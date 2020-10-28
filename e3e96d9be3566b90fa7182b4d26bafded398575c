@@ -69,6 +69,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc2a7f25_7b33f0b7",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T20:51:50Z",
+      "side": 1,
+      "message": "Thanks. Forgot to add the comment around it.",
+      "parentUuid": "02eac53e_5ef5ad50",
+      "revId": "e3e96d9be3566b90fa7182b4d26bafded398575c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b891bce4_c134ba84",
@@ -82,6 +100,24 @@
       "writtenOn": "2020-10-28T09:59:15Z",
       "side": 1,
       "message": "It looks like the return value here could be non-optional? Because it never fails, and you\u0027re not implementing an interface that forces you into a specific signature.",
+      "revId": "e3e96d9be3566b90fa7182b4d26bafded398575c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcebe1a1_875abf65",
+        "filename": "audio/voip/audio_channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T20:51:50Z",
+      "side": 1,
+      "message": "Thanks for pointing out. Done.",
+      "parentUuid": "b891bce4_c134ba84",
       "revId": "e3e96d9be3566b90fa7182b4d26bafded398575c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -109,6 +145,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dbd9e67_7c313742",
+        "filename": "audio/voip/test/audio_channel_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T20:51:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65700c93_a77cf6a5",
+      "range": {
+        "startLine": 142,
+        "startChar": 34,
+        "endLine": 142,
+        "endChar": 35
+      },
+      "revId": "e3e96d9be3566b90fa7182b4d26bafded398575c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecb6f43b_1f188ceb",
@@ -122,6 +182,30 @@
       "writtenOn": "2020-10-28T09:59:15Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 162,
+        "startChar": 66,
+        "endLine": 162,
+        "endChar": 69
+      },
+      "revId": "e3e96d9be3566b90fa7182b4d26bafded398575c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c89ae5d4_171c60a6",
+        "filename": "audio/voip/test/audio_channel_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T20:51:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecb6f43b_1f188ceb",
       "range": {
         "startLine": 162,
         "startChar": 66,
