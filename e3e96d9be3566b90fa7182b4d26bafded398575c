@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca1c7b2_b1a3d02d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T03:29:23Z",
+      "side": 1,
+      "message": "Thanks. I changed to use api/neteq header instead and streamlined struct usage. PTAL!",
+      "revId": "e3e96d9be3566b90fa7182b4d26bafded398575c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

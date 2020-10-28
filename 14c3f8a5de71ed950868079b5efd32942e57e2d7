@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "488a8fa2_f866f153",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T03:29:23Z",
+      "side": 1,
+      "message": "I was exposing what\u0027s available from ACM. I will remove it now till it is useful to open up.",
+      "parentUuid": "74184862_4b2b7051",
+      "range": {
+        "startLine": 18,
+        "startChar": 7,
+        "endLine": 18,
+        "endChar": 25
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b493fee5_7fef9af6",
@@ -71,6 +95,30 @@
       "writtenOn": "2020-10-27T09:43:02Z",
       "side": 1,
       "message": "I think DTX is counted as codec plc (since it is implemented by Opus).",
+      "range": {
+        "startLine": 30,
+        "startChar": 50,
+        "endLine": 30,
+        "endChar": 61
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "020ed170_6acc19da",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T03:29:23Z",
+      "side": 1,
+      "message": "Thanks. I will remove as suggested and use api/neteq.h.",
+      "parentUuid": "b493fee5_7fef9af6",
       "range": {
         "startLine": 30,
         "startChar": 50,
@@ -104,6 +152,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69079c0c_107d8b09",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T03:29:23Z",
+      "side": 1,
+      "message": "Thanks! I missed that it was under API folder which can be included directly. I will use it instead.",
+      "parentUuid": "1d19062b_499e3efd",
+      "range": {
+        "startLine": 40,
+        "startChar": 9,
+        "endLine": 40,
+        "endChar": 24
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "badeb9e5_b57faa0d",
@@ -121,6 +193,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "820de85b_65bd462b",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T03:29:23Z",
+      "side": 1,
+      "message": "It\u0027s the same field from api/neteq.h struct which was used to be int32_t. I will use api/neteq.h structs.",
+      "parentUuid": "badeb9e5_b57faa0d",
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21786536_dbc4713c",
@@ -134,6 +224,30 @@
       "writtenOn": "2020-10-27T09:43:02Z",
       "side": 1,
       "message": "These metrics are all non-standard and deprecated, I would recommend to remove these. We are trying to migrate away from these metrics because their implementation is problematic. The internal counters for these metrics reset on every call to getStats(), and now they will also reset on every call to VoipStatistics::GetNetEqStatistics. In addition these metrics have accuracy/rounding issues that make them sensitive to the polling interval. \n\nThe standardized metrics in the lifetime metrics should contain almost the same information without having these issues.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 0
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46072f5a_51a59085",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T03:29:23Z",
+      "side": 1,
+      "message": "VoIP API stats use will be exclusive, meaning we won\u0027t have a case where getStats calling simultaneously. However, I will remove and try to use the life time ones only. Thanks.",
+      "parentUuid": "21786536_dbc4713c",
       "range": {
         "startLine": 74,
         "startChar": 0,
@@ -205,6 +319,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "8e8ea858_cfeb980b",
+      "range": {
+        "startLine": 114,
+        "startChar": 12,
+        "endLine": 114,
+        "endChar": 38
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b68367_f8917a58",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-28T03:29:23Z",
+      "side": 1,
+      "message": "It looks like not resetting API is disabled on some portions of NetEq stats.\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_coding/acm2/acm_receiver.cc;drc\u003d4461f059d180fe8c2886d422ebd1cb55b5c83e72;l\u003d267-277\n\nI will try to work with Lifetime statistics for now as suggested. Thanks.",
+      "parentUuid": "2fb8135f_0f8b5751",
       "range": {
         "startLine": 114,
         "startChar": 12,
