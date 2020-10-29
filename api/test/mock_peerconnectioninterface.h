@@ -27,16 +27,6 @@ class MockPeerConnectionInterface
     : public rtc::RefCountedObject<webrtc::PeerConnectionInterface> {
  public:
   // PeerConnectionInterface
-  MOCK_METHOD(rtc::scoped_refptr<StreamCollectionInterface>,
-              local_streams,
-              (),
-              (override));
-  MOCK_METHOD(rtc::scoped_refptr<StreamCollectionInterface>,
-              remote_streams,
-              (),
-              (override));
-  MOCK_METHOD(bool, AddStream, (MediaStreamInterface*), (override));
-  MOCK_METHOD(void, RemoveStream, (MediaStreamInterface*), (override));
   MOCK_METHOD(RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>>,
               AddTrack,
               (rtc::scoped_refptr<MediaStreamTrackInterface>,
@@ -63,10 +53,6 @@ class MockPeerConnectionInterface
   MOCK_METHOD(RTCErrorOr<rtc::scoped_refptr<RtpTransceiverInterface>>,
               AddTransceiver,
               (cricket::MediaType, const RtpTransceiverInit&),
-              (override));
-  MOCK_METHOD(rtc::scoped_refptr<RtpSenderInterface>,
-              CreateSender,
-              (const std::string&, const std::string&),
               (override));
   MOCK_METHOD(std::vector<rtc::scoped_refptr<RtpSenderInterface>>,
               GetSenders,

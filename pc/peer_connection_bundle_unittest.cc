@@ -450,7 +450,7 @@ TEST_P(PeerConnectionBundleMatrixTest,
 INSTANTIATE_TEST_SUITE_P(
     PeerConnectionBundleTest,
     PeerConnectionBundleMatrixTest,
-    Combine(Values(SdpSemantics::kPlanB, SdpSemantics::kUnifiedPlan),
+    Combine(Values(SdpSemantics::kUnifiedPlan),
             Values(std::make_tuple(BundlePolicy::kBundlePolicyBalanced,
                                    BundleIncluded::kBundleInAnswer,
                                    false,
@@ -523,7 +523,6 @@ TEST_P(PeerConnectionBundleTest,
   ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
 
   RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio = 0;
   ASSERT_TRUE(
       caller->SetRemoteDescription(callee->CreateAnswerAndSetAsLocal(options)));
 
@@ -854,8 +853,7 @@ TEST_P(PeerConnectionBundleTest, RemoveContentFromBundleGroup) {
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionBundleTest,
                          PeerConnectionBundleTest,
-                         Values(SdpSemantics::kPlanB,
-                                SdpSemantics::kUnifiedPlan));
+                         Values(SdpSemantics::kUnifiedPlan));
 
 // According to RFC5888, if an endpoint understands the semantics of an
 // "a=group", it MUST return an answer with that group. So, an empty BUNDLE

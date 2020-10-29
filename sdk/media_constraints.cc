@@ -66,13 +66,6 @@ bool FindConstraint(const MediaConstraints* constraints,
   return FindConstraint<bool>(constraints, key, value, mandatory_constraints);
 }
 
-bool FindConstraint(const MediaConstraints* constraints,
-                    const std::string& key,
-                    int* value,
-                    size_t* mandatory_constraints) {
-  return FindConstraint<int>(constraints, key, value, mandatory_constraints);
-}
-
 // Converts a constraint (mandatory takes precedence over optional) to an
 // absl::optional.
 template <typename T>
@@ -229,21 +222,6 @@ bool CopyConstraintsIntoOfferAnswerOptions(
   bool value = false;
   size_t mandatory_constraints_satisfied = 0;
 
-  if (FindConstraint(constraints, MediaConstraints::kOfferToReceiveAudio,
-                     &value, &mandatory_constraints_satisfied)) {
-    offer_answer_options->offer_to_receive_audio =
-        value ? PeerConnectionInterface::RTCOfferAnswerOptions::
-                    kOfferToReceiveMediaTrue
-              : 0;
-  }
-
-  if (FindConstraint(constraints, MediaConstraints::kOfferToReceiveVideo,
-                     &value, &mandatory_constraints_satisfied)) {
-    offer_answer_options->offer_to_receive_video =
-        value ? PeerConnectionInterface::RTCOfferAnswerOptions::
-                    kOfferToReceiveMediaTrue
-              : 0;
-  }
   if (FindConstraint(constraints, MediaConstraints::kVoiceActivityDetection,
                      &value, &mandatory_constraints_satisfied)) {
     offer_answer_options->voice_activity_detection = value;
@@ -261,12 +239,6 @@ bool CopyConstraintsIntoOfferAnswerOptions(
                      MediaConstraints::kRawPacketizationForVideoEnabled, &value,
                      &mandatory_constraints_satisfied)) {
     offer_answer_options->raw_packetization_for_video = value;
-  }
-
-  int layers;
-  if (FindConstraint(constraints, MediaConstraints::kNumSimulcastLayers,
-                     &layers, &mandatory_constraints_satisfied)) {
-    offer_answer_options->num_simulcast_layers = layers;
   }
 
   return mandatory_constraints_satisfied == constraints->GetMandatory().size();

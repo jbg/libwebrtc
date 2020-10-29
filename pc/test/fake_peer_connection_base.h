@@ -32,18 +32,6 @@ class FakePeerConnectionBase : public PeerConnectionInternal {
  public:
   // PeerConnectionInterface implementation.
 
-  rtc::scoped_refptr<StreamCollectionInterface> local_streams() override {
-    return nullptr;
-  }
-
-  rtc::scoped_refptr<StreamCollectionInterface> remote_streams() override {
-    return nullptr;
-  }
-
-  bool AddStream(MediaStreamInterface* stream) override { return false; }
-
-  void RemoveStream(MediaStreamInterface* stream) override {}
-
   RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>> AddTrack(
       rtc::scoped_refptr<MediaStreamTrackInterface> track,
       const std::vector<std::string>& stream_ids) override {
@@ -77,12 +65,6 @@ class FakePeerConnectionBase : public PeerConnectionInternal {
       cricket::MediaType media_type,
       const RtpTransceiverInit& init) override {
     return RTCError(RTCErrorType::UNSUPPORTED_OPERATION, "Not implemented");
-  }
-
-  rtc::scoped_refptr<RtpSenderInterface> CreateSender(
-      const std::string& kind,
-      const std::string& stream_id) override {
-    return nullptr;
   }
 
   std::vector<rtc::scoped_refptr<RtpSenderInterface>> GetSenders()

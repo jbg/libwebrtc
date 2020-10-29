@@ -151,7 +151,7 @@ class StatsObserver : public rtc::RefCountInterface {
   ~StatsObserver() override = default;
 };
 
-enum class SdpSemantics { kPlanB, kUnifiedPlan };
+enum class SdpSemantics { kUnifiedPlan };
 
 class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
  public:
@@ -605,7 +605,7 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     // specify kPlanB.
     //
     // For all other users, specify kUnifiedPlan.
-    SdpSemantics sdp_semantics = SdpSemantics::kPlanB;
+    SdpSemantics sdp_semantics = SdpSemantics::kUnifiedPlan;
 
     // TODO(bugs.webrtc.org/9891) - Move to crypto_options or remove.
     // Actively reset the SRTP parameters whenever the DTLS transports
@@ -656,19 +656,6 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     // The default value for constraint offerToReceiveX:true.
     static const int kOfferToReceiveMediaTrue = 1;
 
-    // These options are left as backwards compatibility for clients who need
-    // "Plan B" semantics. Clients who have switched to "Unified Plan" semantics
-    // should use the RtpTransceiver API (AddTransceiver) instead.
-    //
-    // offer_to_receive_X set to 1 will cause a media description to be
-    // generated in the offer, even if no tracks of that type have been added.
-    // Values greater than 1 are treated the same.
-    //
-    // If set to 0, the generated directional attribute will not include the
-    // "recv" direction (meaning it will be "sendonly" or "inactive".
-    int offer_to_receive_video = kUndefined;
-    int offer_to_receive_audio = kUndefined;
-
     bool voice_activity_detection = true;
     bool ice_restart = false;
 
@@ -679,9 +666,6 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     // If true, "a=packetization:<payload_type> raw" attribute will be offered
     // in the SDP for all video payload and accepted in the answer if offered.
     bool raw_packetization_for_video = false;
-
-    // This will apply to all video tracks with a Plan B SDP offer/answer.
-    int num_simulcast_layers = 1;
 
     // If true: Use SDP format from draft-ietf-mmusic-scdp-sdp-03
     // If false: Use SDP format from draft-ietf-mmusic-sdp-sdp-26 or later
@@ -694,9 +678,7 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
                           bool voice_activity_detection,
                           bool ice_restart,
                           bool use_rtp_mux)
-        : offer_to_receive_video(offer_to_receive_video),
-          offer_to_receive_audio(offer_to_receive_audio),
-          voice_activity_detection(voice_activity_detection),
+        : voice_activity_detection(voice_activity_detection),
           ice_restart(ice_restart),
           use_rtp_mux(use_rtp_mux) {}
   };
@@ -709,38 +691,6 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     kStatsOutputLevelStandard,
     kStatsOutputLevelDebug,
   };
-
-  // Accessor methods to active local streams.
-  // This method is not supported with kUnifiedPlan semantics. Please use
-  // GetSenders() instead.
-  virtual rtc::scoped_refptr<StreamCollectionInterface> local_streams() = 0;
-
-  // Accessor methods to remote streams.
-  // This method is not supported with kUnifiedPlan semantics. Please use
-  // GetReceivers() instead.
-  virtual rtc::scoped_refptr<StreamCollectionInterface> remote_streams() = 0;
-
-  // Add a new MediaStream to be sent on this PeerConnection.
-  // Note that a SessionDescription negotiation is needed before the
-  // remote peer can receive the stream.
-  //
-  // This has been removed from the standard in favor of a track-based API. So,
-  // this is equivalent to simply calling AddTrack for each track within the
-  // stream, with the one difference that if "stream->AddTrack(...)" is called
-  // later, the PeerConnection will automatically pick up the new track. Though
-  // this functionality will be deprecated in the future.
-  //
-  // This method is not supported with kUnifiedPlan semantics. Please use
-  // AddTrack instead.
-  virtual bool AddStream(MediaStreamInterface* stream) = 0;
-
-  // Remove a MediaStream from this PeerConnection.
-  // Note that a SessionDescription negotiation is needed before the
-  // remote peer is notified.
-  //
-  // This method is not supported with kUnifiedPlan semantics. Please use
-  // RemoveTrack instead.
-  virtual void RemoveStream(MediaStreamInterface* stream) = 0;
 
   // Add a new MediaStreamTrack to be sent on this PeerConnection, and return
   // the newly created RtpSender. The RtpSender will be associated with the
@@ -813,40 +763,12 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
   AddTransceiver(cricket::MediaType media_type,
                  const RtpTransceiverInit& init) = 0;
 
-  // Creates a sender without a track. Can be used for "early media"/"warmup"
-  // use cases, where the application may want to negotiate video attributes
-  // before a track is available to send.
-  //
-  // The standard way to do this would be through "addTransceiver", but we
-  // don't support that API yet.
-  //
-  // |kind| must be "audio" or "video".
-  //
-  // |stream_id| is used to populate the msid attribute; if empty, one will
-  // be generated automatically.
-  //
-  // This method is not supported with kUnifiedPlan semantics. Please use
-  // AddTransceiver instead.
-  virtual rtc::scoped_refptr<RtpSenderInterface> CreateSender(
-      const std::string& kind,
-      const std::string& stream_id) = 0;
-
-  // If Plan B semantics are specified, gets all RtpSenders, created either
-  // through AddStream, AddTrack, or CreateSender. All senders of a specific
-  // media type share the same media description.
-  //
-  // If Unified Plan semantics are specified, gets the RtpSender for each
+  // Gets the RtpSender for each
   // RtpTransceiver.
   virtual std::vector<rtc::scoped_refptr<RtpSenderInterface>> GetSenders()
       const = 0;
 
-  // If Plan B semantics are specified, gets all RtpReceivers created when a
-  // remote description is applied. All receivers of a specific media type share
-  // the same media description. It is also possible to have a media description
-  // with no associated RtpReceivers, if the directional attribute does not
-  // indicate that the remote peer is sending any media.
-  //
-  // If Unified Plan semantics are specified, gets the RtpReceiver for each
+  // Gets the RtpReceiver for each
   // RtpTransceiver.
   virtual std::vector<rtc::scoped_refptr<RtpReceiverInterface>> GetReceivers()
       const = 0;
@@ -854,8 +776,6 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
   // Get all RtpTransceivers, created either through AddTransceiver, AddTrack or
   // by a remote description applied with SetRemoteDescription.
   //
-  // Note: This method is only available when Unified Plan is enabled (see
-  // RTCConfiguration).
   virtual std::vector<rtc::scoped_refptr<RtpTransceiverInterface>>
   GetTransceivers() const = 0;
 
@@ -1280,8 +1200,6 @@ class PeerConnectionObserver {
 
   // Called when signaling indicates that media will no longer be received on a
   // track.
-  // With Plan B semantics, the given receiver will have been removed from the
-  // PeerConnection and the track muted.
   // With Unified Plan semantics, the receiver will remain but the transceiver
   // will have changed direction to either sendonly or inactive.
   // https://w3c.github.io/webrtc-pc/#process-remote-track-removal

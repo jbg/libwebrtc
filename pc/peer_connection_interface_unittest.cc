@@ -99,8 +99,6 @@ namespace webrtc {
 namespace {
 
 static const char kStreamId1[] = "local_stream_1";
-static const char kStreamId2[] = "local_stream_2";
-static const char kStreamId3[] = "local_stream_3";
 static const int kDefaultStunPort = 3478;
 static const char kStunAddressOnly[] = "stun:address";
 static const char kStunInvalidPort[] = "stun:address:-1";
@@ -119,37 +117,6 @@ static const char kVideoTracks[][32] = {"videotrack0", "videotrack1"};
 static const char kRecvonly[] = "recvonly";
 static const char kSendrecv[] = "sendrecv";
 
-// Reference SDP with a MediaStream with label "stream1" and audio track with
-// id "audio_1" and a video track with id "video_1;
-static const char kSdpStringWithStream1PlanB[] =
-    "v=0\r\n"
-    "o=- 0 0 IN IP4 127.0.0.1\r\n"
-    "s=-\r\n"
-    "t=0 0\r\n"
-    "m=audio 1 RTP/AVPF 103\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:audio\r\n"
-    "a=sendrecv\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:103 ISAC/16000\r\n"
-    "a=ssrc:1 cname:stream1\r\n"
-    "a=ssrc:1 mslabel:stream1\r\n"
-    "a=ssrc:1 label:audiotrack0\r\n"
-    "m=video 1 RTP/AVPF 120\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:video\r\n"
-    "a=sendrecv\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:120 VP8/90000\r\n"
-    "a=ssrc:2 cname:stream1\r\n"
-    "a=ssrc:2 mslabel:stream1\r\n"
-    "a=ssrc:2 label:videotrack0\r\n";
 // Same string as above but with the MID changed to the Unified Plan default.
 // This is needed so that this SDP can be used as an answer for a Unified Plan
 // offer.
@@ -203,41 +170,6 @@ static const char kSdpStringWithStream1AudioTrackOnly[] =
     "a=ssrc:1 label:audiotrack0\r\n"
     "a=rtcp-mux\r\n";
 
-// Reference SDP with two MediaStreams with label "stream1" and "stream2. Each
-// MediaStreams have one audio track and one video track.
-// This uses MSID.
-static const char kSdpStringWithStream1And2PlanB[] =
-    "v=0\r\n"
-    "o=- 0 0 IN IP4 127.0.0.1\r\n"
-    "s=-\r\n"
-    "t=0 0\r\n"
-    "a=msid-semantic: WMS stream1 stream2\r\n"
-    "m=audio 1 RTP/AVPF 103\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:audio\r\n"
-    "a=sendrecv\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:103 ISAC/16000\r\n"
-    "a=ssrc:1 cname:stream1\r\n"
-    "a=ssrc:1 msid:stream1 audiotrack0\r\n"
-    "a=ssrc:3 cname:stream2\r\n"
-    "a=ssrc:3 msid:stream2 audiotrack1\r\n"
-    "m=video 1 RTP/AVPF 120\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:video\r\n"
-    "a=sendrecv\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:120 VP8/0\r\n"
-    "a=ssrc:2 cname:stream1\r\n"
-    "a=ssrc:2 msid:stream1 videotrack0\r\n"
-    "a=ssrc:4 cname:stream2\r\n"
-    "a=ssrc:4 msid:stream2 videotrack1\r\n";
 static const char kSdpStringWithStream1And2UnifiedPlan[] =
     "v=0\r\n"
     "o=- 0 0 IN IP4 127.0.0.1\r\n"
@@ -288,100 +220,6 @@ static const char kSdpStringWithStream1And2UnifiedPlan[] =
     "a=rtpmap:120 VP8/0\r\n"
     "a=ssrc:4 cname:stream2\r\n"
     "a=ssrc:4 msid:stream2 videotrack1\r\n";
-
-// Reference SDP without MediaStreams. Msid is not supported.
-static const char kSdpStringWithoutStreams[] =
-    "v=0\r\n"
-    "o=- 0 0 IN IP4 127.0.0.1\r\n"
-    "s=-\r\n"
-    "t=0 0\r\n"
-    "m=audio 1 RTP/AVPF 103\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:audio\r\n"
-    "a=sendrecv\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:103 ISAC/16000\r\n"
-    "m=video 1 RTP/AVPF 120\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:video\r\n"
-    "a=sendrecv\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:120 VP8/90000\r\n";
-
-// Reference SDP without MediaStreams. Msid is supported.
-static const char kSdpStringWithMsidWithoutStreams[] =
-    "v=0\r\n"
-    "o=- 0 0 IN IP4 127.0.0.1\r\n"
-    "s=-\r\n"
-    "t=0 0\r\n"
-    "a=msid-semantic: WMS\r\n"
-    "m=audio 1 RTP/AVPF 103\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:audio\r\n"
-    "a=sendrecv\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:103 ISAC/16000\r\n"
-    "m=video 1 RTP/AVPF 120\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:video\r\n"
-    "a=sendrecv\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:120 VP8/90000\r\n";
-
-// Reference SDP without MediaStreams and audio only.
-static const char kSdpStringWithoutStreamsAudioOnly[] =
-    "v=0\r\n"
-    "o=- 0 0 IN IP4 127.0.0.1\r\n"
-    "s=-\r\n"
-    "t=0 0\r\n"
-    "m=audio 1 RTP/AVPF 103\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:audio\r\n"
-    "a=sendrecv\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:103 ISAC/16000\r\n";
-
-// Reference SENDONLY SDP without MediaStreams. Msid is not supported.
-static const char kSdpStringSendOnlyWithoutStreams[] =
-    "v=0\r\n"
-    "o=- 0 0 IN IP4 127.0.0.1\r\n"
-    "s=-\r\n"
-    "t=0 0\r\n"
-    "m=audio 1 RTP/AVPF 103\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:audio\r\n"
-    "a=sendrecv\r\n"
-    "a=sendonly\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:103 ISAC/16000\r\n"
-    "m=video 1 RTP/AVPF 120\r\n"
-    "a=ice-ufrag:e5785931\r\n"
-    "a=ice-pwd:36fb7878390db89481c1d46daa4278d8\r\n"
-    "a=fingerprint:sha-256 58:AB:6E:F5:F1:E4:57:B7:E9:46:F4:86:04:28:F9:A7:ED:"
-    "BD:AB:AE:40:EF:CE:9A:51:2C:2A:B1:9B:8B:78:84\r\n"
-    "a=mid:video\r\n"
-    "a=sendrecv\r\n"
-    "a=sendonly\r\n"
-    "a=rtcp-mux\r\n"
-    "a=rtpmap:120 VP8/90000\r\n";
 
 static const char kSdpStringInit[] =
     "v=0\r\n"
@@ -504,37 +342,12 @@ void SetSsrcToZero(std::string* sdp) {
   }
 }
 
-// Check if |streams| contains the specified track.
-bool ContainsTrack(const std::vector<cricket::StreamParams>& streams,
-                   const std::string& stream_id,
-                   const std::string& track_id) {
-  for (const cricket::StreamParams& params : streams) {
-    if (params.first_stream_id() == stream_id && params.id == track_id) {
-      return true;
-    }
-  }
-  return false;
-}
-
 // Check if |senders| contains the specified sender, by id.
 bool ContainsSender(
     const std::vector<rtc::scoped_refptr<RtpSenderInterface>>& senders,
     const std::string& id) {
   for (const auto& sender : senders) {
     if (sender->id() == id) {
-      return true;
-    }
-  }
-  return false;
-}
-
-// Check if |senders| contains the specified sender, by id and stream id.
-bool ContainsSender(
-    const std::vector<rtc::scoped_refptr<RtpSenderInterface>>& senders,
-    const std::string& id,
-    const std::string& stream_id) {
-  for (const auto& sender : senders) {
-    if (sender->id() == id && sender->stream_ids()[0] == stream_id) {
       return true;
     }
   }
@@ -820,13 +633,6 @@ class PeerConnectionInterfaceBaseTest : public ::testing::Test {
     ASSERT_EQ(RTCErrorType::NONE, sender_or_error.error().type());
   }
 
-  void AddVideoStream(const std::string& label) {
-    rtc::scoped_refptr<MediaStreamInterface> stream(
-        pc_factory_->CreateLocalMediaStream(label));
-    stream->AddTrack(CreateVideoTrack(label + "v0"));
-    ASSERT_TRUE(pc_->AddStream(stream));
-  }
-
   rtc::scoped_refptr<AudioTrackInterface> CreateAudioTrack(
       const std::string& label) {
     return pc_factory_->CreateAudioTrack(label, nullptr);
@@ -837,24 +643,6 @@ class PeerConnectionInterfaceBaseTest : public ::testing::Test {
     auto sender_or_error =
         pc_->AddTrack(CreateAudioTrack(track_label), stream_ids);
     ASSERT_EQ(RTCErrorType::NONE, sender_or_error.error().type());
-  }
-
-  void AddAudioStream(const std::string& label) {
-    rtc::scoped_refptr<MediaStreamInterface> stream(
-        pc_factory_->CreateLocalMediaStream(label));
-    stream->AddTrack(CreateAudioTrack(label + "a0"));
-    ASSERT_TRUE(pc_->AddStream(stream));
-  }
-
-  void AddAudioVideoStream(const std::string& stream_id,
-                           const std::string& audio_track_label,
-                           const std::string& video_track_label) {
-    // Create a local stream.
-    rtc::scoped_refptr<MediaStreamInterface> stream(
-        pc_factory_->CreateLocalMediaStream(stream_id));
-    stream->AddTrack(CreateAudioTrack(audio_track_label));
-    stream->AddTrack(CreateVideoTrack(video_track_label));
-    ASSERT_TRUE(pc_->AddStream(stream));
   }
 
   rtc::scoped_refptr<RtpReceiverInterface> GetFirstReceiverOfType(
@@ -943,14 +731,10 @@ class PeerConnectionInterfaceBaseTest : public ::testing::Test {
   void InitiateCall() {
     CreatePeerConnectionWithoutDtls();
     // Create a local stream with audio&video tracks.
-    if (sdp_semantics_ == SdpSemantics::kPlanB) {
-      AddAudioVideoStream(kStreamId1, "audio_track", "video_track");
-    } else {
       // Unified Plan does not support AddStream, so just add an audio and video
       // track.
       AddAudioTrack(kAudioTracks[0], {kStreamId1});
       AddVideoTrack(kVideoTracks[0], {kStreamId1});
-    }
     CreateOfferReceiveAnswer();
   }
 
@@ -1156,24 +940,8 @@ class PeerConnectionInterfaceBaseTest : public ::testing::Test {
     return offer;
   }
 
-  std::unique_ptr<SessionDescriptionInterface> CreateOfferWithOneAudioStream() {
-    CreatePeerConnectionWithoutDtls();
-    AddAudioStream(kStreamId1);
-    std::unique_ptr<SessionDescriptionInterface> offer;
-    EXPECT_TRUE(DoCreateOffer(&offer, nullptr));
-    return offer;
-  }
-
   std::unique_ptr<SessionDescriptionInterface> CreateAnswerWithOneAudioTrack() {
     EXPECT_TRUE(DoSetRemoteDescription(CreateOfferWithOneAudioTrack()));
-    std::unique_ptr<SessionDescriptionInterface> answer;
-    EXPECT_TRUE(DoCreateAnswer(&answer, nullptr));
-    return answer;
-  }
-
-  std::unique_ptr<SessionDescriptionInterface>
-  CreateAnswerWithOneAudioStream() {
-    EXPECT_TRUE(DoSetRemoteDescription(CreateOfferWithOneAudioStream()));
     std::unique_ptr<SessionDescriptionInterface> answer;
     EXPECT_TRUE(DoCreateAnswer(&answer, nullptr));
     return answer;
@@ -1236,19 +1004,11 @@ class PeerConnectionInterfaceBaseTest : public ::testing::Test {
   }
 
   const char* GetSdpStringWithStream1() const {
-    if (sdp_semantics_ == SdpSemantics::kPlanB) {
-      return kSdpStringWithStream1PlanB;
-    } else {
       return kSdpStringWithStream1UnifiedPlan;
-    }
   }
 
   const char* GetSdpStringWithStream1And2() const {
-    if (sdp_semantics_ == SdpSemantics::kPlanB) {
-      return kSdpStringWithStream1And2PlanB;
-    } else {
       return kSdpStringWithStream1And2UnifiedPlan;
-    }
   }
 
   std::unique_ptr<rtc::VirtualSocketServer> vss_;
@@ -1269,13 +1029,6 @@ class PeerConnectionInterfaceTest
       public ::testing::WithParamInterface<SdpSemantics> {
  protected:
   PeerConnectionInterfaceTest() : PeerConnectionInterfaceBaseTest(GetParam()) {}
-};
-
-class PeerConnectionInterfaceTestPlanB
-    : public PeerConnectionInterfaceBaseTest {
- protected:
-  PeerConnectionInterfaceTestPlanB()
-      : PeerConnectionInterfaceBaseTest(SdpSemantics::kPlanB) {}
 };
 
 // Generate different CNAMEs when PeerConnections are created.
@@ -1439,136 +1192,6 @@ TEST_P(PeerConnectionInterfaceTest, SetConfigurationFailsAfterClose) {
       pc_->SetConfiguration(PeerConnectionInterface::RTCConfiguration()).ok());
 }
 
-TEST_F(PeerConnectionInterfaceTestPlanB, AddStreams) {
-  CreatePeerConnectionWithoutDtls();
-  AddVideoStream(kStreamId1);
-  AddAudioStream(kStreamId2);
-  ASSERT_EQ(2u, pc_->local_streams()->count());
-
-  // Test we can add multiple local streams to one peerconnection.
-  rtc::scoped_refptr<MediaStreamInterface> stream(
-      pc_factory_->CreateLocalMediaStream(kStreamId3));
-  rtc::scoped_refptr<AudioTrackInterface> audio_track(
-      pc_factory_->CreateAudioTrack(kStreamId3,
-                                    static_cast<AudioSourceInterface*>(NULL)));
-  stream->AddTrack(audio_track.get());
-  EXPECT_TRUE(pc_->AddStream(stream));
-  EXPECT_EQ(3u, pc_->local_streams()->count());
-
-  // Remove the third stream.
-  pc_->RemoveStream(pc_->local_streams()->at(2));
-  EXPECT_EQ(2u, pc_->local_streams()->count());
-
-  // Remove the second stream.
-  pc_->RemoveStream(pc_->local_streams()->at(1));
-  EXPECT_EQ(1u, pc_->local_streams()->count());
-
-  // Remove the first stream.
-  pc_->RemoveStream(pc_->local_streams()->at(0));
-  EXPECT_EQ(0u, pc_->local_streams()->count());
-}
-
-// Test that the created offer includes streams we added.
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB, AddedStreamsPresentInOffer) {
-  CreatePeerConnectionWithoutDtls();
-  AddAudioVideoStream(kStreamId1, "audio_track", "video_track");
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-
-  const cricket::AudioContentDescription* audio_desc =
-      cricket::GetFirstAudioContentDescription(offer->description());
-  EXPECT_TRUE(ContainsTrack(audio_desc->streams(), kStreamId1, "audio_track"));
-
-  const cricket::VideoContentDescription* video_desc =
-      cricket::GetFirstVideoContentDescription(offer->description());
-  EXPECT_TRUE(ContainsTrack(video_desc->streams(), kStreamId1, "video_track"));
-
-  // Add another stream and ensure the offer includes both the old and new
-  // streams.
-  AddAudioVideoStream(kStreamId2, "audio_track2", "video_track2");
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-
-  audio_desc = cricket::GetFirstAudioContentDescription(offer->description());
-  EXPECT_TRUE(ContainsTrack(audio_desc->streams(), kStreamId1, "audio_track"));
-  EXPECT_TRUE(ContainsTrack(audio_desc->streams(), kStreamId2, "audio_track2"));
-
-  video_desc = cricket::GetFirstVideoContentDescription(offer->description());
-  EXPECT_TRUE(ContainsTrack(video_desc->streams(), kStreamId1, "video_track"));
-  EXPECT_TRUE(ContainsTrack(video_desc->streams(), kStreamId2, "video_track2"));
-}
-
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB, RemoveStream) {
-  CreatePeerConnectionWithoutDtls();
-  AddVideoStream(kStreamId1);
-  ASSERT_EQ(1u, pc_->local_streams()->count());
-  pc_->RemoveStream(pc_->local_streams()->at(0));
-  EXPECT_EQ(0u, pc_->local_streams()->count());
-}
-
-// Test for AddTrack and RemoveTrack methods.
-// Tests that the created offer includes tracks we added,
-// and that the RtpSenders are created correctly.
-// Also tests that RemoveTrack removes the tracks from subsequent offers.
-// Only tested with Plan B since Unified Plan is covered in more detail by tests
-// in peerconnection_jsep_unittests.cc
-TEST_F(PeerConnectionInterfaceTestPlanB, AddTrackRemoveTrack) {
-  CreatePeerConnectionWithoutDtls();
-  rtc::scoped_refptr<AudioTrackInterface> audio_track(
-      CreateAudioTrack("audio_track"));
-  rtc::scoped_refptr<VideoTrackInterface> video_track(
-      CreateVideoTrack("video_track"));
-  auto audio_sender = pc_->AddTrack(audio_track, {kStreamId1}).MoveValue();
-  auto video_sender = pc_->AddTrack(video_track, {kStreamId1}).MoveValue();
-  EXPECT_EQ(1UL, audio_sender->stream_ids().size());
-  EXPECT_EQ(kStreamId1, audio_sender->stream_ids()[0]);
-  EXPECT_EQ("audio_track", audio_sender->id());
-  EXPECT_EQ(audio_track, audio_sender->track());
-  EXPECT_EQ(1UL, video_sender->stream_ids().size());
-  EXPECT_EQ(kStreamId1, video_sender->stream_ids()[0]);
-  EXPECT_EQ("video_track", video_sender->id());
-  EXPECT_EQ(video_track, video_sender->track());
-
-  // Now create an offer and check for the senders.
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-
-  const cricket::ContentInfo* audio_content =
-      cricket::GetFirstAudioContent(offer->description());
-  EXPECT_TRUE(ContainsTrack(audio_content->media_description()->streams(),
-                            kStreamId1, "audio_track"));
-
-  const cricket::ContentInfo* video_content =
-      cricket::GetFirstVideoContent(offer->description());
-  EXPECT_TRUE(ContainsTrack(video_content->media_description()->streams(),
-                            kStreamId1, "video_track"));
-
-  EXPECT_TRUE(DoSetLocalDescription(std::move(offer)));
-
-  // Now try removing the tracks.
-  EXPECT_TRUE(pc_->RemoveTrack(audio_sender));
-  EXPECT_TRUE(pc_->RemoveTrack(video_sender));
-
-  // Create a new offer and ensure it doesn't contain the removed senders.
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-
-  audio_content = cricket::GetFirstAudioContent(offer->description());
-  EXPECT_FALSE(ContainsTrack(audio_content->media_description()->streams(),
-                             kStreamId1, "audio_track"));
-
-  video_content = cricket::GetFirstVideoContent(offer->description());
-  EXPECT_FALSE(ContainsTrack(video_content->media_description()->streams(),
-                             kStreamId1, "video_track"));
-
-  EXPECT_TRUE(DoSetLocalDescription(std::move(offer)));
-
-  // Calling RemoveTrack on a sender no longer attached to a PeerConnection
-  // should return false.
-  EXPECT_FALSE(pc_->RemoveTrack(audio_sender));
-  EXPECT_FALSE(pc_->RemoveTrack(video_sender));
-}
-
 // Test creating senders without a stream specified,
 // expecting a random stream ID to be generated.
 TEST_P(PeerConnectionInterfaceTest, AddTrackWithoutStream) {
@@ -1585,16 +1208,10 @@ TEST_P(PeerConnectionInterfaceTest, AddTrackWithoutStream) {
   EXPECT_EQ(audio_track, audio_sender->track());
   EXPECT_EQ("video_track", video_sender->id());
   EXPECT_EQ(video_track, video_sender->track());
-  if (sdp_semantics_ == SdpSemantics::kPlanB) {
-    // If the ID is truly a random GUID, it should be infinitely unlikely they
-    // will be the same.
-    EXPECT_NE(video_sender->stream_ids(), audio_sender->stream_ids());
-  } else {
     // We allows creating tracks without stream ids under Unified Plan
     // semantics.
     EXPECT_EQ(0u, video_sender->stream_ids().size());
     EXPECT_EQ(0u, audio_sender->stream_ids().size());
-  }
 }
 
 // Test that we can call GetStats() after AddTrack but before connecting
@@ -1629,18 +1246,6 @@ TEST_P(PeerConnectionInterfaceTest, AttachmentIdIsSetOnAddTrack) {
       static_cast<RtpSenderProxyWithInternal<RtpSenderInternal>*>(
           video_sender.value().get());
   EXPECT_NE(0, video_sender_proxy->internal()->AttachmentId());
-}
-
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB, AttachmentIdIsSetOnAddStream) {
-  CreatePeerConnectionWithoutDtls();
-  AddVideoStream(kStreamId1);
-  auto senders = pc_->GetSenders();
-  ASSERT_EQ(1u, senders.size());
-  auto* sender_proxy =
-      static_cast<RtpSenderProxyWithInternal<RtpSenderInternal>*>(
-          senders[0].get());
-  EXPECT_NE(0, sender_proxy->internal()->AttachmentId());
 }
 
 TEST_P(PeerConnectionInterfaceTest, CreateOfferReceiveAnswer) {
@@ -1680,31 +1285,6 @@ TEST_P(PeerConnectionInterfaceTest, ReceiveOfferCreatePrAnswerAndAnswer) {
   WaitAndVerifyOnAddStream(kStreamId1, 1);
 }
 
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB, Renegotiate) {
-  InitiateCall();
-  ASSERT_EQ(1u, pc_->remote_streams()->count());
-  pc_->RemoveStream(pc_->local_streams()->at(0));
-  CreateOfferReceiveAnswer();
-  EXPECT_EQ(0u, pc_->remote_streams()->count());
-  AddVideoStream(kStreamId1);
-  CreateOfferReceiveAnswer();
-}
-
-// Tests that after negotiating an audio only call, the respondent can perform a
-// renegotiation that removes the audio stream.
-TEST_F(PeerConnectionInterfaceTestPlanB, RenegotiateAudioOnly) {
-  CreatePeerConnectionWithoutDtls();
-  AddAudioStream(kStreamId1);
-  CreateOfferAsRemoteDescription();
-  CreateAnswerAsLocalDescription();
-
-  ASSERT_EQ(1u, pc_->remote_streams()->count());
-  pc_->RemoveStream(pc_->local_streams()->at(0));
-  CreateOfferReceiveAnswer();
-  EXPECT_EQ(0u, pc_->remote_streams()->count());
-}
-
 // Test that candidates are generated and that we can parse our own candidates.
 TEST_P(PeerConnectionInterfaceTest, IceCandidates) {
   CreatePeerConnectionWithoutDtls();
@@ -1725,28 +1305,6 @@ TEST_P(PeerConnectionInterfaceTest, IceCandidates) {
   EXPECT_TRUE_WAIT(observer_.ice_gathering_complete_, kTimeout);
 
   EXPECT_TRUE(pc_->AddIceCandidate(observer_.last_candidate()));
-}
-
-// Test that CreateOffer and CreateAnswer will fail if the track labels are
-// not unique.
-TEST_F(PeerConnectionInterfaceTestPlanB, CreateOfferAnswerWithInvalidStream) {
-  CreatePeerConnectionWithoutDtls();
-  // Create a regular offer for the CreateAnswer test later.
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  EXPECT_TRUE(DoCreateOffer(&offer, nullptr));
-  EXPECT_TRUE(offer);
-  offer.reset();
-
-  // Create a local stream with audio&video tracks having same label.
-  AddAudioTrack("track_label", {kStreamId1});
-  AddVideoTrack("track_label", {kStreamId1});
-
-  // Test CreateOffer
-  EXPECT_FALSE(DoCreateOffer(&offer, nullptr));
-
-  // Test CreateAnswer
-  std::unique_ptr<SessionDescriptionInterface> answer;
-  EXPECT_FALSE(DoCreateAnswer(&answer, nullptr));
 }
 
 // Test that we will get different SSRCs for each tracks in the offer and answer
@@ -1779,67 +1337,6 @@ TEST_P(PeerConnectionInterfaceTest, SsrcInOfferAnswer) {
   EXPECT_TRUE(
       GetFirstSsrc(GetFirstVideoContent(answer->description()), &video_ssrc));
   EXPECT_NE(audio_ssrc, video_ssrc);
-}
-
-// Test that it's possible to call AddTrack on a MediaStream after adding
-// the stream to a PeerConnection.
-// TODO(deadbeef): Remove this test once this behavior is no longer supported.
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB, AddTrackAfterAddStream) {
-  CreatePeerConnectionWithoutDtls();
-  // Create audio stream and add to PeerConnection.
-  AddAudioStream(kStreamId1);
-  MediaStreamInterface* stream = pc_->local_streams()->at(0);
-
-  // Add video track to the audio-only stream.
-  rtc::scoped_refptr<VideoTrackInterface> video_track(
-      CreateVideoTrack("video_label"));
-  stream->AddTrack(video_track.get());
-
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-
-  const cricket::MediaContentDescription* video_desc =
-      cricket::GetFirstVideoContentDescription(offer->description());
-  EXPECT_TRUE(video_desc != nullptr);
-}
-
-// Test that it's possible to call RemoveTrack on a MediaStream after adding
-// the stream to a PeerConnection.
-// TODO(deadbeef): Remove this test once this behavior is no longer supported.
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB, RemoveTrackAfterAddStream) {
-  CreatePeerConnectionWithoutDtls();
-  // Create audio/video stream and add to PeerConnection.
-  AddAudioVideoStream(kStreamId1, "audio_label", "video_label");
-  MediaStreamInterface* stream = pc_->local_streams()->at(0);
-
-  // Remove the video track.
-  stream->RemoveTrack(stream->GetVideoTracks()[0]);
-
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-
-  const cricket::MediaContentDescription* video_desc =
-      cricket::GetFirstVideoContentDescription(offer->description());
-  EXPECT_TRUE(video_desc == nullptr);
-}
-
-// Test creating a sender with a stream ID, and ensure the ID is populated
-// in the offer.
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB, CreateSenderWithStream) {
-  CreatePeerConnectionWithoutDtls();
-  pc_->CreateSender("video", kStreamId1);
-
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-
-  const cricket::MediaContentDescription* video_desc =
-      cricket::GetFirstVideoContentDescription(offer->description());
-  ASSERT_TRUE(video_desc != nullptr);
-  ASSERT_EQ(1u, video_desc->streams().size());
-  EXPECT_EQ(kStreamId1, video_desc->streams()[0].first_stream_id());
 }
 
 // Test that we can specify a certain track that we want statistics about.
@@ -2199,8 +1696,6 @@ TEST_P(PeerConnectionInterfaceTest, RenegotiationNeededForNewRtpDataChannel) {
 
   rtc::scoped_refptr<DataChannelInterface> dc2 =
       pc_->CreateDataChannel("test2", NULL);
-  EXPECT_EQ(observer_.renegotiation_needed_,
-            GetParam() == SdpSemantics::kPlanB);
 }
 
 // This test that a data channel closes when a PeerConnection is deleted/closed.
@@ -2346,17 +1841,12 @@ TEST_P(PeerConnectionInterfaceTest, ReceiveUpdatedAudioOfferWithBadCodecs) {
   AddAudioTrack("audio_label");
   CreateOfferAsLocalDescription();
 
-  const char* answer_sdp =
-      (sdp_semantics_ == SdpSemantics::kPlanB ? webrtc::kAudioSdpPlanB
-                                              : webrtc::kAudioSdpUnifiedPlan);
+  const char* answer_sdp = webrtc::kAudioSdpUnifiedPlan;
   std::unique_ptr<SessionDescriptionInterface> answer(
       webrtc::CreateSessionDescription(SdpType::kAnswer, answer_sdp, nullptr));
   EXPECT_TRUE(DoSetSessionDescription(std::move(answer), false));
 
-  const char* reoffer_sdp =
-      (sdp_semantics_ == SdpSemantics::kPlanB
-           ? webrtc::kAudioSdpWithUnsupportedCodecsPlanB
-           : webrtc::kAudioSdpWithUnsupportedCodecsUnifiedPlan);
+  const char* reoffer_sdp = webrtc::kAudioSdpWithUnsupportedCodecsUnifiedPlan;
   std::unique_ptr<SessionDescriptionInterface> updated_offer(
       webrtc::CreateSessionDescription(SdpType::kOffer, reoffer_sdp, nullptr));
   EXPECT_TRUE(DoSetSessionDescription(std::move(updated_offer), false));
@@ -2403,8 +1893,6 @@ TEST_P(PeerConnectionInterfaceTest, CreateSubsequentInactiveOffer) {
   // to make it inactive.
   std::unique_ptr<SessionDescriptionInterface> offer;
   RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio = 0;
-  options.offer_to_receive_video = 0;
   DoCreateOffer(&offer, &options);
 
   const cricket::ContentInfo* video_content =
@@ -2651,12 +2139,7 @@ TEST_P(PeerConnectionInterfaceTest, CloseAndTestStreamsAndStates) {
 
   // With Plan B, verify the stream count. The analog with Unified Plan is the
   // RtpTransceiver count.
-  if (sdp_semantics_ == SdpSemantics::kPlanB) {
-    ASSERT_EQ(1u, pc_->local_streams()->count());
-    ASSERT_EQ(1u, pc_->remote_streams()->count());
-  } else {
     ASSERT_EQ(2u, pc_->GetTransceivers().size());
-  }
 
   pc_->Close();
 
@@ -2666,68 +2149,13 @@ TEST_P(PeerConnectionInterfaceTest, CloseAndTestStreamsAndStates) {
   EXPECT_EQ(PeerConnectionInterface::kIceGatheringComplete,
             pc_->ice_gathering_state());
 
-  if (sdp_semantics_ == SdpSemantics::kPlanB) {
-    EXPECT_EQ(1u, pc_->local_streams()->count());
-    EXPECT_EQ(1u, pc_->remote_streams()->count());
-  } else {
     // Verify that the RtpTransceivers are still returned.
     EXPECT_EQ(2u, pc_->GetTransceivers().size());
-  }
 
   auto audio_receiver = GetFirstReceiverOfType(cricket::MEDIA_TYPE_AUDIO);
   auto video_receiver = GetFirstReceiverOfType(cricket::MEDIA_TYPE_VIDEO);
-  if (sdp_semantics_ == SdpSemantics::kPlanB) {
-    ASSERT_TRUE(audio_receiver);
-    ASSERT_TRUE(video_receiver);
-    // Track state may be updated asynchronously.
-    EXPECT_EQ_WAIT(MediaStreamTrackInterface::kEnded,
-                   audio_receiver->track()->state(), kTimeout);
-    EXPECT_EQ_WAIT(MediaStreamTrackInterface::kEnded,
-                   video_receiver->track()->state(), kTimeout);
-  } else {
     ASSERT_FALSE(audio_receiver);
     ASSERT_FALSE(video_receiver);
-  }
-}
-
-// Test that PeerConnection methods fails gracefully after
-// PeerConnection::Close has been called.
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB, CloseAndTestMethods) {
-  CreatePeerConnectionWithoutDtls();
-  AddAudioVideoStream(kStreamId1, "audio_label", "video_label");
-  CreateOfferAsRemoteDescription();
-  CreateAnswerAsLocalDescription();
-
-  ASSERT_EQ(1u, pc_->local_streams()->count());
-  rtc::scoped_refptr<MediaStreamInterface> local_stream =
-      pc_->local_streams()->at(0);
-
-  pc_->Close();
-
-  pc_->RemoveStream(local_stream);
-  EXPECT_FALSE(pc_->AddStream(local_stream));
-
-  EXPECT_TRUE(pc_->CreateDataChannel("test", NULL) == NULL);
-
-  EXPECT_TRUE(pc_->local_description() != NULL);
-  EXPECT_TRUE(pc_->remote_description() != NULL);
-
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  EXPECT_FALSE(DoCreateOffer(&offer, nullptr));
-  std::unique_ptr<SessionDescriptionInterface> answer;
-  EXPECT_FALSE(DoCreateAnswer(&answer, nullptr));
-
-  std::string sdp;
-  ASSERT_TRUE(pc_->remote_description()->ToString(&sdp));
-  std::unique_ptr<SessionDescriptionInterface> remote_offer(
-      webrtc::CreateSessionDescription(SdpType::kOffer, sdp));
-  EXPECT_FALSE(DoSetRemoteDescription(std::move(remote_offer)));
-
-  ASSERT_TRUE(pc_->local_description()->ToString(&sdp));
-  std::unique_ptr<SessionDescriptionInterface> local_offer(
-      webrtc::CreateSessionDescription(SdpType::kOffer, sdp));
-  EXPECT_FALSE(DoSetLocalDescription(std::move(local_offer)));
 }
 
 // Test that GetStats can still be called after PeerConnection::Close.
@@ -2765,52 +2193,6 @@ TEST_P(PeerConnectionInterfaceTest, UpdateRemoteStreams) {
       CompareStreamCollections(observer_.remote_streams(), reference2.get()));
 }
 
-// This test verifies that when remote tracks are added/removed from SDP, the
-// created remote streams are updated appropriately.
-// Don't run under Unified Plan since this test uses Plan B SDP to test Plan B
-// specific behavior.
-TEST_F(PeerConnectionInterfaceTestPlanB,
-       AddRemoveTrackFromExistingRemoteMediaStream) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  std::unique_ptr<SessionDescriptionInterface> desc_ms1 =
-      CreateSessionDescriptionAndReference(1, 1);
-  EXPECT_TRUE(DoSetRemoteDescription(std::move(desc_ms1)));
-  EXPECT_TRUE(CompareStreamCollections(observer_.remote_streams(),
-                                       reference_collection_));
-
-  // Add extra audio and video tracks to the same MediaStream.
-  std::unique_ptr<SessionDescriptionInterface> desc_ms1_two_tracks =
-      CreateSessionDescriptionAndReference(2, 2);
-  EXPECT_TRUE(DoSetRemoteDescription(std::move(desc_ms1_two_tracks)));
-  EXPECT_TRUE(CompareStreamCollections(observer_.remote_streams(),
-                                       reference_collection_));
-  rtc::scoped_refptr<AudioTrackInterface> audio_track2 =
-      observer_.remote_streams()->at(0)->GetAudioTracks()[1];
-  EXPECT_EQ(webrtc::MediaStreamTrackInterface::kLive, audio_track2->state());
-  rtc::scoped_refptr<VideoTrackInterface> video_track2 =
-      observer_.remote_streams()->at(0)->GetVideoTracks()[1];
-  EXPECT_EQ(webrtc::MediaStreamTrackInterface::kLive, video_track2->state());
-
-  // Remove the extra audio and video tracks.
-  std::unique_ptr<SessionDescriptionInterface> desc_ms2 =
-      CreateSessionDescriptionAndReference(1, 1);
-  MockTrackObserver audio_track_observer(audio_track2);
-  MockTrackObserver video_track_observer(video_track2);
-
-  EXPECT_CALL(audio_track_observer, OnChanged()).Times(Exactly(1));
-  EXPECT_CALL(video_track_observer, OnChanged()).Times(Exactly(1));
-  EXPECT_TRUE(DoSetRemoteDescription(std::move(desc_ms2)));
-  EXPECT_TRUE(CompareStreamCollections(observer_.remote_streams(),
-                                       reference_collection_));
-  // Track state may be updated asynchronously.
-  EXPECT_EQ_WAIT(webrtc::MediaStreamTrackInterface::kEnded,
-                 audio_track2->state(), kTimeout);
-  EXPECT_EQ_WAIT(webrtc::MediaStreamTrackInterface::kEnded,
-                 video_track2->state(), kTimeout);
-}
-
 // This tests that remote tracks are ended if a local session description is set
 // that rejects the media content type.
 TEST_P(PeerConnectionInterfaceTest, RejectMediaContent) {
@@ -2819,7 +2201,7 @@ TEST_P(PeerConnectionInterfaceTest, RejectMediaContent) {
   CreatePeerConnection(config);
   // First create and set a remote offer, then reject its video content in our
   // answer.
-  CreateAndSetRemoteOffer(kSdpStringWithStream1PlanB);
+  CreateAndSetRemoteOffer(kSdpStringWithStream1UnifiedPlan);
   auto audio_receiver = GetFirstReceiverOfType(cricket::MEDIA_TYPE_AUDIO);
   ASSERT_TRUE(audio_receiver);
   auto video_receiver = GetFirstReceiverOfType(cricket::MEDIA_TYPE_VIDEO);
@@ -2859,32 +2241,6 @@ TEST_P(PeerConnectionInterfaceTest, RejectMediaContent) {
                  kTimeout);
 }
 
-// This tests that we won't crash if the remote track has been removed outside
-// of PeerConnection and then PeerConnection tries to reject the track.
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB, RemoveTrackThenRejectMediaContent) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  CreateAndSetRemoteOffer(GetSdpStringWithStream1());
-  MediaStreamInterface* remote_stream = observer_.remote_streams()->at(0);
-  remote_stream->RemoveTrack(remote_stream->GetVideoTracks()[0]);
-  remote_stream->RemoveTrack(remote_stream->GetAudioTracks()[0]);
-
-  std::unique_ptr<SessionDescriptionInterface> local_answer(
-      webrtc::CreateSessionDescription(SdpType::kAnswer,
-                                       GetSdpStringWithStream1(), nullptr));
-  cricket::ContentInfo* video_info =
-      local_answer->description()->GetContentByName("video");
-  video_info->rejected = true;
-  cricket::ContentInfo* audio_info =
-      local_answer->description()->GetContentByName("audio");
-  audio_info->rejected = true;
-  EXPECT_TRUE(DoSetLocalDescription(std::move(local_answer)));
-
-  // No crash is a pass.
-}
-
 // This tests that if a recvonly remote description is set, no remote streams
 // will be created, even if the description contains SSRCs/MSIDs.
 // See: https://code.google.com/p/webrtc/issues/detail?id=5054
@@ -2898,267 +2254,6 @@ TEST_P(PeerConnectionInterfaceTest, RecvonlyDescriptionDoesntCreateStream) {
   CreateAndSetRemoteOffer(recvonly_offer);
 
   EXPECT_EQ(0u, observer_.remote_streams()->count());
-}
-
-// This tests that a default MediaStream is created if a remote session
-// description doesn't contain any streams and no MSID support.
-// It also tests that the default stream is updated if a video m-line is added
-// in a subsequent session description.
-// Don't run under Unified Plan since this behavior is Plan B specific.
-TEST_F(PeerConnectionInterfaceTestPlanB, SdpWithoutMsidCreatesDefaultStream) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  CreateAndSetRemoteOffer(kSdpStringWithoutStreamsAudioOnly);
-
-  ASSERT_EQ(1u, observer_.remote_streams()->count());
-  MediaStreamInterface* remote_stream = observer_.remote_streams()->at(0);
-
-  EXPECT_EQ(1u, remote_stream->GetAudioTracks().size());
-  EXPECT_EQ(0u, remote_stream->GetVideoTracks().size());
-  EXPECT_EQ("default", remote_stream->id());
-
-  CreateAndSetRemoteOffer(kSdpStringWithoutStreams);
-  ASSERT_EQ(1u, observer_.remote_streams()->count());
-  ASSERT_EQ(1u, remote_stream->GetAudioTracks().size());
-  EXPECT_EQ("defaulta0", remote_stream->GetAudioTracks()[0]->id());
-  EXPECT_EQ(MediaStreamTrackInterface::kLive,
-            remote_stream->GetAudioTracks()[0]->state());
-  ASSERT_EQ(1u, remote_stream->GetVideoTracks().size());
-  EXPECT_EQ("defaultv0", remote_stream->GetVideoTracks()[0]->id());
-  EXPECT_EQ(MediaStreamTrackInterface::kLive,
-            remote_stream->GetVideoTracks()[0]->state());
-}
-
-// This tests that a default MediaStream is created if a remote session
-// description doesn't contain any streams and media direction is send only.
-// Don't run under Unified Plan since this behavior is Plan B specific.
-TEST_F(PeerConnectionInterfaceTestPlanB,
-       SendOnlySdpWithoutMsidCreatesDefaultStream) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  CreateAndSetRemoteOffer(kSdpStringSendOnlyWithoutStreams);
-
-  ASSERT_EQ(1u, observer_.remote_streams()->count());
-  MediaStreamInterface* remote_stream = observer_.remote_streams()->at(0);
-
-  EXPECT_EQ(1u, remote_stream->GetAudioTracks().size());
-  EXPECT_EQ(1u, remote_stream->GetVideoTracks().size());
-  EXPECT_EQ("default", remote_stream->id());
-}
-
-// This tests that it won't crash when PeerConnection tries to remove
-// a remote track that as already been removed from the MediaStream.
-// Don't run under Unified Plan since this behavior is Plan B specific.
-TEST_F(PeerConnectionInterfaceTestPlanB, RemoveAlreadyGoneRemoteStream) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  CreateAndSetRemoteOffer(GetSdpStringWithStream1());
-  MediaStreamInterface* remote_stream = observer_.remote_streams()->at(0);
-  remote_stream->RemoveTrack(remote_stream->GetAudioTracks()[0]);
-  remote_stream->RemoveTrack(remote_stream->GetVideoTracks()[0]);
-
-  CreateAndSetRemoteOffer(kSdpStringWithoutStreams);
-
-  // No crash is a pass.
-}
-
-// This tests that a default MediaStream is created if the remote session
-// description doesn't contain any streams and don't contain an indication if
-// MSID is supported.
-// Don't run under Unified Plan since this behavior is Plan B specific.
-TEST_F(PeerConnectionInterfaceTestPlanB,
-       SdpWithoutMsidAndStreamsCreatesDefaultStream) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  CreateAndSetRemoteOffer(kSdpStringWithoutStreams);
-
-  ASSERT_EQ(1u, observer_.remote_streams()->count());
-  MediaStreamInterface* remote_stream = observer_.remote_streams()->at(0);
-  EXPECT_EQ(1u, remote_stream->GetAudioTracks().size());
-  EXPECT_EQ(1u, remote_stream->GetVideoTracks().size());
-}
-
-// This tests that a default MediaStream is not created if the remote session
-// description doesn't contain any streams but does support MSID.
-// Don't run under Unified Plan since this behavior is Plan B specific.
-TEST_F(PeerConnectionInterfaceTestPlanB, SdpWithMsidDontCreatesDefaultStream) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  CreateAndSetRemoteOffer(kSdpStringWithMsidWithoutStreams);
-  EXPECT_EQ(0u, observer_.remote_streams()->count());
-}
-
-// This tests that when setting a new description, the old default tracks are
-// not destroyed and recreated.
-// See: https://bugs.chromium.org/p/webrtc/issues/detail?id=5250
-// Don't run under Unified Plan since this behavior is Plan B specific.
-TEST_F(PeerConnectionInterfaceTestPlanB,
-       DefaultTracksNotDestroyedAndRecreated) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  CreateAndSetRemoteOffer(kSdpStringWithoutStreamsAudioOnly);
-
-  ASSERT_EQ(1u, observer_.remote_streams()->count());
-  MediaStreamInterface* remote_stream = observer_.remote_streams()->at(0);
-  ASSERT_EQ(1u, remote_stream->GetAudioTracks().size());
-
-  // Set the track to "disabled", then set a new description and ensure the
-  // track is still disabled, which ensures it hasn't been recreated.
-  remote_stream->GetAudioTracks()[0]->set_enabled(false);
-  CreateAndSetRemoteOffer(kSdpStringWithoutStreamsAudioOnly);
-  ASSERT_EQ(1u, remote_stream->GetAudioTracks().size());
-  EXPECT_FALSE(remote_stream->GetAudioTracks()[0]->enabled());
-}
-
-// This tests that a default MediaStream is not created if a remote session
-// description is updated to not have any MediaStreams.
-// Don't run under Unified Plan since this behavior is Plan B specific.
-TEST_F(PeerConnectionInterfaceTestPlanB, VerifyDefaultStreamIsNotCreated) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  CreateAndSetRemoteOffer(GetSdpStringWithStream1());
-  rtc::scoped_refptr<StreamCollection> reference(CreateStreamCollection(1, 1));
-  EXPECT_TRUE(
-      CompareStreamCollections(observer_.remote_streams(), reference.get()));
-
-  CreateAndSetRemoteOffer(kSdpStringWithoutStreams);
-  EXPECT_EQ(0u, observer_.remote_streams()->count());
-}
-
-// This tests that a default MediaStream is created if a remote SDP comes from
-// an endpoint that doesn't signal SSRCs, but signals media stream IDs.
-TEST_F(PeerConnectionInterfaceTestPlanB,
-       SdpWithMsidWithoutSsrcCreatesDefaultStream) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  std::string sdp_string = kSdpStringWithoutStreamsAudioOnly;
-  // Add a=msid lines to simulate a Unified Plan endpoint that only
-  // signals stream IDs with a=msid lines.
-  sdp_string.append("a=msid:audio_stream_id audio_track_id\n");
-
-  CreateAndSetRemoteOffer(sdp_string);
-
-  ASSERT_EQ(1u, observer_.remote_streams()->count());
-  MediaStreamInterface* remote_stream = observer_.remote_streams()->at(0);
-  EXPECT_EQ("default", remote_stream->id());
-  ASSERT_EQ(1u, remote_stream->GetAudioTracks().size());
-}
-
-// This tests that when a Plan B endpoint receives an SDP that signals no media
-// stream IDs indicated by the special character "-" in the a=msid line, that
-// a default stream ID will be used for the MediaStream ID. This can occur
-// when a Unified Plan endpoint signals no media stream IDs, but signals both
-// a=ssrc msid and a=msid lines for interop signaling with Plan B.
-TEST_F(PeerConnectionInterfaceTestPlanB,
-       SdpWithEmptyMsidAndSsrcCreatesDefaultStreamId) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-  // Add a a=msid line to the SDP. This is prioritized when parsing the SDP, so
-  // the sender's stream ID will be interpreted as no stream IDs.
-  std::string sdp_string = kSdpStringWithStream1AudioTrackOnly;
-  sdp_string.append("a=msid:- audiotrack0\n");
-
-  CreateAndSetRemoteOffer(sdp_string);
-
-  ASSERT_EQ(1u, observer_.remote_streams()->count());
-  // Because SSRCs are signaled the track ID will be what was signaled in the
-  // a=msid line.
-  EXPECT_EQ("audiotrack0", observer_.last_added_track_label_);
-  MediaStreamInterface* remote_stream = observer_.remote_streams()->at(0);
-  EXPECT_EQ("default", remote_stream->id());
-  ASSERT_EQ(1u, remote_stream->GetAudioTracks().size());
-
-  // Previously a bug ocurred when setting the remote description a second time.
-  // This is because we checked equality of the remote StreamParams stream ID
-  // (empty), and the previously set stream ID for the remote sender
-  // ("default"). This cause a track to be removed, then added, when really
-  // nothing should occur because it is the same track.
-  CreateAndSetRemoteOffer(sdp_string);
-  EXPECT_EQ(0u, observer_.remove_track_events_.size());
-  EXPECT_EQ(1u, observer_.add_track_events_.size());
-  EXPECT_EQ("audiotrack0", observer_.last_added_track_label_);
-  remote_stream = observer_.remote_streams()->at(0);
-  EXPECT_EQ("default", remote_stream->id());
-  ASSERT_EQ(1u, remote_stream->GetAudioTracks().size());
-}
-
-// This tests that an RtpSender is created when the local description is set
-// after adding a local stream.
-// TODO(deadbeef): This test and the one below it need to be updated when
-// an RtpSender's lifetime isn't determined by when a local description is set.
-// Don't run under Unified Plan since this behavior is Plan B specific.
-TEST_F(PeerConnectionInterfaceTestPlanB, LocalDescriptionChanged) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-
-  // Create an offer with 1 stream with 2 tracks of each type.
-  rtc::scoped_refptr<StreamCollection> stream_collection =
-      CreateStreamCollection(1, 2);
-  pc_->AddStream(stream_collection->at(0));
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-  EXPECT_TRUE(DoSetLocalDescription(std::move(offer)));
-
-  auto senders = pc_->GetSenders();
-  EXPECT_EQ(4u, senders.size());
-  EXPECT_TRUE(ContainsSender(senders, kAudioTracks[0]));
-  EXPECT_TRUE(ContainsSender(senders, kVideoTracks[0]));
-  EXPECT_TRUE(ContainsSender(senders, kAudioTracks[1]));
-  EXPECT_TRUE(ContainsSender(senders, kVideoTracks[1]));
-
-  // Remove an audio and video track.
-  pc_->RemoveStream(stream_collection->at(0));
-  stream_collection = CreateStreamCollection(1, 1);
-  pc_->AddStream(stream_collection->at(0));
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-  EXPECT_TRUE(DoSetLocalDescription(std::move(offer)));
-
-  senders = pc_->GetSenders();
-  EXPECT_EQ(2u, senders.size());
-  EXPECT_TRUE(ContainsSender(senders, kAudioTracks[0]));
-  EXPECT_TRUE(ContainsSender(senders, kVideoTracks[0]));
-  EXPECT_FALSE(ContainsSender(senders, kAudioTracks[1]));
-  EXPECT_FALSE(ContainsSender(senders, kVideoTracks[1]));
-}
-
-// This tests that an RtpSender is created when the local description is set
-// before adding a local stream.
-// Don't run under Unified Plan since this behavior is Plan B specific.
-TEST_F(PeerConnectionInterfaceTestPlanB,
-       AddLocalStreamAfterLocalDescriptionChanged) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-
-  rtc::scoped_refptr<StreamCollection> stream_collection =
-      CreateStreamCollection(1, 2);
-  // Add a stream to create the offer, but remove it afterwards.
-  pc_->AddStream(stream_collection->at(0));
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-  pc_->RemoveStream(stream_collection->at(0));
-
-  EXPECT_TRUE(DoSetLocalDescription(std::move(offer)));
-  auto senders = pc_->GetSenders();
-  EXPECT_EQ(0u, senders.size());
-
-  pc_->AddStream(stream_collection->at(0));
-  senders = pc_->GetSenders();
-  EXPECT_EQ(4u, senders.size());
-  EXPECT_TRUE(ContainsSender(senders, kAudioTracks[0]));
-  EXPECT_TRUE(ContainsSender(senders, kVideoTracks[0]));
-  EXPECT_TRUE(ContainsSender(senders, kAudioTracks[1]));
-  EXPECT_TRUE(ContainsSender(senders, kVideoTracks[1]));
 }
 
 // This tests that the expected behavior occurs if the SSRC on a local track is
@@ -3213,46 +2308,6 @@ TEST_P(PeerConnectionInterfaceTest,
   // changed.
 }
 
-// This tests that the expected behavior occurs if a new session description is
-// set with the same tracks, but on a different MediaStream.
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB,
-       SignalSameTracksInSeparateMediaStream) {
-  RTCConfiguration config;
-  config.enable_dtls_srtp = true;
-  CreatePeerConnection(config);
-
-  rtc::scoped_refptr<StreamCollection> stream_collection =
-      CreateStreamCollection(2, 1);
-  pc_->AddStream(stream_collection->at(0));
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-  EXPECT_TRUE(DoSetLocalDescription(std::move(offer)));
-
-  auto senders = pc_->GetSenders();
-  EXPECT_EQ(2u, senders.size());
-  EXPECT_TRUE(ContainsSender(senders, kAudioTracks[0], kStreams[0]));
-  EXPECT_TRUE(ContainsSender(senders, kVideoTracks[0], kStreams[0]));
-
-  // Add a new MediaStream but with the same tracks as in the first stream.
-  rtc::scoped_refptr<webrtc::MediaStreamInterface> stream_1(
-      webrtc::MediaStream::Create(kStreams[1]));
-  stream_1->AddTrack(stream_collection->at(0)->GetVideoTracks()[0]);
-  stream_1->AddTrack(stream_collection->at(0)->GetAudioTracks()[0]);
-  pc_->AddStream(stream_1);
-
-  ASSERT_TRUE(DoCreateOffer(&offer, nullptr));
-  EXPECT_TRUE(DoSetLocalDescription(std::move(offer)));
-
-  auto new_senders = pc_->GetSenders();
-  // Should be the same senders as before, but with updated stream id.
-  // Note that this behavior is subject to change in the future.
-  // We may decide the PC should ignore existing tracks in AddStream.
-  EXPECT_EQ(senders, new_senders);
-  EXPECT_TRUE(ContainsSender(new_senders, kAudioTracks[0], kStreams[1]));
-  EXPECT_TRUE(ContainsSender(new_senders, kVideoTracks[0], kStreams[1]));
-}
-
 // This tests that PeerConnectionObserver::OnAddTrack is correctly called.
 TEST_P(PeerConnectionInterfaceTest, OnAddTrackCallback) {
   RTCConfiguration config;
@@ -3263,7 +2318,7 @@ TEST_P(PeerConnectionInterfaceTest, OnAddTrackCallback) {
   EXPECT_EQ(observer_.last_added_track_label_, kAudioTracks[0]);
 
   // Create and set the updated remote SDP.
-  CreateAndSetRemoteOffer(kSdpStringWithStream1PlanB);
+  CreateAndSetRemoteOffer(kSdpStringWithStream1UnifiedPlan);
   EXPECT_EQ(observer_.num_added_tracks_, 2);
   EXPECT_EQ(observer_.last_added_track_label_, kVideoTracks[0]);
 }
@@ -3474,8 +2529,6 @@ TEST_P(PeerConnectionInterfaceTest, OffersAndAnswersHaveTrickleIceOption) {
 
   // First, create an offer with audio/video.
   RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio = 1;
-  options.offer_to_receive_video = 1;
   std::unique_ptr<SessionDescriptionInterface> offer;
   ASSERT_TRUE(DoCreateOffer(&offer, &options));
   cricket::SessionDescription* desc = offer->description();
@@ -3545,8 +2598,6 @@ TEST_P(PeerConnectionInterfaceTest, CreateOfferWithOfferToReceiveConstraints) {
   CreatePeerConnection();
 
   RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio = 1;
-  options.offer_to_receive_video = 1;
   std::unique_ptr<SessionDescriptionInterface> offer;
   ASSERT_TRUE(DoCreateOffer(&offer, &options));
 
@@ -3557,38 +2608,6 @@ TEST_P(PeerConnectionInterfaceTest, CreateOfferWithOfferToReceiveConstraints) {
   ASSERT_NE(nullptr, video);
   EXPECT_FALSE(audio->rejected);
   EXPECT_FALSE(video->rejected);
-}
-
-// Test that if CreateAnswer is called with the deprecated "offer to receive
-// audio/video" constraints, they're processed and can be used to reject an
-// offered m= section just as can be done with RTCOfferAnswerOptions;
-// Don't run under Unified Plan since this behavior is not supported.
-TEST_F(PeerConnectionInterfaceTestPlanB,
-       CreateAnswerWithOfferToReceiveConstraints) {
-  CreatePeerConnection();
-
-  // First, create an offer with audio/video and apply it as a remote
-  // description.
-  RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio = 1;
-  options.offer_to_receive_video = 1;
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  ASSERT_TRUE(DoCreateOffer(&offer, &options));
-  EXPECT_TRUE(DoSetRemoteDescription(std::move(offer)));
-
-  // Now create answer that rejects audio/video.
-  options.offer_to_receive_audio = 0;
-  options.offer_to_receive_video = 0;
-  std::unique_ptr<SessionDescriptionInterface> answer;
-  ASSERT_TRUE(DoCreateAnswer(&answer, &options));
-
-  cricket::SessionDescription* desc = answer->description();
-  const cricket::ContentInfo* audio = cricket::GetFirstAudioContent(desc);
-  const cricket::ContentInfo* video = cricket::GetFirstVideoContent(desc);
-  ASSERT_NE(nullptr, audio);
-  ASSERT_NE(nullptr, video);
-  EXPECT_TRUE(audio->rejected);
-  EXPECT_TRUE(video->rejected);
 }
 
 // Test that negotiation can succeed with a data channel only, and with the max
@@ -3679,82 +2698,6 @@ TEST_P(PeerConnectionInterfaceTest, SetBitrateCurrentLessThanImplicitMin) {
   EXPECT_TRUE(pc_->SetBitrate(bitrate).ok());
 }
 
-// The following tests verify that the offer can be created correctly.
-TEST_P(PeerConnectionInterfaceTest,
-       CreateOfferFailsWithInvalidOfferToReceiveAudio) {
-  RTCOfferAnswerOptions rtc_options;
-
-  // Setting offer_to_receive_audio to a value lower than kUndefined or greater
-  // than kMaxOfferToReceiveMedia should be treated as invalid.
-  rtc_options.offer_to_receive_audio = RTCOfferAnswerOptions::kUndefined - 1;
-  CreatePeerConnection();
-  EXPECT_FALSE(CreateOfferWithOptions(rtc_options));
-
-  rtc_options.offer_to_receive_audio =
-      RTCOfferAnswerOptions::kMaxOfferToReceiveMedia + 1;
-  EXPECT_FALSE(CreateOfferWithOptions(rtc_options));
-}
-
-TEST_P(PeerConnectionInterfaceTest,
-       CreateOfferFailsWithInvalidOfferToReceiveVideo) {
-  RTCOfferAnswerOptions rtc_options;
-
-  // Setting offer_to_receive_video to a value lower than kUndefined or greater
-  // than kMaxOfferToReceiveMedia should be treated as invalid.
-  rtc_options.offer_to_receive_video = RTCOfferAnswerOptions::kUndefined - 1;
-  CreatePeerConnection();
-  EXPECT_FALSE(CreateOfferWithOptions(rtc_options));
-
-  rtc_options.offer_to_receive_video =
-      RTCOfferAnswerOptions::kMaxOfferToReceiveMedia + 1;
-  EXPECT_FALSE(CreateOfferWithOptions(rtc_options));
-}
-
-// Test that the audio and video content will be added to an offer if both
-// |offer_to_receive_audio| and |offer_to_receive_video| options are 1.
-TEST_P(PeerConnectionInterfaceTest, CreateOfferWithAudioVideoOptions) {
-  RTCOfferAnswerOptions rtc_options;
-  rtc_options.offer_to_receive_audio = 1;
-  rtc_options.offer_to_receive_video = 1;
-
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  CreatePeerConnection();
-  offer = CreateOfferWithOptions(rtc_options);
-  ASSERT_TRUE(offer);
-  EXPECT_NE(nullptr, GetFirstAudioContent(offer->description()));
-  EXPECT_NE(nullptr, GetFirstVideoContent(offer->description()));
-}
-
-// Test that only audio content will be added to the offer if only
-// |offer_to_receive_audio| options is 1.
-TEST_P(PeerConnectionInterfaceTest, CreateOfferWithAudioOnlyOptions) {
-  RTCOfferAnswerOptions rtc_options;
-  rtc_options.offer_to_receive_audio = 1;
-  rtc_options.offer_to_receive_video = 0;
-
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  CreatePeerConnection();
-  offer = CreateOfferWithOptions(rtc_options);
-  ASSERT_TRUE(offer);
-  EXPECT_NE(nullptr, GetFirstAudioContent(offer->description()));
-  EXPECT_EQ(nullptr, GetFirstVideoContent(offer->description()));
-}
-
-// Test that only video content will be added if only |offer_to_receive_video|
-// options is 1.
-TEST_P(PeerConnectionInterfaceTest, CreateOfferWithVideoOnlyOptions) {
-  RTCOfferAnswerOptions rtc_options;
-  rtc_options.offer_to_receive_audio = 0;
-  rtc_options.offer_to_receive_video = 1;
-
-  std::unique_ptr<SessionDescriptionInterface> offer;
-  CreatePeerConnection();
-  offer = CreateOfferWithOptions(rtc_options);
-  ASSERT_TRUE(offer);
-  EXPECT_EQ(nullptr, GetFirstAudioContent(offer->description()));
-  EXPECT_NE(nullptr, GetFirstVideoContent(offer->description()));
-}
-
 // Test that no media content will be added to the offer if using default
 // RTCOfferAnswerOptions.
 TEST_P(PeerConnectionInterfaceTest, CreateOfferWithDefaultOfferAnswerOptions) {
@@ -3775,7 +2718,6 @@ TEST_P(PeerConnectionInterfaceTest, CreateOfferWithIceRestart) {
 
   RTCOfferAnswerOptions rtc_options;
   rtc_options.ice_restart = false;
-  rtc_options.offer_to_receive_audio = 1;
 
   std::unique_ptr<SessionDescriptionInterface> offer;
   CreateOfferWithOptionsAsLocalDescription(&offer, rtc_options);
@@ -3810,9 +2752,6 @@ TEST_P(PeerConnectionInterfaceTest, CreateOfferWithIceRestart) {
 // offer; if it is false, there won't be any bundle group in the offer.
 TEST_P(PeerConnectionInterfaceTest, CreateOfferWithRtpMux) {
   RTCOfferAnswerOptions rtc_options;
-  rtc_options.offer_to_receive_audio = 1;
-  rtc_options.offer_to_receive_video = 1;
-
   std::unique_ptr<SessionDescriptionInterface> offer;
   CreatePeerConnection();
 
@@ -3829,42 +2768,6 @@ TEST_P(PeerConnectionInterfaceTest, CreateOfferWithRtpMux) {
   EXPECT_NE(nullptr, GetFirstAudioContent(offer->description()));
   EXPECT_NE(nullptr, GetFirstVideoContent(offer->description()));
   EXPECT_FALSE(offer->description()->HasGroup(cricket::GROUP_TYPE_BUNDLE));
-}
-
-// This test ensures OnRenegotiationNeeded is called when we add track with
-// MediaStream -> AddTrack in the same way it is called when we add track with
-// PeerConnection -> AddTrack.
-// The test can be removed once addStream is rewritten in terms of addTrack
-// https://bugs.chromium.org/p/webrtc/issues/detail?id=7815
-// Don't run under Unified Plan since the stream API is not available.
-TEST_F(PeerConnectionInterfaceTestPlanB,
-       MediaStreamAddTrackRemoveTrackRenegotiate) {
-  CreatePeerConnectionWithoutDtls();
-  rtc::scoped_refptr<MediaStreamInterface> stream(
-      pc_factory_->CreateLocalMediaStream(kStreamId1));
-  pc_->AddStream(stream);
-  rtc::scoped_refptr<AudioTrackInterface> audio_track(
-      CreateAudioTrack("audio_track"));
-  rtc::scoped_refptr<VideoTrackInterface> video_track(
-      CreateVideoTrack("video_track"));
-  stream->AddTrack(audio_track);
-  EXPECT_TRUE_WAIT(observer_.renegotiation_needed_, kTimeout);
-  observer_.renegotiation_needed_ = false;
-
-  CreateOfferReceiveAnswer();
-  stream->AddTrack(video_track);
-  EXPECT_TRUE_WAIT(observer_.renegotiation_needed_, kTimeout);
-  observer_.renegotiation_needed_ = false;
-
-  CreateOfferReceiveAnswer();
-  stream->RemoveTrack(audio_track);
-  EXPECT_TRUE_WAIT(observer_.renegotiation_needed_, kTimeout);
-  observer_.renegotiation_needed_ = false;
-
-  CreateOfferReceiveAnswer();
-  stream->RemoveTrack(video_track);
-  EXPECT_TRUE_WAIT(observer_.renegotiation_needed_, kTimeout);
-  observer_.renegotiation_needed_ = false;
 }
 
 // Tests that an error is returned if a description is applied that has fewer
@@ -3915,8 +2818,7 @@ TEST_P(PeerConnectionInterfaceTest, ExtmapAllowMixedIsConfigurable) {
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionInterfaceTest,
                          PeerConnectionInterfaceTest,
-                         Values(SdpSemantics::kPlanB,
-                                SdpSemantics::kUnifiedPlan));
+                         Values(SdpSemantics::kUnifiedPlan));
 
 class PeerConnectionMediaConfigTest : public ::testing::Test {
  protected:
