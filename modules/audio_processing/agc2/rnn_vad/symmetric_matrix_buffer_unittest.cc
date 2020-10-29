@@ -52,7 +52,7 @@ bool CheckPairsWithValueExist(
 TEST(RnnVadTest, SymmetricMatrixBufferUseCase) {
   // Instance a ring buffer which will be fed with a series of integer values.
   constexpr int kRingBufSize = 10;
-  RingBuffer<int, 1, static_cast<int>(kRingBufSize)> ring_buf;
+  RingBuffer<int, 1, kRingBufSize> ring_buf;
   // Instance a symmetric matrix buffer for the ring buffer above. It stores
   // pairs of integers with which this test can easily check that the evolution
   // of RingBuffer and SymmetricMatrixBuffer match.

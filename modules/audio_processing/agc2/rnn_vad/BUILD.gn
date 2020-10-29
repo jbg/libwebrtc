@@ -34,6 +34,7 @@ rtc_library("rnn_vad") {
     "../../../../rtc_base:checks",
     "../../../../rtc_base:logging",
     "../../../../rtc_base:safe_compare",
+    "../../../../rtc_base:safe_conversions",
     "../../../../rtc_base/system:arch",
     "//third_party/rnnoise:rnn_vad",
   ]
@@ -94,6 +95,7 @@ rtc_library("rnn_vad_pitch") {
     "../../../../api:array_view",
     "../../../../rtc_base:checks",
     "../../../../rtc_base:safe_compare",
+    "../../../../rtc_base:safe_conversions",
   ]
 }
 
@@ -211,6 +213,7 @@ if (rtc_include_tests) {
       "../../../../rtc_base:checks",
       "../../../../rtc_base:logging",
       "../../../../rtc_base:safe_compare",
+      "../../../../rtc_base:safe_conversions",
       "../../../../rtc_base/system:arch",
       "../../../../test:test_support",
       "../../utility:pffft_wrapper",

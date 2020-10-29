@@ -46,10 +46,9 @@ class RingBuffer {
   // and least recently push array is returned when |delay| is 0 and N - 1
   // respectively.
   rtc::ArrayView<const T, S> GetArrayView(int delay) const {
-    const int delay_int = static_cast<int>(delay);
-    RTC_DCHECK_LE(0, delay_int);
-    RTC_DCHECK_LT(delay_int, N);
-    int offset = tail_ - 1 - delay_int;
+    RTC_DCHECK_LE(0, delay);
+    RTC_DCHECK_LT(delay, N);
+    int offset = tail_ - 1 - delay;
     if (offset < 0)
       offset += N;
     return {buffer_.data() + S * offset, S};

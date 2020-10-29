@@ -15,6 +15,7 @@
 
 #include "modules/audio_processing/agc2/rnn_vad/test_utils.h"
 #include "rtc_base/numerics/safe_compare.h"
+#include "rtc_base/numerics/safe_conversions.h"
 // TODO(bugs.webrtc.org/8948): Add when the issue is fixed.
 // #include "test/fpe_observer.h"
 #include "test/gtest.h"
@@ -79,7 +80,7 @@ TEST(RnnVadTest, FeatureExtractionLowHighPitch) {
   FeaturesExtractor features_extractor;
   std::vector<float> samples(kNumTestDataSize);
   std::vector<float> feature_vector(kFeatureVectorSize);
-  ASSERT_EQ(kFeatureVectorSize, static_cast<int>(feature_vector.size()));
+  ASSERT_EQ(kFeatureVectorSize, rtc::dchecked_cast<int>(feature_vector.size()));
   rtc::ArrayView<float, kFeatureVectorSize> feature_vector_view(
       feature_vector.data(), kFeatureVectorSize);
 
