@@ -33,6 +33,24 @@
       "message": "do you need both GUARDED_BYs?",
       "revId": "349270156261a3891f4c0ba738fe9e533b111cad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fcff3ba_e4422936",
+        "filename": "modules/video_coding/timing.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-29T18:43:30Z",
+      "side": 1,
+      "message": "I think both make sense. The first one protects the pointer itself (and could be removed, if constructor was tweaked to make it a construction-time const). While the second protects the pointed-to object, validating that the lock I remove isn\u0027t needed.\n\nAnd for codec_timer_ below, the pointer is also modified in the Reset method, so would need more refactoring to be made const.\n\nSo I\u0027d prefer to leave const-related refactoring to some other cl.",
+      "parentUuid": "22eada52_c8e4856b",
+      "revId": "349270156261a3891f4c0ba738fe9e533b111cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
