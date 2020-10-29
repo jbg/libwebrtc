@@ -26,7 +26,7 @@ TEST(CallbackList, NoRecieverSingleMessageTest) {
 
 TEST(CallbackList, MultipleParameterMessageTest) {
   CallbackList<const std::string&, std::string, std::string&&, int, int*,
-             std::string&>
+               std::string&>
       c;
   std::string str = "messege";
   int i = 10;
