@@ -169,17 +169,14 @@ TEST_P(PeerConnectionHeaderExtensionTest, OffersUnstoppedModifiedExtensions) {
 INSTANTIATE_TEST_SUITE_P(
     ,
     PeerConnectionHeaderExtensionTest,
-    Combine(Values(SdpSemantics::kPlanB, SdpSemantics::kUnifiedPlan),
-            Values(cricket::MediaType::MEDIA_TYPE_AUDIO,
-                   cricket::MediaType::MEDIA_TYPE_VIDEO)),
+    Values(cricket::MediaType::MEDIA_TYPE_AUDIO,
+           cricket::MediaType::MEDIA_TYPE_VIDEO),
     [](const testing::TestParamInfo<
         PeerConnectionHeaderExtensionTest::ParamType>& info) {
       cricket::MediaType media_type;
       SdpSemantics semantics;
       std::tie(media_type, semantics) = info.param;
       return (rtc::StringBuilder("With")
-              << (semantics == SdpSemantics::kPlanB ? "PlanB" : "UnifiedPlan")
-              << "And"
               << (media_type == cricket::MediaType::MEDIA_TYPE_AUDIO ? "Voice"
                                                                      : "Video")
               << "Engine")

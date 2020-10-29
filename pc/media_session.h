@@ -165,10 +165,6 @@ class MediaSessionDescriptionFactory {
     enable_encrypted_rtp_header_extensions_ = enable;
   }
 
-  void set_is_unified_plan(bool is_unified_plan) {
-    is_unified_plan_ = is_unified_plan;
-  }
-
   std::unique_ptr<SessionDescription> CreateOffer(
       const MediaSessionOptions& options,
       const SessionDescription* current_description) const;
@@ -347,7 +343,6 @@ class MediaSessionDescriptionFactory {
 
   void ComputeVideoCodecsIntersectionAndUnion();
 
-  bool is_unified_plan_ = false;
   AudioCodecs audio_send_codecs_;
   AudioCodecs audio_recv_codecs_;
   // Intersection of send and recv.

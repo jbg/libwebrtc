@@ -389,8 +389,7 @@ TEST_P(PeerConnectionDataChannelTest, ObsoleteSdpSyntaxIfSet) {
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionDataChannelTest,
                          PeerConnectionDataChannelTest,
-                         Values(SdpSemantics::kPlanB,
-                                SdpSemantics::kUnifiedPlan));
+                         Values(SdpSemantics::kUnifiedPlan));
 
 TEST_F(PeerConnectionDataChannelUnifiedPlanTest,
        ReOfferAfterPeerRejectsDataChannel) {

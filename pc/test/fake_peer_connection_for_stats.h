@@ -216,14 +216,6 @@ class FakePeerConnectionForStats : public FakePeerConnectionBase {
 
   // PeerConnectionInterface overrides.
 
-  rtc::scoped_refptr<StreamCollectionInterface> local_streams() override {
-    return local_streams_;
-  }
-
-  rtc::scoped_refptr<StreamCollectionInterface> remote_streams() override {
-    return remote_streams_;
-  }
-
   std::vector<rtc::scoped_refptr<RtpSenderInterface>> GetSenders()
       const override {
     std::vector<rtc::scoped_refptr<RtpSenderInterface>> senders;

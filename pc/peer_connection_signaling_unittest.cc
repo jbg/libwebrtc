@@ -435,8 +435,7 @@ TEST_P(PeerConnectionSignalingStateTest, SetRemoteAnswer) {
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionSignalingTest,
                          PeerConnectionSignalingStateTest,
-                         Combine(Values(SdpSemantics::kPlanB,
-                                        SdpSemantics::kUnifiedPlan),
+                         Combine(Values(SdpSemantics::kUnifiedPlan),
                                  Values(SignalingState::kStable,
                                         SignalingState::kHaveLocalOffer,
                                         SignalingState::kHaveLocalPrAnswer,
@@ -532,8 +531,6 @@ TEST_P(PeerConnectionSignalingTest, CreateOffersAndShutdown) {
   auto caller = CreatePeerConnection();
 
   RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio =
-      RTCOfferAnswerOptions::kOfferToReceiveMediaTrue;
 
   rtc::scoped_refptr<MockCreateSessionDescriptionObserver> observers[100];
   for (auto& observer : observers) {
@@ -903,8 +900,7 @@ TEST_P(PeerConnectionSignalingTest, UnsupportedContentType) {
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionSignalingTest,
                          PeerConnectionSignalingTest,
-                         Values(SdpSemantics::kPlanB,
-                                SdpSemantics::kUnifiedPlan));
+                         Values(SdpSemantics::kUnifiedPlan));
 
 class PeerConnectionSignalingUnifiedPlanTest
     : public PeerConnectionSignalingBaseTest {

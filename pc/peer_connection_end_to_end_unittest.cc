@@ -756,5 +756,4 @@ TEST_P(PeerConnectionEndToEndTest, CanRestartIce) {
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionEndToEndTest,
                          PeerConnectionEndToEndTest,
-                         Values(SdpSemantics::kPlanB,
-                                SdpSemantics::kUnifiedPlan));
+                         Values(SdpSemantics::kUnifiedPlan));

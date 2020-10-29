@@ -69,8 +69,7 @@ struct RtpSenderInfo {
 class RtpTransmissionManager : public RtpSenderBase::SetStreamsObserver,
                                public sigslot::has_slots<> {
  public:
-  RtpTransmissionManager(bool is_unified_plan,
-                         rtc::Thread* signaling_thread,
+  RtpTransmissionManager(rtc::Thread* signaling_thread,
                          rtc::Thread* worker_thread,
                          cricket::ChannelManager* channel_manager,
                          UsagePattern* usage_pattern,
@@ -140,31 +139,6 @@ class RtpTransmissionManager : public RtpSenderBase::SetStreamsObserver,
   rtc::scoped_refptr<RtpTransceiverProxyWithInternal<RtpTransceiver>>
   GetFirstAudioTransceiver() const;
 
-  // Add an audio track, reusing or creating the sender.
-  void AddAudioTrack(AudioTrackInterface* track, MediaStreamInterface* stream);
-  // Plan B: Remove an audio track, removing the sender.
-  void RemoveAudioTrack(AudioTrackInterface* track,
-                        MediaStreamInterface* stream);
-  // Add a video track, reusing or creating the sender.
-  void AddVideoTrack(VideoTrackInterface* track, MediaStreamInterface* stream);
-  // Plan B: Remove a video track, removing the sender.
-  void RemoveVideoTrack(VideoTrackInterface* track,
-                        MediaStreamInterface* stream);
-
-  // Triggered when a remote sender has been seen for the first time in a remote
-  // session description. It creates a remote MediaStreamTrackInterface
-  // implementation and triggers CreateAudioReceiver or CreateVideoReceiver.
-  void OnRemoteSenderAdded(const RtpSenderInfo& sender_info,
-                           MediaStreamInterface* stream,
-                           cricket::MediaType media_type);
-
-  // Triggered when a remote sender has been removed from a remote session
-  // description. It removes the remote sender with id |sender_id| from a remote
-  // MediaStream and triggers DestroyAudioReceiver or DestroyVideoReceiver.
-  void OnRemoteSenderRemoved(const RtpSenderInfo& sender_info,
-                             MediaStreamInterface* stream,
-                             cricket::MediaType media_type);
-
   // Triggered when a local sender has been seen for the first time in a local
   // session description.
   // This method triggers CreateAudioSender or CreateVideoSender if the rtp
@@ -204,16 +178,10 @@ class RtpTransmissionManager : public RtpSenderBase::SetStreamsObserver,
   TransceiverList* transceivers() { return &transceivers_; }
   const TransceiverList* transceivers() const { return &transceivers_; }
 
-  // Plan B helpers for getting the voice/video media channels for the single
-  // audio/video transceiver, if it exists.
-  cricket::VoiceMediaChannel* voice_media_channel() const;
-  cricket::VideoMediaChannel* video_media_channel() const;
-
  private:
   rtc::Thread* signaling_thread() const { return signaling_thread_; }
   rtc::Thread* worker_thread() const { return worker_thread_; }
   cricket::ChannelManager* channel_manager() const { return channel_manager_; }
-  bool IsUnifiedPlan() const { return is_unified_plan_; }
   void NoteUsageEvent(UsageEvent event) {
     usage_pattern_->NoteUsageEvent(event);
   }
@@ -222,22 +190,6 @@ class RtpTransmissionManager : public RtpSenderBase::SetStreamsObserver,
   RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>> AddTrackUnifiedPlan(
       rtc::scoped_refptr<MediaStreamTrackInterface> track,
       const std::vector<std::string>& stream_ids);
-  // AddTrack implementation when Plan B is specified.
-  RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>> AddTrackPlanB(
-      rtc::scoped_refptr<MediaStreamTrackInterface> track,
-      const std::vector<std::string>& stream_ids);
-
-  // Create an RtpReceiver that sources an audio track.
-  void CreateAudioReceiver(MediaStreamInterface* stream,
-                           const RtpSenderInfo& remote_sender_info)
-      RTC_RUN_ON(signaling_thread());
-
-  // Create an RtpReceiver that sources a video track.
-  void CreateVideoReceiver(MediaStreamInterface* stream,
-                           const RtpSenderInfo& remote_sender_info)
-      RTC_RUN_ON(signaling_thread());
-  rtc::scoped_refptr<RtpReceiverInterface> RemoveAndStopReceiver(
-      const RtpSenderInfo& remote_sender_info) RTC_RUN_ON(signaling_thread());
 
   PeerConnectionObserver* Observer() const;
   void OnNegotiationNeeded();
@@ -255,7 +207,6 @@ class RtpTransmissionManager : public RtpSenderBase::SetStreamsObserver,
       RTC_GUARDED_BY(signaling_thread());
 
   bool closed_ = false;
-  bool const is_unified_plan_;
   rtc::Thread* signaling_thread_;
   rtc::Thread* worker_thread_;
   cricket::ChannelManager* channel_manager_;

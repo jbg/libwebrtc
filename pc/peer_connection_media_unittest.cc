@@ -61,10 +61,8 @@ class PeerConnectionMediaBaseTest : public ::testing::Test {
  protected:
   typedef std::unique_ptr<PeerConnectionWrapperForMediaTest> WrapperPtr;
 
-  explicit PeerConnectionMediaBaseTest(SdpSemantics sdp_semantics)
-      : vss_(new rtc::VirtualSocketServer()),
-        main_(vss_.get()),
-        sdp_semantics_(sdp_semantics) {
+  PeerConnectionMediaBaseTest()
+      : vss_(new rtc::VirtualSocketServer()), main_(vss_.get()) {
 #ifdef WEBRTC_ANDROID
     InitializeAndroidObjects();
 #endif
@@ -108,7 +106,6 @@ class PeerConnectionMediaBaseTest : public ::testing::Test {
         rtc::Thread::Current(), nullptr);
     auto observer = std::make_unique<MockPeerConnectionObserver>();
     auto modified_config = config;
-    modified_config.sdp_semantics = sdp_semantics_;
     auto pc = pc_factory->CreatePeerConnection(modified_config,
                                                std::move(fake_port_allocator),
                                                nullptr, observer.get());
@@ -169,32 +166,20 @@ class PeerConnectionMediaBaseTest : public ::testing::Test {
     return content->media_description()->direction();
   }
 
-  bool IsUnifiedPlan() const {
-    return sdp_semantics_ == SdpSemantics::kUnifiedPlan;
-  }
-
   std::unique_ptr<rtc::VirtualSocketServer> vss_;
   rtc::AutoSocketServerThread main_;
-  const SdpSemantics sdp_semantics_;
 };
 
 class PeerConnectionMediaTest
     : public PeerConnectionMediaBaseTest,
       public ::testing::WithParamInterface<SdpSemantics> {
  protected:
-  PeerConnectionMediaTest() : PeerConnectionMediaBaseTest(GetParam()) {}
+  PeerConnectionMediaTest() : PeerConnectionMediaBaseTest() {}
 };
 
 class PeerConnectionMediaTestUnifiedPlan : public PeerConnectionMediaBaseTest {
  protected:
-  PeerConnectionMediaTestUnifiedPlan()
-      : PeerConnectionMediaBaseTest(SdpSemantics::kUnifiedPlan) {}
-};
-
-class PeerConnectionMediaTestPlanB : public PeerConnectionMediaBaseTest {
- protected:
-  PeerConnectionMediaTestPlanB()
-      : PeerConnectionMediaBaseTest(SdpSemantics::kPlanB) {}
+  PeerConnectionMediaTestUnifiedPlan() : PeerConnectionMediaBaseTest() {}
 };
 
 TEST_P(PeerConnectionMediaTest,
@@ -299,81 +284,6 @@ TEST_F(PeerConnectionMediaTestUnifiedPlan,
   ASSERT_FALSE(callee->media_engine()->GetVideoChannel(0));
 }
 
-// Test that removing streams from a subsequent offer causes the receive streams
-// on the callee to be removed.
-// See previous test for equivalent behavior with Unified Plan semantics.
-TEST_F(PeerConnectionMediaTestPlanB, EmptyRemoteOfferRemovesRecvStreams) {
-  auto caller = CreatePeerConnection();
-  auto caller_audio_track = caller->AddAudioTrack("a");
-  auto caller_video_track = caller->AddVideoTrack("v");
-  auto callee = CreatePeerConnectionWithAudioVideo();
-
-  ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
-
-  // Remove both tracks from caller.
-  caller->pc()->RemoveTrack(caller_audio_track);
-  caller->pc()->RemoveTrack(caller_video_track);
-
-  ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
-
-  auto callee_voice = callee->media_engine()->GetVoiceChannel(0);
-  auto callee_video = callee->media_engine()->GetVideoChannel(0);
-  EXPECT_EQ(1u, callee_voice->send_streams().size());
-  EXPECT_EQ(0u, callee_voice->recv_streams().size());
-  EXPECT_EQ(1u, callee_video->send_streams().size());
-  EXPECT_EQ(0u, callee_video->recv_streams().size());
-}
-
-// Test enabling of simulcast with Plan B semantics.
-// This test creating an offer.
-TEST_F(PeerConnectionMediaTestPlanB, SimulcastOffer) {
-  auto caller = CreatePeerConnection();
-  auto caller_video_track = caller->AddVideoTrack("v");
-  RTCOfferAnswerOptions options;
-  options.num_simulcast_layers = 3;
-  auto offer = caller->CreateOffer(options);
-  auto* description = cricket::GetFirstMediaContent(offer->description(),
-                                                    cricket::MEDIA_TYPE_VIDEO)
-                          ->media_description();
-  ASSERT_EQ(1u, description->streams().size());
-  ASSERT_TRUE(description->streams()[0].get_ssrc_group("SIM"));
-  EXPECT_EQ(3u, description->streams()[0].get_ssrc_group("SIM")->ssrcs.size());
-
-  // Check that it actually creates simulcast aswell.
-  caller->SetLocalDescription(std::move(offer));
-  auto senders = caller->pc()->GetSenders();
-  ASSERT_EQ(1u, senders.size());
-  EXPECT_EQ(cricket::MediaType::MEDIA_TYPE_VIDEO, senders[0]->media_type());
-  EXPECT_EQ(3u, senders[0]->GetParameters().encodings.size());
-}
-
-// Test enabling of simulcast with Plan B semantics.
-// This test creating an answer.
-TEST_F(PeerConnectionMediaTestPlanB, SimulcastAnswer) {
-  auto caller = CreatePeerConnection();
-  caller->AddVideoTrack("v0");
-  auto offer = caller->CreateOffer();
-  auto callee = CreatePeerConnection();
-  auto callee_video_track = callee->AddVideoTrack("v1");
-  ASSERT_TRUE(callee->SetRemoteDescription(std::move(offer)));
-  RTCOfferAnswerOptions options;
-  options.num_simulcast_layers = 3;
-  auto answer = callee->CreateAnswer(options);
-  auto* description = cricket::GetFirstMediaContent(answer->description(),
-                                                    cricket::MEDIA_TYPE_VIDEO)
-                          ->media_description();
-  ASSERT_EQ(1u, description->streams().size());
-  ASSERT_TRUE(description->streams()[0].get_ssrc_group("SIM"));
-  EXPECT_EQ(3u, description->streams()[0].get_ssrc_group("SIM")->ssrcs.size());
-
-  // Check that it actually creates simulcast aswell.
-  callee->SetLocalDescription(std::move(answer));
-  auto senders = callee->pc()->GetSenders();
-  ASSERT_EQ(1u, senders.size());
-  EXPECT_EQ(cricket::MediaType::MEDIA_TYPE_VIDEO, senders[0]->media_type());
-  EXPECT_EQ(3u, senders[0]->GetParameters().encodings.size());
-}
-
 // Test that stopping the callee transceivers causes the media channels to be
 // destroyed on the callee after calling SetLocalDescription on the local
 // answer.
@@ -397,31 +307,6 @@ TEST_F(PeerConnectionMediaTestUnifiedPlan,
   EXPECT_FALSE(callee->media_engine()->GetVideoChannel(0));
 }
 
-// Test that removing streams from a subsequent answer causes the send streams
-// on the callee to be removed when applied locally.
-// See previous test for equivalent behavior with Unified Plan semantics.
-TEST_F(PeerConnectionMediaTestPlanB, EmptyLocalAnswerRemovesSendStreams) {
-  auto caller = CreatePeerConnectionWithAudioVideo();
-  auto callee = CreatePeerConnection();
-  auto callee_audio_track = callee->AddAudioTrack("a");
-  auto callee_video_track = callee->AddVideoTrack("v");
-
-  ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
-
-  // Remove both tracks from callee.
-  callee->pc()->RemoveTrack(callee_audio_track);
-  callee->pc()->RemoveTrack(callee_video_track);
-
-  ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
-
-  auto callee_voice = callee->media_engine()->GetVoiceChannel(0);
-  auto callee_video = callee->media_engine()->GetVideoChannel(0);
-  EXPECT_EQ(0u, callee_voice->send_streams().size());
-  EXPECT_EQ(1u, callee_voice->recv_streams().size());
-  EXPECT_EQ(0u, callee_video->send_streams().size());
-  EXPECT_EQ(1u, callee_video->recv_streams().size());
-}
-
 // Test that a new stream in a subsequent offer causes a new receive stream to
 // be created on the callee.
 TEST_P(PeerConnectionMediaTest, NewStreamInRemoteOfferAddsRecvStreams) {
@@ -440,7 +325,6 @@ TEST_P(PeerConnectionMediaTest, NewStreamInRemoteOfferAddsRecvStreams) {
   auto a2 = callee->media_engine()->GetVoiceChannel(1);
   auto v1 = callee->media_engine()->GetVideoChannel(0);
   auto v2 = callee->media_engine()->GetVideoChannel(1);
-  if (IsUnifiedPlan()) {
     ASSERT_TRUE(a1);
     EXPECT_EQ(1u, a1->recv_streams().size());
     ASSERT_TRUE(a2);
@@ -449,14 +333,6 @@ TEST_P(PeerConnectionMediaTest, NewStreamInRemoteOfferAddsRecvStreams) {
     EXPECT_EQ(1u, v1->recv_streams().size());
     ASSERT_TRUE(v2);
     EXPECT_EQ(1u, v2->recv_streams().size());
-  } else {
-    ASSERT_TRUE(a1);
-    EXPECT_EQ(2u, a1->recv_streams().size());
-    ASSERT_FALSE(a2);
-    ASSERT_TRUE(v1);
-    EXPECT_EQ(2u, v1->recv_streams().size());
-    ASSERT_FALSE(v2);
-  }
 }
 
 // Test that a new stream in a subsequent answer causes a new send stream to be
@@ -466,10 +342,6 @@ TEST_P(PeerConnectionMediaTest, NewStreamInLocalAnswerAddsSendStreams) {
   auto callee = CreatePeerConnectionWithAudioVideo();
 
   RTCOfferAnswerOptions offer_options;
-  offer_options.offer_to_receive_audio =
-      RTCOfferAnswerOptions::kOfferToReceiveMediaTrue;
-  offer_options.offer_to_receive_video =
-      RTCOfferAnswerOptions::kOfferToReceiveMediaTrue;
   RTCOfferAnswerOptions answer_options;
 
   ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get(), offer_options,
@@ -487,13 +359,8 @@ TEST_P(PeerConnectionMediaTest, NewStreamInLocalAnswerAddsSendStreams) {
   auto callee_video = callee->media_engine()->GetVideoChannel(0);
   ASSERT_TRUE(callee_video);
 
-  if (IsUnifiedPlan()) {
     EXPECT_EQ(1u, callee_voice->send_streams().size());
     EXPECT_EQ(1u, callee_video->send_streams().size());
-  } else {
-    EXPECT_EQ(2u, callee_voice->send_streams().size());
-    EXPECT_EQ(2u, callee_video->send_streams().size());
-  }
 }
 
 // A PeerConnection with no local streams and no explicit answer constraints
@@ -622,8 +489,7 @@ class PeerConnectionMediaOfferDirectionTest
           std::tuple<SdpSemantics,
                      std::tuple<bool, int, RtpTransceiverDirection>>> {
  protected:
-  PeerConnectionMediaOfferDirectionTest()
-      : PeerConnectionMediaBaseTest(std::get<0>(GetParam())) {
+  PeerConnectionMediaOfferDirectionTest() : PeerConnectionMediaBaseTest() {
     auto param = std::get<1>(GetParam());
     send_media_ = std::get<0>(param);
     offer_to_receive_ = std::get<1>(param);
@@ -644,7 +510,6 @@ TEST_P(PeerConnectionMediaOfferDirectionTest, VerifyDirection) {
   }
 
   RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio = offer_to_receive_;
   auto offer = caller->CreateOffer(options);
 
   auto* content = cricket::GetFirstMediaContent(offer->description(),
@@ -662,7 +527,7 @@ INSTANTIATE_TEST_SUITE_P(
     PeerConnectionMediaTest,
     PeerConnectionMediaOfferDirectionTest,
     Combine(
-        Values(SdpSemantics::kPlanB, SdpSemantics::kUnifiedPlan),
+        Values(SdpSemantics::kUnifiedPlan),
         Values(std::make_tuple(false, -1, RtpTransceiverDirection::kInactive),
                std::make_tuple(false, 0, RtpTransceiverDirection::kInactive),
                std::make_tuple(false, 1, RtpTransceiverDirection::kRecvOnly),
@@ -675,8 +540,7 @@ class PeerConnectionMediaAnswerDirectionTest
       public ::testing::WithParamInterface<
           std::tuple<SdpSemantics, RtpTransceiverDirection, bool, int>> {
  protected:
-  PeerConnectionMediaAnswerDirectionTest()
-      : PeerConnectionMediaBaseTest(std::get<0>(GetParam())) {
+  PeerConnectionMediaAnswerDirectionTest() : PeerConnectionMediaBaseTest() {
     offer_direction_ = std::get<1>(GetParam());
     send_media_ = std::get<2>(GetParam());
     offer_to_receive_ = std::get<3>(GetParam());
@@ -691,8 +555,7 @@ class PeerConnectionMediaAnswerDirectionTest
 // in the offer, the presence of a local media track on the receive side and the
 // offer_to_receive setting.
 TEST_P(PeerConnectionMediaAnswerDirectionTest, VerifyDirection) {
-  if (IsUnifiedPlan() &&
-      offer_to_receive_ != RTCOfferAnswerOptions::kUndefined) {
+  if (offer_to_receive_ != RTCOfferAnswerOptions::kUndefined) {
     // offer_to_receive_ is not implemented when creating answers with Unified
     // Plan semantics specified.
     return;
@@ -714,7 +577,6 @@ TEST_P(PeerConnectionMediaAnswerDirectionTest, VerifyDirection) {
 
   // Create the answer according to the test parameters.
   RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio = offer_to_receive_;
   auto answer = callee->CreateAnswer(options);
 
   // The expected direction in the answer is the intersection of each side's
@@ -741,8 +603,7 @@ TEST_P(PeerConnectionMediaAnswerDirectionTest, VerifyDirection) {
 // local media track and has set offer_to_receive to 0, no matter which
 // direction the caller indicated in the offer.
 TEST_P(PeerConnectionMediaAnswerDirectionTest, VerifyRejected) {
-  if (IsUnifiedPlan() &&
-      offer_to_receive_ != RTCOfferAnswerOptions::kUndefined) {
+  if (offer_to_receive_ != RTCOfferAnswerOptions::kUndefined) {
     // offer_to_receive_ is not implemented when creating answers with Unified
     // Plan semantics specified.
     return;
@@ -764,7 +625,6 @@ TEST_P(PeerConnectionMediaAnswerDirectionTest, VerifyRejected) {
 
   // Create the answer according to the test parameters.
   RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio = offer_to_receive_;
   auto answer = callee->CreateAnswer(options);
 
   // The media section is rejected if and only if offer_to_receive is explicitly
@@ -776,8 +636,7 @@ TEST_P(PeerConnectionMediaAnswerDirectionTest, VerifyRejected) {
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionMediaTest,
                          PeerConnectionMediaAnswerDirectionTest,
-                         Combine(Values(SdpSemantics::kPlanB,
-                                        SdpSemantics::kUnifiedPlan),
+                         Combine(Values(SdpSemantics::kUnifiedPlan),
                                  Values(RtpTransceiverDirection::kInactive,
                                         RtpTransceiverDirection::kSendOnly,
                                         RtpTransceiverDirection::kRecvOnly,
@@ -790,38 +649,12 @@ TEST_P(PeerConnectionMediaTest, OfferHasDifferentDirectionForAudioVideo) {
   caller->AddVideoTrack("v");
 
   RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio = 1;
-  options.offer_to_receive_video = 0;
   auto offer = caller->CreateOffer(options);
 
   EXPECT_EQ(RtpTransceiverDirection::kRecvOnly,
             GetMediaContentDirection(offer.get(), cricket::MEDIA_TYPE_AUDIO));
   EXPECT_EQ(RtpTransceiverDirection::kSendOnly,
             GetMediaContentDirection(offer.get(), cricket::MEDIA_TYPE_VIDEO));
-}
-
-TEST_P(PeerConnectionMediaTest, AnswerHasDifferentDirectionsForAudioVideo) {
-  if (IsUnifiedPlan()) {
-    // offer_to_receive_ is not implemented when creating answers with Unified
-    // Plan semantics specified.
-    return;
-  }
-
-  auto caller = CreatePeerConnectionWithAudioVideo();
-  auto callee = CreatePeerConnection();
-  callee->AddVideoTrack("v");
-
-  ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
-
-  RTCOfferAnswerOptions options;
-  options.offer_to_receive_audio = 1;
-  options.offer_to_receive_video = 0;
-  auto answer = callee->CreateAnswer(options);
-
-  EXPECT_EQ(RtpTransceiverDirection::kRecvOnly,
-            GetMediaContentDirection(answer.get(), cricket::MEDIA_TYPE_AUDIO));
-  EXPECT_EQ(RtpTransceiverDirection::kSendOnly,
-            GetMediaContentDirection(answer.get(), cricket::MEDIA_TYPE_VIDEO));
 }
 
 void AddComfortNoiseCodecsToSend(cricket::FakeMediaEngine* media_engine) {
@@ -885,8 +718,7 @@ class PeerConnectionMediaInvalidMediaTest
                      std::function<void(cricket::SessionDescription*)>,
                      std::string>>> {
  protected:
-  PeerConnectionMediaInvalidMediaTest()
-      : PeerConnectionMediaBaseTest(std::get<0>(GetParam())) {
+  PeerConnectionMediaInvalidMediaTest() : PeerConnectionMediaBaseTest() {
     auto param = std::get<1>(GetParam());
     mutator_ = std::get<1>(param);
     expected_error_ = std::get<2>(param);
@@ -957,7 +789,7 @@ constexpr char kMLinesOutOfOrder[] =
 INSTANTIATE_TEST_SUITE_P(
     PeerConnectionMediaTest,
     PeerConnectionMediaInvalidMediaTest,
-    Combine(Values(SdpSemantics::kPlanB, SdpSemantics::kUnifiedPlan),
+    Combine(Values(SdpSemantics::kUnifiedPlan),
             Values(std::make_tuple("remove video",
                                    RemoveVideoContent,
                                    kMLinesOutOfOrder),
@@ -970,140 +802,6 @@ INSTANTIATE_TEST_SUITE_P(
                    std::make_tuple("change audio type to video type",
                                    ChangeMediaTypeAudioToVideo,
                                    kMLinesOutOfOrder))));
-
-// Test that the correct media engine send/recv streams are created when doing
-// a series of offer/answers where audio/video are both sent, then audio is
-// rejected, then both audio/video sent again.
-TEST_P(PeerConnectionMediaTest, TestAVOfferWithAudioOnlyAnswer) {
-  if (IsUnifiedPlan()) {
-    // offer_to_receive_ is not implemented when creating answers with Unified
-    // Plan semantics specified.
-    return;
-  }
-
-  RTCOfferAnswerOptions options_reject_video;
-  options_reject_video.offer_to_receive_audio =
-      RTCOfferAnswerOptions::kOfferToReceiveMediaTrue;
-  options_reject_video.offer_to_receive_video = 0;
-
-  auto caller = CreatePeerConnection();
-  caller->AddAudioTrack("a");
-  caller->AddVideoTrack("v");
-  auto callee = CreatePeerConnection();
-
-  // Caller initially offers to send/recv audio and video.
-  ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
-  // Callee accepts the audio as recv only but rejects the video.
-  ASSERT_TRUE(caller->SetRemoteDescription(
-      callee->CreateAnswerAndSetAsLocal(options_reject_video)));
-
-  auto caller_voice = caller->media_engine()->GetVoiceChannel(0);
-  ASSERT_TRUE(caller_voice);
-  EXPECT_EQ(0u, caller_voice->recv_streams().size());
-  EXPECT_EQ(1u, caller_voice->send_streams().size());
-  auto caller_video = caller->media_engine()->GetVideoChannel(0);
-  EXPECT_FALSE(caller_video);
-
-  // Callee adds its own audio/video stream and offers to receive audio/video
-  // too.
-  callee->AddAudioTrack("a");
-  auto callee_video_track = callee->AddVideoTrack("v");
-  ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
-  ASSERT_TRUE(
-      caller->SetRemoteDescription(callee->CreateAnswerAndSetAsLocal()));
-
-  auto callee_voice = callee->media_engine()->GetVoiceChannel(0);
-  ASSERT_TRUE(callee_voice);
-  EXPECT_EQ(1u, callee_voice->recv_streams().size());
-  EXPECT_EQ(1u, callee_voice->send_streams().size());
-  auto callee_video = callee->media_engine()->GetVideoChannel(0);
-  ASSERT_TRUE(callee_video);
-  EXPECT_EQ(1u, callee_video->recv_streams().size());
-  EXPECT_EQ(1u, callee_video->send_streams().size());
-
-  // Callee removes video but keeps audio and rejects the video once again.
-  callee->pc()->RemoveTrack(callee_video_track);
-  ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
-  ASSERT_TRUE(
-      callee->SetLocalDescription(callee->CreateAnswer(options_reject_video)));
-
-  callee_voice = callee->media_engine()->GetVoiceChannel(0);
-  ASSERT_TRUE(callee_voice);
-  EXPECT_EQ(1u, callee_voice->recv_streams().size());
-  EXPECT_EQ(1u, callee_voice->send_streams().size());
-  callee_video = callee->media_engine()->GetVideoChannel(0);
-  EXPECT_FALSE(callee_video);
-}
-
-// Test that the correct media engine send/recv streams are created when doing
-// a series of offer/answers where audio/video are both sent, then video is
-// rejected, then both audio/video sent again.
-TEST_P(PeerConnectionMediaTest, TestAVOfferWithVideoOnlyAnswer) {
-  if (IsUnifiedPlan()) {
-    // offer_to_receive_ is not implemented when creating answers with Unified
-    // Plan semantics specified.
-    return;
-  }
-
-  // Disable the bundling here. If the media is bundled on audio
-  // transport, then we can't reject the audio because switching the bundled
-  // transport is not currently supported.
-  // (https://bugs.chromium.org/p/webrtc/issues/detail?id=6704)
-  RTCOfferAnswerOptions options_no_bundle;
-  options_no_bundle.use_rtp_mux = false;
-  RTCOfferAnswerOptions options_reject_audio = options_no_bundle;
-  options_reject_audio.offer_to_receive_audio = 0;
-  options_reject_audio.offer_to_receive_video =
-      RTCOfferAnswerOptions::kMaxOfferToReceiveMedia;
-
-  auto caller = CreatePeerConnection();
-  caller->AddAudioTrack("a");
-  caller->AddVideoTrack("v");
-  auto callee = CreatePeerConnection();
-
-  // Caller initially offers to send/recv audio and video.
-  ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
-  // Callee accepts the video as recv only but rejects the audio.
-  ASSERT_TRUE(caller->SetRemoteDescription(
-      callee->CreateAnswerAndSetAsLocal(options_reject_audio)));
-
-  auto caller_voice = caller->media_engine()->GetVoiceChannel(0);
-  EXPECT_FALSE(caller_voice);
-  auto caller_video = caller->media_engine()->GetVideoChannel(0);
-  ASSERT_TRUE(caller_video);
-  EXPECT_EQ(0u, caller_video->recv_streams().size());
-  EXPECT_EQ(1u, caller_video->send_streams().size());
-
-  // Callee adds its own audio/video stream and offers to receive audio/video
-  // too.
-  auto callee_audio_track = callee->AddAudioTrack("a");
-  callee->AddVideoTrack("v");
-  ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
-  ASSERT_TRUE(caller->SetRemoteDescription(
-      callee->CreateAnswerAndSetAsLocal(options_no_bundle)));
-
-  auto callee_voice = callee->media_engine()->GetVoiceChannel(0);
-  ASSERT_TRUE(callee_voice);
-  EXPECT_EQ(1u, callee_voice->recv_streams().size());
-  EXPECT_EQ(1u, callee_voice->send_streams().size());
-  auto callee_video = callee->media_engine()->GetVideoChannel(0);
-  ASSERT_TRUE(callee_video);
-  EXPECT_EQ(1u, callee_video->recv_streams().size());
-  EXPECT_EQ(1u, callee_video->send_streams().size());
-
-  // Callee removes audio but keeps video and rejects the audio once again.
-  callee->pc()->RemoveTrack(callee_audio_track);
-  ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
-  ASSERT_TRUE(
-      callee->SetLocalDescription(callee->CreateAnswer(options_reject_audio)));
-
-  callee_voice = callee->media_engine()->GetVoiceChannel(0);
-  EXPECT_FALSE(callee_voice);
-  callee_video = callee->media_engine()->GetVideoChannel(0);
-  ASSERT_TRUE(callee_video);
-  EXPECT_EQ(1u, callee_video->recv_streams().size());
-  EXPECT_EQ(1u, callee_video->send_streams().size());
-}
 
 // Tests that if the underlying video encoder fails to be initialized (signaled
 // by failing to set send codecs), the PeerConnection signals the error to the
@@ -1122,8 +820,7 @@ TEST_P(PeerConnectionMediaTest, MediaEngineErrorPropagatedToClients) {
                                             &error));
   EXPECT_EQ(std::string("Failed to set remote answer sdp: Failed to set remote "
                         "video description "
-                        "send parameters for m-section with mid='") +
-                (IsUnifiedPlan() ? "1" : "video") + "'.",
+                        "send parameters for m-section with mid='1'"),
             error);
 }
 
@@ -1738,7 +1435,6 @@ TEST_F(PeerConnectionMediaTestUnifiedPlan,
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionMediaTest,
                          PeerConnectionMediaTest,
-                         Values(SdpSemantics::kPlanB,
-                                SdpSemantics::kUnifiedPlan));
+                         Values(SdpSemantics::kUnifiedPlan));
 
 }  // namespace webrtc
