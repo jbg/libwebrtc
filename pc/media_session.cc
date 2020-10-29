@@ -1458,26 +1458,9 @@ void MediaSessionDescriptionFactory::set_video_codecs(
   ComputeVideoCodecsIntersectionAndUnion();
 }
 
-static void RemoveUnifiedPlanExtensions(RtpHeaderExtensions* extensions) {
-  RTC_DCHECK(extensions);
-
-  extensions->erase(
-      std::remove_if(extensions->begin(), extensions->end(),
-                     [](auto extension) {
-                       return extension.uri == webrtc::RtpExtension::kMidUri ||
-                              extension.uri == webrtc::RtpExtension::kRidUri ||
-                              extension.uri ==
-                                  webrtc::RtpExtension::kRepairedRidUri;
-                     }),
-      extensions->end());
-}
-
 RtpHeaderExtensions
 MediaSessionDescriptionFactory::filtered_rtp_header_extensions(
     RtpHeaderExtensions extensions) const {
-  if (!is_unified_plan_) {
-    RemoveUnifiedPlanExtensions(&extensions);
-  }
   return extensions;
 }
 
@@ -1604,16 +1587,11 @@ std::unique_ptr<SessionDescription> MediaSessionDescriptionFactory::CreateOffer(
 
   // The following determines how to signal MSIDs to ensure compatibility with
   // older endpoints (in particular, older Plan B endpoints).
-  if (is_unified_plan_) {
     // Be conservative and signal using both a=msid and a=ssrc lines. Unified
     // Plan answerers will look at a=msid and Plan B answerers will look at the
     // a=ssrc MSID line.
     offer->set_msid_signaling(cricket::kMsidSignalingMediaSection |
                               cricket::kMsidSignalingSsrcAttribute);
-  } else {
-    // Plan B always signals MSID using a=ssrc lines.
-    offer->set_msid_signaling(cricket::kMsidSignalingSsrcAttribute);
-  }
 
   offer->set_extmap_allow_mixed(session_options.offer_extmap_allow_mixed);
 
@@ -1771,7 +1749,6 @@ MediaSessionDescriptionFactory::CreateAnswer(
 
   // The following determines how to signal MSIDs to ensure compatibility with
   // older endpoints (in particular, older Plan B endpoints).
-  if (is_unified_plan_) {
     // Unified Plan needs to look at what the offer included to find the most
     // compatible answer.
     if (offer->msid_signaling() == 0) {
@@ -1797,10 +1774,6 @@ MediaSessionDescriptionFactory::CreateAnswer(
       // back to them.
       answer->set_msid_signaling(offer->msid_signaling());
     }
-  } else {
-    // Plan B always signals MSID using a=ssrc lines.
-    answer->set_msid_signaling(cricket::kMsidSignalingSsrcAttribute);
-  }
 
   return answer;
 }

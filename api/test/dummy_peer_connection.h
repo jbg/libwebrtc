@@ -27,18 +27,6 @@ namespace webrtc {
 // values. State-changing methods with a return value return failure. Remaining
 // methods (except Close())) will crash with FATAL if called.
 class DummyPeerConnection : public PeerConnectionInterface {
-  rtc::scoped_refptr<StreamCollectionInterface> local_streams() override {
-    return nullptr;
-  }
-  rtc::scoped_refptr<StreamCollectionInterface> remote_streams() override {
-    return nullptr;
-  }
-
-  bool AddStream(MediaStreamInterface* stream) override { return false; }
-  void RemoveStream(MediaStreamInterface* stream) override {
-    FATAL() << "Not implemented";
-  }
-
   RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>> AddTrack(
       rtc::scoped_refptr<MediaStreamTrackInterface> track,
       const std::vector<std::string>& stream_ids) override {
@@ -70,12 +58,6 @@ class DummyPeerConnection : public PeerConnectionInterface {
       cricket::MediaType media_type,
       const RtpTransceiverInit& init) override {
     return RTCError(RTCErrorType::UNSUPPORTED_OPERATION, "Not implemented");
-  }
-
-  rtc::scoped_refptr<RtpSenderInterface> CreateSender(
-      const std::string& kind,
-      const std::string& stream_id) override {
-    return nullptr;
   }
 
   std::vector<rtc::scoped_refptr<RtpSenderInterface>> GetSenders()

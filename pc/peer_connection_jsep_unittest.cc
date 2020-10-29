@@ -1565,39 +1565,6 @@ TEST_F(PeerConnectionJsepTest, AnswerBeforeOfferFails) {
   EXPECT_EQ(RTCErrorType::INVALID_STATE, error.type());
 }
 
-// Test that a Unified Plan PeerConnection fails to set a Plan B offer if it has
-// two video tracks.
-TEST_F(PeerConnectionJsepTest, TwoVideoPlanBToUnifiedPlanFails) {
-  RTCConfiguration config_planb;
-  config_planb.sdp_semantics = SdpSemantics::kPlanB;
-  auto caller = CreatePeerConnection(config_planb);
-  auto callee = CreatePeerConnection();
-  caller->AddVideoTrack("video1");
-  caller->AddVideoTrack("video2");
-
-  RTCError error;
-  ASSERT_FALSE(callee->SetRemoteDescription(caller->CreateOffer(), &error));
-  EXPECT_EQ(RTCErrorType::INVALID_PARAMETER, error.type());
-}
-
-// Test that a Unified Plan PeerConnection fails to set a Plan B answer if it
-// has two video tracks.
-TEST_F(PeerConnectionJsepTest, OneVideoUnifiedPlanToTwoVideoPlanBFails) {
-  auto caller = CreatePeerConnection();
-  RTCConfiguration config_planb;
-  config_planb.sdp_semantics = SdpSemantics::kPlanB;
-  auto callee = CreatePeerConnection(config_planb);
-  caller->AddVideoTrack("video");
-  callee->AddVideoTrack("video1");
-  callee->AddVideoTrack("video2");
-
-  ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
-
-  RTCError error;
-  ASSERT_FALSE(caller->SetRemoteDescription(caller->CreateAnswer(), &error));
-  EXPECT_EQ(RTCErrorType::INVALID_PARAMETER, error.type());
-}
-
 // Removes the RTP header extension associated with the given URI from the media
 // description.
 static void RemoveRtpHeaderExtensionByUri(
@@ -1734,18 +1701,6 @@ TEST_F(PeerConnectionJsepTest, RollbackSupportedInUnifiedPlan) {
   EXPECT_TRUE(caller->SetRemoteDescription(caller->CreateRollback()));
   EXPECT_TRUE(caller->CreateOfferAndSetAsLocal());
   EXPECT_TRUE(caller->SetRemoteDescription(callee->CreateOffer()));
-}
-
-TEST_F(PeerConnectionJsepTest, RollbackNotSupportedInPlanB) {
-  RTCConfiguration config;
-  config.sdp_semantics = SdpSemantics::kPlanB;
-  config.enable_implicit_rollback = true;
-  auto caller = CreatePeerConnection(config);
-  auto callee = CreatePeerConnection(config);
-  EXPECT_TRUE(caller->CreateOfferAndSetAsLocal());
-  EXPECT_FALSE(caller->SetLocalDescription(caller->CreateRollback()));
-  EXPECT_FALSE(caller->SetRemoteDescription(caller->CreateRollback()));
-  EXPECT_FALSE(caller->SetRemoteDescription(callee->CreateOffer()));
 }
 
 TEST_F(PeerConnectionJsepTest, RollbackFailsInStableState) {

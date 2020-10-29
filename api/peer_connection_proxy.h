@@ -24,10 +24,6 @@ namespace webrtc {
 // are called on is an implementation detail.
 BEGIN_SIGNALING_PROXY_MAP(PeerConnection)
 PROXY_SIGNALING_THREAD_DESTRUCTOR()
-PROXY_METHOD0(rtc::scoped_refptr<StreamCollectionInterface>, local_streams)
-PROXY_METHOD0(rtc::scoped_refptr<StreamCollectionInterface>, remote_streams)
-PROXY_METHOD1(bool, AddStream, MediaStreamInterface*)
-PROXY_METHOD1(void, RemoveStream, MediaStreamInterface*)
 PROXY_METHOD2(RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>>,
               AddTrack,
               rtc::scoped_refptr<MediaStreamTrackInterface>,
@@ -48,10 +44,6 @@ PROXY_METHOD2(RTCErrorOr<rtc::scoped_refptr<RtpTransceiverInterface>>,
               AddTransceiver,
               cricket::MediaType,
               const RtpTransceiverInit&)
-PROXY_METHOD2(rtc::scoped_refptr<RtpSenderInterface>,
-              CreateSender,
-              const std::string&,
-              const std::string&)
 PROXY_CONSTMETHOD0(std::vector<rtc::scoped_refptr<RtpSenderInterface>>,
                    GetSenders)
 PROXY_CONSTMETHOD0(std::vector<rtc::scoped_refptr<RtpReceiverInterface>>,

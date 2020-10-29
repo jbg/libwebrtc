@@ -166,9 +166,6 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
       const std::vector<cricket::Candidate>& candidates);
   bool ShouldFireNegotiationNeededEvent(uint32_t event_id);
 
-  bool AddStream(MediaStreamInterface* local_stream);
-  void RemoveStream(MediaStreamInterface* local_stream);
-
   absl::optional<bool> is_caller();
   bool HasNewIceCredentials();
   void UpdateNegotiationNeeded();
@@ -266,22 +263,6 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
   RTCError UpdateSessionState(SdpType type,
                               cricket::ContentSource source,
                               const cricket::SessionDescription* description);
-
-  bool IsUnifiedPlan() const RTC_RUN_ON(signaling_thread());
-
-  // Signals from MediaStreamObserver.
-  void OnAudioTrackAdded(AudioTrackInterface* track,
-                         MediaStreamInterface* stream)
-      RTC_RUN_ON(signaling_thread());
-  void OnAudioTrackRemoved(AudioTrackInterface* track,
-                           MediaStreamInterface* stream)
-      RTC_RUN_ON(signaling_thread());
-  void OnVideoTrackAdded(VideoTrackInterface* track,
-                         MediaStreamInterface* stream)
-      RTC_RUN_ON(signaling_thread());
-  void OnVideoTrackRemoved(VideoTrackInterface* track,
-                           MediaStreamInterface* stream)
-      RTC_RUN_ON(signaling_thread());
 
   // | desc_type | is the type of the description that caused the rollback.
   RTCError Rollback(SdpType desc_type);
@@ -403,8 +384,6 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
   }
   const std::string& session_error_desc() const { return session_error_desc_; }
 
-  RTCError HandleLegacyOfferOptions(
-      const PeerConnectionInterface::RTCOfferAnswerOptions& options);
   void RemoveRecvDirectionFromReceivingTransceiversOfType(
       cricket::MediaType media_type) RTC_RUN_ON(signaling_thread());
   void AddUpToOneReceivingTransceiverOfType(cricket::MediaType media_type);
@@ -432,17 +411,6 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
           remote_streams,
       std::vector<rtc::scoped_refptr<MediaStreamInterface>>* removed_streams);
 
-  // Remove all local and remote senders of type |media_type|.
-  // Called when a media type is rejected (m-line set to port 0).
-  void RemoveSenders(cricket::MediaType media_type);
-
-  // Loops through the vector of |streams| and finds added and removed
-  // StreamParams since last time this method was called.
-  // For each new or removed StreamParam, OnLocalSenderSeen or
-  // OnLocalSenderRemoved is invoked.
-  void UpdateLocalSenders(const std::vector<cricket::StreamParams>& streams,
-                          cricket::MediaType media_type);
-
   // Makes sure a MediaStreamTrack is created for each StreamParam in |streams|,
   // and existing MediaStreamTracks are removed if there is no corresponding
   // StreamParam. If |default_track_needed| is true, a default MediaStreamTrack
@@ -468,9 +436,6 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
                                         SdpType type);
   // Helper function to remove stopped transceivers.
   void RemoveStoppedTransceivers();
-  // Deletes the corresponding channel of contents that don't exist in |desc|.
-  // |desc| can be null. This means that all channels are deleted.
-  void RemoveUnusedChannels(const cricket::SessionDescription* desc);
 
   // Report inferred negotiated SDP semantics from a local/remote answer to the
   // UMA observer.
@@ -503,11 +468,6 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
   // Functions for dealing with transports.
   // Note that cricket code uses the term "channel" for what other code
   // refers to as "transport".
-
-  // Allocates media channels based on the |desc|. If |desc| doesn't have
-  // the BUNDLE option, this method will disable BUNDLE in PortAllocator.
-  // This method will also delete any existing media channels before creating.
-  RTCError CreateChannels(const cricket::SessionDescription& desc);
 
   // Helper methods to create media channels.
   cricket::VoiceChannel* CreateVoiceChannel(const std::string& mid);
@@ -596,7 +556,6 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
   // Whether this peer is the caller. Set when the local description is applied.
   absl::optional<bool> is_caller_ RTC_GUARDED_BY(signaling_thread());
 
-  // Streams added via AddStream.
   const rtc::scoped_refptr<StreamCollection> local_streams_
       RTC_GUARDED_BY(signaling_thread());
   // Streams created as a result of SetRemoteDescription.

@@ -16,24 +16,16 @@
 #include "api/peer_connection_interface.h"
 #include "api/rtp_transceiver_direction.h"
 #include "pc/audio_rtp_receiver.h"
-#include "pc/channel.h"
 #include "pc/stats_collector_interface.h"
 #include "pc/video_rtp_receiver.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/helpers.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 
 namespace webrtc {
 
-namespace {
-
-static const char kDefaultAudioSenderId[] = "defaulta0";
-static const char kDefaultVideoSenderId[] = "defaultv0";
-
-}  // namespace
-
 RtpTransmissionManager::RtpTransmissionManager(
-    bool is_unified_plan,
     rtc::Thread* signaling_thread,
     rtc::Thread* worker_thread,
     cricket::ChannelManager* channel_manager,
@@ -41,8 +33,7 @@ RtpTransmissionManager::RtpTransmissionManager(
     PeerConnectionObserver* observer,
     StatsCollectorInterface* stats,
     std::function<void()> on_negotiation_needed)
-    : is_unified_plan_(is_unified_plan),
-      signaling_thread_(signaling_thread),
+    : signaling_thread_(signaling_thread),
       worker_thread_(worker_thread),
       channel_manager_(channel_manager),
       usage_pattern_(usage_pattern),
@@ -58,7 +49,6 @@ void RtpTransmissionManager::Close() {
 // Implementation of SetStreamsObserver
 void RtpTransmissionManager::OnSetStreams() {
   RTC_DCHECK_RUN_ON(signaling_thread());
-  if (IsUnifiedPlan())
     OnNegotiationNeeded();
 }
 
@@ -74,83 +64,13 @@ PeerConnectionObserver* RtpTransmissionManager::Observer() const {
   return observer_;
 }
 
-cricket::VoiceMediaChannel* RtpTransmissionManager::voice_media_channel()
-    const {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  RTC_DCHECK(!IsUnifiedPlan());
-  auto* voice_channel = static_cast<cricket::VoiceChannel*>(
-      GetAudioTransceiver()->internal()->channel());
-  if (voice_channel) {
-    return voice_channel->media_channel();
-  } else {
-    return nullptr;
-  }
-}
-
-cricket::VideoMediaChannel* RtpTransmissionManager::video_media_channel()
-    const {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  RTC_DCHECK(!IsUnifiedPlan());
-  auto* video_channel = static_cast<cricket::VideoChannel*>(
-      GetVideoTransceiver()->internal()->channel());
-  if (video_channel) {
-    return video_channel->media_channel();
-  } else {
-    return nullptr;
-  }
-}
-
 RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>>
 RtpTransmissionManager::AddTrack(
     rtc::scoped_refptr<MediaStreamTrackInterface> track,
     const std::vector<std::string>& stream_ids) {
   RTC_DCHECK_RUN_ON(signaling_thread());
 
-  return (IsUnifiedPlan() ? AddTrackUnifiedPlan(track, stream_ids)
-                          : AddTrackPlanB(track, stream_ids));
-}
-
-RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>>
-RtpTransmissionManager::AddTrackPlanB(
-    rtc::scoped_refptr<MediaStreamTrackInterface> track,
-    const std::vector<std::string>& stream_ids) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  if (stream_ids.size() > 1u) {
-    LOG_AND_RETURN_ERROR(RTCErrorType::UNSUPPORTED_OPERATION,
-                         "AddTrack with more than one stream is not "
-                         "supported with Plan B semantics.");
-  }
-  std::vector<std::string> adjusted_stream_ids = stream_ids;
-  if (adjusted_stream_ids.empty()) {
-    adjusted_stream_ids.push_back(rtc::CreateRandomUuid());
-  }
-  cricket::MediaType media_type =
-      (track->kind() == MediaStreamTrackInterface::kAudioKind
-           ? cricket::MEDIA_TYPE_AUDIO
-           : cricket::MEDIA_TYPE_VIDEO);
-  auto new_sender =
-      CreateSender(media_type, track->id(), track, adjusted_stream_ids, {});
-  if (track->kind() == MediaStreamTrackInterface::kAudioKind) {
-    new_sender->internal()->SetMediaChannel(voice_media_channel());
-    GetAudioTransceiver()->internal()->AddSender(new_sender);
-    const RtpSenderInfo* sender_info =
-        FindSenderInfo(local_audio_sender_infos_,
-                       new_sender->internal()->stream_ids()[0], track->id());
-    if (sender_info) {
-      new_sender->internal()->SetSsrc(sender_info->first_ssrc);
-    }
-  } else {
-    RTC_DCHECK_EQ(MediaStreamTrackInterface::kVideoKind, track->kind());
-    new_sender->internal()->SetMediaChannel(video_media_channel());
-    GetVideoTransceiver()->internal()->AddSender(new_sender);
-    const RtpSenderInfo* sender_info =
-        FindSenderInfo(local_video_sender_infos_,
-                       new_sender->internal()->stream_ids()[0], track->id());
-    if (sender_info) {
-      new_sender->internal()->SetSsrc(sender_info->first_ssrc);
-    }
-  }
-  return rtc::scoped_refptr<RtpSenderInterface>(new_sender);
+  return AddTrackUnifiedPlan(track, stream_ids);
 }
 
 RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>>
@@ -299,7 +219,7 @@ RtpTransmissionManager::GetSendersInternal() const {
   std::vector<rtc::scoped_refptr<RtpSenderProxyWithInternal<RtpSenderInternal>>>
       all_senders;
   for (const auto& transceiver : transceivers_.List()) {
-    if (IsUnifiedPlan() && transceiver->internal()->stopped())
+    if (transceiver->internal()->stopped())
       continue;
 
     auto senders = transceiver->internal()->senders();
@@ -316,7 +236,7 @@ RtpTransmissionManager::GetReceiversInternal() const {
       rtc::scoped_refptr<RtpReceiverProxyWithInternal<RtpReceiverInternal>>>
       all_receivers;
   for (const auto& transceiver : transceivers_.List()) {
-    if (IsUnifiedPlan() && transceiver->internal()->stopped())
+    if (transceiver->internal()->stopped())
       continue;
 
     auto receivers = transceiver->internal()->receivers();
@@ -324,120 +244,6 @@ RtpTransmissionManager::GetReceiversInternal() const {
                          receivers.end());
   }
   return all_receivers;
-}
-
-rtc::scoped_refptr<RtpTransceiverProxyWithInternal<RtpTransceiver>>
-RtpTransmissionManager::GetAudioTransceiver() const {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  // This method only works with Plan B SDP, where there is a single
-  // audio/video transceiver.
-  RTC_DCHECK(!IsUnifiedPlan());
-  for (auto transceiver : transceivers_.List()) {
-    if (transceiver->media_type() == cricket::MEDIA_TYPE_AUDIO) {
-      return transceiver;
-    }
-  }
-  RTC_NOTREACHED();
-  return nullptr;
-}
-
-rtc::scoped_refptr<RtpTransceiverProxyWithInternal<RtpTransceiver>>
-RtpTransmissionManager::GetVideoTransceiver() const {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  // This method only works with Plan B SDP, where there is a single
-  // audio/video transceiver.
-  RTC_DCHECK(!IsUnifiedPlan());
-  for (auto transceiver : transceivers_.List()) {
-    if (transceiver->media_type() == cricket::MEDIA_TYPE_VIDEO) {
-      return transceiver;
-    }
-  }
-  RTC_NOTREACHED();
-  return nullptr;
-}
-
-void RtpTransmissionManager::AddAudioTrack(AudioTrackInterface* track,
-                                           MediaStreamInterface* stream) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  RTC_DCHECK(track);
-  RTC_DCHECK(stream);
-  auto sender = FindSenderForTrack(track);
-  if (sender) {
-    // We already have a sender for this track, so just change the stream_id
-    // so that it's correct in the next call to CreateOffer.
-    sender->internal()->set_stream_ids({stream->id()});
-    return;
-  }
-
-  // Normal case; we've never seen this track before.
-  auto new_sender = CreateSender(cricket::MEDIA_TYPE_AUDIO, track->id(), track,
-                                 {stream->id()}, {});
-  new_sender->internal()->SetMediaChannel(voice_media_channel());
-  GetAudioTransceiver()->internal()->AddSender(new_sender);
-  // If the sender has already been configured in SDP, we call SetSsrc,
-  // which will connect the sender to the underlying transport. This can
-  // occur if a local session description that contains the ID of the sender
-  // is set before AddStream is called. It can also occur if the local
-  // session description is not changed and RemoveStream is called, and
-  // later AddStream is called again with the same stream.
-  const RtpSenderInfo* sender_info =
-      FindSenderInfo(local_audio_sender_infos_, stream->id(), track->id());
-  if (sender_info) {
-    new_sender->internal()->SetSsrc(sender_info->first_ssrc);
-  }
-}
-
-// TODO(deadbeef): Don't destroy RtpSenders here; they should be kept around
-// indefinitely, when we have unified plan SDP.
-void RtpTransmissionManager::RemoveAudioTrack(AudioTrackInterface* track,
-                                              MediaStreamInterface* stream) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  RTC_DCHECK(!IsUnifiedPlan());
-  auto sender = FindSenderForTrack(track);
-  if (!sender) {
-    RTC_LOG(LS_WARNING) << "RtpSender for track with id " << track->id()
-                        << " doesn't exist.";
-    return;
-  }
-  GetAudioTransceiver()->internal()->RemoveSender(sender);
-}
-
-void RtpTransmissionManager::AddVideoTrack(VideoTrackInterface* track,
-                                           MediaStreamInterface* stream) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  RTC_DCHECK(track);
-  RTC_DCHECK(stream);
-  auto sender = FindSenderForTrack(track);
-  if (sender) {
-    // We already have a sender for this track, so just change the stream_id
-    // so that it's correct in the next call to CreateOffer.
-    sender->internal()->set_stream_ids({stream->id()});
-    return;
-  }
-
-  // Normal case; we've never seen this track before.
-  auto new_sender = CreateSender(cricket::MEDIA_TYPE_VIDEO, track->id(), track,
-                                 {stream->id()}, {});
-  new_sender->internal()->SetMediaChannel(video_media_channel());
-  GetVideoTransceiver()->internal()->AddSender(new_sender);
-  const RtpSenderInfo* sender_info =
-      FindSenderInfo(local_video_sender_infos_, stream->id(), track->id());
-  if (sender_info) {
-    new_sender->internal()->SetSsrc(sender_info->first_ssrc);
-  }
-}
-
-void RtpTransmissionManager::RemoveVideoTrack(VideoTrackInterface* track,
-                                              MediaStreamInterface* stream) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  RTC_DCHECK(!IsUnifiedPlan());
-  auto sender = FindSenderForTrack(track);
-  if (!sender) {
-    RTC_LOG(LS_WARNING) << "RtpSender for track with id " << track->id()
-                        << " doesn't exist.";
-    return;
-  }
-  GetVideoTransceiver()->internal()->RemoveSender(sender);
 }
 
 rtc::scoped_refptr<RtpTransceiverProxyWithInternal<RtpTransceiver>>
@@ -449,151 +255,6 @@ RtpTransmissionManager::GetFirstAudioTransceiver() const {
     }
   }
   return nullptr;
-}
-
-void RtpTransmissionManager::CreateAudioReceiver(
-    MediaStreamInterface* stream,
-    const RtpSenderInfo& remote_sender_info) {
-  RTC_DCHECK(!closed_);
-  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams;
-  streams.push_back(rtc::scoped_refptr<MediaStreamInterface>(stream));
-  // TODO(https://crbug.com/webrtc/9480): When we remove remote_streams(), use
-  // the constructor taking stream IDs instead.
-  auto* audio_receiver = new AudioRtpReceiver(
-      worker_thread(), remote_sender_info.sender_id, streams);
-  audio_receiver->SetMediaChannel(voice_media_channel());
-  if (remote_sender_info.sender_id == kDefaultAudioSenderId) {
-    audio_receiver->SetupUnsignaledMediaChannel();
-  } else {
-    audio_receiver->SetupMediaChannel(remote_sender_info.first_ssrc);
-  }
-  auto receiver = RtpReceiverProxyWithInternal<RtpReceiverInternal>::Create(
-      signaling_thread(), audio_receiver);
-  GetAudioTransceiver()->internal()->AddReceiver(receiver);
-  Observer()->OnAddTrack(receiver, streams);
-  NoteUsageEvent(UsageEvent::AUDIO_ADDED);
-}
-
-void RtpTransmissionManager::CreateVideoReceiver(
-    MediaStreamInterface* stream,
-    const RtpSenderInfo& remote_sender_info) {
-  RTC_DCHECK(!closed_);
-  std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams;
-  streams.push_back(rtc::scoped_refptr<MediaStreamInterface>(stream));
-  // TODO(https://crbug.com/webrtc/9480): When we remove remote_streams(), use
-  // the constructor taking stream IDs instead.
-  auto* video_receiver = new VideoRtpReceiver(
-      worker_thread(), remote_sender_info.sender_id, streams);
-  video_receiver->SetMediaChannel(video_media_channel());
-  if (remote_sender_info.sender_id == kDefaultVideoSenderId) {
-    video_receiver->SetupUnsignaledMediaChannel();
-  } else {
-    video_receiver->SetupMediaChannel(remote_sender_info.first_ssrc);
-  }
-  auto receiver = RtpReceiverProxyWithInternal<RtpReceiverInternal>::Create(
-      signaling_thread(), video_receiver);
-  GetVideoTransceiver()->internal()->AddReceiver(receiver);
-  Observer()->OnAddTrack(receiver, streams);
-  NoteUsageEvent(UsageEvent::VIDEO_ADDED);
-}
-
-// TODO(deadbeef): Keep RtpReceivers around even if track goes away in remote
-// description.
-rtc::scoped_refptr<RtpReceiverInterface>
-RtpTransmissionManager::RemoveAndStopReceiver(
-    const RtpSenderInfo& remote_sender_info) {
-  auto receiver = FindReceiverById(remote_sender_info.sender_id);
-  if (!receiver) {
-    RTC_LOG(LS_WARNING) << "RtpReceiver for track with id "
-                        << remote_sender_info.sender_id << " doesn't exist.";
-    return nullptr;
-  }
-  if (receiver->media_type() == cricket::MEDIA_TYPE_AUDIO) {
-    GetAudioTransceiver()->internal()->RemoveReceiver(receiver);
-  } else {
-    GetVideoTransceiver()->internal()->RemoveReceiver(receiver);
-  }
-  return receiver;
-}
-
-void RtpTransmissionManager::OnRemoteSenderAdded(
-    const RtpSenderInfo& sender_info,
-    MediaStreamInterface* stream,
-    cricket::MediaType media_type) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  RTC_LOG(LS_INFO) << "Creating " << cricket::MediaTypeToString(media_type)
-                   << " receiver for track_id=" << sender_info.sender_id
-                   << " and stream_id=" << sender_info.stream_id;
-
-  if (media_type == cricket::MEDIA_TYPE_AUDIO) {
-    CreateAudioReceiver(stream, sender_info);
-  } else if (media_type == cricket::MEDIA_TYPE_VIDEO) {
-    CreateVideoReceiver(stream, sender_info);
-  } else {
-    RTC_NOTREACHED() << "Invalid media type";
-  }
-}
-
-void RtpTransmissionManager::OnRemoteSenderRemoved(
-    const RtpSenderInfo& sender_info,
-    MediaStreamInterface* stream,
-    cricket::MediaType media_type) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  RTC_LOG(LS_INFO) << "Removing " << cricket::MediaTypeToString(media_type)
-                   << " receiver for track_id=" << sender_info.sender_id
-                   << " and stream_id=" << sender_info.stream_id;
-
-  rtc::scoped_refptr<RtpReceiverInterface> receiver;
-  if (media_type == cricket::MEDIA_TYPE_AUDIO) {
-    // When the MediaEngine audio channel is destroyed, the RemoteAudioSource
-    // will be notified which will end the AudioRtpReceiver::track().
-    receiver = RemoveAndStopReceiver(sender_info);
-    rtc::scoped_refptr<AudioTrackInterface> audio_track =
-        stream->FindAudioTrack(sender_info.sender_id);
-    if (audio_track) {
-      stream->RemoveTrack(audio_track);
-    }
-  } else if (media_type == cricket::MEDIA_TYPE_VIDEO) {
-    // Stopping or destroying a VideoRtpReceiver will end the
-    // VideoRtpReceiver::track().
-    receiver = RemoveAndStopReceiver(sender_info);
-    rtc::scoped_refptr<VideoTrackInterface> video_track =
-        stream->FindVideoTrack(sender_info.sender_id);
-    if (video_track) {
-      // There's no guarantee the track is still available, e.g. the track may
-      // have been removed from the stream by an application.
-      stream->RemoveTrack(video_track);
-    }
-  } else {
-    RTC_NOTREACHED() << "Invalid media type";
-  }
-  if (receiver) {
-    RTC_DCHECK(!closed_);
-    Observer()->OnRemoveTrack(receiver);
-  }
-}
-
-void RtpTransmissionManager::OnLocalSenderAdded(
-    const RtpSenderInfo& sender_info,
-    cricket::MediaType media_type) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  RTC_DCHECK(!IsUnifiedPlan());
-  auto sender = FindSenderById(sender_info.sender_id);
-  if (!sender) {
-    RTC_LOG(LS_WARNING) << "An unknown RtpSender with id "
-                        << sender_info.sender_id
-                        << " has been configured in the local description.";
-    return;
-  }
-
-  if (sender->media_type() != media_type) {
-    RTC_LOG(LS_WARNING) << "An RtpSender has been configured in the local"
-                           " description with an unexpected media type.";
-    return;
-  }
-
-  sender->internal()->set_stream_ids({sender_info.stream_id});
-  sender->internal()->SetSsrc(sender_info.first_ssrc);
 }
 
 void RtpTransmissionManager::OnLocalSenderRemoved(

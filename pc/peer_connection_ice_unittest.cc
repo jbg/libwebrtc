@@ -1138,57 +1138,6 @@ TEST_F(PeerConnectionIceTestUnifiedPlan,
   EXPECT_FALSE(caller->observer()->has_negotiation_needed_event());
 }
 
-// In Plan B, "onnegotiationneeded" is not spec-compliant, firing based on if
-// something changed rather than if negotiation is needed. In Unified Plan it
-// fires according to spec. As such, some tests are SdpSemantics-specific.
-class PeerConnectionIceTestPlanB : public PeerConnectionIceBaseTest {
- protected:
-  PeerConnectionIceTestPlanB()
-      : PeerConnectionIceBaseTest(SdpSemantics::kPlanB) {}
-};
-
-TEST_F(PeerConnectionIceTestPlanB,
-       RestartIceWhileOfferIsPendingCausesNegotiationNeededImmediately) {
-  auto caller = CreatePeerConnectionWithAudioVideo();
-  auto callee = CreatePeerConnectionWithAudioVideo();
-
-  ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
-  caller->observer()->clear_legacy_renegotiation_needed();
-  caller->observer()->clear_latest_negotiation_needed_event();
-  caller->pc()->RestartIce();
-  EXPECT_TRUE(caller->observer()->legacy_renegotiation_needed());
-  EXPECT_TRUE(caller->observer()->has_negotiation_needed_event());
-  caller->observer()->clear_legacy_renegotiation_needed();
-  caller->observer()->clear_latest_negotiation_needed_event();
-  ASSERT_TRUE(
-      caller->SetRemoteDescription(callee->CreateAnswerAndSetAsLocal()));
-  // In Plan B, the event fired early so we don't expect it to fire now. This is
-  // not spec-compliant but follows the pattern of existing Plan B behavior.
-  EXPECT_FALSE(caller->observer()->legacy_renegotiation_needed());
-  EXPECT_FALSE(caller->observer()->has_negotiation_needed_event());
-}
-
-TEST_F(PeerConnectionIceTestPlanB,
-       RestartIceTwiceDoesFireNegotiationNeededTwice) {
-  auto caller = CreatePeerConnectionWithAudioVideo();
-  auto callee = CreatePeerConnectionWithAudioVideo();
-
-  ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
-  caller->observer()->clear_legacy_renegotiation_needed();
-  caller->observer()->clear_latest_negotiation_needed_event();
-  caller->pc()->RestartIce();
-  EXPECT_TRUE(caller->observer()->legacy_renegotiation_needed());
-  EXPECT_TRUE(caller->observer()->has_negotiation_needed_event());
-  caller->observer()->clear_legacy_renegotiation_needed();
-  caller->observer()->clear_latest_negotiation_needed_event();
-  caller->pc()->RestartIce();
-  // In Plan B, the event fires every time something changed, even if we have
-  // already fired the event. This is not spec-compliant but follows the same
-  // pattern of existing Plan B behavior.
-  EXPECT_TRUE(caller->observer()->legacy_renegotiation_needed());
-  EXPECT_TRUE(caller->observer()->has_negotiation_needed_event());
-}
-
 // The following parameterized test verifies that if an offer is sent with a
 // modified ICE ufrag and/or ICE pwd, then the answer should identify that the
 // other side has initiated an ICE restart and generate a new ufrag and pwd.
@@ -1243,7 +1192,7 @@ TEST_P(PeerConnectionIceUfragPwdAnswerTest, TestIncludedInAnswer) {
 INSTANTIATE_TEST_SUITE_P(
     PeerConnectionIceTest,
     PeerConnectionIceUfragPwdAnswerTest,
-    Combine(Values(SdpSemantics::kPlanB, SdpSemantics::kUnifiedPlan),
+    Combine(Values(SdpSemantics::kUnifiedPlan),
             Values(std::make_pair(true, true),      // Both changed.
                    std::make_pair(true, false),     // Only ufrag changed.
                    std::make_pair(false, true))));  // Only pwd changed.
@@ -1340,8 +1289,7 @@ TEST_P(PeerConnectionIceTest,
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionIceTest,
                          PeerConnectionIceTest,
-                         Values(SdpSemantics::kPlanB,
-                                SdpSemantics::kUnifiedPlan));
+                         Values(SdpSemantics::kUnifiedPlan));
 
 class PeerConnectionIceConfigTest : public ::testing::Test {
  protected:

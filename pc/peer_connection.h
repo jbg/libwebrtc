@@ -131,11 +131,6 @@ class PeerConnection : public PeerConnectionInternal,
       const PeerConnectionInterface::RTCConfiguration& configuration,
       PeerConnectionDependencies dependencies);
 
-  rtc::scoped_refptr<StreamCollectionInterface> local_streams() override;
-  rtc::scoped_refptr<StreamCollectionInterface> remote_streams() override;
-  bool AddStream(MediaStreamInterface* local_stream) override;
-  void RemoveStream(MediaStreamInterface* local_stream) override;
-
   RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>> AddTrack(
       rtc::scoped_refptr<MediaStreamTrackInterface> track,
       const std::vector<std::string>& stream_ids) override;
@@ -167,10 +162,6 @@ class PeerConnection : public PeerConnectionInternal,
   // Version of the above method that returns the full certificate chain.
   RTC_DEPRECATED std::unique_ptr<rtc::SSLCertChain>
   GetRemoteAudioSSLCertChain();
-
-  rtc::scoped_refptr<RtpSenderInterface> CreateSender(
-      const std::string& kind,
-      const std::string& stream_id) override;
 
   std::vector<rtc::scoped_refptr<RtpSenderInterface>> GetSenders()
       const override;
@@ -393,16 +384,6 @@ class PeerConnection : public PeerConnectionInternal,
   // Report the UMA metric SdpFormatReceived for the given remote offer.
   void ReportSdpFormatReceived(const SessionDescriptionInterface& remote_offer);
 
-  // Returns true if the PeerConnection is configured to use Unified Plan
-  // semantics for creating offers/answers and setting local/remote
-  // descriptions. If this is true the RtpTransceiver API will also be available
-  // to the user. If this is false, Plan B semantics are assumed.
-  // TODO(bugs.webrtc.org/8530): Flip the default to be Unified Plan once
-  // sufficient time has passed.
-  bool IsUnifiedPlan() const {
-    RTC_DCHECK_RUN_ON(signaling_thread());
-    return is_unified_plan_;
-  }
   bool ValidateBundleSettings(const cricket::SessionDescription* desc);
 
   // Returns the MID for the data section associated with either the
@@ -461,7 +442,6 @@ class PeerConnection : public PeerConnectionInternal,
  protected:
   // Available for rtc::scoped_refptr creation
   explicit PeerConnection(rtc::scoped_refptr<ConnectionContext> context,
-                          bool is_unified_plan,
                           std::unique_ptr<RtcEventLog> event_log,
                           std::unique_ptr<Call> call,
                           PeerConnectionDependencies& dependencies);
@@ -611,8 +591,6 @@ class PeerConnection : public PeerConnectionInternal,
   const rtc::scoped_refptr<ConnectionContext> context_;
   PeerConnectionObserver* observer_ RTC_GUARDED_BY(signaling_thread()) =
       nullptr;
-
-  const bool is_unified_plan_;
 
   // The EventLog needs to outlive |call_| (and any other object that uses it).
   std::unique_ptr<RtcEventLog> event_log_ RTC_GUARDED_BY(worker_thread());
