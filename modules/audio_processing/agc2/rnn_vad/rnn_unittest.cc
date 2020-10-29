@@ -18,6 +18,7 @@
 #include "modules/audio_processing/test/performance_timer.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/system/arch.h"
 #include "test/gtest.h"
 #include "third_party/rnnoise/src/rnn_activations.h"
@@ -44,9 +45,10 @@ void TestGatedRecurrentLayer(
   RTC_CHECK(gru);
   auto gru_output_view = gru->GetOutput();
   const int input_sequence_length = rtc::CheckedDivExact(
-      static_cast<int>(input_sequence.size()), gru->input_size());
+      rtc::dchecked_cast<int>(input_sequence.size()), gru->input_size());
   const int output_sequence_length = rtc::CheckedDivExact(
-      static_cast<int>(expected_output_sequence.size()), gru->output_size());
+      rtc::dchecked_cast<int>(expected_output_sequence.size()),
+      gru->output_size());
   ASSERT_EQ(input_sequence_length, output_sequence_length)
       << "The test data length is invalid.";
   // Feed the GRU layer and check the output at every step.

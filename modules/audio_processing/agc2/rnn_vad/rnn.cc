@@ -26,6 +26,7 @@
 
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/numerics/safe_conversions.h"
 #include "third_party/rnnoise/src/rnn_activations.h"
 #include "third_party/rnnoise/src/rnn_vad_weights.h"
 
@@ -82,8 +83,8 @@ std::vector<float> GetPreprocessedFcWeights(
     return GetScaledParams(weights);
   }
   // Transpose, scale and cast.
-  const int input_size =
-      rtc::CheckedDivExact(static_cast<int>(weights.size()), output_size);
+  const int input_size = rtc::CheckedDivExact(
+      rtc::dchecked_cast<int>(weights.size()), output_size);
   std::vector<float> w(weights.size());
   for (int o = 0; o < output_size; ++o) {
     for (int i = 0; i < input_size; ++i) {
@@ -105,7 +106,7 @@ std::vector<float> GetPreprocessedGruTensor(
     int output_size) {
   // Transpose, cast and scale.
   // |n| is the size of the first dimension of the 3-dim tensor |weights|.
-  const int n = rtc::CheckedDivExact(static_cast<int>(tensor_src.size()),
+  const int n = rtc::CheckedDivExact(rtc::dchecked_cast<int>(tensor_src.size()),
                                      output_size * kNumGruGates);
   const int stride_src = kNumGruGates * output_size;
   const int stride_dst = n * output_size;
