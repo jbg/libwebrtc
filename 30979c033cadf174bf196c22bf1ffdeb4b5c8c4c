@@ -159,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3931bf12_61dedf54",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-30T21:17:17Z",
+      "side": 1,
+      "message": "Ah. I think you want to pull in \u003copenssl/mem.h\u003e, which picks up OPENSSL_free and the char/uint8_t bssl::UniquePtr definitions. And pem.h is probably working because it happens to pull it in.",
+      "parentUuid": "40082b2d_9f711884",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe487b25_e8c988f6",
         "filename": "rtc_base/boringssl_certificate.cc",
         "patchSetId": 16
@@ -758,6 +776,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a234fc3f_04f70e62",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-30T21:17:17Z",
+      "side": 1,
+      "message": "Ah. Yeah, if the intent is that the connection isn\u0027t usable yet (which would make sense), ssl_verify_retry sounds like a good strategy.\n\nYou also could, external to the TLS library, just wait to start the handshake altogether. That might be a good fallback behavior, if you want both modes to be comparably safe. Though I guess running the handshake as far as you can might save you a round-trip.",
+      "parentUuid": "1ec1803e_ca10fe9b",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6594925_179f793e",
@@ -789,6 +825,24 @@
       "side": 1,
       "message": "\u003e I can try to at least extract BoringSSL\u0027s into a separate function, if that\u0027d help.\n\nThat would be great; would it be difficult given that the current code is written for X509 objects? Should I wait for you to do this before submitting?\n\n\u003e This is only reachable via OpenSSLAdapter::SSLPostConnectionCheck(), when it\u0027s actually verifying a certificate against a name, right? That is, this is doing a real certificate verification, instead of WebRTC\u0027s funny hash match? (Which is OpenSSLStreamAdapter.) I\u0027m assuming Chromium doesn\u0027t use this class, just OpenSSLStreamAdapter. Is that right?\n\nCorrect on all counts.\n\n\u003e Given that that rtc::SSLCertificateVerifier can\u0027t express a certificate chain, it seems the CRYPTO_BUFFER codepath isn\u0027t usable for this anyway. So we\u0027d need to adjust the interface anyway. If we do, why not move the hostname verification inside it too?\n\nThat would be the plan. But we still need to fall back to the built-in roots and name matching on platforms where the OS verification is not implemented. At least that\u0027s what I was thinking.",
       "parentUuid": "e6594925_179f793e",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee0741a4_4f0ef1d4",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-30T21:17:17Z",
+      "side": 1,
+      "message": "\u003e That would be the plan. But we still need to fall back to the built-in roots and name matching on platforms where the OS verification is not implemented. At least that\u0027s what I was thinking.\n\nRight, I guess what I\u0027m saying that, where we fallback to built-in roots, we\u0027re already shipping the built-in roots and built-in verifier anyway. At that point, it seems we may as well use the built-in name-matching algorithm too. And where we use OS or other application-supplied verification, that stack should already have a name-matching algorithm, so there\u0027s no sense in us replicating it.\n\nIt\u0027s a little goofy right now, since OpenSSLAdapter checks the name matches after certificate verification. But it seems doing that as part of verification would be preferable anyway (a valid certificate chain for the wrong name isn\u0027t any more useful of a certificate than an arbitrarily invalid chain).\n\nPerhaps this could be rearranged so that VerifyPeerCertMatchesHost() is part of the built-in verification process, and if you use a callback instead, we\u0027ll pass the name in or otherwise expect the callback to check for you. That might be simplest as a separate CL, so perhaps here we just create X509 objects (X509_parse_from_buffer is the most efficient way to go from CRYPTO_BUFFER to X509; we\u0027ll reuse some bits in memory since we know the CRYPTO_BUFFER is immutable.) And then as a follow CL, we get VerifyPeerCertMatchesHost() out of the non-built-in-roots path.",
+      "parentUuid": "60b5ee4d_11495617",
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
