@@ -111,6 +111,11 @@ class VoipCore : public VoipEngine,
       ChannelId channel) override;
 
  private:
+  // Initialize AudioDeviceModule. From Andoird N and on, mobile app may not be
+  // able to gain microphone access when in background that it would be better
+  // to delay to the logic as later as possible.
+  bool InitializeADM();
+
   // Fetches the corresponding AudioChannel assigned with given |channel|.
   // Returns nullptr if not found.
   rtc::scoped_refptr<AudioChannel> GetChannel(ChannelId channel);
@@ -154,6 +159,10 @@ class VoipCore : public VoipEngine,
   // ChannelId.
   std::unordered_map<ChannelId, rtc::scoped_refptr<AudioChannel>> channels_
       RTC_GUARDED_BY(lock_);
+
+  // Mutex and boolean to atomically initialize ADM.
+  Mutex init_lock_;
+  bool adm_initialized_ RTC_GUARDED_BY(init_lock_) = false;
 };
 
 }  // namespace webrtc
