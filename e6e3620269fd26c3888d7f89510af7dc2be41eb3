@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a58ee4ab_02ba8501",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-10-30T14:26:19Z",
+      "side": 1,
+      "message": "Update. I added the benchmark and observed that this CL brings no gain on an Intel i9 CPU. It might be possible that for a different architecture the gain becomes visible though.\n\nI will give priority to other changes and get back to this CL if needed.",
+      "parentUuid": "d57d7c63_548942a4",
+      "revId": "e6e3620269fd26c3888d7f89510af7dc2be41eb3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5069e49c_dd3b4788",
         "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
         "patchSetId": 4
