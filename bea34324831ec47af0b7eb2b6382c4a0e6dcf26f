@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47845f09_64a79455",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5598
+      },
+      "writtenOn": "2020-10-30T18:25:49Z",
+      "side": 1,
+      "message": "Hi Philip, are you the right person to take a first look and recommend an OWNER for the Java parts?",
+      "revId": "bea34324831ec47af0b7eb2b6382c4a0e6dcf26f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
