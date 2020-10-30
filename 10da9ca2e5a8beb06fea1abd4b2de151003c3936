@@ -16,6 +16,23 @@
       "message": "Next action day has arrived. I feel like deleting something.\n",
       "revId": "10da9ca2e5a8beb06fea1abd4b2de151003c3936",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9108ef48_a08e59f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-30T08:14:12Z",
+      "side": 1,
+      "message": "Sweet!",
+      "revId": "10da9ca2e5a8beb06fea1abd4b2de151003c3936",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
