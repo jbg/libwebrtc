@@ -59,6 +59,21 @@ bool VoipCore::Init(rtc::scoped_refptr<AudioEncoderFactory> encoder_factory,
   audio_transport_ = std::make_unique<AudioTransportImpl>(
       audio_mixer_.get(), audio_processing_.get(), nullptr);
 
+  if (audio_device_module_->RegisterAudioCallback(audio_transport_.get()) !=
+      0) {
+    RTC_LOG(LS_WARNING) << "Unable to register audio callback.";
+  }
+
+  return true;
+}
+
+bool VoipCore::InitializeADM() {
+  MutexLock lock(&init_lock_);
+
+  if (adm_initialized_) {
+    return true;
+  }
+
   // Initialize ADM.
   if (audio_device_module_->Init() != 0) {
     RTC_LOG(LS_ERROR) << "Failed to initialize the ADM.";
@@ -70,7 +85,6 @@ bool VoipCore::Init(rtc::scoped_refptr<AudioEncoderFactory> encoder_factory,
   // recording device functioning (e.g webinar where only speaker is available).
   // It's also possible that there are other audio devices available that may
   // work.
-  // TODO(natim@webrtc.org): consider moving this part out of initialization.
 
   // Initialize default speaker device.
   if (audio_device_module_->SetPlayoutDevice(kAudioDeviceId) != 0) {
@@ -106,10 +120,7 @@ bool VoipCore::Init(rtc::scoped_refptr<AudioEncoderFactory> encoder_factory,
     RTC_LOG(LS_WARNING) << "Unable to set stereo recording mode.";
   }
 
-  if (audio_device_module_->RegisterAudioCallback(audio_transport_.get()) !=
-      0) {
-    RTC_LOG(LS_WARNING) << "Unable to register audio callback.";
-  }
+  adm_initialized_ = true;
 
   return true;
 }
@@ -238,6 +249,11 @@ bool VoipCore::UpdateAudioTransportWithSenders() {
 
   // Depending on availability of senders, turn on or off ADM recording.
   if (!audio_senders.empty()) {
+    // Delayed initialization of audio device module.
+    if (!InitializeADM()) {
+      return false;
+    }
+
     if (!audio_device_module_->Recording()) {
       if (audio_device_module_->InitRecording() != 0) {
         RTC_LOG(LS_ERROR) << "InitRecording failed";
@@ -281,6 +297,11 @@ bool VoipCore::StopSend(ChannelId channel) {
 bool VoipCore::StartPlayout(ChannelId channel) {
   auto audio_channel = GetChannel(channel);
   if (!audio_channel || !audio_channel->StartPlay()) {
+    return false;
+  }
+
+  // Delayed initialization of audio device module.
+  if (!InitializeADM()) {
     return false;
   }
 
