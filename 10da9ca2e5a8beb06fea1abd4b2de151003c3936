@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aee4ee3_7d423508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-30T06:46:07Z",
+      "side": 1,
+      "message": "Next action day has arrived. I feel like deleting something.\n",
+      "revId": "10da9ca2e5a8beb06fea1abd4b2de151003c3936",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
