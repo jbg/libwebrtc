@@ -16,6 +16,40 @@
       "message": "Hi Philip, are you the right person to take a first look and recommend an OWNER for the Java parts?",
       "revId": "bea34324831ec47af0b7eb2b6382c4a0e6dcf26f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b2d1741_97a08cdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12359
+      },
+      "writtenOn": "2020-10-30T18:37:11Z",
+      "side": 1,
+      "message": "the new constants seem to match android\u0027s definition of constrained-high and level 3.1",
+      "revId": "bea34324831ec47af0b7eb2b6382c4a0e6dcf26f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "901d4f1d_c7fe4ecd",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 12359
+      },
+      "writtenOn": "2020-10-30T18:37:11Z",
+      "side": 1,
+      "message": "Android definitely expects `AVCProfileConstrainedHigh` [1] as 0x00080000 and `AVCLevel31` as 0x00000200 [2]\n\n[1] https://developer.android.com/reference/android/media/MediaCodecInfo.CodecProfileLevel#AVCProfileConstrainedHigh\n[2] https://developer.android.com/reference/android/media/MediaCodecInfo.CodecProfileLevel#AVCLevel31",
+      "revId": "bea34324831ec47af0b7eb2b6382c4a0e6dcf26f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
