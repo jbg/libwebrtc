@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f79aefe_544f94e1",
+        "filename": "rtc_base/time/timestamp_extrapolator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-30T09:32:56Z",
+      "side": 0,
+      "message": "I just noticed that this use of a read-lock is likely incorrect, because the method CheckForWrapArounds we call mutates the object state. (But works, because of caller\u0027s synchronization).",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 30
+      },
+      "revId": "2c00c40ff9b5d5286b77ae0fc1fc6b9a614d3d82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
