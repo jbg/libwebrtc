@@ -43,8 +43,9 @@ class HardwareVideoEncoder implements VideoEncoder {
   // constant until API level 21.
   private static final String KEY_BITRATE_MODE = "bitrate-mode";
 
-  private static final int VIDEO_AVC_PROFILE_HIGH = 8;
-  private static final int VIDEO_AVC_LEVEL_3 = 0x100;
+  private static final int VIDEO_AVC_PROFILE_CONSTRAINED_HIGH = 0x80000;
+  private static final int VIDEO_AVC_PROFILE_CONSTRAINED_BASELINE = 0x10000;
+  private static final int VIDEO_AVC_LEVEL_3_1 = 0x200;
 
   private static final int MAX_VIDEO_FRAMERATE = 30;
 
@@ -247,10 +248,12 @@ class HardwareVideoEncoder implements VideoEncoder {
         }
         switch (profileLevelId) {
           case VideoCodecInfo.H264_CONSTRAINED_HIGH_3_1:
-            format.setInteger("profile", VIDEO_AVC_PROFILE_HIGH);
-            format.setInteger("level", VIDEO_AVC_LEVEL_3);
+            format.setInteger("profile", VIDEO_AVC_PROFILE_CONSTRAINED_HIGH);
+            format.setInteger("level", VIDEO_AVC_LEVEL_3_1);
             break;
           case VideoCodecInfo.H264_CONSTRAINED_BASELINE_3_1:
+            format.setInteger("profile", VIDEO_AVC_PROFILE_CONSTRAINED_BASELINE);
+            format.setInteger("level", VIDEO_AVC_LEVEL_3_1);
             break;
           default:
             Logging.w(TAG, "Unknown profile level id: " + profileLevelId);
