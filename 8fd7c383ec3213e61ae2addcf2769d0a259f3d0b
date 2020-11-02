@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63c3b8ef_fa72aff3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-11-02T13:43:29Z",
+      "side": 1,
+      "message": "Thanks!\n",
+      "revId": "8fd7c383ec3213e61ae2addcf2769d0a259f3d0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d25c4ca6_e940c914",
@@ -31,6 +48,24 @@
       "writtenOn": "2020-11-02T10:44:56Z",
       "side": 1,
       "message": "nit: add {}? OTOH if the linter does not complain...",
+      "revId": "8fd7c383ec3213e61ae2addcf2769d0a259f3d0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1897d52_3ab0ba29",
+        "filename": "p2p/client/turn_port_factory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-11-02T13:43:29Z",
+      "side": 1,
+      "message": "\"In general, curly braces are not required for single-line statements, but they are allowed if you like them\" (Google C++ style guide). Not so harsh :-)",
+      "parentUuid": "d25c4ca6_e940c914",
       "revId": "8fd7c383ec3213e61ae2addcf2769d0a259f3d0b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
