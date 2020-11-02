@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "518c7875_72d9eeae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-11-02T10:01:38Z",
+      "side": 1,
+      "message": "Sami, PTAL\nSergey, not sure if this of interest to you, but just FYI.",
+      "revId": "f0c5842d80eedb20d60c1ae43dcf78c779f10671",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
