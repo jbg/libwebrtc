@@ -16,6 +16,24 @@
       "message": "Woho!! Third time\u0027s the charm...",
       "revId": "b4de9406a975d6b28d4e9302d1efcaafe40ca497",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2a2d331_b2ba0901",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2020-11-02T08:47:59Z",
+      "side": 1,
+      "message": "fingers crossed! :)",
+      "parentUuid": "4aafe3bb_2d673e0e",
+      "revId": "b4de9406a975d6b28d4e9302d1efcaafe40ca497",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
