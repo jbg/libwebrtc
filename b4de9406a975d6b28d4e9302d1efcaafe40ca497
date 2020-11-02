@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aafe3bb_2d673e0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-11-02T08:02:20Z",
+      "side": 1,
+      "message": "Woho!! Third time\u0027s the charm...",
+      "revId": "b4de9406a975d6b28d4e9302d1efcaafe40ca497",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
