@@ -47,7 +47,7 @@ float ComputePitchGainThreshold(int candidate_pitch_period,
 // most recent ones. The size of "a" corresponds to the maximum pitch period,
 // that of "b" to the frame size (e.g., 16 ms and 20 ms respectively).
 void ComputeSlidingFrameSquareEnergies(
-    rtc::ArrayView<const float, kBufSize24kHz> pitch_buf,
+    rtc::ArrayView<const float, kBufSize24kHz> pitch_buffer,
     rtc::ArrayView<float, kMaxPitch24kHz + 1> yy_values);
 
 // Top-2 pitch period candidates.
@@ -60,21 +60,21 @@ struct CandidatePitchPeriods {
 // stored according to ComputePitchAutoCorrelation() (i.e., using inverted
 // lags). The return periods are inverted lags.
 CandidatePitchPeriods FindBestPitchPeriods(
-    rtc::ArrayView<const float> auto_corr,
-    rtc::ArrayView<const float> pitch_buf,
+    rtc::ArrayView<const float> auto_correlation,
+    rtc::ArrayView<const float> pitch_buffer,
     int max_pitch_period);
 
-// Refines the pitch period estimation given the pitch buffer |pitch_buf| and
-// the initial pitch period estimation |pitch_candidates_inverted_lags|.
+// Refines the pitch period estimation given the pitch buffer |pitch_buffer| and
+// the initial pitch period estimation |pitch_candidates| (inverted lags).
 // Returns an inverted lag at 48 kHz.
 int RefinePitchPeriod48kHz(
-    rtc::ArrayView<const float, kBufSize24kHz> pitch_buf,
-    CandidatePitchPeriods pitch_candidates_inverted_lags);
+    rtc::ArrayView<const float, kBufSize24kHz> pitch_buffer,
+    CandidatePitchPeriods pitch_candidates);
 
 // Refines the pitch period estimation and compute the pitch gain. Returns the
 // refined pitch estimation data at 48 kHz.
 PitchInfo CheckLowerPitchPeriodsAndComputePitchGain(
-    rtc::ArrayView<const float, kBufSize24kHz> pitch_buf,
+    rtc::ArrayView<const float, kBufSize24kHz> pitch_buffer,
     int initial_pitch_period_48kHz,
     PitchInfo prev_pitch_48kHz);
 
