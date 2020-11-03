@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "343ccdc6_3dd52f82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-11-03T15:21:56Z",
+      "side": 1,
+      "message": "Landing this is not the right way to go I think. If you want to test things locally you could do this, but proper wire up is required to make this feature available at the peer connection level.\n\nWiring this up is something we are working on, don\u0027t know the ETA though.",
+      "revId": "b29d183b8dbefdc667b1346ac5e3c50187761fa3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
