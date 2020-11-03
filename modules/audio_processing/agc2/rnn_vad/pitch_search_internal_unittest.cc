@@ -18,6 +18,10 @@
 // #include "test/fpe_observer.h"
 #include "test/gtest.h"
 
+#include "modules/audio_processing/agc2/rnn_vad/auto_correlation.h"
+#include "modules/audio_processing/test/performance_timer.h"
+#include "rtc_base/logging.h"
+
 namespace webrtc {
 namespace rnn_vad {
 namespace test {
@@ -30,6 +34,45 @@ constexpr float kTestPitchGainsLow = 0.35f;
 constexpr float kTestPitchGainsHigh = 0.75f;
 
 }  // namespace
+
+TEST(RnnVadTest, DISABLED_RefinePitchPeriod48kHzBenchmark) {
+  // Prefetch test data.
+  auto pitch_buf_24kHz_reader = CreatePitchBuffer24kHzReader();
+  const int num_frames = pitch_buf_24kHz_reader.second;
+  std::vector<std::array<float, kBufSize24kHz>> pitch_buf_24kHz(num_frames);
+  AutoCorrelationCalculator auto_corr_calculator;
+  std::vector<CandidatePitchPeriods> candidate_pitch_periods(num_frames);
+  for (int i = 0; i < num_frames; ++i) {
+    ASSERT_TRUE(pitch_buf_24kHz_reader.first->ReadChunk(pitch_buf_24kHz[i]));
+    std::array<float, kBufSize12kHz> pitch_buf_12kHz;
+    Decimate2x(pitch_buf_24kHz[i], pitch_buf_12kHz);
+    std::array<float, kNumInvertedLags12kHz> auto_corr;
+    auto_corr_calculator.ComputeOnPitchBuffer(pitch_buf_12kHz, auto_corr);
+    candidate_pitch_periods[i] =
+        FindBestPitchPeriods12kHz(auto_corr, pitch_buf_12kHz);
+    candidate_pitch_periods[i].best *= 2;
+    candidate_pitch_periods[i].second_best *= 2;
+  }
+
+  constexpr int kNumberOfTests = 1000;
+  constexpr int kGroupSize = 50;
+  ::webrtc::test::PerformanceTimer perf_timer(kNumberOfTests * num_frames /
+                                              kGroupSize);
+  for (int i = 0; i < kNumberOfTests; ++i) {
+    for (int j = 0, index = 0; j < num_frames / kGroupSize; ++j) {
+      perf_timer.StartTimer();
+      for (int k = 0; k < kGroupSize; ++k, ++index) {
+        RefinePitchPeriod48kHz(pitch_buf_24kHz[index],
+                               candidate_pitch_periods[index]);
+      }
+      perf_timer.StopTimer();
+    }
+  }
+
+  RTC_LOG(LS_INFO) << "RefinePitchPeriod48kHz "
+                   << perf_timer.GetDurationAverage() << " us +/-"
+                   << perf_timer.GetDurationStandardDeviation();
+}
 
 class ComputePitchGainThresholdTest
     : public ::testing::Test,
@@ -109,8 +152,8 @@ TEST(RnnVadTest, FindBestPitchPeriodsBitExactness) {
     // TODO(bugs.webrtc.org/8948): Add when the issue is fixed.
     // FloatingPointExceptionObserver fpe_observer;
     auto auto_corr_view = test_data.GetPitchBufAutoCorrCoeffsView();
-    pitch_candidates = FindBestPitchPeriods(auto_corr_view, pitch_buf_decimated,
-                                            kMaxPitch12kHz);
+    pitch_candidates =
+        FindBestPitchPeriods12kHz(auto_corr_view, pitch_buf_decimated);
   }
   EXPECT_EQ(pitch_candidates.best, 140);
   EXPECT_EQ(pitch_candidates.second_best, 142);
