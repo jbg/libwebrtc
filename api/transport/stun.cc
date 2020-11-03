@@ -11,8 +11,9 @@
 #include "api/transport/stun.h"
 
 #include <string.h>
-
 #include <algorithm>
+#include <cstdint>
+#include <iterator>
 #include <memory>
 #include <utility>
 
@@ -24,6 +25,8 @@
 
 using rtc::ByteBufferReader;
 using rtc::ByteBufferWriter;
+
+namespace cricket {
 
 namespace {
 
@@ -40,9 +43,36 @@ uint32_t ReduceTransactionId(const std::string& transaction_id) {
   return result;
 }
 
-}  // namespace
+// Check the maximum length of a BYTE_STRING attribute against specifications.
+bool LengthPermitted(int type, int length) {
+  // "Less than 509 bytes" is intended to indicate a maximum of 127
+  // UTF-8 characters, which may take up to 4 bytes per character.
+  switch (type) {
+    case STUN_ATTR_USERNAME:
+      return length < 509;  // RFC 8489 section 14.3
+    case STUN_ATTR_MESSAGE_INTEGRITY:
+      return length == 20;  // RFC 8489 section 14.5
+    case STUN_ATTR_REALM:
+      return length < 509;  // RFC 8489 section 14.9
+    case STUN_ATTR_NONCE:
+      return length < 509;  // RFC 8489 section 14.10
+    case STUN_ATTR_SOFTWARE:
+      return length < 509;  // RFC 8489 section 14.14
+    case STUN_ATTR_ORIGIN:
+      // 0x802F is unassigned by IANA.
+      // RESPONSE-ORIGIN is defined in RFC 5780 section 7.3, but does not
+      // specify a maximum length. It's an URL, so return an arbitrary
+      // restriction.
+      return length < 1024;
+    default:
+      // Return an arbitrary restriction for all other types.
+      return length < 1024;
+  }
+  RTC_NOTREACHED();
+  return true;
+}
 
-namespace cricket {
+}  // namespace
 
 const char STUN_ERROR_REASON_TRY_ALTERNATE_SERVER[] = "Try Alternate Server";
 const char STUN_ERROR_REASON_BAD_REQUEST[] = "Bad Request";
@@ -993,6 +1023,10 @@ bool StunByteStringAttribute::Read(ByteBufferReader* buf) {
 }
 
 bool StunByteStringAttribute::Write(ByteBufferWriter* buf) const {
+  // Check that length is legal according to specs
+  if (!LengthPermitted(type(), length())) {
+    return false;
+  }
   buf->WriteBytes(bytes_, length());
   WritePadding(buf);
   return true;
