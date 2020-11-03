@@ -16,6 +16,29 @@
       "message": "Sami, PTAL\nSergey, not sure if this of interest to you, but just FYI.",
       "revId": "f0c5842d80eedb20d60c1ae43dcf78c779f10671",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd75983c_895e1b45",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2020-11-03T07:55:04Z",
+      "side": 1,
+      "message": "Not all implementations recognize profile\u003d0x80000 and \u003d0x10000. Initialization of such encoders may fail.\n\nBoth AVCProfileConstrainedHigh and AVCProfileConstrainedBaseline were added in O (API v27) - https://developer.android.com/reference/android/media/MediaCodecInfo.CodecProfileLevel#AVCProfileConstrainedBaseline\n\nWe probably should not even try to use them on Android \u003cO.",
+      "range": {
+        "startLine": 251,
+        "startChar": 1,
+        "endLine": 255,
+        "endChar": 79
+      },
+      "revId": "f0c5842d80eedb20d60c1ae43dcf78c779f10671",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
