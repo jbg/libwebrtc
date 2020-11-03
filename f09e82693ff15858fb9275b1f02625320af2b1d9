@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "017dc709_6fc3798a",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-11-03T10:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0271db5_fe6e5aa9",
+      "revId": "f09e82693ff15858fb9275b1f02625320af2b1d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cfa0f74_0df630f2",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6bb1345_bbd074a6",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-11-03T10:14:27Z",
+      "side": 1,
+      "message": "Filing a new bug for ORIGIN removal: https://crbug.com/webrtc/12132\n\nMaking two constants both valued at 508: k128Utf8Characters and kDefaultMaxAttributeLength. It\u0027s more important to have a max attribute length than what it is, I think.\n\n(Also made 20 into a constant)",
+      "parentUuid": "2cfa0f74_0df630f2",
+      "revId": "f09e82693ff15858fb9275b1f02625320af2b1d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8a53367_03a05c75",
         "filename": "api/transport/stun.cc",
         "patchSetId": 2
@@ -48,6 +84,24 @@
       "writtenOn": "2020-11-03T09:56:39Z",
       "side": 1,
       "message": "Since REALM/NONCE are under attacker control, I wonder if you could still do MTU discovery with USERNAME + REALM + NONCE.",
+      "revId": "f09e82693ff15858fb9275b1f02625320af2b1d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db767853_ac711ede",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-11-03T10:14:27Z",
+      "side": 1,
+      "message": "508 + 508 + 508 \u003d 1524, which is enough to get IP fragmentation going.\nWe can also limit the total length of the message in Send(). But if the attacker manipulates TCP MSS, there is no safe minimum size. So I\u0027d suggest that this is not worth the potential problems.",
+      "parentUuid": "f8a53367_03a05c75",
       "revId": "f09e82693ff15858fb9275b1f02625320af2b1d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
