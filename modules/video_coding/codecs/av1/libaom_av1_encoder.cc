@@ -20,6 +20,7 @@
 #include "absl/base/macros.h"
 #include "absl/types/optional.h"
 #include "api/scoped_refptr.h"
+#include "api/transport/field_trial_based_config.h"
 #include "api/video/encoded_image.h"
 #include "api/video/i420_buffer.h"
 #include "api/video/video_frame.h"
@@ -627,8 +628,10 @@ VideoEncoder::EncoderInfo LibaomAv1Encoder::GetEncoderInfo() const {
 const bool kIsLibaomAv1EncoderSupported = true;
 
 std::unique_ptr<VideoEncoder> CreateLibaomAv1Encoder() {
+  FieldTrialBasedConfig trials;
+  auto mode = trials.Lookup("WebRTC-Av1ScalabilityMode");
   return std::make_unique<LibaomAv1Encoder>(
-      std::make_unique<ScalableVideoControllerNoLayering>());
+      CreateScalabilityStructure(!mode.empty() ? mode : "NONE"));
 }
 
 std::unique_ptr<VideoEncoder> CreateLibaomAv1Encoder(
