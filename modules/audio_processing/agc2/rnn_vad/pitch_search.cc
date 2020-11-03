@@ -35,8 +35,8 @@ PitchInfo PitchEstimator::Estimate(
   Decimate2x(pitch_buf, pitch_buf_decimated_view_);
   auto_corr_calculator_.ComputeOnPitchBuffer(pitch_buf_decimated_view_,
                                              auto_corr_view_);
-  CandidatePitchPeriods pitch_candidates_inverted_lags = FindBestPitchPeriods(
-      auto_corr_view_, pitch_buf_decimated_view_, kMaxPitch12kHz);
+  CandidatePitchPeriods pitch_candidates_inverted_lags =
+      FindBestPitchPeriods12kHz(auto_corr_view_, pitch_buf_decimated_view_);
   // Refine the pitch period estimation.
   // The refinement is done using the pitch buffer that contains 24 kHz samples.
   // Therefore, adapt the inverted lags in |pitch_candidates_inv_lags| from 12
