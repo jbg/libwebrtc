@@ -16,6 +16,24 @@
       "message": "I\u0027d recommend doing this check at the STUN level to prevent this sort of funny business in all STUN usages (STUN, TURN, and ICE).",
       "revId": "3cb9c6afe749f20f8c50aa1fe7f39a2913f0a4f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c6a490a_05a21f5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-11-03T09:49:07Z",
+      "side": 1,
+      "message": "see reply in bug. Belt \u0026 suspenders isn\u0027t a bad rule :-)",
+      "parentUuid": "861a2ca2_7a56409c",
+      "revId": "3cb9c6afe749f20f8c50aa1fe7f39a2913f0a4f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
