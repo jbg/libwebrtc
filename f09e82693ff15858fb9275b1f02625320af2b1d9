@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0271db5_fe6e5aa9",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5603
+      },
+      "writtenOn": "2020-11-03T09:56:39Z",
+      "side": 1,
+      "message": "I\u0027d suggest \u0027Valid\u0027 versus \u0027Permitted\u0027.",
+      "revId": "f09e82693ff15858fb9275b1f02625320af2b1d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cfa0f74_0df630f2",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5603
+      },
+      "writtenOn": "2020-11-03T09:56:39Z",
+      "side": 1,
+      "message": "To avoid fragmentation, I\u0027d limit all attributes to be \u003c 509, which I\u0027d make into a constant to avoid errors. ORIGIN is vestigial and can be deleted from our codebase.",
+      "revId": "f09e82693ff15858fb9275b1f02625320af2b1d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8a53367_03a05c75",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5603
+      },
+      "writtenOn": "2020-11-03T09:56:39Z",
+      "side": 1,
+      "message": "Since REALM/NONCE are under attacker control, I wonder if you could still do MTU discovery with USERNAME + REALM + NONCE.",
+      "revId": "f09e82693ff15858fb9275b1f02625320af2b1d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
