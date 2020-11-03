@@ -109,8 +109,8 @@ TEST(RnnVadTest, FindBestPitchPeriodsBitExactness) {
     // TODO(bugs.webrtc.org/8948): Add when the issue is fixed.
     // FloatingPointExceptionObserver fpe_observer;
     auto auto_corr_view = test_data.GetPitchBufAutoCorrCoeffsView();
-    pitch_candidates = FindBestPitchPeriods(auto_corr_view, pitch_buf_decimated,
-                                            kMaxPitch12kHz);
+    pitch_candidates =
+        FindBestPitchPeriods12kHz(auto_corr_view, pitch_buf_decimated);
   }
   EXPECT_EQ(pitch_candidates.best, 140);
   EXPECT_EQ(pitch_candidates.second_best, 142);
