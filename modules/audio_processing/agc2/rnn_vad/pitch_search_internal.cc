@@ -188,7 +188,7 @@ int FindBestPitchPeriods24kHz(
       // Auto-correlation energy normalized by frame energy.
       const float numerator =
           auto_correlation[inverted_lag] * auto_correlation[inverted_lag];
-      const float denominator = y_energy[kMaxPitch24kHz - inverted_lag];
+      const float denominator = y_energy[inverted_lag];
       // Compare numerator/denominator ratios without using divisions.
       if (numerator * best_denominator > best_numerator * denominator) {
         best_inverted_lag = inverted_lag;
@@ -261,20 +261,15 @@ bool IsAlternativePitchStrongerThanInitial(PitchInfo last,
 void ComputeSlidingFrameSquareEnergies(
     rtc::ArrayView<const float, kBufSize24kHz> pitch_buffer,
     rtc::ArrayView<float, kMaxPitch24kHz + 1> yy_values) {
-  // TODO(bugs.webrtc.org/10480): Pass `yy` as argument to avoid recomputing it.
-  float yy = ComputeAutoCorrelation(kMaxPitch24kHz, pitch_buffer);
+  float yy = std::inner_product(pitch_buffer.begin(),
+                                pitch_buffer.begin() + kFrameSize20ms24kHz,
+                                pitch_buffer.begin(), 0.f);
   yy_values[0] = yy;
-
-  for (int i = 1; rtc::SafeLt(i, yy_values.size()); ++i) {
-    RTC_DCHECK_LE(i, kMaxPitch24kHz + kFrameSize20ms24kHz);
-    RTC_DCHECK_LE(i, kMaxPitch24kHz);
-    // TODO(bugs.webrtc.org/10480): Switch to forward.
-    const float y_old = pitch_buffer[kBufSize24kHz - i];
-    const float y_new = pitch_buffer[kMaxPitch24kHz - i];
-    yy -= y_old * y_old;
-    yy += y_new * y_new;
+  for (int i = 0; i < kMaxPitch24kHz; ++i) {
+    yy -= pitch_buffer[i] * pitch_buffer[i];
+    yy += pitch_buffer[i + kFrameSize20ms24kHz] * pitch_buffer[i + kFrameSize20ms24kHz];
     yy = std::max(1.f, yy);
-    yy_values[i] = yy;
+    yy_values[i + 1] = yy;
   }
 }
 
@@ -387,7 +382,7 @@ PitchInfo CheckLowerPitchPeriodsAndComputePitchGain(
   };
 
   // Initialize.
-  const float xx = y_energy[0];
+  const float xx = y_energy[kMaxPitch24kHz];
   // Helpers.
   const auto pitch_gain = [](float xy, float yy, float xx) {
     RTC_DCHECK_LE(0.f, xx * yy);
@@ -399,7 +394,7 @@ PitchInfo CheckLowerPitchPeriodsAndComputePitchGain(
       std::min(initial_pitch_period_48kHz / 2, kMaxPitch24kHz - 1);
   best_pitch.xy =
       ComputeAutoCorrelation(GetInvertedLag(best_pitch.period), pitch_buffer);
-  best_pitch.yy = y_energy[best_pitch.period];
+  best_pitch.yy = y_energy[kMaxPitch24kHz - best_pitch.period];
   best_pitch.gain = pitch_gain(best_pitch.xy, best_pitch.yy, xx);
 
   // 24 kHz version of the last estimated pitch and copy of the initial
@@ -437,8 +432,8 @@ PitchInfo CheckLowerPitchPeriodsAndComputePitchGain(
     float xy_secondary_period = ComputeAutoCorrelation(
         GetInvertedLag(dual_alternative_period), pitch_buffer);
     float xy = 0.5f * (xy_primary_period + xy_secondary_period);
-    float yy = 0.5f * (y_energy[alternative_pitch.period] +
-                       y_energy[dual_alternative_period]);
+    float yy = 0.5f * (y_energy[kMaxPitch24kHz - alternative_pitch.period] +
+                       y_energy[kMaxPitch24kHz - dual_alternative_period]);
     alternative_pitch.gain = pitch_gain(xy, yy, xx);
 
     // Maybe update best period.
