@@ -43,7 +43,7 @@ TEST(RnnVadTest, PitchSearchWithinTolerance) {
       PitchInfo pitch_info =
           pitch_estimator.Estimate({lp_residual.data(), kBufSize24kHz});
       EXPECT_EQ(expected_pitch_period, pitch_info.period);
-      EXPECT_NEAR(expected_pitch_gain, pitch_info.gain, 1e-5f);
+      EXPECT_NEAR(expected_pitch_gain, pitch_info.gain, 15e-4f);
     }
   }
 }
