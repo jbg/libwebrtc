@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80bf89e5_22475458",
+        "filename": "api/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-04T16:04:08Z",
+      "side": 1,
+      "message": "I cannot reference https://source.chromium.org/chromium/chromium/src/+/master:base/metrics/OWNERS from here but maybe we want more owners for this?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 44
+      },
+      "revId": "a0729f139a8765f3b78a6b8a9f422f35f5795872",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
