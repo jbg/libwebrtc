@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe510f2_005764b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-04T13:21:51Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "3ce5020f_c8f51b60",
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d546c65b_eac700c8",
@@ -48,6 +66,30 @@
       "writtenOn": "2020-11-04T08:13:22Z",
       "side": 1,
       "message": "A comment on this is that I think the abstraction of this mathemathical operation into a s separate function reduces readability.\n\nWhat is done in the function is extremely simple and to me does not warrant a separate function.\nI think it could be motivated to have a separate function for this if the name gave a better understanding of what is done, but to me it does not at all do so. \n\nSince this method is called for each call to to ComputeAutoCorrelation, would it not be possible to move this into that method instead?\nThat would a) shorten this code, b) (to my opinion) make this code more redable, c) reduce the binary footprint.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 1
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ff77f0_96a88f91",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-04T13:21:51Z",
+      "side": 1,
+      "message": "\u003e A comment on this is that I think the abstraction of this mathemathical operation into a s separate function reduces readability.\n\u003e \n\u003e What is done in the function is extremely simple and to me does not warrant a separate function.\n\nTrue, it\u0027s simple and readability is reduced because we can\u0027t see how the pitch buffer is accessed; for instance, one can\u0027t tell if a traversal goes backward or forward.\n\nHowever, the way the pitch buffer works may not be obvious and IMO this function clarifies the relationship between a lag and an inverted lag - so the reader can make better sense of the keywords after which variables are named.\n\n\u003e I think it could be motivated to have a separate function for this if the name gave a better understanding of what is done, but to me it does not at all do so.\n\u003e \n\u003e Since this method is called for each call to to ComputeAutoCorrelation, would it not be possible to move this into that method instead?\n\u003e That would a) shorten this code, b) (to my opinion) make this code more redable, c) reduce the binary footprint.\n\n`ComputeAutoCorrelation()` is also called by directly passing inverted lags, so we can\u0027t move the conversion into that function.\n\n---\n\nI propose to improve the comment and to leave the function for now for the following reasons:\n\n1. IMO the correct way to solve the lack of clarity around this topic (pitch buffer and ways to access it) is to migrate to a `PitchBuffer` class. As it is now instead we have a class for the underlying data structure and several functions to operate on the pitch buffer. Namely, I would merge `sequence_buffer.h`, `pitch_search.h/.cc` and `pitch_search_internal.h/.cc` into `pitch_buffer.h/.cc` so that data structure and operations live together in the same place.\n\n2. If we remove this function, it may not be clear anymore why some indices are flipped",
+      "parentUuid": "d546c65b_eac700c8",
       "range": {
         "startLine": 29,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94c49c53_39b6565d",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-04T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4fb6962_64228495",
+      "range": {
+        "startLine": 49,
+        "startChar": 49,
+        "endLine": 49,
+        "endChar": 57
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71fe308e_a3ab7134",
@@ -94,6 +160,30 @@
       "writtenOn": "2020-11-04T08:13:22Z",
       "side": 1,
       "message": "These variable names requires reading the comment to understand.\nI\u0027d actually prefer to keep the previous naming which better explained what the parameters were. (I would suggest changing the name lag_auto_corr though since that seemed incorrect\u003d",
+      "range": {
+        "startLine": 53,
+        "startChar": 38,
+        "endLine": 53,
+        "endChar": 72
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea0fccd_35cd5ed6",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-04T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71fe308e_a3ab7134",
       "range": {
         "startLine": 53,
         "startChar": 38,
@@ -127,6 +217,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c23e31a_c9604167",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-04T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0941108b_021f2b1e",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 3
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4de915fd_89735cd7",
@@ -140,6 +254,30 @@
       "writtenOn": "2020-11-04T08:13:22Z",
       "side": 1,
       "message": "I would prefer a bit more descriptive comment, or alternatively omit it.\n\nIn its current form it I think it raises more question than it clarifies/explains.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 47
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc65693b_4ffab39a",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-04T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4de915fd_89735cd7",
       "range": {
         "startLine": 129,
         "startChar": 0,
@@ -173,6 +311,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8e8b797_af880097",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-04T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "935ae99f_a7933a1c",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 11
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc6ffa80_1bb0c359",
@@ -186,6 +348,30 @@
       "writtenOn": "2020-11-04T08:13:22Z",
       "side": 1,
       "message": "For readability, I\u0027d suggest moving these checks out from the loop and instead do the checks on the loop boundaries. \n\nI don\u0027t think it is needed to check the array indices before each array access.",
+      "range": {
+        "startLine": 152,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 57
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be5f5277_e3653615",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-04T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc6ffa80_1bb0c359",
       "range": {
         "startLine": 152,
         "startChar": 4,
@@ -219,6 +405,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34c38e6a_30e6df8f",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-04T13:21:51Z",
+      "side": 1,
+      "message": "static assert added",
+      "parentUuid": "6ea7658b_d1b4548e",
+      "range": {
+        "startLine": 188,
+        "startChar": 37,
+        "endLine": 188,
+        "endChar": 72
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a45d9dc5_020a9847",
@@ -232,6 +442,30 @@
       "writtenOn": "2020-11-04T08:13:22Z",
       "side": 1,
       "message": "I don\u0027t think it is a good idea to do this parameter renaming.\n\nI see the previous use of alias as a workaround of the fact that the variables are non-properly named.\nBut this I think is worse. The comment do indeed explain the variables but I don\u0027t see that as an alternative to give the variables proper names (this is also clear from the style guide).",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 47
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6030518f_8f9866a3",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-04T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a45d9dc5_020a9847",
       "range": {
         "startLine": 215,
         "startChar": 0,
