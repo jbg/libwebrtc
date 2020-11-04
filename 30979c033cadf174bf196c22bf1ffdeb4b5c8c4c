@@ -175,6 +175,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4708a8e0_967012ca",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-11-04T01:17:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3931bf12_61dedf54",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe487b25_e8c988f6",
@@ -794,6 +812,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d9d8647_d69a9dec",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-11-04T01:17:01Z",
+      "side": 1,
+      "message": "Yeah, running the handshake before we get the digest is intentional, we try to shave off any time we can.",
+      "parentUuid": "a234fc3f_04f70e62",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6594925_179f793e",
@@ -843,6 +879,24 @@
       "side": 1,
       "message": "\u003e That would be the plan. But we still need to fall back to the built-in roots and name matching on platforms where the OS verification is not implemented. At least that\u0027s what I was thinking.\n\nRight, I guess what I\u0027m saying that, where we fallback to built-in roots, we\u0027re already shipping the built-in roots and built-in verifier anyway. At that point, it seems we may as well use the built-in name-matching algorithm too. And where we use OS or other application-supplied verification, that stack should already have a name-matching algorithm, so there\u0027s no sense in us replicating it.\n\nIt\u0027s a little goofy right now, since OpenSSLAdapter checks the name matches after certificate verification. But it seems doing that as part of verification would be preferable anyway (a valid certificate chain for the wrong name isn\u0027t any more useful of a certificate than an arbitrarily invalid chain).\n\nPerhaps this could be rearranged so that VerifyPeerCertMatchesHost() is part of the built-in verification process, and if you use a callback instead, we\u0027ll pass the name in or otherwise expect the callback to check for you. That might be simplest as a separate CL, so perhaps here we just create X509 objects (X509_parse_from_buffer is the most efficient way to go from CRYPTO_BUFFER to X509; we\u0027ll reuse some bits in memory since we know the CRYPTO_BUFFER is immutable.) And then as a follow CL, we get VerifyPeerCertMatchesHost() out of the non-built-in-roots path.",
       "parentUuid": "60b5ee4d_11495617",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be768bfb_305ec485",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-11-04T01:17:01Z",
+      "side": 1,
+      "message": "Yeah, that makes sense, not sure what I was thinking. Done.",
+      "parentUuid": "ee0741a4_4f0ef1d4",
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },

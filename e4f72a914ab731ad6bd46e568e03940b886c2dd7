@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3380cee9_6a6070c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-11-04T01:17:01Z",
+      "side": 1,
+      "message": "Remaining comments should be addressed.",
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1e08b2_08255777",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-11-04T01:17:01Z",
+      "side": 1,
+      "message": "Should I just call TLS_method to avoid having to do this for now?",
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
