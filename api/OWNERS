@@ -12,3 +12,5 @@ per-file peer_connection*=hbos@webrtc.org
 
 per-file DEPS=mbonadei@webrtc.org
 per-file DEPS=kwiberg@webrtc.org
+
+per-file uma_metrics.h=isherman@chromium.org
