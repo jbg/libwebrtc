@@ -16,6 +16,230 @@
       "message": "Hi Per,\nCould you PTAL?\nAlessio",
       "revId": "5542e367ce7981a7683787c1987ad25789979456",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ce5020f_c8f51b60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-04T08:13:22Z",
+      "side": 1,
+      "message": "Awesome!\nThanks for the CL!\n\nA general question I have is whether the optimizations are bitexact?",
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d546c65b_eac700c8",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-04T08:13:22Z",
+      "side": 1,
+      "message": "A comment on this is that I think the abstraction of this mathemathical operation into a s separate function reduces readability.\n\nWhat is done in the function is extremely simple and to me does not warrant a separate function.\nI think it could be motivated to have a separate function for this if the name gave a better understanding of what is done, but to me it does not at all do so. \n\nSince this method is called for each call to to ComputeAutoCorrelation, would it not be possible to move this into that method instead?\nThat would a) shorten this code, b) (to my opinion) make this code more redable, c) reduce the binary footprint.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 1
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4fb6962_64228495",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-04T08:13:22Z",
+      "side": 1,
+      "message": "pseudo-i\n-\u003e\nthis method\n\n?",
+      "range": {
+        "startLine": 49,
+        "startChar": 49,
+        "endLine": 49,
+        "endChar": 57
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71fe308e_a3ab7134",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-04T08:13:22Z",
+      "side": 1,
+      "message": "These variable names requires reading the comment to understand.\nI\u0027d actually prefer to keep the previous naming which better explained what the parameters were. (I would suggest changing the name lag_auto_corr though since that seemed incorrect\u003d",
+      "range": {
+        "startLine": 53,
+        "startChar": 38,
+        "endLine": 53,
+        "endChar": 72
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0941108b_021f2b1e",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-04T08:13:22Z",
+      "side": 1,
+      "message": "Nit\nWould changing this to use early returns make sense?",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 3
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de915fd_89735cd7",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-04T08:13:22Z",
+      "side": 1,
+      "message": "I would prefer a bit more descriptive comment, or alternatively omit it.\n\nIn its current form it I think it raises more question than it clarifies/explains.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 47
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "935ae99f_a7933a1c",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-04T08:13:22Z",
+      "side": 1,
+      "message": "Nit\nHave you considered to name this Range instead?\n\nAlso, I\u0027m have a feeling that first and last could be named a bit differently\nWhat about\nleft and right\nmin and max\nlower upper",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 11
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc6ffa80_1bb0c359",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-04T08:13:22Z",
+      "side": 1,
+      "message": "For readability, I\u0027d suggest moving these checks out from the loop and instead do the checks on the loop boundaries. \n\nI don\u0027t think it is needed to check the array indices before each array access.",
+      "range": {
+        "startLine": 152,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 57
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ea7658b_d1b4548e",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-04T08:13:22Z",
+      "side": 1,
+      "message": "Is there a guaranteed that interved_lag+kFrameSize20ms24kHz does not exceed pitck_buffer.size()?",
+      "range": {
+        "startLine": 188,
+        "startChar": 37,
+        "endLine": 188,
+        "endChar": 72
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a45d9dc5_020a9847",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-04T08:13:22Z",
+      "side": 1,
+      "message": "I don\u0027t think it is a good idea to do this parameter renaming.\n\nI see the previous use of alias as a workaround of the fact that the variables are non-properly named.\nBut this I think is worse. The comment do indeed explain the variables but I don\u0027t see that as an alternative to give the variables proper names (this is also clear from the style guide).",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 47
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
