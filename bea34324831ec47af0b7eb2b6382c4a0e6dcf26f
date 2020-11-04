@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0b655f57_12f03d9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 14754
+      },
+      "writtenOn": "2020-11-04T21:46:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45f93c6a_42778c5d",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "bea34324831ec47af0b7eb2b6382c4a0e6dcf26f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "47845f09_64a79455",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -71,6 +95,24 @@
       "writtenOn": "2020-10-30T18:37:11Z",
       "side": 1,
       "message": "Android definitely expects `AVCProfileConstrainedHigh` [1] as 0x00080000 and `AVCLevel31` as 0x00000200 [2]\n\n[1] https://developer.android.com/reference/android/media/MediaCodecInfo.CodecProfileLevel#AVCProfileConstrainedHigh\n[2] https://developer.android.com/reference/android/media/MediaCodecInfo.CodecProfileLevel#AVCLevel31",
+      "revId": "bea34324831ec47af0b7eb2b6382c4a0e6dcf26f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ad39ce_6e46aeda",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 14754
+      },
+      "writtenOn": "2020-11-04T21:46:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "901d4f1d_c7fe4ecd",
       "revId": "bea34324831ec47af0b7eb2b6382c4a0e6dcf26f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

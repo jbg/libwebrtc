@@ -39,6 +39,30 @@
       },
       "revId": "f0c5842d80eedb20d60c1ae43dcf78c779f10671",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5bf994c_8c3806d7",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 14754
+      },
+      "writtenOn": "2020-11-04T21:46:04Z",
+      "side": 1,
+      "message": "Do you mean that \n1) regardless of api version there will be android handsets crashing when initiated with values from later API or \n2) just handsets that are on an older api?\n\nIf the (2) it is easily solved by using a check on build version (Build.VERSION.SDK_INT \u003e\u003d Build.VERSION_CODES.O).\nIf doing this we do not need to wrap the constants either and are free to use them directly (a good thing).\n\nIf the problem is (1) then how can this ever be updated? Are we stuck at whatever was defined at api level 16?",
+      "parentUuid": "dd75983c_895e1b45",
+      "range": {
+        "startLine": 251,
+        "startChar": 1,
+        "endLine": 255,
+        "endChar": 79
+      },
+      "revId": "f0c5842d80eedb20d60c1ae43dcf78c779f10671",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
