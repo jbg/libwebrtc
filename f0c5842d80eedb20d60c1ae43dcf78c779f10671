@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c70f1a99_68aa6465",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2020-11-05T10:35:50Z",
+      "side": 1,
+      "message": "I agree that it would be right to request CBP/CHP explicitly. But doing this by default may result to:\n1. Failures at initialization (if encoder doesn\u0027t recognize the profile).\n2. Regressions in performance (e.g. CAVLC instead of CABAC when CHP is requested explicitly).\n\nWe should do this only for verified implementations.",
+      "revId": "f0c5842d80eedb20d60c1ae43dcf78c779f10671",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd75983c_895e1b45",
