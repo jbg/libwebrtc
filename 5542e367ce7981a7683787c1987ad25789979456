@@ -124,6 +124,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c684d667_038b0cd9",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "| However, the way the pitch buffer works may not be obvious and IMO this function | clarifies the relationship between a lag and an inverted lag - so the reader can | make better sense of the keywords after which variables are named.\nAck. It is fine code-wise so I leave it up to you.\n\n|`ComputeAutoCorrelation()` is also called by directly passing inverted lags, so \n| we can\u0027t move the conversion into that function.\ntrue",
+      "parentUuid": "9bcb8d5c_9100561c",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 1
+      },
+      "revId": "5542e367ce7981a7683787c1987ad25789979456",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4fb6962_64228495",

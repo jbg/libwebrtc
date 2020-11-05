@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e489cbfe_89baef5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "Thanks for the updated patchset!",
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30894a3a_e7ef5e3f",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "Please doublecheck this comment. It seems incorrect, in particular on line 45",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c66c60a7_f5653d74",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "What about instead writing this like this?\nconst int inverted_lag \u003d kMaxPitch24kHz - lag;\n        ComputeAutoCorrelation(inverted_lag+1, pitch_buffer),\n        ComputeAutoCorrelation(inverted_lag, pitch_buffer),\n        ComputeAutoCorrelation(inverted_lag - 1, pitch_buffer));",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 74
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0392c48c_6609d8a0",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "Unrelated comment, but I\u0027d suggest making this a standard for-loop.\n\nReading up on SafeLt, it is clear that this has no overhead. But to really tell, I actually had to read up on that.\n\nAlso, if dst would in the future be changed to be non-constant in size, this would be more costly.\n\nFor readability, I\u0027d therefore instead prefer\n\n\n static_assert(dst.size() \u003d\u003d kBufSize12kHz, \"\");\n for (int i \u003d 0; i \u003c kBufSize12kHz; ++i) {",
+      "range": {
+        "startLine": 204,
+        "startChar": 18,
+        "endLine": 204,
+        "endChar": 44
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09c95f42_5342d027",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "n and k must be explained in the comment.\n\nHowever, looking at how this method is used, it is very hard for me to understand the meaning of those.\n\nSince the mathematical formula is so simple and this is only used in two places, I\u0027d instead suggest to avoid putting it in a separate function, since that makes it harder to understand this code. In particular, since one of the two uses hardcodes n to be 1.",
+      "range": {
+        "startLine": 211,
+        "startChar": 57,
+        "endLine": 211,
+        "endChar": 71
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67fcab47_b3505595",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "Since \n1) this is used only in two places\n2) that code is quite far from this implementation (~200 lines)\n3) this actually is a one-liner.\n\nI\u0027d suggest that to increase readability, it would be better to create a lambda instead and moving this closer to where it is used.\n\n\nAlternatively, the method could also be placed after IsAlternativePitchStrongerThanInitial. \nHowever, ideally this method should go into the anonymous namespace to avoid accidental ODR violations.",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 0
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec2e82d3_7975d61b",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "Why having a Range called i1 and i2?\nWould it not be better to call them r1 and r2?",
+      "range": {
+        "startLine": 337,
+        "startChar": 14,
+        "endLine": 337,
+        "endChar": 16
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fc347fe_0fb00365",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "Why not call this strength instead, as the comment describes it?\n\nTo me, a gain is something that one applies. But for a pitch I have a hard time imagining what a gain should be.",
+      "range": {
+        "startLine": 372,
+        "startChar": 10,
+        "endLine": 372,
+        "endChar": 14
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5ad1b55_08c3b6ec",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "I don\u0027t think this comment add anything. \n\nIt is quite clear that a lambda cannot be anything but a helper.",
+      "range": {
+        "startLine": 385,
+        "startChar": 1,
+        "endLine": 385,
+        "endChar": 13
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e564fcb_e083b738",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "Yoda style.",
+      "range": {
+        "startLine": 387,
+        "startChar": 4,
+        "endLine": 387,
+        "endChar": 32
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38d8a06d_fbb4a008",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "I know that this is how it was implemented before but I cannot from this understand what `k`, or `max_k` mean.\n\nCan that be explained?\nAlso, I definitely think that it would be good to replace k with some more descriptive name, in particular since it is used as a value that goes into the maths, and not only as a loop counter.\n\nEven though these variable names were there before, the usage of them is heavily refactored here so I think it makes sense to address this in this CL.",
+      "range": {
+        "startLine": 405,
+        "startChar": 3,
+        "endLine": 408,
+        "endChar": 36
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1110f64f_354b05f6",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T23:06:54Z",
+      "side": 1,
+      "message": "Nit\nMaybe it would make sense to explain the concept of inverted lags since it is mentioned so much here. \nAt least, I don\u0027t understand it without looking into the code.",
+      "range": {
+        "startLine": 50,
+        "startChar": 53,
+        "endLine": 51,
+        "endChar": 8
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
