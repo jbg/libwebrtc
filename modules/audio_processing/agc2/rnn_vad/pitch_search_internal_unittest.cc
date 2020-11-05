@@ -31,58 +31,6 @@ constexpr float kTestPitchGainsHigh = 0.75f;
 
 }  // namespace
 
-class ComputePitchGainThresholdTest
-    : public ::testing::Test,
-      public ::testing::WithParamInterface<std::tuple<
-          /*candidate_pitch_period=*/int,
-          /*pitch_period_ratio=*/int,
-          /*initial_pitch_period=*/int,
-          /*initial_pitch_gain=*/float,
-          /*prev_pitch_period=*/int,
-          /*prev_pitch_gain=*/float,
-          /*threshold=*/float>> {};
-
-// Checks that the computed pitch gain is within tolerance given test input
-// data.
-TEST_P(ComputePitchGainThresholdTest, WithinTolerance) {
-  const auto params = GetParam();
-  const int candidate_pitch_period = std::get<0>(params);
-  const int pitch_period_ratio = std::get<1>(params);
-  const int initial_pitch_period = std::get<2>(params);
-  const float initial_pitch_gain = std::get<3>(params);
-  const int prev_pitch_period = std::get<4>(params);
-  const float prev_pitch_gain = std::get<5>(params);
-  const float threshold = std::get<6>(params);
-  {
-    // TODO(bugs.webrtc.org/8948): Add when the issue is fixed.
-    // FloatingPointExceptionObserver fpe_observer;
-    EXPECT_NEAR(
-        threshold,
-        ComputePitchGainThreshold(candidate_pitch_period, pitch_period_ratio,
-                                  initial_pitch_period, initial_pitch_gain,
-                                  prev_pitch_period, prev_pitch_gain),
-        5e-7f);
-  }
-}
-
-INSTANTIATE_TEST_SUITE_P(
-    RnnVadTest,
-    ComputePitchGainThresholdTest,
-    ::testing::Values(
-        std::make_tuple(31, 7, 219, 0.45649201f, 199, 0.604747f, 0.40000001f),
-        std::make_tuple(113,
-                        2,
-                        226,
-                        0.20967799f,
-                        219,
-                        0.40392199f,
-                        0.30000001f),
-        std::make_tuple(63, 2, 126, 0.210788f, 364, 0.098519f, 0.40000001f),
-        std::make_tuple(30, 5, 152, 0.82356697f, 149, 0.55535901f, 0.700032f),
-        std::make_tuple(76, 2, 151, 0.79522997f, 151, 0.82356697f, 0.675946f),
-        std::make_tuple(31, 5, 153, 0.85069299f, 150, 0.79073799f, 0.72308898f),
-        std::make_tuple(78, 2, 156, 0.72750503f, 153, 0.85069299f, 0.618379f)));
-
 // Checks that the frame-wise sliding square energy function produces output
 // within tolerance given test input data.
 TEST(RnnVadTest, ComputeSlidingFrameSquareEnergiesWithinTolerance) {
@@ -109,8 +57,8 @@ TEST(RnnVadTest, FindBestPitchPeriodsBitExactness) {
     // TODO(bugs.webrtc.org/8948): Add when the issue is fixed.
     // FloatingPointExceptionObserver fpe_observer;
     auto auto_corr_view = test_data.GetPitchBufAutoCorrCoeffsView();
-    pitch_candidates = FindBestPitchPeriods(auto_corr_view, pitch_buf_decimated,
-                                            kMaxPitch12kHz);
+    pitch_candidates =
+        FindBestPitchPeriods12kHz(auto_corr_view, pitch_buf_decimated);
   }
   EXPECT_EQ(pitch_candidates.best, 140);
   EXPECT_EQ(pitch_candidates.second_best, 142);
