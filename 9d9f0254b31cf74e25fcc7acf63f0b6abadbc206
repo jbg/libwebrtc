@@ -16,6 +16,322 @@
       "message": "Per, please take a look at this one as well. Thanks!",
       "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e42268c0_4095ddd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "Thanks for the CL!\n\nI\u0027ve added a number of comments. ",
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "519f32a5_6a8d3284",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "Why is not this included in the InitializeADM method?",
+      "range": {
+        "startLine": 62,
+        "startChar": 6,
+        "endLine": 62,
+        "endChar": 26
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "161bdd19_978e4a2f",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "InitializeADM -\u003e InitializeAdm",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 28
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32a6e75a_e443633c",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "With pone part of the ADM being initialized on line 62, the naming of this method becomes misleading.\nCan it be changed somehow to avoid that?",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 32
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c505d3c5_22cdec04",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "The header file mentions that \n\"// Synchronization is handled internally by AudioDeviceModule.\"\n\nThat means that a lock is likely also taken by the calls to the methods in audio_device_module_\nSince the init_lock_ is already held when this call is made, there must be two locks held at the same time which is risky.",
+      "range": {
+        "startLine": 90,
+        "startChar": 1,
+        "endLine": 90,
+        "endChar": 68
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25e75170_b3970e05",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "onwards",
+      "range": {
+        "startLine": 114,
+        "startChar": 54,
+        "endLine": 114,
+        "endChar": 56
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de54c30d_db242683",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "mobile\n-\u003e\nthe mobile",
+      "range": {
+        "startLine": 114,
+        "startChar": 58,
+        "endLine": 114,
+        "endChar": 64
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1910ef7_c36296fe",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "Typo",
+      "range": {
+        "startLine": 114,
+        "startChar": 40,
+        "endLine": 114,
+        "endChar": 47
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7435659d_5479d1cc",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "One part of the initialization still remain in the Init method. \nThis needs to be explained more, and as mentioned elsewhere, I think this method should be renamed.",
+      "range": {
+        "startLine": 114,
+        "startChar": 5,
+        "endLine": 114,
+        "endChar": 15
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f7198d7_ef37db0b",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "// able to gain microphone access when in background that it would be better\n// to delay to the logic as later as possible.\n\n-\u003e\n\n// able to gain microphone access when in background mode. Therefore it is \n// better to delay to the logic as later as possible.\n\n\n?",
+      "range": {
+        "startLine": 115,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 48
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "197b2d97_b8b18d20",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "Please describe the return value, and it\u0027s role.\nE.g., whether this is a success/error signal, or whether it signals that an intialization was performed,",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 6
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c67b95_7cc8992b",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 134,
+        "startChar": 46,
+        "endLine": 134,
+        "endChar": 60
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043c541c_b78bd06f",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "When adding one more lock_ I think this lock needs to be name more specifically to tell what it does.",
+      "range": {
+        "startLine": 153,
+        "startChar": 8,
+        "endLine": 153,
+        "endChar": 13
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e1e2b56_47984619",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-05T21:52:48Z",
+      "side": 1,
+      "message": "Having two locks in one class introduces a risk of deadlock.\nIs there any way to instead use the lock_ variable for this as well, and thereby avoid adding two locks?",
+      "range": {
+        "startLine": 164,
+        "startChar": 2,
+        "endLine": 164,
+        "endChar": 19
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
