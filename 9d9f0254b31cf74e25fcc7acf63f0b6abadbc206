@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "569c63e7_0e501c5d",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "Good point. I will move it there. Thanks.",
+      "parentUuid": "519f32a5_6a8d3284",
+      "range": {
+        "startLine": 62,
+        "startChar": 6,
+        "endLine": 62,
+        "endChar": 26
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "161bdd19_978e4a2f",
@@ -104,6 +128,54 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7afd1210_e91efaa9",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "Using previously defined Init under private section now.",
+      "parentUuid": "161bdd19_978e4a2f",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 28
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c0dd9b_082b7ba3",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32a6e75a_e443633c",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 32
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c505d3c5_22cdec04",
@@ -117,6 +189,30 @@
       "writtenOn": "2020-11-05T21:52:48Z",
       "side": 1,
       "message": "The header file mentions that \n\"// Synchronization is handled internally by AudioDeviceModule.\"\n\nThat means that a lock is likely also taken by the calls to the methods in audio_device_module_\nSince the init_lock_ is already held when this call is made, there must be two locks held at the same time which is risky.",
+      "range": {
+        "startLine": 90,
+        "startChar": 1,
+        "endLine": 90,
+        "endChar": 68
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9eee7c0_d360ca93",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "Currently there is no callback flow that would cause deadlock scenario between VoipCore lock and ADM lock. Your concern is valid and will need to be vigilant to make sure that we don\u0027t allow further API usage in this method. I will add comment to emphasize this for anyone later to modify this to be aware of it. WDYT?",
+      "parentUuid": "c505d3c5_22cdec04",
       "range": {
         "startLine": 90,
         "startChar": 1,
@@ -219,6 +315,102 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44061a5f_662b8217",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1910ef7_c36296fe",
+      "range": {
+        "startLine": 114,
+        "startChar": 40,
+        "endLine": 114,
+        "endChar": 47
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e666852_ec938040",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25e75170_b3970e05",
+      "range": {
+        "startLine": 114,
+        "startChar": 54,
+        "endLine": 114,
+        "endChar": 56
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6998521_44bb186a",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "I see. I will move that part as well.",
+      "parentUuid": "7435659d_5479d1cc",
+      "range": {
+        "startLine": 114,
+        "startChar": 5,
+        "endLine": 114,
+        "endChar": 15
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a7137af_99b53633",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de54c30d_db242683",
+      "range": {
+        "startLine": 114,
+        "startChar": 58,
+        "endLine": 114,
+        "endChar": 64
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f7198d7_ef37db0b",
@@ -232,6 +424,30 @@
       "writtenOn": "2020-11-05T21:52:48Z",
       "side": 1,
       "message": "// able to gain microphone access when in background that it would be better\n// to delay to the logic as later as possible.\n\n-\u003e\n\n// able to gain microphone access when in background mode. Therefore it is \n// better to delay to the logic as later as possible.\n\n\n?",
+      "range": {
+        "startLine": 115,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 48
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb705479_991cbba0",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f7198d7_ef37db0b",
       "range": {
         "startLine": 115,
         "startChar": 2,
@@ -265,6 +481,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "936d1529_f0075530",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "I have refactored previous Init into constructor and updated the API accordingly.",
+      "parentUuid": "197b2d97_b8b18d20",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 6
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04c67b95_7cc8992b",
@@ -278,6 +518,30 @@
       "writtenOn": "2020-11-05T21:52:48Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 134,
+        "startChar": 46,
+        "endLine": 134,
+        "endChar": 60
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f68c41b5_18d64b1f",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04c67b95_7cc8992b",
       "range": {
         "startLine": 134,
         "startChar": 46,
@@ -311,6 +575,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb08007b_34790a0b",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "Removed second lock as suggested. Thanks.",
+      "parentUuid": "043c541c_b78bd06f",
+      "range": {
+        "startLine": 153,
+        "startChar": 8,
+        "endLine": 153,
+        "endChar": 13
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e1e2b56_47984619",
@@ -324,6 +612,30 @@
       "writtenOn": "2020-11-05T21:52:48Z",
       "side": 1,
       "message": "Having two locks in one class introduces a risk of deadlock.\nIs there any way to instead use the lock_ variable for this as well, and thereby avoid adding two locks?",
+      "range": {
+        "startLine": 164,
+        "startChar": 2,
+        "endLine": 164,
+        "endChar": 19
+      },
+      "revId": "9d9f0254b31cf74e25fcc7acf63f0b6abadbc206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f12473f_c8765f90",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-05T23:10:07Z",
+      "side": 1,
+      "message": "You\u0027re right. Taking a second look. I think it\u0027s safe to use current lock instead of another here.",
+      "parentUuid": "4e1e2b56_47984619",
       "range": {
         "startLine": 164,
         "startChar": 2,
