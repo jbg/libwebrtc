@@ -94,27 +94,6 @@ TEST_F(VoipCoreTest, BasicVoipCoreOperation) {
   voip_core_->ReleaseChannel(*channel);
 }
 
-TEST_F(VoipCoreTest, ExpectFailToUseReleasedChannelId) {
-  auto channel = voip_core_->CreateChannel(&transport_, 0xdeadc0de);
-  EXPECT_TRUE(channel);
-
-  // Release right after creation.
-  voip_core_->ReleaseChannel(*channel);
-
-  // Now use released channel.
-
-  // These should be no-op.
-  voip_core_->SetSendCodec(*channel, kPcmuPayload, kPcmuFormat);
-  voip_core_->SetReceiveCodecs(*channel, {{kPcmuPayload, kPcmuFormat}});
-  voip_core_->RegisterTelephoneEventType(*channel, kPcmuPayload,
-                                         kPcmuSampleRateHz);
-
-  EXPECT_FALSE(voip_core_->StartSend(*channel));
-  EXPECT_FALSE(voip_core_->StartPlayout(*channel));
-  EXPECT_FALSE(voip_core_->SendDtmfEvent(*channel, kDtmfEventCode,
-                                         kDtmfEventDurationMs));
-}
-
 TEST_F(VoipCoreTest, SendDtmfEventWithoutRegistering) {
   // Program mock as non-operational and ready to start send.
   EXPECT_CALL(*audio_device_, Recording()).WillOnce(Return(false));
