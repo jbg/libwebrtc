@@ -63,6 +63,30 @@
       },
       "revId": "f0c5842d80eedb20d60c1ae43dcf78c779f10671",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a75b5f69_f196d721",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2020-11-05T07:23:42Z",
+      "side": 1,
+      "message": "We need to query supported profiles and use only those.\n\nI also would like to point to how Android MediaCodec configures underlying encoders - https://android.googlesource.com/platform/frameworks/av/+/master/media/libstagefright/ACodec.cpp#4524.\nBP, MP and HP are configured explicitly. For other profiles some default settings are used. What I observed on practice is that requesting HP technically results to CHP (no B-frames) with CABAC. But if you request CHP you get CHP with CAVLC. I.e., you lose coding efficiency when requesting CHP. Ideally we need to fix Android MediaCodec layer first (configure CBP/CHP explicitly) before using CBP/CHP.",
+      "parentUuid": "a5bf994c_8c3806d7",
+      "range": {
+        "startLine": 251,
+        "startChar": 1,
+        "endLine": 255,
+        "endChar": 79
+      },
+      "revId": "f0c5842d80eedb20d60c1ae43dcf78c779f10671",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
