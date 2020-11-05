@@ -892,6 +892,7 @@ if (rtc_include_tests) {
   rtc_source_set("mock_rtp") {
     testonly = true
     sources = [
+      "test/mock_rtp_transceiver.h",
       "test/mock_rtpreceiver.h",
       "test/mock_rtpsender.h",
     ]
