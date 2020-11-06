@@ -16,6 +16,23 @@
       "message": "Thanks for the review.",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b90b2ab7_b344dbf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-06T01:13:48Z",
+      "side": 1,
+      "message": "Thanks! I think this is the right thing to do, but as I said in the other CL just now, you should not handle the possibility of !foo if you have just DCHECKed foo. In this CL, the DCHECKs basically mean that these functions must only be used with valid channels; trying to use them with a possibly invalid channel is a bug in the caller.\n\nYou could also take the position that they should be robust against being called with invalid channels; you then need to handle this case, e.g. by returning some sort of error that the caller can distinguish from a good return value. But this is more complex, and if the caller is able to avoid using invalid channels without undue effort, requiring the channel to always be valid is probably better.",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
