@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efc78faf_750ed0d0",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "it\u0027s a clarification of the TODO since multiline TODOs are not (well) supported",
+      "parentUuid": "30894a3a_e7ef5e3f",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c66c60a7_f5653d74",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-11-05T23:06:54Z",
       "side": 1,
       "message": "What about instead writing this like this?\nconst int inverted_lag \u003d kMaxPitch24kHz - lag;\n        ComputeAutoCorrelation(inverted_lag+1, pitch_buffer),\n        ComputeAutoCorrelation(inverted_lag, pitch_buffer),\n        ComputeAutoCorrelation(inverted_lag - 1, pitch_buffer));",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 74
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53c57147_65192601",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c66c60a7_f5653d74",
       "range": {
         "startLine": 73,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68ffa7f4_a5fdd1f2",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0392c48c_6609d8a0",
+      "range": {
+        "startLine": 204,
+        "startChar": 18,
+        "endLine": 204,
+        "endChar": 44
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09c95f42_5342d027",
@@ -100,6 +172,30 @@
       "writtenOn": "2020-11-05T23:06:54Z",
       "side": 1,
       "message": "n and k must be explained in the comment.\n\nHowever, looking at how this method is used, it is very hard for me to understand the meaning of those.\n\nSince the mathematical formula is so simple and this is only used in two places, I\u0027d instead suggest to avoid putting it in a separate function, since that makes it harder to understand this code. In particular, since one of the two uses hardcodes n to be 1.",
+      "range": {
+        "startLine": 211,
+        "startChar": 57,
+        "endLine": 211,
+        "endChar": 71
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2b96b6a_06baef2e",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "I will keep the constexpr function and rename the args.\nPreviously we had a lambda, but I think a constexpr function can be faster.\nWritten inline is not clear anymore that it\u0027s the same as round(n*pitch_period/k).",
+      "parentUuid": "09c95f42_5342d027",
       "range": {
         "startLine": 211,
         "startChar": 57,
@@ -133,6 +229,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b6b805e_88279971",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "I placed it before `IsAlternativePitchStrongerThanInitial()` because its docstring mentions `GetAlternativePitchPeriod()`.\n\nI wouldn\u0027t give up proximity (hence, leaving the lambda) for efficiency - I am speculating that a constexpr function is faster than a lambda.\n\nPlus, I much prefer to make things going on in here explicit. To me it wouldn\u0027t be immediately clear that the expression is equal to round(p*n/k) and by writing the expressions in two ways (one for n\u003d1 and one for n\u003e1) will make it harder for the reader to see that the same operation is done. As we can write this as a constexpr function, my personal preference is to keep it.\n\nAlternatively, we can write inline code but then I would add comments so that it\u0027s clear what operation is done.",
+      "parentUuid": "67fcab47_b3505595",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 0
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec2e82d3_7975d61b",
@@ -146,6 +266,30 @@
       "writtenOn": "2020-11-05T23:06:54Z",
       "side": 1,
       "message": "Why having a Range called i1 and i2?\nWould it not be better to call them r1 and r2?",
+      "range": {
+        "startLine": 337,
+        "startChar": 14,
+        "endLine": 337,
+        "endChar": 16
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea0d9d7_a98e0824",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "I switched from Interval to Range and I forgot to rename.",
+      "parentUuid": "ec2e82d3_7975d61b",
       "range": {
         "startLine": 337,
         "startChar": 14,
@@ -179,6 +323,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbf804b4_174ee9e7",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fc347fe_0fb00365",
+      "range": {
+        "startLine": 372,
+        "startChar": 10,
+        "endLine": 372,
+        "endChar": 14
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5ad1b55_08c3b6ec",
@@ -192,6 +360,30 @@
       "writtenOn": "2020-11-05T23:06:54Z",
       "side": 1,
       "message": "I don\u0027t think this comment add anything. \n\nIt is quite clear that a lambda cannot be anything but a helper.",
+      "range": {
+        "startLine": 385,
+        "startChar": 1,
+        "endLine": 385,
+        "endChar": 13
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b41ae16_ce0c4eaa",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5ad1b55_08c3b6ec",
       "range": {
         "startLine": 385,
         "startChar": 1,
@@ -225,6 +417,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c93cc90_8cbcf7cc",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "Right you are!",
+      "parentUuid": "5e564fcb_e083b738",
+      "range": {
+        "startLine": 387,
+        "startChar": 4,
+        "endLine": 387,
+        "endChar": 32
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38d8a06d_fbb4a008",
@@ -248,6 +464,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6070f54_b4653810",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "`max_k` (now `max_period_divisor`) is precomputed to reduce the number of loops below\nThe lazy way is to compute from 2 to the size of `kSubHarmonicMultipliers` (14), but a too large value for `period_divisor` results into a pitch period that is below the minimum (namely, `kMinPitch24kHz`).\n\nHence, instead of adding an if statement in the loop, the loop limit is precomputed.\n\nNot sure how much this saves in practice.",
+      "parentUuid": "38d8a06d_fbb4a008",
+      "range": {
+        "startLine": 405,
+        "startChar": 3,
+        "endLine": 408,
+        "endChar": 36
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1110f64f_354b05f6",
@@ -261,6 +501,30 @@
       "writtenOn": "2020-11-05T23:06:54Z",
       "side": 1,
       "message": "Nit\nMaybe it would make sense to explain the concept of inverted lags since it is mentioned so much here. \nAt least, I don\u0027t understand it without looking into the code.",
+      "range": {
+        "startLine": 50,
+        "startChar": 53,
+        "endLine": 51,
+        "endChar": 8
+      },
+      "revId": "507c628cacbcbc6c6d65ac44dfd5b68ae22fd0df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb147c0b_eed93bf1",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1110f64f_354b05f6",
       "range": {
         "startLine": 50,
         "startChar": 53,

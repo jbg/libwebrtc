@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f4d27c_1f11ca7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-06T16:08:47Z",
+      "side": 1,
+      "message": "Thanks for your comments Per.\n\nThis CL became huge, sorry for that.\nLet me know if you want me to split it.\nHowever, I haven\u0027t added anything new; just addressing your comments.",
+      "revId": "4f61649242cddeb98d9879bb6cc884974b5a24e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
