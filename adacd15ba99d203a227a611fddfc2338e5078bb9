@@ -86,6 +86,24 @@
       "parentUuid": "bcf7c744_e38a1588",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d50762e_32190d55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-07T18:46:22Z",
+      "side": 1,
+      "message": "You\u0027ve probably understood this quite well by now :-) but my thinking is mostly around making it as hard as possible to write expensive-to-fix bugs. In this case, that means either (1) using the type system to force the caller to handle the error case, e.g. by returning an optional result, or (2) crashing noisily (at least in debug builds) if the caller forgets to do as the docs say and verify their inputs.\n\nThis general philosophy comes from the fact that in browsers and video calling apps and servers, we generally do not have to avoid crashing at all costs---specifically, we would often rather have simple and maintainable code than convoluted code with myriad poorly-tested error handling paths that prevent all crashes, because that way, when there is a bug, it shows up clearly as a crash in our telemetry instead of as hard-to-debug erroneous behavior because some error handling path prevented the crash but failed to behave properly.\n\nDoes this make sense?\n\nI suspect that the solution that\u0027s easiest for us to compromise on is the optional return value, since that basically allows the library to punt on error handling and force the caller to deal with it, in whatever way makes most sense for the application. WebRTC doesn\u0027t use absl::StatusOr---otherwise that would have been an obvious candidate as well.",
+      "parentUuid": "d5c09641_96469383",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
