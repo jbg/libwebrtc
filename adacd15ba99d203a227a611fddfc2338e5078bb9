@@ -68,6 +68,24 @@
       "parentUuid": "b90b2ab7_b344dbf5",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5c09641_96469383",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-07T00:51:47Z",
+      "side": 1,
+      "message": "I guess I suppose we could stick to current approach where we left comments on each interface about invalid channel usage leading to no-op instead of using DCHECK to enforce the compliance since the usage intention is different here.",
+      "parentUuid": "bcf7c744_e38a1588",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
