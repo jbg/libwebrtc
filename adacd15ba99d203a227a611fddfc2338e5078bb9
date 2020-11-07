@@ -50,6 +50,24 @@
       "message": "Oh, and now that the channel being valid is a precondition, please double check that this is mentioned in the interface docs for each method.",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf7c744_e38a1588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-07T00:05:06Z",
+      "side": 1,
+      "message": "I actually feel little nervous about this. I like the idea about enforcing validity of ChannelId on debug build but not on production to avoid unfortunate crashes. It\u0027s part due to my mentality from telecom industry that product should never crash.. Maybe this is fine but I do feel this a bit harsh on application developers. Could there be some middle ground that both parties can be happy here?",
+      "parentUuid": "b90b2ab7_b344dbf5",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
