@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7844b37c_102c40f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-09T14:38:22Z",
+      "side": 1,
+      "message": "Thanks for the CL!\nlgtm",
+      "revId": "f6362d117c94147c746b6f71b4ba3c4006a0efab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
