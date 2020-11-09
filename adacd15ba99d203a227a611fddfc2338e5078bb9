@@ -104,6 +104,24 @@
       "parentUuid": "d5c09641_96469383",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3c12d00_e3b89873",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-09T19:41:33Z",
+      "side": 1,
+      "message": "Thanks, I think we are in agreement with the issue here. I think another alternatives would be\n\n1) Return new enum class or int code that specifies success or failure and use the parameters to fetch the resulted operation. \n\nThis is traditionally done and straight-forward \u0026 familiar with developers. The reason can also be shown in detail by the comments in return types.\n\n2) Return error asynchronously by using application callback.\n\nI think this has the disadvantage of disconnecting developer on the way they can react to error they encounter but it does punt the responsibility to application to handle the error when it occurs.\n\nI would prefer approach 1) here as it would cover all the scenarios. WDYT?",
+      "parentUuid": "7d50762e_32190d55",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
