@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec07356b_9563ba12",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-09T14:35:52Z",
+      "side": 1,
+      "message": "fixed in the child CL in which you added the same comment",
+      "parentUuid": "18747b01_11d0a7e1",
+      "range": {
+        "startLine": 45,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 65
+      },
+      "revId": "61e37b8c5e7b2b975fbca1af43fe9aec2779f6aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e1a8b57_aa17d9c6",
@@ -47,6 +71,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a040adc_9d911c54",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-09T14:35:52Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "7e1a8b57_aa17d9c6",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 55
+      },
+      "revId": "61e37b8c5e7b2b975fbca1af43fe9aec2779f6aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7a1a43e_c3eaaed7",
@@ -60,6 +108,30 @@
       "writtenOn": "2020-11-09T14:28:59Z",
       "side": 1,
       "message": "What is the reason for the extra nested scope here?",
+      "range": {
+        "startLine": 97,
+        "startChar": 1,
+        "endLine": 105,
+        "endChar": 3
+      },
+      "revId": "61e37b8c5e7b2b975fbca1af43fe9aec2779f6aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8967102c_40e5daf2",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal_unittest.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-11-09T14:35:52Z",
+      "side": 1,
+      "message": "It was originally done because of `FloatingPointExceptionObserver fpe_observer;`\nHowever, even if it\u0027ll even be re-enabled, the additional scope is not needed since the object goes out of scope when desired anyways.",
+      "parentUuid": "f7a1a43e_c3eaaed7",
       "range": {
         "startLine": 97,
         "startChar": 1,
