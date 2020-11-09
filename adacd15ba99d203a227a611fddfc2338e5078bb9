@@ -122,6 +122,24 @@
       "parentUuid": "7d50762e_32190d55",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd0ea5ed_85bb90b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-09T20:27:48Z",
+      "side": 1,
+      "message": "I just realized my suggestion on alternative 1) wouldn\u0027t work well as it will break the API signature and VoIP API is already started being used in some Google internal project and I suspect there already may be some others in open source community. I guess that would leave us on option 2) here.",
+      "parentUuid": "d3c12d00_e3b89873",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
