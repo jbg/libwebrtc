@@ -16,6 +16,138 @@
       "message": "Thanks Per for reviewing the code. I will try be more correct with spelling and wording next time. PTAL!",
       "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b54f5f30_2ea5481a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-09T21:19:54Z",
+      "side": 1,
+      "message": "Thanks for the patchset!",
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f685ae6_addde9ca",
+        "filename": "api/voip/voip_engine_factory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-09T21:19:54Z",
+      "side": 1,
+      "message": "Please comment on whether nullptr can, or can never, be returned.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 64
+      },
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93cd0249_ab8b7c03",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-09T21:19:54Z",
+      "side": 1,
+      "message": "I don\u0027t follow this one fully and it does not seem fully right.. Please have another look on that part of the comment.",
+      "range": {
+        "startLine": 64,
+        "startChar": 55,
+        "endLine": 65,
+        "endChar": 59
+      },
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2db70d5_08484877",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-09T21:19:54Z",
+      "side": 1,
+      "message": "Please also add a description of what the method does beyond only describing the return values.",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 114,
+        "endChar": 73
+      },
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ca5b40b_b290077a",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-09T21:19:54Z",
+      "side": 1,
+      "message": "Nit\nWhat about InitializeIfNeeded() ?",
+      "range": {
+        "startLine": 115,
+        "startChar": 7,
+        "endLine": 115,
+        "endChar": 24
+      },
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a981f714_fcfce9d8",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-09T21:19:54Z",
+      "side": 1,
+      "message": "Should be capital B in boolean.\n\nAlso please consider modifying the comment which is currently a bit misleading.\n\nE.g,\n // Boolean flag to ensure initialization only occurs once.",
+      "range": {
+        "startLine": 161,
+        "startChar": 1,
+        "endLine": 161,
+        "endChar": 37
+      },
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
