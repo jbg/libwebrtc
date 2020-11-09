@@ -202,13 +202,20 @@ if (is_linux || is_chromeos) {
 
     if (rtc_link_pipewire) {
       pkg_config("pipewire") {
-        packages = [ "libpipewire-0.2" ]
+        packages = [ "libpipewire-0.3" ]
       }
     } else {
       # When libpipewire is not directly linked, use stubs to allow for dlopening of
       # the binary.
+      pkg_config("pipewire") {
+        packages = [ "libpipewire-0.3" ]
+        ignore_libs = true
+      }
       generate_stubs("pipewire_stubs") {
-        configs = [ "../../:common_config" ]
+        configs = [
+          "../../:common_config",
+          ":pipewire",
+        ]
         deps = [ "../../rtc_base" ]
         extra_header = "linux/pipewire_stub_header.fragment"
         logging_function = "RTC_LOG(LS_VERBOSE)"
@@ -525,11 +532,12 @@ rtc_library("desktop_capture_generic") {
     configs += [
       ":pipewire_config",
       ":gio",
+      ":pipewire",
     ]
 
-    if (rtc_link_pipewire) {
-      configs += [ ":pipewire" ]
-    } else {
+    cflags_cc = [ "-Wno-implicit-fallthrough" ]
+
+    if (!rtc_link_pipewire) {
       deps += [ ":pipewire_stubs" ]
     }
   }
