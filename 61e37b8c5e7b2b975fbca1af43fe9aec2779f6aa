@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18747b01_11d0a7e1",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-09T14:28:59Z",
+      "side": 1,
+      "message": "Why is this put on the state?",
+      "range": {
+        "startLine": 45,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 65
+      },
+      "revId": "61e37b8c5e7b2b975fbca1af43fe9aec2779f6aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e1a8b57_aa17d9c6",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-09T14:28:59Z",
+      "side": 1,
+      "message": "Why is this put on the state?",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 55
+      },
+      "revId": "61e37b8c5e7b2b975fbca1af43fe9aec2779f6aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a1a43e_c3eaaed7",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal_unittest.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-11-09T14:28:59Z",
+      "side": 1,
+      "message": "What is the reason for the extra nested scope here?",
+      "range": {
+        "startLine": 97,
+        "startChar": 1,
+        "endLine": 105,
+        "endChar": 3
+      },
+      "revId": "61e37b8c5e7b2b975fbca1af43fe9aec2779f6aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
