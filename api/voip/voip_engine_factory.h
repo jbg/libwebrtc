@@ -60,10 +60,8 @@ struct VoipEngineConfig {
   rtc::scoped_refptr<AudioProcessing> audio_processing;
 };
 
-// Creates a VoipEngine instance with provided VoipEngineConfig.
-// This could return nullptr if AudioDeviceModule (ADM) initialization fails
-// during construction of VoipEngine which would render VoipEngine
-// nonfunctional.
+// Creates a VoipEngine instance with provided VoipEngineConfig. This will not
+// result in nullptr unless the underlying system has insufficient memory.
 std::unique_ptr<VoipEngine> CreateVoipEngine(VoipEngineConfig config);
 
 }  // namespace webrtc
