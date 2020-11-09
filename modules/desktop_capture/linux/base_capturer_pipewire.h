@@ -22,14 +22,6 @@
 
 namespace webrtc {
 
-class PipeWireType {
- public:
-  spa_type_media_type media_type;
-  spa_type_media_subtype media_subtype;
-  spa_type_format_video format_video;
-  spa_type_video_format video_format;
-};
-
 class BaseCapturerPipeWire : public DesktopCapturer {
  public:
   enum CaptureSourceType { Screen = 1, Window };
@@ -46,18 +38,14 @@ class BaseCapturerPipeWire : public DesktopCapturer {
  private:
   // PipeWire types -->
   pw_core* pw_core_ = nullptr;
-  pw_type* pw_core_type_ = nullptr;
+  pw_context* pw_context_ = nullptr;
   pw_stream* pw_stream_ = nullptr;
-  pw_remote* pw_remote_ = nullptr;
   pw_loop* pw_loop_ = nullptr;
   pw_thread_loop* pw_main_loop_ = nullptr;
-  PipeWireType* pw_type_ = nullptr;
 
   spa_hook spa_stream_listener_ = {};
-  spa_hook spa_remote_listener_ = {};
 
   pw_stream_events pw_stream_events_ = {};
-  pw_remote_events pw_remote_events_ = {};
 
   spa_video_info_raw* spa_video_format_ = nullptr;
 
@@ -89,25 +77,22 @@ class BaseCapturerPipeWire : public DesktopCapturer {
 
   void InitPortal();
   void InitPipeWire();
-  void InitPipeWireTypes();
 
   void CreateReceivingStream();
   void HandleBuffer(pw_buffer* buffer);
 
   void ConvertRGBxToBGRx(uint8_t* frame, uint32_t size);
 
-  static void OnStateChanged(void* data,
-                             pw_remote_state old_state,
-                             pw_remote_state state,
-                             const char* error);
   static void OnStreamStateChanged(void* data,
                                    pw_stream_state old_state,
                                    pw_stream_state state,
                                    const char* error_message);
 
-  static void OnStreamFormatChanged(void* data, const struct spa_pod* format);
   static void OnStreamProcess(void* data);
   static void OnNewBuffer(void* data, uint32_t id);
+  static void OnStreamParamChanged(void* data,
+                                   uint32_t id,
+                                   const struct spa_pod* param);
 
   guint SetupRequestResponseSignal(const gchar* object_path,
                                    GDBusSignalCallback callback);
