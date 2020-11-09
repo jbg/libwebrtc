@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c31e7b3_7b55c672",
+        "filename": "api/voip/voip_engine_factory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-09T23:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f685ae6_addde9ca",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 64
+      },
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93cd0249_ab8b7c03",
@@ -71,6 +95,30 @@
       "writtenOn": "2020-11-09T21:19:54Z",
       "side": 1,
       "message": "I don\u0027t follow this one fully and it does not seem fully right.. Please have another look on that part of the comment.",
+      "range": {
+        "startLine": 64,
+        "startChar": 55,
+        "endLine": 65,
+        "endChar": 59
+      },
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9241971c_b37be9e3",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-09T23:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93cd0249_ab8b7c03",
       "range": {
         "startLine": 64,
         "startChar": 55,
@@ -104,6 +152,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efcd116c_02b913ce",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-09T23:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2db70d5_08484877",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 114,
+        "endChar": 73
+      },
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ca5b40b_b290077a",
@@ -127,6 +199,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63f95b47_dbb28ead",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-09T23:49:34Z",
+      "side": 1,
+      "message": "Sounds good. Thanks.",
+      "parentUuid": "4ca5b40b_b290077a",
+      "range": {
+        "startLine": 115,
+        "startChar": 7,
+        "endLine": 115,
+        "endChar": 24
+      },
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a981f714_fcfce9d8",
@@ -140,6 +236,30 @@
       "writtenOn": "2020-11-09T21:19:54Z",
       "side": 1,
       "message": "Should be capital B in boolean.\n\nAlso please consider modifying the comment which is currently a bit misleading.\n\nE.g,\n // Boolean flag to ensure initialization only occurs once.",
+      "range": {
+        "startLine": 161,
+        "startChar": 1,
+        "endLine": 161,
+        "endChar": 37
+      },
+      "revId": "5d8624ffb3f62e402cc545583bba37c304209c42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca66476_45831333",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-09T23:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a981f714_fcfce9d8",
       "range": {
         "startLine": 161,
         "startChar": 1,
