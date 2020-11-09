@@ -44,7 +44,7 @@ TEST(RnnVadTest, ComputeSlidingFrameSquareEnergies24kHzWithinTolerance) {
   }
   auto square_energies_view = test_data.GetPitchBufSquareEnergiesView();
   ExpectNearAbsolute({square_energies_view.data(), square_energies_view.size()},
-                     computed_output, 3e-2f);
+                     computed_output, 1e-3f);
 }
 
 // Checks that the estimated pitch period is bit-exact given test input data.
