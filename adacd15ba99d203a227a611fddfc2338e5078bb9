@@ -140,6 +140,24 @@
       "parentUuid": "d3c12d00_e3b89873",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18b56eba_b9a8bf82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-10T00:17:49Z",
+      "side": 1,
+      "message": "There is a merge conflict that I would like to wait for https://webrtc-review.googlesource.com/c/src/+/191100 to land first and then will work on adding asynchronous error callback option for such notification. Thanks!",
+      "parentUuid": "fd0ea5ed_85bb90b1",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
