@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c068a0a0_9f66472d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-11-10T15:35:15Z",
+      "side": 1,
+      "message": "Attention - This CL is breaking webrtc from rolling into chromium, see:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/2527765\n\nExample:\nhttps://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket.appspot.com/8864027584083350736/+/steps/browser_tests__with_patch_/0/logs/Deterministic_failure:_WebRtcBrowserTest.RunsAudioVideoWebRTCCallInTwoTabsH264__status_CRASH_TIMEOUT_/0\n\n#\n# Fatal error in: ../../third_party/webrtc/modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc, line 352\n# last system error: 34\n# Check failed: r1.max \u003c\u003d r2.max (4 vs. 2)\n\nI am unable to revert without reverting the entire CL chain. Please take a look.\n",
+      "revId": "9da3e177fd5c2236cc15fea0ee8933e1dd0d8f6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
