@@ -33,6 +33,23 @@
       "message": "Awesome!\nlgtm",
       "revId": "f33a3c75aa2da89067d4d93bc4d079c1ea253431",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cc47b24_92cef7e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-10T18:14:28Z",
+      "side": 1,
+      "message": "Karl, could you take a look at API changes? Thanks!",
+      "revId": "f33a3c75aa2da89067d4d93bc4d079c1ea253431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
