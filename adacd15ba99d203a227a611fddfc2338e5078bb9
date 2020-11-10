@@ -158,6 +158,24 @@
       "parentUuid": "fd0ea5ed_85bb90b1",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80643bef_3fdb7c8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-10T17:54:28Z",
+      "side": 1,
+      "message": "I strongly prefer approach (1)---it will be easier and cheaper for callers. We can solve the compatibility issue by supporting both sets of signatures for a short while (weeks) while out-of-tree callers switch to the new signatures, and then remove the old ones.",
+      "parentUuid": "18b56eba_b9a8bf82",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
