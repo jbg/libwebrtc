@@ -50,6 +50,40 @@
       "message": "Karl, could you take a look at API changes? Thanks!",
       "revId": "f33a3c75aa2da89067d4d93bc4d079c1ea253431",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eade92e_160b59af",
+        "filename": "api/voip/voip_engine_factory.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-11T10:55:59Z",
+      "side": 1,
+      "message": "We don\u0027t generally deal with OOM errors, because it\u0027s too hard. So feel free to keep just the first sentence here.",
+      "revId": "f33a3c75aa2da89067d4d93bc4d079c1ea253431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60a0e860_6d34870a",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-11T10:55:59Z",
+      "side": 1,
+      "message": "Describe what happens if this is called more than once? Both if the previous call failed and succeeded.",
+      "revId": "f33a3c75aa2da89067d4d93bc4d079c1ea253431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
