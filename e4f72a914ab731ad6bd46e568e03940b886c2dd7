@@ -18,6 +18,63 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bef94895_a0e3e57c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "(I also went back through old unresolved comment threads and responded to the ones that may have been waiting on me.)",
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e20ca32c_5b635c9d",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "nit: 8 chars",
+      "range": {
+        "startLine": 261,
+        "startChar": 40,
+        "endLine": 261,
+        "endChar": 46
+      },
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c7aae2f_c5c2a0f9",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "By the way, existing issue so no need to do anything in this CL, but you might want to look at SSL_CTX_set_cert_verify_callback for the X509 path. SSL_CTX_set_cert_verify_callback replaces the certificate verification operation altogether, while SSL_CTX_set_verify\u0027s callback runs the normal X.509 verification but lets you override individual failures. It\u0027ll actually get called potentially multiple times. At least for the ssl_cert_verifier_ path, you probably don\u0027t want that. (That\u0027s why the callback takes an ok parameter and such.)\n\nI think it\u0027d look something like:\n\n SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, ExistingLoggingThingOrMaybeJustOmitThis);\n SSL_CTX_set_cert_verify_callback(ctx, SSLVerifyCallback, nullptr);\n\nint ExistingLoggingThingOrMaybeJustOmitThis(int ok, X509_STORE_CTX* store) {\n#if !defined(NDEBUG)\n  if (!ok) {\n    char data[256];\n    X509* cert \u003d X509_STORE_CTX_get_current_cert(store);\n    int depth \u003d X509_STORE_CTX_get_error_depth(store);\n    int err \u003d X509_STORE_CTX_get_error(store);\n\n    RTC_DLOG(LS_INFO) \u003c\u003c \"Error with certificate at depth: \" \u003c\u003c depth;\n    X509_NAME_oneline(X509_get_issuer_name(cert), data, sizeof(data));\n    RTC_DLOG(LS_INFO) \u003c\u003c \"  issuer  \u003d \" \u003c\u003c data;\n    X509_NAME_oneline(X509_get_subject_name(cert), data, sizeof(data));\n    RTC_DLOG(LS_INFO) \u003c\u003c \"  subject \u003d \" \u003c\u003c data;\n    RTC_DLOG(LS_INFO) \u003c\u003c \"  err     \u003d \" \u003c\u003c err \u003c\u003c \":\"\n                      \u003c\u003c X509_verify_cert_error_string(err);\n  }\n#endif\n  return ok;\n}\n\nint SSLVerifyCallback(X509_STORE_CTX *store, void *arg) {\n  // Get our stream pointer from the store\n  SSL* ssl \u003d reinterpret_cast\u003cSSL*\u003e(\n      X509_STORE_CTX_get_ex_data(store, SSL_get_ex_data_X509_STORE_CTX_idx()));\n\n  OpenSSLAdapter* stream \u003d\n      reinterpret_cast\u003cOpenSSLAdapter*\u003e(SSL_get_app_data(ssl));\n  // Probably the SSLVerifyInternal/SSLVerifyCallback split with\n  // ignore_bad_cert_ and whatnot.\n  if (stream_-\u003essl_cert_verifier_ \u003d\u003d nullptr) {\n    // Use the built-in verifier.\n    return X509_verify_cert(store);\n  }\n\n  // Use ssl_cert_verifier_.\n  ...\n}\n\nOpenSSL\u0027s API is the worst... :-(",
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf1e08b2_08255777",
@@ -31,6 +88,64 @@
       "writtenOn": "2020-11-04T01:17:01Z",
       "side": 1,
       "message": "Should I just call TLS_method to avoid having to do this for now?",
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e44102_576028ae",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "No strong feelings either way. Using TLS_with_buffers_method is still a memory improvement by not retaining the X509 objects after the handshake.",
+      "parentUuid": "bf1e08b2_08255777",
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d94a4892_3f59abb7",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "bssl::UniquePtr\u003cX509\u003e x509(X509_parse_from_buffer(leaf)).\n\nThat\u0027s a little shorter and it causes the X509 object to internally share a few buffers with the CRYPTO_BUFFER (since we know its immutable). TLS_method() does this internally.",
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80979461_f751d18f",
+        "filename": "rtc_base/openssl_utility_unittest.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "Nit: It\u0027s the same for non-empty vectors, but cert_buffers.data().",
+      "range": {
+        "startLine": 210,
+        "startChar": 46,
+        "endLine": 210,
+        "endChar": 64
+      },
       "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

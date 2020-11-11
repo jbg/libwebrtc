@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "b4841c37_45fd2774",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "I didn\u0027t have time to go through the CL yet but I will do it this week.\n\nAn early question, I was expecting some binary size reduction but instead I see binary size going up so I suspect the linker is not yet able to remove x509 related code.\n\nDavid, is there a macro to define or something like that to cause x509 code to be stripped or are we still depending on it in this CL?",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "b8294e4e_b61a3b1c",
         "filename": "/PATCHSET_LEVEL",
@@ -32,10 +33,10 @@
       "message": "We are still depending on it, specifically in LoadBuiltinSSLRootCertificates. Which isn\u0027t required by chromium at least, but is for native apps.\n\nI plan to try moving the code for using the system certificate stores from chromium to webrtc for this and other reasons.",
       "parentUuid": "b4841c37_45fd2774",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "4b0e37d5_9b48e7b9",
         "filename": "/PATCHSET_LEVEL",
@@ -49,10 +50,10 @@
       "side": 1,
       "message": "Note that review for this is not a high priority, its on the backburner for me right now.",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "842529de_5458b19d",
         "filename": "/PATCHSET_LEVEL",
@@ -67,10 +68,10 @@
       "message": "\u003e We are still depending on it, specifically in LoadBuiltinSSLRootCertificates. Which isn\u0027t required by chromium at least, but is for native apps.\n\u003e \n\u003e I plan to try moving the code for using the system certificate stores from chromium to webrtc for this and other reasons.\n\nOk, now I remember. Thanks.",
       "parentUuid": "b8294e4e_b61a3b1c",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "c1eb6506_f2e363bb",
         "filename": "/PATCHSET_LEVEL",
@@ -85,10 +86,10 @@
       "message": "SG, but I think it is an important (and awaited, since it comes back every few months) change so I think it would be nice to keep moving this. Maybe slowly but since you have already done part of the work it would be nice to get the benefits.",
       "parentUuid": "4b0e37d5_9b48e7b9",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "b239cfac_628aa5c0",
         "filename": "/PATCHSET_LEVEL",
@@ -102,10 +103,10 @@
       "side": 1,
       "message": "I am not enamored of the type hierarchy proposed here.\n\nWe have SSLCertificate, with sublcasses BoringSSLCertificate and OpenSSLCertificate (and similar things in other places, I think). Then we have parts of the implementation of OpenSSLCertificate calling into BoringSSLCertificate depending on a compile-time flag (if I read it rightly).\n\nThis is not going to be easy to maintain, because it\u0027s not easy to explain.\n\nI would be happier if the SSLCertificate API was fully implemented by each of the subclasses, without cross-references between them, and the common code was extracted to shared utilities.\n\nThat might be a larger CL, but might get us to a better place in the end.\n\nBTW: The presubmit error is because of the blank line between Bug: and Change-Id, I think.",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "54aaf7a4_911e19d9",
         "filename": "/PATCHSET_LEVEL",
@@ -120,10 +121,10 @@
       "message": "\u003e Then we have parts of the implementation of OpenSSLCertificate calling into BoringSSLCertificate depending on a compile-time flag (if I read it rightly).\n\nWhere are you seeing that? This CL doesn\u0027t even modify OpenSSLCertificate. Are you talking about OpenSSLStreamAdapter? It\u0027s really \"OpenSSLOrBoringSSLStreamAdapter\" but that name seems unwieldy.",
       "parentUuid": "b239cfac_628aa5c0",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "2df85efa_3e35640e",
         "filename": "/PATCHSET_LEVEL",
@@ -138,10 +139,10 @@
       "message": "Yes, it\u0027s OpenSSLStreamAdapter that is the confused object. We could rename it to SSLStreamAdapterImpl, or we could complete the job of separation.",
       "parentUuid": "54aaf7a4_911e19d9",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "c539e8d9_269155c1",
         "filename": "/PATCHSET_LEVEL",
@@ -155,10 +156,10 @@
       "side": 1,
       "message": "You\u0027re right.\n",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "211aca19_506d0b82",
         "filename": "/PATCHSET_LEVEL",
@@ -173,10 +174,10 @@
       "message": "OpenSSLStreamAdapter still is an accurate name though, since either way it\u0027s using *some* OpenSSL implementation. But I don\u0027t know if it would be worth splitting into two classes, when 90% of the code would be duplicated. SSLStreamAdapterImpl seems like the lesser of two evils, but would we then rename the other 5 openssl_-prefixed files?\n\nWhat if \"openssl_certificate\" were \"legacy_openssl_certificate\" instead? Maybe I\u0027m thinking about it too hard",
       "parentUuid": "2df85efa_3e35640e",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "8f45811b_e01c4bd6",
         "filename": "rtc_base/BUILD.gn",
@@ -196,10 +197,10 @@
         "endChar": 19
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6c60c202_2769c284",
         "filename": "rtc_base/BUILD.gn",
@@ -220,10 +221,10 @@
         "endChar": 19
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6ee03e96_3dea8f11",
         "filename": "rtc_base/BUILD.gn",
@@ -244,10 +245,34 @@
         "endChar": 19
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "35bc242f_befa292e",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "(No strong preferences on my end. I don\u0027t know how you all handle build flags.)",
+      "parentUuid": "6ee03e96_3dea8f11",
+      "range": {
+        "startLine": 886,
+        "startChar": 6,
+        "endLine": 886,
+        "endChar": 19
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "35ddefa8_5835524f",
         "filename": "rtc_base/boringssl_certificate.cc",
@@ -267,10 +292,10 @@
         "endChar": 25
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "29ab48d6_13e4f605",
         "filename": "rtc_base/boringssl_certificate.cc",
@@ -291,10 +316,10 @@
         "endChar": 25
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "34274020_d9c6e371",
         "filename": "rtc_base/openssl_adapter.cc",
@@ -314,10 +339,10 @@
         "endChar": 34
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "0edc3f09_1e477f52",
         "filename": "rtc_base/openssl_adapter.cc",
@@ -338,10 +363,10 @@
         "endChar": 34
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "24589371_289d8f18",
         "filename": "rtc_base/openssl_adapter.cc",
@@ -355,10 +380,10 @@
       "side": 1,
       "message": "It\u0027s been a while but I have no idea why I added this #ifdef; possibly because I was planning to change VerifyPeerCertMatchesHost but didn\u0027t end up doing so. Went ahead and removed it.",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "7a26a8ee_c6ca6b5e",
         "filename": "rtc_base/openssl_adapter.cc",
@@ -372,10 +397,10 @@
       "side": 1,
       "message": "Optional: Not sure what WebRTC\u0027s preferences are, but I think this would be easier to read with early returns. Perhaps:\n\n  OpenSSLAdapter* stream \u003d\n      reinterpret_cast\u003cOpenSSLAdapter*\u003e(SSL_get_app_data(ssl));\n  if (stream-\u003essl_cert_verifier_ \u003d\u003d nullptr) {\n    RTC_LOG(LS_WARNING) \u003c\u003c \"Built-in trusted root certificates disabled but no \"\n                           \"SSL verify callback provided.\";\n    return ssl_verify_invalid;\n  }\n\n  const STACK_OF(CRYPTO_BUFFER)* chain \u003d SSL_get0_peer_certificates(ssl);\n  if (sk_CRYPTO_BUFFER_num(chain) \u003d\u003d 0) {\n    RTC_LOG(LS_ERROR) \u003c\u003c \"Peer certificate chain empty?\";\n    return ssl_verify_invalid;\n  }\n\n  BoringSSLCertificate cert(bssl::UpRef(sk_CRYPTO_BUFFER_value(chain, 0)));\n  if (stream-\u003essl_cert_verifier_-\u003eVerify(cert)) {\n    stream-\u003ecustom_cert_verifier_status_ \u003d true;\n    RTC_LOG(LS_INFO) \u003c\u003c \"Validated certificate using custom callback\";\n    return ssl_verify_ok;\n  }\n\n  RTC_LOG(LS_WARNING) \u003c\u003c \"Failed to verify certificate using custom callback\";\n  if (stream-\u003eignore_bad_cert_) {\n    RTC_DLOG(LS_WARNING) \u003c\u003c \"Ignoring cert error while verifying cert chain\";\n    return ssl_verify_ok;\n  }\n\n  return ssl_verify_invalid;\n\n(FWIW, the peer certificate chain should never be empty.) You could also move the bottom half of the function to some helper (would return a bool that this converts to the enum) shared with the OpenSSL version, though I guess it\u0027s also not very long.",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "257f1549_c43cdfdc",
         "filename": "rtc_base/openssl_adapter.cc",
@@ -390,10 +415,10 @@
       "message": "+1 for early returns.",
       "parentUuid": "7a26a8ee_c6ca6b5e",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "381f7e0e_074010d7",
         "filename": "rtc_base/openssl_adapter.cc",
@@ -408,10 +433,28 @@
       "message": "The reason for the lack of early returns is that bad certificates may be ignored due to ignore_bad_cert_ at the end of the function; same is true of the existing SSLVerifyCallback.\n\nI went ahead and split it into two functions, \"SSLVerifyCallback\" and\"SSLVerifyInternal\". It means we have four verification functions in total to keep track of though; let me know if you want me to change it back.",
       "parentUuid": "257f1549_c43cdfdc",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b6223ab_2537e201",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "(Seems reasonable. I\u0027ll go ahead and resolve this thread since I opened it.)",
+      "parentUuid": "381f7e0e_074010d7",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
       "key": {
         "uuid": "9d44645a_c7020382",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -425,10 +468,10 @@
       "side": 1,
       "message": "I take it you all can\u0027t use bssl::UniquePtr here and don\u0027t have your own version? :-(",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "88db5723_f857298d",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -443,10 +486,10 @@
       "message": "This is one of the classes that\u0027s supposed to compile with OpenSSL, so can\u0027t use that here.",
       "parentUuid": "9d44645a_c7020382",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6380ffc7_7303c697",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -466,10 +509,10 @@
         "endChar": 26
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "71eb6b4c_52d098b7",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -490,10 +533,10 @@
         "endChar": 26
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e0f53c7e_a1b1cbae",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -513,10 +556,10 @@
         "endChar": 44
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "7a5b2f79_72ec80d5",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -537,10 +580,10 @@
         "endChar": 44
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "f8813903_4a6a57a3",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -554,10 +597,10 @@
       "side": 1,
       "message": "Nit: One hopes pem_string has no embedded NULs, but in case it does, I\u0027d pass pem_string.size() instead of -1.\n\n(From there, a super nitpicky optional nitpick would be to use pem_string.data() instead of pem_string.c_str(). They\u0027re guaranteed to be the same as of C++11, but I tend to use c_str() when I\u0027m relying on NUL termination and data() when I\u0027m pairing with size().)",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "fd385b13_cc6397a3",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -572,10 +615,10 @@
       "message": "Done. Though if it does have embedded NULs, why would we want them included?",
       "parentUuid": "f8813903_4a6a57a3",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "2a8bf5ec_872fa4c2",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -589,10 +632,10 @@
       "side": 1,
       "message": "Not sure why this was passing in \\0; as far as I can tell this is a user data pointer intended to be used by the callback, for which we\u0027re passing in nullptr...",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "12283f45_2d4a55b8",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -606,10 +649,10 @@
       "side": 1,
       "message": "This works, but rather than writing a \\0  and relying on the NUL terminator, BIO_get_mem_data returns the length of the buffer. (Probably prudent to reject \u003c\u003d 0, though I believe it can only fail if you have the wrong kind of BIO.)\n\nDitto below.",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "a579472f_a5e70e79",
         "filename": "rtc_base/openssl_key_pair.cc",
@@ -624,10 +667,10 @@
       "message": "Done",
       "parentUuid": "12283f45_2d4a55b8",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "4acca7f8_1652c943",
         "filename": "rtc_base/openssl_key_pair.h",
@@ -647,10 +690,10 @@
         "endChar": 59
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "dafc38a3_02933c86",
         "filename": "rtc_base/openssl_key_pair.h",
@@ -671,10 +714,10 @@
         "endChar": 59
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "b553d095_35a0bd94",
         "filename": "rtc_base/openssl_key_pair.h",
@@ -688,10 +731,10 @@
       "side": 1,
       "message": "Probably worth documenting whether this takes ownership of pkey or not. (Looks like it\u0027s meant to takes ownership.)",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "fc8ec9e8_caadfc15",
         "filename": "rtc_base/openssl_key_pair.h",
@@ -706,10 +749,10 @@
       "message": "Done",
       "parentUuid": "b553d095_35a0bd94",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "c196dac3_bf30d1c3",
         "filename": "rtc_base/openssl_key_pair.h",
@@ -729,10 +772,10 @@
         "endChar": 9
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "44f5d788_719d3edd",
         "filename": "rtc_base/openssl_key_pair.h",
@@ -753,10 +796,10 @@
         "endChar": 9
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "bb4d0750_1f2c8ee1",
         "filename": "rtc_base/openssl_session_cache_unittest.cc",
@@ -776,10 +819,10 @@
         "endChar": 43
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "9f45cfd3_777d434d",
         "filename": "rtc_base/openssl_session_cache_unittest.cc",
@@ -800,10 +843,10 @@
         "endChar": 43
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "51c9d6e8_706b8178",
         "filename": "rtc_base/openssl_stream_adapter.cc",
@@ -823,10 +866,10 @@
         "endChar": 25
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "ced4eb8b_9751623c",
         "filename": "rtc_base/openssl_stream_adapter.cc",
@@ -847,10 +890,10 @@
         "endChar": 25
       },
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e8bfab2f_7fdb0db6",
         "filename": "rtc_base/openssl_stream_adapter.cc",
@@ -864,10 +907,28 @@
       "side": 1,
       "message": "I forgot about this TODO. David, would using ssl_verify_retry buy us anything? Doesn\u0027t seem like it would make any difference; either this class needs to keep track of whether it\u0027s waiting (which it already has to do for the X509 implementation) or BoringSSL does.\n\nI guess you could argue that having BoringSSL handle it avoids the risk of WebRTC making a mistake.",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9994e57_3b297de4",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "Looks like I missed this but picked it back up again with https://webrtc-review.googlesource.com/c/src/+/174120/16/rtc_base/openssl_stream_adapter.cc#1125, so marking this as resolved.",
+      "parentUuid": "e8bfab2f_7fdb0db6",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "15bc8d02_1669439b",
         "filename": "rtc_base/openssl_utility.cc",
@@ -881,10 +942,28 @@
       "side": 1,
       "message": "I don\u0027t remember if I pointed this out, but I reimplemented this using string_view rather than copying all the necessary functions from BoringSSL. I was careful to make sure this had all the necessary restrictions and effectively does the same thing, would be good to have another pair of eyes though. It did pass all the tests at least.\n\nExample of what the string views will be:\n\npattern: foo*.google.com\nhost: foobar.google.com\n\npattern prefix/suffix: \"foo\", \".google.com\"\nhost prefix/wildcard match/suffix:  \"foo\", \"bar\", \".google.com\"",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d09ca98_11eec003",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "(Looks like this is no longer applicable.)",
+      "parentUuid": "15bc8d02_1669439b",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "ed1cde48_e84acb48",
         "filename": "rtc_base/openssl_utility_unittest.cc",
@@ -898,8 +977,25 @@
       "side": 1,
       "message": "I don\u0027t necessarily have to make the tests use TLS_with_buffers_method, but this did let me observe the difference in binary size easily. Any thoughts?",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b62fb2ce_58b9e852",
+        "filename": "rtc_base/openssl_utility_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-11-11T19:58:33Z",
+      "side": 1,
+      "message": "No strong feelings either way here.",
+      "parentUuid": "ed1cde48_e84acb48",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
