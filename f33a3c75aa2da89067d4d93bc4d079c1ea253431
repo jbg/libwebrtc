@@ -69,6 +69,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bce62c60_dd1ae4c6",
+        "filename": "api/voip/voip_engine_factory.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-11T21:08:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eade92e_160b59af",
+      "revId": "f33a3c75aa2da89067d4d93bc4d079c1ea253431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60a0e860_6d34870a",
@@ -82,6 +100,24 @@
       "writtenOn": "2020-11-11T10:55:59Z",
       "side": 1,
       "message": "Describe what happens if this is called more than once? Both if the previous call failed and succeeded.",
+      "revId": "f33a3c75aa2da89067d4d93bc4d079c1ea253431",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85bf73a3_e9e00835",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-11T21:08:51Z",
+      "side": 1,
+      "message": "I tried to capture the called-more-than-once in \"Returns true if ADM is successfully initialized or already in such state.\" I will modify the comment a bit more here.\n\nAlso I don\u0027t think it can fail and succeed next time as there is audio device issue that wouldn\u0027t go away unless external fix is applied (e.g changing audio device module).",
+      "parentUuid": "60a0e860_6d34870a",
       "revId": "f33a3c75aa2da89067d4d93bc4d079c1ea253431",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
