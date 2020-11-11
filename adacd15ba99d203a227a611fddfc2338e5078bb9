@@ -194,6 +194,24 @@
       "parentUuid": "80643bef_3fdb7c8d",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d717136_a422b9ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-11T10:38:56Z",
+      "side": 1,
+      "message": "I would advise to err on the side of less complexity here. If these codes are to be useful, callers will need to write switch statements and handle them all, on every call. I may be wrong, but most callers will probably want to distinguish at most two cases: errors like hw init failure, and errors like API misuse. Some callers will want to handle the first sort of error and crash on the second, some callers will want to handle them both, and some callers will want to crash on both of them because they don\u0027t want to deal with errors.\n\nHere\u0027s where something like absl::Status would come in handy, since it does basically this, just with a bit more granularity, and it provides a way to pass an error string; this last thing is important, because it allows callers to just log the string.",
+      "parentUuid": "7cb1fbb9_9c2ceee0",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
