@@ -212,6 +212,24 @@
       "parentUuid": "7cb1fbb9_9c2ceee0",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68f900ad_260cdd91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-11T22:07:53Z",
+      "side": 1,
+      "message": "I think we are looking for same solution here with same concerns. This was the main reason on what we had agreed in original implementation on VoipEngine.\n\n1) Comment on invalid channel id usage to warn caller and ignore it but log it internally so that caller can catch with error logging enabled. Ultimately ChannelId validity is caller\u0027s responsibility and they should pay attention.\n\n2) Return boolean on critical errors that caller should handle (e.g recording failure) with appropriate comment on the interfaces.\n\nLet me know when absl::Status usage would gain the traction in WebRTC codebase but meanwhile, I like to keep this simple and concise as well. I would assume it would be bigger and longer change when that takes place.",
+      "parentUuid": "1d717136_a422b9ab",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
