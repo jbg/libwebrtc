@@ -176,6 +176,24 @@
       "parentUuid": "18b56eba_b9a8bf82",
       "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cb1fbb9_9c2ceee0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-11T02:43:54Z",
+      "side": 1,
+      "message": "ok, that\u0027s fine as well. I think we could transition internal projects and remove them afterwards. I am thinking about using enum class in separate voip_result.h header to indicate various returns as follows. WDYT?\n\n// VoipEngine Result to propagate VoIP API result.\n//\nenum class VeResult : int {\n  kSuccess \u003d 0,\n  kInvalidChannelId,  // Invalid ChannelId used by caller.\n  kMicInitFail,       // Failed to init microphone.\n  KSpeakerInitFail,   // Failed to init speaker.\n};",
+      "parentUuid": "80643bef_3fdb7c8d",
+      "revId": "adacd15ba99d203a227a611fddfc2338e5078bb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
