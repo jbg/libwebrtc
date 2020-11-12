@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28703f25_480a2c81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-12T14:14:13Z",
+      "side": 1,
+      "message": "Looks like there is a TSan failure related. I didn\u0027t look into it but it might be related.",
+      "revId": "9b9bb166e1e8f82cfad03c75407fc5af9db137fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5575f6c5_c284c30a",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-12T14:14:13Z",
+      "side": 1,
+      "message": "Should this be LS_VERBOSE level?\n\nThis might log more than we need.",
+      "range": {
+        "startLine": 530,
+        "startChar": 2,
+        "endLine": 530,
+        "endChar": 37
+      },
+      "revId": "9b9bb166e1e8f82cfad03c75407fc5af9db137fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
