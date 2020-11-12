@@ -447,6 +447,8 @@ EmulatedEndpointImpl::EmulatedEndpointImpl(
       ip.ToString(), "Endpoint id=" + std::to_string(id_), prefix,
       prefix_length, type_);
   network_->AddIP(ip);
+  // Configure direct loopback.
+  router_.SetReceiver(peer_local_addr_, this);
 
   enabled_state_checker_.Detach();
 }
@@ -525,6 +527,7 @@ rtc::IPAddress EmulatedEndpointImpl::GetPeerLocalAddress() const {
 
 void EmulatedEndpointImpl::OnPacketReceived(EmulatedIpPacket packet) {
   RTC_DCHECK_RUN_ON(task_queue_);
+  RTC_LOG(INFO) << "Packet received";
   RTC_CHECK(packet.to.ipaddr() == peer_local_addr_)
       << "Routing error: wrong destination endpoint. Packet.to.ipaddr()=: "
       << packet.to.ipaddr().ToString()
