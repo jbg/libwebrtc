@@ -67,6 +67,24 @@
       "message": "Shouldn\u0027t this be 127 rather than 128?\n\nalso would suggest k127Utf8CharactersLength to make it clear we\u0027re counting bytes, not chars",
       "revId": "40d5c548fce9bfa325c7658fbc3512c79a1bc5be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8439addd_b34e1af8",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-11-12T10:28:36Z",
+      "side": 1,
+      "message": "k127Utf8CharactersLengthInBytes should be adequately descriptive :-)",
+      "parentUuid": "3aa907db_a294dc2e",
+      "revId": "40d5c548fce9bfa325c7658fbc3512c79a1bc5be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
