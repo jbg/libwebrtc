@@ -894,6 +894,7 @@ void Port::Destroy() {
   RTC_DCHECK(connections_.empty());
   RTC_LOG(LS_INFO) << ToString() << ": Port deleted";
   SignalDestroyed(this);
+  SendPortDestroyed(this);
   delete this;
 }
 
