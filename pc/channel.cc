@@ -150,6 +150,7 @@ BaseChannel::~BaseChannel() {
   RTC_DCHECK_RUN_ON(worker_thread_);
 
   // Eats any outstanding messages or packets.
+  worker_thread_->Clear(&packet_invoker_);
   worker_thread_->Clear(&invoker_);
   worker_thread_->Clear(this);
   // We must destroy the media channel before the transport channel, otherwise
@@ -193,6 +194,7 @@ void BaseChannel::DisconnectFromRtpTransport() {
   rtp_transport_->SignalNetworkRouteChanged.disconnect(this);
   rtp_transport_->SignalWritableState.disconnect(this);
   rtp_transport_->SignalSentPacket.disconnect(this);
+  previous_demuxer_criteria_ = {};
 }
 
 void BaseChannel::Init_w(webrtc::RtpTransportInternal* rtp_transport) {
@@ -497,7 +499,7 @@ void BaseChannel::OnRtpPacket(const webrtc::RtpPacketReceived& parsed_packet) {
 
   auto packet_buffer = parsed_packet.Buffer();
 
-  invoker_.AsyncInvoke<void>(
+  packet_invoker_.AsyncInvoke<void>(
       RTC_FROM_HERE, worker_thread_, [this, packet_buffer, packet_time_us] {
         RTC_DCHECK_RUN_ON(worker_thread());
         media_channel_->OnPacketReceived(packet_buffer, packet_time_us);
@@ -522,9 +524,25 @@ void BaseChannel::UpdateRtpHeaderExtensionMap(
 
 bool BaseChannel::RegisterRtpDemuxerSink() {
   RTC_DCHECK(rtp_transport_);
-  return network_thread_->Invoke<bool>(RTC_FROM_HERE, [this] {
+  if (demuxer_criteria_ == previous_demuxer_criteria_) {
+    return true;
+  }
+  bool ret = network_thread_->Invoke<bool>(RTC_FROM_HERE, [this] {
     return rtp_transport_->RegisterRtpDemuxerSink(demuxer_criteria_, this);
   });
+  if (ret) {
+    previous_demuxer_criteria_ = demuxer_criteria_;
+  } else {
+    // RegisterRtpDemuxerSink's failure means that no criteria will be
+    // registered for us.
+    previous_demuxer_criteria_ = {};
+  }
+  // Clear out any pending packets; these packets were delivered to us based on
+  // the previous demuxer criteria, so giving them to the media channel would
+  // possibly result in the creation of a receive stream that this channel is no
+  // longer meant to own.
+  worker_thread_->Clear(&packet_invoker_);
+  return ret;
 }
 
 void BaseChannel::EnableMedia_w() {
