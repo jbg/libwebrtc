@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8154361_460a636c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-11-15T21:59:05Z",
+      "side": 1,
+      "message": "sprang: PTAL at call/\nhta: PTAL at pc/",
+      "revId": "a556781c6890b7c626e62e6a5bb5429d1e24995a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8b8c60_7b1ae173",
+        "filename": "pc/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-11-15T21:59:05Z",
+      "side": 1,
+      "message": "I\u0027m introducing this check so that we don\u0027t clear pending packets every single time a description is set, possibly resulting in unnecessarily dropped packets.\n\nThough this check would have been desirable even before this change. RegisterRtpDemuxerSink removes any SSRC-\u003esink mappings, meaning that when using MID-based demuxing, you would have to wait for another packet with a MID extension or in order to relearn the mapping. Which would cause dropped packets every time a description is set, unless the MID extension is used on every single packet.",
+      "revId": "a556781c6890b7c626e62e6a5bb5429d1e24995a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
