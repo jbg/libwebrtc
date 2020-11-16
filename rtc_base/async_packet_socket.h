@@ -13,6 +13,7 @@
 
 #include <vector>
 
+#include "rtc_base/callback_list.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/dscp.h"
 #include "rtc_base/network/sent_packet.h"
@@ -108,6 +109,14 @@ class RTC_EXPORT AsyncPacketSocket : public sigslot::has_slots<> {
                    // timestamp by value.
                    const int64_t&>
       SignalReadPacket;
+  webrtc::CallbackList<AsyncPacketSocket*,
+                       const char*,
+                       size_t,
+                       const SocketAddress&,
+                       // TODO(bugs.webrtc.org/9584): Change to passing the
+                       // int64_t timestamp by value.
+                       const int64_t&>
+      ReadPacket;
 
   // Emitted each time a packet is sent.
   sigslot::signal2<AsyncPacketSocket*, const SentPacket&> SignalSentPacket;

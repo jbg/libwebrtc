@@ -18,6 +18,7 @@
 #include "api/candidate.h"
 #include "p2p/base/transport_description.h"
 #include "rtc_base/async_packet_socket.h"
+#include "rtc_base/callback_list.h"
 #include "rtc_base/socket_address.h"
 
 namespace rtc {
@@ -113,6 +114,7 @@ class PortInterface {
   // Signaled when this port decides to delete itself because it no longer has
   // any usefulness.
   sigslot::signal1<PortInterface*> SignalDestroyed;
+  webrtc::CallbackList<PortInterface*> PortDestroyed;
 
   // Signaled when Port discovers ice role conflict with the peer.
   sigslot::signal1<PortInterface*> SignalRoleConflict;
