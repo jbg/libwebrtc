@@ -815,8 +815,9 @@ void BasicPortAllocatorSession::DoAllocate(bool disable_equivalent) {
 
       AllocationSequence* sequence =
           new AllocationSequence(this, networks[i], config, sequence_flags);
-      sequence->SignalPortAllocationComplete.connect(
-          this, &BasicPortAllocatorSession::OnPortAllocationComplete);
+      sequence->SignalPortAllocationComplete.AddReceiver(
+          [this](AllocationSequence* seq) { OnPortAllocationComplete(seq); });
+
       sequence->Init();
       sequence->Start();
       sequences_.push_back(sequence);
@@ -1238,8 +1239,12 @@ void AllocationSequence::Init() {
         rtc::SocketAddress(network_->GetBestIP(), 0),
         session_->allocator()->min_port(), session_->allocator()->max_port()));
     if (udp_socket_) {
-      udp_socket_->SignalReadPacket.connect(this,
-                                            &AllocationSequence::OnReadPacket);
+      udp_socket_->SubscribeReadPacket(
+          [this](rtc::AsyncPacketSocket* socket, const char* data, size_t size,
+                 const rtc::SocketAddress& remote_addr,
+                 const int64_t& packet_time_us) {
+            OnReadPacket(socket, data, size, remote_addr, packet_time_us);
+          });
     }
     // Continuing if |udp_socket_| is NULL, as local TCP and RelayPort using TCP
     // are next available options to setup a communication channel.
@@ -1388,7 +1393,7 @@ void AllocationSequence::OnMessage(rtc::Message* msg) {
     // If all phases in AllocationSequence are completed, no allocation
     // steps needed further. Canceling  pending signal.
     session_->network_thread()->Clear(this, MSG_ALLOCATION_PHASE);
-    SignalPortAllocationComplete(this);
+    SignalPortAllocationComplete.Send(this);
   }
 }
 
@@ -1423,7 +1428,8 @@ void AllocationSequence::CreateUDPPorts() {
     // UDPPort.
     if (IsFlagSet(PORTALLOCATOR_ENABLE_SHARED_SOCKET)) {
       udp_port_ = port.get();
-      port->SignalDestroyed.connect(this, &AllocationSequence::OnPortDestroyed);
+      port->SubscribePortDestroyed(
+          [this](PortInterface* port) { OnPortDestroyed(port); });
 
       // If STUN is not disabled, setting stun server address to port.
       if (!IsFlagSet(PORTALLOCATOR_DISABLE_STUN)) {
@@ -1562,7 +1568,9 @@ void AllocationSequence::CreateTurnPort(const RelayServerConfig& config) {
       relay_ports_.push_back(port.get());
       // Listen to the port destroyed signal, to allow AllocationSequence to
       // remove entrt from it's map.
-      port->SignalDestroyed.connect(this, &AllocationSequence::OnPortDestroyed);
+      port->SubscribePortDestroyed(
+          [this](PortInterface* port) { OnPortDestroyed(port); });
+
     } else {
       port = session_->allocator()->relay_port_factory()->Create(
           args, session_->allocator()->min_port(),
