@@ -201,6 +201,9 @@ if (rtc_include_tests) {
 
   rtc_test("modules_unittests") {
     testonly = true
+    if (is_ios) {
+      xctest_module_target = "//base/test:google_test_runner"
+    }
     defines = []
     sources = [ "module_common_types_unittest.cc" ]
 
