@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee4a851_b13cf893",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-16T19:55:52Z",
+      "side": 1,
+      "message": "Triggering a CQ dry run while doing the code review.",
+      "revId": "7eb3293db25fbc8ce666b1f5f54b56d832a575c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
