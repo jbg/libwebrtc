@@ -18,6 +18,7 @@
 #include "api/candidate.h"
 #include "p2p/base/transport_description.h"
 #include "rtc_base/async_packet_socket.h"
+#include "rtc_base/callback_list.h"
 #include "rtc_base/socket_address.h"
 
 namespace rtc {
@@ -113,6 +114,15 @@ class PortInterface {
   // Signaled when this port decides to delete itself because it no longer has
   // any usefulness.
   sigslot::signal1<PortInterface*> SignalDestroyed;
+  /**
+   * F: void(PortInterface*)
+   */
+  template <typename F>
+  void SubscribePortDestroyed(F&& callback) {
+    port_destroyed_.AddReceiver(std::forward<F>(callback));
+  }
+
+  void SendPortDestroyed(PortInterface* port) { port_destroyed_.Send(port); }
 
   // Signaled when Port discovers ice role conflict with the peer.
   sigslot::signal1<PortInterface*> SignalRoleConflict;
@@ -125,6 +135,23 @@ class PortInterface {
   sigslot::
       signal4<PortInterface*, const char*, size_t, const rtc::SocketAddress&>
           SignalReadPacket;
+  /**
+   * F: void(PortInterface*,
+              const char*,
+              size_t,
+              const rtc::SocketAddress&*)
+   */
+  template <typename F>
+  void SubscribeReadPacket(F&& callback) {
+    read_packet_.AddReceiver(std::forward<F>(callback));
+  }
+
+  void SendReadPacket(PortInterface* port,
+                      const char* s,
+                      size_t size,
+                      const rtc::SocketAddress& address) {
+    read_packet_.Send(port, s, size, address);
+  }
 
   // Emitted each time a packet is sent on this port.
   sigslot::signal1<const rtc::SentPacket&> SignalSentPacket;
@@ -132,6 +159,14 @@ class PortInterface {
   virtual std::string ToString() const = 0;
 
   virtual void GetStunStats(absl::optional<StunStats>* stats) = 0;
+
+ private:
+  webrtc::CallbackList<PortInterface*> port_destroyed_;
+  webrtc::CallbackList<PortInterface*,
+                       const char*,
+                       size_t,
+                       const rtc::SocketAddress&>
+      read_packet_;
 
  protected:
   PortInterface();
