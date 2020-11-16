@@ -454,6 +454,9 @@ template("rtc_test") {
       target_sdk_version = 23
       deps += [ webrtc_root + "test:native_test_java" ]
     }
+    if (is_ios) {
+      xctest_module_target = "//base/test:google_test_runner"
+    }
   }
 }
 
