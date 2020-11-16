@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "433b07f1_0ba01e17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 22
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-16T20:34:02Z",
+      "side": 1,
+      "message": "downstream",
+      "range": {
+        "startLine": 10,
+        "startChar": 63,
+        "endLine": 10,
+        "endChar": 70
+      },
+      "revId": "7eb3293db25fbc8ce666b1f5f54b56d832a575c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f22a84d_44299114",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 22
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-16T20:34:02Z",
+      "side": 1,
+      "message": "Feel free to skip this part.",
+      "range": {
+        "startLine": 11,
+        "startChar": 12,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "7eb3293db25fbc8ce666b1f5f54b56d832a575c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5ee4a851_b13cf893",
@@ -14,6 +60,138 @@
       "writtenOn": "2020-11-16T19:55:52Z",
       "side": 1,
       "message": "Triggering a CQ dry run while doing the code review.",
+      "revId": "7eb3293db25fbc8ce666b1f5f54b56d832a575c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78e9013f_efdfbbc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-16T20:34:02Z",
+      "side": 1,
+      "message": "First pass done.\n\nI want to look a bit more into SignalReadPacket and understand if we should just replace it everywhere or if we should instead go incremental (like you are doing). Incremental is better but it worth a second look.",
+      "revId": "7eb3293db25fbc8ce666b1f5f54b56d832a575c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f0a2960_adad96a4",
+        "filename": "p2p/base/port_interface.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-16T20:34:02Z",
+      "side": 1,
+      "message": "I see some places in tests that still use this one (e.g. https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/base/port_unittest.cc;l\u003d273;drc\u003dfa54364cea0be4ce3862bc1058ab58b935820de1), I think we should stop accessing this signal everywhere in WebRTC and only keep signaling on it while downstream code is updated and then just remove it since no clients will listen the signal.\n\nHere as well:\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/base/p2p_transport_channel.cc;l\u003d894-895;drc\u003dfa54364cea0be4ce3862bc1058ab58b935820de1\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/base/turn_port_unittest.cc;l\u003d338-339;drc\u003d3cb9c6afe749f20f8c50aa1fe7f39a2913f0a4f3\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/base/fake_port_allocator.h;l\u003d122-123;drc\u003df417238217396b52fd1e03a7ed6439e03cbc43f8\n\nThere might be others.",
+      "range": {
+        "startLine": 114,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 51
+      },
+      "revId": "7eb3293db25fbc8ce666b1f5f54b56d832a575c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9b4b041_4479fd36",
+        "filename": "p2p/base/port_interface.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-16T20:34:02Z",
+      "side": 1,
+      "message": "See my other comment on comments style.",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 5
+      },
+      "revId": "7eb3293db25fbc8ce666b1f5f54b56d832a575c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bfbb90c_c3deb56e",
+        "filename": "p2p/client/basic_port_allocator.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-16T20:34:02Z",
+      "side": 1,
+      "message": "Should this be replaced as well?",
+      "range": {
+        "startLine": 904,
+        "startChar": 2,
+        "endLine": 905,
+        "endChar": 77
+      },
+      "revId": "7eb3293db25fbc8ce666b1f5f54b56d832a575c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1f0322e_80886f4a",
+        "filename": "p2p/client/basic_port_allocator.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-16T20:34:02Z",
+      "side": 1,
+      "message": "Make this a private data member as well.",
+      "range": {
+        "startLine": 368,
+        "startChar": 2,
+        "endLine": 374,
+        "endChar": 73
+      },
+      "revId": "7eb3293db25fbc8ce666b1f5f54b56d832a575c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00169491_1dbf58bc",
+        "filename": "rtc_base/async_packet_socket.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-16T20:34:02Z",
+      "side": 1,
+      "message": "This should use the \"//\" comment style.\n\nMaybe add also a sentence about when the callback will fire, etc.. I am not 100% we want to add callback signatures in all the places, I think it is easy to look up. Karl, WDYT?",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 5
+      },
       "revId": "7eb3293db25fbc8ce666b1f5f54b56d832a575c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
