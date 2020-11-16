@@ -80,6 +80,30 @@
       },
       "revId": "5c358f5a54c39692f77d41f7d7288319201d0dec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3525ded_9423889f",
+        "filename": "sdk/objc/base/RTCMacros.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-16T14:36:23Z",
+      "side": 1,
+      "message": "What about:\n\nRTC_OBJC_HAVE_LEGACY_RTC_RTP_FRAGMENTATION_HEADER\n\n?",
+      "parentUuid": "e5123f69_c0b94e1f",
+      "range": {
+        "startLine": 55,
+        "startChar": 22,
+        "endLine": 55,
+        "endChar": 47
+      },
+      "revId": "5c358f5a54c39692f77d41f7d7288319201d0dec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
