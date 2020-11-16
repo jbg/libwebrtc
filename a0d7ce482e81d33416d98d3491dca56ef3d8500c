@@ -16,6 +16,24 @@
       "message": "call/ lgtm\nBased on the bug description it sounds very difficult to write a test for this. :(\nIs that a fair assumption, or would it be feasible to add an integration test?",
       "revId": "a0d7ce482e81d33416d98d3491dca56ef3d8500c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf4313c7_390a4a5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-11-16T23:23:56Z",
+      "side": 1,
+      "message": "It\u0027s definitely not possible to reproduce these conditions at the PeerConnection level, but I was able to figure out a way to do it in channel_unittest.cc, which can control when each thread processes messages.",
+      "parentUuid": "5f755289_3ee58c0c",
+      "revId": "a0d7ce482e81d33416d98d3491dca56ef3d8500c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
