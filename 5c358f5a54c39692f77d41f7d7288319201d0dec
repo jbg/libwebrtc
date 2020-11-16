@@ -56,6 +56,30 @@
       },
       "revId": "5c358f5a54c39692f77d41f7d7288319201d0dec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5123f69_c0b94e1f",
+        "filename": "sdk/objc/base/RTCMacros.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-11-16T14:29:12Z",
+      "side": 1,
+      "message": "\u003e I find this quite hard to read. :) \n\nMe too...\n\n\u003e Should we use _?\n\nFeel free to suggest another name. I was considering  RTC_OBJC_HAVE_LEGACY_RTPFRAGMENTATIONHEADER?\n\nDoes it matter if the objc class name in in there verbatim (but in all caps).",
+      "parentUuid": "6d96c491_c3b51e64",
+      "range": {
+        "startLine": 55,
+        "startChar": 22,
+        "endLine": 55,
+        "endChar": 47
+      },
+      "revId": "5c358f5a54c39692f77d41f7d7288319201d0dec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
