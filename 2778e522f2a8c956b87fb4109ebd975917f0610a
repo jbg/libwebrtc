@@ -283,6 +283,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f69fb42_cbd2a299",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-11-17T17:30:03Z",
+      "side": 1,
+      "message": "Ah, didn\u0027t notice that, thank you.",
+      "parentUuid": "d911905f_73572695",
+      "range": {
+        "startLine": 247,
+        "startChar": 39,
+        "endLine": 247,
+        "endChar": 55
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2da91aa_fa62db4d",
@@ -320,6 +344,30 @@
       "side": 1,
       "message": "I don\u0027t think this is called that frequently...",
       "parentUuid": "e2da91aa_fa62db4d",
+      "range": {
+        "startLine": 35,
+        "startChar": 11,
+        "endLine": 35,
+        "endChar": 70
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dd7490d_21216021",
+        "filename": "test/network/emulated_turn_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-11-17T17:30:03Z",
+      "side": 1,
+      "message": "It is used in SendTo method to get local address.",
+      "parentUuid": "39c78d80_6afaf98f",
       "range": {
         "startLine": 35,
         "startChar": 11,
