@@ -77,11 +77,11 @@ class VoipCore : public VoipEngine,
   absl::optional<ChannelId> CreateChannel(
       Transport* transport,
       absl::optional<uint32_t> local_ssrc) override;
-  void ReleaseChannel(ChannelId channel_id) override;
-  bool StartSend(ChannelId channel_id) override;
-  bool StopSend(ChannelId channel_id) override;
-  bool StartPlayout(ChannelId channel_id) override;
-  bool StopPlayout(ChannelId channel_id) override;
+  StatusCode ReleaseChannel(ChannelId channel_id) override;
+  StatusCode StartSend(ChannelId channel_id) override;
+  StatusCode StopSend(ChannelId channel_id) override;
+  StatusCode StartPlayout(ChannelId channel_id) override;
+  StatusCode StopPlayout(ChannelId channel_id) override;
 
   // Implements VoipNetwork interfaces.
   void ReceivedRTPPacket(ChannelId channel_id,
