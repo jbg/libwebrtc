@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f43e53b_bee97e17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-11-17T10:15:48Z",
+      "side": 1,
+      "message": "Let me know if we should try another approach to fix this. An alternative could be to not reorder the layers based on max bitrate: https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/video_coding/utility/simulcast_rate_allocator.cc;l\u003d112 ",
+      "revId": "fb5a15cc9431c76b1df848fb9256801917cfd932",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
