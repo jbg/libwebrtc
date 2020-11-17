@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fdc1760_2b4cb3ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-11-17T07:35:20Z",
+      "side": 1,
+      "message": "Before okaying this - can you check out why https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d11908 (large amounts of CPU spent in ClearInternal()) was an issue, and ensure that this is not an issue in this particular usage of Clear()?\n\nCode looks good - and not re-registering a filter when the fiter is unchanged is a Very Good Thing!",
+      "revId": "4898b0b937f8b792bfb2ff4d62af755554409699",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
