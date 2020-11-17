@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cd7104a_df7df7cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-17T17:13:57Z",
+      "side": 1,
+      "message": "I like it! absl::Status would be better, but this is very similar in spirit (though far simpler), and can easily be transitioned later.",
+      "revId": "733440daef04170be211dd0d972a80ef7e966b9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ae91c9d_c2dc5d20",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-17T17:13:57Z",
+      "side": 1,
+      "message": "The name of this enum is webrtc::StatusCode, which seems a bit too generic. Rename to VoipStatusCode, or VoipBase::StatusCode?",
+      "revId": "733440daef04170be211dd0d972a80ef7e966b9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa353eec_5bfd69c1",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-17T17:13:57Z",
+      "side": 1,
+      "message": "Can you decorate this enum with RTC_WARN_UNUSED_RESULT, so that the compiler forces callers to do something with the value? absl::Status does this...",
+      "revId": "733440daef04170be211dd0d972a80ef7e966b9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
