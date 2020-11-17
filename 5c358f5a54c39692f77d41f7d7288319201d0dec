@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb1dd242_23f1aff6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-11-17T09:45:48Z",
+      "side": 1,
+      "message": "I still get lots of warnings, though:\n\n$ git cl upload\nRunning presubmit upload checks ...\nIgnoring /usr/local/google/home/nisse/hack/webrtc/src/PRESUBMIT.py; not a valid file name (cc, h, cpp, cu, cuh)\nDone processing /usr/local/google/home/nisse/hack/webrtc/src/PRESUBMIT.py\n\n** Presubmit Warnings **\nPylint (100 files using [\u0027--disable\u003dcyclic-import\u0027] on 48 cores)\n/usr/local/google/home/nisse/hack/depot_tools/pylint --args-on-stdin (2.45s) failed\nWarning: option ignore-iface-methods is obsolete and it is slated for removal in Pylint 1.6.\n************* Module quality_assessment.echo_path_simulation_factory\nC: 41, 0: Line too long (81/80) (line-too-long)\n************* Module quality_assessment.eval_scores_factory\nC: 43, 0: Line too long (84/80) (line-too-long)\n************* Module quality_assessment.echo_path_simulation\nC: 32, 0: Line too long (84/80) (line-too-long)\n************* Module quality_assessment.test_data_generation_factory\nC: 54, 0: Line too long (81/80) (line-too-long)\n************* Module quality_assessment.input_mixer\nC: 28, 0: Line too long (82/80) (line-too-long)\nC: 64, 0: Line too long (81/80) (line-too-long)\n\n(and a some hundred more lines). I don\u0027t see how that\u0027s related to the cl. A few are complaints on the PRESUBMIT.py file itself, though:\n\nFound lines longer than 80 characters (first 5 shown).\n  PRESUBMIT.py, line 149, 84 chars \\\n  PRESUBMIT.py, line 150, 82 chars \\\n  PRESUBMIT.py, line 215, 86 chars \\\n  PRESUBMIT.py, line 267, 86 chars \\\n  PRESUBMIT.py, line 349, 85 chars",
+      "parentUuid": "33ae5651_eff2e1f1",
+      "revId": "5c358f5a54c39692f77d41f7d7288319201d0dec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d96c491_c3b51e64",
@@ -96,6 +114,30 @@
       "side": 1,
       "message": "What about:\n\nRTC_OBJC_HAVE_LEGACY_RTC_RTP_FRAGMENTATION_HEADER\n\n?",
       "parentUuid": "e5123f69_c0b94e1f",
+      "range": {
+        "startLine": 55,
+        "startChar": 22,
+        "endLine": 55,
+        "endChar": 47
+      },
+      "revId": "5c358f5a54c39692f77d41f7d7288319201d0dec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d50068_055c6250",
+        "filename": "sdk/objc/base/RTCMacros.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-11-17T09:45:48Z",
+      "side": 1,
+      "message": "Seems good enough to me. Done.",
+      "parentUuid": "a3525ded_9423889f",
       "range": {
         "startLine": 55,
         "startChar": 22,
