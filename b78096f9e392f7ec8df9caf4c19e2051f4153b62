@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd5ffb24_c8af2ab9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-17T22:29:31Z",
+      "side": 1,
+      "message": "Karl, I have updated all APIs to use return type. PTAL! Thanks!",
+      "revId": "b78096f9e392f7ec8df9caf4c19e2051f4153b62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99641310_76f727df",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-17T22:29:31Z",
+      "side": 1,
+      "message": "I used VoipResult instead of StatustCode in new patch. Please let me know what you think.",
+      "parentUuid": "bb700c29_a0d0e382",
+      "revId": "733440daef04170be211dd0d972a80ef7e966b9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa353eec_5bfd69c1",
