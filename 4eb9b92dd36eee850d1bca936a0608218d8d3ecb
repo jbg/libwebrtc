@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e311899_58284617",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T20:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c0a4dd0_f3b5bb15",
+      "range": {
+        "startLine": 89,
+        "startChar": 38,
+        "endLine": 89,
+        "endChar": 45
+      },
+      "revId": "4eb9b92dd36eee850d1bca936a0608218d8d3ecb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a43c42d1_f672ca94",
@@ -81,6 +105,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a62ec1f8_9102da83",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T20:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a43c42d1_f672ca94",
+      "range": {
+        "startLine": 247,
+        "startChar": 46,
+        "endLine": 247,
+        "endChar": 47
+      },
+      "revId": "4eb9b92dd36eee850d1bca936a0608218d8d3ecb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a531d222_5932c46b",
@@ -94,6 +142,30 @@
       "writtenOn": "2020-11-17T19:36:55Z",
       "side": 1,
       "message": "const?",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 3
+      },
+      "revId": "4eb9b92dd36eee850d1bca936a0608218d8d3ecb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c439ec1_73bc0ad9",
+        "filename": "test/network/emulated_turn_server.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T20:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a531d222_5932c46b",
       "range": {
         "startLine": 69,
         "startChar": 2,
