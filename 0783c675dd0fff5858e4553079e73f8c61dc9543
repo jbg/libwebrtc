@@ -22,6 +22,70 @@
       },
       "revId": "0783c675dd0fff5858e4553079e73f8c61dc9543",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21864048_4bd9d4a1",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-17T13:45:02Z",
+      "side": 1,
+      "message": "Hmm. I\u0027d say that these lines can absolutely be reached---it\u0027s just that this binary wants to handle those eventualities by printing messages and terminating. So RTC_CHECK_NOTREACHED() seems like morally the wrong thing to use.",
+      "parentUuid": "29aad0e0_9c2d0ebe",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "0783c675dd0fff5858e4553079e73f8c61dc9543",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7169d018_4e4067e5",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-17T13:45:02Z",
+      "side": 1,
+      "message": "Remove this comment.",
+      "revId": "0783c675dd0fff5858e4553079e73f8c61dc9543",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "860a5414_ab976c6c",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-17T13:45:02Z",
+      "side": 1,
+      "message": "Add prefix here too?",
+      "range": {
+        "startLine": 460,
+        "startChar": 50,
+        "endLine": 460,
+        "endChar": 55
+      },
+      "revId": "0783c675dd0fff5858e4553079e73f8c61dc9543",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
