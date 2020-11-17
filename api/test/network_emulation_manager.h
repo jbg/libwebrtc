@@ -13,6 +13,7 @@
 
 #include <functional>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "api/array_view.h"
@@ -66,6 +67,34 @@ struct EmulatedEndpointConfig {
   StatsGatheringMode stats_gathering_mode = StatsGatheringMode::kDefault;
 };
 
+struct EmulatedTURNServerConfig {
+  EmulatedEndpointConfig client_config;
+  EmulatedEndpointConfig peer_config;
+};
+
+// EmulatedTURNServer is an abstraction for a TURN server.
+class EmulatedTURNServerInterface {
+ public:
+  struct IceServerConfig {
+    std::string username;
+    std::string password;
+    std::string url;
+  };
+
+  virtual ~EmulatedTURNServerInterface() {}
+
+  // Get an IceServer configuration suitable to add to a PeerConnection.
+  virtual IceServerConfig GetIceServerConfig() = 0;
+
+  // Get client endpoint.
+  virtual EmulatedEndpoint* GetClientEndpoint() = 0;
+
+  // Get address to client socket.
+  virtual rtc::SocketAddress GetClientEndpointAddress() = 0;
+
+  // Get peer endpoint.
+  virtual EmulatedEndpoint* GetPeerEndpoint() = 0;
+};
 
 // Provide interface to obtain all required objects to inject network emulation
 // layer into PeerConnection. Also contains information about network interfaces
@@ -210,6 +239,13 @@ class NetworkEmulationManager {
       rtc::ArrayView<EmulatedEndpoint*> endpoints,
       std::function<void(std::unique_ptr<EmulatedNetworkStats>)>
           stats_callback) = 0;
+
+  // Create a EmulatedTURNServer.
+  // The TURN server has 2 endpoints that needs to be connected with routes,
+  // - GetClientEnpoint() - the endpoint that accepts TURN allocations.
+  // - GetPeerEndpoint() - the endpoint that is connected "to the internet".
+  virtual EmulatedTURNServerInterface* CreateTURNServer(
+      EmulatedTURNServerConfig config) = 0;
 };
 
 }  // namespace webrtc
