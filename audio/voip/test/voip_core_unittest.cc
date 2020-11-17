@@ -74,8 +74,8 @@ TEST_F(VoipCoreTest, BasicVoipCoreOperation) {
   voip_core_->SetSendCodec(*channel, kPcmuPayload, kPcmuFormat);
   voip_core_->SetReceiveCodecs(*channel, {{kPcmuPayload, kPcmuFormat}});
 
-  EXPECT_TRUE(voip_core_->StartSend(*channel));
-  EXPECT_TRUE(voip_core_->StartPlayout(*channel));
+  EXPECT_EQ(voip_core_->StartSend(*channel), StatusCode::kOk);
+  EXPECT_EQ(voip_core_->StartPlayout(*channel), StatusCode::kOk);
 
   voip_core_->RegisterTelephoneEventType(*channel, kPcmuPayload,
                                          kPcmuSampleRateHz);
@@ -89,9 +89,9 @@ TEST_F(VoipCoreTest, BasicVoipCoreOperation) {
   EXPECT_CALL(*audio_device_, StopRecording()).WillOnce(Return(0));
   EXPECT_CALL(*audio_device_, StopPlayout()).WillOnce(Return(0));
 
-  EXPECT_TRUE(voip_core_->StopSend(*channel));
-  EXPECT_TRUE(voip_core_->StopPlayout(*channel));
-  voip_core_->ReleaseChannel(*channel);
+  EXPECT_EQ(voip_core_->StopSend(*channel), StatusCode::kOk);
+  EXPECT_EQ(voip_core_->StopPlayout(*channel), StatusCode::kOk);
+  EXPECT_EQ(voip_core_->ReleaseChannel(*channel), StatusCode::kOk);
 }
 
 TEST_F(VoipCoreTest, ExpectFailToUseReleasedChannelId) {
@@ -99,7 +99,7 @@ TEST_F(VoipCoreTest, ExpectFailToUseReleasedChannelId) {
   EXPECT_TRUE(channel);
 
   // Release right after creation.
-  voip_core_->ReleaseChannel(*channel);
+  EXPECT_EQ(voip_core_->ReleaseChannel(*channel), StatusCode::kOk);
 
   // Now use released channel.
 
@@ -109,8 +109,8 @@ TEST_F(VoipCoreTest, ExpectFailToUseReleasedChannelId) {
   voip_core_->RegisterTelephoneEventType(*channel, kPcmuPayload,
                                          kPcmuSampleRateHz);
 
-  EXPECT_FALSE(voip_core_->StartSend(*channel));
-  EXPECT_FALSE(voip_core_->StartPlayout(*channel));
+  EXPECT_EQ(voip_core_->StartSend(*channel), StatusCode::kInvalidArgument);
+  EXPECT_EQ(voip_core_->StartPlayout(*channel), StatusCode::kInvalidArgument);
   EXPECT_FALSE(voip_core_->SendDtmfEvent(*channel, kDtmfEventCode,
                                          kDtmfEventDurationMs));
 }
@@ -126,7 +126,7 @@ TEST_F(VoipCoreTest, SendDtmfEventWithoutRegistering) {
 
   voip_core_->SetSendCodec(*channel, kPcmuPayload, kPcmuFormat);
 
-  EXPECT_TRUE(voip_core_->StartSend(*channel));
+  EXPECT_EQ(voip_core_->StartSend(*channel), StatusCode::kOk);
   // Send Dtmf event without registering beforehand, thus payload
   // type is not set and false is expected.
   EXPECT_FALSE(voip_core_->SendDtmfEvent(*channel, kDtmfEventCode,
@@ -136,8 +136,8 @@ TEST_F(VoipCoreTest, SendDtmfEventWithoutRegistering) {
   EXPECT_CALL(*audio_device_, Recording()).WillOnce(Return(true));
   EXPECT_CALL(*audio_device_, StopRecording()).WillOnce(Return(0));
 
-  EXPECT_TRUE(voip_core_->StopSend(*channel));
-  voip_core_->ReleaseChannel(*channel);
+  EXPECT_EQ(voip_core_->StopSend(*channel), StatusCode::kOk);
+  EXPECT_EQ(voip_core_->ReleaseChannel(*channel), StatusCode::kOk);
 }
 
 TEST_F(VoipCoreTest, SendDtmfEventWithoutStartSend) {
@@ -151,7 +151,7 @@ TEST_F(VoipCoreTest, SendDtmfEventWithoutStartSend) {
   EXPECT_FALSE(voip_core_->SendDtmfEvent(*channel, kDtmfEventCode,
                                          kDtmfEventDurationMs));
 
-  voip_core_->ReleaseChannel(*channel);
+  EXPECT_EQ(voip_core_->ReleaseChannel(*channel), StatusCode::kOk);
 }
 
 TEST_F(VoipCoreTest, StartSendAndPlayoutWithoutSettingCodec) {
@@ -160,10 +160,11 @@ TEST_F(VoipCoreTest, StartSendAndPlayoutWithoutSettingCodec) {
 
   // Call StartSend and StartPlayout without setting send/receive
   // codec. Code should see that codecs aren't set and return false.
-  EXPECT_FALSE(voip_core_->StartSend(*channel));
-  EXPECT_FALSE(voip_core_->StartPlayout(*channel));
+  EXPECT_EQ(voip_core_->StartSend(*channel), StatusCode::kFailedPrecondition);
+  EXPECT_EQ(voip_core_->StartPlayout(*channel),
+            StatusCode::kFailedPrecondition);
 
-  voip_core_->ReleaseChannel(*channel);
+  EXPECT_EQ(voip_core_->ReleaseChannel(*channel), StatusCode::kOk);
 }
 
 TEST_F(VoipCoreTest, StopSendAndPlayoutWithoutStarting) {
@@ -176,10 +177,10 @@ TEST_F(VoipCoreTest, StopSendAndPlayoutWithoutStarting) {
   // Call StopSend and StopPlayout without starting them in
   // the first place. Should see that it is already in the
   // stopped state and return true.
-  EXPECT_TRUE(voip_core_->StopSend(*channel));
-  EXPECT_TRUE(voip_core_->StopPlayout(*channel));
+  EXPECT_EQ(voip_core_->StopSend(*channel), StatusCode::kOk);
+  EXPECT_EQ(voip_core_->StopPlayout(*channel), StatusCode::kOk);
 
-  voip_core_->ReleaseChannel(*channel);
+  EXPECT_EQ(voip_core_->ReleaseChannel(*channel), StatusCode::kOk);
 }
 
 // This tests correctness on ProcessThread usage where we expect the first/last
@@ -196,8 +197,8 @@ TEST_F(VoipCoreTest, TestProcessThreadOperation) {
   EXPECT_CALL(*process_thread_, Stop);
   EXPECT_CALL(*process_thread_, DeRegisterModule).Times(2);
 
-  voip_core_->ReleaseChannel(*channel_one);
-  voip_core_->ReleaseChannel(*channel_two);
+  EXPECT_EQ(voip_core_->ReleaseChannel(*channel_one), StatusCode::kOk);
+  EXPECT_EQ(voip_core_->ReleaseChannel(*channel_two), StatusCode::kOk);
 
   EXPECT_CALL(*process_thread_, Start);
   EXPECT_CALL(*process_thread_, RegisterModule);
@@ -208,7 +209,7 @@ TEST_F(VoipCoreTest, TestProcessThreadOperation) {
   EXPECT_CALL(*process_thread_, Stop);
   EXPECT_CALL(*process_thread_, DeRegisterModule);
 
-  voip_core_->ReleaseChannel(*channel_three);
+  EXPECT_EQ(voip_core_->ReleaseChannel(*channel_three), StatusCode::kOk);
 }
 
 }  // namespace
