@@ -32,8 +32,11 @@ class VoipStatistics {
  public:
   // Gets the audio ingress statistics. Returns absl::nullopt when channel_id is
   // invalid.
-  virtual absl::optional<IngressStatistics> GetIngressStatistics(
-      ChannelId channel_id) = 0;
+  // Returns following VoipResult;
+  //  kOk - successfully set provided IngressStatistics reference.
+  //  kInvalidArgument - |channel_id| is invalid.
+  virtual VoipResult GetIngressStatistics(ChannelId channel_id,
+                                          IngressStatistics& ingress_stats) = 0;
 
  protected:
   virtual ~VoipStatistics() = default;
