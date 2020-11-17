@@ -16,6 +16,24 @@
       "message": "I thought the turn server shipped with this project was mainly used for testing?",
       "revId": "3e9cea31e85cb40183bc078a421177bcc7d091d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6810b315_644b15a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-11-17T21:00:59Z",
+      "side": 1,
+      "message": "Network emulation is also used only for testing purposes, so this CL add wider test abilities.",
+      "parentUuid": "c9a6fd05_a506ffc8",
+      "revId": "3e9cea31e85cb40183bc078a421177bcc7d091d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
