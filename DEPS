@@ -7,7 +7,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '27f19de5301e5a052f8d75570bb94db59afc9b6f',
+  'chromium_revision': '842373f4126b4fccbaa7f7417c9257888c1e9912',
 }
 
 deps = {
@@ -31,7 +31,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@d40df8f4627684d944594c8aed3faf095989a4de',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@4c6de560b4142b4d87367e6901f9b8f63a7ac13f',
+    'https://chromium.googlesource.com/chromium/src/third_party@1ee84cf44a66b0d2fe310368955f241c585b04e0',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -122,7 +122,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@9c4671f2e3a63c0f155d9b2511192d0b5fa7f760',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@f92a7636da65f28dad15bc524e6b681d1c311de0',
+    'https://chromium.googlesource.com/catapult.git@808ef50106efd533fe09a8708fb118ca0588fd1b',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
@@ -257,7 +257,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@84556a164af4c28ef90e71b8b5076e3c314bc08a',
+    'https://chromium.googlesource.com/chromium/src/tools@24a85225f264261db73b8cddafdcf8695f70dd40',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@d46ea7635f2911208268170512cb611412488fd8',
 
