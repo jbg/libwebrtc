@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43c9b4a4_a17ce470",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73ad6145_b9e04f9d",
+      "range": {
+        "startLine": 87,
+        "startChar": 46,
+        "endLine": 87,
+        "endChar": 47
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6dd03709_e7d5f6d7",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-11-17T11:21:39Z",
       "side": 1,
       "message": "What is a use case for this endpoint? Can you describe it in comment? Also please document that returned pointer is guaranteed to be not-null.",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 90,
+        "endChar": 52
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34f4191a_7bd13c8b",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dd03709_e7d5f6d7",
       "range": {
         "startLine": 89,
         "startChar": 2,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea77e12_9b23e0b3",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e12f3713_ad7f6a3d",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 34
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c2dbf52_5dfc7065",
@@ -83,6 +155,30 @@
       "writtenOn": "2020-11-17T11:21:39Z",
       "side": 1,
       "message": "const?",
+      "range": {
+        "startLine": 93,
+        "startChar": 55,
+        "endLine": 93,
+        "endChar": 56
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d65aeacd_17dff80c",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c2dbf52_5dfc7065",
       "range": {
         "startLine": 93,
         "startChar": 55,
@@ -116,6 +212,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b6269e8_5e611e4f",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aae1bbec_1528458f",
+      "range": {
+        "startLine": 95,
+        "startChar": 2,
+        "endLine": 96,
+        "endChar": 50
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b46dba6a_2d33a44b",
@@ -129,6 +249,30 @@
       "writtenOn": "2020-11-17T11:21:39Z",
       "side": 1,
       "message": "Please document ownership of returned object and it\u0027s lifetime",
+      "range": {
+        "startLine": 247,
+        "startChar": 39,
+        "endLine": 247,
+        "endChar": 55
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d911905f_73572695",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "it\u0027s already documented at class level.\n\"All objects returned by this API are owned by NetworkEmulationManager itself and will be deleted when manager will be deleted.\"",
+      "parentUuid": "b46dba6a_2d33a44b",
       "range": {
         "startLine": 247,
         "startChar": 39,
@@ -162,6 +306,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c78d80_6afaf98f",
+        "filename": "test/network/emulated_turn_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "I don\u0027t think this is called that frequently...",
+      "parentUuid": "e2da91aa_fa62db4d",
+      "range": {
+        "startLine": 35,
+        "startChar": 11,
+        "endLine": 35,
+        "endChar": 70
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "216e058c_67bed2d3",
@@ -175,6 +343,30 @@
       "writtenOn": "2020-11-17T11:21:39Z",
       "side": 1,
       "message": "Should unbind receiver from endpoint here? Or we should unbind it in the destructor.",
+      "range": {
+        "startLine": 55,
+        "startChar": 25,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "420e53bd_2e77875a",
+        "filename": "test/network/emulated_turn_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "216e058c_67bed2d3",
       "range": {
         "startLine": 55,
         "startChar": 25,
@@ -208,6 +400,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b038cb1_2f84fe9b",
+        "filename": "test/network/emulated_turn_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61ac882f_08362535",
+      "range": {
+        "startLine": 66,
+        "startChar": 13,
+        "endLine": 66,
+        "endChar": 19
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "decfd5fd_7eb50a54",
@@ -221,6 +437,30 @@
       "writtenOn": "2020-11-17T11:21:39Z",
       "side": 1,
       "message": "As I see it can be struct and `turn_server_` can be private",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 6
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8db15a9_30b90f7e",
+        "filename": "test/network/emulated_turn_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "decfd5fd_7eb50a54",
       "range": {
         "startLine": 78,
         "startChar": 0,
@@ -254,6 +494,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26466412_a4e1cbd7",
+        "filename": "test/network/emulated_turn_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deb38801_c8184823",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 76
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8813b508_9967329b",
@@ -277,6 +541,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3acf26c_0390ce8e",
+        "filename": "test/network/emulated_turn_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Added comment on thread.\nSkipped by ref.\nDone",
+      "parentUuid": "8813b508_9967329b",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 20
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "320bc507_a707e773",
@@ -290,6 +578,30 @@
       "writtenOn": "2020-11-17T11:21:39Z",
       "side": 1,
       "message": "Maybe add some number, like turn_servers_.size() at the end to distinguish different turn server\u0027s threads?",
+      "range": {
+        "startLine": 341,
+        "startChar": 48,
+        "endLine": 341,
+        "endChar": 49
+      },
+      "revId": "2778e522f2a8c956b87fb4109ebd975917f0610a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1793c80f_f1803493",
+        "filename": "test/network/network_emulation_manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "320bc507_a707e773",
       "range": {
         "startLine": 341,
         "startChar": 48,

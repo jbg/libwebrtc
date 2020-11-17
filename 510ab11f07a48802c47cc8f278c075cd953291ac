@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ec799b7_b1a72e7b",
+        "filename": "test/network/emulated_turn_server.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Wrap is used both for client/peer sockets\nAnd I don\u0027t know how to \"make this as private\", with putting the entire thind\ninto emulated_turn_server.h...\n\nWDYT?",
+      "parentUuid": "8f5bf6f0_1704b0de",
+      "range": {
+        "startLine": 78,
+        "startChar": 7,
+        "endLine": 78,
+        "endChar": 33
+      },
+      "revId": "510ab11f07a48802c47cc8f278c075cd953291ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70486957_06bfd18e",
@@ -47,6 +71,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb2b418b_07f66705",
+        "filename": "test/network/emulated_turn_server.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70486957_06bfd18e",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 9
+      },
+      "revId": "510ab11f07a48802c47cc8f278c075cd953291ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1217c32_494652be",
@@ -60,6 +108,30 @@
       "writtenOn": "2020-11-17T11:34:00Z",
       "side": 1,
       "message": "Can it be private?\nAlso please document ownership of the returned socket",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 59
+      },
+      "revId": "510ab11f07a48802c47cc8f278c075cd953291ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f95a711_c33a930c",
+        "filename": "test/network/emulated_turn_server.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-11-17T16:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1217c32_494652be",
       "range": {
         "startLine": 49,
         "startChar": 2,
