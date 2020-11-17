@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50cf4ae4_28b9406a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-11-17T14:30:11Z",
+      "side": 1,
+      "message": "lgtm, but a unit test would be great ;)",
+      "revId": "13b02c7bcb3ff35fd2591d2182a24874fea8b6a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
