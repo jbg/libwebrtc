@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f5bf6f0_1704b0de",
+        "filename": "test/network/emulated_turn_server.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-11-17T11:34:00Z",
+      "side": 1,
+      "message": "Maybe have this one as private to the EmulatedTURNServer and then also make EmulatedTURNServer::CreatePeerSocket private too?\n\nOr propagate a thread here and remove Wrap function at all and move implementation of EmulatedTURNServer::CreatePeerSocket directly into this class?",
+      "range": {
+        "startLine": 78,
+        "startChar": 7,
+        "endLine": 78,
+        "endChar": 33
+      },
+      "revId": "510ab11f07a48802c47cc8f278c075cd953291ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70486957_06bfd18e",
+        "filename": "test/network/emulated_turn_server.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-11-17T11:34:00Z",
+      "side": 1,
+      "message": "s/Wrap/Wraps/",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 9
+      },
+      "revId": "510ab11f07a48802c47cc8f278c075cd953291ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1217c32_494652be",
+        "filename": "test/network/emulated_turn_server.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-11-17T11:34:00Z",
+      "side": 1,
+      "message": "Can it be private?\nAlso please document ownership of the returned socket",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 59
+      },
+      "revId": "510ab11f07a48802c47cc8f278c075cd953291ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
