@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb700c29_a0d0e382",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-17T19:03:14Z",
+      "side": 1,
+      "message": "Sounds fair. How about VoipResult? I would like to keep it short if possible.",
+      "parentUuid": "6ae91c9d_c2dc5d20",
+      "revId": "733440daef04170be211dd0d972a80ef7e966b9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa353eec_5bfd69c1",
         "filename": "api/voip/voip_base.h",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2020-11-17T17:13:57Z",
       "side": 1,
       "message": "Can you decorate this enum with RTC_WARN_UNUSED_RESULT, so that the compiler forces callers to do something with the value? absl::Status does this...",
+      "revId": "733440daef04170be211dd0d972a80ef7e966b9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b0a12e1_dc0fb513",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-17T19:03:14Z",
+      "side": 1,
+      "message": "That\u0027s good idea. I will enforce it in another CL as it would break the current application build.",
+      "parentUuid": "fa353eec_5bfd69c1",
       "revId": "733440daef04170be211dd0d972a80ef7e966b9a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
