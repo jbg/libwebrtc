@@ -17,6 +17,7 @@
 #include "api/units/timestamp.h"
 #include "call/simulated_network.h"
 #include "rtc_base/fake_network.h"
+#include "test/network/emulated_turn_server.h"
 #include "test/time_controller/real_time_controller.h"
 #include "test/time_controller/simulated_time_controller.h"
 
@@ -330,6 +331,17 @@ NetworkEmulationManagerImpl::GetNextIPv4Address() {
 
 Timestamp NetworkEmulationManagerImpl::Now() const {
   return clock_->CurrentTime();
+}
+
+EmulatedTURNServerInterface* NetworkEmulationManagerImpl::CreateTURNServer(
+    EmulatedTURNServerConfig config) {
+  auto client = CreateEndpoint(config.client_config);
+  auto peer = CreateEndpoint(config.client_config);
+  auto turn = std::make_unique<EmulatedTURNServer>(
+      time_controller_->CreateThread("turn_server"), client, peer);
+  auto out = turn.get();
+  turn_servers_.push_back(std::move(turn));
+  return out;
 }
 
 }  // namespace test
