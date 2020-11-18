@@ -236,10 +236,12 @@ class BaseChannel : public ChannelInterface,
 
   bool UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
                             webrtc::SdpType type,
-                            std::string* error_desc);
+                            std::string* error_desc)
+      RTC_RUN_ON(worker_thread());
   bool UpdateRemoteStreams_w(const std::vector<StreamParams>& streams,
                              webrtc::SdpType type,
-                             std::string* error_desc);
+                             std::string* error_desc)
+      RTC_RUN_ON(worker_thread());
   virtual bool SetLocalContent_w(const MediaContentDescription* content,
                                  webrtc::SdpType type,
                                  std::string* error_desc) = 0;
@@ -271,7 +273,7 @@ class BaseChannel : public ChannelInterface,
   void UpdateRtpHeaderExtensionMap(
       const RtpHeaderExtensions& header_extensions);
 
-  bool RegisterRtpDemuxerSink();
+  bool RegisterRtpDemuxerSink_w() RTC_RUN_ON(worker_thread());
 
   // Return description of media channel to facilitate logging
   std::string ToString() const;
@@ -325,6 +327,15 @@ class BaseChannel : public ChannelInterface,
   // Cached list of payload types, used if payload type demuxing is re-enabled.
   std::set<uint8_t> payload_types_ RTC_GUARDED_BY(worker_thread());
   webrtc::RtpDemuxerCriteria demuxer_criteria_;
+  // Previous registered criteria, used to avoid clearing SSRC->sink mappings
+  // and discarding packets when nothing is changing.
+  webrtc::RtpDemuxerCriteria previous_demuxer_criteria_;
+  // Version number associated with the current demux criteria. Used to drop
+  // packets that were demuxed using a previous version of the criteria. Using
+  // two variables guarded by the network/worker threads respectively to avoid
+  // the need for locks/atomics/Thread::Clear.
+  uint32_t demuxer_criteria_version_n_ RTC_GUARDED_BY(network_thread()) = 0;
+  uint32_t demuxer_criteria_version_w_ RTC_GUARDED_BY(worker_thread()) = 0;
   // This generator is used to generate SSRCs for local streams.
   // This is needed in cases where SSRCs are not negotiated or set explicitly
   // like in Simulcast.

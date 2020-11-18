@@ -171,10 +171,17 @@ std::string BaseChannel::ToString() const {
 
 bool BaseChannel::ConnectToRtpTransport() {
   RTC_DCHECK(rtp_transport_);
-  if (!RegisterRtpDemuxerSink()) {
+  // Call RegisterRtpDemuxerSink directly rather than going through
+  // MaybeRegisterRtpDemuxerSink_w, since:
+  // 1. We're on the network thread.
+  // 2. We're connecting to a new transport, so we want to call
+  // RegisterRtpDemuxerSink regardless of whether the criteria is changing.
+  if (!rtp_transport_->RegisterRtpDemuxerSink(demuxer_criteria_, this)) {
     RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
+    previous_demuxer_criteria_ = {};
     return false;
   }
+  previous_demuxer_criteria_ = demuxer_criteria_;
   rtp_transport_->SignalReadyToSend.connect(
       this, &BaseChannel::OnTransportReadyToSend);
   rtp_transport_->SignalNetworkRouteChanged.connect(
@@ -465,6 +472,7 @@ bool BaseChannel::SendPacket(bool rtcp,
 }
 
 void BaseChannel::OnRtpPacket(const webrtc::RtpPacketReceived& parsed_packet) {
+  RTC_DCHECK_RUN_ON(network_thread());
   // Take packet time from the |parsed_packet|.
   // RtpPacketReceived.arrival_time_ms = (timestamp_us + 500) / 1000;
   int64_t packet_time_us = -1;
@@ -496,10 +504,20 @@ void BaseChannel::OnRtpPacket(const webrtc::RtpPacketReceived& parsed_packet) {
   }
 
   auto packet_buffer = parsed_packet.Buffer();
+  uint32_t demuxer_criteria_version = demuxer_criteria_version_n_;
 
   invoker_.AsyncInvoke<void>(
-      RTC_FROM_HERE, worker_thread_, [this, packet_buffer, packet_time_us] {
+      RTC_FROM_HERE, worker_thread_,
+      [this, packet_buffer, packet_time_us, demuxer_criteria_version] {
         RTC_DCHECK_RUN_ON(worker_thread());
+        // Drop the packet if the demuxer criteria was changed in between the
+        // packet being passed to us on the network thread and processed on the
+        // worker thread. If the criteria changed, it's possible this packet is
+        // no longer meant for us, and forwarding it to the media channel could
+        // cause it to erroneously create a receive stream.
+        if (demuxer_criteria_version != demuxer_criteria_version_w_) {
+          return;
+        }
         media_channel_->OnPacketReceived(packet_buffer, packet_time_us);
       });
 }
@@ -520,11 +538,29 @@ void BaseChannel::UpdateRtpHeaderExtensionMap(
   });
 }
 
-bool BaseChannel::RegisterRtpDemuxerSink() {
+bool BaseChannel::RegisterRtpDemuxerSink_w() {
   RTC_DCHECK(rtp_transport_);
-  return network_thread_->Invoke<bool>(RTC_FROM_HERE, [this] {
-    return rtp_transport_->RegisterRtpDemuxerSink(demuxer_criteria_, this);
+  if (demuxer_criteria_ == previous_demuxer_criteria_) {
+    return true;
+  }
+  bool ret = network_thread_->Invoke<bool>(RTC_FROM_HERE, [this] {
+    RTC_DCHECK_RUN_ON(network_thread());
+    bool ret = rtp_transport_->RegisterRtpDemuxerSink(demuxer_criteria_, this);
+    // Increment version number, which will cause any packets posted
+    // asynchronously with an older version to be dropped when they reach the
+    // worker thread.
+    ++demuxer_criteria_version_n_;
+    return ret;
   });
+  ++demuxer_criteria_version_w_;
+  if (ret) {
+    previous_demuxer_criteria_ = demuxer_criteria_;
+  } else {
+    // RegisterRtpDemuxerSink's failure means that no criteria will be
+    // registered for us.
+    previous_demuxer_criteria_ = {};
+  }
+  return ret;
 }
 
 void BaseChannel::EnableMedia_w() {
@@ -609,7 +645,7 @@ bool BaseChannel::SetPayloadTypeDemuxingEnabled_w(bool enabled) {
     // there is no straightforward way to identify those streams.
     media_channel()->ResetUnsignaledRecvStream();
     demuxer_criteria_.payload_types.clear();
-    if (!RegisterRtpDemuxerSink()) {
+    if (!RegisterRtpDemuxerSink_w()) {
       RTC_LOG(LS_ERROR) << "Failed to disable payload type demuxing for "
                         << ToString();
       return false;
@@ -617,7 +653,7 @@ bool BaseChannel::SetPayloadTypeDemuxingEnabled_w(bool enabled) {
   } else if (!payload_types_.empty()) {
     demuxer_criteria_.payload_types.insert(payload_types_.begin(),
                                            payload_types_.end());
-    if (!RegisterRtpDemuxerSink()) {
+    if (!RegisterRtpDemuxerSink_w()) {
       RTC_LOG(LS_ERROR) << "Failed to enable payload type demuxing for "
                         << ToString();
       return false;
@@ -765,7 +801,7 @@ bool BaseChannel::UpdateRemoteStreams_w(
                                    new_stream.ssrcs.end());
   }
   // Re-register the sink to update the receiving ssrcs.
-  if (!RegisterRtpDemuxerSink()) {
+  if (!RegisterRtpDemuxerSink_w()) {
     RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
     ret = false;
   }
@@ -931,7 +967,7 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
       MaybeAddHandledPayloadType(codec.id);
     }
     // Need to re-register the sink to update the handled payload.
-    if (!RegisterRtpDemuxerSink()) {
+    if (!RegisterRtpDemuxerSink_w()) {
       RTC_LOG(LS_ERROR) << "Failed to set up audio demuxing for " << ToString();
       return false;
     }
@@ -997,7 +1033,7 @@ bool VoiceChannel::SetRemoteContent_w(const MediaContentDescription* content,
                             "disable payload type demuxing for "
                          << ToString();
     ClearHandledPayloadTypes();
-    if (!RegisterRtpDemuxerSink()) {
+    if (!RegisterRtpDemuxerSink_w()) {
       RTC_LOG(LS_ERROR) << "Failed to update audio demuxing for " << ToString();
       return false;
     }
@@ -1124,7 +1160,7 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
       MaybeAddHandledPayloadType(codec.id);
     }
     // Need to re-register the sink to update the handled payload.
-    if (!RegisterRtpDemuxerSink()) {
+    if (!RegisterRtpDemuxerSink_w()) {
       RTC_LOG(LS_ERROR) << "Failed to set up video demuxing for " << ToString();
       return false;
     }
@@ -1234,7 +1270,7 @@ bool VideoChannel::SetRemoteContent_w(const MediaContentDescription* content,
                             "disable payload type demuxing for "
                          << ToString();
     ClearHandledPayloadTypes();
-    if (!RegisterRtpDemuxerSink()) {
+    if (!RegisterRtpDemuxerSink_w()) {
       RTC_LOG(LS_ERROR) << "Failed to update video demuxing for " << ToString();
       return false;
     }
@@ -1349,7 +1385,7 @@ bool RtpDataChannel::SetLocalContent_w(const MediaContentDescription* content,
     MaybeAddHandledPayloadType(codec.id);
   }
   // Need to re-register the sink to update the handled payload.
-  if (!RegisterRtpDemuxerSink()) {
+  if (!RegisterRtpDemuxerSink_w()) {
     RTC_LOG(LS_ERROR) << "Failed to set up data demuxing for " << ToString();
     return false;
   }
