@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68da5bc5_ffeebe6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-11-18T18:21:23Z",
+      "side": 1,
+      "message": "TBR Erik as owner.",
+      "revId": "cc8b1dc04f8517f4c2a2b4f57d8d59eae0fad9bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
