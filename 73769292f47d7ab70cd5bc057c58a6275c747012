@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "491060bf_d0bb9955",
+        "filename": "pc/channel.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-11-18T02:30:33Z",
+      "side": 1,
+      "message": "I don\u0027t like this solution either because it introduces *per-packet* atomic loads, which are free on x86/64 but not other architectures...\n\nI don\u0027t have any other great ideas though; doing demuxing on the worker thread would eliminate the problem, but that would complicate the transport/transport controller classes. I\u0027ll try coming up with something else tomorrow, any suggestions welcome though.",
+      "revId": "73769292f47d7ab70cd5bc057c58a6275c747012",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

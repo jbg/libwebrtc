@@ -16,6 +16,24 @@
       "message": "Before okaying this - can you check out why https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d11908 (large amounts of CPU spent in ClearInternal()) was an issue, and ensure that this is not an issue in this particular usage of Clear()?\n\nCode looks good - and not re-registering a filter when the fiter is unchanged is a Very Good Thing!",
       "revId": "4898b0b937f8b792bfb2ff4d62af755554409699",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce92fa1_2ebf7591",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-11-18T02:30:33Z",
+      "side": 1,
+      "message": "My understanding was that ClearInternal was an issue because it was called very frequently, and/or with a huge list of messages that needed to be iterated over. So I assumed this would be okay given that it only happens in SLD/SRD.\n\nHowever, it looks like Tommi has been hard at work rooting out any unnecessary instance of ClearInternal regardless of frequency. And given the recent issue of SRD taking a long time with lots of tracks, I don\u0027t want to make the situation worse.\n\nSo I have a new solution which, instead of removing tasks from the thread queue, simply returns early when the tasks are executed.",
+      "parentUuid": "3fdc1760_2b4cb3ee",
+      "revId": "4898b0b937f8b792bfb2ff4d62af755554409699",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
