@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39388d97_0b8c8140",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13129
+      },
+      "writtenOn": "2020-11-18T14:39:48Z",
+      "side": 1,
+      "message": "Could you send me patch link to address duplicating situation( I may have to drop mine 😊 ).\nPipewire0.2 support is also on my mind, I was about to clarify that during review, btw I have that changes locally.\n\nRegarding PW_ID_ANY, portal(OpenPipewireRemote) call returns pipewire socket fd which I am connecting to using pw_context_connect_fd. pw_stream_connect only take target/node_id and PW_ID_ANY allow session manager to connect stream to proper node automatically. I am still learner of pipewire project, so do let me know if you find something wrong in my code, always welcome",
+      "parentUuid": "98363306_74f9546d",
+      "revId": "8eb4be1be912d2dffd83a847cb02ed70272711c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2b3482f_3b22cbd0",
