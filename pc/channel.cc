@@ -138,6 +138,7 @@ BaseChannel::BaseChannel(rtc::Thread* worker_thread,
       srtp_required_(srtp_required),
       crypto_options_(crypto_options),
       media_channel_(std::move(media_channel)),
+      demuxer_criteria_version_(0),
       ssrc_generator_(ssrc_generator) {
   RTC_DCHECK_RUN_ON(worker_thread_);
   RTC_DCHECK(ssrc_generator_);
@@ -193,6 +194,7 @@ void BaseChannel::DisconnectFromRtpTransport() {
   rtp_transport_->SignalNetworkRouteChanged.disconnect(this);
   rtp_transport_->SignalWritableState.disconnect(this);
   rtp_transport_->SignalSentPacket.disconnect(this);
+  previous_demuxer_criteria_ = {};
 }
 
 void BaseChannel::Init_w(webrtc::RtpTransportInternal* rtp_transport) {
@@ -496,10 +498,20 @@ void BaseChannel::OnRtpPacket(const webrtc::RtpPacketReceived& parsed_packet) {
   }
 
   auto packet_buffer = parsed_packet.Buffer();
+  uint32_t demuxer_criteria_version = demuxer_criteria_version_;
 
   invoker_.AsyncInvoke<void>(
-      RTC_FROM_HERE, worker_thread_, [this, packet_buffer, packet_time_us] {
+      RTC_FROM_HERE, worker_thread_,
+      [this, packet_buffer, packet_time_us, demuxer_criteria_version] {
         RTC_DCHECK_RUN_ON(worker_thread());
+        // Drop the packet if the demuxer criteria was changed in between the
+        // packet being passed to us on the network thread and processed on the
+        // worker thread. If the criteria changed, it's possible this packet is
+        // no longer meant for us, and forwarding it to the media channel could
+        // cause it to erroneously create a receive stream.
+        if (demuxer_criteria_version != demuxer_criteria_version_) {
+          return;
+        }
         media_channel_->OnPacketReceived(packet_buffer, packet_time_us);
       });
 }
@@ -522,9 +534,23 @@ void BaseChannel::UpdateRtpHeaderExtensionMap(
 
 bool BaseChannel::RegisterRtpDemuxerSink() {
   RTC_DCHECK(rtp_transport_);
-  return network_thread_->Invoke<bool>(RTC_FROM_HERE, [this] {
+  if (demuxer_criteria_ == previous_demuxer_criteria_) {
+    return true;
+  }
+  bool ret = network_thread_->Invoke<bool>(RTC_FROM_HERE, [this] {
     return rtp_transport_->RegisterRtpDemuxerSink(demuxer_criteria_, this);
   });
+  if (ret) {
+    previous_demuxer_criteria_ = demuxer_criteria_;
+  } else {
+    // RegisterRtpDemuxerSink's failure means that no criteria will be
+    // registered for us.
+    previous_demuxer_criteria_ = {};
+  }
+  // Increment version number, which will cause any packets posted
+  // asynchronously with an older version to be dropped.
+  demuxer_criteria_version_.fetch_add(1);
+  return ret;
 }
 
 void BaseChannel::EnableMedia_w() {

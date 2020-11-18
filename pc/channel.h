@@ -11,6 +11,7 @@
 #ifndef PC_CHANNEL_H_
 #define PC_CHANNEL_H_
 
+#include <atomic>
 #include <map>
 #include <memory>
 #include <set>
@@ -325,6 +326,12 @@ class BaseChannel : public ChannelInterface,
   // Cached list of payload types, used if payload type demuxing is re-enabled.
   std::set<uint8_t> payload_types_ RTC_GUARDED_BY(worker_thread());
   webrtc::RtpDemuxerCriteria demuxer_criteria_;
+  // Previous registered criteria, used to avoid clearing SSRC->sink mappings
+  // and discarding packets when nothing is changing.
+  webrtc::RtpDemuxerCriteria previous_demuxer_criteria_;
+  // Version number associated with the current demux criteria. Used to drop
+  // packets that were demuxed using a previous version of the criteria.
+  std::atomic<uint32_t> demuxer_criteria_version_;
   // This generator is used to generate SSRCs for local streams.
   // This is needed in cases where SSRCs are not negotiated or set explicitly
   // like in Simulcast.

@@ -28,6 +28,8 @@ struct RtpDemuxerCriteria {
   RtpDemuxerCriteria();
   ~RtpDemuxerCriteria();
 
+  bool operator==(const RtpDemuxerCriteria& other) const;
+
   // If not the empty string, will match packets with this MID.
   std::string mid;
 
