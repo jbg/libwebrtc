@@ -16,6 +16,24 @@
       "message": "lgtm, but a unit test would be great ;)",
       "revId": "13b02c7bcb3ff35fd2591d2182a24874fea8b6a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1d8b9ff_a3dfe9ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-11-18T09:19:42Z",
+      "side": 1,
+      "message": "Done :)",
+      "parentUuid": "50cf4ae4_28b9406a",
+      "revId": "13b02c7bcb3ff35fd2591d2182a24874fea8b6a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
