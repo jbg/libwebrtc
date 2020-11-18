@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b7acf01_9ff9562b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-18T10:02:35Z",
+      "side": 1,
+      "message": "Hi,\n\nI have a similar patch in progress. Problem with this change is that we shouldn\u0027t drop support for PipeWire 0.2, because it\u0027s still on systems Chrome needs to support, like RHEL 7.",
+      "revId": "8eb4be1be912d2dffd83a847cb02ed70272711c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2b3482f_3b22cbd0",
