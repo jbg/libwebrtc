@@ -9,6 +9,19 @@
 import("//third_party/libaom/options.gni")
 import("../../../../webrtc.gni")
 
+rtc_library("av1_svc_config") {
+  sources = [
+    "av1_svc_config.cc",
+    "av1_svc_config.h",
+  ]
+  deps = [
+    "../../../../api/video_codecs:video_codecs_api",
+    "../../../../rtc_base:checks",
+    "../../svc:scalability_structures",
+    "../../svc:scalable_video_controller",
+  ]
+}
+
 rtc_library("libaom_av1_decoder") {
   visibility = [ "*" ]
   poisonous = [ "software_video_codecs" ]

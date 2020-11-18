@@ -100,6 +100,7 @@ class VideoQualityTestFixtureInterface {
       std::vector<SpatialLayer> spatial_layers;
       // If set, default parameters will be used instead of |streams|.
       bool infer_streams = false;
+      std::string scalability_mode;
     } ss[2];
     struct Logging {
       std::string rtc_event_log_name;
