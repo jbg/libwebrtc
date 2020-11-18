@@ -357,8 +357,9 @@ TEST_F(CallPerfTest,
                      DriftingClock::PercentsFaster(30.0f), "_audio_faster");
 }
 
-TEST_F(CallPerfTest,
-       Synchronization_PlaysOutAudioAndVideoWithVideoFasterThanAudioDrift) {
+TEST_F(
+    CallPerfTest,
+    DISABLED_Synchronization_PlaysOutAudioAndVideoWithVideoFasterThanAudioDrift) {  // NOLINT(whitespace/line_length)
   TestAudioVideoSync(FecMode::kOn, CreateOrder::kVideoFirst,
                      DriftingClock::kNoDrift,
                      DriftingClock::PercentsFaster(30.0f),
