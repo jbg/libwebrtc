@@ -449,6 +449,8 @@ std::string VideoQualityTest::GenerateGraphTitle() const {
     ss << ", Stream #" << params_.ss[0].selected_stream;
   if (params_.ss[0].num_spatial_layers > 1)
     ss << ", Layer #" << params_.ss[0].selected_sl;
+  if (!params_.ss[0].scalability_mode.empty())
+    ss << ", " << params_.ss[0].scalability_mode;
   ss << ")";
   return ss.Release();
 }
@@ -765,6 +767,10 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
           RtpExtension::kGenericFrameDescriptorUri00,
           kGenericFrameDescriptorExtensionId00);
     }
+    video_send_configs_[video_idx].rtp.extmap_allow_mixed = true;
+    video_send_configs_[video_idx].rtp.extensions.emplace_back(
+        RtpExtension::kDependencyDescriptorUri,
+        kGenericFrameDescriptorExtensionId01);
 
     video_send_configs_[video_idx].rtp.extensions.emplace_back(
         RtpExtension::kVideoContentTypeUri, kVideoContentTypeExtensionId);
@@ -807,6 +813,11 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
 
     video_encoder_configs_[video_idx].spatial_layers =
         params_.ss[video_idx].spatial_layers;
+    video_encoder_configs_[video_idx].scalability_mode =
+        params_.ss[video_idx].scalability_mode;
+    video_encoder_configs_[video_idx].simulcast_layers[0].scalability_mode =
+        params_.ss[video_idx].scalability_mode;
+    RTC_LOG(LS_INFO) << "Copy SM " << params_.ss[video_idx].scalability_mode;
     decode_all_receive_streams = params_.ss[video_idx].selected_stream ==
                                  params_.ss[video_idx].streams.size();
     absl::optional<int> decode_sub_stream;

@@ -15,6 +15,8 @@
 #include <string>
 #include <vector>
 
+#include "absl/debugging/failure_signal_handler.h"
+#include "absl/debugging/symbolize.h"
 #include "absl/flags/flag.h"
 #include "absl/flags/parse.h"
 #include "absl/types/optional.h"
@@ -158,6 +160,8 @@ ABSL_FLAG(std::string,
           sl2,
           "",
           "Comma separated values describing SpatialLayer for layer #2.");
+
+ABSL_FLAG(std::string, scalability_mode, "", "TODO: describe me.");
 
 ABSL_FLAG(std::string,
           encoded_frame_path,
@@ -426,6 +430,7 @@ void Loopback() {
   VideoQualityTest::FillScalabilitySettings(
       &params, 0, stream_descriptors, NumStreams(), SelectedStream(),
       NumSpatialLayers(), SelectedSL(), InterLayerPred(), SL_descriptors);
+  params.ss[0].scalability_mode = absl::GetFlag(FLAGS_scalability_mode);
 
   auto fixture = std::make_unique<VideoQualityTest>(nullptr);
   if (DurationSecs()) {
@@ -436,6 +441,10 @@ void Loopback() {
 }
 
 int RunLoopbackTest(int argc, char* argv[]) {
+  absl::InitializeSymbolizer(argv[0]);
+  absl::ParseCommandLine(argc, argv);
+  absl::InstallFailureSignalHandler({});
+
   ::testing::InitGoogleTest(&argc, argv);
   absl::ParseCommandLine(argc, argv);
 

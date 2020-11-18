@@ -8,6 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 #include "modules/video_coding/svc/scalability_structure_l3t3.h"
+#include "modules/video_coding/svc/scalability_structure_l3t1.h"
 
 #include "modules/video_coding/svc/scalability_structure_test_helpers.h"
 #include "test/gmock.h"
@@ -16,8 +17,24 @@
 namespace webrtc {
 namespace {
 
+using ::testing::ElementsAre;
 using ::testing::IsEmpty;
 using ::testing::SizeIs;
+using ::testing::UnorderedElementsAre;
+
+TEST(ScalabilityStructureL3T1Test, FrameDiffsForUnconstraint) {
+  ScalabilityStructureL3T1 structure;
+  ScalabilityStructureWrapper wrapper(structure);
+
+  auto frames = wrapper.GenerateFrames(/*num_temporal_units=*/2);
+  ASSERT_THAT(frames, SizeIs(6));
+  EXPECT_THAT(frames[0].frame_diffs, IsEmpty());
+  EXPECT_THAT(frames[1].frame_diffs, ElementsAre(1));
+  EXPECT_THAT(frames[2].frame_diffs, ElementsAre(1));
+  EXPECT_THAT(frames[3].frame_diffs, ElementsAre(3));
+  EXPECT_THAT(frames[4].frame_diffs, UnorderedElementsAre(1, 3));
+  EXPECT_THAT(frames[5].frame_diffs, UnorderedElementsAre(1, 3));
+}
 
 TEST(ScalabilityStructureL3T3Test, SkipS1T1FrameKeepsStructureValid) {
   ScalabilityStructureL3T3 structure;

@@ -20,6 +20,7 @@
 #include "api/units/data_rate.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video_codecs/video_encoder.h"
+#include "modules/video_coding/codecs/av1/av1_svc_config.h"
 #include "modules/video_coding/codecs/vp9/svc_config.h"
 #include "modules/video_coding/include/video_coding_defines.h"
 #include "rtc_base/checks.h"
@@ -56,7 +57,6 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
   RTC_DCHECK_GE(config.min_transmit_bitrate_bps, 0);
 
   VideoCodec video_codec;
-  memset(&video_codec, 0, sizeof(video_codec));
   video_codec.codecType = config.codec_type;
 
   switch (config.content_type) {
@@ -138,6 +138,11 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
     video_codec.SetScalabilityMode(*scalability_mode);
   }
 
+  RTC_CHECK(config.scalability_mode.has_value());
+  if (config.scalability_mode.has_value()) {
+    video_codec.SetScalabilityMode(*config.scalability_mode);
+  }
+
   if (video_codec.maxBitrate == 0) {
     // Unset max bitrate -> cap to one bit per pixel.
     video_codec.maxBitrate =
@@ -155,6 +160,7 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
 
   switch (video_codec.codecType) {
     case kVideoCodecVP8: {
+      RTC_LOG(LS_INFO) << "VP8";
       if (!config.encoder_specific_settings) {
         *video_codec.VP8() = VideoEncoder::GetDefaultVp8Settings();
       }
@@ -169,6 +175,7 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
       break;
     }
     case kVideoCodecVP9: {
+      RTC_LOG(LS_INFO) << "VP9";
       // Force the first stream to always be active.
       video_codec.simulcastStream[0].active = codec_active;
 
@@ -255,7 +262,14 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
 
       break;
     }
+    case kVideoCodecAV1:
+      RTC_LOG(LS_INFO) << "AV1";
+      if (!SetAv1SvcConfig(video_codec)) {
+        RTC_LOG(LS_WARNING) << "Failed to configure svc bitrates for av1.";
+      }
+      break;
     case kVideoCodecH264: {
+      RTC_LOG(LS_INFO) << "H264";
       if (!config.encoder_specific_settings)
         *video_codec.H264() = VideoEncoder::GetDefaultH264Settings();
       video_codec.H264()->numberOfTemporalLayers = static_cast<unsigned char>(
@@ -267,11 +281,14 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
       break;
     }
     default:
+      RTC_LOG(LS_INFO) << "XXX";
       // TODO(pbos): Support encoder_settings codec-agnostically.
       RTC_DCHECK(!config.encoder_specific_settings)
           << "Encoder-specific settings for codec type not wired up.";
       break;
   }
+  // video_codec.SetScalabilityMode(streams[0].scalability_mode);
+  // RTC_CHECK_NOTREACHED();
 
   const absl::optional<DataRate> experimental_min_bitrate =
       GetExperimentalMinVideoBitrate(video_codec.codecType);

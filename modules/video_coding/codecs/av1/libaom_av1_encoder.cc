@@ -172,6 +172,7 @@ int LibaomAv1Encoder::InitEncode(const VideoCodec* codec_settings,
   absl::string_view scalability_mode = encoder_settings_.ScalabilityMode();
   // When scalability_mode is not set, keep using svc_controller_ created
   // at construction of the encoder.
+  RTC_CHECK(!scalability_mode.empty());
   if (!scalability_mode.empty()) {
     svc_controller_ = CreateScalabilityStructure(scalability_mode);
   }
@@ -180,6 +181,7 @@ int LibaomAv1Encoder::InitEncode(const VideoCodec* codec_settings,
                         << scalability_mode;
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
   }
+  RTC_LOG(LS_INFO) << "Using scalability mode " << scalability_mode;
 
   if (!SetSvcParams(svc_controller_->StreamConfig())) {
     return WEBRTC_VIDEO_CODEC_ERROR;
@@ -468,6 +470,9 @@ int32_t LibaomAv1Encoder::Encode(
 
     aom_enc_frame_flags_t flags =
         layer_frame.IsKeyframe() ? AOM_EFLAG_FORCE_KF : 0;
+    if (layer_frame.IsKeyframe()) {
+      RTC_LOG(LS_INFO) << "Encoder keyframe.";
+    }
 
     if (SvcEnabled()) {
       SetSvcLayerId(layer_frame);
@@ -499,9 +504,13 @@ int32_t LibaomAv1Encoder::Encode(
             /*data=*/static_cast<const uint8_t*>(pkt->data.frame.buf),
             /*size=*/pkt->data.frame.sz));
 
-        if ((pkt->data.frame.flags & AOM_EFLAG_FORCE_KF) != 0) {
-          layer_frame.Keyframe();
-        }
+        /*
+                if ((pkt->data.frame.flags & AOM_EFLAG_FORCE_KF) != 0 &&
+           !layer_frame.IsKeyframe()) { RTC_LOG(LS_INFO) << "Mark frame with sid
+           " << layer_frame.SpatialId() << " as key frame.";
+                  layer_frame.Keyframe();
+                }
+        */
         encoded_image._frameType = layer_frame.IsKeyframe()
                                        ? VideoFrameType::kVideoFrameKey
                                        : VideoFrameType::kVideoFrameDelta;
@@ -631,8 +640,7 @@ VideoEncoder::EncoderInfo LibaomAv1Encoder::GetEncoderInfo() const {
 const bool kIsLibaomAv1EncoderSupported = true;
 
 std::unique_ptr<VideoEncoder> CreateLibaomAv1Encoder() {
-  return std::make_unique<LibaomAv1Encoder>(
-      std::make_unique<ScalableVideoControllerNoLayering>());
+  return std::make_unique<LibaomAv1Encoder>(CreateScalabilityStructure("NONE"));
 }
 
 std::unique_ptr<VideoEncoder> CreateLibaomAv1Encoder(
