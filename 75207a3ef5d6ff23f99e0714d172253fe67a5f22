@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d18c705_6e11410d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-19T11:38:15Z",
+      "side": 1,
+      "message": "(Removing my previous +1 because this CL contains new stuff and I had comments. Don\u0027t interpret it as me no longer approving of it.)",
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd332fef_6e5a1cf3",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-19T11:38:15Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to specify the type here? Just let the compiler pick the default.",
+      "range": {
+        "startLine": 38,
+        "startChar": 22,
+        "endLine": 38,
+        "endChar": 27
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ac697bf_f8b54c52",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-19T11:38:15Z",
+      "side": 1,
+      "message": "\"the function\"?",
+      "range": {
+        "startLine": 39,
+        "startChar": 24,
+        "endLine": 39,
+        "endChar": 27
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9ef9b8f_3ae7b0e2",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-19T11:38:15Z",
+      "side": 1,
+      "message": "No need to specify what numerical values each case corresponds, to, right? We just need them to be different, and the compiler will see to that.",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 9
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27cb1b85_3bacd15e",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-19T11:38:15Z",
+      "side": 1,
+      "message": "\"such as an invalid ChannelId.\"?",
+      "range": {
+        "startLine": 41,
+        "startChar": 74,
+        "endLine": 42,
+        "endChar": 41
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cabed1fd_75967bb4",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-19T11:38:15Z",
+      "side": 1,
+      "message": "Maybe\n\n  \"kInternal is used to indicate various internal failures that are not the caller\u0027s fault.\"",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 61
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2769829_f46be150",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-19T11:38:15Z",
+      "side": 1,
+      "message": "function",
+      "range": {
+        "startLine": 48,
+        "startChar": 23,
+        "endLine": 48,
+        "endChar": 26
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b0e3af2_f7d63ea1",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-19T11:38:15Z",
+      "side": 1,
+      "message": "I guess this is the one method that actually returns a result? Since creating a VoipResultOr type would be overkill, can we return this instead?\n\n  struct CreateChannelResult {\n    // Describes whether the CreateChannel() call succeeded or not.\n    VoipResult result;\n    // If the call succeeded (i.e., if result \u003d\u003d VoipResult::kOk), holds\n    // the ID of the new channel. Otherwise, holds nullopt.\n    absl::optional\u003cChannelId\u003e channel_id;\n  };",
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
