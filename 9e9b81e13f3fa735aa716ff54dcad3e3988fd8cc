@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a39b91e_f638a406",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-19T07:57:40Z",
+      "side": 1,
+      "message": "Hi,\n\nas mentioned in https://webrtc-review.googlesource.com/c/src/+/189544 (which I abandoned), I decided to pick some PipeWire improvements which are really needed to extend PipeWire support in WebRTC. This doesn\u0027t add any API or change behavior as the previous PR, it just adds support for window sharing and dmabuf support and some code improvements on top of that. This is also code which have been already reviewed many times as part of the previous review.\n\nThank you.\n\nJan",
+      "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
