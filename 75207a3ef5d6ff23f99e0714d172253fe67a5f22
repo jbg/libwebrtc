@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1be48d3_02f3d967",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-19T18:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd332fef_6e5a1cf3",
+      "range": {
+        "startLine": 38,
+        "startChar": 22,
+        "endLine": 38,
+        "endChar": 27
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ac697bf_f8b54c52",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-11-19T11:38:15Z",
       "side": 1,
       "message": "\"the function\"?",
+      "range": {
+        "startLine": 39,
+        "startChar": 24,
+        "endLine": 39,
+        "endChar": 27
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "489d9cc2_93827a98",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-19T18:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ac697bf_f8b54c52",
       "range": {
         "startLine": 39,
         "startChar": 24,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "471298a3_bd9e811d",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-19T18:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9ef9b8f_3ae7b0e2",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 9
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27cb1b85_3bacd15e",
@@ -100,6 +172,30 @@
       "writtenOn": "2020-11-19T11:38:15Z",
       "side": 1,
       "message": "\"such as an invalid ChannelId.\"?",
+      "range": {
+        "startLine": 41,
+        "startChar": 74,
+        "endLine": 42,
+        "endChar": 41
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09c099e8_8456bd16",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-19T18:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27cb1b85_3bacd15e",
       "range": {
         "startLine": 41,
         "startChar": 74,
@@ -133,6 +229,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "519a7b9a_984d3b08",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-19T18:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cabed1fd_75967bb4",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 61
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2769829_f46be150",
@@ -156,6 +276,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77d3b452_9cd6fb0f",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-19T18:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2769829_f46be150",
+      "range": {
+        "startLine": 48,
+        "startChar": 23,
+        "endLine": 48,
+        "endChar": 26
+      },
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b0e3af2_f7d63ea1",
@@ -169,6 +313,24 @@
       "writtenOn": "2020-11-19T11:38:15Z",
       "side": 1,
       "message": "I guess this is the one method that actually returns a result? Since creating a VoipResultOr type would be overkill, can we return this instead?\n\n  struct CreateChannelResult {\n    // Describes whether the CreateChannel() call succeeded or not.\n    VoipResult result;\n    // If the call succeeded (i.e., if result \u003d\u003d VoipResult::kOk), holds\n    // the ID of the new channel. Otherwise, holds nullopt.\n    absl::optional\u003cChannelId\u003e channel_id;\n  };",
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec1c773_2b62a8cc",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-11-19T18:53:47Z",
+      "side": 1,
+      "message": "Thanks for pointing this out. I took a second look at CreateChannel implementation and it looks like we don\u0027t have any failure case that can happen other than system OOM. I think it would make sense for caller to use absl::optional\u003cChannelId\u003e and here we just return the ChannelId as is. Let me know what you think in new patch.",
+      "parentUuid": "0b0e3af2_f7d63ea1",
       "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
