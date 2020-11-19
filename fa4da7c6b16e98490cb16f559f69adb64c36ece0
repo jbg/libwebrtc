@@ -16,6 +16,23 @@
       "message": "I came up with something that replaces the atomic with two variables updated in lockstep. It works but it\u0027s really ugly; I hope I\u0027m overlooking some simpler solution. Maybe sleeping on it will help.",
       "revId": "fa4da7c6b16e98490cb16f559f69adb64c36ece0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35f4da39_1bca59dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-11-19T08:40:44Z",
+      "side": 1,
+      "message": "Approving this CL. No matter what the rest of the redesign does, dropping these orphan packets is the Right Thing to do.\n(Note: it\u0027s critical that the criteria version *not* increment when the criteria are not changed - otherwise, packets will be dropped gratuitously whenever the SDP is updated. This CL is OK with that - but you might want to add a test that packets are not dropped on criteria non-change - the inverse of your current test - so that this remains true in the future.)\n",
+      "revId": "fa4da7c6b16e98490cb16f559f69adb64c36ece0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
