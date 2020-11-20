@@ -333,6 +333,24 @@
       "parentUuid": "0b0e3af2_f7d63ea1",
       "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0db8cd9b_cfbf176f",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-20T08:21:38Z",
+      "side": 1,
+      "message": "Excellent! If it can\u0027t fail, just returning a value is best!",
+      "parentUuid": "dec1c773_2b62a8cc",
+      "revId": "75207a3ef5d6ff23f99e0714d172253fe67a5f22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
