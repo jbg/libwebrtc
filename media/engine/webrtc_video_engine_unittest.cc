@@ -4045,12 +4045,6 @@ class WebRtcVideoChannelFlexfecRecvTest : public WebRtcVideoChannelTest {
       : WebRtcVideoChannelTest("WebRTC-FlexFEC-03-Advertised/Enabled/") {}
 };
 
-TEST_F(WebRtcVideoChannelFlexfecRecvTest,
-       DefaultFlexfecCodecHasTransportCcAndRembFeedbackParam) {
-  EXPECT_TRUE(cricket::HasTransportCc(GetEngineCodec("flexfec-03")));
-  EXPECT_TRUE(cricket::HasRemb(GetEngineCodec("flexfec-03")));
-}
-
 TEST_F(WebRtcVideoChannelFlexfecRecvTest, SetDefaultRecvCodecsWithoutSsrc) {
   AddRecvStream();
 
