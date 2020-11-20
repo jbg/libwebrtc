@@ -88,15 +88,13 @@ bool IsScaleFactorsPowerOfTwo(const webrtc::VideoEncoderConfig& config) {
 
 void AddDefaultFeedbackParams(VideoCodec* codec,
                               const webrtc::WebRtcKeyValueConfig& trials) {
-  // Don't add any feedback params for RED and ULPFEC.
-  if (codec->name == kRedCodecName || codec->name == kUlpfecCodecName)
+  // Don't add any feedback params for RED, ULPFEC and FlexFEC
+  if (codec->name == kRedCodecName || codec->name == kUlpfecCodecName ||
+      codec->name == kFlexfecCodecName)
     return;
   codec->AddFeedbackParam(FeedbackParam(kRtcpFbParamRemb, kParamValueEmpty));
   codec->AddFeedbackParam(
       FeedbackParam(kRtcpFbParamTransportCc, kParamValueEmpty));
-  // Don't add any more feedback params for FLEXFEC.
-  if (codec->name == kFlexfecCodecName)
-    return;
   codec->AddFeedbackParam(FeedbackParam(kRtcpFbParamCcm, kRtcpFbCcmParamFir));
   codec->AddFeedbackParam(FeedbackParam(kRtcpFbParamNack, kParamValueEmpty));
   codec->AddFeedbackParam(FeedbackParam(kRtcpFbParamNack, kRtcpFbNackParamPli));
