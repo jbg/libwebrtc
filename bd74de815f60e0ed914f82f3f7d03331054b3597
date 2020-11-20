@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c632954d_cfde5cbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-11-20T11:37:27Z",
+      "side": 1,
+      "message": "From an SDP point of view (hta: nod or disagree please) I don\u0027t think flexfec should have fmtp parameters since it does not define or send RTCP messages.",
+      "revId": "bd74de815f60e0ed914f82f3f7d03331054b3597",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
