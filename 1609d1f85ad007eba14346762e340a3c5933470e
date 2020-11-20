@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "1609d1f85ad007eba14346762e340a3c5933470e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "105f2554_a8affeb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-11-20T11:24:41Z",
+      "side": 1,
+      "message": "This appears to be dead code. PTAL.",
+      "revId": "1609d1f85ad007eba14346762e340a3c5933470e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
