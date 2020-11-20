@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b43412c2_201197e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-11-20T12:43:54Z",
+      "side": 1,
+      "message": "PTAL. Not sure what to do about corresponding setters, but ideally they should be deleted too, and replaced by construction-time config.",
+      "revId": "3e95d94f44a77411b615652038f80f5f19ea6724",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
