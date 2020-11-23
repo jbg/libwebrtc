@@ -40,10 +40,24 @@ TEST(RnnVadTest, TestDotProductAvx2) {
   if (!GetAvailableCpuFeatures().avx2) {
     return;
   }
-  AvailableCpuFeatures cpu_features_avx2;
-  cpu_features_avx2.avx2 = true;
+  AvailableCpuFeatures cpu_features;
+  cpu_features.avx2 = true;
 
-  VectorMath vector_math(cpu_features_avx2);
+  VectorMath vector_math(cpu_features);
+  EXPECT_FLOAT_EQ(vector_math.DotProduct(kX, kX), kEnergyOfX);
+  EXPECT_FLOAT_EQ(
+      vector_math.DotProduct({kX, kSizeOfXSubSpan}, {kX, kSizeOfXSubSpan}),
+      kEnergyOfXSubspan);
+}
+
+TEST(RnnVadTest, TestDotProductSse2) {
+  if (!GetAvailableCpuFeatures().sse2) {
+    return;
+  }
+  AvailableCpuFeatures cpu_features;
+  cpu_features.sse2 = true;
+
+  VectorMath vector_math(cpu_features);
   EXPECT_FLOAT_EQ(vector_math.DotProduct(kX, kX), kEnergyOfX);
   EXPECT_FLOAT_EQ(
       vector_math.DotProduct({kX, kSizeOfXSubSpan}, {kX, kSizeOfXSubSpan}),
