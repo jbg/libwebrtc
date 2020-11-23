@@ -33,6 +33,23 @@
       "message": "Moving myself to CC since I am not an owner of desktop_capture but build config looks good to me.",
       "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "162fb31d_376d1b52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-23T07:24:21Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2:\n\u003e \n\u003e Sorry about the lack of response - at the moment swamped with a few other things. If possible I\u0027d recommend finding another reviewer right now\n\nHi Tommi,\n\nI understand. However, you are the one who already reviewed this code when it was part of my previous (much bigger) review. This one is only a small portion and focuses only on PipeWire code, it doesn\u0027t change behavior of the capturer at all, it just internally can do more things like window sharing. The same code has been already reviewed and merged in Firefox upstream.\n\n",
+      "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
