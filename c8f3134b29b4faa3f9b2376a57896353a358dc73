@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2582c80_83eaaad8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-11-23T15:26:45Z",
+      "side": 1,
+      "message": "Hi, these utility functions were added almost a year ago, but appear never used. Do you still plan to use them, or should they be deleted?\n",
+      "revId": "c8f3134b29b4faa3f9b2376a57896353a358dc73",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
