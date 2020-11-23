@@ -163,6 +163,12 @@ std::vector<AvailableCpuFeatures> GetCpuFeaturesToTest() {
   std::vector<AvailableCpuFeatures> v;
   v.push_back({});  // No CPU feature available.
   AvailableCpuFeatures available = GetAvailableCpuFeatures();
+  if (available.avx2 && available.sse2) {
+    AvailableCpuFeatures features;
+    features.avx2 = true;
+    features.sse2 = true;
+    v.push_back(features);
+  }
   if (available.sse2) {
     AvailableCpuFeatures features;
     features.sse2 = true;

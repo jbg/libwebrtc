@@ -30,7 +30,8 @@ TEST(RnnVadTest, PitchSearchWithinTolerance) {
   const int num_frames = std::min(lp_residual_reader.second, 300);  // Max 3 s.
   std::vector<float> lp_residual(kBufSize24kHz);
   float expected_pitch_period, expected_pitch_strength;
-  const AvailableCpuFeatures cpu_features = GetAvailableCpuFeatures();
+  // const AvailableCpuFeatures cpu_features = GetAvailableCpuFeatures();
+  const AvailableCpuFeatures cpu_features;
   PitchEstimator pitch_estimator(cpu_features);
   {
     // TODO(bugs.webrtc.org/8948): Add when the issue is fixed.
