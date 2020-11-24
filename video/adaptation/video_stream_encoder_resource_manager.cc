@@ -10,6 +10,7 @@
 
 #include "video/adaptation/video_stream_encoder_resource_manager.h"
 
+#include <algorithm>
 #include <cmath>
 #include <limits>
 #include <memory>
@@ -72,6 +73,21 @@ absl::optional<uint32_t> GetSingleActiveStreamPixels(const VideoCodec& codec) {
   return pixels;
 }
 
+std::vector<bool> GetActiveLayersFlags(const VideoCodec& codec) {
+  const int num_streams = codec.numberOfSimulcastStreams;
+  std::vector<bool> flags(num_streams);
+  for (int i = 0; i < codec.numberOfSimulcastStreams; ++i) {
+    flags[i] = codec.simulcastStream[i].active;
+  }
+  return flags;
+}
+
+bool EqualFlags(const std::vector<bool>& a, const std::vector<bool>& b) {
+  if (a.size() != b.size())
+    return false;
+  return std::equal(a.begin(), a.end(), b.begin());
+}
+
 }  // namespace
 
 class VideoStreamEncoderResourceManager::InitialFrameDropper {
@@ -123,12 +139,20 @@ class VideoStreamEncoderResourceManager::InitialFrameDropper {
   }
 
   void OnEncoderSettingsUpdated(const VideoCodec& codec) {
+    std::vector<bool> active_flags = GetActiveLayersFlags(codec);
+    if (!EqualFlags(active_flags, last_active_flags_)) {
+      // Streams configuration has changed.
+      // Initial frame drop must be enabled because BWE might be way too low
+      // for the selected resolution.
+      initial_framedrop_ = 0;
+      last_active_flags_ = active_flags;
+    }
     single_active_stream_pixels_ = GetSingleActiveStreamPixels(codec);
   }
 
   void OnFrameDroppedDueToSize() { ++initial_framedrop_; }
 
-  void OnMaybeEncodeFrame() { initial_framedrop_ = kMaxInitialFramedrop; }
+  void Disable() { initial_framedrop_ = kMaxInitialFramedrop; }
 
   void OnQualityScalerSettingsUpdated() {
     if (quality_scaler_resource_->is_started()) {
@@ -153,6 +177,7 @@ class VideoStreamEncoderResourceManager::InitialFrameDropper {
   // Counts how many frames we've dropped in the initial framedrop phase.
   int initial_framedrop_;
   absl::optional<uint32_t> single_active_stream_pixels_;
+  std::vector<bool> last_active_flags_;
 };
 
 VideoStreamEncoderResourceManager::VideoStreamEncoderResourceManager(
@@ -372,7 +397,7 @@ VideoStreamEncoderResourceManager::SingleActiveStreamPixels() const {
 
 void VideoStreamEncoderResourceManager::OnMaybeEncodeFrame() {
   RTC_DCHECK_RUN_ON(encoder_queue_);
-  initial_frame_dropper_->OnMaybeEncodeFrame();
+  initial_frame_dropper_->Disable();
   if (quality_rampup_experiment_ && quality_scaler_resource_->is_started()) {
     DataRate bandwidth = encoder_rates_.has_value()
                              ? encoder_rates_->bandwidth_allocation
