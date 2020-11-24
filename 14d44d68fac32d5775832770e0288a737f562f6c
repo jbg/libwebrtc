@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0752c92b_c1a11826",
+        "filename": "webrtc.gni",
+        "patchSetId": 5
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 13725
+      },
+      "writtenOn": "2020-11-24T18:52:32Z",
+      "side": 1,
+      "message": "We should only build this into the GTests running as XCTests, but not the real XCTests. Probably can reuse some arg like `is_xctest \u003d true` with a better name and documentation.",
+      "range": {
+        "startLine": 458,
+        "startChar": 0,
+        "endLine": 458,
+        "endChar": 61
+      },
+      "revId": "14d44d68fac32d5775832770e0288a737f562f6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
