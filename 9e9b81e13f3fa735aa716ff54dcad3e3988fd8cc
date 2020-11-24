@@ -209,6 +209,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bb9d1a0_fd63b916",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-24T08:14:48Z",
+      "side": 1,
+      "message": "The lock over PipeWire loop is used just once, otherwise it shouldn\u0027t be needed. I wouldn\u0027t bother with with additional scoped class just for thise usage.",
+      "parentUuid": "0e230af8_5ac5f8ff",
+      "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bcecce9_f0ab9ba1",
