@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f95bdd_eb815299",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-24T21:33:59Z",
+      "side": 1,
+      "message": "Is this branch considered an error? If I\u0027m reading the code correctly, it means we got a buffer of a type we don\u0027t support, which seems like it ought to be an error. OTOH, if that\u0027s a real-world scenario, then that error would be rather spammy, so perhaps not logging it is fine. I\u0027ll leave it up to you.",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3328c617_4b16ef8c",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-24T21:33:59Z",
+      "side": 1,
+      "message": "You do this several times, identically I think. It seems like another place that would benefit from a scoped pointer.",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d2519b_298d5e2b",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-24T21:33:59Z",
+      "side": 1,
+      "message": "s/metada/metadata/\n\nAlso below.",
+      "range": {
+        "startLine": 550,
+        "startChar": 21,
+        "endLine": 550,
+        "endChar": 27
+      },
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0140801_ccb2b091",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-24T21:33:59Z",
+      "side": 1,
+      "message": "I don\u0027t understand this. Why does the code need to behave differently depending in this case, as opposed to just having a desktop rect to capture, which is either (0,0)x(width,height) or taken from the metadata? AFAICT, everything should just work with no other changes if you do that.",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f314620_18abf64e",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-24T21:33:59Z",
+      "side": 1,
+      "message": "I *think* you can just \"return make_unique...\" here (at least, I see lots of cases of it in Chromium). No need to create a temporary and move on return.\n\nAlso below.",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e16d5837_694a64d0",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-24T21:33:59Z",
+      "side": 1,
+      "message": "This looks identical to CreateRawScreenCapturer. Is that intentional?",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
