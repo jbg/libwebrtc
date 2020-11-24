@@ -86,6 +86,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c56c75b_28987ccc",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-24T08:02:20Z",
+      "side": 1,
+      "message": "Same situation here with C++ and templates, but it looks you need a generic destructor to be defined in order to have destructors for specific objects. At least it doesn\u0027t compile:\n\n../../third_party/webrtc/modules/desktop_capture/linux/base_capturer_pipewire.cc:106:23: error: specialization of member \u0027webrtc::Scoped\u003c_GVariantIter\u003e::~Scoped\u0027 does not specialize an instantiated member Scoped\u003cGVariantIter\u003e::~Scoped()",
+      "parentUuid": "e1f5064f_87a85e6c",
+      "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e771659_25482a4a",
@@ -99,6 +117,24 @@
       "writtenOn": "2020-11-23T19:01:19Z",
       "side": 1,
       "message": "Could you reformat this to match the layout of the [0] and [1] references, above? You probably don\u0027t need to replicate the comments, although perhaps a comment before each assignment explaining what it does would be useful.",
+      "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d870619_72531681",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-24T08:02:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e771659_25482a4a",
       "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -137,6 +173,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e230af8_5ac5f8ff",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-24T08:02:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1722fb7_ef783722",
+      "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bcecce9_f0ab9ba1",
@@ -154,6 +208,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec0354ad_0e112add",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-24T08:02:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bcecce9_f0ab9ba1",
+      "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf25ec19_8792ef53",
@@ -167,6 +239,24 @@
       "writtenOn": "2020-11-23T19:01:19Z",
       "side": 1,
       "message": "Are these values chosen to match some other constants? If so, then it would be good to document that here.",
+      "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d26c48ad_ac170e28",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-24T08:02:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf25ec19_8792ef53",
       "revId": "9e9b81e13f3fa735aa716ff54dcad3e3988fd8cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
