@@ -17,8 +17,10 @@
 #include <vector>
 
 #include "absl/container/inlined_vector.h"
+#include "api/units/data_rate.h"
 #include "modules/video_coding/svc/create_scalability_structure.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/logging.h"
 
 namespace webrtc {
 namespace {
@@ -291,11 +293,14 @@ VideoBitrateAllocation SvcRateAllocator::GetAllocationNormalVideo(
     num_spatial_layers = 1;
     spatial_layer_rates.push_back(total_bitrate);
   } else {
+    auto bitrates = SplitBitrate(num_spatial_layers, total_bitrate,
+                                 kSpatialLayeringRateScalingFactor);
+    RTC_DCHECK_EQ(bitrates.size(), num_spatial_layers);
     spatial_layer_rates =
-        AdjustAndVerify(codec_, first_active_layer,
-                        SplitBitrate(num_spatial_layers, total_bitrate,
-                                     kSpatialLayeringRateScalingFactor));
-    RTC_DCHECK_EQ(spatial_layer_rates.size(), num_spatial_layers);
+        AdjustAndVerify(codec_, first_active_layer, std::move(bitrates));
+    RTC_DCHECK_EQ(spatial_layer_rates.size(), num_spatial_layers)
+        << first_active_layer << "/" << num_spatial_layers << "/"
+        << total_bitrate;
   }
 
   VideoBitrateAllocation bitrate_allocation;

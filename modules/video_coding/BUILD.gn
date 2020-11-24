@@ -208,6 +208,7 @@ rtc_library("video_coding") {
     "../../system_wrappers",
     "../rtp_rtcp",
     "../rtp_rtcp:rtp_rtcp_format",
+    "codecs/av1:av1_svc_config",
   ]
 }
 
