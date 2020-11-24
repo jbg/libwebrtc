@@ -344,6 +344,7 @@ if (!build_with_chromium) {
         "../rtc_base:ignore_wundef",
 
         # TODO(kwiberg): Remove this dependency.
+        "../api:network_state_predictor_api",
         "../api/audio_codecs:audio_codecs_api",
         "../api/transport:field_trial_based_config",
         "../api/transport:goog_cc",
