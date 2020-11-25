@@ -427,6 +427,7 @@ template("rtc_test") {
                            "*",
                            [
                              "configs",
+                             "is_xctest",
                              "public_configs",
                              "suppressed_configs",
                              "visibility",
@@ -453,6 +454,11 @@ template("rtc_test") {
       min_sdk_version = 21
       target_sdk_version = 23
       deps += [ webrtc_root + "test:native_test_java" ]
+    }
+    if (is_ios && target_cpu == "x64") {
+      if (!defined(invoker.is_xctest) || !invoker.is_xctest) {
+        xctest_module_target = "//base/test:google_test_runner"
+      }
     }
   }
 }
