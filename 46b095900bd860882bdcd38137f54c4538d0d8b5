@@ -49,6 +49,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf7fc94c_875c5dde",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-25T13:39:07Z",
+      "side": 1,
+      "message": "Again, change in aspect ratio even without change in the pixel count is the change in the stream configuration.\n\nAnd the solution \"Reset initial frame dropper for stream configuration change\" makes more sense to me than special cases.",
+      "parentUuid": "4198ed8a_3ccbc101",
+      "range": {
+        "startLine": 150,
+        "startChar": 9,
+        "endLine": 151,
+        "endChar": 43
+      },
+      "revId": "46b095900bd860882bdcd38137f54c4538d0d8b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f301b1b_c6e72eba",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-25T13:39:07Z",
+      "side": 1,
+      "message": "Technically, decrease also is a change in the stream. But in that case initial frame drop shouldn\u0027t kick in, since current, bigger resolution is fine.\n\nI would like to leave it as is because it makes more sense to treat every change in the same way.",
+      "parentUuid": "2ce4eb11_c03b318f",
+      "range": {
+        "startLine": 151,
+        "startChar": 28,
+        "endLine": 151,
+        "endChar": 30
+      },
+      "revId": "46b095900bd860882bdcd38137f54c4538d0d8b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a63c50d_21c4c4e3",
         "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
         "patchSetId": 4
@@ -60,6 +108,30 @@
       "writtenOn": "2020-11-25T11:53:58Z",
       "side": 1,
       "message": "Should an adaptation in framerate be included in the check?",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 56
+      },
+      "revId": "46b095900bd860882bdcd38137f54c4538d0d8b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0bd4e9b_fe64e3bb",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-25T13:39:07Z",
+      "side": 1,
+      "message": "I don\u0027t think frame rate should be taken into account.",
+      "parentUuid": "6a63c50d_21c4c4e3",
       "range": {
         "startLine": 152,
         "startChar": 8,
@@ -93,6 +165,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6afea49e_79515859",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-25T13:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "930405c7_d53dd8f7",
+      "range": {
+        "startLine": 157,
+        "startChar": 6,
+        "endLine": 157,
+        "endChar": 37
+      },
+      "revId": "46b095900bd860882bdcd38137f54c4538d0d8b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7010fcf1_e18d0e08",
@@ -106,6 +202,30 @@
       "writtenOn": "2020-11-25T11:53:58Z",
       "side": 1,
       "message": "Only reset if quality_scaler is enabled.",
+      "range": {
+        "startLine": 158,
+        "startChar": 6,
+        "endLine": 158,
+        "endChar": 29
+      },
+      "revId": "46b095900bd860882bdcd38137f54c4538d0d8b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e05c5b5e_99b5875f",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-25T13:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7010fcf1_e18d0e08",
       "range": {
         "startLine": 158,
         "startChar": 6,
@@ -139,6 +259,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81a4007f_cecc94b6",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4634,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-25T13:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42014b6e_7d985fdd",
+      "range": {
+        "startLine": 4631,
+        "startChar": 0,
+        "endLine": 4634,
+        "endChar": 49
+      },
+      "revId": "46b095900bd860882bdcd38137f54c4538d0d8b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46fd234b_b8011873",
@@ -152,6 +296,30 @@
       "writtenOn": "2020-11-25T11:53:58Z",
       "side": 1,
       "message": "Perhaps also add a test verifying that quality upscaling does not trigger the initial frame dropper.",
+      "range": {
+        "startLine": 4667,
+        "startChar": 0,
+        "endLine": 4667,
+        "endChar": 1
+      },
+      "revId": "46b095900bd860882bdcd38137f54c4538d0d8b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f614fa62_7ecb1c7b",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4667,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-25T13:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46fd234b_b8011873",
       "range": {
         "startLine": 4667,
         "startChar": 0,
