@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0d1053a_769359de",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_abs_send_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-11-25T08:50:40Z",
+      "side": 1,
+      "message": "This file uses RateControlInput and maybe more things from bwe_defines.h.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 65
+      },
+      "revId": "5b434eab8d3259753c7d4b63ed6b7f4875eebc88",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

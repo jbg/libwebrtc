@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2caf91d4_db250a6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-11-25T08:50:40Z",
+      "side": 1,
+      "message": "Sebastian, would you like to have a first look? If you think it\u0027s too large or involves too many owners, I could split it in smaller more trivial pieces.",
+      "revId": "be8c50cfacc808c17ca0f91a5909914e5daa2c0f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
