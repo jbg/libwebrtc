@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92b51bf_8406613f",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-25T18:17:44Z",
+      "side": 1,
+      "message": "Elsewhere you compare this against MAP_FAILED. Is that defined to be null? I think you should be consistent in both places.\n\nOptional: perhaps an operator bool() would be a clear way of implementing a validity check.",
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c5edf6c_76a71501",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-25T18:17:44Z",
+      "side": 1,
+      "message": "If you don\u0027t need this as a class member any more, I think it would be clearer to track a couple of bools: video_is_full_width and video_is_full_height (or similar). Combining them into the existing semantics of video_metadata_use_ is trivial, but having them separate makes setting src and xOffset more readable.",
+      "range": {
+        "startLine": 577,
+        "startChar": 2,
+        "endLine": 577,
+        "endChar": 21
+      },
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68460905_48f61664",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-25T18:17:44Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be conditional on video_metadata_use_. Wouldn\u0027t you want to reallocate the buffer if the size changes for any reason?",
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cee5d73f_610cf283",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-25T18:17:44Z",
+      "side": 1,
+      "message": "I think the style guide mandates snake_case for variables: dst_stride and src_stride.",
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c0c4a41_f2fec064",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-25T18:17:44Z",
+      "side": 1,
+      "message": "x_offset",
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "028c0f05_09a7d9f6",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-25T18:17:44Z",
+      "side": 1,
+      "message": "It looks like video_size_ will be equal to desktop_size if video_metadata_use_ is false, so I think you can just use video_size_ and get rid of the video_metadata_use_ member altogether. That\u0027s what I was referring to when I said I didn\u0027t understand why you needed the variable.",
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

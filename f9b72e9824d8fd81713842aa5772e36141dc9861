@@ -221,6 +221,24 @@
       "parentUuid": "e16d5837_694a64d0",
       "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a4ab362_596046bb",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-25T18:17:44Z",
+      "side": 1,
+      "message": "Why not just have a single Create() method in that case?",
+      "parentUuid": "2393df9a_d3640b36",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
