@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d04d4db0_95928187",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-25T11:44:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4f95bdd_eb815299",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3328c617_4b16ef8c",
@@ -31,6 +49,24 @@
       "writtenOn": "2020-11-24T21:33:59Z",
       "side": 1,
       "message": "You do this several times, identically I think. It seems like another place that would benefit from a scoped pointer.",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2ba09b4_d1ebc0f8",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-25T11:44:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3328c617_4b16ef8c",
       "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -58,6 +94,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69c9de42_a4f9f464",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-25T11:44:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74d2519b_298d5e2b",
+      "range": {
+        "startLine": 550,
+        "startChar": 21,
+        "endLine": 550,
+        "endChar": 27
+      },
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0140801_ccb2b091",
@@ -71,6 +131,24 @@
       "writtenOn": "2020-11-24T21:33:59Z",
       "side": 1,
       "message": "I don\u0027t understand this. Why does the code need to behave differently depending in this case, as opposed to just having a desktop rect to capture, which is either (0,0)x(width,height) or taken from the metadata? AFAICT, everything should just work with no other changes if you do that.",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "873a0b64_540c7573",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-25T11:44:54Z",
+      "side": 1,
+      "message": "If we share a screen, then usually metadata will be equal to desktop_size or not set, this depends on implementation (in GNOME metadata will be equal, in KDE they will not be set). However, if we share a window, then the metadata might not be equal to desktop_size (desktop_size is taken from size of the stream), because the position is not always at (0, 0). There might be an offset, then desktop_size will be bigger and the actual content of the window is smaller. That\u0027s also why I do the thing with xOffset below, because if we don\u0027t calculate the offset then part of the window would be missing.",
+      "parentUuid": "a0140801_ccb2b091",
       "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -92,6 +170,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38800962_6cbd41f2",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-25T11:44:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f314620_18abf64e",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e16d5837_694a64d0",
@@ -105,6 +201,24 @@
       "writtenOn": "2020-11-24T21:33:59Z",
       "side": 1,
       "message": "This looks identical to CreateRawScreenCapturer. Is that intentional?",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2393df9a_d3640b36",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-25T11:44:54Z",
+      "side": 1,
+      "message": "Yes, it is intentional. We want to make same request to xdg-desktop-portal for both types of capturers.",
+      "parentUuid": "e16d5837_694a64d0",
       "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
