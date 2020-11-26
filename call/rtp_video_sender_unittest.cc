@@ -768,20 +768,8 @@ TEST(RtpVideoSenderTest, SupportsStoppingUsingDependencyDescriptor) {
       sent_packets.back().HasExtension<RtpDependencyDescriptorExtension>());
 }
 
-TEST(RtpVideoSenderTest, CanSetZeroBitrateWithOverhead) {
-  test::ScopedFieldTrials trials("WebRTC-SendSideBwe-WithOverhead/Enabled/");
+TEST(RtpVideoSenderTest, CanSetZeroBitrate) {
   RtpVideoSenderTestFixture test({kSsrc1}, {kRtxSsrc1}, kPayloadType, {});
-  BitrateAllocationUpdate update;
-  update.target_bitrate = DataRate::Zero();
-  update.packet_loss_ratio = 0;
-  update.round_trip_time = TimeDelta::Zero();
-
-  test.router()->OnBitrateUpdated(update, /*framerate*/ 0);
-}
-
-TEST(RtpVideoSenderTest, CanSetZeroBitrateWithoutOverhead) {
-  RtpVideoSenderTestFixture test({kSsrc1}, {kRtxSsrc1}, kPayloadType, {});
-
   BitrateAllocationUpdate update;
   update.target_bitrate = DataRate::Zero();
   update.packet_loss_ratio = 0;
@@ -802,4 +790,45 @@ TEST(RtpVideoSenderTest, SimulcastSenderRegistersFrameTransformers) {
   EXPECT_CALL(*transformer, UnregisterTransformedFrameSinkCallback(kSsrc1));
   EXPECT_CALL(*transformer, UnregisterTransformedFrameSinkCallback(kSsrc2));
 }
+
+TEST(RtpVideoSenderTest, OverheadIsSubtractedFromTargetBitrate) {
+  // TODO(jakobi): RTP header size should not be hard coded.
+  constexpr uint32_t kRtpHeaderSizeBytes = 20;
+  constexpr uint32_t kTransportPacketOverheadBytes = 40;
+  constexpr uint32_t kOverheadPerPacketBytes =
+      kRtpHeaderSizeBytes + kTransportPacketOverheadBytes;
+  RtpVideoSenderTestFixture test({kSsrc1}, {kRtxSsrc1}, kPayloadType, {});
+  test.router()->OnTransportOverheadChanged(kTransportPacketOverheadBytes);
+  test.router()->SetActive(true);
+
+  {
+    BitrateAllocationUpdate update;
+    update.target_bitrate = DataRate::BitsPerSec(300000);
+    update.round_trip_time = TimeDelta::Zero();
+    test.router()->OnBitrateUpdated(update, /*framerate*/ 30);
+    // 1 packet per frame.
+    EXPECT_EQ(test.router()->GetPayloadBitrateBps(),
+              update.target_bitrate.bps() - kOverheadPerPacketBytes * 8 * 30);
+  }
+  {
+    BitrateAllocationUpdate update;
+    update.target_bitrate = DataRate::BitsPerSec(150000);
+    update.round_trip_time = TimeDelta::Zero();
+    test.router()->OnBitrateUpdated(update, /*framerate*/ 15);
+    // 1 packet per frame.
+    EXPECT_EQ(test.router()->GetPayloadBitrateBps(),
+              update.target_bitrate.bps() - kOverheadPerPacketBytes * 8 * 15);
+  }
+  {
+    BitrateAllocationUpdate update;
+    update.target_bitrate = DataRate::BitsPerSec(1000000);
+    update.round_trip_time = TimeDelta::Zero();
+    test.router()->OnBitrateUpdated(update, /*framerate*/ 30);
+    // 3 packets per frame.
+    EXPECT_EQ(
+        test.router()->GetPayloadBitrateBps(),
+        update.target_bitrate.bps() - kOverheadPerPacketBytes * 8 * 30 * 3);
+  }
+}
+
 }  // namespace webrtc
