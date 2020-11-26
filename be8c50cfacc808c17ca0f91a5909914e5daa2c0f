@@ -33,6 +33,24 @@
       "message": "Karl, PTAL. OWNER\u0027s approval missing for\n\n    audio/BUILD.gn\n    audio/DEPS\n    modules/rtp_rtcp/source/rtcp_sender.h\n    rtc_tools/BUILD.gn\n",
       "revId": "be8c50cfacc808c17ca0f91a5909914e5daa2c0f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "733c88eb_05b58a9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-11-26T12:22:40Z",
+      "side": 1,
+      "message": "These LGTM.",
+      "parentUuid": "eb2f528b_6a97f245",
+      "revId": "be8c50cfacc808c17ca0f91a5909914e5daa2c0f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
