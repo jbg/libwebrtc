@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8f6e2e9_70d49eac",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-26T14:05:03Z",
+      "side": 1,
+      "message": "Ah, good catch! \nIf degradation preference is MAINTAIN_RESOLUTION, quality scaling is disabled altogether. The issue is only possible in BALANCED_MODE: If source resolution changes at the same time as adaptation in frame-rate happens.\n\nSee the latest change: I now ignore adaptations in frame-rate.",
+      "parentUuid": "fd6473a3_cbc592f8",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 56
+      },
+      "revId": "46b095900bd860882bdcd38137f54c4538d0d8b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "930405c7_d53dd8f7",
         "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
         "patchSetId": 4
