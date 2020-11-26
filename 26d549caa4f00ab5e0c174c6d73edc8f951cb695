@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72115e6e_dfcf48b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-11-26T15:08:49Z",
+      "side": 1,
+      "message": "Tried to take a stab at this, PTAL. Questions:\n- Should we use a longer filter for the frame rate?\n- Do you think this warrants a field trial?\n- Any other suggestions how we can make this more accurate?",
+      "revId": "26d549caa4f00ab5e0c174c6d73edc8f951cb695",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
