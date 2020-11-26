@@ -24,6 +24,53 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a991d32_6d735a2f",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-26T15:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f303160c_771ea035",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 27
+      },
+      "revId": "b2e18e943ace880db3b15873abcfc7faef0e54a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e09a7f1_3bf2558d",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-26T15:59:04Z",
+      "side": 1,
+      "message": "This now is not needed with resolution_adaptation, like you have suggested.",
+      "range": {
+        "startLine": 538,
+        "startChar": 2,
+        "endLine": 539,
+        "endChar": 38
+      },
+      "revId": "b2e18e943ace880db3b15873abcfc7faef0e54a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78ed804b_656d6ba6",
@@ -47,6 +94,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e42e9577_a276755e",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 4647,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-26T15:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78ed804b_656d6ba6",
+      "range": {
+        "startLine": 4644,
+        "startChar": 0,
+        "endLine": 4647,
+        "endChar": 59
+      },
+      "revId": "b2e18e943ace880db3b15873abcfc7faef0e54a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e307947c_03b63412",
@@ -60,6 +131,30 @@
       "writtenOn": "2020-11-26T15:51:09Z",
       "side": 1,
       "message": "ditto and see below",
+      "range": {
+        "startLine": 4698,
+        "startChar": 0,
+        "endLine": 4701,
+        "endChar": 59
+      },
+      "revId": "b2e18e943ace880db3b15873abcfc7faef0e54a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5ff8551_c3b9c4a6",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 4701,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-11-26T15:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e307947c_03b63412",
       "range": {
         "startLine": 4698,
         "startChar": 0,
