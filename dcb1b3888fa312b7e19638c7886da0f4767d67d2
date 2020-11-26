@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "696c5703_c1d53475",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-26T08:12:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e92b51bf_8406613f",
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c5edf6c_76a71501",
@@ -31,6 +49,30 @@
       "writtenOn": "2020-11-25T18:17:44Z",
       "side": 1,
       "message": "If you don\u0027t need this as a class member any more, I think it would be clearer to track a couple of bools: video_is_full_width and video_is_full_height (or similar). Combining them into the existing semantics of video_metadata_use_ is trivial, but having them separate makes setting src and xOffset more readable.",
+      "range": {
+        "startLine": 577,
+        "startChar": 2,
+        "endLine": 577,
+        "endChar": 21
+      },
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5da0e7fb_60129c21",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-26T08:12:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c5edf6c_76a71501",
       "range": {
         "startLine": 577,
         "startChar": 2,
@@ -58,6 +100,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc85e10b_57cea5e7",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-26T08:12:05Z",
+      "side": 1,
+      "message": "I don\u0027t expect it to change, basically only when a window sizes changes. Screen size will most likely not change during streaming, but probably we can be ready even for this scenario.",
+      "parentUuid": "68460905_48f61664",
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cee5d73f_610cf283",
@@ -71,6 +131,24 @@
       "writtenOn": "2020-11-25T18:17:44Z",
       "side": 1,
       "message": "I think the style guide mandates snake_case for variables: dst_stride and src_stride.",
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d50dd09f_e1247a5b",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-26T08:12:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cee5d73f_610cf283",
       "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -92,6 +170,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a85dde7_3c63ced6",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-26T08:12:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c0c4a41_f2fec064",
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "028c0f05_09a7d9f6",
@@ -105,6 +201,24 @@
       "writtenOn": "2020-11-25T18:17:44Z",
       "side": 1,
       "message": "It looks like video_size_ will be equal to desktop_size if video_metadata_use_ is false, so I think you can just use video_size_ and get rid of the video_metadata_use_ member altogether. That\u0027s what I was referring to when I said I didn\u0027t understand why you needed the variable.",
+      "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d33766e0_3f3d06c8",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-26T08:12:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "028c0f05_09a7d9f6",
       "revId": "dcb1b3888fa312b7e19638c7886da0f4767d67d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

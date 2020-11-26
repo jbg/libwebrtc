@@ -239,6 +239,24 @@
       "parentUuid": "2393df9a_d3640b36",
       "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b0cb4e_d55f3d99",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-26T08:12:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a4ab362_596046bb",
+      "revId": "f9b72e9824d8fd81713842aa5772e36141dc9861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
