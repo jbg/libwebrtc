@@ -292,11 +292,13 @@ std::vector<RtpStreamSender> CreateRtpStreamSenders(
 
 DataRate CalculateOverheadRate(DataRate data_rate,
                                DataSize packet_size,
-                               DataSize overhead_per_packet) {
-  Frequency packet_rate = data_rate / packet_size;
-  // TOSO(srte): We should not need to round to nearest whole packet per second
-  // rate here.
-  return packet_rate.RoundUpTo(Frequency::Hertz(1)) * overhead_per_packet;
+                               DataSize overhead_per_packet,
+                               int framerate) {
+  framerate = std::max(framerate, 1);
+  auto frame_size = data_rate / framerate;
+  auto packets_per_frame = frame_size / packet_size;
+  return packets_per_frame.RoundUpTo(Frequency::Hertz(1)) * framerate *
+         overhead_per_packet;
 }
 
 absl::optional<VideoCodecType> GetVideoCodecType(const RtpConfig& config) {
@@ -766,8 +768,9 @@ void RtpVideoSender::OnBitrateUpdated(BitrateAllocationUpdate update,
       rtp_config_.max_packet_size + transport_overhead_bytes_per_packet_);
   uint32_t payload_bitrate_bps = update.target_bitrate.bps();
   if (send_side_bwe_with_overhead_ && has_packet_feedback_) {
-    DataRate overhead_rate = CalculateOverheadRate(
-        update.target_bitrate, max_total_packet_size, packet_overhead);
+    DataRate overhead_rate =
+        CalculateOverheadRate(update.target_bitrate, max_total_packet_size,
+                              packet_overhead, framerate);
     // TODO(srte): We probably should not accept 0 payload bitrate here.
     payload_bitrate_bps = rtc::saturated_cast<uint32_t>(payload_bitrate_bps -
                                                         overhead_rate.bps());
@@ -806,7 +809,7 @@ void RtpVideoSender::OnBitrateUpdated(BitrateAllocationUpdate update,
     DataRate encoder_overhead_rate = CalculateOverheadRate(
         DataRate::BitsPerSec(encoder_target_rate_bps_),
         max_total_packet_size - DataSize::Bytes(overhead_bytes_per_packet),
-        packet_overhead);
+        packet_overhead, framerate);
     encoder_overhead_rate_bps = std::min(
         encoder_overhead_rate.bps<uint32_t>(),
         update.target_bitrate.bps<uint32_t>() - encoder_target_rate_bps_);
