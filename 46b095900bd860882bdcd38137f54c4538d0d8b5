@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd6473a3_cbc592f8",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2020-11-26T08:20:07Z",
+      "side": 1,
+      "message": "Was thinking about for example something like:\nIncoming frame 640x360\nQuality scaler requests downgrade -\u003e adapts down in framerate.\nIncoming frame increases -\u003e source resolution changed \u003d false",
+      "parentUuid": "b0bd4e9b_fe64e3bb",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 56
+      },
+      "revId": "46b095900bd860882bdcd38137f54c4538d0d8b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "930405c7_d53dd8f7",
         "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
         "patchSetId": 4
