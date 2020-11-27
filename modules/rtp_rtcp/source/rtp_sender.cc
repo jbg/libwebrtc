@@ -19,6 +19,7 @@
 #include "absl/strings/match.h"
 #include "api/array_view.h"
 #include "api/rtc_event_log/rtc_event_log.h"
+#include "api/units/time_delta.h"
 #include "logging/rtc_event_log/events/rtc_event_rtp_packet_outgoing.h"
 #include "modules/rtp_rtcp/include/rtp_cvo.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
@@ -32,6 +33,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_minmax.h"
 #include "rtc_base/rate_limiter.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/time_utils.h"
 
 namespace webrtc {
@@ -160,6 +162,7 @@ RTPSender::RTPSender(const RtpRtcpInterface::Configuration& config,
                      RtpPacketSender* packet_sender)
     : clock_(config.clock),
       random_(clock_->TimeInMicroseconds()),
+      worker_queue_(TaskQueueBase::Current()),
       audio_configured_(config.audio),
       ssrc_(config.local_media_ssrc),
       rtx_ssrc_(config.rtx_send_ssrc),
@@ -193,8 +196,16 @@ RTPSender::RTPSender(const RtpRtcpInterface::Configuration& config,
   sequence_number_rtx_ = random_.Rand(1, kMaxInitRtpSeqNumber);
   sequence_number_ = random_.Rand(1, kMaxInitRtpSeqNumber);
 
+  last_media_send_time_ = last_rtx_send_time_ = rtc::TimeMillis();
+
   RTC_DCHECK(paced_sender_);
   RTC_DCHECK(packet_history_);
+
+  RTC_DCHECK(worker_queue_);
+  check_send_time_task_ = RepeatingTaskHandle::DelayedStart(
+      worker_queue_,
+      TimeDelta::Millis(kRtpPacketIntervalToRestartMidRidSending),
+      [this]() { return TimeDelta::Millis(CheckSendTimes()); });
 }
 
 RTPSender::~RTPSender() {
@@ -207,6 +218,9 @@ RTPSender::~RTPSender() {
   // variables but we grab them in all other methods. (what's the design?)
   // Start documenting what thread we're on in what method so that it's easier
   // to understand performance attributes and possibly remove locks.
+
+  RTC_DCHECK_RUN_ON(worker_queue_);
+  check_send_time_task_.Stop();
 }
 
 rtc::ArrayView<const RtpExtensionSize> RTPSender::FecExtensionSizes() {
@@ -348,19 +362,29 @@ int32_t RTPSender::ReSendPacket(uint16_t packet_id) {
   return packet_size;
 }
 
-void RTPSender::OnReceivedAckOnSsrc(int64_t extended_highest_sequence_number) {
+void RTPSender::OnReceivedAckOnSsrc(uint32_t extended_highest_sequence_number) {
+  RTC_DCHECK_RUN_ON(worker_queue_);
   MutexLock lock(&send_mutex_);
-  bool update_required = !ssrc_has_acked_;
-  ssrc_has_acked_ = true;
-  if (update_required) {
-    UpdateHeaderSizes();
+  if (!ssrc_has_acked_ && initial_media_sequence_number_) {
+    uint16_t diff = static_cast<uint16_t>(extended_highest_sequence_number) -
+                    *initial_media_sequence_number_;
+    if (diff <= 0x7FFFu) {
+      ssrc_has_acked_ = true;
+      UpdateHeaderSizes();
+    }
   }
 }
 
 void RTPSender::OnReceivedAckOnRtxSsrc(
-    int64_t extended_highest_sequence_number) {
+    uint32_t extended_highest_sequence_number) {
+  RTC_DCHECK_RUN_ON(worker_queue_);
   MutexLock lock(&send_mutex_);
-  rtx_ssrc_has_acked_ = true;
+  if (!rtx_ssrc_has_acked_ && initial_rtx_sequence_number_) {
+    uint16_t diff = static_cast<uint16_t>(extended_highest_sequence_number) -
+                    *initial_rtx_sequence_number_;
+    if (diff <= 0x7FFFu)
+      rtx_ssrc_has_acked_ = true;
+  }
 }
 
 void RTPSender::OnReceivedNack(
@@ -629,6 +653,59 @@ bool RTPSender::AssignSequenceNumber(RtpPacketToSend* packet) {
   return true;
 }
 
+void RTPSender::OnSendingPacket(RtpPacketToSend* packet) {
+  RTC_DCHECK_RUN_ON(worker_queue_);
+  const int64_t now_ms = rtc::TimeMillis();
+  const uint32_t ssrc = packet->Ssrc();
+
+  MutexLock lock(&send_mutex_);
+
+  if (ssrc == ssrc_) {
+    last_media_send_time_ = now_ms;
+    if (!initial_media_sequence_number_)
+      initial_media_sequence_number_ = packet->SequenceNumber();
+  } else if (rtx_ssrc_ && ssrc == *rtx_ssrc_) {
+    last_rtx_send_time_ = now_ms;
+    if (!initial_rtx_sequence_number_)
+      initial_rtx_sequence_number_ = packet->SequenceNumber();
+  }
+}
+
+int64_t RTPSender::CheckSendTimes() {
+  RTC_DCHECK_RUN_ON(worker_queue_);
+  const int64_t now_ms = rtc::TimeMillis();
+  int64_t next_call_delay = kRtpPacketIntervalToRestartMidRidSending;
+
+  MutexLock lock(&send_mutex_);
+
+  if (ssrc_has_acked_) {
+    int64_t elapsed = now_ms - last_media_send_time_;
+    if (elapsed >= kRtpPacketIntervalToRestartMidRidSending) {
+      ssrc_has_acked_ = false;
+      initial_media_sequence_number_ = absl::nullopt;
+      UpdateHeaderSizes();
+    } else {
+      int64_t next_delay = kRtpPacketIntervalToRestartMidRidSending - elapsed;
+      if (next_delay < next_call_delay)
+        next_call_delay = next_delay;
+    }
+  }
+
+  if (rtx_ssrc_has_acked_) {
+    int64_t elapsed = now_ms - last_rtx_send_time_;
+    if (elapsed >= kRtpPacketIntervalToRestartMidRidSending) {
+      rtx_ssrc_has_acked_ = false;
+      initial_rtx_sequence_number_ = absl::nullopt;
+    } else {
+      int64_t next_delay = kRtpPacketIntervalToRestartMidRidSending - elapsed;
+      if (next_delay < next_call_delay)
+        next_call_delay = next_delay;
+    }
+  }
+
+  return next_call_delay;
+}
+
 void RTPSender::SetSendingMediaStatus(bool enabled) {
   MutexLock lock(&send_mutex_);
   sending_media_ = enabled;
@@ -657,16 +734,32 @@ void RTPSender::SetRid(const std::string& rid) {
   // RID is used in simulcast scenario when multiple layers share the same mid.
   MutexLock lock(&send_mutex_);
   RTC_DCHECK_LE(rid.length(), RtpStreamId::kMaxValueSizeBytes);
-  rid_ = rid;
-  UpdateHeaderSizes();
+  if (rid != rid_) {
+    // Restart sending mid and rid RTP header extensions
+    ssrc_has_acked_ = false;
+    rtx_ssrc_has_acked_ = false;
+    initial_media_sequence_number_ = absl::nullopt;
+    initial_rtx_sequence_number_ = absl::nullopt;
+
+    rid_ = rid;
+    UpdateHeaderSizes();
+  }
 }
 
 void RTPSender::SetMid(const std::string& mid) {
   // This is configured via the API.
   MutexLock lock(&send_mutex_);
   RTC_DCHECK_LE(mid.length(), RtpMid::kMaxValueSizeBytes);
-  mid_ = mid;
-  UpdateHeaderSizes();
+  if (mid != mid_) {
+    // Restart sending mid and rid RTP header extensions
+    ssrc_has_acked_ = false;
+    rtx_ssrc_has_acked_ = false;
+    initial_media_sequence_number_ = absl::nullopt;
+    initial_rtx_sequence_number_ = absl::nullopt;
+
+    mid_ = mid;
+    UpdateHeaderSizes();
+  }
 }
 
 void RTPSender::SetCsrcs(const std::vector<uint32_t>& csrcs) {

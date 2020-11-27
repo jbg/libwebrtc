@@ -21,6 +21,7 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/call/transport.h"
+#include "api/task_queue/task_queue_base.h"
 #include "api/transport/webrtc_key_value_config.h"
 #include "modules/rtp_rtcp/include/flexfec_sender.h"
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
@@ -33,6 +34,7 @@
 #include "rtc_base/random.h"
 #include "rtc_base/rate_statistics.h"
 #include "rtc_base/synchronization/mutex.h"
+#include "rtc_base/task_utils/repeating_task.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
@@ -103,9 +105,9 @@ class RTPSender {
   int32_t ReSendPacket(uint16_t packet_id) RTC_LOCKS_EXCLUDED(send_mutex_);
 
   // ACK.
-  void OnReceivedAckOnSsrc(int64_t extended_highest_sequence_number)
+  void OnReceivedAckOnSsrc(uint32_t extended_highest_sequence_number)
       RTC_LOCKS_EXCLUDED(send_mutex_);
-  void OnReceivedAckOnRtxSsrc(int64_t extended_highest_sequence_number)
+  void OnReceivedAckOnRtxSsrc(uint32_t extended_highest_sequence_number)
       RTC_LOCKS_EXCLUDED(send_mutex_);
 
   // RTX.
@@ -165,6 +167,9 @@ class RTPSender {
   void EnqueuePackets(std::vector<std::unique_ptr<RtpPacketToSend>> packets)
       RTC_LOCKS_EXCLUDED(send_mutex_);
 
+  // Notifies of the packet being sent
+  void OnSendingPacket(RtpPacketToSend* packet);
+
   void SetRtpState(const RtpState& rtp_state) RTC_LOCKS_EXCLUDED(send_mutex_);
   RtpState GetRtpState() const RTC_LOCKS_EXCLUDED(send_mutex_);
   void SetRtxRtpState(const RtpState& rtp_state)
@@ -181,8 +186,25 @@ class RTPSender {
 
   void UpdateHeaderSizes() RTC_EXCLUSIVE_LOCKS_REQUIRED(send_mutex_);
 
+  // Called on worker_queue_ to check if no packets are being sent for
+  // kRtpPacketIntervalToRestartMidRidSending
+  int64_t CheckSendTimes();
+
   Clock* const clock_;
   Random random_ RTC_GUARDED_BY(send_mutex_);
+
+  TaskQueueBase* const worker_queue_;
+  RepeatingTaskHandle check_send_time_task_ RTC_GUARDED_BY(worker_queue_);
+
+  // Amount of time, in milliseconds, since the last sent packet for an SSRC,
+  // after which we resume sending mid and rid RTP header extensions
+  static constexpr int64_t kRtpPacketIntervalToRestartMidRidSending = 4000;
+
+  int64_t last_media_send_time_;
+  int64_t last_rtx_send_time_;
+
+  absl::optional<uint16_t> initial_media_sequence_number_;
+  absl::optional<uint16_t> initial_rtx_sequence_number_;
 
   const bool audio_configured_;
 

@@ -333,6 +333,7 @@ bool ModuleRtpRtcpImpl2::TrySendPacket(RtpPacketToSend* packet,
   if (!rtp_sender_->packet_generator.SendingMedia()) {
     return false;
   }
+  rtp_sender_->packet_generator.OnSendingPacket(packet);
   rtp_sender_->packet_sender.SendPacket(packet, pacing_info);
   return true;
 }
