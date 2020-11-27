@@ -1,0 +1,175 @@
+--- modules/desktop_capture/linux/base_capturer_pipewire.cc
++++ modules/desktop_capture/linux/base_capturer_pipewire.cc
+@@ -683,8 +855,13 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
+     return;
+   }
+ 
++#if PW_CHECK_VERSION(0, 3, 0)
++  if (spaBuffer->datas[0].type == SPA_DATA_MemFd ||
++      spaBuffer->datas[0].type == SPA_DATA_DmaBuf) {
++#else
+   if (spaBuffer->datas[0].type == pw_core_type_->data.MemFd ||
+       spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf) {
++#endif
+     map = static_cast<uint8_t*>(mmap(
+         nullptr, spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset,
+         PROT_READ, MAP_PRIVATE, spaBuffer->datas[0].fd, 0));
+@@ -695,12 +872,20 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
+       return;
+     }
+ 
++#if PW_CHECK_VERSION(0, 3, 0)
++    if (spaBuffer->datas[0].type == SPA_DATA_DmaBuf) {
++#else
+     if (spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf) {
++#endif
+       SyncDmaBuf(spaBuffer->datas[0].fd, DMA_BUF_SYNC_START);
+     }
+ 
+     src = SPA_MEMBER(map, spaBuffer->datas[0].mapoffset, uint8_t);
++#if PW_CHECK_VERSION(0, 3, 0)
++  } else if (spaBuffer->datas[0].type == SPA_DATA_MemPtr) {
++#else
+   } else if (spaBuffer->datas[0].type == pw_core_type_->data.MemPtr) {
++#endif
+     map = nullptr;
+     src = static_cast<uint8_t*>(spaBuffer->datas[0].data);
+   } else {
+@@ -710,38 +895,69 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
+   if (!src) {
+     SpaBufferUnmap(map,
+                    spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset,
++#if PW_CHECK_VERSION(0, 3, 0)
++                   spaBuffer->datas[0].type == SPA_DATA_DmaBuf,
++#else
+                    spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf,
++#endif
+                    spaBuffer->datas[0].fd);
+     return;
+   }
+ 
++#if PW_CHECK_VERSION(0, 3, 0)
++  struct spa_meta_region* video_metadata =
++      static_cast<struct spa_meta_region*>(spa_buffer_find_meta_data(
++          spaBuffer, SPA_META_VideoCrop, sizeof(*video_metadata)));
++#else
+   struct spa_meta_video_crop* video_metadata =
+       static_cast<struct spa_meta_video_crop*>(
+           spa_buffer_find_meta(spaBuffer, pw_core_type_->meta.VideoCrop));
++#endif
+ 
+   // Video size from metada is bigger than an actual video stream size.
+   // The metadata are wrong or we should up-scale the video...in both cases
+   // just quit now.
++#if PW_CHECK_VERSION(0, 3, 0)
++  if (video_metadata &&
++      (video_metadata->region.size.width > static_cast<uint32_t>(desktop_size_.width()) ||
++       video_metadata->region.size.height > static_cast<uint32_t>(desktop_size_.height()))) {
++#else
+   if (video_metadata && (video_metadata->width > desktop_size_.width() ||
+                          video_metadata->height > desktop_size_.height())) {
++#endif
+     RTC_LOG(LS_ERROR) << "Stream metadata sizes are wrong!";
+     SpaBufferUnmap(map,
+                    spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset,
++#if PW_CHECK_VERSION(0, 3, 0)
++                   spaBuffer->datas[0].type == SPA_DATA_DmaBuf,
++#else
+                    spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf,
++#endif
+                    spaBuffer->datas[0].fd);
+     return;
+   }
+ 
+   // Use video metada when video size from metadata is set and smaller than
+   // video stream size, so we need to adjust it.
++#if PW_CHECK_VERSION(0, 3, 0)
++  video_metadata_use_ = (video_metadata && video_metadata->region.size.width != 0 &&
++                         video_metadata->region.size.height != 0 &&
++                         (video_metadata->region.size.width < static_cast<uint32_t>(desktop_size_.width()) ||
++                          video_metadata->region.size.height < static_cast<uint32_t>(desktop_size_.height())));
++#else
+   video_metadata_use_ = (video_metadata && video_metadata->width != 0 &&
+                          video_metadata->height != 0 &&
+                          (video_metadata->width < desktop_size_.width() ||
+                           video_metadata->height < desktop_size_.height()));
+-
++#endif
+   DesktopSize video_size_prev = video_size_;
+   if (video_metadata_use_) {
++#if PW_CHECK_VERSION(0, 3, 0)
++    video_size_ = DesktopSize(video_metadata->region.size.width,
++                              video_metadata->region.size.height);
++#else
+     video_size_ = DesktopSize(video_metadata->width, video_metadata->height);
++#endif
+   } else {
+     video_size_ = desktop_size_;
+   }
+@@ -764,7 +980,11 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
+     if (map) {
+       SpaBufferUnmap(
+           map, spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset,
++#if PW_CHECK_VERSION(0, 3, 0)
++          spaBuffer->datas[0].type == SPA_DATA_DmaBuf,
++#else
+           spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf,
++#endif
+           spaBuffer->datas[0].fd);
+     }
+ 
+@@ -772,16 +992,27 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
+   }
+ 
+   // Adjust source content based on metadata video position
++#if PW_CHECK_VERSION(0, 3, 0)
++  if (video_metadata_use_ &&
++      (video_metadata->region.position.y + video_size_.height() <= desktop_size_.height())) {
++    src += srcStride * video_metadata->region.position.y;
++  }
++  const int xOffset =
++      video_metadata_use_ &&
++        (video_metadata->region.position.x + video_size_.width() <= desktop_size_.width())
++          ? video_metadata->region.position.x * kBytesPerPixel
++          : 0;
++#else
+   if (video_metadata_use_ &&
+       (video_metadata->y + video_size_.height() <= desktop_size_.height())) {
+     src += srcStride * video_metadata->y;
+   }
+-
+   const int xOffset =
+       video_metadata_use_ &&
+               (video_metadata->x + video_size_.width() <= desktop_size_.width())
+           ? video_metadata->x * kBytesPerPixel
+           : 0;
++#endif
+ 
+   uint8_t* dst = current_frame_.get();
+   for (int i = 0; i < video_size_.height(); ++i) {
+@@ -790,8 +1021,13 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
+     std::memcpy(dst, src, dstStride);
+     // If both sides decided to go with the RGBx format we need to convert it to
+     // BGRx to match color format expected by WebRTC.
++#if PW_CHECK_VERSION(0, 3, 0)
++    if (spa_video_format_.format == SPA_VIDEO_FORMAT_RGBx ||
++        spa_video_format_.format == SPA_VIDEO_FORMAT_RGBA) {
++#else
+     if (spa_video_format_->format == pw_type_->video_format.RGBx ||
+         spa_video_format_->format == pw_type_->video_format.RGBA) {
++#endif
+       ConvertRGBxToBGRx(dst, dstStride);
+     }
+     src += srcStride - xOffset;
+@@ -801,7 +1037,11 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
+   if (map) {
+     SpaBufferUnmap(map,
+                    spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset,
++#if PW_CHECK_VERSION(0, 3, 0)
++                   spaBuffer->datas[0].type == SPA_DATA_DmaBuf,
++#else
+                    spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf,
++#endif
+                    spaBuffer->datas[0].fd);
+   }
+ }
