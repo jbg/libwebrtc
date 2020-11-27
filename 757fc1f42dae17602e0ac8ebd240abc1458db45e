@@ -16,6 +16,24 @@
       "message": "This should be \u0027map_ !\u003d MAP_FAILED\u0027. Otherwise the buffers are never unmapped.",
       "revId": "757fc1f42dae17602e0ac8ebd240abc1458db45e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e369589b_e37185d3",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-11-27T08:29:19Z",
+      "side": 1,
+      "message": "Ups, I got the logic wrong. Thanks for spotting this.",
+      "parentUuid": "6cd78c6a_141672ac",
+      "revId": "757fc1f42dae17602e0ac8ebd240abc1458db45e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
