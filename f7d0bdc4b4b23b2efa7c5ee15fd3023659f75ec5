@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa278fb_774ef879",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13776
+      },
+      "writtenOn": "2020-11-30T19:01:50Z",
+      "side": 1,
+      "message": "LGTM except some minor comments",
+      "revId": "f7d0bdc4b4b23b2efa7c5ee15fd3023659f75ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d8deee_856a90f7",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 13776
+      },
+      "writtenOn": "2020-11-30T19:01:50Z",
+      "side": 1,
+      "message": "Can you please align this comment with the new lower range of payload types as well?",
+      "revId": "f7d0bdc4b4b23b2efa7c5ee15fd3023659f75ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80795a67_2fdba440",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 13776
+      },
+      "writtenOn": "2020-11-30T19:01:50Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `interoperability`? (new with old versions?)",
+      "revId": "f7d0bdc4b4b23b2efa7c5ee15fd3023659f75ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de87f615_e0fe3952",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 13776
+      },
+      "writtenOn": "2020-11-30T19:01:50Z",
+      "side": 1,
+      "message": "Optional: I prefer `codec.id \u003d isCodecValidForLowerRange ? payload_type_lower++ : payload_type_upper++;\u0027. If you dont like this format, can you switch the `if else` conditions as\n` \nif (isCodecValidForLowerRange) {\n      codec.id \u003d payload_type_lower++;\n} else {\n      codec.id \u003d payload_type_upper++;\n}`\n\nI find that more intuitive to read 😊",
+      "revId": "f7d0bdc4b4b23b2efa7c5ee15fd3023659f75ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
