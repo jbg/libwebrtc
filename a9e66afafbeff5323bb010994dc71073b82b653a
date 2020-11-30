@@ -16,6 +16,23 @@
       "message": "Hi Andrew can you give an initial review before I get real OWNER?",
       "revId": "a9e66afafbeff5323bb010994dc71073b82b653a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a1fc11d_ee0a1be0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5086
+      },
+      "writtenOn": "2020-11-30T19:11:50Z",
+      "side": 1,
+      "message": "lgtm afaict :) ",
+      "revId": "a9e66afafbeff5323bb010994dc71073b82b653a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
