@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f051fc5e_bf87de8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-11-30T09:00:51Z",
+      "side": 1,
+      "message": "as discussed. Note that I still need to figure out the CLA thing before this can be landed.",
+      "revId": "36cb9bbe9aac9889458cd3d6fbd40f146f573c97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
