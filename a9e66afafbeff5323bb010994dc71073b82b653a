@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b006c85_fe8c2029",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15123
+      },
+      "writtenOn": "2020-11-30T18:29:52Z",
+      "side": 1,
+      "message": "Hi Andrew can you give an initial review before I get real OWNER?",
+      "revId": "a9e66afafbeff5323bb010994dc71073b82b653a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
