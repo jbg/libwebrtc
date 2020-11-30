@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93bf2d3d_e64d4f42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-30T23:17:11Z",
+      "side": 1,
+      "message": "LGTM once the accidental files are reverted.\n\nThanks for bearing with me with these changes. For future reference, please try to limit each CL to a single bugfix or feature. CLs are much easier (and faster!) to review that way.",
+      "revId": "6610657feba9e2a915cce5de94e6c42cbfb458c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b0a1b9_c218eff1",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc.orig",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-30T23:17:11Z",
+      "side": 1,
+      "message": "Did you intend to add this file?",
+      "revId": "6610657feba9e2a915cce5de94e6c42cbfb458c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d75277b_2411eb99",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc.rej",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-30T23:17:11Z",
+      "side": 1,
+      "message": "Did you intend to add this file?",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 27
+      },
+      "revId": "6610657feba9e2a915cce5de94e6c42cbfb458c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50bcc441_a7cd6035",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.h.orig",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2020-11-30T23:17:11Z",
+      "side": 1,
+      "message": "Did you intend to add this file?",
+      "revId": "6610657feba9e2a915cce5de94e6c42cbfb458c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
