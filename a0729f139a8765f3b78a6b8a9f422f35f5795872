@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cb3116e_b1626899",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5646
+      },
+      "writtenOn": "2020-12-01T07:16:45Z",
+      "side": 1,
+      "message": "LGTM, thanks. (I don\u0027t think I have formal review permissions in this repository, though...)",
+      "revId": "a0729f139a8765f3b78a6b8a9f422f35f5795872",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80bf89e5_22475458",
@@ -14,6 +31,30 @@
       "writtenOn": "2020-11-04T16:04:08Z",
       "side": 1,
       "message": "I cannot reference https://source.chromium.org/chromium/chromium/src/+/master:base/metrics/OWNERS from here but maybe we want more owners for this?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 44
+      },
+      "revId": "a0729f139a8765f3b78a6b8a9f422f35f5795872",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38a5f550_3d197d62",
+        "filename": "api/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5646
+      },
+      "writtenOn": "2020-12-01T07:16:45Z",
+      "side": 1,
+      "message": "Definitely let\u0027s add more owners here. Perhaps you could copy the current list of owners from the //base/metrics/OWNERS file, and include a comment here nudging folks to keep the list up to date if they notice any discrepancies?",
+      "parentUuid": "80bf89e5_22475458",
       "range": {
         "startLine": 16,
         "startChar": 0,
