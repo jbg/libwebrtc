@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2997a2_fe0052e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-01T15:04:19Z",
+      "side": 1,
+      "message": "Test added. The interesting tests will be relanding the flexfec code without the \"deactivate flexfec for this test\" training wheels.",
+      "parentUuid": "e532a3ee_5ddf383a",
+      "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1630a7f9_066e18d5",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-01T09:40:13Z",
       "side": 1,
       "message": "I\u0027m not sure this is a big worry - effect would be the same as having the RTX codec rejected.\nI\u0027m more worried about the inverse - adding an RTX codec and not adding its base codec.",
+      "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17f52579_b9faad43",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-01T15:04:19Z",
+      "side": 1,
+      "message": "but this would reject RTX for *some* codecs. I would scratch my head why that a particular H264 profile uses plain nack instead when it works with a different H264 profile.\nI don\u0027t see how you could add an RTX codec without the base codec.",
+      "parentUuid": "1630a7f9_066e18d5",
       "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5775d5fe_90ed5fb7",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-01T15:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5397e61_4584e23d",
+      "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e628c87_fa91138c",
@@ -86,6 +140,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "442d83d9_c4eb16c4",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-01T15:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e628c87_fa91138c",
+      "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ec59a93_090fdcb0",
@@ -99,6 +171,24 @@
       "writtenOn": "2020-12-01T09:40:13Z",
       "side": 1,
       "message": "It\u0027s probably a design mistake that this doesn\u0027t return an error when we run out of payload types. Can you add a TODO to flag an error when you run out?",
+      "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3c58203_b862e247",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-01T15:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec59a93_090fdcb0",
       "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
