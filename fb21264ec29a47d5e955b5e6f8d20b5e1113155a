@@ -16,6 +16,91 @@
       "message": "Harald, can you take a first look?",
       "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e532a3ee_5ddf383a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-01T09:40:13Z",
+      "side": 1,
+      "message": "Code looks good so far. Of course, we need tests before submitting.\n",
+      "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1630a7f9_066e18d5",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-01T09:40:13Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is a big worry - effect would be the same as having the RTX codec rejected.\nI\u0027m more worried about the inverse - adding an RTX codec and not adding its base codec.",
+      "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5397e61_4584e23d",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-01T09:40:13Z",
+      "side": 1,
+      "message": "Add \"in lower range\" to error messge.",
+      "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e628c87_fa91138c",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-01T09:40:13Z",
+      "side": 1,
+      "message": "Add \"in 96-127 range\" to error mesage.",
+      "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ec59a93_090fdcb0",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-01T09:40:13Z",
+      "side": 1,
+      "message": "It\u0027s probably a design mistake that this doesn\u0027t return an error when we run out of payload types. Can you add a TODO to flag an error when you run out?",
+      "revId": "fb21264ec29a47d5e955b5e6f8d20b5e1113155a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
