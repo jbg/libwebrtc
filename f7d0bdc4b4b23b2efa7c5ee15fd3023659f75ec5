@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6df2429_9bb0d00d",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-01T09:00:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05d8deee_856a90f7",
+      "revId": "f7d0bdc4b4b23b2efa7c5ee15fd3023659f75ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80795a67_2fdba440",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "031c1515_55ea44da",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-01T09:00:59Z",
+      "side": 1,
+      "message": "this is between Chrome versions which are from the same vendor, hence intraop ;-)",
+      "parentUuid": "80795a67_2fdba440",
+      "revId": "f7d0bdc4b4b23b2efa7c5ee15fd3023659f75ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de87f615_e0fe3952",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 1
@@ -65,6 +101,24 @@
       "writtenOn": "2020-11-30T19:01:50Z",
       "side": 1,
       "message": "Optional: I prefer `codec.id \u003d isCodecValidForLowerRange ? payload_type_lower++ : payload_type_upper++;\u0027. If you dont like this format, can you switch the `if else` conditions as\n` \nif (isCodecValidForLowerRange) {\n      codec.id \u003d payload_type_lower++;\n} else {\n      codec.id \u003d payload_type_upper++;\n}`\n\nI find that more intuitive to read 😊",
+      "revId": "f7d0bdc4b4b23b2efa7c5ee15fd3023659f75ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f04031eb_79fc5240",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-01T09:00:59Z",
+      "side": 1,
+      "message": "The reason for the slightly awkward current style is that the upper range is the preferred one so it comes first.",
+      "parentUuid": "de87f615_e0fe3952",
       "revId": "f7d0bdc4b4b23b2efa7c5ee15fd3023659f75ec5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
