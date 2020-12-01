@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b219bb45_97b69cb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-01T16:25:08Z",
+      "side": 1,
+      "message": "danil, please have another go\n\nI understand now what the real problem was in https://webrtc-review.googlesource.com/c/src/+/191942\n\nWe actually hit this DCHECK:\n\n  RTC_DCHECK_EQ(packet.is_key_frame(), keyframe_in_process_);\n\nIn UlpfecGenerator::AddPacketAndGenerateFec() when running video engine tests. The problem there is \nkeyframe params covering more than one frame.\n\nI removed the DCHECK and instead always update parameters when a new keyframe starts.\nA safe and const getter method was made public to make testing easier.\n\nptal!\n",
+      "revId": "4bdaffe06178bbd67ad642fd575278c0edd42a4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
