@@ -111,7 +111,7 @@ void UlpfecGenerator::AddPacketAndGenerateFec(const RtpPacketToSend& packet) {
   RTC_DCHECK_RUNS_SERIALIZED(&race_checker_);
   RTC_DCHECK(generated_fec_packets_.empty());
 
-  if (media_packets_.empty()) {
+  if (media_packets_.empty() || packet.is_key_frame()) {
     MutexLock lock(&mutex_);
     if (pending_params_) {
       current_params_ = *pending_params_;
@@ -126,7 +126,6 @@ void UlpfecGenerator::AddPacketAndGenerateFec(const RtpPacketToSend& packet) {
 
     keyframe_in_process_ = packet.is_key_frame();
   }
-  RTC_DCHECK_EQ(packet.is_key_frame(), keyframe_in_process_);
 
   bool complete_frame = false;
   const bool marker_bit = packet.Marker();

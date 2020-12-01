@@ -59,6 +59,9 @@ class UlpfecGenerator : public VideoFecGenerator {
 
   absl::optional<RtpState> GetRtpState() override { return absl::nullopt; }
 
+  // Currently used protection params.
+  const FecProtectionParams& CurrentParams() const;
+
  private:
   struct Params {
     Params();
@@ -89,8 +92,6 @@ class UlpfecGenerator : public VideoFecGenerator {
   // that, for the same amount of protection/overhead, longer codes
   // (e.g. (2k,2m) vs (k,m)) are generally more effective at recovering losses.
   bool MinimumMediaPacketsReached() const;
-
-  const FecProtectionParams& CurrentParams() const;
 
   void ResetState();
 
