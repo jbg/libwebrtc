@@ -56,6 +56,23 @@
       "message": "lgtm afaict :) ",
       "revId": "a9e66afafbeff5323bb010994dc71073b82b653a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c55a6fd7_5a90bf8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-01T08:11:58Z",
+      "side": 1,
+      "message": "I triggered a CQ dry-run but this looks good to me.",
+      "revId": "a9e66afafbeff5323bb010994dc71073b82b653a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
