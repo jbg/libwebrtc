@@ -144,6 +144,285 @@ void MatchedFilterCore_NEON(size_t x_start_index,
 
 #if defined(WEBRTC_ARCH_X86_FAMILY)
 
+namespace {
+
+// Computes x*x for the given length elements, starting from x_index. Squared
+// values are saved into vector x2 starting at position x2_index.
+inline void ComputeSquares_SSE2(rtc::ArrayView<const float> x,
+                                int length,
+                                int x_index,
+                                int x2_index,
+                                rtc::ArrayView<float> x2) {
+  const int x_size = static_cast<int>(x.size());
+  RTC_DCHECK_GT(x_size, x_index);
+  RTC_DCHECK_GT(x_size, length);
+  RTC_DCHECK_GE(x2.size(), x2_index + length);
+
+  const float* x_p = &x[x_index];
+  float* x2_p = &x2[x2_index];
+
+  // Compute loop chunk sizes until, and after, the wraparound of the circular
+  // buffer for x.
+  const int chunk1 = std::min(length, static_cast<int>(x_size - x_index));
+
+  // Perform the loop in two chunks.
+  const int chunk2 = length - chunk1;
+  for (int limit : {chunk1, chunk2}) {
+    int sse_limit = limit >> 2;
+    int reminder;
+    if (sse_limit >= 8 || (sse_limit & 1) == 0) {
+      // Perform two parallel 128 bit operations.
+      sse_limit >>= 1;
+      reminder = limit - sse_limit * 8;
+      for (int k = sse_limit; k > 0; --k, x_p += 8, x2_p += 8) {
+        // Load the data into 128 bit vectors.
+        const __m128 x_k = _mm_loadu_ps(x_p);
+        const __m128 x_k_2 = _mm_loadu_ps(x_p + 4);
+        const __m128 xx = _mm_mul_ps(x_k, x_k);
+        const __m128 xx_2 = _mm_mul_ps(x_k_2, x_k_2);
+        _mm_storeu_ps(x2_p, xx);
+        _mm_storeu_ps(x2_p + 4, xx_2);
+      }
+    } else {
+      // Perform single 128 bit vector operations.
+      reminder = limit - sse_limit * 4;
+      for (int k = sse_limit; k > 0; --k, x_p += 4, x2_p += 4) {
+        // Load the data into 128 bit vectors.
+        const __m128 x_k = _mm_loadu_ps(x_p);
+        const __m128 xx = _mm_mul_ps(x_k, x_k);
+        _mm_storeu_ps(x2_p, xx);
+      }
+    }
+
+    // Perform non-vector operations for any remaining items.
+    for (int k = reminder; k > 0; --k, ++x_p, ++x2_p) {
+      const float x_k = *x_p;
+      *x2_p = x_k * x_k;
+    }
+
+    x_p = &x[0];
+  }
+}
+
+// Computes x*x for the given length elements, starting from x_index. Squared
+// values are saved into vector x2 starting at position x2_index. In addition,
+// it computes the sum of the squared values and stores it in the sum_value
+// output parameter.
+inline void ComputeSquaresAndSum_SSE2(rtc::ArrayView<const float> x,
+                                      int length,
+                                      int x_index,
+                                      int x2_index,
+                                      rtc::ArrayView<float> x2,
+                                      float* sum_value) {
+  const int x_size = static_cast<int>(x.size());
+  RTC_DCHECK_GT(x_size, x_index);
+  RTC_DCHECK_GT(x_size, length);
+  RTC_DCHECK_GE(x2.size(), x2_index + length);
+
+  const float* x_p = &x[x_index];
+  float* x2_p = &x2[x2_index];
+  float x2_sum = 0.f;
+  __m128 x2_sum_128 = _mm_set1_ps(0);
+  __m128 x2_2_sum_128 = _mm_set1_ps(0);
+
+  // Compute loop chunk sizes until, and after, the wraparound of the circular
+  // buffer for x.
+  const int chunk1 = std::min(length, static_cast<int>(x_size - x_index));
+
+  // Perform the loop in two chunks.
+  const int chunk2 = length - chunk1;
+  for (int limit : {chunk1, chunk2}) {
+    int sse_limit = limit >> 2;
+    int reminder;
+    if (sse_limit >= 8 || (sse_limit & 1) == 0) {
+      // Perform two parallel 128 bit operations.
+      sse_limit >>= 1;
+      reminder = limit - sse_limit * 8;
+      for (int k = sse_limit; k > 0; --k, x_p += 8, x2_p += 8) {
+        // Load the data into 128 bit vectors.
+        const __m128 x_k = _mm_loadu_ps(x_p);
+        const __m128 x_k_2 = _mm_loadu_ps(x_p + 4);
+        const __m128 xx = _mm_mul_ps(x_k, x_k);
+        const __m128 xx_2 = _mm_mul_ps(x_k_2, x_k_2);
+        x2_sum_128 = _mm_add_ps(x2_sum_128, xx);
+        x2_2_sum_128 = _mm_add_ps(x2_2_sum_128, xx_2);
+        _mm_storeu_ps(x2_p, xx);
+        _mm_storeu_ps(x2_p + 4, xx_2);
+      }
+    } else {
+      // Perform single 128 bit vector operations.
+      reminder = limit - sse_limit * 4;
+      for (int k = sse_limit; k > 0; --k, x_p += 4, x2_p += 4) {
+        // Load the data into 128 bit vectors.
+        const __m128 x_k = _mm_loadu_ps(x_p);
+        const __m128 xx = _mm_mul_ps(x_k, x_k);
+        x2_sum_128 = _mm_add_ps(x2_sum_128, xx);
+        _mm_storeu_ps(x2_p, xx);
+      }
+    }
+
+    // Perform non-vector operations for any remaining items.
+    for (int k = reminder; k > 0; --k, ++x_p, ++x2_p) {
+      const float x_k = *x_p;
+      const float x_sq = x_k * x_k;
+      x2_sum += x_sq;
+      *x2_p = x_sq;
+    }
+
+    x_p = &x[0];
+  }
+  x2_sum_128 = _mm_add_ps(x2_sum_128, x2_2_sum_128);
+  float* v = reinterpret_cast<float*>(&x2_sum_128);
+  x2_sum += (v[0] + v[1]) + (v[2] + v[3]);
+  *sum_value = x2_sum;
+}
+
+}  // namespace
+
+void MatchedFilterCoreReuse_SSE2(size_t x_start_index,
+                                 float x2_sum_threshold,
+                                 float smoothing,
+                                 rtc::ArrayView<const float> x,
+                                 rtc::ArrayView<const float> y,
+                                 rtc::ArrayView<float> h,
+                                 bool* filters_updated,
+                                 float* error_sum) {
+  const int h_size = static_cast<int>(h.size());
+  const int x_size = static_cast<int>(x.size());
+  const int y_size = static_cast<int>(y.size());
+  RTC_DCHECK_EQ(0, h_size % 4);
+
+  // Precompute x*x values used in this function invocation.
+  const int x2_size = h_size + y_size;  // compute one element over.
+  std::vector<float> x2(x2_size);
+
+  int x_index = (x_start_index + x_size - y_size + 1) % x_size;
+  // Compute squared values for the first y_size elements.
+  ComputeSquares_SSE2(x, y_size, x_index, 0, x2);
+
+  x_index = x_start_index + 1;
+  if (x_index == x_size) {
+    x_index = 0;
+  }
+  float x2_sum;
+  // Compute squared values and the sum for the remaining h_size elements.
+  ComputeSquaresAndSum_SSE2(x, h_size, x_index, y_size, x2, &x2_sum);
+
+  // Process for all samples in the sub-block.
+  for (size_t i = 0; i < y.size(); ++i) {
+    // Apply the matched filter as filter * x, and compute x * x.
+
+    RTC_DCHECK_GT(x_size, x_start_index);
+    const float* x_p = &x[x_start_index];
+    const float* h_p = &h[0];
+
+    // Initialize values for the accumulation.
+    __m128 s_128 = _mm_set1_ps(0);
+    __m128 s_2_128 = _mm_set1_ps(0);
+    float s = 0;
+
+    // Compute loop chunk sizes until, and after, the wraparound of the circular
+    // buffer for x.
+    const int chunk1 =
+        std::min(h_size, static_cast<int>(x_size - x_start_index));
+
+    // Perform the loop in two chunks.
+    const int chunk2 = h_size - chunk1;
+    for (int limit : {chunk1, chunk2}) {
+      int sse_limit = limit >> 2;
+      int reminder;
+      if (sse_limit >= 8 || (sse_limit & 1) == 0) {
+        // Perform two parallel 128 bit operations.
+        sse_limit >>= 1;
+        reminder = limit - sse_limit * 8;
+        for (int k = sse_limit; k > 0; --k, h_p += 8, x_p += 8) {
+          // Load the data into 128 bit vectors.
+          const __m128 x_k = _mm_loadu_ps(x_p);
+          const __m128 h_k = _mm_loadu_ps(h_p);
+          const __m128 x_k_2 = _mm_loadu_ps(x_p + 4);
+          const __m128 h_k_2 = _mm_loadu_ps(h_p + 4);
+          // Compute and accumulate h * x.
+          const __m128 hx = _mm_mul_ps(h_k, x_k);
+          const __m128 hx_2 = _mm_mul_ps(h_k_2, x_k_2);
+          s_128 = _mm_add_ps(s_128, hx);
+          s_2_128 = _mm_add_ps(s_2_128, hx_2);
+        }
+      } else {
+        // Perform single 128 bit vector operations.
+        reminder = limit - sse_limit * 4;
+        for (int k = sse_limit; k > 0; --k, h_p += 4, x_p += 4) {
+          // Load the data into 128 bit vectors.
+          const __m128 x_k = _mm_loadu_ps(x_p);
+          const __m128 h_k = _mm_loadu_ps(h_p);
+          // Compute and accumulate h * x.
+          const __m128 hx = _mm_mul_ps(h_k, x_k);
+          s_128 = _mm_add_ps(s_128, hx);
+        }
+      }
+
+      // Perform non-vector operations for any remaining items.
+      for (int k = reminder; k > 0; --k, ++h_p, ++x_p) {
+        const float x_k = *x_p;
+        s += *h_p * x_k;
+      }
+
+      x_p = &x[0];
+    }
+
+    // Combine the accumulated vector and scalar values.
+    int x2_index = y_size - i - 1;
+    s_128 = _mm_add_ps(s_128, s_2_128);
+    x2_sum += x2[x2_index] - x2[x2_index + h_size];
+    float* u = reinterpret_cast<float*>(&s_128);
+    s += (u[0] + u[1]) + (u[2] + u[3]);
+
+    // Compute the matched filter error.
+    float e = y[i] - s;
+    const bool saturation = y[i] >= 32000.f || y[i] <= -32000.f;
+    (*error_sum) += e * e;
+
+    // Update the matched filter estimate in an NLMS manner.
+    if (x2_sum > x2_sum_threshold && !saturation) {
+      RTC_DCHECK_LT(0.f, x2_sum);
+      const float alpha = smoothing * e / x2_sum;
+      const __m128 alpha_128 = _mm_set1_ps(alpha);
+
+      // filter = filter + smoothing * (y - filter * x) * x / x * x.
+      float* h_p = &h[0];
+      x_p = &x[x_start_index];
+
+      // Perform the loop in two chunks.
+      for (int limit : {chunk1, chunk2}) {
+        // Perform 128 bit vector operations.
+        const int limit_by_4 = limit >> 2;
+        for (int k = limit_by_4; k > 0; --k, h_p += 4, x_p += 4) {
+          // Load the data into 128 bit vectors.
+          __m128 h_k = _mm_loadu_ps(h_p);
+          const __m128 x_k = _mm_loadu_ps(x_p);
+
+          // Compute h = h + alpha * x.
+          const __m128 alpha_x = _mm_mul_ps(alpha_128, x_k);
+          h_k = _mm_add_ps(h_k, alpha_x);
+
+          // Store the result.
+          _mm_storeu_ps(h_p, h_k);
+        }
+
+        // Perform non-vector operations for any remaining items.
+        for (int k = limit - limit_by_4 * 4; k > 0; --k, ++h_p, ++x_p) {
+          *h_p += alpha * *x_p;
+        }
+
+        x_p = &x[0];
+      }
+
+      *filters_updated = true;
+    }
+
+    x_start_index = x_start_index > 0 ? x_start_index - 1 : x_size - 1;
+  }
+}
+
 void MatchedFilterCore_SSE2(size_t x_start_index,
                             float x2_sum_threshold,
                             float smoothing,
