@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "cc1c7787_c18b9d30",
+        "filename": "modules/rtp_rtcp/source/ulpfec_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-02T20:42:24Z",
+      "side": 1,
+      "message": "\u003e does that mean that if sent a delta frame, then add a key frame, then an ulpfec packet would be generated with mixed parameters?\n\nYes.\n\n\u003e Wouldn\u0027t that be a problem?\n\nNot really, apart from the bug you noticed below.\nNote that we don\u0027t continuously emit fec packets. We buffer media packets until we have\nenough complete frames or enough packets as specified by the protection parameters. Only then\nare the parameters actually used to produce fec, after which the state is reset.\nSo the side-effect of the mixed scenario you mention is that the delta-frames prior to the\nkey-frame will likely see a little higher protection rate than they would otherwise, rather\nthan getting no protection at all. Not clear if one way is always better?\n\n \n\u003e Another edge case: that would allow to apply new parameters in a middle of a keyframe in case of unlucky race?\n\nTrue. In fact, I think I\u0027ll change this to allow updating the parameters at any time, even in the middle of a frame. As noted above, we only generate fec when we have _complete_ frames so\nworst case the goal-post for how many frames we need may change. I think that\u0027s fair.",
+      "parentUuid": "f406b2bf_68a3809e",
+      "range": {
+        "startLine": 114,
+        "startChar": 28,
+        "endLine": 114,
+        "endChar": 53
+      },
+      "revId": "4bdaffe06178bbd67ad642fd575278c0edd42a4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "edbdc81f_5f1facd5",
         "filename": "modules/rtp_rtcp/source/ulpfec_generator.cc",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2020-12-02T15:41:40Z",
       "side": 1,
       "message": "e.g. we generated 4 delta frames with .max_fec_frames \u003d 5.\nnext comes in a key frame with .max_fec_frames \u003d 2.\nNow this condition would never become true.",
+      "range": {
+        "startLine": 156,
+        "startChar": 7,
+        "endLine": 156,
+        "endChar": 53
+      },
+      "revId": "4bdaffe06178bbd67ad642fd575278c0edd42a4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d349302c_7d17ae95",
+        "filename": "modules/rtp_rtcp/source/ulpfec_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-02T20:42:24Z",
+      "side": 1,
+      "message": "Good catch, this is the real issue here. It should be \u003e\u003d ...",
+      "parentUuid": "edbdc81f_5f1facd5",
       "range": {
         "startLine": 156,
         "startChar": 7,
