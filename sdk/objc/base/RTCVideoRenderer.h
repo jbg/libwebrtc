@@ -37,6 +37,7 @@ RTC_OBJC_EXPORT
 
     - (void)videoView : (id<RTC_OBJC_TYPE(RTCVideoRenderer)>)videoView didChangeVideoSize
     : (CGSize)size;
+- (void)videoViewDidRenderFirstFrame;
 
 @end
 
