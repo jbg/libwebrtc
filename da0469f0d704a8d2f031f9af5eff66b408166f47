@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "355f765d_631a5b0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2020-12-02T14:24:35Z",
+      "side": 1,
+      "message": "Recusing myself since I\u0027m no longer an OWNER of these files, and Jamie has already reviewed (thanks Jamie!).\n\nThanks again for your efforts in making these improvements, Jan. :)",
+      "revId": "da0469f0d704a8d2f031f9af5eff66b408166f47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
