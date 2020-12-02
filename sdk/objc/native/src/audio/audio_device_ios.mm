@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 
 #include "audio_device_ios.h"
+#include "voice_processing_audio_unit_default.h"
 
 #include <cmath>
 
@@ -103,6 +104,7 @@ static void LogDeviceInfo() {
 AudioDeviceIOS::AudioDeviceIOS()
     : audio_device_buffer_(nullptr),
       audio_unit_(nullptr),
+      microphone_muted_(false),
       recording_(0),
       playing_(0),
       initialized_(false),
@@ -731,7 +733,7 @@ void AudioDeviceIOS::SetupAudioBuffersForActiveAudioSession() {
 bool AudioDeviceIOS::CreateAudioUnit() {
   RTC_DCHECK(!audio_unit_);
 
-  audio_unit_.reset(new VoiceProcessingAudioUnit(this));
+  audio_unit_.reset(new VoiceProcessingAudioUnitDefault(this, microphone_muted_));
   if (!audio_unit_->Init()) {
     audio_unit_.reset();
     return false;
@@ -1029,13 +1031,20 @@ int32_t AudioDeviceIOS::MicrophoneMuteIsAvailable(bool& available) {
 }
 
 int32_t AudioDeviceIOS::SetMicrophoneMute(bool enable) {
-  RTC_NOTREACHED() << "Not implemented";
-  return -1;
+  int32_t error = 0;
+  if (audio_unit_) {
+    error = audio_unit_->SetMicrophoneMute(enable);
+  }
+  if (error) {
+    return error;
+  }
+  microphone_muted_ = enable;
+  return 0;
 }
 
 int32_t AudioDeviceIOS::MicrophoneMute(bool& enabled) const {
-  RTC_NOTREACHED() << "Not implemented";
-  return -1;
+  enabled = !microphone_muted_;
+  return 0;
 }
 
 int32_t AudioDeviceIOS::StereoRecordingIsAvailable(bool& available) {
