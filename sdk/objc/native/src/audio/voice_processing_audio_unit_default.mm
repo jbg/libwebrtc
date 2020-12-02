@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#import "voice_processing_audio_unit.h"
+#import "voice_processing_audio_unit_default.h"
 
 #include "absl/base/macros.h"
 #include "rtc_base/checks.h"
@@ -72,19 +72,18 @@ static OSStatus GetAGCState(AudioUnit audio_unit, UInt32* enabled) {
   return result;
 }
 
-VoiceProcessingAudioUnit::VoiceProcessingAudioUnit(
-    VoiceProcessingAudioUnitObserver* observer)
-    : observer_(observer), vpio_unit_(nullptr), state_(kInitRequired) {
+VoiceProcessingAudioUnitDefault::VoiceProcessingAudioUnitDefault(
+    VoiceProcessingAudioUnitObserver* observer, bool microphone_muted)
+    : microphone_muted_(microphone_muted),
+      observer_(observer),
+      vpio_unit_(nullptr),
+      state_(kInitRequired) {
   RTC_DCHECK(observer);
 }
 
-VoiceProcessingAudioUnit::~VoiceProcessingAudioUnit() {
-  DisposeAudioUnit();
-}
+VoiceProcessingAudioUnitDefault::~VoiceProcessingAudioUnitDefault() { DisposeAudioUnit(); }
 
-const UInt32 VoiceProcessingAudioUnit::kBytesPerSample = 2;
-
-bool VoiceProcessingAudioUnit::Init() {
+bool VoiceProcessingAudioUnitDefault::Init() {
   RTC_DCHECK_EQ(state_, kInitRequired);
 
   // Create an audio component description to identify the Voice Processing
@@ -110,7 +109,7 @@ bool VoiceProcessingAudioUnit::Init() {
   }
 
   // Enable input on the input scope of the input element.
-  UInt32 enable_input = 1;
+  UInt32 enable_input = microphone_muted_ ? 0 : 1;
   result = AudioUnitSetProperty(vpio_unit_, kAudioOutputUnitProperty_EnableIO,
                                 kAudioUnitScope_Input, kInputBus, &enable_input,
                                 sizeof(enable_input));
@@ -187,11 +186,9 @@ bool VoiceProcessingAudioUnit::Init() {
   return true;
 }
 
-VoiceProcessingAudioUnit::State VoiceProcessingAudioUnit::GetState() const {
-  return state_;
-}
+VoiceProcessingAudioUnit::State VoiceProcessingAudioUnitDefault::GetState() const { return state_; }
 
-bool VoiceProcessingAudioUnit::Initialize(Float64 sample_rate) {
+bool VoiceProcessingAudioUnitDefault::Initialize(Float64 sample_rate) {
   RTC_DCHECK_GE(state_, kUninitialized);
   RTCLog(@"Initializing audio unit with sample rate: %f", sample_rate);
 
@@ -311,7 +308,7 @@ bool VoiceProcessingAudioUnit::Initialize(Float64 sample_rate) {
   return true;
 }
 
-bool VoiceProcessingAudioUnit::Start() {
+bool VoiceProcessingAudioUnitDefault::Start() {
   RTC_DCHECK_GE(state_, kUninitialized);
   RTCLog(@"Starting audio unit.");
 
@@ -326,7 +323,7 @@ bool VoiceProcessingAudioUnit::Start() {
   return true;
 }
 
-bool VoiceProcessingAudioUnit::Stop() {
+bool VoiceProcessingAudioUnitDefault::Stop() {
   RTC_DCHECK_GE(state_, kUninitialized);
   RTCLog(@"Stopping audio unit.");
 
@@ -342,7 +339,7 @@ bool VoiceProcessingAudioUnit::Stop() {
   return true;
 }
 
-bool VoiceProcessingAudioUnit::Uninitialize() {
+bool VoiceProcessingAudioUnitDefault::Uninitialize() {
   RTC_DCHECK_GE(state_, kUninitialized);
   RTCLog(@"Unintializing audio unit.");
 
@@ -358,11 +355,10 @@ bool VoiceProcessingAudioUnit::Uninitialize() {
   return true;
 }
 
-OSStatus VoiceProcessingAudioUnit::Render(AudioUnitRenderActionFlags* flags,
-                                          const AudioTimeStamp* time_stamp,
-                                          UInt32 output_bus_number,
-                                          UInt32 num_frames,
-                                          AudioBufferList* io_data) {
+OSStatus VoiceProcessingAudioUnitDefault::Render(AudioUnitRenderActionFlags* flags,
+                                                 const AudioTimeStamp* time_stamp,
+                                                 UInt32 output_bus_number, UInt32 num_frames,
+                                                 AudioBufferList* io_data) {
   RTC_DCHECK(vpio_unit_) << "Init() not called.";
 
   OSStatus result = AudioUnitRender(vpio_unit_, flags, time_stamp,
@@ -373,54 +369,52 @@ OSStatus VoiceProcessingAudioUnit::Render(AudioUnitRenderActionFlags* flags,
   return result;
 }
 
-OSStatus VoiceProcessingAudioUnit::OnGetPlayoutData(
-    void* in_ref_con,
-    AudioUnitRenderActionFlags* flags,
-    const AudioTimeStamp* time_stamp,
-    UInt32 bus_number,
-    UInt32 num_frames,
-    AudioBufferList* io_data) {
-  VoiceProcessingAudioUnit* audio_unit =
-      static_cast<VoiceProcessingAudioUnit*>(in_ref_con);
+int32_t VoiceProcessingAudioUnitDefault::SetMicrophoneMute(bool enable) {
+  RTC_NOTREACHED() << "Not implemented";
+  return -1;
+}
+
+int32_t VoiceProcessingAudioUnitDefault::MicrophoneMute(bool& enabled) const {
+  RTC_NOTREACHED() << "Not implemented";
+  return -1;
+}
+
+OSStatus VoiceProcessingAudioUnitDefault::OnGetPlayoutData(void* in_ref_con,
+                                                           AudioUnitRenderActionFlags* flags,
+                                                           const AudioTimeStamp* time_stamp,
+                                                           UInt32 bus_number, UInt32 num_frames,
+                                                           AudioBufferList* io_data) {
+  VoiceProcessingAudioUnitDefault* audio_unit =
+      static_cast<VoiceProcessingAudioUnitDefault*>(in_ref_con);
   return audio_unit->NotifyGetPlayoutData(flags, time_stamp, bus_number,
                                           num_frames, io_data);
 }
 
-OSStatus VoiceProcessingAudioUnit::OnDeliverRecordedData(
-    void* in_ref_con,
-    AudioUnitRenderActionFlags* flags,
-    const AudioTimeStamp* time_stamp,
-    UInt32 bus_number,
-    UInt32 num_frames,
-    AudioBufferList* io_data) {
-  VoiceProcessingAudioUnit* audio_unit =
-      static_cast<VoiceProcessingAudioUnit*>(in_ref_con);
+OSStatus VoiceProcessingAudioUnitDefault::OnDeliverRecordedData(
+    void* in_ref_con, AudioUnitRenderActionFlags* flags, const AudioTimeStamp* time_stamp,
+    UInt32 bus_number, UInt32 num_frames, AudioBufferList* io_data) {
+  VoiceProcessingAudioUnitDefault* audio_unit =
+      static_cast<VoiceProcessingAudioUnitDefault*>(in_ref_con);
   return audio_unit->NotifyDeliverRecordedData(flags, time_stamp, bus_number,
                                                num_frames, io_data);
 }
 
-OSStatus VoiceProcessingAudioUnit::NotifyGetPlayoutData(
-    AudioUnitRenderActionFlags* flags,
-    const AudioTimeStamp* time_stamp,
-    UInt32 bus_number,
-    UInt32 num_frames,
-    AudioBufferList* io_data) {
+OSStatus VoiceProcessingAudioUnitDefault::NotifyGetPlayoutData(AudioUnitRenderActionFlags* flags,
+                                                               const AudioTimeStamp* time_stamp,
+                                                               UInt32 bus_number, UInt32 num_frames,
+                                                               AudioBufferList* io_data) {
   return observer_->OnGetPlayoutData(flags, time_stamp, bus_number, num_frames,
                                      io_data);
 }
 
-OSStatus VoiceProcessingAudioUnit::NotifyDeliverRecordedData(
-    AudioUnitRenderActionFlags* flags,
-    const AudioTimeStamp* time_stamp,
-    UInt32 bus_number,
-    UInt32 num_frames,
-    AudioBufferList* io_data) {
+OSStatus VoiceProcessingAudioUnitDefault::NotifyDeliverRecordedData(
+    AudioUnitRenderActionFlags* flags, const AudioTimeStamp* time_stamp, UInt32 bus_number,
+    UInt32 num_frames, AudioBufferList* io_data) {
   return observer_->OnDeliverRecordedData(flags, time_stamp, bus_number,
                                           num_frames, io_data);
 }
 
-AudioStreamBasicDescription VoiceProcessingAudioUnit::GetFormat(
-    Float64 sample_rate) const {
+AudioStreamBasicDescription VoiceProcessingAudioUnitDefault::GetFormat(Float64 sample_rate) const {
   // Set the application formats for input and output:
   // - use same format in both directions
   // - avoid resampling in the I/O unit by using the hardware sample rate
@@ -440,7 +434,7 @@ AudioStreamBasicDescription VoiceProcessingAudioUnit::GetFormat(
   return format;
 }
 
-void VoiceProcessingAudioUnit::DisposeAudioUnit() {
+void VoiceProcessingAudioUnitDefault::DisposeAudioUnit() {
   if (vpio_unit_) {
     switch (state_) {
       case kStarted:
