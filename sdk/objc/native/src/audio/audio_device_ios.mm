@@ -12,21 +12,22 @@
 #import <Foundation/Foundation.h>
 
 #include "audio_device_ios.h"
+#include "voice_processing_audio_unit_default.h"
 
 #include <cmath>
 
-#include "api/array_view.h"
+#include "third_party/webrtc/files/stable/webrtc/api/array_view.h"
 #include "helpers.h"
-#include "modules/audio_device/fine_audio_buffer.h"
-#include "rtc_base/atomic_ops.h"
-#include "rtc_base/bind.h"
-#include "rtc_base/checks.h"
-#include "rtc_base/logging.h"
-#include "rtc_base/thread.h"
-#include "rtc_base/thread_annotations.h"
-#include "rtc_base/time_utils.h"
-#include "system_wrappers/include/field_trial.h"
-#include "system_wrappers/include/metrics.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_device/fine_audio_buffer.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/atomic_ops.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/bind.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/logging.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/thread.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/thread_annotations.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/time_utils.h"
+#include "third_party/webrtc/files/stable/webrtc/system_wrappers/include/field_trial.h"
+#include "third_party/webrtc/files/stable/webrtc/system_wrappers/include/metrics.h"
 
 #import "base/RTCLogging.h"
 #import "components/audio/RTCAudioSession+Private.h"
@@ -102,7 +103,32 @@ static void LogDeviceInfo() {
 
 AudioDeviceIOS::AudioDeviceIOS()
     : audio_device_buffer_(nullptr),
+      voice_processing_audio_unit_factory_(nullptr),
       audio_unit_(nullptr),
+      microphone_muted_(false),
+      recording_(0),
+      playing_(0),
+      initialized_(false),
+      audio_is_initialized_(false),
+      is_interrupted_(false),
+      has_configured_session_(false),
+      num_detected_playout_glitches_(0),
+      last_playout_time_(0),
+      num_playout_callbacks_(0),
+      last_output_volume_change_time_(0) {
+  LOGI() << "ctor" << ios::GetCurrentThreadDescription();
+  io_thread_checker_.Detach();
+  thread_checker_.Detach();
+  thread_ = rtc::Thread::Current();
+
+  audio_session_observer_ = [[RTCNativeAudioSessionDelegateAdapter alloc] initWithObserver:this];
+}
+
+AudioDeviceIOS::AudioDeviceIOS(VoiceProcessingAudioUnitFactory* voiceProcessingAudioUnitFactory)
+    : audio_device_buffer_(nullptr),
+      voice_processing_audio_unit_factory_(voiceProcessingAudioUnitFactory),
+      audio_unit_(nullptr),
+      microphone_muted_(false),
       recording_(0),
       playing_(0),
       initialized_(false),
@@ -731,7 +757,12 @@ void AudioDeviceIOS::SetupAudioBuffersForActiveAudioSession() {
 bool AudioDeviceIOS::CreateAudioUnit() {
   RTC_DCHECK(!audio_unit_);
 
-  audio_unit_.reset(new VoiceProcessingAudioUnit(this));
+  if (voice_processing_audio_unit_factory_) {
+    audio_unit_.reset(voice_processing_audio_unit_factory_->CreateVoiceProcessingAudioUnit(
+        this, microphone_muted_));
+  } else {
+    audio_unit_.reset(new VoiceProcessingAudioUnitDefault(this, microphone_muted_));
+  }
   if (!audio_unit_->Init()) {
     audio_unit_.reset();
     return false;
@@ -1029,13 +1060,20 @@ int32_t AudioDeviceIOS::MicrophoneMuteIsAvailable(bool& available) {
 }
 
 int32_t AudioDeviceIOS::SetMicrophoneMute(bool enable) {
-  RTC_NOTREACHED() << "Not implemented";
-  return -1;
+  int32_t error = 0;
+  if (audio_unit_) {
+    error = audio_unit_->SetMicrophoneMute(enable);
+  }
+  if (error) {
+    return error;
+  }
+  microphone_muted_ = enable;
+  return 0;
 }
 
 int32_t AudioDeviceIOS::MicrophoneMute(bool& enabled) const {
-  RTC_NOTREACHED() << "Not implemented";
-  return -1;
+  enabled = !microphone_muted_;
+  return 0;
 }
 
 int32_t AudioDeviceIOS::StereoRecordingIsAvailable(bool& available) {
