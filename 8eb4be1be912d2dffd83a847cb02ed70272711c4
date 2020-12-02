@@ -89,6 +89,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b68ef0_1c187724",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13129
+      },
+      "writtenOn": "2020-12-02T12:50:02Z",
+      "side": 1,
+      "message": "Abandoning this patch since similar and better patch is worked out here:\nhttps://webrtc-review.googlesource.com/c/src/+/195441/7",
+      "revId": "8eb4be1be912d2dffd83a847cb02ed70272711c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2b3482f_3b22cbd0",
