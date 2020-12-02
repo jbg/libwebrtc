@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "331f3699_b6c8492d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15254
+      },
+      "writtenOn": "2020-12-02T22:20:09Z",
+      "side": 1,
+      "message": "This adds a delegate callback when the first frame is rendered. This is used instead of polling webRTCStats. First frame rendered is used to transition the UI to being showing video.\n\n",
+      "revId": "599dbc7a620d1cf9a0600a515d45f333aa8cae51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
