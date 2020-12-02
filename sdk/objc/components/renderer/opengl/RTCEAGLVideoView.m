@@ -90,6 +90,7 @@
 }
 
 - (BOOL)configure {
+  _lastDrawnFrameTimeStampNs = 0;
   EAGLContext *glContext =
     [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
   if (!glContext) {
@@ -185,6 +186,9 @@
   // The renderer will draw the frame to the framebuffer corresponding to the
   // one used by |view|.
   RTC_OBJC_TYPE(RTCVideoFrame) *frame = self.videoFrame;
+
+  BOOL firstFramePending = _lastDrawnFrameTimeStampNs == 0;
+
   if (!frame || frame.timeStampNs == _lastDrawnFrameTimeStampNs) {
     return;
   }
@@ -222,6 +226,10 @@
                                     vPlane:_i420TextureCache.vTexture];
 
     _lastDrawnFrameTimeStampNs = self.videoFrame.timeStampNs;
+  }
+
+  if (firstFramePending && _lastDrawnFrameTimeStampNs > 0) {
+    [self.delegate videoViewDidRenderFirstFrame];
   }
 }
 

@@ -112,7 +112,7 @@
 - (void)configure {
   NSAssert([RTC_OBJC_TYPE(RTCMTLVideoView) isMetalAvailable],
            @"Metal not availiable on this device");
-
+  self.lastFrameTimeNs = 0;
   self.metalView = [RTC_OBJC_TYPE(RTCMTLVideoView) createMetalView:self.bounds];
   self.metalView.delegate = self;
   self.metalView.contentMode = UIViewContentModeScaleAspectFill;
@@ -142,6 +142,9 @@
 - (void)drawInMTKView:(nonnull MTKView *)view {
   NSAssert(view == self.metalView, @"Receiving draw callbacks from foreign instance.");
   RTC_OBJC_TYPE(RTCVideoFrame) *videoFrame = self.videoFrame;
+
+  BOOL firstFramePending = self.lastFrameTimeNs == 0;
+
   // Skip rendering if we've already rendered this frame.
   if (!videoFrame || videoFrame.timeStampNs == self.lastFrameTimeNs) {
     return;
@@ -192,6 +195,10 @@
 
   [renderer drawFrame:videoFrame];
   self.lastFrameTimeNs = videoFrame.timeStampNs;
+
+  if (firstFramePending && self.lastFrameTimeNs > 0) {
+    [self.delegate videoViewDidRenderFirstFrame];
+  }
 }
 
 - (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
