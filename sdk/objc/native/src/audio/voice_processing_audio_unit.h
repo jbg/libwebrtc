@@ -46,8 +46,7 @@ class VoiceProcessingAudioUnitObserver {
 // VoIP applications.
 class VoiceProcessingAudioUnit {
  public:
-  explicit VoiceProcessingAudioUnit(VoiceProcessingAudioUnitObserver* observer);
-  ~VoiceProcessingAudioUnit();
+  virtual ~VoiceProcessingAudioUnit() {}
 
   // TODO(tkchin): enum for state and state checking.
   enum State : int32_t {
@@ -62,77 +61,40 @@ class VoiceProcessingAudioUnit {
   };
 
   // Number of bytes per audio sample for 16-bit signed integer representation.
-  static const UInt32 kBytesPerSample;
+  static const UInt32 kBytesPerSample = 2;
 
   // Initializes this class by creating the underlying audio unit instance.
   // Creates a Voice-Processing I/O unit and configures it for full-duplex
   // audio. The selected stream format is selected to avoid internal resampling
   // and to match the 10ms callback rate for WebRTC as well as possible.
   // Does not intialize the audio unit.
-  bool Init();
+  virtual bool Init() = 0;
 
-  VoiceProcessingAudioUnit::State GetState() const;
+  virtual VoiceProcessingAudioUnit::State GetState() const = 0;
 
   // Initializes the underlying audio unit with the given sample rate.
-  bool Initialize(Float64 sample_rate);
+  virtual bool Initialize(Float64 sample_rate) = 0;
 
   // Starts the underlying audio unit.
-  bool Start();
+  virtual bool Start() = 0;
 
   // Stops the underlying audio unit.
-  bool Stop();
+  virtual bool Stop() = 0;
 
   // Uninitializes the underlying audio unit.
-  bool Uninitialize();
+  virtual bool Uninitialize() = 0;
 
   // Calls render on the underlying audio unit.
-  OSStatus Render(AudioUnitRenderActionFlags* flags,
-                  const AudioTimeStamp* time_stamp,
-                  UInt32 output_bus_number,
-                  UInt32 num_frames,
-                  AudioBufferList* io_data);
+  virtual OSStatus Render(AudioUnitRenderActionFlags* flags,
+                          const AudioTimeStamp* time_stamp,
+                          UInt32 output_bus_number, UInt32 num_frames,
+                          AudioBufferList* io_data) = 0;
 
- private:
-  // The C API used to set callbacks requires static functions. When these are
-  // called, they will invoke the relevant instance method by casting
-  // in_ref_con to VoiceProcessingAudioUnit*.
-  static OSStatus OnGetPlayoutData(void* in_ref_con,
-                                   AudioUnitRenderActionFlags* flags,
-                                   const AudioTimeStamp* time_stamp,
-                                   UInt32 bus_number,
-                                   UInt32 num_frames,
-                                   AudioBufferList* io_data);
-  static OSStatus OnDeliverRecordedData(void* in_ref_con,
-                                        AudioUnitRenderActionFlags* flags,
-                                        const AudioTimeStamp* time_stamp,
-                                        UInt32 bus_number,
-                                        UInt32 num_frames,
-                                        AudioBufferList* io_data);
-
-  // Notifies observer that samples are needed for playback.
-  OSStatus NotifyGetPlayoutData(AudioUnitRenderActionFlags* flags,
-                                const AudioTimeStamp* time_stamp,
-                                UInt32 bus_number,
-                                UInt32 num_frames,
-                                AudioBufferList* io_data);
-  // Notifies observer that recorded samples are available for render.
-  OSStatus NotifyDeliverRecordedData(AudioUnitRenderActionFlags* flags,
-                                     const AudioTimeStamp* time_stamp,
-                                     UInt32 bus_number,
-                                     UInt32 num_frames,
-                                     AudioBufferList* io_data);
-
-  // Returns the predetermined format with a specific sample rate. See
-  // implementation file for details on format.
-  AudioStreamBasicDescription GetFormat(Float64 sample_rate) const;
-
-  // Deletes the underlying audio unit.
-  void DisposeAudioUnit();
-
-  VoiceProcessingAudioUnitObserver* observer_;
-  AudioUnit vpio_unit_;
-  VoiceProcessingAudioUnit::State state_;
+  // Set to 1 to mute microphone through the CoreAudio AudioUnit, 0 otherwise.
+  virtual int32_t SetMicrophoneMute(bool enable) = 0;
+  virtual int32_t MicrophoneMute(bool& enabled) const = 0;
 };
+
 }  // namespace ios_adm
 }  // namespace webrtc
 

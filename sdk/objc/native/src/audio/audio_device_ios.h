@@ -14,12 +14,12 @@
 #include <memory>
 
 #include "audio_session_observer.h"
-#include "modules/audio_device/audio_device_generic.h"
-#include "rtc_base/buffer.h"
-#include "rtc_base/thread.h"
-#include "rtc_base/thread_annotations.h"
-#include "rtc_base/thread_checker.h"
-#include "sdk/objc/base/RTCMacros.h"
+#include "gmodules/audio_device/audio_device_generic.h"
+#include "grtc_base/buffer.h"
+#include "grtc_base/thread.h"
+#include "grtc_base/thread_annotations.h"
+#include "grtc_base/thread_checker.h"
+#include "gsdk/objc/base/RTCMacros.h"
 #include "voice_processing_audio_unit.h"
 
 RTC_FWD_DECL_OBJC_CLASS(RTCNativeAudioSessionDelegateAdapter);
@@ -258,10 +258,18 @@ class AudioDeviceIOS : public AudioDeviceGeneric,
   // will be changed dynamically to account for this behavior.
   rtc::BufferT<int16_t> record_audio_buffer_;
 
-  // Set to 1 when recording is active and 0 otherwise.
+  // Set to 1 when we want to mute the VoiceProcessingAudioUnit and 0 otherwise.
+  // Supported only if the underlying VoiceProcessingAudioUnit capable of it.
+  volatile int microphone_muted_;
+
+  // Set to 1 when recording is active and 0 otherwise,
+  // This state determines whether the FineAudioBuffer is streaming input to the
+  // VoiceProcessingAudioUnit.
   volatile int recording_;
 
   // Set to 1 when playout is active and 0 otherwise.
+  // This state determines whether the FineAudioBuffer is streaming output to
+  // the VoiceProcessingAudioUnit.
   volatile int playing_;
 
   // Set to true after successful call to Init(), false otherwise.
