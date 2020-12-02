@@ -16,6 +16,23 @@
       "message": "Hi Gustaf,\nCould you PTAL?\nAlessio",
       "revId": "fea79a419d03c2d766867c218e458f3ca905153c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e957b5d_8561dedd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-12-02T10:13:41Z",
+      "side": 1,
+      "message": "friendly ping",
+      "revId": "fea79a419d03c2d766867c218e458f3ca905153c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
