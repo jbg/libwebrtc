@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de14c961_b40bf181",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15222
+      },
+      "writtenOn": "2020-12-02T00:47:23Z",
+      "side": 1,
+      "message": "peah@, this CL includes the optimization I mentioned for MatchedFilterCore_SSE2.\nI added a new function for it with a tentative name for now.\n\nIt is a bit of code due to the SSE nature, although the idea is not as complex as it looks. Please let me know your thoughts, and if we could run some official benchmarks on it.",
+      "revId": "40fddc4135e2e0993a8442a027b28b07b75fc47d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
