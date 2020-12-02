@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85734d12_b42fe399",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-12-02T07:24:43Z",
+      "side": 1,
+      "message": "This CL LGTM, but I\u0027ll wait for Henrik to chime in since he\u0027s the owner of this code.\n\nThanks!",
+      "revId": "1cfe5e18b31d04c686db682d13aad43f0f69b49d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
