@@ -35,6 +35,46 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d643a5_8ea76c52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-12-03T15:19:27Z",
+      "side": 1,
+      "message": "LGTM with some minor comments.",
+      "revId": "a0310c2567df417f9c50195fd1b1c64c80c626a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19d37e01_db7c5ebc",
+        "filename": "call/adaptation/test/fake_video_stream_input_state_provider.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-12-03T15:19:27Z",
+      "side": 1,
+      "message": "nit: you can directly call setters on fake_input_state_",
+      "range": {
+        "startLine": 25,
+        "startChar": 24,
+        "endLine": 25,
+        "endChar": 35
+      },
+      "revId": "a0310c2567df417f9c50195fd1b1c64c80c626a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ae19613_1a330527",
@@ -76,6 +116,52 @@
         "startChar": 33,
         "endLine": 40,
         "endChar": 35
+      },
+      "revId": "a0310c2567df417f9c50195fd1b1c64c80c626a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d82902c_43a1ccf2",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-12-03T15:19:27Z",
+      "side": 1,
+      "message": "Usual practice is to check !field_trial::IsEnabled(). It will not only check that it\u0027s not empty, but will ensure that it starts with \"Enabled\"",
+      "range": {
+        "startLine": 314,
+        "startChar": 6,
+        "endLine": 314,
+        "endChar": 37
+      },
+      "revId": "a0310c2567df417f9c50195fd1b1c64c80c626a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98a56bf3_dd3d0873",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-12-03T15:19:27Z",
+      "side": 1,
+      "message": "I suggest to have:\nRTC_LOG(LS_ERROR) \u003c\u003c \"Couldn\u0027t parse WebRTC-PixelLimit trial config: \" \u003c\u003c pixel_limit_field_trial;",
+      "range": {
+        "startLine": 320,
+        "startChar": 28,
+        "endLine": 320,
+        "endChar": 65
       },
       "revId": "a0310c2567df417f9c50195fd1b1c64c80c626a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
