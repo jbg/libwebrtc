@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2214c703_0c1ec23c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-12-03T14:47:25Z",
+      "side": 1,
+      "message": "Please take a look, Evan and Ilya. I\u0027m feeling nostalgic for resource adaptation!",
+      "revId": "a0310c2567df417f9c50195fd1b1c64c80c626a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
