@@ -86,6 +86,30 @@
       },
       "revId": "c2a7a8ff312b94d9fd787defdc3b74f6d9d8c248",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c898b3_5bea4f50",
+        "filename": "modules/rtp_rtcp/source/ulpfec_generator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-03T13:25:41Z",
+      "side": 1,
+      "message": "Yes.\nWhen fec packets are generate they are put in generated_fec_packets_ and when they are removed from there using GetFecPackets() a reset is always performed.\nA dcheck above verifies we don\u0027t call AddPacketAndGenerateFec() until the output is empty.",
+      "parentUuid": "f841c04b_299572cd",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 26
+      },
+      "revId": "c2a7a8ff312b94d9fd787defdc3b74f6d9d8c248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
