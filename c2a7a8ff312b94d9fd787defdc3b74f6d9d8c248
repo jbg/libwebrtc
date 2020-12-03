@@ -16,6 +16,52 @@
       "message": "+yinwa@ who knows fec well",
       "revId": "c2a7a8ff312b94d9fd787defdc3b74f6d9d8c248",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ea0f8d_93a70759",
+        "filename": "modules/rtp_rtcp/source/ulpfec_generator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-12-03T11:59:18Z",
+      "side": 1,
+      "message": "personally I would rather set it with\nif (packet.is_key_frame()) {\n  media_contains_keyframe_ \u003d true;\n}\n\nthan with bitwise operator (unfortuntelly there is no similar logical or-assignment)",
+      "range": {
+        "startLine": 128,
+        "startChar": 27,
+        "endLine": 128,
+        "endChar": 29
+      },
+      "revId": "c2a7a8ff312b94d9fd787defdc3b74f6d9d8c248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f841c04b_299572cd",
+        "filename": "modules/rtp_rtcp/source/ulpfec_generator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-12-03T11:59:18Z",
+      "side": 1,
+      "message": "whem media_contains_keyframe_ becomes back false?\nonly when state is reset? Is state is reset after every generated fec packet?",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 26
+      },
+      "revId": "c2a7a8ff312b94d9fd787defdc3b74f6d9d8c248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
