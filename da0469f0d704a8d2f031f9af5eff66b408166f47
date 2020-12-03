@@ -16,6 +16,23 @@
       "message": "Recusing myself since I\u0027m no longer an OWNER of these files, and Jamie has already reviewed (thanks Jamie!).\n\nThanks again for your efforts in making these improvements, Jan. :)",
       "revId": "da0469f0d704a8d2f031f9af5eff66b408166f47",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f69307_5fd768cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-12-03T08:37:54Z",
+      "side": 1,
+      "message": "This CL has been approved and passed CQ dry run. Can we merge this now?",
+      "revId": "da0469f0d704a8d2f031f9af5eff66b408166f47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
