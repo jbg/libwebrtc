@@ -234,6 +234,7 @@ VideoStreamEncoderResourceManager::VideoStreamEncoderResourceManager(
       encode_usage_resource_(
           EncodeUsageResource::Create(std::move(overuse_detector))),
       quality_scaler_resource_(QualityScalerResource::Create()),
+      pixel_limit_resource_for_testbed_(nullptr),
       encoder_queue_(nullptr),
       input_state_provider_(input_state_provider),
       adaptation_processor_(nullptr),
@@ -298,6 +299,17 @@ void VideoStreamEncoderResourceManager::EnsureEncodeUsageResourceStarted() {
   encode_usage_resource_->StartCheckForOveruse(GetCpuOveruseOptions());
 }
 
+void VideoStreamEncoderResourceManager::
+    InitializePixelLimitResourceForTestBed() {
+  RTC_DCHECK_RUN_ON(encoder_queue_);
+  RTC_DCHECK(adaptation_processor_);
+  RTC_DCHECK(!pixel_limit_resource_for_testbed_);
+  pixel_limit_resource_for_testbed_ =
+      PixelLimitResource::Create(encoder_queue_->Get(), input_state_provider_);
+  pixel_limit_resource_for_testbed_->SetMaxPixels(640 * 480);
+  AddResource(pixel_limit_resource_for_testbed_, VideoAdaptationReason::kCpu);
+}
+
 void VideoStreamEncoderResourceManager::StopManagedResources() {
   RTC_DCHECK_RUN_ON(encoder_queue_);
   RTC_DCHECK(adaptation_processor_);
@@ -308,6 +320,10 @@ void VideoStreamEncoderResourceManager::StopManagedResources() {
   if (quality_scaler_resource_->is_started()) {
     quality_scaler_resource_->StopCheckForOveruse();
     RemoveResource(quality_scaler_resource_);
+  }
+  if (pixel_limit_resource_for_testbed_) {
+    RemoveResource(pixel_limit_resource_for_testbed_);
+    pixel_limit_resource_for_testbed_ = nullptr;
   }
 }
 

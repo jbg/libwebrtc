@@ -46,6 +46,7 @@
 #include "video/adaptation/bitrate_constraint.h"
 #include "video/adaptation/encode_usage_resource.h"
 #include "video/adaptation/overuse_frame_detector.h"
+#include "video/adaptation/pixel_limit_resource.h"
 #include "video/adaptation/quality_rampup_experiment_helper.h"
 #include "video/adaptation/quality_scaler_resource.h"
 #include "video/adaptation/video_stream_encoder_resource.h"
@@ -94,6 +95,7 @@ class VideoStreamEncoderResourceManager
   void EnsureEncodeUsageResourceStarted();
   // Stops the encode usage and quality scaler resources if not already stopped.
   void StopManagedResources();
+  void InitializePixelLimitResourceForTestBed();
 
   // Settings that affect the VideoStreamEncoder-specific resources.
   void SetEncoderSettings(EncoderSettings encoder_settings);
@@ -171,6 +173,7 @@ class VideoStreamEncoderResourceManager
       RTC_GUARDED_BY(encoder_queue_);
   const rtc::scoped_refptr<EncodeUsageResource> encode_usage_resource_;
   const rtc::scoped_refptr<QualityScalerResource> quality_scaler_resource_;
+  rtc::scoped_refptr<PixelLimitResource> pixel_limit_resource_for_testbed_;
 
   rtc::TaskQueue* encoder_queue_;
   VideoStreamInputStateProvider* const input_state_provider_
