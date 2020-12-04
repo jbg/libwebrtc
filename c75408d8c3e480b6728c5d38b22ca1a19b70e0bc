@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "c75408d8c3e480b6728c5d38b22ca1a19b70e0bc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3267daa_88aa8095",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-04T12:37:31Z",
+      "side": 1,
+      "message": "LGTM % comment but I am not an owner. I think a root-OWNER (tommi@?) should +1.",
+      "revId": "c75408d8c3e480b6728c5d38b22ca1a19b70e0bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
