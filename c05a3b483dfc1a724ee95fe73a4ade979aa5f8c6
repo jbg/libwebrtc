@@ -16,6 +16,40 @@
       "message": "I assume this will be triggered by C++ users, which already have access to the MAC by other means.\nThere\u0027s no guard against someone specifying this flag on the Chrome command line, but if someone wants to be tracked that badly, it seems like it\u0027s not our place to prevent it.\n\nApproved.\n",
       "revId": "c05a3b483dfc1a724ee95fe73a4ade979aa5f8c6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a587a24d_8fdf6de1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-04T14:48:12Z",
+      "side": 1,
+      "message": "No, I think you have inverted the test.\n\nShows the importance of testing. ALWAYS write tests.\n",
+      "revId": "c05a3b483dfc1a724ee95fe73a4ade979aa5f8c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b7bbd71_ea01dedb",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-04T14:48:12Z",
+      "side": 1,
+      "message": "I think this is backwards. If you allow MAC-based IPv6, you return true for all addresses, which means that it\u0027s not going to be used. That will *hurt*.",
+      "revId": "c05a3b483dfc1a724ee95fe73a4ade979aa5f8c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
