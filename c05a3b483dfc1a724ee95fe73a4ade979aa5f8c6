@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d767c4d_7e56cf3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-04T14:45:02Z",
+      "side": 1,
+      "message": "I assume this will be triggered by C++ users, which already have access to the MAC by other means.\nThere\u0027s no guard against someone specifying this flag on the Chrome command line, but if someone wants to be tracked that badly, it seems like it\u0027s not our place to prevent it.\n\nApproved.\n",
+      "revId": "c05a3b483dfc1a724ee95fe73a4ade979aa5f8c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
