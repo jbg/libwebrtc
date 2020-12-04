@@ -146,7 +146,7 @@ int64_t StreamGenerator::GenerateFrame(std::vector<PacketResult>* packets,
 }  // namespace test
 
 DelayBasedBweTest::DelayBasedBweTest()
-    : field_trial(),
+    : field_trial(std::make_unique<test::ScopedFieldTrials>(GetParam())),
       clock_(100000000),
       acknowledged_bitrate_estimator_(
           AcknowledgedBitrateEstimatorInterface::Create(&field_trial_config_)),
@@ -157,7 +157,7 @@ DelayBasedBweTest::DelayBasedBweTest()
                                                   clock_.TimeInMicroseconds())),
       arrival_time_offset_ms_(0),
       first_update_(true) {}
-
+/*
 DelayBasedBweTest::DelayBasedBweTest(const std::string& field_trial_string)
     : field_trial(
           std::make_unique<test::ScopedFieldTrials>(field_trial_string)),
@@ -171,7 +171,7 @@ DelayBasedBweTest::DelayBasedBweTest(const std::string& field_trial_string)
                                                   clock_.TimeInMicroseconds())),
       arrival_time_offset_ms_(0),
       first_update_(true) {}
-
+*/
 DelayBasedBweTest::~DelayBasedBweTest() {}
 
 void DelayBasedBweTest::AddDefaultStream() {
