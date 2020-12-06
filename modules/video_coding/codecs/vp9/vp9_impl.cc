@@ -2147,6 +2147,14 @@ int VP9DecoderImpl::Release() {
   return ret_val;
 }
 
+VideoDecoder::DecoderInfo VP9DecoderImpl::GetDecoderInfo() const {
+  DecoderInfo info;
+  info.implementation_name = "libvpx";
+  info.is_hardware_accelerated = false;
+  info.prefers_late_decoding = true;
+  return info;
+}
+
 const char* VP9DecoderImpl::ImplementationName() const {
   return "libvpx";
 }

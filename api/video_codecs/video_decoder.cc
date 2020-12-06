@@ -24,6 +24,14 @@ void DecodedImageCallback::Decoded(VideoFrame& decodedImage,
   Decoded(decodedImage, decode_time_ms.value_or(-1));
 }
 
+VideoDecoder::DecoderInfo VideoDecoder::GetDecoderInfo() const {
+  DecoderInfo info;
+  info.prefers_late_decoding = PrefersLateDecoding();
+  info.implementation_name = ImplementationName();
+  info.is_hardware_accelerated = info.implementation_name == "ExternalDecoder";
+  return info;
+}
+
 bool VideoDecoder::PrefersLateDecoding() const {
   return true;
 }
