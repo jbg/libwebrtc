@@ -102,6 +102,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4bee6f7f_ba6cf346",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-07T15:09:55Z",
+      "side": 1,
+      "message": "Alright, if we think this will really be cleaned up soon then it\u0027s fine. Fully moving is going to take a while, I just want to make sure we don\u0027t add new usage at a higher pace than we fix old ones :)",
+      "parentUuid": "d2e482fa_d289af0a",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 48
+      },
+      "revId": "47d7aa082236b44b0fc1d501a6afa456e99c959b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "37dd9371_b733b726",
         "filename": "media/base/codec.cc",
         "patchSetId": 3
