@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8574ecc_e8868f6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-07T14:14:35Z",
+      "side": 1,
+      "message": "See https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d12194#c3 ;-)",
+      "parentUuid": "04dc9305_4a11a125",
+      "revId": "47d7aa082236b44b0fc1d501a6afa456e99c959b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "866b845e_bb39639e",
@@ -48,6 +66,30 @@
       "writtenOn": "2020-12-07T10:18:47Z",
       "side": 1,
       "message": "We\u0027re trying to move away from accessing these static methods directly.\nAny chance you could wire up a flag from the Webrtc(Video|Voice)Engine classes instead? There we have access to an WebRtcKeyValueConfig instance which would be the preferred way.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 48
+      },
+      "revId": "47d7aa082236b44b0fc1d501a6afa456e99c959b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2e482fa_d289af0a",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-07T14:14:35Z",
+      "side": 1,
+      "message": "also for short-lived killswitches that will hopefully go away after this has been in stable for one release? (it might make sense to add a specific killswitch method maybe to disambiguate)\nThis isn\u0027t used from voice or video engine but pc/media_session and the (soon to go away rtp data channnel \"engine\")",
+      "parentUuid": "866b845e_bb39639e",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -88,6 +130,30 @@
       "writtenOn": "2020-12-07T10:23:16Z",
       "side": 1,
       "message": "I don\u0027t quite get the logic. We compare names iff both ids are in the upper dynamic range or at least one is in the lower dynamic range? Why are the ranges treated so differently?\nIsn\u0027t there a typo here?",
+      "range": {
+        "startLine": 166,
+        "startChar": 72,
+        "endLine": 166,
+        "endChar": 74
+      },
+      "revId": "47d7aa082236b44b0fc1d501a6afa456e99c959b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26b72ea7_337782d5",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-07T14:14:35Z",
+      "side": 1,
+      "message": "There is a typo but it turned out to be more complicated.\n\nThe old logic also prevents matches between of a payload type with a static local id and a remote dynamic id (e.g. trying to do PCMU at id 111).\nThe new one did not. OFC the test asserting that was passing because of the typo...",
+      "parentUuid": "7e40aa92_341b1d3d",
       "range": {
         "startLine": 166,
         "startChar": 72,
