@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fd7f58d_a56a4946",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-12-07T14:48:03Z",
+      "side": 1,
+      "message": "generally lgtm, just a few small comments or clarifications",
+      "revId": "2fad44fddfd93b0e04342fabc80566f9f6a47963",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ff44782_2ed84c27",
+        "filename": "modules/audio_processing/agc2/rnn_vad/features_extraction_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-12-07T14:48:03Z",
+      "side": 1,
+      "message": "Remove or uncomment?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 64
+      },
+      "revId": "2fad44fddfd93b0e04342fabc80566f9f6a47963",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd4c7ab0_3c34b1cd",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-12-07T14:48:03Z",
+      "side": 1,
+      "message": "What do you think about ASSERT_TRUEing on these reads? Applies throughout the files.\nThat way, file issues won\u0027t silently pass.\n\nIf not - are the bool return values of the read functions ever used?",
+      "range": {
+        "startLine": 40,
+        "startChar": 5,
+        "endLine": 40,
+        "endChar": 6
+      },
+      "revId": "2fad44fddfd93b0e04342fabc80566f9f6a47963",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c145b60_b879e2bb",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-12-07T14:48:03Z",
+      "side": 1,
+      "message": "rtc::CheckedDivExact, similar to what happens in some of the other Create*Reader() functions?\nOr will it fail due to \"// The last incomplete frame is ignored.\"",
+      "range": {
+        "startLine": 76,
+        "startChar": 25,
+        "endLine": 76,
+        "endChar": 69
+      },
+      "revId": "2fad44fddfd93b0e04342fabc80566f9f6a47963",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee1a3666_1b531f6a",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-12-07T14:48:03Z",
+      "side": 1,
+      "message": "ASSERT_TRUE?",
+      "range": {
+        "startLine": 91,
+        "startChar": 3,
+        "endLine": 91,
+        "endChar": 4
+      },
+      "revId": "2fad44fddfd93b0e04342fabc80566f9f6a47963",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "096d2220_e72b54b2",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-12-07T14:48:03Z",
+      "side": 1,
+      "message": "rtc::CheckedDivExact, similar to what happens in some of the other Create*Reader() functions?",
+      "range": {
+        "startLine": 119,
+        "startChar": 25,
+        "endLine": 119,
+        "endChar": 69
+      },
+      "revId": "2fad44fddfd93b0e04342fabc80566f9f6a47963",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3aa30a2_4ca32fdd",
+        "filename": "modules/audio_processing/agc2/rnn_vad/rnn_vad_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-12-07T14:48:03Z",
+      "side": 1,
+      "message": "ASSERT_TRUE?",
+      "range": {
+        "startLine": 126,
+        "startChar": 3,
+        "endLine": 126,
+        "endChar": 4
+      },
+      "revId": "2fad44fddfd93b0e04342fabc80566f9f6a47963",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
