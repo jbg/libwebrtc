@@ -16,6 +16,57 @@
       "message": "Since you asked ....\n",
       "revId": "811fa611a970fab9c67f15f64a7e0126513e6250",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ee007f_c920dd13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-12-07T10:29:04Z",
+      "side": 1,
+      "message": "LGTM % nits",
+      "revId": "811fa611a970fab9c67f15f64a7e0126513e6250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ad92e38_818b84e4",
+        "filename": "pc/channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-12-07T10:29:04Z",
+      "side": 1,
+      "message": "nit: Call srtp_active() here as well. You currently have the same code copied in two places, so if one of them changed you could have different behavior here depending on which thread the method was invoked on. The Invoke path and the non-invoke path should be identical even if srtp_active() was updated.",
+      "revId": "811fa611a970fab9c67f15f64a7e0126513e6250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a700b41_3163e367",
+        "filename": "pc/channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-12-07T10:29:04Z",
+      "side": 1,
+      "message": "nit: Same comment here, either return rtp_transport_ in both places or rtp_transport() in both places.",
+      "revId": "811fa611a970fab9c67f15f64a7e0126513e6250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
