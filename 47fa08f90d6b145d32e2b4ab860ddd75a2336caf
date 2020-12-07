@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "229c002f_79d9d4cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-12-07T21:37:02Z",
+      "side": 1,
+      "message": "Is it common practice now to use field trials instead of adding new fields to RTCConfiguration?\n\nIf not, how do we decide whether something belongs in RTCConfiguration?",
+      "revId": "47fa08f90d6b145d32e2b4ab860ddd75a2336caf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
