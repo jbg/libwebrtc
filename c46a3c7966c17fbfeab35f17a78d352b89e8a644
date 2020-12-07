@@ -39,6 +39,30 @@
       },
       "revId": "c46a3c7966c17fbfeab35f17a78d352b89e8a644",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c06bc37b_c03ffd51",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2020-12-07T19:33:49Z",
+      "side": 1,
+      "message": "intraoperability is the variant of interoperability with yourself. Intraop problems are way more embarassing :-)\nChanged, too much confusion around this.",
+      "parentUuid": "98aed159_55c39f8d",
+      "range": {
+        "startLine": 113,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 28
+      },
+      "revId": "c46a3c7966c17fbfeab35f17a78d352b89e8a644",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
