@@ -162,6 +162,30 @@
       },
       "revId": "47d7aa082236b44b0fc1d501a6afa456e99c959b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6da9f6a2_d28c731f",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-12-07T14:24:02Z",
+      "side": 1,
+      "message": "Could you update the tests with more cases? Like one codec in lower dynamic range and the other one in a static range, having the same name, expected not to be equal.",
+      "parentUuid": "26b72ea7_337782d5",
+      "range": {
+        "startLine": 166,
+        "startChar": 72,
+        "endLine": 166,
+        "endChar": 74
+      },
+      "revId": "47d7aa082236b44b0fc1d501a6afa456e99c959b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
