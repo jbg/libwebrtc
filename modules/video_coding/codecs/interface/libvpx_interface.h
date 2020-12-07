@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_VIDEO_CODING_CODECS_VP8_LIBVPX_INTERFACE_H_
-#define MODULES_VIDEO_CODING_CODECS_VP8_LIBVPX_INTERFACE_H_
+#ifndef MODULES_VIDEO_CODING_CODECS_INTERFACE_LIBVPX_INTERFACE_H_
+#define MODULES_VIDEO_CODING_CODECS_INTERFACE_LIBVPX_INTERFACE_H_
 
 #include <stdint.h>
 
@@ -96,9 +96,9 @@ class LibvpxInterface {
   virtual const char* codec_error_detail(vpx_codec_ctx_t* ctx) const = 0;
 
   // Returns interface wrapping the actual libvpx functions.
-  static std::unique_ptr<LibvpxInterface> CreateEncoder();
+  static std::unique_ptr<LibvpxInterface> Create();
 };
 
 }  // namespace webrtc
 
-#endif  // MODULES_VIDEO_CODING_CODECS_VP8_LIBVPX_INTERFACE_H_
+#endif  // MODULES_VIDEO_CODING_CODECS_INTERFACE_LIBVPX_INTERFACE_H_
