@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "535d9960_ecab6916",
+        "filename": "pc/channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-07T11:17:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ad92e38_818b84e4",
+      "revId": "811fa611a970fab9c67f15f64a7e0126513e6250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a700b41_3163e367",
@@ -65,6 +83,24 @@
       "writtenOn": "2020-12-07T10:29:04Z",
       "side": 1,
       "message": "nit: Same comment here, either return rtp_transport_ in both places or rtp_transport() in both places.",
+      "revId": "811fa611a970fab9c67f15f64a7e0126513e6250",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8f2f3f1_de0164d8",
+        "filename": "pc/channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-07T11:17:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a700b41_3163e367",
       "revId": "811fa611a970fab9c67f15f64a7e0126513e6250",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
