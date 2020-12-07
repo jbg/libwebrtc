@@ -56,6 +56,46 @@
       },
       "revId": "47d7aa082236b44b0fc1d501a6afa456e99c959b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37dd9371_b733b726",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-12-07T10:23:16Z",
+      "side": 1,
+      "message": "nit:\n\nThis condition became too long. Could you please split it to smaller pieces with const bool variables? Something like that:\n\nconst bool is_id_in_dynamic_range \u003d (id \u003e\u003d kLowerDynamicRangeMin \u0026\u0026 id \u003c\u003d kLowerDynamicRangeMax) || (id \u003e\u003d kUpperDynamicRangeMin \u0026\u0026 id \u003c\u003d kUpperDynamicRangeMax);\nconst bool is_codec_id_in_dynamic_range \u003d (codec.id \u003e\u003d kLowerDynamicRangeMin \u0026\u0026 codec.id \u003c\u003d kLowerDynamicRangeMax) || (codec.id \u003e\u003d kUpperDynamicRangeMin \u0026\u0026 codec.id \u003c\u003d kUpperDynamicRangeMax);",
+      "revId": "47d7aa082236b44b0fc1d501a6afa456e99c959b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e40aa92_341b1d3d",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-12-07T10:23:16Z",
+      "side": 1,
+      "message": "I don\u0027t quite get the logic. We compare names iff both ids are in the upper dynamic range or at least one is in the lower dynamic range? Why are the ranges treated so differently?\nIsn\u0027t there a typo here?",
+      "range": {
+        "startLine": 166,
+        "startChar": 72,
+        "endLine": 166,
+        "endChar": 74
+      },
+      "revId": "47d7aa082236b44b0fc1d501a6afa456e99c959b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
