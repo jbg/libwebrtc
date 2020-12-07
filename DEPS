@@ -7,7 +7,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'eb89725d5b90bdaec46b1049d09ef5b27aa9108f',
+  'chromium_revision': '2ef75f66e4efa4438abeaadfd3f69fc2aa2e2cbe',
 }
 
 deps = {
@@ -25,13 +25,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@a3602f529d38eb9d903f4ebe97bd0d87494a5c77',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@63ea2875141047f0480bc806a65ff175354937cf',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@ea45715036985401bacff706e05995b4f9a4c172',
+    'https://chromium.googlesource.com/chromium/src/testing@fe42abad8d111adb608c78af6ca3e7f9823f637f',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@e30927394dee2e3ac43b7e1c5ff55c94cbbb7e73',
+    'https://chromium.googlesource.com/chromium/src/third_party@cf64ce74ca59531bd4cd63a2b6ef9b012eb9528f',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -122,7 +122,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@e3d485f73f5836fdd6fb287ab96973c4f63175e1',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@88efddc6a162994babc45a2d28bb5f4f9867c2f1',
+    'https://chromium.googlesource.com/catapult.git@4565794f5eda08cefef9bf842e16249fc8aeb5bc',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
@@ -200,7 +200,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@e1502e7972cb2a4bb582d5ae2cc693cc3b7868dc',
+    'https://android.googlesource.com/platform/external/perfetto.git@3efbe10ffd42512a69038fef4b7f042327b3e8e7',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@b5d77a48d740e211a130c8e45d9353ef8c154a47',
   'src/third_party/libyuv':
@@ -257,7 +257,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@44067df94b1be70e0a898bb0cec5979546fc1601',
+    'https://chromium.googlesource.com/chromium/src/tools@922b509d4b8ca9490750d4435fc107cee89ea27b',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@1a072711d4388c62e02480fabc26c68c24494be9',
 
