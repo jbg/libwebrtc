@@ -7,7 +7,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'c24aab83fe2bd0569c83cbcb438fcbaedc37536a',
+  'chromium_revision': 'eaa54b797f2d0b0a943b94c1cf96f79916011343',
 }
 
 deps = {
@@ -31,7 +31,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@95c0c5beb06c66061a95354e033645a6b649041f',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@995c4d680c22dd6085c6ab1d9e64205f9e06f8f0',
+    'https://chromium.googlesource.com/chromium/src/third_party@ac77533a128d4a6e8a46e72b86e7abcc833893cc',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -142,7 +142,7 @@ deps = {
       'condition': 'checkout_linux',
   },
   'src/third_party/freetype/src':
-    'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@9f94d8533cefa8a023a0b81633032fe0aaea08fb',
+    'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@272ae5ee2ab1dd5754931675841f4dd0736fe17a',
   'src/third_party/harfbuzz-ng/src':
     'https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git@53806e5b83cee0e275eac038d0780f95ac56588c',
   'src/third_party/google_benchmark/src': {
@@ -257,7 +257,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@81c9c1eea8e635e838359fedbe16d0ef17d4ae7e',
+    'https://chromium.googlesource.com/chromium/src/tools@fd43e97920ee93a3b3ae289d78b0b39c0df56496',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@1a072711d4388c62e02480fabc26c68c24494be9',
 
