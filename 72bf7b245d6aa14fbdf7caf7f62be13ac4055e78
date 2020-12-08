@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aa66f35_4e420567",
+        "filename": "modules/video_coding/codecs/interface/libvpx_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-08T12:22:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd63a14a_71f54e4f",
+      "range": {
+        "startLine": 25,
+        "startChar": 31,
+        "endLine": 25,
+        "endChar": 34
+      },
+      "revId": "72bf7b245d6aa14fbdf7caf7f62be13ac4055e78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e2d33fd_3e18eb32",
@@ -64,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ad390a2_3c3bcf72",
+        "filename": "modules/video_coding/codecs/interface/libvpx_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-08T12:22:59Z",
+      "side": 1,
+      "message": "Not yet, there\u0027s some functions missing for vp9. This CL just moves and renames the class,\nwanted to keep functional changes to a minimum.",
+      "parentUuid": "2e2d33fd_3e18eb32",
+      "range": {
+        "startLine": 26,
+        "startChar": 49,
+        "endLine": 26,
+        "endChar": 52
+      },
+      "revId": "72bf7b245d6aa14fbdf7caf7f62be13ac4055e78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdf92bf5_31765b9b",
@@ -77,6 +125,30 @@
       "writtenOn": "2020-12-08T12:14:52Z",
       "side": 1,
       "message": "done?",
+      "range": {
+        "startLine": 27,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 7
+      },
+      "revId": "72bf7b245d6aa14fbdf7caf7f62be13ac4055e78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a09583fe_f3026897",
+        "filename": "modules/video_coding/codecs/interface/libvpx_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-08T12:22:59Z",
+      "side": 1,
+      "message": "No, coming in follow-up.",
+      "parentUuid": "bdf92bf5_31765b9b",
       "range": {
         "startLine": 27,
         "startChar": 3,
