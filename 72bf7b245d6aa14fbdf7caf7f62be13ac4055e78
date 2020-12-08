@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb2eed40_791227e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2020-12-08T12:14:52Z",
+      "side": 1,
+      "message": "Nice! LGTM with small notes on documentation.",
+      "revId": "72bf7b245d6aa14fbdf7caf7f62be13ac4055e78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd63a14a_71f54e4f",
+        "filename": "modules/video_coding/codecs/interface/libvpx_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2020-12-08T12:14:52Z",
+      "side": 1,
+      "message": "dup",
+      "range": {
+        "startLine": 25,
+        "startChar": 31,
+        "endLine": 25,
+        "endChar": 34
+      },
+      "revId": "72bf7b245d6aa14fbdf7caf7f62be13ac4055e78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e2d33fd_3e18eb32",
+        "filename": "modules/video_coding/codecs/interface/libvpx_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2020-12-08T12:14:52Z",
+      "side": 1,
+      "message": "and VP9?",
+      "range": {
+        "startLine": 26,
+        "startChar": 49,
+        "endLine": 26,
+        "endChar": 52
+      },
+      "revId": "72bf7b245d6aa14fbdf7caf7f62be13ac4055e78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdf92bf5_31765b9b",
+        "filename": "modules/video_coding/codecs/interface/libvpx_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2020-12-08T12:14:52Z",
+      "side": 1,
+      "message": "done?",
+      "range": {
+        "startLine": 27,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 7
+      },
+      "revId": "72bf7b245d6aa14fbdf7caf7f62be13ac4055e78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
