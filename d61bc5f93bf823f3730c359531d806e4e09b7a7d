@@ -33,6 +33,24 @@
       "message": "\u003e Patch Set 3:\n\u003e \n\u003e (1 comment)\n\u003e \n\u003e This change is ready for review.\n\nLGTM !",
       "revId": "d61bc5f93bf823f3730c359531d806e4e09b7a7d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8497a6ec_70239489",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2020-12-09T19:50:29Z",
+      "side": 1,
+      "message": "Thanks for taking a look!",
+      "parentUuid": "829493fc_938033f1",
+      "revId": "d61bc5f93bf823f3730c359531d806e4e09b7a7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
