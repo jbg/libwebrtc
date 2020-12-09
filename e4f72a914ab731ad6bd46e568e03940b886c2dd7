@@ -60,6 +60,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "40569dbd_2f050015",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-12-09T20:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e20ca32c_5b635c9d",
+      "range": {
+        "startLine": 261,
+        "startChar": 40,
+        "endLine": 261,
+        "endChar": 46
+      },
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8c7aae2f_c5c2a0f9",
         "filename": "rtc_base/openssl_adapter.cc",
         "patchSetId": 19
@@ -71,6 +95,24 @@
       "writtenOn": "2020-11-11T19:58:33Z",
       "side": 1,
       "message": "By the way, existing issue so no need to do anything in this CL, but you might want to look at SSL_CTX_set_cert_verify_callback for the X509 path. SSL_CTX_set_cert_verify_callback replaces the certificate verification operation altogether, while SSL_CTX_set_verify\u0027s callback runs the normal X.509 verification but lets you override individual failures. It\u0027ll actually get called potentially multiple times. At least for the ssl_cert_verifier_ path, you probably don\u0027t want that. (That\u0027s why the callback takes an ok parameter and such.)\n\nI think it\u0027d look something like:\n\n SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, ExistingLoggingThingOrMaybeJustOmitThis);\n SSL_CTX_set_cert_verify_callback(ctx, SSLVerifyCallback, nullptr);\n\nint ExistingLoggingThingOrMaybeJustOmitThis(int ok, X509_STORE_CTX* store) {\n#if !defined(NDEBUG)\n  if (!ok) {\n    char data[256];\n    X509* cert \u003d X509_STORE_CTX_get_current_cert(store);\n    int depth \u003d X509_STORE_CTX_get_error_depth(store);\n    int err \u003d X509_STORE_CTX_get_error(store);\n\n    RTC_DLOG(LS_INFO) \u003c\u003c \"Error with certificate at depth: \" \u003c\u003c depth;\n    X509_NAME_oneline(X509_get_issuer_name(cert), data, sizeof(data));\n    RTC_DLOG(LS_INFO) \u003c\u003c \"  issuer  \u003d \" \u003c\u003c data;\n    X509_NAME_oneline(X509_get_subject_name(cert), data, sizeof(data));\n    RTC_DLOG(LS_INFO) \u003c\u003c \"  subject \u003d \" \u003c\u003c data;\n    RTC_DLOG(LS_INFO) \u003c\u003c \"  err     \u003d \" \u003c\u003c err \u003c\u003c \":\"\n                      \u003c\u003c X509_verify_cert_error_string(err);\n  }\n#endif\n  return ok;\n}\n\nint SSLVerifyCallback(X509_STORE_CTX *store, void *arg) {\n  // Get our stream pointer from the store\n  SSL* ssl \u003d reinterpret_cast\u003cSSL*\u003e(\n      X509_STORE_CTX_get_ex_data(store, SSL_get_ex_data_X509_STORE_CTX_idx()));\n\n  OpenSSLAdapter* stream \u003d\n      reinterpret_cast\u003cOpenSSLAdapter*\u003e(SSL_get_app_data(ssl));\n  // Probably the SSLVerifyInternal/SSLVerifyCallback split with\n  // ignore_bad_cert_ and whatnot.\n  if (stream_-\u003essl_cert_verifier_ \u003d\u003d nullptr) {\n    // Use the built-in verifier.\n    return X509_verify_cert(store);\n  }\n\n  // Use ssl_cert_verifier_.\n  ...\n}\n\nOpenSSL\u0027s API is the worst... :-(",
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "623371df_9dd4f7c8",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-12-09T20:13:58Z",
+      "side": 1,
+      "message": "Ack. Though I don\u0027t think anything is actually using the custom verifier, so I imagine we can just get rid of this code and use SSL_CTX_set_custom_verify for the CRYPTO_BUFFER path.",
+      "parentUuid": "8c7aae2f_c5c2a0f9",
       "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -110,6 +152,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38fca5b0_62dde521",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-12-09T20:13:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d1e44102_576028ae",
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d94a4892_3f59abb7",
@@ -127,6 +187,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa6bf406_40072635",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-12-09T20:13:58Z",
+      "side": 1,
+      "message": "Done, not sure how I missed that.",
+      "parentUuid": "d94a4892_3f59abb7",
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80979461_f751d18f",
@@ -140,6 +218,54 @@
       "writtenOn": "2020-11-11T19:58:33Z",
       "side": 1,
       "message": "Nit: It\u0027s the same for non-empty vectors, but cert_buffers.data().",
+      "range": {
+        "startLine": 210,
+        "startChar": 46,
+        "endLine": 210,
+        "endChar": 64
+      },
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af06bd43_32af5e28",
+        "filename": "rtc_base/openssl_utility_unittest.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-12-09T20:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80979461_f751d18f",
+      "range": {
+        "startLine": 210,
+        "startChar": 46,
+        "endLine": 210,
+        "endChar": 64
+      },
+      "revId": "e4f72a914ab731ad6bd46e568e03940b886c2dd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dcc250a_172e117a",
+        "filename": "rtc_base/openssl_utility_unittest.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-12-09T20:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80979461_f751d18f",
       "range": {
         "startLine": 210,
         "startChar": 46,

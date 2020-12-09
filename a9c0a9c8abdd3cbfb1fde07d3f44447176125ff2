@@ -272,6 +272,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b58ee5_0c1b02e4",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-12-09T20:13:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "35bc242f_befa292e",
+      "range": {
+        "startLine": 886,
+        "startChar": 6,
+        "endLine": 886,
+        "endChar": 19
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35ddefa8_5835524f",
@@ -994,6 +1018,24 @@
       "side": 1,
       "message": "No strong feelings either way here.",
       "parentUuid": "ed1cde48_e84acb48",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "112edc30_89716bbf",
+        "filename": "rtc_base/openssl_utility_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-12-09T20:13:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b62fb2ce_58b9e852",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
