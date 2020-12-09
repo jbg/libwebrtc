@@ -16,6 +16,23 @@
       "message": "Let\u0027s get this landed. It\u0027s been waiting long enough.\n",
       "revId": "19deaf7b9bfcb4cf67b5945bda1abcf45ddcf50f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68d77aeb_9c993a1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-09T10:20:37Z",
+      "side": 1,
+      "message": "Moving myself to CC (I hope this was not blocked on me).",
+      "revId": "19deaf7b9bfcb4cf67b5945bda1abcf45ddcf50f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
