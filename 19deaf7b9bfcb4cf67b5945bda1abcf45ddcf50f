@@ -72,6 +72,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "15d30c01_ea72dcf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-12-09T20:36:35Z",
+      "side": 1,
+      "message": "Mirko, turns out I did need your LGTM for webrtc.gni.",
+      "revId": "19deaf7b9bfcb4cf67b5945bda1abcf45ddcf50f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ee475d8f_a0eedab6",
         "filename": "webrtc.gni",
         "patchSetId": 20
