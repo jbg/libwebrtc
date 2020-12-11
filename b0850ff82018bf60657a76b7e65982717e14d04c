@@ -16,6 +16,29 @@
       "message": "Looks like we were still using the deprecated version of the RtpRtcp module for video receive streams. I\u0027m trying to move the legacy version out of the main production build targets. Will likely need some intermediate cl with a new but empty target to avoid breaking downstream code. Also not sure what\u0027s the appropriate visibility setting for the new target.",
       "revId": "b0850ff82018bf60657a76b7e65982717e14d04c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89e43d7b_81a7a3be",
+        "filename": "modules/rtp_rtcp/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-11T14:34:52Z",
+      "side": 1,
+      "message": "In some cases, we have explicitly moved deprecated things into deprecated/ directories.\n\nDo you think it is doable here or there is a lot of downstream usage?",
+      "range": {
+        "startLine": 322,
+        "startChar": 4,
+        "endLine": 323,
+        "endChar": 29
+      },
+      "revId": "b0850ff82018bf60657a76b7e65982717e14d04c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
