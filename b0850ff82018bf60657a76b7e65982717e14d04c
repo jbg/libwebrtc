@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b614e809_74381aa7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-12-11T14:55:55Z",
+      "side": 1,
+      "message": "this unfortunately goes in the backwards direction of adding dependencies to new code into deprecated code.",
+      "revId": "b0850ff82018bf60657a76b7e65982717e14d04c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89e43d7b_81a7a3be",
@@ -37,6 +54,40 @@
         "endLine": 323,
         "endChar": 29
       },
+      "revId": "b0850ff82018bf60657a76b7e65982717e14d04c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4fb337_541278b7",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-12-11T14:55:55Z",
+      "side": 1,
+      "message": "this method is deprecated, let\u0027s not change it by pulling in non deprecated code",
+      "revId": "b0850ff82018bf60657a76b7e65982717e14d04c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc057ab3_e1e16050",
+        "filename": "video/rtp_video_stream_receiver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-12-11T14:55:55Z",
+      "side": 1,
+      "message": "I don\u0027t think this is going to work. RtpVideoStreamReceiver is one of the deprecated classes btw, so there both shouldn\u0027t be a need to change it and also we shouldn\u0027t introduce a dependency on ModuleRtpRtcpImpl2 from deprecated classes.",
       "revId": "b0850ff82018bf60657a76b7e65982717e14d04c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
