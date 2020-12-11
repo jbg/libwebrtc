@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f54a01d_ec096657",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-12-11T14:30:15Z",
+      "side": 1,
+      "message": "Looks like we were still using the deprecated version of the RtpRtcp module for video receive streams. I\u0027m trying to move the legacy version out of the main production build targets. Will likely need some intermediate cl with a new but empty target to avoid breaking downstream code. Also not sure what\u0027s the appropriate visibility setting for the new target.",
+      "revId": "b0850ff82018bf60657a76b7e65982717e14d04c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
