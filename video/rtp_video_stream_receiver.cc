@@ -77,7 +77,7 @@ int PacketBufferMaxSize() {
   return packet_buffer_max_size;
 }
 
-std::unique_ptr<RtpRtcp> CreateRtpRtcpModule(
+std::unique_ptr<ModuleRtpRtcpImpl2> CreateRtpRtcpModule(
     Clock* clock,
     ReceiveStatistics* receive_statistics,
     Transport* outgoing_transport,
@@ -99,7 +99,7 @@ std::unique_ptr<RtpRtcp> CreateRtpRtcpModule(
   configuration.local_media_ssrc = local_ssrc;
   configuration.non_sender_rtt_measurement = non_sender_rtt_measurement;
 
-  std::unique_ptr<RtpRtcp> rtp_rtcp = RtpRtcp::DEPRECATED_Create(configuration);
+  auto rtp_rtcp = std::make_unique<ModuleRtpRtcpImpl2>(configuration);
   rtp_rtcp->SetRTCPStatus(RtcpMode::kCompound);
 
   return rtp_rtcp;
