@@ -665,6 +665,13 @@ rtc_library("rtc_json") {
   }
 }
 
+rtc_source_set("async_resolver") {
+  sources = [
+    "async_resolver.cc",
+    "async_resolver.h",
+  ]
+}
+
 rtc_source_set("net_helpers") {
   # TODO(bugs.webrtc.org/9987): This build target will soon contain
   #                             the following files:
@@ -676,12 +683,10 @@ rtc_source_set("net_helpers") {
 
 rtc_source_set("async_resolver_interface") {
   visibility = [ "*" ]
-  # TODO(bugs.webrtc.org/9987): This build target will soon contain
-  #                             the following files:
-  # sources = [
-  #   "async_resolver_interface.cc",
-  #   "async_resolver_interface.h",
-  # ]
+  sources = [
+    "async_resolver_interface.cc",
+    "async_resolver_interface.h",
+  ]
 }
 
 rtc_source_set("ip_address") {
@@ -861,8 +866,6 @@ rtc_library("rtc_base") {
     "async_invoker_inl.h",
     "async_packet_socket.cc",
     "async_packet_socket.h",
-    "async_resolver_interface.cc",
-    "async_resolver_interface.h",
     "async_socket.cc",
     "async_socket.h",
     "async_tcp_socket.cc",
