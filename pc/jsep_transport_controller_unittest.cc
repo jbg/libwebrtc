@@ -18,6 +18,7 @@
 #include "p2p/base/fake_ice_transport.h"
 #include "p2p/base/transport_info.h"
 #include "rtc_base/gunit.h"
+#include "rtc_base/system/unused.h"
 #include "rtc_base/thread.h"
 #include "test/gtest.h"
 
@@ -508,10 +509,12 @@ TEST_F(JsepTransportControllerTest, MaybeStartGathering) {
 TEST_F(JsepTransportControllerTest, AddRemoveRemoteCandidates) {
   CreateJsepTransportController(JsepTransportController::Config());
   auto description = CreateSessionDescriptionWithoutBundle();
-  transport_controller_->SetLocalDescription(SdpType::kOffer,
-                                             description.get());
-  transport_controller_->SetRemoteDescription(SdpType::kAnswer,
-                                              description.get());
+  auto result = transport_controller_->SetLocalDescription(SdpType::kOffer,
+                                                           description.get());
+  RTC_UNUSED(result);
+  result = transport_controller_->SetRemoteDescription(SdpType::kAnswer,
+                                                       description.get());
+  RTC_UNUSED(result);
   auto fake_audio_dtls = static_cast<FakeDtlsTransport*>(
       transport_controller_->GetDtlsTransport(kAudioMid1));
   ASSERT_NE(nullptr, fake_audio_dtls);

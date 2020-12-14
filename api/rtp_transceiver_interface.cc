@@ -11,6 +11,7 @@
 #include "api/rtp_transceiver_interface.h"
 
 #include "rtc_base/checks.h"
+#include "rtc_base/system/unused.h"
 
 namespace webrtc {
 
@@ -68,7 +69,8 @@ webrtc::RTCError RtpTransceiverInterface::SetOfferedRtpHeaderExtensions(
 // are updated.
 void RtpTransceiverInterface::SetDirection(
     RtpTransceiverDirection new_direction) {
-  SetDirectionWithError(new_direction);
+  auto result = SetDirectionWithError(new_direction);
+  RTC_UNUSED(result);
 }
 
 RTCError RtpTransceiverInterface::SetDirectionWithError(

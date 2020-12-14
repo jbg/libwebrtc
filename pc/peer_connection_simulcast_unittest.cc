@@ -26,6 +26,7 @@
 #include "pc/test/fake_audio_capture_module.h"
 #include "pc/test/mock_peer_connection_observers.h"
 #include "rtc_base/gunit.h"
+#include "rtc_base/system/unused.h"
 #include "system_wrappers/include/metrics.h"
 #include "test/gmock.h"
 
@@ -455,7 +456,9 @@ TEST_F(PeerConnectionSimulcastTests, ServerSendsOfferToReceiveSimulcast) {
   std::string error;
   EXPECT_TRUE(remote->SetRemoteDescription(std::move(offer), &error)) << error;
   auto transceiver = remote->pc()->GetTransceivers()[0];
-  transceiver->SetDirectionWithError(RtpTransceiverDirection::kSendRecv);
+  auto result =
+      transceiver->SetDirectionWithError(RtpTransceiverDirection::kSendRecv);
+  RTC_UNUSED(result);
   EXPECT_TRUE(remote->CreateAnswerAndSetAsLocal());
   ValidateTransceiverParameters(transceiver, layers);
 }
@@ -478,7 +481,9 @@ TEST_F(PeerConnectionSimulcastTests, TransceiverIsNotRecycledWithSimulcast) {
   auto transceivers = remote->pc()->GetTransceivers();
   ASSERT_EQ(2u, transceivers.size());
   auto transceiver = transceivers[1];
-  transceiver->SetDirectionWithError(RtpTransceiverDirection::kSendRecv);
+  auto result =
+      transceiver->SetDirectionWithError(RtpTransceiverDirection::kSendRecv);
+  RTC_UNUSED(result);
   EXPECT_TRUE(remote->CreateAnswerAndSetAsLocal());
   ValidateTransceiverParameters(transceiver, layers);
 }
@@ -611,7 +616,9 @@ TEST_F(PeerConnectionSimulcastMetricsTests, IncomingSimulcastIsLogged) {
               ElementsAre(Pair(kSimulcastApiVersionSpecCompliant, 1)));
 
   auto transceiver = remote->pc()->GetTransceivers()[0];
-  transceiver->SetDirectionWithError(RtpTransceiverDirection::kSendRecv);
+  auto result =
+      transceiver->SetDirectionWithError(RtpTransceiverDirection::kSendRecv);
+  RTC_UNUSED(result);
   EXPECT_TRUE(remote->CreateAnswerAndSetAsLocal());
   EXPECT_THAT(LocalDescriptionSamples(),
               ElementsAre(Pair(kSimulcastApiVersionSpecCompliant, 2)));

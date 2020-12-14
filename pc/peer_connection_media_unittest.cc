@@ -31,6 +31,7 @@
 #endif
 #include "pc/test/fake_rtc_certificate_generator.h"
 #include "rtc_base/gunit.h"
+#include "rtc_base/system/unused.h"
 #include "rtc_base/virtual_socket_server.h"
 #include "test/gmock.h"
 
@@ -1656,7 +1657,8 @@ TEST_F(PeerConnectionMediaTestUnifiedPlan,
                       });
   video_codecs_vp8_rtx.erase(it, video_codecs_vp8_rtx.end());
   EXPECT_EQ(video_codecs_vp8_rtx.size(), 2u);  // VP8, RTX
-  recv_transceiver->SetCodecPreferences(video_codecs_vp8_rtx);
+  auto result = recv_transceiver->SetCodecPreferences(video_codecs_vp8_rtx);
+  RTC_UNUSED(result);
 
   auto answer = callee->CreateAnswerAndSetAsLocal();
 
@@ -1723,7 +1725,8 @@ TEST_F(PeerConnectionMediaTestUnifiedPlan,
   callee->SetRemoteDescription(std::move(offer));
 
   auto recv_transceiver = callee->pc()->GetTransceivers().front();
-  recv_transceiver->SetCodecPreferences(video_codecs_vpx_reverse);
+  auto result = recv_transceiver->SetCodecPreferences(video_codecs_vpx_reverse);
+  RTC_UNUSED(result);
 
   auto answer = callee->CreateAnswerAndSetAsLocal();
 

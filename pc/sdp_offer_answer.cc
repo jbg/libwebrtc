@@ -64,6 +64,7 @@
 #include "rtc_base/ssl_stream_adapter.h"
 #include "rtc_base/string_encode.h"
 #include "rtc_base/strings/string_builder.h"
+#include "rtc_base/system/unused.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/metrics.h"
@@ -2140,7 +2141,8 @@ void SdpOfferAnswerHandler::DoSetRemoteDescription(
     if (pc_->configuration()->enable_implicit_rollback) {
       if (desc->GetType() == SdpType::kOffer &&
           signaling_state() == PeerConnectionInterface::kHaveLocalOffer) {
-        Rollback(desc->GetType());
+        auto result = Rollback(desc->GetType());
+        RTC_UNUSED(result);
       }
     }
     // Explicit rollback.
