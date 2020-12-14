@@ -226,7 +226,6 @@ rtc_library("probe_controller") {
     "../../../rtc_base:macromagic",
     "../../../rtc_base:safe_conversions",
     "../../../rtc_base/experiments:field_trial_parser",
-    "../../../rtc_base/system:unused",
     "../../../system_wrappers:metrics",
   ]
   absl_deps = [
