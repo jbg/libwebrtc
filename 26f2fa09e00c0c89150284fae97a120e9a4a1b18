@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e64b5be4_e3cb23b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-12-14T09:32:11Z",
+      "side": 1,
+      "message": "Reverting this commit since the code ended up being unused.",
+      "revId": "26f2fa09e00c0c89150284fae97a120e9a4a1b18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
