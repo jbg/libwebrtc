@@ -12,6 +12,7 @@
 
 #include <string>
 
+#include "rtc_base/system/unused.h"
 #include "sdk/android/generated_peerconnection_jni/RtpTransceiver_jni.h"
 #include "sdk/android/native_api/jni/java_types.h"
 #include "sdk/android/src/jni/jni_helpers.h"
@@ -147,8 +148,10 @@ void JNI_RtpTransceiver_StopInternal(JNIEnv* jni,
 
 void JNI_RtpTransceiver_StopStandard(JNIEnv* jni,
                                      jlong j_rtp_transceiver_pointer) {
-  reinterpret_cast<RtpTransceiverInterface*>(j_rtp_transceiver_pointer)
-      ->StopStandard();
+  auto result =
+      reinterpret_cast<RtpTransceiverInterface*>(j_rtp_transceiver_pointer)
+          ->StopStandard();
+  RTC_UNUSED(result);
 }
 
 jboolean JNI_RtpTransceiver_SetDirection(

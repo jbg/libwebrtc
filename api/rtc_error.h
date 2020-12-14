@@ -17,6 +17,7 @@
 #include <string>
 #include <utility>  // For std::move.
 
+#include "absl/base/attributes.h"
 #include "absl/types/optional.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
@@ -100,7 +101,7 @@ enum class RTCErrorDetailType {
 //
 // Doesn't contain anything beyond a type and message now, but will in the
 // future as more errors are implemented.
-class RTC_EXPORT RTCError {
+class RTC_EXPORT ABSL_MUST_USE_RESULT RTCError {
  public:
   // Constructors.
 

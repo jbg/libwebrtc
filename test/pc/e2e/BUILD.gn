@@ -275,6 +275,7 @@ if (!build_with_chromium) {
         "../../../modules/audio_processing/aec_dump",
         "../../../p2p:rtc_p2p",
         "../../../rtc_base:rtc_task_queue",
+        "../../../rtc_base/system:unused",
       ]
       absl_deps = [
         "//third_party/abseil-cpp/absl/memory",

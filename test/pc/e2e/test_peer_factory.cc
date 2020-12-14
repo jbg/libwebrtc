@@ -23,6 +23,7 @@
 #include "media/engine/webrtc_media_engine_defaults.h"
 #include "modules/audio_processing/aec_dump/aec_dump_factory.h"
 #include "p2p/client/basic_port_allocator.h"
+#include "rtc_base/system/unused.h"
 #include "test/pc/e2e/analyzer/video/quality_analyzing_video_encoder.h"
 #include "test/pc/e2e/echo/echo_emulation.h"
 #include "test/pc/e2e/peer_configurer.h"
@@ -350,7 +351,8 @@ std::unique_ptr<TestPeer> TestPeerFactory::CreateTestPeer(
   rtc::scoped_refptr<PeerConnectionInterface> peer_connection =
       peer_connection_factory->CreatePeerConnection(params->rtc_configuration,
                                                     std::move(pc_deps));
-  peer_connection->SetBitrate(params->bitrate_settings);
+  auto result = peer_connection->SetBitrate(params->bitrate_settings);
+  RTC_UNUSED(result);
 
   return absl::WrapUnique(new TestPeer(
       peer_connection_factory, peer_connection, std::move(observer),
