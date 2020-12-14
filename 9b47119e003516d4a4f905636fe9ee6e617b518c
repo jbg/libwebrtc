@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c07859_31b4017d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-14T10:15:05Z",
+      "side": 1,
+      "message": "Looks good as far as I can tell, but I\u0027m not super familiar with this code.\nsrte@ should have better context, care to take a look?",
+      "revId": "9b47119e003516d4a4f905636fe9ee6e617b518c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
