@@ -11,6 +11,7 @@
 #include "api/stats/rtc_stats_collector_callback.h"
 #include "api/stats/rtcstats_objects.h"
 #include "pc/test/mock_peer_connection_observers.h"
+#include "rtc_base/system/unused.h"
 #include "test/field_trial.h"
 #include "test/gtest.h"
 #include "test/peer_scenario/peer_scenario.h"
@@ -68,7 +69,8 @@ TEST(GoogCcPeerScenarioTest, MAYBE_NoBweChangeFromVideoUnmute) {
         encoding_parameters.max_framerate = 15;
       }
     }
-    rtp_sender->SetParameters(parameters);
+    auto result = rtp_sender->SetParameters(parameters);
+    RTC_UNUSED(result);
   }
   ASSERT_EQ(num_video_streams, 1);  // Exactly 1 video stream.
 

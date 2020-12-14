@@ -18,6 +18,7 @@
 #include "pc/test/mock_channel_interface.h"
 #include "pc/test/mock_rtp_receiver_internal.h"
 #include "pc/test/mock_rtp_sender_internal.h"
+#include "rtc_base/system/unused.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 
@@ -104,7 +105,8 @@ class RtpTransceiverUnifiedPlanTest : public ::testing::Test {
 TEST_F(RtpTransceiverUnifiedPlanTest, StopSetsDirection) {
   EXPECT_EQ(RtpTransceiverDirection::kInactive, transceiver_.direction());
   EXPECT_FALSE(transceiver_.current_direction());
-  transceiver_.StopStandard();
+  auto result = transceiver_.StopStandard();
+  RTC_UNUSED(result);
   EXPECT_EQ(RtpTransceiverDirection::kStopped, transceiver_.direction());
   EXPECT_FALSE(transceiver_.current_direction());
   transceiver_.StopTransceiverProcedure();

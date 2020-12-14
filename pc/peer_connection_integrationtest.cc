@@ -64,6 +64,7 @@
 #include "rtc_base/firewall_socket_server.h"
 #include "rtc_base/gunit.h"
 #include "rtc_base/numerics/safe_conversions.h"
+#include "rtc_base/system/unused.h"
 #include "rtc_base/test_certificate_verifier.h"
 #include "rtc_base/time_utils.h"
 #include "rtc_base/virtual_socket_server.h"
@@ -2209,8 +2210,9 @@ TEST_P(PeerConnectionIntegrationTest, AudioToVideoUpgrade) {
       ASSERT_EQ(cricket::MEDIA_TYPE_VIDEO,
                 transceivers[1]->receiver()->media_type());
       transceivers[1]->sender()->SetTrack(caller()->CreateLocalVideoTrack());
-      transceivers[1]->SetDirectionWithError(
+      auto result = transceivers[1]->SetDirectionWithError(
           RtpTransceiverDirection::kSendRecv);
+      RTC_UNUSED(result);
     });
   }
   callee()->CreateAndSetAndSignalOffer();
@@ -2678,7 +2680,9 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
   ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
 
   // Add receive direction.
-  video_sender->SetDirectionWithError(RtpTransceiverDirection::kSendRecv);
+  auto result =
+      video_sender->SetDirectionWithError(RtpTransceiverDirection::kSendRecv);
+  RTC_UNUSED(result);
 
   rtc::scoped_refptr<webrtc::VideoTrackInterface> callee_track =
       callee()->CreateLocalVideoTrack();
@@ -4474,10 +4478,12 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
   auto caller_video_sender = video_result.MoveValue()->sender();
   callee()->SetRemoteOfferHandler([this] {
     ASSERT_EQ(2u, callee()->pc()->GetTransceivers().size());
-    callee()->pc()->GetTransceivers()[0]->SetDirectionWithError(
+    auto result = callee()->pc()->GetTransceivers()[0]->SetDirectionWithError(
         RtpTransceiverDirection::kSendRecv);
-    callee()->pc()->GetTransceivers()[1]->SetDirectionWithError(
+    RTC_UNUSED(result);
+    result = callee()->pc()->GetTransceivers()[1]->SetDirectionWithError(
         RtpTransceiverDirection::kSendRecv);
+    RTC_UNUSED(result);
   });
   caller()->CreateAndSetAndSignalOffer();
   ASSERT_TRUE_WAIT(SignalingStateStable(), kMaxWaitForActivationMs);
@@ -5266,7 +5272,8 @@ TEST_P(PeerConnectionIntegrationTest, RegatherAfterChangingIceTransportType) {
   // Loosen the caller's candidate filter.
   caller_config = caller()->pc()->GetConfiguration();
   caller_config.type = webrtc::PeerConnectionInterface::kAll;
-  caller()->pc()->SetConfiguration(caller_config);
+  auto result = caller()->pc()->SetConfiguration(caller_config);
+  RTC_UNUSED(result);
   // We should have gathered a new host candidate.
   EXPECT_EQ_WAIT(cricket::LOCAL_PORT_TYPE,
                  caller()->last_candidate_gathered().type(), kDefaultTimeout);
@@ -5274,7 +5281,8 @@ TEST_P(PeerConnectionIntegrationTest, RegatherAfterChangingIceTransportType) {
   // Loosen the callee's candidate filter.
   callee_config = callee()->pc()->GetConfiguration();
   callee_config.type = webrtc::PeerConnectionInterface::kAll;
-  callee()->pc()->SetConfiguration(callee_config);
+  result = callee()->pc()->SetConfiguration(callee_config);
+  RTC_UNUSED(result);
   EXPECT_EQ_WAIT(cricket::LOCAL_PORT_TYPE,
                  callee()->last_candidate_gathered().type(), kDefaultTimeout);
 
@@ -5733,7 +5741,8 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
   caller()->CreateAndSetAndSignalOffer();
   ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
 
-  audio_transceiver->StopStandard();
+  auto result = audio_transceiver->StopStandard();
+  RTC_UNUSED(result);
   caller()->CreateAndSetAndSignalOffer();
   ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
   ASSERT_EQ(0U, caller()->pc()->GetTransceivers().size());
@@ -5757,7 +5766,8 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
 
   caller()->CreateAndSetAndSignalOffer();
   ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
-  caller_transceiver->StopStandard();
+  auto result = caller_transceiver->StopStandard();
+  RTC_UNUSED(result);
 
   auto callee_transceiver = callee()->pc()->GetTransceivers()[0];
   caller()->CreateAndSetAndSignalOffer();
@@ -5786,7 +5796,8 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
   ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
   auto caller_track = audio_transceiver->receiver()->track();
   auto callee_track = callee()->pc()->GetReceivers()[0]->track();
-  audio_transceiver->StopStandard();
+  auto result = audio_transceiver->StopStandard();
+  RTC_UNUSED(result);
   EXPECT_EQ(MediaStreamTrackInterface::TrackState::kEnded,
             caller_track->state());
   caller()->CreateAndSetAndSignalOffer();
@@ -5809,7 +5820,8 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
   ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
   auto caller_track = audio_transceiver->receiver()->track();
   auto callee_track = callee()->pc()->GetReceivers()[0]->track();
-  audio_transceiver->StopStandard();
+  auto result = audio_transceiver->StopStandard();
+  RTC_UNUSED(result);
   EXPECT_EQ(MediaStreamTrackInterface::TrackState::kEnded,
             caller_track->state());
   caller()->CreateAndSetAndSignalOffer();

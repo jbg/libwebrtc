@@ -17,6 +17,7 @@ if (rtc_include_tests) {
       "../../modules/rtp_rtcp:rtp_rtcp",
       "../../pc:pc_test_utils",
       "../../pc:rtc_pc_base",
+      "../../rtc_base/system:unused",
       "../../test:field_trial",
       "../../test:test_support",
       "../../test/peer_scenario:peer_scenario",

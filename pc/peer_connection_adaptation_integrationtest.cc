@@ -21,6 +21,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/gunit.h"
 #include "rtc_base/ref_counted_object.h"
+#include "rtc_base/system/unused.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/virtual_socket_server.h"
 #include "test/gtest.h"
@@ -112,7 +113,8 @@ TEST_F(PeerConnectionAdaptationIntegrationTest,
   // Prefer degrading resolution.
   auto parameters = sender->GetParameters();
   parameters.degradation_preference = DegradationPreference::MAINTAIN_FRAMERATE;
-  sender->SetParameters(parameters);
+  auto result = sender->SetParameters(parameters);
+  RTC_UNUSED(result);
 
   const auto& source =
       track_with_source.periodic_track_source->fake_periodic_source();
@@ -145,7 +147,8 @@ TEST_F(PeerConnectionAdaptationIntegrationTest,
   // Prefer degrading resolution.
   auto parameters = sender->GetParameters();
   parameters.degradation_preference = DegradationPreference::MAINTAIN_FRAMERATE;
-  sender->SetParameters(parameters);
+  auto result = sender->SetParameters(parameters);
+  RTC_UNUSED(result);
 
   const auto& source =
       track_with_source.periodic_track_source->fake_periodic_source();

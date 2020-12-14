@@ -1468,7 +1468,9 @@ TEST_F(PeerConnectionRtpTestUnifiedPlan,
   caller->observer()->clear_legacy_renegotiation_needed();
   caller->observer()->clear_latest_negotiation_needed_event();
 
-  transceiver->SetDirectionWithError(RtpTransceiverDirection::kInactive);
+  auto result =
+      transceiver->SetDirectionWithError(RtpTransceiverDirection::kInactive);
+  RTC_UNUSED(result);
   EXPECT_TRUE(caller->observer()->legacy_renegotiation_needed());
   EXPECT_TRUE(caller->observer()->has_negotiation_needed_event());
 }
@@ -1483,7 +1485,8 @@ TEST_F(PeerConnectionRtpTestUnifiedPlan,
 
   caller->observer()->clear_legacy_renegotiation_needed();
   caller->observer()->clear_latest_negotiation_needed_event();
-  transceiver->SetDirectionWithError(transceiver->direction());
+  auto result = transceiver->SetDirectionWithError(transceiver->direction());
+  RTC_UNUSED(result);
   EXPECT_FALSE(caller->observer()->legacy_renegotiation_needed());
   EXPECT_FALSE(caller->observer()->has_negotiation_needed_event());
 }
@@ -1499,7 +1502,9 @@ TEST_F(PeerConnectionRtpTestUnifiedPlan,
 
   caller->observer()->clear_legacy_renegotiation_needed();
   caller->observer()->clear_latest_negotiation_needed_event();
-  transceiver->SetDirectionWithError(RtpTransceiverDirection::kInactive);
+  auto result =
+      transceiver->SetDirectionWithError(RtpTransceiverDirection::kInactive);
+  RTC_UNUSED(result);
   EXPECT_FALSE(caller->observer()->legacy_renegotiation_needed());
   EXPECT_FALSE(caller->observer()->has_negotiation_needed_event());
 }
@@ -1524,7 +1529,8 @@ TEST_F(PeerConnectionRtpTestUnifiedPlan,
   auto caller = CreatePeerConnection();
 
   auto transceiver = caller->AddTransceiver(cricket::MEDIA_TYPE_AUDIO);
-  transceiver->StopStandard();
+  auto result = transceiver->StopStandard();
+  RTC_UNUSED(result);
 
   EXPECT_TRUE(transceiver->stopping());
   EXPECT_FALSE(transceiver->stopped());
@@ -1570,7 +1576,8 @@ TEST_F(PeerConnectionRtpTestUnifiedPlan,
   auto callee = CreatePeerConnection();
   auto transceiver = caller->AddTransceiver(cricket::MEDIA_TYPE_AUDIO);
   ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
-  callee->pc()->GetTransceivers()[0]->StopStandard();
+  auto result = callee->pc()->GetTransceivers()[0]->StopStandard();
+  RTC_UNUSED(result);
   ASSERT_TRUE(callee->ExchangeOfferAnswerWith(caller.get()));
   EXPECT_EQ(RtpTransceiverDirection::kStopped,
             transceiver->current_direction());
@@ -1583,7 +1590,8 @@ TEST_F(PeerConnectionRtpTestUnifiedPlan,
   auto callee = CreatePeerConnection();
   auto transceiver = caller->AddTransceiver(cricket::MEDIA_TYPE_AUDIO);
   ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
-  callee->pc()->GetTransceivers()[0]->StopStandard();
+  auto result = callee->pc()->GetTransceivers()[0]->StopStandard();
+  RTC_UNUSED(result);
   ASSERT_TRUE(callee->ExchangeOfferAnswerWith(caller.get()));
   EXPECT_EQ(RtpTransceiverDirection::kStopped,
             transceiver->current_direction());

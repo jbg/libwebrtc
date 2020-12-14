@@ -22,6 +22,7 @@
 #include "rtc_base/helpers.h"
 #include "rtc_base/location.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/system/unused.h"
 #include "rtc_base/trace_event.h"
 
 namespace webrtc {
@@ -297,7 +298,9 @@ void RtpSenderBase::SetSsrc(uint32_t ssrc) {
       }
       current_parameters.degradation_preference =
           init_parameters_.degradation_preference;
-      media_channel_->SetRtpSendParameters(ssrc_, current_parameters);
+      auto result =
+          media_channel_->SetRtpSendParameters(ssrc_, current_parameters);
+      RTC_UNUSED(result);
       init_parameters_.encodings.clear();
     });
   }

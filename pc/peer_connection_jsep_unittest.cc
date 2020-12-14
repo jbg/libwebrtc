@@ -23,6 +23,7 @@
 #endif
 #include "pc/test/fake_audio_capture_module.h"
 #include "rtc_base/gunit.h"
+#include "rtc_base/system/unused.h"
 #include "rtc_base/virtual_socket_server.h"
 #include "test/gmock.h"
 #include "test/pc/sctp/fake_sctp_transport.h"
@@ -294,7 +295,9 @@ TEST_F(PeerConnectionJsepTest,
   auto caller = CreatePeerConnection();
   caller->AddAudioTrack("a");
   auto caller_audio = caller->pc()->GetTransceivers()[0];
-  caller_audio->SetDirectionWithError(RtpTransceiverDirection::kSendOnly);
+  auto result =
+      caller_audio->SetDirectionWithError(RtpTransceiverDirection::kSendOnly);
+  RTC_UNUSED(result);
   auto callee = CreatePeerConnection();
   callee->AddAudioTrack("a");
 
@@ -465,7 +468,9 @@ TEST_F(PeerConnectionJsepTest, CreateAnswerNegotiatesDirection) {
 TEST_F(PeerConnectionJsepTest, SetLocalAnswerUpdatesCurrentDirection) {
   auto caller = CreatePeerConnection();
   auto caller_audio = caller->AddTransceiver(cricket::MEDIA_TYPE_AUDIO);
-  caller_audio->SetDirectionWithError(RtpTransceiverDirection::kRecvOnly);
+  auto result =
+      caller_audio->SetDirectionWithError(RtpTransceiverDirection::kRecvOnly);
+  RTC_UNUSED(result);
   auto callee = CreatePeerConnection();
   callee->AddAudioTrack("a");
 
@@ -490,7 +495,9 @@ TEST_F(PeerConnectionJsepTest, SetRemoteAnswerUpdatesCurrentDirection) {
   auto callee = CreatePeerConnection();
   callee->AddAudioTrack("a");
   auto callee_audio = callee->pc()->GetTransceivers()[0];
-  callee_audio->SetDirectionWithError(RtpTransceiverDirection::kSendOnly);
+  auto result =
+      callee_audio->SetDirectionWithError(RtpTransceiverDirection::kSendOnly);
+  RTC_UNUSED(result);
 
   ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
   ASSERT_TRUE(
@@ -514,8 +521,9 @@ TEST_F(PeerConnectionJsepTest, SettingTransceiverInactiveDoesNotStopIt) {
   caller->AddAudioTrack("a");
   auto callee = CreatePeerConnection();
   callee->AddAudioTrack("a");
-  callee->pc()->GetTransceivers()[0]->SetDirectionWithError(
+  auto result = callee->pc()->GetTransceivers()[0]->SetDirectionWithError(
       RtpTransceiverDirection::kInactive);
+  RTC_UNUSED(result);
 
   ASSERT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
   ASSERT_TRUE(
@@ -1361,8 +1369,9 @@ TEST_F(PeerConnectionJsepTest, IncludeMsidEvenIfDirectionHasChanged) {
 
   ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
 
-  caller->pc()->GetTransceivers()[0]->SetDirectionWithError(
+  auto result = caller->pc()->GetTransceivers()[0]->SetDirectionWithError(
       RtpTransceiverDirection::kInactive);
+  RTC_UNUSED(result);
 
   // The transceiver direction on both sides will turn to inactive.
   ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
@@ -2042,8 +2051,9 @@ TEST_F(PeerConnectionJsepTest, RollbackLocalDirectionChange) {
   EXPECT_TRUE(
       caller->SetRemoteDescription(callee->CreateAnswerAndSetAsLocal()));
   callee->AddAudioTrack("a");
-  callee->pc()->GetTransceivers()[0]->SetDirectionWithError(
+  auto result = callee->pc()->GetTransceivers()[0]->SetDirectionWithError(
       RtpTransceiverDirection::kSendOnly);
+  RTC_UNUSED(result);
   EXPECT_TRUE(callee->CreateOfferAndSetAsLocal());
   EXPECT_EQ(callee->pc()->GetTransceivers().size(), 1u);
   auto audio_transport =
@@ -2066,7 +2076,9 @@ TEST_F(PeerConnectionJsepTest, RollbackRemoteDirectionChange) {
   EXPECT_TRUE(
       caller->SetRemoteDescription(callee->CreateAnswerAndSetAsLocal()));
   // In stable make remote audio receive only.
-  caller_transceiver->SetDirectionWithError(RtpTransceiverDirection::kRecvOnly);
+  auto result = caller_transceiver->SetDirectionWithError(
+      RtpTransceiverDirection::kRecvOnly);
+  RTC_UNUSED(result);
   EXPECT_TRUE(callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal()));
   EXPECT_EQ(callee->pc()->GetTransceivers().size(), 1u);
   // The direction attribute is not modified by the offer.

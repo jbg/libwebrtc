@@ -414,7 +414,8 @@ class RtpSenderReceiverTest
                     });
 
     EXPECT_TRUE(VerifyEncodingLayers(*sender, all_layers));
-    sender->DisableEncodingLayers(disabled_layers);
+    auto result = sender->DisableEncodingLayers(disabled_layers);
+    RTC_UNUSED(result);
     EXPECT_TRUE(VerifyEncodingLayers(*sender, expected));
   }
 
@@ -1636,9 +1637,11 @@ TEST_F(RtpSenderReceiverTest,
   RtpParameters parameters = video_rtp_sender_->GetParameters();
   RtpParameters new_parameters = video_rtp_sender_->GetParametersInternal();
   new_parameters.encodings[0].active = false;
-  video_rtp_sender_->SetParametersInternal(new_parameters);
+  auto result = video_rtp_sender_->SetParametersInternal(new_parameters);
+  RTC_UNUSED(result);
   new_parameters.encodings[0].active = true;
-  video_rtp_sender_->SetParametersInternal(new_parameters);
+  result = video_rtp_sender_->SetParametersInternal(new_parameters);
+  RTC_UNUSED(result);
   parameters.encodings[0].active = false;
   EXPECT_TRUE(video_rtp_sender_->SetParameters(parameters).ok());
 }

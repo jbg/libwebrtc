@@ -14,6 +14,7 @@
 
 #include "pc/peer_connection.h"
 #include "pc/sctp_utils.h"
+#include "rtc_base/system/unused.h"
 
 namespace webrtc {
 
@@ -99,7 +100,8 @@ void DataChannelController::AddSctpDataStream(int sid) {
   if (data_channel_transport()) {
     network_thread()->Invoke<void>(RTC_FROM_HERE, [this, sid] {
       if (data_channel_transport()) {
-        data_channel_transport()->OpenChannel(sid);
+        auto result = data_channel_transport()->OpenChannel(sid);
+        RTC_UNUSED(result);
       }
     });
   }
@@ -109,7 +111,8 @@ void DataChannelController::RemoveSctpDataStream(int sid) {
   if (data_channel_transport()) {
     network_thread()->Invoke<void>(RTC_FROM_HERE, [this, sid] {
       if (data_channel_transport()) {
-        data_channel_transport()->CloseChannel(sid);
+        auto result = data_channel_transport()->CloseChannel(sid);
+        RTC_UNUSED(result);
       }
     });
   }
