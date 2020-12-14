@@ -1370,6 +1370,7 @@ int ProxyConnection::Send(const void* data,
                           size_t size,
                           const rtc::PacketOptions& options) {
   stats_.sent_total_packets++;
+  int64_t now = rtc::TimeMillis();
   int sent =
       port_->SendTo(data, size, remote_candidate_.address(), options, true);
   if (sent <= 0) {
@@ -1377,8 +1378,9 @@ int ProxyConnection::Send(const void* data,
     error_ = port_->GetError();
     stats_.sent_discarded_packets++;
   } else {
-    send_rate_tracker_.AddSamples(sent);
+    send_rate_tracker_.AddSamplesWithTime(now, sent);
   }
+  last_data_sent_ = now;
   return sent;
 }
 
