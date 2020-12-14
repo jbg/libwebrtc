@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d343cf8f_4bbcda51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-14T20:48:53Z",
+      "side": 1,
+      "message": "Early release, WebRTC trybots are green. Before fixing downstream please take a look if this looks good.",
+      "revId": "bfbcfbbfca9d9555df8bde90fafdd106cee43a67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
