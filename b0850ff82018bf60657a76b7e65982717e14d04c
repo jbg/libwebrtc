@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef97650b_fe8482f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-12-14T09:13:19Z",
+      "side": 1,
+      "message": "Done, reverted changes to the old version of RtpVideoStreamReceiver. And instead, moved that and related code (everything with a \"..2.*\" version) into a new video_legacy build target. Again, not sure what visibility should be.",
+      "parentUuid": "88c8baf5_199c6b32",
+      "revId": "b0850ff82018bf60657a76b7e65982717e14d04c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89e43d7b_81a7a3be",
