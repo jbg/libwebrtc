@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e421362_2a646b5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-14T09:55:13Z",
+      "side": 1,
+      "message": "Still not happy with the decision to both count errors and increment last_data_sent_. But otherwise LGTM.\n",
+      "revId": "f5fdb93a1b081192f6472443bedd7575bc0a12bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
