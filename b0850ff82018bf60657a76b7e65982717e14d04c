@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c8baf5_199c6b32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-12-14T08:39:42Z",
+      "side": 1,
+      "message": "I see. So then the proper change is to leave rtp_video_stream_receiver.* unchanged, but move that too out of the prod build targets?",
+      "parentUuid": "b614e809_74381aa7",
+      "revId": "b0850ff82018bf60657a76b7e65982717e14d04c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89e43d7b_81a7a3be",
