@@ -399,6 +399,7 @@ int TCPConnection::Send(const void* data,
     return SOCKET_ERROR;
   }
   stats_.sent_total_packets++;
+  int64_t now = rtc::TimeMillis();
   rtc::PacketOptions modified_options(options);
   static_cast<TCPPort*>(port_)->CopyPortInformationToPacketInfo(
       &modified_options.info_signaled_after_sent);
@@ -407,8 +408,9 @@ int TCPConnection::Send(const void* data,
     stats_.sent_discarded_packets++;
     error_ = socket_->GetError();
   } else {
-    send_rate_tracker_.AddSamples(sent);
+    send_rate_tracker_.AddSamplesWithTime(sent, now);
   }
+  last_data_sent_ = now;
   return sent;
 }
 
