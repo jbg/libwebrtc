@@ -16,6 +16,24 @@
       "message": "Sorry for the late reply. Could you fix the merge conflict, if this is still relevant?",
       "revId": "b829d60f025124234aea3017d4c6d973be2be31c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de168edb_8a9aac32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-14T16:56:24Z",
+      "side": 1,
+      "message": "No worries, I think we can abandon this one since a fix is on the way.",
+      "parentUuid": "5c9e7846_0d50f2f2",
+      "revId": "b829d60f025124234aea3017d4c6d973be2be31c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
