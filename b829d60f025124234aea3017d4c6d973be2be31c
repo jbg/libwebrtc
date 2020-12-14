@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c9e7846_0d50f2f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-12-14T16:55:24Z",
+      "side": 1,
+      "message": "Sorry for the late reply. Could you fix the merge conflict, if this is still relevant?",
+      "revId": "b829d60f025124234aea3017d4c6d973be2be31c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
