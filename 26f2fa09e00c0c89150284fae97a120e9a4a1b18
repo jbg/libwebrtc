@@ -16,6 +16,23 @@
       "message": "Reverting this commit since the code ended up being unused.",
       "revId": "26f2fa09e00c0c89150284fae97a120e9a4a1b18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa5c8c06_59c23640",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-14T12:32:51Z",
+      "side": 1,
+      "message": "Please don\u0027t.\nWe\u0027re out of spec conformance because we\u0027re not generating these.\nSome day we\u0027ll have to conform.\n",
+      "revId": "26f2fa09e00c0c89150284fae97a120e9a4a1b18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
