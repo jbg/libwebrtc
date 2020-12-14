@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b6ca74b_b147aa17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-12-14T10:37:04Z",
+      "side": 1,
+      "message": "There seems to be a problem with the internal::CallStats class (call_stats2.cc). The constructor creates a repeating task running on a task queue it doesn\u0027t own, by\n\n  repeating_task_ \u003d\n      RepeatingTaskHandle::DelayedStart(task_queue_, kUpdateInterval, [this]() {\n        UpdateAndReport();\n        return kUpdateInterval;\n      });\n\nThe destructor tries to stop it, using\n\nCallStats::~CallStats() {\n  RTC_DCHECK_RUN_ON(\u0026construction_thread_checker_);\n  RTC_DCHECK(observers_.empty());\n\n\u003d\u003erepeating_task_.Stop();\n\nHowever, docs for RepeatingTaskHandle says that Stop may be called *only* on the task queue in question, and this crashes in a DCHECK. I had a look at PendingTaskSafetyFlag, but unclear if that can be used from a destructor on an unrelated thread, docs for ScopedTaskSafety say \"Requirements are that the instance be constructed and destructed on the same thread as the potentially dropped tasks would be running on.\" Suggestions?",
+      "revId": "11759642a93bcc1d2e1e8eb51c3225a0ad3310a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
