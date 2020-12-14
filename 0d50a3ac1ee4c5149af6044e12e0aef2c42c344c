@@ -16,6 +16,23 @@
       "message": "Updated WebRTC DEPS to point the the correct libvpx version, in chrome already merged as\nhttps://chromium-review.googlesource.com/c/chromium/src/+/2586852\n\n+mbonadei to verify",
       "revId": "0d50a3ac1ee4c5149af6044e12e0aef2c42c344c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b1dc88_aaa7e706",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2020-12-14T18:20:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0d50a3ac1ee4c5149af6044e12e0aef2c42c344c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
