@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b875c416_43fe2621",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-12-14T09:45:19Z",
+      "side": 1,
+      "message": "I add a rtc::TimeMillis time in Connection::Send\nI remove a rtc::TimeMillis from RateTracker::AddSamples",
+      "parentUuid": "9d5094ad_306fd2d6",
+      "revId": "d6e1deaab8e4bc94029556d71f73fdcaf66fedd1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5773ad59_a77253a5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -31,6 +49,23 @@
       "writtenOn": "2020-12-14T09:30:15Z",
       "side": 1,
       "message": "I don\u0027t understand how this CL does what it says on the label, and it changes a number of things in somewhat-subtle ways.\nPlease think carefully.\n",
+      "revId": "d6e1deaab8e4bc94029556d71f73fdcaf66fedd1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50601064_7234e272",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-12-14T09:45:19Z",
+      "side": 1,
+      "message": "thanks and PTAL",
       "revId": "d6e1deaab8e4bc94029556d71f73fdcaf66fedd1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +87,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a23434a9_3bbb2126",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1373,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-12-14T09:45:19Z",
+      "side": 1,
+      "message": "no, but restored old behaviour",
+      "parentUuid": "8c84dbea_ffa429a1",
+      "revId": "d6e1deaab8e4bc94029556d71f73fdcaf66fedd1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c61866ac_a3ff9dfa",
@@ -65,6 +118,24 @@
       "writtenOn": "2020-12-14T09:30:15Z",
       "side": 1,
       "message": "This updates last_data_sent_ in the packet-discarded case. Depending on what you want it to mean, this might be correct or it might not be. If it\u0027s correct, this should be called last_data_send_attempt_.",
+      "revId": "d6e1deaab8e4bc94029556d71f73fdcaf66fedd1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c11796_03549fce",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1383,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-12-14T09:45:19Z",
+      "side": 1,
+      "message": "does not matter.\njust because socket::send() succeed does not mean that the\nactual data goes anywhere.\nthis is unreliable transport...\n\nthe data was sent from the perspective of the caller of Connection.",
+      "parentUuid": "c61866ac_a3ff9dfa",
       "revId": "d6e1deaab8e4bc94029556d71f73fdcaf66fedd1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -86,6 +157,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a40e82d_616e0d83",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-12-14T09:45:19Z",
+      "side": 1,
+      "message": "Don\u0027t understand.\nRateTracker::Time() does infact call rtc::TimeMillis()",
+      "parentUuid": "7fcb55bd_7c1c505d",
+      "revId": "d6e1deaab8e4bc94029556d71f73fdcaf66fedd1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7dd5150_8085a9d9",
@@ -99,6 +188,24 @@
       "writtenOn": "2020-12-14T09:30:15Z",
       "side": 1,
       "message": "You could call this AddSamples() since it has a different # of arguments.\nI would suggest to call it AddSamplesAtTime.",
+      "revId": "d6e1deaab8e4bc94029556d71f73fdcaf66fedd1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68384d39_8085ba6d",
+        "filename": "rtc_base/rate_tracker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-12-14T09:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7dd5150_8085a9d9",
       "revId": "d6e1deaab8e4bc94029556d71f73fdcaf66fedd1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
