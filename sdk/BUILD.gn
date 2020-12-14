@@ -383,6 +383,7 @@ if (is_ios || is_mac) {
         "../media:rtc_media_base",
         "../rtc_base",
         "../rtc_base:checks",
+        "../rtc_base:threading",
         "//third_party/libyuv",
       ]
 
@@ -1505,6 +1506,7 @@ if (is_ios || is_mac) {
         "../api/video_codecs:video_codecs_api",
         "../common_video",
         "../rtc_base",
+        "../rtc_base:threading",
       ]
       if (is_ios) {
         deps += [ ":native_network_monitor" ]
