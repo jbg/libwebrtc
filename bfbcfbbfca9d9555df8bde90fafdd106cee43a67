@@ -16,6 +16,23 @@
       "message": "Early release, WebRTC trybots are green. Before fixing downstream please take a look if this looks good.",
       "revId": "bfbcfbbfca9d9555df8bde90fafdd106cee43a67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dedae7e6_469c9208",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-14T23:14:34Z",
+      "side": 1,
+      "message": "I wonder if we should add a parameterless RTC_UNUSED_RESULT so that we could just write\nRTC_UNUSED_RESULT function()\n\ninstead of\n\nauto error \u003d function()\nRTC_UNUSED(error)\n\nIt seems tidier (and more readable than RTC_UNUSED(function()), which gives the wrong impression).",
+      "revId": "bfbcfbbfca9d9555df8bde90fafdd106cee43a67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
