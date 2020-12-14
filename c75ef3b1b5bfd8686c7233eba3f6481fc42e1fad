@@ -16,6 +16,24 @@
       "message": "Do you want me to look at it despite fec test failures?",
       "revId": "c75ef3b1b5bfd8686c7233eba3f6481fc42e1fad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98fe81ff_8b6cb4ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13594
+      },
+      "writtenOn": "2020-12-14T12:51:36Z",
+      "side": 1,
+      "message": "I have attached an updated patch to the bug. It should resolve test failures.",
+      "parentUuid": "25cfe9d1_0b607781",
+      "revId": "c75ef3b1b5bfd8686c7233eba3f6481fc42e1fad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
