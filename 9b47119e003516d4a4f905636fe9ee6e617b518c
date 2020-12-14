@@ -33,6 +33,24 @@
       "message": "It\u0027s not obvious to me that the cost of posting a task is high enough to matter compared to the cost of decoding a frame, sometimes posting a task also means that real time behavior is improved (for instance, after posting a task, we can report status directly without waiting for the decode) so without digging deeper I\u0027d be worried that a change like this have unforeseen consequences. Might be worth doing it under experiment to be sure.\n\nAssuming it is worth it though, I\u0027m not sure that I\u0027m the right person to look at this. My connection to the code is that I made a somewhat direct port of the thread based version that was previously used to a TaskQueue based version, where i dealt by uncertainties regarding timing etc, but trying to preserve it. However at least at the time philipel@ had a lot better understanding of the expected behavior.",
       "revId": "9b47119e003516d4a4f905636fe9ee6e617b518c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed30bae7_99091bcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10557
+      },
+      "writtenOn": "2020-12-14T18:01:12Z",
+      "side": 1,
+      "message": "It\u0027s worth reducing the number of task posts in the RX pipeline. I currently count 9 of those (and this excludes ones happening in the decoder) from when decoding starts to until frames are ready for pickup by the compositing system in Chrome. And many of those will wake threads which is expensive. Times 24 times per second. Times XX for grid view applications.\n\nYes I saw the code was similar to the old code which exhibited the same issue. I suspect the construction existed to avoid calling into NextFrame with the mutex held. Although previously with CriticalSection we could survive that whereas now with Mutex we just hit a deadlock. That\u0027s why I changed frame_buffer2.cc to not call out under the lock.",
+      "parentUuid": "89da71a4_51561e67",
+      "revId": "9b47119e003516d4a4f905636fe9ee6e617b518c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
