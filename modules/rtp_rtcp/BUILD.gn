@@ -192,8 +192,6 @@ rtc_library("rtp_rtcp") {
     "source/rtp_packetizer_av1.cc",
     "source/rtp_packetizer_av1.h",
     "source/rtp_rtcp_config.h",
-    "source/rtp_rtcp_impl.cc",
-    "source/rtp_rtcp_impl.h",
     "source/rtp_rtcp_impl2.cc",
     "source/rtp_rtcp_impl2.h",
     "source/rtp_rtcp_interface.h",
@@ -317,6 +315,27 @@ rtc_library("rtp_rtcp") {
     "//third_party/abseil-cpp/absl/types:optional",
     "//third_party/abseil-cpp/absl/types:variant",
   ]
+}
+
+rtc_library("rtp_rtcp_legacy") {
+  sources = [
+    "source/rtp_rtcp_impl.cc",
+    "source/rtp_rtcp_impl.h",
+  ]
+  deps = [
+    ":rtp_rtcp",
+    ":rtp_rtcp_format",
+    "..:module_fec_api",
+    "../../api:rtp_headers",
+    "../../api/transport:field_trial_based_config",
+    "../../api/video:video_bitrate_allocation",
+    "../../rtc_base:checks",
+    "../../rtc_base:gtest_prod",
+    "../../rtc_base:rtc_base_approved",
+    "../../rtc_base/synchronization:mutex",
+    "../remote_bitrate_estimator",
+  ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
 }
 
 rtc_library("rtcp_transceiver") {
@@ -523,6 +542,7 @@ if (rtc_include_tests) {
       ":rtcp_transceiver",
       ":rtp_rtcp",
       ":rtp_rtcp_format",
+      ":rtp_rtcp_legacy",
       "../../api:array_view",
       "../../api:libjingle_peerconnection_api",
       "../../api:mock_frame_encryptor",
