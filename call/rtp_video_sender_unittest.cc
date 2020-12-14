@@ -30,7 +30,7 @@
 #include "test/mock_transport.h"
 #include "test/scenario/scenario.h"
 #include "test/time_controller/simulated_time_controller.h"
-#include "video/call_stats.h"
+#include "video/call_stats2.h"
 #include "video/send_delay_stats.h"
 #include "video/send_statistics_proxy.h"
 
@@ -148,10 +148,10 @@ class RtpVideoSenderTestFixture {
     router_ = std::make_unique<RtpVideoSender>(
         time_controller_.GetClock(), suspended_ssrcs, suspended_payload_states,
         config_.rtp, config_.rtcp_report_interval_ms, &transport_,
-        CreateObservers(&call_stats_, &encoder_feedback_, &stats_proxy_,
+        CreateObservers(call_stats_.AsRtcpRttStats(), &encoder_feedback_,
                         &stats_proxy_, &stats_proxy_, &stats_proxy_,
-                        frame_count_observer, &stats_proxy_, &stats_proxy_,
-                        &send_delay_stats_),
+                        &stats_proxy_, frame_count_observer, &stats_proxy_,
+                        &stats_proxy_, &send_delay_stats_),
         &transport_controller_, &event_log_, &retransmission_rate_limiter_,
         std::make_unique<FecControllerDefault>(time_controller_.GetClock()),
         nullptr, CryptoOptions{}, frame_transformer);
@@ -197,8 +197,7 @@ class RtpVideoSenderTestFixture {
   const FieldTrialBasedConfig field_trials_;
   RtpTransportControllerSend transport_controller_;
   std::unique_ptr<ProcessThread> process_thread_;
-  // TODO(tommi): Use internal::CallStats.
-  CallStats call_stats_;
+  internal::CallStats call_stats_;
   SendStatisticsProxy stats_proxy_;
   RateLimiter retransmission_rate_limiter_;
   std::unique_ptr<RtpVideoSender> router_;
