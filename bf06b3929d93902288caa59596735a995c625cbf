@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a5fc5f_ad2b7805",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-15T09:34:21Z",
+      "side": 1,
+      "message": "Thanks!\n\nHmm, looks like \u0027git cl format\u0027 doesn\u0027t catch them. :/",
+      "parentUuid": "feb4b316_ef0f1363",
+      "revId": "bf06b3929d93902288caa59596735a995c625cbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43910a86_e2efea9f",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-15T07:51:44Z",
       "side": 1,
       "message": "Hm. Creating a new thread every time you resolve a hostnmae sounds like the Wrong Thing To Do. Can you file a bug asking questions about this?",
+      "revId": "bf06b3929d93902288caa59596735a995c625cbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "759ca913_c111b858",
+        "filename": "rtc_base/async_resolver.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-15T09:34:21Z",
+      "side": 1,
+      "message": "Done: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d12301 (good question).",
+      "parentUuid": "43910a86_e2efea9f",
       "revId": "bf06b3929d93902288caa59596735a995c625cbf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
