@@ -33,6 +33,41 @@
       "message": "I wonder if we should add a parameterless RTC_UNUSED_RESULT so that we could just write\nRTC_UNUSED_RESULT function()\n\ninstead of\n\nauto error \u003d function()\nRTC_UNUSED(error)\n\nIt seems tidier (and more readable than RTC_UNUSED(function()), which gives the wrong impression).",
       "revId": "bfbcfbbfca9d9555df8bde90fafdd106cee43a67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b882d82a_d2aa3839",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-12-15T00:50:48Z",
+      "side": 1,
+      "message": "I wouldn\u0027t support such idea:\nRTC_UNUSED_RESULT function();\ndoesn\u0027t look like a valid c++ code, even if you would manage to make a macro that make it valid.\n\nInstead I\u0027m suggesting to mimic absl::Status and add IgnoreError() function.\nthe code would look then\nfunction().IgnoreError();",
+      "parentUuid": "dedae7e6_469c9208",
+      "revId": "bfbcfbbfca9d9555df8bde90fafdd106cee43a67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7764b111_6c6a5b00",
+        "filename": "api/rtc_error.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-12-15T00:50:48Z",
+      "side": 1,
+      "message": "Suggestion: add IgnoreError() function, similar to absl::Status\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/abseil-cpp/absl/status/status.h;l\u003d461",
+      "revId": "bfbcfbbfca9d9555df8bde90fafdd106cee43a67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
