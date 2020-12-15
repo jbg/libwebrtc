@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b110f7f_3ba9eb71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-15T07:51:44Z",
+      "side": 1,
+      "message": "Seems good. I note that there are CLs required to make internal \u0026 Chromium ready to accept the change, so holding back on LGTM until fixed.\n",
+      "revId": "bf06b3929d93902288caa59596735a995c625cbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb4b316_ef0f1363",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-15T07:51:44Z",
+      "side": 1,
+      "message": "These seem out of order. How come presubmit didn\u0027t tell you to run git cl format?",
+      "revId": "bf06b3929d93902288caa59596735a995c625cbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43910a86_e2efea9f",
+        "filename": "rtc_base/async_resolver.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-15T07:51:44Z",
+      "side": 1,
+      "message": "Hm. Creating a new thread every time you resolve a hostnmae sounds like the Wrong Thing To Do. Can you file a bug asking questions about this?",
+      "revId": "bf06b3929d93902288caa59596735a995c625cbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
