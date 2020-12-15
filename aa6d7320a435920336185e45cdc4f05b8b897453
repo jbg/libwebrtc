@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "864d0fcb_105b59d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-15T14:58:31Z",
+      "side": 1,
+      "message": "Turns out Chromium is copying descriptions by serializing them to SDP and then parsing them again.\nWe can do better.\n",
+      "revId": "aa6d7320a435920336185e45cdc4f05b8b897453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
