@@ -5461,7 +5461,7 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
 }
 
 TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
-       ReegotiateManyAudioTransceivers) {
+       RenegotiateManyAudioTransceivers) {
   PeerConnectionInterface::RTCConfiguration config;
   config.sdp_semantics = SdpSemantics::kUnifiedPlan;
   ASSERT_TRUE(CreatePeerConnectionWrappersWithConfig(config, config));
@@ -5474,7 +5474,7 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
   // Add more tracks until we get close to having issues.
   // Issues have been seen at:
   // - 32 tracks on android_arm64_rel and android_arm_dbg bots
-  while (current_size < 16) {
+  while (current_size < 32) {
     // Double the number of tracks
     for (int i = 0; i < current_size; i++) {
       caller()->pc()->AddTransceiver(cricket::MEDIA_TYPE_AUDIO);
@@ -5509,7 +5509,7 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
   // - 96 on a Linux workstation
   // - 64 at win_x86_more_configs and win_x64_msvc_dbg
   // - 32 on android_arm64_rel and linux_dbg bots
-  while (current_size < 16) {
+  while (current_size < 32) {
     // Double the number of tracks
     for (int i = 0; i < current_size; i++) {
       caller()->pc()->AddTransceiver(cricket::MEDIA_TYPE_VIDEO);
