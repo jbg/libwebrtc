@@ -51,6 +51,24 @@
       "parentUuid": "89da71a4_51561e67",
       "revId": "9b47119e003516d4a4f905636fe9ee6e617b518c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a745ac95_1c5d8e8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-12-15T09:18:17Z",
+      "side": 1,
+      "message": "Hardly a TQ expert, but if task T post task T\u0027 on the same TQ that it is being executed on, will the thread driving TQ even sleep in between T and T\u0027?\n\nAs Sebastian mentioned, this class is sensitive to timings. Making changes work without problems most of the time, but sometimes it can cause some unexpected behavior.",
+      "parentUuid": "ed30bae7_99091bcc",
+      "revId": "9b47119e003516d4a4f905636fe9ee6e617b518c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
