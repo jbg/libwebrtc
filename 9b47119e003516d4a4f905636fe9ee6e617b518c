@@ -87,6 +87,24 @@
       "parentUuid": "a745ac95_1c5d8e8c",
       "revId": "9b47119e003516d4a4f905636fe9ee6e617b518c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "926257a2_8aca6596",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-12-15T11:54:39Z",
+      "side": 1,
+      "message": "As Sebastian mentioned, this was a \"direct port\", so at the time when we were just working on translating thread to TQs. It probably never had to be there in the first place.",
+      "parentUuid": "129e518d_579c103a",
+      "revId": "9b47119e003516d4a4f905636fe9ee6e617b518c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
