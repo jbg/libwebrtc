@@ -88,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f85e6d7d_b267bd13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-15T10:29:17Z",
+      "side": 1,
+      "message": "I am going to add IgnoreError() and RTC_(EXPECT|ASSERT)_OK.\n\nWhile doing so I will also take a look at the usage, I agree the amount of RTC_UNUSED in no-test code requires more investigation.",
+      "parentUuid": "4919b025_e2445c9e",
+      "revId": "bfbcfbbfca9d9555df8bde90fafdd106cee43a67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7764b111_6c6a5b00",
