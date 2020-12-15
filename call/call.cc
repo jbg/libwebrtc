@@ -162,8 +162,12 @@ bool IsRtcp(const uint8_t* packet, size_t length) {
 
 TaskQueueBase* GetCurrentTaskQueueOrThread() {
   TaskQueueBase* current = TaskQueueBase::Current();
-  if (!current)
-    current = rtc::ThreadManager::Instance()->CurrentThread();
+  if (!current) {
+    rtc::Thread* thread = rtc::ThreadManager::Instance()->CurrentThread();
+    RTC_CHECK(thread->IsOwned()) << "webrtc::Call is being used outside of "
+                                    "task queue and webrtc worker thread";
+    current = thread;
+  }
   return current;
 }
 
