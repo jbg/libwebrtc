@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "904868da_cbf3806c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-15T11:58:50Z",
+      "side": 1,
+      "message": "Thanks.\n\nNo-Presubmit to skip the pylint false positives and No-Try to skip the flaky iOS simulator tests (both are being addressed separately).",
+      "revId": "cc54f6bcf397ee559cf16e48b3b113cf8b15e84d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
