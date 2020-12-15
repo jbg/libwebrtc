@@ -862,7 +862,6 @@ void Thread::Run() {
 }
 
 bool Thread::IsOwned() {
-  RTC_DCHECK(IsRunning());
   return owned_;
 }
 
@@ -1041,6 +1040,8 @@ bool Thread::IsInvokeToThreadAllowed(rtc::Thread* target) {
 }
 
 void Thread::PostTask(std::unique_ptr<webrtc::QueuedTask> task) {
+  // Unownded or wrapped threads don't run any message processing loops.
+  RTC_CHECK(IsOwned());
   // Though Post takes MessageData by raw pointer (last parameter), it still
   // takes it with ownership.
   Post(RTC_FROM_HERE, &queued_task_handler_,
@@ -1049,6 +1050,8 @@ void Thread::PostTask(std::unique_ptr<webrtc::QueuedTask> task) {
 
 void Thread::PostDelayedTask(std::unique_ptr<webrtc::QueuedTask> task,
                              uint32_t milliseconds) {
+  // Unownded or wrapped threads don't run any message processing loops.
+  RTC_CHECK(IsOwned());
   // Though PostDelayed takes MessageData by raw pointer (last parameter),
   // it still takes it with ownership.
   PostDelayed(RTC_FROM_HERE, milliseconds, &queued_task_handler_,
