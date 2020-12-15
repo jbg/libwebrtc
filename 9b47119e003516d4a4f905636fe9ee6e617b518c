@@ -69,6 +69,24 @@
       "parentUuid": "ed30bae7_99091bcc",
       "revId": "9b47119e003516d4a4f905636fe9ee6e617b518c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "129e518d_579c103a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10557
+      },
+      "writtenOn": "2020-12-15T11:41:29Z",
+      "side": 1,
+      "message": "\u003e will the thread driving TQ even sleep in between T and T\u0027?\nI think the answer is no here.\n\nCan you motivate why the task post I removed is there in the first place?",
+      "parentUuid": "a745ac95_1c5d8e8c",
+      "revId": "9b47119e003516d4a4f905636fe9ee6e617b518c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
