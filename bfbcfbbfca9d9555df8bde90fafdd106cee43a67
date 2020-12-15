@@ -72,6 +72,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4919b025_e2445c9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-12-15T10:23:40Z",
+      "side": 1,
+      "message": "I\u0027m not too familiar with the RTCError, but I would rather think these amount of RTC_UNUSED surfaces problem of ignoring error too often, and/or returning RTCError too often.\n\nIf function always succeed, then it probably shouldn\u0027t return RTCError.\nIf function usually succeed, but rarely return a failed status, then either the function or the caller should handle such rare error (i.e. crash if error is unrecoverable, or log and recover)\n\nfor tests it might be helpful to add two macros\nRTC_(EXPECT|ASSERT)_OK(function_call());\nand/or add a matcher:\nEXPECT_THAT(function_call(), (Rtc?)IsOk());",
+      "parentUuid": "29d55d8f_118e13fb",
+      "revId": "bfbcfbbfca9d9555df8bde90fafdd106cee43a67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7764b111_6c6a5b00",
         "filename": "api/rtc_error.h",
         "patchSetId": 2
