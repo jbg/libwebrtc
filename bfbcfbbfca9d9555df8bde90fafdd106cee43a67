@@ -55,6 +55,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "29d55d8f_118e13fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-12-15T08:41:26Z",
+      "side": 1,
+      "message": "I\u0027m thinking that all the RTC_UNUSED in this cl indicates that it\u0027s not the right change. RTC_UNUSED should really be an exception.\n\n(I\u0027d be a bit more comfortable with the IgnoreError method suggested by Danil). ",
+      "revId": "bfbcfbbfca9d9555df8bde90fafdd106cee43a67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7764b111_6c6a5b00",
         "filename": "api/rtc_error.h",
         "patchSetId": 2
