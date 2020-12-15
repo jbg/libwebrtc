@@ -4122,6 +4122,41 @@ TEST_F(VideoStreamEncoderTest,
   video_stream_encoder_->Stop();
 }
 
+TEST_F(VideoStreamEncoderTest,
+       ReportsUpdatedVideoLayersAllocationWhenResolutionChanges) {
+  ResetEncoder("VP8", /*num_streams*/ 2, 1, 1, /*screenshare*/ false,
+               VideoStreamEncoderSettings::BitrateAllocationCallbackType::
+                   kVideoLayersAllocation);
+
+  video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
+      DataRate::BitsPerSec(kSimulcastTargetBitrateBps),
+      DataRate::BitsPerSec(kSimulcastTargetBitrateBps),
+      DataRate::BitsPerSec(kSimulcastTargetBitrateBps), 0, 0, 0);
+
+  video_source_.IncomingCapturedFrame(
+      CreateFrame(CurrentTimeMs(), codec_width_, codec_height_));
+  WaitForEncodedFrame(CurrentTimeMs());
+  EXPECT_EQ(sink_.number_of_layers_allocations(), 1);
+  EXPECT_EQ(sink_.GetLastVideoLayersAllocation().active_spatial_layers[0].width,
+            codec_width_);
+  EXPECT_EQ(
+      sink_.GetLastVideoLayersAllocation().active_spatial_layers[0].height,
+      codec_height_);
+
+  // New resolution
+  video_source_.IncomingCapturedFrame(
+      CreateFrame(CurrentTimeMs(), codec_width_ / 2, codec_height_ / 2));
+  WaitForEncodedFrame(CurrentTimeMs());
+  EXPECT_EQ(sink_.number_of_layers_allocations(), 2);
+  EXPECT_EQ(sink_.GetLastVideoLayersAllocation().active_spatial_layers[0].width,
+            codec_width_ / 2);
+  EXPECT_EQ(
+      sink_.GetLastVideoLayersAllocation().active_spatial_layers[0].height,
+      codec_height_ / 2);
+
+  video_stream_encoder_->Stop();
+}
+
 TEST_F(VideoStreamEncoderTest, TemporalLayersNotDisabledIfSupported) {
   // 2 TLs configured, temporal layers supported by encoder.
   const int kNumTemporalLayers = 2;
