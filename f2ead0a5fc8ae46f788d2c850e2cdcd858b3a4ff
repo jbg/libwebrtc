@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52d560f0_1b028e55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-12-16T10:11:40Z",
+      "side": 1,
+      "message": "What will happen when the REMB increases/is lifted? Will we immediately start sending at what the local (potentially outdated) estimate is? That seems dangerous if we are not ALR probing or something to keep that estimate up to date.",
+      "revId": "f2ead0a5fc8ae46f788d2c850e2cdcd858b3a4ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
