@@ -16,6 +16,24 @@
       "message": "What will happen when the REMB increases/is lifted? Will we immediately start sending at what the local (potentially outdated) estimate is? That seems dangerous if we are not ALR probing or something to keep that estimate up to date.",
       "revId": "f2ead0a5fc8ae46f788d2c850e2cdcd858b3a4ff",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95f3d85b_0211f8a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-12-16T11:06:00Z",
+      "side": 1,
+      "message": "I guess we have that problem for ALR currently as well, so maybe it\u0027s not a big issue. Maybe a bigger problem is the reverse, if an overuse is triggered during REMB limit and then it is \"lifted\", we would want to probe for a new estimate. But that can be a separate fix.",
+      "parentUuid": "52d560f0_1b028e55",
+      "revId": "f2ead0a5fc8ae46f788d2c850e2cdcd858b3a4ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
