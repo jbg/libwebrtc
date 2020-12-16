@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b9fc165_355d66fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-12-16T14:36:44Z",
+      "side": 1,
+      "message": "Please have another look. If you are happy with the organization and the names of the new targets, I can prepare the transition cls needed to not break downstream users of the legacy code.",
+      "revId": "5682dc8a5d7c3a15ce49ff6bb45fc7a8c66700bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
