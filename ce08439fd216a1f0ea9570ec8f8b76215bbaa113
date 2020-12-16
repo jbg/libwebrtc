@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf0e065c_e28b3864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-12-16T17:54:10Z",
+      "side": 1,
+      "message": "Can you please specify a reason for this revert.\n",
+      "revId": "ce08439fd216a1f0ea9570ec8f8b76215bbaa113",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
