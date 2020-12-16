@@ -134,10 +134,10 @@ $ git branch -r
 ```
 
 To create a local branch tracking a remote release branch (in this example,
-the 43 branch):
+the branch corresponding to Chrome M80):
 
 ```
-$ git checkout -b my_branch refs/remotes/branch-heads/43
+$ git checkout -b my_branch refs/remotes/branch-heads/3987
 $ gclient sync
 ```
 
@@ -159,11 +159,13 @@ $ # verify the current branch becomes REMOTE:origin/master
 
 The above is untested and unsupported, but it might help.
 
-Commit log for the branch: [https://webrtc.googlesource.com/src/+log/branch-heads/43][m43-log]
-To browse it: [https://webrtc.googlesource.com/src/+/branch-heads/43][m43]
+Commit log for the branch: [https://webrtc.googlesource.com/src/+log/branch-heads/3987][m80-log]
+To browse it: [https://webrtc.googlesource.com/src/+/branch-heads/3987][m80]
 
 For more details, read Chromium's [Working with Branches][chromium-work-branches] and
 [Working with Release Branches][chromium-work-release-branches] pages.
+To find the branch corresponding to a Chrome release check the
+[Chromium Dashboard][https://chromiumdash.appspot.com/branches].
 
 
 ## Contributing Patches
