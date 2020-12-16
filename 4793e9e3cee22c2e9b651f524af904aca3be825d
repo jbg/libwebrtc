@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e101483_e04623a0",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3135,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-12-16T09:20:46Z",
+      "side": 0,
+      "message": "should I add a variable for media_desc-\u003eas_sctp() and a DCHECK or am I too paranoid?",
+      "revId": "4793e9e3cee22c2e9b651f524af904aca3be825d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
