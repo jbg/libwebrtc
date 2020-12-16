@@ -238,7 +238,7 @@ int32_t VCMGenericDecoder::InitDecode(const VideoCodec* settings,
   _codecType = settings->codecType;
 
   int err = decoder_->InitDecode(settings, numberOfCores);
-  implementation_name_ = decoder_->ImplementationName();
+  implementation_name_ = decoder_->GetDecoderInfo().implementation_name;
   RTC_LOG(LS_INFO) << "Decoder implementation: " << implementation_name_;
   return err;
 }
@@ -295,7 +295,7 @@ int32_t VCMGenericDecoder::RegisterDecodeCompleteCallback(
 }
 
 bool VCMGenericDecoder::PrefersLateDecoding() const {
-  return decoder_->PrefersLateDecoding();
+  return decoder_->GetDecoderInfo().prefers_late_decoding;
 }
 
 }  // namespace webrtc
