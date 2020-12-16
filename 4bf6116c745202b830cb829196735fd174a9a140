@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6ba4af7_5d9c734a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-12-16T07:54:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4bf6116c745202b830cb829196735fd174a9a140",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b264225_39697e43",
+        "filename": "pc/jsep_session_description.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-12-16T07:54:13Z",
+      "side": 1,
+      "message": "Even copying seems a bit unnecessary, but I looked at cricket::SessionDescription::Clone() and it looks pretty harmless: what is copied are vectors of structs that more or less contains std::strings or vectors of strings. So strings in the order of magnitude ~size of SDP. So this shouldn\u0027t cause performance problems.",
+      "revId": "4bf6116c745202b830cb829196735fd174a9a140",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
