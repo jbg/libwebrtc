@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed97a7da_2edb83df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-16T08:08:22Z",
+      "side": 1,
+      "message": "Thanks!\n",
+      "revId": "4bf6116c745202b830cb829196735fd174a9a140",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b264225_39697e43",
@@ -31,6 +48,24 @@
       "writtenOn": "2020-12-16T07:54:13Z",
       "side": 1,
       "message": "Even copying seems a bit unnecessary, but I looked at cricket::SessionDescription::Clone() and it looks pretty harmless: what is copied are vectors of structs that more or less contains std::strings or vectors of strings. So strings in the order of magnitude ~size of SDP. So this shouldn\u0027t cause performance problems.",
+      "revId": "4bf6116c745202b830cb829196735fd174a9a140",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4ba0695_a8edea11",
+        "filename": "pc/jsep_session_description.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-16T08:08:22Z",
+      "side": 1,
+      "message": "Yep, the API to webrtc doesn\u0027t make it clear if the return value from localDescription() is a snapshot or a dynamic value, so the old code in Chrome clones (by recreating the SDP string and reparsing it. This should be less expensive in all cases.",
+      "parentUuid": "9b264225_39697e43",
       "revId": "4bf6116c745202b830cb829196735fd174a9a140",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
