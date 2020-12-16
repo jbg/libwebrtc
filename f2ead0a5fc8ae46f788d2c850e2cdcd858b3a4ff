@@ -34,6 +34,24 @@
       "parentUuid": "52d560f0_1b028e55",
       "revId": "f2ead0a5fc8ae46f788d2c850e2cdcd858b3a4ff",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dc41d55_a9980464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-12-16T12:17:11Z",
+      "side": 1,
+      "message": "Yes, both are relevant problems. The first is somewhat mitigated by the bandwidth estimate being capped by a factor of the acknowledged rate. We should consider a follow up for the second.",
+      "parentUuid": "95f3d85b_0211f8a5",
+      "revId": "f2ead0a5fc8ae46f788d2c850e2cdcd858b3a4ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
