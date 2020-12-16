@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6acae09c_d45b5c5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-12-16T11:01:53Z",
+      "side": 1,
+      "message": "PTAL. Intended to work around the test failures on https://webrtc-review.googlesource.com/c/src/+/196904",
+      "revId": "92efbe8339d917a36c893ed61712e6a67db7e7f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
