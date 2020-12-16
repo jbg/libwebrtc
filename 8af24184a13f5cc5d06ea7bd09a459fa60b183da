@@ -63,6 +63,30 @@
       },
       "revId": "8af24184a13f5cc5d06ea7bd09a459fa60b183da",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c49b4b7_9368b41d",
+        "filename": "docs/native-code/development/index.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-16T08:50:05Z",
+      "side": 1,
+      "message": "Yes, feel free to move it around the next time. I also think having links closer to where they are used is better for maintenance.",
+      "parentUuid": "786c69fd_160b4d07",
+      "range": {
+        "startLine": 269,
+        "startChar": 1,
+        "endLine": 270,
+        "endChar": 60
+      },
+      "revId": "8af24184a13f5cc5d06ea7bd09a459fa60b183da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
