@@ -2665,6 +2665,10 @@ bool ParseMediaDescription(
     bool bundle_only = false;
     int section_msid_signaling = 0;
     const std::string& media_type = fields[0];
+    if ((media_type == kMediaTypeVideo || media_type == kMediaTypeAudio) &&
+        !cricket::IsRtpProtocol(protocol)) {
+      return ParseFailed(line, "Unsupported protocol for media type", error);
+    }
     if (media_type == kMediaTypeVideo) {
       content = ParseContentDescription<VideoContentDescription>(
           message, cricket::MEDIA_TYPE_VIDEO, mline_index, protocol,
@@ -2701,7 +2705,7 @@ bool ParseMediaDescription(
         }
         data_desc->set_protocol(protocol);
         content = std::move(data_desc);
-      } else {
+      } else if (cricket::IsRtpProtocol(protocol)) {
         // RTP
         std::unique_ptr<RtpDataContentDescription> data_desc =
             ParseContentDescription<RtpDataContentDescription>(
@@ -2709,6 +2713,8 @@ bool ParseMediaDescription(
                 payload_types, pos, &content_name, &bundle_only,
                 &section_msid_signaling, &transport, candidates, error);
         content = std::move(data_desc);
+      } else {
+        return ParseFailed(line, "Unsupported protocol for media type", error);
       }
     } else {
       RTC_LOG(LS_WARNING) << "Unsupported media type: " << line;
