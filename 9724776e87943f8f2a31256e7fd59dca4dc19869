@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af9c4b60_454fdd46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-12-16T09:57:24Z",
+      "side": 1,
+      "message": "Moving myself out of the way. This is good stuff!\n",
+      "revId": "9724776e87943f8f2a31256e7fd59dca4dc19869",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
