@@ -16,6 +16,24 @@
       "message": "Did not check the red bot. ",
       "revId": "a090c73effb66bcde961f04dc9211be0aad48b5e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47393ff4_45d28738",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-12-16T08:48:37Z",
+      "side": 1,
+      "message": "The Android bot is flaky (the sheriff is looking into that) and the purple ones are infra issues we are investigating (bad cache).",
+      "parentUuid": "434709a6_4133eb4f",
+      "revId": "a090c73effb66bcde961f04dc9211be0aad48b5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
