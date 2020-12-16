@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1304d62e_a39f85cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-12-16T09:17:28Z",
+      "side": 1,
+      "message": "not very happy about removing a regression unit test but I think this is now covered by other tests",
+      "revId": "d351dce8362d3c765bdc03af3f494a80503e709f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
