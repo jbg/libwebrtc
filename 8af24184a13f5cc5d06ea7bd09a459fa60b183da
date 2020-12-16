@@ -39,6 +39,30 @@
       },
       "revId": "8af24184a13f5cc5d06ea7bd09a459fa60b183da",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "786c69fd_160b4d07",
+        "filename": "docs/native-code/development/index.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-12-16T08:36:28Z",
+      "side": 1,
+      "message": "true, thanks for catching that. I\u0027m not a fan of the \"links at the end\" style but since markdown allows it...",
+      "parentUuid": "ec5a39e1_1984ab34",
+      "range": {
+        "startLine": 269,
+        "startChar": 1,
+        "endLine": 270,
+        "endChar": 60
+      },
+      "revId": "8af24184a13f5cc5d06ea7bd09a459fa60b183da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
