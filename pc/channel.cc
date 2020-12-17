@@ -170,12 +170,19 @@ std::string BaseChannel::ToString() const {
 bool BaseChannel::ConnectToRtpTransport() {
   RTC_DCHECK_RUN_ON(network_thread());
   RTC_DCHECK(rtp_transport_);
+  // Call RegisterRtpDemuxerSink directly rather than going through
+  // UpdateRtpTransport, since:
+  // 1. We're already on the network thread.
+  // 2. We're connecting to a new transport, so we want to call
+  // RegisterRtpDemuxerSink regardless of whether the criteria is changing.
   // TODO(bugs.webrtc.org/12230): This accesses demuxer_criteria_ on the
   // networking thread.
   if (!rtp_transport_->RegisterRtpDemuxerSink(demuxer_criteria_, this)) {
     RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
+    previous_demuxer_criteria_ = {};
     return false;
   }
+  previous_demuxer_criteria_ = demuxer_criteria_;
   rtp_transport_->SignalReadyToSend.connect(
       this, &BaseChannel::OnTransportReadyToSend);
   rtp_transport_->SignalNetworkRouteChanged.connect(
@@ -304,15 +311,22 @@ bool BaseChannel::UpdateRtpTransport(std::string* error_desc) {
   return network_thread_->Invoke<bool>(RTC_FROM_HERE, [this, error_desc] {
     RTC_DCHECK_RUN_ON(network_thread());
     RTC_DCHECK(rtp_transport_);
-    // TODO(bugs.webrtc.org/12230): This accesses demuxer_criteria_ on the
-    // networking thread.
-    if (!rtp_transport_->RegisterRtpDemuxerSink(demuxer_criteria_, this)) {
-      RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
-      rtc::StringBuilder desc;
-      desc << "Failed to set up demuxing for m-section with mid='"
-           << content_name() << "'.";
-      SafeSetError(desc.str(), error_desc);
-      return false;
+    if (demuxer_criteria_ != previous_demuxer_criteria_) {
+      // Increment demux criteria version, which will cause packets enqueued
+      // with an older version of the criteria to be dropped; see OnRtpPacket.
+      ++demuxer_criteria_version_;
+      // TODO(bugs.webrtc.org/12230): This accesses demuxer_criteria_ on the
+      // networking thread.
+      if (!rtp_transport_->RegisterRtpDemuxerSink(demuxer_criteria_, this)) {
+        previous_demuxer_criteria_ = {};
+        RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
+        rtc::StringBuilder desc;
+        desc << "Failed to set up demuxing for m-section with mid='"
+             << content_name() << "'.";
+        SafeSetError(desc.str(), error_desc);
+        return false;
+      }
+      previous_demuxer_criteria_ = demuxer_criteria_;
     }
     // NOTE: This doesn't take the BUNDLE case in account meaning the RTP header
     // extension maps are not merged when BUNDLE is enabled. This is fine
@@ -494,6 +508,7 @@ bool BaseChannel::SendPacket(bool rtcp,
 }
 
 void BaseChannel::OnRtpPacket(const webrtc::RtpPacketReceived& parsed_packet) {
+  RTC_DCHECK_RUN_ON(network_thread());
   // Take packet time from the |parsed_packet|.
   // RtpPacketReceived.arrival_time_ms = (timestamp_us + 500) / 1000;
   int64_t packet_time_us = -1;
@@ -525,10 +540,20 @@ void BaseChannel::OnRtpPacket(const webrtc::RtpPacketReceived& parsed_packet) {
   }
 
   auto packet_buffer = parsed_packet.Buffer();
+  uint32_t demuxer_criteria_version = demuxer_criteria_version_;
 
   invoker_.AsyncInvoke<void>(
-      RTC_FROM_HERE, worker_thread_, [this, packet_buffer, packet_time_us] {
+      RTC_FROM_HERE, worker_thread_,
+      [this, packet_buffer, packet_time_us, demuxer_criteria_version] {
         RTC_DCHECK_RUN_ON(worker_thread());
+        // Drop the packet if the demuxer criteria was changed in between the
+        // packet being passed to us on the network thread and processed on the
+        // worker thread. If the criteria changed, it's possible this packet is
+        // no longer meant for us, and forwarding it to the media channel could
+        // cause it to erroneously create a receive stream.
+        if (demuxer_criteria_version != demuxer_criteria_version_) {
+          return;
+        }
         media_channel_->OnPacketReceived(packet_buffer, packet_time_us);
       });
 }
