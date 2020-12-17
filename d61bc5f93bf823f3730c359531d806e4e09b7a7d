@@ -85,6 +85,23 @@
       "message": "Hi Tommi, can you PTAL at this new addition to rtc_base/win?",
       "revId": "d61bc5f93bf823f3730c359531d806e4e09b7a7d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc60193a_3f766de0",
+        "filename": "rtc_base/win/create_direct3d_device.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-12-17T14:07:50Z",
+      "side": 1,
+      "message": "is refcount ownership expected to be passed to this function? (as in std::move())\nIf not, can we use const Foo\u0026 foo?\nAlso, if ComPtr dependency isn\u0027t actually needed, would it make sense to simply accept the interface pointers? i.e. |IDXGIDevice* dxgi_device| for the 1st param.",
+      "revId": "d61bc5f93bf823f3730c359531d806e4e09b7a7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
