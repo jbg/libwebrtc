@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11e1a5d2_282f124e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-12-18T09:38:58Z",
+      "side": 1,
+      "message": "nisse: you seem to be working... can you take an owner-look please?",
+      "revId": "1ff31d2b392f2ccfd72a39f81600c8bee8788fd9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
