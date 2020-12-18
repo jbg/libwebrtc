@@ -102,6 +102,24 @@
       "message": "is refcount ownership expected to be passed to this function? (as in std::move())\nIf not, can we use const Foo\u0026 foo?\nAlso, if ComPtr dependency isn\u0027t actually needed, would it make sense to simply accept the interface pointers? i.e. |IDXGIDevice* dxgi_device| for the 1st param.",
       "revId": "d61bc5f93bf823f3730c359531d806e4e09b7a7d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4857db8_13ad01d2",
+        "filename": "rtc_base/win/create_direct3d_device.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2020-12-18T01:41:06Z",
+      "side": 1,
+      "message": "No, the function shouldn\u0027t modify the refcount, but we can\u0027t uses const refs here because CreateDirect3D11DeviceFromDXGIDevice requires non-const pointers as its parameters.\n\nUsing the raw pointers instead of ComPtrs is a good idea. I was able to do that for the first parameter, but I\u0027m having trouble with the second. It is this line that is giving me trouble:\nhr \u003d inspectableSurface-\u003eQueryInterface(IID_PPV_ARGS(\u0026out_d3d11_device));\n\nI can\u0027t seem to find the REFIID for this class, and so I can\u0027t use the overload of QueryInterface that takes a raw pointer.",
+      "parentUuid": "cc60193a_3f766de0",
+      "revId": "d61bc5f93bf823f3730c359531d806e4e09b7a7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
