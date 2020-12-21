@@ -52,6 +52,23 @@
       "parentUuid": "95f3d85b_0211f8a5",
       "revId": "f2ead0a5fc8ae46f788d2c850e2cdcd858b3a4ff",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f7df7ca_a9306316",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2020-12-21T08:01:17Z",
+      "side": 1,
+      "message": "call_client.* LGTM\n\nI only skimmed the other files, let me know if I should take a look at them too.",
+      "revId": "f2ead0a5fc8ae46f788d2c850e2cdcd858b3a4ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
