@@ -7,7 +7,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'b24ac092cc0ed47c6fd0b923b5144dd361db1b80',
+  'chromium_revision': '6a1855654b9ddc57fba6490b9b34bd507066abe9',
 }
 
 deps = {
@@ -25,13 +25,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@67d39c19547a5e701242e8be59c31c698545767f',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@8af53c699826d1e17f4b82ca41f5c78ff7dfd0da',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@c28f31863ba2155ab32892cdd438c2d72af09068',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@2dbe47e5aa6c8214c76a393fd0d57a1446fed40f',
+    'https://chromium.googlesource.com/chromium/src/third_party@56a042741b58f9890e47cc5a9cd2bf24b45858b7',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -142,7 +142,7 @@ deps = {
       'condition': 'checkout_linux',
   },
   'src/third_party/freetype/src':
-    'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@7bdf386e758cb7c01392e625f4d723e5abb3f9a6',
+    'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@0d5f1dd37c056b4460a460d16fd1fbb06740e891',
   'src/third_party/harfbuzz-ng/src':
     'https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git@53806e5b83cee0e275eac038d0780f95ac56588c',
   'src/third_party/google_benchmark/src': {
@@ -257,7 +257,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@035bbc4dac58cf1c0b0ea0d4cbd56923b17c8c5e',
+    'https://chromium.googlesource.com/chromium/src/tools@cfe374ba77828de5ad381091c13c7f9db35c09e7',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@1a072711d4388c62e02480fabc26c68c24494be9',
 
