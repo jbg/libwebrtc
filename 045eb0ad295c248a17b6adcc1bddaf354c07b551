@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f21c7ca2_fb941d3d",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2020-12-28T16:13:25Z",
+      "side": 1,
+      "message": "Should this be a an optional\u003cint\u003e instead? Where the int specifies the number of available buffers?",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8929ac8_61bee1ed",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2020-12-28T16:13:25Z",
+      "side": 1,
+      "message": "Seems like I dont understand the meaning of prefers_late_decoding. When would it ever be false?  Maybe clarify in the header.",
+      "range": {
+        "startLine": 404,
+        "startChar": 7,
+        "endLine": 404,
+        "endChar": 29
+      },
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
