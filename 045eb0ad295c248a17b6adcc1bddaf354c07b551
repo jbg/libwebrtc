@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93769723_5490862f",
+        "filename": "api/video_codecs/video_decoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 15644
+      },
+      "writtenOn": "2020-12-28T18:42:09Z",
+      "side": 1,
+      "message": "if possible, it would be nice to avoid making a copy of this magic string.\n\nmaybe just set it to \u0027false\u0027 unconditionally, if nothing uses this yet.",
+      "range": {
+        "startLine": 31,
+        "startChar": 62,
+        "endLine": 31,
+        "endChar": 77
+      },
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c93f254c_b30781f1",
+        "filename": "api/video_codecs/video_decoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 15644
+      },
+      "writtenOn": "2020-12-28T18:42:09Z",
+      "side": 1,
+      "message": "perhaps one might \"GetDecoderInfo().prefers_late_decoding\", and unimplement it everywhere else.  makes it clear about which is the authoritative source, and that they must agree.\n\nplease see the comment about std::string in DecoderInfo, though.",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f21c7ca2_fb941d3d",
         "filename": "api/video_codecs/video_decoder.h",
         "patchSetId": 2
@@ -38,6 +78,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eef4d0eb_3520ccd3",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 15644
+      },
+      "writtenOn": "2020-12-28T18:42:09Z",
+      "side": 1,
+      "message": "i think that this involves a memory allocation during construction, which is then promptly overwritten with whatever the real implementation name is a few lines later.  consider adding a ctor to set it, or leaving this default initialized.\n\nhaving a string here at all makes this struct a bit heavy, since it\u0027s returned by (rvo) value on each call -- the string is still allocated and initialized for every call, even if the caller only cares about one of the booleans.\n\nhaving this return `const DecoderInfo\u0026` might make it cheaper, though the video decoder has to maintain the DecoderInfo somewhere then.  i\u0027m also not sure if there are issues about what threads this can be called on, which might make it harder.",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c51c54_65129074",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 15644
+      },
+      "writtenOn": "2020-12-28T18:42:09Z",
+      "side": 1,
+      "message": "might want to comment that this is deprecated, in favor of GetDecoderInfo().implementation_name, if that\u0027s the intention.  same with PrefersLateDecoding.",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8929ac8_61bee1ed",
         "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc",
         "patchSetId": 2
@@ -55,6 +129,23 @@
         "endLine": 404,
         "endChar": 29
       },
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4df70f0_01110a15",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_decoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 15644
+      },
+      "writtenOn": "2020-12-28T18:42:09Z",
+      "side": 1,
+      "message": "\u003d ImplementationName(), here and elsewhere?\n\nit\u0027d be nice if one could make VideoDecoder::ImplementationName() return GetDecoderInfo().implementation_name, and leave it unimplemented.  seems like one can\u0027t, easily, though, since the std::string goes out of scope.",
       "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
