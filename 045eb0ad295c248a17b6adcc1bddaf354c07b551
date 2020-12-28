@@ -78,6 +78,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db2ba263_5415bba0",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2020-12-28T19:24:51Z",
+      "side": 1,
+      "message": "I am surprised about the default value, I wonder when it changed and why?  Doesnt that meant that the client never have more than one outstanding decoder buffer. If it is intentional- maybe do a cl that just remove prefers_late_decoding all together.",
+      "parentUuid": "be9aabb3_b7bda5a4",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eef4d0eb_3520ccd3",
         "filename": "api/video_codecs/video_decoder.h",
         "patchSetId": 2
@@ -89,6 +107,29 @@
       "writtenOn": "2020-12-28T18:42:09Z",
       "side": 1,
       "message": "i think that this involves a memory allocation during construction, which is then promptly overwritten with whatever the real implementation name is a few lines later.  consider adding a ctor to set it, or leaving this default initialized.\n\nhaving a string here at all makes this struct a bit heavy, since it\u0027s returned by (rvo) value on each call -- the string is still allocated and initialized for every call, even if the caller only cares about one of the booleans.\n\nhaving this return `const DecoderInfo\u0026` might make it cheaper, though the video decoder has to maintain the DecoderInfo somewhere then.  i\u0027m also not sure if there are issues about what threads this can be called on, which might make it harder.",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a63bb3b_7d9e6d66",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2020-12-28T19:24:51Z",
+      "side": 1,
+      "message": "const DecoderInfo\u0026 seems to be a good idea.",
+      "range": {
+        "startLine": 72,
+        "startChar": 22,
+        "endLine": 72,
+        "endChar": 36
+      },
       "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
