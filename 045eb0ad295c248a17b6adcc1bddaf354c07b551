@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be9aabb3_b7bda5a4",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-28T17:31:41Z",
+      "side": 1,
+      "message": "I\u0027m trying to not change behavior in this cl.\n\nAs for the purpose of this flag, I think the comment (which is just moved) is a bit weird.\nIt\u0027s used to indicate that we wish to postpone the decoding until close to the desired render time: https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/video_coding/receiver.cc;l\u003d136\niiuc, the purpose was mainly to allow some hardware decoders to decode early in case they exhibit pipelining behavior which could otherwise cause excessive latency.",
+      "parentUuid": "f21c7ca2_fb941d3d",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8929ac8_61bee1ed",
         "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc",
         "patchSetId": 2
