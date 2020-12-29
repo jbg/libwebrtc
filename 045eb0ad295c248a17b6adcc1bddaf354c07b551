@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c28231e4_faa8123a",
+        "filename": "api/video_codecs/video_decoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-29T15:26:47Z",
+      "side": 1,
+      "message": "Fair enough, since it\u0027s not used yet.",
+      "parentUuid": "93769723_5490862f",
+      "range": {
+        "startLine": 31,
+        "startChar": 62,
+        "endLine": 31,
+        "endChar": 77
+      },
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c93f254c_b30781f1",
@@ -37,6 +61,24 @@
       "writtenOn": "2020-12-28T18:42:09Z",
       "side": 1,
       "message": "perhaps one might \"GetDecoderInfo().prefers_late_decoding\", and unimplement it everywhere else.  makes it clear about which is the authoritative source, and that they must agree.\n\nplease see the comment about std::string in DecoderInfo, though.",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d552c213_dd8b5201",
+        "filename": "api/video_codecs/video_decoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-29T15:26:47Z",
+      "side": 1,
+      "message": "Added comment about deprecation.\nAlso see other comment about GetDecoderInfo() and PrefersLateDecoding() referencing eachother.",
+      "parentUuid": "c93f254c_b30781f1",
       "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
