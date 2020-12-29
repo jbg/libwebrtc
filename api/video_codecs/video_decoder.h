@@ -42,6 +42,26 @@ class RTC_EXPORT DecodedImageCallback {
 
 class RTC_EXPORT VideoDecoder {
  public:
+  struct DecoderInfo {
+    // true if the decoder prefer to decode frames late.
+    // Decoding late means we wait until as close to the render timestamp as
+    // possible to send encoded frames to the decoder, even if the frames become
+    // complete and decodable before that time.
+    // If the decode latency is high/inconsistent it might be better to not
+    // decode and risk some potential hit to memory usage and frame drops.
+    bool prefers_late_decoding = true;
+
+    // Descriptive name of the decoder implementation.
+    std::string implementation_name;
+
+    // True if the decoder is backed by hardware acceleration.
+    bool is_hardware_accelerated = false;
+
+    std::string ToString() const;
+    bool operator==(const DecoderInfo& rhs) const;
+    bool operator!=(const DecoderInfo& rhs) const { return !(*this == rhs); }
+  };
+
   virtual ~VideoDecoder() {}
 
   virtual int32_t InitDecode(const VideoCodec* codec_settings,
@@ -56,11 +76,11 @@ class RTC_EXPORT VideoDecoder {
 
   virtual int32_t Release() = 0;
 
-  // Returns true if the decoder prefer to decode frames late.
-  // That is, it can not decode infinite number of frames before the decoded
-  // frame is consumed.
-  virtual bool PrefersLateDecoding() const;
+  virtual DecoderInfo GetDecoderInfo() const;
 
+  // Deprecated, use GetDecoderInfo().prefers_late_decoding instead.
+  virtual bool PrefersLateDecoding() const;
+  // Deprecated, use GetDecoderInfo().implementation_name instead.
   virtual const char* ImplementationName() const;
 };
 

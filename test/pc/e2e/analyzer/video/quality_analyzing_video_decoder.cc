@@ -123,6 +123,12 @@ int32_t QualityAnalyzingVideoDecoder::Release() {
   return result;
 }
 
+VideoDecoder::DecoderInfo QualityAnalyzingVideoDecoder::GetDecoderInfo() const {
+  DecoderInfo info = delegate_->GetDecoderInfo();
+  info.implementation_name = implementation_name_;
+  return info;
+}
+
 bool QualityAnalyzingVideoDecoder::PrefersLateDecoding() const {
   return delegate_->PrefersLateDecoding();
 }

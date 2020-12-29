@@ -238,8 +238,10 @@ int32_t VCMGenericDecoder::InitDecode(const VideoCodec* settings,
   _codecType = settings->codecType;
 
   int err = decoder_->InitDecode(settings, numberOfCores);
-  implementation_name_ = decoder_->ImplementationName();
-  RTC_LOG(LS_INFO) << "Decoder implementation: " << implementation_name_;
+  decoder_info_ = decoder_->GetDecoderInfo();
+  RTC_LOG(LS_INFO) << "Decoder implementation: " << decoder_info_.ToString();
+  _callback->OnDecoderImplementationName(
+      decoder_info_.implementation_name.c_str());
   return err;
 }
 
@@ -269,13 +271,16 @@ int32_t VCMGenericDecoder::Decode(const VCMEncodedFrame& frame, Timestamp now) {
   _nextFrameInfoIdx = (_nextFrameInfoIdx + 1) % kDecoderFrameMemoryLength;
   int32_t ret = decoder_->Decode(frame.EncodedImage(), frame.MissingFrame(),
                                  frame.RenderTimeMs());
-  const char* new_implementation_name = decoder_->ImplementationName();
-  if (new_implementation_name != implementation_name_) {
-    implementation_name_ = new_implementation_name;
+  VideoDecoder::DecoderInfo decoder_info = decoder_->GetDecoderInfo();
+  if (decoder_info != decoder_info_) {
     RTC_LOG(LS_INFO) << "Changed decoder implementation to: "
-                     << new_implementation_name;
+                     << decoder_info.ToString();
+
+    _callback->OnDecoderImplementationName(
+        decoder_info.implementation_name.empty()
+            ? "unknown"
+            : decoder_info.implementation_name.c_str());
   }
-  _callback->OnDecoderImplementationName(implementation_name_.c_str());
   if (ret < WEBRTC_VIDEO_CODEC_OK) {
     RTC_LOG(LS_WARNING) << "Failed to decode frame with timestamp "
                         << frame.Timestamp() << ", error code: " << ret;
@@ -295,7 +300,7 @@ int32_t VCMGenericDecoder::RegisterDecodeCompleteCallback(
 }
 
 bool VCMGenericDecoder::PrefersLateDecoding() const {
-  return decoder_->PrefersLateDecoding();
+  return decoder_->GetDecoderInfo().prefers_late_decoding;
 }
 
 }  // namespace webrtc
