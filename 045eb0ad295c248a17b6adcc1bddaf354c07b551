@@ -189,6 +189,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02300093_b6b2a80e",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 15644
+      },
+      "writtenOn": "2020-12-29T19:52:44Z",
+      "side": 1,
+      "message": "keeping it the same as VideoEncoder sgtm.\n\nthe other concerns, like the const-ness of the getter, can be worked around, if those are the driving factors.  e.g., with \u0027mutable\u0027.\n\none very different idea that just occurred as i\u0027m writing this: perhaps separate update from the getter entirely, since it changes very rarely (often never, for many decoders), but is gotten quite often.\n\nanyway, sgtm in any case.",
+      "parentUuid": "67cf1ce5_ec70caa5",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a63bb3b_7d9e6d66",
