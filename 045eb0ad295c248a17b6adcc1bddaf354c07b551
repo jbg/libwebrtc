@@ -96,6 +96,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18745a6b_3a184296",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-29T15:22:24Z",
+      "side": 1,
+      "message": "Preferring late decoding has been the default for a long time. Simple blame only goes back to when this was moved to the api/ target back in 2018 but pretty sure it was the case long before that.\nNot sure about never having more than one outstanding, frames can arrive in bursts and I think there can still be several in flight for those cases.\nAnyway, there are implementations that explicitly sets this to false - so I don\u0027t think we can just remove this?",
+      "parentUuid": "db2ba263_5415bba0",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eef4d0eb_3520ccd3",
         "filename": "api/video_codecs/video_decoder.h",
         "patchSetId": 2
@@ -107,6 +125,24 @@
       "writtenOn": "2020-12-28T18:42:09Z",
       "side": 1,
       "message": "i think that this involves a memory allocation during construction, which is then promptly overwritten with whatever the real implementation name is a few lines later.  consider adding a ctor to set it, or leaving this default initialized.\n\nhaving a string here at all makes this struct a bit heavy, since it\u0027s returned by (rvo) value on each call -- the string is still allocated and initialized for every call, even if the caller only cares about one of the booleans.\n\nhaving this return `const DecoderInfo\u0026` might make it cheaper, though the video decoder has to maintain the DecoderInfo somewhere then.  i\u0027m also not sure if there are issues about what threads this can be called on, which might make it harder.",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67cf1ce5_ec70caa5",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-29T15:22:24Z",
+      "side": 1,
+      "message": "\u003e i think that this involves a memory allocation during construction, which is then promptly overwritten with whatever the real implementation name is a few lines later.  consider adding a ctor to set it, or leaving this default initialized.\n\nNot having a constructor is a conscious decision. A big part of this change is making it easy to add or remove new flags, and if we have a constructor we\u0027d need to update all call sites\nif the signature changes. We can probably change the default to empty though and have the\ndefault fallback further out.\n\n\u003e having a string here at all makes this struct a bit heavy, since it\u0027s returned by (rvo) value on each call -- the string is still allocated and initialized for every call, even if the caller only cares about one of the booleans.\n\u003e \n\u003e having this return `const DecoderInfo\u0026` might make it cheaper, though the video decoder has to maintain the DecoderInfo somewhere then.  i\u0027m also not sure if there are issues about what threads this can be called on, which might make it harder.\n\nYes, there\u0027s some cost to it, but there are a few reasons for doing it this way.\nAs you say, returning a reference means the decoder needs to own an instance of it.\nThe getter method needs to still be const, so updating the struct cannot be done there. \nIn some cases maintaining its state from other methods would just be a minor nuisance, but\nthings quickly gets tricky. E.g. when you have wrapper classes and the owned instances can\nbe updated under the hood. I also don\u0027t see a good way of implementing a backwards compatible\nfallback.\nI further wanted to keep it consistent with VideoEncoder::GetEncoderInfo() which also returns\nan object for similar reasons. There the problems were much bigger than for decoders though.",
+      "parentUuid": "eef4d0eb_3520ccd3",
       "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -134,6 +170,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "138273f6_9b324d7a",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-29T15:22:24Z",
+      "side": 1,
+      "message": "See answer above.",
+      "parentUuid": "5a63bb3b_7d9e6d66",
+      "range": {
+        "startLine": 72,
+        "startChar": 22,
+        "endLine": 72,
+        "endChar": 36
+      },
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99c51c54_65129074",
@@ -147,6 +207,24 @@
       "writtenOn": "2020-12-28T18:42:09Z",
       "side": 1,
       "message": "might want to comment that this is deprecated, in favor of GetDecoderInfo().implementation_name, if that\u0027s the intention.  same with PrefersLateDecoding.",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d02fdb4a_7720b832",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-29T15:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99c51c54_65129074",
       "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -174,6 +252,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb5da7b_daef30b8",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-29T15:22:24Z",
+      "side": 1,
+      "message": "Agree it\u0027s a bit unintuitive. I\u0027ve tried to update the comment.\nI\u0027ve found at least on downstream implementation that sets this flag to false.\nSo I\u0027d like to not update behavior in this cl.",
+      "parentUuid": "d8929ac8_61bee1ed",
+      "range": {
+        "startLine": 404,
+        "startChar": 7,
+        "endLine": 404,
+        "endChar": 29
+      },
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4df70f0_01110a15",
@@ -187,6 +289,24 @@
       "writtenOn": "2020-12-28T18:42:09Z",
       "side": 1,
       "message": "\u003d ImplementationName(), here and elsewhere?\n\nit\u0027d be nice if one could make VideoDecoder::ImplementationName() return GetDecoderInfo().implementation_name, and leave it unimplemented.  seems like one can\u0027t, easily, though, since the std::string goes out of scope.",
+      "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75147fd0_ea8243b3",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_decoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-12-29T15:22:24Z",
+      "side": 1,
+      "message": "ImplementationName() is left only in case there are external wrapper classes that calls it,\nit will be removed soon. So I don\u0027t want to reference the old methods from here.\n\nWe also can\u0027t let that old methods default-delegate to the GetDecoderInfo() since there are some implementations that implement neither and would cause in infinite recursion.",
+      "parentUuid": "d4df70f0_01110a15",
       "revId": "045eb0ad295c248a17b6adcc1bddaf354c07b551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
