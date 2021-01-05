@@ -16,6 +16,23 @@
       "message": "PTAL at the files you own.\nmbonadaei: iirc there was some reason the gn file still says whitelist but at least that reduces the remaining usage by 2/3rd :-)",
       "revId": "670d8fe9fdac0e0afba75b4dd1a214778402252a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb3adf3c_001da51c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-05T15:24:12Z",
+      "side": 1,
+      "message": "Thanks! I think this is already addressed by hta@ on https://webrtc-review.googlesource.com/c/src/+/200701.",
+      "revId": "670d8fe9fdac0e0afba75b4dd1a214778402252a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
