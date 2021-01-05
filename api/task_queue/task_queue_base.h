@@ -33,6 +33,7 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueueBase {
   // TaskQueue is deallocated and thus should not call any methods after Delete.
   // Code running on the TaskQueue should not call Delete, but can assume
   // TaskQueue still exists and may call other methods, e.g. PostTask.
+  // Should be called on the same task queue that created current task queue.
   virtual void Delete() = 0;
 
   // Schedules a task to execute. Tasks are executed in FIFO order.
@@ -43,17 +44,22 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueueBase {
   // TaskQueue or it may happen asynchronously after TaskQueue is deleted.
   // This may vary from one implementation to the next so assumptions about
   // lifetimes of pending tasks should not be made.
+  // Can be called from any thread or task queue.
+  // Can't be called after Delete unless called on the current task queue.
   virtual void PostTask(std::unique_ptr<QueuedTask> task) = 0;
 
   // Schedules a task to execute a specified number of milliseconds from when
   // the call is made. The precision should be considered as "best effort"
   // and in some cases, such as on Windows when all high precision timers have
   // been used up, can be off by as much as 15 millseconds.
+  // Can be called from any thread or task queue.
+  // Can't be called after Delete unless called on the current task queue.
   virtual void PostDelayedTask(std::unique_ptr<QueuedTask> task,
                                uint32_t milliseconds) = 0;
 
   // Returns the task queue that is running the current thread.
   // Returns nullptr if this thread is not associated with any task queue.
+  // Can be called from any thread or task queue.
   static TaskQueueBase* Current();
   bool IsCurrent() const { return Current() == this; }
 
