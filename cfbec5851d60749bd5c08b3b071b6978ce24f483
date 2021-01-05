@@ -16,6 +16,23 @@
       "message": "Adding OWNERs for approval.\n",
       "revId": "cfbec5851d60749bd5c08b3b071b6978ce24f483",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0118654_de14e2a9",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-01-05T15:26:45Z",
+      "side": 1,
+      "message": "nit: s/whitelisted/allowed",
+      "revId": "cfbec5851d60749bd5c08b3b071b6978ce24f483",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
