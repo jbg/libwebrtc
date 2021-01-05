@@ -316,7 +316,7 @@ size_t RemoveNonWhitelistedRtcpBlocks(const rtc::Buffer& packet,
         // inter-arrival jitter, third-party loss reports, payload-specific
         // feedback and extended reports.
         // TODO(terelius): As an optimization, don't copy anything if all blocks
-        // in the packet are whitelisted types.
+        // in the packet are allowed types.
         memcpy(buffer + buffer_length, block_begin, block_size);
         buffer_length += block_size;
         break;
