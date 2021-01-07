@@ -138,6 +138,24 @@
       "parentUuid": "d4857db8_13ad01d2",
       "revId": "d61bc5f93bf823f3730c359531d806e4e09b7a7d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c077b400_b95866cf",
+        "filename": "rtc_base/win/create_direct3d_device.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-01-07T00:49:51Z",
+      "side": 1,
+      "message": "ping :)",
+      "parentUuid": "84664fd7_e2254c04",
+      "revId": "d61bc5f93bf823f3730c359531d806e4e09b7a7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
