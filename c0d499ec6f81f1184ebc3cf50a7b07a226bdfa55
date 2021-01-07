@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8218c1d5_c5580a80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-01-07T15:19:36Z",
+      "side": 1,
+      "message": "Christoffer, PTAL at api/\nSami, PTAL at sdk/android*\n\n",
+      "revId": "c0d499ec6f81f1184ebc3cf50a7b07a226bdfa55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
