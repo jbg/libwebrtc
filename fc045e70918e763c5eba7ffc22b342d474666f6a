@@ -16,6 +16,24 @@
       "message": "Do you think we need a wider discussion of this issue?",
       "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c61d0bd9_41857003",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-07T12:20:26Z",
+      "side": 1,
+      "message": "No, I think this is a non controversial change so I think we can go ahead and land it.\n\nGood to land https://webrtc-review.googlesource.com/c/src/+/198846 as well. It would be great to remove the mutable data() and operator[] in the short term since without a barrier we risk to backslide. Is it doable to make a push to drop them in Q1?",
+      "parentUuid": "27642d9b_dd56ae57",
+      "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
