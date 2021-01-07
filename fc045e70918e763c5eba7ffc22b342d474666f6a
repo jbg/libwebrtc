@@ -34,6 +34,57 @@
       "parentUuid": "27642d9b_dd56ae57",
       "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5014ea6b_8b1428a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-07T12:24:48Z",
+      "side": 1,
+      "message": "Replied on the bug to record for posterity that I think it\u0027s a reasonable pattern to follow.\n\nWe should follow the deprecation procedure:\n- Add RTC_DEPRECATED\n- Send out PSA\n- Wait 2 weeks\n- Remove\n(with the normal followup of:\n- Find downstream break\n- Swear and revert\n- Fix downstream break\n- Repeat until done)",
+      "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2287293_18530191",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-07T12:24:48Z",
+      "side": 1,
+      "message": "Formulate as TODO(bugs...): Deprecate and remove.",
+      "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64bcc8e5_7c45829f",
+        "filename": "rtc_base/copy_on_write_buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-07T12:24:48Z",
+      "side": 1,
+      "message": "While you\u0027re here, can you replace \"Backet\" with a word that makes sense?",
+      "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
