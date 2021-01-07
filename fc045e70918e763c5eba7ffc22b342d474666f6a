@@ -53,6 +53,42 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4a4f7a3_9bc62a6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-01-07T12:40:44Z",
+      "side": 1,
+      "message": "Sure, removing mutable data() is the main goal. Otherwise implicit conversion to rtc::ArrayView\u003cconst uint8_t\u003e would still be easy to make wrong.\n(mutable operator[] is less dangerous, but still better be removed)\n\nQ1 looks doable. I can probably update all the code within a month.",
+      "parentUuid": "c61d0bd9_41857003",
+      "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66b6fa60_341cb90b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-01-07T12:40:44Z",
+      "side": 1,
+      "message": "For technical reasons I do not see how we can add RTC_DEPRECATED in this case: that would block calling .data() on a mutable CopyOnWriteBuffer\nSuch call is still valid, but should use const version of .data()\n\n(downstream changes seems can be done while waiting 2 weeks)",
+      "parentUuid": "5014ea6b_8b1428a6",
+      "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2287293_18530191",
@@ -70,6 +106,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4949cab_0088d115",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-01-07T12:40:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2287293_18530191",
+      "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64bcc8e5_7c45829f",
@@ -83,6 +137,24 @@
       "writtenOn": "2021-01-07T12:24:48Z",
       "side": 1,
       "message": "While you\u0027re here, can you replace \"Backet\" with a word that makes sense?",
+      "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ddf6aca_e3df46af",
+        "filename": "rtc_base/copy_on_write_buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-01-07T12:40:44Z",
+      "side": 1,
+      "message": "Not too sure what exaclty was meant by \"Backet\". replaced with a more generic word.",
+      "parentUuid": "64bcc8e5_7c45829f",
       "revId": "fc045e70918e763c5eba7ffc22b342d474666f6a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
