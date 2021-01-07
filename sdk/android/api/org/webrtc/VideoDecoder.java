@@ -90,7 +90,11 @@ public interface VideoDecoder {
    * The decoder should return true if it prefers late decoding. That is, it can not decode
    * infinite number of frames before the decoded frame is consumed.
    */
-  @CalledByNative boolean getPrefersLateDecoding();
+  // TODO(bugs.webrtc.org/12271): Remove when downstream has been updated.
+  @CalledByNative
+  default boolean getPrefersLateDecoding() {
+    return true;
+  }
   /**
    * Should return a descriptive name for the implementation. Gets called once and cached. May be
    * called from arbitrary thread.
