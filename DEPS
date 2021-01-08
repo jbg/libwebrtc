@@ -7,7 +7,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '211a9ad899173676e26629f41f8ca0dd0dc7353c',
+  'chromium_revision': 'f44831f49fb134ec06ba567f5eac02453fa5e2e4',
 }
 
 deps = {
@@ -25,13 +25,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@b62dfbee82e7459862dceb454424c397fc0af288',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@0bb03889bc6c24aa8ca972ee59b96b0d4a64cf88',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@067c94e136a8bd1dda3c3e777534b20273e33462',
+    'https://chromium.googlesource.com/chromium/src/testing@3489904f75656d541197d405c351edf26da407a5',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@6560227876f89669b8eaba3c48137b440bea695d',
+    'https://chromium.googlesource.com/chromium/src/third_party@34294cb36769f3bc2b2eddefb62da7f561ab6a11',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -200,7 +200,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@afc78f5e6ae999fd26a7473e8e2b068b6e666063',
+    'https://android.googlesource.com/platform/external/perfetto.git@11e6cfe60a925078976c25536c42358ef3f7666c',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@b5d77a48d740e211a130c8e45d9353ef8c154a47',
   'src/third_party/libyuv':
@@ -257,7 +257,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@5f45dce5dcc9343acfbddbe82944cedcceba274b',
+    'https://chromium.googlesource.com/chromium/src/tools@bf6b93b9b57615f5efda78f574428942f51ca3cf',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@1a072711d4388c62e02480fabc26c68c24494be9',
 
