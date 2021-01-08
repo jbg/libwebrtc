@@ -491,6 +491,9 @@ void VideoQualityTest::CheckParamsAndInjectionComponents() {
                       params_.video[video_idx].num_temporal_layers - 1);
       }
     }
+    if (params_.ss[video_idx].streams[0].scalability_mode.has_value()) {
+      continue;
+    }
 
     // TODO(ivica): Should max_bitrate_bps == -1 represent inf max bitrate, as
     // it does in some parts of the code?
@@ -765,6 +768,10 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
           RtpExtension::kGenericFrameDescriptorUri00,
           kGenericFrameDescriptorExtensionId00);
     }
+    video_send_configs_[video_idx].rtp.extmap_allow_mixed = true;
+    video_send_configs_[video_idx].rtp.extensions.emplace_back(
+        RtpExtension::kDependencyDescriptorUri,
+        kGenericFrameDescriptorExtensionId01);
 
     video_send_configs_[video_idx].rtp.extensions.emplace_back(
         RtpExtension::kVideoContentTypeUri, kVideoContentTypeExtensionId);
@@ -807,6 +814,11 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
 
     video_encoder_configs_[video_idx].spatial_layers =
         params_.ss[video_idx].spatial_layers;
+    video_encoder_configs_[video_idx].simulcast_layers[0].scalability_mode =
+        params_.ss[video_idx].streams[0].scalability_mode;
+    RTC_LOG(LS_INFO)
+        << "Copy SM "
+        << params_.ss[video_idx].streams[0].scalability_mode.value_or("");
     decode_all_receive_streams = params_.ss[video_idx].selected_stream ==
                                  params_.ss[video_idx].streams.size();
     absl::optional<int> decode_sub_stream;
@@ -876,8 +888,8 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
       } else if (params_.video[video_idx].codec == "VP9") {
         VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
         // Only enable quality scaler for single spatial layer.
-        vp9_settings.automaticResizeOn =
-            params_.ss[video_idx].num_spatial_layers == 1;
+        vp9_settings.automaticResizeOn = false;
+        //            params_.ss[video_idx].num_spatial_layers == 1;
         video_encoder_configs_[video_idx].encoder_specific_settings =
             new rtc::RefCountedObject<
                 VideoEncoderConfig::Vp9EncoderSpecificSettings>(vp9_settings);

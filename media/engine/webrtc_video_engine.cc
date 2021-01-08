@@ -3507,6 +3507,7 @@ EncoderStreamFactory::CreateDefaultVideoStreams(
   layer.max_bitrate_bps = max_bitrate_bps;
   layer.max_qp = max_qp_;
   layer.bitrate_priority = encoder_config.bitrate_priority;
+  layer.scalability_mode = encoder_config.simulcast_layers[0].scalability_mode;
 
   if (absl::EqualsIgnoreCase(codec_name_, kVp9CodecName)) {
     RTC_DCHECK(encoder_config.encoder_specific_settings);

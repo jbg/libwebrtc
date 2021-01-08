@@ -386,6 +386,27 @@ void RTPSenderVideo::AddRtpHeaderExtensions(
       if (first_packet) {
         descriptor.active_decode_targets_bitmask =
             active_decode_targets_tracker_.ActiveDecodeTargetsBitmask();
+        if (last_packet) {
+          if (descriptor.active_decode_targets_bitmask) {
+            RTC_LOG(LS_INFO)
+                << "ADT: "
+                << std::bitset<9>(*descriptor.active_decode_targets_bitmask)
+                       .to_string();
+          } else if (video_header.frame_type ==
+                     VideoFrameType::kVideoFrameKey) {
+            RTC_LOG(LS_INFO)
+                << "ADT: (KF)"
+                << std::bitset<9>((1 << video_structure_->num_decode_targets) -
+                                  1)
+                       .to_string();
+          }
+          RTC_LOG(LS_INFO) << "Send frame " << descriptor.frame_number
+                           << " sid "
+                           << descriptor.frame_dependencies.spatial_id
+                           << " depends on "
+                           << descriptor.frame_dependencies.frame_diffs.size()
+                           << " frames.";
+        }
       }
       // VP9 mark all layer frames of the first picture as kVideoFrameKey,
       // Structure should be attached to the descriptor to lowest spatial layer
