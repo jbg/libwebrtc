@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea5abcb_6e504741",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-11T07:51:16Z",
+      "side": 1,
+      "message": "This seems an iOS simulator issue (AppLaunchError).",
+      "revId": "5b469b886592e952d597b6462f0553195b79b2de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
