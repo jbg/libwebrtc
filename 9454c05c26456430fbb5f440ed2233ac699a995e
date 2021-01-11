@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e743ba6_9ba319d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-01-11T14:36:36Z",
+      "side": 1,
+      "message": "PTAL.",
+      "revId": "9454c05c26456430fbb5f440ed2233ac699a995e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e8c14fa_52f6b2d7",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-01-11T14:36:36Z",
+      "side": 1,
+      "message": "I think reference arguments are safe, since this is a blocking invoke.\n\nWould it be clearer to just use [\u0026] for the capture list, here and below?",
+      "range": {
+        "startLine": 313,
+        "startChar": 48,
+        "endLine": 313,
+        "endChar": 67
+      },
+      "revId": "9454c05c26456430fbb5f440ed2233ac699a995e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
