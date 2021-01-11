@@ -56,6 +56,30 @@
       },
       "revId": "a71c9b90adf936b03a3a3af9de5e92c8e739cff1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83b11890_81f2b822",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-01-11T08:26:28Z",
+      "side": 1,
+      "message": "I think you\u0027re right.",
+      "parentUuid": "0926fa2a_21d3fc35",
+      "range": {
+        "startLine": 806,
+        "startChar": 0,
+        "endLine": 806,
+        "endChar": 67
+      },
+      "revId": "a71c9b90adf936b03a3a3af9de5e92c8e739cff1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
