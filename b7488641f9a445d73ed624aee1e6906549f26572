@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "462db50d_cdd5102e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-11T07:43:27Z",
+      "side": 1,
+      "message": "Not sure this is right yet, removing checks always makes me nervous.\n",
+      "revId": "b7488641f9a445d73ed624aee1e6906549f26572",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15669fc1_8a5e961b",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-11T07:43:27Z",
+      "side": 1,
+      "message": "Since you are changing this comment, can you also clear up the bad English?",
+      "revId": "b7488641f9a445d73ed624aee1e6906549f26572",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40708708_ec9ceba9",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4057,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-11T07:43:27Z",
+      "side": 0,
+      "message": "Hm. I realize that with the new check, the formerly-offending code line won\u0027t be reached (the parse will fail before getting that far), but I don\u0027t like removing regression tests.\n\n\nIf you change UDP/DTLS/SCTP to the relevant RTP invocation, the parse should actually succeed, since you changed the parse above to not even try to look for the attributes when you\u0027re doing RTP.",
+      "revId": "1607b3aa8ccd55e48e2fc0204ee5cbe873d41928",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
