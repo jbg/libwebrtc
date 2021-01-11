@@ -57,6 +57,30 @@
       },
       "revId": "ea1e3e17f6d126f44f40dde88133869494924cd2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08b4efe_b644ec7e",
+        "filename": "common_video/libyuv/webrtc_libyuv.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-01-11T12:28:02Z",
+      "side": 1,
+      "message": "\u003e personally I prefer to avoid \u0027()\u0027 in lambda when possible, like in this case.\n\u003e but if you think it keeps it clearer it is an empty lambda, keep it.\n\nI didn\u0027t realize \u0027()\u0027 was an optional part of the syntax. And it seems both styles are common within webrtc. Deleted now.",
+      "parentUuid": "ce3d1622_bebdc97f",
+      "range": {
+        "startLine": 159,
+        "startChar": 30,
+        "endLine": 159,
+        "endChar": 32
+      },
+      "revId": "ea1e3e17f6d126f44f40dde88133869494924cd2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
