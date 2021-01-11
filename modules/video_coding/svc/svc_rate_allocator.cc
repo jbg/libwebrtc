@@ -209,10 +209,12 @@ SvcRateAllocator::SvcRateAllocator(const VideoCodec& codec)
       RTC_DCHECK_GT(codec.spatialLayers[layer_idx].maxBitrate, 0);
       RTC_DCHECK_GE(codec.spatialLayers[layer_idx].maxBitrate,
                     codec.spatialLayers[layer_idx].minBitrate);
-      RTC_DCHECK_GE(codec.spatialLayers[layer_idx].targetBitrate,
-                    codec.spatialLayers[layer_idx].minBitrate);
-      RTC_DCHECK_GE(codec.spatialLayers[layer_idx].maxBitrate,
-                    codec.spatialLayers[layer_idx].targetBitrate);
+      if (codec.spatialLayers[layer_idx].targetBitrate != 0) {
+        RTC_DCHECK_GE(codec.spatialLayers[layer_idx].targetBitrate,
+                      codec.spatialLayers[layer_idx].minBitrate);
+        RTC_DCHECK_GE(codec.spatialLayers[layer_idx].maxBitrate,
+                      codec.spatialLayers[layer_idx].targetBitrate);
+      }
     }
   }
 }
