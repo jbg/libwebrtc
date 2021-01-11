@@ -17,6 +17,8 @@
 #include <utility>
 #include <vector>
 
+#include "absl/container/flat_hash_map.h"
+
 namespace webrtc {
 
 class RtpPacketReceived;
@@ -185,7 +187,7 @@ class RtpDemuxer {
   // received.
   // This is stored separately from the sink mappings because if a sink is
   // removed we want to still remember these associations.
-  std::map<uint32_t, std::string> mid_by_ssrc_;
+  absl::flat_hash_map<uint32_t, std::string> mid_by_ssrc_;
   std::map<uint32_t, std::string> rsid_by_ssrc_;
 
   // Adds a binding from the SSRC to the given sink.
