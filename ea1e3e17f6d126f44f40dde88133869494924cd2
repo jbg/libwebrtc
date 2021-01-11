@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a674612_cbab5032",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-01-11T11:35:43Z",
+      "side": 1,
+      "message": "Danil, can you have a first look? I\u0027m not sure exactly how lambdas are converted to Callback0, but I would expect that the copy-captured refpointers get the right life time.",
+      "revId": "ea1e3e17f6d126f44f40dde88133869494924cd2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
