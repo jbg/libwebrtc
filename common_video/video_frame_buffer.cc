@@ -30,7 +30,7 @@ class WrappedYuvBuffer : public Base {
                    int u_stride,
                    const uint8_t* v_plane,
                    int v_stride,
-                   const rtc::Callback0<void>& no_longer_used)
+                   std::function<void()> no_longer_used)
       : width_(width),
         height_(height),
         y_plane_(y_plane),
@@ -39,7 +39,7 @@ class WrappedYuvBuffer : public Base {
         y_stride_(y_stride),
         u_stride_(u_stride),
         v_stride_(v_stride),
-        no_longer_used_cb_(no_longer_used) {}
+        no_longer_used_cb_(std::move(no_longer_used)) {}
 
   ~WrappedYuvBuffer() override { no_longer_used_cb_(); }
 
@@ -70,7 +70,7 @@ class WrappedYuvBuffer : public Base {
   const int y_stride_;
   const int u_stride_;
   const int v_stride_;
-  rtc::Callback0<void> no_longer_used_cb_;
+  std::function<void()> no_longer_used_cb_;
 };
 
 // Template to implement a wrapped buffer for a I4??BufferInterface.
@@ -87,7 +87,7 @@ class WrappedYuvaBuffer : public WrappedYuvBuffer<BaseWithA> {
                     int v_stride,
                     const uint8_t* a_plane,
                     int a_stride,
-                    const rtc::Callback0<void>& no_longer_used)
+                    std::function<void()> no_longer_used)
       : WrappedYuvBuffer<BaseWithA>(width,
                                     height,
                                     y_plane,
@@ -96,7 +96,7 @@ class WrappedYuvaBuffer : public WrappedYuvBuffer<BaseWithA> {
                                     u_stride,
                                     v_plane,
                                     v_stride,
-                                    no_longer_used),
+                                    std::move(no_longer_used)),
         a_plane_(a_plane),
         a_stride_(a_stride) {}
 
@@ -136,7 +136,7 @@ class WrappedYuv16BBuffer : public Base {
                       int u_stride,
                       const uint16_t* v_plane,
                       int v_stride,
-                      const rtc::Callback0<void>& no_longer_used)
+                      std::function<void()> no_longer_used)
       : width_(width),
         height_(height),
         y_plane_(y_plane),
@@ -145,7 +145,7 @@ class WrappedYuv16BBuffer : public Base {
         y_stride_(y_stride),
         u_stride_(u_stride),
         v_stride_(v_stride),
-        no_longer_used_cb_(no_longer_used) {}
+        no_longer_used_cb_(std::move(no_longer_used)) {}
 
   ~WrappedYuv16BBuffer() override { no_longer_used_cb_(); }
 
@@ -176,7 +176,7 @@ class WrappedYuv16BBuffer : public Base {
   const int y_stride_;
   const int u_stride_;
   const int v_stride_;
-  rtc::Callback0<void> no_longer_used_cb_;
+  std::function<void()> no_longer_used_cb_;
 };
 
 class I010BufferBase : public I010BufferInterface {
@@ -206,11 +206,11 @@ rtc::scoped_refptr<I420BufferInterface> WrapI420Buffer(
     int u_stride,
     const uint8_t* v_plane,
     int v_stride,
-    const rtc::Callback0<void>& no_longer_used) {
+    std::function<void()> no_longer_used) {
   return rtc::scoped_refptr<I420BufferInterface>(
       new rtc::RefCountedObject<WrappedYuvBuffer<I420BufferInterface>>(
           width, height, y_plane, y_stride, u_plane, u_stride, v_plane,
-          v_stride, no_longer_used));
+          v_stride, std::move(no_longer_used)));
 }
 
 rtc::scoped_refptr<I420ABufferInterface> WrapI420ABuffer(
@@ -224,11 +224,11 @@ rtc::scoped_refptr<I420ABufferInterface> WrapI420ABuffer(
     int v_stride,
     const uint8_t* a_plane,
     int a_stride,
-    const rtc::Callback0<void>& no_longer_used) {
+    std::function<void()> no_longer_used) {
   return rtc::scoped_refptr<I420ABufferInterface>(
       new rtc::RefCountedObject<WrappedYuvaBuffer<I420ABufferInterface>>(
           width, height, y_plane, y_stride, u_plane, u_stride, v_plane,
-          v_stride, a_plane, a_stride, no_longer_used));
+          v_stride, a_plane, a_stride, std::move(no_longer_used)));
 }
 
 rtc::scoped_refptr<I444BufferInterface> WrapI444Buffer(
@@ -240,11 +240,11 @@ rtc::scoped_refptr<I444BufferInterface> WrapI444Buffer(
     int u_stride,
     const uint8_t* v_plane,
     int v_stride,
-    const rtc::Callback0<void>& no_longer_used) {
+    std::function<void()> no_longer_used) {
   return rtc::scoped_refptr<I444BufferInterface>(
       new rtc::RefCountedObject<WrappedYuvBuffer<I444BufferBase>>(
           width, height, y_plane, y_stride, u_plane, u_stride, v_plane,
-          v_stride, no_longer_used));
+          v_stride, std::move(no_longer_used)));
 }
 
 rtc::scoped_refptr<PlanarYuvBuffer> WrapYuvBuffer(
@@ -257,14 +257,14 @@ rtc::scoped_refptr<PlanarYuvBuffer> WrapYuvBuffer(
     int u_stride,
     const uint8_t* v_plane,
     int v_stride,
-    const rtc::Callback0<void>& no_longer_used) {
+    std::function<void()> no_longer_used) {
   switch (type) {
     case VideoFrameBuffer::Type::kI420:
       return WrapI420Buffer(width, height, y_plane, y_stride, u_plane, u_stride,
-                            v_plane, v_stride, no_longer_used);
+                            v_plane, v_stride, std::move(no_longer_used));
     case VideoFrameBuffer::Type::kI444:
       return WrapI444Buffer(width, height, y_plane, y_stride, u_plane, u_stride,
-                            v_plane, v_stride, no_longer_used);
+                            v_plane, v_stride, std::move(no_longer_used));
     default:
       RTC_CHECK_NOTREACHED();
   }
@@ -279,11 +279,11 @@ rtc::scoped_refptr<I010BufferInterface> WrapI010Buffer(
     int u_stride,
     const uint16_t* v_plane,
     int v_stride,
-    const rtc::Callback0<void>& no_longer_used) {
+    std::function<void()> no_longer_used) {
   return rtc::scoped_refptr<I010BufferInterface>(
       new rtc::RefCountedObject<WrappedYuv16BBuffer<I010BufferBase>>(
           width, height, y_plane, y_stride, u_plane, u_stride, v_plane,
-          v_stride, no_longer_used));
+          v_stride, std::move(no_longer_used)));
 }
 
 }  // namespace webrtc

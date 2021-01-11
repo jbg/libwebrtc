@@ -11,9 +11,10 @@
 #ifndef RTC_BASE_KEEP_REF_UNTIL_DONE_H_
 #define RTC_BASE_KEEP_REF_UNTIL_DONE_H_
 
+#include <functional>
+
 #include "api/scoped_refptr.h"
 #include "rtc_base/bind.h"
-#include "rtc_base/callback.h"
 #include "rtc_base/ref_count.h"
 
 namespace rtc {
@@ -27,12 +28,12 @@ static inline void DoNothing(const scoped_refptr<T>& object) {}
 // callback goes out of scope. If the returned callback is copied, the
 // reference will be released when the last callback goes out of scope.
 template <class ObjectT>
-static inline Callback0<void> KeepRefUntilDone(ObjectT* object) {
+static inline std::function<void()> KeepRefUntilDone(ObjectT* object) {
   return rtc::Bind(&impl::DoNothing<ObjectT>, scoped_refptr<ObjectT>(object));
 }
 
 template <class ObjectT>
-static inline Callback0<void> KeepRefUntilDone(
+static inline std::function<void()> KeepRefUntilDone(
     const scoped_refptr<ObjectT>& object) {
   return rtc::Bind(&impl::DoNothing<ObjectT>, object);
 }
