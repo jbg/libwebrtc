@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5f19e17_9b29676f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2021-01-11T14:23:43Z",
+      "side": 1,
+      "message": "Would be helpful to mention either here or in the bug what the new behaviour will be. i.e. Will all decoders behave be assumed to prefer late decoding? And what has changed to allow to do this now.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "c0d499ec6f81f1184ebc3cf50a7b07a226bdfa55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdcb22b8_9d8e4cdf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2021-01-11T14:23:43Z",
+      "side": 1,
+      "message": "Possibly webrtc:12271?",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "c0d499ec6f81f1184ebc3cf50a7b07a226bdfa55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8218c1d5_c5580a80",
@@ -14,6 +60,29 @@
       "writtenOn": "2021-01-07T15:19:36Z",
       "side": 1,
       "message": "Christoffer, PTAL at api/\nSami, PTAL at sdk/android*\n\n",
+      "revId": "c0d499ec6f81f1184ebc3cf50a7b07a226bdfa55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b5fe8b5_94e51a2a",
+        "filename": "sdk/android/api/org/webrtc/VideoDecoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2021-01-11T14:23:43Z",
+      "side": 1,
+      "message": "Can we also remove the wrapping if this is no longer called?\n\nhttps://source.corp.google.com/piper///depot/google3/third_party/webrtc/files/stable/webrtc/sdk/android/src/jni/video_decoder_wrapper.cc;l\u003d149?q\u003dvideo_decoder_wrapper",
+      "range": {
+        "startLine": 95,
+        "startChar": 18,
+        "endLine": 95,
+        "endChar": 40
+      },
       "revId": "c0d499ec6f81f1184ebc3cf50a7b07a226bdfa55",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
