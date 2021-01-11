@@ -16,6 +16,47 @@
       "message": "Danil, can you have a first look? I\u0027m not sure exactly how lambdas are converted to Callback0, but I would expect that the copy-captured refpointers get the right life time.",
       "revId": "ea1e3e17f6d126f44f40dde88133869494924cd2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd77ce57_fc7331f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-01-11T11:54:28Z",
+      "side": 1,
+      "message": "I checked how Callback0 capture functor, yes, it seems captures should be saved by value.",
+      "parentUuid": "8a674612_cbab5032",
+      "revId": "ea1e3e17f6d126f44f40dde88133869494924cd2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3d1622_bebdc97f",
+        "filename": "common_video/libyuv/webrtc_libyuv.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-01-11T11:54:28Z",
+      "side": 1,
+      "message": "personally I prefer to avoid \u0027()\u0027 in lambda when possible, like in this case.\nbut if you think it keeps it clearer it is an empty lambda, keep it.",
+      "range": {
+        "startLine": 159,
+        "startChar": 30,
+        "endLine": 159,
+        "endChar": 32
+      },
+      "revId": "ea1e3e17f6d126f44f40dde88133869494924cd2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
