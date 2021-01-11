@@ -44,6 +44,23 @@ class RtcEventBweUpdateDelayBased final : public RtcEvent {
   const BandwidthUsage detector_state_;
 };
 
+struct LoggedBweDelayBasedUpdate {
+  LoggedBweDelayBasedUpdate() = default;
+  LoggedBweDelayBasedUpdate(int64_t timestamp_us,
+                            int32_t bitrate_bps,
+                            BandwidthUsage detector_state)
+      : timestamp_us(timestamp_us),
+        bitrate_bps(bitrate_bps),
+        detector_state(detector_state) {}
+
+  int64_t log_time_us() const { return timestamp_us; }
+  int64_t log_time_ms() const { return timestamp_us / 1000; }
+
+  int64_t timestamp_us;
+  int32_t bitrate_bps;
+  BandwidthUsage detector_state;
+};
+
 }  // namespace webrtc
 
 #endif  // LOGGING_RTC_EVENT_LOG_EVENTS_RTC_EVENT_BWE_UPDATE_DELAY_BASED_H_
