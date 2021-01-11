@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c926cfc_9e2f773e",
+        "filename": "modules/pacing/round_robin_packet_queue.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-01-11T16:19:15Z",
+      "side": 0,
+      "message": "Just stumbled upon this CL, this map does not need to sorted (but changing that is maybe better done in another CL).",
+      "range": {
+        "startLine": 166,
+        "startChar": 7,
+        "endLine": 166,
+        "endChar": 10
+      },
+      "revId": "6afa794b6ec89afa98d447f6792467591c9dfa3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
