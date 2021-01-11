@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97ad9791_bc9bed1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-01-11T14:38:38Z",
+      "side": 1,
+      "message": "Sorry, should have added more context to begin with, updated.",
+      "parentUuid": "c5f19e17_9b29676f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "c0d499ec6f81f1184ebc3cf50a7b07a226bdfa55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdcb22b8_9d8e4cdf",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-11T14:23:43Z",
       "side": 1,
       "message": "Possibly webrtc:12271?",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "c0d499ec6f81f1184ebc3cf50a7b07a226bdfa55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a6a0e0f_973f668b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-01-11T14:38:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdcb22b8_9d8e4cdf",
       "range": {
         "startLine": 9,
         "startChar": 5,
@@ -77,6 +125,30 @@
       "writtenOn": "2021-01-11T14:23:43Z",
       "side": 1,
       "message": "Can we also remove the wrapping if this is no longer called?\n\nhttps://source.corp.google.com/piper///depot/google3/third_party/webrtc/files/stable/webrtc/sdk/android/src/jni/video_decoder_wrapper.cc;l\u003d149?q\u003dvideo_decoder_wrapper",
+      "range": {
+        "startLine": 95,
+        "startChar": 18,
+        "endLine": 95,
+        "endChar": 40
+      },
+      "revId": "c0d499ec6f81f1184ebc3cf50a7b07a226bdfa55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7549ea_29572439",
+        "filename": "sdk/android/api/org/webrtc/VideoDecoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-01-11T14:38:38Z",
+      "side": 1,
+      "message": "Can\u0027t remove it yet since it would cause the generated jni function to become unused, which leads to a compiler error.",
+      "parentUuid": "9b5fe8b5_94e51a2a",
       "range": {
         "startLine": 95,
         "startChar": 18,
