@@ -186,6 +186,31 @@ constexpr int kInactiveStreamThresholdMs = 600000;  //  10 minutes.
 
 }  // namespace
 
+int DetermineMaxWaitForFrame(const VideoReceiveStream::Config& config,
+                             bool is_keyframe) {
+  // TODO: apply some fancy formula? What is the relationship between
+  // rtp_history_ms and the max_wait_for_frame?
+  // TODO: the default rtp_history_ms is 1000 while max_wait_for_frame was/is
+  // 3000.
+  //    How to avoid changing this unintentionally?
+  // TODO: rtp_history_ms can be 0 if NACK is disabled. 0 is not a good idea for
+  // the max wait time probably.
+  auto wait_time_from_field_trial =
+      is_keyframe ? KeyframeIntervalSettings::ParseFromFieldTrials()
+                        .MaxWaitForKeyframeMs()
+                  : KeyframeIntervalSettings::ParseFromFieldTrials()
+                        .MaxWaitForFrameMs();
+  if (wait_time_from_field_trial) {
+    return *wait_time_from_field_trial;
+  } else if (config.rtp.nack.rtp_history_ms > 0 &&
+             config.rtp.nack.rtp_history_ms < kMaxWaitForFrameMs) {
+    return config.rtp.nack.rtp_history_ms;
+  } else if (is_keyframe) {
+    return VideoReceiveStream2::kMaxWaitForKeyFrameMs;
+  }
+  return kMaxWaitForFrameMs;
+}
+
 VideoReceiveStream2::VideoReceiveStream2(
     TaskQueueFactory* task_queue_factory,
     TaskQueueBase* current_queue,
@@ -225,12 +250,8 @@ VideoReceiveStream2::VideoReceiveStream2(
                                  config_.frame_decryptor,
                                  config_.frame_transformer),
       rtp_stream_sync_(current_queue, this),
-      max_wait_for_keyframe_ms_(KeyframeIntervalSettings::ParseFromFieldTrials()
-                                    .MaxWaitForKeyframeMs()
-                                    .value_or(kMaxWaitForKeyFrameMs)),
-      max_wait_for_frame_ms_(KeyframeIntervalSettings::ParseFromFieldTrials()
-                                 .MaxWaitForFrameMs()
-                                 .value_or(kMaxWaitForFrameMs)),
+      max_wait_for_keyframe_ms_(DetermineMaxWaitForFrame(config, true)),
+      max_wait_for_frame_ms_(DetermineMaxWaitForFrame(config, false)),
       low_latency_renderer_enabled_("enabled", true),
       low_latency_renderer_include_predecode_buffer_("include_predecode_buffer",
                                                      true),

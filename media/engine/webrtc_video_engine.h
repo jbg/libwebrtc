@@ -273,6 +273,7 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     webrtc::UlpfecConfig ulpfec;
     int flexfec_payload_type;  // -1 if absent.
     int rtx_payload_type;      // -1 if absent.
+    int rtx_time;              // -1 if absent.
   };
 
   struct ChangedSendParameters {
