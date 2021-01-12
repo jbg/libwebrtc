@@ -11,13 +11,13 @@
 #ifndef P2P_STUNPROBER_STUN_PROBER_H_
 #define P2P_STUNPROBER_STUN_PROBER_H_
 
+#include <functional>
 #include <set>
 #include <string>
 #include <vector>
 
 #include "rtc_base/async_invoker.h"
 #include "rtc_base/byte_buffer.h"
-#include "rtc_base/callback.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/ip_address.h"
 #include "rtc_base/network.h"
@@ -40,7 +40,7 @@ class StunProber;
 
 static const int kMaxUdpBufferSize = 1200;
 
-typedef rtc::Callback2<void, StunProber*, int> AsyncCallback;
+using AsyncCallback = std::function<void(StunProber*, int)>;
 
 enum NatType {
   NATTYPE_INVALID,

@@ -1047,7 +1047,6 @@ rtc_library("rtc_base") {
     public_configs += [ ":rtc_base_chromium_config" ]
   } else {
     sources += [
-      "callback.h",
       "log_sinks.cc",
       "log_sinks.h",
       "rolling_accumulator.h",
@@ -1489,7 +1488,6 @@ if (rtc_include_tests) {
     defines = []
 
     sources = [
-      "callback_unittest.cc",
       "crc32_unittest.cc",
       "data_rate_limiter_unittest.cc",
       "deprecated/signal_thread_unittest.cc",
