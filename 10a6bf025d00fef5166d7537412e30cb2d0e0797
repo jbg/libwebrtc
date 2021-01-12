@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "921634a7_16db0e2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-01-12T15:56:06Z",
+      "side": 1,
+      "message": "Tommi suggested reverting, to stick with stricter tq requirements for the time being.",
+      "revId": "10a6bf025d00fef5166d7537412e30cb2d0e0797",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
