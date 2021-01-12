@@ -16,6 +16,52 @@
       "message": "Hi Mirko, can you PTAL at this CL that adds to rtc_base/win?",
       "revId": "4afd0f7fb7baba58212de3991ff0e8277f5409d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "828a9e67_7f1c672a",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-12T12:28:46Z",
+      "side": 1,
+      "message": "Should this be behind a `rtc_enable_win_wgc` check?\n\nIf I remember correctly, `rtc_enable_win_wgc` was introduced because some clients don\u0027t have WGC and this might break them at compile time.",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 130,
+        "endChar": 37
+      },
+      "revId": "4afd0f7fb7baba58212de3991ff0e8277f5409d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498cf9e2_fdbdfbee",
+        "filename": "rtc_base/win/create_direct3d_device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-12T12:28:46Z",
+      "side": 1,
+      "message": "Should these be lowercase?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "4afd0f7fb7baba58212de3991ff0e8277f5409d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
