@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07b77916_7cb6cdd1",
+        "filename": "common_audio/signal_processing/min_max_operations_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-01-13T15:35:11Z",
+      "side": 1,
+      "message": "Note that this is a merged version of the WebRtcSpl_MinW16Neon and WebRtcSpl_MaxW16Neon functions.",
+      "range": {
+        "startLine": 285,
+        "startChar": 5,
+        "endLine": 285,
+        "endChar": 28
+      },
+      "revId": "7480860ee5fd4e16bfe413907811f32c42283f71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f03a76bd_ab7ee1d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-01-13T15:35:11Z",
+      "side": 1,
+      "message": "Hi Henrik, PTAL at this CL to optimize the previous changes.",
+      "revId": "6e050783eabc92beb39b72d572ec36c2cf4c3575",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
