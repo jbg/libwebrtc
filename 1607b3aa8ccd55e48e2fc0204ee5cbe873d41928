@@ -34,6 +34,24 @@
       "parentUuid": "40708708_ec9ceba9",
       "revId": "1607b3aa8ccd55e48e2fc0204ee5cbe873d41928",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf4b546_b6bb35bc",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4057,
+      "author": {
+        "id": 5686
+      },
+      "writtenOn": "2021-01-13T23:17:16Z",
+      "side": 0,
+      "message": "This is a regression test for a specific crash, not just a generic test for attributes being ignored. You could leave the test, but stop caring about what line the error is on, or we could just depend on the fuzzer filing another bug if there is a regression.",
+      "parentUuid": "776452c7_fefe4fba",
+      "revId": "1607b3aa8ccd55e48e2fc0204ee5cbe873d41928",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
