@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96e79530_dae66304",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-13T12:32:50Z",
+      "side": 1,
+      "message": "Please verify that the usage of the stats API looks sensible.\n",
+      "revId": "4a131a8f256b8c88b196c1ae93a8df816bb9f672",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
