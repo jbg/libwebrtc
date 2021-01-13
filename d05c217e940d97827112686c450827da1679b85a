@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33b27bb9_eba818b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-01-13T11:42:21Z",
+      "side": 1,
+      "message": "My understanding of video_receive_stream is that it sits at the \"right\" end of the video pipeline (with the network on the left) and polls frames with a timeout. If it does not get a frame within that timeout it will send a PLI.\nNACKs are done by the nack module which will retry a certain number of times before giving up on that. To my surprise giving up doesn\u0027t trigger a PLI but in practice the PLI has already been sent because of the timeout here.\n\nexpected_arrival_time + rtx time is an upper bound for the wait time. Taking the RTT into account would be great (here and in the NACK module) but impact would be hard to test + evaluate - which I assume is the reason for the field trial flags.\n\nControlling it via sdp allows different use-cases to tune this differently.",
+      "parentUuid": "02495e85_21fff9a3",
+      "revId": "d05c217e940d97827112686c450827da1679b85a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e2d7a98_176e9696",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2021-01-13T08:28:17Z",
       "side": 1,
       "message": "nit: determined by the sender.\nAdd RFC reference?",
+      "revId": "d05c217e940d97827112686c450827da1679b85a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bda75b3_29ec43e9",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-01-13T11:42:21Z",
+      "side": 1,
+      "message": "Done (locally)",
+      "parentUuid": "9e2d7a98_176e9696",
       "revId": "d05c217e940d97827112686c450827da1679b85a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e7c024a_cbc4b41c",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2897,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-01-13T11:42:21Z",
+      "side": 1,
+      "message": "we don\u0027t have access to the send_codec here. See above (conveniently) for where this is called. Happy to add an additional rtx_time parameter but the use-case for that is not quite likely as it basically only happens in the following case:\n1/ negotiating nack + rtx-time\n2/ not negotiating nack\n3/ negotiating nack + rtx-time\nwhich... doesn\u0027t make much sense.",
+      "parentUuid": "b8235dae_221c4e49",
+      "revId": "d05c217e940d97827112686c450827da1679b85a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdf960ce_6c7598c7",
         "filename": "media/engine/webrtc_video_engine.h",
         "patchSetId": 2
@@ -65,6 +119,24 @@
       "writtenOn": "2021-01-13T08:28:17Z",
       "side": 1,
       "message": "-1 if absent is so last year ... wdyt about absl::optional\u003cint\u003e?",
+      "revId": "d05c217e940d97827112686c450827da1679b85a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df0db8c1_85d6cc0a",
+        "filename": "media/engine/webrtc_video_engine.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-01-13T11:42:21Z",
+      "side": 1,
+      "message": "I like how you\u0027re thinking but would prefer to keep the current style and then switch style for all of them later.",
+      "parentUuid": "cdf960ce_6c7598c7",
       "revId": "d05c217e940d97827112686c450827da1679b85a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
