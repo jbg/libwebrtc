@@ -24,6 +24,7 @@ const MaxValueW16 WebRtcSpl_MaxValueW16 = WebRtcSpl_MaxValueW16Neon;
 const MaxValueW32 WebRtcSpl_MaxValueW32 = WebRtcSpl_MaxValueW32Neon;
 const MinValueW16 WebRtcSpl_MinValueW16 = WebRtcSpl_MinValueW16Neon;
 const MinValueW32 WebRtcSpl_MinValueW32 = WebRtcSpl_MinValueW32Neon;
+const MinMaxValueW16 WebRtcSpl_MinMaxValueW16 = WebRtcSpl_MinMaxW16Neon;
 const CrossCorrelation WebRtcSpl_CrossCorrelation =
     WebRtcSpl_CrossCorrelationNeon;
 const DownsampleFast WebRtcSpl_DownsampleFast = WebRtcSpl_DownsampleFastNeon;
@@ -43,6 +44,8 @@ const MaxValueW16 WebRtcSpl_MaxValueW16 = WebRtcSpl_MaxValueW16_mips;
 const MaxValueW32 WebRtcSpl_MaxValueW32 = WebRtcSpl_MaxValueW32_mips;
 const MinValueW16 WebRtcSpl_MinValueW16 = WebRtcSpl_MinValueW16_mips;
 const MinValueW32 WebRtcSpl_MinValueW32 = WebRtcSpl_MinValueW32_mips;
+// MinMax does not have a mips-specific version, so use the normal C version.
+const MinMaxValueW16 WebRtcSpl_MinMaxValueW16 = WebRtcSpl_MinMaxW16C;
 const CrossCorrelation WebRtcSpl_CrossCorrelation =
     WebRtcSpl_CrossCorrelation_mips;
 const DownsampleFast WebRtcSpl_DownsampleFast = WebRtcSpl_DownsampleFast_mips;
@@ -61,6 +64,7 @@ const MaxValueW16 WebRtcSpl_MaxValueW16 = WebRtcSpl_MaxValueW16C;
 const MaxValueW32 WebRtcSpl_MaxValueW32 = WebRtcSpl_MaxValueW32C;
 const MinValueW16 WebRtcSpl_MinValueW16 = WebRtcSpl_MinValueW16C;
 const MinValueW32 WebRtcSpl_MinValueW32 = WebRtcSpl_MinValueW32C;
+const MinMaxValueW16 WebRtcSpl_MinMaxValueW16 = WebRtcSpl_MinMaxW16C;
 const CrossCorrelation WebRtcSpl_CrossCorrelation = WebRtcSpl_CrossCorrelationC;
 const DownsampleFast WebRtcSpl_DownsampleFast = WebRtcSpl_DownsampleFastC;
 const ScaleAndAddVectorsWithRound WebRtcSpl_ScaleAndAddVectorsWithRound =
