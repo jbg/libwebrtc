@@ -7,7 +7,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'c0feffab8f0f8d5a58135c3a558f78fd68484a8d',
+  'chromium_revision': 'f97f2a1931bc754880b39938886808fa38963cfd',
 }
 
 deps = {
@@ -25,13 +25,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@12c4ed07250eb3608bd3d3bf8ac0e93c2df13b51',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@77c2ca9e4edacf338be16ec505c5d49405072975',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@625f96962613f3a1abea947b2cf8e09257d34e2f',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@b96eee2446ab767c5b50ba9272c0ece198f36dba',
+    'https://chromium.googlesource.com/chromium/src/third_party@b3589922316e8e7bfbe068a8b32fba8e72069c2b',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -122,7 +122,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@e3d485f73f5836fdd6fb287ab96973c4f63175e1',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@3889691dd695c91c212b36d857d73089cb1b8f53',
+    'https://chromium.googlesource.com/catapult.git@178c01be65a4a5458769084606cbc6504dde10f7',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
@@ -190,7 +190,7 @@ deps = {
   'src/third_party/libFuzzer/src':
     'https://chromium.googlesource.com/chromium/llvm-project/compiler-rt/lib/fuzzer.git@debe7d2d1982e540fbd6bd78604bf001753f9e74',
   'src/third_party/libjpeg_turbo':
-    'https://chromium.googlesource.com/chromium/deps/libjpeg_turbo.git@09efc26aff7983f4377a1743a197ca3d74796d7d',
+    'https://chromium.googlesource.com/chromium/deps/libjpeg_turbo.git@518d81558c797486e125e37cb529d65b560a6ea0',
   'src/third_party/libsrtp':
     'https://chromium.googlesource.com/chromium/deps/libsrtp.git@7990ca64c616b150a9cb4714601c4a3b0c84fe91',
   'src/third_party/libaom/source/libaom':
@@ -257,7 +257,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@6714db14bf9c4513d6b65d4ed7eb88a6602518fe',
+    'https://chromium.googlesource.com/chromium/src/tools@44b81bbd969d51e3c005f3bef15c9f5751e78a10',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@1a072711d4388c62e02480fabc26c68c24494be9',
 
