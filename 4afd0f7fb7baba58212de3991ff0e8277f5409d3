@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab211f1_06a94bff",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-01-13T20:02:07Z",
+      "side": 1,
+      "message": "We do not need this here, since we are only using Windows.Graphics.Capture.Interop for the IDirect3DDevice data type, which has been included in the SDK since July 2015. \n\nWe need that check elsewhere because we use a GraphicsCaptureSession API that was only added in 19041.\n\nGood to double check though, thanks for asking!",
+      "parentUuid": "828a9e67_7f1c672a",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 130,
+        "endChar": 37
+      },
+      "revId": "4afd0f7fb7baba58212de3991ff0e8277f5409d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "498cf9e2_fdbdfbee",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-12T12:28:46Z",
       "side": 1,
       "message": "Should these be lowercase?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "4afd0f7fb7baba58212de3991ff0e8277f5409d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f1f69ec_de21c85b",
+        "filename": "rtc_base/win/create_direct3d_device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-01-13T20:02:07Z",
+      "side": 1,
+      "message": "Yes, no reason to have to uppercase.",
+      "parentUuid": "498cf9e2_fdbdfbee",
       "range": {
         "startLine": 14,
         "startChar": 0,
