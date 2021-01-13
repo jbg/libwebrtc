@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02495e85_21fff9a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-13T08:28:17Z",
+      "side": 1,
+      "message": "Hm. I\u0027m not sure I understand.\n\nFrom the description in RFC 4588, I read this as saying that rtx-time gives the time by which it doesn\u0027t make sense to send NAK any more, because the sender will have thrown away the packet from its possible-retransmit buffers. So at that point, the receiver should request a keyframe rather than sending a packet NACK.\n\nIn the interval \u003cexpected arrival time, expected arrival time + rtx-time - RTT/2\u003e, it makes sense to send NACK and hope to get a retransmission, avoiding the need to request a new keyframe. Or, if redundant encoding is in use, just wait and hope that the gap will be covered by a redundant transmission.\n\nBut I don\u0027t understand what the actual effect of specifying rtx-time is in this CL.\n\nApart from that, nits.",
+      "revId": "d05c217e940d97827112686c450827da1679b85a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e2d7a98_176e9696",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-13T08:28:17Z",
+      "side": 1,
+      "message": "nit: determined by the sender.\nAdd RFC reference?",
+      "revId": "d05c217e940d97827112686c450827da1679b85a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8235dae_221c4e49",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2897,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-13T08:28:17Z",
+      "side": 1,
+      "message": "I don\u0027t understand the problem .... either the renegotiation includes rtx-time (in which case the new SDP has it), or it doesn\u0027t (and we should reset to default).\nCare to explain more?",
+      "revId": "d05c217e940d97827112686c450827da1679b85a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdf960ce_6c7598c7",
+        "filename": "media/engine/webrtc_video_engine.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-13T08:28:17Z",
+      "side": 1,
+      "message": "-1 if absent is so last year ... wdyt about absl::optional\u003cint\u003e?",
+      "revId": "d05c217e940d97827112686c450827da1679b85a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "638d762b_ab81c6f5",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-13T08:28:17Z",
+      "side": 1,
+      "message": "I\u0027m still unclear about how this value is used. See top level comment.",
+      "revId": "d05c217e940d97827112686c450827da1679b85a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
