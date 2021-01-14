@@ -16,6 +16,24 @@
       "message": "I am not sure why I have done this in two steps, probably one CL was enough?\n\nOr are there places I am not aware of that requires an update?",
       "revId": "91040788e8368485d771a8e52c1241f3f89b5fab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e663ec2e_071cc372",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6758
+      },
+      "writtenOn": "2021-01-14T22:45:00Z",
+      "side": 1,
+      "message": "We needed two CLs on the chromium CL because the recipe was using the flag, so we had a 2-sided change.",
+      "parentUuid": "6984bd0e_f4814c77",
+      "revId": "91040788e8368485d771a8e52c1241f3f89b5fab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
