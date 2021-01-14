@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee3c2a4d_81e068f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2021-01-14T23:18:13Z",
+      "side": 1,
+      "message": "Please review the change on mock class. Thank you.",
+      "revId": "c4d8873258eaf9c56a3cfee3bfa0e9bfc95e58ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
