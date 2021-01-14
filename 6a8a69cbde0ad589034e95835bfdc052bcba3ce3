@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "6a8a69cbde0ad589034e95835bfdc052bcba3ce3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b33d420f_a836c4c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-01-14T13:45:30Z",
+      "side": 1,
+      "message": "LGTM % comment (But that isn\u0027t directly related to this CL)",
+      "revId": "6a8a69cbde0ad589034e95835bfdc052bcba3ce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
