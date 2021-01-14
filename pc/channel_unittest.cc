@@ -1346,6 +1346,69 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
     VerifySimulcastStreamParams(content3.streams()[0], channel1_.get());
   }
 
+  // Verifies that if a stream is being removed by SetRemoteContent, any packets
+  // for that stream that may have built up in the worker thread's queue are
+  // discarded, rather than being delivered to the media channel which no longer
+  // knows about the stream. Regression test for crbug.com/webrtc/12258.
+  void TestLatePacketsNotDeliveredWhenStreamRemoved() {
+    cricket::StreamParams stream;
+    stream.groupid = "group";
+    stream.id = "stream";
+    stream.ssrcs.push_back(kSsrc1);
+    stream.cname = "cname";
+
+    // Setup a call where channel 1 sends |stream| to channel 2.
+    CreateChannels(0, 0);
+    typename T::Content content1;
+    CreateContent(0, kPcmuCodec, kH264Codec, &content1);
+    content1.AddStream(stream);
+    EXPECT_TRUE(
+        channel1_->SetLocalContent(&content1, SdpType::kOffer, nullptr));
+    EXPECT_TRUE(channel1_->UpdateRtpTransport(nullptr));
+    EXPECT_TRUE(channel1_->Enable(true));
+    EXPECT_EQ(1u, media_channel1_->send_streams().size());
+    EXPECT_TRUE(
+        channel2_->SetRemoteContent(&content1, SdpType::kOffer, nullptr));
+    EXPECT_TRUE(channel2_->UpdateRtpTransport(nullptr));
+    EXPECT_EQ(1u, media_channel2_->recv_streams().size());
+    ConnectFakeTransports();
+
+    // Channel 2 does not send anything.
+    typename T::Content content2;
+    CreateContent(0, kPcmuCodec, kH264Codec, &content2);
+    EXPECT_TRUE(
+        channel1_->SetRemoteContent(&content2, SdpType::kAnswer, nullptr));
+    EXPECT_TRUE(channel1_->UpdateRtpTransport(nullptr));
+    EXPECT_EQ(0u, media_channel1_->recv_streams().size());
+    EXPECT_TRUE(
+        channel2_->SetLocalContent(&content2, SdpType::kAnswer, nullptr));
+    EXPECT_TRUE(channel2_->UpdateRtpTransport(nullptr));
+    EXPECT_TRUE(channel2_->Enable(true));
+    EXPECT_EQ(0u, media_channel2_->send_streams().size());
+
+    // Sanity check that we can currently send/receive packets.
+    SendCustomRtp1(kSsrc1, 0);
+    WaitForThreads();
+    EXPECT_TRUE(CheckCustomRtp2(kSsrc1, 0));
+
+    // Send another packet, and process the network thread but not the worker
+    // thread, which should cause the packet to be queued up on the worker
+    // thread.
+    SendCustomRtp1(kSsrc1, 1);
+    network_thread_->Invoke<void>(
+        RTC_FROM_HERE, [this] { ProcessThreadQueue(network_thread_); });
+    // Set a new remote content that removes the stream, which should also
+    // remove the queued packet...
+    content1.mutable_streams().clear();
+    EXPECT_TRUE(
+        channel2_->SetRemoteContent(&content1, SdpType::kOffer, nullptr));
+    EXPECT_TRUE(channel2_->UpdateRtpTransport(nullptr));
+    // ... meaning that if we now process the worker thread's queue, the packet
+    // won't be delivered.
+    WaitForThreads();
+    EXPECT_TRUE(CheckNoRtp2());
+  }
+
  protected:
   void WaitForThreads() { WaitForThreads(rtc::ArrayView<rtc::Thread*>()); }
   static void ProcessThreadQueue(rtc::Thread* thread) {
@@ -2253,6 +2316,11 @@ TEST_F(VideoChannelDoubleThreadTest, DefaultMaxBitrateIsUnlimited) {
 
 TEST_F(VideoChannelDoubleThreadTest, SocketOptionsMergedOnSetTransport) {
   Base::SocketOptionsMergedOnSetTransport();
+}
+
+TEST_F(VideoChannelDoubleThreadTest,
+       TestLatePacketsNotDeliveredWhenStreamRemoved) {
+  Base::TestLatePacketsNotDeliveredWhenStreamRemoved();
 }
 
 // RtpDataChannelSingleThreadTest
