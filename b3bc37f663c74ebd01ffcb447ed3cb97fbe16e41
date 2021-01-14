@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2234993c_c57aff57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-14T08:28:02Z",
+      "side": 1,
+      "message": "One comment, non blocking if this CL unblocks you on the other one.",
+      "revId": "b3bc37f663c74ebd01ffcb447ed3cb97fbe16e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dc3d366_53f4931b",
+        "filename": "test/network/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-14T08:28:02Z",
+      "side": 1,
+      "message": "I wonder if this should also be inside the if...\n\nProbably there are a bunch of targets here and there that might benefit from this.",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 0
+      },
+      "revId": "b3bc37f663c74ebd01ffcb447ed3cb97fbe16e41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
