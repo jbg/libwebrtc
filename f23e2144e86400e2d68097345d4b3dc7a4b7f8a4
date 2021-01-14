@@ -46,6 +46,30 @@
       },
       "revId": "f23e2144e86400e2d68097345d4b3dc7a4b7f8a4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aecab7c1_bd9b9480",
+        "filename": "logging/rtc_event_log/fake_rtc_event_log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-01-14T16:55:48Z",
+      "side": 0,
+      "message": "I think someone added this for integration tests of the wireup of ICE logging, but I\u0027m not sure. With a mutex, I don\u0027t really see the need for a separate thread at all, but I could be missing something.\n\nLet\u0027s continue the discussion, but let\u0027s not block this CL, as the issue seems unrelated.",
+      "parentUuid": "3bcc6346_52e56ae1",
+      "range": {
+        "startLine": 36,
+        "startChar": 32,
+        "endLine": 36,
+        "endChar": 38
+      },
+      "revId": "f23e2144e86400e2d68097345d4b3dc7a4b7f8a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
