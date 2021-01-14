@@ -16,6 +16,40 @@
       "message": "Harald, did you want to look at the redesigned version of this or should I go ahead and submit?",
       "revId": "5e9be5ffa6c02cf7c57353bf3f99effd8bbfb697",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdea6c49_62a3b477",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-14T07:04:12Z",
+      "side": 1,
+      "message": "Code looks good, but still worried about the possibility of races on demuxer_criteria_version_.",
+      "revId": "5e9be5ffa6c02cf7c57353bf3f99effd8bbfb697",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04366a66_cf23cef8",
+        "filename": "pc/channel.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-14T07:04:12Z",
+      "side": 1,
+      "message": "Is this comment still true, given that previous-demuxer_criteria_ introduced in this CL are accessed only on the network thread?\nCan you make that one RTC_GUARDED_BY(network_thread) and update the comment?\n\nMore invasive: Can we make demuxer_criteria_version_ std::atomic\u003c\u003e and make the thread-crossing harmless?",
+      "revId": "5e9be5ffa6c02cf7c57353bf3f99effd8bbfb697",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
