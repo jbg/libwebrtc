@@ -33,6 +33,23 @@
       "message": "It looks fine to me but I am not an owner of the media/ package.",
       "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fbbb5b7_25ae7595",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-15T09:50:23Z",
+      "side": 1,
+      "message": "Just read the comment on https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d12370 :) \n\nLet me reply there.",
+      "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
