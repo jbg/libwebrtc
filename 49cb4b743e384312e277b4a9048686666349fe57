@@ -33,6 +33,23 @@
       "message": "lgtm. I wish we could just get rid of that automagic wrapping (i.e., behave as is NO_MAIN_THREAD_WRAPPIGN was defined unconditionally).",
       "revId": "49cb4b743e384312e277b4a9048686666349fe57",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64e4c5de_584f66ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-15T12:27:08Z",
+      "side": 1,
+      "message": "Ok, there was a TSan failures but it went away. I am going to run in a loop for a while just to be sure.",
+      "revId": "49cb4b743e384312e277b4a9048686666349fe57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
