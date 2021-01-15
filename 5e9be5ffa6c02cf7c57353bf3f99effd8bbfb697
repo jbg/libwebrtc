@@ -50,6 +50,24 @@
       "message": "Is this comment still true, given that previous-demuxer_criteria_ introduced in this CL are accessed only on the network thread?\nCan you make that one RTC_GUARDED_BY(network_thread) and update the comment?\n\nMore invasive: Can we make demuxer_criteria_version_ std::atomic\u003c\u003e and make the thread-crossing harmless?",
       "revId": "5e9be5ffa6c02cf7c57353bf3f99effd8bbfb697",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8f9c4a4_01af75ef",
+        "filename": "pc/channel.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-01-15T20:14:26Z",
+      "side": 1,
+      "message": "\u003e Can you make that one RTC_GUARDED_BY(network_thread) and update the comment?\n\nDone.\n\n\u003e Can we make demuxer_criteria_version_ std::atomic\u003c\u003e and make the thread-crossing harmless?\n\nIt doesn\u0027t actually need to be atomic; when it\u0027s modified on the network thread it\u0027s always from within an Invoke on the worker thread, meaning pthread_cond_signal/pthread_cond_wait provide memory barriers. If I understand this correctly: https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_12.",
+      "parentUuid": "04366a66_cf23cef8",
+      "revId": "5e9be5ffa6c02cf7c57353bf3f99effd8bbfb697",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
