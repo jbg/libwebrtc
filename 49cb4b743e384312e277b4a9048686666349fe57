@@ -50,6 +50,23 @@
       "message": "Ok, there was a TSan failures but it went away. I am going to run in a loop for a while just to be sure.",
       "revId": "49cb4b743e384312e277b4a9048686666349fe57",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "180ecd7a_5e906c23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-15T13:45:56Z",
+      "side": 1,
+      "message": "I cannot repro. hta@: feel free to review.",
+      "revId": "49cb4b743e384312e277b4a9048686666349fe57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
