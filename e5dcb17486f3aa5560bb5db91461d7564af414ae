@@ -85,6 +85,24 @@
       "message": "nisse, you seem to be around, can you take a look? (trying to not have favorite owners :-))\n",
       "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb3cda7_329445c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-01-15T10:14:19Z",
+      "side": 1,
+      "message": "I think it would make some sense to first move the media constants out rtc_media_base into it\u0027s own target, and merge the engine constants (this cl) after that.\n\nSo we don\u0027t have to replace existing dependencies on the small rtc_constants target with a dependency on the much larger rtc_media_base target.\n\nOr repurpose the existing rtc_constants target, i.e., move media_constants.* into that target.",
+      "parentUuid": "c2a994e3_1bf85afa",
+      "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
