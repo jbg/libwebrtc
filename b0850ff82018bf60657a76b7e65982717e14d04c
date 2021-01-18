@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d04faf2_109f2164",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-18T09:13:48Z",
+      "side": 1,
+      "message": "Should this be \"everything without a \"..2.*\" version\" instead of \"everything with a \"..2.*\" version\"?\n\nIf I understand correctly, we want to delete things without the \"2\" suffix in the mid-term.",
+      "parentUuid": "ef97650b_fe8482f3",
+      "revId": "b0850ff82018bf60657a76b7e65982717e14d04c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "89e43d7b_81a7a3be",
         "filename": "modules/rtp_rtcp/BUILD.gn",
         "patchSetId": 1
