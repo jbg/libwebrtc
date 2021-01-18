@@ -33,6 +33,24 @@
       "message": "Nice! Thanks for this CL!\nlgtm",
       "revId": "ebe900b0ca86bb12b394fcf7666fca2767020413",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ea879d4_262c391a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-01-18T10:29:01Z",
+      "side": 1,
+      "message": "had to use the constants *somewhere* at least ;-)",
+      "parentUuid": "e9cca586_2476d06c",
+      "revId": "ebe900b0ca86bb12b394fcf7666fca2767020413",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
