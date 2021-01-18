@@ -7,16 +7,16 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '18311e2720c3027c11321a8b5fa6ab0fdf30bd08',
+  'chromium_revision': 'a4daf9638853119e4109779561b7a7e4d5c07321',
 }
 
 deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@f7f5bac81fdf7acfaecc2cd99a06ff090565ac91',
+    'https://chromium.googlesource.com/chromium/src/base@842d268a414a2294659729ee48e8e7aed2be30c3',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@43dd2496951592fa103e98c29e69e1d3d1da18b7',
+    'https://chromium.googlesource.com/chromium/src/build@5e4c76e7780d7681aff5d19d2998790d3b2ae534',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@c38b5ab1c6f5a4913afe49709f7acde15229f400',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -25,13 +25,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@ad2e59ea457e25076ee99e851cf8e48eef57ca76',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@569ca1158524eb73bf61266b12be086a0276b900',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@ca81cc1c2148cc6fb62dd4139f2dc7a19301d66a',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@3ee03ddfde253208e6ae8b2e8debc459cd7d5393',
+    'https://chromium.googlesource.com/chromium/src/third_party@f9d6e2ebf38ed34d4a13cb7224674249cd1be81f',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -250,14 +250,14 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/third_party/usrsctp/usrsctplib':
-    'https://chromium.googlesource.com/external/github.com/sctplab/usrsctp@a3c3ef666b7a5e4c93ebae5a7462add6f86f5cf2',
+    'https://chromium.googlesource.com/external/github.com/sctplab/usrsctp@4191ca1784d8774dbf62d48ab9426c7311a91bc5',
   # Dependency used by libjpeg-turbo.
   'src/third_party/yasm/binaries': {
     'url': 'https://chromium.googlesource.com/chromium/deps/yasm/binaries.git@52f9b3f4b0aa06da24ef8b123058bb61ee468881',
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@c952341d24772111b9985c60a27fde13f89b7152',
+    'https://chromium.googlesource.com/chromium/src/tools@a2bdca00ef7d5ca0504545c0b4b71321a9076ffc',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@1a072711d4388c62e02480fabc26c68c24494be9',
 
