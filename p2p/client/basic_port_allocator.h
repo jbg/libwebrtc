@@ -19,6 +19,7 @@
 #include "p2p/base/port_allocator.h"
 #include "p2p/client/relay_port_factory_interface.h"
 #include "p2p/client/turn_port_factory.h"
+#include "rtc_base/callback_list.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/network.h"
 #include "rtc_base/system/rtc_export.h"
@@ -93,6 +94,7 @@ class RTC_EXPORT BasicPortAllocator : public PortAllocator {
 
   // This instance is created if caller does pass a factory.
   std::unique_ptr<RelayPortFactoryInterface> default_relay_port_factory_;
+  void OnPortDestroyed(PortInterface* port);
 };
 
 struct PortConfiguration;
