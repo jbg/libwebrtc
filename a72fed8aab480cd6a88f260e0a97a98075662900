@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89796baf_d9027299",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-18T11:45:55Z",
+      "side": 1,
+      "message": "LGTM, from a build config point of view this is a step forward.",
+      "revId": "a72fed8aab480cd6a88f260e0a97a98075662900",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
