@@ -121,6 +121,24 @@
       "parentUuid": "cfb3cda7_329445c2",
       "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "834a861f_80466154",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-01-18T17:52:01Z",
+      "side": 1,
+      "message": "would a public_dependency of rtc_media_base on the new rtc_constants (containing the merged media_constants.*) be ok in this case?",
+      "parentUuid": "f37fa919_f457feb3",
+      "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
