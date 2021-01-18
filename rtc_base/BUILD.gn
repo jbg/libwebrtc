@@ -68,6 +68,7 @@ rtc_source_set("callback_list") {
 rtc_library("rtc_base_approved") {
   visibility = [ "*" ]
   deps = [
+    ":callback_list",
     ":checks",
     ":rtc_task_queue",
     ":safe_compare",

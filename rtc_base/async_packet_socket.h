@@ -13,6 +13,7 @@
 
 #include <vector>
 
+#include "rtc_base/callback_list.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/dscp.h"
 #include "rtc_base/network/sent_packet.h"
@@ -109,6 +110,24 @@ class RTC_EXPORT AsyncPacketSocket : public sigslot::has_slots<> {
                    const int64_t&>
       SignalReadPacket;
 
+  // F: void(AsyncPacketSocket*,
+  //          const char*,
+  //          size_t,
+  //          const rtc::SocketAddress&*,
+  //          init64_t&?)
+  template <typename F>
+  void SubscribeReadPacket(F&& callback) {
+    read_packet_.AddReceiver(std::forward<F>(callback));
+  }
+
+  void SendReadPacket(AsyncPacketSocket* socket,
+                      const char* s,
+                      size_t size,
+                      const rtc::SocketAddress& address,
+                      const int64_t& packet_time_us) {
+    read_packet_.Send(socket, s, size, address, packet_time_us);
+  }
+
   // Emitted each time a packet is sent.
   sigslot::signal2<AsyncPacketSocket*, const SentPacket&> SignalSentPacket;
 
@@ -134,6 +153,15 @@ class RTC_EXPORT AsyncPacketSocket : public sigslot::has_slots<> {
 
  private:
   RTC_DISALLOW_COPY_AND_ASSIGN(AsyncPacketSocket);
+
+  webrtc::CallbackList<AsyncPacketSocket*,
+                       const char*,
+                       size_t,
+                       const SocketAddress&,
+                       // TODO(bugs.webrtc.org/9584): Change to passing the
+                       // int64_t timestamp by value.
+                       const int64_t&>
+      read_packet_;
 };
 
 void CopySocketInformationToPacketInfo(size_t packet_size_bytes,

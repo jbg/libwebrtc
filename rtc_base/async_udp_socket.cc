@@ -132,6 +132,8 @@ void AsyncUDPSocket::OnReadEvent(AsyncSocket* socket) {
   // If we did not, then we should resize our buffer to be large enough.
   SignalReadPacket(this, buf_, static_cast<size_t>(len), remote_addr,
                    (timestamp > -1 ? timestamp : TimeMicros()));
+  SendReadPacket(this, buf_, static_cast<size_t>(len), remote_addr,
+                 (timestamp > -1 ? timestamp : TimeMicros()));
 }
 
 void AsyncUDPSocket::OnWriteEvent(AsyncSocket* socket) {

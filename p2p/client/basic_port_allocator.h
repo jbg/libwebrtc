@@ -19,6 +19,7 @@
 #include "p2p/base/port_allocator.h"
 #include "p2p/client/relay_port_factory_interface.h"
 #include "p2p/client/turn_port_factory.h"
+#include "rtc_base/callback_list.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/network.h"
 #include "rtc_base/system/rtc_export.h"
@@ -93,6 +94,7 @@ class RTC_EXPORT BasicPortAllocator : public PortAllocator {
 
   // This instance is created if caller does pass a factory.
   std::unique_ptr<RelayPortFactoryInterface> default_relay_port_factory_;
+  void OnPortDestroyed(PortInterface* port);
 };
 
 struct PortConfiguration;
@@ -106,8 +108,9 @@ enum class SessionState {
               // process will be started.
 };
 
-class RTC_EXPORT BasicPortAllocatorSession : public PortAllocatorSession,
-                                             public rtc::MessageHandler {
+class RTC_EXPORT BasicPortAllocatorSession
+    : public PortAllocatorSession,
+      public rtc::MessageHandlerAutoCleanup {
  public:
   BasicPortAllocatorSession(BasicPortAllocator* allocator,
                             const std::string& content_name,
@@ -323,8 +326,7 @@ class TurnPort;
 
 // Performs the allocation of ports, in a sequenced (timed) manner, for a given
 // network and IP address.
-class AllocationSequence : public rtc::MessageHandler,
-                           public sigslot::has_slots<> {
+class AllocationSequence : public rtc::MessageHandlerAutoCleanup {
  public:
   enum State {
     kInit,       // Initial state.
@@ -369,7 +371,7 @@ class AllocationSequence : public rtc::MessageHandler,
   // its candidate discovery conclusion signal. Without this signal,
   // BasicPortAllocatorSession doesn't have any event to trigger signal. This
   // can also be achieved by starting timer in BPAS.
-  sigslot::signal1<AllocationSequence*> SignalPortAllocationComplete;
+  webrtc::CallbackList<AllocationSequence*> SignalPortAllocationComplete;
 
  protected:
   // For testing.

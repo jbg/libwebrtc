@@ -335,6 +335,8 @@ void AsyncTCPSocket::ProcessInput(char* data, size_t* len) {
 
     SignalReadPacket(this, data + kPacketLenSize, pkt_len, remote_addr,
                      TimeMicros());
+    SendReadPacket(this, data + kPacketLenSize, pkt_len, remote_addr,
+                   TimeMicros());
 
     *len -= kPacketLenSize + pkt_len;
     if (*len > 0) {
