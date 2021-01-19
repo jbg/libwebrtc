@@ -50,6 +50,24 @@
       "message": "Before submitting - can we have assurances around avoiding uaf?\n(temporarily -1ing in case of accidental submit)",
       "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7dcb788_e4bf3976",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-19T13:57:08Z",
+      "side": 1,
+      "message": "Yes, this is a great point and it is good we have the possibility to address this early in the process (it will make future refactoring easier).\n\nIn SigSlot, if I understand correctly, this is handled by the base class sigslot::has_slots\u003c\u003e which does this: https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/rtc_base/third_party/sigslot/sigslot.h;l\u003d496;drc\u003da4d873786f10eedd72de25ad0d94ad7c53c1f68a. So when a class with slots (a class that has methods connect()\u0027ed to signals) gets destroyed, it automatically disconnects all its slots. In this case, P2PTransportChannel \u003c-- IceTransportInternal \u003c-- PacketTransportInternal \u003c-- sigslot::has_slots\u003c\u003e.\n\nkwiberg@ has added the possibility to do something similar in https://webrtc-review.googlesource.com/c/src/+/195332, I think this CL might be the first one that needs to use it (the class keeps track of what it subscribes to and unsubscribes when it gets destroyed).\n\nOn the other hand, if we are 100% sure that the callback will always have a longer lifetime, we might want to avoid this. How can we signal this from a lifetime point of view? A comment is not good enough, while before we were paying for more locking and cleanup than we were aware of, we now need a way to make these things clear.",
+      "parentUuid": "0a90e333_034566ff",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
