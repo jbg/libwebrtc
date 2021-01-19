@@ -16,6 +16,23 @@
       "message": "Thanks Mirko.",
       "revId": "c96772a879ff5a25c03af0c5ec62b4bfd4792387",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e8e483d_35931cca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-01-19T11:06:36Z",
+      "side": 1,
+      "message": "are there some safeguards/guarantees in place to avoid uaf?\nBasically the risk of any of these callbacks being called when the \u0027this\u0027 object of the callback object has been deleted.",
+      "revId": "c96772a879ff5a25c03af0c5ec62b4bfd4792387",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
