@@ -153,6 +153,13 @@ bool RtcEventLogSource::Initialize(const ParsedRtcEventLog& parsed_log,
 
   // Fills in rtp_packets_ and audio_outputs_.
   event_processor.ProcessEventsInOrder();
+  std::cout << "Nr of audio playout events: "
+            << parsed_log.audio_playout_events().size()
+            << ", nr of rtp packets: "
+            << parsed_log.incoming_rtp_packets_by_ssrc()
+                   .front()
+                   .incoming_packets.size()
+            << std::endl;
 
   for (const auto& ssrc : ignored_ssrcs) {
     std::cout << "Ignoring GetAudio events from SSRC 0x" << std::hex << ssrc
