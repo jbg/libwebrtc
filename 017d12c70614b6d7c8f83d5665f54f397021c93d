@@ -34,6 +34,24 @@
       "parentUuid": "14faf49a_145b36f9",
       "revId": "017d12c70614b6d7c8f83d5665f54f397021c93d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f7666ca_e18fe414",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 13719
+      },
+      "writtenOn": "2021-01-19T09:15:41Z",
+      "side": 1,
+      "message": "Yes, you are right because we replace all the places with new listeners in webrtc internals.",
+      "parentUuid": "a46ba5c8_a0998d94",
+      "revId": "017d12c70614b6d7c8f83d5665f54f397021c93d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
