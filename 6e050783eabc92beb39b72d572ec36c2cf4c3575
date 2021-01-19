@@ -16,6 +16,23 @@
       "message": "Hi Henrik, PTAL at this CL to optimize the previous changes.",
       "revId": "6e050783eabc92beb39b72d572ec36c2cf4c3575",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e83e1dfe_44133def",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-01-19T10:29:09Z",
+      "side": 1,
+      "message": "Adding Per as alternative reviewer. PTAL!",
+      "revId": "6e050783eabc92beb39b72d572ec36c2cf4c3575",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
