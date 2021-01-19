@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b4cd9e9_f1cbd6f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-01-19T15:42:37Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "612ee92adc28f77e054448ccb0b0e6fb696e0571",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac51db5e_f91cf91b",
@@ -31,6 +48,30 @@
       "writtenOn": "2021-01-19T15:06:42Z",
       "side": 1,
       "message": "Is this, and the below, testing sufficient to test this? Are there any other cases that should be tested?",
+      "range": {
+        "startLine": 292,
+        "startChar": 2,
+        "endLine": 298,
+        "endChar": 0
+      },
+      "revId": "612ee92adc28f77e054448ccb0b0e6fb696e0571",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8805e98b_c1417cc2",
+        "filename": "common_audio/signal_processing/signal_processing_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-01-19T15:42:37Z",
+      "side": 1,
+      "message": "It\u0027s always hard to say if something is sufficiently tested, but I think these tests already cover the most challenging cases (those involving the max/min 16-bit values). Also none of our bit-exactness tests are broken by the CL, which is a good sign (the CrossCorrelationWithAutoShift function is used in many bit-exactness tests).\n\nI added some test cases below to test a single element vector and a two element vector. PTAL.",
+      "parentUuid": "ac51db5e_f91cf91b",
       "range": {
         "startLine": 292,
         "startChar": 2,
