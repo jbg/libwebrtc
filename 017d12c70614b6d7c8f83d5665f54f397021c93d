@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14faf49a_145b36f9",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 13719
+      },
+      "writtenOn": "2021-01-19T07:23:43Z",
+      "side": 1,
+      "message": "Should we just not to do it but send trigger this when we remove the sigslot ?",
+      "revId": "017d12c70614b6d7c8f83d5665f54f397021c93d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
