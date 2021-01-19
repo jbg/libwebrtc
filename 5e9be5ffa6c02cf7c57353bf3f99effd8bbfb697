@@ -68,6 +68,24 @@
       "parentUuid": "04366a66_cf23cef8",
       "revId": "5e9be5ffa6c02cf7c57353bf3f99effd8bbfb697",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39972dde_dc42c58b",
+        "filename": "pc/channel.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-19T15:51:55Z",
+      "side": 1,
+      "message": "OK, that may want to be described in a comment, since it takes quite a bit of code reading to discover this property.\n\nLooks good.",
+      "parentUuid": "b8f9c4a4_01af75ef",
+      "revId": "5e9be5ffa6c02cf7c57353bf3f99effd8bbfb697",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
