@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f42da58_252e616d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-19T08:37:25Z",
+      "side": 1,
+      "message": "Hi, ",
+      "revId": "f6b492f193b26966dabe416fd4740cd760a16d04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b992f33e_0c896a04",
+        "filename": "p2p/client/basic_port_allocator.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-19T08:37:25Z",
+      "side": 1,
+      "message": "Is this needed here?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 35
+      },
+      "revId": "f6b492f193b26966dabe416fd4740cd760a16d04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

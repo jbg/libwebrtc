@@ -16,6 +16,24 @@
       "message": "Should we just not to do it but send trigger this when we remove the sigslot ?",
       "revId": "017d12c70614b6d7c8f83d5665f54f397021c93d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a46ba5c8_a0998d94",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-19T08:37:25Z",
+      "side": 1,
+      "message": "I think we need both in the transition period because we need to notify WebRTC internals via CallbackList and downstream users with SigSlot. Then update the downstream to subscribe to the CallBackList instead of the SigSlot and only then we will be able to remove the SigSlot.\n\nDoes this make sense?",
+      "parentUuid": "14faf49a_145b36f9",
+      "revId": "017d12c70614b6d7c8f83d5665f54f397021c93d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
