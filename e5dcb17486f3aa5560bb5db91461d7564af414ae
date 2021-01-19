@@ -139,6 +139,24 @@
       "parentUuid": "f37fa919_f457feb3",
       "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c376846_3899f609",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-01-19T08:40:54Z",
+      "side": 1,
+      "message": "To me, it seems ok as a transition measure (but I\u0027m not 100% sure it will work with downstream builds, Mirko?), and we can update downstream dependencies later.\n\nThe alternative would be to first update the code that depends on rtc_media_base and needs the constants to also depend on the existing rtc_constants target.",
+      "parentUuid": "834a861f_80466154",
+      "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
