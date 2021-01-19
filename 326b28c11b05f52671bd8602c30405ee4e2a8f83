@@ -16,6 +16,23 @@
       "message": "Jonas, would you mind reviewing this instead of me? I have very little knowledge about this part of the code?",
       "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d59d73_d79b2c14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-01-19T12:44:36Z",
+      "side": 1,
+      "message": "LGTM on the actual patch.\n\nSome comment on the project/bug: sorry for being late to the party.\n\nThe \"old\" sigslot code had the nice feature of being easy to read as it was \nnamed similarly, and structured similarly.\nIs there a proposal on how that should be done wrt to CallbackList too ?\n\ne.g\n1) definition:\nsigslot SignalPortDestroyed \u003d\u003e port_destroyed_\ncomment: how about port_destroyed_callback_list_\n\n2) invokation:\nSignalPortDestroyed(args); \u003d\u003e port_destroyed_.Send(args);\ncomment: ok\n\n3) subscription\nSignalPortDestroyed.connect(args) \u003d\u003e MyClass::SubscribePortDestroyed()\ncomment: why not \"connect\" like before ?\n",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
