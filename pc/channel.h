@@ -366,10 +366,18 @@ class BaseChannel : public ChannelInterface,
 
   // Cached list of payload types, used if payload type demuxing is re-enabled.
   std::set<uint8_t> payload_types_ RTC_GUARDED_BY(worker_thread());
-  // TODO(bugs.webrtc.org/12239): These two variables are modified on the worker
+  // Previous registered criteria, used to avoid clearing SSRC->sink mappings
+  // and discarding packets when nothing is changing.
+  webrtc::RtpDemuxerCriteria previous_demuxer_criteria_
+      RTC_GUARDED_BY(network_thread());
+  // TODO(bugs.webrtc.org/12239): These three variables are modified on the
   // thread, accessed on the network thread in UpdateRtpTransport.
   webrtc::RtpDemuxerCriteria demuxer_criteria_;
+  // Version number associated with the current demux criteria. Used to drop
+  // packets that were demuxed using a previous version of the criteria.
+  uint32_t demuxer_criteria_version_ = 0;
   RtpHeaderExtensions receive_rtp_header_extensions_;
+
   // This generator is used to generate SSRCs for local streams.
   // This is needed in cases where SSRCs are not negotiated or set explicitly
   // like in Simulcast.
