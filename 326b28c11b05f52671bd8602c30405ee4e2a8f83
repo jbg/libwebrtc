@@ -86,6 +86,24 @@
       "parentUuid": "f7dcb788_e4bf3976",
       "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cae7c1c_97a167c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-01-20T13:47:48Z",
+      "side": 1,
+      "message": "One thing to consider is that there are at least a couple of design patterns that could be applied towards avoiding uaf. If we talk about a weakptr approach vs a registration token, the differences are:\n\nweak_ptr\n* Pointer is embedded in the callback\n* caller can generate a new weakptr instance per registration\n* no built in trip wires against registering the same callback more than once\n* callback always executes, weak pointer ensures it doesn\u0027t run if object deleted\n* threading concerns if any, taken care of by the weak ptr impl + callback\n* callback reference is actually never deleted and list of callbacks grows indefinitely.\n\nregistration token\n* caller is responsible for holding the token for every registration\n* token calls unregister when it goes out of scope\n* callback actually gets removed from the list of callbacks\n* threading responsibilities are on the callback architecture, not the caller\n* storing a registration token in a variable and registering again, would automatically unregister the previous registration. 1:1 token to callback mapping.",
+      "parentUuid": "4cb45c72_15974670",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
