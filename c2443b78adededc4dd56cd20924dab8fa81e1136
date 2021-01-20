@@ -16,6 +16,23 @@
       "message": "Thank you for suggestion. Changed as commented.",
       "revId": "c2443b78adededc4dd56cd20924dab8fa81e1136",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead48bdb_28ccbdb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-20T15:37:56Z",
+      "side": 1,
+      "message": "Yes, we need to add a new library in this case because api/voip/ files cannot be handled by a BUILD.gn file different from api/voip/BUILD.gn (presubmit protection against multiple BUILD.gn files owning the same set of files).\n\nNice catch Harald!",
+      "revId": "c2443b78adededc4dd56cd20924dab8fa81e1136",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
