@@ -16,6 +16,24 @@
       "message": "Let\u0027s land this (once rebased).\n\n",
       "revId": "85f101bb0393f67809fffab22c50f2249ac69dda",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff1e72ce_ce193b7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-01-20T01:30:02Z",
+      "side": 1,
+      "message": "Unfortunately, rebasing after this CL will be nontrivial:\nhttps://webrtc-review.googlesource.com/c/src/+/202242\n\nI\u0027d need to push the version down into the media engines, which would make this even messier. And it would just have to be rewritten again as more progress is made on that issue (11993).\n\nSince this is a niche issue and the client is already working around it, I think I\u0027ll put this on hold until 11993 resolves.",
+      "parentUuid": "b7d5e3d4_ad353759",
+      "revId": "85f101bb0393f67809fffab22c50f2249ac69dda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
