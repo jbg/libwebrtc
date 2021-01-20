@@ -104,6 +104,23 @@
       "parentUuid": "4cb45c72_15974670",
       "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51f2283b_366e68fb",
+        "filename": "p2p/base/fake_port_allocator.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-01-20T13:49:41Z",
+      "side": 1,
+      "message": "here is essentially where we give a \u0027this\u0027 pointer to an external list of callbacks.\nWhat the uaf question is about is where do we guarantee that this pointer is removed before the object gets deleted?",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
