@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01e8f562_02aab1f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-20T14:10:42Z",
+      "side": 1,
+      "message": "Feel free to TBR one of the owners (I am not a root owner but this is indeed a good change).",
+      "revId": "b49b0ead207a86c2854e489d30130f31ebe8d42e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
