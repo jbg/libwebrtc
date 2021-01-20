@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2883d04a_f882f7d2",
+        "filename": "modules/audio_coding/neteq/tools/rtc_event_log_source.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-01-20T08:06:22Z",
+      "side": 1,
+      "message": "This seems unrelated to the CL. Is this intentional?",
+      "range": {
+        "startLine": 156,
+        "startChar": 1,
+        "endLine": 162,
+        "endChar": 25
+      },
+      "revId": "f4b10e17297319d53975717b4393c13dbbba00e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
