@@ -68,6 +68,24 @@
       "parentUuid": "0a90e333_034566ff",
       "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb45c72_15974670",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-20T09:02:35Z",
+      "side": 1,
+      "message": "What I have written yesterday in the comment above is overly complicated and partially undoes the benefits of the SigSlots-\u003eCallbackList switch.\n\nI think the correct way to avoid UAF is using weak pointers like hta@ has done in https://webrtc-review.googlesource.com/c/src/+/192540 (see the code in pc/rtp_transmission_manager.h and pc/rtp_transmission_manager.cc in that CL).\n\nI never used rtc::WeakPtrFactory so I am reading the code right now, but it looks like the best way to go.",
+      "parentUuid": "f7dcb788_e4bf3976",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
