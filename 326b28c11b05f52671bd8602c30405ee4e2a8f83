@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88ff7254_58f0c933",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-20T15:59:24Z",
+      "side": 1,
+      "message": "These are good points (I think we will end up writing some documentation in https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/rtc_base/callback_list.h about when to use one or the other).\n\nI need to spend some time thinking on this (probably tomorrow), one concern after thinking on the points above is \"callback reference is actually never deleted and list of callbacks grows indefinitely\" so we need to think carefully.\n\ntommi@: Do you see other patterns to deal with this? Evaluating them in this early CL will pay dividends during the future cleanup CLs.",
+      "parentUuid": "8cae7c1c_97a167c8",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51f2283b_366e68fb",
         "filename": "p2p/base/fake_port_allocator.h",
         "patchSetId": 31
@@ -119,6 +137,24 @@
       "writtenOn": "2021-01-20T13:49:41Z",
       "side": 1,
       "message": "here is essentially where we give a \u0027this\u0027 pointer to an external list of callbacks.\nWhat the uaf question is about is where do we guarantee that this pointer is removed before the object gets deleted?",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edcfb4b1_4614f3fa",
+        "filename": "p2p/base/fake_port_allocator.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-20T15:59:24Z",
+      "side": 1,
+      "message": "In this case, the CallbackList is owned by port_ which is a unique_ptr owned by this. Can we assume that when we have this pattern we don\u0027t have the UAF problem?\n\nOn the other hand, here (https://webrtc-review.googlesource.com/c/src/+/191520/31/p2p/base/p2p_transport_channel.cc) we have to make a choice since we deal with raw pointers and no clear lifetime information exists.",
+      "parentUuid": "51f2283b_366e68fb",
       "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
