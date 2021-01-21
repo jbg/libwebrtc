@@ -124,6 +124,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff4d6cc7_fcba3fb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-21T08:43:57Z",
+      "side": 1,
+      "message": "I think I\u0027m +1\u0027ing this particular CL, but we may want to revisit the API for CallbackList to accomodate at least one pattern of guarding against callbacks to destroyed objects.\n\nAt the moment I think I\u0027m favoring the \"active registration token\", which would delete the callback if the callee is destroyed; of course that token also needs to be guarded against the *caller* being destroyed (otherwise it gets into exactly the same issue). I assume that there\u0027s a written-up exposition of how to write such a token safely somewhere.\n\nBut since the port allocator owns the port in this particular instance, we should be guaranteed that the port is destroyed before the port allocator is, so this instance should be safe.\n\nTommi, can you file a bug on the issue and add it to the webrtc-core hotlist?",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51f2283b_366e68fb",
@@ -155,6 +172,23 @@
       "side": 1,
       "message": "In this case, the CallbackList is owned by port_ which is a unique_ptr owned by this. Can we assume that when we have this pattern we don\u0027t have the UAF problem?\n\nOn the other hand, here (https://webrtc-review.googlesource.com/c/src/+/191520/31/p2p/base/p2p_transport_channel.cc) we have to make a choice since we deal with raw pointers and no clear lifetime information exists.",
       "parentUuid": "51f2283b_366e68fb",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f58073b_03fcde7a",
+        "filename": "p2p/client/basic_port_allocator.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-21T08:43:57Z",
+      "side": 1,
+      "message": "while you\u0027re here: entrt -\u003e the entry",
       "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
