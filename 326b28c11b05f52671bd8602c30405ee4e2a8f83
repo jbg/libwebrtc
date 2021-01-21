@@ -176,6 +176,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "208c9b76_fe48e4ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-21T09:47:02Z",
+      "side": 1,
+      "message": "https://webrtc-review.googlesource.com/c/src/+/195332 implements the registration token from CallbackList point of view.\n\nI think that if we are in an unclear lifetime situation in which we need to guard both ways, we probably need to use weak pointers (or we risk to re-implement SigSlot\u0027s internals).",
+      "parentUuid": "3fc0fa78_d81654bd",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f408feec_b352a4c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-21T09:47:02Z",
+      "side": 1,
+      "message": "One more question on p2p_transport_channel before we go..",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51f2283b_366e68fb",
@@ -207,6 +242,29 @@
       "side": 1,
       "message": "In this case, the CallbackList is owned by port_ which is a unique_ptr owned by this. Can we assume that when we have this pattern we don\u0027t have the UAF problem?\n\nOn the other hand, here (https://webrtc-review.googlesource.com/c/src/+/191520/31/p2p/base/p2p_transport_channel.cc) we have to make a choice since we deal with raw pointers and no clear lifetime information exists.",
       "parentUuid": "51f2283b_366e68fb",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd193bcf_9256aa9a",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-21T09:47:02Z",
+      "side": 1,
+      "message": "hta@: Is this a concern from a lifetime point of view?\n\nPort allocators own the port so in that case we are fine, but I am not sure here (I need to check but I am short on time at the moment).",
+      "range": {
+        "startLine": 906,
+        "startChar": 2,
+        "endLine": 907,
+        "endChar": 62
+      },
       "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
