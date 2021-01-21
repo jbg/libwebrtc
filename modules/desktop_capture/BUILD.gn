@@ -567,8 +567,6 @@ rtc_library("desktop_capture_generic") {
       "win/window_capturer_win_wgc.cc",
       "win/window_capturer_win_wgc.h",
     ]
-
-    defines += [ "RTC_ENABLE_WIN_WGC" ]
   }
 }
 
