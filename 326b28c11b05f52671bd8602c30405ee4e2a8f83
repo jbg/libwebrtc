@@ -229,6 +229,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c398dc4b_874f9811",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13719
+      },
+      "writtenOn": "2021-01-21T14:56:13Z",
+      "side": 1,
+      "message": "Thanks All for the comments.",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51f2283b_366e68fb",
@@ -277,6 +294,30 @@
       "writtenOn": "2021-01-21T09:47:02Z",
       "side": 1,
       "message": "hta@: Is this a concern from a lifetime point of view?\n\nPort allocators own the port so in that case we are fine, but I am not sure here (I need to check but I am short on time at the moment).",
+      "range": {
+        "startLine": 906,
+        "startChar": 2,
+        "endLine": 907,
+        "endChar": 62
+      },
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf244d9_ca84b6c3",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 13719
+      },
+      "writtenOn": "2021-01-21T14:56:13Z",
+      "side": 1,
+      "message": "This is also fine because OnPortReady is invoked internally within the object and each port is coming from another private member allocation_session_. So it\u0027s quite similar to the scenario above on the FakePortAllocator.",
+      "parentUuid": "bd193bcf_9256aa9a",
       "range": {
         "startLine": 906,
         "startChar": 2,
