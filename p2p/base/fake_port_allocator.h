@@ -118,8 +118,7 @@ class FakePortAllocatorSession : public PortAllocatorSession {
                                       username(), password(), std::string(),
                                       false));
       RTC_DCHECK(port_);
-      port_->SignalDestroyed.connect(
-          this, &FakePortAllocatorSession::OnPortDestroyed);
+      port_->Connect([this](PortInterface* port) { OnPortDestroyed(port); });
       AddPort(port_.get());
     }
     ++port_config_count_;

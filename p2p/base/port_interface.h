@@ -12,12 +12,14 @@
 #define P2P_BASE_PORT_INTERFACE_H_
 
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "absl/types/optional.h"
 #include "api/candidate.h"
 #include "p2p/base/transport_description.h"
 #include "rtc_base/async_packet_socket.h"
+#include "rtc_base/callback_list.h"
 #include "rtc_base/socket_address.h"
 
 namespace rtc {
@@ -113,6 +115,15 @@ class PortInterface {
   // Signaled when this port decides to delete itself because it no longer has
   // any usefulness.
   sigslot::signal1<PortInterface*> SignalDestroyed;
+  // F: void(PortInterface*)
+  template <typename F>
+  void Connect(F&& callback) {
+    port_destroyed_callback_list_.AddReceiver(std::forward<F>(callback));
+  }
+
+  void SendPortDestroyed(PortInterface* port) {
+    port_destroyed_callback_list_.Send(port);
+  }
 
   // Signaled when Port discovers ice role conflict with the peer.
   sigslot::signal1<PortInterface*> SignalRoleConflict;
@@ -132,6 +143,9 @@ class PortInterface {
   virtual std::string ToString() const = 0;
 
   virtual void GetStunStats(absl::optional<StunStats>* stats) = 0;
+
+ private:
+  webrtc::CallbackList<PortInterface*> port_destroyed_callback_list_;
 
  protected:
   PortInterface();

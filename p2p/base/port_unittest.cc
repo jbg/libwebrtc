@@ -270,7 +270,7 @@ class TestChannel : public sigslot::has_slots<> {
   explicit TestChannel(std::unique_ptr<Port> p1) : port_(std::move(p1)) {
     port_->SignalPortComplete.connect(this, &TestChannel::OnPortComplete);
     port_->SignalUnknownAddress.connect(this, &TestChannel::OnUnknownAddress);
-    port_->SignalDestroyed.connect(this, &TestChannel::OnSrcPortDestroyed);
+    port_->Connect([this](PortInterface* port) { OnSrcPortDestroyed(port); });
   }
 
   int complete_count() { return complete_count_; }
