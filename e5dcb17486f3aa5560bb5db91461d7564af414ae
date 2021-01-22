@@ -157,6 +157,24 @@
       "parentUuid": "834a861f_80466154",
       "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fb2286b_f7025164",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-22T09:45:07Z",
+      "side": 1,
+      "message": "Sorry for the late reply.\n\nUsing public_deps might be fine for a short period of time but then it needs to be removed. I always try to avoid it even for the refactoring tasks since it is easy to forget them around.\n\nWhat nisse@ suggests is usually easy to do. You basically rewire the dependency graph in advance and then move the code. I can help with downstream clients.",
+      "parentUuid": "2c376846_3899f609",
+      "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
