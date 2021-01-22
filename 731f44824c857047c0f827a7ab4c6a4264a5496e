@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc8e53e3_36afef4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-22T08:00:36Z",
+      "side": 1,
+      "message": "LGTM since this is a legacy API folder according to https://webrtc.googlesource.com/src/+/HEAD/native-api.md.",
+      "revId": "731f44824c857047c0f827a7ab4c6a4264a5496e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
