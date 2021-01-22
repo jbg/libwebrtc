@@ -248,6 +248,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d27e0b6_ea66a12a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-22T08:24:48Z",
+      "side": 1,
+      "message": "Thanks Jonas for the suggestions.\n\nI think (1) is helpful, especially if we will add some common pattern of how to deal with CallbackLists in callback_list.h. It is hard to enforce though, people will have to remember to call the data member with the _callback_list_ suffix. But I am open to this.\n\nAbout (3), the problem is that sigslot data members were public, which breaks encapsulation. With this refactoring we are also trying to keep these data members private so we need a interface layer (the Subscribe* methods), we can use a common pattern here as well (common method names) but we will probably not be able to get to the same clarity of connect() but connect() was just being called on a public data member without any check from the class owning the sigslot.",
+      "parentUuid": "cfd4dee0_d79d8b3e",
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51f2283b_366e68fb",
         "filename": "p2p/base/fake_port_allocator.h",
         "patchSetId": 31
