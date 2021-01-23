@@ -8,10 +8,6 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-// Disable for TSan v2, see
-// https://code.google.com/p/webrtc/issues/detail?id=1205 for details.
-#if !defined(THREAD_SANITIZER)
-
 #include <stdio.h>
 
 #include <algorithm>
@@ -64,6 +60,8 @@
 #include "rtc_base/firewall_socket_server.h"
 #include "rtc_base/gunit.h"
 #include "rtc_base/numerics/safe_conversions.h"
+#include "rtc_base/task_utils/pending_task_safety_flag.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/test_certificate_verifier.h"
 #include "rtc_base/time_utils.h"
 #include "rtc_base/virtual_socket_server.h"
@@ -223,6 +221,7 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     }
     return client;
   }
+  ~PeerConnectionWrapper() override { alive_->SetNotAlive(); }
 
   webrtc::PeerConnectionFactoryInterface* pc_factory() const {
     return peer_connection_factory_.get();
@@ -920,9 +919,11 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     if (signaling_delay_ms_ == 0) {
       RelaySdpMessageIfReceiverExists(type, msg);
     } else {
-      invoker_.AsyncInvokeDelayed<void>(
-          RTC_FROM_HERE, rtc::Thread::Current(),
-          [this, type, msg] { RelaySdpMessageIfReceiverExists(type, msg); },
+      rtc::Thread::Current()->PostDelayedTask(
+          ToQueuedTask(alive_,
+                       [this, type, msg] {
+                         RelaySdpMessageIfReceiverExists(type, msg);
+                       }),
           signaling_delay_ms_);
     }
   }
@@ -941,11 +942,12 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     if (signaling_delay_ms_ == 0) {
       RelayIceMessageIfReceiverExists(sdp_mid, sdp_mline_index, msg);
     } else {
-      invoker_.AsyncInvokeDelayed<void>(
-          RTC_FROM_HERE, rtc::Thread::Current(),
-          [this, sdp_mid, sdp_mline_index, msg] {
-            RelayIceMessageIfReceiverExists(sdp_mid, sdp_mline_index, msg);
-          },
+      rtc::Thread::Current()->PostDelayedTask(
+          ToQueuedTask(alive_,
+                       [this, sdp_mid, sdp_mline_index, msg] {
+                         RelayIceMessageIfReceiverExists(sdp_mid,
+                                                         sdp_mline_index, msg);
+                       }),
           signaling_delay_ms_);
     }
   }
@@ -1141,7 +1143,8 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
   std::string rtp_stats_id_;
   std::string audio_track_stats_id_;
 
-  rtc::AsyncInvoker invoker_;
+  rtc::scoped_refptr<PendingTaskSafetyFlag> alive_ =
+      PendingTaskSafetyFlag::Create();
 
   friend class PeerConnectionIntegrationBaseTest;
 };
@@ -6005,5 +6008,3 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan,
 
 }  // namespace
 }  // namespace webrtc
-
-#endif  // if !defined(THREAD_SANITIZER)
