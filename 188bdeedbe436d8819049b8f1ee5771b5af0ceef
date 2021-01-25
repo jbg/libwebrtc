@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d1d740a_f9736665",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-25T10:46:38Z",
+      "side": 1,
+      "message": "LGTM but let\u0027s wait for hta@ as well.",
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28fff60a_ef2d196e",
