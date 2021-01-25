@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7467bf5b_514f7133",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-01-25T12:47:38Z",
+      "side": 1,
+      "message": "Thanks for the comments. I have updated the CL, please let me know if something is still not clear. ",
+      "revId": "8ee6c2b05b7af6edd0f04587a6e3cb033622c864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

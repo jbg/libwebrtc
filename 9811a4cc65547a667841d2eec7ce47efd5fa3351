@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e3c309e_80f4956e",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-01-25T12:47:38Z",
+      "side": 1,
+      "message": "The idea is to predict the comfort noise energy that the decoder is estimating. As the refresh DTX packets with high energy are not sent, the decoder will not use them for estimating the comfort noise levels and, therefore, they are neither used here for updating the smooth_energy. \n\nThe smooth energy is never reset as the decoder is updating all the time its comfort noise model with all the non activity frames. So the summary would look like: \n\n loud \u003d\u003d true \u0026\u0026 InDtx \u003d\u003d true \u003d\u003e return true, don\u0027t modify smooth_energy\n loud \u003d\u003d true/false \u0026\u0026 InDtx \u003d\u003d false \u003d\u003e return false, update smooth_energy",
+      "parentUuid": "8b0fb450_4b9553a9",
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ddff63dc_e7db707b",
         "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
         "patchSetId": 2
@@ -48,6 +66,30 @@
       "writtenOn": "2021-01-25T10:37:54Z",
       "side": 1,
       "message": "Question: is it known what type the result of the `b * b` multiplication will be? int16_t or float? Is there a risk for overflow?",
+      "range": {
+        "startLine": 78,
+        "startChar": 60,
+        "endLine": 78,
+        "endChar": 65
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0baff02_71778a85",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-01-25T12:47:38Z",
+      "side": 1,
+      "message": "Good point, I took as example the Rms computation that is done in WebRtc so I did not give so much thoughts: \nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_processing/rms_level.cc;drc\u003d928146f546193cfd56256aa828e2e19a013012cd;l\u003d67\n\nHowever, it looks like it is guaranteed to work as the int16_t would be converted to int before doing the multiplication (assuming that int has at least 32 bits): https://en.cppreference.com/w/cpp/language/implicit_conversion Integral promotion section.",
+      "parentUuid": "ddff63dc_e7db707b",
       "range": {
         "startLine": 78,
         "startChar": 60,
@@ -83,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd32d6d5_c0ceedfd",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-01-25T12:47:38Z",
+      "side": 1,
+      "message": "Yes, even the average is considered loud. Every time that we send a refresh packet we might introduce artifacts on the comfort noise that the decoder is producing so the idea is to just send the ones that would reduce the energy by more than 3 dB. This is an approximation as the decoder does not track the energy in exactly the same manner as this code. \n\nI rewrite the comment to \"3 dB negative margin\".",
+      "parentUuid": "c9b871a4_a6ed5257",
+      "range": {
+        "startLine": 84,
+        "startChar": 55,
+        "endLine": 84,
+        "endChar": 75
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "113fed8a_755cc32a",
         "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
         "patchSetId": 2
@@ -106,6 +172,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49dcbc2c_1736556b",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-01-25T12:47:38Z",
+      "side": 1,
+      "message": "Good point, I should have made it more clear. It comes from the Opus RFC, \nhttps://tools.ietf.org/html/rfc6716#section-3.1\n\nI have added a comment on that.",
+      "parentUuid": "113fed8a_755cc32a",
+      "range": {
+        "startLine": 252,
+        "startChar": 30,
+        "endLine": 252,
+        "endChar": 40
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05589ccd_14abe591",
         "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
         "patchSetId": 2
@@ -117,6 +207,30 @@
       "writtenOn": "2021-01-25T10:37:54Z",
       "side": 1,
       "message": "For clarity, comment that encoded length is 1 byte.",
+      "range": {
+        "startLine": 254,
+        "startChar": 11,
+        "endLine": 254,
+        "endChar": 12
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b4ccda6_a0436bd6",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-01-25T12:47:38Z",
+      "side": 1,
+      "message": "Done, thanks.",
+      "parentUuid": "05589ccd_14abe591",
       "range": {
         "startLine": 254,
         "startChar": 11,
