@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82cb16ae_5d3897f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-25T10:37:54Z",
+      "side": 1,
+      "message": "Drive-by review with a few questions/comments.",
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b0fb450_4b9553a9",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-25T10:37:54Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand the logic here.\n\nWe have two input conditions (InDtx \u003d true/false; loud \u003d true/false), and two actions (return true/false; modify smooth_energy).\n\n loud \u003d\u003d true \u0026\u0026 InDtx \u003d\u003d true \u003d\u003e return true, don\u0027t modify smooth_energy\n loud \u003d\u003d true \u0026\u0026 InDtx \u003d\u003d false \u003d\u003e return false, update smooth_energy\n loud \u003d\u003d true \u0026\u0026 InDtx \u003d\u003d true/false \u003d\u003e return false, reset smooth_energy\n\nWhy isn\u0027t smooth_energy updated in the top line?",
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddff63dc_e7db707b",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-25T10:37:54Z",
+      "side": 1,
+      "message": "Question: is it known what type the result of the `b * b` multiplication will be? int16_t or float? Is there a risk for overflow?",
+      "range": {
+        "startLine": 78,
+        "startChar": 60,
+        "endLine": 78,
+        "endChar": 65
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9b871a4_a6ed5257",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-25T10:37:54Z",
+      "side": 1,
+      "message": "Question: the margin is \"negative\", i.e., anything louder than 3 dB _lower_ than the smoothed average is considered loud, right? If so, even the average itself is considered loud.",
+      "range": {
+        "startLine": 84,
+        "startChar": 55,
+        "endLine": 84,
+        "endChar": 75
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "113fed8a_755cc32a",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-25T10:37:54Z",
+      "side": 1,
+      "message": "Where does this magic number come from? Is it used/defined elsewhere in the code?",
+      "range": {
+        "startLine": 252,
+        "startChar": 30,
+        "endLine": 252,
+        "endChar": 40
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05589ccd_14abe591",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-25T10:37:54Z",
+      "side": 1,
+      "message": "For clarity, comment that encoded length is 1 byte.",
+      "range": {
+        "startLine": 254,
+        "startChar": 11,
+        "endLine": 254,
+        "endChar": 12
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
