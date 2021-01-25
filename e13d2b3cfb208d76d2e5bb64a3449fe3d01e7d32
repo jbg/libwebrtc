@@ -16,6 +16,24 @@
       "message": "We should also update RegisterParticipantInCall method of VideoQualityAnalyzerInjectionHelper. Will it be done in a separate CL?",
       "revId": "e13d2b3cfb208d76d2e5bb64a3449fe3d01e7d32",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f3639af_8f0a434a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-01-25T22:06:00Z",
+      "side": 1,
+      "message": "Ah, good point, forgot the main thing. Thank you for catching it!",
+      "parentUuid": "95a38b5f_b4d7a448",
+      "revId": "e13d2b3cfb208d76d2e5bb64a3449fe3d01e7d32",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
