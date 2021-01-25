@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9fbd1dc_850328b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2021-01-25T18:16:14Z",
+      "side": 1,
+      "message": "Mirko. Can we land this somehow even without Berthold being a registered contributor?",
+      "revId": "fa581649cc4e043b7ba7386af2d24660e1a7da89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
