@@ -125,6 +125,15 @@ ConnectionContext::ConnectionContext(
       worker_thread(), network_thread());
 
   channel_manager_->SetVideoRtxEnabled(true);
+  // Set processing limits on the threads.
+  // Since some of the threads may be the same, start with the most
+  // restrictive limits and end with the most permissive ones.
+  network_thread_->SetDispatchWarningMs(10);
+  network_thread_->SetDispatchDeadlineMs(400);
+  worker_thread_->SetDispatchWarningMs(30);
+  worker_thread_->SetDispatchDeadlineMs(2000);
+  signaling_thread_->SetDispatchWarningMs(1000);
+  signaling_thread_->SetDispatchDeadlineMs(2000);
 }
 
 ConnectionContext::~ConnectionContext() {
