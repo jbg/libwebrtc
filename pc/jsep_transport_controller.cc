@@ -482,6 +482,9 @@ JsepTransportController::CreateDtlsTransport(
       this, &JsepTransportController::OnTransportStateChanged_n);
   dtls->ice_transport()->SignalCandidatePairChanged.connect(
       this, &JsepTransportController::OnTransportCandidatePairChanged_n);
+
+  dtls->SubscribeDtlsHandshakeError(
+      [this](rtc::SSLHandshakeError error) { OnDtlsHandshakeError(error); });
   return dtls;
 }
 
@@ -1411,7 +1414,7 @@ void JsepTransportController::OnRtcpPacketReceived_n(
 
 void JsepTransportController::OnDtlsHandshakeError(
     rtc::SSLHandshakeError error) {
-  SignalDtlsHandshakeError(error);
+  signal_dtls_handshake_error_.Send(error);
 }
 
 }  // namespace webrtc
