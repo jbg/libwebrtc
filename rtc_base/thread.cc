@@ -71,8 +71,6 @@ class ScopedAutoReleasePool {
 namespace rtc {
 namespace {
 
-const int kSlowDispatchLoggingThreshold = 50;  // 50 ms
-
 class MessageHandlerWithTask final : public MessageHandler {
  public:
   MessageHandlerWithTask() {}
@@ -685,10 +683,13 @@ void Thread::Dispatch(Message* pmsg) {
   pmsg->phandler->OnMessage(pmsg);
   int64_t end_time = TimeMillis();
   int64_t diff = TimeDiff(end_time, start_time);
-  if (diff >= kSlowDispatchLoggingThreshold) {
-    RTC_LOG(LS_INFO) << "Message took " << diff
+  if (diff >= dispatch_warning_ms_) {
+    RTC_LOG(LS_INFO) << "Message to " << name() << " took " << diff
                      << "ms to dispatch. Posted from: "
                      << pmsg->posted_from.ToString();
+  }
+  if (diff >= dispatch_deadline_ms_) {
+    RTC_NOTREACHED();  // This statement is ignored if debug=false
   }
 }
 
