@@ -71,8 +71,6 @@ class ScopedAutoReleasePool {
 namespace rtc {
 namespace {
 
-const int kSlowDispatchLoggingThreshold = 50;  // 50 ms
-
 class MessageHandlerWithTask final : public MessageHandler {
  public:
   MessageHandlerWithTask() {}
@@ -681,14 +679,18 @@ void Thread::Dispatch(Message* pmsg) {
   TRACE_EVENT2("webrtc", "Thread::Dispatch", "src_file",
                pmsg->posted_from.file_name(), "src_func",
                pmsg->posted_from.function_name());
+  RTC_DCHECK_RUN_ON(this);
   int64_t start_time = TimeMillis();
   pmsg->phandler->OnMessage(pmsg);
   int64_t end_time = TimeMillis();
   int64_t diff = TimeDiff(end_time, start_time);
-  if (diff >= kSlowDispatchLoggingThreshold) {
-    RTC_LOG(LS_INFO) << "Message took " << diff
+  if (diff >= dispatch_warning_ms_) {
+    RTC_LOG(LS_INFO) << "Message to " << name() << " took " << diff
                      << "ms to dispatch. Posted from: "
                      << pmsg->posted_from.ToString();
+  }
+  if (diff >= dispatch_deadline_ms_) {
+    RTC_NOTREACHED();  // This statement is ignored if debug=false
   }
 }
 
@@ -738,6 +740,31 @@ bool Thread::SetName(const std::string& name, const void* obj) {
     name_ += buf;
   }
   return true;
+}
+
+void Thread::SetDispatchWarningMs(int deadline) {
+  if (!IsCurrent()) {
+    PostTask(webrtc::ToQueuedTask(
+        [this, deadline]() { SetDispatchWarningMs(deadline); }));
+    return;
+  }
+  RTC_DCHECK_RUN_ON(this);
+  dispatch_warning_ms_ = deadline;
+}
+
+void Thread::SetDispatchDeadlineMs(int deadline) {
+  if (!IsCurrent()) {
+    PostTask(webrtc::ToQueuedTask(
+        [this, deadline]() { SetDispatchDeadlineMs(deadline); }));
+    return;
+  }
+  RTC_DCHECK_RUN_ON(this);
+  dispatch_deadline_ms_ = deadline;
+  // Since the only logging comes from the warning limit,
+  // this has to be <= the dispach deadline.
+  if (dispatch_warning_ms_ > deadline) {
+    dispatch_warning_ms_ = deadline;
+  }
 }
 
 bool Thread::Start() {
