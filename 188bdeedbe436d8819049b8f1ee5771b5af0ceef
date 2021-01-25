@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a2af729_91a76d7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-25T10:02:48Z",
+      "side": 1,
+      "message": "Ok, I have done one more pass to double check the lifetime of some callbacks with respect to \"this\".\n\nhta@ please also take a look before landing.",
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28fff60a_ef2d196e",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 33
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-25T10:02:48Z",
+      "side": 1,
+      "message": "This one should also be safe even if the lifetime of the PortInterface* with regards to this is non trivial.\n\nMy understanding is that P2PTransportChannel has a std::vector of unique_ptrs to PortAllocationSessions (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/base/p2p_transport_channel.h;l\u003d371;drc\u003dc5fd745672798221b71611a92c33ab5f2bf04a3b) and the PortAllocationSessions are themselves responsible to delete the Ports when destroyed (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/base/port_allocator.h;l\u003d197-198;drc\u003df417238217396b52fd1e03a7ed6439e03cbc43f8) and this happens for example here: https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/client/basic_port_allocator.cc;l\u003d290;drc\u003dfa8019c3c33a1e75b7dfc8aa8d8ad6e07c2d80a8.\n\nA second look into this is probably needed though.",
+      "range": {
+        "startLine": 906,
+        "startChar": 2,
+        "endLine": 907,
+        "endChar": 62
+      },
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587a54d9_be3402ac",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 33
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-25T10:02:48Z",
+      "side": 1,
+      "message": "unique_ptr so lifetime is fine (this will be alive when the port triggers the callback).",
+      "range": {
+        "startLine": 273,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 9
+      },
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e5194be_7889584a",
+        "filename": "p2p/base/turn_port_unittest.cc",
+        "patchSetId": 33
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-25T10:02:48Z",
+      "side": 1,
+      "message": "unique_ptr so lifetime is fine (this will be alive when the port triggers the callback).",
+      "range": {
+        "startLine": 338,
+        "startChar": 4,
+        "endLine": 338,
+        "endChar": 14
+      },
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036c8b3f_44c27845",
+        "filename": "p2p/client/basic_port_allocator.cc",
+        "patchSetId": 33
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-25T10:02:48Z",
+      "side": 1,
+      "message": "If I understand correctly (this is the same reasoning applied to the comment on the P2PTransportChannel) the BasicPortAllocatorSession owns the ports (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/client/basic_port_allocator.cc;l\u003d289-290;drc\u003dfa8019c3c33a1e75b7dfc8aa8d8ad6e07c2d80a8).\n\nMaybe a comment should be added on top of the data member (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/client/basic_port_allocator.h;l\u003d271;drc\u003de27f3dea8293884701283a54f90f8a429ea99505)?",
+      "range": {
+        "startLine": 903,
+        "startChar": 2,
+        "endLine": 904,
+        "endChar": 62
+      },
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4764934_865162ee",
+        "filename": "p2p/client/basic_port_allocator.cc",
+        "patchSetId": 33
+      },
+      "lineNbr": 1428,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-25T10:02:48Z",
+      "side": 1,
+      "message": "The AllocationSequence is destroyed after the port (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/client/basic_port_allocator.cc;l\u003d295-296;drc\u003dfa8019c3c33a1e75b7dfc8aa8d8ad6e07c2d80a8) by the BasicPortAllocatorSession dtor so \"this\" should also be safe to access here.",
+      "range": {
+        "startLine": 1427,
+        "startChar": 6,
+        "endLine": 1428,
+        "endChar": 66
+      },
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97366624_803d5293",
+        "filename": "p2p/client/basic_port_allocator.cc",
+        "patchSetId": 33
+      },
+      "lineNbr": 1568,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-25T10:02:48Z",
+      "side": 1,
+      "message": "Same as the previous comment on this file.",
+      "range": {
+        "startLine": 1567,
+        "startChar": 6,
+        "endLine": 1568,
+        "endChar": 66
+      },
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
