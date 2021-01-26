@@ -16,6 +16,24 @@
       "message": "Mirko. Can we land this somehow even without Berthold being a registered contributor?",
       "revId": "fa581649cc4e043b7ba7386af2d24660e1a7da89",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16af5ff3_ef1dd5a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-26T10:42:41Z",
+      "side": 1,
+      "message": "Yes, I see bertholdherrmann08@gmail.com having signed the CLA (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/docs/faq.md;l\u003d140-143;drc\u003d8696f9a062e2b256ef03eb6d9fff9d46a069dddf). So this is good to go.",
+      "parentUuid": "f9fbd1dc_850328b7",
+      "revId": "fa581649cc4e043b7ba7386af2d24660e1a7da89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
