@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb1e325_0ebde497",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-26T15:16:28Z",
+      "side": 1,
+      "message": "OK. I didn\u0027t really understand that you were modeling the decoder behavior. Also, my truth table above contained at least one typo. 😊\n\nAlthough I haven\u0027t fully digested the algorithm, it seems legit.",
+      "parentUuid": "5e3c309e_80f4956e",
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddff63dc_e7db707b",
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "Good point, I took as example the Rms computation that is done in WebRtc so I did not give so much thoughts: \nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_processing/rms_level.cc;drc\u003d928146f546193cfd56256aa828e2e19a013012cd;l\u003d67\n\nHowever, it looks like it is guaranteed to work as the int16_t would be converted to int before doing the multiplication (assuming that int has at least 32 bits): https://en.cppreference.com/w/cpp/language/implicit_conversion Integral promotion section.",
       "parentUuid": "ddff63dc_e7db707b",
+      "range": {
+        "startLine": 78,
+        "startChar": 60,
+        "endLine": 78,
+        "endChar": 65
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "086442d3_894f0e53",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-26T15:16:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d0baff02_71778a85",
       "range": {
         "startLine": 78,
         "startChar": 60,
@@ -147,6 +189,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f553a669_b375877b",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-26T15:16:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd32d6d5_c0ceedfd",
+      "range": {
+        "startLine": 84,
+        "startChar": 55,
+        "endLine": 84,
+        "endChar": 75
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "113fed8a_755cc32a",
@@ -194,6 +260,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9802dc4_2b133598",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-26T15:16:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "49dcbc2c_1736556b",
+      "range": {
+        "startLine": 252,
+        "startChar": 30,
+        "endLine": 252,
+        "endChar": 40
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05589ccd_14abe591",
@@ -231,6 +321,30 @@
       "side": 1,
       "message": "Done, thanks.",
       "parentUuid": "05589ccd_14abe591",
+      "range": {
+        "startLine": 254,
+        "startChar": 11,
+        "endLine": 254,
+        "endChar": 12
+      },
+      "revId": "9811a4cc65547a667841d2eec7ce47efd5fa3351",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98884137_125e1255",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2021-01-26T15:16:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9b4ccda6_a0436bd6",
       "range": {
         "startLine": 254,
         "startChar": 11,
