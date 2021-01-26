@@ -34,6 +34,29 @@
       "parentUuid": "f9fbd1dc_850328b7",
       "revId": "fa581649cc4e043b7ba7386af2d24660e1a7da89",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a02b6420_c7d42e71",
+        "filename": "AUTHORS",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-26T10:45:58Z",
+      "side": 1,
+      "message": "I suspect this should be bertholdherrmann08@googlemail.com (since the email used to upload the CL is that one).",
+      "range": {
+        "startLine": 24,
+        "startChar": 19,
+        "endLine": 24,
+        "endChar": 47
+      },
+      "revId": "fa581649cc4e043b7ba7386af2d24660e1a7da89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
