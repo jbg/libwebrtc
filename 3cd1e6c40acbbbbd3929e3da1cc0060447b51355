@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9236a3d4_9be78af7",
+        "filename": "p2p/base/dtls_transport.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-26T10:25:07Z",
+      "side": 1,
+      "message": "See offline discussion about the need of two steps before doing this.",
+      "range": {
+        "startLine": 823,
+        "startChar": 2,
+        "endLine": 823,
+        "endChar": 32
+      },
+      "revId": "3cd1e6c40acbbbbd3929e3da1cc0060447b51355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68be2d17_cc5ad28e",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-26T10:25:07Z",
+      "side": 1,
+      "message": "This callback looks safe (\"this\" is valid when it will be invoked) because \"dtls\" is created here (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/pc/jsep_transport_controller.cc;l\u003d977-978;drc\u003d5eb527cf7fb28e22d0687c0295cb9f1bb458160c) which is inside the JsepTransportController. It is then owned by the JsepTransport (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/pc/jsep_transport_controller.cc;l\u003d1016-1022;drc\u003d5eb527cf7fb28e22d0687c0295cb9f1bb458160c) which is itself owner by the JsepTransportController (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/pc/jsep_transport_controller.cc;l\u003d1031;drc\u003d5eb527cf7fb28e22d0687c0295cb9f1bb458160c).\n\nThe other location where it is created is https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/pc/jsep_transport_controller.cc;l\u003d991-993;drc\u003d5eb527cf7fb28e22d0687c0295cb9f1bb458160c, which similarly results into https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/pc/jsep_transport_controller.cc;l\u003d1016-1022;drc\u003d5eb527cf7fb28e22d0687c0295cb9f1bb458160c and https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/pc/jsep_transport_controller.cc;l\u003d1031;drc\u003d5eb527cf7fb28e22d0687c0295cb9f1bb458160c.\n\nSo it looks like the JsepTransportController (this) indirectly owns the DtlsTransportInternal (dtls).",
+      "range": {
+        "startLine": 484,
+        "startChar": 2,
+        "endLine": 485,
+        "endChar": 77
+      },
+      "revId": "3cd1e6c40acbbbbd3929e3da1cc0060447b51355",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
