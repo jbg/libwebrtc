@@ -16,6 +16,29 @@
       "message": "Hi Mirko, thanks for you +1, but I\u0027ve found a better solution. I\u0027ve removed the include of the WGC header, it was unneeded. Instead I\u0027ve included the more direct header, instead of transitively including it through the WGC header. That was my mistake. Can you please take another look?",
       "revId": "5cac0ea3c6963e26d6532d5f2fd6a4d90eb053c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fed54a4_b95dd862",
+        "filename": "rtc_base/win/create_direct3d_device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-26T09:01:28Z",
+      "side": 1,
+      "message": "I still see a project failing when including this one.\n\nIs it possible to switch back to the previous approach? (using this header is fine, I mean the \"rtc_enable_win_wgc\" one).",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 48
+      },
+      "revId": "5cac0ea3c6963e26d6532d5f2fd6a4d90eb053c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

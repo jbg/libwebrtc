@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc36063e_4b8ff6ef",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-26T09:01:28Z",
+      "side": 1,
+      "message": "I am tempted to say this should be done anyway (but in another CL to avoid to mix 2 things into one) in order to literally \"forget\" about this macro and just know that when rtc_enable_win_wgc\u003dtrue is defined, the macro is there.\n\nBut no need to change it back here.",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 3
+      },
+      "revId": "794d2e05487df24a00862a03460af4c9777b6969",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
