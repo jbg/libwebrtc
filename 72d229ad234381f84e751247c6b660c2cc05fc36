@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dabf7c98_ca7d2b29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-27T21:54:31Z",
+      "side": 1,
+      "message": "After Monday\u0027s discussion on webrtc-core, I changed this CL to only be about configuring warning messages on a per-thread basis.\n",
+      "revId": "72d229ad234381f84e751247c6b660c2cc05fc36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
