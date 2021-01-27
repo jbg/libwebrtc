@@ -61,7 +61,8 @@ TEST(QualityScalingExperimentTest, ParseSettings) {
 
 TEST(QualityScalingExperimentTest, ParseSettingsFailsWithoutFieldTrial) {
   webrtc::test::ScopedFieldTrials field_trials("");
-  EXPECT_FALSE(QualityScalingExperiment::ParseSettings());
+  // Uses some default hard coded values.
+  EXPECT_TRUE(QualityScalingExperiment::ParseSettings());
 }
 
 TEST(QualityScalingExperimentTest, ParseSettingsFailsWithInvalidFieldTrial) {
