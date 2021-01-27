@@ -39,6 +39,30 @@
       },
       "revId": "5cac0ea3c6963e26d6532d5f2fd6a4d90eb053c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eec4d9e_6539e678",
+        "filename": "rtc_base/win/create_direct3d_device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-01-27T17:42:35Z",
+      "side": 1,
+      "message": "Done! Thanks for checking, much easier to fix it now than have this get reverted again 😄",
+      "parentUuid": "0fed54a4_b95dd862",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 48
+      },
+      "revId": "5cac0ea3c6963e26d6532d5f2fd6a4d90eb053c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

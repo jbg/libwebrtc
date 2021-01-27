@@ -22,6 +22,30 @@
       },
       "revId": "794d2e05487df24a00862a03460af4c9777b6969",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b835b033_92d171de",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-01-27T17:42:35Z",
+      "side": 1,
+      "message": "Done! I\u0027ll put out a follow up CL to move the define.",
+      "parentUuid": "bc36063e_4b8ff6ef",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 3
+      },
+      "revId": "794d2e05487df24a00862a03460af4c9777b6969",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
