@@ -33,6 +33,23 @@
       "message": "sadly we can\u0027t reuse ap/peerconnection.h\u0027s BundlePolicy\nOrdered that that one instead of the order in the spec.",
       "revId": "957c592ebcf0509654f82e6b7acf1ae5fe3d017d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bae04fef_6c6a30c6",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2391,
+      "author": {
+        "id": 5603
+      },
+      "writtenOn": "2021-01-28T22:27:01Z",
+      "side": 1,
+      "message": "I think we want to only have this in the ctor, to get a sense of what people are actually setting it to, rather than what is being negotiated.",
+      "revId": "957c592ebcf0509654f82e6b7acf1ae5fe3d017d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
