@@ -61,7 +61,8 @@ constexpr NamedStructureFactory kFactories[] = {
 
 std::unique_ptr<ScalableVideoController> CreateScalabilityStructure(
     absl::string_view name) {
-  RTC_DCHECK(!name.empty());
+  if (name.empty())
+    return Create<ScalableVideoControllerNoLayering>();
   for (const auto& entry : kFactories) {
     if (entry.name == name) {
       return entry.factory();

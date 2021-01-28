@@ -168,10 +168,6 @@ int LibaomAv1Encoder::InitEncode(const VideoCodec* codec_settings,
     return result;
   }
   absl::string_view scalability_mode = encoder_settings_.ScalabilityMode();
-  if (scalability_mode.empty()) {
-    RTC_LOG(LS_WARNING) << "Scalability mode is not set.";
-    return WEBRTC_VIDEO_CODEC_ERROR;
-  }
   svc_controller_ = CreateScalabilityStructure(scalability_mode);
   if (svc_controller_ == nullptr) {
     RTC_LOG(LS_WARNING) << "Failed to set scalability mode "
