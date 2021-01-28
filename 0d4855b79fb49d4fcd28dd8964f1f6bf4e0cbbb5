@@ -16,6 +16,23 @@
       "message": "will land per merge approval on https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1171206",
       "revId": "0d4855b79fb49d4fcd28dd8964f1f6bf4e0cbbb5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a06a2f6_cb5f351e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-01-28T16:39:05Z",
+      "side": 1,
+      "message": "Hi Sam, needs your owner\u0027s approval.",
+      "revId": "0d4855b79fb49d4fcd28dd8964f1f6bf4e0cbbb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
