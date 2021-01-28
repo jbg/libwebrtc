@@ -49,18 +49,15 @@ class DEPRECATED_SignalThread : public sigslot::has_slots<>,
  public:
   DEPRECATED_SignalThread();
 
-  // Context: Main Thread.  Call before Start to change the worker's name.
-  bool SetName(const std::string& name, const void* obj);
-
   // Context: Main Thread.  Call to begin the worker thread.
   void Start();
 
   // Context: Main Thread.  If the worker thread is not running, deletes the
   // object immediately.  Otherwise, asks the worker thread to abort processing,
   // and schedules the object to be deleted once the worker exits.
-  // SignalWorkDone will not be signalled.  If wait is true, does not return
-  // until the thread is deleted.
-  void Destroy(bool wait);
+  // SignalWorkDone will not be signalled.  Does not return
+  // until the thread is deleted. (wait == false is no longer supported).
+  void Destroy(bool wait = true);
 
   // Context: Main Thread.  If the worker thread is complete, deletes the
   // object immediately.  Otherwise, schedules the object to be deleted once
@@ -77,19 +74,8 @@ class DEPRECATED_SignalThread : public sigslot::has_slots<>,
 
   Thread* worker() { return &worker_; }
 
-  // Context: Main Thread.  Subclass should override to do pre-work setup.
-  virtual void OnWorkStart() {}
-
   // Context: Worker Thread.  Subclass should override to do work.
   virtual void DoWork() = 0;
-
-  // Context: Worker Thread.  Subclass should call periodically to
-  // dispatch messages and determine if the thread should terminate.
-  bool ContinueWork();
-
-  // Context: Worker Thread.  Subclass should override when extra work is
-  // needed to abort the worker thread.
-  virtual void OnWorkStop() {}
 
   // Context: Main Thread.  Subclass should override to do post-work cleanup.
   virtual void OnWorkDone() {}
