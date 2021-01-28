@@ -16,6 +16,29 @@
       "message": "Spin-off from a code review; \"this should be done\".\n\n",
       "revId": "8784898c4357535372921a1b8dce746df15029df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e0989a_b22b246b",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-28T08:03:57Z",
+      "side": 1,
+      "message": "Are we going to remove this one in a future CL?\n\nWe should probably have only one place with this info (this is becoming const in JsepTransportController so it will not change but it might diverge from the active_reset_srtp_params_).",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "8784898c4357535372921a1b8dce746df15029df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
