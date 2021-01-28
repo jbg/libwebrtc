@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "28655051_0c2c95db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-28T09:01:18Z",
+      "side": 1,
+      "message": "Commentary...\n",
+      "revId": "72d229ad234381f84e751247c6b660c2cc05fc36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0af4f436_2880e3be",
         "filename": "rtc_base/thread.h",
         "patchSetId": 8
@@ -31,6 +48,30 @@
       "writtenOn": "2021-01-28T08:30:32Z",
       "side": 1,
       "message": "I wonder if this might have a different value in debug builds compared to release builds. Probably not a big issue since we increase the dispatch_warning_ms_ but let\u0027s keep an eye on it.",
+      "range": {
+        "startLine": 533,
+        "startChar": 19,
+        "endLine": 533,
+        "endChar": 48
+      },
+      "revId": "72d229ad234381f84e751247c6b660c2cc05fc36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a60e5e6_07309413",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-28T09:01:18Z",
+      "side": 1,
+      "message": "Given that the weakest machines that run this code are not developer machines (ChromeOS boxes, Android phones), I think it\u0027s sensible to not increase the value in debug builds.\n\nThere\u0027s a greater (small, but greater) chance of someone noticing the log for debug builds.",
+      "parentUuid": "0af4f436_2880e3be",
       "range": {
         "startLine": 533,
         "startChar": 19,
