@@ -34,6 +34,24 @@
       "parentUuid": "1dc42a76_98afc9f6",
       "revId": "0f0be10faa9a7568780b6af94fd31e4f7ef844b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "604aec8d_5d96841e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2021-01-28T13:53:53Z",
+      "side": 1,
+      "message": "One thing is that the scalability_mode is not AV1 specific, so i think it should be enough to set it on the constructor. \n\nI see two potential trade offs, first, what happens if the temporal_layers is set to a different value and scalability mode is not set for a codec different than av1 (vp8 or vp9). \n\nIn this case it would be good to know if the user has actually set the \"NONE\" or it is the default value. \n\nSame thing with the svc js apis. It would be possible to not set a value for the encodings attribute and just use the default (i.e. no layer), however when retrieving the value it would be no way of checking if it was actually set by the user or it has the default value.\n\nTo solve that, either we would need to make the scalability_mode an std::optional value, or as it is in this patch, differentiate the default value (\"\") from the explicit \"NONE\" one.. \n\nThe other question is if we should allow \"NONE\" as a value for the js svc apis or not.",
+      "parentUuid": "10cd4a54_cd64e33b",
+      "revId": "0f0be10faa9a7568780b6af94fd31e4f7ef844b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
