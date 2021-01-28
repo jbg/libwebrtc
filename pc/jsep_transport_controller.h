@@ -379,7 +379,8 @@ class JsepTransportController : public sigslot::has_slots<> {
       PeerConnectionInterface::PeerConnectionState::kNew;
   cricket::IceGatheringState ice_gathering_state_ = cricket::kIceGatheringNew;
 
-  Config config_;
+  const Config config_;
+  bool active_reset_srtp_params_ RTC_GUARDED_BY(network_thread_);
 
   const cricket::SessionDescription* local_desc_ = nullptr;
   const cricket::SessionDescription* remote_desc_ = nullptr;
