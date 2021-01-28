@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "064e8446_e2eb26df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-28T07:17:35Z",
+      "side": 1,
+      "message": "Spin-off from a code review; \"this should be done\".\n\n",
+      "revId": "8784898c4357535372921a1b8dce746df15029df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
