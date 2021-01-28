@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc42a76_98afc9f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2021-01-28T08:52:13Z",
+      "side": 1,
+      "message": "There are three options for fixing the issue:\n\n- Initializat the VideoCodec scalability_settings to \"NONE\"\n- in av1 encoder check if scalability mode has not been set and consider it as \"NONE\n- in the scalability factory set the empty string to return same factory than \"NONE\". \n\nI think latest is the cleanest IMHO as in the webrtc svc api the value can not set, so we would have to use an optional if we use \"NONE\" as default value.\n\nAdd a comment and make changes",
+      "revId": "0f0be10faa9a7568780b6af94fd31e4f7ef844b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
