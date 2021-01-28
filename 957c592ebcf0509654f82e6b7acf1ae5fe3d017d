@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1301f43f_856791e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-01-28T14:58:38Z",
+      "side": 1,
+      "message": "this one is easier",
+      "revId": "957c592ebcf0509654f82e6b7acf1ae5fe3d017d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1a13ff_314186e8",
+        "filename": "api/uma_metrics.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-01-28T14:58:38Z",
+      "side": 1,
+      "message": "sadly we can\u0027t reuse ap/peerconnection.h\u0027s BundlePolicy\nOrdered that that one instead of the order in the spec.",
+      "revId": "957c592ebcf0509654f82e6b7acf1ae5fe3d017d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
