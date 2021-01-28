@@ -372,6 +372,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7c64b6e_60a43add",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-28T08:17:03Z",
+      "side": 1,
+      "message": "Yes, this is an unclear ownership situation. I have taken a look a few days ago but maybe I should dedicate this a bit more time.\n\nFrom a previous look, P2PTransportChannel owns multiple PortAllocatorSessions (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/base/p2p_transport_channel.h;l\u003d371;drc\u003dc5fd745672798221b71611a92c33ab5f2bf04a3b) which are responsible for deallocating ports (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/base/port_allocator.h;l\u003d197-198;drc\u003df417238217396b52fd1e03a7ed6439e03cbc43f8 and https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/client/basic_port_allocator.cc;l\u003d290;drc\u003dfa8019c3c33a1e75b7dfc8aa8d8ad6e07c2d80a8).\n\nSo this might be fine but in future code updates this can become a problem. Are you suggesting we should go the weak_ptr solution?",
+      "parentUuid": "3aa8daf6_cf619aa2",
+      "range": {
+        "startLine": 906,
+        "startChar": 2,
+        "endLine": 907,
+        "endChar": 62
+      },
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f58073b_03fcde7a",
         "filename": "p2p/client/basic_port_allocator.cc",
         "patchSetId": 31
