@@ -52,6 +52,24 @@
       "parentUuid": "10cd4a54_cd64e33b",
       "revId": "0f0be10faa9a7568780b6af94fd31e4f7ef844b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd4dc665_8c67e6a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-01-28T14:15:15Z",
+      "side": 1,
+      "message": "for vp8/vp9 it would likely be a mistake to create scalability structure from an unset (empty string), Rather when scalability_mode is unset, number of spatial \u0026 temporal layers should be checked instead to pick correct structure.\ni.e. av1 and vp9 would treat (at least for a while) empty scalability mode differently.\nThat\u0027s one of the reasons I\u0027m leaning towards option 2 over current option 3.\n\nBut current approach works too.\n\nAbout js api: I agree webrtc shouldn\u0027t overwrite whatever user set, be it unset (empty string), \"NONE\" if allowed, or something else. I think that somewhere on VideoCodec/EncoderSettings conversion path there should be a conversion from empty string/nullopt to \"NONE\".",
+      "parentUuid": "604aec8d_5d96841e",
+      "revId": "0f0be10faa9a7568780b6af94fd31e4f7ef844b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
