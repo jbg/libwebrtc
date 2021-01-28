@@ -348,6 +348,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3aa8daf6_cf619aa2",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-28T06:42:43Z",
+      "side": 1,
+      "message": "Oops. This is a case of unclear ownership.\nThe transport channel does not own the port allocator (not deallocated in destructor), so we can definitely get into the case where the transport channel is destroyed, but the port isn\u0027t.\n\nIt has a nice list of the ports concerned in the ports_ member (plus the ones in pruned_ports_), so removing the callback in the destructor would in fact work in this case - but it\u0027s somewhat fragile. It doesn\u0027t have a weak factory at present, so the weak_ptr solution leads to some code bloat.\n\nThe fact that I overlooked it illustrates Tommi\u0027s point very well.",
+      "parentUuid": "bd193bcf_9256aa9a",
+      "range": {
+        "startLine": 906,
+        "startChar": 2,
+        "endLine": 907,
+        "endChar": 62
+      },
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f58073b_03fcde7a",
         "filename": "p2p/client/basic_port_allocator.cc",
         "patchSetId": 31

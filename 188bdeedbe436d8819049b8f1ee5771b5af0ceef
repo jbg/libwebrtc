@@ -52,6 +52,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb64343_0cc9a6f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-28T06:42:43Z",
+      "side": 1,
+      "message": "-1 since this breaks the Interface paradigm.\n",
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28fff60a_ef2d196e",
@@ -95,6 +112,23 @@
         "endLine": 907,
         "endChar": 62
       },
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e24021e4_620d2dde",
+        "filename": "p2p/base/port_interface.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-28T06:42:43Z",
+      "side": 1,
+      "message": "Classes named \"interface\" are supposed to be pure virtual. All functions should be \u003d 0, and there should be no private variablesl.\n\nCan you move the implementation to the Port class?",
       "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
