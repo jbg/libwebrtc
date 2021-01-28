@@ -16,6 +16,23 @@
       "message": "Hi Jamie, Yash, I forgot to upload the patchset that addressed your comments from this CL:\nhttps://webrtc-review.googlesource.com/c/src/+/200161\n\nThat was my mistake. I\u0027ve uploaded those edits here, PTAL.",
       "revId": "bbbb10638079d2141b34ee6d09db5f1f5287437f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "954a5ff4_bbc3167f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15369
+      },
+      "writtenOn": "2021-01-28T21:50:29Z",
+      "side": 1,
+      "message": "LGTM. Thanks for addressing these.",
+      "revId": "bbbb10638079d2141b34ee6d09db5f1f5287437f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
