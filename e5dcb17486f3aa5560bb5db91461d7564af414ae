@@ -175,6 +175,24 @@
       "parentUuid": "2c376846_3899f609",
       "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28095594_7b91fe85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-01-28T08:25:11Z",
+      "side": 1,
+      "message": "Turns out the split of the build target from issue 12730 might not be worth it since the constants are defined in the old (legacy?) cricket namespace which makes including them in webrtc ugly :-(\n\nThis change still improves things a tiny bit.",
+      "parentUuid": "5fb2286b_f7025164",
+      "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
