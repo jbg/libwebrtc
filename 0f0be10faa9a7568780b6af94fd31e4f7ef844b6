@@ -16,6 +16,24 @@
       "message": "There are three options for fixing the issue:\n\n- Initializat the VideoCodec scalability_settings to \"NONE\"\n- in av1 encoder check if scalability mode has not been set and consider it as \"NONE\n- in the scalability factory set the empty string to return same factory than \"NONE\". \n\nI think latest is the cleanest IMHO as in the webrtc svc api the value can not set, so we would have to use an optional if we use \"NONE\" as default value.\n\nAdd a comment and make changes",
       "revId": "0f0be10faa9a7568780b6af94fd31e4f7ef844b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10cd4a54_cd64e33b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-01-28T10:15:48Z",
+      "side": 1,
+      "message": "My idea was to use something like 1st option. (to spread importance of scalability_mode)\nThis way it should be easier to catch situations where user sets number of spatial/temporal layers same as it was done for VP9, but doesn\u0027t see any effect.\nBut I\u0027m not familiar enough with VideoCodec/CodecSettings/EncoderSettings to find the right place to set the default scalability_mode for AV1.\n\n3rd option I would like to avoid (that was the reason of introducing mode \"NONE\")\nSimilar reasons - to catch early scenarios where scalability_mode wasn\u0027t set by mistake.\n\nSo for now I would prefer the 2nd option, may be with a warning.\ni.e. \nif (scalability_mode.empty()) {\n  RTC_LOG(LS_WARNING) \u003c\u003c \"Scalability mode is not set. Using NONE\";\n  scalability_mode \u003d \"NONE\";\n}",
+      "parentUuid": "1dc42a76_98afc9f6",
+      "revId": "0f0be10faa9a7568780b6af94fd31e4f7ef844b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
