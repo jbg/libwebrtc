@@ -69,6 +69,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f0c0941_98d6e39c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-28T09:27:22Z",
+      "side": 1,
+      "message": "Letting the -1 stand because of the wrong modification to the Interface class, but we can go on discussing the ownership problem.\n",
+      "revId": "188bdeedbe436d8819049b8f1ee5771b5af0ceef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28fff60a_ef2d196e",
