@@ -35,29 +35,20 @@ DEPRECATED_SignalThread::~DEPRECATED_SignalThread() {
   RTC_DCHECK(refcount_ == 0);
 }
 
-bool DEPRECATED_SignalThread::SetName(const std::string& name,
-                                      const void* obj) {
-  EnterExit ee(this);
-  RTC_DCHECK(!destroy_called_);
-  RTC_DCHECK(main_->IsCurrent());
-  RTC_DCHECK(kInit == state_);
-  return worker_.SetName(name, obj);
-}
-
 void DEPRECATED_SignalThread::Start() {
   EnterExit ee(this);
   RTC_DCHECK(!destroy_called_);
   RTC_DCHECK(main_->IsCurrent());
   if (kInit == state_ || kComplete == state_) {
     state_ = kRunning;
-    OnWorkStart();
     worker_.Start();
   } else {
     RTC_NOTREACHED();
   }
 }
 
-void DEPRECATED_SignalThread::Destroy(bool wait) {
+void DEPRECATED_SignalThread::Destroy(bool wait /*=true*/) {
+  RTC_CHECK(wait);
   EnterExit ee(this);
   // Sometimes the caller can't guarantee which thread will call Destroy, only
   // that it will be the last thing it does.
@@ -71,14 +62,12 @@ void DEPRECATED_SignalThread::Destroy(bool wait) {
     // OnWorkStop() must follow Quit(), so that when the thread wakes up due to
     // OWS(), ContinueWork() will return false.
     worker_.Quit();
-    OnWorkStop();
-    if (wait) {
-      // Release the thread's lock so that it can return from ::Run.
-      cs_.Leave();
-      worker_.Stop();
-      cs_.Enter();
-      refcount_--;
-    }
+
+    // Release the thread's lock so that it can return from ::Run.
+    cs_.Leave();
+    worker_.Stop();
+    cs_.Enter();
+    refcount_--;
   } else {
     RTC_NOTREACHED();
   }
@@ -96,13 +85,6 @@ void DEPRECATED_SignalThread::Release() {
     // if (kInit == state_) use Destroy()
     RTC_NOTREACHED();
   }
-}
-
-bool DEPRECATED_SignalThread::ContinueWork() {
-  EnterExit ee(this);
-  RTC_DCHECK(!destroy_called_);
-  RTC_DCHECK(worker_.IsCurrent());
-  return worker_.ProcessMessages(0);
 }
 
 void DEPRECATED_SignalThread::OnMessage(Message* msg) {

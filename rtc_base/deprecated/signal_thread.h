@@ -36,12 +36,10 @@ namespace rtc {
 //    completion, and then self-destruct without further notification.
 //   Periodic tasks: Wait for SignalWorkDone, then eventually call Start()
 //    again to repeat the task. When the instance isn't needed anymore,
-//    call Release. DoWork, OnWorkStart and OnWorkStop are called again,
-//    on a new thread.
-//  The subclass should override DoWork() to perform the background task.  By
-//   periodically calling ContinueWork(), it can check for cancellation.
-//   OnWorkStart and OnWorkDone can be overridden to do pre- or post-work
+//    call Release. DoWork and OnWorkStop are called again on a new thread.
+//   OnWorkDone can be overridden to do pre- or post-work
 //   tasks in the context of the main thread.
+//  The subclass should override DoWork() to perform the background task.
 ///////////////////////////////////////////////////////////////////////////////
 
 class DEPRECATED_SignalThread : public sigslot::has_slots<>,
@@ -49,18 +47,15 @@ class DEPRECATED_SignalThread : public sigslot::has_slots<>,
  public:
   DEPRECATED_SignalThread();
 
-  // Context: Main Thread.  Call before Start to change the worker's name.
-  bool SetName(const std::string& name, const void* obj);
-
   // Context: Main Thread.  Call to begin the worker thread.
   void Start();
 
   // Context: Main Thread.  If the worker thread is not running, deletes the
   // object immediately.  Otherwise, asks the worker thread to abort processing,
   // and schedules the object to be deleted once the worker exits.
-  // SignalWorkDone will not be signalled.  If wait is true, does not return
-  // until the thread is deleted.
-  void Destroy(bool wait);
+  // SignalWorkDone will not be signalled.  Does not return
+  // until the thread is deleted. (wait == false is no longer supported).
+  void Destroy(bool wait = true);
 
   // Context: Main Thread.  If the worker thread is complete, deletes the
   // object immediately.  Otherwise, schedules the object to be deleted once
@@ -77,15 +72,8 @@ class DEPRECATED_SignalThread : public sigslot::has_slots<>,
 
   Thread* worker() { return &worker_; }
 
-  // Context: Main Thread.  Subclass should override to do pre-work setup.
-  virtual void OnWorkStart() {}
-
   // Context: Worker Thread.  Subclass should override to do work.
   virtual void DoWork() = 0;
-
-  // Context: Worker Thread.  Subclass should call periodically to
-  // dispatch messages and determine if the thread should terminate.
-  bool ContinueWork();
 
   // Context: Worker Thread.  Subclass should override when extra work is
   // needed to abort the worker thread.

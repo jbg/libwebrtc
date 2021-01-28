@@ -40,19 +40,6 @@ class SignalThreadTest : public ::testing::Test, public sigslot::has_slots<> {
     const SignalThreadTest* harness() { return harness_; }
 
    protected:
-    void OnWorkStart() override {
-      ASSERT_TRUE(harness_ != nullptr);
-      ++harness_->thread_started_;
-      EXPECT_EQ(harness_->main_thread_, Thread::Current());
-      EXPECT_FALSE(worker()->RunningForTest());  // not started yet
-    }
-
-    void OnWorkStop() override {
-      ++harness_->thread_stopped_;
-      EXPECT_EQ(harness_->main_thread_, Thread::Current());
-      EXPECT_TRUE(worker()->RunningForTest());  // not stopped yet
-    }
-
     void OnWorkDone() override {
       ++harness_->thread_done_;
       EXPECT_EQ(harness_->main_thread_, Thread::Current());
@@ -86,35 +73,20 @@ class SignalThreadTest : public ::testing::Test, public sigslot::has_slots<> {
     thread_ = new SlowSignalThread(this);
     thread_->SignalWorkDone.connect(this, &SignalThreadTest::OnWorkComplete);
     called_release_ = false;
-    thread_started_ = 0;
     thread_done_ = 0;
     thread_completed_ = 0;
-    thread_stopped_ = 0;
     thread_deleted_ = 0;
   }
 
-  void ExpectState(int started,
-                   int done,
-                   int completed,
-                   int stopped,
-                   int deleted) {
-    EXPECT_EQ(started, thread_started_);
+  void ExpectState(int done, int completed, int deleted) {
     EXPECT_EQ(done, thread_done_);
     EXPECT_EQ(completed, thread_completed_);
-    EXPECT_EQ(stopped, thread_stopped_);
     EXPECT_EQ(deleted, thread_deleted_);
   }
 
-  void ExpectStateWait(int started,
-                       int done,
-                       int completed,
-                       int stopped,
-                       int deleted,
-                       int timeout) {
-    EXPECT_EQ_WAIT(started, thread_started_, timeout);
+  void ExpectStateWait(int done, int completed, int deleted, int timeout) {
     EXPECT_EQ_WAIT(done, thread_done_, timeout);
     EXPECT_EQ_WAIT(completed, thread_completed_, timeout);
-    EXPECT_EQ_WAIT(stopped, thread_stopped_, timeout);
     EXPECT_EQ_WAIT(deleted, thread_deleted_, timeout);
   }
 
@@ -122,10 +94,8 @@ class SignalThreadTest : public ::testing::Test, public sigslot::has_slots<> {
   SlowSignalThread* thread_;
   bool called_release_;
 
-  int thread_started_;
   int thread_done_;
   int thread_completed_;
-  int thread_stopped_;
   int thread_deleted_;
 };
 
@@ -146,7 +116,7 @@ class OwnerThread : public Thread, public sigslot::has_slots<> {
     Thread::Current()->socketserver()->Wait(100, false);
     signal_thread->Release();
     // Delete |signal_thread|.
-    signal_thread->Destroy(true);
+    signal_thread->Destroy();
     {
       webrtc::MutexLock lock(&mutex_);
       has_run_ = true;
@@ -173,7 +143,7 @@ class OwnerThread : public Thread, public sigslot::has_slots<> {
 // when shutting down the process.
 TEST_F(SignalThreadTest, OwnerThreadGoesAway) {
   // We don't use |thread_| for this test, so destroy it.
-  thread_->Destroy(true);
+  thread_->Destroy();
 
   {
     std::unique_ptr<OwnerThread> owner(new OwnerThread(this));
@@ -192,34 +162,26 @@ TEST_F(SignalThreadTest, OwnerThreadGoesAway) {
 
 TEST_F(SignalThreadTest, ThreadFinishes) {
   thread_->Start();
-  ExpectState(1, 0, 0, 0, 0);
-  ExpectStateWait(1, 1, 1, 0, 1, kTimeout);
+  ExpectState(0, 0, 0);
+  ExpectStateWait(1, 1, 1, kTimeout);
 }
 
 TEST_F(SignalThreadTest, ReleasedThreadFinishes) {
   thread_->Start();
-  ExpectState(1, 0, 0, 0, 0);
+  ExpectState(0, 0, 0);
   thread_->Release();
   called_release_ = true;
-  ExpectState(1, 0, 0, 0, 0);
-  ExpectStateWait(1, 1, 1, 0, 1, kTimeout);
+  ExpectState(0, 0, 0);
+  ExpectStateWait(1, 1, 1, kTimeout);
 }
 
 TEST_F(SignalThreadTest, DestroyedThreadCleansUp) {
   thread_->Start();
-  ExpectState(1, 0, 0, 0, 0);
-  thread_->Destroy(true);
-  ExpectState(1, 0, 0, 1, 1);
+  ExpectState(0, 0, 0);
+  thread_->Destroy();
+  ExpectState(0, 0, 1);
   Thread::Current()->ProcessMessages(0);
-  ExpectState(1, 0, 0, 1, 1);
-}
-
-TEST_F(SignalThreadTest, DeferredDestroyedThreadCleansUp) {
-  thread_->Start();
-  ExpectState(1, 0, 0, 0, 0);
-  thread_->Destroy(false);
-  ExpectState(1, 0, 0, 1, 0);
-  ExpectStateWait(1, 1, 0, 1, 1, kTimeout);
+  ExpectState(0, 0, 1);
 }
 
 }  // namespace
