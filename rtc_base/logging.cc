@@ -48,6 +48,7 @@ static const int kMaxLogLineSize = 1024 - 60;
 #include "rtc_base/string_utils.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/synchronization/mutex.h"
+#include "rtc_base/system_time.h"
 #include "rtc_base/thread_annotations.h"
 #include "rtc_base/time_utils.h"
 
