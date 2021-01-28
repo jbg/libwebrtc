@@ -33,6 +33,40 @@
       "message": "Yes, we need to add a new library in this case because api/voip/ files cannot be handled by a BUILD.gn file different from api/voip/BUILD.gn (presubmit protection against multiple BUILD.gn files owning the same set of files).\n\nNice catch Harald!",
       "revId": "c2443b78adededc4dd56cd20924dab8fa81e1136",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a7037e_6ffc867a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-28T06:37:47Z",
+      "side": 1,
+      "message": "LGTM, but I\u0027d like an extra dependency....\n",
+      "revId": "c2443b78adededc4dd56cd20924dab8fa81e1136",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "255acb15_654763a7",
+        "filename": "api/voip/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-28T06:37:47Z",
+      "side": 1,
+      "message": "Can you add a dependency to this target in the BUILD.gn target \"rtc_unittests\", or in the api/BUILD.gn target \"compile_all_headers\"?\n\nThe point is to ensure that routine compiles (such as the bots) will also compile this header file; we\u0027ve seen test mocks rot before when this wasn\u0027t done.\n\nI see that you have it in voip_unittests, but an extra dependency shouldn\u0027t hurt.",
+      "revId": "c2443b78adededc4dd56cd20924dab8fa81e1136",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
