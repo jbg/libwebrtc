@@ -2388,6 +2388,23 @@ void PeerConnection::ReportSdpBundleUsage(
   }
   RTC_HISTOGRAM_ENUMERATION("WebRTC.PeerConnection.BundleUsage", usage,
                             kBundleUsageMax);
+
+  // Record bundle-policy from configuration. Done here from
+  // setRemoteDescription to limit to actually established connections.
+  BundlePolicyUsage policy = kBundlePolicyUsageMax;
+  switch (configuration_.bundle_policy) {
+    case kBundlePolicyBalanced:
+      policy = kBundlePolicyUsageBalanced;
+      break;
+    case kBundlePolicyMaxBundle:
+      policy = kBundlePolicyUsageMaxBundle;
+      break;
+    case kBundlePolicyMaxCompat:
+      policy = kBundlePolicyUsageMaxCompat;
+      break;
+  }
+  RTC_HISTOGRAM_ENUMERATION("WebRTC.PeerConnection.BundlePolicy", policy,
+                            kBundlePolicyUsageMax);
 }
 
 void PeerConnection::ReportIceCandidateCollected(
