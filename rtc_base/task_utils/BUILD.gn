@@ -34,8 +34,8 @@ rtc_library("pending_task_safety_flag") {
   ]
   deps = [
     "..:checks",
+    "..:macromagic",
     "..:refcount",
-    "..:thread_checker",
     "../../api:scoped_refptr",
     "../synchronization:sequence_checker",
     "../system:no_unique_address",
