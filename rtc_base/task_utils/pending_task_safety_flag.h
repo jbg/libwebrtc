@@ -55,7 +55,7 @@ class PendingTaskSafetyFlag : public rtc::RefCountInterface {
   bool alive() const;
 
  protected:
-  PendingTaskSafetyFlag() = default;
+  PendingTaskSafetyFlag() { main_sequence_.Detach(); }
 
  private:
   bool alive_ = true;
