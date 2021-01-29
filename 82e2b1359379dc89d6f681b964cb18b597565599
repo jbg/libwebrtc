@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0566b060_78d6ee8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-01-29T00:32:03Z",
+      "side": 1,
+      "message": "I have a CL that fixes the merge conflict here:\nhttps://webrtc-review.googlesource.com/c/src/+/204460\n\nDo you know how to get rid of the extra Change-Id footer and get the presubmit to not complain about a missing bug tag? I never had this issue in the past.",
+      "revId": "82e2b1359379dc89d6f681b964cb18b597565599",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
