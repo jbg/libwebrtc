@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0da8a513_2cfb6d34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-29T10:35:48Z",
+      "side": 1,
+      "message": "I think removing active_..... is out of scope for this CL.\n",
+      "revId": "8784898c4357535372921a1b8dce746df15029df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2e0989a_b22b246b",
@@ -31,6 +48,30 @@
       "writtenOn": "2021-01-28T08:03:57Z",
       "side": 1,
       "message": "Are we going to remove this one in a future CL?\n\nWe should probably have only one place with this info (this is becoming const in JsepTransportController so it will not change but it might diverge from the active_reset_srtp_params_).",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "8784898c4357535372921a1b8dce746df15029df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e370954_e881568e",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-29T10:35:48Z",
+      "side": 1,
+      "message": "It\u0027s being changed dynamically, so the value from config_ should be treated only as an initial value. Removing it requires evaluation of why it is changing and whether it should change, so I didn\u0027t want to touch that in this CL.\n\n(The background for this CL is that I want the new function pointer to be const)",
+      "parentUuid": "e2e0989a_b22b246b",
       "range": {
         "startLine": 101,
         "startChar": 4,
