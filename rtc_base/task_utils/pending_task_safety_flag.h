@@ -16,6 +16,7 @@
 #include "rtc_base/ref_count.h"
 #include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/system/no_unique_address.h"
+#include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
 
@@ -43,8 +44,7 @@ namespace webrtc {
 //    my_task_queue_->PostTask(ToQueuedTask(pending_task_safety_flag_,
 //        [this]() { MyMethod(); }));
 //
-// Note that checking the state only works on the construction/destruction
-// thread of the ReceiveStatisticsProxy instance.
+// Checking and setting the alive state must be done on the same sequence.
 class PendingTaskSafetyFlag : public rtc::RefCountInterface {
  public:
   static rtc::scoped_refptr<PendingTaskSafetyFlag> Create();
@@ -55,10 +55,10 @@ class PendingTaskSafetyFlag : public rtc::RefCountInterface {
   bool alive() const;
 
  protected:
-  PendingTaskSafetyFlag() = default;
+  PendingTaskSafetyFlag() { main_sequence_.Detach(); }
 
  private:
-  bool alive_ = true;
+  bool alive_ RTC_GUARDED_BY(main_sequence_) = true;
   RTC_NO_UNIQUE_ADDRESS SequenceChecker main_sequence_;
 };
 
@@ -66,8 +66,8 @@ class PendingTaskSafetyFlag : public rtc::RefCountInterface {
 // and signalling of destruction when the ScopedTaskSafety instance goes out
 // of scope.
 // Should be used by the class that wants tasks dropped after destruction.
-// Requirements are that the instance be constructed and destructed on
-// the same thread as the potentially dropped tasks would be running on.
+// Requirements are that the instance be destructed on the same thread as the
+// potentially dropped tasks would be running on.
 class ScopedTaskSafety {
  public:
   ScopedTaskSafety() = default;
