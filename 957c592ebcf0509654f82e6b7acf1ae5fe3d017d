@@ -50,6 +50,24 @@
       "message": "I think we want to only have this in the ctor, to get a sense of what people are actually setting it to, rather than what is being negotiated.",
       "revId": "957c592ebcf0509654f82e6b7acf1ae5fe3d017d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "501f8e98_4681033e",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2391,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-01-29T07:51:28Z",
+      "side": 1,
+      "message": "the reason for measuring the configured policy here is to avoid measuring the 8% from\n  https://www.chromestatus.com/metrics/feature/timeline/popularity/1042\n-- the ip-gathering scripts never call SRD but they aren\u0027t relevant to our question and just add noise that makes the data harder to interpret.",
+      "parentUuid": "bae04fef_6c6a30c6",
+      "revId": "957c592ebcf0509654f82e6b7acf1ae5fe3d017d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
