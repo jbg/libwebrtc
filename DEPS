@@ -7,7 +7,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'bbd3f0121d2182f4a72c93dae8c594d9ef86343e',
+  'chromium_revision': '069b89dff7b0e7e044f3529b4e730609c0a2bfed',
 }
 
 deps = {
@@ -25,13 +25,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@89e45e730d1a681ad3f2a19874a8cc715279f3af',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@6a1fd94985ddd914608c061f1e21084d2077a3ef',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@c4fefcb6462116dc3a28456c6f58d65b7f6cfbad',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@67b430625dfe76148bce5e007a99a70d98daafdb',
+    'https://chromium.googlesource.com/chromium/src/third_party@08c98a3eee8f18600b5e770d3ce03d580b322929',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -200,7 +200,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@0f2d499389c5de52c1d42310715bf83835e44c48',
+    'https://android.googlesource.com/platform/external/perfetto.git@709de7fdeb9ccf0ae6ca6a76529e777131a20fc4',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@576e0801f9281fd54e2c69ad5be5fef7af656011',
   'src/third_party/libyuv':
@@ -257,7 +257,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@ebcb191873884188fd8b5de227a0caabe4a7bbdc',
+    'https://chromium.googlesource.com/chromium/src/tools@f9ecf8ba84cb789015e9b7e9915a6c230966b521',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@a32a1607f6093d338f756c7e7c7b4333b0c50c9c',
 
