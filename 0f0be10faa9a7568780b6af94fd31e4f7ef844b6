@@ -70,6 +70,24 @@
       "parentUuid": "604aec8d_5d96841e",
       "revId": "0f0be10faa9a7568780b6af94fd31e4f7ef844b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d028cca4_d6c56e04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2021-01-29T09:17:02Z",
+      "side": 1,
+      "message": "I am fine to use option 2 for now until vp8/vp9 fully uses the scalability mode and we can get rid of the temporal_layers field on the codec structure (if ever).\n\nWill update the patch accordingly.",
+      "parentUuid": "dd4dc665_8c67e6a9",
+      "revId": "0f0be10faa9a7568780b6af94fd31e4f7ef844b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
