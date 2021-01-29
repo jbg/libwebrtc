@@ -33,6 +33,115 @@
       "message": "Thanks! I have no further comments, but will let Minyue take a look as well.\n",
       "revId": "8ee6c2b05b7af6edd0f04587a6e3cb033622c864",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8deb6bc3_c1087daa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-01-29T11:01:18Z",
+      "side": 1,
+      "message": "Thanks for the CL! great idea! Some comments from me, see inline. In addition\n\nWhy is the feature called ”minimize number dtx“? I think we DTX by definition is already a minimal transmission, and we do not intend to minimize it. This is, IMO, a fix for pumping noise.",
+      "revId": "8ee6c2b05b7af6edd0f04587a6e3cb033622c864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f27b4c4_dd5ff731",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-01-29T11:01:18Z",
+      "side": 1,
+      "message": "I am not sure what compile will do, to be sure to avoid overflow, static_cast\u003cfloat\u003e(b)",
+      "range": {
+        "startLine": 78,
+        "startChar": 60,
+        "endLine": 78,
+        "endChar": 61
+      },
+      "revId": "8ee6c2b05b7af6edd0f04587a6e3cb033622c864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4275206_6aca75fc",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-01-29T11:01:18Z",
+      "side": 1,
+      "message": "this function is a lot cheaper than calculating average_frame_energy, consider putting it upfront.",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 38
+      },
+      "revId": "8ee6c2b05b7af6edd0f04587a6e3cb033622c864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c444bad0_50214ad6",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-01-29T11:01:18Z",
+      "side": 1,
+      "message": "can we simply drop this packet (and do not set in_dtx_mode), a 1-byter will be in the next frame.",
+      "range": {
+        "startLine": 256,
+        "startChar": 1,
+        "endLine": 259,
+        "endChar": 13
+      },
+      "revId": "8ee6c2b05b7af6edd0f04587a6e3cb033622c864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03ad67a3_247d4baa",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-01-29T11:01:18Z",
+      "side": 1,
+      "message": "may better save this in state, so we do not need to call inst everytime?",
+      "range": {
+        "startLine": 390,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 12
+      },
+      "revId": "8ee6c2b05b7af6edd0f04587a6e3cb033622c864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
