@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b21150c_494fce44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-29T10:42:19Z",
+      "side": 1,
+      "message": "LGTM % comment about adding a comment or renaming the data member to make it explicit the value in config is the initial one (even if this is implicit by the \"const\" I think there is value in making it explicit since we have 2 data members holding similar info).",
+      "revId": "8784898c4357535372921a1b8dce746df15029df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2e0989a_b22b246b",
@@ -72,6 +89,30 @@
       "side": 1,
       "message": "It\u0027s being changed dynamically, so the value from config_ should be treated only as an initial value. Removing it requires evaluation of why it is changing and whether it should change, so I didn\u0027t want to touch that in this CL.\n\n(The background for this CL is that I want the new function pointer to be const)",
       "parentUuid": "e2e0989a_b22b246b",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "8784898c4357535372921a1b8dce746df15029df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d10e94_46f8e821",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-01-29T10:42:19Z",
+      "side": 1,
+      "message": "Ok, can you add a comment on top of the `active_reset_srtp_params` data member to mention this is only the initial value and that active_reset_srtp_params_ should always be used?\n\nBetter if we can rename it to initial_active_reset_srtp_params (if I searched correctly, this is not referred outside of WebRTC, so a rename might be easy to achieve).",
+      "parentUuid": "8e370954_e881568e",
       "range": {
         "startLine": 101,
         "startChar": 4,
