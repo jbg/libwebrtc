@@ -193,6 +193,24 @@
       "parentUuid": "5fb2286b_f7025164",
       "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2da6176e_5e287bbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-01-29T08:40:17Z",
+      "side": 1,
+      "message": "I see there are no added dependencies on rtc_media_base. So I think it\u0027s good enough.\n\nAs for namespaces, I think there\u0027s no longer any meaningful reason why symbols are split up between the cricket, webrtc and rtc namespaces, we just have to live with the clutter until namespaces are merged.",
+      "parentUuid": "28095594_7b91fe85",
+      "revId": "e5dcb17486f3aa5560bb5db91461d7564af414ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
