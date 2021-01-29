@@ -57,6 +57,13 @@ class SimulcastEncoderAdapterEncoderInfoSettings : public EncoderInfoSettings {
   ~SimulcastEncoderAdapterEncoderInfoSettings() override {}
 };
 
+// EncoderInfo settings for LibvpxVp9Encoder.
+class LibvpxVp9EncoderEncoderInfoSettings : public EncoderInfoSettings {
+ public:
+  LibvpxVp9EncoderEncoderInfoSettings();
+  ~LibvpxVp9EncoderEncoderInfoSettings() override {}
+};
+
 }  // namespace webrtc
 
 #endif  // RTC_BASE_EXPERIMENTS_ENCODER_INFO_SETTINGS_H_

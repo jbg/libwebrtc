@@ -1671,6 +1671,14 @@ int LibvpxVp9Encoder::RegisterEncodeCompleteCallback(
   return WEBRTC_VIDEO_CODEC_OK;
 }
 
+void LibvpxVp9Encoder::OverrideFromFieldTrial(
+    VideoEncoder::EncoderInfo* info) const {
+  if (!encoder_info_override_.resolution_bitrate_limits().empty()) {
+    info->resolution_bitrate_limits =
+        encoder_info_override_.resolution_bitrate_limits();
+  }
+}
+
 VideoEncoder::EncoderInfo LibvpxVp9Encoder::GetEncoderInfo() const {
   EncoderInfo info;
   info.supports_native_handle = false;
@@ -1718,6 +1726,7 @@ VideoEncoder::EncoderInfo LibvpxVp9Encoder::GetEncoderInfo() const {
                                       VideoFrameBuffer::Type::kNV12};
     }
   }
+  OverrideFromFieldTrial(&info);
   return info;
 }
 
