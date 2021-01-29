@@ -52,6 +52,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "964966f2_4dc8e516",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-29T14:27:38Z",
+      "side": 1,
+      "message": "Thanks!\n\nComment added.\n",
+      "revId": "8784898c4357535372921a1b8dce746df15029df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2e0989a_b22b246b",
@@ -113,6 +130,30 @@
       "side": 1,
       "message": "Ok, can you add a comment on top of the `active_reset_srtp_params` data member to mention this is only the initial value and that active_reset_srtp_params_ should always be used?\n\nBetter if we can rename it to initial_active_reset_srtp_params (if I searched correctly, this is not referred outside of WebRTC, so a rename might be easy to achieve).",
       "parentUuid": "8e370954_e881568e",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "8784898c4357535372921a1b8dce746df15029df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb1537b0_972dc380",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-01-29T14:27:38Z",
+      "side": 1,
+      "message": "I wonder whether both values are actually legal protocol-wise, but I guess someone thought it was valid when it was added .... added a comment; it\u0027s changeable from PeerConnection::SetConfiguration.",
+      "parentUuid": "c4d10e94_46f8e821",
       "range": {
         "startLine": 101,
         "startChar": 4,
