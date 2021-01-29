@@ -68,6 +68,24 @@
       "parentUuid": "bae04fef_6c6a30c6",
       "revId": "957c592ebcf0509654f82e6b7acf1ae5fe3d017d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6c7af5_c342a92a",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2391,
+      "author": {
+        "id": 5603
+      },
+      "writtenOn": "2021-01-29T21:16:47Z",
+      "side": 1,
+      "message": "That makes sense, but I still think we want to only record once per PC, since this value won\u0027t change post-ctor.",
+      "parentUuid": "501f8e98_4681033e",
+      "revId": "957c592ebcf0509654f82e6b7acf1ae5fe3d017d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
