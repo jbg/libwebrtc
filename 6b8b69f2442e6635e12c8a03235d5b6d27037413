@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1601f2fd_b3c73850",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-01-29T18:15:00Z",
+      "side": 1,
+      "message": "I should have run tests before sending it for review.\nI did check that FakeNetworkSocket is destroyed and process packets on the same thread, but didn\u0027t noticed FakeNetworkSocket is created on a different thread. \n\nIt seems to me SafetyFlag still should work when created on a different thread.\nTommi, can you confirm?",
+      "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
