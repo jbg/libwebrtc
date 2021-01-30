@@ -335,15 +335,18 @@ class Call final : public webrtc::Call,
 
   NetworkState audio_network_state_;
   NetworkState video_network_state_;
+  // TODO(bugs.webrtc.org/11993): Move aggregate_network_up_ over to the
+  // network thread.
   bool aggregate_network_up_ RTC_GUARDED_BY(worker_thread_);
 
   // Audio, Video, and FlexFEC receive streams are owned by the client that
   // creates them.
+  // TODO(bugs.webrtc.org/11993): Move audio_receive_streams_,
+  // video_receive_streams_ and sync_stream_mapping_ over to the network thread.
   std::set<AudioReceiveStream*> audio_receive_streams_
       RTC_GUARDED_BY(worker_thread_);
   std::set<VideoReceiveStream2*> video_receive_streams_
       RTC_GUARDED_BY(worker_thread_);
-
   std::map<std::string, AudioReceiveStream*> sync_stream_mapping_
       RTC_GUARDED_BY(worker_thread_);
 
@@ -848,6 +851,8 @@ webrtc::AudioReceiveStream* Call::CreateAudioReceiveStream(
       config_.audio_state, event_log_);
 
   receive_rtp_config_.emplace(config.rtp.remote_ssrc, ReceiveRtpConfig(config));
+
+  // TODO(bugs.webrtc.org/11993): Update the below on the network thread.
   audio_receive_streams_.insert(receive_stream);
 
   ConfigureSync(config.sync_group);
@@ -1134,34 +1139,45 @@ const WebRtcKeyValueConfig& Call::trials() const {
 }
 
 void Call::SignalChannelNetworkState(MediaType media, NetworkState state) {
-  RTC_DCHECK_RUN_ON(worker_thread_);
-  switch (media) {
-    case MediaType::AUDIO:
-      audio_network_state_ = state;
-      break;
-    case MediaType::VIDEO:
-      video_network_state_ = state;
-      break;
-    case MediaType::ANY:
-    case MediaType::DATA:
-      RTC_NOTREACHED();
-      break;
-  }
+  RTC_DCHECK_RUN_ON(network_thread_);
+  {
+    // TODO(bugs.webrtc.org/11993): Move this over to the network thread.
+    RTC_DCHECK_RUN_ON(worker_thread_);
+    switch (media) {
+      case MediaType::AUDIO:
+        audio_network_state_ = state;
+        break;
+      case MediaType::VIDEO:
+        video_network_state_ = state;
+        break;
+      case MediaType::ANY:
+      case MediaType::DATA:
+        RTC_NOTREACHED();
+        break;
+    }
 
-  UpdateAggregateNetworkState();
-  for (VideoReceiveStream2* video_receive_stream : video_receive_streams_) {
-    video_receive_stream->SignalNetworkState(video_network_state_);
+    UpdateAggregateNetworkState();
+    for (VideoReceiveStream2* video_receive_stream : video_receive_streams_) {
+      video_receive_stream->SignalNetworkState(video_network_state_);
+    }
   }
 }
 
 void Call::OnAudioTransportOverheadChanged(int transport_overhead_per_packet) {
-  RTC_DCHECK_RUN_ON(worker_thread_);
-  for (auto& kv : audio_send_ssrcs_) {
-    kv.second->SetTransportOverhead(transport_overhead_per_packet);
+  RTC_DCHECK_RUN_ON(network_thread_);
+  {
+    // TODO(bugs.webrtc.org/11993): Move this over to the network thread.
+    RTC_DCHECK_RUN_ON(worker_thread_);
+    for (auto& kv : audio_send_ssrcs_) {
+      kv.second->SetTransportOverhead(transport_overhead_per_packet);
+    }
   }
 }
 
 void Call::UpdateAggregateNetworkState() {
+  // TODO(bugs.webrtc.org/11993): Move this over to the network thread.
+  // RTC_DCHECK_RUN_ON(network_thread_);
+
   RTC_DCHECK_RUN_ON(worker_thread_);
 
   bool have_audio =
@@ -1241,6 +1257,7 @@ void Call::OnAllocationLimitsChanged(BitrateAllocationLimits limits) {
 }
 
 void Call::ConfigureSync(const std::string& sync_group) {
+  // TODO(bugs.webrtc.org/11993): Expect to be called on the network thread.
   // Set sync only if there was no previous one.
   if (sync_group.empty())
     return;
