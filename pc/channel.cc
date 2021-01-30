@@ -410,10 +410,7 @@ void BaseChannel::OnNetworkRouteChanged(
   // use the same transport name and MediaChannel::OnNetworkRouteChanged cannot
   // work correctly. Intentionally leave it broken to simplify the code and
   // encourage the users to stop using non-muxing RTCP.
-  worker_thread_->PostTask(ToQueuedTask(alive_, [this, new_route] {
-    RTC_DCHECK_RUN_ON(worker_thread());
-    media_channel_->OnNetworkRouteChanged(transport_name_, new_route);
-  }));
+  media_channel_->OnNetworkRouteChanged(transport_name_, new_route);
 }
 
 sigslot::signal1<ChannelInterface*>& BaseChannel::SignalFirstPacketReceived() {
@@ -429,10 +426,8 @@ sigslot::signal1<const rtc::SentPacket&>& BaseChannel::SignalSentPacket() {
 }
 
 void BaseChannel::OnTransportReadyToSend(bool ready) {
-  worker_thread_->PostTask(ToQueuedTask(alive_, [this, ready] {
-    RTC_DCHECK_RUN_ON(worker_thread());
-    media_channel_->OnReadyToSend(ready);
-  }));
+  RTC_DCHECK_RUN_ON(network_thread());
+  media_channel_->OnReadyToSend(ready);
 }
 
 bool BaseChannel::SendPacket(bool rtcp,
@@ -577,13 +572,13 @@ void BaseChannel::ChannelWritable_n() {
   // We only have to do this AsyncInvoke once, when first transitioning to
   // writable.
   if (!was_ever_writable_n_) {
+    was_ever_writable_n_ = true;
     worker_thread_->PostTask(ToQueuedTask(alive_, [this] {
       RTC_DCHECK_RUN_ON(worker_thread());
       was_ever_writable_ = true;
       UpdateMediaSendRecvState_w();
     }));
   }
-  was_ever_writable_n_ = true;
 }
 
 void BaseChannel::ChannelNotWritable_n() {
