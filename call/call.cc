@@ -1132,34 +1132,45 @@ const WebRtcKeyValueConfig& Call::trials() const {
 }
 
 void Call::SignalChannelNetworkState(MediaType media, NetworkState state) {
-  RTC_DCHECK_RUN_ON(worker_thread_);
-  switch (media) {
-    case MediaType::AUDIO:
-      audio_network_state_ = state;
-      break;
-    case MediaType::VIDEO:
-      video_network_state_ = state;
-      break;
-    case MediaType::ANY:
-    case MediaType::DATA:
-      RTC_NOTREACHED();
-      break;
-  }
+  RTC_DCHECK_RUN_ON(&network_thread_);
+  {
+    // TODO(tommi): Move this over to the network thread.
+    RTC_DCHECK_RUN_ON(worker_thread_);
+    switch (media) {
+      case MediaType::AUDIO:
+        audio_network_state_ = state;
+        break;
+      case MediaType::VIDEO:
+        video_network_state_ = state;
+        break;
+      case MediaType::ANY:
+      case MediaType::DATA:
+        RTC_NOTREACHED();
+        break;
+    }
 
-  UpdateAggregateNetworkState();
-  for (VideoReceiveStream2* video_receive_stream : video_receive_streams_) {
-    video_receive_stream->SignalNetworkState(video_network_state_);
+    UpdateAggregateNetworkState();
+    for (VideoReceiveStream2* video_receive_stream : video_receive_streams_) {
+      video_receive_stream->SignalNetworkState(video_network_state_);
+    }
   }
 }
 
 void Call::OnAudioTransportOverheadChanged(int transport_overhead_per_packet) {
-  RTC_DCHECK_RUN_ON(worker_thread_);
-  for (auto& kv : audio_send_ssrcs_) {
-    kv.second->SetTransportOverhead(transport_overhead_per_packet);
+  RTC_DCHECK_RUN_ON(&network_thread_);
+  {
+    // TODO(tommi): Move this over to the network thread.
+    RTC_DCHECK_RUN_ON(worker_thread_);
+    for (auto& kv : audio_send_ssrcs_) {
+      kv.second->SetTransportOverhead(transport_overhead_per_packet);
+    }
   }
 }
 
 void Call::UpdateAggregateNetworkState() {
+  // TODO(tommi): Move this over to the network thread.
+  // RTC_DCHECK_RUN_ON(&network_thread_);
+
   RTC_DCHECK_RUN_ON(worker_thread_);
 
   bool have_audio =
