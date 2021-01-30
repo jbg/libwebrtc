@@ -34,6 +34,24 @@
       "parentUuid": "1601f2fd_b3c73850",
       "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499332b8_3ba5f0d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-01-30T13:21:33Z",
+      "side": 1,
+      "message": "TL;DR: Why?\n\nI understand that using the flag (alive/SetAlive) has to be on the same sequence to avoid extra synchronisation. That normally imply that the object under protection has to be used (check alive) and destroyed (SetAlive(false)) on the same sequence.\n\nWhat I do not understand, is the requirement to create that object on the same sequence. Can you please point me to an explanation why.\n\ni.e. what is wrong with a pattern.\nRTC_DCHECK_RUN_ON(singaling_thread);\nauto object \u003d std::make_unique\u003cClass\u003e(large, parameters, accessed, only, on, signaling, thread);\n\nworker_thread_-\u003ePostTask([object \u003d std::move(object)]() mutable {\n  object-\u003eDoSomthing();\n  object \u003d nullptr;\n});\n\n------\nNetworkEmulationManagerTest.Run test fails without change to the safety flag (patchset#1). \nMay be it is not hard to change the test and create objects on the same thread they are are used. But before starting investigation how hard it is, I want to understand why do it in the first place.",
+      "parentUuid": "c05bc0e1_6cd5c2cf",
+      "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
