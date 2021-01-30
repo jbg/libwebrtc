@@ -16,6 +16,24 @@
       "message": "I should have run tests before sending it for review.\nI did check that FakeNetworkSocket is destroyed and process packets on the same thread, but didn\u0027t noticed FakeNetworkSocket is created on a different thread. \n\nIt seems to me SafetyFlag still should work when created on a different thread.\nTommi, can you confirm?",
       "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05bc0e1_6cd5c2cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-01-30T11:18:56Z",
+      "side": 1,
+      "message": "TL;DR: The flag needs to be created on the same thread/task queue where the \u0027alive\u0027 state is checked.\n\nThe safety flag has fairly strict (but usually easy to meet) requirements that allow us to avoid synchronization and in the end, the |alive| check is just checking a regular bool thanks to those restrictions.\n\nIn my experience when those requirements can\u0027t be met, it points to an issue that can be (or perhaps _needs to be_) addressed in the code where we\u0027d like to use the SafetyFlag.\n\nCan you point me to the test that fails? Is the problem that the FakeNetworkSocket somehow gets created on a different thread then its destroyed on? Perhaps that\u0027s the problem we could fix? (what is the prod behavior?)",
+      "parentUuid": "1601f2fd_b3c73850",
+      "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
