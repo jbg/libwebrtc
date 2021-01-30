@@ -52,6 +52,24 @@
       "parentUuid": "c05bc0e1_6cd5c2cf",
       "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb2114a_1fa376e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-01-30T13:52:58Z",
+      "side": 1,
+      "message": "The constructor is used to capture what context the flag is valid for and as is, that\u0027s done implicitly because we use a SequenceChecker to catch programmer errors and the SequenceChecker goes away in official release builds.\n\nIf we wanted to allow injecting the context information into the flag instance, then that implies SequenceChecker doing that (and ideally that code should also vanish from official builds). However, as SequenceChecker is used, the implicit behavior is relied upon and allowing construction anywhere while requiring use of an instance to be in a specific context, takes away an assumption that a single threaded implementation could otherwise make about the construction context.\n\nSo, concretely to give an example of what could be problematic in the example above:\n\nif Class has a SequenceChecker member variable, it must Detach() that sequence checker in the constructor. At that point the first method call made on that object will \"win\" and be considered the correct thread, whether it is or not. That means that you\u0027ll only catch an error when a call is made following the first call and in a different context. If you then find out that the method call that raised a DCHECK was actually made in the correct context, you\u0027ve lost information about what call was made previously and was incorrectly marked as \"correct\".",
+      "parentUuid": "499332b8_3ba5f0d4",
+      "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
