@@ -70,6 +70,24 @@
       "parentUuid": "499332b8_3ba5f0d4",
       "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1bb2601_0cfb564a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-01-31T02:14:18Z",
+      "side": 1,
+      "message": "I\u0027m thinking, when creating SequenceChecker can we make it possible to explicitly provide to which thread in should belong in the constructor instead of detaching it from the current thread and allowing to another first come thread to acquire it?",
+      "parentUuid": "9fb2114a_1fa376e7",
+      "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
