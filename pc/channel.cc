@@ -377,7 +377,7 @@ void BaseChannel::OnWritableState(bool writable) {
 
 void BaseChannel::OnNetworkRouteChanged(
     absl::optional<rtc::NetworkRoute> network_route) {
-  RTC_LOG(LS_INFO) << "Network route for " << ToString() << " was changed.";
+  RTC_LOG(LS_INFO) << "Network route changed for " << ToString();
 
   RTC_DCHECK_RUN_ON(network_thread());
   rtc::NetworkRoute new_route;
@@ -388,10 +388,7 @@ void BaseChannel::OnNetworkRouteChanged(
   // use the same transport name and MediaChannel::OnNetworkRouteChanged cannot
   // work correctly. Intentionally leave it broken to simplify the code and
   // encourage the users to stop using non-muxing RTCP.
-  worker_thread_->PostTask(ToQueuedTask(alive_, [this, new_route] {
-    RTC_DCHECK_RUN_ON(worker_thread());
-    media_channel_->OnNetworkRouteChanged(transport_name_, new_route);
-  }));
+  media_channel_->OnNetworkRouteChanged(transport_name_, new_route);
 }
 
 sigslot::signal1<ChannelInterface*>& BaseChannel::SignalFirstPacketReceived() {
@@ -407,10 +404,8 @@ sigslot::signal1<const rtc::SentPacket&>& BaseChannel::SignalSentPacket() {
 }
 
 void BaseChannel::OnTransportReadyToSend(bool ready) {
-  worker_thread_->PostTask(ToQueuedTask(alive_, [this, ready] {
-    RTC_DCHECK_RUN_ON(worker_thread());
-    media_channel_->OnReadyToSend(ready);
-  }));
+  RTC_DCHECK_RUN_ON(network_thread());
+  media_channel_->OnReadyToSend(ready);
 }
 
 bool BaseChannel::SendPacket(bool rtcp,
