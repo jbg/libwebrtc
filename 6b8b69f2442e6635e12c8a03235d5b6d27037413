@@ -88,6 +88,24 @@
       "parentUuid": "9fb2114a_1fa376e7",
       "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bce01ee_50dbeaae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-01-31T12:18:14Z",
+      "side": 1,
+      "message": "That\u0027s an option. If we can think of a way that would still allow for no (or close to no) impact on production code, then that would be ideal.\n\nWhat I\u0027m concerned with is that if we relax the rules too much without realizing what loopholes we might be opening, then that could create headaches and additional work for us down the line.",
+      "parentUuid": "f1bb2601_0cfb564a",
+      "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
