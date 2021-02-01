@@ -1,6 +1,7 @@
 asapersson@webrtc.org
 sprang@webrtc.org
 srte@webrtc.org
+yinwa@webrtc.org
 
 per-file alr_experiment*=sprang@webrtc.org
 per-file audio_allocation_settings*=srte@webrtc.org
