@@ -51,6 +51,24 @@
       "parentUuid": "ef0f25a1_788b9ee0",
       "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06cb4215_cda7bf7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T10:55:52Z",
+      "side": 1,
+      "message": "What\u0027s unclear to me is if the `accessor_lock_` in this class is intended to only protect the member pointers, or if it\u0027s intended to also protect the pointed-too objects\u0027 internal state (i.e., RTC_PT_GUARDED_BY)?",
+      "parentUuid": "288688c7_559d80b2",
+      "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
