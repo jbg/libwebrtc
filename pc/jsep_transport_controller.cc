@@ -94,7 +94,8 @@ JsepTransportController::JsepTransportController(
       port_allocator_(port_allocator),
       async_resolver_factory_(async_resolver_factory),
       config_(config),
-      active_reset_srtp_params_(config.active_reset_srtp_params) {
+      active_reset_srtp_params_(config.active_reset_srtp_params),
+      weak_factory_(this) {
   // The |transport_observer| is assumed to be non-null.
   RTC_DCHECK(config_.transport_observer);
   RTC_DCHECK(config_.rtcp_handler);
@@ -477,8 +478,6 @@ JsepTransportController::CreateDtlsTransport(
       this, &JsepTransportController::OnTransportWritableState_n);
   dtls->SignalReceivingState.connect(
       this, &JsepTransportController::OnTransportReceivingState_n);
-  dtls->SignalDtlsHandshakeError.connect(
-      this, &JsepTransportController::OnDtlsHandshakeError);
   dtls->ice_transport()->SignalGatheringState.connect(
       this, &JsepTransportController::OnTransportGatheringState_n);
   dtls->ice_transport()->SignalCandidateGathered.connect(
@@ -495,6 +494,13 @@ JsepTransportController::CreateDtlsTransport(
       this, &JsepTransportController::OnTransportStateChanged_n);
   dtls->ice_transport()->SignalCandidatePairChanged.connect(
       this, &JsepTransportController::OnTransportCandidatePairChanged_n);
+
+  dtls->on_dtls_handshake_error =
+      [weak_ptr = weak_factory_.GetWeakPtr()](rtc::SSLHandshakeError s) {
+        if (weak_ptr) {
+          weak_ptr->OnDtlsHandshakeError(s);
+        }
+      };
   return dtls;
 }
 
