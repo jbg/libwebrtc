@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe09dde3_3ab6db08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T11:14:28Z",
+      "side": 1,
+      "message": "I started looking into it, and I think I\u0027d prefer to land elimination of recursive mutex first.",
+      "parentUuid": "06cb4215_cda7bf7e",
+      "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de1354a9_2f635a91",
         "filename": "rtc_base/synchronization/mutex.h",
         "patchSetId": 2
@@ -125,6 +143,30 @@
       "side": 1,
       "message": "Lock/unlock certainly is a state change. But how do we then deal with the usecase where we have a member with a const getter called on one thread, and a setter called on a different thread?",
       "parentUuid": "de1354a9_2f635a91",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08662d50_e867a156",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T11:14:28Z",
+      "side": 1,
+      "message": "Hmm, or should it work fine to just mark the accessor_lock_ object itself as mutable? That seems cleaner to me.",
+      "parentUuid": "fd5f90ab_55220861",
       "range": {
         "startLine": 41,
         "startChar": 14,
