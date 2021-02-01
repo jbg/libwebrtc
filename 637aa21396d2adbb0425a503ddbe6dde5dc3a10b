@@ -39,6 +39,30 @@
       },
       "revId": "637aa21396d2adbb0425a503ddbe6dde5dc3a10b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1f457ac_6934030c",
+        "filename": "modules/audio_coding/neteq/buffer_level_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-02-01T16:11:37Z",
+      "side": 1,
+      "message": "Ah so there was a good reason for this multiplication. Reverted back.",
+      "parentUuid": "6dc33b68_5c1c0ecb",
+      "range": {
+        "startLine": 44,
+        "startChar": 43,
+        "endLine": 44,
+        "endChar": 65
+      },
+      "revId": "637aa21396d2adbb0425a503ddbe6dde5dc3a10b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
