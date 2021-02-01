@@ -44,10 +44,10 @@
 #include "pc/transport_stats.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/constructor_magic.h"
-#include "rtc_base/deprecated/recursive_critical_section.h"
 #include "rtc_base/rtc_certificate.h"
 #include "rtc_base/ssl_fingerprint.h"
 #include "rtc_base/ssl_stream_adapter.h"
+#include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
 #include "rtc_base/thread.h"
@@ -149,7 +149,7 @@ class JsepTransport : public sigslot::has_slots<> {
   // occurred yet for this transport (by applying a local description with
   // changed ufrag/password).
   bool needs_ice_restart() const RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    rtc::CritScope scope(&accessor_lock_);
+    webrtc::MutexLock lock(&accessor_lock_);
     return needs_ice_restart_;
   }
 
@@ -173,7 +173,7 @@ class JsepTransport : public sigslot::has_slots<> {
 
   webrtc::RtpTransportInternal* rtp_transport() const
       RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    rtc::CritScope scope(&accessor_lock_);
+    webrtc::MutexLock lock(&accessor_lock_);
     if (composite_rtp_transport_) {
       return composite_rtp_transport_.get();
     } else if (datagram_rtp_transport_) {
@@ -185,7 +185,7 @@ class JsepTransport : public sigslot::has_slots<> {
 
   const DtlsTransportInternal* rtp_dtls_transport() const
       RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    rtc::CritScope scope(&accessor_lock_);
+    webrtc::MutexLock lock(&accessor_lock_);
     if (rtp_dtls_transport_) {
       return rtp_dtls_transport_->internal();
     } else {
@@ -195,13 +195,13 @@ class JsepTransport : public sigslot::has_slots<> {
 
   DtlsTransportInternal* rtp_dtls_transport()
       RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    rtc::CritScope scope(&accessor_lock_);
+    webrtc::MutexLock lock(&accessor_lock_);
     return rtp_dtls_transport_locked();
   }
 
   const DtlsTransportInternal* rtcp_dtls_transport() const
       RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    rtc::CritScope scope(&accessor_lock_);
+    webrtc::MutexLock lock(&accessor_lock_);
     if (rtcp_dtls_transport_) {
       return rtcp_dtls_transport_->internal();
     } else {
@@ -211,7 +211,7 @@ class JsepTransport : public sigslot::has_slots<> {
 
   DtlsTransportInternal* rtcp_dtls_transport()
       RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    rtc::CritScope scope(&accessor_lock_);
+    webrtc::MutexLock lock(&accessor_lock_);
     if (rtcp_dtls_transport_) {
       return rtcp_dtls_transport_->internal();
     } else {
@@ -221,13 +221,13 @@ class JsepTransport : public sigslot::has_slots<> {
 
   rtc::scoped_refptr<webrtc::DtlsTransport> RtpDtlsTransport()
       RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    rtc::CritScope scope(&accessor_lock_);
+    webrtc::MutexLock lock(&accessor_lock_);
     return rtp_dtls_transport_;
   }
 
   rtc::scoped_refptr<webrtc::SctpTransport> SctpTransport() const
       RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    rtc::CritScope scope(&accessor_lock_);
+    webrtc::MutexLock lock(&accessor_lock_);
     return sctp_transport_;
   }
 
@@ -235,7 +235,7 @@ class JsepTransport : public sigslot::has_slots<> {
   // SctpTransport() instead.
   webrtc::DataChannelTransportInterface* data_channel_transport() const
       RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    rtc::CritScope scope(&accessor_lock_);
+    webrtc::MutexLock lock(&accessor_lock_);
     if (sctp_data_channel_transport_) {
       return sctp_data_channel_transport_.get();
     }
@@ -257,7 +257,8 @@ class JsepTransport : public sigslot::has_slots<> {
       const rtc::RTCCertificate* certificate,
       const rtc::SSLFingerprint* fingerprint) const;
 
-  void SetActiveResetSrtpParams(bool active_reset_srtp_params);
+  void SetActiveResetSrtpParams(bool active_reset_srtp_params)
+      RTC_LOCKS_EXCLUDED(accessor_lock_);
 
  private:
   DtlsTransportInternal* rtp_dtls_transport_locked()
@@ -271,7 +272,7 @@ class JsepTransport : public sigslot::has_slots<> {
 
   bool SetRtcpMux(bool enable, webrtc::SdpType type, ContentSource source);
 
-  void ActivateRtcpMux();
+  void ActivateRtcpMux() RTC_LOCKS_EXCLUDED(accessor_lock_);
 
   bool SetSdes(const std::vector<CryptoParams>& cryptos,
                const std::vector<int>& encrypted_extension_ids,
@@ -329,7 +330,7 @@ class JsepTransport : public sigslot::has_slots<> {
   const rtc::Thread* const network_thread_;
   // Critical scope for fields accessed off-thread
   // TODO(https://bugs.webrtc.org/10300): Stop doing this.
-  rtc::RecursiveCriticalSection accessor_lock_;
+  webrtc::Mutex accessor_lock_;
   const std::string mid_;
   // needs-ice-restart bit as described in JSEP.
   bool needs_ice_restart_ RTC_GUARDED_BY(accessor_lock_) = false;
