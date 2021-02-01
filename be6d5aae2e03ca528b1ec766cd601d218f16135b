@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8373b3_f246101d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T09:42:48Z",
+      "side": 1,
+      "message": "I think Markus already did all needed preparations, what was missing was to allow allow members protected by a webrtc::Mutex to be accessed in const methods (I think that\u0027s the right thing), and actually replace RecursiveCriticalSection with Mutex.",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
