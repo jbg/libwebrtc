@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "081c8240_03900a57",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-02-01T15:30:56Z",
+      "side": 1,
+      "message": "Yes, exactly. Just to make sure that the Chrome and WebRTC clocks are the same.",
+      "parentUuid": "b5066b90_dd41ea18",
+      "range": {
+        "startLine": 411,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 20
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bc7ef63_2e00a304",
         "filename": "rtc_base/system_time.cc",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2021-02-01T15:08:46Z",
       "side": 1,
       "message": "Nit: 2021",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7476de8_23c058e3",
+        "filename": "rtc_base/system_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-02-01T15:30:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bc7ef63_2e00a304",
       "range": {
         "startLine": 2,
         "startChar": 14,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f194a1ff_c9e73899",
+        "filename": "rtc_base/system_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-02-01T15:30:56Z",
+      "side": 1,
+      "message": "Yes, perhaps that\u0027s preferable.\nHow about putting it in the header file?",
+      "parentUuid": "d4cc645f_4affcb97",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "325c7845_697566a4",
         "filename": "rtc_base/system_time.cc",
         "patchSetId": 1
@@ -83,6 +155,30 @@
       "writtenOn": "2021-02-01T15:08:46Z",
       "side": 1,
       "message": "I see this used at https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/system_wrappers/source/clock.cc;l\u003d96;drc\u003d9308b7af1e4211fd35defc34249d4a56c8b9c043 but no #include is added. Can you double check with code search (there might be other places)?",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 23
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d31a8df_e7501386",
+        "filename": "rtc_base/system_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-02-01T15:30:56Z",
+      "side": 1,
+      "message": "Thanks! I\u0027ve double checked for other usages, this was the only one I missed.",
+      "parentUuid": "325c7845_697566a4",
       "range": {
         "startLine": 43,
         "startChar": 8,
@@ -106,6 +202,30 @@
       "writtenOn": "2021-02-01T15:08:46Z",
       "side": 1,
       "message": "Since you are moving this, maybe you are interested into https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d12351 (in a separate CL of course).",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 69
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5d3d9d8_10db2d3a",
+        "filename": "rtc_base/system_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-02-01T15:30:56Z",
+      "side": 1,
+      "message": "That sounds interesting I will keep it in mind. However, already this is slightly outside of my scope, so I probably won\u0027t do it right away.",
+      "parentUuid": "d7584113_8e0e8783",
       "range": {
         "startLine": 46,
         "startChar": 0,
