@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98428c0f_749dc157",
+        "filename": "rtc_base/system_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T15:59:32Z",
+      "side": 1,
+      "message": "I think it\u0027s short enough that defining it inline in the time_utils.h header is ok. I don\u0027t have a strong opinion on the merits of inlining it. I just think that the planned chromium override file(s) shouldn\u0027t need to know about it.",
+      "parentUuid": "f194a1ff_c9e73899",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "325c7845_697566a4",
         "filename": "rtc_base/system_time.cc",
         "patchSetId": 1
