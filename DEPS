@@ -8,6 +8,13 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'chromium_revision': '402f104a7491ff8fae324950facea4552646e7f3',
+
+  # This can be overridden, e.g. with custom_vars, to download a nonstandard
+  # Xcode version in build/mac_toolchain.py
+  # instead of downloading the prebuilt pinned revision.
+  'mac_xcode_version': 'default',
+  'build_with_chromium': False,
+  'checkout_clang_coverage_tools': True,
 }
 
 deps = {
@@ -3170,6 +3177,13 @@ hooks = [
     'name': 'clang',
     'pattern': '.',
     'action': ['python', 'src/tools/clang/scripts/update.py'],
+  },
+  {
+    'name': 'clang_coverage_tools',
+    'pattern': '.',
+    'condition': 'not build_with_chromium and checkout_clang_coverage_tools',
+    'action': ['python', 'src/tools/clang/scripts/update.py',
+               '--package=coverage_tools'],
   },
   {
     # Update LASTCHANGE.
