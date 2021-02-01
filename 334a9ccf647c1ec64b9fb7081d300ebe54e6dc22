@@ -16,6 +16,40 @@
       "message": "Moved the function definitions to port but removed the usage of templates because I do not know how to use templates with a virtual functions at port_interface.",
       "revId": "334a9ccf647c1ec64b9fb7081d300ebe54e6dc22",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd11f506_f9c4544d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-01T09:43:17Z",
+      "side": 1,
+      "message": "Much better, but I wonder if we need to modify PortInterface at all.\nIf it turns out we have to modify PortInterface, I\u0027ll LGTM this one, but if we don\u0027t - less exposure in the Interface class is a Good Thing.\n",
+      "revId": "334a9ccf647c1ec64b9fb7081d300ebe54e6dc22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff0a80d7_753e2204",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-01T09:43:17Z",
+      "side": 1,
+      "message": "Hm. If you use Port rather than PortInterface here, I think you can remove the declarations of SubscribePortDestroyed and SendPortDestroyed from the PortInterface class, leaving them as implementation details of Port. I think everyone who knows about the signal already knows they are dealing with a Port, and don\u0027t need this API to be visible on the abstraction.",
+      "revId": "334a9ccf647c1ec64b9fb7081d300ebe54e6dc22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
