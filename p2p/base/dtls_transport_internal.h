@@ -16,6 +16,7 @@
 
 #include <memory>
 #include <string>
+#include <utility>
 
 #include "api/crypto/crypto_options.h"
 #include "api/dtls_transport_interface.h"
@@ -116,6 +117,7 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
 
   // Emitted whenever the Dtls handshake failed on some transport channel.
   sigslot::signal1<rtc::SSLHandshakeError> SignalDtlsHandshakeError;
+  std::function<void(const rtc::SSLHandshakeError)> on_dtls_handshake_error;
 
  protected:
   DtlsTransportInternal();
