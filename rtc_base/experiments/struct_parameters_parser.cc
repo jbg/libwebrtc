@@ -11,6 +11,7 @@
 
 #include <algorithm>
 
+#include "absl/strings/match.h"
 #include "rtc_base/logging.h"
 
 namespace webrtc {
@@ -107,7 +108,7 @@ void StructParametersParser::Parse(absl::string_view src) {
         break;
       }
     }
-    if (!found) {
+    if (!found && !absl::StartsWith(key, "_")) {
       RTC_LOG(LS_INFO) << "No field with key: '" << key
                        << "' (found in trial: \"" << src << "\")";
     }
