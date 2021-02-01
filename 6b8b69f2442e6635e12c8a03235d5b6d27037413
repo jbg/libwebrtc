@@ -106,6 +106,24 @@
       "parentUuid": "f1bb2601_0cfb564a",
       "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f73755_73d21523",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-01T14:16:03Z",
+      "side": 1,
+      "message": "I like idea of given option to provide task_queue at construction instead of grabbing the current. Will prepare a separate change.\n\nI do not see it as a loophope, but as a proper separation:\nSequence checker itself can be created/destroyed on any thread, but returns IsCurrent just for one. Providing it as constructor parameters is explicit, while grabbing current during construction or grabbing current at first usage is implicit.\n\n(Same applies to the Safety flag: it can be created/copied/destroyed on any thread. alive can be checked from single sequence)",
+      "parentUuid": "9fb2114a_1fa376e7",
+      "revId": "6b8b69f2442e6635e12c8a03235d5b6d27037413",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
