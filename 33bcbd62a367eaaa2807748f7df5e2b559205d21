@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8cc351_470fd839",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T16:16:00Z",
+      "side": 1,
+      "message": "Philip, would you like to have a first look? Since the few subtleties are in modules/video_coding/.\n",
+      "revId": "33bcbd62a367eaaa2807748f7df5e2b559205d21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "397f4040_3c153f63",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_decoder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T16:16:00Z",
+      "side": 1,
+      "message": "Use explicit refptr type, for lambda capture below.",
+      "range": {
+        "startLine": 279,
+        "startChar": 2,
+        "endLine": 279,
+        "endChar": 56
+      },
+      "revId": "33bcbd62a367eaaa2807748f7df5e2b559205d21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

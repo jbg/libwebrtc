@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67a7767b_80d8ea7a",
+        "filename": "modules/video_coding/codecs/multiplex/multiplex_encoder_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T16:16:00Z",
+      "side": 1,
+      "message": "I think this is a bugfix, it looks like the previous code could retain the wrong buffer.",
+      "range": {
+        "startLine": 217,
+        "startChar": 21,
+        "endLine": 217,
+        "endChar": 40
+      },
+      "revId": "f9d5449296841cb7098d541f180403f33f49aeaa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
