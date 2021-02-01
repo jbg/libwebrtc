@@ -305,6 +305,8 @@ class JsepTransportController : public sigslot::has_slots<> {
 
   CallbackList<const cricket::CandidatePairChangeEvent&>
       signal_ice_candidate_pair_changed_;
+  CallbackList<const rtc::SSLHandshakeError>
+      dtls_handshake_error_callback_list_;
 
   RTCError ApplyDescription_n(bool local,
                               SdpType type,
