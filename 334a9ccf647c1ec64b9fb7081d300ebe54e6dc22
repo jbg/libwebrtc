@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4d5e9ed_c789af83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T09:59:01Z",
+      "side": 1,
+      "message": "Hmm, but you only need the subscribe method on the interface? SendPortDestroyed could be in the implementation (and perhaps even private)?",
+      "parentUuid": "93e2d172_2508ed3a",
+      "revId": "334a9ccf647c1ec64b9fb7081d300ebe54e6dc22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff0a80d7_753e2204",
         "filename": "p2p/base/port.h",
         "patchSetId": 34
