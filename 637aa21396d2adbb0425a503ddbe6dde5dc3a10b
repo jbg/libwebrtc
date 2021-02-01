@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d8d14d2_686ca328",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-02-01T15:55:32Z",
+      "side": 1,
+      "message": "Nice fix.",
+      "revId": "637aa21396d2adbb0425a503ddbe6dde5dc3a10b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dc33b68_5c1c0ecb",
+        "filename": "modules/audio_coding/neteq/buffer_level_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-02-01T15:55:32Z",
+      "side": 1,
+      "message": "This can be negative, right? Left shifting a negative number is undefined behavior, I think.",
+      "range": {
+        "startLine": 44,
+        "startChar": 43,
+        "endLine": 44,
+        "endChar": 65
+      },
+      "revId": "637aa21396d2adbb0425a503ddbe6dde5dc3a10b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
