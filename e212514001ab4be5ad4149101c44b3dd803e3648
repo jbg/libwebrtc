@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1547ae1_91f5510e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-01T11:49:08Z",
+      "side": 1,
+      "message": "I see some issues in tests. I didn\u0027t have time to dig deeper into them but maybe there are some SigSlots to migrate (since we removed a call to connect())?",
+      "revId": "e212514001ab4be5ad4149101c44b3dd803e3648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54603622_911b365c",
+        "filename": "p2p/base/dtls_transport_internal.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-01T11:49:08Z",
+      "side": 1,
+      "message": "Having this data member in the \"public\" will allow anyone to change it (which is one of the issues with SigSlot members in the public part of the class API).\n\n+1 for removing the callback list if not needed, can you move the on_dtls_handshake_error_ to the private part and add an interface to access it?",
+      "range": {
+        "startLine": 120,
+        "startChar": 2,
+        "endLine": 120,
+        "endChar": 76
+      },
+      "revId": "e212514001ab4be5ad4149101c44b3dd803e3648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
