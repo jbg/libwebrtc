@@ -16,6 +16,23 @@
       "message": "Thanks for the review and suggestions. I have updated the code and replied to the comments, please, take a look. ",
       "revId": "ade7341f68f7b88ac2eb3abe4e96ebfa08e89353",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18aababc_5426d20c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-01T09:50:58Z",
+      "side": 1,
+      "message": "LG! please also add a unittest. In addition, some existing tests will fail, I believe ... needs update.",
+      "revId": "ade7341f68f7b88ac2eb3abe4e96ebfa08e89353",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
