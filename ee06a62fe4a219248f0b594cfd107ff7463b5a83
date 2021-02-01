@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91eed054_e8c518d3",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-01T15:39:26Z",
+      "side": 1,
+      "message": "Sounds good, so to move forward feel free to look at https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/webrtc.gni;l\u003d56-60;drc\u003d7864600a6ee3531652530b8fddad9bc49d20f3f7 for inspiration.\n\nIn general, link time injection is not the best thing to do but sometimes there are no other ways, especially if dependency injection is not possible (nisse@ commented about injection on https://bugs.chromium.org/p/chromium/issues/detail?id\u003d516700#c16 but I didn\u0027t look at the code, can we double check it before landing?).",
+      "parentUuid": "081c8240_03900a57",
+      "range": {
+        "startLine": 411,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 20
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bc7ef63_2e00a304",
         "filename": "rtc_base/system_time.cc",
         "patchSetId": 1
