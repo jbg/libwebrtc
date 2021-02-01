@@ -420,6 +420,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52099987_e290457b",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-01T10:35:38Z",
+      "side": 1,
+      "message": "Are we going to do this in a follow-up CL?",
+      "parentUuid": "43642f7b_b37e5f1d",
+      "range": {
+        "startLine": 906,
+        "startChar": 2,
+        "endLine": 907,
+        "endChar": 62
+      },
+      "revId": "326b28c11b05f52671bd8602c30405ee4e2a8f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f58073b_03fcde7a",
         "filename": "p2p/client/basic_port_allocator.cc",
         "patchSetId": 31
