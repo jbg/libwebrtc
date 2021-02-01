@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "979a009b_a7849e52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T12:12:32Z",
+      "side": 1,
+      "message": "Harald, PTAL. I\u0027m not that familiar with threading conventions in this code. Can you confirm that the removed RTC_GUARDED_BY shouldn\u0027t in fact be RTC_PT_GUARDED_BY?",
+      "revId": "b741c60c5174879e453ff0b497d2fa8d54e4b804",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
