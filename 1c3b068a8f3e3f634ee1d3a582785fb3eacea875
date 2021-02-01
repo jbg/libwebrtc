@@ -106,6 +106,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aa23eac_a10ffd12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T13:40:03Z",
+      "side": 1,
+      "message": "Ack.\n\nAs far as protecting the internal state of the objects, I\u0027m not too worried about that myself since the current APIs hand out pointers to those objects and don\u0027t have a way of controlling or synchronizing access to the objects from where those pointers are used.",
+      "parentUuid": "fe09dde3_3ab6db08",
+      "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de1354a9_2f635a91",
