@@ -71,6 +71,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "848ee32e_5e7aa17b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13719
+      },
+      "writtenOn": "2021-02-01T10:06:32Z",
+      "side": 1,
+      "message": "Thanks Neils and Harald.",
+      "revId": "334a9ccf647c1ec64b9fb7081d300ebe54e6dc22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85a94e23_e04458bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13719
+      },
+      "writtenOn": "2021-02-01T10:06:32Z",
+      "side": 1,
+      "message": "Yes you are right, so removed the SendPortDestroyed from the interface.",
+      "parentUuid": "f4d5e9ed_c789af83",
+      "revId": "334a9ccf647c1ec64b9fb7081d300ebe54e6dc22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff0a80d7_753e2204",
