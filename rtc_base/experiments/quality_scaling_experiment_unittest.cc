@@ -38,10 +38,13 @@ void ExpectEqualConfig(QualityScalingExperiment::Config a,
 }
 }  // namespace
 
-TEST(QualityScalingExperimentTest, DisabledWithoutFieldTrial) {
+#if !defined(WEBRTC_IOS)
+// TODO(bugs.webrtc.org/12401): investigate why QualityScaler kicks in on iOS.
+TEST(QualityScalingExperimentTest, DefaultEnabledWithoutFieldTrial) {
   webrtc::test::ScopedFieldTrials field_trials("");
-  EXPECT_FALSE(QualityScalingExperiment::Enabled());
+  EXPECT_TRUE(QualityScalingExperiment::Enabled());
 }
+#endif
 
 TEST(QualityScalingExperimentTest, EnabledWithFieldTrial) {
   webrtc::test::ScopedFieldTrials field_trials(
@@ -59,10 +62,14 @@ TEST(QualityScalingExperimentTest, ParseSettings) {
   ExpectEqualSettings(kExpected, *settings);
 }
 
-TEST(QualityScalingExperimentTest, ParseSettingsFailsWithoutFieldTrial) {
+#if !defined(WEBRTC_IOS)
+// TODO(bugs.webrtc.org/12401): investigate why QualityScaler kicks in on iOS.
+TEST(QualityScalingExperimentTest, ParseSettingsUsesDefaultsWithoutFieldTrial) {
   webrtc::test::ScopedFieldTrials field_trials("");
-  EXPECT_FALSE(QualityScalingExperiment::ParseSettings());
+  // Uses some default hard coded values.
+  EXPECT_TRUE(QualityScalingExperiment::ParseSettings());
 }
+#endif
 
 TEST(QualityScalingExperimentTest, ParseSettingsFailsWithInvalidFieldTrial) {
   webrtc::test::ScopedFieldTrials field_trials(
