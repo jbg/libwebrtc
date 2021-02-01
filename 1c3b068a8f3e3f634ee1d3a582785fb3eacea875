@@ -69,6 +69,46 @@
       "parentUuid": "288688c7_559d80b2",
       "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bd9033c_6f54a87e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-02-01T11:06:58Z",
+      "side": 1,
+      "message": "Thanks for taking this on! I put an initial discussion comment.",
+      "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1354a9_2f635a91",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-02-01T11:06:58Z",
+      "side": 1,
+      "message": "Hmm I propose to drop the change in the Mutex code. I remember we discussed the topic already when it was introduced. The state is actually changed when Lock/Unlock is used, and const is also inconsistent with Abseil mutex semantics.",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
