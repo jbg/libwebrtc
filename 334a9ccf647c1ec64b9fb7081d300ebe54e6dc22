@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d173fe_0e407820",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13719
+      },
+      "writtenOn": "2021-02-01T09:33:25Z",
+      "side": 1,
+      "message": "Moved the function definitions to port but removed the usage of templates because I do not know how to use templates with a virtual functions at port_interface.",
+      "revId": "334a9ccf647c1ec64b9fb7081d300ebe54e6dc22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
