@@ -109,6 +109,30 @@
       },
       "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd5f90ab_55220861",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T11:11:02Z",
+      "side": 1,
+      "message": "Lock/unlock certainly is a state change. But how do we then deal with the usecase where we have a member with a const getter called on one thread, and a setter called on a different thread?",
+      "parentUuid": "de1354a9_2f635a91",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
