@@ -107,7 +107,7 @@ void StructParametersParser::Parse(absl::string_view src) {
         break;
       }
     }
-    if (!found) {
+    if (key.size() == 0 || key[0] != '_') {
       RTC_LOG(LS_INFO) << "No field with key: '" << key
                        << "' (found in trial: \"" << src << "\")";
     }
