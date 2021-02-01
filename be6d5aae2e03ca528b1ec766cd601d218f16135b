@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "886a2fe8_532d2dd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T10:29:49Z",
+      "side": 1,
+      "message": "I\u0027ll try out a separate cl refactoring construction to make more members const.",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6261359_9dcbbee3",
@@ -103,6 +120,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0218019_f2b73e1a",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T10:29:49Z",
+      "side": 1,
+      "message": "Added a TODO item. The comment above says in can be called on any thread. It looks like its called from corresponding methods in JsepTransportController, but not crystal clear to me if that\u0027s signal thread or network thread. \"The ICE related events are signaled on the |signaling_thread|. All the transport related methods are called on the |network_thread|.\"",
+      "parentUuid": "93c5615f_a11bcec3",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aecb4915_9bb71862",
@@ -116,6 +151,30 @@
       "writtenOn": "2021-02-01T10:00:28Z",
       "side": 1,
       "message": "can we refactor the initialization code so that composite_rtp_transport_ becomes const?",
+      "range": {
+        "startLine": 177,
+        "startChar": 8,
+        "endLine": 177,
+        "endChar": 32
+      },
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74c48e58_6bb56000",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-01T10:29:49Z",
+      "side": 1,
+      "message": "Probably. Not entirely trivial, so prefer a separate cl for that.",
+      "parentUuid": "aecb4915_9bb71862",
       "range": {
         "startLine": 177,
         "startChar": 8,
