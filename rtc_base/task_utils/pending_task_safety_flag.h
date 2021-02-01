@@ -12,10 +12,12 @@
 #define RTC_BASE_TASK_UTILS_PENDING_TASK_SAFETY_FLAG_H_
 
 #include "api/scoped_refptr.h"
+#include "api/task_queue/task_queue_base.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/ref_count.h"
 #include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/system/no_unique_address.h"
+#include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
 
@@ -43,11 +45,14 @@ namespace webrtc {
 //    my_task_queue_->PostTask(ToQueuedTask(pending_task_safety_flag_,
 //        [this]() { MyMethod(); }));
 //
-// Note that checking the state only works on the construction/destruction
-// thread of the ReceiveStatisticsProxy instance.
+// Checking and setting the alive state must be done on the same sequence.
 class PendingTaskSafetyFlag : public rtc::RefCountInterface {
  public:
+  // Creates a flag that must be used on the current thread or task queue.
   static rtc::scoped_refptr<PendingTaskSafetyFlag> Create();
+  // Creates a flag that must be used on the `task_queue`.
+  static rtc::scoped_refptr<PendingTaskSafetyFlag> Create(
+      TaskQueueBase& task_queue);
 
   ~PendingTaskSafetyFlag() = default;
 
@@ -56,9 +61,11 @@ class PendingTaskSafetyFlag : public rtc::RefCountInterface {
 
  protected:
   PendingTaskSafetyFlag() = default;
+  PendingTaskSafetyFlag(TaskQueueBase& task_queue)
+      : main_sequence_(task_queue) {}
 
  private:
-  bool alive_ = true;
+  bool alive_ RTC_GUARDED_BY(main_sequence_) = true;
   RTC_NO_UNIQUE_ADDRESS SequenceChecker main_sequence_;
 };
 

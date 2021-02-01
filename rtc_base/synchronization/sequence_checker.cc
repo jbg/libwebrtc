@@ -42,10 +42,17 @@ SequenceCheckerImpl::SequenceCheckerImpl()
       valid_queue_(TaskQueueBase::Current()),
       valid_system_queue_(GetSystemQueueRef()) {}
 
+SequenceCheckerImpl::SequenceCheckerImpl(TaskQueueBase& task_queue)
+    // When `task_queue` is attached, `valid_thread_` and `valid_system_queue_`
+    // shouldn't be used. Keep them unititialize to let msan catch accidental
+    // usage. Since this code shouldn't be used in production code, such
+    // uninitialized access wouldn't be a security risk.
+    : attached_(true), valid_queue_(&task_queue) {}
+
 SequenceCheckerImpl::~SequenceCheckerImpl() = default;
 
 bool SequenceCheckerImpl::IsCurrent() const {
-  const TaskQueueBase* const current_queue = TaskQueueBase::Current();
+  TaskQueueBase* const current_queue = TaskQueueBase::Current();
   const rtc::PlatformThreadRef current_thread = rtc::CurrentThreadRef();
   const void* const current_system_queue = GetSystemQueueRef();
   MutexLock scoped_lock(&lock_);
@@ -74,7 +81,7 @@ void SequenceCheckerImpl::Detach() {
 
 #if RTC_DCHECK_IS_ON
 std::string SequenceCheckerImpl::ExpectationToString() const {
-  const TaskQueueBase* const current_queue = TaskQueueBase::Current();
+  TaskQueueBase* const current_queue = TaskQueueBase::Current();
   const rtc::PlatformThreadRef current_thread = rtc::CurrentThreadRef();
   const void* const current_system_queue = GetSystemQueueRef();
   MutexLock scoped_lock(&lock_);

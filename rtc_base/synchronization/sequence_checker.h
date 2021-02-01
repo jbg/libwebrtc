@@ -25,9 +25,10 @@ namespace webrtc {
 //
 // Note: You should almost always use the SequenceChecker class to get the
 // right version for your build configuration.
-class RTC_EXPORT SequenceCheckerImpl {
+class RTC_EXPORT RTC_LOCKABLE SequenceCheckerImpl {
  public:
   SequenceCheckerImpl();
+  explicit SequenceCheckerImpl(TaskQueueBase& task_queue);
   ~SequenceCheckerImpl();
 
   bool IsCurrent() const;
@@ -46,7 +47,7 @@ class RTC_EXPORT SequenceCheckerImpl {
   // These are mutable so that IsCurrent can set them.
   mutable bool attached_ RTC_GUARDED_BY(lock_);
   mutable rtc::PlatformThreadRef valid_thread_ RTC_GUARDED_BY(lock_);
-  mutable const TaskQueueBase* valid_queue_ RTC_GUARDED_BY(lock_);
+  mutable TaskQueueBase* valid_queue_ RTC_GUARDED_BY(lock_);
   mutable const void* valid_system_queue_ RTC_GUARDED_BY(lock_);
 };
 
@@ -54,8 +55,10 @@ class RTC_EXPORT SequenceCheckerImpl {
 //
 // Note: You should almost always use the SequenceChecker class to get the
 // right version for your build configuration.
-class SequenceCheckerDoNothing {
+class RTC_LOCKABLE SequenceCheckerDoNothing {
  public:
+  SequenceCheckerDoNothing() = default;
+  explicit SequenceCheckerDoNothing(const TaskQueueBase&) {}
   bool IsCurrent() const { return true; }
   void Detach() {}
 };
@@ -80,9 +83,9 @@ class SequenceCheckerDoNothing {
 //
 // In Release mode, IsCurrent will always return true.
 #if RTC_DCHECK_IS_ON
-class RTC_LOCKABLE SequenceChecker : public SequenceCheckerImpl {};
+using SequenceChecker = SequenceCheckerImpl;
 #else
-class RTC_LOCKABLE SequenceChecker : public SequenceCheckerDoNothing {};
+using SequenceChecker = SequenceCheckerDoNothing;
 #endif  // RTC_ENABLE_THREAD_CHECKER
 
 namespace webrtc_seq_check_impl {
