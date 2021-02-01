@@ -38,18 +38,15 @@ class RTC_LOCKABLE Mutex final {
   Mutex(const Mutex&) = delete;
   Mutex& operator=(const Mutex&) = delete;
 
-  void Lock() RTC_EXCLUSIVE_LOCK_FUNCTION() {
-    impl_.Lock();
-  }
-  ABSL_MUST_USE_RESULT bool TryLock() RTC_EXCLUSIVE_TRYLOCK_FUNCTION(true) {
+  void Lock() const RTC_EXCLUSIVE_LOCK_FUNCTION() { impl_.Lock(); }
+  ABSL_MUST_USE_RESULT bool TryLock() const
+      RTC_EXCLUSIVE_TRYLOCK_FUNCTION(true) {
     return impl_.TryLock();
   }
-  void Unlock() RTC_UNLOCK_FUNCTION() {
-    impl_.Unlock();
-  }
+  void Unlock() const RTC_UNLOCK_FUNCTION() { impl_.Unlock(); }
 
  private:
-  MutexImpl impl_;
+  mutable MutexImpl impl_;
 };
 
 // MutexLock, for serializing execution through a scope.
@@ -58,14 +55,14 @@ class RTC_SCOPED_LOCKABLE MutexLock final {
   MutexLock(const MutexLock&) = delete;
   MutexLock& operator=(const MutexLock&) = delete;
 
-  explicit MutexLock(Mutex* mutex) RTC_EXCLUSIVE_LOCK_FUNCTION(mutex)
+  explicit MutexLock(const Mutex* mutex) RTC_EXCLUSIVE_LOCK_FUNCTION(mutex)
       : mutex_(mutex) {
     mutex->Lock();
   }
   ~MutexLock() RTC_UNLOCK_FUNCTION() { mutex_->Unlock(); }
 
  private:
-  Mutex* mutex_;
+  const Mutex* const mutex_;
 };
 
 // A mutex used to protect global variables. Do NOT use for other purposes.
