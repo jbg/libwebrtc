@@ -26,6 +26,7 @@
 #endif  // defined(WEBRTC_POSIX)
 
 #include "rtc_base/synchronization/mutex.h"
+#include "rtc_base/system_time.h"
 #include "rtc_base/time_utils.h"
 
 namespace webrtc {
