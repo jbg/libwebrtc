@@ -488,6 +488,7 @@ class JsepTransportController : public sigslot::has_slots<> {
   rtc::AsyncInvoker invoker_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(JsepTransportController);
+  rtc::WeakPtrFactory<JsepTransportController> weak_factory_;
 };
 
 }  // namespace webrtc
