@@ -16,6 +16,41 @@
       "message": "Sideline comment: JsepTransport is guaranteed to be either sdes mode or dtls mode, there is no way to change between them (and I\u0027d *really* like to get rid of sdes mode, usage is low enough that we may be able to do it soon).\nSo it should be relatively simple to make the dtls_transport_ and sdes_transport_ members const; it\u0027s possible that they may be set to null at some point; it\u0027s also possible that we could just check if they are stopped instead.\n\n\n",
       "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "288688c7_559d80b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:50:19Z",
+      "side": 1,
+      "message": "follow up cl for employing more constness sgtm.",
+      "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30847a58_625039a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:50:19Z",
+      "side": 1,
+      "message": "+1\n\nShould we add a TODO for that in this CL before landing?",
+      "parentUuid": "ef0f25a1_788b9ee0",
+      "revId": "1c3b068a8f3e3f634ee1d3a582785fb3eacea875",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
