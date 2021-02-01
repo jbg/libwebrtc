@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5066b90_dd41ea18",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-01T15:08:46Z",
+      "side": 1,
+      "message": "Is this CL a preparation into doing something like https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/rtc_base/BUILD.gn;l\u003d288-303;drc\u003d5e227abfe98a0ac676cba7c6b9ae4d25e716a8bd?\n\nI am tempted to look into something more similar to metrics and field_trial where we have a GN args that by default defines a macro to not define (but declare) these methods and then make webrtc_overrides to define them (the logging approach is quite problematic).",
+      "range": {
+        "startLine": 411,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 20
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bc7ef63_2e00a304",
+        "filename": "rtc_base/system_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-01T15:08:46Z",
+      "side": 1,
+      "message": "Nit: 2021",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4cc645f_4affcb97",
         "filename": "rtc_base/system_time.cc",
         "patchSetId": 1
@@ -19,6 +65,52 @@
         "startChar": 0,
         "endLine": 42,
         "endChar": 0
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "325c7845_697566a4",
+        "filename": "rtc_base/system_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-01T15:08:46Z",
+      "side": 1,
+      "message": "I see this used at https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/system_wrappers/source/clock.cc;l\u003d96;drc\u003d9308b7af1e4211fd35defc34249d4a56c8b9c043 but no #include is added. Can you double check with code search (there might be other places)?",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 23
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7584113_8e0e8783",
+        "filename": "rtc_base/system_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-01T15:08:46Z",
+      "side": 1,
+      "message": "Since you are moving this, maybe you are interested into https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d12351 (in a separate CL of course).",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 69
       },
       "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
