@@ -16,6 +16,222 @@
       "message": "I think Markus already did all needed preparations, what was missing was to allow allow members protected by a webrtc::Mutex to be accessed in const methods (I think that\u0027s the right thing), and actually replace RecursiveCriticalSection with Mutex.",
       "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb652136_c4782be0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "Thanks for taking a look at this. I think there\u0027s excessive locking going on here so I\u0027m wondering if we can get rid of much of it?\n\nbtw, I wrote the comments in reverse order since I went through the changes first and then realized we shouldn\u0027t really need the locks in the first place, so apologies if the context comes in a bit late",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6261359_9dcbbee3",
+        "filename": "pc/jsep_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "if |sdes_transport_| can be made const, then the lock can be moved into the condition",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a87ac3f9_84218bba",
+        "filename": "pc/jsep_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "same for dtls_srtp_transport_",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc5793b_d9d38ee9",
+        "filename": "pc/jsep_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "don\u0027t think we need a lock for this check... actually, I don\u0027t think this scope needs a lock.",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93c5615f_a11bcec3",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "ideally (and perhaps this is already the case) this variable gets read and written to on the same thread/tq. If that\u0027s the case we can use a sequence checker instead of a lock. As is, the return value from this function can otherwise not be trusted.\nCan you add a TODO for me, yourself (or point to a bug) about seeing if we can get rid of a lock requirement for this variable?",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aecb4915_9bb71862",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "can we refactor the initialization code so that composite_rtp_transport_ becomes const?",
+      "range": {
+        "startLine": 177,
+        "startChar": 8,
+        "endLine": 177,
+        "endChar": 32
+      },
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b30f83d6_76f670d1",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "I think that there isn\u0027t a need for rtp_dtls_transport_locked() since rtp_dtls_transport_ can be made const and the check for whether it\u0027s nullptr or not, can be made without a lock.",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a77daf2d_df27ca17",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "make rtcp_dtls_transport_ const and remove need for lock?",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3620f8e6_1e736892",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "I think we can make rtcp_dtls_transport_ const and remove the need for the lock",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9f5d8fd_db76b165",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "make rtp_dtls_transport_ const and remove the lock?",
+      "range": {
+        "startLine": 225,
+        "startChar": 11,
+        "endLine": 225,
+        "endChar": 30
+      },
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c39ba35_2ee76374",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "can we make sctp_transport_ const and remove the lock?",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7b4d3d_0fa1345a",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-01T10:00:28Z",
+      "side": 1,
+      "message": "this check seems unnecessary. Can you remove it?\n\nActually, what about making sctp_data_channel_transport_ const and remove the lock requirement?",
+      "revId": "be6d5aae2e03ca528b1ec766cd601d218f16135b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
