@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cb9f4a9_2e257f41",
+        "filename": "pc/channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-02T14:20:46Z",
+      "side": 0,
+      "message": "Looks like a left-over from https://codereview.webrtc.org/2890263003",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 32
+      },
+      "revId": "7358b40f4468c1cbbe9f73a293385b7cfe7b3920",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
