@@ -74,6 +74,17 @@ TEST(SequenceCheckerTest, DestructorAllowedOnDifferentThread) {
   });
 }
 
+TEST(SequenceCheckerTest, AttachToTaskQueueOnConstruction) {
+  TaskQueueForTest right_queue;
+  TaskQueueForTest wrong_queue;
+  SequenceChecker sequence_checker(*right_queue.Get());
+  wrong_queue.SendTask(
+      [&] { EXPECT_EQ(sequence_checker.IsCurrent(), !RTC_DCHECK_IS_ON); },
+      RTC_FROM_HERE);
+  right_queue.SendTask([&] { EXPECT_TRUE(sequence_checker.IsCurrent()); },
+                       RTC_FROM_HERE);
+}
+
 TEST(SequenceCheckerTest, Detach) {
   SequenceChecker sequence_checker;
   sequence_checker.Detach();

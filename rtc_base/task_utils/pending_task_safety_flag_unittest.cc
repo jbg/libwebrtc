@@ -20,13 +20,6 @@
 #include "test/gtest.h"
 
 namespace webrtc {
-namespace {
-using ::testing::AtLeast;
-using ::testing::Invoke;
-using ::testing::MockFunction;
-using ::testing::NiceMock;
-using ::testing::Return;
-}  // namespace
 
 TEST(PendingTaskSafetyFlagTest, Basic) {
   rtc::scoped_refptr<PendingTaskSafetyFlag> safety_flag;
@@ -67,15 +60,16 @@ TEST(PendingTaskSafetyFlagTest, PendingTaskSuccess) {
 
   class Owner {
    public:
-    Owner() : tq_main_(TaskQueueBase::Current()) { RTC_DCHECK(tq_main_); }
+    explicit Owner(TaskQueueBase& tq_main)
+        : tq_main_(tq_main), flag_(PendingTaskSafetyFlag::Create(tq_main)) {}
     ~Owner() {
-      RTC_DCHECK(tq_main_->IsCurrent());
+      RTC_DCHECK(tq_main_.IsCurrent());
       flag_->SetNotAlive();
     }
 
     void DoStuff() {
-      RTC_DCHECK(!tq_main_->IsCurrent());
-      tq_main_->PostTask(ToQueuedTask([safe = flag_, this]() {
+      RTC_DCHECK(!tq_main_.IsCurrent());
+      tq_main_.PostTask(ToQueuedTask([safe = flag_, this]() {
         if (!safe->alive())
           return;
         stuff_done_ = true;
@@ -85,25 +79,20 @@ TEST(PendingTaskSafetyFlagTest, PendingTaskSuccess) {
     bool stuff_done() const { return stuff_done_; }
 
    private:
-    TaskQueueBase* const tq_main_;
+    TaskQueueBase& tq_main_;
     bool stuff_done_ = false;
-    rtc::scoped_refptr<PendingTaskSafetyFlag> flag_{
-        PendingTaskSafetyFlag::Create()};
+    const rtc::scoped_refptr<PendingTaskSafetyFlag> flag_;
   };
 
-  std::unique_ptr<Owner> owner;
-  tq1.SendTask(
-      [&owner]() {
-        owner.reset(new Owner());
-        EXPECT_FALSE(owner->stuff_done());
-      },
-      RTC_FROM_HERE);
+  auto owner = std::make_unique<Owner>(*tq1.Get());
+  EXPECT_FALSE(owner->stuff_done());
+
   ASSERT_TRUE(owner);
   tq2.SendTask([&owner]() { owner->DoStuff(); }, RTC_FROM_HERE);
   tq1.SendTask(
-      [&owner]() {
+      [owner = std::move(owner)]() mutable {
         EXPECT_TRUE(owner->stuff_done());
-        owner.reset();
+        owner = nullptr;
       },
       RTC_FROM_HERE);
   ASSERT_FALSE(owner);
@@ -138,8 +127,9 @@ TEST(PendingTaskSafetyFlagTest, PendingTaskDropped) {
 
   std::unique_ptr<Owner> owner;
   bool stuff_done = false;
-  tq1.SendTask([&owner, &stuff_done]() { owner.reset(new Owner(&stuff_done)); },
-               RTC_FROM_HERE);
+  tq1.SendTask(
+      [&owner, &stuff_done]() { owner = std::make_unique<Owner>(&stuff_done); },
+      RTC_FROM_HERE);
   ASSERT_TRUE(owner);
   // Queue up a task on tq1 that will execute before the 'DoStuff' task
   // can, and delete the |owner| before the 'stuff' task can execute.

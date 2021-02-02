@@ -19,6 +19,12 @@ rtc::scoped_refptr<PendingTaskSafetyFlag> PendingTaskSafetyFlag::Create() {
   return new rtc::RefCountedObject<PendingTaskSafetyFlag>();
 }
 
+// static
+rtc::scoped_refptr<PendingTaskSafetyFlag> PendingTaskSafetyFlag::Create(
+    TaskQueueBase& task_queue) {
+  return new rtc::RefCountedObject<PendingTaskSafetyFlag>(task_queue);
+}
+
 void PendingTaskSafetyFlag::SetNotAlive() {
   RTC_DCHECK_RUN_ON(&main_sequence_);
   alive_ = false;
