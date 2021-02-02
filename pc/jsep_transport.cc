@@ -341,6 +341,7 @@ webrtc::RTCError JsepTransport::AddRemoteCandidates(
 }
 
 void JsepTransport::SetNeedsIceRestartFlag() {
+  RTC_DCHECK_RUN_ON(network_thread_);
   webrtc::MutexLock lock(&accessor_lock_);
   if (!needs_ice_restart_) {
     needs_ice_restart_ = true;
