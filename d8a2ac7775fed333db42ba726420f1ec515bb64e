@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e296ec5_5ea0606e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-02T14:11:04Z",
+      "side": 1,
+      "message": "Nice cleanup!\n\nOnce this has landed (and not rolled back), will you submit a second CL to delete all the locks that only lock over const members?\n",
+      "revId": "d8a2ac7775fed333db42ba726420f1ec515bb64e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "158432f7_37f42e1f",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-02T14:11:04Z",
+      "side": 1,
+      "message": "I wonder if the lock here becomes unnecessary because default_rtp_transport() now accesses only const members. But I\u0027m OK with making that a separate CL.",
+      "revId": "d8a2ac7775fed333db42ba726420f1ec515bb64e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
