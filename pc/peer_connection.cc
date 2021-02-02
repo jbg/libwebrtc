@@ -528,6 +528,9 @@ RTCError PeerConnection::Initialize(
 
   // The port allocator lives on the network thread and should be initialized
   // there.
+  // TODO(tommi): See if we can piggyback on this call and initialize all the
+  // |transport_controller_->Subscribe*| calls below on the network thread via
+  // this invoke.
   const auto pa_result =
       network_thread()->Invoke<InitializePortAllocatorResult>(
           RTC_FROM_HERE, [this, &stun_servers, &turn_servers, &configuration] {
@@ -620,6 +623,10 @@ RTCError PeerConnection::Initialize(
   // due to lack of unit tests which trigger these scenarios.
   // TODO(bugs.webrtc.org/12160): Remove above comments.
   // callbacks for signaling_thread.
+  // TODO(tommi): If we can't piggyback on the above network Invoke(), then
+  // perhaps we could post these subscription calls to the network thread
+  // so that the transport controller doesn't have to do the signaling/network
+  // handling internally and use AsyncInvoker.
   transport_controller_->SubscribeIceConnectionState(
       [this](cricket::IceConnectionState s) {
         RTC_DCHECK_RUN_ON(signaling_thread());
@@ -2155,6 +2162,8 @@ void PeerConnection::OnTransportControllerConnectionState(
 void PeerConnection::OnTransportControllerCandidatesGathered(
     const std::string& transport_name,
     const cricket::Candidates& candidates) {
+  // TODO(tommi): Expect this to come in on the network thread (not signaling
+  // as it currently does), handle appropriately.
   int sdp_mline_index;
   if (!GetLocalCandidateMediaIndex(transport_name, &sdp_mline_index)) {
     RTC_LOG(LS_ERROR)
