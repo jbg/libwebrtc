@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5a15291_5fd310dd",
+        "filename": "call/call.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-02T16:57:54Z",
+      "side": 1,
+      "message": "Yes you\u0027re right, that makes more sense. Updated comment.",
+      "parentUuid": "2bf3041f_8f836cd4",
+      "range": {
+        "startLine": 858,
+        "startChar": 0,
+        "endLine": 861,
+        "endChar": 64
+      },
+      "revId": "3782aa5d21ec43d29aa77d5f156e61451b945368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6089578a_c8b682bc",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-02-02T13:11:06Z",
       "side": 1,
       "message": "Copy paste error.",
+      "range": {
+        "startLine": 1026,
+        "startChar": 45,
+        "endLine": 1026,
+        "endChar": 63
+      },
+      "revId": "3782aa5d21ec43d29aa77d5f156e61451b945368",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "879076ab_1aa6e565",
+        "filename": "call/call.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-02T16:57:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6089578a_c8b682bc",
       "range": {
         "startLine": 1026,
         "startChar": 45,
