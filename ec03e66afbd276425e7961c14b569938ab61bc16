@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e780015_dc70068f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-02T14:55:22Z",
+      "side": 1,
+      "message": "This description seems to have been copied from another CL, because it doesn\u0027t describe what this CL does.\n\n(You could have done it the way the commit message says, I think, but you didn\u0027t).",
+      "revId": "ec03e66afbd276425e7961c14b569938ab61bc16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f14bf7_030d2f18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-02T14:55:22Z",
+      "side": 1,
+      "message": "Code LGTM, but please fix the description to be accurate before submitting.\n",
+      "revId": "ec03e66afbd276425e7961c14b569938ab61bc16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
