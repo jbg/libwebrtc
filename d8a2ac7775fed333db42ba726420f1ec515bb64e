@@ -33,6 +33,24 @@
       "message": "I wonder if the lock here becomes unnecessary because default_rtp_transport() now accesses only const members. But I\u0027m OK with making that a separate CL.",
       "revId": "d8a2ac7775fed333db42ba726420f1ec515bb64e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4450bf1_c48600ef",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-02T14:17:34Z",
+      "side": 1,
+      "message": "Intend to make a followup to remove unneeded locking, as well as the default_rtp_transport method that likely becomes useless.",
+      "parentUuid": "158432f7_37f42e1f",
+      "revId": "d8a2ac7775fed333db42ba726420f1ec515bb64e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
