@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "725d07d5_c8d02f5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-02T09:43:55Z",
+      "side": 1,
+      "message": "I took a look how sockets normally are created (in prod code). It seems there is some extra reason to create them on the owning thread. So here I\u0027ve adjusted tests to follow that practice too. ptal\n\n(while I still think it make sense to give TQ to pending flag at construction: https://webrtc-review.googlesource.com/c/src/+/205100, I tried to find some SequenceCheckers where that CL would allow to remove call to Detach. Failed to find any in non-deprecated code. So may be that idea is not as practical as it looks)",
+      "revId": "dd93c25be2aae8474dd0cb9306b2db9e0fe44168",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
