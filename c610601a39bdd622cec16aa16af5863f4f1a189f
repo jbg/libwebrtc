@@ -16,6 +16,23 @@
       "message": "Very straightforward substitution!\n",
       "revId": "c610601a39bdd622cec16aa16af5863f4f1a189f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49ebc8c2_805a6c85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-02T14:29:14Z",
+      "side": 1,
+      "message": "Nice!\n\nQQ: Should we follow this up with use of RTC_NO_UNIQUE_ADDRESS or would it make more sense to have a macro for declaring and using a sequence checker? (and the macro would use RTC_NO_UNIQUE_ADDRESS)",
+      "revId": "c610601a39bdd622cec16aa16af5863f4f1a189f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
