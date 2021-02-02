@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abbe451d_e7da9c4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-02-02T15:57:57Z",
+      "side": 1,
+      "message": "Erik is OOO",
+      "revId": "2982b6875ab5ed563e2d5ef8daf01a0523fe219d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
