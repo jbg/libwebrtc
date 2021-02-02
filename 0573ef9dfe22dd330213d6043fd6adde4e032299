@@ -22,6 +22,30 @@
       },
       "revId": "0573ef9dfe22dd330213d6043fd6adde4e032299",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2799699_c520f725",
+        "filename": "rtc_base/task_utils/pending_task_safety_flag.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-02T17:24:32Z",
+      "side": 1,
+      "message": "That will limit SafetyFlag just to task queues,\ni.e. would disallow usage of the flag when object is protected by a system thread.\nI\u0027m not aware of such usage, but do not see a reason to exclude it.",
+      "parentUuid": "79f051e0_1ad48083",
+      "range": {
+        "startLine": 19,
+        "startChar": 57,
+        "endLine": 19,
+        "endChar": 58
+      },
+      "revId": "0573ef9dfe22dd330213d6043fd6adde4e032299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
