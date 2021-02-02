@@ -107,7 +107,8 @@ void StructParametersParser::Parse(absl::string_view src) {
         break;
       }
     }
-    if (!found) {
+    // Key starts with _ may be used as Finch experiment suffix.
+    if (key.empty() || key[0] != '_') {
       RTC_LOG(LS_INFO) << "No field with key: '" << key
                        << "' (found in trial: \"" << src << "\")";
     }

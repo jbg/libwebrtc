@@ -83,7 +83,8 @@ void ParseFieldTrial(
         RTC_LOG(LS_WARNING) << "Failed to read empty key field with value '"
                             << key << "' in trial: \"" << trial_string << "\"";
       }
-    } else {
+    } else if (key.empty() || key[0] != '_') {
+      // Key starts with _ may be used as Finch experiment suffix.
       RTC_LOG(LS_INFO) << "No field with key: '" << key
                        << "' (found in trial: \"" << trial_string << "\")";
       std::string valid_keys;
