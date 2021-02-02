@@ -149,8 +149,8 @@ class JsepTransport : public sigslot::has_slots<> {
   // Returns true if the ICE restart flag above was set, and no ICE restart has
   // occurred yet for this transport (by applying a local description with
   // changed ufrag/password).
-  bool needs_ice_restart() const RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    webrtc::MutexLock lock(&accessor_lock_);
+  bool needs_ice_restart() const {
+    RTC_DCHECK_RUN_ON(network_thread_);
     return needs_ice_restart_;
   }
 
@@ -335,7 +335,7 @@ class JsepTransport : public sigslot::has_slots<> {
   mutable webrtc::Mutex accessor_lock_;
   const std::string mid_;
   // needs-ice-restart bit as described in JSEP.
-  bool needs_ice_restart_ RTC_GUARDED_BY(accessor_lock_) = false;
+  bool needs_ice_restart_ RTC_GUARDED_BY(network_thread_) = false;
   rtc::scoped_refptr<rtc::RTCCertificate> local_certificate_
       RTC_GUARDED_BY(network_thread_);
   std::unique_ptr<JsepTransportDescription> local_description_
