@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dfba3f5_4b5362ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-03T09:03:24Z",
+      "side": 1,
+      "message": "It looks like TSan2 started to become more flaky since this CL has landed (see for example https://ci.chromium.org/ui/p/webrtc/builders/ci/Linux%20Tsan%20v2/25042/overview).\n\nI don\u0027t have time to investigate more, is a speculative revert possible?",
+      "revId": "d48a2b14e7545d0a0778df753e062075c044e2a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
