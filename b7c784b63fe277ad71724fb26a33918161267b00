@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ed7cd43_7e3c0ce6",
+        "filename": "common_video/video_frame_buffer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-02-03T12:41:14Z",
+      "side": 1,
+      "message": "Maybe not for this CL, but is it possible to change these to an rtc::scoped_refptr\u003cT\u003e instead?",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 23
+      },
+      "revId": "b7c784b63fe277ad71724fb26a33918161267b00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
