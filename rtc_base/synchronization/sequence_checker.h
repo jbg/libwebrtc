@@ -117,16 +117,6 @@ using ::webrtc::webrtc_sequence_checker_internal::SequenceCheckerScope;
 #define RTC_RUN_ON(x) \
   RTC_THREAD_ANNOTATION_ATTRIBUTE__(exclusive_locks_required(x))
 
-namespace webrtc {
-
-// Deprecated. Do not use.
-template <typename ThreadLikeObject>
-RTC_DEPRECATED std::string ExpectationToString(const ThreadLikeObject* o) {
-  return webrtc::webrtc_sequence_checker_internal::ExpectationToString(o);
-}
-
-}  // namespace webrtc
-
 #define RTC_DCHECK_RUN_ON(x)                                               \
   webrtc::webrtc_sequence_checker_internal::SequenceCheckerScope scope(x); \
   RTC_DCHECK((x)->IsCurrent())                                             \
