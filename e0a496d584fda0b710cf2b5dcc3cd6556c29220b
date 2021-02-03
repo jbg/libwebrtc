@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca8b8b30_194ec78b",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-03T23:49:19Z",
+      "side": 1,
+      "message": "kSampleRateHz / 100;\n\ncan we input 20ms blocks? then we do not need \"Every second call to the encoder will generate an Opus packet.\"",
+      "range": {
+        "startLine": 825,
+        "startChar": 44,
+        "endLine": 825,
+        "endChar": 65
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ff1960_7c6e14cc",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-03T23:49:19Z",
+      "side": 1,
+      "message": "sam\"p\"les,\n\nmy understanding is that kMaxLoopLengthSaples is carefully chosen so that the encoder goes into DTX.\n\nI would suggest that\n\nbool opus_entered_dtx \u003d false;\nwhile (!opus_entered_dtx) {\n  Encode();\n  if (encoded_bytes \u003c\u003d 2) {\n     opus_entered_dtx \u003d true;\n     std::copy();\n  }\n}",
+      "range": {
+        "startLine": 834,
+        "startChar": 25,
+        "endLine": 834,
+        "endChar": 45
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "273671ea_de7f023d",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-03T23:49:19Z",
+      "side": 1,
+      "message": "I would make this stricter.\n\nSomething like\nbool expected_cng_packet[] \u003d {false, false, false, true, true, true};",
+      "range": {
+        "startLine": 854,
+        "startChar": 0,
+        "endLine": 858,
+        "endChar": 51
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a364b7c_ce8eb3cc",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-03T23:49:19Z",
+      "side": 1,
+      "message": "emm, I think I need to understand this part a bit better. How are we sure that Opus keeps in DTX during this period? My expected result is that none of these packets would trigger CNG sending, because the DTX has not reached 400 ms.",
+      "range": {
+        "startLine": 859,
+        "startChar": 0,
+        "endLine": 859,
+        "endChar": 46
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7111590a_12d051d4",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-03T23:49:19Z",
+      "side": 1,
+      "message": "1.0f?",
+      "range": {
+        "startLine": 863,
+        "startChar": 49,
+        "endLine": 863,
+        "endChar": 53
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
