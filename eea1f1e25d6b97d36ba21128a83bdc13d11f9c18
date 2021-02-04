@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a13d737_0fab5304",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-02-04T08:11:43Z",
+      "side": 1,
+      "message": "Since https://chromium-review.googlesource.com/c/chromium/src/+/2659019 has been merged, we really need to switch to the new PipeWire as defailt, otherwise we will loose screensharing support on Linux Wayland sessions. Can we please get this reviewed?",
+      "revId": "eea1f1e25d6b97d36ba21128a83bdc13d11f9c18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
