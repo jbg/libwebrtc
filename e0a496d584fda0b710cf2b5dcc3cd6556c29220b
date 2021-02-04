@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3345d73_f060a2f6",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-02-04T10:31:27Z",
+      "side": 1,
+      "message": "It looks like AudioEncoder::Encode is expecting 10 ms chunks of audio: \nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/api/audio_codecs/audio_encoder.cc;drc\u003d90ecee1ed97821b6444ef070813f73dfa6e17627;l\u003d40",
+      "parentUuid": "ca8b8b30_194ec78b",
+      "range": {
+        "startLine": 825,
+        "startChar": 44,
+        "endLine": 825,
+        "endChar": 65
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8ff1960_7c6e14cc",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
         "patchSetId": 11
@@ -37,6 +61,30 @@
       "writtenOn": "2021-02-03T23:49:19Z",
       "side": 1,
       "message": "sam\"p\"les,\n\nmy understanding is that kMaxLoopLengthSaples is carefully chosen so that the encoder goes into DTX.\n\nI would suggest that\n\nbool opus_entered_dtx \u003d false;\nwhile (!opus_entered_dtx) {\n  Encode();\n  if (encoded_bytes \u003c\u003d 2) {\n     opus_entered_dtx \u003d true;\n     std::copy();\n  }\n}",
+      "range": {
+        "startLine": 834,
+        "startChar": 25,
+        "endLine": 834,
+        "endChar": 45
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef4e18c_bdcacb1c",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-02-04T10:31:27Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, it also makes the unittest faster as we do not need to wait until the end of the file for storing 200 ms of silence.",
+      "parentUuid": "f8ff1960_7c6e14cc",
       "range": {
         "startLine": 834,
         "startChar": 25,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33cd6592_5a8481ac",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-02-04T10:31:27Z",
+      "side": 1,
+      "message": "Each burst is not a packet but 200 ms of silence fed to the encoder. As I am not sure in which burst a refresh DTX packet would be sent I prefer gathering the number of non empty packets for several bursts. In the first 3 burst which cover 600 ms, no refresh packet is expected as the silence level has increased (gain \u003d 1.4f). In the last 3 bursts, another 600 ms, we expect to see at least one refresh DTX packet as the silence level has decreased (gain \u003d 0.0f).",
+      "parentUuid": "273671ea_de7f023d",
+      "range": {
+        "startLine": 854,
+        "startChar": 0,
+        "endLine": 858,
+        "endChar": 51
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a364b7c_ce8eb3cc",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
         "patchSetId": 11
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a168eebb_1b3ca8bf",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-02-04T10:31:27Z",
+      "side": 1,
+      "message": "In each of those burst we are feeding kSilenceDurationSamples samples which is equal to 200 ms. So, we are feeding 600 ms of silence that tries to increase the comfort noise and 600 ms of silence that decrease the comfort noise.",
+      "parentUuid": "4a364b7c_ce8eb3cc",
+      "range": {
+        "startLine": 859,
+        "startChar": 0,
+        "endLine": 859,
+        "endChar": 46
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7111590a_12d051d4",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
         "patchSetId": 11
@@ -106,6 +202,30 @@
       "writtenOn": "2021-02-03T23:49:19Z",
       "side": 1,
       "message": "1.0f?",
+      "range": {
+        "startLine": 863,
+        "startChar": 49,
+        "endLine": 863,
+        "endChar": 53
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7334c361_510cbdac",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-02-04T10:31:27Z",
+      "side": 1,
+      "message": "The idea is to feed silence with lower energy and therefore I am multiplying by 0.0f. The expected result is to send a refresh packets during that region in order to decrease the comfort noise at the receiver.",
+      "parentUuid": "7111590a_12d051d4",
       "range": {
         "startLine": 863,
         "startChar": 49,

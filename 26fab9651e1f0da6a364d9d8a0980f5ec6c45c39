@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d943c0d0_c0a87fb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-02-04T10:31:27Z",
+      "side": 1,
+      "message": "Thanks for the review and suggestions. I have replied to the comments and updated the unittest, please, have a look. ",
+      "revId": "26fab9651e1f0da6a364d9d8a0980f5ec6c45c39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
