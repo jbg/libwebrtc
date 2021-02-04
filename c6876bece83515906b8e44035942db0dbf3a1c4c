@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eac22d87_f5499ec0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-04T09:12:08Z",
+      "side": 1,
+      "message": "Please check all call sites of SetNeedsIceRestartFlag. Comment in jsep_transport_controller.h says \"The ICE related events are signaled on the |signaling_thread|.\".\n\nThis call https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/pc/peer_connection.cc;drc\u003d5761e7b3ff678756ebfc48268592c280f3cc4e34;l\u003d1407\n\nlooks like it\u0027s from the signal thread (it\u0027s to the controller, but it looks like call is forwarded to transports with no thread hopping).",
+      "revId": "c6876bece83515906b8e44035942db0dbf3a1c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14721d73_862b8848",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-04T09:12:08Z",
+      "side": 1,
+      "message": "Please drop this annotation, and update above TODO comment.",
+      "range": {
+        "startLine": 148,
+        "startChar": 31,
+        "endLine": 148,
+        "endChar": 66
+      },
+      "revId": "c6876bece83515906b8e44035942db0dbf3a1c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
