@@ -5448,6 +5448,59 @@ TEST_F(VideoStreamEncoderTest, InitialFrameDropIsNotReactivatedWhenAdaptingUp) {
   video_stream_encoder_->Stop();
 }
 
+TEST_F(VideoStreamEncoderTest,
+       FrameDroppedWhenResolutionIncreasesAndLinkAllocationIsLow) {
+  const int kMinStartBps360p = 222000;
+  fake_encoder_.SetResolutionBitrateLimits(
+      {VideoEncoder::ResolutionBitrateLimits(320 * 180, 0, 30000, 400000),
+       VideoEncoder::ResolutionBitrateLimits(640 * 360, kMinStartBps360p, 30000,
+                                             800000)});
+
+  video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
+      DataRate::BitsPerSec(kMinStartBps360p - 1),  // target_bitrate
+      DataRate::BitsPerSec(kMinStartBps360p - 1),  // stable_target_bitrate
+      DataRate::BitsPerSec(kMinStartBps360p - 1),  // link_allocation
+      0, 0, 0);
+  // Frame should not be dropped, bitrate not too low for frame.
+  video_source_.IncomingCapturedFrame(CreateFrame(1, 320, 180));
+  WaitForEncodedFrame(1);
+
+  // Incoming resolution increases, initial frame drop activates.
+  // Frame should be dropped, link allocation too low for frame.
+  video_source_.IncomingCapturedFrame(CreateFrame(2, 640, 360));
+  ExpectDroppedFrame();
+
+  // Expect sink_wants to specify a scaled frame.
+  EXPECT_TRUE_WAIT(video_source_.sink_wants().max_pixel_count < 640 * 360,
+                   5000);
+  video_stream_encoder_->Stop();
+}
+
+TEST_F(VideoStreamEncoderTest,
+       FrameNotDroppedWhenResolutionIncreasesAndLinkAllocationIsHigh) {
+  const int kMinStartBps360p = 222000;
+  fake_encoder_.SetResolutionBitrateLimits(
+      {VideoEncoder::ResolutionBitrateLimits(320 * 180, 0, 30000, 400000),
+       VideoEncoder::ResolutionBitrateLimits(640 * 360, kMinStartBps360p, 30000,
+                                             800000)});
+
+  video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
+      DataRate::BitsPerSec(kMinStartBps360p - 1),  // target_bitrate
+      DataRate::BitsPerSec(kMinStartBps360p - 1),  // stable_target_bitrate
+      DataRate::BitsPerSec(kMinStartBps360p),      // link_allocation
+      0, 0, 0);
+  // Frame should not be dropped, bitrate not too low for frame.
+  video_source_.IncomingCapturedFrame(CreateFrame(1, 320, 180));
+  WaitForEncodedFrame(1);
+
+  // Incoming resolution increases, initial frame drop activates.
+  // Frame should be dropped, link allocation not too low for frame.
+  video_source_.IncomingCapturedFrame(CreateFrame(2, 640, 360));
+  WaitForEncodedFrame(2);
+
+  video_stream_encoder_->Stop();
+}
+
 TEST_F(VideoStreamEncoderTest, RampsUpInQualityWhenBwIsHigh) {
   webrtc::test::ScopedFieldTrials field_trials(
       "WebRTC-Video-QualityRampupSettings/min_pixels:1,min_duration_ms:2000/");
