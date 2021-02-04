@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1531a284_d39691d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5427
+      },
+      "writtenOn": "2021-02-04T08:49:15Z",
+      "side": 1,
+      "message": "The AUTHORS file is changed and uploaded. @gmail.com changed to @googlemail.com.",
+      "revId": "ec971931f49d31b3e5b9d6b0cc59906318e1d1a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
