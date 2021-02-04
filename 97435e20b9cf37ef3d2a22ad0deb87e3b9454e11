@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "391dc681_c421f8c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-02-04T14:33:43Z",
+      "side": 1,
+      "message": "LGTM with suggestion.",
+      "revId": "97435e20b9cf37ef3d2a22ad0deb87e3b9454e11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a79991_d5ce6d16",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-02-04T14:33:43Z",
+      "side": 1,
+      "message": "maybe replace with:\nuint32_t bitrate_bps \u003d stream_resource_manager_.UseBandwidthAllocationBps().value_or(encoder_target_bitrate_bps_.value());",
+      "range": {
+        "startLine": 2019,
+        "startChar": 2,
+        "endLine": 2022,
+        "endChar": 3
+      },
+      "revId": "97435e20b9cf37ef3d2a22ad0deb87e3b9454e11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
