@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af6bc4d2_d2640034",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-04T09:13:48Z",
+      "side": 1,
+      "message": "Sorry, I see you do add the thread hop in JsepTransportController.",
+      "parentUuid": "eac22d87_f5499ec0",
+      "revId": "c6876bece83515906b8e44035942db0dbf3a1c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14721d73_862b8848",
