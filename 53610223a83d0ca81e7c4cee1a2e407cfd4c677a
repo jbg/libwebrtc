@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "112c3385_479a9144",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-04T09:23:08Z",
+      "side": 0,
+      "message": "This is the call you pointed to in the other comment, now happens in the right context.",
+      "revId": "53610223a83d0ca81e7c4cee1a2e407cfd4c677a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

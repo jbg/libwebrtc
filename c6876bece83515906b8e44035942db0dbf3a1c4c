@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61566c07_0bcb0a68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-04T09:23:08Z",
+      "side": 1,
+      "message": "Yup, just for clarities sake, I added a comment to where that call has been moved, in peer_connection.cc.",
+      "parentUuid": "af6bc4d2_d2640034",
+      "revId": "c6876bece83515906b8e44035942db0dbf3a1c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14721d73_862b8848",
@@ -49,6 +67,30 @@
       "writtenOn": "2021-02-04T09:12:08Z",
       "side": 1,
       "message": "Please drop this annotation, and update above TODO comment.",
+      "range": {
+        "startLine": 148,
+        "startChar": 31,
+        "endLine": 148,
+        "endChar": 66
+      },
+      "revId": "c6876bece83515906b8e44035942db0dbf3a1c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a15d9e0_39a8f881",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-04T09:23:08Z",
+      "side": 1,
+      "message": "Thanks. Done.",
+      "parentUuid": "14721d73_862b8848",
       "range": {
         "startLine": 148,
         "startChar": 31,
