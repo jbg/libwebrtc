@@ -1308,6 +1308,10 @@ RTCError SdpOfferAnswerHandler::ApplyLocalDescription(
       // Note that code paths that don't set MID won't be able to use
       // information about DTLS transports.
       if (transceiver->mid()) {
+        // TODO: Can we post this to the network thread?
+        // Basically set the transport on the network thread and then update
+        // the implementation to check that the set_ and relevant get methods
+        // are always called on the network thread (need to update proxy maps).
         auto dtls_transport = transport_controller()->LookupDtlsTransportByMid(
             *transceiver->mid());
         transceiver->internal()->sender_internal()->set_transport(
@@ -4644,6 +4648,7 @@ cricket::VoiceChannel* SdpOfferAnswerHandler::CreateVoiceChannel(
 cricket::VideoChannel* SdpOfferAnswerHandler::CreateVideoChannel(
     const std::string& mid) {
   RTC_DCHECK_RUN_ON(signaling_thread());
+  // NOTE: This involves a non-ideal hop (Invoke) over to the network thread.
   RtpTransportInternal* rtp_transport = pc_->GetRtpTransport(mid);
 
   // TODO(bugs.webrtc.org/11992): CreateVideoChannel internally switches to the

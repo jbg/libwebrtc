@@ -832,6 +832,16 @@ PeerConnection::AddTransceiver(
   return AddTransceiver(track, RtpTransceiverInit());
 }
 
+RtpTransportInternal* PeerConnection::GetRtpTransport(const std::string& mid) {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  return network_thread()->Invoke<RtpTransportInternal*>(
+      RTC_FROM_HERE, [this, &mid] {
+        auto rtp_transport = transport_controller_->GetRtpTransport(mid);
+        RTC_DCHECK(rtp_transport);
+        return rtp_transport;
+      });
+}
+
 RTCErrorOr<rtc::scoped_refptr<RtpTransceiverInterface>>
 PeerConnection::AddTransceiver(
     rtc::scoped_refptr<MediaStreamTrackInterface> track,
