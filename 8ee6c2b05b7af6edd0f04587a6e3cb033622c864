@@ -117,6 +117,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "661fa749_7092c379",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-04T23:32:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ecd2d5ef_19a39f24",
+      "range": {
+        "startLine": 78,
+        "startChar": 60,
+        "endLine": 78,
+        "endChar": 61
+      },
+      "revId": "8ee6c2b05b7af6edd0f04587a6e3cb033622c864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4275206_6aca75fc",
@@ -154,6 +178,30 @@
       "side": 1,
       "message": "Note that we enter in this function just when (WebRtcOpus_GetUseDtx(inst) \u003d\u003d 1). That is, when the DTX is enabled in the encoder. \n\nWebRtcOpus_GetInDtx(inst) tells us whether the encoder is currently in DTX. We need to track the non activity energy even when that is false to mimic what the decoder is doing (the decoder updates the comfort noise model with all the non activity frames). Therefore, I cannot move that if clause.",
       "parentUuid": "c4275206_6aca75fc",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 38
+      },
+      "revId": "8ee6c2b05b7af6edd0f04587a6e3cb033622c864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95c8e50b_46d2fe1b",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-04T23:32:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9d84441b_b4212f20",
       "range": {
         "startLine": 80,
         "startChar": 8,

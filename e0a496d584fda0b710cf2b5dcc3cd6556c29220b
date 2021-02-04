@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bb2fcb6_86df9d8a",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-04T23:32:41Z",
+      "side": 1,
+      "message": "right! thanks!",
+      "parentUuid": "b3345d73_f060a2f6",
+      "range": {
+        "startLine": 825,
+        "startChar": 44,
+        "endLine": 825,
+        "endChar": 65
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8ff1960_7c6e14cc",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
         "patchSetId": 11
@@ -144,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d5ae068_2a893570",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-04T23:32:41Z",
+      "side": 1,
+      "message": "got it",
+      "parentUuid": "33cd6592_5a8481ac",
+      "range": {
+        "startLine": 854,
+        "startChar": 0,
+        "endLine": 858,
+        "endChar": 51
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a364b7c_ce8eb3cc",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
         "patchSetId": 11
@@ -191,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16e6d36e_536a414f",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-04T23:32:41Z",
+      "side": 1,
+      "message": "ah, thanks for the explanation. I essentially missed \"while (rtp_timestamp \u003c rtp_timestamp_start + kSilenceDurationSamples)\"",
+      "parentUuid": "a168eebb_1b3ca8bf",
+      "range": {
+        "startLine": 859,
+        "startChar": 0,
+        "endLine": 859,
+        "endChar": 46
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7111590a_12d051d4",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
         "patchSetId": 11
@@ -226,6 +298,30 @@
       "side": 1,
       "message": "The idea is to feed silence with lower energy and therefore I am multiplying by 0.0f. The expected result is to send a refresh packets during that region in order to decrease the comfort noise at the receiver.",
       "parentUuid": "7111590a_12d051d4",
+      "range": {
+        "startLine": 863,
+        "startChar": 49,
+        "endLine": 863,
+        "endChar": 53
+      },
+      "revId": "e0a496d584fda0b710cf2b5dcc3cd6556c29220b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a464737e_7f33dc1a",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-04T23:32:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7334c361_510cbdac",
       "range": {
         "startLine": 863,
         "startChar": 49,

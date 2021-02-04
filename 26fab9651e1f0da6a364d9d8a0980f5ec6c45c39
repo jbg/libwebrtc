@@ -16,6 +16,69 @@
       "message": "Thanks for the review and suggestions. I have replied to the comments and updated the unittest, please, have a look. ",
       "revId": "26fab9651e1f0da6a364d9d8a0980f5ec6c45c39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54be1deb_a88e7b48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-04T23:32:41Z",
+      "side": 1,
+      "message": "lgtm % two nits",
+      "revId": "26fab9651e1f0da6a364d9d8a0980f5ec6c45c39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50688ecf_e307f1cc",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-04T23:32:41Z",
+      "side": 1,
+      "message": "move out of while loop",
+      "range": {
+        "startLine": 869,
+        "startChar": 0,
+        "endLine": 869,
+        "endChar": 44
+      },
+      "revId": "26fab9651e1f0da6a364d9d8a0980f5ec6c45c39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727c1424_5a02fe12",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-02-04T23:32:41Z",
+      "side": 1,
+      "message": "move out of while loop",
+      "range": {
+        "startLine": 870,
+        "startChar": 0,
+        "endLine": 870,
+        "endChar": 54
+      },
+      "revId": "26fab9651e1f0da6a364d9d8a0980f5ec6c45c39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
