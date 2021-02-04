@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb5dedd3_73d29cd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-02-04T08:56:02Z",
+      "side": 1,
+      "message": "I added it.",
+      "parentUuid": "3bda64cc_7636d5e2",
+      "revId": "eea1f1e25d6b97d36ba21128a83bdc13d11f9c18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4de4d42_7a7bb3b2",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-02-04T08:17:15Z",
       "side": 1,
       "message": "Can you change this to \"WebRTC supports\".",
+      "range": {
+        "startLine": 121,
+        "startChar": 14,
+        "endLine": 121,
+        "endChar": 24
+      },
+      "revId": "eea1f1e25d6b97d36ba21128a83bdc13d11f9c18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3794d632_6ef8f9bd",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-02-04T08:56:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4de4d42_7a7bb3b2",
       "range": {
         "startLine": 121,
         "startChar": 14,
