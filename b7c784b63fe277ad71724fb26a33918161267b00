@@ -22,6 +22,30 @@
       },
       "revId": "b7c784b63fe277ad71724fb26a33918161267b00",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eeb3874_5377a30f",
+        "filename": "common_video/video_frame_buffer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-04T08:30:17Z",
+      "side": 1,
+      "message": "Maybe. But I\u0027m afraid that it\u0027s not trivial, because there\u0027s no single interface used for everything refcounted (e.g, Release() is sometimes a non-virtual method, sometimes an implementation of RefCountInterface). Then some layer of glue in between is needed, and std::function looks reasonably simple.",
+      "parentUuid": "5ed7cd43_7e3c0ce6",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 23
+      },
+      "revId": "b7c784b63fe277ad71724fb26a33918161267b00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
