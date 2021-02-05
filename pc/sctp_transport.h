@@ -75,9 +75,9 @@ class SctpTransport : public SctpTransportInterface,
   void OnDtlsStateChange(cricket::DtlsTransportInternal* transport,
                          cricket::DtlsTransportState state);
 
-  // Note - owner_thread never changes, but can't be const if we do
-  // Invoke() on it.
-  rtc::Thread* owner_thread_;
+  // NOTE: |owner_thread_| is the thread that the SctpTransport object is
+  // constructed on. In the context of PeerConnection, it's the network thread.
+  rtc::Thread* const owner_thread_;
   mutable Mutex lock_;
   // Variables accessible off-thread, guarded by lock_
   SctpTransportInformation info_ RTC_GUARDED_BY(lock_);
