@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ff7841_a2d74d0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5427
+      },
+      "writtenOn": "2021-02-05T09:52:58Z",
+      "side": 1,
+      "message": "delete of AUTHORS-file checkedin in the meantime with webrtc:12384",
+      "revId": "895e8ffc3809655cdef3817fe3c9c38fa8dd20e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
