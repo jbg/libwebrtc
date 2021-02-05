@@ -832,6 +832,16 @@ PeerConnection::AddTransceiver(
   return AddTransceiver(track, RtpTransceiverInit());
 }
 
+RtpTransportInternal* PeerConnection::GetRtpTransport(const std::string& mid) {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  return network_thread()->Invoke<RtpTransportInternal*>(
+      RTC_FROM_HERE, [this, &mid] {
+        auto rtp_transport = transport_controller_->GetRtpTransport(mid);
+        RTC_DCHECK(rtp_transport);
+        return rtp_transport;
+      });
+}
+
 RTCErrorOr<rtc::scoped_refptr<RtpTransceiverInterface>>
 PeerConnection::AddTransceiver(
     rtc::scoped_refptr<MediaStreamTrackInterface> track,
@@ -1588,11 +1598,16 @@ PeerConnection::LookupDtlsTransportByMidInternal(const std::string& mid) {
 
 rtc::scoped_refptr<SctpTransportInterface> PeerConnection::GetSctpTransport()
     const {
+  // TODO(tommi): Update proxy to run this on the network thread (and use
+  // sctp_mid_n_).
   RTC_DCHECK_RUN_ON(signaling_thread());
-  if (!sctp_mid_s_) {
+  if (!sctp_mid_s_)
     return nullptr;
-  }
-  return transport_controller_->GetSctpTransport(*sctp_mid_s_);
+
+  return network_thread()->Invoke<rtc::scoped_refptr<SctpTransportInterface>>(
+      RTC_FROM_HERE, [this, mid = *sctp_mid_s_] {
+        return transport_controller_->GetSctpTransport(mid);
+      });
 }
 
 const SessionDescriptionInterface* PeerConnection::local_description() const {
@@ -1810,6 +1825,16 @@ absl::optional<std::string> PeerConnection::GetDataMid() const {
   }
 }
 
+void PeerConnection::SetSctpDataMid(const std::string& mid) {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  sctp_mid_s_ = mid;
+}
+
+void PeerConnection::ResetSctpDataMid() {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  sctp_mid_s_.reset();
+}
+
 void PeerConnection::OnSctpDataChannelClosed(DataChannelInterface* channel) {
   // Since data_channel_controller doesn't do signals, this
   // signal is relayed here.
@@ -2024,7 +2049,15 @@ std::vector<DataChannelStats> PeerConnection::GetDataChannelStats() const {
 absl::optional<std::string> PeerConnection::sctp_transport_name() const {
   RTC_DCHECK_RUN_ON(signaling_thread());
   if (sctp_mid_s_ && transport_controller_) {
-    auto dtls_transport = transport_controller_->GetDtlsTransport(*sctp_mid_s_);
+    // TODO(tommi): Should the mid-to-transport_names map be managaged
+    // separately so that it can be looked up without relying on fetching the
+    // transport object itself (which requires accessing a map that belongs to
+    // the network thread).
+    auto dtls_transport =
+        network_thread()->Invoke<cricket::DtlsTransportInternal*>(
+            RTC_FROM_HERE, [this, mid = *sctp_mid_s_] {
+              return transport_controller_->GetDtlsTransport(mid);
+            });
     if (dtls_transport) {
       return dtls_transport->transport_name();
     }
@@ -2622,6 +2655,23 @@ PeerConnectionObserver* PeerConnection::Observer() const {
   RTC_DCHECK_RUN_ON(signaling_thread());
   RTC_DCHECK(observer_);
   return observer_;
+}
+
+void PeerConnection::StartSctpTransport(int local_port,
+                                        int remote_port,
+                                        int max_message_size) {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  if (!sctp_mid_s_)
+    return;
+
+  // TODO(tommi): Use an alive_ flag for the network thread.
+  network_thread()->PostTask(ToQueuedTask(
+      [this, mid = *sctp_mid_s_, local_port, remote_port, max_message_size] {
+        rtc::scoped_refptr<SctpTransport> sctp_transport =
+            transport_controller()->GetSctpTransport(mid);
+        if (sctp_transport)
+          sctp_transport->Start(local_port, remote_port, max_message_size);
+      }));
 }
 
 CryptoOptions PeerConnection::GetCryptoOptions() {
