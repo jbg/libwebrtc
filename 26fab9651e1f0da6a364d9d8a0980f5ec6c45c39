@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "caee3cbd_5b672cde",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-02-05T08:06:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50688ecf_e307f1cc",
+      "range": {
+        "startLine": 869,
+        "startChar": 0,
+        "endLine": 869,
+        "endChar": 44
+      },
+      "revId": "26fab9651e1f0da6a364d9d8a0980f5ec6c45c39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "727c1424_5a02fe12",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-02-04T23:32:41Z",
       "side": 1,
       "message": "move out of while loop",
+      "range": {
+        "startLine": 870,
+        "startChar": 0,
+        "endLine": 870,
+        "endChar": 54
+      },
+      "revId": "26fab9651e1f0da6a364d9d8a0980f5ec6c45c39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f48fce9_b6024430",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-02-05T08:06:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "727c1424_5a02fe12",
       "range": {
         "startLine": 870,
         "startChar": 0,
