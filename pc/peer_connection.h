@@ -363,19 +363,19 @@ class PeerConnection : public PeerConnectionInternal,
   const RtpTransmissionManager* rtp_manager() const {
     return rtp_manager_.get();
   }
-  cricket::ChannelManager* channel_manager() const;
 
+  cricket::ChannelManager* channel_manager() const;
   JsepTransportController* transport_controller() {
     return transport_controller_.get();
   }
   cricket::PortAllocator* port_allocator() { return port_allocator_.get(); }
   Call* call_ptr() { return call_ptr_; }
-
   ConnectionContext* context() { return context_.get(); }
   const PeerConnectionFactoryInterface::Options* options() const {
     return &options_;
   }
   cricket::DataChannelType data_channel_type() const;
+
   void SetIceConnectionState(IceConnectionState new_state);
   void NoteUsageEvent(UsageEvent event);
 
@@ -404,14 +404,15 @@ class PeerConnection : public PeerConnectionInternal,
   // channels are configured this will return nullopt.
   absl::optional<std::string> GetDataMid() const;
 
-  void SetSctpDataMid(const std::string& mid) {
-    RTC_DCHECK_RUN_ON(signaling_thread());
-    sctp_mid_s_ = mid;
-  }
-  void ResetSctpDataMid() {
-    RTC_DCHECK_RUN_ON(signaling_thread());
-    sctp_mid_s_.reset();
-  }
+  void SetSctpDataMid(const std::string& mid);
+
+  void ResetSctpDataMid();
+
+  // Asynchronously calls SctpTransport::Start() on the network thread for
+  // |sctp_mid()| if set. Called as part of setting the local description.
+  void StartSctpTransport(int local_port,
+                          int remote_port,
+                          int max_message_size);
 
   // Returns the CryptoOptions for this PeerConnection. This will always
   // return the RTCConfiguration.crypto_options if set and will only default
@@ -427,12 +428,7 @@ class PeerConnection : public PeerConnectionInternal,
       bool fire_callback = true);
 
   // Returns rtp transport, result can not be nullptr.
-  RtpTransportInternal* GetRtpTransport(const std::string& mid) {
-    RTC_DCHECK_RUN_ON(signaling_thread());
-    auto rtp_transport = transport_controller_->GetRtpTransport(mid);
-    RTC_DCHECK(rtp_transport);
-    return rtp_transport;
-  }
+  RtpTransportInternal* GetRtpTransport(const std::string& mid);
 
   // Returns true if SRTP (either using DTLS-SRTP or SDES) is required by
   // this session.

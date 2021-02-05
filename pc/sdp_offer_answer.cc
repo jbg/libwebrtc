@@ -729,6 +729,20 @@ bool CanAddLocalMediaStream(webrtc::StreamCollectionInterface* current_streams,
   return true;
 }
 
+rtc::scoped_refptr<webrtc::DtlsTransport> LookupDtlsTransportByMid(
+    rtc::Thread* network_thread,
+    JsepTransportController* controller,
+    const std::string& mid) {
+  // TODO(tommi): Can we post this to the network thread and avoid this Invoke?
+  // We might be able to simplify a few things if we set the transport on
+  // the network thread and then update the implementation to check that
+  // the set_ and relevant get methods are always called on the network
+  // thread (we'll need to update proxy maps).
+  return network_thread->Invoke<rtc::scoped_refptr<webrtc::DtlsTransport>>(
+      RTC_FROM_HERE,
+      [controller, &mid] { return controller->LookupDtlsTransportByMid(mid); });
+}
+
 }  // namespace
 
 // Used by parameterless SetLocalDescription() to create an offer or answer.
@@ -1308,8 +1322,8 @@ RTCError SdpOfferAnswerHandler::ApplyLocalDescription(
       // Note that code paths that don't set MID won't be able to use
       // information about DTLS transports.
       if (transceiver->mid()) {
-        auto dtls_transport = transport_controller()->LookupDtlsTransportByMid(
-            *transceiver->mid());
+        auto dtls_transport = LookupDtlsTransportByMid(
+            pc_->network_thread(), transport_controller(), *transceiver->mid());
         transceiver->internal()->sender_internal()->set_transport(
             dtls_transport);
         transceiver->internal()->receiver_internal()->set_transport(
@@ -1725,9 +1739,9 @@ RTCError SdpOfferAnswerHandler::ApplyRemoteDescription(
         transceiver->internal()->set_current_direction(local_direction);
         // 2.2.8.1.11.[3-6]: Set the transport internal slots.
         if (transceiver->mid()) {
-          auto dtls_transport =
-              transport_controller()->LookupDtlsTransportByMid(
-                  *transceiver->mid());
+          auto dtls_transport = LookupDtlsTransportByMid(pc_->network_thread(),
+                                                         transport_controller(),
+                                                         *transceiver->mid());
           transceiver->internal()->sender_internal()->set_transport(
               dtls_transport);
           transceiver->internal()->receiver_internal()->set_transport(
@@ -4276,13 +4290,11 @@ RTCError SdpOfferAnswerHandler::PushdownMediaDescription(
   // Need complete offer/answer with an SCTP m= section before starting SCTP,
   // according to https://tools.ietf.org/html/draft-ietf-mmusic-sctp-sdp-19
   if (pc_->sctp_mid() && local_description() && remote_description()) {
-    rtc::scoped_refptr<SctpTransport> sctp_transport =
-        transport_controller()->GetSctpTransport(*(pc_->sctp_mid()));
     auto local_sctp_description = cricket::GetFirstSctpDataContentDescription(
         local_description()->description());
     auto remote_sctp_description = cricket::GetFirstSctpDataContentDescription(
         remote_description()->description());
-    if (sctp_transport && local_sctp_description && remote_sctp_description) {
+    if (local_sctp_description && remote_sctp_description) {
       int max_message_size;
       // A remote max message size of zero means "any size supported".
       // We configure the connection with our own max message size.
@@ -4293,8 +4305,9 @@ RTCError SdpOfferAnswerHandler::PushdownMediaDescription(
             std::min(local_sctp_description->max_message_size(),
                      remote_sctp_description->max_message_size());
       }
-      sctp_transport->Start(local_sctp_description->port(),
-                            remote_sctp_description->port(), max_message_size);
+      pc_->StartSctpTransport(local_sctp_description->port(),
+                              remote_sctp_description->port(),
+                              max_message_size);
     }
   }
 
@@ -4520,6 +4533,10 @@ bool SdpOfferAnswerHandler::ReadyToUseRemoteCandidate(
     return false;
   }
 
+  // TODO(tommi): Is this check necessary? The call to GetTransportName involves
+  // a blocking hop to the network thread + map lookup. Check if this is an
+  // actual error case or if it's something that has already been validated
+  // up stack.
   std::string transport_name = GetTransportName(result.value()->name);
   return !transport_name.empty();
 }
@@ -4644,6 +4661,7 @@ cricket::VoiceChannel* SdpOfferAnswerHandler::CreateVoiceChannel(
 cricket::VideoChannel* SdpOfferAnswerHandler::CreateVideoChannel(
     const std::string& mid) {
   RTC_DCHECK_RUN_ON(signaling_thread());
+  // NOTE: This involves a non-ideal hop (Invoke) over to the network thread.
   RtpTransportInternal* rtp_transport = pc_->GetRtpTransport(mid);
 
   // TODO(bugs.webrtc.org/11992): CreateVideoChannel internally switches to the

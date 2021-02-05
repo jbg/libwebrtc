@@ -145,6 +145,7 @@ RTCError JsepTransportController::SetRemoteDescription(
 
 RtpTransportInternal* JsepTransportController::GetRtpTransport(
     const std::string& mid) const {
+  RTC_DCHECK_RUN_ON(network_thread_);
   auto jsep_transport = GetJsepTransportForMid(mid);
   if (!jsep_transport) {
     return nullptr;
@@ -154,6 +155,7 @@ RtpTransportInternal* JsepTransportController::GetRtpTransport(
 
 DataChannelTransportInterface* JsepTransportController::GetDataChannelTransport(
     const std::string& mid) const {
+  RTC_DCHECK_RUN_ON(network_thread_);
   auto jsep_transport = GetJsepTransportForMid(mid);
   if (!jsep_transport) {
     return nullptr;
@@ -163,6 +165,7 @@ DataChannelTransportInterface* JsepTransportController::GetDataChannelTransport(
 
 cricket::DtlsTransportInternal* JsepTransportController::GetDtlsTransport(
     const std::string& mid) {
+  RTC_DCHECK_RUN_ON(network_thread_);
   auto jsep_transport = GetJsepTransportForMid(mid);
   if (!jsep_transport) {
     return nullptr;
@@ -172,6 +175,7 @@ cricket::DtlsTransportInternal* JsepTransportController::GetDtlsTransport(
 
 const cricket::DtlsTransportInternal*
 JsepTransportController::GetRtcpDtlsTransport(const std::string& mid) const {
+  RTC_DCHECK_RUN_ON(network_thread_);
   auto jsep_transport = GetJsepTransportForMid(mid);
   if (!jsep_transport) {
     return nullptr;
@@ -181,6 +185,7 @@ JsepTransportController::GetRtcpDtlsTransport(const std::string& mid) const {
 
 rtc::scoped_refptr<webrtc::DtlsTransport>
 JsepTransportController::LookupDtlsTransportByMid(const std::string& mid) {
+  RTC_DCHECK_RUN_ON(network_thread_);
   auto jsep_transport = GetJsepTransportForMid(mid);
   if (!jsep_transport) {
     return nullptr;
@@ -190,6 +195,7 @@ JsepTransportController::LookupDtlsTransportByMid(const std::string& mid) {
 
 rtc::scoped_refptr<SctpTransport> JsepTransportController::GetSctpTransport(
     const std::string& mid) const {
+  RTC_DCHECK_RUN_ON(network_thread_);
   auto jsep_transport = GetJsepTransportForMid(mid);
   if (!jsep_transport) {
     return nullptr;
@@ -236,10 +242,13 @@ bool JsepTransportController::NeedsIceRestart(
 
 absl::optional<rtc::SSLRole> JsepTransportController::GetDtlsRole(
     const std::string& mid) const {
+  // Can we remove this hop?
   if (!network_thread_->IsCurrent()) {
     return network_thread_->Invoke<absl::optional<rtc::SSLRole>>(
         RTC_FROM_HERE, [&] { return GetDtlsRole(mid); });
   }
+
+  RTC_DCHECK_RUN_ON(network_thread_);
 
   const cricket::JsepTransport* t = GetJsepTransportForMid(mid);
   if (!t) {
@@ -846,12 +855,15 @@ bool JsepTransportController::HandleBundledContent(
 bool JsepTransportController::SetTransportForMid(
     const std::string& mid,
     cricket::JsepTransport* jsep_transport) {
+  RTC_DCHECK_RUN_ON(network_thread_);
   RTC_DCHECK(jsep_transport);
   if (mid_to_transport_[mid] == jsep_transport) {
     return true;
   }
-  RTC_DCHECK_RUN_ON(network_thread_);
   pending_mids_.push_back(mid);
+  // TODO(tommi): Fire events when this map changes. In PC, handle those events
+  // and use them to maintain a map of mid-to-transport_name on the signaling
+  // thread.
   mid_to_transport_[mid] = jsep_transport;
   return config_.transport_observer->OnTransportChanged(
       mid, jsep_transport->rtp_transport(), jsep_transport->RtpDtlsTransport(),
@@ -859,11 +871,15 @@ bool JsepTransportController::SetTransportForMid(
 }
 
 void JsepTransportController::RemoveTransportForMid(const std::string& mid) {
+  RTC_DCHECK_RUN_ON(network_thread_);
   bool ret = config_.transport_observer->OnTransportChanged(mid, nullptr,
                                                             nullptr, nullptr);
   // Calling OnTransportChanged with nullptr should always succeed, since it is
   // only expected to fail when adding media to a transport (not removing).
   RTC_DCHECK(ret);
+  // TODO(tommi): Fire events when this map changes. In PC, handle those events
+  // and use them to maintain a map of mid-to-transport_name on the signaling
+  // thread.
   mid_to_transport_.erase(mid);
 }
 
