@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af36432e_52f30fe1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-06T22:00:26Z",
+      "side": 1,
+      "message": "Late Saturday night is the wrong time to be reviewing this, so I\u0027m just adding a few comments.\nProper review is a monday-morning thing.\n",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b156ca9_f6578958",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-06T22:00:26Z",
+      "side": 1,
+      "message": "Called from peer_connection.cc and sdp_offer_answer.cc.\n\nThe source of this info is ultimately https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/base/dtls_transport.h;l\u003d239;drc\u003d2ac64302ae161cd6b5e4b1254497bdf5fd6d3415;bpv\u003d1;bpt\u003d1\n\nThe variable is set based on DTLS negotiation (we start off with \"I can take either role\" and end up with a defined role, which if I recall right is different for ICE-Lite and ICE-full). \n\ncricket::DtlsTransport is a single-thread class; webrtc::DtlsTransport isn\u0027t.\n\nA long way of saying: No, I don\u0027t think we can get rid of it easily.",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03862b40_ce446f50",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-06T22:00:26Z",
+      "side": 1,
+      "message": "Can we please not use worker_thread_ ? Any name, including black_magic_thread_ or the_thread_that_must_not_be_named_, would be better than worker_thread_, given just how many places in the code that refers to worker_thread().",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6944b19a_9727235b",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-06T22:00:26Z",
+      "side": 1,
+      "message": "s/the factories worker_thread()/the worker_thread() that is passed in from the factory/",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
