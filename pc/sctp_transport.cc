@@ -45,6 +45,7 @@ SctpTransport::~SctpTransport() {
 }
 
 SctpTransportInformation SctpTransport::Information() const {
+  RTC_DCHECK_RUN_ON(owner_thread_);
   MutexLock lock(&lock_);
   return info_;
 }
@@ -108,6 +109,7 @@ void SctpTransport::SetDtlsTransport(
 void SctpTransport::Start(int local_port,
                           int remote_port,
                           int max_message_size) {
+  RTC_DCHECK_RUN_ON(owner_thread_);
   {
     MutexLock lock(&lock_);
     // Record max message size on calling thread.
