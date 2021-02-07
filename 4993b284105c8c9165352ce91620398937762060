@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6cce2cfa_994c96ba",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-07T10:05:57Z",
+      "side": 1,
+      "message": "I\u0027ll update this comment, it was a note to self but I\u0027ll change it to be a TODO. I agree that it\u0027s not easy but I\u0027m sure there\u0027s a way. I think this is an example of where things are slowed down during negotiation in ways that are subtle and make it easy to add more.\n\nFor example, this function is called from the signaling thread, in a loop from  WebRtcSessionDescriptionFactory::InternalCreateAnswer:\n\n    for (cricket::MediaDescriptionOptions\u0026 options :\n         request.options.media_description_options) {\n      // According to http://tools.ietf.org/html/rfc5245#section-9.2.1.1\n      // an answer should also contain new ICE ufrag and password if an offer\n      // has been received with new ufrag and password.\n      options.transport_options.ice_restart \u003d\n          sdp_info_-\u003eIceRestartPending(options.mid);\n      // We should pass the current DTLS role to the transport description\n      // factory, if there is already an existing ongoing session.\n      absl::optional\u003crtc::SSLRole\u003e dtls_role \u003d\n          sdp_info_-\u003eGetDtlsRole(options.mid);  \u003c--- *******\n      if (dtls_role) {\n        options.transport_options.prefer_passive_role \u003d\n            (rtc::SSL_SERVER \u003d\u003d *dtls_role);\n      }\n\nThat\u0027s just one example of where the signaling thread interrupts the network thread and blocks while building the offer. From the code in WebRtcSessionDescriptionFactory, it\u0027s not obvious how costly the loop could end up being. So while it\u0027s not easy, I think it\u0027s still worth doing.",
+      "parentUuid": "3b156ca9_f6578958",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03862b40_ce446f50",
         "filename": "pc/peer_connection_factory.cc",
         "patchSetId": 14
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d407b2f_4986e23d",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-07T10:05:57Z",
+      "side": 1,
+      "message": "In case the comment is being misunderstood - Which worker_thread_ name specifically do you have in mind and how would you recommend changing it?",
+      "parentUuid": "03862b40_ce446f50",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6944b19a_9727235b",
         "filename": "pc/peer_connection_factory.cc",
         "patchSetId": 14
@@ -65,6 +101,24 @@
       "writtenOn": "2021-02-06T22:00:26Z",
       "side": 1,
       "message": "s/the factories worker_thread()/the worker_thread() that is passed in from the factory/",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "958e8782_5dd37f32",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-07T10:05:57Z",
+      "side": 1,
+      "message": "For a couple of reasons, I think that would be misleading:\n- The factory does not pass the worker_thread()\n- The difference between saying \"its worker_thread()\" vs \"the worker_thread() that is passed\", is that the second way indicates that what is passed each time, might not always be the same, so the former is more applicable in this case.\n\nAgain I think that there might be some misunderstanding so I\u0027m happy to explain this and flesh the comment out in more detail on Monday.",
+      "parentUuid": "6944b19a_9727235b",
       "revId": "4993b284105c8c9165352ce91620398937762060",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
