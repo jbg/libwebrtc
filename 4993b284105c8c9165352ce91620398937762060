@@ -106,6 +106,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66928fdb_1d3641f6",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-08T12:57:02Z",
+      "side": 1,
+      "message": "I see. I could make a change to the proxy classes/macros and replace works like \u0027signaling\u0027 and \u0027worker\u0027 with \u0027default\u0027 and \u0027secondary\u0027? wdyt? It might just make things less clear.",
+      "parentUuid": "6feb5c81_5ea9df5f",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6944b19a_9727235b",
@@ -155,6 +173,24 @@
       "side": 1,
       "message": "I\u0027m not sure I understand.\n\nThe worker_thread() is passed to the CreatePeerConnectionFactory() function as part of its configuration, and CreatePeerConnection creates a ConnectionContext object (which I split off from PeerConnectionFactory recently); if there is no worker_thread in the configuration, the ConnectionContext will create one.\n\nThe ConnectionContext is passed to the PeerConnection when PeerConnection is created, and the worker_thread() for a PeerConnection is set from the ConnectionContext. If this isn\u0027t \"passing\" (by reference, ownership is not transferred), I\u0027m not sure what to call it.\n\nMy point was really that \"the factories worker thread\" is a) ungrammatical and b) imprecise, since it doesn\u0027t tell you which factory it is pointing at; I *think* it is the PeerConnectionFactory you are referring to, but I want to be sure (and have the comment be easy to interpret for others).",
       "parentUuid": "958e8782_5dd37f32",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33219370_b43783a3",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-08T12:57:02Z",
+      "side": 1,
+      "message": "Sorry, it should be \"factory\u0027s\", not \"factories\". I\u0027ll fix that. Hopefully that makes it clear which factory is referred to.\n\nAs far as this comment goes, it\u0027s meant to be for the creation of the proxy, not the PeerConnection object. The context is passed to the constructor of PeerConnection as opposed to PeerConnectionProxy.",
+      "parentUuid": "4ea32973_f04bce55",
       "revId": "4993b284105c8c9165352ce91620398937762060",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
