@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8476bc6f_4f1b0543",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 5950,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-08T12:56:54Z",
+      "side": 1,
+      "message": "The ASSERT_EQ_WAIT macro is kind of a loop+sleep mechanism that retries an expression for a given timeout and running due tasks on the current thread in the meantime (it\u0027s a bit of a hack). In this case it does the \"right\" thing in terms of it does what it used to do, but this isn\u0027t the ideal way to test this imho.\n\nDespite the name, it\u0027s not related to the ASSERT() macro (not gtest\u0027s ASSERT) that maps to CRTs assert(). That method internally calls abort() which isn\u0027t debugger friendly (or helpful for collecting stack dumps).",
+      "parentUuid": "c1ac8250_1bc5a4d9",
+      "revId": "0f4e4cdf5051f521967a86f82168e744d99d6654",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b576a7b1_fd68ae24",
         "filename": "pc/sctp_transport.h",
         "patchSetId": 16
@@ -82,6 +100,24 @@
       "writtenOn": "2021-02-08T12:09:59Z",
       "side": 1,
       "message": "The reason this is possible now is because the QuicTransport implementation in Blink is removed. Perhaps we can make these functions private?",
+      "revId": "0f4e4cdf5051f521967a86f82168e744d99d6654",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "308aadfc_d230286d",
+        "filename": "pc/sctp_transport.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-08T12:56:54Z",
+      "side": 1,
+      "message": "turns out that internal() is still required by the tests at least.",
+      "parentUuid": "b576a7b1_fd68ae24",
       "revId": "0f4e4cdf5051f521967a86f82168e744d99d6654",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
