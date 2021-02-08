@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88777885_2a8f4e57",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 5950,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-08T14:19:39Z",
+      "side": 1,
+      "message": "You\u0027re right to be concerned. In this case, although the macro is declared in a header whose name is \"gunit.h\", there are very proprietary things going on:\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/rtc_base/gunit.h;drc\u003d0c626afcf387d16ba0ea35871690a0ca5bd11962;l\u003d30\n\nIn this case, it works OK because both contexts run with a valid rtc::Thread instance. It\u0027s not exactly clear though that the macro needs that.",
+      "parentUuid": "6905de90_cd7e3cd0",
+      "revId": "0f4e4cdf5051f521967a86f82168e744d99d6654",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b576a7b1_fd68ae24",
         "filename": "pc/sctp_transport.h",
         "patchSetId": 16
