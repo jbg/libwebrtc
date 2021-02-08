@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11e54085_dcb3841f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-02-08T13:48:38Z",
+      "side": 1,
+      "message": "the bots were a good source of information! Wasn\u0027t sure whether to put this here or into a README in the fuzzers directory but... more docs ;-)",
+      "revId": "e3fb71d16dad47f2adc1f5355bf9c9e1e0e48251",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
