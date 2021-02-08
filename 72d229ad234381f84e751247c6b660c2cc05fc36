@@ -71,6 +71,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f8a9d253_f0166c7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-02-08T17:12:53Z",
+      "side": 1,
+      "message": "One more idea... perhaps we could start supporting a policy in the TQ implementation of Thread that no blocking calls are made from within TQ posted tasks?",
+      "parentUuid": "fe2cdfe0_d33721c2",
+      "revId": "72d229ad234381f84e751247c6b660c2cc05fc36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0af4f436_2880e3be",
         "filename": "rtc_base/thread.h",
         "patchSetId": 8
