@@ -193,6 +193,24 @@
       "parentUuid": "4ea32973_f04bce55",
       "revId": "4993b284105c8c9165352ce91620398937762060",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e3ef249_2245167e",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-08T14:08:50Z",
+      "side": 1,
+      "message": "OK, that is clear enough.\nFWIW, the proxy is also created inside PeerConnectionFactory-\u003eCreatePeerConnection.",
+      "parentUuid": "33219370_b43783a3",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

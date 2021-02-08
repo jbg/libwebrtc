@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6905de90_cd7e3cd0",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 5950,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-08T14:08:50Z",
+      "side": 1,
+      "message": "What I was wondering about was whether it would actually fail the test if the test never became true, given that the ASSERT happens in a lambda that is executed on a different thread.\n\ngtest ASSERT_ seems to manage well with working inside functions, but I haven\u0027t tried it inside  invoked lambdas.",
+      "parentUuid": "8476bc6f_4f1b0543",
+      "revId": "0f4e4cdf5051f521967a86f82168e744d99d6654",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b576a7b1_fd68ae24",
         "filename": "pc/sctp_transport.h",
         "patchSetId": 16
