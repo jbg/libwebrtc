@@ -88,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6feb5c81_5ea9df5f",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-08T11:00:44Z",
+      "side": 1,
+      "message": "\"Internally, the proxy object has a member variable named |worker_thread_|\"\nThat worker_thread_. I see that api/proxy.h has this name, and has had it for quite some time, so this may be something outside the scope of this CL.\n\nI think it\u0027s a Bad Thing to be using the word \"worker\" for multiple concepts. But not a rant on this particular CL.",
+      "parentUuid": "8d407b2f_4986e23d",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6944b19a_9727235b",
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "For a couple of reasons, I think that would be misleading:\n- The factory does not pass the worker_thread()\n- The difference between saying \"its worker_thread()\" vs \"the worker_thread() that is passed\", is that the second way indicates that what is passed each time, might not always be the same, so the former is more applicable in this case.\n\nAgain I think that there might be some misunderstanding so I\u0027m happy to explain this and flesh the comment out in more detail on Monday.",
       "parentUuid": "6944b19a_9727235b",
+      "revId": "4993b284105c8c9165352ce91620398937762060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ea32973_f04bce55",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-08T11:00:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand.\n\nThe worker_thread() is passed to the CreatePeerConnectionFactory() function as part of its configuration, and CreatePeerConnection creates a ConnectionContext object (which I split off from PeerConnectionFactory recently); if there is no worker_thread in the configuration, the ConnectionContext will create one.\n\nThe ConnectionContext is passed to the PeerConnection when PeerConnection is created, and the worker_thread() for a PeerConnection is set from the ConnectionContext. If this isn\u0027t \"passing\" (by reference, ownership is not transferred), I\u0027m not sure what to call it.\n\nMy point was really that \"the factories worker thread\" is a) ungrammatical and b) imprecise, since it doesn\u0027t tell you which factory it is pointing at; I *think* it is the PeerConnectionFactory you are referring to, but I want to be sure (and have the comment be easy to interpret for others).",
+      "parentUuid": "958e8782_5dd37f32",
       "revId": "4993b284105c8c9165352ce91620398937762060",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
