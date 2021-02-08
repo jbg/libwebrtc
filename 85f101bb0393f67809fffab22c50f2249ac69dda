@@ -34,6 +34,24 @@
       "parentUuid": "b7d5e3d4_ad353759",
       "revId": "85f101bb0393f67809fffab22c50f2249ac69dda",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "161e99e0_505f5981",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-08T12:44:30Z",
+      "side": 1,
+      "message": "that cl doesn\u0027t change where work is actually done, so the vulnerability still exists. If a subsequent redesign moves the filtering to the network thread, the problem being addressed here disappears; if so, this approach can be abandoned.\n\nPutting it on hold seems reasonable.",
+      "parentUuid": "ff1e72ce_ce193b7a",
+      "revId": "85f101bb0393f67809fffab22c50f2249ac69dda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
