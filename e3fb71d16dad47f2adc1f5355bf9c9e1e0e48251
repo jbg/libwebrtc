@@ -39,6 +39,30 @@
       },
       "revId": "e3fb71d16dad47f2adc1f5355bf9c9e1e0e48251",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe27805d_30c90164",
+        "filename": "docs/native-code/development/index.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-02-08T14:02:56Z",
+      "side": 1,
+      "message": "true, without asan the fuzzer won\u0027t find anything. Updated!",
+      "parentUuid": "478ceaf0_0fe20896",
+      "range": {
+        "startLine": 103,
+        "startChar": 29,
+        "endLine": 103,
+        "endChar": 73
+      },
+      "revId": "e3fb71d16dad47f2adc1f5355bf9c9e1e0e48251",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
