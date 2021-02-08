@@ -33,6 +33,57 @@
       "message": "Clarifying my commentary.\n",
       "revId": "0f4e4cdf5051f521967a86f82168e744d99d6654",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "852ac41c_b7cf4944",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-08T12:09:59Z",
+      "side": 1,
+      "message": "I\u0027m approving this.\n",
+      "revId": "0f4e4cdf5051f521967a86f82168e744d99d6654",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ac8250_1bc5a4d9",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 5950,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-08T12:09:59Z",
+      "side": 1,
+      "message": "Does ASSERT_EQ_WAIT in an invoke do the right thing if it fails?\nI recall having problems with ASSERT in a function, even, but that may have been long ago.",
+      "revId": "0f4e4cdf5051f521967a86f82168e744d99d6654",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b576a7b1_fd68ae24",
+        "filename": "pc/sctp_transport.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-08T12:09:59Z",
+      "side": 1,
+      "message": "The reason this is possible now is because the QuicTransport implementation in Blink is removed. Perhaps we can make these functions private?",
+      "revId": "0f4e4cdf5051f521967a86f82168e744d99d6654",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
