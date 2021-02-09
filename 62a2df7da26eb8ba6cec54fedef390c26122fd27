@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34032ac3_69c7c9aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-09T09:00:50Z",
+      "side": 1,
+      "message": "LGTM.\n\n(I am not an owner of these folders so probably hta@\u0027s +1 is needed as well)",
+      "revId": "62a2df7da26eb8ba6cec54fedef390c26122fd27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
