@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fea8192_1f760a0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-10T13:37:47Z",
+      "side": 1,
+      "message": "This adds tests to verify that just losing the connection, or losing, restarting and regaining the connection, does *not* cause an issue with SCTP, so should also not cause an issue with RPC-over-datachannels.\n\nThis strengthens the theory that we only have problems with handovers.\n",
+      "revId": "c646625d72eaa222e135253d7bc287ab2a8ed369",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
