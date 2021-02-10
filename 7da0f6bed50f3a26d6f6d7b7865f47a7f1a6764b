@@ -16,6 +16,23 @@
       "message": "Sam, PTAL at ",
       "revId": "7da0f6bed50f3a26d6f6d7b7865f47a7f1a6764b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a6b5d2_e8da0722",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-02-10T15:22:12Z",
+      "side": 1,
+      "message": "Sam, PTAL at test/fuzzers\nNisse, PTAL at api/video\nIlya, PTAL at everything else",
+      "revId": "7da0f6bed50f3a26d6f6d7b7865f47a7f1a6764b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
