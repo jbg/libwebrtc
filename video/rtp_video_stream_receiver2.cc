@@ -367,6 +367,10 @@ RtpVideoStreamReceiver2::ParseGenericDependenciesResult
 RtpVideoStreamReceiver2::ParseGenericDependenciesExtension(
     const RtpPacketReceived& rtp_packet,
     RTPVideoHeader* video_header) {
+  // Always unwrap sequence number to keep better track of wrap arounds, even
+  // if `sequence_number` is not used later.
+  int64_t sequence_number =
+      rtp_sequence_number_.Unwrap(rtp_packet.SequenceNumber());
   if (rtp_packet.HasExtension<RtpDependencyDescriptorExtension>()) {
     webrtc::DependencyDescriptor dependency_descriptor;
     if (!rtp_packet.GetExtension<RtpDependencyDescriptorExtension>(
@@ -416,17 +420,18 @@ RtpVideoStreamReceiver2::ParseGenericDependenciesExtension(
     // Save it if there is a (potentially) new structure.
     if (dependency_descriptor.attached_structure) {
       RTC_DCHECK(dependency_descriptor.first_packet_in_frame);
-      if (video_structure_frame_id_ > frame_id) {
+      if (video_structure_sequence_number_ > sequence_number) {
         RTC_LOG(LS_WARNING)
             << "Arrived key frame with id " << frame_id << " and structure id "
             << dependency_descriptor.attached_structure->structure_id
-            << " is older than the latest received key frame with id "
-            << *video_structure_frame_id_ << " and structure id "
-            << video_structure_->structure_id;
+            << " in packet #" << sequence_number
+            << " is older than the latest received key frame with structure id "
+            << video_structure_->structure_id << " from packet #"
+            << *video_structure_sequence_number_;
         return kDropPacket;
       }
       video_structure_ = std::move(dependency_descriptor.attached_structure);
-      video_structure_frame_id_ = frame_id;
+      video_structure_sequence_number_ = sequence_number;
       video_header->frame_type = VideoFrameType::kVideoFrameKey;
     } else {
       video_header->frame_type = VideoFrameType::kVideoFrameDelta;
