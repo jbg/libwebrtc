@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b558674_f1f9192f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10980
+      },
+      "writtenOn": "2021-02-10T14:26:33Z",
+      "side": 1,
+      "message": "NV12 is being removed?",
+      "revId": "a0bb2ef2dce1e64efd40a1b98789664102f377f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
