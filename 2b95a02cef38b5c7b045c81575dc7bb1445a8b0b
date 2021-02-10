@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7c46f3e_ac336c7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-02-10T22:13:43Z",
+      "side": 1,
+      "message": "PTAL. Don\u0027t really have a way to test this since the fake clock replaces both TimeMillis and TimeUTCMillis.",
+      "revId": "2b95a02cef38b5c7b045c81575dc7bb1445a8b0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
