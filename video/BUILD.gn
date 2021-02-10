@@ -632,6 +632,7 @@ if (rtc_include_tests) {
       ":video_mocks",
       ":video_stream_decoder_impl",
       ":video_stream_encoder_impl",
+      "../api:array_view",
       "../api:create_frame_generator",
       "../api:fake_frame_decryptor",
       "../api:fake_frame_encryptor",
