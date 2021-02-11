@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2638b782_4b40b7cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-11T16:12:13Z",
+      "side": 1,
+      "message": "tl;dr; I agree with your 1st point, but still would like to go with this change,\n2nd point is valid, but not related to this particular change,\n3rd point - I do not see how it is related to this change.\n\nSimulcast is an example where frame number order and sequence number order may mismatch, but that is not the only scenario where it may happen (internal bug describes a different scenario where it did happen). I agree it is better to handle it in SFM, but client can behave better too.\n\nWhen rtp sequence numbers order is aligned with frame numbers order, this change is noop.\nWhen they do not align, I propose to prefer rtp sequence number order over frame_number order. In particular because other mechanics like nacks or FIR rely on gaps in rtp sequence numbers, not in frame numbers.\n\nwhat are the numbers in your example? is it sequence numbers or frame numbers?\nYes, there is an issue where we may throw away DF6, there is a TODO (line 382) to address it eventually, but that is unrelated to this change. \n\nThis change doesn\u0027t contradict the quote. It suggest to order coded video sequences based on rtp sequence numbers rather than on frame_numbers. I\u0027m not sure  decode order is well defined for frames from different video coded sequences.\n\n(I\u0027ve slightly updated the description with motivation for the change)",
+      "parentUuid": "d7a4c4e8_7c3a75b8",
+      "revId": "8e89ac7f05b21e1baa9b566001ba014c9c393905",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c95c73b_374d36d5",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-02-11T15:27:05Z",
       "side": 1,
       "message": "2?",
+      "range": {
+        "startLine": 1182,
+        "startChar": 33,
+        "endLine": 1182,
+        "endChar": 45
+      },
+      "revId": "8e89ac7f05b21e1baa9b566001ba014c9c393905",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ab2622_6fa7d62d",
+        "filename": "video/rtp_video_stream_receiver2_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-11T16:12:13Z",
+      "side": 1,
+      "message": "oops, you\u0027re right.",
+      "parentUuid": "8c95c73b_374d36d5",
       "range": {
         "startLine": 1182,
         "startChar": 33,
