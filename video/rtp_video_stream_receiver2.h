@@ -302,6 +302,8 @@ class RtpVideoStreamReceiver2 : public LossNotificationSender,
 
   video_coding::PacketBuffer packet_buffer_;
   UniqueTimestampCounter frame_counter_ RTC_GUARDED_BY(worker_task_checker_);
+  SeqNumUnwrapper<uint16_t> rtp_sequence_number_
+      RTC_GUARDED_BY(worker_task_checker_);
   SeqNumUnwrapper<uint16_t> frame_id_unwrapper_
       RTC_GUARDED_BY(worker_task_checker_);
 
@@ -310,9 +312,9 @@ class RtpVideoStreamReceiver2 : public LossNotificationSender,
   // following delta packets.
   std::unique_ptr<FrameDependencyStructure> video_structure_
       RTC_GUARDED_BY(worker_task_checker_);
-  // Frame id of the last frame with the attached video structure.
-  // absl::nullopt when `video_structure_ == nullptr`;
-  absl::optional<int64_t> video_structure_frame_id_
+  // Rtp sequence number of the last packet with the video structure attached to
+  // dependency descriptor or absl::nullopt when `video_structure_ == nullptr`.
+  absl::optional<int64_t> video_structure_sequence_number_
       RTC_GUARDED_BY(worker_task_checker_);
 
   std::unique_ptr<video_coding::RtpFrameReferenceFinder> reference_finder_
