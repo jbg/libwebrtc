@@ -16,6 +16,24 @@
       "message": "NV12 is being removed?",
       "revId": "a0bb2ef2dce1e64efd40a1b98789664102f377f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13c4ef65_22047b7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-11T08:25:40Z",
+      "side": 1,
+      "message": "NV12 support stays, see api/video/video_frame_buffer.h. The enum that is trimmed in this cl is used in a few places in old code interacting with libyuv, and that code didn\u0027t use the NV12 value.",
+      "parentUuid": "5b558674_f1f9192f",
+      "revId": "a0bb2ef2dce1e64efd40a1b98789664102f377f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
