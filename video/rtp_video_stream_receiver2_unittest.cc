@@ -1038,21 +1038,27 @@ class RtpVideoStreamReceiver2DependencyDescriptorTest
     return stream_structure;
   }
 
-  void InjectPacketWith(const FrameDependencyStructure& stream_structure,
-                        const DependencyDescriptor& dependency_descriptor) {
+  RtpPacketReceived PacketWith(
+      const FrameDependencyStructure& stream_structure,
+      const DependencyDescriptor& dependency_descriptor) {
     const std::vector<uint8_t> data = {0, 1, 2, 3, 4};
     RtpPacketReceived rtp_packet(&extension_map_);
-    ASSERT_TRUE(rtp_packet.SetExtension<RtpDependencyDescriptorExtension>(
+    EXPECT_TRUE(rtp_packet.SetExtension<RtpDependencyDescriptorExtension>(
         stream_structure, dependency_descriptor));
     uint8_t* payload = rtp_packet.SetPayloadSize(data.size());
-    ASSERT_TRUE(payload);
+    EXPECT_TRUE(payload);
     memcpy(payload, data.data(), data.size());
-    mock_on_complete_frame_callback_.ClearExpectedBitstream();
-    mock_on_complete_frame_callback_.AppendExpectedBitstream(data.data(),
-                                                             data.size());
     rtp_packet.SetMarker(true);
     rtp_packet.SetPayloadType(payload_type_);
     rtp_packet.SetSequenceNumber(++rtp_sequence_number_);
+    return rtp_packet;
+  }
+
+  void Inject(const RtpPacketReceived& rtp_packet) {
+    rtc::ArrayView<const uint8_t> payload = rtp_packet.payload();
+    mock_on_complete_frame_callback_.ClearExpectedBitstream();
+    mock_on_complete_frame_callback_.AppendExpectedBitstream(payload.data(),
+                                                             payload.size());
     rtp_video_stream_receiver_->OnRtpPacket(rtp_packet);
   }
 
@@ -1077,7 +1083,7 @@ TEST_F(RtpVideoStreamReceiver2DependencyDescriptorTest, UnwrapsFrameId) {
       .WillOnce([&](video_coding::EncodedFrame* frame) {
         first_picture_id = frame->id.picture_id;
       });
-  InjectPacketWith(stream_structure, keyframe_descriptor);
+  Inject(PacketWith(stream_structure, keyframe_descriptor));
 
   DependencyDescriptor deltaframe1_descriptor;
   deltaframe1_descriptor.frame_dependencies = stream_structure.templates[1];
@@ -1098,8 +1104,8 @@ TEST_F(RtpVideoStreamReceiver2DependencyDescriptorTest, UnwrapsFrameId) {
         // 0xfffe - 0xfff0
         EXPECT_EQ(frame->id.picture_id - first_picture_id, 14);
       });
-  InjectPacketWith(stream_structure, deltaframe2_descriptor);
-  InjectPacketWith(stream_structure, deltaframe1_descriptor);
+  Inject(PacketWith(stream_structure, deltaframe2_descriptor));
+  Inject(PacketWith(stream_structure, deltaframe1_descriptor));
 }
 
 TEST_F(RtpVideoStreamReceiver2DependencyDescriptorTest,
@@ -1117,24 +1123,86 @@ TEST_F(RtpVideoStreamReceiver2DependencyDescriptorTest,
       std::make_unique<FrameDependencyStructure>(stream_structure1);
   keyframe1_descriptor.frame_dependencies = stream_structure1.templates[0];
   keyframe1_descriptor.frame_number = 1;
-  EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame);
-  InjectPacketWith(stream_structure1, keyframe1_descriptor);
+  RtpPacketReceived packet1 =
+      PacketWith(stream_structure1, keyframe1_descriptor);
 
-  // Pass in 2nd key frame with different structure.
+  DependencyDescriptor deltaframe_descriptor;
+  deltaframe_descriptor.frame_dependencies = stream_structure1.templates[0];
+  deltaframe_descriptor.frame_number = 2;
+  RtpPacketReceived packet2 =
+      PacketWith(stream_structure1, deltaframe_descriptor);
+
   DependencyDescriptor keyframe2_descriptor;
   keyframe2_descriptor.attached_structure =
       std::make_unique<FrameDependencyStructure>(stream_structure2);
   keyframe2_descriptor.frame_dependencies = stream_structure2.templates[0];
   keyframe2_descriptor.frame_number = 3;
+  RtpPacketReceived packet3 =
+      PacketWith(stream_structure2, keyframe2_descriptor);
+
   EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame);
-  InjectPacketWith(stream_structure2, keyframe2_descriptor);
+  Inject(packet1);
+
+  // Pass in 2nd key frame with different structure.
+  EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame);
+  Inject(packet3);
 
   // Pass in late delta frame that uses structure of the 1st key frame.
-  DependencyDescriptor deltaframe_descriptor;
-  deltaframe_descriptor.frame_dependencies = stream_structure1.templates[0];
-  deltaframe_descriptor.frame_number = 2;
   EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame).Times(0);
-  InjectPacketWith(stream_structure1, deltaframe_descriptor);
+  Inject(packet2);
+}
+
+TEST_F(RtpVideoStreamReceiver2DependencyDescriptorTest,
+       RelyOnRtpSequenceNumbersToDetectOrderOfKeyFrames) {
+  FrameDependencyStructure stream_structure1 = CreateStreamStructure();
+  FrameDependencyStructure stream_structure2 = CreateStreamStructure();
+  FrameDependencyStructure stream_structure3 = CreateStreamStructure();
+  // Make sure template ids for these two structures do not collide:
+  // adjust structure_id (that is also used as template id offset).
+  stream_structure1.structure_id = 13;
+  stream_structure2.structure_id =
+      stream_structure1.structure_id + stream_structure1.templates.size();
+  stream_structure3.structure_id =
+      stream_structure2.structure_id + stream_structure2.templates.size();
+
+  DependencyDescriptor keyframe1_descriptor;
+  keyframe1_descriptor.attached_structure =
+      std::make_unique<FrameDependencyStructure>(stream_structure1);
+  keyframe1_descriptor.frame_dependencies = stream_structure1.templates[0];
+  keyframe1_descriptor.frame_number = 1000;
+  RtpPacketReceived packet1 =
+      PacketWith(stream_structure1, keyframe1_descriptor);
+
+  DependencyDescriptor keyframe2_descriptor;
+  keyframe1_descriptor.attached_structure =
+      std::make_unique<FrameDependencyStructure>(stream_structure2);
+  keyframe2_descriptor.frame_dependencies = stream_structure2.templates[0];
+  keyframe2_descriptor.frame_number = 5;
+  RtpPacketReceived packet2 =
+      PacketWith(stream_structure2, keyframe2_descriptor);
+
+  DependencyDescriptor keyframe3_descriptor;
+  keyframe3_descriptor.attached_structure =
+      std::make_unique<FrameDependencyStructure>(stream_structure3);
+  keyframe3_descriptor.frame_dependencies = stream_structure3.templates[0];
+  keyframe3_descriptor.frame_number = 1;
+  RtpPacketReceived packet3 =
+      PacketWith(stream_structure3, keyframe3_descriptor);
+
+  EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame);
+  packet1.SetSequenceNumber(13);
+  Inject(packet1);
+
+  // 3rd key frame uses smaller frame_number, but still should be accpeted
+  // because it is later in the sequence number order.
+  EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame);
+  packet3.SetSequenceNumber(17);
+  Inject(packet3);
+
+  // 2nd key frame should now be discarded for the similar reason
+  EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame).Times(0);
+  packet2.SetSequenceNumber(15);
+  Inject(packet2);
 }
 
 TEST_F(RtpVideoStreamReceiver2DependencyDescriptorTest,
@@ -1152,30 +1220,37 @@ TEST_F(RtpVideoStreamReceiver2DependencyDescriptorTest,
       std::make_unique<FrameDependencyStructure>(stream_structure1);
   keyframe1_descriptor.frame_dependencies = stream_structure1.templates[0];
   keyframe1_descriptor.frame_number = 1;
+  RtpPacketReceived packet1 =
+      PacketWith(stream_structure1, keyframe1_descriptor);
 
   DependencyDescriptor keyframe2_descriptor;
   keyframe2_descriptor.attached_structure =
       std::make_unique<FrameDependencyStructure>(stream_structure2);
   keyframe2_descriptor.frame_dependencies = stream_structure2.templates[0];
   keyframe2_descriptor.frame_number = 3;
+  RtpPacketReceived packet2 =
+      PacketWith(stream_structure2, keyframe2_descriptor);
+
+  DependencyDescriptor deltaframe_descriptor;
+  deltaframe_descriptor.frame_dependencies = stream_structure2.templates[0];
+  deltaframe_descriptor.frame_number = 4;
+  RtpPacketReceived packet3 =
+      PacketWith(stream_structure2, deltaframe_descriptor);
 
   EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame)
       .WillOnce([&](video_coding::EncodedFrame* frame) {
         EXPECT_EQ(frame->id.picture_id & 0xFFFF, 3);
       });
-  InjectPacketWith(stream_structure2, keyframe2_descriptor);
-  InjectPacketWith(stream_structure1, keyframe1_descriptor);
+  Inject(packet2);
+  Inject(packet1);
 
   // Pass in delta frame that uses structure of the 2nd key frame. Late key
   // frame shouldn't block it.
-  DependencyDescriptor deltaframe_descriptor;
-  deltaframe_descriptor.frame_dependencies = stream_structure2.templates[0];
-  deltaframe_descriptor.frame_number = 4;
   EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame)
       .WillOnce([&](video_coding::EncodedFrame* frame) {
         EXPECT_EQ(frame->id.picture_id & 0xFFFF, 4);
       });
-  InjectPacketWith(stream_structure2, deltaframe_descriptor);
+  Inject(packet3);
 }
 
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
