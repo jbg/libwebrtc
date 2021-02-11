@@ -50,6 +50,24 @@
       "message": "Good that you\u0027re calling this out - I think it\u0027s a bug, and someone was trying to solve it elsewhere by creating an injectable clock so that timestamps could be made consistent with the Chrome \"Performance\" clock (which is what the spec says it should be).",
       "revId": "2b95a02cef38b5c7b045c81575dc7bb1445a8b0b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51d134e6_1ebabc4e",
+        "filename": "pc/stats_collector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-02-11T19:47:41Z",
+      "side": 1,
+      "message": "It is a bug: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d12353\n\nJust not trying to address it right now since it\u0027s a bit more complex, especially if we want to exactly match \"Performance.timeOrigin + Performance.now()\". It\u0027s not sufficient to just use WebRTC\u0027s monotonic clock.",
+      "parentUuid": "423a8c71_3186733a",
+      "revId": "2b95a02cef38b5c7b045c81575dc7bb1445a8b0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
