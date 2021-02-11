@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6652e71_1dcfbaf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-02-11T12:27:06Z",
+      "side": 1,
+      "message": "Hello Zeke and Sami!\n\nCould you please take a look at this CL, which adds early resolution of relative paths passed to scripts to build mobile SDKs? Before this change there were errors, when build script started not from src/ folder, because ninja invocation was done with custom cwd, while path arguments passed unresolved, causing saving build artifacts in wrong place and later scripts could not find build artifacts.\n\nThanks a lot in advance!",
+      "revId": "5707ac9207b47478088928c91de01fb91f2ae348",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
