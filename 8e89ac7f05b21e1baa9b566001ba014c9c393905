@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a4c4e8_7c3a75b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-02-11T15:27:05Z",
+      "side": 1,
+      "message": "I think this is the wrong approach for a few reasons:\n - Simulcast is not a receive side concept, it should be handled by the SFM\n\n - Reordering, lets say we have (10,KF), (11,DF), (5,KF) and (6,DF), what if we receive 10 11, 6, 5 in that order. In that case we would throw away 6 before we had a chance to reset at 5.  \n\n - From https://aomediacodec.github.io/av1-rtp-spec/#a83-semantics: frame_number: is represented using 16 bits and increases strictly monotonically in decode order. frame_number MAY start on a random number, and MUST wrap after reaching the maximum value. All packets of the same frame MUST have the same frame_number value.",
+      "revId": "8e89ac7f05b21e1baa9b566001ba014c9c393905",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c95c73b_374d36d5",
+        "filename": "video/rtp_video_stream_receiver2_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-02-11T15:27:05Z",
+      "side": 1,
+      "message": "2?",
+      "range": {
+        "startLine": 1182,
+        "startChar": 33,
+        "endLine": 1182,
+        "endChar": 45
+      },
+      "revId": "8e89ac7f05b21e1baa9b566001ba014c9c393905",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
