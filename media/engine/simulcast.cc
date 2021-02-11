@@ -296,17 +296,21 @@ size_t LimitSimulcastLayerCount(int width,
     // if the ratio (pixels_up - pixels) / (pixels_up - pixels_down) is less
     // than configured |max_ratio|. pixels_down is the selected index in
     // kSimulcastFormats based on pixels.
+    const double kDefaultMaxRatio = 0.1;
     webrtc::FieldTrialOptional<double> max_ratio("max_ratio");
     webrtc::ParseFieldTrial({&max_ratio},
                             trials.Lookup("WebRTC-SimulcastLayerLimitRoundUp"));
 
     const bool enable_lowres_bitrate_interpolation =
         EnableLowresBitrateInterpolation(trials);
-    size_t adaptive_layer_count = std::max(
-        need_layers,
-        InterpolateSimulcastFormat(width, height, max_ratio.GetOptional(),
-                                   enable_lowres_bitrate_interpolation)
-            .max_layers);
+    size_t adaptive_layer_count =
+        std::max(need_layers,
+                 InterpolateSimulcastFormat(
+                     width, height,
+                     absl::optional<double>(
+                         max_ratio.GetOptional().value_or(kDefaultMaxRatio)),
+                     enable_lowres_bitrate_interpolation)
+                     .max_layers);
     if (layer_count > adaptive_layer_count) {
       RTC_LOG(LS_WARNING) << "Reducing simulcast layer count from "
                           << layer_count << " to " << adaptive_layer_count;
