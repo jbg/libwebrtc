@@ -271,7 +271,7 @@ class Call final : public webrtc::Call,
   void DeliverPacketAsync(MediaType media_type,
                           rtc::CopyOnWriteBuffer packet,
                           int64_t packet_time_us,
-                          PacketCallback callback) override;
+                          UnknownSsrcCallback callback) override;
 
   // Implements RecoveredPacketReceiver.
   void OnRecoveredPacket(const uint8_t* packet, size_t length) override;
@@ -1482,7 +1482,7 @@ PacketReceiver::DeliveryStatus Call::DeliverPacket(
 void Call::DeliverPacketAsync(MediaType media_type,
                               rtc::CopyOnWriteBuffer packet,
                               int64_t packet_time_us,
-                              PacketCallback callback) {
+                              UnknownSsrcCallback callback) {
   RTC_DCHECK_RUN_ON(network_thread_);
 
   TaskQueueBase* network_thread = rtc::Thread::Current();
@@ -1493,11 +1493,11 @@ void Call::DeliverPacketAsync(MediaType media_type,
                      packet_time_us, cb = std::move(callback)] {
         RTC_DCHECK_RUN_ON(worker_thread_);
         DeliveryStatus status = DeliverPacket(media_type, p, packet_time_us);
-        if (cb) {
+        if (status == DELIVERY_UNKNOWN_SSRC && cb) {
           network_thread->PostTask(
-              ToQueuedTask([cb = std::move(cb), status, media_type,
-                            p = std::move(p), packet_time_us]() {
-                cb(status, media_type, std::move(p), packet_time_us);
+              ToQueuedTask([cb = std::move(cb), media_type, p = std::move(p),
+                            packet_time_us]() {
+                cb(media_type, std::move(p), packet_time_us);
               }));
         }
       }));
