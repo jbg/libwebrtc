@@ -54,6 +54,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d85706a5_15f1ac26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-12T14:57:37Z",
+      "side": 1,
+      "message": "You mean a later component (FrameBuffer?) would discard a key frame #5 after key frame#10 anyway? That I haven\u0027t thought about.\n\nI\u0027m still trying to think what would be best action when rtp sequence number order mismatch frame number order. Current implementation assumes it never happens and freezes when it does: it doesn\u0027t send nack or fir since packets keep coming in sequence number order without gaps.\n\nMay be it would be better to \u0027panic\u0027 in such a case: send a key frame request. But  receiver should be able to accept a new key frame after that, which is sort of what I\u0027m trying to do right away.\n\nAnyway, I guess this scenario need a bit more thinking.",
+      "parentUuid": "cbc3ba5a_5d48342b",
+      "revId": "8e89ac7f05b21e1baa9b566001ba014c9c393905",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c95c73b_374d36d5",
