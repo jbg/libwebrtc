@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7f788ce_c8c1e250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-02-12T11:13:33Z",
+      "side": 1,
+      "message": "test/fuzzers/ lgtm!",
+      "revId": "690cf1a852e3d4a6c43024f170bd5df36ad0f8c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
