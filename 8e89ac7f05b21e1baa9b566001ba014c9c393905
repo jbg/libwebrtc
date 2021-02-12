@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbc3ba5a_5d48342b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-02-12T11:04:44Z",
+      "side": 1,
+      "message": "1) If the SFM does not rewrite frame_ids/frame_dependency_template_id, then there could be situations where the receiver can\u0027t detect a broken stream, so I don\u0027t see how this could be solved at any other place than in the SFM.\n\n2) Oops, yeah they are frame numbers. I\u0027m worried about contradictory information leading to weird/unintended behavior. Sometimes we use timestamps, sometimes we use rtp sequence numbers and sometime we use frame ids to determine what is newer. It\u0027s messy. I\u0027m interested to see what happens if you create a call level test for this fix, AFAICT even if you received 10, 11, 5, 6 you would still not get the outcome you were hoping for (continued decoding from 5).\n\n3) If you make frame ids jump backwards you are not a conformant sender according to the DD spec.",
+      "parentUuid": "2638b782_4b40b7cf",
+      "revId": "8e89ac7f05b21e1baa9b566001ba014c9c393905",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c95c73b_374d36d5",
