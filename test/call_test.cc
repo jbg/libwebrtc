@@ -584,19 +584,21 @@ void CallTest::ConnectVideoSourcesToStreams() {
 
 void CallTest::AssociateFlexfecStreamsWithVideoStreams() {
   // All FlexFEC streams protect all of the video streams.
+  /*
   for (FlexfecReceiveStream* flexfec_recv_stream : flexfec_receive_streams_) {
     for (VideoReceiveStream* video_recv_stream : video_receive_streams_) {
       video_recv_stream->AddSecondarySink(flexfec_recv_stream);
     }
-  }
+  }*/
 }
 
 void CallTest::DissociateFlexfecStreamsFromVideoStreams() {
+  /*
   for (FlexfecReceiveStream* flexfec_recv_stream : flexfec_receive_streams_) {
     for (VideoReceiveStream* video_recv_stream : video_receive_streams_) {
       video_recv_stream->RemoveSecondarySink(flexfec_recv_stream);
     }
-  }
+  }*/
 }
 
 void CallTest::Start() {
