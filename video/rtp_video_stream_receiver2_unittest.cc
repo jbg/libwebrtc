@@ -145,11 +145,11 @@ class MockRtpPacketSink : public RtpPacketSinkInterface {
 };
 
 constexpr uint32_t kSsrc = 111;
-constexpr uint16_t kSequenceNumber = 222;
 constexpr int kPayloadType = 100;
 constexpr int kRedPayloadType = 125;
 
 std::unique_ptr<RtpPacketReceived> CreateRtpPacketReceived() {
+  constexpr uint16_t kSequenceNumber = 222;
   auto packet = std::make_unique<RtpPacketReceived>();
   packet->SetSsrc(kSsrc);
   packet->SetSequenceNumber(kSequenceNumber);
@@ -164,7 +164,8 @@ MATCHER_P(SamePacketAs, other, "") {
 
 }  // namespace
 
-class RtpVideoStreamReceiver2Test : public ::testing::Test {
+class RtpVideoStreamReceiver2Test : public ::testing::Test,
+                                    public RtpPacketSinkInterface {
  public:
   RtpVideoStreamReceiver2Test() : RtpVideoStreamReceiver2Test("") {}
   explicit RtpVideoStreamReceiver2Test(std::string field_trials)
@@ -228,12 +229,18 @@ class RtpVideoStreamReceiver2Test : public ::testing::Test {
     h264.nalus[h264.nalus_length++] = info;
   }
 
+  void OnRtpPacket(const RtpPacketReceived& packet) override {
+    if (test_packet_sink_)
+      test_packet_sink_->OnRtpPacket(packet);
+  }
+
  protected:
-  static VideoReceiveStream::Config CreateConfig() {
+  VideoReceiveStream::Config CreateConfig() {
     VideoReceiveStream::Config config(nullptr);
     config.rtp.remote_ssrc = 1111;
     config.rtp.local_ssrc = 2222;
     config.rtp.red_payload_type = kRedPayloadType;
+    config.rtp.packet_sink_ = this;
     return config;
   }
 
@@ -249,6 +256,7 @@ class RtpVideoStreamReceiver2Test : public ::testing::Test {
   std::unique_ptr<ProcessThread> process_thread_;
   std::unique_ptr<ReceiveStatistics> rtp_receive_statistics_;
   std::unique_ptr<RtpVideoStreamReceiver2> rtp_video_stream_receiver_;
+  RtpPacketSinkInterface* test_packet_sink_ = nullptr;
 };
 
 TEST_F(RtpVideoStreamReceiver2Test, CacheColorSpaceFromLastPacketOfKeyframe) {
@@ -755,27 +763,22 @@ TEST_F(RtpVideoStreamReceiver2Test, RequestKeyframeWhenPacketBufferGetsFull) {
                                                     video_header);
 }
 
-TEST_F(RtpVideoStreamReceiver2Test, SecondarySinksGetRtpNotifications) {
+TEST_F(RtpVideoStreamReceiver2Test, SinkGetsRtpNotifications) {
   rtp_video_stream_receiver_->StartReceive();
 
-  MockRtpPacketSink secondary_sink_1;
-  MockRtpPacketSink secondary_sink_2;
-
-  rtp_video_stream_receiver_->AddSecondarySink(&secondary_sink_1);
-  rtp_video_stream_receiver_->AddSecondarySink(&secondary_sink_2);
+  MockRtpPacketSink test_sink;
+  test_packet_sink_ = &test_sink;
 
   auto rtp_packet = CreateRtpPacketReceived();
-  EXPECT_CALL(secondary_sink_1, OnRtpPacket(SamePacketAs(*rtp_packet)));
-  EXPECT_CALL(secondary_sink_2, OnRtpPacket(SamePacketAs(*rtp_packet)));
+  EXPECT_CALL(test_sink, OnRtpPacket(SamePacketAs(*rtp_packet)));
 
   rtp_video_stream_receiver_->OnRtpPacket(*rtp_packet);
 
   // Test tear-down.
   rtp_video_stream_receiver_->StopReceive();
-  rtp_video_stream_receiver_->RemoveSecondarySink(&secondary_sink_1);
-  rtp_video_stream_receiver_->RemoveSecondarySink(&secondary_sink_2);
+  test_packet_sink_ = nullptr;
 }
-
+/*
 TEST_F(RtpVideoStreamReceiver2Test,
        RemovedSecondarySinksGetNoRtpNotifications) {
   rtp_video_stream_receiver_->StartReceive();
@@ -832,7 +835,7 @@ TEST_F(RtpVideoStreamReceiver2Test,
 
   // Test tear-down.
   rtp_video_stream_receiver_->RemoveSecondarySink(&secondary_sink);
-}
+}*/
 
 TEST_F(RtpVideoStreamReceiver2Test, ParseGenericDescriptorOnePacket) {
   const std::vector<uint8_t> data = {0, 1, 2, 3, 4};
@@ -1177,20 +1180,6 @@ TEST_F(RtpVideoStreamReceiver2DependencyDescriptorTest,
       });
   InjectPacketWith(stream_structure2, deltaframe_descriptor);
 }
-
-#if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
-using RtpVideoStreamReceiver2DeathTest = RtpVideoStreamReceiver2Test;
-TEST_F(RtpVideoStreamReceiver2DeathTest, RepeatedSecondarySinkDisallowed) {
-  MockRtpPacketSink secondary_sink;
-
-  rtp_video_stream_receiver_->AddSecondarySink(&secondary_sink);
-  EXPECT_DEATH(rtp_video_stream_receiver_->AddSecondarySink(&secondary_sink),
-               "");
-
-  // Test tear-down.
-  rtp_video_stream_receiver_->RemoveSecondarySink(&secondary_sink);
-}
-#endif
 
 TEST_F(RtpVideoStreamReceiver2Test, TransformFrame) {
   rtc::scoped_refptr<MockFrameTransformer> mock_frame_transformer =
