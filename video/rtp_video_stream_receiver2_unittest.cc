@@ -145,17 +145,18 @@ class MockRtpPacketSink : public RtpPacketSinkInterface {
 };
 
 constexpr uint32_t kSsrc = 111;
-constexpr uint16_t kSequenceNumber = 222;
 constexpr int kPayloadType = 100;
 constexpr int kRedPayloadType = 125;
 
+/*
 std::unique_ptr<RtpPacketReceived> CreateRtpPacketReceived() {
+ constexpr uint16_t kSequenceNumber = 222;
   auto packet = std::make_unique<RtpPacketReceived>();
   packet->SetSsrc(kSsrc);
   packet->SetSequenceNumber(kSequenceNumber);
   packet->SetPayloadType(kPayloadType);
   return packet;
-}
+}*/
 
 MATCHER_P(SamePacketAs, other, "") {
   return arg.Ssrc() == other.Ssrc() &&
@@ -754,7 +755,7 @@ TEST_F(RtpVideoStreamReceiver2Test, RequestKeyframeWhenPacketBufferGetsFull) {
   rtp_video_stream_receiver_->OnReceivedPayloadData(data, rtp_packet,
                                                     video_header);
 }
-
+/*
 TEST_F(RtpVideoStreamReceiver2Test, SecondarySinksGetRtpNotifications) {
   rtp_video_stream_receiver_->StartReceive();
 
@@ -832,7 +833,7 @@ TEST_F(RtpVideoStreamReceiver2Test,
 
   // Test tear-down.
   rtp_video_stream_receiver_->RemoveSecondarySink(&secondary_sink);
-}
+}*/
 
 TEST_F(RtpVideoStreamReceiver2Test, ParseGenericDescriptorOnePacket) {
   const std::vector<uint8_t> data = {0, 1, 2, 3, 4};
@@ -1177,20 +1178,6 @@ TEST_F(RtpVideoStreamReceiver2DependencyDescriptorTest,
       });
   InjectPacketWith(stream_structure2, deltaframe_descriptor);
 }
-
-#if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
-using RtpVideoStreamReceiver2DeathTest = RtpVideoStreamReceiver2Test;
-TEST_F(RtpVideoStreamReceiver2DeathTest, RepeatedSecondarySinkDisallowed) {
-  MockRtpPacketSink secondary_sink;
-
-  rtp_video_stream_receiver_->AddSecondarySink(&secondary_sink);
-  EXPECT_DEATH(rtp_video_stream_receiver_->AddSecondarySink(&secondary_sink),
-               "");
-
-  // Test tear-down.
-  rtp_video_stream_receiver_->RemoveSecondarySink(&secondary_sink);
-}
-#endif
 
 TEST_F(RtpVideoStreamReceiver2Test, TransformFrame) {
   rtc::scoped_refptr<MockFrameTransformer> mock_frame_transformer =
