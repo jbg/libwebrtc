@@ -39,6 +39,30 @@
       },
       "revId": "d2ad50c89f892bfc4732adc07d2affff02e85784",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6de98ed5_7d4dc1a2",
+        "filename": "video/video_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-02-15T14:00:31Z",
+      "side": 1,
+      "message": "It compiles without it due to it being indirectly included. From what I understand, the recommendation is that each file should include the needed headers directly.",
+      "parentUuid": "a0583ac2_2df9a5c3",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 32
+      },
+      "revId": "d2ad50c89f892bfc4732adc07d2affff02e85784",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
