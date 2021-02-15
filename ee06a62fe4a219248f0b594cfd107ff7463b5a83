@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da36a6fc_eb07eb1c",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-02-15T13:05:53Z",
+      "side": 1,
+      "message": "Last week I was CCed on a bug where the receive time of packets (which is set by WebRTC) is in the future compared to the time when the corresponding frame is rendered. I believe that this is due to the clock difference.\n\nBecause of that I would like to proceed with this CL and override the WebRTC implementation when building with chromium.\n\nI will create a new bug about injecting a clock upon creation, but I won\u0027t have time to look into that now.\n\nWhat do you think?",
+      "parentUuid": "ed7c8215_6c88787e",
+      "range": {
+        "startLine": 411,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 20
+      },
+      "revId": "ee06a62fe4a219248f0b594cfd107ff7463b5a83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bc7ef63_2e00a304",
         "filename": "rtc_base/system_time.cc",
         "patchSetId": 1
