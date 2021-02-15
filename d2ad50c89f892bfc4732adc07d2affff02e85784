@@ -63,6 +63,30 @@
       },
       "revId": "d2ad50c89f892bfc4732adc07d2affff02e85784",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2119e50d_080c18ed",
+        "filename": "video/video_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-15T14:05:59Z",
+      "side": 1,
+      "message": "It\u0027s a good fix, just not related to the main point of the cl, and you could have had fewer reviewers without it. But since Ilya was able to review it quickly, no problem, go ahead.",
+      "parentUuid": "6de98ed5_7d4dc1a2",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 32
+      },
+      "revId": "d2ad50c89f892bfc4732adc07d2affff02e85784",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
