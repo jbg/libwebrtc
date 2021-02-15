@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fff8da2c_d5cb3beb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-02-15T08:10:26Z",
+      "side": 1,
+      "message": "Hello Mirko!\n\nSorry for bothering you, but I\u0027m stuck and could not move further. Could you please take a look at presubmit failure of this CL, I don\u0027t really understand why it happen: something wrong with python formatting check in files I haven\u0027t touched at all. Another problem is probably absent LGTM from the only owner of tools_webrtc/ios/*, whose account doesn\u0027t look very active here.\n\nThanks a lot in advance!",
+      "revId": "e5fd327207814b3fb994c5a1347368fbac0f57f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
