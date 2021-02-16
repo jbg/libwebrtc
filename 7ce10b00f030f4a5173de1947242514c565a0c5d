@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed85e25_1a165ca3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-16T08:05:29Z",
+      "side": 1,
+      "message": "Skipping presubmit because of an unrelated issue with the python linter.",
+      "revId": "7ce10b00f030f4a5173de1947242514c565a0c5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
