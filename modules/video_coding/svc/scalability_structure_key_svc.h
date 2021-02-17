@@ -16,6 +16,7 @@
 #include "api/transport/rtp/dependency_descriptor.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "common_video/generic_frame_descriptor/generic_frame_info.h"
+#include "modules/video_coding/svc/scalability_structure_helper_t3.h"
 #include "modules/video_coding/svc/scalable_video_controller.h"
 
 namespace webrtc {
@@ -32,39 +33,18 @@ class ScalabilityStructureKeySvc : public ScalableVideoController {
   void OnRatesUpdated(const VideoBitrateAllocation& bitrates) override;
 
  private:
-  enum FramePattern {
-    kNone,
-    kDeltaT0,
-    kDeltaT2A,
-    kDeltaT1,
-    kDeltaT2B,
-  };
-  static constexpr int kMaxNumSpatialLayers = 3;
-  static constexpr int kMaxNumTemporalLayers = 3;
-
-  // Index of the buffer to store last frame for layer (`sid`, `tid`)
-  int BufferIndex(int sid, int tid) const {
-    return tid * num_spatial_layers_ + sid;
-  }
-  bool DecodeTargetIsActive(int sid, int tid) const {
-    return active_decode_targets_[sid * num_temporal_layers_ + tid];
-  }
-  void SetDecodeTargetIsActive(int sid, int tid, bool value) {
-    active_decode_targets_.set(sid * num_temporal_layers_ + tid, value);
-  }
-  bool TemporalLayerIsActive(int tid) const;
   std::vector<LayerFrameConfig> KeyframeConfig();
   std::vector<LayerFrameConfig> T0Config();
   std::vector<LayerFrameConfig> T1Config();
   std::vector<LayerFrameConfig> T2Config();
 
-  const int num_spatial_layers_;
-  const int num_temporal_layers_;
-
-  FramePattern last_pattern_ = kNone;
-  std::bitset<kMaxNumSpatialLayers> spatial_id_is_enabled_;
-  std::bitset<kMaxNumSpatialLayers> can_reference_t1_frame_for_spatial_id_;
-  std::bitset<32> active_decode_targets_;
+  ScalabilityStructureHelperT3 helper_;
+  ScalabilityStructureHelperT3::FramePattern last_pattern_ =
+      ScalabilityStructureHelperT3::kNone;
+  std::bitset<ScalabilityStructureHelperT3::kMaxNumSpatialLayers>
+      spatial_id_is_enabled_;
+  std::bitset<ScalabilityStructureHelperT3::kMaxNumSpatialLayers>
+      can_reference_t1_frame_for_spatial_id_;
 };
 
 // S1  0--0--0-

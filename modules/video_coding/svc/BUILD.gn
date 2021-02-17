@@ -27,17 +27,21 @@ rtc_source_set("scalable_video_controller") {
 }
 
 rtc_source_set("scalability_structures") {
+  public = [
+    "create_scalability_structure.h",
+    "scalability_structure_full_svc.h",
+    "scalability_structure_key_svc.h",
+    "scalability_structure_l2t2_key_shift.h",
+    "scalability_structure_s2t1.h",
+  ]
   sources = [
     "create_scalability_structure.cc",
-    "create_scalability_structure.h",
     "scalability_structure_full_svc.cc",
-    "scalability_structure_full_svc.h",
+    "scalability_structure_helper_t3.cc",
+    "scalability_structure_helper_t3.h",
     "scalability_structure_key_svc.cc",
-    "scalability_structure_key_svc.h",
     "scalability_structure_l2t2_key_shift.cc",
-    "scalability_structure_l2t2_key_shift.h",
     "scalability_structure_s2t1.cc",
-    "scalability_structure_s2t1.h",
   ]
   deps = [
     ":scalable_video_controller",
