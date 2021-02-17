@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d472cc7_53df2baf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-02-17T17:15:00Z",
+      "side": 1,
+      "message": "hta: for pc/\nthe added test fails on master and passes here.\n\nartem: for test/\nThe way the simulcast tests (PeerConnectionE2EQualityTestSmokeTest.Simul* and PCFullStackTest.Pc_Screenshare_Slides_Simulcast_No_Conference_Mode) munge is a bit confusing since they generate audio-video-video-video from a video-audio offer. With the new way candidates are looked up by mid that lead to a connection failure.",
+      "revId": "db0cf5745a237ac4d2f8938d55e49f10bcf6c230",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
