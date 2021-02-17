@@ -25,6 +25,7 @@ namespace webrtc {
 namespace {
 // Values to use as LayerFrameConfig::Id
 enum : int { kKey, kDelta };
+using FramePattern = ScalabilityStructureHelperT3::FramePattern;
 
 DecodeTargetIndication
 Dti(int sid, int tid, const ScalableVideoController::LayerFrameConfig& config) {
@@ -45,59 +46,30 @@ Dti(int sid, int tid, const ScalableVideoController::LayerFrameConfig& config) {
 
 }  // namespace
 
-constexpr int ScalabilityStructureKeySvc::kMaxNumSpatialLayers;
-constexpr int ScalabilityStructureKeySvc::kMaxNumTemporalLayers;
-
 ScalabilityStructureKeySvc::ScalabilityStructureKeySvc(int num_spatial_layers,
                                                        int num_temporal_layers)
-    : num_spatial_layers_(num_spatial_layers),
-      num_temporal_layers_(num_temporal_layers),
-      active_decode_targets_(
-          (uint32_t{1} << (num_spatial_layers * num_temporal_layers)) - 1) {
+    : helper_(num_spatial_layers, num_temporal_layers, {}) {
   // There is no point to use this structure without spatial scalability.
   RTC_DCHECK_GT(num_spatial_layers, 1);
-  RTC_DCHECK_LE(num_spatial_layers, kMaxNumSpatialLayers);
-  RTC_DCHECK_LE(num_temporal_layers, kMaxNumTemporalLayers);
 }
 
 ScalabilityStructureKeySvc::~ScalabilityStructureKeySvc() = default;
 
 ScalableVideoController::StreamLayersConfig
 ScalabilityStructureKeySvc::StreamConfig() const {
-  StreamLayersConfig result;
-  result.num_spatial_layers = num_spatial_layers_;
-  result.num_temporal_layers = num_temporal_layers_;
-  result.scaling_factor_num[num_spatial_layers_ - 1] = 1;
-  result.scaling_factor_den[num_spatial_layers_ - 1] = 1;
-  for (int sid = num_spatial_layers_ - 1; sid > 0; --sid) {
-    result.scaling_factor_num[sid - 1] = 1;
-    result.scaling_factor_den[sid - 1] = 2 * result.scaling_factor_den[sid];
-  }
-  return result;
-}
-
-bool ScalabilityStructureKeySvc::TemporalLayerIsActive(int tid) const {
-  if (tid >= num_temporal_layers_) {
-    return false;
-  }
-  for (int sid = 0; sid < num_spatial_layers_; ++sid) {
-    if (DecodeTargetIsActive(sid, tid)) {
-      return true;
-    }
-  }
-  return false;
+  return helper_.StreamConfig();
 }
 
 std::vector<ScalableVideoController::LayerFrameConfig>
 ScalabilityStructureKeySvc::KeyframeConfig() {
   std::vector<LayerFrameConfig> configs;
-  configs.reserve(num_spatial_layers_);
+  configs.reserve(helper_.num_spatial_layers());
   absl::optional<int> spatial_dependency_buffer_id;
   spatial_id_is_enabled_.reset();
   // Disallow temporal references cross T0 on higher temporal layers.
   can_reference_t1_frame_for_spatial_id_.reset();
-  for (int sid = 0; sid < num_spatial_layers_; ++sid) {
-    if (!DecodeTargetIsActive(sid, /*tid=*/0)) {
+  for (int sid = 0; sid < helper_.num_spatial_layers(); ++sid) {
+    if (!helper_.DecodeTargetIsActive(sid, /*tid=*/0)) {
       continue;
     }
     configs.emplace_back();
@@ -109,10 +81,10 @@ ScalabilityStructureKeySvc::KeyframeConfig() {
     } else {
       config.Keyframe();
     }
-    config.Update(BufferIndex(sid, /*tid=*/0));
+    config.Update(helper_.BufferIndex(sid, /*tid=*/0));
 
     spatial_id_is_enabled_.set(sid);
-    spatial_dependency_buffer_id = BufferIndex(sid, /*tid=*/0);
+    spatial_dependency_buffer_id = helper_.BufferIndex(sid, /*tid=*/0);
   }
   return configs;
 }
@@ -120,17 +92,17 @@ ScalabilityStructureKeySvc::KeyframeConfig() {
 std::vector<ScalableVideoController::LayerFrameConfig>
 ScalabilityStructureKeySvc::T0Config() {
   std::vector<LayerFrameConfig> configs;
-  configs.reserve(num_spatial_layers_);
+  configs.reserve(helper_.num_spatial_layers());
   // Disallow temporal references cross T0 on higher temporal layers.
   can_reference_t1_frame_for_spatial_id_.reset();
-  for (int sid = 0; sid < num_spatial_layers_; ++sid) {
-    if (!DecodeTargetIsActive(sid, /*tid=*/0)) {
+  for (int sid = 0; sid < helper_.num_spatial_layers(); ++sid) {
+    if (!helper_.DecodeTargetIsActive(sid, /*tid=*/0)) {
       spatial_id_is_enabled_.reset(sid);
       continue;
     }
     configs.emplace_back();
     configs.back().Id(kDelta).S(sid).T(0).ReferenceAndUpdate(
-        BufferIndex(sid, /*tid=*/0));
+        helper_.BufferIndex(sid, /*tid=*/0));
   }
   return configs;
 }
@@ -138,16 +110,17 @@ ScalabilityStructureKeySvc::T0Config() {
 std::vector<ScalableVideoController::LayerFrameConfig>
 ScalabilityStructureKeySvc::T1Config() {
   std::vector<LayerFrameConfig> configs;
-  configs.reserve(num_spatial_layers_);
-  for (int sid = 0; sid < num_spatial_layers_; ++sid) {
-    if (!DecodeTargetIsActive(sid, /*tid=*/1)) {
+  configs.reserve(helper_.num_spatial_layers());
+  for (int sid = 0; sid < helper_.num_spatial_layers(); ++sid) {
+    if (!helper_.DecodeTargetIsActive(sid, /*tid=*/1)) {
       continue;
     }
     configs.emplace_back();
     ScalableVideoController::LayerFrameConfig& config = configs.back();
-    config.Id(kDelta).S(sid).T(1).Reference(BufferIndex(sid, /*tid=*/0));
-    if (num_temporal_layers_ > 2) {
-      config.Update(BufferIndex(sid, /*tid=*/1));
+    config.Id(kDelta).S(sid).T(1).Reference(
+        helper_.BufferIndex(sid, /*tid=*/0));
+    if (helper_.num_temporal_layers() > 2) {
+      config.Update(helper_.BufferIndex(sid, /*tid=*/1));
     }
   }
   return configs;
@@ -156,18 +129,18 @@ ScalabilityStructureKeySvc::T1Config() {
 std::vector<ScalableVideoController::LayerFrameConfig>
 ScalabilityStructureKeySvc::T2Config() {
   std::vector<LayerFrameConfig> configs;
-  configs.reserve(num_spatial_layers_);
-  for (int sid = 0; sid < num_spatial_layers_; ++sid) {
-    if (!DecodeTargetIsActive(sid, /*tid=*/2)) {
+  configs.reserve(helper_.num_spatial_layers());
+  for (int sid = 0; sid < helper_.num_spatial_layers(); ++sid) {
+    if (!helper_.DecodeTargetIsActive(sid, /*tid=*/2)) {
       continue;
     }
     configs.emplace_back();
     ScalableVideoController::LayerFrameConfig& config = configs.back();
     config.Id(kDelta).S(sid).T(2);
     if (can_reference_t1_frame_for_spatial_id_[sid]) {
-      config.Reference(BufferIndex(sid, /*tid=*/1));
+      config.Reference(helper_.BufferIndex(sid, /*tid=*/1));
     } else {
-      config.Reference(BufferIndex(sid, /*tid=*/0));
+      config.Reference(helper_.BufferIndex(sid, /*tid=*/0));
     }
   }
   return configs;
@@ -175,49 +148,33 @@ ScalabilityStructureKeySvc::T2Config() {
 
 std::vector<ScalableVideoController::LayerFrameConfig>
 ScalabilityStructureKeySvc::NextFrameConfig(bool restart) {
-  if (active_decode_targets_.none()) {
-    last_pattern_ = kNone;
+  if (!helper_.AnyActiveDecodeTargets()) {
+    last_pattern_ = FramePattern::kNone;
     return {};
   }
 
   if (restart) {
-    last_pattern_ = kNone;
+    last_pattern_ = FramePattern::kNone;
   }
 
-  switch (last_pattern_) {
-    case kNone:
-      last_pattern_ = kDeltaT0;
-      return KeyframeConfig();
-    case kDeltaT2B:
-      last_pattern_ = kDeltaT0;
-      return T0Config();
-    case kDeltaT2A:
-      if (TemporalLayerIsActive(1)) {
-        last_pattern_ = kDeltaT1;
-        return T1Config();
-      }
-      last_pattern_ = kDeltaT0;
-      return T0Config();
-    case kDeltaT1:
-      if (TemporalLayerIsActive(2)) {
-        last_pattern_ = kDeltaT2B;
-        return T2Config();
-      }
-      last_pattern_ = kDeltaT0;
-      return T0Config();
-    case kDeltaT0:
-      if (TemporalLayerIsActive(2)) {
-        last_pattern_ = kDeltaT2A;
-        return T2Config();
-      } else if (TemporalLayerIsActive(1)) {
-        last_pattern_ = kDeltaT1;
-        return T1Config();
-      }
-      last_pattern_ = kDeltaT0;
-      return T0Config();
+  if (last_pattern_ == FramePattern::kNone) {
+    RTC_DCHECK_EQ(helper_.NextPattern(last_pattern_), FramePattern::kDeltaT0);
+    last_pattern_ = FramePattern::kDeltaT0;
+    return KeyframeConfig();
   }
-  RTC_NOTREACHED();
-  return {};
+  last_pattern_ = helper_.NextPattern(last_pattern_);
+  switch (last_pattern_) {
+    case FramePattern::kDeltaT0:
+      return T0Config();
+    case FramePattern::kDeltaT1:
+      return T1Config();
+    case FramePattern::kDeltaT2A:
+    case FramePattern::kDeltaT2B:
+      return T2Config();
+    default:
+      RTC_NOTREACHED();
+      return {};
+  }
 }
 
 GenericFrameInfo ScalabilityStructureKeySvc::OnEncodeDone(
@@ -226,45 +183,32 @@ GenericFrameInfo ScalabilityStructureKeySvc::OnEncodeDone(
     can_reference_t1_frame_for_spatial_id_.set(config.SpatialId());
   }
 
-  GenericFrameInfo frame_info;
-  frame_info.spatial_id = config.SpatialId();
-  frame_info.temporal_id = config.TemporalId();
-  frame_info.encoder_buffers = config.Buffers();
-  frame_info.decode_target_indications.reserve(num_spatial_layers_ *
-                                               num_temporal_layers_);
-  for (int sid = 0; sid < num_spatial_layers_; ++sid) {
-    for (int tid = 0; tid < num_temporal_layers_; ++tid) {
+  GenericFrameInfo frame_info = helper_.OnEncodeDone(config);
+  for (int sid = 0; sid < helper_.num_spatial_layers(); ++sid) {
+    for (int tid = 0; tid < helper_.num_temporal_layers(); ++tid) {
       frame_info.decode_target_indications.push_back(Dti(sid, tid, config));
     }
   }
-  frame_info.part_of_chain.assign(num_spatial_layers_, false);
   if (config.IsKeyframe() || config.Id() == kKey) {
     RTC_DCHECK_EQ(config.TemporalId(), 0);
-    for (int sid = config.SpatialId(); sid < num_spatial_layers_; ++sid) {
+    for (int sid = config.SpatialId(); sid < helper_.num_spatial_layers();
+         ++sid) {
       frame_info.part_of_chain[sid] = true;
     }
   } else if (config.TemporalId() == 0) {
     frame_info.part_of_chain[config.SpatialId()] = true;
   }
-  frame_info.active_decode_targets = active_decode_targets_;
   return frame_info;
 }
 
 void ScalabilityStructureKeySvc::OnRatesUpdated(
     const VideoBitrateAllocation& bitrates) {
-  for (int sid = 0; sid < num_spatial_layers_; ++sid) {
-    // Enable/disable spatial layers independetely.
-    bool active = bitrates.GetBitrate(sid, /*tid=*/0) > 0;
-    SetDecodeTargetIsActive(sid, /*tid=*/0, active);
-    if (!spatial_id_is_enabled_[sid] && active) {
+  helper_.SetDecodeTargetsFromAllocation(bitrates);
+  for (int sid = 0; sid < helper_.num_spatial_layers(); ++sid) {
+    if (!spatial_id_is_enabled_[sid] && helper_.DecodeTargetIsActive(sid, 0)) {
       // Key frame is required to reenable any spatial layer.
-      last_pattern_ = kNone;
-    }
-
-    for (int tid = 1; tid < num_temporal_layers_; ++tid) {
-      // To enable temporal layer, require bitrates for lower temporal layers.
-      active = active && bitrates.GetBitrate(sid, tid) > 0;
-      SetDecodeTargetIsActive(sid, tid, active);
+      last_pattern_ = FramePattern::kNone;
+      break;
     }
   }
 }
