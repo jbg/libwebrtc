@@ -64,11 +64,18 @@ int GetIncreasedMaxPixelsWanted(int target_pixels) {
 bool CanDecreaseResolutionTo(int target_pixels,
                              const VideoStreamInputState& input_state,
                              const VideoSourceRestrictions& restrictions) {
+  int target_pixels_single_active_stream = target_pixels;
+  if (input_state.single_active_stream_pixels()) {
+    // Pixels of active stream could be lower than input stream.
+    target_pixels_single_active_stream = GetLowerResolutionThan(
+        input_state.single_active_stream_pixels().value());
+  }
   int max_pixels_per_frame =
       rtc::dchecked_cast<int>(restrictions.max_pixels_per_frame().value_or(
           std::numeric_limits<int>::max()));
   return target_pixels < max_pixels_per_frame &&
-         target_pixels >= input_state.min_pixels_per_frame();
+         target_pixels_single_active_stream >=
+             input_state.min_pixels_per_frame();
 }
 
 bool CanIncreaseResolutionTo(int target_pixels,
@@ -96,6 +103,11 @@ bool CanIncreaseFrameRateTo(int max_frame_rate,
 }
 
 bool MinPixelLimitReached(const VideoStreamInputState& input_state) {
+  if (input_state.single_active_stream_pixels().has_value()) {
+    return GetLowerResolutionThan(
+               input_state.single_active_stream_pixels().value()) <
+           input_state.min_pixels_per_frame();
+  }
   return input_state.frame_size_pixels().has_value() &&
          GetLowerResolutionThan(input_state.frame_size_pixels().value()) <
              input_state.min_pixels_per_frame();
@@ -692,5 +704,28 @@ VideoStreamAdapter::AwaitingFrameSizeChange::AwaitingFrameSizeChange(
     int frame_size_pixels)
     : pixels_increased(pixels_increased),
       frame_size_pixels(frame_size_pixels) {}
+
+absl::optional<uint32_t> VideoStreamAdapter::GetSingleActiveLayerPixels(
+    const VideoCodec& codec) {
+  int num_active = 0;
+  absl::optional<uint32_t> pixels;
+  if (codec.codecType == VideoCodecType::kVideoCodecVP9) {
+    for (int i = 0; i < codec.VP9().numberOfSpatialLayers; ++i) {
+      if (codec.spatialLayers[i].active) {
+        ++num_active;
+        pixels = codec.spatialLayers[i].width * codec.spatialLayers[i].height;
+      }
+    }
+  } else {
+    for (int i = 0; i < codec.numberOfSimulcastStreams; ++i) {
+      if (codec.simulcastStream[i].active) {
+        ++num_active;
+        pixels =
+            codec.simulcastStream[i].width * codec.simulcastStream[i].height;
+      }
+    }
+  }
+  return (num_active > 1) ? absl::nullopt : pixels;
+}
 
 }  // namespace webrtc
