@@ -523,14 +523,13 @@ SignalingInterceptor::PatchOffererIceCandidates(
     auto simulcast_info_it =
         context_.simulcast_infos_by_mid.find(candidate->sdp_mid());
     if (simulcast_info_it != context_.simulcast_infos_by_mid.end()) {
-      // This is candidate for simulcast section, so it should be transformed
-      // into candidates for replicated sections
-      out.push_back(CreateIceCandidate(simulcast_info_it->second->rids[0], 0,
-                                       candidate->candidate()));
+      // This is candidate for simulcast section. Due to the layout of
+      // putting audio first and bundling, these can be ignored.
     } else {
-      out.push_back(CreateIceCandidate(candidate->sdp_mid(),
-                                       candidate->sdp_mline_index(),
-                                       candidate->candidate()));
+      // We put the non-simulcast context first on the remote end so
+      // its sdpMLineIndex is 0.
+      out.push_back(
+          CreateIceCandidate(candidate->sdp_mid(), 0, candidate->candidate()));
     }
   }
   RTC_CHECK_GT(out.size(), 0);
@@ -545,15 +544,10 @@ SignalingInterceptor::PatchAnswererIceCandidates(
     auto simulcast_info_it =
         context_.simulcast_infos_by_rid.find(candidate->sdp_mid());
     if (simulcast_info_it != context_.simulcast_infos_by_rid.end()) {
-      // This is candidate for replicated section, created from single simulcast
-      // section, so it should be transformed into candidates for simulcast
-      // section.
-      out.push_back(CreateIceCandidate(simulcast_info_it->second->mid, 0,
-                                       candidate->candidate()));
+      // Drop candidates from the replicated sections.
     } else {
-      out.push_back(CreateIceCandidate(candidate->sdp_mid(),
-                                       candidate->sdp_mline_index(),
-                                       candidate->candidate()));
+      // Do not set the mid on the candidate so the index takes precedence.
+      out.push_back(CreateIceCandidate("", 0, candidate->candidate()));
     }
   }
   RTC_CHECK_GT(out.size(), 0);
