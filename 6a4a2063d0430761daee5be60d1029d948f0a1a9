@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffccc245_78fb004d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-17T09:06:20Z",
+      "side": 1,
+      "message": "This is the revert + reland version of adding the missing lines.\n",
+      "revId": "6a4a2063d0430761daee5be60d1029d948f0a1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
