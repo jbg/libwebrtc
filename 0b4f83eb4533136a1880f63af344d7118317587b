@@ -69,6 +69,24 @@
       "parentUuid": "4e2873dd_6f32ff98",
       "revId": "0b4f83eb4533136a1880f63af344d7118317587b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc5501ea_b8d08003",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2021-02-18T15:58:29Z",
+      "side": 1,
+      "message": "The target_pixels is what is requested from the video adapter and based on the incoming frame size. It is used to check that a new downgrade is not requested multiple times for the same resolution I think. I did not change this part (e.g. what if active layer changes).",
+      "parentUuid": "c2cfe843_855b0789",
+      "revId": "0b4f83eb4533136a1880f63af344d7118317587b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
