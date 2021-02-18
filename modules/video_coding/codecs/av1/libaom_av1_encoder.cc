@@ -7,11 +7,10 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-#include "modules/video_coding/codecs/av1/libaom_av1_encoder.h"
-
 #include <stddef.h>
 #include <stdint.h>
 
+#include <algorithm>
 #include <memory>
 #include <utility>
 #include <vector>
@@ -25,6 +24,7 @@
 #include "api/video/video_frame.h"
 #include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder.h"
+#include "modules/video_coding/codecs/av1/libaom_av1_encoder.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/include/video_error_codes.h"
 #include "modules/video_coding/svc/create_scalability_structure.h"
@@ -41,13 +41,15 @@ namespace {
 
 // Encoder configuration parameters
 constexpr int kQpMin = 10;
-constexpr int kUsageProfile = 1;     // 0 = good quality; 1 = real-time.
-constexpr int kMinQindex = 58;       // Min qindex threshold for QP scaling.
-constexpr int kMaxQindex = 180;      // Max qindex threshold for QP scaling.
+constexpr int kUsageProfile = 1;  // 0 = good quality; 1 = real-time.
+constexpr int kMinQindex = 58;    // Min qindex threshold for QP scaling.
+constexpr int kMaxQindex = 180;   // Max qindex threshold for QP scaling.
 constexpr int kBitDepth = 8;
 constexpr int kLagInFrames = 0;  // No look ahead.
 constexpr int kRtpTicksPerSecond = 90000;
 constexpr float kMinimumFrameRate = 1.0;
+constexpr int kSuperblock64x64 = 12;
+constexpr int kSuperblock128x128 = 15;
 
 // Only positive speeds, range for real-time coding currently is: 6 - 8.
 // Lower means slower/better quality, higher means fastest/lower quality.
@@ -350,6 +352,16 @@ int LibaomAv1Encoder::InitEncode(const VideoCodec* codec_settings,
   if (ret != AOM_CODEC_OK) {
     RTC_LOG(LS_WARNING) << "LibaomAv1Encoder::EncodeInit returned " << ret
                         << " on control AV1E_SET_ENABLE_REF_FRAME_MVS.";
+    return WEBRTC_VIDEO_CODEC_ERROR;
+  }
+
+  ret =
+      aom_codec_control(&ctx_, AV1E_SET_SUPERBLOCK_SIZE,
+                        std::min(cfg_.g_w, cfg_.g_h) > 480 ? kSuperblock128x128
+                                                           : kSuperblock64x64);
+  if (ret != AOM_CODEC_OK) {
+    RTC_LOG(LS_WARNING) << "LibaomAv1Encoder::EncodeInit returned " << ret
+                        << " on control AV1E_SET_SUPERBLOCK_SIZE.";
     return WEBRTC_VIDEO_CODEC_ERROR;
   }
 
