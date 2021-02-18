@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f05bf2d_81208d63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-18T12:10:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "194352ce_5794651f",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b860265_0966146f",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-01-28T06:31:29Z",
       "side": 1,
       "message": "Can you file a relevant bug?",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38f53676_efbb06ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-18T12:10:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b860265_0966146f",
       "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "280207d5_863a59f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-18T12:10:13Z",
+      "side": 1,
+      "message": "enjoy the parametrized test :-)\nI didn\u0027t see a good way to add a test in pc/media_session (which does not deal with SDP)",
+      "parentUuid": "25e5c6cd_6dbe3492",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8ac9f40_7d93753e",
@@ -69,6 +123,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ba8ab1_cc7363c3",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-18T12:10:13Z",
+      "side": 1,
+      "message": "We could actually look at the local rtx-time here but since we don\u0027t have an API and I do not want to allow changing the nack buffer size through SDP munging...\n\nRemoved the question. The line is valid I think.",
+      "parentUuid": "c8ac9f40_7d93753e",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa8a8986_8f20aef6",
@@ -82,6 +154,24 @@
       "writtenOn": "2021-01-28T06:31:29Z",
       "side": 1,
       "message": "rtx_time\u003d0 would mean that you disable the nack buffer. You allow it. Intentional?\n(ignoring rtx_time\u003d-1 as a misconfiguration seems like a Good Thing)",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cd260aa_3e5a7040",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3293,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-18T12:10:13Z",
+      "side": 1,
+      "message": "disallowing 0 now since if you want to disable nack, you don\u0027t negotiate. One way to do that is enough.",
+      "parentUuid": "fa8a8986_8f20aef6",
       "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -120,6 +210,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "686c0d8d_949082ee",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-18T12:10:13Z",
+      "side": 1,
+      "message": "I assume there is an existing test that covers NACK not being negotiated. rtx-time\u003d0 is no longer allowed.",
+      "parentUuid": "8101d297_9b92134d",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad614667_8940d1df",
@@ -133,6 +241,24 @@
       "writtenOn": "2021-01-28T06:31:29Z",
       "side": 1,
       "message": "QUESTION or TODO(bug: do it later)?",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71a7dbd4_a8799ef0",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-18T12:10:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad614667_8940d1df",
       "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -156,6 +282,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "419b2d52_373ef865",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-18T12:10:13Z",
+      "side": 1,
+      "message": "No? Now the terminology here is confusing since max_wait_for_keyframe is the time to between sending PLIs while max wait for frame is the time you wait for a normal frame after a valid frame.\n\nNote that there are some timing issues here since PLIs will only be sent for what is considered to be an \"active\" stream which is hardcoded as 5s in HandleFrameBufferTimeout.",
+      "parentUuid": "96cc15e7_1f6a81d0",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c0e58f1_c58398b7",
         "filename": "video/video_receive_stream2.cc",
         "patchSetId": 4
@@ -167,6 +311,24 @@
       "writtenOn": "2021-01-28T06:31:29Z",
       "side": 1,
       "message": "This has the interesting property that if the buffer is configured by rtx-time to be larger than 1000 ms (1/3 of kMaxWaitForFrame), the field trial will be preferred. (Can\u0027t happen in this CL, but that depends on the precise values of kMaxWaitForFrame and kNackHistoryMs).\n\nThis may be a surprising result for the user.",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0c0ab0c_408d2291",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-18T12:10:13Z",
+      "side": 1,
+      "message": "only if field trial is set? And even then an explicit rtx-time should override field-trial based experimentation.",
+      "parentUuid": "4c0e58f1_c58398b7",
       "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
