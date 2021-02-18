@@ -168,13 +168,13 @@ class AndroidVideoDecoder implements VideoDecoder, VideoSink {
       return VideoCodecStatus.FALLBACK_SOFTWARE;
     }
 
-    // Note:  it is not necessary to initialize dimensions under the lock, since the output thread
-    // is not running.
-    this.width = width;
-    this.height = height;
+    synchronized (dimensionLock) {
+      this.width = width;
+      this.height = height;
+      stride = width;
+      sliceHeight = height;
+    }
 
-    stride = width;
-    sliceHeight = height;
     hasDecodedFirstFrame = false;
     keyFrameRequired = true;
 
