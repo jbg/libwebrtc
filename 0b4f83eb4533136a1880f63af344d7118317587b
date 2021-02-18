@@ -33,6 +33,24 @@
       "message": "I don\u0027t like how this function incapsulates hidden logic to get the next smaller resolution from single active layer.\n\nInstead, could you please calculate correct target_pixels in [1] and pass it here. So, this function stays unchanged.\n\nUnless I\u0027m missing something, is there any particular reason why you\u0027ve put this logic here?\n\n[1] https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/call/adaptation/video_stream_adapter.cc;l\u003d473;drc\u003df4df12dbe591008e72c11b5a2ac788b84b4a76e6",
       "revId": "0b4f83eb4533136a1880f63af344d7118317587b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2873dd_6f32ff98",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2021-02-18T13:30:32Z",
+      "side": 1,
+      "message": "I have moved the calculation of target_pixels_active_stream and it is now passed to this function.",
+      "parentUuid": "4c037c64_cceed692",
+      "revId": "0b4f83eb4533136a1880f63af344d7118317587b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
