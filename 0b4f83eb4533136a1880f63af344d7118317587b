@@ -87,6 +87,24 @@
       "parentUuid": "c2cfe843_855b0789",
       "revId": "0b4f83eb4533136a1880f63af344d7118317587b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6911b144_64689f66",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-02-18T16:00:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bc5501ea_b8d08003",
+      "revId": "0b4f83eb4533136a1880f63af344d7118317587b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
