@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3609e190_4dae8cf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-02-20T13:44:52Z",
+      "side": 1,
+      "message": "Hello Tommi!\n\nCould you please looks at this CL which adds wrappers for AV1 encoder \u0026 decoder into iOS SDK.\nIt also make it possible to play with AV1 encoding in AppRTCMobile.\n\nThanks a lot in advance,\nYura.",
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
