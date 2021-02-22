@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "830c48c2_e1e78a17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-22T09:21:05Z",
+      "side": 1,
+      "message": "Advice on how to fix this case of recursive mutex locking?",
+      "revId": "782b0d58bb9a6ae749367333970d10ef9c93fcb6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

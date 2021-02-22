@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc0645b1_f0875729",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-22T09:21:05Z",
+      "side": 0,
+      "message": "This is a problem, when the call goes to ActionReceiver::OnPacketReceived, which calls back to UnbindReceiver. And deadlocks with a non-reentrant mutex.\n\nOne way to fix this usecase might be to add a return value to OnPacketReceived, and do the unbinding here (without taking the lock again).",
+      "range": {
+        "startLine": 555,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 50
+      },
+      "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
