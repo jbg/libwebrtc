@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d562999e_f2dc9327",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-22T13:07:08Z",
+      "side": 1,
+      "message": "This is mostly copy-paste of the documentation from the removed deprecation header\n\nhttps://webrtc-review.googlesource.com/c/src/+/208282/8/rtc_base/deprecation.h",
+      "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
