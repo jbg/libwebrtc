@@ -513,7 +513,7 @@ void EmulatedEndpointImpl::SendPacket(const rtc::SocketAddress& from,
 absl::optional<uint16_t> EmulatedEndpointImpl::BindReceiver(
     uint16_t desired_port,
     EmulatedNetworkReceiverInterface* receiver) {
-  rtc::CritScope crit(&receiver_lock_);
+  MutexLock lock(&receiver_lock_);
   uint16_t port = desired_port;
   if (port == 0) {
     // Because client can specify its own port, next_port_ can be already in
@@ -553,7 +553,7 @@ uint16_t EmulatedEndpointImpl::NextPort() {
 }
 
 void EmulatedEndpointImpl::UnbindReceiver(uint16_t port) {
-  rtc::CritScope crit(&receiver_lock_);
+  MutexLock lock(&receiver_lock_);
   RTC_LOG(INFO) << "Receiver is removed on port " << port << " from endpoint "
                 << options_.log_name << "; id=" << options_.id;
   port_to_receiver_.erase(port);
@@ -561,7 +561,7 @@ void EmulatedEndpointImpl::UnbindReceiver(uint16_t port) {
 
 void EmulatedEndpointImpl::BindDefaultReceiver(
     EmulatedNetworkReceiverInterface* receiver) {
-  rtc::CritScope crit(&receiver_lock_);
+  MutexLock lock(&receiver_lock_);
   RTC_CHECK(!default_receiver_.has_value())
       << "Endpoint " << options_.log_name << "; id=" << options_.id
       << " already has default receiver";
@@ -571,7 +571,7 @@ void EmulatedEndpointImpl::BindDefaultReceiver(
 }
 
 void EmulatedEndpointImpl::UnbindDefaultReceiver() {
-  rtc::CritScope crit(&receiver_lock_);
+  MutexLock lock(&receiver_lock_);
   RTC_LOG(INFO) << "Default receiver is removed from endpoint "
                 << options_.log_name << "; id=" << options_.id;
   default_receiver_ = absl::nullopt;
@@ -589,7 +589,7 @@ void EmulatedEndpointImpl::OnPacketReceived(EmulatedIpPacket packet) {
         << packet.to.ipaddr().ToString()
         << "; Receiver options_.ip=" << options_.ip.ToString();
   }
-  rtc::CritScope crit(&receiver_lock_);
+  MutexLock lock(&receiver_lock_);
   stats_builder_.OnPacketReceived(clock_->CurrentTime(), packet.from.ipaddr(),
                                   DataSize::Bytes(packet.ip_packet_size()),
                                   options_.stats_gathering_mode);
