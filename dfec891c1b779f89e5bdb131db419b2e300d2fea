@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5a43202_e2e9c188",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-02-22T12:34:47Z",
+      "side": 1,
+      "message": "I plan on moving some tests from RtpSender level to RtpRtcp interface level (to aid in the \"deferred sequencing\" test coverage), and anything that\u0027s too hard to test on that level may get additional unit tests for this class.\nFor now, since usage is entirely contained within RtpSender, I\u0027ll hold off.",
+      "parentUuid": "d4b0fbff_f542821c",
+      "revId": "dfec891c1b779f89e5bdb131db419b2e300d2fea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "341eaead_149cb5f0",
@@ -41,6 +59,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba8f644c_b3f50985",
+        "filename": "modules/rtp_rtcp/source/packet_sequencer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-02-22T12:34:47Z",
+      "side": 1,
+      "message": "Presume it should say \"is\" instead of \"if\"?\ncopy/pasta this typo from rtp_sender.cc",
+      "parentUuid": "341eaead_149cb5f0",
+      "range": {
+        "startLine": 17,
+        "startChar": 3,
+        "endLine": 17,
+        "endChar": 39
+      },
+      "revId": "dfec891c1b779f89e5bdb131db419b2e300d2fea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fc755b1_df728bd7",
@@ -54,6 +96,30 @@
       "writtenOn": "2021-02-22T11:15:30Z",
       "side": 1,
       "message": "put the constants into unnamed namespace [to avoid collision with same name constants in other .cc files]",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 45
+      },
+      "revId": "dfec891c1b779f89e5bdb131db419b2e300d2fea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb59679_55f72e32",
+        "filename": "modules/rtp_rtcp/source/packet_sequencer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-02-22T12:34:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fc755b1_df728bd7",
       "range": {
         "startLine": 17,
         "startChar": 0,
