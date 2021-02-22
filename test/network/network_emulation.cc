@@ -483,7 +483,7 @@ void EmulatedEndpointImpl::SendPacket(const rtc::SocketAddress& from,
 absl::optional<uint16_t> EmulatedEndpointImpl::BindReceiver(
     uint16_t desired_port,
     EmulatedNetworkReceiverInterface* receiver) {
-  rtc::CritScope crit(&receiver_lock_);
+  MutexLock lock(&receiver_lock_);
   uint16_t port = desired_port;
   if (port == 0) {
     // Because client can specify its own port, next_port_ can be already in
@@ -522,7 +522,7 @@ uint16_t EmulatedEndpointImpl::NextPort() {
 }
 
 void EmulatedEndpointImpl::UnbindReceiver(uint16_t port) {
-  rtc::CritScope crit(&receiver_lock_);
+  MutexLock lock(&receiver_lock_);
   port_to_receiver_.erase(port);
 }
 
@@ -536,7 +536,7 @@ void EmulatedEndpointImpl::OnPacketReceived(EmulatedIpPacket packet) {
       << "Routing error: wrong destination endpoint. Packet.to.ipaddr()=: "
       << packet.to.ipaddr().ToString()
       << "; Receiver peer_local_addr_=" << peer_local_addr_.ToString();
-  rtc::CritScope crit(&receiver_lock_);
+  MutexLock lock(&receiver_lock_);
   stats_builder_.OnPacketReceived(clock_->CurrentTime(), packet.from.ipaddr(),
                                   DataSize::Bytes(packet.ip_packet_size()),
                                   stats_gathering_mode_);

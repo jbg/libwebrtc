@@ -30,6 +30,7 @@
 #include "rtc_base/network.h"
 #include "rtc_base/network_constants.h"
 #include "rtc_base/socket_address.h"
+#include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/task_utils/repeating_task.h"
 #include "rtc_base/thread_annotations.h"
@@ -523,7 +524,7 @@ class EmulatedEndpointImpl : public EmulatedEndpoint {
   static constexpr uint16_t kFirstEphemeralPort = 49152;
   uint16_t NextPort() RTC_EXCLUSIVE_LOCKS_REQUIRED(receiver_lock_);
 
-  rtc::RecursiveCriticalSection receiver_lock_;
+  Mutex receiver_lock_;
   SequenceChecker enabled_state_checker_;
 
   const uint64_t id_;
