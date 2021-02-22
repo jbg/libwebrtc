@@ -16,6 +16,91 @@
       "message": "This is mostly copy-paste of the documentation from the removed deprecation header\n\nhttps://webrtc-review.googlesource.com/c/src/+/208282/8/rtc_base/deprecation.h",
       "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6f56dcf_771c8f92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-22T13:18:09Z",
+      "side": 1,
+      "message": "Some nits. Good stuff!\n",
+      "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a91fe983_c832b5c1",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-22T13:18:09Z",
+      "side": 1,
+      "message": "Since seeing it doesn\u0027t make much sense any more, say \"(use the ABSL_DEPRECATE macro)\"",
+      "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c01fe9a_8061cad2",
+        "filename": "style-guide.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-22T13:18:09Z",
+      "side": 1,
+      "message": "nit: dependend -\u003e dependent (or dependant, I\u0027m never sure)",
+      "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8afb1017_4913f411",
+        "filename": "style-guide.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-22T13:18:09Z",
+      "side": 1,
+      "message": "Since \"keep unit testing\" is a bit hard to read, I suggest \"In order to have unit tests that use the deprecated functions without getting warnings...\"",
+      "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e52421d_9883d237",
+        "filename": "style-guide.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-22T13:18:09Z",
+      "side": 1,
+      "message": "This is an .md file - can you use []() markup so that the URL doesn\u0027t show in the text? It\u0027s long and ugly...",
+      "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
