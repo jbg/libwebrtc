@@ -1,0 +1,389 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "196ff2be_f2dced84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "Nice, just some nit comments here and there.",
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b729e0b_ec615b4e",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 20,
+        "startChar": 34,
+        "endLine": 20,
+        "endChar": 35
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "163f161a_1f735df4",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 22
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4522bea9_3481517e",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 22,
+        "startChar": 9,
+        "endLine": 22,
+        "endChar": 10
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc08908_3dde3edd",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "it",
+      "range": {
+        "startLine": 22,
+        "startChar": 51,
+        "endLine": 22,
+        "endChar": 52
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1de93f5_90b6f880",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 22,
+        "startChar": 59,
+        "endLine": 22,
+        "endChar": 60
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eb73151_ed04020d",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "the frame was decoded?\n\n(to be symmetric with (3))",
+      "range": {
+        "startLine": 23,
+        "startChar": 22,
+        "endLine": 23,
+        "endChar": 29
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a02f732_717af9a6",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c59edc3f_d4e15bc0",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "The Analyzer",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 8
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6922a3be_3e20fb30",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "them",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 10
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53f2e7e5_49f49a5f",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "\"the following helpers\"?",
+      "range": {
+        "startLine": 30,
+        "startChar": 63,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ebd1879_e1c692eb",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 37,
+        "startChar": 36,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "602f87ec_e9440033",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 44,
+        "startChar": 65,
+        "endLine": 44,
+        "endChar": 66
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cea73e1_61c1db83",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "It also configures?",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 12
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07e445cb_6595649f",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "The information required for its work in the last...",
+      "range": {
+        "startLine": 73,
+        "startChar": 54,
+        "endLine": 73,
+        "endChar": 55
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df311b6a_596badca",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 74,
+        "startChar": 52,
+        "endLine": 74,
+        "endChar": 53
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcd1216b_a47f0d57",
+        "filename": "test/pc/e2e/g3doc/default_video_quality_analyzer.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-02-22T08:24:55Z",
+      "side": 1,
+      "message": ",",
+      "range": {
+        "startLine": 74,
+        "startChar": 42,
+        "endLine": 74,
+        "endChar": 43
+      },
+      "revId": "8374ba027b4a82cc6ce268ebb7c627c12f5777aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
