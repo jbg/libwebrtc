@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b0fbff_f542821c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-22T11:15:30Z",
+      "side": 1,
+      "message": "Nice splity,\ndo you also want to move some tests?",
+      "revId": "dfec891c1b779f89e5bdb131db419b2e300d2fea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "341eaead_149cb5f0",
+        "filename": "modules/rtp_rtcp/source/packet_sequencer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-22T11:15:30Z",
+      "side": 1,
+      "message": "I do not understand this comment. Is there a misspell or missing word?",
+      "range": {
+        "startLine": 17,
+        "startChar": 3,
+        "endLine": 17,
+        "endChar": 39
+      },
+      "revId": "dfec891c1b779f89e5bdb131db419b2e300d2fea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fc755b1_df728bd7",
+        "filename": "modules/rtp_rtcp/source/packet_sequencer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-22T11:15:30Z",
+      "side": 1,
+      "message": "put the constants into unnamed namespace [to avoid collision with same name constants in other .cc files]",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 45
+      },
+      "revId": "dfec891c1b779f89e5bdb131db419b2e300d2fea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21efb115_f4f59654",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-22T11:15:30Z",
+      "side": 1,
+      "message": "that line looks confusing.... since \"mid_frame\" determined by marker bit is video-specific way of treating marker bit.\n\nI feel it is the name \"allow_mid_frame_padding\" that adds confusion.\ncould it be something like \u0027allow_padding_only_after_marker_bit\u0027 or \u0027require_marker_bit_before_padding\u0027\n(i.e. avoid video-specific meaning of \u0027frame\u0027)\n\nor keep existent name \u0027is_audio\u0027 (or change to \u0027is_video\u0027 to remove a negation in code)",
+      "range": {
+        "startLine": 176,
+        "startChar": 17,
+        "endLine": 176,
+        "endChar": 57
+      },
+      "revId": "dfec891c1b779f89e5bdb131db419b2e300d2fea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
