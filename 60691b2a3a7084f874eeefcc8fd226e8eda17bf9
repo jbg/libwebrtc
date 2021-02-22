@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "885428d2_c565739b",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-22T13:33:48Z",
+      "side": 1,
+      "message": "Done.\n(there is still some sense to look at the macro, it still includes some documentation how to use it, particularly where to place it to be consistent. But looking at documentation near it it is implied)",
+      "parentUuid": "a91fe983_c832b5c1",
+      "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c01fe9a_8061cad2",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-02-22T13:18:09Z",
       "side": 1,
       "message": "nit: dependend -\u003e dependent (or dependant, I\u0027m never sure)",
+      "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09fd4a5c_009597fe",
+        "filename": "style-guide.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-22T13:33:48Z",
+      "side": 1,
+      "message": "done (look like both forms are about equally acceptable:\nhttps://www.merriam-webster.com/words-at-play/spelling-variants-dependent-vs-dependant )",
+      "parentUuid": "7c01fe9a_8061cad2",
       "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -86,6 +122,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e616497_d98e8f16",
+        "filename": "style-guide.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-22T13:33:48Z",
+      "side": 1,
+      "message": "Yep, that sounds better. updated.\n(also replaced warnings with errors since in webrtc unit tests these warnings are treated as errors)",
+      "parentUuid": "8afb1017_4913f411",
+      "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e52421d_9883d237",
@@ -99,6 +153,24 @@
       "writtenOn": "2021-02-22T13:18:09Z",
       "side": 1,
       "message": "This is an .md file - can you use []() markup so that the URL doesn\u0027t show in the text? It\u0027s long and ugly...",
+      "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66176f36_06a05b90",
+        "filename": "style-guide.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-02-22T13:33:48Z",
+      "side": 1,
+      "message": "Thank you!\nshowing uri wasn\u0027t the intent, but I misremembered how to do it in markdown.",
+      "parentUuid": "1e52421d_9883d237",
       "revId": "60691b2a3a7084f874eeefcc8fd226e8eda17bf9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
