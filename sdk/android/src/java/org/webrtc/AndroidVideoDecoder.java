@@ -585,13 +585,25 @@ class AndroidVideoDecoder implements VideoDecoder, VideoSink {
     }
     // Compare to existing width, height, and save values under the dimension lock.
     synchronized (dimensionLock) {
-      if (hasDecodedFirstFrame && (width != newWidth || height != newHeight)) {
-        stopOnOutputThread(new RuntimeException("Unexpected size change. Configured " + width + "*"
-            + height + ". New " + newWidth + "*" + newHeight));
-        return;
+      if (newWidth != width || newHeight != height) {
+        if (hasDecodedFirstFrame) {
+          stopOnOutputThread(new RuntimeException("Unexpected size change. "
+              + "Configured " + width + "*" + height + ". "
+              + "New " + newWidth + "*" + newHeight));
+          return;
+        } else if (newWidth <= 0) {
+          Logging.e(TAG,
+              "Unexpected format width. Configured " + width + ". "
+                  + "New " + newWidth);
+          return;
+        } else if (newHeight <= 0) {
+          Logging.e(TAG, "Unexpected format height. Configured " + height + ". "
+              + "New " + newHeight));
+          return;
+        }
+        width = newWidth;
+        height = newHeight;
       }
-      width = newWidth;
-      height = newHeight;
     }
 
     // Note:  texture mode ignores colorFormat.  Hence, if the texture helper is non-null, skip
