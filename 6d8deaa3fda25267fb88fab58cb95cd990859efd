@@ -33,6 +33,23 @@
       "message": "Peter - can you take a look?",
       "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d764b4_7132a94c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-02-22T09:40:03Z",
+      "side": 1,
+      "message": "Hello Kári,\n\nCould you please take a look?\n\nThanks a lot in advance,\nYura.",
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
