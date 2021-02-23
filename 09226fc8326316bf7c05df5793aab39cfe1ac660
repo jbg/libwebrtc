@@ -22,6 +22,30 @@
       },
       "revId": "09226fc8326316bf7c05df5793aab39cfe1ac660",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "565029ee_cdfdded9",
+        "filename": "system_wrappers/source/clock.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-02-23T11:44:08Z",
+      "side": 0,
+      "message": "I\u0027m not confident about that. The current implementation for WIN_UWP relies on SystemTimeNanos() being synced at initialization with the wall clock. Since I\u0027m working on replacing SystemTimeNanos() when built with Chromium that assumption will break.\n\nTo not break anything for WIN_UWP I will replace the call to SystemTimeNanos() with a call to TimeHelper::TicksNs() which is what SystemTimeNanos() currently does for WIN_UWP.",
+      "parentUuid": "f1da1c08_d8f75be0",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 2
+      },
+      "revId": "09226fc8326316bf7c05df5793aab39cfe1ac660",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
