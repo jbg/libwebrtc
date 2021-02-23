@@ -16,6 +16,23 @@
       "message": "Another harp on that comparison....\n",
       "revId": "797baacc1ae42c54f99cd1d278dec9e69363e745",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c17f8a5_ef02940f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-02-23T13:54:38Z",
+      "side": 1,
+      "message": "(merge conflict is due to test, will resolve later)",
+      "revId": "797baacc1ae42c54f99cd1d278dec9e69363e745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

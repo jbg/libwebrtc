@@ -367,6 +367,24 @@
       "parentUuid": "f0c0ab0c_408d2291",
       "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c72828d2_07b5c29e",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-02-23T13:54:38Z",
+      "side": 1,
+      "message": "kMaxWaitForFrameMs is hardcoded to 3000, defined here in the video_receive_stream.\nrtp_nack_history_ms has a default value of 1000 (hardcoded elsewhere)\n\nI want to allow values of rtx-time like 200ms which would lead to\n  if (200 \u003e 0 \u0026\u0026 3 * 200 \u003c 3000) {\n    return is_key_frame ? 200 * 600\n  }\nIf the value is 1000 (i.e. the default rtp_nack_history_ms) I want to go into the \"query the field trial or fallback to the default\" branch.\n\nthe wait_time_from_field_trial is actually two different values depending on whether it is a keyframe or not. Sadly assigning to a value with a ?: in an if is highly unreadable.",
+      "parentUuid": "3e56bcf6_f2083bb5",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
