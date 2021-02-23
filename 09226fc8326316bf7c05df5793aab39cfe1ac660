@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1da1c08_d8f75be0",
+        "filename": "system_wrappers/source/clock.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-23T09:14:47Z",
+      "side": 0,
+      "message": "As I understand it, CurrentTimeVal is expected to produce wall-clock time, and then using SystemTimeNanos looks plain wrong.\n\nAr you confident the windows version below works as is on winuwp? This looks like a partial revert of https://webrtc-review.googlesource.com/c/src/+/110570, and I imagine there were some reason for adding the winuwp-specific code back then.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 2
+      },
+      "revId": "09226fc8326316bf7c05df5793aab39cfe1ac660",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

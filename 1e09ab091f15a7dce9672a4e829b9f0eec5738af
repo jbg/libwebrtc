@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa8d405_c1a066e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-23T09:14:47Z",
+      "side": 1,
+      "message": "Maybe \"current wallclock time\" for clarity.",
+      "range": {
+        "startLine": 7,
+        "startChar": 32,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "1e09ab091f15a7dce9672a4e829b9f0eec5738af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba17f0d_8a23c34f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-23T09:14:47Z",
+      "side": 1,
+      "message": "Looks right to me, but please get a review also from someone familiar with windows apis.",
+      "revId": "1e09ab091f15a7dce9672a4e829b9f0eec5738af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
