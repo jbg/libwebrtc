@@ -142,6 +142,30 @@
       },
       "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cabf7ff2_1355db97",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-02-23T09:59:28Z",
+      "side": 0,
+      "message": "Yep, I agree with local changes, I was just saying that maybe creating an API method for remove after 1st packet use case maybe a bit to narrow and having ability to say \"please remove after next packet\" will be better. WDYT? Also adding documentation into API saying that managing receivers during packet\u0027s received is forbidden?",
+      "parentUuid": "64391cff_1221f79b",
+      "range": {
+        "startLine": 555,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 50
+      },
+      "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
