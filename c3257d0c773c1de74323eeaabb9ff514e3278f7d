@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89f2da1c_a1cc3fec",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1634,
+      "author": {
+        "id": 5355
+      },
+      "writtenOn": "2021-02-23T19:22:06Z",
+      "side": 1,
+      "message": "CMIIW, but transport_controller_ is going to assert that we\u0027re on on the network thread (while this method asserts we\u0027re on the signaling thread). I believe this is causing a crash in Nest webrtc:\n\n# Fatal error in: ../../third_party/webrtc/pc/jsep_transport_controller.cc, line 137\n# last system error: 0\n# Check failed: (network_thread_)-\u003eIsCurrent()\n# Received signal 6",
+      "revId": "c3257d0c773c1de74323eeaabb9ff514e3278f7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
