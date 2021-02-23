@@ -70,6 +70,30 @@
       },
       "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac32260_7ce87a2b",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-23T09:32:22Z",
+      "side": 0,
+      "message": "I think calls to OnPacketReceived must be synchronized with UnbindReceiver in one way or the other. Not holding the lock will get quite complex.\n\nI think I\u0027ll try adding a method EmulatedEndpointImpl::BindOnePacketReceiver, and use that for the special case of NetworkDelayedAction. I think that should be a reasonable and local change, with small api implications. Are you aware of any other implementation of the OnPacketReceived that could be a problem?",
+      "parentUuid": "18f96c3c_e768d00f",
+      "range": {
+        "startLine": 555,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 50
+      },
+      "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
