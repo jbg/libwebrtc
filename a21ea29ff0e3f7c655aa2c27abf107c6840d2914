@@ -46,6 +46,30 @@
       },
       "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f96c3c_e768d00f",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-02-23T09:22:40Z",
+      "side": 0,
+      "message": "I\u0027ll say the issue arise from the fact that we call receiver holding a lock. Maybe we can relax that and actually free the lock before call to the receiver-\u003eOnPacketReceived(...). The idea was to protect against removing receiver before processing of packet. We can partly put this burden on the client, so client should ensure that receiver isn\u0027t destroyed before all packets it could receive are processed. But it might be complicated for client.",
+      "parentUuid": "fd4503df_cc95bdbe",
+      "range": {
+        "startLine": 555,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 50
+      },
+      "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
