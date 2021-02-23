@@ -46,6 +46,30 @@
       },
       "revId": "09226fc8326316bf7c05df5793aab39cfe1ac660",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "028760c8_34afd398",
+        "filename": "system_wrappers/source/clock.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-23T12:09:14Z",
+      "side": 0,
+      "message": "Sounds like a reasonable plan. Setting offset at initialization sounds brittle to me, but no worse than the existing code.",
+      "parentUuid": "565029ee_cdfdded9",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 2
+      },
+      "revId": "09226fc8326316bf7c05df5793aab39cfe1ac660",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
