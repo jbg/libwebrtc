@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f92ab43_85500005",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-23T14:30:04Z",
+      "side": 1,
+      "message": "Please have another look.",
+      "revId": "ea980d9e55fa36f7725be85a6953f21b010a5bc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "618cf27b_0688f74d",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-23T14:30:04Z",
+      "side": 1,
+      "message": "This looks a bit special and of limited utility. And it is, with only a single usecase. But it\u0027s a good fit for the immediate problem, and I\u0027d prefer to not try to generalize it until there are additional usecases.",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 54
+      },
+      "revId": "ea980d9e55fa36f7725be85a6953f21b010a5bc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
