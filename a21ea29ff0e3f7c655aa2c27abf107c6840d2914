@@ -118,6 +118,30 @@
       },
       "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64391cff_1221f79b",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-23T09:44:02Z",
+      "side": 0,
+      "message": "The potential use after free race is:\n\nThread A: Packet arrives, lock taken, a receiver is looked up in the mapping, lock released.\n\n   Thread B: Calls UnbindReceiver, and destroys receiver as soon as UnbindReceiver returns.\n\nThread A: Calls OnPacketReceived on a destroyed object.\n\nThere are some alternatives to holding the lock over the call to OnPacketReceived, but we will easily get into a rabbit hole. The same pattern has been discussed at length in the context of VideoSourceInterface, RemoveSink and OnFrame.\n\nI\u0027d prefer a local change without reworking the api contracts.",
+      "parentUuid": "2a47dcc8_74732d6a",
+      "range": {
+        "startLine": 555,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 50
+      },
+      "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
