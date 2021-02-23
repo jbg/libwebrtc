@@ -94,6 +94,30 @@
       },
       "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a47dcc8_74732d6a",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-02-23T09:36:14Z",
+      "side": 0,
+      "message": "Theoretically nothing forbid user from unbinding receiver after receiving i_th packet. So maybe it will be better to have a way to tell at any time that this receiver should be removed after next packet, which will turn on some internal flag? The same for the default receivers. \n\nAlso because there is no constraints the client can try to bind something new during handling received packet in theory",
+      "parentUuid": "2ac32260_7ce87a2b",
+      "range": {
+        "startLine": 555,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 50
+      },
+      "revId": "a21ea29ff0e3f7c655aa2c27abf107c6840d2914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
