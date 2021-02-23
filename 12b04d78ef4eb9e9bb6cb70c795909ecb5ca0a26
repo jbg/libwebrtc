@@ -176,6 +176,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bdd9e94_127e51ac",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3293,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-23T10:50:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6cd260aa_3e5a7040",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fd23bdf_85b250fc",
@@ -329,6 +347,24 @@
       "side": 1,
       "message": "only if field trial is set? And even then an explicit rtx-time should override field-trial based experimentation.",
       "parentUuid": "4c0e58f1_c58398b7",
+      "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e56bcf6_f2083bb5",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-02-23T10:50:14Z",
+      "side": 1,
+      "message": "if config.rtp.nack.rtp_history_ms is 1000, and kMaxWaitForFrameMs is 1000, then the comparison returns false (checking 3000 \u003c 1000), and the function returns *wait_time_from_field_trial (if set). If the \u003c is intended to guard against overlarge rtp_history_ms values, I\u0027d expect it to be\n\nif (config.rtp.nack.rtp_history:ms \u003e 0) {\n  if (conversion_factor * config.rtp_nack.rtp_history_ms \u003c kMaxWaitForFrameMs)\n     return ....\n  else\n     return kMaxWaitForFrameMs; // clamp to maximum value\n} else if (wait_time_from_field_trial) {\n ...\n\n(it seems a bit strange that wait_time_from_field_trial is used unmodified for both types of wait, though...)",
+      "parentUuid": "f0c0ab0c_408d2291",
       "revId": "12b04d78ef4eb9e9bb6cb70c795909ecb5ca0a26",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
