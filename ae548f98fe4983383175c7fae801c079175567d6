@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40400830_a6b9884c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-02-23T13:01:19Z",
+      "side": 1,
+      "message": "Mirko,\ncan you take a look at this CL as well. I realized that my previous CL broke the UWP build since the TimeHelper class was in an anonymous namespace.",
+      "revId": "ae548f98fe4983383175c7fae801c079175567d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
