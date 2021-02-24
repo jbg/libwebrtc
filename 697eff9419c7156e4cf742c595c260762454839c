@@ -16,6 +16,29 @@
       "message": "Moving myself too CC instead since I am not an owner and have not done any work in this code base.",
       "revId": "697eff9419c7156e4cf742c595c260762454839c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52f296e4_78725bc3",
+        "filename": "sdk/android/src/java/org/webrtc/AndroidVideoDecoder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2021-02-24T09:07:12Z",
+      "side": 1,
+      "message": "nit: I have a slight preference for combining these if-statement into one and logging both width and height.",
+      "range": {
+        "startLine": 595,
+        "startChar": 0,
+        "endLine": 602,
+        "endChar": 54
+      },
+      "revId": "697eff9419c7156e4cf742c595c260762454839c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
