@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cda77d15_3a1b2b5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-02-24T16:35:33Z",
+      "side": 1,
+      "message": "Hi Kári.\nThank you very much for review!\n\nI also was concerned about binary size when did this CL. I was mostly inspired by the way VP9 is enabled during compilation. But even so they are similar, the way the are compiled is a bit different (please correct me if I\u0027m wrong).\n\nCompilation of VP9 is primarily controlled with `rtc_libvpx_build_vp9` from `webrtc.gni`. When `rtc_libvpx_build_vp9` is set true during `gn gen` special define `RTC_ENABLE_VP9` is added to compilation. Files with VP9 encoder and decoder are unconditionally included in the compilation (modules/video_coding/BUILD.gn), but the whole content of encoder/decoder files are wrapped with `#ifdef RTC_ENABLE_VP9`. So when `rtc_libvpx_build_vp9` and no `RTC_ENABLE_VP9 is defined, then \"dummy\" implementations of VP9 encoder and decoders are compiled (defined in modules/video_coding/codecs/vp9/vp9.cc).\n\n\nCompilation of AV1 is primarily controlled with `enable_libaom` parameter. There is no special defines added. But actual AV1 encoder/decoder are conditionally included into compilation in `modules/video_coding/codecs/av1/BUILD.gn`. E.g. when AV1 is not enabled, dummy encoder and decoder come from special files `modules/video_coding/codecs/av1/libaom_av1_(encoder/decoder)_absent.cc`, but actual AV1 encoder/decoder not included in the compilation.\n\nSo when enable_libaom \u003d false, then only dummy AV1 encoder/decoder is included in binary and it returns `nullptr` when actual encoder/decoder attempted to be created.\n\nThe only concern is should `RTCVideo(Encoder/Decoder)AV1.mm` be included in SDK compilation or not when enable_libaom \u003d false.\nTo resolve this concert I\u0027ve looked at how VP9 was added in SDK. VP9 encoder/decoder .mm are included in SDK always, but they are just not listed in default codecs when not enabled. \nI could do the same with AV1, but I\u0027d prefer not compile time #ifdef, but rather dynamic check of special flag `webrtc::kIsLibaomAv1EncoderSupported`.\n\nWhat do you think? Should I do some work such that `RTCVideo(Encoder/Decoder)AV1.mm` not included in SDK at all when enable_libaom \u003d false or it wouldn\u0027t hurt that much if dummy implementation will be presented (the same as VP9 encoder/decoder now).\nYura.",
+      "parentUuid": "c0d2852a_5636036a",
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d58bca5_7d165b82",
         "filename": "sdk/BUILD.gn",
         "patchSetId": 1
