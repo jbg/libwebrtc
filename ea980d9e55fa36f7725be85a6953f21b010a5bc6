@@ -39,6 +39,30 @@
       },
       "revId": "ea980d9e55fa36f7725be85a6953f21b010a5bc6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "891e673a_16604a3b",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-02-24T09:24:29Z",
+      "side": 1,
+      "message": "Theoretically in /test/network we have assumption that there is only one implementation of the endpoint and it is enforced by hidden ctor. So theoretically we can safely cast EmulatedEndpoint to EmulatedEndpointImpl in delayed action setup, so then we can keep this method in private API instead of exposing to public one. WDYT? We already use casts in NetworkEmulationManager implementation.",
+      "parentUuid": "618cf27b_0688f74d",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 54
+      },
+      "revId": "ea980d9e55fa36f7725be85a6953f21b010a5bc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
