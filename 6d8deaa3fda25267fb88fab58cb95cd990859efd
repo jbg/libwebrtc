@@ -50,6 +50,92 @@
       "message": "Hello Kári,\n\nCould you please take a look?\n\nThanks a lot in advance,\nYura.",
       "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0d2852a_5636036a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-02-24T14:39:06Z",
+      "side": 1,
+      "message": "Hello Yura, thank you for this contribution! \n\nThis looks good, but in order to avoid increasing binary size for all clients, please make including AV1 a compile-time option.",
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d58bca5_7d165b82",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-02-24T14:39:06Z",
+      "side": 1,
+      "message": "please put this behind a build-time flag to avoid inflating the binary size for clients who don\u0027t use it. See f.x. `rtc_apprtcmobile_broadcast_extension` for how to do this.",
+      "range": {
+        "startLine": 648,
+        "startChar": 10,
+        "endLine": 648,
+        "endChar": 13
+      },
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82da78a9_f3010995",
+        "filename": "sdk/objc/components/video_codec/RTCDefaultVideoDecoderFactory.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-02-24T14:39:06Z",
+      "side": 1,
+      "message": "Please add DEFINES for this, similar to VP9 above.",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2794c7d_3211e5ae",
+        "filename": "sdk/objc/components/video_codec/RTCDefaultVideoEncoderFactory.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-02-24T14:39:06Z",
+      "side": 1,
+      "message": "this also needs ifdefs",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 0
+      },
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
