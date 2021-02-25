@@ -37,6 +37,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eabea835_72fbb80b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-25T16:20:37Z",
+      "side": 1,
+      "message": "see WebRtcVideoChannel::MapCodecs -- there is one check for negative values and then a bit below one for this being less than kNackHistoryMs (1000ms). Might be clearer to merge the second check into the first one.",
+      "parentUuid": "323b0a88_b2b4d62b",
+      "revId": "97edb0e67b252cbae61b2f3b9a35a4607649ed42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "741fb21b_aad97739",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-25T16:20:37Z",
+      "side": 1,
+      "message": "Thank you! Adding a bit of the rationale from the original email discussion:\nIf you tell me via rtx-time that you store packets for 200ms it does not make sense for you to ask for nacks of a 300ms old packet. But it doesn\u0027t make sense to wait for 3 seconds to send a PLI either.\n\nI was a bit surprised the nack module doesn\u0027t \"give up\" when hitting kMaxNackRetries and send a PLI but it has no notion of a picture.\nNow the nack module will currently ignore the rtx-time setting and continue to send. I think this will be relatively rare though as a new keyframe will remove the need for nack-ing old packets. Hence just a TODO",
+      "revId": "97edb0e67b252cbae61b2f3b9a35a4607649ed42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "189bf3db_71eff9c0",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 7
@@ -48,6 +83,30 @@
       "writtenOn": "2021-02-25T14:30:58Z",
       "side": 1,
       "message": "Note that this doesn\u0027t actually change the size of the nack history. RtpVideoSender for some reason only looks at if this value is 0 or not.\n\nSo I\u0027m a little concerned if we expose this on the web and it doesn\u0027t actually do\nwhat it\u0027s supposed to.",
+      "range": {
+        "startLine": 1524,
+        "startChar": 4,
+        "endLine": 1524,
+        "endChar": 35
+      },
+      "revId": "97edb0e67b252cbae61b2f3b9a35a4607649ed42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd61113_6ab67287",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-02-25T16:20:37Z",
+      "side": 1,
+      "message": "This is for the remote description so doesn\u0027t touch the local senders settings. See WebRtcVideoChannel::WebRtcVideoSendStream::SetCodecs where the existing code isn\u0027t changed (some of the discussion was around this).\n\nControlling the senders history size seems like a headache API wise. This would have to happen via setParameters() but you can\u0027t modify sdpFmtpLine as it is currently defined as read-only.",
+      "parentUuid": "189bf3db_71eff9c0",
       "range": {
         "startLine": 1524,
         "startChar": 4,
