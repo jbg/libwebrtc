@@ -16,6 +16,46 @@
       "message": "sprang, since you had thoughts in the bug report can you help reviewing?",
       "revId": "97edb0e67b252cbae61b2f3b9a35a4607649ed42",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "323b0a88_b2b4d62b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-02-25T14:30:58Z",
+      "side": 1,
+      "message": "Overall looks good, but we\u0027re using this value only to set how long we wait before PLI now - and not actually setting the packet history size.\n\nAlso, maybe I missed it, but would be good with some input validation and capping the value within reasonable bounds. I believe the packet history already has a cap of 9600 packets, but I\u0027d rather no rely on validation all the way at the bottom of the stack.\n\n+philipel has more context on the pli timeouts, care to comment?\n",
+      "revId": "97edb0e67b252cbae61b2f3b9a35a4607649ed42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "189bf3db_71eff9c0",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-02-25T14:30:58Z",
+      "side": 1,
+      "message": "Note that this doesn\u0027t actually change the size of the nack history. RtpVideoSender for some reason only looks at if this value is 0 or not.\n\nSo I\u0027m a little concerned if we expose this on the web and it doesn\u0027t actually do\nwhat it\u0027s supposed to.",
+      "range": {
+        "startLine": 1524,
+        "startChar": 4,
+        "endLine": 1524,
+        "endChar": 35
+      },
+      "revId": "97edb0e67b252cbae61b2f3b9a35a4607649ed42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
