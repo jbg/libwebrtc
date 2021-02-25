@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45d42df8_cdb9b902",
+        "filename": "test/network/network_emulation.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-02-25T19:32:42Z",
+      "side": 1,
+      "message": "Please add documentation for this method.",
+      "range": {
+        "startLine": 536,
+        "startChar": 27,
+        "endLine": 536,
+        "endChar": 46
+      },
+      "revId": "bb3e95e9f0fb4eb6007b09d718a26583b4e985c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
