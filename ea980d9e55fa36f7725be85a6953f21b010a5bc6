@@ -111,6 +111,30 @@
       },
       "revId": "ea980d9e55fa36f7725be85a6953f21b010a5bc6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f5ceb47_d1a19ee2",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-25T14:42:07Z",
+      "side": 1,
+      "message": "I\u0027ll have a look, but probably not today. Also note that C++ has \"covariant return types\". Might be useful in this case (although rarely used in the webrtc code base). So if NetworkManagerImpl inherits NetworkManager, and EndpointImpl inherits EndPoint, we can have a virtual method\n\n  EndPoint* NetworkManager::CreateEndpoint() \u003d 0;\n\nand override it with an \n\n  EndPointImpl* NetworkManagerImpl::CreateEndpoint() { ... }",
+      "parentUuid": "515fcbe9_44aa68c5",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 54
+      },
+      "revId": "ea980d9e55fa36f7725be85a6953f21b010a5bc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
