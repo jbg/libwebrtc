@@ -87,6 +87,30 @@
       },
       "revId": "ea980d9e55fa36f7725be85a6953f21b010a5bc6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "515fcbe9_44aa68c5",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-02-25T14:28:36Z",
+      "side": 1,
+      "message": "I think we can make CrossTrafficRouteImpl accept a pointer to the EmulatedEndpointImpl in the ctor. It still will need a cast inside NetworkEmulationManagerImpl, but the cast there will be safe, because that one is responsible for creating endpoints and is aware of the type. Also theoretically cast can be avoided if we will introduce internal CreateEndpointImpl method, which will return pointer to the impl.",
+      "parentUuid": "cacfeab1_5f510331",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 54
+      },
+      "revId": "ea980d9e55fa36f7725be85a6953f21b010a5bc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
