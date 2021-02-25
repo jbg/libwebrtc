@@ -63,6 +63,30 @@
       },
       "revId": "ea980d9e55fa36f7725be85a6953f21b010a5bc6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cacfeab1_5f510331",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-02-25T09:11:15Z",
+      "side": 1,
+      "message": "I think there\u0027s less harm in an additional but somewhat odd public method, than using explicit type casts to get access to the method.\n\nWe could make it an internal method if there were a good way to have the CrossTrafficRouteImpl get access (without any casting) via the EmulatedEndpointImpl type. But I don\u0027t know the code well enough to say if that\u0027s an easy change.",
+      "parentUuid": "891e673a_16604a3b",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 54
+      },
+      "revId": "ea980d9e55fa36f7725be85a6953f21b010a5bc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
