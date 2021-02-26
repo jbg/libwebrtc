@@ -50,6 +50,24 @@
       "message": "Should it be set to -1 (not present) instead?",
       "revId": "de0a30e435857be8507037d85b3ae72fedbece08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79112499_8f8594cf",
+        "filename": "test/pc/e2e/sdp/sdp_changer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-02-26T08:26:06Z",
+      "side": 1,
+      "message": "https://bugs.chromium.org/p/chromium/issues/detail?id\u003d614958 says the webrtc layer interprets -1 as \"no value\" but I have not seen any code that explicitly does so. What -1 did was to skip the lookup-by-index section that is changed now.\n\n-1 is more readable however.",
+      "parentUuid": "09d41f35_c7a478b4",
+      "revId": "de0a30e435857be8507037d85b3ae72fedbece08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
