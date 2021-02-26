@@ -28,6 +28,7 @@
 #include "api/function_view.h"
 #include "api/task_queue/queued_task.h"
 #include "api/task_queue/task_queue_base.h"
+#include "rtc_base/callback_list.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/deprecated/recursive_critical_section.h"
 #include "rtc_base/location.h"
@@ -276,7 +277,10 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
 
   // When this signal is sent out, any references to this queue should
   // no longer be used.
-  sigslot::signal0<> SignalQueueDestroyed;
+  template <typename F>
+  void SubscribeSignalQueueDestroyed(F&& callback) {
+    signal_queue_destroyed_.AddReceiver(std::forward<F>(callback));
+  }
 
   bool IsCurrent() const;
 
@@ -622,6 +626,7 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   friend class ThreadManager;
 
   int dispatch_warning_ms_ RTC_GUARDED_BY(this) = kSlowDispatchLoggingThreshold;
+  webrtc::CallbackList<> signal_queue_destroyed_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(Thread);
 };

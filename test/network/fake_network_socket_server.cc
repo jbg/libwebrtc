@@ -312,8 +312,8 @@ rtc::AsyncSocket* FakeNetworkSocketServer::CreateAsyncSocket(int family,
 void FakeNetworkSocketServer::SetMessageQueue(rtc::Thread* thread) {
   thread_ = thread;
   if (thread_) {
-    thread_->SignalQueueDestroyed.connect(
-        this, &FakeNetworkSocketServer::OnMessageQueueDestroyed);
+    thread_->SubscribeSignalQueueDestroyed(
+        [this]() { OnMessageQueueDestroyed(); });
   }
 }
 

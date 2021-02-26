@@ -484,8 +484,7 @@ TEST(ThreadTest, ThreeThreadsInvoke) {
 class SetNameOnSignalQueueDestroyedTester : public sigslot::has_slots<> {
  public:
   SetNameOnSignalQueueDestroyedTester(Thread* thread) : thread_(thread) {
-    thread->SignalQueueDestroyed.connect(
-        this, &SetNameOnSignalQueueDestroyedTester::OnQueueDestroyed);
+    thread->SubscribeSignalQueueDestroyed([this]() { OnQueueDestroyed(); });
   }
 
   void OnQueueDestroyed() {

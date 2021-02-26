@@ -778,6 +778,7 @@ rtc_library("threading") {
   deps = [
     ":async_resolver_interface",
     ":atomicops",
+    ":callback_list",
     ":checks",
     ":criticalsection",
     ":ip_address",
