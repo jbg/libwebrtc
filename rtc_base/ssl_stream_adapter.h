@@ -13,15 +13,16 @@
 
 #include <stddef.h>
 #include <stdint.h>
+
 #include <memory>
 #include <string>
 #include <vector>
 
 #include "absl/memory/memory.h"
+#include "rtc_base/callback_list.h"
 #include "rtc_base/ssl_certificate.h"
 #include "rtc_base/ssl_identity.h"
 #include "rtc_base/stream.h"
-#include "rtc_base/third_party/sigslot/sigslot.h"
 
 namespace rtc {
 
@@ -267,7 +268,13 @@ class SSLStreamAdapter : public StreamAdapterInterface {
   // authentication.
   bool GetClientAuthEnabled() const { return client_auth_enabled_; }
 
-  sigslot::signal1<SSLHandshakeError> SignalSSLHandshakeError;
+  template <typename F>
+  void SubscribeSSLHandshakeError(F&& callback) {
+    ssl_handshake_error_callback_list_.AddReceiver(std::forward<F>(callback));
+  }
+
+ protected:
+  webrtc::CallbackList<SSLHandshakeError> ssl_handshake_error_callback_list_;
 
  private:
   // If true (default), the client is required to provide a certificate during

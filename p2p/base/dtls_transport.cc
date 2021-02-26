@@ -358,8 +358,8 @@ bool DtlsTransport::SetupDtls() {
   dtls_->SetMaxProtocolVersion(ssl_max_version_);
   dtls_->SetServerRole(*dtls_role_);
   dtls_->SignalEvent.connect(this, &DtlsTransport::OnDtlsEvent);
-  dtls_->SignalSSLHandshakeError.connect(this,
-                                         &DtlsTransport::OnDtlsHandshakeError);
+  dtls_->SubscribeSSLHandshakeError(
+      [this](rtc::SSLHandshakeError e) { OnDtlsHandshakeError(e); });
   if (remote_fingerprint_value_.size() &&
       !dtls_->SetPeerCertificateDigest(
           remote_fingerprint_algorithm_,
