@@ -79,9 +79,7 @@ DtmfSender::DtmfSender(rtc::Thread* signaling_thread,
       comma_delay_(kDtmfDefaultCommaDelayMs) {
   RTC_DCHECK(signaling_thread_);
   if (provider_) {
-    RTC_DCHECK(provider_->GetOnDestroyedSignal());
-    provider_->GetOnDestroyedSignal()->connect(
-        this, &DtmfSender::OnProviderDestroyed);
+    provider_->SubscribeOnDestroyed([this]() { OnProviderDestroyed(); });
   }
 }
 

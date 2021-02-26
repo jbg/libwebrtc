@@ -442,7 +442,9 @@ AudioRtpSender::AudioRtpSender(rtc::Thread* worker_thread,
 
 AudioRtpSender::~AudioRtpSender() {
   // For DtmfSender.
-  SignalDestroyed();
+  if (on_destroyed_) {
+    on_destroyed_();
+  }
   Stop();
 }
 
@@ -477,10 +479,6 @@ bool AudioRtpSender::InsertDtmf(int code, int duration) {
     RTC_LOG(LS_ERROR) << "Failed to insert DTMF to channel.";
   }
   return success;
-}
-
-sigslot::signal0<>* AudioRtpSender::GetOnDestroyedSignal() {
-  return &SignalDestroyed;
 }
 
 void AudioRtpSender::OnChanged() {

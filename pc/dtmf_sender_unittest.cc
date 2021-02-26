@@ -14,6 +14,7 @@
 
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "rtc_base/fake_clock.h"
@@ -78,7 +79,7 @@ class FakeDtmfProvider : public DtmfProviderInterface {
 
   FakeDtmfProvider() : last_insert_dtmf_call_(0) {}
 
-  ~FakeDtmfProvider() { SignalDestroyed(); }
+  ~FakeDtmfProvider() { on_destroyed_(); }
 
   // Implements DtmfProviderInterface.
   bool CanInsertDtmf() override { return can_insert_; }
@@ -96,8 +97,8 @@ class FakeDtmfProvider : public DtmfProviderInterface {
     return true;
   }
 
-  sigslot::signal0<>* GetOnDestroyedSignal() override {
-    return &SignalDestroyed;
+  void SubscribeOnDestroyed(std::function<void()> callback) override {
+    on_destroyed_ = std::move(callback);
   }
 
   // getter and setter
@@ -112,7 +113,7 @@ class FakeDtmfProvider : public DtmfProviderInterface {
   bool can_insert_ = false;
   std::vector<DtmfInfo> dtmf_info_queue_;
   int64_t last_insert_dtmf_call_;
-  sigslot::signal0<> SignalDestroyed;
+  std::function<void()> on_destroyed_;
 };
 
 class DtmfSenderTest : public ::testing::Test {

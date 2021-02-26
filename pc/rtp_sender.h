@@ -17,8 +17,11 @@
 
 #include <stddef.h>
 #include <stdint.h>
+
+#include <functional>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "absl/types/optional.h"
@@ -37,7 +40,6 @@
 #include "pc/dtmf_sender.h"
 #include "pc/stats_collector_interface.h"
 #include "rtc_base/synchronization/mutex.h"
-#include "rtc_base/third_party/sigslot/sigslot.h"
 #include "rtc_base/thread.h"
 
 namespace webrtc {
@@ -282,7 +284,9 @@ class AudioRtpSender : public DtmfProviderInterface, public RtpSenderBase {
   // DtmfSenderProvider implementation.
   bool CanInsertDtmf() override;
   bool InsertDtmf(int code, int duration) override;
-  sigslot::signal0<>* GetOnDestroyedSignal() override;
+  void SubscribeOnDestroyed(std::function<void()> callback) override {
+    on_destroyed_ = std::move(callback);
+  }
 
   // ObserverInterface implementation.
   void OnChanged() override;
@@ -319,7 +323,7 @@ class AudioRtpSender : public DtmfProviderInterface, public RtpSenderBase {
     return rtc::scoped_refptr<AudioTrackInterface>(
         static_cast<AudioTrackInterface*>(track_.get()));
   }
-  sigslot::signal0<> SignalDestroyed;
+  std::function<void()> on_destroyed_;
 
   StatsCollectorInterface* stats_ = nullptr;
   rtc::scoped_refptr<DtmfSenderInterface> dtmf_sender_proxy_;
