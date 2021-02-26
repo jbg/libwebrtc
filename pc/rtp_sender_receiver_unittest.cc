@@ -204,8 +204,8 @@ class RtpSenderReceiverTest
     audio_rtp_sender_->SetStreams({local_stream_->id()});
     audio_rtp_sender_->SetMediaChannel(voice_media_channel_);
     audio_rtp_sender_->SetSsrc(kAudioSsrc);
-    audio_rtp_sender_->GetOnDestroyedSignal()->connect(
-        this, &RtpSenderReceiverTest::OnAudioSenderDestroyed);
+    audio_rtp_sender_->SubscribeOnDestroyed(
+        [this]() { OnAudioSenderDestroyed(); });
     VerifyVoiceChannelInput();
   }
 
