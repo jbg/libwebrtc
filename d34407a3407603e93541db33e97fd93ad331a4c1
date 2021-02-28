@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d652c6e_f4380127",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16600
+      },
+      "writtenOn": "2021-02-28T04:19:20Z",
+      "side": 1,
+      "message": "Thanks hbos \u0026 hta!\n\nhttps://bugs.chromium.org/p/webrtc/issues/detail?id\u003d12507",
+      "revId": "d34407a3407603e93541db33e97fd93ad331a4c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
