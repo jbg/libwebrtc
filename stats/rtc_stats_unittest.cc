@@ -71,7 +71,7 @@ TEST(RTCStatsTest, RTCStatsAndMembers) {
   EXPECT_EQ(stats.id(), "testId");
   EXPECT_EQ(stats.timestamp_us(), static_cast<int64_t>(42));
   std::vector<const RTCStatsMemberInterface*> members = stats.Members();
-  EXPECT_EQ(members.size(), static_cast<size_t>(14));
+  EXPECT_EQ(members.size(), static_cast<size_t>(15));
   for (const RTCStatsMemberInterface* member : members) {
     EXPECT_FALSE(member->is_defined());
   }
@@ -82,6 +82,7 @@ TEST(RTCStatsTest, RTCStatsAndMembers) {
   stats.m_uint64 = 123;
   stats.m_double = 123.0;
   stats.m_string = std::string("123");
+  stats.m_data_channel_state = RTCDataChannelState::OPEN;
 
   std::vector<bool> sequence_bool;
   sequence_bool.push_back(true);
@@ -123,6 +124,7 @@ TEST(RTCStatsTest, RTCStatsAndMembers) {
   EXPECT_EQ(*stats.m_sequence_uint64, sequence_uint64);
   EXPECT_EQ(*stats.m_sequence_double, sequence_double);
   EXPECT_EQ(*stats.m_sequence_string, sequence_string);
+  EXPECT_EQ(*stats.m_data_channel_state, RTCDataChannelState::OPEN);
 
   int32_t numbers[] = {4, 8, 15, 16, 23, 42};
   std::vector<int32_t> numbers_sequence(&numbers[0], &numbers[6]);

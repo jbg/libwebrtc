@@ -12,6 +12,7 @@
 
 #include <cstdio>
 
+#include "api/stats/rtcstats_objects.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/string_encode.h"
 #include "rtc_base/strings/string_builder.h"
@@ -248,6 +249,12 @@ WEBRTC_DEFINE_RTCSTATSMEMBER(std::vector<std::string>,
                              false,
                              VectorOfStringsToString(value_),
                              VectorOfStringsToString(value_));
+WEBRTC_DEFINE_RTCSTATSMEMBER(webrtc::RTCDataChannelState,
+                             kDataChannelState,
+                             false,
+                             false,
+                             webrtc::RTCDataChannelStateToString(value_),
+                             webrtc::RTCDataChannelStateToString(value_));
 
 template class RTC_EXPORT_TEMPLATE_DEFINE(RTC_EXPORT)
     RTCNonStandardStatsMember<bool>;
