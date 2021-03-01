@@ -10,6 +10,8 @@
 
 #include "api/stats/rtcstats_objects.h"
 
+#include <cassert>
+#include <map>
 #include <utility>
 
 #include "api/stats/rtc_stats.h"
@@ -17,10 +19,20 @@
 
 namespace webrtc {
 
-const char* const RTCDataChannelState::kConnecting = "connecting";
-const char* const RTCDataChannelState::kOpen = "open";
-const char* const RTCDataChannelState::kClosing = "closing";
-const char* const RTCDataChannelState::kClosed = "closed";
+const char* RTCDataChannelStateToString(RTCDataChannelState state) {
+  switch (state) {
+    case RTCDataChannelState::CONNECTING:
+      return "connecting";
+    case RTCDataChannelState::OPEN:
+      return "open";
+    case RTCDataChannelState::CLOSING:
+      return "closing";
+    case RTCDataChannelState::CLOSED:
+      return "closed";
+    default:
+      RTC_NOTREACHED();
+  }
+}
 
 const char* const RTCStatsIceCandidatePairState::kFrozen = "frozen";
 const char* const RTCStatsIceCandidatePairState::kWaiting = "waiting";
@@ -849,7 +861,9 @@ WEBRTC_RTCSTATS_IMPL(
     &jitter,
     &local_id,
     &round_trip_time,
-    &fraction_lost)
+    &fraction_lost,
+    &total_round_trip_time,
+    &round_trip_time_measurements)
 // clang-format on
 
 RTCRemoteInboundRtpStreamStats::RTCRemoteInboundRtpStreamStats(
@@ -869,7 +883,9 @@ RTCRemoteInboundRtpStreamStats::RTCRemoteInboundRtpStreamStats(
       jitter("jitter"),
       local_id("localId"),
       round_trip_time("roundTripTime"),
-      fraction_lost("fractionLost") {}
+      fraction_lost("fractionLost"),
+      total_round_trip_time("totalRoundTripTime"),
+      round_trip_time_measurements("roundTripTimeMeasurements") {}
 
 RTCRemoteInboundRtpStreamStats::RTCRemoteInboundRtpStreamStats(
     const RTCRemoteInboundRtpStreamStats& other)
@@ -882,7 +898,9 @@ RTCRemoteInboundRtpStreamStats::RTCRemoteInboundRtpStreamStats(
       jitter(other.jitter),
       local_id(other.local_id),
       round_trip_time(other.round_trip_time),
-      fraction_lost(other.fraction_lost) {}
+      fraction_lost(other.fraction_lost),
+      total_round_trip_time(other.total_round_trip_time),
+      round_trip_time_measurements(other.round_trip_time_measurements) {}
 
 RTCRemoteInboundRtpStreamStats::~RTCRemoteInboundRtpStreamStats() {}
 
