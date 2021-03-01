@@ -17,10 +17,20 @@
 
 namespace webrtc {
 
-const char* const RTCDataChannelState::kConnecting = "connecting";
-const char* const RTCDataChannelState::kOpen = "open";
-const char* const RTCDataChannelState::kClosing = "closing";
-const char* const RTCDataChannelState::kClosed = "closed";
+const char* RTCDataChannelStateToString(RTCDataChannelState state) {
+  switch (state) {
+    case RTCDataChannelState::CONNECTING:
+      return "connecting";
+    case RTCDataChannelState::OPEN:
+      return "open";
+    case RTCDataChannelState::CLOSING:
+      return "closing";
+    case RTCDataChannelState::CLOSED:
+      return "closed";
+    default:
+      RTC_NOTREACHED();
+  }
+}
 
 const char* const RTCStatsIceCandidatePairState::kFrozen = "frozen";
 const char* const RTCStatsIceCandidatePairState::kWaiting = "waiting";
