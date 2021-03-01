@@ -30,7 +30,8 @@ WEBRTC_RTCSTATS_IMPL(RTCTestStats,
                      &m_sequence_int64,
                      &m_sequence_uint64,
                      &m_sequence_double,
-                     &m_sequence_string)
+                     &m_sequence_string,
+                     &m_data_channel_state)
 
 RTCTestStats::RTCTestStats(const std::string& id, int64_t timestamp_us)
     : RTCStats(id, timestamp_us),
@@ -47,7 +48,8 @@ RTCTestStats::RTCTestStats(const std::string& id, int64_t timestamp_us)
       m_sequence_int64("mSequenceInt64"),
       m_sequence_uint64("mSequenceUint64"),
       m_sequence_double("mSequenceDouble"),
-      m_sequence_string("mSequenceString") {}
+      m_sequence_string("mSequenceString"),
+      m_data_channel_state("mDataChannelState") {}
 
 RTCTestStats::RTCTestStats(const RTCTestStats& other)
     : RTCStats(other.id(), other.timestamp_us()),
@@ -64,7 +66,8 @@ RTCTestStats::RTCTestStats(const RTCTestStats& other)
       m_sequence_int64(other.m_sequence_int64),
       m_sequence_uint64(other.m_sequence_uint64),
       m_sequence_double(other.m_sequence_double),
-      m_sequence_string(other.m_sequence_string) {}
+      m_sequence_string(other.m_sequence_string),
+      m_data_channel_state(other.m_data_channel_state) {}
 
 RTCTestStats::~RTCTestStats() {}
 
