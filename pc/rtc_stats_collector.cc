@@ -157,20 +157,19 @@ const char* CandidateTypeToRTCIceCandidateType(const std::string& type) {
   return nullptr;
 }
 
-const char* DataStateToRTCDataChannelState(
+RTCDataChannelState DataStateToRTCDataChannelState(
     DataChannelInterface::DataState state) {
   switch (state) {
     case DataChannelInterface::kConnecting:
-      return RTCDataChannelState::kConnecting;
+      return RTCDataChannelState::CONNECTING;
     case DataChannelInterface::kOpen:
-      return RTCDataChannelState::kOpen;
+      return RTCDataChannelState::OPEN;
     case DataChannelInterface::kClosing:
-      return RTCDataChannelState::kClosing;
+      return RTCDataChannelState::CLOSING;
     case DataChannelInterface::kClosed:
-      return RTCDataChannelState::kClosed;
+      return RTCDataChannelState::CLOSED;
     default:
       RTC_NOTREACHED();
-      return nullptr;
   }
 }
 
@@ -549,8 +548,7 @@ ProduceRemoteInboundRtpStreamStatsFromReportBlockData(
   remote_inbound->total_round_trip_time =
       static_cast<double>(report_block_data.sum_rtt_ms()) /
       rtc::kNumMillisecsPerSec;
-  remote_inbound->round_trip_time_measurements =
-      report_block_data.num_rtts();
+  remote_inbound->round_trip_time_measurements = report_block_data.num_rtts();
 
   std::string local_id = RTCOutboundRTPStreamStatsIDFromSSRC(
       media_type == cricket::MEDIA_TYPE_AUDIO, report_block.source_ssrc);
@@ -2117,7 +2115,7 @@ const char* CandidateTypeToRTCIceCandidateTypeForTesting(
   return CandidateTypeToRTCIceCandidateType(type);
 }
 
-const char* DataStateToRTCDataChannelStateForTesting(
+RTCDataChannelState DataStateToRTCDataChannelStateForTesting(
     DataChannelInterface::DataState state) {
   return DataStateToRTCDataChannelState(state);
 }

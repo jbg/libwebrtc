@@ -1000,7 +1000,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCDataChannelStats) {
   expected_data_channel0.label = "MockSctpDataChannel0";
   expected_data_channel0.protocol = "udp";
   expected_data_channel0.data_channel_identifier = 0;
-  expected_data_channel0.state = "connecting";
+  expected_data_channel0.state = RTCDataChannelState::CONNECTING;
   expected_data_channel0.messages_sent = 1;
   expected_data_channel0.bytes_sent = 2;
   expected_data_channel0.messages_received = 3;
@@ -1013,7 +1013,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCDataChannelStats) {
   expected_data_channel1.label = "MockSctpDataChannel1";
   expected_data_channel1.protocol = "tcp";
   expected_data_channel1.data_channel_identifier = 1;
-  expected_data_channel1.state = "open";
+  expected_data_channel1.state = RTCDataChannelState::OPEN;
   expected_data_channel1.messages_sent = 5;
   expected_data_channel1.bytes_sent = 6;
   expected_data_channel1.messages_received = 7;
@@ -1026,7 +1026,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCDataChannelStats) {
   expected_data_channel2.label = "MockSctpDataChannel2";
   expected_data_channel2.protocol = "udp";
   expected_data_channel2.data_channel_identifier = 2;
-  expected_data_channel2.state = "closing";
+  expected_data_channel2.state = RTCDataChannelState::CLOSING;
   expected_data_channel2.messages_sent = 9;
   expected_data_channel2.bytes_sent = 10;
   expected_data_channel2.messages_received = 11;
@@ -1039,7 +1039,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCDataChannelStats) {
   expected_data_channel3.label = "MockSctpDataChannel3";
   expected_data_channel3.protocol = "tcp";
   expected_data_channel3.data_channel_identifier = 3;
-  expected_data_channel3.state = "closed";
+  expected_data_channel3.state = RTCDataChannelState::CLOSED;
   expected_data_channel3.messages_sent = 13;
   expected_data_channel3.bytes_sent = 14;
   expected_data_channel3.messages_received = 15;
