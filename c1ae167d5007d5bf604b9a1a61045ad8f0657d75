@@ -16,6 +16,23 @@
       "message": "Nice! LGTM. Just need to wait for chromium allow list CL to land before landing this",
       "revId": "c1ae167d5007d5bf604b9a1a61045ad8f0657d75",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff727b5b_c3c57ae2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-01T19:11:52Z",
+      "side": 1,
+      "message": "This is ready to land now, the whitelist has landed (and so has the prior CL). If you resolve the merge conflict and upload another patch set then we can +2 this.",
+      "revId": "c1ae167d5007d5bf604b9a1a61045ad8f0657d75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
