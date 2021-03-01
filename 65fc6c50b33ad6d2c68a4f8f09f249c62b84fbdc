@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "237475d2_571d8fae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-01T08:16:51Z",
+      "side": 1,
+      "message": "Looks good (although I don\u0027t understand the fine details of the usrsctp interface).",
+      "revId": "65fc6c50b33ad6d2c68a4f8f09f249c62b84fbdc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f7369df_c7af4fb3",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-01T08:16:51Z",
+      "side": 1,
+      "message": "Nice that we can use this idiom now!",
+      "range": {
+        "startLine": 257,
+        "startChar": 20,
+        "endLine": 257,
+        "endChar": 45
+      },
+      "revId": "65fc6c50b33ad6d2c68a4f8f09f249c62b84fbdc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
