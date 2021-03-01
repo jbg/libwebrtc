@@ -1000,7 +1000,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCDataChannelStats) {
   expected_data_channel0.label = "MockSctpDataChannel0";
   expected_data_channel0.protocol = "udp";
   expected_data_channel0.data_channel_identifier = 0;
-  expected_data_channel0.state = "connecting";
+  expected_data_channel0.state = RTCDataChannelState::CONNECTING;
   expected_data_channel0.messages_sent = 1;
   expected_data_channel0.bytes_sent = 2;
   expected_data_channel0.messages_received = 3;
@@ -1013,7 +1013,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCDataChannelStats) {
   expected_data_channel1.label = "MockSctpDataChannel1";
   expected_data_channel1.protocol = "tcp";
   expected_data_channel1.data_channel_identifier = 1;
-  expected_data_channel1.state = "open";
+  expected_data_channel1.state = RTCDataChannelState::OPEN;
   expected_data_channel1.messages_sent = 5;
   expected_data_channel1.bytes_sent = 6;
   expected_data_channel1.messages_received = 7;
@@ -1026,7 +1026,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCDataChannelStats) {
   expected_data_channel2.label = "MockSctpDataChannel2";
   expected_data_channel2.protocol = "udp";
   expected_data_channel2.data_channel_identifier = 2;
-  expected_data_channel2.state = "closing";
+  expected_data_channel2.state = RTCDataChannelState::CLOSING;
   expected_data_channel2.messages_sent = 9;
   expected_data_channel2.bytes_sent = 10;
   expected_data_channel2.messages_received = 11;
@@ -1039,7 +1039,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCDataChannelStats) {
   expected_data_channel3.label = "MockSctpDataChannel3";
   expected_data_channel3.protocol = "tcp";
   expected_data_channel3.data_channel_identifier = 3;
-  expected_data_channel3.state = "closed";
+  expected_data_channel3.state = RTCDataChannelState::CLOSED;
   expected_data_channel3.messages_sent = 13;
   expected_data_channel3.bytes_sent = 14;
   expected_data_channel3.messages_received = 15;
@@ -2676,9 +2676,11 @@ class RTCStatsCollectorTestWithParamKind
 TEST_P(RTCStatsCollectorTestWithParamKind,
        RTCRemoteInboundRtpStreamStatsCollectedFromReportBlock) {
   const int64_t kReportBlockTimestampUtcUs = 123456789;
-  const int64_t kRoundTripTimeMs = 13000;
-  const double kRoundTripTimeSeconds = 13.0;
   const uint8_t kFractionLost = 12;
+  const int64_t kRoundTripTimeSample1Ms = 1234;
+  const double kRoundTripTimeSample1Seconds = 1.234;
+  const int64_t kRoundTripTimeSample2Ms = 13000;
+  const double kRoundTripTimeSample2Seconds = 13;
 
   // The report block's timestamp cannot be from the future, set the fake clock
   // to match.
@@ -2694,10 +2696,10 @@ TEST_P(RTCStatsCollectorTestWithParamKind,
     report_block.fraction_lost = kFractionLost;
     ReportBlockData report_block_data;
     report_block_data.SetReportBlock(report_block, kReportBlockTimestampUtcUs);
-    report_block_data.AddRoundTripTimeSample(1234);
+    report_block_data.AddRoundTripTimeSample(kRoundTripTimeSample1Ms);
     // Only the last sample should be exposed as the
     // |RTCRemoteInboundRtpStreamStats::round_trip_time|.
-    report_block_data.AddRoundTripTimeSample(kRoundTripTimeMs);
+    report_block_data.AddRoundTripTimeSample(kRoundTripTimeSample2Ms);
     report_block_datas.push_back(report_block_data);
   }
   AddSenderInfoAndMediaChannel("TransportName", report_block_datas,
@@ -2719,7 +2721,10 @@ TEST_P(RTCStatsCollectorTestWithParamKind,
     expected_remote_inbound_rtp.packets_lost = 7;
     expected_remote_inbound_rtp.local_id =
         "RTCOutboundRTP" + MediaTypeUpperCase() + stream_id;
-    expected_remote_inbound_rtp.round_trip_time = kRoundTripTimeSeconds;
+    expected_remote_inbound_rtp.round_trip_time = kRoundTripTimeSample2Seconds;
+    expected_remote_inbound_rtp.total_round_trip_time =
+        kRoundTripTimeSample1Seconds + kRoundTripTimeSample2Seconds;
+    expected_remote_inbound_rtp.round_trip_time_measurements = 2;
     // This test does not set up RTCCodecStats, so |codec_id| and |jitter| are
     // expected to be missing. These are tested separately.
 

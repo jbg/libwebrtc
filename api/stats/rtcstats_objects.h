@@ -23,12 +23,13 @@
 namespace webrtc {
 
 // https://w3c.github.io/webrtc-pc/#idl-def-rtcdatachannelstate
-struct RTCDataChannelState {
-  static const char* const kConnecting;
-  static const char* const kOpen;
-  static const char* const kClosing;
-  static const char* const kClosed;
+enum RTCDataChannelState {
+  CONNECTING,
+  OPEN,
+  CLOSING,
+  CLOSED,
 };
+const char* RTCDataChannelStateToString(RTCDataChannelState state);
 
 // https://w3c.github.io/webrtc-stats/#dom-rtcstatsicecandidatepairstate
 struct RTCStatsIceCandidatePairState {
@@ -136,8 +137,7 @@ class RTC_EXPORT RTCDataChannelStats final : public RTCStats {
   RTCStatsMember<std::string> label;
   RTCStatsMember<std::string> protocol;
   RTCStatsMember<int32_t> data_channel_identifier;
-  // TODO(hbos): Support enum types? "RTCStatsMember<RTCDataChannelState>"?
-  RTCStatsMember<std::string> state;
+  RTCStatsMember<RTCDataChannelState> state;
   RTCStatsMember<uint32_t> messages_sent;
   RTCStatsMember<uint64_t> bytes_sent;
   RTCStatsMember<uint32_t> messages_received;
@@ -556,6 +556,8 @@ class RTC_EXPORT RTCRemoteInboundRtpStreamStats final : public RTCStats {
   RTCStatsMember<std::string> local_id;
   RTCStatsMember<double> round_trip_time;
   RTCStatsMember<double> fraction_lost;
+  RTCStatsMember<double> total_round_trip_time;
+  RTCStatsMember<int32_t> round_trip_time_measurements;
 };
 
 // https://w3c.github.io/webrtc-stats/#dom-rtcmediasourcestats
