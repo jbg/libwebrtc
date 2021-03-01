@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc9640f7_3b62a4da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16600
+      },
+      "writtenOn": "2021-03-01T19:23:22Z",
+      "side": 1,
+      "message": "Rebased.\n\nMinor: Not sure what\u0027s the etiquette is here .. Should I always \"modify attention to\" you so you can take a look again? :) ",
+      "revId": "8a9e34a8dcffdb9da0257187476f9a4eb3343a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
