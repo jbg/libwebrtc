@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0021045_a1f212dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-01T16:16:46Z",
+      "side": 1,
+      "message": "Nice! LGTM. Just need to wait for chromium allow list CL to land before landing this",
+      "revId": "c1ae167d5007d5bf604b9a1a61045ad8f0657d75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
