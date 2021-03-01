@@ -306,7 +306,7 @@ class RTCStatsCollector : public virtual rtc::RefCountInterface,
 
 const char* CandidateTypeToRTCIceCandidateTypeForTesting(
     const std::string& type);
-const char* DataStateToRTCDataChannelStateForTesting(
+RTCDataChannelState DataStateToRTCDataChannelStateForTesting(
     DataChannelInterface::DataState state);
 
 }  // namespace webrtc

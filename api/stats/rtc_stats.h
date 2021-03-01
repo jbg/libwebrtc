@@ -237,6 +237,8 @@ class RTCStatsMemberInterface {
     kSequenceUint64,  // std::vector<uint64_t>
     kSequenceDouble,  // std::vector<double>
     kSequenceString,  // std::vector<std::string>
+
+    kDataChannelState,  // webrtc::DataChannelState
   };
 
   virtual ~RTCStatsMemberInterface() {}

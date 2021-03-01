@@ -71,7 +71,7 @@ TEST(RTCStatsTest, RTCStatsAndMembers) {
   EXPECT_EQ(stats.id(), "testId");
   EXPECT_EQ(stats.timestamp_us(), static_cast<int64_t>(42));
   std::vector<const RTCStatsMemberInterface*> members = stats.Members();
-  EXPECT_EQ(members.size(), static_cast<size_t>(14));
+  EXPECT_EQ(members.size(), static_cast<size_t>(15));
   for (const RTCStatsMemberInterface* member : members) {
     EXPECT_FALSE(member->is_defined());
   }
@@ -82,6 +82,7 @@ TEST(RTCStatsTest, RTCStatsAndMembers) {
   stats.m_uint64 = 123;
   stats.m_double = 123.0;
   stats.m_string = std::string("123");
+  stats.m_data_channel_state = RTCDataChannelState::OPEN;
 
   std::vector<bool> sequence_bool;
   sequence_bool.push_back(true);
@@ -123,6 +124,7 @@ TEST(RTCStatsTest, RTCStatsAndMembers) {
   EXPECT_EQ(*stats.m_sequence_uint64, sequence_uint64);
   EXPECT_EQ(*stats.m_sequence_double, sequence_double);
   EXPECT_EQ(*stats.m_sequence_string, sequence_string);
+  EXPECT_EQ(*stats.m_data_channel_state, RTCDataChannelState::OPEN);
 
   int32_t numbers[] = {4, 8, 15, 16, 23, 42};
   std::vector<int32_t> numbers_sequence(&numbers[0], &numbers[6]);
@@ -152,6 +154,7 @@ TEST(RTCStatsTest, EqualityOperator) {
   stats_with_all_values.m_sequence_uint64 = std::vector<uint64_t>();
   stats_with_all_values.m_sequence_double = std::vector<double>();
   stats_with_all_values.m_sequence_string = std::vector<std::string>();
+  stats_with_all_values.m_data_channel_state = RTCDataChannelState::OPEN;
   EXPECT_NE(stats_with_all_values, empty_stats);
   EXPECT_EQ(stats_with_all_values, stats_with_all_values);
   EXPECT_NE(stats_with_all_values.m_int32, stats_with_all_values.m_uint32);
@@ -161,7 +164,7 @@ TEST(RTCStatsTest, EqualityOperator) {
       stats_with_all_values, stats_with_all_values, stats_with_all_values,
       stats_with_all_values, stats_with_all_values, stats_with_all_values,
       stats_with_all_values, stats_with_all_values, stats_with_all_values,
-      stats_with_all_values, stats_with_all_values,
+      stats_with_all_values, stats_with_all_values, stats_with_all_values,
   };
   for (size_t i = 0; i < 14; ++i) {
     EXPECT_EQ(stats_with_all_values, one_member_different[i]);
@@ -180,7 +183,8 @@ TEST(RTCStatsTest, EqualityOperator) {
   one_member_different[11].m_sequence_uint64->push_back(321);
   one_member_different[12].m_sequence_double->push_back(321.0);
   one_member_different[13].m_sequence_string->push_back("321");
-  for (size_t i = 0; i < 14; ++i) {
+  one_member_different[14].m_data_channel_state = RTCDataChannelState::CLOSING;
+  for (size_t i = 0; i < 15; ++i) {
     EXPECT_NE(stats_with_all_values, one_member_different[i]);
   }
 
@@ -224,6 +228,7 @@ TEST(RTCStatsTest, RTCStatsPrintsValidJson) {
   int64_t m_int64 = 1234567890123456499L;
   double m_double = 123.4567890123456499;
   std::string m_string = "123";
+  std::string m_data_channel_state = "";
 
   std::vector<bool> sequence_bool;
   std::vector<int32_t> sequence_int32;
@@ -249,6 +254,7 @@ TEST(RTCStatsTest, RTCStatsPrintsValidJson) {
   stats.m_sequence_int64 = sequence_int64;
   stats.m_sequence_double = sequence_double;
   stats.m_sequence_string = sequence_string;
+  stats.m_data_channel_state = RTCDataChannelState::OPEN;
 
   Json::Value json_output;
   EXPECT_TRUE(Json::Reader().parse(stats.ToJson(), json_output));
@@ -259,6 +265,8 @@ TEST(RTCStatsTest, RTCStatsPrintsValidJson) {
   EXPECT_TRUE(rtc::GetIntFromJsonObject(json_output, "mInt32", &m_int32));
   EXPECT_TRUE(rtc::GetDoubleFromJsonObject(json_output, "mDouble", &m_double));
   EXPECT_TRUE(rtc::GetStringFromJsonObject(json_output, "mString", &m_string));
+  EXPECT_TRUE(rtc::GetStringFromJsonObject(json_output, "mDataChannelState",
+                                           &m_data_channel_state));
 
   Json::Value json_array;
 
@@ -286,6 +294,7 @@ TEST(RTCStatsTest, RTCStatsPrintsValidJson) {
   EXPECT_EQ(sequence_bool, *stats.m_sequence_bool);
   EXPECT_EQ(sequence_int32, *stats.m_sequence_int32);
   EXPECT_EQ(sequence_string, *stats.m_sequence_string);
+  EXPECT_EQ(m_data_channel_state, "open");
 
   EXPECT_NEAR(m_double, *stats.m_double, GetExpectedError(*stats.m_double));
 

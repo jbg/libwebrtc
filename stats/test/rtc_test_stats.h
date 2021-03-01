@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "api/stats/rtc_stats.h"
+#include "api/stats/rtcstats_objects.h"
 #include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {
@@ -42,6 +43,7 @@ class RTC_EXPORT RTCTestStats : public RTCStats {
   RTCStatsMember<std::vector<uint64_t>> m_sequence_uint64;
   RTCStatsMember<std::vector<double>> m_sequence_double;
   RTCStatsMember<std::vector<std::string>> m_sequence_string;
+  RTCStatsMember<RTCDataChannelState> m_data_channel_state;
 };
 
 }  // namespace webrtc
