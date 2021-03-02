@@ -59,7 +59,6 @@ class AsyncPacketSocketWrapper : public rtc::AsyncPacketSocket {
   rtc::AsyncPacketSocket::State GetState() const override {
     return rtc::AsyncPacketSocket::STATE_BOUND;
   }
-  int GetOption(rtc::Socket::Option opt, int* value) override { return 0; }
   int SetOption(rtc::Socket::Option opt, int value) override { return 0; }
   int GetError() const override { return 0; }
   void SetError(int error) override {}

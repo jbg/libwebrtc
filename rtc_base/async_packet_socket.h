@@ -89,8 +89,7 @@ class RTC_EXPORT AsyncPacketSocket : public sigslot::has_slots<> {
   // Returns current state of the socket.
   virtual State GetState() const = 0;
 
-  // Get/set options.
-  virtual int GetOption(Socket::Option opt, int* value) = 0;
+  // Set options.
   virtual int SetOption(Socket::Option opt, int value) = 0;
 
   // Get/Set current error.

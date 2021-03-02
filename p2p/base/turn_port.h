@@ -190,7 +190,6 @@ class TurnPort : public Port {
              const rtc::PacketOptions& options,
              bool payload) override;
   int SetOption(rtc::Socket::Option opt, int value) override;
-  int GetOption(rtc::Socket::Option opt, int* value) override;
   int GetError() override;
 
   bool HandleIncomingPacket(rtc::AsyncPacketSocket* socket,

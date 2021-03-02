@@ -62,7 +62,6 @@ class FakeNetworkSocket : public rtc::AsyncSocket,
   int GetError() const override;
   void SetError(int error) override;
   ConnState GetState() const override;
-  int GetOption(Option opt, int* value) override;
   int SetOption(Option opt, int value) override;
 
  private:
@@ -73,7 +72,6 @@ class FakeNetworkSocket : public rtc::AsyncSocket,
   rtc::SocketAddress remote_addr_ RTC_GUARDED_BY(&thread_);
   ConnState state_ RTC_GUARDED_BY(&thread_);
   int error_ RTC_GUARDED_BY(&thread_);
-  std::map<Option, int> options_map_ RTC_GUARDED_BY(&thread_);
 
   absl::optional<EmulatedIpPacket> pending_ RTC_GUARDED_BY(thread_);
   rtc::scoped_refptr<PendingTaskSafetyFlag> alive_;
@@ -254,19 +252,8 @@ rtc::AsyncSocket::ConnState FakeNetworkSocket::GetState() const {
   return state_;
 }
 
-int FakeNetworkSocket::GetOption(Option opt, int* value) {
-  RTC_DCHECK_RUN_ON(thread_);
-  auto it = options_map_.find(opt);
-  if (it == options_map_.end()) {
-    return -1;
-  }
-  *value = it->second;
-  return 0;
-}
-
 int FakeNetworkSocket::SetOption(Option opt, int value) {
   RTC_DCHECK_RUN_ON(thread_);
-  options_map_[opt] = value;
   return 0;
 }
 

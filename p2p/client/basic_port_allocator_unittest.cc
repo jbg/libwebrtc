@@ -377,23 +377,6 @@ class BasicPortAllocatorTestBase : public ::testing::Test,
     EXPECT_TRUE(session->CandidatesAllocationDone());
   }
 
-  // Check if all ports allocated have send-buffer size |expected|. If
-  // |expected| == -1, check if GetOptions returns SOCKET_ERROR.
-  void CheckSendBufferSizesOfAllPorts(int expected) {
-    std::vector<PortInterface*>::iterator it;
-    for (it = ports_.begin(); it < ports_.end(); ++it) {
-      int send_buffer_size;
-      if (expected == -1) {
-        EXPECT_EQ(SOCKET_ERROR,
-                  (*it)->GetOption(rtc::Socket::OPT_SNDBUF, &send_buffer_size));
-      } else {
-        EXPECT_EQ(0,
-                  (*it)->GetOption(rtc::Socket::OPT_SNDBUF, &send_buffer_size));
-        ASSERT_EQ(expected, send_buffer_size);
-      }
-    }
-  }
-
   rtc::VirtualSocketServer* virtual_socket_server() { return vss_.get(); }
 
  protected:
@@ -1161,9 +1144,6 @@ TEST_F(BasicPortAllocatorTest, TestSetupVideoRtpPortsWithNormalSendBuffers) {
   EXPECT_EQ(3U, candidates_.size());
   // If we Stop gathering now, we shouldn't get a second "done" callback.
   session_->StopGettingPorts();
-
-  // All ports should have unset send-buffer sizes.
-  CheckSendBufferSizesOfAllPorts(-1);
 }
 
 // Tests that we can get callback after StopGetAllPorts when called in the

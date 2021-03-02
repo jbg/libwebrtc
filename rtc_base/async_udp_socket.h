@@ -51,7 +51,6 @@ class AsyncUDPSocket : public AsyncPacketSocket {
   int Close() override;
 
   State GetState() const override;
-  int GetOption(Socket::Option opt, int* value) override;
   int SetOption(Socket::Option opt, int value) override;
   int GetError() const override;
   void SetError(int error) override;

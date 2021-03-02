@@ -91,7 +91,6 @@ class UDPPort : public Port {
   Connection* CreateConnection(const Candidate& address,
                                CandidateOrigin origin) override;
   int SetOption(rtc::Socket::Option opt, int value) override;
-  int GetOption(rtc::Socket::Option opt, int* value) override;
   int GetError() override;
 
   bool HandleIncomingPacket(rtc::AsyncPacketSocket* socket,

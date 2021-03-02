@@ -69,7 +69,6 @@ class AsyncSocketAdapter : public AsyncSocket, public sigslot::has_slots<> {
   int GetError() const override;
   void SetError(int error) override;
   ConnState GetState() const override;
-  int GetOption(Option opt, int* value) override;
   int SetOption(Option opt, int value) override;
 
  protected:

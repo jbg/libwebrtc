@@ -99,10 +99,6 @@ AsyncSocket::ConnState AsyncSocketAdapter::GetState() const {
   return socket_->GetState();
 }
 
-int AsyncSocketAdapter::GetOption(Option opt, int* value) {
-  return socket_->GetOption(opt, value);
-}
-
 int AsyncSocketAdapter::SetOption(Option opt, int value) {
   return socket_->SetOption(opt, value);
 }

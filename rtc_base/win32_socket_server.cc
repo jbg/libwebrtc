@@ -377,17 +377,6 @@ Socket::ConnState Win32Socket::GetState() const {
   return state_;
 }
 
-int Win32Socket::GetOption(Option opt, int* value) {
-  int slevel;
-  int sopt;
-  if (TranslateOption(opt, &slevel, &sopt) == -1)
-    return -1;
-
-  char* p = reinterpret_cast<char*>(value);
-  int optlen = sizeof(value);
-  return ::getsockopt(socket_, slevel, sopt, p, &optlen);
-}
-
 int Win32Socket::SetOption(Option opt, int value) {
   int slevel;
   int sopt;

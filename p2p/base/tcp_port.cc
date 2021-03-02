@@ -245,14 +245,6 @@ int TCPPort::SendTo(const void* data,
   return sent;
 }
 
-int TCPPort::GetOption(rtc::Socket::Option opt, int* value) {
-  if (socket_) {
-    return socket_->GetOption(opt, value);
-  } else {
-    return SOCKET_ERROR;
-  }
-}
-
 int TCPPort::SetOption(rtc::Socket::Option opt, int value) {
   if (socket_) {
     return socket_->SetOption(opt, value);

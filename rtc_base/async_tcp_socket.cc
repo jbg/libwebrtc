@@ -119,10 +119,6 @@ AsyncTCPSocket::State AsyncTCPSocketBase::GetState() const {
   }
 }
 
-int AsyncTCPSocketBase::GetOption(Socket::Option opt, int* value) {
-  return socket_->GetOption(opt, value);
-}
-
 int AsyncTCPSocketBase::SetOption(Socket::Option opt, int value) {
   return socket_->SetOption(opt, value);
 }

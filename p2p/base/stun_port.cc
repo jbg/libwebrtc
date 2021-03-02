@@ -331,10 +331,6 @@ int UDPPort::SetOption(rtc::Socket::Option opt, int value) {
   return socket_->SetOption(opt, value);
 }
 
-int UDPPort::GetOption(rtc::Socket::Option opt, int* value) {
-  return socket_->GetOption(opt, value);
-}
-
 int UDPPort::GetError() {
   return error_;
 }

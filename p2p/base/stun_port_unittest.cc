@@ -426,10 +426,6 @@ class MockAsyncPacketSocket : public rtc::AsyncPacketSocket {
               (override));
   MOCK_METHOD(int, Close, (), (override));
   MOCK_METHOD(State, GetState, (), (const, override));
-  MOCK_METHOD(int,
-              GetOption,
-              (rtc::Socket::Option opt, int* value),
-              (override));
   MOCK_METHOD(int, SetOption, (rtc::Socket::Option opt, int value), (override));
   MOCK_METHOD(int, GetError, (), (const, override));
   MOCK_METHOD(void, SetError, (int error), (override));
