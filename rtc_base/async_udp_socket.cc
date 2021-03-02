@@ -95,10 +95,6 @@ AsyncUDPSocket::State AsyncUDPSocket::GetState() const {
   return STATE_BOUND;
 }
 
-int AsyncUDPSocket::GetOption(Socket::Option opt, int* value) {
-  return socket_->GetOption(opt, value);
-}
-
 int AsyncUDPSocket::SetOption(Socket::Option opt, int value) {
   return socket_->SetOption(opt, value);
 }

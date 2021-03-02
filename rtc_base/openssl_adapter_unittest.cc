@@ -45,7 +45,6 @@ class MockAsyncSocket : public AsyncSocket {
   MOCK_METHOD(int, GetError, (), (const, override));
   MOCK_METHOD(void, SetError, (int), (override));
   MOCK_METHOD(ConnState, GetState, (), (const, override));
-  MOCK_METHOD(int, GetOption, (Option, int*), (override));
   MOCK_METHOD(int, SetOption, (Option, int), (override));
 };
 

@@ -79,7 +79,6 @@ class PortInterface {
 
   // Functions on the underlying socket(s).
   virtual int SetOption(rtc::Socket::Option opt, int value) = 0;
-  virtual int GetOption(rtc::Socket::Option opt, int* value) = 0;
   virtual int GetError() = 0;
 
   virtual ProtocolType GetProtocol() const = 0;

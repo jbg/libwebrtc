@@ -287,29 +287,6 @@ AsyncSocket::ConnState PhysicalSocket::GetState() const {
   return state_;
 }
 
-int PhysicalSocket::GetOption(Option opt, int* value) {
-  int slevel;
-  int sopt;
-  if (TranslateOption(opt, &slevel, &sopt) == -1)
-    return -1;
-  socklen_t optlen = sizeof(*value);
-  int ret = ::getsockopt(s_, slevel, sopt, (SockOptArg)value, &optlen);
-  if (ret == -1) {
-    return -1;
-  }
-  if (opt == OPT_DONTFRAGMENT) {
-#if defined(WEBRTC_LINUX) && !defined(WEBRTC_ANDROID)
-    *value = (*value != IP_PMTUDISC_DONT) ? 1 : 0;
-#endif
-  } else if (opt == OPT_DSCP) {
-#if defined(WEBRTC_POSIX)
-    // unshift DSCP value to get six most significant bits of IP DiffServ field
-    *value >>= 2;
-#endif
-  }
-  return ret;
-}
-
 int PhysicalSocket::SetOption(Option opt, int value) {
   int slevel;
   int sopt;

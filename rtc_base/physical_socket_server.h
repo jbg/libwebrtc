@@ -149,7 +149,6 @@ class PhysicalSocket : public AsyncSocket, public sigslot::has_slots<> {
 
   ConnState GetState() const override;
 
-  int GetOption(Option opt, int* value) override;
   int SetOption(Option opt, int value) override;
 
   int Send(const void* pv, size_t cb) override;

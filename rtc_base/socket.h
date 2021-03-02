@@ -121,7 +121,6 @@ class Socket {
                                // This is specific to libjingle and will be used
                                // if SendTime option is needed at socket level.
   };
-  virtual int GetOption(Option opt, int* value) = 0;
   virtual int SetOption(Option opt, int value) = 0;
 
  protected:

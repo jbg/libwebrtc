@@ -612,19 +612,6 @@ int TurnPort::SetOption(rtc::Socket::Option opt, int value) {
   return socket_->SetOption(opt, value);
 }
 
-int TurnPort::GetOption(rtc::Socket::Option opt, int* value) {
-  if (!socket_) {
-    SocketOptionsMap::const_iterator it = socket_options_.find(opt);
-    if (it == socket_options_.end()) {
-      return -1;
-    }
-    *value = it->second;
-    return 0;
-  }
-
-  return socket_->GetOption(opt, value);
-}
-
 int TurnPort::GetError() {
   return error_;
 }

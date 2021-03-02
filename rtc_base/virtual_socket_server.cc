@@ -326,15 +326,6 @@ Socket::ConnState VirtualSocket::GetState() const {
   return state_;
 }
 
-int VirtualSocket::GetOption(Option opt, int* value) {
-  OptionsMap::const_iterator it = options_map_.find(opt);
-  if (it == options_map_.end()) {
-    return -1;
-  }
-  *value = it->second;
-  return 0;  // 0 is success to emulate getsockopt()
-}
-
 int VirtualSocket::SetOption(Option opt, int value) {
   options_map_[opt] = value;
   return 0;  // 0 is success to emulate setsockopt()
@@ -1204,16 +1195,13 @@ bool VirtualSocketServer::CanInteractWith(VirtualSocket* local,
     return true;
   }
 
-  // If ip1 is IPv4 and ip2 is :: and ip2 is not IPV6_V6ONLY.
-  int remote_v6_only = 0;
-  remote->GetOption(Socket::OPT_IPV6_V6ONLY, &remote_v6_only);
-  if (local_ip.family() == AF_INET && !remote_v6_only && IPIsAny(remote_ip)) {
+  // Assume not IPv6ONLY
+  // If ip1 is IPv4 and ip2 is ::.
+  if (local_ip.family() == AF_INET && IPIsAny(remote_ip)) {
     return true;
   }
   // Same check, backwards.
-  int local_v6_only = 0;
-  local->GetOption(Socket::OPT_IPV6_V6ONLY, &local_v6_only);
-  if (remote_ip.family() == AF_INET && !local_v6_only && IPIsAny(local_ip)) {
+  if (remote_ip.family() == AF_INET && IPIsAny(local_ip)) {
     return true;
   }
 

@@ -52,7 +52,6 @@ class TCPPort : public Port {
 
   void PrepareAddress() override;
 
-  int GetOption(rtc::Socket::Option opt, int* value) override;
   int SetOption(rtc::Socket::Option opt, int value) override;
   int GetError() override;
   bool SupportsProtocol(const std::string& protocol) const override;

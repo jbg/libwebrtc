@@ -1047,39 +1047,18 @@ void SocketTest::GetSetOptionsInternal(const IPAddress& loopback) {
 
   // Check SNDBUF/RCVBUF.
   const int desired_size = 12345;
-#if defined(WEBRTC_LINUX)
-  // Yes, really.  It's in the kernel source.
-  const int expected_size = desired_size * 2;
-#else   // !WEBRTC_LINUX
-  const int expected_size = desired_size;
-#endif  // !WEBRTC_LINUX
-  int recv_size = 0;
-  int send_size = 0;
-  // get the initial sizes
-  ASSERT_NE(-1, socket->GetOption(Socket::OPT_RCVBUF, &recv_size));
-  ASSERT_NE(-1, socket->GetOption(Socket::OPT_SNDBUF, &send_size));
   // set our desired sizes
   ASSERT_NE(-1, socket->SetOption(Socket::OPT_RCVBUF, desired_size));
   ASSERT_NE(-1, socket->SetOption(Socket::OPT_SNDBUF, desired_size));
-  // get the sizes again
-  ASSERT_NE(-1, socket->GetOption(Socket::OPT_RCVBUF, &recv_size));
-  ASSERT_NE(-1, socket->GetOption(Socket::OPT_SNDBUF, &send_size));
-  // make sure they are right
-  ASSERT_EQ(expected_size, recv_size);
-  ASSERT_EQ(expected_size, send_size);
 
   // Check that we can't set NODELAY on a UDP socket.
-  int current_nd, desired_nd = 1;
-  ASSERT_EQ(-1, socket->GetOption(Socket::OPT_NODELAY, &current_nd));
+  int desired_nd = 1;
   ASSERT_EQ(-1, socket->SetOption(Socket::OPT_NODELAY, desired_nd));
 
 #if defined(WEBRTC_POSIX)
   // Check DSCP.
-  int current_dscp, desired_dscp = 1;
-  ASSERT_NE(-1, socket->GetOption(Socket::OPT_DSCP, &current_dscp));
+  int desired_dscp = 1;
   ASSERT_NE(-1, socket->SetOption(Socket::OPT_DSCP, desired_dscp));
-  ASSERT_NE(-1, socket->GetOption(Socket::OPT_DSCP, &current_dscp));
-  ASSERT_EQ(desired_dscp, current_dscp);
 #endif
 }
 
