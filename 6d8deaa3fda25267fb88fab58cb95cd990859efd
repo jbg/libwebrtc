@@ -87,6 +87,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb51b772_3771fa96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-03T08:16:58Z",
+      "side": 1,
+      "message": "Hi Kári,\n\nSorry for bothering you while you might be very busy with your current tasks.\nCould you please let me know if you still think it is still relevant to implement your previous request about binary size taking into account my explanation about difference with AV1 and VP9 integration to WebRTC? I mean when AV1 is enabled only tiny ObjC wrappers will be included in SDK, but AV1 codec will not increase binary size.\nLet me know if you just busy and don\u0027t have enough time to think about my request.\n\nThanks a lot in advance!",
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d58bca5_7d165b82",
