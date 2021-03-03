@@ -33,6 +33,23 @@
       "message": "It seems like there is also need an LGTM from the owner of sdk/BUILD.gn, which is currently magjed@webrtc.org, but he is taking parental leave according to status here. Could please anybody else give LGTM on srg/BUILD.gn?\n\nMikro Bonadei, you have a lot of commits somehow related to build files. Maybe you could give me LGTM and send CL without pre-submit check? Thanks a lot in advance!",
       "revId": "7c7b0e8a17f2ac90f7fb3429ba58a063b80aaf70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "507b6eee_bd939b48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-03T19:58:27Z",
+      "side": 1,
+      "message": "Since Kari has signed off on the addition of av1 to the default codec factory for objc, I can sign off on the BUILD file changes.\n",
+      "revId": "7c7b0e8a17f2ac90f7fb3429ba58a063b80aaf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
