@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f49ade3_cb5d84ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-03-03T09:18:10Z",
+      "side": 1,
+      "message": "Thanks for the detailed explanation! My concern is that when `enable_libaom` is set to false it will still be included in SDP as-is, though with a non-functional implementation, or am I misunderstanding something? I think it might be convenient to add a define that we can use to omit it from the default decoder/encoder factories when compiling without `enable_libaom`.",
+      "parentUuid": "cda77d15_3a1b2b5a",
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d58bca5_7d165b82",
         "filename": "sdk/BUILD.gn",
         "patchSetId": 1
