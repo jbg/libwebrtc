@@ -50,6 +50,23 @@
       "message": "I think it would be better if this was:\n\n  rtc::scoped_refptr\u003cUsrSctpWrapper\u003e GetOrCreateInstance(\n      rtc::Thread* usrsctp_thread)\n\nThat would require moving UsrSctpWrapper to a header file, which is why I haven\u0027t done it yet.",
       "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9c57af1_f8ceccc8",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-03T02:36:11Z",
+      "side": 1,
+      "message": "It\u0027s not ideal that this and ConnInput block the network thread, which could delay receiving RTP packets.\n\nThough again, may not be worth worrying about if `usrsctp_thread \u003d\u003d network_thread` is expected to be the default.",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

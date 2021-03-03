@@ -16,6 +16,23 @@
       "message": "It\u0027s unfortunate that we can no longer use RTC_LOG_ERRNO. Maybe all of the UsrSctpWrapper methods could internally copy the value of errno from the usrsctp thread to the calling thread?",
       "revId": "a88fe7be146b9b85575504d4d5193c007f2e3de4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d5ff5ac_d0809b00",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-03T02:36:11Z",
+      "side": 0,
+      "message": "This results in a bunch of Invokes if `usrsctp_thread !\u003d network_thread`. We could move all this logic to UsrSctpWrapper, though that someone breaks encapsulation.\n\nMaybe it\u0027s not worth worrying about if we expect that `usrsctp_thread \u003d\u003d network_thread` will be the general case, with the only exceptions being tests.",
+      "revId": "a88fe7be146b9b85575504d4d5193c007f2e3de4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
