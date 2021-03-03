@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e98adc_3476e111",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-03T02:22:49Z",
+      "side": 1,
+      "message": "Could also be a boolean \"use_network_thread_for_usrsctp\". Though I\u0027m not sure where that would go (PeerConnectionFactoryInterface::Options?)",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de30eb0_0514c8ac",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-03T02:22:49Z",
+      "side": 1,
+      "message": "Looking at the code, I don\u0027t *think* it\u0027s currently possible for the iterator thread to invoke a callback. But that\u0027s not necessarily a guarantee.",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bbd53de_888271cd",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-03T02:22:49Z",
+      "side": 1,
+      "message": "I think it would be better if this was:\n\n  rtc::scoped_refptr\u003cUsrSctpWrapper\u003e GetOrCreateInstance(\n      rtc::Thread* usrsctp_thread)\n\nThat would require moving UsrSctpWrapper to a header file, which is why I haven\u0027t done it yet.",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
