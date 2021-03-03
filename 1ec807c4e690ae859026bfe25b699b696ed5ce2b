@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7bfcd1d_07de52e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2021-03-03T05:40:54Z",
+      "side": 1,
+      "message": "Alessio, by removing the SSE intrinsic code in avx2 code, the performance has been improved a lot, PTAL",
+      "revId": "1ec807c4e690ae859026bfe25b699b696ed5ce2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
