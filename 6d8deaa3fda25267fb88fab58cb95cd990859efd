@@ -163,6 +163,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f752956_d42b0626",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-03T11:24:43Z",
+      "side": 1,
+      "message": "Actual codec presence is controlled by `enable_libaom` build flag which is used inside `libaom_av1_decoder` and `libaom_av1_encoderz` targets.",
+      "parentUuid": "2d58bca5_7d165b82",
+      "range": {
+        "startLine": 648,
+        "startChar": 10,
+        "endLine": 648,
+        "endChar": 13
+      },
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82da78a9_f3010995",
@@ -186,6 +210,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa51e7b7_68eae7ad",
+        "filename": "sdk/objc/components/video_codec/RTCDefaultVideoDecoderFactory.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-03T11:24:43Z",
+      "side": 1,
+      "message": "Added dynamic check for decoder.",
+      "parentUuid": "82da78a9_f3010995",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2794c7d_3211e5ae",
@@ -199,6 +247,30 @@
       "writtenOn": "2021-02-24T14:39:06Z",
       "side": 1,
       "message": "this also needs ifdefs",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 0
+      },
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62606c28_bbe4f26f",
+        "filename": "sdk/objc/components/video_codec/RTCDefaultVideoEncoderFactory.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-03T11:24:43Z",
+      "side": 1,
+      "message": "Added dynamic check for encoder.",
+      "parentUuid": "c2794c7d_3211e5ae",
       "range": {
         "startLine": 54,
         "startChar": 2,
