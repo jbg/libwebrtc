@@ -124,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5921e63_d9742925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-03T09:34:38Z",
+      "side": 1,
+      "message": "Thanks a lot for explanation! I just missed that list of codecs in default factory will be reflected and SDP and it is a problem if codec is included, but doesn\u0027t actually work. I uploaded fix for this problem. I also changed VP9 codec wrapper a bit in favor of dynamic check instead of #ifdef (I can rollback if necessary) and do the same dynamic check for AV1.",
+      "parentUuid": "2f49ade3_cb5d84ec",
+      "revId": "6d8deaa3fda25267fb88fab58cb95cd990859efd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d58bca5_7d165b82",
         "filename": "sdk/BUILD.gn",
         "patchSetId": 1
