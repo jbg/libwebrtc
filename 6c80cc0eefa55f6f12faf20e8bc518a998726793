@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d0a3832_7737a490",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-03-03T21:46:15Z",
+      "side": 1,
+      "message": "Hi Sam, I\u0027ve fixed the portrait oriented monitor screen capture bug you reported, PTAL.\n\nJoe@ as the OWNER can you PTAL as well?\n\nThanks!",
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
