@@ -16,6 +16,92 @@
       "message": "Hi Sam, I\u0027ve fixed the portrait oriented monitor screen capture bug you reported, PTAL.\n\nJoe@ as the OWNER can you PTAL as well?\n\nThanks!",
       "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f522778d_ae2580dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15369
+      },
+      "writtenOn": "2021-03-03T23:47:25Z",
+      "side": 1,
+      "message": "Some questions.",
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "699ff441_5135aad5",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 15369
+      },
+      "writtenOn": "2021-03-03T23:47:25Z",
+      "side": 1,
+      "message": "Do we still need to do this when the size has not changed i.e the new size is equal to the previous size ?",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 0
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e99d0f72_6d96597e",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 15369
+      },
+      "writtenOn": "2021-03-03T23:47:25Z",
+      "side": 1,
+      "message": "nit. Should we use \"int\" here since the datatype is not complex ?",
+      "range": {
+        "startLine": 202,
+        "startChar": 7,
+        "endLine": 202,
+        "endChar": 12
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25364679_9e280e25",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 15369
+      },
+      "writtenOn": "2021-03-03T23:47:25Z",
+      "side": 1,
+      "message": "Can map_info.RowPitch be less than row_data_length ? If so, we can end up copying some part of the same data in the next iteration.\nSame when map_info.RowPitch \u003e row_data_length, we can end up not copying some data from src_data.",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 35
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
