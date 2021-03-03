@@ -1353,6 +1353,10 @@ struct RTC_EXPORT PeerConnectionFactoryDependencies final {
   rtc::Thread* network_thread = nullptr;
   rtc::Thread* worker_thread = nullptr;
   rtc::Thread* signaling_thread = nullptr;
+  // Thread used for all usrsctp operations. If non-null, it must be set to the
+  // same value for all PeerConnectionFactory instances. Recommend setting this
+  // to |network_thread| for optimal performance.
+  rtc::Thread* usrsctp_thread = nullptr;
   std::unique_ptr<TaskQueueFactory> task_queue_factory;
   std::unique_ptr<cricket::MediaEngineInterface> media_engine;
   std::unique_ptr<CallFactoryInterface> call_factory;

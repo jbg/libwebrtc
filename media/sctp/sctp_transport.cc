@@ -48,6 +48,7 @@ constexpr int kSctpErrorReturn = 0;
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/string_utils.h"
 #include "rtc_base/synchronization/mutex.h"
+#include "rtc_base/task_utils/repeating_task.h"
 #include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/thread_annotations.h"
 #include "rtc_base/trace_event.h"
@@ -68,6 +69,10 @@ namespace {
 //   -4 TURN ChannelData
 // = 1191 bytes.
 static constexpr size_t kSctpMtu = 1191;
+
+// The same delay is used by `SCTP timer` thread within usrsctp, when
+// it is enabled during library initialization.
+static constexpr int kUsrsctpTimerGranularityMillis = 10;
 
 // Set the initial value of the static SCTP Data Engines reference count.
 ABSL_CONST_INIT int g_usrsctp_usage_count = 0;
@@ -92,9 +97,6 @@ enum {
   PPID_TEXT_PARTIAL = 54,
   PPID_TEXT_LAST = 51
 };
-
-// Should only be modified by UsrSctpWrapper.
-ABSL_CONST_INIT cricket::SctpTransportMap* g_transport_map_ = nullptr;
 
 // Helper for logging SCTP messages.
 #if defined(__GNUC__)
@@ -279,112 +281,228 @@ class SctpTransportMap {
     return it->second;
   }
 
+  // Note: In theory this lock wouldn't be necessary, as all operations on this
+  // class should run on UsrSctpWrapper::thread_. But there is still a usrsctp
+  // "interator thread" which could in theory invoke a callback, so we still use
+  // a lock here to be safe
   mutable webrtc::Mutex lock_;
 
   uintptr_t next_id_ RTC_GUARDED_BY(lock_) = 0;
   std::unordered_map<uintptr_t, SctpTransport*> map_ RTC_GUARDED_BY(lock_);
 };
 
+// Represents instance of usrsctp library initialized in single-threaded mode.
+//
 // Handles global init/deinit, and mapping from usrsctp callbacks to
-// SctpTransport calls.
+// SctpTransport calls. Also provides wrapper methods for usrsctp functions used
+// by SctpTransport to marshal method execution to appropriate thread.
 class SctpTransport::UsrSctpWrapper {
  public:
-  static void InitializeUsrSctp() {
-    RTC_LOG(LS_INFO) << __FUNCTION__;
-    // UninitializeUsrSctp tries to call usrsctp_finish in a loop for three
-    // seconds; if that failed and we were left in a still-initialized state, we
-    // don't want to call usrsctp_init again as that will result in undefined
-    // behavior.
-    if (g_usrsctp_initialized_) {
-      RTC_LOG(LS_WARNING) << "Not reinitializing usrsctp since last attempt at "
-                             "usrsctp_finish failed.";
-    } else {
-      // First argument is udp_encapsulation_port, which is not releveant for
-      // our AF_CONN use of sctp.
-      usrsctp_init(0, &UsrSctpWrapper::OnSctpOutboundPacket, &DebugSctpPrintf);
-      g_usrsctp_initialized_ = true;
-    }
+  static UsrSctpWrapper* Instance() { return instance_; }
 
-    // To turn on/off detailed SCTP debugging. You will also need to have the
-    // SCTP_DEBUG cpp defines flag, which can be turned on in media/BUILD.gn.
-    // usrsctp_sysctl_set_sctp_debug_on(SCTP_DEBUG_ALL);
-
-    // TODO(ldixon): Consider turning this on/off.
-    usrsctp_sysctl_set_sctp_ecn_enable(0);
-
-    // WebRTC doesn't use these features, so disable them to reduce the
-    // potential attack surface.
-    usrsctp_sysctl_set_sctp_asconf_enable(0);
-    usrsctp_sysctl_set_sctp_auth_enable(0);
-
-    // This is harmless, but we should find out when the library default
-    // changes.
-    int send_size = usrsctp_sysctl_get_sctp_sendspace();
-    if (send_size != kSctpSendBufferSize) {
-      RTC_LOG(LS_ERROR) << "Got different send size than expected: "
-                        << send_size;
-    }
-
-    // TODO(ldixon): Consider turning this on/off.
-    // This is not needed right now (we don't do dynamic address changes):
-    // If SCTP Auto-ASCONF is enabled, the peer is informed automatically
-    // when a new address is added or removed. This feature is enabled by
-    // default.
-    // usrsctp_sysctl_set_sctp_auto_asconf(0);
-
-    // TODO(ldixon): Consider turning this on/off.
-    // Add a blackhole sysctl. Setting it to 1 results in no ABORTs
-    // being sent in response to INITs, setting it to 2 results
-    // in no ABORTs being sent for received OOTB packets.
-    // This is similar to the TCP sysctl.
-    //
-    // See: http://lakerest.net/pipermail/sctp-coders/2012-January/009438.html
-    // See: http://svnweb.freebsd.org/base?view=revision&revision=229805
-    // usrsctp_sysctl_set_sctp_blackhole(2);
-
-    // Set the number of default outgoing streams. This is the number we'll
-    // send in the SCTP INIT message.
-    usrsctp_sysctl_set_sctp_nr_outgoing_streams_default(kMaxSctpStreams);
-
-    g_transport_map_ = new SctpTransportMap();
-  }
-
-  static void UninitializeUsrSctp() {
-    RTC_LOG(LS_INFO) << __FUNCTION__;
-    // usrsctp_finish() may fail if it's called too soon after the transports
-    // are
-    // closed. Wait and try again until it succeeds for up to 3 seconds.
-    for (size_t i = 0; i < 300; ++i) {
-      if (usrsctp_finish() == 0) {
-        g_usrsctp_initialized_ = false;
-        delete g_transport_map_;
-        g_transport_map_ = nullptr;
-        return;
-      }
-
-      rtc::Thread::SleepMs(10);
-    }
-    delete g_transport_map_;
-    g_transport_map_ = nullptr;
-    RTC_LOG(LS_ERROR) << "Failed to shutdown usrsctp.";
-  }
-
-  static void IncrementUsrSctpUsageCount() {
+  static bool IncrementUsrSctpUsageCount(rtc::Thread* usrsctp_thread) {
     webrtc::GlobalMutexLock lock(&g_usrsctp_lock_);
-    if (!g_usrsctp_usage_count) {
-      InitializeUsrSctp();
+    if (instance_) {
+      if (!instance_->ValidateThread(usrsctp_thread)) {
+        return false;
+      }
+    } else {
+      instance_ = new UsrSctpWrapper(usrsctp_thread);
     }
     ++g_usrsctp_usage_count;
+    return true;
   }
 
   static void DecrementUsrSctpUsageCount() {
     webrtc::GlobalMutexLock lock(&g_usrsctp_lock_);
     --g_usrsctp_usage_count;
     if (!g_usrsctp_usage_count) {
-      UninitializeUsrSctp();
+      delete instance_;
+      instance_ = nullptr;
     }
   }
 
+  int GetLAddrs(struct socket* so, sctp_assoc_t id, struct sockaddr** raddrs) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<int>(RTC_FROM_HERE, [this, so, id, raddrs] {
+        return GetLAddrs(so, id, raddrs);
+      });
+    }
+
+    return usrsctp_getladdrs(so, id, raddrs);
+  }
+
+  void FreeLAddrs(struct sockaddr* addrs) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<void>(RTC_FROM_HERE,
+                                   [this, addrs] { FreeLAddrs(addrs); });
+    }
+    return usrsctp_freeladdrs(addrs);
+  }
+
+  ssize_t SendV(struct socket* so,
+                const void* data,
+                size_t len,
+                struct sockaddr* to,
+                int addrcnt,
+                void* info,
+                socklen_t infolen,
+                unsigned int infotype,
+                int flags,
+                int* error_number) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<ssize_t>(
+          RTC_FROM_HERE, [this, so, data, len, to, addrcnt, info, infolen,
+                          infotype, flags, error_number] {
+            return SendV(so, data, len, to, addrcnt, info, infolen, infotype,
+                         flags, error_number);
+          });
+    }
+
+    auto ret = usrsctp_sendv(so, data, len, to, addrcnt, info, infolen,
+                             infotype, flags);
+    if (error_number != nullptr) {
+      *error_number = errno;
+    }
+    return ret;
+  }
+
+  int Bind(struct socket* so,
+           struct sockaddr* name,
+           int namelen,
+           int* error_number) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<ssize_t>(
+          RTC_FROM_HERE, [this, so, name, namelen, error_number] {
+            return Bind(so, name, namelen, error_number);
+          });
+    }
+
+    auto ret = usrsctp_bind(so, name, namelen);
+    if (error_number != nullptr) {
+      *error_number = errno;
+    }
+    return ret;
+  }
+
+  int Connect(struct socket* so,
+              struct sockaddr* name,
+              int namelen,
+              int* error_number) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<ssize_t>(
+          RTC_FROM_HERE, [this, so, name, namelen, error_number] {
+            return Connect(so, name, namelen, error_number);
+          });
+    }
+
+    auto ret = usrsctp_connect(so, name, namelen);
+    if (error_number != nullptr) {
+      *error_number = errno;
+    }
+    return ret;
+  }
+
+  int SetSockOpt(struct socket* so,
+                 int level,
+                 int option_name,
+                 const void* option_value,
+                 socklen_t option_len) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<int>(RTC_FROM_HERE, [this, so, level, option_name,
+                                                  option_value, option_len] {
+        return SetSockOpt(so, level, option_name, option_value, option_len);
+      });
+    }
+
+    return usrsctp_setsockopt(so, level, option_name, option_value, option_len);
+  }
+
+  struct socket* Socket(int domain,
+                        int type,
+                        int protocol,
+                        uint32_t sb_threshold,
+                        SctpTransport* transport,
+                        int* error_number) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<struct socket*>(
+          RTC_FROM_HERE, [this, domain, type, protocol, sb_threshold, transport,
+                          error_number] {
+            return Socket(domain, type, protocol, sb_threshold, transport,
+                          error_number);
+          });
+    }
+
+    auto ret = usrsctp_socket(
+        domain, type, protocol, &UsrSctpWrapper::OnSctpInboundPacket,
+        &UsrSctpWrapper::SendThresholdCallback, sb_threshold, transport);
+    if (error_number != nullptr) {
+      *error_number = errno;
+    }
+    return ret;
+  }
+
+  uint32_t GetSctpSendspace() {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<uint32_t>(RTC_FROM_HERE,
+                                       [this] { return GetSctpSendspace(); });
+    }
+    return usrsctp_sysctl_get_sctp_sendspace();
+  }
+
+  uintptr_t Register(SctpTransport* transport) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<uintptr_t>(
+          RTC_FROM_HERE, [this, transport] { return Register(transport); });
+    }
+    uintptr_t id = transport_map_.Register(transport);
+    usrsctp_register_address(reinterpret_cast<void*>(id));
+    return id;
+  }
+
+  bool Deregister(uintptr_t id) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<bool>(RTC_FROM_HERE,
+                                   [this, id] { return Deregister(id); });
+    }
+
+    usrsctp_deregister_address(reinterpret_cast<void*>(id));
+    return transport_map_.Deregister(id);
+  }
+
+  void ConnInput(void* addr,
+                 const void* buffer,
+                 size_t length,
+                 uint8_t ecn_bits) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<void>(RTC_FROM_HERE,
+                                   [this, addr, buffer, length, ecn_bits] {
+                                     ConnInput(addr, buffer, length, ecn_bits);
+                                   });
+    }
+
+    return usrsctp_conninput(addr, buffer, length, ecn_bits);
+  }
+
+  void Close(struct socket* so) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<void>(RTC_FROM_HERE, [this, so] { Close(so); });
+    }
+
+    return usrsctp_close(so);
+  }
+
+  int SetNonBlocking(struct socket* so, int onoff) {
+    if (!thread_->IsCurrent()) {
+      return thread_->Invoke<int>(RTC_FROM_HERE, [this, so, onoff] {
+        return SetNonBlocking(so, onoff);
+      });
+    }
+
+    return usrsctp_set_non_blocking(so, onoff);
+  }
+
+ private:
   // This is the callback usrsctp uses when there's data to send on the network
   // that has been wrapped appropriatly for the SCTP protocol.
   static int OnSctpOutboundPacket(void* addr,
@@ -392,11 +510,12 @@ class SctpTransport::UsrSctpWrapper {
                                   size_t length,
                                   uint8_t tos,
                                   uint8_t set_df) {
-    if (!g_transport_map_) {
+    if (!instance_) {
       RTC_LOG(LS_ERROR)
           << "OnSctpOutboundPacket called after usrsctp uninitialized?";
       return EINVAL;
     }
+
     RTC_LOG(LS_VERBOSE) << "global OnSctpOutboundPacket():"
                            "addr: "
                         << addr << "; length: " << length
@@ -411,7 +530,7 @@ class SctpTransport::UsrSctpWrapper {
     // PostsToTransportThread protects against the transport being
     // simultaneously deregistered/deleted, since this callback may come from
     // the SCTP timer thread and thus race with the network thread.
-    bool found = g_transport_map_->PostToTransportThread(
+    bool found = instance_->transport_map_.PostToTransportThread(
         reinterpret_cast<uintptr_t>(addr), [buf](SctpTransport* transport) {
           transport->OnPacketFromSctpToNetwork(buf);
         });
@@ -449,7 +568,7 @@ class SctpTransport::UsrSctpWrapper {
       return kSctpErrorReturn;
     }
 
-    if (!g_transport_map_) {
+    if (!instance_) {
       RTC_LOG(LS_ERROR)
           << "OnSctpInboundPacket called after usrsctp uninitialized?";
       return kSctpErrorReturn;
@@ -457,7 +576,7 @@ class SctpTransport::UsrSctpWrapper {
     // PostsToTransportThread protects against the transport being
     // simultaneously deregistered/deleted, since this callback may come from
     // the SCTP timer thread and thus race with the network thread.
-    bool found = g_transport_map_->PostToTransportThread(
+    bool found = instance_->transport_map_.PostToTransportThread(
         *id, [owned_data{std::move(owned_data)}, length, rcv,
               flags](SctpTransport* transport) {
           transport->OnDataOrNotificationFromSctp(owned_data.get(), length, rcv,
@@ -506,12 +625,12 @@ class SctpTransport::UsrSctpWrapper {
           << sock;
       return 0;
     }
-    if (!g_transport_map_) {
+    if (!instance_) {
       RTC_LOG(LS_ERROR)
           << "SendThresholdCallback called after usrsctp uninitialized?";
       return 0;
     }
-    bool found = g_transport_map_->PostToTransportThread(
+    bool found = instance_->transport_map_.PostToTransportThread(
         *id,
         [](SctpTransport* transport) { transport->OnSendThresholdCallback(); });
     if (!found) {
@@ -535,12 +654,12 @@ class SctpTransport::UsrSctpWrapper {
           << sock;
       return 0;
     }
-    if (!g_transport_map_) {
+    if (!instance_) {
       RTC_LOG(LS_ERROR)
           << "SendThresholdCallback called after usrsctp uninitialized?";
       return 0;
     }
-    bool found = g_transport_map_->PostToTransportThread(
+    bool found = instance_->transport_map_.PostToTransportThread(
         *id,
         [](SctpTransport* transport) { transport->OnSendThresholdCallback(); });
     if (!found) {
@@ -550,17 +669,164 @@ class SctpTransport::UsrSctpWrapper {
     }
     return 0;
   }
+
+  explicit UsrSctpWrapper(rtc::Thread* usrsctp_thread) {
+    if (usrsctp_thread) {
+      thread_ = usrsctp_thread;
+    } else {
+      owned_thread_ = rtc::Thread::Create();
+      owned_thread_->Start();
+      thread_ = owned_thread_.get();
+    }
+    thread_->Invoke<void>(RTC_FROM_HERE, [this] {
+      InitializeUsrSctp();
+      last_handled_timers_ms_ = rtc::TimeMillis();
+      timer_task_handle_ = webrtc::RepeatingTaskHandle::DelayedStart(
+          thread_, webrtc::TimeDelta::Millis(kUsrsctpTimerGranularityMillis),
+          [this] { return HandleTimers(); });
+    });
+  }
+
+  ~UsrSctpWrapper() {
+    thread_->Invoke<void>(RTC_FROM_HERE, [this] {
+      timer_task_handle_.Stop();
+      DeinitializeUsrSctp();
+    });
+  }
+
+  // Ensures that UsrSctpWrapper is being initialized with the same thread as it
+  // was previously.
+  bool ValidateThread(rtc::Thread* usrsctp_thread) {
+    rtc::Thread* initial_thread = owned_thread_ ? nullptr : thread_;
+    if (usrsctp_thread != initial_thread) {
+      RTC_LOG(LS_ERROR) << "usrsctp being initialized with thread "
+                        << usrsctp_thread
+                        << " after initially being initialized with thread "
+                        << initial_thread;
+      return false;
+    }
+    return true;
+  }
+
+  void InitializeUsrSctp() {
+    RTC_LOG(LS_INFO) << __FUNCTION__;
+    // UninitializeUsrSctp tries to call usrsctp_finish in a loop for three
+    // seconds; if that failed and we were left in a still-initialized state, we
+    // don't want to call usrsctp_init again as that will result in undefined
+    // behavior.
+    if (g_usrsctp_initialized_) {
+      RTC_LOG(LS_WARNING) << "Not reinitializing usrsctp since last attempt at "
+                             "usrsctp_finish failed.";
+    } else {
+      // First argument is udp_encapsulation_port, which is not releveant for
+      // our AF_CONN use of sctp.
+      //
+      // Note that this still spawns an extra "interator thread" which is used
+      // for operations that need to iterate over all associations, so we still
+      // need to be prepared for callbacks occurring on a thread other than
+      // |thread_|.
+      usrsctp_init_nothreads(0, &UsrSctpWrapper::OnSctpOutboundPacket,
+                             &DebugSctpPrintf);
+      g_usrsctp_initialized_ = true;
+    }
+
+    // To turn on/off detailed SCTP debugging. You will also need to have the
+    // SCTP_DEBUG cpp defines flag, which can be turned on in media/BUILD.gn.
+    // usrsctp_sysctl_set_sctp_debug_on(SCTP_DEBUG_ALL);
+
+    // TODO(ldixon): Consider turning this on/off.
+    usrsctp_sysctl_set_sctp_ecn_enable(0);
+
+    // WebRTC doesn't use these features, so disable them to reduce the
+    // potential attack surface.
+    usrsctp_sysctl_set_sctp_asconf_enable(0);
+    usrsctp_sysctl_set_sctp_auth_enable(0);
+
+    // This is harmless, but we should find out when the library default
+    // changes.
+    int send_size = usrsctp_sysctl_get_sctp_sendspace();
+    if (send_size != kSctpSendBufferSize) {
+      RTC_LOG(LS_ERROR) << "Got different send size than expected: "
+                        << send_size;
+    }
+
+    // TODO(ldixon): Consider turning this on/off.
+    // This is not needed right now (we don't do dynamic address changes):
+    // If SCTP Auto-ASCONF is enabled, the peer is informed automatically
+    // when a new address is added or removed. This feature is enabled by
+    // default.
+    // usrsctp_sysctl_set_sctp_auto_asconf(0);
+
+    // TODO(ldixon): Consider turning this on/off.
+    // Add a blackhole sysctl. Setting it to 1 results in no ABORTs
+    // being sent in response to INITs, setting it to 2 results
+    // in no ABORTs being sent for received OOTB packets.
+    // This is similar to the TCP sysctl.
+    //
+    // See: http://lakerest.net/pipermail/sctp-coders/2012-January/009438.html
+    // See: http://svnweb.freebsd.org/base?view=revision&revision=229805
+    // usrsctp_sysctl_set_sctp_blackhole(2);
+
+    // Set the number of default outgoing streams. This is the number we'll
+    // send in the SCTP INIT message.
+    usrsctp_sysctl_set_sctp_nr_outgoing_streams_default(kMaxSctpStreams);
+  }
+
+  void DeinitializeUsrSctp() {
+    RTC_LOG(LS_INFO) << __FUNCTION__;
+    // Even though we initialized in single threaded mode, there is still an
+    // "iterator thread" which may be doing some work that prevents
+    // usrsctp_finish from completing. Wait and try again until it succeeds for
+    // up to 3 seconds; if it doesn't succeed it's likely due to a reference
+    // counting bug.
+    for (size_t i = 0; i < 300; ++i) {
+      if (usrsctp_finish() == 0) {
+        g_usrsctp_initialized_ = false;
+        return;
+      }
+      rtc::Thread::SleepMs(10);
+    }
+    RTC_LOG(LS_ERROR) << "Failed to shutdown usrsctp.";
+  }
+
+  webrtc::TimeDelta HandleTimers() {
+    RTC_DCHECK_RUN_ON(thread_);
+    auto now = rtc::TimeMillis();
+    auto elapsed_millis = now - last_handled_timers_ms_;
+    last_handled_timers_ms_ = now;
+    usrsctp_handle_timers(elapsed_millis);
+    return webrtc::TimeDelta::Millis(kUsrsctpTimerGranularityMillis);
+  }
+
+  static UsrSctpWrapper* instance_;
+
+  rtc::Thread* thread_;
+  std::unique_ptr<rtc::Thread> owned_thread_;
+
+  SctpTransportMap transport_map_;
+
+  webrtc::RepeatingTaskHandle timer_task_handle_;
+  int64_t last_handled_timers_ms_;
 };
 
+SctpTransport::UsrSctpWrapper* SctpTransport::UsrSctpWrapper::instance_ =
+    nullptr;
+
 SctpTransport::SctpTransport(rtc::Thread* network_thread,
+                             rtc::Thread* usrsctp_thread,
                              rtc::PacketTransportInternal* transport)
     : network_thread_(network_thread),
+      usrsctp_thread_(usrsctp_thread),
       transport_(transport),
       was_ever_writable_(transport ? transport->writable() : false) {
   RTC_DCHECK(network_thread_);
   RTC_DCHECK_RUN_ON(network_thread_);
   ConnectTransportSignals();
 }
+
+SctpTransport::SctpTransport(rtc::Thread* network_thread,
+                             rtc::PacketTransportInternal* transport)
+    : SctpTransport(network_thread, nullptr, transport) {}
 
 SctpTransport::~SctpTransport() {
   RTC_DCHECK_RUN_ON(network_thread_);
@@ -765,20 +1031,22 @@ SendDataResult SctpTransport::SendMessageInternal(OutgoingMessage* message) {
   // Note: this send call is not atomic because the EOR bit is set. This means
   // that usrsctp can partially accept this message and it is our duty to buffer
   // the rest.
-  ssize_t send_res = usrsctp_sendv(
+  int error_number = 0;
+  ssize_t send_res = UsrSctpWrapper::Instance()->SendV(
       sock_, message->data(), message->size(), NULL, 0, &spa,
-      rtc::checked_cast<socklen_t>(sizeof(spa)), SCTP_SENDV_SPA, 0);
-  if (send_res < 0) {
-    if (errno == SCTP_EWOULDBLOCK) {
+      rtc::checked_cast<socklen_t>(sizeof(spa)), SCTP_SENDV_SPA, 0,
+      &error_number);
+  if (error_number < 0) {
+    if (error_number == SCTP_EWOULDBLOCK) {
       ready_to_send_data_ = false;
       RTC_LOG(LS_INFO) << debug_name_
                        << "->SendMessageInternal(...): EWOULDBLOCK returned";
       return SDR_BLOCK;
     }
 
-    RTC_LOG_ERRNO(LS_ERROR) << "ERROR:" << debug_name_
-                            << "->SendMessageInternal(...): "
-                               " usrsctp_sendv: ";
+    RTC_LOG(LS_ERROR) << "ERROR:" << debug_name_
+                      << "->SendMessageInternal(...): "
+                         " usrsctp_sendv: ";
     return SDR_ERROR;
   }
 
@@ -838,23 +1106,25 @@ bool SctpTransport::Connect() {
 
   // Note: conversion from int to uint16_t happens on assignment.
   sockaddr_conn local_sconn = GetSctpSockAddr(local_port_);
-  if (usrsctp_bind(sock_, reinterpret_cast<sockaddr*>(&local_sconn),
-                   sizeof(local_sconn)) < 0) {
-    RTC_LOG_ERRNO(LS_ERROR)
-        << debug_name_ << "->Connect(): " << ("Failed usrsctp_bind");
+  if (UsrSctpWrapper::Instance()->Bind(
+          sock_, reinterpret_cast<sockaddr*>(&local_sconn), sizeof(local_sconn),
+          /*error_number=*/nullptr) < 0) {
+    RTC_LOG(LS_ERROR) << debug_name_
+                      << "->Connect(): " << ("Failed usrsctp_bind");
     CloseSctpSocket();
     return false;
   }
 
   // Note: conversion from int to uint16_t happens on assignment.
   sockaddr_conn remote_sconn = GetSctpSockAddr(remote_port_);
-  int connect_result = usrsctp_connect(
-      sock_, reinterpret_cast<sockaddr*>(&remote_sconn), sizeof(remote_sconn));
-  if (connect_result < 0 && errno != SCTP_EINPROGRESS) {
-    RTC_LOG_ERRNO(LS_ERROR) << debug_name_
-                            << "->Connect(): "
-                               "Failed usrsctp_connect. got errno="
-                            << errno << ", but wanted " << SCTP_EINPROGRESS;
+  int error_number = 0;
+  int connect_result = UsrSctpWrapper::Instance()->Connect(
+      sock_, reinterpret_cast<sockaddr*>(&remote_sconn), sizeof(remote_sconn),
+      &error_number);
+  if (connect_result < 0 && error_number != SCTP_EINPROGRESS) {
+    RTC_LOG(LS_ERROR) << debug_name_
+                      << "->Connect(): Failed usrsctp_connect. got errno="
+                      << error_number << ", but wanted " << SCTP_EINPROGRESS;
     CloseSctpSocket();
     return false;
   }
@@ -866,11 +1136,11 @@ bool SctpTransport::Connect() {
   // The MTU value provided specifies the space available for chunks in the
   // packet, so we subtract the SCTP header size.
   params.spp_pathmtu = kSctpMtu - sizeof(struct sctp_common_header);
-  if (usrsctp_setsockopt(sock_, IPPROTO_SCTP, SCTP_PEER_ADDR_PARAMS, &params,
-                         sizeof(params))) {
-    RTC_LOG_ERRNO(LS_ERROR) << debug_name_
-                            << "->Connect(): "
-                               "Failed to set SCTP_PEER_ADDR_PARAMS.";
+  if (UsrSctpWrapper::Instance()->SetSockOpt(sock_, IPPROTO_SCTP,
+                                             SCTP_PEER_ADDR_PARAMS, &params,
+                                             sizeof(params))) {
+    RTC_LOG(LS_ERROR) << debug_name_
+                      << "->Connect(): Failed to set SCTP_PEER_ADDR_PARAMS.";
   }
   // Since this is a fresh SCTP association, we'll always start out with empty
   // queues, so "ReadyToSendData" should be true.
@@ -887,7 +1157,9 @@ bool SctpTransport::OpenSctpSocket() {
     return false;
   }
 
-  UsrSctpWrapper::IncrementUsrSctpUsageCount();
+  if (!UsrSctpWrapper::IncrementUsrSctpUsageCount(usrsctp_thread_)) {
+    return false;
+  }
 
   // If kSctpSendBufferSize isn't reflective of reality, we log an error, but we
   // still have to do something reasonable here.  Look up what the buffer's real
@@ -895,29 +1167,29 @@ bool SctpTransport::OpenSctpSocket() {
   // TODO(bugs.webrtc.org/11824): That was previously set to 50%, not 25%, but
   // it was reduced to a recent usrsctp regression. Can return to 50% when the
   // root cause is fixed.
-  static const int kSendThreshold = usrsctp_sysctl_get_sctp_sendspace() / 4;
+  static const int kSendThreshold =
+      UsrSctpWrapper::Instance()->GetSctpSendspace() / 4;
 
-  sock_ = usrsctp_socket(
-      AF_CONN, SOCK_STREAM, IPPROTO_SCTP, &UsrSctpWrapper::OnSctpInboundPacket,
-      &UsrSctpWrapper::SendThresholdCallback, kSendThreshold, this);
+  sock_ = UsrSctpWrapper::Instance()->Socket(AF_CONN, SOCK_STREAM, IPPROTO_SCTP,
+                                             kSendThreshold, this,
+                                             /*error_number=*/nullptr);
   if (!sock_) {
-    RTC_LOG_ERRNO(LS_ERROR) << debug_name_
-                            << "->OpenSctpSocket(): "
-                               "Failed to create SCTP socket.";
+    RTC_LOG(LS_ERROR) << debug_name_
+                      << "->OpenSctpSocket(): Failed to create SCTP socket.";
     UsrSctpWrapper::DecrementUsrSctpUsageCount();
     return false;
   }
 
   if (!ConfigureSctpSocket()) {
-    usrsctp_close(sock_);
+    UsrSctpWrapper::Instance()->Close(sock_);
     sock_ = nullptr;
     UsrSctpWrapper::DecrementUsrSctpUsageCount();
     return false;
   }
-  id_ = g_transport_map_->Register(this);
-  // Register our id as an address for usrsctp. This is used by SCTP to
-  // direct the packets received (by the created socket) to this class.
-  usrsctp_register_address(reinterpret_cast<void*>(id_));
+  // Acquire an ID and register it as an address for usrsctp. This is used by
+  // usrsctp/UsrSctpWrapper to direct the packets received (by the created
+  // socket) to this class.
+  id_ = UsrSctpWrapper::Instance()->Register(this);
   return true;
 }
 
@@ -926,10 +1198,10 @@ bool SctpTransport::ConfigureSctpSocket() {
   RTC_DCHECK(sock_);
   // Make the socket non-blocking. Connect, close, shutdown etc will not block
   // the thread waiting for the socket operation to complete.
-  if (usrsctp_set_non_blocking(sock_, 1) < 0) {
-    RTC_LOG_ERRNO(LS_ERROR) << debug_name_
-                            << "->ConfigureSctpSocket(): "
-                               "Failed to set SCTP to non blocking.";
+  if (UsrSctpWrapper::Instance()->SetNonBlocking(sock_, 1) < 0) {
+    RTC_LOG(LS_ERROR) << debug_name_
+                      << "->ConfigureSctpSocket(): "
+                         "Failed to set SCTP to non blocking.";
     return false;
   }
 
@@ -939,11 +1211,10 @@ bool SctpTransport::ConfigureSctpSocket() {
   linger linger_opt;
   linger_opt.l_onoff = 1;
   linger_opt.l_linger = 0;
-  if (usrsctp_setsockopt(sock_, SOL_SOCKET, SO_LINGER, &linger_opt,
-                         sizeof(linger_opt))) {
-    RTC_LOG_ERRNO(LS_ERROR) << debug_name_
-                            << "->ConfigureSctpSocket(): "
-                               "Failed to set SO_LINGER.";
+  if (UsrSctpWrapper::Instance()->SetSockOpt(sock_, SOL_SOCKET, SO_LINGER,
+                                             &linger_opt, sizeof(linger_opt))) {
+    RTC_LOG(LS_ERROR) << debug_name_
+                      << "->ConfigureSctpSocket(): Failed to set SO_LINGER.";
     return false;
   }
 
@@ -951,31 +1222,31 @@ bool SctpTransport::ConfigureSctpSocket() {
   struct sctp_assoc_value stream_rst;
   stream_rst.assoc_id = SCTP_ALL_ASSOC;
   stream_rst.assoc_value = 1;
-  if (usrsctp_setsockopt(sock_, IPPROTO_SCTP, SCTP_ENABLE_STREAM_RESET,
-                         &stream_rst, sizeof(stream_rst))) {
-    RTC_LOG_ERRNO(LS_ERROR) << debug_name_
-                            << "->ConfigureSctpSocket(): "
-                               "Failed to set SCTP_ENABLE_STREAM_RESET.";
+  if (UsrSctpWrapper::Instance()->SetSockOpt(sock_, IPPROTO_SCTP,
+                                             SCTP_ENABLE_STREAM_RESET,
+                                             &stream_rst, sizeof(stream_rst))) {
+    RTC_LOG(LS_ERROR) << debug_name_
+                      << "->ConfigureSctpSocket(): "
+                         "Failed to set SCTP_ENABLE_STREAM_RESET.";
     return false;
   }
 
   // Nagle.
   uint32_t nodelay = 1;
-  if (usrsctp_setsockopt(sock_, IPPROTO_SCTP, SCTP_NODELAY, &nodelay,
-                         sizeof(nodelay))) {
-    RTC_LOG_ERRNO(LS_ERROR) << debug_name_
-                            << "->ConfigureSctpSocket(): "
-                               "Failed to set SCTP_NODELAY.";
+  if (UsrSctpWrapper::Instance()->SetSockOpt(sock_, IPPROTO_SCTP, SCTP_NODELAY,
+                                             &nodelay, sizeof(nodelay))) {
+    RTC_LOG(LS_ERROR) << debug_name_
+                      << "->ConfigureSctpSocket(): Failed to set SCTP_NODELAY.";
     return false;
   }
 
   // Explicit EOR.
   uint32_t eor = 1;
-  if (usrsctp_setsockopt(sock_, IPPROTO_SCTP, SCTP_EXPLICIT_EOR, &eor,
-                         sizeof(eor))) {
-    RTC_LOG_ERRNO(LS_ERROR) << debug_name_
-                            << "->ConfigureSctpSocket(): "
-                               "Failed to set SCTP_EXPLICIT_EOR.";
+  if (UsrSctpWrapper::Instance()->SetSockOpt(
+          sock_, IPPROTO_SCTP, SCTP_EXPLICIT_EOR, &eor, sizeof(eor))) {
+    RTC_LOG(LS_ERROR) << debug_name_
+                      << "->ConfigureSctpSocket(): "
+                         "Failed to set SCTP_EXPLICIT_EOR.";
     return false;
   }
 
@@ -990,12 +1261,12 @@ bool SctpTransport::ConfigureSctpSocket() {
   event.se_on = 1;
   for (size_t i = 0; i < arraysize(event_types); i++) {
     event.se_type = event_types[i];
-    if (usrsctp_setsockopt(sock_, IPPROTO_SCTP, SCTP_EVENT, &event,
-                           sizeof(event)) < 0) {
-      RTC_LOG_ERRNO(LS_ERROR) << debug_name_
-                              << "->ConfigureSctpSocket(): "
-                                 "Failed to set SCTP_EVENT type: "
-                              << event.se_type;
+    if (UsrSctpWrapper::Instance()->SetSockOpt(sock_, IPPROTO_SCTP, SCTP_EVENT,
+                                               &event, sizeof(event)) < 0) {
+      RTC_LOG(LS_ERROR) << debug_name_
+                        << "->ConfigureSctpSocket(): "
+                           "Failed to set SCTP_EVENT type: "
+                        << event.se_type;
       return false;
     }
   }
@@ -1008,10 +1279,9 @@ void SctpTransport::CloseSctpSocket() {
     // We assume that SO_LINGER option is set to close the association when
     // close is called. This means that any pending packets in usrsctp will be
     // discarded instead of being sent.
-    usrsctp_close(sock_);
+    UsrSctpWrapper::Instance()->Close(sock_);
     sock_ = nullptr;
-    usrsctp_deregister_address(reinterpret_cast<void*>(id_));
-    RTC_CHECK(g_transport_map_->Deregister(id_));
+    RTC_CHECK(UsrSctpWrapper::Instance()->Deregister(id_));
     UsrSctpWrapper::DecrementUsrSctpUsageCount();
     ready_to_send_data_ = false;
   }
@@ -1053,18 +1323,18 @@ bool SctpTransport::SendQueuedStreamResets() {
     resetp->srs_stream_list[result_idx++] = stream.first;
   }
 
-  int ret =
-      usrsctp_setsockopt(sock_, IPPROTO_SCTP, SCTP_RESET_STREAMS, resetp,
-                         rtc::checked_cast<socklen_t>(reset_stream_buf.size()));
+  int ret = UsrSctpWrapper::Instance()->SetSockOpt(
+      sock_, IPPROTO_SCTP, SCTP_RESET_STREAMS, resetp,
+      rtc::checked_cast<socklen_t>(reset_stream_buf.size()));
   if (ret < 0) {
     // Note that usrsctp only lets us have one reset in progress at a time
     // (even though multiple streams can be reset at once). If this happens,
     // SendQueuedStreamResets will end up called after the current in-progress
     // reset finishes, in OnStreamResetEvent.
-    RTC_LOG_ERRNO(LS_WARNING) << debug_name_
-                              << "->SendQueuedStreamResets(): "
-                                 "Failed to send a stream reset for "
-                              << num_streams << " streams";
+    RTC_LOG(LS_WARNING) << debug_name_
+                        << "->SendQueuedStreamResets(): "
+                           "Failed to send a stream reset for "
+                        << num_streams << " streams";
     return false;
   }
 
@@ -1142,7 +1412,8 @@ void SctpTransport::OnPacketRead(rtc::PacketTransportInternal* transport,
     // will be will be given to the global OnSctpInboundData, and then,
     // marshalled by the AsyncInvoker.
     VerboseLogPacket(data, len, SCTP_DUMP_INBOUND);
-    usrsctp_conninput(reinterpret_cast<void*>(id_), data, len, 0);
+    UsrSctpWrapper::Instance()->ConnInput(reinterpret_cast<void*>(id_), data,
+                                          len, 0);
   } else {
     // TODO(ldixon): Consider caching the packet for very slightly better
     // reliability.
