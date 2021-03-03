@@ -43,23 +43,15 @@ float SincResampler::Convolve_AVX2(const float* input_ptr,
   }
 
   // Linearly interpolate the two "convolutions".
-  __m128 m128_sums1 = _mm_add_ps(_mm256_extractf128_ps(m_sums1, 0),
-                                 _mm256_extractf128_ps(m_sums1, 1));
-  __m128 m128_sums2 = _mm_add_ps(_mm256_extractf128_ps(m_sums2, 0),
-                                 _mm256_extractf128_ps(m_sums2, 1));
-  m128_sums1 = _mm_mul_ps(
-      m128_sums1,
-      _mm_set_ps1(static_cast<float>(1.0 - kernel_interpolation_factor)));
-  m128_sums2 = _mm_mul_ps(
-      m128_sums2, _mm_set_ps1(static_cast<float>(kernel_interpolation_factor)));
-  m128_sums1 = _mm_add_ps(m128_sums1, m128_sums2);
+  m_sums1 = _mm256_fmadd_ps(
+      m_sums1,
+      _mm256_set1_ps(static_cast<float>(1.0 - kernel_interpolation_factor)),
+      _mm256_mul_ps(m_sums2, _mm256_set1_ps(static_cast<float>(
+                                 kernel_interpolation_factor))));
 
   // Sum components together.
-  float result;
-  m128_sums2 = _mm_add_ps(_mm_movehl_ps(m128_sums1, m128_sums1), m128_sums1);
-  _mm_store_ss(&result, _mm_add_ss(m128_sums2,
-                                   _mm_shuffle_ps(m128_sums2, m128_sums2, 1)));
-
+  float* v = reinterpret_cast<float*>(&m_sums1);
+  float result = v[0] + v[1] + v[2] + v[3] + v[4] + v[5] + v[6] + v[7];
   return result;
 }
 

@@ -74,11 +74,10 @@ void FIRFilterAVX2::Filter(const float* in, size_t length, float* out) {
         m_sum = _mm256_fmadd_ps(m_in, _mm256_load_ps(coef_ptr + j), m_sum);
       }
     }
-    __m128 m128_sum = _mm_add_ps(_mm256_extractf128_ps(m_sum, 0),
-                                 _mm256_extractf128_ps(m_sum, 1));
-    m128_sum = _mm_add_ps(_mm_movehl_ps(m128_sum, m128_sum), m128_sum);
-    _mm_store_ss(out + i,
-                 _mm_add_ss(m128_sum, _mm_shuffle_ps(m128_sum, m128_sum, 1)));
+
+    // Sum components together.
+    float* v = reinterpret_cast<float*>(&m_sum);
+    *(out + i) = v[0] + v[1] + v[2] + v[3] + v[4] + v[5] + v[6] + v[7];
   }
 
   // Update current state.
