@@ -16,6 +16,23 @@
       "message": "(triggered by recent bugs)\n\nI don\u0027t see much point in allowing more than 1 for ice candidate pool size -- if you want fast connection establishment, then you also want max-bundle.\nMaybe we could only interpret ice candidate pool size if max-bundle is set.\nBut we don\u0027t know if it this would be a safe change so we need to measure.",
       "revId": "9774909e94c1a42524b3e7b7f31f018e6651577f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e56adf9d_a0cc6892",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1833,
+      "author": {
+        "id": 5603
+      },
+      "writtenOn": "2021-03-04T20:19:00Z",
+      "side": 1,
+      "message": "I think you\u0027re going to want to have at least \u003d\u003d 2 and \u003d\u003d 3 since that might be the expectation when using a/v or a/v/d. \n\nthe issue here is with \u003e\u003e 1, right?",
+      "revId": "9774909e94c1a42524b3e7b7f31f018e6651577f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
