@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10464fc7_2fc516c6",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 13004
+      },
+      "writtenOn": "2021-03-04T06:33:46Z",
+      "side": 1,
+      "message": "I\u0027m probably missing something, but can we create a desktop frame using the new size of the currently captured frame?  To do this, can we recreate the frame pool immediately with the new size?  It looks like we\u0027d maybe drop some frames, but is this worse than potentially showing cropped frames depending on how the size change?",
+      "parentUuid": "699ff441_5135aad5",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 0
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e99d0f72_6d96597e",
         "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
         "patchSetId": 1
