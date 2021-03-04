@@ -1817,6 +1817,24 @@ void PeerConnection::SetConnectionState(
     }
     RTC_HISTOGRAM_ENUMERATION("WebRTC.PeerConnection.BundlePolicy", policy,
                               kBundlePolicyUsageMax);
+
+    // Report sage of the the ice candidate pool size depending on
+    // the configured bundle policy to determine whether the
+    // candidate pool size can be limited to [0, 1] with affecting
+    // existing deployments.
+    auto pool_size = configuration_.ice_candidate_pool_size;
+    bool max_bundle = configuration_.bundle_policy == kBundlePolicyMaxBundle;
+    IceCandidatePoolUsage usage = kIceCandidatePoolUsageMax;
+    if (pool_size == 0) {
+      usage = kIceCandidatePoolUsageNone;
+    } else if (pool_size == 1) {
+      usage = max_bundle ? kIceCandidateUsagePoolOneMaxBundle
+                         : kIceCandidatePoolUsageOne;
+    } else if (pool_size > 1) {
+      usage = kIceCandidatePoolUsageMultiple;
+    }
+    RTC_HISTOGRAM_ENUMERATION("WebRTC.PeerConnection.CandidatePoolUsage", usage,
+                              kIceCandidatePoolUsageMax);
   }
 }
 
