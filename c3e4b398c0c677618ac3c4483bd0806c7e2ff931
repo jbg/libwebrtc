@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec65b4be_43c8f692",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-04T15:42:35Z",
+      "side": 1,
+      "message": "Hello Harald!\n\nCould you please review this CL, which exposes parameterless setLocalDescription from iOS SDK?\n\nThanks a lot in advance!",
+      "revId": "c3e4b398c0c677618ac3c4483bd0806c7e2ff931",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
