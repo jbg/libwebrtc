@@ -202,6 +202,21 @@ enum BundlePolicyUsage {
   kBundlePolicyUsageMax
 };
 
+// Metrics for reporting configured ice candidate pool size depending on the
+// BUNDLE policy. See
+// https://w3c.github.io/webrtc-pc/#dom-rtcconfiguration-icecandidatepoolsize
+// The ICE candidate pool size is an optimization and it may be desirable
+// to restrict the maximum size of the pre-gathered candidates.
+// These values are persisted to logs. Entries should not be renumbered and
+// numeric values should never be reused.
+enum IceCandidatePoolUsage {
+  kIceCandidatePoolUsageNone = 0,
+  kIceCandidatePoolUsageOne = 1,
+  kIceCandidateUsagePoolOneMaxBundle = 2,
+  kIceCandidatePoolUsageMultiple,
+  kIceCandidatePoolUsageMax
+};
+
 // When adding new metrics please consider using the style described in
 // https://chromium.googlesource.com/chromium/src.git/+/HEAD/tools/metrics/histograms/README.md#usage
 // instead of the legacy enums used above.
