@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8002e1d8_0f3f0580",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-03-04T20:25:38Z",
+      "side": 1,
+      "message": "Yash, we don\u0027t need to do this when the size is the same, but I think it helps simplify the code. We could check if the size has changed first, and not assign to smaller_height/width, but then we need to repeat that check later to determine if we should use smaller_height/width or previous_size_. Unless you had another design in mind that I am not seeing?\n\nSteve, we could drop frames that have grown instead of cropping them (frames that have shrunk we can handle normally). I guess this is just personal preference, I find the black frames from dropped frames to be more annoying than a cropped frame when resizing. Do you think dropping the frames would improve the experience?",
+      "parentUuid": "10464fc7_2fc516c6",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 0
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e99d0f72_6d96597e",
         "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
         "patchSetId": 1
@@ -95,6 +119,30 @@
       "writtenOn": "2021-03-03T23:47:25Z",
       "side": 1,
       "message": "nit. Should we use \"int\" here since the datatype is not complex ?",
+      "range": {
+        "startLine": 202,
+        "startChar": 7,
+        "endLine": 202,
+        "endChar": 12
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0fe7863_9c17bb00",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-03-04T20:25:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e99d0f72_6d96597e",
       "range": {
         "startLine": 202,
         "startChar": 7,
@@ -118,6 +166,30 @@
       "writtenOn": "2021-03-03T23:47:25Z",
       "side": 1,
       "message": "Can map_info.RowPitch be less than row_data_length ? If so, we can end up copying some part of the same data in the next iteration.\nSame when map_info.RowPitch \u003e row_data_length, we can end up not copying some data from src_data.",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 35
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f00e1024_893539d1",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-03-04T20:25:38Z",
+      "side": 1,
+      "message": "No, RowPitch is the width of the texture in bytes, and row_data_length is the size in pixels * kBytesPerPixel. Since we have agreed on an image format that has 4 bytes per pixel, they will be at least be equal or RowPitch will be larger due to padding. And often there is significant amounts of padding at the end of each row after the image data has ended, IIUC it is used in the GPU to align the memory to a certain size. We intentionally leave that data out as we don\u0027t need it, and we are left with contiguous image data.",
+      "parentUuid": "25364679_9e280e25",
       "range": {
         "startLine": 205,
         "startChar": 0,
