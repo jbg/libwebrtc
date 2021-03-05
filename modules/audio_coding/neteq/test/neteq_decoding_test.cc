@@ -180,6 +180,12 @@ void NetEqDecodingTest::DecodeAndCompare(
     }
   }
 
+  // These properties can be used to generate output to build PlatformChecksum
+  RecordProperty("PlatformChecksum_output", output.CalculateChecksum());
+  RecordProperty("PlatformChecksum_network_stats",
+                 network_stats.CalculateChecksum());
+
+  // std::string test_id = sprintf();
   SCOPED_TRACE("Check output audio.");
   output.VerifyChecksum(output_checksum);
   SCOPED_TRACE("Check network stats.");
