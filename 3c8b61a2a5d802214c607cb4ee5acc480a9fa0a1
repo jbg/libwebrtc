@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e97413b_af5df661",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T11:02:16Z",
+      "side": 1,
+      "message": "Yes, we can...\n",
+      "revId": "3c8b61a2a5d802214c607cb4ee5acc480a9fa0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eada10d9_6f950d4e",
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "a histogram won\u0027t allow us to identify poolsize\u003d1+max-bundle.\nSo the enum gives us more granularity (at the expense of putting everything \u003e 3 in the same bucket)",
       "parentUuid": "eada10d9_6f950d4e",
+      "revId": "3c8b61a2a5d802214c607cb4ee5acc480a9fa0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f39919e9_0e88230d",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T11:02:16Z",
+      "side": 1,
+      "message": "But histograms CandidatePoolUsage.MaxBundle, CandidatePoolUsage.Balanced and CandidatePoolUsage.MaxCompat will.\nI think we\u0027re likely to see a bunch of 0 and a bunch of 4 (because an early example had that), and possibly a bunch of way-too-large because someone\u0027s found that that produces some weird behavior unrelated to WebRTC that they want - and that the patterns will be unrelated to the bundle policy.\n\nSo I want to have enough data to have my guesses falsified.",
+      "parentUuid": "50f4e024_bb0b0768",
       "revId": "3c8b61a2a5d802214c607cb4ee5acc480a9fa0a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
