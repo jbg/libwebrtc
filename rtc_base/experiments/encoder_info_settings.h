@@ -42,9 +42,14 @@ class EncoderInfoSettings {
   }
 
   static std::vector<VideoEncoder::ResolutionBitrateLimits>
-  GetDefaultSinglecastBitrateLimits();
+  GetDefaultSinglecastBitrateLimitsVp8();
+  static std::vector<VideoEncoder::ResolutionBitrateLimits>
+  GetDefaultSinglecastBitrateLimitsVp9();
+
   static absl::optional<VideoEncoder::ResolutionBitrateLimits>
-  GetDefaultSinglecastBitrateLimitsForResolution(int frame_size_pixels);
+  GetDefaultSinglecastBitrateLimitsForResolutionVp8(int frame_size_pixels);
+  static absl::optional<VideoEncoder::ResolutionBitrateLimits>
+  GetDefaultSinglecastBitrateLimitsForResolutionVp9(int frame_size_pixels);
 
  protected:
   explicit EncoderInfoSettings(std::string name);
