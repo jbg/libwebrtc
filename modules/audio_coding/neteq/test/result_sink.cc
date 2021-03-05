@@ -74,7 +74,8 @@ void AddMessage(FILE* file,
 
 ResultSink::ResultSink(const std::string& output_file)
     : output_fp_(nullptr),
-      digest_(rtc::MessageDigestFactory::Create(rtc::DIGEST_SHA_1)) {
+      digest_(rtc::MessageDigestFactory::Create(rtc::DIGEST_SHA_1)),
+      calculated_checksum_(nullptr) {
   if (!output_file.empty()) {
     output_fp_ = fopen(output_file.c_str(), "wb");
     EXPECT_TRUE(output_fp_ != NULL);
@@ -112,11 +113,25 @@ void ResultSink::AddResult(const RtcpStatistics& stats_raw) {
 #endif  // WEBRTC_NETEQ_UNITTEST_BITEXACT
 }
 
-void ResultSink::VerifyChecksum(const std::string& checksum) {
+const std::string ResultSink::CalculateChecksum() {
+  if (calculated_checksum_) {
+    return *calculated_checksum_.get();
+  }
+
   std::vector<char> buffer;
   buffer.resize(digest_->Size());
   digest_->Finish(&buffer[0], buffer.size());
-  const std::string result = rtc::hex_encode(&buffer[0], digest_->Size());
+  std::string* result =
+      new std::string(rtc::hex_encode(&buffer[0], digest_->Size()));
+  calculated_checksum_.reset(result);
+  return *result;
+}
+
+void ResultSink::VerifyChecksum(const std::string& checksum) {
+  if (!calculated_checksum_) {
+    CalculateChecksum();
+  }
+  const std::string result = *calculated_checksum_.get();
   if (checksum.size() == result.size()) {
     EXPECT_EQ(checksum, result);
   } else {

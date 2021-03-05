@@ -31,12 +31,13 @@ class ResultSink {
 
   void AddResult(const NetEqNetworkStatistics& stats);
   void AddResult(const RtcpStatistics& stats);
-
+  const std::string CalculateChecksum();
   void VerifyChecksum(const std::string& ref_check_sum);
 
  private:
   FILE* output_fp_;
   std::unique_ptr<rtc::MessageDigest> digest_;
+  std::unique_ptr<const std::string> calculated_checksum_;
 };
 
 template <typename T>
