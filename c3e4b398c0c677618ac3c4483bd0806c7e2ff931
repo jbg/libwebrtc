@@ -50,6 +50,75 @@
       "message": "Hello Kári!\n\nCould you please take a look at this CL which exposes additional method in iOS SDK, which is necessary for perfect negotiation algorithm?\n\nThanks a lot in advance,\nYura.",
       "revId": "c3e4b398c0c677618ac3c4483bd0806c7e2ff931",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a71c08_2f9af711",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-03-05T14:11:45Z",
+      "side": 1,
+      "message": "setLocalDescriptionWithCompletionHandler:",
+      "range": {
+        "startLine": 305,
+        "startChar": 8,
+        "endLine": 305,
+        "endChar": 27
+      },
+      "revId": "c3e4b398c0c677618ac3c4483bd0806c7e2ff931",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f16e16d_fe69a2ed",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-03-05T14:11:45Z",
+      "side": 1,
+      "message": "This looks unnecessary to me. Also this is C++ so should be nullptr. I realise that this code is just copied from elsewhere but we can use the opportunity to clean it up.",
+      "range": {
+        "startLine": 52,
+        "startChar": 3,
+        "endLine": 52,
+        "endChar": 74
+      },
+      "revId": "c3e4b398c0c677618ac3c4483bd0806c7e2ff931",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aafc404_36fd5c34",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-03-05T14:11:45Z",
+      "side": 1,
+      "message": "This should not be possible, right? I prefer to keep the DCHECK.",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 35
+      },
+      "revId": "c3e4b398c0c677618ac3c4483bd0806c7e2ff931",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
