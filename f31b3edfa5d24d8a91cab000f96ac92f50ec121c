@@ -18,6 +18,40 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "860a3da5_529cdbf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T10:17:10Z",
+      "side": 1,
+      "message": "I think this is something that could work well.\n\nWe should have a CHECK where we construct the PeerConnectionFactory for whether usrsctp_thread is the same as before or not.\n",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcd7d643_535ca54b",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T10:17:10Z",
+      "side": 1,
+      "message": "English: \"For optimal performance, set this to the same value as |network_thread|\".",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58e98adc_3476e111",
@@ -31,6 +65,23 @@
       "writtenOn": "2021-03-03T02:22:49Z",
       "side": 1,
       "message": "Could also be a boolean \"use_network_thread_for_usrsctp\". Though I\u0027m not sure where that would go (PeerConnectionFactoryInterface::Options?)",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c18fe45_1badecb5",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T10:17:10Z",
+      "side": 1,
+      "message": "Nit: The same delay -\u003e This delay (\"the same\" makes me look for the thing it is the same as).",
       "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +103,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "673fed1f_df98ba9a",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T10:17:10Z",
+      "side": 1,
+      "message": "Should we make a CHECK that it doesn\u0027t happen?",
+      "parentUuid": "0de30eb0_0514c8ac",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bbd53de_888271cd",
@@ -65,6 +134,74 @@
       "writtenOn": "2021-03-03T02:22:49Z",
       "side": 1,
       "message": "I think it would be better if this was:\n\n  rtc::scoped_refptr\u003cUsrSctpWrapper\u003e GetOrCreateInstance(\n      rtc::Thread* usrsctp_thread)\n\nThat would require moving UsrSctpWrapper to a header file, which is why I haven\u0027t done it yet.",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a06e4f7e_42893652",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T10:17:10Z",
+      "side": 1,
+      "message": "Style: Having constructors in the midst of a section is highly confusing. Please put them either at the top of the class (if public) or just after the \"private:\" keyword.",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f88cc6_57e1bd46",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T10:17:10Z",
+      "side": 1,
+      "message": "Given that this is a static global variable, shouldn\u0027t it be prefixed with g_?\nAnd why isn\u0027t it an unique_ptr to indicate ownership of the instance?\n(because of the rules against non-POD globals?)",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fea41f3d_169d9643",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T10:17:10Z",
+      "side": 1,
+      "message": "What\u0027s the advantage of having this outside the class declaration, given that it\u0027s in the same file?",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a14d4fe9_feb86f4d",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T10:17:10Z",
+      "side": 1,
+      "message": "This comment doesn\u0027t make sense to me. Does the EOR bit influence whether the call is atomic or not?",
       "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
