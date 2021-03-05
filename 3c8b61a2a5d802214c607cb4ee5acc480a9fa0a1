@@ -33,6 +33,24 @@
       "message": "Why not use a regular histogram and record the values?\nAdding the enum seems to only obfuscate things for me.",
       "revId": "3c8b61a2a5d802214c607cb4ee5acc480a9fa0a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50f4e024_bb0b0768",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-03-05T10:23:19Z",
+      "side": 1,
+      "message": "a histogram won\u0027t allow us to identify poolsize\u003d1+max-bundle.\nSo the enum gives us more granularity (at the expense of putting everything \u003e 3 in the same bucket)",
+      "parentUuid": "eada10d9_6f950d4e",
+      "revId": "3c8b61a2a5d802214c607cb4ee5acc480a9fa0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
