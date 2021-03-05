@@ -75,6 +75,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a2cf3a5_f5eea5b7",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-05T15:28:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35a71c08_2f9af711",
+      "range": {
+        "startLine": 305,
+        "startChar": 8,
+        "endLine": 305,
+        "endChar": 27
+      },
+      "revId": "c3e4b398c0c677618ac3c4483bd0806c7e2ff931",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f16e16d_fe69a2ed",
@@ -98,6 +122,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c060bc2b_93d8961a",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-05T15:28:40Z",
+      "side": 1,
+      "message": "No problem. Removed it completely.",
+      "parentUuid": "6f16e16d_fe69a2ed",
+      "range": {
+        "startLine": 52,
+        "startChar": 3,
+        "endLine": 52,
+        "endChar": 74
+      },
+      "revId": "c3e4b398c0c677618ac3c4483bd0806c7e2ff931",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4aafc404_36fd5c34",
@@ -111,6 +159,30 @@
       "writtenOn": "2021-03-05T14:11:45Z",
       "side": 1,
       "message": "This should not be possible, right? I prefer to keep the DCHECK.",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 35
+      },
+      "revId": "c3e4b398c0c677618ac3c4483bd0806c7e2ff931",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0edf524c_57ac3214",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-05T15:28:40Z",
+      "side": 1,
+      "message": "It is possible because Objective C SDK has nullable annotation on completion handler, but native PC requires observer. So it is possible that there is no completion handler to call, because user code didn\u0027t provide it. Maybe it make sense to change Objective C API to require completion handlers to be nonnull here and in other methods. Let me know if I should change it to nonnull in separate CL.",
+      "parentUuid": "4aafc404_36fd5c34",
       "range": {
         "startLine": 55,
         "startChar": 4,

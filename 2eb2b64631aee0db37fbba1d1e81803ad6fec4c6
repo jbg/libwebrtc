@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c18fc651_57f133f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-05T15:28:40Z",
+      "side": 1,
+      "message": " Kári, I\u0027ve fixed code according to you comments except null-check, which need some further clarification. I\u0027ve added details in reply to comment.",
+      "revId": "2eb2b64631aee0db37fbba1d1e81803ad6fec4c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
