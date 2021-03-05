@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d42f5c6b_65b2d98b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-03-05T10:12:11Z",
+      "side": 1,
+      "message": "LGTM for /test/encoder_settings.cc",
+      "revId": "e2de8836a5d0cc7ebcb5f56701e064d7b246a894",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33119497_169e886e",
