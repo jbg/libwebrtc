@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69ee4f60_ddfa971c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-03-05T09:24:53Z",
+      "side": 1,
+      "message": "+titovartem@ for test/encoder_settings.cc",
+      "revId": "e2de8836a5d0cc7ebcb5f56701e064d7b246a894",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
