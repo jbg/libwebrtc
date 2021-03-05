@@ -429,8 +429,9 @@ class AudioProcessingImpl : public AudioProcessing {
   } constants_;
 
   struct ApmCaptureState {
-    ApmCaptureState();
+    explicit ApmCaptureState(bool override_capture_output_usage_setting);
     ~ApmCaptureState();
+    const bool override_capture_output_usage_setting;
     bool was_stream_delay_set;
     bool capture_output_used;
     bool key_pressed;
