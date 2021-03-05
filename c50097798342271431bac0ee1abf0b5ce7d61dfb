@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60cc4ff0_41c185b2",
+        "filename": "modules/audio_coding/acm2/audio_coding_module_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-05T15:48:03Z",
+      "side": 0,
+      "message": "it looks like this change breaks the bit-exactness\nif so, state that clearly in the CL description",
+      "range": {
+        "startLine": 942,
+        "startChar": 32,
+        "endLine": 942,
+        "endChar": 64
+      },
+      "revId": "c50097798342271431bac0ee1abf0b5ce7d61dfb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
