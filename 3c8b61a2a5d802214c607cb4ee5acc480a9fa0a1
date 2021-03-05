@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "058584c0_ac3c6e86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T09:55:19Z",
+      "side": 1,
+      "message": "Design question.\n",
+      "revId": "3c8b61a2a5d802214c607cb4ee5acc480a9fa0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eada10d9_6f950d4e",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-05T09:55:19Z",
+      "side": 1,
+      "message": "Why not use a regular histogram and record the values?\nAdding the enum seems to only obfuscate things for me.",
+      "revId": "3c8b61a2a5d802214c607cb4ee5acc480a9fa0a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
