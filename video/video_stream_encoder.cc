@@ -343,6 +343,7 @@ VideoLayersAllocation CreateVideoLayersAllocation(
 VideoEncoder::EncoderInfo GetEncoderInfoWithBitrateLimitUpdate(
     const VideoEncoder::EncoderInfo& info,
     const VideoEncoderConfig& encoder_config,
+    VideoCodecType codec_type,
     bool default_limits_allowed) {
   if (!default_limits_allowed || !info.resolution_bitrate_limits.empty() ||
       encoder_config.simulcast_layers.size() <= 1) {
@@ -350,9 +351,13 @@ VideoEncoder::EncoderInfo GetEncoderInfoWithBitrateLimitUpdate(
   }
   // Bitrate limits are not configured and more than one layer is used, use
   // the default limits (bitrate limits are not used for simulcast).
+  // VP9 is using its specific bitrate limits. Other codecs are using VP8's
+  // limits.
   VideoEncoder::EncoderInfo new_info = info;
   new_info.resolution_bitrate_limits =
-      EncoderInfoSettings::GetDefaultSinglecastBitrateLimits();
+      codec_type == VideoCodecType::kVideoCodecVP9
+          ? EncoderInfoSettings::GetDefaultSinglecastBitrateLimitsVp9()
+          : EncoderInfoSettings::GetDefaultSinglecastBitrateLimitsVp8();
   return new_info;
 }
 
@@ -943,7 +948,8 @@ void VideoStreamEncoder::ReconfigureEncoder() {
 
   ApplyEncoderBitrateLimitsIfSingleActiveStream(
       GetEncoderInfoWithBitrateLimitUpdate(
-          encoder_->GetEncoderInfo(), encoder_config_, default_limits_allowed_),
+          encoder_->GetEncoderInfo(), encoder_config_,
+          encoder_config_.codec_type, default_limits_allowed_),
       encoder_config_.simulcast_layers, &streams);
 
   VideoCodec codec;
@@ -958,7 +964,7 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     crop_height_ = last_frame_info_->height - codec.height;
     ApplyVp9BitrateLimits(GetEncoderInfoWithBitrateLimitUpdate(
                               encoder_->GetEncoderInfo(), encoder_config_,
-                              default_limits_allowed_),
+                              kVideoCodecVP9, default_limits_allowed_),
                           encoder_config_, &codec);
   }
 
@@ -1199,7 +1205,8 @@ void VideoStreamEncoder::ReconfigureEncoder() {
 void VideoStreamEncoder::OnEncoderSettingsChanged() {
   EncoderSettings encoder_settings(
       GetEncoderInfoWithBitrateLimitUpdate(
-          encoder_->GetEncoderInfo(), encoder_config_, default_limits_allowed_),
+          encoder_->GetEncoderInfo(), encoder_config_, send_codec_.codecType,
+          default_limits_allowed_),
       encoder_config_.Copy(), send_codec_);
   stream_resource_manager_.SetEncoderSettings(encoder_settings);
   input_state_provider_.OnEncoderSettingsChanged(encoder_settings);
@@ -2098,7 +2105,8 @@ bool VideoStreamEncoder::DropDueToSize(uint32_t pixel_count) const {
 
   absl::optional<VideoEncoder::ResolutionBitrateLimits> encoder_bitrate_limits =
       GetEncoderInfoWithBitrateLimitUpdate(
-          encoder_->GetEncoderInfo(), encoder_config_, default_limits_allowed_)
+          encoder_->GetEncoderInfo(), encoder_config_, send_codec_.codecType,
+          default_limits_allowed_)
           .GetEncoderBitrateLimitsForResolution(pixel_count);
 
   if (encoder_bitrate_limits.has_value()) {
