@@ -30,6 +30,9 @@ void ExtractVectorFromAudioBuffer(const StreamConfig& stream_config,
                                   AudioBuffer* source,
                                   std::vector<float>* destination);
 
+// Sets all values in `audio_buffer` to `value`.
+void FillBuffer(float value, AudioBuffer& audio_buffer);
+
 }  // namespace test
 }  // namespace webrtc
 
