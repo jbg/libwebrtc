@@ -23,6 +23,7 @@
 #include "modules/audio_processing/agc/agc_manager_direct.h"
 #include "modules/audio_processing/agc/gain_control.h"
 #include "modules/audio_processing/audio_buffer.h"
+#include "modules/audio_processing/capture_levels_adjuster.h"
 #include "modules/audio_processing/echo_control_mobile_impl.h"
 #include "modules/audio_processing/gain_control_impl.h"
 #include "modules/audio_processing/gain_controller2.h"
@@ -270,7 +271,8 @@ class AudioProcessingImpl : public AudioProcessing {
       RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
   void InitializeGainController2() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
   void InitializeNoiseSuppressor() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
-  void InitializePreAmplifier() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
+  void InitializeCaptureLevelsAdjuster()
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
   void InitializePostProcessor() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
   void InitializeAnalyzer() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
 
@@ -396,6 +398,7 @@ class AudioProcessingImpl : public AudioProcessing {
     std::unique_ptr<CustomAudioAnalyzer> capture_analyzer;
     std::unique_ptr<LevelEstimator> output_level_estimator;
     std::unique_ptr<VoiceDetection> voice_detector;
+    std::unique_ptr<CaptureLevelsAdjuster> capture_levels_scaler;
   } submodules_;
 
   // State that is written to while holding both the render and capture locks

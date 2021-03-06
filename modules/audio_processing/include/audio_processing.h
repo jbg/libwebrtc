@@ -211,6 +211,18 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
       float fixed_gain_factor = 1.f;
     } pre_amplifier;
 
+    // Enables the post-gain which scales the signal once all processing is
+    // done.
+    struct PostGain {
+      bool enabled = false;
+      float gain_factor = 1.f;
+    } post_gain;
+
+    struct AnalogMicGainEmulation {
+      bool enabled = false;
+      int initial_level;
+    } analog_mic_gain_emulation;
+
     struct HighPassFilter {
       bool enabled = false;
       bool apply_in_full_band = true;
