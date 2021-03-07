@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38e9ac76_0487559d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-07T23:56:35Z",
+      "side": 1,
+      "message": "That\u0027s a good idea; it may be confusing if the error from using different threads only happens when the SctpTransport is created, since that would happen in the middle of negotiation.\n\nThough I don\u0027t know if it should be a CHECK, since we have a general policy against bad inputs causing crashes.\n\nAlso, where would this global \"last thread\" be stored? It would need to be protected by a mutex if we really want to be safe.",
+      "parentUuid": "860a3da5_529cdbf5",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcd7d643_535ca54b",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-05T10:17:10Z",
       "side": 1,
       "message": "English: \"For optimal performance, set this to the same value as |network_thread|\".",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c088d90e_e75f8195",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-07T23:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcd7d643_535ca54b",
       "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -88,6 +124,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "87b64a09_5b4c263d",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-07T23:56:35Z",
+      "side": 1,
+      "message": "Made the comment clearer.",
+      "parentUuid": "1c18fe45_1badecb5",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0de30eb0_0514c8ac",
         "filename": "media/sctp/sctp_transport.cc",
         "patchSetId": 1
@@ -117,6 +171,24 @@
       "side": 1,
       "message": "Should we make a CHECK that it doesn\u0027t happen?",
       "parentUuid": "0de30eb0_0514c8ac",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60c1391e_8a9301da",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-07T23:56:35Z",
+      "side": 1,
+      "message": "I don\u0027t think it should be a CHECK, because if it\u0027s not caught in our testing and it\u0027s a result of some rare event, it could result in users needlessly encountering crashes. Added DCHECKs, though.",
+      "parentUuid": "673fed1f_df98ba9a",
       "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -155,6 +227,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf3f526_6a9265f5",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-07T23:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a06e4f7e_42893652",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28f88cc6_57e1bd46",
@@ -168,6 +258,24 @@
       "writtenOn": "2021-03-05T10:17:10Z",
       "side": 1,
       "message": "Given that this is a static global variable, shouldn\u0027t it be prefixed with g_?\nAnd why isn\u0027t it an unique_ptr to indicate ownership of the instance?\n(because of the rules against non-POD globals?)",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7191a03_068c728e",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-07T23:56:35Z",
+      "side": 1,
+      "message": "Google C++ style guide says static members are named the same as normal members. Should I make it a non-member?\n\nAlso, it can\u0027t be a unique_ptr because that results in an exit–time destructor.",
+      "parentUuid": "28f88cc6_57e1bd46",
       "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -189,6 +297,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2be4fe0f_99525a9d",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-07T23:56:35Z",
+      "side": 1,
+      "message": "It\u0027s just a requirement of C++: https://stackoverflow.com/questions/18860895/how-to-initialize-static-members-in-the-header\n\nThough the explanation there doesn\u0027t apply since this class is declared in a .cc file, the compiler still complains.",
+      "parentUuid": "fea41f3d_169d9643",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a14d4fe9_feb86f4d",
@@ -202,6 +328,24 @@
       "writtenOn": "2021-03-05T10:17:10Z",
       "side": 1,
       "message": "This comment doesn\u0027t make sense to me. Does the EOR bit influence whether the call is atomic or not?",
+      "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "409da034_fe3b4827",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-07T23:56:35Z",
+      "side": 1,
+      "message": "It might be more accurate to say it\u0027s not atomic because the EXPLICIT_EOR mode is set, I\u0027ll revise it.",
+      "parentUuid": "a14d4fe9_feb86f4d",
       "revId": "f31b3edfa5d24d8a91cab000f96ac92f50ec121c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
