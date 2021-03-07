@@ -59,12 +59,14 @@ rtc::Thread* MaybeWrapThread(rtc::Thread* signaling_thread,
 
 std::unique_ptr<SctpTransportFactoryInterface> MaybeCreateSctpFactory(
     std::unique_ptr<SctpTransportFactoryInterface> factory,
+    rtc::Thread* usrsctp_thread,
     rtc::Thread* network_thread) {
   if (factory) {
     return factory;
   }
 #ifdef WEBRTC_HAVE_SCTP
-  return std::make_unique<cricket::SctpTransportFactory>(network_thread);
+  return std::make_unique<cricket::SctpTransportFactory>(network_thread,
+                                                         usrsctp_thread);
 #else
   return nullptr;
 #endif
@@ -100,6 +102,7 @@ ConnectionContext::ConnectionContext(
       media_engine_(std::move(dependencies->media_engine)),
       sctp_factory_(
           MaybeCreateSctpFactory(std::move(dependencies->sctp_factory),
+                                 dependencies->usrsctp_thread,
                                  network_thread())),
       trials_(dependencies->trials
                   ? std::move(dependencies->trials)
