@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76384e3d_4d56aec5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-08T10:22:42Z",
+      "side": 1,
+      "message": "Hi Kári!\n\nCould you please review this CL, which exposes restartIce method. This method is part of perfect negotiation API: https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Perfect_negotiation\n\nThanks a lot in advance,\nYura.",
+      "revId": "4e17cefd18a86092ede27b4e81121495566b0892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
