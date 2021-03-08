@@ -72,7 +72,15 @@ class SctpTransport : public SctpTransportInternal,
   // |network_thread| is where packets will be processed and callbacks from
   // this transport will be posted, and is the only thread on which public
   // methods can be called.
+  // |usrsctp_thread| is where all direct usrsctp operations will take place.
+  // Must be the same for all created SctpTransport instances. If null, a thread
+  // will be created automatically.
   // |transport| is not required (can be null).
+  SctpTransport(rtc::Thread* network_thread,
+                rtc::Thread* usrsctp_thread,
+                rtc::PacketTransportInternal* transport);
+  // Deprecated constructor, temporarily kept around for existing
+  // SctpTransportFactory subclasses.
   SctpTransport(rtc::Thread* network_thread,
                 rtc::PacketTransportInternal* transport);
   ~SctpTransport() override;
@@ -198,6 +206,7 @@ class SctpTransport : public SctpTransportInternal,
   // Responsible for marshalling incoming data to the transports listeners, and
   // outgoing data to the network interface.
   rtc::Thread* network_thread_;
+  rtc::Thread* usrsctp_thread_;
   // Helps pass inbound/outbound packets asynchronously to the network thread.
   webrtc::ScopedTaskSafety task_safety_;
   // Underlying DTLS transport.
@@ -271,8 +280,6 @@ class SctpTransport : public SctpTransportInternal,
 
   // A static human-readable name for debugging messages.
   const char* debug_name_ = "SctpTransport";
-  // Hides usrsctp interactions from this header file.
-  class UsrSctpWrapper;
   // Number of channels negotiated. Not set before negotiation completes.
   absl::optional<int> max_outbound_streams_;
   absl::optional<int> max_inbound_streams_;
@@ -281,6 +288,7 @@ class SctpTransport : public SctpTransportInternal,
   // various callbacks.
   uintptr_t id_ = 0;
 
+  friend class UsrSctpWrapper;
   friend class SctpTransportMap;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(SctpTransport);
@@ -288,17 +296,18 @@ class SctpTransport : public SctpTransportInternal,
 
 class SctpTransportFactory : public webrtc::SctpTransportFactoryInterface {
  public:
-  explicit SctpTransportFactory(rtc::Thread* network_thread)
-      : network_thread_(network_thread) {}
+  SctpTransportFactory(rtc::Thread* network_thread, rtc::Thread* usrsctp_thread)
+      : network_thread_(network_thread), usrsctp_thread_(usrsctp_thread) {}
 
   std::unique_ptr<SctpTransportInternal> CreateSctpTransport(
       rtc::PacketTransportInternal* transport) override {
     return std::unique_ptr<SctpTransportInternal>(
-        new SctpTransport(network_thread_, transport));
+        new SctpTransport(network_thread_, usrsctp_thread_, transport));
   }
 
  private:
   rtc::Thread* network_thread_;
+  rtc::Thread* usrsctp_thread_;
 };
 
 class SctpTransportMap;
