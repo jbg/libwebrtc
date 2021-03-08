@@ -35,6 +35,46 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e00a3be_12d22c14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2021-03-08T21:25:17Z",
+      "side": 1,
+      "message": "I was AFK last week so sorry for the slow reply.",
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58bcebdf_faad4895",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2021-03-08T21:25:17Z",
+      "side": 1,
+      "message": "nit: Since this is used for both resize and same-size scenarios, maybe drop the \u0027smaller_\u0027 prefix or replace it with content_height / content_width?  You could use min_{height|width} but while reading through the code later on, the \u0027smaller_\u0027 bit didn\u0027t improve readability, at least for me.",
+      "range": {
+        "startLine": 192,
+        "startChar": 6,
+        "endLine": 192,
+        "endChar": 20
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "699ff441_5135aad5",
@@ -96,6 +136,30 @@
       "side": 1,
       "message": "Yash, we don\u0027t need to do this when the size is the same, but I think it helps simplify the code. We could check if the size has changed first, and not assign to smaller_height/width, but then we need to repeat that check later to determine if we should use smaller_height/width or previous_size_. Unless you had another design in mind that I am not seeing?\n\nSteve, we could drop frames that have grown instead of cropping them (frames that have shrunk we can handle normally). I guess this is just personal preference, I find the black frames from dropped frames to be more annoying than a cropped frame when resizing. Do you think dropping the frames would improve the experience?",
       "parentUuid": "10464fc7_2fc516c6",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 0
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f15586b9_687160d2",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2021-03-08T21:25:17Z",
+      "side": 1,
+      "message": "My preference would also be to crop the image while resizing rather than drop a frame (assuming the dropped frame experience is a \u0027flash\u0027 of the buffer init color).  IIRC the cropping effect is pretty common when resizing.",
+      "parentUuid": "8002e1d8_0f3f0580",
       "range": {
         "startLine": 189,
         "startChar": 0,
@@ -195,6 +259,75 @@
         "startChar": 0,
         "endLine": 205,
         "endChar": 35
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a29be6_332887d5",
+        "filename": "modules/desktop_capture/win/wgc_capturer_win_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2021-03-08T21:25:17Z",
+      "side": 1,
+      "message": "Is there already a test for landscape/portrait?  If not it seems like a good idea to add explicit tests for them.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 35
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "581fa7d7_5d4ee556",
+        "filename": "modules/desktop_capture/win/wgc_capturer_win_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2021-03-08T21:25:17Z",
+      "side": 1,
+      "message": "Were you going to validate something using end_data or are you relying on this crashing if the buffer isn\u0027t large enough?",
+      "range": {
+        "startLine": 192,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 43
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a26b423_905e3407",
+        "filename": "modules/desktop_capture/win/wgc_capturer_win_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2021-03-08T21:25:17Z",
+      "side": 1,
+      "message": "Can you combine these two lines?\nuint8_t end_data \u003d frame_-\u003edata()[data_length];",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 43
       },
       "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"

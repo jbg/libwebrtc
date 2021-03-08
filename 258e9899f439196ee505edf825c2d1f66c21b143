@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e364c7e_c5b8e9d1",
+        "filename": "modules/desktop_capture/win/wgc_desktop_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2021-03-08T21:25:17Z",
+      "side": 0,
+      "message": "Why change away from vector?  I didn\u0027t see that mentioned in the CL description.",
+      "range": {
+        "startLine": 33,
+        "startChar": 18,
+        "endLine": 33,
+        "endChar": 29
+      },
+      "revId": "258e9899f439196ee505edf825c2d1f66c21b143",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
