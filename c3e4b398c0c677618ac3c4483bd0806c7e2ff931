@@ -191,6 +191,30 @@
       },
       "revId": "c3e4b398c0c677618ac3c4483bd0806c7e2ff931",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbc81d63_fd971961",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-03-08T15:42:16Z",
+      "side": 1,
+      "message": "Got it, didn\u0027t see the nullability annotation. I think it _should_ be non-nullable, but for the purposes of this CL, this is fine. Thanks!",
+      "parentUuid": "0edf524c_57ac3214",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 35
+      },
+      "revId": "c3e4b398c0c677618ac3c4483bd0806c7e2ff931",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
