@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba147edb_c2734247",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-08T10:42:18Z",
+      "side": 1,
+      "message": "Removing myself from the reviewers list since I don\u0027t know this coed at all.",
+      "revId": "7687d65c14763c9b1adf45d69bdd347c0bf0233e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
