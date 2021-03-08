@@ -118,6 +118,13 @@ std::string AudioProcessing::Config::ToString() const {
       << ", multi_channel_capture: " << pipeline.multi_channel_capture
       << " }, pre_amplifier: { enabled: " << pre_amplifier.enabled
       << ", fixed_gain_factor: " << pre_amplifier.fixed_gain_factor
+      << " }, pre_gain: { enabled: " << pre_gain.enabled
+      << ", gain_factor: " << pre_gain.gain_factor
+      << " }, post_gain: { enabled: " << post_gain.enabled
+      << ", gain_factor: " << post_gain.gain_factor
+      << " }, analog_mic_gain_emulation: { enabled: "
+      << analog_mic_gain_emulation.enabled
+      << ", initial_level: " << analog_mic_gain_emulation.initial_level
       << " }, high_pass_filter: { enabled: " << high_pass_filter.enabled
       << " }, echo_canceller: { enabled: " << echo_canceller.enabled
       << ", mobile_mode: " << echo_canceller.mobile_mode
