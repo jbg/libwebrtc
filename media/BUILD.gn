@@ -399,14 +399,17 @@ rtc_library("rtc_data") {
   deps = [
     ":rtc_media_base",
     "../api:call_api",
+    "../api:scoped_refptr",
     "../api:sequence_checker",
     "../api:transport_api",
     "../p2p:rtc_p2p",
     "../rtc_base",
+    "../rtc_base:refcount",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:threading",
     "../rtc_base/synchronization:mutex",
     "../rtc_base/task_utils:pending_task_safety_flag",
+    "../rtc_base/task_utils:repeating_task",
     "../rtc_base/task_utils:to_queued_task",
     "../rtc_base/third_party/sigslot",
     "../system_wrappers",
@@ -421,7 +424,11 @@ rtc_library("rtc_data") {
     sources = [
       "sctp/sctp_transport.cc",
       "sctp/sctp_transport.h",
+      "sctp/sctp_transport_factory.cc",
+      "sctp/sctp_transport_factory.h",
       "sctp/sctp_transport_internal.h",
+      "sctp/usrsctp_wrapper.cc",
+      "sctp/usrsctp_wrapper.h",
     ]
   } else {
     # libtool on mac does not like empty targets.
