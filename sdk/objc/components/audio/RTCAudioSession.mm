@@ -372,16 +372,19 @@ NSString * const kRTCAudioSessionOutputVolumeSelector = @"outputVolume";
     }
     if (active) {
       [self incrementActivationCount];
+      [self notifyDidSetActive:active];
     }
-    [self notifyDidSetActive:active];
   } else {
     RTCLogError(@"Failed to setActive:%d. Error: %@",
                 active, error.localizedDescription);
     [self notifyFailedToSetActive:active error:error];
   }
-  // Decrement activation count on deactivation whether or not it succeeded.
+  // Set isActive and decrement activation count on deactivation
+  // whether or not it succeeded.
   if (!active) {
+    self.isActive = active;
     [self decrementActivationCount];
+    [self notifyDidSetActive:active];
   }
   RTCLog(@"Number of current activations: %d", _activationCount);
   return success;
