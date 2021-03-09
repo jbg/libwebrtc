@@ -18,6 +18,40 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae679f86_dfa9e99c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-09T17:30:57Z",
+      "side": 1,
+      "message": "Great - the update to the safety flag is simple but clever. The need for it has come up a few times in the past.",
+      "revId": "7312de971310b2c5637617146fd5a945db777b78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d425835_c17befb1",
+        "filename": "rtc_base/task_utils/pending_task_safety_flag.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-09T17:30:57Z",
+      "side": 1,
+      "message": "I think that this will be useful for several cases. Can you add some documentation that explains when someone might want to use this?",
+      "revId": "7312de971310b2c5637617146fd5a945db777b78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5731b5d_70994c9a",
@@ -31,6 +65,30 @@
       "writtenOn": "2021-03-09T13:32:50Z",
       "side": 1,
       "message": "This call should attach the safety flags\u0027s sequence checker to the right thread.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 27
+      },
+      "revId": "7312de971310b2c5637617146fd5a945db777b78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "625a2700_ed87af03",
+        "filename": "sdk/objc/native/src/objc_network_monitor.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-09T17:30:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e5731b5d_70994c9a",
       "range": {
         "startLine": 39,
         "startChar": 0,
