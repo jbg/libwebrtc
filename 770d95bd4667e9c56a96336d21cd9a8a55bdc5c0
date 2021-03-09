@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bdb98d2_a1fa8108",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-09T10:28:26Z",
+      "side": 1,
+      "message": "Hello Kári!\n\nCould you please review this CL, which exposes modern version of addIceCandidate with completion handler from RTCPeerConnection object?\n\nThanks a lot in advance,\nYura.",
+      "revId": "770d95bd4667e9c56a96336d21cd9a8a55bdc5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
