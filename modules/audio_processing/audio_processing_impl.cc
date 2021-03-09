@@ -145,7 +145,7 @@ bool AudioProcessingImpl::SubmoduleStates::Update(
     bool noise_suppressor_enabled,
     bool adaptive_gain_controller_enabled,
     bool gain_controller2_enabled,
-    bool pre_amplifier_enabled,
+    bool gain_adjustment_enabled,
     bool echo_controller_enabled,
     bool voice_detector_enabled,
     bool transient_suppressor_enabled) {
@@ -159,7 +159,7 @@ bool AudioProcessingImpl::SubmoduleStates::Update(
   changed |=
       (adaptive_gain_controller_enabled != adaptive_gain_controller_enabled_);
   changed |= (gain_controller2_enabled != gain_controller2_enabled_);
-  changed |= (pre_amplifier_enabled_ != pre_amplifier_enabled);
+  changed |= (gain_adjustment_enabled != gain_adjustment_enabled_);
   changed |= (echo_controller_enabled != echo_controller_enabled_);
   changed |= (voice_detector_enabled != voice_detector_enabled_);
   changed |= (transient_suppressor_enabled != transient_suppressor_enabled_);
@@ -170,7 +170,7 @@ bool AudioProcessingImpl::SubmoduleStates::Update(
     noise_suppressor_enabled_ = noise_suppressor_enabled;
     adaptive_gain_controller_enabled_ = adaptive_gain_controller_enabled;
     gain_controller2_enabled_ = gain_controller2_enabled;
-    pre_amplifier_enabled_ = pre_amplifier_enabled;
+    gain_adjustment_enabled_ = gain_adjustment_enabled;
     echo_controller_enabled_ = echo_controller_enabled;
     voice_detector_enabled_ = voice_detector_enabled;
     transient_suppressor_enabled_ = transient_suppressor_enabled;
@@ -202,7 +202,7 @@ bool AudioProcessingImpl::SubmoduleStates::CaptureMultiBandProcessingActive(
 bool AudioProcessingImpl::SubmoduleStates::CaptureFullBandProcessingActive()
     const {
   return gain_controller2_enabled_ || capture_post_processor_enabled_ ||
-         pre_amplifier_enabled_;
+         gain_adjustment_enabled_;
 }
 
 bool AudioProcessingImpl::SubmoduleStates::CaptureAnalyzerActive() const {
@@ -422,6 +422,7 @@ void AudioProcessingImpl::InitializeLocked() {
   InitializeAnalyzer();
   InitializePostProcessor();
   InitializePreProcessor();
+  InitializeCaptureLevelsAdjuster();
 
   if (aec_dump_) {
     aec_dump_->WriteInitMessage(formats_.api_format, rtc::TimeUTCMillis());
@@ -563,6 +564,19 @@ void AudioProcessingImpl::ApplyConfig(const AudioProcessing::Config& config) {
       config_.pre_amplifier.fixed_gain_factor !=
           config.pre_amplifier.fixed_gain_factor;
 
+  const bool gain_adjustment_config_changed =
+      config_.capture_level_adjustment.enabled !=
+          config.capture_level_adjustment.enabled ||
+      config_.capture_level_adjustment.pre_gain_factor !=
+          config.capture_level_adjustment.pre_gain_factor ||
+      config_.capture_level_adjustment.post_gain_factor !=
+          config.capture_level_adjustment.post_gain_factor ||
+      config_.capture_level_adjustment.analog_mic_gain_emulation.enabled !=
+          config.capture_level_adjustment.analog_mic_gain_emulation.enabled ||
+      config_.capture_level_adjustment.analog_mic_gain_emulation
+              .initial_level != config.capture_level_adjustment
+                                    .analog_mic_gain_emulation.initial_level;
+
   config_ = config;
 
   if (aec_config_changed) {
@@ -594,8 +608,8 @@ void AudioProcessingImpl::ApplyConfig(const AudioProcessing::Config& config) {
     InitializeGainController2();
   }
 
-  if (pre_amplifier_config_changed) {
-    InitializePreAmplifier();
+  if (pre_amplifier_config_changed || gain_adjustment_config_changed) {
+    InitializeCaptureLevelsAdjuster();
   }
 
   if (config_.level_estimation.enabled && !submodules_.output_level_estimator) {
@@ -688,6 +702,7 @@ bool AudioProcessingImpl::PostRuntimeSetting(RuntimeSetting setting) {
     case RuntimeSetting::Type::kPlayoutAudioDeviceChange:
       return render_runtime_settings_enqueuer_.Enqueue(setting);
     case RuntimeSetting::Type::kCapturePreGain:
+    case RuntimeSetting::Type::kCapturePostGain:
     case RuntimeSetting::Type::kCaptureCompressionGain:
     case RuntimeSetting::Type::kCaptureFixedPostGain:
     case RuntimeSetting::Type::kCaptureOutputUsed:
@@ -809,11 +824,35 @@ void AudioProcessingImpl::HandleCaptureRuntimeSettings() {
     }
     switch (setting.type()) {
       case RuntimeSetting::Type::kCapturePreGain:
-        if (config_.pre_amplifier.enabled) {
+        if (config_.pre_amplifier.enabled ||
+            config_.capture_level_adjustment.enabled) {
           float value;
           setting.GetFloat(&value);
-          config_.pre_amplifier.fixed_gain_factor = value;
-          submodules_.pre_amplifier->SetGainFactor(value);
+          if (config_.pre_amplifier.enabled) {
+            config_.pre_amplifier.fixed_gain_factor = value;
+          } else {
+            config_.capture_level_adjustment.pre_gain_factor = value;
+          }
+
+          float gain = 1.f;
+          if (config_.pre_amplifier.enabled) {
+            gain *= config_.pre_amplifier.fixed_gain_factor;
+          }
+          if (config_.capture_level_adjustment.enabled) {
+            gain *= config_.capture_level_adjustment.pre_gain_factor;
+          }
+
+          submodules_.capture_levels_adjuster->SetPreGain(gain);
+        }
+        // TODO(bugs.chromium.org/9138): Log setting handling by Aec Dump.
+        break;
+      case RuntimeSetting::Type::kCapturePostGain:
+        if (config_.capture_level_adjustment.enabled) {
+          float value;
+          setting.GetFloat(&value);
+          config_.capture_level_adjustment.post_gain_factor = value;
+          submodules_.capture_levels_adjuster->SetPostGain(
+              config_.capture_level_adjustment.post_gain_factor);
         }
         // TODO(bugs.chromium.org/9138): Log setting handling by Aec Dump.
         break;
@@ -896,6 +935,7 @@ void AudioProcessingImpl::HandleRenderRuntimeSettings() {
         }
         break;
       case RuntimeSetting::Type::kCapturePreGain:          // fall-through
+      case RuntimeSetting::Type::kCapturePostGain:         // fall-through
       case RuntimeSetting::Type::kCaptureCompressionGain:  // fall-through
       case RuntimeSetting::Type::kCaptureFixedPostGain:    // fall-through
       case RuntimeSetting::Type::kCaptureOutputUsed:       // fall-through
@@ -1083,10 +1123,20 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
                                           /*use_split_band_data=*/false);
   }
 
-  if (submodules_.pre_amplifier) {
-    submodules_.pre_amplifier->ApplyGain(AudioFrameView<float>(
-        capture_buffer->channels(), capture_buffer->num_channels(),
-        capture_buffer->num_frames()));
+  if (submodules_.capture_levels_adjuster) {
+    // If the analog mic gain emulation is active, get the emulated analog mic
+    // gain and pass it to the analog gain control functionality.
+    if (config_.capture_level_adjustment.analog_mic_gain_emulation.enabled) {
+      int level = submodules_.capture_levels_adjuster->GetAnalogMicGainLevel();
+      if (submodules_.agc_manager) {
+        submodules_.agc_manager->set_stream_analog_level(level);
+      } else if (submodules_.gain_control) {
+        int error = submodules_.gain_control->set_stream_analog_level(level);
+        RTC_DCHECK_EQ(kNoError, error);
+      }
+    }
+
+    submodules_.capture_levels_adjuster->PreLevelAdjustment(*capture_buffer);
   }
 
   capture_input_rms_.Analyze(rtc::ArrayView<const float>(
@@ -1110,14 +1160,15 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
         capture_.prev_analog_mic_level != -1;
     capture_.prev_analog_mic_level = analog_mic_level;
 
-    // Detect and flag any change in the pre-amplifier gain.
-    if (submodules_.pre_amplifier) {
-      float pre_amp_gain = submodules_.pre_amplifier->GetGainFactor();
+    // Detect and flag any change in the capture level adjustment pre-gain.
+    if (submodules_.capture_levels_adjuster) {
+      float pre_adjustment_gain =
+          submodules_.capture_levels_adjuster->GetPreAdjustmentGain();
       capture_.echo_path_gain_change =
           capture_.echo_path_gain_change ||
-          (capture_.prev_pre_amp_gain != pre_amp_gain &&
-           capture_.prev_pre_amp_gain >= 0.f);
-      capture_.prev_pre_amp_gain = pre_amp_gain;
+          (capture_.prev_pre_adjustment_gain != pre_adjustment_gain &&
+           capture_.prev_pre_adjustment_gain >= 0.f);
+      capture_.prev_pre_adjustment_gain = pre_adjustment_gain;
     }
 
     // Detect volume change.
@@ -1325,6 +1376,22 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   // Pass stats for reporting.
   stats_reporter_.UpdateStatistics(capture_.stats);
 
+  if (submodules_.capture_levels_adjuster) {
+    submodules_.capture_levels_adjuster->PostLevelAdjustment(*capture_buffer);
+
+    // If the analog mic gain emulation is active, retrieve the level from the
+    // anaalog gain control and set it to mic gain emulator.
+    if (config_.capture_level_adjustment.analog_mic_gain_emulation.enabled) {
+      if (submodules_.agc_manager) {
+        submodules_.capture_levels_adjuster->SetAnalogMicGainLevel(
+            submodules_.agc_manager->stream_analog_level());
+      } else if (submodules_.gain_control) {
+        submodules_.capture_levels_adjuster->SetAnalogMicGainLevel(
+            submodules_.gain_control->stream_analog_level());
+      }
+    }
+  }
+
   capture_.was_stream_delay_set = false;
   return kNoError;
 }
@@ -1527,16 +1594,27 @@ void AudioProcessingImpl::set_stream_key_pressed(bool key_pressed) {
 void AudioProcessingImpl::set_stream_analog_level(int level) {
   MutexLock lock_capture(&mutex_capture_);
 
+  if (config_.capture_level_adjustment.analog_mic_gain_emulation.enabled) {
+    // If the analog mic gain is emulated internally, simply cache the level for
+    // reporting.
+    capture_.cached_stream_analog_level_ = level;
+    return;
+  }
+
   if (submodules_.agc_manager) {
     submodules_.agc_manager->set_stream_analog_level(level);
     data_dumper_->DumpRaw("experimental_gain_control_set_stream_analog_level",
                           1, &level);
-  } else if (submodules_.gain_control) {
+    return;
+  }
+
+  if (submodules_.gain_control) {
     int error = submodules_.gain_control->set_stream_analog_level(level);
     RTC_DCHECK_EQ(kNoError, error);
-  } else {
-    capture_.cached_stream_analog_level_ = level;
+    return;
   }
+
+  capture_.cached_stream_analog_level_ = level;
 }
 
 int AudioProcessingImpl::recommended_stream_analog_level() const {
@@ -1545,13 +1623,19 @@ int AudioProcessingImpl::recommended_stream_analog_level() const {
 }
 
 int AudioProcessingImpl::recommended_stream_analog_level_locked() const {
-  if (submodules_.agc_manager) {
-    return submodules_.agc_manager->stream_analog_level();
-  } else if (submodules_.gain_control) {
-    return submodules_.gain_control->stream_analog_level();
-  } else {
+  if (config_.capture_level_adjustment.analog_mic_gain_emulation.enabled) {
     return capture_.cached_stream_analog_level_;
   }
+
+  if (submodules_.agc_manager) {
+    return submodules_.agc_manager->stream_analog_level();
+  }
+
+  if (submodules_.gain_control) {
+    return submodules_.gain_control->stream_analog_level();
+  }
+
+  return capture_.cached_stream_analog_level_;
 }
 
 bool AudioProcessingImpl::CreateAndAttachAecDump(const std::string& file_name,
@@ -1615,7 +1699,8 @@ bool AudioProcessingImpl::UpdateActiveSubmoduleStates() {
       config_.high_pass_filter.enabled, !!submodules_.echo_control_mobile,
       config_.residual_echo_detector.enabled, !!submodules_.noise_suppressor,
       !!submodules_.gain_control, !!submodules_.gain_controller2,
-      config_.pre_amplifier.enabled, capture_nonlocked_.echo_controller_enabled,
+      config_.pre_amplifier.enabled || config_.capture_level_adjustment.enabled,
+      capture_nonlocked_.echo_controller_enabled,
       config_.voice_detection.enabled, !!submodules_.transient_suppressor);
 }
 
@@ -1859,12 +1944,25 @@ void AudioProcessingImpl::InitializeNoiseSuppressor() {
   }
 }
 
-void AudioProcessingImpl::InitializePreAmplifier() {
-  if (config_.pre_amplifier.enabled) {
-    submodules_.pre_amplifier.reset(
-        new GainApplier(true, config_.pre_amplifier.fixed_gain_factor));
+void AudioProcessingImpl::InitializeCaptureLevelsAdjuster() {
+  if (config_.pre_amplifier.enabled ||
+      config_.capture_level_adjustment.enabled) {
+    float pre_gain = 1.f;
+    if (config_.pre_amplifier.enabled) {
+      pre_gain *= config_.pre_amplifier.fixed_gain_factor;
+    }
+    if (config_.capture_level_adjustment.enabled) {
+      pre_gain *= config_.capture_level_adjustment.pre_gain_factor;
+    }
+
+    submodules_.capture_levels_adjuster =
+        std::make_unique<CaptureLevelsAdjuster>(
+            config_.capture_level_adjustment.analog_mic_gain_emulation.enabled,
+            config_.capture_level_adjustment.analog_mic_gain_emulation
+                .initial_level,
+            pre_gain, config_.capture_level_adjustment.post_gain_factor);
   } else {
-    submodules_.pre_amplifier.reset();
+    submodules_.capture_levels_adjuster.reset();
   }
 }
 
@@ -2030,7 +2128,7 @@ AudioProcessingImpl::ApmCaptureState::ApmCaptureState()
       split_rate(kSampleRate16kHz),
       echo_path_gain_change(false),
       prev_analog_mic_level(-1),
-      prev_pre_amp_gain(-1.f),
+      prev_pre_adjustment_gain(-1.f),
       playout_volume(-1),
       prev_playout_volume(-1) {}
 

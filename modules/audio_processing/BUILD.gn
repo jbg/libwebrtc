@@ -108,6 +108,26 @@ rtc_library("high_pass_filter") {
   ]
 }
 
+rtc_library("capture_levels_adjuster") {
+  visibility = [ "*" ]
+
+  sources = [
+    "audio_samples_scaler.cc",
+    "audio_samples_scaler.h",
+    "capture_levels_adjuster.cc",
+    "capture_levels_adjuster.h",
+  ]
+
+  defines = []
+
+  deps = [
+    ":audio_buffer",
+    "../../api:array_view",
+    "../../rtc_base:checks",
+    "../../rtc_base:safe_minmax",
+  ]
+}
+
 rtc_source_set("aec_dump_interface") {
   visibility = [ "*" ]
   sources = [
@@ -162,6 +182,7 @@ rtc_library("audio_processing") {
     ":audio_frame_proxies",
     ":audio_frame_view",
     ":audio_processing_statistics",
+    ":capture_levels_adjuster",
     ":config",
     ":high_pass_filter",
     ":optionally_built_submodule_creators",
@@ -333,6 +354,8 @@ if (rtc_include_tests) {
       sources = [
         "audio_buffer_unittest.cc",
         "audio_frame_view_unittest.cc",
+        "audio_samples_scaler_unittest.cc",
+        "capture_levels_adjuster_unittest.cc",
         "config_unittest.cc",
         "echo_control_mobile_unittest.cc",
         "gain_controller2_unittest.cc",
@@ -348,6 +371,7 @@ if (rtc_include_tests) {
         ":audio_frame_view",
         ":audio_processing",
         ":audioproc_test_utils",
+        ":capture_levels_adjuster",
         ":config",
         ":high_pass_filter",
         ":mocks",
