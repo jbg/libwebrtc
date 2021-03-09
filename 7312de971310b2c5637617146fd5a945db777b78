@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84de49a9_6b6f70ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-09T13:32:50Z",
+      "side": 1,
+      "message": "PTAL, this way of using the safety flag seems to work. If this works out, we could perhaps do the same for AndroidNetworkMonitor too (earlier attempt failed, possibly because the objects aren\u0027t constructed on the network thread).",
+      "revId": "7312de971310b2c5637617146fd5a945db777b78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5731b5d_70994c9a",
+        "filename": "sdk/objc/native/src/objc_network_monitor.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-09T13:32:50Z",
+      "side": 1,
+      "message": "This call should attach the safety flags\u0027s sequence checker to the right thread.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 27
+      },
+      "revId": "7312de971310b2c5637617146fd5a945db777b78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
