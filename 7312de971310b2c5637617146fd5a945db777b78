@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6874bfde_a7b20fce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-09T20:45:34Z",
+      "side": 1,
+      "message": "Are you sure this is necessary? It looks to me like the monitor is always created and started on the same thread: https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/rtc_base/network.cc;l\u003d861?q\u003d%22-%3Ecreatenetworkmonitor%22\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nIf it\u0027s not, can we figure out why that\u0027s happening? If it\u0027s unavoidable this looks good though.",
+      "revId": "7312de971310b2c5637617146fd5a945db777b78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d425835_c17befb1",
