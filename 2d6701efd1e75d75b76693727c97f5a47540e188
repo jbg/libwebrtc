@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ced56f2_e1daa475",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-03-10T15:26:03Z",
+      "side": 1,
+      "message": "v4-rmnet was actually already added to the \"manual\" classification...\nnow it will match inside android_network_monitor.cc instead.",
+      "parentUuid": "f2dd39df_fee6c551",
+      "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "209266f7_145077ed",
