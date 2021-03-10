@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b058ad4_18295be1",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-03-10T15:05:08Z",
+      "side": 1,
+      "message": "It is hard to follow what happens when capture output is vs is not used. Can all of that be placed within a single if(capture_.capture_output_used)?",
+      "range": {
+        "startLine": 1237,
+        "startChar": 0,
+        "endLine": 1329,
+        "endChar": 3
+      },
+      "revId": "546b78d8336d8a37daeb0fc8ed757447a69ef8d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8043e04e_9cb0f4f2",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-03-10T15:05:08Z",
+      "side": 1,
+      "message": "The variable name tells me that it overrides a capture usage setting, but not how / in what direction. Can it be clarified? E.g. always_assume_capture_output_is_used.\n\nThe same holds for the field trial name.",
+      "range": {
+        "startLine": 432,
+        "startChar": 34,
+        "endLine": 432,
+        "endChar": 71
+      },
+      "revId": "546b78d8336d8a37daeb0fc8ed757447a69ef8d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26f5243_5964bec4",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-03-10T15:05:08Z",
+      "side": 1,
+      "message": "Move this into ApmConstants",
+      "range": {
+        "startLine": 432,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 53
+      },
+      "revId": "546b78d8336d8a37daeb0fc8ed757447a69ef8d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
