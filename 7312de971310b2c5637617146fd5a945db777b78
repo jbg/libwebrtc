@@ -52,6 +52,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "974c3ad3_8b62e838",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-03-10T09:38:10Z",
+      "side": 1,
+      "message": "objc bits lgtm.",
+      "revId": "7312de971310b2c5637617146fd5a945db777b78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d425835_c17befb1",
@@ -65,6 +82,29 @@
       "writtenOn": "2021-03-09T17:30:57Z",
       "side": 1,
       "message": "I think that this will be useful for several cases. Can you add some documentation that explains when someone might want to use this?",
+      "revId": "7312de971310b2c5637617146fd5a945db777b78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d43d8ae_2c10e5eb",
+        "filename": "sdk/objc/native/src/objc_network_monitor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-03-10T09:38:10Z",
+      "side": 1,
+      "message": "can we get rid of this include now?",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 35
+      },
       "revId": "7312de971310b2c5637617146fd5a945db777b78",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
