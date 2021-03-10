@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10f14685_947807db",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-10T20:09:06Z",
+      "side": 1,
+      "message": "Is there a reason we can\u0027t use an exact match?",
+      "revId": "da2fd2a2b25ee4bd7b383424cb26d51fb6cc7716",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "363ceded_4ce78ad5",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-10T20:09:06Z",
+      "side": 1,
+      "message": "Is this meant to be vpn_underlying_adapter_type_by_name_? If this uses adapter_type_my_name_ it will return VPN for VPNs, which isn\u0027t what we want.",
+      "revId": "da2fd2a2b25ee4bd7b383424cb26d51fb6cc7716",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
