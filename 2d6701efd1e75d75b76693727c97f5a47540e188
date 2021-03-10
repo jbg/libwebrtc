@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2dd39df_fee6c551",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-10T14:01:57Z",
+      "side": 1,
+      "message": "This kind of change makes me nervious, because it moves the boundary between abstractions, and it doesn\u0027t update any documentation (apart from comments).\n\nBut it solves a real problem.\n\nNote: the \"v4-rmnet\" network will apparently be unaffected by this change - it\u0027s not classified.\nIs that right?\n\nStill - going LGTM.",
+      "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "209266f7_145077ed",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-10T14:01:57Z",
+      "side": 1,
+      "message": "Given the duplication of code is likely to increase over time, is it possible to write this constructor as : BasicNetworkManager(null)?",
+      "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9e82385_0be6d349",
+        "filename": "rtc_base/network_monitor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-10T14:01:57Z",
+      "side": 1,
+      "message": "If this is a question, end it with a question mark.",
+      "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3c6d947_9088a466",
+        "filename": "rtc_base/network_monitor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-10T14:01:57Z",
+      "side": 1,
+      "message": "Name should be Supports, not Support (it\u0027s a query not a command).",
+      "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53638426_4a2bfc0c",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-10T14:01:57Z",
+      "side": 1,
+      "message": "This function does \"first find network handle by address, then if that fails find it by name\". I wonder if the code would be clearer if you made this two functions (\"FindNetworkHandleFromAddress\" and \"FindNetworkHandleFromInterfaceName\") and let the caller site decide which one to call on first - the lookup functions are entirely independent.",
+      "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
