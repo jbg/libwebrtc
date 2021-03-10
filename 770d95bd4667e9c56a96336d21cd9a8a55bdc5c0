@@ -16,6 +16,52 @@
       "message": "Hello Kári!\n\nCould you please review this CL, which exposes modern version of addIceCandidate with completion handler from RTCPeerConnection object?\n\nThanks a lot in advance,\nYura.",
       "revId": "770d95bd4667e9c56a96336d21cd9a8a55bdc5c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dd5961b_1a3a178f",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-03-10T09:45:54Z",
+      "side": 1,
+      "message": "why change the return type here? This will break backwards compatibility in some cases.",
+      "range": {
+        "startLine": 216,
+        "startChar": 3,
+        "endLine": 216,
+        "endChar": 7
+      },
+      "revId": "770d95bd4667e9c56a96336d21cd9a8a55bdc5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c5e36cf_bd844bd8",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-03-10T09:45:54Z",
+      "side": 1,
+      "message": "Assert that nonnull params are indeed non-null at the top of the method.",
+      "range": {
+        "startLine": 444,
+        "startChar": 60,
+        "endLine": 444,
+        "endChar": 77
+      },
+      "revId": "770d95bd4667e9c56a96336d21cd9a8a55bdc5c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
