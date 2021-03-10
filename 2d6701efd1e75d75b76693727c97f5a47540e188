@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "979f3938_31cf18da",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-03-10T15:24:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "209266f7_145077ed",
+      "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9e82385_0be6d349",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-10T14:01:57Z",
       "side": 1,
       "message": "If this is a question, end it with a question mark.",
+      "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "845969b3_0c84eb42",
+        "filename": "rtc_base/network_monitor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-03-10T15:24:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9e82385_0be6d349",
       "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b708fa9_40365c37",
+        "filename": "rtc_base/network_monitor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-03-10T15:24:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3c6d947_9088a466",
+      "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53638426_4a2bfc0c",
@@ -82,6 +136,24 @@
       "writtenOn": "2021-03-10T14:01:57Z",
       "side": 1,
       "message": "This function does \"first find network handle by address, then if that fails find it by name\". I wonder if the code would be clearer if you made this two functions (\"FindNetworkHandleFromAddress\" and \"FindNetworkHandleFromInterfaceName\") and let the caller site decide which one to call on first - the lookup functions are entirely independent.",
+      "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19a7007b_8e0dd49c",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-03-10T15:24:51Z",
+      "side": 1,
+      "message": "Did half...created FindNetworkHandleFromIfname and called that from FindNetworkHandleFromAddressOrName",
+      "parentUuid": "53638426_4a2bfc0c",
       "revId": "2d6701efd1e75d75b76693727c97f5a47540e188",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
