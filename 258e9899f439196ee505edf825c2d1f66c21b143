@@ -22,6 +22,30 @@
       },
       "revId": "258e9899f439196ee505edf825c2d1f66c21b143",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f953e692_a1e3a76c",
+        "filename": "modules/desktop_capture/win/wgc_desktop_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-03-11T19:52:43Z",
+      "side": 0,
+      "message": "I thought it had something to do with the bug, but it didn\u0027t. I\u0027ve changed it back since it was more readable before.",
+      "parentUuid": "7e364c7e_c5b8e9d1",
+      "range": {
+        "startLine": 33,
+        "startChar": 18,
+        "endLine": 33,
+        "endChar": 29
+      },
+      "revId": "258e9899f439196ee505edf825c2d1f66c21b143",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

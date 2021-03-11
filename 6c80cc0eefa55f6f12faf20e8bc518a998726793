@@ -75,6 +75,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22c2a9be_722ef818",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-03-11T19:52:43Z",
+      "side": 1,
+      "message": "Sure, I will change it to image_width and image_height, since we use image_data as well.",
+      "parentUuid": "58bcebdf_faad4895",
+      "range": {
+        "startLine": 192,
+        "startChar": 6,
+        "endLine": 192,
+        "endChar": 20
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "699ff441_5135aad5",
@@ -160,6 +184,30 @@
       "side": 1,
       "message": "My preference would also be to crop the image while resizing rather than drop a frame (assuming the dropped frame experience is a \u0027flash\u0027 of the buffer init color).  IIRC the cropping effect is pretty common when resizing.",
       "parentUuid": "8002e1d8_0f3f0580",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 0
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d80fdd_f4ae876f",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-03-11T19:52:43Z",
+      "side": 1,
+      "message": "Sounds good, I\u0027ll leave it as is then.",
+      "parentUuid": "f15586b9_687160d2",
       "range": {
         "startLine": 189,
         "startChar": 0,
@@ -287,6 +335,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce1f19d_bd180481",
+        "filename": "modules/desktop_capture/win/wgc_capturer_win_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-03-11T19:52:43Z",
+      "side": 1,
+      "message": "No, I was wary of changing the orientation in case it would disrupt other tests running in parallel. I think this would be a good test case for a Mock API. I\u0027ve filed this bug to write up some mock tests to cover this scenario: \nhttps://bugs.chromium.org/p/webrtc/issues/detail?id\u003d12572",
+      "parentUuid": "59a29be6_332887d5",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 35
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "581fa7d7_5d4ee556",
@@ -323,6 +395,54 @@
       "writtenOn": "2021-03-08T21:25:17Z",
       "side": 1,
       "message": "Can you combine these two lines?\nuint8_t end_data \u003d frame_-\u003edata()[data_length];",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 43
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af2b17d6_f9cb8664",
+        "filename": "modules/desktop_capture/win/wgc_capturer_win_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-03-11T19:52:43Z",
+      "side": 1,
+      "message": "I was relying on the crash, but I think it\u0027s worthwhile to validate the pixels so I\u0027ve updated the TestWindow to paint itself and now we can validate the actual data.",
+      "parentUuid": "581fa7d7_5d4ee556",
+      "range": {
+        "startLine": 192,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 43
+      },
+      "revId": "6c80cc0eefa55f6f12faf20e8bc518a998726793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43770a1_a563cb48",
+        "filename": "modules/desktop_capture/win/wgc_capturer_win_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-03-11T19:52:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a26b423_905e3407",
       "range": {
         "startLine": 191,
         "startChar": 4,
