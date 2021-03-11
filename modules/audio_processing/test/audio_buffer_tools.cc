@@ -51,5 +51,13 @@ void ExtractVectorFromAudioBuffer(const StreamConfig& stream_config,
   source->CopyTo(stream_config, &output[0]);
 }
 
+void FillBuffer(float value, AudioBuffer& audio_buffer) {
+  for (size_t ch = 0; ch < audio_buffer.num_channels(); ++ch) {
+    for (size_t i = 0; i < audio_buffer.num_frames(); ++i) {
+      audio_buffer.channels()[ch][i] = value;
+    }
+  }
+}
+
 }  // namespace test
 }  // namespace webrtc
