@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e95140e_8d486a46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-11T08:52:34Z",
+      "side": 1,
+      "message": "Hi, do you think it\u0027s reasonable to delete this method? As far as I\u0027ve found, only use is in tests for SetOption. If you like the change, we\u0027d need to leave a default dummy implementation on the interface, and update downstream subclasses in a few places, before deleting it completely.",
+      "revId": "f321921c80e46481b3f6391c82de292d3b1f1fb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
