@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8290c77_8d7bd833",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-11T06:19:25Z",
+      "side": 1,
+      "message": "Yes, you are fully right.\nI shuffled this round a bit and managed to put everything in one single block.\nThat also made is superclear that it was more things that could be deactivated when the capture output is not used.\n\nThanks for pointing this out!",
+      "parentUuid": "0b058ad4_18295be1",
+      "range": {
+        "startLine": 1237,
+        "startChar": 0,
+        "endLine": 1329,
+        "endChar": 3
+      },
+      "revId": "546b78d8336d8a37daeb0fc8ed757447a69ef8d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8043e04e_9cb0f4f2",
         "filename": "modules/audio_processing/audio_processing_impl.h",
         "patchSetId": 5
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fee47370_f49841f5",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-11T06:19:25Z",
+      "side": 1,
+      "message": "I changed it a bit.\nPTAL",
+      "parentUuid": "8043e04e_9cb0f4f2",
+      "range": {
+        "startLine": 432,
+        "startChar": 34,
+        "endLine": 432,
+        "endChar": 71
+      },
+      "revId": "546b78d8336d8a37daeb0fc8ed757447a69ef8d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d26f5243_5964bec4",
         "filename": "modules/audio_processing/audio_processing_impl.h",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2021-03-10T15:05:08Z",
       "side": 1,
       "message": "Move this into ApmConstants",
+      "range": {
+        "startLine": 432,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 53
+      },
+      "revId": "546b78d8336d8a37daeb0fc8ed757447a69ef8d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05c3fa69_382a3340",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-11T06:19:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d26f5243_5964bec4",
       "range": {
         "startLine": 432,
         "startChar": 0,
