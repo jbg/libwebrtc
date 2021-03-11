@@ -1,0 +1,722 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01f36383_e9bf170e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "Hi Per,\nThanks for the CL. I have some comments; nothing major, there\u0027s only one small bug.\n\nFYI, the following files are still unreviewed:\nmodules/audio_processing/audio_processing_impl.h\nmodules/audio_processing/audio_processing_impl.cc\nmodules/audio_processing/audio_processing_impl_unittest.cc\nmodules/audio_processing/audio_processing_unittest.cc\n\nCheers,\nAlessio",
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1124564_931a5810",
+        "filename": "modules/audio_processing/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "\":*\" right? we only need package visibility, not public",
+      "range": {
+        "startLine": 112,
+        "startChar": 17,
+        "endLine": 112,
+        "endChar": 20
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f93e5c3_89ce52b2",
+        "filename": "modules/audio_processing/audio_samples_scaler.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "sample \u003d rtc::SafeClamp(...\n\nBTW, why not using that in lines 45, 61 and 73 directly? the complexity doesn\u0027t change, but that should be more cache friendly",
+      "range": {
+        "startLine": 87,
+        "startChar": 6,
+        "endLine": 87,
+        "endChar": 27
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2814492c_d9fc0e6c",
+        "filename": "modules/audio_processing/audio_samples_scaler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "consider moving this file to a subfolder since this is not an APM sub-module\nmaybe under modules/audio_processing/utility/? this can very well be reused inside APM",
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54948ad8_cf0ba048",
+        "filename": "modules/audio_processing/audio_samples_scaler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "linearly",
+      "range": {
+        "startLine": 22,
+        "startChar": 3,
+        "endLine": 22,
+        "endChar": 12
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "428a8781_24018962",
+        "filename": "modules/audio_processing/audio_samples_scaler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "initial_gain\n\nplus, I would add ctor docstring to explain that the initial gain is applied from the first sample - i.e., no 1 frame linear/gradual gain adaptation as it happens when the gain is changed via SetGain()",
+      "range": {
+        "startLine": 25,
+        "startChar": 36,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec6503f6_0a55b29f",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "I would recommend to also add a test that checks that the same (gradually adjusted) gain is applied to each the channels by checking that all the channels contain the same values.\n\nWe also miss a test to check that clamping is applied - it\u0027d have caught the small bug in audio_samples_scaler.cc.",
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df625f8_2f7465d4",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "for unit tests always enclose everything into the anon ns (unless a test class is a friend of the testee class)",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cbaf318_503002fb",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "```\nclass AudioSamplesScalerTest\n    : public ::testing::Test,\n      public ::testing::WithParamInterface\u003cstd::tuple\u003cint, int, float\u003e\u003e {\n protected:\n  int sample_rate_hz() const { return std::get\u003c0\u003e(GetParam()); }\n  int num_channels() const { return std::get\u003c1\u003e(GetParam()); }\n  float initial_gain() const { return std::get\u003c2\u003e(GetParam()); }\n};\n```\n\nand use the getters in the tests below",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 75
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81eedb04_83c04a08",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "same in all the tests, define in the anon ns",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 39
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "674eb086_90cd5efd",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "Outside of the inner loop I would add\n```\nEXPECT_FLOAT_EQ(\n  audio_buffer.channels_const()[ch][audio_buffer.num_frames() - 1],\n  higher_gain * kSampleValue\n);\n```",
+      "range": {
+        "startLine": 78,
+        "startChar": 52,
+        "endLine": 78,
+        "endChar": 56
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cde8c37a_e35ce105",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "I would also add\n```\nEXPECT_LE(audio_buffer.channels_const()[ch][i],\n          audio_buffer.channels_const()[ch][i+1]);\n```",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e4c3d80_cda5141e",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "it\u0027s better to keep separate unit tests\nshorter code, less clutter, easy to exactly identify what fails\n\n```\n// Checks that the gain is lowered gradually throughout one frame and after that\n// the wanted gain is applied to all the samples.\nTEST_P(AudioSamplesScalerTest, VerifyGainAdjustmentLowerGain)\n\n// Checks that the gain is increased gradually throughout one frame and after that\n// the wanted gain is applied to all the samples.\nTEST_P(AudioSamplesScalerTest, VerifyGainAdjustmentIncreaseGain)\n```",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 29
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e33cdd34_a748fbdb",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "same as above (lines 78-81)",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 106,
+        "endChar": 43
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d047d6f5_4c5c9d00",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "not sure what you mean here\nmaybe digital?",
+      "range": {
+        "startLine": 21,
+        "startChar": 45,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cfe1943_6a331f48",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "can you add the accepted ranges for these arguments?\n\nemulated_analog_mic_gain_level [0, 255]\n(pre|post)_gain \u003e\u003d 0.f\n\nright?",
+      "range": {
+        "startLine": 35,
+        "startChar": 24,
+        "endLine": 37,
+        "endChar": 39
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b79e659_a123c369",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "// Adjusts the level of the signal. It is meant to be used before\n// any of the other processing is performed.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 15
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b317a9d_d548e2e8",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "ApplyPreAdjustmentGain() might match better the `pre_adjustment_gain()` getter naming (line 56)",
+      "range": {
+        "startLine": 43,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 25
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c88ed38_5fcaccae",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 45,
+        "startChar": 30,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4f4168c_70b4114b",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "ApplyPostGain",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 26
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31182e09_2d42102a",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "[nit] pre_adjustment_gain",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 28
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beec55aa_a289fd76",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "maybe a better API\n\nvoid DisableAnalogMicGain();\nvoid EnableAnalogMicGain(int emulated_analog_mic_gain_level);\n\notherwise, when if `SetAnalogMicGainEnabled(true)` is called without setting the gain it\u0027s not clear what will happen",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 40
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a138eb0f_390429a5",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "[nit] analog_mic_gain_level",
+      "range": {
+        "startLine": 70,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 27
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6107812_6fef8a33",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "[nit] `pre_adjustment_gain_` as done below",
+      "range": {
+        "startLine": 73,
+        "startChar": 26,
+        "endLine": 73,
+        "endChar": 46
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31294f11_a350aa05",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "```\nclass CaptureLevelsAdjusterTest\n    : public ::testing::Test,\n      public ::testing::WithParamInterface\u003c\n          std::tuple\u003cint, int, bool, int, float, float\u003e\u003e {\n protected:\n  int sample_rate_hz() const { return std::get\u003c0\u003e(GetParam()); }\n  int num_channels() const { return std::get\u003c1\u003e(GetParam()); }\n  bool emulated_analog_mic_gain_enabled() const {\n    return std::get\u003c2\u003e(GetParam());\n  }\n  int emulated_analog_mic_gain_level() const { return std::get\u003c3\u003e(GetParam()); }\n  float pre_gain() const { return std::get\u003c4\u003e(GetParam()); }\n  float post_gain() const { return std::get\u003c5\u003e(GetParam()); }\n};\n```",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 60
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61fbc0da_e416cb83",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "[nit] when there are several params that are combined, it might be a good idea to return a string to easily identify the parametrization that fails; you can add the following lambda:\n\n```\n    [](const ::testing::TestParamInfo\u003cstd::tuple\u003cint, int, bool, int, float, float\u003e\u003e\u0026 info) {\n      // TODO use a string builder\n      return builder.ToString();\n    }\n```",
+      "range": {
+        "startLine": 59,
+        "startChar": 57,
+        "endLine": 59,
+        "endChar": 59
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c1d83b_bb8d2abe",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "[nit] bool, but not needed if you apply the edit suggested above",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 11
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ef1695e_4e2dd43c",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "This test looks more like an integration test since it also tests the behavior of `AudioSamplesScaler`, which is already validated in modules/audio_processing/audio_samples_scaler_unittest.cc.\nFor instance, I don\u0027t think you need to add expectations for the first frame (lines 146-166), since that\u0027s an implementation detail and not part of the contract for `CaptureLevelsAdjuster`.\n\nI would instead check a few different things in separate tests so that we can have smaller and more specific tests:\n\n```\n// Checks that when a higher gain is set, a higher output level is produced.\nTEST_P(CaptureLevelsAdjusterTest, IncreasedGainHigherOutputLevel) {\n  ...\n  const float higher_pre_gain \u003d pre_gain() * 2.f;\n  const float higher_post_gain \u003d post_gain() * 2.f\n  ...\n  constexpr int kNumFramesToProcess \u003d 2;  // That\u0027s sufficient.\n  ...\n}\n\n// Checks that when a lower gain is set, a lower output level is produced.\nTEST_P(CaptureLevelsAdjusterTest, DecreasedGainLowerOutputLevel) {\n  ...\n  const float lower_pre_gain \u003d pre_gain() / 2.f;\n  const float lower_post_gain \u003d post_gain() / 2.f\n  ...\n  constexpr int kNumFramesToProcess \u003d 2;  // That\u0027s sufficient.\n  ...\n}\n\n// Checks that, when the gains are increased, the expected output level is\n// reached.\nTEST_P(CaptureLevelsAdjusterTest, IncreasedGainOutputLevelReached) {\n  ...\n          EXPECT_FLOAT_EQ(audio_buffer.channels_const()[ch][i],\n                          expected_signal_gain_after_pre_gain * kSampleValue);\n  ...\n          EXPECT_FLOAT_EQ(\n              audio_buffer.channels_const()[ch][i],\n              expected_signal_gain_after_post_level_adjustment * kSampleValue);\n}\n\n\n// Checks that, when the gains are decreased, the expected output level is\n// reached.\nTEST_P(CaptureLevelsAdjusterTest, DecreasedGainOutputLevelReached)```\n\n\nplus, naming nit: `NewGainIsAchieved` or\n```\nNewGainsAreAchieved\n       ^\n```",
+      "range": {
+        "startLine": 109,
+        "startChar": 34,
+        "endLine": 109,
+        "endChar": 52
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db5dedb0_8a25b1e0",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "in case you want to keep these expectations, can we move them outside of the loop?",
+      "range": {
+        "startLine": 146,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 0
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbc5bc55_1a71964d",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "`bugs.webrtc.org/\u003cbug_number\u003e` is preferred",
+      "range": {
+        "startLine": 209,
+        "startChar": 12,
+        "endLine": 209,
+        "endChar": 16
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5cf57a3_5695059b",
+        "filename": "modules/audio_processing/test/aec_dump_based_simulator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "super hard to read; can you add intermediate bool variables?\nexample\n```\nconst bool pre_amplifier_overridden \u003d ...\nconst bool capture_level_overridden \u003d ...\nif (!pre_amplifier_overridden \u0026\u0026 !capture_level_overridden) {\n  ap_-\u003eSetRuntimeSetting(...);\n}\n```",
+      "range": {
+        "startLine": 599,
+        "startChar": 0,
+        "endLine": 603,
+        "endChar": 39
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1adcf193_947cee16",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-11T15:27:38Z",
+      "side": 1,
+      "message": "now we have two flags groups that do the a similar thing through different implementations\n\nthe other group is: `simulated_mic_kind`, `simulate_mic_gain`, `initial_mic_level`\nI would add a TODO to clean this up (how BTW?) and I would clarify in the flag description string what implementation is used",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 73
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
