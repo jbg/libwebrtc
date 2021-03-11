@@ -16,6 +16,23 @@
       "message": "Hi Kári,\n\nSorry for bothering you again and again. Could you please take a loot at fixed version of CL?\n\nThanks a lot in advance,\nYura.",
       "revId": "8432175537c2d262dd64d62496725f359584b7f8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e147178b_1320427b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-03-11T15:40:37Z",
+      "side": 1,
+      "message": "Thanks Yura! LGTM.",
+      "revId": "8432175537c2d262dd64d62496725f359584b7f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
