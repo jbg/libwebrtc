@@ -16,6 +16,40 @@
       "message": "Hi, do you think it\u0027s reasonable to delete this method? As far as I\u0027ve found, only use is in tests for SetOption. If you like the change, we\u0027d need to leave a default dummy implementation on the interface, and update downstream subclasses in a few places, before deleting it completely.",
       "revId": "f321921c80e46481b3f6391c82de292d3b1f1fb0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efd9bc1c_a4c17351",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-11T21:13:39Z",
+      "side": 1,
+      "message": "We lose a tiny bit of test coverage from removing this. And it feels like a pretty elementary feature of a socket wrapper, which I wouldn\u0027t be surprised if third party applications are using. So I\u0027m not 100% sure if this is the right thing to do. hta, WDYT?",
+      "revId": "f321921c80e46481b3f6391c82de292d3b1f1fb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73727b19_57f71bd4",
+        "filename": "rtc_base/virtual_socket_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-11T21:13:39Z",
+      "side": 1,
+      "message": "I think it\u0027s fine to assume this, it doesn\u0027t look like OPT_IPV6_V6ONLY is implemented anywhere. But this comment doesn\u0027t completely make sense without context, maybe just say \"Assume socket is dual stack if IPIsAny is true.\"",
+      "revId": "f321921c80e46481b3f6391c82de292d3b1f1fb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
