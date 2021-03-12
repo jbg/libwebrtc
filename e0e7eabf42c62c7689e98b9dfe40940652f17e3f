@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "270f1f63_48556e7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Thanks for the great comments!\nI\u0027ve uploaded a new patchset.\nPTAL!",
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1124564_931a5810",
@@ -48,6 +65,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "\":*\" right? we only need package visibility, not public",
+      "range": {
+        "startLine": 112,
+        "startChar": 17,
+        "endLine": 112,
+        "endChar": 20
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "991df696_208342fc",
+        "filename": "modules/audio_processing/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "True. Since I in the new patchset moved this to a separate subfolder I think \"*\" is needed though.",
+      "parentUuid": "a1124564_931a5810",
       "range": {
         "startLine": 112,
         "startChar": 17,
@@ -83,6 +124,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9eff671e_b5bb3ff9",
+        "filename": "modules/audio_processing/audio_samples_scaler.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "I\u0027d prefer to keep it separate since it reduces the amount of code in each block and makes it clear that this is not missed.\n\nAs for cache-friendliness, I agree. However, I\u0027d expect this amount of data to stay in the cache even after the main loop so I think this should be fine, but I may be wrong.\n\nThere is also the aspect of the loop complexity. Two of the above loops already have if-statements in them (the max/min operation) and the clamping would add two more if-statements for each loop. I\u0027m not sure what impact that has on the branch-prediction.\n\nI would prefer to keep it like this since I think the code becomes more readable and I don\u0027t think that it is for granted that bundling the loop content would give a performance benefit.",
+      "parentUuid": "8f93e5c3_89ce52b2",
+      "range": {
+        "startLine": 87,
+        "startChar": 6,
+        "endLine": 87,
+        "endChar": 27
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2814492c_d9fc0e6c",
         "filename": "modules/audio_processing/audio_samples_scaler.h",
         "patchSetId": 10
@@ -100,6 +165,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25d8e659_5198381c",
+        "filename": "modules/audio_processing/audio_samples_scaler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "I instead moved all of the new files related to CaptureLevelAdjuster into a separate folder.\n\nCode re-use is good but this class is not written to be very general, but rather to exactly do what it does. I\u0027d therefore prefer to keep it only for the current use for now, and instead move it to utility when a second use of it arises.",
+      "parentUuid": "2814492c_d9fc0e6c",
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54948ad8_cf0ba048",
         "filename": "modules/audio_processing/audio_samples_scaler.h",
         "patchSetId": 10
@@ -111,6 +194,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "linearly",
+      "range": {
+        "startLine": 22,
+        "startChar": 3,
+        "endLine": 22,
+        "endChar": 12
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88f13bc5_77d77d51",
+        "filename": "modules/audio_processing/audio_samples_scaler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54948ad8_cf0ba048",
       "range": {
         "startLine": 22,
         "startChar": 3,
@@ -144,6 +251,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fb9a9ae_ed36fde2",
+        "filename": "modules/audio_processing/audio_samples_scaler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "428a8781_24018962",
+      "range": {
+        "startLine": 25,
+        "startChar": 36,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec6503f6_0a55b29f",
@@ -161,6 +292,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d0ed52_d2507cd3",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Good point!\nI added that for the unittests.",
+      "parentUuid": "ec6503f6_0a55b29f",
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3df625f8_2f7465d4",
@@ -174,6 +323,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "for unit tests always enclose everything into the anon ns (unless a test class is a friend of the testee class)",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8af03a0_62cf03a5",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3df625f8_2f7465d4",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -207,6 +380,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "976ddea4_7b9082e8",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cbaf318_503002fb",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 75
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81eedb04_83c04a08",
@@ -220,6 +417,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "same in all the tests, define in the anon ns",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 39
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "138864ed_8da12d18",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81eedb04_83c04a08",
       "range": {
         "startLine": 64,
         "startChar": 2,
@@ -253,6 +474,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceaecedf_e3c8d0f2",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "That makes sense. \nI changed it to test for \nEXPECT_LE though, since there is actually no guarantee that the last sample in the frame will achieve the new value.",
+      "parentUuid": "674eb086_90cd5efd",
+      "range": {
+        "startLine": 78,
+        "startChar": 52,
+        "endLine": 78,
+        "endChar": 56
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cde8c37a_e35ce105",
@@ -266,6 +511,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "I would also add\n```\nEXPECT_LE(audio_buffer.channels_const()[ch][i],\n          audio_buffer.channels_const()[ch][i+1]);\n```",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecfc7e73_7d8cda0f",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cde8c37a_e35ce105",
       "range": {
         "startLine": 79,
         "startChar": 0,
@@ -301,6 +570,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ab016ea_f376506b",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "I agree.\nI could add those as well.\n\nHowever, I don\u0027t think they can fully replace this test, since this test actually test how the feature would be used in practice, where the gains are varied back and forth, while the other tests would only test adjustment from the initial gain, which is not the same.\n\nI would therefore prefer to keep this test. I could on top of this test add more tests that tests the adjustments from the initial gain, but I would prefer not to.",
+      "parentUuid": "2e4c3d80_cda5141e",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 29
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e33cdd34_a748fbdb",
         "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
         "patchSetId": 10
@@ -312,6 +605,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "same as above (lines 78-81)",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 106,
+        "endChar": 43
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "865d2aa7_0a581ce3",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e33cdd34_a748fbdb",
       "range": {
         "startLine": 104,
         "startChar": 4,
@@ -347,6 +664,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cd59b9d_33650d8b",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "All of the gains applied in this class are digital, so I\u0027d prefer not to use that term.\n\nI now changed this to instead be explicitly specified gains and clarified a bit more what the difference is compared to the emulated analog gain.",
+      "parentUuid": "d047d6f5_4c5c9d00",
+      "range": {
+        "startLine": 21,
+        "startChar": 45,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cfe1943_6a331f48",
         "filename": "modules/audio_processing/capture_levels_adjuster.h",
         "patchSetId": 10
@@ -358,6 +699,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "can you add the accepted ranges for these arguments?\n\nemulated_analog_mic_gain_level [0, 255]\n(pre|post)_gain \u003e\u003d 0.f\n\nright?",
+      "range": {
+        "startLine": 35,
+        "startChar": 24,
+        "endLine": 37,
+        "endChar": 39
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "170391b9_e7bcab47",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cfe1943_6a331f48",
       "range": {
         "startLine": 35,
         "startChar": 24,
@@ -381,6 +746,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "// Adjusts the level of the signal. It is meant to be used before\n// any of the other processing is performed.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 15
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63c090d5_1d0e7337",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b79e659_a123c369",
       "range": {
         "startLine": 41,
         "startChar": 0,
@@ -416,6 +805,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f9bea3d_5684b385",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "I only prefer to use getters like pre_adjustment_gain() when they clearly map to a well-defined variable with a clear meaning.\n\nIn this case, the pre_adjustment_gain is a private variable which is not at all mentioned in the public interface. Since it\u0027s computation is non-trivial I\u0027d prefer not to use the getter-naming-style.",
+      "parentUuid": "7b317a9d_d548e2e8",
+      "range": {
+        "startLine": 43,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 25
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c88ed38_5fcaccae",
         "filename": "modules/audio_processing/capture_levels_adjuster.h",
         "patchSetId": 10
@@ -427,6 +840,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "same as above",
+      "range": {
+        "startLine": 45,
+        "startChar": 30,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8c14b1f_d8f016f9",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c88ed38_5fcaccae",
       "range": {
         "startLine": 45,
         "startChar": 30,
@@ -450,6 +887,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "ApplyPostGain",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 26
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1fb4597_64ec57bf",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "I would prefer to keep this as it is since it matches the name of the PreLevelAdjustment.\n\nI.e., I think that\nPreLevelAdjustment()\n[Processing]\nPostLevelAdjustment()\n\nis easier to understand than\nPreLevelAdjustment()\n[Processing]\nApplyPostGain()\n\nAlso, I think there is a value to separate this in terms of naming from the AGC functionality.\n\nWDYT?",
+      "parentUuid": "a4f4168c_70b4114b",
       "range": {
         "startLine": 47,
         "startChar": 7,
@@ -508,6 +969,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2277898b_0a4f7807",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "I\u0027d prefer to keep it as it is since we have the same issue in the parameters of the constructor. I.e., it is there possible to set the gain without setting this to enabled.\n\nAlso, I think the usage of this class maps better with this type of methods than with the suggested variant and requires less boilerplate code in setting up the usage of the class. I list the variants of API usage below.\n\n\nstruct AnalogMicGainEmulation {\n  bool enabled \u003d false;\n  int initial_level \u003d 255;\n} analog_mic_gain_emulation;\n...\n\nadjuster.SetAnalogMicGainLevel(analog_mic_gain_emulation.initial_level);\nadjuster.SetAnalogMicGainEnabled(analog_mic_gain_emulation.enabled);\n\nvs\n\nif (analog_mic_gain_emulation.enabled) {\n  adjuster.EnableAnalogMicGain(analog_mic_gain_emulation.initial_level);\nelse {\n  adjuster.DisableAnalogMicGain();\n}",
+      "parentUuid": "beec55aa_a289fd76",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 40
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a138eb0f_390429a5",
         "filename": "modules/audio_processing/capture_levels_adjuster.h",
         "patchSetId": 10
@@ -519,6 +1004,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "[nit] analog_mic_gain_level",
+      "range": {
+        "startLine": 70,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 27
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5204793a_f473f5cd",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "I\u0027d prefer to keep it like this since the setter of this (SetAnalogMicGainLevel) is non-trivial.",
+      "parentUuid": "a138eb0f_390429a5",
       "range": {
         "startLine": 70,
         "startChar": 6,
@@ -552,6 +1061,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6bba9bf_a3aa1006",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6107812_6fef8a33",
+      "range": {
+        "startLine": 73,
+        "startChar": 26,
+        "endLine": 73,
+        "endChar": 46
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31294f11_a350aa05",
@@ -565,6 +1098,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "```\nclass CaptureLevelsAdjusterTest\n    : public ::testing::Test,\n      public ::testing::WithParamInterface\u003c\n          std::tuple\u003cint, int, bool, int, float, float\u003e\u003e {\n protected:\n  int sample_rate_hz() const { return std::get\u003c0\u003e(GetParam()); }\n  int num_channels() const { return std::get\u003c1\u003e(GetParam()); }\n  bool emulated_analog_mic_gain_enabled() const {\n    return std::get\u003c2\u003e(GetParam());\n  }\n  int emulated_analog_mic_gain_level() const { return std::get\u003c3\u003e(GetParam()); }\n  float pre_gain() const { return std::get\u003c4\u003e(GetParam()); }\n  float post_gain() const { return std::get\u003c5\u003e(GetParam()); }\n};\n```",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 60
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4c2c8b7_1a4c254a",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Good point! Thanks!\nDone.",
+      "parentUuid": "31294f11_a350aa05",
       "range": {
         "startLine": 46,
         "startChar": 0,
@@ -598,6 +1155,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc7ad865_1c78f931",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Thanks! I did not know about that feature.",
+      "parentUuid": "61fbc0da_e416cb83",
+      "range": {
+        "startLine": 59,
+        "startChar": 57,
+        "endLine": 59,
+        "endChar": 59
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52c1d83b_bb8d2abe",
@@ -611,6 +1192,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "[nit] bool, but not needed if you apply the edit suggested above",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 11
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ad22c6c_6e2c3c1c",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Thanks! Nice catch!",
+      "parentUuid": "52c1d83b_bb8d2abe",
       "range": {
         "startLine": 64,
         "startChar": 8,
@@ -646,6 +1251,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f552b6b9_b12e0ed4",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Yes, I agree, at least partly.\nI removed the lines 146-166 because those definitely are already tested.\n\nI would like, however, to at least have a test that verifies changes in all of pre-gain, post-gain and analog level at the same time, since that is how the real usage would be.\nWith that, I think that the testing is sufficient, since such a test also covers the more specific test cases. \nI could add those as well though, but I think the value of that would only be to slightly simplify the debugging when the test would fail, and not really increase the test coverage.",
+      "parentUuid": "8ef1695e_4e2dd43c",
+      "range": {
+        "startLine": 109,
+        "startChar": 34,
+        "endLine": 109,
+        "endChar": 52
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db5dedb0_8a25b1e0",
         "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
         "patchSetId": 10
@@ -657,6 +1286,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "in case you want to keep these expectations, can we move them outside of the loop?",
+      "range": {
+        "startLine": 146,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 0
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a3fe47a_83832a78",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "I removed them.",
+      "parentUuid": "db5dedb0_8a25b1e0",
       "range": {
         "startLine": 146,
         "startChar": 4,
@@ -690,6 +1343,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1921c73c_504bb036",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbc5bc55_1a71964d",
+      "range": {
+        "startLine": 209,
+        "startChar": 12,
+        "endLine": 209,
+        "endChar": 16
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5cf57a3_5695059b",
@@ -713,6 +1390,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81960758_73006ec5",
+        "filename": "modules/audio_processing/test/aec_dump_based_simulator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5cf57a3_5695059b",
+      "range": {
+        "startLine": 599,
+        "startChar": 0,
+        "endLine": 603,
+        "endChar": 39
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1adcf193_947cee16",
@@ -726,6 +1427,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "now we have two flags groups that do the a similar thing through different implementations\n\nthe other group is: `simulated_mic_kind`, `simulate_mic_gain`, `initial_mic_level`\nI would add a TODO to clean this up (how BTW?) and I would clarify in the flag description string what implementation is used",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 73
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "652df5ec_c04f3bdb",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-12T13:18:03Z",
+      "side": 1,
+      "message": "Good point. I changed the description of these to more clearly specify what their use is.\n\nWhile the naming is an issue, I think it is currently ok as it is. `simulated_mic_kind` and `simulate_mic_gain` have the prefix simulate, while the newly added have the prefix emulate.\n\nThe variable we might rename would be  `initial_mic_level` but I think it is ok as it is.\n\naudioproc_f is a test tool, and I don\u0027t think the naming is superimportant to get right for that.",
+      "parentUuid": "1adcf193_947cee16",
       "range": {
         "startLine": 98,
         "startChar": 0,
