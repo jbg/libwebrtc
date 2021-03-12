@@ -16,6 +16,23 @@
       "message": "No worries about the delay Joe, thanks for taking a look! I\u0027ve updated the unit tests to cover more resizing scenarios, and to validate the actual pixel data that was captured. I\u0027ve also responded to the rest of your feedback, PTAL.",
       "revId": "be16c3f4146cc9411d8ad081e832ce2db7bda9bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03a7180e_a2cf650d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6515
+      },
+      "writtenOn": "2021-03-12T23:10:30Z",
+      "side": 1,
+      "message": "Thanks for fixing this!",
+      "revId": "be16c3f4146cc9411d8ad081e832ce2db7bda9bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
