@@ -16,6 +16,23 @@
       "message": "Finished responding to comments and also implementing some of the TODOs I left myself.",
       "revId": "a0c431c99964d0c9f5acdfd32095d0bcd6b8f594",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "755db5ad_e576d648",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-12T08:20:58Z",
+      "side": 1,
+      "message": "If you\u0027re intending this for submission, can you change the description from \"proof of concept\"?\n\nHave you run performance benchmarks (like the samples pages, or the ones in https://chromeperf.appspot.com/report?sid\u003d96fbd001af0c23dd90f33bc4f1653a2705d0aec122ea29cff012f08ed0fbce89) on the tests with / without the patch, to make sure we\u0027re not regressing performance?\n",
+      "revId": "a0c431c99964d0c9f5acdfd32095d0bcd6b8f594",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
