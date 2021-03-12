@@ -99,6 +99,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86a2e4e7_6861e8eb",
+        "filename": "modules/audio_processing/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "991df696_208342fc",
+      "range": {
+        "startLine": 112,
+        "startChar": 17,
+        "endLine": 112,
+        "endChar": 20
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f93e5c3_89ce52b2",
@@ -146,6 +170,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66de0890_374ad8a4",
+        "filename": "modules/audio_processing/audio_samples_scaler.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9eff671e_b5bb3ff9",
+      "range": {
+        "startLine": 87,
+        "startChar": 6,
+        "endLine": 87,
+        "endChar": 27
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2814492c_d9fc0e6c",
@@ -177,6 +225,24 @@
       "side": 1,
       "message": "I instead moved all of the new files related to CaptureLevelAdjuster into a separate folder.\n\nCode re-use is good but this class is not written to be very general, but rather to exactly do what it does. I\u0027d therefore prefer to keep it only for the current use for now, and instead move it to utility when a second use of it arises.",
       "parentUuid": "2814492c_d9fc0e6c",
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5264361_dae03433",
+        "filename": "modules/audio_processing/audio_samples_scaler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "25d8e659_5198381c",
       "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -592,6 +658,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3906ca6f_ce478b06",
+        "filename": "modules/audio_processing/audio_samples_scaler_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9ab016ea_f376506b",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 29
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e33cdd34_a748fbdb",
@@ -676,6 +766,30 @@
       "side": 1,
       "message": "All of the gains applied in this class are digital, so I\u0027d prefer not to use that term.\n\nI now changed this to instead be explicitly specified gains and clarified a bit more what the difference is compared to the emulated analog gain.",
       "parentUuid": "d047d6f5_4c5c9d00",
+      "range": {
+        "startLine": 21,
+        "startChar": 45,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "404ce9b5_8870be66",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3cd59b9d_33650d8b",
       "range": {
         "startLine": 21,
         "startChar": 45,
@@ -827,6 +941,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb06896a_e873aa0a",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0f9bea3d_5684b385",
+      "range": {
+        "startLine": 43,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 25
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c88ed38_5fcaccae",
@@ -921,6 +1059,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4501ed2_d7d30aa0",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d1fb4597_64ec57bf",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 26
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31182e09_2d42102a",
@@ -934,6 +1096,30 @@
       "writtenOn": "2021-03-11T15:27:38Z",
       "side": 1,
       "message": "[nit] pre_adjustment_gain",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 28
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c9d9d5c_39d7ae36",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "31182e09_2d42102a",
       "range": {
         "startLine": 56,
         "startChar": 8,
@@ -991,6 +1177,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "100a594d_a39fd1ae",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2277898b_0a4f7807",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 40
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a138eb0f_390429a5",
@@ -1028,6 +1238,30 @@
       "side": 1,
       "message": "I\u0027d prefer to keep it like this since the setter of this (SetAnalogMicGainLevel) is non-trivial.",
       "parentUuid": "a138eb0f_390429a5",
+      "range": {
+        "startLine": 70,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 27
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce86955e_19ebc0c1",
+        "filename": "modules/audio_processing/capture_levels_adjuster.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5204793a_f473f5cd",
       "range": {
         "startLine": 70,
         "startChar": 6,
@@ -1273,6 +1507,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c942be11_9310bfd3",
+        "filename": "modules/audio_processing/capture_levels_adjuster_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f552b6b9_b12e0ed4",
+      "range": {
+        "startLine": 109,
+        "startChar": 34,
+        "endLine": 109,
+        "endChar": 52
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db5dedb0_8a25b1e0",
@@ -1451,6 +1709,30 @@
       "side": 1,
       "message": "Good point. I changed the description of these to more clearly specify what their use is.\n\nWhile the naming is an issue, I think it is currently ok as it is. `simulated_mic_kind` and `simulate_mic_gain` have the prefix simulate, while the newly added have the prefix emulate.\n\nThe variable we might rename would be  `initial_mic_level` but I think it is ok as it is.\n\naudioproc_f is a test tool, and I don\u0027t think the naming is superimportant to get right for that.",
       "parentUuid": "1adcf193_947cee16",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 73
+      },
+      "revId": "e0e7eabf42c62c7689e98b9dfe40940652f17e3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66d9f783_2c89aff3",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-12T15:05:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "652df5ec_c04f3bdb",
       "range": {
         "startLine": 98,
         "startChar": 0,
