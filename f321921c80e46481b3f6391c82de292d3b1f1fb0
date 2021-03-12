@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef971f80_8788e3eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-12T08:24:12Z",
+      "side": 1,
+      "message": "I understand. My gut feeling is that the socket abstractions are a bit too complex for their own good, but this is perhaps not a good step now.\n\nAs for renaming, if we do GetOptionsForTesting, we\u0027d need to either provide a default implementation, or somehow avoid adding it to the interface. Since it\u0027s no good to require downstream implementations of the interface (the same code, e.g, chromium, that breaks from this cl) to provide that method.\n\nAlso not sure if the same considerations apply for the socket api and the port api.",
+      "parentUuid": "c5918d4a_2e5f9aaa",
+      "revId": "f321921c80e46481b3f6391c82de292d3b1f1fb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73727b19_57f71bd4",
