@@ -70,6 +70,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acb3cf70_8660de63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-12T10:59:28Z",
+      "side": 1,
+      "message": "Are we agreed to drop this removal, then?\n",
+      "revId": "f321921c80e46481b3f6391c82de292d3b1f1fb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65dc5740_b7ff0508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-12T10:59:28Z",
+      "side": 1,
+      "message": "Yes, I think Posix sockets are a bit too complex for their own good. However, I think our wrapper for them needs to be able to reflect the underlying reality - leaving functionality out in the hope that we\u0027ll never need it makes me uncomfortable.",
+      "parentUuid": "ef971f80_8788e3eb",
+      "revId": "f321921c80e46481b3f6391c82de292d3b1f1fb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73727b19_57f71bd4",
