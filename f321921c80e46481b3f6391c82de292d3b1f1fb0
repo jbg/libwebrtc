@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5918d4a_2e5f9aaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-12T08:01:54Z",
+      "side": 1,
+      "message": "My impression is that I get acutely nervous if we delete this method.\n\nIf we do anything with options, one of the basic tasks is to figure out the OS default value, add tests to set the value, and verify that we got the result back.\nAs you can see from the GetOption code, this is more complex than just calling ::getsockopt, and as you can see from the tests, removing it reduces test coverage.\n\nI think that 1) we\u0027ll need it whenever we test a new socket option type or value, and 2) we\u0027re likely to need it in production too.\n\nIf this doesn\u0027t cause a problem, I would leave it in place.\n\n(Halfway proposition: Rename it to GetOptionForTesting.)\n",
+      "revId": "f321921c80e46481b3f6391c82de292d3b1f1fb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73727b19_57f71bd4",
