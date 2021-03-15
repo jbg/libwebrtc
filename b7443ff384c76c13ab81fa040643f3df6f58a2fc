@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01fe9f5e_94194c4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-15T12:19:32Z",
+      "side": 1,
+      "message": "I think this is submittable. Some questions and comments.\n",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d89d762_9211a76e",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-15T12:19:32Z",
+      "side": 1,
+      "message": "Is it possible / simple to make sctp_transport_factory and usrsctp_wrapper their own library targets? We\u0027re trying to encourage small targets, and it helps make the dependency graphs clearer.",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91aa468f_543d41ec",
+        "filename": "media/sctp/sctp_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-15T12:19:32Z",
+      "side": 1,
+      "message": "Friend class declarations don\u0027t make me happy - I\u0027m actually less unhappy with a bunch of public methods guarded only by a comment saying \"These should only be called from UsrSctpWrapper\".\n\nThis is a matter of taste; the style guide says \"allowed, within reason\".",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f0d1200_55ef5c6d",
+        "filename": "media/sctp/usrsctp_wrapper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-15T12:19:32Z",
+      "side": 1,
+      "message": "Do you want a log here, so that it\u0027s possible to figure out what happened?",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d2b103_cb6a9457",
+        "filename": "media/sctp/usrsctp_wrapper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-15T12:19:32Z",
+      "side": 1,
+      "message": "What happens if the call to this function is done on the usrsctp_thread?\n(if the answer is \"self-invoke, and that\u0027s not a problem\", that\u0027s fine).",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8df5e5cf_33094301",
+        "filename": "media/sctp/usrsctp_wrapper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-15T12:19:32Z",
+      "side": 1,
+      "message": "the WebRTC style guide overrides the Chromium style guide\u0027s override of the Google style guide - forward declarations should be avoided.\n\nhttps://webrtc.googlesource.com/src/+/HEAD/style-guide.md",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "052146fd_cadb616c",
+        "filename": "media/sctp/usrsctp_wrapper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-15T12:19:32Z",
+      "side": 1,
+      "message": "Is there a reason why this interface does RefCountInterface differently?\nthe usual pattern in webrtc seems to be to just use RefCountedObject\u003cUsrSctpWrapper\u003e when you create an object of the class, rather than to implement AddRef and Release.\n\nThe reason seems to be that the last-dropped-reference code is nonstandard because it updates a global object; that may deserve a comment.",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36c23991_677bc386",
+        "filename": "media/sctp/usrsctp_wrapper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-15T12:19:32Z",
+      "side": 1,
+      "message": "I wonder if it makes sense to make the class name SctpTransportMap private to UsrSctpWrappper - that would make it clear that it\u0027s an implementation detail.\n\nI like having it shielded from the rest of the world!",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
