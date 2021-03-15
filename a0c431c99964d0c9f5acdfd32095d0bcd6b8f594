@@ -33,6 +33,24 @@
       "message": "If you\u0027re intending this for submission, can you change the description from \"proof of concept\"?\n\nHave you run performance benchmarks (like the samples pages, or the ones in https://chromeperf.appspot.com/report?sid\u003d96fbd001af0c23dd90f33bc4f1653a2705d0aec122ea29cff012f08ed0fbce89) on the tests with / without the patch, to make sure we\u0027re not regressing performance?\n",
       "revId": "a0c431c99964d0c9f5acdfd32095d0bcd6b8f594",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "288cb477_ee7b55fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-15T04:23:04Z",
+      "side": 1,
+      "message": "Updated description. I\u0027ll run some tests tomorrow, though my expectation is that in the end, only test frameworks will need to use a standalone thread. Though I can\u0027t say I\u0027m sure about third-party applications, I\u0027m assuming using multiple PeerConnectionFactories is not the norm.",
+      "parentUuid": "755db5ad_e576d648",
+      "revId": "a0c431c99964d0c9f5acdfd32095d0bcd6b8f594",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
