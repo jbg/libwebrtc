@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be6c2f58_f0f105a4",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-15T09:30:47Z",
+      "side": 1,
+      "message": "why not adding operator\u003d\u003d and operator!\u003d in modules/audio_processing/include/audio_processing.cc?\n\nthen you can write e.g., (lines 545-552)\n\n```\n  const bool agc1_config_changed \u003d\n      config_.gain_controller1 !\u003d config.gain_controller1;\n\n  const bool agc2_config_changed \u003d\n      config_.gain_controller2 !\u003d config.gain_controller2;\n```",
+      "range": {
+        "startLine": 566,
+        "startChar": 1,
+        "endLine": 577,
+        "endChar": 77
+      },
+      "revId": "06451085caee8418be32a305e0704543c328f921",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
