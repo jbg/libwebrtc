@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14f7e4c9_2f389033",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2021-03-15T13:40:49Z",
+      "side": 1,
+      "message": "LGTM!\nMy review limited to the mentioned tests.",
+      "revId": "8008a50ab6a671d9e55d84e7a93e65472c4d39c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
