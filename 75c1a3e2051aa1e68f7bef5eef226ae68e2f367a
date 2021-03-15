@@ -16,6 +16,23 @@
       "message": "Quick CL. Please hit +2 when approved.\n",
       "revId": "75c1a3e2051aa1e68f7bef5eef226ae68e2f367a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35a3fd6b_1d9379e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-15T21:47:03Z",
+      "side": 1,
+      "message": "I think we could use \"#ifdef WEBRTC_ANDROID\", but I\u0027m good with this.",
+      "revId": "75c1a3e2051aa1e68f7bef5eef226ae68e2f367a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
