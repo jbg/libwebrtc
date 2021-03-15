@@ -16,6 +16,23 @@
       "message": "LGTM!\nMy review limited to the mentioned tests.",
       "revId": "8008a50ab6a671d9e55d84e7a93e65472c4d39c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d28092da_4d798fb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-03-15T14:29:13Z",
+      "side": 1,
+      "message": "Thanks for the reviews and the comments!!!",
+      "revId": "8008a50ab6a671d9e55d84e7a93e65472c4d39c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
