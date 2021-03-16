@@ -33,6 +33,24 @@
       "message": "You\u0027re using 0 to imply \"we don\u0027t have an RTT value\" here, but you should be able to get 0 ms ping if you on a very good/close e2e network or on LAN, etc? Or in loopback testing.\n\nYou can instead see if there exists an RTT measurement with block.num_rtts() \u003e 0 so please consider making max_rtt_ms an optional value instead so hat we can invoke OnRttUpdate() even if we have a 0 ms ping.\n\nOr you could fix that in a follow-up CL if you prefer?",
       "revId": "142e1afda539aa14f90b857a1a557c786783c7b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c22d0372_1992c06c",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-03-16T10:06:55Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right, rtt can be zero, but I prefer it to be fixed in a separate CL because that kind of improvement is out of scope of this change. Here I prefer to keep old behaviour.\n\nI do not promise I\u0027ll do such follow-up, in particular because RtpRtcpImpl is not used by chromium (it is deprecated in favor of RtpRtcpImpl2).\nIt is also likely all this block is not needed at all. at least there was a reason not to migrate it into RtpRtcpImpl2",
+      "parentUuid": "36f750a8_25456d6d",
+      "revId": "142e1afda539aa14f90b857a1a557c786783c7b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
