@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "552ab1c3_a11f61d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-16T08:14:23Z",
+      "side": 1,
+      "message": "LGTM % comment",
+      "revId": "142e1afda539aa14f90b857a1a557c786783c7b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36f750a8_25456d6d",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-16T08:14:23Z",
+      "side": 1,
+      "message": "You\u0027re using 0 to imply \"we don\u0027t have an RTT value\" here, but you should be able to get 0 ms ping if you on a very good/close e2e network or on LAN, etc? Or in loopback testing.\n\nYou can instead see if there exists an RTT measurement with block.num_rtts() \u003e 0 so please consider making max_rtt_ms an optional value instead so hat we can invoke OnRttUpdate() even if we have a 0 ms ping.\n\nOr you could fix that in a follow-up CL if you prefer?",
+      "revId": "142e1afda539aa14f90b857a1a557c786783c7b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
