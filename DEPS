@@ -200,7 +200,7 @@ deps = {
   'src/third_party/libsrtp':
     'https://chromium.googlesource.com/chromium/deps/libsrtp.git@7990ca64c616b150a9cb4714601c4a3b0c84fe91',
   'src/third_party/libaom/source/libaom':
-    'https://aomedia.googlesource.com/aom.git@f4064dd1c74659bbaf020da6512d9987c0340065',
+    'https://aomedia.googlesource.com/aom.git@79b775799699eb00b7d65e9b8892bde1094ae91e',
   'src/third_party/libunwindstack': {
       'url': 'https://chromium.googlesource.com/chromium/src/third_party/libunwindstack.git@11659d420a71e7323b379ea8781f07c6f384bc7e',
       'condition': 'checkout_android',
