@@ -171,8 +171,8 @@ class SctpTransportTest : public ::testing::Test, public sigslot::has_slots<> {
 
   SctpTransport* CreateTransport(FakeDtlsTransport* fake_dtls,
                                  SctpFakeDataReceiver* recv) {
-    SctpTransport* transport =
-        new SctpTransport(rtc::Thread::Current(), fake_dtls);
+    SctpTransport* transport = new SctpTransport(
+        rtc::Thread::Current(), rtc::Thread::Current(), fake_dtls);
     // When data is received, pass it to the SctpFakeDataReceiver.
     transport->SignalDataReceived.connect(
         recv, &SctpFakeDataReceiver::OnDataReceived);
