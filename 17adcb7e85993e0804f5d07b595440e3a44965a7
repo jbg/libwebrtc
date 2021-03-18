@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "17adcb7e85993e0804f5d07b595440e3a44965a7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c40dac5c_c474c3ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-18T17:08:15Z",
+      "side": 1,
+      "message": "lgtm % adding a note for the SetAlive() method.",
+      "revId": "17adcb7e85993e0804f5d07b595440e3a44965a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15268469_199effd5",
+        "filename": "rtc_base/task_utils/pending_task_safety_flag.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-18T17:08:15Z",
+      "side": 1,
+      "message": "Do you mind adding a note here about a subtle thing to consider when \"reviving\" a flag, that it might make pending tasks run that could have state that doesn\u0027t match with the expected new \u0027alive\u0027 scope. Something to consider instead of reviving, is to create a new flag for the new scope.",
+      "revId": "17adcb7e85993e0804f5d07b595440e3a44965a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
