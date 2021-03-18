@@ -35,6 +35,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8588390_f7f3afa2",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-18T02:12:26Z",
+      "side": 1,
+      "message": "Done. Ended up splitting into four targets, only two of which are public. Let me know if I went overboard.\n\nIt\u0027s unfortunate multiple of them need to depend on usrsctp, but there\u0027s no way getting around the fact that sctp_transport.cc needs to include usrsctp.h to use the related types.",
+      "parentUuid": "0d89d762_9211a76e",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10b5dc7_a5e12389",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-18T02:12:26Z",
+      "side": 1,
+      "message": "Comment for myself: I need to make sure that it\u0027s impossible to dereference usrsctp_wrapper_ before it\u0027s initialized. Previously, calling a usrsctp API before it\u0027s initialized would result in an error. Now it will result in a null pointer dereference.",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91aa468f_543d41ec",
@@ -48,6 +83,24 @@
       "writtenOn": "2021-03-15T12:19:32Z",
       "side": 1,
       "message": "Friend class declarations don\u0027t make me happy - I\u0027m actually less unhappy with a bunch of public methods guarded only by a comment saying \"These should only be called from UsrSctpWrapper\".\n\nThis is a matter of taste; the style guide says \"allowed, within reason\".",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbaebec7_052780bb",
+        "filename": "media/sctp/sctp_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-18T02:12:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91aa468f_543d41ec",
       "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +122,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aedd47ab_d577aaa5",
+        "filename": "media/sctp/usrsctp_wrapper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-18T02:12:26Z",
+      "side": 1,
+      "message": "I put the logging in ValidateThread itself.",
+      "parentUuid": "8f0d1200_55ef5c6d",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19d2b103_cb6a9457",
@@ -82,6 +153,24 @@
       "writtenOn": "2021-03-15T12:19:32Z",
       "side": 1,
       "message": "What happens if the call to this function is done on the usrsctp_thread?\n(if the answer is \"self-invoke, and that\u0027s not a problem\", that\u0027s fine).",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "582b0370_8af7d3af",
+        "filename": "media/sctp/usrsctp_wrapper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-18T02:12:26Z",
+      "side": 1,
+      "message": "Invoke called from the target thread posts the task and then waits for it, which I\u0027m pretty sure is fine. Just didn\u0027t want to do it for all the methods above since it adds a little overhead, and already-queued tasks may run first.\n\nActually, that makes me a little nervous now. I\u0027m going to switch to doing an \"if current thread\" check.",
+      "parentUuid": "19d2b103_cb6a9457",
       "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -103,6 +192,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99428387_0feb8334",
+        "filename": "media/sctp/usrsctp_wrapper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-18T02:12:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8df5e5cf_33094301",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "052146fd_cadb616c",
@@ -120,6 +227,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8212b14d_8c7e9437",
+        "filename": "media/sctp/usrsctp_wrapper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-18T02:12:26Z",
+      "side": 1,
+      "message": "Added a comment.",
+      "parentUuid": "052146fd_cadb616c",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36c23991_677bc386",
@@ -133,6 +258,24 @@
       "writtenOn": "2021-03-15T12:19:32Z",
       "side": 1,
       "message": "I wonder if it makes sense to make the class name SctpTransportMap private to UsrSctpWrappper - that would make it clear that it\u0027s an implementation detail.\n\nI like having it shielded from the rest of the world!",
+      "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0976f920_25a5e62a",
+        "filename": "media/sctp/usrsctp_wrapper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-18T02:12:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36c23991_677bc386",
       "revId": "b7443ff384c76c13ab81fa040643f3df6f58a2fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
