@@ -73,12 +73,12 @@ class FakeDtlsTransport : public DtlsTransportInternal {
 
   // Get inner fake ICE transport.
   FakeIceTransport* fake_ice_transport() { return ice_transport_; }
-
+#if 0
   // If async, will send packets by "Post"-ing to message queue instead of
   // synchronously "Send"-ing.
   void SetAsync(bool async) { ice_transport_->SetAsync(async); }
   void SetAsyncDelay(int delay_ms) { ice_transport_->SetAsyncDelay(delay_ms); }
-
+#endif
   // SetWritable, SetReceiving and SetDestination are the main methods that can
   // be used for testing, to simulate connectivity or lack thereof.
   void SetWritable(bool writable) {
