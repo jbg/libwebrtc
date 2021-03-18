@@ -21,7 +21,6 @@
 #include <vector>
 
 #include "absl/types/optional.h"
-#include "api/transport/sctp_transport_factory_interface.h"
 #include "rtc_base/buffer.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/copy_on_write_buffer.h"
@@ -31,6 +30,7 @@
 // For SendDataParams/ReceiveDataParams.
 #include "media/base/media_channel.h"
 #include "media/sctp/sctp_transport_internal.h"
+#include "media/sctp/usrsctp_wrapper.h"
 
 // Defined by "usrsctplib/usrsctp.h"
 struct sockaddr_conn;
@@ -67,13 +67,18 @@ struct SctpInboundPacket;
 // [from the same thread, methods registered/connected to
 //  SctpTransport are called with the recieved data]
 class SctpTransport : public SctpTransportInternal,
+                      public UsrSctpWrapperDelegate,
                       public sigslot::has_slots<> {
  public:
   // |network_thread| is where packets will be processed and callbacks from
   // this transport will be posted, and is the only thread on which public
   // methods can be called.
+  // |usrsctp_thread| is where all direct usrsctp operations will take place.
+  // Must be the same for all created SctpTransport instances. If null, a thread
+  // will be created automatically.
   // |transport| is not required (can be null).
   SctpTransport(rtc::Thread* network_thread,
+                rtc::Thread* usrsctp_thread,
                 rtc::PacketTransportInternal* transport);
   ~SctpTransport() override;
 
@@ -100,10 +105,6 @@ class SctpTransport : public SctpTransportInternal,
                                                   size_t length,
                                                   struct sctp_rcvinfo rcv,
                                                   int flags);
-
-  // Exposed to allow Post call from c-callbacks.
-  // TODO(deadbeef): Remove this or at least make it return a const pointer.
-  rtc::Thread* network_thread() const { return network_thread_; }
 
  private:
   // A message to be sent by the sctp library. This class is used to track the
@@ -173,23 +174,29 @@ class SctpTransport : public SctpTransportInternal,
                             int flags);
   void OnClosed(rtc::PacketTransportInternal* transport);
 
+  // Implementation of UsrSctpWrapperDelegate, used to safely post tasks to
+  // |network_thread_| that invoke callbacks.
+  const webrtc::ScopedTaskSafety& task_safety() const override {
+    return task_safety_;
+  }
+  rtc::Thread* network_thread() const override { return network_thread_; }
+
   // Methods related to usrsctp callbacks.
-  void OnSendThresholdCallback();
+  void OnSendThresholdCallback() override;
   sockaddr_conn GetSctpSockAddr(int port);
 
-  // Called using |invoker_| to send packet on the network.
-  void OnPacketFromSctpToNetwork(const rtc::CopyOnWriteBuffer& buffer);
+  // Send packet on the network.
+  void OnPacketFromSctpToNetwork(const rtc::CopyOnWriteBuffer& buffer) override;
 
   // Called on the network thread.
   // Flags are standard socket API flags (RFC 6458).
   void OnDataOrNotificationFromSctp(const void* data,
                                     size_t length,
                                     struct sctp_rcvinfo rcv,
-                                    int flags);
-  // Called using |invoker_| to decide what to do with the data.
+                                    int flags) override;
+
   void OnDataFromSctpToTransport(const ReceiveDataParams& params,
                                  const rtc::CopyOnWriteBuffer& buffer);
-  // Called using |invoker_| to decide what to do with the notification.
   void OnNotificationFromSctp(const rtc::CopyOnWriteBuffer& buffer);
   void OnNotificationAssocChange(const sctp_assoc_change& change);
 
@@ -198,6 +205,7 @@ class SctpTransport : public SctpTransportInternal,
   // Responsible for marshalling incoming data to the transports listeners, and
   // outgoing data to the network interface.
   rtc::Thread* network_thread_;
+  rtc::Thread* usrsctp_thread_;
   // Helps pass inbound/outbound packets asynchronously to the network thread.
   webrtc::ScopedTaskSafety task_safety_;
   // Underlying DTLS transport.
@@ -271,8 +279,6 @@ class SctpTransport : public SctpTransportInternal,
 
   // A static human-readable name for debugging messages.
   const char* debug_name_ = "SctpTransport";
-  // Hides usrsctp interactions from this header file.
-  class UsrSctpWrapper;
   // Number of channels negotiated. Not set before negotiation completes.
   absl::optional<int> max_outbound_streams_;
   absl::optional<int> max_inbound_streams_;
@@ -281,24 +287,9 @@ class SctpTransport : public SctpTransportInternal,
   // various callbacks.
   uintptr_t id_ = 0;
 
-  friend class SctpTransportMap;
+  rtc::scoped_refptr<UsrSctpWrapper> usrsctp_wrapper_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(SctpTransport);
-};
-
-class SctpTransportFactory : public webrtc::SctpTransportFactoryInterface {
- public:
-  explicit SctpTransportFactory(rtc::Thread* network_thread)
-      : network_thread_(network_thread) {}
-
-  std::unique_ptr<SctpTransportInternal> CreateSctpTransport(
-      rtc::PacketTransportInternal* transport) override {
-    return std::unique_ptr<SctpTransportInternal>(
-        new SctpTransport(network_thread_, transport));
-  }
-
- private:
-  rtc::Thread* network_thread_;
 };
 
 class SctpTransportMap;
