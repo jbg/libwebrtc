@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ccfb226_9f490fd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-19T09:05:09Z",
+      "side": 1,
+      "message": "Drive-by comment on AsyncResolver.\n",
+      "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68f2e3d1_703c10b7",
@@ -48,6 +65,24 @@
       "writtenOn": "2021-03-19T08:42:54Z",
       "side": 1,
       "message": "Is this thread safe? Don\u0027t we need task_safety_.flag() here too since we no longer have an async invoker that is being destroyed?\n\nOr else, who is responsible for AsyncResolverInterface staying alive?",
+      "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20736993_064fb32e",
+        "filename": "p2p/stunprober/stun_prober.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-19T09:05:09Z",
+      "side": 1,
+      "message": "AsyncResolver is a self-deleting interface - the Destroy() method causes it to be deleted eventually. I have a CL in progress (triggered by a flaky test with ASAN issues) to revisit AsyncResolver\u0027s ownership design.\n\nI suspect it\u0027s threadsafe, but it\u0027s a different issue than this one.",
+      "parentUuid": "d48947d0_f5d1a773",
       "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
