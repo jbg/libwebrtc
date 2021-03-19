@@ -157,6 +157,24 @@
       "parentUuid": "a3f359b4_6a3dbf20",
       "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66ee13cc_131657f3",
+        "filename": "p2p/stunprober/stun_prober.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-03-19T21:14:52Z",
+      "side": 1,
+      "message": "Yeah, this shouldn\u0027t use the task safety flag; the tasks should be executed regardless of whether StunProber is destroyed.\n\nThis class also leaks the resolver if it\u0027s destroyed before OnServerResolved is called. I wouldn\u0027t worry about it too much since this is just for a test utility.",
+      "parentUuid": "c1a51e19_0118b2eb",
+      "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
