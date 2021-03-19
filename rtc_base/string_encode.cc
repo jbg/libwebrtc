@@ -353,7 +353,7 @@ std::string ToString(const unsigned long long int s) {
 
 std::string ToString(const double d) {
   char buf[32];
-  const int len = std::snprintf(&buf[0], arraysize(buf), "%g", d);
+  const int len = std::snprintf(&buf[0], arraysize(buf), "%.16g", d);
   RTC_DCHECK_LE(len, arraysize(buf));
   return std::string(&buf[0], len);
 }
