@@ -54,4 +54,8 @@ int AugmentedVideoFrameBuffer::height() const {
 rtc::scoped_refptr<I420BufferInterface> AugmentedVideoFrameBuffer::ToI420() {
   return video_frame_buffer_->ToI420();
 }
+
+const I420BufferInterface* AugmentedVideoFrameBuffer::GetI420() const {
+  return video_frame_buffer_->GetI420();
+}
 }  // namespace webrtc
