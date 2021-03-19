@@ -145,7 +145,6 @@ public class PeerConnectionClient {
   private int videoHeight;
   private int videoFps;
   private MediaConstraints audioConstraints;
-  private MediaConstraints sdpMediaConstraints;
   // Queued remote ICE candidates are consumed only after both local and
   // remote descriptions are set. Similarly local ICE candidates are sent to
   // remote peer after both local and remote description are set.
@@ -337,7 +336,7 @@ public class PeerConnectionClient {
       PeerConnectionFactory.initialize(
           PeerConnectionFactory.InitializationOptions.builder(appContext)
               .setFieldTrials(fieldTrials)
-              .setEnableInternalTracer(true)
+              .setEnableInternalTracer(peerConnectionParameters.tracing)
               .createInitializationOptions());
     });
   }
@@ -571,12 +570,6 @@ public class PeerConnectionClient {
       audioConstraints.mandatory.add(
           new MediaConstraints.KeyValuePair(AUDIO_NOISE_SUPPRESSION_CONSTRAINT, "false"));
     }
-    // Create SDP constraints.
-    sdpMediaConstraints = new MediaConstraints();
-    sdpMediaConstraints.mandatory.add(
-        new MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"));
-    sdpMediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair(
-        "OfferToReceiveVideo", Boolean.toString(isVideoCallEnabled())));
   }
 
   private void createPeerConnectionInternal() {
@@ -736,8 +729,10 @@ public class PeerConnectionClient {
     rootEglBase.release();
     Log.d(TAG, "Closing peer connection done.");
     events.onPeerConnectionClosed();
-    PeerConnectionFactory.stopInternalTracingCapture();
-    PeerConnectionFactory.shutdownInternalTracer();
+    if (peerConnectionParameters.tracing) {
+      PeerConnectionFactory.stopInternalTracingCapture();
+      PeerConnectionFactory.shutdownInternalTracer();
+    }
   }
 
   public boolean isHDVideo() {
@@ -803,7 +798,9 @@ public class PeerConnectionClient {
       if (peerConnection != null && !isError) {
         Log.d(TAG, "PC Create OFFER");
         isInitiator = true;
-        peerConnection.createOffer(sdpObserver, sdpMediaConstraints);
+        // setLocalDescription automatically creates and sets
+        // local description based on current signaling state
+        peerConnection.setLocalDescription(sdpObserver);
       }
     });
   }
@@ -813,7 +810,9 @@ public class PeerConnectionClient {
       if (peerConnection != null && !isError) {
         Log.d(TAG, "PC create ANSWER");
         isInitiator = false;
-        peerConnection.createAnswer(sdpObserver, sdpMediaConstraints);
+        // setLocalDescription automatically creates and sets
+        // local description based on current signaling state
+        peerConnection.setLocalDescription(sdpObserver);
       }
     });
   }
@@ -1327,6 +1326,7 @@ public class PeerConnectionClient {
         if (peerConnection == null || isError) {
           return;
         }
+        localDescription = peerConnection.getLocalDescription();
         if (isInitiator) {
           // For offering peer connection we first create offer and set
           // local SDP, then after receiving answer set remote SDP.
