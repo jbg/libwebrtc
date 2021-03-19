@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5ad09d3_ae887455",
+        "filename": "p2p/stunprober/stun_prober.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-19T09:32:10Z",
+      "side": 1,
+      "message": "That requirement is inherited from PendingTaskSafetyFlag::SetNotAlive, which is called from the destructor.\n\nAdding DCHECK for clarity, even if it is redundant, since PendingTaskSafety has its own thread check. (A separate improvement would be to add thread annotations, and replace RTC_DCHECK(thread_checker_.IsCurrent()); with RTC_DCHECK_RUN_ON(thread_);, but I don\u0027t intend to do that now)",
+      "parentUuid": "68f2e3d1_703c10b7",
+      "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d48947d0_f5d1a773",
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "AsyncResolver is a self-deleting interface - the Destroy() method causes it to be deleted eventually. I have a CL in progress (triggered by a flaky test with ASAN issues) to revisit AsyncResolver\u0027s ownership design.\n\nI suspect it\u0027s threadsafe, but it\u0027s a different issue than this one.",
       "parentUuid": "d48947d0_f5d1a773",
+      "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3f359b4_6a3dbf20",
+        "filename": "p2p/stunprober/stun_prober.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-19T09:32:10Z",
+      "side": 1,
+      "message": "As far as I understand, (i) nothing else destroys the resolver, so it should stay alive until the task runs, and (ii) the lambda doesn\u0027t depend on anything in `this`.\n\nBut lifetime of the resolver isn\u0027t crystal clear to me. It would be simpler if it automatically self destructed after OnServerResolved returns. And if I remember correctly, the reason we can\u0027t destroy it synchronously is that OnServerResolved isn\u0027t a tail call, the resolver object is calling it from an iteration of the sigslot state, and calling Destroy directly gives a use-after-free immediately on return.",
+      "parentUuid": "20736993_064fb32e",
       "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
