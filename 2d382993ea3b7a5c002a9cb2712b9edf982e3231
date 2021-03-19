@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9450fe5_0dd628cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-03-19T13:07:32Z",
+      "side": 1,
+      "message": "you might want to add a \"see LBRR_WB_MIN_RATE_BPS/LBRR_rate_thres_bps in libopus\"",
+      "revId": "2d382993ea3b7a5c002a9cb2712b9edf982e3231",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
