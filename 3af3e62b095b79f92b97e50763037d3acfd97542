@@ -16,6 +16,40 @@
       "message": "PTAL. I\u0027m not sure what test coverage we have for this. But it appears referenced from chromium,\n\nthird_party/blink/renderer/modules/peerconnection/peer_connection_dependency_factory.h:#include \"third_party/webrtc/p2p/stunprober/stun_prober.h\"\nthird_party/blink/renderer/platform/peerconnection/stun_field_trial.h:#include \"third_party/webrtc/p2p/stunprober/stun_prober.h\"\n",
       "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68f2e3d1_703c10b7",
+        "filename": "p2p/stunprober/stun_prober.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-19T08:42:54Z",
+      "side": 1,
+      "message": "I don\u0027t know why webrtc::ScopedTaskSafety is required to be destroyed on the same thread as the tasks run on, but to me it sounds like we must now RTC_DCHECK(thread_checker_.IsCurrent()); in ~StunProber.",
+      "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d48947d0_f5d1a773",
+        "filename": "p2p/stunprober/stun_prober.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-19T08:42:54Z",
+      "side": 1,
+      "message": "Is this thread safe? Don\u0027t we need task_safety_.flag() here too since we no longer have an async invoker that is being destroyed?\n\nOr else, who is responsible for AsyncResolverInterface staying alive?",
+      "revId": "3af3e62b095b79f92b97e50763037d3acfd97542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
