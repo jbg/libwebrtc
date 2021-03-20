@@ -836,6 +836,8 @@ void ChannelReceive::SetAssociatedSendChannel(
     const ChannelSendInterface* channel) {
   // TODO(bugs.webrtc.org/11993): Expect to be called on the network thread.
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  // TODO(tommi): Get rid of this lock and protect associated_send_channel_
+  // with network checker/thread.
   MutexLock lock(&assoc_send_channel_lock_);
   associated_send_channel_ = channel;
 }
