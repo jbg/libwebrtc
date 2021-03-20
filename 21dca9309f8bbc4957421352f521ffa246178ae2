@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9e5f4d6_145dfa8f",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-20T19:24:38Z",
+      "side": 1,
+      "message": "this is to match the ctor but also stops timers on the process thread before we continue with teardown. The effect of this is basically a noop, but could reduce chances of synchronization with those timers while stopping playout (i.e. if anything, this will reduce contention).",
+      "range": {
+        "startLine": 547,
+        "startChar": 2,
+        "endLine": 547,
+        "endChar": 24
+      },
+      "revId": "21dca9309f8bbc4957421352f521ffa246178ae2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98388630_0fe3d7b6",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-20T19:24:38Z",
+      "side": 1,
+      "message": "before, we held video_sync_lock_ while fetching the jitter buffer size. That\u0027s not necessary and also holds video_sync_lock_ while FilteredCurrentDelayMs() grabs another lock (potentially contending).",
+      "revId": "21dca9309f8bbc4957421352f521ffa246178ae2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
