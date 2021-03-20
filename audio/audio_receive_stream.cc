@@ -317,14 +317,9 @@ uint32_t AudioReceiveStream::id() const {
 }
 
 absl::optional<Syncable::Info> AudioReceiveStream::GetInfo() const {
+  // TODO(bugs.webrtc.org/11993): move to network thread?
   RTC_DCHECK_RUN_ON(&module_process_thread_checker_);
-  absl::optional<Syncable::Info> info = channel_receive_->GetSyncInfo();
-
-  if (!info)
-    return absl::nullopt;
-
-  info->current_delay_ms = channel_receive_->GetDelayEstimate();
-  return info;
+  return channel_receive_->GetSyncInfo();
 }
 
 bool AudioReceiveStream::GetPlayoutRtpTimestamp(uint32_t* rtp_timestamp,
