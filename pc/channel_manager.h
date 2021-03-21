@@ -45,6 +45,15 @@ namespace cricket {
 // using device manager.
 class ChannelManager final {
  public:
+  // Returns an initialized instance of ChannelManager.
+  // If media_engine is non-nullptr, then the returned ChannelManager instance
+  // will own that reference and media engine initialization
+  std::unique_ptr<ChannelManager> Create(
+      std::unique_ptr<MediaEngineInterface> media_engine,
+      std::unique_ptr<DataEngineInterface> data_engine,
+      rtc::Thread* worker_thread,
+      rtc::Thread* network_thread);
+
   // Construct a ChannelManager with the specified media engine and data engine.
   ChannelManager(std::unique_ptr<MediaEngineInterface> media_engine,
                  std::unique_ptr<DataEngineInterface> data_engine,
@@ -75,8 +84,8 @@ class ChannelManager final {
 
   // Indicates whether the media engine is started.
   bool initialized() const;
-  // Starts up the media engine.
-  bool Init();
+  // Initializes the media engine.
+  void Init();
   // Shuts down the media engine.
   void Terminate();
 
