@@ -41,6 +41,7 @@ ChannelManager::ChannelManager(
 }
 
 ChannelManager::~ChannelManager() {
+  RTC_DCHECK_RUN_ON(main_thread_);
   if (initialized_) {
     Terminate();
   }
@@ -50,6 +51,7 @@ ChannelManager::~ChannelManager() {
 }
 
 bool ChannelManager::SetVideoRtxEnabled(bool enable) {
+  RTC_DCHECK_RUN_ON(main_thread_);
   // To be safe, this call is only allowed before initialization. Apps like
   // Flute only have a singleton ChannelManager and we don't want this flag to
   // be toggled between calls or when there's concurrent calls. We expect apps
@@ -119,7 +121,13 @@ void ChannelManager::GetSupportedDataCodecs(
   *codecs = data_engine_->data_codecs();
 }
 
+bool ChannelManager::initialized() const {
+  RTC_DCHECK_RUN_ON(main_thread_);
+  return initialized_;
+}
+
 bool ChannelManager::Init() {
+  RTC_DCHECK_RUN_ON(main_thread_);
   RTC_DCHECK(!initialized_);
   if (initialized_) {
     return false;
@@ -171,6 +179,7 @@ ChannelManager::GetSupportedVideoRtpHeaderExtensions() const {
 }
 
 void ChannelManager::Terminate() {
+  RTC_DCHECK_RUN_ON(main_thread_);
   RTC_DCHECK(initialized_);
   if (!initialized_) {
     return;

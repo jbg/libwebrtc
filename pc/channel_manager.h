@@ -55,21 +55,7 @@ class ChannelManager final {
   // Accessors for the worker thread, allowing it to be set after construction,
   // but before Init. set_worker_thread will return false if called after Init.
   rtc::Thread* worker_thread() const { return worker_thread_; }
-  bool set_worker_thread(rtc::Thread* thread) {
-    if (initialized_) {
-      return false;
-    }
-    worker_thread_ = thread;
-    return true;
-  }
   rtc::Thread* network_thread() const { return network_thread_; }
-  bool set_network_thread(rtc::Thread* thread) {
-    if (initialized_) {
-      return false;
-    }
-    network_thread_ = thread;
-    return true;
-  }
 
   MediaEngineInterface* media_engine() { return media_engine_.get(); }
 
@@ -88,7 +74,7 @@ class ChannelManager final {
   GetSupportedVideoRtpHeaderExtensions() const;
 
   // Indicates whether the media engine is started.
-  bool initialized() const { return initialized_; }
+  bool initialized() const;
   // Starts up the media engine.
   bool Init();
   // Shuts down the media engine.
@@ -166,9 +152,9 @@ class ChannelManager final {
   std::unique_ptr<MediaEngineInterface> media_engine_;  // Nullable.
   std::unique_ptr<DataEngineInterface> data_engine_;    // Non-null.
   bool initialized_ = false;
-  rtc::Thread* main_thread_;
-  rtc::Thread* worker_thread_;
-  rtc::Thread* network_thread_;
+  rtc::Thread* const main_thread_;
+  rtc::Thread* const worker_thread_;
+  rtc::Thread* const network_thread_;
 
   // Vector contents are non-null.
   std::vector<std::unique_ptr<VoiceChannel>> voice_channels_;
