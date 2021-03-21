@@ -106,7 +106,7 @@ class ChannelManagerTest : public ::testing::Test {
 // Test that we startup/shutdown properly.
 TEST_F(ChannelManagerTest, StartupShutdown) {
   EXPECT_FALSE(cm_->initialized());
-  EXPECT_TRUE(cm_->Init());
+  cm_->Init();
   EXPECT_TRUE(cm_->initialized());
   cm_->Terminate();
   EXPECT_FALSE(cm_->initialized());
@@ -117,7 +117,7 @@ TEST_F(ChannelManagerTest, StartupShutdownOnThread) {
   EXPECT_FALSE(cm_->initialized());
   EXPECT_EQ(network_.get(), cm_->network_thread());
   EXPECT_EQ(worker_.get(), cm_->worker_thread());
-  EXPECT_TRUE(cm_->Init());
+  cm_->Init();
   EXPECT_TRUE(cm_->initialized());
   cm_->Terminate();
   EXPECT_FALSE(cm_->initialized());
@@ -149,7 +149,7 @@ TEST_F(ChannelManagerTest, SetVideoRtxEnabled) {
   EXPECT_FALSE(ContainsMatchingCodec(recv_codecs, rtx_codec));
 
   // Cannot toggle rtx after initialization.
-  EXPECT_TRUE(cm_->Init());
+  cm_->Init();
   EXPECT_FALSE(cm_->SetVideoRtxEnabled(true));
   EXPECT_FALSE(cm_->SetVideoRtxEnabled(false));
 
@@ -163,7 +163,7 @@ TEST_F(ChannelManagerTest, SetVideoRtxEnabled) {
 }
 
 TEST_F(ChannelManagerTest, CreateDestroyChannels) {
-  EXPECT_TRUE(cm_->Init());
+  cm_->Init();
   auto rtp_dtls_transport = std::make_unique<FakeDtlsTransport>(
       "fake_dtls_transport", cricket::ICE_CANDIDATE_COMPONENT_RTP,
       network_.get());
