@@ -27,6 +27,31 @@
 namespace cricket {
 using ::webrtc::ToQueuedTask;
 
+// static
+std::unique_ptr<ChannelManager> ChannelManager::Create(
+    std::unique_ptr<MediaEngineInterface> media_engine,
+    std::unique_ptr<DataEngineInterface> data_engine,
+    rtc::Thread* worker_thread,
+    rtc::Thread* network_thread) {
+  RTC_DCHECK(network_thread);
+  RTC_DCHECK(worker_thread);
+
+  if (media_engine) {
+    if (worker_thread->IsCurrent()) {
+      media_engine->Init();
+    } else {
+      worker_thread_->Invoke<void>(
+          RTC_FROM_HERE, [engine = media_engine.get()] { engine->Init(); });
+    }
+  }
+
+  std::unique_ptr<ChannelManager> ret(
+      new ChannelManager(std::move(media_engine), std::move(data_engine),
+                         worker_thread, network_thread));
+
+  return ret;
+}
+
 ChannelManager::ChannelManager(
     std::unique_ptr<MediaEngineInterface> media_engine,
     std::unique_ptr<DataEngineInterface> data_engine,
@@ -47,6 +72,7 @@ ChannelManager::~ChannelManager() {
   if (initialized_) {
     Terminate();
   }
+
   if (media_engine_) {
     // The media engine needs to be deleted on the worker thread for thread safe
     // destruction.
@@ -131,28 +157,25 @@ bool ChannelManager::initialized() const {
   return initialized_;
 }
 
-bool ChannelManager::Init() {
+void ChannelManager::Init() {
   RTC_DCHECK_RUN_ON(main_thread_);
   RTC_DCHECK(!initialized_);
-  if (initialized_) {
-    return false;
-  }
   RTC_DCHECK(network_thread_);
   RTC_DCHECK(worker_thread_);
+
   if (!network_thread_->IsCurrent()) {
     // Do not allow invoking calls to other threads on the network thread.
+    // TODO(tommi): Post? Why is this done here?
     network_thread_->Invoke<void>(
         RTC_FROM_HERE, [&] { network_thread_->DisallowBlockingCalls(); });
   }
 
   if (media_engine_) {
-    initialized_ = worker_thread_->Invoke<bool>(
-        RTC_FROM_HERE, [&] { return media_engine_->Init(); });
-    RTC_DCHECK(initialized_);
-  } else {
-    initialized_ = true;
+    // TODO(tommi): Post? Also, protect media_engine_ with the worker thread?
+    worker_thread_->Invoke<void>(RTC_FROM_HERE,
+                                 [engine = media_engine_] { engine->Init(); });
   }
-  return initialized_;
+  initialized_ = true;  // TODO(tommi): remove variable.
 }
 
 RtpHeaderExtensions ChannelManager::GetDefaultEnabledAudioRtpHeaderExtensions()

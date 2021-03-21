@@ -18,6 +18,7 @@
 #include "media/base/rtp_data_engine.h"
 #include "rtc_base/helpers.h"
 #include "rtc_base/ref_counted_object.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/time_utils.h"
 
 namespace webrtc {
@@ -76,9 +77,8 @@ std::unique_ptr<SctpTransportFactoryInterface> MaybeCreateSctpFactory(
 rtc::scoped_refptr<ConnectionContext> ConnectionContext::Create(
     PeerConnectionFactoryDependencies* dependencies) {
   auto context = new rtc::RefCountedObject<ConnectionContext>(dependencies);
-  if (!context->channel_manager_->Init()) {
-    return nullptr;
-  }
+  // TODO(tommi): Handle the Init() step inside of ChannelManager.
+  context->channel_manager_->Init();
   return context;
 }
 
@@ -107,7 +107,14 @@ ConnectionContext::ConnectionContext(
   signaling_thread_->AllowInvokesToThread(worker_thread_);
   signaling_thread_->AllowInvokesToThread(network_thread_);
   worker_thread_->AllowInvokesToThread(network_thread_);
-  network_thread_->DisallowAllInvokes();
+  if (network_thread_->IsCurrent()) {
+    network_thread_->DisallowAllInvokes();
+  } else {
+    network_thread_->PostTask(ToQueuedTask([thread = network_thread_] {
+      thread->DisallowBlockingCalls();
+      thread->DisallowAllInvokes();
+    }));
+  }
 
   RTC_DCHECK_RUN_ON(signaling_thread_);
   rtc::InitRandom(rtc::Time32());
@@ -120,6 +127,8 @@ ConnectionContext::ConnectionContext(
   default_socket_factory_ =
       std::make_unique<rtc::BasicPacketSocketFactory>(network_thread());
 
+  // TODO(tommi): Invoke this on the worker thread.
+  // Remove media_engine_ member variable.
   channel_manager_ = std::make_unique<cricket::ChannelManager>(
       std::move(media_engine_), std::make_unique<cricket::RtpDataEngine>(),
       worker_thread(), network_thread());
