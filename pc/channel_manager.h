@@ -45,9 +45,20 @@ namespace cricket {
 // using device manager.
 class ChannelManager final {
  public:
+  // Returns an initialized instance of ChannelManager.
+  // If media_engine is non-nullptr, then the returned ChannelManager instance
+  // will own that reference and media engine initialization
+  static std::unique_ptr<ChannelManager> Create(
+      std::unique_ptr<MediaEngineInterface> media_engine,
+      std::unique_ptr<DataEngineInterface> data_engine,
+      bool enable_rtx,
+      rtc::Thread* worker_thread,
+      rtc::Thread* network_thread);
+
   // Construct a ChannelManager with the specified media engine and data engine.
   ChannelManager(std::unique_ptr<MediaEngineInterface> media_engine,
                  std::unique_ptr<DataEngineInterface> data_engine,
+                 bool enable_rtx,
                  rtc::Thread* worker_thread,
                  rtc::Thread* network_thread);
   ~ChannelManager();
@@ -72,13 +83,6 @@ class ChannelManager final {
   RtpHeaderExtensions GetDefaultEnabledVideoRtpHeaderExtensions() const;
   std::vector<webrtc::RtpHeaderExtensionCapability>
   GetSupportedVideoRtpHeaderExtensions() const;
-
-  // Indicates whether the media engine is started.
-  bool initialized() const;
-  // Starts up the media engine.
-  bool Init();
-  // Shuts down the media engine.
-  void Terminate();
 
   // The operations below all occur on the worker thread.
   // ChannelManager retains ownership of the created channels, so clients should
@@ -131,10 +135,6 @@ class ChannelManager final {
             !data_channels_.empty());
   }
 
-  // RTX will be enabled/disabled in engines that support it. The supporting
-  // engines will start offering an RTX codec. Must be called before Init().
-  bool SetVideoRtxEnabled(bool enable);
-
   // Starts/stops the local microphone and enables polling of the input level.
   bool capturing() const { return capturing_; }
 
@@ -151,7 +151,6 @@ class ChannelManager final {
  private:
   std::unique_ptr<MediaEngineInterface> media_engine_;  // Nullable.
   std::unique_ptr<DataEngineInterface> data_engine_;    // Non-null.
-  bool initialized_ RTC_GUARDED_BY(main_thread_) = false;
   rtc::Thread* const main_thread_;
   rtc::Thread* const worker_thread_;
   rtc::Thread* const network_thread_;
@@ -161,7 +160,7 @@ class ChannelManager final {
   std::vector<std::unique_ptr<VideoChannel>> video_channels_;
   std::vector<std::unique_ptr<RtpDataChannel>> data_channels_;
 
-  bool enable_rtx_ = false;
+  const bool enable_rtx_;
   bool capturing_ = false;
 };
 
