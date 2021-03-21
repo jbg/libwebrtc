@@ -76,9 +76,8 @@ std::unique_ptr<SctpTransportFactoryInterface> MaybeCreateSctpFactory(
 rtc::scoped_refptr<ConnectionContext> ConnectionContext::Create(
     PeerConnectionFactoryDependencies* dependencies) {
   auto context = new rtc::RefCountedObject<ConnectionContext>(dependencies);
-  if (!context->channel_manager_->Init()) {
-    return nullptr;
-  }
+  // TODO(tommi): Handle the Init() step inside of ChannelManager.
+  context->channel_manager_->Init();
   return context;
 }
 

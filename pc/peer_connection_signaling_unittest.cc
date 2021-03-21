@@ -107,6 +107,10 @@ class PeerConnectionSignalingBaseTest : public ::testing::Test {
         nullptr /* audio_mixer */, nullptr /* audio_processing */);
   }
 
+  ~PeerConnectionSignalingBaseTest() override {
+    rtc::Thread::Current()->ProcessMessages(0);
+  }
+
   WrapperPtr CreatePeerConnection() {
     return CreatePeerConnection(RTCConfiguration());
   }
