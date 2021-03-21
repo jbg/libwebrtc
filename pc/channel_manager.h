@@ -57,7 +57,7 @@ class ChannelManager final {
   rtc::Thread* worker_thread() const { return worker_thread_; }
   rtc::Thread* network_thread() const { return network_thread_; }
 
-  MediaEngineInterface* media_engine() { return media_engine_.get(); }
+  MediaEngineInterface* media_engine() { return media_engine_; }
 
   // Retrieves the list of supported audio & video codec types.
   // Can be called before starting the media engine.
@@ -149,7 +149,7 @@ class ChannelManager final {
   void StopAecDump();
 
  private:
-  std::unique_ptr<MediaEngineInterface> media_engine_;  // Nullable.
+  MediaEngineInterface* const media_engine_;  // Nullable. Owned if not null.
   std::unique_ptr<DataEngineInterface> data_engine_;    // Non-null.
   bool initialized_ RTC_GUARDED_BY(main_thread_) = false;
   rtc::Thread* const main_thread_;
