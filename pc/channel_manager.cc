@@ -21,16 +21,18 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/location.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/trace_event.h"
 
 namespace cricket {
+using ::webrtc::ToQueuedTask;
 
 ChannelManager::ChannelManager(
     std::unique_ptr<MediaEngineInterface> media_engine,
     std::unique_ptr<DataEngineInterface> data_engine,
     rtc::Thread* worker_thread,
     rtc::Thread* network_thread)
-    : media_engine_(std::move(media_engine)),
+    : media_engine_(media_engine.release()),  // Take ownership.
       data_engine_(std::move(data_engine)),
       main_thread_(rtc::Thread::Current()),
       worker_thread_(worker_thread),
@@ -45,9 +47,12 @@ ChannelManager::~ChannelManager() {
   if (initialized_) {
     Terminate();
   }
-  // The media engine needs to be deleted on the worker thread for thread safe
-  // destruction,
-  worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] { media_engine_.reset(); });
+  if (media_engine_) {
+    // The media engine needs to be deleted on the worker thread for thread safe
+    // destruction.
+    worker_thread_->PostTask(
+        ToQueuedTask([engine = media_engine_] { delete engine; }));
+  }
 }
 
 bool ChannelManager::SetVideoRtxEnabled(bool enable) {
