@@ -45,9 +45,20 @@ namespace cricket {
 // using device manager.
 class ChannelManager final {
  public:
+  // Returns an initialized instance of ChannelManager.
+  // If media_engine is non-nullptr, then the returned ChannelManager instance
+  // will own that reference and media engine initialization
+  static std::unique_ptr<ChannelManager> Create(
+      std::unique_ptr<MediaEngineInterface> media_engine,
+      std::unique_ptr<DataEngineInterface> data_engine,
+      bool enable_rtx,
+      rtc::Thread* worker_thread,
+      rtc::Thread* network_thread);
+
   // Construct a ChannelManager with the specified media engine and data engine.
   ChannelManager(std::unique_ptr<MediaEngineInterface> media_engine,
                  std::unique_ptr<DataEngineInterface> data_engine,
+                 bool enable_rtx,
                  rtc::Thread* worker_thread,
                  rtc::Thread* network_thread);
   ~ChannelManager();
@@ -75,8 +86,8 @@ class ChannelManager final {
 
   // Indicates whether the media engine is started.
   bool initialized() const;
-  // Starts up the media engine.
-  bool Init();
+  // Initializes the media engine.
+  void Init();
   // Shuts down the media engine.
   void Terminate();
 
@@ -131,10 +142,6 @@ class ChannelManager final {
             !data_channels_.empty());
   }
 
-  // RTX will be enabled/disabled in engines that support it. The supporting
-  // engines will start offering an RTX codec. Must be called before Init().
-  bool SetVideoRtxEnabled(bool enable);
-
   // Starts/stops the local microphone and enables polling of the input level.
   bool capturing() const { return capturing_; }
 
@@ -161,7 +168,7 @@ class ChannelManager final {
   std::vector<std::unique_ptr<VideoChannel>> video_channels_;
   std::vector<std::unique_ptr<RtpDataChannel>> data_channels_;
 
-  bool enable_rtx_ = false;
+  const bool enable_rtx_;
   bool capturing_ = false;
 };
 
