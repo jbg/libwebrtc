@@ -52,9 +52,10 @@ class ChannelManagerTest : public ::testing::Test {
             webrtc::CreateBuiltinVideoBitrateAllocatorFactory()),
         fme_(new cricket::FakeMediaEngine()),
         fdme_(new cricket::FakeDataEngine()),
-        cm_(new cricket::ChannelManager(
+        cm_(cricket::ChannelManager::Create(
             std::unique_ptr<MediaEngineInterface>(fme_),
             std::unique_ptr<DataEngineInterface>(fdme_),
+            false,
             worker_.get(),
             network_.get())),
         fake_call_() {
@@ -106,7 +107,7 @@ class ChannelManagerTest : public ::testing::Test {
 // Test that we startup/shutdown properly.
 TEST_F(ChannelManagerTest, StartupShutdown) {
   EXPECT_FALSE(cm_->initialized());
-  EXPECT_TRUE(cm_->Init());
+  cm_->Init();
   EXPECT_TRUE(cm_->initialized());
   cm_->Terminate();
   EXPECT_FALSE(cm_->initialized());
@@ -117,7 +118,7 @@ TEST_F(ChannelManagerTest, StartupShutdownOnThread) {
   EXPECT_FALSE(cm_->initialized());
   EXPECT_EQ(network_.get(), cm_->network_thread());
   EXPECT_EQ(worker_.get(), cm_->worker_thread());
-  EXPECT_TRUE(cm_->Init());
+  cm_->Init();
   EXPECT_TRUE(cm_->initialized());
   cm_->Terminate();
   EXPECT_FALSE(cm_->initialized());
@@ -135,35 +136,28 @@ TEST_F(ChannelManagerTest, SetVideoRtxEnabled) {
   EXPECT_FALSE(ContainsMatchingCodec(recv_codecs, rtx_codec));
 
   // Enable and check.
-  EXPECT_TRUE(cm_->SetVideoRtxEnabled(true));
+  cm_ = cricket::ChannelManager::Create(
+      std::unique_ptr<MediaEngineInterface>(fme_),
+      std::unique_ptr<DataEngineInterface>(fdme_), true, worker_.get(),
+      network_.get());
   cm_->GetSupportedVideoSendCodecs(&send_codecs);
   EXPECT_TRUE(ContainsMatchingCodec(send_codecs, rtx_codec));
   cm_->GetSupportedVideoSendCodecs(&recv_codecs);
   EXPECT_TRUE(ContainsMatchingCodec(recv_codecs, rtx_codec));
 
   // Disable and check.
-  EXPECT_TRUE(cm_->SetVideoRtxEnabled(false));
+  cm_ = cricket::ChannelManager::Create(
+      std::unique_ptr<MediaEngineInterface>(fme_),
+      std::unique_ptr<DataEngineInterface>(fdme_), false, worker_.get(),
+      network_.get());
   cm_->GetSupportedVideoSendCodecs(&send_codecs);
   EXPECT_FALSE(ContainsMatchingCodec(send_codecs, rtx_codec));
   cm_->GetSupportedVideoSendCodecs(&recv_codecs);
   EXPECT_FALSE(ContainsMatchingCodec(recv_codecs, rtx_codec));
-
-  // Cannot toggle rtx after initialization.
-  EXPECT_TRUE(cm_->Init());
-  EXPECT_FALSE(cm_->SetVideoRtxEnabled(true));
-  EXPECT_FALSE(cm_->SetVideoRtxEnabled(false));
-
-  // Can set again after terminate.
-  cm_->Terminate();
-  EXPECT_TRUE(cm_->SetVideoRtxEnabled(true));
-  cm_->GetSupportedVideoSendCodecs(&send_codecs);
-  EXPECT_TRUE(ContainsMatchingCodec(send_codecs, rtx_codec));
-  cm_->GetSupportedVideoSendCodecs(&recv_codecs);
-  EXPECT_TRUE(ContainsMatchingCodec(recv_codecs, rtx_codec));
 }
 
 TEST_F(ChannelManagerTest, CreateDestroyChannels) {
-  EXPECT_TRUE(cm_->Init());
+  cm_->Init();
   auto rtp_dtls_transport = std::make_unique<FakeDtlsTransport>(
       "fake_dtls_transport", cricket::ICE_CANDIDATE_COMPONENT_RTP,
       network_.get());
