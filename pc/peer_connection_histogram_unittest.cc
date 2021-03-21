@@ -85,6 +85,10 @@ class PeerConnectionFactoryForUsageHistogramTest
           dependencies.call_factory = CreateCallFactory();
           return dependencies;
         }()) {}
+
+  ~PeerConnectionFactoryForUsageHistogramTest() override {
+    rtc::Thread::Current()->ProcessMessage(0);
+  }
 };
 
 class PeerConnectionWrapperForUsageHistogramTest;
