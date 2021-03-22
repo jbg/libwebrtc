@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "269695a0_dc622656",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T19:06:19Z",
+      "side": 1,
+      "message": "This will definitely crash in debug, because the RTC_DCHECK_RUN_ON dereferences self before checking it.\nIt\u0027s not obvious to me why it crashes in other cases.\n",
+      "revId": "1d86b17b573f7fa90121f210592f1a89b8d5581b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a49b0094_492b0f1f",
@@ -54,6 +71,23 @@
         "endLine": 142,
         "endChar": 53
       },
+      "revId": "1d86b17b573f7fa90121f210592f1a89b8d5581b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd7eb510_b19ee5f9",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T19:06:19Z",
+      "side": 1,
+      "message": "The RTC_DCHECK will segfault.",
       "revId": "1d86b17b573f7fa90121f210592f1a89b8d5581b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
