@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2545d20a_f4dfd618",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T06:23:29Z",
+      "side": 1,
+      "message": "Looks good. Less unrealistic test environment.\n",
+      "revId": "bd4a5dbd488e1fbd5e61f4000307204db5572921",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37efcf46_12fa3648",
+        "filename": "pc/channel_manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T06:23:29Z",
+      "side": 1,
+      "message": "Update comment.",
+      "revId": "bd4a5dbd488e1fbd5e61f4000307204db5572921",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
