@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f718380_95815ab5",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-03-22T10:12:56Z",
+      "side": 1,
+      "message": "You should fallback to ToI420 here. If the native buffer doesn\u0027t implement GetMappedFrameBuffer - you will get nullptr here.\n\nAlternatively, you can change the default implementation of GetMappedFrameBuffer to return ToI420 if such a format is requested (which is always present actually).\n\nThen DCHECK and return {} is fine here.",
+      "parentUuid": "92753081_ff003dad",
+      "range": {
+        "startLine": 1324,
+        "startChar": 17,
+        "endLine": 1324,
+        "endChar": 30
+      },
+      "revId": "a8533d36d0e7372f7d605a622f58347c27c46794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9221c5f5_da84701b",
         "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
         "patchSetId": 26
