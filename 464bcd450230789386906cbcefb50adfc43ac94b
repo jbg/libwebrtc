@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ff7dbc_ea37e85f",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-22T15:48:53Z",
+      "side": 0,
+      "message": "Unclear to me why deleting the RTC_FROM_HERE argument requires explicit wrapping of the lambda in a ToQueuedTask.",
+      "range": {
+        "startLine": 395,
+        "startChar": 10,
+        "endLine": 395,
+        "endChar": 23
+      },
+      "revId": "464bcd450230789386906cbcefb50adfc43ac94b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

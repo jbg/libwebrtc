@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a7800d9_b4c974fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-22T15:48:53Z",
+      "side": 1,
+      "message": "PTAL. This class already had a WeakPtrFactory, so use that instead of a ScopedTaskSafety.",
+      "revId": "1d86b17b573f7fa90121f210592f1a89b8d5581b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a49b0094_492b0f1f",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-22T15:48:53Z",
+      "side": 1,
+      "message": "This change consistently creates weak pointers on the network thread, and dereference them on the signalling thread. From my reading of the docs, that should be fine.",
+      "range": {
+        "startLine": 142,
+        "startChar": 27,
+        "endLine": 142,
+        "endChar": 53
+      },
+      "revId": "1d86b17b573f7fa90121f210592f1a89b8d5581b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
