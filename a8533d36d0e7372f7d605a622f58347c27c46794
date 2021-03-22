@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9221c5f5_da84701b",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 1327,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-22T09:03:18Z",
+      "side": 1,
+      "message": "I\u0027ll fix https://crbug.com/webrc/12595. The assumption is that supported formats (I420 and NV12), when scaled, return the same pixel buffer type after scaling.",
+      "revId": "a8533d36d0e7372f7d605a622f58347c27c46794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
