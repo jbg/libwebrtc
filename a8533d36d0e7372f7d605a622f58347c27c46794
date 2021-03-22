@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cc55ea0_ded11326",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-22T10:57:02Z",
+      "side": 1,
+      "message": "All simulcast layers have to have the same pixel format for libvpx to be happy. I think the assumption I am making here is reasonable: if I was able to map |mapped_type| for the full scale buffer, then I should be able to map |mapped_type| for a Scale()d version of that buffer. If I am not able to do that, then Scale() must have changed the pixel format in the process of scaling. I would argue that we do not want to handle this case, because if we were to recover in this case that means we have performed unnecessary conversion and scaling, which is just silently wasting CPU.\n\nI think it is better that we ensure that supported native buffers (i.e. I420 and NV12 in this case) are scalable and mappable and that anything else is a bug that crashes.\n\nSo I made this DCHECK-crash but for release builds I make it return {}. Alternatively I could make it CHECK-crash to be more visible if it happens.",
+      "parentUuid": "92753081_ff003dad",
+      "range": {
+        "startLine": 1324,
+        "startChar": 17,
+        "endLine": 1324,
+        "endChar": 30
+      },
+      "revId": "a8533d36d0e7372f7d605a622f58347c27c46794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9221c5f5_da84701b",
@@ -101,6 +125,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4be4db95_21d81d66",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 1327,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-22T10:57:02Z",
+      "side": 1,
+      "message": "It is impossible for libvpx to handle mixed pixel formats. To be consistent with other code I made this DCHECK-crash but return {} in release builds. Alternatively we make both places CHECK-crash to increase visibility.",
+      "parentUuid": "753b5be6_f4d8b256",
+      "revId": "a8533d36d0e7372f7d605a622f58347c27c46794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f07a99e5_7c081a4f",
@@ -114,6 +156,30 @@
       "writtenOn": "2021-03-22T09:48:12Z",
       "side": 1,
       "message": "Instead of passing `i`, this function could be moved into the implementation, or even to a shared library for Vp8 and Vp9 and take a `vpx_image_t*`.",
+      "range": {
+        "startLine": 1334,
+        "startChar": 0,
+        "endLine": 1334,
+        "endChar": 78
+      },
+      "revId": "a8533d36d0e7372f7d605a622f58347c27c46794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc58a677_f17b9df1",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-22T10:57:02Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f07a99e5_7c081a4f",
       "range": {
         "startLine": 1334,
         "startChar": 0,

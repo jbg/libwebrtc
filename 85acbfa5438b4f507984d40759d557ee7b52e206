@@ -68,6 +68,24 @@
       "parentUuid": "e8c7d4f5_13706af2",
       "revId": "85acbfa5438b4f507984d40759d557ee7b52e206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b301a7ef_bc16b3d5",
+        "filename": "modules/video_coding/codecs/vp8/test/vp8_impl_unittest.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-22T10:57:02Z",
+      "side": 1,
+      "message": "OK I filed a bug: https://crbug.com/webrtc/12603\n\nBut as-is, even when \".active \u003d false\", we pass in a pointer to buffers for all layers in libvpx, so it feels safer to address this separately.",
+      "parentUuid": "ef05fca0_c58dd680",
+      "revId": "85acbfa5438b4f507984d40759d557ee7b52e206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
