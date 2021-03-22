@@ -16,6 +16,75 @@
       "message": "Danil, PTAL at modules/video_coding/\nErik, PTAL at video/\nSam, PTAL at test/fuzzers/",
       "revId": "1f87138ad4b89703b48f23c9a63102b79c1d0e6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c112d51_e1c504a3",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-03-22T16:19:11Z",
+      "side": 1,
+      "message": "nit, may rename it to rtp_frame_referece_internal\nto stress it is internal to nearby code, not internal to webrtc overall\n(i.e. in former case it is ok to use it just by this class/build target.\nin latter case it would look ok to use it anywhere from webrtc, but not ok to use from outside of webrtc)\n\n(though looking how it is used, I would probably made it a private child class of the RtpFrameReferenceFinder)",
+      "range": {
+        "startLine": 19,
+        "startChar": 10,
+        "endLine": 19,
+        "endChar": 18
+      },
+      "revId": "1f87138ad4b89703b48f23c9a63102b79c1d0e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75d7b1a5_edf83606",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-03-22T16:19:11Z",
+      "side": 1,
+      "message": "nit: ::webrtc::...\n\n\"Fully qualify using declaration outside class or function scope\"\nhttp://go/totw/151#what-do-i-do\n\n(but feel free not to worry since this block looks very temporary)",
+      "range": {
+        "startLine": 34,
+        "startChar": 32,
+        "endLine": 34,
+        "endChar": 38
+      },
+      "revId": "1f87138ad4b89703b48f23c9a63102b79c1d0e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20481c86_37fdd083",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-03-22T16:19:11Z",
+      "side": 1,
+      "message": "why are you leaving this class behind?",
+      "range": {
+        "startLine": 40,
+        "startChar": 42,
+        "endLine": 40,
+        "endChar": 70
+      },
+      "revId": "1f87138ad4b89703b48f23c9a63102b79c1d0e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
