@@ -50,6 +50,24 @@
       "message": "Independent of this CL, I noticed that even if I set \".active \u003d false\" here, LibvpxVp8Encoder will try to scale all the streams. Isn\u0027t \".active \u003d false\" enough to turn off the stream? Should I file a crbug about not scaling in this case?",
       "revId": "85acbfa5438b4f507984d40759d557ee7b52e206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef05fca0_c58dd680",
+        "filename": "modules/video_coding/codecs/vp8/test/vp8_impl_unittest.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2021-03-22T09:48:12Z",
+      "side": 1,
+      "message": "I think this is the implementation yes, and likely a bug - it should skip scaling for all disabled layers I think.",
+      "parentUuid": "e8c7d4f5_13706af2",
+      "revId": "85acbfa5438b4f507984d40759d557ee7b52e206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

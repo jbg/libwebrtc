@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92753081_ff003dad",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2021-03-22T09:48:12Z",
+      "side": 1,
+      "message": "In production what happens in this case? It looks to me like things will crash in SetRawImagesPlanes. Perhaps return an empty array or force an encoder error instead?",
+      "range": {
+        "startLine": 1324,
+        "startChar": 17,
+        "endLine": 1324,
+        "endChar": 30
+      },
+      "revId": "a8533d36d0e7372f7d605a622f58347c27c46794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9221c5f5_da84701b",
         "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
         "patchSetId": 26
@@ -14,6 +37,47 @@
       "writtenOn": "2021-03-22T09:03:18Z",
       "side": 1,
       "message": "I\u0027ll fix https://crbug.com/webrc/12595. The assumption is that supported formats (I420 and NV12), when scaled, return the same pixel buffer type after scaling.",
+      "revId": "a8533d36d0e7372f7d605a622f58347c27c46794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "577623e9_159fcab2",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 1327,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2021-03-22T09:48:12Z",
+      "side": 1,
+      "message": "I don\u0027t know about using `CHECK` here, `DCHECK` should suffice. It might now be optimal to have the wrong type when scaled, but it should not crash.",
+      "parentUuid": "9221c5f5_da84701b",
+      "revId": "a8533d36d0e7372f7d605a622f58347c27c46794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07a99e5_7c081a4f",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2021-03-22T09:48:12Z",
+      "side": 1,
+      "message": "Instead of passing `i`, this function could be moved into the implementation, or even to a shared library for Vp8 and Vp9 and take a `vpx_image_t*`.",
+      "range": {
+        "startLine": 1334,
+        "startChar": 0,
+        "endLine": 1334,
+        "endChar": 78
+      },
       "revId": "a8533d36d0e7372f7d605a622f58347c27c46794",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
