@@ -16,6 +16,74 @@
       "message": "Hi Mirko,\nCould you PTAL?\nFYI, I abandoned https://webrtc-review.googlesource.com/c/src/+/212607 and created this CL because `rtc::ToString(double)` is used by StringBuilder, which is widely used. Directly fixing the bug can be risky, so I instead added disabled tests and a TODO for now.\nCheers,\nAlessio",
       "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fc96cd1_4812d213",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T13:40:00Z",
+      "side": 1,
+      "message": "Commentary....",
+      "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f4c2af9_9dcf1432",
+        "filename": "rtc_base/string_encode_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T13:40:00Z",
+      "side": 1,
+      "message": "Do we have a separate float method? I see only double and long double in third_party/webrtc/rtc_base/string_encode.h",
+      "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09b81d4a_c3229f0c",
+        "filename": "rtc_base/string_encode_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T13:40:00Z",
+      "side": 1,
+      "message": "I would expect these tests to be specified in terms of std::numeric_limits\u003cfloat\u003e; in particular std::numeric_limits\u003cfloat\u003e::digits10 seems relevant (anything above 10^::digits10 SHOULD be expressed in exponent notation).\n\nThese numbers seem a bit arbitrary.",
+      "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc8f1426_69f20542",
+        "filename": "rtc_base/string_encode_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T13:40:00Z",
+      "side": 1,
+      "message": "Nit: doulbe -\u003e double",
+      "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
