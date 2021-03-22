@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63887ec0_f25840b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-22T12:37:12Z",
+      "side": 1,
+      "message": "Hi Mirko,\nCould you PTAL?\nFYI, I abandoned https://webrtc-review.googlesource.com/c/src/+/212607 and created this CL because `rtc::ToString(double)` is used by StringBuilder, which is widely used. Directly fixing the bug can be risky, so I instead added disabled tests and a TODO for now.\nCheers,\nAlessio",
+      "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
