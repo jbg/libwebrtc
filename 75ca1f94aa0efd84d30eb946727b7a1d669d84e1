@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78958a04_ccf4353d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-22T08:43:58Z",
+      "side": 1,
+      "message": "PTAL. Downstream calls now deleted.",
+      "revId": "75ca1f94aa0efd84d30eb946727b7a1d669d84e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
