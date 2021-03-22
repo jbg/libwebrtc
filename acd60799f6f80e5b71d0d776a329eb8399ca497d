@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa9920f8_3508a0f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-22T09:49:19Z",
+      "side": 1,
+      "message": "Uploaded a CL attempting to get rid of the recursion as per similar comment in the previous CL, but if that crashes I\u0027ll try another GetMapping call. Really annoying that the stack trace is not symbolized, you have no idea which check is failing.",
+      "revId": "acd60799f6f80e5b71d0d776a329eb8399ca497d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
