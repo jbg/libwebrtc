@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84934d6c_3fa2bfa5",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-22T13:38:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02375164_efa0caff",
+      "revId": "ad06d719ef8d43fc5119670bb2aa6256a992cdaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c6802e8_82660620",
@@ -52,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3c624c2_f403c9d4",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 31
+      },
+      "lineNbr": 1354,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-22T13:38:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c6802e8_82660620",
+      "revId": "ad06d719ef8d43fc5119670bb2aa6256a992cdaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48534f0a_4be3a402",
@@ -65,6 +101,30 @@
       "writtenOn": "2021-03-22T12:27:39Z",
       "side": 1,
       "message": "nit: Can be static or moved to the namespace.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 75
+      },
+      "revId": "ad06d719ef8d43fc5119670bb2aa6256a992cdaf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "585a9c68_38e77fcb",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-22T13:38:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48534f0a_4be3a402",
       "range": {
         "startLine": 105,
         "startChar": 0,
