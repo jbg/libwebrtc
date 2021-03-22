@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3882d1f4_2a1db23b",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-22T10:30:39Z",
+      "side": 1,
+      "message": "Needs resolver\u003dstd::move(resolver), right?\n\nIf we want the ability for the user to stop the resolver before it\u0027s finished (destroying it should be enough, without any Stop() method?) I would suggest instead\n\n  std::unique_ptr\u003c...\u003e \u003d factory-\u003eCreate(name, [](AsyncDnsResolverInterface* resolver){...}\n\nOr maybe even better,\n\n  std::unique_ptr\u003c...\u003e resolver \u003d factory-\u003eResolve(name, [...](std::unique_ptr\u003cResolverAnswer\u003e answer){...]);\n\nlike a function call in continuation-passing style. Destroying the returned resolver would cancel the resolution process.\n\nAs for threading, my initial thoughts are that it\u0027s best to allow the callback on any thread, internal to the resolver machinery, and leave to the callback to, e.g., post the answer and related work to the appropriate task queue.",
+      "range": {
+        "startLine": 26,
+        "startChar": 51,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
