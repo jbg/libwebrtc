@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "832d12cf_043bad40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T05:59:50Z",
+      "side": 1,
+      "message": "I\u0027d like your commentary on the new API async_dns_resolver.h before I commit the time to use that interface internally in WebRTC.\n",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
