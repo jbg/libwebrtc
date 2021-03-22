@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f352fe4_67427095",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T08:15:43Z",
+      "side": 1,
+      "message": "Added a documentation example.\nAn interim design criterion for this class is that it should be able to wrap the existing functionality so that we don\u0027t have to replace the Chromium implementation at the same time.",
+      "parentUuid": "7e76496d_5f78eb2c",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff11582f_bb2d85e7",
         "filename": "api/async_dns_resolver.h",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-22T07:39:31Z",
       "side": 1,
       "message": "This implies that the AsyncDnsResolverInterface implementation will own and hold state that it needs to protect against potential misuse, which likely means some sort of synchronization, and I\u0027m wondering if we can avoid that.\n\nGetResolvedAddress doesn\u0027t specify what context is OK to call it from. If the context is \u0027any\u0027, then that could force implementations to use locks. If it needs to be the same context as calls Start(), then we still need to make sure to handle the case when it\u0027s called while Start() is in progress.\n\nHow about reporting the results via callback() instead?",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ad098e5_9d2fed20",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T08:15:43Z",
+      "side": 1,
+      "message": "As I read it, it\u0027s actually single-threaded.\n\nThe old implementation will post to the internal thread to resolve the address, and then post back the result (with a std::move) to the original thread. So this was a monothread class; I don\u0027t see a reason to depart from that",
+      "parentUuid": "ff11582f_bb2d85e7",
       "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82170db2_13df7ff8",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T08:15:43Z",
+      "side": 1,
+      "message": "My preferred interface would be:\n\nclass AsyncDnsResolverFactory {\n  public:\n    std::unique_ptr\u003cAsyncResolver\u003e Create(Address, callback);\n}\n\nclass AsyncDnsResolver {\n  bool done();\n}\n\nwhere callback returns the address.\nBut that\u0027s a bigger redesign than the proposal.",
+      "parentUuid": "1474b95b_6b27a037",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0b2ba2d_6db75530",
         "filename": "api/async_dns_resolver.h",
         "patchSetId": 2
@@ -82,6 +136,24 @@
       "writtenOn": "2021-03-22T07:39:31Z",
       "side": 1,
       "message": "s/Destroy/Stop ?",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4507e92f_58ba7b39",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T08:15:43Z",
+      "side": 1,
+      "message": "Removed comment. It\u0027s repeated on the Stop() method above.",
+      "parentUuid": "e0b2ba2d_6db75530",
       "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

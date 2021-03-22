@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "673d41a5_394b5703",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-22T08:15:43Z",
+      "side": 1,
+      "message": "I don\u0027t like the many-calls approach either, but it makes it easier to ensure that\na) existing injected factories and resolvers continue to work\nb) all the call sites can be converted.\n\nOnce we\u0027re switched, making factory.Create() do both creation and Start() should be simpler.\n(I added the Create method I want to the API. Makes it easier to fix both at the same time,\nand if it turns out we don\u0027t need the non-starter method, we can delete it.)\n",
+      "revId": "08627b61a2c5e3104ca7cdd6f89b3525f9e12397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
