@@ -16,6 +16,74 @@
       "message": "I\u0027d like your commentary on the new API async_dns_resolver.h before I commit the time to use that interface internally in WebRTC.\n",
       "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e76496d_5f78eb2c",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-22T07:39:31Z",
+      "side": 1,
+      "message": "Can you add documentation that explains in what context |callback| will run?\n(same thread/task queue as issued the call to Start?)\n\nAlso explain what implementations of callback are expected to do.",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff11582f_bb2d85e7",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-22T07:39:31Z",
+      "side": 1,
+      "message": "This implies that the AsyncDnsResolverInterface implementation will own and hold state that it needs to protect against potential misuse, which likely means some sort of synchronization, and I\u0027m wondering if we can avoid that.\n\nGetResolvedAddress doesn\u0027t specify what context is OK to call it from. If the context is \u0027any\u0027, then that could force implementations to use locks. If it needs to be the same context as calls Start(), then we still need to make sure to handle the case when it\u0027s called while Start() is in progress.\n\nHow about reporting the results via callback() instead?",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1474b95b_6b27a037",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-22T07:39:31Z",
+      "side": 1,
+      "message": "Given that there\u0027s a requirement to call Stop() before deleting and also the requirement of holding state in the AsyncDnsResolverInterface implementation, I\u0027m wondering if we can avoid that altogether and have a single method in the interface:\n\nclass AsyncDnsResolverInterface {\n public:\n  // Deleting the resolver before Resolve() completes, will cancel\n  // the operation.\n  // Construction/deletion and Resolve() must all occur in the same\n  // execution context. The callback will be issued in that same\n  // execution context.\n  virtual ~AsyncDnsResolverInterface() \u003d 0;\n\n  // Here we\u0027d have a std::function based definition of a function\n  // that accepts (and owns) the results of the resolution. \n  typedef Callback;\n\n  virtual void Resolve(rtc::SocketAddress addr,\n                       Callback callback) \u003d 0\n};",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0b2ba2d_6db75530",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-22T07:39:31Z",
+      "side": 1,
+      "message": "s/Destroy/Stop ?",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
