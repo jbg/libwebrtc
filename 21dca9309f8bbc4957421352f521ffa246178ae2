@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35412e77_cb56eb87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-22T08:16:04Z",
+      "side": 1,
+      "message": "Some suggestions for improved docs. Code lgtm.",
+      "revId": "21dca9309f8bbc4957421352f521ffa246178ae2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9e5f4d6_145dfa8f",
@@ -19,6 +36,53 @@
         "startChar": 2,
         "endLine": 547,
         "endChar": 24
+      },
+      "revId": "21dca9309f8bbc4957421352f521ffa246178ae2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcdb033d_cd9ef9d7",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-22T08:16:04Z",
+      "side": 1,
+      "message": "Add a code comment in the as well?",
+      "parentUuid": "f9e5f4d6_145dfa8f",
+      "range": {
+        "startLine": 547,
+        "startChar": 2,
+        "endLine": 547,
+        "endChar": 24
+      },
+      "revId": "21dca9309f8bbc4957421352f521ffa246178ae2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d9430a0_919fd479",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-22T08:16:04Z",
+      "side": 1,
+      "message": "It\u0027s unclear from this comment and similar comments what\u0027s the current state. On which thread(s) is this method called? Would it work with dchecks like\n\nRTC_DCHECK(foo_thread_checker_.IsCurrent() || bar_thread_.IsCurrent());",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 595,
+        "endChar": 31
       },
       "revId": "21dca9309f8bbc4957421352f521ffa246178ae2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
