@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7faf04de_3c83954b",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-03-22T16:26:50Z",
+      "side": 1,
+      "message": "Good point, will think about that next time I used pimpl. I can update that in a followup CL.",
+      "parentUuid": "9c112d51_e1c504a3",
+      "range": {
+        "startLine": 19,
+        "startChar": 10,
+        "endLine": 19,
+        "endChar": 18
+      },
+      "revId": "1f87138ad4b89703b48f23c9a63102b79c1d0e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75d7b1a5_edf83606",
@@ -66,6 +90,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7b88f427_a6b260b4",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-03-22T16:26:50Z",
+      "side": 1,
+      "message": "True, and yes it\u0027s highly temporary so I will leave it as is if I don\u0027t need to update anything else in this CL.",
+      "parentUuid": "75d7b1a5_edf83606",
+      "range": {
+        "startLine": 34,
+        "startChar": 32,
+        "endLine": 34,
+        "endChar": 38
+      },
+      "revId": "1f87138ad4b89703b48f23c9a63102b79c1d0e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "20481c86_37fdd083",
         "filename": "modules/video_coding/rtp_frame_reference_finder.h",
         "patchSetId": 5
@@ -77,6 +125,30 @@
       "writtenOn": "2021-03-22T16:19:11Z",
       "side": 1,
       "message": "why are you leaving this class behind?",
+      "range": {
+        "startLine": 40,
+        "startChar": 42,
+        "endLine": 40,
+        "endChar": 70
+      },
+      "revId": "1f87138ad4b89703b48f23c9a63102b79c1d0e6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c570c2e_694bffdf",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-03-22T16:26:50Z",
+      "side": 1,
+      "message": "Will move it in a later CL",
+      "parentUuid": "20481c86_37fdd083",
       "range": {
         "startLine": 40,
         "startChar": 42,
