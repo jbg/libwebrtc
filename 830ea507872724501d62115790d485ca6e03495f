@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d4c5a31_ca40d787",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-03-22T08:49:28Z",
+      "side": 1,
+      "message": "Hello Sami!\n\nCould you please review this CL which exposes parameterless sLD from Android SDK, which makes it possible (*with extra CLs planned) to implement perfect negotiation algorithm.\n\nThanks a lot in advance,\nYura.",
+      "revId": "830ea507872724501d62115790d485ca6e03495f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
