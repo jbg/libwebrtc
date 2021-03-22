@@ -33,6 +33,24 @@
       "message": "Update comment.",
       "revId": "bd4a5dbd488e1fbd5e61f4000307204db5572921",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5bca2ad_1e35a801",
+        "filename": "pc/channel_manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-22T18:38:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37efcf46_12fa3648",
+      "revId": "bd4a5dbd488e1fbd5e61f4000307204db5572921",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
