@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32235e07_ba4dac21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-03-22T16:34:33Z",
+      "side": 1,
+      "message": "Lgtm with one suggestion and a nit.",
+      "revId": "701c9d738d11d9103914b1497d6bcaf3b8dd12d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31474f0f_d86d47e3",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-03-22T16:34:33Z",
+      "side": 1,
+      "message": "Nit: add comment:\n|prepared_buffers| need to be held while their data is referenced by |raw_images_|.\n\nAt the first glance I thought that we could just get rid of them and return bool in PrepareBuffers instead.",
+      "revId": "701c9d738d11d9103914b1497d6bcaf3b8dd12d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "328a3e33_7103ea79",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-03-22T16:34:33Z",
+      "side": 1,
+      "message": "this can be simplified. Since we already fellback to ToI420() call, no need to try |GetMapedFrameBuffer| first. Basically, remove this if.",
+      "revId": "701c9d738d11d9103914b1497d6bcaf3b8dd12d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
