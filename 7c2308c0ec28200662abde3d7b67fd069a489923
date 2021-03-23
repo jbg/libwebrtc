@@ -87,6 +87,30 @@
       },
       "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03fb106f_64fc3281",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-23T11:38:01Z",
+      "side": 1,
+      "message": "I rewrote the example to not pass ownership; instead the example shows how one can replicate the way the old API is used (store the unique_ptr, capture a pointer, look up the pointer in the store and use that to delete).\n\nI think we might want to mention explicitly the \"elegant\" solution of making the lambda own the resolver, which gives you the option of automatic destruction, but doesn\u0027t offer a means to deal with resolvers that never complete.",
+      "parentUuid": "36e04d85_cc887b3d",
+      "range": {
+        "startLine": 26,
+        "startChar": 51,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

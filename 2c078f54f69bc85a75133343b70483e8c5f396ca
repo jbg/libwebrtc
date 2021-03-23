@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe4629aa_a223d2d7",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-23T11:38:01Z",
+      "side": 1,
+      "message": "Ensuring all callers are OK with being called back on a different thread when they are \"used to\" being called on the same thread seems a bit complex to me.",
+      "parentUuid": "d8a63405_3701a47b",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1474b95b_6b27a037",
         "filename": "api/async_dns_resolver.h",
         "patchSetId": 2
