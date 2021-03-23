@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8a63405_3701a47b",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-23T10:41:18Z",
+      "side": 1,
+      "message": "I think it is poor practice to capture current thread with rtc::Thread::Current() and then post tasks to it. If the callback is supposed to be called on a particular thread, it\u0027s cleaner to pass that as an explicit argument to the factory. But as I\u0027ve said, my own preference would be to allow the callback from any internal thread in the resolver, and leave to the callback itself to post to any thread of its choice (or use locks, if that\u0027s for some reason preferred in some context).\n\nRequiring incoming methods calls to all be on the same thread make sense.",
+      "parentUuid": "4ad098e5_9d2fed20",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1474b95b_6b27a037",
         "filename": "api/async_dns_resolver.h",
         "patchSetId": 2

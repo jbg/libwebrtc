@@ -63,6 +63,30 @@
       },
       "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e04d85_cc887b3d",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-23T10:41:18Z",
+      "side": 1,
+      "message": "Passing on ownership doesn\u0027t seem right. Can we design it so that there\u0027s no need to capture a resolver reference? If the callback is going to need it, it can be passed as an argument to the callback.",
+      "parentUuid": "92eead5b_3d61d8b3",
+      "range": {
+        "startLine": 26,
+        "startChar": 51,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
