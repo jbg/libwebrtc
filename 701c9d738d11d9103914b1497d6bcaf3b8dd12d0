@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2beca17a_1ca2a948",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-23T08:15:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31474f0f_d86d47e3",
+      "revId": "701c9d738d11d9103914b1497d6bcaf3b8dd12d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "328a3e33_7103ea79",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-22T16:34:33Z",
       "side": 1,
       "message": "this can be simplified. Since we already fellback to ToI420() call, no need to try |GetMapedFrameBuffer| first. Basically, remove this if.",
+      "revId": "701c9d738d11d9103914b1497d6bcaf3b8dd12d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9687959e_51da7e32",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-03-23T08:15:29Z",
+      "side": 1,
+      "message": "There could be a difference between mapping before or after the ToI420() since this does modify the buffer, but I\u0027ll try one more time to simplify this to ToI420(). (I tried this earlier and it crashed, but I discovered I had made a mistake in that patch set now.) I\u0027ll try to land it without a second mapping, but if it crashes without a stack trace again then I\u0027ll keep it. Fingers crossed.",
+      "parentUuid": "328a3e33_7103ea79",
       "revId": "701c9d738d11d9103914b1497d6bcaf3b8dd12d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
