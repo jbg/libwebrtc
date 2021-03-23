@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d455c6d_5052e060",
+        "filename": "rtc_base/string_encode_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-23T14:14:00Z",
+      "side": 1,
+      "message": "ToString(float) is not defined, but I believe the test may still be relevant since the result of ToString(3825138380791.123f) differs from that of ToString(3825138380791.123).",
+      "parentUuid": "3f4c2af9_9dcf1432",
+      "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09b81d4a_c3229f0c",
         "filename": "rtc_base/string_encode_unittest.cc",
         "patchSetId": 2
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11aca85e_1fb0cd7f",
+        "filename": "rtc_base/string_encode_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-23T14:14:00Z",
+      "side": 1,
+      "message": "\u003e I would expect these tests to be specified in terms of std::numeric_limits\u003cfloat\u003e; in particular std::numeric_limits\u003cfloat\u003e::digits10 seems relevant (anything above 10^::digits10 SHOULD be expressed in exponent notation).\n\nDo we really want to use scientific notation? That causes the issue described in bugs.webrtc.org/12597#c2, which BTW I could fix in https://chromium-review.googlesource.com/c/chromium/src/+/2778291 avoiding unnecessary double-string-double conversions.\n\n\u003e \n\u003e These numbers seem a bit arbitrary.\nIf scientific notation is what we want, then yes. Otherwise here I\u0027m adding the case that failed (see bugs.webrtc.org/12597)",
+      "parentUuid": "09b81d4a_c3229f0c",
+      "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc8f1426_69f20542",
         "filename": "rtc_base/string_encode_unittest.cc",
         "patchSetId": 2
@@ -82,6 +118,24 @@
       "writtenOn": "2021-03-22T13:40:00Z",
       "side": 1,
       "message": "Nit: doulbe -\u003e double",
+      "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69d5f2f1_1d407b57",
+        "filename": "rtc_base/string_encode_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-03-23T14:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc8f1426_69f20542",
       "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
