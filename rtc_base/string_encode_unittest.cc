@@ -318,14 +318,18 @@ TEST(SplitTest, CompareSubstrings) {
   ASSERT_STREQ("", fields.at(0).c_str());
 }
 
-TEST(ToString, SanityCheck) {
+TEST(ToString, SanityCheckBool) {
   EXPECT_EQ(ToString(true), "true");
   EXPECT_EQ(ToString(false), "false");
+}
 
+TEST(ToString, SanityCheckString) {
   const char* c = "message";
   EXPECT_EQ(ToString(c), c);
   EXPECT_EQ(ToString(std::string(c)), c);
+}
 
+TEST(ToString, SanityCheckIntegral) {
   EXPECT_EQ(ToString(short{-123}), "-123");
   EXPECT_EQ(ToString((unsigned short)123), "123");
   EXPECT_EQ(ToString(int{-123}), "-123");
@@ -334,14 +338,35 @@ TEST(ToString, SanityCheck) {
   EXPECT_EQ(ToString((unsigned long int)123), "123");
   EXPECT_EQ(ToString((long long int)-123), "-123");
   EXPECT_EQ(ToString((unsigned long long int)123), "123");
+}
 
+TEST(ToString, SanityCheckFloat) {
+  EXPECT_EQ(ToString(-0.5f), "-0.5");
+  EXPECT_EQ(ToString(0.5f), "0.5");
+  // TODO(bugs.webrtc.org/12597): Uncomment below once bug is fixed.
+  // Not exactly represented.
+  // EXPECT_EQ(ToString(-3825138380791.123f), "-3825138401280");
+  // EXPECT_EQ(ToString(3825138380791.123f), "3825138401280");
+  // EXPECT_EQ(ToString(-3825138380791.0f), "-3825138401280");
+  // EXPECT_EQ(ToString(3825138380791.0f), "3825138401280");
+}
+
+TEST(ToString, SanityCheckDouble) {
+  EXPECT_EQ(ToString(0.5), "0.5");
+  EXPECT_EQ(ToString(-0.5), "-0.5");
+  // TODO(bugs.webrtc.org/12597): Uncomment below once bug is fixed.
+  // EXPECT_EQ(ToString(-3825138380791.123), "-3825138380791.123");
+  // EXPECT_EQ(ToString(3825138380791.123), "3825138380791.123");
+  // EXPECT_EQ(ToString(-3825138380791.0), "-3825138380791");
+  // EXPECT_EQ(ToString(3825138380791.0), "3825138380791");
+}
+
+TEST(ToString, SanityCheckPointer) {
   int i = 10;
   int* p = &i;
   std::ostringstream s;  // no-presubmit-check TODO(webrtc:8982)
   s << p;
   EXPECT_EQ(s.str(), ToString(p));
-
-  EXPECT_EQ(ToString(0.5), "0.5");
 }
 
 template <typename T>

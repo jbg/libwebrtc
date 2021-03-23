@@ -119,6 +119,7 @@ std::string ToString(unsigned long int s);
 std::string ToString(long long int s);
 std::string ToString(unsigned long long int s);
 
+// TODO(bugs.webrtc.org/12597): Fix in order to correctly handle large numbers.
 std::string ToString(double t);
 std::string ToString(long double t);
 
