@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5361991d_64eb7823",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-23T11:47:38Z",
+      "side": 1,
+      "message": "I have a very vague picture of the transition. Maybe callers could be fixed as they are transitioned to use the new interface? Ideally, that would just be an additional PostTask or similar in the provided callback.",
+      "parentUuid": "fe4629aa_a223d2d7",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1474b95b_6b27a037",
         "filename": "api/async_dns_resolver.h",
         "patchSetId": 2

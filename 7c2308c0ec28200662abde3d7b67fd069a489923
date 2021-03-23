@@ -111,6 +111,30 @@
       },
       "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "317c9c86_c1de89ee",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-23T11:47:38Z",
+      "side": 1,
+      "message": "\u003e I think we might want to mention explicitly the \"elegant\" solution of making the lambda own the resolver, which gives you the option of automatic destruction.\n\nWon\u0027t work with std::function for the callback, though.",
+      "parentUuid": "03fb106f_64fc3281",
+      "range": {
+        "startLine": 26,
+        "startChar": 51,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
