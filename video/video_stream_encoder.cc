@@ -2192,7 +2192,9 @@ void VideoStreamEncoder::RunPostEncode(const EncodedImage& encoded_image,
   stream_resource_manager_.OnEncodeCompleted(encoded_image, time_sent_us,
                                              encode_duration_us);
   if (bitrate_adjuster_) {
-    bitrate_adjuster_->OnEncodedFrame(encoded_image, temporal_index);
+    bitrate_adjuster_->OnEncodedFrame(frame_size.bytes(),
+                                      encoded_image.SpatialIndex().value_or(0),
+                                      temporal_index);
   }
 }
 
