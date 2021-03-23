@@ -159,6 +159,30 @@
       },
       "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca7cfd0_1c6fa57b",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-23T13:12:23Z",
+      "side": 1,
+      "message": "Move-only lambdas seem fine with our current C++ version (although I\u0027m no real C++ guru). But they can\u0027t be converted to std::function, which is one of the main drawbacks with that type.",
+      "parentUuid": "8584b023_2a61f85c",
+      "range": {
+        "startLine": 26,
+        "startChar": 51,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

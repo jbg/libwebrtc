@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab07f838_af260b1e",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-23T13:12:23Z",
+      "side": 1,
+      "message": "Where are the callers? Do I get it right, that the resolver factory (old or new flavor) is injected by applications, and used from within the webrtc machinery?",
+      "parentUuid": "643766ba_7867ab09",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1474b95b_6b27a037",
         "filename": "api/async_dns_resolver.h",
         "patchSetId": 2
