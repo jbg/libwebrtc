@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "643766ba_7867ab09",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-23T12:50:08Z",
+      "side": 1,
+      "message": "Yes, it\u0027s more code at every callsite. As a rule I don\u0027t like code repetition - and calling the callback on the resolver thread exposes the resolver thread to the outside world, something I also don\u0027t see an advantage of.\n\nIf it\u0027s always the right thing to jump back to the thread that called the interface, forcing all users to code this for themselves has no advantage that I can see. (And control has to get back there in order to delete the object too.)\n\nI can see the general principle (don\u0027t jump until you know where you should jump, and the callee knows better than the caller), but I don\u0027t think I agree with applying it in this instance.",
+      "parentUuid": "5361991d_64eb7823",
+      "revId": "2c078f54f69bc85a75133343b70483e8c5f396ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1474b95b_6b27a037",
         "filename": "api/async_dns_resolver.h",
         "patchSetId": 2

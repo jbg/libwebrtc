@@ -135,6 +135,30 @@
       },
       "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8584b023_2a61f85c",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-23T12:50:08Z",
+      "side": 1,
+      "message": "Hm. Can a std::function always be move()d? At the moment my code copies it..... probably shouldn\u0027t.\n\nCapturing a std::unique_ptr makes the lambda move-only, I think. So the current code won\u0027t admit to that anyway.",
+      "parentUuid": "317c9c86_c1de89ee",
+      "range": {
+        "startLine": 26,
+        "startChar": 51,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "7c2308c0ec28200662abde3d7b67fd069a489923",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
