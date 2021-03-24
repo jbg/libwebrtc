@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1b6d87_8a0e33e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-03-24T10:18:59Z",
+      "side": 1,
+      "message": "nit: aduster -\u003e adjuster\n\n\\o/",
+      "revId": "4ec42080b96b57ffec4c29ecbaff4dbce3a122fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
