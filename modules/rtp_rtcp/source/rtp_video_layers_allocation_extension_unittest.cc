@@ -239,5 +239,15 @@ TEST(RtpVideoLayersAllocationExtension,
   EXPECT_EQ(written_allocation, parsed_allocation);
 }
 
+TEST(RtpVideoLayersAllocationExtension, WriteInvalidAllocationReturnsFalse) {
+  VideoLayersAllocation written_allocation;
+  written_allocation.rtp_stream_index =
+      1;  // > max(active_spatial_layers.rtp_stream_index)
+  rtc::Buffer buffer(
+      RtpVideoLayersAllocationExtension::ValueSize(written_allocation));
+  EXPECT_FALSE(
+      RtpVideoLayersAllocationExtension::Write(buffer, written_allocation));
+}
+
 }  // namespace
 }  // namespace webrtc

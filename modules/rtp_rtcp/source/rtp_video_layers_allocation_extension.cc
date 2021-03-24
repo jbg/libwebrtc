@@ -208,7 +208,9 @@ SpatialLayersBitmasks SpatialLayersBitmasksPerRtpStream(
 bool RtpVideoLayersAllocationExtension::Write(
     rtc::ArrayView<uint8_t> data,
     const VideoLayersAllocation& allocation) {
-  RTC_DCHECK(AllocationIsValid(allocation));
+  if (!AllocationIsValid(allocation)) {
+    return false;
+  }
   RTC_DCHECK_GE(data.size(), ValueSize(allocation));
 
   if (allocation.active_spatial_layers.empty()) {
