@@ -504,7 +504,8 @@ class SctpPingPong final {
           transport_thread1_, packet_loss_percents_, avg_send_delay_millis_));
       data_receiver1_.reset(new SctpDataReceiver(id_, messages_count_));
       sctp_transport1_.reset(new cricket::SctpTransport(
-          transport_thread1_, packet_transport1_.get()));
+          transport_thread1_, /*usrsctp_thread=*/nullptr,
+          packet_transport1_.get()));
       sctp_transport1_->set_debug_name_for_testing("sctp transport 1");
 
       sctp_transport1_->SignalDataReceived.connect(
@@ -526,7 +527,8 @@ class SctpPingPong final {
           transport_thread2_, packet_loss_percents_, avg_send_delay_millis_));
       data_receiver2_.reset(new SctpDataReceiver(id_, messages_count_));
       sctp_transport2_.reset(new cricket::SctpTransport(
-          transport_thread2_, packet_transport2_.get()));
+          transport_thread2_, /*usrsctp_thread=*/nullptr,
+          packet_transport2_.get()));
       sctp_transport2_->set_debug_name_for_testing("sctp transport 2");
       sctp_transport2_->SignalDataReceived.connect(
           data_receiver2_.get(), &SctpDataReceiver::OnDataReceived);
