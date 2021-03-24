@@ -70,6 +70,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7db9abbc_c324ad2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "PTAL - I think I\u0027ve addressed the latest batch of comments.\n\nI want to keep the Stop() method because I\u0027m afraid of destructors that do complex things.\nOnce the destructor doesn\u0027t do complex things any more, we can remove it.\n",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c9ffa89_9dd3436e",
@@ -83,6 +100,24 @@
       "writtenOn": "2021-03-24T10:58:05Z",
       "side": 1,
       "message": "remove?",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bb26a40_7207e0e1",
+        "filename": "api/async_dns_resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c9ffa89_9dd3436e",
       "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -136,6 +171,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "491b7454_2438afe5",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "The Stop() implementation calls Delete() on the underlying wrapped AsyncResolver. I could do that from the destructor, but 1) I\u0027m leery about doing work that includes threadjumps in classes that are not part of the CL in a destructor and 2) there\u0027s a lot of tests that want to verify that Destroy() has been called.\n\nIt seems like a lower risk to leave it in now and deprecate/remove it later. (And yes, we do currently call Destroy() when releasing resolvers that haven\u0027t completed yet. I haven\u0027t yet checked what that function actually does.)\n\n(The first 4 lines of the comment belongd to a different function. Moved.)",
+      "parentUuid": "c5ebf372_a6dfe5cc",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 26
+      },
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "355ea8c2_71a2ed20",
         "filename": "api/async_dns_resolver.h",
         "patchSetId": 5
@@ -147,6 +206,24 @@
       "writtenOn": "2021-03-24T10:58:05Z",
       "side": 1,
       "message": "nit: since this method resolves the name, we could call the method something else (e.g. ResolveName) rather than CreateAndStart() since that name seems to come from the old implementation.",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ece12742_0e03e679",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "CreateAndResolve, since it returns an object. (CreateAndStartResolving would be more accurate, but it\u0027s a loong name.)",
+      "parentUuid": "355ea8c2_71a2ed20",
       "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -168,6 +245,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "799690d0_e7d0ad3a",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af64e1b0_1361ace5",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb0af17c_8c6e9e83",
@@ -181,6 +276,24 @@
       "writtenOn": "2021-03-24T10:58:05Z",
       "side": 1,
       "message": "WrappingAsyncDnsResolver* const owner_",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "809455f7_f45fe5cd",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb0af17c_8c6e9e83",
       "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -202,6 +315,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "441dbbb7_9b985861",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "Added a bunch of these, with an explicit state variable. Cleaner.",
+      "parentUuid": "fa1cac5c_40e001e7",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a78b9938_2b006d76",
@@ -215,6 +346,24 @@
       "writtenOn": "2021-03-24T10:58:05Z",
       "side": 1,
       "message": "RTC_DCHECK_EQ",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "870ca442_ae25e68b",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a78b9938_2b006d76",
       "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -236,6 +385,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "609cb77b_86c3beae",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "It\u0027s a local variable.",
+      "parentUuid": "eecbb234_3e697bea",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48c3b6a8_500372dd",
@@ -253,6 +420,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba238981_c40666ce",
+        "filename": "p2p/base/basic_async_resolver_factory.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48c3b6a8_500372dd",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b25e033e_b9e8eb4c",
@@ -266,6 +451,24 @@
       "writtenOn": "2021-03-24T10:58:05Z",
       "side": 1,
       "message": "remove?",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eca45f89_70f1567e",
+        "filename": "p2p/base/basic_async_resolver_factory_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T11:36:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b25e033e_b9e8eb4c",
       "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
