@@ -72,6 +72,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c9ffa89_9dd3436e",
+        "filename": "api/async_dns_resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T10:58:05Z",
+      "side": 1,
+      "message": "remove?",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e90ea6d3_613a8844",
         "filename": "api/async_dns_resolver.h",
         "patchSetId": 5
@@ -89,6 +106,166 @@
         "endLine": 63,
         "endChar": 26
       },
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5ebf372_a6dfe5cc",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T10:58:05Z",
+      "side": 1,
+      "message": "+1 on avoiding Stop() if we can",
+      "parentUuid": "e90ea6d3_613a8844",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 26
+      },
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "355ea8c2_71a2ed20",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T10:58:05Z",
+      "side": 1,
+      "message": "nit: since this method resolves the name, we could call the method something else (e.g. ResolveName) rather than CreateAndStart() since that name seems to come from the old implementation.",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af64e1b0_1361ace5",
+        "filename": "api/async_dns_resolver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T10:58:05Z",
+      "side": 1,
+      "message": "great - this comment is helpful. We could possibly call out that this is being deprecated.",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb0af17c_8c6e9e83",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T10:58:05Z",
+      "side": 1,
+      "message": "WrappingAsyncDnsResolver* const owner_",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa1cac5c_40e001e7",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T10:58:05Z",
+      "side": 1,
+      "message": "if we can\u0027t get rid of Stop(), add an RTC_DCHECK in Start() for the expected state.",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a78b9938_2b006d76",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T10:58:05Z",
+      "side": 1,
+      "message": "RTC_DCHECK_EQ",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eecbb234_3e697bea",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T10:58:05Z",
+      "side": 1,
+      "message": "RTC_DCHECK(!resolver);\n(before Create())",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c3b6a8_500372dd",
+        "filename": "p2p/base/basic_async_resolver_factory.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T10:58:05Z",
+      "side": 1,
+      "message": "const",
+      "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b25e033e_b9e8eb4c",
+        "filename": "p2p/base/basic_async_resolver_factory_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T10:58:05Z",
+      "side": 1,
+      "message": "remove?",
       "revId": "19424f718a76c5d1d1c09bda69b75620ad3e6f5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
