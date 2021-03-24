@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f109234b_08198e9d",
+        "filename": "modules/rtp_rtcp/source/rtp_video_layers_allocation_extension.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-03-24T11:52:15Z",
+      "side": 1,
+      "message": "this function is large and slow, but now it is always called in release mode.\n\nI think it would be better to adjust AllocationIsValid function to return true when there are no active_spatial_layers regardless of value of rtp_stream_index.\n\n[or adjust caller to set rtp_stream_index to 0 when allocation.spatial_layers.empty()]",
+      "range": {
+        "startLine": 211,
+        "startChar": 7,
+        "endLine": 211,
+        "endChar": 24
+      },
+      "revId": "eb5be7115fb4f85e12cf2c8fdec09763fa83c94e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
