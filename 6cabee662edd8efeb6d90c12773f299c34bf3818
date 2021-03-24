@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bbc0bd90_5e73ddff",
+        "filename": "rtc_base/string_encode_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T08:32:01Z",
+      "side": 1,
+      "message": "This is likely because of float truncation. The mantissa of standard float is 23 bits (also random googling), so it will round after 6-7 digits; you should get 382513....and then random stuff. Same thing happens with double (52 bits), but only at 15 digits, which is why 16 digits is really the most one should ever print.",
+      "parentUuid": "6d455c6d_5052e060",
+      "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09b81d4a_c3229f0c",
         "filename": "rtc_base/string_encode_unittest.cc",
         "patchSetId": 2
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "\u003e I would expect these tests to be specified in terms of std::numeric_limits\u003cfloat\u003e; in particular std::numeric_limits\u003cfloat\u003e::digits10 seems relevant (anything above 10^::digits10 SHOULD be expressed in exponent notation).\n\nDo we really want to use scientific notation? That causes the issue described in bugs.webrtc.org/12597#c2, which BTW I could fix in https://chromium-review.googlesource.com/c/chromium/src/+/2778291 avoiding unnecessary double-string-double conversions.\n\n\u003e \n\u003e These numbers seem a bit arbitrary.\nIf scientific notation is what we want, then yes. Otherwise here I\u0027m adding the case that failed (see bugs.webrtc.org/12597)",
       "parentUuid": "09b81d4a_c3229f0c",
+      "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fc25673_961ea78c",
+        "filename": "rtc_base/string_encode_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T08:32:01Z",
+      "side": 1,
+      "message": "The original bug is about inappropriately formatted timestamps. I think the right answer there is to recognize them as timestamps and convert them to UTC time.\n\nFloats in general go from 1.2E-38 to 3.4E+38; doubles go from 2.3E-308 to 1.7E+308 (from quick googling) - there exist floats for which non-scientific notation is definitley the wrong answer (we don\u0027t want 308-digit strings, and a 16-digit string that represents a 308-digit number by truncating the decimal expansion is Just Wrong).\n\nSo the question isn\u0027t whether scientific notation should kick in, it\u0027s when; having a strong opinion on that at 16 or so digits seems reasonable for a webrtc ToString function.\n\nI suggest adding test cases just below and above the place where you want to have scientific notation kick in.",
+      "parentUuid": "11aca85e_1fb0cd7f",
       "revId": "6cabee662edd8efeb6d90c12773f299c34bf3818",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },

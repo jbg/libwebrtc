@@ -33,6 +33,23 @@
       "message": "Adding hta@ to reviewers as well (to reply comments in the test code).",
       "revId": "b759819074f4dfe70c3520d5671d23ebb85a3888",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fb59f95_36c1a0ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-24T08:32:01Z",
+      "side": 1,
+      "message": "TL;DR: Yes, we need exponential notation, because we have no idea how large the numbers are that will be fed to ToString.\n\nSome details on float and double numbers below.\n",
+      "revId": "b759819074f4dfe70c3520d5671d23ebb85a3888",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
