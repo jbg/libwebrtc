@@ -1031,6 +1031,9 @@ def CommonChecks(input_api, output_api):
                                   non_third_party_sources))
     results.extend(
         CheckObjcApiSymbols(input_api, output_api, non_third_party_sources))
+    results.extend(
+        CheckNoDirectUsrsctpUsage(input_api, output_api,
+                                  non_third_party_sources))
     return results
 
 
@@ -1246,6 +1249,27 @@ def CheckNewlineAtTheEndOfProtoFiles(input_api, output_api,
                 results.append(
                     output_api.PresubmitError(error_msg.format(file_path)))
     return results
+
+
+def CheckNoDirectUsrsctpUsage(input_api,
+                              output_api,
+                              source_file_filter,
+                              error_formatter=_ReportFileAndLine):
+    error_msg = ('All usrsctp API calls must go through UsrSctpWrapper.')
+    errors = []  # 2-element tuples with (file, line number)
+    pattern = input_api.re.compile(r'usrsctp_\w*[a-zA-Z0-9]\(')
+    file_filter = lambda x: (input_api.FilterSourceFile(x) and
+                             source_file_filter(x))
+
+    for f in input_api.AffectedSourceFiles(file_filter):
+        if f.LocalPath() == 'media/sctp/usrsctp_wrapper.cc':
+            continue
+        for line_num, line in f.ChangedContents():
+            if pattern.search(line):
+                errors.append(error_formatter(f.LocalPath(), line_num))
+    if errors:
+        return [output_api.PresubmitError(error_msg, errors)]
+    return []
 
 
 def _ExtractAddRulesFromParsedDeps(parsed_deps):
