@@ -16,6 +16,23 @@
       "message": "After chat discussion with Tommi: Removed Stop() from the API.\n",
       "revId": "b07b21be6eba569bc0070962eeab698ef050cf69",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5db49884_9adeefea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-03-24T16:18:36Z",
+      "side": 1,
+      "message": "lgtm!",
+      "revId": "b07b21be6eba569bc0070962eeab698ef050cf69",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
