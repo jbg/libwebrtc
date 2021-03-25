@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f6d12d9_34aa99db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-03-25T09:21:01Z",
+      "side": 1,
+      "message": "If StartAecDump() or StopAecDump() blocked while the operation completed, this seems like a Really Bad Idea, since the worker thread is sensitive to blocks.\n\nBut agree that there is no reason why the signaling thread should be caught in the middle.\n",
+      "revId": "13da6be4af473b9ef48b1a1b170623abdf7728c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
