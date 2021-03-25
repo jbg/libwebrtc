@@ -22,6 +22,30 @@
       },
       "revId": "464bcd450230789386906cbcefb50adfc43ac94b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93ec5b62_2b13e3bd",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-25T08:36:10Z",
+      "side": 0,
+      "message": "Replying to myself, I think it\u0027s because the overload with rtc::Location uses a FunctorT template, and the PostTask method in TaskQueueBase doesn\u0027t have that.",
+      "parentUuid": "07ff7dbc_ea37e85f",
+      "range": {
+        "startLine": 395,
+        "startChar": 10,
+        "endLine": 395,
+        "endChar": 23
+      },
+      "revId": "464bcd450230789386906cbcefb50adfc43ac94b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
