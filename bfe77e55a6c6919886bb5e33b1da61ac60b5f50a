@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b74d5a1_9b9bec86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-25T10:45:38Z",
+      "side": 1,
+      "message": "lgtm % nits",
+      "revId": "bfe77e55a6c6919886bb5e33b1da61ac60b5f50a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ea8a61e_5a374a0a",
+        "filename": "pc/channel_manager.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-25T10:45:38Z",
+      "side": 1,
+      "message": "Also DCHECK non-null data_engine?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "bfe77e55a6c6919886bb5e33b1da61ac60b5f50a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7fa88e_5a7f9ff5",
+        "filename": "pc/channel_manager.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-25T10:45:38Z",
+      "side": 1,
+      "message": "Prefer absl::WrapUnique.",
+      "range": {
+        "startLine": 44,
+        "startChar": 9,
+        "endLine": 44,
+        "endChar": 45
+      },
+      "revId": "bfe77e55a6c6919886bb5e33b1da61ac60b5f50a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abb8504a_803741a1",
+        "filename": "pc/channel_manager_unittest.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-25T10:45:38Z",
+      "side": 1,
+      "message": "std::make_unique",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 56
+      },
+      "revId": "bfe77e55a6c6919886bb5e33b1da61ac60b5f50a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0472ffb8_a8c8ea9f",
+        "filename": "pc/channel_manager_unittest.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-03-25T10:45:38Z",
+      "side": 1,
+      "message": "std::make_unique. (Or maybe delete function, and substitute where used?)",
+      "range": {
+        "startLine": 52,
+        "startChar": 9,
+        "endLine": 52,
+        "endChar": 77
+      },
+      "revId": "bfe77e55a6c6919886bb5e33b1da61ac60b5f50a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
