@@ -157,6 +157,7 @@ def ParseArgs(argv=None):
     parser.add_argument('executable')
     parser.add_argument('executable_args', nargs='*')
 
+    parser.add_argument('--store_test_properties', action='store_true')
     options, unrecognized_args = parser.parse_known_args(argv)
 
     args_to_pass = []
@@ -181,6 +182,13 @@ def ParseArgs(argv=None):
                                '--test_artifacts_dir=%s' % test_artifacts_dir)
     else:
         test_artifacts_dir = None
+
+    if options.store_test_properties:
+        assert options.output_dir, (
+            '--output_dir must be specified for storing test properties.')
+        json_file_path = os.path.join(options.output_dir,
+                                      'test_properties.json')
+        executable_args.insert(0, '--gtest_output=json:%s' % json_file_path)
 
     gtest_parallel_args = gtest_group.RemakeCommandLine(options)
 
