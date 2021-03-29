@@ -52,19 +52,25 @@ const std::string& PlatformChecksum(const std::string& checksum_general,
                                     const std::string& checksum_android_64,
                                     const std::string& checksum_win_32,
                                     const std::string& checksum_win_64) {
+  const std::string checksum_arg_property = "PlatformChecksumString";
 #if defined(WEBRTC_ANDROID)
 #ifdef WEBRTC_ARCH_64_BITS
+  ::testing::Test::RecordProperty(checksum_arg_property, "checksum_android_64");
   return checksum_android_64;
 #else
+  ::testing::Test::RecordProperty(checksum_arg_property, "checksum_android_32");
   return checksum_android_32;
 #endif  // WEBRTC_ARCH_64_BITS
 #elif defined(WEBRTC_WIN)
 #ifdef WEBRTC_ARCH_64_BITS
+  ::testing::Test::RecordProperty(checksum_arg_property, "checksum_win_64");
   return checksum_win_64;
 #else
+  ::testing::Test::RecordProperty(checksum_arg_property, "checksum_win_32");
   return checksum_win_32;
 #endif  // WEBRTC_ARCH_64_BITS
 #else
+  ::testing::Test::RecordProperty(checksum_arg_property, "checksum_general");
   return checksum_general;
 #endif  // WEBRTC_WIN
 }

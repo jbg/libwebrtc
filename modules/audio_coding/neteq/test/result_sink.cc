@@ -7,6 +7,7 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include <optional>
 
 #include "modules/audio_coding/neteq/test/result_sink.h"
 
@@ -112,11 +113,25 @@ void ResultSink::AddResult(const RtcpStatistics& stats_raw) {
 #endif  // WEBRTC_NETEQ_UNITTEST_BITEXACT
 }
 
-void ResultSink::VerifyChecksum(const std::string& checksum) {
+const std::string ResultSink::CalculateChecksum() {
+  if (calculated_checksum_) {
+    return calculated_checksum_.value();
+  }
+
   std::vector<char> buffer;
   buffer.resize(digest_->Size());
   digest_->Finish(&buffer[0], buffer.size());
-  const std::string result = rtc::hex_encode(&buffer[0], digest_->Size());
+  std::string result = std::string(
+    rtc::hex_encode(&buffer[0], digest_->Size()));
+  calculated_checksum_ = absl::make_optional(result);
+  return calculated_checksum_.value();
+}
+
+void ResultSink::VerifyChecksum(const std::string& checksum) {
+  if (!calculated_checksum_) {
+    CalculateChecksum();
+  }
+  const std::string result = calculated_checksum_.value();
   if (checksum.size() == result.size()) {
     EXPECT_EQ(checksum, result);
   } else {
