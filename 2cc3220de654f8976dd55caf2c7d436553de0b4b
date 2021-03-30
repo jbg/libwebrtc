@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f143336_b68a40e4",
+        "filename": "modules/audio_coding/neteq/test/neteq_decoding_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 16870
+      },
+      "writtenOn": "2021-03-30T07:27:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86c58f17_a7efe1ef",
+      "range": {
+        "startLine": 188,
+        "startChar": 2,
+        "endLine": 188,
+        "endChar": 37
+      },
+      "revId": "2cc3220de654f8976dd55caf2c7d436553de0b4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2289c703_8e477dc6",
@@ -64,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3bc9283_f133b331",
+        "filename": "modules/audio_coding/neteq/test/result_sink.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 16870
+      },
+      "writtenOn": "2021-03-30T07:27:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2289c703_8e477dc6",
+      "range": {
+        "startLine": 78,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 26
+      },
+      "revId": "2cc3220de654f8976dd55caf2c7d436553de0b4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3126e8e2_d0fa623c",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-03-29T14:30:38Z",
       "side": 1,
       "message": "I think using an optional would be nicer, I don\u0027t think a unique_ptr is necessary here.",
+      "range": {
+        "startLine": 40,
+        "startChar": 7,
+        "endLine": 40,
+        "endChar": 17
+      },
+      "revId": "2cc3220de654f8976dd55caf2c7d436553de0b4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c4d9dad_40ff7ed1",
+        "filename": "modules/audio_coding/neteq/test/result_sink.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 16870
+      },
+      "writtenOn": "2021-03-30T07:27:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3126e8e2_d0fa623c",
       "range": {
         "startLine": 40,
         "startChar": 7,
