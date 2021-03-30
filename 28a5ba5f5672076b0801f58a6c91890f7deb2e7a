@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "171e00e1_837fdf35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16458
+      },
+      "writtenOn": "2021-03-30T20:57:42Z",
+      "side": 1,
+      "message": "PTAL?\nI disabled NoStatsUpdatesBeforeStart since the behavior is not enabled yet; I think it\u0027s useful to add all the logic here, so that the follow up only needs to turn |is_started| to false.",
+      "revId": "28a5ba5f5672076b0801f58a6c91890f7deb2e7a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
