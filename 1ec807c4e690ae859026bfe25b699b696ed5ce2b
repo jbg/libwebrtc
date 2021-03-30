@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c853f15c_f68899a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2021-03-30T02:39:22Z",
+      "side": 1,
+      "message": "The data is collected using SincResamplerTest.ConvolveBenchmark.",
+      "parentUuid": "53d473e4_169c3357",
+      "range": {
+        "startLine": 11,
+        "startChar": 45,
+        "endLine": 11,
+        "endChar": 57
+      },
+      "revId": "1ec807c4e690ae859026bfe25b699b696ed5ce2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d7bfcd1d_07de52e5",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-03-05T15:48:03Z",
       "side": 1,
       "message": "Is this the recommended approach to reduce a SIMD register by sum?\n\nFirst of all, `reinterpret_cast\u003cT*\u003e` is highly discouraged by our style guide\nif the pointer doesn\u0027t meet the memory alignment requirements of T, the behavior is undefined (see https://google.github.io/styleguide/cppguide.html#Casting).\n\nI also wonder if this implementation is actually faster. As you recommended in one of your comments in https://webrtc-review.googlesource.com/c/src/+/209062, we could instead use _mm256_add_ps etc. I believe that the number of ops will be lower.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 71
+      },
+      "revId": "1ec807c4e690ae859026bfe25b699b696ed5ce2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d56b8db_d2eeecb2",
+        "filename": "common_audio/fir_filter_avx2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2021-03-30T02:39:22Z",
+      "side": 1,
+      "message": "It\u0027s not the recommended approach, but this implementation is actually faster according to perf test result. Since it may lead to unsafe problems, I tend to give up this kind of implementation.\n\nI also tried to implement pure avx2 code, but the performance is bad is current one, so I think maybe it\u0027s better to stay as-is. What do you think?",
+      "parentUuid": "c699e582_e373b62b",
       "range": {
         "startLine": 78,
         "startChar": 0,
