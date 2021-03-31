@@ -359,13 +359,13 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
         int vad_reset_period_ms = 1500;
         float vad_probability_attack = 0.3f;
         LevelEstimator level_estimator = kRms;
-        int level_estimator_adjacent_speech_frames_threshold = 6;
+        int level_estimator_adjacent_speech_frames_threshold = 10;
         // TODO(crbug.com/webrtc/7494): Remove `use_saturation_protector`.
         bool use_saturation_protector = true;
         float initial_saturation_margin_db = 20.0f;
         float extra_saturation_margin_db = 5.0f;
         int gain_applier_adjacent_speech_frames_threshold = 6;
-        float max_gain_change_db_per_second = 3.0f;
+        float max_gain_change_db_per_second = 150.0f;
         float max_output_noise_level_dbfs = -55.0f;
         bool sse2_allowed = true;
         bool avx2_allowed = true;
