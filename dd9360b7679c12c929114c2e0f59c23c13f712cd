@@ -33,6 +33,75 @@
       "message": "glad to see this! Thank you!",
       "revId": "dd9360b7679c12c929114c2e0f59c23c13f712cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec36649a_948aa62b",
+        "filename": "modules/audio_coding/neteq/test/result_sink.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-03-31T07:33:50Z",
+      "side": 1,
+      "message": "The include is not needed here, putting it in the .h file is enough.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 19
+      },
+      "revId": "dd9360b7679c12c929114c2e0f59c23c13f712cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b64a006e_0aa42c75",
+        "filename": "modules/audio_coding/neteq/test/result_sink.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-03-31T07:33:50Z",
+      "side": 1,
+      "message": "Although not wrong, the explicit absl::make_optional() call can be removed. The conversion will happen automatically if you assign.",
+      "range": {
+        "startLine": 126,
+        "startChar": 25,
+        "endLine": 126,
+        "endChar": 44
+      },
+      "revId": "dd9360b7679c12c929114c2e0f59c23c13f712cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f99eb8d_dab279dc",
+        "filename": "modules/audio_coding/neteq/test/result_sink.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-03-31T07:33:50Z",
+      "side": 1,
+      "message": "This is the wrong include, you should include \"third_party/absl/types/optional.h\" instead. This include is for std::optional, but we use absl::optional in WebRTC.",
+      "range": {
+        "startLine": 16,
+        "startChar": 10,
+        "endLine": 16,
+        "endChar": 18
+      },
+      "revId": "dd9360b7679c12c929114c2e0f59c23c13f712cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
