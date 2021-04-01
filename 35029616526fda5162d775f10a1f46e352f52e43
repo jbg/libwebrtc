@@ -33,6 +33,23 @@
       "message": "Test comment to find out if my login is working.",
       "revId": "35029616526fda5162d775f10a1f46e352f52e43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cf5337a_09644028",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7133
+      },
+      "writtenOn": "2021-04-01T17:52:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "35029616526fda5162d775f10a1f46e352f52e43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
