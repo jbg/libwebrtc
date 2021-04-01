@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17c7bd94_466899b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-01T11:23:46Z",
+      "side": 1,
+      "message": "LGTM (maybe we also want to take https://source.chromium.org/chromium/chromium/src/+/master:base/types/strong_alias_unittest.cc into dcsctp, but in another CL is fine as well).",
+      "revId": "35029616526fda5162d775f10a1f46e352f52e43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
