@@ -16,6 +16,23 @@
       "message": "Hello Kári!\n\nCould you please review this CL which exposes extra ICE related properties of RTCConfiguration?\n\nThanks a lot in advance,\nYura.",
       "revId": "60a7871f0adf3eac9c56f833f64576f9f3e7b7eb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a66d0d7e_f38b2c42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-04-02T08:09:55Z",
+      "side": 1,
+      "message": "Hi Kári!\n\nCould you please take a look at this CL?\n\nThanks,\nYura.",
+      "revId": "60a7871f0adf3eac9c56f833f64576f9f3e7b7eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
