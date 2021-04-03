@@ -65,6 +65,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da4aaa01_025a073a",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-03T12:05:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcdb033d_cd9ef9d7",
+      "range": {
+        "startLine": 547,
+        "startChar": 2,
+        "endLine": 547,
+        "endChar": 24
+      },
+      "revId": "21dca9309f8bbc4957421352f521ffa246178ae2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d9430a0_919fd479",
@@ -78,6 +102,30 @@
       "writtenOn": "2021-03-22T08:16:04Z",
       "side": 1,
       "message": "It\u0027s unclear from this comment and similar comments what\u0027s the current state. On which thread(s) is this method called? Would it work with dchecks like\n\nRTC_DCHECK(foo_thread_checker_.IsCurrent() || bar_thread_.IsCurrent());",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 595,
+        "endChar": 31
+      },
+      "revId": "21dca9309f8bbc4957421352f521ffa246178ae2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0961576_ee3ce5e0",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-03T12:05:40Z",
+      "side": 1,
+      "message": "yes this is unfortunately an issue we need to solve. This comment is effectively to fix what the comments two lines above explains:\n\n  \"May be called on either worker thread or network thread.\"\n\nThe problem with calling IsCurrent() on a thread checker is that if \u0027current\u0027 isn\u0027t known, the current context will be assumed to be the future \u0027current\u0027. So if either foo or bar in that example aren\u0027t initialized, they\u0027ll grab the current context, pass the check and then could fail on the next check (false positive).",
+      "parentUuid": "4d9430a0_919fd479",
       "range": {
         "startLine": 593,
         "startChar": 0,
