@@ -50,6 +50,24 @@
       "message": "At this point, you might as well do a getParameters() and check that params.encodings[0] is still false and params.encodings[1] is still true (that all the rolling doesn\u0027t affect the \"active\" flag).",
       "revId": "58674249924cb8430ebcb3bbd27df5732f500f49",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e70a67c_e70c820c",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1966,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2021-04-06T19:40:57Z",
+      "side": 1,
+      "message": "Added only the false check as after negotiation there remains only single encoding \u0027hi\u0027.",
+      "parentUuid": "25ebcd80_2a6075ac",
+      "revId": "58674249924cb8430ebcb3bbd27df5732f500f49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
