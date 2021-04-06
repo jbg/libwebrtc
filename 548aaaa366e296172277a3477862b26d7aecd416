@@ -105,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ad1f663_9ba8d265",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1936,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2021-04-06T15:08:30Z",
+      "side": 1,
+      "message": "I probably didn\u0027t quite understand your idea of the test. As far as I can see the rollback has something to restore only in case there isn\u0027t yet a completed negotiation. Also the bug report is about the case where init parameters got lost. Now the test just proves that the rollback doesn\u0027t do anything to send encodings, which is the expected behavior.",
+      "parentUuid": "86b6428f_35cef3c1",
+      "revId": "548aaaa366e296172277a3477862b26d7aecd416",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18d6492b_98af567b",

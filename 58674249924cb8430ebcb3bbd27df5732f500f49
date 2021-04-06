@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a161bac4_b24e7339",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2021-04-06T15:08:30Z",
+      "side": 1,
+      "message": "@hta, please have a look at the test I added. Maybe I need few extra hints how to write a more useful test.",
+      "revId": "58674249924cb8430ebcb3bbd27df5732f500f49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
