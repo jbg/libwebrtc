@@ -47,7 +47,7 @@ TEST_F(BasicAsyncResolverFactoryTest, TestCreate) {
   TestCreate();
 }
 
-TEST(WrappingAsyncDnsResolverFactoryTest, TestCreate) {
+TEST(WrappingAsyncDnsResolverFactoryTest, TestCreateAndResolve) {
   WrappingAsyncDnsResolverFactory factory(
       std::make_unique<BasicAsyncResolverFactory>());
 
@@ -59,6 +59,31 @@ TEST(WrappingAsyncDnsResolverFactoryTest, TestCreate) {
   resolver->Start(address, [&address_resolved]() { address_resolved = true; });
   ASSERT_TRUE_WAIT(address_resolved, 10000 /*ms*/);
   resolver.reset();
+}
+
+TEST(WrappingAsyncDnsResolverFactoryTest, WrapOtherResolver) {
+  BasicAsyncResolverFactory non_owned_factory;
+  WrappingAsyncDnsResolverFactory factory(&non_owned_factory);
+  std::unique_ptr<AsyncDnsResolverInterface> resolver(factory.Create());
+  ASSERT_TRUE(resolver);
+
+  bool address_resolved = false;
+  rtc::SocketAddress address("", 0);
+  resolver->Start(address, [&address_resolved]() { address_resolved = true; });
+  ASSERT_TRUE_WAIT(address_resolved, 10000 /*ms*/);
+  resolver.reset();
+}
+
+TEST(WrappingAsyncDnsResolverFactoryTest, DeleteResolverInCallback) {
+  WrappingAsyncDnsResolverFactory factory(
+      std::make_unique<BasicAsyncResolverFactory>());
+
+  std::unique_ptr<AsyncDnsResolverInterface> resolver(factory.Create());
+  ASSERT_TRUE(resolver);
+
+  rtc::SocketAddress address("", 0);
+  resolver->Start(address, [&resolver]() { resolver.reset(); });
+  ASSERT_TRUE_WAIT(!resolver.get(), 10000 /*ms*/);
 }
 
 }  // namespace webrtc
