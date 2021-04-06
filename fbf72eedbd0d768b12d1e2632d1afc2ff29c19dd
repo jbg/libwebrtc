@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52172604_61ef5e97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-04-06T07:44:57Z",
+      "side": 1,
+      "message": "Thanks Eldar, looks good to me",
+      "revId": "fbf72eedbd0d768b12d1e2632d1afc2ff29c19dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
