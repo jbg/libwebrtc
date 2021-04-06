@@ -44,7 +44,7 @@ float EnergyToDbfs(float signal_energy, size_t num_samples) {
 }  // namespace
 
 NoiseLevelEstimator::NoiseLevelEstimator(ApmDataDumper* data_dumper)
-    : signal_classifier_(data_dumper) {
+    : data_dumper_(data_dumper), signal_classifier_(data_dumper) {
   Initialize(48000);
 }
 
@@ -68,19 +68,26 @@ float NoiseLevelEstimator::Analyze(const AudioFrameView<const float>& frame) {
   const float frame_energy = FrameEnergy(frame);
   if (frame_energy <= 0.f) {
     RTC_DCHECK_GE(frame_energy, 0.f);
+    data_dumper_->DumpRaw("agc2_noise_level_estimator_signal_type", -1);
+    data_dumper_->DumpRaw("agc2_noise_level_estimator_hold_counter",
+                          noise_energy_hold_counter_);
     return EnergyToDbfs(noise_energy_, frame.samples_per_channel());
   }
 
   if (first_update_) {
     // Initialize the noise energy to the frame energy.
     first_update_ = false;
-    return EnergyToDbfs(
-        noise_energy_ = std::max(frame_energy, min_noise_energy_),
-        frame.samples_per_channel());
+    data_dumper_->DumpRaw("agc2_noise_level_estimator_signal_type", -1);
+    data_dumper_->DumpRaw("agc2_noise_level_estimator_hold_counter",
+                          noise_energy_hold_counter_);
+    noise_energy_ = std::max(frame_energy, min_noise_energy_);
+    return EnergyToDbfs(noise_energy_, frame.samples_per_channel());
   }
 
   const SignalClassifier::SignalType signal_type =
       signal_classifier_.Analyze(frame.channel(0));
+  data_dumper_->DumpRaw("agc2_noise_level_estimator_signal_type",
+                        static_cast<int>(signal_type));
 
   // Update the noise estimate in a minimum statistics-type manner.
   if (signal_type == SignalClassifier::SignalType::kStationary) {
@@ -94,21 +101,28 @@ float NoiseLevelEstimator::Analyze(const AudioFrameView<const float>& frame) {
       }
     } else {
       // Update smoothly downwards with a limited maximum update magnitude.
+      constexpr float kMinNoiseEnergyFactor = 0.9f;
+      constexpr float kNoiseEnergyDeltaFactor = 0.05f;
       noise_energy_ =
-          std::max(noise_energy_ * 0.9f,
-                   noise_energy_ + 0.05f * (frame_energy - noise_energy_));
-      noise_energy_hold_counter_ = 1000;
+          std::max(noise_energy_ * kMinNoiseEnergyFactor,
+                   noise_energy_ - kNoiseEnergyDeltaFactor *
+                                       (noise_energy_ - frame_energy));
+      // Prevent an energy increase for a period of time.
+      constexpr int kTimeToEnergyIncreasedAllowedNumFrames = 200;  // 2 seconds.
+      noise_energy_hold_counter_ = kTimeToEnergyIncreasedAllowedNumFrames;
     }
   } else {
+    // TODO(bugs.webrtc.org/7494): Remove to not loose the estimated level.
     // For a non-stationary signal, leak the estimate downwards in order to
     // avoid estimate locking due to incorrect signal classification.
     noise_energy_ = noise_energy_ * 0.99f;
   }
+  data_dumper_->DumpRaw("agc2_noise_level_estimator_hold_counter",
+                        noise_energy_hold_counter_);
 
   // Ensure a minimum of the estimate.
-  return EnergyToDbfs(
-      noise_energy_ = std::max(noise_energy_, min_noise_energy_),
-      frame.samples_per_channel());
+  noise_energy_ = std::max(noise_energy_, min_noise_energy_);
+  return EnergyToDbfs(noise_energy_, frame.samples_per_channel());
 }
 
 }  // namespace webrtc
