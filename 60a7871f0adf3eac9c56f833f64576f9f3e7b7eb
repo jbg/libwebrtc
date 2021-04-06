@@ -67,6 +67,24 @@
       "message": "Adding jonaso@ as reviewer to comment on whether these variables make sense to expose, or whether they are part of a failed experiment that we should hide as much as possible.\n\nThese seem to have been added by qingsi@ in 2018.",
       "revId": "60a7871f0adf3eac9c56f833f64576f9f3e7b7eb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c24e6c23_d1088c57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-04-06T12:38:05Z",
+      "side": 1,
+      "message": "I think they makes sense to add,\nassuming that \"you understand what you get\".",
+      "parentUuid": "ce71802a_d13d6297",
+      "revId": "60a7871f0adf3eac9c56f833f64576f9f3e7b7eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
