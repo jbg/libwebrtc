@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c68ddc6_b3dc4362",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1919,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2021-04-06T11:56:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83d6f3d3_32fc069a",
+      "revId": "548aaaa366e296172277a3477862b26d7aecd416",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58587672_0c7b03f1",
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86b6428f_35cef3c1",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1936,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2021-04-06T11:56:52Z",
+      "side": 1,
+      "message": "I can look into that if it is still relevant after my last comments",
+      "parentUuid": "58587672_0c7b03f1",
+      "revId": "548aaaa366e296172277a3477862b26d7aecd416",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18d6492b_98af567b",
         "filename": "pc/sdp_offer_answer.cc",
         "patchSetId": 2
@@ -82,6 +118,24 @@
       "writtenOn": "2021-04-06T09:09:45Z",
       "side": 1,
       "message": "This doesn\u0027t smell right to me. When you\u0027re rolling back, you\u0027re not changing the initialization data, you\u0027re changing the current data. set_init_send_encodings is only called from CreateSender at the moment.",
+      "revId": "548aaaa366e296172277a3477862b26d7aecd416",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0504e7f_85a7619d",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2732,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2021-04-06T11:56:52Z",
+      "side": 1,
+      "message": "The logic there is that if media channel doesn\u0027t exist then RtpSenderBase::init_parameters_ is used for keeping the parameters. During rollback media channel gets destroyed, which leaves the init_parameters the place where parameters for next offer are taken.",
+      "parentUuid": "18d6492b_98af567b",
       "revId": "548aaaa366e296172277a3477862b26d7aecd416",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
