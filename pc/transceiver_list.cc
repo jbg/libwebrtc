@@ -36,6 +36,11 @@ void TransceiverStableState::SetRemoteStreamIdsIfUnset(
   }
 }
 
+void TransceiverStableState::SetSendEncodings(
+    const std::vector<RtpEncodingParameters>& encodings) {
+  send_encodings_ = encodings;
+}
+
 RtpTransceiverProxyRefPtr TransceiverList::FindBySender(
     rtc::scoped_refptr<RtpSenderInterface> sender) const {
   for (auto transceiver : transceivers_) {
