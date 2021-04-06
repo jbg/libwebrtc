@@ -141,6 +141,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "832569cd_1b6ed559",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1936,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2021-04-06T19:26:12Z",
+      "side": 1,
+      "message": "I think the \u0027active\u003dfalse\u0027 had such effect in the SDP that it added \u0027~\u0027 on \u0027a\u003dsimulcast\u0027 line to indicate that encoder is not active. Like \u0027a\u003dsimulcast:send ~hi\u0027 That is why I also added comparison of that line in the test.",
+      "parentUuid": "825cca42_97517e69",
+      "revId": "548aaaa366e296172277a3477862b26d7aecd416",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18d6492b_98af567b",
