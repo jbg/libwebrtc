@@ -1423,8 +1423,15 @@ RTCError SdpOfferAnswerHandler::ApplyLocalDescription(
         const std::vector<StreamParams>& streams = channel->local_streams();
         transceiver->internal()->sender_internal()->set_stream_ids(
             streams[0].stream_ids());
+        auto params =
+            transceiver->internal()->sender_internal()->GetParametersInternal();
         transceiver->internal()->sender_internal()->SetSsrc(
             streams[0].first_ssrc());
+        if (!params.encodings.empty()) {
+          transceivers()
+              ->StableState(transceiver)
+              ->SetSendEncodings(params.encodings);
+        }
       }
     }
   } else {
@@ -2721,6 +2728,10 @@ RTCError SdpOfferAnswerHandler::Rollback(SdpType desc_type) {
       } else {
         transceivers()->Remove(transceiver);
       }
+    }
+    if (state.send_encodings()) {
+      transceiver->internal()->sender_internal()->set_init_send_encodings(
+          state.send_encodings().value());
     }
     transceiver->internal()->sender_internal()->set_transport(nullptr);
     transceiver->internal()->receiver_internal()->set_transport(nullptr);

@@ -1915,6 +1915,26 @@ TEST_F(PeerConnectionJsepTest, RollbackRestoresMid) {
   EXPECT_TRUE(callee->SetLocalDescription(std::move(offer)));
 }
 
+TEST_F(PeerConnectionJsepTest, RollbackRestoresSendEncodings) {
+  auto pc = CreatePeerConnection();
+  RtpTransceiverInit init;
+  init.direction = RtpTransceiverDirection::kSendRecv;
+  RtpEncodingParameters encoding;
+  encoding.rid = "hi";
+  init.send_encodings.push_back(encoding);
+  encoding.rid = "mid";
+  init.send_encodings.push_back(encoding);
+  encoding.rid = "lo";
+  init.send_encodings.push_back(encoding);
+  pc->AddTransceiver(cricket::MEDIA_TYPE_VIDEO, init);
+  auto encodings =
+      pc->pc()->GetTransceivers()[0]->sender()->init_send_encodings();
+  EXPECT_TRUE(pc->SetLocalDescription(pc->CreateOffer()));
+  EXPECT_TRUE(pc->SetLocalDescription(pc->CreateRollback()));
+  EXPECT_EQ(pc->pc()->GetTransceivers()[0]->sender()->init_send_encodings(),
+            encodings);
+}
+
 TEST_F(PeerConnectionJsepTest, RollbackRestoresMidAndRemovesTransceiver) {
   auto callee = CreatePeerConnection();
   callee->AddVideoTrack("a");
