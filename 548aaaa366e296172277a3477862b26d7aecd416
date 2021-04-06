@@ -16,6 +16,74 @@
       "message": "** Presubmit ERRORS **\nBug entry requires issue tracker prefix, e.g. chromium:1188398\n\nDo you see, what the presubmit script is complaining about?\nAlso it appears that the fix is not that easy and more changes are required. Especially to ensure that unnecessary rollback wouldn\u0027t happen.",
       "revId": "548aaaa366e296172277a3477862b26d7aecd416",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4446f120_159e6481",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-06T09:09:45Z",
+      "side": 1,
+      "message": "Doesn\u0027t look quite right to me, but could be convinced otherwise.\n",
+      "revId": "548aaaa366e296172277a3477862b26d7aecd416",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83d6f3d3_32fc069a",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1919,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-06T09:09:45Z",
+      "side": 1,
+      "message": "the pattern \"pc-\u003epc()\" is so ugly that I\u0027d like another name. Since you\u0027re doing CreateOffer() here, \"caller\" would be the traditional name.",
+      "revId": "548aaaa366e296172277a3477862b26d7aecd416",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58587672_0c7b03f1",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1936,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-06T09:09:45Z",
+      "side": 1,
+      "message": "can you add a test that does an offer/answer with one set of encodings, changes the set of encodings in some fashion, does an offer/answer with that, and then does a SLD + rollback and verifies that the restored encodings are the second set, not the initial set?\n\nI think you may be unable to set the name and number of encodings, but should be able to flip around their enabled state.",
+      "revId": "548aaaa366e296172277a3477862b26d7aecd416",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18d6492b_98af567b",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2732,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-06T09:09:45Z",
+      "side": 1,
+      "message": "This doesn\u0027t smell right to me. When you\u0027re rolling back, you\u0027re not changing the initialization data, you\u0027re changing the current data. set_init_send_encodings is only called from CreateSender at the moment.",
+      "revId": "548aaaa366e296172277a3477862b26d7aecd416",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
