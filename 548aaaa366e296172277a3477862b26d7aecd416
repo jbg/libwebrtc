@@ -123,6 +123,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "825cca42_97517e69",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1936,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-06T18:56:03Z",
+      "side": 1,
+      "message": "Yeah, the active flag doesn\u0027t affect SDP in any way, so setParameters() doesn\u0027t fire negotiationNeeded. I had forgotten that. So the test doesn\u0027t test what I wanted it to test.....",
+      "parentUuid": "6ad1f663_9ba8d265",
+      "revId": "548aaaa366e296172277a3477862b26d7aecd416",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18d6492b_98af567b",

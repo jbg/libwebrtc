@@ -16,6 +16,40 @@
       "message": "@hta, please have a look at the test I added. Maybe I need few extra hints how to write a more useful test.",
       "revId": "58674249924cb8430ebcb3bbd27df5732f500f49",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "587f204a_ab0015bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-06T18:56:03Z",
+      "side": 1,
+      "message": "It\u0027s likely that there\u0027s no problem now, but I\u0027d still like a few more lines in the test.\nBut setting the +1 flag so that I\u0027m not in the way of getting the fix submitted.\n",
+      "revId": "58674249924cb8430ebcb3bbd27df5732f500f49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25ebcd80_2a6075ac",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1966,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-06T18:56:03Z",
+      "side": 1,
+      "message": "At this point, you might as well do a getParameters() and check that params.encodings[0] is still false and params.encodings[1] is still true (that all the rolling doesn\u0027t affect the \"active\" flag).",
+      "revId": "58674249924cb8430ebcb3bbd27df5732f500f49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
