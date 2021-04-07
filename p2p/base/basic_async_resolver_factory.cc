@@ -16,6 +16,7 @@
 #include "absl/memory/memory.h"
 #include "api/async_dns_resolver.h"
 #include "rtc_base/async_resolver.h"
+#include "rtc_base/logging.h"
 
 namespace webrtc {
 
@@ -46,7 +47,14 @@ class WrappingAsyncDnsResolver : public AsyncDnsResolverInterface,
   explicit WrappingAsyncDnsResolver(rtc::AsyncResolverInterface* wrapped)
       : wrapped_(absl::WrapUnique(wrapped)), result_(this) {}
 
-  ~WrappingAsyncDnsResolver() override { wrapped_.release()->Destroy(false); }
+  ~WrappingAsyncDnsResolver() override {
+    // Workaround to get around the fact that sigslot-using objects can't be
+    // destroyed from within their callback.
+    // TODO(bugs.webrtc.org/12651): Delete this class once the sigslot users are
+    // gone.
+    RTC_CHECK(!within_resolve_result_);
+    wrapped_.release()->Destroy(false);
+  }
 
   void Start(const rtc::SocketAddress& addr,
              std::function<void()> callback) override {
@@ -73,13 +81,16 @@ class WrappingAsyncDnsResolver : public AsyncDnsResolverInterface,
     RTC_DCHECK(state_ == State::kStarted);
     RTC_DCHECK_EQ(ref, wrapped_.get());
     state_ = State::kResolved;
+    within_resolve_result_ = true;
     callback_();
+    within_resolve_result_ = false;
   }
 
   std::function<void()> callback_;
   std::unique_ptr<rtc::AsyncResolverInterface> wrapped_;
   State state_ = State::kNotStarted;
   WrappingAsyncDnsResolverResult result_;
+  bool within_resolve_result_ = false;
 };
 
 bool WrappingAsyncDnsResolverResult::GetResolvedAddress(
