@@ -16,6 +16,52 @@
       "message": "Hi Ivo,\nThe CL is now ready. Could you PTAL?\nAlessio",
       "revId": "c6f45a22090e6e6edb9799202e78fff5d2f16c74",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf043e2_1f399756",
+        "filename": "modules/audio_processing/agc2/agc2_testing_common.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-04-07T09:12:44Z",
+      "side": 1,
+      "message": "nit: I think this should be \u003e\u003d",
+      "range": {
+        "startLine": 61,
+        "startChar": 17,
+        "endLine": 61,
+        "endChar": 18
+      },
+      "revId": "c6f45a22090e6e6edb9799202e78fff5d2f16c74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f75f00ab_a3045a68",
+        "filename": "modules/audio_processing/agc2/noise_level_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-04-07T09:12:44Z",
+      "side": 1,
+      "message": "nit: Maybe this is just my opinion, so feel free to ignore, but to me this name seems a bit awkward. How about kNumFramesToEnergyIncreaseAllowed?",
+      "range": {
+        "startLine": 111,
+        "startChar": 20,
+        "endLine": 111,
+        "endChar": 58
+      },
+      "revId": "c6f45a22090e6e6edb9799202e78fff5d2f16c74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
