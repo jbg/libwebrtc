@@ -50,6 +50,23 @@
       "message": "Carolina - can you take a look?",
       "revId": "4f198a8afe5458d09eec1659a6254ff27907ddbd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d9f7539_d3bd14a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-04-07T14:57:15Z",
+      "side": 1,
+      "message": "Hi Tommi!\n\nCould you please maybe assign someone else to review this CL, because there is no repose so far from Xavier.\n\nThanks,\nYura. ",
+      "revId": "4f198a8afe5458d09eec1659a6254ff27907ddbd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
