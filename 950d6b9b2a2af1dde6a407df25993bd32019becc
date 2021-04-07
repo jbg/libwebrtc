@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "345cde4a_d673c90a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-04-07T12:19:05Z",
+      "side": 1,
+      "message": "Changes from Patchset 5, still LGTM.",
+      "revId": "950d6b9b2a2af1dde6a407df25993bd32019becc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
