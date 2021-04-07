@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ced19ab5_a2b5e619",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-04-07T07:14:54Z",
+      "side": 1,
+      "message": "Hi Ivo,\nThe CL is now ready. Could you PTAL?\nAlessio",
+      "revId": "c6f45a22090e6e6edb9799202e78fff5d2f16c74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
