@@ -10,9 +10,13 @@
 
 #include "p2p/base/basic_async_resolver_factory.h"
 
+#include "api/test/mock_async_dns_resolver.h"
+#include "p2p/base/mock_async_resolver.h"
+#include "rtc_base/async_resolver.h"
 #include "rtc_base/gunit.h"
 #include "rtc_base/socket_address.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
+#include "test/gmock.h"
 #include "test/gtest.h"
 
 namespace webrtc {
@@ -47,7 +51,7 @@ TEST_F(BasicAsyncResolverFactoryTest, TestCreate) {
   TestCreate();
 }
 
-TEST(WrappingAsyncDnsResolverFactoryTest, TestCreate) {
+TEST(WrappingAsyncDnsResolverFactoryTest, TestCreateAndResolve) {
   WrappingAsyncDnsResolverFactory factory(
       std::make_unique<BasicAsyncResolverFactory>());
 
@@ -59,6 +63,40 @@ TEST(WrappingAsyncDnsResolverFactoryTest, TestCreate) {
   resolver->Start(address, [&address_resolved]() { address_resolved = true; });
   ASSERT_TRUE_WAIT(address_resolved, 10000 /*ms*/);
   resolver.reset();
+}
+
+TEST(WrappingAsyncDnsResolverFactoryTest, WrapOtherResolver) {
+  BasicAsyncResolverFactory non_owned_factory;
+  WrappingAsyncDnsResolverFactory factory(&non_owned_factory);
+  std::unique_ptr<AsyncDnsResolverInterface> resolver(factory.Create());
+  ASSERT_TRUE(resolver);
+
+  bool address_resolved = false;
+  rtc::SocketAddress address("", 0);
+  resolver->Start(address, [&address_resolved]() { address_resolved = true; });
+  ASSERT_TRUE_WAIT(address_resolved, 10000 /*ms*/);
+  resolver.reset();
+}
+
+// Tests that the prohibition against deleting the resolver from the callback
+// is enforced. This is required by the use of sigslot in the wrapped resolver.
+TEST(WrappingAsyncDnsResolverFactoryDeathTestButNotMangled,
+     DestroyResolverInCallback) {
+  // This test requires the main thread to be wrapped. So we defeat the
+  // workaround in test/test_main_lib.cc by not ending the name with DeathTest.
+  WrappingAsyncDnsResolverFactory factory(
+      std::make_unique<BasicAsyncResolverFactory>());
+
+  rtc::SocketAddress address("", 0);
+  // Since EXPECT_DEATH is thread sensitive, and the resolver creates a thread,
+  // we wrap the whole creation section in EXPECT_DEATH.
+  EXPECT_DEATH(
+      {
+        std::unique_ptr<AsyncDnsResolverInterface> resolver(factory.Create());
+        resolver->Start(address, [&resolver]() { resolver.reset(); });
+        WAIT(!resolver.get(), 10000 /*ms*/);
+      },
+      "Check failed: !within_resolve_result_");
 }
 
 }  // namespace webrtc
