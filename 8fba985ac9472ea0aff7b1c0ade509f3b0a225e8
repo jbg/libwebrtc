@@ -16,6 +16,23 @@
       "message": "I triggered a dry-run, should this land together with the roll or alone?",
       "revId": "8fba985ac9472ea0aff7b1c0ade509f3b0a225e8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7f46846_c2c97d25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-08T14:54:08Z",
+      "side": 1,
+      "message": "+glahiru@ (WebRTC trooper).\n\nLahiru, this needs to be patched on the roll CL (once we have the MSVC bots green) and it will make the android bots green as well.",
+      "revId": "8fba985ac9472ea0aff7b1c0ade509f3b0a225e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
