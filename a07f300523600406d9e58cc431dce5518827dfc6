@@ -35,6 +35,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1feeb07d_1782daac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-08T07:26:07Z",
+      "side": 1,
+      "message": "IceTransportInit is a structure in need of tender loving care, yes. I\u0027m trying to make small CLs, but adding a TODO seems sensible.",
+      "parentUuid": "44c7c9de_8a72b57c",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e59782cb_8294688b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-08T07:26:07Z",
+      "side": 1,
+      "message": "Thanks!\n",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15a757b1_af96218c",
@@ -54,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "498eb210_b28f11bb",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-08T07:26:07Z",
+      "side": 1,
+      "message": "The only reason for set_async_dns_resolver_factory is to be called from set_async_resolver_factory, which is called from exactly 2 places, both of which are creating an IceTransportInit from scratch.\n\nHaving a constructor with as many arguments as there are members is a PITA; if we want to be OO-pattern-compliant, we would define an IceTransportInitBuilder with all the setters, and have a single constructor that creates an IceTransportInit from the builder.\n\nIs it worth the typing?\n\nTODO referencing https://crbug.com/webrtc/12657 added.",
+      "parentUuid": "15a757b1_af96218c",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "813dcbd9_cf93ca58",
         "filename": "p2p/base/basic_async_resolver_factory.cc",
         "patchSetId": 9
@@ -65,6 +118,24 @@
       "writtenOn": "2021-04-08T06:45:13Z",
       "side": 1,
       "message": "Update to RTC_DCHECK_EQ?\n\n(key benefit would be knowing what the value of start_ is when it\u0027s not kNotStarted)",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c9f1e8_d5dd7589",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-08T07:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "813dcbd9_cf93ca58",
       "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -88,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd780034_53506e83",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-08T07:26:07Z",
+      "side": 1,
+      "message": "Added a SequenceChecker",
+      "parentUuid": "07b44ba9_5a1f61e7",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e905c7cf_88b2ce00",
         "filename": "p2p/base/basic_async_resolver_factory.cc",
         "patchSetId": 9
@@ -99,6 +188,24 @@
       "writtenOn": "2021-04-08T06:45:13Z",
       "side": 1,
       "message": "const\n(since wrapped() gives out a pointer to that object)",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31c17dd0_e615b0c2",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-08T07:26:07Z",
+      "side": 1,
+      "message": "Can\u0027t, since the destructor does .release() on it.\n\nMade wrapped() a private function and the result class a friend instead; should prevent inappropriate usages of wrapped().",
+      "parentUuid": "e905c7cf_88b2ce00",
       "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
