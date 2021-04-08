@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a066999_5766f3ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-08T12:50:19Z",
+      "side": 1,
+      "message": "Great to see it!\n\nA few nits, and one potential breaking bug.\n",
+      "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42243d6_c7faf3c3",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-08T12:50:19Z",
+      "side": 1,
+      "message": "This will not detect changes from \"absent\" to \"present\", and will in fact crash when one is absent and the other is present. Please rewrite.\n\n(I think you have to do (if (a xor b) || (a \u0026\u0026 b \u0026\u0026 *a !\u003d *b))) - ugly!",
+      "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b177ab78_600c4275",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-08T12:50:19Z",
+      "side": 1,
+      "message": "are you sure we can\u0027t change it from \"set\" to \"not set\", ever?",
+      "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8da0a863_48197462",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-08T12:50:19Z",
+      "side": 1,
+      "message": "Add TODO in the relevant struct to get rid of -1 here too?",
+      "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
