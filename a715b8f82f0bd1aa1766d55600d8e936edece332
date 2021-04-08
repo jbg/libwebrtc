@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b64dfcc_0fa81de6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-04-08T12:59:06Z",
+      "side": 1,
+      "message": "lgtm % some style nits",
+      "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e42243d6_c7faf3c3",
@@ -31,6 +48,29 @@
       "writtenOn": "2021-04-08T12:50:19Z",
       "side": 1,
       "message": "This will not detect changes from \"absent\" to \"present\", and will in fact crash when one is absent and the other is present. Please rewrite.\n\n(I think you have to do (if (a xor b) || (a \u0026\u0026 b \u0026\u0026 *a !\u003d *b))) - ugly!",
+      "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae581d31_738eb488",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-04-08T12:59:06Z",
+      "side": 1,
+      "message": "If both are absl::optional, isn\u0027t it enough with the first !\u003d test?",
+      "range": {
+        "startLine": 1214,
+        "startChar": 57,
+        "endLine": 1215,
+        "endChar": 58
+      },
       "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -54,6 +94,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "095276b3_4ec03113",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1757,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-04-08T12:59:06Z",
+      "side": 1,
+      "message": "Pretty sure you should be able to simplify this to\nif (payload_type \u003d\u003d recv_flexfec_payload_type_)\n\nIf not set, the optional will compare false to a plan int - otherwise the content will be compared.",
+      "range": {
+        "startLine": 1756,
+        "startChar": 12,
+        "endLine": 1757,
+        "endChar": 55
+      },
+      "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8da0a863_48197462",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 2
@@ -65,6 +128,69 @@
       "writtenOn": "2021-04-08T12:50:19Z",
       "side": 1,
       "message": "Add TODO in the relevant struct to get rid of -1 here too?",
+      "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d51cbb1_a73331f6",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2209,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-04-08T12:59:06Z",
+      "side": 1,
+      "message": ".value_or(-1)",
+      "range": {
+        "startLine": 2209,
+        "startChar": 6,
+        "endLine": 2209,
+        "endChar": 41
+      },
+      "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5294091_46d5ad13",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2214,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-04-08T12:59:06Z",
+      "side": 1,
+      "message": "perhaps to make it extra clear:\nif (!codec_settings.rtx_payload_type.has_value())",
+      "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cb2967c_dbd33c6d",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2924,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-04-08T12:59:06Z",
+      "side": 1,
+      "message": "nack_enabled ? rtx_time.value_or(kNackHistoryMs) : 0;\n\n... or at least some parentheses to clarify that nested ??:: 😊",
+      "range": {
+        "startLine": 2924,
+        "startChar": 21,
+        "endLine": 2924,
+        "endChar": 58
+      },
       "revId": "a715b8f82f0bd1aa1766d55600d8e936edece332",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
