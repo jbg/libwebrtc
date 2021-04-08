@@ -257,8 +257,6 @@ class WebRtcVideoChannel : public VideoMediaChannel,
       RTC_EXCLUSIVE_LOCKS_REQUIRED(thread_checker_);
 
   struct VideoCodecSettings {
-    VideoCodecSettings();
-
     // Checks if all members of |*this| are equal to the corresponding members
     // of |other|.
     bool operator==(const VideoCodecSettings& other) const;
@@ -271,9 +269,9 @@ class WebRtcVideoChannel : public VideoMediaChannel,
 
     VideoCodec codec;
     webrtc::UlpfecConfig ulpfec;
-    int flexfec_payload_type;  // -1 if absent.
-    int rtx_payload_type;      // -1 if absent.
-    int rtx_time;              // -1 if absent.
+    absl::optional<int> flexfec_payload_type;
+    absl::optional<int> rtx_payload_type;
+    absl::optional<int> rtx_time;
   };
 
   struct ChangedSendParameters {
@@ -457,7 +455,7 @@ class WebRtcVideoChannel : public VideoMediaChannel,
                                bool nack_enabled,
                                bool transport_cc_enabled,
                                webrtc::RtcpMode rtcp_mode,
-                               int rtx_time);
+                               absl::optional<int> rtx_time);
     void SetRecvParameters(const ChangedRecvParameters& recv_params);
 
     void OnFrame(const webrtc::VideoFrame& frame) override;
@@ -596,7 +594,8 @@ class WebRtcVideoChannel : public VideoMediaChannel,
       RTC_GUARDED_BY(thread_checker_);
   // See reason for keeping track of the FlexFEC payload type separately in
   // comment in WebRtcVideoChannel::ChangedRecvParameters.
-  int recv_flexfec_payload_type_ RTC_GUARDED_BY(thread_checker_);
+  absl::optional<int> recv_flexfec_payload_type_
+      RTC_GUARDED_BY(thread_checker_);
   webrtc::BitrateConstraints bitrate_config_ RTC_GUARDED_BY(thread_checker_);
   // TODO(deadbeef): Don't duplicate information between
   // send_params/recv_params, rtp_extensions, options, etc.

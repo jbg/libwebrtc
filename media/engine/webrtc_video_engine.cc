@@ -824,7 +824,7 @@ bool WebRtcVideoChannel::GetChangedSendParameters(
   // Never enable sending FlexFEC, unless we are in the experiment.
   if (!IsEnabled(call_->trials(), "WebRTC-FlexFEC-03")) {
     for (VideoCodecSettings& codec : negotiated_codecs)
-      codec.flexfec_payload_type = -1;
+      codec.flexfec_payload_type = {};
   }
 
   if (negotiated_codecs_ != negotiated_codecs) {
@@ -1210,7 +1210,7 @@ bool WebRtcVideoChannel::GetChangedRecvParameters(
         absl::optional<std::vector<webrtc::RtpExtension>>(filtered_extensions);
   }
 
-  int flexfec_payload_type = mapped_codecs.front().flexfec_payload_type;
+  auto flexfec_payload_type = mapped_codecs.front().flexfec_payload_type;
   if (flexfec_payload_type != recv_flexfec_payload_type_) {
     changed_params->flexfec_payload_type = flexfec_payload_type;
   }
@@ -1228,9 +1228,15 @@ bool WebRtcVideoChannel::SetRecvParameters(const VideoRecvParameters& params) {
   }
   if (changed_params.flexfec_payload_type) {
     RTC_DLOG(LS_INFO) << "Changing FlexFEC payload type (recv) from "
-                      << recv_flexfec_payload_type_ << " to "
-                      << *changed_params.flexfec_payload_type;
-    recv_flexfec_payload_type_ = *changed_params.flexfec_payload_type;
+                      << (recv_flexfec_payload_type_
+                              ? rtc::ToString(*recv_flexfec_payload_type_)
+                              : "(not set)")
+                      << " to "
+                      << (changed_params.flexfec_payload_type
+                              ? rtc::ToString(
+                                    *changed_params.flexfec_payload_type)
+                              : "(not set)");
+    recv_flexfec_payload_type_ = changed_params.flexfec_payload_type;
   }
   if (changed_params.rtp_header_extensions) {
     recv_rtp_extensions_ = *changed_params.rtp_header_extensions;
@@ -1526,8 +1532,8 @@ void WebRtcVideoChannel::ConfigureReceiverRtp(
 
   // rtx-time (RFC 4588) is a declarative attribute similar to rtcp-rsize and
   // determined by the sender / send codec.
-  if (send_codec_ && send_codec_->rtx_time != -1) {
-    config->rtp.nack.rtp_history_ms = send_codec_->rtx_time;
+  if (send_codec_ && send_codec_->rtx_time) {
+    config->rtp.nack.rtp_history_ms = *send_codec_->rtx_time;
   }
 
   config->rtp.transport_cc =
@@ -1538,7 +1544,7 @@ void WebRtcVideoChannel::ConfigureReceiverRtp(
   config->rtp.extensions = recv_rtp_extensions_;
 
   // TODO(brandtr): Generalize when we add support for multistream protection.
-  flexfec_config->payload_type = recv_flexfec_payload_type_;
+  flexfec_config->payload_type = recv_flexfec_payload_type_.value_or(-1);
   if (!IsDisabled(call_->trials(), "WebRTC-FlexFEC-03-Advertised") &&
       sp.GetFecFrSsrc(ssrc, &flexfec_config->remote_ssrc)) {
     flexfec_config->protected_media_ssrcs = {ssrc};
@@ -2201,17 +2207,18 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetCodec(
       codec_settings.codec.packetization == kPacketizationParamRaw;
   parameters_.config.rtp.ulpfec = codec_settings.ulpfec;
   parameters_.config.rtp.flexfec.payload_type =
-      codec_settings.flexfec_payload_type;
+      codec_settings.flexfec_payload_type.value_or(-1);
 
   // Set RTX payload type if RTX is enabled.
   if (!parameters_.config.rtp.rtx.ssrcs.empty()) {
-    if (codec_settings.rtx_payload_type == -1) {
+    if (!codec_settings.rtx_payload_type.has_value()) {
       RTC_LOG(LS_WARNING)
           << "RTX SSRCs configured but there's no configured RTX "
              "payload type. Ignoring.";
       parameters_.config.rtp.rtx.ssrcs.clear();
     } else {
-      parameters_.config.rtp.rtx.payload_type = codec_settings.rtx_payload_type;
+      parameters_.config.rtp.rtx.payload_type =
+          *codec_settings.rtx_payload_type;
     }
   }
 
@@ -2858,8 +2865,10 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::ConfigureCodecs(
     decoder.video_format =
         webrtc::SdpVideoFormat(recv_codec.codec.name, recv_codec.codec.params);
     config_.decoders.push_back(decoder);
-    config_.rtp.rtx_associated_payload_types[recv_codec.rtx_payload_type] =
-        recv_codec.codec.id;
+    if (recv_codec.rtx_payload_type) {
+      config_.rtp.rtx_associated_payload_types[*recv_codec.rtx_payload_type] =
+          recv_codec.codec.id;
+    }
     if (recv_codec.codec.packetization == kPacketizationParamRaw) {
       config_.rtp.raw_payload_types.insert(recv_codec.codec.id);
     }
@@ -2873,8 +2882,8 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::ConfigureCodecs(
   config_.rtp.nack.rtp_history_ms = HasNack(codec.codec) ? kNackHistoryMs : 0;
   // The rtx-time parameter can be used to override the hardcoded default for
   // the NACK buffer length.
-  if (codec.rtx_time != -1 && config_.rtp.nack.rtp_history_ms != 0) {
-    config_.rtp.nack.rtp_history_ms = codec.rtx_time;
+  if (codec.rtx_time && config_.rtp.nack.rtp_history_ms != 0) {
+    config_.rtp.nack.rtp_history_ms = *codec.rtx_time;
   }
   config_.rtp.rtcp_xr.receiver_reference_time_report = HasRrtr(codec.codec);
   if (codec.ulpfec.red_rtx_payload_type != -1) {
@@ -2910,9 +2919,8 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetFeedbackParameters(
     bool nack_enabled,
     bool transport_cc_enabled,
     webrtc::RtcpMode rtcp_mode,
-    int rtx_time) {
-  int nack_history_ms =
-      nack_enabled ? rtx_time != -1 ? rtx_time : kNackHistoryMs : 0;
+    absl::optional<int> rtx_time) {
+  int nack_history_ms = nack_enabled ? rtx_time.value_or(kNackHistoryMs) : 0;
   if (config_.rtp.lntf.enabled == lntf_enabled &&
       config_.rtp.nack.rtp_history_ms == nack_history_ms &&
       config_.rtp.transport_cc == transport_cc_enabled &&
@@ -2922,7 +2930,7 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetFeedbackParameters(
            "unchanged; lntf="
         << lntf_enabled << ", nack=" << nack_enabled
         << ", transport_cc=" << transport_cc_enabled
-        << ", rtx_time=" << rtx_time;
+        << ", rtx_time=" << (rtx_time ? rtc::ToString(*rtx_time) : "(not set)");
     return;
   }
   config_.rtp.lntf.enabled = lntf_enabled;
@@ -3190,9 +3198,6 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::
   if (stream_)
     stream_->SetDepacketizerToDecoderFrameTransformer(frame_transformer);
 }
-
-WebRtcVideoChannel::VideoCodecSettings::VideoCodecSettings()
-    : flexfec_payload_type(-1), rtx_payload_type(-1), rtx_time(-1) {}
 
 bool WebRtcVideoChannel::VideoCodecSettings::operator==(
     const WebRtcVideoChannel::VideoCodecSettings& other) const {
