@@ -16,6 +16,91 @@
       "message": "Moved the death test that refused to cooperate to a new branch (CL).\nThis should now be ready for +1.\n",
       "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c7c9de_8a72b57c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-08T06:45:13Z",
+      "side": 1,
+      "message": "lgtm-ing since I don\u0027t want to block the reland. I like the fact that you\u0027re using std::unique_ptr to make ownership clear in a few places, so wondering if it makes sense to do the same for IceTransportInit - and actually if we need setters in that struct? Seems like we could make it simpler to require variables to be set at construction, keep them as const as possible (if we use unique_ptr, we could support moving ownership) and not have to worry about state changing during the lifetime of the object.",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15a757b1_af96218c",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-08T06:45:13Z",
+      "side": 1,
+      "message": "since we\u0027re already adding DCHECKs here, it would be nice to also protect against unsafe usage by having thread/tq checks for the variables.\n\nActually, is there a need to be able to set and unset (replace?) an async_resolver_factory_ post IceTransportInit construction? (my gut tells me that that it would be better to avoid it).\n\nIf not, can we just set it at construction time and have it be a const pointer?\nThat way we can also get rid of the setter+DCHECK for correct usage.\n\nAsyncDnsResolverFactoryInterface* const async_dns_resolver_factory_;\n\nAs an aside, it looks like set_port_allocator() is only ever used directly after constructing an IceTransportInit() instance, so that method doesn\u0027t seem necessary either. Same for set_event_log() (not to be confused with IceEventLog::set_event_log()... which actually seems unnecessary too 😐)",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813dcbd9_cf93ca58",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-08T06:45:13Z",
+      "side": 1,
+      "message": "Update to RTC_DCHECK_EQ?\n\n(key benefit would be knowing what the value of start_ is when it\u0027s not kNotStarted)",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07b44ba9_5a1f61e7",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-08T06:45:13Z",
+      "side": 1,
+      "message": "protect variable with RTC_GUARDED_BY?",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e905c7cf_88b2ce00",
+        "filename": "p2p/base/basic_async_resolver_factory.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-08T06:45:13Z",
+      "side": 1,
+      "message": "const\n(since wrapped() gives out a pointer to that object)",
+      "revId": "a07f300523600406d9e58cc431dce5518827dfc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
