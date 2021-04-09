@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d7118d_7c5225a2",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2021-04-09T13:14:05Z",
+      "side": 1,
+      "message": "nit: Would it make sense to change this to something like:\n\n  #if PW_CHECK_VERSION(..3)\n    const \u003csizetype\u003e* video_size \u003d video_metadata ? video_metadata.region.size;\n  #else\n    const \u003cmetadatatype\u003e* video_size \u003d video_metadata\n  #endif\n  if (video_size \u0026\u0026 video_size-\u003ewidth ...) {\n    ...\n  }\n\nso that there is one single full-height/width logic?",
+      "range": {
+        "startLine": 777,
+        "startChar": 0,
+        "endLine": 797,
+        "endChar": 6
+      },
+      "revId": "b9e309e1b87dfe0009a1477474b93a32055c5eed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
