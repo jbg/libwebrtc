@@ -16,6 +16,74 @@
       "message": "Hi jamiewalch@, can you PTAL at this change that makes WgcCapturerWin interoperable with the other capturer implementations?",
       "revId": "64ac78fcb30ac5f892957ad56a16f7362d68466e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "868f4c05_93618abb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2021-04-09T18:39:15Z",
+      "side": 1,
+      "message": "LGTM with nits.",
+      "revId": "64ac78fcb30ac5f892957ad56a16f7362d68466e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e666fd_97db50b1",
+        "filename": "modules/desktop_capture/win/screen_capture_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2021-04-09T18:39:15Z",
+      "side": 1,
+      "message": "Nit: It looks like this file uses braces for single-line conditionals (at lezst the bits I can see without expanding hidden lines). I\u0027d prefer we stay consistent here and below.",
+      "revId": "64ac78fcb30ac5f892957ad56a16f7362d68466e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6022380_66522c33",
+        "filename": "modules/desktop_capture/win/screen_capture_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2021-04-09T18:39:15Z",
+      "side": 1,
+      "message": "Optional: Is it expected to be rare that this function returns false? If so, then it might be worthwhile logging which of the Win32 API calls failed, to help with debugging.\n\nIf it\u0027s likely to be common (e,g., if callers are likely to use this function to validate something, or if it\u0027s going to be called very frequently once it stats failing), then that might end up being too spammy.",
+      "revId": "64ac78fcb30ac5f892957ad56a16f7362d68466e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "441c6f12_8b9b34f8",
+        "filename": "modules/desktop_capture/win/screen_capture_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2021-04-09T18:39:15Z",
+      "side": 1,
+      "message": "Assuming it\u0027s equivalent, I think screen_rect.is_empty() would be clearer here.",
+      "revId": "64ac78fcb30ac5f892957ad56a16f7362d68466e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
