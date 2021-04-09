@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25602de2_a9e6a041",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-04-09T03:15:17Z",
+      "side": 1,
+      "message": "Got around to testing performance; with the extra thread, throughput (on my Macbook) is down by around 25%. I don\u0027t know if it\u0027s acceptable for the default behavior to regress so much, even if it\u0027s only temporary.\n\nI\u0027ll try making sends more asynchronous or move where buffering happens to address this. Though I was hoping I\u0027d be able to keep this relatively simple.",
+      "revId": "b6d0d8d7b0c873b0444a960492f9cc1926268251",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
