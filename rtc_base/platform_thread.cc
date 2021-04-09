@@ -23,9 +23,9 @@
 namespace rtc {
 namespace {
 #if !defined(WEBRTC_WIN)
-struct ThreadAttributes {
-  ThreadAttributes() { pthread_attr_init(&attr); }
-  ~ThreadAttributes() { pthread_attr_destroy(&attr); }
+struct PThreadAttributes {
+  PThreadAttributes() { pthread_attr_init(&attr); }
+  ~PThreadAttributes() { pthread_attr_destroy(&attr); }
   pthread_attr_t* operator&() { return &attr; }
   pthread_attr_t attr;
 };
@@ -35,8 +35,11 @@ struct ThreadAttributes {
 PlatformThread::PlatformThread(ThreadRunFunction func,
                                void* obj,
                                absl::string_view thread_name,
-                               ThreadPriority priority /*= kNormalPriority*/)
-    : run_function_(func), priority_(priority), obj_(obj), name_(thread_name) {
+                               ThreadAttributes attributes)
+    : run_function_(func),
+      attributes_(attributes),
+      obj_(obj),
+      name_(thread_name) {
   RTC_DCHECK(func);
   RTC_DCHECK(!name_.empty());
   // TODO(tommi): Consider lowering the limit to 15 (limit on Linux).
@@ -47,8 +50,11 @@ PlatformThread::PlatformThread(ThreadRunFunction func,
 PlatformThread::~PlatformThread() {
   RTC_DCHECK(thread_checker_.IsCurrent());
 #if defined(WEBRTC_WIN)
-  RTC_DCHECK(!thread_);
-  RTC_DCHECK(!thread_id_);
+  if (thread_) {
+    CloseHandle(thread_);
+    thread_ = nullptr;
+    thread_id_ = 0;
+  }
 #endif  // defined(WEBRTC_WIN)
 }
 
@@ -81,10 +87,12 @@ void PlatformThread::Start() {
   RTC_CHECK(thread_) << "CreateThread failed";
   RTC_DCHECK(thread_id_);
 #else
-  ThreadAttributes attr;
+  PThreadAttributes attr;
   // Set the stack stack size to 1M.
   pthread_attr_setstacksize(&attr, 1024 * 1024);
   RTC_CHECK_EQ(0, pthread_create(&thread_, &attr, &StartThread, this));
+  if (!attributes_.joinable)
+    pthread_detach(thread_);
 #endif  // defined(WEBRTC_WIN)
 }
 
@@ -111,12 +119,16 @@ void PlatformThread::Stop() {
     return;
 
 #if defined(WEBRTC_WIN)
-  WaitForSingleObject(thread_, INFINITE);
+  if (attributes_.joinable) {
+    WaitForSingleObject(thread_, INFINITE);
+  }
   CloseHandle(thread_);
   thread_ = nullptr;
   thread_id_ = 0;
 #else
-  RTC_CHECK_EQ(0, pthread_join(thread_, nullptr));
+  if (attributes_.joinable) {
+    RTC_CHECK_EQ(0, pthread_join(thread_, nullptr));
+  }
   thread_ = 0;
 #endif  // defined(WEBRTC_WIN)
   spawned_thread_checker_.Detach();
@@ -126,15 +138,15 @@ void PlatformThread::Run() {
   // Attach the worker thread checker to this thread.
   RTC_DCHECK(spawned_thread_checker_.IsCurrent());
   rtc::SetCurrentThreadName(name_.c_str());
-  SetPriority(priority_);
+  SetPriority();
   run_function_(obj_);
 }
 
-bool PlatformThread::SetPriority(ThreadPriority priority) {
+bool PlatformThread::SetPriority() {
   RTC_DCHECK(spawned_thread_checker_.IsCurrent());
 
 #if defined(WEBRTC_WIN)
-  return SetThreadPriority(thread_, priority) != FALSE;
+  return SetThreadPriority(thread_, attributes_.priority) != FALSE;
 #elif defined(__native_client__) || defined(WEBRTC_FUCHSIA)
   // Setting thread priorities is not supported in NaCl or Fuchsia.
   return true;
@@ -157,7 +169,7 @@ bool PlatformThread::SetPriority(ThreadPriority priority) {
   sched_param param;
   const int top_prio = max_prio - 1;
   const int low_prio = min_prio + 1;
-  switch (priority) {
+  switch (attributes_.priority) {
     case kLowPriority:
       param.sched_priority = low_prio;
       break;
