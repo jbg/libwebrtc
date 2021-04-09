@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3da23ef_80d61ad4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-09T11:27:23Z",
+      "side": 1,
+      "message": "lgtm stamping - I\u0027m assuming this doesn\u0027t require much manual review but please ping back if so.",
+      "revId": "e26918e61a020fcb3697b9e10490d17a7cfdfd36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
