@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fe897ad_b69dd463",
+        "filename": "modules/desktop_capture/win/screen_capture_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 13004
+      },
+      "writtenOn": "2021-04-09T21:47:13Z",
+      "side": 1,
+      "message": "Should we also record the success of this operation using WGC telemetry like you added in the other change?",
+      "parentUuid": "c6022380_66522c33",
+      "revId": "64ac78fcb30ac5f892957ad56a16f7362d68466e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "441c6f12_8b9b34f8",
         "filename": "modules/desktop_capture/win/screen_capture_utils.cc",
         "patchSetId": 5
