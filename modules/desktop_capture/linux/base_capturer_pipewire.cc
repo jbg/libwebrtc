@@ -789,6 +789,7 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
   if (video_metadata && video_metadata->width != 0 &&
       video_metadata->height != 0) {
     if (video_metadata->width < desktop_size_.width()) {
+      video_is_full_width = false;
     } else if (video_metadata->height < desktop_size_.height()) {
       video_is_full_height = false;
     }
