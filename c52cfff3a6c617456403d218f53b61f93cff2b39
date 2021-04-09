@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aa1f07b_e49495b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-04-09T06:31:26Z",
+      "side": 1,
+      "message": "much nicer style now. Might make sense to apply the same pattern to the bitrate which also uses -1 for \"not set\"...",
+      "revId": "c52cfff3a6c617456403d218f53b61f93cff2b39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
