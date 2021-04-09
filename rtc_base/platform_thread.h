@@ -42,6 +42,20 @@ enum ThreadPriority {
 #endif
 };
 
+struct ThreadAttributes {
+  ThreadPriority priority = kNormalPriority;
+  bool joinable = true;
+
+  ThreadAttributes& SetPriority(ThreadPriority priority) {
+    this->priority = priority;
+    return *this;
+  }
+  ThreadAttributes& SetDetached() {
+    this->joinable = false;
+    return *this;
+  }
+};
+
 // Represents a simple worker thread.  The implementation must be assumed
 // to be single threaded, meaning that all methods of the class, must be
 // called from the same thread, including instantiation.
@@ -50,7 +64,7 @@ class PlatformThread {
   PlatformThread(ThreadRunFunction func,
                  void* obj,
                  absl::string_view thread_name,
-                 ThreadPriority priority = kNormalPriority);
+                 ThreadAttributes attributes = ThreadAttributes());
   virtual ~PlatformThread();
 
   const std::string& name() const { return name_; }
@@ -65,7 +79,10 @@ class PlatformThread {
   // thread checks.
   PlatformThreadRef GetThreadRef() const;
 
-  // Stops (joins) the spawned thread.
+  // Stops the spawned thread. If the thread is joinable (default), the
+  // function waits until all activity in the thread has completed. Otherwise
+  // if detached, Stop() returns immediately without waiting for thread
+  // completion.
   void Stop();
 
  protected:
@@ -76,10 +93,10 @@ class PlatformThread {
 
  private:
   void Run();
-  bool SetPriority(ThreadPriority priority);
+  bool SetPriority();
 
   ThreadRunFunction const run_function_ = nullptr;
-  const ThreadPriority priority_ = kNormalPriority;
+  const ThreadAttributes attributes_;
   void* const obj_;
   // TODO(pbos): Make sure call sites use string literals and update to a const
   // char* instead of a std::string.
