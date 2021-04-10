@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ba95d4f_31d5e6c8",
+        "filename": "rtc_base/platform_thread.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-10T14:42:12Z",
+      "side": 1,
+      "message": "I\u0027d prefer to keep this in Stop() for detached threads. I think it makes things a bit more consistent from the pov of PlatformThread.\n\nWhat we could do specifically for detached threads, could be to offer a utility function that spawns a fire-and-forget type thread and hides the Stop() call from the caller.",
+      "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ce8e1fb_ab58197b",
+        "filename": "rtc_base/platform_thread.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-10T14:42:12Z",
+      "side": 1,
+      "message": "when we initially implemented this, we went through some lengths to avoid having to do this sort of synchronization.\nA couple of options:\n* Can the attributes be reference counted instead?\n\n* If not, can we avoid having start_complete_event_ be a member variable and avoid the dependency on Event in the PlatformThread class?\nI\u0027m thinking that a local struct that points to the on-stack Event object and object variable, could be used as a parameter to a bootstrapping root function.\nIf required, you could fwd declare the struct as a class scoped struct in the header, make the Run function take a pointer to such an instance but only declare the struct in the cc file, thus avoiding the Event type in the header and PlatformThread class itself.",
+      "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17323cde_8f8b8c10",
+        "filename": "rtc_base/platform_thread.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-10T14:42:12Z",
+      "side": 1,
+      "message": "nit: remove `this-\u003e`\ncan we remove it above too and just rename the param?",
+      "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3290ee63_4d2618b8",
+        "filename": "rtc_base/platform_thread.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-10T14:42:12Z",
+      "side": 1,
+      "message": "nit: \"returns immediately\"\n-\u003e\n\"returns immediately after freeing any held resources\"\n\nOr something to that effect - I\u0027m thinking about emphasizing the need to call Stop() even if you have a detached thread.",
+      "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db91fa30_f1d3c3c5",
+        "filename": "rtc_base/platform_thread_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-10T14:42:12Z",
+      "side": 1,
+      "message": "can we use something else than sleep?",
+      "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97fd46b9_ef0eb283",
+        "filename": "rtc_base/platform_thread_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-10T14:42:12Z",
+      "side": 1,
+      "message": "for how long does the test run and for how long does this thread live?\nSeems like it could be cleaner to wait on an event instead and signal that event after the test itself has been completed",
+      "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
