@@ -151,6 +151,7 @@ void WgcCapturerWin::CaptureFrame() {
     return;
   }
 
+  frame->set_top_left(capture_source_->GetTopLeft());
   callback_->OnCaptureResult(DesktopCapturer::Result::SUCCESS,
                              std::move(frame));
 }
