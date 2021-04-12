@@ -67,6 +67,23 @@
       "message": "I am giving my OK mainly since Mirko has given a green light. I don\u0027t know the details well enough tp provide valid comments.",
       "revId": "29fff3eea6b48fb1ce284733f0c563ff4e57123d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10262ef6_fc84050b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2021-04-12T14:50:39Z",
+      "side": 1,
+      "message": "LGTM, based on my limited knowledge about this - trusting Mirko\u0027s review.",
+      "revId": "29fff3eea6b48fb1ce284733f0c563ff4e57123d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
