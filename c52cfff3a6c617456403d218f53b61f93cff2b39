@@ -16,6 +16,40 @@
       "message": "much nicer style now. Might make sense to apply the same pattern to the bitrate which also uses -1 for \"not set\"...",
       "revId": "c52cfff3a6c617456403d218f53b61f93cff2b39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42197ba3_c46a07f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-12T05:49:52Z",
+      "side": 1,
+      "message": "Still niggling on that change of send_params when you change from \"present\" to \"not present\"....\n",
+      "revId": "c52cfff3a6c617456403d218f53b61f93cff2b39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "721594ed_0b4c0956",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-12T05:49:52Z",
+      "side": 1,
+      "message": "hmm.... the interesting part here is that if we change it from \"has a value\" to \"has no value\", the value recorded in changed_params is \"has no value\", which is the same as the value for \"was unchanged\".\n\nSo changed_params should really have an absl::optional\u003cabsl::optional\u003cint\u003e\u003e to capture the full semantics of changes? Ouch....",
+      "revId": "c52cfff3a6c617456403d218f53b61f93cff2b39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
