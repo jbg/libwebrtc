@@ -1244,7 +1244,8 @@ bool LibvpxVp9Encoder::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
       vp9_info->width[i] = 0;
       vp9_info->height[i] = 0;
     }
-    for (size_t i = first_active_layer_; i < num_active_spatial_layers_; ++i) {
+    for (size_t i = first_active_layer_;
+         i < num_active_spatial_layers_ + first_active_layer_; ++i) {
       vp9_info->width[i] = codec_.width * svc_params_.scaling_factor_num[i] /
                            svc_params_.scaling_factor_den[i];
       vp9_info->height[i] = codec_.height * svc_params_.scaling_factor_num[i] /
