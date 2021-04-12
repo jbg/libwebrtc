@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ea6038b_56e4ad64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-04-12T13:17:01Z",
+      "side": 1,
+      "message": "Hello Harald!\n\nCould you please review this CL, which enhances error message printed from stun_port.cc?\nI\u0027ve recently encountered errors during sending stun bindings, but was unable to determine from logs which host triggered error. Not it should be possible.\n\nThanks a lot in advance,\nYura.\n\n",
+      "revId": "6425f7f227ef8f27b27abcb82e55f847bda5f4db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
