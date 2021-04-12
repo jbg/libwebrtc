@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "299b7d8d_7fc23c96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-04-12T07:48:19Z",
+      "side": 1,
+      "message": "There\u0027s no way to avoid casting pointers from void*.\n\nI rephrased the comment. What I meant is that in the case the join implementation has an issue, the test will flake.",
+      "parentUuid": "cbe2ad74_536d349a",
+      "revId": "1ac9b7565d7d8a935591a55ab054058e82de829c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59182fe7_c0c962ef",
@@ -52,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57bcbc76_06eb519d",
+        "filename": "rtc_base/platform_thread.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-04-12T07:48:19Z",
+      "side": 1,
+      "message": "Thread join is a standard concept present in just about any threading API. But I spelled the docs from pthread_join() out in clear text what\u0027s meant.\nAs I wrote above in the Start() documentation, you can actually start twice, if you have a stop inbetween. But I was merely documenting what the implementation did and continues to do.",
+      "parentUuid": "980cb474_6ce3f9df",
+      "revId": "1ac9b7565d7d8a935591a55ab054058e82de829c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aea510a_acb41730",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-04-12T05:43:40Z",
       "side": 1,
       "message": "Is this still true?",
+      "revId": "1ac9b7565d7d8a935591a55ab054058e82de829c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5724ca6_cfca331c",
+        "filename": "rtc_base/platform_thread_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-04-12T07:48:19Z",
+      "side": 1,
+      "message": "It flakes _on_ problems. It doesn\u0027t say there is a problem. Rephrased.",
+      "parentUuid": "8aea510a_acb41730",
       "revId": "1ac9b7565d7d8a935591a55ab054058e82de829c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
