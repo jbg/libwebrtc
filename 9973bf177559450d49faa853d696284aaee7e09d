@@ -16,6 +16,23 @@
       "message": "Hello all,\n\nIn order to highlight the referenced bug, I\u0027m starting with a negative unittest that fails on the master branch. Once the bots fail, I will push a commit that actually tries to fix the bug. Feel free to review the unittest in the meanwhile.",
       "revId": "9973bf177559450d49faa853d696284aaee7e09d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e36fc0f_351e093b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-04-12T19:34:16Z",
+      "side": 1,
+      "message": "linux_rel bot triggered, expected to fail",
+      "revId": "9973bf177559450d49faa853d696284aaee7e09d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
