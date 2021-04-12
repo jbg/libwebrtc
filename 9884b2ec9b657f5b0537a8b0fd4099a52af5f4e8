@@ -16,6 +16,24 @@
       "message": "this seems like a classic sequence-number-too-old-arithmetic problem. Isn\u0027t there a more general solution?",
       "revId": "9884b2ec9b657f5b0537a8b0fd4099a52af5f4e8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "431860bb_b8772142",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 13776
+      },
+      "writtenOn": "2021-04-12T21:45:05Z",
+      "side": 1,
+      "message": "As much as I hate doing number arithmetic with sequences that can be both out-of-order and wrapped, unfortunately this is the cleanest way of fixing this. I did consider using a time-based approach (see deleted TODO), but choosing the right threshold for different bitrates (also fps, resolutions, fec rate and other factors) becomes a challenge, and brings us back to the same problem. This approach is guaranteed to purge old FEC before media sequences wraps around, irrespective of what the factors are.\n\nPS: I intend to also reduce the threshold from `0x3fff` to a smaller value, because more relaxed this threshold is, more cycles will be spent on old FEC packets before eventually purging them. I\u0027ll wait for some feedback on my algo first 😊",
+      "parentUuid": "2833a6ac_ff22b11a",
+      "revId": "9884b2ec9b657f5b0537a8b0fd4099a52af5f4e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
