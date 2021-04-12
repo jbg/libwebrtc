@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe2ad74_536d349a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-12T05:43:40Z",
+      "side": 1,
+      "message": "I still wonder about whether we have a way to avoid the casting of pointers to void*, but since these are functions passed to syscalls, then perhaps not.....\n\nNot doing LGTM while the tests contain comments saying \"this is flaky\".....\n",
+      "revId": "1ac9b7565d7d8a935591a55ab054058e82de829c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59182fe7_c0c962ef",
+        "filename": "rtc_base/platform_thread.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-12T05:43:40Z",
+      "side": 1,
+      "message": "Tommi needs to file a bug here, I think....",
+      "revId": "1ac9b7565d7d8a935591a55ab054058e82de829c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980cb474_6ce3f9df",
+        "filename": "rtc_base/platform_thread.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-12T05:43:40Z",
+      "side": 1,
+      "message": "Do we assume that everyone knows that \"joins the thread\" means \"this thread will pause until the other thread exits\"?\n\nSince the sentence starts with \"if\", I kind of look for the \"else\" - here \"If the thread is not joinable, it only sets the flag that says Stop() has been called\".\n\nI don\u0027t think one-shot threads can be Start()ed twice - is that true?",
+      "revId": "1ac9b7565d7d8a935591a55ab054058e82de829c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aea510a_acb41730",
+        "filename": "rtc_base/platform_thread_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-12T05:43:40Z",
+      "side": 1,
+      "message": "Is this still true?",
+      "revId": "1ac9b7565d7d8a935591a55ab054058e82de829c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
