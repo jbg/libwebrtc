@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25625805_72b93596",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-04-13T17:16:16Z",
+      "side": 1,
+      "message": "Hi team, PTAL at this CL that improves cursor capture for the Wgc Capturer.",
+      "revId": "be7bf0df24494c7b06497b88941bbf8e2a0ec43c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
