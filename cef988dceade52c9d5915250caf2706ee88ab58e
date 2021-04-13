@@ -34,6 +34,24 @@
       "parentUuid": "14e20888_ff39cfd9",
       "revId": "cef988dceade52c9d5915250caf2706ee88ab58e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2fe5d7_9cd0fb37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-13T05:46:20Z",
+      "side": 1,
+      "message": "Yes, since we don\u0027t cherry pick infra related changes these kind of issues are expected unfortunately (on really old branches).",
+      "parentUuid": "d8b75e1d_7725cc85",
+      "revId": "cef988dceade52c9d5915250caf2706ee88ab58e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
