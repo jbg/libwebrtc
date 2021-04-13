@@ -16,6 +16,115 @@
       "message": "Hi team, PTAL at this CL that improves cursor capture for the Wgc Capturer.",
       "revId": "be7bf0df24494c7b06497b88941bbf8e2a0ec43c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d2a75ea_17b45925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13074
+      },
+      "writtenOn": "2021-04-13T21:17:25Z",
+      "side": 1,
+      "message": "Thanks Austin! A few questions for you below.",
+      "revId": "be7bf0df24494c7b06497b88941bbf8e2a0ec43c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af2358ea_e954e124",
+        "filename": "modules/desktop_capture/win/test_support/test_window.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 13074
+      },
+      "writtenOn": "2021-04-13T21:17:25Z",
+      "side": 1,
+      "message": "Can we simplify this comment to just:\n// SWP_NOSIZE results in the width and height params being ignored.\n\nSame above.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 12
+      },
+      "revId": "be7bf0df24494c7b06497b88941bbf8e2a0ec43c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7bab3a9_d115472a",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 13074
+      },
+      "writtenOn": "2021-04-13T21:17:25Z",
+      "side": 1,
+      "message": "Do we need to handle FAILED(hr) here?",
+      "range": {
+        "startLine": 120,
+        "startChar": 1,
+        "endLine": 121,
+        "endChar": 54
+      },
+      "revId": "be7bf0df24494c7b06497b88941bbf8e2a0ec43c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f61b631_30a2d055",
+        "filename": "modules/desktop_capture/win/wgc_capture_source.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 13074
+      },
+      "writtenOn": "2021-04-13T21:17:25Z",
+      "side": 1,
+      "message": "nit: Should we add a comment describing the inner workings of this method? i.e. that on success it sets source_rect_?",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 20
+      },
+      "revId": "be7bf0df24494c7b06497b88941bbf8e2a0ec43c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55478050_d36d2db1",
+        "filename": "modules/desktop_capture/win/wgc_capture_source.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 13074
+      },
+      "writtenOn": "2021-04-13T21:17:25Z",
+      "side": 1,
+      "message": "With GetHmonitor() here, are we making sure we have the latest HMON before we:\nSetSourceRect(GetMonitorRect(*hmonitor_))?\n\nSo we return false if hmonitor_ is not set AND also if refreshing a currently set hmonitor_ fails?\n\nIf this is the case, can you please add a short comment above.",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 139,
+        "endChar": 35
+      },
+      "revId": "be7bf0df24494c7b06497b88941bbf8e2a0ec43c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
