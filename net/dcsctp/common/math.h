@@ -19,6 +19,18 @@ IntType RoundUpTo4(IntType val) {
   return (val + 3) & -4;
 }
 
+// Similarly, rounds down `val` to the nearest value that is divisible by four.
+template <typename IntType>
+IntType RoundDownTo4(IntType val) {
+  return val & -4;
+}
+
+// Returns true if `val` is divisible by four.
+template <typename IntType>
+bool IsDivisibleBy4(IntType val) {
+  return (val & 3) == 0;
+}
+
 }  // namespace dcsctp
 
 #endif  // NET_DCSCTP_COMMON_MATH_H_

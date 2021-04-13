@@ -52,11 +52,11 @@ SctpPacket::Builder::Builder(VerificationTag verification_tag,
     : verification_tag_(verification_tag),
       source_port_(options.local_port),
       dest_port_(options.remote_port),
-      max_mtu_(options.mtu) {}
+      max_packet_size_(RoundDownTo4(options.mtu)) {}
 
 SctpPacket::Builder& SctpPacket::Builder::Add(const Chunk& chunk) {
   if (out_.empty()) {
-    out_.reserve(max_mtu_);
+    out_.reserve(max_packet_size_);
     out_.resize(SctpPacket::kHeaderSize);
     BoundedByteWriter<kHeaderSize> buffer(out_);
     buffer.Store16<0>(source_port_);
@@ -64,12 +64,24 @@ SctpPacket::Builder& SctpPacket::Builder::Add(const Chunk& chunk) {
     buffer.Store32<4>(*verification_tag_);
     // Checksum is at offset 8 - written when calling Build();
   }
+  RTC_DCHECK(IsDivisibleBy4(out_.size()));
+
   chunk.SerializeTo(out_);
   if (out_.size() % 4 != 0) {
     out_.resize(RoundUpTo4(out_.size()));
   }
 
+  RTC_DCHECK(out_.size() <= max_packet_size_)
+      << "Exceeded MTU, data=" << out_.size() << ", mtu=" << max_packet_size_;
   return *this;
+}
+
+size_t SctpPacket::Builder::bytes_remaining() const {
+  if (out_.empty()) {
+    // The packet header (CommonHeader) hasn't been written yet:
+    return max_packet_size_ - kHeaderSize;
+  }
+  return out_.size() >= max_packet_size_ ? 0 : max_packet_size_ - out_.size();
 }
 
 std::vector<uint8_t> SctpPacket::Builder::Build() {
@@ -80,6 +92,10 @@ std::vector<uint8_t> SctpPacket::Builder::Build() {
     uint32_t crc = GenerateCrc32C(out);
     BoundedByteWriter<kHeaderSize>(out).Store32<8>(crc);
   }
+
+  RTC_DCHECK(out.size() <= max_packet_size_)
+      << "Exceeded MTU, data=" << out.size() << ", mtu=" << max_packet_size_;
+
   return out;
 }
 
