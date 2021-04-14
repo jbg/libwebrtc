@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "387a0491_0604a253",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 13004
+      },
+      "writtenOn": "2021-04-14T19:50:53Z",
+      "side": 1,
+      "message": "Should we record and return any HRESULT error codes returned by these functions?",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 54
+      },
+      "revId": "57b2f7456139c8c082a71527bd5e6d2b6b53bd5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "544ce067_d82aea8f",
+        "filename": "modules/desktop_capture/win/wgc_capture_source.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 13004
+      },
+      "writtenOn": "2021-04-14T19:50:53Z",
+      "side": 1,
+      "message": "How do we update the cached value after the window moves?",
+      "range": {
+        "startLine": 48,
+        "startChar": 6,
+        "endLine": 48,
+        "endChar": 18
+      },
+      "revId": "57b2f7456139c8c082a71527bd5e6d2b6b53bd5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
