@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e1bd1d2_6f5a4f2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-04-14T09:53:32Z",
+      "side": 1,
+      "message": "two minor fixes, two questions :-)",
+      "revId": "15ab47c19cdc7217ff736a3304ddc93ea7c4934a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c70cdad_dde36e26",
+        "filename": "p2p/g3doc/ice.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-04-14T09:53:32Z",
+      "side": 1,
+      "message": "that is only true for the slightly nonstandard continuous nomination?",
+      "revId": "15ab47c19cdc7217ff736a3304ddc93ea7c4934a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab1c4cb4_b225fe44",
+        "filename": "p2p/g3doc/ice.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-04-14T09:53:32Z",
+      "side": 1,
+      "message": "while I am at it: this depends on the role (I can never remember how the dtls client/server map to the a\u003dsetup)?\n... may cause ... to initiate a DTLS handshake depending on its role\n?",
+      "revId": "15ab47c19cdc7217ff736a3304ddc93ea7c4934a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
