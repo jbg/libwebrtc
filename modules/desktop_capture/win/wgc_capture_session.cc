@@ -57,7 +57,9 @@ enum class StartCaptureResult {
   kCreateFreeThreadedFailed = 9,
   kCreateCaptureSessionFailed = 10,
   kStartCaptureFailed = 11,
-  kMaxValue = kStartCaptureFailed
+  kDisableCursorCaptureFailed = 12,
+  kCastToSession2Failed = 13,
+  kMaxValue = kCastToSession2Failed
 };
 
 // These values are persisted to logs. Entries should not be renumbered and
@@ -183,6 +185,16 @@ HRESULT WgcCaptureSession::StartCapture() {
   if (FAILED(hr)) {
     RecordStartCaptureResult(StartCaptureResult::kCreateCaptureSessionFailed);
     return hr;
+  }
+
+  ComPtr<WGC::IGraphicsCaptureSession2> session_2;
+  hr = session_->QueryInterface(IID_PPV_ARGS(&session_2));
+  if (SUCCEEDED(hr)) {
+    hr = session_2->put_IsCursorCaptureEnabled(false);
+    if (FAILED(hr))
+      RecordStartCaptureResult(StartCaptureResult::kDisableCursorCaptureFailed);
+  } else {
+    RecordStartCaptureResult(StartCaptureResult::kCastToSession2Failed);
   }
 
   hr = session_->StartCapture();
