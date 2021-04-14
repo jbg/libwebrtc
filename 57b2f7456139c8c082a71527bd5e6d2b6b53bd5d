@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d0268e5_1b6bb1ad",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-04-14T22:03:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e389524_8752f923",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 54
+      },
+      "revId": "57b2f7456139c8c082a71527bd5e6d2b6b53bd5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "544ce067_d82aea8f",
