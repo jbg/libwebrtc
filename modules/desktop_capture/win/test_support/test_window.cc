@@ -73,8 +73,17 @@ WindowInfo CreateTestWindow(const WCHAR* window_title,
 }
 
 void ResizeTestWindow(const HWND hwnd, const int width, const int height) {
+  // Resizes the window, SWP_NOMOVE causes it to ignore the x and y params.
   ::SetWindowPos(hwnd, HWND_TOP, /*x-coord=*/0, /*y-coord=*/0, width, height,
-                 SWP_SHOWWINDOW);
+                 SWP_SHOWWINDOW | SWP_NOMOVE);
+  ::UpdateWindow(hwnd);
+}
+
+void MoveTestWindow(const HWND hwnd, const int x, const int y) {
+  // Moves the window, SWP_NOSIZE causes it to ignore the width and height
+  // params.
+  ::SetWindowPos(hwnd, HWND_TOP, x, y, /*width=*/0, /*height=*/0,
+                 SWP_SHOWWINDOW | SWP_NOSIZE);
   ::UpdateWindow(hwnd);
 }
 
