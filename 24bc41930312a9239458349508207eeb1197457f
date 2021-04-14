@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6505d9a_73ae774f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8882
+      },
+      "writtenOn": "2021-04-14T11:28:03Z",
+      "side": 1,
+      "message": "There is no clear answer what the default filter should be. Thus, it is a conscious design of the updated FindHeaderExtensionByUri function that the user of the API always needs to be aware of its current context, i.e.: Do I require, prefer or explicitly don\u0027t want encrypted headers?\n\nIf one does not care, arguably the closest one to the original behaviour would be kPreferEncryptedExtension even though it does not what the previous algorithm did.\n\nIdeally, the downstream tests would be updated to select the appropriate filter for their use case. If that\u0027s too much to ask, then I propose to have a fallback to kPreferEncryptedExtension.",
+      "revId": "24bc41930312a9239458349508207eeb1197457f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
