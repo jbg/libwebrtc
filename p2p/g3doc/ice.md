@@ -1,7 +1,6 @@
 # ICE
 
-<?% config.freshness.owner = 'jonaso' %?> <?% config.freshness.reviewed =
-'2021-04-12' %?>
+<?% config.freshness.owner = 'jonaso' %?> <?% config.freshness.reviewed = '2021-04-12' %?>
 
 ## Overview
 
@@ -86,7 +85,7 @@ All of these steps are invoked by interactions with `PeerConnection`.
     form new `cricket::Connection`(s). Candidates are compatible if it is
     possible to send/receive data (e.g ipv4 can only send to ipv4, tcp can only
     connect to tcp etc...) The newly formed `cricket::Connection`(s) will be
-    added to the `cricket::IceController` that will decides which
+    added to the `cricket::IceController` that will decide which
     `cricket::Connection` to send STUN ping on.
 
 4.  [`P2PTransportChannel::SignalCandidatePairChanged`](https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/p2p/base/ice_transport_internal.h;l=310;drc=8cb97062880b0e0a78f9d578370a01aced81a13f)
