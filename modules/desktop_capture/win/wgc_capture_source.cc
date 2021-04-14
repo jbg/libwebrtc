@@ -44,6 +44,21 @@ bool WgcCaptureSource::IsCapturable() {
   return SUCCEEDED(CreateCaptureItem(&item));
 }
 
+DesktopVector WgcCaptureSource::GetTopLeft() {
+  if (source_rect_)
+    return source_rect_->top_left();
+
+  // |GetSourceRect()| will set the |source_rect_| member on success.
+  if (!GetSourceRect())
+    return DesktopVector();
+
+  return source_rect_->top_left();
+}
+
+void WgcCaptureSource::SetSourceRect(DesktopRect source_rect) {
+  source_rect_ = source_rect;
+}
+
 WgcCaptureSourceFactory::~WgcCaptureSourceFactory() = default;
 
 WgcWindowSourceFactory::WgcWindowSourceFactory() = default;
@@ -73,6 +88,15 @@ bool WgcWindowSource::IsCapturable() {
   return WgcCaptureSource::IsCapturable();
 }
 
+bool WgcWindowSource::GetSourceRect() {
+  DesktopRect source_rect;
+  if (!GetWindowRect(reinterpret_cast<HWND>(GetSourceId()), &source_rect))
+    return false;
+
+  SetSourceRect(source_rect);
+  return true;
+}
+
 HRESULT WgcWindowSource::CreateCaptureItem(
     ComPtr<WGC::IGraphicsCaptureItem>* result) {
   if (!ResolveCoreWinRTDelayload())
@@ -99,22 +123,32 @@ HRESULT WgcWindowSource::CreateCaptureItem(
 }
 
 WgcScreenSource::WgcScreenSource(DesktopCapturer::SourceId source_id)
-    : WgcCaptureSource(source_id) {}
+    : WgcCaptureSource(source_id) {
+  // Getting the HMONITOR could fail if the source_id is invalid. In that case,
+  // we leave hmonitor_ uninitialized and |IsCapturable()| will fail.
+  HMONITOR hmon;
+  if (GetHmonitorFromDeviceIndex(GetSourceId(), &hmon))
+    hmonitor_ = hmon;
+}
+
 WgcScreenSource::~WgcScreenSource() = default;
 
 bool WgcScreenSource::IsCapturable() {
-  if (!hmonitor_) {
-    HMONITOR hmon;
-    if (!GetHmonitorFromDeviceIndex(GetSourceId(), &hmon))
-      return false;
-
-    hmonitor_ = hmon;
-  }
+  if (!hmonitor_)
+    return false;
 
   if (!IsMonitorValid(*hmonitor_))
     return false;
 
   return WgcCaptureSource::IsCapturable();
+}
+
+bool WgcScreenSource::GetSourceRect() {
+  if (!hmonitor_)
+    return false;
+
+  SetSourceRect(GetMonitorRect(*hmonitor_));
+  return true;
 }
 
 HRESULT WgcScreenSource::CreateCaptureItem(

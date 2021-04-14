@@ -18,6 +18,7 @@
 
 #include "absl/types/optional.h"
 #include "modules/desktop_capture/desktop_capturer.h"
+#include "modules/desktop_capture/desktop_geometry.h"
 
 namespace webrtc {
 
@@ -30,6 +31,7 @@ class WgcCaptureSource {
   explicit WgcCaptureSource(DesktopCapturer::SourceId source_id);
   virtual ~WgcCaptureSource();
 
+  virtual DesktopVector GetTopLeft();
   virtual bool IsCapturable();
   HRESULT GetCaptureItem(
       Microsoft::WRL::ComPtr<
@@ -37,6 +39,8 @@ class WgcCaptureSource {
   DesktopCapturer::SourceId GetSourceId() { return source_id_; }
 
  protected:
+  virtual bool GetSourceRect() = 0;
+  void SetSourceRect(DesktopRect);
   virtual HRESULT CreateCaptureItem(
       Microsoft::WRL::ComPtr<
           ABI::Windows::Graphics::Capture::IGraphicsCaptureItem>* result) = 0;
@@ -45,6 +49,7 @@ class WgcCaptureSource {
   Microsoft::WRL::ComPtr<ABI::Windows::Graphics::Capture::IGraphicsCaptureItem>
       item_;
   const DesktopCapturer::SourceId source_id_;
+  absl::optional<DesktopRect> source_rect_;
 };
 
 class WgcCaptureSourceFactory {
@@ -95,6 +100,7 @@ class WgcWindowSource final : public WgcCaptureSource {
   bool IsCapturable() override;
 
  private:
+  bool GetSourceRect() override;
   HRESULT CreateCaptureItem(
       Microsoft::WRL::ComPtr<
           ABI::Windows::Graphics::Capture::IGraphicsCaptureItem>* result)
@@ -114,6 +120,7 @@ class WgcScreenSource final : public WgcCaptureSource {
   bool IsCapturable() override;
 
  private:
+  bool GetSourceRect() override;
   HRESULT CreateCaptureItem(
       Microsoft::WRL::ComPtr<
           ABI::Windows::Graphics::Capture::IGraphicsCaptureItem>* result)
