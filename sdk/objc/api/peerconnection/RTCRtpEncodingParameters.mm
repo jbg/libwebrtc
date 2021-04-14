@@ -26,12 +26,13 @@
 @synthesize networkPriority = _networkPriority;
 
 - (instancetype)init {
-  return [super init];
+  webrtc::RtpEncodingParameters defaultNativeParameters;
+  return [self initWithNativeParameters:defaultNativeParameters];
 }
 
 - (instancetype)initWithNativeParameters:
     (const webrtc::RtpEncodingParameters &)nativeParameters {
-  if (self = [self init]) {
+  if (self = [super init]) {
     if (!nativeParameters.rid.empty()) {
       _rid = [NSString stringForStdString:nativeParameters.rid];
     }
