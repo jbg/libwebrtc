@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2d7fe3b_87343fc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-04-14T22:04:20Z",
+      "side": 1,
+      "message": "Hi Jamie, can you PTAL at this CL that fixes cursor capture for the WGC capturer?",
+      "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
