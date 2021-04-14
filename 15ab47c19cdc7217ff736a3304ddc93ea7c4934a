@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88ac0aad_cb78b131",
+        "filename": "p2p/g3doc/ice.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-04-14T10:15:16Z",
+      "side": 1,
+      "message": "you mean the \"other connections\" ?\ni think built-in IceController will keep one backup connection\ngo/nicer will keep as many as possible",
+      "parentUuid": "1c70cdad_dde36e26",
+      "revId": "15ab47c19cdc7217ff736a3304ddc93ea7c4934a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab1c4cb4_b225fe44",
         "filename": "p2p/g3doc/ice.md",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2021-04-14T09:53:32Z",
       "side": 1,
       "message": "while I am at it: this depends on the role (I can never remember how the dtls client/server map to the a\u003dsetup)?\n... may cause ... to initiate a DTLS handshake depending on its role\n?",
+      "revId": "15ab47c19cdc7217ff736a3304ddc93ea7c4934a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa1ba77_9cfd83ef",
+        "filename": "p2p/g3doc/ice.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-04-14T10:15:16Z",
+      "side": 1,
+      "message": "true!",
+      "parentUuid": "ab1c4cb4_b225fe44",
       "revId": "15ab47c19cdc7217ff736a3304ddc93ea7c4934a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
