@@ -16,6 +16,103 @@
       "message": "Hi Jamie, can you PTAL at this CL that fixes cursor capture for the WGC capturer?",
       "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67f43245_15ffff1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2021-04-14T22:36:12Z",
+      "side": 1,
+      "message": "LGTM with a couple of questions.",
+      "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f23ea889_5ceff8ed",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2021-04-14T22:36:12Z",
+      "side": 1,
+      "message": "The naming had me confused for a minute here, as \"cast to session\" sounds like it\u0027s related to Chromecast rather than type-casting. Maybe s/CastTo/QueryInterface/?",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 29
+      },
+      "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4a4e9d4_d94676da",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2021-04-14T22:36:12Z",
+      "side": 1,
+      "message": "Is it okay to call RecordStartCaptureResult more than once for one StartCapture call? All the other instances \"return hr\" immediately after calling this.",
+      "range": {
+        "startLine": 195,
+        "startChar": 79,
+        "endLine": 195,
+        "endChar": 80
+      },
+      "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8bde84d_64511617",
+        "filename": "modules/desktop_capture/win/wgc_capture_source.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2021-04-14T22:36:12Z",
+      "side": 1,
+      "message": "Would it make sense to also set |screen_rect_| here? It would avoid needing to make it absl::optional, but I don\u0027t know if there\u0027s significant cost to computing it.",
+      "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97604109_c494d25b",
+        "filename": "modules/desktop_capture/win/wgc_capture_source.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2021-04-14T22:36:12Z",
+      "side": 1,
+      "message": "(Oppositely to my previous comment), is it possible for the rect associated with a monitor to change during the HMONITOR\u0027s lifetime? If so, then presumably it can\u0027t be cached.",
+      "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
