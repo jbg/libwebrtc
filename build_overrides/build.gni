@@ -35,7 +35,7 @@ ignore_elf32_limitations = true
 # Use bundled hermetic Xcode installation maintainted by Chromium,
 # except for local iOS builds where it's unsupported.
 # Allow for mac cross compile on linux machines.
-if (host_os == "mac" || host_os == "linux") {
+if (host_os == "mac" || host_os == "linuxx") {
   _result = exec_script("//build/mac/should_use_hermetic_xcode.py",
                         [ target_os ],
                         "value")
