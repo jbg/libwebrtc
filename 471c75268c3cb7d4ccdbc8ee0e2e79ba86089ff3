@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4784f6ce_3c170fa6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2021-04-14T12:08:06Z",
+      "side": 1,
+      "message": "Hello Kári!\n\nCould you please review this CL? It resolves the issue with current implementation such that when some RTP*Parameters class is created with default init it gets default property values come from ObjC wrappers, which are not necessarily correspond to default values in native implementation. The simple solution to keep default initialization in ObjC in sync with native implementation is to use default constructed value of native parameters class as initialization for ObjC wrapper.\n\nThanks a lot in advance,\nYura.",
+      "revId": "471c75268c3cb7d4ccdbc8ee0e2e79ba86089ff3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
