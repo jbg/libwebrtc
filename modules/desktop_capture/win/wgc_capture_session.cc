@@ -185,6 +185,11 @@ HRESULT WgcCaptureSession::StartCapture() {
     return hr;
   }
 
+  ComPtr<WGC::IGraphicsCaptureSession2> session_2;
+  hr = session_->QueryInterface(IID_PPV_ARGS(&session_2));
+  if (SUCCEEDED(hr))
+    hr = session_2->put_IsCursorCaptureEnabled(false);
+
   hr = session_->StartCapture();
   if (FAILED(hr)) {
     RTC_LOG(LS_ERROR) << "Failed to start CaptureSession: " << hr;
