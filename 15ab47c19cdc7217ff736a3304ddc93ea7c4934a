@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef828408_51716156",
+        "filename": "p2p/g3doc/ice.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-04-15T12:48:35Z",
+      "side": 1,
+      "message": "1) GATHER_CONTINUALLY does not matter for this. That is only for new local candidates even after ice has conenction.\n\n2) re TURN: that is correct,\nthe kept backup connection will only be present if it\u0027s on a different network adapter.",
+      "parentUuid": "b23e670c_bd80358d",
+      "revId": "15ab47c19cdc7217ff736a3304ddc93ea7c4934a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab1c4cb4_b225fe44",
         "filename": "p2p/g3doc/ice.md",
         "patchSetId": 1
