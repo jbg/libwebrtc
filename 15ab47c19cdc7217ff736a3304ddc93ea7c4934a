@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b23e670c_bd80358d",
+        "filename": "p2p/g3doc/ice.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-04-15T07:32:23Z",
+      "side": 1,
+      "message": "only in GATHER_CONTINUALLY mode, no? TURN connections are closed usually if they\u0027re not used and they\u0027d usually be what I would expect a fallback to.",
+      "parentUuid": "88ac0aad_cb78b131",
+      "revId": "15ab47c19cdc7217ff736a3304ddc93ea7c4934a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab1c4cb4_b225fe44",
         "filename": "p2p/g3doc/ice.md",
         "patchSetId": 1
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "true!",
       "parentUuid": "ab1c4cb4_b225fe44",
+      "revId": "15ab47c19cdc7217ff736a3304ddc93ea7c4934a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb4a6b6b_51a2774d",
+        "filename": "p2p/g3doc/ice.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-04-15T07:32:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0aa1ba77_9cfd83ef",
       "revId": "15ab47c19cdc7217ff736a3304ddc93ea7c4934a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
