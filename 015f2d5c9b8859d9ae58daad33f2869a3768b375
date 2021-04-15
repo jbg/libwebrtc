@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7d606a8_9bb7ccaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-15T06:48:25Z",
+      "side": 1,
+      "message": "Seems to be ready to go (Chrome now compiles). The internal_tests failure is unrelated.\n",
+      "revId": "015f2d5c9b8859d9ae58daad33f2869a3768b375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
