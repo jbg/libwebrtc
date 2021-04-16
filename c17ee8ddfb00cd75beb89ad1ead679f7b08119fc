@@ -82,6 +82,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0779707_575f904a",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-04-16T00:04:14Z",
+      "side": 1,
+      "message": "I think it will be better to remove the edits to wgc_capture_session.cc. I remembered that the put_IsCursorCaptureEnabled API is only available on later versions of Win10 from the rest of the APIs we need (v17134 vs v19041) which will reduce the population that we can enable this capturer for. Instead I put up another CL that resolves the cursor capture issue.\n\nI still think we should land this CL since consumers may use the top_left property for other reasons.",
+      "parentUuid": "72ab0584_e6b5616b",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 29
+      },
+      "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4a4e9d4_d94676da",
@@ -164,6 +188,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6319f128_2ae0279b",
+        "filename": "modules/desktop_capture/win/wgc_capture_source.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-04-16T00:04:14Z",
+      "side": 1,
+      "message": "Turns out we can\u0027t cache screen_rect_.",
+      "parentUuid": "e5abc6ef_83dc2150",
+      "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97604109_c494d25b",
@@ -195,6 +237,24 @@
       "side": 1,
       "message": "Good question, maybe if the user changes their display settings (resolution, primary monitor, monitor placement, etc) while capturing we may end up with the cursor being offset. I will test this out and see if it\u0027s an issue.",
       "parentUuid": "97604109_c494d25b",
+      "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f5a8324_f5fee971",
+        "filename": "modules/desktop_capture/win/wgc_capture_source.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2021-04-16T00:04:14Z",
+      "side": 1,
+      "message": "So yes, if the user has multiple monitors side by side, shares one, and then changes the resolution of the other, then screen_rect_ will no longer accurately describe the shared monitor. This means we can\u0027t cache screen_rect_. The latest patch set addresss this.",
+      "parentUuid": "a90e7ddc_37086ee3",
       "revId": "c17ee8ddfb00cd75beb89ad1ead679f7b08119fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
