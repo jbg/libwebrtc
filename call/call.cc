@@ -1239,6 +1239,7 @@ void Call::UpdateAggregateNetworkState() {
 }
 
 void Call::OnSentPacket(const rtc::SentPacket& sent_packet) {
+  RTC_DCHECK_RUN_ON(network_thread_);
   video_send_delay_stats_->OnSentPacket(sent_packet.packet_id,
                                         clock_->TimeInMilliseconds());
   transport_send_ptr_->OnSentPacket(sent_packet);
