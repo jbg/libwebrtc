@@ -2297,6 +2297,12 @@ void WebRtcVoiceMediaChannel::OnPacketReceived(rtc::CopyOnWriteBuffer packet,
   }));
 }
 
+void WebRtcVoiceMediaChannel::OnPacketSent(const rtc::SentPacket& sent_packet) {
+  RTC_DCHECK_RUN_ON(&network_thread_checker_);
+  // TODO(tommi): call transport_send_ptr_->OnSentPacket() directly here.
+  call_->OnSentPacket(sent_packet);
+}
+
 void WebRtcVoiceMediaChannel::OnNetworkRouteChanged(
     const std::string& transport_name,
     const rtc::NetworkRoute& network_route) {

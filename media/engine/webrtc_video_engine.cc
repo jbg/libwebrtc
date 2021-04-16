@@ -1789,6 +1789,12 @@ void WebRtcVideoChannel::OnPacketReceived(rtc::CopyOnWriteBuffer packet,
       }));
 }
 
+void WebRtcVideoChannel::OnPacketSent(const rtc::SentPacket& sent_packet) {
+  RTC_DCHECK_RUN_ON(&network_thread_checker_);
+  // TODO(tommi): call transport_send_ptr_->OnSentPacket() directly here.
+  call_->OnSentPacket(sent_packet);
+}
+
 void WebRtcVideoChannel::BackfillBufferedPackets(
     rtc::ArrayView<const uint32_t> ssrcs) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
