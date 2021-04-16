@@ -181,6 +181,9 @@ class MediaChannel : public sigslot::has_slots<> {
   // Called on the network when an RTP packet is received.
   virtual void OnPacketReceived(rtc::CopyOnWriteBuffer packet,
                                 int64_t packet_time_us) = 0;
+  // Called on the network thread after a transport has finished sending a
+  // packet.
+  virtual void OnPacketSent(const rtc::SentPacket& sent_packet) = 0;
   // Called when the socket's ability to send has changed.
   virtual void OnReadyToSend(bool ready) = 0;
   // Called when the network route used for sending packets changed.
