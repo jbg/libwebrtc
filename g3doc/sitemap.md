@@ -27,6 +27,7 @@
     *   PeerConnection
     *   Desktop capture
     *   Stats
+        *   [Video](video/g3doc/stats.md)
 *   Testing
     *   Media Quality and performance
         *   [PeerConnection Framework](/test/pc/e2e/g3doc/index.md)
