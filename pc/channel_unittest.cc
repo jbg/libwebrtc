@@ -404,12 +404,16 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
   }
 
   void SendRtp1() {
-    media_channel1_->SendRtp(rtp_packet_.data(), rtp_packet_.size(),
-                             rtc::PacketOptions());
+    network_thread_->PostTask(RTC_FROM_HERE, [this]() {
+      media_channel1_->SendRtp(rtp_packet_.data(), rtp_packet_.size(),
+                               rtc::PacketOptions());
+    });
   }
   void SendRtp2() {
-    media_channel2_->SendRtp(rtp_packet_.data(), rtp_packet_.size(),
-                             rtc::PacketOptions());
+    network_thread_->PostTask(RTC_FROM_HERE, [this]() {
+      media_channel2_->SendRtp(rtp_packet_.data(), rtp_packet_.size(),
+                               rtc::PacketOptions());
+    });
   }
   // Methods to send custom data.
   void SendCustomRtp1(uint32_t ssrc, int sequence_number, int pl_type = -1) {
