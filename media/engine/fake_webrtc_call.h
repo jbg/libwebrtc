@@ -364,6 +364,9 @@ class FakeCall final : public webrtc::Call, public webrtc::PacketReceiver {
     return trials_;
   }
 
+  webrtc::TaskQueueBase* network_thread() const override;
+  webrtc::TaskQueueBase* worker_thread() const override;
+
   void SignalChannelNetworkState(webrtc::MediaType media,
                                  webrtc::NetworkState state) override;
   void OnAudioTransportOverheadChanged(

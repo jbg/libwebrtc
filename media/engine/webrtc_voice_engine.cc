@@ -2571,6 +2571,52 @@ void WebRtcVoiceMediaChannel::SetDepacketizerToDecoderFrameTransformer(
       std::move(frame_transformer));
 }
 
+bool WebRtcVoiceMediaChannel::SendRtp(const uint8_t* data,
+                                      size_t len,
+                                      const webrtc::PacketOptions& options) {
+  rtc::CopyOnWriteBuffer packet(data, len, kMaxRtpPacketLen);
+  rtc::PacketOptions rtc_options;
+  rtc_options.packet_id = options.packet_id;
+  if (DscpEnabled()) {
+    rtc_options.dscp = PreferredDscp();
+  }
+  rtc_options.info_signaled_after_sent.included_in_feedback =
+      options.included_in_feedback;
+  rtc_options.info_signaled_after_sent.included_in_allocation =
+      options.included_in_allocation;
+  return VoiceMediaChannel::SendPacket(&packet, rtc_options);
+}
+
+bool WebRtcVoiceMediaChannel::SendRtcp(const uint8_t* data, size_t len) {
+  // TODO(tommi): MediaChannel could have a pending safety task for the network
+  // thread that is initialized/uninitialized (alive/dead) inside of
+  // SetInterface.
+  auto send = [this, packet = rtc::CopyOnWriteBuffer(
+                         data, len, kMaxRtpPacketLen)]() mutable {
+    rtc::PacketOptions rtc_options;
+    if (DscpEnabled()) {
+      rtc_options.dscp = PreferredDscp();
+    }
+
+    VoiceMediaChannel::SendRtcp(&packet, rtc_options);
+  };
+
+  // TODO(bugs.webrtc.org/11993): ModuleRtpRtcpImpl2 and related classes (e.g.
+  // RTCPSender) aren't aware of the network thread and may trigger calls to
+  // this function from different threads. Update those classes to keep
+  // network traffic on the network thread.
+  if (call_->network_thread()->IsCurrent()) {
+    RTC_NOTREACHED() << "just checking when this hits";
+    send();
+  } else {
+    call_->network_thread()->PostTask(webrtc::ToQueuedTask(std::move(send)));
+  }
+
+  // TODO(tommi): Implementations are actually async, so SendRtcp and SendRtp
+  // should return void.
+  return true;
+}
+
 bool WebRtcVoiceMediaChannel::MaybeDeregisterUnsignaledRecvStream(
     uint32_t ssrc) {
   RTC_DCHECK_RUN_ON(worker_thread_);
