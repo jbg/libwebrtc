@@ -263,13 +263,20 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   }
 
   bool SendRtcp(const uint8_t* data, size_t len) override {
+    // TODO(bugs.webrtc.org/11993): ModuleRtpRtcpImpl2 and related classes (e.g.
+    // RTCPSender) aren't aware of the network thread and may trigger calls to
+    // this function from different threads. Update those classes to keep
+    // network traffic on the network thread.
     rtc::CopyOnWriteBuffer packet(data, len, kMaxRtpPacketLen);
     rtc::PacketOptions rtc_options;
     if (DscpEnabled()) {
       rtc_options.dscp = PreferredDscp();
     }
 
-    return VoiceMediaChannel::SendRtcp(&packet, rtc_options);
+    VoiceMediaChannel::SendRtcp(&packet, rtc_options);
+
+    // TODO(tommi): SendRtcp and SendRtp should return void.
+    return true;
   }
 
  private:
