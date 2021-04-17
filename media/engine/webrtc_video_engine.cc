@@ -1076,6 +1076,8 @@ webrtc::RtpParameters WebRtcVideoChannel::GetRtpSendParameters(
 webrtc::RTCError WebRtcVideoChannel::SetRtpSendParameters(
     uint32_t ssrc,
     const webrtc::RtpParameters& parameters) {
+  // TODO(tommi): SetRtpSendParameters, SendRtp and SendRtcp in
+  // WebRtcVoiceMediaChannel and WebRtcVideoChannel are basically copy/pasted.
   RTC_DCHECK_RUN_ON(&thread_checker_);
   TRACE_EVENT0("webrtc", "WebRtcVideoChannel::SetRtpSendParameters");
   auto it = send_streams_.find(ssrc);
@@ -1115,7 +1117,13 @@ webrtc::RTCError WebRtcVideoChannel::SetRtpSendParameters(
         new_dscp = rtc::DSCP_AF41;
         break;
     }
-    SetPreferredDscp(new_dscp);
+    if (call_->network_thread()->IsCurrent()) {
+      SetPreferredDscp(new_dscp);
+    } else {
+      call_->network_thread()->PostTask(webrtc::ToQueuedTask(
+          network_safety(),
+          [this, new_dscp]() { SetPreferredDscp(new_dscp); }));
+    }
   }
 
   return it->second->SetRtpParameters(parameters);
@@ -1870,7 +1878,7 @@ void WebRtcVideoChannel::OnNetworkRouteChanged(
 }
 
 void WebRtcVideoChannel::SetInterface(NetworkInterface* iface) {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK_RUN_ON(&network_thread_checker_);
   MediaChannel::SetInterface(iface);
   // Set the RTP recv/send buffer to a bigger size.
 
@@ -2019,27 +2027,68 @@ std::vector<webrtc::RtpSource> WebRtcVideoChannel::GetSources(
 bool WebRtcVideoChannel::SendRtp(const uint8_t* data,
                                  size_t len,
                                  const webrtc::PacketOptions& options) {
-  rtc::CopyOnWriteBuffer packet(data, len, kMaxRtpPacketLen);
-  rtc::PacketOptions rtc_options;
-  rtc_options.packet_id = options.packet_id;
-  if (DscpEnabled()) {
-    rtc_options.dscp = PreferredDscp();
+  // TODO(tommi): WebRtcVoiceMediaChannel::SendRtp and
+  // WebRtcVideoChannel::SendRtp are basically the same implementation.
+  auto send =
+      [this, packet_id = options.packet_id,
+       included_in_feedback = options.included_in_feedback,
+       included_in_allocation = options.included_in_allocation,
+       packet = rtc::CopyOnWriteBuffer(data, len, kMaxRtpPacketLen)]() mutable {
+        rtc::PacketOptions rtc_options;
+        rtc_options.packet_id = packet_id;
+        if (DscpEnabled()) {
+          rtc_options.dscp = PreferredDscp();
+        }
+        rtc_options.info_signaled_after_sent.included_in_feedback =
+            included_in_feedback;
+        rtc_options.info_signaled_after_sent.included_in_allocation =
+            included_in_allocation;
+        MediaChannel::SendPacket(&packet, rtc_options);
+      };
+
+  // TODO(bugs.webrtc.org/11993): ModuleRtpRtcpImpl2 and related classes (e.g.
+  // RTCPSender) aren't aware of the network thread and may trigger calls to
+  // this function from different threads. Update those classes to keep
+  // network traffic on the network thread.
+  if (call_->network_thread()->IsCurrent()) {
+    send();
+  } else {
+    call_->network_thread()->PostTask(
+        webrtc::ToQueuedTask(network_safety(), std::move(send)));
   }
-  rtc_options.info_signaled_after_sent.included_in_feedback =
-      options.included_in_feedback;
-  rtc_options.info_signaled_after_sent.included_in_allocation =
-      options.included_in_allocation;
-  return MediaChannel::SendPacket(&packet, rtc_options);
+
+  // TODO(tommi): Implementations are actually async, so SendRtcp and SendRtp
+  // should return void.
+  return true;
 }
 
 bool WebRtcVideoChannel::SendRtcp(const uint8_t* data, size_t len) {
-  rtc::CopyOnWriteBuffer packet(data, len, kMaxRtpPacketLen);
-  rtc::PacketOptions rtc_options;
-  if (DscpEnabled()) {
-    rtc_options.dscp = PreferredDscp();
+  // TODO(tommi): This is exactly the same implementation as
+  // WebRtcVoiceMediaChannel::SendRtcp except for how the base class is called.
+  auto send = [this, packet = rtc::CopyOnWriteBuffer(
+                         data, len, kMaxRtpPacketLen)]() mutable {
+    rtc::PacketOptions rtc_options;
+    if (DscpEnabled()) {
+      rtc_options.dscp = PreferredDscp();
+    }
+
+    MediaChannel::SendRtcp(&packet, rtc_options);
+  };
+
+  // TODO(bugs.webrtc.org/11993): ModuleRtpRtcpImpl2 and related classes (e.g.
+  // RTCPSender) aren't aware of the network thread and may trigger calls to
+  // this function from different threads. Update those classes to keep
+  // network traffic on the network thread.
+  if (call_->network_thread()->IsCurrent()) {
+    send();
+  } else {
+    call_->network_thread()->PostTask(
+        webrtc::ToQueuedTask(network_safety(), std::move(send)));
   }
 
-  return MediaChannel::SendRtcp(&packet, rtc_options);
+  // TODO(tommi): Implementations are actually async, so SendRtcp and SendRtp
+  // should return void.
+  return true;
 }
 
 WebRtcVideoChannel::WebRtcVideoSendStream::VideoSendStreamParameters::
