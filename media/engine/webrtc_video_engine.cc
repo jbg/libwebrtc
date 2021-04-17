@@ -1115,7 +1115,9 @@ webrtc::RTCError WebRtcVideoChannel::SetRtpSendParameters(
         new_dscp = rtc::DSCP_AF41;
         break;
     }
-    SetPreferredDscp(new_dscp);
+    // TODO(tommi): safety flag.
+    call_->network_thread()->PostTask(webrtc::ToQueuedTask(
+        [this, new_dscp]() { SetPreferredDscp(new_dscp); }));
   }
 
   return it->second->SetRtpParameters(parameters);
@@ -1870,7 +1872,7 @@ void WebRtcVideoChannel::OnNetworkRouteChanged(
 }
 
 void WebRtcVideoChannel::SetInterface(NetworkInterface* iface) {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK_RUN_ON(&network_thread_checker_);
   MediaChannel::SetInterface(iface);
   // Set the RTP recv/send buffer to a bigger size.
 
@@ -2033,13 +2035,32 @@ bool WebRtcVideoChannel::SendRtp(const uint8_t* data,
 }
 
 bool WebRtcVideoChannel::SendRtcp(const uint8_t* data, size_t len) {
-  rtc::CopyOnWriteBuffer packet(data, len, kMaxRtpPacketLen);
-  rtc::PacketOptions rtc_options;
-  if (DscpEnabled()) {
-    rtc_options.dscp = PreferredDscp();
+  // TODO(tommi): This is exactly the same implementation as
+  // WebRtcVoiceMediaChannel::SendRtcp except for how the base class is called.
+  auto send = [this, packet = rtc::CopyOnWriteBuffer(
+                         data, len, kMaxRtpPacketLen)]() mutable {
+    rtc::PacketOptions rtc_options;
+    if (DscpEnabled()) {
+      rtc_options.dscp = PreferredDscp();
+    }
+
+    MediaChannel::SendRtcp(&packet, rtc_options);
+  };
+
+  // TODO(bugs.webrtc.org/11993): ModuleRtpRtcpImpl2 and related classes (e.g.
+  // RTCPSender) aren't aware of the network thread and may trigger calls to
+  // this function from different threads. Update those classes to keep
+  // network traffic on the network thread.
+  if (call_->network_thread()->IsCurrent()) {
+    RTC_NOTREACHED() << "just checking when this hits";
+    send();
+  } else {
+    call_->network_thread()->PostTask(webrtc::ToQueuedTask(std::move(send)));
   }
 
-  return MediaChannel::SendRtcp(&packet, rtc_options);
+  // TODO(tommi): Implementations are actually async, so SendRtcp and SendRtp
+  // should return void.
+  return true;
 }
 
 WebRtcVideoChannel::WebRtcVideoSendStream::VideoSendStreamParameters::

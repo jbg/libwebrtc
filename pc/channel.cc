@@ -210,22 +210,22 @@ void BaseChannel::DisconnectFromRtpTransport() {
 void BaseChannel::Init_w(webrtc::RtpTransportInternal* rtp_transport) {
   RTC_DCHECK_RUN_ON(worker_thread());
 
-  network_thread_->Invoke<void>(
-      RTC_FROM_HERE, [this, rtp_transport] { SetRtpTransport(rtp_transport); });
-
-  // Both RTP and RTCP channels should be set, we can call SetInterface on
-  // the media channel and it can set network options.
-  media_channel_->SetInterface(this);
+  network_thread_->Invoke<void>(RTC_FROM_HERE, [this, rtp_transport] {
+    SetRtpTransport(rtp_transport);
+    // Both RTP and RTCP channels should be set, we can call SetInterface on
+    // the media channel and it can set network options.
+    media_channel_->SetInterface(this);
+  });
 }
 
 void BaseChannel::Deinit() {
   RTC_DCHECK_RUN_ON(worker_thread());
-  media_channel_->SetInterface(/*iface=*/nullptr);
   // Packets arrive on the network thread, processing packets calls virtual
   // functions, so need to stop this process in Deinit that is called in
   // derived classes destructor.
   network_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
     RTC_DCHECK_RUN_ON(network_thread());
+    media_channel_->SetInterface(/*iface=*/nullptr);
     FlushRtcpMessages_n();
 
     if (rtp_transport_) {
@@ -339,6 +339,7 @@ bool BaseChannel::SendRtcp(rtc::CopyOnWriteBuffer* packet,
 int BaseChannel::SetOption(SocketType type,
                            rtc::Socket::Option opt,
                            int value) {
+  // TODO(tommi): Remove hop, expect network thread.
   return network_thread_->Invoke<int>(RTC_FROM_HERE, [this, type, opt, value] {
     RTC_DCHECK_RUN_ON(network_thread());
     return SetOption_n(type, opt, value);
@@ -409,6 +410,8 @@ bool BaseChannel::SendPacket(bool rtcp,
   // SRTP and the inner workings of the transport channels.
   // The only downside is that we can't return a proper failure code if
   // needed. Since UDP is unreliable anyway, this should be a non-issue.
+
+  // TODO(tommi): Remove Post, expect network thread.
   if (!network_thread_->IsCurrent()) {
     // Avoid a copy by transferring the ownership of the packet data.
     int message_id = rtcp ? MSG_SEND_RTCP_PACKET : MSG_SEND_RTP_PACKET;
