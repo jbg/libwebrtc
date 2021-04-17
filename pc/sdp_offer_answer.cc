@@ -4545,6 +4545,7 @@ cricket::VideoChannel* SdpOfferAnswerHandler::CreateVideoChannel(
     return nullptr;
 
   // NOTE: This involves a non-ideal hop (Invoke) over to the network thread.
+  // TODO(tommi): Shift the whole thing to the network thread?
   RtpTransportInternal* rtp_transport = pc_->GetRtpTransport(mid);
 
   // TODO(bugs.webrtc.org/11992): CreateVideoChannel internally switches to the
@@ -4558,8 +4559,18 @@ cricket::VideoChannel* SdpOfferAnswerHandler::CreateVideoChannel(
   if (!video_channel) {
     return nullptr;
   }
-  video_channel->SignalSentPacket().connect(pc_,
-                                            &PeerConnection::OnSentPacket_w);
+
+  // TODO(tommi):
+  // * Remove invoke, use async posttask.
+  // * Can this callback be set as part of creating the channel?
+  // * How many 'SignalSentPacket' sinks are needed? OK if there's just one?
+  pc_->network_thread()->Invoke<void>(
+      RTC_FROM_HERE, [this, rtp_transport, video_channel] {
+        RTC_DCHECK_RUN_ON(pc_->network_thread());
+        video_channel->SignalSentPacket().connect(
+            pc_, &PeerConnection::OnSentPacket_n);
+      });
+
   return video_channel;
 }
 

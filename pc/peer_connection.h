@@ -430,7 +430,7 @@ class PeerConnection : public PeerConnectionInternal,
   // this session.
   bool SrtpRequired() const;
 
-  void OnSentPacket_w(const rtc::SentPacket& sent_packet);
+  void OnSentPacket_n(const rtc::SentPacket& sent_packet);
 
   bool SetupDataChannelTransport_n(const std::string& mid)
       RTC_RUN_ON(network_thread());

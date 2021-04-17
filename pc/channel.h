@@ -323,7 +323,7 @@ class BaseChannel : public ChannelInterface,
   sigslot::signal1<ChannelInterface*> SignalFirstPacketReceived_
       RTC_GUARDED_BY(signaling_thread_);
   sigslot::signal1<const rtc::SentPacket&> SignalSentPacket_
-      RTC_GUARDED_BY(worker_thread_);
+      RTC_GUARDED_BY(network_thread_);
 
   const std::string content_name_;
 
