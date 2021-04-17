@@ -1416,6 +1416,10 @@ class WebRtcVideoChannelEncodedFrameCallbackTest : public ::testing::Test {
     channel_->SetRecvParameters(parameters);
   }
 
+  ~WebRtcVideoChannelEncodedFrameCallbackTest() {
+    channel_->SetInterface(nullptr);
+  }
+
   void DeliverKeyFrame(uint32_t ssrc) {
     webrtc::RtpPacket packet;
     packet.SetMarker(true);
@@ -1543,7 +1547,7 @@ class WebRtcVideoChannelBaseTest : public ::testing::Test {
                 webrtc::CreateBuiltinVideoDecoderFactory(),
                 field_trials_) {}
 
-  virtual void SetUp() {
+  void SetUp() override {
     // One testcase calls SetUp in a loop, only create call_ once.
     if (!call_) {
       webrtc::Call::Config call_config(&event_log_);
@@ -1585,6 +1589,7 @@ class WebRtcVideoChannelBaseTest : public ::testing::Test {
     // Make the second renderer available for use by a new stream.
     EXPECT_TRUE(channel_->SetSink(kSsrc + 2, &renderer2_));
   }
+
   // Setup an additional stream just to send video. Defer add recv stream.
   // This is required if you want to test unsignalled recv of video rtp packets.
   void SetUpSecondStreamWithNoRecv() {
@@ -1603,7 +1608,17 @@ class WebRtcVideoChannelBaseTest : public ::testing::Test {
     EXPECT_TRUE(
         channel_->SetVideoSend(kSsrc + 2, nullptr, frame_forwarder_2_.get()));
   }
-  virtual void TearDown() { channel_.reset(); }
+
+  void TearDown() override {
+    channel_->SetInterface(nullptr);
+    channel_.reset();
+  }
+
+  void ResetTest() {
+    TearDown();
+    SetUp();
+  }
+
   bool SetDefaultCodec() { return SetOneCodec(DefaultCodec()); }
 
   bool SetOneCodec(const cricket::VideoCodec& codec) {
@@ -1787,7 +1802,7 @@ TEST_F(WebRtcVideoChannelBaseTest, OverridesRecvBufferSize) {
   const int kCustomRecvBufferSize = 123456;
   webrtc::test::ScopedFieldTrials field_trial(
       "WebRTC-IncreasedReceivebuffers/123456/");
-  SetUp();
+  ResetTest();
 
   EXPECT_TRUE(SetOneCodec(DefaultCodec()));
   EXPECT_TRUE(SetSend(true));
@@ -1803,7 +1818,7 @@ TEST_F(WebRtcVideoChannelBaseTest, OverridesRecvBufferSizeWithSuffix) {
   const int kCustomRecvBufferSize = 123456;
   webrtc::test::ScopedFieldTrials field_trial(
       "WebRTC-IncreasedReceivebuffers/123456_Dogfood/");
-  SetUp();
+  ResetTest();
 
   EXPECT_TRUE(SetOneCodec(DefaultCodec()));
   EXPECT_TRUE(SetSend(true));
@@ -1823,7 +1838,7 @@ TEST_F(WebRtcVideoChannelBaseTest, InvalidRecvBufferSize) {
     field_trial_string += group;
     field_trial_string += "/";
     webrtc::test::ScopedFieldTrials field_trial(field_trial_string);
-    SetUp();
+    ResetTest();
 
     EXPECT_TRUE(SetOneCodec(DefaultCodec()));
     EXPECT_TRUE(SetSend(true));
@@ -1834,8 +1849,6 @@ TEST_F(WebRtcVideoChannelBaseTest, InvalidRecvBufferSize) {
 
 // Test that stats work properly for a 1-1 call.
 TEST_F(WebRtcVideoChannelBaseTest, GetStats) {
-  SetUp();
-
   const int kDurationSec = 3;
   const int kFps = 10;
   SendReceiveManyAndGetStats(DefaultCodec(), kDurationSec, kFps);
@@ -1892,8 +1905,6 @@ TEST_F(WebRtcVideoChannelBaseTest, GetStats) {
 
 // Test that stats work properly for a conf call with multiple recv streams.
 TEST_F(WebRtcVideoChannelBaseTest, GetStatsMultipleRecvStreams) {
-  SetUp();
-
   cricket::FakeVideoRenderer renderer1, renderer2;
   EXPECT_TRUE(SetOneCodec(DefaultCodec()));
   cricket::VideoSendParameters parameters;
@@ -2510,6 +2521,16 @@ class WebRtcVideoChannelTest : public WebRtcVideoEngineTest {
     send_parameters_.codecs = engine_.send_codecs();
     recv_parameters_.codecs = engine_.recv_codecs();
     ASSERT_TRUE(channel_->SetSendParameters(send_parameters_));
+  }
+
+  void TearDown() override {
+    channel_->SetInterface(nullptr);
+    channel_.reset();
+  }
+
+  void ResetTest() {
+    TearDown();
+    SetUp();
   }
 
   cricket::VideoCodec GetEngineCodec(const std::string& name) {
@@ -3164,7 +3185,7 @@ TEST_F(WebRtcVideoChannelTest, LossNotificationIsEnabledByFieldTrial) {
   RTC_DCHECK(!override_field_trials_);
   override_field_trials_ = std::make_unique<webrtc::test::ScopedFieldTrials>(
       "WebRTC-RtcpLossNotification/Enabled/");
-  SetUp();
+  ResetTest();
   TestLossNotificationState(true);
 }
 
@@ -3172,7 +3193,7 @@ TEST_F(WebRtcVideoChannelTest, LossNotificationCanBeEnabledAndDisabled) {
   RTC_DCHECK(!override_field_trials_);
   override_field_trials_ = std::make_unique<webrtc::test::ScopedFieldTrials>(
       "WebRTC-RtcpLossNotification/Enabled/");
-  SetUp();
+  ResetTest();
 
   AssignDefaultCodec();
   VerifyCodecHasDefaultFeedbackParams(default_codec_, true);
@@ -5247,6 +5268,7 @@ TEST_F(WebRtcVideoChannelTest, TestSetDscpOptions) {
   channel->SetInterface(network_interface.get());
   // Default value when DSCP is disabled should be DSCP_DEFAULT.
   EXPECT_EQ(rtc::DSCP_DEFAULT, network_interface->dscp());
+  channel->SetInterface(nullptr);
 
   // Default value when DSCP is enabled is also DSCP_DEFAULT, until it is set
   // through rtp parameters.
@@ -5276,6 +5298,7 @@ TEST_F(WebRtcVideoChannelTest, TestSetDscpOptions) {
   EXPECT_TRUE(static_cast<webrtc::Transport*>(channel.get())
                   ->SendRtcp(kData, sizeof(kData)));
   EXPECT_EQ(rtc::DSCP_CS1, network_interface->options().dscp);
+  channel->SetInterface(nullptr);
 
   // Verify that setting the option to false resets the
   // DiffServCodePoint.
@@ -5286,6 +5309,7 @@ TEST_F(WebRtcVideoChannelTest, TestSetDscpOptions) {
           video_bitrate_allocator_factory_.get())));
   channel->SetInterface(network_interface.get());
   EXPECT_EQ(rtc::DSCP_DEFAULT, network_interface->dscp());
+  channel->SetInterface(nullptr);
 }
 
 // This test verifies that the RTCP reduced size mode is properly applied to
