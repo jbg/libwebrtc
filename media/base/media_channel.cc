@@ -11,20 +11,35 @@
 #include "media/base/media_channel.h"
 
 namespace cricket {
+using webrtc::FrameDecryptorInterface;
+using webrtc::FrameEncryptorInterface;
+using webrtc::FrameTransformerInterface;
+using webrtc::PendingTaskSafetyFlag;
+using webrtc::TaskQueueBase;
+using webrtc::VideoTrackInterface;
 
 VideoOptions::VideoOptions()
-    : content_hint(webrtc::VideoTrackInterface::ContentHint::kNone) {}
+    : content_hint(VideoTrackInterface::ContentHint::kNone) {}
 VideoOptions::~VideoOptions() = default;
 
-MediaChannel::MediaChannel(const MediaConfig& config)
-    : enable_dscp_(config.enable_dscp) {}
+MediaChannel::MediaChannel(const MediaConfig& config,
+                           TaskQueueBase* network_thread)
+    : enable_dscp_(config.enable_dscp),
+      network_safety_(PendingTaskSafetyFlag::CreateDetached(false)),
+      network_thread_(network_thread) {}
 
-MediaChannel::MediaChannel() : enable_dscp_(false) {}
+MediaChannel::MediaChannel(TaskQueueBase* network_thread)
+    : enable_dscp_(false),
+      network_safety_(PendingTaskSafetyFlag::CreateDetached(false)),
+      network_thread_(network_thread) {}
 
-MediaChannel::~MediaChannel() {}
+MediaChannel::~MediaChannel() {
+  RTC_DCHECK(!network_interface_);
+}
 
 void MediaChannel::SetInterface(NetworkInterface* iface) {
-  webrtc::MutexLock lock(&network_interface_mutex_);
+  RTC_DCHECK_RUN_ON(network_thread_);
+  iface ? network_safety_->SetAlive() : network_safety_->SetNotAlive();
   network_interface_ = iface;
   UpdateDscp();
 }
@@ -35,13 +50,13 @@ int MediaChannel::GetRtpSendTimeExtnId() const {
 
 void MediaChannel::SetFrameEncryptor(
     uint32_t ssrc,
-    rtc::scoped_refptr<webrtc::FrameEncryptorInterface> frame_encryptor) {
+    rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor) {
   // Placeholder should be pure virtual once internal supports it.
 }
 
 void MediaChannel::SetFrameDecryptor(
     uint32_t ssrc,
-    rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor) {
+    rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor) {
   // Placeholder should be pure virtual once internal supports it.
 }
 
@@ -59,9 +74,8 @@ bool MediaChannel::SendRtcp(rtc::CopyOnWriteBuffer* packet,
 
 int MediaChannel::SetOption(NetworkInterface::SocketType type,
                             rtc::Socket::Option opt,
-                            int option)
-    RTC_LOCKS_EXCLUDED(network_interface_mutex_) {
-  webrtc::MutexLock lock(&network_interface_mutex_);
+                            int option) {
+  RTC_DCHECK_RUN_ON(network_thread_);
   return SetOptionLocked(type, opt, option);
 }
 
@@ -79,11 +93,11 @@ bool MediaChannel::ExtmapAllowMixed() const {
 
 void MediaChannel::SetEncoderToPacketizerFrameTransformer(
     uint32_t ssrc,
-    rtc::scoped_refptr<webrtc::FrameTransformerInterface> frame_transformer) {}
+    rtc::scoped_refptr<FrameTransformerInterface> frame_transformer) {}
 
 void MediaChannel::SetDepacketizerToDecoderFrameTransformer(
     uint32_t ssrc,
-    rtc::scoped_refptr<webrtc::FrameTransformerInterface> frame_transformer) {}
+    rtc::scoped_refptr<FrameTransformerInterface> frame_transformer) {}
 
 int MediaChannel::SetOptionLocked(NetworkInterface::SocketType type,
                                   rtc::Socket::Option opt,
@@ -100,17 +114,21 @@ bool MediaChannel::DscpEnabled() const {
 // This is the DSCP value used for both RTP and RTCP channels if DSCP is
 // enabled. It can be changed at any time via |SetPreferredDscp|.
 rtc::DiffServCodePoint MediaChannel::PreferredDscp() const {
-  webrtc::MutexLock lock(&network_interface_mutex_);
+  RTC_DCHECK_RUN_ON(network_thread_);
   return preferred_dscp_;
 }
 
 int MediaChannel::SetPreferredDscp(rtc::DiffServCodePoint preferred_dscp) {
-  webrtc::MutexLock lock(&network_interface_mutex_);
+  RTC_DCHECK_RUN_ON(network_thread_);
   if (preferred_dscp == preferred_dscp_) {
     return 0;
   }
   preferred_dscp_ = preferred_dscp;
   return UpdateDscp();
+}
+
+rtc::scoped_refptr<PendingTaskSafetyFlag> MediaChannel::network_safety() {
+  return network_safety_;
 }
 
 int MediaChannel::UpdateDscp() {
@@ -128,7 +146,7 @@ int MediaChannel::UpdateDscp() {
 bool MediaChannel::DoSendPacket(rtc::CopyOnWriteBuffer* packet,
                                 bool rtcp,
                                 const rtc::PacketOptions& options) {
-  webrtc::MutexLock lock(&network_interface_mutex_);
+  RTC_DCHECK_RUN_ON(network_thread_);
   if (!network_interface_)
     return false;
 
