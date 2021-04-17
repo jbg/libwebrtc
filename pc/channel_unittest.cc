@@ -35,6 +35,8 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/rtc_certificate.h"
 #include "rtc_base/ssl_identity.h"
+#include "rtc_base/task_utils/pending_task_safety_flag.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 
@@ -122,6 +124,11 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
     }
   }
 
+  ~ChannelTest() {
+    network_thread_->Invoke<void>(
+        RTC_FROM_HERE, [this]() { network_thread_safety_->SetNotAlive(); });
+  }
+
   void CreateChannels(int flags1, int flags2) {
     CreateChannels(std::make_unique<typename T::MediaChannel>(
                        nullptr, typename T::Options()),
@@ -133,6 +140,9 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
                       std::unique_ptr<typename T::MediaChannel> ch2,
                       int flags1,
                       int flags2) {
+    RTC_DCHECK(!channel1_);
+    RTC_DCHECK(!channel2_);
+
     // Network thread is started in CreateChannels, to allow the test to
     // configure a fake clock before any threads are spawned and attempt to
     // access the time.
@@ -403,22 +413,32 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
     return true;
   }
 
+  void SendRtp(typename T::MediaChannel* media_channel, rtc::Buffer data) {
+    network_thread_->PostTask(webrtc::ToQueuedTask(
+        network_thread_safety_, [media_channel, data = std::move(data)]() {
+          media_channel->SendRtp(data.data(), data.size(),
+                                 rtc::PacketOptions());
+        }));
+  }
+
   void SendRtp1() {
-    media_channel1_->SendRtp(rtp_packet_.data(), rtp_packet_.size(),
-                             rtc::PacketOptions());
+    SendRtp1(rtc::Buffer(rtp_packet_.data(), rtp_packet_.size()));
   }
+
+  void SendRtp1(rtc::Buffer data) { SendRtp(media_channel1_, std::move(data)); }
+
   void SendRtp2() {
-    media_channel2_->SendRtp(rtp_packet_.data(), rtp_packet_.size(),
-                             rtc::PacketOptions());
+    SendRtp2(rtc::Buffer(rtp_packet_.data(), rtp_packet_.size()));
   }
+
+  void SendRtp2(rtc::Buffer data) { SendRtp(media_channel2_, std::move(data)); }
+
   // Methods to send custom data.
   void SendCustomRtp1(uint32_t ssrc, int sequence_number, int pl_type = -1) {
-    rtc::Buffer data = CreateRtpData(ssrc, sequence_number, pl_type);
-    media_channel1_->SendRtp(data.data(), data.size(), rtc::PacketOptions());
+    SendRtp1(CreateRtpData(ssrc, sequence_number, pl_type));
   }
   void SendCustomRtp2(uint32_t ssrc, int sequence_number, int pl_type = -1) {
-    rtc::Buffer data = CreateRtpData(ssrc, sequence_number, pl_type);
-    media_channel2_->SendRtp(data.data(), data.size(), rtc::PacketOptions());
+    SendRtp2(CreateRtpData(ssrc, sequence_number, pl_type));
   }
 
   bool CheckRtp1() {
@@ -884,28 +904,6 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
     }
     EXPECT_TRUE(media_channel2_->sending());
     EXPECT_EQ(1U, media_channel2_->codecs().size());
-  }
-
-  // Test that we don't crash if packets are sent during call teardown
-  // when RTCP mux is enabled. This is a regression test against a specific
-  // race condition that would only occur when a RTCP packet was sent during
-  // teardown of a channel on which RTCP mux was enabled.
-  void TestCallTeardownRtcpMux() {
-    class LastWordMediaChannel : public T::MediaChannel {
-     public:
-      LastWordMediaChannel() : T::MediaChannel(NULL, typename T::Options()) {}
-      ~LastWordMediaChannel() {
-        T::MediaChannel::SendRtp(kPcmuFrame, sizeof(kPcmuFrame),
-                                 rtc::PacketOptions());
-        T::MediaChannel::SendRtcp(kRtcpReport, sizeof(kRtcpReport));
-      }
-    };
-    CreateChannels(std::make_unique<LastWordMediaChannel>(),
-                   std::make_unique<LastWordMediaChannel>(), RTCP_MUX,
-                   RTCP_MUX);
-    EXPECT_TRUE(SendInitiate());
-    EXPECT_TRUE(SendAccept());
-    EXPECT_TRUE(Terminate());
   }
 
   // Send voice RTP data to the other side and ensure it gets there.
@@ -1381,9 +1379,25 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
     // Worker thread = current Thread process received messages.
     ProcessThreadQueue(rtc::Thread::Current());
   }
+
+  // TODO(tommi): Remove the raw pointers below that point to these variables.
+  typename T::MediaChannel* media_channel1() {
+    RTC_DCHECK(channel1_);
+    RTC_DCHECK(channel1_->media_channel());
+    return channel1_->media_channel();
+  }
+
+  typename T::MediaChannel* media_channel2() {
+    RTC_DCHECK(channel2_);
+    RTC_DCHECK(channel2_->media_channel());
+    return channel2_->media_channel();
+  }
+
   // TODO(pbos): Remove playout from all media channels and let renderers mute
   // themselves.
   const bool verify_playout_;
+  rtc::scoped_refptr<webrtc::PendingTaskSafetyFlag> network_thread_safety_ =
+      webrtc::PendingTaskSafetyFlag::CreateDetached();
   std::unique_ptr<rtc::Thread> network_thread_keeper_;
   rtc::Thread* network_thread_;
   std::unique_ptr<cricket::FakeDtlsTransport> fake_rtp_dtls_transport1_;
@@ -1622,10 +1636,6 @@ TEST_F(VoiceChannelSingleThreadTest, TestCallSetup) {
   Base::TestCallSetup();
 }
 
-TEST_F(VoiceChannelSingleThreadTest, TestCallTeardownRtcpMux) {
-  Base::TestCallTeardownRtcpMux();
-}
-
 TEST_F(VoiceChannelSingleThreadTest, SendRtpToRtp) {
   Base::SendRtpToRtp();
 }
@@ -1763,10 +1773,6 @@ TEST_F(VoiceChannelDoubleThreadTest, TestCallSetup) {
   Base::TestCallSetup();
 }
 
-TEST_F(VoiceChannelDoubleThreadTest, TestCallTeardownRtcpMux) {
-  Base::TestCallTeardownRtcpMux();
-}
-
 TEST_F(VoiceChannelDoubleThreadTest, SendRtpToRtp) {
   Base::SendRtpToRtp();
 }
@@ -1900,10 +1906,6 @@ TEST_F(VideoChannelSingleThreadTest, TestNetworkRouteChanges) {
 
 TEST_F(VideoChannelSingleThreadTest, TestCallSetup) {
   Base::TestCallSetup();
-}
-
-TEST_F(VideoChannelSingleThreadTest, TestCallTeardownRtcpMux) {
-  Base::TestCallTeardownRtcpMux();
 }
 
 TEST_F(VideoChannelSingleThreadTest, SendRtpToRtp) {
@@ -2189,10 +2191,6 @@ TEST_F(VideoChannelDoubleThreadTest, TestNetworkRouteChanges) {
 
 TEST_F(VideoChannelDoubleThreadTest, TestCallSetup) {
   Base::TestCallSetup();
-}
-
-TEST_F(VideoChannelDoubleThreadTest, TestCallTeardownRtcpMux) {
-  Base::TestCallTeardownRtcpMux();
 }
 
 TEST_F(VideoChannelDoubleThreadTest, SendRtpToRtp) {
