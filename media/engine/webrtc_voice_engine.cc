@@ -1395,7 +1395,7 @@ WebRtcVoiceMediaChannel::WebRtcVoiceMediaChannel(
     const AudioOptions& options,
     const webrtc::CryptoOptions& crypto_options,
     webrtc::Call* call)
-    : VoiceMediaChannel(config),
+    : VoiceMediaChannel(config, call->network_thread()),
       worker_thread_(rtc::Thread::Current()),
       engine_(engine),
       call_(call),
@@ -1523,6 +1523,8 @@ webrtc::RtpParameters WebRtcVoiceMediaChannel::GetRtpSendParameters(
 webrtc::RTCError WebRtcVoiceMediaChannel::SetRtpSendParameters(
     uint32_t ssrc,
     const webrtc::RtpParameters& parameters) {
+  // TODO(tommi): SetRtpSendParameters, SendRtp and SendRtcp in
+  // WebRtcVoiceMediaChannel and WebRtcVideoChannel are basically copy/pasted.
   RTC_DCHECK_RUN_ON(worker_thread_);
   auto it = send_streams_.find(ssrc);
   if (it == send_streams_.end()) {
@@ -2569,6 +2571,18 @@ void WebRtcVoiceMediaChannel::SetDepacketizerToDecoderFrameTransformer(
   }
   matching_stream->second->SetDepacketizerToDecoderFrameTransformer(
       std::move(frame_transformer));
+}
+
+bool WebRtcVoiceMediaChannel::SendRtp(const uint8_t* data,
+                                      size_t len,
+                                      const webrtc::PacketOptions& options) {
+  MediaChannel::SendRtp(data, len, options);
+  return true;
+}
+
+bool WebRtcVoiceMediaChannel::SendRtcp(const uint8_t* data, size_t len) {
+  MediaChannel::SendRtcp(data, len);
+  return true;
 }
 
 bool WebRtcVoiceMediaChannel::MaybeDeregisterUnsignaledRecvStream(
