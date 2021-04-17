@@ -1395,7 +1395,7 @@ WebRtcVoiceMediaChannel::WebRtcVoiceMediaChannel(
     const AudioOptions& options,
     const webrtc::CryptoOptions& crypto_options,
     webrtc::Call* call)
-    : VoiceMediaChannel(config),
+    : VoiceMediaChannel(config, call->network_thread()),
       worker_thread_(rtc::Thread::Current()),
       engine_(engine),
       call_(call),
@@ -1523,6 +1523,8 @@ webrtc::RtpParameters WebRtcVoiceMediaChannel::GetRtpSendParameters(
 webrtc::RTCError WebRtcVoiceMediaChannel::SetRtpSendParameters(
     uint32_t ssrc,
     const webrtc::RtpParameters& parameters) {
+  // TODO(tommi): SetRtpSendParameters, SendRtp and SendRtcp in
+  // WebRtcVoiceMediaChannel and WebRtcVideoChannel are basically copy/pasted.
   RTC_DCHECK_RUN_ON(worker_thread_);
   auto it = send_streams_.find(ssrc);
   if (it == send_streams_.end()) {
@@ -2569,6 +2571,43 @@ void WebRtcVoiceMediaChannel::SetDepacketizerToDecoderFrameTransformer(
   }
   matching_stream->second->SetDepacketizerToDecoderFrameTransformer(
       std::move(frame_transformer));
+}
+
+bool WebRtcVoiceMediaChannel::SendRtp(const uint8_t* data,
+                                      size_t len,
+                                      const webrtc::PacketOptions& options) {
+  MediaChannel::SendRtp(data, len, options);
+  return true;
+}
+
+bool WebRtcVoiceMediaChannel::SendRtcp(const uint8_t* data, size_t len) {
+  // TODO(tommi): MediaChannel could have a pending safety task for the network
+  // thread that is initialized/uninitialized (alive/dead) inside of
+  // SetInterface.
+  auto send = [this, packet = rtc::CopyOnWriteBuffer(
+                         data, len, kMaxRtpPacketLen)]() mutable {
+    rtc::PacketOptions rtc_options;
+    if (DscpEnabled()) {
+      rtc_options.dscp = PreferredDscp();
+    }
+
+    VoiceMediaChannel::SendRtcp(&packet, rtc_options);
+  };
+
+  // TODO(bugs.webrtc.org/11993): ModuleRtpRtcpImpl2 and related classes (e.g.
+  // RTCPSender) aren't aware of the network thread and may trigger calls to
+  // this function from different threads. Update those classes to keep
+  // network traffic on the network thread.
+  if (call_->network_thread()->IsCurrent()) {
+    send();
+  } else {
+    call_->network_thread()->PostTask(
+        webrtc::ToQueuedTask(network_safety(), std::move(send)));
+  }
+
+  // TODO(tommi): Implementations are actually async, so SendRtcp and SendRtp
+  // should return void.
+  return true;
 }
 
 bool WebRtcVoiceMediaChannel::MaybeDeregisterUnsignaledRecvStream(
