@@ -1870,7 +1870,7 @@ void WebRtcVideoChannel::OnNetworkRouteChanged(
 }
 
 void WebRtcVideoChannel::SetInterface(NetworkInterface* iface) {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK_RUN_ON(&network_thread_checker_);
   MediaChannel::SetInterface(iface);
   // Set the RTP recv/send buffer to a bigger size.
 
@@ -2039,7 +2039,8 @@ bool WebRtcVideoChannel::SendRtcp(const uint8_t* data, size_t len) {
     rtc_options.dscp = PreferredDscp();
   }
 
-  return MediaChannel::SendRtcp(&packet, rtc_options);
+  MediaChannel::SendRtcp(&packet, rtc_options);
+  return true;
 }
 
 WebRtcVideoChannel::WebRtcVideoSendStream::VideoSendStreamParameters::
