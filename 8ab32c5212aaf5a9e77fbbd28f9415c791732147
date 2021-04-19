@@ -16,6 +16,57 @@
       "message": "My fault, I haven\u0027t tried PW 0.3 code and I was sure I did. Now it should build and it works for me.",
       "revId": "8ab32c5212aaf5a9e77fbbd28f9415c791732147",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd7a9542_94cf22c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2021-04-19T15:42:16Z",
+      "side": 1,
+      "message": "I don\u0027t think I have CQ privileges in WebRTC.",
+      "revId": "8ab32c5212aaf5a9e77fbbd28f9415c791732147",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3166b6fd_e5465841",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2021-04-19T15:42:16Z",
+      "side": 1,
+      "message": "if (video_metadata_size \u0026\u0026 ...",
+      "revId": "8ab32c5212aaf5a9e77fbbd28f9415c791732147",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1560272_cb707544",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2021-04-19T15:42:16Z",
+      "side": 1,
+      "message": "Should this be two if statements, since either the video width or the height could be full or not?",
+      "revId": "8ab32c5212aaf5a9e77fbbd28f9415c791732147",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
