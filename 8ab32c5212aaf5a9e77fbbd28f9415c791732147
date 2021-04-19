@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90b3a7d4_528b4b92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-04-19T16:20:57Z",
+      "side": 1,
+      "message": "I simplified it more, now I took some minor changes from Firefox which I didn\u0027t pick up before.\n\nFF code: https://github.com/mozilla/gecko-dev/blob/master/third_party/libwebrtc/webrtc/modules/desktop_capture/linux/base_capturer_pipewire.cc#L392",
+      "revId": "8ab32c5212aaf5a9e77fbbd28f9415c791732147",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3166b6fd_e5465841",
@@ -52,6 +69,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ee0d151_4bd37676",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-04-19T16:20:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3166b6fd_e5465841",
+      "revId": "8ab32c5212aaf5a9e77fbbd28f9415c791732147",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1560272_cb707544",
@@ -65,6 +100,24 @@
       "writtenOn": "2021-04-19T15:42:16Z",
       "side": 1,
       "message": "Should this be two if statements, since either the video width or the height could be full or not?",
+      "revId": "8ab32c5212aaf5a9e77fbbd28f9415c791732147",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50e1ebe8_4fe332ff",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-04-19T16:20:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1560272_cb707544",
       "revId": "8ab32c5212aaf5a9e77fbbd28f9415c791732147",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
