@@ -774,35 +774,28 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
   // video stream size, so we need to adjust it.
   bool video_is_full_width = true;
   bool video_is_full_height = true;
+
 #if PW_CHECK_VERSION(0, 3, 0)
-  if (video_metadata && video_metadata->region.size.width != 0 &&
-      video_metadata->region.size.height != 0) {
-    if (video_metadata->region.size.width <
-        static_cast<uint32_t>(desktop_size_.width())) {
-      video_is_full_width = false;
-    } else if (video_metadata->region.size.height <
-               static_cast<uint32_t>(desktop_size_.height())) {
-      video_is_full_height = false;
-    }
-  }
+  const struct spa_rectangle* video_metadata_size =
+      video_metadata ? &video_metadata->region.size : nullptr;
 #else
-  if (video_metadata && video_metadata->width != 0 &&
-      video_metadata->height != 0) {
-    if (video_metadata->width < desktop_size_.width()) {
-    } else if (video_metadata->height < desktop_size_.height()) {
+  const struct spa_meta_video_crop* video_metadata_size = video_metadata;
+#endif
+
+  if (video_metadata && video_metadata_size->width != 0 &&
+      video_metadata_size->height != 0) {
+    if (static_cast<int>(video_metadata_size->width) < desktop_size_.width()) {
+      video_is_full_width = false;
+    } else if (static_cast<int>(video_metadata_size->height) <
+               desktop_size_.height()) {
       video_is_full_height = false;
     }
   }
-#endif
 
   DesktopSize video_size_prev = video_size_;
   if (!video_is_full_height || !video_is_full_width) {
-#if PW_CHECK_VERSION(0, 3, 0)
-    video_size_ = DesktopSize(video_metadata->region.size.width,
-                              video_metadata->region.size.height);
-#else
-    video_size_ = DesktopSize(video_metadata->width, video_metadata->height);
-#endif
+    video_size_ =
+        DesktopSize(video_metadata_size->width, video_metadata_size->height);
   } else {
     video_size_ = desktop_size_;
   }
