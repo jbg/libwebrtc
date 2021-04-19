@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "062e1d88_729b0572",
+        "filename": "rtc_base/platform_thread.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-19T08:53:24Z",
+      "side": 1,
+      "message": "nit: could do `thread_name.clear()` or std::move() it once it\u0027s not needed.",
+      "revId": "519775b3a62152e9e3d818bcfdf745e2a61e49a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd635b9f_6828c29c",
+        "filename": "rtc_base/platform_thread.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-19T08:53:24Z",
+      "side": 1,
+      "message": "RTC_DCHECK_RUN_ON(\u0026thread_checker_);\n(same below)",
+      "revId": "519775b3a62152e9e3d818bcfdf745e2a61e49a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

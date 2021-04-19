@@ -212,6 +212,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16bbaa29_ffa03191",
+        "filename": "rtc_base/platform_thread_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-19T08:53:24Z",
+      "side": 1,
+      "message": "would prefer to not use global variables. This is used within a single test, so a local variable should be enough.",
+      "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db91fa30_f1d3c3c5",
         "filename": "rtc_base/platform_thread_unittest.cc",
         "patchSetId": 13
@@ -241,6 +258,24 @@
       "side": 1,
       "message": "In the case of a faulty join implementation, I wanted to make it unlikely that the event is set immediately after Stop. Removing the Sleep increases that probability and makes such a problem potentially slip.\nCurious, what can be used instead of a sleep?\n\nDo you think 5s is too much? Changed to 1s.",
       "parentUuid": "db91fa30_f1d3c3c5",
+      "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "027dd41b_d1e184e0",
+        "filename": "rtc_base/platform_thread_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-04-19T08:53:24Z",
+      "side": 1,
+      "message": "To make the test more hermetic, I\u0027d prefer to not have lingering threads when the test exits. Instead of Sleep, would something like this work?\n\nEvent* thread_blocker \u003d new Event();\n...\n... {\n  thread_blocker-\u003eWait(kForever);\n  event.Set();\n  delete thread_blocker;\n}\n...\nASSERT_TRUE(event.Wait(/*give_up_after_ms\u003d*/0));\nthread_blocker-\u003eSet();\n\nIt also makes the test not rely on a global variable. Think of running the test with gtest_repeat\u003d10000. (or multiple parallel runs)",
+      "parentUuid": "83de674d_3609cb5a",
       "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
