@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "477673c0_acfb37b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-04-19T15:21:24Z",
+      "side": 1,
+      "message": "My fault, I haven\u0027t tried PW 0.3 code and I was sure I did. Now it should build and it works for me.",
+      "revId": "8ab32c5212aaf5a9e77fbbd28f9415c791732147",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
