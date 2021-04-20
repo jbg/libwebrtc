@@ -227,6 +227,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3ef96ab_7cd64740",
+        "filename": "rtc_base/platform_thread_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-04-20T15:55:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16bbaa29_ffa03191",
+      "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db91fa30_f1d3c3c5",
@@ -276,6 +294,24 @@
       "side": 1,
       "message": "To make the test more hermetic, I\u0027d prefer to not have lingering threads when the test exits. Instead of Sleep, would something like this work?\n\nEvent* thread_blocker \u003d new Event();\n...\n... {\n  thread_blocker-\u003eWait(kForever);\n  event.Set();\n  delete thread_blocker;\n}\n...\nASSERT_TRUE(event.Wait(/*give_up_after_ms\u003d*/0));\nthread_blocker-\u003eSet();\n\nIt also makes the test not rely on a global variable. Think of running the test with gtest_repeat\u003d10000. (or multiple parallel runs)",
       "parentUuid": "83de674d_3609cb5a",
+      "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c067c5a_9223a08b",
+        "filename": "rtc_base/platform_thread_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-04-20T15:55:04Z",
+      "side": 1,
+      "message": "The snippet will deadlock though...\nOK, skipped the Sleep and went for a lockstepped implementation instead to at least verify we run past Stop() and dtor.",
+      "parentUuid": "027dd41b_d1e184e0",
       "revId": "97e394c2e62d90263246f4592b117c7a6efd26a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
