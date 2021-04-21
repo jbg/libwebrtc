@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfd9a831_777bc19e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-04-21T11:13:52Z",
+      "side": 1,
+      "message": "Patchset#1 is the original change (rebased)\nPatchset#2 is adjustment to make it compile with chromium fuzzer build flags [checked using bot that fails @patchset#1 and pass @patchset#2]",
+      "revId": "661c9e45793c647f411b71850ebc11105a428d75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
