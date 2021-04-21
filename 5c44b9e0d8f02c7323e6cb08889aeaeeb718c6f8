@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce5ba118_fc3a6183",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-04-21T11:52:20Z",
+      "side": 1,
+      "message": "Hi Erik,\nCan you take a look at this CL that is needed for the MediaCapabilities API implementation?\n",
+      "revId": "5c44b9e0d8f02c7323e6cb08889aeaeeb718c6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
