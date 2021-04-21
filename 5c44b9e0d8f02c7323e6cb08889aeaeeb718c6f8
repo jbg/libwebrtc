@@ -16,6 +16,52 @@
       "message": "Hi Erik,\nCan you take a look at this CL that is needed for the MediaCapabilities API implementation?\n",
       "revId": "5c44b9e0d8f02c7323e6cb08889aeaeeb718c6f8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fad366c5_ad1b71a4",
+        "filename": "api/video_codecs/video_decoder_factory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-04-21T11:55:47Z",
+      "side": 1,
+      "message": "Self-review: Add link to definition of scalability mode.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 27
+      },
+      "revId": "5c44b9e0d8f02c7323e6cb08889aeaeeb718c6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1a2fd4d_c863575b",
+        "filename": "api/video_codecs/video_decoder_factory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-04-21T11:55:47Z",
+      "side": 1,
+      "message": "Once this function is overridden by all relevant encoder and decoder factories, it may be better to change so that scalability_mode is checked in a better way.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 17
+      },
+      "revId": "5c44b9e0d8f02c7323e6cb08889aeaeeb718c6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
