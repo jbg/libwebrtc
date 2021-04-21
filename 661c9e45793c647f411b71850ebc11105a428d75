@@ -39,6 +39,30 @@
       },
       "revId": "661c9e45793c647f411b71850ebc11105a428d75",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da009ef3_92fe46bb",
+        "filename": "test/fuzzers/vp9_encoder_references_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-04-21T12:36:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57b4838b_5d2dc80e",
+      "range": {
+        "startLine": 28,
+        "startChar": 66,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "661c9e45793c647f411b71850ebc11105a428d75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
