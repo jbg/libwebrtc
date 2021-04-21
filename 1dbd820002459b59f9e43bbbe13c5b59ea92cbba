@@ -16,6 +16,24 @@
       "message": "def win_builder(*args, **kwargs):\n  return ci_builder(*args, **merge_dicts({dimensions \u003d {\"os\": \"Windows\"}, properties\u003dGOMA_BACKEND_RBE_ATS_PROD}, kwargs))\n\ndef win_try_job(*args, **kwargs):\n  return try_builder(*args, **merge_dicts({dimensions \u003d {\"os\": \"Windows\"}, properties\u003dGOMA_BACKEND_RBE_NO_ATS_PROD}, kwargs))\n\n?",
       "revId": "1dbd820002459b59f9e43bbbe13c5b59ea92cbba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc5bb7db_6a890c25",
+        "filename": "config.star",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-21T08:42:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "512800c1_43f46888",
+      "revId": "1dbd820002459b59f9e43bbbe13c5b59ea92cbba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
