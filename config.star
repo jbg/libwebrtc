@@ -584,6 +584,11 @@ def normal_builder_factory(**common_kwargs):
         return ci_builder(*args, **merge_dicts(common_kwargs, kwargs))
 
     def try_job(*args, **kwargs):
+        # In CQ/try, disable ATS on windows.
+        if common_kwargs["dimensions"]["os"] == "Windows":
+            goma_dict = dict(common_kwargs["properties"]["$build/goma"])
+            goma_dict["enable_ats"] = False
+            common_kwargs["properties"]["$build/goma"] = goma_dict
         return try_builder(*args, **merge_dicts(common_kwargs, kwargs))
 
     return builder, try_job
