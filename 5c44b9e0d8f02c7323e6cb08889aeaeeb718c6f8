@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d291e152_e5999ea9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-04-21T13:32:08Z",
+      "side": 1,
+      "message": "I wonder if we really should add this to the native webrtc api at this point?\nI\u0027d be more interested in a concrete example in e.g. RTCVideoEncoderFactory.\nWe can revisit this if there\u0027s a concrete need to call these APIs from within webrtc? ",
+      "revId": "5c44b9e0d8f02c7323e6cb08889aeaeeb718c6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fad366c5_ad1b71a4",
