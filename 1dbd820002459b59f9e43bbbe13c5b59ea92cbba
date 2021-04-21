@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "512800c1_43f46888",
+        "filename": "config.star",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5592
+      },
+      "writtenOn": "2021-04-21T08:20:55Z",
+      "side": 1,
+      "message": "def win_builder(*args, **kwargs):\n  return ci_builder(*args, **merge_dicts({dimensions \u003d {\"os\": \"Windows\"}, properties\u003dGOMA_BACKEND_RBE_ATS_PROD}, kwargs))\n\ndef win_try_job(*args, **kwargs):\n  return try_builder(*args, **merge_dicts({dimensions \u003d {\"os\": \"Windows\"}, properties\u003dGOMA_BACKEND_RBE_NO_ATS_PROD}, kwargs))\n\n?",
+      "revId": "1dbd820002459b59f9e43bbbe13c5b59ea92cbba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
