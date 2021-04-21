@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "737d91fc_b2b807d8",
+        "filename": "pc/data_channel_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2021-04-21T17:44:09Z",
+      "side": 1,
+      "message": "Since no packets are delivered, the message_count is already 1 and this will not wait at all.\nYou may want to use WAIT(false, 10) instead to actually wait 10ms.",
+      "revId": "a35c592a0cda893e111f44bdb6dc18b54b7d3268",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
