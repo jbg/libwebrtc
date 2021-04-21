@@ -16,6 +16,29 @@
       "message": "Patchset#1 is the original change (rebased)\nPatchset#2 is adjustment to make it compile with chromium fuzzer build flags [checked using bot that fails @patchset#1 and pass @patchset#2]",
       "revId": "661c9e45793c647f411b71850ebc11105a428d75",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57b4838b_5d2dc80e",
+        "filename": "test/fuzzers/vp9_encoder_references_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-21T12:17:05Z",
+      "side": 1,
+      "message": "dropping",
+      "range": {
+        "startLine": 28,
+        "startChar": 66,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "661c9e45793c647f411b71850ebc11105a428d75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
