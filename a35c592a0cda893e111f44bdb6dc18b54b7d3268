@@ -16,6 +16,24 @@
       "message": "Since no packets are delivered, the message_count is already 1 and this will not wait at all.\nYou may want to use WAIT(false, 10) instead to actually wait 10ms.",
       "revId": "a35c592a0cda893e111f44bdb6dc18b54b7d3268",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78ae811b_1ac870a6",
+        "filename": "pc/data_channel_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-21T18:53:16Z",
+      "side": 1,
+      "message": "WAIT; EXPECT_EQ is more correct, yes.",
+      "parentUuid": "737d91fc_b2b807d8",
+      "revId": "a35c592a0cda893e111f44bdb6dc18b54b7d3268",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
