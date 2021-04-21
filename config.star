@@ -36,6 +36,15 @@ GOMA_BACKEND_RBE_ATS_PROD = {
     },
 }
 
+# Disable ATS on CQ/try.
+GOMA_BACKEND_RBE_NO_ATS_PROD = {
+    "$build/goma": {
+        "server_host": "goma.chromium.org",
+        "use_luci_auth": True,
+        "enable_ats": False,
+    },
+}
+
 # Top-level configs:
 
 # Enable luci.tree_closer.
@@ -728,41 +737,41 @@ mac_try_job("mac_asan")
 mac_try_job("mac_chromium_compile", recipe = "chromium_trybot", dimensions = {"cores": "8"}, branch_cq = False)
 
 win_builder("Win32 Debug", "Win MSVC|x86|dbg")
-win_try_job("win_x86_msvc_dbg")
-win_try_job("win_compile_x86_msvc_dbg", cq = None)
+win_try_job("win_x86_msvc_dbg", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_compile_x86_msvc_dbg", cq = None, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
 win_builder("Win32 Release", "Win MSVC|x86|rel")
-win_try_job("win_x86_msvc_rel")
-win_try_job("win_compile_x86_msvc_rel", cq = None)
+win_try_job("win_x86_msvc_rel", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_compile_x86_msvc_rel", cq = None, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
 win_builder("Win64 Debug", "Win MSVC|x64|dbg")
-win_try_job("win_x64_msvc_dbg")
-win_try_job("win_compile_x64_msvc_dbg", cq = None)
+win_try_job("win_x64_msvc_dbg", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_compile_x64_msvc_dbg", cq = None, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
 win_builder("Win64 Release", "Win MSVC|x64|rel")
-win_try_job("win_x64_msvc_rel")
-win_try_job("win_compile_x64_msvc_rel", cq = None)
+win_try_job("win_x64_msvc_rel", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_compile_x64_msvc_rel", cq = None, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
 win_builder("Win32 Debug (Clang)", "Win Clang|x86|dbg")
-win_try_job("win_x86_clang_dbg", cq = None)
-win_try_job("win_compile_x86_clang_dbg")
+win_try_job("win_x86_clang_dbg", cq = None, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_compile_x86_clang_dbg", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
 win_builder("Win32 Release (Clang)", "Win Clang|x86|rel")
-win_try_job("win_x86_clang_rel")
-win_try_job("win_compile_x86_clang_rel", cq = None)
+win_try_job("win_x86_clang_rel", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_compile_x86_clang_rel", cq = None, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
 win_builder("Win32 Builder (Clang)", ci_cat = None, perf_cat = "Win|x86|Builder|")
 win_perf_builder("Perf Win7", "Win|x86|Tester|7", triggered_by = ["Win32 Builder (Clang)"])
 win_builder("Win64 Debug (Clang)", "Win Clang|x64|dbg")
-win_try_job("win_x64_clang_dbg", cq = None)
-win_try_job("win_x64_clang_dbg_win8", cq = None)
-win_try_job("win_x64_clang_dbg_win10", cq = None)
-win_try_job("win_compile_x64_clang_dbg")
+win_try_job("win_x64_clang_dbg", cq = None, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_x64_clang_dbg_win8", cq = None, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_x64_clang_dbg_win10", cq = None, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_compile_x64_clang_dbg", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
 win_builder("Win64 Release (Clang)", "Win Clang|x64|rel")
-win_try_job("win_x64_clang_rel", cq = None)
-win_try_job("win_compile_x64_clang_rel")
-win_builder("Win64 ASan", "Win Clang|x64|asan")
-win_try_job("win_asan")
+win_try_job("win_x64_clang_rel", cq = None, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_compile_x64_clang_rel", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_builder("Win64 ASan", "Win Clang|x64|asan", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_asan", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
 win_builder("Win64 UWP", ci_cat = None, fyi_cat = "")
-win_try_job("win_x64_uwp", cq = None, try_cat = None, fyi_cat = "")
+win_try_job("win_x64_uwp", cq = None, try_cat = None, fyi_cat = "", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
 win_builder("Win (more configs)", "Win Clang|x86|more", recipe = "more_configs")
-win_try_job("win_x86_more_configs", recipe = "more_configs")
-win_try_job("win_chromium_compile", recipe = "chromium_trybot", branch_cq = False, goma_jobs = 150)
-win_try_job("win_chromium_compile_dbg", recipe = "chromium_trybot", branch_cq = False, goma_jobs = 150)
+win_try_job("win_x86_more_configs", recipe = "more_configs", properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_chromium_compile", recipe = "chromium_trybot", branch_cq = False, goma_jobs = 150, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
+win_try_job("win_chromium_compile_dbg", recipe = "chromium_trybot", branch_cq = False, goma_jobs = 150, properties = GOMA_BACKEND_RBE_NO_ATS_PROD)
 
 linux_try_job(
     "presubmit",
