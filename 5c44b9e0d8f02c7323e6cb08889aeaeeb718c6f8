@@ -71,6 +71,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a9e4a28_75855b6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-04-26T20:18:05Z",
+      "side": 1,
+      "message": "Yes exactly, and also to avoid that the MediaCapabilities API implementation hardcode a dependency that may change in the future.",
+      "parentUuid": "c9f96440_7bea1ed4",
+      "revId": "5c44b9e0d8f02c7323e6cb08889aeaeeb718c6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fad366c5_ad1b71a4",
@@ -84,6 +102,30 @@
       "writtenOn": "2021-04-21T11:55:47Z",
       "side": 1,
       "message": "Self-review: Add link to definition of scalability mode.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 27
+      },
+      "revId": "5c44b9e0d8f02c7323e6cb08889aeaeeb718c6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49c78dd7_3562ba03",
+        "filename": "api/video_codecs/video_decoder_factory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-04-26T20:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fad366c5_ad1b71a4",
       "range": {
         "startLine": 39,
         "startChar": 0,
