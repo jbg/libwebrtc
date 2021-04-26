@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f6b7ea5_ad74cd00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17610
+      },
+      "writtenOn": "2021-04-26T18:44:07Z",
+      "side": 1,
+      "message": "Dependency on crc32c LGTM. I\u0027m glad this library finding more use!\n\nI don\u0027t have a CR+1 here... does someone need to give me bits? 😊",
+      "revId": "99d1455b57169ea3c7ec1742dd12224781d95a8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
