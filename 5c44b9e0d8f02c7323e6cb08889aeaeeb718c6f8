@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "493c9164_4f8bf6f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-04-26T09:51:38Z",
+      "side": 1,
+      "message": "(Strange, I didn\u0027t get an email that you had made a comment.)\n\nI see your point. The problem with that approach as I see it is that the objects that are a passed around are webrtc::VideoEncoderFactory and webrtc::VideoDecoderFactory.\n\nThe plan is to call \nCreateWebrtcVideoEncoderFactory() and CreateWebrtcVideoDecoderFactory [1] and then query whatever is returned from there.  To make it work for all different scenarios I think it\u0027s easiest to add it to these objects.\n\nPerhaps I can add a comment that this code is currently being worked on and is subject to change?\n\n[1]\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/blink/renderer/platform/peerconnection/video_codec_factory.cc;drc\u003d8d11cc76f8e27e5cf82697edaf73ef051c696b15;l\u003d206",
+      "parentUuid": "d291e152_e5999ea9",
+      "revId": "5c44b9e0d8f02c7323e6cb08889aeaeeb718c6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fad366c5_ad1b71a4",
         "filename": "api/video_codecs/video_decoder_factory.h",
         "patchSetId": 1
