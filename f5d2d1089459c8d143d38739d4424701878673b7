@@ -34,6 +34,24 @@
       "parentUuid": "a5d4a5a5_dc88c502",
       "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b92972a4_ee63b86d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2021-04-26T11:04:50Z",
+      "side": 1,
+      "message": "This happens when the encodings are set with just the svc mode set and the rest of the attributes with default values or not even set (when being called via the js w3c apis in chrome)",
+      "parentUuid": "a5d4a5a5_dc88c502",
+      "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
