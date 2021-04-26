@@ -16,6 +16,24 @@
       "message": "Needs more context. Why is targetBitrate not being set? What is the expected outcome?\nJust removing the dcheck seems to me like it would break some aspects of the allocator.\nIf this is a new use case, please add a unit test for it.\nAlso please refer to a bug.",
       "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "540241ae_c50caf73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-26T10:27:38Z",
+      "side": 1,
+      "message": "Issue was discovered when adding tests for https://chromium-review.googlesource.com/c/chromium/src/+/2623011",
+      "parentUuid": "a5d4a5a5_dc88c502",
+      "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
