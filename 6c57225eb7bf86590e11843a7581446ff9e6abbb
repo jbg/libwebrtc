@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30afc026_6651e86d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-27T07:42:07Z",
+      "side": 1,
+      "message": "Skipping presubmit because it looks like checkdeps have some issues with the multi-repo setup.",
+      "revId": "6c57225eb7bf86590e11843a7581446ff9e6abbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
