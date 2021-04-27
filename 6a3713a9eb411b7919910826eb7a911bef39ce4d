@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5e45d74_3b92f865",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-04-27T12:52:00Z",
+      "side": 1,
+      "message": "Thanks, that makes sense. I did like that (but misremembered, and used four instead of three). Are we sure it will not be more than 3 elements?",
+      "parentUuid": "886bb65b_71ecee27",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 18
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adb60d97_f438f314",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-04-27T10:40:07Z",
       "side": 1,
       "message": "actually this table is list of local ssrcs and will always be small regardless of size of the meeting (see another comment).\n\nand yep, it is easily avoidable: registered_ssrcs_ is const, so shouldn\u0027t require lock to query it.",
+      "range": {
+        "startLine": 1062,
+        "startChar": 58,
+        "endLine": 1063,
+        "endChar": 18
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "488002d4_31f6e59e",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-04-27T12:52:00Z",
+      "side": 1,
+      "message": "Removed the lock. I should\u0027ve seen that - thanks!",
+      "parentUuid": "adb60d97_f438f314",
       "range": {
         "startLine": 1062,
         "startChar": 58,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6847faa8_1a59be7e",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-04-27T12:52:00Z",
+      "side": 1,
+      "message": "I will do that as a second step. There are numerous unit tests that expect items to be in a specific order, which complicated it. I tried, and postponed it as I can\u0027t see from profiling that this is a real problem.",
+      "parentUuid": "6ecee98f_41611d26",
+      "range": {
+        "startLine": 133,
+        "startChar": 29,
+        "endLine": 133,
+        "endChar": 46
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "081a727d_05ad7016",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-04-27T10:40:07Z",
       "side": 1,
       "message": "I suspect you want to update this map to unordered_map instead.",
+      "range": {
+        "startLine": 259,
+        "startChar": 2,
+        "endLine": 259,
+        "endChar": 19
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fb0addc_42f17bea",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-04-27T12:52:00Z",
+      "side": 1,
+      "message": "There is a separate CL for converting this class to using unordered maps; https://webrtc-review.googlesource.com/c/src/+/216321. You\u0027ll get to review it. Promise.",
+      "parentUuid": "081a727d_05ad7016",
       "range": {
         "startLine": 259,
         "startChar": 2,
