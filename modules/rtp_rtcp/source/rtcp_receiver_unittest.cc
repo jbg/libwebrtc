@@ -51,6 +51,7 @@ using rtcp::ReceiveTimeInfo;
 using ::testing::_;
 using ::testing::AllOf;
 using ::testing::ElementsAreArray;
+using ::testing::Eq;
 using ::testing::Field;
 using ::testing::InSequence;
 using ::testing::IsEmpty;
@@ -1267,15 +1268,19 @@ TEST(RtcpReceiverTest, TmmbrThreeConstraintsTimeOut) {
   }
   // It is now starttime + 15.
   std::vector<rtcp::TmmbItem> candidate_set = receiver.TmmbrReceived();
-  ASSERT_EQ(3u, candidate_set.size());
-  EXPECT_EQ(30000U, candidate_set[0].bitrate_bps());
+  EXPECT_THAT(candidate_set,
+              ElementsAre(Property(&rtcp::TmmbItem::bitrate_bps, Eq(30000U)),
+                          Property(&rtcp::TmmbItem::bitrate_bps, Eq(30000U)),
+                          Property(&rtcp::TmmbItem::bitrate_bps, Eq(30000U))));
 
   // We expect the timeout to be 25 seconds. Advance the clock by 12
   // seconds, timing out the first packet.
   mocks.clock.AdvanceTimeMilliseconds(12000);
   candidate_set = receiver.TmmbrReceived();
-  ASSERT_EQ(2u, candidate_set.size());
-  EXPECT_EQ(kSenderSsrc + 1, candidate_set[0].ssrc());
+  EXPECT_THAT(candidate_set,
+              UnorderedElementsAre(
+                  Property(&rtcp::TmmbItem::ssrc, Eq(kSenderSsrc + 1)),
+                  Property(&rtcp::TmmbItem::ssrc, Eq(kSenderSsrc + 2))));
 }
 
 TEST(RtcpReceiverTest, Callbacks) {
