@@ -67,9 +67,9 @@ const size_t kMaxNumberOfStoredRrtrs = 300;
 constexpr TimeDelta kDefaultVideoReportInterval = TimeDelta::Seconds(1);
 constexpr TimeDelta kDefaultAudioReportInterval = TimeDelta::Seconds(5);
 
-std::set<uint32_t> GetRegisteredSsrcs(
+std::unordered_set<uint32_t> GetRegisteredSsrcs(
     const RtpRtcpInterface::Configuration& config) {
-  std::set<uint32_t> ssrcs;
+  std::unordered_set<uint32_t> ssrcs;
   ssrcs.insert(config.local_media_ssrc);
   if (config.rtx_send_ssrc) {
     ssrcs.insert(*config.rtx_send_ssrc);
@@ -1057,7 +1057,11 @@ void RTCPReceiver::TriggerCallbacksFromRtcpPacket(
     NotifyTmmbrUpdated();
   }
   uint32_t local_ssrc;
-  std::set<uint32_t> registered_ssrcs;
+
+  // Question to the reviewer: The copying of registered_ssrcs seems costly, as
+  // later a single SSRC is looked up. In large meetings, this table should be
+  // fairly large. Could this be changed so that no copy is made?
+  std::unordered_set<uint32_t> registered_ssrcs;
   {
     // We don't want to hold this critsect when triggering the callbacks below.
     MutexLock lock(&rtcp_receiver_lock_);

@@ -15,6 +15,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 #include "api/array_view.h"
@@ -229,7 +230,7 @@ class RTCPReceiver final {
   const bool receiver_only_;
   ModuleRtpRtcp* const rtp_rtcp_;
   const uint32_t main_ssrc_;
-  const std::set<uint32_t> registered_ssrcs_;
+  const std::unordered_set<uint32_t> registered_ssrcs_;
 
   RtcpBandwidthObserver* const rtcp_bandwidth_observer_;
   RtcpIntraFrameObserver* const rtcp_intra_frame_observer_;
