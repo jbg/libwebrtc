@@ -52,6 +52,24 @@
       "parentUuid": "a5d4a5a5_dc88c502",
       "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a3ba48_2d85956a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-04-27T13:18:07Z",
+      "side": 1,
+      "message": "So then the question is - why does that code path not populate targetBitrate? \nWithout that I don\u0027t think you\u0027ll get the bitrate distribution you expect as the available bitrate changes.\nE.g. the current default seems to set target to (max-min)/2, see svc_config.cc",
+      "parentUuid": "b92972a4_ee63b86d",
+      "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
