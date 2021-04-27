@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "500462c1_3c7f43fc",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-04-27T12:59:21Z",
+      "side": 1,
+      "message": "For now it can\u0027t be, just looking at the code that creates it.\nMay be somewhere in the future there will be more than 3. We can review then if it would make sense to keep InlinedVector (if usually it is up to 4), use std::vector, or used some unordered_set.",
+      "parentUuid": "e5e45d74_3b92f865",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 18
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adb60d97_f438f314",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Removed the lock. I should\u0027ve seen that - thanks!",
       "parentUuid": "adb60d97_f438f314",
+      "range": {
+        "startLine": 1062,
+        "startChar": 58,
+        "endLine": 1063,
+        "endChar": 18
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f80da383_4fd6cd35",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-04-27T12:59:21Z",
+      "side": 1,
+      "message": "Right, main_ssrc_ is const too. Yay for less locks!",
+      "parentUuid": "488002d4_31f6e59e",
       "range": {
         "startLine": 1062,
         "startChar": 58,
