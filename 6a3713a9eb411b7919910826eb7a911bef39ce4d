@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "886bb65b_71ecee27",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-04-27T10:40:07Z",
+      "side": 1,
+      "message": "this set is keyed by local ssrc and is always small,\nit might be faster to use InlinedVector\u003cuint32_t, 3\u003e\nand do linear search.\n(or leave it as is for now)",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 18
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adb60d97_f438f314",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-04-27T10:40:07Z",
+      "side": 1,
+      "message": "actually this table is list of local ssrcs and will always be small regardless of size of the meeting (see another comment).\n\nand yep, it is easily avoidable: registered_ssrcs_ is const, so shouldn\u0027t require lock to query it.",
+      "range": {
+        "startLine": 1062,
+        "startChar": 58,
+        "endLine": 1063,
+        "endChar": 18
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ecee98f_41611d26",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-04-27T10:40:07Z",
+      "side": 1,
+      "message": "I suspect you want to update this map (because it uses remote SSRC as the key)",
+      "range": {
+        "startLine": 133,
+        "startChar": 29,
+        "endLine": 133,
+        "endChar": 46
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "081a727d_05ad7016",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-04-27T10:40:07Z",
+      "side": 1,
+      "message": "I suspect you want to update this map to unordered_map instead.",
+      "range": {
+        "startLine": 259,
+        "startChar": 2,
+        "endLine": 259,
+        "endChar": 19
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
