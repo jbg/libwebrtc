@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a93fe2a5_af593d7f",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-04-27T13:34:38Z",
+      "side": 1,
+      "message": "*sigh*. I wasn\u0027t paying attention - as you say, it\u0027s obvious from the code. I added a RTC_DCHECK so that it\u0027s hopefully caught if someone changes that in the future.",
+      "parentUuid": "500462c1_3c7f43fc",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 18
+      },
+      "revId": "6a3713a9eb411b7919910826eb7a911bef39ce4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adb60d97_f438f314",
