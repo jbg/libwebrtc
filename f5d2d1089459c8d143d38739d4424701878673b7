@@ -70,6 +70,24 @@
       "parentUuid": "b92972a4_ee63b86d",
       "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b7963e_1988904b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-04-28T09:03:47Z",
+      "side": 1,
+      "message": "I\u0027d consider that a separate issue - if the user doesn\u0027t care about bitrate, perhaps bitrate shouldn\u0027t be populated?\nThe immediate fix needed is to make sure Chrome doesn\u0027t crash based on Javascript action, which I think this CL accomplishes. We should have a TODO(bugs.webrtc.org/bugnumber) added to figure out whether not specifying bitrate is a feature we should support or an error.",
+      "parentUuid": "70a3ba48_2d85956a",
+      "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
