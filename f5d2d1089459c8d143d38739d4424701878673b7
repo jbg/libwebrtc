@@ -106,6 +106,24 @@
       "parentUuid": "e1b7963e_1988904b",
       "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5744c022_6f260a32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2021-04-28T20:13:03Z",
+      "side": 1,
+      "message": "I think there are two points here.\n\nFirst one, is that av1 svc must work if user does not specify any maxBitrate on the js apis.\n\nThe second one is determining whether the targetbitrate\u003d0 is a valid state for the svc rate config (so the DCHECK is a false positive and this patch solves it) or if we must avoid targetbitrate\u003d0 and a different patch is needed to populate propper defaults when no bitrate is specified.\n\nFor what is worth, I have been testing encoding av1 svc with chrome and the svc js patch without any issues (except a very slow ramp up in bitrate, but I don\u0027t think it is related to this).",
+      "parentUuid": "98abf5c2_9bb7a0e0",
+      "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
