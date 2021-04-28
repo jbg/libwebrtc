@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "994db04b_f1c4c722",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-04-28T13:51:46Z",
+      "side": 1,
+      "message": "The convention is that delegate methods should be called on the main queue. Is that not the case here?",
+      "revId": "c13da2d01f8da8ca92f7b93bffaf3fae8d083072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58575963_82fd42a3",
