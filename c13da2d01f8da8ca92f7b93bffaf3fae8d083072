@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d858a4b_c079f7e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17614
+      },
+      "writtenOn": "2021-04-28T13:19:00Z",
+      "side": 1,
+      "message": "When I debugging AppRTCMobile, I found the method \"- (void)appClient:(ARDAppClient *)client didChangeState:(ARDAppClientState)state\" in line 340 of APPRTCViewController.m is called by non-main thread. So xcode shows warning message.",
+      "revId": "c13da2d01f8da8ca92f7b93bffaf3fae8d083072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
