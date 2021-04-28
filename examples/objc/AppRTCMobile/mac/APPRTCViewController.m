@@ -295,14 +295,16 @@ static NSUInteger const kBottomViewHeight = 200;
 @interface APPRTCViewController ()
     <ARDAppClientDelegate, APPRTCMainViewDelegate>
 @property(nonatomic, readonly) APPRTCMainView* mainView;
+@property(nonatomic, strong) ARDAppClient* client;
 @end
 
 @implementation APPRTCViewController {
-  ARDAppClient* _client;
   RTC_OBJC_TYPE(RTCVideoTrack) * _localVideoTrack;
   RTC_OBJC_TYPE(RTCVideoTrack) * _remoteVideoTrack;
   ARDCaptureController* _captureController;
 }
+
+@synthesize client = _client;
 
 - (void)dealloc {
   [self disconnect];
@@ -337,19 +339,21 @@ static NSUInteger const kBottomViewHeight = 200;
 
 - (void)appClient:(ARDAppClient *)client
     didChangeState:(ARDAppClientState)state {
-  switch (state) {
-    case kARDAppClientStateConnected:
-      [self.mainView displayLogMessage:@"Client connected."];
-      break;
-    case kARDAppClientStateConnecting:
-      [self.mainView displayLogMessage:@"Client connecting."];
-      break;
-    case kARDAppClientStateDisconnected:
-      [self.mainView displayLogMessage:@"Client disconnected."];
-      [self resetUI];
-      _client = nil;
-      break;
-  }
+  dispatch_async(dispatch_get_main_queue(), ^{
+    switch (state) {
+      case kARDAppClientStateConnected:
+        [self.mainView displayLogMessage:@"Client connected."];
+        break;
+      case kARDAppClientStateConnecting:
+        [self.mainView displayLogMessage:@"Client connecting."];
+        break;
+      case kARDAppClientStateDisconnected:
+        [self.mainView displayLogMessage:@"Client disconnected."];
+        [self resetUI];
+        self.client = nil;
+        break;
+    }
+  });
 }
 
 - (void)appClient:(ARDAppClient *)client
