@@ -33,6 +33,29 @@
       "message": "I have no knowledge of this code so I\u0027m opting out as a reviewer.\nkthelgason@: Since you are an OWNER, I\u0027m adding you instead.\n\n",
       "revId": "c13da2d01f8da8ca92f7b93bffaf3fae8d083072",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58575963_82fd42a3",
+        "filename": "examples/objc/AppRTCMobile/mac/APPRTCViewController.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-04-28T13:50:54Z",
+      "side": 1,
+      "message": "nit: I think this code has auto property synthesis enabled so this is strictly not necessary.",
+      "range": {
+        "startLine": 307,
+        "startChar": 1,
+        "endLine": 307,
+        "endChar": 29
+      },
+      "revId": "c13da2d01f8da8ca92f7b93bffaf3fae8d083072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
