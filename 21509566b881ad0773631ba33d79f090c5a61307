@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708ce587_105d5c4e",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-29T20:31:26Z",
+      "side": 0,
+      "message": "Can you also remove https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/webrtc.gni;l\u003d186-187;drc\u003d66241e4fa4fa88ae6314e9e51aac9edc3013ecb6?",
+      "range": {
+        "startLine": 432,
+        "startChar": 6,
+        "endLine": 432,
+        "endChar": 29
+      },
+      "revId": "21509566b881ad0773631ba33d79f090c5a61307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8bd12d6_a44aaa33",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-29T20:31:26Z",
+      "side": 0,
+      "message": "I am not an expert, does it mean that metal is available everywhere (double checking). So it is available on mac and iOS is only 64 bits nowadays. Is this correct?",
+      "range": {
+        "startLine": 432,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 3
+      },
+      "revId": "21509566b881ad0773631ba33d79f090c5a61307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb9f76bd_5e53ac16",
+        "filename": "examples/objc/AppRTCMobile/ios/ARDVideoCallView.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-29T20:31:26Z",
+      "side": 0,
+      "message": "Can you remove this?",
+      "range": {
+        "startLine": 17,
+        "startChar": 62,
+        "endLine": 17,
+        "endChar": 76
+      },
+      "revId": "21509566b881ad0773631ba33d79f090c5a61307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04bcc3bf_27bf4349",
+        "filename": "examples/objcnativeapi/objc/NADViewController.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-29T20:31:26Z",
+      "side": 0,
+      "message": "Also remove this.",
+      "range": {
+        "startLine": 16,
+        "startChar": 62,
+        "endLine": 16,
+        "endChar": 76
+      },
+      "revId": "21509566b881ad0773631ba33d79f090c5a61307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
