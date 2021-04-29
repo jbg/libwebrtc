@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f512c007_83239174",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-04-29T22:03:52Z",
+      "side": 1,
+      "message": "Thanks, LGTM for BUILD.gn and webrtc.gni.",
+      "revId": "683c428c48655eb5aaa4190537986791781b8664",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
