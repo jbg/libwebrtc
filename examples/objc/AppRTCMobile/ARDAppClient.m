@@ -208,11 +208,15 @@ static int const kKbpsMultiplier = 1000;
 }
 
 - (void)setState:(ARDAppClientState)state {
-  if (_state == state) {
-    return;
-  }
-  _state = state;
-  [_delegate appClient:self didChangeState:_state];
+  __weak ARDAppClient *weakSelf = self;
+  dispatch_async(dispatch_get_main_queue(), ^{
+    ARDAppClient *strongSelf = weakSelf;
+    if (strongSelf.state == state) {
+      return;
+    }
+    strongSelf.state = state;
+    [strongSelf.delegate appClient:strongSelf didChangeState:strongSelf.state];
+  });
 }
 
 - (void)connectToRoomWithId:(NSString *)roomId
