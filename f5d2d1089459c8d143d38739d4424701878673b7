@@ -124,6 +124,23 @@
       "parentUuid": "98abf5c2_9bb7a0e0",
       "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24ec29d5_da537cb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-04-29T08:52:48Z",
+      "side": 1,
+      "message": "Perhaps we can move this discussion to a bug.\nIf the user does not specify any max bitrates, we need webrtc to provide reasonable defaults (e.g. like simulcast.cc for vp8 and svc_config.cc for vp9). Not sure how/where that is done today.\n+philipel@ +danilchap@ do you know what exists/what the plan is?\nIs there a bug we can track this in?",
+      "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
