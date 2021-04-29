@@ -141,6 +141,24 @@
       "message": "Perhaps we can move this discussion to a bug.\nIf the user does not specify any max bitrates, we need webrtc to provide reasonable defaults (e.g. like simulcast.cc for vp8 and svc_config.cc for vp9). Not sure how/where that is done today.\n+philipel@ +danilchap@ do you know what exists/what the plan is?\nIs there a bug we can track this in?",
       "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8117bab_792dc5cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5963
+      },
+      "writtenOn": "2021-04-29T09:15:43Z",
+      "side": 1,
+      "message": "Opened a bug in webrtc tracker so we can move the discussion there:\n\nhttps://bugs.chromium.org/p/webrtc/issues/detail?id\u003d12720",
+      "parentUuid": "24ec29d5_da537cb7",
+      "revId": "f5d2d1089459c8d143d38739d4424701878673b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
