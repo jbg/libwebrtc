@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe9ac63c_1f2a14ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17614
+      },
+      "writtenOn": "2021-04-29T03:03:24Z",
+      "side": 1,
+      "message": "Hi kthelgason, thanks for your reply.\n\nI found the case will cause that delegate method be called on non-main queue, the callstack as follows:\n\nThread 6 Queue : com.apple.NSURLSession-delegate (serial)\n    #0\t0x00000001024d1ce8 in -[APPRTCViewController appClient:didChangeState:] at APPRTCViewController.m:342\n    #1\t0x000000010259773c in -[ARDAppClient setState:] at ARDAppClient.m:215\n    #2\t0x000000010259a6dc in -[ARDAppClient startSignalingIfReady] at ARDAppClient.m:548\n    #3\t0x0000000102597d50 in __56-[ARDAppClient connectToRoomWithId:settings:isLoopback:]_block_invoke at ARDAppClient.m:253\n    #4\t0x00000001025a621c in __66-[ARDTURNClient makeTurnServerRequestToURL:WithCompletionHandler:]_block_invoke at ARDTURNClient.m:82\n    #5\t0x00000001024d3268 in __68+[NSURLConnection(ARDUtilities) sendAsyncRequest:completionHandler:]_block_invoke at ARDUtilities.m:54\n    ...",
+      "parentUuid": "994db04b_f1c4c722",
+      "revId": "c13da2d01f8da8ca92f7b93bffaf3fae8d083072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58575963_82fd42a3",
@@ -65,6 +83,30 @@
       "writtenOn": "2021-04-28T13:50:54Z",
       "side": 1,
       "message": "nit: I think this code has auto property synthesis enabled so this is strictly not necessary.",
+      "range": {
+        "startLine": 307,
+        "startChar": 1,
+        "endLine": 307,
+        "endChar": 29
+      },
+      "revId": "c13da2d01f8da8ca92f7b93bffaf3fae8d083072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bb5190c_4c1b0da3",
+        "filename": "examples/objc/AppRTCMobile/mac/APPRTCViewController.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 17614
+      },
+      "writtenOn": "2021-04-29T03:03:24Z",
+      "side": 1,
+      "message": "It won\u0027t build success if comment this code in Xcode 12.5. Xcode will display error message \"Auto property synthesis is synthesizing property not explicitly synthesized\", and I found many propery synthesis explicitly like line 60 ~ 64 in this file.",
+      "parentUuid": "58575963_82fd42a3",
       "range": {
         "startLine": 307,
         "startChar": 1,
