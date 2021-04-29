@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c3e180_2d80b4a8",
+        "filename": "examples/objc/AppRTCMobile/ARDAppClient.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-04-29T11:28:33Z",
+      "side": 1,
+      "message": "All of this should be outside the dispatch, only the message to the delegate needs to be on the main queue.",
+      "range": {
+        "startLine": 213,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 29
+      },
+      "revId": "f30a9d68480c8cbaea6f7cadc1fc970b7ef5e215",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
