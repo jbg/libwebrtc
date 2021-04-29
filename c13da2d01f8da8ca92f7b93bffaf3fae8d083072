@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b34c44ac_6cc5a832",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-04-29T06:16:50Z",
+      "side": 1,
+      "message": "Then I think the appropriate place for the dispatch to main is in -[ARDAppClient setState:].",
+      "parentUuid": "fe9ac63c_1f2a14ff",
+      "revId": "c13da2d01f8da8ca92f7b93bffaf3fae8d083072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58575963_82fd42a3",
         "filename": "examples/objc/AppRTCMobile/mac/APPRTCViewController.m",
         "patchSetId": 1
@@ -107,6 +125,30 @@
       "side": 1,
       "message": "It won\u0027t build success if comment this code in Xcode 12.5. Xcode will display error message \"Auto property synthesis is synthesizing property not explicitly synthesized\", and I found many propery synthesis explicitly like line 60 ~ 64 in this file.",
       "parentUuid": "58575963_82fd42a3",
+      "range": {
+        "startLine": 307,
+        "startChar": 1,
+        "endLine": 307,
+        "endChar": 29
+      },
+      "revId": "c13da2d01f8da8ca92f7b93bffaf3fae8d083072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0c929b8_7fdac3d3",
+        "filename": "examples/objc/AppRTCMobile/mac/APPRTCViewController.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-04-29T06:16:50Z",
+      "side": 1,
+      "message": "Ok, I may be misremembering. Thanks.",
+      "parentUuid": "1bb5190c_4c1b0da3",
       "range": {
         "startLine": 307,
         "startChar": 1,
