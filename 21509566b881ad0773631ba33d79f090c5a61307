@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bdfe235_9882445a",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 17629
+      },
+      "writtenOn": "2021-04-29T21:57:36Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "708ce587_105d5c4e",
+      "range": {
+        "startLine": 432,
+        "startChar": 6,
+        "endLine": 432,
+        "endChar": 29
+      },
+      "revId": "21509566b881ad0773631ba33d79f090c5a61307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8bd12d6_a44aaa33",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-04-29T20:31:26Z",
       "side": 0,
       "message": "I am not an expert, does it mean that metal is available everywhere (double checking). So it is available on mac and iOS is only 64 bits nowadays. Is this correct?",
+      "range": {
+        "startLine": 432,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 3
+      },
+      "revId": "21509566b881ad0773631ba33d79f090c5a61307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b55051_18b3170f",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 17629
+      },
+      "writtenOn": "2021-04-29T21:57:36Z",
+      "side": 0,
+      "message": "Yes, that\u0027s correct.",
+      "parentUuid": "f8bd12d6_a44aaa33",
       "range": {
         "startLine": 432,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aa97177_81bd5a75",
+        "filename": "examples/objc/AppRTCMobile/ios/ARDVideoCallView.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 17629
+      },
+      "writtenOn": "2021-04-29T21:57:36Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "eb9f76bd_5e53ac16",
+      "range": {
+        "startLine": 17,
+        "startChar": 62,
+        "endLine": 17,
+        "endChar": 76
+      },
+      "revId": "21509566b881ad0773631ba33d79f090c5a61307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04bcc3bf_27bf4349",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-04-29T20:31:26Z",
       "side": 0,
       "message": "Also remove this.",
+      "range": {
+        "startLine": 16,
+        "startChar": 62,
+        "endLine": 16,
+        "endChar": 76
+      },
+      "revId": "21509566b881ad0773631ba33d79f090c5a61307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f9139c7_9596de18",
+        "filename": "examples/objcnativeapi/objc/NADViewController.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 17629
+      },
+      "writtenOn": "2021-04-29T21:57:36Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "04bcc3bf_27bf4349",
       "range": {
         "startLine": 16,
         "startChar": 62,
