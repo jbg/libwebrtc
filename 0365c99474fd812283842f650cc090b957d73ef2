@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa3f1773_bfdae0d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-04-30T12:59:49Z",
+      "side": 1,
+      "message": "There is an issue here where ARDAppClient calls `[self disconnect]` when it\u0027s being deallocated, and that sets the state. In general objects shouldn\u0027t message themselves much in dealloc as it causes problems like this. I think we should just get rid of the disconnect message in the dealloc method. Could you try that and see if everything is still fine?",
+      "revId": "0365c99474fd812283842f650cc090b957d73ef2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
