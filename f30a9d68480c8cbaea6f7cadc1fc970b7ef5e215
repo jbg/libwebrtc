@@ -22,6 +22,30 @@
       },
       "revId": "f30a9d68480c8cbaea6f7cadc1fc970b7ef5e215",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d44592_dc60fad2",
+        "filename": "examples/objc/AppRTCMobile/ARDAppClient.m",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 17614
+      },
+      "writtenOn": "2021-04-30T02:43:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20c3e180_2d80b4a8",
+      "range": {
+        "startLine": 213,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 29
+      },
+      "revId": "f30a9d68480c8cbaea6f7cadc1fc970b7ef5e215",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
