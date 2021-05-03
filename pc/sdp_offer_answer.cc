@@ -29,7 +29,6 @@
 #include "api/rtp_sender_interface.h"
 #include "api/video/builtin_video_bitrate_allocator_factory.h"
 #include "media/base/codec.h"
-#include "media/base/media_engine.h"
 #include "media/base/rid_description.h"
 #include "p2p/base/ice_transport_internal.h"
 #include "p2p/base/p2p_constants.h"
@@ -38,7 +37,6 @@
 #include "p2p/base/transport_description.h"
 #include "p2p/base/transport_description_factory.h"
 #include "p2p/base/transport_info.h"
-#include "pc/data_channel_utils.h"
 #include "pc/dtls_transport.h"
 #include "pc/media_stream.h"
 #include "pc/peer_connection.h"
@@ -4787,12 +4785,6 @@ bool SdpOfferAnswerHandler::UpdatePayloadTypeDemuxingState(
   const SessionDescriptionInterface* sdesc =
       (source == cricket::CS_LOCAL ? local_description()
                                    : remote_description());
-  struct PayloadTypes {
-    std::set<int> audio_payload_types;
-    std::set<int> video_payload_types;
-    bool pt_demuxing_enabled_audio = true;
-    bool pt_demuxing_enabled_video = true;
-  };
   std::map<const cricket::ContentGroup*, PayloadTypes> payload_types_by_bundle;
   for (auto& content_info : sdesc->description()->contents()) {
     auto it = bundle_groups_by_mid.find(content_info.name);
@@ -4847,14 +4839,13 @@ bool SdpOfferAnswerHandler::UpdatePayloadTypeDemuxingState(
         continue;
     }
   }
-
   // Gather all updates ahead of time so that all channels can be updated in a
   // single Invoke; necessary due to thread guards.
   std::vector<std::pair<RtpTransceiverDirection, cricket::ChannelInterface*>>
       channels_to_update;
   for (const auto& transceiver : transceivers()->ListInternal()) {
     cricket::ChannelInterface* channel = transceiver->channel();
-    const ContentInfo* content =
+    const cricket::ContentInfo* content =
         FindMediaSectionForTransceiver(transceiver, sdesc);
     if (!channel || !content) {
       continue;
@@ -4870,35 +4861,9 @@ bool SdpOfferAnswerHandler::UpdatePayloadTypeDemuxingState(
   if (channels_to_update.empty()) {
     return true;
   }
-  return pc_->worker_thread()->Invoke<bool>(
-      RTC_FROM_HERE,
-      [&channels_to_update, &bundle_groups_by_mid, &payload_types_by_bundle]() {
-        for (const auto& it : channels_to_update) {
-          RtpTransceiverDirection local_direction = it.first;
-          cricket::ChannelInterface* channel = it.second;
-          cricket::MediaType media_type = channel->media_type();
-          auto bundle_it = bundle_groups_by_mid.find(channel->content_name());
-          const cricket::ContentGroup* bundle_group =
-              bundle_it != bundle_groups_by_mid.end() ? bundle_it->second
-                                                      : nullptr;
-          if (media_type == cricket::MediaType::MEDIA_TYPE_AUDIO) {
-            if (!channel->SetPayloadTypeDemuxingEnabled(
-                    (!bundle_group || payload_types_by_bundle[bundle_group]
-                                          .pt_demuxing_enabled_audio) &&
-                    RtpTransceiverDirectionHasRecv(local_direction))) {
-              return false;
-            }
-          } else if (media_type == cricket::MediaType::MEDIA_TYPE_VIDEO) {
-            if (!channel->SetPayloadTypeDemuxingEnabled(
-                    (!bundle_group || payload_types_by_bundle[bundle_group]
-                                          .pt_demuxing_enabled_video) &&
-                    RtpTransceiverDirectionHasRecv(local_direction))) {
-              return false;
-            }
-          }
-        }
-        return true;
-      });
+
+  return rtp_manager()->UpdatePayloadTypeDemuxing(
+      channels_to_update, bundle_groups_by_mid, payload_types_by_bundle);
 }
 
 }  // namespace webrtc
