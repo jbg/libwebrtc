@@ -33,6 +33,24 @@
       "message": "This actually hides the fact that there\u0027s a thread block here and in that sense is a step backwards (I\u0027ll explain).\n\nA problem that we\u0027ve been reducing over the last few months has been that downstream classes from SdpOfferAnswer, hide Invoke()s that end up hurting performance and slowing down negotiations.\n\nPulling those Invokes *into* SdpOfferAnswer has helped in making it clear where we have multiple Invokes to the same thread, sometimes even hidden in loops. It has lead to design changes that incrementally have cut down on thread blocks and simplified the implementation of downstream classes.\n\nIn this particular case, the demuxer state, state in channel objects and transceivers is being changed and referred to on the worker thread - which actually causes a side effect to the network thread. This is something that hbos recently worked around via \u0027pending modification\u0027 notifications + added checks on the network thread. I think that\u0027s simply a sign that this state belongs to the network thread and not the worker thread. So as to how to tackle this invoke, I\u0027d rather be looking at the change of moving it to the network thread rather than moving it into a different class so that it can\u0027t be seen in the SdpOfferAnswer class.\n\nI\u0027d also consider if we can eliminate potential points of failure early so that the state changes can be applied asynchronously.",
       "revId": "e932cda1fa7bc70f6e0c91de88a6882da3fd0ede",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0396984e_6814268b",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4865,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-03T09:25:41Z",
+      "side": 1,
+      "message": "The loop point is an interesting one.\n\nI was looking at more invokes to see if they could be pushed out, and see that they have only recently been pushed *in*.\nThe line of thinking I\u0027m pursuing is that the class that only deals with signaling matters shouldn\u0027t really be in the business of manipulating network-thread objects; rather, there should be a management interface to relate to that encapsulates these implementation details. Seen in this perspective, the presence of threads in sdp_offer_answer is a sign of a leaky abstraction.\n\nBut our present APIs to transports \u0026 friends lend themselves very much to piecemeal-ism - if we could abstract up the \"state description\" in an SDP-independent way, it would make sense to look at rtp_transport_manager and see if we could get an \"install desired state\" function there - where all loops would either be inside the preparation for state change (inside sdp_offer_answer) or inside the rtp_transport_manager (running on the appropriate thread).\n\nThis CL is just mechanically moving stuff, it\u0027s not helping us get better interfaces.\n\nI think I\u0027ll abandon.",
+      "parentUuid": "6d413275_6937f756",
+      "revId": "e932cda1fa7bc70f6e0c91de88a6882da3fd0ede",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
