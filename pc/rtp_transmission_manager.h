@@ -14,7 +14,10 @@
 #include <stdint.h>
 
 #include <functional>
+#include <map>
+#include <set>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "api/media_stream_interface.h"
@@ -24,13 +27,16 @@
 #include "api/rtp_parameters.h"
 #include "api/rtp_receiver_interface.h"
 #include "api/rtp_sender_interface.h"
+#include "api/rtp_transceiver_direction.h"
 #include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
 #include "media/base/media_channel.h"
+#include "pc/channel_interface.h"
 #include "pc/channel_manager.h"
 #include "pc/rtp_receiver.h"
 #include "pc/rtp_sender.h"
 #include "pc/rtp_transceiver.h"
+#include "pc/session_description.h"
 #include "pc/stats_collector_interface.h"
 #include "pc/transceiver_list.h"
 #include "pc/usage_pattern.h"
@@ -63,6 +69,15 @@ struct RtpSenderInfo {
   // An RtpSender can have many SSRCs. The first one is used as a sort of ID
   // for communicating with the lower layers.
   uint32_t first_ssrc;
+};
+
+// This struct contains information about the payload types registered to
+// a cricket::channel.
+struct PayloadTypes {
+  std::set<int> audio_payload_types;
+  std::set<int> video_payload_types;
+  bool pt_demuxing_enabled_audio = true;
+  bool pt_demuxing_enabled_video = true;
 };
 
 // The RtpTransmissionManager class is responsible for managing the lifetime
@@ -205,6 +220,15 @@ class RtpTransmissionManager : public RtpSenderBase::SetStreamsObserver {
   // audio/video transceiver, if it exists.
   cricket::VoiceMediaChannel* voice_media_channel() const;
   cricket::VideoMediaChannel* video_media_channel() const;
+
+  bool UpdatePayloadTypeDemuxing(
+      const std::vector<
+          std::pair<RtpTransceiverDirection, cricket::ChannelInterface*>>&
+          channels_to_update,
+      const std::map<std::string, const cricket::ContentGroup*>&
+          bundle_groups_by_mid,
+      std::map<const cricket::ContentGroup*, PayloadTypes>&
+          payload_types_by_bundle);
 
  private:
   rtc::Thread* signaling_thread() const { return signaling_thread_; }

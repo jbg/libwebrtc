@@ -17,10 +17,12 @@
 #include "api/rtp_transceiver_direction.h"
 #include "pc/audio_rtp_receiver.h"
 #include "pc/channel.h"
+#include "pc/rtp_media_utils.h"
 #include "pc/stats_collector_interface.h"
 #include "pc/video_rtp_receiver.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/helpers.h"
+#include "rtc_base/location.h"
 #include "rtc_base/logging.h"
 
 namespace webrtc {
@@ -681,6 +683,45 @@ RtpTransmissionManager::FindReceiverById(const std::string& receiver_id) const {
     }
   }
   return nullptr;
+}
+
+bool RtpTransmissionManager::UpdatePayloadTypeDemuxing(
+    const std::vector<
+        std::pair<RtpTransceiverDirection, cricket::ChannelInterface*>>&
+        channels_to_update,
+    const std::map<std::string, const cricket::ContentGroup*>&
+        bundle_groups_by_mid,
+    std::map<const cricket::ContentGroup*, PayloadTypes>&
+        payload_types_by_bundle) {
+  return worker_thread()->Invoke<bool>(
+      RTC_FROM_HERE,
+      [&channels_to_update, &bundle_groups_by_mid, &payload_types_by_bundle]() {
+        for (const auto& it : channels_to_update) {
+          RtpTransceiverDirection local_direction = it.first;
+          cricket::ChannelInterface* channel = it.second;
+          cricket::MediaType media_type = channel->media_type();
+          auto bundle_it = bundle_groups_by_mid.find(channel->content_name());
+          const cricket::ContentGroup* bundle_group =
+              bundle_it != bundle_groups_by_mid.end() ? bundle_it->second
+                                                      : nullptr;
+          if (media_type == cricket::MediaType::MEDIA_TYPE_AUDIO) {
+            if (!channel->SetPayloadTypeDemuxingEnabled(
+                    (!bundle_group || payload_types_by_bundle[bundle_group]
+                                          .pt_demuxing_enabled_audio) &&
+                    RtpTransceiverDirectionHasRecv(local_direction))) {
+              return false;
+            }
+          } else if (media_type == cricket::MediaType::MEDIA_TYPE_VIDEO) {
+            if (!channel->SetPayloadTypeDemuxingEnabled(
+                    (!bundle_group || payload_types_by_bundle[bundle_group]
+                                          .pt_demuxing_enabled_video) &&
+                    RtpTransceiverDirectionHasRecv(local_direction))) {
+              return false;
+            }
+          }
+        }
+        return true;
+      });
 }
 
 }  // namespace webrtc
