@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0aea1d9_eb366c5a",
+        "filename": "examples/objc/AppRTCMobile/ios/ARDVideoCallView.m",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2021-05-03T13:40:52Z",
+      "side": 1,
+      "message": "Please remove this as well since it\u0027s now unused.",
+      "revId": "337f7211a3ea9fbb73897ba4db0f41e707b50f37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43b6e4b_f49e365e",
+        "filename": "examples/objcnativeapi/objc/NADViewController.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2021-05-03T13:40:52Z",
+      "side": 1,
+      "message": "Please remove this as well since it\u0027s now unused.",
+      "revId": "337f7211a3ea9fbb73897ba4db0f41e707b50f37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
