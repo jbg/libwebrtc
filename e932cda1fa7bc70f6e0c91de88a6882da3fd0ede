@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bbcfe24_b0c80ecf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-03T08:07:23Z",
+      "side": 1,
+      "message": "I thought it would be a good idea (if possible) to make the sdp_offer_answer module only relate to the signalling thread. I found exactly one reference to the worker thread in it, so it seemed a good idea to start by getting rid of that one.\n\nThe API is a bit crummy, but I definitely did not want rtp_transmission_manager to know about cricket:::Content and friends - SDP should live in SDP-land only.\n\n",
+      "revId": "e932cda1fa7bc70f6e0c91de88a6882da3fd0ede",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
