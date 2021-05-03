@@ -34,6 +34,41 @@
       "parentUuid": "f6505d9a_73ae774f",
       "revId": "24bc41930312a9239458349508207eeb1197457f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3966c0d_e29e5974",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-03T07:14:43Z",
+      "side": 1,
+      "message": "(seems I forgot to send this)\n",
+      "revId": "24bc41930312a9239458349508207eeb1197457f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "369ad847_0124edaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-03T07:14:43Z",
+      "side": 1,
+      "message": "I suggest that you add back the 2-argument version, marked with ABSL_DEPRECATED(\"bugnumber\") that defaults to kPreferEncryptedExtension and does a RTC_LOG(LS_WARNING) saying that the caller should decide what it wants.\n\nGiven that we don\u0027t enable encrypted extensions at all now, this should be a nonbreaking change - and I\u0027d like to get this CL landed and out of the way.",
+      "parentUuid": "7f103e02_39595252",
+      "revId": "24bc41930312a9239458349508207eeb1197457f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
