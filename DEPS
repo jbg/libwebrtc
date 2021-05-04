@@ -7,7 +7,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '5bf8ed3a598f7f6f01a9dbbe89507dcbed191786',
+  'chromium_revision': 'f8f700e0d4e3ca944a74668145ba2f0cbc334c61',
 }
 
 deps = {
@@ -16,7 +16,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@a2b5873233144124ec0aef4b288fbe7c12b9289b',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@153efb2bc39b1d9fba73d11d95b2d0c1577ab698',
+    'https://chromium.googlesource.com/chromium/src/build@b0572595a7d71f41f7890311fcb06beb9326b9fb',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@e72cd4587a1b833ecf559e4524b69a359cc87697',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -25,13 +25,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@6a236c2e0445ab36778f9932fbe61deefedaae00',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@3e8e69e2f0db797fd4797fcf7b6bda9d59db9d37',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@db10e8b046a586a18fbeac06c1a18a58fd1bb11d',
+    'https://chromium.googlesource.com/chromium/src/testing@756148e2895142de789d6292b1da6ba93f441a6e',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@5e106579cde7bf70206820b839810756f553a6fa',
+    'https://chromium.googlesource.com/chromium/src/third_party@c01b99ecfb7050f42d968efb9334b5a025dd63e4',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -366,7 +366,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': 'WPO_QMEF9NV6Zg7-1VmbVF8AqhgqwfW2uMuC_JkoquwC',
+          'version': 'FNuFgvRBcpyQW5WOaiPBvxLfoUoh4aBd5S2QkEohikoC',
       },
     ],
     'condition': 'checkout_android',
