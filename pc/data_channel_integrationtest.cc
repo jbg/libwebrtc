@@ -620,7 +620,7 @@ TEST_P(DataChannelIntegrationTest, QueuedPacketsGetDeliveredInReliableMode) {
                  kDefaultTimeout);
 }
 
-TEST_P(DataChannelIntegrationTest, QueuedPacketsGetDeliveredInUnReliableMode) {
+TEST_P(DataChannelIntegrationTest, QueuedPacketsGetDroppedInUnReliableMode) {
   CreatePeerConnectionWrappers();
   ConnectFakeSignaling();
   DataChannelInit init;
@@ -652,6 +652,52 @@ TEST_P(DataChannelIntegrationTest, QueuedPacketsGetDeliveredInUnReliableMode) {
   // been delivered.
   // First, check that the protocol guarantee is preserved.
   EXPECT_GT(11u, callee()->data_observer()->received_message_count());
+  EXPECT_LE(2u, callee()->data_observer()->received_message_count());
+  // Then, check that observed behavior (lose all messages) has not changed
+  EXPECT_EQ(2u, callee()->data_observer()->received_message_count());
+}
+
+TEST_P(DataChannelIntegrationTest,
+       LotsOfQueuedPacketsGetDroppedInUnReliableMode) {
+  CreatePeerConnectionWrappers();
+  ConnectFakeSignaling();
+  DataChannelInit init;
+  init.maxRetransmits = 0;
+  init.ordered = false;
+  caller()->CreateDataChannel(&init);
+  caller()->CreateAndSetAndSignalOffer();
+  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
+  ASSERT_TRUE_WAIT(callee()->data_channel(), kDefaultTimeout);
+  caller()->data_channel()->Send(DataBuffer("hello first"));
+  ASSERT_EQ_WAIT(1u, callee()->data_observer()->received_message_count(),
+                 kDefaultTimeout);
+  // Cause a temporary network outage
+  virtual_socket_server()->set_drop_probability(1.0);
+  // Fill the buffer until queued data starts to build
+  int packet_counter = 0;
+  while (caller()->data_channel()->buffered_amount() < 1) {
+    packet_counter++;
+    caller()->data_channel()->Send(DataBuffer("Sent while blocked"));
+  }
+  RTC_LOG(LS_ERROR) << "DEBUG: Buffered data after " << packet_counter
+                    << " packets";
+  RTC_LOG(LS_ERROR) << "DEBUG: BufferedAmount is "
+                    << caller()->data_channel()->buffered_amount();
+  // Nothing should be delivered during outage.
+  // We do a short wait to verify that delivery count is still 1.
+  WAIT(false, 10);
+  EXPECT_EQ(1u, callee()->data_observer()->received_message_count());
+  // Reverse the network outage.
+  virtual_socket_server()->set_drop_probability(0.0);
+  // Send a new packet, and wait for it to be delivered.
+  caller()->data_channel()->Send(DataBuffer("After block"));
+  EXPECT_EQ_WAIT("After block", callee()->data_observer()->last_message(),
+                 kDefaultTimeout);
+  // Some messages should be lost, but first and last message should have
+  // been delivered.
+  // First, check that the protocol guarantee is preserved.
+  EXPECT_GT(static_cast<size_t>(packet_counter),
+            callee()->data_observer()->received_message_count());
   EXPECT_LE(2u, callee()->data_observer()->received_message_count());
   // Then, check that observed behavior (lose all messages) has not changed
   EXPECT_EQ(2u, callee()->data_observer()->received_message_count());
