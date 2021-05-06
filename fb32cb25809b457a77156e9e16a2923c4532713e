@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1649dfb1_0922b581",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17614
+      },
+      "writtenOn": "2021-05-06T03:52:44Z",
+      "side": 1,
+      "message": "I found the case will cause that delegate method be called on non-main queue, the callstack as follows:\n\nThread 6 Queue : com.apple.NSURLSession-delegate (serial)\n\n    #0\t0x00000001024d1ce8 in -[APPRTCViewController appClient:didChangeState:] at APPRTCViewController.m:342\n    #1\t0x000000010259773c in -[ARDAppClient setState:] at ARDAppClient.m:215\n    #2\t0x000000010259a6dc in -[ARDAppClient startSignalingIfReady] at ARDAppClient.m:548\n    #3\t0x0000000102597d50 in __56-[ARDAppClient connectToRoomWithId:settings:isLoopback:]_block_invoke at ARDAppClient.m:253\n    #4\t0x00000001025a621c in __66-[ARDTURNClient makeTurnServerRequestToURL:WithCompletionHandler:]_block_invoke at ARDTURNClient.m:82\n    #5\t0x00000001024d3268 in __68+[NSURLConnection(ARDUtilities) sendAsyncRequest:completionHandler:]_block_invoke at ARDUtilities.m:54\n    ...",
+      "revId": "fb32cb25809b457a77156e9e16a2923c4532713e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
