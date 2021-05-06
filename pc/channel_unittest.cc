@@ -1668,10 +1668,6 @@ TEST_F(VoiceChannelSingleThreadTest, TestCallSetup) {
   Base::TestCallSetup();
 }
 
-TEST_F(VoiceChannelSingleThreadTest, TestCallTeardownRtcpMux) {
-  Base::TestCallTeardownRtcpMux();
-}
-
 TEST_F(VoiceChannelSingleThreadTest, SendRtpToRtp) {
   Base::SendRtpToRtp();
 }
@@ -1809,10 +1805,6 @@ TEST_F(VoiceChannelDoubleThreadTest, TestCallSetup) {
   Base::TestCallSetup();
 }
 
-TEST_F(VoiceChannelDoubleThreadTest, TestCallTeardownRtcpMux) {
-  Base::TestCallTeardownRtcpMux();
-}
-
 TEST_F(VoiceChannelDoubleThreadTest, SendRtpToRtp) {
   Base::SendRtpToRtp();
 }
@@ -1946,10 +1938,6 @@ TEST_F(VideoChannelSingleThreadTest, TestNetworkRouteChanges) {
 
 TEST_F(VideoChannelSingleThreadTest, TestCallSetup) {
   Base::TestCallSetup();
-}
-
-TEST_F(VideoChannelSingleThreadTest, TestCallTeardownRtcpMux) {
-  Base::TestCallTeardownRtcpMux();
 }
 
 TEST_F(VideoChannelSingleThreadTest, SendRtpToRtp) {
@@ -2235,10 +2223,6 @@ TEST_F(VideoChannelDoubleThreadTest, TestNetworkRouteChanges) {
 
 TEST_F(VideoChannelDoubleThreadTest, TestCallSetup) {
   Base::TestCallSetup();
-}
-
-TEST_F(VideoChannelDoubleThreadTest, TestCallTeardownRtcpMux) {
-  Base::TestCallTeardownRtcpMux();
 }
 
 TEST_F(VideoChannelDoubleThreadTest, SendRtpToRtp) {
