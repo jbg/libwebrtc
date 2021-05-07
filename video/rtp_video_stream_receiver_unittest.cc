@@ -50,17 +50,6 @@ namespace {
 
 const uint8_t kH264StartCode[] = {0x00, 0x00, 0x00, 0x01};
 
-std::vector<uint64_t> GetAbsoluteCaptureTimestamps(const EncodedFrame* frame) {
-  std::vector<uint64_t> result;
-  for (const auto& packet_info : frame->PacketInfos()) {
-    if (packet_info.absolute_capture_time()) {
-      result.push_back(
-          packet_info.absolute_capture_time()->absolute_capture_timestamp);
-    }
-  }
-  return result;
-}
-
 RTPVideoHeader GetGenericVideoHeader(VideoFrameType frame_type) {
   RTPVideoHeader video_header;
   video_header.is_first_packet_in_frame = true;
@@ -360,81 +349,6 @@ TEST_F(RtpVideoStreamReceiverTest, GenericKeyFrame) {
   mock_on_complete_frame_callback_.AppendExpectedBitstream(data.data(),
                                                            data.size());
   EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame(_));
-  rtp_video_stream_receiver_->OnReceivedPayloadData(data, rtp_packet,
-                                                    video_header);
-}
-
-TEST_F(RtpVideoStreamReceiverTest, PacketInfoIsPropagatedIntoVideoFrames) {
-  constexpr uint64_t kAbsoluteCaptureTimestamp = 12;
-  constexpr int kId0 = 1;
-
-  RtpHeaderExtensionMap extension_map;
-  extension_map.Register<AbsoluteCaptureTimeExtension>(kId0);
-  RtpPacketReceived rtp_packet(&extension_map);
-  rtp_packet.SetPayloadType(kPayloadType);
-  rtc::CopyOnWriteBuffer data({1, 2, 3, 4});
-  rtp_packet.SetSequenceNumber(1);
-  rtp_packet.SetTimestamp(1);
-  rtp_packet.SetSsrc(kSsrc);
-  rtp_packet.SetExtension<AbsoluteCaptureTimeExtension>(
-      AbsoluteCaptureTime{kAbsoluteCaptureTimestamp,
-                          /*estimated_capture_clock_offset=*/absl::nullopt});
-
-  RTPVideoHeader video_header =
-      GetGenericVideoHeader(VideoFrameType::kVideoFrameKey);
-  mock_on_complete_frame_callback_.AppendExpectedBitstream(data.data(),
-                                                           data.size());
-  EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame(_))
-      .WillOnce(Invoke([kAbsoluteCaptureTimestamp](EncodedFrame* frame) {
-        EXPECT_THAT(GetAbsoluteCaptureTimestamps(frame),
-                    ElementsAre(kAbsoluteCaptureTimestamp));
-      }));
-  rtp_video_stream_receiver_->OnReceivedPayloadData(data, rtp_packet,
-                                                    video_header);
-}
-
-TEST_F(RtpVideoStreamReceiverTest,
-       MissingAbsoluteCaptureTimeIsFilledWithExtrapolatedValue) {
-  constexpr uint64_t kAbsoluteCaptureTimestamp = 12;
-  constexpr int kId0 = 1;
-
-  RtpHeaderExtensionMap extension_map;
-  extension_map.Register<AbsoluteCaptureTimeExtension>(kId0);
-  RtpPacketReceived rtp_packet(&extension_map);
-  rtp_packet.SetPayloadType(kPayloadType);
-
-  rtc::CopyOnWriteBuffer data({1, 2, 3, 4});
-  uint16_t sequence_number = 1;
-  uint32_t rtp_timestamp = 1;
-  rtp_packet.SetSequenceNumber(sequence_number);
-  rtp_packet.SetTimestamp(rtp_timestamp);
-  rtp_packet.SetSsrc(kSsrc);
-  rtp_packet.SetExtension<AbsoluteCaptureTimeExtension>(
-      AbsoluteCaptureTime{kAbsoluteCaptureTimestamp,
-                          /*estimated_capture_clock_offset=*/absl::nullopt});
-
-  RTPVideoHeader video_header =
-      GetGenericVideoHeader(VideoFrameType::kVideoFrameKey);
-  mock_on_complete_frame_callback_.AppendExpectedBitstream(data.data(),
-                                                           data.size());
-  EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame(_));
-  rtp_video_stream_receiver_->OnReceivedPayloadData(data, rtp_packet,
-                                                    video_header);
-
-  // Rtp packet without absolute capture time.
-  rtp_packet = RtpPacketReceived(&extension_map);
-  rtp_packet.SetPayloadType(kPayloadType);
-  rtp_packet.SetSequenceNumber(++sequence_number);
-  rtp_packet.SetTimestamp(++rtp_timestamp);
-  rtp_packet.SetSsrc(kSsrc);
-
-  // There is no absolute capture time in the second packet.
-  // Expect rtp video stream receiver to extrapolate it for the resulting video
-  // frame using absolute capture time from the previous packet.
-  EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame(_))
-      .WillOnce(Invoke([](EncodedFrame* frame) {
-        EXPECT_THAT(GetAbsoluteCaptureTimestamps(frame), SizeIs(1));
-      }));
   rtp_video_stream_receiver_->OnReceivedPayloadData(data, rtp_packet,
                                                     video_header);
 }
@@ -849,7 +763,6 @@ TEST_F(RtpVideoStreamReceiverTest, ParseGenericDescriptorOnePacket) {
         EXPECT_EQ(frame->references[0], frame->Id() - 90);
         EXPECT_EQ(frame->references[1], frame->Id() - 80);
         EXPECT_EQ(frame->SpatialIndex(), kSpatialIndex);
-        EXPECT_THAT(frame->PacketInfos(), SizeIs(1));
       }));
 
   rtp_video_stream_receiver_->OnRtpPacket(rtp_packet);
@@ -907,7 +820,6 @@ TEST_F(RtpVideoStreamReceiverTest, ParseGenericDescriptorTwoPackets) {
         EXPECT_EQ(frame->SpatialIndex(), kSpatialIndex);
         EXPECT_EQ(frame->EncodedImage()._encodedWidth, 480u);
         EXPECT_EQ(frame->EncodedImage()._encodedHeight, 360u);
-        EXPECT_THAT(frame->PacketInfos(), SizeIs(2));
       }));
 
   rtp_video_stream_receiver_->OnRtpPacket(second_packet);

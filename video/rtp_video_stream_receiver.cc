@@ -506,18 +506,8 @@ void RtpVideoStreamReceiver::OnReceivedPayloadData(
     const RtpPacketReceived& rtp_packet,
     const RTPVideoHeader& video) {
   RTC_DCHECK_RUN_ON(&worker_task_checker_);
-  auto packet = std::make_unique<video_coding::PacketBuffer::Packet>(
-      rtp_packet, video, clock_->CurrentTime());
-
-  // Try to extrapolate absolute capture time if it is missing.
-  packet->packet_info.set_absolute_capture_time(
-      absolute_capture_time_receiver_.OnReceivePacket(
-          AbsoluteCaptureTimeReceiver::GetSource(packet->packet_info.ssrc(),
-                                                 packet->packet_info.csrcs()),
-          packet->packet_info.rtp_timestamp(),
-          // Assume frequency is the same one for all video frames.
-          kVideoPayloadTypeFrequency,
-          packet->packet_info.absolute_capture_time()));
+  auto packet =
+      std::make_unique<video_coding::PacketBuffer::Packet>(rtp_packet, video);
 
   RTPVideoHeader& video_header = packet->video_header;
   video_header.rotation = kVideoRotation_0;
@@ -739,10 +729,7 @@ void RtpVideoStreamReceiver::OnInsertedPacket(
     video_coding::PacketBuffer::InsertResult result) {
   video_coding::PacketBuffer::Packet* first_packet = nullptr;
   int max_nack_count;
-  int64_t min_recv_time;
-  int64_t max_recv_time;
   std::vector<rtc::ArrayView<const uint8_t>> payloads;
-  RtpPacketInfos::vector_type packet_infos;
 
   bool frame_boundary = true;
   for (auto& packet : result.packets) {
@@ -752,19 +739,11 @@ void RtpVideoStreamReceiver::OnInsertedPacket(
     if (packet->is_first_packet_in_frame()) {
       first_packet = packet.get();
       max_nack_count = packet->times_nacked;
-      min_recv_time = packet->packet_info.receive_time().ms();
-      max_recv_time = packet->packet_info.receive_time().ms();
       payloads.clear();
-      packet_infos.clear();
     } else {
       max_nack_count = std::max(max_nack_count, packet->times_nacked);
-      min_recv_time =
-          std::min(min_recv_time, packet->packet_info.receive_time().ms());
-      max_recv_time =
-          std::max(max_recv_time, packet->packet_info.receive_time().ms());
     }
     payloads.emplace_back(packet->video_payload);
-    packet_infos.push_back(packet->packet_info);
 
     frame_boundary = packet->is_last_packet_in_frame();
     if (packet->is_last_packet_in_frame()) {
@@ -784,8 +763,8 @@ void RtpVideoStreamReceiver::OnInsertedPacket(
           last_packet.seq_num,                               //
           last_packet.marker_bit,                            //
           max_nack_count,                                    //
-          min_recv_time,                                     //
-          max_recv_time,                                     //
+          /*min_recv_time=*/0,                               //
+          /*max_recv_time=*/0,                               //
           first_packet->timestamp,                           //
           ntp_estimator_.Estimate(first_packet->timestamp),  //
           last_packet.video_header.video_timing,             //
@@ -795,7 +774,7 @@ void RtpVideoStreamReceiver::OnInsertedPacket(
           last_packet.video_header.content_type,             //
           first_packet->video_header,                        //
           last_packet.video_header.color_space,              //
-          RtpPacketInfos(std::move(packet_infos)),           //
+          RtpPacketInfos(),                                  //
           std::move(bitstream)));
     }
   }
