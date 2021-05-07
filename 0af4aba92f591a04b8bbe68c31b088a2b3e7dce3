@@ -232,6 +232,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "767069f1_1cedbec9",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-07T16:22:29Z",
+      "side": 1,
+      "message": "the scoped_refptr object is const already, set at construction and never cleared. That\u0027s the object that owns the pointer, so in the end the pointer itself is const (methods like release(), operator\u003d(), etc, can\u0027t be called).\n\nThe pointer points to a PendingTaskSafetyFlag that can\u0027t be made const since we need to call SetAlive/SetNotAlive().",
+      "parentUuid": "5948eb0c_3d71882f",
+      "range": {
+        "startLine": 308,
+        "startChar": 2,
+        "endLine": 308,
+        "endChar": 68
+      },
+      "revId": "0af4aba92f591a04b8bbe68c31b088a2b3e7dce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b16e33d_da0cce04",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 5
