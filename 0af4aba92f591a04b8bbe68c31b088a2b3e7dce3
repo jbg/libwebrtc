@@ -208,6 +208,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5948eb0c_3d71882f",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-05-07T12:00:26Z",
+      "side": 1,
+      "message": "Can you make the pointer const too? Looked like pointer was assigned only as part of construction.",
+      "parentUuid": "2c469b10_83e2c862",
+      "range": {
+        "startLine": 308,
+        "startChar": 2,
+        "endLine": 308,
+        "endChar": 68
+      },
+      "revId": "0af4aba92f591a04b8bbe68c31b088a2b3e7dce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b16e33d_da0cce04",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 5
