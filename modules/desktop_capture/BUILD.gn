@@ -16,7 +16,7 @@ if (rtc_use_pipewire) {
          "Unsupported PipeWire version")
 }
 
-use_desktop_capture_differ_sse2 = current_cpu == "x86" || current_cpu == "x64"
+use_desktop_capture_differ_simd = current_cpu == "x86" || current_cpu == "x64"
 
 config("x11_config") {
   if (rtc_use_x11_extensions) {
@@ -552,8 +552,8 @@ rtc_library("desktop_capture_generic") {
     deps += [ "//third_party/libyuv" ]
   }
 
-  if (use_desktop_capture_differ_sse2) {
-    deps += [ ":desktop_capture_differ_sse2" ]
+  if (use_desktop_capture_differ_simd) {
+    deps += [ ":desktop_capture_differ_simd" ]
   }
 
   if (rtc_use_pipewire) {
@@ -587,18 +587,16 @@ rtc_library("desktop_capture_generic") {
   }
 }
 
-if (use_desktop_capture_differ_sse2) {
+if (use_desktop_capture_differ_simd) {
   # Have to be compiled as a separate target because it needs to be compiled
-  # with SSE2 enabled.
-  rtc_library("desktop_capture_differ_sse2") {
+  # with SIMD enabled.
+  rtc_library("desktop_capture_differ_simd") {
     visibility = [ ":*" ]
     sources = [
-      "differ_vector_sse2.cc",
-      "differ_vector_sse2.h",
+      "differ_vector_simd.cc",
+      "differ_vector_simd.h",
     ]
 
-    if (is_posix || is_fuchsia) {
-      cflags = [ "-msse2" ]
-    }
+    deps = [ "../../system_wrappers" ]
   }
 }
