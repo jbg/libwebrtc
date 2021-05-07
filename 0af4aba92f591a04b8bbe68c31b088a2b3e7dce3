@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3032746f_a0226a51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-05-07T08:27:06Z",
+      "side": 1,
+      "message": "lgtm % a few nits.",
+      "revId": "0af4aba92f591a04b8bbe68c31b088a2b3e7dce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a429fc4_9a686ccb",
+        "filename": "media/base/media_channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-05-07T08:27:06Z",
+      "side": 1,
+      "message": "Unused assignment.",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 10
+      },
+      "revId": "0af4aba92f591a04b8bbe68c31b088a2b3e7dce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf87b50_5a58b71f",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-05-07T08:27:06Z",
+      "side": 1,
+      "message": "Should this be RTC_RUN_ON? (as far as I see, same as RTC_EXCLUSIVE_LOCKS_REQUIRED after macro expansion).",
+      "range": {
+        "startLine": 275,
+        "startChar": 34,
+        "endLine": 275,
+        "endChar": 62
+      },
+      "revId": "0af4aba92f591a04b8bbe68c31b088a2b3e7dce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f12039_73e979a7",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-05-07T08:27:06Z",
+      "side": 1,
+      "message": "d:o.",
+      "range": {
+        "startLine": 300,
+        "startChar": 20,
+        "endLine": 300,
+        "endChar": 48
+      },
+      "revId": "0af4aba92f591a04b8bbe68c31b088a2b3e7dce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e54c7d09_a4df3ebe",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-05-07T08:27:06Z",
+      "side": 1,
+      "message": "Can this one be declared a bit stricter, like\n\nconst rtc::scoped_refptr\u003cwebrtc::PendingTaskSafetyFlag\u003e network_safety_ RTC_PT_GUARDED_BY(network_thread_);\n\n?\n\n(I seem to recall that RTC_PT_GUARDED_BY didn\u0027t work with rtc::scoped_ref_ptr, but that was fixed in https://webrtc-review.googlesource.com/c/src/+/211351)",
+      "range": {
+        "startLine": 308,
+        "startChar": 2,
+        "endLine": 308,
+        "endChar": 68
+      },
+      "revId": "0af4aba92f591a04b8bbe68c31b088a2b3e7dce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b16e33d_da0cce04",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2561,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-05-07T08:27:06Z",
+      "side": 1,
+      "message": "Looks like there\u0027s an opportunity to drop the return value of this method (but perhaps best in a different cl).",
+      "range": {
+        "startLine": 2561,
+        "startChar": 0,
+        "endLine": 2561,
+        "endChar": 14
+      },
+      "revId": "0af4aba92f591a04b8bbe68c31b088a2b3e7dce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
