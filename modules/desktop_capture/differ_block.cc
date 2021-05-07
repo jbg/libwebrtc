@@ -12,7 +12,7 @@
 
 #include <string.h>
 
-#include "modules/desktop_capture/differ_vector_sse2.h"
+#include "modules/desktop_capture/differ_vector_simd.h"
 #include "rtc_base/system/arch.h"
 #include "system_wrappers/include/cpu_features_wrapper.h"
 
@@ -35,12 +35,12 @@ bool VectorDifference(const uint8_t* image1, const uint8_t* image2) {
     // TODO(hclam): Implement a NEON version.
     diff_proc = &VectorDifference_C;
 #else
-    bool have_sse2 = GetCPUInfo(kSSE2) != 0;
-    // For x86 processors, check if SSE2 is supported.
-    if (have_sse2 && kBlockSize == 32) {
-      diff_proc = &VectorDifference_SSE2_W32;
-    } else if (have_sse2 && kBlockSize == 16) {
-      diff_proc = &VectorDifference_SSE2_W16;
+    bool have_simd = GetCPUInfo(kAVX2) != 0 || GetCPUInfo(kSSE2) != 0;
+    // For x86 processors, check if SIMD is supported.
+    if (have_simd && kBlockSize == 32) {
+      diff_proc = &VectorDifference_SIMD_W32;
+    } else if (have_simd && kBlockSize == 16) {
+      diff_proc = &VectorDifference_SIMD_W16;
     } else {
       diff_proc = &VectorDifference_C;
     }
