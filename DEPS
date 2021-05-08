@@ -7,7 +7,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'c8edc4c427a5ff191039204965ff04808bf3b585',
+  'chromium_revision': '1df5150128df9f3cc4be3cb151639c5dfd85de33',
 }
 
 deps = {
@@ -25,13 +25,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@e40affe3bc7041e9e5d89f41589af0e042763abf',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@8f9b7370657deeaa79386b764d8aa6af9f15c10c',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@cb29807a582592b34518392c1bbe4786d3e403bd',
+    'https://chromium.googlesource.com/chromium/src/testing@acfc2462533bfac897c22686ee3ce1d9e344cf2e',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@aefb8b5ccc2be5fc7c8e6ab14a635ac0e212047c',
+    'https://chromium.googlesource.com/chromium/src/third_party@45a29367f2e0818abf19ceb534f58609952ec737',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -265,7 +265,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@1aa2a56db398808a30f9d3dc6a5e0759225937b3',
+    'https://chromium.googlesource.com/chromium/src/tools@462cb37c3abbb239a1eaa9da14148f01450ddf4d',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@a32a1607f6093d338f756c7e7c7b4333b0c50c9c',
 
@@ -476,15 +476,15 @@ deps = {
       'packages': [
         {
           'package': 'infra/tools/luci/isolate/${{platform}}',
-          'version': 'git_revision:fa78eb7ab25ca5d574c0741c8c1a02d6fd7ed66d',
+          'version': 'git_revision:66f9c8541b85c7f6efc63e75e68d660d4fb30752',
         },
         {
           'package': 'infra/tools/luci/isolated/${{platform}}',
-          'version': 'git_revision:fa78eb7ab25ca5d574c0741c8c1a02d6fd7ed66d',
+          'version': 'git_revision:66f9c8541b85c7f6efc63e75e68d660d4fb30752',
         },
         {
           'package': 'infra/tools/luci/swarming/${{platform}}',
-          'version': 'git_revision:fa78eb7ab25ca5d574c0741c8c1a02d6fd7ed66d',
+          'version': 'git_revision:66f9c8541b85c7f6efc63e75e68d660d4fb30752',
         },
       ],
       'dep_type': 'cipd',
