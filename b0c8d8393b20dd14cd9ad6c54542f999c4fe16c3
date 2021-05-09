@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9576ec32_ed17020a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-09T09:59:42Z",
+      "side": 1,
+      "message": "Change these two lines to:\n\nBug: webrtc:12713",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "b0c8d8393b20dd14cd9ad6c54542f999c4fe16c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d0e3df_070946f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-09T09:59:42Z",
+      "side": 1,
+      "message": "Thanks for contributing!",
+      "revId": "b0c8d8393b20dd14cd9ad6c54542f999c4fe16c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a169836_c56b13c0",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-09T09:59:42Z",
+      "side": 1,
+      "message": "Setting ssrc to other than media ssrc is likely to be rare. I think just changing the ssrc of packet after calling BuildRtpPacket() is good enough, no need to add this parameter.",
+      "range": {
+        "startLine": 177,
+        "startChar": 50,
+        "endLine": 177,
+        "endChar": 71
+      },
+      "revId": "b0c8d8393b20dd14cd9ad6c54542f999c4fe16c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79894b59_851b42d3",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-09T09:59:42Z",
+      "side": 1,
+      "message": "Just use kSsrc and kRtxSsrc directly, I think that makes it more clear what scenario is being tested.",
+      "range": {
+        "startLine": 236,
+        "startChar": 2,
+        "endLine": 237,
+        "endChar": 35
+      },
+      "revId": "b0c8d8393b20dd14cd9ad6c54542f999c4fe16c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1f5fd1d_1ecf70a9",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-09T09:59:42Z",
+      "side": 1,
+      "message": "Most of these are already test, feel free to trim the test case down to just testing ssrc and possible transport sequence number.\n(TransportFeedbackObserverGetsCorrectByteCount is not a great example, I should really break that into several tests at some point...)",
+      "range": {
+        "startLine": 238,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 71
+      },
+      "revId": "b0c8d8393b20dd14cd9ad6c54542f999c4fe16c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
