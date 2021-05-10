@@ -28,25 +28,18 @@ namespace webrtc {
 
 AudioRtpReceiver::AudioRtpReceiver(rtc::Thread* worker_thread,
                                    std::string receiver_id,
-                                   std::vector<std::string> stream_ids,
-                                   bool is_unified_plan)
+                                   std::vector<std::string> stream_ids)
     : AudioRtpReceiver(worker_thread,
                        receiver_id,
-                       CreateStreamsFromIds(std::move(stream_ids)),
-                       is_unified_plan) {}
+                       CreateStreamsFromIds(std::move(stream_ids))) {}
 
 AudioRtpReceiver::AudioRtpReceiver(
     rtc::Thread* worker_thread,
     const std::string& receiver_id,
-    const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams,
-    bool is_unified_plan)
+    const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams)
     : worker_thread_(worker_thread),
       id_(receiver_id),
-      source_(new rtc::RefCountedObject<RemoteAudioSource>(
-          worker_thread,
-          is_unified_plan
-              ? RemoteAudioSource::OnAudioChannelGoneAction::kSurvive
-              : RemoteAudioSource::OnAudioChannelGoneAction::kEnd)),
+      source_(new rtc::RefCountedObject<RemoteAudioSource>(worker_thread)),
       track_(AudioTrackProxyWithInternal<AudioTrack>::Create(
           rtc::Thread::Current(),
           AudioTrack::Create(receiver_id, source_))),
@@ -144,7 +137,6 @@ void AudioRtpReceiver::Stop() {
   if (stopped_) {
     return;
   }
-  source_->SetState(MediaSourceInterface::kEnded);
   if (media_channel_) {
     // Allow that SetOutputVolume fail. This is the normal case when the
     // underlying media channel has already been deleted.
