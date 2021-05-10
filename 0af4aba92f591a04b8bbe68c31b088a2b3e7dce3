@@ -280,6 +280,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3452616d_2895ebf3",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-10T08:45:56Z",
+      "side": 1,
+      "message": "Sorry, yes it should have been const. I must have been misreading the line since I read it as it being const already (as per my previous comment). Will fix.",
+      "parentUuid": "7208f50d_bb0be09a",
+      "range": {
+        "startLine": 308,
+        "startChar": 2,
+        "endLine": 308,
+        "endChar": 68
+      },
+      "revId": "0af4aba92f591a04b8bbe68c31b088a2b3e7dce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b16e33d_da0cce04",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 5
