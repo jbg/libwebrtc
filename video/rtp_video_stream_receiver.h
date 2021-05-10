@@ -299,11 +299,14 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
   void UpdateHistograms();
   bool IsRedEnabled() const;
   void InsertSpsPpsIntoTracker(uint8_t payload_type);
-  void OnInsertedPacket(video_coding::PacketBuffer::InsertResult result);
+  std::vector<std::unique_ptr<RtpFrameObject>> OnInsertedPacket(
+      video_coding::PacketBuffer::InsertResult result)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(packet_buffer_lock_);
   ParseGenericDependenciesResult ParseGenericDependenciesExtension(
       const RtpPacketReceived& rtp_packet,
       RTPVideoHeader* video_header) RTC_RUN_ON(worker_task_checker_);
-  void OnAssembledFrame(std::unique_ptr<RtpFrameObject> frame);
+  void OnAssembledFrames(std::vector<std::unique_ptr<RtpFrameObject>>& frames)
+      RTC_LOCKS_EXCLUDED(packet_buffer_lock_);
   void UpdatePacketReceiveTimestamps(const RtpPacketReceived& packet,
                                      bool is_keyframe)
       RTC_RUN_ON(worker_task_checker_);
@@ -407,6 +410,11 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
 
   rtc::scoped_refptr<RtpVideoStreamReceiverFrameTransformerDelegate>
       frame_transformer_delegate_;
+
+  SeqNumUnwrapper<uint16_t> rtp_seq_num_unwrapper_
+      RTC_GUARDED_BY(packet_buffer_lock_);
+  std::map<int64_t, RtpPacketInfo> packet_infos_
+      RTC_GUARDED_BY(packet_buffer_lock_);
 };
 
 }  // namespace webrtc
