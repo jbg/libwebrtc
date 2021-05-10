@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1019632_1ccc4022",
+        "filename": "examples/objc/AppRTCMobile/ios/ARDVideoCallView.m",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 17629
+      },
+      "writtenOn": "2021-05-10T21:46:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0aea1d9_eb366c5a",
+      "revId": "337f7211a3ea9fbb73897ba4db0f41e707b50f37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c43b6e4b_f49e365e",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-05-03T13:40:52Z",
       "side": 1,
       "message": "Please remove this as well since it\u0027s now unused.",
+      "revId": "337f7211a3ea9fbb73897ba4db0f41e707b50f37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "759b2adb_0c51b66f",
+        "filename": "examples/objcnativeapi/objc/NADViewController.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 17629
+      },
+      "writtenOn": "2021-05-10T21:46:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c43b6e4b_f49e365e",
       "revId": "337f7211a3ea9fbb73897ba4db0f41e707b50f37",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
