@@ -256,6 +256,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7208f50d_bb0be09a",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-05-10T08:39:43Z",
+      "side": 1,
+      "message": "I think const expresses the desired semantics, of marking just the pointer itself as const. See https://webrtc-review.googlesource.com/c/src/+/217896",
+      "parentUuid": "767069f1_1cedbec9",
+      "range": {
+        "startLine": 308,
+        "startChar": 2,
+        "endLine": 308,
+        "endChar": 68
+      },
+      "revId": "0af4aba92f591a04b8bbe68c31b088a2b3e7dce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b16e33d_da0cce04",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 5
