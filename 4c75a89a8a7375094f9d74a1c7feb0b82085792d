@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a98c811b_663b43a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2021-05-10T22:54:35Z",
+      "side": 1,
+      "message": "And we\u0027re not OWNERS of the sctp folder, so we\u0027ll need some extra help until we merge this: https://webrtc-review.googlesource.com/c/src/+/218281",
+      "revId": "4c75a89a8a7375094f9d74a1c7feb0b82085792d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
