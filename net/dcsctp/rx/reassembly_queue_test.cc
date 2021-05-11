@@ -68,17 +68,22 @@ MATCHER_P3(SctpMessageIs, stream_id, ppid, expected_payload, "") {
 class ReassemblyQueueTest : public testing::Test {
  protected:
   ReassemblyQueueTest() {}
+
+  ReassemblyQueue CreateQueue() {
+    return ReassemblyQueue("log: ", TSN(10), kBufferSize);
+  }
+
   DataGenerator gen_;
 };
 
 TEST_F(ReassemblyQueueTest, EmptyQueue) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   EXPECT_FALSE(reasm.HasMessages());
   EXPECT_EQ(reasm.queued_bytes(), 0u);
 }
 
 TEST_F(ReassemblyQueueTest, SingleUnorderedChunkMessage) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   reasm.Add(TSN(10), gen_.Unordered({1, 2, 3, 4}, "BE"));
   EXPECT_TRUE(reasm.HasMessages());
   EXPECT_THAT(reasm.FlushMessages(),
@@ -90,7 +95,7 @@ TEST_F(ReassemblyQueueTest, LargeUnorderedChunkAllPermutations) {
   std::vector<uint32_t> tsns = {10, 11, 12, 13};
   rtc::ArrayView<const uint8_t> payload(kLongPayload);
   do {
-    ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+    ReassemblyQueue reasm = CreateQueue();
 
     for (size_t i = 0; i < tsns.size(); i++) {
       auto span = payload.subview((tsns[i] - 10) * 4, 4);
@@ -114,7 +119,7 @@ TEST_F(ReassemblyQueueTest, LargeUnorderedChunkAllPermutations) {
 }
 
 TEST_F(ReassemblyQueueTest, SingleOrderedChunkMessage) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   reasm.Add(TSN(10), gen_.Ordered({1, 2, 3, 4}, "BE"));
   EXPECT_EQ(reasm.queued_bytes(), 0u);
   EXPECT_TRUE(reasm.HasMessages());
@@ -126,7 +131,7 @@ TEST_F(ReassemblyQueueTest, ManySmallOrderedMessages) {
   std::vector<uint32_t> tsns = {10, 11, 12, 13};
   rtc::ArrayView<const uint8_t> payload(kLongPayload);
   do {
-    ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+    ReassemblyQueue reasm = CreateQueue();
     for (size_t i = 0; i < tsns.size(); i++) {
       auto span = payload.subview((tsns[i] - 10) * 4, 4);
       Data::IsBeginning is_beginning(true);
@@ -149,7 +154,7 @@ TEST_F(ReassemblyQueueTest, ManySmallOrderedMessages) {
 }
 
 TEST_F(ReassemblyQueueTest, RetransmissionInLargeOrdered) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   reasm.Add(TSN(10), gen_.Ordered({1}, "B"));
   reasm.Add(TSN(12), gen_.Ordered({3}));
   reasm.Add(TSN(13), gen_.Ordered({4}));
@@ -174,7 +179,7 @@ TEST_F(ReassemblyQueueTest, RetransmissionInLargeOrdered) {
 }
 
 TEST_F(ReassemblyQueueTest, ForwardTSNRemoveUnordered) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   reasm.Add(TSN(10), gen_.Unordered({1}, "B"));
   reasm.Add(TSN(12), gen_.Unordered({3}));
   reasm.Add(TSN(13), gen_.Unordered({4}, "E"));
@@ -201,7 +206,7 @@ TEST_F(ReassemblyQueueTest, ForwardTSNRemoveUnordered) {
 }
 
 TEST_F(ReassemblyQueueTest, ForwardTSNRemoveOrdered) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   reasm.Add(TSN(10), gen_.Ordered({1}, "B"));
   reasm.Add(TSN(12), gen_.Ordered({3}));
   reasm.Add(TSN(13), gen_.Ordered({4}, "E"));
@@ -225,7 +230,7 @@ TEST_F(ReassemblyQueueTest, ForwardTSNRemoveOrdered) {
 }
 
 TEST_F(ReassemblyQueueTest, ForwardTSNRemoveALotOrdered) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   reasm.Add(TSN(10), gen_.Ordered({1}, "B"));
   reasm.Add(TSN(12), gen_.Ordered({3}));
   reasm.Add(TSN(13), gen_.Ordered({4}, "E"));
@@ -249,14 +254,14 @@ TEST_F(ReassemblyQueueTest, ForwardTSNRemoveALotOrdered) {
 }
 
 TEST_F(ReassemblyQueueTest, ShouldntDeliverMessagesBeforeInitialTsn) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   reasm.Add(TSN(5), gen_.Unordered({1, 2, 3, 4}, "BE"));
   EXPECT_EQ(reasm.queued_bytes(), 0u);
   EXPECT_FALSE(reasm.HasMessages());
 }
 
 TEST_F(ReassemblyQueueTest, ShouldntRedeliverUnorderedMessages) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   reasm.Add(TSN(10), gen_.Unordered({1, 2, 3, 4}, "BE"));
   EXPECT_EQ(reasm.queued_bytes(), 0u);
   EXPECT_TRUE(reasm.HasMessages());
@@ -268,7 +273,7 @@ TEST_F(ReassemblyQueueTest, ShouldntRedeliverUnorderedMessages) {
 }
 
 TEST_F(ReassemblyQueueTest, ShouldntRedeliverUnorderedMessagesReallyUnordered) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   reasm.Add(TSN(10), gen_.Unordered({1, 2, 3, 4}, "B"));
   EXPECT_EQ(reasm.queued_bytes(), 4u);
 
@@ -286,7 +291,7 @@ TEST_F(ReassemblyQueueTest, ShouldntRedeliverUnorderedMessagesReallyUnordered) {
 }
 
 TEST_F(ReassemblyQueueTest, ShouldntDeliverBeforeForwardedTsn) {
-  ReassemblyQueue reasm("log: ", TSN(10), kBufferSize);
+  ReassemblyQueue reasm = CreateQueue();
   reasm.Handle(ForwardTsnChunk(TSN(12), {}));
 
   reasm.Add(TSN(12), gen_.Unordered({1, 2, 3, 4}, "BE"));
