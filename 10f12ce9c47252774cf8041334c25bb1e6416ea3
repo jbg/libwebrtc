@@ -39,6 +39,30 @@
       },
       "revId": "10f12ce9c47252774cf8041334c25bb1e6416ea3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f29b67_8ba1ba16",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-05-11T09:32:59Z",
+      "side": 1,
+      "message": "Done, we still need to check it twice, once to call `packet_infos_.clear()`, and then once more after `packet_buffer_lock_` has been released.",
+      "parentUuid": "e8e3177b_eca743e9",
+      "range": {
+        "startLine": 826,
+        "startChar": 3,
+        "endLine": 826,
+        "endChar": 32
+      },
+      "revId": "10f12ce9c47252774cf8041334c25bb1e6416ea3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
