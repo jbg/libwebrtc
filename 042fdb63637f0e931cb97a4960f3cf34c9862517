@@ -16,6 +16,23 @@
       "message": "Hi Natalie,\n\nI\u0027m wondering if you can provide some feedback as this is my first non-trivial fuzzer!",
       "revId": "042fdb63637f0e931cb97a4960f3cf34c9862517",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a372bf80_10e5e901",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7133
+      },
+      "writtenOn": "2021-05-11T20:18:51Z",
+      "side": 1,
+      "message": "LGTM, Looks great! FYI, I don\u0027t have review permissions in chromium, so you will need to add another reviewer.",
+      "revId": "042fdb63637f0e931cb97a4960f3cf34c9862517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
