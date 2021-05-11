@@ -16,6 +16,29 @@
       "message": "Ilya, PTAL",
       "revId": "10f12ce9c47252774cf8041334c25bb1e6416ea3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8e3177b_eca743e9",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-05-11T09:28:13Z",
+      "side": 1,
+      "message": "This part can be moved out of |packet_buffer_lock_|.\n\nPlease do so, as it simplifies the lock taking. Now the reader must reason why is it safe to grab sync_info_lock_ after packet_buffer_lock_ and some change in other part might introduce a deadlock.\n\nAslo, it will simplify if (result.buffer_cleared)  condition, as it will have to be checked only once.",
+      "range": {
+        "startLine": 826,
+        "startChar": 3,
+        "endLine": 826,
+        "endChar": 32
+      },
+      "revId": "10f12ce9c47252774cf8041334c25bb1e6416ea3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
