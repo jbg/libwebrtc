@@ -103,8 +103,9 @@ SSLFingerprint::SSLFingerprint(const std::string& algorithm,
                                size_t digest_len)
     : SSLFingerprint(algorithm, MakeArrayView(digest_in, digest_len)) {}
 
-SSLFingerprint::SSLFingerprint(const SSLFingerprint& from)
-    : algorithm(from.algorithm), digest(from.digest) {}
+SSLFingerprint::SSLFingerprint(const SSLFingerprint& from) = default;
+
+SSLFingerprint& SSLFingerprint::operator=(const SSLFingerprint& from) = default;
 
 bool SSLFingerprint::operator==(const SSLFingerprint& other) const {
   return algorithm == other.algorithm && digest == other.digest;
