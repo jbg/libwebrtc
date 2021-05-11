@@ -29,25 +29,42 @@
 #include "net/dcsctp/packet/parameter/outgoing_ssn_reset_request_parameter.h"
 #include "net/dcsctp/packet/parameter/reconfiguration_response_parameter.h"
 #include "net/dcsctp/public/dcsctp_message.h"
+#include "net/dcsctp/rx/interleaved_reassembly_streams.h"
 #include "net/dcsctp/rx/reassembly_streams.h"
 #include "net/dcsctp/rx/traditional_reassembly_streams.h"
 #include "rtc_base/logging.h"
 
 namespace dcsctp {
+namespace {
+std::unique_ptr<ReassemblyStreams> CreateStreams(
+    absl::string_view log_prefix,
+    ReassemblyStreams::OnAssembledMessage on_assembled_message,
+    bool use_message_interleaving) {
+  if (use_message_interleaving) {
+    return std::make_unique<InterleavedReassemblyStreams>(
+        log_prefix, std::move(on_assembled_message));
+  }
+  return std::make_unique<TraditionalReassemblyStreams>(
+      log_prefix, std::move(on_assembled_message));
+}
+}  // namespace
+
 ReassemblyQueue::ReassemblyQueue(absl::string_view log_prefix,
                                  TSN peer_initial_tsn,
-                                 size_t max_size_bytes)
+                                 size_t max_size_bytes,
+                                 bool use_message_interleaving)
     : log_prefix_(std::string(log_prefix) + "reasm: "),
       max_size_bytes_(max_size_bytes),
       watermark_bytes_(max_size_bytes * kHighWatermarkLimit),
       last_assembled_tsn_watermark_(
           tsn_unwrapper_.Unwrap(TSN(*peer_initial_tsn - 1))),
-      streams_(std::make_unique<TraditionalReassemblyStreams>(
+      streams_(CreateStreams(
           log_prefix_,
           [this](rtc::ArrayView<const UnwrappedTSN> tsns,
                  DcSctpMessage message) {
             AddReassembledMessage(tsns, std::move(message));
-          })) {}
+          },
+          use_message_interleaving)) {}
 
 void ReassemblyQueue::Add(TSN tsn, Data data) {
   RTC_DCHECK(IsConsistent());

@@ -97,7 +97,10 @@ class StreamResetHandlerTest : public testing::Test {
             []() { return absl::nullopt; },
             TimerOptions(DurationMs(0)))),
         buf_("log: ", delayed_ack_timer_.get(), kPeerInitialTsn),
-        reasm_("log: ", kPeerInitialTsn, kArwnd),
+        reasm_("log: ",
+               kPeerInitialTsn,
+               kArwnd,
+               /*use_message_interleaving=*/false),
         retransmission_queue_(
             "",
             kMyInitialTsn,

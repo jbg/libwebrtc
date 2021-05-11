@@ -82,7 +82,8 @@ class TransmissionControlBlock : public Context {
         data_tracker_(log_prefix, delayed_ack_timer_.get(), peer_initial_tsn),
         reassembly_queue_(log_prefix,
                           peer_initial_tsn,
-                          options.max_receiver_window_buffer_size),
+                          options.max_receiver_window_buffer_size,
+                          capabilities.message_interleaving),
         retransmission_queue_(
             log_prefix,
             my_initial_tsn,
