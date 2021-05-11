@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a26f525_358c3221",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-05-11T21:26:14Z",
+      "side": 1,
+      "message": "Why do you want to keep output parameters instead of making one extra step and replace them with return values?\nabsl::optional\u003cuintX_t\u003e looks like a reasonable return value.\n\nhttps://google.github.io/styleguide/cppguide.html#Inputs_and_Outputs\n\"Prefer using return values over output parameters\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "80c81ca8bbb158c8f0a1a85763c09f75e8afeade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
