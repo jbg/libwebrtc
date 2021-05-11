@@ -50,6 +50,24 @@
       "message": "We usually put \u003ddefault into the .h file - is there a reason not to do this here?\n\n(can\u0027t see that it\u0027s a rule, but https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types uses public \u003d default in all its examples).",
       "revId": "ee911dca1c7c88f797735cb9cbbad57ae6d5b47c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "015fd6dd_dfad42aa",
+        "filename": "rtc_base/ssl_fingerprint.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-05-11T13:28:37Z",
+      "side": 1,
+      "message": "$ git grep -rIE \"\u003d\\s+default;\" -- \u0027*.h\u0027 | wc -l\n620\n$ git grep -rIE \"\u003d\\s+default;\" -- \u0027*.cc\u0027 | wc -l\n1145\nWell, Both are popular on WebRTC codebase, but I can change it according to your request.",
+      "parentUuid": "5f2bdcf7_f24c3c36",
+      "revId": "ee911dca1c7c88f797735cb9cbbad57ae6d5b47c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
