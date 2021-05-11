@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab93910a_77fa82bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-05-11T12:55:45Z",
+      "side": 1,
+      "message": "This is a small CL for fixing a compilation issue in Xcode 12.5. Please take a look. Thank you.",
+      "revId": "ee911dca1c7c88f797735cb9cbbad57ae6d5b47c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
