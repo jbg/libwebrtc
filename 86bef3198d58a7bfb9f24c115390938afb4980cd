@@ -16,6 +16,23 @@
       "message": "Thanks for reviewing!",
       "revId": "86bef3198d58a7bfb9f24c115390938afb4980cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "103e84aa_156270b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-12T09:11:36Z",
+      "side": 1,
+      "message": "All good - let\u0027s go!\n\n(Any fuzzing is better than no fuzzing, but this is really thorough fuzzing!)\n",
+      "revId": "86bef3198d58a7bfb9f24c115390938afb4980cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
