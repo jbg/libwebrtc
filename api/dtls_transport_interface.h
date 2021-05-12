@@ -26,7 +26,7 @@ namespace webrtc {
 
 // States of a DTLS transport, corresponding to the JS API specification.
 // http://w3c.github.io/webrtc-pc/#dom-rtcdtlstransportstate
-enum class DtlsTransportState {
+enum class DtlsTransportState : int {
   kNew,         // Has not started negotiating yet.
   kConnecting,  // In the process of negotiating a secure connection.
   kConnected,   // Completed negotiation and verified fingerprints.
