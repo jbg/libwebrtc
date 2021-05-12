@@ -32,24 +32,6 @@
 
 namespace cricket {
 
-enum DtlsTransportState {
-  // Haven't started negotiating.
-  DTLS_TRANSPORT_NEW = static_cast<int>(webrtc::DtlsTransportState::kNew),
-  // Have started negotiating.
-  DTLS_TRANSPORT_CONNECTING =
-      static_cast<int>(webrtc::DtlsTransportState::kConnecting),
-  // Negotiated, and has a secure connection.
-  DTLS_TRANSPORT_CONNECTED =
-      static_cast<int>(webrtc::DtlsTransportState::kConnected),
-  // Transport is closed.
-  DTLS_TRANSPORT_CLOSED = static_cast<int>(webrtc::DtlsTransportState::kClosed),
-  // Failed due to some error in the handshake process.
-  DTLS_TRANSPORT_FAILED = static_cast<int>(webrtc::DtlsTransportState::kFailed),
-};
-
-webrtc::DtlsTransportState ConvertDtlsTransportState(
-    cricket::DtlsTransportState cricket_state);
-
 enum PacketFlags {
   PF_NORMAL = 0x00,       // A normal packet.
   PF_SRTP_BYPASS = 0x01,  // An encrypted SRTP packet; bypass any additional
@@ -66,7 +48,7 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
  public:
   ~DtlsTransportInternal() override;
 
-  virtual DtlsTransportState dtls_state() const = 0;
+  virtual webrtc::DtlsTransportState dtls_state() const = 0;
 
   virtual int component() const = 0;
 
@@ -117,7 +99,7 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
   // Expose the underneath IceTransport.
   virtual IceTransportInternal* ice_transport() = 0;
 
-  // F: void(DtlsTransportInternal*, const DtlsTransportState)
+  // F: void(DtlsTransportInternal*, const webrtc::DtlsTransportState)
   template <typename F>
   void SubscribeDtlsState(F&& callback) {
     dtls_state_callback_list_.AddReceiver(std::forward<F>(callback));
@@ -133,7 +115,7 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
   }
 
   void SendDtlsState(DtlsTransportInternal* transport,
-                     DtlsTransportState state) {
+                     webrtc::DtlsTransportState state) {
     dtls_state_callback_list_.Send(transport, state);
   }
 
@@ -155,7 +137,7 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
   RTC_DISALLOW_COPY_AND_ASSIGN(DtlsTransportInternal);
   webrtc::CallbackList<const rtc::SSLHandshakeError>
       dtls_handshake_error_callback_list_;
-  webrtc::CallbackList<DtlsTransportInternal*, const DtlsTransportState>
+  webrtc::CallbackList<DtlsTransportInternal*, const webrtc::DtlsTransportState>
       dtls_state_callback_list_;
 };
 
