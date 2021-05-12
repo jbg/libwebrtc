@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9d29d45e_2a8a3de2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-05-12T09:11:39Z",
+      "side": 1,
+      "message": "Ok, this change is still an improvement.",
+      "parentUuid": "43a8cbfd_3f5710a3",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "80c81ca8bbb158c8f0a1a85763c09f75e8afeade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c94fcce6_29b56222",
         "filename": "common_video/h264/h264_bitstream_parser.cc",
         "patchSetId": 1
@@ -61,6 +85,23 @@
       "writtenOn": "2021-05-11T21:49:28Z",
       "side": 1,
       "message": "If you would go for using absl::optional return type, \nmay be something like this would work:\n\n#define ASSIGN_OR_RETURN_IMPL(temp_name, lhs, exp, result) \\\n  auto temp_name \u003d exp; \\\n  if (!temp_name.has_value()) { \\\n    return result; \\\n  } \\\n  lhs \u003d *temp_name\n\n#define ASSIGN_OR_RETURN(lhs, exp) \\\n  ASSIGN_OR_RETURN_IMPL(tmp_var##__LINE__, lhs, exp, kInvalidStream)\n  \n\n...\nASSIGN_OR_RETURN(uint32_t unused_golomb, slice_reader.ReadExponentioalGolomb());\nASSIGN_OR_RETURN(uint32_t slice_type, slice_reader.ReadExponentioalGolomb());\nASSIGN_OR_RETURN(unused_golomb, slice_reader.ReadExponentioalGolomb());\n...\n\nor existent macros can be kept and local variable types be changed to optionals:\n\n// no need for golomb_tmp variable because it is discarded anyway\nRETURN_INV_ON_FAIL(slice_reader.ReadExponentialGolomb());\nabsl::optional\u003cuint32_t\u003e slice_type;\nRETURN_INV_ON_FAIL(slice_type \u003d slice_reader.ReadExponentialGolomb());\n*slice_type %\u003d 5;\n...",
+      "revId": "80c81ca8bbb158c8f0a1a85763c09f75e8afeade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1927778b_e56575e8",
+        "filename": "rtc_base/bit_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-05-12T09:11:39Z",
+      "side": 1,
+      "message": "Looks like you need to leave old signatures (as deprecated) for a while because downstream uses this class.",
       "revId": "80c81ca8bbb158c8f0a1a85763c09f75e8afeade",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
