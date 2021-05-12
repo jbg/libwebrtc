@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "659c5728_ad1782bc",
+        "filename": "net/dcsctp/fuzzers/dcsctp_fuzzers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-05-12T08:59:21Z",
+      "side": 1,
+      "message": "Using dcsctp_fuzzers.\n\nI didn\u0027t want to add symbols to dcsctp namespace simply to prevent dcsctp from accidentally including anything. At the same time, I don\u0027t want it to be a completely separate namespace as I want to be able to use symbols from the library without having to prefix each and every time (it\u0027s the same library after all). So that\u0027s why I opted for a sub-namespace.\n\nThe symbols in the header file need to be exported, to be used by the libfuzzer and test testbed, so I can\u0027t put everything in the anonymous namespace unfortunately.",
+      "parentUuid": "fb36423f_b63aad01",
+      "revId": "6a499c8224a0444820772d51f7668eb50533352c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61d13118_21360051",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-05-12T06:40:26Z",
       "side": 1,
       "message": "Wouldn\u0027t it be better to limit the size of fuzz input?\nI\u0027m afraid of the case where the fuzzer decides to spend lots of time exploring the \"space\" of packets larger than the MTU - it would be better to tell the fuzzer that we can\u0027t use more than X bytes of input.\n\nWe can also let the builders limit generated chunks to \u003c MTU.",
+      "revId": "6a499c8224a0444820772d51f7668eb50533352c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39ddfa15_61396f31",
+        "filename": "net/dcsctp/fuzzers/dcsctp_fuzzers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-05-12T08:59:21Z",
+      "side": 1,
+      "message": "I lowered it as I do have more limiting of the generated chunks than I had previously. Now it should stop before it grows too big.",
+      "parentUuid": "61d13118_21360051",
       "revId": "6a499c8224a0444820772d51f7668eb50533352c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5c6924e_1df2f3e0",
+        "filename": "net/dcsctp/fuzzers/dcsctp_fuzzers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-05-12T08:59:21Z",
+      "side": 1,
+      "message": "Good idea. Done!",
+      "parentUuid": "f5dee4d9_4b6c1c3f",
+      "revId": "6a499c8224a0444820772d51f7668eb50533352c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36b4c83d_8f58b4aa",
@@ -82,6 +136,24 @@
       "writtenOn": "2021-05-12T06:40:26Z",
       "side": 1,
       "message": "static_cast\u003cStartingState\u003e(byte) will (I think) happily generate out-of-range numbers, leading to undefined behavior (I think).\n\nLong discussion in https://stackoverflow.com/questions/18195312/what-happens-if-you-static-cast-invalid-value-to-enum-class with lots of spec references.",
+      "revId": "6a499c8224a0444820772d51f7668eb50533352c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50778767_6535c375",
+        "filename": "net/dcsctp/fuzzers/dcsctp_fuzzers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-05-12T08:59:21Z",
+      "side": 1,
+      "message": "There is a range check (which aborts quickly, to signal to the fuzzer that it can\u0027t get more coverage than this by that input) just above it. Is that sufficient do you think?",
+      "parentUuid": "36b4c83d_8f58b4aa",
       "revId": "6a499c8224a0444820772d51f7668eb50533352c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
