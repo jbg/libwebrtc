@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "734e5c0a_9bc0f9bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-12T06:40:26Z",
+      "side": 1,
+      "message": "That\u0027s some solid infrastructure for fuzzing!\n\nLooks good, but a few questions.\n",
+      "revId": "6a499c8224a0444820772d51f7668eb50533352c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb36423f_b63aad01",
+        "filename": "net/dcsctp/fuzzers/dcsctp_fuzzers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-12T06:40:26Z",
+      "side": 1,
+      "message": "Nit: the namespace \"fuzzers\" seems likely to be confusable (https://google.github.io/styleguide/cppguide.html#Namespace_Names). Is this a recommended practie when writing fuzzers, or should it be anonymous or dcsctp_fuzzers?",
+      "revId": "6a499c8224a0444820772d51f7668eb50533352c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d13118_21360051",
+        "filename": "net/dcsctp/fuzzers/dcsctp_fuzzers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-12T06:40:26Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be better to limit the size of fuzz input?\nI\u0027m afraid of the case where the fuzzer decides to spend lots of time exploring the \"space\" of packets larger than the MTU - it would be better to tell the fuzzer that we can\u0027t use more than X bytes of input.\n\nWe can also let the builders limit generated chunks to \u003c MTU.",
+      "revId": "6a499c8224a0444820772d51f7668eb50533352c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5dee4d9_4b6c1c3f",
+        "filename": "net/dcsctp/fuzzers/dcsctp_fuzzers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-12T06:40:26Z",
+      "side": 1,
+      "message": "Shoud there be a case for MakeChunkWithRandomContent here too?",
+      "revId": "6a499c8224a0444820772d51f7668eb50533352c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36b4c83d_8f58b4aa",
+        "filename": "net/dcsctp/fuzzers/dcsctp_fuzzers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-12T06:40:26Z",
+      "side": 1,
+      "message": "static_cast\u003cStartingState\u003e(byte) will (I think) happily generate out-of-range numbers, leading to undefined behavior (I think).\n\nLong discussion in https://stackoverflow.com/questions/18195312/what-happens-if-you-static-cast-invalid-value-to-enum-class with lots of spec references.",
+      "revId": "6a499c8224a0444820772d51f7668eb50533352c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
