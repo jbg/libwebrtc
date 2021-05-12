@@ -33,6 +33,24 @@
       "message": "LGTM, Looks great! FYI, I don\u0027t have review permissions in chromium, so you will need to add another reviewer.",
       "revId": "042fdb63637f0e931cb97a4960f3cf34c9862517",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e71e83ea_a63d3370",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-05-12T06:09:00Z",
+      "side": 1,
+      "message": "Thanks! I just wanted your input first, and now I\u0027ll add the right OWNERS",
+      "parentUuid": "a372bf80_10e5e901",
+      "revId": "042fdb63637f0e931cb97a4960f3cf34c9862517",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
