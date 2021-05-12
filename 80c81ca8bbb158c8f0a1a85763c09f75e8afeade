@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "43a8cbfd_3f5710a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-05-12T07:13:04Z",
+      "side": 1,
+      "message": "Because there\u0027s about 150 call sites using different macros and call patterns. Rewriting the argument order can be partially automated, but changing to a return value requires also rewriting the surrounding code.",
+      "parentUuid": "9a26f525_358c3221",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "80c81ca8bbb158c8f0a1a85763c09f75e8afeade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c94fcce6_29b56222",
         "filename": "common_video/h264/h264_bitstream_parser.cc",
         "patchSetId": 1
