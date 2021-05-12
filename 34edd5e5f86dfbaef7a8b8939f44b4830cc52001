@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d6b74b5_67ff5f1f",
+        "filename": "test/fuzzers/vp9_encoder_references_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-12T18:31:16Z",
+      "side": 1,
+      "message": "nit: capitalize",
+      "range": {
+        "startLine": 71,
+        "startChar": 5,
+        "endLine": 71,
+        "endChar": 6
+      },
+      "revId": "34edd5e5f86dfbaef7a8b8939f44b4830cc52001",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
