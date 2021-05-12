@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbc8e3f6_e110e56f",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-12T18:15:52Z",
+      "side": 0,
+      "message": "The way WritesNetwork2ToTimingExtensionWithPacer and\nWritesNetwork2ToTimingExtensionWithoutPacer are written, they do not actually test\ndifferent things in any meaningful way. Removing the latter one.",
+      "range": {
+        "startLine": 672,
+        "startChar": 22,
+        "endLine": 672,
+        "endChar": 65
+      },
+      "revId": "6174173f81e10e400b55d4e6f6d94608dc4174b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
