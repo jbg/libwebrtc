@@ -59,13 +59,11 @@ class AudioRtpReceiver : public ObserverInterface,
   // AudioSourceInterface::AudioObserver implementation
   void OnSetVolume(double volume) override;
 
-  rtc::scoped_refptr<AudioTrackInterface> audio_track() const {
-    return track_.get();
-  }
+  rtc::scoped_refptr<AudioTrackInterface> audio_track() const { return track_; }
 
   // RtpReceiverInterface implementation
   rtc::scoped_refptr<MediaStreamTrackInterface> track() const override {
-    return track_.get();
+    return track_;
   }
   rtc::scoped_refptr<DtlsTransportInterface> dtls_transport() const override {
     return dtls_transport_;
