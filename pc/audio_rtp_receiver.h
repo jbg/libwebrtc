@@ -12,6 +12,7 @@
 #define PC_AUDIO_RTP_RECEIVER_H_
 
 #include <stdint.h>
+
 #include <string>
 #include <vector>
 
@@ -28,7 +29,7 @@
 #include "api/transport/rtp/rtp_source.h"
 #include "media/base/media_channel.h"
 #include "pc/audio_track.h"
-#include "pc/jitter_buffer_delay_interface.h"
+#include "pc/jitter_buffer_delay.h"
 #include "pc/remote_audio_source.h"
 #include "pc/rtp_receiver.h"
 #include "rtc_base/ref_counted_object.h"
@@ -59,13 +60,11 @@ class AudioRtpReceiver : public ObserverInterface,
   // AudioSourceInterface::AudioObserver implementation
   void OnSetVolume(double volume) override;
 
-  rtc::scoped_refptr<AudioTrackInterface> audio_track() const {
-    return track_.get();
-  }
+  rtc::scoped_refptr<AudioTrackInterface> audio_track() const { return track_; }
 
   // RtpReceiverInterface implementation
   rtc::scoped_refptr<MediaStreamTrackInterface> track() const override {
-    return track_.get();
+    return track_;
   }
   rtc::scoped_refptr<DtlsTransportInterface> dtls_transport() const override {
     return dtls_transport_;
@@ -137,9 +136,9 @@ class AudioRtpReceiver : public ObserverInterface,
   int attachment_id_ = 0;
   rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor_;
   rtc::scoped_refptr<DtlsTransportInterface> dtls_transport_;
-  // Allows to thread safely change playout delay. Handles caching cases if
+  // Stores and updates the playout delay. Handles caching cases if
   // |SetJitterBufferMinimumDelay| is called before start.
-  rtc::scoped_refptr<JitterBufferDelayInterface> delay_;
+  JitterBufferDelay delay_;
   rtc::scoped_refptr<FrameTransformerInterface> frame_transformer_
       RTC_GUARDED_BY(worker_thread_);
 };
