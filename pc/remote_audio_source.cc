@@ -71,13 +71,14 @@ RemoteAudioSource::~RemoteAudioSource() {
 
 void RemoteAudioSource::Start(cricket::VoiceMediaChannel* media_channel,
                               absl::optional<uint32_t> ssrc) {
-  RTC_DCHECK_RUN_ON(main_thread_);
-  RTC_DCHECK(media_channel);
+  // OK to be called on the worker thread (preferred in fact).
+  // RTC_DCHECK_RUN_ON(main_thread_);
 
   // Register for callbacks immediately before AddSink so that we always get
   // notified when a channel goes out of scope (signaled when "AudioDataProxy"
   // is destroyed).
   worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
+    RTC_DCHECK(media_channel);
     ssrc ? media_channel->SetRawAudioSink(
                *ssrc, std::make_unique<AudioDataProxy>(this))
          : media_channel->SetDefaultRawAudioSink(
@@ -87,10 +88,11 @@ void RemoteAudioSource::Start(cricket::VoiceMediaChannel* media_channel,
 
 void RemoteAudioSource::Stop(cricket::VoiceMediaChannel* media_channel,
                              absl::optional<uint32_t> ssrc) {
-  RTC_DCHECK_RUN_ON(main_thread_);
-  RTC_DCHECK(media_channel);
+  // OK to be called on the worker thread (preferred in fact).
+  // RTC_DCHECK_RUN_ON(main_thread_);
 
   worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
+    RTC_DCHECK(media_channel);
     ssrc ? media_channel->SetRawAudioSink(*ssrc, nullptr)
          : media_channel->SetDefaultRawAudioSink(nullptr);
   });
