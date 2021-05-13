@@ -216,8 +216,6 @@ rtc_library("peerconnection") {
     ":connection_context",
     ":dtmf_sender",
     ":jitter_buffer_delay",
-    ":jitter_buffer_delay_interface",
-    ":jitter_buffer_delay_proxy",
     ":media_protocol_names",
     ":media_stream",
     ":peer_connection_message_handler",
@@ -502,8 +500,6 @@ rtc_library("audio_rtp_receiver") {
   deps = [
     ":audio_track",
     ":jitter_buffer_delay",
-    ":jitter_buffer_delay_interface",
-    ":jitter_buffer_delay_proxy",
     ":media_stream",
     ":remote_audio_source",
     ":rtp_receiver",
@@ -535,8 +531,6 @@ rtc_library("video_rtp_receiver") {
   ]
   deps = [
     ":jitter_buffer_delay",
-    ":jitter_buffer_delay_interface",
-    ":jitter_buffer_delay_proxy",
     ":media_stream",
     ":rtp_receiver",
     ":video_rtp_track_source",
@@ -556,6 +550,7 @@ rtc_library("video_rtp_receiver") {
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:threading",
+    "../rtc_base/system:no_unique_address",
   ]
   absl_deps = [
     "//third_party/abseil-cpp/absl/algorithm:container",
@@ -615,6 +610,7 @@ rtc_library("video_track") {
   ]
 }
 
+# TODO(tommi): Delete this target and associated files.
 rtc_source_set("jitter_buffer_delay_interface") {
   sources = [ "jitter_buffer_delay_interface.h" ]
   deps = [
@@ -636,6 +632,7 @@ rtc_source_set("sdp_state_provider") {
   ]
 }
 
+# TODO(tommi): Delete this target and associated files.
 rtc_source_set("jitter_buffer_delay_proxy") {
   sources = [ "jitter_buffer_delay_proxy.h" ]
   deps = [
@@ -651,14 +648,12 @@ rtc_library("jitter_buffer_delay") {
     "jitter_buffer_delay.h",
   ]
   deps = [
-    ":jitter_buffer_delay_interface",
     "../api:sequence_checker",
     "../media:rtc_media_base",
-    "../rtc_base",
     "../rtc_base:checks",
-    "../rtc_base:refcount",
+    "../rtc_base:safe_conversions",
     "../rtc_base:safe_minmax",
-    "../rtc_base:threading",
+    "../rtc_base/system:no_unique_address",
   ]
   absl_deps = [
     "//third_party/abseil-cpp/absl/algorithm:container",
@@ -1024,7 +1019,6 @@ if (rtc_include_tests && !build_with_chromium) {
       ":dtmf_sender",
       ":integration_test_helpers",
       ":jitter_buffer_delay",
-      ":jitter_buffer_delay_interface",
       ":media_stream",
       ":peerconnection",
       ":remote_audio_source",
@@ -1181,7 +1175,6 @@ if (rtc_include_tests && !build_with_chromium) {
       ":audio_track",
       ":dtmf_sender",
       ":jitter_buffer_delay",
-      ":jitter_buffer_delay_interface",
       ":media_stream",
       ":pc_test_utils",
       ":peerconnection",
@@ -1303,7 +1296,6 @@ if (rtc_include_tests && !build_with_chromium) {
 
     deps = [
       ":jitter_buffer_delay",
-      ":jitter_buffer_delay_interface",
       ":libjingle_peerconnection",
       ":peerconnection",
       ":rtc_pc_base",

@@ -18,8 +18,6 @@
 #include "api/media_stream_track_proxy.h"
 #include "api/sequence_checker.h"
 #include "pc/audio_track.h"
-#include "pc/jitter_buffer_delay.h"
-#include "pc/jitter_buffer_delay_proxy.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/location.h"
 #include "rtc_base/logging.h"
@@ -51,11 +49,7 @@ AudioRtpReceiver::AudioRtpReceiver(
           rtc::Thread::Current(),
           AudioTrack::Create(receiver_id, source_))),
       cached_track_enabled_(track_->enabled()),
-      attachment_id_(GenerateUniqueId()),
-      delay_(JitterBufferDelayProxy::Create(
-          rtc::Thread::Current(),
-          worker_thread_,
-          rtc::make_ref_counted<JitterBufferDelay>(worker_thread))) {
+      attachment_id_(GenerateUniqueId()) {
   RTC_DCHECK(worker_thread_);
   RTC_DCHECK(track_->GetSource()->remote());
   track_->RegisterObserver(this);
@@ -159,19 +153,22 @@ void AudioRtpReceiver::StopAndEndTrack() {
 }
 
 void AudioRtpReceiver::RestartMediaChannel(absl::optional<uint32_t> ssrc) {
-  RTC_DCHECK(media_channel_);
   if (!stopped_ && ssrc_ == ssrc) {
     return;
   }
 
-  if (!stopped_) {
-    source_->Stop(media_channel_, ssrc_);
-    delay_->OnStop();
-  }
-  ssrc_ = ssrc;
-  stopped_ = false;
-  source_->Start(media_channel_, ssrc);
-  delay_->OnStart(media_channel_, ssrc.value_or(0));
+  worker_thread_->Invoke<void>(RTC_FROM_HERE, [&]() {
+    RTC_DCHECK_RUN_ON(worker_thread_);
+    RTC_DCHECK(media_channel_);
+    if (!stopped_) {
+      source_->Stop(media_channel_, ssrc_);
+    }
+    ssrc_ = ssrc;
+    stopped_ = false;
+    source_->Start(media_channel_, ssrc);
+    delay_.OnStart(media_channel_, ssrc_);
+  });
+
   Reconfigure();
 }
 
@@ -284,7 +281,8 @@ void AudioRtpReceiver::SetObserver(RtpReceiverObserverInterface* observer) {
 
 void AudioRtpReceiver::SetJitterBufferMinimumDelay(
     absl::optional<double> delay_seconds) {
-  delay_->Set(delay_seconds);
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  delay_.Set(delay_seconds, media_channel_, ssrc_);
 }
 
 void AudioRtpReceiver::SetMediaChannel(cricket::MediaChannel* media_channel) {

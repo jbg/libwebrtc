@@ -14,7 +14,6 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/numerics/safe_minmax.h"
-#include "rtc_base/thread.h"
 
 namespace {
 constexpr int kDefaultDelay = 0;
@@ -23,42 +22,31 @@ constexpr int kMaximumDelayMs = 10000;
 
 namespace webrtc {
 
-JitterBufferDelay::JitterBufferDelay(rtc::Thread* worker_thread)
-    : signaling_thread_(rtc::Thread::Current()), worker_thread_(worker_thread) {
-  RTC_DCHECK(worker_thread_);
+JitterBufferDelay::JitterBufferDelay() {
+  worker_thread_checker_.Detach();
 }
 
 void JitterBufferDelay::OnStart(cricket::Delayable* media_channel,
-                                uint32_t ssrc) {
-  RTC_DCHECK_RUN_ON(signaling_thread_);
-
-  media_channel_ = media_channel;
-  ssrc_ = ssrc;
-
+                                absl::optional<uint32_t> ssrc) {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   // Trying to apply cached delay for the audio stream.
   if (cached_delay_seconds_) {
-    Set(cached_delay_seconds_.value());
+    Set(cached_delay_seconds_.value(), media_channel, ssrc);
   }
 }
 
-void JitterBufferDelay::OnStop() {
-  RTC_DCHECK_RUN_ON(signaling_thread_);
-  // Assume that audio stream is no longer present.
-  media_channel_ = nullptr;
-  ssrc_ = absl::nullopt;
-}
-
-void JitterBufferDelay::Set(absl::optional<double> delay_seconds) {
-  RTC_DCHECK_RUN_ON(worker_thread_);
-
-  // TODO(kuddai) propagate absl::optional deeper down as default preference.
-  int delay_ms =
-      rtc::saturated_cast<int>(delay_seconds.value_or(kDefaultDelay) * 1000);
-  delay_ms = rtc::SafeClamp(delay_ms, 0, kMaximumDelayMs);
+void JitterBufferDelay::Set(absl::optional<double> delay_seconds,
+                            cricket::Delayable* media_channel,
+                            absl::optional<uint32_t> ssrc) {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
 
   cached_delay_seconds_ = delay_seconds;
-  if (media_channel_ && ssrc_) {
-    media_channel_->SetBaseMinimumPlayoutDelayMs(ssrc_.value(), delay_ms);
+  if (media_channel && ssrc) {
+    // TODO(kuddai) propagate absl::optional deeper down as default preference.
+    int delay_ms =
+        rtc::saturated_cast<int>(delay_seconds.value_or(kDefaultDelay) * 1000);
+    delay_ms = rtc::SafeClamp(delay_ms, 0, kMaximumDelayMs);
+    media_channel->SetBaseMinimumPlayoutDelayMs(ssrc.value(), delay_ms);
   }
 }
 
