@@ -16,6 +16,23 @@
       "message": "Wez, may I please ask you again to submit this to CQ?",
       "revId": "179c9ba71b1cef055d46a71e90dab3cf049b36d6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b37ac48_c871b525",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2021-05-13T16:39:57Z",
+      "side": 1,
+      "message": "It looks like only committers can CQ+2 in this repository.  Wez, Tommi, or Erik will have to help you out here.\n",
+      "revId": "179c9ba71b1cef055d46a71e90dab3cf049b36d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
