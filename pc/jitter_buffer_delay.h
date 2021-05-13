@@ -41,7 +41,7 @@ class JitterBufferDelay : public JitterBufferDelayInterface {
   rtc::Thread* const signaling_thread_;
   rtc::Thread* const worker_thread_;
   // Media channel and ssrc together uniqely identify audio stream.
-  cricket::Delayable* media_channel_ = nullptr;
+  cricket::Delayable* media_channel_ RTC_GUARDED_BY(worker_thread_) = nullptr;
   absl::optional<uint32_t> ssrc_;
   absl::optional<double> cached_delay_seconds_;
 };

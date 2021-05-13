@@ -30,7 +30,7 @@ JitterBufferDelay::JitterBufferDelay(rtc::Thread* worker_thread)
 
 void JitterBufferDelay::OnStart(cricket::Delayable* media_channel,
                                 uint32_t ssrc) {
-  RTC_DCHECK_RUN_ON(signaling_thread_);
+  RTC_DCHECK_RUN_ON(worker_thread_);
 
   media_channel_ = media_channel;
   ssrc_ = ssrc;
@@ -42,7 +42,7 @@ void JitterBufferDelay::OnStart(cricket::Delayable* media_channel,
 }
 
 void JitterBufferDelay::OnStop() {
-  RTC_DCHECK_RUN_ON(signaling_thread_);
+  RTC_DCHECK_RUN_ON(worker_thread_);
   // Assume that audio stream is no longer present.
   media_channel_ = nullptr;
   ssrc_ = absl::nullopt;
