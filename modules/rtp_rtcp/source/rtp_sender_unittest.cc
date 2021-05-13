@@ -911,51 +911,6 @@ TEST_P(RtpSenderTest, SendPadding) {
   EXPECT_EQ(expected_send_time, rtp_header.extension.absoluteSendTime);
 }
 
-TEST_P(RtpSenderTest, OnSendPacketUpdated) {
-  EXPECT_TRUE(rtp_sender()->RegisterRtpHeaderExtension(
-      TransportSequenceNumber::kUri, kTransportSequenceNumberExtensionId));
-  rtp_sender_context_->packet_history_.SetStorePacketsStatus(
-      RtpPacketHistory::StorageMode::kStoreAndCull, 10);
-
-  EXPECT_CALL(send_packet_observer_,
-              OnSendPacket(kTransportSequenceNumber, _, _))
-      .Times(1);
-
-  EXPECT_CALL(
-      mock_paced_sender_,
-      EnqueuePackets(Contains(AllOf(
-          Pointee(Property(&RtpPacketToSend::Ssrc, kSsrc)),
-          Pointee(Property(&RtpPacketToSend::SequenceNumber, kSeqNum))))));
-  auto packet = SendGenericPacket();
-  packet->set_packet_type(RtpPacketMediaType::kVideo);
-  packet->SetExtension<TransportSequenceNumber>(kTransportSequenceNumber);
-  rtp_sender_context_->InjectPacket(std::move(packet), PacedPacketInfo());
-
-  EXPECT_EQ(1, transport_.packets_sent());
-}
-
-TEST_P(RtpSenderTest, OnSendPacketNotUpdatedForRetransmits) {
-  EXPECT_TRUE(rtp_sender()->RegisterRtpHeaderExtension(
-      TransportSequenceNumber::kUri, kTransportSequenceNumberExtensionId));
-  rtp_sender_context_->packet_history_.SetStorePacketsStatus(
-      RtpPacketHistory::StorageMode::kStoreAndCull, 10);
-
-  EXPECT_CALL(send_packet_observer_, OnSendPacket(_, _, _)).Times(0);
-
-  EXPECT_CALL(
-      mock_paced_sender_,
-      EnqueuePackets(Contains(AllOf(
-          Pointee(Property(&RtpPacketToSend::Ssrc, kSsrc)),
-          Pointee(Property(&RtpPacketToSend::SequenceNumber, kSeqNum))))));
-  auto packet = SendGenericPacket();
-  packet->set_packet_type(RtpPacketMediaType::kRetransmission);
-  packet->SetExtension<TransportSequenceNumber>(kTransportSequenceNumber);
-  rtp_sender_context_->InjectPacket(std::move(packet), PacedPacketInfo());
-
-  EXPECT_EQ(1, transport_.packets_sent());
-  EXPECT_TRUE(transport_.last_options_.is_retransmit);
-}
-
 TEST_P(RtpSenderTestWithoutPacer, SendGenericVideo) {
   const uint8_t kPayloadType = 127;
   const VideoCodecType kCodecType = VideoCodecType::kVideoCodecGeneric;
