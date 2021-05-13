@@ -17,8 +17,10 @@
 #include "test/gmock.h"
 
 using ::testing::_;
+using ::testing::AnyNumber;
 using ::testing::InSequence;
 using ::testing::Mock;
+using ::testing::NiceMock;
 using ::testing::SaveArg;
 using ::testing::StrictMock;
 
@@ -60,12 +62,18 @@ class VideoRtpReceiverTest : public testing::Test {
     receiver_->SetMediaChannel(&channel_);
   }
 
+  ~VideoRtpReceiverTest() override {
+    // Clear expectations that tests may have set up before calling Stop().
+    Mock::VerifyAndClearExpectations(&channel_);
+    receiver_->Stop();
+  }
+
   webrtc::VideoTrackSourceInterface* Source() {
     return receiver_->streams()[0]->FindVideoTrack("receiver")->GetSource();
   }
 
   std::unique_ptr<rtc::Thread> worker_thread_;
-  MockVideoMediaChannel channel_;
+  NiceMock<MockVideoMediaChannel> channel_;
   rtc::scoped_refptr<VideoRtpReceiver> receiver_;
 };
 
@@ -98,6 +106,10 @@ TEST_F(VideoRtpReceiverTest,
   // Switching to a new channel should now not cause calls to GenerateKeyFrame.
   StrictMock<MockVideoMediaChannel> channel4(nullptr, cricket::VideoOptions());
   receiver_->SetMediaChannel(&channel4);
+
+  // We must call Stop() here since the mock media channels live on the stack
+  // and `receiver_` still has a pointer to those objects.
+  receiver_->Stop();
 }
 
 TEST_F(VideoRtpReceiverTest, EnablesEncodedOutput) {
@@ -131,6 +143,10 @@ TEST_F(VideoRtpReceiverTest, DisablesEnablesEncodedOutputOnChannelSwitch) {
   Source()->RemoveEncodedSink(&sink);
   StrictMock<MockVideoMediaChannel> channel3(nullptr, cricket::VideoOptions());
   receiver_->SetMediaChannel(&channel3);
+
+  // We must call Stop() here since the mock media channels live on the stack
+  // and `receiver_` still has a pointer to those objects.
+  receiver_->Stop();
 }
 
 TEST_F(VideoRtpReceiverTest, BroadcastsEncodedFramesWhenEnabled) {
