@@ -37,12 +37,15 @@
 #include "pc/video_rtp_track_source.h"
 #include "pc/video_track.h"
 #include "rtc_base/ref_counted_object.h"
+#include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
 
+// TODO(tommi): Remove RefCountedObject inheritance.
 class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
+                         // TODO(tommi): composition.
                          public VideoRtpTrackSource::Callback {
  public:
   // An SSRC of 0 will create a receiver that will match the first SSRC it
@@ -129,6 +132,7 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
   void OnEncodedSinkEnabled(bool enable) override;
   void SetEncodedSinkEnabled(bool enable) RTC_RUN_ON(worker_thread_);
 
+  RTC_NO_UNIQUE_ADDRESS SequenceChecker signaling_thread_checker_;
   rtc::Thread* const worker_thread_;
 
   const std::string id_;
