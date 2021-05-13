@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4617f2d6_e639620e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-05-13T18:33:57Z",
+      "side": 1,
+      "message": "since i put your name into the freshness thing... ;-)",
+      "revId": "987b581406a92ed82c792cb389c30b409a839b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0d17f9a_757fa2d2",
+        "filename": "pc/g3doc/dtls_transport.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-05-13T18:33:57Z",
+      "side": 1,
+      "message": "drive-by fix",
+      "revId": "987b581406a92ed82c792cb389c30b409a839b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
