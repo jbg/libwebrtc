@@ -37,13 +37,13 @@
 #include "pc/video_rtp_track_source.h"
 #include "pc/video_track.h"
 #include "rtc_base/ref_counted_object.h"
+#include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
 
-class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
-                         public VideoRtpTrackSource::Callback {
+class VideoRtpReceiver : public RtpReceiverInternal {
  public:
   // An SSRC of 0 will create a receiver that will match the first SSRC it
   // sees. Must be called on signaling thread.
@@ -59,13 +59,11 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
 
   virtual ~VideoRtpReceiver();
 
-  rtc::scoped_refptr<VideoTrackInterface> video_track() const {
-    return track_.get();
-  }
+  rtc::scoped_refptr<VideoTrackInterface> video_track() const { return track_; }
 
   // RtpReceiverInterface implementation
   rtc::scoped_refptr<MediaStreamTrackInterface> track() const override {
-    return track_.get();
+    return track_;
   }
   rtc::scoped_refptr<DtlsTransportInterface> dtls_transport() const override {
     return dtls_transport_;
@@ -98,7 +96,7 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
   void StopAndEndTrack() override;
   void SetupMediaChannel(uint32_t ssrc) override;
   void SetupUnsignaledMediaChannel() override;
-  uint32_t ssrc() const override { return ssrc_.value_or(0); }
+  uint32_t ssrc() const override;
   void NotifyFirstPacketReceived() override;
   void set_stream_ids(std::vector<std::string> stream_ids) override;
   void set_transport(
@@ -123,21 +121,41 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
   void RestartMediaChannel(absl::optional<uint32_t> ssrc);
   void SetSink(rtc::VideoSinkInterface<VideoFrame>* sink)
       RTC_RUN_ON(worker_thread_);
+  void SetMediaChannel_w(cricket::MediaChannel* media_channel)
+      RTC_RUN_ON(worker_thread_);
 
   // VideoRtpTrackSource::Callback
-  void OnGenerateKeyFrame() override;
-  void OnEncodedSinkEnabled(bool enable) override;
+  void OnGenerateKeyFrame();
+  void OnEncodedSinkEnabled(bool enable);
+
   void SetEncodedSinkEnabled(bool enable) RTC_RUN_ON(worker_thread_);
 
+  class SourceCallback : public VideoRtpTrackSource::Callback {
+   public:
+    explicit SourceCallback(VideoRtpReceiver* receiver) : receiver_(receiver) {}
+    ~SourceCallback() override = default;
+
+   private:
+    void OnGenerateKeyFrame() override { receiver_->OnGenerateKeyFrame(); }
+    void OnEncodedSinkEnabled(bool enable) override {
+      receiver_->OnEncodedSinkEnabled(enable);
+    }
+
+    VideoRtpReceiver* const receiver_;
+  } source_callback_{this};
+  // TODO(tommi): ^^^ should this be a pointer that gets deleted on the worker
+  // when Stop() is called?
+
+  RTC_NO_UNIQUE_ADDRESS SequenceChecker signaling_thread_checker_;
   rtc::Thread* const worker_thread_;
 
   const std::string id_;
   cricket::VideoMediaChannel* media_channel_ = nullptr;
-  absl::optional<uint32_t> ssrc_;
+  absl::optional<uint32_t> ssrc_ RTC_GUARDED_BY(worker_thread_);
   // |source_| is held here to be able to change the state of the source when
   // the VideoRtpReceiver is stopped.
-  rtc::scoped_refptr<VideoRtpTrackSource> source_;
-  rtc::scoped_refptr<VideoTrackProxyWithInternal<VideoTrack>> track_;
+  const rtc::scoped_refptr<VideoRtpTrackSource> source_;
+  const rtc::scoped_refptr<VideoTrackProxyWithInternal<VideoTrack>> track_;
   std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams_;
   bool stopped_ = true;
   RtpReceiverObserverInterface* observer_ = nullptr;

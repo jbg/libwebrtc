@@ -120,9 +120,9 @@ class RTC_EXPORT RtpReceiverInterface : public rtc::RefCountInterface {
 // Define proxy for RtpReceiverInterface.
 // TODO(deadbeef): Move this to .cc file and out of api/. What threads methods
 // are called on is an implementation detail.
-BEGIN_PRIMARY_PROXY_MAP(RtpReceiver)
+BEGIN_PROXY_MAP(RtpReceiver)
 PROXY_PRIMARY_THREAD_DESTRUCTOR()
-PROXY_CONSTMETHOD0(rtc::scoped_refptr<MediaStreamTrackInterface>, track)
+BYPASS_PROXY_CONSTMETHOD0(rtc::scoped_refptr<MediaStreamTrackInterface>, track)
 PROXY_CONSTMETHOD0(rtc::scoped_refptr<DtlsTransportInterface>, dtls_transport)
 PROXY_CONSTMETHOD0(std::vector<std::string>, stream_ids)
 PROXY_CONSTMETHOD0(std::vector<rtc::scoped_refptr<MediaStreamInterface>>,
