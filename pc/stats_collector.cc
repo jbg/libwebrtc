@@ -1163,9 +1163,11 @@ void StatsCollector::ExtractMediaInfo(
 
   std::vector<std::unique_ptr<MediaChannelStatsGatherer>> gatherers;
 
+  auto transceivers = pc_->GetTransceiversInternal();
   {
     rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
-    for (const auto& transceiver : pc_->GetTransceiversInternal()) {
+#if 0
+    for (const auto& transceiver : transceivers) {
       cricket::ChannelInterface* channel = transceiver->internal()->channel();
       if (!channel) {
         continue;
@@ -1186,10 +1188,36 @@ void StatsCollector::ExtractMediaInfo(
       }
       gatherers.push_back(std::move(gatherer));
     }
+#endif
   }
 
   pc_->worker_thread()->Invoke<void>(RTC_FROM_HERE, [&] {
     rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
+#if 1
+    // TODO(tommi): cleanup.
+    for (const auto& transceiver : transceivers) {
+      cricket::ChannelInterface* channel = transceiver->internal()->channel();
+      if (!channel) {
+        continue;
+      }
+      std::unique_ptr<MediaChannelStatsGatherer> gatherer =
+          CreateMediaChannelStatsGatherer(channel->media_channel());
+      gatherer->mid = channel->content_name();
+      gatherer->transport_name = transport_names_by_mid.at(gatherer->mid);
+
+      for (const auto& sender : transceiver->internal()->senders()) {
+        std::string track_id = (sender->track() ? sender->track()->id() : "");
+        gatherer->sender_track_id_by_ssrc.insert(
+            std::make_pair(sender->ssrc(), track_id));
+      }
+      for (const auto& receiver : transceiver->internal()->receivers()) {
+        gatherer->receiver_track_id_by_ssrc.insert(std::make_pair(
+            receiver->internal()->ssrc(), receiver->track()->id()));
+      }
+      gatherers.push_back(std::move(gatherer));
+    }
+#endif
+
     for (auto it = gatherers.begin(); it != gatherers.end();
          /* incremented manually */) {
       MediaChannelStatsGatherer* gatherer = it->get();
