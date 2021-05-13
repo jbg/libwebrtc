@@ -37,12 +37,15 @@
 #include "pc/video_rtp_track_source.h"
 #include "pc/video_track.h"
 #include "rtc_base/ref_counted_object.h"
+#include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
 
+// TODO(tommi): Remove RefCountedObject inheritance.
 class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
+                         // TODO(tommi): composition.
                          public VideoRtpTrackSource::Callback {
  public:
   // An SSRC of 0 will create a receiver that will match the first SSRC it
@@ -98,7 +101,7 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
   void StopAndEndTrack() override;
   void SetupMediaChannel(uint32_t ssrc) override;
   void SetupUnsignaledMediaChannel() override;
-  uint32_t ssrc() const override { return ssrc_.value_or(0); }
+  uint32_t ssrc() const override;
   void NotifyFirstPacketReceived() override;
   void set_stream_ids(std::vector<std::string> stream_ids) override;
   void set_transport(
@@ -123,17 +126,20 @@ class VideoRtpReceiver : public rtc::RefCountedObject<RtpReceiverInternal>,
   void RestartMediaChannel(absl::optional<uint32_t> ssrc);
   void SetSink(rtc::VideoSinkInterface<VideoFrame>* sink)
       RTC_RUN_ON(worker_thread_);
+  void SetMediaChannel_w(cricket::MediaChannel* media_channel)
+      RTC_RUN_ON(worker_thread_);
 
   // VideoRtpTrackSource::Callback
   void OnGenerateKeyFrame() override;
   void OnEncodedSinkEnabled(bool enable) override;
   void SetEncodedSinkEnabled(bool enable) RTC_RUN_ON(worker_thread_);
 
+  RTC_NO_UNIQUE_ADDRESS SequenceChecker signaling_thread_checker_;
   rtc::Thread* const worker_thread_;
 
   const std::string id_;
   cricket::VideoMediaChannel* media_channel_ = nullptr;
-  absl::optional<uint32_t> ssrc_;
+  absl::optional<uint32_t> ssrc_ RTC_GUARDED_BY(worker_thread_);
   // |source_| is held here to be able to change the state of the source when
   // the VideoRtpReceiver is stopped.
   rtc::scoped_refptr<VideoRtpTrackSource> source_;
