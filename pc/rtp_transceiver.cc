@@ -261,6 +261,11 @@ void RtpTransceiver::AddReceiver(
 
 bool RtpTransceiver::RemoveReceiver(RtpReceiverInterface* receiver) {
   RTC_DCHECK(!unified_plan_);
+  // TODO(tommi): Removing a receiver involves a few thread hops.
+  // This probably all belongs to the worker thread, question is if we can
+  // do it asynchronously.
+  // Possibly remove from the receivers_ collection first, pass ownership
+  // to an async task that deletes the receiver?
   if (receiver) {
     RTC_DCHECK_EQ(media_type(), receiver->media_type());
   }
