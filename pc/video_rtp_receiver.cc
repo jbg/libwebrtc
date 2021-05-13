@@ -60,15 +60,18 @@ VideoRtpReceiver::VideoRtpReceiver(
 }
 
 VideoRtpReceiver::~VideoRtpReceiver() {
+  RTC_DCHECK_RUN_ON(&signaling_thread_checker_);
   // Since cricket::VideoRenderer is not reference counted,
   // we need to remove it from the channel before we are deleted.
   Stop();
   // Make sure we can't be called by the |source_| anymore.
+  // TODO(tommi): Use pending safety task.
   worker_thread_->Invoke<void>(RTC_FROM_HERE,
                                [this] { source_->ClearCallback(); });
 }
 
 std::vector<std::string> VideoRtpReceiver::stream_ids() const {
+  RTC_DCHECK_RUN_ON(&signaling_thread_checker_);
   std::vector<std::string> stream_ids(streams_.size());
   for (size_t i = 0; i < streams_.size(); ++i)
     stream_ids[i] = streams_[i]->id();
@@ -76,6 +79,7 @@ std::vector<std::string> VideoRtpReceiver::stream_ids() const {
 }
 
 RtpParameters VideoRtpReceiver::GetParameters() const {
+  // TODO(tommi): Remove invoke, enforce being called on worker.
   if (!media_channel_ || stopped_) {
     return RtpParameters();
   }
@@ -87,9 +91,12 @@ RtpParameters VideoRtpReceiver::GetParameters() const {
 
 void VideoRtpReceiver::SetFrameDecryptor(
     rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor) {
+  // TODO(tommi): Update proxy map.
+  RTC_DCHECK_RUN_ON(worker_thread_);
   frame_decryptor_ = std::move(frame_decryptor);
   // Special Case: Set the frame decryptor to any value on any existing channel.
   if (media_channel_ && ssrc_.has_value() && !stopped_) {
+    // TODO(tommi): Remove invoke.
     worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
       media_channel_->SetFrameDecryptor(*ssrc_, frame_decryptor_);
     });
@@ -98,11 +105,16 @@ void VideoRtpReceiver::SetFrameDecryptor(
 
 rtc::scoped_refptr<FrameDecryptorInterface>
 VideoRtpReceiver::GetFrameDecryptor() const {
+  // TODO(tommi): Update proxy.
+  RTC_DCHECK_RUN_ON(worker_thread_);
   return frame_decryptor_;
 }
 
 void VideoRtpReceiver::SetDepacketizerToDecoderFrameTransformer(
     rtc::scoped_refptr<FrameTransformerInterface> frame_transformer) {
+  // TODO(tommi): Update proxy.
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  // TODO(tommi): Remove invoke.
   worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
     RTC_DCHECK_RUN_ON(worker_thread_);
     frame_transformer_ = std::move(frame_transformer);
@@ -114,6 +126,7 @@ void VideoRtpReceiver::SetDepacketizerToDecoderFrameTransformer(
 }
 
 void VideoRtpReceiver::Stop() {
+  RTC_DCHECK_RUN_ON(&signaling_thread_checker_);
   // TODO(deadbeef): Need to do more here to fully stop receiving packets.
   if (stopped_) {
     return;
@@ -134,11 +147,13 @@ void VideoRtpReceiver::Stop() {
 }
 
 void VideoRtpReceiver::StopAndEndTrack() {
+  RTC_DCHECK_RUN_ON(&signaling_thread_checker_);
   Stop();
   track_->internal()->set_ended();
 }
 
 void VideoRtpReceiver::RestartMediaChannel(absl::optional<uint32_t> ssrc) {
+  RTC_DCHECK_RUN_ON(&signaling_thread_checker_);
   RTC_DCHECK(media_channel_);
   if (!stopped_ && ssrc_ == ssrc) {
     return;
@@ -316,6 +331,7 @@ void VideoRtpReceiver::OnEncodedSinkEnabled(bool enable) {
   saved_encoded_sink_enabled_ = enable;
 }
 
+// RTC_RUN_ON(worker_thread_)
 void VideoRtpReceiver::SetEncodedSinkEnabled(bool enable) {
   if (media_channel_) {
     if (enable) {
