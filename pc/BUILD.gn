@@ -556,6 +556,7 @@ rtc_library("video_rtp_receiver") {
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:threading",
+    "../rtc_base/system:no_unique_address",
   ]
   absl_deps = [
     "//third_party/abseil-cpp/absl/algorithm:container",
