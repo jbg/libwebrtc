@@ -52,10 +52,7 @@ AudioRtpReceiver::AudioRtpReceiver(
           AudioTrack::Create(receiver_id, source_))),
       cached_track_enabled_(track_->enabled()),
       attachment_id_(GenerateUniqueId()),
-      delay_(JitterBufferDelayProxy::Create(
-          rtc::Thread::Current(),
-          worker_thread_,
-          rtc::make_ref_counted<JitterBufferDelay>(worker_thread))) {
+      delay_(rtc::make_ref_counted<JitterBufferDelay>(worker_thread)) {
   RTC_DCHECK(worker_thread_);
   RTC_DCHECK(track_->GetSource()->remote());
   track_->RegisterObserver(this);
@@ -159,19 +156,23 @@ void AudioRtpReceiver::StopAndEndTrack() {
 }
 
 void AudioRtpReceiver::RestartMediaChannel(absl::optional<uint32_t> ssrc) {
-  RTC_DCHECK(media_channel_);
   if (!stopped_ && ssrc_ == ssrc) {
     return;
   }
 
-  if (!stopped_) {
-    source_->Stop(media_channel_, ssrc_);
-    delay_->OnStop();
-  }
-  ssrc_ = ssrc;
-  stopped_ = false;
-  source_->Start(media_channel_, ssrc);
-  delay_->OnStart(media_channel_, ssrc.value_or(0));
+  worker_thread_->Invoke<void>(RTC_FROM_HERE, [&]() {
+    RTC_DCHECK_RUN_ON(worker_thread_);
+    RTC_DCHECK(media_channel_);
+    if (!stopped_) {
+      source_->Stop(media_channel_, ssrc_);
+      delay_->OnStop();
+    }
+    ssrc_ = ssrc;
+    stopped_ = false;
+    source_->Start(media_channel_, ssrc);
+    delay_->OnStart(media_channel_, ssrc_.value_or(0));
+  });
+
   Reconfigure();
 }
 
@@ -284,6 +285,7 @@ void AudioRtpReceiver::SetObserver(RtpReceiverObserverInterface* observer) {
 
 void AudioRtpReceiver::SetJitterBufferMinimumDelay(
     absl::optional<double> delay_seconds) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
   delay_->Set(delay_seconds);
 }
 
