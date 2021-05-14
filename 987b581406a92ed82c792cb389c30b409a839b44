@@ -69,6 +69,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d154774_dbeb7589",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-05-14T08:50:54Z",
+      "side": 1,
+      "message": "I usually put a link to the line with commit hash and also put it in the end of document as I showed in another comment. Then links are less distractive for document source readers/writers.\n\nYou can see example here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/test/pc/e2e/g3doc/index.md",
+      "parentUuid": "73603abb_de2406cd",
+      "revId": "987b581406a92ed82c792cb389c30b409a839b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0d17f9a_757fa2d2",
