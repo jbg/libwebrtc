@@ -44,13 +44,18 @@ RtpReceiverInternal::CreateStreamsFromIds(std::vector<std::string> stream_ids) {
 // been allocated to the stream.
 void RtpReceiverInternal::MaybeAttachFrameDecryptorToMediaChannel(
     const absl::optional<uint32_t>& ssrc,
+    // TODO(tommi): Remove worker_thread argument.
     rtc::Thread* worker_thread,
     rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor,
     cricket::MediaChannel* media_channel,
+    // TODO(tommi): Remove `stopped` parameter since media_channel on the
+    // worker thread will be an equivalent check.
     bool stopped) {
-  if (media_channel && frame_decryptor && ssrc.has_value() && !stopped) {
+  // TODO(tommi): After updating AudioRtpReceiver, tihs method will always
+  // be called on the worker thread, so remove the Invoke.
+  if (media_channel && frame_decryptor && ssrc && !stopped) {
     worker_thread->Invoke<void>(RTC_FROM_HERE, [&] {
-      media_channel->SetFrameDecryptor(*ssrc, frame_decryptor);
+      media_channel->SetFrameDecryptor(*ssrc, std::move(frame_decryptor));
     });
   }
 }
