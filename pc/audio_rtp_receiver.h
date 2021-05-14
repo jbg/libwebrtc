@@ -12,6 +12,7 @@
 #define PC_AUDIO_RTP_RECEIVER_H_
 
 #include <stdint.h>
+
 #include <string>
 #include <vector>
 
@@ -25,13 +26,15 @@
 #include "api/rtp_parameters.h"
 #include "api/rtp_receiver_interface.h"
 #include "api/scoped_refptr.h"
+#include "api/sequence_checker.h"
 #include "api/transport/rtp/rtp_source.h"
 #include "media/base/media_channel.h"
 #include "pc/audio_track.h"
-#include "pc/jitter_buffer_delay_interface.h"
+#include "pc/jitter_buffer_delay.h"
 #include "pc/remote_audio_source.h"
 #include "pc/rtp_receiver.h"
 #include "rtc_base/ref_counted_object.h"
+#include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/thread_annotations.h"
 
@@ -59,13 +62,11 @@ class AudioRtpReceiver : public ObserverInterface,
   // AudioSourceInterface::AudioObserver implementation
   void OnSetVolume(double volume) override;
 
-  rtc::scoped_refptr<AudioTrackInterface> audio_track() const {
-    return track_.get();
-  }
+  rtc::scoped_refptr<AudioTrackInterface> audio_track() const { return track_; }
 
   // RtpReceiverInterface implementation
   rtc::scoped_refptr<MediaStreamTrackInterface> track() const override {
-    return track_.get();
+    return track_;
   }
   rtc::scoped_refptr<DtlsTransportInterface> dtls_transport() const override {
     return dtls_transport_;
@@ -119,9 +120,14 @@ class AudioRtpReceiver : public ObserverInterface,
 
  private:
   void RestartMediaChannel(absl::optional<uint32_t> ssrc);
-  void Reconfigure();
+  void Reconfigure(bool track_enabled, double volume)
+      RTC_RUN_ON(worker_thread_);
   bool SetOutputVolume(double volume);
+  bool SetOutputVolume_w(double volume) RTC_RUN_ON(worker_thread_);
+  void SetMediaChannel_w(cricket::MediaChannel* media_channel)
+      RTC_RUN_ON(worker_thread_);
 
+  RTC_NO_UNIQUE_ADDRESS SequenceChecker signaling_thread_checker_;
   rtc::Thread* const worker_thread_;
   const std::string id_;
   const rtc::scoped_refptr<RemoteAudioSource> source_;
@@ -130,16 +136,17 @@ class AudioRtpReceiver : public ObserverInterface,
   absl::optional<uint32_t> ssrc_;
   std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams_;
   bool cached_track_enabled_;
-  double cached_volume_ = 1;
+  double cached_volume_ = 1.0;
   bool stopped_ = true;
-  RtpReceiverObserverInterface* observer_ = nullptr;
+  RtpReceiverObserverInterface* observer_
+      RTC_GUARDED_BY(&signaling_thread_checker_) = nullptr;
   bool received_first_packet_ = false;
-  int attachment_id_ = 0;
+  const int attachment_id_;
   rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor_;
   rtc::scoped_refptr<DtlsTransportInterface> dtls_transport_;
-  // Allows to thread safely change playout delay. Handles caching cases if
+  // Stores and updates the playout delay. Handles caching cases if
   // |SetJitterBufferMinimumDelay| is called before start.
-  rtc::scoped_refptr<JitterBufferDelayInterface> delay_;
+  JitterBufferDelay delay_;
   rtc::scoped_refptr<FrameTransformerInterface> frame_transformer_
       RTC_GUARDED_BY(worker_thread_);
 };
