@@ -52,6 +52,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21209aa8_e356135d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-05-14T08:48:05Z",
+      "side": 1,
+      "message": "nit: maybe having an image showing the relations ships of classes will be good, but I\u0027m not sure, how to draw it in a good way, so feel free to skip this comment.",
+      "revId": "987b581406a92ed82c792cb389c30b409a839b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0d17f9a_757fa2d2",
@@ -118,6 +135,75 @@
       "side": 1,
       "message": "true but so do line references without a commit hash. The advantage of the format i used is that source.chromium.org gives it to you.",
       "parentUuid": "7ef0134c_5ec49946",
+      "revId": "987b581406a92ed82c792cb389c30b409a839b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cfc4cb2_b9a016bd",
+        "filename": "pc/g3doc/srtp.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-05-14T08:48:05Z",
+      "side": 1,
+      "message": "nit: when you have a lot of long links in the text, it might be better to use a different link format, like this:\n\nIn the text:\nThe [`cricket::SrtpSession`][1] is providing encryption and decryption of SRTP packets using [`libsrtp`][2].\n\nAt the end of the file:\n[1]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/srtp_session.h;l\u003d33;drc\u003dbe66d95ab7f9428028806bbf66cb83800bda9241\n[2]: https://github.com/cisco/libsrtp",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 173
+      },
+      "revId": "987b581406a92ed82c792cb389c30b409a839b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1039b1f4_310b5c6b",
+        "filename": "pc/g3doc/srtp.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-05-14T08:48:05Z",
+      "side": 1,
+      "message": "`SrtpSession` for consistency",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 15
+      },
+      "revId": "987b581406a92ed82c792cb389c30b409a839b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fea7db7_27d50861",
+        "filename": "pc/g3doc/srtp.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-05-14T08:48:05Z",
+      "side": 1,
+      "message": "`SrtpSession` for consistency",
+      "range": {
+        "startLine": 31,
+        "startChar": 320,
+        "endLine": 31,
+        "endChar": 331
+      },
       "revId": "987b581406a92ed82c792cb389c30b409a839b44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
