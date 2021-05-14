@@ -22,6 +22,30 @@
       },
       "revId": "ada00128fe633b2c04565fafb35ccc20a23c3a51",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03667973_2012a0cf",
+        "filename": "pc/video_rtp_receiver.cc",
+        "patchSetId": 34
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-14T16:23:20Z",
+      "side": 0,
+      "message": "Yes, that\u0027s an option (assuming it does not introduce blocking to the signaling thread). Making that change involves several layers of classes (and related classes that keep the sources list up to date) so it might be quite a bit of work.\n\nThe worker thread being overloaded in itself, is unfortunately not due to one single issue, so while this CL helps, more needs to be done before it or similar issues completely go away. Network packets and Invokes() together are probably the root cause(s). This CL removes several problematic Invokes and also removes Invokes to the signaling thread, which unblocks the application thread.",
+      "parentUuid": "574c4682_08205861",
+      "range": {
+        "startLine": 292,
+        "startChar": 25,
+        "endLine": 292,
+        "endChar": 31
+      },
+      "revId": "ada00128fe633b2c04565fafb35ccc20a23c3a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
