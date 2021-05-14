@@ -381,10 +381,10 @@ TEST_F(SimulcastRateAllocatorTest, OneToThreeStreams) {
       static_cast<uint32_t>(codec_.simulcastStream[2].minBitrate *
                             kDefaultHysteresis);
   {
-    // First two streams maxed out, but not enough for third. Nowhere to put
-    // remaining bits.
+    // First two streams maxed out, but not enough for third. Remaining
+    // bits put to both layers
     const uint32_t bitrate = kMinInitialRateThreeLayers - 1;
-    uint32_t expected[] = {codec_.simulcastStream[0].targetBitrate,
+    uint32_t expected[] = {codec_.simulcastStream[0].maxBitrate,
                            codec_.simulcastStream[1].maxBitrate, 0};
     ExpectEqual(expected, GetAllocation(bitrate));
   }
@@ -417,8 +417,8 @@ TEST_F(SimulcastRateAllocatorTest, OneToThreeStreams) {
     const uint32_t bitrate = codec_.simulcastStream[0].maxBitrate +
                              codec_.simulcastStream[1].maxBitrate +
                              codec_.simulcastStream[2].maxBitrate;
-    uint32_t expected[] = {codec_.simulcastStream[0].targetBitrate,
-                           codec_.simulcastStream[1].targetBitrate,
+    uint32_t expected[] = {codec_.simulcastStream[0].maxBitrate,
+                           codec_.simulcastStream[1].maxBitrate,
                            codec_.simulcastStream[2].maxBitrate};
     ExpectEqual(expected, GetAllocation(bitrate));
   }
@@ -561,7 +561,21 @@ TEST_F(SimulcastRateAllocatorTest, ThreeStreamsMiddleInactive) {
     uint32_t expected[] = {codec_.simulcastStream[0].targetBitrate, 0,
                            codec_.simulcastStream[2].maxBitrate};
     ExpectEqual(expected, GetAllocation(bitrate));
+  }
+
+  {
+    // Lowest stream gets left bitrate, high stream gets its max bitrate.
+    uint32_t bitrate = codec_.simulcastStream[0].targetBitrate +
+                       codec_.simulcastStream[2].maxBitrate;
+    uint32_t expected[] = {codec_.simulcastStream[0].targetBitrate + 10, 0,
+                           codec_.simulcastStream[2].maxBitrate};
     ExpectEqual(expected, GetAllocation(bitrate + 10));
+  }
+
+  {
+    // Lowest stream gets max bitrate, high stream gets its max bitrate.
+    uint32_t expected[] = {codec_.simulcastStream[0].maxBitrate, 0,
+                           codec_.simulcastStream[2].maxBitrate};
     ExpectEqual(expected, GetAllocation(std::numeric_limits<uint32_t>::max()));
   }
 }
@@ -599,7 +613,7 @@ TEST_F(SimulcastRateAllocatorTest, StableRate) {
   {
     // On the first call to a new SimulcastRateAllocator instance, hysteresis
     // is disabled, but stable rate still caps layers.
-    uint32_t expected[] = {TargetRate(0).kbps<uint32_t>(),
+    uint32_t expected[] = {MaxRate(0).kbps<uint32_t>(),
                            MaxRate(1).kbps<uint32_t>()};
     ExpectEqual(expected,
                 GetAllocation(volatile_rate, TargetRate(0) + MinRate(1)));
@@ -622,7 +636,7 @@ TEST_F(SimulcastRateAllocatorTest, StableRate) {
 
   {
     // Above threshold with hysteresis, enable second stream.
-    uint32_t expected[] = {TargetRate(0).kbps<uint32_t>(),
+    uint32_t expected[] = {MaxRate(0).kbps<uint32_t>(),
                            MaxRate(1).kbps<uint32_t>()};
     ExpectEqual(expected, GetAllocation(volatile_rate,
                                         (TargetRate(0) + MinRate(1)) * 1.1));
