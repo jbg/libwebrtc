@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73603abb_de2406cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-05-14T07:30:13Z",
+      "side": 1,
+      "message": "artem: what is the best common practice for \"how to link to source code\"?",
+      "revId": "987b581406a92ed82c792cb389c30b409a839b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0d17f9a_757fa2d2",
@@ -83,6 +100,24 @@
       "writtenOn": "2021-05-14T07:04:17Z",
       "side": 1,
       "message": "Soruce references are a PITA. I recommend leaving off the drc, since it will lead to the wrong place after a while.",
+      "revId": "987b581406a92ed82c792cb389c30b409a839b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4718ae3_99113d21",
+        "filename": "pc/g3doc/srtp.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-05-14T07:30:13Z",
+      "side": 1,
+      "message": "true but so do line references without a commit hash. The advantage of the format i used is that source.chromium.org gives it to you.",
+      "parentUuid": "7ef0134c_5ec49946",
       "revId": "987b581406a92ed82c792cb389c30b409a839b44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
