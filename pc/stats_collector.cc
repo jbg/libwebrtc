@@ -1163,9 +1163,10 @@ void StatsCollector::ExtractMediaInfo(
 
   std::vector<std::unique_ptr<MediaChannelStatsGatherer>> gatherers;
 
+  auto transceivers = pc_->GetTransceiversInternal();
   {
     rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
-    for (const auto& transceiver : pc_->GetTransceiversInternal()) {
+    for (const auto& transceiver : transceivers) {
       cricket::ChannelInterface* channel = transceiver->internal()->channel();
       if (!channel) {
         continue;
@@ -1180,16 +1181,35 @@ void StatsCollector::ExtractMediaInfo(
         gatherer->sender_track_id_by_ssrc.insert(
             std::make_pair(sender->ssrc(), track_id));
       }
+#if 0
       for (const auto& receiver : transceiver->internal()->receivers()) {
         gatherer->receiver_track_id_by_ssrc.insert(std::make_pair(
             receiver->internal()->ssrc(), receiver->track()->id()));
       }
+#endif
       gatherers.push_back(std::move(gatherer));
     }
   }
 
   pc_->worker_thread()->Invoke<void>(RTC_FROM_HERE, [&] {
     rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
+#if 1
+    // TODO(tommi): cleanup.
+    int i = 0;
+    for (const auto& transceiver : transceivers) {
+      cricket::ChannelInterface* channel = transceiver->internal()->channel();
+      if (!channel) {
+        continue;
+      }
+      MediaChannelStatsGatherer* gatherer = gatherers[i++].get();
+      RTC_DCHECK_EQ(gatherer->mid, channel->content_name());
+      for (const auto& receiver : transceiver->internal()->receivers()) {
+        gatherer->receiver_track_id_by_ssrc.insert(std::make_pair(
+            receiver->internal()->ssrc(), receiver->track()->id()));
+      }
+    }
+#endif
+
     for (auto it = gatherers.begin(); it != gatherers.end();
          /* incremented manually */) {
       MediaChannelStatsGatherer* gatherer = it->get();
