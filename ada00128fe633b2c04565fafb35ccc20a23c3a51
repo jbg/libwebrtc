@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "574c4682_08205861",
+        "filename": "pc/video_rtp_receiver.cc",
+        "patchSetId": 34
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-14T15:32:32Z",
+      "side": 0,
+      "message": "If the root cause of the bug is that the worker is overloaded, and \"secondary\" up in rtp_receiver_interface.h meaning that the destination is the worker thread, JS will remain blocked on GetSources post this change. To terminally decouple GetSources from this situation, a solution is to move GetSources back to the signaling thread and do some downstairs work to make the method both efficient and not depend on the worker thread.",
+      "range": {
+        "startLine": 292,
+        "startChar": 25,
+        "endLine": 292,
+        "endChar": 31
+      },
+      "revId": "ada00128fe633b2c04565fafb35ccc20a23c3a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
