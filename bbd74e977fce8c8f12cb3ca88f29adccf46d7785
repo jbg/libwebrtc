@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7cc647_96b57226",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-15T12:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a70c8ae_04b33f63",
+      "range": {
+        "startLine": 338,
+        "startChar": 2,
+        "endLine": 338,
+        "endChar": 6
+      },
+      "revId": "bbd74e977fce8c8f12cb3ca88f29adccf46d7785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bdaa3f3_fa7f846a",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-14T09:39:48Z",
       "side": 1,
       "message": "I miss designated initializers....\nThe 7th member in the struct is uint8_t, assigning it a boolean looks weird.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/video/video_timing.h;l\u003d44;drc\u003dd381eede92d1f417385bda908841c9868d9d0ded\n\nis there real need to keep this variable constant?\nit might be safer to initialize it like this:\n  VideoSendTiming video_timing \u003d {}; // to ensure all members are value initialized\n  video_timing.flags \u003d VideoSendTiming::kTriggeredByTimer; // is that what is meant instead of true or kNotTriggered is enough for this test?",
+      "range": {
+        "startLine": 339,
+        "startChar": 64,
+        "endLine": 339,
+        "endChar": 68
+      },
+      "revId": "bbd74e977fce8c8f12cb3ca88f29adccf46d7785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e26af02_ad07276e",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-15T12:35:37Z",
+      "side": 1,
+      "message": "Huh, I didn\u0027t actually look that far into what the old test was doing there and just copied it.\nIt seems that flag is only read earlier (in rtp_sender_video), so doesn\u0027t actually matter here. Replace with just\npacket-\u003eSetExtension\u003cVideoTimingExtension\u003e(VideoSendTiming {});",
+      "parentUuid": "5bdaa3f3_fa7f846a",
       "range": {
         "startLine": 339,
         "startChar": 64,
@@ -64,6 +112,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "132b4236_7b33f972",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-15T12:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b67f4bd0_2c56134c",
+      "revId": "bbd74e977fce8c8f12cb3ca88f29adccf46d7785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c73e43b_e6f0381e",
@@ -87,6 +153,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bc9cf95_01a33bef",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-15T12:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c73e43b_e6f0381e",
+      "range": {
+        "startLine": 363,
+        "startChar": 74,
+        "endLine": 363,
+        "endChar": 78
+      },
+      "revId": "bbd74e977fce8c8f12cb3ca88f29adccf46d7785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebf2a036_c461ab09",
@@ -100,6 +190,30 @@
       "writtenOn": "2021-05-14T09:39:48Z",
       "side": 1,
       "message": "ditto, write type explicitly.",
+      "range": {
+        "startLine": 364,
+        "startChar": 2,
+        "endLine": 364,
+        "endChar": 6
+      },
+      "revId": "bbd74e977fce8c8f12cb3ca88f29adccf46d7785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "977a2bb9_ec2a1d95",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-15T12:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebf2a036_c461ab09",
       "range": {
         "startLine": 364,
         "startChar": 2,
