@@ -17,7 +17,7 @@ following classes interact.
 
 ## webrtc::DtlsTransport
 The [`webrtc::DtlsTransport`](https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/pc/dtls_transport.h;l=32;drc=6a55e7307b78edb50f94a1ff1ef8393d58218369) class
-is a wrapper around the  `cricket::DtlsTransportInternal` and allows registering observers implementing the `webrtc::DtlsTransportObserverInterface.
+is a wrapper around the  `cricket::DtlsTransportInternal` and allows registering observers implementing the `webrtc::DtlsTransportObserverInterface`.
 The [`webrtc::DtlsTransportObserverInterface`](https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/api/dtls_transport_interface.h;l=76;drc=34437d5660a80393d631657329ef74c6538be25a) will provide updates to the observers, passing around a snapshot of the transports state such as the connection state, the remote certificate(s) and the SRTP ciphers as [`DtlsTransportInformation`](https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/api/dtls_transport_interface.h;l=41;drc=34437d5660a80393d631657329ef74c6538be25a).
 
 ##cricket::DtlsTransportInternal
