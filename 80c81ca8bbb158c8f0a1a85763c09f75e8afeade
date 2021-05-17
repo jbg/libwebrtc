@@ -104,6 +104,24 @@
       "message": "Looks like you need to leave old signatures (as deprecated) for a while because downstream uses this class.",
       "revId": "80c81ca8bbb158c8f0a1a85763c09f75e8afeade",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51730372_ecf99eee",
+        "filename": "rtc_base/bit_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-05-17T15:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1927778b_e56575e8",
+      "revId": "80c81ca8bbb158c8f0a1a85763c09f75e8afeade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
