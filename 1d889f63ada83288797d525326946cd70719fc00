@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a2b6723_7f3df7ce",
+        "filename": "api/rtp_receiver_interface.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-17T08:25:31Z",
+      "side": 1,
+      "message": "Filed bugs.webrtc.org/12772 on the removal of GetFrameEn/Decryptor - could you please add todo comments to remove them?",
+      "range": {
+        "startLine": 142,
+        "startChar": 29,
+        "endLine": 142,
+        "endChar": 46
+      },
+      "revId": "1d889f63ada83288797d525326946cd70719fc00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b8093bd_a3bb48b6",
+        "filename": "pc/video_rtp_receiver.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-17T08:25:31Z",
+      "side": 1,
+      "message": "The callback isn\u0027t set up again after this, I wonder if this is safe because https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/rtp_transceiver.cc;drc\u003d6531e02635a3f00784aacad5c641cd16532657e5;bpv\u003d1;bpt\u003d1;l\u003d220 i.e. is it possible for SetMediaChannel to be called with a valid channel again?",
+      "range": {
+        "startLine": 131,
+        "startChar": 13,
+        "endLine": 131,
+        "endChar": 26
+      },
+      "revId": "1d889f63ada83288797d525326946cd70719fc00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0032d7b0_bd5e5a67",
+        "filename": "pc/video_rtp_receiver.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-17T08:25:31Z",
+      "side": 1,
+      "message": "Unsure - see comment in the code.",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 0
+      },
+      "revId": "1d889f63ada83288797d525326946cd70719fc00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

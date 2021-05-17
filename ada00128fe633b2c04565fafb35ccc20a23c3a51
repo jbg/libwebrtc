@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c17b8891_4b40732c",
+        "filename": "pc/audio_rtp_receiver.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-17T08:25:31Z",
+      "side": 0,
+      "message": "Should this really be removed?",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 29
+      },
+      "revId": "ada00128fe633b2c04565fafb35ccc20a23c3a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "360fec51_bc60de71",
+        "filename": "pc/audio_rtp_receiver.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-17T08:25:31Z",
+      "side": 0,
+      "message": "Should this check for a null media_channel be removed here? I don\u0027t see the check pushed down into SetOutputVolume_w.",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 21
+      },
+      "revId": "ada00128fe633b2c04565fafb35ccc20a23c3a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "224203ad_7a4017fb",
+        "filename": "pc/audio_rtp_receiver.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-17T08:25:31Z",
+      "side": 0,
+      "message": "Previously, when stopped_ was true the call wasn\u0027t forwarded to the media channel, now it is. Intentional?",
+      "range": {
+        "startLine": 233,
+        "startChar": 35,
+        "endLine": 233,
+        "endChar": 43
+      },
+      "revId": "ada00128fe633b2c04565fafb35ccc20a23c3a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "574c4682_08205861",
         "filename": "pc/video_rtp_receiver.cc",
         "patchSetId": 34
