@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "799bdcaa_b8c31bb9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-17T13:00:45Z",
+      "side": 1,
+      "message": "After making the modification on your local git branch, commit them and then run \"git cl upload\" again - you\u0027ll see a new \"patchet\" here.\nYou can run unit tests locally, for instance:\n\nout/Debug/modules_unittests --gtest_filter\u003d*RtpSenderEgressTest*\n\nOnce happy with the results, we\u0027ll run all the try bots with this patch before actually landing the code in the repository. Meaning all unit tests must pass on all platforms.",
+      "parentUuid": "d61a1bc8_791ae627",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "b0c8d8393b20dd14cd9ad6c54542f999c4fe16c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a2d0e3df_070946f0",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -78,6 +102,23 @@
       "writtenOn": "2021-05-15T06:37:19Z",
       "side": 1,
       "message": "Thank you for these constructive suggestions. ",
+      "revId": "b0c8d8393b20dd14cd9ad6c54542f999c4fe16c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ca4860f_4141b066",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-17T13:00:45Z",
+      "side": 1,
+      "message": "Please go ahead and upload the fixed code. You can edit the CL description as instructed directly in the web view.",
       "revId": "b0c8d8393b20dd14cd9ad6c54542f999c4fe16c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
