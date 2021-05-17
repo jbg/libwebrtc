@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95c52a8e_617ed7a5",
+        "filename": "pc/audio_rtp_receiver.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-17T11:57:53Z",
+      "side": 0,
+      "message": "Maybe this invariant should be documented in the attributes to aid future readers?",
+      "parentUuid": "80c51fbd_b588ff8b",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 21
+      },
+      "revId": "ada00128fe633b2c04565fafb35ccc20a23c3a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "224203ad_7a4017fb",
         "filename": "pc/audio_rtp_receiver.cc",
         "patchSetId": 36

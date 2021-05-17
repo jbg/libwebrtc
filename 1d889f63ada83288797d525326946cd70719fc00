@@ -95,6 +95,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac7f9bbd_e593cceb",
+        "filename": "pc/video_rtp_receiver.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-17T11:57:53Z",
+      "side": 1,
+      "message": "I see, then I\u0027m good.",
+      "parentUuid": "437bf413_ab02135c",
+      "range": {
+        "startLine": 131,
+        "startChar": 13,
+        "endLine": 131,
+        "endChar": 26
+      },
+      "revId": "1d889f63ada83288797d525326946cd70719fc00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0032d7b0_bd5e5a67",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "ah, this was a TODO for myself to consider. What I was thinking of was to make it even more explicit that when the callback is cleared, that the link between the source and the receiver, had been removed. As is, I think this is relatively simple and we don\u0027t need to change this to be a pointer or separate allocation.\nComment removed.",
       "parentUuid": "0032d7b0_bd5e5a67",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 0
+      },
+      "revId": "1d889f63ada83288797d525326946cd70719fc00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed4b42d5_badc7b4c",
+        "filename": "pc/video_rtp_receiver.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-17T11:57:53Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "3a378529_ebf00c1d",
       "range": {
         "startLine": 139,
         "startChar": 2,
