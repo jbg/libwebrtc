@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28d42a37_4d4b1877",
+        "filename": "pc/audio_rtp_receiver.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-17T09:25:30Z",
+      "side": 0,
+      "message": "Yes, there\u0027s no point in dchecking the pointer since we dereference it anyway on the next line. This is a convention in chromium and webrtc.",
+      "parentUuid": "c17b8891_4b40732c",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 29
+      },
+      "revId": "ada00128fe633b2c04565fafb35ccc20a23c3a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "360fec51_bc60de71",
         "filename": "pc/audio_rtp_receiver.cc",
         "patchSetId": 36
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80c51fbd_b588ff8b",
+        "filename": "pc/audio_rtp_receiver.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-17T09:25:30Z",
+      "side": 0,
+      "message": "checking media_channel_ on the signaling thread isn\u0027t allowed. But checking stopped_ is fine. If we\u0027re not stopped_ (signaling thread state), media_channel_ cannot be nullptr (worker thread state).",
+      "parentUuid": "360fec51_bc60de71",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 21
+      },
+      "revId": "ada00128fe633b2c04565fafb35ccc20a23c3a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "224203ad_7a4017fb",
         "filename": "pc/audio_rtp_receiver.cc",
         "patchSetId": 36
@@ -60,6 +108,30 @@
       "writtenOn": "2021-05-17T08:25:31Z",
       "side": 0,
       "message": "Previously, when stopped_ was true the call wasn\u0027t forwarded to the media channel, now it is. Intentional?",
+      "range": {
+        "startLine": 233,
+        "startChar": 35,
+        "endLine": 233,
+        "endChar": 43
+      },
+      "revId": "ada00128fe633b2c04565fafb35ccc20a23c3a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f91dac_38a2b1d6",
+        "filename": "pc/audio_rtp_receiver.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-17T09:25:30Z",
+      "side": 0,
+      "message": "Yes, this is intentional. Since the method is called on the worker thread, it cannot check `stopped_`. However, the equivalent check on the worker thread (for the purposes of this method) is `media_channel_`.\n\nBtw, before, the class checked both states on both threads, which was racy (due to external calls into the class) and also forced use of Invoke() for the internal implementation. Now I\u0027ve added RTC_GUARDED_BY to catch those errors.",
+      "parentUuid": "224203ad_7a4017fb",
       "range": {
         "startLine": 233,
         "startChar": 35,

@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edfe53da_e30a326a",
+        "filename": "api/rtp_receiver_interface.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-17T09:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a2b6723_7f3df7ce",
+      "range": {
+        "startLine": 142,
+        "startChar": 29,
+        "endLine": 142,
+        "endChar": 46
+      },
+      "revId": "1d889f63ada83288797d525326946cd70719fc00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b8093bd_a3bb48b6",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "437bf413_ab02135c",
+        "filename": "pc/video_rtp_receiver.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-17T09:25:30Z",
+      "side": 1,
+      "message": "It\u0027s not possible, but it isn\u0027t exactly clear from the code in rtp_transceiver, sdp_offer_answer or rtp_transmission_manager unfortunately. The teardown of receivers could be made more explicit (at least for unified plan) and also how transceivers are cleaned up. This CL makes it a bit simpler and cuts down on a couple of steps, but beyond that, there are multiple more steps involved with cleaning up the state of an active transceiver before it\u0027s fully freed. This also involves multiple redundant thread hops.\n\nThe code you linked to btw, is changed a little bit in this CL.",
+      "parentUuid": "8b8093bd_a3bb48b6",
+      "range": {
+        "startLine": 131,
+        "startChar": 13,
+        "endLine": 131,
+        "endChar": 26
+      },
+      "revId": "1d889f63ada83288797d525326946cd70719fc00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0032d7b0_bd5e5a67",
         "filename": "pc/video_rtp_receiver.h",
         "patchSetId": 36
@@ -60,6 +108,30 @@
       "writtenOn": "2021-05-17T08:25:31Z",
       "side": 1,
       "message": "Unsure - see comment in the code.",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 0
+      },
+      "revId": "1d889f63ada83288797d525326946cd70719fc00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a378529_ebf00c1d",
+        "filename": "pc/video_rtp_receiver.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-17T09:25:30Z",
+      "side": 1,
+      "message": "ah, this was a TODO for myself to consider. What I was thinking of was to make it even more explicit that when the callback is cleared, that the link between the source and the receiver, had been removed. As is, I think this is relatively simple and we don\u0027t need to change this to be a pointer or separate allocation.\nComment removed.",
+      "parentUuid": "0032d7b0_bd5e5a67",
       "range": {
         "startLine": 139,
         "startChar": 2,
