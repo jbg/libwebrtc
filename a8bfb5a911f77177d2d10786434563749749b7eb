@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f2c0cda_6ac70bc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-18T10:41:17Z",
+      "side": 1,
+      "message": "Why do we have to do this in two hops, rather than just changing the return type of dtls_transport_state_callback_list?\n\nIs it a public interface?\n",
+      "revId": "a8bfb5a911f77177d2d10786434563749749b7eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
