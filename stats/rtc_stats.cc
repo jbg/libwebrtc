@@ -67,14 +67,14 @@ std::string VectorOfStringsToString(const std::vector<T>& strings) {
 template <typename T>
 std::string MapToString(const std::map<std::string, T>& map) {
   rtc::StringBuilder sb;
-  sb << "[";
+  sb << "{";
   const char* separator = "";
   for (const auto& element : map) {
-    sb << separator << "\"" << rtc::ToString(element.first)
-       << "\":" << rtc::ToString(element.second);
+    sb << separator << rtc::ToString(element.first) << ":"
+       << rtc::ToString(element.second);
     separator = ",";
   }
-  sb << "]";
+  sb << "}";
   return sb.Release();
 }
 
