@@ -33,6 +33,24 @@
       "message": "+R sprang@ WDYT?\n\nI\u0027m a little against this change.\n\n\nMax bitrate is bigger than target mainly for a different reason:\nit\u0027s to facilitate bandwidth estimation ramp-up up-to the point where higher simulcast streams will be enabled.\n\nOf course, giving a better quality and better utilization of the available bandwidth is a reason too, but that\u0027s mostly a bonus.\n\nThis max bitrate is usually considered to be wasteful, so sending up-to max bitrate for all the streams may not be a great idea. If the user would like to get a better quality, they should increase the target bitrate instead (there\u0027s even WebAPI for that). There\u0027s always a trade off: users want quality, but at the same time, they want not to use extreme amount of bandwidth.\n\nFor that reason, default configured bitrates have MAX\u003d\u003dTARGET for supposed top layers [1].\n\nAlso, sending all max bitrates might be a bad configuration for SFUs in conference scenario. Lower streams are there for participants with constrained downlinks. Increasing bitrates at the lower layers would result in lower resolution and frame-rate selected for such users.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/media/engine/simulcast.cc;l\u003d94;drc\u003d2afff37ba007429cd1cb65369ee815bceee6f3c9\n\n\n",
       "revId": "0bc103e20152c4815531fccb23250bb5e5c5500f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25408f28_f3534495",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14174
+      },
+      "writtenOn": "2021-05-18T17:51:52Z",
+      "side": 1,
+      "message": "hmm, actually i didn\u0027t see api open for target bitrate, we could only set max bitrate and min bitrate. The target is calculated from webrtc internal about 3/4 of max bit. This is the rtp encoding parameter api: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/rtp_parameters.h;l\u003d454?q\u003dstruct%20RtpEncodingParameters%20%7B\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nI also don\u0027t remember web api support that: https://w3c.github.io/webrtc-pc/#rtcrtpencodingparameters, it even doesn\u0027t open min bitrate to config.\n\nI could understand the argument here,\nsince we have a central module already consider all participant downlinks, we could safely use \u0027max bandwidth\u0027 here (it is actually target, but we don\u0027t have open api to set).\nFor the app without a central BWA module, we may want to keep the low layers\u0027 bitrate low. \nSo I think this depends on what we use this max for",
+      "parentUuid": "a4dda749_ec4f4e10",
+      "revId": "0bc103e20152c4815531fccb23250bb5e5c5500f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
