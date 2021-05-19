@@ -51,6 +51,24 @@
       "parentUuid": "a4dda749_ec4f4e10",
       "revId": "0bc103e20152c4815531fccb23250bb5e5c5500f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e102022_36e97c31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-05-19T08:41:05Z",
+      "side": 1,
+      "message": "Oh, yes, my bad. There\u0027s only web API for max bitrate. However, as you\u0027ve said, target bitrate is set to be 3/4 of that. So, again, if the user needs better quality, they may increase the bitrate. Otherwise current bitrates are already selected as a reasonable quality-cost trade-off.\n\nI\u0027m not saying they are the absolute best values and would never need to be adjusted, but the system is just not designed to allocate max bitrate to all layers.",
+      "parentUuid": "25408f28_f3534495",
+      "revId": "0bc103e20152c4815531fccb23250bb5e5c5500f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
