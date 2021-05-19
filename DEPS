@@ -7,14 +7,14 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '3bdbd47d2324ad233e86a7faccc252c700c9286c',
+  'chromium_revision': '1444499000d1340bb89a29858f9eb46d6224ebcd',
 }
 
 deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@e34cf0158f0e7f19212988a6202de55784b04191',
+    'https://chromium.googlesource.com/chromium/src/base@9a1a941308fdfe9691866032ec88da5ef449ce9a',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@4e5721997aa843a4f63065845eb948d2ae0230c9',
   'src/buildtools':
@@ -25,13 +25,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@e0e60851e175e18b15b62fa82eda293e2a4b70e9',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@8d4e75c85c98b392eb52dfdec4dba6db5b36595d',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@1bebb81f26837deb369c8e4c2e5da4998eae49ce',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@721e99a5ba0fcd752d03ecb7fc40719f4e1094ef',
+    'https://chromium.googlesource.com/chromium/src/third_party@6aa949a77f449bbe2e3631f9df9f5a25785a2125',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -265,7 +265,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@04d8fb209386bad6667404b6ba4fa524cfe807f3',
+    'https://chromium.googlesource.com/chromium/src/tools@dced217d59d12999c3e6753f3509b513deb31389',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@a32a1607f6093d338f756c7e7c7b4333b0c50c9c',
 
