@@ -328,13 +328,17 @@ config("common_config") {
         # "-Wbad-function-cast",  (C/Obj-C only)
         # "-Wnested-externs",  (C/Obj-C only)
       ]
-      cflags_objc += [ "-Wstrict-prototypes" ]
+      cflags_objc += [
+        "-Wstrict-prototypes",
+        "-Wobjc-missing-property-synthesis",
+      ]
       cflags_cc = [
         "-Wnon-virtual-dtor",
 
         # This is enabled for clang; enable for gcc as well.
         "-Woverloaded-virtual",
       ]
+      cflags_objcc = [ "-Wobjc-missing-property-synthesis" ]
     }
 
     if (is_clang) {
