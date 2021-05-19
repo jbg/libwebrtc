@@ -86,6 +86,24 @@
       "message": "This is a question that has been raised before.\nThe problem with the change as is, is that it effectively raises the minimum bitrate required to receive video by 25% - especially concerning for all existing apps using the default allocations.\n\nI\u0027d be more in favor of ditching the 3/4 target when translating from the web apis to codec config.\nIdeally we\u0027d move to using the SvcRateAllocator for vp8/h264 instead, since it imo has a better algorithm for distributing bitrates and does allow lower streams to ramp up to the specified max.",
       "revId": "0bc103e20152c4815531fccb23250bb5e5c5500f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83ad3b97_bc69ba29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14174
+      },
+      "writtenOn": "2021-05-19T18:14:48Z",
+      "side": 1,
+      "message": "Yea, working on the logic when decide target based on external setup seems another way.\nOne concern is increasing target to max will kind of increasing the bar to trigger next layer a bit (in today setup it is 25%)",
+      "parentUuid": "c74b80de_98398beb",
+      "revId": "0bc103e20152c4815531fccb23250bb5e5c5500f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
