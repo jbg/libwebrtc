@@ -38,6 +38,9 @@
 
 namespace {
 
+constexpr const char* kOptimizedSimulcastFieldTrialName =
+    "WebRTC-OptimizedSimulcast";
+
 const unsigned int kDefaultMinQp = 2;
 const unsigned int kDefaultMaxQp = 56;
 // Max qp for lowest spatial resolution when doing simulcast.
@@ -353,8 +356,15 @@ int SimulcastEncoderAdapter::InitEncode(
   //   stream.
 
   // Singlecast or simulcast with simulcast-capable underlaying encoder.
-  if (total_streams_count_ == 1 ||
-      encoder_context->encoder().GetEncoderInfo().supports_simulcast) {
+  RTC_LOG(LS_ERROR) << "[HBOS] total_streams_count_: " << total_streams_count_;
+  RTC_LOG(LS_ERROR) << "[HBOS] ACTIVE STREAM COUNT: " << CountActiveStreams(*inst);
+  RTC_LOG(LS_ERROR) << "[HBOS] supports_simulcast: " << encoder_context->encoder().GetEncoderInfo().supports_simulcast;
+  bool optimized_simulcast = field_trial::IsEnabled(kOptimizedSimulcastFieldTrialName);
+  RTC_LOG(LS_ERROR) << "[HBOS] optimized_simulcast: " << optimized_simulcast;
+  if (!optimized_simulcast &&
+      (total_streams_count_ == 1 ||
+       encoder_context->encoder().GetEncoderInfo().supports_simulcast)) {
+    RTC_LOG(LS_ERROR) << "[HBOS] Singlecast or simulcast with simulcast-capable underlaying encoder.";
     int ret = encoder_context->encoder().InitEncode(&codec_, settings);
     if (ret >= 0) {
       int active_streams_count = CountActiveStreams(*inst);
@@ -374,9 +384,13 @@ int SimulcastEncoderAdapter::InitEncode(
       // Failed to initialize singlecast encoder.
       return ret;
     }
+    RTC_LOG(LS_ERROR)
+        << "WEBRTC_VIDEO_CODEC_ERR_SIMULCAST_PARAMETERS_NOT_SUPPORTED? "
+        << (ret == WEBRTC_VIDEO_CODEC_ERR_SIMULCAST_PARAMETERS_NOT_SUPPORTED ? "YES" : "NO");
   }
 
   // Multi-encoder simulcast or singlecast (deactivated layers).
+  RTC_LOG(LS_ERROR) << "[HBOS] Multi-encoder simulcast or singlecast (deactivated layers).";
   std::vector<uint32_t> stream_start_bitrate_kbps =
       GetStreamStartBitratesKbps(codec_);
 
@@ -485,11 +499,13 @@ int SimulcastEncoderAdapter::Encode(
   int src_width = input_image.width();
   int src_height = input_image.height();
 
+  // RTC_LOG(LS_ERROR) << "For each stream context...";
   for (auto& layer : stream_contexts_) {
     // Don't encode frames in resolutions that we don't intend to send.
     if (layer.is_paused()) {
       continue;
     }
+    // RTC_LOG(LS_ERROR) << "~~~ ENCODE " << layer.width() << " x " << layer.height();
 
     // Convert timestamp from RTP 90kHz clock.
     const Timestamp frame_timestamp =
