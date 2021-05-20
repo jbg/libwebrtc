@@ -34,6 +34,23 @@
       "parentUuid": "9f2c0cda_6ac70bc7",
       "revId": "a8bfb5a911f77177d2d10786434563749749b7eb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6497c12d_6a897e90",
+        "filename": "p2p/base/dtls_transport_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-20T10:13:08Z",
+      "side": 1,
+      "message": "Add ABSL_DEPRECATED on the old methods?",
+      "revId": "a8bfb5a911f77177d2d10786434563749749b7eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
