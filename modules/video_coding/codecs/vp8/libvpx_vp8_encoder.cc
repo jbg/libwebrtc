@@ -413,7 +413,16 @@ void LibvpxVp8Encoder::SetStreamState(bool send_stream, int stream_idx) {
     // Need a key frame if we have not sent this stream before.
     key_frame_request_[stream_idx] = true;
   }
+  if (send_stream_[stream_idx] == send_stream) {
+    // No change.
+    return;
+  }
   send_stream_[stream_idx] = send_stream;
+  std::string send_stream_str = "";
+  for (bool send_stream : send_stream_) {
+    send_stream_str += (send_stream ? "S" : "_");
+  }
+  RTC_LOG(LS_ERROR) << "[HBOS] SetStreamState: [" << send_stream_str << "]";
 }
 
 void LibvpxVp8Encoder::SetFecControllerOverride(
@@ -471,6 +480,7 @@ int LibvpxVp8Encoder::InitEncode(const VideoCodec* inst,
   int number_of_streams = SimulcastUtility::NumberOfSimulcastStreams(*inst);
   if (number_of_streams > 1 &&
       !SimulcastUtility::ValidSimulcastParameters(*inst, number_of_streams)) {
+    RTC_LOG(LS_ERROR) << "[HBOS] WEBRTC_VIDEO_CODEC_ERR_SIMULCAST_PARAMETERS_NOT_SUPPORTED";
     return WEBRTC_VIDEO_CODEC_ERR_SIMULCAST_PARAMETERS_NOT_SUPPORTED;
   }
 
@@ -520,6 +530,11 @@ int LibvpxVp8Encoder::InitEncode(const VideoCodec* inst,
     downsampling_factors_[number_of_streams - 1].num = 1;
     downsampling_factors_[number_of_streams - 1].den = 1;
   }
+  std::string send_stream_str = "";
+  for (bool send_stream : send_stream_) {
+    send_stream_str += (send_stream ? "S" : "_");
+  }
+  RTC_LOG(LS_ERROR) << "[HBOS] LibvpxVp8Encoder: [" << send_stream_str << "]";
 
   // populate encoder configuration with default values
   if (libvpx_->codec_enc_config_default(vpx_codec_vp8_cx(), &vpx_configs_[0],
@@ -1388,8 +1403,6 @@ LibvpxVp8Encoder::PrepareBuffers(rtc::scoped_refptr<VideoFrameBuffer> buffer) {
       }
       scaled_buffer = mapped_scaled_buffer;
     }
-    RTC_DCHECK_EQ(scaled_buffer->type(), mapped_buffer->type())
-        << "Scaled frames must have the same type as the mapped frame.";
     if (!IsCompatibleVideoFrameBufferType(scaled_buffer->type(),
                                           mapped_buffer->type())) {
       RTC_LOG(LS_ERROR) << "When scaling "
