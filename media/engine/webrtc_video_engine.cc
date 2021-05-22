@@ -3026,8 +3026,26 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::RecreateWebRtcVideoStream() {
   }
 }
 
+void WebRtcVideoChannel::WebRtcVideoReceiveStream::OnStart(
+    webrtc::TaskQueueBase* delivery_queue) {
+  RTC_DCHECK(!frame_tq_);
+  frame_tq_ = delivery_queue;
+  webrtc::MutexLock lock(&sink_lock_);
+  if (sink_)
+    sink_->OnStart(delivery_queue);
+}
+
+void WebRtcVideoChannel::WebRtcVideoReceiveStream::OnStop() {
+  webrtc::MutexLock lock(&sink_lock_);
+  if (sink_)
+    sink_->OnStop();
+  frame_tq_ = nullptr;
+}
+
 void WebRtcVideoChannel::WebRtcVideoReceiveStream::OnFrame(
     const webrtc::VideoFrame& frame) {
+  RTC_DCHECK_RUN_ON(frame_tq_);
+
   webrtc::MutexLock lock(&sink_lock_);
 
   int64_t time_now_ms = rtc::TimeMillis();
@@ -3073,6 +3091,7 @@ int WebRtcVideoChannel::WebRtcVideoReceiveStream::GetBaseMinimumPlayoutDelayMs()
 
 void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetSink(
     rtc::VideoSinkInterface<webrtc::VideoFrame>* sink) {
+  RTC_DCHECK(!frame_tq_) << "Frame delivery already in progress.";
   webrtc::MutexLock lock(&sink_lock_);
   sink_ = sink;
 }

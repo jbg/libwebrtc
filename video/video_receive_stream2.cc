@@ -333,6 +333,8 @@ void VideoReceiveStream2::Start() {
     return;
   }
 
+  RTC_DCHECK(!frame_delivery_tq_);
+
   const bool protected_by_fec = config_.rtp.protected_by_flexfec ||
                                 rtp_video_stream_receiver_.IsUlpfecEnabled();
 
@@ -344,10 +346,13 @@ void VideoReceiveStream2::Start() {
   transport_adapter_.Enable();
   rtc::VideoSinkInterface<VideoFrame>* renderer = nullptr;
   if (config_.enable_prerenderer_smoothing) {
-    incoming_video_stream_.reset(new IncomingVideoStream(
-        task_queue_factory_, config_.render_delay_ms, this));
+    auto* incoming_video_stream = new IncomingVideoStream(
+        task_queue_factory_, config_.render_delay_ms, this);
+    frame_delivery_tq_ = incoming_video_stream->render_queue();
+    incoming_video_stream_.reset(incoming_video_stream);
     renderer = incoming_video_stream_.get();
   } else {
+    frame_delivery_tq_ = decode_queue_.Get();
     renderer = this;
   }
 
@@ -383,6 +388,10 @@ void VideoReceiveStream2::Start() {
   // Start decoding on task queue.
   video_receiver_.DecoderThreadStarting();
   stats_proxy_.DecoderThreadStarting();
+
+  RTC_DCHECK(frame_delivery_tq_);
+  config_.renderer->OnStart(frame_delivery_tq_);
+
   decode_queue_.PostTask([this] {
     RTC_DCHECK_RUN_ON(&decode_queue_);
     decoder_stopped_ = false;
@@ -415,6 +424,8 @@ void VideoReceiveStream2::Stop() {
     decoder_running_ = false;
     video_receiver_.DecoderThreadStopped();
     stats_proxy_.DecoderThreadStopped();
+    config_.renderer->OnStop();
+
     // Deregister external decoders so they are no longer running during
     // destruction. This effectively stops the VCM since the decoder thread is
     // stopped, the VCM is deregistered and no asynchronous decoder threads are
@@ -428,6 +439,7 @@ void VideoReceiveStream2::Stop() {
   video_stream_decoder_.reset();
   incoming_video_stream_.reset();
   transport_adapter_.Disable();
+  frame_delivery_tq_ = nullptr;
 }
 
 void VideoReceiveStream2::CreateAndRegisterExternalDecoder(
@@ -524,6 +536,8 @@ int VideoReceiveStream2::GetBaseMinimumPlayoutDelayMs() const {
 }
 
 void VideoReceiveStream2::OnFrame(const VideoFrame& video_frame) {
+  RTC_DCHECK_RUN_ON(frame_delivery_tq_);
+
   VideoFrameMetaData frame_meta(video_frame, clock_->CurrentTime());
 
   // TODO(bugs.webrtc.org/10739): we should set local capture clock offset for

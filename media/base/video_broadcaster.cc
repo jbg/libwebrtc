@@ -21,12 +21,18 @@
 
 namespace rtc {
 
-VideoBroadcaster::VideoBroadcaster() = default;
+VideoBroadcaster::VideoBroadcaster() {
+  worker_thread_.Detach();
+  frame_tq_.Detach();
+}
+
 VideoBroadcaster::~VideoBroadcaster() = default;
 
 void VideoBroadcaster::AddOrUpdateSink(
     VideoSinkInterface<webrtc::VideoFrame>* sink,
     const VideoSinkWants& wants) {
+  // RTC_DCHECK_RUN_ON(&signaling_thread_);
+  RTC_DCHECK_RUN_ON(&worker_thread_);
   RTC_DCHECK(sink != nullptr);
   webrtc::MutexLock lock(&sinks_and_wants_lock_);
   if (!FindSinkPair(sink)) {
@@ -39,6 +45,8 @@ void VideoBroadcaster::AddOrUpdateSink(
 
 void VideoBroadcaster::RemoveSink(
     VideoSinkInterface<webrtc::VideoFrame>* sink) {
+  // RTC_DCHECK_RUN_ON(&signaling_thread_);
+  // RTC_DCHECK_RUN_ON(&worker_thread_);
   RTC_DCHECK(sink != nullptr);
   webrtc::MutexLock lock(&sinks_and_wants_lock_);
   VideoSourceBase::RemoveSink(sink);
@@ -46,16 +54,23 @@ void VideoBroadcaster::RemoveSink(
 }
 
 bool VideoBroadcaster::frame_wanted() const {
+  RTC_DCHECK_RUN_ON(&worker_thread_);
   webrtc::MutexLock lock(&sinks_and_wants_lock_);
   return !sink_pairs().empty();
 }
 
 VideoSinkWants VideoBroadcaster::wants() const {
+  // RTC_DCHECK_RUN_ON(&worker_thread_);
+  // RTC_DCHECK_RUN_ON(&signaling_thread_);
+  // RTC_DCHECK_RUN_ON(&frame_tq_);
   webrtc::MutexLock lock(&sinks_and_wants_lock_);
   return current_wants_;
 }
 
 void VideoBroadcaster::OnFrame(const webrtc::VideoFrame& frame) {
+  // Called on IncomingVideoStream's `incoming_render_queue_` when render
+  // smoothing is enabled, otherwise the decoder queue.
+  RTC_DCHECK_RUN_ON(&frame_tq_);
   webrtc::MutexLock lock(&sinks_and_wants_lock_);
   bool current_frame_was_discarded = false;
   for (auto& sink_pair : sink_pairs()) {
@@ -94,6 +109,7 @@ void VideoBroadcaster::OnFrame(const webrtc::VideoFrame& frame) {
 }
 
 void VideoBroadcaster::OnDiscardedFrame() {
+  RTC_DCHECK_RUN_ON(&worker_thread_);
   webrtc::MutexLock lock(&sinks_and_wants_lock_);
   for (auto& sink_pair : sink_pairs()) {
     sink_pair.sink->OnDiscardedFrame();
@@ -101,6 +117,7 @@ void VideoBroadcaster::OnDiscardedFrame() {
 }
 
 void VideoBroadcaster::UpdateWants() {
+  // RTC_DCHECK_RUN_ON(&signaling_thread_);
   VideoSinkWants wants;
   wants.rotation_applied = false;
   wants.resolution_alignment = 1;
@@ -139,6 +156,7 @@ void VideoBroadcaster::UpdateWants() {
 
 const rtc::scoped_refptr<webrtc::VideoFrameBuffer>&
 VideoBroadcaster::GetBlackFrameBuffer(int width, int height) {
+  RTC_DCHECK_RUN_ON(&frame_tq_);
   if (!black_frame_buffer_ || black_frame_buffer_->width() != width ||
       black_frame_buffer_->height() != height) {
     rtc::scoped_refptr<webrtc::I420Buffer> buffer =
