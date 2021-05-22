@@ -18,6 +18,7 @@
 #include "api/units/data_size.h"
 #include "api/units/timestamp.h"
 #include "logging/rtc_event_log/mock/mock_rtc_event_log.h"
+#include "modules/rtp_rtcp/include/flexfec_sender.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"
@@ -38,9 +39,13 @@ using ::testing::StrictMock;
 
 constexpr Timestamp kStartTime = Timestamp::Millis(123456789);
 constexpr int kDefaultPayloadType = 100;
+constexpr int kFlexfectPayloadType = 110;
 constexpr uint16_t kStartSequenceNumber = 33;
 constexpr uint32_t kSsrc = 725242;
 constexpr uint32_t kRtxSsrc = 12345;
+constexpr uint32_t kFlexFecSsrc = 23456;
+const std::vector<RtpExtension> kNoRtpHeaderExtensions;
+const std::vector<RtpExtensionSize> kNoRtpHeaderExtensionSizes;
 enum : int {
   kTransportSequenceNumberExtensionId = 1,
   kVideoTimingExtensionExtensionId,
@@ -476,6 +481,102 @@ TEST_P(RtpSenderEgressTest, BitrateCallbacks) {
     sender->SendPacket(packet.get(), PacedPacketInfo());
     time_controller_.AdvanceTime(kPacketInterval);
   }
+}
+
+TEST_P(RtpSenderEgressTest, SendPacketMatchesVideo) {
+  std::unique_ptr<RtpSenderEgress> sender = CreateRtpSenderEgress();
+  std::unique_ptr<RtpPacketToSend> packet = BuildRtpPacket();
+  packet->set_packet_type(RtpPacketMediaType::kVideo);
+
+  sender->SendPacket(packet.get(), PacedPacketInfo());
+  EXPECT_TRUE(transport_.last_packet().has_value());
+}
+
+TEST_P(RtpSenderEgressTest, SendPacketMatchesAudio) {
+  std::unique_ptr<RtpSenderEgress> sender = CreateRtpSenderEgress();
+  std::unique_ptr<RtpPacketToSend> packet = BuildRtpPacket();
+  packet->set_packet_type(RtpPacketMediaType::kAudio);
+
+  sender->SendPacket(packet.get(), PacedPacketInfo());
+  EXPECT_TRUE(transport_.last_packet().has_value());
+}
+
+TEST_P(RtpSenderEgressTest, SendPacketMatchesRetransmissions) {
+  std::unique_ptr<RtpSenderEgress> sender = CreateRtpSenderEgress();
+  std::unique_ptr<RtpPacketToSend> packet = BuildRtpPacket();
+  packet->set_packet_type(RtpPacketMediaType::kRetransmission);
+
+  sender->SendPacket(packet.get(), PacedPacketInfo());
+  EXPECT_TRUE(transport_.last_packet().has_value());
+}
+
+TEST_P(RtpSenderEgressTest, SendPacketMatchesRtxRetransmissions) {
+  std::unique_ptr<RtpSenderEgress> sender = CreateRtpSenderEgress();
+  std::unique_ptr<RtpPacketToSend> packet = BuildRtpPacket();
+  packet->set_packet_type(RtpPacketMediaType::kRetransmission);
+  packet->SetSsrc(kRtxSsrc);
+
+  sender->SendPacket(packet.get(), PacedPacketInfo());
+  EXPECT_TRUE(transport_.last_packet().has_value());
+}
+
+TEST_P(RtpSenderEgressTest, SendPacketMatchesPadding) {
+  std::unique_ptr<RtpSenderEgress> sender = CreateRtpSenderEgress();
+  std::unique_ptr<RtpPacketToSend> packet = BuildRtpPacket();
+  packet->set_packet_type(RtpPacketMediaType::kPadding);
+  packet->SetPadding(224);
+
+  sender->SendPacket(packet.get(), PacedPacketInfo());
+  EXPECT_TRUE(transport_.last_packet().has_value());
+}
+
+TEST_P(RtpSenderEgressTest, SendPacketMatchesRtxPadding) {
+  std::unique_ptr<RtpSenderEgress> sender = CreateRtpSenderEgress();
+  std::unique_ptr<RtpPacketToSend> packet = BuildRtpPacket();
+  packet->set_packet_type(RtpPacketMediaType::kPadding);
+  packet->SetPadding(224);
+  packet->SetSsrc(kRtxSsrc);
+
+  sender->SendPacket(packet.get(), PacedPacketInfo());
+  EXPECT_TRUE(transport_.last_packet().has_value());
+}
+
+TEST_P(RtpSenderEgressTest, SendPacketMatchesRtxPayloadPadding) {
+  std::unique_ptr<RtpSenderEgress> sender = CreateRtpSenderEgress();
+  std::unique_ptr<RtpPacketToSend> packet = BuildRtpPacket();
+  packet->set_packet_type(RtpPacketMediaType::kPadding);
+  packet->SetPayloadSize(500);
+  packet->SetSsrc(kRtxSsrc);
+
+  sender->SendPacket(packet.get(), PacedPacketInfo());
+  EXPECT_TRUE(transport_.last_packet().has_value());
+}
+
+TEST_P(RtpSenderEgressTest, SendPacketMatchesFlexfec) {
+  FlexfecSender flexfec(kFlexfectPayloadType, kFlexFecSsrc, kSsrc, /*mid=*/"",
+                        kNoRtpHeaderExtensions, kNoRtpHeaderExtensionSizes,
+                        /*rtp_state=*/nullptr, time_controller_.GetClock());
+  RtpRtcpInterface::Configuration config = DefaultConfig();
+  config.fec_generator = &flexfec;
+  auto sender = std::make_unique<RtpSenderEgress>(config, &packet_history_);
+
+  std::unique_ptr<RtpPacketToSend> packet = BuildRtpPacket();
+  packet->set_packet_type(RtpPacketMediaType::kForwardErrorCorrection);
+  packet->SetPayloadSize(500);
+  packet->SetSsrc(kFlexFecSsrc);
+
+  sender->SendPacket(packet.get(), PacedPacketInfo());
+  EXPECT_TRUE(transport_.last_packet().has_value());
+}
+
+TEST_P(RtpSenderEgressTest, SendPacketMatchesUlpfec) {
+  std::unique_ptr<RtpSenderEgress> sender = CreateRtpSenderEgress();
+  std::unique_ptr<RtpPacketToSend> packet = BuildRtpPacket();
+  packet->set_packet_type(RtpPacketMediaType::kForwardErrorCorrection);
+  packet->SetPayloadSize(500);
+
+  sender->SendPacket(packet.get(), PacedPacketInfo());
+  EXPECT_TRUE(transport_.last_packet().has_value());
 }
 
 INSTANTIATE_TEST_SUITE_P(WithAndWithoutOverhead,
