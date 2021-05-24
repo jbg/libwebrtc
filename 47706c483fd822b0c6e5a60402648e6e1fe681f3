@@ -33,6 +33,23 @@
       "message": "Hi Tommi, friendly ping for review.",
       "revId": "47706c483fd822b0c6e5a60402648e6e1fe681f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6409f051_afe9d68b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-24T12:07:44Z",
+      "side": 1,
+      "message": "zijiehe@ - can you take a look? ",
+      "revId": "47706c483fd822b0c6e5a60402648e6e1fe681f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
