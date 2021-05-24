@@ -16,6 +16,23 @@
       "message": "Tommi, PTAL",
       "revId": "47706c483fd822b0c6e5a60402648e6e1fe681f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06a473d7_d438e42f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2021-05-24T11:34:01Z",
+      "side": 1,
+      "message": "Hi Tommi, friendly ping for review.",
+      "revId": "47706c483fd822b0c6e5a60402648e6e1fe681f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
