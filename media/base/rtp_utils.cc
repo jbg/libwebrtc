@@ -289,7 +289,7 @@ bool IsRtpPacket(rtc::ArrayView<const char> packet) {
              rtc::reinterpret_array_view<const uint8_t>(packet));
 }
 
-// Check the RTP payload type. If 63 < payload type < 96, it's RTCP.
+// Check the RTP payload type. If 65 <= payload type < 96, it's RTCP.
 // For additional details, see http://tools.ietf.org/html/rfc5761.
 bool IsRtcpPacket(rtc::ArrayView<const char> packet) {
   if (packet.size() < kMinRtcpPacketLen ||
@@ -299,7 +299,7 @@ bool IsRtcpPacket(rtc::ArrayView<const char> packet) {
   }
 
   char pt = packet[1] & 0x7F;
-  return (63 < pt) && (pt < 96);
+  return (65 <= pt) && (pt < 96);
 }
 
 bool IsValidRtpPayloadType(int payload_type) {
