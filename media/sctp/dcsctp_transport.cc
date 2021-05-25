@@ -106,7 +106,7 @@ class TextPcapPacketObserver : public dcsctp::PacketObserver {
     remaining = remaining % (60 * 1000);
     int seconds = remaining / 1000;
     int ms = remaining % 1000;
-    s.AppendFormat("%02d:%02d:%02d.%03d", hours, minutes, seconds, ms);
+    s.AppendFormat("\n%02d:%02d:%02d.%03d", hours, minutes, seconds, ms);
     s << " 0000";
     for (uint8_t byte : payload) {
       s.AppendFormat(" %02x", byte);
