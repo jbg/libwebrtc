@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6860fc7f_4ba99ad1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-05-25T10:46:57Z",
+      "side": 1,
+      "message": "Hi, a friendly ping to submit this to CQ. It failed previously on a wrong bug reference, now it should be resolved.\n\nTommi, Wez, Erik, anyone 😊. Thank you.",
+      "revId": "fafa4d1ac87b5923515903dff969356ebf05f002",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
