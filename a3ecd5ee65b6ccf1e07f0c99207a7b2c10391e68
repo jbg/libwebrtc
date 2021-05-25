@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed1501b5_620faa93",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-05-25T12:06:53Z",
+      "side": 1,
+      "message": "I think we could save a few more bytes by putting it within the prefix, e.g. on line 88 and 93, doing: PrintPacket(\"\\nO \", ...);\n\nBut that\u0027s just a nit. Thanks!",
+      "range": {
+        "startLine": 101,
+        "startChar": 9,
+        "endLine": 101,
+        "endChar": 14
+      },
+      "revId": "a3ecd5ee65b6ccf1e07f0c99207a7b2c10391e68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
