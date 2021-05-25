@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cacdb248_878e6e22",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-25T11:01:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e7840be2_ee65ad63",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 55
+      },
+      "revId": "fbf0416ea41da11d804b52e9dc28aafa570ba36b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dedc69c9_c8acaa54",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-25T09:56:29Z",
       "side": 1,
       "message": "I\u0027m not sure what \u0027Matches\u0027 in this test.\nThe only expectation I see is that SendPacket deliveres packet to the transport.\n\nWhy do we need tests per packet_type? what logic is tested here?\nI quickly checked RtpSenderEgress::SendPacket, doesn\u0027t look like there is any logic that switch on packet type to decide if packet should be passed to the transport.",
+      "range": {
+        "startLine": 486,
+        "startChar": 38,
+        "endLine": 486,
+        "endChar": 45
+      },
+      "revId": "fbf0416ea41da11d804b52e9dc28aafa570ba36b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8e14c2b_5841841d",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-25T11:01:45Z",
+      "side": 1,
+      "message": "Seems they were made for HasCorrectSsrc() method. There are other tests that implicitly covers this check though, so yeah probably don\u0027t need these. I think that was not a dcheck before (instead returning false, back when  packet router iterated over modules instead of doing a lookup) so seems obsolete. Will remove.",
+      "parentUuid": "dedc69c9_c8acaa54",
       "range": {
         "startLine": 486,
         "startChar": 38,
