@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a992c79_60b78890",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-05-25T10:53:57Z",
+      "side": 1,
+      "message": "Don\u0027t you want to put the newline before the prefix (on line 101?). The prefix indicates the direction, e.g. \"I \" or \"O \".",
+      "range": {
+        "startLine": 109,
+        "startChar": 20,
+        "endLine": 109,
+        "endChar": 22
+      },
+      "revId": "b9d86cf508a59dfc98c54655bea4ac28cbc8d58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
