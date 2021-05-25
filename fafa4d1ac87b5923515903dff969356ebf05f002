@@ -16,6 +16,23 @@
       "message": "Hi, a friendly ping to submit this to CQ. It failed previously on a wrong bug reference, now it should be resolved.\n\nTommi, Wez, Erik, anyone 😊. Thank you.",
       "revId": "fafa4d1ac87b5923515903dff969356ebf05f002",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c441f0ec_d3cb78c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2021-05-25T17:34:51Z",
+      "side": 1,
+      "message": "Jan, sorry but the format in the commit message needs to be:\n\nBug: chromium:XXX",
+      "revId": "fafa4d1ac87b5923515903dff969356ebf05f002",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
