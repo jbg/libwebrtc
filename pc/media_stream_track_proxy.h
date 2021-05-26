@@ -11,13 +11,13 @@
 // This file includes proxy classes for tracks. The purpose is
 // to make sure tracks are only accessed from the signaling thread.
 
-#ifndef API_MEDIA_STREAM_TRACK_PROXY_H_
-#define API_MEDIA_STREAM_TRACK_PROXY_H_
+#ifndef PC_MEDIA_STREAM_TRACK_PROXY_H_
+#define PC_MEDIA_STREAM_TRACK_PROXY_H_
 
 #include <string>
 
 #include "api/media_stream_interface.h"
-#include "api/proxy.h"
+#include "pc/proxy.h"
 
 namespace webrtc {
 
@@ -62,4 +62,4 @@ END_PROXY_MAP()
 
 }  // namespace webrtc
 
-#endif  // API_MEDIA_STREAM_TRACK_PROXY_H_
+#endif  // PC_MEDIA_STREAM_TRACK_PROXY_H_
