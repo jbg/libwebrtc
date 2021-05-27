@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f7ac69_e1465fda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-27T09:15:54Z",
+      "side": 1,
+      "message": "Change the first line to something that directly describes what the cl does, for instance:\n\"Fix incorrect SSRC in RtpPacketSendInfo for RTX packets.\" \n\nThe \"webrtc:12713\" is automatically a link to the issue, so you don\u0027t need to write it explicitly.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 80
+      },
+      "revId": "58b654c14bd8bc9e9a887de2dae513b5099c1cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc9e1fff_255b5936",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-27T09:15:54Z",
+      "side": 1,
+      "message": "Sorry for the delay, I missed that you had uploaded the new patch set!\nLooks good to me once these final comments are addressed.",
+      "revId": "58b654c14bd8bc9e9a887de2dae513b5099c1cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83f9ea0e_d654aaf8",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-27T09:15:54Z",
+      "side": 1,
+      "message": "nit: easier will be easier to see what is expected to trigger these if you move them down, e.g:\n\nEXPECT_CALL(feedback_observer_,\n            OnAddPacket(Field(\u0026RtpPacketSendInfo::ssrc, kSsrc)));\nsender-\u003eSendPacket(packet1.get(), PacedPacketInfo());\n\nEXPECT_CALL(feedback_observer_,\n            OnAddPacket(Field(\u0026RtpPacketSendInfo::ssrc, kRtxSsrc)));\nsender-\u003eSendPacket(packet2.get(), PacedPacketInfo());",
+      "range": {
+        "startLine": 225,
+        "startChar": 2,
+        "endLine": 228,
+        "endChar": 70
+      },
+      "revId": "58b654c14bd8bc9e9a887de2dae513b5099c1cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "860038fb_addf4e87",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-05-27T09:15:54Z",
+      "side": 1,
+      "message": "nit: suggest renaming packet1 to media_packet and packet2 to rtx_packet",
+      "range": {
+        "startLine": 231,
+        "startChar": 35,
+        "endLine": 231,
+        "endChar": 42
+      },
+      "revId": "58b654c14bd8bc9e9a887de2dae513b5099c1cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
