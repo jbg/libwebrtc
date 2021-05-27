@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20473aca_597a823c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-27T09:46:55Z",
+      "side": 1,
+      "message": "What\u0027s the behavior that changes because of this default code assignment, and where\u0027s the test for it?\n",
+      "revId": "9d015304c406ab5ea740ab99339e512760610117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
