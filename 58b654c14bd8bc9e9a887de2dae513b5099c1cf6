@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "458753e7_39dfdf57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-05-27T09:25:52Z",
+      "side": 1,
+      "message": "Here are best practices how to write a description:\nhttps://google.github.io/eng-practices/review/developer/cl-descriptions.html",
+      "parentUuid": "81f7ac69_e1465fda",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 80
+      },
+      "revId": "58b654c14bd8bc9e9a887de2dae513b5099c1cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fc9e1fff_255b5936",
