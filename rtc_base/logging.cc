@@ -114,6 +114,8 @@ ABSL_CONST_INIT std::atomic<bool> LogMessage::streams_empty_ = {true};
 // Boolean options default to false (0)
 bool LogMessage::thread_, LogMessage::timestamp_;
 
+rtc::ClockInterface* LogMessage::clock_;
+
 LogMessage::LogMessage(const char* file, int line, LoggingSeverity sev)
     : LogMessage(file, line, sev, ERRCTX_NONE, 0) {}
 
@@ -126,7 +128,13 @@ LogMessage::LogMessage(const char* file,
   if (timestamp_) {
     // Use SystemTimeMillis so that even if tests use fake clocks, the timestamp
     // in log messages represents the real system time.
-    int64_t time = TimeDiff(SystemTimeMillis(), LogStartTime());
+    int64_t time;
+
+    if (clock_ == nullptr) {
+      time = TimeDiff(SystemTimeMillis(), LogStartTime());
+    } else {
+      time = clock_->TimeNanos() / 1000000;
+    }
     // Also ensure WallClockStartTime is initialized, so that it matches
     // LogStartTime.
     WallClockStartTime();
@@ -265,6 +273,10 @@ void LogMessage::LogThreads(bool on) {
 
 void LogMessage::LogTimestamps(bool on) {
   timestamp_ = on;
+}
+
+void LogMessage::SetClockForLogging(rtc::ClockInterface* clock) {
+  clock_ = clock;
 }
 
 void LogMessage::LogToDebug(LoggingSeverity min_sev) {

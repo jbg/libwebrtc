@@ -57,6 +57,7 @@
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/system/inline.h"
+#include "rtc_base/time_utils.h"
 
 #if !defined(NDEBUG) || defined(DLOG_ALWAYS_ON)
 #define RTC_DLOG_IS_ON 1
@@ -456,6 +457,8 @@ class LogMessage {
   static void LogThreads(bool on = true);
   //  LogTimestamps: Display the elapsed time of the program
   static void LogTimestamps(bool on = true);
+
+  static void SetClockForLogging(rtc::ClockInterface* clock);
   // These are the available logging channels
   //  Debug: Debug console on Windows, otherwise stderr
   static void LogToDebug(LoggingSeverity min_sev);
@@ -581,6 +584,8 @@ class LogMessage {
 
   // Flags for formatting options
   static bool thread_, timestamp_;
+
+  static rtc::ClockInterface* clock_;
 
   // Determines if logs will be directed to stderr in debug mode.
   static bool log_to_stderr_;
