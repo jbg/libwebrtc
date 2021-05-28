@@ -17,6 +17,7 @@
 #include "api/video/video_source_interface.h"
 #include "media/base/video_source_base.h"
 #include "rtc_base/synchronization/mutex.h"
+#include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace rtc {
@@ -56,10 +57,14 @@ class VideoBroadcaster : public VideoSourceBase,
       int width,
       int height) RTC_EXCLUSIVE_LOCKS_REQUIRED(sinks_and_wants_lock_);
 
+  RTC_NO_UNIQUE_ADDRESS webrtc::SequenceChecker signaling_thread_;
+  RTC_NO_UNIQUE_ADDRESS webrtc::SequenceChecker worker_thread_;
+  RTC_NO_UNIQUE_ADDRESS webrtc::SequenceChecker frame_tq_;
   mutable webrtc::Mutex sinks_and_wants_lock_;
 
   VideoSinkWants current_wants_ RTC_GUARDED_BY(sinks_and_wants_lock_);
-  rtc::scoped_refptr<webrtc::VideoFrameBuffer> black_frame_buffer_;
+  rtc::scoped_refptr<webrtc::VideoFrameBuffer> black_frame_buffer_
+      RTC_GUARDED_BY(&frame_tq_);
   bool previous_frame_sent_to_all_sinks_ RTC_GUARDED_BY(sinks_and_wants_lock_) =
       true;
 };
