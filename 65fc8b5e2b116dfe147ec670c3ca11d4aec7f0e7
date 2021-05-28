@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18be48cb_83f8efcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-05-28T22:53:32Z",
+      "side": 1,
+      "message": "Hello, I found a typo in the URL due to RTC_OBJC_TYPE. Please take a look. Thank you.",
+      "revId": "65fc8b5e2b116dfe147ec670c3ca11d4aec7f0e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
