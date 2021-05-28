@@ -13,12 +13,26 @@
 
 #include "rtc_base/checks.h"
 
+namespace webrtc {
+class TaskQueueBase;
+}
+
 namespace rtc {
 
 template <typename VideoFrameT>
 class VideoSinkInterface {
  public:
   virtual ~VideoSinkInterface() = default;
+
+  // Called when frames will start to arrive. The `delivery_queue` will be the
+  // task queue on which the OnFrame and OnDiscardedFrame calls will be made.
+  // NOTE: Not all implementations call OnStart/OnStop right now, so if you find
+  // that calls are missing, please fix that area of the code.
+  virtual void OnStart(webrtc::TaskQueueBase* delivery_queue) {}
+
+  // Called when frame delivery has been stopped and further calls to On*Frame
+  // methods will not be made.
+  virtual void OnStop() {}
 
   virtual void OnFrame(const VideoFrameT& frame) = 0;
 
