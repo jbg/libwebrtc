@@ -200,6 +200,7 @@ TEST(CallTest, CreateDestroy_AssociateAudioSendReceiveStreams_RecvFirst) {
 
     internal::AudioReceiveStream* internal_recv_stream =
         static_cast<internal::AudioReceiveStream*>(recv_stream);
+    internal_recv_stream->GetInfo();
     EXPECT_EQ(send_stream,
               internal_recv_stream->GetAssociatedSendStreamForTesting());
 
