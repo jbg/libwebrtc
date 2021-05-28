@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fee9a25_3f8294ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-05-28T22:41:15Z",
+      "side": 1,
+      "message": "Hello, this CL is a follow-up work to introducing the qualityLimitationDurations stats. Please take a look. Thank you.",
+      "revId": "fb3efac8191aa94090440679b9c89f9036c82269",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
