@@ -118,9 +118,11 @@ class VideoReceiveStreamTest : public ::testing::Test {
 
     video_receive_stream_ =
         std::make_unique<webrtc::internal::VideoReceiveStream>(
-            task_queue_factory_.get(), &rtp_stream_receiver_controller_,
-            kDefaultNumCpuCores, &packet_router_, config_.Copy(),
-            process_thread_.get(), &call_stats_, clock_, timing_);
+            task_queue_factory_.get(), kDefaultNumCpuCores, &packet_router_,
+            config_.Copy(), process_thread_.get(), &call_stats_, clock_,
+            timing_);
+    video_receive_stream_->RegisterWithTransport(
+        &rtp_stream_receiver_controller_);
   }
 
  protected:
@@ -256,10 +258,11 @@ class VideoReceiveStreamTestWithFakeDecoder : public ::testing::Test {
     video_receive_stream_ = nullptr;
     timing_ = new VCMTiming(clock_);
     video_receive_stream_.reset(new webrtc::internal::VideoReceiveStream(
-        task_queue_factory_.get(), &rtp_stream_receiver_controller_,
-        kDefaultNumCpuCores, &packet_router_, config_.Copy(),
-        process_thread_.get(), &call_stats_, clock_, timing_));
+        task_queue_factory_.get(), kDefaultNumCpuCores, &packet_router_,
+        config_.Copy(), process_thread_.get(), &call_stats_, clock_, timing_));
     video_receive_stream_->SetAndGetRecordingState(std::move(state), false);
+    video_receive_stream_->RegisterWithTransport(
+        &rtp_stream_receiver_controller_);
   }
 
  protected:
@@ -483,7 +486,6 @@ class VideoReceiveStreamTestWithSimulatedClock : public ::testing::Test {
                           &fake_renderer_)),
         call_stats_(time_controller_.GetClock(), process_thread_.get()),
         video_receive_stream_(time_controller_.GetTaskQueueFactory(),
-                              &rtp_stream_receiver_controller_,
                               /*num_cores=*/2,
                               &packet_router_,
                               config_.Copy(),
@@ -491,6 +493,8 @@ class VideoReceiveStreamTestWithSimulatedClock : public ::testing::Test {
                               &call_stats_,
                               time_controller_.GetClock(),
                               new VCMTiming(time_controller_.GetClock())) {
+    video_receive_stream_.RegisterWithTransport(
+        &rtp_stream_receiver_controller_);
     video_receive_stream_.Start();
   }
 

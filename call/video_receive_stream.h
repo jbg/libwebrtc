@@ -32,6 +32,7 @@
 #include "api/video/video_timing.h"
 #include "api/video_codecs/sdp_video_format.h"
 #include "call/rtp_config.h"
+#include "call/rtp_stream_receiver_controller_interface.h"
 #include "common_video/frame_counts.h"
 #include "modules/rtp_rtcp/include/rtcp_statistics.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
@@ -266,6 +267,13 @@ class VideoReceiveStream {
 
     rtc::scoped_refptr<webrtc::FrameTransformerInterface> frame_transformer;
   };
+
+  // Registers this send stream with a network transport.
+  virtual void RegisterWithTransport(
+      RtpStreamReceiverControllerInterface* receiver_controller) = 0;
+
+  // Unregisters with the previously registered network transport.
+  virtual void UnregisterFromTransport() = 0;
 
   // Starts stream activity.
   // When a stream is active, it can receive, process and deliver packets.

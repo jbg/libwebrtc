@@ -243,6 +243,9 @@ class FakeVideoReceiveStream final : public webrtc::VideoReceiveStream {
 
  private:
   // webrtc::VideoReceiveStream implementation.
+  void RegisterWithTransport(webrtc::RtpStreamReceiverControllerInterface*
+                                 receiver_controller) override;
+  void UnregisterFromTransport() override;
   void Start() override;
   void Stop() override;
 
