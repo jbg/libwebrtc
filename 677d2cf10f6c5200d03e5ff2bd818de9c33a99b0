@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb79789_4e396858",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-05-29T04:52:43Z",
+      "side": 1,
+      "message": "Hello, this CL is for compatibility with Python 3. Please take a look. Thank you.",
+      "revId": "677d2cf10f6c5200d03e5ff2bd818de9c33a99b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
