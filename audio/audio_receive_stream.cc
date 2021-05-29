@@ -90,7 +90,6 @@ std::unique_ptr<voe::ChannelReceiveInterface> CreateChannelReceive(
 
 AudioReceiveStream::AudioReceiveStream(
     Clock* clock,
-    RtpStreamReceiverControllerInterface* receiver_controller,
     PacketRouter* packet_router,
     ProcessThread* module_process_thread,
     NetEqFactory* neteq_factory,
@@ -98,7 +97,6 @@ AudioReceiveStream::AudioReceiveStream(
     const rtc::scoped_refptr<webrtc::AudioState>& audio_state,
     webrtc::RtcEventLog* event_log)
     : AudioReceiveStream(clock,
-                         receiver_controller,
                          packet_router,
                          config,
                          audio_state,
@@ -112,7 +110,6 @@ AudioReceiveStream::AudioReceiveStream(
 
 AudioReceiveStream::AudioReceiveStream(
     Clock* clock,
-    RtpStreamReceiverControllerInterface* receiver_controller,
     PacketRouter* packet_router,
     const webrtc::AudioReceiveStream::Config& config,
     const rtc::scoped_refptr<webrtc::AudioState>& audio_state,
@@ -127,7 +124,6 @@ AudioReceiveStream::AudioReceiveStream(
   RTC_DCHECK(audio_state_);
   RTC_DCHECK(channel_receive_);
 
-  RTC_DCHECK(receiver_controller);
   RTC_DCHECK(packet_router);
   // Configure bandwidth estimation.
   channel_receive_->RegisterReceiverCongestionControlObjects(packet_router);
@@ -137,9 +133,6 @@ AudioReceiveStream::AudioReceiveStream(
   // be updated.
   channel_receive_->SetSourceTracker(&source_tracker_);
 
-  // Register with transport.
-  rtp_stream_receiver_ = receiver_controller->CreateReceiver(
-      config.rtp.remote_ssrc, channel_receive_.get());
   ConfigureStream(this, config, true);
 }
 
@@ -149,6 +142,17 @@ AudioReceiveStream::~AudioReceiveStream() {
   Stop();
   channel_receive_->SetAssociatedSendChannel(nullptr);
   channel_receive_->ResetReceiverCongestionControlObjects();
+}
+
+void AudioReceiveStream::RegisterWithTransport(
+    RtpStreamReceiverControllerInterface* receiver_controller) {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  rtp_stream_receiver_ = receiver_controller->CreateReceiver(
+      config_.rtp.remote_ssrc, channel_receive_.get());
+}
+void AudioReceiveStream::UnregisterFromTransport() {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  rtp_stream_receiver_ = nullptr;
 }
 
 void AudioReceiveStream::Reconfigure(

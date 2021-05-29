@@ -26,6 +26,7 @@
 #include "api/scoped_refptr.h"
 #include "api/transport/rtp/rtp_source.h"
 #include "call/rtp_config.h"
+#include "call/rtp_stream_receiver_controller_interface.h"
 
 namespace webrtc {
 class AudioSinkInterface;
@@ -163,6 +164,13 @@ class AudioReceiveStream {
     // encoded frames.
     rtc::scoped_refptr<webrtc::FrameTransformerInterface> frame_transformer;
   };
+
+  // Registers this send stream with a network transport.
+  virtual void RegisterWithTransport(
+      RtpStreamReceiverControllerInterface* receiver_controller) = 0;
+
+  // Unregisters with the previously registered network transport.
+  virtual void UnregisterFromTransport() = 0;
 
   // Reconfigure the stream according to the Configuration.
   virtual void Reconfigure(const Config& config) = 0;

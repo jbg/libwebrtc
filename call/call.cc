@@ -862,14 +862,14 @@ webrtc::AudioReceiveStream* Call::CreateAudioReceiveStream(
   event_log_->Log(std::make_unique<RtcEventAudioReceiveStreamConfig>(
       CreateRtcLogStreamConfig(config)));
 
-  // TODO(bugs.webrtc.org/11993): Move the registration between |receive_stream|
-  // and |audio_receiver_controller_| out of AudioReceiveStream construction and
-  // set it up asynchronously on the network thread (the registration and
-  // |audio_receiver_controller_| need to live on the network thread).
+  // TODO(bugs.webrtc.org/11993): Set transport registration up asynchronously
+  // on the network thread (the registration and |audio_receiver_controller_|
+  // need to live on the network thread).
   AudioReceiveStream* receive_stream = new AudioReceiveStream(
-      clock_, &audio_receiver_controller_, transport_send_ptr_->packet_router(),
+      clock_, transport_send_ptr_->packet_router(),
       module_process_thread_->process_thread(), config_.neteq_factory, config,
       config_.audio_state, event_log_);
+  receive_stream->RegisterWithTransport(&audio_receiver_controller_);
 
   // TODO(bugs.webrtc.org/11993): Update the below on the network thread.
   // We could possibly set up the audio_receiver_controller_ association up

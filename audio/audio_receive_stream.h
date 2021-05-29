@@ -44,7 +44,6 @@ class AudioReceiveStream final : public webrtc::AudioReceiveStream,
                                  public Syncable {
  public:
   AudioReceiveStream(Clock* clock,
-                     RtpStreamReceiverControllerInterface* receiver_controller,
                      PacketRouter* packet_router,
                      ProcessThread* module_process_thread,
                      NetEqFactory* neteq_factory,
@@ -54,7 +53,6 @@ class AudioReceiveStream final : public webrtc::AudioReceiveStream,
   // For unit tests, which need to supply a mock channel receive.
   AudioReceiveStream(
       Clock* clock,
-      RtpStreamReceiverControllerInterface* receiver_controller,
       PacketRouter* packet_router,
       const webrtc::AudioReceiveStream::Config& config,
       const rtc::scoped_refptr<webrtc::AudioState>& audio_state,
@@ -68,6 +66,9 @@ class AudioReceiveStream final : public webrtc::AudioReceiveStream,
   ~AudioReceiveStream() override;
 
   // webrtc::AudioReceiveStream implementation.
+  void RegisterWithTransport(
+      RtpStreamReceiverControllerInterface* receiver_controller) override;
+  void UnregisterFromTransport() override;
   void Reconfigure(const webrtc::AudioReceiveStream::Config& config) override;
   void Start() override;
   void Stop() override;
