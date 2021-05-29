@@ -58,7 +58,6 @@ class VideoReceiveStream
   static constexpr int kMaxWaitForKeyFrameMs = 200;
 
   VideoReceiveStream(TaskQueueFactory* task_queue_factory,
-                     RtpStreamReceiverControllerInterface* receiver_controller,
                      int num_cpu_cores,
                      PacketRouter* packet_router,
                      VideoReceiveStream::Config config,
@@ -67,7 +66,6 @@ class VideoReceiveStream
                      Clock* clock,
                      VCMTiming* timing);
   VideoReceiveStream(TaskQueueFactory* task_queue_factory,
-                     RtpStreamReceiverControllerInterface* receiver_controller,
                      int num_cpu_cores,
                      PacketRouter* packet_router,
                      VideoReceiveStream::Config config,
@@ -84,6 +82,9 @@ class VideoReceiveStream
   void SetSync(Syncable* audio_syncable);
 
   // Implements webrtc::VideoReceiveStream.
+  void RegisterWithTransport(
+      RtpStreamReceiverControllerInterface* receiver_controller) override;
+  void UnregisterFromTransport() override;
   void Start() override;
   void Stop() override;
 

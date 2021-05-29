@@ -92,7 +92,6 @@ class VideoReceiveStream2
 
   VideoReceiveStream2(TaskQueueFactory* task_queue_factory,
                       TaskQueueBase* current_queue,
-                      RtpStreamReceiverControllerInterface* receiver_controller,
                       int num_cpu_cores,
                       PacketRouter* packet_router,
                       VideoReceiveStream::Config config,
@@ -110,6 +109,9 @@ class VideoReceiveStream2
   void SetSync(Syncable* audio_syncable);
 
   // Implements webrtc::VideoReceiveStream.
+  void RegisterWithTransport(
+      RtpStreamReceiverControllerInterface* receiver_controller) override;
+  void UnregisterFromTransport() override;
   void Start() override;
   void Stop() override;
 

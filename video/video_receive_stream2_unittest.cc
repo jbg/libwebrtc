@@ -133,10 +133,11 @@ class VideoReceiveStream2Test : public ::testing::Test {
 
     video_receive_stream_ =
         std::make_unique<webrtc::internal::VideoReceiveStream2>(
-            task_queue_factory_.get(), loop_.task_queue(),
-            &rtp_stream_receiver_controller_, kDefaultNumCpuCores,
+            task_queue_factory_.get(), loop_.task_queue(), kDefaultNumCpuCores,
             &packet_router_, config_.Copy(), process_thread_.get(),
             &call_stats_, clock_, timing_);
+    video_receive_stream_->RegisterWithTransport(
+        &rtp_stream_receiver_controller_);
   }
 
  protected:
@@ -307,10 +308,12 @@ class VideoReceiveStream2TestWithFakeDecoder : public ::testing::Test {
     video_receive_stream_ = nullptr;
     timing_ = new VCMTiming(clock_);
     video_receive_stream_.reset(new webrtc::internal::VideoReceiveStream2(
-        task_queue_factory_.get(), loop_.task_queue(),
-        &rtp_stream_receiver_controller_, kDefaultNumCpuCores, &packet_router_,
-        config_.Copy(), process_thread_.get(), &call_stats_, clock_, timing_));
+        task_queue_factory_.get(), loop_.task_queue(), kDefaultNumCpuCores,
+        &packet_router_, config_.Copy(), process_thread_.get(), &call_stats_,
+        clock_, timing_));
     video_receive_stream_->SetAndGetRecordingState(std::move(state), false);
+    video_receive_stream_->RegisterWithTransport(
+        &rtp_stream_receiver_controller_);
   }
 
  protected:
@@ -569,7 +572,6 @@ class VideoReceiveStream2TestWithSimulatedClock
         call_stats_(time_controller_.GetClock(), loop_.task_queue()),
         video_receive_stream_(time_controller_.GetTaskQueueFactory(),
                               loop_.task_queue(),
-                              &rtp_stream_receiver_controller_,
                               /*num_cores=*/2,
                               &packet_router_,
                               config_.Copy(),
@@ -577,6 +579,8 @@ class VideoReceiveStream2TestWithSimulatedClock
                               &call_stats_,
                               time_controller_.GetClock(),
                               new VCMTiming(time_controller_.GetClock())) {
+    video_receive_stream_.RegisterWithTransport(
+        &rtp_stream_receiver_controller_);
     video_receive_stream_.Start();
   }
 
@@ -735,10 +739,11 @@ class VideoReceiveStream2TestWithLazyDecoderCreation : public ::testing::Test {
 
     video_receive_stream_ =
         std::make_unique<webrtc::internal::VideoReceiveStream2>(
-            task_queue_factory_.get(), loop_.task_queue(),
-            &rtp_stream_receiver_controller_, kDefaultNumCpuCores,
+            task_queue_factory_.get(), loop_.task_queue(), kDefaultNumCpuCores,
             &packet_router_, config_.Copy(), process_thread_.get(),
             &call_stats_, clock_, timing_);
+    video_receive_stream_->RegisterWithTransport(
+        &rtp_stream_receiver_controller_);
   }
 
  protected:

@@ -184,7 +184,6 @@ namespace internal {
 
 VideoReceiveStream::VideoReceiveStream(
     TaskQueueFactory* task_queue_factory,
-    RtpStreamReceiverControllerInterface* receiver_controller,
     int num_cpu_cores,
     PacketRouter* packet_router,
     VideoReceiveStream::Config config,
@@ -250,15 +249,10 @@ VideoReceiveStream::VideoReceiveStream(
       new video_coding::FrameBuffer(clock_, timing_.get(), &stats_proxy_));
 
   process_thread_->RegisterModule(&rtp_stream_sync_, RTC_FROM_HERE);
-  // Register with RtpStreamReceiverController.
-  media_receiver_ = receiver_controller->CreateReceiver(
-      config_.rtp.remote_ssrc, &rtp_video_stream_receiver_);
   if (config_.rtp.rtx_ssrc) {
     rtx_receive_stream_ = std::make_unique<RtxReceiveStream>(
         &rtp_video_stream_receiver_, config.rtp.rtx_associated_payload_types,
         config_.rtp.remote_ssrc, rtp_receive_statistics_.get());
-    rtx_receiver_ = receiver_controller->CreateReceiver(
-        config_.rtp.rtx_ssrc, rtx_receive_stream_.get());
   } else {
     rtp_receive_statistics_->EnableRetransmitDetection(config.rtp.remote_ssrc,
                                                        true);
@@ -267,7 +261,6 @@ VideoReceiveStream::VideoReceiveStream(
 
 VideoReceiveStream::VideoReceiveStream(
     TaskQueueFactory* task_queue_factory,
-    RtpStreamReceiverControllerInterface* receiver_controller,
     int num_cpu_cores,
     PacketRouter* packet_router,
     VideoReceiveStream::Config config,
@@ -275,7 +268,6 @@ VideoReceiveStream::VideoReceiveStream(
     CallStats* call_stats,
     Clock* clock)
     : VideoReceiveStream(task_queue_factory,
-                         receiver_controller,
                          num_cpu_cores,
                          packet_router,
                          std::move(config),
@@ -289,6 +281,23 @@ VideoReceiveStream::~VideoReceiveStream() {
   RTC_LOG(LS_INFO) << "~VideoReceiveStream: " << config_.ToString();
   Stop();
   process_thread_->DeRegisterModule(&rtp_stream_sync_);
+}
+
+void VideoReceiveStream::RegisterWithTransport(
+    RtpStreamReceiverControllerInterface* receiver_controller) {
+  RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+  media_receiver_ = receiver_controller->CreateReceiver(
+      config_.rtp.remote_ssrc, &rtp_video_stream_receiver_);
+  if (config_.rtp.rtx_ssrc) {
+    rtx_receiver_ = receiver_controller->CreateReceiver(
+        config_.rtp.rtx_ssrc, rtx_receive_stream_.get());
+  }
+}
+
+void VideoReceiveStream::UnregisterFromTransport() {
+  RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+  media_receiver_ = nullptr;
+  rtx_receiver_ = nullptr;
 }
 
 void VideoReceiveStream::SignalNetworkState(NetworkState state) {

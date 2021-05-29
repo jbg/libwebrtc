@@ -351,6 +351,11 @@ webrtc::VideoReceiveStream::Stats FakeVideoReceiveStream::GetStats() const {
   return stats_;
 }
 
+void FakeVideoReceiveStream::RegisterWithTransport(
+    webrtc::RtpStreamReceiverControllerInterface* receiver_controller) {}
+
+void FakeVideoReceiveStream::UnregisterFromTransport() {}
+
 void FakeVideoReceiveStream::Start() {
   receiving_ = true;
 }
