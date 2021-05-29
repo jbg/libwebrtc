@@ -20,6 +20,7 @@
 #include "api/rtp_headers.h"
 #include "api/rtp_parameters.h"
 #include "call/rtp_packet_sink_interface.h"
+#include "call/rtp_stream_receiver_controller_interface.h"
 
 namespace webrtc {
 
@@ -75,6 +76,13 @@ class FlexfecReceiveStream : public RtpPacketSinkInterface {
     // RTP header extensions that have been negotiated for this track.
     std::vector<RtpExtension> rtp_header_extensions;
   };
+
+  // Registers this send stream with a network transport.
+  virtual void RegisterWithTransport(
+      RtpStreamReceiverControllerInterface* receiver_controller) = 0;
+
+  // Unregisters with the previously registered network transport.
+  virtual void UnregisterFromTransport() = 0;
 
   virtual Stats GetStats() const = 0;
 

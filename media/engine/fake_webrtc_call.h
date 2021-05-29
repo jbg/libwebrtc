@@ -278,6 +278,10 @@ class FakeFlexfecReceiveStream final : public webrtc::FlexfecReceiveStream {
   const webrtc::FlexfecReceiveStream::Config& GetConfig() const override;
 
  private:
+  void RegisterWithTransport(
+      webrtc::RtpStreamReceiverControllerInterface* receiver_controller);
+  void UnregisterFromTransport();
+
   webrtc::FlexfecReceiveStream::Stats GetStats() const override;
 
   void OnRtpPacket(const webrtc::RtpPacketReceived& packet) override;
