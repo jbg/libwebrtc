@@ -138,7 +138,6 @@ std::unique_ptr<ModuleRtpRtcpImpl2> CreateRtpRtcpModule(
 
 FlexfecReceiveStreamImpl::FlexfecReceiveStreamImpl(
     Clock* clock,
-    RtpStreamReceiverControllerInterface* receiver_controller,
     const Config& config,
     RecoveredPacketReceiver* recovered_packet_receiver,
     RtcpRttStats* rtt_stats,
@@ -158,20 +157,6 @@ FlexfecReceiveStreamImpl::FlexfecReceiveStreamImpl(
   // RTCP reporting.
   rtp_rtcp_->SetRTCPStatus(config_.rtcp_mode);
   process_thread_->RegisterModule(rtp_rtcp_.get(), RTC_FROM_HERE);
-
-  // Register with transport.
-  // TODO(nisse): OnRtpPacket in this class delegates all real work to
-  // |receiver_|. So maybe we don't need to implement RtpPacketSinkInterface
-  // here at all, we'd then delete the OnRtpPacket method and instead register
-  // |receiver_| as the RtpPacketSinkInterface for this stream.
-  // TODO(nisse): Passing |this| from the constructor to the RtpDemuxer, before
-  // the object is fully initialized, is risky. But it works in this case
-  // because locking in our caller, Call::CreateFlexfecReceiveStream, ensures
-  // that the demuxer doesn't call OnRtpPacket before this object is fully
-  // constructed. Registering |receiver_| instead of |this| would solve this
-  // problem too.
-  rtp_stream_receiver_ =
-      receiver_controller->CreateReceiver(config_.remote_ssrc, this);
 }
 
 FlexfecReceiveStreamImpl::~FlexfecReceiveStreamImpl() {
@@ -189,6 +174,20 @@ void FlexfecReceiveStreamImpl::OnRtpPacket(const RtpPacketReceived& packet) {
   if (packet.Ssrc() == config_.remote_ssrc) {
     rtp_receive_statistics_->OnRtpPacket(packet);
   }
+}
+
+void FlexfecReceiveStreamImpl::RegisterWithTransport(
+    RtpStreamReceiverControllerInterface* receiver_controller) {
+  // TODO(nisse): OnRtpPacket in this class delegates all real work to
+  // |receiver_|. So maybe we don't need to implement RtpPacketSinkInterface
+  // here at all, we'd then delete the OnRtpPacket method and instead register
+  // |receiver_| as the RtpPacketSinkInterface for this stream.
+  rtp_stream_receiver_ =
+      receiver_controller->CreateReceiver(config_.remote_ssrc, this);
+}
+
+void FlexfecReceiveStreamImpl::UnregisterFromTransport() {
+  rtp_stream_receiver_ = nullptr;
 }
 
 // TODO(brandtr): Implement this member function when we have designed the

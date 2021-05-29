@@ -32,18 +32,19 @@ class RtpStreamReceiverInterface;
 
 class FlexfecReceiveStreamImpl : public FlexfecReceiveStream {
  public:
-  FlexfecReceiveStreamImpl(
-      Clock* clock,
-      RtpStreamReceiverControllerInterface* receiver_controller,
-      const Config& config,
-      RecoveredPacketReceiver* recovered_packet_receiver,
-      RtcpRttStats* rtt_stats,
-      ProcessThread* process_thread);
+  FlexfecReceiveStreamImpl(Clock* clock,
+                           const Config& config,
+                           RecoveredPacketReceiver* recovered_packet_receiver,
+                           RtcpRttStats* rtt_stats,
+                           ProcessThread* process_thread);
   ~FlexfecReceiveStreamImpl() override;
 
   // RtpPacketSinkInterface.
   void OnRtpPacket(const RtpPacketReceived& packet) override;
 
+  void RegisterWithTransport(
+      RtpStreamReceiverControllerInterface* receiver_controller) override;
+  void UnregisterFromTransport() override;
   Stats GetStats() const override;
   const Config& GetConfig() const override;
 

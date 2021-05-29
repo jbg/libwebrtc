@@ -368,6 +368,11 @@ FakeFlexfecReceiveStream::GetConfig() const {
   return config_;
 }
 
+void FakeFlexfecReceiveStream::RegisterWithTransport(
+    webrtc::RtpStreamReceiverControllerInterface* receiver_controller) {}
+
+void FakeFlexfecReceiveStream::UnregisterFromTransport() {}
+
 // TODO(brandtr): Implement when the stats have been designed.
 webrtc::FlexfecReceiveStream::Stats FakeFlexfecReceiveStream::GetStats() const {
   return webrtc::FlexfecReceiveStream::Stats();

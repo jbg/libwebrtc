@@ -1092,15 +1092,10 @@ FlexfecReceiveStream* Call::CreateFlexfecReceiveStream(
 
   FlexfecReceiveStreamImpl* receive_stream;
 
-  // Unlike the video and audio receive streams, FlexfecReceiveStream implements
-  // RtpPacketSinkInterface itself, and hence its constructor passes its |this|
-  // pointer to video_receiver_controller_->CreateStream(). Calling the
-  // constructor while on the worker thread ensures that we don't call
-  // OnRtpPacket until the constructor is finished and the object is
-  // in a valid state, since OnRtpPacket runs on the same thread.
   receive_stream = new FlexfecReceiveStreamImpl(
-      clock_, &video_receiver_controller_, config, recovered_packet_receiver,
-      call_stats_->AsRtcpRttStats(), module_process_thread_->process_thread());
+      clock_, config, recovered_packet_receiver, call_stats_->AsRtcpRttStats(),
+      module_process_thread_->process_thread());
+  receive_stream->RegisterWithTransport(&video_receiver_controller_);
 
   RTC_DCHECK(receive_rtp_config_.find(config.remote_ssrc) ==
              receive_rtp_config_.end());
