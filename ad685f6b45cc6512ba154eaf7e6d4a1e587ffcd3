@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e49f2cc2_835bd592",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-30T19:57:17Z",
+      "side": 1,
+      "message": "\u003e It\u0027s in the chain of CLs that I think you\u0027ve already reviewed a couple of CLs from (thanks!)\n\nOh I see... I got a hacking fever and went ahead with what we discussed needed to be done a few days ago.\n\n\u003e Patch Set 2:\n\u003e \n\u003e Doesn\u0027t this break functionally?\n\u003e \n\u003e In any event I have three changes queued up that address the same thing but retain the registration. \n\nNot according to unit tests. The registration is killed when the receive stream is deleted which happens last in DestroyAudioReceiveStream. Before stuff\u0027s moved to the network thread that should be safe right? (Later on the network thread it needs to happen somewhere else.)\n\n",
+      "revId": "ad685f6b45cc6512ba154eaf7e6d4a1e587ffcd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
