@@ -16,6 +16,7 @@ rtc_library("emulated_network") {
   ]
   if (rtc_include_tests) {
     visibility += [
+      "../../net/dcsctp/socket:*",
       "../peer_scenario:*",
       "../scenario:*",
     ]
