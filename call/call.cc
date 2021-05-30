@@ -336,7 +336,6 @@ class Call final : public webrtc::Call,
                                  MediaType media_type)
       RTC_SHARED_LOCKS_REQUIRED(worker_thread_);
 
-  void UpdateReceiveHistograms();
   void UpdateAggregateNetworkState();
 
   // Ensure that necessary process threads are started, and any required
@@ -436,14 +435,21 @@ class Call final : public webrtc::Call,
   // The following members are only accessed (exclusively) from one thread and
   // from the destructor, and therefore doesn't need any explicit
   // synchronization.
-  RateCounter received_bytes_per_second_counter_;
-  RateCounter received_audio_bytes_per_second_counter_;
-  RateCounter received_video_bytes_per_second_counter_;
-  RateCounter received_rtcp_bytes_per_second_counter_;
-  absl::optional<int64_t> first_received_rtp_audio_ms_;
-  absl::optional<int64_t> last_received_rtp_audio_ms_;
-  absl::optional<int64_t> first_received_rtp_video_ms_;
-  absl::optional<int64_t> last_received_rtp_video_ms_;
+  RateCounter received_bytes_per_second_counter_ RTC_GUARDED_BY(worker_thread_);
+  RateCounter received_audio_bytes_per_second_counter_
+      RTC_GUARDED_BY(worker_thread_);
+  RateCounter received_video_bytes_per_second_counter_
+      RTC_GUARDED_BY(worker_thread_);
+  RateCounter received_rtcp_bytes_per_second_counter_
+      RTC_GUARDED_BY(worker_thread_);
+  absl::optional<int64_t> first_received_rtp_audio_ms_
+      RTC_GUARDED_BY(worker_thread_);
+  absl::optional<int64_t> last_received_rtp_audio_ms_
+      RTC_GUARDED_BY(worker_thread_);
+  absl::optional<int64_t> first_received_rtp_video_ms_
+      RTC_GUARDED_BY(worker_thread_);
+  absl::optional<int64_t> last_received_rtp_video_ms_
+      RTC_GUARDED_BY(worker_thread_);
 
   uint32_t last_bandwidth_bps_ RTC_GUARDED_BY(worker_thread_);
   // TODO(holmer): Remove this lock once BitrateController no longer calls
@@ -700,7 +706,7 @@ Call::~Call() {
   absl::optional<Timestamp> first_sent_packet_time =
       transport_send_->GetFirstPacketTime();
 
-  Timestamp now = clock_->CurrentTime();
+  const Timestamp now = clock_->CurrentTime();
 
   // Only update histograms after process threads have been shut down, so that
   // they won't try to concurrently update stats.
@@ -710,34 +716,8 @@ Call::~Call() {
                          pacer_bitrate_kbps_counter_);
   }
 
-  UpdateReceiveHistograms();
+  // Update receive histograms.
 
-  RTC_HISTOGRAM_COUNTS_100000("WebRTC.Call.LifetimeInSeconds",
-                              (now.ms() - start_ms_) / 1000);
-}
-
-void Call::EnsureStarted() {
-  if (is_started_) {
-    return;
-  }
-  is_started_ = true;
-
-  call_stats_->EnsureStarted();
-
-  // This call seems to kick off a number of things, so probably better left
-  // off being kicked off on request rather than in the ctor.
-  transport_send_ptr_->RegisterTargetTransferRateObserver(this);
-
-  module_process_thread_->EnsureStarted();
-  transport_send_ptr_->EnsureStarted();
-}
-
-void Call::SetClientBitratePreferences(const BitrateSettings& preferences) {
-  RTC_DCHECK_RUN_ON(worker_thread_);
-  GetTransportControllerSend()->SetClientBitratePreferences(preferences);
-}
-
-void Call::UpdateReceiveHistograms() {
   if (first_received_rtp_audio_ms_) {
     RTC_HISTOGRAM_COUNTS_100000(
         "WebRTC.Call.TimeReceivingAudioRtpPacketsInSeconds",
@@ -781,6 +761,30 @@ void Call::UpdateReceiveHistograms() {
     RTC_LOG(LS_INFO) << "WebRTC.Call.BitrateReceivedInBps, "
                      << recv_bytes_per_sec.ToStringWithMultiplier(8);
   }
+
+  RTC_HISTOGRAM_COUNTS_100000("WebRTC.Call.LifetimeInSeconds",
+                              (now.ms() - start_ms_) / 1000);
+}
+
+void Call::EnsureStarted() {
+  if (is_started_) {
+    return;
+  }
+  is_started_ = true;
+
+  call_stats_->EnsureStarted();
+
+  // This call seems to kick off a number of things, so probably better left
+  // off being kicked off on request rather than in the ctor.
+  transport_send_ptr_->RegisterTargetTransferRateObserver(this);
+
+  module_process_thread_->EnsureStarted();
+  transport_send_ptr_->EnsureStarted();
+}
+
+void Call::SetClientBitratePreferences(const BitrateSettings& preferences) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  GetTransportControllerSend()->SetClientBitratePreferences(preferences);
 }
 
 PacketReceiver* Call::Receiver() {
