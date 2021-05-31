@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a219af_9997913f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-05-31T08:09:30Z",
+      "side": 1,
+      "message": "lgtm % documentation of unregister / destruction. ",
+      "revId": "2bbbdea308063b35b8db075670b105418d2d5f65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6648980f_57c0bb84",
+        "filename": "audio/audio_receive_stream.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-05-31T08:09:30Z",
+      "side": 1,
+      "message": "It would be nice with a comment on proper destruction sequence. This Unregister method is called on the network thread, to stop callbacks from the RTP demuxer (which arrive, or should arrive, on the network thread).\n\nWhile destruction happens on the worker thread. And to avoid use-after from from RTP callbacks, this must not happen until the Unregister call on the network thread has completed. Right? Will there be a blocking invoke, somewhere, to ensure this, or can we somehow ping pong asynchronous tasks between threads?",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 33
+      },
+      "revId": "2bbbdea308063b35b8db075670b105418d2d5f65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
