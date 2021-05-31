@@ -91,9 +91,17 @@ class ScalingObserver : public test::SendTest {
         automatic_resize_(automatic_resize),
         expect_scaling_(expect_scaling) {}
 
+  DegradationPreference degradation_preference_ =
+      DegradationPreference::MAINTAIN_FRAMERATE;
+
  private:
   void ModifySenderBitrateConfig(BitrateConstraints* bitrate_config) override {
     bitrate_config->start_bitrate_bps = start_bps_;
+  }
+
+  void ModifyVideoDegradationPreference(
+      DegradationPreference* degradation_preference) override {
+    *degradation_preference = degradation_preference_;
   }
 
   size_t GetNumVideoStreams() const override {
@@ -183,6 +191,10 @@ class UpscalingObserver
                         automatic_resize,
                         expect_upscale) {}
 
+  void SetDegradationPreference(DegradationPreference preference) {
+    degradation_preference_ = preference;
+  }
+
  private:
   void OnFrameGeneratorCapturerCreated(
       test::FrameGeneratorCapturer* frame_generator_capturer) override {
@@ -244,10 +256,39 @@ TEST_F(QualityScalingTest, AdaptsDownForLowStartBitrate_Vp8) {
 
 TEST_F(QualityScalingTest, AdaptsDownForLowStartBitrateAndThenUp) {
   // qp_low:127, qp_high:127 -> kLowQp
-  test::ScopedFieldTrials field_trials(kPrefix + "127,127,0,0,0,0" + kEnd);
+  test::ScopedFieldTrials field_trials(
+      kPrefix + "127,127,0,0,0,0" + kEnd +
+      "WebRTC-Video-BalancedDegradationSettings/"
+      "pixels:230400|921600,fps:20|30,kbps:300|500/");  // should not affect
 
   UpscalingObserver test("VP8", {true}, kDefaultVgaMinStartBps - 1,
                          /*automatic_resize=*/true, /*expect_upscale=*/true);
+  RunBaseTest(&test);
+}
+
+TEST_F(QualityScalingTest, AdaptsDownAndThenUpWithBalanced) {
+  // qp_low:127, qp_high:127 -> kLowQp
+  test::ScopedFieldTrials field_trials(
+      kPrefix + "127,127,0,0,0,0" + kEnd +
+      "WebRTC-Video-BalancedDegradationSettings/"
+      "pixels:230400|921600,fps:20|30,kbps:300|499/");
+
+  UpscalingObserver test("VP8", {true}, kDefaultVgaMinStartBps - 1,
+                         /*automatic_resize=*/true, /*expect_upscale=*/true);
+  test.SetDegradationPreference(DegradationPreference::BALANCED);
+  RunBaseTest(&test);
+}
+
+TEST_F(QualityScalingTest, AdaptsDownButNotUpWithBalancedIfBitrateNotEnough) {
+  // qp_low:127, qp_high:127 -> kLowQp
+  test::ScopedFieldTrials field_trials(
+      kPrefix + "127,127,0,0,0,0" + kEnd +
+      "WebRTC-Video-BalancedDegradationSettings/"
+      "pixels:230400|921600,fps:20|30,kbps:300|500/");
+
+  UpscalingObserver test("VP8", {true}, kDefaultVgaMinStartBps - 1,
+                         /*automatic_resize=*/true, /*expect_upscale=*/false);
+  test.SetDegradationPreference(DegradationPreference::BALANCED);
   RunBaseTest(&test);
 }
 

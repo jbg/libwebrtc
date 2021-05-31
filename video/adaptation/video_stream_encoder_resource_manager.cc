@@ -593,8 +593,11 @@ CpuOveruseOptions VideoStreamEncoderResourceManager::GetCpuOveruseOptions()
 
 int VideoStreamEncoderResourceManager::LastInputFrameSizeOrDefault() const {
   RTC_DCHECK_RUN_ON(encoder_queue_);
-  return input_state_provider_->InputState().frame_size_pixels().value_or(
-      kDefaultInputPixelsWidth * kDefaultInputPixelsHeight);
+  return input_state_provider_->InputState()
+      .single_active_stream_pixels()
+      .value_or(
+          input_state_provider_->InputState().frame_size_pixels().value_or(
+              kDefaultInputPixelsWidth * kDefaultInputPixelsHeight));
 }
 
 void VideoStreamEncoderResourceManager::OnVideoSourceRestrictionsUpdated(
