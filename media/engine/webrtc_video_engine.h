@@ -458,7 +458,11 @@ class WebRtcVideoChannel : public VideoMediaChannel,
                                int rtx_time);
     void SetRecvParameters(const ChangedRecvParameters& recv_params);
 
+    // VideoSinkInterface.
+    void OnStart(webrtc::TaskQueueBase* delivery_queue) override;
+    void OnStop() override;
     void OnFrame(const webrtc::VideoFrame& frame) override;
+
     bool IsDefaultStream() const;
 
     void SetFrameDecryptor(
@@ -504,6 +508,8 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     webrtc::VideoDecoderFactory* const decoder_factory_;
 
     webrtc::Mutex sink_lock_;
+    webrtc::TaskQueueBase* frame_tq_ = nullptr;
+    // TODO(tommi): See if we can get rid of the need for sink_lock_.
     rtc::VideoSinkInterface<webrtc::VideoFrame>* sink_
         RTC_GUARDED_BY(sink_lock_);
     // Expands remote RTP timestamps to int64_t to be able to estimate how long

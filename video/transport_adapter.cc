@@ -46,5 +46,9 @@ void TransportAdapter::Disable() {
   enabled_.store(false);
 }
 
+void TransportAdapter::AssertDisabled() {
+  RTC_DCHECK(!enabled_.load());
+}
+
 }  // namespace internal
 }  // namespace webrtc
