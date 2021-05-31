@@ -16,6 +16,23 @@
       "message": "Hello, this CL is a follow-up work to introducing the qualityLimitationDurations stats. Please take a look. Thank you.",
       "revId": "fb3efac8191aa94090440679b9c89f9036c82269",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dccfa858_baf17253",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-05-31T12:48:24Z",
+      "side": 1,
+      "message": "Looks good to me. And I see that https://source.chromium.org/chromium/chromium/src/+/main:chrome/test/data/webrtc/peerconnection_getstats.js;l\u003d218?q\u003dpeerconnection_getstats.js\u0026originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F already contains it, which means the chromium bots won\u0027t complain when you add it (it\u0027s an allow list in chromium repo).\n\nSo I think we can land this but have you checked the chrome://webrtc-internals page in Chrome with this change? Does this metric show up somehow or does it get ignored?",
+      "revId": "fb3efac8191aa94090440679b9c89f9036c82269",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
