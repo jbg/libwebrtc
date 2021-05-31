@@ -22,6 +22,30 @@
       },
       "revId": "9c8b7f983863995daeb705cfad590b1ab695d2aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ea44ca_b21ef0cf",
+        "filename": "call/flexfec_receive_stream_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-31T11:56:17Z",
+      "side": 0,
+      "message": "Comment restored (and moved into RegisterWithTransport)",
+      "parentUuid": "db7bbfd0_d0053670",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 63
+      },
+      "revId": "9c8b7f983863995daeb705cfad590b1ab695d2aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
