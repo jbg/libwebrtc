@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "890d8136_d94553ed",
+        "filename": "call/call.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-05-31T09:50:34Z",
+      "side": 1,
+      "message": "what prevents making config const instead?\n(Any guarantees trials_ are not modified through the config_ member?)",
+      "range": {
+        "startLine": 382,
+        "startChar": 40,
+        "endLine": 382,
+        "endChar": 66
+      },
+      "revId": "2f0e87bc5ae5a99eb7624ab6cf64a3221226769e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d7c1333_9feddda3",
+        "filename": "call/call.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-05-31T09:50:34Z",
+      "side": 1,
+      "message": "what are these links? (i.e. why are they in the code?)\n\n(should it be a TODO(crbug.com/992640) instead?)",
+      "revId": "2f0e87bc5ae5a99eb7624ab6cf64a3221226769e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b223e47e_50a95b50",
+        "filename": "call/call.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-05-31T09:50:34Z",
+      "side": 1,
+      "message": "the variable itself is const,\ndid you mean RTC_PT_GUARDED_BY ?",
+      "range": {
+        "startLine": 491,
+        "startChar": 6,
+        "endLine": 491,
+        "endChar": 20
+      },
+      "revId": "2f0e87bc5ae5a99eb7624ab6cf64a3221226769e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
