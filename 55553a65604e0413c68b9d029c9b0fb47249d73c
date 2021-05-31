@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6fab6b9_d8bcd160",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-05-31T07:02:25Z",
+      "side": 1,
+      "message": "All green and the issue is related to a presubmit issue. Skipping for this CL.",
+      "revId": "55553a65604e0413c68b9d029c9b0fb47249d73c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
