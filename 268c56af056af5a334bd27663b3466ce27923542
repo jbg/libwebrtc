@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4e0ce42_fb8e3025",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2021-05-31T07:10:25Z",
+      "side": 1,
+      "message": "Not sure what triggered this and don\u0027t know the specifics of this code but LGTM",
+      "revId": "268c56af056af5a334bd27663b3466ce27923542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae07fa27_7213d5e9",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2021-05-31T07:10:25Z",
+      "side": 1,
+      "message": "Link to issue instead of TODO, thanks.",
+      "revId": "268c56af056af5a334bd27663b3466ce27923542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
