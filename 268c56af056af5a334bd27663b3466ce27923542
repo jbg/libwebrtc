@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb230cb3_7d53db8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-31T07:45:15Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "268c56af056af5a334bd27663b3466ce27923542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae07fa27_7213d5e9",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-05-31T07:10:25Z",
       "side": 1,
       "message": "Link to issue instead of TODO, thanks.",
+      "revId": "268c56af056af5a334bd27663b3466ce27923542",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08741d50_9a733e1d",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-05-31T07:45:15Z",
+      "side": 1,
+      "message": "Ack. This code was moved from L413 below, so unclear what bug was worked on at the time..",
+      "parentUuid": "ae07fa27_7213d5e9",
       "revId": "268c56af056af5a334bd27663b3466ce27923542",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
