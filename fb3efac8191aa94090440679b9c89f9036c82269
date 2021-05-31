@@ -51,6 +51,24 @@
       "parentUuid": "dccfa858_baf17253",
       "revId": "fb3efac8191aa94090440679b9c89f9036c82269",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "723400ef_8c3e4ab2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-05-31T19:13:57Z",
+      "side": 1,
+      "message": "I checked chrome://webrtc-internals and I can see that this stat is displayed as text but no graphs. (Which is make sense.)",
+      "parentUuid": "f7399e5e_57d36b7f",
+      "revId": "fb3efac8191aa94090440679b9c89f9036c82269",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
