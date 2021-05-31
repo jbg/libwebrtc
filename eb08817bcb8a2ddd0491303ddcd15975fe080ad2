@@ -16,6 +16,23 @@
       "message": "abandoning change since Markus landed an alternate approach that solves the same problem (in a more elegant way)",
       "revId": "eb08817bcb8a2ddd0491303ddcd15975fe080ad2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cd7a542_735bbf69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-05-31T08:49:18Z",
+      "side": 1,
+      "message": "Yay for more thread guards.\n\n",
+      "revId": "eb08817bcb8a2ddd0491303ddcd15975fe080ad2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
