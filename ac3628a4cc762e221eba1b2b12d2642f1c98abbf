@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9bbeb82_1187d48f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2021-05-31T13:43:28Z",
+      "side": 1,
+      "message": "Could you add the URLs for these [1] and [2] references you mention?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 55
+      },
+      "revId": "ac3628a4cc762e221eba1b2b12d2642f1c98abbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
