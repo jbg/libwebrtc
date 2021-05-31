@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd64dd60_9340ed86",
+        "filename": "call/call.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-31T10:06:20Z",
+      "side": 1,
+      "message": "config_ can actually be const - done now.\nThe reason for the separate pointer was to keep thread usage of config_ known, which is basically on the worker thread except for the trials member variable.\n\nWith the restructuring of the code now, the thread guard helps knowing when unintentional changes are introduced.",
+      "parentUuid": "890d8136_d94553ed",
+      "range": {
+        "startLine": 382,
+        "startChar": 40,
+        "endLine": 382,
+        "endChar": 66
+      },
+      "revId": "2f0e87bc5ae5a99eb7624ab6cf64a3221226769e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d7c1333_9feddda3",
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d998742f_c8b0c99d",
+        "filename": "call/call.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-31T10:06:20Z",
+      "side": 1,
+      "message": "I added \"For more details on the background of this member variable, see:\".\n\nThe conversation in the code review and other details in the bug explain why this duplicate pointer exists. I\u0027d like to remove it personally, but these links provide context about things to look out for.",
+      "parentUuid": "6d7c1333_9feddda3",
+      "revId": "2f0e87bc5ae5a99eb7624ab6cf64a3221226769e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b223e47e_50a95b50",
         "filename": "call/call.cc",
         "patchSetId": 9
@@ -54,6 +96,30 @@
       "writtenOn": "2021-05-31T09:50:34Z",
       "side": 1,
       "message": "the variable itself is const,\ndid you mean RTC_PT_GUARDED_BY ?",
+      "range": {
+        "startLine": 491,
+        "startChar": 6,
+        "endLine": 491,
+        "endChar": 20
+      },
+      "revId": "2f0e87bc5ae5a99eb7624ab6cf64a3221226769e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee05bd2_c164f154",
+        "filename": "call/call.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-05-31T10:06:20Z",
+      "side": 1,
+      "message": "nope, I actually want RTC_GUARDED_BY. The point is just to keep the invariant that this pointer be used only in the context that it was introduced to fix. Ideally the code uses the other member variable that points to the same object, transport_send_.",
+      "parentUuid": "b223e47e_50a95b50",
       "range": {
         "startLine": 491,
         "startChar": 6,
