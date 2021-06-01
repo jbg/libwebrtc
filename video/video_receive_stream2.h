@@ -213,6 +213,13 @@ class VideoReceiveStream2
   const VideoReceiveStream::Config config_;
   const int num_cpu_cores_;
   Call* const call_;
+  // Set during Start(), cleared in Stop(), can be considered to be const
+  // in between those calls and can be safely called without a lock from the
+  // threads/task queues whose scope is smaller.
+  // When `config_.enable_prerenderer_smoothing` is true, this will point to
+  // a TQ owned by `incoming_video_stream_` (IncomingVideoStream), when
+  // smoothing is disabled, this points to the `decode_queue_`.
+  TaskQueueBase* frame_delivery_tq_ = nullptr;
   Clock* const clock_;
 
   CallStats* const call_stats_;
