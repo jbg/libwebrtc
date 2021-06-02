@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1206846e_65e12896",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-06-02T14:24:36Z",
+      "side": 1,
+      "message": "also take my suggestion as optional. (or we can do as a follow-up).",
+      "revId": "749ee9dc397eb839db5102b49295ebdd0dced6a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c843bdc_30c181c2",
+        "filename": "modules/audio_processing/agc/agc_manager_direct.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-06-02T14:24:36Z",
+      "side": 1,
+      "message": "would be nice if (first mark clipping_predictor_ as const std::unique_ptr)\n\nclipping_predictor_(CreateClippingFactor(clipping_cfg))\n\nwhere\n\nCreateClippingFactor() can be defined in a\n\nnamespace {\n  CreateClippingFactor() {\n     line 460 - 477.\n  }\n}",
+      "range": {
+        "startLine": 445,
+        "startChar": 0,
+        "endLine": 445,
+        "endChar": 36
+      },
+      "revId": "749ee9dc397eb839db5102b49295ebdd0dced6a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5d5f786_d466b92c",
+        "filename": "modules/audio_processing/agc/agc_manager_direct.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-06-02T14:24:36Z",
+      "side": 1,
+      "message": "this ought better be a const std::unique_ptr,",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 57
+      },
+      "revId": "749ee9dc397eb839db5102b49295ebdd0dced6a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38eda0e5_0ae77278",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-06-02T14:24:36Z",
+      "side": 1,
+      "message": "format a bit here",
+      "range": {
+        "startLine": 355,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 23
+      },
+      "revId": "749ee9dc397eb839db5102b49295ebdd0dced6a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
