@@ -26,7 +26,6 @@
 #include "rtc_base/task_queue_for_test.h"
 #include "test/logging/log_writer.h"
 #include "test/network/network_emulation.h"
-#include "test/rtp_header_parser.h"
 #include "test/scenario/column_printer.h"
 #include "test/scenario/network_node.h"
 #include "test/scenario/scenario_config.h"
@@ -149,7 +148,6 @@ class CallClient : public EmulatedNetworkReceiverInterface {
   CallClientFakeAudio fake_audio_setup_;
   std::unique_ptr<Call> call_;
   std::unique_ptr<NetworkNodeTransport> transport_;
-  std::unique_ptr<RtpHeaderParser> const header_parser_;
   std::vector<std::pair<EmulatedEndpoint*, uint16_t>> endpoints_;
 
   int next_video_ssrc_index_ = 0;
