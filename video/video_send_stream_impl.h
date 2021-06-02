@@ -19,8 +19,6 @@
 #include <vector>
 
 #include "absl/types/optional.h"
-#include "api/fec_controller.h"
-#include "api/rtc_event_log/rtc_event_log.h"
 #include "api/video/encoded_image.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video/video_bitrate_allocator.h"
@@ -41,8 +39,6 @@
 #include "rtc_base/task_utils/repeating_task.h"
 #include "rtc_base/thread_annotations.h"
 #include "rtc_base/weak_ptr.h"
-#include "video/encoder_rtcp_feedback.h"
-#include "video/send_delay_stats.h"
 #include "video/send_statistics_proxy.h"
 #include "video/video_send_stream.h"
 
@@ -69,23 +65,17 @@ struct PacingConfig {
 class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
                             public VideoStreamEncoderInterface::EncoderSink {
  public:
-  VideoSendStreamImpl(
-      Clock* clock,
-      SendStatisticsProxy* stats_proxy,
-      rtc::TaskQueue* rtp_transport_queue,
-      RtcpRttStats* call_stats,
-      RtpTransportControllerSendInterface* transport,
-      BitrateAllocatorInterface* bitrate_allocator,
-      SendDelayStats* send_delay_stats,
-      VideoStreamEncoderInterface* video_stream_encoder,
-      RtcEventLog* event_log,
-      const VideoSendStream::Config* config,
-      int initial_encoder_max_bitrate,
-      double initial_encoder_bitrate_priority,
-      std::map<uint32_t, RtpState> suspended_ssrcs,
-      std::map<uint32_t, RtpPayloadState> suspended_payload_states,
-      VideoEncoderConfig::ContentType content_type,
-      std::unique_ptr<FecController> fec_controller);
+  VideoSendStreamImpl(Clock* clock,
+                      SendStatisticsProxy* stats_proxy,
+                      rtc::TaskQueue* rtp_transport_queue,
+                      RtpTransportControllerSendInterface* transport,
+                      BitrateAllocatorInterface* bitrate_allocator,
+                      VideoStreamEncoderInterface* video_stream_encoder,
+                      const VideoSendStream::Config* config,
+                      int initial_encoder_max_bitrate,
+                      double initial_encoder_bitrate_priority,
+                      VideoEncoderConfig::ContentType content_type,
+                      RtpVideoSenderInterface* rtp_video_sender);
   ~VideoSendStreamImpl() override;
 
   // RegisterProcessThread register |module_process_thread| with those objects
@@ -176,7 +166,6 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
   double encoder_bitrate_priority_;
 
   VideoStreamEncoderInterface* const video_stream_encoder_;
-  EncoderRtcpFeedback encoder_feedback_;
 
   RtcpBandwidthObserver* const bandwidth_observer_;
   RtpVideoSenderInterface* const rtp_video_sender_;

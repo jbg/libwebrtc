@@ -130,32 +130,6 @@ int CalculateMaxPadBitrateBps(const std::vector<VideoStream>& streams,
   return pad_up_to_bitrate_bps;
 }
 
-RtpSenderFrameEncryptionConfig CreateFrameEncryptionConfig(
-    const VideoSendStream::Config* config) {
-  RtpSenderFrameEncryptionConfig frame_encryption_config;
-  frame_encryption_config.frame_encryptor = config->frame_encryptor;
-  frame_encryption_config.crypto_options = config->crypto_options;
-  return frame_encryption_config;
-}
-
-RtpSenderObservers CreateObservers(RtcpRttStats* call_stats,
-                                   EncoderRtcpFeedback* encoder_feedback,
-                                   SendStatisticsProxy* stats_proxy,
-                                   SendDelayStats* send_delay_stats) {
-  RtpSenderObservers observers;
-  observers.rtcp_rtt_stats = call_stats;
-  observers.intra_frame_callback = encoder_feedback;
-  observers.rtcp_loss_notification_observer = encoder_feedback;
-  observers.report_block_data_observer = stats_proxy;
-  observers.rtp_stats = stats_proxy;
-  observers.bitrate_observer = stats_proxy;
-  observers.frame_count_observer = stats_proxy;
-  observers.rtcp_type_observer = stats_proxy;
-  observers.send_delay_observer = stats_proxy;
-  observers.send_packet_observer = send_delay_stats;
-  return observers;
-}
-
 absl::optional<AlrExperimentSettings> GetAlrSettings(
     VideoEncoderConfig::ContentType content_type) {
   if (content_type == VideoEncoderConfig::ContentType::kScreen) {
@@ -231,19 +205,14 @@ VideoSendStreamImpl::VideoSendStreamImpl(
     Clock* clock,
     SendStatisticsProxy* stats_proxy,
     rtc::TaskQueue* rtp_transport_queue,
-    RtcpRttStats* call_stats,
     RtpTransportControllerSendInterface* transport,
     BitrateAllocatorInterface* bitrate_allocator,
-    SendDelayStats* send_delay_stats,
     VideoStreamEncoderInterface* video_stream_encoder,
-    RtcEventLog* event_log,
     const VideoSendStream::Config* config,
     int initial_encoder_max_bitrate,
     double initial_encoder_bitrate_priority,
-    std::map<uint32_t, RtpState> suspended_ssrcs,
-    std::map<uint32_t, RtpPayloadState> suspended_payload_states,
     VideoEncoderConfig::ContentType content_type,
-    std::unique_ptr<FecController> fec_controller)
+    RtpVideoSenderInterface* rtp_video_sender)
     : clock_(clock),
       has_alr_probing_(config->periodic_alr_bandwidth_probing ||
                        GetAlrSettings(content_type)),
@@ -262,28 +231,8 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       encoder_target_rate_bps_(0),
       encoder_bitrate_priority_(initial_encoder_bitrate_priority),
       video_stream_encoder_(video_stream_encoder),
-      encoder_feedback_(
-          clock,
-          config_->rtp.ssrcs,
-          video_stream_encoder,
-          [this](uint32_t ssrc, const std::vector<uint16_t>& seq_nums) {
-            return rtp_video_sender_->GetSentRtpPacketInfos(ssrc, seq_nums);
-          }),
       bandwidth_observer_(transport->GetBandwidthObserver()),
-      rtp_video_sender_(
-          transport_->CreateRtpVideoSender(suspended_ssrcs,
-                                           suspended_payload_states,
-                                           config_->rtp,
-                                           config_->rtcp_report_interval_ms,
-                                           config_->send_transport,
-                                           CreateObservers(call_stats,
-                                                           &encoder_feedback_,
-                                                           stats_proxy_,
-                                                           send_delay_stats),
-                                           event_log,
-                                           std::move(fec_controller),
-                                           CreateFrameEncryptionConfig(config_),
-                                           config->frame_transformer)),
+      rtp_video_sender_(rtp_video_sender),
       weak_ptr_factory_(this),
       configured_pacing_factor_(
           GetConfiguredPacingFactor(*config_, content_type, pacing_config_)) {
@@ -297,8 +246,9 @@ VideoSendStreamImpl::VideoSendStreamImpl(
 
   RTC_CHECK(AlrExperimentSettings::MaxOneFieldTrialEnabled());
 
+  // TODO(tommi): Replace weak_ptr_ with pending flag?
+  // This needs to belong to the rtp_transport_queue_.
   weak_ptr_ = weak_ptr_factory_.GetWeakPtr();
-  video_stream_encoder->SetFecControllerOverride(rtp_video_sender_);
 
   absl::optional<bool> enable_alr_bw_probing;
 
@@ -318,7 +268,9 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       queue_time_limit_ms = pacing_config_.max_pacing_delay.Get().ms();
     }
 
+    // TODO(tommi): SetQueueTimeLimit uses a mutex.
     transport->SetQueueTimeLimit(queue_time_limit_ms);
+    // TODO(tommi): SetPacingFactor needs to be called on worker_queue_.
     transport->SetPacingFactor(*configured_pacing_factor_);
   }
 
@@ -327,9 +279,11 @@ VideoSendStreamImpl::VideoSendStreamImpl(
   }
 
   if (enable_alr_bw_probing) {
+    // TODO(tommi): EnablePeriodicAlrProbing calls PostTask.
     transport->EnablePeriodicAlrProbing(*enable_alr_bw_probing);
   }
 
+  // TODO(tommi): Needs to be set asynchronously on worker_queue_.worker_queue_
   video_stream_encoder_->SetStartBitrate(
       bitrate_allocator_->GetStartBitrate(this));
 }
@@ -339,6 +293,8 @@ VideoSendStreamImpl::~VideoSendStreamImpl() {
   RTC_DCHECK(!rtp_video_sender_->IsActive())
       << "VideoSendStreamImpl::Stop not called";
   RTC_LOG(LS_INFO) << "~VideoSendStreamInternal: " << config_->ToString();
+  // TODO(tommi): Consider doing this from VideoSendStream instead since
+  // `rtp_video_sender_` belongs to VideoSendStream.
   transport_->DestroyRtpVideoSender(rtp_video_sender_);
 }
 
