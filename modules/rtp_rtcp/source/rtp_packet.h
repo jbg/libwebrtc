@@ -162,10 +162,12 @@ class RtpPacket {
   // but does not touch packet own buffer, leaving packet in invalid state.
   bool ParseBuffer(const uint8_t* buffer, size_t size);
 
+ public:
   // Returns pointer to extension info for a given id. Returns nullptr if not
   // found.
   const ExtensionInfo* FindExtensionInfo(int id) const;
 
+ private:
   // Returns reference to extension info for a given id. Creates a new entry
   // with the specified id if not found.
   ExtensionInfo& FindOrCreateExtensionInfo(int id);
@@ -233,8 +235,10 @@ template <typename Extension, typename... Values>
 bool RtpPacket::SetExtension(const Values&... values) {
   const size_t value_size = Extension::ValueSize(values...);
   auto buffer = AllocateExtension(Extension::kId, value_size);
-  if (buffer.empty())
+  if (buffer.empty()) {
+    printf("AllocateExtension failed...\n");
     return false;
+  }
   return Extension::Write(buffer, values...);
 }
 

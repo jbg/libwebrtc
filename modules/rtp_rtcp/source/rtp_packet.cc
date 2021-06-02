@@ -615,6 +615,7 @@ rtc::ArrayView<uint8_t> RtpPacket::AllocateExtension(ExtensionType type,
       id > RtpExtension::kOneByteHeaderExtensionMaxId) {
     return nullptr;
   }
+  RTC_LOG(LS_ERROR) << "TRYING TO ALLOCATE EXT";
   return AllocateRawExtension(id, length);
 }
 
