@@ -47,9 +47,11 @@ class EncoderRtcpFeedback : public RtcpIntraFrameObserver,
 
   Clock* const clock_;
   const std::vector<uint32_t> ssrcs_;
+  // TODO(tommi): Get rid of this pointer and SetRtpVideoSender.
   const RtpVideoSenderInterface* rtp_video_sender_;
   VideoStreamEncoderInterface* const video_stream_encoder_;
 
+  // TODO(tommi): Use sequence checker instead?
   Mutex mutex_;
   int64_t time_last_intra_request_ms_ RTC_GUARDED_BY(mutex_);
 
