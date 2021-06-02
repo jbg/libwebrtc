@@ -17,6 +17,7 @@
 #include "api/rtc_event_log/rtc_event_log_factory.h"
 #include "api/transport/network_types.h"
 #include "modules/audio_mixer/audio_mixer_impl.h"
+#include "test/rtp_header_parser.h"
 
 namespace webrtc {
 namespace test {
@@ -213,7 +214,6 @@ CallClient::CallClient(
       clock_(time_controller->GetClock()),
       log_writer_factory_(std::move(log_writer_factory)),
       network_controller_factory_(log_writer_factory_.get(), config.transport),
-      header_parser_(RtpHeaderParser::CreateForTest()),
       task_queue_(time_controller->GetTaskQueueFactory()->CreateTaskQueue(
           "CallClient",
           TaskQueueFactory::Priority::NORMAL)) {
@@ -338,10 +338,7 @@ uint32_t CallClient::GetNextRtxSsrc() {
   return kSendRtxSsrcs[next_rtx_ssrc_index_++];
 }
 
-void CallClient::AddExtensions(std::vector<RtpExtension> extensions) {
-  for (const auto& extension : extensions)
-    header_parser_->RegisterRtpHeaderExtension(extension);
-}
+void CallClient::AddExtensions(std::vector<RtpExtension> extensions) {}
 
 void CallClient::SendTask(std::function<void()> task) {
   task_queue_.SendTask(std::move(task), RTC_FROM_HERE);
