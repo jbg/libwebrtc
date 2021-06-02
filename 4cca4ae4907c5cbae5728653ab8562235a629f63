@@ -33,6 +33,24 @@
       "message": "Maybe reference the bug ID that removed the bots from cq?",
       "revId": "4cca4ae4907c5cbae5728653ab8562235a629f63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc6c0cc_1c6c9681",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2021-06-02T17:29:13Z",
+      "side": 1,
+      "message": "SG",
+      "parentUuid": "f6c59919_ddd12c7c",
+      "revId": "4cca4ae4907c5cbae5728653ab8562235a629f63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
