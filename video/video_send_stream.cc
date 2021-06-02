@@ -99,7 +99,7 @@ VideoSendStream::VideoSendStream(
     const std::map<uint32_t, RtpState>& suspended_ssrcs,
     const std::map<uint32_t, RtpPayloadState>& suspended_payload_states,
     std::unique_ptr<FecController> fec_controller)
-    : worker_queue_(transport->GetWorkerQueue()),
+    : rtp_transport_queue_(transport->GetWorkerQueue()),
       stats_proxy_(clock, config, encoder_config.content_type),
       config_(std::move(config)),
       content_type_(encoder_config.content_type) {
@@ -110,16 +110,30 @@ VideoSendStream::VideoSendStream(
       clock, num_cpu_cores, &stats_proxy_, config_.encoder_settings,
       std::make_unique<OveruseFrameDetector>(&stats_proxy_), task_queue_factory,
       GetBitrateAllocationCallbackType(config_));
+  /*
+    auto sender = transport_->CreateRtpVideoSender(suspended_ssrcs,
+                                             suspended_payload_states,
+                                             config_->rtp,
+                                             config_->rtcp_report_interval_ms,
+                                             config_->send_transport,
+                                             CreateObservers(call_stats,
+                                                             &encoder_feedback_,
+                                                             stats_proxy_,
+                                                             send_delay_stats),
+                                             event_log,
+                                             std::move(fec_controller),
+                                             CreateFrameEncryptionConfig(config_),
+                                             config->frame_transformer);*/
 
   // TODO(srte): Initialization should not be done posted on a task queue.
   // Note that the posted task must not outlive this scope since the closure
   // references local variables.
-  worker_queue_->PostTask(ToQueuedTask(
+  rtp_transport_queue_->PostTask(ToQueuedTask(
       [this, clock, call_stats, transport, bitrate_allocator, send_delay_stats,
        event_log, &suspended_ssrcs, &encoder_config, &suspended_payload_states,
        &fec_controller]() {
         send_stream_.reset(new VideoSendStreamImpl(
-            clock, &stats_proxy_, worker_queue_, call_stats, transport,
+            clock, &stats_proxy_, rtp_transport_queue_, call_stats, transport,
             bitrate_allocator, send_delay_stats, video_stream_encoder_.get(),
             event_log, &config_, encoder_config.max_bitrate_bps,
             encoder_config.bitrate_priority, suspended_ssrcs,
@@ -162,7 +176,7 @@ void VideoSendStream::UpdateActiveSimulcastLayers(
                    << active_layers_string.str();
 
   VideoSendStreamImpl* send_stream = send_stream_.get();
-  worker_queue_->PostTask([this, send_stream, active_layers] {
+  rtp_transport_queue_->PostTask([this, send_stream, active_layers] {
     send_stream->UpdateActiveSimulcastLayers(active_layers);
     thread_sync_event_.Set();
   });
@@ -174,7 +188,7 @@ void VideoSendStream::Start() {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   RTC_DLOG(LS_INFO) << "VideoSendStream::Start";
   VideoSendStreamImpl* send_stream = send_stream_.get();
-  worker_queue_->PostTask([this, send_stream] {
+  rtp_transport_queue_->PostTask([this, send_stream] {
     send_stream->Start();
     thread_sync_event_.Set();
   });
@@ -189,7 +203,7 @@ void VideoSendStream::Stop() {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   RTC_DLOG(LS_INFO) << "VideoSendStream::Stop";
   VideoSendStreamImpl* send_stream = send_stream_.get();
-  worker_queue_->PostTask([send_stream] { send_stream->Stop(); });
+  rtp_transport_queue_->PostTask([send_stream] { send_stream->Stop(); });
 }
 
 void VideoSendStream::AddAdaptationResource(
@@ -236,10 +250,11 @@ void VideoSendStream::StopPermanentlyAndGetRtpStates(
   RTC_DCHECK_RUN_ON(&thread_checker_);
   video_stream_encoder_->Stop();
   send_stream_->DeRegisterProcessThread();
-  worker_queue_->PostTask([this, rtp_state_map, payload_state_map]() {
+  rtp_transport_queue_->PostTask([this, rtp_state_map, payload_state_map]() {
     send_stream_->Stop();
     *rtp_state_map = send_stream_->GetRtpStates();
     *payload_state_map = send_stream_->GetRtpPayloadStates();
+    // TODO(tommi): This prevents from making send_stream_ const.
     send_stream_.reset();
     thread_sync_event_.Set();
   });
