@@ -16,6 +16,7 @@
 #include "test/field_trial.h"
 #include "test/peer_scenario/peer_scenario.h"
 #include "test/rtp_header_parser.h"
+// #include "webrtc/test/field_trial.h"
 
 #include "test/gmock.h"
 #include "test/gtest.h"
@@ -113,9 +114,17 @@ TEST(UnsignaledStreamTest, ReplacesUnsignaledStreamOnCompletedSignaling) {
             if (ByteReader<uint32_t>::ReadBigEndian(&(packet.cdata()[8])) ==
                     first_ssrc &&
                 !got_unsignaled_packet) {
-              rtc::CopyOnWriteBuffer updated_buffer = packet.data;
-              ByteWriter<uint32_t>::WriteBigEndian(
-                  updated_buffer.MutableData() + 8, second_ssrc);
+              RtpPacket parsed_packet;
+              std::vector<RtpExtension> extensions;
+              extensions.emplace_back(RtpExtension::kMidUri, 9);
+              RtpHeaderExtensionMap extensions_map(extensions);
+              parsed_packet.IdentifyExtensions(extensions_map);
+              ASSERT_TRUE(parsed_packet.Parse(packet.data));
+              parsed_packet.SetSsrc(second_ssrc);
+              RTC_CHECK(parsed_packet.HasExtension<RtpMid>());
+              RTC_LOG(LS_ERROR) << "Come on SetExtension..";
+              RTC_CHECK(parsed_packet.SetExtension<RtpMid>("1"));
+              rtc::CopyOnWriteBuffer updated_buffer = parsed_packet.Buffer();
               EmulatedIpPacket updated_packet(
                   packet.from, packet.to, updated_buffer, packet.arrival_time);
               send_node->OnPacketReceived(std::move(updated_packet));
