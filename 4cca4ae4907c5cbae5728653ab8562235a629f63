@@ -16,6 +16,23 @@
       "message": "Bjorn, please, also attach the bug where you fixed the test",
       "revId": "4cca4ae4907c5cbae5728653ab8562235a629f63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c59919_ddd12c7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-06-02T17:09:03Z",
+      "side": 1,
+      "message": "Maybe reference the bug ID that removed the bots from cq?",
+      "revId": "4cca4ae4907c5cbae5728653ab8562235a629f63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
