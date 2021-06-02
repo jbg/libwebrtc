@@ -62,6 +62,7 @@ class RtpTransportControllerSend final
       const WebRtcKeyValueConfig* trials);
   ~RtpTransportControllerSend() override;
 
+  // TODO(tommi): Change to std::unique_ptr<>.
   RtpVideoSenderInterface* CreateRtpVideoSender(
       std::map<uint32_t, RtpState> suspended_ssrcs,
       const std::map<uint32_t, RtpPayloadState>&
