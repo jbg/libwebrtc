@@ -251,6 +251,8 @@ VideoSendStreamImpl::VideoSendStreamImpl(
             return rtp_video_sender_->GetSentRtpPacketInfos(ssrc, seq_nums);
           }),
       bandwidth_observer_(transport->GetBandwidthObserver()),
+      // TODO(tommi): Move call to CreateRtpVideoSender over to the caller
+      // (VideoSendStream) and inject here.
       rtp_video_sender_(
           transport_->CreateRtpVideoSender(suspended_ssrcs,
                                            suspended_payload_states,
@@ -268,15 +270,26 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       weak_ptr_factory_(this),
       configured_pacing_factor_(
           GetConfiguredPacingFactor(*config_, content_type, pacing_config_)) {
+  RTC_DCHECK_GE(config_->rtp.payload_type, 0);
+  RTC_DCHECK_LE(config_->rtp.payload_type, 127);
+
+  // TODO(tommi): Move this to ctor of video_stream_encoder in
+  // VideoSendStream::VideoSendStream.
   video_stream_encoder->SetFecControllerOverride(rtp_video_sender_);
+
+  // TODO(tommi): Remove.
   RTC_DCHECK_RUN_ON(worker_queue_);
+
   RTC_LOG(LS_INFO) << "VideoSendStreamInternal: " << config_->ToString();
+
+  // TODO(tommi): Replace weak_ptr_ with pending flag?
   weak_ptr_ = weak_ptr_factory_.GetWeakPtr();
 
   RTC_DCHECK(!config_->rtp.ssrcs.empty());
   RTC_DCHECK(transport_);
   RTC_DCHECK_NE(initial_encoder_max_bitrate, 0);
 
+  // TODO(tommi): initialize in initializer list.
   if (initial_encoder_max_bitrate > 0) {
     encoder_max_bitrate_bps_ =
         rtc::dchecked_cast<uint32_t>(initial_encoder_max_bitrate);
@@ -295,13 +308,16 @@ VideoSendStreamImpl::VideoSendStreamImpl(
   }
 
   RTC_CHECK(AlrExperimentSettings::MaxOneFieldTrialEnabled());
+
   // If send-side BWE is enabled, check if we should apply updated probing and
   // pacing settings.
   if (configured_pacing_factor_.has_value()) {
     absl::optional<AlrExperimentSettings> alr_settings =
         GetAlrSettings(content_type);
     if (alr_settings) {
+      // TODO(tommi): EnablePeriodicAlrProbing calls PostTask.
       transport->EnablePeriodicAlrProbing(true);
+      // TODO(tommi): SetQueueTimeLimit uses a mutex.
       transport->SetQueueTimeLimit(alr_settings->max_paced_queue_time);
     } else {
       RateControlSettings rate_control_settings =
@@ -312,16 +328,17 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       transport->SetQueueTimeLimit(pacing_config_.max_pacing_delay.Get().ms());
     }
 
+    // TODO(tommi): SetPacingFactor needs to be called on worker_queue_.
     transport->SetPacingFactor(*configured_pacing_factor_);
   }
 
   if (config_->periodic_alr_bandwidth_probing) {
+    // TODO(tommi): This seems to just post a task - however it may already have
+    // been called above!?
     transport->EnablePeriodicAlrProbing(true);
   }
 
-  RTC_DCHECK_GE(config_->rtp.payload_type, 0);
-  RTC_DCHECK_LE(config_->rtp.payload_type, 127);
-
+  // TODO(tommi): Needs to be set asynchronously on worker_queue_.worker_queue_
   video_stream_encoder_->SetStartBitrate(
       bitrate_allocator_->GetStartBitrate(this));
 }
