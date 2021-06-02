@@ -110,6 +110,20 @@ VideoSendStream::VideoSendStream(
       clock, num_cpu_cores, &stats_proxy_, config_.encoder_settings,
       std::make_unique<OveruseFrameDetector>(&stats_proxy_), task_queue_factory,
       GetBitrateAllocationCallbackType(config_));
+  /*
+    auto sender = transport_->CreateRtpVideoSender(suspended_ssrcs,
+                                             suspended_payload_states,
+                                             config_->rtp,
+                                             config_->rtcp_report_interval_ms,
+                                             config_->send_transport,
+                                             CreateObservers(call_stats,
+                                                             &encoder_feedback_,
+                                                             stats_proxy_,
+                                                             send_delay_stats),
+                                             event_log,
+                                             std::move(fec_controller),
+                                             CreateFrameEncryptionConfig(config_),
+                                             config->frame_transformer);*/
 
   // TODO(srte): Initialization should not be done posted on a task queue.
   // Note that the posted task must not outlive this scope since the closure
@@ -240,6 +254,7 @@ void VideoSendStream::StopPermanentlyAndGetRtpStates(
     send_stream_->Stop();
     *rtp_state_map = send_stream_->GetRtpStates();
     *payload_state_map = send_stream_->GetRtpPayloadStates();
+    // TODO(tommi): This prevents from making send_stream_ const.
     send_stream_.reset();
     thread_sync_event_.Set();
   });

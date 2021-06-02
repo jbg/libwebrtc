@@ -270,6 +270,8 @@ VideoSendStreamImpl::VideoSendStreamImpl(
             return rtp_video_sender_->GetSentRtpPacketInfos(ssrc, seq_nums);
           }),
       bandwidth_observer_(transport->GetBandwidthObserver()),
+      // TODO(tommi): Move call to CreateRtpVideoSender over to the caller
+      // (VideoSendStream) and inject here.
       rtp_video_sender_(
           transport_->CreateRtpVideoSender(suspended_ssrcs,
                                            suspended_payload_states,
@@ -297,7 +299,10 @@ VideoSendStreamImpl::VideoSendStreamImpl(
 
   RTC_CHECK(AlrExperimentSettings::MaxOneFieldTrialEnabled());
 
+  // TODO(tommi): Replace weak_ptr_ with pending flag?
   weak_ptr_ = weak_ptr_factory_.GetWeakPtr();
+  // TODO(tommi): Move this to ctor of video_stream_encoder in
+  // VideoSendStream::VideoSendStream.
   video_stream_encoder->SetFecControllerOverride(rtp_video_sender_);
 
   absl::optional<bool> enable_alr_bw_probing;
@@ -318,7 +323,9 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       queue_time_limit_ms = pacing_config_.max_pacing_delay.Get().ms();
     }
 
+      // TODO(tommi): SetQueueTimeLimit uses a mutex.
     transport->SetQueueTimeLimit(queue_time_limit_ms);
+    // TODO(tommi): SetPacingFactor needs to be called on worker_queue_.
     transport->SetPacingFactor(*configured_pacing_factor_);
   }
 
@@ -327,9 +334,11 @@ VideoSendStreamImpl::VideoSendStreamImpl(
   }
 
   if (enable_alr_bw_probing) {
+    // TODO(tommi): EnablePeriodicAlrProbing calls PostTask.
     transport->EnablePeriodicAlrProbing(*enable_alr_bw_probing);
   }
 
+  // TODO(tommi): Needs to be set asynchronously on worker_queue_.worker_queue_
   video_stream_encoder_->SetStartBitrate(
       bitrate_allocator_->GetStartBitrate(this));
 }

@@ -1143,6 +1143,8 @@ void Call::DestroyVideoSendStream(webrtc::VideoSendStream* send_stream) {
   }
 
   UpdateAggregateNetworkState();
+  // TODO(tommi): consider deleting on the same thread as runs
+  // StopPermanentlyAndGetRtpStates.
   delete send_stream_impl;
 }
 
