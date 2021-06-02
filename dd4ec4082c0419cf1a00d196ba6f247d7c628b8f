@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76756623_f4e41417",
+        "filename": "video/quality_scaling_tests.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-06-02T14:14:52Z",
+      "side": 1,
+      "message": "Annotate these arguments? /*streams_active\u003d*/{true}, ...",
+      "range": {
+        "startLine": 264,
+        "startChar": 25,
+        "endLine": 264,
+        "endChar": 66
+      },
+      "revId": "dd4ec4082c0419cf1a00d196ba6f247d7c628b8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
