@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0ec0dfc_2f3ec769",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-03T11:33:08Z",
+      "side": 1,
+      "message": "Or should we just delete the tool? Is it still used?\n(simple history span until 6 years ago when all files in webrtc repo was moved. Since then there were only non-functional refactoring in this tool)",
+      "revId": "efee4810b1760e08e344c3455ba4539376556001",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
