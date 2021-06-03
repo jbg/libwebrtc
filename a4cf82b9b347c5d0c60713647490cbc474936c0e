@@ -241,6 +241,24 @@
       "parentUuid": "b6501ad8_4ee06048",
       "revId": "a4cf82b9b347c5d0c60713647490cbc474936c0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab55d8e_07c715a4",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-03T16:00:23Z",
+      "side": 1,
+      "message": "yes that\u0027s indeed the case. Thanks - I moved the StopPermanentlyAndGetRtpStates() call up to where the first Stop() call was and removed the call to Stop().",
+      "parentUuid": "ae86b8e6_a4cb4872",
+      "revId": "a4cf82b9b347c5d0c60713647490cbc474936c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
