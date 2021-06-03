@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0f7da5d_d2572fff",
+        "filename": "sdk/android/api/org/webrtc/HardwareVideoEncoderFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2021-06-03T13:53:45Z",
+      "side": 1,
+      "message": "This should be change to type.toSdpCodecName()\n\nAlternatively, could we have a VideoCodecInfo constructor taking a VideoCodecMimeType as first argument? (I’m not 100% sure it’s a good idea)",
+      "range": {
+        "startLine": 145,
+        "startChar": 22,
+        "endLine": 145,
+        "endChar": 33
+      },
+      "revId": "a84b6981dce37129b0685b64371e66162361f7a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91167312_f3b7763b",
+        "filename": "sdk/android/api/org/webrtc/SoftwareVideoDecoderFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2021-06-03T13:53:45Z",
+      "side": 1,
+      "message": "Maybe not for this change, but we should standardise on the way the hardware factories are doing: getting a VideoCodecMimeType out of the VideoCodecInfo right from the start, and then using that in the conditions below.\n\nThe difference in logic would be that the case need to be correct, but that’s already the case for the hardware factories, I don’t see why these should be treated differently.",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 85
+      },
+      "revId": "a84b6981dce37129b0685b64371e66162361f7a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d08f78e2_2e6b8573",
+        "filename": "sdk/android/src/java/org/webrtc/MediaCodecVideoDecoderFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2021-06-03T13:53:45Z",
+      "side": 1,
+      "message": "Same here, this should be changed.",
+      "range": {
+        "startLine": 71,
+        "startChar": 22,
+        "endLine": 71,
+        "endChar": 33
+      },
+      "revId": "a84b6981dce37129b0685b64371e66162361f7a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38abadf5_50cb55fa",
+        "filename": "sdk/android/src/java/org/webrtc/VideoCodecMimeType.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2021-06-03T13:53:45Z",
+      "side": 1,
+      "message": "codecName.equals(\"AV1X\") ? AV1 : valueOf(codecName)",
+      "range": {
+        "startLine": 31,
+        "startChar": 11,
+        "endLine": 31,
+        "endChar": 83
+      },
+      "revId": "a84b6981dce37129b0685b64371e66162361f7a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
