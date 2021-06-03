@@ -22,7 +22,9 @@
 #include "call/video_receive_stream.h"
 #include "call/video_send_stream.h"
 #include "rtc_base/event.h"
+#include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/task_queue.h"
+#include "video/encoder_rtcp_feedback.h"
 #include "video/send_delay_stats.h"
 #include "video/send_statistics_proxy.h"
 
@@ -97,15 +99,19 @@ class VideoSendStream : public webrtc::VideoSendStream {
 
   absl::optional<float> GetPacingFactorOverride() const;
 
-  SequenceChecker thread_checker_;
+  RTC_NO_UNIQUE_ADDRESS SequenceChecker thread_checker_;
   rtc::TaskQueue* const rtp_transport_queue_;
+  RtpTransportControllerSendInterface* const transport_;
   rtc::Event thread_sync_event_;
 
   SendStatisticsProxy stats_proxy_;
   const VideoSendStream::Config config_;
   const VideoEncoderConfig::ContentType content_type_;
-  std::unique_ptr<VideoSendStreamImpl> send_stream_;
   std::unique_ptr<VideoStreamEncoderInterface> video_stream_encoder_;
+  EncoderRtcpFeedback encoder_feedback_;
+  RtpVideoSenderInterface* const rtp_video_sender_ = nullptr;
+  const std::unique_ptr<VideoSendStreamImpl> send_stream_;
+  bool running_ RTC_GUARDED_BY(thread_checker_) = false;
 };
 
 }  // namespace internal
