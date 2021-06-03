@@ -16,6 +16,24 @@
       "message": "Remove, or add todo to remove if there\u0027s some upstream usage?",
       "revId": "9f71b0b0ba664267fc27d19d4c487538a43cc795",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0976c803_1885db59",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-03T10:28:52Z",
+      "side": 1,
+      "message": "Removed. (this is a private function, there can\u0027t be upstream usage. just a usage by a befriended class)",
+      "parentUuid": "d4d4ed9f_446e684c",
+      "revId": "9f71b0b0ba664267fc27d19d4c487538a43cc795",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
