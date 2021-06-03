@@ -16,6 +16,23 @@
       "message": "Harald - see reply to one of your questions.\n\nTaylor - please take a look",
       "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e429040e_024412b9",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 4835,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-06-03T20:52:42Z",
+      "side": 1,
+      "message": "Do we need to look at both the local and remote description? If the extension is rejected by the remote side, we\u0027ll keep offering it, which could cause the unsignaled streams to be destroyed/recreated on each round of negotiation.\n\nI don\u0027t know if it\u0027s fair to say \"if you want to avoid this, munge the offer\" if SDP munging is against the standard.",
+      "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
