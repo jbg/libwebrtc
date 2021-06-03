@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "113b9900_2cdf3b53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-03T06:44:11Z",
+      "side": 1,
+      "message": "lgtm % a question",
+      "revId": "95e7e4059e7d744f4f6ec9b74a94da2e1f9456b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66220d90_cfcd5b61",
+        "filename": "video/encoder_rtcp_feedback.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-03T06:44:11Z",
+      "side": 1,
+      "message": "Switch this to Timestamp in this CL?",
+      "range": {
+        "startLine": 59,
+        "startChar": 10,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "95e7e4059e7d744f4f6ec9b74a94da2e1f9456b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
