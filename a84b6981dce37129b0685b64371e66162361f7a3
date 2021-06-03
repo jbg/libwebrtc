@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27f41e52_84a93ee3",
+        "filename": "sdk/android/api/org/webrtc/HardwareVideoEncoderFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-06-03T15:43:22Z",
+      "side": 1,
+      "message": "Oh, good catch. Changed to toSdpCodecName(). I would prefer not to touch VideoCodecInfo in this CL.",
+      "parentUuid": "b0f7da5d_d2572fff",
+      "range": {
+        "startLine": 145,
+        "startChar": 22,
+        "endLine": 145,
+        "endChar": 33
+      },
+      "revId": "a84b6981dce37129b0685b64371e66162361f7a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91167312_f3b7763b",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-03T13:53:45Z",
       "side": 1,
       "message": "Maybe not for this change, but we should standardise on the way the hardware factories are doing: getting a VideoCodecMimeType out of the VideoCodecInfo right from the start, and then using that in the conditions below.\n\nThe difference in logic would be that the case need to be correct, but that’s already the case for the hardware factories, I don’t see why these should be treated differently.",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 85
+      },
+      "revId": "a84b6981dce37129b0685b64371e66162361f7a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fcf3b32_67f9f55d",
+        "filename": "sdk/android/api/org/webrtc/SoftwareVideoDecoderFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-06-03T15:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91167312_f3b7763b",
       "range": {
         "startLine": 29,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6cc1545_5286b106",
+        "filename": "sdk/android/src/java/org/webrtc/MediaCodecVideoDecoderFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-06-03T15:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d08f78e2_2e6b8573",
+      "range": {
+        "startLine": 71,
+        "startChar": 22,
+        "endLine": 71,
+        "endChar": 33
+      },
+      "revId": "a84b6981dce37129b0685b64371e66162361f7a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38abadf5_50cb55fa",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-06-03T13:53:45Z",
       "side": 1,
       "message": "codecName.equals(\"AV1X\") ? AV1 : valueOf(codecName)",
+      "range": {
+        "startLine": 31,
+        "startChar": 11,
+        "endLine": 31,
+        "endChar": 83
+      },
+      "revId": "a84b6981dce37129b0685b64371e66162361f7a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "066ef691_64c6c49c",
+        "filename": "sdk/android/src/java/org/webrtc/VideoCodecMimeType.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-06-03T15:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38abadf5_50cb55fa",
       "range": {
         "startLine": 31,
         "startChar": 11,
