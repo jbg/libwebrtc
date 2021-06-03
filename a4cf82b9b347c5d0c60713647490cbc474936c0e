@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d6aa8c_b944be8c",
+        "filename": "video/video_send_stream.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-03T12:38:07Z",
+      "side": 1,
+      "message": "nit: Can you s/VideoSendStreamInternal/VideoSendStreamImpl/g? Found 2 more occurrences in VideoSendStreamImpl.",
+      "range": {
+        "startLine": 50,
+        "startChar": 23,
+        "endLine": 50,
+        "endChar": 46
+      },
+      "revId": "a4cf82b9b347c5d0c60713647490cbc474936c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c7c604_ae88636d",
+        "filename": "video/video_send_stream.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-03T12:38:07Z",
+      "side": 1,
+      "message": "Is there a point in forward declaring Impl and having to store as unique_ptr?",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 23
+      },
+      "revId": "a4cf82b9b347c5d0c60713647490cbc474936c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f29eadf_5fca4dac",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-03T12:38:07Z",
+      "side": 1,
+      "message": "Is this text leftover? As we now do this from VideoSendStream.",
+      "range": {
+        "startLine": 300,
+        "startChar": 2,
+        "endLine": 303,
+        "endChar": 58
+      },
+      "revId": "a4cf82b9b347c5d0c60713647490cbc474936c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b871555f_2b8b2549",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-03T12:38:07Z",
+      "side": 1,
+      "message": "What stops this scenario?\n1. We\u0027re called on another sequence than |rtp_transport_queue_| and the lambda is posted.\n2. VideoSendStream destroys the Impl\n3. The lambda is dropped due to no safety anymore.\n\nIn such case we won\u0027t execute StopVideoSendStream and so won\u0027t deregister observers etc.",
+      "revId": "a4cf82b9b347c5d0c60713647490cbc474936c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
