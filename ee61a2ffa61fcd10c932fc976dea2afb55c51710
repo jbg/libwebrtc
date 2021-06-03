@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9f5f2b9_8997b1cb",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 4919,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-03T08:55:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecf550f1_bfad98ba",
+      "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8c66e48_7fb19170",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-06-03T08:20:08Z",
       "side": 1,
       "message": "Is it worth specifying that this is the *remote* offer or answer?",
+      "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69690f0a_5a6e132c",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 4920,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-03T08:55:16Z",
+      "side": 1,
+      "message": "Actually, UpdatePayloadTypeDemuxingState() is invoked for both local and remote offers and answers. This ensures that by default we turn off PT demuxing at local offer time so that early media does not cause issues (before we know whether or not the remote endpoint does or does not support MID). This also makes it possible to opt-in to PT demuxing in the early media case by SDP munging, but without SDP munging the PT demuxing would not be turned on until when you get the answer and the extension as been removed by the remote endpoint.",
+      "parentUuid": "e8c66e48_7fb19170",
       "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -86,6 +122,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eccd4d9_150b2a10",
+        "filename": "test/peer_scenario/tests/unsignaled_stream_test.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-03T08:55:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a54ff31_6aedc217",
+      "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa2e7a58_1410b251",
@@ -99,6 +153,24 @@
       "writtenOn": "2021-06-03T08:20:08Z",
       "side": 1,
       "message": "I think the hidden assumption is that the first section doesn\u0027t have MID:1 - if it has any other MID, the test should still work.",
+      "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ca79bfa_1eb0e112",
+        "filename": "test/peer_scenario/tests/unsignaled_stream_test.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-03T08:55:16Z",
+      "side": 1,
+      "message": "You\u0027re right. Done.",
+      "parentUuid": "fa2e7a58_1410b251",
       "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
