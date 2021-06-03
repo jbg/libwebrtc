@@ -18,6 +18,57 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06b76e5c_0c48502f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-03T08:20:08Z",
+      "side": 1,
+      "message": "LGTM, let\u0027s do it.\n\nOnly comments on comments.\n",
+      "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecf550f1_bfad98ba",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 4919,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-03T08:20:08Z",
+      "side": 1,
+      "message": "Nit: Therefor -\u003e Therefore",
+      "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c66e48_7fb19170",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 4920,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-03T08:20:08Z",
+      "side": 1,
+      "message": "Is it worth specifying that this is the *remote* offer or answer?",
+      "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a54ff31_6aedc217",
@@ -31,6 +82,23 @@
       "writtenOn": "2021-06-03T07:59:02Z",
       "side": 1,
       "message": "self-review: typo, \"the\"... I need a new keybard \u003c- (lol!)",
+      "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa2e7a58_1410b251",
+        "filename": "test/peer_scenario/tests/unsignaled_stream_test.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-03T08:20:08Z",
+      "side": 1,
+      "message": "I think the hidden assumption is that the first section doesn\u0027t have MID:1 - if it has any other MID, the test should still work.",
       "revId": "ee61a2ffa61fcd10c932fc976dea2afb55c51710",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
