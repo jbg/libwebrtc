@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SoftwareVideoDecoderFactory implements VideoDecoderFactory {
+  private static final String TAG = "SoftwareVideoDecoderFactory";
+
   @Deprecated
   @Nullable
   @Override
@@ -25,17 +27,26 @@ public class SoftwareVideoDecoderFactory implements VideoDecoderFactory {
 
   @Nullable
   @Override
-  public VideoDecoder createDecoder(VideoCodecInfo codecType) {
-    if (codecType.getName().equalsIgnoreCase("VP8")) {
+  public VideoDecoder createDecoder(VideoCodecInfo codecInfo) {
+    VideoCodecMimeType codecType = null;
+    try {
+      codecType = VideoCodecMimeType.fromSdpCodecName(codecInfo.getName());
+    } catch (IllegalArgumentException e) {
+      Logging.e(TAG, "Unknown decoder: " + codecInfo.getName(), e);
+      return null;
+    }
+
+    if (codecType == VideoCodecMimeType.VP8) {
       return new LibvpxVp8Decoder();
     }
-    if (codecType.getName().equalsIgnoreCase("VP9") && LibvpxVp9Decoder.nativeIsSupported()) {
+    if (codecType == VideoCodecMimeType.VP9 && LibvpxVp9Decoder.nativeIsSupported()) {
       return new LibvpxVp9Decoder();
     }
-    if (codecType.getName().equalsIgnoreCase("AV1") && LibaomAv1Decoder.nativeIsSupported()) {
+    if (codecType == VideoCodecMimeType.AV1 && LibaomAv1Decoder.nativeIsSupported()) {
       return new LibaomAv1Decoder();
     }
 
+    Logging.w(TAG, "Unsupported decoder: " + codecInfo.getName());
     return null;
   }
 
@@ -47,12 +58,12 @@ public class SoftwareVideoDecoderFactory implements VideoDecoderFactory {
   static VideoCodecInfo[] supportedCodecs() {
     List<VideoCodecInfo> codecs = new ArrayList<VideoCodecInfo>();
 
-    codecs.add(new VideoCodecInfo("VP8", new HashMap<>()));
+    codecs.add(new VideoCodecInfo(VideoCodecMimeType.VP8.toSdpCodecName(), new HashMap<>()));
     if (LibvpxVp9Decoder.nativeIsSupported()) {
-      codecs.add(new VideoCodecInfo("VP9", new HashMap<>()));
+      codecs.add(new VideoCodecInfo(VideoCodecMimeType.VP9.toSdpCodecName(), new HashMap<>()));
     }
     if (LibaomAv1Decoder.nativeIsSupported()) {
-      codecs.add(new VideoCodecInfo("AV1", new HashMap<>()));
+      codecs.add(new VideoCodecInfo(VideoCodecMimeType.AV1.toSdpCodecName(), new HashMap<>()));
     }
 
     return codecs.toArray(new VideoCodecInfo[codecs.size()]);
