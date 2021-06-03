@@ -94,7 +94,7 @@ public class HardwareVideoEncoderFactory implements VideoEncoderFactory {
       return null;
     }
 
-    VideoCodecMimeType type = VideoCodecMimeType.valueOf(input.name);
+    VideoCodecMimeType type = VideoCodecMimeType.fromSdpCodecName(input.getName());
     MediaCodecInfo info = findCodecForType(type);
 
     if (info == null) {
