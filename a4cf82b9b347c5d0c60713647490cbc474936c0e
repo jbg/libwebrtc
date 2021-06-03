@@ -142,6 +142,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15ac1ebd_956defa8",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-03T14:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "749d9e08_ce0b481a",
+      "range": {
+        "startLine": 300,
+        "startChar": 2,
+        "endLine": 303,
+        "endChar": 58
+      },
+      "revId": "a4cf82b9b347c5d0c60713647490cbc474936c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b871555f_2b8b2549",
@@ -173,6 +197,24 @@
       "side": 1,
       "message": "yes this is a bit confusing. In practice the code path always goes through StopVideoSendStream because of a call to VideoSendStream::StopPermanentlyAndGetRtpStates() and then Stop() is called on the transport queue. In a follow-up change, I delete this lambda and DCHECK that Stop() is only called on the transport queue. That requires a couple of additional things to be wired up in VideoSendStream.\n\nHowever, in order to catch when this happened (at least as far as making developers aware) I\u0027ve added DCHECKs here and there, in particular in the dtor since this is a crucial step for proper teardown.",
       "parentUuid": "b871555f_2b8b2549",
+      "revId": "a4cf82b9b347c5d0c60713647490cbc474936c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae86b8e6_a4cb4872",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-03T14:57:28Z",
+      "side": 1,
+      "message": "I see. It looks like we\u0027re calling Stop() twice for each send stream now from Call::DestroyVideoSendStream. Can we erase the first call or is that addressed in the upcoming CL? If I misunderstood please disregard.",
+      "parentUuid": "b6501ad8_4ee06048",
       "revId": "a4cf82b9b347c5d0c60713647490cbc474936c0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
