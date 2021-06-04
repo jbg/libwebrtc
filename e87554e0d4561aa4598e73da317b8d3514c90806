@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e212264b_196a0b9c",
+        "filename": "sdk/android/api/org/webrtc/SoftwareVideoDecoderFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2021-06-04T07:41:17Z",
+      "side": 1,
+      "message": "the HW factories don’t both with this try/catch and would crash with an unknown type.\n\nIIUC this method should never be called for a codec not returned by getSupportedCodecs(), so it should be fine to remove this try/catch, no?\n\n(same thing for the SW encoder factory)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 5
+      },
+      "revId": "e87554e0d4561aa4598e73da317b8d3514c90806",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
