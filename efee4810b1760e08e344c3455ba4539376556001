@@ -16,6 +16,23 @@
       "message": "Or should we just delete the tool? Is it still used?\n(simple history span until 6 years ago when all files in webrtc repo was moved. Since then there were only non-functional refactoring in this tool)",
       "revId": "efee4810b1760e08e344c3455ba4539376556001",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26e96a11_d5db027d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-06-04T15:11:51Z",
+      "side": 1,
+      "message": "I\u0027m not aware of usage of this tool, but I suggest asking on webrtc-discuss if you want to remove it.",
+      "revId": "efee4810b1760e08e344c3455ba4539376556001",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
