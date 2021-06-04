@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1011dda7_ed14213a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-04T05:12:18Z",
+      "side": 1,
+      "message": "What\u0027s up with that sanitizer bot all of a sudden? I looked into the race and it looks it could be legit, if the task queue dtor won\u0027t await already running tasks to complete (not sure about if this is expected behavior).",
+      "revId": "6fc23ace1c75366f3915e0c79f1181f1d5745912",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
