@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0105ca4b_8c3abd58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-04T12:21:02Z",
+      "side": 1,
+      "message": "Please advice - see comment",
+      "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e429040e_024412b9",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-06-03T20:52:42Z",
       "side": 1,
       "message": "Do we need to look at both the local and remote description? If the extension is rejected by the remote side, we\u0027ll keep offering it, which could cause the unsignaled streams to be destroyed/recreated on each round of negotiation.\n\nI don\u0027t know if it\u0027s fair to say \"if you want to avoid this, munge the offer\" if SDP munging is against the standard.",
+      "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5b22797_afea1e3a",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 4835,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-04T12:21:02Z",
+      "side": 1,
+      "message": "I did think about this but I am not sure what is better/worse. Munging is against the standard, but so is supporting BUNDLE without supporting MID, so we\u0027re already in legacy land.\n\nI was trying to pick the lesser of two evils:\n\n- On one hand, if we turn of PT at offer time only to turn it back on at answer time due to the answerer removing the MID, we lose out on packets during negotiation for legacy endpoints. The SDP munging avoids that, but it does require munging.\n\n- On the other hand, if we don\u0027t turn off PT at offer time, we force popular SSRC-based services to always negotiate with dummy m\u003d sections which might not be obvious that you have to do since this is racy.\n\nIdeally, I don\u0027t want to force SSRC endpoints to use dummy m\u003d sections.\n\nBut it\u0027s not nice if every negotiation temporarily disables PT demuxing for clients that do want PT demuxing and don\u0027t want to SDP munge either.\n\nWhat do you think about this compromise: Once we have received an answer that turns PT demuxing on, from that point on we allow PT demuxing for all follow-up offers and answers? Then this is only an initial one-time setup for early media for legacy endpoints.",
+      "parentUuid": "e429040e_024412b9",
       "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
