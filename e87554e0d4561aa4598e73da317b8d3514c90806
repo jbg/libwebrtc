@@ -22,6 +22,30 @@
       },
       "revId": "e87554e0d4561aa4598e73da317b8d3514c90806",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad57dbdb_5ca61777",
+        "filename": "sdk/android/api/org/webrtc/SoftwareVideoDecoderFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-06-04T08:12:05Z",
+      "side": 1,
+      "message": "Before using VideoCodecMimeType SW factories didn\u0027t crash on unknown codec. It would be better to keep that behavior unchanged.",
+      "parentUuid": "e212264b_196a0b9c",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 5
+      },
+      "revId": "e87554e0d4561aa4598e73da317b8d3514c90806",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
