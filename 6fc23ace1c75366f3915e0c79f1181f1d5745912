@@ -16,6 +16,24 @@
       "message": "What\u0027s up with that sanitizer bot all of a sudden? I looked into the race and it looks it could be legit, if the task queue dtor won\u0027t await already running tasks to complete (not sure about if this is expected behavior).",
       "revId": "6fc23ace1c75366f3915e0c79f1181f1d5745912",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40d2b60e_c2677f0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-04T07:53:59Z",
+      "side": 1,
+      "message": "Took a look at the test, filed a bug and added a bit of a band-aid hack. The test (and I guess the suite) needs to be reconsidered.",
+      "parentUuid": "1011dda7_ed14213a",
+      "revId": "6fc23ace1c75366f3915e0c79f1181f1d5745912",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
