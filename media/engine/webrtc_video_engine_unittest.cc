@@ -53,6 +53,7 @@
 #include "media/engine/webrtc_voice_engine.h"
 #include "modules/rtp_rtcp/source/rtp_packet.h"
 #include "rtc_base/arraysize.h"
+#include "rtc_base/event.h"
 #include "rtc_base/experiments/min_video_bitrate_experiment.h"
 #include "rtc_base/fake_clock.h"
 #include "rtc_base/gunit.h"
@@ -1829,8 +1830,31 @@ TEST_F(WebRtcVideoChannelBaseTest, InvalidRecvBufferSize) {
     std::string field_trial_string = "WebRTC-IncreasedReceivebuffers/";
     field_trial_string += group;
     field_trial_string += "/";
+
+    // Dear reader. Sorry for this... it's a bit of a mess.
+    // TODO(bugs.webrtc.org/12854): This test needs to be rewritten to not use
+    // ResetTest and changing global field trials in a loop.
+    TearDown();
+    // This is a hack to appease tsan. Because of the way the test is written
+    // active state within Call, including running task queues may race with
+    // the test changing the global field trial variable.
+    // This particular hack, pauses the transport controller TQ while we
+    // change the field trial.
+    rtc::TaskQueue* tq = call_->GetTransportControllerSend()->GetWorkerQueue();
+    rtc::Event waiting, resume;
+    tq->PostTask([&waiting, &resume]() {
+      waiting.Set();
+      resume.Wait(rtc::Event::kForever);
+    });
+
+    waiting.Wait(rtc::Event::kForever);
+
     webrtc::test::ScopedFieldTrials field_trial(field_trial_string);
-    ResetTest();
+
+    SetUp();
+    resume.Set();
+
+    // OK, now the test can carry on.
 
     EXPECT_TRUE(SetOneCodec(DefaultCodec()));
     EXPECT_TRUE(SetSend(true));
