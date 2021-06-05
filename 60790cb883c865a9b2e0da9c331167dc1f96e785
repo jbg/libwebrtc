@@ -68,6 +68,24 @@
       "parentUuid": "e429040e_024412b9",
       "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd79190_7c0bd3a6",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 4835,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-05T07:27:10Z",
+      "side": 1,
+      "message": "Also I just realized that if you are the offerer and want PT demuxing, you ALREADY have to SDP munge because by default the payload types are not unique. So any user of offer-with-PT-demux is already an SDP munger. And otherwise if you are the answerer then SDP munging does not apply to you.\n\nIf we add a boolean that says \"once PT has been disabled, we always allow PT\" then there is no issue with follow-up offers and answers.",
+      "parentUuid": "f5b22797_afea1e3a",
+      "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
