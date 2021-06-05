@@ -86,6 +86,24 @@
       "parentUuid": "f5b22797_afea1e3a",
       "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76b2a6c0_53f7124f",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 4835,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-05T07:28:03Z",
+      "side": 1,
+      "message": "once PT has beeen enabled*",
+      "parentUuid": "7fd79190_7c0bd3a6",
+      "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
