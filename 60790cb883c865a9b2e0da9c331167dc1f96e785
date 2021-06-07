@@ -122,6 +122,24 @@
       "parentUuid": "76b2a6c0_53f7124f",
       "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3997f96_6bbdf340",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 4835,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-06-07T21:08:53Z",
+      "side": 1,
+      "message": "\u003e Munging is against the standard, but so is supporting BUNDLE without supporting MID\n\nBut munging is something the API is supposed to disallow, while supporting legacy endpoints is something it is expected to do.\n\n\u003e If we don\u0027t turn off PT at offer time, we force popular SSRC-based services to always negotiate with dummy m\u003d sections\n\nExcept that as you mentioned in an e mail, this isn\u0027t an issue for the first round of negotiation because we\u0027re waiting on fingerprints anyway.\n\n\u003e What do you think about this compromise: Once we have received an answer that turns PT demuxing on, from that point on we allow PT demuxing for all follow-up offers and answers?\n\nChecking for the extension in both the offer and answer seems more robust (what if only one media type uses the MID extension?), but this should work in general.\n\n\u003e Also I just realized that if you are the offerer and want PT demuxing, you ALREADY have to SDP munge because by default the payload types are not unique.\n\nYou mean when you have multiple m\u003d sections of the same media type? The legacy case we really care about is when you have one section of each media type though.",
+      "parentUuid": "f3f1f798_facc4572",
+      "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
