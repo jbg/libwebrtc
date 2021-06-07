@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dac723bf_4b9fcb02",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-07T13:19:06Z",
+      "side": 1,
+      "message": "See updated CL description.",
+      "revId": "6e82912ad4806dfceb4a340b80a60bb3721d726e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc16740f_a6dcf40d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-07T13:19:06Z",
+      "side": 1,
+      "message": "Please take another look Taylor, I think this CL will not harm legacy endpoints anymore after adding logic to always allow PT demuxing if it was been enabled in the past.",
+      "revId": "6e82912ad4806dfceb4a340b80a60bb3721d726e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
