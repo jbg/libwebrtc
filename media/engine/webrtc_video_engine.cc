@@ -1767,7 +1767,24 @@ void WebRtcVideoChannel::OnPacketReceived(rtc::CopyOnWriteBuffer packet,
         if (demuxer_criteria_id_ != demuxer_criteria_completed_id_) {
           return;
         }
-
+        // Ignore unknown ssrcs if we recently created an unsignalled receive
+        // stream since this shouldn't happen frequently. Getting into a state
+        // of creating decoders on every packet eats up processing time (e.g.
+        // https://crbug.com/1069603) and this cooldown prevents that.
+        if (last_unsignalled_ssrc_creation_time_ms_.has_value()) {
+          int64_t now_ms = rtc::TimeMillis();
+          if (now_ms - last_unsignalled_ssrc_creation_time_ms_.has_value() <=
+              rtc::kNumMillisecsPerSec / 2) {
+            // We've already created an unsignalled ssrc stream within the last
+            // 0.5 s, ignore with a warning.
+            RTC_LOG(LS_WARNING)
+                << "Another unsignalled ssrc packet arrived shortly after the "
+                << "creation of an unsignalled ssrc stream. Dropping packet.";
+            return;
+          }
+          last_unsignalled_ssrc_creation_time_ms_ = now_ms;
+        }
+        // Let the unsignalled ssrc handler decide whether to drop or deliver.
         switch (unsignalled_ssrc_handler_->OnUnsignalledSsrc(this, ssrc)) {
           case UnsignalledSsrcHandler::kDropPacket:
             return;
