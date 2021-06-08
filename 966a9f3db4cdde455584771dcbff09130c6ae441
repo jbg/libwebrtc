@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c47c448_76cc3218",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-08T08:04:57Z",
+      "side": 1,
+      "message": "Have at it",
+      "revId": "966a9f3db4cdde455584771dcbff09130c6ae441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "775903ee_2fecdba7",
+        "filename": "pc/bundle_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-08T08:04:57Z",
+      "side": 1,
+      "message": "micro-nit: align indent with rest of the text",
+      "revId": "966a9f3db4cdde455584771dcbff09130c6ae441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9685408_309e8edd",
+        "filename": "pc/bundle_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-08T08:04:57Z",
+      "side": 1,
+      "message": "Later when the logic is moved into this class, will the non-const getter method be removed in favor of other methods that do specific things?",
+      "revId": "966a9f3db4cdde455584771dcbff09130c6ae441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
