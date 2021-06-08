@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a72c68_eaf04a2f",
+        "filename": "pc/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-06-08T07:42:51Z",
+      "side": 1,
+      "message": "Maybe leave deps out until next cl?\n\nAlso it seems wrong to have a dependency on libjingle_peerconnection_api here, can that be avoided?",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 3
+      },
+      "revId": "6128c84fc67558f7f7086e4773bbfd5994c27248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8832b757_4a739f49",
+        "filename": "pc/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-06-08T07:42:51Z",
+      "side": 1,
+      "message": "Remove?",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 16
+      },
+      "revId": "6128c84fc67558f7f7086e4773bbfd5994c27248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
