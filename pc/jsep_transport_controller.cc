@@ -544,6 +544,8 @@ RTCError JsepTransportController::ApplyDescription_n(
     const cricket::SessionDescription* description) {
   TRACE_EVENT0("webrtc", "JsepTransportController::ApplyDescription_n");
   RTC_DCHECK(description);
+  RTC_LOG(LS_ERROR) << "DEBUG: ApplyDescription_n, type "
+                    << SdpTypeToString(type) << ", local " << local;
 
   if (local) {
     local_desc_ = description;
@@ -561,6 +563,8 @@ RTCError JsepTransportController::ApplyDescription_n(
       established_bundle_groups_by_mid;
   for (const auto& bundle_group : bundle_groups_) {
     for (const std::string& content_name : bundle_group->content_names()) {
+      RTC_LOG(LS_ERROR) << "DEBUG: MID " << content_name << " is a member of "
+                        << bundle_group.get();
       established_bundle_groups_by_mid[content_name] = bundle_group.get();
     }
   }
@@ -638,6 +642,7 @@ RTCError JsepTransportController::ApplyDescription_n(
 
     cricket::JsepTransport* transport =
         GetJsepTransportForMid(content_info.name);
+
     RTC_DCHECK(transport);
 
     SetIceRole_n(DetermineIceRole(transport, transport_info, type, local));
@@ -715,6 +720,8 @@ RTCError JsepTransportController::ValidateAndMaybeUpdateBundleGroups(
     std::map<const cricket::ContentGroup*, const cricket::ContentGroup*>
         new_bundle_groups_by_offered_bundle_groups;
     for (const cricket::ContentGroup* new_bundle_group : new_bundle_groups) {
+      RTC_DLOG(LS_ERROR) << "DEBUG: Bundle group in new_bundle_groups: "
+                         << new_bundle_group->ToString();
       if (!new_bundle_group->FirstContentName()) {
         // Empty groups could be a subset of any group.
         continue;
@@ -753,9 +760,12 @@ RTCError JsepTransportController::ValidateAndMaybeUpdateBundleGroups(
     }
 
     for (const auto& bundle_group : bundle_groups_) {
+      RTC_DLOG(LS_ERROR) << "DEBUG: Bundle group in bundle_groups_: "
+                         << bundle_group->ToString();
       for (const std::string& content_name : bundle_group->content_names()) {
         // An answer that removes m= sections from pre-negotiated BUNDLE group
         // without rejecting it, is invalid.
+        RTC_LOG(LS_ERROR) << "DEBUG: Looking for " << content_name;
         auto it = new_bundle_groups_by_mid.find(content_name);
         if (it == new_bundle_groups_by_mid.end()) {
           auto* content_info = description->GetContentByName(content_name);
@@ -777,7 +787,9 @@ RTCError JsepTransportController::ValidateAndMaybeUpdateBundleGroups(
                     "max-bundle is used but no bundle group found.");
   }
 
-  if (ShouldUpdateBundleGroup(type, description)) {
+  RTC_LOG(LS_ERROR) << "DEBUG: Calling ShouldUpdateBundleGroup";
+  if (ShouldUpdateBundleGroup(local, type, description)) {
+    RTC_LOG(LS_ERROR) << "DEBUG: Updating Bundle Group";
     bundle_groups_.clear();
     for (const cricket::ContentGroup* new_bundle_group : new_bundle_groups) {
       bundle_groups_.push_back(
@@ -945,6 +957,7 @@ JsepTransportController::CreateJsepTransportDescription(
 }
 
 bool JsepTransportController::ShouldUpdateBundleGroup(
+    bool local,
     SdpType type,
     const cricket::SessionDescription* description) {
   if (config_.bundle_policy ==
@@ -952,16 +965,59 @@ bool JsepTransportController::ShouldUpdateBundleGroup(
     return true;
   }
 
-  if (type != SdpType::kAnswer) {
+  // Always believe the passed-in description, EXCEPT for the
+  // case of a local offer where we don't know that bundle has been
+  // accepted on a previous offer.
+  // Cases are:
+  // - Local initial offer: Might be rejected. Have to create all transports.
+  // - Local subsequent offer: Might get modified in answer, but no reason
+  //   to create more transports now. Accept it.
+  // - Remote initial offer: We need to wait to accept it, may be rejected.
+  // - Remote subsequent offer: We will accept it.
+  // - Remote answer: We will accept it.
+  // - Local answer: We have accepted it.
+  if (type == SdpType::kOffer && bundle_groups_.empty()) {
+    RTC_LOG(LS_ERROR) << "DEBUG: Not updating bundle groups, initial offer";
+    return false;
+  }
+  std::vector<const cricket::ContentGroup*> bundles =
+      description->GetGroupsByName(cricket::GROUP_TYPE_BUNDLE);
+  RTC_DLOG(LS_ERROR) << "DEBUG: Content groups proposed:";
+  for (const auto& bundle : bundles) {
+    RTC_DLOG(LS_ERROR) << "DEBUG: " << bundle->ToString();
+  }
+
+  if (bundles.empty()) {
+    // Bundles are being turned off; need to change if they are on.
+    RTC_LOG(LS_ERROR) << "DEBUG: Bundle being turned off";
+    return !bundle_groups_.empty();
+  }
+  return true;
+
+  /*
+
+  if (!local_desc_ || !remote_desc_) {
     return false;
   }
 
-  RTC_DCHECK(local_desc_ && remote_desc_);
+  // TODO(todo): Sometimes remote_desc is invalidated without being
+  // unset. This is a footgun, so should be fixed.
+  // Seems to happen only with tests involving rollbacks and local offers,
+  // so skip on local offers.
+  RTC_LOG(LS_ERROR) << "DEBUG: Type is " << SdpTypeToString(type)
+                    << ", local=" << local;
+  if (type != SdpType::kAnswer) {
+    RTC_LOG(LS_ERROR) << "DEBUG: Not updating local/remote bundles";
+    return false;
+  }
+
+  RTC_LOG(LS_ERROR) << "DEBUG: Updating local/remote bundles";
   std::vector<const cricket::ContentGroup*> local_bundles =
       local_desc_->GetGroupsByName(cricket::GROUP_TYPE_BUNDLE);
   std::vector<const cricket::ContentGroup*> remote_bundles =
       remote_desc_->GetGroupsByName(cricket::GROUP_TYPE_BUNDLE);
   return !local_bundles.empty() && !remote_bundles.empty();
+  */
 }
 
 std::vector<int> JsepTransportController::GetEncryptedHeaderExtensionIds(
@@ -1060,11 +1116,13 @@ RTCError JsepTransportController::MaybeCreateJsepTransport(
     bool local,
     const cricket::ContentInfo& content_info,
     const cricket::SessionDescription& description) {
+  RTC_LOG(LS_ERROR) << "DEBUG: MaybeCreateJseptransport, name "
+                    << content_info.name;
   cricket::JsepTransport* transport = GetJsepTransportByName(content_info.name);
   if (transport) {
     return RTCError::OK();
   }
-
+  RTC_LOG(LS_ERROR) << "DEBUG: Decided to create JsepTransport";
   const cricket::MediaContentDescription* content_desc =
       content_info.media_description();
   if (certificate_ && !content_desc->cryptos().empty()) {
@@ -1239,6 +1297,7 @@ void JsepTransportController::OnTransportGatheringState_n(
 void JsepTransportController::OnTransportCandidateGathered_n(
     cricket::IceTransportInternal* transport,
     const cricket::Candidate& candidate) {
+  RTC_LOG(LS_ERROR) << "DEBUG: JTC::OnTransportCandidateGathered_n";
   // We should never signal peer-reflexive candidates.
   if (candidate.type() == cricket::PRFLX_PORT_TYPE) {
     RTC_NOTREACHED();

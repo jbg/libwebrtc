@@ -195,6 +195,7 @@ P2PTransportChannel::P2PTransportChannel(
               REGATHER_ON_FAILED_NETWORKS_INTERVAL,
               RECEIVING_SWITCHING_DELAY) {
   TRACE_EVENT0("webrtc", "P2PTransportChannel::P2PTransportChannel");
+  RTC_LOG(LS_ERROR) << "DEBUG: P2PTransportChannel created: " << this;
   RTC_DCHECK(allocator_ != nullptr);
   weak_ping_interval_ = GetWeakPingIntervalInFieldTrial();
   // Validate IceConfig even for mostly built-in constant default values in case
@@ -264,6 +265,7 @@ void P2PTransportChannel::AddAllocatorSession(
     std::unique_ptr<PortAllocatorSession> session) {
   RTC_DCHECK_RUN_ON(network_thread_);
 
+  RTC_LOG(LS_ERROR) << "DEBUG: AddAllocatorSession to " << this;
   session->set_generation(static_cast<uint32_t>(allocator_sessions_.size()));
   session->SignalPortReady.connect(this, &P2PTransportChannel::OnPortReady);
   session->SignalPortsPruned.connect(this, &P2PTransportChannel::OnPortsPruned);
@@ -866,6 +868,7 @@ int P2PTransportChannel::check_receiving_interval() const {
 
 void P2PTransportChannel::MaybeStartGathering() {
   RTC_DCHECK_RUN_ON(network_thread_);
+  RTC_LOG(LS_ERROR) << "DEBUG: MaybeStartGathering";
   if (ice_parameters_.ufrag.empty() || ice_parameters_.pwd.empty()) {
     RTC_LOG(LS_ERROR)
         << "Cannot gather candidates because ICE parameters are empty"
@@ -878,6 +881,9 @@ void P2PTransportChannel::MaybeStartGathering() {
       IceCredentialsChanged(allocator_sessions_.back()->ice_ufrag(),
                             allocator_sessions_.back()->ice_pwd(),
                             ice_parameters_.ufrag, ice_parameters_.pwd)) {
+    RTC_LOG(LS_ERROR)
+        << "DEBUG: Definitely Start gathering, allocator_sessions.empty()="
+        << allocator_sessions_.empty();
     if (gathering_state_ != kIceGatheringGathering) {
       gathering_state_ = kIceGatheringGathering;
       SignalGatheringState(this);

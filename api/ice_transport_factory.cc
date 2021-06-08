@@ -58,6 +58,7 @@ rtc::scoped_refptr<IceTransportInterface> CreateIceTransport(
 
 rtc::scoped_refptr<IceTransportInterface> CreateIceTransport(
     IceTransportInit init) {
+  RTC_LOG(LS_ERROR) << "DEBUG: API-CreateIceTransport";
   if (init.async_resolver_factory()) {
     // Backwards compatibility mode
     return rtc::make_ref_counted<IceTransportWithTransportChannel>(
