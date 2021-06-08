@@ -488,6 +488,9 @@ class ContentGroup {
   bool HasContentName(const std::string& content_name) const;
   void AddContentName(const std::string& content_name);
   bool RemoveContentName(const std::string& content_name);
+#if RTC_DLOG_IS_ON
+  std::string ToString() const;
+#endif
 
  private:
   std::string semantics_;
