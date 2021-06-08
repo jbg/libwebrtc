@@ -16,6 +16,24 @@
       "message": "Nice!\nIs the plan to eventually remove rtp_utility too?",
       "revId": "7e7c3a15a81e94147815faba35dbbc957833fa78",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3708776_b442fd67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-08T11:22:03Z",
+      "side": 1,
+      "message": "Yes, that\u0027s the main plan here (but NetEq tests still uses RtpUtility parser directly, will take a bit more effort to toggle those)\n\nI also plan to move IsRtcp/GetSsrc outside of the class and merge them with similar cricket functions",
+      "parentUuid": "38e34a7c_720c9538",
+      "revId": "7e7c3a15a81e94147815faba35dbbc957833fa78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
