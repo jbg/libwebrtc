@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684ea908_d4155fd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-08T04:05:02Z",
+      "side": 1,
+      "message": "This is nearly just making the statement \"all stored bundle info is here\".\n",
+      "revId": "0772ce86caf9ed3faeac5afaaaac90c6c9d87f0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
