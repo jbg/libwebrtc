@@ -140,6 +140,24 @@
       "parentUuid": "f3f1f798_facc4572",
       "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e508b397_75e15f53",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 4835,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-08T10:24:45Z",
+      "side": 1,
+      "message": "\u003e But munging is something the API is supposed to disallow, while supporting legacy endpoints is something it is expected to do.\n\nTrue. You\u0027re right.\n\n\u003e Checking for the extension in both the offer and answer seems more robust (what if only one media type uses the MID extension?), but this should work in general.\n\nThat\u0027s an interesting case. Or if one BUNDLE uses MID but not another BUNDLE, but that seems far fetched.\n\nI did considered \"mixed\" setups but I *think* people would either use MID or not use MID rather than mix things - I could be wrong though.\n\nIn terms of early media, my thinking is that more complex logic does not make any difference prior to the fingerprint, and in follow-up O/As we have to continue to disable PT until we get the answer or else unsignalled ssrc could happen between offer and answer.\n\nBut in terms of mixed setups, more complex logic could help. Can you clarify, do you think I need to update the code to take care of \"mixed\" setups or is this CL good as-is? I don\u0027t think a more robust solution helps in non-mixed setups since we have to default to PT being off until proven otherwise anyway (after the initial exchange), but maybe I am missing something.\n\n\u003e You mean when you have multiple m\u003d sections of the same media type? The legacy case we really care about is when you have one section of each media type though.\n\nAh, right, that doesn\u0027t require munging.\n\n---\n\nWhat, if anything, do you want me to change with the current CL?\nShould I make PT demuxing per kind instead?",
+      "parentUuid": "d3997f96_6bbdf340",
+      "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
