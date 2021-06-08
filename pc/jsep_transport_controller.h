@@ -345,7 +345,8 @@ class JsepTransportController : public sigslot::has_slots<> {
       const std::vector<int>& encrypted_extension_ids,
       int rtp_abs_sendtime_extn_id);
 
-  bool ShouldUpdateBundleGroup(SdpType type,
+  bool ShouldUpdateBundleGroup(bool local,
+                               SdpType type,
                                const cricket::SessionDescription* description);
 
   std::map<const cricket::ContentGroup*, std::vector<int>>
