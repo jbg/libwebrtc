@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1f0b55c_67912854",
+        "filename": "pc/bundle_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-08T08:51:27Z",
+      "side": 1,
+      "message": "Will do in next CL.",
+      "parentUuid": "775903ee_2fecdba7",
+      "revId": "966a9f3db4cdde455584771dcbff09130c6ae441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f9685408_309e8edd",
         "filename": "pc/bundle_manager.h",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2021-06-08T08:04:57Z",
       "side": 1,
       "message": "Later when the logic is moved into this class, will the non-const getter method be removed in favor of other methods that do specific things?",
+      "revId": "966a9f3db4cdde455584771dcbff09130c6ae441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38506c43_7c62ebed",
+        "filename": "pc/bundle_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-08T08:51:27Z",
+      "side": 1,
+      "message": "Yes. First victim of the \"move functions\" step.",
+      "parentUuid": "f9685408_309e8edd",
       "revId": "966a9f3db4cdde455584771dcbff09130c6ae441",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
