@@ -158,6 +158,24 @@
       "parentUuid": "d3997f96_6bbdf340",
       "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7119f2d0_93441c48",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 4835,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-08T10:54:22Z",
+      "side": 1,
+      "message": "I updated the CL to make the decision on whether to allow PT demuxing be per-kind instead. And if it is ever allowed once then we continue to allow it for the lifetime of the PC.\n\nI currently check if MID was present anywhere for that kind. Another alternative could be to instead check if MID was removed from any m\u003d section of that kind in case it is present for some but not others, but I doubt people use MID in one group or m\u003d section of the same kind and not in another - that seems like a theoretical use case and I want to keep things simple.\n\nBut if you want me to change the CL, let me know how.",
+      "parentUuid": "e508b397_75e15f53",
+      "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
