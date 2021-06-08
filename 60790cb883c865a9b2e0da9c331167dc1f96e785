@@ -176,6 +176,24 @@
       "parentUuid": "e508b397_75e15f53",
       "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "720ca48d_2748c62d",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 4835,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-08T12:25:21Z",
+      "side": 1,
+      "message": "Ignore the last message. I updated the CL one more time to try to be maximally friendly towards PT-based endpoints.\n\nNow it is enough to remove the MID from ANY receiving m\u003d section to enable PT demux, and the decision is per-kind. So if anybody does weird mixes of MID and not MID you still get PT demux except if the MID vs no MID is kind-specific. When in doubt, allow PT.\n\nSo we only disable BUNDLE PT demux if:\n- PT demux has never been used in the past for this kind.\n- ALL m\u003d sections of this kind support MID.",
+      "parentUuid": "7119f2d0_93441c48",
+      "revId": "60790cb883c865a9b2e0da9c331167dc1f96e785",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
