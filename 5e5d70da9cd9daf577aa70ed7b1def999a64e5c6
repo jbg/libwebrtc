@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64e6fedc_bd44f916",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-08T09:52:20Z",
+      "side": 1,
+      "message": "Step 2 (careful one).\n",
+      "revId": "5e5d70da9cd9daf577aa70ed7b1def999a64e5c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
