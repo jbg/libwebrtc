@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38e34a7c_720c9538",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-06-08T11:18:09Z",
+      "side": 1,
+      "message": "Nice!\nIs the plan to eventually remove rtp_utility too?",
+      "revId": "7e7c3a15a81e94147815faba35dbbc957833fa78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
