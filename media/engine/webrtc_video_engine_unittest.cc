@@ -97,6 +97,7 @@ static const uint32_t kSsrcs3[] = {1, 2, 3};
 static const uint32_t kRtxSsrcs1[] = {4};
 static const uint32_t kFlexfecSsrc = 5;
 static const uint32_t kIncomingUnsignalledSsrc = 0xC0FFEE;
+static const int64_t kUnsignalledReceiveStreamCooldownMs = 500;
 
 constexpr uint32_t kRtpHeaderSize = 12;
 
@@ -2564,6 +2565,16 @@ class WebRtcVideoChannelTest : public WebRtcVideoEngineTest {
   }
 
   cricket::VideoCodec DefaultCodec() { return GetEngineCodec("VP8"); }
+
+  // After receciving and processing the packet, enough time is advanced that
+  // the unsignalled receive stream cooldown is no longer in effect.
+  void ReceivePacketAndAdvanceTime(rtc::CopyOnWriteBuffer packet,
+                                   int64_t packet_time_us) {
+    channel_->OnPacketReceived(packet, packet_time_us);
+    rtc::Thread::Current()->ProcessMessages(0);
+    fake_clock_.AdvanceTime(
+        webrtc::TimeDelta::Millis(kUnsignalledReceiveStreamCooldownMs));
+  }
 
  protected:
   FakeVideoSendStream* AddSendStream() {
@@ -6459,8 +6470,7 @@ TEST_F(WebRtcVideoChannelTest, RecvUnsignaledSsrcWithSignaledStreamId) {
   memset(data, 0, sizeof(data));
   rtc::SetBE32(&data[8], kIncomingUnsignalledSsrc);
   rtc::CopyOnWriteBuffer packet(data, kDataLength);
-  channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
-  rtc::Thread::Current()->ProcessMessages(0);
+  ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
 
   // The stream should now be created with the appropriate sync label.
   EXPECT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
@@ -6501,8 +6511,7 @@ TEST_F(WebRtcVideoChannelTest,
   memset(data, 0, sizeof(data));
   rtc::SetBE32(&data[8], kIncomingUnsignalledSsrc);
   rtc::CopyOnWriteBuffer packet(data, kDataLength);
-  channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
-  rtc::Thread::Current()->ProcessMessages(0);
+  ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
 
   // Default receive stream created.
   const auto& receivers1 = fake_call_->GetVideoReceiveStreams();
@@ -6552,7 +6561,7 @@ TEST_F(WebRtcVideoChannelTest,
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc1);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
   {
     // Receive a packet for kSsrc2.
@@ -6561,9 +6570,8 @@ TEST_F(WebRtcVideoChannelTest,
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc2);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
-  rtc::Thread::Current()->ProcessMessages(0);
 
   // No unsignaled ssrc for kSsrc2 should have been created, but kSsrc1 should
   // arrive since it already has a stream.
@@ -6585,7 +6593,7 @@ TEST_F(WebRtcVideoChannelTest,
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc1);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
   {
     // Receive a packet for kSsrc2.
@@ -6594,9 +6602,8 @@ TEST_F(WebRtcVideoChannelTest,
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc2);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
-  rtc::Thread::Current()->ProcessMessages(0);
 
   // An unsignalled ssrc for kSsrc2 should be created and the packet counter
   // should increase for both ssrcs.
@@ -6637,7 +6644,7 @@ TEST_F(WebRtcVideoChannelTest,
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc1);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
   {
     // Receive a packet for kSsrc2.
@@ -6646,9 +6653,8 @@ TEST_F(WebRtcVideoChannelTest,
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc2);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
-  rtc::Thread::Current()->ProcessMessages(0);
 
   // No unsignaled ssrc for kSsrc1 should have been created, but the packet
   // count for kSsrc2 should increase.
@@ -6669,7 +6675,7 @@ TEST_F(WebRtcVideoChannelTest,
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc1);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
   {
     // Receive a packet for kSsrc2.
@@ -6678,9 +6684,8 @@ TEST_F(WebRtcVideoChannelTest,
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc2);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
-  rtc::Thread::Current()->ProcessMessages(0);
 
   // An unsignalled ssrc for kSsrc1 should be created and the packet counter
   // should increase for both ssrcs.
@@ -6717,9 +6722,8 @@ TEST_F(WebRtcVideoChannelTest, MultiplePendingDemuxerCriteriaUpdates) {
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
-  rtc::Thread::Current()->ProcessMessages(0);
   EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc), 1u);
 
   // Signal that the demuxer knows about the first update: the removal.
@@ -6734,9 +6738,8 @@ TEST_F(WebRtcVideoChannelTest, MultiplePendingDemuxerCriteriaUpdates) {
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
-  rtc::Thread::Current()->ProcessMessages(0);
   EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc), 2u);
 
   // Remove the kSsrc again while previous demuxer updates are still pending.
@@ -6752,9 +6755,8 @@ TEST_F(WebRtcVideoChannelTest, MultiplePendingDemuxerCriteriaUpdates) {
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
-  rtc::Thread::Current()->ProcessMessages(0);
   EXPECT_EQ(fake_call_->GetVideoReceiveStreams().size(), 0u);
   EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc), 2u);
 
@@ -6770,9 +6772,8 @@ TEST_F(WebRtcVideoChannelTest, MultiplePendingDemuxerCriteriaUpdates) {
     memset(data, 0, sizeof(data));
     rtc::SetBE32(&data[8], kSsrc);
     rtc::CopyOnWriteBuffer packet(data, kDataLength);
-    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+    ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   }
-  rtc::Thread::Current()->ProcessMessages(0);
   EXPECT_EQ(fake_call_->GetVideoReceiveStreams().size(), 0u);
   EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc), 2u);
 
@@ -6793,6 +6794,68 @@ TEST_F(WebRtcVideoChannelTest, MultiplePendingDemuxerCriteriaUpdates) {
   rtc::Thread::Current()->ProcessMessages(0);
   EXPECT_EQ(fake_call_->GetVideoReceiveStreams().size(), 1u);
   EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc), 3u);
+}
+
+TEST_F(WebRtcVideoChannelTest, UnsignalledSsrcHasACooldown) {
+  const uint32_t kSsrc1 = 1;
+  const uint32_t kSsrc2 = 2;
+
+  // Send packets for kSsrc1, creating an unsignalled receive stream.
+  {
+    // Receive a packet for kSsrc1.
+    const size_t kDataLength = 12;
+    uint8_t data[kDataLength];
+    memset(data, 0, sizeof(data));
+    rtc::SetBE32(&data[8], kSsrc1);
+    rtc::CopyOnWriteBuffer packet(data, kDataLength);
+    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+  }
+  rtc::Thread::Current()->ProcessMessages(0);
+  fake_clock_.AdvanceTime(
+      webrtc::TimeDelta::Millis(kUnsignalledReceiveStreamCooldownMs - 1));
+
+  // We now have an unsignalled receive stream for kSsrc1.
+  EXPECT_EQ(fake_call_->GetVideoReceiveStreams().size(), 1u);
+  EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc1), 1u);
+  EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc2), 0u);
+
+  {
+    // Receive a packet for kSsrc2.
+    const size_t kDataLength = 12;
+    uint8_t data[kDataLength];
+    memset(data, 0, sizeof(data));
+    rtc::SetBE32(&data[8], kSsrc2);
+    rtc::CopyOnWriteBuffer packet(data, kDataLength);
+    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+  }
+  rtc::Thread::Current()->ProcessMessages(0);
+
+  // Not enough time has passed to replace the unsignalled receive stream, so
+  // the kSsrc2 should be ignored.
+  EXPECT_EQ(fake_call_->GetVideoReceiveStreams().size(), 1u);
+  EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc1), 1u);
+  EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc2), 0u);
+
+  // After 500 ms, kSsrc2 should trigger a new unsignalled receive stream that
+  // replaces the old one.
+  fake_clock_.AdvanceTime(webrtc::TimeDelta::Millis(1));
+  {
+    // Receive a packet for kSsrc2.
+    const size_t kDataLength = 12;
+    uint8_t data[kDataLength];
+    memset(data, 0, sizeof(data));
+    rtc::SetBE32(&data[8], kSsrc2);
+    rtc::CopyOnWriteBuffer packet(data, kDataLength);
+    channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
+  }
+  rtc::Thread::Current()->ProcessMessages(0);
+
+  // The old unsignalled receive stream was destroyed and replaced, so we still
+  // only have one unsignalled receive stream. But tha packet counter for kSsrc2
+  // has now increased.
+  EXPECT_EQ(fake_call_->GetVideoReceiveStreams().size(), 1u);
+  EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc1), 1u);
+  EXPECT_EQ(fake_call_->GetDeliveredPacketsForSsrc(kSsrc2), 1u);
 }
 
 // Test BaseMinimumPlayoutDelayMs on receive streams.
@@ -6954,8 +7017,7 @@ TEST_F(WebRtcVideoChannelTest, ReceiveDifferentUnsignaledSsrc) {
   rtpHeader.ssrc = kIncomingUnsignalledSsrc + 1;
   cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
   rtc::CopyOnWriteBuffer packet(data, sizeof(data));
-  channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
-  rtc::Thread::Current()->ProcessMessages(0);
+  ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   // VP8 packet should create default receive stream.
   ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
   FakeVideoReceiveStream* recv_stream = fake_call_->GetVideoReceiveStreams()[0];
@@ -6976,8 +7038,7 @@ TEST_F(WebRtcVideoChannelTest, ReceiveDifferentUnsignaledSsrc) {
   rtpHeader.ssrc = kIncomingUnsignalledSsrc + 2;
   cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
   rtc::CopyOnWriteBuffer packet2(data, sizeof(data));
-  channel_->OnPacketReceived(packet2, /* packet_time_us */ -1);
-  rtc::Thread::Current()->ProcessMessages(0);
+  ReceivePacketAndAdvanceTime(packet2, /* packet_time_us */ -1);
   // VP9 packet should replace the default receive SSRC.
   ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
   recv_stream = fake_call_->GetVideoReceiveStreams()[0];
@@ -6999,8 +7060,7 @@ TEST_F(WebRtcVideoChannelTest, ReceiveDifferentUnsignaledSsrc) {
   rtpHeader.ssrc = kIncomingUnsignalledSsrc + 3;
   cricket::SetRtpHeader(data, sizeof(data), rtpHeader);
   rtc::CopyOnWriteBuffer packet3(data, sizeof(data));
-  channel_->OnPacketReceived(packet3, /* packet_time_us */ -1);
-  rtc::Thread::Current()->ProcessMessages(0);
+  ReceivePacketAndAdvanceTime(packet3, /* packet_time_us */ -1);
   // H264 packet should replace the default receive SSRC.
   ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
   recv_stream = fake_call_->GetVideoReceiveStreams()[0];
@@ -7039,8 +7099,7 @@ TEST_F(WebRtcVideoChannelTest,
   rtp_header.ssrc = kSsrcs3[0];
   cricket::SetRtpHeader(data, sizeof(data), rtp_header);
   rtc::CopyOnWriteBuffer packet(data, sizeof(data));
-  channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
-  rtc::Thread::Current()->ProcessMessages(0);
+  ReceivePacketAndAdvanceTime(packet, /* packet_time_us */ -1);
   // Default receive stream should be created.
   ASSERT_EQ(1u, fake_call_->GetVideoReceiveStreams().size());
   FakeVideoReceiveStream* recv_stream0 =
