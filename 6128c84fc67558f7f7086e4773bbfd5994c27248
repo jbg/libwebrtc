@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c13825f_9fc4e04d",
+        "filename": "pc/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-09T09:34:55Z",
+      "side": 1,
+      "message": "I\u0027d like to leave the dependencies in, finding the dependencies is the tedious part of breaking targets out.\n\nsession_description.h includes four api/ files, all of which currently live in libjingle_peerconnection_api. That target has a bad name - \"everyone\" depends on some file in it.",
+      "parentUuid": "88a72c68_eaf04a2f",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 3
+      },
+      "revId": "6128c84fc67558f7f7086e4773bbfd5994c27248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8832b757_4a739f49",
         "filename": "pc/BUILD.gn",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-08T07:42:51Z",
       "side": 1,
       "message": "Remove?",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 16
+      },
+      "revId": "6128c84fc67558f7f7086e4773bbfd5994c27248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5ecbb64_c0da2dda",
+        "filename": "pc/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-09T09:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8832b757_4a739f49",
       "range": {
         "startLine": 214,
         "startChar": 0,
