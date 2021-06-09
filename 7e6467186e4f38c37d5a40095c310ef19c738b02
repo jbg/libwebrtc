@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76b3bda1_af54d04f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-06-09T14:54:28Z",
+      "side": 1,
+      "message": "PTAL, I can\u0027t investigate why the mac bots differ, but I hope this should be sufficient to reenable the test.",
+      "revId": "7e6467186e4f38c37d5a40095c310ef19c738b02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
