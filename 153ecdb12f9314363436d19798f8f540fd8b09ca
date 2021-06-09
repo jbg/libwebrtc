@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50237957_c1009ae5",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1778,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-09T09:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17c64c68_f46a4f2b",
+      "revId": "153ecdb12f9314363436d19798f8f540fd8b09ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77350503_f8035f4d",
@@ -52,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fed3030_e0d79b62",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 6510,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-09T09:10:56Z",
+      "side": 1,
+      "message": "Only a couple of tests failed after my change and had to be updated.\n\nBut some tests asserting that we didn\u0027t create unsignalled receive streams for other reasons than cooldown, so they needed to be updated in order not to give false-positives in case the behavior they were trying to test breaks.\n\nI made all WebRtcVideoChannelTest tests use the helper by default, except in the cooldown test where I wanted the cooldown.\n\nDone.",
+      "parentUuid": "77350503_f8035f4d",
+      "revId": "153ecdb12f9314363436d19798f8f540fd8b09ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd13d76c_1e511e75",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-06-09T00:49:59Z",
       "side": 1,
       "message": "We haven\u0027t even received a packet here, have we?",
+      "revId": "153ecdb12f9314363436d19798f8f540fd8b09ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a634a0b_3e8a4b6d",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 6541,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-09T09:10:56Z",
+      "side": 1,
+      "message": "Oops, removed.",
+      "parentUuid": "cd13d76c_1e511e75",
       "revId": "153ecdb12f9314363436d19798f8f540fd8b09ca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

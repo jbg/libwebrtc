@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c849809d_a6b0f668",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-09T09:10:56Z",
+      "side": 1,
+      "message": "Comments addressed, PTAL Taylor and Harald",
+      "revId": "2e979501ebc4262d5d778fd68b670e2d5e55b208",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
