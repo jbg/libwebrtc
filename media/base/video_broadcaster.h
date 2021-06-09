@@ -50,6 +50,8 @@ class VideoBroadcaster : public VideoSourceBase,
 
   void OnDiscardedFrame() override;
 
+  void SetConstraints(absl::optional<double> min_frame_rate,
+                      absl::optional<double> max_frame_rate) override;
  protected:
   void UpdateWants() RTC_EXCLUSIVE_LOCKS_REQUIRED(sinks_and_wants_lock_);
   const rtc::scoped_refptr<webrtc::VideoFrameBuffer>& GetBlackFrameBuffer(
@@ -62,6 +64,9 @@ class VideoBroadcaster : public VideoSourceBase,
   rtc::scoped_refptr<webrtc::VideoFrameBuffer> black_frame_buffer_;
   bool previous_frame_sent_to_all_sinks_ RTC_GUARDED_BY(sinks_and_wants_lock_) =
       true;
+
+  absl::optional<double> min_frame_rate_ RTC_GUARDED_BY(sinks_and_wants_lock_);
+  absl::optional<double> max_frame_rate_ RTC_GUARDED_BY(sinks_and_wants_lock_);
 };
 
 }  // namespace rtc

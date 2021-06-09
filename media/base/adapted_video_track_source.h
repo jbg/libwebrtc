@@ -36,6 +36,8 @@ class RTC_EXPORT AdaptedVideoTrackSource
  public:
   AdaptedVideoTrackSource();
   ~AdaptedVideoTrackSource() override;
+  void SetConstraints(absl::optional<double> min_frame_rate,
+                      absl::optional<double> max_frame_rate) override;
 
  protected:
   // Allows derived classes to initialize |video_adapter_| with a custom

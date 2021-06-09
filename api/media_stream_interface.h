@@ -154,6 +154,10 @@ class VideoTrackSourceInterface : public MediaSourceInterface,
   // Removes an encoded video sink from the source.
   virtual void RemoveEncodedSink(
       rtc::VideoSinkInterface<RecordableEncodedFrame>* sink) = 0;
+  
+  // Make constraints known to the source interface.
+  virtual void SetConstraints(absl::optional<double> min_frame_rate,
+                              absl::optional<double> max_frame_rate) {}
 
  protected:
   ~VideoTrackSourceInterface() override = default;

@@ -83,6 +83,12 @@ void AdaptedVideoTrackSource::OnSinkWantsChanged(
   video_adapter_.OnSinkWants(wants);
 }
 
+void AdaptedVideoTrackSource::SetConstraints(
+    absl::optional<double> min_frame_rate,
+    absl::optional<double> max_frame_rate) {
+  broadcaster_.SetConstraints(min_frame_rate, max_frame_rate);
+}
+
 bool AdaptedVideoTrackSource::AdaptFrame(int width,
                                          int height,
                                          int64_t time_us,

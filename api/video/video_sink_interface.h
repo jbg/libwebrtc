@@ -11,6 +11,7 @@
 #ifndef API_VIDEO_VIDEO_SINK_INTERFACE_H_
 #define API_VIDEO_VIDEO_SINK_INTERFACE_H_
 
+#include "absl/types/optional.h"
 #include "rtc_base/checks.h"
 
 namespace rtc {
@@ -25,6 +26,9 @@ class VideoSinkInterface {
   // Should be called by the source when it discards the frame due to rate
   // limiting.
   virtual void OnDiscardedFrame() {}
+
+  virtual void SetConstraints(absl::optional<double> min_frame_rate,
+                              absl::optional<double> max_frame_rate) {}
 };
 
 }  // namespace rtc

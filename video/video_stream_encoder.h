@@ -176,6 +176,8 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   // Implements VideoSinkInterface.
   void OnFrame(const VideoFrame& video_frame) override;
   void OnDiscardedFrame() override;
+  void SetConstraints(absl::optional<double> min_frame_rate,
+                      absl::optional<double> max_frame_rate) override;
 
   void MaybeEncodeVideoFrame(const VideoFrame& frame,
                              int64_t time_when_posted_in_ms);

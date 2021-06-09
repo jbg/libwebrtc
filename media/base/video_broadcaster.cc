@@ -32,6 +32,7 @@ void VideoBroadcaster::AddOrUpdateSink(
   if (!FindSinkPair(sink)) {
     // |Sink| is a new sink, which didn't receive previous frame.
     previous_frame_sent_to_all_sinks_ = false;
+    sink->SetConstraints(min_frame_rate_, max_frame_rate_);
   }
   VideoSourceBase::AddOrUpdateSink(sink, wants);
   UpdateWants();
@@ -148,6 +149,16 @@ VideoBroadcaster::GetBlackFrameBuffer(int width, int height) {
   }
 
   return black_frame_buffer_;
+}
+
+void VideoBroadcaster::SetConstraints(absl::optional<double> min_frame_rate,
+                                      absl::optional<double> max_frame_rate) {
+  webrtc::MutexLock lock(&sinks_and_wants_lock_);
+  min_frame_rate_ = min_frame_rate;
+  max_frame_rate_ = max_frame_rate;
+  for (auto& sink : sink_pairs()) {
+    sink.sink->SetConstraints(min_frame_rate, max_frame_rate);
+  }
 }
 
 }  // namespace rtc

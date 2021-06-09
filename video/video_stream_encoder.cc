@@ -1029,6 +1029,7 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   // Make sure the start bit rate is sane...
   RTC_DCHECK_LE(codec.startBitrate, 1000000);
   max_framerate_ = codec.maxFramerate;
+  RTC_LOG(LS_ERROR) << " *************************** MAX FR " << max_framerate_;
 
   // Inform source about max configured framerate.
   int max_framerate = 0;
@@ -1228,11 +1229,16 @@ void VideoStreamEncoder::OnEncoderSettingsChanged() {
   input_state_provider_.OnEncoderSettingsChanged(encoder_settings);
   bool is_screenshare = encoder_settings.encoder_config().content_type ==
                         VideoEncoderConfig::ContentType::kScreen;
+  RTC_LOG(LS_ERROR) << " *************************** IS SCREENSHARE "
+                    << is_screenshare;
   degradation_preference_manager_->SetIsScreenshare(is_screenshare);
 }
 
 void VideoStreamEncoder::OnFrame(const VideoFrame& video_frame) {
   RTC_DCHECK_RUNS_SERIALIZED(&incoming_frame_race_checker_);
+
+  RTC_LOG(LS_ERROR) << " ======== " << __PRETTY_FUNCTION__;
+
   VideoFrame incoming_frame = video_frame;
 
   // Local time in webrtc time base.
@@ -1337,6 +1343,13 @@ void VideoStreamEncoder::OnFrame(const VideoFrame& video_frame) {
 void VideoStreamEncoder::OnDiscardedFrame() {
   encoder_stats_observer_->OnFrameDropped(
       VideoStreamEncoderObserver::DropReason::kSource);
+}
+
+void VideoStreamEncoder::SetConstraints(absl::optional<double> min_frame_rate,
+                                        absl::optional<double> max_frame_rate) {
+  RTC_LOG(LS_ERROR) << " ============================= " << __PRETTY_FUNCTION__
+                    << " min " << min_frame_rate.value_or(-666) << " max "
+                    << max_frame_rate.value_or(-666);
 }
 
 bool VideoStreamEncoder::EncoderPaused() const {
