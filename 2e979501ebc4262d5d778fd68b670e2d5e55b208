@@ -33,6 +33,24 @@
       "message": "I\u0027m a bit surprised at the number of tests that needed tweaking. Are those all the tests that broke when you added the cooldown, or did you just add it indiscriminately to every OnReceivePacket call?\n",
       "revId": "2e979501ebc4262d5d778fd68b670e2d5e55b208",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09edf10f_38981ad3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-10T11:38:47Z",
+      "side": 1,
+      "message": "Not all of the tests NEEDED to be tweaked, but for the tests that was ensuring that unsignalled ssrcs was not being created I wanted to add the delay in order to not make the test PASS for the *wrong* reason. By using the helper method everywhere we ensure that \"unsignalled ssrc is possible\", which then means that whatever the test was supposed to assert is still acccurate.",
+      "parentUuid": "6642e0b0_05271a1b",
+      "revId": "2e979501ebc4262d5d778fd68b670e2d5e55b208",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
