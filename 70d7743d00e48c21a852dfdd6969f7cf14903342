@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "981e4088_87205a8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-06-10T09:31:45Z",
+      "side": 1,
+      "message": "Thanks so much for your offline comments Hanna!\nI added a bunch of `PredictedMultipleTimes*` tests and that was indeed an important set of cases that was missing. To implement the desired behavior I introduced a ring buffer, so the implementation is now a bit more complex than the 1st version.",
+      "revId": "70d7743d00e48c21a852dfdd6969f7cf14903342",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
