@@ -16,6 +16,23 @@
       "message": "Comments addressed, PTAL Taylor and Harald",
       "revId": "2e979501ebc4262d5d778fd68b670e2d5e55b208",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6642e0b0_05271a1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-10T10:53:27Z",
+      "side": 1,
+      "message": "I\u0027m a bit surprised at the number of tests that needed tweaking. Are those all the tests that broke when you added the cooldown, or did you just add it indiscriminately to every OnReceivePacket call?\n",
+      "revId": "2e979501ebc4262d5d778fd68b670e2d5e55b208",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
