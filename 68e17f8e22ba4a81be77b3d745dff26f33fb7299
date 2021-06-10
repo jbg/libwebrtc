@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4029ed7_0d252183",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-06-10T12:47:26Z",
+      "side": 1,
+      "message": "Oops fixed 😊",
+      "parentUuid": "05878bc7_a3bc903e",
+      "revId": "68e17f8e22ba4a81be77b3d745dff26f33fb7299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "888091e1_a6a685b6",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-06-10T11:23:30Z",
       "side": 1,
       "message": "nit: .Times(1) is implicit and can be omitted.",
+      "range": {
+        "startLine": 1045,
+        "startChar": 12,
+        "endLine": 1045,
+        "endChar": 21
+      },
+      "revId": "68e17f8e22ba4a81be77b3d745dff26f33fb7299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b471d1ca_61ac6ecd",
+        "filename": "video/video_send_stream_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-06-10T12:47:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "888091e1_a6a685b6",
       "range": {
         "startLine": 1045,
         "startChar": 12,
