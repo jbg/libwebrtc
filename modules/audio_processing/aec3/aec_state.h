@@ -75,6 +75,11 @@ class AecState {
     return erle_estimator_.Erle(onset_compensated);
   }
 
+  rtc::ArrayView<const std::array<float, kFftLengthBy2Plus1>> ErleUnbounded()
+      const {
+    return erle_estimator_.ErleUnbounded();
+  }
+
   // Returns the fullband ERLE estimate in log2 units.
   float FullBandErleLog2() const { return erle_estimator_.FullbandErleLog2(); }
 
