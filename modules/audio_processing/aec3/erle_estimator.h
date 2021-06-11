@@ -62,6 +62,12 @@ class ErleEstimator {
                : subband_erle_estimator_.Erle(onset_compensated);
   }
 
+  // Returns the non-capped subband ERLE.
+  rtc::ArrayView<const std::array<float, kFftLengthBy2Plus1>> ErleUnbounded()
+      const {
+    return subband_erle_estimator_.ErleUnbounded();
+  }
+
   // Returns the subband ERLE that are estimated during onsets (only used for
   // testing).
   rtc::ArrayView<const std::array<float, kFftLengthBy2Plus1>> ErleDuringOnsets()
