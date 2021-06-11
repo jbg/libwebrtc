@@ -33,6 +33,23 @@
       "message": "Thanks for this CL, great work.",
       "revId": "fbc203affbbadb000f38bb1c9b7a789f06055f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "474323fe_c15fbcbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2021-06-11T13:12:39Z",
+      "side": 1,
+      "message": "Thanks for reviewing! Submitting.",
+      "revId": "fbc203affbbadb000f38bb1c9b7a789f06055f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
