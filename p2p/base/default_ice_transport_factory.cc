@@ -43,6 +43,7 @@ DefaultIceTransportFactory::CreateIceTransport(
     const std::string& transport_name,
     int component,
     IceTransportInit init) {
+  RTC_LOG(LS_ERROR) << "DEBUG: DefautlIceTransportFactory::CreateIceTransport";
   BasicIceControllerFactory factory;
   return rtc::make_ref_counted<DefaultIceTransport>(
       cricket::P2PTransportChannel::Create(
