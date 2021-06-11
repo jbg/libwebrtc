@@ -48,7 +48,6 @@ FrameEncodeMetadataWriter::TimingFramesLayerInfo::~TimingFramesLayerInfo() =
 FrameEncodeMetadataWriter::FrameEncodeMetadataWriter(
     EncodedImageCallback* frame_drop_callback)
     : frame_drop_callback_(frame_drop_callback),
-      internal_source_(false),
       framerate_fps_(0),
       last_timing_frame_time_ms_(-1),
       reordered_frames_logged_messages_(0),
@@ -57,11 +56,9 @@ FrameEncodeMetadataWriter::FrameEncodeMetadataWriter(
 }
 FrameEncodeMetadataWriter::~FrameEncodeMetadataWriter() {}
 
-void FrameEncodeMetadataWriter::OnEncoderInit(const VideoCodec& codec,
-                                              bool internal_source) {
+void FrameEncodeMetadataWriter::OnEncoderInit(const VideoCodec& codec) {
   MutexLock lock(&lock_);
   codec_settings_ = codec;
-  internal_source_ = internal_source;
 }
 
 void FrameEncodeMetadataWriter::OnSetRates(
@@ -81,9 +78,6 @@ void FrameEncodeMetadataWriter::OnSetRates(
 
 void FrameEncodeMetadataWriter::OnEncodeStarted(const VideoFrame& frame) {
   MutexLock lock(&lock_);
-  if (internal_source_) {
-    return;
-  }
 
   const size_t num_spatial_layers = NumSpatialLayers();
   timing_frames_info_.resize(num_spatial_layers);
@@ -134,12 +128,8 @@ void FrameEncodeMetadataWriter::FillTimingInfo(size_t simulcast_svc_idx,
 
   int64_t encode_done_ms = rtc::TimeMillis();
 
-  // Encoders with internal sources do not call OnEncodeStarted
-  // |timing_frames_info_| may be not filled here.
-  if (!internal_source_) {
-    encode_start_ms =
-        ExtractEncodeStartTimeAndFillMetadata(simulcast_svc_idx, encoded_image);
-  }
+  encode_start_ms =
+      ExtractEncodeStartTimeAndFillMetadata(simulcast_svc_idx, encoded_image);
 
   if (timing_frames_info_.size() > simulcast_svc_idx) {
     size_t target_bitrate =
@@ -176,7 +166,7 @@ void FrameEncodeMetadataWriter::FillTimingInfo(size_t simulcast_svc_idx,
   // Workaround for chromoting encoder: it passes encode start and finished
   // timestamps in |timing_| field, but they (together with capture timestamp)
   // are not in the WebRTC clock.
-  if (internal_source_ && encoded_image->timing_.encode_finish_ms > 0 &&
+  if (encoded_image->timing_.encode_finish_ms > 0 &&
       encoded_image->timing_.encode_start_ms > 0) {
     int64_t clock_offset_ms =
         encode_done_ms - encoded_image->timing_.encode_finish_ms;

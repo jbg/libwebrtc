@@ -837,7 +837,6 @@ VideoEncoder::EncoderInfo SimulcastEncoderAdapter::GetEncoderInfo() const {
           encoder_impl_info.has_trusted_rate_controller;
       encoder_info.is_hardware_accelerated =
           encoder_impl_info.is_hardware_accelerated;
-      encoder_info.has_internal_source = encoder_impl_info.has_internal_source;
     } else {
       encoder_info.implementation_name += ", ";
       encoder_info.implementation_name += encoder_impl_info.implementation_name;
@@ -856,9 +855,6 @@ VideoEncoder::EncoderInfo SimulcastEncoderAdapter::GetEncoderInfo() const {
       // thresholds in CPU adaptation.
       encoder_info.is_hardware_accelerated |=
           encoder_impl_info.is_hardware_accelerated;
-
-      // Has internal source only if all encoders have it.
-      encoder_info.has_internal_source &= encoder_impl_info.has_internal_source;
     }
     encoder_info.fps_allocation[i] = encoder_impl_info.fps_allocation[0];
     encoder_info.requested_resolution_alignment = cricket::LeastCommonMultiple(

@@ -7378,72 +7378,6 @@ TEST_F(VideoStreamEncoderTest, SetsFrameTypesSimulcast) {
   video_stream_encoder_->Stop();
 }
 
-TEST_F(VideoStreamEncoderTest, RequestKeyframeInternalSource) {
-  // Configure internal source factory and setup test again.
-  encoder_factory_.SetHasInternalSource(true);
-  ResetEncoder("VP8", 1, 1, 1, false);
-  video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
-      DataRate::BitsPerSec(kTargetBitrateBps),
-      DataRate::BitsPerSec(kTargetBitrateBps),
-      DataRate::BitsPerSec(kTargetBitrateBps), 0, 0, 0);
-
-  // Call encoder directly, simulating internal source where encoded frame
-  // callback in VideoStreamEncoder is called despite no OnFrame().
-  fake_encoder_.InjectFrame(CreateFrame(1, nullptr), true);
-  EXPECT_TRUE(WaitForFrame(kDefaultTimeoutMs));
-  EXPECT_THAT(
-      fake_encoder_.LastFrameTypes(),
-      ::testing::ElementsAre(VideoFrameType{VideoFrameType::kVideoFrameKey}));
-
-  const std::vector<VideoFrameType> kDeltaFrame = {
-      VideoFrameType::kVideoFrameDelta};
-  // Need to set timestamp manually since manually for injected frame.
-  VideoFrame frame = CreateFrame(101, nullptr);
-  frame.set_timestamp(101);
-  fake_encoder_.InjectFrame(frame, false);
-  EXPECT_TRUE(WaitForFrame(kDefaultTimeoutMs));
-  EXPECT_THAT(
-      fake_encoder_.LastFrameTypes(),
-      ::testing::ElementsAre(VideoFrameType{VideoFrameType::kVideoFrameDelta}));
-
-  // Request key-frame. The forces a dummy frame down into the encoder.
-  fake_encoder_.ExpectNullFrame();
-  video_stream_encoder_->SendKeyFrame();
-  EXPECT_TRUE(WaitForFrame(kDefaultTimeoutMs));
-  EXPECT_THAT(
-      fake_encoder_.LastFrameTypes(),
-      ::testing::ElementsAre(VideoFrameType{VideoFrameType::kVideoFrameKey}));
-
-  video_stream_encoder_->Stop();
-}
-
-TEST_F(VideoStreamEncoderTest, AdjustsTimestampInternalSource) {
-  // Configure internal source factory and setup test again.
-  encoder_factory_.SetHasInternalSource(true);
-  ResetEncoder("VP8", 1, 1, 1, false);
-  video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
-      DataRate::BitsPerSec(kTargetBitrateBps),
-      DataRate::BitsPerSec(kTargetBitrateBps),
-      DataRate::BitsPerSec(kTargetBitrateBps), 0, 0, 0);
-
-  int64_t timestamp = 1;
-  EncodedImage image;
-  image.capture_time_ms_ = ++timestamp;
-  image.SetTimestamp(static_cast<uint32_t>(timestamp * 90));
-  const int64_t kEncodeFinishDelayMs = 10;
-  image.timing_.encode_start_ms = timestamp;
-  image.timing_.encode_finish_ms = timestamp + kEncodeFinishDelayMs;
-  fake_encoder_.InjectEncodedImage(image, /*codec_specific_info=*/nullptr);
-  // Wait for frame without incrementing clock.
-  EXPECT_TRUE(sink_.WaitForFrame(kDefaultTimeoutMs));
-  // Frame is captured kEncodeFinishDelayMs before it's encoded, so restored
-  // capture timestamp should be kEncodeFinishDelayMs in the past.
-  EXPECT_EQ(sink_.GetLastCaptureTimeMs(),
-            CurrentTimeMs() - kEncodeFinishDelayMs);
-
-  video_stream_encoder_->Stop();
-}
-
 TEST_F(VideoStreamEncoderTest, DoesNotRewriteH264BitstreamWithOptimalSps) {
   // SPS contains VUI with restrictions on the maximum number of reordered
   // pictures, there is no need to rewrite the bitstream to enable faster
@@ -8095,8 +8029,6 @@ TEST_F(VideoStreamEncoderTest, EncoderResolutionsExposedInSimulcast) {
 }
 
 TEST_F(VideoStreamEncoderTest, QpPresent_QpKept) {
-  // Enable encoder source to force encoder reconfig.
-  encoder_factory_.SetHasInternalSource(true);
   ResetEncoder("VP8", 1, 1, 1, false);
 
   // Set QP on encoded frame and pass the frame to encode complete callback.
@@ -8115,8 +8047,6 @@ TEST_F(VideoStreamEncoderTest, QpPresent_QpKept) {
 }
 
 TEST_F(VideoStreamEncoderTest, QpAbsent_QpParsed) {
-  // Enable encoder source to force encoder reconfig.
-  encoder_factory_.SetHasInternalSource(true);
   ResetEncoder("VP8", 1, 1, 1, false);
 
   // Pass an encoded frame without QP to encode complete callback. QP should be
@@ -8137,8 +8067,6 @@ TEST_F(VideoStreamEncoderTest, QpAbsentParsingDisabled_QpAbsent) {
   webrtc::test::ScopedFieldTrials field_trials(
       "WebRTC-QpParsingKillSwitch/Enabled/");
 
-  // Enable encoder source to force encoder reconfig.
-  encoder_factory_.SetHasInternalSource(true);
   ResetEncoder("VP8", 1, 1, 1, false);
 
   EncodedImage encoded_image;
