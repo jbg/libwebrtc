@@ -16,6 +16,161 @@
       "message": "Jesús, could you please take a look at this CL?",
       "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2aa3aae_0ca08132",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-06-11T10:13:08Z",
+      "side": 1,
+      "message": "Thanks for this CL, it looks great.",
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4528cd27_d65d1f3d",
+        "filename": "modules/audio_processing/aec3/erle_estimator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-06-11T10:13:08Z",
+      "side": 1,
+      "message": "shouldn\u0027t we do something similar for the signal_dependent_erle_estimator?",
+      "range": {
+        "startLine": 68,
+        "startChar": 11,
+        "endLine": 68,
+        "endChar": 51
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb9b6060_d8ffdaf6",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-06-11T10:13:08Z",
+      "side": 1,
+      "message": "nit: .0f\nhttps://google.github.io/styleguide/cppguide.html#Floating_Literals",
+      "range": {
+        "startLine": 174,
+        "startChar": 50,
+        "endLine": 174,
+        "endChar": 52
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b22ee539_34692615",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-06-11T10:13:08Z",
+      "side": 1,
+      "message": "I usually like to put those dumper at the end of the functions but it is a personal taste.",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 70
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "233225ba_b736a9b4",
+        "filename": "modules/audio_processing/aec3/suppression_gain_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-06-11T10:13:08Z",
+      "side": 1,
+      "message": "nit: 0.0f",
+      "range": {
+        "startLine": 31,
+        "startChar": 70,
+        "endLine": 31,
+        "endChar": 73
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9765280_ad07cff0",
+        "filename": "modules/audio_processing/aec3/suppression_gain_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-06-11T10:13:08Z",
+      "side": 1,
+      "message": "nit: 0.1f",
+      "range": {
+        "startLine": 96,
+        "startChar": 26,
+        "endLine": 96,
+        "endChar": 29
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31aa9b3f_b4ec7113",
+        "filename": "modules/audio_processing/aec3/suppression_gain_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-06-11T10:13:08Z",
+      "side": 1,
+      "message": "nit: .0f",
+      "range": {
+        "startLine": 143,
+        "startChar": 37,
+        "endLine": 143,
+        "endChar": 39
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
