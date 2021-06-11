@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a8eb8a7_42772b5b",
+        "filename": "modules/audio_processing/aec3/erle_estimator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2021-06-11T12:05:39Z",
+      "side": 1,
+      "message": "Good point. Now returning the bounded ERLE for the signal dependent ERLE estimator as decided in offline discussion.",
+      "parentUuid": "4528cd27_d65d1f3d",
+      "range": {
+        "startLine": 68,
+        "startChar": 11,
+        "endLine": 68,
+        "endChar": 51
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb9b6060_d8ffdaf6",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-06-11T10:13:08Z",
       "side": 1,
       "message": "nit: .0f\nhttps://google.github.io/styleguide/cppguide.html#Floating_Literals",
+      "range": {
+        "startLine": 174,
+        "startChar": 50,
+        "endLine": 174,
+        "endChar": 52
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63611aed_8c877344",
+        "filename": "modules/audio_processing/aec3/subband_erle_estimator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2021-06-11T12:05:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb9b6060_d8ffdaf6",
       "range": {
         "startLine": 174,
         "startChar": 50,
@@ -104,6 +152,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fba13b8d_65ac7a0a",
+        "filename": "modules/audio_processing/aec3/suppression_gain.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2021-06-11T12:05:39Z",
+      "side": 1,
+      "message": "Agree.",
+      "parentUuid": "b22ee539_34692615",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 70
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "233225ba_b736a9b4",
@@ -117,6 +189,30 @@
       "writtenOn": "2021-06-11T10:13:08Z",
       "side": 1,
       "message": "nit: 0.0f",
+      "range": {
+        "startLine": 31,
+        "startChar": 70,
+        "endLine": 31,
+        "endChar": 73
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf6b2eb0_b80b5e2e",
+        "filename": "modules/audio_processing/aec3/suppression_gain_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2021-06-11T12:05:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "233225ba_b736a9b4",
       "range": {
         "startLine": 31,
         "startChar": 70,
@@ -150,6 +246,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bf5589d_9d7823f6",
+        "filename": "modules/audio_processing/aec3/suppression_gain_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2021-06-11T12:05:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9765280_ad07cff0",
+      "range": {
+        "startLine": 96,
+        "startChar": 26,
+        "endLine": 96,
+        "endChar": 29
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31aa9b3f_b4ec7113",
@@ -163,6 +283,30 @@
       "writtenOn": "2021-06-11T10:13:08Z",
       "side": 1,
       "message": "nit: .0f",
+      "range": {
+        "startLine": 143,
+        "startChar": 37,
+        "endLine": 143,
+        "endChar": 39
+      },
+      "revId": "14e6a371f85e1bb6c00f453ce14a2b90ff36d0d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1f42d03_54653b10",
+        "filename": "modules/audio_processing/aec3/suppression_gain_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2021-06-11T12:05:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31aa9b3f_b4ec7113",
       "range": {
         "startLine": 143,
         "startChar": 37,
