@@ -1016,6 +1016,21 @@ RTCError JsepTransportController::MaybeCreateJsepTransport(
   if (transport) {
     return RTCError::OK();
   }
+  // If we have agreed to a bundle, the new mid will be added to the bundle
+  // according to JSEP, and the responder can't move it out of the group
+  // according to BUNDLE. So don't create a transport.
+  // The MID will be added to the bundle elsewhere in the code.
+  if (bundles_.bundle_groups().size() > 0) {
+    const auto& default_bundle_group = bundles_.bundle_groups()[0];
+    if (default_bundle_group->content_names().size() > 0) {
+      auto bundle_transport =
+          GetJsepTransportByName(default_bundle_group->content_names()[0]);
+      if (bundle_transport) {
+        transports_.SetTransportForMid(content_info.name, bundle_transport);
+        return RTCError::OK();
+      }
+    }
+  }
 
   const cricket::MediaContentDescription* content_desc =
       content_info.media_description();
