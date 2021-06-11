@@ -16,6 +16,23 @@
       "message": "Thanks for the very speedy review. I have addressed your comments. Please take another look.",
       "revId": "fbc203affbbadb000f38bb1c9b7a789f06055f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bd8ee16_8595dd0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2021-06-11T13:07:32Z",
+      "side": 1,
+      "message": "Thanks for this CL, great work.",
+      "revId": "fbc203affbbadb000f38bb1c9b7a789f06055f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
