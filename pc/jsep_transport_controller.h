@@ -366,8 +366,10 @@ class JsepTransportController : public sigslot::has_slots<> {
 
   // Get the JsepTransport without considering the BUNDLE group. Return nullptr
   // if the JsepTransport is destroyed.
+  ABSL_DEPRECATED("Use GetJsepTransportForMid")
   const cricket::JsepTransport* GetJsepTransportByName(
       const std::string& transport_name) const RTC_RUN_ON(network_thread_);
+  ABSL_DEPRECATED("Use GetJsepTransportForMid")
   cricket::JsepTransport* GetJsepTransportByName(
       const std::string& transport_name) RTC_RUN_ON(network_thread_);
 

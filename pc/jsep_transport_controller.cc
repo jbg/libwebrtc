@@ -198,7 +198,7 @@ bool JsepTransportController::NeedsIceRestart(
   RTC_DCHECK_RUN_ON(network_thread_);
 
   const cricket::JsepTransport* transport =
-      GetJsepTransportByName(transport_name);
+      GetJsepTransportForMid(transport_name);
   if (!transport) {
     return false;
   }
@@ -257,7 +257,7 @@ JsepTransportController::GetLocalCertificate(
     const std::string& transport_name) const {
   RTC_DCHECK_RUN_ON(network_thread_);
 
-  const cricket::JsepTransport* t = GetJsepTransportByName(transport_name);
+  const cricket::JsepTransport* t = GetJsepTransportForMid(transport_name);
   if (!t) {
     return nullptr;
   }
@@ -272,7 +272,7 @@ JsepTransportController::GetRemoteSSLCertChain(
   // Get the certificate from the RTP transport's DTLS handshake. Should be
   // identical to the RTCP transport's, since they were given the same remote
   // fingerprint.
-  auto jsep_transport = GetJsepTransportByName(transport_name);
+  auto jsep_transport = GetJsepTransportForMid(transport_name);
   if (!jsep_transport) {
     return nullptr;
   }
@@ -301,7 +301,7 @@ RTCError JsepTransportController::AddRemoteCandidates(
     const cricket::Candidates& candidates) {
   RTC_DCHECK_RUN_ON(network_thread_);
   RTC_DCHECK(VerifyCandidates(candidates).ok());
-  auto jsep_transport = GetJsepTransportByName(transport_name);
+  auto jsep_transport = GetJsepTransportForMid(transport_name);
   if (!jsep_transport) {
     RTC_LOG(LS_WARNING) << "Not adding candidate because the JsepTransport "
                            "doesn't exist. Ignore it.";
@@ -340,7 +340,7 @@ RTCError JsepTransportController::RemoveRemoteCandidates(
     const std::string& transport_name = kv.first;
     const cricket::Candidates& candidates = kv.second;
     cricket::JsepTransport* jsep_transport =
-        GetJsepTransportByName(transport_name);
+        GetJsepTransportForMid(transport_name);
     if (!jsep_transport) {
       RTC_LOG(LS_WARNING)
           << "Not removing candidate because the JsepTransport doesn't exist.";
@@ -363,7 +363,7 @@ bool JsepTransportController::GetStats(const std::string& transport_name,
                                        cricket::TransportStats* stats) {
   RTC_DCHECK_RUN_ON(network_thread_);
 
-  cricket::JsepTransport* transport = GetJsepTransportByName(transport_name);
+  cricket::JsepTransport* transport = GetJsepTransportForMid(transport_name);
   if (!transport) {
     return false;
   }
@@ -863,7 +863,7 @@ bool JsepTransportController::HandleBundledContent(
   TRACE_EVENT0("webrtc", "JsepTransportController::HandleBundledContent");
   RTC_DCHECK(bundle_group.FirstContentName());
   auto jsep_transport =
-      GetJsepTransportByName(*bundle_group.FirstContentName());
+      GetJsepTransportForMid(*bundle_group.FirstContentName());
   RTC_DCHECK(jsep_transport);
   // If the content is bundled, let the
   // BaseChannel/SctpTransport change the RtpTransport/DtlsTransport first,
@@ -993,21 +993,23 @@ cricket::JsepTransport* JsepTransportController::GetJsepTransportForMid(
   return transports_.GetTransportForMid(mid);
 }
 
+// Deprecated
 const cricket::JsepTransport* JsepTransportController::GetJsepTransportByName(
     const std::string& transport_name) const {
-  return transports_.GetTransportByName(transport_name);
+  return transports_.GetTransportForMid(transport_name);
 }
 
+// Deprecated
 cricket::JsepTransport* JsepTransportController::GetJsepTransportByName(
     const std::string& transport_name) {
-  return transports_.GetTransportByName(transport_name);
+  return transports_.GetTransportForMid(transport_name);
 }
 
 RTCError JsepTransportController::MaybeCreateJsepTransport(
     bool local,
     const cricket::ContentInfo& content_info,
     const cricket::SessionDescription& description) {
-  cricket::JsepTransport* transport = GetJsepTransportByName(content_info.name);
+  cricket::JsepTransport* transport = GetJsepTransportForMid(content_info.name);
   if (transport) {
     return RTCError::OK();
   }

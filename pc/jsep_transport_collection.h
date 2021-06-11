@@ -80,10 +80,6 @@ class JsepTransportCollection {
                          std::unique_ptr<cricket::JsepTransport> transport);
   std::vector<cricket::JsepTransport*> Transports();
   void DestroyAllTransports();
-  // Lookup a JsepTransport by the MID that was used to register it.
-  cricket::JsepTransport* GetTransportByName(const std::string& mid);
-  const cricket::JsepTransport* GetTransportByName(
-      const std::string& mid) const;
   // Lookup a JsepTransport by any MID that refers to it.
   cricket::JsepTransport* GetTransportForMid(const std::string& mid);
   const cricket::JsepTransport* GetTransportForMid(

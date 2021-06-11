@@ -78,20 +78,6 @@ void JsepTransportCollection::DestroyAllTransports() {
   RTC_DCHECK(IsConsistent());
 }
 
-const cricket::JsepTransport* JsepTransportCollection::GetTransportByName(
-    const std::string& transport_name) const {
-  RTC_DCHECK_RUN_ON(&sequence_checker_);
-  auto it = jsep_transports_by_name_.find(transport_name);
-  return (it == jsep_transports_by_name_.end()) ? nullptr : it->second.get();
-}
-
-cricket::JsepTransport* JsepTransportCollection::GetTransportByName(
-    const std::string& transport_name) {
-  RTC_DCHECK_RUN_ON(&sequence_checker_);
-  auto it = jsep_transports_by_name_.find(transport_name);
-  return (it == jsep_transports_by_name_.end()) ? nullptr : it->second.get();
-}
-
 cricket::JsepTransport* JsepTransportCollection::GetTransportForMid(
     const std::string& mid) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
