@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e579f97_e0f4a046",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-13T19:42:04Z",
+      "side": 1,
+      "message": "The biggest change, usage-wise, is the change from a tons-of-arguments constructor to an AudioReceiveStream::Config class. Seems to be worth mentioning in the CL description.\n\nBut the biggest change for safety is making the stream const. So I\u0027m +1ing it.\n\n\n",
+      "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a66a711_a9b89cfc",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-13T19:42:04Z",
+      "side": 1,
+      "message": "Why isn\u0027t this a constructor on AudioReceiveStream::Config?\nThat would allow us to consider making members of that struct const, which is a Good Thing in general.\n\n(if that\u0027s a Good Idea (tm), but out of scope for this CL, mark it with a TODO).",
+      "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "446495f0_ce826cf9",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-13T19:42:04Z",
+      "side": 1,
+      "message": "This change means that the VoiceMediaChannel no longer remembers what the frame decryptor was. Does it ever need to remember that, now that Recreate is gone?\nIf so, does it really belong in config any more?",
+      "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5065714_ac725c96",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-13T19:42:04Z",
+      "side": 1,
+      "message": "The name of this method seems to have been a lie, both before and after this CL.\nShould it change?\n\nSame comment about config as above.",
+      "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
