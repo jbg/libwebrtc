@@ -22,6 +22,7 @@
 #include "api/transport/field_trial_based_config.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/dlrr.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_config.h"
+#include "modules/rtp_rtcp/source/rtp_rtcp_interface.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "system_wrappers/include/ntp_time.h"
@@ -37,6 +38,25 @@ const int64_t kRtpRtcpMaxIdleTimeProcessMs = 5;
 const int64_t kRtpRtcpRttProcessTimeMs = 1000;
 const int64_t kRtpRtcpBitrateProcessTimeMs = 10;
 const int64_t kDefaultExpectedRetransmissionTimeMs = 125;
+
+RTCPSender::Configuration ToRtcpSenderConfiguration(
+    const RtpRtcpInterface::Configuration& configuration) {
+  RTCPSender::Configuration result;
+  result.audio = configuration.audio;
+  result.local_media_ssrc = configuration.local_media_ssrc;
+  result.clock = configuration.clock;
+  result.outgoing_transport = configuration.outgoing_transport;
+  result.non_sender_rtt_measurement = configuration.non_sender_rtt_measurement;
+  result.event_log = configuration.event_log;
+  if (configuration.rtcp_report_interval_ms) {
+    result.rtcp_report_interval =
+        TimeDelta::Millis(configuration.rtcp_report_interval_ms);
+  }
+  result.receive_statistics = configuration.receive_statistics;
+  result.rtcp_packet_type_counter_observer =
+      configuration.rtcp_packet_type_counter_observer;
+  return result;
+}
 }  // namespace
 
 ModuleRtpRtcpImpl::RtpSenderContext::RtpSenderContext(
@@ -58,7 +78,7 @@ std::unique_ptr<RtpRtcp> RtpRtcp::DEPRECATED_Create(
 }
 
 ModuleRtpRtcpImpl::ModuleRtpRtcpImpl(const Configuration& configuration)
-    : rtcp_sender_(configuration),
+    : rtcp_sender_(ToRtcpSenderConfiguration(configuration)),
       rtcp_receiver_(configuration, this),
       clock_(configuration.clock),
       last_bitrate_process_time_(clock_->TimeInMilliseconds()),

@@ -37,6 +37,25 @@ const int64_t kRtpRtcpMaxIdleTimeProcessMs = 5;
 const int64_t kDefaultExpectedRetransmissionTimeMs = 125;
 
 constexpr TimeDelta kRttUpdateInterval = TimeDelta::Millis(1000);
+
+RTCPSender::Configuration ToRtcpSenderConfiguration(
+    const RtpRtcpInterface::Configuration& configuration) {
+  RTCPSender::Configuration result;
+  result.audio = configuration.audio;
+  result.local_media_ssrc = configuration.local_media_ssrc;
+  result.clock = configuration.clock;
+  result.outgoing_transport = configuration.outgoing_transport;
+  result.non_sender_rtt_measurement = configuration.non_sender_rtt_measurement;
+  result.event_log = configuration.event_log;
+  if (configuration.rtcp_report_interval_ms) {
+    result.rtcp_report_interval =
+        TimeDelta::Millis(configuration.rtcp_report_interval_ms);
+  }
+  result.receive_statistics = configuration.receive_statistics;
+  result.rtcp_packet_type_counter_observer =
+      configuration.rtcp_packet_type_counter_observer;
+  return result;
+}
 }  // namespace
 
 ModuleRtpRtcpImpl2::RtpSenderContext::RtpSenderContext(
@@ -55,7 +74,7 @@ void ModuleRtpRtcpImpl2::RtpSenderContext::AssignSequenceNumber(
 
 ModuleRtpRtcpImpl2::ModuleRtpRtcpImpl2(const Configuration& configuration)
     : worker_queue_(TaskQueueBase::Current()),
-      rtcp_sender_(configuration),
+      rtcp_sender_(ToRtcpSenderConfiguration(configuration)),
       rtcp_receiver_(configuration, this),
       clock_(configuration.clock),
       last_rtt_process_time_(clock_->TimeInMilliseconds()),
