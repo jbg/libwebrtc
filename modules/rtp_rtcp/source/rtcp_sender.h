@@ -42,6 +42,27 @@ class RtcEventLog;
 
 class RTCPSender final {
  public:
+  struct Configuration {
+    // True for a audio version of the RTP/RTCP module object false will create
+    // a video version.
+    bool audio = false;
+    // SSRCs for media and retransmission, respectively.
+    // FlexFec SSRC is fetched from |flexfec_sender|.
+    uint32_t local_media_ssrc = 0;
+    // The clock to use to read time. If nullptr then system clock will be used.
+    Clock* clock = nullptr;
+    // Transport object that will be called when packets are ready to be sent
+    // out on the network.
+    Transport* outgoing_transport = nullptr;
+    // Estimate RTT as non-sender as described in
+    // https://tools.ietf.org/html/rfc3611#section-4.4 and #section-4.5
+    bool non_sender_rtt_measurement = false;
+
+    RtcEventLog* event_log = nullptr;
+    int rtcp_report_interval_ms = 0;
+    ReceiveStatisticsProvider* receive_statistics = nullptr;
+    RtcpPacketTypeCounterObserver* rtcp_packet_type_counter_observer = nullptr;
+  };
   struct FeedbackState {
     FeedbackState();
     FeedbackState(const FeedbackState&);
@@ -63,6 +84,9 @@ class RTCPSender final {
     RTCPReceiver* receiver;
   };
 
+  explicit RTCPSender(const Configuration& config);
+  // TODO(bugs.webrtc.org/11581): delete this temporary compatibility helper
+  // once downstream dependencies migrates.
   explicit RTCPSender(const RtpRtcpInterface::Configuration& config);
 
   RTCPSender() = delete;

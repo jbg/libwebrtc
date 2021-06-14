@@ -71,7 +71,7 @@ static const uint32_t kStartRtpTimestamp = 0x34567;
 static const uint32_t kRtpTimestamp = 0x45678;
 
 std::unique_ptr<RTCPSender> CreateRtcpSender(
-    const RtpRtcpInterface::Configuration& config,
+    const RTCPSender::Configuration& config,
     bool init_timestamps = true) {
   auto rtcp_sender = std::make_unique<RTCPSender>(config);
   rtcp_sender->SetRemoteSSRC(kRemoteSsrc);
@@ -82,6 +82,19 @@ std::unique_ptr<RTCPSender> CreateRtcpSender(
                                 /*payload_type=*/0);
   }
   return rtcp_sender;
+}
+
+RTCPSender::Configuration ToSenderConfig(
+    const RtpRtcpInterface::Configuration& config) {
+  return {.audio = config.audio,
+          .local_media_ssrc = config.local_media_ssrc,
+          .clock = config.clock,
+          .outgoing_transport = config.outgoing_transport,
+          .non_sender_rtt_measurement = config.non_sender_rtt_measurement,
+          .rtcp_report_interval_ms = config.rtcp_report_interval_ms,
+          .receive_statistics = config.receive_statistics,
+          .rtcp_packet_type_counter_observer =
+              config.rtcp_packet_type_counter_observer};
 }
 
 }  // namespace
@@ -131,21 +144,21 @@ class RtcpSenderTest : public ::testing::Test {
 };
 
 TEST_F(RtcpSenderTest, SetRtcpStatus) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   EXPECT_EQ(RtcpMode::kOff, rtcp_sender->Status());
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   EXPECT_EQ(RtcpMode::kReducedSize, rtcp_sender->Status());
 }
 
 TEST_F(RtcpSenderTest, SetSendingStatus) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   EXPECT_FALSE(rtcp_sender->Sending());
   rtcp_sender->SetSendingStatus(feedback_state(), true);
   EXPECT_TRUE(rtcp_sender->Sending());
 }
 
 TEST_F(RtcpSenderTest, NoPacketSentIfOff) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kOff);
   EXPECT_EQ(-1, rtcp_sender->SendRTCP(feedback_state(), kRtcpSr));
 }
@@ -153,7 +166,7 @@ TEST_F(RtcpSenderTest, NoPacketSentIfOff) {
 TEST_F(RtcpSenderTest, SendSr) {
   const uint32_t kPacketCount = 0x12345;
   const uint32_t kOctetCount = 0x23456;
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   RTCPSender::FeedbackState feedback_state = rtp_rtcp_impl_->GetFeedbackState();
   rtcp_sender->SetSendingStatus(feedback_state, true);
@@ -176,7 +189,7 @@ TEST_F(RtcpSenderTest, SendConsecutiveSrWithExactSlope) {
   const uint32_t kOctetCount = 0x23456;
   const int kTimeBetweenSRsUs = 10043;  // Not exact value in milliseconds.
   const int kExtraPackets = 30;
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   // Make sure clock is not exactly at some milliseconds point.
   clock_.AdvanceTimeMicroseconds(kTimeBetweenSRsUs);
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
@@ -212,7 +225,8 @@ TEST_F(RtcpSenderTest, DoNotSendSrBeforeRtp) {
   config.outgoing_transport = &test_transport_;
   config.rtcp_report_interval_ms = 1000;
   config.local_media_ssrc = kSenderSsrc;
-  auto rtcp_sender = CreateRtcpSender(config, /*init_timestamps=*/false);
+  auto rtcp_sender =
+      CreateRtcpSender(ToSenderConfig(config), /*init_timestamps=*/false);
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   rtcp_sender->SetSendingStatus(feedback_state(), true);
 
@@ -233,7 +247,8 @@ TEST_F(RtcpSenderTest, DoNotSendCompundBeforeRtp) {
   config.outgoing_transport = &test_transport_;
   config.rtcp_report_interval_ms = 1000;
   config.local_media_ssrc = kSenderSsrc;
-  auto rtcp_sender = CreateRtcpSender(config, /*init_timestamps=*/false);
+  auto rtcp_sender =
+      CreateRtcpSender(ToSenderConfig(config), /*init_timestamps=*/false);
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   rtcp_sender->SetSendingStatus(feedback_state(), true);
 
@@ -244,7 +259,7 @@ TEST_F(RtcpSenderTest, DoNotSendCompundBeforeRtp) {
 }
 
 TEST_F(RtcpSenderTest, SendRr) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpRr));
   EXPECT_EQ(1, parser()->receiver_report()->num_packets());
@@ -254,7 +269,7 @@ TEST_F(RtcpSenderTest, SendRr) {
 
 TEST_F(RtcpSenderTest, SendRrWithOneReportBlock) {
   const uint16_t kSeqNum = 11111;
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   InsertIncomingPacket(kRemoteSsrc, kSeqNum);
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpRr));
@@ -270,7 +285,7 @@ TEST_F(RtcpSenderTest, SendRrWithOneReportBlock) {
 
 TEST_F(RtcpSenderTest, SendRrWithTwoReportBlocks) {
   const uint16_t kSeqNum = 11111;
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   InsertIncomingPacket(kRemoteSsrc, kSeqNum);
   InsertIncomingPacket(kRemoteSsrc + 1, kSeqNum + 1);
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
@@ -285,7 +300,7 @@ TEST_F(RtcpSenderTest, SendRrWithTwoReportBlocks) {
 }
 
 TEST_F(RtcpSenderTest, SendSdes) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   EXPECT_EQ(0, rtcp_sender->SetCNAME("alice@host"));
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpSdes));
@@ -296,7 +311,7 @@ TEST_F(RtcpSenderTest, SendSdes) {
 }
 
 TEST_F(RtcpSenderTest, SdesIncludedInCompoundPacket) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   EXPECT_EQ(0, rtcp_sender->SetCNAME("alice@host"));
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpReport));
@@ -306,7 +321,7 @@ TEST_F(RtcpSenderTest, SdesIncludedInCompoundPacket) {
 }
 
 TEST_F(RtcpSenderTest, SendBye) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpBye));
   EXPECT_EQ(1, parser()->bye()->num_packets());
@@ -314,7 +329,7 @@ TEST_F(RtcpSenderTest, SendBye) {
 }
 
 TEST_F(RtcpSenderTest, StopSendingTriggersBye) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   rtcp_sender->SetSendingStatus(feedback_state(), true);
   rtcp_sender->SetSendingStatus(feedback_state(), false);
@@ -323,7 +338,7 @@ TEST_F(RtcpSenderTest, StopSendingTriggersBye) {
 }
 
 TEST_F(RtcpSenderTest, SendFir) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpFir));
   EXPECT_EQ(1, parser()->fir()->num_packets());
@@ -337,7 +352,7 @@ TEST_F(RtcpSenderTest, SendFir) {
 }
 
 TEST_F(RtcpSenderTest, SendPli) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpPli));
   EXPECT_EQ(1, parser()->pli()->num_packets());
@@ -346,7 +361,7 @@ TEST_F(RtcpSenderTest, SendPli) {
 }
 
 TEST_F(RtcpSenderTest, SendNack) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   const uint16_t kList[] = {0, 1, 16};
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpNack,
@@ -358,7 +373,7 @@ TEST_F(RtcpSenderTest, SendNack) {
 }
 
 TEST_F(RtcpSenderTest, SendLossNotificationBufferingNotAllowed) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   constexpr uint16_t kLastDecoded = 0x1234;
   constexpr uint16_t kLastReceived = 0x4321;
@@ -375,7 +390,7 @@ TEST_F(RtcpSenderTest, SendLossNotificationBufferingNotAllowed) {
 }
 
 TEST_F(RtcpSenderTest, SendLossNotificationBufferingAllowed) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   constexpr uint16_t kLastDecoded = 0x1234;
   constexpr uint16_t kLastReceived = 0x4321;
@@ -407,7 +422,7 @@ TEST_F(RtcpSenderTest, SendLossNotificationBufferingAllowed) {
 }
 
 TEST_F(RtcpSenderTest, RembNotIncludedBeforeSet) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
 
   rtcp_sender->SendRTCP(feedback_state(), kRtcpRr);
@@ -419,7 +434,7 @@ TEST_F(RtcpSenderTest, RembNotIncludedBeforeSet) {
 TEST_F(RtcpSenderTest, RembNotIncludedAfterUnset) {
   const int64_t kBitrate = 261011;
   const std::vector<uint32_t> kSsrcs = {kRemoteSsrc, kRemoteSsrc + 1};
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   rtcp_sender->SetRemb(kBitrate, kSsrcs);
   rtcp_sender->SendRTCP(feedback_state(), kRtcpRr);
@@ -436,7 +451,7 @@ TEST_F(RtcpSenderTest, RembNotIncludedAfterUnset) {
 TEST_F(RtcpSenderTest, SendRemb) {
   const int64_t kBitrate = 261011;
   const std::vector<uint32_t> kSsrcs = {kRemoteSsrc, kRemoteSsrc + 1};
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   rtcp_sender->SetRemb(kBitrate, kSsrcs);
 
@@ -452,7 +467,7 @@ TEST_F(RtcpSenderTest, SendRemb) {
 TEST_F(RtcpSenderTest, RembIncludedInEachCompoundPacketAfterSet) {
   const int kBitrate = 261011;
   const std::vector<uint32_t> kSsrcs = {kRemoteSsrc, kRemoteSsrc + 1};
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   rtcp_sender->SetRemb(kBitrate, kSsrcs);
 
@@ -464,7 +479,7 @@ TEST_F(RtcpSenderTest, RembIncludedInEachCompoundPacketAfterSet) {
 }
 
 TEST_F(RtcpSenderTest, SendXrWithDlrr) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   RTCPSender::FeedbackState feedback_state = rtp_rtcp_impl_->GetFeedbackState();
   rtcp::ReceiveTimeInfo last_xr_rr;
@@ -484,7 +499,7 @@ TEST_F(RtcpSenderTest, SendXrWithDlrr) {
 
 TEST_F(RtcpSenderTest, SendXrWithMultipleDlrrSubBlocks) {
   const size_t kNumReceivers = 2;
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   RTCPSender::FeedbackState feedback_state = rtp_rtcp_impl_->GetFeedbackState();
   for (size_t i = 0; i < kNumReceivers; ++i) {
@@ -512,7 +527,7 @@ TEST_F(RtcpSenderTest, SendXrWithMultipleDlrrSubBlocks) {
 TEST_F(RtcpSenderTest, SendXrWithRrtr) {
   RtpRtcpInterface::Configuration config = GetDefaultConfig();
   config.non_sender_rtt_measurement = true;
-  auto rtcp_sender = CreateRtcpSender(config);
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(config));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   rtcp_sender->SetSendingStatus(feedback_state(), false);
   NtpTime ntp = clock_.CurrentNtpTime();
@@ -527,7 +542,7 @@ TEST_F(RtcpSenderTest, SendXrWithRrtr) {
 TEST_F(RtcpSenderTest, TestNoXrRrtrSentIfSending) {
   RtpRtcpInterface::Configuration config = GetDefaultConfig();
   config.non_sender_rtt_measurement = true;
-  auto rtcp_sender = CreateRtcpSender(config);
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(config));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   rtcp_sender->SetSendingStatus(feedback_state(), true);
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpReport));
@@ -537,7 +552,7 @@ TEST_F(RtcpSenderTest, TestNoXrRrtrSentIfSending) {
 TEST_F(RtcpSenderTest, TestNoXrRrtrSentIfNotEnabled) {
   RtpRtcpInterface::Configuration config = GetDefaultConfig();
   config.non_sender_rtt_measurement = false;
-  auto rtcp_sender = CreateRtcpSender(config);
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(config));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   rtcp_sender->SetSendingStatus(feedback_state(), false);
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpReport));
@@ -552,7 +567,7 @@ TEST_F(RtcpSenderTest, TestRegisterRtcpPacketTypeObserver) {
   config.outgoing_transport = &test_transport_;
   config.rtcp_packet_type_counter_observer = &observer;
   config.rtcp_report_interval_ms = 1000;
-  auto rtcp_sender = CreateRtcpSender(config);
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(config));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpPli));
   EXPECT_EQ(1, parser()->pli()->num_packets());
@@ -564,7 +579,7 @@ TEST_F(RtcpSenderTest, TestRegisterRtcpPacketTypeObserver) {
 
 TEST_F(RtcpSenderTest, SendTmmbr) {
   const unsigned int kBitrateBps = 312000;
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   rtcp_sender->SetTargetBitrate(kBitrateBps);
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpTmmbr));
@@ -576,7 +591,7 @@ TEST_F(RtcpSenderTest, SendTmmbr) {
 }
 
 TEST_F(RtcpSenderTest, SendTmmbn) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   rtcp_sender->SetSendingStatus(feedback_state(), true);
   std::vector<rtcp::TmmbItem> bounding_set;
@@ -604,7 +619,7 @@ TEST_F(RtcpSenderTest, SendTmmbn) {
 // See http://code.google.com/p/webrtc/issues/detail?id=468 for one
 // situation where this caused confusion.
 TEST_F(RtcpSenderTest, SendsTmmbnIfSetAndEmpty) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   rtcp_sender->SetSendingStatus(feedback_state(), true);
   std::vector<rtcp::TmmbItem> bounding_set;
@@ -649,7 +664,7 @@ TEST_F(RtcpSenderTest, ByeMustBeLast) {
   config.outgoing_transport = &mock_transport;
   config.rtcp_report_interval_ms = 1000;
   config.local_media_ssrc = kSenderSsrc;
-  auto rtcp_sender = CreateRtcpSender(config);
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(config));
 
   rtcp_sender->SetTimestampOffset(kStartRtpTimestamp);
   rtcp_sender->SetLastRtpTime(kRtpTimestamp, clock_.TimeInMilliseconds(),
@@ -662,7 +677,7 @@ TEST_F(RtcpSenderTest, ByeMustBeLast) {
 }
 
 TEST_F(RtcpSenderTest, SendXrWithTargetBitrate) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   const size_t kNumSpatialLayers = 2;
   const size_t kNumTemporalLayers = 2;
@@ -699,7 +714,7 @@ TEST_F(RtcpSenderTest, SendXrWithTargetBitrate) {
 
 TEST_F(RtcpSenderTest, SendImmediateXrWithTargetBitrate) {
   // Initialize. Send a first report right away.
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   EXPECT_EQ(0, rtcp_sender->SendRTCP(feedback_state(), kRtcpReport));
   clock_.AdvanceTimeMilliseconds(5);
@@ -736,7 +751,7 @@ TEST_F(RtcpSenderTest, SendImmediateXrWithTargetBitrate) {
 TEST_F(RtcpSenderTest, SendTargetBitrateExplicitZeroOnStreamRemoval) {
   // Set up and send a bitrate allocation with two layers.
 
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kCompound);
   VideoBitrateAllocation allocation;
   allocation.SetBitrate(0, 0, 100000);
@@ -772,7 +787,7 @@ TEST_F(RtcpSenderTest, SendTargetBitrateExplicitZeroOnStreamRemoval) {
 }
 
 TEST_F(RtcpSenderTest, DoesntSchedulesInitialReportWhenSsrcSetOnConstruction) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
   rtcp_sender->SetRemoteSSRC(kRemoteSsrc);
   // New report should not have been scheduled yet.
@@ -781,7 +796,7 @@ TEST_F(RtcpSenderTest, DoesntSchedulesInitialReportWhenSsrcSetOnConstruction) {
 }
 
 TEST_F(RtcpSenderTest, SendsCombinedRtcpPacket) {
-  auto rtcp_sender = CreateRtcpSender(GetDefaultConfig());
+  auto rtcp_sender = CreateRtcpSender(ToSenderConfig(GetDefaultConfig()));
   rtcp_sender->SetRTCPStatus(RtcpMode::kReducedSize);
 
   std::vector<std::unique_ptr<rtcp::RtcpPacket>> packets;
