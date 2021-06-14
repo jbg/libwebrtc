@@ -61,8 +61,8 @@ class ClippingPredictorEvaluator {
   int ring_buffer_tail_;
   int ring_buffer_size_;
 
-  // Pushes `value` into `expected_matches_ring_buffer_`.
-  void Push(ExpectedDetection value);
+  // Pushes `expected_detection` into `expected_matches_ring_buffer_`.
+  void Push(ExpectedDetection expected_detection);
   // Decreased the TTLs in `expected_matches_ring_buffer_` and removes expired
   // items.
   void DecreaseTimesToLive();

@@ -41,6 +41,25 @@ TEST(ClippingPredictorEvaluatorTest, Init) {
   EXPECT_EQ(evaluator.false_negatives(), 0);
 }
 
+TEST(ClippingPredictorEvaluatorTest, Reset) {
+  ClippingPredictorEvaluator evaluator(/*history_size=*/2);
+  evaluator.Observe(kNotDetected, kNotPredicted);
+  evaluator.Observe(kDetected, kNotPredicted);
+  evaluator.Observe(kNotDetected, kPredicted);
+  evaluator.Observe(kNotDetected, kPredicted);
+  evaluator.Observe(kNotDetected, kPredicted);
+  evaluator.Observe(kDetected, kPredicted);
+  ASSERT_GT(evaluator.true_positives(), 0);
+  ASSERT_GT(evaluator.true_negatives(), 0);
+  ASSERT_GT(evaluator.false_positives(), 0);
+  ASSERT_GT(evaluator.false_negatives(), 0);
+  evaluator.Reset();
+  EXPECT_EQ(evaluator.true_positives(), 0);
+  EXPECT_EQ(evaluator.true_negatives(), 0);
+  EXPECT_EQ(evaluator.false_positives(), 0);
+  EXPECT_EQ(evaluator.false_negatives(), 0);
+}
+
 class ClippingPredictorEvaluatorParameterization
     : public ::testing::TestWithParam<std::tuple<int, int>> {
  protected:
@@ -50,42 +69,54 @@ class ClippingPredictorEvaluatorParameterization
   int history_size() const { return std::get<1>(GetParam()); }
 };
 
-// Checks that the sum of true/false positives/negatives is not greater than the
-// number of calls to `Observe()`.
-TEST_P(ClippingPredictorEvaluatorParameterization,
-       SumOverMetricsLessEqualThanNumObserveCalls) {
-  constexpr int kNumCalls = 123;
-  Random random_generator(seed());
-  ClippingPredictorEvaluator evaluator(history_size());
-  for (int i = 0; i < kNumCalls; ++i) {
-    bool clipping_detected = random_generator.Rand<bool>();
-    bool clipping_predicted = random_generator.Rand<bool>();
-    evaluator.Observe(clipping_detected, clipping_predicted);
-  }
-  EXPECT_LE(SumTrueFalsePositivesNegatives(evaluator), kNumCalls);
+// Expects that `current - previous` is not greater than `max_growth` and
+// returns 1 if `current` is different from `previous` or 0 otherwise.
+int ExpectMetricGrowthAndCheckChanged(int previous,
+                                      int current,
+                                      int max_growth) {
+  bool changed = current != previous;
+  const int difference = current - previous;
+  EXPECT_GE(difference, 0);
+  EXPECT_LE(difference, max_growth);
+  return changed ? 1 : 0;
 }
 
-// Checks that after each call to `Observe()` at most one metric grows by the
-// history size. Such an upper bound is defined by the true positive growth in
-// the case in which multiple predictions are matched by a single detection.
+// Checks that after each call to `Observe()` at most one metric grows and that
+// such a metric grows at most by one. True positives can grow at most by the
+// history size plus one. Such an upper bound is reached when multiple
+// predictions are matched by a single detection.
 TEST_P(ClippingPredictorEvaluatorParameterization,
-       AtMostOneMetricGrowsByHistorySize) {
+       AtMostOneMetricGrowsByUpperBound) {
   constexpr int kNumCalls = 123;
   Random random_generator(seed());
   ClippingPredictorEvaluator evaluator(history_size());
 
-  int sum = SumTrueFalsePositivesNegatives(evaluator);
   for (int i = 0; i < kNumCalls; ++i) {
     SCOPED_TRACE(i);
+    // Read metrics before `Observe()` is called.
+    const int true_positives = evaluator.true_positives();
+    const int true_negatives = evaluator.true_negatives();
+    const int false_positives = evaluator.false_positives();
+    const int false_negatives = evaluator.false_negatives();
+    // `Observe()` a random observation.
     bool clipping_detected = random_generator.Rand<bool>();
     bool clipping_predicted = random_generator.Rand<bool>();
     evaluator.Observe(clipping_detected, clipping_predicted);
-
-    const int new_sum = SumTrueFalsePositivesNegatives(evaluator);
-    const int difference = new_sum - sum;
-    EXPECT_GE(difference, 0);
-    EXPECT_LE(difference, history_size());
-    sum = new_sum;
+    // Count the number of changed metrics and check that each metric has grown
+    // by at most `max_growth`.
+    int num_changed_metrics = 0;
+    num_changed_metrics += ExpectMetricGrowthAndCheckChanged(
+        true_positives, evaluator.true_positives(),
+        /*max_growth=*/history_size() + 1);
+    num_changed_metrics += ExpectMetricGrowthAndCheckChanged(
+        true_negatives, evaluator.true_negatives(), /*max_growth=*/1);
+    num_changed_metrics += ExpectMetricGrowthAndCheckChanged(
+        false_positives, evaluator.false_positives(), /*max_growth=*/1);
+    num_changed_metrics += ExpectMetricGrowthAndCheckChanged(
+        false_negatives, evaluator.false_negatives(), /*max_growth=*/1);
+    // Check that at most one metric has changed.
+    EXPECT_GE(num_changed_metrics, 0);
+    EXPECT_LE(num_changed_metrics, 1);
   }
 }
 
@@ -95,49 +126,40 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::Combine(::testing::Values(4, 8, 15, 16, 23, 42),
                        ::testing::Values(1, 10, 21)));
 
-// Checks that, when clipping is detected the first time that `Observe()` is
-// called, that generates a false negative - i.e., no grace period is applied
-// after initialization.
-TEST(ClippingPredictorEvaluatorTest, NoGracePeriodAfterInit) {
+// Checks that, observing a detection and a prediction after init, produces a
+// true positive.
+TEST(ClippingPredictorEvaluatorTest, OneTruePositiveAfterInit) {
+  ClippingPredictorEvaluator evaluator(/*history_size=*/3);
+  evaluator.Observe(kDetected, kPredicted);
+  EXPECT_EQ(evaluator.true_positives(), 1);
+}
+
+// Checks that, observing a detection but no prediction after init, produces a
+// false negative.
+TEST(ClippingPredictorEvaluatorTest, OneFalseNegativeAfterInit) {
   ClippingPredictorEvaluator evaluator(/*history_size=*/3);
   evaluator.Observe(kDetected, kNotPredicted);
   EXPECT_EQ(evaluator.false_negatives(), 1);
 }
 
-// Checks that `clipping_predicted` predicts the future - i.e., it does not
-// apply to the current observation.
-TEST(ClippingPredictorEvaluatorTest, PredictDoesNotApplyToCurrentCall) {
+// Checks that, observing no detection but a prediction after init, produces a
+// false positive after expiration.
+TEST(ClippingPredictorEvaluatorTest, OneFalsePositiveAfterInit) {
   ClippingPredictorEvaluator evaluator(/*history_size=*/3);
-
-  // First call.
-  evaluator.Observe(kDetected, kPredicted);
-  EXPECT_EQ(evaluator.false_negatives(), 1);
-  evaluator.Reset();
-
-  // Same expectation afterwards.
-  evaluator.Observe(kNotDetected, kNotPredicted);
-  evaluator.Observe(kDetected, kPredicted);
-  EXPECT_EQ(evaluator.false_negatives(), 1);
-}
-
-// Checks that no clipping is expected the first time `Observe()` is called.
-TEST(ClippingPredictorEvaluatorTest, ExpectNoClippingAfterInit) {
-  ClippingPredictorEvaluator evaluator(/*history_size=*/3);
-
   evaluator.Observe(kNotDetected, kPredicted);
-  EXPECT_EQ(evaluator.true_negatives(), 1);
-  evaluator.Reset();
+  EXPECT_EQ(evaluator.false_positives(), 0);
+  evaluator.Observe(kNotDetected, kNotPredicted);
+  evaluator.Observe(kNotDetected, kNotPredicted);
+  evaluator.Observe(kNotDetected, kNotPredicted);
+  EXPECT_EQ(evaluator.false_positives(), 1);
+}
 
+// Checks that, observing no detection and no prediction after init, produces a
+// true negative.
+TEST(ClippingPredictorEvaluatorTest, OneTrueNegativeAfterInit) {
+  ClippingPredictorEvaluator evaluator(/*history_size=*/3);
   evaluator.Observe(kNotDetected, kNotPredicted);
   EXPECT_EQ(evaluator.true_negatives(), 1);
-  evaluator.Reset();
-
-  evaluator.Observe(kDetected, kPredicted);
-  EXPECT_EQ(evaluator.false_negatives(), 1);
-  evaluator.Reset();
-
-  evaluator.Observe(kDetected, kNotPredicted);
-  EXPECT_EQ(evaluator.false_negatives(), 1);
 }
 
 // Checks that the evaluator detects true negatives when clipping is neither
@@ -206,6 +228,7 @@ TEST(ClippingPredictorEvaluatorTest, PredictedOnceAndThenImmediatelyDetected) {
   EXPECT_EQ(evaluator.false_positives(), 0);
   evaluator.Observe(kDetected, kNotPredicted);
   EXPECT_EQ(evaluator.true_positives(), 1);
+  EXPECT_EQ(SumTrueFalsePositivesNegatives(evaluator), 1);
 }
 
 // Checks that a prediction followed by a delayed detection counts as true
@@ -249,6 +272,7 @@ TEST(ClippingPredictorEvaluatorTest, PredictedOnceAndDetectedMultipleTimes) {
   // A detection outside of the observation period counts as false negative.
   evaluator.Observe(kDetected, kNotPredicted);
   EXPECT_EQ(evaluator.false_negatives(), 1);
+  EXPECT_EQ(SumTrueFalsePositivesNegatives(evaluator), 2);
 }
 
 TEST(ClippingPredictorEvaluatorTest,
@@ -313,7 +337,7 @@ TEST(ClippingPredictorEvaluatorTest, PredictedMultipleTimesAndAllDetected) {
   evaluator.Observe(kDetected, kNotPredicted);  //     <-+ <-+
   evaluator.Observe(kDetected, kNotPredicted);  //         <-+
   EXPECT_EQ(evaluator.true_positives(), 3);
-  EXPECT_EQ(evaluator.true_negatives(), 1);  // First `Observe()` call.
+  EXPECT_EQ(evaluator.true_negatives(), 0);
   EXPECT_EQ(evaluator.false_positives(), 0);
   EXPECT_EQ(evaluator.false_negatives(), 0);
 }
@@ -328,7 +352,7 @@ TEST(ClippingPredictorEvaluatorTest,
   evaluator.Observe(kDetected, kNotPredicted);     //     <-+
   evaluator.Observe(kDetected, kNotPredicted);     //     <-+
   EXPECT_EQ(evaluator.true_positives(), 2);
-  EXPECT_EQ(evaluator.true_negatives(), 1);  // First `Observe()` call.
+  EXPECT_EQ(evaluator.true_negatives(), 0);
   EXPECT_EQ(evaluator.false_positives(), 0);
   EXPECT_EQ(evaluator.false_negatives(), 0);
 }

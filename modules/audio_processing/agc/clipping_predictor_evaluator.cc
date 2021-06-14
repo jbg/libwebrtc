@@ -45,6 +45,9 @@ void ClippingPredictorEvaluator::Observe(bool clipping_detected,
   RTC_DCHECK_LT(ring_buffer_tail_, ring_buffer_capacity_);
 
   DecreaseTimesToLive();
+  if (clipping_predicted) {
+    Push(/*expected_detection=*/{.ttl = history_size_, .detected = false});
+  }
   // Clipping is expected if there are expected detections regardless of
   // whether all the expected detections have been previously matched - i.e.,
   // `ExpectedDetection::detected` is true.
@@ -66,10 +69,6 @@ void ClippingPredictorEvaluator::Observe(bool clipping_detected,
   } else {
     RTC_DCHECK(!clipping_expected && !clipping_detected);
     true_negatives_++;
-  }
-
-  if (clipping_predicted) {
-    Push(/*value=*/{.ttl = history_size_, .detected = false});
   }
 }
 
