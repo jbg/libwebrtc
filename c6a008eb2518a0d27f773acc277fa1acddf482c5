@@ -16,6 +16,74 @@
       "message": "I think I found the last piece of missing state. Please review.\n",
       "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec5c0c6_dd846d52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-14T14:24:50Z",
+      "side": 1,
+      "message": "A question and a comment",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b2fe008_2aed7bb4",
+        "filename": "api/ice_transport_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-14T14:24:50Z",
+      "side": 1,
+      "message": "Here and in many other places - Remember to remove debug logs",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb86f51_d62a137d",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-14T14:24:50Z",
+      "side": 1,
+      "message": "If the initial O/A exchange, i.e. before a BUNDLE group has been accepted, contains a lot of m\u003d sections, would we still end up creating all those transports initially? And would that cause a lot of ICE candidates for that exchange even if not in follow-up exchanges?\n\nI am thinking of apps that negotiate what they want immediately versus apps that do an initial dance only to then do a follow-up. Would \"max-bundle\" be able to save you?",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b5eeca_06213187",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-14T14:24:50Z",
+      "side": 1,
+      "message": "You could have multiple BUNDLEs. It\u0027s probably not very popular, but the issue to support it had 14 stars (https://crbug.com/webrtc/10208) so we should probably not break that use case.\n\nDo we need to sanity check that this m\u003d section is supposed to be part of this group?",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
