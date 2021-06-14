@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07771320_4fc7ad9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-06-14T10:10:46Z",
+      "side": 1,
+      "message": "PTAL.",
+      "revId": "80df2c869dc5f9fbae5953771248ef54d4f1807b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c459338_71fc6c33",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 8103,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-06-14T10:10:46Z",
+      "side": 1,
+      "message": "I\u0027ve tried several variants of waiting for the reconfig to happen (on encoder queue), and this was the first one I found that worked. Should this be part of the ResetEncoder helper method?",
+      "range": {
+        "startLine": 8103,
+        "startChar": 0,
+        "endLine": 8103,
+        "endChar": 52
+      },
+      "revId": "80df2c869dc5f9fbae5953771248ef54d4f1807b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
