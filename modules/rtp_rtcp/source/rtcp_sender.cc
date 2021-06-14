@@ -35,6 +35,7 @@
 #include "modules/rtp_rtcp/source/rtcp_packet/tmmbr.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/transport_feedback.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_impl2.h"
+#include "modules/rtp_rtcp/source/rtp_rtcp_interface.h"
 #include "modules/rtp_rtcp/source/time_util.h"
 #include "modules/rtp_rtcp/source/tmmbr_help.h"
 #include "rtc_base/checks.h"
@@ -116,7 +117,7 @@ class RTCPSender::RtcpContext {
   const Timestamp now_;
 };
 
-RTCPSender::RTCPSender(const RtpRtcpInterface::Configuration& config)
+RTCPSender::RTCPSender(const Configuration& config)
     : audio_(config.audio),
       ssrc_(config.local_media_ssrc),
       clock_(config.clock),
@@ -164,6 +165,19 @@ RTCPSender::RTCPSender(const RtpRtcpInterface::Configuration& config)
   builders_[kRtcpNack] = &RTCPSender::BuildNACK;
   builders_[kRtcpAnyExtendedReports] = &RTCPSender::BuildExtendedReports;
 }
+
+RTCPSender::RTCPSender(const RtpRtcpInterface::Configuration& config)
+    : RTCPSender(Configuration{
+          .audio = config.audio,
+          .local_media_ssrc = config.local_media_ssrc,
+          .clock = config.clock,
+          .outgoing_transport = config.outgoing_transport,
+          .non_sender_rtt_measurement = config.non_sender_rtt_measurement,
+          .event_log = config.event_log,
+          .rtcp_report_interval_ms = config.rtcp_report_interval_ms,
+          .receive_statistics = config.receive_statistics,
+          .rtcp_packet_type_counter_observer =
+              config.rtcp_packet_type_counter_observer}) {}
 
 RTCPSender::~RTCPSender() {}
 

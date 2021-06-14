@@ -55,7 +55,18 @@ void ModuleRtpRtcpImpl2::RtpSenderContext::AssignSequenceNumber(
 
 ModuleRtpRtcpImpl2::ModuleRtpRtcpImpl2(const Configuration& configuration)
     : worker_queue_(TaskQueueBase::Current()),
-      rtcp_sender_(configuration),
+      rtcp_sender_(RTCPSender::Configuration{
+          .audio = configuration.audio,
+          .local_media_ssrc = configuration.local_media_ssrc,
+          .clock = configuration.clock,
+          .outgoing_transport = configuration.outgoing_transport,
+          .non_sender_rtt_measurement =
+              configuration.non_sender_rtt_measurement,
+          .event_log = configuration.event_log,
+          .rtcp_report_interval_ms = configuration.rtcp_report_interval_ms,
+          .receive_statistics = configuration.receive_statistics,
+          .rtcp_packet_type_counter_observer =
+              configuration.rtcp_packet_type_counter_observer}),
       rtcp_receiver_(configuration, this),
       clock_(configuration.clock),
       last_rtt_process_time_(clock_->TimeInMilliseconds()),
