@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c756e8e_9275ca27",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-06-14T10:05:25Z",
+      "side": 1,
+      "message": "This is duplicated in three places now. Can it be e.g. a static member RTCPSender::Configuration::FromRtpRtcpConfig(...) or something?",
+      "range": {
+        "startLine": 41,
+        "startChar": 26,
+        "endLine": 41,
+        "endChar": 51
+      },
+      "revId": "c5d1aed9df58827a659e40c66b877c0801ad80d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
