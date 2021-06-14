@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7467f29e_6157c120",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-06-14T12:26:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "80df2c869dc5f9fbae5953771248ef54d4f1807b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c459338_71fc6c33",
@@ -31,6 +48,30 @@
       "writtenOn": "2021-06-14T10:10:46Z",
       "side": 1,
       "message": "I\u0027ve tried several variants of waiting for the reconfig to happen (on encoder queue), and this was the first one I found that worked. Should this be part of the ResetEncoder helper method?",
+      "range": {
+        "startLine": 8103,
+        "startChar": 0,
+        "endLine": 8103,
+        "endChar": 52
+      },
+      "revId": "80df2c869dc5f9fbae5953771248ef54d4f1807b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84057618_c715fd77",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 8103,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-06-14T12:26:03Z",
+      "side": 1,
+      "message": "Did you try WaitForEncodedFrame()?\n\n\u003e\u003eShould this be part of the ResetEncoder helper method?\nI don\u0027t know. I guess not all tests need/expect encoder reconfig. For some of them it is enough to supply new config to VSE without propagating it to encoder.",
+      "parentUuid": "3c459338_71fc6c33",
       "range": {
         "startLine": 8103,
         "startChar": 0,
