@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ad6677d_bf35a6dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-14T15:41:53Z",
+      "side": 1,
+      "message": "Thanks! Commented on a couple of items, and cleaned up the debug logs.\n",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b2fe008_2aed7bb4",
@@ -69,6 +86,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9b1f6dc_6a5eda54",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-14T15:41:53Z",
+      "side": 1,
+      "message": "Yes, we would; that\u0027s BUNDLE for you (and probably one reason why many apps choose to do an initial data-only offer/answer).\n\nMax-bundle will save you; that\u0027s checked before we call MaybeCreateJsepTransport.",
+      "parentUuid": "afb86f51_d62a137d",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50b5eeca_06213187",
@@ -82,6 +117,24 @@
       "writtenOn": "2021-06-14T14:24:50Z",
       "side": 1,
       "message": "You could have multiple BUNDLEs. It\u0027s probably not very popular, but the issue to support it had 14 stars (https://crbug.com/webrtc/10208) so we should probably not break that use case.\n\nDo we need to sanity check that this m\u003d section is supposed to be part of this group?",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cceef122_8c35cd7e",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-14T15:41:53Z",
+      "side": 1,
+      "message": "No, we shouldn\u0027t - according to my reading, JSEP demands that new m\u003d sections must be added to the first bundle group. (It doesn\u0027t really admit to there being more than one).\n\nRFC 8829:\n\n   The \"a\u003dgroup:BUNDLE\" attribute MUST include the MID identifiers\n   specified in the bundle group in the most recent answer, minus any\n   \"m\u003d\" sections that have been marked as rejected, plus any newly added\n   or re-enabled \"m\u003d\" sections.  In other words, the bundle attribute\n   MUST contain all \"m\u003d\" sections that were previously bundled, as long\n   as they are still alive, as well as any new \"m\u003d\" sections.\n\nNote that we can only get here in offers; in an answer, we are not allowed to add m\u003d sections. So our acceptance of multi-bundle offers is actually going slightly beyond JSEP.",
+      "parentUuid": "50b5eeca_06213187",
       "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
