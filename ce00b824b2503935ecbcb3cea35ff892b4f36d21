@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbc5a262_62f2c13f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11717
+      },
+      "writtenOn": "2021-06-14T12:25:57Z",
+      "side": 1,
+      "message": "Not sure if we should test if pointer in std::unique_ptr is non-null.\nI don\u0027t have access to dry run and can\u0027t commit.",
+      "revId": "ce00b824b2503935ecbcb3cea35ff892b4f36d21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
