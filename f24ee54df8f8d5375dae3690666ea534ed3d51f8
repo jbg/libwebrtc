@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f945d81_92cb5596",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-15T05:47:38Z",
+      "side": 1,
+      "message": "Yes, we should make the code more elegant (and shorter), and we should have tests that cover the case of the remote end doing bundle changes with multiple bundle groups.\n\nBut can we get the fix for the actual issue submitted now, please?\n",
+      "revId": "f24ee54df8f8d5375dae3690666ea534ed3d51f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

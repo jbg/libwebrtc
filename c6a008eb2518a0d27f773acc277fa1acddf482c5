@@ -173,6 +173,24 @@
       "parentUuid": "cceef122_8c35cd7e",
       "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68940593_7dab6196",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-15T05:47:38Z",
+      "side": 1,
+      "message": "It\u0027s not that it\u0027s a restriction, it\u0027s that JSEP ignores the multi-bundle case.\nI think that\u0027s a technical error in JSEP, but it does mean that when creating a new offer, JSEP only allows adding m- sections to a single BUNDLE attribute, and picking the first one is a reasonable choice.",
+      "parentUuid": "a18eefdd_771e6250",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
