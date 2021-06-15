@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66496c6d_dbe35c9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-06-15T07:56:33Z",
+      "side": 1,
+      "message": "Please stamp merge to M92 branch",
+      "revId": "8c01b85a4f1cbcb92e640282aeae38d7f7414cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
