@@ -123,6 +123,24 @@
       "parentUuid": "cbf0d418_b9296a4c",
       "revId": "dc9dfee7a4455b582ae388ef29d97901fbc35c3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a836f80_0b000785",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-06-15T22:03:22Z",
+      "side": 1,
+      "message": "\u003e We don\u0027t add m-sections through this logic with incoming offers.\n\nWe do, that\u0027s why I\u0027m concerned. This is silently breaking cases that previously worked.",
+      "parentUuid": "06cd85ee_55d05385",
+      "revId": "dc9dfee7a4455b582ae388ef29d97901fbc35c3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

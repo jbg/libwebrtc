@@ -227,6 +227,24 @@
       "parentUuid": "c3066759_00f30eff",
       "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ca980ed_572b2e62",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-06-15T22:03:22Z",
+      "side": 1,
+      "message": "JSEP does address the multi bundle case; it consistently uses terminology like \"a bundle group\" (rather than \"the\"), \"the same bundle group\", \"offered bundled groups\", \"in each bundle\"... For example:\n\n   If \"a\u003dgroup\" attributes with semantics of \"BUNDLE\" are offered,\n   corresponding session-level \"a\u003dgroup\" attributes MUST be added as\n   specified in [RFC5888].  These attributes MUST have semantics\n   \"BUNDLE\" and MUST include all mid identifiers from the offered bundle\n   groups that have not been rejected.",
+      "parentUuid": "09ebe96b_66f93eeb",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
