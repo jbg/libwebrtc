@@ -35,7 +35,7 @@ AudioChannel::AudioChannel(
     ProcessThread* process_thread,
     AudioMixer* audio_mixer,
     rtc::scoped_refptr<AudioDecoderFactory> decoder_factory)
-    : audio_mixer_(audio_mixer), process_thread_(process_thread) {
+    : audio_mixer_(audio_mixer) {
   RTC_DCHECK(task_queue_factory);
   RTC_DCHECK(process_thread);
   RTC_DCHECK(audio_mixer);
@@ -55,9 +55,6 @@ AudioChannel::AudioChannel(
 
   rtp_rtcp_->SetSendingMediaStatus(false);
   rtp_rtcp_->SetRTCPStatus(RtcpMode::kCompound);
-
-  // ProcessThread periodically services RTP stack for RTCP.
-  process_thread_->RegisterModule(rtp_rtcp_.get(), RTC_FROM_HERE);
 
   ingress_ = std::make_unique<AudioIngress>(rtp_rtcp_.get(), clock,
                                             receive_statistics_.get(),
@@ -84,8 +81,6 @@ AudioChannel::~AudioChannel() {
   // before ProcessThread::DeRegisterModule.
   egress_.reset();
   ingress_.reset();
-
-  process_thread_->DeRegisterModule(rtp_rtcp_.get());
 }
 
 bool AudioChannel::StartSend() {
