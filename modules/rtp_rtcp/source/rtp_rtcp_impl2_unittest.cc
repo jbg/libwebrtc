@@ -10,18 +10,22 @@
 
 #include "modules/rtp_rtcp/source/rtp_rtcp_impl2.h"
 
+#include <deque>
 #include <map>
 #include <memory>
 #include <set>
+#include <utility>
 
 #include "absl/types/optional.h"
 #include "api/transport/field_trial_based_config.h"
+#include "api/units/time_delta.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/rtcp_packet.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/nack.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_interface.h"
 #include "modules/rtp_rtcp/source/rtp_sender_video.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/rate_limiter.h"
 #include "rtc_base/strings/string_builder.h"
 #include "test/gmock.h"
@@ -42,16 +46,17 @@ using ::testing::SizeIs;
 
 namespace webrtc {
 namespace {
-const uint32_t kSenderSsrc = 0x12345;
-const uint32_t kReceiverSsrc = 0x23456;
-const int64_t kOneWayNetworkDelayMs = 100;
-const uint8_t kBaseLayerTid = 0;
-const uint8_t kHigherLayerTid = 1;
-const uint16_t kSequenceNumber = 100;
-const uint8_t kPayloadType = 100;
-const int kWidth = 320;
-const int kHeight = 100;
-const int kCaptureTimeMsToRtpTimestamp = 90;  // 90 kHz clock.
+constexpr uint32_t kSenderSsrc = 0x12345;
+constexpr uint32_t kReceiverSsrc = 0x23456;
+constexpr int64_t kOneWayNetworkDelayMs = 100;
+constexpr uint8_t kBaseLayerTid = 0;
+constexpr uint8_t kHigherLayerTid = 1;
+constexpr uint16_t kSequenceNumber = 100;
+constexpr uint8_t kPayloadType = 100;
+constexpr int kWidth = 320;
+constexpr int kHeight = 100;
+constexpr int kCaptureTimeMsToRtpTimestamp = 90;  // 90 kHz clock.
+constexpr int32_t kDefaultReportIntervalMs = 1000;
 
 // RTP header extension ids.
 enum : int {
@@ -70,21 +75,24 @@ class RtcpRttStatsTestImpl : public RtcpRttStats {
   int64_t rtt_ms_;
 };
 
-class SendTransport : public Transport {
+class SendTransport : public Transport,
+                      public sim_time_impl::SimulatedSequenceRunner {
  public:
-  SendTransport()
+  SendTransport(int64_t delay_ms,
+                GlobalSimulatedTimeController* time_controller)
       : receiver_(nullptr),
-        time_controller_(nullptr),
-        delay_ms_(0),
+        time_controller_(time_controller),
+        delay_ms_(delay_ms),
         rtp_packets_sent_(0),
         rtcp_packets_sent_(0),
-        last_packet_(&header_extensions_) {}
+        last_packet_(&header_extensions_) {
+    time_controller_->Register(this);
+  }
+
+  ~SendTransport() { time_controller_->Unregister(this); }
 
   void SetRtpRtcpModule(ModuleRtpRtcpImpl2* receiver) { receiver_ = receiver; }
-  void SimulateNetworkDelay(int64_t delay_ms, TimeController* time_controller) {
-    time_controller_ = time_controller;
-    delay_ms_ = delay_ms;
-  }
+  void SimulateNetworkDelay(int64_t delay_ms) { delay_ms_ = delay_ms; }
   bool SendRtp(const uint8_t* data,
                size_t len,
                const PacketOptions& options) override {
@@ -96,26 +104,49 @@ class SendTransport : public Transport {
     test::RtcpPacketParser parser;
     parser.Parse(data, len);
     last_nack_list_ = parser.nack()->packet_ids();
-
-    if (time_controller_) {
-      time_controller_->AdvanceTime(TimeDelta::Millis(delay_ms_));
-    }
-    EXPECT_TRUE(receiver_);
-    receiver_->IncomingRtcpPacket(data, len);
+    Timestamp current_time = time_controller_->GetClock()->CurrentTime();
+    Timestamp delivery_time = current_time + TimeDelta::Millis(delay_ms_);
+    rtcp_packets_.push_back(
+        Packet{delivery_time, std::vector<uint8_t>(data, data + len)});
     ++rtcp_packets_sent_;
+    RunReady(current_time);
     return true;
+  }
+
+  // sim_time_impl::SimulatedSequenceRunner
+  Timestamp GetNextRunTime() const override {
+    if (!rtcp_packets_.empty())
+      return rtcp_packets_.front().send_time;
+    return Timestamp::PlusInfinity();
+  }
+  void RunReady(Timestamp at_time) override {
+    while (!rtcp_packets_.empty() &&
+           rtcp_packets_.front().send_time <= at_time) {
+      Packet packet = std::move(rtcp_packets_.front());
+      rtcp_packets_.pop_front();
+      EXPECT_TRUE(receiver_);
+      receiver_->IncomingRtcpPacket(packet.data.data(), packet.data.size());
+    }
+  }
+  TaskQueueBase* GetAsTaskQueue() override {
+    return reinterpret_cast<TaskQueueBase*>(this);
   }
 
   size_t NumRtcpSent() { return rtcp_packets_sent_; }
 
   ModuleRtpRtcpImpl2* receiver_;
-  TimeController* time_controller_;
+  GlobalSimulatedTimeController* time_controller_;
   int64_t delay_ms_;
   int rtp_packets_sent_;
   size_t rtcp_packets_sent_;
   std::vector<uint16_t> last_nack_list_;
   RtpHeaderExtensionMap header_extensions_;
   RtpPacketReceived last_packet_;
+  struct Packet {
+    Timestamp send_time;
+    std::vector<uint8_t> data;
+  };
+  std::deque<Packet> rtcp_packets_;
 };
 
 struct TestConfig {
@@ -166,27 +197,32 @@ class RtpRtcpModule : public RtcpPacketTypeCounterObserver,
     uint32_t ssrc;
   };
 
-  RtpRtcpModule(TimeController* time_controller,
+  RtpRtcpModule(GlobalSimulatedTimeController* time_controller,
+                ProcessThread* process_thread,
                 bool is_sender,
                 const FieldTrialConfig& trials)
-      : is_sender_(is_sender),
+      : time_controller_(time_controller),
+        is_sender_(is_sender),
         trials_(trials),
+        process_thread_(process_thread),
         receive_statistics_(
             ReceiveStatistics::Create(time_controller->GetClock())),
-        time_controller_(time_controller) {
+        transport_(kOneWayNetworkDelayMs, time_controller) {
     CreateModuleImpl();
-    transport_.SimulateNetworkDelay(kOneWayNetworkDelayMs, time_controller);
   }
 
+  ~RtpRtcpModule() { process_thread_->DeRegisterModule(impl_.get()); }
+
+  TimeController* const time_controller_;
   const bool is_sender_;
   const FieldTrialConfig& trials_;
+  ProcessThread* const process_thread_;
   RtcpPacketTypeCounter packets_sent_;
   RtcpPacketTypeCounter packets_received_;
   std::unique_ptr<ReceiveStatistics> receive_statistics_;
   SendTransport transport_;
   RtcpRttStatsTestImpl rtt_stats_;
   std::unique_ptr<ModuleRtpRtcpImpl2> impl_;
-  int rtcp_report_interval_ms_ = 0;
 
   void RtcpPacketTypesCounterUpdated(
       uint32_t ssrc,
@@ -249,16 +285,18 @@ class RtpRtcpModule : public RtcpPacketTypeCounterObserver,
     config.field_trials = &trials_;
     config.send_packet_observer = this;
     config.fec_generator = fec_generator_;
-
+    if (impl_)
+      process_thread_->DeRegisterModule(impl_.get());
     impl_.reset(new ModuleRtpRtcpImpl2(config));
+    process_thread_->RegisterModule(impl_.get(), RTC_FROM_HERE);
     impl_->SetRemoteSSRC(is_sender_ ? kReceiverSsrc : kSenderSsrc);
     impl_->SetRTCPStatus(RtcpMode::kCompound);
   }
 
-  TimeController* const time_controller_;
   std::map<uint32_t, RtcpPacketTypeCounter> counter_map_;
   absl::optional<SentPacket> last_sent_packet_;
   VideoFecGenerator* fec_generator_ = nullptr;
+  int rtcp_report_interval_ms_ = kDefaultReportIntervalMs;
 };
 }  // namespace
 
@@ -267,12 +305,20 @@ class RtpRtcpImpl2Test : public ::testing::TestWithParam<TestConfig> {
   RtpRtcpImpl2Test()
       : time_controller_(Timestamp::Micros(133590000000000)),
         field_trials_(FieldTrialConfig::GetFromTestConfig(GetParam())),
+        process_thread_(
+            time_controller_.CreateProcessThread("RtpRtcpImpl2Test")),
         sender_(&time_controller_,
+                process_thread_.get(),
                 /*is_sender=*/true,
                 field_trials_),
         receiver_(&time_controller_,
+                  process_thread_.get(),
                   /*is_sender=*/false,
-                  field_trials_) {}
+                  field_trials_) {
+    process_thread_->Start();
+  }
+
+  ~RtpRtcpImpl2Test() { process_thread_->Stop(); }
 
   void SetUp() override {
     // Send module.
@@ -320,6 +366,7 @@ class RtpRtcpImpl2Test : public ::testing::TestWithParam<TestConfig> {
 
   GlobalSimulatedTimeController time_controller_;
   FieldTrialConfig field_trials_;
+  std::unique_ptr<ProcessThread> process_thread_;
   RtpRtcpModule sender_;
   std::unique_ptr<RTPSenderVideo> sender_video_;
   RtpRtcpModule receiver_;
@@ -417,10 +464,11 @@ TEST_P(RtpRtcpImpl2Test, Rtt) {
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
   // Sender module should send an SR.
   EXPECT_EQ(0, sender_.impl_->SendRTCP(kRtcpReport));
+  AdvanceTimeMs(kOneWayNetworkDelayMs);
 
   // Receiver module should send a RR with a response to the last received SR.
-  AdvanceTimeMs(1000);
   EXPECT_EQ(0, receiver_.impl_->SendRTCP(kRtcpReport));
+  AdvanceTimeMs(kOneWayNetworkDelayMs);
 
   // Verify RTT.
   int64_t rtt;
@@ -469,21 +517,18 @@ TEST_P(RtpRtcpImpl2Test, RttForReceiverOnly) {
 
 TEST_P(RtpRtcpImpl2Test, NoSrBeforeMedia) {
   // Ignore fake transport delays in this test.
-  sender_.transport_.SimulateNetworkDelay(0, &time_controller_);
-  receiver_.transport_.SimulateNetworkDelay(0, &time_controller_);
+  sender_.transport_.SimulateNetworkDelay(0);
+  receiver_.transport_.SimulateNetworkDelay(0);
 
-  sender_.impl_->Process();
-  EXPECT_EQ(-1, sender_.RtcpSent().first_packet_time_ms);
-
+  // Move ahead to the instant a rtcp is expected.
   // Verify no SR is sent before media has been sent, RR should still be sent
   // from the receiving module though.
-  AdvanceTimeMs(2000);
+  AdvanceTimeMs(kDefaultReportIntervalMs / 2);
   int64_t current_time = time_controller_.GetClock()->TimeInMilliseconds();
-  sender_.impl_->Process();
-  receiver_.impl_->Process();
   EXPECT_EQ(-1, sender_.RtcpSent().first_packet_time_ms);
   EXPECT_EQ(receiver_.RtcpSent().first_packet_time_ms, current_time);
 
+  // RTCP should be triggered by the RTP send.
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
   EXPECT_EQ(sender_.RtcpSent().first_packet_time_ms, current_time);
 }
@@ -498,6 +543,7 @@ TEST_P(RtpRtcpImpl2Test, RtcpPacketTypeCounter_Nack) {
   const uint16_t kNackLength = 1;
   uint16_t nack_list[kNackLength] = {123};
   EXPECT_EQ(0, receiver_.impl_->SendNACK(nack_list, kNackLength));
+  AdvanceTimeMs(kOneWayNetworkDelayMs);
   EXPECT_EQ(1U, receiver_.RtcpSent().nack_packets);
   EXPECT_GT(receiver_.RtcpSent().first_packet_time_ms, -1);
 
@@ -586,7 +632,7 @@ TEST_P(RtpRtcpImpl2Test, SendsExtendedNackList) {
 }
 
 TEST_P(RtpRtcpImpl2Test, ReSendsNackListAfterRttMs) {
-  sender_.transport_.SimulateNetworkDelay(0, &time_controller_);
+  sender_.transport_.SimulateNetworkDelay(0);
   // Send module sends a NACK.
   const uint16_t kNackLength = 2;
   uint16_t nack_list[kNackLength] = {123, 125};
@@ -611,7 +657,7 @@ TEST_P(RtpRtcpImpl2Test, ReSendsNackListAfterRttMs) {
 }
 
 TEST_P(RtpRtcpImpl2Test, UniqueNackRequests) {
-  receiver_.transport_.SimulateNetworkDelay(0, &time_controller_);
+  receiver_.transport_.SimulateNetworkDelay(0);
   EXPECT_EQ(0U, receiver_.RtcpSent().nack_packets);
   EXPECT_EQ(0U, receiver_.RtcpSent().nack_requests);
   EXPECT_EQ(0U, receiver_.RtcpSent().unique_nack_requests);
@@ -660,19 +706,16 @@ TEST_P(RtpRtcpImpl2Test, ConfigurableRtcpReportInterval) {
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
 
   // Initial state
-  sender_.impl_->Process();
   EXPECT_EQ(sender_.RtcpSent().first_packet_time_ms, -1);
   EXPECT_EQ(0u, sender_.transport_.NumRtcpSent());
 
   // Move ahead to the last ms before a rtcp is expected, no action.
   AdvanceTimeMs(kVideoReportInterval / 2 - 1);
-  sender_.impl_->Process();
   EXPECT_EQ(sender_.RtcpSent().first_packet_time_ms, -1);
   EXPECT_EQ(sender_.transport_.NumRtcpSent(), 0u);
 
   // Move ahead to the first rtcp. Send RTCP.
   AdvanceTimeMs(1);
-  sender_.impl_->Process();
   EXPECT_GT(sender_.RtcpSent().first_packet_time_ms, -1);
   EXPECT_EQ(sender_.transport_.NumRtcpSent(), 1u);
 
@@ -680,21 +723,17 @@ TEST_P(RtpRtcpImpl2Test, ConfigurableRtcpReportInterval) {
 
   // Move ahead to the last possible second before second rtcp is expected.
   AdvanceTimeMs(kVideoReportInterval * 1 / 2 - 1);
-  sender_.impl_->Process();
   EXPECT_EQ(sender_.transport_.NumRtcpSent(), 1u);
 
   // Move ahead into the range of second rtcp, the second rtcp may be sent.
   AdvanceTimeMs(1);
-  sender_.impl_->Process();
   EXPECT_GE(sender_.transport_.NumRtcpSent(), 1u);
 
   AdvanceTimeMs(kVideoReportInterval / 2);
-  sender_.impl_->Process();
   EXPECT_GE(sender_.transport_.NumRtcpSent(), 1u);
 
   // Move out the range of second rtcp, the second rtcp must have been sent.
   AdvanceTimeMs(kVideoReportInterval / 2);
-  sender_.impl_->Process();
   EXPECT_EQ(sender_.transport_.NumRtcpSent(), 2u);
 }
 
@@ -771,6 +810,7 @@ TEST_P(RtpRtcpImpl2Test, SenderReportStatsAvailable) {
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
   // Send an SR.
   ASSERT_THAT(sender_.impl_->SendRTCP(kRtcpReport), Eq(0));
+  AdvanceTimeMs(kOneWayNetworkDelayMs);
   EXPECT_THAT(receiver_.impl_->GetSenderReportStats(), Not(Eq(absl::nullopt)));
 }
 
@@ -821,10 +861,12 @@ TEST_P(RtpRtcpImpl2Test, SenderReportStatsCount) {
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
   // Send the first SR.
   ASSERT_THAT(sender_.impl_->SendRTCP(kRtcpReport), Eq(0));
+  AdvanceTimeMs(kOneWayNetworkDelayMs);
   EXPECT_THAT(receiver_.impl_->GetSenderReportStats(),
               Optional(Field(&SenderReportStats::reports_count, Eq(1u))));
   // Send the second SR.
   ASSERT_THAT(sender_.impl_->SendRTCP(kRtcpReport), Eq(0));
+  AdvanceTimeMs(kOneWayNetworkDelayMs);
   EXPECT_THAT(receiver_.impl_->GetSenderReportStats(),
               Optional(Field(&SenderReportStats::reports_count, Eq(2u))));
 }
@@ -836,6 +878,7 @@ TEST_P(RtpRtcpImpl2Test, SenderReportStatsArrivalTimestampSet) {
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
   // Send an SR.
   ASSERT_THAT(sender_.impl_->SendRTCP(kRtcpReport), Eq(0));
+  AdvanceTimeMs(kOneWayNetworkDelayMs);
   auto stats = receiver_.impl_->GetSenderReportStats();
   ASSERT_THAT(stats, Not(Eq(absl::nullopt)));
   EXPECT_TRUE(stats->last_arrival_timestamp.Valid());
@@ -853,6 +896,7 @@ TEST_P(RtpRtcpImpl2Test, SenderReportStatsPacketByteCounters) {
   AdvanceTimeMs(1);
   // Send an SR.
   ASSERT_THAT(sender_.impl_->SendRTCP(kRtcpReport), Eq(0));
+  AdvanceTimeMs(kOneWayNetworkDelayMs);
   EXPECT_THAT(receiver_.impl_->GetSenderReportStats(),
               Optional(AllOf(Field(&SenderReportStats::packets_sent, Gt(0u)),
                              Field(&SenderReportStats::bytes_sent, Gt(0u)))));
