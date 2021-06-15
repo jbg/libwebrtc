@@ -191,6 +191,24 @@
       "parentUuid": "a18eefdd_771e6250",
       "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3066759_00f30eff",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-06-15T09:33:55Z",
+      "side": 1,
+      "message": "My initial concern was with breaking this demo page:\nhttps://jsfiddle.net/henbos/to89L6ce/59/\n\nAnd Good news. This CL does not break adding more m\u003d sections to existing BUNDLE groups even if there are multiple groups (I checked by pressing \"Two bundles\" followed by \"Re-negotiate 6 sections by two groups\").\n\nWhat about if we want to add new BUNDLE groups after the initial O/A exchange?\n\nIn this case we probably would need to update the logic like so [*], however it looks like this use case is already broken even without this CL (I tested it in Canary by pressing \"One bundle\" followed by \"Re-negotiate 6 sections by two groups\" and it gives me a demux error).\n\nSo bottom line: I think this CL works as-is and creating new groups is already not supported. So adding the [*] logic probably doesn\u0027t help.\n\n[*] Changing the logic from \"if bundles_ is non-zero, use the first transport\" to \"if this m\u003d section\u0027s BUNDLE in SDP already exists in bundle_, then use that BUNDLE\u0027s transport instead of creating a new one\" would let us create more BUNDLE groups after the initial exchange.",
+      "parentUuid": "68940593_7dab6196",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
