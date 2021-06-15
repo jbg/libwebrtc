@@ -51,6 +51,24 @@
       "parentUuid": "8f3af224_9162c088",
       "revId": "dc9dfee7a4455b582ae388ef29d97901fbc35c3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2652b90f_794ad342",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-06-15T00:24:39Z",
+      "side": 1,
+      "message": "JSEP is clear on what the JSEP-compliant endpoint does. But if the policy is \"max-compat\" (we don\u0027t implement \"balanced\" yet), it\u0027s entirely possible for a non-JSEP endpoint to add a new m\u003d section that\u0027s not part of a BUNDLE group, which would not meet the criteria for rejection described in 5.3.1.\n\nBut regardless of which of our interpretations is correct, I still think this logic would be more appropriate in ShouldUpdateBundleGroup/BundleManager::Update. This code is currently making assumptions about BUNDLE group restrictions that are not actually enforced elsewhere; if the logic in BundleManager::Update were simply \"update all BUNDLE groups if this is an answer or policy is max-bundle, and update pre-existing BUNDLE groups if this is an offer\", it wouldn\u0027t need to make any assumptions.",
+      "parentUuid": "e20c0cff_95cddd1b",
+      "revId": "dc9dfee7a4455b582ae388ef29d97901fbc35c3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

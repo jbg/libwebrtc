@@ -155,6 +155,24 @@
       "parentUuid": "50b5eeca_06213187",
       "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a18eefdd_771e6250",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-06-15T00:24:39Z",
+      "side": 1,
+      "message": "As far as I can see, the \"one BUNDLE group\" restriction only applies to the max-bundle policy; see 5.3.1.",
+      "parentUuid": "cceef122_8c35cd7e",
+      "revId": "c6a008eb2518a0d27f773acc277fa1acddf482c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
