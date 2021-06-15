@@ -140,6 +140,13 @@ class GlobalSimulatedTimeController : public TimeController {
 
   void AdvanceTime(TimeDelta duration) override;
 
+  // Makes the simulated time controller aware of a custom
+  // SimulatedSequenceRunner.
+  void Register(sim_time_impl::SimulatedSequenceRunner* runner);
+  // Removes a previously installed custom SimulatedSequenceRunner from the
+  // simulated time controller.
+  void Unregister(sim_time_impl::SimulatedSequenceRunner* runner);
+
  private:
   rtc::ScopedBaseFakeClock global_clock_;
   // Provides simulated CurrentNtpInMilliseconds()
