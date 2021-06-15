@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d19d2a72_0097e9e7",
+        "filename": "pc/rtcp_mux_filter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-15T09:40:32Z",
+      "side": 1,
+      "message": "Yes, it is strictly a debugging tool, only useful for people with the source.\nI didn\u0027t see the cost/benefit of adding printers for the enums to be worth it.",
+      "parentUuid": "a9c7e79f_046120ed",
+      "revId": "f24ee54df8f8d5375dae3690666ea534ed3d51f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8108bdf_b251a7e5",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-06-15T09:33:55Z",
       "side": 1,
       "message": "This is not used. I\u0027m fine with keeping it, but only if it was intentional.",
+      "revId": "f24ee54df8f8d5375dae3690666ea534ed3d51f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44cb76e4_65323580",
+        "filename": "pc/session_description.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-15T09:40:32Z",
+      "side": 1,
+      "message": "It was intentional. Showing the bundles was critical a bit earlier; I could add some RTC_DLOG(LS_VERBOSE) statements calling it just to keep it around.... can do that on next refactoring.",
+      "parentUuid": "d8108bdf_b251a7e5",
       "revId": "f24ee54df8f8d5375dae3690666ea534ed3d51f8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
