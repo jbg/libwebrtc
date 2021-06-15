@@ -49,7 +49,6 @@ struct PacedPacketInfo;
 struct RTPVideoHeader;
 
 class ModuleRtpRtcpImpl2 final : public RtpRtcpInterface,
-                                 public Module,
                                  public RTCPReceiver::ModuleRtpRtcp {
  public:
   explicit ModuleRtpRtcpImpl2(
@@ -62,13 +61,6 @@ class ModuleRtpRtcpImpl2 final : public RtpRtcpInterface,
   // be fine.
   static std::unique_ptr<ModuleRtpRtcpImpl2> Create(
       const Configuration& configuration);
-
-  // Returns the number of milliseconds until the module want a worker thread to
-  // call Process.
-  int64_t TimeUntilNextProcess() override;
-
-  // Process any pending tasks such as timeouts.
-  void Process() override;
 
   // Receiver part.
 
@@ -253,9 +245,6 @@ class ModuleRtpRtcpImpl2 final : public RtpRtcpInterface,
   RTPSender* RtpSender() override;
   const RTPSender* RtpSender() const override;
 
-  // Module overrides.
-  void ProcessThreadAttached(ProcessThread* process_thread) override;
-
  private:
   FRIEND_TEST_ALL_PREFIXES(RtpRtcpImpl2Test, Rtt);
   FRIEND_TEST_ALL_PREFIXES(RtpRtcpImpl2Test, RttForReceiverOnly);
@@ -293,7 +282,6 @@ class ModuleRtpRtcpImpl2 final : public RtpRtcpInterface,
   void ScheduleRtcpSendEvaluation(absl::optional<TimeDelta> duration);
 
   TaskQueueBase* const worker_queue_;
-  RTC_NO_UNIQUE_ADDRESS SequenceChecker process_thread_checker_;
 
   std::unique_ptr<RtpSenderContext> rtp_sender_;
   RTCPSender rtcp_sender_;

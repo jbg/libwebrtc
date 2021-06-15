@@ -120,9 +120,6 @@ class AudioChannel : public rtc::RefCountInterface {
   // Synchronization is handled internally by AudioMixer.
   AudioMixer* audio_mixer_;
 
-  // Synchronization is handled internally by ProcessThread.
-  ProcessThread* process_thread_;
-
   // Listed in order for safe destruction of AudioChannel object.
   // Synchronization for these are handled internally.
   std::unique_ptr<ReceiveStatistics> receive_statistics_;
