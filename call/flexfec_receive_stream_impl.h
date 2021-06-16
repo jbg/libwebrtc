@@ -33,12 +33,10 @@ class RtpStreamReceiverInterface;
 
 class FlexfecReceiveStreamImpl : public FlexfecReceiveStream {
  public:
-  FlexfecReceiveStreamImpl(
-      Clock* clock,
-      const Config& config,
-      RecoveredPacketReceiver* recovered_packet_receiver,
-      RtcpRttStats* rtt_stats,
-      ProcessThread* process_thread);
+  FlexfecReceiveStreamImpl(Clock* clock,
+                           const Config& config,
+                           RecoveredPacketReceiver* recovered_packet_receiver,
+                           RtcpRttStats* rtt_stats);
   // Destruction happens on the worker thread. Prior to destruction the caller
   // must ensure that a registration with the transport has been cleared. See
   // `RegisterWithTransport` for details.
@@ -73,7 +71,6 @@ class FlexfecReceiveStreamImpl : public FlexfecReceiveStream {
   // RTCP reporting.
   const std::unique_ptr<ReceiveStatistics> rtp_receive_statistics_;
   const std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp_;
-  ProcessThread* const process_thread_;
 
   std::unique_ptr<RtpStreamReceiverInterface> rtp_stream_receiver_
       RTC_GUARDED_BY(packet_sequence_checker_);
