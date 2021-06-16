@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c06728d_38c2ff32",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-16T20:40:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4312ea86_043a6b4d",
+      "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "446495f0_ce826cf9",
@@ -88,6 +106,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c549fb8_187bd81a",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-16T20:40:45Z",
+      "side": 1,
+      "message": "Good riddance!",
+      "parentUuid": "c67ecc27_d526f4a2",
+      "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5065714_ac725c96",
@@ -119,6 +155,24 @@
       "side": 1,
       "message": "Good point. I had actually asked the same question here:\nhttps://webrtc-review.googlesource.com/c/src/+/39664/3/media/engine/webrtcvoiceengine.cc#1154\n\nRemoved the \"AndRecreateStream\" part.",
       "parentUuid": "e5065714_ac725c96",
+      "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ec0983_152d62b7",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-16T20:40:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ebdc245d_15b5a8be",
       "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
