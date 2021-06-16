@@ -16,6 +16,23 @@
       "message": "does that sound like a realistic explanation of why it behaves like that?\nI considered writing a test (PS0 shows it is possible to change without any existing test failing) but the effort to do so requires creating a CA chain of at least depth four which is a lot of effort...",
       "revId": "9e4968f06710eb3d0bd513d90d9cf6ca93cd1a12",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9c68ed3_221864a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-06-16T20:42:34Z",
+      "side": 1,
+      "message": "Explanation sounds fine to me. I\u0027m a little surprised we don\u0027t have a test, but I don\u0027t expect you to add one if all you\u0027re doing is adding documentation.",
+      "revId": "9e4968f06710eb3d0bd513d90d9cf6ca93cd1a12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
