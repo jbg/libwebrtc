@@ -347,6 +347,10 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
         // Enables clipping prediction functionality.
         struct ClippingPredictor {
           bool enabled = false;
+          // If true, the recommended clipped level step is used to modify the
+          // analog gain. Otherwise, the predictor runs without affecting the
+          // analog gain.
+          bool use_predicted_step = true;
           enum Mode {
             // Clipping event prediction mode with fixed step estimation.
             kClippingEventPrediction,
