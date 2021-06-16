@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9945393_3d2084ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2021-06-16T09:29:13Z",
+      "side": 1,
+      "message": "Thank you Alessio! I\u0027d suggest to add a few more tests to make sure the evaluator works as we discussed offline.",
+      "revId": "20dbdca616e12b3e8da189da94c84c934dbd3808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "417e9314_31c23e75",
+        "filename": "modules/audio_processing/agc/clipping_predictor_evaluator_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2021-06-16T09:29:13Z",
+      "side": 1,
+      "message": "We discussed changing a fully overlapping prediction and detection to produce a false positive.\n\nWould it make sense to also add a test for partially overlapping prediction and detection?",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 43
+      },
+      "revId": "20dbdca616e12b3e8da189da94c84c934dbd3808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "830965e0_67dbaa79",
+        "filename": "modules/audio_processing/agc/clipping_predictor_evaluator_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2021-06-16T09:29:13Z",
+      "side": 1,
+      "message": "How many true negatives are expected here? Could you add a check for that too?",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 371,
+        "endChar": 56
+      },
+      "revId": "20dbdca616e12b3e8da189da94c84c934dbd3808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "613eedc6_c3eb0b81",
+        "filename": "modules/audio_processing/agc/clipping_predictor_evaluator_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2021-06-16T09:29:13Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 56
+      },
+      "revId": "20dbdca616e12b3e8da189da94c84c934dbd3808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb1b883_549678ad",
+        "filename": "modules/audio_processing/agc/clipping_predictor_evaluator_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2021-06-16T09:29:13Z",
+      "side": 1,
+      "message": "Would it make sense to add two more tests, something like `PredictedAndDetectedFullyOverlap` and `PredictedAndDetectedPartiallyOverlap`? (See the comment for `OneTruePositiveAfterInit`)",
+      "revId": "20dbdca616e12b3e8da189da94c84c934dbd3808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
