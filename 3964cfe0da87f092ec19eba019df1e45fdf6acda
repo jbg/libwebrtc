@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4312ea86_043a6b4d",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-16T19:47:07Z",
+      "side": 1,
+      "message": "added a TODO",
+      "parentUuid": "5a66a711_a9b89cfc",
+      "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "446495f0_ce826cf9",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 3
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c67ecc27_d526f4a2",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-16T19:47:07Z",
+      "side": 1,
+      "message": "a reference to the frame decryptor ends up being held by ChannelReceive instances (not via a config struct though) that are associated with the audio receive streams.\n\nThe entire `config_` member variable that was stored in WebRtcAudioReceiveStream for the purposes of recreating the stream, is gone and isn\u0027t needed. So right now, the only reason for having the frame decryptor member variable in the config struct is to get it to the constructor (or rather, give it to Call::CreateAudioReceiveStream).",
+      "parentUuid": "446495f0_ce826cf9",
+      "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5065714_ac725c96",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 3
@@ -65,6 +101,24 @@
       "writtenOn": "2021-06-13T19:42:04Z",
       "side": 1,
       "message": "The name of this method seems to have been a lie, both before and after this CL.\nShould it change?\n\nSame comment about config as above.",
+      "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebdc245d_15b5a8be",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-16T19:47:07Z",
+      "side": 1,
+      "message": "Good point. I had actually asked the same question here:\nhttps://webrtc-review.googlesource.com/c/src/+/39664/3/media/engine/webrtcvoiceengine.cc#1154\n\nRemoved the \"AndRecreateStream\" part.",
+      "parentUuid": "e5065714_ac725c96",
       "revId": "3964cfe0da87f092ec19eba019df1e45fdf6acda",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
