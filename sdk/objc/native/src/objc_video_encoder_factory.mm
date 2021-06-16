@@ -60,7 +60,8 @@ class ObjCVideoEncoder : public VideoEncoder {
               [(RTC_OBJC_TYPE(RTCCodecSpecificInfoH264) *)info nativeCodecSpecificInfo];
         }
 
-        EncodedImageCallback::Result res = callback->OnEncodedImage(encodedImage, &codecSpecificInfo);
+        EncodedImageCallback::Result res =
+            callback->OnEncodedImage(encodedImage, &codecSpecificInfo);
         return res.error == EncodedImageCallback::Result::OK;
       }];
     } else {
