@@ -64,6 +64,11 @@ class RTCPSender final {
     // Estimate RTT as non-sender as described in
     // https://tools.ietf.org/html/rfc3611#section-4.4 and #section-4.5
     bool non_sender_rtt_measurement = false;
+    // Callback which, if specified, is used by RTCPSender to schedule the next
+    // time to evaluate if RTCP should be sent by means of
+    // TimeToSendRTCPReport/SendRTCP.
+    std::function<void(absl::optional<TimeDelta>)>
+        schedule_next_rtcp_send_evaluation_function;
 
     RtcEventLog* event_log = nullptr;
     absl::optional<TimeDelta> rtcp_report_interval;
@@ -223,6 +228,10 @@ class RTCPSender final {
   void BuildNACK(const RtcpContext& context, PacketSender& sender)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_rtcp_sender_);
 
+  // A nullopt specified in |duration| means schedule immediately.
+  void SetNextRtcpSendEvaluationDuration(absl::optional<TimeDelta> duration)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_rtcp_sender_);
+
   const bool audio_;
   const uint32_t ssrc_;
   Clock* const clock_;
@@ -233,6 +242,8 @@ class RTCPSender final {
   Transport* const transport_;
 
   const TimeDelta report_interval_;
+  const std::function<void(absl::optional<TimeDelta>)>
+      schedule_next_rtcp_send_evaluation_function_;
 
   mutable Mutex mutex_rtcp_sender_;
   bool sending_ RTC_GUARDED_BY(mutex_rtcp_sender_);
