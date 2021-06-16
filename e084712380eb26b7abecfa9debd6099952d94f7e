@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fee96845_e0b3f98e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-16T14:52:46Z",
+      "side": 1,
+      "message": "Yeah that\u0027s a good point. Adding todo.",
+      "parentUuid": "cd6ec317_6b078427",
+      "revId": "e084712380eb26b7abecfa9debd6099952d94f7e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5c3b420_c125dd00",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-06-16T11:33:19Z",
       "side": 1,
       "message": "nit: TimeDelta?",
+      "range": {
+        "startLine": 81,
+        "startChar": 16,
+        "endLine": 81,
+        "endChar": 23
+      },
+      "revId": "e084712380eb26b7abecfa9debd6099952d94f7e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abf8c5ea_69c0de49",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-16T14:52:46Z",
+      "side": 1,
+      "message": "Converted the whole file.",
+      "parentUuid": "f5c3b420_c125dd00",
       "range": {
         "startLine": 81,
         "startChar": 16,
@@ -64,6 +106,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c42800e_195aba04",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-16T14:52:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee2e78b5_8d0a2a7d",
+      "range": {
+        "startLine": 138,
+        "startChar": 32,
+        "endLine": 138,
+        "endChar": 33
+      },
+      "revId": "e084712380eb26b7abecfa9debd6099952d94f7e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "deb8ca2a_c9b34b5f",
@@ -77,6 +143,30 @@
       "writtenOn": "2021-06-16T11:33:19Z",
       "side": 1,
       "message": "Is this change intended, going from 2000ms to 500ms?",
+      "range": {
+        "startLine": 526,
+        "startChar": 16,
+        "endLine": 526,
+        "endChar": 44
+      },
+      "revId": "e084712380eb26b7abecfa9debd6099952d94f7e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fce99ed_e05a18a7",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-16T14:52:46Z",
+      "side": 1,
+      "message": "Yes!\n\nThe test started on line 476 with the expectation that a Process() call would lead to no RTCP. That the sender was anyway not sending RTCP was checked again at line 484, so I removed the first occurrence.\n\nBut the way the test checked for the |receiver_| send time of the RTCP (i.e. Advance(2000) and then expecting the send to happen there) doesn\u0027t work when using a ProcessThread which controls calls to Process(), because the first RTCP will be sent by the module at relative instant kDefaultReportIntervalMs/2. So to get a handle at the |current_time|, I advance the time to the send instant so that line 481/527 can stay unchanged.",
+      "parentUuid": "deb8ca2a_c9b34b5f",
       "range": {
         "startLine": 526,
         "startChar": 16,
