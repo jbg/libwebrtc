@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'b452ca696d154bb46945947cf2964f4955f3ad07',
+  'chromium_revision': 'd2f86b6679f3cdf01313a403158d034b1f3ada61',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -20,9 +20,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@5728cd31d79b054ee5139204a60026acb33faf86',
+    'https://chromium.googlesource.com/chromium/src/base@46146bca12010c6d90bea61afc616f85bd8ab460',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@96bb81b69150bf0dc18457c223de441a47eda03e',
+    'https://chromium.googlesource.com/chromium/src/build@94441aacf6a6e315987e70933548d9d698da8405',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@be7dcbc36110b9381f228b8e4ca73ca1db9bf21a',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -31,13 +31,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@f3b597ed9487794747a50c8d8ef51c3141419982',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@91e836c1580974c7e473fae33184cf7460ec67d5',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@72756fe569f6b2b301cff39390f4d165efdfe4bd',
+    'https://chromium.googlesource.com/chromium/src/testing@1c1a1626e90003820328a5392a50630bbbcb7342',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@da4640450370d5659e5092006f6260a87add65fa',
+    'https://chromium.googlesource.com/chromium/src/third_party@55c0b0f3013d722eb5c1634ceb5752ad75bac470',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -77,7 +77,7 @@ deps = {
   'src/buildtools/third_party/libc++abi/trunk':
     'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git@f4328ad7c0d8242d36cb5bea530925f9fea34248',
   'src/buildtools/third_party/libunwind/trunk':
-    'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libunwind.git@7e85c7a26be09db769732d59a829cc0d310e3ef6',
+    'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libunwind.git@a38ef11ab68f975bb4fe5356aff5f0e3dabe9f23',
 
   'src/tools/clang/dsymutil': {
     'packages': [
@@ -150,7 +150,7 @@ deps = {
       'condition': 'checkout_linux',
   },
   'src/third_party/freetype/src':
-    'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@8336d53cff9f78bb48f1ba4aa670c1d8d81d1808',
+    'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@c6fcd61228ea349e76aa4f09442c431308da3262',
   'src/third_party/harfbuzz-ng/src':
     'https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git@4811e8f5d76ef528b4cec00f241cc4ab8110db30',
   'src/third_party/google_benchmark/src': {
@@ -214,7 +214,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@73cf27bf1244cc6d8605f4c4ba0840831908a6f5',
+    'https://android.googlesource.com/platform/external/perfetto.git@bb16fa2cc0a03db867a1977c68d87efe7d7e26be',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@61edec1efbea1c02d71857e2aff9426d9cd2df4e',
   'src/third_party/libyuv':
@@ -271,7 +271,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@6d465fb61fd58caa269eddaad95c448c1067fcf5',
+    'https://chromium.googlesource.com/chromium/src/tools@1603deacd97b0dbf7e2c16753c194ee5889dec8c',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@a32a1607f6093d338f756c7e7c7b4333b0c50c9c',
 
