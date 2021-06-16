@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "712fdca6_13348b18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-06-16T11:36:27Z",
+      "side": 1,
+      "message": "does that sound like a realistic explanation of why it behaves like that?\nI considered writing a test (PS0 shows it is possible to change without any existing test failing) but the effort to do so requires creating a CA chain of at least depth four which is a lot of effort...",
+      "revId": "9e4968f06710eb3d0bd513d90d9cf6ca93cd1a12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
