@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98fc360e_05429b88",
+        "filename": "modules/audio_processing/agc/clipping_predictor_evaluator_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-06-16T12:56:59Z",
+      "side": 1,
+      "message": "\u003e We discussed changing a fully overlapping prediction and detection to produce a false positive.\n\nAs discussed offline, let\u0027s keep this option as this CL also adds a measurement of \"predictive power\" - namely, clipping prediction interval.",
+      "parentUuid": "417e9314_31c23e75",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 43
+      },
+      "revId": "20dbdca616e12b3e8da189da94c84c934dbd3808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "830965e0_67dbaa79",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-06-16T09:29:13Z",
       "side": 1,
       "message": "How many true negatives are expected here? Could you add a check for that too?",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 371,
+        "endChar": 56
+      },
+      "revId": "20dbdca616e12b3e8da189da94c84c934dbd3808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b68dca6_a67abf87",
+        "filename": "modules/audio_processing/agc/clipping_predictor_evaluator_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-06-16T12:56:59Z",
+      "side": 1,
+      "message": "TL;DR done\n\nMy intent was to decouple the tests in this file as much as possible; so, in this test, I wanted to focus on the next 2 calls to `Observe()` testing that no other true negative is added - i.e., same number as before the 2 calls regardless of what that number is.\n\nHowever, in the latest patch set I changed approach for this whole file and added expecations on all the metrics to further clarify the behavior.",
+      "parentUuid": "830965e0_67dbaa79",
       "range": {
         "startLine": 371,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8404e44c_d6937d70",
+        "filename": "modules/audio_processing/agc/clipping_predictor_evaluator_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-06-16T12:56:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "613eedc6_c3eb0b81",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 56
+      },
+      "revId": "20dbdca616e12b3e8da189da94c84c934dbd3808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fb1b883_549678ad",
@@ -100,6 +172,24 @@
       "writtenOn": "2021-06-16T09:29:13Z",
       "side": 1,
       "message": "Would it make sense to add two more tests, something like `PredictedAndDetectedFullyOverlap` and `PredictedAndDetectedPartiallyOverlap`? (See the comment for `OneTruePositiveAfterInit`)",
+      "revId": "20dbdca616e12b3e8da189da94c84c934dbd3808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7beb7740_8ee2e847",
+        "filename": "modules/audio_processing/agc/clipping_predictor_evaluator_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-06-16T12:56:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9fb1b883_549678ad",
       "revId": "20dbdca616e12b3e8da189da94c84c934dbd3808",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
