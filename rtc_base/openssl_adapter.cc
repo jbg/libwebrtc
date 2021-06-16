@@ -981,7 +981,7 @@ SSL_CTX* OpenSSLAdapter::CreateContext(SSLMode mode, bool enable_cache) {
   SSL_CTX_set_custom_verify(ctx, SSL_VERIFY_PEER, SSLVerifyCallback);
 #else
   SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, SSLVerifyCallback);
-  SSL_CTX_set_verify_depth(ctx, 4);
+  SSL_CTX_set_verify_depth(ctx, 0);
 #endif
   // Use defaults, but disable HMAC-SHA256 and HMAC-SHA384 ciphers
   // (note that SHA256 and SHA384 only select legacy CBC ciphers).
