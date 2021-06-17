@@ -87,6 +87,30 @@
       },
       "revId": "08633e6411833c296ecd107a84a5201c53e380ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc35d896_661fe1c2",
+        "filename": "test/fuzzers/rtp_packet_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-06-17T13:18:53Z",
+      "side": 1,
+      "message": "You are right in that it wasn\u0027t a style change, when it was in the enclosing scope the compiler generated a warning (turned into an error ofc) that `timing` wouldn\u0027t get initialized for all switch cases.",
+      "parentUuid": "a46843c4_2aee17f2",
+      "range": {
+        "startLine": 114,
+        "startChar": 11,
+        "endLine": 114,
+        "endChar": 41
+      },
+      "revId": "08633e6411833c296ecd107a84a5201c53e380ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
