@@ -16,6 +16,29 @@
       "message": "Sam, PTAL",
       "revId": "08633e6411833c296ecd107a84a5201c53e380ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad017704_c18bb814",
+        "filename": "test/fuzzers/rtp_packet_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-06-17T12:35:44Z",
+      "side": 1,
+      "message": "If you are fixing style, could you also add brackets for this case?",
+      "range": {
+        "startLine": 114,
+        "startChar": 11,
+        "endLine": 114,
+        "endChar": 41
+      },
+      "revId": "08633e6411833c296ecd107a84a5201c53e380ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
