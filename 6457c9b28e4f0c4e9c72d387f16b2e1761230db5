@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a00b7f54_fb3c3624",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-17T13:31:36Z",
+      "side": 1,
+      "message": "in addition to avoid wasting resources, \nit should mitigate issues when generating such an extension.",
+      "revId": "6457c9b28e4f0c4e9c72d387f16b2e1761230db5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
