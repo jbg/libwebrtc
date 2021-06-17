@@ -63,6 +63,30 @@
       },
       "revId": "08633e6411833c296ecd107a84a5201c53e380ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a46843c4_2aee17f2",
+        "filename": "test/fuzzers/rtp_packet_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-17T12:50:07Z",
+      "side": 1,
+      "message": "My understanding it is not a style fix, brackets become necessary because VideoSendTiming constructor is no longer trivial, thus VideoSendTiming is no longer POD.\n\n(not sure I fully I understand why compile might get confused now - destructor is still trivial. may be compiler is a bit overprotective.\nswitch/case has lot\u0027s of c++ valid but confusing usecases. compilers warns against them)",
+      "parentUuid": "82d0084c_682c17d9",
+      "range": {
+        "startLine": 114,
+        "startChar": 11,
+        "endLine": 114,
+        "endChar": 41
+      },
+      "revId": "08633e6411833c296ecd107a84a5201c53e380ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
