@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5af59107_0570862a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-06-17T11:35:17Z",
+      "side": 1,
+      "message": "Thanks for the review Hanna!",
+      "revId": "ddd5d9a0f6fa8a28e11e314d7af907305fc95fb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
