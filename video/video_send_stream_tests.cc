@@ -1464,13 +1464,7 @@ TEST_F(VideoSendStreamTest, MinTransmitBitrateRespectsRemb) {
 
     ~BitrateObserver() override {
       // Make sure we free |rtp_rtcp_| in the same context as we constructed it.
-      SendTask(RTC_FROM_HERE, task_queue_, [this]() {
-        if (rtp_rtcp_)
-          process_thread_->DeRegisterModule(rtp_rtcp_.get());
-        rtp_rtcp_ = nullptr;
-        process_thread_->Stop();
-        process_thread_ = nullptr;
-      });
+      SendTask(RTC_FROM_HERE, task_queue_, [this]() { rtp_rtcp_ = nullptr; });
     }
 
    private:
@@ -1512,12 +1506,8 @@ TEST_F(VideoSendStreamTest, MinTransmitBitrateRespectsRemb) {
       config.clock = Clock::GetRealTimeClock();
       config.outgoing_transport = feedback_transport_.get();
       config.retransmission_rate_limiter = &retranmission_rate_limiter_;
-      RTC_DCHECK(!rtp_rtcp_ && !process_thread_);
-      process_thread_ =
-          ProcessThread::Create("MinTransmitBitrateRespectsRemb_ProcessThread");
-      process_thread_->Start();
+      RTC_DCHECK(!rtp_rtcp_);
       rtp_rtcp_ = ModuleRtpRtcpImpl2::Create(config);
-      process_thread_->RegisterModule(rtp_rtcp_.get(), RTC_FROM_HERE);
       rtp_rtcp_->SetRTCPStatus(RtcpMode::kReducedSize);
     }
 
@@ -1537,7 +1527,6 @@ TEST_F(VideoSendStreamTest, MinTransmitBitrateRespectsRemb) {
     }
 
     TaskQueueBase* const task_queue_;
-    std::unique_ptr<ProcessThread> process_thread_;
     std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp_;
     std::unique_ptr<internal::TransportAdapter> feedback_transport_;
     RateLimiter retranmission_rate_limiter_;
