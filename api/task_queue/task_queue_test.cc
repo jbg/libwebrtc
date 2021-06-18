@@ -9,8 +9,12 @@
  */
 #include "api/task_queue/task_queue_test.h"
 
+#include <memory>
+
 #include "absl/memory/memory.h"
 #include "absl/strings/string_view.h"
+#include "api/task_queue/queued_task.h"
+#include "api/units/timestamp.h"
 #include "rtc_base/event.h"
 #include "rtc_base/ref_counter.h"
 #include "rtc_base/task_utils/to_queued_task.h"
@@ -269,6 +273,42 @@ TEST_P(TaskQueueTest, PostTwoWithSharedUnprotectedState) {
     EXPECT_EQ(state.state, 0);
   }));
   EXPECT_TRUE(done.Wait(1000));
+}
+
+// Test that delayed tasks posted from the queue sequence won't fire early.
+// Regression test for bugs.webrtc.org/12889.
+TEST_P(TaskQueueTest, DelayedTasksNotFiredEarly) {
+  std::unique_ptr<webrtc::TaskQueueFactory> factory = GetParam()();
+  auto queue = CreateTaskQueue(factory, "DelayedTasksNotFiredEarly");
+  auto post_and_verify_not_early = [&queue](int delay_ms, rtc::Event* done) {
+    queue->PostDelayedTask(
+        ToQueuedTask([delay_ms, done,
+                      fire_time = Timestamp::Micros(rtc::TimeMicros()) +
+                                  TimeDelta::Millis(delay_ms)] {
+          auto now = Timestamp::Micros(rtc::TimeMicros());
+          auto diff = now - fire_time;
+          EXPECT_GE(now, fire_time)
+              << "Diff: " << diff.us() << "us for delay " << delay_ms << "ms";
+          done->Set();
+        }),
+        delay_ms);
+  };
+
+  rtc::Event delayed_task_1_done;
+  rtc::Event delayed_task_2_done;
+  rtc::Event never_set;
+  queue->PostTask(ToQueuedTask([&] {
+    post_and_verify_not_early(100, &delayed_task_1_done);
+
+    // Let some time pass in the execution.
+    never_set.Wait(4);
+
+    // Schedule another delayed task.
+    post_and_verify_not_early(500, &delayed_task_2_done);
+  }));
+
+  EXPECT_TRUE(delayed_task_1_done.Wait(30000));
+  EXPECT_TRUE(delayed_task_2_done.Wait(30000));
 }
 
 // TaskQueueTest is a set of tests for any implementation of the TaskQueueBase.
