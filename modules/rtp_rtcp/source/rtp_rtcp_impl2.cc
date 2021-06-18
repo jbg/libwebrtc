@@ -20,12 +20,15 @@
 #include <utility>
 
 #include "absl/types/optional.h"
+#include "api/sequence_checker.h"
 #include "api/transport/field_trial_based_config.h"
+#include "api/units/time_delta.h"
 #include "api/units/timestamp.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/dlrr.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_config.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "system_wrappers/include/ntp_time.h"
 
 #ifdef _WIN32
@@ -39,6 +42,14 @@ const int64_t kRtpRtcpMaxIdleTimeProcessMs = 5;
 const int64_t kDefaultExpectedRetransmissionTimeMs = 125;
 
 constexpr TimeDelta kRttUpdateInterval = TimeDelta::Millis(1000);
+
+RTCPSender::Configuration AddRtcpSendEvaluationCallback(
+    RTCPSender::Configuration config,
+    std::function<void(absl::optional<TimeDelta>)> send_evaluation_callback) {
+  config.schedule_next_rtcp_send_evaluation_function =
+      std::move(send_evaluation_callback);
+  return config;
+}
 }  // namespace
 
 ModuleRtpRtcpImpl2::RtpSenderContext::RtpSenderContext(
@@ -57,8 +68,11 @@ void ModuleRtpRtcpImpl2::RtpSenderContext::AssignSequenceNumber(
 
 ModuleRtpRtcpImpl2::ModuleRtpRtcpImpl2(const Configuration& configuration)
     : worker_queue_(TaskQueueBase::Current()),
-      rtcp_sender_(
-          RTCPSender::Configuration::FromRtpRtcpConfiguration(configuration)),
+      rtcp_sender_(AddRtcpSendEvaluationCallback(
+          RTCPSender::Configuration::FromRtpRtcpConfiguration(configuration),
+          [this](absl::optional<TimeDelta> duration) {
+            ScheduleRtcpSendEvaluation(duration);
+          })),
       rtcp_receiver_(configuration, this),
       clock_(configuration.clock),
       last_rtt_process_time_(clock_->TimeInMilliseconds()),
@@ -71,6 +85,7 @@ ModuleRtpRtcpImpl2::ModuleRtpRtcpImpl2(const Configuration& configuration)
       rtt_stats_(configuration.rtt_stats),
       rtt_ms_(0) {
   RTC_DCHECK(worker_queue_);
+  task_safety_.flag()->SetNotAlive();
   process_thread_checker_.Detach();
   if (!configuration.receiver_only) {
     rtp_sender_ = std::make_unique<RtpSenderContext>(configuration);
@@ -138,11 +153,6 @@ void ModuleRtpRtcpImpl2::Process() {
       rtcp_sender_.SetTargetBitrate(target_bitrate);
     }
   }
-
-  // TODO(bugs.webrtc.org/11581): Run this on a separate set of delayed tasks
-  // based off of next_time_to_send_rtcp_ in RTCPSender.
-  if (rtcp_sender_.TimeToSendRTCPReport())
-    rtcp_sender_.SendRTCP(GetFeedbackState(), kRtcpReport);
 }
 
 void ModuleRtpRtcpImpl2::SetRtxSendStatus(int mode) {
@@ -755,6 +765,63 @@ void ModuleRtpRtcpImpl2::PeriodicUpdate() {
   // rtcp_sender_.TMMBR().
   if (rtcp_sender_.TMMBR() && rtcp_receiver_.UpdateTmmbrTimers())
     rtcp_receiver_.NotifyTmmbrUpdated();
+}
+
+void ModuleRtpRtcpImpl2::ProcessThreadAttached(ProcessThread* process_thread) {
+  RTC_DCHECK_RUN_ON(worker_queue_);
+  // |process_thread| is nullptr when the module is detached. Clearing the flag
+  // cancels future RTCP callbacks.
+  if (process_thread) {
+    task_safety_.flag()->SetAlive();
+    ScheduleRtcpSendEvaluation(absl::nullopt);
+  } else {
+    task_safety_.flag()->SetNotAlive();
+  }
+}
+
+void ModuleRtpRtcpImpl2::MaybeSendRtcp() {
+  RTC_DCHECK_RUN_ON(worker_queue_);
+  if (rtcp_sender_.TimeToSendRTCPReport())
+    rtcp_sender_.SendRTCP(GetFeedbackState(), kRtcpReport);
+}
+
+// TODO(bugs.webrtc.org/12889): Consider removing this function when the issue
+// is resolved.
+void ModuleRtpRtcpImpl2::MaybeSendRtcpAtOrAfterTimestamp(
+    Timestamp execution_time) {
+  RTC_DCHECK_RUN_ON(worker_queue_);
+  Timestamp now = clock_->CurrentTime();
+  if (now >= execution_time) {
+    MaybeSendRtcp();
+    return;
+  }
+
+  RTC_DLOG(LS_WARNING)
+      << "BUGBUG: Task queue scheduled delayed call too early.";
+
+  // Add 1 to the delay due to TimeDelta::ms() rounding downwards sometimes.
+  int delay_ms = (execution_time - now).ms() + 1;
+  worker_queue_->PostDelayedTask(
+      ToQueuedTask(task_safety_,
+                   [this, execution_time] {
+                     MaybeSendRtcpAtOrAfterTimestamp(execution_time);
+                   }),
+      delay_ms);
+}
+
+void ModuleRtpRtcpImpl2::ScheduleRtcpSendEvaluation(
+    absl::optional<TimeDelta> duration) {
+  if (!worker_queue_->IsCurrent()) {
+    worker_queue_->PostTask(ToQueuedTask(task_safety_, [this, duration] {
+      ScheduleRtcpSendEvaluation(duration);
+    }));
+    return;
+  }
+  RTC_DCHECK_RUN_ON(worker_queue_);
+  Timestamp execution_time =
+      clock_->CurrentTime() +
+      (duration.has_value() ? *duration : TimeDelta::Zero());
+  MaybeSendRtcpAtOrAfterTimestamp(execution_time);
 }
 
 }  // namespace webrtc

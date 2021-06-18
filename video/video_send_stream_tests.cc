@@ -31,11 +31,13 @@
 #include "modules/rtp_rtcp/source/rtp_packet.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_impl2.h"
 #include "modules/rtp_rtcp/source/video_rtp_depacketizer_vp9.h"
+#include "modules/utility/include/process_thread.h"
 #include "modules/video_coding/codecs/vp8/include/vp8.h"
 #include "modules/video_coding/codecs/vp9/include/vp9.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
 #include "rtc_base/experiments/alr_experiment.h"
+#include "rtc_base/location.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/rate_limiter.h"
@@ -1462,7 +1464,13 @@ TEST_F(VideoSendStreamTest, MinTransmitBitrateRespectsRemb) {
 
     ~BitrateObserver() override {
       // Make sure we free |rtp_rtcp_| in the same context as we constructed it.
-      SendTask(RTC_FROM_HERE, task_queue_, [this]() { rtp_rtcp_ = nullptr; });
+      SendTask(RTC_FROM_HERE, task_queue_, [this]() {
+        if (rtp_rtcp_)
+          process_thread_->DeRegisterModule(rtp_rtcp_.get());
+        rtp_rtcp_ = nullptr;
+        process_thread_->Stop();
+        process_thread_ = nullptr;
+      });
     }
 
    private:
@@ -1486,7 +1494,6 @@ TEST_F(VideoSendStreamTest, MinTransmitBitrateRespectsRemb) {
                           "bps", false);
         if (total_bitrate_bps > kHighBitrateBps) {
           rtp_rtcp_->SetRemb(kRembBitrateBps, {rtp_packet.Ssrc()});
-          rtp_rtcp_->Process();
           bitrate_capped_ = true;
         } else if (bitrate_capped_ &&
                    total_bitrate_bps < kRembRespectedBitrateBps) {
@@ -1505,7 +1512,12 @@ TEST_F(VideoSendStreamTest, MinTransmitBitrateRespectsRemb) {
       config.clock = Clock::GetRealTimeClock();
       config.outgoing_transport = feedback_transport_.get();
       config.retransmission_rate_limiter = &retranmission_rate_limiter_;
+      RTC_DCHECK(!rtp_rtcp_ && !process_thread_);
+      process_thread_ =
+          ProcessThread::Create("MinTransmitBitrateRespectsRemb_ProcessThread");
+      process_thread_->Start();
       rtp_rtcp_ = ModuleRtpRtcpImpl2::Create(config);
+      process_thread_->RegisterModule(rtp_rtcp_.get(), RTC_FROM_HERE);
       rtp_rtcp_->SetRTCPStatus(RtcpMode::kReducedSize);
     }
 
@@ -1525,6 +1537,7 @@ TEST_F(VideoSendStreamTest, MinTransmitBitrateRespectsRemb) {
     }
 
     TaskQueueBase* const task_queue_;
+    std::unique_ptr<ProcessThread> process_thread_;
     std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp_;
     std::unique_ptr<internal::TransportAdapter> feedback_transport_;
     RateLimiter retranmission_rate_limiter_;
