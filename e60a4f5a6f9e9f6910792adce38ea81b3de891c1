@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0589a31_a501c9e7",
+        "filename": "video/end_to_end_tests/network_state_tests.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-20T20:37:08Z",
+      "side": 0,
+      "message": "CreateSender/ReceiverCall doesn\u0027t specify Config::network_task_queue_ which makes Call instances expect calls to SignalChannelNetworkState on the worker thread which is taken as the the sequence that created the Call instance, i.e. e2e_test_task_queue_.",
+      "range": {
+        "startLine": 232,
+        "startChar": 22,
+        "endLine": 232,
+        "endChar": 47
+      },
+      "revId": "e60a4f5a6f9e9f6910792adce38ea81b3de891c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "928506a0_3aa59e3d",
+        "filename": "video/rtp_video_stream_receiver2_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-20T20:37:08Z",
+      "side": 0,
+      "message": "The test assumed a fake task queue was okay to use. Now it\u0027s not as it\u0027s used for RTCP send.",
+      "range": {
+        "startLine": 236,
+        "startChar": 17,
+        "endLine": 236,
+        "endChar": 28
+      },
+      "revId": "e60a4f5a6f9e9f6910792adce38ea81b3de891c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

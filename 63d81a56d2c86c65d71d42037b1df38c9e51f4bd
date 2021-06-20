@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20336f18_2bff66ba",
+        "filename": "video/end_to_end_tests/network_state_tests.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-20T20:37:08Z",
+      "side": 1,
+      "message": "The test assumed blocking operations were okay on the test task queue. It\u0027s not anymore.",
+      "range": {
+        "startLine": 175,
+        "startChar": 10,
+        "endLine": 175,
+        "endChar": 30
+      },
+      "revId": "63d81a56d2c86c65d71d42037b1df38c9e51f4bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
