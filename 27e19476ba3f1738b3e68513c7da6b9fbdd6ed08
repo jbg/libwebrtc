@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9b4711e_6048b51a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17849
+      },
+      "writtenOn": "2021-06-20T21:17:06Z",
+      "side": 1,
+      "message": "Hello! I\u0027m just getting set up to try contributing to WebRTC, and going with the default suggested reviewers. Apologies if this is best suited for someone else.",
+      "revId": "27e19476ba3f1738b3e68513c7da6b9fbdd6ed08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
