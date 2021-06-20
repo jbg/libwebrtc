@@ -32,9 +32,6 @@ struct FecProtectionParams;
 class RtpVideoSenderInterface : public EncodedImageCallback,
                                 public FecControllerOverride {
  public:
-  virtual void RegisterProcessThread(ProcessThread* module_process_thread) = 0;
-  virtual void DeRegisterProcessThread() = 0;
-
   // RtpVideoSender will only route packets if being active, all
   // packets will be dropped otherwise.
   virtual void SetActive(bool active) = 0;
