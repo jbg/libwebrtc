@@ -524,7 +524,7 @@ TEST_P(RtpRtcpImpl2Test, NoSrBeforeMedia) {
   // Move ahead to the instant a rtcp is expected.
   // Verify no SR is sent before media has been sent, RR should still be sent
   // from the receiving module though.
-  AdvanceTime(kDefaultReportInterval / 2);
+  AdvanceTime(kDefaultReportInterval / 2 + TimeDelta::Millis(1));
   int64_t current_time = time_controller_.GetClock()->TimeInMilliseconds();
   EXPECT_EQ(-1, sender_.RtcpSent().first_packet_time_ms);
   EXPECT_EQ(receiver_.RtcpSent().first_packet_time_ms, current_time);
@@ -711,7 +711,7 @@ TEST_P(RtpRtcpImpl2Test, ConfigurableRtcpReportInterval) {
   EXPECT_EQ(0u, sender_.transport_.NumRtcpSent());
 
   // Move ahead to the last ms before a rtcp is expected, no action.
-  AdvanceTime(kVideoReportInterval / 2 - TimeDelta::Millis(1));
+  AdvanceTime(kVideoReportInterval / 2);
   EXPECT_EQ(sender_.RtcpSent().first_packet_time_ms, -1);
   EXPECT_EQ(sender_.transport_.NumRtcpSent(), 0u);
 
@@ -723,7 +723,7 @@ TEST_P(RtpRtcpImpl2Test, ConfigurableRtcpReportInterval) {
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
 
   // Move ahead to the last possible second before second rtcp is expected.
-  AdvanceTime(kVideoReportInterval * 1 / 2 - TimeDelta::Millis(1));
+  AdvanceTime(kVideoReportInterval * 1 / 2);
   EXPECT_EQ(sender_.transport_.NumRtcpSent(), 1u);
 
   // Move ahead into the range of second rtcp, the second rtcp may be sent.

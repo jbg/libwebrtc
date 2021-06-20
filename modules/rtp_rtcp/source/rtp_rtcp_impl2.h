@@ -32,7 +32,6 @@
 #include "modules/rtp_rtcp/source/rtcp_sender.h"
 #include "modules/rtp_rtcp/source/rtp_packet_history.h"
 #include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
-#include "modules/rtp_rtcp/source/rtp_rtcp_impl2.h"
 #include "modules/rtp_rtcp/source/rtp_sender.h"
 #include "modules/rtp_rtcp/source/rtp_sender_egress.h"
 #include "rtc_base/gtest_prod_util.h"
@@ -40,6 +39,8 @@
 #include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/task_utils/pending_task_safety_flag.h"
 #include "rtc_base/task_utils/repeating_task.h"
+#include "rtc_base/task_utils/to_queued_task.h"
+#include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
 
@@ -259,6 +260,9 @@ class ModuleRtpRtcpImpl2 final : public RtpRtcpInterface,
   RTPSender* RtpSender() override;
   const RTPSender* RtpSender() const override;
 
+  // Module overrides.
+  void ProcessThreadAttached(ProcessThread* process_thread) override;
+
  private:
   FRIEND_TEST_ALL_PREFIXES(RtpRtcpImpl2Test, Rtt);
   FRIEND_TEST_ALL_PREFIXES(RtpRtcpImpl2Test, RttForReceiverOnly);
@@ -289,12 +293,23 @@ class ModuleRtpRtcpImpl2 final : public RtpRtcpInterface,
   // Returns true if the module is configured to store packets.
   bool StorePackets() const;
 
+  // Used from RtcpSenderMediator to maybe send rtcp.
+  void MaybeSendRtcp() RTC_RUN_ON(worker_queue_);
+
+  // Called when |rtcp_sender_| informs of the next RTCP instant. The method may
+  // be called on various sequences, and is called under a RTCPSenderLock.
+  void ScheduleRtcpSendEvaluation(absl::optional<TimeDelta> duration);
+
+  // Helper method combating too early delayed calls from task queues.
+  // TODO(bugs.webrtc.org/12889): Consider removing this function when the issue
+  // is resolved.
+  void MaybeSendRtcpAtOrAfterTimestamp(Timestamp execution_time);
+
   TaskQueueBase* const worker_queue_;
   RTC_NO_UNIQUE_ADDRESS SequenceChecker process_thread_checker_;
   RTC_NO_UNIQUE_ADDRESS SequenceChecker packet_sequence_checker_;
 
   std::unique_ptr<RtpSenderContext> rtp_sender_;
-
   RTCPSender rtcp_sender_;
   RTCPReceiver rtcp_receiver_;
 
@@ -316,6 +331,8 @@ class ModuleRtpRtcpImpl2 final : public RtpRtcpInterface,
   // The processed RTT from RtcpRttStats.
   mutable Mutex mutex_rtt_;
   int64_t rtt_ms_ RTC_GUARDED_BY(mutex_rtt_);
+
+  RTC_NO_UNIQUE_ADDRESS ScopedTaskSafety task_safety_;
 };
 
 }  // namespace webrtc
