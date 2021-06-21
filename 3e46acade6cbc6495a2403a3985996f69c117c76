@@ -37,6 +37,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55415310_7863e3ba",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2021-06-21T14:54:21Z",
+      "side": 1,
+      "message": "Can\u0027t we pass in TimeDelta::Zero() here instead of absl::nullopt to indicate that it\u0027s supposed to be sent immediately? Would be easier to read IMO",
+      "range": {
+        "startLine": 908,
+        "startChar": 44,
+        "endLine": 908,
+        "endChar": 51
+      },
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd2eeb6b_ac6b3822",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2021-06-21T14:54:21Z",
+      "side": 1,
+      "message": "Will this ever not be set? If so, why?",
+      "range": {
+        "startLine": 973,
+        "startChar": 6,
+        "endLine": 973,
+        "endChar": 50
+      },
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de5796aa_fe59bc0c",
         "filename": "modules/rtp_rtcp/source/rtcp_sender.h",
         "patchSetId": 14
@@ -99,6 +145,47 @@
       "writtenOn": "2021-06-21T07:57:14Z",
       "side": 1,
       "message": "Instead of leaving this commented out (which to me reads like the function doesn\u0027t actually run on that thread) can we add a comment like this:\n\n  // RTC_RUN_ON(worker_queue_)\n  void ModuleRtpRtcpImpl2::MaybeSendRtcpAtOrAfterTimestamp(",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b75d1957_1d79b4cd",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2021-06-21T14:54:21Z",
+      "side": 1,
+      "message": "At least I think it would be good to explain why it\u0027s commented out, and what it would take to undo it 😊",
+      "parentUuid": "da271a65_555f26e7",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c0189a7_1afcebb5",
+        "filename": "video/end_to_end_tests/network_state_tests.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2021-06-21T14:54:21Z",
+      "side": 1,
+      "message": "Feels like a separate CL?",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 46
+      },
       "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
