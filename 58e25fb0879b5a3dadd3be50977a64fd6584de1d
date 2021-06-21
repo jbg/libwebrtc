@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7376c266_4bccbacc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-21T18:52:52Z",
+      "side": 1,
+      "message": "...aaand I forgot to tick the box.",
+      "revId": "58e25fb0879b5a3dadd3be50977a64fd6584de1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1021c4c1_8b0a5cde",
