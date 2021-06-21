@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46557c2b_600d1e13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-21T07:57:14Z",
+      "side": 1,
+      "message": "Adding Stefan to take a look as well",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2238b1fd_24ff5da8",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-21T07:57:14Z",
+      "side": 1,
+      "message": "s/Sleep/Delay ? (just to make it clear that we don\u0027t block the thread by sleeping)",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da271a65_555f26e7",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-21T07:57:14Z",
+      "side": 1,
+      "message": "Instead of leaving this commented out (which to me reads like the function doesn\u0027t actually run on that thread) can we add a comment like this:\n\n  // RTC_RUN_ON(worker_queue_)\n  void ModuleRtpRtcpImpl2::MaybeSendRtcpAtOrAfterTimestamp(",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
