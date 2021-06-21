@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4637885_8af46ed2",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2021-06-21T11:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707e6edb_590a5ca7",
+      "revId": "9b7bcd22319c3cd0db3578d1444a5e424260236e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a9d75d9_25f40791",
@@ -35,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dae16ccc_941ee75e",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2021-06-21T11:47:55Z",
+      "side": 1,
+      "message": "Already checked above.",
+      "parentUuid": "5a9d75d9_25f40791",
+      "revId": "9b7bcd22319c3cd0db3578d1444a5e424260236e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33a2f79f_f3bca8fb",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-06-17T14:34:01Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "9b7bcd22319c3cd0db3578d1444a5e424260236e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f6eef3b_f0b47deb",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1915,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2021-06-21T11:47:55Z",
+      "side": 1,
+      "message": "This one is already checked above.",
+      "parentUuid": "33a2f79f_f3bca8fb",
       "revId": "9b7bcd22319c3cd0db3578d1444a5e424260236e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
