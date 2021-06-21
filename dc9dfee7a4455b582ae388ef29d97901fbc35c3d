@@ -159,6 +159,24 @@
       "parentUuid": "5a836f80_0b000785",
       "revId": "dc9dfee7a4455b582ae388ef29d97901fbc35c3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7a36419_bbbd339e",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-06-21T20:35:23Z",
+      "side": 1,
+      "message": "\u003e The groups from the proposed offer should in all cases be the same as what we get by deleting rejected sections and adding new sections to the currently standing grouping\n\nIn a proposed offer *from a JSEP-compliant endpoint*, yes. But I\u0027m talking about a non-JSEP endpoint, which doesn\u0027t even need to support BUNDLE, and if it does, is not required to bundle everything.\n\nIt\u0027s difficult to provide a test, since after this change, both the offerer and answerer will behave in the same way. But I did reproduce the problem by making a call between M91 and Chrome Canary, where M91 is re-offering, adding a video m\u003d section not in the BUNDLE group (allowed via SDP munging). M91 keeps waiting for candidates that never come.\n\nOf course, ideally I\u0027d be testing between a non-WebRTC endpoint, but Chrome + SDP munging is usually good enough to simulate one.",
+      "parentUuid": "4ce7c46b_e8867b33",
+      "revId": "dc9dfee7a4455b582ae388ef29d97901fbc35c3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
