@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7281ae8d_9b15c7da",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-21T16:52:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57b963f3_eac04bc8",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55415310_7863e3ba",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-06-21T14:54:21Z",
       "side": 1,
       "message": "Can\u0027t we pass in TimeDelta::Zero() here instead of absl::nullopt to indicate that it\u0027s supposed to be sent immediately? Would be easier to read IMO",
+      "range": {
+        "startLine": 908,
+        "startChar": 44,
+        "endLine": 908,
+        "endChar": 51
+      },
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37619973_cc2b77fa",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-21T16:52:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55415310_7863e3ba",
       "range": {
         "startLine": 908,
         "startChar": 44,
@@ -81,6 +123,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe08eb6_9089e886",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-21T16:52:38Z",
+      "side": 1,
+      "message": "There are legacy consumers downstream that don\u0027t make use of the callback-based method.",
+      "parentUuid": "bd2eeb6b_ac6b3822",
+      "range": {
+        "startLine": 973,
+        "startChar": 6,
+        "endLine": 973,
+        "endChar": 50
+      },
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de5796aa_fe59bc0c",
@@ -94,6 +160,24 @@
       "writtenOn": "2021-06-21T08:10:52Z",
       "side": 1,
       "message": "Can you add documentation about how this works if this is not set? From the comment I\u0027m not clear on if there\u0027s a mechanism that gets disabled when this is set.",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eae14cb_059514f9",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-21T16:52:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de5796aa_fe59bc0c",
       "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -115,6 +199,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e224d54_af31f82a",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-21T16:52:38Z",
+      "side": 1,
+      "message": "Documented.",
+      "parentUuid": "bc11e4ec_d81e5a1a",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2238b1fd_24ff5da8",
@@ -128,6 +230,24 @@
       "writtenOn": "2021-06-21T07:57:14Z",
       "side": 1,
       "message": "s/Sleep/Delay ? (just to make it clear that we don\u0027t block the thread by sleeping)",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa94a47_ec19614f",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-21T16:52:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2238b1fd_24ff5da8",
       "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -167,6 +287,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f1daf9e_0c1ff52c",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-21T16:52:38Z",
+      "side": 1,
+      "message": "Stefan, the method is declared RTC_RUN_ON(worker_queue_).\nFixed according to Tommi\u0027s suggestion.",
+      "parentUuid": "b75d1957_1d79b4cd",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c0189a7_1afcebb5",
@@ -180,6 +318,30 @@
       "writtenOn": "2021-06-21T14:54:21Z",
       "side": 1,
       "message": "Feels like a separate CL?",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 46
+      },
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "855d0699_4862f94d",
+        "filename": "video/end_to_end_tests/network_state_tests.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-21T16:52:38Z",
+      "side": 1,
+      "message": "It\u0027s not, this test deadlocks with the new TQ-based RTCP design 😊\nSee my earlier comment from PS12.",
+      "parentUuid": "9c0189a7_1afcebb5",
       "range": {
         "startLine": 231,
         "startChar": 0,
