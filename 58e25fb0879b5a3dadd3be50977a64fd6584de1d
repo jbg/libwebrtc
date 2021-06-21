@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51d5095b_e32f9485",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-21T18:51:38Z",
+      "side": 1,
+      "message": "Super nice! Looking forward to unlocking some of the potential savings that this CL gives.",
+      "revId": "58e25fb0879b5a3dadd3be50977a64fd6584de1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1021c4c1_8b0a5cde",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-06-21T18:51:38Z",
+      "side": 1,
+      "message": "if remote_bitrate_ is nullptr, can we, with this CL, disable the timer?\n(fine if we take a look at that and the other checks in a separate CL)",
+      "revId": "58e25fb0879b5a3dadd3be50977a64fd6584de1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
