@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6707505_0e3dd7c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-22T10:06:16Z",
+      "side": 1,
+      "message": "Impressive number of files touched!\n\nI think that if we want TMMBR to work again, we won\u0027t do it by reverting this CL.\n",
+      "revId": "3dca93a9df307f409f12e1219ed8214fd94605a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408daae4_c503e523",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-22T10:06:16Z",
+      "side": 1,
+      "message": "It seems a bit strange to reuse the word Module in the class name when it isn\u0027t a Module any more. But I see it\u0027s still a ModuleRtpRtcp, whatever that is.",
+      "revId": "3dca93a9df307f409f12e1219ed8214fd94605a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
