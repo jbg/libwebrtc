@@ -171,6 +171,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "307d104d_b179d2b0",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-22T07:46:26Z",
+      "side": 1,
+      "message": "Makes sense. Adding the comment in the follow up CL.",
+      "parentUuid": "a8af8c82_5c795ff3",
+      "range": {
+        "startLine": 973,
+        "startChar": 6,
+        "endLine": 973,
+        "endChar": 50
+      },
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de5796aa_fe59bc0c",
