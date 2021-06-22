@@ -199,25 +199,20 @@ class RtpRtcpModule : public RtcpPacketTypeCounterObserver,
   };
 
   RtpRtcpModule(GlobalSimulatedTimeController* time_controller,
-                ProcessThread* process_thread,
                 bool is_sender,
                 const FieldTrialConfig& trials)
       : time_controller_(time_controller),
         is_sender_(is_sender),
         trials_(trials),
-        process_thread_(process_thread),
         receive_statistics_(
             ReceiveStatistics::Create(time_controller->GetClock())),
         transport_(kOneWayNetworkDelay, time_controller) {
     CreateModuleImpl();
   }
 
-  ~RtpRtcpModule() { process_thread_->DeRegisterModule(impl_.get()); }
-
   TimeController* const time_controller_;
   const bool is_sender_;
   const FieldTrialConfig& trials_;
-  ProcessThread* const process_thread_;
   RtcpPacketTypeCounter packets_sent_;
   RtcpPacketTypeCounter packets_received_;
   std::unique_ptr<ReceiveStatistics> receive_statistics_;
@@ -286,10 +281,7 @@ class RtpRtcpModule : public RtcpPacketTypeCounterObserver,
     config.field_trials = &trials_;
     config.send_packet_observer = this;
     config.fec_generator = fec_generator_;
-    if (impl_)
-      process_thread_->DeRegisterModule(impl_.get());
     impl_.reset(new ModuleRtpRtcpImpl2(config));
-    process_thread_->RegisterModule(impl_.get(), RTC_FROM_HERE);
     impl_->SetRemoteSSRC(is_sender_ ? kReceiverSsrc : kSenderSsrc);
     impl_->SetRTCPStatus(RtcpMode::kCompound);
   }
@@ -306,20 +298,12 @@ class RtpRtcpImpl2Test : public ::testing::TestWithParam<TestConfig> {
   RtpRtcpImpl2Test()
       : time_controller_(Timestamp::Micros(133590000000000)),
         field_trials_(FieldTrialConfig::GetFromTestConfig(GetParam())),
-        process_thread_(
-            time_controller_.CreateProcessThread("RtpRtcpImpl2Test")),
         sender_(&time_controller_,
-                process_thread_.get(),
                 /*is_sender=*/true,
                 field_trials_),
         receiver_(&time_controller_,
-                  process_thread_.get(),
                   /*is_sender=*/false,
-                  field_trials_) {
-    process_thread_->Start();
-  }
-
-  ~RtpRtcpImpl2Test() { process_thread_->Stop(); }
+                  field_trials_) {}
 
   void SetUp() override {
     // Send module.
@@ -367,7 +351,6 @@ class RtpRtcpImpl2Test : public ::testing::TestWithParam<TestConfig> {
 
   GlobalSimulatedTimeController time_controller_;
   FieldTrialConfig field_trials_;
-  std::unique_ptr<ProcessThread> process_thread_;
   RtpRtcpModule sender_;
   std::unique_ptr<RTPSenderVideo> sender_video_;
   RtpRtcpModule receiver_;
@@ -524,7 +507,7 @@ TEST_P(RtpRtcpImpl2Test, NoSrBeforeMedia) {
   // Move ahead to the instant a rtcp is expected.
   // Verify no SR is sent before media has been sent, RR should still be sent
   // from the receiving module though.
-  AdvanceTime(kDefaultReportInterval / 2);
+  AdvanceTime(kDefaultReportInterval / 2 + TimeDelta::Millis(1));
   int64_t current_time = time_controller_.GetClock()->TimeInMilliseconds();
   EXPECT_EQ(-1, sender_.RtcpSent().first_packet_time_ms);
   EXPECT_EQ(receiver_.RtcpSent().first_packet_time_ms, current_time);
@@ -711,7 +694,7 @@ TEST_P(RtpRtcpImpl2Test, ConfigurableRtcpReportInterval) {
   EXPECT_EQ(0u, sender_.transport_.NumRtcpSent());
 
   // Move ahead to the last ms before a rtcp is expected, no action.
-  AdvanceTime(kVideoReportInterval / 2 - TimeDelta::Millis(1));
+  AdvanceTime(kVideoReportInterval / 2);
   EXPECT_EQ(sender_.RtcpSent().first_packet_time_ms, -1);
   EXPECT_EQ(sender_.transport_.NumRtcpSent(), 0u);
 
@@ -723,7 +706,7 @@ TEST_P(RtpRtcpImpl2Test, ConfigurableRtcpReportInterval) {
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
 
   // Move ahead to the last possible second before second rtcp is expected.
-  AdvanceTime(kVideoReportInterval * 1 / 2 - TimeDelta::Millis(1));
+  AdvanceTime(kVideoReportInterval * 1 / 2);
   EXPECT_EQ(sender_.transport_.NumRtcpSent(), 1u);
 
   // Move ahead into the range of second rtcp, the second rtcp may be sent.
