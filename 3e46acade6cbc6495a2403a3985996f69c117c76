@@ -147,6 +147,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8af8c82_5c795ff3",
+        "filename": "modules/rtp_rtcp/source/rtcp_sender.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2021-06-22T07:37:51Z",
+      "side": 1,
+      "message": "Ack, that was my guess. I\u0027d comment on that, e.g., \"Change to DCHECK once downstream projects have been updated.\"",
+      "parentUuid": "1fe08eb6_9089e886",
+      "range": {
+        "startLine": 973,
+        "startChar": 6,
+        "endLine": 973,
+        "endChar": 50
+      },
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de5796aa_fe59bc0c",
@@ -305,6 +329,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed38426a_94fdd6f6",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2021-06-22T07:37:51Z",
+      "side": 1,
+      "message": "Aha, my bad.",
+      "parentUuid": "3f1daf9e_0c1ff52c",
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c0189a7_1afcebb5",
@@ -342,6 +384,30 @@
       "side": 1,
       "message": "It\u0027s not, this test deadlocks with the new TQ-based RTCP design 😊\nSee my earlier comment from PS12.",
       "parentUuid": "9c0189a7_1afcebb5",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 46
+      },
+      "revId": "3e46acade6cbc6495a2403a3985996f69c117c76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "361296ed_c9e4a431",
+        "filename": "video/end_to_end_tests/network_state_tests.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2021-06-22T07:37:51Z",
+      "side": 1,
+      "message": "Ack. I guess it could still have made it as a separate first CL to avoid increasing the complexity of this one, but I\u0027m OK with it as is given that it\u0027s related.",
+      "parentUuid": "855d0699_4862f94d",
       "range": {
         "startLine": 231,
         "startChar": 0,
