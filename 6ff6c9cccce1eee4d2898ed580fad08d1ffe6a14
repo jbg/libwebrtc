@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95c160df_7ba27590",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 14
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-06-22T06:43:52Z",
+      "side": 1,
+      "message": "Can you revert the sdk/ changes (I guess you can just rebase the CL)?\n\nAfter that we can land it.",
+      "revId": "6ff6c9cccce1eee4d2898ed580fad08d1ffe6a14",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
