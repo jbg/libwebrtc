@@ -33,6 +33,24 @@
       "message": "It seems a bit strange to reuse the word Module in the class name when it isn\u0027t a Module any more. But I see it\u0027s still a ModuleRtpRtcp, whatever that is.",
       "revId": "3dca93a9df307f409f12e1219ed8214fd94605a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3788db91_ccbe16ca",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-06-22T10:48:23Z",
+      "side": 1,
+      "message": "I think an alternative name could include Manager (duckandrun).",
+      "parentUuid": "408daae4_c503e523",
+      "revId": "3dca93a9df307f409f12e1219ed8214fd94605a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
