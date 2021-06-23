@@ -195,6 +195,24 @@
       "parentUuid": "c7a36419_bbbd339e",
       "revId": "dc9dfee7a4455b582ae388ef29d97901fbc35c3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c48ec93_64fa00eb",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-06-23T20:45:58Z",
+      "side": 1,
+      "message": "If the test is like other peer connection integration tests where the success criteria is \"make sure video flows,\" that won\u0027t work because as mentioned above, if both sides of the connection are using this logic, they will both attempt to bundle all m\u003d sections regardless of the SDP. It will only fail if one side expects a new transport and the other does not.\n\nBut you could write a test in peer_connection_bundle_unittest.cc that verifies the transports end up being different, that\u0027s what I\u0027d suggest.\n\nAnyway, here is a bug: https://webrtc-review.googlesource.com/c/src/+/221601\n\nI\u0027d consider this high priority to fix before M92 branches. I\u0027d be happy to give it a shot if you\u0027d like me to.",
+      "parentUuid": "f53f6a7c_109265b9",
+      "revId": "dc9dfee7a4455b582ae388ef29d97901fbc35c3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
