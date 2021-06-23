@@ -177,6 +177,24 @@
       "parentUuid": "4ce7c46b_e8867b33",
       "revId": "dc9dfee7a4455b582ae388ef29d97901fbc35c3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f53f6a7c_109265b9",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-06-23T01:25:17Z",
+      "side": 1,
+      "message": "Should be easy enough to write a peerconnection integration test for this case.\n\nThe case where the remote endpoint doesn\u0027t support bundle is easy to handle - in that case, no bundling should ever be done, and no groups are installed in the bundle manager.\n\nThe case where the remote endpoint supports bundle, but adds a new m-section outside of any bundle, should be easy enough to test (in peerconnection integration tests, not in javascript). Can you file a bug for it, and I can write the test?",
+      "parentUuid": "c7a36419_bbbd339e",
+      "revId": "dc9dfee7a4455b582ae388ef29d97901fbc35c3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
