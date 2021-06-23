@@ -23,7 +23,6 @@
 
 #include "rtc_base/async_resolver.h"
 #include "rtc_base/async_resolver_interface.h"
-#include "rtc_base/deprecated/recursive_critical_section.h"
 #include "rtc_base/socket_server.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/system/rtc_export.h"
@@ -106,12 +105,12 @@ class RTC_EXPORT PhysicalSocketServer : public SocketServer {
   // uint64_t keys are used to uniquely identify a dispatcher in order to avoid
   // the ABA problem during the epoll loop (a dispatcher being destroyed and
   // replaced by one with the same address).
-  uint64_t next_dispatcher_key_ RTC_GUARDED_BY(crit_) = 0;
+  uint64_t next_dispatcher_key_ RTC_GUARDED_BY(mutex_) = 0;
   std::unordered_map<uint64_t, Dispatcher*> dispatcher_by_key_
-      RTC_GUARDED_BY(crit_);
+      RTC_GUARDED_BY(mutex_);
   // Reverse lookup necessary for removals/updates.
   std::unordered_map<Dispatcher*, uint64_t> key_by_dispatcher_
-      RTC_GUARDED_BY(crit_);
+      RTC_GUARDED_BY(mutex_);
   // A list of dispatcher keys that we're interested in for the current
   // select() or WSAWaitForMultipleEvents() loop. Again, used to avoid the ABA
   // problem (a socket being destroyed and a new one created with the same
@@ -120,7 +119,7 @@ class RTC_EXPORT PhysicalSocketServer : public SocketServer {
   // Kept as a member variable just for efficiency.
   std::vector<uint64_t> current_dispatcher_keys_;
   Signaler* signal_wakeup_;  // Assigned in constructor only
-  RecursiveCriticalSection crit_;
+  webrtc::Mutex mutex_;
 #if defined(WEBRTC_WIN)
   const WSAEVENT socket_ev_;
 #endif

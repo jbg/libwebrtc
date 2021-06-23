@@ -1113,7 +1113,7 @@ AsyncSocket* PhysicalSocketServer::WrapSocket(SOCKET s) {
 }
 
 void PhysicalSocketServer::Add(Dispatcher* pdispatcher) {
-  CritScope cs(&crit_);
+  webrtc::MutexLock lock(&mutex_);
   if (key_by_dispatcher_.count(pdispatcher)) {
     RTC_LOG(LS_WARNING)
         << "PhysicalSocketServer asked to add a duplicate dispatcher.";
@@ -1130,7 +1130,7 @@ void PhysicalSocketServer::Add(Dispatcher* pdispatcher) {
 }
 
 void PhysicalSocketServer::Remove(Dispatcher* pdispatcher) {
-  CritScope cs(&crit_);
+  webrtc::MutexLock lock(&mutex_);
   if (!key_by_dispatcher_.count(pdispatcher)) {
     RTC_LOG(LS_WARNING)
         << "PhysicalSocketServer asked to remove a unknown "
@@ -1154,7 +1154,7 @@ void PhysicalSocketServer::Update(Dispatcher* pdispatcher) {
   }
 
   // Don't update dispatchers that haven't yet been added.
-  CritScope cs(&crit_);
+  webrtc::MutexLock lock(&mutex_);
   if (!key_by_dispatcher_.count(pdispatcher)) {
     return;
   }
@@ -1270,7 +1270,7 @@ bool PhysicalSocketServer::WaitSelect(int cmsWait, bool process_io) {
     FD_ZERO(&fdsWrite);
     int fdmax = -1;
     {
-      CritScope cr(&crit_);
+      webrtc::MutexLock lock(&mutex_);
       current_dispatcher_keys_.clear();
       for (auto const& kv : dispatcher_by_key_) {
         uint64_t key = kv.first;
@@ -1315,7 +1315,7 @@ bool PhysicalSocketServer::WaitSelect(int cmsWait, bool process_io) {
       return true;
     } else {
       // We have signaled descriptors
-      CritScope cr(&crit_);
+      webrtc::MutexLock lock(&mutex_);
       // Iterate only on the dispatchers whose sockets were passed into
       // WSAEventSelect; this avoids the ABA problem (a socket being
       // destroyed and a new one created with the same file descriptor).
@@ -1447,7 +1447,7 @@ bool PhysicalSocketServer::WaitEpoll(int cmsWait) {
       return true;
     } else {
       // We have signaled descriptors
-      CritScope cr(&crit_);
+      webrtc::MutexLock lock(&mutex_);
       for (int i = 0; i < n; ++i) {
         const epoll_event& event = epoll_events_[i];
         uint64_t key = event.data.u64;
@@ -1566,7 +1566,7 @@ bool PhysicalSocketServer::Wait(int cmsWait, bool process_io) {
     events.push_back(socket_ev_);
 
     {
-      CritScope cr(&crit_);
+      webrtc::MutexLock lock(&mutex_);
       // Get a snapshot of all current dispatchers; this is used to avoid the
       // ABA problem (see later comment) and avoids the dispatcher_by_key_
       // iterator being invalidated by calling CheckSignalClose, which may
@@ -1622,7 +1622,7 @@ bool PhysicalSocketServer::Wait(int cmsWait, bool process_io) {
       return true;
     } else {
       // Figure out which one it is and call it
-      CritScope cr(&crit_);
+      webrtc::MutexLock lock(&mutex_);
       int index = dw - WSA_WAIT_EVENT_0;
       if (index > 0) {
         --index;  // The first event is the socket event
