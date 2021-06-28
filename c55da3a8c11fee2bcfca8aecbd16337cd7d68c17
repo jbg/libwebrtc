@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78e5ee97_27e57c97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-06-28T20:18:44Z",
+      "side": 1,
+      "message": "For a redundancy of 2 the packets are ok, the issue described in https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d11640#c38 only happens with a higher level of redundancy. For which there were no tests. Now there are.",
+      "revId": "c55da3a8c11fee2bcfca8aecbd16337cd7d68c17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
