@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9be07904_a715659d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-06-29T19:18:07Z",
+      "side": 1,
+      "message": "Kari, can you take a look with me at this CL?\n\nRunning some presubmit in the meantime.",
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd52841d_73b91537",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-06-29T19:18:07Z",
+      "side": 1,
+      "message": "Is it possible to revert the \"opengl_\" parts? I would prefer if target names remain the same.",
+      "range": {
+        "startLine": 437,
+        "startChar": 17,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a826f0_4534ecc2",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-06-29T19:18:07Z",
+      "side": 1,
+      "message": "If this only affects iOS/macOS maybe it is good to put \"catalyst\" or ios_macos in the name.",
+      "range": {
+        "startLine": 187,
+        "startChar": 2,
+        "endLine": 187,
+        "endChar": 26
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e9ee87_746e57b4",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-06-29T19:18:07Z",
+      "side": 1,
+      "message": "Can you add a comment about this? Is this documented somewhere?",
+      "range": {
+        "startLine": 999,
+        "startChar": 6,
+        "endLine": 999,
+        "endChar": 40
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
