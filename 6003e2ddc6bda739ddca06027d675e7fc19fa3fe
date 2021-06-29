@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c11f069_b6fc65d0",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2021-06-29T21:40:30Z",
+      "side": 1,
+      "message": "I think it\u0027s important to make it clear why the components are optional. Excluding \":video_objc\" but still supporting video and ObjC didn\u0027t make sense to me. But it\u0027s up to y\u0027all.",
+      "parentUuid": "bd52841d_73b91537",
+      "range": {
+        "startLine": 437,
+        "startChar": 17,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14a826f0_4534ecc2",
         "filename": "webrtc.gni",
         "patchSetId": 1
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "334977af_0bc8254c",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2021-06-29T21:40:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "14a826f0_4534ecc2",
+      "range": {
+        "startLine": 187,
+        "startChar": 2,
+        "endLine": 187,
+        "endChar": 26
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34e9ee87_746e57b4",
         "filename": "webrtc.gni",
         "patchSetId": 1
@@ -77,6 +125,30 @@
       "writtenOn": "2021-06-29T19:18:07Z",
       "side": 1,
       "message": "Can you add a comment about this? Is this documented somewhere?",
+      "range": {
+        "startLine": 999,
+        "startChar": 6,
+        "endLine": 999,
+        "endChar": 40
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1946f473_432b15bc",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2021-06-29T21:40:30Z",
+      "side": 1,
+      "message": "Catalyst frameworks use the same layout as regular Mac frameworks. I don\u0027t have a citation but I can add that first sentence as a comment.",
+      "parentUuid": "34e9ee87_746e57b4",
       "range": {
         "startLine": 999,
         "startChar": 6,
