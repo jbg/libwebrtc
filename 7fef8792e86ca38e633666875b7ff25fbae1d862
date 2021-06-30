@@ -33,6 +33,230 @@
       "message": "You\u0027re adding 700 lines of code without any tests.\nCan it be split into several CLs?\n\nhttps://google.github.io/eng-practices/review/developer/small-cls.html\nhttps://google.github.io/eng-practices/review/reviewer/looking-for.html#tests\n",
       "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5ef3ec9_29aab2ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-30T09:10:35Z",
+      "side": 1,
+      "message": "took a fast look and left some random comments. ",
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6a921cf_c948d235",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-30T09:10:35Z",
+      "side": 1,
+      "message": "can key_value_config be nullptr?\nIf yes - check for that before dereferencing.\nif not - pass by const reference.",
+      "range": {
+        "startLine": 104,
+        "startChar": 32,
+        "endLine": 104,
+        "endChar": 48
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c0a494e_b518bec5",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-30T09:10:35Z",
+      "side": 1,
+      "message": "why add _F suffix (i.e. why do you think adding function name is useful for these logs?)",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 13
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "674bc6dc_c1fda9d6",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-30T09:10:35Z",
+      "side": 1,
+      "message": "why do you need this function?\nCan\u0027t you instead have a constructor with the same parameter:\n\n  LossBasedBweV2::LossBasedBweV2(const WebRtcKeyValueConfig* key_value_config)\n   : config_(CreateConfig(key_value_config)) {\n    if (!IsValid(config_)) {\n      LOG(WARNING) \u003c\u003c ...;\n      config_.enabled \u003d false; // or config_ \u003d absl::nulopt;\n      return;\n    }\n    current_estimate_.inherit_loss \u003d ...\n    ... \n  }",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 0
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0abfc1_13abb8d1",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-30T09:10:35Z",
+      "side": 1,
+      "message": "nit: num_observations_ is integer? then prefer to compare to zero:\nnum_observation_ \u003c\u003d 0",
+      "range": {
+        "startLine": 388,
+        "startChar": 24,
+        "endLine": 388,
+        "endChar": 27
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "853404b1_f2fea45a",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-30T09:10:35Z",
+      "side": 1,
+      "message": "https://chromium.googlesource.com/chromium/src/+/main/styleguide/c++/c++.md#check_dcheck_and-notreached\n\n\"you should not handle DCHECK() failures, even if failure would result in a crash.\"",
+      "range": {
+        "startLine": 573,
+        "startChar": 2,
+        "endLine": 573,
+        "endChar": 31
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0746ed29_46a40073",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-30T09:10:35Z",
+      "side": 1,
+      "message": "GetNumberOfLostPackets and GetDataSize are used once.\neach of the loops through the same packet_result.\nmay be do a classic loop instead:\nfor (const PacketRrsult\u0026 p : packet_results) {\n  if (!p.IsReceived()) {\n    ++partial_observation_.number_of_lost_packets;\n  }\n  partial_observation_.size +\u003d p.sent_packet.size;\n}",
+      "range": {
+        "startLine": 578,
+        "startChar": 0,
+        "endLine": 581,
+        "endChar": 0
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca1a06d_374ac191",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-30T09:10:35Z",
+      "side": 1,
+      "message": "similarly may put search for min/max elements into the same loop\n(or combine using absl::c_minmax_element helper)",
+      "range": {
+        "startLine": 584,
+        "startChar": 34,
+        "endLine": 587,
+        "endChar": 41
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7038acaa_3c83fbdc",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-30T09:10:35Z",
+      "side": 1,
+      "message": "are other values valid when enabled \u003d false?\nif not, then may be do not have this member, instead pass optional\u003cConfig\u003e where config may be invalid.",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 25
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e305d5e_fad8ed4a",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-06-30T09:10:35Z",
+      "side": 1,
+      "message": ":)\nthis struct looks almost list std::pair\u003cdouble, double\u003e,\nbut the name of the struct adds meaning to the member names.",
+      "range": {
+        "startLine": 73,
+        "startChar": 9,
+        "endLine": 73,
+        "endChar": 20
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
