@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "715c5c5d_b065d2ca",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2021-06-30T21:40:42Z",
+      "side": 1,
+      "message": "Honestly, I\u0027m not entirely sure, and the documentation for this constant (https://developer.apple.com/documentation/corevideo/kcvpixelbuffermetalcompatibilitykey) doesn\u0027t quite clear it up. I\u0027m still in the \"getting things building\" phase, and this seemed better than omitting the \"compatibility\" key entirely. (I didn\u0027t come up with it, either; it\u0027s from a previous attempt by Filip Bajaník, who uploaded several of his WIP patches to the issue.)",
+      "parentUuid": "861aa6ad_3d7f575d",
+      "range": {
+        "startLine": 606,
+        "startChar": 6,
+        "endLine": 606,
+        "endChar": 41
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14a826f0_4534ecc2",
         "filename": "webrtc.gni",
         "patchSetId": 1
