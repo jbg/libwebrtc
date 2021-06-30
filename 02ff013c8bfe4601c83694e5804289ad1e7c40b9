@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d57c7abc_a6fc94f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2021-06-30T13:42:06Z",
+      "side": 1,
+      "message": "Mb build config for bionic perf bot.",
+      "revId": "02ff013c8bfe4601c83694e5804289ad1e7c40b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
