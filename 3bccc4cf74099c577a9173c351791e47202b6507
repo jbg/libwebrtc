@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88bbc946_e1d44888",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-06-30T19:28:54Z",
+      "side": 1,
+      "message": "No-Try to workaround crbug.com/1225383.",
+      "revId": "3bccc4cf74099c577a9173c351791e47202b6507",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
