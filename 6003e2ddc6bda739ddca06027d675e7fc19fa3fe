@@ -67,6 +67,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5d0d93c_caad274a",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-06-30T19:26:09Z",
+      "side": 1,
+      "message": "I have to agree with the CL author here, the names don\u0027t make much sense as-is.",
+      "parentUuid": "5c11f069_b6fc65d0",
+      "range": {
+        "startLine": 437,
+        "startChar": 17,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "861aa6ad_3d7f575d",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-06-30T19:26:09Z",
+      "side": 1,
+      "message": "is this mutually exclusive with kCVPixelBufferOpenGLESCompatibilityKey?\n\nI wonder if we want to set this for native iOS builds as well.\n\nWhat exactly does this do? I\u0027d expect it just to create CVPixelBuffers backed by IOSurfaces (GPU buffers), just like kCVPixelBufferOpenGLESCompatibilityKey.",
+      "range": {
+        "startLine": 606,
+        "startChar": 6,
+        "endLine": 606,
+        "endChar": 41
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14a826f0_4534ecc2",
         "filename": "webrtc.gni",
         "patchSetId": 1

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a10613_59a8734f",
+        "filename": "examples/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-06-30T19:26:09Z",
+      "side": 0,
+      "message": "We still want to keep this.",
+      "range": {
+        "startLine": 507,
+        "startChar": 6,
+        "endLine": 509,
+        "endChar": 7
+      },
+      "revId": "53f1fe4ff6c8256ec388506914c039d6245e9181",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
