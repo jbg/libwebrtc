@@ -113,6 +113,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9a448c_0b3b90bc",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-07-01T08:16:40Z",
+      "side": 1,
+      "message": "Ok, let me run some tests to ensure downstream projects are fine and we can land when Kari approves.",
+      "parentUuid": "0ae86fd5_6cbd509c",
+      "range": {
+        "startLine": 437,
+        "startChar": 17,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "861aa6ad_3d7f575d",
@@ -231,6 +255,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ce7398d_144cc093",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-07-01T08:16:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "334977af_0bc8254c",
+      "range": {
+        "startLine": 187,
+        "startChar": 2,
+        "endLine": 187,
+        "endChar": 26
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34e9ee87_746e57b4",
@@ -268,6 +316,30 @@
       "side": 1,
       "message": "Catalyst frameworks use the same layout as regular Mac frameworks. I don\u0027t have a citation but I can add that first sentence as a comment.",
       "parentUuid": "34e9ee87_746e57b4",
+      "range": {
+        "startLine": 999,
+        "startChar": 6,
+        "endLine": 999,
+        "endChar": 40
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62de77aa_5a3522ef",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-07-01T08:16:40Z",
+      "side": 1,
+      "message": "Sounds good, thanks.",
+      "parentUuid": "1946f473_432b15bc",
       "range": {
         "startLine": 999,
         "startChar": 6,
