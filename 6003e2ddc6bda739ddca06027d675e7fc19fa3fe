@@ -161,6 +161,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c4e8e4d_d647bf3f",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2021-07-01T22:53:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "583d5d05_912fd164",
+      "range": {
+        "startLine": 437,
+        "startChar": 17,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "861aa6ad_3d7f575d",
@@ -364,6 +388,30 @@
       "side": 1,
       "message": "Sounds good, thanks.",
       "parentUuid": "1946f473_432b15bc",
+      "range": {
+        "startLine": 999,
+        "startChar": 6,
+        "endLine": 999,
+        "endChar": 40
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c825f8c0_91e4b47c",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2021-07-01T22:53:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62de77aa_5a3522ef",
       "range": {
         "startLine": 999,
         "startChar": 6,
