@@ -89,6 +89,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae86fd5_6cbd509c",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-07-01T06:48:11Z",
+      "side": 1,
+      "message": "resolving.",
+      "parentUuid": "b5d0d93c_caad274a",
+      "range": {
+        "startLine": 437,
+        "startChar": 17,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "861aa6ad_3d7f575d",
@@ -126,6 +150,30 @@
       "side": 1,
       "message": "Honestly, I\u0027m not entirely sure, and the documentation for this constant (https://developer.apple.com/documentation/corevideo/kcvpixelbuffermetalcompatibilitykey) doesn\u0027t quite clear it up. I\u0027m still in the \"getting things building\" phase, and this seemed better than omitting the \"compatibility\" key entirely. (I didn\u0027t come up with it, either; it\u0027s from a previous attempt by Filip Bajaník, who uploaded several of his WIP patches to the issue.)",
       "parentUuid": "861aa6ad_3d7f575d",
+      "range": {
+        "startLine": 606,
+        "startChar": 6,
+        "endLine": 606,
+        "endChar": 41
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "798154af_1dcfbed0",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-07-01T06:48:11Z",
+      "side": 1,
+      "message": "Thanks for the explanation. I\u0027m fine with keeping it like this for now, and deferring further investigation.",
+      "parentUuid": "715c5c5d_b065d2ca",
       "range": {
         "startLine": 606,
         "startChar": 6,
