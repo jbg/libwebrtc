@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "583d5d05_912fd164",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-07-01T12:25:26Z",
+      "side": 1,
+      "message": "Done, so in order to land this CL there needs to be some backwards compatibility.\n\nI suggest to try this, can you add targets with the old name depending on the new ones? For example:\n\nrtc_library(\"video_objc\") {\n  public_deps \u003d [\":opengl_objc\"] # no-presubmit-check TODO(webrtc:8603)\n}\n\nI think with something like this the CL becomes ready and then I can clean up.",
+      "parentUuid": "fd9a448c_0b3b90bc",
+      "range": {
+        "startLine": 437,
+        "startChar": 17,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "6003e2ddc6bda739ddca06027d675e7fc19fa3fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "861aa6ad_3d7f575d",
         "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
         "patchSetId": 1
