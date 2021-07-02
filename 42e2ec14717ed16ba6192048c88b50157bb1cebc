@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9489127_50039e89",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2021-07-02T17:15:42Z",
+      "side": 1,
+      "message": "Oops, my bad. Still getting used to gn.",
+      "parentUuid": "73fc7d42_3f5e4852",
+      "revId": "42e2ec14717ed16ba6192048c88b50157bb1cebc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7442e9da_1fc0f357",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-07-02T07:34:24Z",
       "side": 1,
       "message": "visibility \u003d [ \"*\" ]",
+      "revId": "42e2ec14717ed16ba6192048c88b50157bb1cebc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99a7013d_03a971a4",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2021-07-02T17:15:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7442e9da_1fc0f357",
       "revId": "42e2ec14717ed16ba6192048c88b50157bb1cebc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
