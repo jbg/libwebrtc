@@ -52,6 +52,46 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df7382dc_f4549d8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "please find my comments inline",
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "defb77ef_561255d9",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "maybe a bit more detailed?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 55
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6a921cf_c948d235",
@@ -116,6 +156,52 @@
         "startChar": 0,
         "endLine": 309,
         "endChar": 0
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "836d08ac_6d18f692",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "maybe initial_bitrate instead for readability?",
+      "range": {
+        "startLine": 346,
+        "startChar": 53,
+        "endLine": 346,
+        "endChar": 56
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980bab8e_39efdeae",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "maybe rename to UpdateBandwidthEstimate() for consistency, as you have GetBandwidthEstimate() in the same class",
+      "range": {
+        "startLine": 355,
+        "startChar": 21,
+        "endLine": 355,
+        "endChar": 30
       },
       "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
@@ -215,6 +301,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b348e600_18dc7e2e",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "it\u0027s better to use time_delta or something describes the intent of the variable, I suggest to minimize the use of abbreviations, as they make it harder to understand by readers.",
+      "range": {
+        "startLine": 588,
+        "startChar": 18,
+        "endLine": 588,
+        "endChar": 20
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee785dda_e35062aa",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "partial_observation_ \u003d {};\nor\npartial_observation_ \u003d PartialObservation();",
+      "range": {
+        "startLine": 617,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 47
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7038acaa_3c83fbdc",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
         "patchSetId": 3
@@ -254,6 +386,167 @@
         "startChar": 9,
         "endLine": 73,
         "endChar": 20
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f947117_0fe9176f",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "nit: empty line before comment for readability",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 79
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6bd7fe_165b4d98",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "nit: empty line before comment for readability",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 49
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9364a66_90ddf4a1",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "Perhaps it can be simplified a bit. We can keep the v1 as default, and just check whether v2 is enabled by experiment flag? For example,\nif (LossBasedBweV2Enabled()) {\n    loss_based_bwe_v2_.SetAcknowledgedBitrate(*acknowledged_rate);\n} else {\n    loss_based_bwe_v1_.UpdateAcknowledgedBitrate(*acknowledged_rate, at_time);\n}\n\nAnother alternative maybe to have a base or controller loss_based_bwe class, and have the v1/v2 switch logic inside that.",
+      "range": {
+        "startLine": 349,
+        "startChar": 0,
+        "endLine": 353,
+        "endChar": 66
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b37568_c28038aa",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "same as above\nif (LossBasedBweV2Enabled()) {\n...\n} else {\n...\n}",
+      "range": {
+        "startLine": 359,
+        "startChar": 2,
+        "endLine": 365,
+        "endChar": 3
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ffffdea_bab16940",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "same as above\nif (LossBasedBweV2Enabled()) {\n...\n} else {\n...\n}",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 5
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "210107dd_4acef8c8",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 3
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ec9466_511f644f",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2021-07-02T13:49:35Z",
+      "side": 1,
+      "message": "this can be removed",
+      "range": {
+        "startLine": 652,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 0
       },
       "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
