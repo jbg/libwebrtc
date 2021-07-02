@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0643f5b0_efe78eff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-07-02T07:34:24Z",
+      "side": 1,
+      "message": "Almost there, just two visibility to add to the backwards compatible targets then this can lang.\n\nKari, feel free to do the final review.",
+      "revId": "42e2ec14717ed16ba6192048c88b50157bb1cebc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73fc7d42_3f5e4852",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-07-02T07:34:24Z",
+      "side": 1,
+      "message": "visibility \u003d [ \"*\" ]",
+      "revId": "42e2ec14717ed16ba6192048c88b50157bb1cebc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7442e9da_1fc0f357",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-07-02T07:34:24Z",
+      "side": 1,
+      "message": "visibility \u003d [ \"*\" ]",
+      "revId": "42e2ec14717ed16ba6192048c88b50157bb1cebc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
