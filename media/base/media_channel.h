@@ -375,6 +375,7 @@ struct MediaSenderInfo {
   int packets_lost = 0;
   float fraction_lost = 0.0f;
   int64_t rtt_ms = 0;
+  uint32_t nacks_rcvd = 0;
   std::string codec_name;
   absl::optional<int> codec_payload_type;
   std::vector<SsrcSenderInfo> local_stats;
@@ -535,7 +536,6 @@ struct VideoSenderInfo : public MediaSenderInfo {
   std::string encoder_implementation_name;
   int firs_rcvd = 0;
   int plis_rcvd = 0;
-  int nacks_rcvd = 0;
   int send_frame_width = 0;
   int send_frame_height = 0;
   int frames = 0;
