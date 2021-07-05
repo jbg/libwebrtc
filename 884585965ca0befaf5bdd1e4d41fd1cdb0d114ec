@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f406a544_39214803",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-07-05T14:36:02Z",
+      "side": 1,
+      "message": "Ah, can you change these two to rtc_source_set (to workaround the libtool issue when linking libraries without any code).",
+      "range": {
+        "startLine": 521,
+        "startChar": 4,
+        "endLine": 533,
+        "endChar": 5
+      },
+      "revId": "884585965ca0befaf5bdd1e4d41fd1cdb0d114ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
