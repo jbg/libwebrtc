@@ -13,6 +13,7 @@
 
 #include "absl/strings/string_view.h"
 #include "api/array_view.h"
+#include "modules/rtp_rtcp/source/rtp_util.h"
 #include "rtc_base/byte_order.h"
 #include "rtc_base/system/rtc_export.h"
 
@@ -62,9 +63,9 @@ bool SetRtpSsrc(void* data, size_t len, uint32_t value);
 // Assumes version 2, no padding, no extensions, no csrcs.
 bool SetRtpHeader(void* data, size_t len, const RtpHeader& header);
 
-bool IsRtpPacket(rtc::ArrayView<const char> packet);
+using ::webrtc::IsRtcpPacket;
+using ::webrtc::IsRtpPacket;
 
-bool IsRtcpPacket(rtc::ArrayView<const char> packet);
 // Checks the packet header to determine if it can be an RTP or RTCP packet.
 RtpPacketType InferRtpPacketType(rtc::ArrayView<const char> packet);
 // True if |payload type| is 0-127.

@@ -102,7 +102,7 @@ static const rtc::ArrayView<const char> kInvalidPacketArrayView =
                        sizeof(kInvalidPacket));
 
 TEST(RtpUtilsTest, GetRtp) {
-  EXPECT_TRUE(IsRtpPacket(kPcmuFrameArrayView));
+  EXPECT_TRUE(IsRtpPacket(kPcmuFrame));
 
   int pt;
   EXPECT_TRUE(GetRtpPayloadType(kPcmuFrame, sizeof(kPcmuFrame), &pt));
