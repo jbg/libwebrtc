@@ -75,6 +75,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96805e95_37e034ea",
+        "filename": "audio/test/nack_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-07-06T07:56:26Z",
+      "side": 1,
+      "message": "Tested once and then nacks_rcvd was 1 so I thought it might be good to keep some margin since the tests are not deterministic.",
+      "parentUuid": "b0b2e928_a1dd0e9f",
+      "range": {
+        "startLine": 23,
+        "startChar": 32,
+        "endLine": 23,
+        "endChar": 36
+      },
+      "revId": "ea3819a128b41220811e3a97463ebed5e6cd22bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb3faf0c_24ca8ab1",
@@ -98,6 +122,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b9f5d5_78d7efcc",
+        "filename": "audio/test/nack_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-07-06T07:56:26Z",
+      "side": 1,
+      "message": "They are not really connected in any way. NACK history specifies how old packets we are willing to NACK and 1 second is a reasonable value (a bit high maybe).",
+      "parentUuid": "fb3faf0c_24ca8ab1",
+      "range": {
+        "startLine": 26,
+        "startChar": 14,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "ea3819a128b41220811e3a97463ebed5e6cd22bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a9bccbb_e4022064",
@@ -111,6 +159,30 @@
       "writtenOn": "2021-07-05T16:15:10Z",
       "side": 1,
       "message": "Link to https://w3c.github.io/webrtc-stats/#dom-rtcoutboundrtpstreamstats-nackcount as done for the metrics above?",
+      "range": {
+        "startLine": 378,
+        "startChar": 2,
+        "endLine": 378,
+        "endChar": 26
+      },
+      "revId": "ea3819a128b41220811e3a97463ebed5e6cd22bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92a6bbcd_590d1a07",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-07-06T07:56:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a9bccbb_e4022064",
       "range": {
         "startLine": 378,
         "startChar": 2,
