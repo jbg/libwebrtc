@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ee0e25_66f77dfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-07-06T07:54:08Z",
+      "side": 1,
+      "message": "LGTM % other people\u0027s comments. Thanks for doing this Jakob! :) ",
+      "revId": "ea3819a128b41220811e3a97463ebed5e6cd22bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0b2e928_a1dd0e9f",
