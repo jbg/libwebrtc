@@ -16,6 +16,24 @@
       "message": "Nice!\nBut no bug to track this cleanup?\nIs the plan to replace RtpUtility::RtpHeaderParser::ParseRtcp() with something else in rtp_util too?",
       "revId": "51e59997554fda7f1a8ea663f6958d1c8744074d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8920678_d7ddd3ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-06T09:34:24Z",
+      "side": 1,
+      "message": "It is sort of post http://bugs.webrtc.org/5261 cleanup\n\nRtpHeaderParser::ParseRtcp is an odd function: it parses rtcp into rtp header.\nI would like to remove RtpUtility altogether, including this function, but not yet sure about the details (this function is only used in a test file reader, may be just would move it in-there, without trying to understand it)",
+      "parentUuid": "f11d3584_a3854cfd",
+      "revId": "51e59997554fda7f1a8ea663f6958d1c8744074d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
