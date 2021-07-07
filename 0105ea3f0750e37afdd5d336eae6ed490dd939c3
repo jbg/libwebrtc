@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe8deff_eaceff91",
+        "filename": "rtc_base/containers/flat_map.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-07T09:16:49Z",
+      "side": 1,
+      "message": "either forward with using:\nusing ::webrtc::flat_containers_internal::EraseIf;\n\nor do a perfect forwarding for the predicate:\nstd::forward\u003cPredicate\u003e(pred)",
+      "range": {
+        "startLine": 373,
+        "startChar": 64,
+        "endLine": 373,
+        "endChar": 68
+      },
+      "revId": "0105ea3f0750e37afdd5d336eae6ed490dd939c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39ed6e60_ae42721d",
+        "filename": "rtc_base/containers/flat_map_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-07T09:16:49Z",
+      "side": 1,
+      "message": "would it currently work for move-only capture?",
+      "range": {
+        "startLine": 435,
+        "startChar": 13,
+        "endLine": 435,
+        "endChar": 15
+      },
+      "revId": "0105ea3f0750e37afdd5d336eae6ed490dd939c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
