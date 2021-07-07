@@ -161,6 +161,10 @@ template <class Key,
 using flat_set = typename ::webrtc::flat_containers_internal::
     flat_tree<Key, webrtc::identity, Compare, Container>;
 
+// ----------------------------------------------------------------------------
+// Free functions.
+
+using ::webrtc::flat_containers_internal::EraseIf;
 }  // namespace webrtc
 
 #endif  // RTC_BASE_CONTAINERS_FLAT_SET_H_
