@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4c61600_2ca183c9",
+        "filename": "rtc_base/containers/flat_map.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-07T09:54:37Z",
+      "side": 1,
+      "message": "Please keep the [public] documentation for this function, \nso that user won\u0027t need to browse private header to find it.\nMay be with an example (specially since parameters are not visible here):\n\n// Erases all elements that match predicate. It has O(size) complexity.\n// e.g. \n//  flat_map\u003cint, Timestamp\u003e last_times;\n//  ...\n//  EraseIf(last_times,\n//          [](const auto\u0026 element) { return now - element.second \u003e kTimeout; });\n\n(on the other hand... tests have examples, so example here might be an overkill)",
+      "revId": "012334498feb7645b61ba683bcf6c2760a2d651c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2dafb57_4d550ed7",
+        "filename": "rtc_base/containers/flat_map.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-07T09:54:37Z",
+      "side": 1,
+      "message": "to make it a bit nicer, may be use\n// NOLINTNEXTLINE(misc-unused-using-decls)\nusing ::webrtc::flat_containers_internal::EraseIf;",
+      "range": {
+        "startLine": 366,
+        "startChar": 14,
+        "endLine": 366,
+        "endChar": 48
+      },
+      "revId": "012334498feb7645b61ba683bcf6c2760a2d651c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
