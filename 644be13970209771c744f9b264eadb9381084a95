@@ -46,6 +46,29 @@
       },
       "revId": "644be13970209771c744f9b264eadb9381084a95",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9db98e6c_d495eb7a",
+        "filename": "rtc_base/containers/flat_set.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-07T10:08:06Z",
+      "side": 1,
+      "message": "nit:\nmay be use example that can\u0027t be solved using something \u0027simpler\u0027 like:\nnumbers.erase(std::begin(numbers), std::lower_bound(numbers, 5));\n\ne.g. \n{ return number % 2 \u003d\u003d 1; }",
+      "range": {
+        "startLine": 171,
+        "startChar": 51,
+        "endLine": 171,
+        "endChar": 61
+      },
+      "revId": "644be13970209771c744f9b264eadb9381084a95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
