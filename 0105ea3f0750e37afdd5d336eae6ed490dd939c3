@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ef70ee_7c7bcf5e",
+        "filename": "rtc_base/containers/flat_map.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-07-07T09:47:46Z",
+      "side": 1,
+      "message": "Correct. I wonder how much we should deviate from Chromium\u0027s fork... I merged this section with the previous one, though.",
+      "parentUuid": "5dea52af_a90bc3e0",
+      "range": {
+        "startLine": 363,
+        "startChar": 3,
+        "endLine": 363,
+        "endChar": 18
+      },
+      "revId": "0105ea3f0750e37afdd5d336eae6ed490dd939c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfe8deff_eaceff91",
@@ -49,6 +73,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c3c14bd1_ab2f92f2",
+        "filename": "rtc_base/containers/flat_map.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-07-07T09:47:46Z",
+      "side": 1,
+      "message": "Not even the Chromium version supported move-only capturing functors, but that was  fixed.\n\nUsing \"using ::..\" will result in a clang-tidy warning about unused using, so that\u0027s why I didn\u0027t use it at first. But you make a good point, and I muted that warning instead. I can understand that warning\u0027s usefulness in a source file, but I can also think of intentional forward declarations like this one in header files.",
+      "parentUuid": "bfe8deff_eaceff91",
+      "range": {
+        "startLine": 373,
+        "startChar": 64,
+        "endLine": 373,
+        "endChar": 68
+      },
+      "revId": "0105ea3f0750e37afdd5d336eae6ed490dd939c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "39ed6e60_ae42721d",
         "filename": "rtc_base/containers/flat_map_unittest.cc",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2021-07-07T09:16:49Z",
       "side": 1,
       "message": "would it currently work for move-only capture?",
+      "range": {
+        "startLine": 435,
+        "startChar": 13,
+        "endLine": 435,
+        "endChar": 15
+      },
+      "revId": "0105ea3f0750e37afdd5d336eae6ed490dd939c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "928858a4_4eb7387a",
+        "filename": "rtc_base/containers/flat_map_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-07-07T09:47:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39ed6e60_ae42721d",
       "range": {
         "startLine": 435,
         "startChar": 13,
