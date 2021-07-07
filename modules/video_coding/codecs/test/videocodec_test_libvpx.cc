@@ -202,6 +202,7 @@ TEST(VideoCodecTestLibvpx, VeryLowBitrateVP9) {
 
 TEST(VideoCodecTestLibvpx, HighBitrateVP8) {
   auto config = CreateConfig();
+  config.print_frame_level_stats = true;
   config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, true, true, false,
                           kCifWidth, kCifHeight);
   config.num_frames = kNumFramesShort;
