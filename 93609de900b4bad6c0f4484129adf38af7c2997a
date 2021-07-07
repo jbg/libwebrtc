@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "787986a0_bca00bdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-07-07T13:10:19Z",
+      "side": 1,
+      "message": "I think such a facility would benefit from a design doc.\nWe\u0027ve had enough trouble with defining what stats for video mean that it\u0027s good to have some guidelines for use before we lock ourselves down on it.\n\n(Appreciate that this is for internal testing only).\n",
+      "revId": "93609de900b4bad6c0f4484129adf38af7c2997a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
