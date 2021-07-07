@@ -97,6 +97,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "904f85d6_17c6e1de",
+        "filename": "rtc_base/containers/flat_map.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-07T10:01:35Z",
+      "side": 1,
+      "message": "yep, `using` generally should be used header file, specially at namespace level, but this case is a valid exception.\n\nI guess it is covered by this section:\nhttps://google.github.io/styleguide/cppguide.html#Aliases\n\n\"Don\u0027t put an alias in your public API just to save typing in the implementation; do so only if you intend it to be used by your clients.\"",
+      "parentUuid": "c3c14bd1_ab2f92f2",
+      "range": {
+        "startLine": 373,
+        "startChar": 64,
+        "endLine": 373,
+        "endChar": 68
+      },
+      "revId": "0105ea3f0750e37afdd5d336eae6ed490dd939c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "39ed6e60_ae42721d",
         "filename": "rtc_base/containers/flat_map_unittest.cc",
         "patchSetId": 1
