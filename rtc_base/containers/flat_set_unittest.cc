@@ -125,5 +125,13 @@ TEST(FlatSet, UsingTransparentCompare) {
   s.erase(s.begin());
   s.erase(s.cbegin());
 }
+
+TEST(FlatSet, SupportsEraseIf) {
+  flat_set<int> s({1, 2, 3, 4, 5});
+
+  EraseIf(s, [](const int& elem) { return elem % 2 == 0; });
+
+  EXPECT_THAT(s, ElementsAre(1, 3, 5));
+}
 }  // namespace
 }  // namespace webrtc

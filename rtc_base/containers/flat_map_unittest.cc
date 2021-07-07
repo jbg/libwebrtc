@@ -429,5 +429,14 @@ TEST(FlatMap, UsingTransparentCompare) {
   m.erase(m.cbegin());
 }
 
+TEST(FlatMap, SupportsEraseIf) {
+  flat_map<int, int> m({{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}});
+
+  EraseIf(m, [](const std::pair<int, int>& e) { return e.second % 2 == 0; });
+
+  EXPECT_THAT(m, ElementsAre(std::make_pair(1, 1), std::make_pair(3, 3),
+                             std::make_pair(5, 5)));
+}
+
 }  // namespace
 }  // namespace webrtc

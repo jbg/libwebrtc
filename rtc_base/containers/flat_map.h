@@ -359,6 +359,20 @@ void flat_map<Key, Mapped, Compare, Container>::swap(flat_map& other) noexcept {
   tree::swap(other);
 }
 
+// ----------------------------------------------------------------------------
+// Free functions.
+
+// Erases all elements that match predicate. It has O(size) complexity.
+template <class Key,
+          class Mapped,
+          class KeyCompare,
+          class Container,
+          typename Predicate>
+size_t EraseIf(flat_map<Key, Mapped, KeyCompare, Container>& container,
+               Predicate pred) {
+  return ::webrtc::flat_containers_internal::EraseIf(container, pred);
+}
+
 }  // namespace webrtc
 
 #endif  // RTC_BASE_CONTAINERS_FLAT_MAP_H_

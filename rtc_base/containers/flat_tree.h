@@ -1076,8 +1076,6 @@ auto flat_tree<Key, GetKeyFromValue, KeyCompare, Container>::
   return emplace_key_args(key, std::forward<Args>(args)...);
 }
 
-}  // namespace flat_containers_internal
-
 // ----------------------------------------------------------------------------
 // Free functions.
 
@@ -1097,6 +1095,7 @@ size_t EraseIf(
   return removed;
 }
 
+}  // namespace flat_containers_internal
 }  // namespace webrtc
 
 #endif  // RTC_BASE_CONTAINERS_FLAT_TREE_H_
