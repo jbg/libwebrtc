@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dea52af_a90bc3e0",
+        "filename": "rtc_base/containers/flat_map.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-07T09:22:28Z",
+      "side": 1,
+      "message": "side note: swap also exists as free function (and doesn\u0027t have to be a friend inside the container: it doesn\u0027t use any private access)",
+      "range": {
+        "startLine": 363,
+        "startChar": 3,
+        "endLine": 363,
+        "endChar": 18
+      },
+      "revId": "0105ea3f0750e37afdd5d336eae6ed490dd939c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfe8deff_eaceff91",
