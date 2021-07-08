@@ -3,6 +3,29 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f6c0d6ba_78505bbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-08T11:01:01Z",
+      "side": 1,
+      "message": "should address real-time case too:\nafter thread is destroyed, delayed task shouldn\u0027t run. (delayed task may still live, but that is not an issue here)",
+      "range": {
+        "startLine": 15,
+        "startChar": 17,
+        "endLine": 16,
+        "endChar": 50
+      },
+      "revId": "d4b55ef33a00a418897a214751ea4a89440436a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a7c53cdb_0324cac9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
