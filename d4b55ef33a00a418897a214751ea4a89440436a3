@@ -51,6 +51,24 @@
       "parentUuid": "b60216b4_85653afd",
       "revId": "d4b55ef33a00a418897a214751ea4a89440436a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b1a8ee2_6ac44a4f",
+        "filename": "test/time_controller/time_controller_conformance_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-07-08T10:59:36Z",
+      "side": 1,
+      "message": "Yes, changing the destruction order is what matters. What happens is that the callback on `thread` runs after `execution_order` has been marked as out of scope by ASan:\n\nThis frame has 11 object(s):\n    [32, 64) \u0027ref.tmp.i.i\u0027\n    [96, 120) \u0027agg.tmp.i\u0027\n    [160, 176) \u0027mutex_attribute.i.i.i.i.i.i\u0027\n    [192, 216) \u0027ref.tmp\u0027 (line 100)\n    [256, 344) \u0027execution_order\u0027 (line 102) \u003c\u003d\u003d Memory access at offset 328 is inside this variable\n    [384, 400) \u0027gtest_ar\u0027 (line 107)\n    [416, 440) \u0027ref.tmp48\u0027 (line 107)\n    [480, 504) \u0027agg.tmp49\u0027\n    [544, 568) \u0027ref.tmp51\u0027 (line 107)\n    [608, 616) \u0027ref.tmp53\u0027 (line 107)\n    [640, 648) \u0027ref.tmp54\u0027 (line 107)\n\nInstead of explicitly destroying `thread`, I can just move the creation of `execution_order` before. What do you think?",
+      "parentUuid": "b60216b4_85653afd",
+      "revId": "d4b55ef33a00a418897a214751ea4a89440436a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
