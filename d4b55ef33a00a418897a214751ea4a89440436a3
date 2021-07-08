@@ -33,6 +33,24 @@
       "message": "what does it change?\nit look like it only changes destruction order of `thread` and `execution_order` variables.\nThat order doesn\u0027t look important",
       "revId": "d4b55ef33a00a418897a214751ea4a89440436a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c7d9d53_f1710e2c",
+        "filename": "test/time_controller/time_controller_conformance_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-08T10:58:53Z",
+      "side": 1,
+      "message": "hm, I think I see a scenario where it matters:\ntasked posted with PostTask didn\u0027t run until after execution_order is destroyed.\nThen yes, instead of just failing the test, it would also cause stack-use-after-scope.\n\nMay be added a comment about it, something like\n// Destroy thread before execution_order to be sure execution_order is not accessed on the posted task after it is destroyed.",
+      "parentUuid": "b60216b4_85653afd",
+      "revId": "d4b55ef33a00a418897a214751ea4a89440436a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
