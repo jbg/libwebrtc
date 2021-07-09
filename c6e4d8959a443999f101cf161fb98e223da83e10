@@ -16,6 +16,23 @@
       "message": "Friendly ping saza@",
       "revId": "c6e4d8959a443999f101cf161fb98e223da83e10",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d26a8d7c_a3295924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-07-09T11:40:11Z",
+      "side": 1,
+      "message": "lgtm! Thank you for addressing the comments, sorry for the delay",
+      "revId": "c6e4d8959a443999f101cf161fb98e223da83e10",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
