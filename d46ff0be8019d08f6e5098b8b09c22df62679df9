@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25cb0f6a_40cc0d34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-07-15T18:17:32Z",
+      "side": 1,
+      "message": "I modified the code to fix the pylint violation, but the presubmit still fails and\nI made another CL for fix PRESUBMIT.py itself. https://webrtc-review.googlesource.com/c/src/+/226280",
+      "revId": "d46ff0be8019d08f6e5098b8b09c22df62679df9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
