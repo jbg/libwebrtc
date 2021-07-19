@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '505063c0cb6ade31a4066eac03e00b6521e761fa',
+  'chromium_revision': '617d5121d3596f9f57660d963d17f86aa109567d',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -31,13 +31,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@b210790ca4b8869b652ff875c01e195d7bfd9bf3',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@57422bee2ccad3d8b1f0f288845c86df024430d5',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@3631fcc251283c14d6df12c84e4f6558176db609',
+    'https://chromium.googlesource.com/chromium/src/testing@c4bd9205eeb6037d567de781d736ab81ff63ecee',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@02a1455fd10fe89e9b98d4549a5046897534df97',
+    'https://chromium.googlesource.com/chromium/src/third_party@f7d9d7e9dd45109820780e5bfbc3e6f0892d56d7',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -271,7 +271,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@10a53a91e86a4dba1b7124c91a0b6f82722866d0',
+    'https://chromium.googlesource.com/chromium/src/tools@4f73c6f51dc2198347630219417cbf21a7064bdd',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@a32a1607f6093d338f756c7e7c7b4333b0c50c9c',
 
@@ -372,7 +372,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': 'YiuL0FMMTU_K_n0aBAT3GBA4dMfL8JHhn6dkcz5SFgAC',
+          'version': 'xXfTzt6__4_ooeFJUwsWc8CiehiWLlYQ-pX4VxOyAEoC',
       },
     ],
     'condition': 'checkout_android',
@@ -477,15 +477,15 @@ deps = {
       'packages': [
         {
           'package': 'infra/tools/luci/isolate/${{platform}}',
-          'version': 'git_revision:d10ff2af1182ccaad573bc5acb84a36f4c280876',
+          'version': 'git_revision:175b811c1eebfa8868ab96b58a4dc7b5bcabf756',
         },
         {
           'package': 'infra/tools/luci/isolated/${{platform}}',
-          'version': 'git_revision:d10ff2af1182ccaad573bc5acb84a36f4c280876',
+          'version': 'git_revision:175b811c1eebfa8868ab96b58a4dc7b5bcabf756',
         },
         {
           'package': 'infra/tools/luci/swarming/${{platform}}',
-          'version': 'git_revision:d10ff2af1182ccaad573bc5acb84a36f4c280876',
+          'version': 'git_revision:175b811c1eebfa8868ab96b58a4dc7b5bcabf756',
         },
       ],
       'dep_type': 'cipd',
