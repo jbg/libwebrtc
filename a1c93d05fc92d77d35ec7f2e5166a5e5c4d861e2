@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab492157_95898866",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-07-21T12:21:12Z",
+      "side": 1,
+      "message": "I\u0027m certainly not an expert on the VCMTiming class, but AFAIKT this change makes sense. I\u0027ll give a hesitant LGTM (% comment), but in my experience fiddling with the timing class can cause weird effects. I expect several perf-bots to trigger alerts, we have to take a look at them to verify that this is not a regression.",
+      "revId": "a1c93d05fc92d77d35ec7f2e5166a5e5c4d861e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e46164_06f7cadb",
+        "filename": "modules/video_coding/timing.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-07-21T12:21:12Z",
+      "side": 1,
+      "message": "Looks like this function could be marked const now.",
+      "range": {
+        "startLine": 212,
+        "startChar": 19,
+        "endLine": 212,
+        "endChar": 33
+      },
+      "revId": "a1c93d05fc92d77d35ec7f2e5166a5e5c4d861e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
