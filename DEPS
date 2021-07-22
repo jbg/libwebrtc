@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '9b243167aa7326b6bbf97b1334d7c0fd5f155f01',
+  'chromium_revision': '6748cd591d7f7f617fbe259eb361b00e3223b084',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -35,9 +35,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@0b41bd3fd2691a54e2c7bdef7c3650dfa8263ea7',
+    'https://chromium.googlesource.com/chromium/src/testing@8c3404999d90f3192a776dab50d26401fd676492',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@9965543f354e3e2788f3da29698e20278c8a8a14',
+    'https://chromium.googlesource.com/chromium/src/third_party@1285e0bdb6a6658f355a4ee2b626fb797db1080e',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -214,7 +214,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@f7ba153308a223418921dff22a61527a00aea264',
+    'https://android.googlesource.com/platform/external/perfetto.git@cb07e44638b99718b8c54bc19f8dbd84a3743dc6',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@eebc5cd487a89c51ba148f6d6ac45779970f72d7',
   'src/third_party/libyuv':
@@ -271,7 +271,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@a0a9a4bd0ce6dd68b1ef9c9dc8a64564c307abb2',
+    'https://chromium.googlesource.com/chromium/src/tools@9e900eb183c76d728f73cfc60bdf202ff4df8605',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@a32a1607f6093d338f756c7e7c7b4333b0c50c9c',
 
@@ -372,7 +372,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': 'K8c7JN0QlH9y-iVNRC74RIWTTwcUwtM9CIwQ8vPQyFkC',
+          'version': 'R0benUT8A1oqvs7L0N-hfCvDpMzfzemd6fXXr4tBOrEC',
       },
     ],
     'condition': 'checkout_android',
