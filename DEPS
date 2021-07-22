@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '03a29cf406887d9341dc238c873402084352613e',
+  'chromium_revision': '70563c0fd79d0c5fc47c6e5a581fc10629ec441a',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -20,7 +20,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@58887e6f2a7d5c37befea9ffb4d675df86bae5b7',
+    'https://chromium.googlesource.com/chromium/src/base@aa4c3c4d7c88c59fac6f9930a1167f0400a38ede',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@4638e2675872e022efd9315b34bd364d5c62cac4',
   'src/buildtools':
@@ -31,13 +31,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@c172f6d55d8006686cc2e9a11bd775de46da15bd',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@a00b49ec30aab6ea371cda3b7b46c55782d2cb1c',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@e6a8848e04224cdd729ba957e7133368e2b4fa3f',
+    'https://chromium.googlesource.com/chromium/src/testing@9f8c96619975cc48141ee68bfbca4ea0fc96dc42',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@43300033c567983076ecf876ae86bd31dc9739a6',
+    'https://chromium.googlesource.com/chromium/src/third_party@156a42d1943cd664e7fbd9fc6145e337ad8980ff',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -128,7 +128,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@32096a2dc8f8a7d5aac4097e34912bb7e06a5277',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@9ac1fdf373609aac2e866e298067d78e053b6527',
+    'https://chromium.googlesource.com/catapult.git@032ed8560c6ed8302564e3ad2afa33e9926f903b',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
@@ -214,7 +214,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@13482fe8f91c9249d7311899e1627f0ea670afb7',
+    'https://android.googlesource.com/platform/external/perfetto.git@2760080cdd174b4b3093e1af9250e530cacf9e0b',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@eebc5cd487a89c51ba148f6d6ac45779970f72d7',
   'src/third_party/libyuv':
@@ -271,7 +271,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@2f3bb89f4e4a952f55afbd3b7f36e02d404141b5',
+    'https://chromium.googlesource.com/chromium/src/tools@ca6b5a16a9c26d8f6e1c3cca317adf3efb90d793',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@a32a1607f6093d338f756c7e7c7b4333b0c50c9c',
 
@@ -372,7 +372,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': 'hKpaz7h0NioWOEg8YP2hSuRaZ6uRCUEUcmNcvkxr9aYC',
+          'version': 'u-5j9v7tcNYMf2DUqhV4T5Df9lmX6PrJrCTRyE-1my4C',
       },
     ],
     'condition': 'checkout_android',
@@ -2107,7 +2107,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_jetbrains_kotlin_kotlin_stdlib',
-              'version': 'version:2@1.5.10.cr0',
+              'version': 'version:2@1.5.21.cr0',
           },
       ],
       'condition': 'checkout_android',
@@ -2118,7 +2118,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_jetbrains_kotlin_kotlin_stdlib_common',
-              'version': 'version:2@1.5.10.cr0',
+              'version': 'version:2@1.5.21.cr0',
           },
       ],
       'condition': 'checkout_android',
