@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85958c41_fc7ae867",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2021-07-23T22:09:55Z",
+      "side": 1,
+      "message": "Follow-up to https://webrtc-review.googlesource.com/c/src/+/224200 (initial Catalyst build support) and to Lee\u0027s https://webrtc-review.googlesource.com/c/src/+/202160 (XCFramework support for build_ios_libs.py)",
+      "revId": "38e1f3d11961e5c20081d0af058c01b186e8c1aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
