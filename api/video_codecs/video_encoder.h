@@ -260,6 +260,11 @@ class RTC_EXPORT VideoEncoder {
     // preferred pixel format. The order of the formats does not matter.
     absl::InlinedVector<VideoFrameBuffer::Type, kMaxPreferredPixelFormats>
         preferred_pixel_formats;
+
+    // If true for H.264 encoder, slice_qp_delta in slice header indicates
+    // current slice's average QP. Otherwise, slice_qp_delta should not be
+    // used for deriving slice QP.
+    absl::optional<bool> is_qp_trusted;
   };
 
   struct RTC_EXPORT RateControlParameters {
