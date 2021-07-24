@@ -16,6 +16,23 @@
       "message": "Follow-up to https://webrtc-review.googlesource.com/c/src/+/224200 (initial Catalyst build support) and to Lee\u0027s https://webrtc-review.googlesource.com/c/src/+/202160 (XCFramework support for build_ios_libs.py)",
       "revId": "38e1f3d11961e5c20081d0af058c01b186e8c1aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86a2231e_85e893e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-07-24T12:43:08Z",
+      "side": 1,
+      "message": "I\u0027m not a committer so I can\u0027t +1 on this CL, so I added mbonadei as a reviewer.\nThis changelist looks good to me, but I have one question.\nCatalyst build fails due to an undefined symbol issue in libvpx. Is there a gn flag that makes the build successful?",
+      "revId": "38e1f3d11961e5c20081d0af058c01b186e8c1aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
