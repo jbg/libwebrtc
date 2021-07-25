@@ -92,6 +92,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "770c847a_c49e1e70",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "defb77ef_561255d9",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 55
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6a921cf_c948d235",
@@ -105,6 +129,30 @@
       "writtenOn": "2021-06-30T09:10:35Z",
       "side": 1,
       "message": "can key_value_config be nullptr?\nIf yes - check for that before dereferencing.\nif not - pass by const reference.",
+      "range": {
+        "startLine": 104,
+        "startChar": 32,
+        "endLine": 104,
+        "endChar": 48
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fff59f6_99f31f76",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "a6a921cf_c948d235",
       "range": {
         "startLine": 104,
         "startChar": 32,
@@ -138,6 +186,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54750539_a1121448",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Fixed. I was not aware that `RTC_LOG` already outputs the file and line number.",
+      "parentUuid": "1c0a494e_b518bec5",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 13
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "674bc6dc_c1fda9d6",
@@ -161,6 +233,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04ca00f9_f16d3b60",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "This is remnants from when an invalid object was indicated by returning a `nullptr`.\n\nI\u0027m converting this to a constructor.",
+      "parentUuid": "674bc6dc_c1fda9d6",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 0
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "836d08ac_6d18f692",
@@ -174,6 +270,30 @@
       "writtenOn": "2021-07-02T13:49:35Z",
       "side": 1,
       "message": "maybe initial_bitrate instead for readability?",
+      "range": {
+        "startLine": 346,
+        "startChar": 53,
+        "endLine": 346,
+        "endChar": 56
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfd1c9e9_4e766403",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "836d08ac_6d18f692",
       "range": {
         "startLine": 346,
         "startChar": 53,
@@ -209,6 +329,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "703a0129_2f482768",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "980bab8e_39efdeae",
+      "range": {
+        "startLine": 355,
+        "startChar": 21,
+        "endLine": 355,
+        "endChar": 30
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2a0abfc1_13abb8d1",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
         "patchSetId": 3
@@ -220,6 +364,30 @@
       "writtenOn": "2021-06-30T09:10:35Z",
       "side": 1,
       "message": "nit: num_observations_ is integer? then prefer to compare to zero:\nnum_observation_ \u003c\u003d 0",
+      "range": {
+        "startLine": 388,
+        "startChar": 24,
+        "endLine": 388,
+        "endChar": 27
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24016497_d1bd2d97",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "2a0abfc1_13abb8d1",
       "range": {
         "startLine": 388,
         "startChar": 24,
@@ -253,6 +421,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d202211_8e5f44ca",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "This `DCHECK` should have already been removed.",
+      "parentUuid": "853404b1_f2fea45a",
+      "range": {
+        "startLine": 573,
+        "startChar": 2,
+        "endLine": 573,
+        "endChar": 31
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0746ed29_46a40073",
@@ -266,6 +458,30 @@
       "writtenOn": "2021-06-30T09:10:35Z",
       "side": 1,
       "message": "GetNumberOfLostPackets and GetDataSize are used once.\neach of the loops through the same packet_result.\nmay be do a classic loop instead:\nfor (const PacketRrsult\u0026 p : packet_results) {\n  if (!p.IsReceived()) {\n    ++partial_observation_.number_of_lost_packets;\n  }\n  partial_observation_.size +\u003d p.sent_packet.size;\n}",
+      "range": {
+        "startLine": 578,
+        "startChar": 0,
+        "endLine": 581,
+        "endChar": 0
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b358473_92b6d673",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Merged all of the utility functions to one.",
+      "parentUuid": "0746ed29_46a40073",
       "range": {
         "startLine": 578,
         "startChar": 0,
@@ -299,6 +515,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cce2d42_dd7f6a09",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eca1a06d_374ac191",
+      "range": {
+        "startLine": 584,
+        "startChar": 34,
+        "endLine": 587,
+        "endChar": 41
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b348e600_18dc7e2e",
@@ -312,6 +552,30 @@
       "writtenOn": "2021-07-02T13:49:35Z",
       "side": 1,
       "message": "it\u0027s better to use time_delta or something describes the intent of the variable, I suggest to minimize the use of abbreviations, as they make it harder to understand by readers.",
+      "range": {
+        "startLine": 588,
+        "startChar": 18,
+        "endLine": 588,
+        "endChar": 20
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30aafd72_1e28a8b2",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b348e600_18dc7e2e",
       "range": {
         "startLine": 588,
         "startChar": 18,
@@ -345,6 +609,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "275f4399_3cfc9978",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee785dda_e35062aa",
+      "range": {
+        "startLine": 617,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 47
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7038acaa_3c83fbdc",
@@ -358,6 +646,30 @@
       "writtenOn": "2021-06-30T09:10:35Z",
       "side": 1,
       "message": "are other values valid when enabled \u003d false?\nif not, then may be do not have this member, instead pass optional\u003cConfig\u003e where config may be invalid.",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 25
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a11cb51_d4b2d1a1",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Fixed. They may be valid, but should not be used nevertheless.",
+      "parentUuid": "7038acaa_3c83fbdc",
       "range": {
         "startLine": 31,
         "startChar": 4,
@@ -414,6 +726,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a8af9b_3a1053c5",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f947117_0fe9176f",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 79
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e6bd7fe_165b4d98",
@@ -427,6 +763,30 @@
       "writtenOn": "2021-07-02T13:49:35Z",
       "side": 1,
       "message": "nit: empty line before comment for readability",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 49
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed7b5d5e_e88ab12d",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6bd7fe_165b4d98",
       "range": {
         "startLine": 114,
         "startChar": 0,
@@ -460,6 +820,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5287741_238d458f",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "By default V1 is disabled [1] so we must check if it is enabled.\n\n[1]: https://webrtc.googlesource.com/src/+/c661b3fe707ed467880fdd8e7edb5fae5e9e1858/modules/congestion_controller/goog_cc/loss_based_bandwidth_estimation.cc#78",
+      "parentUuid": "a9364a66_90ddf4a1",
+      "range": {
+        "startLine": 349,
+        "startChar": 0,
+        "endLine": 353,
+        "endChar": 66
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74b37568_c28038aa",
@@ -473,6 +857,30 @@
       "writtenOn": "2021-07-02T13:49:35Z",
       "side": 1,
       "message": "same as above\nif (LossBasedBweV2Enabled()) {\n...\n} else {\n...\n}",
+      "range": {
+        "startLine": 359,
+        "startChar": 2,
+        "endLine": 365,
+        "endChar": 3
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cd5bcf0_bd5422d9",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "See above comment.",
+      "parentUuid": "74b37568_c28038aa",
       "range": {
         "startLine": 359,
         "startChar": 2,
@@ -506,6 +914,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf556fff_025154f5",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "See above comment.",
+      "parentUuid": "2ffffdea_bab16940",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 5
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "210107dd_4acef8c8",
@@ -529,6 +961,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ac370a_bf6ac438",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "See above comment.",
+      "parentUuid": "210107dd_4acef8c8",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 3
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0ec9466_511f644f",
@@ -542,6 +998,30 @@
       "writtenOn": "2021-07-02T13:49:35Z",
       "side": 1,
       "message": "this can be removed",
+      "range": {
+        "startLine": 652,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 0
+      },
+      "revId": "7fef8792e86ca38e633666875b7ff25fbae1d862",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "895941b4_334cd66c",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-25T19:39:55Z",
+      "side": 1,
+      "message": "See above comment.",
+      "parentUuid": "a0ec9466_511f644f",
       "range": {
         "startLine": 652,
         "startChar": 0,
