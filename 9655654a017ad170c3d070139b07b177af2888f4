@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c5e0f25_e01b3a3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-07-26T10:32:42Z",
+      "side": 1,
+      "message": "LGTM\n\nJianlin, are you planning to add bandwidth-based resolution adaptation (should not necessarily be a part of this CL)? If we simply disable QP-based adaptation the quality will be suboptimal if bandwidth drops below certain level but resolution stays high.",
+      "revId": "9655654a017ad170c3d070139b07b177af2888f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "531ebd04_111d36fc",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-07-26T10:32:42Z",
+      "side": 1,
+      "message": "I would like to suggest to make this less H264-specific. For example: \"Indicates whether or not QP value encoder writes into frame/slice/tile header can be interpreted as average frame/slice/tile QP.\"",
+      "range": {
+        "startLine": 264,
+        "startChar": 4,
+        "endLine": 266,
+        "endChar": 34
+      },
+      "revId": "9655654a017ad170c3d070139b07b177af2888f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2028707_6b660b6d",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-07-26T10:32:42Z",
+      "side": 1,
+      "message": "Please add test for this logic. You can place it in  video/video_stream_encoder_unittest.cc. Use QualityScalingNotAllowed_QualityScalingDisabled for reference.",
+      "range": {
+        "startLine": 530,
+        "startChar": 72,
+        "endLine": 531,
+        "endChar": 77
+      },
+      "revId": "9655654a017ad170c3d070139b07b177af2888f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
