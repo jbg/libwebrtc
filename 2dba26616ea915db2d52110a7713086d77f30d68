@@ -34,6 +34,23 @@
       "parentUuid": "40a9886f_42ef24a1",
       "revId": "2dba26616ea915db2d52110a7713086d77f30d68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db18707d_add0f4dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-07-26T14:32:24Z",
+      "side": 1,
+      "message": "Are you leaving this CL open and pending until the compiler bug is fixed?\n",
+      "revId": "2dba26616ea915db2d52110a7713086d77f30d68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
