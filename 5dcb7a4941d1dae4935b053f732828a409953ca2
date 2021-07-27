@@ -16,6 +16,23 @@
       "message": "Removing myself as reviewer, since there are already more appropriate OWNERS listed!",
       "revId": "5dcb7a4941d1dae4935b053f732828a409953ca2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3d95832_b2aa249b",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 18044
+      },
+      "writtenOn": "2021-07-27T12:52:14Z",
+      "side": 1,
+      "message": "I believe this will leak render_node, since it\u0027s returning a const char* which doesn\u0027t seem to ever be freed. (Could this just return a std::string instead?)",
+      "revId": "5dcb7a4941d1dae4935b053f732828a409953ca2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
