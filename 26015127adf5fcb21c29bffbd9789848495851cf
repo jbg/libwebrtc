@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49214b6b_a1aeaa34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6756
+      },
+      "writtenOn": "2021-07-27T07:43:44Z",
+      "side": 1,
+      "message": "LGTMish\n\nYou could do the many BUILD.gn changes in a separate CL to distribute any risk. E.g.:\n1. CL: change build_overrides (to import gclient_args) - now gclient_args is indirectly imported in Chrome. It also already is in webrtc through webrtc.gni.\n2. CL: Explicit imports of gclient_args - those aren\u0027t strictly required, but are cleaning up an indirect-import anti-pattern.\n\nMy comment below is for copied code, but nonetheless:",
+      "revId": "26015127adf5fcb21c29bffbd9789848495851cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c4c40b9_6364bc71",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 6756
+      },
+      "writtenOn": "2021-07-27T07:43:44Z",
+      "side": 1,
+      "message": "nit: standalone",
+      "range": {
+        "startLine": 10,
+        "startChar": 50,
+        "endLine": 10,
+        "endChar": 59
+      },
+      "revId": "26015127adf5fcb21c29bffbd9789848495851cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e62a90b_d9010e1d",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 6756
+      },
+      "writtenOn": "2021-07-27T07:43:44Z",
+      "side": 1,
+      "message": "I don\u0027t understand this. Maybe you mean WebRTC in Chromium builds?\n\nI.e. what does support mean? The true-case?",
+      "range": {
+        "startLine": 11,
+        "startChar": 32,
+        "endLine": 11,
+        "endChar": 69
+      },
+      "revId": "26015127adf5fcb21c29bffbd9789848495851cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
