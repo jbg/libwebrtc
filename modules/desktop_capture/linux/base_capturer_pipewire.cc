@@ -19,11 +19,14 @@
 #include <spa/support/type-map.h>
 #endif
 
+#include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/syscall.h>
+#include <unistd.h>
 
 #include <memory>
+#include <string>
 #include <utility>
 
 #include "absl/memory/memory.h"
@@ -91,6 +94,27 @@ static void SyncDmaBuf(int fd, uint64_t start_or_end) {
     } else {
       break;
     }
+  }
+}
+
+static const std::string formatGLError(GLenum err) {
+  switch (err) {
+    case GL_NO_ERROR:
+      return "GL_NO_ERROR";
+    case GL_INVALID_ENUM:
+      return "GL_INVALID_ENUM";
+    case GL_INVALID_VALUE:
+      return "GL_INVALID_VALUE";
+    case GL_INVALID_OPERATION:
+      return "GL_INVALID_OPERATION";
+    case GL_STACK_OVERFLOW:
+      return "GL_STACK_OVERFLOW";
+    case GL_STACK_UNDERFLOW:
+      return "GL_STACK_UNDERFLOW";
+    case GL_OUT_OF_MEMORY:
+      return "GL_OUT_OF_MEMORY";
+    default:
+      return std::string("0x") + std::to_string(err);
   }
 }
 
@@ -320,11 +344,17 @@ void BaseCapturerPipeWire::OnStreamFormatChanged(void* data,
   // Setup buffers and meta header for new format.
   const struct spa_pod* params[3];
 #if PW_CHECK_VERSION(0, 3, 0)
+  const auto bufferTypes =
+      that->egl_initialized_ ? (1 << SPA_DATA_DmaBuf) | (1 << SPA_DATA_MemFd) |
+                                   (1 << SPA_DATA_MemPtr)
+                             : (1 << SPA_DATA_MemFd) | (1 << SPA_DATA_MemPtr);
+
   params[0] = reinterpret_cast<spa_pod*>(spa_pod_builder_add_object(
       &builder, SPA_TYPE_OBJECT_ParamBuffers, SPA_PARAM_Buffers,
       SPA_PARAM_BUFFERS_size, SPA_POD_Int(size), SPA_PARAM_BUFFERS_stride,
       SPA_POD_Int(stride), SPA_PARAM_BUFFERS_buffers,
-      SPA_POD_CHOICE_RANGE_Int(8, 1, 32)));
+      SPA_POD_CHOICE_RANGE_Int(8, 1, 32), SPA_PARAM_BUFFERS_dataType,
+      SPA_POD_CHOICE_FLAGS_Int(bufferTypes)));
   params[1] = reinterpret_cast<spa_pod*>(spa_pod_builder_add_object(
       &builder, SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta, SPA_PARAM_META_type,
       SPA_POD_Id(SPA_META_Header), SPA_PARAM_META_size,
@@ -497,6 +527,86 @@ BaseCapturerPipeWire::~BaseCapturerPipeWire() {
     g_object_unref(proxy_);
     proxy_ = nullptr;
   }
+}
+
+void BaseCapturerPipeWire::InitEGL() {
+  // Initialize EGL for DMA-BUF support
+  drm_fd_ = open("/dev/dri/renderD128", O_RDWR);
+
+  if (drm_fd_ < 0) {
+    RTC_LOG(LS_ERROR) << "Failed to open drm render node: " << strerror(errno);
+    return;
+  }
+
+  gbm_device_ = gbm_create_device(drm_fd_);
+
+  if (!gbm_device_) {
+    RTC_LOG(LS_ERROR) << "Cannot create GBM device: " << strerror(errno);
+    return;
+  }
+
+  // Get the list of client extensions
+  const char* clientExtensionsCString =
+      eglQueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS);
+  std::string clientExtensionsString = clientExtensionsCString;
+  if (clientExtensionsString.empty()) {
+    // If eglQueryString() returned NULL, the implementation doesn't support
+    // EGL_EXT_client_extensions. Expect an EGL_BAD_DISPLAY error.
+    RTC_LOG(LS_ERROR) << "No client extensions defined! "
+                      << formatGLError(eglGetError());
+    return;
+  }
+
+  std::string delimiter = " ";
+  size_t pos = 0;
+  while ((pos = clientExtensionsString.find(delimiter)) != std::string::npos) {
+    egl_.extensions.push_back(clientExtensionsString.substr(0, pos));
+    clientExtensionsString.erase(0, pos + delimiter.length());
+  }
+
+  // Use eglGetPlatformDisplayEXT() to get the display pointer
+  // if the implementation supports it.
+  if (std::find(egl_.extensions.begin(), egl_.extensions.end(),
+                "EGL_EXT_platform_base") == egl_.extensions.end() ||
+      std::find(egl_.extensions.begin(), egl_.extensions.end(),
+                "EGL_MESA_platform_gbm") == egl_.extensions.end()) {
+    RTC_LOG(LS_ERROR) << "One of required EGL extensions is missing";
+    return;
+  }
+
+  egl_.display =
+      eglGetPlatformDisplayEXT(EGL_PLATFORM_GBM_MESA, gbm_device_, nullptr);
+
+  if (egl_.display == EGL_NO_DISPLAY) {
+    RTC_LOG(LS_ERROR) << "Error during obtaining EGL display: "
+                      << formatGLError(eglGetError());
+    return;
+  }
+
+  EGLint major, minor;
+  if (eglInitialize(egl_.display, &major, &minor) == EGL_FALSE) {
+    RTC_LOG(LS_ERROR) << "Error during eglInitialize: "
+                      << formatGLError(eglGetError());
+    return;
+  }
+
+  if (eglBindAPI(EGL_OPENGL_API) == EGL_FALSE) {
+    RTC_LOG(LS_ERROR) << "bind OpenGL API failed";
+    return;
+  }
+
+  egl_.context =
+      eglCreateContext(egl_.display, nullptr, EGL_NO_CONTEXT, nullptr);
+
+  if (egl_.context == EGL_NO_CONTEXT) {
+    RTC_LOG(LS_ERROR) << "Couldn't create EGL context: "
+                      << formatGLError(eglGetError());
+    return;
+  }
+
+  RTC_LOG(LS_ERROR) << "Egl initialization succeeded";
+
+  egl_initialized_ = true;
 }
 
 void BaseCapturerPipeWire::InitPortal() {
@@ -697,9 +807,10 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
     return;
   }
 
+  std::function<void()> cleanup;
+  const int32_t src_stride = spaBuffer->datas[0].chunk->stride;
 #if PW_CHECK_VERSION(0, 3, 0)
-  if (spaBuffer->datas[0].type == SPA_DATA_MemFd ||
-      spaBuffer->datas[0].type == SPA_DATA_DmaBuf) {
+  if (spaBuffer->datas[0].type == SPA_DATA_MemFd) {
 #else
   if (spaBuffer->datas[0].type == pw_core_type_->data.MemFd ||
       spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf) {
@@ -711,7 +822,7 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
                  PROT_READ, MAP_PRIVATE, spaBuffer->datas[0].fd, 0)),
         spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset,
 #if PW_CHECK_VERSION(0, 3, 0)
-        spaBuffer->datas[0].type == SPA_DATA_DmaBuf,
+        false,
 #else
         spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf,
 #endif
@@ -723,15 +834,99 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
       return;
     }
 
-#if PW_CHECK_VERSION(0, 3, 0)
-    if (spaBuffer->datas[0].type == SPA_DATA_DmaBuf) {
-#else
+#if !PW_CHECK_VERSION(0, 3, 0)
     if (spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf) {
-#endif
       SyncDmaBuf(spaBuffer->datas[0].fd, DMA_BUF_SYNC_START);
     }
+#endif
 
     src = SPA_MEMBER(map.get(), spaBuffer->datas[0].mapoffset, uint8_t);
+#if PW_CHECK_VERSION(0, 3, 0)
+  } else if (spaBuffer->datas[0].type == SPA_DATA_DmaBuf) {
+    if (!egl_initialized_) {
+      // Shouldn't reach this
+      RTC_LOG(LS_ERROR) << "Failed to process DMA buffer.";
+      return;
+    }
+
+    gbm_import_fd_data importInfo = {
+        static_cast<int>(spaBuffer->datas->fd),
+        static_cast<uint32_t>(desktop_size_.width()),
+        static_cast<uint32_t>(desktop_size_.height()),
+        static_cast<uint32_t>(spaBuffer->datas[0].chunk->stride),
+        GBM_BO_FORMAT_ARGB8888};
+    gbm_bo* imported = gbm_bo_import(gbm_device_, GBM_BO_IMPORT_FD, &importInfo,
+                                     GBM_BO_USE_SCANOUT);
+    if (!imported) {
+      RTC_LOG(LS_ERROR)
+          << "Failed to process buffer: Cannot import passed GBM fd - "
+          << strerror(errno);
+      return;
+    }
+
+    // bind context to render thread
+    eglMakeCurrent(egl_.display, EGL_NO_SURFACE, EGL_NO_SURFACE, egl_.context);
+
+    // create EGL image from imported BO
+    EGLImageKHR image = eglCreateImageKHR(
+        egl_.display, nullptr, EGL_NATIVE_PIXMAP_KHR, imported, nullptr);
+
+    if (image == EGL_NO_IMAGE_KHR) {
+      RTC_LOG(LS_ERROR)
+          << "Failed to record frame: Error creating EGLImageKHR - "
+          << formatGLError(glGetError());
+      gbm_bo_destroy(imported);
+      return;
+    }
+
+    // create GL 2D texture for framebuffer
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, image);
+
+    src = static_cast<uint8_t*>(malloc(src_stride * desktop_size_.height()));
+
+    GLenum glFormat = GL_BGRA;
+    switch (spa_video_format_.format) {
+      case SPA_VIDEO_FORMAT_RGBx:
+        glFormat = GL_RGBA;
+        break;
+      case SPA_VIDEO_FORMAT_RGBA:
+        glFormat = GL_RGBA;
+        break;
+      case SPA_VIDEO_FORMAT_BGRx:
+        glFormat = GL_BGRA;
+        break;
+      case SPA_VIDEO_FORMAT_RGB:
+        glFormat = GL_RGB;
+        break;
+      case SPA_VIDEO_FORMAT_BGR:
+        glFormat = GL_BGR;
+        break;
+      default:
+        glFormat = GL_BGRA;
+        break;
+    }
+    glGetTexImage(GL_TEXTURE_2D, 0, glFormat, GL_UNSIGNED_BYTE, src);
+
+    if (!src) {
+      RTC_LOG(LS_ERROR) << "Failed to get image from DMA buffer.";
+      gbm_bo_destroy(imported);
+      return;
+    }
+
+    cleanup = [src] { free(src); };
+
+    glDeleteTextures(1, &texture);
+    eglDestroyImageKHR(egl_.display, image);
+
+    gbm_bo_destroy(imported);
+#endif
 #if PW_CHECK_VERSION(0, 3, 0)
   } else if (spaBuffer->datas[0].type == SPA_DATA_MemPtr) {
 #else
@@ -767,6 +962,9 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
                          video_metadata->height > desktop_size_.height())) {
 #endif
     RTC_LOG(LS_ERROR) << "Stream metadata sizes are wrong!";
+#if PW_CHECK_VERSION(0, 3, 0)
+    cleanup();
+#endif
     return;
   }
 
@@ -804,12 +1002,14 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
   }
 
   const int32_t dst_stride = video_size_.width() * kBytesPerPixel;
-  const int32_t src_stride = spaBuffer->datas[0].chunk->stride;
 
   if (src_stride != (desktop_size_.width() * kBytesPerPixel)) {
     RTC_LOG(LS_ERROR) << "Got buffer with stride different from screen stride: "
                       << src_stride
                       << " != " << (desktop_size_.width() * kBytesPerPixel);
+#if PW_CHECK_VERSION(0, 3, 0)
+    cleanup();
+#endif
     portal_init_failed_ = true;
 
     return;
@@ -860,6 +1060,10 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
     src += src_stride - x_offset;
     dst += dst_stride;
   }
+
+#if PW_CHECK_VERSION(0, 3, 0)
+  cleanup();
+#endif
 }
 
 void BaseCapturerPipeWire::ConvertRGBxToBGRx(uint8_t* frame, uint32_t size) {
@@ -1283,6 +1487,9 @@ void BaseCapturerPipeWire::OnOpenPipeWireRemoteRequested(
     return;
   }
 
+#if PW_CHECK_VERSION(0, 3, 0)
+  that->InitEGL();
+#endif
   that->InitPipeWire();
 }
 
