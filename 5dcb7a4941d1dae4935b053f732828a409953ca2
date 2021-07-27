@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "057e8a52_467a9791",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2021-07-27T11:50:54Z",
+      "side": 1,
+      "message": "Removing myself as reviewer, since there are already more appropriate OWNERS listed!",
+      "revId": "5dcb7a4941d1dae4935b053f732828a409953ca2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
