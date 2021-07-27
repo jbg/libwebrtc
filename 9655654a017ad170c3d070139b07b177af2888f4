@@ -59,6 +59,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "366394bb_7952719f",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2021-07-27T07:25:42Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "531ebd04_111d36fc",
+      "range": {
+        "startLine": 264,
+        "startChar": 4,
+        "endLine": 266,
+        "endChar": 34
+      },
+      "revId": "9655654a017ad170c3d070139b07b177af2888f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2028707_6b660b6d",
@@ -72,6 +96,30 @@
       "writtenOn": "2021-07-26T10:32:42Z",
       "side": 1,
       "message": "Please add test for this logic. You can place it in  video/video_stream_encoder_unittest.cc. Use QualityScalingNotAllowed_QualityScalingDisabled for reference.",
+      "range": {
+        "startLine": 530,
+        "startChar": 72,
+        "endLine": 531,
+        "endChar": 77
+      },
+      "revId": "9655654a017ad170c3d070139b07b177af2888f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cedf0006_f1c738ac",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2021-07-27T07:25:42Z",
+      "side": 1,
+      "message": "Added.",
+      "parentUuid": "f2028707_6b660b6d",
       "range": {
         "startLine": 530,
         "startChar": 72,
