@@ -16,6 +16,23 @@
       "message": "Waiting a Chromium roll in WebRTC before landing.",
       "revId": "c2752486a0b90174c84969df7cd4ed32a8857d10",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5d3868_ef4067bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6756
+      },
+      "writtenOn": "2021-07-27T07:57:08Z",
+      "side": 1,
+      "message": "lgtm! and yes, wait for the dependent CL in Chrome to roll...",
+      "revId": "c2752486a0b90174c84969df7cd4ed32a8857d10",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
