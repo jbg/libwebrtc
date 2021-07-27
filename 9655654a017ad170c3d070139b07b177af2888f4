@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4535b18_5d7cf8b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2021-07-27T07:01:00Z",
+      "side": 1,
+      "message": "Yes, that\u0027s the plan.",
+      "parentUuid": "2c5e0f25_e01b3a3d",
+      "revId": "9655654a017ad170c3d070139b07b177af2888f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "531ebd04_111d36fc",
