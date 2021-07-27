@@ -6,12 +6,10 @@
 # in the file PATENTS.  All contributing project authors may
 # be found in the AUTHORS file in the root of the source tree.
 
+import("//build/config/gclient_args.gni")
+
 # Some non-Chromium builds don't support building java targets.
 enable_java_templates = true
-
-# Don't set this variable to true when building stadalone WebRTC, it is
-# only needed to support both WebRTC standalone and Chromium builds.
-build_with_chromium = false
 
 # WebRTC checks out google_benchmark by default since it is always used.
 checkout_google_benchmark = true

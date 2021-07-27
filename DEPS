@@ -2,10 +2,15 @@
 
 gclient_gn_args_file = 'src/build/config/gclient_args.gni'
 gclient_gn_args = [
+  'build_with_chromium',
   'generate_location_tags',
 ]
 
 vars = {
+  # Don't set this variable to true when building stadalone WebRTC, it is
+  # only needed to support both WebRTC standalone and Chromium builds.
+  'build_with_chromium': False,
+
   # By default, we should check out everything needed to run on the main
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
