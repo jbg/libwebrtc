@@ -230,6 +230,15 @@ if (is_linux || is_chromeos) {
           ignore_libs = true
         }
       }
+      pkg_config("gbm") {
+        packages = [ "gbm" ]
+      }
+      pkg_config("egl") {
+        packages = [ "egl" ]
+      }
+      pkg_config("epoxy") {
+        packages = [ "epoxy" ]
+      }
     } else {
       pkg_config("pipewire") {
         packages = [ "libpipewire-0.2" ]
@@ -566,6 +575,9 @@ rtc_library("desktop_capture_generic") {
       ":pipewire_config",
       ":gio",
       ":pipewire",
+      ":gbm",
+      ":egl",
+      ":epoxy",
     ]
 
     if (!rtc_link_pipewire) {
