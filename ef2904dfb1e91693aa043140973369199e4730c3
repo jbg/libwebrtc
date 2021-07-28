@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9edac58e_5779e0bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-07-28T23:49:31Z",
+      "side": 1,
+      "message": "All right; ready for review, but not submission until I deal with a test that\u0027s going from failing to passing.\n\nWe now no longer include the \"zombie\" transports that aren\u0027t currently mapped to a transceiver in the aggregate state calculation. Though they can still receive ICE candidates and configuration, as they should.\n\nPatchset #2 adds a separate map for these zombie transports. Patchset #3 just uses mid_to_transport_ to figure out the active transports, which I thought was cleaner.",
+      "revId": "ef2904dfb1e91693aa043140973369199e4730c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
