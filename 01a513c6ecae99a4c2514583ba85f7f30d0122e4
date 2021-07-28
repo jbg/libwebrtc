@@ -1,6 +1,92 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a27f459_7403599c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "style looks ok.\nI haven\u0027t tried to understand the algorithm",
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1edbda45_adf60697",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "may be use double constants to stress inherit_loss is double, not int: 0.0 and 1.0\n\nhttps://google.github.io/styleguide/cppguide.html#Floating_Literals",
+      "range": {
+        "startLine": 78,
+        "startChar": 22,
+        "endLine": 78,
+        "endChar": 23
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5c1a6e7_62ddedc8",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "may be clamp inherit_loss only inside the validation above\nif (inherit_loss \u003c 0.0 || inherit_loss \u003e 1.0) {\n  LOG(WARNING) \u003c\u003c ...;\n  inherit_loss \u003d std::min(std::max(inherent_loss, 0.0), 1.0);\n}",
+      "range": {
+        "startLine": 91,
+        "startChar": 28,
+        "endLine": 91,
+        "endChar": 72
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "499a7241_ce2206c9",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "is it right way to sum probabilities? \nor is it ok because probabilities suppose to be small and thus their produce is negligible.\n\nI think normally you sum probabilities of two independent events as\neither_may_happen \u003d 1 - (1 - one_can_happen) * (1 - another_can_happen) \u003d \none_can_happen + another_can_happen - one_can_happen * another_can_happen;",
+      "range": {
+        "startLine": 94,
+        "startChar": 21,
+        "endLine": 94,
+        "endChar": 24
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79c3dc7f_576daa06",
@@ -19,6 +105,138 @@
         "startChar": 2,
         "endLine": 103,
         "endChar": 54
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "086d45ad_9d0cf384",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "to hint compiler to use RVO, may be return single variable:\n\n  absl::optional\u003cLossBasedBweV2::Config\u003e config;\n  if (!enabled.Get()) {\n    return config;\n  }\n\n  config.emplace();\n  config-\u003evalue \u003d ...;\n  ...\n  return config;\n\n\nhttps://abseil.io/tips/11#how-can-you-ensure-the-compiler-performs-rvo\n\"The compiler also can’t do RVO if the called function uses more than one variable for the return value,\nBut it’s okay if the called function uses one variable and returns it in multiple places\"",
+      "range": {
+        "startLine": 152,
+        "startChar": 1,
+        "endLine": 152,
+        "endChar": 32
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77236848_4f2c4d77",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "remove this empty line",
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "add076ea_2a4ac8b7",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "may be do not use else after return",
+      "range": {
+        "startLine": 292,
+        "startChar": 4,
+        "endLine": 292,
+        "endChar": 8
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c7d7438_d875c42e",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "*config_\n\n(you\u0027ve already ensure config_.has_value(), thus no need to recheck it inside the value() accessor)",
+      "range": {
+        "startLine": 292,
+        "startChar": 22,
+        "endLine": 292,
+        "endChar": 37
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bff222d_b0a8d5d1",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "may be 1.0",
+      "range": {
+        "startLine": 468,
+        "startChar": 46,
+        "endLine": 468,
+        "endChar": 48
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04c44241_2ab36ea8",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "may be 1.0",
+      "range": {
+        "startLine": 473,
+        "startChar": 19,
+        "endLine": 473,
+        "endChar": 20
       },
       "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
@@ -43,6 +261,63 @@
         "endLine": 499,
         "endChar": 6
       },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e6a5f2f_c0fde1d6",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "does this struct need to be public?\nif yes, then its members deserve documentation.\n(but it looks like config is not used in the api, so may be move this struct to the private section)",
+      "range": {
+        "startLine": 30,
+        "startChar": 9,
+        "endLine": 30,
+        "endChar": 15
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "998cf446_9ccc6f0e",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "Add lines\n  LossBasedBweV2(const LossBasedBweV2\u0026) \u003d delete;\n  LossBasedBweV2\u0026 operator\u003d(const LossBasedBweV2\u0026) \u003d delete;\n(or `\u003d default` if this class intended to be copyable)\n\nhttps://google.github.io/styleguide/cppguide.html#Copy_Constructors\n\n\"Every class\u0027s public interface must make clear which copy and move operations the class supports.\"",
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f8b7a3e_beaf011f",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:41:43Z",
+      "side": 1,
+      "message": "can you please clarify what is the difference between IsEnabled and IsReady",
       "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
