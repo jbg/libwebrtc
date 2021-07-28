@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90b7b5ab_fc663ed3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16600
+      },
+      "writtenOn": "2021-07-28T17:20:08Z",
+      "side": 1,
+      "message": "+nisse +sprang for video",
+      "revId": "6abb5ee0b1e2db631fc691246feea13ddf666455",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
