@@ -22,6 +22,30 @@
       },
       "revId": "d26c38e9056ee84db7fbaf5b40f5b8142ae994c4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f9e3be8_db6d9c89",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2021-07-28T07:53:55Z",
+      "side": 1,
+      "message": "Should be value_or(true) as our logic would be:\nIf encoder does not set this flag, we still use quality scaler(to work with existing encoders not having QP issue); Otherwise follow what\u0027s set by encoder.",
+      "parentUuid": "7a419b4a_907c6860",
+      "range": {
+        "startLine": 531,
+        "startChar": 7,
+        "endLine": 532,
+        "endChar": 41
+      },
+      "revId": "d26c38e9056ee84db7fbaf5b40f5b8142ae994c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
