@@ -290,6 +290,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4224d9cd_b9d0dd3a",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-07-28T15:44:00Z",
+      "side": 1,
+      "message": "you can make CreateConfig a private static function to give it access to this struct",
+      "parentUuid": "7e6a5f2f_c0fde1d6",
+      "range": {
+        "startLine": 30,
+        "startChar": 9,
+        "endLine": 30,
+        "endChar": 15
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "998cf446_9ccc6f0e",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
         "patchSetId": 6
