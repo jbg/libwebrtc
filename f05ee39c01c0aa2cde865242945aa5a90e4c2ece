@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5da3c48e_dd2698f0",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f3ff59a_2e57f87d",
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d14fd1d0_649d6c12",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
         "patchSetId": 4
@@ -48,6 +66,30 @@
       "writtenOn": "2021-07-26T11:57:49Z",
       "side": 1,
       "message": "nit: may be 15\u0027000",
+      "range": {
+        "startLine": 29,
+        "startChar": 50,
+        "endLine": 29,
+        "endChar": 55
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07bdaca5_3c5d6a4f",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d14fd1d0_649d6c12",
       "range": {
         "startLine": 29,
         "startChar": 50,
@@ -83,6 +125,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "799b6267_760f549d",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "The reasoning was that if I use the same value in all tests then complex tests can skip the assertions that simpler tests are already making since they are running the same code. However, after taking a closer look at the tests those assertions were left (or variations of them) for readability, so there is no need to enforce them to use the same data rate.",
+      "parentUuid": "ec8bb7f8_641fc4f4",
+      "range": {
+        "startLine": 30,
+        "startChar": 19,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dcb93818_68cf0888",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
         "patchSetId": 4
@@ -106,6 +172,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a5861681_60604d9d",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcb93818_68cf0888",
+      "range": {
+        "startLine": 31,
+        "startChar": 10,
+        "endLine": 31,
+        "endChar": 13
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a0860610_0dc32f49",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
         "patchSetId": 4
@@ -117,6 +207,30 @@
       "writtenOn": "2021-07-26T11:57:49Z",
       "side": 1,
       "message": "personally I prefer to avoid extra word \u0027Create\u0027 or \u0027Make\u0027 when feasible.\nif function return something by value, it does create it.\nwould you find `ConfigString` as readable?  (or just Config, or may be something like BweFieldTrial)",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 33,
+        "endChar": 18
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fb811e5_b527bfb6",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0860610_0dc32f49",
       "range": {
         "startLine": 33,
         "startChar": 12,
@@ -152,6 +266,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "269c8bc1_b7202223",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Done. I must have only read \"Use assignment-like syntax with \u003d\" at https://abseil.io/tips/88 and not the whole paragraph.",
+      "parentUuid": "96b0c62d_fe060623",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "39e10acf_3b7346d9",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
         "patchSetId": 4
@@ -163,6 +301,30 @@
       "writtenOn": "2021-07-26T11:57:49Z",
       "side": 1,
       "message": "feel free to put everything (including TESTs) into unnamed namespace.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 15
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6a12e1_41eb202f",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39e10acf_3b7346d9",
       "range": {
         "startLine": 84,
         "startChar": 0,
@@ -196,6 +358,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52e5a642_6c9b3168",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22dcba9c_988e3862",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 90,
+        "endChar": 63
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd5d6f25_fe97aa57",
@@ -209,6 +395,30 @@
       "writtenOn": "2021-07-26T11:57:49Z",
       "side": 1,
       "message": "This test, or even this test file validates only v2, likely no need to repeat that in the variable name every time. \n(having it in variable name would be helpful if there would be v1 in the same scope)",
+      "range": {
+        "startLine": 97,
+        "startChar": 47,
+        "endLine": 97,
+        "endChar": 51
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51e49061_eedfa037",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd5d6f25_fe97aa57",
       "range": {
         "startLine": 97,
         "startChar": 47,
@@ -244,6 +454,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "dd4109eb_a35fa6fa",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Exactly what I was looking for. Fixed.",
+      "parentUuid": "0530bf21_12e2c365",
+      "range": {
+        "startLine": 98,
+        "startChar": 46,
+        "endLine": 98,
+        "endChar": 60
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e6214b72_8f36c225",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
         "patchSetId": 4
@@ -255,6 +489,30 @@
       "writtenOn": "2021-07-26T11:57:49Z",
       "side": 1,
       "message": "this helper imho makes it harder to understand the test: what do parameters mean?\nthough removing it will make code 1-line longer, it would address the question:\nPacketResult packet_result_1;\npacket_result_1.send_time \u003d Timestamp::Zero();\npacket_result_1.receive_time \u003d kObservationDurationLowerBound;\npacket_result_1.packet_size \u003d DataSize::Bytes(15\u0027000);",
+      "range": {
+        "startLine": 111,
+        "startChar": 33,
+        "endLine": 111,
+        "endChar": 51
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe34140_091e3cd0",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "I agree. I think I added the function to ensure that all relevant fields were set, but it certainly decreased the readability.",
+      "parentUuid": "e6214b72_8f36c225",
       "range": {
         "startLine": 111,
         "startChar": 33,
@@ -290,6 +548,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f4e207b5_35c196ca",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72e0aad1_9c2b04fa",
+      "range": {
+        "startLine": 127,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 38
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "25953e9f_0f82bc0d",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
         "patchSetId": 4
@@ -301,6 +583,30 @@
       "writtenOn": "2021-07-26T11:57:49Z",
       "side": 1,
       "message": "why std::vector? plane c-vector would work too:\neither\n  PacketResult enough_feedback_1[] \u003d {packet_result_1, packet_result2_}\nor\n  PacketResult enough_feedback_1[] \u003d {CreatePacketResult(...), \n                                      CreatePacketResult(...)};\nor (using another comment)\n  PacketResult feedback1[2];\n  feedback1[0].receive_time \u003d ...;\n  ...\n  feedback1[1].packet_size \u003d ...;\n  ...\n  loss_based_bandwidth_estimator_v2_1.UpdateBandwidthEstimate(feedback1);",
+      "range": {
+        "startLine": 227,
+        "startChar": 2,
+        "endLine": 227,
+        "endChar": 27
+      },
+      "revId": "f05ee39c01c0aa2cde865242945aa5a90e4c2ece",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a8ece71_fe3f2687",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-28T12:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25953e9f_0f82bc0d",
       "range": {
         "startLine": 227,
         "startChar": 2,
