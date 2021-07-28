@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7930b3f_f7b3c05b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-07-28T09:04:43Z",
+      "side": 1,
+      "message": "You should probably update SimulcastEncoderAdapter as well, even if qp scaling is currently not used with simulcast.\nother than that lgtm",
+      "revId": "d26c38e9056ee84db7fbaf5b40f5b8142ae994c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a419b4a_907c6860",
