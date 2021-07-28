@@ -18,6 +18,10 @@
 #include <spa/utils/result.h>
 #endif
 
+#include <epoxy/egl.h>
+#include <epoxy/gl.h>
+#include <gbm.h>
+
 #include "absl/types/optional.h"
 #include "modules/desktop_capture/desktop_capture_options.h"
 #include "modules/desktop_capture/desktop_capturer.h"
@@ -53,6 +57,12 @@ class BaseCapturerPipeWire : public DesktopCapturer {
     kMetadata = 0b100
   };
 
+  struct EGLStruct {
+    std::vector<std::string> extensions;
+    EGLDisplay display = EGL_NO_DISPLAY;
+    EGLContext context = EGL_NO_CONTEXT;
+  };
+
   explicit BaseCapturerPipeWire(CaptureSourceType source_type);
   ~BaseCapturerPipeWire() override;
 
@@ -81,6 +91,12 @@ class BaseCapturerPipeWire : public DesktopCapturer {
   pw_stream_events pw_stream_events_ = {};
 
   struct spa_video_info_raw spa_video_format_;
+
+  bool egl_initialized_ = false;
+  gint32 drm_fd_ = -1;                // for GBM buffer mmap
+  gbm_device* gbm_device_ = nullptr;  // for passed GBM buffer retrieval
+
+  EGLStruct egl_;
 #else
   pw_core* pw_core_ = nullptr;
   pw_type* pw_core_type_ = nullptr;
@@ -128,6 +144,7 @@ class BaseCapturerPipeWire : public DesktopCapturer {
 
   bool portal_init_failed_ = false;
 
+  void InitEGL();
   void InitPortal();
   void InitPipeWire();
   void InitPipeWireTypes();
