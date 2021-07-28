@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79c3dc7f_576daa06",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2021-07-28T15:30:15Z",
+      "side": 1,
+      "message": "nit: Convention seems to be to use a FieldTrialFlag for these.",
+      "range": {
+        "startLine": 103,
+        "startChar": 2,
+        "endLine": 103,
+        "endChar": 54
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70cfee83_b510d845",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2021-07-28T15:30:15Z",
+      "side": 1,
+      "message": "nit: double?",
+      "range": {
+        "startLine": 499,
+        "startChar": 2,
+        "endLine": 499,
+        "endChar": 6
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
