@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b50ad493_60259410",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-07-28T10:35:31Z",
+      "side": 1,
+      "message": "I don\u0027t see a change after patchset 1. Does this mean that the behavior of iceGatheringstate has not changed?",
+      "revId": "2adfd797aec8581a177942449afe9043899b58dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
