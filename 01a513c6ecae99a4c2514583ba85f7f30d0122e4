@@ -89,6 +89,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5e62f51_8cc8239c",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2021-07-29T12:43:23Z",
+      "side": 1,
+      "message": "You are right that this is not correct. For example, the probability can attain values above 1. But as you say the calculation is a good approximation for small values of \"inherent_loss\" and this approximation allows for simpler computation of the derivatives.\nI suggest adding comment:\n\"We approximate the loss model\n loss_probability \u003d inherent_loss + (1-inherent_loss) * max(0, sending_rate - bandwidth) / sending_rate\n by\nloss_probability \u003d inherent_loss + max(0, sending_rate - bandwidth) / sending_rate\nas it allows for simpler calculations and makes little difference in practice.\"",
+      "parentUuid": "499a7241_ce2206c9",
+      "range": {
+        "startLine": 94,
+        "startChar": 21,
+        "endLine": 94,
+        "endChar": 24
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79c3dc7f_576daa06",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
         "patchSetId": 6
