@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ad8c77c8_a6eb27c1",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1edbda45_adf60697",
+      "range": {
+        "startLine": 78,
+        "startChar": 22,
+        "endLine": 78,
+        "endChar": 23
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c5c1a6e7_62ddedc8",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
         "patchSetId": 6
@@ -54,6 +78,30 @@
       "writtenOn": "2021-07-28T15:41:43Z",
       "side": 1,
       "message": "may be clamp inherit_loss only inside the validation above\nif (inherit_loss \u003c 0.0 || inherit_loss \u003e 1.0) {\n  LOG(WARNING) \u003c\u003c ...;\n  inherit_loss \u003d std::min(std::max(inherent_loss, 0.0), 1.0);\n}",
+      "range": {
+        "startLine": 91,
+        "startChar": 28,
+        "endLine": 91,
+        "endChar": 72
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75a5e870_633dddd3",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5c1a6e7_62ddedc8",
       "range": {
         "startLine": 91,
         "startChar": 28,
@@ -111,6 +159,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "274b1925_4267db34",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Added Christoffer\u0027s comment as an algorithm comment.",
+      "parentUuid": "499a7241_ce2206c9",
+      "range": {
+        "startLine": 94,
+        "startChar": 21,
+        "endLine": 94,
+        "endChar": 24
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79c3dc7f_576daa06",
@@ -124,6 +196,30 @@
       "writtenOn": "2021-07-28T15:30:15Z",
       "side": 1,
       "message": "nit: Convention seems to be to use a FieldTrialFlag for these.",
+      "range": {
+        "startLine": 103,
+        "startChar": 2,
+        "endLine": 103,
+        "endChar": 54
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "264c386b_c4a9ceaa",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "I considered that, but then it is not possible to set the default behavior (i.e. when the \"Enabled\" key is missing) to true. For reference: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/rtc_base/experiments/field_trial_parser.h?q\u003dsymbol:webrtc::FieldTrialFlag",
+      "parentUuid": "79c3dc7f_576daa06",
       "range": {
         "startLine": 103,
         "startChar": 2,
@@ -157,6 +253,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f44b135_257654e5",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "086d45ad_9d0cf384",
+      "range": {
+        "startLine": 152,
+        "startChar": 1,
+        "endLine": 152,
+        "endChar": 32
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77236848_4f2c4d77",
@@ -170,6 +290,24 @@
       "writtenOn": "2021-07-28T15:41:43Z",
       "side": 1,
       "message": "remove this empty line",
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7acc8017_4f9c61de",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77236848_4f2c4d77",
       "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -222,6 +360,54 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "cf302ea3_691e3eab",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c7d7438_d875c42e",
+      "range": {
+        "startLine": 292,
+        "startChar": 22,
+        "endLine": 292,
+        "endChar": 37
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35cd419d_f0c97a38",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "add076ea_2a4ac8b7",
+      "range": {
+        "startLine": 292,
+        "startChar": 4,
+        "endLine": 292,
+        "endChar": 8
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8bff222d_b0a8d5d1",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
         "patchSetId": 6
@@ -233,6 +419,30 @@
       "writtenOn": "2021-07-28T15:41:43Z",
       "side": 1,
       "message": "may be 1.0",
+      "range": {
+        "startLine": 468,
+        "startChar": 46,
+        "endLine": 468,
+        "endChar": 48
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "763d4491_a561a69f",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bff222d_b0a8d5d1",
       "range": {
         "startLine": 468,
         "startChar": 46,
@@ -266,6 +476,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90543daa_3abe4cdd",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04c44241_2ab36ea8",
+      "range": {
+        "startLine": 473,
+        "startChar": 19,
+        "endLine": 473,
+        "endChar": 20
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70cfee83_b510d845",
@@ -279,6 +513,30 @@
       "writtenOn": "2021-07-28T15:30:15Z",
       "side": 1,
       "message": "nit: double?",
+      "range": {
+        "startLine": 499,
+        "startChar": 2,
+        "endLine": 499,
+        "endChar": 6
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0953d7a3_1d3c1e9a",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70cfee83_b510d845",
       "range": {
         "startLine": 499,
         "startChar": 2,
@@ -336,6 +594,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c10e7823_d73bd646",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4224d9cd_b9d0dd3a",
+      "range": {
+        "startLine": 30,
+        "startChar": 9,
+        "endLine": 30,
+        "endChar": 15
+      },
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "998cf446_9ccc6f0e",
@@ -353,6 +635,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "370446a1_4abe80e8",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "998cf446_9ccc6f0e",
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f8b7a3e_beaf011f",
@@ -366,6 +666,24 @@
       "writtenOn": "2021-07-28T15:41:43Z",
       "side": 1,
       "message": "can you please clarify what is the difference between IsEnabled and IsReady",
+      "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23071f9b_c7485b9c",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-07-29T15:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f8b7a3e_beaf011f",
       "revId": "01a513c6ecae99a4c2514583ba85f7f30d0122e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
