@@ -230,6 +230,18 @@ if (is_linux || is_chromeos) {
           ignore_libs = true
         }
       }
+      pkg_config("gbm") {
+        packages = [ "gbm" ]
+      }
+      pkg_config("egl") {
+        packages = [ "egl" ]
+      }
+      pkg_config("epoxy") {
+        packages = [ "epoxy" ]
+      }
+      pkg_config("libdrm") {
+        packages = [ "libdrm" ]
+      }
     } else {
       pkg_config("pipewire") {
         packages = [ "libpipewire-0.2" ]
@@ -562,10 +574,21 @@ rtc_library("desktop_capture_generic") {
       "linux/base_capturer_pipewire.h",
     ]
 
+    if (rtc_pipewire_version == "0.3") {
+      sources += [
+        "linux/egl_dmabuf.cc",
+        "linux/egl_dmabuf.h",
+      ]
+    }
+
     configs += [
       ":pipewire_config",
       ":gio",
       ":pipewire",
+      ":gbm",
+      ":egl",
+      ":epoxy",
+      ":libdrm",
     ]
 
     if (!rtc_link_pipewire) {
