@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8213e681_d54e3ad5",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-07-30T12:45:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e4e8dc0_5b56cc4f",
+      "range": {
+        "startLine": 606,
+        "startChar": 1,
+        "endLine": 612,
+        "endChar": 0
+      },
+      "revId": "2f940dfef3217cff5b0dee324dae24cc3b069ddd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9874d07b_fab33665",
@@ -37,6 +61,24 @@
       "writtenOn": "2021-07-27T12:52:14Z",
       "side": 1,
       "message": "Could src\u0027s address be saved into a separate unique_ptr? That would avoid the need for sprinkling in any manual cleanup() invocations.",
+      "revId": "2f940dfef3217cff5b0dee324dae24cc3b069ddd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63bb767b_a1c146bf",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-07-30T12:45:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9874d07b_fab33665",
       "revId": "2f940dfef3217cff5b0dee324dae24cc3b069ddd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
