@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 The WebRTC project authors. All Rights Reserved.
+ *  Copyright 2021 The WebRTC project authors. All Rights Reserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -21,6 +21,7 @@
 #include "absl/types/optional.h"
 #include "modules/desktop_capture/desktop_capture_options.h"
 #include "modules/desktop_capture/desktop_capturer.h"
+#include "modules/desktop_capture/linux/egl_dmabuf.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/synchronization/mutex.h"
 
@@ -118,6 +119,7 @@ class BaseCapturerPipeWire : public DesktopCapturer {
   guint sources_request_signal_id_ = 0;
   guint start_request_signal_id_ = 0;
 
+  int64_t modifier_;
   DesktopSize video_size_;
   DesktopSize desktop_size_ = {};
   DesktopCaptureOptions options_ = {};
@@ -127,6 +129,12 @@ class BaseCapturerPipeWire : public DesktopCapturer {
   Callback* callback_ = nullptr;
 
   bool portal_init_failed_ = false;
+
+#if PW_CHECK_VERSION(0, 3, 0)
+  std::unique_ptr<EglDmaBuf> egl_dmabuf_;
+
+  void InitEGL();
+#endif
 
   void InitPortal();
   void InitPipeWire();
