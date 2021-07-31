@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "165c67ae_66fee27f",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-07-31T08:57:55Z",
+      "side": 1,
+      "message": "can you update variable names to follow the style guide?",
+      "revId": "123141456eaa0997826d1c08b046a92ddae342f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ba244dd_8df3cca8",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-07-31T08:57:55Z",
+      "side": 1,
+      "message": "here too (and elsewhere I may have missed)",
+      "revId": "123141456eaa0997826d1c08b046a92ddae342f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f66ebdc9_aa5c026e",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-07-31T08:57:55Z",
+      "side": 1,
+      "message": "nit: instead of multiple call sites for std::find(), you could loop over an array\n\nstatic const char* supported[] \u003d {\"...\", \"...\", ...};\nfor (const auto* entry : supported) {\n  // one call to std::find() here\n}",
+      "revId": "123141456eaa0997826d1c08b046a92ddae342f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf8d0ef1_eff108f5",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-07-31T08:57:55Z",
+      "side": 1,
+      "message": "ImageFromDmaBuf() etc",
+      "revId": "123141456eaa0997826d1c08b046a92ddae342f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
