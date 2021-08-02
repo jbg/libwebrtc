@@ -22,8 +22,10 @@
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/syscall.h>
+#include <unistd.h>
 
 #include <memory>
+#include <string>
 #include <utility>
 
 #include "absl/memory/memory.h"
@@ -93,6 +95,65 @@ static void SyncDmaBuf(int fd, uint64_t start_or_end) {
     }
   }
 }
+
+#if !PW_CHECK_VERSION(0, 3, 29)
+#define SPA_POD_PROP_FLAG_MANDATORY (1u << 3)
+#endif
+
+struct pw_version {
+  int major;
+  int minor;
+  int micro;
+};
+
+static pw_version ParsePipeWireVersion(const char* version) {
+  pw_version pw_version;
+  sscanf(version, "%d.%d.%d", &pw_version.major, &pw_version.minor,
+         &pw_version.micro);
+  return pw_version;
+}
+
+#if PW_CHECK_VERSION(0, 3, 0)
+static spa_pod* BuildFormat(
+    spa_pod_builder* builder,
+    uint32_t format,
+    const std::vector<uint64_t>& modifiers = std::vector<uint64_t>()) {
+  int c = 0;
+  spa_pod_frame f[2];
+  spa_rectangle pw_min_screen_bounds = spa_rectangle{1, 1};
+  spa_rectangle pw_max_screen_bounds = spa_rectangle{UINT32_MAX, UINT32_MAX};
+
+  spa_pod_builder_push_object(builder, &f[0], SPA_TYPE_OBJECT_Format,
+                              SPA_PARAM_EnumFormat);
+  spa_pod_builder_add(builder, SPA_FORMAT_mediaType,
+                      SPA_POD_Id(SPA_MEDIA_TYPE_video), 0);
+  spa_pod_builder_add(builder, SPA_FORMAT_mediaSubtype,
+                      SPA_POD_Id(SPA_MEDIA_SUBTYPE_raw), 0);
+  spa_pod_builder_add(builder, SPA_FORMAT_VIDEO_format, SPA_POD_Id(format), 0);
+
+  if (modifiers.size()) {
+    spa_pod_builder_prop(builder, SPA_FORMAT_VIDEO_modifier,
+                         SPA_POD_PROP_FLAG_MANDATORY);
+    spa_pod_builder_push_choice(builder, &f[1], SPA_CHOICE_Enum, 0);
+    // mofifiers from the array
+    for (auto it = modifiers.begin(); it != modifiers.end(); it++) {
+      spa_pod_builder_long(builder, *it);
+      if (c++ == 0) {
+        spa_pod_builder_long(builder, *it);
+      }
+    }
+    spa_pod_builder_pop(builder, &f[1]);
+  }
+
+  spa_pod_builder_add(
+      builder, SPA_FORMAT_VIDEO_size,
+      SPA_POD_CHOICE_RANGE_Rectangle(
+          &pw_min_screen_bounds, &pw_min_screen_bounds, &pw_max_screen_bounds),
+      0);
+
+  return static_cast<spa_pod*>(spa_pod_builder_pop(builder, &f[0]));
+}
+#endif
 
 class ScopedBuf {
  public:
@@ -313,6 +374,9 @@ void BaseCapturerPipeWire::OnStreamFormatChanged(void* data,
   auto size = height * stride;
 
   that->desktop_size_ = DesktopSize(width, height);
+#if PW_CHECK_VERSION(0, 3, 0)
+  that->modifier_ = that->spa_video_format_.modifier;
+#endif
 
   uint8_t buffer[1024] = {};
   auto builder = spa_pod_builder{buffer, sizeof(buffer)};
@@ -320,11 +384,18 @@ void BaseCapturerPipeWire::OnStreamFormatChanged(void* data,
   // Setup buffers and meta header for new format.
   const struct spa_pod* params[3];
 #if PW_CHECK_VERSION(0, 3, 0)
+  const auto bufferTypes =
+      spa_pod_find_prop(format, nullptr, SPA_FORMAT_VIDEO_modifier)
+          ? (1 << SPA_DATA_DmaBuf) | (1 << SPA_DATA_MemFd) |
+                (1 << SPA_DATA_MemPtr)
+          : (1 << SPA_DATA_MemFd) | (1 << SPA_DATA_MemPtr);
+
   params[0] = reinterpret_cast<spa_pod*>(spa_pod_builder_add_object(
       &builder, SPA_TYPE_OBJECT_ParamBuffers, SPA_PARAM_Buffers,
       SPA_PARAM_BUFFERS_size, SPA_POD_Int(size), SPA_PARAM_BUFFERS_stride,
       SPA_POD_Int(stride), SPA_PARAM_BUFFERS_buffers,
-      SPA_POD_CHOICE_RANGE_Int(8, 1, 32)));
+      SPA_POD_CHOICE_RANGE_Int(8, 1, 32), SPA_PARAM_BUFFERS_dataType,
+      SPA_POD_CHOICE_FLAGS_Int(bufferTypes)));
   params[1] = reinterpret_cast<spa_pod*>(spa_pod_builder_add_object(
       &builder, SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta, SPA_PARAM_META_type,
       SPA_POD_Id(SPA_META_Header), SPA_PARAM_META_size,
@@ -499,6 +570,12 @@ BaseCapturerPipeWire::~BaseCapturerPipeWire() {
   }
 }
 
+#if PW_CHECK_VERSION(0, 3, 0)
+void BaseCapturerPipeWire::InitEGL() {
+  egl_dmabuf_ = std::make_unique<EglDmaBuf>();
+}
+#endif
+
 void BaseCapturerPipeWire::InitPortal() {
   cancellable_ = g_cancellable_new();
   g_dbus_proxy_new_for_bus(
@@ -619,8 +696,6 @@ pw_stream* BaseCapturerPipeWire::CreateReceivingStream() {
     return nullptr;
   }
 #endif
-  spa_rectangle pwMinScreenBounds = spa_rectangle{1, 1};
-  spa_rectangle pwMaxScreenBounds = spa_rectangle{UINT32_MAX, UINT32_MAX};
 
   pw_properties* reuseProps =
       pw_properties_new_string("pipewire.client.reuse=1");
@@ -630,24 +705,45 @@ pw_stream* BaseCapturerPipeWire::CreateReceivingStream() {
   auto stream = pw_stream_new(pw_remote_, "webrtc-consume-stream", reuseProps);
 #endif
 
+#if PW_CHECK_VERSION(0, 3, 0)
+  const spa_pod** params;
+  spa_pod_builder builder;
+  uint32_t n_formats, n_params = 0;
+  uint8_t buffer[2048] = {};
+  std::vector<uint64_t> modifiers;
+
+  builder = spa_pod_builder{buffer, sizeof(buffer)};
+  uint32_t formats[] = {
+      SPA_VIDEO_FORMAT_BGRA,
+      SPA_VIDEO_FORMAT_RGBA,
+      SPA_VIDEO_FORMAT_BGRx,
+      SPA_VIDEO_FORMAT_RGBx,
+  };
+
+  n_formats = sizeof(formats) / sizeof(formats[0]);
+  params = static_cast<const spa_pod**>(
+      calloc(2 * n_formats, sizeof(struct spa_param*)));
+
+  for (uint32_t i = 0; i < n_formats; i++) {
+    pw_version pw_version = ParsePipeWireVersion(pw_get_library_version());
+
+    // Modifiers can be used with PipeWire >= 0.3.29
+    if (pw_version.major >= 0 && pw_version.minor >= 3 &&
+        pw_version.micro >= 29) {
+      modifiers = egl_dmabuf_->QueryDmaBufModifiers(formats[i]);
+
+      if (modifiers.size()) {
+        params[n_params++] = BuildFormat(&builder, formats[i], modifiers);
+      }
+    }
+
+    params[n_params++] = BuildFormat(&builder, formats[i]);
+  }
+#else
   uint8_t buffer[1024] = {};
   const spa_pod* params[1];
   spa_pod_builder builder = spa_pod_builder{buffer, sizeof(buffer)};
 
-#if PW_CHECK_VERSION(0, 3, 0)
-  params[0] = reinterpret_cast<spa_pod*>(spa_pod_builder_add_object(
-      &builder, SPA_TYPE_OBJECT_Format, SPA_PARAM_EnumFormat,
-      SPA_FORMAT_mediaType, SPA_POD_Id(SPA_MEDIA_TYPE_video),
-      SPA_FORMAT_mediaSubtype, SPA_POD_Id(SPA_MEDIA_SUBTYPE_raw),
-      SPA_FORMAT_VIDEO_format,
-      SPA_POD_CHOICE_ENUM_Id(5, SPA_VIDEO_FORMAT_BGRx, SPA_VIDEO_FORMAT_RGBx,
-                             SPA_VIDEO_FORMAT_RGBA, SPA_VIDEO_FORMAT_BGRx,
-                             SPA_VIDEO_FORMAT_BGRA),
-      SPA_FORMAT_VIDEO_size,
-      SPA_POD_CHOICE_RANGE_Rectangle(&pwMinScreenBounds, &pwMinScreenBounds,
-                                     &pwMaxScreenBounds),
-      0));
-#else
   params[0] = reinterpret_cast<spa_pod*>(spa_pod_builder_object(
       &builder,
       // id to enumerate formats
@@ -671,7 +767,7 @@ pw_stream* BaseCapturerPipeWire::CreateReceivingStream() {
                          this);
 #if PW_CHECK_VERSION(0, 3, 0)
   if (pw_stream_connect(stream, PW_DIRECTION_INPUT, pw_stream_node_id_,
-                        PW_STREAM_FLAG_AUTOCONNECT, params, 1) != 0) {
+                        PW_STREAM_FLAG_AUTOCONNECT, params, n_params) != 0) {
 #else
   pw_stream_flags flags = static_cast<pw_stream_flags>(
       PW_STREAM_FLAG_AUTOCONNECT | PW_STREAM_FLAG_INACTIVE);
@@ -690,6 +786,7 @@ pw_stream* BaseCapturerPipeWire::CreateReceivingStream() {
 void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
   spa_buffer* spaBuffer = buffer->buffer;
   ScopedBuf map;
+  std::unique_ptr<uint8_t[]> src_unique_ptr;
   uint8_t* src = nullptr;
 
   if (spaBuffer->datas[0].chunk->size == 0) {
@@ -697,9 +794,10 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
     return;
   }
 
+  std::function<void()> cleanup;
+  const int32_t src_stride = spaBuffer->datas[0].chunk->stride;
 #if PW_CHECK_VERSION(0, 3, 0)
-  if (spaBuffer->datas[0].type == SPA_DATA_MemFd ||
-      spaBuffer->datas[0].type == SPA_DATA_DmaBuf) {
+  if (spaBuffer->datas[0].type == SPA_DATA_MemFd) {
 #else
   if (spaBuffer->datas[0].type == pw_core_type_->data.MemFd ||
       spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf) {
@@ -711,7 +809,7 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
                  PROT_READ, MAP_PRIVATE, spaBuffer->datas[0].fd, 0)),
         spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset,
 #if PW_CHECK_VERSION(0, 3, 0)
-        spaBuffer->datas[0].type == SPA_DATA_DmaBuf,
+        false,
 #else
         spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf,
 #endif
@@ -723,16 +821,19 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
       return;
     }
 
-#if PW_CHECK_VERSION(0, 3, 0)
-    if (spaBuffer->datas[0].type == SPA_DATA_DmaBuf) {
-#else
+#if !PW_CHECK_VERSION(0, 3, 0)
     if (spaBuffer->datas[0].type == pw_core_type_->data.DmaBuf) {
-#endif
       SyncDmaBuf(spaBuffer->datas[0].fd, DMA_BUF_SYNC_START);
     }
+#endif
 
     src = SPA_MEMBER(map.get(), spaBuffer->datas[0].mapoffset, uint8_t);
 #if PW_CHECK_VERSION(0, 3, 0)
+  } else if (spaBuffer->datas[0].type == SPA_DATA_DmaBuf) {
+    src_unique_ptr = egl_dmabuf_->ImageFromDmaBuf(
+        spaBuffer->datas->fd, desktop_size_, src_stride,
+        spa_video_format_.format, spaBuffer->datas[0].chunk->offset, modifier_);
+    src = src_unique_ptr.get();
   } else if (spaBuffer->datas[0].type == SPA_DATA_MemPtr) {
 #else
   } else if (spaBuffer->datas[0].type == pw_core_type_->data.MemPtr) {
@@ -804,7 +905,6 @@ void BaseCapturerPipeWire::HandleBuffer(pw_buffer* buffer) {
   }
 
   const int32_t dst_stride = video_size_.width() * kBytesPerPixel;
-  const int32_t src_stride = spaBuffer->datas[0].chunk->stride;
 
   if (src_stride != (desktop_size_.width() * kBytesPerPixel)) {
     RTC_LOG(LS_ERROR) << "Got buffer with stride different from screen stride: "
@@ -1283,6 +1383,9 @@ void BaseCapturerPipeWire::OnOpenPipeWireRemoteRequested(
     return;
   }
 
+#if PW_CHECK_VERSION(0, 3, 0)
+  that->InitEGL();
+#endif
   that->InitPipeWire();
 }
 
