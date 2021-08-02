@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc95a523_fbaf6c20",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-02T07:17:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "165c67ae_66fee27f",
+      "revId": "123141456eaa0997826d1c08b046a92ddae342f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ba244dd_8df3cca8",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-07-31T08:57:55Z",
       "side": 1,
       "message": "here too (and elsewhere I may have missed)",
+      "revId": "123141456eaa0997826d1c08b046a92ddae342f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f14add2b_14d6bc91",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-02T07:17:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ba244dd_8df3cca8",
       "revId": "123141456eaa0997826d1c08b046a92ddae342f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f01849f_2fae115c",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-02T07:17:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f66ebdc9_aa5c026e",
+      "revId": "123141456eaa0997826d1c08b046a92ddae342f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf8d0ef1_eff108f5",
@@ -65,6 +119,24 @@
       "writtenOn": "2021-07-31T08:57:55Z",
       "side": 1,
       "message": "ImageFromDmaBuf() etc",
+      "revId": "123141456eaa0997826d1c08b046a92ddae342f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "804d8a21_358172cc",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-02T07:17:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf8d0ef1_eff108f5",
       "revId": "123141456eaa0997826d1c08b046a92ddae342f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
