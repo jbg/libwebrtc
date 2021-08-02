@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a42a533_3b17612f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-08-02T11:32:47Z",
+      "side": 1,
+      "message": "thanks!",
+      "revId": "f749f8c5bc106d760d30b277aa0a3b3dbe727cea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a45e06_958ec373",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-08-02T11:32:47Z",
+      "side": 1,
+      "message": "remove (both unreachable and incorrect type)",
+      "revId": "f749f8c5bc106d760d30b277aa0a3b3dbe727cea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
