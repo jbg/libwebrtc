@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b613e409_e4247a32",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-02T11:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baa0fe0b_160bdebd",
+      "revId": "6eb078224cbbbea6ec85d75ae085e5c1f31993f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdf93549_3312bd62",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-08-02T08:59:46Z",
       "side": 1,
       "message": "nit - could this be:\n\n  for (int i \u003d 0; i \u003c ret; ++i) {\n    device \u003d devices[i];\n    if (device-\u003eavailable_nodes \u0026 (1 \u003c\u003c DRM_NODE_RENDER)) {\n      render_node \u003d device-\u003enodes[DRM_NODE_RENDER];\n      break;\n    }\n  }",
+      "revId": "6eb078224cbbbea6ec85d75ae085e5c1f31993f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5892996_dc1a56cb",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-02T11:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdf93549_3312bd62",
       "revId": "6eb078224cbbbea6ec85d75ae085e5c1f31993f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc22dc2b_efdd5189",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-02T11:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff0ab23b_b671b70d",
+      "revId": "6eb078224cbbbea6ec85d75ae085e5c1f31993f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b7039a2_dd233122",
@@ -86,6 +140,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e6cb3ba_0fc6c595",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-02T11:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b7039a2_dd233122",
+      "revId": "6eb078224cbbbea6ec85d75ae085e5c1f31993f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ea5bd61_142f1c21",
@@ -99,6 +171,24 @@
       "writtenOn": "2021-08-02T08:59:46Z",
       "side": 1,
       "message": "style guide",
+      "revId": "6eb078224cbbbea6ec85d75ae085e5c1f31993f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b73bdbe_5f64bfdf",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-02T11:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ea5bd61_142f1c21",
       "revId": "6eb078224cbbbea6ec85d75ae085e5c1f31993f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
