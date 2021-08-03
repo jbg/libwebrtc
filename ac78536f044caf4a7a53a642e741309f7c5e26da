@@ -16,6 +16,23 @@
       "message": "It should be now feature complete and work (as I tested it myself), but I\u0027m still waiting for some other confirmations. I\u0027ll leave it as WIP until then so it doesn\u0027t get accidentally merged.\n\n",
       "revId": "ac78536f044caf4a7a53a642e741309f7c5e26da",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0f69ee6_18100837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2021-08-03T17:46:21Z",
+      "side": 1,
+      "message": "I\u0027m happy to review for style, but not deeply familiar with implementation details here.   I asked around on my team to see if there is someone who knows this area better.\n\nI did notice that this patch is using the rtc_pipewire_version buildflag you\u0027re removing in your other patch, so you might want to land that one first and rebase.",
+      "revId": "ac78536f044caf4a7a53a642e741309f7c5e26da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
