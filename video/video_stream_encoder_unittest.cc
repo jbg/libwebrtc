@@ -514,7 +514,7 @@ class AdaptingFrameForwarder : public test::FrameForwarder {
                      << "h=" << video_frame.height();
       if (adapter_.AdaptFrameResolution(
               video_frame.width(), video_frame.height(),
-              video_frame.timestamp_us() * 1000, &cropped_width,
+              video_frame.timestamp_us().value_or(0) * 1000, &cropped_width,
               &cropped_height, &out_width, &out_height)) {
         VideoFrame adapted_frame =
             VideoFrame::Builder()

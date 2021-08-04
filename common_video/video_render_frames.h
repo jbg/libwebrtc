@@ -46,7 +46,7 @@ class VideoRenderFrames {
   // Estimated delay from a frame is released until it's rendered.
   const uint32_t render_delay_ms_;
 
-  int64_t last_render_time_ms_ = 0;
+  absl::optional<int64_t> last_render_time_ms_ = 0;
   size_t frames_dropped_ = 0;
 };
 

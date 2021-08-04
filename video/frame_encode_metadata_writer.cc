@@ -91,14 +91,14 @@ void FrameEncodeMetadataWriter::OnEncodeStarted(const VideoFrame& frame) {
   metadata.rtp_timestamp = frame.timestamp();
   metadata.encode_start_time_ms = rtc::TimeMillis();
   metadata.ntp_time_ms = frame.ntp_time_ms();
-  metadata.timestamp_us = frame.timestamp_us();
+  metadata.timestamp_us = frame.timestamp_us().value_or(0);
   metadata.rotation = frame.rotation();
   metadata.color_space = frame.color_space();
   metadata.packet_infos = frame.packet_infos();
   for (size_t si = 0; si < num_spatial_layers; ++si) {
     RTC_DCHECK(timing_frames_info_[si].frames.empty() ||
                rtc::TimeDiff(
-                   frame.render_time_ms(),
+                   frame.render_time_ms().value_or(0),
                    timing_frames_info_[si].frames.back().timestamp_us / 1000) >=
                    0);
     // If stream is disabled due to low bandwidth OnEncodeStarted still will be

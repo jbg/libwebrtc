@@ -2986,7 +2986,7 @@ TEST_F(VideoSendStreamTest, ReportsSentResolution) {
       memset(buffer->data(), 0, 16);
       encoded.SetEncodedData(buffer);
       encoded.SetTimestamp(input_image.timestamp());
-      encoded.capture_time_ms_ = input_image.render_time_ms();
+      encoded.capture_time_ms_ = input_image.render_time_ms().value_or(0);
 
       for (size_t i = 0; i < kNumStreams; ++i) {
         encoded._frameType = (*frame_types)[i];

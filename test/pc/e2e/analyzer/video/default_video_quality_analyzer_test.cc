@@ -69,7 +69,8 @@ EncodedImage FakeEncode(const VideoFrame& frame) {
       /*rtp_timestamp=*/frame.timestamp(),
       /*audio_level=*/absl::nullopt,
       /*absolute_capture_time=*/absl::nullopt,
-      /*receive_time=*/Timestamp::Micros(frame.timestamp_us() + 10000)));
+      /*receive_time=*/
+      Timestamp::Micros(frame.timestamp_us().value_or(0) + 10000)));
   image.SetPacketInfos(RtpPacketInfos(packet_infos));
   return image;
 }

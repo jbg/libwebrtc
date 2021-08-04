@@ -54,7 +54,7 @@ int32_t ConfigurableFrameSizeEncoder::Encode(
   encodedImage._encodedWidth = inputImage.width();
   encodedImage._frameType = VideoFrameType::kVideoFrameKey;
   encodedImage.SetTimestamp(inputImage.timestamp());
-  encodedImage.capture_time_ms_ = inputImage.render_time_ms();
+  encodedImage.capture_time_ms_ = inputImage.render_time_ms().value_or(0);
   CodecSpecificInfo specific{};
   specific.codecType = codec_type_;
   callback_->OnEncodedImage(encodedImage, &specific);

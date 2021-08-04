@@ -86,7 +86,7 @@ class VideoAdapterTest : public ::testing::Test,
       int out_height;
       if (video_adapter_->AdaptFrameResolution(
               in_width, in_height,
-              frame.timestamp_us() * rtc::kNumNanosecsPerMicrosec,
+              frame.timestamp_us().value_or(0) * rtc::kNumNanosecsPerMicrosec,
               &cropped_width, &cropped_height, &out_width, &out_height)) {
         stats_.cropped_width = cropped_width;
         stats_.cropped_height = cropped_height;

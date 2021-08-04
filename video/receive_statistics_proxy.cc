@@ -815,7 +815,8 @@ void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrame& frame) {
   content_specific_stats->received_height.Add(height);
 
   // Consider taking stats_.render_delay_ms into account.
-  const int64_t time_until_rendering_ms = frame.render_time_ms() - now_ms;
+  const int64_t time_until_rendering_ms =
+      frame.render_time_ms().value_or(0) - now_ms;
   if (time_until_rendering_ms < 0) {
     sum_missed_render_deadline_ms_ += -time_until_rendering_ms;
     ++num_delayed_frames_rendered_;

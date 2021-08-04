@@ -530,6 +530,16 @@ void Log(const LogArgType* fmt, ...) {
       case LogArgType::kStringView:
         log_message.stream() << *va_arg(args, const absl::string_view*);
         break;
+      case LogArgType::kOptionalLongLong: {
+        const absl::optional<long long>* val =
+            va_arg(args, const absl::optional<long long>*);
+        if (val->has_value()) {
+          log_message.stream() << val->value();
+        } else {
+          log_message.stream() << "(null)";
+        }
+        break;
+      }
       case LogArgType::kVoidP:
         log_message.stream() << rtc::ToHex(
             reinterpret_cast<uintptr_t>(va_arg(args, const void*)));

@@ -1249,8 +1249,9 @@ void VideoStreamEncoder::OnFrame(const VideoFrame& video_frame) {
   int64_t capture_ntp_time_ms;
   if (video_frame.ntp_time_ms() > 0) {
     capture_ntp_time_ms = video_frame.ntp_time_ms();
-  } else if (video_frame.render_time_ms() != 0) {
-    capture_ntp_time_ms = video_frame.render_time_ms() + delta_ntp_internal_ms_;
+  } else if (video_frame.render_time_ms().has_value()) {
+    capture_ntp_time_ms =
+        video_frame.render_time_ms().value() + delta_ntp_internal_ms_;
   } else {
     capture_ntp_time_ms = now.ms() + delta_ntp_internal_ms_;
   }
@@ -1717,8 +1718,8 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
   }
   accumulated_update_rect_is_valid_ = true;
 
-  TRACE_EVENT_ASYNC_STEP0("webrtc", "Video", video_frame.render_time_ms(),
-                          "Encode");
+  TRACE_EVENT_ASYNC_STEP0("webrtc", "Video",
+                          video_frame.render_time_ms().value_or(0), "Encode");
 
   stream_resource_manager_.OnEncodeStarted(out_frame, time_when_posted_us);
 

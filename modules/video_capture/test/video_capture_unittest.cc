@@ -101,7 +101,7 @@ class TestVideoCaptureCallback
     }
 
     incoming_frames_++;
-    last_render_time_ms_ = videoFrame.render_time_ms();
+    last_render_time_ms_ = videoFrame.render_time_ms().value_or(0);
     last_frame_ = videoFrame.video_frame_buffer();
   }
 

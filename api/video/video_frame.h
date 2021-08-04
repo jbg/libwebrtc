@@ -87,7 +87,9 @@ class RTC_EXPORT VideoFrame {
     VideoFrame build();
     Builder& set_video_frame_buffer(
         const rtc::scoped_refptr<VideoFrameBuffer>& buffer);
+    Builder& set_timestamp_ms(absl::optional<int64_t> timestamp_ms);
     Builder& set_timestamp_ms(int64_t timestamp_ms);
+    Builder& set_timestamp_us(absl::optional<int64_t> timestamp_us);
     Builder& set_timestamp_us(int64_t timestamp_us);
     Builder& set_timestamp_rtp(uint32_t timestamp_rtp);
     Builder& set_ntp_time_ms(int64_t ntp_time_ms);
@@ -101,7 +103,7 @@ class RTC_EXPORT VideoFrame {
    private:
     uint16_t id_ = 0;
     rtc::scoped_refptr<webrtc::VideoFrameBuffer> video_frame_buffer_;
-    int64_t timestamp_us_ = 0;
+    absl::optional<int64_t> timestamp_us_ = 0;
     uint32_t timestamp_rtp_ = 0;
     int64_t ntp_time_ms_ = 0;
     VideoRotation rotation_ = kVideoRotation_0;
@@ -109,16 +111,6 @@ class RTC_EXPORT VideoFrame {
     absl::optional<UpdateRect> update_rect_;
     RtpPacketInfos packet_infos_;
   };
-
-  // To be deprecated. Migrate all use to Builder.
-  VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-             webrtc::VideoRotation rotation,
-             int64_t timestamp_us);
-  VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-             uint32_t timestamp_rtp,
-             int64_t render_time_ms,
-             VideoRotation rotation);
-
   ~VideoFrame();
 
   // Support move and copy.
@@ -144,8 +136,9 @@ class RTC_EXPORT VideoFrame {
   void set_id(uint16_t id) { id_ = id; }
 
   // System monotonic clock, same timebase as rtc::TimeMicros().
-  int64_t timestamp_us() const { return timestamp_us_; }
-  void set_timestamp_us(int64_t timestamp_us) { timestamp_us_ = timestamp_us; }
+  absl::optional<int64_t> timestamp_us() const { return timestamp_us_; }
+  void set_timestamp_us(absl::optional<int64_t> timestamp_us);
+  void set_timestamp_us(int64_t timestamp_us);
 
   // TODO(nisse): After the cricket::VideoFrame and webrtc::VideoFrame
   // merge, timestamps other than timestamp_us will likely be
@@ -198,7 +191,7 @@ class RTC_EXPORT VideoFrame {
 
   // Get render time in milliseconds.
   // TODO(nisse): Deprecated. Migrate all users to timestamp_us().
-  int64_t render_time_ms() const;
+  absl::optional<int64_t> render_time_ms() const;
 
   // Return the underlying buffer. Never nullptr for a properly
   // initialized VideoFrame.
@@ -249,7 +242,7 @@ class RTC_EXPORT VideoFrame {
  private:
   VideoFrame(uint16_t id,
              const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-             int64_t timestamp_us,
+             absl::optional<int64_t> timestamp_us,
              uint32_t timestamp_rtp,
              int64_t ntp_time_ms,
              VideoRotation rotation,
@@ -262,7 +255,7 @@ class RTC_EXPORT VideoFrame {
   rtc::scoped_refptr<webrtc::VideoFrameBuffer> video_frame_buffer_;
   uint32_t timestamp_rtp_;
   int64_t ntp_time_ms_;
-  int64_t timestamp_us_;
+  absl::optional<int64_t> timestamp_us_;
   VideoRotation rotation_;
   absl::optional<ColorSpace> color_space_;
   absl::optional<int32_t> max_composition_delay_in_frames_;

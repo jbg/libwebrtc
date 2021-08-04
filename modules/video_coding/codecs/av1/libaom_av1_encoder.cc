@@ -597,8 +597,12 @@ int32_t LibaomAv1Encoder::Encode(
     }
     RTC_CHECK(converted_buffer->type() == VideoFrameBuffer::Type::kI420 ||
               converted_buffer->type() == VideoFrameBuffer::Type::kI420A);
-    prepped_input_frame = VideoFrame(converted_buffer, frame.timestamp(),
-                                     frame.render_time_ms(), frame.rotation());
+    prepped_input_frame = VideoFrame::Builder()
+                              .set_video_frame_buffer(converted_buffer)
+                              .set_timestamp_rtp(frame.timestamp())
+                              .set_timestamp_ms(frame.render_time_ms())
+                              .set_rotation(frame.rotation())
+                              .build();
   }
 
   // Set frame_for_encode_ data pointers and strides.
@@ -669,7 +673,7 @@ int32_t LibaomAv1Encoder::Encode(
                                        ? VideoFrameType::kVideoFrameKey
                                        : VideoFrameType::kVideoFrameDelta;
         encoded_image.SetTimestamp(frame.timestamp());
-        encoded_image.capture_time_ms_ = frame.render_time_ms();
+        encoded_image.capture_time_ms_ = frame.render_time_ms().value_or(0);
         encoded_image.rotation_ = frame.rotation();
         encoded_image.content_type_ = VideoContentType::UNSPECIFIED;
         // If encoded image width/height info are added to aom_codec_cx_pkt_t,

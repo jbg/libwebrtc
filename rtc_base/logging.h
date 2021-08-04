@@ -180,6 +180,7 @@ enum class LogArgType : int8_t {
   kStdString,
   kStringView,
   kVoidP,
+  kOptionalLongLong,
   kLogMetadata,
   kLogMetadataErr,
 #ifdef WEBRTC_ANDROID
@@ -241,6 +242,11 @@ inline Val<LogArgType::kStdString, const std::string*> MakeVal(
 }
 inline Val<LogArgType::kStringView, const absl::string_view*> MakeVal(
     const absl::string_view& x) {
+  return {&x};
+}
+
+inline Val<LogArgType::kOptionalLongLong, const absl::optional<int64_t>*>
+MakeVal(const absl::optional<int64_t>& x) {
   return {&x};
 }
 

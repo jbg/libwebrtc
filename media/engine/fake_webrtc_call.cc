@@ -221,7 +221,7 @@ int FakeVideoSendStream::GetLastHeight() const {
 
 int64_t FakeVideoSendStream::GetLastTimestamp() const {
   RTC_DCHECK(last_frame_->ntp_time_ms() == 0);
-  return last_frame_->render_time_ms();
+  return last_frame_->render_time_ms().value_or(0);
 }
 
 void FakeVideoSendStream::OnFrame(const webrtc::VideoFrame& frame) {

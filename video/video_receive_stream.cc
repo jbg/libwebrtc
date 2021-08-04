@@ -515,7 +515,7 @@ void VideoReceiveStream::OnFrame(const VideoFrame& video_frame) {
   // GetPlayoutTimestamp.  Seems excessive.  Anyhow, I'm assuming the function
   // succeeds most of the time, which leads to grabbing a fourth lock.
   if (rtp_stream_sync_.GetStreamSyncOffsetInMs(
-          video_frame.timestamp(), video_frame.render_time_ms(),
+          video_frame.timestamp(), video_frame.render_time_ms().value_or(0),
           &video_playout_ntp_ms, &sync_offset_ms, &estimated_freq_khz)) {
     // TODO(tommi): OnSyncOffsetUpdated grabs a lock.
     stats_proxy_.OnSyncOffsetUpdated(video_playout_ntp_ms, sync_offset_ms,
