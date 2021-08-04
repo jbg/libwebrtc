@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8be1045b_350aeaa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-08-04T12:00:01Z",
+      "side": 1,
+      "message": "Hello, this is another fix of ObjC SDK crash with addIceCandidate. The idea is almost same as the previous CL.\nPlease take a look. Thank you.",
+      "revId": "042b3fa8b9ba76fa2492aa6afccdc50cf97b26cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
