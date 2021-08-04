@@ -211,6 +211,13 @@ int DetermineMaxWaitForFrame(const VideoReceiveStream::Config& config,
                      : kMaxWaitForFrameMs;
 }
 
+absl::optional<int64_t> VideoFrameMetaData::render_time_ms() const {
+  if (!timestamp_us.has_value()) {
+    return absl::nullopt;
+  }
+  return timestamp_us.value() / rtc::kNumMicrosecsPerMillisec;
+}
+
 VideoReceiveStream2::VideoReceiveStream2(
     TaskQueueFactory* task_queue_factory,
     Call* call,
@@ -572,8 +579,9 @@ void VideoReceiveStream2::OnFrame(const VideoFrame& video_frame) {
         int64_t sync_offset_ms;
         double estimated_freq_khz;
         if (rtp_stream_sync_.GetStreamSyncOffsetInMs(
-                frame_meta.rtp_timestamp, frame_meta.render_time_ms(),
-                &video_playout_ntp_ms, &sync_offset_ms, &estimated_freq_khz)) {
+                frame_meta.rtp_timestamp,
+                frame_meta.render_time_ms().value_or(0), &video_playout_ntp_ms,
+                &sync_offset_ms, &estimated_freq_khz)) {
           stats_proxy_.OnSyncOffsetUpdated(video_playout_ntp_ms, sync_offset_ms,
                                            estimated_freq_khz);
         }

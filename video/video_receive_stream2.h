@@ -63,12 +63,10 @@ struct VideoFrameMetaData {
         height(frame.height()),
         decode_timestamp(now) {}
 
-  int64_t render_time_ms() const {
-    return timestamp_us / rtc::kNumMicrosecsPerMillisec;
-  }
+  absl::optional<int64_t> render_time_ms() const;
 
   const uint32_t rtp_timestamp;
-  const int64_t timestamp_us;
+  const absl::optional<int64_t> timestamp_us;
   const int64_t ntp_time_ms;
   const int width;
   const int height;

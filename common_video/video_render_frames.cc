@@ -53,8 +53,9 @@ int32_t VideoRenderFrames::AddFrame(VideoFrame&& new_frame) {
 
   // Drop old frames only when there are other frames in the queue, otherwise, a
   // really slow system never renders any frames.
-  if (!incoming_frames_.empty() &&
-      new_frame.render_time_ms() + kOldRenderTimestampMS < time_now) {
+  const absl::optional<int64_t> render_time_ms = new_frame.render_time_ms();
+  if (!incoming_frames_.empty() && render_time_ms.has_value() &&
+      render_time_ms.value() + kOldRenderTimestampMS < time_now) {
     RTC_LOG(LS_WARNING) << "Too old frame, timestamp=" << new_frame.timestamp();
     ++frames_dropped_;
     return -1;
@@ -67,7 +68,8 @@ int32_t VideoRenderFrames::AddFrame(VideoFrame&& new_frame) {
     return -1;
   }
 
-  if (new_frame.render_time_ms() < last_render_time_ms_) {
+  if (last_render_time_ms_.has_value() && render_time_ms.has_value() &&
+      render_time_ms.value() < last_render_time_ms_.has_value()) {
     RTC_LOG(LS_WARNING) << "Frame scheduled out of order, render_time="
                         << new_frame.render_time_ms()
                         << ", latest=" << last_render_time_ms_;
@@ -77,7 +79,7 @@ int32_t VideoRenderFrames::AddFrame(VideoFrame&& new_frame) {
     return -1;
   }
 
-  last_render_time_ms_ = new_frame.render_time_ms();
+  last_render_time_ms_ = render_time_ms;
   incoming_frames_.emplace_back(std::move(new_frame));
 
   if (incoming_frames_.size() > kMaxIncomingFramesBeforeLogged) {
@@ -104,8 +106,12 @@ uint32_t VideoRenderFrames::TimeToNextFrameRelease() {
   if (incoming_frames_.empty()) {
     return kEventMaxWaitTimeMs;
   }
-  const int64_t time_to_release = incoming_frames_.front().render_time_ms() -
-                                  render_delay_ms_ - rtc::TimeMillis();
+  const auto& render_time_ms = incoming_frames_.front().render_time_ms();
+  if (!render_time_ms.has_value()) {
+    return kEventMaxWaitTimeMs;
+  }
+  const int64_t time_to_release =
+      render_time_ms.value() - render_delay_ms_ - rtc::TimeMillis();
   return time_to_release < 0 ? 0u : static_cast<uint32_t>(time_to_release);
 }
 

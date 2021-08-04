@@ -175,15 +175,33 @@ VideoFrame::Builder& VideoFrame::Builder::set_video_frame_buffer(
 }
 
 VideoFrame::Builder& VideoFrame::Builder::set_timestamp_ms(
+    absl::optional<int64_t> timestamp_ms) {
+  if (timestamp_ms.has_value() && timestamp_ms.value() != 0) {
+    timestamp_us_ = timestamp_ms.value() * rtc::kNumMicrosecsPerMillisec;
+  } else {
+    timestamp_us_ = absl::nullopt;
+  }
+  return *this;
+}
+
+VideoFrame::Builder& VideoFrame::Builder::set_timestamp_ms(
     int64_t timestamp_ms) {
-  timestamp_us_ = timestamp_ms * rtc::kNumMicrosecsPerMillisec;
+  return set_timestamp_ms(absl::optional<int64_t>(timestamp_ms));
+}
+
+VideoFrame::Builder& VideoFrame::Builder::set_timestamp_us(
+    absl::optional<int64_t> timestamp_us) {
+  if (timestamp_us.has_value() && timestamp_us.value() != 0) {
+    timestamp_us_ = timestamp_us;
+  } else {
+    timestamp_us_ = absl::nullopt;
+  }
   return *this;
 }
 
 VideoFrame::Builder& VideoFrame::Builder::set_timestamp_us(
     int64_t timestamp_us) {
-  timestamp_us_ = timestamp_us;
-  return *this;
+  return set_timestamp_us(absl::optional<int64_t>(timestamp_us));
 }
 
 VideoFrame::Builder& VideoFrame::Builder::set_timestamp_rtp(
@@ -232,30 +250,9 @@ VideoFrame::Builder& VideoFrame::Builder::set_packet_infos(
   return *this;
 }
 
-VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-                       webrtc::VideoRotation rotation,
-                       int64_t timestamp_us)
-    : video_frame_buffer_(buffer),
-      timestamp_rtp_(0),
-      ntp_time_ms_(0),
-      timestamp_us_(timestamp_us),
-      rotation_(rotation) {}
-
-VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-                       uint32_t timestamp_rtp,
-                       int64_t render_time_ms,
-                       VideoRotation rotation)
-    : video_frame_buffer_(buffer),
-      timestamp_rtp_(timestamp_rtp),
-      ntp_time_ms_(0),
-      timestamp_us_(render_time_ms * rtc::kNumMicrosecsPerMillisec),
-      rotation_(rotation) {
-  RTC_DCHECK(buffer);
-}
-
 VideoFrame::VideoFrame(uint16_t id,
                        const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-                       int64_t timestamp_us,
+                       absl::optional<int64_t> timestamp_us,
                        uint32_t timestamp_rtp,
                        int64_t ntp_time_ms,
                        VideoRotation rotation,
@@ -308,8 +305,27 @@ void VideoFrame::set_video_frame_buffer(
   video_frame_buffer_ = buffer;
 }
 
-int64_t VideoFrame::render_time_ms() const {
-  return timestamp_us() / rtc::kNumMicrosecsPerMillisec;
+void VideoFrame::set_timestamp_us(absl::optional<int64_t> timestamp_us) {
+  if (!timestamp_us.has_value() || timestamp_us_.value() == 0) {
+    timestamp_us_ = absl::nullopt;
+  } else {
+    timestamp_us_ = timestamp_us;
+  }
+}
+
+void VideoFrame::set_timestamp_us(int64_t timestamp_us) {
+  if (timestamp_us == 0) {
+    timestamp_us_ = absl::nullopt;
+  } else {
+    timestamp_us_ = timestamp_us;
+  }
+}
+
+absl::optional<int64_t> VideoFrame::render_time_ms() const {
+  if (!timestamp_us_.has_value()) {
+    return absl::nullopt;
+  }
+  return timestamp_us_.value() / rtc::kNumMicrosecsPerMillisec;
 }
 
 }  // namespace webrtc

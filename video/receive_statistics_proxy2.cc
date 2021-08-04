@@ -926,7 +926,8 @@ void ReceiveStatisticsProxy::OnRenderedFrame(
 
   // Consider taking stats_.render_delay_ms into account.
   const int64_t time_until_rendering_ms =
-      frame_meta.render_time_ms() - frame_meta.decode_timestamp.ms();
+      frame_meta.render_time_ms().value_or(0) -
+      frame_meta.decode_timestamp.ms();
   if (time_until_rendering_ms < 0) {
     sum_missed_render_deadline_ms_ += -time_until_rendering_ms;
     ++num_delayed_frames_rendered_;

@@ -104,8 +104,8 @@ class SendProcessingUsage1 : public OveruseFrameDetector::ProcessingUsage {
     if (last_capture_time_us != -1)
       AddCaptureSample(1e-3 * (time_when_first_seen_us - last_capture_time_us));
 
-    frame_timing_.push_back(FrameTiming(frame.timestamp_us(), frame.timestamp(),
-                                        time_when_first_seen_us));
+    frame_timing_.push_back(
+        FrameTiming(frame.timestamp(), time_when_first_seen_us));
   }
 
   absl::optional<int> FrameSent(
@@ -166,12 +166,8 @@ class SendProcessingUsage1 : public OveruseFrameDetector::ProcessingUsage {
 
  private:
   struct FrameTiming {
-    FrameTiming(int64_t capture_time_us, uint32_t timestamp, int64_t now)
-        : capture_time_us(capture_time_us),
-          timestamp(timestamp),
-          capture_us(now),
-          last_send_us(-1) {}
-    int64_t capture_time_us;
+    FrameTiming(uint32_t timestamp, int64_t now)
+        : timestamp(timestamp), capture_us(now), last_send_us(-1) {}
     uint32_t timestamp;
     int64_t capture_us;
     int64_t last_send_us;

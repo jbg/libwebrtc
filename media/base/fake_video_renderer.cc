@@ -27,7 +27,7 @@ void FakeVideoRenderer::OnFrame(const webrtc::VideoFrame& frame) {
   width_ = frame.width();
   height_ = frame.height();
   rotation_ = frame.rotation();
-  timestamp_us_ = frame.timestamp_us();
+  timestamp_us_ = frame.timestamp_us().value_or(0);
   ntp_timestamp_ms_ = frame.ntp_time_ms();
   color_space_ = frame.color_space();
   packet_infos_ = frame.packet_infos();
