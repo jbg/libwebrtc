@@ -39,6 +39,30 @@
       },
       "revId": "4ef58c9bd9cca4bd54b1f183add494b3cc1169e8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b307379_84a56643",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-08-05T13:03:35Z",
+      "side": 1,
+      "message": "Yes that\u0027s possible. TL;DR: but it\u0027s OK.\n\nThe difference would be that VideoSendStreamImpl wouldn\u0027t call RtpVideoSender::SetActive(), as is done when send_stream_.Stop() runs. There\u0027s a contract between RtpVideoSender and VideoSendStreamImpl related to the \"active\" state, that\u0027s a bit convoluted but it ends up being OK in this case and functionally equivalent to send_stream_.Stop() being called when all layers are deactivated and conversely calling Start() when a layer is activated when none was before.\n\nThe reason for this is that inside VideoSendStreamImpl::UpdateActiveSimulcastLayers(), we call RtpVideoSender::SetActiveModules and there, the active state will be updated implicitly (no need to call SetActive()).",
+      "parentUuid": "1511db13_81235804",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 24
+      },
+      "revId": "4ef58c9bd9cca4bd54b1f183add494b3cc1169e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
