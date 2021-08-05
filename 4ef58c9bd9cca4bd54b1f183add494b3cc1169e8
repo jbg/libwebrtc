@@ -63,6 +63,30 @@
       },
       "revId": "4ef58c9bd9cca4bd54b1f183add494b3cc1169e8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "741cf324_f85f5d5e",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2021-08-05T13:07:39Z",
+      "side": 1,
+      "message": "Thanks, I missed that step when looking at this!",
+      "parentUuid": "3b307379_84a56643",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 24
+      },
+      "revId": "4ef58c9bd9cca4bd54b1f183add494b3cc1169e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
