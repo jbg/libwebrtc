@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a20e132_2f00febc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2021-08-05T10:02:37Z",
+      "side": 1,
+      "message": "One question, it\u0027s been a while since I worked in this file...",
+      "revId": "4ef58c9bd9cca4bd54b1f183add494b3cc1169e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1511db13_81235804",
+        "filename": "video/video_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2021-08-05T10:02:37Z",
+      "side": 1,
+      "message": "Can we end up in a state where we won\u0027t call \"send_stream_.Stop()\" if setting \"running_ \u003d false\" in VideoSendStream::UpdateActiveSimulcastLayers?",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 24
+      },
+      "revId": "4ef58c9bd9cca4bd54b1f183add494b3cc1169e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
