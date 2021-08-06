@@ -39,6 +39,30 @@
       },
       "revId": "27e19476ba3f1738b3e68513c7da6b9fbdd6ed08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9980540f_e1b546a6",
+        "filename": "AUTHORS",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 17849
+      },
+      "writtenOn": "2021-08-06T17:39:37Z",
+      "side": 1,
+      "message": "Hello! I do have a change in the works, but I might be a little lost in the repository structure here.\n\nIn my working copy — set up using the instructions at \u003chttps://webrtc.github.io/webrtc-org/native-code/ios/\u003e — I made a change to the file at `build/config/ios/BUILD.gn`. This is the change I\u0027d like to contribute, but it looks like that file might be part of a Chromium repository instead?\n\nI was able to build the WebRTC library for iOS locally with the change I made, and had hoped to contribute the patch back. If I can do so in this repository, that\u0027s great; otherwise, I would really appreciate any pointers for where to look next. Thanks!",
+      "parentUuid": "df949dbf_e477a997",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 29
+      },
+      "revId": "27e19476ba3f1738b3e68513c7da6b9fbdd6ed08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
