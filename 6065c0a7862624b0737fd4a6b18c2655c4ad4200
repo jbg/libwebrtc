@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "255585d2_8ae5db43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-08-06T20:34:07Z",
+      "side": 1,
+      "message": "Hoping this is okay, Harald. After discussing with the release owner (pbommana), we decided https://webrtc-review.googlesource.com/c/src/+/227120 would be too risky to merge at this stage, opting to revert this instead.\n\nSince this is just an optimization, and one that applications can already receive the benefits of by using \"max-bundle\", I\u0027m assuming there won\u0027t be any great drawbacks to delaying it by one release.",
+      "revId": "6065c0a7862624b0737fd4a6b18c2655c4ad4200",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
