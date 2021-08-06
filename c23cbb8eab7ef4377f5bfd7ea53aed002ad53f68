@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ea22e5a_1a5554d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10016
+      },
+      "writtenOn": "2021-08-06T00:57:37Z",
+      "side": 1,
+      "message": "Resolved the two comments from previous review. (Marked MaxWaitingTime() as const and removed the special handling of last_decode_scheduled_ts_\u003d0.",
+      "revId": "c23cbb8eab7ef4377f5bfd7ea53aed002ad53f68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
