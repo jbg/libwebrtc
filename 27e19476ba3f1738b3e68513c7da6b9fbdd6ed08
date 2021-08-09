@@ -63,6 +63,30 @@
       },
       "revId": "27e19476ba3f1738b3e68513c7da6b9fbdd6ed08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c6555e1_a339ac71",
+        "filename": "AUTHORS",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-09T07:36:53Z",
+      "side": 1,
+      "message": "\u003e Hello! I do have a change in the works, but I might be a little lost in the repository structure here.\n\u003e \n\u003e In my working copy — set up using the instructions at \u003chttps://webrtc.github.io/webrtc-org/native-code/ios/\u003e — I made a change to the file at `build/config/ios/BUILD.gn`. This is the change I\u0027d like to contribute, but it looks like that file might be part of a Chromium repository instead?\n\u003e \n\u003e I was able to build the WebRTC library for iOS locally with the change I made, and had hoped to contribute the patch back. If I can do so in this repository, that\u0027s great; otherwise, I would really appreciate any pointers for where to look next. Thanks!\n\nHi, yes //build/ is pulled from Chromium (WebRTC reuse build configs and toolchains from Chromium) and that happens here https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/DEPS;l\u003d24;drc\u003dd937f50e20906a3302e41d0201ef6464f2fcc655.\n\nSo, the best thing to do is to create a Chromium CL with this patch.",
+      "parentUuid": "9980540f_e1b546a6",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 29
+      },
+      "revId": "27e19476ba3f1738b3e68513c7da6b9fbdd6ed08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
