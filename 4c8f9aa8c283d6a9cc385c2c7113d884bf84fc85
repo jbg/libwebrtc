@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe72e661_a43edc01",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-10T06:36:10Z",
+      "side": 1,
+      "message": "Since you change what we\u0027re keying on, maybe a comment to the header explaining \nhow the map is indexed.",
+      "range": {
+        "startLine": 976,
+        "startChar": 33,
+        "endLine": 976,
+        "endChar": 37
+      },
+      "revId": "4c8f9aa8c283d6a9cc385c2c7113d884bf84fc85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
