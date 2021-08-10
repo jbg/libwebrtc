@@ -74,11 +74,11 @@ class GenericDecoderTest : public ::testing::Test {
   void SetUp() override {
     generic_decoder_.RegisterDecodeCompleteCallback(&vcm_callback_);
     vcm_callback_.SetUserReceiveCallback(&user_callback_);
-    VideoCodec settings;
-    settings.codecType = kVideoCodecVP8;
-    settings.width = 10;
-    settings.height = 10;
-    generic_decoder_.InitDecode(&settings, /*numberOfCores=*/4);
+    VideoDecoder::Settings settings;
+    settings.set_codec_type(kVideoCodecVP8);
+    settings.set_max_render_resolution({10, 10});
+    settings.set_number_of_cores(4);
+    generic_decoder_.InitDecode(settings);
   }
 
   SimulatedClock clock_;

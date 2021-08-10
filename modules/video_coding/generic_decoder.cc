@@ -245,11 +245,10 @@ VCMGenericDecoder::~VCMGenericDecoder() {
   decoder_->Release();
 }
 
-int32_t VCMGenericDecoder::InitDecode(const VideoCodec* settings,
-                                      int32_t numberOfCores) {
+bool VCMGenericDecoder::InitDecode(const VideoDecoder::Settings& settings) {
   TRACE_EVENT0("webrtc", "VCMGenericDecoder::InitDecode");
 
-  int err = decoder_->InitDecode(settings, numberOfCores);
+  bool err = decoder_->Configure(settings);
   decoder_info_ = decoder_->GetDecoderInfo();
   RTC_LOG(LS_INFO) << "Decoder implementation: " << decoder_info_.ToString();
   if (_callback) {
