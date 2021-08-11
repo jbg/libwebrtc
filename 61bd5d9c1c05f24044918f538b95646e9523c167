@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7114658e_cfa2e0f3",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3164,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-08-11T07:25:52Z",
+      "side": 1,
+      "message": "Note that in general, one would get better accuracy with (1000*jitter) / kVideoCodecClockRate. But in this case, the division by 1000 is exact.",
+      "range": {
+        "startLine": 3164,
+        "startChar": 19,
+        "endLine": 3164,
+        "endChar": 74
+      },
+      "revId": "61bd5d9c1c05f24044918f538b95646e9523c167",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
