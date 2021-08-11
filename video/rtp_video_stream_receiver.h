@@ -24,7 +24,7 @@
 #include "api/sequence_checker.h"
 #include "api/units/timestamp.h"
 #include "api/video/color_space.h"
-#include "api/video_codecs/video_codec.h"
+#include "api/video/video_codec_type.h"
 #include "call/rtp_packet_sink_interface.h"
 #include "call/syncable.h"
 #include "call/video_receive_stream.h"
@@ -125,7 +125,7 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
   ~RtpVideoStreamReceiver() override;
 
   void AddReceiveCodec(uint8_t payload_type,
-                       const VideoCodec& video_codec,
+                       VideoCodecType video_codec,
                        const std::map<std::string, std::string>& codec_params,
                        bool raw_payload);
 
