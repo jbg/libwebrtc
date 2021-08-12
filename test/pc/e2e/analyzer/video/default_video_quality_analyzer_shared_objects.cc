@@ -59,6 +59,10 @@ bool operator==(const StatsKey& a, const StatsKey& b) {
          a.receiver == b.receiver;
 }
 
+}  // namespace webrtc_pc_e2e
+
+namespace default_video_quality_analyzer_internal {
+
 std::string InternalStatsKey::ToString() const {
   rtc::StringBuilder out;
   out << "stream=" << stream << "_sender=" << sender
@@ -81,5 +85,18 @@ bool operator==(const InternalStatsKey& a, const InternalStatsKey& b) {
          a.receiver == b.receiver;
 }
 
-}  // namespace webrtc_pc_e2e
+FrameComparison::FrameComparison(InternalStatsKey stats_key,
+                                 absl::optional<VideoFrame> captured,
+                                 absl::optional<VideoFrame> rendered,
+                                 bool dropped,
+                                 FrameStats frame_stats,
+                                 OverloadReason overload_reason)
+    : stats_key(std::move(stats_key)),
+      captured(std::move(captured)),
+      rendered(std::move(rendered)),
+      dropped(dropped),
+      frame_stats(std::move(frame_stats)),
+      overload_reason(overload_reason) {}
+
+}  // namespace default_video_quality_analyzer_internal
 }  // namespace webrtc

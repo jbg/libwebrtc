@@ -113,73 +113,6 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
   double GetCpuUsagePercent();
 
  private:
-  // Final stats computed for frame after it went through the whole video
-  // pipeline from capturing to rendering or dropping.
-  struct FrameStats {
-    FrameStats(Timestamp captured_time) : captured_time(captured_time) {}
-
-    // Frame events timestamp.
-    Timestamp captured_time;
-    Timestamp pre_encode_time = Timestamp::MinusInfinity();
-    Timestamp encoded_time = Timestamp::MinusInfinity();
-    // Time when last packet of a frame was received.
-    Timestamp received_time = Timestamp::MinusInfinity();
-    Timestamp decode_start_time = Timestamp::MinusInfinity();
-    Timestamp decode_end_time = Timestamp::MinusInfinity();
-    Timestamp rendered_time = Timestamp::MinusInfinity();
-    Timestamp prev_frame_rendered_time = Timestamp::MinusInfinity();
-
-    int64_t encoded_image_size = 0;
-    uint32_t target_encode_bitrate = 0;
-
-    absl::optional<int> rendered_frame_width = absl::nullopt;
-    absl::optional<int> rendered_frame_height = absl::nullopt;
-
-    // Can be not set if frame was dropped by encoder.
-    absl::optional<StreamCodecInfo> used_encoder = absl::nullopt;
-    // Can be not set if frame was dropped in the network.
-    absl::optional<StreamCodecInfo> used_decoder = absl::nullopt;
-  };
-
-  // Describes why comparison was done in overloaded mode (without calculating
-  // PSNR and SSIM).
-  enum class OverloadReason {
-    kNone,
-    // Not enough CPU to process all incoming comparisons.
-    kCpu,
-    // Not enough memory to store captured frames for all comparisons.
-    kMemory
-  };
-
-  // Represents comparison between two VideoFrames. Contains video frames itself
-  // and stats. Can be one of two types:
-  //   1. Normal - in this case `captured` is presented and either `rendered` is
-  //      presented and `dropped` is false, either `rendered` is omitted and
-  //      `dropped` is true.
-  //   2. Overloaded - in this case both `captured` and `rendered` are omitted
-  //      because there were too many comparisons in the queue. `dropped` can be
-  //      true or false showing was frame dropped or not.
-  struct FrameComparison {
-    FrameComparison(InternalStatsKey stats_key,
-                    absl::optional<VideoFrame> captured,
-                    absl::optional<VideoFrame> rendered,
-                    bool dropped,
-                    FrameStats frame_stats,
-                    OverloadReason overload_reason);
-
-    InternalStatsKey stats_key;
-    // Frames can be omitted if there too many computations waiting in the
-    // queue.
-    absl::optional<VideoFrame> captured;
-    absl::optional<VideoFrame> rendered;
-    // If true frame was dropped somewhere from capturing to rendering and
-    // wasn't rendered on remote peer side. If `dropped` is true, `rendered`
-    // will be `absl::nullopt`.
-    bool dropped;
-    FrameStats frame_stats;
-    OverloadReason overload_reason;
-  };
-
   // Represents a current state of video stream.
   class StreamState {
    public:
@@ -323,7 +256,8 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
       receiver_stats_[peer].prev_frame_rendered_time = time;
     }
 
-    FrameStats GetStatsForPeer(size_t peer) const;
+    default_video_quality_analyzer_internal::FrameStats GetStatsForPeer(
+        size_t peer) const;
 
    private:
     const size_t stream_;
@@ -372,15 +306,18 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
     std::map<absl::string_view, size_t> index_;
   };
 
-  void AddComparison(InternalStatsKey stats_key,
-                     absl::optional<VideoFrame> captured,
-                     absl::optional<VideoFrame> rendered,
-                     bool dropped,
-                     FrameStats frame_stats)
+  void AddComparison(
+      default_video_quality_analyzer_internal::InternalStatsKey stats_key,
+      absl::optional<VideoFrame> captured,
+      absl::optional<VideoFrame> rendered,
+      bool dropped,
+      default_video_quality_analyzer_internal::FrameStats frame_stats)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(comparison_lock_);
   static void ProcessComparisonsThread(void* obj);
   void ProcessComparisons();
-  void ProcessComparison(const FrameComparison& comparison);
+  void ProcessComparison(
+      const default_video_quality_analyzer_internal::FrameComparison&
+          comparison);
   // Report results for all metrics for all streams.
   void ReportResults();
   void ReportResults(const std::string& test_case_name,
@@ -397,8 +334,9 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
   // Returns name of current test case for reporting.
   std::string GetTestCaseName(const std::string& stream_label) const;
   Timestamp Now();
-  StatsKey ToStatsKey(const InternalStatsKey& key) const
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
+  StatsKey ToStatsKey(
+      const default_video_quality_analyzer_internal::InternalStatsKey& key)
+      const RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
   // Returns string representation of stats key for metrics naming. Used for
   // backward compatibility by metrics naming for 2 peers cases.
   std::string StatsKeyToMetricName(const StatsKey& key) const
@@ -439,8 +377,9 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
   // Global frames count for all video streams.
   FrameCounters frame_counters_ RTC_GUARDED_BY(lock_);
   // Frame counters per each stream per each receiver.
-  std::map<InternalStatsKey, FrameCounters> stream_frame_counters_
-      RTC_GUARDED_BY(lock_);
+  std::map<default_video_quality_analyzer_internal::InternalStatsKey,
+           FrameCounters>
+      stream_frame_counters_ RTC_GUARDED_BY(lock_);
   // Map from stream index in `streams_` to its StreamState.
   std::map<size_t, StreamState> stream_states_ RTC_GUARDED_BY(lock_);
   // Map from stream index in `streams_` to sender peer index in `peers_`.
@@ -454,11 +393,13 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
       RTC_GUARDED_BY(lock_);
 
   mutable Mutex comparison_lock_;
-  std::map<InternalStatsKey, StreamStats> stream_stats_
-      RTC_GUARDED_BY(comparison_lock_);
-  std::map<InternalStatsKey, Timestamp> stream_last_freeze_end_time_
-      RTC_GUARDED_BY(comparison_lock_);
-  std::deque<FrameComparison> comparisons_ RTC_GUARDED_BY(comparison_lock_);
+  std::map<default_video_quality_analyzer_internal::InternalStatsKey,
+           StreamStats>
+      stream_stats_ RTC_GUARDED_BY(comparison_lock_);
+  std::map<default_video_quality_analyzer_internal::InternalStatsKey, Timestamp>
+      stream_last_freeze_end_time_ RTC_GUARDED_BY(comparison_lock_);
+  std::deque<default_video_quality_analyzer_internal::FrameComparison>
+      comparisons_ RTC_GUARDED_BY(comparison_lock_);
   AnalyzerStats analyzer_stats_ RTC_GUARDED_BY(comparison_lock_);
 
   std::vector<rtc::PlatformThread> thread_pool_;
