@@ -16,8 +16,10 @@
 #include <utility>
 #include <vector>
 
+#include "absl/types/optional.h"
 #include "api/numerics/samples_stats_counter.h"
 #include "api/units/timestamp.h"
+#include "api/video/video_frame.h"
 
 namespace webrtc {
 namespace webrtc_pc_e2e {
@@ -164,6 +166,12 @@ struct StatsKey {
 bool operator<(const StatsKey& a, const StatsKey& b);
 bool operator==(const StatsKey& a, const StatsKey& b);
 
+}  // namespace webrtc_pc_e2e
+
+// Namespace for internal shared objects used by various
+// `DefaultVideoQualityAnalyzer` components.
+namespace default_video_quality_analyzer_internal {
+
 struct InternalStatsKey {
   InternalStatsKey(size_t stream, size_t sender, size_t receiver)
       : stream(stream), sender(sender), receiver(receiver) {}
@@ -179,7 +187,74 @@ struct InternalStatsKey {
 bool operator<(const InternalStatsKey& a, const InternalStatsKey& b);
 bool operator==(const InternalStatsKey& a, const InternalStatsKey& b);
 
-}  // namespace webrtc_pc_e2e
+// Final stats computed for frame after it went through the whole video
+// pipeline from capturing to rendering or dropping.
+struct FrameStats {
+  explicit FrameStats(Timestamp captured_time) : captured_time(captured_time) {}
+
+  // Frame events timestamp.
+  Timestamp captured_time;
+  Timestamp pre_encode_time = Timestamp::MinusInfinity();
+  Timestamp encoded_time = Timestamp::MinusInfinity();
+  // Time when last packet of a frame was received.
+  Timestamp received_time = Timestamp::MinusInfinity();
+  Timestamp decode_start_time = Timestamp::MinusInfinity();
+  Timestamp decode_end_time = Timestamp::MinusInfinity();
+  Timestamp rendered_time = Timestamp::MinusInfinity();
+  Timestamp prev_frame_rendered_time = Timestamp::MinusInfinity();
+
+  int64_t encoded_image_size = 0;
+  uint32_t target_encode_bitrate = 0;
+
+  absl::optional<int> rendered_frame_width = absl::nullopt;
+  absl::optional<int> rendered_frame_height = absl::nullopt;
+
+  // Can be not set if frame was dropped by encoder.
+  absl::optional<webrtc_pc_e2e::StreamCodecInfo> used_encoder = absl::nullopt;
+  // Can be not set if frame was dropped in the network.
+  absl::optional<webrtc_pc_e2e::StreamCodecInfo> used_decoder = absl::nullopt;
+};
+
+// Describes why comparison was done in overloaded mode (without calculating
+// PSNR and SSIM).
+enum class OverloadReason {
+  kNone,
+  // Not enough CPU to process all incoming comparisons.
+  kCpu,
+  // Not enough memory to store captured frames for all comparisons.
+  kMemory
+};
+
+// Represents comparison between two VideoFrames. Contains video frames itself
+// and stats. Can be one of two types:
+//   1. Normal - in this case `captured` is presented and either `rendered` is
+//      presented and `dropped` is false, either `rendered` is omitted and
+//      `dropped` is true.
+//   2. Overloaded - in this case both `captured` and `rendered` are omitted
+//      because there were too many comparisons in the queue. `dropped` can be
+//      true or false showing was frame dropped or not.
+struct FrameComparison {
+  FrameComparison(InternalStatsKey stats_key,
+                  absl::optional<VideoFrame> captured,
+                  absl::optional<VideoFrame> rendered,
+                  bool dropped,
+                  FrameStats frame_stats,
+                  OverloadReason overload_reason);
+
+  InternalStatsKey stats_key;
+  // Frames can be omitted if there too many computations waiting in the
+  // queue.
+  absl::optional<VideoFrame> captured;
+  absl::optional<VideoFrame> rendered;
+  // If true frame was dropped somewhere from capturing to rendering and
+  // wasn't rendered on remote peer side. If `dropped` is true, `rendered`
+  // will be `absl::nullopt`.
+  bool dropped;
+  FrameStats frame_stats;
+  OverloadReason overload_reason;
+};
+
+}  // namespace default_video_quality_analyzer_internal
 }  // namespace webrtc
 
 #endif  // TEST_PC_E2E_ANALYZER_VIDEO_DEFAULT_VIDEO_QUALITY_ANALYZER_SHARED_OBJECTS_H_
