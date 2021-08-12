@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b665d97_7eb00fcf",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-12T13:53:28Z",
+      "side": 1,
+      "message": "Abseil users internal folders for this, e.g.:\n\n#include \"test/pc/e2e/analyzer/video/internal/default_video_quality_analyzer_shared_objects.h\"\n\nWDYT about doing the same? I think the folder is more visible compared to the file name. See for example https://github.com/abseil/abseil-cpp/tree/master/absl/base/internal.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 94
+      },
+      "revId": "acb7bcf207b972675284b41eac11ccad8124e923",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
