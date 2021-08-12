@@ -22,6 +22,30 @@
       },
       "revId": "acb7bcf207b972675284b41eac11ccad8124e923",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4856d65b_5a189f40",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-08-12T14:06:26Z",
+      "side": 1,
+      "message": "Discussed offline. Comment added to the target definition.",
+      "parentUuid": "6b665d97_7eb00fcf",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 94
+      },
+      "revId": "acb7bcf207b972675284b41eac11ccad8124e923",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
