@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51931ddc_a76ca197",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-12T08:45:53Z",
+      "side": 1,
+      "message": "Waiting for the Chromium roll before testing.",
+      "revId": "05945551e5f87fa153c9e4248de5564ef7628509",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
