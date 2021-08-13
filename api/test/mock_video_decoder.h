@@ -37,6 +37,10 @@ class MockDecodedImageCallback : public DecodedImageCallback {
 
 class MockVideoDecoder : public VideoDecoder {
  public:
+  MockVideoDecoder() {
+    ON_CALL(*this, Configure).WillByDefault(testing::Return(true));
+  }
+
   MOCK_METHOD(bool, Configure, (const Settings& settings), (override));
   MOCK_METHOD(int32_t,
               InitDecode,
