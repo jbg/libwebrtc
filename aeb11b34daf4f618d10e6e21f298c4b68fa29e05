@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "206e6f42_a440a480",
+        "filename": "api/test/mock_video_decoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-13T14:56:48Z",
+      "side": 1,
+      "message": "ah, ack",
+      "parentUuid": "7aa94793_3238eb49",
+      "revId": "aeb11b34daf4f618d10e6e21f298c4b68fa29e05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4857b2e_31e9b330",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "I think it can be. I\u0027ll create a separate change for that.\n(making it DCHECK allows to change return type to void, which has some follow up cleanups)\n\nbesides, that check makes more sense in\nVideoDecoder::Settings::set_number_of_cores, than here.",
       "parentUuid": "c4857b2e_31e9b330",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 3
+      },
+      "revId": "aeb11b34daf4f618d10e6e21f298c4b68fa29e05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9adfda60_cce8b4ac",
+        "filename": "modules/video_coding/decoder_database.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-13T14:56:48Z",
+      "side": 1,
+      "message": "sgtm!",
+      "parentUuid": "447f5d93_ded8c6c1",
       "range": {
         "startLine": 54,
         "startChar": 2,
