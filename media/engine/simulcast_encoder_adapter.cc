@@ -789,10 +789,6 @@ webrtc::VideoCodec SimulcastEncoderAdapter::MakeStreamCodec(
   codec_params.startBitrate =
       std::max(stream_params.minBitrate, start_bitrate_kbps);
 
-  // Legacy screenshare mode is only enabled for the first simulcast layer
-  codec_params.legacy_conference_mode =
-      codec.legacy_conference_mode && stream_idx == 0;
-
   return codec_params;
 }
 

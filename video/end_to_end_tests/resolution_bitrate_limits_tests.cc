@@ -121,7 +121,7 @@ class InitEncodeTest : public test::EndToEndTest,
     encoder_config->codec_type = codec_type;
     encoder_config->video_stream_factory =
         rtc::make_ref_counted<cricket::EncoderStreamFactory>(
-            payload_name_, /*max qp*/ 0, /*screencast*/ false,
+            payload_name_, /*max qp*/ 0,
             /*screenshare enabled*/ false);
     encoder_config->max_bitrate_bps = -1;
     if (configs_.size() == 1 && configs_[0].bitrate_bps.max)

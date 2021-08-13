@@ -861,11 +861,6 @@ bool WebRtcVideoChannel::GetChangedSendParameters(
         params.max_bandwidth_bps == 0 ? -1 : params.max_bandwidth_bps;
   }
 
-  // Handle conference mode.
-  if (params.conference_mode != send_params_.conference_mode) {
-    changed_params->conference_mode = params.conference_mode;
-  }
-
   // Handle RTCP mode.
   if (params.rtcp.reduced_size != send_params_.rtcp.reduced_size) {
     changed_params->rtcp_mode = params.rtcp.reduced_size
@@ -2048,7 +2043,6 @@ WebRtcVideoChannel::WebRtcVideoSendStream::VideoSendStreamParameters::
     : config(std::move(config)),
       options(options),
       max_bitrate_bps(max_bitrate_bps),
-      conference_mode(false),
       codec_settings(codec_settings) {}
 
 WebRtcVideoChannel::WebRtcVideoSendStream::WebRtcVideoSendStream(
@@ -2080,7 +2074,6 @@ WebRtcVideoChannel::WebRtcVideoSendStream::WebRtcVideoSendStream(
   // given max_packet_size.
   parameters_.config.rtp.max_packet_size =
       std::min<size_t>(parameters_.config.rtp.max_packet_size, kVideoMtu);
-  parameters_.conference_mode = send_params.conference_mode;
 
   sp.GetPrimarySsrcs(&parameters_.config.rtp.ssrcs);
 
@@ -2288,9 +2281,6 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetSendParameters(
   if (params.max_bandwidth_bps) {
     parameters_.max_bitrate_bps = *params.max_bandwidth_bps;
     ReconfigureEncoder();
-  }
-  if (params.conference_mode) {
-    parameters_.conference_mode = *params.conference_mode;
   }
 
   // Set codecs and options.
@@ -2533,8 +2523,6 @@ WebRtcVideoChannel::WebRtcVideoSendStream::CreateVideoEncoderConfig(
     }
   }
 
-  encoder_config.legacy_conference_mode = parameters_.conference_mode;
-
   encoder_config.is_quality_scaling_allowed =
       !disable_automatic_resize_ && !is_screencast &&
       (parameters_.config.rtp.ssrcs.size() == 1 ||
@@ -2543,8 +2531,8 @@ WebRtcVideoChannel::WebRtcVideoSendStream::CreateVideoEncoderConfig(
   int max_qp = kDefaultQpMax;
   codec.GetParam(kCodecParamMaxQuantization, &max_qp);
   encoder_config.video_stream_factory =
-      rtc::make_ref_counted<EncoderStreamFactory>(
-          codec.name, max_qp, is_screencast, parameters_.conference_mode);
+      rtc::make_ref_counted<EncoderStreamFactory>(codec.name, max_qp,
+                                                  is_screencast);
 
   return encoder_config;
 }
@@ -3522,13 +3510,11 @@ EncoderStreamFactory::EncoderStreamFactory(
     std::string codec_name,
     int max_qp,
     bool is_screenshare,
-    bool conference_mode,
     const webrtc::WebRtcKeyValueConfig* trials)
 
     : codec_name_(codec_name),
       max_qp_(max_qp),
       is_screenshare_(is_screenshare),
-      conference_mode_(conference_mode),
       trials_(trials ? *trials : fallback_trials_) {}
 
 std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
@@ -3542,10 +3528,7 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
   const absl::optional<webrtc::DataRate> experimental_min_bitrate =
       GetExperimentalMinVideoBitrate(encoder_config.codec_type);
 
-  if (encoder_config.number_of_streams > 1 ||
-      ((absl::EqualsIgnoreCase(codec_name_, kVp8CodecName) ||
-        absl::EqualsIgnoreCase(codec_name_, kH264CodecName)) &&
-       is_screenshare_ && conference_mode_)) {
+  if (encoder_config.number_of_streams > 1) {
     return CreateSimulcastOrConferenceModeScreenshareStreams(
         width, height, encoder_config, experimental_min_bitrate);
   }
@@ -3650,7 +3633,6 @@ EncoderStreamFactory::CreateSimulcastOrConferenceModeScreenshareStreams(
   layers = GetSimulcastConfig(FindRequiredActiveLayers(encoder_config),
                               encoder_config.number_of_streams, width, height,
                               encoder_config.bitrate_priority, max_qp_,
-                              is_screenshare_ && conference_mode_,
                               temporal_layers_supported, trials_);
   // Allow an experiment to override the minimum bitrate for the lowest
   // spatial layer. The experiment's configuration has the lowest priority.

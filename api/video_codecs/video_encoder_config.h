@@ -178,9 +178,6 @@ class VideoEncoderConfig {
   // Max number of encoded VideoStreams to produce.
   size_t number_of_streams;
 
-  // Legacy Google conference mode flag for simulcast screenshare
-  bool legacy_conference_mode;
-
   // Indicates whether quality scaling can be used or not.
   bool is_quality_scaling_allowed;
 

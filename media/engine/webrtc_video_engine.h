@@ -373,7 +373,6 @@ class WebRtcVideoChannel : public VideoMediaChannel,
       webrtc::VideoSendStream::Config config;
       VideoOptions options;
       int max_bitrate_bps;
-      bool conference_mode;
       absl::optional<VideoCodecSettings> codec_settings;
       // Sent resolutions + bitrates etc. by the underlying VideoSendStream,
       // typically changes when setting a new resolution or reconfiguring
@@ -646,20 +645,12 @@ class WebRtcVideoChannel : public VideoMediaChannel,
 class EncoderStreamFactory
     : public webrtc::VideoEncoderConfig::VideoStreamFactoryInterface {
  public:
-  EncoderStreamFactory(std::string codec_name,
-                       int max_qp,
-                       bool is_screenshare,
-                       bool conference_mode)
-      : EncoderStreamFactory(codec_name,
-                             max_qp,
-                             is_screenshare,
-                             conference_mode,
-                             nullptr) {}
+  EncoderStreamFactory(std::string codec_name, int max_qp, bool is_screenshare)
+      : EncoderStreamFactory(codec_name, max_qp, is_screenshare, nullptr) {}
 
   EncoderStreamFactory(std::string codec_name,
                        int max_qp,
                        bool is_screenshare,
-                       bool conference_mode,
                        const webrtc::WebRtcKeyValueConfig* trials);
 
  private:
@@ -684,9 +675,6 @@ class EncoderStreamFactory
   const std::string codec_name_;
   const int max_qp_;
   const bool is_screenshare_;
-  // Allows a screenshare specific configuration, which enables temporal
-  // layering and various settings.
-  const bool conference_mode_;
   const webrtc::FieldTrialBasedConfig fallback_trials_;
   const webrtc::WebRtcKeyValueConfig& trials_;
 };

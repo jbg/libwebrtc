@@ -181,7 +181,6 @@ LocalAndRemoteSdp SignalingInterceptor::PatchOffer(
                    RtpTransceiverDirection::kRecvOnly);
       continue;
     }
-    media_desc->set_conference_mode(params_.use_conference_mode);
   }
 
   if (!params_.stream_label_to_simulcast_streams_count.empty()) {
@@ -374,7 +373,6 @@ LocalAndRemoteSdp SignalingInterceptor::PatchAnswer(
         RtpTransceiverDirection::kRecvOnly) {
       continue;
     }
-    media_desc->set_conference_mode(params_.use_conference_mode);
   }
 
   if (!params_.stream_label_to_simulcast_streams_count.empty()) {

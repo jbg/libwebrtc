@@ -83,11 +83,6 @@ bool SimulcastUtility::ValidSimulcastParameters(const VideoCodec& codec,
   return true;
 }
 
-bool SimulcastUtility::IsConferenceModeScreenshare(const VideoCodec& codec) {
-  return codec.mode == VideoCodecMode::kScreensharing &&
-         codec.legacy_conference_mode;
-}
-
 int SimulcastUtility::NumberOfTemporalLayers(const VideoCodec& codec,
                                              int spatial_id) {
   uint8_t num_temporal_layers =

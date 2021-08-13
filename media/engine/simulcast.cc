@@ -325,30 +325,23 @@ std::vector<webrtc::VideoStream> GetSimulcastConfig(
     int height,
     double bitrate_priority,
     int max_qp,
-    bool is_screenshare_with_conference_mode,
     bool temporal_layers_supported,
     const webrtc::WebRtcKeyValueConfig& trials) {
   RTC_DCHECK_LE(min_layers, max_layers);
-  RTC_DCHECK(max_layers > 1 || is_screenshare_with_conference_mode);
+  RTC_DCHECK(max_layers > 1);
 
   const bool base_heavy_tl3_rate_alloc =
       webrtc::RateControlSettings::ParseFromKeyValueConfig(&trials)
           .Vp8BaseHeavyTl3RateAllocation();
-  if (is_screenshare_with_conference_mode) {
-    return GetScreenshareLayers(max_layers, width, height, bitrate_priority,
-                                max_qp, temporal_layers_supported,
-                                base_heavy_tl3_rate_alloc, trials);
-  } else {
-    // Some applications rely on the old behavior limiting the simulcast layer
-    // count based on the resolution automatically, which they can get through
-    // the WebRTC-LegacySimulcastLayerLimit field trial until they update.
-    max_layers =
-        LimitSimulcastLayerCount(width, height, min_layers, max_layers, trials);
+  // Some applications rely on the old behavior limiting the simulcast layer
+  // count based on the resolution automatically, which they can get through
+  // the WebRTC-LegacySimulcastLayerLimit field trial until they update.
+  max_layers =
+      LimitSimulcastLayerCount(width, height, min_layers, max_layers, trials);
 
-    return GetNormalSimulcastLayers(max_layers, width, height, bitrate_priority,
-                                    max_qp, temporal_layers_supported,
-                                    base_heavy_tl3_rate_alloc, trials);
-  }
+  return GetNormalSimulcastLayers(max_layers, width, height, bitrate_priority,
+                                  max_qp, temporal_layers_supported,
+                                  base_heavy_tl3_rate_alloc, trials);
 }
 
 std::vector<webrtc::VideoStream> GetNormalSimulcastLayers(

@@ -45,8 +45,10 @@ using FramerateFractions =
     absl::InlinedVector<uint8_t, webrtc::kMaxTemporalStreams>;
 
 namespace {
+#if 0
 constexpr uint32_t kLegacyScreenshareTl0BitrateKbps = 200;
 constexpr uint32_t kLegacyScreenshareTl1BitrateKbps = 1000;
+#endif
 constexpr uint32_t kInitialTimestampRtp = 123;
 constexpr int64_t kTestNtpTimeMs = 456;
 constexpr int64_t kInitialTimestampMs = 789;
@@ -471,6 +473,7 @@ TEST_F(TestVp8Impl, DontDropKeyframes) {
   EncodeAndExpectFrameWith(NextInputFrame(), 0, true);
 }
 
+#if 0
 TEST_F(TestVp8Impl, KeepsTimestampOnReencode) {
   auto* const vpx = new NiceMock<MockLibvpxInterface>();
   LibvpxVp8Encoder encoder((std::unique_ptr<LibvpxInterface>(vpx)),
@@ -481,7 +484,6 @@ TEST_F(TestVp8Impl, KeepsTimestampOnReencode) {
   codec_settings_.maxBitrate = 1000;
   codec_settings_.mode = VideoCodecMode::kScreensharing;
   codec_settings_.VP8()->numberOfTemporalLayers = 2;
-  codec_settings_.legacy_conference_mode = true;
 
   EXPECT_CALL(*vpx, img_wrap(_, _, _, _, _, _))
       .WillOnce(Invoke([](vpx_image_t* img, vpx_img_fmt_t fmt, unsigned int d_w,
@@ -510,6 +512,7 @@ TEST_F(TestVp8Impl, KeepsTimestampOnReencode) {
       std::vector<VideoFrameType>{VideoFrameType::kVideoFrameDelta};
   encoder.Encode(NextInputFrame(), &delta_frame);
 }
+#endif
 
 TEST(LibvpxVp8EncoderTest, GetEncoderInfoReturnsStaticInformation) {
   auto* const vpx = new NiceMock<MockLibvpxInterface>();
@@ -640,6 +643,7 @@ TEST_F(TestVp8Impl, GetEncoderInfoFpsAllocationThreeTemporalLayers) {
               ::testing::ElementsAreArray(expected_fps_allocation));
 }
 
+#if 0
 TEST_F(TestVp8Impl, GetEncoderInfoFpsAllocationScreenshareLayers) {
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK, encoder_->Release());
   codec_settings_.numberOfSimulcastStreams = 1;
@@ -651,7 +655,6 @@ TEST_F(TestVp8Impl, GetEncoderInfoFpsAllocationScreenshareLayers) {
   codec_settings_.simulcastStream[0].maxBitrate =
       kLegacyScreenshareTl1BitrateKbps;
   codec_settings_.simulcastStream[0].numberOfTemporalLayers = 2;
-  codec_settings_.legacy_conference_mode = true;
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             encoder_->InitEncode(&codec_settings_, kSettings));
 
@@ -660,6 +663,7 @@ TEST_F(TestVp8Impl, GetEncoderInfoFpsAllocationScreenshareLayers) {
   EXPECT_THAT(encoder_->GetEncoderInfo().fps_allocation,
               ::testing::ElementsAreArray(expected_fps_allocation));
 }
+#endif
 
 TEST_F(TestVp8Impl, GetEncoderInfoFpsAllocationSimulcastVideo) {
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK, encoder_->Release());

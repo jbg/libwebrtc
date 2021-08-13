@@ -36,15 +36,8 @@ std::unique_ptr<Vp8FrameBufferController> Vp8TemporalLayersFactory::Create(
     int num_temporal_layers =
         SimulcastUtility::NumberOfTemporalLayers(codec, i);
     RTC_DCHECK_GE(num_temporal_layers, 1);
-    if (SimulcastUtility::IsConferenceModeScreenshare(codec) && i == 0) {
-      // Legacy screenshare layers supports max 2 layers.
-      num_temporal_layers = std::max(2, num_temporal_layers);
-      controllers.push_back(
-          std::make_unique<ScreenshareLayers>(num_temporal_layers));
-    } else {
-      controllers.push_back(
-          std::make_unique<DefaultTemporalLayers>(num_temporal_layers));
-    }
+    controllers.push_back(
+        std::make_unique<DefaultTemporalLayers>(num_temporal_layers));
   }
 
   return std::make_unique<Vp8TemporalLayers>(std::move(controllers),

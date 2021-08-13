@@ -2094,7 +2094,7 @@ TEST_F(VideoStreamEncoderTest,
   config.simulcast_layers[1].active = true;
   config.video_stream_factory =
       rtc::make_ref_counted<cricket::EncoderStreamFactory>(
-          "VP8", /*max qp*/ 56, /*screencast*/ false,
+          "VP8", /*max qp*/ 56,
           /*screenshare enabled*/ false);
   video_stream_encoder_->ConfigureEncoder(config.Copy(), kMaxPayloadLength);
 
@@ -2158,7 +2158,7 @@ TEST_F(VideoStreamEncoderTest,
   config.simulcast_layers[1].active = true;
   config.video_stream_factory =
       rtc::make_ref_counted<cricket::EncoderStreamFactory>(
-          "VP8", /*max qp*/ 56, /*screencast*/ false,
+          "VP8", /*max qp*/ 56,
           /*screenshare enabled*/ false);
   video_stream_encoder_->ConfigureEncoder(config.Copy(), kMaxPayloadLength);
 
@@ -2231,7 +2231,7 @@ TEST_F(VideoStreamEncoderTest,
   config.simulcast_layers[2].active = false;
   config.video_stream_factory =
       rtc::make_ref_counted<cricket::EncoderStreamFactory>(
-          "VP8", /*max qp*/ 56, /*screencast*/ false,
+          "VP8", /*max qp*/ 56,
           /*screenshare enabled*/ false);
   video_stream_encoder_->ConfigureEncoder(config.Copy(), kMaxPayloadLength);
 
@@ -2275,7 +2275,7 @@ TEST_F(VideoStreamEncoderTest,
   config.simulcast_layers[2].active = false;
   config.video_stream_factory =
       rtc::make_ref_counted<cricket::EncoderStreamFactory>(
-          "VP8", /*max qp*/ 56, /*screencast*/ false,
+          "VP8", /*max qp*/ 56,
           /*screenshare enabled*/ false);
   video_stream_encoder_->ConfigureEncoder(config.Copy(), kMaxPayloadLength);
 
@@ -2311,7 +2311,7 @@ TEST_F(VideoStreamEncoderTest,
   config.simulcast_layers[1].max_bitrate_bps = kMaxBitrateBps;
   config.video_stream_factory =
       rtc::make_ref_counted<cricket::EncoderStreamFactory>(
-          "VP8", /*max qp*/ 56, /*screencast*/ false,
+          "VP8", /*max qp*/ 56,
           /*screenshare enabled*/ false);
   video_stream_encoder_->ConfigureEncoder(config.Copy(), kMaxPayloadLength);
 
@@ -2399,7 +2399,7 @@ TEST_P(ResolutionAlignmentTest, SinkWantsAlignmentApplied) {
   }
   config.video_stream_factory =
       rtc::make_ref_counted<cricket::EncoderStreamFactory>(
-          "VP8", /*max qp*/ 56, /*screencast*/ false,
+          "VP8", /*max qp*/ 56,
           /*screenshare enabled*/ false);
   video_stream_encoder_->ConfigureEncoder(std::move(config), kMaxPayloadLength);
 
@@ -5636,7 +5636,7 @@ TEST_F(VideoStreamEncoderTest, InitialFrameDropActivatesWhenLayersChange) {
                                  &video_encoder_config);
   video_encoder_config.video_stream_factory =
       rtc::make_ref_counted<cricket::EncoderStreamFactory>(
-          "VP8", /*max qp*/ 56, /*screencast*/ false,
+          "VP8", /*max qp*/ 56,
           /*screenshare enabled*/ false);
   for (auto& layer : video_encoder_config.simulcast_layers) {
     layer.num_temporal_layers = 1;
@@ -7924,7 +7924,7 @@ TEST_F(VideoStreamEncoderTest, EncoderResetAccordingToParameterChange) {
   }
   config.video_stream_factory =
       rtc::make_ref_counted<cricket::EncoderStreamFactory>(
-          "VP8", /*max qp*/ 56, /*screencast*/ false,
+          "VP8", /*max qp*/ 56,
           /*screenshare enabled*/ false);
   video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
       DataRate::BitsPerSec(kSimulcastTargetBitrateBps),
@@ -8052,7 +8052,7 @@ TEST_F(VideoStreamEncoderTest, EncoderResolutionsExposedInSimulcast) {
   }
   config.video_stream_factory =
       rtc::make_ref_counted<cricket::EncoderStreamFactory>(
-          "VP8", /*max qp*/ 56, /*screencast*/ false,
+          "VP8", /*max qp*/ 56,
           /*screenshare enabled*/ false);
   video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
       DataRate::BitsPerSec(kSimulcastTargetBitrateBps),
@@ -8511,7 +8511,6 @@ TEST_P(VideoStreamEncoderWithRealEncoderTest, HandlesLayerToggling) {
   config.video_stream_factory =
       rtc::make_ref_counted<cricket::EncoderStreamFactory>(
           CodecTypeToPayloadString(codec_type_), /*max qp*/ 56,
-          /*screencast*/ false,
           /*screenshare enabled*/ false);
   video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
       DataRate::BitsPerSec(kSimulcastTargetBitrateBps),

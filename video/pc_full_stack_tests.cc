@@ -1123,7 +1123,6 @@ TEST(PCFullStackTest, Pc_Screenshare_Slides) {
   RunParams run_params(TimeDelta::Seconds(kTestDurationSec));
   run_params.use_flex_fec = false;
   run_params.use_ulp_fec = false;
-  run_params.use_conference_mode = true;
   fixture->Run(std::move(run_params));
 }
 
@@ -1176,7 +1175,6 @@ TEST(PCFullStackTest, Pc_Screenshare_Slides_Simulcast) {
   RunParams run_params(TimeDelta::Seconds(kTestDurationSec));
   run_params.use_flex_fec = false;
   run_params.use_ulp_fec = false;
-  run_params.use_conference_mode = true;
   fixture->Run(std::move(run_params));
 }
 #endif  // !defined(WEBRTC_MAC) && !defined(WEBRTC_WIN)

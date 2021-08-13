@@ -554,8 +554,7 @@ PeerConnectionE2EQualityTest::CreateSignalingInterceptor(
            video_config.simulcast_config->simulcast_streams_count});
     }
   }
-  PatchingParams patching_params(run_params.use_conference_mode,
-                                 stream_label_to_simulcast_streams_count);
+  PatchingParams patching_params(stream_label_to_simulcast_streams_count);
   return std::make_unique<SignalingInterceptor>(patching_params);
 }
 

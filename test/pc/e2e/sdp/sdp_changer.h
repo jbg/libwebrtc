@@ -60,14 +60,11 @@ struct LocalAndRemoteSdp {
 };
 
 struct PatchingParams {
-  PatchingParams(
-      bool use_conference_mode,
+  explicit PatchingParams(
       std::map<std::string, int> stream_label_to_simulcast_streams_count)
-      : use_conference_mode(use_conference_mode),
-        stream_label_to_simulcast_streams_count(
+      : stream_label_to_simulcast_streams_count(
             stream_label_to_simulcast_streams_count) {}
 
-  bool use_conference_mode;
   std::map<std::string, int> stream_label_to_simulcast_streams_count;
 };
 
