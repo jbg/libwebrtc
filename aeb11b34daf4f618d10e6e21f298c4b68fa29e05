@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91834f1a_7328717f",
+        "filename": "api/test/mock_video_decoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-13T14:37:50Z",
+      "side": 1,
+      "message": "I assume the plan is to get rid of InitDecode, at which point tests should expect this call explicitly?\nIf so add a todo about removing it?",
+      "revId": "aeb11b34daf4f618d10e6e21f298c4b68fa29e05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4857b2e_31e9b330",
+        "filename": "modules/video_coding/decoder_database.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-13T14:37:50Z",
+      "side": 1,
+      "message": "Not new code, but could this be a dcheck instead?",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 3
+      },
+      "revId": "aeb11b34daf4f618d10e6e21f298c4b68fa29e05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
