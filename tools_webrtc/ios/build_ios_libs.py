@@ -332,9 +332,12 @@ def main():
         cmd += [
             '-framework',
             os.path.abspath(os.path.join(framework_path, SDK_FRAMEWORK_NAME)),
-            '-debug-symbols',
-            os.path.abspath(os.path.join(framework_path, SDK_DSYM_NAME))
         ]
+        if os.path.exists(os.path.join(framework_path, SDK_DSYM_NAME)):
+            cmd += [
+                '-debug-symbols',
+                os.path.abspath(os.path.join(framework_path, SDK_DSYM_NAME))
+            ]
 
     _RunCommand(cmd)
 
