@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aa94793_3238eb49",
+        "filename": "api/test/mock_video_decoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-08-13T14:54:44Z",
+      "side": 1,
+      "message": "yes, there is plan to remove InitDecode,\nbut this line is added for a different reason: There are [plenty of] tests that do not put any expectation on InitDecode (and thus Configure), only on Decode.\nInitDecode by default returns 0 (success)\ndefault value for boolean type is false (failure)\n\nThus those test would fail because they implicitly assume MockVideoDecoder::Configure returns success value.\n\nI\u0027ve added a comment. Does it capture it?",
+      "parentUuid": "91834f1a_7328717f",
+      "revId": "aeb11b34daf4f618d10e6e21f298c4b68fa29e05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4857b2e_31e9b330",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-08-13T14:37:50Z",
       "side": 1,
       "message": "Not new code, but could this be a dcheck instead?",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 3
+      },
+      "revId": "aeb11b34daf4f618d10e6e21f298c4b68fa29e05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "447f5d93_ded8c6c1",
+        "filename": "modules/video_coding/decoder_database.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-08-13T14:54:44Z",
+      "side": 1,
+      "message": "I think it can be. I\u0027ll create a separate change for that.\n(making it DCHECK allows to change return type to void, which has some follow up cleanups)\n\nbesides, that check makes more sense in\nVideoDecoder::Settings::set_number_of_cores, than here.",
+      "parentUuid": "c4857b2e_31e9b330",
       "range": {
         "startLine": 54,
         "startChar": 2,
