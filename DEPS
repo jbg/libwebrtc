@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'fcc47647934603cb4cd9821f236abc9fb4191403',
+  'chromium_revision': 'dc5050efec2795fc8c663d2872822dc92f8f1e3b',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -20,9 +20,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@d5da9fc322dbd18c229dc8cf4d4c1937b0c0a64d',
+    'https://chromium.googlesource.com/chromium/src/base@dd2dda85e2269464d178da9c18e3f7a890cc9733',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@4d07fd6ad54418724e632519dd08851a4077d5b6',
+    'https://chromium.googlesource.com/chromium/src/build@5c5313fbbde1656aa038428a185e6b198de2ed61',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@37dc929ecb351687006a61744b116cda601753d7',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -37,7 +37,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@7a163851ecd66053d582d18a4d0ad7737d75ac92',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@755005b7cb646776bb6ff4b69f224fb7069c8e14',
+    'https://chromium.googlesource.com/chromium/src/third_party@1ab68539cc5b732be79551665552e9641f047739',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -230,7 +230,7 @@ deps = {
 
   # Used by boringssl.
   'src/third_party/nasm': {
-      'url': 'https://chromium.googlesource.com/chromium/deps/nasm.git@e9be5fd6d723a435ca2da162f9e0ffcb688747c1'
+      'url': 'https://chromium.googlesource.com/chromium/deps/nasm.git@4e6fe9d1549e4ffb6c804494573e404849dfe7de'
   },
 
   'src/third_party/openh264/src':
@@ -271,7 +271,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@58a626d71543a0b187d7889d3268984f2462dcd6',
+    'https://chromium.googlesource.com/chromium/src/tools@160f50a68ac45b6b1c769fafec57ec70914bc20a',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@a32a1607f6093d338f756c7e7c7b4333b0c50c9c',
 
@@ -372,7 +372,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': 'JO4WtrFSgv4hKbrR0kNn-c6rw1p6XQZuWfufbsEhuD4C',
+          'version': 'XKB4TqIlfrjdCUPceZw9_ttRBHeJrqmD29rW7hpj0EoC',
       },
     ],
     'condition': 'checkout_android',
