@@ -18,6 +18,7 @@
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "rtc_base/copy_on_write_buffer.h"
+#include "rtc_base/logging.h"
 
 namespace webrtc {
 
@@ -244,8 +245,11 @@ template <typename Extension, typename... Values>
 bool RtpPacket::SetExtension(const Values&... values) {
   const size_t value_size = Extension::ValueSize(values...);
   auto buffer = AllocateExtension(Extension::kId, value_size);
-  if (buffer.empty())
+  if (buffer.empty()) {
+    RTC_DLOG(LS_WARNING) << "RTP Header Extension " << Extension::kId << " ("
+                         << Extension::kUri << ") was not set";
     return false;
+  }
   return Extension::Write(buffer, values...);
 }
 
