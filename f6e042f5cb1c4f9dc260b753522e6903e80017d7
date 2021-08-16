@@ -241,6 +241,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe123438_b707ae85",
+        "filename": "g3doc/style-guide/nested-namespaces.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-08-16T12:39:36Z",
+      "side": 1,
+      "message": "May be that can be added together with the documentation why this subnamespace exists (instead of having all symbols from it in the top webrtc namespace)\n\nin particular it should explain abbreviations\nhttps://google.github.io/styleguide/cppguide.html#General_Naming_Rules\n\"Minimize the use of abbreviations that would likely be unknown to someone outside your project (especially acronyms and initialisms).\"\n\"As a rule of thumb, an abbreviation is probably OK if it\u0027s listed in Wikipedia.\"\n(I\u0027ve checked wikipedia. pc is way too overloaded, \"peer connection\" is not even on that list. e2e can be guessed, it is just slightly overloaded)\n\nhttps://google.github.io/styleguide/cppguide.html#Namespace_Names\n\"Keep in mind that the rule against abbreviated names applies to namespaces just as much as variable names.\"",
+      "parentUuid": "f91b50cb_f506b7d6",
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c13f1633_b2c44149",
         "filename": "g3doc/style-guide/nested-namespaces.md",
         "patchSetId": 1
