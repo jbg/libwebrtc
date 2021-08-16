@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb5d7123_173580ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-16T10:21:44Z",
+      "side": 1,
+      "message": "I always find more text to write...",
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82fce5ea_5ee58155",
@@ -73,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd611618_36dc9ec6",
+        "filename": "g3doc/style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-16T10:21:44Z",
+      "side": 1,
+      "message": "I think we might want words for people who don\u0027t know whether or not they want a nested namespace, ie \"what\u0027s it good for\".\nI\u0027m not sure it\u0027s clear in my head why they are good, but something like:\n\nA nested namespace is useful when you have files that are exposed to a wide audience (such as files in /api, or files included from /api) that need to define types that are only for internal use within a particular context, but because of C++ rules, the names need to be defined in that widely visible file.\n\nIf you only need the definitions inside a single c++ file, use an anonymous namespace; if your symbols are limited by BUILD rules to be visible only to their intended targets, you don\u0027t need a namespace.\n\nYou may still want a namespace if you have types being defined inside templates, since it is hard to ensure that no colliding names are ever constructed.",
+      "parentUuid": "de912052_ef96e181",
+      "range": {
+        "startLine": 48,
+        "startChar": 26,
+        "endLine": 50,
+        "endChar": 43
+      },
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c97d8d0_443b09ed",
         "filename": "g3doc/style-guide.md",
         "patchSetId": 1
@@ -90,6 +131,23 @@
         "endLine": 53,
         "endChar": 77
       },
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c184be1_6fc3958c",
+        "filename": "g3doc/style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-16T10:21:44Z",
+      "side": 1,
+      "message": "I think the more common case is \"only by a few files, but they are not neatly grouped into a separate folder\" - for example a concept whose implementation is spread across multiple directories. We should try to avoid this.",
       "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -143,6 +201,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c13f1633_b2c44149",
+        "filename": "g3doc/style-guide/nested-namespaces.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-16T10:21:44Z",
+      "side": 1,
+      "message": "Need some intro words here. Something like\n\nThis page contains all the internal namespaces of webrtc that are not limited to use within a single file or directory. See (link) for when it\u0027s appropriate to add internal namespaces.",
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f75fee35_f418f88f",
         "filename": "g3doc/style-guide/nested-namespaces.md",
         "patchSetId": 1
@@ -177,6 +252,30 @@
       "writtenOn": "2021-08-16T10:16:33Z",
       "side": 1,
       "message": "if it is named \u0027containers_internal\u0027 then it probably doesn\u0027t need this exception - it uses \u0027FOLDER_internal\u0027 pattern.\n\nOn the other hand I think we have other kind of webrtc containers this utility is not for.... I remember there was custom implementation of inlined array, but can\u0027t find where is it located right now.",
+      "parentUuid": "f75fee35_f418f88f",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d022990c_613acd4f",
+        "filename": "g3doc/style-guide/nested-namespaces.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-16T10:21:44Z",
+      "side": 1,
+      "message": "If we think that we ever would want to add webrtc-specific containers that are not flat, this should definitely be \"containers\".\nIf not, \"containers_internal\" is less typing, and they are otherwise the same.",
       "parentUuid": "f75fee35_f418f88f",
       "range": {
         "startLine": 6,
