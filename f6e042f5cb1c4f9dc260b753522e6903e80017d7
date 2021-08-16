@@ -49,6 +49,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cded9a16_705968ad",
+        "filename": "g3doc/style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-08-16T10:16:33Z",
+      "side": 1,
+      "message": "https://abseil.io/tips/130",
+      "parentUuid": "de912052_ef96e181",
+      "range": {
+        "startLine": 48,
+        "startChar": 26,
+        "endLine": 50,
+        "endChar": 43
+      },
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c97d8d0_443b09ed",
+        "filename": "g3doc/style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-08-16T10:16:33Z",
+      "side": 1,
+      "message": "In this case sometimes it is possible to put such symbol as private member of the public class. Sometimes it is also possible to forward-declare such private symbol.\nI find that preferable over introducing internal namespace.\n\nAnother related tip: https://abseil.io/tips/186\n(though I\u0027m not sure we have that particular problem wide spread)",
+      "range": {
+        "startLine": 53,
+        "startChar": 76,
+        "endLine": 53,
+        "endChar": 77
+      },
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0106606_9c49db6d",
         "filename": "g3doc/style-guide.md",
         "patchSetId": 1
@@ -72,6 +119,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ae65fdf_4feedc59",
+        "filename": "g3doc/style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-08-16T10:16:33Z",
+      "side": 1,
+      "message": "why it would be noisy?\nif you look just for introducing namespaces with `namespace concept {`\n(though in c++17 the check would need to be more complicated, there it would be allowed to write `namespace webrtc::concept_internal {`\n\nHow many custom internal namespaces do we have? if that number is not too large, then may be forcing it with the presubmit check won\u0027t worth the effort to write one.",
+      "parentUuid": "e0106606_9c49db6d",
+      "range": {
+        "startLine": 69,
+        "startChar": 58,
+        "endLine": 70,
+        "endChar": 74
+      },
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f75fee35_f418f88f",
         "filename": "g3doc/style-guide/nested-namespaces.md",
         "patchSetId": 1
@@ -83,6 +154,30 @@
       "writtenOn": "2021-08-16T09:16:36Z",
       "side": 1,
       "message": "I wonder if this should just be `::webrtc::containers_internal`.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba43c2c0_b0612758",
+        "filename": "g3doc/style-guide/nested-namespaces.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-08-16T10:16:33Z",
+      "side": 1,
+      "message": "if it is named \u0027containers_internal\u0027 then it probably doesn\u0027t need this exception - it uses \u0027FOLDER_internal\u0027 pattern.\n\nOn the other hand I think we have other kind of webrtc containers this utility is not for.... I remember there was custom implementation of inlined array, but can\u0027t find where is it located right now.",
+      "parentUuid": "f75fee35_f418f88f",
       "range": {
         "startLine": 6,
         "startChar": 0,
