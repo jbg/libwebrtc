@@ -57,6 +57,10 @@ public class HardwareVideoEncoderTest {
       /* capabilities= */ new VideoEncoder.Capabilities(false /* lossNotification */));
   private static final long POLL_DELAY_MS = 10;
   private static final long DELIVER_ENCODED_IMAGE_DELAY_MS = 10;
+  private static final EncodeInfo ENCODE_INFO_KEY_FRAME =
+      new EncodeInfo(new FrameType[] {FrameType.VideoFrameKey});
+  private static final EncodeInfo ENCODE_INFO_DELTA_FRAME =
+      new EncodeInfo(new FrameType[] {FrameType.VideoFrameDelta});
 
   private static class TestEncoder extends HardwareVideoEncoder {
     private final Object deliverEncodedImageLock = new Object();
@@ -114,9 +118,15 @@ public class HardwareVideoEncoderTest {
 
   private class TestEncoderBuilder {
     private VideoCodecMimeType codecType = VideoCodecMimeType.VP8;
+    private BitrateAdjuster bitrateAdjuster = new BaseBitrateAdjuster();
 
     public TestEncoderBuilder setCodecType(VideoCodecMimeType codecType) {
       this.codecType = codecType;
+      return this;
+    }
+
+    public TestEncoderBuilder setBitrateAdjuster(BitrateAdjuster bitrateAdjuster) {
+      this.bitrateAdjuster = bitrateAdjuster;
       return this;
     }
 
@@ -128,10 +138,17 @@ public class HardwareVideoEncoderTest {
           /* yuvColorFormat= */ MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar,
           /* params= */ new HashMap<>(),
           /* keyFrameIntervalSec= */ 0,
-          /* forceKeyFrameIntervalMs= */ 0,
-          /* bitrateAdjuster= */ new BaseBitrateAdjuster(),
+          /* forceKeyFrameIntervalMs= */ 0, bitrateAdjuster,
           /* sharedContext= */ null);
     }
+  }
+
+  private VideoFrame createTestVideoFrame(long timestampNs) {
+    byte[] i420 = CodecTestHelper.generateRandomData(
+        TEST_ENCODER_SETTINGS.width * TEST_ENCODER_SETTINGS.height * 3 / 2);
+    final VideoFrame.I420Buffer testBuffer =
+        CodecTestHelper.wrapI420(TEST_ENCODER_SETTINGS.width, TEST_ENCODER_SETTINGS.height, i420);
+    return new VideoFrame(testBuffer, /* rotation= */ 0, timestampNs);
   }
 
   @Mock VideoEncoder.Callback mockEncoderCallback;
@@ -263,5 +280,95 @@ public class HardwareVideoEncoderTest {
 
     // Verify.
     assertThat(fakeMediaCodecWrapper.getState()).isEqualTo(State.RELEASED);
+  }
+
+  @Test
+  public void testFramerateWithFramerateBitrateAdjuster() {
+    // Enable FramerateBitrateAdjuster and configure encoder with frame rate 15fps. Verify that our
+    // frame rate setting is ignored and media encoder is initialized with 30fps
+    // (FramerateBitrateAdjuster's default).
+    HardwareVideoEncoder encoder =
+        new TestEncoderBuilder().setBitrateAdjuster(new FramerateBitrateAdjuster()).build();
+    encoder.initEncode(
+        new Settings(
+            /* numberOfCores= */ 1,
+            /* width= */ 640,
+            /* height= */ 480,
+            /* startBitrate= */ 10000,
+            /* maxFramerate= */ 15,
+            /* numberOfSimulcastStreams= */ 1,
+            /* automaticResizeOn= */ true,
+            /* capabilities= */ new VideoEncoder.Capabilities(false /* lossNotification */)),
+        mockEncoderCallback);
+
+    MediaFormat mediaFormat = fakeMediaCodecWrapper.getConfiguredFormat();
+    assertThat(mediaFormat.getInteger(MediaFormat.KEY_FRAME_RATE)).isEqualTo(30);
+  }
+
+  @Test
+  public void testBitrateWithFramerateBitrateAdjuster() {
+    // Verify that FramerateBitrateAdjuster adjusts bit rate when frame rate changes.
+    HardwareVideoEncoder encoder =
+        new TestEncoderBuilder().setBitrateAdjuster(new FramerateBitrateAdjuster()).build();
+    encoder.initEncode(TEST_ENCODER_SETTINGS, mockEncoderCallback);
+
+    encoder.encode(createTestVideoFrame(/* timestampNs= */ 0), ENCODE_INFO_KEY_FRAME);
+
+    // Reduce frame rate by half.
+    BitrateAllocation bitrateAllocation = new BitrateAllocation(
+        /* bitratesBbs= */ new int[][] {new int[] {TEST_ENCODER_SETTINGS.startBitrate}});
+    encoder.setRateAllocation(bitrateAllocation, TEST_ENCODER_SETTINGS.maxFramerate / 2);
+
+    // Generate output to trigger bitrate update in encoder wrapper.
+    fakeMediaCodecWrapper.addOutputData(
+        CodecTestHelper.generateRandomData(100), /* presentationTimestampUs= */ 0, /* flags= */ 0);
+    encoder.waitDeliverEncodedImage();
+
+    // Frame rate has been reduced by half. Verify that bitrate doubled.
+    ArgumentCaptor<Bundle> bundleCaptor = ArgumentCaptor.forClass(Bundle.class);
+    verify(fakeMediaCodecWrapper, times(2)).setParameters(bundleCaptor.capture());
+    Bundle params = bundleCaptor.getAllValues().get(1);
+    assertThat(params.containsKey(MediaCodec.PARAMETER_KEY_VIDEO_BITRATE)).isTrue();
+    assertThat(params.getInt(MediaCodec.PARAMETER_KEY_VIDEO_BITRATE))
+        .isEqualTo(TEST_ENCODER_SETTINGS.startBitrate * 2);
+  }
+
+  @Test
+  public void testTimestampsWithFramerateBitrateAdjuster() {
+    // Verify that encoder calculates frame timestamps based on adjusted framerate when
+    // FramerateBitrateAdjuster is used.
+    HardwareVideoEncoder encoder =
+        new TestEncoderBuilder().setBitrateAdjuster(new FramerateBitrateAdjuster()).build();
+    encoder.initEncode(TEST_ENCODER_SETTINGS, mockEncoderCallback);
+
+    encoder.encode(createTestVideoFrame(/* timestampNs= */ 0), ENCODE_INFO_KEY_FRAME);
+
+    // Reduce frametate by half.
+    BitrateAllocation bitrateAllocation = new BitrateAllocation(
+        /* bitratesBbs= */ new int[][] {new int[] {TEST_ENCODER_SETTINGS.startBitrate}});
+    encoder.setRateAllocation(bitrateAllocation, TEST_ENCODER_SETTINGS.maxFramerate / 2);
+
+    // Encoder is allowed to buffer up to 2 frames. Generate output to avoid frame dropping.
+    fakeMediaCodecWrapper.addOutputData(
+        CodecTestHelper.generateRandomData(100), /* presentationTimestampUs= */ 0, /* flags= */ 0);
+    encoder.waitDeliverEncodedImage();
+
+    encoder.encode(createTestVideoFrame(/* timestampNs= */ 1), ENCODE_INFO_DELTA_FRAME);
+    encoder.encode(createTestVideoFrame(/* timestampNs= */ 2), ENCODE_INFO_DELTA_FRAME);
+
+    ArgumentCaptor<Long> timestampCaptor = ArgumentCaptor.forClass(Long.class);
+    verify(fakeMediaCodecWrapper, times(3))
+        .queueInputBuffer(
+            /* index= */ anyInt(),
+            /* offset= */ anyInt(),
+            /* size= */ anyInt(), timestampCaptor.capture(),
+            /* flags= */ anyInt());
+
+    // We reduce frame rate by half before encoding first delta frame. But this should not affect
+    // frame duration since timestamps are calculated using the fixed frame rate when
+    // FramerateBitrateAdjuster is used.
+    long frameDurationMs = SECONDS.toMicros(1) / FramerateBitrateAdjuster.DEFAULT_FRAMERATE_FPS;
+    assertThat(timestampCaptor.getAllValues())
+        .containsExactly(0L, frameDurationMs, 2 * frameDurationMs);
   }
 }
