@@ -33,6 +33,23 @@
       "message": "Thanks!",
       "revId": "be125659064f2b81a67bc28075a801fd1389b9af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f7adc2_309d018e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-08-16T10:37:40Z",
+      "side": 1,
+      "message": "Do I understand correctly that @available() does not work correctly here?\n\nAlso maybe Mirko will know this, but what versions of macOS do we even support?",
+      "revId": "be125659064f2b81a67bc28075a801fd1389b9af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
