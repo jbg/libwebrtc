@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82fce5ea_5ee58155",
+        "filename": "g3doc/style-guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-16T09:22:33Z",
+      "side": 1,
+      "message": "typo (I will fix later).",
+      "range": {
+        "startLine": 43,
+        "startChar": 24,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de912052_ef96e181",
         "filename": "g3doc/style-guide.md",
         "patchSetId": 1
