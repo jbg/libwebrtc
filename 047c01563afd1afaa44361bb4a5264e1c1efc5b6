@@ -16,6 +16,23 @@
       "message": "LGTM, I added \"[Merge to M93]\" to the desc to make it more clear in the git log.",
       "revId": "047c01563afd1afaa44361bb4a5264e1c1efc5b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64ff9639_963102e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2021-08-16T07:28:25Z",
+      "side": 1,
+      "message": "LGTM\n\nThanks Mirko, I thought I reviewed the same CL last week and that explained it :) ",
+      "revId": "047c01563afd1afaa44361bb4a5264e1c1efc5b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
