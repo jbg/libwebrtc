@@ -38,6 +38,37 @@ Unlike the Chromium and Google C++ style guides, we do not allow C++20-style
 designated initializers, because we want to stay compatible with compilers that
 do not yet support them.
 
+### Namespaces
+
+The top level namespace if `::webrtc`, use it for any new symbol you add. Other
+top level namespaces like `::cricket` and `::rtc` will be migrated to `::webrtc`
+in a future migration so there is no need to move symbols to it.
+
+WebRTC is small enough that nested namespaces should be used sparingly. Before
+adding a nested namespace ask yourself why do you need it and follow the next
+steps to decide how to name it (if none of the following steps helps it might
+be that you don't need a nested namespace):
+
+1. Are the symbols you want to add to a nested namespace in a header file and
+they are supposed to be used only in that header and its associatd .cc file? In
+this case it is fine to use a nested namespace `::webrtc::<HEADER_internal>`
+(if the header is called `array_view.h` the nested namespace will be
+`::webrtc::array_view_internal`).
+
+2. Are the symbols you want to add to a nested namespace supposed to be used by
+more .cc files but all of them are in the same folder? In this case think if it
+is possible to isolate such symbols in a GN build target with limited visibility
+and avoid the nested namespace. If that is not possible or header leakage still
+represents a real issue then it is fine to use a nested namespace
+`::webrtc::<FOLDER_NAME>_internal`.
+
+3. Are the symbols you want to add to a nested namespace supposed to be used
+only by a subset of files in the same folder? This might suggest that a new
+sub-folder is needed but that is not always possible. In such rare cases, nested
+namespaces that represent a logical concept are fine and should follow the
+naming convention `::webrtc::<LOGICAL_CONCEPT>_internal`. These nested
+namespaces need to be documented [here](style-guide/nested-namespaces.md).
+
 ### Abseil
 
 You may use a subset of the utilities provided by the [Abseil][abseil] library
