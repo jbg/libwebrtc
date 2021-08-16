@@ -201,6 +201,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25dc4ae8_5932f65e",
+        "filename": "g3doc/style-guide/nested-namespaces.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-08-16T11:40:31Z",
+      "side": 1,
+      "message": "List of defined nested namespaces?",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 36
+      },
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f91b50cb_f506b7d6",
+        "filename": "g3doc/style-guide/nested-namespaces.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-08-16T11:40:31Z",
+      "side": 1,
+      "message": "Should we also add ::webrtc::webrtc_pc_e2e here as a namespace used by PCLF?",
+      "revId": "f6e042f5cb1c4f9dc260b753522e6903e80017d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c13f1633_b2c44149",
         "filename": "g3doc/style-guide/nested-namespaces.md",
         "patchSetId": 1
