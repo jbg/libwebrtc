@@ -111,6 +111,7 @@ bool RTPSenderVideoFrameTransformerDelegate::TransformFrame(
     const EncodedImage& encoded_image,
     RTPVideoHeader video_header,
     absl::optional<int64_t> expected_retransmission_time_ms) {
+  RTC_CHECK(payload_type >= 0);
   if (!encoder_queue_) {
     // Save the current task queue to post the transformed frame for sending
     // once it is transformed. When there is no current task queue, i.e.
