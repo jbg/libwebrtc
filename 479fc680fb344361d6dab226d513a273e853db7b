@@ -16,6 +16,23 @@
       "message": "fix debug mode assert failed problem.",
       "revId": "479fc680fb344361d6dab226d513a273e853db7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe315163_aefdcf05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-17T06:50:56Z",
+      "side": 1,
+      "message": "LGTM and thanks.\n\nThis was a bug introduced by https://webrtc-review.googlesource.com/c/src/+/224846.",
+      "revId": "479fc680fb344361d6dab226d513a273e853db7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
