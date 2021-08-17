@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "261eab51_5f74329f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-08-17T10:58:42Z",
+      "side": 1,
+      "message": "hta: PTAL. Will only land once the spec PR gets approved.\ntoprice: you might want to read along, the chromium side of this will be incoming soon",
+      "revId": "3d95b75378ac05531422ee07a621cd33e2e9b49b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

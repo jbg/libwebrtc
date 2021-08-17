@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5305e7f_f0256f43",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-08-17T10:58:42Z",
+      "side": 0,
+      "message": "this looks like one of those \"we might use -1 for a payload type that is unset\" cases. That can not happen here imo and an assert that it is \u003e\u003d 0 here: https://webrtc-review.googlesource.com/c/src/+/229022 passed all tests.",
+      "revId": "6b89130d45b1cdedbfc5e223300f8db074ef88f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
