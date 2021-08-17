@@ -67,7 +67,7 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
   const VideoFrameMetadata& GetMetadata() const override { return metadata_; }
 
   const RTPVideoHeader& GetHeader() const { return header_; }
-  int GetPayloadType() const { return payload_type_; }
+  uint8_t GetPayloadType() const override { return payload_type_; }
   absl::optional<VideoCodecType> GetCodecType() const { return codec_type_; }
   int64_t GetCaptureTimeMs() const { return capture_time_ms_; }
 
@@ -80,7 +80,7 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
   const RTPVideoHeader header_;
   const VideoFrameMetadata metadata_;
   const VideoFrameType frame_type_;
-  const int payload_type_;
+  const uint8_t payload_type_;
   const absl::optional<VideoCodecType> codec_type_ = absl::nullopt;
   const uint32_t timestamp_;
   const int64_t capture_time_ms_;
