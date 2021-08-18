@@ -33,6 +33,23 @@
       "message": "LGTM and thanks.\n\nThis was a bug introduced by https://webrtc-review.googlesource.com/c/src/+/224846.",
       "revId": "479fc680fb344361d6dab226d513a273e853db7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dbc6e6c_28651513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-18T07:00:13Z",
+      "side": 1,
+      "message": "Harald, can you stamp (this is a bug introduced by my previous CL).",
+      "revId": "479fc680fb344361d6dab226d513a273e853db7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
