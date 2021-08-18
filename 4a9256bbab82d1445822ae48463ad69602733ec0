@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c58381_22fc23a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2021-08-18T07:02:38Z",
+      "side": 1,
+      "message": "drive by question - nice find",
+      "revId": "4a9256bbab82d1445822ae48463ad69602733ec0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c01a6154_e6b9c956",
+        "filename": "net/dcsctp/socket/transmission_control_block.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2021-08-18T07:02:38Z",
+      "side": 1,
+      "message": "to ease with finding this later should it be TODO(bugs.webrtc.org/12961):...  ?",
+      "revId": "4a9256bbab82d1445822ae48463ad69602733ec0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
