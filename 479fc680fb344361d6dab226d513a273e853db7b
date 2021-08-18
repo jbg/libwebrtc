@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "036e4645_6a4b9da7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-18T10:52:22Z",
+      "side": 1,
+      "message": "Done, I added webrtc:6779.",
+      "parentUuid": "f6cef10d_d86665be",
+      "revId": "479fc680fb344361d6dab226d513a273e853db7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "13e65acf_6ce07427",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -135,6 +153,24 @@
       "side": 1,
       "message": "I have tested the examples/peerconnection and it works.",
       "parentUuid": "24c2fa67_573c1bcb",
+      "revId": "479fc680fb344361d6dab226d513a273e853db7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35f4e24c_732caa22",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2358,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-18T10:52:22Z",
+      "side": 1,
+      "message": "Thanks Qian.\n\nYes, I agree Harald. We need to ask henrika@ about this.",
+      "parentUuid": "6a63ffc7_59986045",
       "revId": "479fc680fb344361d6dab226d513a273e853db7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
