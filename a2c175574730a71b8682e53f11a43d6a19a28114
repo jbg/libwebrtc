@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98ef1d3a_90a8987a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Thanks a lot for the review. I really appreciate it.",
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e6fb306_4a7ee29a",
@@ -31,6 +48,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "Does this add a flag that\u0027s only available in certain versions? Or is this related to behavior wanted by our code? If the former this is probably fine, but if the second consider a typed constant instead e.g. constexpr uint32_t kSpaPodPropFlagMandatory \u003d 1u \u003c\u003c 3;",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 36
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef04bb50_6720f80b",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "These are defines from PipeWire which exist in the most recent versions.\n\nhttps://gitlab.freedesktop.org/pipewire/pipewire/-/blob/master/spa/include/spa/pod/pod.h#L209",
+      "parentUuid": "1e6fb306_4a7ee29a",
       "range": {
         "startLine": 56,
         "startChar": 0,
@@ -64,6 +105,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ec1f21a_36463cb6",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb6025a8_f05f7b7a",
+      "range": {
+        "startLine": 72,
+        "startChar": 9,
+        "endLine": 72,
+        "endChar": 19
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ee1b142_6313d399",
@@ -77,6 +142,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "static is not needed?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 6
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d541c32_bb835913",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ee1b142_6313d399",
       "range": {
         "startLine": 75,
         "startChar": 0,
@@ -110,6 +199,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "287013be_b4de5d24",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3e151b8_bdbeb397",
+      "range": {
+        "startLine": 78,
+        "startChar": 43,
+        "endLine": 78,
+        "endChar": 68
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fa51c2c_fdb25e36",
@@ -123,6 +236,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "please use more descriptive names than c and f",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 21
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f911b45_e75b4df5",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fa51c2c_fdb25e36",
       "range": {
         "startLine": 79,
         "startChar": 0,
@@ -156,6 +293,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee1029f2_2a3e8c0b",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94752b77_65a8f6a6",
+      "range": {
+        "startLine": 92,
+        "startChar": 6,
+        "endLine": 92,
+        "endChar": 22
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cfadc13_f0cc51ad",
@@ -169,6 +330,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "nit: Modifiers from the array.",
+      "range": {
+        "startLine": 106,
+        "startChar": 4,
+        "endLine": 106,
+        "endChar": 31
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e58023a_e3720764",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cfadc13_f0cc51ad",
       "range": {
         "startLine": 106,
         "startChar": 4,
@@ -196,6 +381,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fbecabf_4531db33",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7780c498_0788156f",
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e3db9dd_02eed78b",
@@ -209,6 +412,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "so for the first modifier we add it twice? why? Seems like it deserves a comment :)",
+      "range": {
+        "startLine": 109,
+        "startChar": 6,
+        "endLine": 111,
+        "endChar": 7
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e01a4f9_7fb07a14",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e3db9dd_02eed78b",
       "range": {
         "startLine": 109,
         "startChar": 6,
@@ -242,6 +469,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "911137ca_0b7adf6d",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdbcf9f0_81f90a61",
+      "range": {
+        "startLine": 282,
+        "startChar": 8,
+        "endLine": 282,
+        "endChar": 12
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c315de1_2d07fb81",
@@ -255,6 +506,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "This looks odd, if version is \u003e\u003d 0.3.29 and there are parameters, you\u0027ll build the format twice now, both with and without modifiers. Is that intended?",
+      "range": {
+        "startLine": 508,
+        "startChar": 4,
+        "endLine": 508,
+        "endChar": 59
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "723402e0_e553dc0d",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Yes, it is intended. From the documentation:\n\nThe stream parameters should contain two `SPA_PARAM_EnumFormat` objects: the\nfirst one is used for DMA-BUFs, the second one for shared memory buffers as a\nfallback.\n\nTherefore the first one is with modifiers (if we have newer PipeWire), the second one is without modifiers for SHM buffers.",
+      "parentUuid": "7c315de1_2d07fb81",
       "range": {
         "startLine": 508,
         "startChar": 4,
@@ -288,6 +563,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57c00538_3d1e31e3",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Good suggestion!!",
+      "parentUuid": "a950b34a_80ecc7bd",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 522,
+        "endChar": 0
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acad3953_e51bc56a",
@@ -301,6 +600,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "Prefer returning \"\" explicitly rather than relying on `render_node` being empty at this point. Same below.\nAlternatively, consider absl::optional\u003cstd::string\u003e as return type.",
+      "range": {
+        "startLine": 87,
+        "startChar": 11,
+        "endLine": 87,
+        "endChar": 22
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6030989f_f67dabe0",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acad3953_e51bc56a",
       "range": {
         "startLine": 87,
         "startChar": 11,
@@ -334,6 +657,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19636262_08b52b7e",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e6c087d_3dcba0a5",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 76
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6801abe3_b14bb46c",
@@ -347,6 +694,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "consider using absl::StrSplit or similar, I think this should work and allow you to remove a few things here\n\nfor (const auto\u0026 extension : absl::StrSplit(client_extensions_cstring_no_display, \" \")) {\n  egl_.extesions.push_back(extension);\n}",
+      "range": {
+        "startLine": 151,
+        "startChar": 1,
+        "endLine": 153,
+        "endChar": 29
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa2d864_a36a1513",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "That\u0027s what I\u0027ve been looking for. Thanks.",
+      "parentUuid": "6801abe3_b14bb46c",
       "range": {
         "startLine": 151,
         "startChar": 1,
@@ -380,6 +751,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd60223f_231aa966",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "I need both to be present, not one or the other.",
+      "parentUuid": "43bdaefa_094bc543",
+      "range": {
+        "startLine": 159,
+        "startChar": 2,
+        "endLine": 160,
+        "endChar": 36
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75fa8b31_93511e29",
@@ -393,6 +788,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "for (const auto\u0026 extension : egl_.extensions)",
+      "range": {
+        "startLine": 162,
+        "startChar": 7,
+        "endLine": 162,
+        "endChar": 75
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ebf12d6_9ebd5096",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75fa8b31_93511e29",
       "range": {
         "startLine": 162,
         "startChar": 7,
@@ -426,6 +845,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86322802_9c3a3629",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52dedc05_2571382c",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 216,
+        "endChar": 78
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "640615b5_c7553d6a",
@@ -439,6 +882,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "import_info",
+      "range": {
+        "startLine": 265,
+        "startChar": 23,
+        "endLine": 265,
+        "endChar": 33
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4e4910b_70d25ed7",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "640615b5_c7553d6a",
       "range": {
         "startLine": 265,
         "startChar": 23,
@@ -472,6 +939,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48879cd5_0755728f",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b88f9582_1ad8e24f",
+      "range": {
+        "startLine": 266,
+        "startChar": 8,
+        "endLine": 266,
+        "endChar": 24
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dac087b_7c3234ab",
@@ -485,6 +976,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "cast not needed",
+      "range": {
+        "startLine": 267,
+        "startChar": 46,
+        "endLine": 267,
+        "endChar": 67
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ad660a_b5b468d2",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dac087b_7c3234ab",
       "range": {
         "startLine": 267,
         "startChar": 46,
@@ -518,6 +1033,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7701521e_3be1af8d",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "743f9972_bd153587",
+      "range": {
+        "startLine": 278,
+        "startChar": 9,
+        "endLine": 278,
+        "endChar": 13
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3778d7a_a3a63ae1",
@@ -541,6 +1080,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3d6357d_60c328a9",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3778d7a_a3a63ae1",
+      "range": {
+        "startLine": 344,
+        "startChar": 2,
+        "endLine": 344,
+        "endChar": 13
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "432d5daf_fab6f27c",
@@ -554,6 +1117,30 @@
       "writtenOn": "2021-08-18T12:10:12Z",
       "side": 1,
       "message": "enough to just \nreturn {};\n\nsame below, e.g. return {DRM_FORMAT_MOD_INVALID};",
+      "range": {
+        "startLine": 361,
+        "startChar": 11,
+        "endLine": 361,
+        "endChar": 34
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "954d1eb7_02505f78",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "432d5daf_fab6f27c",
       "range": {
         "startLine": 361,
         "startChar": 11,
