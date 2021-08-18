@@ -69,6 +69,24 @@
       "parentUuid": "f766d763_423afe3f",
       "revId": "4a9256bbab82d1445822ae48463ad69602733ec0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d940c7b1_20134b7d",
+        "filename": "net/dcsctp/socket/transmission_control_block.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-08-18T07:07:25Z",
+      "side": 1,
+      "message": "Then I\u0027ll keep it as it is. Thanks for the comment, though. Resolving.",
+      "parentUuid": "fef732de_3ebbbfb9",
+      "revId": "4a9256bbab82d1445822ae48463ad69602733ec0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
