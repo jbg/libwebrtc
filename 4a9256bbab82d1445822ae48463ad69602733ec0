@@ -33,6 +33,24 @@
       "message": "to ease with finding this later should it be TODO(bugs.webrtc.org/12961):...  ?",
       "revId": "4a9256bbab82d1445822ae48463ad69602733ec0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f766d763_423afe3f",
+        "filename": "net/dcsctp/socket/transmission_control_block.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-08-18T07:04:56Z",
+      "side": 1,
+      "message": "My intention is to be able to close 12961 once this commit has proven to work. I could instead reference the usrsctp upstream issue (https://github.com/sctplab/usrsctp/issues/597) if you think that\u0027s better?",
+      "parentUuid": "c01a6154_e6b9c956",
+      "revId": "4a9256bbab82d1445822ae48463ad69602733ec0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
