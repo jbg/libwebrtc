@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9755a47_2c9f78fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T14:04:30Z",
+      "side": 1,
+      "message": "Thanks! lgtm % nits",
+      "revId": "6face0059fb6a06bed61c5fffcdd41d9b42c5d15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84f7e67d_db394691",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 30
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T14:04:30Z",
+      "side": 1,
+      "message": "nullopt here too?",
+      "range": {
+        "startLine": 94,
+        "startChar": 11,
+        "endLine": 94,
+        "endChar": 13
+      },
+      "revId": "6face0059fb6a06bed61c5fffcdd41d9b42c5d15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6d542e5_4cbafba5",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 30
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T14:04:30Z",
+      "side": 1,
+      "message": "Since you switched to an optional for GetRenderNode(), capture that here e.g.\n\nabsl::optional\u003cstd::string\u003e render_node \u003d GetRenderNode();\nif (!render_node) {\n  return;\n}\ndrm_fd_ \u003d open(render_node-\u003ec_str(), O_RDWR);",
+      "revId": "6face0059fb6a06bed61c5fffcdd41d9b42c5d15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c4318d8_9a92e47b",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 30
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T14:04:30Z",
+      "side": 1,
+      "message": "You can simplify all of these below too.",
+      "range": {
+        "startLine": 359,
+        "startChar": 4,
+        "endLine": 359,
+        "endChar": 57
+      },
+      "revId": "6face0059fb6a06bed61c5fffcdd41d9b42c5d15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

@@ -317,6 +317,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9681505_a40eabf4",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T14:04:30Z",
+      "side": 1,
+      "message": "Think you missed this",
+      "parentUuid": "ee1029f2_2a3e8c0b",
+      "range": {
+        "startLine": 92,
+        "startChar": 6,
+        "endLine": 92,
+        "endChar": 22
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cfadc13_f0cc51ad",
@@ -530,6 +554,30 @@
       "side": 1,
       "message": "Yes, it is intended. From the documentation:\n\nThe stream parameters should contain two `SPA_PARAM_EnumFormat` objects: the\nfirst one is used for DMA-BUFs, the second one for shared memory buffers as a\nfallback.\n\nTherefore the first one is with modifiers (if we have newer PipeWire), the second one is without modifiers for SHM buffers.",
       "parentUuid": "7c315de1_2d07fb81",
+      "range": {
+        "startLine": 508,
+        "startChar": 4,
+        "endLine": 508,
+        "endChar": 59
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6278660b_bd25a44b",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T14:04:30Z",
+      "side": 1,
+      "message": "Ah, thanks for clarifying.",
+      "parentUuid": "723402e0_e553dc0d",
       "range": {
         "startLine": 508,
         "startChar": 4,
@@ -765,6 +813,30 @@
       "side": 1,
       "message": "I need both to be present, not one or the other.",
       "parentUuid": "43bdaefa_094bc543",
+      "range": {
+        "startLine": 159,
+        "startChar": 2,
+        "endLine": 160,
+        "endChar": 36
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44427f2b_179549d0",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T14:04:30Z",
+      "side": 1,
+      "message": "Ack, I misread :)",
+      "parentUuid": "bd60223f_231aa966",
       "range": {
         "startLine": 159,
         "startChar": 2,
