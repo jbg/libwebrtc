@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a93c3449_1da5c7bb",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 30
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T14:27:18Z",
+      "side": 1,
+      "message": "Oh, yes, missed that one.",
+      "parentUuid": "84f7e67d_db394691",
+      "range": {
+        "startLine": 94,
+        "startChar": 11,
+        "endLine": 94,
+        "endChar": 13
+      },
+      "revId": "6face0059fb6a06bed61c5fffcdd41d9b42c5d15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6d542e5_4cbafba5",
@@ -58,6 +82,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a9a997_adfecf72",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 30
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T14:27:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6d542e5_4cbafba5",
+      "revId": "6face0059fb6a06bed61c5fffcdd41d9b42c5d15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c4318d8_9a92e47b",
@@ -71,6 +113,30 @@
       "writtenOn": "2021-08-18T14:04:30Z",
       "side": 1,
       "message": "You can simplify all of these below too.",
+      "range": {
+        "startLine": 359,
+        "startChar": 4,
+        "endLine": 359,
+        "endChar": 57
+      },
+      "revId": "6face0059fb6a06bed61c5fffcdd41d9b42c5d15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64e15314_507e5f98",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 30
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-18T14:27:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c4318d8_9a92e47b",
       "range": {
         "startLine": 359,
         "startChar": 4,
