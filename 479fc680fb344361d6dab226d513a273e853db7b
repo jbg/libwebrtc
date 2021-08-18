@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "850ae93b_bc036384",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-18T10:26:37Z",
+      "side": 1,
+      "message": "Can you add a bug number? The bug that was used by the CL that introduced the bug will do fine :-)",
+      "revId": "479fc680fb344361d6dab226d513a273e853db7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "13e65acf_6ce07427",
@@ -48,6 +65,40 @@
       "writtenOn": "2021-08-18T07:00:13Z",
       "side": 1,
       "message": "Harald, can you stamp (this is a bug introduced by my previous CL).",
+      "revId": "479fc680fb344361d6dab226d513a273e853db7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21b32969_2e9f3d34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-18T10:26:37Z",
+      "side": 1,
+      "message": "+1 to get out of the way, but I worry about there being no tests covering this code.\n",
+      "revId": "479fc680fb344361d6dab226d513a273e853db7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24c2fa67_573c1bcb",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2358,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-18T10:26:37Z",
+      "side": 1,
+      "message": "This was obviously not caught by tests. Is it possible to exercise this code from a test? (anything that calls this function should expose the bug, it seems - so it seems that this function has zero test coverage, which is not a happy place).",
       "revId": "479fc680fb344361d6dab226d513a273e853db7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
