@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '680b7dae9d798185da195bcf15e2cccaedacf8c5',
+  'chromium_revision': 'bb249695be8dc76c79d6b5ebd7cb765bb5160f9d',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -20,7 +20,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@4bcc0feab1b6be3bff376c621fa7c013660900ac',
+    'https://chromium.googlesource.com/chromium/src/base@12a87e0f67777534b392790a9a800093926a554b',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@02ca29f24d0a070cbc55c18f3c0cc32e2e0d0c96',
   'src/buildtools':
@@ -31,13 +31,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@4bdd6cc72d7757f193eb02563d1d944a78f34991',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@94f3f5af6be669bb3b6372a91528c5954f9d6b1f',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@e3201c323dcfaba4bd4c3a0001fa218addca407e',
+    'https://chromium.googlesource.com/chromium/src/testing@c5717aa498168967175a6724bdf517e88a5ef87e',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@0f2f057998273e2f9846bea612b2742e22cd8d39',
+    'https://chromium.googlesource.com/chromium/src/third_party@358ff674c99b57c8448b7bf6c5a44a1cceecbf76',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -372,7 +372,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': '8ehN1uRQQBM3VrBh28TpSvhV4AmGQRMCfN6Fm1L5y9QC',
+          'version': 'DehTXO66o3yGYEs8yTaO9Gdhlx_OsEL5wMtn2Wgfsr8C',
       },
     ],
     'condition': 'checkout_android',
