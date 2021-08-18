@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6cef10d_d86665be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 18144
+      },
+      "writtenOn": "2021-08-18T10:46:03Z",
+      "side": 1,
+      "message": "Ok,modified.",
+      "parentUuid": "850ae93b_bc036384",
+      "revId": "479fc680fb344361d6dab226d513a273e853db7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "13e65acf_6ce07427",
@@ -99,6 +117,24 @@
       "writtenOn": "2021-08-18T10:26:37Z",
       "side": 1,
       "message": "This was obviously not caught by tests. Is it possible to exercise this code from a test? (anything that calls this function should expose the bug, it seems - so it seems that this function has zero test coverage, which is not a happy place).",
+      "revId": "479fc680fb344361d6dab226d513a273e853db7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a63ffc7_59986045",
+        "filename": "modules/audio_device/win/audio_device_core_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2358,
+      "author": {
+        "id": 18144
+      },
+      "writtenOn": "2021-08-18T10:46:03Z",
+      "side": 1,
+      "message": "I have tested the examples/peerconnection and it works.",
+      "parentUuid": "24c2fa67_573c1bcb",
       "revId": "479fc680fb344361d6dab226d513a273e853db7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
