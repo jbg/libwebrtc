@@ -1,0 +1,567 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecd9d029_a8d438ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "Don\u0027t know this domain, so mostly style comments.\nUnfortunately I don\u0027t think we have a good owner for this code base within the webrtc team at the moment :( ",
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e6fb306_4a7ee29a",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "Does this add a flag that\u0027s only available in certain versions? Or is this related to behavior wanted by our code? If the former this is probably fine, but if the second consider a typed constant instead e.g. constexpr uint32_t kSpaPodPropFlagMandatory \u003d 1u \u003c\u003c 3;",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 36
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb6025a8_f05f7b7a",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "If sscanf fails to parse the string this may have undefined value. Suggest adding default values for the struct members.",
+      "range": {
+        "startLine": 72,
+        "startChar": 9,
+        "endLine": 72,
+        "endChar": 19
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee1b142_6313d399",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "static is not needed?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 6
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3e151b8_bdbeb397",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "avoid default parameters, call with (..., /*modifiers\u003d*/ {}); below instead",
+      "range": {
+        "startLine": 78,
+        "startChar": 43,
+        "endLine": 78,
+        "endChar": 68
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa51c2c_fdb25e36",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "please use more descriptive names than c and f",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 21
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94752b77_65a8f6a6",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "if (!modifiers.empty()) {",
+      "range": {
+        "startLine": 92,
+        "startChar": 6,
+        "endLine": 92,
+        "endChar": 22
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cfadc13_f0cc51ad",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "nit: Modifiers from the array.",
+      "range": {
+        "startLine": 106,
+        "startChar": 4,
+        "endLine": 106,
+        "endChar": 31
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7780c498_0788156f",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "for (int64_t val : modifiers) {",
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e3db9dd_02eed78b",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "so for the first modifier we add it twice? why? Seems like it deserves a comment :)",
+      "range": {
+        "startLine": 109,
+        "startChar": 6,
+        "endLine": 111,
+        "endChar": 7
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdbcf9f0_81f90a61",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "Avoid auto for simple types. Great for long bloated iterator types, but I think \"const spa_pod_prop*\" is more readable than \"const auto\".",
+      "range": {
+        "startLine": 282,
+        "startChar": 8,
+        "endLine": 282,
+        "endChar": 12
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c315de1_2d07fb81",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "This looks odd, if version is \u003e\u003d 0.3.29 and there are parameters, you\u0027ll build the format twice now, both with and without modifiers. Is that intended?",
+      "range": {
+        "startLine": 508,
+        "startChar": 4,
+        "endLine": 508,
+        "endChar": 59
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a950b34a_80ecc7bd",
+        "filename": "modules/desktop_capture/linux/base_capturer_pipewire.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "This is written in a very c-style way at the moment, despite being in a c++ method. Not sure where to draw the style guide lines since the API you\u0027re using is c. But my suggestion would be to rewrite it along these lines (off the cuff, not sure it will compile, but you should get the idea :) )\n\n\n\n  pw_properties* reuseProps \u003d\n      pw_properties_new_string(\"pipewire.client.reuse\u003d1\");\n  auto stream \u003d pw_stream_new(pw_core_, \"webrtc-consume-stream\", reuseProps);\n\n  uint8_t buffer[2048] \u003d {};\n  spa_pod_builder builder(buffer, sizeof(buffer));\n  const pw_version pw_version \u003d ParsePipeWireVersion(pw_get_library_version());\n  std::vector\u003cconst spa_pod*\u003e params;\n\n  for (uint32_t format : { SPA_VIDEO_FORMAT_BGRA,\n                           SPA_VIDEO_FORMAT_RGBA,\n                           SPA_VIDEO_FORMAT_BGRx,\n                           SPA_VIDEO_FORMAT_RGBx}) {\n    // Modifiers can be used with PipeWire \u003e\u003d 0.3.29\n    if (pw_version.major \u003e\u003d 0 \u0026\u0026 pw_version.minor \u003e\u003d 3 \u0026\u0026\n        pw_version.micro \u003e\u003d 29) {\n      std::vector\u003cuint64_t\u003e modifiers \u003d egl_dmabuf_-\u003eQueryDmaBufModifiers(format);\n      if (!modifiers.empty()) {\n        params.push_back(BuildFormat(\u0026builder, format, modifiers);\n      }\n    }\n    params.push_back(BuildFormat(\u0026builder, format, /*modifiers\u003d*/{});\n  }\n\n  pw_stream_add_listener(stream, \u0026spa_stream_listener_, \u0026pw_stream_events_,\n                         this);\n  if (pw_stream_connect(stream, PW_DIRECTION_INPUT, pw_stream_node_id_,\n                        PW_STREAM_FLAG_AUTOCONNECT, params.data(), params.size()) !\u003d 0) {\n    RTC_LOG(LS_ERROR) \u003c\u003c \"Could not connect receiving stream.\";\n    portal_init_failed_ \u003d true;\n    return nullptr;\n  }\n\n  return stream;",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 522,
+        "endChar": 0
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acad3953_e51bc56a",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "Prefer returning \"\" explicitly rather than relying on `render_node` being empty at this point. Same below.\nAlternatively, consider absl::optional\u003cstd::string\u003e as return type.",
+      "range": {
+        "startLine": 87,
+        "startChar": 11,
+        "endLine": 87,
+        "endChar": 22
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e6c087d_3dcba0a5",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "Suggest using a container for this, rather than calloc/free.",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 76
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6801abe3_b14bb46c",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "consider using absl::StrSplit or similar, I think this should work and allow you to remove a few things here\n\nfor (const auto\u0026 extension : absl::StrSplit(client_extensions_cstring_no_display, \" \")) {\n  egl_.extesions.push_back(extension);\n}",
+      "range": {
+        "startLine": 151,
+        "startChar": 1,
+        "endLine": 153,
+        "endChar": 29
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43bdaefa_094bc543",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "None of these are used except for the check below on L172.\nConsider having a common has_platform_base_or_gbm_ext instead, then you can set it to true and abort; inside the for loop as soon as you find one or the other.",
+      "range": {
+        "startLine": 159,
+        "startChar": 2,
+        "endLine": 160,
+        "endChar": 36
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75fa8b31_93511e29",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "for (const auto\u0026 extension : egl_.extensions)",
+      "range": {
+        "startLine": 162,
+        "startChar": 7,
+        "endLine": 162,
+        "endChar": 75
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52dedc05_2571382c",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 216,
+        "endChar": 78
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "640615b5_c7553d6a",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "import_info",
+      "range": {
+        "startLine": 265,
+        "startChar": 23,
+        "endLine": 265,
+        "endChar": 33
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b88f9582_1ad8e24f",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "int should be the same as int32_t here, so don\u0027t think this cast is needed?",
+      "range": {
+        "startLine": 266,
+        "startChar": 8,
+        "endLine": 266,
+        "endChar": 24
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dac087b_7c3234ab",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "cast not needed",
+      "range": {
+        "startLine": 267,
+        "startChar": 46,
+        "endLine": 267,
+        "endChar": 67
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "743f9972_bd153587",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "uint32_t ?",
+      "range": {
+        "startLine": 278,
+        "startChar": 9,
+        "endLine": 278,
+        "endChar": 13
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3778d7a_a3a63ae1",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "I don\u0027t think you can actually hit this, unless the allocation on L319 failed perhaps?\nNot sure how to check for error conditions from glGetTexImage(), is it glGetError() maybe?",
+      "range": {
+        "startLine": 344,
+        "startChar": 2,
+        "endLine": 344,
+        "endChar": 13
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "432d5daf_fab6f27c",
+        "filename": "modules/desktop_capture/linux/egl_dmabuf.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-18T12:10:12Z",
+      "side": 1,
+      "message": "enough to just \nreturn {};\n\nsame below, e.g. return {DRM_FORMAT_MOD_INVALID};",
+      "range": {
+        "startLine": 361,
+        "startChar": 11,
+        "endLine": 361,
+        "endChar": 34
+      },
+      "revId": "a2c175574730a71b8682e53f11a43d6a19a28114",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
