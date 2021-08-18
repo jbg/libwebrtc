@@ -16,6 +16,23 @@
       "message": "Andrey, Per, Ilya PTAL.",
       "revId": "d7250b47ad94147a93c2152095a35eeae18abbe4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcaa8334_87f70c8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-08-18T08:00:26Z",
+      "side": 1,
+      "message": "Mirko, Gerrit is complaining, that self-approvals are not allowed. Remember to remove self+1 before landing.",
+      "revId": "d7250b47ad94147a93c2152095a35eeae18abbe4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
