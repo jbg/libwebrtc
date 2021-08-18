@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f3ae92_6d1ac0fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-18T07:57:38Z",
+      "side": 1,
+      "message": "Andrey, Per, Ilya PTAL.",
+      "revId": "d7250b47ad94147a93c2152095a35eeae18abbe4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
