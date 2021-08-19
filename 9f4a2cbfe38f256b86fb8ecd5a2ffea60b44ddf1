@@ -22,6 +22,30 @@
       },
       "revId": "9f4a2cbfe38f256b86fb8ecd5a2ffea60b44ddf1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d8e5044_420f6b2e",
+        "filename": "modules/video_coding/utility/vp9_uncompressed_header_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-19T11:20:15Z",
+      "side": 1,
+      "message": "Changed to kSegmentationFeatureBits[j] \u003d\u003d 0\n\nNot sure we get much from reorganizing. Calling ReadBoolean() directly is iffy since we the reading itself may fail.",
+      "parentUuid": "a27cfe6d_cb4276cd",
+      "range": {
+        "startLine": 389,
+        "startChar": 21,
+        "endLine": 389,
+        "endChar": 35
+      },
+      "revId": "9f4a2cbfe38f256b86fb8ecd5a2ffea60b44ddf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
