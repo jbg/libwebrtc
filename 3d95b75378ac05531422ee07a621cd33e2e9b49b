@@ -70,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "187c613f_1141b700",
+        "filename": "api/frame_transformer_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-19T10:47:43Z",
+      "side": 1,
+      "message": "reason for 255 rather than -1 here is that you explicitly return an uint8_t, which means that probably it\u0027s going to come out as 255 anyway, but trusting the compiler to silently do the cropping for you is a Bad Thing.",
+      "parentUuid": "ef44ec8c_ae32c503",
+      "revId": "3d95b75378ac05531422ee07a621cd33e2e9b49b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f14931f_04c94ae9",
@@ -83,6 +101,24 @@
       "writtenOn": "2021-08-19T09:35:54Z",
       "side": 1,
       "message": "if you DCHECK(), here\u0027s a good place to also do it.",
+      "revId": "3d95b75378ac05531422ee07a621cd33e2e9b49b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b32228_496806b4",
+        "filename": "video/rtp_video_stream_receiver_frame_transformer_delegate.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-19T10:47:43Z",
+      "side": 1,
+      "message": "but VCMEncodedFrame::PayloadType returns an uint8_t, so not so necessary.",
+      "parentUuid": "2f14931f_04c94ae9",
       "revId": "3d95b75378ac05531422ee07a621cd33e2e9b49b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
