@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2df9467_bc32d2bc",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-19T17:05:05Z",
+      "side": 1,
+      "message": "Super nit: enum class?",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 4
+      },
+      "revId": "99c9430a8b07cbda8ab9ddee3f05fd18664d833b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d549bd_0f4b627a",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1784,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-19T17:05:05Z",
+      "side": 1,
+      "message": "Is this part of the CL?\n\n(I am not familiar with this area of the codebase and this looks unrelated from the flag change).",
+      "range": {
+        "startLine": 1783,
+        "startChar": 0,
+        "endLine": 1784,
+        "endChar": 30
+      },
+      "revId": "99c9430a8b07cbda8ab9ddee3f05fd18664d833b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
