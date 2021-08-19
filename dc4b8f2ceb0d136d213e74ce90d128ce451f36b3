@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfdc600b_cb3e7872",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2021-08-19T17:58:26Z",
+      "side": 1,
+      "message": "I also like that idea as that would remove the need for changing application codes that set includeWifiDirect flag. However, I see that NetworkMonitor is created as a singleton and can\u0027t find a place for doing the lookup for passing in the argument to constructor without adding public static set method.\n\nI would appreciate if you can suggest a way to make this happen. Thanks!",
+      "parentUuid": "c9ad866e_d94765d2",
+      "revId": "dc4b8f2ceb0d136d213e74ce90d128ce451f36b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "719aa150_0b0c5fd7",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-08-19T07:45:45Z",
       "side": 1,
       "message": "Maybe prefix with \"set\"? setIncludeWifiDirect",
+      "range": {
+        "startLine": 613,
+        "startChar": 21,
+        "endLine": 613,
+        "endChar": 38
+      },
+      "revId": "dc4b8f2ceb0d136d213e74ce90d128ce451f36b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a1c7863_e9d0d66f",
+        "filename": "sdk/android/api/org/webrtc/NetworkMonitorAutoDetect.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2021-08-19T17:58:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "719aa150_0b0c5fd7",
       "range": {
         "startLine": 613,
         "startChar": 21,
