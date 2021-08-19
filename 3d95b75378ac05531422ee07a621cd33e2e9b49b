@@ -16,6 +16,57 @@
       "message": "hta: PTAL. Will only land once the spec PR gets approved.\ntoprice: you might want to read along, the chromium side of this will be incoming soon",
       "revId": "3d95b75378ac05531422ee07a621cd33e2e9b49b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "104931ae_232c27cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-19T09:35:54Z",
+      "side": 1,
+      "message": "Apart from the choice of \"not implemented\" value, I think this is good to go.\nRTC_DCHECK is an option.\n",
+      "revId": "3d95b75378ac05531422ee07a621cd33e2e9b49b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3c8d055_9973cf46",
+        "filename": "api/frame_transformer_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-19T09:35:54Z",
+      "side": 1,
+      "message": "can you make the default implementation return 255?\n0 is a valid value (static:PCMU), while 255 is not (max legal value is 127).",
+      "revId": "3d95b75378ac05531422ee07a621cd33e2e9b49b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f14931f_04c94ae9",
+        "filename": "video/rtp_video_stream_receiver_frame_transformer_delegate.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-19T09:35:54Z",
+      "side": 1,
+      "message": "if you DCHECK(), here\u0027s a good place to also do it.",
+      "revId": "3d95b75378ac05531422ee07a621cd33e2e9b49b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
