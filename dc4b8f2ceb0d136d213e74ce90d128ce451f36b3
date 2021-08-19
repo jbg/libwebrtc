@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64bb1c8_54bc1d24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-08-19T07:45:45Z",
+      "side": 1,
+      "message": "+Jonas to take a look.",
+      "revId": "dc4b8f2ceb0d136d213e74ce90d128ce451f36b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "719aa150_0b0c5fd7",
+        "filename": "sdk/android/api/org/webrtc/NetworkMonitorAutoDetect.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-08-19T07:45:45Z",
+      "side": 1,
+      "message": "Maybe prefix with \"set\"? setIncludeWifiDirect",
+      "range": {
+        "startLine": 613,
+        "startChar": 21,
+        "endLine": 613,
+        "endChar": 38
+      },
+      "revId": "dc4b8f2ceb0d136d213e74ce90d128ce451f36b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
