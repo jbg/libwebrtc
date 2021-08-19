@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9ad866e_d94765d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8527
+      },
+      "writtenOn": "2021-08-19T09:57:33Z",
+      "side": 1,
+      "message": "Would of course much prefer to remove the access to PeerConnectionFactory\nand have the includeWifiDirect as argument to constructor...\n\nNo idea how much work that is though ??",
+      "revId": "dc4b8f2ceb0d136d213e74ce90d128ce451f36b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "719aa150_0b0c5fd7",
