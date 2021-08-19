@@ -34,6 +34,24 @@
       "parentUuid": "342d5e72_9c095bf9",
       "revId": "1bba17fe0bf6302a05454f70bc49b934d04a0e15",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc30703a_98f2d0ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-08-19T16:16:56Z",
+      "side": 1,
+      "message": "It is backporting of cl/388453152 and cl/388519278. The changes are covered with unit tests. I\u0027m going to land it.",
+      "parentUuid": "1670c556_e7923b4d",
+      "revId": "1bba17fe0bf6302a05454f70bc49b934d04a0e15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
