@@ -86,6 +86,54 @@
       },
       "revId": "1be1dcdc25768eaa98b719b03d1061fc0ba0465f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2face7b5_a81c349f",
+        "filename": "modules/audio_coding/neteq/statistics_calculator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-08-19T15:24:09Z",
+      "side": 1,
+      "message": "ah, I was only considering it as a readability improvement, but a very small one. Let\u0027s skip it.",
+      "parentUuid": "eb1426d3_18c59b28",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 46
+      },
+      "revId": "1be1dcdc25768eaa98b719b03d1061fc0ba0465f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12fb2fab_bcd87b0d",
+        "filename": "modules/audio_coding/neteq/statistics_calculator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2021-08-19T15:24:09Z",
+      "side": 1,
+      "message": "this comment was duplicated",
+      "parentUuid": "67b46ef5_982f2442",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 46
+      },
+      "revId": "1be1dcdc25768eaa98b719b03d1061fc0ba0465f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
