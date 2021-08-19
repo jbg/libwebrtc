@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef44ec8c_ae32c503",
+        "filename": "api/frame_transformer_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-08-19T09:59:47Z",
+      "side": 1,
+      "message": "this will be gone soon but ok.\n\nMaybe 255 instead of -1 is also an option for the other cases where -1 is used as payload type -- thinking of https://webrtc-review.googlesource.com/c/src/+/214301",
+      "parentUuid": "a3c8d055_9973cf46",
+      "revId": "3d95b75378ac05531422ee07a621cd33e2e9b49b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f14931f_04c94ae9",
         "filename": "video/rtp_video_stream_receiver_frame_transformer_delegate.cc",
         "patchSetId": 5
