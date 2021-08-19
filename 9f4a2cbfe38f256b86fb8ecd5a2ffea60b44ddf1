@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a27cfe6d_cb4276cd",
+        "filename": "modules/video_coding/utility/vp9_uncompressed_header_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-08-19T10:22:36Z",
+      "side": 1,
+      "message": "I can\u0027t find such condition in the vp9 spec.\nif you want closer match syntax in the spec, may be instead write\n  if (kSegmentationFeatureBits[j] \u003d\u003d 0)\n\nif you want this code to be a bit more compact, may be use different loop:\n  for (size_t j \u003d 0; j \u003c kVp9SegLvlMax - 1; ++j) {\n    RETURIN_IF_FALSE(...);\n  }\n  frame_info-\u003esegmentation_features[i][kVp9SegLvlSkip] \u003d ReadBoolean();",
+      "range": {
+        "startLine": 389,
+        "startChar": 21,
+        "endLine": 389,
+        "endChar": 35
+      },
+      "revId": "9f4a2cbfe38f256b86fb8ecd5a2ffea60b44ddf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
