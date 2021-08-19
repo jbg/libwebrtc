@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "342d5e72_9c095bf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-08-19T12:08:53Z",
+      "side": 1,
+      "message": "Asa has some issue with her laptop. Danil, could you please take a look?",
+      "revId": "1bba17fe0bf6302a05454f70bc49b934d04a0e15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
