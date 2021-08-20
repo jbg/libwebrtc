@@ -33,6 +33,24 @@
       "message": "but a different solution to your problem would be to set the field-trial.\nis that something you have considered ?",
       "revId": "7ebbb789472d57b55846b27bd78a6c6866b63fe3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f350edc8_ba11e516",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2021-08-20T16:19:46Z",
+      "side": 1,
+      "message": "I am not trying to use directWifiManger but rather trying to remove PeerConnectionFactory usage which is preventing NetworkManager build separation. I am currently at step 1).\n\n1) Add setIncludeWifiDirect public static method.\n2) Change application code to set directly without using field trial.\n3) Remove PeerConnectionFactory usage in NetworkMonitorAutoDetect class.\n4) Create a separate NetworkManger build from peerconnection_java build.\n5) Now Android application that uses VoipEngine API can include android network monitor without including PeerConnection related java classes.",
+      "parentUuid": "5af0154d_b4e5e2e8",
+      "revId": "7ebbb789472d57b55846b27bd78a6c6866b63fe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
