@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ba323c_e8c5be03",
+        "filename": "rtc_base/cpu_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5509
+      },
+      "writtenOn": "2021-08-20T15:03:05Z",
+      "side": 1,
+      "message": "(The motivation is to not have this `return -1` in fuchsia builds since the fuchsia block above returns 0 unconditionally)",
+      "revId": "4d575c12b0b992d3a24759348224d17d05e393a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
