@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f4a6d1_de9f9ef9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5296
+      },
+      "writtenOn": "2021-08-23T23:25:51Z",
+      "side": 1,
+      "message": "This is a slightly tricky cleanup CL. I found it because this header was causing annoying namespace pollution in Chrome. The fix technique mirrors base\\win\\windows_types.h. Landing and rolling this requires some preparatory fixes in Chromium which I will do first if this looks good.\n\nThis could break other downstream clients that are inadvertently relying on shared_memory.h pulling in all of windows.h. Thoughts?",
+      "revId": "ab0b07d35a8fa5ece186a86b282b52fff314e511",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
