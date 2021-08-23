@@ -14,7 +14,13 @@
 #include <stddef.h>
 
 #if defined(WEBRTC_WIN)
-#include <windows.h>
+typedef void* HANDLE;
+
+#define CHROME_DECLARE_HANDLE(name) \
+  struct name##__;                  \
+  typedef struct name##__* name
+CHROME_DECLARE_HANDLE(HMONITOR);
+#undef CHROME_DECLARE_HANDLE
 #endif
 
 #include <memory>
