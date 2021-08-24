@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bec6c3a1_29e5a19d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-24T07:25:10Z",
+      "side": 1,
+      "message": "Hi,\n\nsince we don\u0027t have anyone we can wait for to do a proper review of the code related to EGL and stuff, can we proceed further with this merge request? I can at least confirm the code works for me, as well as some other people who tested this confirmed it works for them. Also many parts of this code are used in similar manner elsewhere (KWin, OBS, Mutter) so we may safely assume there is no major issue with it.",
+      "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
