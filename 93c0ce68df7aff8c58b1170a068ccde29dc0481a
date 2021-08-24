@@ -52,6 +52,23 @@
       "parentUuid": "da84e83e_969403f3",
       "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "897ed7f9_165cadeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-24T19:23:38Z",
+      "side": 1,
+      "message": "Libepoxy is missing. I thought it\u0027s part of the sysroot. I will double check and fix. ",
+      "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
