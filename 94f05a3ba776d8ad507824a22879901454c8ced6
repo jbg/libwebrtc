@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50bdedfc_62394483",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-08-24T06:48:37Z",
+      "side": 1,
+      "message": "TransformableVideoSenderFrame is only in the c++ so not testable. Pity, I wanted to learn about death tests...",
+      "parentUuid": "b7adfee5_821fcb88",
+      "revId": "94f05a3ba776d8ad507824a22879901454c8ced6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f589a949_5d984fc1",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-08-19T10:47:43Z",
       "side": 1,
       "message": "GE not GT - 0 is valid.",
+      "revId": "94f05a3ba776d8ad507824a22879901454c8ced6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f88fc6d_e83d7f5f",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-08-24T06:48:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f589a949_5d984fc1",
       "revId": "94f05a3ba776d8ad507824a22879901454c8ced6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
