@@ -34,6 +34,24 @@
       "parentUuid": "bec6c3a1_29e5a19d",
       "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9715710_1d10602a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-24T10:42:06Z",
+      "side": 1,
+      "message": "The only thing that is blocking me is that I need someone to submit this to CQ as I don\u0027t have permissions to do it myself. Otherwise I believe it\u0027s ready to go.",
+      "parentUuid": "da84e83e_969403f3",
+      "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
