@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11a0d7b1_dd82cece",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-25T12:22:05Z",
+      "side": 1,
+      "message": "Code looks good enough, but the test change wasn\u0027t the one I was asking for.\n\nLGTMing to get out of the way.",
+      "revId": "5e0d8454af010c9d38ed0208b8455f596535a7af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c08cbd2_c6d0bb69",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-25T12:22:05Z",
+      "side": 1,
+      "message": "Hm. This is interesting. Are VPN adapters always configured with a netmask longer than or equal to the configured VPN?\nMy Linux box seems to be configured with /32 on all interfaces, except for loopback, which is configured with /8... longer masks shouldn\u0027t be a problem in matching, but shorter masks should be.",
+      "revId": "5e0d8454af010c9d38ed0208b8455f596535a7af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
