@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18559f0d_2d1ea468",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5296
+      },
+      "writtenOn": "2021-08-25T23:43:46Z",
+      "side": 1,
+      "message": "I realized that the HMONITOR declaration really belongs in a separate header, where HMONITOR is used. I put in explanatory comments as well.\n\nI tried editing the commit message (the last paragraph isn\u0027t needed) but I can\u0027t. Can you?",
+      "revId": "5fec0b1e6a842f434a4fd30d5d346ac8920f1142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

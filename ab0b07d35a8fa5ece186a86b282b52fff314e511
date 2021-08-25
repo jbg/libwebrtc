@@ -73,6 +73,30 @@
       },
       "revId": "ab0b07d35a8fa5ece186a86b282b52fff314e511",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b3c8e0d_58f8d3ff",
+        "filename": "modules/desktop_capture/shared_memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5296
+      },
+      "writtenOn": "2021-08-25T23:43:46Z",
+      "side": 1,
+      "message": "Indeed. I renamed to WEBRTC_DECLARE_HANDLE, and also moved it to a more appropriate file (the one that actually uses HMONITOR).",
+      "parentUuid": "f8fcb0e2_3b7bfd95",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 21
+      },
+      "revId": "ab0b07d35a8fa5ece186a86b282b52fff314e511",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
