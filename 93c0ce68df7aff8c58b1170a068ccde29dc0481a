@@ -69,6 +69,24 @@
       "message": "Libepoxy is missing. I thought it\u0027s part of the sysroot. I will double check and fix. ",
       "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f0ab7d_dc8fc8d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-25T06:33:42Z",
+      "side": 1,
+      "message": "I have no idea what might be wrong. I can see that both libepoxy-dev and libepoxy0 are in the sysroot. \n\nThe error message is: ./modules_unittests: error while loading shared libraries: libepoxy.so.0: cannot open shared object file: No such file or directory\n\nThat\u0027s weird as libepoxy.so.0 is provided by libepoxy0 package. Do you run the tests in some special environment with different paths or something that could cause this error?",
+      "parentUuid": "897ed7f9_165cadeb",
+      "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
