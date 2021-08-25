@@ -50,6 +50,29 @@
       "message": "I can\u0027t run try-bots for webrtc - can you?",
       "revId": "ab0b07d35a8fa5ece186a86b282b52fff314e511",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8fcb0e2_3b7bfd95",
+        "filename": "modules/desktop_capture/shared_memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6515
+      },
+      "writtenOn": "2021-08-25T22:10:56Z",
+      "side": 1,
+      "message": "Consider renaming since this seems like it is specific to CHROME but per our discussion it isn\u0027t.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 21
+      },
+      "revId": "ab0b07d35a8fa5ece186a86b282b52fff314e511",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
