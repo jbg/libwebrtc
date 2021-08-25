@@ -123,6 +123,24 @@
       "parentUuid": "b5616cc4_0c672d33",
       "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b46ce2a3_98514746",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-25T13:01:17Z",
+      "side": 1,
+      "message": "Actually, it looks like the problem is now only reported on \"linux_msan\" job, those other two which failed before are now green. So maybe indeed an infra problem?",
+      "parentUuid": "d5f3f2ea_3efab484",
+      "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
