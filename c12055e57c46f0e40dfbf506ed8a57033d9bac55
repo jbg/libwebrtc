@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1fb0aa3_ed520e25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-25T11:49:54Z",
+      "side": 1,
+      "message": "It seems so straightforward .... I like it.\nNits.\n",
+      "revId": "c12055e57c46f0e40dfbf506ed8a57033d9bac55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5a0ea5f_35f532b0",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-25T11:49:54Z",
+      "side": 1,
+      "message": "can you use your newfangled NetworkMask class here instead of IPAddress?\nThe use of addresses to represent masks is an abomination (albeit one with a lot of history).",
+      "revId": "c12055e57c46f0e40dfbf506ed8a57033d9bac55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc103ca_c15bbe3c",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-25T11:49:54Z",
+      "side": 1,
+      "message": "can you use your newfangled NetworkMask class here instead of IPAddress?\nThe use of addresses to represent masks is an abomination.",
+      "revId": "c12055e57c46f0e40dfbf506ed8a57033d9bac55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08e86822_c24fe2b8",
+        "filename": "rtc_base/network_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-25T11:49:54Z",
+      "side": 1,
+      "message": "Dangerous function. What happens if you try to get an IP address from \"bogus\"?\n\nSince this is a test-only function, you can add a CHECK around the IPFromString call and deal with the result while testing. (not a DCHECK - DCHECKs don\u0027t call their argument when compiled out.)",
+      "revId": "c12055e57c46f0e40dfbf506ed8a57033d9bac55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "978100ac_545eeb0d",
+        "filename": "rtc_base/network_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-25T11:49:54Z",
+      "side": 1,
+      "message": "Now run this again with 192.168.0.0/24 as the configured network.... my main worry on the subject was alleviated on closer code reading, but it\u0027s worth checking.",
+      "revId": "c12055e57c46f0e40dfbf506ed8a57033d9bac55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d2dadde_4a9e4f6c",
+        "filename": "rtc_base/network_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-08-25T11:49:54Z",
+      "side": 1,
+      "message": "Add an explanation of what goes wrong, and possibly a TODO(bugnumber) to fix?",
+      "revId": "c12055e57c46f0e40dfbf506ed8a57033d9bac55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
