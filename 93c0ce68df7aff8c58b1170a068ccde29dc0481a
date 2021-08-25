@@ -105,6 +105,24 @@
       "parentUuid": "23f0ab7d_dc8fc8d8",
       "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5f3f2ea_3efab484",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-25T12:58:30Z",
+      "side": 1,
+      "message": "Same failure. I tried to run tests locally, but I don\u0027t hit this problem, on the other hand I have this library present in my system, but I build with \"use_sysroot \u003d true\" so it should use libepoxy from there.",
+      "parentUuid": "b5616cc4_0c672d33",
+      "revId": "93c0ce68df7aff8c58b1170a068ccde29dc0481a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
