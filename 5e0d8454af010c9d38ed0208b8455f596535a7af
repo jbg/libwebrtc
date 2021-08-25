@@ -33,6 +33,24 @@
       "message": "Hm. This is interesting. Are VPN adapters always configured with a netmask longer than or equal to the configured VPN?\nMy Linux box seems to be configured with /32 on all interfaces, except for loopback, which is configured with /8... longer masks shouldn\u0027t be a problem in matching, but shorter masks should be.",
       "revId": "5e0d8454af010c9d38ed0208b8455f596535a7af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b49a5f9_ff41a830",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-08-25T13:43:30Z",
+      "side": 1,
+      "message": "Yes, shorter might be...\nLooking in cisco docs, it seems like a subnet can be configured on the server\nbut a client gets an address (/32 mask).",
+      "parentUuid": "6c08cbd2_c6d0bb69",
+      "revId": "5e0d8454af010c9d38ed0208b8455f596535a7af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

@@ -193,6 +193,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36b2cfbb_3b9ee9ce",
+        "filename": "rtc_base/network_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2021-08-25T13:43:30Z",
+      "side": 1,
+      "message": "Done\n\nre argument: subnet address\n\nAdapterType is a property of an \"Network\"\nA Network has a subnet, but i guess that this most of the time is a /32 mask\ni.e an address",
+      "parentUuid": "4b4cdf9c_8a13383b",
+      "revId": "c12055e57c46f0e40dfbf506ed8a57033d9bac55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d2dadde_4a9e4f6c",
