@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09e6bcbb_91b90007",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2021-08-26T13:16:24Z",
+      "side": 1,
+      "message": "What do you think about allowing this?\n\nAlso, this is my first time with lucicfg so I\u0027m not 100% sure I\u0027m modifying the correct realm and role.",
+      "revId": "5669662ba38ab37b1edc8b42a8b1aa852b29ef11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
