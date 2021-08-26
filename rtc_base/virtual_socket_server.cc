@@ -238,6 +238,7 @@ int VirtualSocket::RecvFrom(void* pv,
   size_t data_read = std::min(cb, packet->size());
   memcpy(pv, packet->data(), data_read);
   *paddr = packet->from();
+  RTC_CHECK(!IPIsAny(paddr->ipaddr()));
 
   if (data_read < packet->size()) {
     packet->Consume(data_read);
