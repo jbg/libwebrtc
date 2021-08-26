@@ -16,6 +16,29 @@
       "message": "What do you think about allowing this?\n\nAlso, this is my first time with lucicfg so I\u0027m not 100% sure I\u0027m modifying the correct realm and role.",
       "revId": "5669662ba38ab37b1edc8b42a8b1aa852b29ef11",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca9c37d9_7c14a43d",
+        "filename": "config.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-26T13:27:08Z",
+      "side": 1,
+      "message": "jansson@ suggested this should be poolUser.\n\nAside from this, I like the idea of using project-webrtc-led-users.",
+      "range": {
+        "startLine": 185,
+        "startChar": 27,
+        "endLine": 185,
+        "endChar": 40
+      },
+      "revId": "5669662ba38ab37b1edc8b42a8b1aa852b29ef11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
