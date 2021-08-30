@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55bbbdc2_2d913cea",
+        "filename": "net/dcsctp/public/dcsctp_options.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-08-30T18:17:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4f74fe9_2870edc9",
+      "revId": "713819f84bd33b7483b16b1abb1609416f902e10",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9eeedaed_2eef1478",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-08-30T14:47:37Z",
       "side": 1,
       "message": "It would be preferable to have an optional\u003cint\u003e instead of a magic value probably for a cleaner API.",
+      "revId": "713819f84bd33b7483b16b1abb1609416f902e10",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec1694d5_ea8898e0",
+        "filename": "net/dcsctp/public/dcsctp_options.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-08-30T18:17:35Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "9eeedaed_2eef1478",
       "revId": "713819f84bd33b7483b16b1abb1609416f902e10",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
