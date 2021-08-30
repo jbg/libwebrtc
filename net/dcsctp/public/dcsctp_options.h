@@ -35,6 +35,9 @@ struct DcSctpOptions {
   // = 1191 bytes.
   static constexpr size_t kMaxSafeMTUSize = 1191;
 
+  // The maximum timer duration - one day.
+  static constexpr DurationMs kMaxTimerDuration = DurationMs(24 * 3600 * 1000);
+
   // The local port for which the socket is supposed to be bound to. Incoming
   // packets will be verified that they are sent to this port number and all
   // outgoing packets will have this port number as source port.
@@ -112,6 +115,14 @@ struct DcSctpOptions {
 
   // T2-shutdown timeout.
   DurationMs t2_shutdown_timeout = DurationMs(1000);
+
+  // For t1-init, t1-cookie, t2-shutdown, t3-rtx, this value is the upper bound
+  // on how large the exponentially backed off timeout can become. The lower the
+  // duration, the faster the connection can recover on transient network
+  // issues. Changing this value may require changing `max_retransmissions` and
+  // `max_init_retransmits` to ensure that the connection is not closed too
+  // quickly.
+  DurationMs max_timer_backoff_duration = kMaxTimerDuration;
 
   // Hearbeat interval (on idle connections only). Set to zero to disable.
   DurationMs heartbeat_interval = DurationMs(30000);
