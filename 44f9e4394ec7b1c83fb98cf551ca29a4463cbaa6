@@ -16,6 +16,23 @@
       "message": "Did you had any plans for this field? Can\u0027t find any usage of it.",
       "revId": "44f9e4394ec7b1c83fb98cf551ca29a4463cbaa6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2adabcf6_fd7d2587",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-08-30T14:16:00Z",
+      "side": 1,
+      "message": "It\u0027s not used _yet_. \nI added this field since it will be used in a CL that rewrites the render resolution, but I haven\u0027t prioritized finishing that.",
+      "revId": "44f9e4394ec7b1c83fb98cf551ca29a4463cbaa6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
