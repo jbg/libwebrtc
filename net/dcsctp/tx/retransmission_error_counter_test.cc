@@ -72,5 +72,15 @@ TEST(RetransmissionErrorCounterTest, ClearingCounter) {
   EXPECT_TRUE(counter.IsExhausted());
 }
 
+TEST(RetransmissionErrorCounterTest, CanBeLimitless) {
+  DcSctpOptions options;
+  options.max_retransmissions = -1;
+  RetransmissionErrorCounter counter("log: ", options);
+  for (int i = 0; i < 100; ++i) {
+    EXPECT_TRUE(counter.Increment("test"));  // One is too many.
+    EXPECT_FALSE(counter.IsExhausted());
+  }
+}
+
 }  // namespace
 }  // namespace dcsctp

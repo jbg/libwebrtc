@@ -55,7 +55,8 @@ struct TimerOptions {
   // If the duration should be increased (using exponential backoff) when it is
   // restarted. If not set, the same duration will be used.
   const TimerBackoffAlgorithm backoff_algorithm;
-  // The maximum number of times that the timer will be automatically restarted.
+  // The maximum number of times that the timer will be automatically restarted,
+  // or -1 if there is no limit.
   const int max_restarts;
 };
 

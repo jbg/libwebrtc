@@ -150,10 +150,11 @@ struct DcSctpOptions {
   // retransmission scenarios.
   int max_burst = 4;
 
-  // Maximum Data Retransmit Attempts (per DATA chunk).
+  // Maximum Data Retransmit Attempts (per DATA chunk). Set to -1 for no limit.
   int max_retransmissions = 10;
 
-  // Max.Init.Retransmits (https://tools.ietf.org/html/rfc4960#section-15)
+  // Max.Init.Retransmits (https://tools.ietf.org/html/rfc4960#section-15). Set
+  // to -1 for no limit.
   int max_init_retransmits = 8;
 
   // RFC3758 Partial Reliability Extension

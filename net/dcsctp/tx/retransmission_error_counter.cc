@@ -15,7 +15,7 @@
 namespace dcsctp {
 bool RetransmissionErrorCounter::Increment(absl::string_view reason) {
   ++counter_;
-  if (counter_ > limit_) {
+  if (limit_ >= 0 && counter_ > limit_) {
     RTC_DLOG(LS_INFO) << log_prefix_ << reason
                       << ", too many retransmissions, counter=" << counter_;
     return false;
