@@ -320,8 +320,8 @@ TEST_F(TimerTest, TimersHaveMaximumDuration) {
       "t1", on_expired_.AsStdFunction(),
       TimerOptions(DurationMs(1000), TimerBackoffAlgorithm::kExponential));
 
-  t1->set_duration(DurationMs(2 * *Timer::kMaxTimerDuration));
-  EXPECT_EQ(t1->duration(), Timer::kMaxTimerDuration);
+  t1->set_duration(DurationMs(2 * *DcSctpOptions::kMaxTimerDuration));
+  EXPECT_EQ(t1->duration(), DcSctpOptions::kMaxTimerDuration);
 }
 
 TEST_F(TimerTest, TimersHaveMaximumBackoffDuration) {
@@ -331,7 +331,8 @@ TEST_F(TimerTest, TimersHaveMaximumBackoffDuration) {
 
   t1->Start();
 
-  int max_exponent = static_cast<int>(log2(*Timer::kMaxTimerDuration / 1000));
+  int max_exponent =
+      static_cast<int>(log2(*DcSctpOptions::kMaxTimerDuration / 1000));
   for (int i = 0; i < max_exponent; ++i) {
     EXPECT_CALL(on_expired_, Call).Times(1);
     AdvanceTimeAndRunTimers(DurationMs(1000 * (1 << i)));
@@ -339,16 +340,16 @@ TEST_F(TimerTest, TimersHaveMaximumBackoffDuration) {
 
   // Reached the maximum duration.
   EXPECT_CALL(on_expired_, Call).Times(1);
-  AdvanceTimeAndRunTimers(Timer::kMaxTimerDuration);
+  AdvanceTimeAndRunTimers(DcSctpOptions::kMaxTimerDuration);
 
   EXPECT_CALL(on_expired_, Call).Times(1);
-  AdvanceTimeAndRunTimers(Timer::kMaxTimerDuration);
+  AdvanceTimeAndRunTimers(DcSctpOptions::kMaxTimerDuration);
 
   EXPECT_CALL(on_expired_, Call).Times(1);
-  AdvanceTimeAndRunTimers(Timer::kMaxTimerDuration);
+  AdvanceTimeAndRunTimers(DcSctpOptions::kMaxTimerDuration);
 
   EXPECT_CALL(on_expired_, Call).Times(1);
-  AdvanceTimeAndRunTimers(Timer::kMaxTimerDuration);
+  AdvanceTimeAndRunTimers(DcSctpOptions::kMaxTimerDuration);
 }
 
 TEST_F(TimerTest, TimerCanBeStartedFromWithinExpirationHandler) {
