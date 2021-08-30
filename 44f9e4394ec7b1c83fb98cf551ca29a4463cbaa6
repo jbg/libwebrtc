@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abfa6be5_bbb0f042",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-08-30T13:11:03Z",
+      "side": 1,
+      "message": "Did you had any plans for this field? Can\u0027t find any usage of it.",
+      "revId": "44f9e4394ec7b1c83fb98cf551ca29a4463cbaa6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
