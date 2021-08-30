@@ -31,9 +31,9 @@ rtc::scoped_refptr<VideoFrameBuffer> VideoFrameBuffer::CropAndScale(
 }
 
 const I420BufferInterface* VideoFrameBuffer::GetI420() const {
-  // Overridden by subclasses that can return an I420 buffer without any
-  // conversion, in particular, I420BufferInterface.
-  return nullptr;
+  // I420A can be converted to I420
+  RTC_CHECK(type() == Type::kI420 || type() == Type::kI420A);
+  return static_cast<const I420BufferInterface*>(this);
 }
 
 const I420ABufferInterface* VideoFrameBuffer::GetI420A() const {
@@ -94,10 +94,6 @@ int I420BufferInterface::ChromaHeight() const {
 }
 
 rtc::scoped_refptr<I420BufferInterface> I420BufferInterface::ToI420() {
-  return this;
-}
-
-const I420BufferInterface* I420BufferInterface::GetI420() const {
   return this;
 }
 

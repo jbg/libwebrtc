@@ -71,16 +71,6 @@ class RTC_EXPORT VideoFrameBuffer : public rtc::RefCountInterface {
   // software encoders.
   virtual rtc::scoped_refptr<I420BufferInterface> ToI420() = 0;
 
-  // GetI420() methods should return I420 buffer if conversion is trivial, i.e
-  // no change for binary data is needed. Otherwise these methods should return
-  // nullptr. One example of buffer with that property is
-  // WebrtcVideoFrameAdapter in Chrome - it's I420 buffer backed by a shared
-  // memory buffer. Therefore it must have type kNative. Yet, ToI420()
-  // doesn't affect binary data at all. Another example is any I420A buffer.
-  // TODO(https://crbug.com/webrtc/12021): Make this method non-virtual and
-  // behave as the other GetXXX methods below.
-  virtual const I420BufferInterface* GetI420() const;
-
   // A format specific scale function. Default implementation works by
   // converting to I420. But more efficient implementations may override it,
   // especially for kNative.
@@ -101,6 +91,7 @@ class RTC_EXPORT VideoFrameBuffer : public rtc::RefCountInterface {
 
   // These functions should only be called if type() is of the correct type.
   // Calling with a different type will result in a crash.
+  const I420BufferInterface* GetI420() const;
   const I420ABufferInterface* GetI420A() const;
   const I444BufferInterface* GetI444() const;
   const I010BufferInterface* GetI010() const;
@@ -159,7 +150,6 @@ class RTC_EXPORT I420BufferInterface : public PlanarYuv8Buffer {
   int ChromaHeight() const final;
 
   rtc::scoped_refptr<I420BufferInterface> ToI420() final;
-  const I420BufferInterface* GetI420() const final;
 
  protected:
   ~I420BufferInterface() override {}
