@@ -21,6 +21,7 @@
 
 #include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
+#include "net/dcsctp/public/dcsctp_options.h"
 #include "net/dcsctp/public/strong_alias.h"
 #include "net/dcsctp/public/timeout.h"
 
@@ -46,9 +47,18 @@ struct TimerOptions {
   TimerOptions(DurationMs duration,
                TimerBackoffAlgorithm backoff_algorithm,
                absl::optional<int> max_restarts)
+      : TimerOptions(duration,
+                     backoff_algorithm,
+                     max_restarts,
+                     DcSctpOptions::kMaxTimerDuration) {}
+  TimerOptions(DurationMs duration,
+               TimerBackoffAlgorithm backoff_algorithm,
+               absl::optional<int> max_restarts,
+               DurationMs max_backoff_duration)
       : duration(duration),
         backoff_algorithm(backoff_algorithm),
-        max_restarts(max_restarts) {}
+        max_restarts(max_restarts),
+        max_backoff_duration(max_backoff_duration) {}
 
   // The initial timer duration. Can be overridden with `set_duration`.
   const DurationMs duration;
@@ -58,6 +68,8 @@ struct TimerOptions {
   // The maximum number of times that the timer will be automatically restarted,
   // or absl::nullopt if there is no limit.
   const absl::optional<int> max_restarts;
+  // The maximum timeout value for exponential backoff.
+  const DurationMs max_backoff_duration;
 };
 
 // A high-level timer (in contrast to the low-level `Timeout` class).
@@ -74,9 +86,6 @@ struct TimerOptions {
 // backoff algorithm).
 class Timer {
  public:
-  // The maximum timer duration - one day.
-  static constexpr DurationMs kMaxTimerDuration = DurationMs(24 * 3600 * 1000);
-
   // When expired, the timer handler can optionally return a new duration which
   // will be set as `duration` and used as base duration when the timer is
   // restarted and as input to the backoff algorithm.
@@ -99,7 +108,7 @@ class Timer {
   // Sets the base duration. The actual timer duration may be larger depending
   // on the backoff algorithm.
   void set_duration(DurationMs duration) {
-    duration_ = std::min(duration, kMaxTimerDuration);
+    duration_ = std::min(duration, DcSctpOptions::kMaxTimerDuration);
   }
 
   // Retrieves the base duration. The actual timer duration may be larger
