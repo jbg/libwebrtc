@@ -105,6 +105,24 @@
       "parentUuid": "b6ea7fc3_5f6558bc",
       "revId": "9a30675f3a5f7e62032a90592289af0c7f0c5e4c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a6cbd08_3d704dc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2021-08-31T16:03:17Z",
+      "side": 1,
+      "message": "FWIW, the Chromium MSAN build and test bots run on bionic (Ubuntu 18.04).  Maybe they get the prebuilt libraries from somewhere else or don\u0027t use them at all?\n\nhttps://ci.chromium.org/p/chromium/builders/ci/Linux%20MSan%20Builder\nhttps://ci.chromium.org/p/chromium/builders/ci/Linux%20MSan%20Tests",
+      "parentUuid": "ac8e5ad4_c268c0c5",
+      "revId": "9a30675f3a5f7e62032a90592289af0c7f0c5e4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
