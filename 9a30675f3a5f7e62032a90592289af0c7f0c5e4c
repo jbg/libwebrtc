@@ -33,6 +33,24 @@
       "message": "+mirko do you know if there are special build considerations related just to the msan bot?",
       "revId": "9a30675f3a5f7e62032a90592289af0c7f0c5e4c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7eb0011_11939259",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-31T12:23:32Z",
+      "side": 1,
+      "message": "I suspect the issue is that MSan still uses Ubuntu 14.04 bots because of https://www.chromium.org/developers/testing/memorysanitizer, and this seems related to this (other bots are using 18.04).\n\nMaybe try to remove the dependency and skip related tests on MSan (or even rtc_use_pipewire\u003dfalse?).",
+      "parentUuid": "1406bd38_e83d6018",
+      "revId": "9a30675f3a5f7e62032a90592289af0c7f0c5e4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
