@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ce6d13f_e3ca8695",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-08-31T06:06:48Z",
+      "side": 1,
+      "message": "I tried to rebase it, however, I don\u0027t really know if that can help. I still hope this is an infra issue as there were previously two more jobs failing with the same result (missing libepoxy.so.0 library).",
+      "revId": "9a30675f3a5f7e62032a90592289af0c7f0c5e4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
