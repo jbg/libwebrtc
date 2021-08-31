@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65834cdd_346e59d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2021-08-31T08:14:23Z",
+      "side": 1,
+      "message": "This was originally reverted because of a perf regression: https://chromium-swarm.appspot.com/task?id\u003d55066d77da908210\n\nHowever, this regression now seems to be gone. Here\u0027s the result of manually triggering a perf test: https://chromium-swarm.appspot.com/task?id\u003d55b3fe649e523810",
+      "revId": "70d1e04a78f15a1f111b1473c829d6cc3013c24e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
