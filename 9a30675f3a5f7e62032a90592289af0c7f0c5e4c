@@ -69,6 +69,24 @@
       "parentUuid": "f7eb0011_11939259",
       "revId": "9a30675f3a5f7e62032a90592289af0c7f0c5e4c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ea7fc3_5f6558bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-08-31T13:19:34Z",
+      "side": 1,
+      "message": "Maybe here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/webrtc.gni;l\u003d133;drc\u003d96106719a9db95380c5fff5ab013e7027bad324d ?\n\nrtc_use_pipewire \u003d is_linux \u0026\u0026 use_sysroot \u0026\u0026 !is_msan\n\nSo no pipewire on MSan until this dependency will be supported. Maybe also file a bugs.webrtc.org and add a TODO(bugs.webrtc.org/XXX) to remove the !is_msan.",
+      "parentUuid": "3d901ca9_548ae5e4",
+      "revId": "9a30675f3a5f7e62032a90592289af0c7f0c5e4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
