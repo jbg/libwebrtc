@@ -16,6 +16,24 @@
       "message": "upstream was fixed in https://chromium-review.googlesource.com/c/chromium/src/+/3135313 so this *might* be obsolete. Can you try to roll again?",
       "revId": "645e727244d6202313fb473880934f66c66f42df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e79f63d5_01165f82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2021-09-01T10:20:34Z",
+      "side": 1,
+      "message": "There was a bot breakage, so we have not roll for a while and there is a big diff by now. I\u0027d prefer to revert, roll, and reland.",
+      "parentUuid": "ecbe1a1d_feb373fb",
+      "revId": "645e727244d6202313fb473880934f66c66f42df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
