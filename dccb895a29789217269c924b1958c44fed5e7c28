@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e580990a_b93517f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2021-09-01T07:56:43Z",
+      "side": 1,
+      "message": "Mirko, thank you for your help.\n\nTommi or Erik, can you submit this to CQ officially so it can get merged? Thanks.",
+      "revId": "dccb895a29789217269c924b1958c44fed5e7c28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
