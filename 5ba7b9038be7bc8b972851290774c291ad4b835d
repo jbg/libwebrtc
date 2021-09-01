@@ -22,6 +22,30 @@
       },
       "revId": "5ba7b9038be7bc8b972851290774c291ad4b835d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a45ace8_438e8ef1",
+        "filename": "modules/video_coding/utility/vp9_uncompressed_header_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-09-01T14:12:31Z",
+      "side": 1,
+      "message": "Good catch! Yes, let\u0027s fix as a followup.",
+      "parentUuid": "3ff8ab1f_4672faf9",
+      "range": {
+        "startLine": 149,
+        "startChar": 23,
+        "endLine": 149,
+        "endChar": 24
+      },
+      "revId": "5ba7b9038be7bc8b972851290774c291ad4b835d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

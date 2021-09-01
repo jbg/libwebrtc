@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dce8112_595cca40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-09-01T14:12:31Z",
+      "side": 1,
+      "message": "Awesome! Though I have a _lot_ of uncommitted code to update now 😄",
+      "revId": "919b67dd78ea1890859f9fde0f53b9b40d4e9eb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8049950e_48f4bbda",
+        "filename": "modules/video_coding/utility/vp9_uncompressed_header_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-09-01T14:12:31Z",
+      "side": 1,
+      "message": "would it make sense to pass the reader as a reference instead?",
+      "range": {
+        "startLine": 26,
+        "startChar": 39,
+        "endLine": 26,
+        "endChar": 40
+      },
+      "revId": "919b67dd78ea1890859f9fde0f53b9b40d4e9eb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b1bfbb2_7984c0b1",
+        "filename": "modules/video_coding/utility/vp9_uncompressed_header_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-09-01T14:12:31Z",
+      "side": 1,
+      "message": "nit: now new, but perhaps we should change this to \"Failed to parse header.\" throughout the file since it\u0027s not longer just a QP parser...",
+      "range": {
+        "startLine": 396,
+        "startChar": 28,
+        "endLine": 396,
+        "endChar": 45
+      },
+      "revId": "919b67dd78ea1890859f9fde0f53b9b40d4e9eb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
