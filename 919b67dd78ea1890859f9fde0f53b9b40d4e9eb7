@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7d4e322_d3a34a64",
+        "filename": "modules/video_coding/utility/vp9_uncompressed_header_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-09-01T14:24:01Z",
+      "side": 1,
+      "message": "yes, and Vp9UncompressedHeader too,\nbut then diff would be much harder to read.\n\nIf you do not mind, I can update it in within this change.\n(updated just the BitstreamReader - that changes only the lines that are already changed anyway)",
+      "parentUuid": "8049950e_48f4bbda",
+      "range": {
+        "startLine": 26,
+        "startChar": 39,
+        "endLine": 26,
+        "endChar": 40
+      },
+      "revId": "919b67dd78ea1890859f9fde0f53b9b40d4e9eb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b1bfbb2_7984c0b1",
         "filename": "modules/video_coding/utility/vp9_uncompressed_header_parser.cc",
         "patchSetId": 4
@@ -54,6 +78,30 @@
       "writtenOn": "2021-09-01T14:12:31Z",
       "side": 1,
       "message": "nit: now new, but perhaps we should change this to \"Failed to parse header.\" throughout the file since it\u0027s not longer just a QP parser...",
+      "range": {
+        "startLine": 396,
+        "startChar": 28,
+        "endLine": 396,
+        "endChar": 45
+      },
+      "revId": "919b67dd78ea1890859f9fde0f53b9b40d4e9eb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e95b1fa8_c14399db",
+        "filename": "modules/video_coding/utility/vp9_uncompressed_header_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-09-01T14:24:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b1bfbb2_7984c0b1",
       "range": {
         "startLine": 396,
         "startChar": 28,
