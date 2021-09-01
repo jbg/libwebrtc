@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecbe1a1d_feb373fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-09-01T09:40:31Z",
+      "side": 1,
+      "message": "upstream was fixed in https://chromium-review.googlesource.com/c/chromium/src/+/3135313 so this *might* be obsolete. Can you try to roll again?",
+      "revId": "645e727244d6202313fb473880934f66c66f42df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
