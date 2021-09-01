@@ -112,6 +112,18 @@ VideoFrame CreateVideoFrame(int width, int height, int64_t timestamp_ms) {
       .set_timestamp_ms(timestamp_ms)
       .build();
 }
+
+VideoStream GetVideoStreamConfig() {
+  VideoStream stream;
+  stream.max_framerate = 25;
+  stream.min_bitrate_bps = 35000;
+  stream.max_bitrate_bps = 900000;
+  stream.scale_resolution_down_by = 1.0;
+  stream.num_temporal_layers = 1;
+  stream.bitrate_priority = 1.0;
+  stream.scalability_mode = "";
+  return stream;
+}
 }  // namespace
 
 class VideoSendStreamTest : public test::CallTest {
@@ -134,6 +146,9 @@ class VideoSendStreamTest : public test::CallTest {
   void TestTemporalLayers(VideoEncoderFactory* encoder_factory,
                           const std::string& payload_name,
                           const std::vector<int>& num_temporal_layers);
+
+  void TestReconfigureEncoder(const std::vector<VideoStream>& configs,
+                              int expected_num_init_encode);
 };
 
 TEST_F(VideoSendStreamTest, CanStartStartedStream) {
@@ -4192,6 +4207,183 @@ TEST_F(VideoSendStreamTest, TestTemporalLayersVp8SimulcastWithoutSimAdapter) {
 
   TestTemporalLayers(&encoder_factory, "VP8",
                      /*num_temporal_layers=*/{2, 2});
+}
+
+void VideoSendStreamTest::TestReconfigureEncoder(
+    const std::vector<VideoStream>& configs,
+    int expected_num_init_encode) {
+  class InitEncodeObserver : public test::SendTest,
+                             public test::FakeEncoder,
+                             public VideoBitrateAllocatorFactory {
+   public:
+    InitEncodeObserver(const std::vector<VideoStream>& configs,
+                       int expected_num_init_encode,
+                       TaskQueueBase* task_queue)
+        : SendTest(test::CallTest::kDefaultTimeoutMs),
+          FakeEncoder(Clock::GetRealTimeClock()),
+          encoder_factory_(this),
+          configs_(configs),
+          expected_num_init_encode(expected_num_init_encode),
+          task_queue_(task_queue),
+          bitrate_allocator_factory_(
+              CreateBuiltinVideoBitrateAllocatorFactory()) {}
+
+    void OnVideoStreamsCreated(
+        VideoSendStream* send_stream,
+        const std::vector<VideoReceiveStream*>& receive_streams) override {
+      send_stream_ = send_stream;
+    }
+
+    void ModifyVideoConfigs(
+        VideoSendStream::Config* send_config,
+        std::vector<VideoReceiveStream::Config>* receive_configs,
+        VideoEncoderConfig* encoder_config) override {
+      send_config->encoder_settings.encoder_factory = &encoder_factory_;
+      send_config->encoder_settings.bitrate_allocator_factory = this;
+      encoder_config->video_stream_factory =
+          rtc::make_ref_counted<cricket::EncoderStreamFactory>(
+              /*codec_name=*/"VP8", /*max_qp=*/0, /*is_screenshare=*/false,
+              /*conference_mode=*/false);
+
+      encoder_config->max_bitrate_bps = configs_[0].max_bitrate_bps;
+      encoder_config->simulcast_layers[0] = configs_[0];
+
+      reconfigure_encoder_config_ = encoder_config->Copy();
+      reconfigure_encoder_config_.max_bitrate_bps = configs_[1].max_bitrate_bps;
+      reconfigure_encoder_config_.simulcast_layers[0] = configs_[1];
+    }
+
+    void VerifyCodecConfig(const VideoCodec& codec) const {
+      EXPECT_EQ(configs_.size(), 2u);
+      VideoStream expected_stream =
+          (num_init_encode_ == 0) ? configs_[0] : configs_[1];
+      EXPECT_EQ(codec.numberOfSimulcastStreams, 1);
+      EXPECT_EQ(codec.simulcastStream[0].maxFramerate,
+                expected_stream.max_framerate);
+      EXPECT_EQ(codec.simulcastStream[0].minBitrate * 1000,
+                static_cast<unsigned int>(expected_stream.min_bitrate_bps));
+      EXPECT_EQ(codec.simulcastStream[0].maxBitrate * 1000,
+                static_cast<unsigned int>(expected_stream.max_bitrate_bps));
+      EXPECT_EQ(codec.simulcastStream[0].width,
+                test::CallTest::kDefaultWidth /
+                    expected_stream.scale_resolution_down_by);
+      EXPECT_EQ(codec.simulcastStream[0].height,
+                test::CallTest::kDefaultHeight /
+                    expected_stream.scale_resolution_down_by);
+      EXPECT_EQ(codec.simulcastStream[0].numberOfTemporalLayers,
+                expected_stream.num_temporal_layers);
+      EXPECT_EQ(codec.ScalabilityMode(), expected_stream.scalability_mode);
+    }
+
+    int32_t InitEncode(const VideoCodec* codec,
+                       const Settings& settings) override {
+      VerifyCodecConfig(*codec);
+      ++num_init_encode_;
+      return FakeEncoder::InitEncode(codec, settings);
+    }
+
+    std::unique_ptr<VideoBitrateAllocator> CreateVideoBitrateAllocator(
+        const VideoCodec& codec) override {
+      VerifyCodecConfig(codec);
+      ++num_bitrate_allocations_;
+      observation_complete_.Set();
+      return bitrate_allocator_factory_->CreateVideoBitrateAllocator(codec);
+    }
+
+    void PerformTest() override {
+      ASSERT_TRUE(Wait())
+          << "Timed out while waiting for encoder to be configured.";
+
+      // Set new config, encoder should be reconfigured if needed.
+      SendTask(RTC_FROM_HERE, task_queue_, [&]() {
+        send_stream_->ReconfigureVideoEncoder(
+            reconfigure_encoder_config_.Copy());
+      });
+      EXPECT_TRUE(Wait())
+          << "Timed out while waiting for rate allocator to be recreated.";
+
+      // Call reconfigure an additional time to verify number of encoder
+      // reconfigurations (InitEncode called after rate allocator is created).
+      SendTask(RTC_FROM_HERE, task_queue_, [&]() {
+        send_stream_->ReconfigureVideoEncoder(
+            std::move(reconfigure_encoder_config_));
+      });
+      EXPECT_TRUE(Wait())
+          << "Timed out while waiting for rate allocator to be recreated.";
+
+      EXPECT_EQ(3, num_bitrate_allocations_);
+      EXPECT_EQ(expected_num_init_encode, num_init_encode_);
+    }
+
+   private:
+    test::VideoEncoderProxyFactory encoder_factory_;
+    const std::vector<VideoStream> configs_;
+    const int expected_num_init_encode;
+    TaskQueueBase* const task_queue_;
+    std::unique_ptr<VideoBitrateAllocatorFactory> bitrate_allocator_factory_;
+    VideoSendStream* send_stream_ = nullptr;
+    VideoEncoderConfig reconfigure_encoder_config_;
+    int num_init_encode_ = 0;
+    int num_bitrate_allocations_ = 0;
+  } test(configs, expected_num_init_encode, task_queue());
+
+  RunBaseTest(&test);
+}
+
+TEST_F(VideoSendStreamTest, EncoderNotReconfiguredIfMaxFramerateChanges) {
+  VideoStream config1 = GetVideoStreamConfig();
+  VideoStream config2 = config1;
+  config2.max_framerate++;
+
+  TestReconfigureEncoder({config1, config2}, /*expected_num_init_encode=*/1);
+}
+
+TEST_F(VideoSendStreamTest, EncoderNotReconfiguredIfMinBitrateChanges) {
+  VideoStream config1 = GetVideoStreamConfig();
+  VideoStream config2 = config1;
+  config2.min_bitrate_bps += 10000;
+
+  TestReconfigureEncoder({config1, config2}, /*expected_num_init_encode=*/1);
+}
+
+TEST_F(VideoSendStreamTest, EncoderNotReconfiguredIfMaxBitrateChanges) {
+  VideoStream config1 = GetVideoStreamConfig();
+  VideoStream config2 = config1;
+  config2.max_bitrate_bps += 100000;
+
+  TestReconfigureEncoder({config1, config2}, /*expected_num_init_encode=*/1);
+}
+
+TEST_F(VideoSendStreamTest, EncoderNotReconfiguredIfBitratePriorityChanges) {
+  VideoStream config1 = GetVideoStreamConfig();
+  VideoStream config2 = config1;
+  config2.bitrate_priority = config1.bitrate_priority.value() * 2.0;
+
+  TestReconfigureEncoder({config1, config2}, /*expected_num_init_encode=*/1);
+}
+
+TEST_F(VideoSendStreamTest, EncoderReconfiguredIfResolutionChanges) {
+  VideoStream config1 = GetVideoStreamConfig();
+  VideoStream config2 = config1;
+  config2.scale_resolution_down_by *= 2;
+
+  TestReconfigureEncoder({config1, config2}, /*expected_num_init_encode=*/2);
+}
+
+TEST_F(VideoSendStreamTest, EncoderReconfiguredIfNumTemporalLayerChanges) {
+  VideoStream config1 = GetVideoStreamConfig();
+  VideoStream config2 = config1;
+  config2.num_temporal_layers = config1.num_temporal_layers.value() + 1;
+
+  TestReconfigureEncoder({config1, config2}, /*expected_num_init_encode=*/2);
+}
+
+TEST_F(VideoSendStreamTest, EncoderReconfiguredIfScalabilityModeChanges) {
+  VideoStream config1 = GetVideoStreamConfig();
+  VideoStream config2 = config1;
+  config2.scalability_mode = "L1T2";
+
+  TestReconfigureEncoder({config1, config2}, /*expected_num_init_encode=*/2);
 }
 
 }  // namespace webrtc
