@@ -22,6 +22,75 @@
       },
       "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc5cf70e_e4844e7f",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-01T10:20:04Z",
+      "side": 1,
+      "message": "Could this be made a bool and avoid the repetition below?",
+      "range": {
+        "startLine": 384,
+        "startChar": 2,
+        "endLine": 385,
+        "endChar": 66
+      },
+      "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a38ca8c5_4b6a7406",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-01T10:20:04Z",
+      "side": 1,
+      "message": "Maybe split into two fileds per your suggestion, the latter as pointer that\u0027s maybe null",
+      "range": {
+        "startLine": 409,
+        "startChar": 31,
+        "endLine": 409,
+        "endChar": 60
+      },
+      "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d23289_3e8926e1",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-01T10:20:04Z",
+      "side": 1,
+      "message": "use brace initialization",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 62
+      },
+      "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
