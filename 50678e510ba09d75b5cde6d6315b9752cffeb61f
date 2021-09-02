@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2b6afb0_45cdc9fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-09-02T08:05:00Z",
+      "side": 1,
+      "message": "Skipping line-too-long because it is not introduced by this CL",
+      "revId": "50678e510ba09d75b5cde6d6315b9752cffeb61f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
