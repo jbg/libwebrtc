@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a026eac_7de83ccd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-09-02T08:04:33Z",
+      "side": 1,
+      "message": "I had https://webrtc-review.googlesource.com/c/src/+/230943 but yours is just as nice. Thank you!",
+      "revId": "7db36383d1982e9bb45fb8df560119e521b93e0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
