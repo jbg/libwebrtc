@@ -87,6 +87,30 @@
       },
       "revId": "27e19476ba3f1738b3e68513c7da6b9fbdd6ed08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea2b4632_6f0e95ea",
+        "filename": "AUTHORS",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 17849
+      },
+      "writtenOn": "2021-09-04T00:20:33Z",
+      "side": 1,
+      "message": "Sounds good, thanks. I believe this can be closed, then.",
+      "parentUuid": "5c6555e1_a339ac71",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 29
+      },
+      "revId": "27e19476ba3f1738b3e68513c7da6b9fbdd6ed08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
