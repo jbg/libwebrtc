@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd9cf7da_768d1359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2021-09-06T07:30:15Z",
+      "side": 1,
+      "message": "Thanks for contributing. I don\u0027t know this code well and am not an owner.\n\nPlease use third_party/webrtc/modules/desktop_capture/OWNERS",
+      "revId": "9c294a8212c05f957fe78fe1057e36ab39465300",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
