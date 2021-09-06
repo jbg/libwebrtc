@@ -16,6 +16,23 @@
       "message": "Looks good to me.",
       "revId": "6d3de086b13914f24a6d1c0c5e9ba47efa7123a8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1161bd93_039d7261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-09-06T17:03:56Z",
+      "side": 1,
+      "message": "I ran the linux bot and it looks like a linker failure.\nMaybe that needs to be guarded by a version check?",
+      "revId": "6d3de086b13914f24a6d1c0c5e9ba47efa7123a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
