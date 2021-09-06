@@ -93,6 +93,30 @@
       },
       "revId": "557766f84efd98f62fb9b2d055bdce8fb87ddd47",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc1baf5_a851d5b2",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4296,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-09-06T12:10:49Z",
+      "side": 1,
+      "message": "Right, but why? It\u0027s the same object that is also verified in the overridden InitEncode() ?\nIf it\u0027s unfeasible to override OnEncoderReconfigured() due to test fixture complexity I understand, but otherwise would prefer not to use the video bitrate allocation creation as proxy for the encoder reconfigured callback",
+      "parentUuid": "8818c4f3_b2ec8d9c",
+      "range": {
+        "startLine": 4294,
+        "startChar": 6,
+        "endLine": 4296,
+        "endChar": 0
+      },
+      "revId": "557766f84efd98f62fb9b2d055bdce8fb87ddd47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
