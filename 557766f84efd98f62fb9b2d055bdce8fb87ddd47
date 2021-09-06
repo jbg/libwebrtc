@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1d06ee5_5540d3fe",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4281,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2021-09-06T07:13:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9cd49cc_0a648c4e",
+      "range": {
+        "startLine": 4281,
+        "startChar": 20,
+        "endLine": 4281,
+        "endChar": 31
+      },
+      "revId": "557766f84efd98f62fb9b2d055bdce8fb87ddd47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "421d7e99_5858dde8",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-03T08:53:56Z",
       "side": 1,
       "message": "Why do we check for rate allocator creation?\nIf it is just a proxy to see that encode VideoStreamEncoder::ReconfigureEncoder() completes, it looks like there are other more explicit signals we could use e.g. is see calls to:\nencoder_stats_observer_-\u003eOnEncoderReconfigured\nand\nsink_-\u003eOnEncoderConfigurationChanged",
+      "range": {
+        "startLine": 4294,
+        "startChar": 6,
+        "endLine": 4296,
+        "endChar": 0
+      },
+      "revId": "557766f84efd98f62fb9b2d055bdce8fb87ddd47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8818c4f3_b2ec8d9c",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4296,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2021-09-06T07:13:14Z",
+      "side": 1,
+      "message": "It also verifies the configuration for the bitrate allocator.",
+      "parentUuid": "421d7e99_5858dde8",
       "range": {
         "startLine": 4294,
         "startChar": 6,
