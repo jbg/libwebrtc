@@ -16,6 +16,23 @@
       "message": "Thanks for contributing. I don\u0027t know this code well and am not an owner.\n\nPlease use third_party/webrtc/modules/desktop_capture/OWNERS",
       "revId": "9c294a8212c05f957fe78fe1057e36ab39465300",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f397aa36_e1bdc979",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2021-09-06T07:31:53Z",
+      "side": 1,
+      "message": "Also, please file a bug at https://bugs.chromium.org/p/webrtc/issues/list and add it to the Bug section in the description of your CL. ",
+      "revId": "9c294a8212c05f957fe78fe1057e36ab39465300",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
