@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "e5901028_025aedcc",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "good stuff % comments",
       "revId": "d3aa3102e278b397f6013cb45e831b61d71ab6f6",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "18ceb690_8e409f31",
         "filename": "modules/audio_processing/agc2/rnn_vad/lp_residual.cc",
@@ -37,10 +38,34 @@
         "endChar": 3
       },
       "revId": "d3aa3102e278b397f6013cb45e831b61d71ab6f6",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d60cdb6_608b961b",
+        "filename": "modules/audio_processing/agc2/rnn_vad/lp_residual.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-09-08T14:18:55Z",
+      "side": 1,
+      "message": "I benchmarked that, but it seems much slower.",
+      "parentUuid": "18ceb690_8e409f31",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 3
+      },
+      "revId": "d3aa3102e278b397f6013cb45e831b61d71ab6f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "3d397543_50a1d6e6",
         "filename": "modules/audio_processing/agc2/rnn_vad/lp_residual_unittest.cc",
@@ -60,8 +85,7 @@
         "endChar": 76
       },
       "revId": "d3aa3102e278b397f6013cb45e831b61d71ab6f6",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
