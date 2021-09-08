@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fabf57b7_06ba53e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-09-08T21:47:54Z",
+      "side": 1,
+      "message": "Not sure if you\u0027re familiar with this code, but this is following basically the same logic that already happens if you don\u0027t have codec preferences: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/media_session.cc;l\u003d2167;drc\u003d612d14c8a9ad56b0f873a7c69b43da34d3ef31d8;bpv\u003d0;bpt\u003d0",
+      "revId": "b8e2d089fa17ccab4552287108f1e7057381c87d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
