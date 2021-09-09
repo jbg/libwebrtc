@@ -50,6 +50,40 @@
       "message": "Great solution!\n",
       "revId": "b8e2d089fa17ccab4552287108f1e7057381c87d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04b24b9f_e0bc1be3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-09-09T07:29:27Z",
+      "side": 1,
+      "message": "please also add webrtc:12169 to the list of bugs\n\\o/",
+      "revId": "b8e2d089fa17ccab4552287108f1e7057381c87d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da55238_142cb0f4",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-09-09T07:29:27Z",
+      "side": 1,
+      "message": "something something about collisions being removed between audio and video? Because that is the difference, supported_codecs only looks at either audio or video",
+      "revId": "b8e2d089fa17ccab4552287108f1e7057381c87d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
