@@ -33,6 +33,23 @@
       "message": "Harald likes payload type collisions too!",
       "revId": "b8e2d089fa17ccab4552287108f1e7057381c87d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71ab2f09_3aa11392",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-09T07:28:25Z",
+      "side": 1,
+      "message": "Great solution!\n",
+      "revId": "b8e2d089fa17ccab4552287108f1e7057381c87d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
