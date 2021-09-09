@@ -775,7 +775,11 @@ void VirtualSocketServer::RemoveConnection(const SocketAddress& local,
   connections_->erase(address_pair);
 }
 
-static double Random() {
+double VirtualSocketServer::Random() {
+  if (random_.has_value()) {
+    return static_cast<double>(random_->Rand(RAND_MAX)) / RAND_MAX;
+  }
+
   return static_cast<double>(rand()) / RAND_MAX;
 }
 
@@ -1109,7 +1113,8 @@ uint32_t VirtualSocketServer::GetTransitDelay(Socket* socket) {
     return static_cast<uint32_t>(iter->second);
   }
   // Otherwise, use the delay from the distribution distribution.
-  size_t index = rand() % delay_dist_->size();
+  size_t index = (random_.has_value() ? random_->Rand(RAND_MAX) : rand()) %
+                 delay_dist_->size();
   double delay = (*delay_dist_)[index].second;
   // RTC_LOG_F(LS_INFO) << "random[" << index << "] = " << delay;
   return static_cast<uint32_t>(delay);
