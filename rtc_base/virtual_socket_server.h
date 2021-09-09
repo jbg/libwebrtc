@@ -15,11 +15,13 @@
 #include <map>
 #include <vector>
 
+#include "absl/types/optional.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/event.h"
 #include "rtc_base/fake_clock.h"
 #include "rtc_base/message_handler.h"
+#include "rtc_base/random.h"
 #include "rtc_base/socket_server.h"
 #include "rtc_base/synchronization/mutex.h"
 
@@ -338,6 +340,10 @@ class VirtualSocketServer : public SocketServer {
   // Sending was previously blocked, but now isn't.
   sigslot::signal0<> SignalReadyToSend;
 
+  // Makes the random drop probabilities and delays deterministic, by using a
+  // PRNG with the given `seed`.
+  void MakeDeterministic(uint32_t seed) { random_.emplace(seed); }
+
  protected:
   // Returns a new IP not used before in this network.
   IPAddress GetNextIP(int family);
@@ -399,9 +405,13 @@ class VirtualSocketServer : public SocketServer {
   typedef std::map<SocketAddress, VirtualSocket*> AddressMap;
   typedef std::map<SocketAddressPair, VirtualSocket*> ConnectionMap;
 
+  double Random();
+
   // May be null if the test doesn't use a fake clock, or it does but doesn't
   // use ProcessMessagesUntilIdle.
   ThreadProcessingFakeClock* fake_clock_ = nullptr;
+
+  absl::optional<webrtc::Random> random_;
 
   // Used to implement Wait/WakeUp.
   Event wakeup_;

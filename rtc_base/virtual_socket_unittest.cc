@@ -721,7 +721,7 @@ class VirtualSocketServerTest : public ::testing::Test {
   void DelayTest(const SocketAddress& initial_addr) {
     time_t seed = ::time(nullptr);
     RTC_LOG(LS_VERBOSE) << "seed = " << seed;
-    srand(static_cast<unsigned int>(seed));
+    ss_.MakeDeterministic(seed);
 
     const uint32_t mean = 2000;
     const uint32_t stddev = 500;
