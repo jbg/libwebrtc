@@ -16,6 +16,29 @@
       "message": "minimal change guarded with a killswitch. Doesn\u0027t solve everything but makes things a bit better at least.",
       "revId": "39243bb24625380d523efa619a3620a9d20bd406",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f99eae1_7697c58a",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2104,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2021-09-09T11:46:42Z",
+      "side": 1,
+      "message": "Maybe we should consider using the default bitrate limits for singlecast here as well which has more steps?\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/rtc_base/experiments/encoder_info_settings.cc;l\u003d38",
+      "range": {
+        "startLine": 2100,
+        "startChar": 0,
+        "endLine": 2104,
+        "endChar": 3
+      },
+      "revId": "39243bb24625380d523efa619a3620a9d20bd406",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
