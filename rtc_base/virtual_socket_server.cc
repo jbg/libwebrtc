@@ -775,8 +775,12 @@ void VirtualSocketServer::RemoveConnection(const SocketAddress& local,
   connections_->erase(address_pair);
 }
 
-static double Random() {
-  return static_cast<double>(rand()) / RAND_MAX;
+uint32_t VirtualSocketServer::Random() {
+  if (random_.has_value()) {
+    return random_->Rand(RAND_MAX);
+  }
+
+  return rand();
 }
 
 int VirtualSocketServer::Connect(VirtualSocket* socket,
@@ -899,7 +903,8 @@ int VirtualSocketServer::SendUdp(VirtualSocket* socket,
     return data_size;
   }
 
-  if (Random() < drop_prob_) {
+  double r = static_cast<double>(Random()) / RAND_MAX;
+  if (r < drop_prob_) {
     RTC_LOG(LS_VERBOSE) << "Dropping packet: bad luck";
     return static_cast<int>(data_size);
   }
@@ -1109,7 +1114,7 @@ uint32_t VirtualSocketServer::GetTransitDelay(Socket* socket) {
     return static_cast<uint32_t>(iter->second);
   }
   // Otherwise, use the delay from the distribution distribution.
-  size_t index = rand() % delay_dist_->size();
+  size_t index = Random() % delay_dist_->size();
   double delay = (*delay_dist_)[index].second;
   // RTC_LOG_F(LS_INFO) << "random[" << index << "] = " << delay;
   return static_cast<uint32_t>(delay);
