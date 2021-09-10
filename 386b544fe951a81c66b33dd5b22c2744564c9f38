@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "543eaed6_b01f6248",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-10T08:59:14Z",
+      "side": 1,
+      "message": "That would be much nicer, but the existing API eventually needs to output a string. To me, it seems cleaner to have this slightly uglier implementation here, than creating a vector of bytes and then have an ugly and/or inefficient conversion to a string elsewhere.",
+      "parentUuid": "33e09783_554be15a",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc5cf70e_e4844e7f",
         "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-01T10:20:04Z",
       "side": 1,
       "message": "Could this be made a bool and avoid the repetition below?",
+      "range": {
+        "startLine": 384,
+        "startChar": 2,
+        "endLine": 385,
+        "endChar": 66
+      },
+      "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00072a0b_ab49fbbc",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-10T08:59:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc5cf70e_e4844e7f",
       "range": {
         "startLine": 384,
         "startChar": 2,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "199981cb_62a888af",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-10T08:59:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a38ca8c5_4b6a7406",
+      "range": {
+        "startLine": 409,
+        "startChar": 31,
+        "endLine": 409,
+        "endChar": 60
+      },
+      "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10d23289_3e8926e1",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-09-01T10:20:04Z",
       "side": 1,
       "message": "use brace initialization",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 62
+      },
+      "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16076b25_0ba738a7",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-10T08:59:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10d23289_3e8926e1",
       "range": {
         "startLine": 71,
         "startChar": 0,
