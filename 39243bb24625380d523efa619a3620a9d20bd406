@@ -39,6 +39,30 @@
       },
       "revId": "39243bb24625380d523efa619a3620a9d20bd406",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96ba4069_e1b6bdab",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2104,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-09-10T13:29:23Z",
+      "side": 1,
+      "message": "long-term yes. The current constants are probably a decade old -- I don\u0027t think a 4:3 aspect ratio (or vga) is prevalent anymore",
+      "parentUuid": "8f99eae1_7697c58a",
+      "range": {
+        "startLine": 2100,
+        "startChar": 0,
+        "endLine": 2104,
+        "endChar": 3
+      },
+      "revId": "39243bb24625380d523efa619a3620a9d20bd406",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
