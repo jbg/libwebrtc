@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcb54c2d_d4ec6fa5",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-13T07:54:08Z",
+      "side": 1,
+      "message": "My argument would be that if we make an ugly conversion close to the API surface, it\u0027s very clear why we\u0027re doing it (assuming we also add a comment), compensating for the ugliness and inefficiency of it. Fundamentally, using a string to represent a byte array seems like the wrong choice, so cleaning up the API would in itself be worthwhile. In the future, someone might fix the API, and can then remove the ugly code. Vs if we let the API choice surface throughout the codebase, we get ugliness spread out and cleaning it up becomes a rather large task.",
+      "parentUuid": "543eaed6_b01f6248",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc5cf70e_e4844e7f",
         "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
         "patchSetId": 1

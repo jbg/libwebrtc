@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54c654dc_030f06f4",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-13T07:54:08Z",
+      "side": 1,
+      "message": "For this and below, it would, IMO, be nice to use classes to represent the operations for each fieldtype. Currently the operations are close enough in the code base that I think it\u0027s acceptable as is, but encoding type operations using the type systems prives nice implicit documentation to the reader and could provide some opportunity for extra clarity.\n\nFor instance, it might make sense to have something like the below to make it clear to the reader that all fixed width fields work the same:\n template\u003cint W, FieldType FT\u003e class FixedWidthSerilalizer {\n   static constexpr int width \u003d W;\nstatic std::string Encode(uint64_t value) {\n       webrtc_event_logging::SerializeLittleEndian(value, width);\n   }\n   ...\n }\n \n \nswitch(field_type) {\n  case FieldType::kFixed8:\n  FixedWidthSerilalizer\u003c1\u003e::Encode(value);\n}",
+      "range": {
+        "startLine": 113,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 29
+      },
+      "revId": "1c4a86490cc3d0eee57f4a797e96bf8dcb3fe8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f74cff4a_e24758fd",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-13T07:54:08Z",
+      "side": 1,
+      "message": "nit: We usually use comments of the form: /*bytes\u003d*/ 1\n\nAlso below",
+      "range": {
+        "startLine": 116,
+        "startChar": 63,
+        "endLine": 116,
+        "endChar": 75
+      },
+      "revId": "1c4a86490cc3d0eee57f4a797e96bf8dcb3fe8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afab5faa_15358d26",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-13T07:54:08Z",
+      "side": 1,
+      "message": "Unsigned aritmetics are really easy to get wrong. Ideally we\u0027d use as much signed operations as possible rather than careful use of unsigned (eg, using negative value instead of backwards delta) If we do need to use unsigned operations (eg. because of field width limitations, although delta encoding probably doesn\u0027t make sense for any field that actually use all 64 bits of value space) it would be good to add some comments throughout to explain the intended behavior. Eg, the section where we do \"backwards\" \"forwards\" delta, what is the expected end result?",
+      "range": {
+        "startLine": 239,
+        "startChar": 33,
+        "endLine": 239,
+        "endChar": 52
+      },
+      "revId": "1c4a86490cc3d0eee57f4a797e96bf8dcb3fe8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "785b2c2a_6a8f9b48",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-13T07:54:08Z",
+      "side": 1,
+      "message": "Would be good to also declare rule for addition, is it ok to add a new one and if so are the special precautions to take?",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 63
+      },
+      "revId": "1c4a86490cc3d0eee57f4a797e96bf8dcb3fe8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffaa439a_2a23c368",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-13T07:54:08Z",
+      "side": 1,
+      "message": "For semantic clarity, I think it would be good to explicitly assign each enum value. Using default assignment weakly implies that the exact value is not important, but as the comment above notes, it is.",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 11
+      },
+      "revId": "1c4a86490cc3d0eee57f4a797e96bf8dcb3fe8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
