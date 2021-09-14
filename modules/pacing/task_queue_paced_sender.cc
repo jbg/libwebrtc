@@ -39,11 +39,15 @@ TaskQueuePacedSender::TaskQueuePacedSender(
     TimeDelta hold_back_window)
     : clock_(clock),
       hold_back_window_(hold_back_window),
-      pacing_controller_(clock,
-                         packet_sender,
-                         event_log,
-                         field_trials,
-                         PacingController::ProcessMode::kDynamic),
+      pacing_controller_(
+          clock,
+          packet_sender,
+          event_log,
+          field_trials,
+          (field_trials != nullptr &&
+           !field_trials->Lookup("WebRTC-Pacer-MinPacketLimitMs").empty())
+              ? PacingController::ProcessMode::kPeriodic
+              : PacingController::ProcessMode::kDynamic),
       next_process_time_(Timestamp::MinusInfinity()),
       stats_update_scheduled_(false),
       last_stats_time_(Timestamp::MinusInfinity()),
