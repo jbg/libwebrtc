@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "508e90bc_1ce1d120",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2021-09-15T12:24:40Z",
+      "side": 1,
+      "message": "Danil, Erik, and Harald,\nThanks for the helpful comments in the original review!",
+      "revId": "55be3bb1c730b00aaaaa3b5ef09f36982dc1d688",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
