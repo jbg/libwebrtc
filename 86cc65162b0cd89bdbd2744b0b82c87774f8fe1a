@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95174919_2594493c",
+        "filename": "net/dcsctp/tx/retransmission_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-15T19:19:38Z",
+      "side": 1,
+      "message": "Oh, that was unfortunate. Thanks for fixing it.",
+      "parentUuid": "b907b18e_b95b87d0",
+      "range": {
+        "startLine": 526,
+        "startChar": 48,
+        "endLine": 526,
+        "endChar": 66
+      },
+      "revId": "86cc65162b0cd89bdbd2744b0b82c87774f8fe1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f1fc77f_0c0ed92b",
