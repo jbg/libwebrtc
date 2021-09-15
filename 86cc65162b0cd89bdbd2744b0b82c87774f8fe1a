@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b907b18e_b95b87d0",
+        "filename": "net/dcsctp/tx/retransmission_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2021-09-15T15:26:47Z",
+      "side": 1,
+      "message": "Argument was different between header and cc. Changed argument name in the header to be tsn.",
+      "parentUuid": "2e939a29_0b20c5e2",
+      "range": {
+        "startLine": 526,
+        "startChar": 48,
+        "endLine": 526,
+        "endChar": 66
+      },
+      "revId": "86cc65162b0cd89bdbd2744b0b82c87774f8fe1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f1fc77f_0c0ed92b",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-15T14:09:03Z",
       "side": 1,
       "message": "When there is no outstanding data, then next_tsn \u003d\u003d last_cumulative_tsn_ack_.next_value()\n\nI can add that to IsConsistent, and then you don\u0027t have to persist both in the state (feel free to do change that already now and don\u0027t wait for my commit)",
+      "range": {
+        "startLine": 944,
+        "startChar": 22,
+        "endLine": 944,
+        "endChar": 40
+      },
+      "revId": "86cc65162b0cd89bdbd2744b0b82c87774f8fe1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "915d114e_2ae6a79c",
+        "filename": "net/dcsctp/tx/retransmission_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2021-09-15T15:26:47Z",
+      "side": 1,
+      "message": "Kept next_tsn.",
+      "parentUuid": "9f1fc77f_0c0ed92b",
       "range": {
         "startLine": 944,
         "startChar": 22,
