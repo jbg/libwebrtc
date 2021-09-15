@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e939a29_0b20c5e2",
+        "filename": "net/dcsctp/tx/retransmission_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-15T14:09:03Z",
+      "side": 1,
+      "message": "Please let it remain as tsn.\n\nThe cumulative TSN ack represents \"up to this number, everything below is acked\", and that is not the case when nacking, as the RetransmissionQueue might e.g. NACK chunks that are \"in between\" gap-ack-blocks.",
+      "range": {
+        "startLine": 526,
+        "startChar": 48,
+        "endLine": 526,
+        "endChar": 66
+      },
+      "revId": "86cc65162b0cd89bdbd2744b0b82c87774f8fe1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f1fc77f_0c0ed92b",
+        "filename": "net/dcsctp/tx/retransmission_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-15T14:09:03Z",
+      "side": 1,
+      "message": "When there is no outstanding data, then next_tsn \u003d\u003d last_cumulative_tsn_ack_.next_value()\n\nI can add that to IsConsistent, and then you don\u0027t have to persist both in the state (feel free to do change that already now and don\u0027t wait for my commit)",
+      "range": {
+        "startLine": 944,
+        "startChar": 22,
+        "endLine": 944,
+        "endChar": 40
+      },
+      "revId": "86cc65162b0cd89bdbd2744b0b82c87774f8fe1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
