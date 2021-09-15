@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b9c8ea0_05138d00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-09-15T13:27:18Z",
+      "side": 1,
+      "message": "This is the last usage of the BitBuffer class in webrtc.\n",
+      "revId": "ace3fb3b2b8713306d57704d671056e3d747556f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
