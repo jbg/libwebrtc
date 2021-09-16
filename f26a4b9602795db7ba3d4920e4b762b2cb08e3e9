@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55a9c64e_c6362b5f",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1784,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-16T11:55:22Z",
+      "side": 1,
+      "message": "I suspect they are not, but they were not implicated in this bug.\n\nWe should extend test coverage to all callbacks on general principle, but that\u0027s a too large scope for this fix.\n\nAs an experiment, I tried to run peer_connection_integrationtests with a separate signaling thread (which should flush out most of those bugs), but my attempt failed at a deeper level (it seems that deleting a thread and then checking if it\u0027s active is an unsafe operation .... sigh.)",
+      "parentUuid": "9ae79882_3aef1283",
+      "range": {
+        "startLine": 1783,
+        "startChar": 27,
+        "endLine": 1784,
+        "endChar": 61
+      },
+      "revId": "f26a4b9602795db7ba3d4920e4b762b2cb08e3e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a4b47fb_7c13b6e9",
         "filename": "pc/test/mock_peer_connection_observers.h",
         "patchSetId": 5
