@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "858b567f_3394dab5",
+        "filename": "common_video/h264/sps_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-09-16T09:13:02Z",
+      "side": 1,
+      "message": "that may cause integer overflow, there is comment above about it:\n\n\"We also have to avoid overflow when adding 4 to the on-wire golomb value,\ne.g., for evil input data, ReadExponentialGolomb might return 0xfffc.\"",
+      "parentUuid": "54cbaa00_b08a4a72",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 3
+      },
+      "revId": "ace3fb3b2b8713306d57704d671056e3d747556f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0153887d_0a8d0a48",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-09-16T08:27:39Z",
       "side": 1,
       "message": "Optional simplification here too:\n\n// pic_width_in_mbs_minus1: ue(v)\nsps.width \u003d 16 * (reader.ReadExponentialGolomb() + 1);",
+      "revId": "ace3fb3b2b8713306d57704d671056e3d747556f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb2413fc_50b39d07",
+        "filename": "common_video/h264/sps_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-09-16T09:13:02Z",
+      "side": 1,
+      "message": "Done.\n\nReadExponentialGolomb() comes from the wire and can be arbitrary big.\nOn the other hand.... there is no validation atm any way.\nNot sure if adding the validation is worth it (it seems worst thing that can happen is that width would become 0). At least h264_bitstream fuzzer didn\u0027t found any issues.",
+      "parentUuid": "0153887d_0a8d0a48",
       "revId": "ace3fb3b2b8713306d57704d671056e3d747556f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
