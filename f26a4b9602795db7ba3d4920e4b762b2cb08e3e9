@@ -16,6 +16,52 @@
       "message": "Thanks! (embarassed smiley)\n",
       "revId": "f26a4b9602795db7ba3d4920e4b762b2cb08e3e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ae79882_3aef1283",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1784,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-16T09:46:16Z",
+      "side": 1,
+      "message": "Are these arguments also proxy objects (or thread-safe-by-locks)?",
+      "range": {
+        "startLine": 1783,
+        "startChar": 27,
+        "endLine": 1784,
+        "endChar": 61
+      },
+      "revId": "f26a4b9602795db7ba3d4920e4b762b2cb08e3e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a4b47fb_7c13b6e9",
+        "filename": "pc/test/mock_peer_connection_observers.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-16T09:46:16Z",
+      "side": 1,
+      "message": "nit:\n\n  desc_ \u003d absl::WrapUnique(desc);\n  \n(I guess it\u0027s a harder api change to use unique_ptr for the argument)",
+      "range": {
+        "startLine": 265,
+        "startChar": 4,
+        "endLine": 265,
+        "endChar": 22
+      },
+      "revId": "f26a4b9602795db7ba3d4920e4b762b2cb08e3e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
