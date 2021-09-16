@@ -16,6 +16,46 @@
       "message": "This is the last usage of the BitBuffer class in webrtc.\n",
       "revId": "ace3fb3b2b8713306d57704d671056e3d747556f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54cbaa00_b08a4a72",
+        "filename": "common_video/h264/sps_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-09-16T08:27:39Z",
+      "side": 1,
+      "message": "Optionally, you could avoid the temporary and do something like:\n\nconst uint32_t kMaxLog2 \u003d 32;\n\n// log2_max_frame_num_minus4: ue(v)\nsps.log2_max_frame_num \u003d reader.ReadExponentialGolomb() + 4;\nif (!reader.Ok() || sps.log2_max_frame_num \u003e kMaxLog2) {\n  return absl::nullopt;\n}\n\nSimilar below below.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 3
+      },
+      "revId": "ace3fb3b2b8713306d57704d671056e3d747556f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0153887d_0a8d0a48",
+        "filename": "common_video/h264/sps_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-09-16T08:27:39Z",
+      "side": 1,
+      "message": "Optional simplification here too:\n\n// pic_width_in_mbs_minus1: ue(v)\nsps.width \u003d 16 * (reader.ReadExponentialGolomb() + 1);",
+      "revId": "ace3fb3b2b8713306d57704d671056e3d747556f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
