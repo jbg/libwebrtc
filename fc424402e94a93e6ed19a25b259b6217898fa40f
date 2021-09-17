@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68d08175_da1b7b24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-17T10:32:40Z",
+      "side": 1,
+      "message": "Not too happy - this will cause  renderer crash based on something we can\u0027t prevent the user from trying, and we don\u0027t usually want to introduce renderer crashes.\n\nWould it be possible to error-close the stream instead?\n\nAs a quick-fix for an uncontrolled crash, I suppose a managed crash is an improvement.\n",
+      "revId": "fc424402e94a93e6ed19a25b259b6217898fa40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80d412c9_27f3bc57",
+        "filename": "audio/channel_receive_frame_transformer_delegate.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-17T10:32:40Z",
+      "side": 1,
+      "message": "This naming is actually hideously ugly - there are two TransformableAudioFrameInterface classes, where they are not confused by the compiler because they live in different namespaces.\n\nCan you remove this \"subtlety\" by renmaing TransformableAudioFrame here to TransformableIncomingAudioFrame and the other one to TransformableOutgoingAudioFrame?",
+      "revId": "fc424402e94a93e6ed19a25b259b6217898fa40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
