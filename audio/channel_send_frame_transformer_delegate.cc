@@ -48,6 +48,7 @@ class TransformableAudioFrame : public TransformableFrameInterface {
   int64_t GetAbsoluteCaptureTimestampMs() const {
     return absolute_capture_timestamp_ms_;
   }
+  Direction GetDirection() const override { return Direction::kSender; }
 
  private:
   AudioFrameType frame_type_;
@@ -111,6 +112,8 @@ void ChannelSendFrameTransformerDelegate::SendFrame(
     std::unique_ptr<TransformableFrameInterface> frame) const {
   MutexLock lock(&send_lock_);
   RTC_DCHECK_RUN_ON(encoder_queue_);
+  RTC_CHECK_EQ(frame->GetDirection(),
+               TransformableFrameInterface::Direction::kSender);
   if (!send_frame_callback_)
     return;
   auto* transformed_frame = static_cast<TransformableAudioFrame*>(frame.get());
