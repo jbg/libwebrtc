@@ -33,6 +33,24 @@
       "message": "Awesome!",
       "revId": "b71393e0fe6dbcc14d059dab8abf8be12d2cb007",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a916c23_21cef6ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-09-17T09:07:22Z",
+      "side": 1,
+      "message": "Thanks for pointing me to this leftover :)",
+      "parentUuid": "08123c90_e3affccf",
+      "revId": "b71393e0fe6dbcc14d059dab8abf8be12d2cb007",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
