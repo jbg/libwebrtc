@@ -96,6 +96,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "728b511b_7d8d2d74",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-17T14:07:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ecdf3c45_3084ae9b",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc5cf70e_e4844e7f",
