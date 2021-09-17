@@ -37,6 +37,7 @@ class TransformableAudioFrame : public TransformableAudioFrameInterface {
   uint32_t GetSsrc() const override { return ssrc_; }
   uint32_t GetTimestamp() const override { return header_.timestamp; }
   const RTPHeader& GetHeader() const override { return header_; }
+  Direction GetDirection() const override { return Direction::kReceiver; }
 
  private:
   rtc::Buffer payload_;
@@ -89,6 +90,8 @@ void ChannelReceiveFrameTransformerDelegate::ReceiveFrame(
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   if (!receive_frame_callback_)
     return;
+  RTC_CHECK_EQ(frame->GetDirection(),
+               TransformableFrameInterface::Direction::kReceiver);
   auto* transformed_frame = static_cast<TransformableAudioFrame*>(frame.get());
   receive_frame_callback_(transformed_frame->GetData(),
                           transformed_frame->GetHeader());
