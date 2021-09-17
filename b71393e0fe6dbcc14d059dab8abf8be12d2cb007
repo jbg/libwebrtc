@@ -16,6 +16,23 @@
       "message": "Hi Sam,\nCould you PTAL?\nAlessio",
       "revId": "b71393e0fe6dbcc14d059dab8abf8be12d2cb007",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08123c90_e3affccf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-09-17T08:36:59Z",
+      "side": 1,
+      "message": "Awesome!",
+      "revId": "b71393e0fe6dbcc14d059dab8abf8be12d2cb007",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
