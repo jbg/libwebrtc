@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0986746_a8a28d02",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-17T13:23:15Z",
+      "side": 1,
+      "message": "I don\u0027t quite see the benefit here? Instead of calling SerializeLittleEndian directly in the switch, we would be going via a template that just forwards the call to SerializeLitteEndian?",
+      "parentUuid": "54c654dc_030f06f4",
+      "range": {
+        "startLine": 113,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 29
+      },
+      "revId": "1c4a86490cc3d0eee57f4a797e96bf8dcb3fe8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f74cff4a_e24758fd",
         "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-13T07:54:08Z",
       "side": 1,
       "message": "nit: We usually use comments of the form: /*bytes\u003d*/ 1\n\nAlso below",
+      "range": {
+        "startLine": 116,
+        "startChar": 63,
+        "endLine": 116,
+        "endChar": 75
+      },
+      "revId": "1c4a86490cc3d0eee57f4a797e96bf8dcb3fe8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e94812_6e77d049",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-17T13:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f74cff4a_e24758fd",
       "range": {
         "startLine": 116,
         "startChar": 63,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ff5964_c4b42cf1",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-17T13:23:15Z",
+      "side": 1,
+      "message": "There are several reasons for preferring unsigned in this case.\n\n1. The events may contain both signed and unsigned numbers. To avoid two almost-identical versions of the delta compression, we want to encode one of the types as the other. However, it is not guaranteed that a signed x-bit number can hold 2^x different values on non-2-complement architectures. This suggests encoding signed numbers in an unsigned type instead, which is guaranteed to fit.\n\n2. We actually do want the wrapping behavior here. Consider the sequence 65534, 65535, 0, 1, 2, 3, which we want to encode as a sequence of where all deltas are 1. With unsigned values we can just do additions/subtractions and mask out the width we are interested in. With signed values it becomes considerably more difficult to do this efficiently.\n\nAdded comments.",
+      "parentUuid": "afab5faa_15358d26",
+      "range": {
+        "startLine": 239,
+        "startChar": 33,
+        "endLine": 239,
+        "endChar": 52
+      },
+      "revId": "1c4a86490cc3d0eee57f4a797e96bf8dcb3fe8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "785b2c2a_6a8f9b48",
@@ -93,6 +165,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aca13cc_0ce47fa6",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-17T13:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "785b2c2a_6a8f9b48",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 63
+      },
+      "revId": "1c4a86490cc3d0eee57f4a797e96bf8dcb3fe8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffaa439a_2a23c368",
@@ -106,6 +202,30 @@
       "writtenOn": "2021-09-13T07:54:08Z",
       "side": 1,
       "message": "For semantic clarity, I think it would be good to explicitly assign each enum value. Using default assignment weakly implies that the exact value is not important, but as the comment above notes, it is.",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 11
+      },
+      "revId": "1c4a86490cc3d0eee57f4a797e96bf8dcb3fe8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af814a0f_4d42eb76",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-17T13:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffaa439a_2a23c368",
       "range": {
         "startLine": 58,
         "startChar": 2,

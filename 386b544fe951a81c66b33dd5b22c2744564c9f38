@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecdf3c45_3084ae9b",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-17T13:23:15Z",
+      "side": 1,
+      "message": "I looked into it a bit more. If we change type here, we also need to change the return type from other functions, e.g. EncodeOptionalValuesPositions and EncodeDeltasV3. Those functions in turn use the BitWriter class to store bits in a string. That class could also be changed to use a byte vector without too much difficulty. However, the class is shared with the old format encoder, so to avoid a potential performance change in the old encoding, we\u0027d need to fork that class.\n\nIt feels a bit like a yagni violation to start forking code now, in anticipation of a refactoring in the future. It will also be easier to do these changes after we have deprecated and removed the old format.",
+      "parentUuid": "bcb54c2d_d4ec6fa5",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "386b544fe951a81c66b33dd5b22c2744564c9f38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc5cf70e_e4844e7f",
         "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
         "patchSetId": 1
