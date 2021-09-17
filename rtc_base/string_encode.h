@@ -17,6 +17,7 @@
 #include <type_traits>
 #include <vector>
 
+#include "absl/strings/numbers.h"
 #include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
 #include "rtc_base/checks.h"
@@ -102,9 +103,20 @@ std::string ToString(long double t);
 
 std::string ToString(const void* p);
 
+// TODO(bugs.webrtc.org/6424): Delete, and change callers to use
+// absl::SimpleAtoi directly.
 template <typename T,
-          typename std::enable_if<std::is_arithmetic<T>::value &&
-                                      !std::is_same<T, bool>::value,
+          typename std::enable_if<std::is_integral<T>::value &&
+                                      sizeof(T) >= sizeof(int),
+                                  int>::type = 0>
+static bool FromString(absl::string_view s, T* t) {
+  RTC_DCHECK(t);
+  return absl::SimpleAtoi(s, t);
+}
+
+template <typename T,
+          typename std::enable_if<std::is_floating_point<T>::value ||
+                                      std::is_same<T, unsigned short>::value,
                                   int>::type = 0>
 static bool FromString(const std::string& s, T* t) {
   RTC_DCHECK(t);
