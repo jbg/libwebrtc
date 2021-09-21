@@ -94,7 +94,8 @@ std::string DataChunk::ToString() const {
              : *options().is_beginning ? "first"
                                        : *options().is_end ? "last" : "middle")
      << ", tsn=" << *tsn() << ", stream_id=" << *stream_id()
-     << ", ppid=" << *ppid() << ", length=" << payload().size();
+     << ", ppid=" << *ppid() << ", length=" << payload().size()
+     << ", ssn=" << *ssn();
   return sb.Release();
 }
 

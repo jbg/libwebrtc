@@ -68,7 +68,7 @@ TEST(DataChunkTest, SerializeAndDeserialize) {
 
   EXPECT_EQ(deserialized.ToString(),
             "DATA, type=ordered::middle, tsn=123, stream_id=456, ppid=9090, "
-            "length=5");
+            "length=5, ssn=789");
 }
 }  // namespace
 }  // namespace dcsctp
