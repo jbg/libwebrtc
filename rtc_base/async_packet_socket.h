@@ -54,9 +54,39 @@ struct RTC_EXPORT PacketOptions {
   PacketInfo info_signaled_after_sent;
 };
 
+class AsyncPacketSocket;
+
+// Listen socket, producing an AsyncPacketSocket when a peer connects.
+class RTC_EXPORT AsyncPacketListenSocket : public sigslot::has_slots<> {
+ public:
+  enum class State {
+    kClosed,
+    kBinding,
+    kBound,
+  };
+
+  // Returns current state of the socket. TODO(bugs.webrtc.org/13145): Delete
+  // default implementation, when AsyncPacketSocket below no longer inherits
+  // this class.
+  virtual State GetBindState() const { return State::kClosed; }
+
+  // Returns current local address. Address may be set to null if the
+  // socket is not bound yet (GetState() returns kBinding).
+  virtual SocketAddress GetLocalAddress() const = 0;
+
+  // Get/set options.
+  virtual int GetOption(Socket::Option opt, int* value) = 0;
+  virtual int SetOption(Socket::Option opt, int value) = 0;
+
+  sigslot::signal2<AsyncPacketListenSocket*, AsyncPacketSocket*>
+      SignalNewConnection;
+};
+
 // Provides the ability to receive packets asynchronously. Sends are not
 // buffered since it is acceptable to drop packets under high load.
-class RTC_EXPORT AsyncPacketSocket : public sigslot::has_slots<> {
+// TODO(bugs.webrtc.org/13145): Cut the temporary inheritance of
+// AsyncPacketListenSocket.
+class RTC_EXPORT AsyncPacketSocket : public AsyncPacketListenSocket {
  public:
   enum State {
     STATE_CLOSED,
@@ -68,10 +98,6 @@ class RTC_EXPORT AsyncPacketSocket : public sigslot::has_slots<> {
 
   AsyncPacketSocket();
   ~AsyncPacketSocket() override;
-
-  // Returns current local address. Address may be set to null if the
-  // socket is not bound yet (GetState() returns STATE_BINDING).
-  virtual SocketAddress GetLocalAddress() const = 0;
 
   // Returns remote address. Returns zeroes if this is not a client TCP socket.
   virtual SocketAddress GetRemoteAddress() const = 0;
@@ -88,10 +114,6 @@ class RTC_EXPORT AsyncPacketSocket : public sigslot::has_slots<> {
 
   // Returns current state of the socket.
   virtual State GetState() const = 0;
-
-  // Get/set options.
-  virtual int GetOption(Socket::Option opt, int* value) = 0;
-  virtual int SetOption(Socket::Option opt, int value) = 0;
 
   // Get/Set current error.
   // TODO: Remove SetError().
@@ -128,9 +150,6 @@ class RTC_EXPORT AsyncPacketSocket : public sigslot::has_slots<> {
   // Emitted for client TCP sockets when state is changed from
   // CONNECTED to CLOSED.
   sigslot::signal2<AsyncPacketSocket*, int> SignalClose;
-
-  // Used only for listening TCP sockets.
-  sigslot::signal2<AsyncPacketSocket*, AsyncPacketSocket*> SignalNewConnection;
 
  private:
   RTC_DISALLOW_COPY_AND_ASSIGN(AsyncPacketSocket);

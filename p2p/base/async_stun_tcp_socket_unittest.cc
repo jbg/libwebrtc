@@ -16,7 +16,9 @@
 #include <list>
 #include <memory>
 #include <string>
+#include <utility>
 
+#include "absl/memory/memory.h"
 #include "rtc_base/network/sent_packet.h"
 #include "rtc_base/socket.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
@@ -58,10 +60,10 @@ static unsigned char kTurnChannelDataMessageWithOddLength[] = {
 static const rtc::SocketAddress kClientAddr("11.11.11.11", 0);
 static const rtc::SocketAddress kServerAddr("22.22.22.22", 0);
 
-class AsyncStunServerTCPSocket : public rtc::AsyncTCPSocket {
+class AsyncStunServerTCPSocket : public rtc::AsyncTcpListenSocket {
  public:
-  explicit AsyncStunServerTCPSocket(rtc::Socket* socket)
-      : AsyncTCPSocket(socket, true) {}
+  explicit AsyncStunServerTCPSocket(std::unique_ptr<rtc::Socket> socket)
+      : AsyncTcpListenSocket(std::move(socket)) {}
   void HandleIncomingConnection(rtc::Socket* socket) override {
     SignalNewConnection(this, new AsyncStunTCPSocket(socket));
   }
@@ -76,9 +78,11 @@ class AsyncStunTCPSocketTest : public ::testing::Test,
   virtual void SetUp() { CreateSockets(); }
 
   void CreateSockets() {
-    rtc::Socket* server = vss_->CreateSocket(kServerAddr.family(), SOCK_STREAM);
+    std::unique_ptr<rtc::Socket> server =
+        absl::WrapUnique(vss_->CreateSocket(kServerAddr.family(), SOCK_STREAM));
     server->Bind(kServerAddr);
-    recv_socket_.reset(new AsyncStunServerTCPSocket(server));
+    recv_socket_ =
+        std::make_unique<AsyncStunServerTCPSocket>(std::move(server));
     recv_socket_->SignalNewConnection.connect(
         this, &AsyncStunTCPSocketTest::OnNewConnection);
 
@@ -104,7 +108,7 @@ class AsyncStunTCPSocketTest : public ::testing::Test,
     ++sent_packets_;
   }
 
-  void OnNewConnection(rtc::AsyncPacketSocket* /*server*/,
+  void OnNewConnection(rtc::AsyncPacketListenSocket* /*server*/,
                        rtc::AsyncPacketSocket* new_socket) {
     listen_socket_.reset(new_socket);
     new_socket->SignalReadPacket.connect(this,
@@ -132,7 +136,7 @@ class AsyncStunTCPSocketTest : public ::testing::Test,
   std::unique_ptr<rtc::VirtualSocketServer> vss_;
   rtc::AutoSocketServerThread thread_;
   std::unique_ptr<AsyncStunTCPSocket> send_socket_;
-  std::unique_ptr<rtc::AsyncPacketSocket> recv_socket_;
+  std::unique_ptr<rtc::AsyncPacketListenSocket> recv_socket_;
   std::unique_ptr<rtc::AsyncPacketSocket> listen_socket_;
   std::list<std::string> recv_packets_;
   int sent_packets_ = 0;
