@@ -128,9 +128,6 @@ struct DcSctpOptions {
   // unacknowledged packet. Whatever is smallest of RTO/2 and this will be used.
   DurationMs delayed_ack_max_timeout = DurationMs(200);
 
-  // Do slow start as TCP - double cwnd instead of increasing it by MTU.
-  bool slow_start_tcp_style = false;
-
   // The initial congestion window size, in number of MTUs.
   // See https://tools.ietf.org/html/rfc4960#section-7.2.1 which defaults at ~3
   // and https://research.google/pubs/pub36640/ which argues for at least ten
