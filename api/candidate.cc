@@ -105,7 +105,7 @@ uint32_t Candidate::GetPriority(uint32_t type_preference,
 
   int addr_pref = IPAddressPrecedence(address_.ipaddr());
   int local_preference =
-      ((network_adapter_preference << 8) | addr_pref) + relay_preference;
+      ((network_adapter_preference << 8) | addr_pref) - relay_preference;
 
   return (type_preference << 24) | (local_preference << 8) | (256 - component_);
 }
