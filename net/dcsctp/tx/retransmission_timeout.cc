@@ -20,6 +20,7 @@ RetransmissionTimeout::RetransmissionTimeout(const DcSctpOptions& options)
     : min_rto_(*options.rto_min),
       max_rto_(*options.rto_max),
       max_rtt_(*options.rtt_max),
+      min_rtt_variance_(*options.min_rtt_variance),
       rto_(*options.rto_initial) {}
 
 void RetransmissionTimeout::ObserveRTT(DurationMs measured_rtt) {
@@ -48,6 +49,11 @@ void RetransmissionTimeout::ObserveRTT(DurationMs measured_rtt) {
     rtt_diff -= (scaled_rtt_var_ >> kRttVarShift);
     scaled_rtt_var_ += rtt_diff;
   }
+
+  if (scaled_rtt_var_ < min_rtt_variance_) {
+    scaled_rtt_var_ = min_rtt_variance_;
+  }
+
   rto_ = (scaled_srtt_ >> kRttShift) + scaled_rtt_var_;
 
   // If the RTO becomes smaller or equal to RTT, expiration timers will be
