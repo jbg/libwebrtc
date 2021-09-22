@@ -128,6 +128,10 @@ struct DcSctpOptions {
   // unacknowledged packet. Whatever is smallest of RTO/2 and this will be used.
   DurationMs delayed_ack_max_timeout = DurationMs(200);
 
+  // How precise scheduled timers are expected to be. See
+  // https://datatracker.ietf.org/doc/html/rfc6298#section-4.
+  DurationMs clock_granularity = DurationMs(10);
+
   // Do slow start as TCP - double cwnd instead of increasing it by MTU.
   bool slow_start_tcp_style = false;
 

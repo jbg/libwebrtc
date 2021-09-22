@@ -20,6 +20,7 @@ constexpr DurationMs kMaxRtt = DurationMs(8'000);
 constexpr DurationMs kInitialRto = DurationMs(200);
 constexpr DurationMs kMaxRto = DurationMs(800);
 constexpr DurationMs kMinRto = DurationMs(120);
+constexpr DurationMs kClockGranularity = DurationMs(0);
 
 DcSctpOptions MakeOptions() {
   DcSctpOptions options;
@@ -27,6 +28,7 @@ DcSctpOptions MakeOptions() {
   options.rto_initial = kInitialRto;
   options.rto_max = kMaxRto;
   options.rto_min = kMinRto;
+  options.clock_granularity = kClockGranularity;
   return options;
 }
 
@@ -141,10 +143,22 @@ TEST(RetransmissionTimeoutTest, WillAlwaysStayAboveRTT) {
   // any jitter will increase the RTO.
   RetransmissionTimeout rto_(MakeOptions());
 
-  for (int i = 0; i < 100; ++i) {
+  for (int i = 0; i < 1000; ++i) {
     rto_.ObserveRTT(DurationMs(124));
   }
-  EXPECT_GT(*rto_.rto(), 124);
+  EXPECT_EQ(*rto_.rto(), 127);
+}
+
+TEST(RetransmissionTimeoutTest, CanSpecifyClockGranularity) {
+  DcSctpOptions options = MakeOptions();
+  // Test with a large number.
+  options.clock_granularity = DurationMs(10);
+  RetransmissionTimeout rto_(options);
+
+  for (int i = 0; i < 1000; ++i) {
+    rto_.ObserveRTT(DurationMs(124));
+  }
+  EXPECT_EQ(*rto_.rto(), 134);
 }
 
 }  // namespace
