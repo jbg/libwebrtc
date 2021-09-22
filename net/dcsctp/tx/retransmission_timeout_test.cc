@@ -27,6 +27,7 @@ DcSctpOptions MakeOptions() {
   options.rto_initial = kInitialRto;
   options.rto_max = kMaxRto;
   options.rto_min = kMinRto;
+  options.min_rtt_variance = DurationMs(0);
   return options;
 }
 
@@ -141,10 +142,22 @@ TEST(RetransmissionTimeoutTest, WillAlwaysStayAboveRTT) {
   // any jitter will increase the RTO.
   RetransmissionTimeout rto_(MakeOptions());
 
-  for (int i = 0; i < 100; ++i) {
+  for (int i = 0; i < 1000; ++i) {
     rto_.ObserveRTT(DurationMs(124));
   }
-  EXPECT_GT(*rto_.rto(), 124);
+  EXPECT_EQ(*rto_.rto(), 127);
+}
+
+TEST(RetransmissionTimeoutTest, CanSpecifyMinimumRttVariance) {
+  DcSctpOptions options = MakeOptions();
+  // Test with a large number.
+  options.min_rtt_variance = DurationMs(220);
+  RetransmissionTimeout rto_(options);
+
+  for (int i = 0; i < 1000; ++i) {
+    rto_.ObserveRTT(DurationMs(124));
+  }
+  EXPECT_EQ(*rto_.rto(), 344);
 }
 
 }  // namespace
