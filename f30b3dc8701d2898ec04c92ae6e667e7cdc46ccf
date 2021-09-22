@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d8dc105_4380182b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-22T15:36:06Z",
+      "side": 1,
+      "message": "Except for the testing, this looks fine.\n\n(can\u0027t speak to the congestion control math, but code seems to do what it says on the label).\n\ntesting needs improving. But +1 anyway.",
+      "revId": "f30b3dc8701d2898ec04c92ae6e667e7cdc46ccf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453822f0_bd23ea8f",
+        "filename": "net/dcsctp/tx/retransmission_timeout_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-22T15:36:06Z",
+      "side": 1,
+      "message": "This is the same as the default, but different from the default for tests (if I read this correctly).\n\n1) The test should use a different number, to verify that we\u0027re not going with the default.\n\n2) Since this is observing behavior (resulting RTO), there should be a test for the behavior when the option is left at default.",
+      "revId": "f30b3dc8701d2898ec04c92ae6e667e7cdc46ccf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
