@@ -33,6 +33,24 @@
       "message": "This is the same as the default, but different from the default for tests (if I read this correctly).\n\n1) The test should use a different number, to verify that we\u0027re not going with the default.\n\n2) Since this is observing behavior (resulting RTO), there should be a test for the behavior when the option is left at default.",
       "revId": "f30b3dc8701d2898ec04c92ae6e667e7cdc46ccf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59c3bce9_25085a66",
+        "filename": "net/dcsctp/tx/retransmission_timeout_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-22T18:03:14Z",
+      "side": 1,
+      "message": "Good feedback. I changed so that the default value is used in most tests. It gives you a feeling on what to expect.\n\nThen I added two test cases that test smaller and larger values, and that they are as expected.",
+      "parentUuid": "453822f0_bd23ea8f",
+      "revId": "f30b3dc8701d2898ec04c92ae6e667e7cdc46ccf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
