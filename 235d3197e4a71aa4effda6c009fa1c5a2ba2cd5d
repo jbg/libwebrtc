@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b8e252e0_e382c2d5",
+        "filename": "test/fuzzers/vp9_encoder_references_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2021-09-22T14:47:31Z",
+      "side": 1,
+      "message": "Yeah, agreed that from the call-site it should be pretty clear that the bitrate is validated.",
+      "parentUuid": "1731d424_847d4740",
+      "range": {
+        "startLine": 250,
+        "startChar": 5,
+        "endLine": 250,
+        "endChar": 16
+      },
+      "revId": "235d3197e4a71aa4effda6c009fa1c5a2ba2cd5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "600bbf29_2ec9b895",
         "filename": "test/fuzzers/vp9_encoder_references_fuzzer.cc",
         "patchSetId": 2
@@ -278,6 +302,30 @@
         "startChar": 23,
         "endLine": 275,
         "endChar": 48
+      },
+      "revId": "235d3197e4a71aa4effda6c009fa1c5a2ba2cd5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e78a25b_5f30b1dc",
+        "filename": "test/fuzzers/vp9_encoder_references_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2021-09-22T14:47:31Z",
+      "side": 1,
+      "message": "Yes, I ment \"skipping are not supported\".\n\nI think it should be either \"skipping full frames are\" or \"skipping a full frame is\".",
+      "parentUuid": "43c5d31a_076aff7f",
+      "range": {
+        "startLine": 275,
+        "startChar": 78,
+        "endLine": 275,
+        "endChar": 80
       },
       "revId": "235d3197e4a71aa4effda6c009fa1c5a2ba2cd5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
