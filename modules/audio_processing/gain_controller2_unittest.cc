@@ -129,22 +129,6 @@ TEST(GainController2, CheckFixedDigitalConfig) {
   EXPECT_TRUE(GainController2::Validate(config));
 }
 
-TEST(GainController2, CheckAdaptiveDigitalVadProbabilityAttackConfig) {
-  AudioProcessing::Config::GainController2 config;
-  // Reject invalid attack.
-  config.adaptive_digital.vad_probability_attack = -123.f;
-  EXPECT_FALSE(GainController2::Validate(config));
-  config.adaptive_digital.vad_probability_attack = 0.f;
-  EXPECT_FALSE(GainController2::Validate(config));
-  config.adaptive_digital.vad_probability_attack = 42.f;
-  EXPECT_FALSE(GainController2::Validate(config));
-  // Accept valid attack.
-  config.adaptive_digital.vad_probability_attack = 0.1f;
-  EXPECT_TRUE(GainController2::Validate(config));
-  config.adaptive_digital.vad_probability_attack = 1.f;
-  EXPECT_TRUE(GainController2::Validate(config));
-}
-
 TEST(GainController2,
      CheckAdaptiveDigitalLevelEstimatorSpeechFramesThresholdConfig) {
   AudioProcessing::Config::GainController2 config;

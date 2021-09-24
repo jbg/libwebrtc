@@ -377,7 +377,6 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
         bool avx2_allowed = true;
         bool neon_allowed = true;
         // TODO(crbug.com/webrtc/7494): Remove deprecated settings below.
-        float vad_probability_attack = 1.0f;
         int level_estimator_adjacent_speech_frames_threshold = 12;
         bool use_saturation_protector = true;
         float initial_saturation_margin_db = 25.0f;
