@@ -22,8 +22,6 @@ namespace {
 
 using AdaptiveDigitalConfig =
     AudioProcessing::Config::GainController2::AdaptiveDigital;
-using NoiseEstimatorType =
-    AudioProcessing::Config::GainController2::NoiseEstimator;
 
 // Detects the available CPU features and applies any kill-switches.
 AvailableCpuFeatures GetAllowedCpuFeatures(
