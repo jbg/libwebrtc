@@ -206,7 +206,7 @@ rtc::CopyOnWriteBuffer Packet::BuildSingleNaluPayload() const {
   rtc::CopyOnWriteBuffer res;
   auto& h264_header = H264Header();
   res.AppendData(&h264_header.nalus[0].type, 1);
-  res.AppendData(nalu_payloads_[0].data(), nalu_payloads_[0].size());
+  res.AppendData(nalu_payloads_[0]);
   return res;
 }
 
@@ -224,7 +224,7 @@ rtc::CopyOnWriteBuffer Packet::BuildStapAPayload() const {
     res.AppendData(length_as_array);
 
     res.AppendData(&h264_header.nalus[i].type, 1);
-    res.AppendData(nalu_payloads_[i].data(), nalu_payloads_[i].size());
+    res.AppendData(nalu_payloads_[i]);
   }
   return res;
 }
