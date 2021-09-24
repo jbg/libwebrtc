@@ -27,7 +27,6 @@
 #include "rtc_base/type_traits.h"
 
 namespace rtc {
-
 class RTC_EXPORT CopyOnWriteBuffer {
  public:
   // An empty buffer.
