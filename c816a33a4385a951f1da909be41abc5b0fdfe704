@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b63b359_3527fed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2021-09-24T15:56:42Z",
+      "side": 1,
+      "message": "LGTM but I\u0027m unable to +1 it.",
+      "revId": "c816a33a4385a951f1da909be41abc5b0fdfe704",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
