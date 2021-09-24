@@ -25,7 +25,7 @@ constexpr int kSubFramesInFrame = 20;
 constexpr int kMaximalNumberOfSamplesPerChannel = 480;
 
 // Adaptive digital gain applier settings below.
-constexpr float kHeadroomDbfs = 1.0f;
+constexpr float kHeadroomDbfs = 6.0f;
 constexpr float kMaxGainDb = 30.0f;
 constexpr float kInitialAdaptiveDigitalGainDb = 8.0f;
 // At what limiter levels should we start decreasing the adaptive digital gain.
@@ -48,14 +48,12 @@ constexpr int kDefaultLevelEstimatorAdjacentSpeechFramesThreshold = 12;
 
 // Saturation Protector settings.
 constexpr float kSaturationProtectorInitialHeadroomDb = 20.0f;
-constexpr float kSaturationProtectorExtraHeadroomDb = 5.0f;
 constexpr int kSaturationProtectorBufferSize = 4;
 
 // Set the initial speech level estimate so that `kInitialAdaptiveDigitalGainDb`
 // is applied at the beginning of the call.
 constexpr float kInitialSpeechLevelEstimateDbfs =
-    -kSaturationProtectorExtraHeadroomDb -
-    kSaturationProtectorInitialHeadroomDb - kInitialAdaptiveDigitalGainDb -
+    -kSaturationProtectorInitialHeadroomDb - kInitialAdaptiveDigitalGainDb -
     kHeadroomDbfs;
 
 // Number of interpolation points for each region of the limiter.
