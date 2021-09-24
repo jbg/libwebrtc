@@ -33,6 +33,24 @@
       "message": "Please mention in the description why they are removed. Are they no longer used? Were they never used? Did we learn anything important during their lifetime worth highlighting for future generations of SWEs?",
       "revId": "4f813ad4078e9dca6c47dadf737e75b3595b0094",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a07c1fc8_b5856d46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6641
+      },
+      "writtenOn": "2021-09-24T10:14:38Z",
+      "side": 1,
+      "message": "oh, now i see the CL was abandoned.",
+      "parentUuid": "9f8a7799_ece4db3b",
+      "revId": "4f813ad4078e9dca6c47dadf737e75b3595b0094",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
