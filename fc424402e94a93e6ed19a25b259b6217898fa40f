@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "955cc8e4_92cfde84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16731
+      },
+      "writtenOn": "2021-09-24T12:03:04Z",
+      "side": 1,
+      "message": "Ah sorry, I should have made my plan clearer:\n1) This cl to add a direction indicator to the TransformableAudioFrameInterface webrtc API.\n2) Change the Chrome UnderlyingSource code to check that an RTCEncodedFrame written by javascript to a writable stream is backed by the right kind of WebRTC object and fail in a nice way if not - likely with an error-close.",
+      "parentUuid": "68d08175_da1b7b24",
+      "revId": "fc424402e94a93e6ed19a25b259b6217898fa40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80d412c9_27f3bc57",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-09-17T10:32:40Z",
       "side": 1,
       "message": "This naming is actually hideously ugly - there are two TransformableAudioFrameInterface classes, where they are not confused by the compiler because they live in different namespaces.\n\nCan you remove this \"subtlety\" by renmaing TransformableAudioFrame here to TransformableIncomingAudioFrame and the other one to TransformableOutgoingAudioFrame?",
+      "revId": "fc424402e94a93e6ed19a25b259b6217898fa40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "168ec2f6_19e4b7dd",
+        "filename": "audio/channel_receive_frame_transformer_delegate.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 16731
+      },
+      "writtenOn": "2021-09-24T12:03:04Z",
+      "side": 1,
+      "message": "With pleasure. Done.",
+      "parentUuid": "80d412c9_27f3bc57",
       "revId": "fc424402e94a93e6ed19a25b259b6217898fa40f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
