@@ -61,9 +61,6 @@ AdaptiveAgc::AdaptiveAgc(ApmDataDumper* apm_data_dumper,
   RTC_DCHECK(apm_data_dumper);
   RTC_DCHECK(noise_level_estimator_);
   RTC_DCHECK(saturation_protector_);
-  if (!config.use_saturation_protector) {
-    RTC_LOG(LS_WARNING) << "The saturation protector cannot be disabled.";
-  }
 }
 
 AdaptiveAgc::~AdaptiveAgc() = default;
