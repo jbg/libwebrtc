@@ -33,6 +33,52 @@
       "message": "Hi Sam,\nCould you PTAL?\nAlessio",
       "revId": "8337c514b8c150a9888bd369425f2f90afe7eb20",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb07054_c206a5d4",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-09-27T13:53:07Z",
+      "side": 1,
+      "message": "Where is this used?",
+      "range": {
+        "startLine": 24,
+        "startChar": 9,
+        "endLine": 24,
+        "endChar": 43
+      },
+      "revId": "8337c514b8c150a9888bd369425f2f90afe7eb20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "766449ab_4fd83111",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-09-27T13:53:07Z",
+      "side": 1,
+      "message": "Side question: Does it make more sense to have the GainController2 constructor take an AP::Config::GainController2? Or is the difference (potential reinitializations / reallocations) negligible?",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 27
+      },
+      "revId": "8337c514b8c150a9888bd369425f2f90afe7eb20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
