@@ -1530,10 +1530,9 @@ TEST_F(PortTest, TestDisableInterfaceOfTcpPort) {
   socket_factory.set_next_server_tcp_socket(rsocket);
   auto rport = CreateTcpPort(kLocalAddr2, &socket_factory);
 
-  lsocket->set_state(AsyncPacketSocket::STATE_BINDING);
-  lsocket->SignalAddressReady(lsocket, kLocalAddr1);
-  rsocket->set_state(AsyncPacketSocket::STATE_BINDING);
-  rsocket->SignalAddressReady(rsocket, kLocalAddr2);
+  lsocket->set_state(AsyncPacketSocket::STATE_BOUND);
+  rsocket->set_state(AsyncPacketSocket::STATE_BOUND);
+  rsocket->SignalAddressReady(rsocket, kLocalAddr2);  // XXX Why?
 
   lport->SetIceRole(cricket::ICEROLE_CONTROLLING);
   lport->SetIceTiebreaker(kTiebreaker1);
