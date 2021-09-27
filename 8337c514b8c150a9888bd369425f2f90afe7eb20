@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d9a9ee9_3bfca314",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-09-27T15:07:23Z",
+      "side": 1,
+      "message": "in a patch set I never uploaded\ngood catch!",
+      "parentUuid": "acb07054_c206a5d4",
+      "range": {
+        "startLine": 24,
+        "startChar": 9,
+        "endLine": 24,
+        "endChar": 43
+      },
+      "revId": "8337c514b8c150a9888bd369425f2f90afe7eb20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "766449ab_4fd83111",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-09-27T13:53:07Z",
       "side": 1,
       "message": "Side question: Does it make more sense to have the GainController2 constructor take an AP::Config::GainController2? Or is the difference (potential reinitializations / reallocations) negligible?",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 27
+      },
+      "revId": "8337c514b8c150a9888bd369425f2f90afe7eb20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b4991f9_137516a0",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-09-27T15:07:23Z",
+      "side": 1,
+      "message": "For sure I need to review ctor, Initialize() and ApplyConfig() as I believe that the AGC2 API can definitely be improved. So, thanks for the suggestion, I\u0027ll work on it as soon as possible.",
+      "parentUuid": "766449ab_4fd83111",
       "range": {
         "startLine": 241,
         "startChar": 0,
