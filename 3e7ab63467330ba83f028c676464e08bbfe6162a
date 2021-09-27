@@ -16,6 +16,414 @@
       "message": "Did a bunch of changes in the parser. PTAL.",
       "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d622541b_7c04b310",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "There\u0027s also some structural things that could be improved, but I don\u0027t want to draw out the process so I\u0027ll approve it just some nit-level issues to fix.",
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6356f8b2_c9ba101c",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "max_positive_delta (or max_positive_signer_delta, but imo signed is redundant in the context)",
+      "range": {
+        "startLine": 50,
+        "startChar": 11,
+        "endLine": 50,
+        "endChar": 31
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acfb4824_a20be3c7",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "min_negative_delta",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 31
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eff34da_31a03206",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "nit: Imo there\u0027s not much point in using const in such a short context if you are still acting on a copy and it makes for more boiler plate without adding much in terms of semantics.",
+      "range": {
+        "startLine": 53,
+        "startChar": 7,
+        "endLine": 53,
+        "endChar": 12
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17bd13a5_905c9a4f",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "positive_delta",
+      "range": {
+        "startLine": 54,
+        "startChar": 19,
+        "endLine": 54,
+        "endChar": 32
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7fe6b4d_df08a070",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "nit: Would IMO make sense to add some using to avoid extra namespacing in this code, making it easier to read with less line breaks etc.",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 43
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb4363d_bad413c6",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "negative_delta",
+      "range": {
+        "startLine": 56,
+        "startChar": 19,
+        "endLine": 56,
+        "endChar": 33
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07821c09_5fe017cd",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "unsigned_delta_bit_width\n\n(or IMO it\u0027s ok to replace bit_width with simply \"bits\")",
+      "range": {
+        "startLine": 73,
+        "startChar": 17,
+        "endLine": 73,
+        "endChar": 42
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e8aaf5_4912480f",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "signed_delta_bit_width",
+      "range": {
+        "startLine": 75,
+        "startChar": 17,
+        "endLine": 75,
+        "endChar": 40
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e74bc91_6746a740",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "use_signed_deltas",
+      "range": {
+        "startLine": 79,
+        "startChar": 7,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75163128_2405ba1e",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "delta_bit_width",
+      "range": {
+        "startLine": 80,
+        "startChar": 11,
+        "endLine": 80,
+        "endChar": 27
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13633b97_0342b7a5",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "It would be nice to extract the calculation of these two into a separate function since the other two are simply propagated and only noise for the reader of the algorithm above. Return value can be a struct DeltaCodingParams {int bit_width, bool signed}",
+      "range": {
+        "startLine": 88,
+        "startChar": 41,
+        "endLine": 88,
+        "endChar": 72
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e396dc4b_6024dc05",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "nit: Not needed given explicit numbering",
+      "range": {
+        "startLine": 32,
+        "startChar": 42,
+        "endLine": 32,
+        "endChar": 55
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6543310_14f9cd06",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "Extract the conre implementation into uint64_t ReadLittleEndian(const string_view data);",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 38
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ee5c69b_70ab7fbc",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "Explain in the comment why we need a parse specific error code instead of the other ones in webrtc/absl.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 71
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f9ae78_896ddef3",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "Since it\u0027s exposed in the public interface below, define this in the main namespace. If you need to disambiguate, extend the name to do so (for example: EventLogParseStatus)",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 17
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68975b78_9b009d97",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "Unless we expect this to be used in any other context than internally in the parser I\\d refrain to add example usage, it adds maintenance overhead and unit tests + actual code usage should be sufficient.",
+      "range": {
+        "startLine": 62,
+        "startChar": 52,
+        "endLine": 70,
+        "endChar": 64
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da14e40_b56e7d02",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-09-27T12:07:20Z",
+      "side": 1,
+      "message": "pending_data_",
+      "range": {
+        "startLine": 100,
+        "startChar": 20,
+        "endLine": 100,
+        "endChar": 22
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
