@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ed16f50_5753e17b",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T09:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce61994c_f17278c7",
+      "range": {
+        "startLine": 271,
+        "startChar": 19,
+        "endLine": 271,
+        "endChar": 26
+      },
+      "revId": "af75b45cc49a66ec7cbee5478dcdb3ad9134cbb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05093145_ddde8c84",
@@ -60,6 +84,54 @@
       "writtenOn": "2021-09-17T14:07:52Z",
       "side": 1,
       "message": "negative_delta",
+      "range": {
+        "startLine": 273,
+        "startChar": 19,
+        "endLine": 273,
+        "endChar": 33
+      },
+      "revId": "af75b45cc49a66ec7cbee5478dcdb3ad9134cbb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1d59b3f_eb822bfe",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T09:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05093145_ddde8c84",
+      "range": {
+        "startLine": 273,
+        "startChar": 19,
+        "endLine": 273,
+        "endChar": 33
+      },
+      "revId": "af75b45cc49a66ec7cbee5478dcdb3ad9134cbb8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58572812_e5f45b6c",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T09:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48f41897_795e4ceb",
       "range": {
         "startLine": 273,
         "startChar": 19,
