@@ -58,6 +58,54 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11975b50_3b7bbbf7",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done (Though I kept \u0027signed\u0027 because I think dropping it would make it less clear why there is a difference between max_unsigned_delta and max_positive_delta).",
+      "parentUuid": "6356f8b2_c9ba101c",
+      "range": {
+        "startLine": 50,
+        "startChar": 11,
+        "endLine": 50,
+        "endChar": 31
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99a31999_b1df74b9",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6356f8b2_c9ba101c",
+      "range": {
+        "startLine": 50,
+        "startChar": 11,
+        "endLine": 50,
+        "endChar": 31
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acfb4824_a20be3c7",
@@ -71,6 +119,30 @@
       "writtenOn": "2021-09-27T12:07:20Z",
       "side": 1,
       "message": "min_negative_delta",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 31
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6eb1019_c9b7c092",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acfb4824_a20be3c7",
       "range": {
         "startLine": 51,
         "startChar": 11,
@@ -104,6 +176,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1c687ae_f7ab09a7",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done. Also removed in some other places where I felt it didn\u0027t add too much value. Initially used it because a reviewer liked having it as an annotation in a different CL.",
+      "parentUuid": "1eff34da_31a03206",
+      "range": {
+        "startLine": 53,
+        "startChar": 7,
+        "endLine": 53,
+        "endChar": 12
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17bd13a5_905c9a4f",
@@ -117,6 +213,30 @@
       "writtenOn": "2021-09-27T12:07:20Z",
       "side": 1,
       "message": "positive_delta",
+      "range": {
+        "startLine": 54,
+        "startChar": 19,
+        "endLine": 54,
+        "endChar": 32
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d95556_770ea580",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17bd13a5_905c9a4f",
       "range": {
         "startLine": 54,
         "startChar": 19,
@@ -150,6 +270,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ee09caa_908e946c",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7fe6b4d_df08a070",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 43
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbb4363d_bad413c6",
@@ -163,6 +307,30 @@
       "writtenOn": "2021-09-27T12:07:20Z",
       "side": 1,
       "message": "negative_delta",
+      "range": {
+        "startLine": 56,
+        "startChar": 19,
+        "endLine": 56,
+        "endChar": 33
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8432e2cc_817374c7",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbb4363d_bad413c6",
       "range": {
         "startLine": 56,
         "startChar": 19,
@@ -196,6 +364,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b10284d0_6457f0b3",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07821c09_5fe017cd",
+      "range": {
+        "startLine": 73,
+        "startChar": 17,
+        "endLine": 73,
+        "endChar": 42
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11e8aaf5_4912480f",
@@ -209,6 +401,30 @@
       "writtenOn": "2021-09-27T12:07:20Z",
       "side": 1,
       "message": "signed_delta_bit_width",
+      "range": {
+        "startLine": 75,
+        "startChar": 17,
+        "endLine": 75,
+        "endChar": 40
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b5988fd_7d329adc",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11e8aaf5_4912480f",
       "range": {
         "startLine": 75,
         "startChar": 17,
@@ -242,6 +458,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ea2426_b90875e3",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e74bc91_6746a740",
+      "range": {
+        "startLine": 79,
+        "startChar": 7,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75163128_2405ba1e",
@@ -255,6 +495,30 @@
       "writtenOn": "2021-09-27T12:07:20Z",
       "side": 1,
       "message": "delta_bit_width",
+      "range": {
+        "startLine": 80,
+        "startChar": 11,
+        "endLine": 80,
+        "endChar": 27
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94a37deb_ae31834d",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75163128_2405ba1e",
       "range": {
         "startLine": 80,
         "startChar": 11,
@@ -290,6 +554,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "993260ca_2d3685a9",
+        "filename": "logging/rtc_event_log/events/fixed_length_encoding_parameters_v3.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "value_bit_width is used (in the form of a bit_mask) to compute the deltas. Not sure if it is worth making a separate function and struct just to avoid propagating the values_optional flag in the same function?",
+      "parentUuid": "13633b97_0342b7a5",
+      "range": {
+        "startLine": 88,
+        "startChar": 41,
+        "endLine": 88,
+        "endChar": 72
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e396dc4b_6024dc05",
         "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
         "patchSetId": 6
@@ -301,6 +589,30 @@
       "writtenOn": "2021-09-27T12:07:20Z",
       "side": 1,
       "message": "nit: Not needed given explicit numbering",
+      "range": {
+        "startLine": 32,
+        "startChar": 42,
+        "endLine": 32,
+        "endChar": 55
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56391ae9_923677aa",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e396dc4b_6024dc05",
       "range": {
         "startLine": 32,
         "startChar": 42,
@@ -336,6 +648,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62dec66d_0a6e374d",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "I\u0027m sorry. Could you clarify what you mean?",
+      "parentUuid": "b6543310_14f9cd06",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 38
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ee5c69b_70ab7fbc",
         "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.h",
         "patchSetId": 6
@@ -347,6 +683,30 @@
       "writtenOn": "2021-09-27T12:07:20Z",
       "side": 1,
       "message": "Explain in the comment why we need a parse specific error code instead of the other ones in webrtc/absl.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 71
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3a4e596_c7d06052",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ee5c69b_70ab7fbc",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -380,6 +740,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e37430d8_52e6ea76",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7f9ae78_896ddef3",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 17
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68975b78_9b009d97",
@@ -403,6 +787,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86dcb0df_6895505f",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "This will have to be done when adding a new event type, but I agree that there is a risk of the example going stale. Removed.",
+      "parentUuid": "68975b78_9b009d97",
+      "range": {
+        "startLine": 62,
+        "startChar": 52,
+        "endLine": 70,
+        "endChar": 64
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2da14e40_b56e7d02",
@@ -416,6 +824,30 @@
       "writtenOn": "2021-09-27T12:07:20Z",
       "side": 1,
       "message": "pending_data_",
+      "range": {
+        "startLine": 100,
+        "startChar": 20,
+        "endLine": 100,
+        "endChar": 22
+      },
+      "revId": "3e7ab63467330ba83f028c676464e08bbfe6162a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb680301_73ac0a98",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-27T16:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2da14e40_b56e7d02",
       "range": {
         "startLine": 100,
         "startChar": 20,
