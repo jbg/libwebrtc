@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61040a4d_e216edc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-27T19:40:05Z",
+      "side": 1,
+      "message": "When I read the description, I was thinking \"this is a bad idea\", but when I see what you\u0027re doing (picking up a string that we already send in the cookie), I think it\u0027s taking advantage of what\u0027s already there.\n\nLet\u0027s do it.\n",
+      "revId": "225ad32a836c12193ce35ad8ec62b29f89f45f42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
