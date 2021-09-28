@@ -16,6 +16,23 @@
       "message": "Some help needed.",
       "revId": "4284e2002fc796fe8d1afcaf3e403af20638d9b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cea3e67_158e9e68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-28T08:29:56Z",
+      "side": 1,
+      "message": "Merged fix into https://webrtc-review.googlesource.com/c/src/+/232860, will abandon this cl.",
+      "revId": "4284e2002fc796fe8d1afcaf3e403af20638d9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

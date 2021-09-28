@@ -22,6 +22,30 @@
       },
       "revId": "9f18756547f0a31ad3679c6237bf2305f46a687a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace67a34_b2bb8b2a",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-28T08:29:56Z",
+      "side": 1,
+      "message": "\u003e The calls to AddAddress look identical in TCPPort::OnAddressReady and TCPPort::PrepareAddress (under the assumption that socket_ is non-null and socket_-\u003eGetLocalAddress() returns the configured address).\n\nTurns out it\u0027s GetLocalAddress() that didn\u0027t return the intended address. Fixing that seems to make things work.",
+      "parentUuid": "5d4060dc_374b3c7c",
+      "range": {
+        "startLine": 1535,
+        "startChar": 0,
+        "endLine": 1535,
+        "endChar": 65
+      },
+      "revId": "9f18756547f0a31ad3679c6237bf2305f46a687a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
