@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2470502a_d6cf96b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-28T12:19:02Z",
+      "side": 1,
+      "message": "This is my intended next step. A transition plan is needed, to update downstream implementations of PacketSocketFactory.",
+      "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1f3683_481c9133",
+        "filename": "rtc_base/async_packet_socket.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-28T12:19:02Z",
+      "side": 1,
+      "message": "I wonder if this inheritance hack is a working way to transition downstream code. A different approach would be to first land a preparatory cl that makes AsyncPacketListenSocket an alias for AsyncPacketSocket, then fix downstream code to use the right name in the right places, and then land a variant of this cl that separates the two classes.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 68
+      },
+      "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
