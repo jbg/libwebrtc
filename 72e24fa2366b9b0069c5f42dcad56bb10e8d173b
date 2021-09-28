@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e8c828_38ec9fe9",
+        "filename": "net/dcsctp/socket/BUILD.gn",
+        "patchSetId": 16
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-09-28T14:09:24Z",
+      "side": 1,
+      "message": "Use api:network_emulation_manager_api instead",
+      "range": {
+        "startLine": 234,
+        "startChar": 16,
+        "endLine": 234,
+        "endChar": 45
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "168ac0b6_0a025400",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-09-28T14:09:24Z",
+      "side": 1,
+      "message": "If it must be non-null, then maybe pass a reference instead?",
+      "range": {
+        "startLine": 137,
+        "startChar": 12,
+        "endLine": 137,
+        "endChar": 23
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0016208_b50e596e",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-09-28T14:09:24Z",
+      "side": 1,
+      "message": "Please add constants for 53 and 52 here and below",
+      "range": {
+        "startLine": 231,
+        "startChar": 42,
+        "endLine": 231,
+        "endChar": 44
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a606ec_93837484",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-09-28T14:09:24Z",
+      "side": 1,
+      "message": "Constant?",
+      "range": {
+        "startLine": 267,
+        "startChar": 62,
+        "endLine": 267,
+        "endChar": 66
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "140469b0_0ffc80e9",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-09-28T14:09:24Z",
+      "side": 1,
+      "message": "Constant here and above?",
+      "range": {
+        "startLine": 282,
+        "startChar": 42,
+        "endLine": 282,
+        "endChar": 46
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b77538a_904c40be",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-09-28T14:09:24Z",
+      "side": 1,
+      "message": "FYI: network endpoint has method to get stats from it, so it might be useful for you.",
+      "range": {
+        "startLine": 289,
+        "startChar": 9,
+        "endLine": 289,
+        "endChar": 34
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6561dee_ed6bcafd",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-09-28T14:09:24Z",
+      "side": 1,
+      "message": "Please use real type here",
+      "range": {
+        "startLine": 338,
+        "startChar": 4,
+        "endLine": 338,
+        "endChar": 8
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea603b7_149a41fc",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-09-28T14:09:24Z",
+      "side": 1,
+      "message": "You don\u0027t need to create SimulatedNetwork, you can just pass config directly.",
+      "range": {
+        "startLine": 339,
+        "startChar": 8,
+        "endLine": 339,
+        "endChar": 51
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb301b84_76da38bd",
+        "filename": "test/network/BUILD.gn",
+        "patchSetId": 16
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-09-28T14:09:24Z",
+      "side": 1,
+      "message": "You don\u0027t need this, use public API on network emulation framework instead (in /api/test/)",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 34
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
