@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "f1b85c8103ff906b884d4a3024636902a43cfb00",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1233864b_db7b202f",
+        "filename": "rtc_base/network.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-28T14:04:45Z",
+      "side": 1,
+      "message": "Should we ABSL_DEPRECATE this one too?",
+      "revId": "f1b85c8103ff906b884d4a3024636902a43cfb00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e0d93b_8b5970b9",
+        "filename": "rtc_base/network.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-28T14:04:45Z",
+      "side": 1,
+      "message": "Suggest including the text \"Use the version with socket_factory, see\" before the bug number.",
+      "revId": "f1b85c8103ff906b884d4a3024636902a43cfb00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
