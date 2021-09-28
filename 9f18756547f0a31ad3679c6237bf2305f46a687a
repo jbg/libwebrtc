@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d4060dc_374b3c7c",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-28T07:12:40Z",
+      "side": 1,
+      "message": "For lsocket, it worked fine to drop SignalAddressReady(). My rough understanding is that when state is BOUND, the below call to lport-\u003ePrepareAddress() does whatever is needed to register the port (essentially calling Port::AddAddress, but I haven\u0027t grokked the meaning of all the arguments).\n\nThe calls to AddAddress look identical in TCPPort::OnAddressReady and TCPPort::PrepareAddress (under the assumption that socket_ is non-null and socket_-\u003eGetLocalAddress() returns the configured address).\n\nBut doing the same to rsocket breaks the test, with rport-\u003eCandidates().empty() being true. Jonas, can you help out, as author of this test?",
+      "range": {
+        "startLine": 1535,
+        "startChar": 0,
+        "endLine": 1535,
+        "endChar": 65
+      },
+      "revId": "9f18756547f0a31ad3679c6237bf2305f46a687a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
