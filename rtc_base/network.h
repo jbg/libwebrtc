@@ -256,10 +256,6 @@ class RTC_EXPORT BasicNetworkManager : public NetworkManagerBase,
                                        public sigslot::has_slots<> {
  public:
   BasicNetworkManager();
-
-  ABSL_DEPRECATED(
-      "Use the version with socket_factory, see bugs.webrtc.org/13145")
-  explicit BasicNetworkManager(NetworkMonitorFactory* network_monitor_factory);
   BasicNetworkManager(NetworkMonitorFactory* network_monitor_factory,
                       SocketFactory* socket_factory);
   ~BasicNetworkManager() override;
