@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41fa138e_6dd83743",
+        "filename": "net/dcsctp/socket/BUILD.gn",
+        "patchSetId": 16
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-29T12:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12e8c828_38ec9fe9",
+      "range": {
+        "startLine": 234,
+        "startChar": 16,
+        "endLine": 234,
+        "endChar": 45
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "168ac0b6_0a025400",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-28T14:09:24Z",
       "side": 1,
       "message": "If it must be non-null, then maybe pass a reference instead?",
+      "range": {
+        "startLine": 137,
+        "startChar": 12,
+        "endLine": 137,
+        "endChar": 23
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2cb918_23d3ecd9",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-29T12:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "168ac0b6_0a025400",
       "range": {
         "startLine": 137,
         "startChar": 12,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44103dae_40c648ba",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-29T12:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0016208_b50e596e",
+      "range": {
+        "startLine": 231,
+        "startChar": 42,
+        "endLine": 231,
+        "endChar": 44
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0a606ec_93837484",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-09-28T14:09:24Z",
       "side": 1,
       "message": "Constant?",
+      "range": {
+        "startLine": 267,
+        "startChar": 62,
+        "endLine": 267,
+        "endChar": 66
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca49ed65_b43ce764",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-29T12:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0a606ec_93837484",
       "range": {
         "startLine": 267,
         "startChar": 62,
@@ -118,6 +214,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3782f7e5_7e0b203d",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-29T12:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "140469b0_0ffc80e9",
+      "range": {
+        "startLine": 282,
+        "startChar": 42,
+        "endLine": 282,
+        "endChar": 46
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7b77538a_904c40be",
         "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
         "patchSetId": 16
@@ -129,6 +249,30 @@
       "writtenOn": "2021-09-28T14:09:24Z",
       "side": 1,
       "message": "FYI: network endpoint has method to get stats from it, so it might be useful for you.",
+      "range": {
+        "startLine": 289,
+        "startChar": 9,
+        "endLine": 289,
+        "endChar": 34
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c99f4fac_c5848e16",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-29T12:20:15Z",
+      "side": 1,
+      "message": "Thanks - I\u0027ll evaluate them separately. They will not reflect the same thing exactly; This is how much that was successfully received from assembled messages, and I validate the partial reliability with this information. With the stats from the network emulation, I could get how much that is sent and received on the wire, but that\u0027s not exactly the same. But it\u0027s complementary information that I should check as well, so that there aren\u0027t e.g. too many retransmissions.",
+      "parentUuid": "7b77538a_904c40be",
       "range": {
         "startLine": 289,
         "startChar": 9,
@@ -162,6 +306,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52050616_1c84f86d",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-29T12:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6561dee_ed6bcafd",
+      "range": {
+        "startLine": 338,
+        "startChar": 4,
+        "endLine": 338,
+        "endChar": 8
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cea603b7_149a41fc",
@@ -185,6 +353,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d39d5508_95a0cae7",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-29T12:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea603b7_149a41fc",
+      "range": {
+        "startLine": 339,
+        "startChar": 8,
+        "endLine": 339,
+        "endChar": 51
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb301b84_76da38bd",
@@ -198,6 +390,30 @@
       "writtenOn": "2021-09-28T14:09:24Z",
       "side": 1,
       "message": "You don\u0027t need this, use public API on network emulation framework instead (in /api/test/)",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 34
+      },
+      "revId": "72e24fa2366b9b0069c5f42dcad56bb10e8d173b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05dc7560_f4288baf",
+        "filename": "test/network/BUILD.gn",
+        "patchSetId": 16
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-09-29T12:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb301b84_76da38bd",
       "range": {
         "startLine": 19,
         "startChar": 6,
