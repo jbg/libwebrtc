@@ -18,6 +18,40 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "613110e8_99921531",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-29T12:10:32Z",
+      "side": 1,
+      "message": "Some comments ... let\u0027s discuss this before landing.\n",
+      "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "021b4426_1a948050",
+        "filename": "rtc_base/async_packet_socket.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-29T12:10:32Z",
+      "side": 1,
+      "message": "Bikeshedding: This class has nothing to do with packets. Should we shorten the name to AsyncListenSocket?",
+      "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe1f3683_481c9133",
@@ -31,6 +65,30 @@
       "writtenOn": "2021-09-28T12:19:02Z",
       "side": 1,
       "message": "I wonder if this inheritance hack is a working way to transition downstream code. A different approach would be to first land a preparatory cl that makes AsyncPacketListenSocket an alias for AsyncPacketSocket, then fix downstream code to use the right name in the right places, and then land a variant of this cl that separates the two classes.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 68
+      },
+      "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b48dafe_c90f6b15",
+        "filename": "rtc_base/async_packet_socket.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-09-29T12:10:32Z",
+      "side": 1,
+      "message": "I think this is a reasonable way to do it, and lets us get to where we want to be.\n\nOne possible alternative is to let AsyncPacketSocket own (rather than be) an AsyncListenSocket, and forward the calls - that would allow us to ABSL_DEPRECATE the methods that only make sense on the ListenSocket, so that we get to see the call sites that use it.\n\nAll the methods are virtual, so we can also keep the inheritance and override them in this interface in order to ABSL_DEPRECATE them, I think.",
+      "parentUuid": "fe1f3683_481c9133",
       "range": {
         "startLine": 87,
         "startChar": 0,
