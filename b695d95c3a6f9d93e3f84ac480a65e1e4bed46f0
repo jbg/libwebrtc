@@ -16,6 +16,29 @@
       "message": "Thanks for reviewing!",
       "revId": "b695d95c3a6f9d93e3f84ac480a65e1e4bed46f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea665e2c_8f7ba2c7",
+        "filename": "net/dcsctp/socket/dcsctp_socket_network_test.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-09-29T21:18:02Z",
+      "side": 1,
+      "message": "Before it was 52 and now it\u0027s 53, so is it intended? (Asking to be sure that it\u0027s not a typo)",
+      "range": {
+        "startLine": 248,
+        "startChar": 37,
+        "endLine": 248,
+        "endChar": 42
+      },
+      "revId": "b695d95c3a6f9d93e3f84ac480a65e1e4bed46f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
