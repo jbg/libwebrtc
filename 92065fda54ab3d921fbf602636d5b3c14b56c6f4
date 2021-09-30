@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "435e86f7_db06b9d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-09-30T08:28:33Z",
+      "side": 1,
+      "message": "LGTM from the perspective of wanting to increase holdback window, but please get this reviewed by someone more familiar with the pacer logic",
+      "revId": "92065fda54ab3d921fbf602636d5b3c14b56c6f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "054711d5_d4f44773",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-09-30T08:28:33Z",
+      "side": 1,
+      "message": "Is pacing_rate_ just mirroring what pacing_controller_\u0027s rate is? If so, would it make more sense to add a getter to pacing_controller_?",
+      "revId": "92065fda54ab3d921fbf602636d5b3c14b56c6f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
