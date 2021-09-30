@@ -22,6 +22,30 @@
       },
       "revId": "dc3236ee2a5e468cf2a4db604b4223c95cc48b8b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae994906_b0197f95",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding_parser.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-09-30T09:49:09Z",
+      "side": 1,
+      "message": "I\u0027m not so fond of that since it essentially just moves the input validation and code that relies on the input being valid into separate functions.",
+      "parentUuid": "55222e06_c4027af9",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 3
+      },
+      "revId": "dc3236ee2a5e468cf2a4db604b4223c95cc48b8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
