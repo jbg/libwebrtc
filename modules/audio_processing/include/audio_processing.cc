@@ -56,7 +56,9 @@ void CustomProcessing::SetRuntimeSetting(
 bool Agc1Config::operator==(const Agc1Config& rhs) const {
   const auto& analog_lhs = analog_gain_controller;
   const auto& analog_rhs = rhs.analog_gain_controller;
-  return enabled == rhs.enabled && mode == rhs.mode &&
+  // clang-format off
+  return enabled == rhs.enabled &&
+         mode == rhs.mode &&
          target_level_dbfs == rhs.target_level_dbfs &&
          compression_gain_db == rhs.compression_gain_db &&
          enable_limiter == rhs.enable_limiter &&
@@ -85,18 +87,26 @@ bool Agc1Config::operator==(const Agc1Config& rhs) const {
              analog_rhs.clipping_predictor.crest_factor_margin &&
          analog_lhs.clipping_predictor.use_predicted_step ==
              analog_rhs.clipping_predictor.use_predicted_step;
+  // clang-format on
 }
 
 bool Agc2Config::AdaptiveDigital::operator==(
     const Agc2Config::AdaptiveDigital& rhs) const {
-  return enabled == rhs.enabled && dry_run == rhs.dry_run &&
+  // clang-format off
+  return enabled == rhs.enabled &&
+         dry_run == rhs.dry_run &&
+         headroom_db == rhs.headroom_db &&
+         max_gain_db == rhs.max_gain_db &&
+         initial_gain_db == rhs.initial_gain_db &&
          vad_reset_period_ms == rhs.vad_reset_period_ms &&
          adjacent_speech_frames_threshold ==
              rhs.adjacent_speech_frames_threshold &&
          max_gain_change_db_per_second == rhs.max_gain_change_db_per_second &&
          max_output_noise_level_dbfs == rhs.max_output_noise_level_dbfs &&
-         sse2_allowed == rhs.sse2_allowed && avx2_allowed == rhs.avx2_allowed &&
+         sse2_allowed == rhs.sse2_allowed &&
+         avx2_allowed == rhs.avx2_allowed &&
          neon_allowed == rhs.neon_allowed;
+  // clang-format on
 }
 
 bool Agc2Config::operator==(const Agc2Config& rhs) const {
@@ -197,6 +207,10 @@ std::string AudioProcessing::Config::ToString() const {
       << " }, adaptive_digital: { enabled: "
       << gain_controller2.adaptive_digital.enabled
       << ", dry_run: " << gain_controller2.adaptive_digital.dry_run
+      << ", headroom_db: " << gain_controller2.adaptive_digital.headroom_db
+      << ", max_gain_db: " << gain_controller2.adaptive_digital.max_gain_db
+      << ", initial_gain_db: "
+      << gain_controller2.adaptive_digital.initial_gain_db
       << ", vad_reset_period_ms: "
       << gain_controller2.adaptive_digital.vad_reset_period_ms
       << ", adjacent_speech_frames_threshold: "
