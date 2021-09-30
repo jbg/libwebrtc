@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a11d5aa7_32a5e5dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-30T13:31:36Z",
+      "side": 1,
+      "message": "Makes sense, done.",
+      "parentUuid": "7594a0f5_bfe3e111",
+      "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "021b4426_1a948050",
@@ -154,6 +172,30 @@
       "side": 1,
       "message": "This definitely seems like the cleanest way - if we stop/pause at any place in the process, the hierarchy is obvious. It does mean that the downstream fixes will have to happen before we reap the benefits (splitting the class), but we\u0027re not in a tearing hurry.",
       "parentUuid": "c44af5bc_d444c091",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 68
+      },
+      "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed3ba69a_ce60903f",
+        "filename": "rtc_base/async_packet_socket.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-30T13:31:36Z",
+      "side": 1,
+      "message": "Still a bit worried about how to make it work, if we have downstream implementations of PacketSocketFactory::CreateServerTcpSocket and creates and returns a custom class. Maybe we\u0027ll need additional steps.\n\nAnd some cases may be easier, e.g., https://source.chromium.org/chromium/chromium/src/+/main:remoting/protocol/chromium_socket_factory.cc;drc\u003de9178e48b3e17acf7e6cbd554700aca0d0c825d5;l\u003d432 just returns nullptr, and doesn\u0027t care much what type that is.",
+      "parentUuid": "c61e949b_33efb999",
       "range": {
         "startLine": 87,
         "startChar": 0,
