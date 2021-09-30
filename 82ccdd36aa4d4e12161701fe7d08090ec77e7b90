@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffbc2952_347089f7",
+        "filename": "modules/audio_processing/agc2/adaptive_digital_gain_applier.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-09-30T20:57:21Z",
+      "side": 0,
+      "message": "Some of this description should make it into the AP::Config::GainController2::AdaptiveDigital declaration, so at least some basic definitions are kept around.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 78
+      },
+      "revId": "82ccdd36aa4d4e12161701fe7d08090ec77e7b90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca82471_bfe5db9c",
+        "filename": "modules/audio_processing/agc2/agc2_common.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-09-30T20:57:21Z",
+      "side": 0,
+      "message": "Is there any information here that should be ported to the parameter description in the config in audio_processing.h?",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 47
+      },
+      "revId": "82ccdd36aa4d4e12161701fe7d08090ec77e7b90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
