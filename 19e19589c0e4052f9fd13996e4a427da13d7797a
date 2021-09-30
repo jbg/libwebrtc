@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e79cc3b_5e12e529",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-09-30T19:01:03Z",
+      "side": 1,
+      "message": "I think these bots don\u0027t build Chromium (only these one: https://ci.chromium.org/p/chromium/builders/luci.chromium.webrtc.fyi/WebRTC%20Chromium%20FYI%20ios-device, https://ci.chromium.org/p/chromium/builders/luci.chromium.webrtc.fyi/WebRTC%20Chromium%20FYI%20ios-simulator).\n\nMy feeling is that https://chromium-review.googlesource.com/c/chromium/src/+/3195917 is enough but landing this one is not a problem and we will have a double level of security.",
+      "range": {
+        "startLine": 381,
+        "startChar": 4,
+        "endLine": 407,
+        "endChar": 6
+      },
+      "revId": "19e19589c0e4052f9fd13996e4a427da13d7797a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
