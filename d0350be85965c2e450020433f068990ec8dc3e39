@@ -97,6 +97,30 @@
       },
       "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c44af5bc_d444c091",
+        "filename": "rtc_base/async_packet_socket.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-30T08:47:22Z",
+      "side": 1,
+      "message": "I think the main obstacle is downstream implementations of the PacketSocketFactory interface, and implementing CreateServerTcpSocket, where return type is going to change from AsyncPacketSocket to Async(Packet)Listensocket. The inheritance hack was intended to deal with this by making discrepancy in return types match the covariant return type feature, but I\u0027m thinking that\u0027s maybe too clever, and it might break in other context, e.g., if downstream code callse the interface CreateServerTcpSocket and wants to assign the result to an AsyncPacketSocket pointer.\n\nI\u0027m currently leaning towards this dance:\n\n1. Land a cl to introduce the new name as an alias.\n\n2. Update downstream code to use the new name when handling server sockets.\n\n3. Split the class in two (this cl, but without the inheritance hack).\n\nDo you see any easier way?",
+      "parentUuid": "1b48dafe_c90f6b15",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 68
+      },
+      "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

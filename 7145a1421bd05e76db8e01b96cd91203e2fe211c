@@ -16,6 +16,24 @@
       "message": "I think these functions are needed in this API post-split too.",
       "revId": "7145a1421bd05e76db8e01b96cd91203e2fe211c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c15136ad_a6c44e7b",
+        "filename": "rtc_base/async_packet_socket.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-09-30T08:47:22Z",
+      "side": 0,
+      "message": "Agree, they were moved to the parent class in the cl, would have to move back when inheritance is cut.",
+      "parentUuid": "41ccbdc4_c2b19493",
+      "revId": "7145a1421bd05e76db8e01b96cd91203e2fe211c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
