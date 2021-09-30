@@ -28,6 +28,19 @@ AsyncPacketSocket::AsyncPacketSocket() = default;
 
 AsyncPacketSocket::~AsyncPacketSocket() = default;
 
+AsyncPacketSocket::State AsyncListenSocket::GetState() {
+  switch (GetBindState()) {
+    default:
+      RTC_NOTREACHED();
+    case State::kClosed:
+      return AsyncPacketSocket::STATE_CLOSED;
+    case State::kBinding:
+      return AsyncPacketSocket::STATE_BINDING;
+    case State::kBound:
+      return AsyncPacketSocket::STATE_BOUND;
+  }
+}
+
 void CopySocketInformationToPacketInfo(size_t packet_size_bytes,
                                        const AsyncPacketSocket& socket_from,
                                        bool is_connectionless,

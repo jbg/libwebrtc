@@ -14,6 +14,7 @@
 
 #include <string>
 
+#include "absl/memory/memory.h"
 #include "p2p/base/async_stun_tcp_socket.h"
 #include "rtc_base/async_resolver.h"
 #include "rtc_base/async_tcp_socket.h"
@@ -51,7 +52,7 @@ AsyncPacketSocket* BasicPacketSocketFactory::CreateUdpSocket(
   return new AsyncUDPSocket(socket);
 }
 
-AsyncPacketSocket* BasicPacketSocketFactory::CreateServerTcpSocket(
+AsyncListenSocket* BasicPacketSocketFactory::CreateServerTcpSocket(
     const SocketAddress& local_address,
     uint16_t min_port,
     uint16_t max_port,
@@ -90,7 +91,7 @@ AsyncPacketSocket* BasicPacketSocketFactory::CreateServerTcpSocket(
 
   RTC_CHECK(!(opts & PacketSocketFactory::OPT_STUN));
 
-  return new AsyncTCPSocket(socket, true);
+  return new AsyncTcpListenSocket(absl::WrapUnique(socket));
 }
 
 AsyncPacketSocket* BasicPacketSocketFactory::CreateClientTcpSocket(
@@ -184,7 +185,7 @@ AsyncPacketSocket* BasicPacketSocketFactory::CreateClientTcpSocket(
   if (tcp_options.opts & PacketSocketFactory::OPT_STUN) {
     tcp_socket = new cricket::AsyncStunTCPSocket(socket);
   } else {
-    tcp_socket = new AsyncTCPSocket(socket, false);
+    tcp_socket = new AsyncTCPSocket(socket);
   }
 
   return tcp_socket;
