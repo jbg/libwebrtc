@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9eead8_6c8c841e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-10-01T13:42:03Z",
+      "side": 1,
+      "message": "Thanks for the comments Sam! Addressed as per offline discussion.",
+      "revId": "0681d5bec13cd553218abfcf6f299838287c548e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

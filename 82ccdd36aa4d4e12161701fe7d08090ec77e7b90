@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c11de160_6c929335",
+        "filename": "modules/audio_processing/agc2/adaptive_digital_gain_applier.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-10-01T13:42:03Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "ffbc2952_347089f7",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 78
+      },
+      "revId": "82ccdd36aa4d4e12161701fe7d08090ec77e7b90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ca82471_bfe5db9c",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-30T20:57:21Z",
       "side": 0,
       "message": "Is there any information here that should be ported to the parameter description in the config in audio_processing.h?",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 47
+      },
+      "revId": "82ccdd36aa4d4e12161701fe7d08090ec77e7b90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4abd405f_d0157a0e",
+        "filename": "modules/audio_processing/agc2/agc2_common.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-10-01T13:42:03Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "6ca82471_bfe5db9c",
       "range": {
         "startLine": 46,
         "startChar": 0,
