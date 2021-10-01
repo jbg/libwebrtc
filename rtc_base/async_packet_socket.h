@@ -128,11 +128,32 @@ class RTC_EXPORT AsyncPacketSocket : public sigslot::has_slots<> {
   // CONNECTED to CLOSED.
   sigslot::signal2<AsyncPacketSocket*, int> SignalClose;
 
-  // Used only for listening TCP sockets.
-  sigslot::signal2<AsyncPacketSocket*, AsyncPacketSocket*> SignalNewConnection;
-
  private:
   RTC_DISALLOW_COPY_AND_ASSIGN(AsyncPacketSocket);
+};
+
+// Listen socket, producing an AsyncPacketSocket when a peer connects.
+class RTC_EXPORT AsyncListenSocket : public sigslot::has_slots<> {
+ public:
+  enum class State {
+    kClosed,
+    kBinding,
+    kBound,
+  };
+
+  // Returns current state of the socket.
+  virtual State GetBindState() const = 0;
+  AsyncPacketSocket::State GetState();
+
+  // Returns current local address. Address may be set to null if the
+  // socket is not bound yet (GetState() returns kBinding).
+  virtual SocketAddress GetLocalAddress() const = 0;
+
+  // Get/set options.
+  virtual int GetOption(Socket::Option opt, int* value) = 0;
+  virtual int SetOption(Socket::Option opt, int value) = 0;
+
+  sigslot::signal2<AsyncListenSocket*, AsyncPacketSocket*> SignalNewConnection;
 };
 
 void CopySocketInformationToPacketInfo(size_t packet_size_bytes,
