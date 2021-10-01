@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be84f6a6_46065c40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-10-01T09:09:22Z",
+      "side": 1,
+      "message": "you\u0027re changing it both for audio and video,\ncan you please update the description to reflect that",
+      "range": {
+        "startLine": 7,
+        "startChar": 74,
+        "endLine": 7,
+        "endChar": 83
+      },
+      "revId": "e96ef0b9ef2d62832b39b8ac6b69eeffb15febf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
