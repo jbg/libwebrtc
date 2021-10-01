@@ -104,7 +104,7 @@ class AsyncStunTCPSocketTest : public ::testing::Test,
     ++sent_packets_;
   }
 
-  void OnNewConnection(rtc::AsyncPacketSocket* /*server*/,
+  void OnNewConnection(rtc::AsyncListenSocket* /*server*/,
                        rtc::AsyncPacketSocket* new_socket) {
     listen_socket_.reset(new_socket);
     new_socket->SignalReadPacket.connect(this,
@@ -132,7 +132,7 @@ class AsyncStunTCPSocketTest : public ::testing::Test,
   std::unique_ptr<rtc::VirtualSocketServer> vss_;
   rtc::AutoSocketServerThread thread_;
   std::unique_ptr<AsyncStunTCPSocket> send_socket_;
-  std::unique_ptr<rtc::AsyncPacketSocket> recv_socket_;
+  std::unique_ptr<rtc::AsyncListenSocket> recv_socket_;
   std::unique_ptr<rtc::AsyncPacketSocket> listen_socket_;
   std::list<std::string> recv_packets_;
   int sent_packets_ = 0;
