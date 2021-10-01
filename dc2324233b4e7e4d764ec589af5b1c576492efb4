@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "528b3b16_4bbae96d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-01T15:11:55Z",
+      "side": 1,
+      "message": "Thanks for the review!\n",
+      "revId": "dc2324233b4e7e4d764ec589af5b1c576492efb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f317e17f_d67885cb",
@@ -41,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5444771c_6bfb2abd",
+        "filename": "api/wrapping_async_resolver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-01T15:11:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f317e17f_d67885cb",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 38
+      },
+      "revId": "dc2324233b4e7e4d764ec589af5b1c576492efb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd82fe86_0e1279af",
@@ -54,6 +95,30 @@
       "writtenOn": "2021-10-01T15:03:20Z",
       "side": 1,
       "message": "Is this needed in this CL or was it leftover from a future CL by mistake?",
+      "range": {
+        "startLine": 217,
+        "startChar": 3,
+        "endLine": 217,
+        "endChar": 35
+      },
+      "revId": "dc2324233b4e7e4d764ec589af5b1c576492efb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f747dd2_f08fd2df",
+        "filename": "pc/test/integration_test_helpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-01T15:11:55Z",
+      "side": 1,
+      "message": "This is a fix from a completely unrelated CL. Thanks for the catch!",
+      "parentUuid": "dd82fe86_0e1279af",
       "range": {
         "startLine": 217,
         "startChar": 3,
