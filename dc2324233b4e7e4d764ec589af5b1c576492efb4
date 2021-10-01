@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea738352_cbd0bd36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-10-01T15:03:20Z",
+      "side": 1,
+      "message": "lgtm % nits",
+      "revId": "dc2324233b4e7e4d764ec589af5b1c576492efb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f317e17f_d67885cb",
+        "filename": "api/wrapping_async_resolver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-10-01T15:03:20Z",
+      "side": 1,
+      "message": "The file name should probably contain _dns_ (also consistent with exposed class name) to avoid confusion with AsyncResolver.",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 38
+      },
+      "revId": "dc2324233b4e7e4d764ec589af5b1c576492efb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd82fe86_0e1279af",
+        "filename": "pc/test/integration_test_helpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-10-01T15:03:20Z",
+      "side": 1,
+      "message": "Is this needed in this CL or was it leftover from a future CL by mistake?",
+      "range": {
+        "startLine": 217,
+        "startChar": 3,
+        "endLine": 217,
+        "endChar": 35
+      },
+      "revId": "dc2324233b4e7e4d764ec589af5b1c576492efb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
