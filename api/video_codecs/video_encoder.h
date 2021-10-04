@@ -25,6 +25,7 @@
 #include "api/video/video_codec_constants.h"
 #include "api/video/video_frame.h"
 #include "api/video_codecs/video_codec.h"
+#include "api/video_codecs/video_encoding_config.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/system/rtc_export.h"
 
@@ -341,6 +342,10 @@ class RTC_EXPORT VideoEncoder {
   static VideoCodecVP9 GetDefaultVp9Settings();
   static VideoCodecH264 GetDefaultH264Settings();
 
+  static void SetDefaultVp8Settings(VideoEncodingParameters& config);
+  static void SetDefaultVp9Settings(VideoEncodingParameters& config);
+  static void SetDefaultH264Settings(VideoEncodingParameters& config);
+
   virtual ~VideoEncoder() {}
 
   // Set a FecControllerOverride, through which the encoder may override
@@ -368,12 +373,18 @@ class RTC_EXPORT VideoEncoder {
   // TODO(bugs.webrtc.org/10720): After updating downstream projects and posting
   // an announcement to discuss-webrtc, remove the three-parameters variant
   // and make the two-parameters variant pure-virtual.
-  /* ABSL_DEPRECATED("bugs.webrtc.org/10720") */ virtual int32_t InitEncode(
-      const VideoCodec* codec_settings,
-      int32_t number_of_cores,
-      size_t max_payload_size);
+  ABSL_DEPRECATED("bugs.webrtc.org/10720")
+  virtual int32_t InitEncode(const VideoCodec* codec_settings,
+                             int32_t number_of_cores,
+                             size_t max_payload_size);
+  ABSL_DEPRECATED("")
   virtual int InitEncode(const VideoCodec* codec_settings,
                          const VideoEncoder::Settings& settings);
+
+  // `config` describes how to encoder video stream.
+  // `settings` describes what kind of resources encoder has to handle encoding.
+  virtual bool Init(const VideoTrackConfig& config,
+                    const Settings& settings) = 0;
 
   // Register an encode complete callback object.
   //

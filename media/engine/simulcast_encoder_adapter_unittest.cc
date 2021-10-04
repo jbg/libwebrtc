@@ -486,7 +486,7 @@ class TestSimulcastEncoderAdapterFake : public ::testing::Test,
       }
     }
     rate_allocator_.reset(new SimulcastRateAllocator(codec_));
-    EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
+    EXPECT_TRUE(adapter_->Init(&codec_, kSettings));
     adapter_->RegisterEncodeCompleteCallback(this);
   }
 
@@ -562,7 +562,7 @@ class TestSimulcastEncoderAdapterFake : public ::testing::Test,
  protected:
   std::unique_ptr<TestSimulcastEncoderAdapterFakeHelper> helper_;
   std::unique_ptr<VideoEncoder> adapter_;
-  VideoCodec codec_;
+  VideoEncodingConfig encoding_;
   int last_encoded_image_width_;
   int last_encoded_image_height_;
   int last_encoded_image_simulcast_index_;
@@ -584,7 +584,7 @@ TEST_F(TestSimulcastEncoderAdapterFake, Reinit) {
   SetupCodec();
   EXPECT_EQ(0, adapter_->Release());
 
-  EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
+  EXPECT_TRUE(adapter_->Init(encoding_, kSettings));
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, EncodedCallbackForDifferentEncoders) {

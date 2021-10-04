@@ -12,6 +12,13 @@ if (is_android) {
   import("//build/config/android/rules.gni")
 }
 
+rtc_library("video_encoding_config") {
+  visibility = [ "*" ]
+  public = [ "video_encoding_config.h" ]
+  deps = [ "../video:render_resolution" ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/strings" ]
+}
+
 rtc_library("video_codecs_api") {
   visibility = [ "*" ]
   sources = [
@@ -19,10 +26,6 @@ rtc_library("video_codecs_api") {
     "h264_profile_level_id.h",
     "sdp_video_format.cc",
     "sdp_video_format.h",
-    "spatial_layer.cc",
-    "spatial_layer.h",
-    "video_codec.cc",
-    "video_codec.h",
     "video_decoder.cc",
     "video_decoder.h",
     "video_decoder_factory.h",

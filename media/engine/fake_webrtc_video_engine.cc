@@ -136,10 +136,19 @@ void FakeWebRtcVideoEncoder::SetFecControllerOverride(
 int32_t FakeWebRtcVideoEncoder::InitEncode(
     const webrtc::VideoCodec* codecSettings,
     const VideoEncoder::Settings& settings) {
-  webrtc::MutexLock lock(&mutex_);
-  codec_settings_ = *codecSettings;
+  RTC_NOTREACHED();
+  //  webrtc::MutexLock lock(&mutex_);
+  //  codec_settings_ = *codecSettings;
   init_encode_event_.Set();
   return WEBRTC_VIDEO_CODEC_OK;
+}
+
+bool FakeWebRtcVideoEncoder::Init(const webrtc::VideoEncodingConfig& config,
+                                  const Settings& /*settings*/) {
+  webrtc::MutexLock lock(&mutex_);
+  encoding_config_ = config;
+  init_encode_event_.Set();
+  return true;
 }
 
 int32_t FakeWebRtcVideoEncoder::Encode(

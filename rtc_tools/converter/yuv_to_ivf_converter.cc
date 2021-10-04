@@ -54,7 +54,7 @@ namespace {
 
 constexpr int kMaxFramerate = 30;
 // We use very big value here to ensure that codec won't hit any limits.
-constexpr uint32_t kBitrateBps = 100000000;
+constexpr DataRate kBitrate = DataRate::BitsPerSec(100'000'000);
 constexpr int kKeyFrameIntervalMs = 30000;
 constexpr int kMaxFrameEncodeWaitTimeoutMs = 2000;
 constexpr int kFrameLogInterval = 100;
@@ -118,7 +118,9 @@ class Encoder {
     ivf_writer_callback_ = std::make_unique<IvfFileWriterEncodedCallback>(
         output_file_name, video_codec_type, frames_count);
 
+#if 0
     task_queue_.PostTask([width, height, video_codec_type, this]() {
+      // TODO(before_submit): convert
       VideoCodec codec_settings;
       CodecSettings(video_codec_type, &codec_settings);
       codec_settings.width = width;
@@ -164,6 +166,7 @@ class Encoder {
           bitrate_allocation,
           static_cast<double>(codec_settings.maxFramerate)));
     });
+#endif
   }
 
   void Encode(const VideoFrame& frame) {

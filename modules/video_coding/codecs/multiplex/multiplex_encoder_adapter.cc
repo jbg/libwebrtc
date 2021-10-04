@@ -64,17 +64,17 @@ void MultiplexEncoderAdapter::SetFecControllerOverride(
   // Ignored.
 }
 
-int MultiplexEncoderAdapter::InitEncode(
-    const VideoCodec* inst,
-    const VideoEncoder::Settings& settings) {
+bool MultiplexEncoderAdapter::Init(const VideoTrackConfig& config,
+                                   const VideoEncoder::Settings& settings) {
+  const auto& r = config.max_resolution();
   const size_t buffer_size =
-      CalcBufferSize(VideoType::kI420, inst->width, inst->height);
+      CalcBufferSize(VideoType::kI420, r.Width(), r.Height());
   multiplex_dummy_planes_.resize(buffer_size);
   // It is more expensive to encode 0x00, so use 0x80 instead.
   std::fill(multiplex_dummy_planes_.begin(), multiplex_dummy_planes_.end(),
             0x80);
 
-  RTC_DCHECK_EQ(kVideoCodecMultiplex, inst->codecType);
+  RTC_DCHECK_EQ(kVideoCodecMultiplex, config.codec_type());
   VideoCodec video_codec = *inst;
   video_codec.codecType = PayloadStringToCodecType(associated_format_.name);
 

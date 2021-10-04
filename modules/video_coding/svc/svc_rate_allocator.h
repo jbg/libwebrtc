@@ -18,22 +18,22 @@
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video/video_bitrate_allocator.h"
 #include "api/video/video_codec_constants.h"
-#include "api/video_codecs/video_codec.h"
+#include "api/video_codecs/video_encoding_config.h"
 #include "rtc_base/experiments/stable_target_rate_experiment.h"
 
 namespace webrtc {
 
 class SvcRateAllocator : public VideoBitrateAllocator {
  public:
-  explicit SvcRateAllocator(const VideoCodec& codec);
+  explicit SvcRateAllocator(const VideoTrackConfig& config);
 
   VideoBitrateAllocation Allocate(
       VideoBitrateAllocationParameters parameters) override;
 
-  static DataRate GetMaxBitrate(const VideoCodec& codec);
-  static DataRate GetPaddingBitrate(const VideoCodec& codec);
+  static DataRate GetMaxBitrate(const VideoTrackConfig& config);
+  static DataRate GetPaddingBitrate(const VideoTrackConfig& config);
   static absl::InlinedVector<DataRate, kMaxSpatialLayers> GetLayerStartBitrates(
-      const VideoCodec& codec);
+      const VideoTrackConfig& config);
 
  private:
   struct NumLayers {
@@ -56,7 +56,7 @@ class SvcRateAllocator : public VideoBitrateAllocator {
   // actually be enabled.
   size_t FindNumEnabledLayers(DataRate target_rate) const;
 
-  const VideoCodec codec_;
+  const VideoTrackConfig config_;
   const NumLayers num_layers_;
   const StableTargetRateExperiment experiment_settings_;
   const absl::InlinedVector<DataRate, kMaxSpatialLayers>

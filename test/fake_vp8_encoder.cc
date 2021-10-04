@@ -49,19 +49,21 @@ FakeVp8Encoder::FakeVp8Encoder(Clock* clock) : FakeEncoder(clock) {
   sequence_checker_.Detach();
 }
 
-int32_t FakeVp8Encoder::InitEncode(const VideoCodec* config,
-                                   const Settings& settings) {
+bool FakeVp8Encoder::Init(const VideoTrackConfig& config,
+                          const Settings& settings) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  auto result = FakeEncoder::InitEncode(config, settings);
-  if (result != WEBRTC_VIDEO_CODEC_OK) {
-    return result;
+  if (!FakeEncoder::Init(config, settings)) {
+    return false;
+  }
+  if (config.simulcast()) {
+    return false;
   }
 
   Vp8TemporalLayersFactory factory;
-  frame_buffer_controller_ =
-      factory.Create(*config, settings, &fec_controller_override_);
+  frame_buffer_controller_ = factory.Create(config.encodings()[0], settings,
+                                            &fec_controller_override_);
 
-  return WEBRTC_VIDEO_CODEC_OK;
+  return true;
 }
 
 int32_t FakeVp8Encoder::Release() {

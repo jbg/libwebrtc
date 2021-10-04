@@ -40,6 +40,10 @@ class RenderResolution {
   int height_ = 0;
 };
 
+constexpr int Area(const RenderResolution& resolution) {
+  return resolution.Width() * resolution.Height();
+}
+
 }  // namespace webrtc
 
 #endif  // API_VIDEO_RENDER_RESOLUTION_H_

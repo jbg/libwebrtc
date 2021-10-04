@@ -123,7 +123,7 @@ const char* CodecTypeToPayloadString(VideoCodecType type) {
   RTC_CHECK_NOTREACHED();
 }
 
-VideoCodecType PayloadStringToCodecType(const std::string& name) {
+VideoCodecType PayloadStringToCodecType(absl::string_view name) {
   if (absl::EqualsIgnoreCase(name, kPayloadNameVp8))
     return kVideoCodecVP8;
   if (absl::EqualsIgnoreCase(name, kPayloadNameVp9))

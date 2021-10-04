@@ -29,13 +29,13 @@ class BuiltinVideoBitrateAllocatorFactory
   ~BuiltinVideoBitrateAllocatorFactory() override = default;
 
   std::unique_ptr<VideoBitrateAllocator> CreateVideoBitrateAllocator(
-      const VideoCodec& codec) override {
-    switch (codec.codecType) {
+      const VideoTrackConfig& config) override {
+    switch (config.codec_type()) {
       case kVideoCodecAV1:
       case kVideoCodecVP9:
-        return std::make_unique<SvcRateAllocator>(codec);
+        return std::make_unique<SvcRateAllocator>(config);
       default:
-        return std::make_unique<SimulcastRateAllocator>(codec);
+        return std::make_unique<SimulcastRateAllocator>(config);
     }
   }
 };

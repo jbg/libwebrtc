@@ -53,10 +53,21 @@ struct ForcedFallbackParams {
            codec.numberOfSimulcastStreams <= 1 &&
            codec.width * codec.height <= max_pixels;
   }
+  bool SupportsResolutionBasedSwitch(const VideoTrackConfig& track) const {
+    return enable_resolution_based_switch &&
+           track.num_simulcast_layers() == 1 &&
+           track.codec_type() == kVideoCodecVP8 &&
+           Area(track.encodings()[0].render_resolution()) <= max_pixels;
+  }
 
   bool SupportsTemporalBasedSwitch(const VideoCodec& codec) const {
     return enable_temporal_based_switch &&
            SimulcastUtility::NumberOfTemporalLayers(codec, 0) != 1;
+  }
+
+  bool SupportsTemporalBasedSwitch(const VideoTrackConfig& codec) const {
+    return enable_temporal_based_switch &&
+           codec.encodings()[0].num_temporal_layers() > 1;
   }
 
   bool enable_temporal_based_switch = false;
@@ -123,8 +134,7 @@ class VideoEncoderSoftwareFallbackWrapper final : public VideoEncoder {
   void SetFecControllerOverride(
       FecControllerOverride* fec_controller_override) override;
 
-  int32_t InitEncode(const VideoCodec* codec_settings,
-                     const VideoEncoder::Settings& settings) override;
+  bool Init(const VideoTrackConfig& config, const Settings& settings) override;
 
   int32_t RegisterEncodeCompleteCallback(
       EncodedImageCallback* callback) override;
@@ -171,7 +181,8 @@ class VideoEncoderSoftwareFallbackWrapper final : public VideoEncoder {
 
   // Settings used in the last InitEncode call and used if a dynamic fallback to
   // software is required.
-  VideoCodec codec_settings_;
+  // VideoCodec codec_settings_;
+  VideoTrackConfig encoding_config_;
   absl::optional<VideoEncoder::Settings> encoder_settings_;
 
   // The last rate control settings, if set.
@@ -246,10 +257,8 @@ bool VideoEncoderSoftwareFallbackWrapper::InitFallbackEncoder(bool is_forced) {
   RTC_LOG(LS_WARNING) << "Encoder falling back to software encoding.";
 
   RTC_DCHECK(encoder_settings_.has_value());
-  const int ret = fallback_encoder_->InitEncode(&codec_settings_,
-                                                encoder_settings_.value());
 
-  if (ret != WEBRTC_VIDEO_CODEC_OK) {
+  if (!fallback_encoder_->Init(encoding_config_, *encoder_settings_)) {
     RTC_LOG(LS_ERROR) << "Failed to initialize software-encoder fallback.";
     fallback_encoder_->Release();
     return false;
@@ -281,13 +290,13 @@ void VideoEncoderSoftwareFallbackWrapper::SetFecControllerOverride(
   current_encoder()->SetFecControllerOverride(fec_controller_override);
 }
 
-int32_t VideoEncoderSoftwareFallbackWrapper::InitEncode(
-    const VideoCodec* codec_settings,
-    const VideoEncoder::Settings& settings) {
+bool VideoEncoderSoftwareFallbackWrapper::Init(const VideoTrackConfig& config,
+                                               const Settings& settings) {
   // Store settings, in case we need to dynamically switch to the fallback
   // encoder after a failed Encode call.
-  codec_settings_ = *codec_settings;
+  encoding_config_ = config;
   encoder_settings_ = settings;
+
   // Clear stored rate/channel parameters.
   rate_control_parameters_ = absl::nullopt;
 
@@ -297,25 +306,24 @@ int32_t VideoEncoderSoftwareFallbackWrapper::InitEncode(
   // Try to init forced software codec if it should be used.
   if (TryInitForcedFallbackEncoder()) {
     PrimeEncoder(current_encoder());
-    return WEBRTC_VIDEO_CODEC_OK;
+    return true;
   }
 
-  int32_t ret = encoder_->InitEncode(codec_settings, settings);
-  if (ret == WEBRTC_VIDEO_CODEC_OK) {
+  if (encoder_->Init(config, settings)) {
     encoder_state_ = EncoderState::kMainEncoderUsed;
     PrimeEncoder(current_encoder());
-    return ret;
+    return true;
   }
 
   // Try to instantiate software codec.
   if (InitFallbackEncoder(/*is_forced=*/false)) {
     PrimeEncoder(current_encoder());
-    return WEBRTC_VIDEO_CODEC_OK;
+    return true;
   }
 
   // Software encoder failed too, use original return code.
   encoder_state_ = EncoderState::kUninitialized;
-  return ret;
+  return false;
 }
 
 int32_t VideoEncoderSoftwareFallbackWrapper::RegisterEncodeCompleteCallback(
@@ -370,8 +378,9 @@ int32_t VideoEncoderSoftwareFallbackWrapper::EncodeWithMainEncoder(
         RTC_LOG(LS_ERROR) << "Failed to convert from to I420";
         return WEBRTC_VIDEO_CODEC_ENCODER_FAILURE;
       }
+      RenderResolution resolution = encoding_config_.max_resolution();
       rtc::scoped_refptr<VideoFrameBuffer> dst_buffer =
-          src_buffer->Scale(codec_settings_.width, codec_settings_.height);
+          src_buffer->Scale(resolution.Width(), resolution.Height());
       if (!dst_buffer) {
         RTC_LOG(LS_ERROR) << "Failed to scale video frame.";
         return WEBRTC_VIDEO_CODEC_ENCODER_FAILURE;
@@ -454,17 +463,17 @@ bool VideoEncoderSoftwareFallbackWrapper::TryInitForcedFallbackEncoder() {
 
   RTC_DCHECK_EQ(encoder_state_, EncoderState::kUninitialized);
 
-  if (fallback_params_->SupportsResolutionBasedSwitch(codec_settings_)) {
+  if (fallback_params_->SupportsResolutionBasedSwitch(encoding_config_)) {
+    const auto& r = encoding_config_.max_resolution();
     // Settings valid, try to instantiate software codec.
-    RTC_LOG(LS_INFO) << "Request forced SW encoder fallback: "
-                     << codec_settings_.width << "x" << codec_settings_.height;
+    RTC_LOG(LS_INFO) << "Request forced SW encoder fallback: " << r.Width()
+                     << "x" << r.Height();
     return InitFallbackEncoder(/*is_forced=*/true);
   }
 
-  if (fallback_params_->SupportsTemporalBasedSwitch(codec_settings_)) {
+  if (fallback_params_->SupportsTemporalBasedSwitch(encoding_config_)) {
     // First init main encoder to see if that supports temporal layers.
-    if (encoder_->InitEncode(&codec_settings_, encoder_settings_.value()) ==
-        WEBRTC_VIDEO_CODEC_OK) {
+    if (encoder_->Init(encoding_config_, *encoder_settings_)) {
       encoder_state_ = EncoderState::kMainEncoderUsed;
     }
 
@@ -475,9 +484,7 @@ bool VideoEncoderSoftwareFallbackWrapper::TryInitForcedFallbackEncoder() {
     }
 
     // Try to initialize fallback and check if it supports temporal layers.
-    if (fallback_encoder_->InitEncode(&codec_settings_,
-                                      encoder_settings_.value()) ==
-        WEBRTC_VIDEO_CODEC_OK) {
+    if (fallback_encoder_->Init(encoding_config_, *encoder_settings_)) {
       if (fallback_encoder_->GetEncoderInfo().fps_allocation[0].size() != 1) {
         // Fallback encoder available and supports temporal layers, use it!
         if (encoder_state_ == EncoderState::kMainEncoderUsed) {

@@ -33,16 +33,18 @@ void EncoderSimulcastProxy::SetFecControllerOverride(
   encoder_->SetFecControllerOverride(fec_controller_override);
 }
 
-// TODO(eladalon): s/inst/codec_settings/g.
-int EncoderSimulcastProxy::InitEncode(const VideoCodec* inst,
-                                      const VideoEncoder::Settings& settings) {
-  int ret = encoder_->InitEncode(inst, settings);
-  if (ret == WEBRTC_VIDEO_CODEC_ERR_SIMULCAST_PARAMETERS_NOT_SUPPORTED) {
-    encoder_.reset(new SimulcastEncoderAdapter(factory_, video_format_));
+bool EncoderSimulcastProxy::Init(const VideoTrackConfig& config,
+                                 const Settings& settings) {
+  bool ret = encoder_->Init(config, settings);
+  // TODO: create simulcast adapter only when
+  // WEBRTC_VIDEO_CODEC_ERR_SIMULCAST_PARAMETERS_NOT_SUPPORTED
+  if (!ret) {
+    encoder_ =
+        std::make_unique<SimulcastEncoderAdapter>(factory_, video_format_);
     if (callback_) {
       encoder_->RegisterEncodeCompleteCallback(callback_);
     }
-    ret = encoder_->InitEncode(inst, settings);
+    ret = encoder_->Init(config, settings);
   }
   return ret;
 }

@@ -24,17 +24,17 @@
 namespace webrtc {
 
 std::unique_ptr<Vp8FrameBufferController> Vp8TemporalLayersFactory::Create(
-    const VideoCodec& codec,
+    const VideoTrackConfig& config,
     const VideoEncoder::Settings& settings,
     FecControllerOverride* fec_controller_override) {
   std::vector<std::unique_ptr<Vp8FrameBufferController>> controllers;
-  const int num_streams = SimulcastUtility::NumberOfSimulcastStreams(codec);
+  const int num_streams = config.num_simulcast_layers();
+  SimulcastUtility::NumberOfSimulcastStreams(codec);
   RTC_DCHECK_GE(num_streams, 1);
   controllers.reserve(num_streams);
 
   for (int i = 0; i < num_streams; ++i) {
-    int num_temporal_layers =
-        SimulcastUtility::NumberOfTemporalLayers(codec, i);
+    int num_temporal_layers = config.encodings()[i].num_temporal_layers();
     RTC_DCHECK_GE(num_temporal_layers, 1);
     if (SimulcastUtility::IsConferenceModeScreenshare(codec) && i == 0) {
       // Legacy screenshare layers supports max 2 layers.

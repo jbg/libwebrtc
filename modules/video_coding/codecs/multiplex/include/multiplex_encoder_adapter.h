@@ -37,13 +37,13 @@ class MultiplexEncoderAdapter : public VideoEncoder {
   MultiplexEncoderAdapter(VideoEncoderFactory* factory,
                           const SdpVideoFormat& associated_format,
                           bool supports_augmenting_data = false);
-  virtual ~MultiplexEncoderAdapter();
+  ~MultiplexEncoderAdapter() override;
 
   // Implements VideoEncoder
   void SetFecControllerOverride(
       FecControllerOverride* fec_controller_override) override;
-  int InitEncode(const VideoCodec* inst,
-                 const VideoEncoder::Settings& settings) override;
+  bool Init(const VideoTrackConfig& config,
+            const VideoEncoder::Settings& settings) override;
   int Encode(const VideoFrame& input_image,
              const std::vector<VideoFrameType>* frame_types) override;
   int RegisterEncodeCompleteCallback(EncodedImageCallback* callback) override;

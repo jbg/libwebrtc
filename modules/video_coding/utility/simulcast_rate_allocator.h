@@ -18,7 +18,7 @@
 
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video/video_bitrate_allocator.h"
-#include "api/video_codecs/video_codec.h"
+#include "api/video_codecs/video_encoding_config.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/experiments/rate_control_settings.h"
 #include "rtc_base/experiments/stable_target_rate_experiment.h"
@@ -27,12 +27,12 @@ namespace webrtc {
 
 class SimulcastRateAllocator : public VideoBitrateAllocator {
  public:
-  explicit SimulcastRateAllocator(const VideoCodec& codec);
+  explicit SimulcastRateAllocator(const VideoTrackConfig& codec);
   ~SimulcastRateAllocator() override;
 
   VideoBitrateAllocation Allocate(
       VideoBitrateAllocationParameters parameters) override;
-  const VideoCodec& GetCodec() const;
+  const VideoTrackConfig& Config() const { return config_; }
 
   static float GetTemporalRateAllocation(int num_layers,
                                          int temporal_id,
@@ -56,7 +56,7 @@ class SimulcastRateAllocator : public VideoBitrateAllocator {
       int simulcast_id) const;
   int NumTemporalStreams(size_t simulcast_id) const;
 
-  const VideoCodec codec_;
+  const VideoTrackConfig config_;
   const StableTargetRateExperiment stable_rate_settings_;
   const RateControlSettings rate_control_settings_;
   std::vector<bool> stream_enabled_;

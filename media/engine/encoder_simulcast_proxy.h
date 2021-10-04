@@ -41,8 +41,8 @@ class RTC_EXPORT EncoderSimulcastProxy : public VideoEncoder {
   int Release() override;
   void SetFecControllerOverride(
       FecControllerOverride* fec_controller_override) override;
-  int InitEncode(const VideoCodec* codec_settings,
-                 const VideoEncoder::Settings& settings) override;
+  bool Init(const VideoTrackConfig& config, const Settings& settings) override;
+
   int Encode(const VideoFrame& input_image,
              const std::vector<VideoFrameType>* frame_types) override;
   int RegisterEncodeCompleteCallback(EncodedImageCallback* callback) override;

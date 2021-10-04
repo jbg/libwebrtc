@@ -13,6 +13,7 @@
 
 #include <memory>
 
+#include "api/video_codecs/video_encoding_config.h"
 #include "api/video_codecs/vp8_temporal_layers.h"
 
 namespace webrtc {
@@ -24,7 +25,7 @@ class Vp8TemporalLayersFactory : public Vp8FrameBufferControllerFactory {
   std::unique_ptr<Vp8FrameBufferControllerFactory> Clone() const override;
 
   std::unique_ptr<Vp8FrameBufferController> Create(
-      const VideoCodec& codec,
+      const VideoEncodingConfig& config,
       const VideoEncoder::Settings& settings,
       FecControllerOverride* fec_controller_override) override;
 };

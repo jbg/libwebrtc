@@ -69,8 +69,8 @@ std::unique_ptr<VideoEncoder> MultiplexEncoderFactory::CreateVideoEncoder(
   }
   SdpVideoFormat associated_format = format;
   associated_format.name = it->second;
-  return std::unique_ptr<VideoEncoder>(new MultiplexEncoderAdapter(
-      factory_.get(), associated_format, supports_augmenting_data_));
+  return std::make_unique<MultiplexEncoderAdapter>(
+      factory_.get(), associated_format, supports_augmenting_data_);
 }
 
 MultiplexDecoderFactory::MultiplexDecoderFactory(

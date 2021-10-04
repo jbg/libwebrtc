@@ -109,8 +109,8 @@ class VideoEncoderSoftwareFallbackWrapperTestBase : public ::testing::Test {
       // Ignored.
     }
 
-    int32_t InitEncode(const VideoCodec* codec_settings,
-                       const VideoEncoder::Settings& settings) override {
+    bool Init(const VideoTrackConfig& config,
+              const VideoEncoder::Settings& settings) override {
       ++init_encode_count_;
       return init_encode_return_code_;
     }
@@ -151,7 +151,7 @@ class VideoEncoderSoftwareFallbackWrapperTestBase : public ::testing::Test {
     }
 
     int init_encode_count_ = 0;
-    int32_t init_encode_return_code_ = WEBRTC_VIDEO_CODEC_OK;
+    bool init_encode_return_code_ = true;
     int32_t encode_return_code_ = WEBRTC_VIDEO_CODEC_OK;
     int encode_count_ = 0;
     EncodedImageCallback* encode_complete_callback_ = nullptr;
@@ -180,7 +180,7 @@ class VideoEncoderSoftwareFallbackWrapperTestBase : public ::testing::Test {
   CountingFakeEncoder* fake_sw_encoder_;
   bool wrapper_initialized_;
   std::unique_ptr<VideoEncoder> fallback_wrapper_;
-  VideoCodec codec_ = {};
+  VideoEncodingConfig encoding_;
   std::unique_ptr<VideoFrame> frame_;
   std::unique_ptr<SimulcastRateAllocator> rate_allocator_;
 };
@@ -208,8 +208,9 @@ void VideoEncoderSoftwareFallbackWrapperTestBase::EncodeFrame() {
 
 void VideoEncoderSoftwareFallbackWrapperTestBase::EncodeFrame(
     int expected_ret) {
+  const auto& r = encoding_.render_resolution();
   rtc::scoped_refptr<I420Buffer> buffer =
-      I420Buffer::Create(codec_.width, codec_.height);
+      I420Buffer::Create(r.Width(), r.Height());
   I420Buffer::SetBlack(buffer);
   std::vector<VideoFrameType> types(1, VideoFrameType::kVideoFrameKey);
 
@@ -229,18 +230,18 @@ void VideoEncoderSoftwareFallbackWrapperTestBase::InitEncode() {
   }
 
   // Register fake encoder as main.
-  codec_.codecType = kVideoCodecVP8;
-  codec_.maxFramerate = kFramerate;
-  codec_.width = kWidth;
-  codec_.height = kHeight;
-  codec_.VP8()->numberOfTemporalLayers = 1;
-  rate_allocator_.reset(new SimulcastRateAllocator(codec_));
+  encoding_.set_codec_name("VP8");
+  encoding_.set_max_framerate(Frequency::Hertz(kFramerate));
+  encoding_.set_render_resolution({kWidth, kHeight});
+  encoding_.SetScalabilityMode("NONE");
+  rate_allocator_ = std::make_unique<SimulcastRateAllocator>(
+      rtc::MakeArrayView(&encoding_, 1));
 
   if (wrapper_initialized_) {
     fallback_wrapper_->Release();
   }
 
-  fake_encoder_->init_encode_return_code_ = WEBRTC_VIDEO_CODEC_OK;
+  fake_encoder_->init_encode_return_code_ = true;
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             fallback_wrapper_->InitEncode(&codec_, kSettings));
 
@@ -271,7 +272,7 @@ void VideoEncoderSoftwareFallbackWrapperTestBase::UtilizeFallbackEncoder() {
     fallback_wrapper_->Release();
   }
 
-  fake_encoder_->init_encode_return_code_ = WEBRTC_VIDEO_CODEC_ERROR;
+  fake_encoder_->init_encode_return_code_ = false;
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             fallback_wrapper_->InitEncode(&codec_, kSettings));
   fallback_wrapper_->SetRates(VideoEncoder::RateControlParameters(

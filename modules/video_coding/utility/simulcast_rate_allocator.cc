@@ -40,8 +40,8 @@ static const float kBaseHeavy3TlRateAllocation[kMaxTemporalStreams] = {
     0.6f, 0.8f, 1.0f, 1.0f  // 3 layers {60%, 20%, 20%}
 };
 
-const uint32_t kLegacyScreenshareTl0BitrateKbps = 200;
-const uint32_t kLegacyScreenshareTl1BitrateKbps = 1000;
+// constexpr DataRate kLegacyScreenshareTl0Bitrate = DataRate::bps(200'000);
+// constexpr DataRate kLegacyScreenshareTl1Bitrate = DataRate::bps(1'000'000);
 }  // namespace
 
 float SimulcastRateAllocator::GetTemporalRateAllocation(
@@ -58,8 +58,8 @@ float SimulcastRateAllocator::GetTemporalRateAllocation(
   return kLayerRateAllocation[num_layers - 1][temporal_id];
 }
 
-SimulcastRateAllocator::SimulcastRateAllocator(const VideoCodec& codec)
-    : codec_(codec),
+SimulcastRateAllocator::SimulcastRateAllocator(const VideoTrackConfig& config)
+    : config_(config),
       stable_rate_settings_(StableTargetRateExperiment::ParseFromFieldTrials()),
       rate_control_settings_(RateControlSettings::ParseFromFieldTrials()),
       legacy_conference_mode_(false) {}
@@ -84,6 +84,8 @@ void SimulcastRateAllocator::DistributeAllocationToSimulcastLayers(
     DataRate total_bitrate,
     DataRate stable_bitrate,
     VideoBitrateAllocation* allocated_bitrates) {
+// TODO(before_submit):
+#if 0
   DataRate left_in_total_allocation = total_bitrate;
   DataRate left_in_stable_allocation = stable_bitrate;
 
@@ -204,10 +206,13 @@ void SimulcastRateAllocator::DistributeAllocationToSimulcastLayers(
         top_active_layer, 0,
         (initial_layer_rate + additional_allocation).bps());
   }
+#endif
 }
 
 void SimulcastRateAllocator::DistributeAllocationToTemporalLayers(
     VideoBitrateAllocation* allocated_bitrates_bps) const {
+// TODO(before_submit):
+#if 0
   const int num_spatial_streams =
       std::max(1, static_cast<int>(codec_.numberOfSimulcastStreams));
 
@@ -273,6 +278,7 @@ void SimulcastRateAllocator::DistributeAllocationToTemporalLayers(
     }
     RTC_DCHECK_LE(tl_allocation_sum_kbps, expected_allocated_bitrate_kbps);
   }
+#endif
 }
 
 std::vector<uint32_t> SimulcastRateAllocator::DefaultTemporalLayerAllocation(
@@ -324,16 +330,8 @@ SimulcastRateAllocator::ScreenshareTemporalLayerAllocation(
   return allocation;
 }
 
-const VideoCodec& webrtc::SimulcastRateAllocator::GetCodec() const {
-  return codec_;
-}
-
 int SimulcastRateAllocator::NumTemporalStreams(size_t simulcast_id) const {
-  return std::max<uint8_t>(
-      1,
-      codec_.codecType == kVideoCodecVP8 && codec_.numberOfSimulcastStreams == 0
-          ? codec_.VP8().numberOfTemporalLayers
-          : codec_.simulcastStream[simulcast_id].numberOfTemporalLayers);
+  return config_.encodings()[simulcast_id].num_temporal_layers();
 }
 
 void SimulcastRateAllocator::SetLegacyConferenceMode(bool enabled) {

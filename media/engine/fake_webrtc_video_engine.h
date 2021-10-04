@@ -85,8 +85,8 @@ class FakeWebRtcVideoEncoder : public webrtc::VideoEncoder {
 
   void SetFecControllerOverride(
       webrtc::FecControllerOverride* fec_controller_override) override;
-  int32_t InitEncode(const webrtc::VideoCodec* codecSettings,
-                     const VideoEncoder::Settings& settings) override;
+  bool Init(const webrtc::VideoTrackConfig& config,
+            const Settings& settings) override;
   int32_t Encode(
       const webrtc::VideoFrame& inputImage,
       const std::vector<webrtc::VideoFrameType>* frame_types) override;
@@ -104,7 +104,7 @@ class FakeWebRtcVideoEncoder : public webrtc::VideoEncoder {
   webrtc::Mutex mutex_;
   rtc::Event init_encode_event_;
   int num_frames_encoded_ RTC_GUARDED_BY(mutex_);
-  webrtc::VideoCodec codec_settings_ RTC_GUARDED_BY(mutex_);
+  webrtc::VideoEncodingConfig encoding_config_ RTC_GUARDED_BY(mutex_);
   FakeWebRtcVideoEncoderFactory* factory_;
 };
 

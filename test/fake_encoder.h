@@ -36,7 +36,7 @@ namespace test {
 class FakeEncoder : public VideoEncoder {
  public:
   explicit FakeEncoder(Clock* clock);
-  virtual ~FakeEncoder() = default;
+  ~FakeEncoder() override = default;
 
   // Sets max bitrate. Not thread-safe, call before registering the encoder.
   void SetMaxBitrate(int max_kbps) RTC_LOCKS_EXCLUDED(mutex_);
@@ -45,7 +45,7 @@ class FakeEncoder : public VideoEncoder {
   void SetFecControllerOverride(
       FecControllerOverride* fec_controller_override) override;
 
-  int32_t InitEncode(const VideoCodec* config, const Settings& settings)
+  bool Init(const VideoTrackConfig& config, const Settings& settings)
       RTC_LOCKS_EXCLUDED(mutex_) override;
   int32_t Encode(const VideoFrame& input_image,
                  const std::vector<VideoFrameType>* frame_types)

@@ -114,6 +114,27 @@ bool StreamQualityCompare(const webrtc::SpatialLayer& a,
          std::tie(b.height, b.width, b.maxBitrate, b.maxFramerate);
 }
 
+bool SupportsEncoding(const webrtc::VideoEncodingConfig& config) {
+  constexpr Frequency kFps = Frequency::Hertz(1);
+  if (config.max_framerate() < 1 * kFps) {
+    return false;
+  }
+  if (config.start_bitrate() > config.max_bitrate()) {
+    return false;
+  }
+  if (config.render_resolution().Width() <= 1 ||
+      config.render_resolution().Height() <= 1) {
+    return false;
+  }
+
+  if (config.codec_name() == "vp8" && config.automatic_resize_on() &&
+      config.num_spatial_layers() > 1) {
+    return false;
+  }
+
+  return true;
+}
+
 void GetLowestAndHighestQualityStreamIndixes(
     rtc::ArrayView<webrtc::SpatialLayer> streams,
     int* lowest_quality_stream_idx,
@@ -411,6 +432,134 @@ int SimulcastEncoderAdapter::InitEncode(
 
     // Intercept frame encode complete callback only for upper streams, where
     // we need to set a correct stream index. Set `parent` to nullptr for the
+    // lowest stream to bypass the callback.
+    SimulcastEncoderAdapter* parent = stream_idx > 0 ? this : nullptr;
+
+    bool is_paused = stream_start_bitrate_kbps[stream_idx] == 0;
+    stream_contexts_.emplace_back(
+        parent, std::move(encoder_context),
+        std::make_unique<FramerateController>(stream_codec.maxFramerate),
+        stream_idx, stream_codec.width, stream_codec.height, is_paused);
+  }
+
+  // To save memory, don't store encoders that we don't use.
+  DestroyStoredEncoders();
+
+  rtc::AtomicOps::ReleaseStore(&inited_, 1);
+  return WEBRTC_VIDEO_CODEC_OK;
+}
+
+bool SimulcastEncoderAdapter::Init(const VideoEncodingConfig& config,
+                                   const VideoEncoder::Settings& settings) {
+  RTC_DCHECK_RUN_ON(&encoder_queue_);
+
+  if (settings.number_of_cores < 1) {
+    return false;
+  }
+
+  int ret = VerifyCodec(inst);
+  if (ret < 0) {
+    return ret;
+  }
+
+  Release();
+
+  codec_ = *inst;
+  total_streams_count_ = CountAllStreams(*inst);
+
+  // TODO(ronghuawu): Remove once this is handled in LibvpxVp8Encoder.
+  if (codec_.qpMax < kDefaultMinQp) {
+    codec_.qpMax = kDefaultMaxQp;
+  }
+
+  bool is_legacy_singlecast = codec_.numberOfSimulcastStreams == 0;
+  int lowest_quality_stream_idx = 0;
+  int highest_quality_stream_idx = 0;
+  if (!is_legacy_singlecast) {
+    GetLowestAndHighestQualityStreamIndixes(
+        rtc::ArrayView<SpatialLayer>(codec_.simulcastStream,
+                                     total_streams_count_),
+        &lowest_quality_stream_idx, &highest_quality_stream_idx);
+  }
+
+  std::unique_ptr<EncoderContext> encoder_context = FetchOrCreateEncoderContext(
+      /*is_lowest_quality_stream=*/(
+          is_legacy_singlecast ||
+          codec_.simulcastStream[lowest_quality_stream_idx].active));
+  if (encoder_context == nullptr) {
+    return WEBRTC_VIDEO_CODEC_MEMORY;
+  }
+
+  // Two distinct scenarios:
+  // * Singlecast (total_streams_count == 1) or simulcast with simulcast-capable
+  //   underlaying encoder implementation if active_streams_count > 1. SEA
+  //   operates in bypass mode: original settings are passed to the underlaying
+  //   encoder, frame encode complete callback is not intercepted.
+  // * Multi-encoder simulcast or singlecast if layers are deactivated
+  //   (active_streams_count >= 1). SEA creates N=active_streams_count encoders
+  //   and configures each to produce a single stream.
+
+  int active_streams_count = CountActiveStreams(*inst);
+  // If we only have a single active layer it is better to create an encoder
+  // with only one configured layer than creating it with all-but-one disabled
+  // layers because that way we control scaling.
+  bool separate_encoders_needed =
+      !encoder_context->encoder().GetEncoderInfo().supports_simulcast ||
+      active_streams_count == 1;
+  // Singlecast or simulcast with simulcast-capable underlaying encoder.
+  if (total_streams_count_ == 1 || !separate_encoders_needed) {
+    int ret = encoder_context->encoder().InitEncode(&codec_, settings);
+    if (ret >= 0) {
+      stream_contexts_.emplace_back(
+          /*parent=*/nullptr, std::move(encoder_context),
+          /*framerate_controller=*/nullptr, /*stream_idx=*/0, codec_.width,
+          codec_.height, /*is_paused=*/active_streams_count == 0);
+      bypass_mode_ = true;
+
+      DestroyStoredEncoders();
+      rtc::AtomicOps::ReleaseStore(&inited_, 1);
+      return WEBRTC_VIDEO_CODEC_OK;
+    }
+
+    encoder_context->Release();
+    if (total_streams_count_ == 1) {
+      // Failed to initialize singlecast encoder.
+      return ret;
+    }
+  }
+
+  // Multi-encoder simulcast or singlecast (deactivated layers).
+  std::vector<uint32_t> stream_start_bitrate_kbps =
+      GetStreamStartBitratesKbps(codec_);
+
+  for (int stream_idx = 0; stream_idx < total_streams_count_; ++stream_idx) {
+    if (!is_legacy_singlecast && !codec_.simulcastStream[stream_idx].active) {
+      continue;
+    }
+
+    if (encoder_context == nullptr) {
+      encoder_context = FetchOrCreateEncoderContext(
+          /*is_lowest_quality_stream=*/stream_idx == lowest_quality_stream_idx);
+    }
+    if (encoder_context == nullptr) {
+      Release();
+      return WEBRTC_VIDEO_CODEC_MEMORY;
+    }
+
+    VideoCodec stream_codec = MakeStreamCodec(
+        codec_, stream_idx, stream_start_bitrate_kbps[stream_idx],
+        /*is_lowest_quality_stream=*/stream_idx == lowest_quality_stream_idx,
+        /*is_highest_quality_stream=*/stream_idx == highest_quality_stream_idx);
+
+    int ret = encoder_context->encoder().InitEncode(&stream_codec, settings);
+    if (ret < 0) {
+      encoder_context.reset();
+      Release();
+      return ret;
+    }
+
+    // Intercept frame encode complete callback only for upper streams, where
+    // we need to set a correct stream index. Set |parent| to nullptr for the
     // lowest stream to bypass the callback.
     SimulcastEncoderAdapter* parent = stream_idx > 0 ? this : nullptr;
 

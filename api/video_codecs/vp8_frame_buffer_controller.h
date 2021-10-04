@@ -182,7 +182,7 @@ class Vp8FrameBufferControllerFactory {
 
   // Create a Vp8FrameBufferController instance.
   virtual std::unique_ptr<Vp8FrameBufferController> Create(
-      const VideoCodec& codec,
+      const VideoTrackConfig& config,
       const VideoEncoder::Settings& settings,
       FecControllerOverride* fec_controller_override) = 0;
 };

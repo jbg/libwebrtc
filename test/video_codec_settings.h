@@ -18,49 +18,47 @@ namespace test {
 const uint16_t kTestWidth = 352;
 const uint16_t kTestHeight = 288;
 const uint32_t kTestFrameRate = 30;
-const unsigned int kTestMinBitrateKbps = 30;
-const unsigned int kTestStartBitrateKbps = 300;
 const uint8_t kTestPayloadType = 100;
 const int64_t kTestTimingFramesDelayMs = 200;
 const uint16_t kTestOutlierFrameSizePercent = 250;
 
-static void CodecSettings(VideoCodecType codec_type, VideoCodec* settings) {
-  *settings = {};
+inline VideoEncodingConfig CodecSettings(absl::string_view codec_name) {
+  VideoEncodingConfig config;
+  config.set_render_resolution({kTestWidth, kTestHeight});
+  config.set_start_bitrate(DataRate::BitsPerSec(300'000));
+  config.set_min_bitrate(DataRate::BitsPerSec(30'000));
 
-  settings->width = kTestWidth;
-  settings->height = kTestHeight;
+  config.set_max_framerate(Frequency::Hertz(kTestFrameRate));
 
-  settings->startBitrate = kTestStartBitrateKbps;
-  settings->maxBitrate = 0;
-  settings->minBitrate = kTestMinBitrateKbps;
+  //  settings->active = true;
 
-  settings->maxFramerate = kTestFrameRate;
+  //  settings->qpMax = 56;  // See webrtcvideoengine.h.
 
-  settings->active = true;
+  //  settings->timing_frame_thresholds = {
+  //      kTestTimingFramesDelayMs,
+  //      kTestOutlierFrameSizePercent,
+  //  };
 
-  settings->qpMax = 56;  // See webrtcvideoengine.h.
-  settings->numberOfSimulcastStreams = 0;
+  config.set_codec_name(codec_name);
 
-  settings->timing_frame_thresholds = {
-      kTestTimingFramesDelayMs,
-      kTestOutlierFrameSizePercent,
-  };
-
-  settings->codecType = codec_type;
-  switch (codec_type) {
+  switch (config.codec_type()) {
     case kVideoCodecVP8:
-      *(settings->VP8()) = VideoEncoder::GetDefaultVp8Settings();
-      return;
+      VideoEncoder::GetDefaultVp8Settings(config);
+      //      *(settings->VP8()) = VideoEncoder::GetDefaultVp8Settings();
+      break;
     case kVideoCodecVP9:
-      *(settings->VP9()) = VideoEncoder::GetDefaultVp9Settings();
-      return;
+      VideoEncoder::GetDefaultVp9Settings(config);
+      //      *(settings->VP9()) = VideoEncoder::GetDefaultVp9Settings();
+      break;
     case kVideoCodecH264:
+      VideoEncoder::GetDefaultH264Settings(config);
       // TODO(brandtr): Set `qpMax` here, when the OpenH264 wrapper supports it.
-      *(settings->H264()) = VideoEncoder::GetDefaultH264Settings();
-      return;
+      //      *(settings->H264()) = VideoEncoder::GetDefaultH264Settings();
+      break;
     default:
-      return;
+      break;
   }
+  return config;
 }
 }  // namespace test
 }  // namespace webrtc

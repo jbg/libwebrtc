@@ -32,6 +32,11 @@ VideoCodecVP8 VideoEncoder::GetDefaultVp8Settings() {
   return vp8_settings;
 }
 
+void GetDefaultVp8Settings(VideoEncodingConfig& config) {
+  // TODO(before_submit):
+  config.SetScalabilityMode("NONE");
+}
+
 VideoCodecVP9 VideoEncoder::GetDefaultVp9Settings() {
   VideoCodecVP9 vp9_settings;
   memset(&vp9_settings, 0, sizeof(vp9_settings));
@@ -49,6 +54,10 @@ VideoCodecVP9 VideoEncoder::GetDefaultVp9Settings() {
   return vp9_settings;
 }
 
+void GetDefaultVp9Settings(VideoEncodingConfig& config) {
+  // TODO(before_submit):
+}
+
 VideoCodecH264 VideoEncoder::GetDefaultH264Settings() {
   VideoCodecH264 h264_settings;
   memset(&h264_settings, 0, sizeof(h264_settings));
@@ -58,6 +67,10 @@ VideoCodecH264 VideoEncoder::GetDefaultH264Settings() {
   h264_settings.numberOfTemporalLayers = 1;
 
   return h264_settings;
+}
+
+void GetDefaultH264Settings(VideoEncodingConfig& config) {
+  // TODO(before_submit):
 }
 
 VideoEncoder::ScalingSettings::ScalingSettings() = default;
