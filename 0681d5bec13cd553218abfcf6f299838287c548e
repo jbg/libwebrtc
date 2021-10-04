@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6748219f_bff60b99",
+        "filename": "modules/audio_processing/agc2/adaptive_digital_gain_applier.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-10-04T11:36:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bf7f024_cb7502e9",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 22
+      },
+      "revId": "0681d5bec13cd553218abfcf6f299838287c548e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6827244e_5b29bd9d",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-10-04T09:52:46Z",
       "side": 1,
       "message": "This comment seems a bit strange. It sounds like also the  `target_gain_db` is returned to avoid that the applied gain causes excessive noise boosting.\n\nCould you please change it so that it is less ambiguous.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 35
+      },
+      "revId": "0681d5bec13cd553218abfcf6f299838287c548e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb71f659_69d0113f",
+        "filename": "modules/audio_processing/agc2/adaptive_digital_gain_applier.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-10-04T11:36:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6827244e_5b29bd9d",
       "range": {
         "startLine": 53,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "867f4c77_096fb345",
+        "filename": "modules/audio_processing/include/audio_processing.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-10-04T11:36:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79efa182_4786d931",
+      "range": {
+        "startLine": 59,
+        "startChar": 2,
+        "endLine": 59,
+        "endChar": 21
+      },
+      "revId": "0681d5bec13cd553218abfcf6f299838287c548e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "810cd6d0_1eaf6cd8",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-10-04T09:52:46Z",
       "side": 1,
       "message": "Same as above",
+      "range": {
+        "startLine": 95,
+        "startChar": 1,
+        "endLine": 95,
+        "endChar": 21
+      },
+      "revId": "0681d5bec13cd553218abfcf6f299838287c548e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8fe98e0_c4bd5b62",
+        "filename": "modules/audio_processing/include/audio_processing.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-10-04T11:36:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "810cd6d0_1eaf6cd8",
       "range": {
         "startLine": 95,
         "startChar": 1,
