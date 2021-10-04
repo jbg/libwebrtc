@@ -16,6 +16,98 @@
       "message": "Thanks for the comments Sam! Addressed as per offline discussion.",
       "revId": "0681d5bec13cd553218abfcf6f299838287c548e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bf7f024_cb7502e9",
+        "filename": "modules/audio_processing/agc2/adaptive_digital_gain_applier.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-10-04T09:52:46Z",
+      "side": 1,
+      "message": "One is too many",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 22
+      },
+      "revId": "0681d5bec13cd553218abfcf6f299838287c548e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6827244e_5b29bd9d",
+        "filename": "modules/audio_processing/agc2/adaptive_digital_gain_applier.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-10-04T09:52:46Z",
+      "side": 1,
+      "message": "This comment seems a bit strange. It sounds like also the  `target_gain_db` is returned to avoid that the applied gain causes excessive noise boosting.\n\nCould you please change it so that it is less ambiguous.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 35
+      },
+      "revId": "0681d5bec13cd553218abfcf6f299838287c548e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79efa182_4786d931",
+        "filename": "modules/audio_processing/include/audio_processing.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-10-04T09:52:46Z",
+      "side": 1,
+      "message": "Please remove this.\nI definitely share the feeling that the clang formatting could be better, but I don\u0027t think that manual formatting is something that scales in the sense that adding comments for bypassing the clang-formatting clutters the code.\n\nAlso, manual formatting is highly subjective in what would be the right variant so I\u0027d therefore prefer to keep the clang formatting as a ground truth.\n\nAlso, comparing against what the clang-format produces, I don\u0027t think that is that bad so I don\u0027t think there is a strong reason to bypass that.",
+      "range": {
+        "startLine": 59,
+        "startChar": 2,
+        "endLine": 59,
+        "endChar": 21
+      },
+      "revId": "0681d5bec13cd553218abfcf6f299838287c548e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "810cd6d0_1eaf6cd8",
+        "filename": "modules/audio_processing/include/audio_processing.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-10-04T09:52:46Z",
+      "side": 1,
+      "message": "Same as above",
+      "range": {
+        "startLine": 95,
+        "startChar": 1,
+        "endLine": 95,
+        "endChar": 21
+      },
+      "revId": "0681d5bec13cd553218abfcf6f299838287c548e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
