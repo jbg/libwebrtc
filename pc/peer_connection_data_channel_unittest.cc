@@ -45,7 +45,6 @@
 #ifdef WEBRTC_ANDROID
 #include "pc/test/android_test_initializer.h"
 #endif
-#include "rtc_base/virtual_socket_server.h"
 #include "test/pc/sctp/fake_sctp_transport.h"
 
 namespace webrtc {
@@ -109,9 +108,7 @@ class PeerConnectionDataChannelBaseTest : public ::testing::Test {
   typedef std::unique_ptr<PeerConnectionWrapperForDataChannelTest> WrapperPtr;
 
   explicit PeerConnectionDataChannelBaseTest(SdpSemantics sdp_semantics)
-      : vss_(new rtc::VirtualSocketServer()),
-        main_(vss_.get()),
-        sdp_semantics_(sdp_semantics) {
+      : sdp_semantics_(sdp_semantics) {
 #ifdef WEBRTC_ANDROID
     InitializeAndroidObjects();
 #endif
@@ -173,8 +170,6 @@ class PeerConnectionDataChannelBaseTest : public ::testing::Test {
     data_desc->set_port(port);
   }
 
-  std::unique_ptr<rtc::VirtualSocketServer> vss_;
-  rtc::AutoSocketServerThread main_;
   const SdpSemantics sdp_semantics_;
 };
 
