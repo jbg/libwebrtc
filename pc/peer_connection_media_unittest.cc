@@ -32,7 +32,6 @@
 #endif
 #include "pc/test/fake_rtc_certificate_generator.h"
 #include "rtc_base/gunit.h"
-#include "rtc_base/virtual_socket_server.h"
 #include "test/gmock.h"
 
 namespace webrtc {
@@ -63,9 +62,7 @@ class PeerConnectionMediaBaseTest : public ::testing::Test {
   typedef std::unique_ptr<PeerConnectionWrapperForMediaTest> WrapperPtr;
 
   explicit PeerConnectionMediaBaseTest(SdpSemantics sdp_semantics)
-      : vss_(new rtc::VirtualSocketServer()),
-        main_(vss_.get()),
-        sdp_semantics_(sdp_semantics) {
+      : sdp_semantics_(sdp_semantics) {
 #ifdef WEBRTC_ANDROID
     InitializeAndroidObjects();
 #endif
@@ -174,8 +171,6 @@ class PeerConnectionMediaBaseTest : public ::testing::Test {
     return sdp_semantics_ == SdpSemantics::kUnifiedPlan;
   }
 
-  std::unique_ptr<rtc::VirtualSocketServer> vss_;
-  rtc::AutoSocketServerThread main_;
   const SdpSemantics sdp_semantics_;
 };
 

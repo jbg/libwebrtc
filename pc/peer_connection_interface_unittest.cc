@@ -86,7 +86,6 @@
 #include "rtc_base/socket_address.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/time_utils.h"
-#include "rtc_base/virtual_socket_server.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 #include "test/testsupport/file_utils.h"
@@ -675,9 +674,7 @@ class PeerConnectionFactoryForTest : public webrtc::PeerConnectionFactory {
 class PeerConnectionInterfaceBaseTest : public ::testing::Test {
  protected:
   explicit PeerConnectionInterfaceBaseTest(SdpSemantics sdp_semantics)
-      : vss_(new rtc::VirtualSocketServer()),
-        main_(vss_.get()),
-        sdp_semantics_(sdp_semantics) {
+      : sdp_semantics_(sdp_semantics) {
 #ifdef WEBRTC_ANDROID
     webrtc::InitializeAndroidObjects();
 #endif
@@ -1258,8 +1255,6 @@ class PeerConnectionInterfaceBaseTest : public ::testing::Test {
     }
   }
 
-  std::unique_ptr<rtc::VirtualSocketServer> vss_;
-  rtc::AutoSocketServerThread main_;
   rtc::scoped_refptr<FakeAudioCaptureModule> fake_audio_capture_module_;
   cricket::FakePortAllocator* port_allocator_ = nullptr;
   FakeRTCCertificateGenerator* fake_certificate_generator_ = nullptr;
@@ -2015,7 +2010,6 @@ TEST_P(PeerConnectionInterfaceTest, SctpDuplicatedLabelAllowed) {
       pc_->CreateDataChannel(label, nullptr);
   EXPECT_NE(dup_channel, nullptr);
 }
-
 
 #ifdef WEBRTC_HAVE_SCTP
 // This tests that SCTP data channels can be rejected in an answer.
