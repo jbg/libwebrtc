@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ca4b2ac_2b502e70",
+        "filename": "p2p/base/async_stun_tcp_socket_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-06T09:21:17Z",
+      "side": 1,
+      "message": "Naming was weird here. Fixed in a separate cl.",
+      "parentUuid": "a89ce584_85db2bed",
+      "revId": "ee9ab85666a31ffe5f3a6727468e1f9371cba0c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37b195f8_46ea1e2e",
         "filename": "p2p/base/tcp_port.cc",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2021-10-05T21:58:53Z",
       "side": 1,
       "message": "Somewhat scary here - you are changing the deletion of socket_ / listen_socket_ from being done first to being done last (after all the incoming sockets).\n\nAre you sure this does not matter?",
+      "revId": "ee9ab85666a31ffe5f3a6727468e1f9371cba0c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "358470c6_b87dc034",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-06T09:21:17Z",
+      "side": 1,
+      "message": "Not sure, so added more explicit destruction.",
+      "parentUuid": "37b195f8_46ea1e2e",
       "revId": "ee9ab85666a31ffe5f3a6727468e1f9371cba0c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
