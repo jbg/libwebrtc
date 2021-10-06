@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a3fc03_ec3ae62b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-10-06T05:43:03Z",
+      "side": 1,
+      "message": "I found some crash reports where pthread_create fails on PlatformThread with the error code EAGAIN. To reduce the number of threads used by the application, I\u0027m proposing to use GCD\u0027s built-in concurrent queues [1]. The advantage is that GCD maintains an internal thread pool and spawns threads when needed. I would expect the behavior to be almost identical to creating a thread using PlatformThread.\n\nSince that\u0027s all the suggestion is, I wonder if it\u0027s worth filing a bug.\n\n[1] https://developer.apple.com/documentation/dispatch/1452927-dispatch_get_global_queue",
+      "parentUuid": "5adddb32_14d23849",
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "20133438_2b3d7533",
