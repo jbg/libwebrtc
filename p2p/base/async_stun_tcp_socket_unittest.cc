@@ -78,13 +78,13 @@ class AsyncStunTCPSocketTest : public ::testing::Test,
   void CreateSockets() {
     rtc::Socket* server = vss_->CreateSocket(kServerAddr.family(), SOCK_STREAM);
     server->Bind(kServerAddr);
-    recv_socket_.reset(new AsyncStunServerTCPSocket(server));
-    recv_socket_->SignalNewConnection.connect(
+    listen_socket_.reset(new AsyncStunServerTCPSocket(server));
+    listen_socket_->SignalNewConnection.connect(
         this, &AsyncStunTCPSocketTest::OnNewConnection);
 
     rtc::Socket* client = vss_->CreateSocket(kClientAddr.family(), SOCK_STREAM);
     send_socket_.reset(AsyncStunTCPSocket::Create(
-        client, kClientAddr, recv_socket_->GetLocalAddress()));
+        client, kClientAddr, listen_socket_->GetLocalAddress()));
     send_socket_->SignalSentPacket.connect(
         this, &AsyncStunTCPSocketTest::OnSentPacket);
     ASSERT_TRUE(send_socket_.get() != NULL);
@@ -106,7 +106,7 @@ class AsyncStunTCPSocketTest : public ::testing::Test,
 
   void OnNewConnection(rtc::AsyncPacketSocket* /*server*/,
                        rtc::AsyncPacketSocket* new_socket) {
-    listen_socket_.reset(new_socket);
+    recv_socket_.reset(new_socket);
     new_socket->SignalReadPacket.connect(this,
                                          &AsyncStunTCPSocketTest::OnReadPacket);
   }
@@ -132,8 +132,8 @@ class AsyncStunTCPSocketTest : public ::testing::Test,
   std::unique_ptr<rtc::VirtualSocketServer> vss_;
   rtc::AutoSocketServerThread thread_;
   std::unique_ptr<AsyncStunTCPSocket> send_socket_;
-  std::unique_ptr<rtc::AsyncPacketSocket> recv_socket_;
   std::unique_ptr<rtc::AsyncPacketSocket> listen_socket_;
+  std::unique_ptr<rtc::AsyncPacketSocket> recv_socket_;
   std::list<std::string> recv_packets_;
   int sent_packets_ = 0;
 };
