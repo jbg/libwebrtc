@@ -29,6 +29,9 @@ class RetransmissionErrorCounter {
                              const DcSctpOptions& options)
       : log_prefix_(std::string(log_prefix) + "rtx-errors: "),
         limit_(options.max_retransmissions) {}
+  RetransmissionErrorCounter(const RetransmissionErrorCounter&) = delete;
+  RetransmissionErrorCounter& operator=(const RetransmissionErrorCounter&) =
+      delete;
 
   // Increments the retransmission timer. If the maximum error count has been
   // reached, `false` will be returned.

@@ -63,6 +63,8 @@ class DataTracker {
         last_cumulative_acked_tsn_(tsn_unwrapper_.Unwrap(
             handover_state ? TSN(handover_state->rx.last_cumulative_acked_tsn)
                            : TSN(*peer_initial_tsn - 1))) {}
+  DataTracker(const DataTracker&) = delete;
+  DataTracker& operator=(const DataTracker&) = delete;
 
   // Indicates if the provided TSN is valid. If this return false, the data
   // should be dropped and not added to any other buffers, which essentially

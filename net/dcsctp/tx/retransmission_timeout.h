@@ -31,6 +31,9 @@ class RetransmissionTimeout {
   static constexpr int kRttVarShift = 2;
   explicit RetransmissionTimeout(const DcSctpOptions& options);
 
+  RetransmissionTimeout(const RetransmissionTimeout&) = delete;
+  RetransmissionTimeout& operator=(const RetransmissionTimeout&) = delete;
+
   // To be called when a RTT has been measured, to update the RTO value.
   void ObserveRTT(DurationMs measured_rtt);
 

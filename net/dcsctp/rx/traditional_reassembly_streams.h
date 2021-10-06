@@ -33,6 +33,9 @@ class TraditionalReassemblyStreams : public ReassemblyStreams {
       absl::string_view log_prefix,
       OnAssembledMessage on_assembled_message,
       const DcSctpSocketHandoverState* handover_state = nullptr);
+  TraditionalReassemblyStreams(const TraditionalReassemblyStreams&) = delete;
+  TraditionalReassemblyStreams& operator=(const TraditionalReassemblyStreams&) =
+      delete;
 
   int Add(UnwrappedTSN tsn, Data data) override;
 
@@ -66,6 +69,9 @@ class TraditionalReassemblyStreams : public ReassemblyStreams {
    public:
     explicit UnorderedStream(TraditionalReassemblyStreams* parent)
         : StreamBase(parent) {}
+    UnorderedStream(const UnorderedStream&) = delete;
+    UnorderedStream& operator=(const UnorderedStream&) = delete;
+
     int Add(UnwrappedTSN tsn, Data data);
     // Returns the number of bytes removed from the queue.
     size_t EraseTo(UnwrappedTSN tsn);
@@ -89,6 +95,9 @@ class TraditionalReassemblyStreams : public ReassemblyStreams {
     explicit OrderedStream(TraditionalReassemblyStreams* parent,
                            SSN next_ssn = SSN(0))
         : StreamBase(parent), next_ssn_(ssn_unwrapper_.Unwrap(next_ssn)) {}
+    OrderedStream(const OrderedStream&) = delete;
+    OrderedStream& operator=(const OrderedStream&) = delete;
+
     int Add(UnwrappedTSN tsn, Data data);
     size_t EraseTo(SSN ssn);
     void Reset() {

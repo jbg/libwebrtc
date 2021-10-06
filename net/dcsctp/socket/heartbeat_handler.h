@@ -37,6 +37,8 @@ class HeartbeatHandler {
                    const DcSctpOptions& options,
                    Context* context,
                    TimerManager* timer_manager);
+  HeartbeatHandler(const HeartbeatHandler&) = delete;
+  HeartbeatHandler& operator=(const HeartbeatHandler&) = delete;
 
   // Called when the heartbeat interval timer should be restarted. This is
   // generally done every time data is sent, which makes the timer expire when

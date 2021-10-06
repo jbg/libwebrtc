@@ -23,6 +23,8 @@ class PacketSender {
   PacketSender(DcSctpSocketCallbacks& callbacks,
                std::function<void(rtc::ArrayView<const uint8_t>,
                                   SendPacketStatus)> on_sent_packet);
+  PacketSender(const PacketSender&) = delete;
+  PacketSender& operator=(const PacketSender&) = delete;
 
   // Sends the packet, and returns true if it was sent successfully.
   bool Send(SctpPacket::Builder& builder);

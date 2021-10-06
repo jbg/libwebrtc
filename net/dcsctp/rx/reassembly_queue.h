@@ -73,6 +73,8 @@ class ReassemblyQueue {
                   TSN peer_initial_tsn,
                   size_t max_size_bytes,
                   const DcSctpSocketHandoverState* handover_state = nullptr);
+  ReassemblyQueue(const ReassemblyQueue&) = delete;
+  ReassemblyQueue& operator=(const ReassemblyQueue&) = delete;
 
   // Adds a data chunk to the queue, with a `tsn` and other parameters in
   // `data`.

@@ -54,6 +54,8 @@ class TaskQueueTimeoutFactory {
    public:
     explicit TaskQueueTimeout(TaskQueueTimeoutFactory& parent);
     ~TaskQueueTimeout();
+    TaskQueueTimeout(const TaskQueueTimeout&) = delete;
+    TaskQueueTimeout& operator=(const TaskQueueTimeout&) = delete;
 
     void Start(DurationMs duration_ms, TimeoutID timeout_id) override;
     void Stop() override;

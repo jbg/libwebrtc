@@ -50,6 +50,9 @@ class RRSendQueue : public SendQueue {
               std::function<void()> on_total_buffered_amount_low,
               const DcSctpSocketHandoverState* handover_state = nullptr);
 
+  RRSendQueue(const RRSendQueue&) = delete;
+  RRSendQueue& operator=(const RRSendQueue&) = delete;
+
   // Indicates if the buffer is full. Note that it's up to the caller to ensure
   // that the buffer is not full prior to adding new items to it.
   bool IsFull() const;

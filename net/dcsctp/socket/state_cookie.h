@@ -39,6 +39,8 @@ class StateCookie {
         a_rwnd_(a_rwnd),
         tie_tag_(tie_tag),
         capabilities_(capabilities) {}
+  StateCookie(StateCookie&& other) = default;
+  StateCookie& operator=(StateCookie&& other) = default;
 
   // Returns a serialized version of this cookie.
   std::vector<uint8_t> Serialize();
@@ -54,11 +56,11 @@ class StateCookie {
   const Capabilities& capabilities() const { return capabilities_; }
 
  private:
-  const VerificationTag initiate_tag_;
-  const TSN initial_tsn_;
-  const uint32_t a_rwnd_;
-  const TieTag tie_tag_;
-  const Capabilities capabilities_;
+  VerificationTag initiate_tag_;
+  TSN initial_tsn_;
+  uint32_t a_rwnd_;
+  TieTag tie_tag_;
+  Capabilities capabilities_;
 };
 }  // namespace dcsctp
 

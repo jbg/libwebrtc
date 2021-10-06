@@ -58,6 +58,8 @@ class CallbackDeferrer : public DcSctpSocketCallbacks {
 
   explicit CallbackDeferrer(DcSctpSocketCallbacks& underlying)
       : underlying_(underlying) {}
+  CallbackDeferrer(const CallbackDeferrer&) = delete;
+  CallbackDeferrer& operator=(const CallbackDeferrer&) = delete;
 
   // Implementation of DcSctpSocketCallbacks
   SendPacketStatus SendPacketWithStatus(

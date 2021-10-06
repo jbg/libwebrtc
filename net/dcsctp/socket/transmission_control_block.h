@@ -117,6 +117,9 @@ class TransmissionControlBlock : public Context {
                               handover_state),
         heartbeat_handler_(log_prefix, options, this, &timer_manager_) {}
 
+  TransmissionControlBlock(const TransmissionControlBlock&) = delete;
+  TransmissionControlBlock& operator=(const TransmissionControlBlock&) = delete;
+
   // Implementation of `Context`.
   bool is_connection_established() const override {
     return is_connection_established_();

@@ -82,6 +82,9 @@ class RetransmissionQueue {
       bool use_message_interleaving = false,
       const DcSctpSocketHandoverState* handover_state = nullptr);
 
+  RetransmissionQueue(const RetransmissionQueue&) = delete;
+  RetransmissionQueue& operator=(const RetransmissionQueue&) = delete;
+
   // Handles a received SACK. Returns true if the `sack` was processed and
   // false if it was discarded due to received out-of-order and not relevant.
   bool HandleSack(TimeMs now, const SackChunk& sack);
