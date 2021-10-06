@@ -68,6 +68,69 @@
       "message": "Why?\n\nAdding Kari as IOS expert.",
       "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f75ebe_be5d0abd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-10-06T07:59:52Z",
+      "side": 1,
+      "message": "This change makes sense to me, we should be using GCD as much as possible on iOS/Mac to allow the OS to optimise the scheduling of threads.",
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "430aef02_c41fe5ee",
+        "filename": "rtc_base/task_queue_gcd.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-10-06T07:59:52Z",
+      "side": 1,
+      "message": "please use the actual type here instead of `auto` to help readability.",
+      "range": {
+        "startLine": 164,
+        "startChar": 2,
+        "endLine": 164,
+        "endChar": 7
+      },
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1cd2025_94bb0272",
+        "filename": "rtc_base/task_queue_gcd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-10-06T07:59:52Z",
+      "side": 1,
+      "message": "nit: I\u0027d prefer the name `PostTaskToGlobalQueue`",
+      "range": {
+        "startLine": 22,
+        "startChar": 5,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
