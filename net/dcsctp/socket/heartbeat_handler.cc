@@ -56,9 +56,8 @@ class HeartbeatInfo {
     uint32_t low_bits = static_cast<uint32_t>(*created_at_);
 
     std::vector<uint8_t> data(kBufferSize);
-    BoundedByteWriter<kBufferSize> writer(data);
-    writer.Store32<0>(high_bits);
-    writer.Store32<4>(low_bits);
+    internal::StoreBigEndian32(data.data(), high_bits);
+    internal::StoreBigEndian32(data.data() + 4, low_bits);
     return data;
   }
 
