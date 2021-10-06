@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "482ed08a_ed5f3b39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-06T09:45:44Z",
+      "side": 1,
+      "message": "Do file that bug. Looks nice.",
+      "revId": "9949e606671ed457015d7933ded6b9c4bf3296e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "179f902b_daee2aef",
+        "filename": "rtc_base/task_queue_gcd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-06T09:45:44Z",
+      "side": 1,
+      "message": "Hyper-nit: \"Post a task into the system-defined global concurrent queue\".",
+      "revId": "9949e606671ed457015d7933ded6b9c4bf3296e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
