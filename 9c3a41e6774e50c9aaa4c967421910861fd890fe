@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5adddb32_14d23849",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-06T05:16:48Z",
+      "side": 1,
+      "message": "Please file a bug and explain why this is a Good Thing.\n\n(It seems to use a single global thread for DNS resolution instead of firing up a new one for every DNS resolution. This is probably an improvement IF the thread it\u0027s using is otherwise uncongested, and the overhead of SpawnDetached is somewhat significant.)",
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "20133438_2b3d7533",
@@ -14,6 +31,23 @@
       "writtenOn": "2021-10-06T02:19:21Z",
       "side": 1,
       "message": "Hello, when using WebRTC on iOS it seems to be more efficient to use GCD than to spawn a thread every time. Please take a look. Thank you.",
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4258d1de_779d0542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-06T05:16:48Z",
+      "side": 1,
+      "message": "Why?\n\nAdding Kari as IOS expert.",
       "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
