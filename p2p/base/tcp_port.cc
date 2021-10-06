@@ -169,9 +169,11 @@ void TCPPort::PrepareAddress() {
     // Socket may be in the CLOSED state if Listen()
     // failed, we still want to add the socket address.
     RTC_LOG(LS_VERBOSE) << "Preparing TCP address, current state: "
-                        << listen_socket_->GetState();
-    if (listen_socket_->GetState() == rtc::AsyncPacketSocket::STATE_BOUND ||
-        listen_socket_->GetState() == rtc::AsyncPacketSocket::STATE_CLOSED)
+                        << listen_socket_->GetBindState();
+    if (listen_socket_->GetBindState() ==
+            rtc::AsyncListenSocket::State::kBound ||
+        listen_socket_->GetBindState() ==
+            rtc::AsyncListenSocket::State::kClosed)
       AddAddress(listen_socket_->GetLocalAddress(),
                  listen_socket_->GetLocalAddress(), rtc::SocketAddress(),
                  TCP_PROTOCOL_NAME, "", TCPTYPE_PASSIVE_STR, LOCAL_PORT_TYPE,
