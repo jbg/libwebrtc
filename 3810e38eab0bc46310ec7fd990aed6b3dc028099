@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "3810e38eab0bc46310ec7fd990aed6b3dc028099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fca78521_fe50ba4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-06T08:44:34Z",
+      "side": 1,
+      "message": "readability hooray!\nlgtm % consider another name.\n",
+      "revId": "3810e38eab0bc46310ec7fd990aed6b3dc028099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "824ede61_950e7644",
+        "filename": "p2p/base/async_stun_tcp_socket_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-06T08:44:34Z",
+      "side": 1,
+      "message": "Given that we\u0027re replacing these, perhaps name it something more obvious, like \"incoming_connection_socket_\"? \"recv\" is an abbreviation, and abbreviations aren\u0027t style guide compliant in general.\n\nSince it\u0027s \"only\" a test, perhaps not that important, but nice to do.",
+      "revId": "3810e38eab0bc46310ec7fd990aed6b3dc028099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
