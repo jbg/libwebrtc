@@ -2770,12 +2770,6 @@ RTCError SdpOfferAnswerHandler::Rollback(SdpType desc_type) {
   // gets called in SetRemoteDescription.
   if (desc_type == SdpType::kRollback) {
     UpdateNegotiationNeeded();
-    if (is_negotiation_needed_) {
-      // Legacy version.
-      pc_->Observer()->OnRenegotiationNeeded();
-      // Spec-compliant version; the event may get invalidated before firing.
-      GenerateNegotiationNeededEvent();
-    }
   }
   return RTCError::OK();
 }
