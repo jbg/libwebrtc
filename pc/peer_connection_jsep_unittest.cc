@@ -2157,8 +2157,8 @@ TEST_F(PeerConnectionJsepTest, RollbackAfterMultipleSLD) {
   callee->observer()->clear_legacy_renegotiation_needed();
   callee->observer()->clear_latest_negotiation_needed_event();
   EXPECT_TRUE(callee->SetRemoteDescription(callee->CreateRollback()));
-  EXPECT_TRUE(callee->observer()->legacy_renegotiation_needed());
-  EXPECT_TRUE(callee->observer()->has_negotiation_needed_event());
+  EXPECT_FALSE(callee->observer()->legacy_renegotiation_needed());
+  EXPECT_FALSE(callee->observer()->has_negotiation_needed_event());
   EXPECT_EQ(callee->pc()->GetTransceivers().size(), 2u);
   EXPECT_EQ(callee->pc()->GetTransceivers()[0]->mid(), absl::nullopt);
   EXPECT_EQ(callee->pc()->GetTransceivers()[1]->mid(), absl::nullopt);
