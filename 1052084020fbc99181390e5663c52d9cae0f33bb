@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bca4e3a7_7602aeb3",
+        "filename": "media/engine/simulcast_encoder_adapter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2021-10-07T08:33:47Z",
+      "side": 1,
+      "message": "If both are null, this is going to fail. Should we instead log an error and return null from the whole FetchOrCreateEncoderContext function?",
+      "range": {
+        "startLine": 742,
+        "startChar": 0,
+        "endLine": 742,
+        "endChar": 47
+      },
+      "revId": "1052084020fbc99181390e5663c52d9cae0f33bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
