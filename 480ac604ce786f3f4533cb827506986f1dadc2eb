@@ -39,6 +39,30 @@
       },
       "revId": "480ac604ce786f3f4533cb827506986f1dadc2eb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5af52e_d196190c",
+        "filename": "media/engine/simulcast_encoder_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-10-07T09:58:18Z",
+      "side": 1,
+      "message": "Restyled the logic.",
+      "parentUuid": "95565b01_afadc87a",
+      "range": {
+        "startLine": 725,
+        "startChar": 0,
+        "endLine": 743,
+        "endChar": 7
+      },
+      "revId": "480ac604ce786f3f4533cb827506986f1dadc2eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
