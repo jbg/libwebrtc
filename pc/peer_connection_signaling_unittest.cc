@@ -1219,13 +1219,6 @@ TEST_F(PeerConnectionSignalingUnifiedPlanTest,
   EXPECT_FALSE(callee->pc()->ShouldFireNegotiationNeededEvent(
       callee->observer()->latest_negotiation_needed_event()));
   callee->observer()->clear_latest_negotiation_needed_event();
-
-  // Upon rolling back to "stable", a new negotiation needed event will be
-  // generated that is not suppressed.
-  callee->SetLocalDescription(CreateSessionDescription(SdpType::kRollback, ""));
-  EXPECT_TRUE(callee->observer()->has_negotiation_needed_event());
-  EXPECT_TRUE(callee->pc()->ShouldFireNegotiationNeededEvent(
-      callee->observer()->latest_negotiation_needed_event()));
 }
 
 }  // namespace webrtc

@@ -1513,7 +1513,6 @@ public class PeerConnectionEndToEndTest {
     offeringExpectations.expectSignalingChange(SignalingState.STABLE);
     // TODO(bugs.webrtc.org/11970): determine if triggering ONN (twice even) is correct.
     offeringExpectations.expectRenegotiationNeeded();
-    offeringExpectations.expectRenegotiationNeeded();
     pc.setLocalDescription(sdpLatch, rollback);
     assertTrue(sdpLatch.await());
 
