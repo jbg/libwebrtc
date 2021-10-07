@@ -16,6 +16,29 @@
       "message": "+nisse@ to approve the change",
       "revId": "480ac604ce786f3f4533cb827506986f1dadc2eb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95565b01_afadc87a",
+        "filename": "media/engine/simulcast_encoder_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-07T09:44:04Z",
+      "side": 1,
+      "message": "I think the logic for the four cases would be easier to follow with a decision tree like\n```\nif (primary_encoder !\u003d nullptr) {\n  if (fallback_encoder !\u003d nullptr) { ... both available ... }\n  else { ... primary only ...}\n} else {\n  if (fallback_encoder !\u003d nullptr) { ... fallback only ...}\n  else { ... fail ... }\n}\n```\nBut feel free to leave as is, if you\u0027re confident it gives less code duplication.",
+      "range": {
+        "startLine": 725,
+        "startChar": 0,
+        "endLine": 743,
+        "endChar": 7
+      },
+      "revId": "480ac604ce786f3f4533cb827506986f1dadc2eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
