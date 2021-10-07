@@ -13,7 +13,6 @@
 #include "absl/strings/string_view.h"
 
 namespace webrtc {
-constexpr RtcEvent::Type RtcEventBeginLog::kType;
 constexpr EventParameters RtcEventBeginLog::event_params_;
 constexpr FieldParameters RtcEventBeginLog::utc_start_time_params_;
 

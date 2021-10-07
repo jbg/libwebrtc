@@ -13,7 +13,6 @@
 #include "absl/strings/string_view.h"
 
 namespace webrtc {
-constexpr RtcEvent::Type RtcEventEndLog::kType;
 constexpr EventParameters RtcEventEndLog::event_params_;
 
 RtcEventEndLog::RtcEventEndLog(Timestamp timestamp)
