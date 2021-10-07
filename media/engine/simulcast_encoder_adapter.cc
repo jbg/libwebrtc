@@ -709,17 +709,38 @@ SimulcastEncoderAdapter::FetchOrCreateEncoderContext(
     encoder_context = std::move(*encoder_context_iter);
     cached_encoder_contexts_.erase(encoder_context_iter);
   } else {
-    std::unique_ptr<VideoEncoder> encoder =
+    std::unique_ptr<VideoEncoder> primary_encoder =
         primary_encoder_factory_->CreateVideoEncoder(video_format_);
-    VideoEncoder::EncoderInfo primary_info = encoder->GetEncoderInfo();
-    VideoEncoder::EncoderInfo fallback_info = primary_info;
+
+    std::unique_ptr<VideoEncoder> fallback_encoder;
     if (fallback_encoder_factory_ != nullptr) {
-      std::unique_ptr<VideoEncoder> fallback_encoder =
+      fallback_encoder =
           fallback_encoder_factory_->CreateVideoEncoder(video_format_);
+    }
+
+    std::unique_ptr<VideoEncoder> encoder;
+    VideoEncoder::EncoderInfo primary_info;
+    VideoEncoder::EncoderInfo fallback_info;
+
+    if (primary_encoder != nullptr && fallback_encoder != nullptr) {
+      primary_info = primary_encoder->GetEncoderInfo();
       fallback_info = fallback_encoder->GetEncoderInfo();
+
       encoder = CreateVideoEncoderSoftwareFallbackWrapper(
-          std::move(fallback_encoder), std::move(encoder),
+          std::move(fallback_encoder), std::move(primary_encoder),
           prefer_temporal_support);
+    } else {
+      if (primary_encoder != nullptr) {
+        encoder = std::move(primary_encoder);
+      } else {
+        RTC_LOG(LS_WARNING) << "Failed to create HW " << video_format_.name
+                            << " encoder. Try fallback encoder.";
+        RTC_CHECK(fallback_encoder != nullptr);
+        encoder = std::move(fallback_encoder);
+      }
+
+      primary_info = encoder->GetEncoderInfo();
+      fallback_info = primary_info;
     }
 
     encoder_context = std::make_unique<SimulcastEncoderAdapter::EncoderContext>(
