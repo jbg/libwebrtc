@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4895444b_654e373a",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-08T08:13:35Z",
+      "side": 1,
+      "message": "This compiles fine in webrtc, but when I try building chromium this this change, I get the error \n\n../../third_party/webrtc/p2p/base/tcp_port.cc:172:25: error: invalid operands to binary expression (\u0027basic_ostream\u003cchar, std::char_traits\u003cchar\u003e\u003e\u0027 and \u0027rtc::AsyncListenSocket::State\u0027)\n                        \u003c\u003c listen_socket_-\u003eGetBindState();\n\nHow to deal with that, explicitly convert to int? It\u0027s unclear to me how webrtc\u0027s version of RTC_LOG handles it.",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 58
+      },
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
