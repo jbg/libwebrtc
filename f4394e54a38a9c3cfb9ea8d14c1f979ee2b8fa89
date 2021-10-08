@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0095bf0f_cccf2138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-08T08:26:00Z",
+      "side": 1,
+      "message": "Different compile flags?\n",
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4895444b_654e373a",
@@ -14,6 +31,30 @@
       "writtenOn": "2021-10-08T08:13:35Z",
       "side": 1,
       "message": "This compiles fine in webrtc, but when I try building chromium this this change, I get the error \n\n../../third_party/webrtc/p2p/base/tcp_port.cc:172:25: error: invalid operands to binary expression (\u0027basic_ostream\u003cchar, std::char_traits\u003cchar\u003e\u003e\u0027 and \u0027rtc::AsyncListenSocket::State\u0027)\n                        \u003c\u003c listen_socket_-\u003eGetBindState();\n\nHow to deal with that, explicitly convert to int? It\u0027s unclear to me how webrtc\u0027s version of RTC_LOG handles it.",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 58
+      },
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df56f56b_6b5b6187",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-08T08:26:00Z",
+      "side": 1,
+      "message": "Seems that WebRTC autoconverts enums to ints (it\u0027s an enum not an enum class), but that Chromium doesn\u0027t.\n\nAdding @mbonadei to reviewers to say what the facts are.",
+      "parentUuid": "4895444b_654e373a",
       "range": {
         "startLine": 171,
         "startChar": 0,
