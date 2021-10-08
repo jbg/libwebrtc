@@ -63,6 +63,30 @@
       },
       "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1902597_ba571821",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-10-08T13:40:44Z",
+      "side": 1,
+      "message": "Yes, when compiling Chromium, RTC_LOG() expands to a different thing (delegating to Chromium\u0027s log system): https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc_overrides/rtc_base/logging.h;l\u003d64;drc\u003d4930b28dab587e422d14c060a9063f46fdae7473\n\nAnd WebRTC\u0027s logging system is smart on these things (https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/rtc_base/logging.h;l\u003d190;drc\u003d96e3b991daeb058859324105635d29f56092e79a) doing more than Chromium\u0027s LOG().",
+      "parentUuid": "df56f56b_6b5b6187",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 58
+      },
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
