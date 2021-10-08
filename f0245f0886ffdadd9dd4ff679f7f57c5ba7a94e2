@@ -16,6 +16,23 @@
       "message": "Dear @Persson, @Dear Nikolaevskiy,\n\nI\u0027ve uploaded the CL to fix fatal error using VideoEncoderSoftwareFallbackWrapper with LibvpxVp8Encoder as a fallback encoder. Please have a look.",
       "revId": "f0245f0886ffdadd9dd4ff679f7f57c5ba7a94e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d621a5_cb8f45ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18194
+      },
+      "writtenOn": "2021-10-08T06:38:20Z",
+      "side": 1,
+      "message": "Dear @Persson, @Nikolaevsky,\n\nDue to the change of VideoEncoderSoftwareFallbackWrapper, I\u0027ve found that unittest \"PrimesEncoderOnSwitch\" should be changed.\n\nSorry to say, however, I ask you to hold reviewing on my CL before I announce that all the related jobs are completed.",
+      "revId": "f0245f0886ffdadd9dd4ff679f7f57c5ba7a94e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
