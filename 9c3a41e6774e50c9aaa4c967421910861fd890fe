@@ -123,6 +123,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b553c79_5315a45d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-11T11:48:57Z",
+      "side": 1,
+      "message": "Hi Kári - won\u0027t this change name resolutions from being parallel to being sequential? Also, since this maps to the default queue, might it not potentially block the queue for extended periods of time depending on how long the operation takes?",
+      "parentUuid": "c6f75ebe_be5d0abd",
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "430aef02_c41fe5ee",

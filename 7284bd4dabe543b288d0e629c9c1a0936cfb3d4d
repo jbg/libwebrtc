@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f73e00c3_c9d89b1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-11T11:48:57Z",
+      "side": 1,
+      "message": "I\u0027m not sure using the default queue like this is good. Also, the problem that triggered this CL may indicate that this change could make things worse.",
+      "revId": "7284bd4dabe543b288d0e629c9c1a0936cfb3d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
