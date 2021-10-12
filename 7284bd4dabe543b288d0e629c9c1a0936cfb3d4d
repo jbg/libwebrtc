@@ -34,6 +34,24 @@
       "parentUuid": "f73e00c3_c9d89b1d",
       "revId": "7284bd4dabe543b288d0e629c9c1a0936cfb3d4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a496a579_eb3e2d8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-12T09:59:23Z",
+      "side": 1,
+      "message": "The problem might be a design problem. Using TaskQueue this way is different from all other use of TaskQueue, which introduces behavior one can consider to be surprising and also sets a precedence I\u0027m not sure we want to set (at least not before having the chance of thinking it through).",
+      "parentUuid": "32d9303c_5224a2cb",
+      "revId": "7284bd4dabe543b288d0e629c9c1a0936cfb3d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

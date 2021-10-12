@@ -159,6 +159,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a978c7a0_0e213529",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-12T09:59:23Z",
+      "side": 1,
+      "message": "Thanks Kári. I looked around for confirmation on that but couldn\u0027t find it. In that case this API introduces a couple of things that the TQ concept doesn\u0027t have:\n\n- Global task queues (currently requiring compile time flags to use)\n- Queues that do parallel processing.\n\nSince before this CL all TQ instances process tasks strictly sequentially, this doesn\u0027t adhere to the design and also offers an arbitrary way of posting tasks. If that gets adoption across the code base, we\u0027ll lose control of grouped tasks and could have new issues to deal with deterministic state tear-down.",
+      "parentUuid": "814015b6_139146b2",
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "430aef02_c41fe5ee",
