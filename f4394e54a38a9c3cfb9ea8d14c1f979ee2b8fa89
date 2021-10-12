@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba91442_891c6afd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-12T09:34:37Z",
+      "side": 1,
+      "message": "BTW, do you intend to reland https://webrtc-review.googlesource.com/c/src/+/234342 soon? The merge conflict on this cl is with the revert.",
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4895444b_654e373a",
@@ -132,6 +149,77 @@
         "startChar": 0,
         "endLine": 172,
         "endChar": 58
+      },
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1167d1bc_db78b5a0",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-12T09:34:37Z",
+      "side": 1,
+      "message": "Done. Added cast. If numeric output was good enough before this cl, it likely still is.",
+      "parentUuid": "c9036433_70321cf0",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 58
+      },
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f280b92_16bf3b28",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-12T09:34:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9036433_70321cf0",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 58
+      },
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96569c26_3317dc56",
+        "filename": "rtc_base/async_packet_socket.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-12T09:34:37Z",
+      "side": 1,
+      "message": "I wonder if we can we rename the GetBindState to just GetState, and remove the other method? Or if that will make transition harder? I added the new name when I still had the inheritance hack.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 38
       },
       "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
