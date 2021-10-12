@@ -177,6 +177,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de66511e_ad576ef8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-10-12T13:02:05Z",
+      "side": 1,
+      "message": "See the \"discussion\" section here for confirmation: https://developer.apple.com/documentation/dispatch/dispatchqueue/2300077-global\n\nI get your concern. Even though this method was not added to the public TQ interface but just the apple-specific one, it still might be better to just use the GCD API directly from `AsyncResolver` instead of expanding the scope of TQ like this.",
+      "parentUuid": "a978c7a0_0e213529",
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "430aef02_c41fe5ee",
