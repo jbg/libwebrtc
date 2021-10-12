@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure using the default queue like this is good. Also, the problem that triggered this CL may indicate that this change could make things worse.",
       "revId": "7284bd4dabe543b288d0e629c9c1a0936cfb3d4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d9303c_5224a2cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-10-12T06:10:11Z",
+      "side": 1,
+      "message": "If this CL produces a regression, it should be reverted. Before that, I\u0027d like to know what kind of problem this CL is causing.",
+      "parentUuid": "f73e00c3_c9d89b1d",
+      "revId": "7284bd4dabe543b288d0e629c9c1a0936cfb3d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
