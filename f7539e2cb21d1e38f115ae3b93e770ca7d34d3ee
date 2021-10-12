@@ -16,6 +16,23 @@
       "message": "Hello, I have modified task queue related functions as mentioned in https://webrtc-review.googlesource.com/c/src/+/234300. Please take a look.\n",
       "revId": "f7539e2cb21d1e38f115ae3b93e770ca7d34d3ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "039d00d0_355c8612",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-12T15:14:30Z",
+      "side": 1,
+      "message": "thanks, lgtm.\n\nI think this is a reasonable approach. To add to the discussion in the other thread I started thinking about the non-obvious parts of the TQ contract that we might have missed and then realized that because there weren\u0027t tests, we missed things like supporting TaskQueue::Current() from within the callback etc. So there are subtle things that I\u0027d like to think through first at the TQ level.",
+      "revId": "f7539e2cb21d1e38f115ae3b93e770ca7d34d3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
