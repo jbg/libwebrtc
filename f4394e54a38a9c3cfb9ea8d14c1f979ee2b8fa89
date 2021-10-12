@@ -111,6 +111,30 @@
       },
       "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9036433_70321cf0",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-12T09:10:13Z",
+      "side": 1,
+      "message": "That\u0027s what I\u0027ve done in the past.\nIf the state name matters, implement a ToString method on it; if it\u0027s likely that the only people who care will look at the enum definition anyway, cast it.",
+      "parentUuid": "7a1c4ec6_1ae76718",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 58
+      },
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
