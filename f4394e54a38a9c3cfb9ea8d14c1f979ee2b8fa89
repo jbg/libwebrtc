@@ -87,6 +87,30 @@
       },
       "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a1c4ec6_1ae76718",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-12T08:12:16Z",
+      "side": 1,
+      "message": "So what\u0027s the right way to solve the problem? Just add an explicit static_cast\u003cint\u003e(listen_socket_-\u003eGetBindState()) here?",
+      "parentUuid": "a1902597_ba571821",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 58
+      },
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
