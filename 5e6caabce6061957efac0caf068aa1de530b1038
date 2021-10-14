@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e5c4c67_4d4d932d",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-10-14T15:12:11Z",
+      "side": 1,
+      "message": "updated to ignore case (but i am not sure this is done in other places).\nI am trying to avoid using H264IsSameProfile but that might be required.",
+      "parentUuid": "f32abd3c_489d1cc5",
+      "revId": "5e6caabce6061957efac0caf068aa1de530b1038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "127ea932_37a83d32",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 1
@@ -48,6 +66,30 @@
       "writtenOn": "2021-10-14T14:46:44Z",
       "side": 1,
       "message": "Shouldn\u0027t this be changed also?",
+      "range": {
+        "startLine": 228,
+        "startChar": 10,
+        "endLine": 228,
+        "endChar": 35
+      },
+      "revId": "5e6caabce6061957efac0caf068aa1de530b1038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df7d48a_03537a0f",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-10-14T15:12:11Z",
+      "side": 1,
+      "message": "true, thanks for catching it!",
+      "parentUuid": "127ea932_37a83d32",
       "range": {
         "startLine": 228,
         "startChar": 10,
