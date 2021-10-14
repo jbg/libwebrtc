@@ -279,6 +279,7 @@ AudioProcessingImpl::AudioProcessingImpl(
                  field_trial::IsEnabled("WebRTC-TransientSuppressorForcedOff")),
       capture_(),
       capture_nonlocked_() {
+  RTC_LOG(LS_INFO) << config_.ToString();
   RTC_LOG(LS_INFO) << "Injected APM submodules:"
                       "\nEcho control factory: "
                    << !!echo_control_factory_
