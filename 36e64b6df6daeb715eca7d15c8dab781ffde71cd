@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f8ed227_4c6d52b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-14T14:07:35Z",
+      "side": 1,
+      "message": "I think it would be clearer with something like\n\n\"Check for padding packet based on payload size being zero, without   attempting to parse the payload in this case.\"\n\nWould also be nice with a brief explanation on why the previous way of doing it isn\u0027t right (if this is more than just a small optimization).",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 94
+      },
+      "revId": "36e64b6df6daeb715eca7d15c8dab781ffde71cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
