@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6f777a3_7e7ff793",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-14T12:10:47Z",
+      "side": 1,
+      "message": "First (and hopefully the main) obstacle in chromium is \n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/p2p/ipc_socket_factory.cc;drc\u003d7f7c846b9c2d2a8faa731c9182530cc3bf8585ee;l\u003d739\n\nand the corresponding class IpcPacketSocket. We need to find a way to introduce an IpcListenSocket without breaking things.",
+      "revId": "4a73f521ffd5e640ec732cfae2e650badd24fedf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
