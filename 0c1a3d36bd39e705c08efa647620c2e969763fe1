@@ -16,6 +16,23 @@
       "message": "Stefan, Niels, please RS LGTM.",
       "revId": "0c1a3d36bd39e705c08efa647620c2e969763fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a7c334_ec6e2152",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18414
+      },
+      "writtenOn": "2021-10-14T15:05:16Z",
+      "side": 1,
+      "message": "LGTM.",
+      "revId": "0c1a3d36bd39e705c08efa647620c2e969763fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
