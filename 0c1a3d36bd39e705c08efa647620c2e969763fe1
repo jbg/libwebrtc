@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1722aff_77480690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-10-14T13:41:07Z",
+      "side": 1,
+      "message": "Stefan, Niels, please RS LGTM.",
+      "revId": "0c1a3d36bd39e705c08efa647620c2e969763fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
