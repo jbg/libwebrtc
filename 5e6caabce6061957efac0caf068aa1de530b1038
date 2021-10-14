@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6de5645f_1ca1dd3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2021-10-14T14:39:55Z",
+      "side": 1,
+      "message": "Manually tested the assignment in chrome with a different prefix.\n\nstefan: all profile levels for this start with \"f400\", right?\n\nilya: when relanding the other change make sure to test the full chromium bot but if this lands first it should pass.\nhta: you like profile-level-ids ;-)\n\n",
+      "revId": "5e6caabce6061957efac0caf068aa1de530b1038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
