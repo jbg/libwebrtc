@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbb9f59a_cd5e4de7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2021-10-14T13:29:08Z",
+      "side": 1,
+      "message": "Hi Per,\nCould you PTAL?\nAlessio\n\nPS: for sure this CL is needed once https://chromium-review.googlesource.com/c/chromium/src/+/3222588 lands",
+      "revId": "d3f0cc1925af43b54b87dd7bf5a99069a9afd8b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
