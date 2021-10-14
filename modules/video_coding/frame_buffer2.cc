@@ -54,7 +54,8 @@ constexpr int64_t kLogNonDecodedIntervalMs = 5000;
 
 FrameBuffer::FrameBuffer(Clock* clock,
                          VCMTiming* timing,
-                         VCMReceiveStatisticsCallback* stats_callback)
+                         VCMReceiveStatisticsCallback* stats_callback,
+                         FrameDeliveryStrategy frame_delivery_strategy)
     : decoded_frames_history_(kMaxFramesHistory),
       clock_(clock),
       callback_queue_(nullptr),
@@ -70,7 +71,8 @@ FrameBuffer::FrameBuffer(Clock* clock,
       rtt_mult_settings_(RttMultExperiment::GetRttMultValue()),
       zero_playout_delay_max_decode_queue_size_(
           "max_decode_queue_size",
-          kZeroPlayoutDelayDefaultMaxDecodeQueueSize) {
+          kZeroPlayoutDelayDefaultMaxDecodeQueueSize),
+      frame_delivery_strategy_(frame_delivery_strategy) {
   ParseFieldTrial({&zero_playout_delay_max_decode_queue_size_},
                   field_trial::FindFullName("WebRTC-ZeroPlayoutDelay"));
   callback_checker_.Detach();
@@ -80,6 +82,31 @@ FrameBuffer::~FrameBuffer() {
   RTC_DCHECK_RUN_ON(&construction_checker_);
 }
 
+std::unique_ptr<EncodedFrame> FrameBuffer::ImmediateGetNextFrame(
+    bool keyframe_required,
+    int64_t latest_return_time_ms) {
+  RTC_DCHECK(frame_delivery_strategy_ == FrameDeliveryStrategy::kMetronome);
+  std::unique_ptr<EncodedFrame> frame;
+  {
+    MutexLock lock(&mutex_);
+    keyframe_required_ = keyframe_required;
+    latest_return_time_ms_ = latest_return_time_ms;
+    int64_t wait_ms = FindNextFrame(clock_->TimeInMilliseconds());
+    // TODO(eshr): We can ignore wait. A new FindNextFrame+GetNextFrame method
+    // that returns all ready frames is preferable.
+    if (wait_ms > 0) {
+      RTC_DLOG(LS_WARNING) << "Wait time " << wait_ms
+                           << " frames to decode: " << frames_to_decode_.size();
+    }
+    if (!frames_to_decode_.empty()) {
+      // We have frames, deliver!
+      frame = absl::WrapUnique(GetNextFrame());
+      timing_->SetLastDecodeScheduledTimestamp(clock_->TimeInMilliseconds());
+    }
+  }
+  return frame;
+}
+
 void FrameBuffer::NextFrame(
     int64_t max_wait_time_ms,
     bool keyframe_required,
@@ -87,6 +114,7 @@ void FrameBuffer::NextFrame(
     std::function<void(std::unique_ptr<EncodedFrame>, ReturnReason)> handler) {
   RTC_DCHECK_RUN_ON(&callback_checker_);
   RTC_DCHECK(callback_queue->IsCurrent());
+  RTC_DCHECK(frame_delivery_strategy_ == FrameDeliveryStrategy::kDefault);
   TRACE_EVENT0("webrtc", "FrameBuffer::NextFrame");
   int64_t latest_return_time_ms =
       clock_->TimeInMilliseconds() + max_wait_time_ms;
@@ -105,6 +133,7 @@ void FrameBuffer::NextFrame(
 void FrameBuffer::StartWaitForNextFrameOnQueue() {
   RTC_DCHECK(callback_queue_);
   RTC_DCHECK(!callback_task_.Running());
+  RTC_DCHECK(frame_delivery_strategy_ == FrameDeliveryStrategy::kDefault);
   int64_t wait_ms = FindNextFrame(clock_->TimeInMilliseconds());
   callback_task_ = RepeatingTaskHandle::DelayedStart(
       callback_queue_->Get(), TimeDelta::Millis(wait_ms), [this] {
@@ -154,8 +183,9 @@ int64_t FrameBuffer::FindNextFrame(int64_t now_ms) {
 
     EncodedFrame* frame = frame_it->second.frame.get();
 
-    if (keyframe_required_ && !frame->is_keyframe())
+    if (keyframe_required_ && !frame->is_keyframe()) {
       continue;
+    }
 
     auto last_decoded_frame_timestamp =
         decoded_frames_history_.GetLastDecodedFrameTimestamp();
@@ -232,8 +262,9 @@ int64_t FrameBuffer::FindNextFrame(int64_t now_ms) {
     // enough and the stream has multiple spatial and temporal layers.
     // For multiple temporal layers it may cause non-base layer frames to be
     // skipped if they are late.
-    if (wait_ms < -kMaxAllowedFrameDelayMs)
+    if (wait_ms < -kMaxAllowedFrameDelayMs) {
       continue;
+    }
 
     break;
   }
@@ -360,6 +391,7 @@ void FrameBuffer::SetProtectionMode(VCMVideoProtection mode) {
 
 void FrameBuffer::Stop() {
   TRACE_EVENT0("webrtc", "FrameBuffer::Stop");
+  DCHECK(frame_delivery_strategy_ == FrameDeliveryStrategy::kDefault);
   MutexLock lock(&mutex_);
   if (stopped_)
     return;
@@ -398,6 +430,7 @@ bool FrameBuffer::ValidReferences(const EncodedFrame& frame) const {
 }
 
 void FrameBuffer::CancelCallback() {
+  DCHECK(frame_delivery_strategy_ == FrameDeliveryStrategy::kDefault);
   // Called from the callback queue or from within Stop().
   frame_handler_ = {};
   callback_task_.Stop();
@@ -495,6 +528,7 @@ int64_t FrameBuffer::InsertFrame(std::unique_ptr<EncodedFrame> frame) {
     // Since we now have new continuous frames there might be a better frame
     // to return from NextFrame.
     if (callback_queue_) {
+      DCHECK(frame_delivery_strategy_ == FrameDeliveryStrategy::kDefault);
       callback_queue_->PostTask([this] {
         MutexLock lock(&mutex_);
         if (!callback_task_.Running())

@@ -195,7 +195,8 @@ VideoReceiveStream2::VideoReceiveStream2(
     CallStats* call_stats,
     Clock* clock,
     VCMTiming* timing,
-    NackPeriodicProcessor* nack_periodic_processor)
+    NackPeriodicProcessor* nack_periodic_processor,
+    FrameDeliveryStrategy frame_delivery_strategy)
     : task_queue_factory_(task_queue_factory),
       transport_adapter_(config.rtcp_send_transport),
       config_(std::move(config)),
@@ -203,6 +204,7 @@ VideoReceiveStream2::VideoReceiveStream2(
       call_(call),
       clock_(clock),
       call_stats_(call_stats),
+      frame_delivery_strategy_(frame_delivery_strategy),
       source_tracker_(clock_),
       stats_proxy_(config_.rtp.remote_ssrc, clock_, call->worker_thread()),
       rtp_receive_statistics_(ReceiveStatistics::Create(clock_)),
@@ -224,6 +226,13 @@ VideoReceiveStream2::VideoReceiveStream2(
                                  std::move(config_.frame_decryptor),
                                  std::move(config_.frame_transformer)),
       rtp_stream_sync_(call->worker_thread(), this),
+      frame_buffer_(std::make_unique<video_coding::FrameBuffer>(
+          clock_,
+          timing_.get(),
+          &stats_proxy_,
+          frame_delivery_strategy_ == FrameDeliveryStrategy::kDefault
+              ? video_coding::FrameBuffer::FrameDeliveryStrategy::kDefault
+              : video_coding::FrameBuffer::FrameDeliveryStrategy::kMetronome)),
       max_wait_for_keyframe_ms_(DetermineMaxWaitForFrame(config, true)),
       max_wait_for_frame_ms_(DetermineMaxWaitForFrame(config, false)),
       low_latency_renderer_enabled_("enabled", true),
@@ -234,6 +243,11 @@ VideoReceiveStream2::VideoReceiveStream2(
           "DecodingQueue",
           TaskQueueFactory::Priority::HIGH)) {
   RTC_LOG(LS_INFO) << "VideoReceiveStream2: " << config_.ToString();
+  RTC_LOG(LS_WARNING) << "Using strategy "
+                      << (frame_delivery_strategy_ ==
+                                  FrameDeliveryStrategy::kDefault
+                              ? "default"
+                              : "metronome");
 
   RTC_DCHECK(call_->worker_thread());
   RTC_DCHECK(config_.renderer);
@@ -252,9 +266,6 @@ VideoReceiveStream2::VideoReceiveStream2(
   }
 
   timing_->set_render_delay(config_.render_delay_ms);
-
-  frame_buffer_.reset(
-      new video_coding::FrameBuffer(clock_, timing_.get(), &stats_proxy_));
 
   if (config_.rtp.rtx_ssrc) {
     rtx_receive_stream_ = std::make_unique<RtxReceiveStream>(
@@ -397,7 +408,9 @@ void VideoReceiveStream2::Start() {
   decode_queue_.PostTask([this] {
     RTC_DCHECK_RUN_ON(&decode_queue_);
     decoder_stopped_ = false;
-    StartNextDecode();
+    if (frame_delivery_strategy_ == FrameDeliveryStrategy::kDefault) {
+      StartNextDecode();
+    }
   });
   decoder_running_ = true;
 
@@ -421,7 +434,9 @@ void VideoReceiveStream2::Stop() {
   stats_proxy_.OnUniqueFramesCounted(
       rtp_video_stream_receiver_.GetUniqueFramesSeen());
 
-  decode_queue_.PostTask([this] { frame_buffer_->Stop(); });
+  if (frame_delivery_strategy_ == FrameDeliveryStrategy::kDefault) {
+    decode_queue_.PostTask([this] { frame_buffer_->Stop(); });
+  }
 
   call_stats_->DeregisterStatsObserver(this);
 
@@ -717,8 +732,68 @@ int64_t VideoReceiveStream2::GetMaxWaitMs() const {
                             : max_wait_for_frame_ms_;
 }
 
+void VideoReceiveStream2::ImmediateStartNextDecode() {
+  DCHECK_EQ(frame_delivery_strategy_, FrameDeliveryStrategy::kMetronome);
+  decode_queue_.PostTask([this]() {
+    RTC_DCHECK_RUN_ON(&decode_queue_);
+    ImmediateStartNextDecodeOnDecoderThread();
+  });
+}
+
+void VideoReceiveStream2::ImmediateStartNextDecodeOnDecoderThread() {
+  DCHECK_EQ(frame_delivery_strategy_, FrameDeliveryStrategy::kMetronome);
+  TRACE_EVENT0("webrtc", "VideoReceiveStream2::StartNextDecode");
+  if (last_decoded_frame_timestamp_.IsMinusInfinity()) {
+    last_decoded_frame_timestamp_ = clock_->CurrentTime();
+  }
+
+  RTC_DLOG(LS_WARNING) << "last decode time "
+                       << last_decoded_frame_timestamp_.ms();
+
+  if (decoder_stopped_) {
+    RTC_DLOG(LS_WARNING) << "decoder_stopped";
+    return;
+  }
+
+  const Timestamp encode_start = clock_->CurrentTime();
+
+  const auto wait_ms = GetMaxWaitMs();
+  const auto latest_return_time_ms = encode_start.ms() + wait_ms;
+  std::unique_ptr<EncodedFrame> next_frame =
+      frame_buffer_->ImmediateGetNextFrame(keyframe_required_,
+                                           latest_return_time_ms);
+
+  if (!next_frame) {
+    RTC_DLOG(LS_WARNING) << "no frame.";
+    // Handle timeout.
+    if (encode_start - last_decoded_frame_timestamp_ >
+        TimeDelta::Millis(wait_ms)) {
+      // TODO(bugs.webrtc.org/11993): PostTask to the network thread.
+      RTC_DLOG(LS_WARNING) << "timeout. waited more than wait " << wait_ms
+                           << " since encode start " << encode_start.ms();
+      call_->worker_thread()->PostTask(ToQueuedTask(
+          task_safety_, [this, now_ms = clock_->TimeInMilliseconds(),
+                         wait_ms = GetMaxWaitMs()]() {
+            RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
+            HandleFrameBufferTimeout(now_ms, wait_ms);
+          }));
+    }
+    // No frames to decode.
+    return;
+  }
+
+  while (next_frame) {
+    RTC_DLOG(WARNING) << "fetched frame. encode start " << encode_start.ms();
+    HandleEncodedFrame(std::move(next_frame));
+    last_decoded_frame_timestamp_ = clock_->CurrentTime();
+    next_frame = frame_buffer_->ImmediateGetNextFrame(keyframe_required_,
+                                                      latest_return_time_ms);
+  }
+}
+
 void VideoReceiveStream2::StartNextDecode() {
   // Running on the decode thread.
+  DCHECK_EQ(frame_delivery_strategy_, FrameDeliveryStrategy::kDefault);
   TRACE_EVENT0("webrtc", "VideoReceiveStream2::StartNextDecode");
   frame_buffer_->NextFrame(
       GetMaxWaitMs(), keyframe_required_, &decode_queue_,
