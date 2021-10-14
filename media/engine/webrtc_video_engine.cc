@@ -110,6 +110,22 @@ void AddDefaultFeedbackParams(VideoCodec* codec,
   }
 }
 
+// Helper function to determine whether a codec should use the [35, 63] range.
+// Should be used when adding new codecs (or variants).
+bool IsCodecValidForLowerRange(const VideoCodec& codec) {
+  if (absl::EqualsIgnoreCase(codec.name, kFlexfecCodecName) ||
+      absl::EqualsIgnoreCase(codec.name, kAv1CodecName) ||
+      absl::EqualsIgnoreCase(codec.name, kAv1xCodecName)) {
+    return true;
+  } else if (absl::EqualsIgnoreCase(codec.name, kH264CodecName)) {
+    std::string profileLevelId;
+    if (codec.GetParam(kH264FmtpProfileLevelId, &profileLevelId)) {
+      return absl::StartsWith(profileLevelId, "f400");
+    }
+  }
+  return false;
+}
+
 // This function will assign dynamic payload types (in the range [96, 127]
 // and then [35, 63]) to the input codecs, and also add ULPFEC, RED, FlexFEC,
 // and associated RTX codecs for recognized codecs (VP8, VP9, H264, and RED).
@@ -189,7 +205,7 @@ std::vector<VideoCodec> GetPayloadTypesAndDefaultCodecs(
 
     // Lower range gets used for "new" codecs or when running out of payload
     // types in the upper range.
-    if (isCodecValidForLowerRange ||
+    if (IsCodecValidForLowerRange(codec) ||
         payload_type_upper >= kLastDynamicPayloadTypeUpperRange) {
       codec.id = payload_type_lower++;
     } else {
