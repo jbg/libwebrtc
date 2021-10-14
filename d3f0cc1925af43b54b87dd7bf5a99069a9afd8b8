@@ -16,6 +16,23 @@
       "message": "Hi Per,\nCould you PTAL?\nAlessio\n\nPS: for sure this CL is needed once https://chromium-review.googlesource.com/c/chromium/src/+/3222588 lands",
       "revId": "d3f0cc1925af43b54b87dd7bf5a99069a9afd8b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "115c925e_8fb988f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-10-14T14:58:56Z",
+      "side": 1,
+      "message": "While logging is good, I\u0027m not sure adding this to the log is the right thing to do.\n\nAs commented by tommi@ on https://webrtc-review.googlesource.com/c/src/+/219468/2/modules/audio_processing/aec3/echo_canceller3.cc#749\n\n\"They slow down the build bots and increase the size of the debug logs quite a bit\"\n\nThe logging added by this line will be much more extensive than the logging commented on in that CL.\n\nI think it should be fine not to log this here, since there all information about what settings were used anyway are available elsewhere.\n\n",
+      "revId": "d3f0cc1925af43b54b87dd7bf5a99069a9afd8b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
