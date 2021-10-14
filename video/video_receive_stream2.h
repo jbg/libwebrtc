@@ -85,6 +85,11 @@ class VideoReceiveStream2
       public Syncable,
       public CallStatsObserver {
  public:
+  enum class FrameDeliveryStrategy {
+    kDefault,
+    kMetronome,
+  };
+
   // The default number of milliseconds to pass before re-requesting a key frame
   // to be sent.
   static constexpr int kMaxWaitForKeyFrameMs = 200;
@@ -92,15 +97,17 @@ class VideoReceiveStream2
   // configured.
   static constexpr size_t kBufferedEncodedFramesMaxSize = 60;
 
-  VideoReceiveStream2(TaskQueueFactory* task_queue_factory,
-                      Call* call,
-                      int num_cpu_cores,
-                      PacketRouter* packet_router,
-                      VideoReceiveStream::Config config,
-                      CallStats* call_stats,
-                      Clock* clock,
-                      VCMTiming* timing,
-                      NackPeriodicProcessor* nack_periodic_processor);
+  VideoReceiveStream2(
+      TaskQueueFactory* task_queue_factory,
+      Call* call,
+      int num_cpu_cores,
+      PacketRouter* packet_router,
+      VideoReceiveStream::Config config,
+      CallStats* call_stats,
+      Clock* clock,
+      VCMTiming* timing,
+      NackPeriodicProcessor* nack_periodic_processor,
+      FrameDeliveryStrategy strategy = FrameDeliveryStrategy::kDefault);
   // Destruction happens on the worker thread. Prior to destruction the caller
   // must ensure that a registration with the transport has been cleared. See
   // `RegisterWithTransport` for details.
@@ -183,10 +190,15 @@ class VideoReceiveStream2
                                          bool generate_key_frame) override;
   void GenerateKeyFrame() override;
 
+  void ImmediateStartNextDecode();
+
  private:
   void CreateAndRegisterExternalDecoder(const Decoder& decoder);
   int64_t GetMaxWaitMs() const RTC_RUN_ON(decode_queue_);
   void StartNextDecode() RTC_RUN_ON(decode_queue_);
+
+  void ImmediateStartNextDecodeOnDecoderThread() RTC_RUN_ON(decode_queue_);
+
   void HandleEncodedFrame(std::unique_ptr<EncodedFrame> frame)
       RTC_RUN_ON(decode_queue_);
   void HandleFrameBufferTimeout(int64_t now_ms, int64_t wait_ms)
@@ -230,6 +242,8 @@ class VideoReceiveStream2
   bool decoder_running_ RTC_GUARDED_BY(worker_sequence_checker_) = false;
   bool decoder_stopped_ RTC_GUARDED_BY(decode_queue_) = true;
 
+  const FrameDeliveryStrategy frame_delivery_strategy_;
+
   SourceTracker source_tracker_;
   ReceiveStatisticsProxy stats_proxy_;
   // Shared by media and rtx stream receivers, since the latter has no RtpRtcp
@@ -267,6 +281,8 @@ class VideoReceiveStream2
   int64_t last_keyframe_request_ms_ RTC_GUARDED_BY(decode_queue_) = 0;
   int64_t last_complete_frame_time_ms_
       RTC_GUARDED_BY(worker_sequence_checker_) = 0;
+  Timestamp last_decoded_frame_timestamp_ RTC_GUARDED_BY(decode_queue_) =
+      Timestamp::MinusInfinity();
 
   // Keyframe request intervals are configurable through field trials.
   const int max_wait_for_keyframe_ms_;

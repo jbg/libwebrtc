@@ -47,9 +47,15 @@ class FrameBuffer {
  public:
   enum ReturnReason { kFrameFound, kTimeout, kStopped };
 
+  enum class FrameDeliveryStrategy {
+    kDefault,
+    kMetronome,
+  };
+
   FrameBuffer(Clock* clock,
               VCMTiming* timing,
-              VCMReceiveStatisticsCallback* stats_callback);
+              VCMReceiveStatisticsCallback* stats_callback,
+              FrameDeliveryStrategy frame_delivery_strategy);
 
   FrameBuffer() = delete;
   FrameBuffer(const FrameBuffer&) = delete;
@@ -68,6 +74,10 @@ class FrameBuffer {
       bool keyframe_required,
       rtc::TaskQueue* callback_queue,
       std::function<void(std::unique_ptr<EncodedFrame>, ReturnReason)> handler);
+
+  std::unique_ptr<EncodedFrame> ImmediateGetNextFrame(
+      bool keyframe_required,
+      int64_t latest_return_time_ms);
 
   // Tells the FrameBuffer which protection mode that is in use. Affects
   // the frame timing.
@@ -196,6 +206,8 @@ class FrameBuffer {
   // when the low-latency rendering path is active, which is indicated by
   // the frame's render time == 0.
   FieldTrialParameter<unsigned> zero_playout_delay_max_decode_queue_size_;
+
+  const FrameDeliveryStrategy frame_delivery_strategy_;
 };
 
 }  // namespace video_coding
