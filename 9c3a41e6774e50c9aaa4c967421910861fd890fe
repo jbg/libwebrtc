@@ -213,6 +213,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a47bddc_1ece3892",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2021-10-15T13:01:50Z",
+      "side": 1,
+      "message": "It\u0027s as concurrent as the operating system deems appropriate for the hardware it\u0027s running on. I think this is probably a lot more safe than rtc::PlatformThread and more likely to respect system limits.",
+      "parentUuid": "10e03ae4_fd81fd29",
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "430aef02_c41fe5ee",
