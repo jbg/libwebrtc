@@ -51,6 +51,23 @@
       "parentUuid": "91a7c334_ec6e2152",
       "revId": "0c1a3d36bd39e705c08efa647620c2e969763fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e45ad75_8066e0f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-10-15T09:17:15Z",
+      "side": 1,
+      "message": "There\u0027s a discussion ongoing in the bug.\nI advised the author to create a reland in a separate CL so that they could update it with new fixes.",
+      "revId": "0c1a3d36bd39e705c08efa647620c2e969763fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
