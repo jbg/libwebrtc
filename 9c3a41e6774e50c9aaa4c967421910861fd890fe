@@ -195,6 +195,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e03ae4_fd81fd29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-15T13:00:07Z",
+      "side": 1,
+      "message": "How concurrent is it? 10x, 100x, 1000x?\nSpecifically for DNS queries, a misconfigured DNS can cause a query to hang for 10 seconds, so if we run the risk of starving a system resource, we might want to be careful.",
+      "parentUuid": "814015b6_139146b2",
+      "revId": "9c3a41e6774e50c9aaa4c967421910861fd890fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "430aef02_c41fe5ee",
