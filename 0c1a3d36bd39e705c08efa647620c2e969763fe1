@@ -33,6 +33,24 @@
       "message": "LGTM.",
       "revId": "0c1a3d36bd39e705c08efa647620c2e969763fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d6779c2_c6e5488a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-10-15T08:31:22Z",
+      "side": 1,
+      "message": "Still waiting for Stefan Holmer to approve.",
+      "parentUuid": "91a7c334_ec6e2152",
+      "revId": "0c1a3d36bd39e705c08efa647620c2e969763fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
