@@ -31,6 +31,8 @@ class IncomingVideoStream : public rtc::VideoSinkInterface<VideoFrame> {
                       rtc::VideoSinkInterface<VideoFrame>* callback);
   ~IncomingVideoStream() override;
 
+  TaskQueueBase* render_queue() { return incoming_render_queue_.Get(); }
+
  private:
   void OnFrame(const VideoFrame& video_frame) override;
   void Dequeue();

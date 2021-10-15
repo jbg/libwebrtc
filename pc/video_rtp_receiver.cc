@@ -162,6 +162,9 @@ void VideoRtpReceiver::RestartMediaChannel(absl::optional<uint32_t> ssrc) {
 
     // Disconnect from the previous ssrc.
     if (!was_stopped) {
+      // TODO(tommi): This causes an issue with the incoming video frame
+      // task queue. If video is actively streaming, we could perhaps change
+      // the sinks asynchronously on the video frame queue?
       SetSink(nullptr);
     }
 

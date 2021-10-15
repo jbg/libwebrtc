@@ -33,6 +33,8 @@ class TransportAdapter : public Transport {
   void Enable();
   void Disable();
 
+  void AssertDisabled();
+
  private:
   Transport* transport_;
   std::atomic<bool> enabled_;
