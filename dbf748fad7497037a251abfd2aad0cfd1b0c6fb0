@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d7bcb9f_93648b08",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-10-18T08:40:41Z",
+      "side": 1,
+      "message": "We want to log each invalid value, so we need to keep this loop",
+      "parentUuid": "0bbe8366_53e8f775",
+      "range": {
+        "startLine": 359,
+        "startChar": 14,
+        "endLine": 359,
+        "endChar": 31
+      },
+      "revId": "dbf748fad7497037a251abfd2aad0cfd1b0c6fb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2172aa65_caea822d",
@@ -64,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f228cd3_14e64ac0",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-10-18T08:40:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2172aa65_caea822d",
+      "range": {
+        "startLine": 371,
+        "startChar": 47,
+        "endLine": 371,
+        "endChar": 52
+      },
+      "revId": "dbf748fad7497037a251abfd2aad0cfd1b0c6fb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d79857d5_8b31aba1",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-10-14T16:20:36Z",
       "side": 1,
       "message": "No need to use Mock. Just use a normal ExplicitKeyValueConfig. I dont see how a mock is different/better than than the real in these tests.",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 98,
+        "endChar": 21
+      },
+      "revId": "dbf748fad7497037a251abfd2aad0cfd1b0c6fb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc2cf62_2639773b",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 17594
+      },
+      "writtenOn": "2021-10-18T08:40:41Z",
+      "side": 1,
+      "message": "Right, I only meant to use it in the test that actually need it (which is in a separate CL)",
+      "parentUuid": "d79857d5_8b31aba1",
       "range": {
         "startLine": 98,
         "startChar": 2,
