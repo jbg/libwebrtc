@@ -169,28 +169,11 @@ void TCPPort::PrepareAddress() {
     // Socket may be in the CLOSED state if Listen()
     // failed, we still want to add the socket address.
     RTC_LOG(LS_VERBOSE) << "Preparing TCP address, current state: "
-                        << listen_socket_->GetState();
-    if (listen_socket_->GetState() == rtc::AsyncPacketSocket::STATE_BOUND ||
-        listen_socket_->GetState() == rtc::AsyncPacketSocket::STATE_CLOSED)
-      AddAddress(listen_socket_->GetLocalAddress(),
-                 listen_socket_->GetLocalAddress(), rtc::SocketAddress(),
-                 TCP_PROTOCOL_NAME, "", TCPTYPE_PASSIVE_STR, LOCAL_PORT_TYPE,
-                 ICE_TYPE_PREFERENCE_HOST_TCP, 0, "", true);
-  } else {
-    RTC_LOG(LS_INFO) << ToString()
-                     << ": Not listening due to firewall restrictions.";
-    // Note: We still add the address, since otherwise the remote side won't
-    // recognize our incoming TCP connections. According to
-    // https://tools.ietf.org/html/rfc6544#section-4.5, for active candidate,
-    // the port must be set to the discard port, i.e. 9. We can't be 100% sure
-    // which IP address will actually be used, so GetBestIP is as good as we
-    // can do.
-    // TODO(deadbeef): We could do something like create a dummy socket just to
-    // see what IP we get. But that may be overkill.
-    AddAddress(rtc::SocketAddress(Network()->GetBestIP(), DISCARD_PORT),
-               rtc::SocketAddress(Network()->GetBestIP(), 0),
-               rtc::SocketAddress(), TCP_PROTOCOL_NAME, "", TCPTYPE_ACTIVE_STR,
-               LOCAL_PORT_TYPE, ICE_TYPE_PREFERENCE_HOST_TCP, 0, "", true);
+                        << static_cast<int>(listen_socket_->GetState());
+    AddAddress(listen_socket_->GetLocalAddress(),
+               listen_socket_->GetLocalAddress(), rtc::SocketAddress(),
+               TCP_PROTOCOL_NAME, "", TCPTYPE_PASSIVE_STR, LOCAL_PORT_TYPE,
+               ICE_TYPE_PREFERENCE_HOST_TCP, 0, "", true);
   }
 }
 
