@@ -67,6 +67,24 @@
       "message": "@nisse, please RS LGTM.",
       "revId": "b4f293f83512d77d98bfbb35a45960b31fb6096e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e93e27_0e96c82d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-10-18T07:55:07Z",
+      "side": 1,
+      "message": "It appears that brandt@ is on vacation. I\u0027ve added another owner to review.",
+      "parentUuid": "e92c7e04_d29a231e",
+      "revId": "b4f293f83512d77d98bfbb35a45960b31fb6096e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
