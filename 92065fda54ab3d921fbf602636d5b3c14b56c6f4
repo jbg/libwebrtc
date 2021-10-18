@@ -33,6 +33,24 @@
       "message": "Is pacing_rate_ just mirroring what pacing_controller_\u0027s rate is? If so, would it make more sense to add a getter to pacing_controller_?",
       "revId": "92065fda54ab3d921fbf602636d5b3c14b56c6f4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76d409d6_310a998c",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-10-18T09:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "054711d5_d4f44773",
+      "revId": "92065fda54ab3d921fbf602636d5b3c14b56c6f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
