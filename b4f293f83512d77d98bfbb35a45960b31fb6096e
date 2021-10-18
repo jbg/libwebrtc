@@ -33,6 +33,23 @@
       "message": "Dear @Brandt, @Nikolaevsky, @Persson,\n\nWould you please run CQ to test the unittest I\u0027ve modified?",
       "revId": "b4f293f83512d77d98bfbb35a45960b31fb6096e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e92c7e04_d29a231e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18194
+      },
+      "writtenOn": "2021-10-18T00:45:02Z",
+      "side": 1,
+      "message": "Dear @Nikolaevky, @Dear Persson,\n\nI\u0027ve added @Brandt as a reviewer since he/she had appeared as one of the owners of the modified codes with \"git cl owners\".\n\nCurrent status says that this CL still needs to get approval from the code owners, and I\u0027m wondering if I\u0027ve assigned the wrong owner on this issue.\n\nWould you please give me any advices to go through on this CL?",
+      "revId": "b4f293f83512d77d98bfbb35a45960b31fb6096e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
