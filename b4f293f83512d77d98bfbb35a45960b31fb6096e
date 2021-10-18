@@ -85,6 +85,23 @@
       "parentUuid": "e92c7e04_d29a231e",
       "revId": "b4f293f83512d77d98bfbb35a45960b31fb6096e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3841ee8_9d346f5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18194
+      },
+      "writtenOn": "2021-10-18T08:00:35Z",
+      "side": 1,
+      "message": "Dear @Nikolaevskiy, @Moller,\n\nThank you for your help, Great!",
+      "revId": "b4f293f83512d77d98bfbb35a45960b31fb6096e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
