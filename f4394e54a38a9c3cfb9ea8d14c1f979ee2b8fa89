@@ -223,6 +223,30 @@
       },
       "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a54bec8_4825733a",
+        "filename": "rtc_base/async_packet_socket.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-18T10:16:59Z",
+      "side": 1,
+      "message": "Done. Also deleted the unused kBinding state.",
+      "parentUuid": "96569c26_3317dc56",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 38
+      },
+      "revId": "f4394e54a38a9c3cfb9ea8d14c1f979ee2b8fa89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
