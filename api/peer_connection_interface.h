@@ -180,6 +180,7 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     kHaveRemotePrAnswer,
     kClosed,
   };
+  static const std::string& ToString(SignalingState);
 
   // See https://w3c.github.io/webrtc-pc/#dom-rtcicegatheringstate
   enum IceGatheringState {
@@ -187,6 +188,7 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     kIceGatheringGathering,
     kIceGatheringComplete
   };
+  static const std::string& ToString(IceGatheringState);
 
   // See https://w3c.github.io/webrtc-pc/#dom-rtcpeerconnectionstate
   enum class PeerConnectionState {
@@ -197,6 +199,7 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     kFailed,
     kClosed,
   };
+  static const char* ToString(PeerConnectionState);
 
   // See https://w3c.github.io/webrtc-pc/#dom-rtciceconnectionstate
   enum IceConnectionState {
@@ -209,6 +212,7 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     kIceConnectionClosed,
     kIceConnectionMax,
   };
+  static const char* ToString(IceConnectionState);
 
   // TLS certificate policy.
   enum TlsCertPolicy {
@@ -264,6 +268,7 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     kNoHost,
     kAll
   };
+  static const std::string& ToString(IceTransportsType);
 
   // https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-24#section-4.1.1
   enum BundlePolicy {
@@ -277,6 +282,7 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     kRtcpMuxPolicyNegotiate,
     kRtcpMuxPolicyRequire,
   };
+  static const std::string& ToString(RtcpMuxPolicy);
 
   enum TcpCandidatePolicy {
     kTcpCandidatePolicyEnabled,

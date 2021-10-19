@@ -41,6 +41,30 @@ PeerConnectionInterface::RTCConfiguration::RTCConfiguration(
 
 PeerConnectionInterface::RTCConfiguration::~RTCConfiguration() = default;
 
+// https://w3c.github.io/webrtc-pc/#dom-rtciceconnectionstate
+// static
+const char* PeerConnectionInterface::ToString(PeerConnectionState state) {
+  switch (state) {
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kNew:
+      return "new";
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kConnecting:
+      return "connecting";
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kConnected:
+      return "connected";
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kDisconnected:
+      return "disconnected";
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kFailed:
+      return "failed";
+    case webrtc::PeerConnectionInterface::PeerConnectionState::kClosed:
+      return "closed";
+    default:
+      RTC_NOTREACHED();
+      return "";
+  }
+  RTC_NOTREACHED();
+  return "";
+}
+
 RTCError PeerConnectionInterface::RemoveTrackNew(
     rtc::scoped_refptr<RtpSenderInterface> sender) {
   return RTCError(RemoveTrack(sender) ? RTCErrorType::NONE
