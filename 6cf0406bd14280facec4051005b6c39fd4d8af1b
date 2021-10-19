@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b996b6e9_278fb8ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-10-19T08:51:07Z",
+      "side": 1,
+      "message": "may be attach this change to webrtc:11404",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "6cf0406bd14280facec4051005b6c39fd4d8af1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b836a93_683353e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-10-19T08:51:07Z",
+      "side": 1,
+      "message": "Thank you for fixing the tests!",
+      "revId": "6cf0406bd14280facec4051005b6c39fd4d8af1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b262e193_66529d47",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-10-19T08:51:07Z",
+      "side": 1,
+      "message": "This particular test is not about bitrates, disabling tests for half of the structures doesn\u0027t look like a good idea to me.\nWould prefer instead to generate some default bitrates for all the layers, something like.\n\n  std::unique_ptr\u003cScalableVideoController\u003e svc_controller \u003d CreateScalabilityStructure(GetParam().name);\n  ASSERT_TRUE(svc_controller);\n\n  VideoBitrateAllocation allocation;\n  if (bitrates.empty()) {\n    ScalableVideoController::StreamLayersConfig config \u003d svc_controller-\u003eStreamConfig();\n    for (int sid \u003d 0; sid \u003c config.num_spatial_layers; ++sid) {\n      for (int tid...) {\n        allocation.SetBitrate(sid, tid, 500\u0027000);\n      }\n    }\n  } else {\n    // same as you\u0027re suggesting.\n  } \n  ...\n  size_t num_decode_targets \u003d svc_controller-\u003eDependencyStructure().num_decode_targets;",
+      "range": {
+        "startLine": 183,
+        "startChar": 4,
+        "endLine": 183,
+        "endChar": 77
+      },
+      "revId": "6cf0406bd14280facec4051005b6c39fd4d8af1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
