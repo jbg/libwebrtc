@@ -178,6 +178,18 @@ struct SvcTestParam {
 class LibaomAv1SvcTest : public ::testing::TestWithParam<SvcTestParam> {};
 
 TEST_P(LibaomAv1SvcTest, EncodeAndDecodeAllDecodeTargets) {
+  const SvcTestParam param = GetParam();
+  if (param.configured_bitrates.empty()) {
+    // Rates are not configured for this particular structure, skip the test.
+    return;
+  }
+
+  VideoBitrateAllocation allocation;
+  for (const auto& kv : param.configured_bitrates) {
+    allocation.SetBitrate(kv.first.spatial_id, kv.first.temporal_id,
+                          kv.second.bps());
+  }
+
   size_t num_decode_targets = CreateScalabilityStructure(GetParam().name)
                                   ->DependencyStructure()
                                   .num_decode_targets;
@@ -187,6 +199,8 @@ TEST_P(LibaomAv1SvcTest, EncodeAndDecodeAllDecodeTargets) {
   codec_settings.SetScalabilityMode(GetParam().name);
   ASSERT_EQ(encoder->InitEncode(&codec_settings, DefaultEncoderSettings()),
             WEBRTC_VIDEO_CODEC_OK);
+  encoder->SetRates(VideoEncoder::RateControlParameters(
+      allocation, codec_settings.maxFramerate));
   std::vector<EncodedVideoFrameProducer::EncodedFrame> encoded_frames =
       EncodedVideoFrameProducer(*encoder)
           .SetNumInputFrames(GetParam().num_frames_to_generate)
