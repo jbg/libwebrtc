@@ -16,6 +16,57 @@
       "message": "Don\u0027t +1 this one (yet). Make commentary on the design choices.\n",
       "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9107e77b_da5807c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2021-10-19T18:37:51Z",
+      "side": 1,
+      "message": "adding danilchap@ too for input",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee392018_93a4e795",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2021-10-19T18:37:51Z",
+      "side": 1,
+      "message": "returning a std::string\u0026 seems problematic.\nIt implies a globally constructed object (discouraged or banned), an object that requires synchronization (which global objects partially are too) or an object that may have gone out of scope when returned.\n\nInstead, can we use trivially static string_view objects? (as in, that do not require runtime construction)",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecac4c98_d5a951e5",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2021-10-19T18:37:51Z",
+      "side": 1,
+      "message": "it would be nice to be consistent with the return type. const char* works with printf() style formatting, but std::string doesn\u0027t, so they could easily be mixed up, but with potentially bad results.",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
