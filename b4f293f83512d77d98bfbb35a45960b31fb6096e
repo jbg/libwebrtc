@@ -155,6 +155,24 @@
       "parentUuid": "c542b898_82894dcf",
       "revId": "b4f293f83512d77d98bfbb35a45960b31fb6096e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f510f882_9439ac78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18194
+      },
+      "writtenOn": "2021-10-19T08:56:02Z",
+      "side": 1,
+      "message": "Dear @Nikolavskiy,\n\nThank you for the check.😊",
+      "parentUuid": "259eca64_471c3826",
+      "revId": "b4f293f83512d77d98bfbb35a45960b31fb6096e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
