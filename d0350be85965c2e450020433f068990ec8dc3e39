@@ -222,6 +222,30 @@
       },
       "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a189aa01_b0ea68ad",
+        "filename": "rtc_base/async_packet_socket.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-19T09:07:09Z",
+      "side": 1,
+      "message": "Chromium case was solved by deleting the offending code, since the code paths via P2PSocketTcpServer were unused. See https://chromium-review.googlesource.com/c/chromium/src/+/3229278.",
+      "parentUuid": "ed3ba69a_ce60903f",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 68
+      },
+      "revId": "d0350be85965c2e450020433f068990ec8dc3e39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
