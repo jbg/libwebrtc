@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c24c0cbe_ed34bf23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-19T09:29:58Z",
+      "side": 1,
+      "message": "I think all downstream breakage is fixed now. Mirko, would you like to have a look before I land this?",
+      "revId": "b83f5c63f8a9d97ec827d3614b26a3c36368740f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
