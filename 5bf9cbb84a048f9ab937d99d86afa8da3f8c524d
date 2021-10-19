@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76a500ee_ac5d8b30",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-19T20:26:14Z",
+      "side": 1,
+      "message": "Yep, a main point of this review is to settle what the best return type is.\n\nreturn an absl::string_view by value, constructing it from a string?\nor find a way to declare a lookup table of string_view valus without requiring a std::map that has to be destructed on program exit? (I tried with a static std::map\u003cPeerConnectionState, std::string\u003e and was told that this required a destructor on program exit, which was a no-no.)",
+      "parentUuid": "ee392018_93a4e795",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecac4c98_d5a951e5",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2021-10-19T18:37:51Z",
       "side": 1,
       "message": "it would be nice to be consistent with the return type. const char* works with printf() style formatting, but std::string doesn\u0027t, so they could easily be mixed up, but with potentially bad results.",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07fe062_f10d0175",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-19T20:26:14Z",
+      "side": 1,
+      "message": "Consistency will arrive once we decide what we\u0027re consistent on.",
+      "parentUuid": "ecac4c98_d5a951e5",
       "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
