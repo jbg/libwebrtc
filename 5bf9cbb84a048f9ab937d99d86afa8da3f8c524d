@@ -37,6 +37,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34f8d75c_a446741e",
+        "filename": "api/peer_connection_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-20T07:36:09Z",
+      "side": 1,
+      "message": "remove this default to make sure the method doesn\u0027t compile if someone forgets to update the ToString method after adding to the enum collection.",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca5c4528_c4da0869",
+        "filename": "api/peer_connection_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-20T07:36:09Z",
+      "side": 1,
+      "message": "same here - this shouldn\u0027t be necessary or the return statement.",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee392018_93a4e795",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
@@ -120,6 +154,23 @@
       "side": 1,
       "message": "\"static Foo foo\" is a singleton pattern, which is discouraged. Since the type (std::string) is complex, it\u0027s a different thing than if we were talking about char[]. It also adds implicit global locking and atexit code.\n\nSo for this case it\u0027s not necessary (since the data is known at compile time), besides the above, it\u0027s also inefficient because of allocating additional heap memory for data that already exists in the data section. So I think std::string is a no-go.\n\nI also think that constructing a std::map for this is wasteful. A ToString method for constant enums has *all* the data available at compile time so there shouldn\u0027t be any need to construct a map at compile time and take on additional heap allocations (a std::map isn\u0027t cheap).\n\nI suggest we use absl::string_view as the return type, much like danil has already done for rtp header extension constants.\n\nFor converting a collection of enums to a string_view, we can either\n* have a switch statement inside a ToString() method on the enum values and return a literal.\n\n  absl::string_view ToString(FooEnum f) {\n    switch (f) {\n      case kF1:\n        return \"F1\";\n      // no default label.\n    }\n    // no return statement here.\n  }\n\n* or have a simple static array of const char* with the strings.\n\n  namespace {\n  // Assumes contiguous integral enum type Foo with a last kMaxFoo.\n  const char* g_foo_names[kMaxFoo] \u003d {\n    \"Foo\",\n    ...\n  };\n  }\n\n  absl::string_view ToString(FooEnum f) {\n    return g_foo_names[f];\n  }",
       "parentUuid": "8c4f097a_f46ec28c",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ede450_adce8708",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-20T07:36:09Z",
+      "side": 1,
+      "message": "I don\u0027t see an implementation for these methods actually - is it just for discussion?",
       "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
