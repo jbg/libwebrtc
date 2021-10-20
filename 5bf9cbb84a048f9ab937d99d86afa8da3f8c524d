@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16b2ded9_fc4a819c",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-10-20T07:25:45Z",
+      "side": 1,
+      "message": "I like the absl::string_view on static storage strings and delegate the conversion to std::string if needed (is it in this case? IIUC this is mostly for logs right?)\n\nI am not sure we should add maps and things that dynamically allocate memory and require a lookup.",
+      "parentUuid": "8c4f097a_f46ec28c",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecac4c98_d5a951e5",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
