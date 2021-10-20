@@ -291,10 +291,6 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
       // target level. Otherwise, the signal will be compressed but not limited
       // above the target level.
       bool enable_limiter = true;
-      // Sets the minimum and maximum analog levels of the audio capture device.
-      // Must be set if an analog mode is used. Limited to [0, 65535].
-      int analog_level_minimum = 0;
-      int analog_level_maximum = 255;
 
       // Enables the analog gain controller functionality.
       struct AnalogGainController {
