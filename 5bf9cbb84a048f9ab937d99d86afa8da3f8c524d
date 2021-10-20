@@ -322,6 +322,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc8e2be4_1ca41658",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-20T09:46:18Z",
+      "side": 1,
+      "message": "expanding to __builtin_unreachable() makes sense to me as something that could be a general (and low cost) guideline. As far there being a single answer to this, I\u0027m not sure that there is because in some cases such as a public API, you want and can afford more rigorous error checking. For other parts, having small code/fast path, is more important and RTC_CHECK() can be expensive. Something that amounts to a jmp instruction sounds cheap enough 😊\n\nIn this case, I\u0027d personally be fine with an additional check in an api/ directory before translating/converting an arbitrary value into an enum based equivalent. Doing the same for every caller of ToString, seems excessive.",
+      "parentUuid": "2259dbf0_a33290b3",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ede450_adce8708",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
