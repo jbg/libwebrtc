@@ -268,6 +268,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3f2af96_0a752abe",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-20T09:17:56Z",
+      "side": 1,
+      "message": "I\u0027m not convinced that this is the right thing to do in all cases. For frequently used inline utility functions, I\u0027d not want the associated code that comes with RTC_CHECK(false) to be injected for all callers.\n\nAlso the description for that CL states:\n\n  \"In all the reported cases, the end of function is never actually reached. Add RTC_CHECK(false) to ensure the compiler is aware that this path is a dead-end.\"\n\nThat isn\u0027t what the CL does. The first sentence is useful information, but the second sentence is the opposite of what the change does. Before the change, the compiler would know about what paths are legal and which ones should trigger a compiler error. What the change does is take that knowledge away and make it a runtime possibility to execute that RTC_CHECK.",
+      "parentUuid": "0a30a4b5_35efe25e",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ede450_adce8708",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
