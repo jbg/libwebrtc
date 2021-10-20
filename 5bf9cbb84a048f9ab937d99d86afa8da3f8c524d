@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13a3901e_747fcf82",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-10-20T08:28:35Z",
+      "side": 1,
+      "message": "WRT array of string_view - we\u0027re at risk of invoking undefined behavior in C++ here.\n\nhttps://github.com/cplusplus/draft/commit/b416ec442dad103d57661007030bca096bd0fd0f\n\n\"A value of integral or enumeration type can be explicitly converted to\nan enumeration type. The value is unchanged if the original value is\nwithin the range of the enumeration values~(\\ref{dcl.enum}). Otherwise,\nthe behavior is undefined.\"\n\nabsl::string_view returned by value seems like the best choice for return value.\n\n1) Easiest to read:\nswitch(f) {\ncase kF1: return \"f1\"; // dynamically calls string_view constructor and strlen\n}\nRTC_CHECK_NOTREACHED();\n\n2) harder to read, but should force the compiler to do strlen at compile time:\n\nswitch(f) {\ncase kF1: return (constexpr string_view(\"f1\"));\n}\nRTC_CHECK_NOTREACHED();\n\nthe compiler has enough information to turn 1) into 2), but don\u0027t know if it does.\n\n3) dangerous in case of C++ UB, vulnerable to new names in the middle, but seems to certainly avoid runtime strlen:\n\nstatic const string_view[] names \u003d {\"f1\"};\n\nRTC_CHECK(f in names);\nreturn names[f];\n\nSo many choices :-)",
+      "parentUuid": "71d58d3c_8d8e1c2e",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ede450_adce8708",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
