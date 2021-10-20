@@ -250,6 +250,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a30a4b5_35efe25e",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-20T09:09:28Z",
+      "side": 1,
+      "message": "The issue of compiler warnings was discussed at some length on https://webrtc-review.googlesource.com/c/src/+/189784. I\u0027d suggest doing the same thing, just adding an RTC_CHECK(false) after the switch statement.\n\nResponsibility of passing legal (according to our apis and conventions) values stays with the caller, we just have to explain that to the compiler.",
+      "parentUuid": "f616178f_ece596aa",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ede450_adce8708",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
