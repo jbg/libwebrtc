@@ -286,6 +286,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2259dbf0_a33290b3",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-20T09:36:55Z",
+      "side": 1,
+      "message": "Hmm. Maybe RTC_ASSUME(false) (a macro expanding to __builtin_unreachable()) would be a more precise tool for explaining our intentions to the compiler.\n\nI guess proper choice between RTC_ASSUME and RTC_CHECK is partly related to security. If there\u0027s a bug that causes ToString to be called with an unexpected numerical value, what are the consequences if execution is UB, e.g., just continues off the edge of the function? Is it likely that a bug like that can be triggered by evil remote data? My preference would be to play it safe and just do RTC_CHECK(false). If the binary cost is too high, maybe replace that with something that compiles to  single jmp instruction.",
+      "parentUuid": "a3f2af96_0a752abe",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ede450_adce8708",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
