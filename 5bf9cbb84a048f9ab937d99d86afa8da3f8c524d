@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6978310d_5cc60e5c",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-20T07:47:21Z",
+      "side": 1,
+      "message": "\u003e   absl::string_view ToString(FooEnum f) {\n\u003e     switch (f) {\n\u003e       case kF1:\n\u003e         return \"F1\";\n\u003e       // no default label.\n\u003e     }\n\u003e     // no return statement here.\n\u003e   }\n\nThat may rightfully trigger compiler warnings (I vaguely remember gcc and clang behaving differently). An enum is just an int + syntactic sugar. I think it\u0027s valid C++ to call ToString(static_cast\u003cFooEnum\u003e(0xdeadbeaf)). That\u0027s clearly misuse of *our* apis, but since it\u0027s valid C++, it deserves at least a DCHECK to back up our api requirements, and make clear to the compiler that ToString returns some value (or aborts) for all inputs. \n\nI agree with no default statement, to get other proper warnings, so it would have to go after the switch, either CHECK(false) (or equivalent) or DCHECK(false); return \"invalid\";\n \n\u003e * or have a simple static array of const char* with the strings.\n\u003e \n\u003e   namespace {\n\u003e   // Assumes contiguous integral enum type Foo with a last kMaxFoo.\n\u003e   const char* g_foo_names[kMaxFoo] \u003d {\n\u003e     \"Foo\",\n\u003e     ...\n\u003e   };\n\u003e   }\n\u003e \n\u003e   absl::string_view ToString(FooEnum f) {\n\u003e     return g_foo_names[f];\n\u003e   }\n\nCan we have an array of string_view, do avoid runtime calls to strlen?",
+      "parentUuid": "87993063_e99a21a1",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ede450_adce8708",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
