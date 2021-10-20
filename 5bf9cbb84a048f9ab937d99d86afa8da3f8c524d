@@ -214,6 +214,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "966afd89_42a8bfc7",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-20T08:41:11Z",
+      "side": 1,
+      "message": "https://github.com/cplusplus/draft/commit/b416ec442dad103d57661007030bca096bd0fd0f\n\u003e \n\u003e \"A value of integral or enumeration type can be explicitly converted to\n\u003e an enumeration type. The value is unchanged if the original value is\n\u003e within the range of the enumeration values~(\\ref{dcl.enum}). Otherwise,\n\u003e the behavior is undefined.\"\n\nWhat does \"within the range of\" mean here? Is that the range of the underlying integral type? (The set of values that have assigned enum names isn\u0027t quite a \"range\", and I imagine the use of enums for flag bits to be or:ed together is too widespread to be UB).\n\n\u003e 1) Easiest to read:\n\u003e switch(f) {\n\u003e case kF1: return \"f1\"; // dynamically calls string_view constructor and strlen\n\u003e }\n\nI would be surprised if the compiler doesn\u0027t do constant folding to eliminate run-time call to strlen.",
+      "parentUuid": "13a3901e_747fcf82",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ede450_adce8708",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
