@@ -129,6 +129,11 @@ static const size_t kMaxAllowedValuesOfSamplesPerFrame = 480;
 // reverse and forward call numbers.
 static const size_t kMaxNumFramesToBuffer = 100;
 
+// Minimum and maximum analog levels. The analog level input is limited to [0,
+// 255].
+constexpr int kAnalogLevelMinimum = 0;
+constexpr int kAnalogLevelMaximum = 255;
+
 }  // namespace
 
 // Throughout webrtc, it's assumed that success is represented by zero.
@@ -1882,8 +1887,7 @@ void AudioProcessingImpl::InitializeGainController1() {
         config_.gain_controller1.enable_limiter);
     RTC_DCHECK_EQ(kNoError, error);
     error = submodules_.gain_control->set_analog_level_limits(
-        config_.gain_controller1.analog_level_minimum,
-        config_.gain_controller1.analog_level_maximum);
+        kAnalogLevelMinimum, kAnalogLevelMaximum);
     RTC_DCHECK_EQ(kNoError, error);
 
     submodules_.agc_manager.reset();
