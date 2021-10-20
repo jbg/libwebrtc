@@ -35,6 +35,29 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a51b48b_04913c15",
+        "filename": "api/peer_connection_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-10-20T10:57:07Z",
+      "side": 1,
+      "message": "fyi: https://godbolt.org/z/xr76W1sh5\nI\u0027ve compared switch vs static array.\nusing \u0027switch\u0027 seems to generate better code (or at least as good code)\nin addition to beeing more readable and safer.",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 16
+      },
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34f8d75c_a446741e",
