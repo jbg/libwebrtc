@@ -232,6 +232,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f616178f_ece596aa",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-10-20T08:59:23Z",
+      "side": 1,
+      "message": "\"A value of integral or enumeration type can be explicitly converted to an enumeration type.\"\n\nHm... ignoring \"integral or\"... isn\u0027t that just tautology? 😄 Regardless, we\u0027re talking exclusively about integral types for the purposes of this CL.\n\nFor the second part of the paragraph:\n\n  \"The value is unchanged if the original value is within the range of the enumeration values~(\\ref{dcl.enum}). Otherwise, the behavior is undefined.\"\n\nA couple of things that I think would be helpful for us to consider to avoid over engineering a utility like this. First, can we assume that the caller owns the responsibility of ensuring that the value passed to ToString(), is a legal value? If so, the implementation can just focus on making sure that all legal values are correctly accounted for and we do not have to be concerned with undefined behavior.\n\nSecondly, at this abstraction level, I don\u0027t think that overly defensive programming hold much value (with the exception of static_assert + constexpr functions that e.g. check ranges etc). It could just contribute code bloat and consume cpu cycles and memory but the foot gun is still there since the caller can do all sorts of bad things anyway.",
+      "parentUuid": "966afd89_42a8bfc7",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ede450_adce8708",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
