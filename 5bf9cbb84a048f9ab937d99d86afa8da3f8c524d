@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c4f097a_f46ec28c",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-20T07:02:29Z",
+      "side": 1,
+      "message": "I think const std::string\u0026 makes sense if\n\n1. It\u0027s convenient for the implementation to back it by a string, e.g.,\n\nstatic const std::string kFoo \u003d \"foo\";  // In local scope\n\nAs far as I\u0027m aware, that kind of globals isn\u0027t discouraged. But not sure if it will be destructed at exit, which we\u0027d like to avoid.\n\n2. Most callers need a std::string, so returning one avoids construction and copy cost.\n\nOtherwise, returning a string_view (with documentation saying that it refers to a data  that lives for ever) is the \"modern\" way.\n\nRegarding avoiding destructors at exit: The standard trick seems to be\n\n// Intentionally leaked\nstatic std::map\u003c...\u003e* map \u003d new std::map\u003c...\u003e ...  // Also in local scope\n\nWill be constructed first time the scope is entered (in a thread-safe way), and never destroyed.",
+      "parentUuid": "76a500ee_ac5d8b30",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecac4c98_d5a951e5",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 1
