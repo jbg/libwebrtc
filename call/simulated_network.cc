@@ -90,7 +90,10 @@ SimulatedNetwork::~SimulatedNetwork() = default;
 void SimulatedNetwork::SetConfig(const Config& config) {
   MutexLock lock(&config_lock_);
   config_state_.config = config;  // Shallow copy of the struct.
-  double prob_loss = config.loss_percent / 100.0;
+  double prob_loss = config.loss_fraction;
+  if (config.loss_percent > 0) {
+    prob_loss = config.loss_percent / 100.0;
+  }
   if (config_state_.config.avg_burst_loss_length == -1) {
     // Uniform loss
     config_state_.prob_loss_bursting = prob_loss;
@@ -101,7 +104,7 @@ void SimulatedNetwork::SetConfig(const Config& config) {
     int min_avg_burst_loss_length = std::ceil(prob_loss / (1 - prob_loss));
 
     RTC_CHECK_GT(avg_burst_loss_length, min_avg_burst_loss_length)
-        << "For a total packet loss of " << config.loss_percent
+        << "For a total packet loss of " << (prob_loss * 100)
         << "%% then"
            " avg_burst_loss_length must be "
         << min_avg_burst_loss_length + 1 << " or higher.";
@@ -216,7 +219,7 @@ void SimulatedNetwork::UpdateCapacityQueue(ConfigState state,
     pending_drain_bits_ -= packet.packet.size * 8;
     RTC_DCHECK(pending_drain_bits_ >= 0);
 
-    // Drop packets at an average rate of `state.config.loss_percent` with
+    // Drop packets at an average rate of `state.config.loss_fraction` with
     // and average loss burst length of `state.config.avg_burst_loss_length`.
     if ((bursting_ && random_.Rand<double>() < state.prob_loss_bursting) ||
         (!bursting_ && random_.Rand<double>() < state.prob_start_bursting)) {

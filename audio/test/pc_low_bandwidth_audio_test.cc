@@ -155,7 +155,7 @@ TEST(PCLowBandwidthAudioTest, PC40kbpsNetwork) {
   config.link_capacity_kbps = 40;
   config.queue_length_packets = 1500;
   config.queue_delay_ms = 400;
-  config.loss_percent = 1;
+  config.loss_fraction = 0.01;
   auto fixture = CreateTestFixture(
       GetMetricTestCaseName(), *network_emulation_manager->time_controller(),
       CreateTwoNetworkLinks(network_emulation_manager.get(), config),

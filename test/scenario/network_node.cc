@@ -10,9 +10,9 @@
 #include "test/scenario/network_node.h"
 
 #include <algorithm>
+#include <memory>
 #include <vector>
 
-#include <memory>
 #include "rtc_base/net_helper.h"
 #include "rtc_base/numerics/safe_minmax.h"
 
@@ -24,7 +24,7 @@ SimulatedNetwork::Config CreateSimulationConfig(
     NetworkSimulationConfig config) {
   SimulatedNetwork::Config sim_config;
   sim_config.link_capacity_kbps = config.bandwidth.kbps_or(0);
-  sim_config.loss_percent = config.loss_rate * 100;
+  sim_config.loss_fraction = config.loss_rate;
   sim_config.queue_delay_ms = config.delay.ms();
   sim_config.delay_standard_deviation_ms = config.delay_std_dev.ms();
   sim_config.packet_overhead = config.packet_overhead.bytes<int>();

@@ -28,7 +28,7 @@ TEST_F(NackTest, ShouldNackInLossyNetwork) {
     BuiltInNetworkBehaviorConfig GetNetworkPipeConfig() const override {
       BuiltInNetworkBehaviorConfig pipe_config;
       pipe_config.queue_delay_ms = kRttMs / 2;
-      pipe_config.loss_percent = kLossPercent;
+      pipe_config.loss_fraction = kLossPercent / 100.0;
       return pipe_config;
     }
 

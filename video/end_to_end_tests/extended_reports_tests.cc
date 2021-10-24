@@ -77,7 +77,7 @@ class RtcpXrObserver : public test::EndToEndTest {
         send_simulated_network_(nullptr) {
     forward_transport_config_.link_capacity_kbps = 500;
     forward_transport_config_.queue_delay_ms = 0;
-    forward_transport_config_.loss_percent = 0;
+    forward_transport_config_.loss_fraction = 0.0;
   }
 
  private:

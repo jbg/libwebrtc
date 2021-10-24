@@ -466,7 +466,7 @@ TEST_F(DcSctpSocketNetworkTest,
 TEST_F(DcSctpSocketNetworkTest, CanSendMessagesReliablyWithMuchPacketLoss) {
   webrtc::BuiltInNetworkBehaviorConfig config;
   config.queue_delay_ms = 30;
-  config.loss_percent = 1;
+  config.loss_fraction = 0.01;
   MakeNetwork(config);
 
   SctpActor sender("A", emulated_socket_a_, options_);

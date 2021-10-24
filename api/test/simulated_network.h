@@ -55,7 +55,10 @@ struct BuiltInNetworkBehaviorConfig {
   // Link capacity in kbps.
   int link_capacity_kbps = 0;
   // Random packet loss.
+  // ABSL_DEPRECATED("Use loss_fraction instead")
   int loss_percent = 0;
+  // Random packet loss, between [0.0, 1.0]
+  double loss_fraction = 0.0;
   // If packets are allowed to be reordered.
   bool allow_reordering = false;
   // The average length of a burst of lost packets.

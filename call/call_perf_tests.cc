@@ -176,7 +176,7 @@ void CallPerfTest::TestAudioVideoSync(FecMode fec,
 
   BuiltInNetworkBehaviorConfig audio_net_config;
   audio_net_config.queue_delay_ms = 500;
-  audio_net_config.loss_percent = 5;
+  audio_net_config.loss_fraction = 0.05;
 
   auto observer = std::make_unique<VideoRtcpAndSyncObserver>(
       task_queue(), Clock::GetRealTimeClock(), test_label);

@@ -129,12 +129,12 @@ TEST(TcpMessageRouteTest, DeliveredOnLossyNetwork) {
   // 800 kbps means that the 100 kB message would be delivered in ca 1 second
   // under ideal conditions and no overhead.
   send.link_capacity_kbps = 100 * 8;
-  send.loss_percent = 50;
+  send.loss_fraction = 0.50;
   send.queue_delay_ms = 100;
   send.delay_standard_deviation_ms = 20;
   send.allow_reordering = true;
   auto ret = send;
-  ret.loss_percent = 10;
+  ret.loss_fraction = 0.10;
 
   auto* tcp_route =
       net.CreateTcpRoute(net.CreateRoute({net.CreateEmulatedNode(send)}),

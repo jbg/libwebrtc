@@ -57,8 +57,9 @@ absl::optional<webrtc::BuiltInNetworkBehaviorConfig> ParseDegradationConfig(
   }
   configured |=
       ParseConfigParam(exp_prefix + "CapacityKbps", &config.link_capacity_kbps);
-  configured |=
-      ParseConfigParam(exp_prefix + "LossPercent", &config.loss_percent);
+  int loss_percent = 0.0;
+  configured |= ParseConfigParam(exp_prefix + "LossPercent", &loss_percent);
+  config.loss_fraction = loss_percent / 100.0;
   int allow_reordering = 0;
   if (ParseConfigParam(exp_prefix + "AllowReordering", &allow_reordering)) {
     config.allow_reordering = true;

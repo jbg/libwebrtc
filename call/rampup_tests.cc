@@ -445,7 +445,7 @@ RampUpDownUpTester::RampUpDownUpTester(size_t num_video_streams,
       loss_rates_(loss_rates) {
   forward_transport_config_.link_capacity_kbps = link_rates_[test_state_];
   forward_transport_config_.queue_delay_ms = 100;
-  forward_transport_config_.loss_percent = loss_rates_[test_state_];
+  forward_transport_config_.loss_fraction = loss_rates_[test_state_] / 100.0;
 }
 
 RampUpDownUpTester::~RampUpDownUpTester() {}
@@ -519,7 +519,8 @@ size_t RampUpDownUpTester::GetFecBytes() const {
 }
 
 bool RampUpDownUpTester::ExpectingFec() const {
-  return num_flexfec_streams_ > 0 && forward_transport_config_.loss_percent > 0;
+  return num_flexfec_streams_ > 0 &&
+         forward_transport_config_.loss_fraction > 0.0;
 }
 
 void RampUpDownUpTester::EvolveTestState(int bitrate_bps, bool suspended) {
@@ -534,7 +535,8 @@ void RampUpDownUpTester::EvolveTestState(int bitrate_bps, bool suspended) {
                                     false);
         }
         // Apply loss during the transition between states if FEC is enabled.
-        forward_transport_config_.loss_percent = loss_rates_[test_state_];
+        forward_transport_config_.loss_fraction =
+            loss_rates_[test_state_] / 100.0;
         test_state_ = kTransitionToNextState;
         next_state_ = kLowRate;
       }
@@ -550,7 +552,8 @@ void RampUpDownUpTester::EvolveTestState(int bitrate_bps, bool suspended) {
                                     false);
         }
         // Apply loss during the transition between states if FEC is enabled.
-        forward_transport_config_.loss_percent = loss_rates_[test_state_];
+        forward_transport_config_.loss_fraction =
+            loss_rates_[test_state_] / 100.0;
         test_state_ = kTransitionToNextState;
         next_state_ = kSecondRampup;
       }
@@ -566,7 +569,8 @@ void RampUpDownUpTester::EvolveTestState(int bitrate_bps, bool suspended) {
                        send_transport_->GetAverageDelayMs(), "milliseconds");
         }
         // Apply loss during the transition between states if FEC is enabled.
-        forward_transport_config_.loss_percent = loss_rates_[test_state_];
+        forward_transport_config_.loss_fraction =
+            loss_rates_[test_state_] / 100.0;
         test_state_ = kTransitionToNextState;
         next_state_ = kTestEnd;
       }
@@ -580,7 +584,7 @@ void RampUpDownUpTester::EvolveTestState(int bitrate_bps, bool suspended) {
         forward_transport_config_.link_capacity_kbps = link_rates_[test_state_];
         // No loss while ramping up and down as it may affect the BWE
         // negatively, making the test flaky.
-        forward_transport_config_.loss_percent = 0;
+        forward_transport_config_.loss_fraction = 0.0;
         state_start_ms_ = now;
         interval_start_ms_ = now;
         sent_bytes_ = 0;
