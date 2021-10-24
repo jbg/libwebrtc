@@ -115,7 +115,7 @@ TEST(GenericDescriptorTest,
       false, false,  true,    ClipNameToClipPath("foreman_cif")};
   foreman_cif.analyzer = {"foreman_cif_delay_50_0_plr_5_VP9_generic_descriptor",
                           0.0, 0.0, kFullStackTestDurationSecs};
-  foreman_cif.config->loss_percent = 5;
+  foreman_cif.config->loss_fraction = 0.05;
   foreman_cif.config->queue_delay_ms = 50;
   foreman_cif.call.generic_descriptor = true;
   fixture->RunWithAnalyzer(foreman_cif);
@@ -286,7 +286,7 @@ TEST(FullStackTest, Foreman_Cif_Link_250kbps_Delay100ms_10pkts_Loss1) {
   foreman_cif.config->link_capacity_kbps = 250;
   foreman_cif.config->queue_length_packets = 10;
   foreman_cif.config->queue_delay_ms = 100;
-  foreman_cif.config->loss_percent = 1;
+  foreman_cif.config->loss_fraction = 0.01;
   fixture->RunWithAnalyzer(foreman_cif);
 }
 
@@ -301,7 +301,7 @@ TEST(GenericDescriptorTest, Foreman_Cif_Delay_50_0_Plr_5_Generic_Descriptor) {
       false, false,  true,    ClipNameToClipPath("foreman_cif")};
   foreman_cif.analyzer = {"foreman_cif_delay_50_0_plr_5_generic_descriptor",
                           0.0, 0.0, kFullStackTestDurationSecs};
-  foreman_cif.config->loss_percent = 5;
+  foreman_cif.config->loss_fraction = 0.05;
   foreman_cif.config->queue_delay_ms = 50;
   foreman_cif.call.generic_descriptor = true;
   fixture->RunWithAnalyzer(foreman_cif);
@@ -320,7 +320,7 @@ TEST(GenericDescriptorTest,
   foreman_cif.analyzer = {
       "foreman_cif_delay_50_0_plr_5_ulpfec_generic_descriptor", 0.0, 0.0,
       kFullStackTestDurationSecs};
-  foreman_cif.config->loss_percent = 5;
+  foreman_cif.config->loss_fraction = 0.05;
   foreman_cif.config->queue_delay_ms = 50;
   foreman_cif.call.generic_descriptor = true;
   fixture->RunWithAnalyzer(foreman_cif);
@@ -337,7 +337,7 @@ TEST(FullStackTest, Foreman_Cif_Delay_50_0_Plr_5_Flexfec) {
       false, true,   true,    ClipNameToClipPath("foreman_cif")};
   foreman_cif.analyzer = {"foreman_cif_delay_50_0_plr_5_flexfec", 0.0, 0.0,
                           kFullStackTestDurationSecs};
-  foreman_cif.config->loss_percent = 5;
+  foreman_cif.config->loss_fraction = 0.05;
   foreman_cif.config->queue_delay_ms = 50;
   fixture->RunWithAnalyzer(foreman_cif);
 }
@@ -353,7 +353,7 @@ TEST(FullStackTest, Foreman_Cif_500kbps_Delay_50_0_Plr_3_Flexfec) {
       false, true,   true,    ClipNameToClipPath("foreman_cif")};
   foreman_cif.analyzer = {"foreman_cif_500kbps_delay_50_0_plr_3_flexfec", 0.0,
                           0.0, kFullStackTestDurationSecs};
-  foreman_cif.config->loss_percent = 3;
+  foreman_cif.config->loss_fraction = 0.03;
   foreman_cif.config->link_capacity_kbps = 500;
   foreman_cif.config->queue_delay_ms = 50;
   fixture->RunWithAnalyzer(foreman_cif);
@@ -370,7 +370,7 @@ TEST(FullStackTest, Foreman_Cif_500kbps_Delay_50_0_Plr_3_Ulpfec) {
       true,  false,  true,    ClipNameToClipPath("foreman_cif")};
   foreman_cif.analyzer = {"foreman_cif_500kbps_delay_50_0_plr_3_ulpfec", 0.0,
                           0.0, kFullStackTestDurationSecs};
-  foreman_cif.config->loss_percent = 3;
+  foreman_cif.config->loss_fraction = 0.03;
   foreman_cif.config->link_capacity_kbps = 500;
   foreman_cif.config->queue_delay_ms = 50;
   fixture->RunWithAnalyzer(foreman_cif);
@@ -419,7 +419,7 @@ TEST(GenericDescriptorTest,
   foreman_cif.analyzer = {
       "foreman_cif_delay_50_0_plr_5_H264_generic_descriptor", 0.0, 0.0,
       kFullStackTestDurationSecs};
-  foreman_cif.config->loss_percent = 5;
+  foreman_cif.config->loss_fraction = 0.05;
   foreman_cif.config->queue_delay_ms = 50;
   foreman_cif.call.generic_descriptor = true;
   fixture->RunWithAnalyzer(foreman_cif);
@@ -439,7 +439,7 @@ TEST(FullStackTest, Foreman_Cif_Delay_50_0_Plr_5_H264_Sps_Pps_Idr) {
       false,  false,  true,    ClipNameToClipPath("foreman_cif")};
   foreman_cif.analyzer = {"foreman_cif_delay_50_0_plr_5_H264_sps_pps_idr", 0.0,
                           0.0, kFullStackTestDurationSecs};
-  foreman_cif.config->loss_percent = 5;
+  foreman_cif.config->loss_fraction = 0.05;
   foreman_cif.config->queue_delay_ms = 50;
   fixture->RunWithAnalyzer(foreman_cif);
 }
@@ -456,7 +456,7 @@ TEST(FullStackTest, Foreman_Cif_Delay_50_0_Plr_5_H264_Flexfec) {
       false,  true,   true,    ClipNameToClipPath("foreman_cif")};
   foreman_cif.analyzer = {"foreman_cif_delay_50_0_plr_5_H264_flexfec", 0.0, 0.0,
                           kFullStackTestDurationSecs};
-  foreman_cif.config->loss_percent = 5;
+  foreman_cif.config->loss_fraction = 0.05;
   foreman_cif.config->queue_delay_ms = 50;
   fixture->RunWithAnalyzer(foreman_cif);
 }
@@ -474,7 +474,7 @@ TEST(FullStackTest, DISABLED_Foreman_Cif_Delay_50_0_Plr_5_H264_Ulpfec) {
       true,   false,  true,    ClipNameToClipPath("foreman_cif")};
   foreman_cif.analyzer = {"foreman_cif_delay_50_0_plr_5_H264_ulpfec", 0.0, 0.0,
                           kFullStackTestDurationSecs};
-  foreman_cif.config->loss_percent = 5;
+  foreman_cif.config->loss_fraction = 0.05;
   foreman_cif.config->queue_delay_ms = 50;
   fixture->RunWithAnalyzer(foreman_cif);
 }
@@ -625,7 +625,7 @@ TEST(GenericDescriptorTest,
       "conference_motion_hd_2tl_moderate_limits_generic_descriptor", 0.0, 0.0,
       kFullStackTestDurationSecs};
   conf_motion_hd.config->queue_length_packets = 50;
-  conf_motion_hd.config->loss_percent = 3;
+  conf_motion_hd.config->loss_fraction = 0.03;
   conf_motion_hd.config->queue_delay_ms = 100;
   conf_motion_hd.config->link_capacity_kbps = 2000;
   conf_motion_hd.call.generic_descriptor = true;
@@ -648,7 +648,7 @@ TEST(FullStackTest, Conference_Motion_Hd_3tl_Moderate_Limits) {
   conf_motion_hd.analyzer = {"conference_motion_hd_3tl_moderate_limits", 0.0,
                              0.0, kFullStackTestDurationSecs};
   conf_motion_hd.config->queue_length_packets = 50;
-  conf_motion_hd.config->loss_percent = 3;
+  conf_motion_hd.config->loss_fraction = 0.03;
   conf_motion_hd.config->queue_delay_ms = 100;
   conf_motion_hd.config->link_capacity_kbps = 2000;
   fixture->RunWithAnalyzer(conf_motion_hd);
@@ -670,7 +670,7 @@ TEST(FullStackTest, Conference_Motion_Hd_4tl_Moderate_Limits) {
   conf_motion_hd.analyzer = {"conference_motion_hd_4tl_moderate_limits", 0.0,
                              0.0, kFullStackTestDurationSecs};
   conf_motion_hd.config->queue_length_packets = 50;
-  conf_motion_hd.config->loss_percent = 3;
+  conf_motion_hd.config->loss_fraction = 0.03;
   conf_motion_hd.config->queue_delay_ms = 100;
   conf_motion_hd.config->link_capacity_kbps = 2000;
   fixture->RunWithAnalyzer(conf_motion_hd);
@@ -694,7 +694,7 @@ TEST(FullStackTest, Conference_Motion_Hd_3tl_Alt_Moderate_Limits) {
   conf_motion_hd.analyzer = {"conference_motion_hd_3tl_alt_moderate_limits",
                              0.0, 0.0, kFullStackTestDurationSecs};
   conf_motion_hd.config->queue_length_packets = 50;
-  conf_motion_hd.config->loss_percent = 3;
+  conf_motion_hd.config->loss_fraction = 0.03;
   conf_motion_hd.config->queue_delay_ms = 100;
   conf_motion_hd.config->link_capacity_kbps = 2000;
   fixture->RunWithAnalyzer(conf_motion_hd);
@@ -720,7 +720,7 @@ TEST(FullStackTest, Conference_Motion_Hd_3tl_Alt_Heavy_Moderate_Limits) {
       "conference_motion_hd_3tl_alt_heavy_moderate_limits", 0.0, 0.0,
       kFullStackTestDurationSecs};
   conf_motion_hd.config->queue_length_packets = 50;
-  conf_motion_hd.config->loss_percent = 3;
+  conf_motion_hd.config->loss_fraction = 0.03;
   conf_motion_hd.config->queue_delay_ms = 100;
   conf_motion_hd.config->link_capacity_kbps = 2000;
   fixture->RunWithAnalyzer(conf_motion_hd);
@@ -818,7 +818,7 @@ TEST(GenericDescriptorTest, Screenshare_Slides_Lossy_Net_Generic_Descriptor) {
   screenshare.screenshare[0] = {true, false, 10};
   screenshare.analyzer = {"screenshare_slides_lossy_net_generic_descriptor",
                           0.0, 0.0, kFullStackTestDurationSecs};
-  screenshare.config->loss_percent = 5;
+  screenshare.config->loss_fraction = 0.05;
   screenshare.config->queue_delay_ms = 200;
   screenshare.config->link_capacity_kbps = 500;
   screenshare.call.generic_descriptor = true;
@@ -835,7 +835,7 @@ TEST(FullStackTest, Screenshare_Slides_Very_Lossy) {
   screenshare.screenshare[0] = {true, false, 10};
   screenshare.analyzer = {"screenshare_slides_very_lossy", 0.0, 0.0,
                           kFullStackTestDurationSecs};
-  screenshare.config->loss_percent = 10;
+  screenshare.config->loss_fraction = 0.010;
   screenshare.config->queue_delay_ms = 200;
   screenshare.config->link_capacity_kbps = 500;
   fixture->RunWithAnalyzer(screenshare);
@@ -851,7 +851,7 @@ TEST(FullStackTest, Screenshare_Slides_Lossy_Limited) {
   screenshare.screenshare[0] = {true, false, 10};
   screenshare.analyzer = {"screenshare_slides_lossy_limited", 0.0, 0.0,
                           kFullStackTestDurationSecs};
-  screenshare.config->loss_percent = 5;
+  screenshare.config->loss_fraction = 0.05;
   screenshare.config->link_capacity_kbps = 200;
   screenshare.config->queue_length_packets = 30;
 
@@ -868,7 +868,7 @@ TEST(FullStackTest, Screenshare_Slides_Moderately_Restricted) {
   screenshare.screenshare[0] = {true, false, 10};
   screenshare.analyzer = {"screenshare_slides_moderately_restricted", 0.0, 0.0,
                           kFullStackTestDurationSecs};
-  screenshare.config->loss_percent = 1;
+  screenshare.config->loss_fraction = 0.01;
   screenshare.config->link_capacity_kbps = 1200;
   screenshare.config->queue_length_packets = 30;
 
@@ -1048,7 +1048,7 @@ TEST(FullStackTest, MAYBE_Simulcast_HD_High) {
                         false,   false, false, "Generator"};
   simulcast.analyzer = {"simulcast_HD_high", 0.0, 0.0,
                         kFullStackTestDurationSecs};
-  simulcast.config->loss_percent = 0;
+  simulcast.config->loss_fraction = 0;
   simulcast.config->queue_delay_ms = 100;
   std::vector<VideoStream> streams = {
       VideoQualityTest::DefaultVideoStream(simulcast, 0),
@@ -1069,7 +1069,7 @@ TEST(FullStackTest, Simulcast_Vp8_3sl_High) {
   simulcast.video[0] = SimulcastVp8VideoHigh();
   simulcast.analyzer = {"simulcast_vp8_3sl_high", 0.0, 0.0,
                         kFullStackTestDurationSecs};
-  simulcast.config->loss_percent = 0;
+  simulcast.config->loss_fraction = 0;
   simulcast.config->queue_delay_ms = 100;
   ParamsWithLogging video_params_high;
   video_params_high.video[0] = SimulcastVp8VideoHigh();
@@ -1095,7 +1095,7 @@ TEST(FullStackTest, Simulcast_Vp8_3sl_Low) {
   simulcast.video[0] = SimulcastVp8VideoHigh();
   simulcast.analyzer = {"simulcast_vp8_3sl_low", 0.0, 0.0,
                         kFullStackTestDurationSecs};
-  simulcast.config->loss_percent = 0;
+  simulcast.config->loss_fraction = 0;
   simulcast.config->queue_delay_ms = 100;
   ParamsWithLogging video_params_high;
   video_params_high.video[0] = SimulcastVp8VideoHigh();
@@ -1166,7 +1166,7 @@ TEST(FullStackTest, MAYBE_Largeroom_50thumb) {
   large_room.video[0] = SimulcastVp8VideoHigh();
   large_room.analyzer = {"largeroom_50thumb", 0.0, 0.0,
                          kFullStackTestDurationSecs};
-  large_room.config->loss_percent = 0;
+  large_room.config->loss_fraction = 0;
   large_room.config->queue_delay_ms = 100;
   ParamsWithLogging video_params_high;
   video_params_high.video[0] = SimulcastVp8VideoHigh();

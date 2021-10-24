@@ -590,7 +590,7 @@ void Loopback() {
   }
 
   BuiltInNetworkBehaviorConfig pipe_config;
-  pipe_config.loss_percent = LossPercent();
+  pipe_config.loss_fraction = LossPercent() / 100.0;
   pipe_config.avg_burst_loss_length = AvgBurstLossLength();
   pipe_config.link_capacity_kbps = LinkCapacityKbps();
   pipe_config.queue_length_packets = QueueSize();

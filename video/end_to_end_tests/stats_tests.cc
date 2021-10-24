@@ -238,7 +238,7 @@ TEST_F(StatsEndToEndTest, GetStats) {
         TaskQueueBase* task_queue,
         Call* sender_call) override {
       BuiltInNetworkBehaviorConfig network_config;
-      network_config.loss_percent = 5;
+      network_config.loss_fraction = 0.05;
       return std::make_unique<test::PacketTransport>(
           task_queue, sender_call, this, test::PacketTransport::kSender,
           payload_type_map_,

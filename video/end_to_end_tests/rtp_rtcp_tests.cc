@@ -488,7 +488,7 @@ TEST_F(RtpRtcpEndToEndTest, DISABLED_TestFlexfecRtpStatePreservation) {
     CreateCalls();
 
     BuiltInNetworkBehaviorConfig lossy_delayed_link;
-    lossy_delayed_link.loss_percent = 2;
+    lossy_delayed_link.loss_fraction = 0.02;
     lossy_delayed_link.queue_delay_ms = 50;
 
     send_transport = std::make_unique<test::PacketTransport>(

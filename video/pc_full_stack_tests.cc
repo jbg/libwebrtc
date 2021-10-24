@@ -143,7 +143,7 @@ TEST(PCGenericDescriptorTest,
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 5;
+  config.loss_fraction = 0.05;
   config.queue_delay_ms = 50;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_delay_50_0_plr_5_VP9_generic_descriptor",
@@ -348,7 +348,7 @@ TEST(PCFullStackTest, Pc_Foreman_Cif_Link_130kbps_Delay100ms_Loss1_Ulpfec) {
   BuiltInNetworkBehaviorConfig config;
   config.link_capacity_kbps = 130;
   config.queue_delay_ms = 100;
-  config.loss_percent = 1;
+  config.loss_fraction = 0.01;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_link_130kbps_delay100ms_loss1_ulpfec",
       *network_emulation_manager->time_controller(),
@@ -373,7 +373,7 @@ TEST(PCFullStackTest, Pc_Foreman_Cif_Link_50kbps_Delay100ms_Loss1_Ulpfec) {
   BuiltInNetworkBehaviorConfig config;
   config.link_capacity_kbps = 50;
   config.queue_delay_ms = 100;
-  config.loss_percent = 1;
+  config.loss_fraction = 0.01;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_link_50kbps_delay100ms_loss1_ulpfec",
       *network_emulation_manager->time_controller(),
@@ -431,7 +431,7 @@ TEST(PCFullStackTest, Pc_Foreman_Cif_Link_250kbps_Delay100ms_10pkts_Loss1) {
   config.link_capacity_kbps = 250;
   config.queue_length_packets = 10;
   config.queue_delay_ms = 100;
-  config.loss_percent = 1;
+  config.loss_fraction = 0.01;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_link_250kbps_delay100ms_10pkts_loss1",
       *network_emulation_manager->time_controller(),
@@ -456,7 +456,7 @@ TEST(PCGenericDescriptorTest,
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 5;
+  config.loss_fraction = 0.05;
   config.queue_delay_ms = 50;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_delay_50_0_plr_5_generic_descriptor",
@@ -481,7 +481,7 @@ TEST(PCGenericDescriptorTest,
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 5;
+  config.loss_fraction = 0.05;
   config.queue_delay_ms = 50;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_delay_50_0_plr_5_ulpfec_generic_descriptor",
@@ -505,7 +505,7 @@ TEST(PCFullStackTest, Pc_Foreman_Cif_Delay_50_0_Plr_5_Flexfec) {
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 5;
+  config.loss_fraction = 0.05;
   config.queue_delay_ms = 50;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_delay_50_0_plr_5_flexfec",
@@ -529,7 +529,7 @@ TEST(PCFullStackTest, Pc_Foreman_Cif_500kbps_Delay_50_0_Plr_3_Flexfec) {
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 3;
+  config.loss_fraction = 0.03;
   config.link_capacity_kbps = 500;
   config.queue_delay_ms = 50;
   auto fixture = CreateTestFixture(
@@ -554,7 +554,7 @@ TEST(PCFullStackTest, Pc_Foreman_Cif_500kbps_Delay_50_0_Plr_3_Ulpfec) {
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 3;
+  config.loss_fraction = 0.03;
   config.link_capacity_kbps = 500;
   config.queue_delay_ms = 50;
   auto fixture = CreateTestFixture(
@@ -637,7 +637,7 @@ TEST(PCGenericDescriptorTest,
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 5;
+  config.loss_fraction = 0.05;
   config.queue_delay_ms = 50;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_delay_50_0_plr_5_H264_generic_descriptor",
@@ -667,7 +667,7 @@ TEST(PCFullStackTest, Pc_Foreman_Cif_Delay_50_0_Plr_5_H264_Sps_Pps_Idr) {
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 5;
+  config.loss_fraction = 0.05;
   config.queue_delay_ms = 50;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_delay_50_0_plr_5_H264_sps_pps_idr",
@@ -694,7 +694,7 @@ TEST(PCFullStackTest, Pc_Foreman_Cif_Delay_50_0_Plr_5_H264_Flexfec) {
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 5;
+  config.loss_fraction = 0.05;
   config.queue_delay_ms = 50;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_delay_50_0_plr_5_H264_flexfec",
@@ -723,7 +723,7 @@ TEST(PCFullStackTest, DISABLED_Pc_Foreman_Cif_Delay_50_0_Plr_5_H264_Ulpfec) {
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 5;
+  config.loss_fraction = 0.05;
   config.queue_delay_ms = 50;
   auto fixture = CreateTestFixture(
       "pc_foreman_cif_delay_50_0_plr_5_H264_ulpfec",
@@ -938,7 +938,7 @@ TEST(PCGenericDescriptorTest, ConferenceMotionHd2TLModerateLimits) {
       "conference_motion_hd_2tl_moderate_limits_generic_descriptor", 0.0, 0.0,
       kTestDurationSec};
   conf_motion_hd.config->queue_length_packets = 50;
-  conf_motion_hd.config->loss_percent = 3;
+  conf_motion_hd.config->loss_fraction = 0.03;
   conf_motion_hd.config->queue_delay_ms = 100;
   conf_motion_hd.config->link_capacity_kbps = 2000;
   conf_motion_hd.call.generic_descriptor = GenericDescriptorEnabled();
@@ -962,7 +962,7 @@ TEST(PCFullStackTest, ConferenceMotionHd3TLModerateLimits) {
   conf_motion_hd.analyzer = {"conference_motion_hd_3tl_moderate_limits", 0.0,
                              0.0, kTestDurationSec};
   conf_motion_hd.config->queue_length_packets = 50;
-  conf_motion_hd.config->loss_percent = 3;
+  conf_motion_hd.config->loss_fraction = 0.03;
   conf_motion_hd.config->queue_delay_ms = 100;
   conf_motion_hd.config->link_capacity_kbps = 2000;
   fixture->RunWithAnalyzer(conf_motion_hd);
@@ -985,7 +985,7 @@ TEST(PCFullStackTest, ConferenceMotionHd4TLModerateLimits) {
   conf_motion_hd.analyzer = {"conference_motion_hd_4tl_moderate_limits", 0.0,
                              0.0, kTestDurationSec};
   conf_motion_hd.config->queue_length_packets = 50;
-  conf_motion_hd.config->loss_percent = 3;
+  conf_motion_hd.config->loss_fraction = 0.03;
   conf_motion_hd.config->queue_delay_ms = 100;
   conf_motion_hd.config->link_capacity_kbps = 2000;
   fixture->RunWithAnalyzer(conf_motion_hd);
@@ -1010,7 +1010,7 @@ TEST(PCFullStackTest, ConferenceMotionHd3TLModerateLimitsAltTLPattern) {
   conf_motion_hd.analyzer = {"conference_motion_hd_3tl_alt_moderate_limits",
                              0.0, 0.0, kTestDurationSec};
   conf_motion_hd.config->queue_length_packets = 50;
-  conf_motion_hd.config->loss_percent = 3;
+  conf_motion_hd.config->loss_fraction = 0.03;
   conf_motion_hd.config->queue_delay_ms = 100;
   conf_motion_hd.config->link_capacity_kbps = 2000;
   fixture->RunWithAnalyzer(conf_motion_hd);
@@ -1038,7 +1038,7 @@ TEST(PCFullStackTest,
       "conference_motion_hd_3tl_alt_heavy_moderate_limits", 0.0, 0.0,
       kTestDurationSec};
   conf_motion_hd.config->queue_length_packets = 50;
-  conf_motion_hd.config->loss_percent = 3;
+  conf_motion_hd.config->loss_fraction = 0.03;
   conf_motion_hd.config->queue_delay_ms = 100;
   conf_motion_hd.config->link_capacity_kbps = 2000;
   fixture->RunWithAnalyzer(conf_motion_hd);
@@ -1242,7 +1242,7 @@ TEST(PCGenericDescriptorTest, Screenshare_Slides_Lossy_Net_Generic_Descriptor) {
   screenshare.screenshare[0] = {true, false, 10};
   screenshare.analyzer = {"screenshare_slides_lossy_net_generic_descriptor",
                           0.0, 0.0, kTestDurationSec};
-  screenshare.config->loss_percent = 5;
+  screenshare.config->loss_fraction = 0.05;
   screenshare.config->queue_delay_ms = 200;
   screenshare.config->link_capacity_kbps = 500;
   screenshare.call.generic_descriptor = true;
@@ -1260,7 +1260,7 @@ TEST(PCFullStackTest, ScreenshareSlidesVP8_2TL_VeryLossyNet) {
   screenshare.screenshare[0] = {true, false, 10};
   screenshare.analyzer = {"screenshare_slides_very_lossy", 0.0, 0.0,
                           kTestDurationSec};
-  screenshare.config->loss_percent = 10;
+  screenshare.config->loss_fraction = 0.010;
   screenshare.config->queue_delay_ms = 200;
   screenshare.config->link_capacity_kbps = 500;
   fixture->RunWithAnalyzer(screenshare);
@@ -1277,7 +1277,7 @@ TEST(PCFullStackTest, ScreenshareSlidesVP8_2TL_LossyNetRestrictedQueue) {
   screenshare.screenshare[0] = {true, false, 10};
   screenshare.analyzer = {"screenshare_slides_lossy_limited", 0.0, 0.0,
                           kTestDurationSec};
-  screenshare.config->loss_percent = 5;
+  screenshare.config->loss_fraction = 0.05;
   screenshare.config->link_capacity_kbps = 200;
   screenshare.config->queue_length_packets = 30;
 
@@ -1295,7 +1295,7 @@ TEST(PCFullStackTest, ScreenshareSlidesVP8_2TL_ModeratelyRestricted) {
   screenshare.screenshare[0] = {true, false, 10};
   screenshare.analyzer = {"screenshare_slides_moderately_restricted", 0.0, 0.0,
                           kTestDurationSec};
-  screenshare.config->loss_percent = 1;
+  screenshare.config->loss_fraction = 0.01;
   screenshare.config->link_capacity_kbps = 1200;
   screenshare.config->queue_length_packets = 30;
 
@@ -1569,7 +1569,7 @@ TEST(PCFullStackTest, MAYBE_Pc_Simulcast_HD_High) {
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 0;
+  config.loss_fraction = 0.0;
   config.queue_delay_ms = 100;
   auto fixture = CreateTestFixture(
       "pc_simulcast_HD_high", *network_emulation_manager->time_controller(),
@@ -1592,7 +1592,7 @@ TEST(PCFullStackTest, Pc_Simulcast_Vp8_3sl_High) {
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 0;
+  config.loss_fraction = 0.0;
   config.queue_delay_ms = 100;
   auto fixture = CreateTestFixture(
       "pc_simulcast_vp8_3sl_high",
@@ -1617,7 +1617,7 @@ TEST(PCFullStackTest, Pc_Simulcast_Vp8_3sl_Low) {
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
-  config.loss_percent = 0;
+  config.loss_fraction = 0.0;
   config.queue_delay_ms = 100;
   auto fixture = CreateTestFixture(
       "pc_simulcast_vp8_3sl_low", *network_emulation_manager->time_controller(),
@@ -1682,7 +1682,7 @@ TEST(PCFullStackTest, LargeRoomVP8_5thumb) {
   large_room.call.send_side_bwe = true;
   large_room.video[0] = SimulcastVp8VideoHigh();
   large_room.analyzer = {"largeroom_5thumb", 0.0, 0.0, kTestDurationSec};
-  large_room.config->loss_percent = 0;
+  large_room.config->loss_fraction = 0.0;
   large_room.config->queue_delay_ms = 100;
   ParamsWithLogging video_params_high;
   video_params_high.video[0] = SimulcastVp8VideoHigh();
@@ -1718,7 +1718,7 @@ TEST(PCFullStackTest, MAYBE_LargeRoomVP8_15thumb) {
   large_room.call.send_side_bwe = true;
   large_room.video[0] = SimulcastVp8VideoHigh();
   large_room.analyzer = {"largeroom_15thumb", 0.0, 0.0, kTestDurationSec};
-  large_room.config->loss_percent = 0;
+  large_room.config->loss_fraction = 0.0;
   large_room.config->queue_delay_ms = 100;
   ParamsWithLogging video_params_high;
   video_params_high.video[0] = SimulcastVp8VideoHigh();
@@ -1745,7 +1745,7 @@ TEST(PCFullStackTest, MAYBE_LargeRoomVP8_50thumb) {
   large_room.call.send_side_bwe = true;
   large_room.video[0] = SimulcastVp8VideoHigh();
   large_room.analyzer = {"largeroom_50thumb", 0.0, 0.0, kTestDurationSec};
-  large_room.config->loss_percent = 0;
+  large_room.config->loss_fraction = 0.0;
   large_room.config->queue_delay_ms = 100;
   ParamsWithLogging video_params_high;
   video_params_high.video[0] = SimulcastVp8VideoHigh();
@@ -1824,7 +1824,7 @@ TEST_P(PCDualStreamsTest,
   std::string test_label = "dualstreams_moderately_restricted_screenshare_" +
                            std::to_string(first_stream);
   dual_streams.analyzer = {test_label, 0.0, 0.0, kTestDurationSec};
-  dual_streams.config->loss_percent = 1;
+  dual_streams.config->loss_fraction = 0.01;
   dual_streams.config->link_capacity_kbps = 7500;
   dual_streams.config->queue_length_packets = 30;
   dual_streams.config->queue_delay_ms = 100;
@@ -1862,7 +1862,7 @@ TEST_P(PCDualStreamsTest, Conference_Restricted) {
   std::string test_label = "dualstreams_conference_restricted_screenshare_" +
                            std::to_string(first_stream);
   dual_streams.analyzer = {test_label, 0.0, 0.0, kTestDurationSec};
-  dual_streams.config->loss_percent = 1;
+  dual_streams.config->loss_fraction = 0.01;
   dual_streams.config->link_capacity_kbps = 5000;
   dual_streams.config->queue_length_packets = 30;
   dual_streams.config->queue_delay_ms = 100;

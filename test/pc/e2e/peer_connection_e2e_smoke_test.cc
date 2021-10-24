@@ -233,7 +233,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_ChangeNetworkConditions) {
 
   fixture()->ExecuteAt(TimeDelta::Seconds(1), [alice_node](TimeDelta) {
     BuiltInNetworkBehaviorConfig config;
-    config.loss_percent = 5;
+    config.loss_fraction = 0.05;
     alice_node.simulation->SetConfig(config);
   });
 
@@ -253,20 +253,19 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_ChangeNetworkConditions) {
 TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Screenshare) {
   std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
       network_links = CreateNetwork();
-  AddPeer(
-      network_links.first, [](PeerConfigurer* alice) {
-        VideoConfig screenshare(320, 180, 30);
-        screenshare.stream_label = "alice-screenshare";
-        screenshare.content_hint = VideoTrackInterface::ContentHint::kText;
-        ScreenShareConfig screen_share_config =
-            ScreenShareConfig(TimeDelta::Seconds(2));
-        screen_share_config.scrolling_params = ScrollingParams(
-            TimeDelta::Millis(1800), kDefaultSlidesWidth, kDefaultSlidesHeight);
-        auto screen_share_frame_generator =
-            CreateScreenShareFrameGenerator(screenshare, screen_share_config);
-        alice->AddVideoConfig(std::move(screenshare),
-                              std::move(screen_share_frame_generator));
-      });
+  AddPeer(network_links.first, [](PeerConfigurer* alice) {
+    VideoConfig screenshare(320, 180, 30);
+    screenshare.stream_label = "alice-screenshare";
+    screenshare.content_hint = VideoTrackInterface::ContentHint::kText;
+    ScreenShareConfig screen_share_config =
+        ScreenShareConfig(TimeDelta::Seconds(2));
+    screen_share_config.scrolling_params = ScrollingParams(
+        TimeDelta::Millis(1800), kDefaultSlidesWidth, kDefaultSlidesHeight);
+    auto screen_share_frame_generator =
+        CreateScreenShareFrameGenerator(screenshare, screen_share_config);
+    alice->AddVideoConfig(std::move(screenshare),
+                          std::move(screen_share_frame_generator));
+  });
   AddPeer(network_links.second, [](PeerConfigurer* bob) {});
   RunAndCheckEachVideoStreamReceivedFrames(RunParams(TimeDelta::Seconds(2)));
 }

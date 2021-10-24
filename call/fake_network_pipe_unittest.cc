@@ -368,7 +368,7 @@ TEST_F(FakeNetworkPipeTest, BurstLoss) {
 
   BuiltInNetworkBehaviorConfig config;
   config.queue_length_packets = kNumPackets;
-  config.loss_percent = kLossPercent;
+  config.loss_fraction = kLossPercent / 100.0;
   config.avg_burst_loss_length = kAvgBurstLength;
   ReorderTestReceiver receiver;
   auto simulated_network = std::make_unique<SimulatedNetwork>(config);

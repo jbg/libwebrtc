@@ -591,7 +591,7 @@ class UlpfecObserver : public test::EndToEndTest {
     // Configure some network delay.
     const int kNetworkDelayMs = 100;
     BuiltInNetworkBehaviorConfig config;
-    config.loss_percent = 5;
+    config.loss_fraction = 0.05;
     config.queue_delay_ms = kNetworkDelayMs;
     return std::make_unique<test::PacketTransport>(
         task_queue, sender_call, this, test::PacketTransport::kSender,
@@ -789,7 +789,7 @@ class FlexfecObserver : public test::EndToEndTest {
     // Therefore we need some network delay.
     const int kNetworkDelayMs = 100;
     BuiltInNetworkBehaviorConfig config;
-    config.loss_percent = 5;
+    config.loss_fraction = 0.05;
     config.queue_delay_ms = kNetworkDelayMs;
     return std::make_unique<test::PacketTransport>(
         task_queue, sender_call, this, test::PacketTransport::kSender,
@@ -804,7 +804,7 @@ class FlexfecObserver : public test::EndToEndTest {
     // We need the RTT to be >200 ms to send FEC and the network delay for the
     // send transport is 100 ms, so add 100 ms (but no loss) on the return link.
     BuiltInNetworkBehaviorConfig config;
-    config.loss_percent = 0;
+    config.loss_fraction = 0.0;
     config.queue_delay_ms = 100;
     return std::make_unique<test::PacketTransport>(
         task_queue, nullptr, this, test::PacketTransport::kReceiver,
@@ -1409,7 +1409,7 @@ TEST_F(VideoSendStreamTest, PaddingIsPrimarilyRetransmissions) {
         Call* sender_call) override {
       const int kNetworkDelayMs = 50;
       BuiltInNetworkBehaviorConfig config;
-      config.loss_percent = 10;
+      config.loss_fraction = 0.10;
       config.link_capacity_kbps = kCapacityKbps;
       config.queue_delay_ms = kNetworkDelayMs;
       return std::make_unique<test::PacketTransport>(
