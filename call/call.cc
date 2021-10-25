@@ -196,6 +196,68 @@ class ResourceVideoSendStreamForwarder {
       adapter_resources_;
 };
 
+constexpr TimeDelta k60HzDelay = 1 / Frequency::Hertz(60);
+class Basic60HzMetronome : public Metronome {
+ public:
+  Basic60HzMetronome(Clock* clock, TaskQueueFactory* task_queue_factory)
+      : clock_(clock),
+        task_queue_(task_queue_factory->CreateTaskQueue(
+            "Basic60HzMetronome",
+            TaskQueueFactory::Priority::NORMAL)) {
+    owner_sequence_checker_.Detach();
+  }
+  Basic60HzMetronome(const Basic60HzMetronome&) = delete;
+  Basic60HzMetronome& operator=(const Basic60HzMetronome&) = delete;
+
+  void Start() {
+    RTC_LOG(INFO) << "Starting basic metronome";
+    RTC_DCHECK_RUN_ON(&owner_sequence_checker_);
+    RTC_DCHECK(!task_.Running());
+    task_ = RepeatingTaskHandle::Start(task_queue_.Get(), [this] {
+      auto next_run_time = clock_->CurrentTime() + k60HzDelay;
+      {
+        MutexLock lock(&mutex_);
+        next_run_time_ = next_run_time;
+      }
+      // TODO: Maybe say next tick time in here and propogate to tasks.
+      Metronome::RunTickTasks();
+
+      auto delay = next_run_time - clock_->CurrentTime();
+      return delay.Clamped(TimeDelta::Zero(), k60HzDelay);
+    });
+  }
+
+  void Stop() {
+    RTC_LOG(INFO) << "Stopping basic metronome";
+    RTC_DCHECK_RUN_ON(&owner_sequence_checker_);
+    task_.Stop();
+  }
+
+  TimeDelta NextTickDelay() const override {
+    TimeDelta delay = TimeDelta::Zero();
+    {
+      MutexLock lock(&mutex_);
+      RTC_DCHECK(next_run_time_.IsFinite());
+      delay = next_run_time_ - clock_->CurrentTime();
+    }
+
+    if (delay < TimeDelta::Zero()) {
+      RTC_DLOG(LS_VERBOSE) << "Negative delay time in metronome: "
+                           << delay.ms();
+      return TimeDelta::Zero();
+    }
+    return delay;
+  }
+
+ private:
+  RTC_NO_UNIQUE_ADDRESS SequenceChecker owner_sequence_checker_;
+  Clock* const clock_;
+  RepeatingTaskHandle task_ RTC_GUARDED_BY(owner_sequence_checker_);
+  mutable Mutex mutex_;
+  Timestamp next_run_time_ RTC_GUARDED_BY(&mutex_) = Timestamp::MinusInfinity();
+  rtc::TaskQueue task_queue_;
+};
+
 class Call final : public webrtc::Call,
                    public PacketReceiver,
                    public RecoveredPacketReceiver,
@@ -360,6 +422,7 @@ class Call final : public webrtc::Call,
   TaskQueueFactory* const task_queue_factory_;
   TaskQueueBase* const worker_thread_;
   TaskQueueBase* const network_thread_;
+  std::unique_ptr<Basic60HzMetronome> metronome_;
   RTC_NO_UNIQUE_ADDRESS SequenceChecker send_transport_sequence_checker_;
 
   const int num_cpu_cores_;
@@ -785,6 +848,11 @@ Call::Call(Clock* clock,
       // must be made on `worker_thread_` (i.e. they're one and the same).
       network_thread_(config.network_task_queue_ ? config.network_task_queue_
                                                  : worker_thread_),
+      // TODO: Inject extenally.
+      metronome_(field_trial::IsEnabled("WebRTC-DecodeMetronome")
+                     ? std::make_unique<Basic60HzMetronome>(clock_,
+                                                            task_queue_factory_)
+                     : nullptr),
       num_cpu_cores_(CpuInfo::DetectNumberOfCores()),
       module_process_thread_(std::move(module_process_thread)),
       call_stats_(new CallStats(clock_, worker_thread_)),
@@ -825,6 +893,10 @@ Call::Call(Clock* clock,
       receive_side_cc_.GetRemoteBitrateEstimator(true), RTC_FROM_HERE);
   module_process_thread_->process_thread()->RegisterModule(&receive_side_cc_,
                                                            RTC_FROM_HERE);
+
+  if (metronome_) {
+    metronome_->Start();
+  }
 }
 
 Call::~Call() {
@@ -841,6 +913,7 @@ Call::~Call() {
   module_process_thread_->process_thread()->DeRegisterModule(&receive_side_cc_);
   call_stats_->DeregisterStatsObserver(&receive_side_cc_);
   send_stats_.SetFirstPacketTime(transport_send_->GetFirstPacketTime());
+  metronome_->Stop();
 
   RTC_HISTOGRAM_COUNTS_100000(
       "WebRTC.Call.LifetimeInSeconds",
@@ -1131,7 +1204,7 @@ webrtc::VideoReceiveStream* Call::CreateVideoReceiveStream(
       task_queue_factory_, this, num_cpu_cores_,
       transport_send_->packet_router(), std::move(configuration),
       call_stats_.get(), clock_, new VCMTiming(clock_),
-      &nack_periodic_processor_);
+      &nack_periodic_processor_, metronome_.get());
   // TODO(bugs.webrtc.org/11993): Set this up asynchronously on the network
   // thread.
   receive_stream->RegisterWithTransport(&video_receiver_controller_);
