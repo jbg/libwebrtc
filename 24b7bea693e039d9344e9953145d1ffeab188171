@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "060d68d3_99412f2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-10-26T11:12:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "24b7bea693e039d9344e9953145d1ffeab188171",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bafba8fd_10f3eff3",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-10-26T11:12:52Z",
+      "side": 1,
+      "message": "nit: `kFixedCoalescingWindow`",
+      "range": {
+        "startLine": 609,
+        "startChar": 6,
+        "endLine": 609,
+        "endChar": 28
+      },
+      "revId": "24b7bea693e039d9344e9953145d1ffeab188171",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08576de2_dc37c597",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-10-26T11:12:52Z",
+      "side": 1,
+      "message": "nit: only",
+      "range": {
+        "startLine": 627,
+        "startChar": 32,
+        "endLine": 627,
+        "endChar": 33
+      },
+      "revId": "24b7bea693e039d9344e9953145d1ffeab188171",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
