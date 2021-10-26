@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "350d255f_6b3c9146",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-10-26T06:43:19Z",
+      "side": 1,
+      "message": "Hi, can we delete this feature? There appears to be no test coverage, and unclear if there\u0027s ever been any usage.\n\nMy context is that I want to limit AsyncSSLSocket to only wrap connected sockets, no Bind() / Listen().",
+      "revId": "d656ed5d58bc6e455f0799c735f668c95d008978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
