@@ -23,6 +23,10 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/crypto/frame_decryptor_interface.h"
+#include "api/sequence_checker.h"
+#include "api/task_queue/task_queue_factory.h"
+#include "api/units/time_delta.h"
+#include "api/units/timestamp.h"
 #include "api/video/encoded_image.h"
 #include "api/video_codecs/h264_profile_level_id.h"
 #include "api/video_codecs/sdp_video_format.h"
@@ -43,6 +47,9 @@
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/system/thread_registry.h"
+#include "rtc_base/task_queue.h"
+#include "rtc_base/task_utils/repeating_task.h"
+#include "rtc_base/thread_annotations.h"
 #include "rtc_base/time_utils.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/clock.h"
@@ -195,7 +202,8 @@ VideoReceiveStream2::VideoReceiveStream2(
     CallStats* call_stats,
     Clock* clock,
     VCMTiming* timing,
-    NackPeriodicProcessor* nack_periodic_processor)
+    NackPeriodicProcessor* nack_periodic_processor,
+    Metronome* metronome)
     : task_queue_factory_(task_queue_factory),
       transport_adapter_(config.rtcp_send_transport),
       config_(std::move(config)),
@@ -230,6 +238,7 @@ VideoReceiveStream2::VideoReceiveStream2(
       low_latency_renderer_include_predecode_buffer_("include_predecode_buffer",
                                                      true),
       maximum_pre_stream_decoders_("max", kDefaultMaximumPreStreamDecoders),
+      metronome_(metronome),
       decode_queue_(task_queue_factory_->CreateTaskQueue(
           "DecodingQueue",
           TaskQueueFactory::Priority::HIGH)) {
@@ -253,8 +262,8 @@ VideoReceiveStream2::VideoReceiveStream2(
 
   timing_->set_render_delay(config_.render_delay_ms);
 
-  frame_buffer_.reset(
-      new video_coding::FrameBuffer(clock_, timing_.get(), &stats_proxy_));
+  frame_buffer_ = std::make_unique<video_coding::FrameBuffer>(
+      clock_, timing_.get(), &stats_proxy_, metronome_);
 
   if (config_.rtp.rtx_ssrc) {
     rtx_receive_stream_ = std::make_unique<RtxReceiveStream>(
@@ -720,6 +729,7 @@ int64_t VideoReceiveStream2::GetMaxWaitMs() const {
 void VideoReceiveStream2::StartNextDecode() {
   // Running on the decode thread.
   TRACE_EVENT0("webrtc", "VideoReceiveStream2::StartNextDecode");
+  RTC_LOG(INFO) << "StartNextDecode";
   frame_buffer_->NextFrame(
       GetMaxWaitMs(), keyframe_required_, &decode_queue_,
       /* encoded frame handler */
@@ -740,6 +750,8 @@ void VideoReceiveStream2::StartNextDecode() {
                 HandleFrameBufferTimeout(now_ms, wait_ms);
               }));
         }
+        RTC_LOG(INFO) << "StartNextDecode again. res="
+                      << (res == ReturnReason::kFrameFound);
         StartNextDecode();
       });
 }

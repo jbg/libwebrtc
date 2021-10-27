@@ -94,6 +94,7 @@
 #include "api/jsep.h"
 #include "api/media_stream_interface.h"
 #include "api/media_types.h"
+#include "api/metronome/metronome.h"
 #include "api/neteq/neteq_factory.h"
 #include "api/network_state_predictor.h"
 #include "api/packet_socket_factory.h"
@@ -1413,6 +1414,7 @@ struct RTC_EXPORT PeerConnectionFactoryDependencies final {
   std::unique_ptr<WebRtcKeyValueConfig> trials;
   std::unique_ptr<RtpTransportControllerSendFactoryInterface>
       transport_controller_send_factory;
+  std::unique_ptr<Metronome> metronome;
 };
 
 // PeerConnectionFactoryInterface is the factory interface used for creating

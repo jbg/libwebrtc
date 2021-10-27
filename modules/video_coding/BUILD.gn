@@ -219,6 +219,7 @@ rtc_library("video_coding") {
     "../../api:rtp_packet_info",
     "../../api:scoped_refptr",
     "../../api:sequence_checker",
+    "../../api/metronome:metronome",
     "../../api/units:data_rate",
     "../../api/units:time_delta",
     "../../api/units:timestamp",

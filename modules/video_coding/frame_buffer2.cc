@@ -13,11 +13,15 @@
 #include <algorithm>
 #include <cstdlib>
 #include <iterator>
+#include <memory>
 #include <queue>
 #include <utility>
 #include <vector>
 
 #include "absl/memory/memory.h"
+#include "api/sequence_checker.h"
+#include "api/units/time_delta.h"
+#include "api/units/timestamp.h"
 #include "api/video/encoded_image.h"
 #include "api/video/video_timing.h"
 #include "modules/video_coding/include/video_coding_defines.h"
@@ -27,6 +31,8 @@
 #include "rtc_base/experiments/rtt_mult_experiment.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/sequence_number_util.h"
+#include "rtc_base/synchronization/mutex.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/clock.h"
 #include "system_wrappers/include/field_trial.h"
@@ -54,9 +60,11 @@ constexpr int64_t kLogNonDecodedIntervalMs = 5000;
 
 FrameBuffer::FrameBuffer(Clock* clock,
                          VCMTiming* timing,
-                         VCMReceiveStatisticsCallback* stats_callback)
+                         VCMReceiveStatisticsCallback* stats_callback,
+                         Metronome* metronome)
     : decoded_frames_history_(kMaxFramesHistory),
       clock_(clock),
+      metronome_(metronome),
       callback_queue_(nullptr),
       jitter_estimator_(clock),
       timing_(timing),
@@ -89,7 +97,9 @@ void FrameBuffer::NextFrame(
   int64_t latest_return_time_ms =
       clock_->TimeInMilliseconds() + max_wait_time_ms;
 
+  RTC_LOG(INFO) << __FUNCTION__ << " waiting.";
   MutexLock lock(&mutex_);
+  RTC_LOG(INFO) << __FUNCTION__ << " stopped_=" << stopped_;
   if (stopped_) {
     return;
   }
@@ -103,6 +113,60 @@ void FrameBuffer::NextFrame(
 void FrameBuffer::StartWaitForNextFrameOnQueue() {
   RTC_DCHECK(callback_queue_);
   RTC_DCHECK(!callback_task_.Running());
+  RTC_DCHECK(!metronome_task_);
+  if (metronome_) {
+    RTC_LOG(INFO) << "Start looking for frame on metronome";
+    // Use metronome.
+    metronome_task_ = metronome_->AddTickListener(
+        callback_queue_->Get(), ToQueuedTask([this] {
+          RTC_DCHECK_RUN_ON(&callback_checker_);
+          std::unique_ptr<EncodedFrame> frame;
+          std::function<void(std::unique_ptr<EncodedFrame>, ReturnReason)>
+              frame_handler;
+
+          // Get frame timeout.
+          {
+            MutexLock lock(&mutex_);
+            Timestamp now = clock_->CurrentTime();
+            TimeDelta frame_wait = TimeDelta::Millis(FindNextFrame(now.ms()));
+            // Release frame if ready in (or before) the current window.
+            const TimeDelta next_tick_delay = metronome_->NextTickDelay();
+            // There is a frame ready to decode
+            if (!frames_to_decode_.empty() && frame_wait < next_tick_delay) {
+              if (frame_wait < TimeDelta::Zero()) {
+                RTC_LOG(INFO) << "Delayed frame with negative wait time "
+                              << frame_wait.ms();
+              }
+              frame = absl::WrapUnique(GetNextFrame());
+              timing_->SetLastDecodeScheduledTimestamp(now.ms());
+            }
+            if (frame_wait >= next_tick_delay) {
+              RTC_LOG(INFO) << "Skipping this window. Wait=" << frame_wait.ms()
+                            << " next tick=" << next_tick_delay.ms();
+            }
+            if (!frame && now.ms() < latest_return_time_ms_) {
+              RTC_LOG(INFO) << "Frame wait is " << frame_wait.ms()
+                            << " which is not happening until a later window."
+                            << " Next window is in " << next_tick_delay.ms()
+                            << " and we have not yet timed out. Time out in "
+                            << (latest_return_time_ms_ - now.ms()) << "ms.";
+              return;
+            }
+            RTC_LOG(INFO)
+                << "Yielding frame or timeout within this window. Wait="
+                << frame_wait.ms() << " next tick=" << next_tick_delay.ms()
+                << " timeout=" << !frame;
+            frame_handler = std::move(frame_handler_);
+            CancelCallback();
+          }
+          ReturnReason reason = frame ? kFrameFound : kTimeout;
+          frame_handler(std::move(frame), reason);
+        }));
+
+    return;
+  }
+
+  // TODO: refactor out to separate queue handler.
   int64_t wait_ms = FindNextFrame(clock_->TimeInMilliseconds());
   callback_task_ = RepeatingTaskHandle::DelayedStart(
       callback_queue_->Get(), TimeDelta::Millis(wait_ms), [this] {
@@ -401,6 +465,11 @@ void FrameBuffer::CancelCallback() {
   callback_task_.Stop();
   callback_queue_ = nullptr;
   callback_checker_.Detach();
+
+  if (metronome_ && metronome_task_) {
+    metronome_->RemoveTickListener(std::move(metronome_task_));
+    metronome_task_ = nullptr;
+  }
 }
 
 int64_t FrameBuffer::InsertFrame(std::unique_ptr<EncodedFrame> frame) {
@@ -492,7 +561,9 @@ int64_t FrameBuffer::InsertFrame(std::unique_ptr<EncodedFrame> frame) {
 
     // Since we now have new continuous frames there might be a better frame
     // to return from NextFrame.
-    if (callback_queue_) {
+    // TODO: Refactor the frame sending to an external handler to handle new
+    // frames.
+    if (callback_queue_ && !metronome_) {
       callback_queue_->PostTask([this] {
         MutexLock lock(&mutex_);
         if (!callback_task_.Running())

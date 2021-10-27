@@ -14,6 +14,7 @@
 #include "api/neteq/neteq_factory.h"
 #include "api/network_state_predictor.h"
 #include "api/rtc_error.h"
+#include "api/metronome/metronome.h"
 #include "api/task_queue/task_queue_factory.h"
 #include "api/transport/bitrate_settings.h"
 #include "api/transport/network_control.h"
@@ -75,6 +76,9 @@ struct CallConfig {
   // RtpTransportControllerSend to use for this call.
   RtpTransportControllerSendFactoryInterface*
       rtp_transport_controller_send_factory = nullptr;
+
+  // Metronome used to synchronize tasks, like decoding.
+  Metronome* metronome = nullptr;
 };
 
 }  // namespace webrtc
