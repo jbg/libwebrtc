@@ -18,6 +18,8 @@
 #include <vector>
 
 #include "absl/container/inlined_vector.h"
+#include "api/metronome/metronome.h"
+#include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
 #include "api/video/encoded_frame.h"
 #include "modules/video_coding/include/video_coding_defines.h"
@@ -49,7 +51,9 @@ class FrameBuffer {
 
   FrameBuffer(Clock* clock,
               VCMTiming* timing,
-              VCMReceiveStatisticsCallback* stats_callback);
+              VCMReceiveStatisticsCallback* stats_callback,
+              // TODO: Remove optional arg.
+              Metronome* metronome = nullptr);
 
   FrameBuffer() = delete;
   FrameBuffer(const FrameBuffer&) = delete;
@@ -167,6 +171,9 @@ class FrameBuffer {
 
   Mutex mutex_;
   Clock* const clock_;
+
+  Metronome* const metronome_;
+  rtc::scoped_refptr<Metronome::TickHandle> metronome_task_;
 
   rtc::TaskQueue* callback_queue_ RTC_GUARDED_BY(mutex_);
   RepeatingTaskHandle callback_task_ RTC_GUARDED_BY(mutex_);

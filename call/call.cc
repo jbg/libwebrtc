@@ -206,7 +206,8 @@ class Call final : public webrtc::Call,
        const Call::Config& config,
        std::unique_ptr<RtpTransportControllerSendInterface> transport_send,
        rtc::scoped_refptr<SharedModuleThread> module_process_thread,
-       TaskQueueFactory* task_queue_factory);
+       TaskQueueFactory* task_queue_factory,
+       Metronome* metronome);
   ~Call() override;
 
   // Implements webrtc::Call.
@@ -358,6 +359,7 @@ class Call final : public webrtc::Call,
 
   Clock* const clock_;
   TaskQueueFactory* const task_queue_factory_;
+  Metronome* const metronome_;
   TaskQueueBase* const worker_thread_;
   TaskQueueBase* const network_thread_;
   RTC_NO_UNIQUE_ADDRESS SequenceChecker send_transport_sequence_checker_;
@@ -505,7 +507,8 @@ Call* Call::Create(const Call::Config& config,
       clock, config,
       transport_controller_factory_.Create(transportConfig, clock,
                                            std::move(pacer_thread)),
-      std::move(call_thread), config.task_queue_factory);
+      std::move(call_thread), config.task_queue_factory,
+      config.metronome);
 }
 
 Call* Call::Create(const Call::Config& config,
@@ -515,7 +518,8 @@ Call* Call::Create(const Call::Config& config,
                        transportControllerSend) {
   RTC_DCHECK(config.task_queue_factory);
   return new internal::Call(clock, config, std::move(transportControllerSend),
-                            std::move(call_thread), config.task_queue_factory);
+                            std::move(call_thread), config.task_queue_factory,
+                            config.metronome);
 }
 
 class SharedModuleThread::Impl {
@@ -777,9 +781,11 @@ Call::Call(Clock* clock,
            const Call::Config& config,
            std::unique_ptr<RtpTransportControllerSendInterface> transport_send,
            rtc::scoped_refptr<SharedModuleThread> module_process_thread,
-           TaskQueueFactory* task_queue_factory)
+           TaskQueueFactory* task_queue_factory,
+           Metronome* metronome)
     : clock_(clock),
       task_queue_factory_(task_queue_factory),
+      metronome_(metronome),
       worker_thread_(GetCurrentTaskQueueOrThread()),
       // If `network_task_queue_` was set to nullptr, network related calls
       // must be made on `worker_thread_` (i.e. they're one and the same).
@@ -812,6 +818,10 @@ Call::Call(Clock* clock,
   RTC_DCHECK(config.trials != nullptr);
   RTC_DCHECK(network_thread_);
   RTC_DCHECK(worker_thread_->IsCurrent());
+
+  if (metronome_) {
+    RTC_LOG(INFO) << "Received a metronome.";
+  }
 
   send_transport_sequence_checker_.Detach();
 
@@ -1131,7 +1141,7 @@ webrtc::VideoReceiveStream* Call::CreateVideoReceiveStream(
       task_queue_factory_, this, num_cpu_cores_,
       transport_send_->packet_router(), std::move(configuration),
       call_stats_.get(), clock_, new VCMTiming(clock_),
-      &nack_periodic_processor_);
+      &nack_periodic_processor_, metronome_);
   // TODO(bugs.webrtc.org/11993): Set this up asynchronously on the network
   // thread.
   receive_stream->RegisterWithTransport(&video_receiver_controller_);
