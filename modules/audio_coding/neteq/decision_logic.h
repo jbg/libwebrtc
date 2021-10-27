@@ -157,9 +157,6 @@ class DecisionLogic : public NetEqController {
     return !timescale_countdown_ || timescale_countdown_->Finished();
   }
 
-  // Checks if the current (filtered) buffer level is under the target level.
-  bool UnderTargetLevel() const;
-
   // Checks if `timestamp_leap` is so long into the future that a reset due
   // to exceeding kReinitAfterExpands will be done.
   bool ReinitAfterExpands(uint32_t timestamp_leap) const;
@@ -192,6 +189,8 @@ class DecisionLogic : public NetEqController {
   FieldTrialParameter<bool> estimate_dtx_delay_;
   FieldTrialParameter<bool> time_stretch_cn_;
   FieldTrialConstrained<int> target_level_window_ms_;
+  // Allow less PLC than samples lost.
+  FieldTrialParameter<bool> allow_loss_skip_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DecisionLogic);
 };
