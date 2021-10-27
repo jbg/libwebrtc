@@ -61,17 +61,19 @@ DecisionLogic::DecisionLogic(
       target_level_window_ms_("target_level_window",
                               kDefaultTargetLevelWindowMs,
                               0,
-                              absl::nullopt) {
+                              absl::nullopt),
+      allow_loss_skip_("allow_loss_skip", true) {
   const std::string field_trial_name =
       field_trial::FindFullName("WebRTC-Audio-NetEqDecisionLogicSettings");
-  ParseFieldTrial(
-      {&estimate_dtx_delay_, &time_stretch_cn_, &target_level_window_ms_},
-      field_trial_name);
+  ParseFieldTrial({&estimate_dtx_delay_, &time_stretch_cn_,
+                   &target_level_window_ms_, &allow_loss_skip_},
+                  field_trial_name);
   RTC_LOG(LS_INFO) << "NetEq decision logic settings:"
                       " estimate_dtx_delay="
                    << estimate_dtx_delay_
                    << " time_stretch_cn=" << time_stretch_cn_
-                   << " target_level_window_ms=" << target_level_window_ms_;
+                   << " target_level_window_ms=" << target_level_window_ms_
+                   << " allow_loss_skip=" << allow_loss_skip_;
 }
 
 DecisionLogic::~DecisionLogic() = default;
@@ -161,7 +163,7 @@ NetEq::Operation DecisionLogic::GetDecision(const NetEqStatus& status,
 
   // If the expand period was very long, reset NetEQ since it is likely that the
   // sender was restarted.
-  if (num_consecutive_expands_ > kReinitAfterExpands) {
+  if (allow_loss_skip_ && num_consecutive_expands_ > kReinitAfterExpands) {
     *reset_decoder = true;
     return NetEq::Operation::kNormal;
   }
@@ -348,10 +350,15 @@ NetEq::Operation DecisionLogic::FuturePacketAvailable(
   // Check if we should continue with an ongoing expand because the new packet
   // is too far into the future.
   uint32_t timestamp_leap = available_timestamp - target_timestamp;
+  const int samples_per_ms = sample_rate_ / 1000;
+  bool above_target_level = buffer_level_filter_->filtered_current_level() >=
+                            delay_manager_->TargetDelayMs() * samples_per_ms;
+  bool skip_loss =
+      allow_loss_skip_ && (ReinitAfterExpands(timestamp_leap) ||
+                           MaxWaitForPacket() || above_target_level);
   if ((prev_mode == NetEq::Mode::kExpand ||
        prev_mode == NetEq::Mode::kCodecPlc) &&
-      !ReinitAfterExpands(timestamp_leap) && !MaxWaitForPacket() &&
-      PacketTooEarly(timestamp_leap) && UnderTargetLevel()) {
+      PacketTooEarly(timestamp_leap) && !skip_loss) {
     if (play_dtmf) {
       // Still have DTMF to play, so do not do expand.
       return NetEq::Operation::kDtmf;
@@ -374,14 +381,14 @@ NetEq::Operation DecisionLogic::FuturePacketAvailable(
             : num_packets_in_packet_buffer * decoder_frame_length;
     // Target level is in number of packets in Q8.
     const size_t target_level_samples =
-        delay_manager_->TargetDelayMs() * sample_rate_ / 1000;
+        delay_manager_->TargetDelayMs() * samples_per_ms;
     const bool generated_enough_noise =
         static_cast<uint32_t>(generated_noise_samples + target_timestamp) >=
         available_timestamp;
 
     if (time_stretch_cn_) {
       const size_t target_threshold_samples =
-          target_level_window_ms_ / 2 * (sample_rate_ / 1000);
+          target_level_window_ms_ / 2 * samples_per_ms;
       const bool above_target_window =
           cur_size_samples > target_level_samples + target_threshold_samples;
       const bool below_target_window =
@@ -421,11 +428,6 @@ NetEq::Operation DecisionLogic::FuturePacketAvailable(
   } else {
     return NetEq::Operation::kExpand;
   }
-}
-
-bool DecisionLogic::UnderTargetLevel() const {
-  return buffer_level_filter_->filtered_current_level() <
-         delay_manager_->TargetDelayMs() * sample_rate_ / 1000;
 }
 
 bool DecisionLogic::ReinitAfterExpands(uint32_t timestamp_leap) const {
