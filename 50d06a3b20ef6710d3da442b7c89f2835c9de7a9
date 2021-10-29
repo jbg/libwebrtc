@@ -50,6 +50,92 @@
       "message": "Per, can you please take a look?",
       "revId": "50d06a3b20ef6710d3da442b7c89f2835c9de7a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e454eabc_ce9c7316",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-10-29T10:56:51Z",
+      "side": 1,
+      "message": "Thanks for this CL!",
+      "revId": "50d06a3b20ef6710d3da442b7c89f2835c9de7a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c9e4d1a_04963c4d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-10-29T10:56:51Z",
+      "side": 1,
+      "message": "I only use constants with file-scope (visible throughout the file) if they either are used in several places, or in some rare case when I want them to be tuning parameters.\n\nThese constants, I would suggest not put here since having them here \n-Makes the code harder to read\n-Gives the reader the impression that they are used elsewhere in the file\n-Encourages future developers to use them liberally.\n\nI would instead suggest that they\u0027d instead be put just before line 1880.\nThat would make the scope more local and would allow the reader of the code to have the constant values readily at hand when seeing them being used.",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 40
+      },
+      "revId": "50d06a3b20ef6710d3da442b7c89f2835c9de7a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09c1dd74_cd83c776",
+        "filename": "modules/audio_processing/audio_processing_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-10-29T10:56:51Z",
+      "side": 1,
+      "message": "constexpr",
+      "range": {
+        "startLine": 1081,
+        "startChar": 2,
+        "endLine": 1081,
+        "endChar": 5
+      },
+      "revId": "50d06a3b20ef6710d3da442b7c89f2835c9de7a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a09346a0_25ed4f5c",
+        "filename": "modules/audio_processing/audio_processing_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1082,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2021-10-29T10:56:51Z",
+      "side": 1,
+      "message": "constexpr",
+      "range": {
+        "startLine": 1082,
+        "startChar": 2,
+        "endLine": 1082,
+        "endChar": 5
+      },
+      "revId": "50d06a3b20ef6710d3da442b7c89f2835c9de7a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
