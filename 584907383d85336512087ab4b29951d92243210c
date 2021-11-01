@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9082cd6_a6a611e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18504
+      },
+      "writtenOn": "2021-11-01T17:31:09Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review+1\n\u003e \n\u003e By voting Code-Review+1 the following files are now code-owner approved by \u003cGERRIT_ACCOUNT_5091\u003e:\n\u003e * system_wrappers/source/clock.cc\n\u003e \n\nPlease add this change to the commit queue.\n\nThanks!",
+      "revId": "584907383d85336512087ab4b29951d92243210c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
