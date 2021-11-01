@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2adb536_469de5e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-01T13:15:46Z",
+      "side": 1,
+      "message": "New version - based on comment in webrtc-core about using constexpr functions (the compiler can then optimize AsString(Foo) to \"foo\", saving a function call).",
+      "revId": "6999bb5b3d49f181d480ef30f5c089310dc70d29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

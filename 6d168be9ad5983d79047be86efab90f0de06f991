@@ -75,6 +75,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc524aee_0070a4a3",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-01T13:15:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9af06090_c8e1971f",
+      "revId": "6d168be9ad5983d79047be86efab90f0de06f991",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c36931f_16612f50",
@@ -98,6 +116,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5356dd02_8e39ee7e",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-01T13:15:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c36931f_16612f50",
+      "range": {
+        "startLine": 183,
+        "startChar": 36,
+        "endLine": 183,
+        "endChar": 50
+      },
+      "revId": "6d168be9ad5983d79047be86efab90f0de06f991",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6810b06a_3b4617c6",
@@ -111,6 +153,30 @@
       "writtenOn": "2021-11-01T12:44:28Z",
       "side": 1,
       "message": "with function name changed to \u0027AsString\u0027, changes to this file seems now unrelated to the changes above.",
+      "range": {
+        "startLine": 168,
+        "startChar": 27,
+        "endLine": 168,
+        "endChar": 35
+      },
+      "revId": "6d168be9ad5983d79047be86efab90f0de06f991",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f987b58b_807bf847",
+        "filename": "api/rtc_error.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-01T13:15:46Z",
+      "side": 1,
+      "message": "Yes, I thought it would be a good idea to make them anyway, since the error messages on defining another ToString were not very comprehensible, and namespacing these functions didn\u0027t seem to hurt anything.",
+      "parentUuid": "6810b06a_3b4617c6",
       "range": {
         "startLine": 168,
         "startChar": 27,
