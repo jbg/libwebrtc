@@ -82,6 +82,13 @@ in the (slow) process of being removed from the codebase.
 
 * RecursiveCriticalSection. Try to use [webrtc::Mutex][6] instead, and don't recurse.
 
+## Enum-To-String functions
+If there is a need to convert an enum to a string representation, such as for
+enums exposed at the Javascript API interface, the recommended way is to write
+a function named AsString, declared "static constexpr" and returning an
+absl::string_view. The declaration should be right after the enum declaration,
+in the same scope; the implementation (which must be marked "inline") should
+be at the end of the same header file.
 
 
 [1]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/units/timestamp.h;drc=b95d90b78a3491ef8e8aa0640dd521515ec881ca;l=29
