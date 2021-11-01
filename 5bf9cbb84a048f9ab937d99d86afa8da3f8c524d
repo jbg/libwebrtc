@@ -397,6 +397,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d53b7c4_886a7ff8",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-01T19:44:48Z",
+      "side": 1,
+      "message": "Leaving as RTC_CHECK_UNREACHED for now (we should never get there, so it\u0027s just a codespace cost.) Can upgrade to RTC_UNREACHABLE once that exists.",
+      "parentUuid": "cc8e2be4_1ca41658",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88ede450_adce8708",
@@ -410,6 +428,24 @@
       "writtenOn": "2021-10-20T07:36:09Z",
       "side": 1,
       "message": "I don\u0027t see an implementation for these methods actually - is it just for discussion?",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e53fbda4_e6f356f3",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-01T19:44:48Z",
+      "side": 1,
+      "message": "Adding implementations as we resolve issues.",
+      "parentUuid": "88ede450_adce8708",
       "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -463,6 +499,24 @@
       "side": 1,
       "message": "returning const char* would require caller to dynamically calculate strlen",
       "parentUuid": "c07fe062_f10d0175",
+      "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1dd9833_a2289618",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-01T19:44:48Z",
+      "side": 1,
+      "message": "Settled on absl::string_view (returned by value).",
+      "parentUuid": "b80c0851_4ab841fd",
       "revId": "5bf9cbb84a048f9ab937d99d86afa8da3f8c524d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
