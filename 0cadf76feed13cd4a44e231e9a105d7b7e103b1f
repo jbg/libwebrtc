@@ -16,6 +16,29 @@
       "message": "Thank you for the comments!",
       "revId": "0cadf76feed13cd4a44e231e9a105d7b7e103b1f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa8aa669_c1c053e5",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2021-11-01T09:36:25Z",
+      "side": 1,
+      "message": "These comments may need to be updated, since they implicitly refer to the now-removed values in Config::GainController1. I guess the min and max are still 0 and 255, should we make that explicit in these comments?",
+      "range": {
+        "startLine": 618,
+        "startChar": 0,
+        "endLine": 626,
+        "endChar": 58
+      },
+      "revId": "0cadf76feed13cd4a44e231e9a105d7b7e103b1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
