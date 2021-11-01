@@ -41,6 +41,63 @@ PeerConnectionInterface::RTCConfiguration::RTCConfiguration(
 
 PeerConnectionInterface::RTCConfiguration::~RTCConfiguration() = default;
 
+// See https://w3c.github.io/webrtc-pc/#dom-rtcsignalingstate
+// static
+absl::string_view PeerConnectionInterface::AsString(SignalingState state) {
+  switch (state) {
+    case SignalingState::kStable:
+      return "stable";
+    case SignalingState::kHaveLocalOffer:
+      return "have-local-offer";
+    case SignalingState::kHaveLocalPrAnswer:
+      return "have-local-pranswer";
+    case SignalingState::kHaveRemoteOffer:
+      return "have-remote-offer";
+    case SignalingState::kHaveRemotePrAnswer:
+      return "have-remote-pranswer";
+    case SignalingState::kClosed:
+      return "closed";
+  }
+  RTC_CHECK_NOTREACHED();
+  return "";
+}
+
+// https://w3c.github.io/webrtc-pc/#dom-rtcicegatheringstate
+// static
+absl::string_view PeerConnectionInterface::AsString(IceGatheringState state) {
+  switch (state) {
+    case IceGatheringState::kIceGatheringNew:
+      return "new";
+    case IceGatheringState::kIceGatheringGathering:
+      return "gathering";
+    case IceGatheringState::kIceGatheringComplete:
+      return "complete";
+  }
+  RTC_CHECK_NOTREACHED();
+  return "";
+}
+
+// https://w3c.github.io/webrtc-pc/#dom-rtciceconnectionstate
+// static
+absl::string_view PeerConnectionInterface::AsString(PeerConnectionState state) {
+  switch (state) {
+    case PeerConnectionState::kNew:
+      return "new";
+    case PeerConnectionState::kConnecting:
+      return "connecting";
+    case PeerConnectionState::kConnected:
+      return "connected";
+    case PeerConnectionState::kDisconnected:
+      return "disconnected";
+    case PeerConnectionState::kFailed:
+      return "failed";
+    case PeerConnectionState::kClosed:
+      return "closed";
+  }
+  RTC_CHECK_NOTREACHED();
+  return "";
+}
+
 RTCError PeerConnectionInterface::RemoveTrackNew(
     rtc::scoped_refptr<RtpSenderInterface> sender) {
   return RTCError(RemoveTrack(sender) ? RTCErrorType::NONE
