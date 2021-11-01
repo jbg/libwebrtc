@@ -16,6 +16,29 @@
       "message": "New version - based on comment in webrtc-core about using constexpr functions (the compiler can then optimize AsString(Foo) to \"foo\", saving a function call).",
       "revId": "6999bb5b3d49f181d480ef30f5c089310dc70d29",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7b493d6_098abb4b",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1574,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-01T13:24:39Z",
+      "side": 1,
+      "message": "add keyword \u0027inline\u0027\notherwise there will be linker error as soon as someone use this function from two different .cc files.\ngo/totw/125\n\n(and don\u0027t worry, inline doesn\u0027t force compiler to inline all the invocations)",
+      "range": {
+        "startLine": 1574,
+        "startChar": 0,
+        "endLine": 1574,
+        "endChar": 9
+      },
+      "revId": "6999bb5b3d49f181d480ef30f5c089310dc70d29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
