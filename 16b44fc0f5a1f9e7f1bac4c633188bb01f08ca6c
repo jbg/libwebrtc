@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "926cd2b2_c177b28b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-02T10:40:18Z",
+      "side": 1,
+      "message": "Tried to improve comments.\n",
+      "revId": "16b44fc0f5a1f9e7f1bac4c633188bb01f08ca6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6782033_e96ea333",
@@ -43,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b893a1b_70f6d60b",
+        "filename": "pc/media_protocol_names.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-02T10:40:18Z",
+      "side": 1,
+      "message": "This comment is only documenting the behavior of the functions below, which is why I thought it belonged in the .cc file. This is in contrast to the names above, which are globally visible.\n\nAdded a namespace around this to make them better hidden.",
+      "parentUuid": "c6782033_e96ea333",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 21
+      },
+      "revId": "16b44fc0f5a1f9e7f1bac4c633188bb01f08ca6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39817ed4_d25f9b21",
         "filename": "pc/media_protocol_names.h",
         "patchSetId": 2
@@ -54,6 +95,30 @@
       "writtenOn": "2021-11-02T10:22:22Z",
       "side": 1,
       "message": "This isn\u0027t crystal clear to me. Do you mean something like \"used in webrtc standards\"? (Similar comment also in .cc file).",
+      "range": {
+        "startLine": 19,
+        "startChar": 21,
+        "endLine": 19,
+        "endChar": 33
+      },
+      "revId": "16b44fc0f5a1f9e7f1bac4c633188bb01f08ca6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45b6fc5f_3930bae5",
+        "filename": "pc/media_protocol_names.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-02T10:40:18Z",
+      "side": 1,
+      "message": "\"generated in SDP produced by WebRTC\" is probably clearer.\nThe reason they are exported is because other pieces of code use them to set things.",
+      "parentUuid": "39817ed4_d25f9b21",
       "range": {
         "startLine": 19,
         "startChar": 21,
