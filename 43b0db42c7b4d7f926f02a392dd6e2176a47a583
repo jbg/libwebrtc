@@ -132,6 +132,30 @@
       },
       "revId": "43b0db42c7b4d7f926f02a392dd6e2176a47a583",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22e583fc_5f24a86c",
+        "filename": "g3doc/implementation_basics.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-02T10:01:34Z",
+      "side": 1,
+      "message": "I see (I was thinking of static at top-level), maybe docs can be rephrased to say that it can either be a free function (if we think that it\u0027s fine to use webrtc::AsString, with overloads spread out over multiple files?), or a static method on a relevant class. And constexpr inline in either case.",
+      "parentUuid": "484a49ca_0f5d87f0",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 38
+      },
+      "revId": "43b0db42c7b4d7f926f02a392dd6e2176a47a583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
