@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69a7ff1_2dd6a48d",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-02T10:55:27Z",
+      "side": 1,
+      "message": "Done!",
+      "parentUuid": "178fd6f2_262d72ac",
+      "range": {
+        "startLine": 184,
+        "startChar": 2,
+        "endLine": 184,
+        "endChar": 18
+      },
+      "revId": "43b0db42c7b4d7f926f02a392dd6e2176a47a583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b2eca52_88cb020f",
@@ -64,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71ec9bf9_bb9644ff",
+        "filename": "api/rtc_error.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-02T10:55:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b2eca52_88cb020f",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 43
+      },
+      "revId": "43b0db42c7b4d7f926f02a392dd6e2176a47a583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47f197c7_c50c3c03",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-11-02T08:10:02Z",
       "side": 1,
       "message": "In a macro, I would prefer to play it super safe and fully qualify the name as ::webrtc::ToString. And similarly, for the references to RTCErrorType and RTCError.\n\nCould possibly fail if macros are invoked inside something like\n\nnamespace foo_app { namespace webrtc { ... }}",
+      "range": {
+        "startLine": 184,
+        "startChar": 44,
+        "endLine": 184,
+        "endChar": 67
+      },
+      "revId": "43b0db42c7b4d7f926f02a392dd6e2176a47a583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a146670_da502c6a",
+        "filename": "api/rtc_error.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-02T10:55:27Z",
+      "side": 1,
+      "message": "Someone who reuses a toplevel namespace deserves trouble, but supersafe is better!",
+      "parentUuid": "47f197c7_c50c3c03",
       "range": {
         "startLine": 184,
         "startChar": 44,
@@ -148,6 +220,30 @@
       "side": 1,
       "message": "I see (I was thinking of static at top-level), maybe docs can be rephrased to say that it can either be a free function (if we think that it\u0027s fine to use webrtc::AsString, with overloads spread out over multiple files?), or a static method on a relevant class. And constexpr inline in either case.",
       "parentUuid": "484a49ca_0f5d87f0",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 38
+      },
+      "revId": "43b0db42c7b4d7f926f02a392dd6e2176a47a583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a0d0947_9194bbee",
+        "filename": "g3doc/implementation_basics.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-02T10:55:27Z",
+      "side": 1,
+      "message": "Compilation failed when I did not include \"static\", apparently constexpr inside a class requires the function to be static.\nThe style guide advice on \"inline\" is to include it with the definition (implementation), not the declaration, since it\u0027s part of the compiler contract, not the API contract.\n\nAs long as the enum definition is within a class, having AsString as a free function goes against the concept of having its declaration be next to the enum definition; when the enum isn\u0027t within a class, it will naturally be a free function (within the webrtc namespace), and won\u0027t need static.\n\nAdded a sentence to that effect.",
+      "parentUuid": "7ba971aa_f4ee47f5",
       "range": {
         "startLine": 85,
         "startChar": 0,
