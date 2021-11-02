@@ -16,6 +16,75 @@
       "message": "I think this is in a state that can be submitted. I also wrote documentation.\n",
       "revId": "43b0db42c7b4d7f926f02a392dd6e2176a47a583",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b2eca52_88cb020f",
+        "filename": "api/rtc_error.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-02T08:10:02Z",
+      "side": 1,
+      "message": "This (and below) is a function (not macro), and we\u0027re in the webrtc namespace. So should not need the webtrc:: prefix.",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 43
+      },
+      "revId": "43b0db42c7b4d7f926f02a392dd6e2176a47a583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47f197c7_c50c3c03",
+        "filename": "api/rtc_error.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-02T08:10:02Z",
+      "side": 1,
+      "message": "In a macro, I would prefer to play it super safe and fully qualify the name as ::webrtc::ToString. And similarly, for the references to RTCErrorType and RTCError.\n\nCould possibly fail if macros are invoked inside something like\n\nnamespace foo_app { namespace webrtc { ... }}",
+      "range": {
+        "startLine": 184,
+        "startChar": 44,
+        "endLine": 184,
+        "endChar": 67
+      },
+      "revId": "43b0db42c7b4d7f926f02a392dd6e2176a47a583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ba971aa_f4ee47f5",
+        "filename": "g3doc/implementation_basics.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-02T08:10:02Z",
+      "side": 1,
+      "message": "Thanks for documenting. Using inline on the definition make sense (in current C++, it seems to just mean that it\u0027s not a violation of the \"One Definition Rule\" if it appears in multiple compilation units, unrelated to actual inlining at call sites).\n\nCombining that with static at the declaration is subtle, you\u0027re sure that\u0027s the right way (does replacing static with inline at the declaration fail)?",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 38
+      },
+      "revId": "43b0db42c7b4d7f926f02a392dd6e2176a47a583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
