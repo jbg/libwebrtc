@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc732a6f_df18adea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-02T10:00:43Z",
+      "side": 1,
+      "message": "Just tidying. We should now have no need to refer to protocol names by string value outside of tests.",
+      "revId": "96516e3e33fef249597ca54a782cd6299e0f121b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
