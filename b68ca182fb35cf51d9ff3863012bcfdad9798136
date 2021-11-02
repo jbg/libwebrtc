@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2604c1b6_397cf26b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2021-11-02T10:07:15Z",
+      "side": 1,
+      "message": "Thanks Sam for the comments!\n\nI\u0027ve updated the comment, can you please take a look? Thanks!",
+      "revId": "b68ca182fb35cf51d9ff3863012bcfdad9798136",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
