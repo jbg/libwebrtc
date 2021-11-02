@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2def23f4_063716ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-02T10:22:22Z",
+      "side": 1,
+      "message": "Some comments on comments. Code changes lgtm.",
+      "revId": "16b44fc0f5a1f9e7f1bac4c633188bb01f08ca6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6782033_e96ea333",
+        "filename": "pc/media_protocol_names.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-02T10:22:22Z",
+      "side": 1,
+      "message": "I think it would be clearer to have all the documenting comments in one place, probably best in the header file.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 21
+      },
+      "revId": "16b44fc0f5a1f9e7f1bac4c633188bb01f08ca6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39817ed4_d25f9b21",
+        "filename": "pc/media_protocol_names.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-02T10:22:22Z",
+      "side": 1,
+      "message": "This isn\u0027t crystal clear to me. Do you mean something like \"used in webrtc standards\"? (Similar comment also in .cc file).",
+      "range": {
+        "startLine": 19,
+        "startChar": 21,
+        "endLine": 19,
+        "endChar": 33
+      },
+      "revId": "16b44fc0f5a1f9e7f1bac4c633188bb01f08ca6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
