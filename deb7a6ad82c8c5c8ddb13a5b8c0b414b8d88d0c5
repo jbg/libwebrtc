@@ -16,6 +16,29 @@
       "message": "There\u0027s usage in the internal builds, so not deleting the alias, but let\u0027s get this one landed before the files change.",
       "revId": "deb7a6ad82c8c5c8ddb13a5b8c0b414b8d88d0c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0196b76a_fa5c62b0",
+        "filename": "examples/peerconnection/client/linux/main_wnd.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-04T13:19:40Z",
+      "side": 1,
+      "message": "Using __FUNCTION__ like this seems redundant. But leave for some other cl.",
+      "range": {
+        "startLine": 255,
+        "startChar": 22,
+        "endLine": 255,
+        "endChar": 35
+      },
+      "revId": "deb7a6ad82c8c5c8ddb13a5b8c0b414b8d88d0c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
