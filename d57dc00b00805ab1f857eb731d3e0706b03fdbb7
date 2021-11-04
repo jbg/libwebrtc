@@ -16,6 +16,23 @@
       "message": "consistency FTW!",
       "revId": "d57dc00b00805ab1f857eb731d3e0706b03fdbb7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "295fbb61_dc9a359a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-04T09:07:23Z",
+      "side": 1,
+      "message": "Yep, I think that\u0027s more consistent.\n",
+      "revId": "d57dc00b00805ab1f857eb731d3e0706b03fdbb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
