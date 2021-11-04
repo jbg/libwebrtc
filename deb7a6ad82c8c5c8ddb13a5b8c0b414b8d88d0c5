@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "723f2fb1_7f58b6d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-04T12:02:35Z",
+      "side": 1,
+      "message": "There\u0027s usage in the internal builds, so not deleting the alias, but let\u0027s get this one landed before the files change.",
+      "revId": "deb7a6ad82c8c5c8ddb13a5b8c0b414b8d88d0c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
