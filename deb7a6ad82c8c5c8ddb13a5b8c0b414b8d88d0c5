@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "969a6872_b4e6b5a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-04T13:33:32Z",
+      "side": 1,
+      "message": "Thanks for the rreview!\n",
+      "revId": "deb7a6ad82c8c5c8ddb13a5b8c0b414b8d88d0c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0196b76a_fa5c62b0",
@@ -31,6 +48,30 @@
       "writtenOn": "2021-11-04T13:19:40Z",
       "side": 1,
       "message": "Using __FUNCTION__ like this seems redundant. But leave for some other cl.",
+      "range": {
+        "startLine": 255,
+        "startChar": 22,
+        "endLine": 255,
+        "endChar": 35
+      },
+      "revId": "deb7a6ad82c8c5c8ddb13a5b8c0b414b8d88d0c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38b18ec7_63ed7f20",
+        "filename": "examples/peerconnection/client/linux/main_wnd.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-04T13:33:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0196b76a_fa5c62b0",
       "range": {
         "startLine": 255,
         "startChar": 22,
