@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39cab5c5_d5a9cf5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-05T01:32:53Z",
+      "side": 1,
+      "message": "titovartem, this is a minor cleanup about the exit-time destructor run.\nPlease take a look. Thank you.",
+      "revId": "b09f2dc9fefd920613c886c65ace28f4bb271153",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
