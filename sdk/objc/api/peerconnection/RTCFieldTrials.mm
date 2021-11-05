@@ -14,6 +14,7 @@
 
 #import "base/RTCLogging.h"
 
+#include "rtc_base/system/no_destroy.h"
 #include "system_wrappers/include/field_trial.h"
 
 NSString * const kRTCFieldTrialAudioSendSideBweKey = @"WebRTC-Audio-SendSideBwe";
@@ -28,7 +29,7 @@ NSString * const kRTCFieldTrialMinimizeResamplingOnMobileKey =
 NSString *const kRTCFieldTrialUseNWPathMonitor = @"WebRTC-Network-UseNWPathMonitor";
 NSString * const kRTCFieldTrialEnabledValue = @"Enabled";
 
-static std::unique_ptr<char[]> gFieldTrialInitString;
+static std::unique_ptr<char[]> gFieldTrialInitString RTC_NO_DESTROY;
 
 void RTCInitFieldTrialDictionary(NSDictionary<NSString *, NSString *> *fieldTrials) {
   if (!fieldTrials) {

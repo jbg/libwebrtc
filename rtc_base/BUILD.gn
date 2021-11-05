@@ -316,15 +316,14 @@ rtc_library("logging") {
       "../../webrtc_overrides/rtc_base/logging.h",
     ]
   } else {
-    configs += [
-      "..:no_exit_time_destructors",
-      "..:no_global_constructors",
-    ]
     sources = [
       "logging.cc",
       "logging.h",
     ]
-    deps += [ "system:inline" ]
+    deps += [
+      "system:inline",
+      "system:no_destroy",
+    ]
 
     if (is_mac) {
       frameworks = [ "Foundation.framework" ]
@@ -819,6 +818,7 @@ rtc_library("threading") {
     "../api:sequence_checker",
     "../api/task_queue",
     "synchronization:mutex",
+    "system:no_destroy",
     "system:no_unique_address",
     "system:rtc_export",
     "task_utils:pending_task_safety_flag",
