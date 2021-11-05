@@ -56,12 +56,16 @@ namespace rtc {
 namespace {
 // By default, release builds don't log, debug builds at info level
 #if !defined(NDEBUG)
-static LoggingSeverity g_min_sev = LS_INFO;
-static LoggingSeverity g_dbg_sev = LS_INFO;
+constexpr LoggingSeverity kMinSev = LS_INFO;
+constexpr LoggingSeverity kDbgSev = LS_INFO;
 #else
-static LoggingSeverity g_min_sev = LS_NONE;
-static LoggingSeverity g_dbg_sev = LS_NONE;
+constexpr LoggingSeverity kMinSev = LS_NONE;
+constexpr LoggingSeverity kDbgSev = LS_NONE;
 #endif
+
+// Note: `g_min_sev` and `g_dbg_sev` can be changed while running.
+LoggingSeverity g_min_sev = kMinSev;
+LoggingSeverity g_dbg_sev = kDbgSev;
 
 // Return the filename portion of the string (that following the last slash).
 const char* FilenameFromPath(const char* file) {
