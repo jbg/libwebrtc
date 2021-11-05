@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "368e5d22_312d6ba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-05T08:14:20Z",
+      "side": 1,
+      "message": "Ah, thanks for suggesting another way.\nIf that\u0027s the preferred method, I\u0027d like to apply it instead of this annotation.",
+      "revId": "b09f2dc9fefd920613c886c65ace28f4bb271153",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d25f0c41_33bd6d15",
@@ -48,6 +65,30 @@
       "writtenOn": "2021-11-05T07:42:38Z",
       "side": 1,
       "message": "I am not sure about this part.\n\nWhen I added the -Wno-exit-time-destructors, I think I was trying to make it as local as possible regardless of \"build_with_chromium\".\n\nOn the other hand, this seems to be interesting for cases where it is not possible to heap allocate an object and then just leak it (since it needs to stay around for the whole duration of the program). As mentioned on https://google.github.io/styleguide/cppguide.html: \"If all else fails, you can create an object dynamically and never delete it by using a function-local static pointer or reference (e.g., static const auto\u0026 impl \u003d *new T(args...);).\".\n\nI think this comment should be made such that people don\u0027t use this too frequently but only when needed.",
+      "range": {
+        "startLine": 16,
+        "startChar": 49,
+        "endLine": 17,
+        "endChar": 47
+      },
+      "revId": "b09f2dc9fefd920613c886c65ace28f4bb271153",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e5836ec_af8e408c",
+        "filename": "rtc_base/system/no_destroy.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-05T08:14:20Z",
+      "side": 1,
+      "message": "Ah, thanks for suggesting another way.\nIf that\u0027s the preferred method, I\u0027d like to apply it instead of this annotation.",
+      "parentUuid": "d25f0c41_33bd6d15",
       "range": {
         "startLine": 16,
         "startChar": 49,
