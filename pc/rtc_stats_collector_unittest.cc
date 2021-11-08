@@ -2667,11 +2667,11 @@ TEST_F(RTCStatsCollectorTest, RTCVideoSourceStatsCollectedForSenderWithTrack) {
   video_media_info.senders.push_back(cricket::VideoSenderInfo());
   video_media_info.senders[0].local_stats.push_back(cricket::SsrcSenderInfo());
   video_media_info.senders[0].local_stats[0].ssrc = kSsrc;
-  video_media_info.senders[0].framerate_input = 29;
+  video_media_info.senders[0].framerate_input = 29.0;
   video_media_info.aggregated_senders[0].local_stats.push_back(
       cricket::SsrcSenderInfo());
   video_media_info.aggregated_senders[0].local_stats[0].ssrc = kSsrc;
-  video_media_info.aggregated_senders[0].framerate_input = 29;
+  video_media_info.aggregated_senders[0].framerate_input = 29.0;
   video_media_info.aggregated_senders[0].frames = 10001;
   auto* video_media_channel = pc_->AddVideoChannel("VideoMid", "TransportName");
   video_media_channel->SetStats(video_media_info);
@@ -2716,7 +2716,7 @@ TEST_F(RTCStatsCollectorTest,
   cricket::VideoMediaInfo video_media_info;
   video_media_info.senders.push_back(cricket::VideoSenderInfo());
   video_media_info.senders[0].local_stats.push_back(cricket::SsrcSenderInfo());
-  video_media_info.senders[0].framerate_input = 29;
+  video_media_info.senders[0].framerate_input = 29.0;
   auto* video_media_channel = pc_->AddVideoChannel("VideoMid", "TransportName");
   video_media_channel->SetStats(video_media_info);
 
@@ -2747,7 +2747,7 @@ TEST_F(RTCStatsCollectorTest,
   video_media_info.senders.push_back(cricket::VideoSenderInfo());
   video_media_info.senders[0].local_stats.push_back(cricket::SsrcSenderInfo());
   video_media_info.senders[0].local_stats[0].ssrc = kSsrc;
-  video_media_info.senders[0].framerate_input = 29;
+  video_media_info.senders[0].framerate_input = 29.0;
   auto* video_media_channel = pc_->AddVideoChannel("VideoMid", "TransportName");
   video_media_channel->SetStats(video_media_info);
 
@@ -3099,7 +3099,7 @@ TEST_F(RTCStatsCollectorTest,
   video_media_info.senders.push_back(cricket::VideoSenderInfo());
   video_media_info.senders[0].local_stats.push_back(cricket::SsrcSenderInfo());
   video_media_info.senders[0].local_stats[0].ssrc = kSsrc;
-  video_media_info.senders[0].framerate_input = 29;
+  video_media_info.senders[0].framerate_input = 29.0;
   auto* video_media_channel = pc_->AddVideoChannel("VideoMid", "TransportName");
   video_media_channel->SetStats(video_media_info);
 
