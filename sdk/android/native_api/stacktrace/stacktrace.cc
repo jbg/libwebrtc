@@ -106,8 +106,10 @@ _Unwind_Reason_Code UnwindBacktrace(struct _Unwind_Context* unwind_context,
       static_cast<SignalHandlerOutputState*>(unwind_output_state);
 
   // Abort if output state is corrupt.
-  if (output_state == nullptr)
+  if (output_state == nullptr) {
+    printf("@@ HERE @@");
     return _URC_END_OF_STACK;
+  }
 
   // Avoid overflowing the stack trace array.
   if (output_state->stack_size_counter >= kMaxStackSize)
