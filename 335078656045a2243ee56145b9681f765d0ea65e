@@ -16,6 +16,40 @@
       "message": "Hi, please take a look. Thanks!",
       "revId": "335078656045a2243ee56145b9681f765d0ea65e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b28f4de_a12c14f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-08T09:15:27Z",
+      "side": 1,
+      "message": "The spec says that framesPerSecond is \"number of frames in the last second\". The way I interpret this is that this would necessarily always be an integer, so I don\u0027t know why the spec uses double here.\n\nOn the other hand, the way the implementation calculates this is by approximating a second, and calculating a rate that may not be an integer.\n\nHarald can you advice - should the spec be updated to match the implementation, where double makes sense, or should the implementation change so that it knows the true integer number of frames in the last second (in which case the spec should say unsigned int)?",
+      "revId": "335078656045a2243ee56145b9681f765d0ea65e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af623dd5_af671b00",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-08T09:15:27Z",
+      "side": 1,
+      "message": "This is initialized as \"input_frame_rate_tracker_(100, 10u)\"\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/send_statistics_proxy.h;drc\u003df78106f1fb37b3aa9e660993c62e645ea92f34f1;bpv\u003d1;bpt\u003d1;l\u003d345\n\nWhich calculates FPS according to rates into buckets of a RateTracker...\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/rtc_base/rate_tracker.h;l\u003d24;drc\u003df78106f1fb37b3aa9e660993c62e645ea92f34f1;bpv\u003d1;bpt\u003d1\n\nWhile this approximates the number of frames in the last second, the bucketization logic means the actual interval we get is a multiple of the buckets, and so we may get an interval other than 1 second:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/rtc_base/rate_tracker.cc;l\u003d90;drc\u003df78106f1fb37b3aa9e660993c62e645ea92f34f1;bpv\u003d1;bpt\u003d1\n\nThis may yield non-integer frame rates... but the spec says that framesPerSecond is \"the number of frames in the last second\", which would always be an integer. Even though the spec uses the type double.",
+      "revId": "335078656045a2243ee56145b9681f765d0ea65e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
