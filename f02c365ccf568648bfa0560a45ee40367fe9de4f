@@ -16,6 +16,24 @@
       "message": "Seems like the Windows check failed with something unrelated, can anyone with access re-run?",
       "revId": "f02c365ccf568648bfa0560a45ee40367fe9de4f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59163458_433a990e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18499
+      },
+      "writtenOn": "2021-11-08T08:59:19Z",
+      "side": 1,
+      "message": "Still getting the same test errors from ensure_webcam_is_running.py:\n\nERROR: The system cannot find the file specified.\nFailed to launch virtual webcam: Command \u0027(\u0027schtasks\u0027, \u0027/run\u0027, \u0027/tn\u0027, \u0027ManyCam\u0027)\u0027 returned non-zero exit status 1\n\nI don\u0027t see how this could be related to the code changes. I merged the master changes in now, hopefully that resolves it.",
+      "parentUuid": "b1aff793_856cdcf9",
+      "revId": "f02c365ccf568648bfa0560a45ee40367fe9de4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
