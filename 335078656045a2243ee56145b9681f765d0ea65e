@@ -35,6 +35,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "576cab61_3d58e08f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-08T09:44:39Z",
+      "side": 1,
+      "message": "Replying to the spec issue only.\n",
+      "revId": "335078656045a2243ee56145b9681f765d0ea65e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5220279a_24c54462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-08T09:44:39Z",
+      "side": 1,
+      "message": "I think the definition of RTCVideoSourceStats is not that useful. For the most common non-integer source rate, 29.97 fps, if defined as it says, it will jump up and down between 29 (3/100 of the time) and 30 (97/100 of the time). It\u0027s also one of the very few places in stats where we say that we calculate something over a precise interval.\n\nI\u0027m happy leaving it as double, but think that we might add some words to the definition to say that it\u0027s a double to leave some room for approximation.",
+      "parentUuid": "6b28f4de_a12c14f7",
+      "revId": "335078656045a2243ee56145b9681f765d0ea65e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af623dd5_af671b00",
