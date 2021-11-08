@@ -162,7 +162,7 @@ ColumnPrinter SendAudioStream::StatsPrinter() {
       [this](rtc::SimpleStringBuilder& sb) {
         sender_->SendTask([this, &sb] {
           AudioSendStream::Stats stats = send_stream_->GetStats();
-          sb.AppendFormat("%.0lf", stats.target_bitrate_bps / 8.0);
+          sb.AppendFormat("%.0lf", stats.target_bitrate / 8.0);
         });
       },
       64);

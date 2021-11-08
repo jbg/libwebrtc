@@ -64,7 +64,7 @@ class AudioSendStream : public AudioSender {
     ANAStats ana_statistics;
     AudioProcessingStats apm_statistics;
 
-    int64_t target_bitrate_bps = 0;
+    double target_bitrate = 0;
     // A snapshot of Report Blocks with additional data of interest to
     // statistics. Within this list, the sender-source SSRC pair is unique and
     // per-pair the ReportBlockData represents the latest Report Block that was
