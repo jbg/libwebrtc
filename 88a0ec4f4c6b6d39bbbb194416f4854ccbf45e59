@@ -63,6 +63,30 @@
       },
       "revId": "88a0ec4f4c6b6d39bbbb194416f4854ccbf45e59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d22f8249_46695645",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 7102
+      },
+      "writtenOn": "2021-11-09T12:01:53Z",
+      "side": 1,
+      "message": "not much difference between -1 and 0, just -1 can be more undoubtably seen as invalid. optional can be good, but IMO, equally clear as -1 😊",
+      "parentUuid": "c43a788d_08044ca9",
+      "range": {
+        "startLine": 611,
+        "startChar": 0,
+        "endLine": 611,
+        "endChar": 13
+      },
+      "revId": "88a0ec4f4c6b6d39bbbb194416f4854ccbf45e59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
