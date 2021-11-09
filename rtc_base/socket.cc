@@ -10,4 +10,14 @@
 
 #include "rtc_base/socket.h"
 
-namespace rtc {}  // namespace rtc
+#include "rtc_base/checks.h"
+
+namespace rtc {
+int Socket::Listen(int) {
+  RTC_CHECK(false);
+}
+Socket* Socket::Accept(SocketAddress*) {
+  RTC_CHECK(false);
+}
+
+}  // namespace rtc

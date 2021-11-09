@@ -69,6 +69,7 @@ class RTC_EXPORT PhysicalSocketServer : public SocketServer {
 
   // SocketFactory:
   Socket* CreateSocket(int family, int type) override;
+  std::unique_ptr<ListenSocket> CreateListenSocket(int family) override;
 
   // Internal Factory for Accept (virtual so it can be overwritten in tests).
   virtual Socket* WrapSocket(SOCKET s);
