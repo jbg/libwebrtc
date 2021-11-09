@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40fd74bc_e2f6d10b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-09T15:07:36Z",
+      "side": 1,
+      "message": "This cl tries out a ListenSocket interface, to replace the Listen and Accept methods on Socket. Integration tests work, but most of the lower-level socket unit tests are just disabled in this cl, and would need quite a bit of work. If you like the approach, it would have to be landed piecewise, I think.",
+      "revId": "43bfb990996e751b1bbe38375c93dfc492b9198a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
