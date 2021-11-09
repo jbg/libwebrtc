@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee8faba4_e7d9a0d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-09T12:00:05Z",
+      "side": 1,
+      "message": "Fixed failing mac bots in https://webrtc-review.googlesource.com/c/src/+/237441 now, PTAL.",
+      "revId": "32ac305ace3c7b1842dee2fee9df95ad0c27a568",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
