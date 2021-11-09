@@ -87,6 +87,30 @@
       },
       "revId": "88a0ec4f4c6b6d39bbbb194416f4854ccbf45e59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d90f425_84d90e82",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-09T13:25:46Z",
+      "side": 1,
+      "message": "Alright, changed to -1. The value is filtered away in rtc_stats_collector anyway.",
+      "parentUuid": "d22f8249_46695645",
+      "range": {
+        "startLine": 611,
+        "startChar": 0,
+        "endLine": 611,
+        "endChar": 13
+      },
+      "revId": "88a0ec4f4c6b6d39bbbb194416f4854ccbf45e59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
