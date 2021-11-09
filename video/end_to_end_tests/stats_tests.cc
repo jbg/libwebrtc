@@ -412,12 +412,10 @@ TEST_F(StatsEndToEndTest, TimingFramesAreReported) {
 TEST_F(StatsEndToEndTest, TestReceivedRtpPacketStats) {
   static const size_t kNumRtpPacketsToSend = 5;
   class ReceivedRtpStatsObserver : public test::EndToEndTest,
-                                   public QueuedTask {
+                                   public QueuedTask,
+                                   public RtpPacketSinkInterface {
    public:
-    ReceivedRtpStatsObserver()
-        : EndToEndTest(kDefaultTimeoutMs),
-          receive_stream_(nullptr),
-          sent_rtp_(0) {}
+    ReceivedRtpStatsObserver() : EndToEndTest(kDefaultTimeoutMs) {}
 
    private:
     void OnVideoStreamsCreated(
@@ -428,10 +426,15 @@ TEST_F(StatsEndToEndTest, TestReceivedRtpPacketStats) {
       EXPECT_TRUE(task_queue_ != nullptr);
     }
 
+    void ModifyVideoConfigs(
+        VideoSendStream::Config* send_config,
+        std::vector<VideoReceiveStream::Config>* receive_configs,
+        VideoEncoderConfig* encoder_config) override {
+      (*receive_configs)[0].rtp.packet_sink_ = this;
+    }
+
     Action OnSendRtp(const uint8_t* packet, size_t length) override {
       if (sent_rtp_ >= kNumRtpPacketsToSend) {
-        // Need to check the stats on the correct thread.
-        task_queue_->PostTask(std::unique_ptr<QueuedTask>(this));
         return DROP_PACKET;
       }
       ++sent_rtp_;
@@ -443,6 +446,11 @@ TEST_F(StatsEndToEndTest, TestReceivedRtpPacketStats) {
           << "Timed out while verifying number of received RTP packets.";
     }
 
+    void OnRtpPacket(const RtpPacketReceived& packet) override {
+      // Need to check the stats on the correct thread.
+      task_queue_->PostTask(std::unique_ptr<QueuedTask>(this));
+    }
+
     bool Run() override {
       VideoReceiveStream::Stats stats = receive_stream_->GetStats();
       if (kNumRtpPacketsToSend == stats.rtp_stats.packet_counter.packets) {
@@ -451,8 +459,8 @@ TEST_F(StatsEndToEndTest, TestReceivedRtpPacketStats) {
       return false;
     }
 
-    VideoReceiveStream* receive_stream_;
-    uint32_t sent_rtp_;
+    VideoReceiveStream* receive_stream_ = nullptr;
+    uint32_t sent_rtp_ = 0;
     TaskQueueBase* task_queue_ = nullptr;
   } test;
 
