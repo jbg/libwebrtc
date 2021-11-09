@@ -1673,6 +1673,9 @@ RTCError SdpOfferAnswerHandler::ApplyRemoteDescription(
       if (!content) {
         continue;
       }
+      if (content->rejected) {
+        continue;
+      }
       const MediaContentDescription* media_desc = content->media_description();
       RtpTransceiverDirection local_direction =
           RtpTransceiverDirectionReversed(media_desc->direction());
