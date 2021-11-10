@@ -62,7 +62,7 @@ class FieldTrialList : public FieldTrialListBase {
   const std::vector<T>* operator->() const { return &values_; }
 
  protected:
-  bool Parse(absl::optional<std::string> str_value) override {
+  bool Parse(absl::optional<absl::string_view> str_value) override {
     parse_got_called_ = true;
 
     if (!str_value) {
@@ -178,7 +178,7 @@ class FieldTrialStructListBase : public FieldTrialParameterInterface {
   // user-supplied values, we return -1.
   int ValidateAndGetLength();
 
-  bool Parse(absl::optional<std::string> str_value) override;
+  bool Parse(absl::optional<absl::string_view> str_value) override;
 
   std::vector<std::unique_ptr<FieldTrialListWrapper>> sub_lists_;
 };
