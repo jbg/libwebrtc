@@ -543,7 +543,6 @@ if (is_android) {
       ":base_java",
       ":logging_java",
       "//rtc_base:base_java",
-      "//third_party/android_deps:com_android_support_support_annotations_java",
       "//third_party/androidx:androidx_annotation_annotation_java",
     ]
     srcjar_deps = [ "//rtc_base:network_monitor_enums" ]
@@ -1460,6 +1459,7 @@ if (is_android) {
         ":hwcodecs_java",
         ":libjingle_peerconnection_java",
         ":libjingle_peerconnection_metrics_default_java",
+        ":network_monitor_java",
         ":peerconnection_java",
         ":surfaceviewrenderer_java",
         ":swcodecs_java",
