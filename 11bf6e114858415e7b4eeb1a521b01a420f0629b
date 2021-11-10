@@ -34,6 +34,23 @@
       "parentUuid": "5d4f7c97_e336d960",
       "revId": "11bf6e114858415e7b4eeb1a521b01a420f0629b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2b62c0_694c559c",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1688,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-10T12:42:13Z",
+      "side": 1,
+      "message": "Drive-by more spec stuff:\n\nIf direction is \"sendrecv\" or \"recvonly\", let msids be a list of the MSIDs that the media description indicates transceiver.[[Receiver]].[[ReceiverTrack]] is to be associated with. Otherwise, let msids be an empty list.\n\nIt doesn\u0027t look like we set the msids to the empty list, which we should do if becoming inactive?",
+      "revId": "11bf6e114858415e7b4eeb1a521b01a420f0629b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
