@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce43fedc_d8261386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-10T12:23:47Z",
+      "side": 1,
+      "message": "\u003e However, I don\u0027t necessarily like the additional duplicated/boilerplate code this adds, especially in PhysicalSocketServer (where you\u0027ll need to handle Windows as well).\n\nMaybe it will look a bit better if the old Listen/Accept methods are deleted (the DE_ACCEPT flag can probably be deleted, unless it\u0027s somehow required for the windows code, which I haven\u0027t touched yet).",
+      "parentUuid": "77f316de_4b3f211b",
+      "revId": "43bfb990996e751b1bbe38375c93dfc492b9198a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0ca8497_59aa313b",
         "filename": "rtc_base/socket.h",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2021-11-10T00:08:45Z",
       "side": 1,
       "message": "I don\u0027t know that it really matters, since no one outside WebRTC is using this API directly, but at this level the convention would be for the client to explicitly call Accept after some signal is fired, with AsyncTcpListenSocket being responsible for automatically calling Accept when it\u0027s wrapping the socket.",
+      "revId": "43bfb990996e751b1bbe38375c93dfc492b9198a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ae786ab_77ada556",
+        "filename": "rtc_base/socket.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-10T12:23:47Z",
+      "side": 1,
+      "message": "That part of the change is intentional, and motivated by the threading complications of the current Accept method. A user of this class registers a callback which calls Accept, which creates a new socket and registers it with the socket server, and that registration needs synchronization. I think that code path is the main blocker for removing the recursive mutex. If Accept is called only internally, locking state will be known and make that simpler.\n\nThat said, threading is complicated and I don\u0027t know exactly how it will look like. In the VirtualSocketServer\u0027s ListenSocket class I had to arrange so that the internal lock is released before invoking the application\u0027s listen callback. Which I think is nice, but not sure if all SocketServers can do that.",
+      "parentUuid": "c0ca8497_59aa313b",
       "revId": "43bfb990996e751b1bbe38375c93dfc492b9198a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
