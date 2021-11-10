@@ -1679,8 +1679,9 @@ RTCError SdpOfferAnswerHandler::ApplyRemoteDescription(
       // Roughly the same as steps 2.2.8.6 of section 4.4.1.6 "Set the
       // RTCSessionDescription: Set the associated remote streams given
       // transceiver.[[Receiver]], msids, addList, and removeList".
-      // https://w3c.github.io/webrtc-pc/#set-the-rtcsessiondescription
-      if (RtpTransceiverDirectionHasRecv(local_direction)) {
+      // https://w3c.github.io/webrtc-pc/#set-the-session-description
+      if (RtpTransceiverDirectionHasRecv(local_direction) &&
+          !content->rejected) {
         std::vector<std::string> stream_ids;
         if (!media_desc->streams().empty()) {
           // The remote description has signaled the stream IDs.
