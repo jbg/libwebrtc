@@ -2266,4 +2266,38 @@ TEST_F(PeerConnectionJsepTest,
   EXPECT_TRUE(callee->CreateOfferAndSetAsLocal());
 }
 
+// Test that setting a remote offer with a rejected mediasection
+// does not fire OnAddTrack.
+TEST_F(PeerConnectionJsepTest,
+       SetRemoteOfferWithOneRejectedMediaSectionDoesNotFireOnAddTrack) {
+  auto callee = CreatePeerConnection();
+
+  const std::string sdp =
+      "v=0\r\n"
+      "o=- 166855176514521964 2 IN IP4 127.0.0.1\r\n"
+      "s=-\r\n"
+      "t=0 0\r\n"
+      "m=audio 0 UDP/TLS/RTP/SAVPF 111\r\n"
+      "c=IN IP4 0.0.0.0\r\n"
+      "a=rtcp:9 IN IP4 0.0.0.0\r\n"
+      "a=ice-ufrag:someufrag\r\n"
+      "a=ice-pwd:somelongpwdwithenoughrandomness\r\n"
+      "a=fingerprint:sha-256 "
+      "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:"
+      "00:00:00:00:00:00:00:00\r\n"
+      "a=setup:actpass\r\n"
+      "a=mid:1\r\n"
+      "a=sendonly\r\n"
+      "a=rtcp-mux\r\n"
+      "a=rtpmap:111 opus/48000/2\r\n"
+      "a=ssrc:1001 cname:some\r\n";
+
+  std::unique_ptr<webrtc::SessionDescriptionInterface> remote_description =
+      webrtc::CreateSessionDescription(SdpType::kOffer, sdp, nullptr);
+  EXPECT_TRUE(callee->SetRemoteDescription(std::move(remote_description)));
+
+  const auto& track_events = callee->observer()->add_track_events_;
+  EXPECT_EQ(0u, track_events.size());
+}
+
 }  // namespace webrtc
