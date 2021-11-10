@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d4f7c97_e336d960",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1684,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-10T12:37:15Z",
+      "side": 1,
+      "message": "Should we instead do?\n\n  if (content-\u003erejected) {\n    local_direction \u003d kInactive;\n  }\n\nSince this code block still does stuff like updating streams which could affect other events (add and remove track on stream).\n\nThe actual stopping will still happen later on line 1744.",
+      "revId": "11bf6e114858415e7b4eeb1a521b01a420f0629b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
