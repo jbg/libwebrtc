@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73467ae3_8404f775",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-11-10T15:58:53Z",
+      "side": 1,
+      "message": "LGTM, but have you verified that it fixes the flakiness by compiling with asan and running with --gtest_repeat\u003d1000 or similar?",
+      "revId": "571cedab4ab95c6da47c5249a6ae3fb251fcc04b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "037330f9_8bac6895",
