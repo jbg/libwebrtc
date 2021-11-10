@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a7a9980_cd019ffa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2021-11-10T18:46:12Z",
+      "side": 1,
+      "message": "Yes asan now passes 10000/10000 (before failed ~8/10000).",
+      "parentUuid": "73467ae3_8404f775",
+      "revId": "571cedab4ab95c6da47c5249a6ae3fb251fcc04b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "037330f9_8bac6895",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-11-10T15:52:24Z",
       "side": 1,
       "message": "Drive-by-comment: If possible, it would be nice if we could get the appropriate task queue by some more explicit means (e.g., accessor on the test class (CallTest?) owning it), instead of implicitly via TaskQueueBase::Current().",
+      "range": {
+        "startLine": 423,
+        "startChar": 6,
+        "endLine": 423,
+        "endChar": 17
+      },
+      "revId": "571cedab4ab95c6da47c5249a6ae3fb251fcc04b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "461d6655_99dd7278",
+        "filename": "video/end_to_end_tests/stats_tests.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2021-11-10T18:46:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "037330f9_8bac6895",
       "range": {
         "startLine": 423,
         "startChar": 6,
