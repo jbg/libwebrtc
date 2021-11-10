@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba01e86f_21d6b0b7",
+        "filename": "video/end_to_end_tests/stats_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2021-11-10T11:15:14Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with this test, but I assume the intention is to test packets received rather than packets sent? If so, this looks like a good change.\n\nHowever, isn\u0027t the problem that we post a task to that would dereference this object, then the object is destroyed and finally the task executes causing a use-after-free? It seems this could happen even if we post the task from OnRtpPacket. If so, one way to avoid this use-after-free might be adding a scoped_refptr\u003cPendingTaskSafetyFlag\u003e member (rtc_base/task_utils/pending_task_safety_flag.h), toggle it before destroying the object and checking the value before running the task. Or maybe I\u0027m missing something?",
+      "range": {
+        "startLine": 451,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 63
+      },
+      "revId": "6f4340318b29843a3f9f7279960bc893cfa10a67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
