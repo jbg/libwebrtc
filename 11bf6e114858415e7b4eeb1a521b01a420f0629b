@@ -16,6 +16,24 @@
       "message": "Should we instead do?\n\n  if (content-\u003erejected) {\n    local_direction \u003d kInactive;\n  }\n\nSince this code block still does stuff like updating streams which could affect other events (add and remove track on stream).\n\nThe actual stopping will still happen later on line 1744.",
       "revId": "11bf6e114858415e7b4eeb1a521b01a420f0629b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b03f02_943b7435",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1684,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-10T12:38:35Z",
+      "side": 1,
+      "message": "This matches the spec:\n\nLet direction be an RTCRtpTransceiverDirection value representing the direction from the media description, but with the send and receive directions reversed to represent this peer\u0027s point of view. If the media description is rejected, set direction to \"inactive\".\n\nEspecially the last sentence",
+      "parentUuid": "5d4f7c97_e336d960",
+      "revId": "11bf6e114858415e7b4eeb1a521b01a420f0629b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
