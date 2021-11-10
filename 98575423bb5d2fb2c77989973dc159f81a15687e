@@ -70,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57afd0a8_91bc23d1",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2269,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-11-10T08:16:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd811b2b_1cfedf4a",
+      "revId": "98575423bb5d2fb2c77989973dc159f81a15687e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baa2cc47_9ab71dbc",
@@ -83,6 +101,24 @@
       "writtenOn": "2021-11-09T23:26:51Z",
       "side": 1,
       "message": "This seems odd to me - and not tested by the test.\nNot removing a track because the track is listed as rejected in the offer? Shouldn\u0027t that be a reason to remove it? Is it removed elsewhere in this (long) function?",
+      "revId": "98575423bb5d2fb2c77989973dc159f81a15687e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e812781_23ca96e2",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-11-10T08:16:45Z",
+      "side": 1,
+      "message": "oh I approached this from a different angle (see PS1 where I just continue\u0027d earlier but that broke too many tests).\nBut this doesn\u0027t seem odd, it seems wrong. I missed the `!` in the beginning.",
+      "parentUuid": "baa2cc47_9ab71dbc",
       "revId": "98575423bb5d2fb2c77989973dc159f81a15687e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
