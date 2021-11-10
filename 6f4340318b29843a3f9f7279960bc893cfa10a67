@@ -22,6 +22,30 @@
       },
       "revId": "6f4340318b29843a3f9f7279960bc893cfa10a67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3e8f65e_b953df41",
+        "filename": "video/end_to_end_tests/stats_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2021-11-10T14:07:59Z",
+      "side": 1,
+      "message": "Added a PendingTaskSafetyFlag.",
+      "parentUuid": "ba01e86f_21d6b0b7",
+      "range": {
+        "startLine": 451,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 63
+      },
+      "revId": "6f4340318b29843a3f9f7279960bc893cfa10a67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
