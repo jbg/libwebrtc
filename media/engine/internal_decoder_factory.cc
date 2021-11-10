@@ -16,6 +16,7 @@
 #include "media/base/codec.h"
 #include "media/base/media_constants.h"
 #include "modules/video_coding/codecs/av1/libaom_av1_decoder.h"
+#include "modules/video_coding/codecs/av1/dav1d_decoder.h"
 #include "modules/video_coding/codecs/h264/include/h264.h"
 #include "modules/video_coding/codecs/vp8/include/vp8.h"
 #include "modules/video_coding/codecs/vp9/include/vp9.h"
@@ -32,8 +33,7 @@ std::vector<SdpVideoFormat> InternalDecoderFactory::GetSupportedFormats()
     formats.push_back(format);
   for (const SdpVideoFormat& h264_format : SupportedH264Codecs())
     formats.push_back(h264_format);
-  if (kIsLibaomAv1DecoderSupported)
-    formats.push_back(SdpVideoFormat(cricket::kAv1CodecName));
+  formats.push_back(SdpVideoFormat(cricket::kAv1CodecName));
   return formats;
 }
 
@@ -69,9 +69,11 @@ std::unique_ptr<VideoDecoder> InternalDecoderFactory::CreateVideoDecoder(
     return VP9Decoder::Create();
   if (absl::EqualsIgnoreCase(format.name, cricket::kH264CodecName))
     return H264Decoder::Create();
-  if (kIsLibaomAv1DecoderSupported &&
-      absl::EqualsIgnoreCase(format.name, cricket::kAv1CodecName))
-    return CreateLibaomAv1Decoder();
+  if (absl::EqualsIgnoreCase(format.name, cricket::kAv1CodecName))
+    return Dav1dDecoder::Create();
+  // if (kIsLibaomAv1DecoderSupported &&
+  //     absl::EqualsIgnoreCase(format.name, cricket::kAv1CodecName))
+  //   return CreateLibaomAv1Decoder();
 
   RTC_NOTREACHED();
   return nullptr;
