@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58aeae29_fa6184a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-11T13:10:27Z",
+      "side": 1,
+      "message": "This is the kind of subtle change that I find really scary, especially since I can\u0027t find good documentation for when TaskQueueBase::Current() is guaranteed to be non-null.\n",
+      "revId": "4b9e82985329a85bbeef845856fc434d909c7bf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
