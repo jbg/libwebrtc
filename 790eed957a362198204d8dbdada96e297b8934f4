@@ -16,6 +16,23 @@
       "message": "https://chromium-review.googlesource.com/c/chromium/src/+/3268594 -- corresponding chromium CL. \"plan-b\" still fails until this rolls.",
       "revId": "790eed957a362198204d8dbdada96e297b8934f4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c75537e_ace1a425",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1679,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-11T15:19:27Z",
+      "side": 1,
+      "message": "I don\u0027t think we should use kStopped here. It is a special state that is reached by executing stopping procedures (other methods), so I don\u0027t want to set it prematurely or surface kStopped in the [[FiredDirection]] or [[CurrentDirection]]. And I really don\u0027t like the idea of current_direction() being kStopped when the boolean stopped() is still false. I don\u0027t know if that causes any problems now, but having contradictory states is never good. And besides, the spec uses \"inactive\" here.\n\nPlease use kInactive.",
+      "revId": "790eed957a362198204d8dbdada96e297b8934f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

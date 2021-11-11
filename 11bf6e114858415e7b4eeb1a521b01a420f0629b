@@ -54,6 +54,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eca813c6_aef3800f",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1684,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-11T15:19:27Z",
+      "side": 1,
+      "message": "See my other comment but I actually think we do want \"inactive\".",
+      "parentUuid": "f91a37cb_bf465294",
+      "revId": "11bf6e114858415e7b4eeb1a521b01a420f0629b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f2b62c0_694c559c",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "for rejected this doesn\u0027t make a difference since you can\u0027t revive this. The other case is not a drive-by fix.",
       "parentUuid": "1f2b62c0_694c559c",
+      "revId": "11bf6e114858415e7b4eeb1a521b01a420f0629b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7224284_d4401b7c",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1688,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-11T15:19:27Z",
+      "side": 1,
+      "message": "Setting associated streams does make a difference because it results in changing stream memberships and firing associated stream.onremovetrack, but for some reason we only run this code if \"DirectionHasRecv\"... oh, well, separate and existing problem.",
+      "parentUuid": "b1a995d7_84946007",
       "revId": "11bf6e114858415e7b4eeb1a521b01a420f0629b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
