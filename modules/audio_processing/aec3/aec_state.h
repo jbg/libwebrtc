@@ -268,6 +268,9 @@ class AecState {
   // saturated.
   class SaturationDetector {
    public:
+    explicit SaturationDetector(
+        const EchoCanceller3Config::SaturationDetector& config);
+
     // Returns whether the echo is to be considered saturated.
     bool SaturatedEcho() const { return saturated_echo_; }
 
@@ -279,6 +282,7 @@ class AecState {
                 float echo_path_gain);
 
    private:
+    const EchoCanceller3Config::SaturationDetector config_;
     bool saturated_echo_ = false;
   } saturation_detector_;
 

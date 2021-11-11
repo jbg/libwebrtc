@@ -587,6 +587,15 @@ EchoCanceller3Config AdjustConfig(const EchoCanceller3Config& config) {
       "WebRTC-Aec3DelayEstimateSmoothingDelayFoundOverride", 0.f, 1.f,
       &adjusted_cfg.delay.delay_estimate_smoothing_delay_found);
 
+  RetrieveFieldTrialValue(
+      "WebRTC-Aec3SaturationDetectorSaturationThresholdOverride",
+      /*min=*/20000.0f, /*max=*/32000.f,
+      &adjusted_cfg.saturation_detector.saturation_threshold);
+  RetrieveFieldTrialValue(
+      "WebRTC-Aec3SaturationDetectorPeakEchoAmplitudeMarginOverride",
+      /*min=*/1.0f, /*max=*/10.f,
+      &adjusted_cfg.saturation_detector.peak_echo_amplitude_margin);
+
   return adjusted_cfg;
 }
 

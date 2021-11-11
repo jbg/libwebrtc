@@ -236,6 +236,11 @@ struct RTC_EXPORT EchoCanceller3Config {
     float floor_first_increase = 0.00001f;
     bool conservative_hf_suppression = false;
   } suppressor;
+
+  struct SaturationDetector {
+    float saturation_threshold = 20000.0f;
+    float peak_echo_amplitude_margin = 10.0f;
+  } saturation_detector;
 };
 }  // namespace webrtc
 

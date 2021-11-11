@@ -128,6 +128,7 @@ AecState::AecState(const EchoCanceller3Config& config,
       delay_state_(config_, num_capture_channels_),
       transparent_state_(TransparentMode::Create(config_)),
       filter_quality_state_(config_, num_capture_channels_),
+      saturation_detector_(config.saturation_detector),
       erl_estimator_(2 * kNumBlocksPerSecond),
       erle_estimator_(2 * kNumBlocksPerSecond, config_, num_capture_channels_),
       filter_analyzer_(config_, num_capture_channels_),
@@ -445,6 +446,10 @@ void AecState::FilteringQualityAnalyzer::Update(
   }
 }
 
+AecState::SaturationDetector::SaturationDetector(
+    const EchoCanceller3Config::SaturationDetector& config)
+    : config_(config) {}
+
 void AecState::SaturationDetector::Update(
     rtc::ArrayView<const std::vector<float>> x,
     bool saturated_capture,
@@ -457,12 +462,12 @@ void AecState::SaturationDetector::Update(
   }
 
   if (usable_linear_estimate) {
-    constexpr float kSaturationThreshold = 20000.f;
     for (size_t ch = 0; ch < subtractor_output.size(); ++ch) {
       saturated_echo_ =
-          saturated_echo_ ||
-          (subtractor_output[ch].s_refined_max_abs > kSaturationThreshold ||
-           subtractor_output[ch].s_coarse_max_abs > kSaturationThreshold);
+          saturated_echo_ || (subtractor_output[ch].s_refined_max_abs >
+                                  config_.saturation_threshold ||
+                              subtractor_output[ch].s_coarse_max_abs >
+                                  config_.saturation_threshold);
     }
   } else {
     float max_sample = 0.f;
@@ -472,9 +477,11 @@ void AecState::SaturationDetector::Update(
       }
     }
 
-    const float kMargin = 10.f;
-    float peak_echo_amplitude = max_sample * echo_path_gain * kMargin;
-    saturated_echo_ = saturated_echo_ || peak_echo_amplitude > 32000;
+    float peak_echo_amplitude =
+        max_sample * echo_path_gain * config_.peak_echo_amplitude_margin;
+    constexpr float kPeakEchoAmplitudeThreshold = 32000.0f;
+    saturated_echo_ =
+        saturated_echo_ || peak_echo_amplitude > kPeakEchoAmplitudeThreshold;
   }
 }
 
