@@ -34,6 +34,24 @@
       "parentUuid": "50f1761f_10f91d7e",
       "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3c01caa_4ff95c6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-11-11T15:01:06Z",
+      "side": 1,
+      "message": "The expectation is that in the normal case, objects that are used on a specific TQ will also be created on that TQ. So the assumption that TQB is set before is intentional. Sometimes there\u0027s a reason why this is not the case, often due to legacy code but for other reasons as well. To handle those cases we have the Detach)\u003d function that can be called in the class constructor to ensure that the checker won\u0027t care about the construction thread, maybe this could be applicable in your scenario as well?",
+      "parentUuid": "bc864e4e_350f1397",
+      "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
