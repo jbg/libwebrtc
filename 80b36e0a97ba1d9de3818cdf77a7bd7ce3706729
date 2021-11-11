@@ -69,6 +69,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67ff3980_37f912af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-11T12:44:19Z",
+      "side": 1,
+      "message": "Thanks, fixed: https://chromium-review.googlesource.com/c/chromium/src/+/3268676",
+      "parentUuid": "a3d65d4a_e98a4d37",
+      "revId": "80b36e0a97ba1d9de3818cdf77a7bd7ce3706729",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "252152e2_66d78862",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-11T12:44:19Z",
+      "side": 1,
+      "message": "Thanks, all :)",
+      "revId": "80b36e0a97ba1d9de3818cdf77a7bd7ce3706729",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5245a5c_6fe4e6a6",
@@ -86,6 +121,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c50b8098_ba2f6edb",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-11T12:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5245a5c_6fe4e6a6",
+      "revId": "80b36e0a97ba1d9de3818cdf77a7bd7ce3706729",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6290133_6fb7e97d",
@@ -99,6 +152,24 @@
       "writtenOn": "2021-11-11T10:53:22Z",
       "side": 1,
       "message": "Can you also test coverage in rtc_stats_collector_unittest.cc using fake values?\nE.g. update CollectRTCOutboundRTPStreamStats_Audio to also set a value for target_bitrate",
+      "revId": "80b36e0a97ba1d9de3818cdf77a7bd7ce3706729",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "527ca85e_417590f0",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-11T12:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6290133_6fb7e97d",
       "revId": "80b36e0a97ba1d9de3818cdf77a7bd7ce3706729",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
