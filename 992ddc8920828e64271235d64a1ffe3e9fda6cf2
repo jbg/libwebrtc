@@ -70,6 +70,29 @@
       "parentUuid": "f3c01caa_4ff95c6d",
       "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98ab9e0_7e3fb50a",
+        "filename": "rtc_base/synchronization/sequence_checker_internal.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-11T15:27:00Z",
+      "side": 1,
+      "message": "This is subtle. To me it would make more sense with\n\nif (valid_queue_) { \n  return valid_queue_ \u003d\u003d current_queue;\n}\n  \nThat is, if some queue was current at attachment time, require same queue. If no queue were current at attachment time, ignore current queue and fall back to comparing thread refs.\n\nFor the problem use case, the broken fuzzer test, what was the context at attach time? If running on a TaskQueue or rtc::Thread (which also is a TaskQueue these days), TaskQueueBase::Current() ought to be non-null. Are any other type of threads (e.g., ProcessThread, or AsyncResolver) involved in the test?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
