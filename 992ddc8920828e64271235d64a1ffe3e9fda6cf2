@@ -52,6 +52,24 @@
       "parentUuid": "bc864e4e_350f1397",
       "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d35111d_ead9bfe0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-11T15:05:48Z",
+      "side": 1,
+      "message": "The construction *thread* is set (and captured) just fine, it is the TQ that is not set. I don\u0027t understand how it\u0027s possible (or sensible) for one to be set and not the other, but it does happen (both in the fuzzer and in the death test that the CL touches).",
+      "parentUuid": "f3c01caa_4ff95c6d",
+      "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
