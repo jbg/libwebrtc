@@ -14,40 +14,39 @@
 #include <limits>
 #include <string>
 
+#include "absl/strings/charconv.h"
+#include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
-
-// Large enough to fit "seconds", the longest supported unit name.
-#define RTC_TRIAL_UNIT_LENGTH_STR "7"
-#define RTC_TRIAL_UNIT_SIZE 8
 
 namespace webrtc {
 namespace {
 
 struct ValueWithUnit {
   double value;
-  std::string unit;
+  absl::string_view unit;
 };
 
-absl::optional<ValueWithUnit> ParseValueWithUnit(std::string str) {
+absl::optional<ValueWithUnit> ParseValueWithUnit(absl::string_view str) {
   if (str == "inf") {
     return ValueWithUnit{std::numeric_limits<double>::infinity(), ""};
-  } else if (str == "-inf") {
-    return ValueWithUnit{-std::numeric_limits<double>::infinity(), ""};
-  } else {
-    double double_val;
-    char unit_char[RTC_TRIAL_UNIT_SIZE];
-    unit_char[0] = 0;
-    if (sscanf(str.c_str(), "%lf%" RTC_TRIAL_UNIT_LENGTH_STR "s", &double_val,
-               unit_char) >= 1) {
-      return ValueWithUnit{double_val, unit_char};
-    }
   }
-  return absl::nullopt;
+  if (str == "-inf") {
+    return ValueWithUnit{-std::numeric_limits<double>::infinity(), ""};
+  }
+  ValueWithUnit result;
+  const char* const str_end = str.data() + str.size();
+  absl::from_chars_result r =
+      absl::from_chars(str.data(), str_end, result.value);
+  if (r.ec != std::errc()) {
+    return absl::nullopt;
+  }
+  result.unit = absl::string_view(r.ptr, str_end - r.ptr);
+  return result;
 }
 }  // namespace
 
 template <>
-absl::optional<DataRate> ParseTypedParameter<DataRate>(std::string str) {
+absl::optional<DataRate> ParseTypedParameter<DataRate>(absl::string_view str) {
   absl::optional<ValueWithUnit> result = ParseValueWithUnit(str);
   if (result) {
     if (result->unit.empty() || result->unit == "kbps") {
@@ -60,7 +59,7 @@ absl::optional<DataRate> ParseTypedParameter<DataRate>(std::string str) {
 }
 
 template <>
-absl::optional<DataSize> ParseTypedParameter<DataSize>(std::string str) {
+absl::optional<DataSize> ParseTypedParameter<DataSize>(absl::string_view str) {
   absl::optional<ValueWithUnit> result = ParseValueWithUnit(str);
   if (result) {
     if (result->unit.empty() || result->unit == "bytes")
@@ -70,7 +69,8 @@ absl::optional<DataSize> ParseTypedParameter<DataSize>(std::string str) {
 }
 
 template <>
-absl::optional<TimeDelta> ParseTypedParameter<TimeDelta>(std::string str) {
+absl::optional<TimeDelta> ParseTypedParameter<TimeDelta>(
+    absl::string_view str) {
   absl::optional<ValueWithUnit> result = ParseValueWithUnit(str);
   if (result) {
     if (result->unit == "s" || result->unit == "seconds") {
@@ -86,17 +86,17 @@ absl::optional<TimeDelta> ParseTypedParameter<TimeDelta>(std::string str) {
 
 template <>
 absl::optional<absl::optional<DataRate>>
-ParseTypedParameter<absl::optional<DataRate>>(std::string str) {
+ParseTypedParameter<absl::optional<DataRate>>(absl::string_view str) {
   return ParseOptionalParameter<DataRate>(str);
 }
 template <>
 absl::optional<absl::optional<DataSize>>
-ParseTypedParameter<absl::optional<DataSize>>(std::string str) {
+ParseTypedParameter<absl::optional<DataSize>>(absl::string_view str) {
   return ParseOptionalParameter<DataSize>(str);
 }
 template <>
 absl::optional<absl::optional<TimeDelta>>
-ParseTypedParameter<absl::optional<TimeDelta>>(std::string str) {
+ParseTypedParameter<absl::optional<TimeDelta>>(absl::string_view str) {
   return ParseOptionalParameter<TimeDelta>(str);
 }
 

@@ -16,6 +16,8 @@
 #include <type_traits>
 #include <utility>
 
+#include "absl/strings/charconv.h"
+#include "absl/strings/numbers.h"
 #include "absl/strings/string_view.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
@@ -111,7 +113,7 @@ void ParseFieldTrial(
 }
 
 template <>
-absl::optional<bool> ParseTypedParameter<bool>(std::string str) {
+absl::optional<bool> ParseTypedParameter<bool>(absl::string_view str) {
   if (str == "true" || str == "1") {
     return true;
   } else if (str == "false" || str == "0") {
@@ -121,63 +123,61 @@ absl::optional<bool> ParseTypedParameter<bool>(std::string str) {
 }
 
 template <>
-absl::optional<double> ParseTypedParameter<double>(std::string str) {
+absl::optional<double> ParseTypedParameter<double>(absl::string_view str) {
   double value;
-  char unit[2]{0, 0};
-  if (sscanf(str.c_str(), "%lf%1s", &value, unit) >= 1) {
-    if (unit[0] == '%')
-      return value / 100;
-    return value;
-  } else {
+  const char* const str_end = str.data() + str.size();
+  absl::from_chars_result r = absl::from_chars(str.data(), str_end, value);
+  if (r.ec != std::errc()) {
     return absl::nullopt;
   }
-}
-
-template <>
-absl::optional<int> ParseTypedParameter<int>(std::string str) {
-  int64_t value;
-  if (sscanf(str.c_str(), "%" SCNd64, &value) == 1) {
-    if (rtc::IsValueInRangeForNumericType<int, int64_t>(value)) {
-      return static_cast<int>(value);
-    }
+  if (r.ptr != str_end && r.ptr[0] == '%') {
+    return value / 100;
   }
-  return absl::nullopt;
+  return value;
 }
 
 template <>
-absl::optional<unsigned> ParseTypedParameter<unsigned>(std::string str) {
-  int64_t value;
-  if (sscanf(str.c_str(), "%" SCNd64, &value) == 1) {
-    if (rtc::IsValueInRangeForNumericType<unsigned, int64_t>(value)) {
-      return static_cast<unsigned>(value);
-    }
+absl::optional<int> ParseTypedParameter<int>(absl::string_view str) {
+  int value;
+  if (!SimpleAtoi(str, &value)) {
+    return absl::nullopt;
   }
-  return absl::nullopt;
+  return value;
 }
 
 template <>
-absl::optional<std::string> ParseTypedParameter<std::string>(std::string str) {
-  return std::move(str);
+absl::optional<unsigned> ParseTypedParameter<unsigned>(absl::string_view str) {
+  unsigned value;
+  if (!SimpleAtoi(str, &value)) {
+    return absl::nullopt;
+  }
+  return value;
+}
+
+template <>
+absl::optional<std::string> ParseTypedParameter<std::string>(
+    absl::string_view str) {
+  return std::string(str);
 }
 
 template <>
 absl::optional<absl::optional<bool>> ParseTypedParameter<absl::optional<bool>>(
-    std::string str) {
+    absl::string_view str) {
   return ParseOptionalParameter<bool>(str);
 }
 template <>
 absl::optional<absl::optional<int>> ParseTypedParameter<absl::optional<int>>(
-    std::string str) {
+    absl::string_view str) {
   return ParseOptionalParameter<int>(str);
 }
 template <>
 absl::optional<absl::optional<unsigned>>
-ParseTypedParameter<absl::optional<unsigned>>(std::string str) {
+ParseTypedParameter<absl::optional<unsigned>>(absl::string_view str) {
   return ParseOptionalParameter<unsigned>(str);
 }
 template <>
 absl::optional<absl::optional<double>>
-ParseTypedParameter<absl::optional<double>>(std::string str) {
+ParseTypedParameter<absl::optional<double>>(absl::string_view str) {
   return ParseOptionalParameter<double>(str);
 }
 
@@ -194,7 +194,7 @@ webrtc::FieldTrialFlag::operator bool() const {
   return value_;
 }
 
-bool FieldTrialFlag::Parse(absl::optional<std::string> str_value) {
+bool FieldTrialFlag::Parse(absl::optional<absl::string_view> str_value) {
   // Only set the flag if there is no argument provided.
   if (str_value) {
     absl::optional<bool> opt_value = ParseTypedParameter<bool>(*str_value);
@@ -210,7 +210,7 @@ bool FieldTrialFlag::Parse(absl::optional<std::string> str_value) {
 AbstractFieldTrialEnum::AbstractFieldTrialEnum(
     std::string key,
     int default_value,
-    std::map<std::string, int> mapping)
+    std::map<absl::string_view, int> mapping)
     : FieldTrialParameterInterface(key),
       value_(default_value),
       enum_mapping_(mapping) {
@@ -221,7 +221,8 @@ AbstractFieldTrialEnum::AbstractFieldTrialEnum(const AbstractFieldTrialEnum&) =
     default;
 AbstractFieldTrialEnum::~AbstractFieldTrialEnum() = default;
 
-bool AbstractFieldTrialEnum::Parse(absl::optional<std::string> str_value) {
+bool AbstractFieldTrialEnum::Parse(
+    absl::optional<absl::string_view> str_value) {
   if (str_value) {
     auto it = enum_mapping_.find(*str_value);
     if (it != enum_mapping_.end()) {

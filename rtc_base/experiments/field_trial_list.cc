@@ -33,7 +33,8 @@ bool FieldTrialListWrapper::Used() {
   return GetList()->Used();
 }
 
-bool FieldTrialStructListBase::Parse(absl::optional<std::string> str_value) {
+bool FieldTrialStructListBase::Parse(
+    absl::optional<absl::string_view> str_value) {
   RTC_NOTREACHED();
   return true;
 }
