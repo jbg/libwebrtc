@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50f1761f_10f91d7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-11-11T14:31:16Z",
+      "side": 1,
+      "message": "Was a while ago I worked with this code, but isn\u0027t your use case rather similar to the detach use case? Seems like if it\u0027s bound before TQB is set, we\u0027d want to attach it when it is, or we\u0027ll have a checker that will actually allow being checked on different task queues?",
+      "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
