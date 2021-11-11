@@ -16,6 +16,24 @@
       "message": "Was a while ago I worked with this code, but isn\u0027t your use case rather similar to the detach use case? Seems like if it\u0027s bound before TQB is set, we\u0027d want to attach it when it is, or we\u0027ll have a checker that will actually allow being checked on different task queues?",
       "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc864e4e_350f1397",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-11T14:53:04Z",
+      "side": 1,
+      "message": "It won\u0027t allow initialization on one queue and checking on another (the normal case). What it will allow is initialization before TQB is set.\n\nAs it is written now, there is a hidden API requirement for anything that uses SequenceChecker that it must cause TQB to be set before any object is created, and that is a) hard to document and b) hard to explain why.\n\nWe could change this in multiple ways:\n\n- Initialize TQB as part of some other global initialization, so that it is never null (but where could we do that?)\n- Capture the current value of TQB whenever it is non-null and the stored TQ pointer is null. This would capture sensible use cases, and possibly cause failures when the TQB capture is done on a different thread than the thread capture (we would then be in a state that cannot be resolved)\n- Do something else.\n\nOne complication is that TQB has code where it is set from a scoped variable, where the old value is popped when the scoped variable exits - which means that null -\u003e TQB set -\u003e null is a perfectly possible transition diagram. But I don\u0027t know what set TQB here, so I don\u0027t know if it is possible to guarantee it being unset before object destruction - or even if it should be.\n\nComplexities..... this was the simplest change I could find that stopped the crash I was worried about and still checked all the normal cases where TQB is set both at create time and at check time.",
+      "parentUuid": "50f1761f_10f91d7e",
+      "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
