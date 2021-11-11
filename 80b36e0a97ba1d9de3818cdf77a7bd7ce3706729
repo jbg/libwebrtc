@@ -33,6 +33,57 @@
       "message": "+hbos for pc/\n+saza for media/",
       "revId": "80b36e0a97ba1d9de3818cdf77a7bd7ce3706729",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dce247e_bad5374c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-11T10:53:22Z",
+      "side": 1,
+      "message": "Just nits!",
+      "revId": "80b36e0a97ba1d9de3818cdf77a7bd7ce3706729",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5245a5c_6fe4e6a6",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-11T10:53:22Z",
+      "side": 1,
+      "message": "There\u0027s currently a TODO in rtcstats_objects.h that says:\n\n// TODO(hbos): Collect and populate this value. https://bugs.webrtc.org/7066\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/stats/rtcstats_objects.h;l\u003d533?q\u003drtcstats_objects\u0026originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F\n\nPlease update this to reflect that it is only not collected for video. E.g.\n\n// This is only collected for audio.\n// TODO(\u003csome crbug that makes sense\u003e): Also collect this metric for video.",
+      "revId": "80b36e0a97ba1d9de3818cdf77a7bd7ce3706729",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6290133_6fb7e97d",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-11T10:53:22Z",
+      "side": 1,
+      "message": "Can you also test coverage in rtc_stats_collector_unittest.cc using fake values?\nE.g. update CollectRTCOutboundRTPStreamStats_Audio to also set a value for target_bitrate",
+      "revId": "80b36e0a97ba1d9de3818cdf77a7bd7ce3706729",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
