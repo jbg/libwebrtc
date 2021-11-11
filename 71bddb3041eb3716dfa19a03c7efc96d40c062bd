@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e656b39f_8b507e27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-11-11T19:04:37Z",
+      "side": 1,
+      "message": "maybe having a rtc_base/strings/tokenchar helper would avoid duplication? At least this is easier to grep than before.",
+      "revId": "71bddb3041eb3716dfa19a03c7efc96d40c062bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
