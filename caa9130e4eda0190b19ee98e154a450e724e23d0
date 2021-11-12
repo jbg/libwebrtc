@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bde8356_3c4f76fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14174
+      },
+      "writtenOn": "2021-11-12T19:55:37Z",
+      "side": 1,
+      "message": " We have long been notice the delay/av sync/freeze issue after unmute for a while for in-house app as well. \n We did some test on chrome about start/stop video stream, we could notice the short-term overshoot as well when just unmute video after mute for sometime.",
+      "revId": "caa9130e4eda0190b19ee98e154a450e724e23d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
