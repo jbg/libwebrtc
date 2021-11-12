@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8910c300_ebbe47ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-12T15:08:37Z",
+      "side": 1,
+      "message": "Artem, could you take a look once more? The implementation is largely changed.",
+      "revId": "d924035a14a2be9cb65f4c92604e4186d0efba2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
