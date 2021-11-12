@@ -16,6 +16,24 @@
       "message": "did you intend to delete -Wno-exit-time-destructors?",
       "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "990478a4_c5ec3253",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-12T17:10:45Z",
+      "side": 0,
+      "message": "Yes, that is the goal of this CL.",
+      "parentUuid": "0c51c041_ed3df7d7",
+      "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

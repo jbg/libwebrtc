@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd44fca_609b00c9",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-12T17:10:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9ceeb48_72f973e1",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 13
+      },
+      "revId": "d924035a14a2be9cb65f4c92604e4186d0efba2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0efbe8e_421930b3",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-11-12T15:36:36Z",
       "side": 1,
       "message": "this implementation does atomic load (twice!) for each call.\nat the very least you may change it to do a single load when mutex already created.\nbut why are you sure it is faster than lock compiler uses for static initialization?\n(each atomic operation also involves some kind of lock)",
+      "revId": "d924035a14a2be9cb65f4c92604e4186d0efba2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "111acbee_a9c95386",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-12T17:10:45Z",
+      "side": 1,
+      "message": "It was my mistake to use two load. Fixed\nI\u0027m not 100% sure that atomic access will be faster than accessing static initialized variables using mutex.\nLooking for a way to see if I can evaluate the performance difference.\nAlso considering just using the well-known pattern of static initialization.",
+      "parentUuid": "d0efbe8e_421930b3",
       "revId": "d924035a14a2be9cb65f4c92604e4186d0efba2b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
