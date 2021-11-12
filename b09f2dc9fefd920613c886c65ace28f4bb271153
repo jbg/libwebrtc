@@ -69,6 +69,46 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "880a182b_43120127",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-12T10:59:47Z",
+      "side": 1,
+      "message": "Would prefer solution within c++ language over solution that changes behaviour in a  compile-specific way",
+      "revId": "b09f2dc9fefd920613c886c65ace28f4bb271153",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccdd2e79_3d346c0f",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-12T10:59:47Z",
+      "side": 1,
+      "message": "(fyi)\nusing static function member adds a bit of overhead on each use,\nwhich might be an issue for the variable that used a lot (every time there is a log) but it seems this overhead is negligibly small.\n\nhttps://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables\n“Note: usual implementations of this feature use variants of the double-checked locking pattern, which reduces runtime overhead for already-initialized local statics to a single non-atomic boolean comparison.”",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 8
+      },
+      "revId": "b09f2dc9fefd920613c886c65ace28f4bb271153",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d25f0c41_33bd6d15",
@@ -106,6 +146,30 @@
       "side": 1,
       "message": "Ah, thanks for suggesting another way.\nIf that\u0027s the preferred method, I\u0027d like to apply it instead of this annotation.",
       "parentUuid": "d25f0c41_33bd6d15",
+      "range": {
+        "startLine": 16,
+        "startChar": 49,
+        "endLine": 17,
+        "endChar": 47
+      },
+      "revId": "b09f2dc9fefd920613c886c65ace28f4bb271153",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d37c389a_13685396",
+        "filename": "rtc_base/system/no_destroy.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-12T10:59:47Z",
+      "side": 1,
+      "message": "I would prefer function-local static pointer over compiler-specific annotation.\nif you do not like this mutex use dynamic memory, I would recommend porting NoDestructor from chromium:\nhttps://chromium.googlesource.com/chromium/src/+/refs/heads/main/base/no_destructor.h",
+      "parentUuid": "9e5836ec_af8e408c",
       "range": {
         "startLine": 16,
         "startChar": 49,
