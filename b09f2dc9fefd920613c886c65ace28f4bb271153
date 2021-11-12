@@ -52,6 +52,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ff8bf26_ac3a1cbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-11-12T09:59:19Z",
+      "side": 1,
+      "message": "Looks good to me from C++ point of view. Danil, can you please take a look from functional point of view. I\u0027m not fully familiar with this part of the code.",
+      "revId": "b09f2dc9fefd920613c886c65ace28f4bb271153",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d25f0c41_33bd6d15",
