@@ -50,6 +50,24 @@
       "message": "This is the method that was deleted by the mock.",
       "revId": "2f9160779b67b0b277c9ef8d454763713e4f72b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8a71b83_8f94d457",
+        "filename": "api/video_codecs/video_encoder_factory.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-12T10:04:39Z",
+      "side": 1,
+      "message": "It\u0027s unused, but a few references downstream. So I\u0027d prefer to keep the default implementation for now, and purge later.",
+      "parentUuid": "1e7420dc_35dbc74e",
+      "revId": "2f9160779b67b0b277c9ef8d454763713e4f72b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
