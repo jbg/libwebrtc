@@ -33,6 +33,24 @@
       "message": "Is it possible to write a test for this behavior?\n",
       "revId": "caa9130e4eda0190b19ee98e154a450e724e23d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c781c76_fbe718d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14174
+      },
+      "writtenOn": "2021-11-14T09:44:20Z",
+      "side": 1,
+      "message": "modified unit test to cover new usage",
+      "parentUuid": "63b0aac8_887aab13",
+      "revId": "caa9130e4eda0190b19ee98e154a450e724e23d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
