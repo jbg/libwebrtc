@@ -50,6 +50,24 @@
       "message": "The other usage of IsTokenChar uses absl::c_all_of(value, IsTokenChar). Which is faster? (The other is more readable)",
       "revId": "71bddb3041eb3716dfa19a03c7efc96d40c062bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8922f5b3_fb7b7d5d",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2021-11-15T11:14:47Z",
+      "side": 1,
+      "message": "c_all_of works for containers such as string_view, not string or string\u0026 :-(",
+      "parentUuid": "dd32213f_3ce78bb7",
+      "revId": "71bddb3041eb3716dfa19a03c7efc96d40c062bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
