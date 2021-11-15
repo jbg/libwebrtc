@@ -93,6 +93,30 @@
       },
       "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cadb7ca_e84cc9f6",
+        "filename": "rtc_base/synchronization/sequence_checker_internal.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T08:02:29Z",
+      "side": 1,
+      "message": "Had to analyze this case by case to figure out what the change would do.\n\nThe four cases are:\n\nnull, null \u003d\u003e old compare thread, new compare thread, suggested compare thread\nnull, non-null \u003d\u003e old return false, new compare thread, suggested compare thread\nnon-null, null \u003d\u003e old return false, new compare thread, suggested return false\nnon-null, non-null \u003d\u003e old compare queue, new compare queue, suggested compare queue\n\nSo the suggested code change is a smaller change than my proposal. Changing.\n\n(I don\u0027t know if it makes sense to fail if current_queue is null, but that\u0027s not a case I\u0027m seeing. Let\u0027s see what happens.)",
+      "parentUuid": "d98ab9e0_7e3fb50a",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "992ddc8920828e64271235d64a1ffe3e9fda6cf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
