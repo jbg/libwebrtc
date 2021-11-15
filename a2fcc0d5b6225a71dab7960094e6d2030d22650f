@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8e7b33e_83c1072b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-15T15:28:17Z",
+      "side": 1,
+      "message": "I think concept of frame as represented by webrtc::RTPVideoHeader::is_first_packet_in_frame\nhas changed. It is not about spec.",
+      "parentUuid": "5ab6b527_2056a174",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "a2fcc0d5b6225a71dab7960094e6d2030d22650f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4266f1fd_a16b1864",
