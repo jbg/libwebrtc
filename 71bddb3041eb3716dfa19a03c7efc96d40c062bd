@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbf5b9d0_b5b8d449",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T11:49:15Z",
+      "side": 1,
+      "message": "Later CL - it should live somewhere that defines SDP related constructs",
+      "parentUuid": "78a6a0e8_4eb2dbd2",
+      "revId": "71bddb3041eb3716dfa19a03c7efc96d40c062bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd32213f_3ce78bb7",
         "filename": "pc/webrtc_sdp.cc",
         "patchSetId": 1
@@ -154,6 +172,24 @@
       "side": 1,
       "message": "had to be absl::string_view(*value) -- I feel like that should require a DCHECK for value before that line?",
       "parentUuid": "27821744_c961a06e",
+      "revId": "71bddb3041eb3716dfa19a03c7efc96d40c062bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d4f938b_11ba5f3a",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T11:49:15Z",
+      "side": 1,
+      "message": "OK, let\u0027s live with the string pointer so far. (by the new C++ guide text, it should be a reference not a pointer anyway.)",
+      "parentUuid": "9c672c4e_e8653657",
       "revId": "71bddb3041eb3716dfa19a03c7efc96d40c062bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
