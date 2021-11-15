@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9acac8ca_8603019a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-15T14:50:10Z",
+      "side": 1,
+      "message": "may be be more descriptive.\nThe current way of setting BOF is also correct, but uses different concept of what frame is in case of spatial scalability.\n(looking at the definition it seems in full svc all 3 spatial layers are treated as single frame, but in k-svc case those 3 spatial layers are treated as three frames, i.e. frame is something that concatenated together can be decoded at maximum available resolution)\n\nThe new way of setting BOF and EOF better aligns with DD and components that rely on new way of treating what frame is.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "a2fcc0d5b6225a71dab7960094e6d2030d22650f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42d0e234_f5b4799e",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3380,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-15T14:50:10Z",
+      "side": 1,
+      "message": "nit: may be new_picture (or new_temporal_unit)\nafaik in vp9 picture and super frame are not exactly the same concept.\ncomparing by rtp timestamp imply it is about picture, not super frame.\n\n(if 2nd clause would be replaced to check picture id, then new_picture would look more appropriate)",
+      "range": {
+        "startLine": 3380,
+        "startChar": 15,
+        "endLine": 3380,
+        "endChar": 30
+      },
+      "revId": "a2fcc0d5b6225a71dab7960094e6d2030d22650f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
