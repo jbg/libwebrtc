@@ -116,6 +116,24 @@
       "parentUuid": "d0efbe8e_421930b3",
       "revId": "d924035a14a2be9cb65f4c92604e4186d0efba2b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e5b85c_df671bcc",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-15T17:10:41Z",
+      "side": 1,
+      "message": "Unless you\u0027ve measured performance, I would prefer simpler\n  webrtc::Mutex\u0026 GetLoggingLock() {\n    static webrtc::Mutex\u0026 mutex \u003d *new webrtc::Mutex();\n    return mutex;\n  };\n  \nusually compiler can do better optimisation than developer.",
+      "parentUuid": "111acbee_a9c95386",
+      "revId": "d924035a14a2be9cb65f4c92604e4186d0efba2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

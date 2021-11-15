@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "877252a9_3765763b",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-15T17:10:41Z",
+      "side": 1,
+      "message": "I\u0027m sure you mean `if (mutex \u003d\u003d nullptr)`\ni.e. go to slow path when mutex isn\u0027t created yet.\n(or, to have less indentation:\n  if (mutex !\u003d nullptr) {\n    return *mutex;\n  }\n  // slow path...",
+      "revId": "2e463e73d0e82d9ef73539d4c3e561eb75a95803",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d65cce7_f5d399f6",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-15T17:10:41Z",
+      "side": 1,
+      "message": "nit: if you\u0027ve end up keeping this solution, then this line should be\n  auto new_mutex \u003d std::make_unique\u003cwebrtc::Mutex\u003e();\nhttps://abseil.io/tips/126",
+      "revId": "2e463e73d0e82d9ef73539d4c3e561eb75a95803",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07851e32_4dae360d",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-15T17:10:41Z",
+      "side": 1,
+      "message": "or `mutex \u003d expected` (or `return expected;`) to avoid extra load\nhttps://en.cppreference.com/w/cpp/atomic/atomic/compare_exchange#Parameters\n“Parameters\nexpected\t-\treference to the value expected to be found in the atomic object. Gets stored with the actual value of *this if the comparison fails.”\n\nThough this should rarely happen, so not that important.",
+      "revId": "2e463e73d0e82d9ef73539d4c3e561eb75a95803",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
