@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04e50d1b_c96eae77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T08:09:20Z",
+      "side": 1,
+      "message": "Thanks for adding the test!\n\nGiven that the change caused an existing test to change its behavior, I\u0027m a bit surprised that the CL passed the CQ dry run before this change.",
+      "revId": "324c51480c3ed628cc01109501db042cbe157a1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a67ce236_17faff33",
+        "filename": "rtc_base/rate_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T08:09:20Z",
+      "side": 1,
+      "message": "nit: frist -\u003e first",
+      "revId": "324c51480c3ed628cc01109501db042cbe157a1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88795c66_3751e7d5",
+        "filename": "rtc_base/rate_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T08:09:20Z",
+      "side": 1,
+      "message": "We\u0027re now missing a case where Rate is different from kExpectedBitrate.\nDo we need another test?",
+      "revId": "324c51480c3ed628cc01109501db042cbe157a1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae2baaa_f066aaff",
+        "filename": "rtc_base/rate_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T08:09:20Z",
+      "side": 1,
+      "message": "Does this mean \"This will cause an automatic reset of the window\"?\nIf so, it\u0027s clearer to write it like that.",
+      "revId": "324c51480c3ed628cc01109501db042cbe157a1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
