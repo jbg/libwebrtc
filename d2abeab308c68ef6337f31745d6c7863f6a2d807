@@ -34,6 +34,24 @@
       "parentUuid": "0c51c041_ed3df7d7",
       "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9163e34_cfea38fc",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T22:30:59Z",
+      "side": 0,
+      "message": "I don\u0027t understand.\n\nIs the goal of this CL to *permit* exit time destructors in general?\n\nThe goal of the flag is that people shouldn\u0027t add stuff that requires exit time destructors. The rest of the patch seems to work around needing an exit time destructor by keeping a reference through a raw pointer so that the object is never destroyed.\n\nI don\u0027t understand the connection between the CL and allowing exit time destructors in general.",
+      "parentUuid": "990478a4_c5ec3253",
+      "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
