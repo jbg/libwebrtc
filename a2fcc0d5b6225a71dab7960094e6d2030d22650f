@@ -24,6 +24,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4266f1fd_a16b1864",
+        "filename": "modules/rtp_rtcp/source/video_rtp_depacketizer_vp9.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2021-11-15T15:06:43Z",
+      "side": 1,
+      "message": "Won\u0027t that break a FrameBuffer? Especially the old one.\n\nThat is_first_packet_in_frame was used to determine if the current frame can be used as a first one for decoding, or something similar.\n\nNow it will be set even for undecodable higher spatial layers.\n\nI would like this part to be left intact.",
+      "revId": "a2fcc0d5b6225a71dab7960094e6d2030d22650f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "42d0e234_f5b4799e",
