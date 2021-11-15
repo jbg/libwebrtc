@@ -16,6 +16,40 @@
       "message": "maybe having a rtc_base/strings/tokenchar helper would avoid duplication? At least this is easier to grep than before.",
       "revId": "71bddb3041eb3716dfa19a03c7efc96d40c062bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8453600_e53b1509",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T11:12:37Z",
+      "side": 1,
+      "message": "bikeshedding :-)\n",
+      "revId": "71bddb3041eb3716dfa19a03c7efc96d40c062bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd32213f_3ce78bb7",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T11:12:37Z",
+      "side": 1,
+      "message": "The other usage of IsTokenChar uses absl::c_all_of(value, IsTokenChar). Which is faster? (The other is more readable)",
+      "revId": "71bddb3041eb3716dfa19a03c7efc96d40c062bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
