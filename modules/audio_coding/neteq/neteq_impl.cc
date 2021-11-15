@@ -851,6 +851,17 @@ int NetEqImpl::GetAudioInternal(AudioFrame* audio_frame,
           lifetime_stats.silent_concealed_samples,
       fs_hz_);
 
+  size_t num_output_samples_per_channel = output_size_samples_;
+  size_t num_output_samples = output_size_samples_ * sync_buffer_->Channels();
+  if (num_output_samples > AudioFrame::kMaxDataSizeSamples) {
+    RTC_LOG(LS_WARNING) << "Output array is too short. "
+                        << AudioFrame::kMaxDataSizeSamples << " < "
+                        << output_size_samples_ << " * "
+                        << sync_buffer_->Channels();
+    num_output_samples = AudioFrame::kMaxDataSizeSamples;
+    num_output_samples_per_channel =
+        AudioFrame::kMaxDataSizeSamples / sync_buffer_->Channels();
+  }
   // Check for muted state.
   if (enable_muted_state_ && expand_->Muted() && packet_buffer_->Empty()) {
     RTC_DCHECK_EQ(last_mode_, Mode::kExpand);
@@ -858,7 +869,7 @@ int NetEqImpl::GetAudioInternal(AudioFrame* audio_frame,
     RTC_DCHECK(audio_frame->muted());  // Reset() should mute the frame.
     playout_timestamp_ += static_cast<uint32_t>(output_size_samples_);
     audio_frame->sample_rate_hz_ = fs_hz_;
-    audio_frame->samples_per_channel_ = output_size_samples_;
+    audio_frame->samples_per_channel_ = num_output_samples_per_channel;
     audio_frame->timestamp_ =
         first_packet_
             ? 0
@@ -980,17 +991,6 @@ int NetEqImpl::GetAudioInternal(AudioFrame* audio_frame,
   sync_buffer_->PushBack(*algorithm_buffer_);
 
   // Extract data from `sync_buffer_` to `output`.
-  size_t num_output_samples_per_channel = output_size_samples_;
-  size_t num_output_samples = output_size_samples_ * sync_buffer_->Channels();
-  if (num_output_samples > AudioFrame::kMaxDataSizeSamples) {
-    RTC_LOG(LS_WARNING) << "Output array is too short. "
-                        << AudioFrame::kMaxDataSizeSamples << " < "
-                        << output_size_samples_ << " * "
-                        << sync_buffer_->Channels();
-    num_output_samples = AudioFrame::kMaxDataSizeSamples;
-    num_output_samples_per_channel =
-        AudioFrame::kMaxDataSizeSamples / sync_buffer_->Channels();
-  }
   sync_buffer_->GetNextAudioInterleaved(num_output_samples_per_channel,
                                         audio_frame);
   audio_frame->sample_rate_hz_ = fs_hz_;
