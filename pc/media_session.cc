@@ -1685,7 +1685,7 @@ std::unique_ptr<SessionDescription> MediaSessionDescriptionFactory::CreateOffer(
         }
         break;
       default:
-        RTC_NOTREACHED();
+        RTC_DCHECK_NOTREACHED();
     }
     ++msection_index;
   }
@@ -1861,7 +1861,7 @@ MediaSessionDescriptionFactory::CreateAnswer(
         }
         break;
       default:
-        RTC_NOTREACHED();
+        RTC_DCHECK_NOTREACHED();
     }
     ++msection_index;
     // See if we can add the newly generated m= section to the BUNDLE group in
@@ -2792,7 +2792,7 @@ bool MediaSessionDescriptionFactory::AddDataContentForAnswer(
     bool offer_uses_sctpmap = offer_data_description->use_sctpmap();
     data_answer->as_sctp()->set_use_sctpmap(offer_uses_sctpmap);
   } else {
-    RTC_NOTREACHED() << "Non-SCTP data content found";
+    RTC_DCHECK_NOTREACHED() << "Non-SCTP data content found";
   }
 
   bool secure = bundle_transport ? bundle_transport->description.secure()
