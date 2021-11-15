@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e7833e2_cb3c1bf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-11-15T09:35:37Z",
+      "side": 1,
+      "message": "Thank you for heads up. I\u0027ll take the second look then after Danil will LGTM",
+      "parentUuid": "8910c300_ebbe47ca",
+      "revId": "d924035a14a2be9cb65f4c92604e4186d0efba2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9ceeb48_72f973e1",
