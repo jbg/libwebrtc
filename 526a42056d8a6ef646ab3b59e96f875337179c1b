@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b8630ae_6067d3a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T15:54:08Z",
+      "side": 1,
+      "message": "I think there\u0027s a bug...\n",
+      "revId": "526a42056d8a6ef646ab3b59e96f875337179c1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8d9909_9c676286",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-15T15:54:08Z",
+      "side": 1,
+      "message": "This defines RTC_DCHECK_NOTREACHED twice, and leaves RTC_NOTREACHED undefined. Not the intention?",
+      "revId": "526a42056d8a6ef646ab3b59e96f875337179c1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
