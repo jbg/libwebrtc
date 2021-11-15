@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ab6b527_2056a174",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-15T15:23:23Z",
+      "side": 1,
+      "message": "Maybe the spec changed, but AFAICT this is the only correct way? From https://datatracker.ietf.org/doc/html/draft-ietf-payload-vp9-16#section-4.2:\n\n   B:  Start of a frame.  MUST be set to 1 if the first payload octet of\n       the RTP packet is the beginning of a new VP9 frame, and MUST NOT\n       be 1 otherwise.  Note that this frame might not be the first frame\n       of a picture.",
+      "parentUuid": "9acac8ca_8603019a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "a2fcc0d5b6225a71dab7960094e6d2030d22650f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4266f1fd_a16b1864",
@@ -43,6 +67,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e965271b_32386ca0",
+        "filename": "modules/rtp_rtcp/source/video_rtp_depacketizer_vp9.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-15T15:23:23Z",
+      "side": 1,
+      "message": "The equivalent logic already exists outside the depacketizer: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/rtp_video_stream_receiver2.cc;l\u003d506;drc\u003da43ffb32f2b1f3243e02c76678ce3fdb6f655a9e\n\nRemoved it as well.",
+      "parentUuid": "4266f1fd_a16b1864",
+      "revId": "a2fcc0d5b6225a71dab7960094e6d2030d22650f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "42d0e234_f5b4799e",
         "filename": "video/video_send_stream_tests.cc",
         "patchSetId": 1
@@ -54,6 +96,30 @@
       "writtenOn": "2021-11-15T14:50:10Z",
       "side": 1,
       "message": "nit: may be new_picture (or new_temporal_unit)\nafaik in vp9 picture and super frame are not exactly the same concept.\ncomparing by rtp timestamp imply it is about picture, not super frame.\n\n(if 2nd clause would be replaced to check picture id, then new_picture would look more appropriate)",
+      "range": {
+        "startLine": 3380,
+        "startChar": 15,
+        "endLine": 3380,
+        "endChar": 30
+      },
+      "revId": "a2fcc0d5b6225a71dab7960094e6d2030d22650f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0aae520_24681b31",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3380,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-15T15:23:23Z",
+      "side": 1,
+      "message": "Huh, I always thought that in VP9 RTP terminology a picture was equivalent to a superframe. Updated.",
+      "parentUuid": "42d0e234_f5b4799e",
       "range": {
         "startLine": 3380,
         "startChar": 15,
