@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "225f8f28_c75e7f0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-16T14:40:46Z",
+      "side": 1,
+      "message": "Can you add an unit test that tries to create an encoder / decoder with 25 channels, and verify that it fails as expected?\n\nCode looks fine, but when introducing a new way to error, we should have a test of the error path.",
+      "revId": "9b056f8cd040f824daf99fcf90a08b770307b84c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
