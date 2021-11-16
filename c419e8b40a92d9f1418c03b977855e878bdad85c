@@ -33,6 +33,42 @@
       "message": "NetEq change looks good to me, but maybe we should split it into a separate cl that fixes the oob issue separately from enforcing the maximum number of channels (which is also a reasonable change since having a larger number of channels actually doesn\u0027t work currently).",
       "revId": "c419e8b40a92d9f1418c03b977855e878bdad85c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1830b6d_7a81f703",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-11-16T14:33:13Z",
+      "side": 1,
+      "message": "The bots are happy now, so PTAL.\n\nWe don\u0027t seem to have a UMA metric to track the number of audio channels in WebRTC, but the Media.HardwareAudioChannelCount shows almost no hardware configurations with more than 9 channels. The reason I used 24 as an upper bound is that the wikipedia article on surround sound (https://en.wikipedia.org/wiki/Surround_sound) does not list any standardized configurations with more than 24 channels. Of course we can revisit this upper limit in the future if needed. \n\nAnother reason why I\u0027m fairly sure that not many people are using more than 24 channels, is because the WebRTC audio code has limitations that prevent things from working with a high number of channels. For example the AudioFrame object can contain no more than 7680 samples, which means that as the number of channels goes up, both the sampling rate and frame size need to be limited (otherwise things stop working). With 24 channels the best we can do is 10 ms frames @ 32 kHz. The use case for even more channels than 24 with the current limitations in the code seems very slim to me.",
+      "parentUuid": "79055672_4529a1c6",
+      "revId": "c419e8b40a92d9f1418c03b977855e878bdad85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36f6df58_f621e1d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-11-16T14:33:13Z",
+      "side": 1,
+      "message": "Good idea, I did split off that part of the CL to https://webrtc-review.googlesource.com/c/src/+/237808",
+      "parentUuid": "82d6be63_f3454ffd",
+      "revId": "c419e8b40a92d9f1418c03b977855e878bdad85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
