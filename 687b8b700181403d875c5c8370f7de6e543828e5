@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73befb9a_3616be45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-11-16T09:54:25Z",
+      "side": 1,
+      "message": "lgtm - one question for potential follow up",
+      "revId": "687b8b700181403d875c5c8370f7de6e543828e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34a10bd6_3c15d646",
+        "filename": "api/video_codecs/video_encoder_factory.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2021-11-16T09:54:25Z",
+      "side": 1,
+      "message": "can we delete the struct now?",
+      "revId": "687b8b700181403d875c5c8370f7de6e543828e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
