@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7041449_5ea8443a",
+        "filename": "DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-11-16T09:22:45Z",
+      "side": 1,
+      "message": "Can you try changing this commit sha to \"refs/changes/74/3281974/1\" in order to pick https://chromium-review.googlesource.com/c/chromium/src/+/3281974?\n\nAfter this, \"gclient sync\" locally (bots will do it automatically).",
+      "range": {
+        "startLine": 223,
+        "startChar": 78,
+        "endLine": 223,
+        "endChar": 118
+      },
+      "revId": "f89444ea1d2bb8e7a8a2b8af741118d4f51413be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
