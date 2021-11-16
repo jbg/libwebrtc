@@ -104,9 +104,9 @@ TEST(AudioDecoderFactoryTest, CreateL16) {
   rtc::scoped_refptr<AudioDecoderFactory> adf =
       CreateBuiltinAudioDecoderFactory();
   ASSERT_TRUE(adf);
-  // L16 supports any clock rate, any number of channels.
+  // L16 supports any clock rate and any number of channels up to 24.
   const int clockrates[] = {8000, 16000, 32000, 48000};
-  const int num_channels[] = {1, 2, 3, 4711};
+  const int num_channels[] = {1, 2, 3, 24};
   for (int clockrate : clockrates) {
     EXPECT_FALSE(adf->MakeAudioDecoder(SdpAudioFormat("l16", clockrate, 0),
                                        absl::nullopt));
