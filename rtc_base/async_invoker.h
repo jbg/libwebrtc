@@ -26,6 +26,8 @@
 
 namespace rtc {
 
+// DEPRECATED - do not use.
+//
 // Invokes function objects (aka functors) asynchronously on a Thread, and
 // owns the lifetime of calls (ie, when this object is destroyed, calls in
 // flight are cancelled). AsyncInvoker can optionally execute a user-specified
@@ -126,12 +128,12 @@ class DEPRECATED_AsyncInvoker : public MessageHandlerAutoCleanup {
   // behavior is desired, call Flush() before destroying this object.
   void Flush(Thread* thread, uint32_t id = MQID_ANY);
 
+ private:
   // Cancels any outstanding calls we own that are pending on any thread, and
   // which have not yet started to execute. This does not wait for any calls
   // that have already started executing to complete.
   void Clear();
 
- private:
   void OnMessage(Message* msg) override;
   void DoInvoke(const Location& posted_from,
                 Thread* thread,
@@ -153,10 +155,9 @@ class DEPRECATED_AsyncInvoker : public MessageHandlerAutoCleanup {
   // future.
   std::atomic<int> pending_invocations_;
 
-  // Reference counted so that if the AsyncInvoker destructor finishes before
-  // an AsyncClosure's destructor that's about to call
-  // "invocation_complete_->Set()", it's not dereferenced after being
-  // destroyed.
+  // Reference counted so that if the destructor finishes before an
+  // AsyncClosure's destructor that's about to call
+  // "invocation_complete_->Set()", it's not dereferenced after being destroyed.
   rtc::Ref<Event>::Ptr invocation_complete_;
 
   // This flag is used to ensure that if an application AsyncInvokes tasks that
@@ -168,9 +169,6 @@ class DEPRECATED_AsyncInvoker : public MessageHandlerAutoCleanup {
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DEPRECATED_AsyncInvoker);
 };
-
-using AsyncInvoker ABSL_DEPRECATED("bugs.webrtc.org/12339") =
-    DEPRECATED_AsyncInvoker;
 
 }  // namespace rtc
 
