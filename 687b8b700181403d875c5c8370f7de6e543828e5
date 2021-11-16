@@ -33,6 +33,24 @@
       "message": "can we delete the struct now?",
       "revId": "687b8b700181403d875c5c8370f7de6e543828e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d1c2a2_60dc7f73",
+        "filename": "api/video_codecs/video_encoder_factory.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-16T10:14:13Z",
+      "side": 1,
+      "message": "Yup, should be deleted together with the QueryVideoEncoder method (line 77 below), but I\u0027m leaving that for a followup.",
+      "parentUuid": "34a10bd6_3c15d646",
+      "revId": "687b8b700181403d875c5c8370f7de6e543828e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
