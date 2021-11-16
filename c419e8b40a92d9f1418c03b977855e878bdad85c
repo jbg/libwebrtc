@@ -16,6 +16,23 @@
       "message": "I\u0027ll look at the code once the bots are OK with it, but from the description: How sure are we that nobody uses \u003e 24 audio channels for something sensible?\nDo we have UMA showing the distribution of usage?\n\nThe webaudio team got surprised by people building synthesizers out of WebAudio components which resulted in hundreds of WebAudio objects.",
       "revId": "c419e8b40a92d9f1418c03b977855e878bdad85c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82d6be63_f3454ffd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-16T09:41:32Z",
+      "side": 1,
+      "message": "NetEq change looks good to me, but maybe we should split it into a separate cl that fixes the oob issue separately from enforcing the maximum number of channels (which is also a reasonable change since having a larger number of channels actually doesn\u0027t work currently).",
+      "revId": "c419e8b40a92d9f1418c03b977855e878bdad85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
