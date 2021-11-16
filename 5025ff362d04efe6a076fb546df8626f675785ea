@@ -39,6 +39,30 @@
       },
       "revId": "5025ff362d04efe6a076fb546df8626f675785ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adb146ae_e78fa154",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-11-16T12:30:15Z",
+      "side": 1,
+      "message": "Unfortunately we need to copy them. When these values are used below it will be after the operation has happened, which could change output_size_samples_ and/or the number of channels. This is what caused the test breakage on the other CL.",
+      "parentUuid": "2682eeb2_43b1c069",
+      "range": {
+        "startLine": 861,
+        "startChar": 0,
+        "endLine": 873,
+        "endChar": 0
+      },
+      "revId": "5025ff362d04efe6a076fb546df8626f675785ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
