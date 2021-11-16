@@ -36,6 +36,7 @@ class TransformableFrameInterface {
   virtual uint8_t GetPayloadType() const = 0;
   virtual uint32_t GetSsrc() const = 0;
   virtual uint32_t GetTimestamp() const = 0;
+  virtual bool IsMuted() const { return false; }
 
   enum class Direction {
     kUnknown,

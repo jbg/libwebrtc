@@ -208,6 +208,7 @@ class ChannelSend : public ChannelSendInterface,
   RmsLevel rms_level_ RTC_GUARDED_BY(encoder_queue_);
   bool input_mute_ RTC_GUARDED_BY(volume_settings_mutex_);
   bool previous_frame_muted_ RTC_GUARDED_BY(encoder_queue_);
+  bool frame_is_empty_ RTC_GUARDED_BY(encoder_queue_);
   // VoeRTP_RTCP
   // TODO(henrika): can today be accessed on the main thread and on the
   // task queue; hence potential race.
@@ -361,7 +362,7 @@ int32_t ChannelSend::SendData(AudioFrameType frameType,
     frame_transformer_delegate_->Transform(
         frameType, payloadType, rtp_timestamp, rtp_rtcp_->StartTimestamp(),
         payloadData, payloadSize, absolute_capture_timestamp_ms,
-        rtp_rtcp_->SSRC());
+        rtp_rtcp_->SSRC(), frame_is_empty_);
     return 0;
   }
   return SendRtpAudio(frameType, payloadType, rtp_timestamp, payload,
@@ -845,6 +846,7 @@ void ChannelSend::ProcessAndEncodeAudio(
           }
         }
         previous_frame_muted_ = is_muted;
+        frame_is_empty_ = audio_frame->empty();
 
         // Add 10ms of raw (PCM) audio data to the encoder @ 32kHz.
 

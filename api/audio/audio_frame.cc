@@ -137,4 +137,17 @@ const int16_t* AudioFrame::empty_data() {
   return &null_data[0];
 }
 
+bool AudioFrame::empty() const {
+  if (muted_) {
+    return true;
+  }
+  const size_t length = samples_per_channel_ * num_channels_;
+  for (size_t i = 0; i < length; ++i) {
+    if (data_[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 }  // namespace webrtc

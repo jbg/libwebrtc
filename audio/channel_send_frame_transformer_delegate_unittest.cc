@@ -101,7 +101,7 @@ TEST(ChannelSendFrameTransformerDelegateTest,
             callback->OnTransformedFrame(std::move(frame));
           });
   delegate->Transform(AudioFrameType::kEmptyFrame, 0, 0, 0, data, sizeof(data),
-                      0, 0);
+                      0, 0, false);
   channel_queue.WaitForPreviouslyPostedTasks();
 }
 

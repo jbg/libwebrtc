@@ -98,6 +98,9 @@ class AudioFrame {
   // Frame is muted by default.
   bool muted() const;
 
+  // Returns true if the frame only contains samples with value zero.
+  bool empty() const;
+
   size_t max_16bit_samples() const { return kMaxDataSizeSamples; }
   size_t samples_per_channel() const { return samples_per_channel_; }
   size_t num_channels() const { return num_channels_; }
