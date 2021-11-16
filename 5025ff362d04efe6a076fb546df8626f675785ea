@@ -16,6 +16,29 @@
       "message": "Hi Jakob, PTAL",
       "revId": "5025ff362d04efe6a076fb546df8626f675785ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2682eeb2_43b1c069",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-16T12:06:43Z",
+      "side": 1,
+      "message": "Does this need to be copied or can we move the lines below? I guess the sync buffer channels can potentially change after a decode?",
+      "range": {
+        "startLine": 861,
+        "startChar": 0,
+        "endLine": 873,
+        "endChar": 0
+      },
+      "revId": "5025ff362d04efe6a076fb546df8626f675785ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
