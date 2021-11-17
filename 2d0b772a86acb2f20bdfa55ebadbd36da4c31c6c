@@ -35,6 +35,42 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f54f4ca8_b4d918e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18224
+      },
+      "writtenOn": "2021-11-17T12:33:05Z",
+      "side": 1,
+      "message": "Thank you Harald, those definitions actually help a lot!\nI\u0027ll change the naming to be consistent.\n\nAnd to answer your question, there are no plans to expose this elsewhere.",
+      "parentUuid": "fc504a8b_81fa2c4a",
+      "revId": "2d0b772a86acb2f20bdfa55ebadbd36da4c31c6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aad83049_860105b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18224
+      },
+      "writtenOn": "2021-11-17T12:33:05Z",
+      "side": 1,
+      "message": "Hi Jakob, of course, apologies for the brief description. I don\u0027t have a design doc for this but the goal is to give upper layers of an app the ability to verify that media is allowed to be sent, in case there are inconsistencies in mute/call state between the app and webrtc.",
+      "parentUuid": "dc6d8da7_631899d7",
+      "revId": "2d0b772a86acb2f20bdfa55ebadbd36da4c31c6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb1f6569_a47ed3c3",
