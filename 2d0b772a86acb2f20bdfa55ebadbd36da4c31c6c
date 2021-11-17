@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc504a8b_81fa2c4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-17T10:30:33Z",
+      "side": 1,
+      "message": "I think you need to revisit the naming.\n\n\"Muted\" is a track state, explicitly set upstream of where you consume it.\n\"Silent\" is a level of audio - happens because of muting, or for other reasons.\n\"Empty\" is the absence of data - which is not what you are seeing here; there\u0027s plenty of data, it\u0027s just all silence.\n\nDo you eventually hope to surface this information elsewhere (like to JS)?\n\nHope that helps!\n\n\n",
+      "revId": "2d0b772a86acb2f20bdfa55ebadbd36da4c31c6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb1f6569_a47ed3c3",
+        "filename": "api/audio/audio_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-17T10:30:33Z",
+      "side": 1,
+      "message": "This is not a good usage of the word \"empty\".\nConsider renaming this function to \"silent\".",
+      "revId": "2d0b772a86acb2f20bdfa55ebadbd36da4c31c6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a1151e_77f7995f",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-17T10:30:33Z",
+      "side": 1,
+      "message": "I think you should call it \"silent\" here too.",
+      "revId": "2d0b772a86acb2f20bdfa55ebadbd36da4c31c6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb347ba1_7afd532b",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-17T10:30:33Z",
+      "side": 1,
+      "message": "This confuses \"muted\" (a state) with \"empty\" (a condition that may happen for multiple reasons, and should be called \"silent\"). Please stick to a consistent terminology.",
+      "revId": "2d0b772a86acb2f20bdfa55ebadbd36da4c31c6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
