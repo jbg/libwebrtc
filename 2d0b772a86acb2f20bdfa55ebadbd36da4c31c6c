@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc6d8da7_631899d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-17T10:34:13Z",
+      "side": 1,
+      "message": "Hi, could you share some context of what problem you are trying to solve here (like a design doc or something)? Sorry for the drive by review ;)",
+      "revId": "2d0b772a86acb2f20bdfa55ebadbd36da4c31c6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb1f6569_a47ed3c3",
