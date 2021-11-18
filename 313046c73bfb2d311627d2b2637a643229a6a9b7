@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc6222f4_1a66b215",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "because it is unconditional now, likely better just add this source file to the sources \u003d [...] section",
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e37311db_d368499a",
+        "filename": "modules/video_coding/codecs/av1/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "why split devs and absl_deps into two parts?",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 11
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a65f0fa_dbb6f4ac",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "static doesn\u0027t add anything here",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd716c70_e53735b0",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "decode_res is always 0 here (last set as return value from dav1d_send_data)",
+      "range": {
+        "startLine": 131,
+        "startChar": 11,
+        "endLine": 131,
+        "endChar": 21
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b94f8f4_23977c4e",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "what is this forward declaration? (in global namespace)\nAt the very least it deserves a comment.\nbut preferably, shouldn\u0027t be in the header file",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3151697_6d14ce75",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "to hide implementation better, may be this create should be the only function in the header file.\n\n.h\nnamespace webrtc {\nstd::unique_ptr\u003cVideoDecoder\u003e CreateDav1dDecoder();\n}\n\n.cc\nnamespace webrtc {\nnamespace {\nclass Dav1dDecoder : public VideoDecoder {..}\n}  // namespace\n\nstd::unique_ptr\u003cVideoDecoder\u003e CreateDav1dDecoder() {\n  return std::make_unique\u003cDav1dDecoder\u003e\n}\n}  // namespace webrtc",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 48
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cfc7317_10ba9537",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_av1.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "prefer constructor over SetUp \n\nhttps://github.com/google/googletest/blob/main/docs/faq.md#should-i-use-the-constructordestructor-of-the-test-fixture-or-setupteardown-ctorvssetup\n\n(or document why it has to be SetUp method, not the constructor)",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 12
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67c567a3_39f11e76",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_av1.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "may be parameter should be an enum, not a string.\nas an extra parameter to INSTANTIATE_TEST_SUITE_P macro you can add a function how to convert GetParam() into readable string",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 29
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "809c69fa_fca6a5c1",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_av1.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "why wrap it into unique_ptr?\nhttps://abseil.io/tips/123 How to Store Values\nhttps://abseil.io/tips/187 std::unique_ptr Must Be Moved",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3045175e_5c8f3885",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_av1.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "testing::Values\nor \nadd \nusing ::testing::Values and use it here without namespace\n\nhttp://go/totw/151\n“Is the namespace common and well-known? (such as std or absl)? Don\u0027t fully qualify.”",
+      "range": {
+        "startLine": 122,
+        "startChar": 25,
+        "endLine": 122,
+        "endChar": 42
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

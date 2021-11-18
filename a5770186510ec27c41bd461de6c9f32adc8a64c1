@@ -68,6 +68,30 @@
       },
       "revId": "a5770186510ec27c41bd461de6c9f32adc8a64c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1235454_7bca1887",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:09:18Z",
+      "side": 1,
+      "message": "The force new lines at logical places. \n\nhttp://go/clang-format#opt-out-for-specific-regions-of-code\n“insert empty comments at the end of the lines in this example to force line breaks”",
+      "parentUuid": "b8754236_0affe2ed",
+      "range": {
+        "startLine": 154,
+        "startChar": 63,
+        "endLine": 154,
+        "endChar": 65
+      },
+      "revId": "a5770186510ec27c41bd461de6c9f32adc8a64c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
