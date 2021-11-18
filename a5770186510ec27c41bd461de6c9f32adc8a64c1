@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e459dd98_84cddfea",
+        "filename": "modules/video_coding/codecs/av1/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-11-18T09:25:32Z",
+      "side": 1,
+      "message": "Does this need to be visible outside of WebRTC?",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "a5770186510ec27c41bd461de6c9f32adc8a64c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bac332da_91cd535c",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-11-18T09:25:32Z",
+      "side": 1,
+      "message": "Extract in a constant? (used below as well)",
+      "range": {
+        "startLine": 95,
+        "startChar": 29,
+        "endLine": 95,
+        "endChar": 37
+      },
+      "revId": "a5770186510ec27c41bd461de6c9f32adc8a64c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8754236_0affe2ed",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-11-18T09:25:32Z",
+      "side": 1,
+      "message": "Remove?",
+      "range": {
+        "startLine": 154,
+        "startChar": 63,
+        "endLine": 154,
+        "endChar": 65
+      },
+      "revId": "a5770186510ec27c41bd461de6c9f32adc8a64c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

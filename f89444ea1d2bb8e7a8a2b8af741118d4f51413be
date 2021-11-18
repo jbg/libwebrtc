@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e05d08cb_5ffc92a3",
+        "filename": "DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-11-18T09:25:32Z",
+      "side": 1,
+      "message": "Can you rebase and point //DEPS to the new commit it needs and trigger again CQ?",
+      "parentUuid": "429aa223_a586fe43",
+      "range": {
+        "startLine": 223,
+        "startChar": 78,
+        "endLine": 223,
+        "endChar": 118
+      },
+      "revId": "f89444ea1d2bb8e7a8a2b8af741118d4f51413be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff4b940a_eef83087",
         "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
         "patchSetId": 4
