@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d9d434_035a1062",
+        "filename": "media/engine/internal_decoder_factory.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T12:52:00Z",
+      "side": 1,
+      "message": "This string is used twice in this file, may be move it into a constant to be sure spelling is the same.",
+      "range": {
+        "startLine": 37,
+        "startChar": 29,
+        "endLine": 37,
+        "endChar": 50
+      },
+      "revId": "1ae595d35f561c7d14ad9d9fac7532c82ac234ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dcd88c8_524932f4",
+        "filename": "media/engine/internal_decoder_factory.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T12:52:00Z",
+      "side": 1,
+      "message": "why swap checks here?\nthe idea was to check \u0027more constant\u0027 condition first, not a very strong reason,\nbut do you have a reason to change the order of the checks?",
+      "range": {
+        "startLine": 80,
+        "startChar": 65,
+        "endLine": 80,
+        "endChar": 68
+      },
+      "revId": "1ae595d35f561c7d14ad9d9fac7532c82ac234ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76a04d20_b998461f",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T12:52:00Z",
+      "side": 1,
+      "message": "override",
+      "range": {
+        "startLine": 33,
+        "startChar": 16,
+        "endLine": 33,
+        "endChar": 18
+      },
+      "revId": "1ae595d35f561c7d14ad9d9fac7532c82ac234ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a29306e_1f34fbe4",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T12:52:00Z",
+      "side": 1,
+      "message": "constant and function in between classes doesn\u0027t look consistent.\n\nUnless there is some stronger reason, I prefer same order as proposed for classes\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order\n\n(i.e. I\u0027m suggesting to move the constant and function just below ScopedDav* classes)",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "revId": "1ae595d35f561c7d14ad9d9fac7532c82ac234ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f46f9b8_60cdb007",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T12:52:00Z",
+      "side": 1,
+      "message": "data_{0} means \"initialise first member of that struct to 0, and use value initialization for other members\"\nI guess you mean here is data_(): \"use value initialization for all members (1st one is not exceptional)\n\nor\n  public:\n   ScopedDav1dData() \u003d default; // or do not mention it at all\n  private:\n   Datv1dData data_ \u003d {};\n   \nhttps://en.cppreference.com/w/cpp/language/aggregate_initialization#Explanation\n\n“If the number of initializer clauses is less than the number of members or initializer list is completely empty, the remaining members are value-initialized.”\n\n(because of advice\nhttps://abseil.io/tips/88\n“Use {} initialization without the \u003d only if the above options don’t compile”\nI tried to understand why you use {} here, not (0)\")",
+      "range": {
+        "startLine": 58,
+        "startChar": 22,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "1ae595d35f561c7d14ad9d9fac7532c82ac234ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb501a8_a82f8e68",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T12:52:00Z",
+      "side": 1,
+      "message": "or\n  if (int decode_res \u003d dav1d_send_data(context_, \u0026dav1d_data)) {\n    ...\n  }\n  \nto avoid leaking decode_res variable outside where it shouldn\u0027t be used.\n(downside is that `decode_res !\u003d 0` comparison becomes implicit, which is harder to read for integer error codes)",
+      "range": {
+        "startLine": 136,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 24
+      },
+      "revId": "1ae595d35f561c7d14ad9d9fac7532c82ac234ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64198071_1f81f85b",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T12:52:00Z",
+      "side": 1,
+      "message": "should be there some kind a check that encoded_image resolution is same as dav1d_picture resolution?",
+      "range": {
+        "startLine": 161,
+        "startChar": 36,
+        "endLine": 161,
+        "endChar": 72
+      },
+      "revId": "1ae595d35f561c7d14ad9d9fac7532c82ac234ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15ae04f4_15fea06a",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_av1.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T12:52:00Z",
+      "side": 1,
+      "message": "may be explain with a comment why Dav1dDecoder field trial added conditionally on libaom decoder support",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 3
+      },
+      "revId": "1ae595d35f561c7d14ad9d9fac7532c82ac234ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
