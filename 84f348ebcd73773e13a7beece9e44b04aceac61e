@@ -16,6 +16,24 @@
       "message": "LGTM after fixing the linter issues.",
       "revId": "84f348ebcd73773e13a7beece9e44b04aceac61e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cee19e8b_abe3d8d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2021-11-18T15:13:46Z",
+      "side": 1,
+      "message": "Yes, I\u0027m working on the linter issue on another CL.",
+      "parentUuid": "97b9d24e_7225ec50",
+      "revId": "84f348ebcd73773e13a7beece9e44b04aceac61e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
