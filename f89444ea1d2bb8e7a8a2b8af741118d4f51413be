@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "429aa223_a586fe43",
+        "filename": "DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T09:20:13Z",
+      "side": 1,
+      "message": "That CL has now been merged",
+      "parentUuid": "b7041449_5ea8443a",
+      "range": {
+        "startLine": 223,
+        "startChar": 78,
+        "endLine": 223,
+        "endChar": 118
+      },
+      "revId": "f89444ea1d2bb8e7a8a2b8af741118d4f51413be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff4b940a_eef83087",
