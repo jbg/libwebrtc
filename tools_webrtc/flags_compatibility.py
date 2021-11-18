@@ -17,9 +17,15 @@ import sys
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--isolated-script-test-perf-output')
+    parser.add_argument('--dump_json_test_results')
     args, unrecognized_args = parser.parse_known_args()
 
     test_command = _ForcePythonInterpreter(unrecognized_args)
+    if args.dump_json_test_results:
+        test_command += [
+            '--gtest_output=json:' +
+            args.dump_json_test_results
+        ]
     if args.isolated_script_test_perf_output:
         test_command += [
             '--isolated_script_test_perf_output=' +
