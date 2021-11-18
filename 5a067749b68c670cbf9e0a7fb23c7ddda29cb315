@@ -16,6 +16,29 @@
       "message": "Now we just wait for https://chromium-review.googlesource.com/c/chromium/src/+/3289275 to land and everything \"should work\".",
       "revId": "5a067749b68c670cbf9e0a7fb23c7ddda29cb315",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b41eebe_910382a6",
+        "filename": "media/engine/internal_decoder_factory.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T16:24:09Z",
+      "side": 1,
+      "message": "May be slightly differently code structre would explain better what\u0027s going on with av1 here:\nif (format.name eq \"av1\") {\n  if (field_tral(kDav)) {\n    // prefer dav1d decoder over libaom why?\n    return CreateDav1dDecoder();\n  }\n  if (kIsLibaomAv1DecoderSupported) {\n    return CreateLibaomAv1Decoder();\n  }\n  // No av1 decoder available.\n  return nullptr;\n}",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 3
+      },
+      "revId": "5a067749b68c670cbf9e0a7fb23c7ddda29cb315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
