@@ -133,6 +133,7 @@ def ParseArgs(argv=None):
     # These options will be passed unchanged to gtest-parallel.
     gtest_group.AddArgument('-d', '--output_dir')
     gtest_group.AddArgument('-r', '--repeat')
+    gtest_group.AddArgument('--dump_json_test_results')
     gtest_group.AddArgument('--retry_failed')
     gtest_group.AddArgument('--gtest_color')
     gtest_group.AddArgument('--gtest_filter')
