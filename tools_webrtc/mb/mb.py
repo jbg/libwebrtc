@@ -670,7 +670,7 @@ class MetaBuildWrapper(object):
         gn_args_path = self.ToAbsPath(build_dir, 'args.gn')
         self.WriteFile(gn_args_path, gn_args, force_verbose=True)
 
-        swarming_targets = []
+        swarming_targets = set()
         if getattr(self.args, 'swarming_targets_file', None):
             # We need GN to generate the list of runtime dependencies for
             # the compile targets listed (one per line) in the file so
@@ -947,10 +947,12 @@ class MetaBuildWrapper(object):
                 ]
                 sep = '\\' if self.platform == 'win32' else '/'
                 output_dir = '${ISOLATED_OUTDIR}' + sep + 'test_logs'
+                test_results = '${ISOLATED_OUTDIR}' + sep + 'gtest_output.json'
                 timeout = isolate_map[target].get('timeout', 900)
                 cmdline += [
                     '../../tools_webrtc/gtest-parallel-wrapper.py',
                     '--output_dir=%s' % output_dir,
+                    '--dump_json_test_results=%s' % test_results,
                     '--gtest_color=no',
                     # We tell gtest-parallel to interrupt the test after 900
                     # seconds, so it can exit cleanly and report results,
