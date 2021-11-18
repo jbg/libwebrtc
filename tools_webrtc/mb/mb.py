@@ -39,6 +39,13 @@ sys.path = [os.path.join(SRC_DIR, 'build')] + sys.path
 import gn_helpers
 
 
+def DefaultVals():
+    return {
+        'args_file': '',
+        'cros_passthrough': False,
+        'gn_args': '',
+    }
+
 def main(args):
     mbw = MetaBuildWrapper()
     return mbw.Main(args)
@@ -508,7 +515,7 @@ class MetaBuildWrapper(object):
     def GetConfig(self):
         build_dir = self.args.path[0]
 
-        vals = self.DefaultVals()
+        vals = DefaultVals()
         if self.args.builder or self.args.builder_group or self.args.config:
             vals = self.Lookup()
             # Re-run gn gen in order to ensure the config is consistent with
@@ -547,7 +554,7 @@ class MetaBuildWrapper(object):
         if config.startswith('//'):
             if not self.Exists(self.ToAbsPath(config)):
                 raise MBErr('args file "%s" not found' % config)
-            vals = self.DefaultVals()
+            vals = DefaultVals()
             vals['args_file'] = config
         else:
             if not config in self.configs:
@@ -624,18 +631,11 @@ class MetaBuildWrapper(object):
 
     def FlattenConfig(self, config):
         mixins = self.configs[config]
-        vals = self.DefaultVals()
+        vals = DefaultVals()
 
         visited = []
         self.FlattenMixins(mixins, vals, visited)
         return vals
-
-    def DefaultVals(self):
-        return {
-            'args_file': '',
-            'cros_passthrough': False,
-            'gn_args': '',
-        }
 
     def FlattenMixins(self, mixins, vals, visited):
         for m in mixins:
@@ -670,7 +670,7 @@ class MetaBuildWrapper(object):
         gn_args_path = self.ToAbsPath(build_dir, 'args.gn')
         self.WriteFile(gn_args_path, gn_args, force_verbose=True)
 
-        swarming_targets = []
+        swarming_targets = set()
         if getattr(self.args, 'swarming_targets_file', None):
             # We need GN to generate the list of runtime dependencies for
             # the compile targets listed (one per line) in the file so
@@ -947,10 +947,12 @@ class MetaBuildWrapper(object):
                 ]
                 sep = '\\' if self.platform == 'win32' else '/'
                 output_dir = '${ISOLATED_OUTDIR}' + sep + 'test_logs'
+                test_results = '${ISOLATED_OUTDIR}' + sep + 'gtest_output.json'
                 timeout = isolate_map[target].get('timeout', 900)
                 cmdline += [
                     '../../tools_webrtc/gtest-parallel-wrapper.py',
                     '--output_dir=%s' % output_dir,
+                    '--dump_json_test_results=%s' % test_results,
                     '--gtest_color=no',
                     # We tell gtest-parallel to interrupt the test after 900
                     # seconds, so it can exit cleanly and report results,
