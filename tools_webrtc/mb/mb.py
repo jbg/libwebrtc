@@ -951,6 +951,7 @@ class MetaBuildWrapper(object):
                 cmdline += [
                     '../../tools_webrtc/gtest-parallel-wrapper.py',
                     '--output_dir=%s' % output_dir,
+                    '--dump_json_test_results=${ISOLATED_OUTDIR}/gtest_output.json',
                     '--gtest_color=no',
                     # We tell gtest-parallel to interrupt the test after 900
                     # seconds, so it can exit cleanly and report results,
