@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7671537_1075a0b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T15:56:51Z",
+      "side": 1,
+      "message": "Now we just wait for https://chromium-review.googlesource.com/c/chromium/src/+/3289275 to land and everything \"should work\".",
+      "revId": "5a067749b68c670cbf9e0a7fb23c7ddda29cb315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
