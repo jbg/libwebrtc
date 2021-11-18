@@ -18,6 +18,8 @@
 #include "media/engine/internal_decoder_factory.h"
 #include "media/engine/internal_encoder_factory.h"
 #include "media/engine/simulcast_encoder_adapter.h"
+#include "modules/video_coding/codecs/av1/libaom_av1_decoder.h"
+#include "test/field_trial.h"
 #include "test/gtest.h"
 #include "test/testsupport/file_utils.h"
 
@@ -38,7 +40,27 @@ VideoCodecTestFixture::Config CreateConfig(std::string filename) {
   return config;
 }
 
-TEST(VideoCodecTestLibaom, HighBitrateAV1) {
+class VideoCodecTestAv1 : public ::testing::TestWithParam<std::string> {
+ protected:
+  void SetUp() override {
+    if (GetParam() == "dav1d") {
+      scoped_field_trial_ =
+          std::make_unique<ScopedFieldTrials>("WebRTC-Dav1dDecoder/Enabled/");
+    } else if (GetParam() == "libaom") {
+      if (!kIsLibaomAv1DecoderSupported) {
+        GTEST_SKIP() << "Not built with libaom decoder, skipping test";
+      }
+    } else {
+      GTEST_FAIL() << GetParam()
+                   << " is not a known AV1 decoder implementation.";
+    }
+  }
+
+ private:
+  std::unique_ptr<ScopedFieldTrials> scoped_field_trial_;
+};
+
+TEST_P(VideoCodecTestAv1, HighBitrateAV1) {
   auto config = CreateConfig("foreman_cif");
   config.SetCodecSettings(cricket::kAv1CodecName, 1, 1, 1, false, true, true,
                           kCifWidth, kCifHeight);
@@ -56,7 +78,7 @@ TEST(VideoCodecTestLibaom, HighBitrateAV1) {
   fixture->RunTest(rate_profiles, &rc_thresholds, &quality_thresholds, nullptr);
 }
 
-TEST(VideoCodecTestLibaom, VeryLowBitrateAV1) {
+TEST_P(VideoCodecTestAv1, VeryLowBitrateAV1) {
   auto config = CreateConfig("foreman_cif");
   config.SetCodecSettings(cricket::kAv1CodecName, 1, 1, 1, false, true, true,
                           kCifWidth, kCifHeight);
@@ -76,7 +98,7 @@ TEST(VideoCodecTestLibaom, VeryLowBitrateAV1) {
 #if !defined(WEBRTC_ANDROID)
 constexpr int kHdWidth = 1280;
 constexpr int kHdHeight = 720;
-TEST(VideoCodecTestLibaom, HdAV1) {
+TEST_P(VideoCodecTestAv1, HdAV1) {
   auto config = CreateConfig("ConferenceMotion_1280_720_50");
   config.SetCodecSettings(cricket::kAv1CodecName, 1, 1, 1, false, true, true,
                           kHdWidth, kHdHeight);
@@ -94,6 +116,10 @@ TEST(VideoCodecTestLibaom, HdAV1) {
   fixture->RunTest(rate_profiles, &rc_thresholds, &quality_thresholds, nullptr);
 }
 #endif
+
+INSTANTIATE_TEST_SUITE_P(Decoder,
+                         VideoCodecTestAv1,
+                         ::testing::Values("dav1d", "libaom"));
 
 }  // namespace
 }  // namespace test
