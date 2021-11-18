@@ -90,6 +90,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "338bbae5_789f2124",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-11-18T10:32:47Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c809ca35_a2b24604",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-11-18T10:32:47Z",
+      "side": 1,
+      "message": "Would it be better to align this with libaom decoder?: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/codecs/av1/libaom_av1_decoder.cc;drc\u003d53d4be223b92aedd3fa9f668bed0cd203a38450d;l\u003d77\n\nconfig.threads \u003d static_cast\u003cunsigned int\u003e(settings.number_of_cores());",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 70,
+        "endChar": 56
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd716c70_e53735b0",
         "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
         "patchSetId": 9
@@ -221,6 +267,29 @@
         "startChar": 2,
         "endLine": 60,
         "endChar": 17
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a13706ae_513737d8",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_av1.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-11-18T10:32:47Z",
+      "side": 1,
+      "message": "Should \"v\" be lowcase?\n\nHighBitrateAv1",
+      "range": {
+        "startLine": 63,
+        "startChar": 38,
+        "endLine": 63,
+        "endChar": 39
       },
       "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
