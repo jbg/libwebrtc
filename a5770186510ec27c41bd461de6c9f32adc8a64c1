@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe2f4c61_919804fc",
+        "filename": "modules/video_coding/codecs/av1/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "No, just me mindlessly copy pasting stuff, fixed.",
+      "parentUuid": "e459dd98_84cddfea",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "a5770186510ec27c41bd461de6c9f32adc8a64c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bac332da_91cd535c",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-18T09:25:32Z",
       "side": 1,
       "message": "Extract in a constant? (used below as well)",
+      "range": {
+        "startLine": 95,
+        "startChar": 29,
+        "endLine": 95,
+        "endChar": 37
+      },
+      "revId": "a5770186510ec27c41bd461de6c9f32adc8a64c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f30b7a2_2d1a1cb3",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bac332da_91cd535c",
       "range": {
         "startLine": 95,
         "startChar": 29,
@@ -83,6 +131,30 @@
       "writtenOn": "2021-11-18T10:09:18Z",
       "side": 1,
       "message": "The force new lines at logical places. \n\nhttp://go/clang-format#opt-out-for-specific-regions-of-code\n“insert empty comments at the end of the lines in this example to force line breaks”",
+      "parentUuid": "b8754236_0affe2ed",
+      "range": {
+        "startLine": 154,
+        "startChar": 63,
+        "endLine": 154,
+        "endChar": 65
+      },
+      "revId": "a5770186510ec27c41bd461de6c9f32adc8a64c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "621fe3c0_af590438",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Yepp, just tweaking the formatting a bit.",
       "parentUuid": "b8754236_0affe2ed",
       "range": {
         "startLine": 154,

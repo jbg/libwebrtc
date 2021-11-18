@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2679304a_9feee1ca",
+        "filename": "DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Already synced with chrome",
+      "parentUuid": "e05d08cb_5ffc92a3",
+      "range": {
+        "startLine": 223,
+        "startChar": 78,
+        "endLine": 223,
+        "endChar": 118
+      },
+      "revId": "f89444ea1d2bb8e7a8a2b8af741118d4f51413be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff4b940a_eef83087",

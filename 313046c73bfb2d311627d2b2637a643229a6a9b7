@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f78f3f30_202657a4",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc6222f4_1a66b215",
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e37311db_d368499a",
@@ -113,6 +131,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d45e93_a76ba055",
+        "filename": "modules/video_coding/codecs/av1/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "e99455a5_6f08bd18",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 11
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a65f0fa_dbb6f4ac",
@@ -126,6 +168,30 @@
       "writtenOn": "2021-11-18T10:09:18Z",
       "side": 1,
       "message": "static doesn\u0027t add anything here",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d83e684f_92da4987",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a65f0fa_dbb6f4ac",
       "range": {
         "startLine": 28,
         "startChar": 0,
@@ -159,6 +225,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "465d6e84_616d3f2d",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "338bbae5_789f2124",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c809ca35_a2b24604",
@@ -172,6 +262,30 @@
       "writtenOn": "2021-11-18T10:32:47Z",
       "side": 1,
       "message": "Would it be better to align this with libaom decoder?: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/codecs/av1/libaom_av1_decoder.cc;drc\u003d53d4be223b92aedd3fa9f668bed0cd203a38450d;l\u003d77\n\nconfig.threads \u003d static_cast\u003cunsigned int\u003e(settings.number_of_cores());",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 70,
+        "endChar": 56
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24fcce6a_e15faec1",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "We can do tuning in a followup CL. I suggest we run tests and try stuff, when we figure out how we want things to work we can update the decoder wrapper.",
+      "parentUuid": "c809ca35_a2b24604",
       "range": {
         "startLine": 70,
         "startChar": 2,
@@ -205,6 +319,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1750c8f2_e19e277c",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Oops, updated with `get_picture_res` instead.",
+      "parentUuid": "fd716c70_e53735b0",
+      "range": {
+        "startLine": 131,
+        "startChar": 11,
+        "endLine": 131,
+        "endChar": 21
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b94f8f4_23977c4e",
@@ -218,6 +356,30 @@
       "writtenOn": "2021-11-18T10:09:18Z",
       "side": 1,
       "message": "what is this forward declaration? (in global namespace)\nAt the very least it deserves a comment.\nbut preferably, shouldn\u0027t be in the header file",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "518d949f_e8d03919",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "I hid the implementation.",
+      "parentUuid": "9b94f8f4_23977c4e",
       "range": {
         "startLine": 19,
         "startChar": 0,
@@ -251,6 +413,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d061113f_92fb0b57",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3151697_6d14ce75",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 48
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cfc7317_10ba9537",
@@ -264,6 +450,30 @@
       "writtenOn": "2021-11-18T10:09:18Z",
       "side": 1,
       "message": "prefer constructor over SetUp \n\nhttps://github.com/google/googletest/blob/main/docs/faq.md#should-i-use-the-constructordestructor-of-the-test-fixture-or-setupteardown-ctorvssetup\n\n(or document why it has to be SetUp method, not the constructor)",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 12
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6a6b928_6fb7255d",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_av1.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "GTEST_SKIP() will return void, so I can\u0027t call it in the constructor.\n\nFound a better way to conditionally skip the test.",
+      "parentUuid": "7cfc7317_10ba9537",
       "range": {
         "startLine": 45,
         "startChar": 7,
@@ -320,6 +530,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a73db72_125fa763",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_av1.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Don\u0027t need a unique_ptr or optional now.",
+      "parentUuid": "809c69fa_fca6a5c1",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a13706ae_513737d8",
@@ -343,6 +577,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c39bb177_e2d4649a",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_av1.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Removed \"AV1\" all together since these are all AV1 tests.",
+      "parentUuid": "a13706ae_513737d8",
+      "range": {
+        "startLine": 63,
+        "startChar": 38,
+        "endLine": 63,
+        "endChar": 39
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3045175e_5c8f3885",
@@ -356,6 +614,30 @@
       "writtenOn": "2021-11-18T10:09:18Z",
       "side": 1,
       "message": "testing::Values\nor \nadd \nusing ::testing::Values and use it here without namespace\n\nhttp://go/totw/151\n“Is the namespace common and well-known? (such as std or absl)? Don\u0027t fully qualify.”",
+      "range": {
+        "startLine": 122,
+        "startChar": 25,
+        "endLine": 122,
+        "endChar": 42
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46d42075_194ec172",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_av1.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-18T12:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3045175e_5c8f3885",
       "range": {
         "startLine": 122,
         "startChar": 25,
