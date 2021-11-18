@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1e68793_96c1167b",
+        "filename": "modules/video_coding/codecs/av1/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T10:49:38Z",
+      "side": 1,
+      "message": "I mean why there is deps, then deps +\u003d\n(and same question for absl_deps: why there is absl_deps, then absl_deps +\u003d)\ninstead of single section of each.",
+      "parentUuid": "e99455a5_6f08bd18",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 11
+      },
+      "revId": "313046c73bfb2d311627d2b2637a643229a6a9b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a65f0fa_dbb6f4ac",
         "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
         "patchSetId": 9
