@@ -259,6 +259,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "999486c8_8ac3d54b",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-18T16:15:36Z",
+      "side": 1,
+      "message": "I do not think `picture_ \u003d {0};` do what you think it does. (as I\u0027ve already quoted from the cpprefernce)\nIt doesn\u0027t mean memset(\u0026picture_, 0, sizeof(picture_));\nIt doesn\u0027t mean for (each member : picture_) { picture_.member \u003d 0; }\n\nit mean\npicture_.first_member \u003d 0; (i.e. picture_.seq_hdr \u003d 0; which, btw, is against style guidance telling that pointer should be initialised with nullptr rather than int{0})\nand for the rest of the members do value intialization:\npicture_.other_member \u003d decltype(other_member)();\n(which yes, mean initialise to 0 or nullptr for most of the POD types)\n\nDave1dData data_ \u003d {};\nis imho what you actually want, i.e. do value initialization for all members.\n\nIn this case result would be the same.\n\nbut if struct would be different, e.g. \n  struct Layering {\n    int num_spatial_layers \u003d 1;\n    int num_temporal_layers \u003d 1;\n    int unset_value;\n  };\n\nthen\nLayering l \u003d {}; would set it to {1, 1, 0},\nbut\nLayering l \u003d {0}; would set it to {0, 1, 0}\nand \nLayering l; would set it to {1, 1, uninitialized}",
+      "parentUuid": "36e5a14f_ff1ff32f",
+      "range": {
+        "startLine": 58,
+        "startChar": 22,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "1ae595d35f561c7d14ad9d9fac7532c82ac234ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1bb501a8_a82f8e68",
