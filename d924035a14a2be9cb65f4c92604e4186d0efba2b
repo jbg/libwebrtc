@@ -134,6 +134,24 @@
       "parentUuid": "111acbee_a9c95386",
       "revId": "d924035a14a2be9cb65f4c92604e4186d0efba2b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61443771_18747c7f",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-19T10:06:24Z",
+      "side": 1,
+      "message": "You\u0027re right. I changed this to keep this small and simple.",
+      "parentUuid": "a1e5b85c_df671bcc",
+      "revId": "d924035a14a2be9cb65f4c92604e4186d0efba2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

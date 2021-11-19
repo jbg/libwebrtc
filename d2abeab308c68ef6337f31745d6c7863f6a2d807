@@ -52,6 +52,24 @@
       "parentUuid": "990478a4_c5ec3253",
       "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c6d711b_ab1de083",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-19T10:06:24Z",
+      "side": 0,
+      "message": "From what I understand, we should avoid exit-time destructors unless there is a very good reason.\n\nThe use of the two global variables I\u0027ve changed isn\u0027t easy to replace, so I made them not to call the destructor on exit.\n\nThe description of this CL was a bit misleading, so I changed it once more.",
+      "parentUuid": "f9163e34_cfea38fc",
+      "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
