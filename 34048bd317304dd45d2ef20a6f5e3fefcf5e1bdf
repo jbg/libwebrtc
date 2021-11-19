@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb1a2bb3_0277a039",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-19T08:33:12Z",
+      "side": 1,
+      "message": "As I understand it, the posts are moved from VideoStreamEncoder to WebrtcVideoEngine, with no real work moving between threads. Commit message could be a bit more explicit about that.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 59
+      },
+      "revId": "34048bd317304dd45d2ef20a6f5e3fefcf5e1bdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4242545e_3be946ed",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-19T08:33:12Z",
+      "side": 1,
+      "message": "It would be more specific if this check (and corresponding GUARDED_BY annotations) referred to worker_thread. But perhaps best done in a separate cl.",
+      "range": {
+        "startLine": 876,
+        "startChar": 0,
+        "endLine": 876,
+        "endChar": 38
+      },
+      "revId": "34048bd317304dd45d2ef20a6f5e3fefcf5e1bdf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
