@@ -285,6 +285,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "06fa7553_a8aed556",
+        "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2021-11-19T09:08:28Z",
+      "side": 1,
+      "message": "I misread your first comment, fixed now, thanks",
+      "parentUuid": "999486c8_8ac3d54b",
+      "range": {
+        "startLine": 58,
+        "startChar": 22,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "1ae595d35f561c7d14ad9d9fac7532c82ac234ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1bb501a8_a82f8e68",
         "filename": "modules/video_coding/codecs/av1/dav1d_decoder.cc",
         "patchSetId": 10
