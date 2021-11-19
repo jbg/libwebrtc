@@ -88,6 +88,24 @@
       "parentUuid": "5c6d711b_ab1de083",
       "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1932258a_c1bf0569",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-19T12:23:45Z",
+      "side": 0,
+      "message": "exit time destructors are not permitted.\n-Wno-exit-time-destructors\ndisables warning about it, i.e. allows to use exit time destructors.\n\n(opposit to -Wexit-time-destructors:\nhttps://clang.llvm.org/docs/DiagnosticsReference.html#wexit-time-destructors )\n\nThus removing this extra config removes exception for 2 targets in this change to have exit time destructors.",
+      "parentUuid": "a72df6a1_f36b41b1",
+      "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
