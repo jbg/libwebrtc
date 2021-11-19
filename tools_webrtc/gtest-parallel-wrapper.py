@@ -144,8 +144,8 @@ def ParseArgs(argv=None):
     # Syntax 'Nx' will be interpreted as N * number of cpu cores.
     gtest_group.AddArgument('-w', '--workers', type=_ParseWorkersOption)
 
-    # Needed when the test wants to store test artifacts, because it doesn't know
-    # what will be the swarming output dir.
+    # Needed when the test wants to store test artifacts, because it doesn't
+    # know what will be the swarming output dir.
     parser.add_argument('--store-test-artifacts', action='store_true')
 
     # No-sandbox is a Chromium-specific flag, ignore it.
