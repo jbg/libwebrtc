@@ -106,6 +106,24 @@
       "parentUuid": "a72df6a1_f36b41b1",
       "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66e0a00c_4d9d4a45",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-19T13:00:08Z",
+      "side": 0,
+      "message": "Thank you Danil! I was reading the flag wrong. This is good - approving!",
+      "parentUuid": "1932258a_c1bf0569",
+      "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
