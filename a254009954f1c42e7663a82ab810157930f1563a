@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8a0b8ace_6cca4fbf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-19T13:21:42Z",
+      "side": 1,
+      "message": "The answer is yes as the destructor is not called at exit time.",
+      "parentUuid": "3ab60dd8_afe1cf9c",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 34
+      },
+      "revId": "a254009954f1c42e7663a82ab810157930f1563a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bbe2e45a_6c2afe90",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7

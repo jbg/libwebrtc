@@ -124,6 +124,24 @@
       "parentUuid": "1932258a_c1bf0569",
       "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "835c84bc_72adbabd",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2021-11-19T13:21:42Z",
+      "side": 0,
+      "message": "I had to explain a little bit more about which flags I want to remove. Thanks to Danil and Harald!",
+      "parentUuid": "66e0a00c_4d9d4a45",
+      "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
