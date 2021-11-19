@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99de9711_188dbbc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2021-11-19T14:04:29Z",
+      "side": 1,
+      "message": "The roll is landed. \n\nCan you try to rebase and run CQ again?",
+      "revId": "1bb7f567c8e4545203077f39d729a667818463ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
