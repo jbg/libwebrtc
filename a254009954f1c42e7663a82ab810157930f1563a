@@ -16,6 +16,23 @@
       "message": "Still LGTM",
       "revId": "a254009954f1c42e7663a82ab810157930f1563a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d529f5c3_03ef22cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-19T11:56:14Z",
+      "side": 1,
+      "message": "Please answer the question about the global Clang flag!\n",
+      "revId": "a254009954f1c42e7663a82ab810157930f1563a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

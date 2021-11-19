@@ -70,6 +70,24 @@
       "parentUuid": "f9163e34_cfea38fc",
       "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a72df6a1_f36b41b1",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-19T11:56:14Z",
+      "side": 0,
+      "message": "You still haven\u0027t answered my question: Is it the aim of this CL to permit exit time destructors, or isn\u0027t it the aim of this CL to permit exit time destructors?\n\nIf we want to permit them, this CL is right.\nIf we don\u0027t want to permit them, you need to restore this cflag, and possibly remove it again for the two files where you can\u0027t prevent an error.",
+      "parentUuid": "5c6d711b_ab1de083",
+      "revId": "d2abeab308c68ef6337f31745d6c7863f6a2d807",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
