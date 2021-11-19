@@ -16,6 +16,23 @@
       "message": "add a bug id as well",
       "revId": "bbe07889f4ffc3012b3de6dd688bd70bbaf87992",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "987e5e51_7fee28a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14174
+      },
+      "writtenOn": "2021-11-19T19:17:31Z",
+      "side": 1,
+      "message": "hey, thanks for reviewing, wondering what is the next step here, is this good to put in commit queue etc, thanks!",
+      "revId": "bbe07889f4ffc3012b3de6dd688bd70bbaf87992",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
