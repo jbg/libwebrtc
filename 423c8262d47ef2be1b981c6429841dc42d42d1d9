@@ -16,6 +16,24 @@
       "message": "Any opinions on using naked [[deprecated]], given that it compiles on our botset?\n",
       "revId": "423c8262d47ef2be1b981c6429841dc42d42d1d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbf98e6e_085867ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-23T14:05:28Z",
+      "side": 1,
+      "message": "It seems to be standard C++14, right? Are there any non-ancient C++ compilers that are known to not support it? My closest GNU g++ accepts it by default.\n\nThat said, can\u0027t we just delete known usage and delete it, without asking the compiler for new warnings?",
+      "parentUuid": "f1d80847_6f55a525",
+      "revId": "423c8262d47ef2be1b981c6429841dc42d42d1d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
