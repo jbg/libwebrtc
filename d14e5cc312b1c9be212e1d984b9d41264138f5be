@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d16faca1_0225cc4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-11-23T14:37:18Z",
+      "side": 1,
+      "message": "Hi Harald, PTAL at another fix involving audio codec negotiation.",
+      "revId": "d14e5cc312b1c9be212e1d984b9d41264138f5be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
