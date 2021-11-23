@@ -37,6 +37,9 @@ AudioEncoderIsacFloat::SdpToConfig(const SdpAudioFormat& format) {
         }
       }
     }
+    if (!config.IsOk()) {
+      return absl::nullopt;
+    }
     return config;
   } else {
     return absl::nullopt;
@@ -65,13 +68,13 @@ std::unique_ptr<AudioEncoder> AudioEncoderIsacFloat::MakeAudioEncoder(
     const AudioEncoderIsacFloat::Config& config,
     int payload_type,
     absl::optional<AudioCodecPairId> /*codec_pair_id*/) {
-  RTC_DCHECK(config.IsOk());
   AudioEncoderIsacFloatImpl::Config c;
   c.payload_type = payload_type;
   c.sample_rate_hz = config.sample_rate_hz;
   c.frame_size_ms = config.frame_size_ms;
   c.bit_rate = config.bit_rate;
-  return std::make_unique<AudioEncoderIsacFloatImpl>(c);
+  return config.IsOk() ? std::make_unique<AudioEncoderIsacFloatImpl>(c)
+                       : nullptr;
 }
 
 }  // namespace webrtc

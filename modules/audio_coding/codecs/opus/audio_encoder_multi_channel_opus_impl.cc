@@ -280,6 +280,9 @@ AudioEncoderMultiChannelOpusImpl::SdpToConfig(const SdpAudioFormat& format) {
   }
   config.channel_mapping = *channel_mapping;
 
+  if (!config.IsOk()) {
+    return absl::nullopt;
+  }
   return config;
 }
 

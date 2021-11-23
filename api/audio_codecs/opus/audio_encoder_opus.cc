@@ -33,7 +33,9 @@ std::unique_ptr<AudioEncoder> AudioEncoderOpus::MakeAudioEncoder(
     const AudioEncoderOpusConfig& config,
     int payload_type,
     absl::optional<AudioCodecPairId> /*codec_pair_id*/) {
-  return AudioEncoderOpusImpl::MakeAudioEncoder(config, payload_type);
+  return config.IsOk()
+             ? AudioEncoderOpusImpl::MakeAudioEncoder(config, payload_type)
+             : nullptr;
 }
 
 }  // namespace webrtc

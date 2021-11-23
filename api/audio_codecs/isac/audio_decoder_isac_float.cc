@@ -24,6 +24,9 @@ AudioDecoderIsacFloat::SdpToConfig(const SdpAudioFormat& format) {
       format.num_channels == 1) {
     Config config;
     config.sample_rate_hz = format.clockrate_hz;
+    if (!config.IsOk()) {
+      return absl::nullopt;
+    }
     return config;
   } else {
     return absl::nullopt;
@@ -39,10 +42,10 @@ void AudioDecoderIsacFloat::AppendSupportedDecoders(
 std::unique_ptr<AudioDecoder> AudioDecoderIsacFloat::MakeAudioDecoder(
     Config config,
     absl::optional<AudioCodecPairId> /*codec_pair_id*/) {
-  RTC_DCHECK(config.IsOk());
   AudioDecoderIsacFloatImpl::Config c;
   c.sample_rate_hz = config.sample_rate_hz;
-  return std::make_unique<AudioDecoderIsacFloatImpl>(c);
+  return config.IsOk() ? std::make_unique<AudioDecoderIsacFloatImpl>(c)
+                       : nullptr;
 }
 
 }  // namespace webrtc

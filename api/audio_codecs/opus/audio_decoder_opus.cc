@@ -51,7 +51,9 @@ absl::optional<AudioDecoderOpus::Config> AudioDecoderOpus::SdpToConfig(
       num_channels) {
     Config config;
     config.num_channels = *num_channels;
-    RTC_DCHECK(config.IsOk());
+    if (!config.IsOk()) {
+      return absl::nullopt;
+    }
     return config;
   } else {
     return absl::nullopt;
@@ -71,9 +73,9 @@ void AudioDecoderOpus::AppendSupportedDecoders(
 std::unique_ptr<AudioDecoder> AudioDecoderOpus::MakeAudioDecoder(
     Config config,
     absl::optional<AudioCodecPairId> /*codec_pair_id*/) {
-  RTC_DCHECK(config.IsOk());
-  return std::make_unique<AudioDecoderOpusImpl>(config.num_channels,
-                                                config.sample_rate_hz);
+  return config.IsOk() ? std::make_unique<AudioDecoderOpusImpl>(
+                             config.num_channels, config.sample_rate_hz)
+                       : nullptr;
 }
 
 }  // namespace webrtc
