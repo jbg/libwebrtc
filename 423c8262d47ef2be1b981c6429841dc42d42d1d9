@@ -34,6 +34,24 @@
       "parentUuid": "f1d80847_6f55a525",
       "revId": "423c8262d47ef2be1b981c6429841dc42d42d1d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e4e8752_4c753efd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-23T14:47:46Z",
+      "side": 1,
+      "message": "The values are heavily used in internal code. Deleting known usage in webrtc and marking them as deprecated prevents internal backsliding and warns our users.",
+      "parentUuid": "bbf98e6e_085867ed",
+      "revId": "423c8262d47ef2be1b981c6429841dc42d42d1d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
