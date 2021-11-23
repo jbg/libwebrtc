@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ad640d6_8cddc3eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-11-23T10:53:17Z",
+      "side": 1,
+      "message": "Hi and thanks for the patch! I only superficially know this code and am looking for a proper reviewer for this and https://webrtc-review.googlesource.com/c/src/+/238741.",
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7177af94_74ca3ab6",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-11-23T10:53:17Z",
+      "side": 1,
+      "message": "I\u0027m a little bit unsure if there is already a sequence checker for the threading situation in Call::OnSentPacket. Assuming there currently is none (didn\u0027t find one after a brief look), this should be\n\n  RTC_NO_UNIQUE_ADDRESS SequenceChecker sent_packet_sequence_checker_;\n\nto avoid locking.",
+      "range": {
+        "startLine": 469,
+        "startChar": 2,
+        "endLine": 469,
+        "endChar": 22
+      },
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9dcd04f_37fe0005",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-11-23T10:53:17Z",
+      "side": 1,
+      "message": "sent_packet_sequence_checker_",
+      "range": {
+        "startLine": 470,
+        "startChar": 51,
+        "endLine": 470,
+        "endChar": 57
+      },
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0044a540_789c9274",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-11-23T10:53:17Z",
+      "side": 1,
+      "message": "I suggest using absl::optional\u003crtc::SentPacket\u003e here to not rely on implementation/luck down in Call::OnSentPacket.",
+      "range": {
+        "startLine": 470,
+        "startChar": 2,
+        "endLine": 470,
+        "endChar": 17
+      },
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8641bd01_05e3c508",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-11-23T10:53:17Z",
+      "side": 1,
+      "message": "sent_packet_sequence_checker_.Detach()",
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a799aa_9b58bc1e",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-11-23T10:53:17Z",
+      "side": 1,
+      "message": "RTC_DCHECK_RUN_ON(\u0026sent_packet_sequence_checker_);",
+      "range": {
+        "startLine": 1392,
+        "startChar": 3,
+        "endLine": 1392,
+        "endChar": 28
+      },
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9c4f0f_bd851239",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-11-23T10:53:17Z",
+      "side": 1,
+      "message": "if (last_sent_packet_.has_value() \u0026\u0026 ...)",
+      "range": {
+        "startLine": 1393,
+        "startChar": 4,
+        "endLine": 1393,
+        "endChar": 6
+      },
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
