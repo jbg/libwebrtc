@@ -16,6 +16,29 @@
       "message": "this turned out to be a better place to catch programming errors ;-)",
       "revId": "62fabb5a5d765e4fac3a90b0e6c0e5d3fe44ff18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d84d8772_fd1cf695",
+        "filename": "net/dcsctp/timer/timer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2021-11-23T19:03:17Z",
+      "side": 1,
+      "message": "Please spell it out: \"std::unique_ptr\u003cTimeout\u003e\"\n\nhttps://google.github.io/styleguide/cppguide.html#Type_deduction",
+      "range": {
+        "startLine": 147,
+        "startChar": 2,
+        "endLine": 147,
+        "endChar": 6
+      },
+      "revId": "62fabb5a5d765e4fac3a90b0e6c0e5d3fe44ff18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
