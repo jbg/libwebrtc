@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a58f0b07_1c5b3798",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14174
+      },
+      "writtenOn": "2021-11-23T09:12:24Z",
+      "side": 1,
+      "message": "Seems description footer is wrong and presubmit test failed,\nupdate the footer and presubmit tests passed locally",
+      "revId": "a9bdc2d7b9b3030008cd5b7dcd67ee177365a8d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
