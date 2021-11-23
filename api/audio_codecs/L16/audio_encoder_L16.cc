@@ -58,13 +58,12 @@ std::unique_ptr<AudioEncoder> AudioEncoderL16::MakeAudioEncoder(
     const AudioEncoderL16::Config& config,
     int payload_type,
     absl::optional<AudioCodecPairId> /*codec_pair_id*/) {
-  RTC_DCHECK(config.IsOk());
   AudioEncoderPcm16B::Config c;
   c.sample_rate_hz = config.sample_rate_hz;
   c.num_channels = config.num_channels;
   c.frame_size_ms = config.frame_size_ms;
   c.payload_type = payload_type;
-  return std::make_unique<AudioEncoderPcm16B>(c);
+  return config.IsOk() ? std::make_unique<AudioEncoderPcm16B>(c) : nullptr;
 }
 
 }  // namespace webrtc

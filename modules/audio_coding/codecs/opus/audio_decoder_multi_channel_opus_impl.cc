@@ -78,6 +78,9 @@ AudioDecoderMultiChannelOpusImpl::SdpToConfig(const SdpAudioFormat& format) {
     return absl::nullopt;
   }
   config.channel_mapping = *channel_mapping;
+  if (!config.IsOk()) {
+    return absl::nullopt;
+  }
   return config;
 }
 
