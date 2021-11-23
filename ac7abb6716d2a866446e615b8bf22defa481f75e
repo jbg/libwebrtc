@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e3bd3b4_48e740ed",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2021-11-23T12:59:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7177af94_74ca3ab6",
+      "range": {
+        "startLine": 469,
+        "startChar": 2,
+        "endLine": 469,
+        "endChar": 22
+      },
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9dcd04f_37fe0005",
@@ -104,6 +128,54 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5189ecd0_b05b37a4",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2021-11-23T12:59:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0044a540_789c9274",
+      "range": {
+        "startLine": 470,
+        "startChar": 2,
+        "endLine": 470,
+        "endChar": 17
+      },
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d84bfc7_e661924c",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2021-11-23T12:59:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9dcd04f_37fe0005",
+      "range": {
+        "startLine": 470,
+        "startChar": 51,
+        "endLine": 470,
+        "endChar": 57
+      },
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8641bd01_05e3c508",
@@ -117,6 +189,24 @@
       "writtenOn": "2021-11-23T10:53:17Z",
       "side": 1,
       "message": "sent_packet_sequence_checker_.Detach()",
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69a0e3ed_26b01354",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2021-11-23T12:59:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8641bd01_05e3c508",
       "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -144,6 +234,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "316da4d1_3346d1e4",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2021-11-23T12:59:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70a799aa_9b58bc1e",
+      "range": {
+        "startLine": 1392,
+        "startChar": 3,
+        "endLine": 1392,
+        "endChar": 28
+      },
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d9c4f0f_bd851239",
@@ -157,6 +271,30 @@
       "writtenOn": "2021-11-23T10:53:17Z",
       "side": 1,
       "message": "if (last_sent_packet_.has_value() \u0026\u0026 ...)",
+      "range": {
+        "startLine": 1393,
+        "startChar": 4,
+        "endLine": 1393,
+        "endChar": 6
+      },
+      "revId": "ac7abb6716d2a866446e615b8bf22defa481f75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56946405_6d2113ba",
+        "filename": "call/call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2021-11-23T12:59:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d9c4f0f_bd851239",
       "range": {
         "startLine": 1393,
         "startChar": 4,
