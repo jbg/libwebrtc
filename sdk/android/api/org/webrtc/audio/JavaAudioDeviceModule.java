@@ -14,7 +14,9 @@ import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
+import android.media.AudioRecord;
 import android.os.Build;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import java.util.concurrent.ScheduledExecutorService;
 import org.webrtc.JniCommon;
@@ -44,6 +46,7 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
     private SamplesReadyCallback samplesReadyCallback;
     private AudioTrackStateCallback audioTrackStateCallback;
     private AudioRecordStateCallback audioRecordStateCallback;
+    private AudioRecordProvider audioRecordProvider;
     private boolean useHardwareAcousticEchoCanceler = isBuiltInAcousticEchoCancelerSupported();
     private boolean useHardwareNoiseSuppressor = isBuiltInNoiseSuppressorSupported();
     private boolean useStereoInput;
@@ -155,6 +158,14 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
     }
 
     /**
+     * Set a interface which can provide custom android AudioRecord to WebRtcAudioRecord.
+     */
+    public Builder setAudioRecordProvider(AudioRecordProvider audioRecordProvider) {
+      this.audioRecordProvider = audioRecordProvider;
+      return this;
+    }
+
+    /**
      * Control if the built-in HW noise suppressor should be used or not. The default is on if it is
      * supported. It is possible to query support by calling isBuiltInNoiseSuppressorSupported().
      */
@@ -245,9 +256,10 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
       if (executor == null) {
         executor = WebRtcAudioRecord.newDefaultScheduler();
       }
-      final WebRtcAudioRecord audioInput = new WebRtcAudioRecord(context, executor, audioManager,
-          audioSource, audioFormat, audioRecordErrorCallback, audioRecordStateCallback,
-          samplesReadyCallback, useHardwareAcousticEchoCanceler, useHardwareNoiseSuppressor);
+      final WebRtcAudioRecord audioInput =
+          new WebRtcAudioRecord(context, executor, audioManager, audioSource, audioFormat,
+              audioRecordErrorCallback, audioRecordStateCallback, samplesReadyCallback,
+              audioRecordProvider, useHardwareAcousticEchoCanceler, useHardwareNoiseSuppressor);
       final WebRtcAudioTrack audioOutput = new WebRtcAudioTrack(context, audioManager,
           audioAttributes, audioTrackErrorCallback, audioTrackStateCallback, useLowLatency);
       return new JavaAudioDeviceModule(context, audioManager, audioInput, audioOutput,
@@ -272,6 +284,16 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
   public static interface AudioRecordStateCallback {
     void onWebRtcAudioRecordStart();
     void onWebRtcAudioRecordStop();
+  }
+
+  /**
+   * Called when audio record initializing. if this function return null WebrtcAudioRecord creatе a
+   * new instance. See {@link WebRtcAudioRecord#initRecording()}
+   **/
+  public static interface AudioRecordProvider {
+    @Nullable
+    AudioRecord getCustomAudioRecord(
+        int audioSource, int sampleRate, int channelConfig, int audioFormat, int bufferSizeInBytes);
   }
 
   /**
