@@ -159,9 +159,9 @@ class RTC_EXPORT BasicPortAllocatorSession : public PortAllocatorSession {
   // network (or a timeout occurs), we will start allocating ports.
   void ConfigReady(std::unique_ptr<PortConfiguration> config);
   // TODO(bugs.webrtc.org/12840) Remove once unused in downstream projects.
-  ABSL_DEPRECATED(
-      "Use ConfigReady(std::unique_ptr<PortConfiguration>) instead!")
-  void ConfigReady(PortConfiguration* config);
+  [[deprecated(
+      "Use ConfigReady(std::unique_ptr<PortConfiguration>) instead!")]] void
+  ConfigReady(PortConfiguration* config);
 
  private:
   class PortData {

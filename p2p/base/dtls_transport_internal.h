@@ -18,7 +18,6 @@
 #include <string>
 #include <utility>
 
-#include "absl/base/attributes.h"
 #include "api/crypto/crypto_options.h"
 #include "api/dtls_transport_interface.h"
 #include "api/scoped_refptr.h"
@@ -91,8 +90,8 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
                                     const uint8_t* digest,
                                     size_t digest_len) = 0;
 
-  ABSL_DEPRECATED("Set the max version via construction.")
-  bool SetSslMaxProtocolVersion(rtc::SSLProtocolVersion version) {
+  [[deprecated("Set the max version via construction.")]] bool
+  SetSslMaxProtocolVersion(rtc::SSLProtocolVersion version) {
     return true;
   }
 

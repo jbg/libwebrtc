@@ -48,11 +48,11 @@ class RTPSender {
             RtpPacketHistory* packet_history,
             RtpPacketSender* packet_sender);
 
-  ABSL_DEPRECATED("bugs.webrtc.org/11340")
-  RTPSender(const RtpRtcpInterface::Configuration& config,
-            RtpPacketHistory* packet_history,
-            RtpPacketSender* packet_sender,
-            PacketSequencer* packet_sequencer);
+  [[deprecated("bugs.webrtc.org/11340")]] RTPSender(
+      const RtpRtcpInterface::Configuration& config,
+      RtpPacketHistory* packet_history,
+      RtpPacketSender* packet_sender,
+      PacketSequencer* packet_sequencer);
 
   RTPSender() = delete;
   RTPSender(const RTPSender&) = delete;

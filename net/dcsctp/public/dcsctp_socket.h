@@ -289,8 +289,8 @@ class DcSctpSocketCallbacks {
   //
   // Note that it's NOT ALLOWED to call into this library from within this
   // callback.
-  ABSL_DEPRECATED("Use OnTotalBufferedAmountLow instead")
-  virtual void NotifyOutgoingMessageBufferEmpty() {}
+  [[deprecated("Use OnTotalBufferedAmountLow instead")]] virtual void
+  NotifyOutgoingMessageBufferEmpty() {}
 
   // Called when the library has received an SCTP message in full and delivers
   // it to the upper layer.

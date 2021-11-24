@@ -42,8 +42,7 @@ class VP8Encoder {
   static std::unique_ptr<VideoEncoder> Create(Settings settings);
   static bool SupportsScalabilityMode(absl::string_view scalability_mode);
 
-  ABSL_DEPRECATED("")
-  static std::unique_ptr<VideoEncoder> Create(
+  [[deprecated]] static std::unique_ptr<VideoEncoder> Create(
       std::unique_ptr<Vp8FrameBufferControllerFactory>
           frame_buffer_controller_factory);
 };

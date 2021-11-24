@@ -252,7 +252,7 @@ class ParsedRtcEventLog {
       return error_ + " failed at " + file_ + " line " + std::to_string(line_);
     }
 
-    ABSL_DEPRECATED("Use ok() instead") operator bool() const { return ok(); }
+    [[deprecated("Use ok() instead")]] operator bool() const { return ok(); }
 
    private:
     ParseStatus() : error_(), file_(), line_(0) {}

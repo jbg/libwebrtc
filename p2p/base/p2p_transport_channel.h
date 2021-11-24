@@ -114,8 +114,7 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   P2PTransportChannel(const std::string& transport_name,
                       int component,
                       PortAllocator* allocator);
-  ABSL_DEPRECATED("bugs.webrtc.org/12598")
-  P2PTransportChannel(
+  [[deprecated("bugs.webrtc.org/12598")]] P2PTransportChannel(
       const std::string& transport_name,
       int component,
       PortAllocator* allocator,

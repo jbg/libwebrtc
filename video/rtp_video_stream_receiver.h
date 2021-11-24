@@ -18,7 +18,6 @@
 #include <string>
 #include <vector>
 
-#include "absl/base/attributes.h"
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/crypto/frame_decryptor_interface.h"
@@ -131,11 +130,11 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
                        const std::map<std::string, std::string>& codec_params,
                        bool raw_payload);
 
-  ABSL_DEPRECATED("Use AddReceiveCodec above")
-  void AddReceiveCodec(uint8_t payload_type,
-                       const VideoCodec& video_codec,
-                       const std::map<std::string, std::string>& codec_params,
-                       bool raw_payload) {
+  [[deprecated("Use AddReceiveCodec above")]] void AddReceiveCodec(
+      uint8_t payload_type,
+      const VideoCodec& video_codec,
+      const std::map<std::string, std::string>& codec_params,
+      bool raw_payload) {
     AddReceiveCodec(payload_type, video_codec.codecType, codec_params,
                     raw_payload);
   }

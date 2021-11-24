@@ -51,7 +51,6 @@
 #include <string>
 #include <utility>
 
-#include "absl/base/attributes.h"
 #include "absl/meta/type_traits.h"
 #include "absl/strings/string_view.h"
 #include "rtc_base/constructor_magic.h"
@@ -438,11 +437,12 @@ class LogMessage {
   // DEPRECATED - DO NOT USE - PLEASE USE THE MACROS INSTEAD OF THE CLASS.
   // Android code should use the 'const char*' version since tags are static
   // and we want to avoid allocating a std::string copy per log line.
-  ABSL_DEPRECATED("Use RTC_LOG macros instead of accessing this class directly")
-  LogMessage(const char* file,
-             int line,
-             LoggingSeverity sev,
-             const std::string& tag);
+  [
+      [deprecated("Use RTC_LOG macros instead of accessing this class "
+                  "directly")]] LogMessage(const char* file,
+                                           int line,
+                                           LoggingSeverity sev,
+                                           const std::string& tag);
   ~LogMessage();
 
   void AddTag(const char* tag);
@@ -512,11 +512,12 @@ class LogMessage {
   // DEPRECATED - DO NOT USE - PLEASE USE THE MACROS INSTEAD OF THE CLASS.
   // Android code should use the 'const char*' version since tags are static
   // and we want to avoid allocating a std::string copy per log line.
-  ABSL_DEPRECATED("Use RTC_LOG macros instead of accessing this class directly")
-  LogMessage(const char* file,
-             int line,
-             LoggingSeverity sev,
-             const std::string& tag) {}
+  [
+      [deprecated("Use RTC_LOG macros instead of accessing this class "
+                  "directly")]] LogMessage(const char* file,
+                                           int line,
+                                           LoggingSeverity sev,
+                                           const std::string& tag) {}
   ~LogMessage() = default;
 
   inline void AddTag(const char* tag) {}

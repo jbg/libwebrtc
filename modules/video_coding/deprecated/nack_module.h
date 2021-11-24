@@ -17,7 +17,6 @@
 #include <set>
 #include <vector>
 
-#include "absl/base/attributes.h"
 #include "api/units/time_delta.h"
 #include "modules/include/module.h"
 #include "modules/include/module_common_types.h"
@@ -125,7 +124,7 @@ class DEPRECATED_NackModule : public Module {
   const absl::optional<BackoffSettings> backoff_settings_;
 };
 
-using NackModule ABSL_DEPRECATED("") = DEPRECATED_NackModule;
+using NackModule [[deprecated]] = DEPRECATED_NackModule;
 
 }  // namespace webrtc
 
