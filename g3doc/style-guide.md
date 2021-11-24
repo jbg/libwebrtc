@@ -81,12 +81,12 @@ referencing a WebRTC bug, prefer the url form, e.g.
 ### Deprecation
 
 Annotate the declarations of deprecated functions and classes with the
-[`ABSL_DEPRECATED` macro][ABSL_DEPRECATED] to cause an error when they're used
+[`[[deprecated("reason")]]` attribute][CPP_DEPRECATED] to cause an error when they're used
 inside WebRTC and a compiler warning when they're used by dependant projects.
 Like so:
 
 ```cpp
-ABSL_DEPRECATED("bugs.webrtc.org/12345")
+[[deprecated("bugs.webrtc.org/12345")]]
 std::pony PonyPlz(const std::pony_spec& ps);
 ```
 
@@ -98,7 +98,7 @@ getting errors, do something like this:
 
 ```cpp
 std::pony DEPRECATED_PonyPlz(const std::pony_spec& ps);
-ABSL_DEPRECATED("bugs.webrtc.org/12345")
+[[deprecated("bugs.webrtc.org/12345")]]
 inline std::pony PonyPlz(const std::pony_spec& ps) {
   return DEPRECATED_PonyPlz(ps);
 }
@@ -108,7 +108,7 @@ In other words, rename the existing function, and provide an inline wrapper
 using the original name that calls it. That way, callers who are willing to
 call it using the `DEPRECATED_`-prefixed name don't get the warning.
 
-[ABSL_DEPRECATED]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/abseil-cpp/absl/base/attributes.h?q=ABSL_DEPRECATED
+[CPP_DEPRECATED]: https://en.cppreference.com/w/cpp/language/attributes/deprecated
 
 ### ArrayView
 
