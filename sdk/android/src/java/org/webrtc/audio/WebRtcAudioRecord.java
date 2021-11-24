@@ -39,6 +39,7 @@ import org.webrtc.CalledByNative;
 import org.webrtc.Logging;
 import org.webrtc.ThreadUtils;
 import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordErrorCallback;
+import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordProvider;
 import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordStartErrorCode;
 import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordStateCallback;
 import org.webrtc.audio.JavaAudioDeviceModule.SamplesReadyCallback;
@@ -104,6 +105,7 @@ class WebRtcAudioRecord {
   private final @Nullable AudioRecordErrorCallback errorCallback;
   private final @Nullable AudioRecordStateCallback stateCallback;
   private final @Nullable SamplesReadyCallback audioSamplesReadyCallback;
+  private final @Nullable AudioRecordProvider audioRecordProvider;
   private final boolean isAcousticEchoCancelerSupported;
   private final boolean isNoiseSuppressorSupported;
 
@@ -184,7 +186,8 @@ class WebRtcAudioRecord {
   WebRtcAudioRecord(Context context, AudioManager audioManager) {
     this(context, newDefaultScheduler() /* scheduler */, audioManager, DEFAULT_AUDIO_SOURCE,
         DEFAULT_AUDIO_FORMAT, null /* errorCallback */, null /* stateCallback */,
-        null /* audioSamplesReadyCallback */, WebRtcAudioEffects.isAcousticEchoCancelerSupported(),
+        null /* audioSamplesReadyCallback */, null /* audioRecordProvider */,
+        WebRtcAudioEffects.isAcousticEchoCancelerSupported(),
         WebRtcAudioEffects.isNoiseSuppressorSupported());
   }
 
@@ -193,7 +196,8 @@ class WebRtcAudioRecord {
       @Nullable AudioRecordErrorCallback errorCallback,
       @Nullable AudioRecordStateCallback stateCallback,
       @Nullable SamplesReadyCallback audioSamplesReadyCallback,
-      boolean isAcousticEchoCancelerSupported, boolean isNoiseSuppressorSupported) {
+      @Nullable AudioRecordProvider audioRecordProvider, boolean isAcousticEchoCancelerSupported,
+      boolean isNoiseSuppressorSupported) {
     if (isAcousticEchoCancelerSupported && !WebRtcAudioEffects.isAcousticEchoCancelerSupported()) {
       throw new IllegalArgumentException("HW AEC not supported");
     }
@@ -208,6 +212,7 @@ class WebRtcAudioRecord {
     this.errorCallback = errorCallback;
     this.stateCallback = stateCallback;
     this.audioSamplesReadyCallback = audioSamplesReadyCallback;
+    this.audioRecordProvider = audioRecordProvider;
     this.isAcousticEchoCancelerSupported = isAcousticEchoCancelerSupported;
     this.isNoiseSuppressorSupported = isNoiseSuppressorSupported;
     Logging.d(TAG, "ctor" + WebRtcAudioUtils.getThreadInfo());
@@ -299,11 +304,15 @@ class WebRtcAudioRecord {
     int bufferSizeInBytes = Math.max(BUFFER_SIZE_FACTOR * minBufferSize, byteBuffer.capacity());
     Logging.d(TAG, "bufferSizeInBytes: " + bufferSizeInBytes);
     try {
+      AudioRecord customAudioRecord = getCustomAudioRecord(
+          audioSource, sampleRate, channelConfig, audioFormat, bufferSizeInBytes);
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         // Use the AudioRecord.Builder class on Android M (23) and above.
         // Throws IllegalArgumentException.
-        audioRecord = createAudioRecordOnMOrHigher(
-            audioSource, sampleRate, channelConfig, audioFormat, bufferSizeInBytes);
+        audioRecord = customAudioRecord != null
+            ? customAudioRecord
+            : createAudioRecordOnMOrHigher(
+                audioSource, sampleRate, channelConfig, audioFormat, bufferSizeInBytes);
         audioSourceMatchesRecordingSessionRef.set(null);
         if (preferredDevice != null) {
           setPreferredDevice(preferredDevice);
@@ -311,8 +320,10 @@ class WebRtcAudioRecord {
       } else {
         // Use the old AudioRecord constructor for API levels below 23.
         // Throws UnsupportedOperationException.
-        audioRecord = createAudioRecordOnLowerThanM(
-            audioSource, sampleRate, channelConfig, audioFormat, bufferSizeInBytes);
+        audioRecord = customAudioRecord != null
+            ? customAudioRecord
+            : createAudioRecordOnLowerThanM(
+                audioSource, sampleRate, channelConfig, audioFormat, bufferSizeInBytes);
         audioSourceMatchesRecordingSessionRef.set(null);
       }
     } catch (IllegalArgumentException | UnsupportedOperationException e) {
@@ -418,6 +429,15 @@ class WebRtcAudioRecord {
                             .build())
         .setBufferSizeInBytes(bufferSizeInBytes)
         .build();
+  }
+
+  private AudioRecord getCustomAudioRecord(
+      int audioSource, int sampleRate, int channelConfig, int audioFormat, int bufferSizeInBytes) {
+    if (audioRecordProvider == null) {
+      return null;
+    }
+    return audioRecordProvider.getCustomAudioRecord(
+        audioSource, sampleRate, channelConfig, audioFormat, bufferSizeInBytes);
   }
 
   private static AudioRecord createAudioRecordOnLowerThanM(
