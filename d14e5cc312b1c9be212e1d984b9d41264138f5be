@@ -16,6 +16,57 @@
       "message": "Hi Harald, PTAL at another fix involving audio codec negotiation.",
       "revId": "d14e5cc312b1c9be212e1d984b9d41264138f5be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3f340cc_ac2d0886",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-24T12:23:59Z",
+      "side": 1,
+      "message": "Two decisions to make:\n\n- do we want to continue crashing in debug? If not, we should add tests that exercise the nullptr path.\n\n- do we want to standardize on if/return, or do we want to sometimes use trinary? (I\u0027d prefer to use if/return - I find it more readable.)",
+      "revId": "d14e5cc312b1c9be212e1d984b9d41264138f5be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "868962fa_394ee410",
+        "filename": "api/audio_codecs/g711/audio_decoder_g711.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-24T12:23:59Z",
+      "side": 1,
+      "message": "Perhaps add an RTC_DCHECK_UNREACHED() to preserve the property that it crashes in debug? We do NOT want this to happen.",
+      "revId": "d14e5cc312b1c9be212e1d984b9d41264138f5be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00773a52_86f8b3a0",
+        "filename": "api/audio_codecs/g711/audio_encoder_g711.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-24T12:23:59Z",
+      "side": 1,
+      "message": "I think the form \"if (config.isOk()) return absl::nullopt\" is actually easier to read than the trinary operator. This path didn\u0027t have a DCHECK - should it have had one?",
+      "revId": "d14e5cc312b1c9be212e1d984b9d41264138f5be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
