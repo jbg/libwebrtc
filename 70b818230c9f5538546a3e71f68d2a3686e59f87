@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf936f01_0dd971c3",
+        "filename": "g3doc/style-guide.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-25T09:59:07Z",
+      "side": 1,
+      "message": "no, this is a link name, it shouldn\u0027t be displayed.\nOn the other hand, there is single place that uses this link, so I\u0027ve inlined it instead.",
+      "parentUuid": "aa2ba4db_7edcb1e5",
+      "revId": "70b818230c9f5538546a3e71f68d2a3686e59f87",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "109aa433_6241a57a",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-11-24T18:37:40Z",
       "side": 1,
       "message": "Can you add an example of deprecating an enum value, since it is clear that not everyone knows how to do that?\n\n(It\u0027s enum class {\n    value [[deprecated]],\n    valueNotDeprecated\n  }\nwhich surprised me when I went searching for it.)",
+      "revId": "70b818230c9f5538546a3e71f68d2a3686e59f87",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e28f98_742e7ef9",
+        "filename": "g3doc/style-guide.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2021-11-25T09:59:07Z",
+      "side": 1,
+      "message": "https://en.cppreference.com/w/cpp/language/attributes/deprecated\nlists 9 scenarios and shows where to put deprecated in each of them, including enum values.\nWhy do you find deprecating enum value special to provide an extra example?\n\n(personally I find placement for \u0027class\u0027 and \u0027using\u0027 alias surprising too, but style guide shouldn\u0027t be used as c++ reference guide)",
+      "parentUuid": "109aa433_6241a57a",
       "revId": "70b818230c9f5538546a3e71f68d2a3686e59f87",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
