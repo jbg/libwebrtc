@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c4a498b_9961154e",
+        "filename": "api/audio_codecs/g711/audio_decoder_g711.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-11-25T07:59:00Z",
+      "side": 1,
+      "message": "Good idea, I\u0027ve added calls to RTC_DCHECK_UNREACHED() whenever nullopt or nullptr is returned in these functions (even in existing code without DCHECKs). I then removed those RTC_DCHECK_UNREACHED() calls that are hit in unittests (because those code paths are actually tested).",
+      "parentUuid": "868962fa_394ee410",
+      "revId": "d14e5cc312b1c9be212e1d984b9d41264138f5be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00773a52_86f8b3a0",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-11-24T12:23:59Z",
       "side": 1,
       "message": "I think the form \"if (config.isOk()) return absl::nullopt\" is actually easier to read than the trinary operator. This path didn\u0027t have a DCHECK - should it have had one?",
+      "revId": "d14e5cc312b1c9be212e1d984b9d41264138f5be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3373303_19b0ea5f",
+        "filename": "api/audio_codecs/g711/audio_encoder_g711.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2021-11-25T07:59:00Z",
+      "side": 1,
+      "message": "I\u0027ll standardize on the if (config.isOk()) { ... } style. \n\nI had another look at this code and decided the extra check here doesn\u0027t add much value, so I removed it again. If the codec is misconfigured this should be detected in the first call to IsOk() above.",
+      "parentUuid": "00773a52_86f8b3a0",
       "revId": "d14e5cc312b1c9be212e1d984b9d41264138f5be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
