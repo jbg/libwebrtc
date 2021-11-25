@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a08be38_7dd4d9db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2021-11-25T08:31:02Z",
+      "side": 1,
+      "message": "Did a small refactoring so that all realms define their bindings (sometimes it was done the other way around like for the \"@root\" realm).",
+      "revId": "85ff3650ad8dd59cf1beb1a2c9c4685774258fc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
