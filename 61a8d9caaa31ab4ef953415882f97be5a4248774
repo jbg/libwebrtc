@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce65a21_8557acb2",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2021-11-26T16:15:12Z",
+      "side": 0,
+      "message": "Do you know why we previously called ProcessPackets() inside of the scheduled stats loop?\n\nThis CL makes sense to me, but I\u0027m having trouble wrapping my head around why we were processing packets here or why we needed to throttle stats collection prior to this CL. If there was a good reason for it I\u0027d like to know before removing it.\n\nI.e. I am not opposing the CL I\u0027m just trying to gather context. Does any of the reviewers know what the old code was trying to achieve?",
+      "revId": "61a8d9caaa31ab4ef953415882f97be5a4248774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
