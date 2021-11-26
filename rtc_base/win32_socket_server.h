@@ -13,11 +13,6 @@
 
 #if defined(WEBRTC_WIN)
 #include "rtc_base/socket.h"
-#include "rtc_base/socket_factory.h"
-#include "rtc_base/socket_server.h"
-#include "rtc_base/synchronization/mutex.h"
-#include "rtc_base/thread.h"
-#include "rtc_base/win32_window.h"
 
 namespace rtc {
 
@@ -85,64 +80,6 @@ class Win32Socket : public Socket {
   struct DnsLookup;
   DnsLookup* dns_;
 };
-
-///////////////////////////////////////////////////////////////////////////////
-// Win32SocketServer
-///////////////////////////////////////////////////////////////////////////////
-
-class Win32SocketServer : public SocketServer {
- public:
-  Win32SocketServer();
-  ~Win32SocketServer() override;
-
-  void set_modeless_dialog(HWND hdlg) { hdlg_ = hdlg; }
-
-  // SocketServer Interface
-  Socket* CreateSocket(int family, int type) override;
-
-  void SetMessageQueue(Thread* queue) override;
-  bool Wait(int cms, bool process_io) override;
-  void WakeUp() override;
-
-  void Pump();
-
-  HWND handle() { return wnd_.handle(); }
-
- private:
-  class MessageWindow : public Win32Window {
-   public:
-    explicit MessageWindow(Win32SocketServer* ss) : ss_(ss) {}
-
-   private:
-    bool OnMessage(UINT msg, WPARAM wp, LPARAM lp, LRESULT& result) override;
-    Win32SocketServer* ss_;
-  };
-
-  static const wchar_t kWindowName[];
-  Thread* message_queue_;
-  MessageWindow wnd_;
-  webrtc::Mutex mutex_;
-  bool posted_;
-  HWND hdlg_;
-};
-
-///////////////////////////////////////////////////////////////////////////////
-// Win32Thread. Automatically pumps Windows messages.
-///////////////////////////////////////////////////////////////////////////////
-
-class Win32Thread : public Thread {
- public:
-  explicit Win32Thread(SocketServer* ss);
-  ~Win32Thread() override;
-
-  void Run() override;
-  void Quit() override;
-
- private:
-  DWORD id_;
-};
-
-///////////////////////////////////////////////////////////////////////////////
 
 }  // namespace rtc
 
