@@ -42,6 +42,7 @@
 #include <algorithm>
 #include <map>
 
+#include "absl/memory/memory.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/byte_order.h"
 #include "rtc_base/checks.h"
@@ -104,6 +105,8 @@ typedef char* SockOptArg;
 #endif
 #endif
 
+namespace rtc {
+
 namespace {
 class ScopedSetTrue {
  public:
@@ -116,9 +119,109 @@ class ScopedSetTrue {
  private:
   bool* value_;
 };
-}  // namespace
 
-namespace rtc {
+class ListenSocketDispatcher : public Dispatcher, public ListenSocket {
+ public:
+  explicit ListenSocketDispatcher(PhysicalSocketServer* ss) : ss_(ss) {}
+  ~ListenSocketDispatcher();
+
+  bool Create(int family);
+  int Bind(const SocketAddress& addr) override;
+  int Listen(int backlog,
+             std::function<void(const SocketAddress&, std::unique_ptr<Socket>)>
+                 callback) override;
+  SocketAddress GetLocalAddress() const override;
+  int GetError() const override { return 0; }
+
+  uint32_t GetRequestedEvents() override;
+  void OnEvent(uint32_t ff, int err) override;
+  int GetDescriptor() override { return fd_; }
+  bool IsDescriptorClosed() override { return fd_ == -1; }
+
+ private:
+  PhysicalSocketServer* const ss_;
+
+  std::function<void(const SocketAddress&, std::unique_ptr<Socket>)> callback_;
+  int fd_ = -1;
+};
+
+ListenSocketDispatcher::~ListenSocketDispatcher() {
+  if (fd_ != -1) {
+    ss_->Remove(this);
+    ::close(fd_);
+  }
+}
+
+uint32_t ListenSocketDispatcher::GetRequestedEvents() {
+  return DE_READ;
+}
+
+void ListenSocketDispatcher::OnEvent(uint32_t ff, int err) {
+  RTC_DCHECK_EQ(ff, DE_READ);
+  RTC_DCHECK_NE(fd_, -1);
+  RTC_DCHECK(callback_);
+  // TODO(nisse): When do we get an error here?
+  RTC_DCHECK_EQ(err, 0);
+  sockaddr_storage addr_storage;
+  socklen_t addr_len = sizeof(addr_storage);
+  sockaddr* addr = reinterpret_cast<sockaddr*>(&addr_storage);
+  int accepted_fd = ::accept(fd_, addr, &addr_len);
+  if (accepted_fd < 0) {
+    return;
+  }
+  SocketAddress socket_address;
+  SocketAddressFromSockAddrStorage(addr_storage, &socket_address);
+  callback_(socket_address, absl::WrapUnique(ss_->WrapSocket(accepted_fd)));
+}
+
+bool ListenSocketDispatcher::Create(int family) {
+  RTC_DCHECK_EQ(fd_, -1);
+  fd_ = ::socket(family, SOCK_STREAM, 0);
+  if (fd_ == -1) {
+    return false;
+  }
+  fcntl(fd_, F_SETFL, fcntl(fd_, F_GETFL, 0) | O_NONBLOCK);
+  ss_->Add(this);
+  return true;
+}
+
+int ListenSocketDispatcher::Bind(const SocketAddress& socket_address) {
+  // TODO(nisse): Network binder logic.
+  sockaddr_storage addr_storage;
+  size_t len = socket_address.ToSockAddrStorage(&addr_storage);
+  sockaddr* addr = reinterpret_cast<sockaddr*>(&addr_storage);
+  return ::bind(fd_, addr, static_cast<int>(len));
+}
+
+int ListenSocketDispatcher::Listen(
+    int backlog,
+    std::function<void(const SocketAddress&, std::unique_ptr<Socket>)>
+        callback) {
+  RTC_DCHECK(callback);
+  int err = ::listen(fd_, backlog);
+  if (err == 0) {
+    callback_ = callback;
+  }
+  return err;
+}
+
+SocketAddress ListenSocketDispatcher::GetLocalAddress() const {
+  RTC_DCHECK(fd_ != -1);
+  sockaddr_storage addr_storage = {};
+  socklen_t addrlen = sizeof(addr_storage);
+  sockaddr* addr = reinterpret_cast<sockaddr*>(&addr_storage);
+  int result = ::getsockname(fd_, addr, &addrlen);
+  SocketAddress address;
+  if (result >= 0) {
+    SocketAddressFromSockAddrStorage(addr_storage, &address);
+  } else {
+    RTC_LOG(LS_WARNING) << "GetLocalAddress: unable to get local addr, socket="
+                        << fd_;
+  }
+  return address;
+}
+
+}  // namespace
 
 PhysicalSocket::PhysicalSocket(PhysicalSocketServer* ss, SOCKET s)
     : ss_(ss),
@@ -446,36 +549,6 @@ int PhysicalSocket::RecvFrom(void* buffer,
   return received;
 }
 
-int PhysicalSocket::Listen(int backlog) {
-  int err = ::listen(s_, backlog);
-  UpdateLastError();
-  if (err == 0) {
-    state_ = CS_CONNECTING;
-    EnableEvents(DE_ACCEPT);
-#if !defined(NDEBUG)
-    dbg_addr_ = "Listening @ ";
-    dbg_addr_.append(GetLocalAddress().ToString());
-#endif
-  }
-  return err;
-}
-
-Socket* PhysicalSocket::Accept(SocketAddress* out_addr) {
-  // Always re-subscribe DE_ACCEPT to make sure new incoming connections will
-  // trigger an event even if DoAccept returns an error here.
-  EnableEvents(DE_ACCEPT);
-  sockaddr_storage addr_storage;
-  socklen_t addr_len = sizeof(addr_storage);
-  sockaddr* addr = reinterpret_cast<sockaddr*>(&addr_storage);
-  SOCKET s = DoAccept(s_, addr, &addr_len);
-  UpdateLastError();
-  if (s == INVALID_SOCKET)
-    return nullptr;
-  if (out_addr != nullptr)
-    SocketAddressFromSockAddrStorage(addr_storage, out_addr);
-  return ss_->WrapSocket(s);
-}
-
 int PhysicalSocket::Close() {
   if (s_ == INVALID_SOCKET)
     return 0;
@@ -489,12 +562,6 @@ int PhysicalSocket::Close() {
     resolver_ = nullptr;
   }
   return err;
-}
-
-SOCKET PhysicalSocket::DoAccept(SOCKET socket,
-                                sockaddr* addr,
-                                socklen_t* addrlen) {
-  return ::accept(socket, addr, addrlen);
 }
 
 int PhysicalSocket::DoSend(SOCKET socket, const char* buf, int len, int flags) {
@@ -1099,6 +1166,16 @@ Socket* PhysicalSocketServer::CreateSocket(int family, int type) {
     return dispatcher;
   } else {
     delete dispatcher;
+    return nullptr;
+  }
+}
+
+std::unique_ptr<ListenSocket> PhysicalSocketServer::CreateListenSocket(
+    int family) {
+  auto dispatcher = std::make_unique<ListenSocketDispatcher>(this);
+  if (dispatcher->Create(family)) {
+    return dispatcher;
+  } else {
     return nullptr;
   }
 }
