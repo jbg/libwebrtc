@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f49048b6_770f90d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-26T09:49:35Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll see if I can get it to work on windows and address Taylor\u0027s comments, and then we need to figure out a good order for landing changes. (And I think it would make things a bit simpler if we could delete win32_socket_server first; used only in examples/peerconnection/client/peer_connection_client.cc, but I\u0027ve had some trouble with https://webrtc-review.googlesource.com/c/src/+/224541. Maybe we can delete Win32SocketServer right away (it seems unused), but keep Win32Socket for the time being?",
+      "parentUuid": "f8744c4b_c4c67680",
+      "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2015af3_f0e5a5b2",
