@@ -48,6 +48,8 @@ class VideoDecoderWrapper : public VideoDecoder {
 
   const char* ImplementationName() const override;
 
+  DecoderInfo GetDecoderInfo() const override;
+
   // Wraps the frame to a AndroidVideoBuffer and passes it to the callback.
   void OnDecodedFrame(JNIEnv* env,
                       const JavaRef<jobject>& j_frame,
@@ -81,6 +83,7 @@ class VideoDecoderWrapper : public VideoDecoder {
 
   const ScopedJavaGlobalRef<jobject> decoder_;
   const std::string implementation_name_;
+  const bool is_hardware_accelerated_;
 
   SequenceChecker decoder_thread_checker_;
   // Callbacks must be executed sequentially on an arbitrary thread. We do not

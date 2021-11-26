@@ -78,17 +78,26 @@ public interface VideoDecoder {
    * before any decode calls.
    */
   @CalledByNative VideoCodecStatus initDecode(Settings settings, Callback decodeCallback);
+
   /**
    * Called when the decoder is no longer needed. Any more calls to decode will not be made.
    */
   @CalledByNative VideoCodecStatus release();
+
   /**
    * Request the decoder to decode a frame.
    */
   @CalledByNative VideoCodecStatus decode(EncodedImage frame, DecodeInfo info);
+
   /**
    * Should return a descriptive name for the implementation. Gets called once and cached. May be
    * called from arbitrary thread.
    */
   @CalledByNative String getImplementationName();
+
+  /** Returns true if the decoder is backed by hardware. */
+  @CalledByNative
+  default boolean isHardwareAccelerated() {
+    return true;
+  }
 }
