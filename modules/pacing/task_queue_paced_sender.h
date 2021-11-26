@@ -130,7 +130,7 @@ class TaskQueuePacedSender : public RtpPacketPacer, public RtpPacketSender {
   // method again with desired (finite) scheduled process time.
   void MaybeProcessPackets(Timestamp scheduled_process_time);
 
-  void MaybeUpdateStats(bool is_scheduled_call) RTC_RUN_ON(task_queue_);
+  void UpdateStats() RTC_RUN_ON(task_queue_);
   Stats GetStats() const;
 
   Clock* const clock_;
@@ -145,16 +145,6 @@ class TaskQueuePacedSender : public RtpPacketPacer, public RtpPacketSender {
   // as parameter.
   // Timestamp::MinusInfinity() indicates no valid pending task.
   Timestamp next_process_time_ RTC_GUARDED_BY(task_queue_);
-
-  // Since we don't want to support synchronous calls that wait for a
-  // task execution, we poll the stats at some interval and update
-  // `current_stats_`, which can in turn be polled at any time.
-
-  // True iff there is delayed task in flight that that will call
-  // UdpateStats().
-  bool stats_update_scheduled_ RTC_GUARDED_BY(task_queue_);
-  // Last time stats were updated.
-  Timestamp last_stats_time_ RTC_GUARDED_BY(task_queue_);
 
   // Indicates if this task queue is started. If not, don't allow
   // posting delayed tasks yet.
