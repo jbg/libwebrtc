@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8744c4b_c4c67680",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-11-26T08:16:19Z",
+      "side": 1,
+      "message": "I think this is worthwhile, given that we want to make it clear which sockets are for listening and which sockets are for traffic - and that there is no overlap between the two sets.\n\n(I have scanned the changes, but not reviewed them with \"code-review\" glasses on)",
+      "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2015af3_f0e5a5b2",
