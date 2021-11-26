@@ -46,11 +46,12 @@ VideoDecoderWrapper::VideoDecoderWrapper(JNIEnv* jni,
       implementation_name_(JavaToStdString(
           jni,
           Java_VideoDecoder_getImplementationName(jni, decoder))),
+      is_hardware_accelerated_(
+          Java_VideoDecoder_isHardwareAccelerated(jni, decoder)),
       initialized_(false),
       qp_parsing_enabled_(true)  // QP parsing starts enabled and we disable it
                                  // if the decoder provides frames.
-
-{
+(
   decoder_thread_checker_.Detach();
 }
 
@@ -148,6 +149,13 @@ int32_t VideoDecoderWrapper::Release() {
 
 const char* VideoDecoderWrapper::ImplementationName() const {
   return implementation_name_.c_str();
+}
+
+DecoderInfo VideoDecoderWrapper::GetDecoderInfo() const {
+  DecoderInfo info;
+  info.implementation_name = ImplementationName();
+  info.is_hardware_accelerated = is_hardware_accelerated_;
+  return info;
 }
 
 void VideoDecoderWrapper::OnDecodedFrame(
