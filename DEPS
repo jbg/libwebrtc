@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '22cbef27a6cdaa4333b2589056b93c5d6ec62390',
+  'chromium_revision': 'a0e2e186a9e3ebe529d1cee8b4d4224acd228c36',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -34,13 +34,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@d11bb31289bfbdd5ceef97d31b2412b79f349e3a',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@ba3a7971930dfe316971c5057a6f491df96dde4b',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@42caab826deb8f8ad58b74e04e634fb3433846fe',
+    'https://chromium.googlesource.com/chromium/src/testing@8ad34c42046ab7c5f1d6de2a4d7dba0aaa79e682',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@17c7be145e9a317ccdaebcb8f2c2a55dd6631e95',
+    'https://chromium.googlesource.com/chromium/src/third_party@9e333964311bba3dafab8afe633bc3135a9b345c',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -149,7 +149,7 @@ deps = {
   'src/third_party/crc32c/src':
     'https://chromium.googlesource.com/external/github.com/google/crc32c.git@fa5ade41ee480003d9c5af6f43567ba22e4e17e6',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@51d99b2f3a76cbd88f0520014714ae8b33a32d47',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@2e486c0d9d44e651a4def1d8397e4dfa1871ee65',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@731bf2abeb9e5d4fd02f6c7b8c743961130de5b0',
   'src/third_party/findbugs': {
@@ -285,7 +285,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@25c7e111290fd7efaacc9149f2f3a9830119e252',
+    'https://chromium.googlesource.com/chromium/src/tools@5b4be421ac77f25337bd2e26932fdaf09e622602',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
