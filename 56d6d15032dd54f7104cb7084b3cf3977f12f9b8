@@ -104,6 +104,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "246b629e_d075d722",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-30T12:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13144a43_8000f0e4",
+      "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "612b2b1e_8fae0f78",
@@ -138,6 +156,42 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08390882_9bf7d279",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-30T12:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "130fe28e_5ed38dff",
+      "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c1a3503_963c048b",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-30T12:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "612b2b1e_8fae0f78",
+      "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06beb9c4_ea947383",
@@ -151,6 +205,24 @@
       "writtenOn": "2021-11-16T19:50:32Z",
       "side": 1,
       "message": "Need to handle DE_CLOSED even if it\u0027s not a requested event",
+      "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a7a2cce_c4bf4d17",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-11-30T12:49:49Z",
+      "side": 1,
+      "message": "And just close the fd in this case?",
+      "parentUuid": "06beb9c4_ea947383",
       "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
