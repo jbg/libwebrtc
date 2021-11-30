@@ -16,6 +16,24 @@
       "message": "Hi, I need to revert this change since it is causing some regressions: https://webrtc-review.googlesource.com/c/src/+/239441\n\nI will verify what the problem is and come back with a suggestion for a fix.",
       "revId": "61a8d9caaa31ab4ef953415882f97be5a4248774",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5fad677_2aad5cea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-30T14:03:13Z",
+      "side": 1,
+      "message": "It seems like this change affects bandwidth estimation behavior. Specifically, packets without a packet_id are getting de-duped by this change when they previously were counted multiple times in TransportFeedbackAdapter. So to maintain the same behavior we still need to call TransportFeedbackAdapter with packets with `packet_id \u003d\u003d -1`.\n\nIs it this PostTask we want to avoid: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/call/rtp_transport_controller_send.cc;l\u003d419;drc\u003dc1d62d8428875969cdc66dade8090d8863b2561e ?\n\nIf so, then we could add `last_sent_packet_-\u003epacket_id !\u003d -1` to the check added in this cl.\nOtherwise, we could check if a packet_msg returned from ProcessSentPacket before calling the pacer and let the TransportFeedbackAdapter do the de-duping instead.\n\nIf we think neither of those are a good options, then I think we need to land this behind a field trial (or add a kill-switch) and roll it out in an experiment to make sure we are not affecting clients negatively.",
+      "parentUuid": "b500f13c_bfabb8a9",
+      "revId": "61a8d9caaa31ab4ef953415882f97be5a4248774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
