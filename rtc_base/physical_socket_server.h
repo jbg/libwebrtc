@@ -69,6 +69,7 @@ class RTC_EXPORT PhysicalSocketServer : public SocketServer {
 
   // SocketFactory:
   Socket* CreateSocket(int family, int type) override;
+  std::unique_ptr<ListenSocket> CreateListenSocket(int family) override;
 
   // Internal Factory for Accept (virtual so it can be overwritten in tests).
   virtual Socket* WrapSocket(SOCKET s);
@@ -162,18 +163,12 @@ class PhysicalSocket : public Socket, public sigslot::has_slots<> {
                SocketAddress* out_addr,
                int64_t* timestamp) override;
 
-  int Listen(int backlog) override;
-  Socket* Accept(SocketAddress* out_addr) override;
-
   int Close() override;
 
   SocketServer* socketserver() { return ss_; }
 
  protected:
   int DoConnect(const SocketAddress& connect_addr);
-
-  // Make virtual so ::accept can be overwritten in tests.
-  virtual SOCKET DoAccept(SOCKET socket, sockaddr* addr, socklen_t* addrlen);
 
   // Make virtual so ::send can be overwritten in tests.
   virtual int DoSend(SOCKET socket, const char* buf, int len, int flags);
