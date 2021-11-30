@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b500f13c_bfabb8a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2021-11-30T10:12:14Z",
+      "side": 1,
+      "message": "Hi, I need to revert this change since it is causing some regressions: https://webrtc-review.googlesource.com/c/src/+/239441\n\nI will verify what the problem is and come back with a suggestion for a fix.",
+      "revId": "61a8d9caaa31ab4ef953415882f97be5a4248774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
