@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f0e33d_96dae772",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-01T09:15:41Z",
+      "side": 1,
+      "message": "Comments only, no code fixes yet. I think I need to add a bit more state, an error value (and a mutex to protect it), and a closedness flag. Does the latter need mutex protection too, or can I trust that GetRequestedEvents and OnEvents are called exclusively by the network thread?",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd22c4b1_fb18b8c7",
@@ -48,6 +65,24 @@
       "writtenOn": "2021-12-01T00:42:03Z",
       "side": 1,
       "message": "To do?",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c8733f2_f779b765",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-01T09:15:41Z",
+      "side": 1,
+      "message": "Not sure if this is ever called, but if we have the method, it should produce the errno value from the most recent Bind or Listen call, right? Is the convention that the error code also be reset to 0 on any successful operation (e.g., say Bind fails, GetError() should return non-zero, then used calls Bind() again and it succeeds, then GetError() should return zero?)",
+      "parentUuid": "fd22c4b1_fb18b8c7",
       "revId": "f1489a9943a9959627e481c006e593d6ae172648",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -71,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76944398_b8016fe3",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-01T09:15:41Z",
+      "side": 1,
+      "message": "\u003e Needs to return true after DE_CLOSED if we are following the existing logic, otherwise it will keep being added via WSAEventSelect (if DE_CLOSED doesn\u0027t close the socket).\n\nOk, I\u0027ll try to fix that. BTW, it\u0027s not clear to me when DE_CLOSED will occur?\n\n\u003e Also, do we need to check calling recv(MSG_PEEK) as the current implementation does?\n\nI don\u0027t think it makes sense to call recv on a listen socket. I think it should work fine to call accept() whenever the socket appears readable, and ignore any spurious failures.",
+      "parentUuid": "b1b7f21b_e23252d2",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b2353ac_57bd811d",
         "filename": "rtc_base/physical_socket_server.cc",
         "patchSetId": 10
@@ -82,6 +135,24 @@
       "writtenOn": "2021-12-01T00:42:03Z",
       "side": 1,
       "message": "Don\u0027t you need to override Close as well?",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "747a075e_a9ffa39f",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-01T09:15:41Z",
+      "side": 1,
+      "message": "There\u0027s no Close method on the ListenSocket interface, it will stay listening until the object is destroyed.",
+      "parentUuid": "1b2353ac_57bd811d",
       "revId": "f1489a9943a9959627e481c006e593d6ae172648",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },

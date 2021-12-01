@@ -230,6 +230,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e60a8638_f0c8f391",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-01T09:15:41Z",
+      "side": 1,
+      "message": "Ooops, I attempted to change it to return DE_ACCEPT only when the socket is listening, but then tests failed, so I changed back. If we return DE_ACCEPT unconditionally, what happens is that the thread polls for read events. Then some other thread (user of the socket) calls Listen, someone connects, and the thread wakes up.\n\nIf I initially return 0 here, and change to DE_ACCEPT only after Listen, the call to Listen would need to wake up the thread to get it to call GetRequestedEvents again, and I couldn\u0027t figure out the right way to do that (or understand how Listen handled that before this change).",
+      "parentUuid": "ef0160fc_31a033f9",
+      "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06beb9c4_ea947383",
         "filename": "rtc_base/physical_socket_server.cc",
         "patchSetId": 2
