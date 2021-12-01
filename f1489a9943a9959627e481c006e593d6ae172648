@@ -87,6 +87,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc3bd96b_18533a3c",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-01T14:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c8733f2_f779b765",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1b7f21b_e23252d2",
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "\u003e Needs to return true after DE_CLOSED if we are following the existing logic, otherwise it will keep being added via WSAEventSelect (if DE_CLOSED doesn\u0027t close the socket).\n\nOk, I\u0027ll try to fix that. BTW, it\u0027s not clear to me when DE_CLOSED will occur?\n\n\u003e Also, do we need to check calling recv(MSG_PEEK) as the current implementation does?\n\nI don\u0027t think it makes sense to call recv on a listen socket. I think it should work fine to call accept() whenever the socket appears readable, and ignore any spurious failures.",
       "parentUuid": "b1b7f21b_e23252d2",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d504ac77_8082d3ad",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-01T14:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76944398_b8016fe3",
       "revId": "f1489a9943a9959627e481c006e593d6ae172648",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
