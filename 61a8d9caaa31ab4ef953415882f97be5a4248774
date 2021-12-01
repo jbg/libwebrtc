@@ -16,6 +16,24 @@
       "message": "Do you know why we previously called ProcessPackets() inside of the scheduled stats loop?\n\nThis CL makes sense to me, but I\u0027m having trouble wrapping my head around why we were processing packets here or why we needed to throttle stats collection prior to this CL. If there was a good reason for it I\u0027d like to know before removing it.\n\nI.e. I am not opposing the CL I\u0027m just trying to gather context. Does any of the reviewers know what the old code was trying to achieve?",
       "revId": "61a8d9caaa31ab4ef953415882f97be5a4248774",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1d9c2a7_a2aba162",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-01T11:12:41Z",
+      "side": 0,
+      "message": "The old code was mostly to avoid staleness after sending the last packet. E.g. the same time of issue you get from an fps measurement if you only update on new frames - you can never reach 0 fps that way...\n\nThat is however not a concern anymore - the pacing controller is now internally accounting for that behavior. So we can probably remove this timer, with a few caveats.",
+      "parentUuid": "0ce65a21_8557acb2",
+      "revId": "61a8d9caaa31ab4ef953415882f97be5a4248774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
