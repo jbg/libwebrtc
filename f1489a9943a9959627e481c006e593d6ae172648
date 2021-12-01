@@ -16,6 +16,125 @@
       "message": "Tests now pass on windows.",
       "revId": "f1489a9943a9959627e481c006e593d6ae172648",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6150a956_d6638824",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-01T00:42:03Z",
+      "side": 1,
+      "message": "I\u0027m still somewhat concerned about PhysicalSocketFactory. It feels like it would be easy to introduce a bug (either in this CL, or future CLs if the author doesn\u0027t notice that ListenSocketDispatcher needs to be modified along with SocketDispatcher). Especially since there is very little test coverage for listen sockets.\n\nCan\u0027t think of many good ways to solve this. One idea would be to stay with a single SocketDispatcher class that implements both listen/non-listen behavior, but doesn\u0027t subclass from Socket directly. Instead PhysicalSocketServer::Create would return an adapter object (subclassing either Socket or ListenSocket) which would wrap the SocketDispatcher. At least then the ugliness would be confined to physical_socket_server.cc and we wouldn\u0027t end up with duplicated code. Still definitely not the Right Way to do things but it would make me feel less nervous about breaking something.",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd22c4b1_fb18b8c7",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-01T00:42:03Z",
+      "side": 1,
+      "message": "To do?",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b7f21b_e23252d2",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-01T00:42:03Z",
+      "side": 1,
+      "message": "Needs to return true after DE_CLOSED if we are following the existing logic, otherwise it will keep being added via WSAEventSelect (if DE_CLOSED doesn\u0027t close the socket).\n\nAlso, do we need to check calling recv(MSG_PEEK) as the current implementation does?",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b2353ac_57bd811d",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-01T00:42:03Z",
+      "side": 1,
+      "message": "Don\u0027t you need to override Close as well?",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc5cd047_28493f43",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-01T00:42:03Z",
+      "side": 1,
+      "message": "Need to handle this differently as mentioned in the other comment.",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d66d335_38606755",
+        "filename": "rtc_base/socket.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-01T00:42:03Z",
+      "side": 1,
+      "message": "No SignalCloseEvent?",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d5655b6_fd565531",
+        "filename": "rtc_base/socket.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-01T00:42:03Z",
+      "side": 1,
+      "message": "Do we not have a SignalClosed? I guess TcpPort wasn\u0027t using that, but I\u0027m a little surprised, I would expect it to at least log a message.",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
