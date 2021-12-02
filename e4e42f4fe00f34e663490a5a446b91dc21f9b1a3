@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1590d628_8ea22ece",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2021-12-02T00:16:51Z",
+      "side": 1,
+      "message": "Thank for the review. Will rework the patch according to the comment.",
+      "parentUuid": "cb6c8ca8_d6089d45",
+      "revId": "e4e42f4fe00f34e663490a5a446b91dc21f9b1a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "774374ef_afe17eda",
