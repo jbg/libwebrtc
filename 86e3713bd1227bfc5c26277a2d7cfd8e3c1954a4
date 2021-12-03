@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d445f4c_3f90f10d",
+        "filename": "modules/video_coding/codecs/vp9/include/vp9_globals.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 8409
+      },
+      "writtenOn": "2021-12-03T21:19:05Z",
+      "side": 1,
+      "message": "@reviewers: \nPresubmit complains that I\u0027m changing the native API here. Is this OK to do or should I introduce copies and declare the old variables deprecated (as the presubmit message suggests)?\n\nI renamed all webrtc usages, and don\u0027t see any usage in google3.\n\n** Presubmit Messages **\n\nYou seem to be changing native API header files. Please make sure that you:\n  1. Make compatible changes that don\u0027t break existing clients. Usually\n     this is done by keeping the existing method signatures unchanged.\n  2. Mark the old stuff as deprecated (use the ABSL_DEPRECATED macro).\n  3. Create a timeline and plan for when the deprecated stuff will be\n     removed. (The amount of time we give users to change their code\n     should be informed by how much work it is for them. If they just\n     need to replace one name with another or something equally\n     simple, 1-2 weeks might be good; if they need to do serious work,\n     up to 3 months may be called for.)\n  4. Update/inform existing downstream code owners to stop using the\n     deprecated stuff. (Send announcements to\n     discuss-webrtc@googlegroups.com and webrtc-users@google.com.)\n  5. Remove the deprecated stuff, once the agreed-upon amount of time\n     has passed.\nRelated files:\n\n  modules/video_coding/codecs/vp9/include/vp9_globals.h\n\nPresubmit checks took 5.0s to calculate.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "86e3713bd1227bfc5c26277a2d7cfd8e3c1954a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
