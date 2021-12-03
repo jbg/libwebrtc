@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecfaa534_125e176b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2021-12-03T23:57:05Z",
+      "side": 1,
+      "message": "Mirko:  What downstream projects were impacted?  Do you know why they are including platform-specific headers for desktop capture?  Those should really be private to WebRTC.",
+      "revId": "fec9900cc0ee07b801d03c573086962928b6e7b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
