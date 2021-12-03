@@ -114,8 +114,8 @@ class PacingController {
 
   void SetTransportOverhead(DataSize overhead_per_packet);
 
-  // Returns the time since the oldest queued packet was enqueued.
-  TimeDelta OldestPacketWaitTime() const;
+  // Returns the time when the oldest packet was queued.
+  Timestamp OldestPacketEnqueueTime() const;
 
   // Number of packets in the pacer queue.
   size_t QueueSizePackets() const;
@@ -125,7 +125,7 @@ class PacingController {
   // Current buffer level, i.e. max of media and padding debt.
   DataSize CurrentBufferLevel() const;
 
-  // Returns the time when the first packet was sent;
+  // Returns the time when the first packet was sent.
   absl::optional<Timestamp> FirstSentPacketTime() const;
 
   // Returns the number of milliseconds it will take to send the current

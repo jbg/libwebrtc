@@ -281,13 +281,9 @@ absl::optional<Timestamp> PacingController::FirstSentPacketTime() const {
   return first_sent_packet_time_;
 }
 
-TimeDelta PacingController::OldestPacketWaitTime() const {
+Timestamp PacingController::OldestPacketEnqueueTime() const {
   Timestamp oldest_packet = packet_queue_.OldestEnqueueTime();
-  if (oldest_packet.IsInfinite()) {
-    return TimeDelta::Zero();
-  }
-
-  return CurrentTime() - oldest_packet;
+  return oldest_packet;
 }
 
 void PacingController::EnqueuePacketInternal(
