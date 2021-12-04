@@ -94,6 +94,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3038d08_21149580",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2021-12-04T02:17:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "774374ef_afe17eda",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 1
+      },
+      "revId": "e4e42f4fe00f34e663490a5a446b91dc21f9b1a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55103188_e3d20deb",
@@ -107,6 +131,30 @@
       "writtenOn": "2021-12-01T11:12:41Z",
       "side": 1,
       "message": "This metric will break as the CL looks currently.\nYou can fix that by having PacingController expose e.g. OldestPacketEnqueueTime() and just calculating the delta in this method call instead.\nBe mindful not to return a negative delta though, PacingController::CurrentTime() might be slightly out of sync with realtime...",
+      "range": {
+        "startLine": 95,
+        "startChar": 12,
+        "endLine": 95,
+        "endChar": 32
+      },
+      "revId": "e4e42f4fe00f34e663490a5a446b91dc21f9b1a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06b34535_a0959c35",
+        "filename": "modules/pacing/task_queue_paced_sender.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2021-12-04T02:17:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55103188_e3d20deb",
       "range": {
         "startLine": 95,
         "startChar": 12,
