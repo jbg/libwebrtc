@@ -46,6 +46,30 @@
       },
       "revId": "86e3713bd1227bfc5c26277a2d7cfd8e3c1954a4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d35ab49_8011ce6d",
+        "filename": "modules/video_coding/codecs/vp9/include/vp9_globals.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-06T09:37:48Z",
+      "side": 1,
+      "message": "Note that this is a legacy api, according to native-api.md. For those files, if change seems unlikely to break third_party code (and any breakage is easy to fix), and all known/internal usage is fixed, I think it\u0027s fine to land with no deprecation procedure.\n\nYou could also check if it\u0027s possible to strike modules/video_coding/codecs/vp9/include from the list of legacy api directories. Anything applications would need access to, should be moved to api/.\n\nVaguely related: Perhaps move these constants to modules/video_coding/codecs/vp9/svc_config.h ? Or even better, to the .cc file, if you can figure out a way to keep the two tests that access the constants working.",
+      "parentUuid": "595bf8f8_36003135",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "86e3713bd1227bfc5c26277a2d7cfd8e3c1954a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
