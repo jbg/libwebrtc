@@ -22,6 +22,30 @@
       },
       "revId": "86e3713bd1227bfc5c26277a2d7cfd8e3c1954a4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "595bf8f8_36003135",
+        "filename": "modules/video_coding/codecs/vp9/include/vp9_globals.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-12-06T08:00:10Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a public API. Should be fine to skip deprecation.",
+      "parentUuid": "0d445f4c_3f90f10d",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "86e3713bd1227bfc5c26277a2d7cfd8e3c1954a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
