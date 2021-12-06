@@ -1629,10 +1629,12 @@ void LibvpxVp9Encoder::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
     DeliverBufferedFrame(end_of_picture);
   }
 
-  // TODO(nisse): Introduce some buffer cache or buffer pool, to reduce
-  // allocations and/or copy operations.
-  encoded_image_.SetEncodedData(EncodedImageBuffer::Create(
-      static_cast<const uint8_t*>(pkt->data.frame.buf), pkt->data.frame.sz));
+  size_t buffer_id;
+  auto buffer = pool_.Allocate(&buffer_id, pkt->data.frame.sz);
+  memcpy(buffer->data(), static_cast<const uint8_t*>(pkt->data.frame.buf),
+         pkt->data.frame.sz);
+  encoded_image_.SetEncodedData(buffer);
+  encoded_image_.set_size(pkt->data.frame.sz);
 
   const bool is_key_frame =
       (pkt->data.frame.flags & VPX_FRAME_IS_KEY) ? true : false;
@@ -1673,6 +1675,7 @@ void LibvpxVp9Encoder::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
                                 num_active_spatial_layers_;
     DeliverBufferedFrame(end_of_picture);
   }
+  pool_.Return(buffer_id);
 }
 
 void LibvpxVp9Encoder::DeliverBufferedFrame(bool end_of_picture) {

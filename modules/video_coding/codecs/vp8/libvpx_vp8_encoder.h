@@ -109,6 +109,7 @@ class LibvpxVp8Encoder : public VideoEncoder {
   const RateControlSettings rate_control_settings_;
 
   EncodedImageCallback* encoded_complete_callback_ = nullptr;
+  EncodedImageBufferPool pool_;
   VideoCodec codec_;
   bool inited_ = false;
   int64_t timestamp_ = 0;

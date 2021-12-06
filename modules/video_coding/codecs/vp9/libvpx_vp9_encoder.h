@@ -120,6 +120,7 @@ class LibvpxVp9Encoder : public VP9Encoder {
   EncodedImage encoded_image_;
   CodecSpecificInfo codec_specific_;
   EncodedImageCallback* encoded_complete_callback_;
+  EncodedImageBufferPool pool_;
   VideoCodec codec_;
   const VP9Profile profile_;
   bool inited_;

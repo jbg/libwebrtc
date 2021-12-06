@@ -111,6 +111,7 @@ class LibaomAv1Encoder final : public VideoEncoder {
   bool rates_configured_;
   absl::optional<aom_svc_params_t> svc_params_;
   VideoCodec encoder_settings_;
+  EncodedImageBufferPool pool_;
   aom_image_t* frame_for_encode_;
   aom_codec_ctx_t ctx_;
   aom_codec_enc_cfg_t cfg_;
@@ -663,6 +664,7 @@ int32_t LibaomAv1Encoder::Encode(
 
     // Get encoded image data.
     EncodedImage encoded_image;
+    size_t buffer_id;
     aom_codec_iter_t iter = nullptr;
     int data_pkt_count = 0;
     while (const aom_codec_cx_pkt_t* pkt =
@@ -673,9 +675,11 @@ int32_t LibaomAv1Encoder::Encode(
                                  "one data packet for an input video frame.";
           Release();
         }
-        encoded_image.SetEncodedData(EncodedImageBuffer::Create(
-            /*data=*/static_cast<const uint8_t*>(pkt->data.frame.buf),
-            /*size=*/pkt->data.frame.sz));
+        auto buffer = pool_.Allocate(&buffer_id, pkt->data.frame.sz);
+        memcpy(buffer->data(), static_cast<const uint8_t*>(pkt->data.frame.buf),
+               pkt->data.frame.sz);
+        encoded_image.SetEncodedData(buffer);
+        encoded_image.set_size(pkt->data.frame.sz);
 
         if ((pkt->data.frame.flags & AOM_EFLAG_FORCE_KF) != 0) {
           layer_frame->Keyframe();
@@ -741,6 +745,7 @@ int32_t LibaomAv1Encoder::Encode(
       encoded_image_callback_->OnEncodedImage(encoded_image,
                                               &codec_specific_info);
     }
+    pool_.Return(buffer_id);
   }
 
   return WEBRTC_VIDEO_CODEC_OK;
