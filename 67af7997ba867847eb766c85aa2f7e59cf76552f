@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "384d63cc_fc1b50d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2021-12-06T08:24:23Z",
+      "side": 1,
+      "message": "Delete status update testcases and add test to cover:\n- OldestPacketWaitTime\n- FirstSentPacketTime\n- QueueSizeData\n- ExpectedQueueTime\n",
+      "revId": "67af7997ba867847eb766c85aa2f7e59cf76552f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
