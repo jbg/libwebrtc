@@ -16,6 +16,69 @@
       "message": "Delete status update testcases and add test to cover:\n- OldestPacketWaitTime\n- FirstSentPacketTime\n- QueueSizeData\n- ExpectedQueueTime\n",
       "revId": "67af7997ba867847eb766c85aa2f7e59cf76552f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3695ea12_c433a80c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-06T16:23:53Z",
+      "side": 1,
+      "message": "Thanks!\nlgtm % nits",
+      "revId": "67af7997ba867847eb766c85aa2f7e59cf76552f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "331c62d9_1f33cbfb",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-06T16:23:53Z",
+      "side": 1,
+      "message": "nit: alternatively EXPECT_TRUE(pacer.ExpectedQueueTime().IsZero())\nI general I try to avoid calling the .ms() methods where feasible",
+      "range": {
+        "startLine": 561,
+        "startChar": 38,
+        "endLine": 561,
+        "endChar": 45
+      },
+      "revId": "67af7997ba867847eb766c85aa2f7e59cf76552f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78009fe0_f5ba2870",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-06T16:23:53Z",
+      "side": 1,
+      "message": "I you change kStartTime to a Timestamp I think you can just do\nEXPECT_EQ(pacer.FirstSentPacketTime(), kStartTime)\nand avoid the separate has_value() checks etc",
+      "range": {
+        "startLine": 569,
+        "startChar": 2,
+        "endLine": 570,
+        "endChar": 59
+      },
+      "revId": "67af7997ba867847eb766c85aa2f7e59cf76552f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
