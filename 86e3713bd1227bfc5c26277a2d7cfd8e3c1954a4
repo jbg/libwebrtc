@@ -70,6 +70,30 @@
       },
       "revId": "86e3713bd1227bfc5c26277a2d7cfd8e3c1954a4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a6dadc3_a88e7d7b",
+        "filename": "modules/video_coding/codecs/vp9/include/vp9_globals.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 8385
+      },
+      "writtenOn": "2021-12-06T23:08:50Z",
+      "side": 1,
+      "message": "Thanks everyone. Given your comments I\u0027d do without deprecation, and/but I think it\u0027s safest to keep them in the same place: IF some external app really depends on them, then it\u0027s at least just a simple and obvious rename.",
+      "parentUuid": "5d35ab49_8011ce6d",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "86e3713bd1227bfc5c26277a2d7cfd8e3c1954a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
