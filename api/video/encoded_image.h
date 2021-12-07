@@ -15,6 +15,7 @@
 
 #include <map>
 #include <utility>
+#include <vector>
 
 #include "absl/types/optional.h"
 #include "api/rtp_packet_infos.h"
@@ -27,6 +28,7 @@
 #include "api/video/video_timing.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/ref_count.h"
+#include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {
@@ -63,6 +65,21 @@ class RTC_EXPORT EncodedImageBuffer : public EncodedImageBufferInterface {
 
   size_t size_;
   uint8_t* buffer_;
+};
+
+class EncodedImageBufferPool {
+ public:
+  EncodedImageBufferPool() = default;
+  ~EncodedImageBufferPool() = default;
+  rtc::scoped_refptr<EncodedImageBuffer> Allocate(size_t* id,
+                                                  size_t buffer_size);
+  void Return(size_t id);
+
+ private:
+  Mutex buffer_lock_;
+  std::vector<rtc::scoped_refptr<EncodedImageBuffer>> buffers_
+      RTC_GUARDED_BY(buffer_lock_);
+  std::vector<size_t> free_ids_ RTC_GUARDED_BY(buffer_lock_);
 };
 
 // TODO(bug.webrtc.org/9378): This is a legacy api class, which is slowly being

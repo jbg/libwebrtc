@@ -11,6 +11,7 @@
 #include "modules/video_coding/codecs/test/encoded_video_frame_producer.h"
 
 #include <memory>
+#include <utility>
 #include <vector>
 
 #include "api/test/create_frame_generator.h"
@@ -35,7 +36,10 @@ class EncoderCallback : public EncodedImageCallback {
  private:
   Result OnEncodedImage(const EncodedImage& encoded_image,
                         const CodecSpecificInfo* codec_specific_info) override {
-    output_frames_.push_back({encoded_image, *codec_specific_info});
+    EncodedImage image_copy(encoded_image);
+    image_copy.SetEncodedData(webrtc::EncodedImageBuffer::Create(
+        encoded_image.data(), encoded_image.size()));
+    output_frames_.push_back({std::move(image_copy), *codec_specific_info});
     return Result(Result::Error::OK);
   }
 

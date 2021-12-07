@@ -61,6 +61,29 @@ void EncodedImageBuffer::Realloc(size_t size) {
   size_ = size;
 }
 
+rtc::scoped_refptr<EncodedImageBuffer> EncodedImageBufferPool::Allocate(
+    size_t* id,
+    size_t buffer_size) {
+  MutexLock lock(&buffer_lock_);
+  if (!free_ids_.empty()) {
+    *id = free_ids_.back();
+    if (buffers_[*id]->size() < buffer_size) {
+      buffers_[*id]->Realloc(buffer_size);
+    }
+    free_ids_.pop_back();
+    return buffers_[*id];
+  }
+
+  buffers_.push_back(EncodedImageBuffer::Create(buffer_size));
+  *id = buffers_.size() - 1;
+  return buffers_[*id];
+}
+
+void EncodedImageBufferPool::Return(size_t id) {
+  MutexLock lock(&buffer_lock_);
+  free_ids_.push_back(id);
+}
+
 EncodedImage::EncodedImage() = default;
 
 EncodedImage::EncodedImage(EncodedImage&&) = default;
