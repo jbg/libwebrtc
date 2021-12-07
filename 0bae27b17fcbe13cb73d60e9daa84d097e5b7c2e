@@ -16,6 +16,74 @@
       "message": "Sorry for the delay but I should be able to give this another review pass tomorrow.",
       "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0e44c30_0e9a1192",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-07T21:07:28Z",
+      "side": 1,
+      "message": "Why do s_ and is_closed_ need to be guarded? It looks like existing code only guards error_ and fSignaled_. Acquiring a mutex for each iteration of the socket loop could be costly.",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f9cb7cc_8850d260",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-07T21:07:28Z",
+      "side": 1,
+      "message": "It looks like existing code only surfaces this error in SignalCloseEvent, and doesn\u0027t return it from GetError, only populating the GetError return value when a call like ::recv fails.\n\nCould be a bug? For now it may make sense to make the behavior of Socket and ListenSocket match, and fix both in a separate CL.",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21cf73bf_c5d60ded",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-07T21:07:28Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s possible to get DE_ACCEPT with an error anymore, see ProcessEvents",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c38746db_6dd4be11",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-07T21:07:28Z",
+      "side": 1,
+      "message": "Update last error here?",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

@@ -193,6 +193,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5176e99b_ddc60f15",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-07T21:07:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "747a075e_a9ffa39f",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc5cd047_28493f43",
@@ -206,6 +224,24 @@
       "writtenOn": "2021-12-01T00:42:03Z",
       "side": 1,
       "message": "Need to handle this differently as mentioned in the other comment.",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "685dde77_213d5a09",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-07T21:07:28Z",
+      "side": 1,
+      "message": "Has been fixed.",
+      "parentUuid": "cc5cd047_28493f43",
       "revId": "f1489a9943a9959627e481c006e593d6ae172648",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -240,6 +276,24 @@
       "writtenOn": "2021-12-01T00:42:03Z",
       "side": 1,
       "message": "Do we not have a SignalClosed? I guess TcpPort wasn\u0027t using that, but I\u0027m a little surprised, I would expect it to at least log a message.",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e067cb8_99ee8b7e",
+        "filename": "rtc_base/socket.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-07T21:07:28Z",
+      "side": 1,
+      "message": "Closing duplicate comment.",
+      "parentUuid": "4d66d335_38606755",
       "revId": "f1489a9943a9959627e481c006e593d6ae172648",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

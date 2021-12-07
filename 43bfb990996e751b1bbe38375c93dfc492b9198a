@@ -86,6 +86,24 @@
       "parentUuid": "c0ca8497_59aa313b",
       "revId": "43bfb990996e751b1bbe38375c93dfc492b9198a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3013d6a0_6d9e89c6",
+        "filename": "rtc_base/socket.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-07T21:07:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6ae786ab_77ada556",
+      "revId": "43bfb990996e751b1bbe38375c93dfc492b9198a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

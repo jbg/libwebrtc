@@ -248,6 +248,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7bacf03_b7551411",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2021-12-07T21:07:28Z",
+      "side": 1,
+      "message": "Hmm... It doesn\u0027t seem like calling Listen from another thread would be safe in the first place. But it looks like the existing code gets around this because the PhysicalSocket constructor sets DE_READ | DE_WRITE.\n\nCould you return DE_ACCEPT unconditionally at the start but make sure you return 0 after DE_CLOSED?",
+      "parentUuid": "e60a8638_f0c8f391",
+      "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06beb9c4_ea947383",
         "filename": "rtc_base/physical_socket_server.cc",
         "patchSetId": 2
