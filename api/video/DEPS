@@ -8,6 +8,7 @@ specific_include_rules = {
 
   "encoded_image\.h" : [
     "+rtc_base/ref_count.h",
+    "+rtc_base/synchronization/mutex.h",
   ],
 
   "i010_buffer\.h": [
