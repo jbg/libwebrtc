@@ -16,6 +16,52 @@
       "message": "Thank for your patient review.",
       "revId": "ba41aa78bb24d756e4707da8f9fefcb54bfdce5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f16613d_78b37f9d",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-07T09:16:42Z",
+      "side": 1,
+      "message": "Ok, just one more pass of things I missed, sorry...\nI recommend changing to use data types where you can.\nE.g. change kPacingRate to a DataRate, kPacketSize to a DataSize and use TimeDelta for durations. Then you don\u0027t need to worry about unit types (e.g. bits per second vs bytes per second, or time in seconds or milliseconds?) - and get conversions for free - no need typ multiply by 8 or 1000. For \"example expected_queue_size / kPacingRate\" automatically generates a TimeDelta if they are DataSize and DataRate objects respectively.\n\nIf this CL is blocking other things it\u0027s fine if that is done in a follow-up.",
+      "range": {
+        "startLine": 541,
+        "startChar": 19,
+        "endLine": 541,
+        "endChar": 25
+      },
+      "revId": "ba41aa78bb24d756e4707da8f9fefcb54bfdce5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9a47f75_014efc6e",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-07T09:16:42Z",
+      "side": 1,
+      "message": "nit: remove this - it\u0027s now already covered by the below check",
+      "range": {
+        "startLine": 594,
+        "startChar": 2,
+        "endLine": 594,
+        "endChar": 54
+      },
+      "revId": "ba41aa78bb24d756e4707da8f9fefcb54bfdce5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
