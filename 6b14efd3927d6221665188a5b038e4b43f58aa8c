@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "947fba52_f68d4301",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-07T11:58:07Z",
+      "side": 1,
+      "message": "great, let\u0027s ship it!",
+      "revId": "6b14efd3927d6221665188a5b038e4b43f58aa8c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
