@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "257059b8_f2e66e58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-12-08T05:48:59Z",
+      "side": 1,
+      "message": "Artem, can you take this one?\nI note that the same name is defined in two fuzzers with the definition of \"libgav1::kIvfFileHeaderSize + libgav1::kIvfFrameHeaderSize\", while the definition here is simply 32. Which one is more correct?",
+      "revId": "488bedc1721fcbea07aac1dd07397a8ebf432049",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5016b9eb_8715dc93",
