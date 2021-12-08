@@ -16,6 +16,52 @@
       "message": "Hi Niels, could you review this CL?",
       "revId": "f97c7fe5c68914f1275506bdd75b3d2318b04137",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34240d6b_00974b13",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-08T09:32:19Z",
+      "side": 1,
+      "message": "Overall comments and questions:\n\nDo you have any benchmarks that show that using this pool gives a real performance benefit?\n\nThis needs a class comment, to explain its purpose.\n\nIt should go in a separate header file, not encoded_image.h.\n\nUnclear to me if it should be part of the webrtc api/. If it\u0027s a utility for internal use, it could go in common_video/ instead.",
+      "range": {
+        "startLine": 70,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 28
+      },
+      "revId": "f97c7fe5c68914f1275506bdd75b3d2318b04137",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b31dc9f4_ab5f7e9b",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-08T09:32:19Z",
+      "side": 1,
+      "message": "I think this is brittle, the buffer is a refcounted object attached to the encoded_image, and passed to encoded_image_callback_, and then we\u0027re no longer in control of how it is used, e.g., it might be posted to the network thread for packetization (I don\u0027t know on which thread packetization happens in the current code, my point is, that it is out of this class\u0027 control). \n\nTo reuse buffers safely, I think you need to used the HasOneRef hack, like in https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_video/video_frame_buffer_pool.cc",
+      "range": {
+        "startLine": 748,
+        "startChar": 4,
+        "endLine": 748,
+        "endChar": 28
+      },
+      "revId": "f97c7fe5c68914f1275506bdd75b3d2318b04137",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
