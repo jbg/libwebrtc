@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea6d84f5_9b57fe4e",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-12-08T13:46:01Z",
+      "side": 1,
+      "message": "I believe this is safe because source_tracker_ is set at construction time and never changed. Could you try to add a \"const\" declaration to source_tracker_ to let the compiler verify that assumption?",
+      "revId": "621c1c0f1b5903d296ebd62eaea419269977b3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
