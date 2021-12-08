@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fb948f7_d3a56cd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-12-08T05:19:18Z",
+      "side": 1,
+      "message": "Style nits.",
+      "revId": "488bedc1721fcbea07aac1dd07397a8ebf432049",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5016b9eb_8715dc93",
+        "filename": "modules/video_coding/utility/ivf_defines.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-12-08T05:19:18Z",
+      "side": 1,
+      "message": "Year of newly created files needs to be the year the file was created.",
+      "revId": "488bedc1721fcbea07aac1dd07397a8ebf432049",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8dcf5d_bdd90a04",
+        "filename": "modules/video_coding/utility/ivf_defines.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-12-08T05:19:18Z",
+      "side": 1,
+      "message": "Please add a file comment stating what this file is and why it exists.\n\nhttps://google.github.io/styleguide/cppguide.html#File_Comments\n\n(webrtc is lousy at that - we\u0027re trying to imprive)\n\nIn this case, \"This file contains definitions that are common to the IvfFileReader and IvfFileWriter classes\" should be sufficient.",
+      "revId": "488bedc1721fcbea07aac1dd07397a8ebf432049",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
