@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df72d78b_cdd7d929",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2021-12-08T17:34:22Z",
+      "side": 1,
+      "message": "I don\u0027t know about libgav1 definition. At least here in multiple sources it is just 32:\nhttps://wiki.multimedia.cx/index.php/IVF\nhttps://chromium.googlesource.com/chromium/src/media/+/refs/heads/main/filters/ivf_parser.h",
+      "parentUuid": "257059b8_f2e66e58",
+      "revId": "488bedc1721fcbea07aac1dd07397a8ebf432049",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5016b9eb_8715dc93",
