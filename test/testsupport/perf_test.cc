@@ -13,17 +13,29 @@
 #include <stdio.h>
 
 #include <fstream>
+#include <mutex>
 #include <set>
 #include <sstream>
+#include <thread>
 #include <vector>
 
+#include "absl/flags/declare.h"
+#include "absl/flags/flag.h"
 #include "absl/strings/string_view.h"
 #include "api/numerics/samples_stats_counter.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "test/testsupport/file_utils.h"
 #include "test/testsupport/perf_test_histogram_writer.h"
+
+ABSL_FLAG(bool,
+          save_worst_frame,
+          false,
+          "Enable saving a frame with the lowest PSNR to a jpeg file in the "
+          "test_artifacts_dir");
+ABSL_FLAG(std::string, test_artifacts_dir, "", "test artifact dir");
 
 namespace webrtc {
 namespace test {
@@ -240,21 +252,39 @@ void PrintPlottableResults(const std::vector<std::string>& desired_graphs) {
 }
 
 bool WritePerfResults(const std::string& output_path) {
+  // static int test_tt = 0;
+  //std::mutex m;
+  // srand (time(NULL));
+  //int tt = rand() % 1000;
   std::string results = GetPerfResults();
   CreateDir(DirName(output_path));
-  FILE* output = fopen(output_path.c_str(), "wb");
-  if (output == NULL) {
-    printf("Failed to write to %s.\n", output_path.c_str());
-    return false;
-  }
-  size_t written =
-      fwrite(results.c_str(), sizeof(char), results.size(), output);
-  fclose(output);
 
-  if (written != results.size()) {
-    long expected = results.size();
-    printf("Wrote %zu, tried to write %lu\n", written, expected);
-    return false;
+  //if (!results.empty())
+  {
+    /*std::thread::id this_id = std::this_thread::get_id();
+    std::stringstream ss;
+    ss << this_id;
+    std::string tmp_name = output_path + "_" + std::to_string(tt) + "_" +
+    ss.str() + ".txt";
+    FILE* tmp_output = fopen(tmp_name.c_str(), "wb");
+    fwrite(results.c_str(), sizeof(char), results.size(), tmp_output);
+    fclose(tmp_output);*/
+
+
+    //std::lock_guard<std::mutex> lock(m);
+    FILE* output = fopen(output_path.c_str(), "ab");
+    if (output == NULL) {
+      printf("Failed to write to %s.\n", output_path.c_str());
+      return false;
+    }
+    size_t written =
+        fwrite(results.c_str(), sizeof(char), results.size(), output);
+    fclose(output);
+    if (written != results.size()) {
+      long expected = results.size();
+      printf("Wrote %zu, tried to write %lu\n", written, expected);
+      return false;
+    }
   }
 
   return true;
