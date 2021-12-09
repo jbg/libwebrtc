@@ -223,7 +223,7 @@ class TestMainImpl : public TestMain {
     int exit_code = RUN_ALL_TESTS();
 
     std::string perf_output_file =
-        absl::GetFlag(FLAGS_isolated_script_test_perf_output);
+        absl::GetFlag(FLAGS_isolated_script_test_perf_output) + "_1";
     if (!perf_output_file.empty()) {
       if (!webrtc::test::WritePerfResults(perf_output_file)) {
         return 1;
