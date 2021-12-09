@@ -663,14 +663,25 @@ if (rtc_include_tests && !build_with_chromium) {
   rtc_test("webrtc_perf_tests") {
     testonly = true
     deps = [
-      "audio:audio_perf_tests",
+      #"video:video_full_stack_tests",
+      #"video:video_pc_full_stack_tests",
+      #"audio:audio_perf_tests",
+      "api:audio_options_api",
+      "api:create_peerconnection_factory",
+      "api:libjingle_peerconnection_api",
+      "api:media_stream_interface",
+      "api:rtc_stats_api",
+      "api:scoped_refptr",
+      "api/audio:audio_mixer_api",
+      "api/audio_codecs:audio_codecs_api",
+      "api/audio_codecs:builtin_audio_decoder_factory",
+      "api/audio_codecs:builtin_audio_encoder_factory",
       "call:call_perf_tests",
-      "modules/audio_coding:audio_coding_perf_tests",
-      "modules/audio_processing:audio_processing_perf_tests",
-      "pc:peerconnection_perf_tests",
+
+      #"modules/audio_coding:audio_coding_perf_tests",
+      #"modules/audio_processing:audio_processing_perf_tests",
+      #"pc:peerconnection_perf_tests",
       "test:test_main",
-      "video:video_full_stack_tests",
-      "video:video_pc_full_stack_tests",
     ]
 
     data = webrtc_perf_tests_resources
