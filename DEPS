@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '3e28ffc1a02be49d550f02a0b939d88412ecf730',
+  'chromium_revision': '08f28800f73972aa5092c972db2cc23132b36ca3',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -23,9 +23,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@b7a4a63077c19d57278a5511ca496684dfc4cf9d',
+    'https://chromium.googlesource.com/chromium/src/base@8d08a240be0dd5899fb867ad1c18530a8a549431',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@b0f69c015d1a90a7b8a236288c0f326d56afca24',
+    'https://chromium.googlesource.com/chromium/src/build@808c68b64c49b881424794840e2e9f3967f11baa',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@075dd7e22837a69189003e4fa84499acf63188cf',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -38,9 +38,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@f900a7275ed5edd160b5fef11c8a322b7097c81a',
+    'https://chromium.googlesource.com/chromium/src/testing@6013178743e71628b2193a1df25a38b2f95608d2',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@83654bf8f2bebe9007d7c1f7b51a7d5a2ce1124a',
+    'https://chromium.googlesource.com/chromium/src/third_party@7ff033281612816916bd3ea12f285e71349a8ab2',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -285,7 +285,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@402f7e816ae626d5cfd05ad12d5ea8091f8563ff',
+    'https://chromium.googlesource.com/chromium/src/tools@087ba756fa89b515737477d8027cb3d0ff0d044c',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
