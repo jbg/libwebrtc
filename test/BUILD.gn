@@ -263,6 +263,7 @@ rtc_library("perf_test") {
     "../test:fileutils",
   ]
   absl_deps = [
+    "//third_party/abseil-cpp/absl/flags:flag",
     "//third_party/abseil-cpp/absl/strings",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
