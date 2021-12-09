@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87d73ce3_81fd44dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2021-12-09T16:35:28Z",
+      "side": 1,
+      "message": "This is what comes from running an SDP fuzzer...\n",
+      "revId": "1fee80b3ebc741f3f30992c61fcb416f4359932d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
