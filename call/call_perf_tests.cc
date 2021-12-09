@@ -345,7 +345,8 @@ void CallPerfTest::TestAudioVideoSync(FecMode fec,
       ToQueuedTask([to_delete = observer.release()]() { delete to_delete; }));
 }
 
-TEST_F(CallPerfTest, Synchronization_PlaysOutAudioAndVideoWithoutClockDrift) {
+TEST_F(CallPerfTest,
+       DISABLED_Synchronization_PlaysOutAudioAndVideoWithoutClockDrift) {
   TestAudioVideoSync(FecMode::kOff, CreateOrder::kAudioFirst,
                      DriftingClock::kNoDrift, DriftingClock::kNoDrift,
                      DriftingClock::kNoDrift, "_video_no_drift");
@@ -358,16 +359,18 @@ TEST_F(CallPerfTest, Synchronization_PlaysOutAudioAndVideoWithVideoNtpDrift) {
                      "_video_ntp_drift");
 }
 
-TEST_F(CallPerfTest,
-       Synchronization_PlaysOutAudioAndVideoWithAudioFasterThanVideoDrift) {
+TEST_F(
+    CallPerfTest,
+    DISABLED_Synchronization_PlaysOutAudioAndVideoWithAudioFasterThanVideoDrift) {
   TestAudioVideoSync(FecMode::kOff, CreateOrder::kAudioFirst,
                      DriftingClock::kNoDrift,
                      DriftingClock::PercentsSlower(30.0f),
                      DriftingClock::PercentsFaster(30.0f), "_audio_faster");
 }
 
-TEST_F(CallPerfTest,
-       Synchronization_PlaysOutAudioAndVideoWithVideoFasterThanAudioDrift) {
+TEST_F(
+    CallPerfTest,
+    DISABLED_Synchronization_PlaysOutAudioAndVideoWithVideoFasterThanAudioDrift) {
   TestAudioVideoSync(FecMode::kOn, CreateOrder::kVideoFirst,
                      DriftingClock::kNoDrift,
                      DriftingClock::PercentsFaster(30.0f),
@@ -518,7 +521,7 @@ void CallPerfTest::TestCaptureNtpTime(
 
 // Flaky tests, disabled on Mac and Windows due to webrtc:8291.
 #if !(defined(WEBRTC_MAC) || defined(WEBRTC_WIN))
-TEST_F(CallPerfTest, Real_Estimated_CaptureNtpTimeWithNetworkDelay) {
+TEST_F(CallPerfTest, DISABLED_Real_Estimated_CaptureNtpTimeWithNetworkDelay) {
   BuiltInNetworkBehaviorConfig net_config;
   net_config.queue_delay_ms = 100;
   // TODO(wu): lower the threshold as the calculation/estimation becomes more
@@ -529,7 +532,7 @@ TEST_F(CallPerfTest, Real_Estimated_CaptureNtpTimeWithNetworkDelay) {
   TestCaptureNtpTime(net_config, kThresholdMs, kStartTimeMs, kRunTimeMs);
 }
 
-TEST_F(CallPerfTest, Real_Estimated_CaptureNtpTimeWithNetworkJitter) {
+TEST_F(CallPerfTest, DISABLED_Real_Estimated_CaptureNtpTimeWithNetworkJitter) {
   BuiltInNetworkBehaviorConfig net_config;
   net_config.queue_delay_ms = 100;
   net_config.delay_standard_deviation_ms = 10;
@@ -744,11 +747,11 @@ void CallPerfTest::TestMinTransmitBitrate(bool pad_to_min_bitrate) {
   RunBaseTest(&test);
 }
 
-TEST_F(CallPerfTest, Bitrate_Kbps_PadsToMinTransmitBitrate) {
+TEST_F(CallPerfTest, DISABLED_Bitrate_Kbps_PadsToMinTransmitBitrate) {
   TestMinTransmitBitrate(true);
 }
 
-TEST_F(CallPerfTest, Bitrate_Kbps_NoPadWithoutMinTransmitBitrate) {
+TEST_F(CallPerfTest, DISABLED_Bitrate_Kbps_NoPadWithoutMinTransmitBitrate) {
   TestMinTransmitBitrate(false);
 }
 
@@ -760,7 +763,7 @@ TEST_F(CallPerfTest, Bitrate_Kbps_NoPadWithoutMinTransmitBitrate) {
 #define MAYBE_KeepsHighBitrateWhenReconfiguringSender \
   KeepsHighBitrateWhenReconfiguringSender
 #endif
-TEST_F(CallPerfTest, MAYBE_KeepsHighBitrateWhenReconfiguringSender) {
+TEST_F(CallPerfTest, DISABLED_KeepsHighBitrateWhenReconfiguringSender) {
   static const uint32_t kInitialBitrateKbps = 400;
   static const uint32_t kReconfigureThresholdKbps = 600;
 
@@ -1050,7 +1053,7 @@ void CallPerfTest::TestMinAudioVideoBitrate(int test_bitrate_from,
 #else
 #define MAYBE_Min_Bitrate_VideoAndAudio Min_Bitrate_VideoAndAudio
 #endif
-TEST_F(CallPerfTest, MAYBE_Min_Bitrate_VideoAndAudio) {
+TEST_F(CallPerfTest, DISABLED_Min_Bitrate_VideoAndAudio) {
   TestMinAudioVideoBitrate(110, 40, -10, 10000, 70000, 200000);
 }
 
@@ -1175,7 +1178,7 @@ void CallPerfTest::TestEncodeFramerate(VideoEncoderFactory* encoder_factory,
   RunBaseTest(&test);
 }
 
-TEST_F(CallPerfTest, TestEncodeFramerateVp8Simulcast) {
+TEST_F(CallPerfTest, DISABLED_TestEncodeFramerateVp8Simulcast) {
   InternalEncoderFactory internal_encoder_factory;
   test::FunctionVideoEncoderFactory encoder_factory(
       [&internal_encoder_factory]() {
