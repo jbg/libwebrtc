@@ -26,7 +26,7 @@ const std::string& DefaultArtifactPath() {
 }  // namespace
 
 ABSL_FLAG(std::string,
-          test_artifacts_dir,
+          test_artifacts_dir2,
           DefaultArtifactPath().c_str(),
           "The output folder where test output should be saved.");
 
@@ -34,18 +34,18 @@ namespace webrtc {
 namespace test {
 
 bool GetTestArtifactsDir(std::string* out_dir) {
-  if (absl::GetFlag(FLAGS_test_artifacts_dir).empty()) {
+  if (absl::GetFlag(FLAGS_test_artifacts_dir2).empty()) {
     RTC_LOG(LS_WARNING) << "No test_out_dir defined.";
     return false;
   }
-  *out_dir = absl::GetFlag(FLAGS_test_artifacts_dir);
+  *out_dir = absl::GetFlag(FLAGS_test_artifacts_dir2);
   return true;
 }
 
 bool WriteToTestArtifactsDir(const char* filename,
                              const uint8_t* buffer,
                              size_t length) {
-  if (absl::GetFlag(FLAGS_test_artifacts_dir).empty()) {
+  if (absl::GetFlag(FLAGS_test_artifacts_dir2).empty()) {
     RTC_LOG(LS_WARNING) << "No test_out_dir defined.";
     return false;
   }
@@ -56,7 +56,7 @@ bool WriteToTestArtifactsDir(const char* filename,
   }
 
   FileWrapper output = FileWrapper::OpenWriteOnly(
-      JoinFilename(absl::GetFlag(FLAGS_test_artifacts_dir), filename));
+      JoinFilename(absl::GetFlag(FLAGS_test_artifacts_dir2), filename));
 
   return output.is_open() && output.Write(buffer, length);
 }

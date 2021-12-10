@@ -62,6 +62,9 @@ def _ParseArgs():
       '--isolated-script-test-perf-output',
       default=None,
       help='Path to store perf results in histogram proto format.')
+  parser.add_argument('--dump_json_test_results',
+                      default=None,
+                      help='Path to store json test results.')
   parser.add_argument('--extra-test-args',
                       default=[],
                       action='append',
@@ -286,7 +289,10 @@ def main():
         '-v', '--num-retries', args.num_retries
     ]
   else:
-    test_command = [os.path.join(args.build_dir, 'low_bandwidth_audio_test')]
+    test_command = [
+        os.path.join(args.build_dir, 'low_bandwidth_audio_test'),
+        '--isolated_script_test_perf_output=%s_tt' % args.isolated_script_test_perf_output,
+    ]
 
   analyzers = [Analyzer('pesq', _RunPesq, pesq_path, 16000)]
   # Check if POLQA can run at all, or skip the 48 kHz tests entirely.
@@ -351,7 +357,7 @@ def main():
         os.remove(perf_results_file)
 
   if args.isolated_script_test_perf_output:
-    with open(args.isolated_script_test_perf_output, 'wb') as f:
+    with open(args.isolated_script_test_perf_output, 'ab') as f:
       f.write(histograms.AsProto().SerializeToString())
 
   return test_process.wait()

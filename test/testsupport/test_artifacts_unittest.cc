@@ -20,16 +20,16 @@
 #include "test/gtest.h"
 #include "test/testsupport/file_utils.h"
 
-ABSL_DECLARE_FLAG(std::string, test_artifacts_dir);
+ABSL_DECLARE_FLAG(std::string, test_artifacts_dir2);
 
 namespace webrtc {
 namespace test {
 
 TEST(IsolatedOutputTest, ShouldRejectInvalidIsolatedOutDir) {
-  const std::string backup = absl::GetFlag(FLAGS_test_artifacts_dir);
-  absl::SetFlag(&FLAGS_test_artifacts_dir, "");
+  const std::string backup = absl::GetFlag(FLAGS_test_artifacts_dir2);
+  absl::SetFlag(&FLAGS_test_artifacts_dir2, "");
   ASSERT_FALSE(WriteToTestArtifactsDir("a-file", "some-contents"));
-  absl::SetFlag(&FLAGS_test_artifacts_dir, backup);
+  absl::SetFlag(&FLAGS_test_artifacts_dir2, backup);
 }
 
 TEST(IsolatedOutputTest, ShouldRejectInvalidFileName) {
@@ -43,7 +43,7 @@ TEST(IsolatedOutputTest, ShouldBeAbleToWriteContent) {
   const char* content = "some-contents";
   if (WriteToTestArtifactsDir(filename, content)) {
     std::string out_file =
-        JoinFilename(absl::GetFlag(FLAGS_test_artifacts_dir), filename);
+        JoinFilename(absl::GetFlag(FLAGS_test_artifacts_dir2), filename);
     FileWrapper input = FileWrapper::OpenReadOnly(out_file);
     EXPECT_TRUE(input.is_open());
     EXPECT_TRUE(input.Rewind());

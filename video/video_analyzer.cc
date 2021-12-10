@@ -33,7 +33,7 @@
 #include "test/testsupport/test_artifacts.h"
 
 ABSL_FLAG(bool,
-          save_worst_frame,
+          save_worst_frame2,
           false,
           "Enable saving a frame with the lowest PSNR to a jpeg file in the "
           "test_artifacts_dir");
@@ -721,7 +721,7 @@ void VideoAnalyzer::PrintResults() {
   // Saving only the worst frame for manual analysis. Intention here is to
   // only detect video corruptions and not to track picture quality. Thus,
   // jpeg is used here.
-  if (absl::GetFlag(FLAGS_save_worst_frame) && worst_frame_) {
+  if (absl::GetFlag(FLAGS_save_worst_frame2) && worst_frame_) {
     std::string output_dir;
     test::GetTestArtifactsDir(&output_dir);
     std::string output_path =
