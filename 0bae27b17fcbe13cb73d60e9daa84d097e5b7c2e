@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da8ddc2f_2cb8bdb8",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-10T13:07:29Z",
+      "side": 1,
+      "message": "For `s_`, it is accessed by public methods, like GetLocalAddress. It should be doable to make it a construction time const, and turn Create into a static factory method. \n\n`is_closed_` is accessed by Bind and Listen. \n\nIt\u0027s still not entirely clear to me when OnEvent can get DE_CLOSE. But if we access `is_closed_` only in OnEvent, GetRequestedEvents, and the destructor, then I agree it needs no mutex.",
+      "parentUuid": "e0e44c30_0e9a1192",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f9cb7cc_8850d260",
         "filename": "rtc_base/physical_socket_server.cc",
         "patchSetId": 12
@@ -66,6 +84,24 @@
       "writtenOn": "2021-12-07T21:07:28Z",
       "side": 1,
       "message": "It looks like existing code only surfaces this error in SignalCloseEvent, and doesn\u0027t return it from GetError, only populating the GetError return value when a call like ::recv fails.\n\nCould be a bug? For now it may make sense to make the behavior of Socket and ListenSocket match, and fix both in a separate CL.",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c205dbb9_5e83d223",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-10T13:07:29Z",
+      "side": 1,
+      "message": "Deleting setting it here, for now. Then GetError will only report errors related to Bind and Listen, the methods that the user of the class call directly. Makes sense to me. (Even better would be to make error code part of the return value, but that\u0027s a larger redesign).",
+      "parentUuid": "1f9cb7cc_8850d260",
       "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -100,6 +136,24 @@
       "writtenOn": "2021-12-07T21:07:28Z",
       "side": 1,
       "message": "Update last error here?",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efe6c88c_29ffa799",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-10T13:07:29Z",
+      "side": 1,
+      "message": "Not sure if that is useful, since we don\u0027t tell the application that anything went wrong, and if we have some spurious wakeups resulting in EWOULDBLOCK, that should probably be ignored.\n\nLet me know if you really think saving the error is useful, otherwise I\u0027d be inclined to just ignore (and possibly log) errors here..",
+      "parentUuid": "c38746db_6dd4be11",
       "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
