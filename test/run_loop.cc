@@ -40,6 +40,12 @@ void RunLoop::Flush() {
   worker_thread_.ProcessMessages(1000);
 }
 
+void RunLoop::FlushImmediate() {
+  worker_thread_.PostTask(
+      ToQueuedTask([this]() { socket_server_.FailNextWait(); }));
+  worker_thread_.ProcessMessages(0);
+}
+
 RunLoop::FakeSocketServer::FakeSocketServer() = default;
 RunLoop::FakeSocketServer::~FakeSocketServer() = default;
 
