@@ -529,21 +529,6 @@ TEST_P(FrameBufferProxyTest, SlowDecoderDropsTemporalLayers) {
   // EXPECT_EQ(dropped_frames(), 2);
 }
 
-TEST_P(FrameBufferProxyTest, OldTimestampNotDecodable) {
-  StartNextDecodeForceKeyframe();
-
-  proxy_->InsertFrame(Builder().Id(0).Time(kFps30Rtp).AsLast().Build());
-  EXPECT_TRUE(WaitForFrameOrTimeout(kFps30Delay));
-  EXPECT_THAT(last_frame(), Pointee(FrameWithId(0)));
-
-  // Timestamp is before previous frame's.
-  proxy_->InsertFrame(Builder().Id(1).Time(0).AsLast().Build());
-  StartNextDecode();
-  // F1 should be dropped since its timestamp went backwards.
-  EXPECT_TRUE(WaitForFrameOrTimeout(kMaxWaitForFrame));
-  EXPECT_EQ(timeouts(), 1);
-}
-
 TEST_P(FrameBufferProxyTest, NewFrameInsertedWhileWaitingToReleaseFrame) {
   StartNextDecodeForceKeyframe();
   // Initial keyframe.
@@ -633,6 +618,7 @@ TEST_P(FrameBufferProxyTest, TestStatsCallback) {
 
 INSTANTIATE_TEST_SUITE_P(FrameBufferProxy,
                          FrameBufferProxyTest,
-                         ::testing::Values("WebRTC-FrameBuffer3/Disabled/"));
+                         ::testing::Values("WebRTC-FrameBuffer3/Disabled/",
+                                           "WebRTC-FrameBuffer3/Enabled/"));
 
 }  // namespace webrtc
