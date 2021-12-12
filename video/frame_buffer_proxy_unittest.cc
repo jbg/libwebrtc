@@ -633,6 +633,7 @@ TEST_P(FrameBufferProxyTest, TestStatsCallback) {
 
 INSTANTIATE_TEST_SUITE_P(FrameBufferProxy,
                          FrameBufferProxyTest,
-                         ::testing::Values("WebRTC-FrameBuffer3/Disabled/"));
+                         ::testing::Values("WebRTC-FrameBuffer3/Disabled/",
+                                           "WebRTC-FrameBuffer3/Enabled/"));
 
 }  // namespace webrtc
