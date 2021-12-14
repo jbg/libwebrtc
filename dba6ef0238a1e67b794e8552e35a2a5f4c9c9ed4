@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02f0c517_86e59f90",
+        "filename": "config.star",
+        "patchSetId": 2
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2021-12-14T12:04:52Z",
+      "side": 1,
+      "message": "@jansson, can you confirm I need to add this service account in the ACL ?",
+      "range": {
+        "startLine": 689,
+        "startChar": 8,
+        "endLine": 689,
+        "endChar": 23
+      },
+      "revId": "dba6ef0238a1e67b794e8552e35a2a5f4c9c9ed4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8d5e56_ed7946d9",
+        "filename": "config.star",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2021-12-14T12:04:52Z",
+      "side": 1,
+      "message": "@jansson, can you confirm I need to add this service account in the ACL ?",
+      "range": {
+        "startLine": 918,
+        "startChar": 4,
+        "endLine": 918,
+        "endChar": 19
+      },
+      "revId": "dba6ef0238a1e67b794e8552e35a2a5f4c9c9ed4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
