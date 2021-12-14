@@ -8787,7 +8787,7 @@ TEST(VideoStreamEncoderFrameCadenceTest, UsesFrameCadenceAdapterForFrameRate) {
         VideoFrame::Builder()
             .set_video_frame_buffer(
                 rtc::make_ref_counted<NV12Buffer>(/*width=*/16, /*height=*/16))
-            .set_ntp_time_ms(0)
+            .set_ntp_time_ms(1)
             .set_timestamp_ms(0)
             .set_rotation(kVideoRotation_0)
             .build());

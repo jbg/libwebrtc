@@ -35,6 +35,9 @@
 namespace webrtc {
 namespace {
 
+// Assumes a 90 kHz RTP clock.
+constexpr uint32_t kRtpTicksPerMs = 90;
+
 // Abstracts concrete modes of the cadence adapter.
 class AdapterMode {
  public:
@@ -154,6 +157,10 @@ class FrameCadenceAdapterImpl : public FrameCadenceAdapterInterface {
       const VideoTrackSourceConstraints& constraints) override;
 
  private:
+  // Returns a frame with defined timestamps.
+  VideoFrame FrameWithDefinedTimestamps(Timestamp now,
+                                        const VideoFrame& frame) const;
+
   // Called from OnFrame in zero-hertz mode.
   void OnFrameOnMainQueue(Timestamp post_time,
                           int frames_scheduled_for_processing,
@@ -174,6 +181,9 @@ class FrameCadenceAdapterImpl : public FrameCadenceAdapterInterface {
 
   Clock* const clock_;
   TaskQueueBase* const queue_;
+
+  // Delta used for translating between NTP and internal timestamps.
+  const int64_t delta_ntp_internal_ms_;
 
   // True if we support frame entry for screenshare with a minimum frequency of
   // 0 Hz.
@@ -292,12 +302,11 @@ void ZeroHertzAdapterMode::ProcessRepeatedFrameOnDelayedCadence(
 
   // Adjust timestamps of the frame of the repeat, accounting for the delay in
   // scheduling this method.
-  // NOTE: No need to update the RTP timestamp as the VideoStreamEncoder
-  // overwrites it based on its chosen NTP timestamp source.
+  frame.set_timestamp(frame.timestamp() +
+                      scheduled_delay.ms() * kRtpTicksPerMs);
+  frame.set_ntp_time_ms(frame.ntp_time_ms() + scheduled_delay.ms());
   if (frame.timestamp_us() > 0)
     frame.set_timestamp_us(frame.timestamp_us() + scheduled_delay.us());
-  if (frame.ntp_time_ms())
-    frame.set_ntp_time_ms(frame.ntp_time_ms() + scheduled_delay.ms());
   SendFrameNow(frame);
 
   // TODO(crbug.com/1255737): Wire in a QP convergence signal here and adjust
@@ -327,6 +336,8 @@ FrameCadenceAdapterImpl::FrameCadenceAdapterImpl(Clock* clock,
                                                  TaskQueueBase* queue)
     : clock_(clock),
       queue_(queue),
+      delta_ntp_internal_ms_(clock_->CurrentNtpInMilliseconds() -
+                             clock_->TimeInMilliseconds()),
       zero_hertz_screenshare_enabled_(
           field_trial::IsEnabled("WebRTC-ZeroHertzScreenshare")) {}
 
@@ -366,15 +377,17 @@ void FrameCadenceAdapterImpl::OnFrame(const VideoFrame& frame) {
   // Local time in webrtc time base.
   Timestamp post_time = clock_->CurrentTime();
   frames_scheduled_for_processing_.fetch_add(1, std::memory_order_relaxed);
-  queue_->PostTask(ToQueuedTask(safety_.flag(), [this, post_time, frame] {
-    RTC_DCHECK_RUN_ON(queue_);
-    const int frames_scheduled_for_processing =
-        frames_scheduled_for_processing_.fetch_sub(1,
-                                                   std::memory_order_relaxed);
-    OnFrameOnMainQueue(post_time, frames_scheduled_for_processing,
-                       std::move(frame));
-    MaybeReportFrameRateConstraintUmas();
-  }));
+  queue_->PostTask(ToQueuedTask(
+      safety_.flag(),
+      [this, post_time, frame = FrameWithDefinedTimestamps(post_time, frame)] {
+        RTC_DCHECK_RUN_ON(queue_);
+        const int frames_scheduled_for_processing =
+            frames_scheduled_for_processing_.fetch_sub(
+                1, std::memory_order_relaxed);
+        OnFrameOnMainQueue(post_time, frames_scheduled_for_processing,
+                           std::move(frame));
+        MaybeReportFrameRateConstraintUmas();
+      }));
 }
 
 void FrameCadenceAdapterImpl::OnConstraintsChanged(
@@ -388,6 +401,29 @@ void FrameCadenceAdapterImpl::OnConstraintsChanged(
     source_constraints_ = constraints;
     MaybeReconfigureAdapters(was_zero_hertz_enabled);
   }));
+}
+
+VideoFrame FrameCadenceAdapterImpl::FrameWithDefinedTimestamps(
+    Timestamp now,
+    const VideoFrame& frame) const {
+  VideoFrame incoming_frame = frame;
+  // Capture time may come from clock with an offset and drift from clock_.
+  int64_t capture_ntp_time_ms;
+  if (incoming_frame.ntp_time_ms() > 0) {
+    capture_ntp_time_ms = incoming_frame.ntp_time_ms();
+  } else if (incoming_frame.render_time_ms() != 0) {
+    capture_ntp_time_ms =
+        incoming_frame.render_time_ms() + delta_ntp_internal_ms_;
+  } else {
+    capture_ntp_time_ms = now.ms() + delta_ntp_internal_ms_;
+  }
+  incoming_frame.set_ntp_time_ms(capture_ntp_time_ms);
+
+  // Convert NTP time, in ms, to RTP timestamp.
+  const int kMsToRtpTimestamp = 90;
+  incoming_frame.set_timestamp(
+      kMsToRtpTimestamp * static_cast<uint32_t>(incoming_frame.ntp_time_ms()));
+  return incoming_frame;
 }
 
 // RTC_RUN_ON(queue_)

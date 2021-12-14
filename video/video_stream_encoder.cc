@@ -615,8 +615,6 @@ VideoStreamEncoder::VideoStreamEncoder(
       encoder_failed_(false),
       clock_(clock),
       last_captured_timestamp_(0),
-      delta_ntp_internal_ms_(clock_->CurrentNtpInMilliseconds() -
-                             clock_->TimeInMilliseconds()),
       last_frame_log_ms_(clock_->TimeInMilliseconds()),
       captured_frame_count_(0),
       dropped_frame_cwnd_pushback_count_(0),
@@ -1266,22 +1264,6 @@ void VideoStreamEncoder::OnFrame(Timestamp post_time,
   // timestamps here. Otherwise there may be issues with RTP send stream.
   if (incoming_frame.timestamp_us() > post_time.us())
     incoming_frame.set_timestamp_us(post_time.us());
-
-  // Capture time may come from clock with an offset and drift from clock_.
-  int64_t capture_ntp_time_ms;
-  if (video_frame.ntp_time_ms() > 0) {
-    capture_ntp_time_ms = video_frame.ntp_time_ms();
-  } else if (video_frame.render_time_ms() != 0) {
-    capture_ntp_time_ms = video_frame.render_time_ms() + delta_ntp_internal_ms_;
-  } else {
-    capture_ntp_time_ms = post_time.ms() + delta_ntp_internal_ms_;
-  }
-  incoming_frame.set_ntp_time_ms(capture_ntp_time_ms);
-
-  // Convert NTP time, in ms, to RTP timestamp.
-  const int kMsToRtpTimestamp = 90;
-  incoming_frame.set_timestamp(
-      kMsToRtpTimestamp * static_cast<uint32_t>(incoming_frame.ntp_time_ms()));
 
   if (incoming_frame.ntp_time_ms() <= last_captured_timestamp_) {
     // We don't allow the same capture time for two frames, drop this one.
