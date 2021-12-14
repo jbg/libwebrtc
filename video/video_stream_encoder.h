@@ -297,8 +297,6 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
 
   // Used to make sure incoming time stamp is increasing for every frame.
   int64_t last_captured_timestamp_ RTC_GUARDED_BY(&encoder_queue_);
-  // Delta used for translating between NTP and internal timestamps.
-  const int64_t delta_ntp_internal_ms_ RTC_GUARDED_BY(&encoder_queue_);
 
   int64_t last_frame_log_ms_ RTC_GUARDED_BY(&encoder_queue_);
   int captured_frame_count_ RTC_GUARDED_BY(&encoder_queue_);
