@@ -1229,6 +1229,7 @@ VideoEncoder::EncoderInfo LibvpxVp8Encoder::GetEncoderInfo() const {
     info.resolution_bitrate_limits =
         encoder_info_override_.resolution_bitrate_limits();
   }
+  info.steady_state_qp = variable_framerate_experiment_.steady_state_qp;
 
   const bool enable_scaling =
       num_active_streams_ == 1 &&

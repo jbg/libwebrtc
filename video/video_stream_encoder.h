@@ -429,6 +429,9 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   // first to make sure no tasks run that use other members.
   rtc::TaskQueue encoder_queue_;
 
+  // The steady-state QP level reported by the encoder.
+  absl::optional<int> steady_state_qp_ RTC_GUARDED_BY(&encoder_queue_);
+
   // Used to cancel any potentially pending tasks to the worker thread.
   ScopedTaskSafety task_safety_;
 
