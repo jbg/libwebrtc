@@ -20,6 +20,7 @@
 
 #include "api/video/encoded_image.h"
 #include "api/video/video_timing.h"
+#include "modules/video_coding/frame_helpers.h"
 #include "modules/video_coding/include/video_coding_defines.h"
 #include "modules/video_coding/jitter_estimator.h"
 #include "modules/video_coding/timing.h"
@@ -250,7 +251,8 @@ std::unique_ptr<EncodedFrame> FrameBuffer::GetNextFrame() {
   int64_t render_time_ms = first_frame.RenderTime();
   int64_t receive_time_ms = first_frame.ReceivedTime();
   // Gracefully handle bad RTP timestamps and render time issues.
-  if (HasBadRenderTiming(first_frame, now_ms)) {
+  if (FrameHasBadRenderTiming(first_frame.RenderTimeMs(), now_ms,
+                              timing_->TargetVideoDelay())) {
     jitter_estimator_.Reset();
     timing_->Reset();
     render_time_ms = timing_->RenderTimeMs(first_frame.Timestamp(), now_ms);
@@ -316,35 +318,6 @@ std::unique_ptr<EncodedFrame> FrameBuffer::GetNextFrame() {
   } else {
     return CombineAndDeleteFrames(std::move(frames_out));
   }
-}
-
-bool FrameBuffer::HasBadRenderTiming(const EncodedFrame& frame,
-                                     int64_t now_ms) {
-  // Assume that render timing errors are due to changes in the video stream.
-  int64_t render_time_ms = frame.RenderTimeMs();
-  // Zero render time means render immediately.
-  if (render_time_ms == 0) {
-    return false;
-  }
-  if (render_time_ms < 0) {
-    return true;
-  }
-  const int64_t kMaxVideoDelayMs = 10000;
-  if (std::abs(render_time_ms - now_ms) > kMaxVideoDelayMs) {
-    int frame_delay = static_cast<int>(std::abs(render_time_ms - now_ms));
-    RTC_LOG(LS_WARNING)
-        << "A frame about to be decoded is out of the configured "
-           "delay bounds ("
-        << frame_delay << " > " << kMaxVideoDelayMs
-        << "). Resetting the video jitter buffer.";
-    return true;
-  }
-  if (static_cast<int>(timing_->TargetVideoDelay()) > kMaxVideoDelayMs) {
-    RTC_LOG(LS_WARNING) << "The video target delay has grown larger than "
-                        << kMaxVideoDelayMs << " ms.";
-    return true;
-  }
-  return false;
 }
 
 void FrameBuffer::SetProtectionMode(VCMVideoProtection mode) {
