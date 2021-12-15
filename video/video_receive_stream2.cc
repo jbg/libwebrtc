@@ -23,6 +23,9 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/crypto/frame_decryptor_interface.h"
+#include "api/scoped_refptr.h"
+#include "api/sequence_checker.h"
+#include "api/units/time_delta.h"
 #include "api/video/encoded_image.h"
 #include "api/video_codecs/h264_profile_level_id.h"
 #include "api/video_codecs/sdp_video_format.h"
@@ -32,6 +35,7 @@
 #include "call/rtp_stream_receiver_controller_interface.h"
 #include "call/rtx_receive_stream.h"
 #include "common_video/include/incoming_video_stream.h"
+#include "modules/video_coding/frame_buffer2.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/include/video_coding_defines.h"
 #include "modules/video_coding/include/video_error_codes.h"
@@ -43,6 +47,9 @@
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/system/thread_registry.h"
+#include "rtc_base/task_queue.h"
+#include "rtc_base/task_utils/pending_task_safety_flag.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/time_utils.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/clock.h"
@@ -167,6 +174,117 @@ constexpr int kInactiveStreamThresholdMs = 600000;  //  10 minutes.
 
 }  // namespace
 
+class FrameBuffer2Proxy : public FrameBufferProxy {
+ public:
+  FrameBuffer2Proxy(Clock* clock,
+                    VCMTiming* timing,
+                    VCMReceiveStatisticsCallback* stats_proxy,
+                    rtc::TaskQueue* decode_queue,
+                    FrameSchedulingReceiver* receiver,
+                    TimeDelta max_wait_for_keyframe,
+                    TimeDelta max_wait_for_frame)
+      : max_wait_for_keyframe_(max_wait_for_keyframe),
+        max_wait_for_frame_(max_wait_for_frame),
+        frame_buffer_(clock, timing, stats_proxy),
+        decode_queue_(decode_queue),
+        stats_proxy_(stats_proxy),
+        receiver_(receiver) {
+    RTC_DCHECK(decode_queue_);
+    RTC_DCHECK(stats_proxy_);
+    RTC_DCHECK(receiver_);
+  }
+
+  void StopOnWorker() override {
+    RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+    decode_queue_->PostTask([this] {
+      frame_buffer_.Stop();
+      decode_safety_->SetNotAlive();
+    });
+  }
+
+  void SetProtectionMode(VCMVideoProtection protection_mode) override {
+    RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+    frame_buffer_.SetProtectionMode(kProtectionNackFEC);
+  }
+
+  void Clear() override {
+    RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+    frame_buffer_.Clear();
+  }
+
+  absl::optional<int64_t> InsertFrame(
+      std::unique_ptr<EncodedFrame> frame) override {
+    RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+    int64_t last_continuous_pid = frame_buffer_.InsertFrame(std::move(frame));
+    if (last_continuous_pid != -1)
+      return last_continuous_pid;
+    return absl::nullopt;
+  }
+
+  void UpdateRtt(int64_t max_rtt_ms) override {
+    RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+    frame_buffer_.UpdateRtt(max_rtt_ms);
+  }
+
+  void StartNextDecode(bool keyframe_required) override {
+    if (!decode_queue_->IsCurrent()) {
+      decode_queue_->PostTask(ToQueuedTask(
+          decode_safety_,
+          [this, keyframe_required] { StartNextDecode(keyframe_required); }));
+      return;
+    }
+    RTC_DCHECK_RUN_ON(decode_queue_);
+
+    frame_buffer_.NextFrame(
+        MaxWait(keyframe_required).ms(), keyframe_required, decode_queue_,
+        /* encoded frame handler */
+        [this, keyframe_required](std::unique_ptr<EncodedFrame> frame) {
+          RTC_DCHECK_RUN_ON(decode_queue_);
+          if (!decode_safety_->alive())
+            return;
+          if (frame) {
+            receiver_->OnEncodedFrame(std::move(frame));
+          } else {
+            receiver_->OnDecodableFrameTimeout(MaxWait(keyframe_required));
+          }
+        });
+  }
+
+  int Size() override {
+    RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+    return frame_buffer_.Size();
+  }
+
+ private:
+  TimeDelta MaxWait(bool keyframe_required) const {
+    return keyframe_required ? max_wait_for_keyframe_ : max_wait_for_frame_;
+  }
+
+  RTC_NO_UNIQUE_ADDRESS SequenceChecker worker_sequence_checker_;
+  const TimeDelta max_wait_for_keyframe_;
+  const TimeDelta max_wait_for_frame_;
+  video_coding::FrameBuffer frame_buffer_;
+  rtc::TaskQueue* const decode_queue_;
+  VCMReceiveStatisticsCallback* const stats_proxy_;
+  FrameSchedulingReceiver* const receiver_;
+  rtc::scoped_refptr<PendingTaskSafetyFlag> decode_safety_ =
+      PendingTaskSafetyFlag::CreateDetached();
+};
+
+std::unique_ptr<FrameBufferProxy> FrameBufferProxy::CreateFromFieldTrial(
+    Clock* clock,
+    TaskQueueBase* worker_queue,
+    VCMTiming* timing,
+    VCMReceiveStatisticsCallback* stats_proxy,
+    rtc::TaskQueue* decode_queue,
+    FrameSchedulingReceiver* receiver,
+    TimeDelta max_wait_for_keyframe,
+    TimeDelta max_wait_for_frame) {
+  return std::make_unique<FrameBuffer2Proxy>(
+      clock, timing, stats_proxy, decode_queue, receiver, max_wait_for_keyframe,
+      max_wait_for_frame);
+}
+
 int DetermineMaxWaitForFrame(const VideoReceiveStream::Config& config,
                              bool is_keyframe) {
   // A (arbitrary) conversion factor between the remotely signalled NACK buffer
@@ -251,8 +369,10 @@ VideoReceiveStream2::VideoReceiveStream2(
 
   timing_->set_render_delay(config_.render_delay_ms);
 
-  frame_buffer_.reset(
-      new video_coding::FrameBuffer(clock_, timing_.get(), &stats_proxy_));
+  frame_buffer_ = FrameBufferProxy::CreateFromFieldTrial(
+      clock_, call->worker_thread(), timing_.get(), &stats_proxy_,
+      &decode_queue_, this, TimeDelta::Millis(max_wait_for_keyframe_ms_),
+      TimeDelta::Millis(max_wait_for_frame_ms_));
 
   if (config_.rtp.rtx_ssrc) {
     rtx_receive_stream_ = std::make_unique<RtxReceiveStream>(
@@ -419,10 +539,8 @@ void VideoReceiveStream2::Stop() {
   stats_proxy_.OnUniqueFramesCounted(
       rtp_video_stream_receiver_.GetUniqueFramesSeen());
 
-  decode_queue_.PostTask([this] { frame_buffer_->Stop(); });
-
+  frame_buffer_->StopOnWorker();
   call_stats_->DeregisterStatsObserver(this);
-
   if (decoder_running_) {
     rtc::Event done;
     decode_queue_.PostTask([this, &done] {
@@ -657,12 +775,12 @@ void VideoReceiveStream2::OnCompleteFrame(std::unique_ptr<EncodedFrame> frame) {
     UpdatePlayoutDelays();
   }
 
-  int64_t last_continuous_pid = frame_buffer_->InsertFrame(std::move(frame));
-  if (last_continuous_pid != -1) {
+  auto last_continuous_pid = frame_buffer_->InsertFrame(std::move(frame));
+  if (last_continuous_pid.has_value()) {
     {
       // TODO(bugs.webrtc.org/11993): Call on the network thread.
       RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
-      rtp_video_stream_receiver_.FrameContinuous(last_continuous_pid);
+      rtp_video_stream_receiver_.FrameContinuous(*last_continuous_pid);
     }
   }
 }
@@ -715,29 +833,39 @@ int64_t VideoReceiveStream2::GetMaxWaitMs() const {
                             : max_wait_for_frame_ms_;
 }
 
+void VideoReceiveStream2::OnEncodedFrame(std::unique_ptr<EncodedFrame> frame) {
+  if (!decode_queue_.IsCurrent()) {
+    decode_queue_.PostTask([this, frame = std::move(frame)]() mutable {
+      OnEncodedFrame(std::move(frame));
+    });
+    return;
+  }
+  RTC_DCHECK_RUN_ON(&decode_queue_);
+  HandleEncodedFrame(std::move(frame));
+  StartNextDecode();
+}
+
+void VideoReceiveStream2::OnDecodableFrameTimeout(TimeDelta wait_time) {
+  if (!call_->worker_thread()->IsCurrent()) {
+    call_->worker_thread()->PostTask(ToQueuedTask(
+        task_safety_,
+        [this, wait_time] { OnDecodableFrameTimeout(wait_time); }));
+    return;
+  }
+
+  // TODO(bugs.webrtc.org/11993): PostTask to the network thread.
+  RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
+  int64_t now_ms = clock_->TimeInMilliseconds();
+  HandleFrameBufferTimeout(now_ms, wait_time.ms());
+
+  decode_queue_.PostTask([this] {
+    RTC_DCHECK_RUN_ON(&decode_queue_);
+    StartNextDecode();
+  });
+}
+
 void VideoReceiveStream2::StartNextDecode() {
-  // Running on the decode thread.
-  TRACE_EVENT0("webrtc", "VideoReceiveStream2::StartNextDecode");
-  frame_buffer_->NextFrame(
-      GetMaxWaitMs(), keyframe_required_, &decode_queue_,
-      /* encoded frame handler */
-      [this](std::unique_ptr<EncodedFrame> frame) {
-        RTC_DCHECK_RUN_ON(&decode_queue_);
-        if (decoder_stopped_)
-          return;
-        if (frame) {
-          HandleEncodedFrame(std::move(frame));
-        } else {
-          int64_t now_ms = clock_->TimeInMilliseconds();
-          // TODO(bugs.webrtc.org/11993): PostTask to the network thread.
-          call_->worker_thread()->PostTask(ToQueuedTask(
-              task_safety_, [this, now_ms, wait_ms = GetMaxWaitMs()]() {
-                RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
-                HandleFrameBufferTimeout(now_ms, wait_ms);
-              }));
-        }
-        StartNextDecode();
-      });
+  frame_buffer_->StartNextDecode(keyframe_required_);
 }
 
 void VideoReceiveStream2::HandleEncodedFrame(
