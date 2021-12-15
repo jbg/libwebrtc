@@ -56,6 +56,30 @@
       },
       "revId": "980bf76dad78faaf58272b679e632fbebff143bc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc92e563_39e85bde",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-12-15T12:15:51Z",
+      "side": 1,
+      "message": "The convergence term was though as QP reaching \"steady-state\" levels (see https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.h;l\u003d141?q\u003dlibvpx_vp8\u0026ss\u003dchromium).\n\nI and Erik discussed prior to creating the CL and didn\u0027t want to use individual QP values since that would need a reference scale. If we do that we need the definition of the threshold and in such case communicate that up from the Encoder interface.\n\n\u003e What kind of qp representation would you need to be able to aggregate it to get max and/or min qp for all spatial layers?\n\nNot sure I\u0027m reading the question right but it\u0027s the threshold level defined in libvpx_vp8_encoder, linked above.\n\nErik/Niels - thoughts?",
+      "parentUuid": "26dafd4e_28f15262",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 59
+      },
+      "revId": "980bf76dad78faaf58272b679e632fbebff143bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
