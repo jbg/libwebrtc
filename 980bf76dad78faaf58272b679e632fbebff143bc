@@ -16,6 +16,46 @@
       "message": "Hi Niels and Erik, PTAL on this CL which implements repeat 0-hz repeated frame slow-down on quality convergence.\nNiels, adding you as owner of the encoded image interface. Do you think this method of modifying the encoded image to convey quality convergence info between encoder/VSE makes sense and if not, what would you recommend as a reasonable alternative?",
       "revId": "980bf76dad78faaf58272b679e632fbebff143bc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f22650f_4fb096a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-15T11:54:23Z",
+      "side": 1,
+      "message": "Had a first look. Attaching some quality property to EncodedImage makes sense to me, but a bool doesn\u0027t seem ideal.",
+      "revId": "980bf76dad78faaf58272b679e632fbebff143bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26dafd4e_28f15262",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-15T11:54:23Z",
+      "side": 1,
+      "message": "As I understand it, this doesn\u0027t need to refer to \"convergence\", it just says if this image has small encoding error (based on some qp threshold), is that right?\n\nSo I\u0027d prefer something like IsHighQuality or HasSmallError.\n\nBut I think it would be even better to have a non-bool indictator, with threshold closer to the decision making. We already have a `qp_` member (but integer, and I guess meaning is codec specific?). Could you use that qp value, or some variant of normalized qp (in 0.0 to 1.0 range, or so).\n\nWhat kind of qp representation would you need to be able to aggregate it to get max and/or min qp for all spatial layers?\n\nPlease also have a look at how the quality scaler uses the qp value; it would be nice to keep it generally consistent.",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 59
+      },
+      "revId": "980bf76dad78faaf58272b679e632fbebff143bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
