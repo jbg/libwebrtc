@@ -80,6 +80,30 @@
       },
       "revId": "980bf76dad78faaf58272b679e632fbebff143bc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1143dc0_89449b87",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-15T13:30:59Z",
+      "side": 1,
+      "message": "\u003e The convergence term was though as QP reaching \"steady-state\" levels (see https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.h;l\u003d141?q\u003dlibvpx_vp8\u0026ss\u003dchromium).\n\nAt least in the context of EncodedImage, I think it makes sense to treat it as a stateless thing with no history (\"convergence\" implies history, at least to me). I\u0027d view it not that much as a steady state, but quality at a level where it\u0027s not worth additional bits to increase quality further. So my only easily actionable comment is to improve naming of these methods.\n\n\u003e I and Erik discussed prior to creating the CL and didn\u0027t want to use individual QP values since that would need a reference scale. \n\nProbably not for this cl, but I think it will make things simpler if we can define a quality/error scale between, say 0.0 and 1.0, where a particular value (in the useful range of not extremely poor quality) corresponds to similar quality for all codecs. Main success measure of such a refactoring would be to delete codec-specific quality scaler thresholds (and instead have codec specific normalization purely internal to the encoder).\n\nMay or may not be useful with some calibration point in terms of objective metrics like snr. With the most naive way of normalizing, I guess  the current threshold of 15 would correspond to 0.06 (15 / 255).\n \n\u003e \u003e What kind of qp representation would you need to be able to aggregate it to get max and/or min qp for all spatial layers?\n\u003e \n\u003e Not sure I\u0027m reading the question right but it\u0027s the threshold level defined in libvpx_vp8_encoder, linked above.\n\nAs I understood it, you wanted to make a fps decision based on quality of all layers? What I wonder is if it\u0027s reasonable to do aggregation first (like getting min `qp_` over the most recent frame for all active layers), and then compare that *aggregated* value to a threshold?\n\nFor lack of normalized qp, I guess you\u0027ve considered using the codec-dependent `qp_` but add yet another threshold to VideoCodec::EncoderInfo. At least, that\u0027s not additional per-frame metadata.\n\nI don\u0027t want to make a strong objection to the current approach, but I\u0027m a bit worried about the pattern of adding one or two new methods to EncodedImage for each incremental feature; we should aim for more generally useful metadata.",
+      "parentUuid": "fc92e563_39e85bde",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 59
+      },
+      "revId": "980bf76dad78faaf58272b679e632fbebff143bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
