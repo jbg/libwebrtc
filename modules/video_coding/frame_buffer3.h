@@ -57,8 +57,8 @@ class FrameBuffer {
 
   int GetTotalNumberOfContinuousTemporalUnits() const;
   int GetTotalNumberOfDroppedFrames() const;
-
   size_t CurrentSize() const;
+  void Clear();
 
  private:
   struct FrameInfo {
@@ -78,7 +78,6 @@ class FrameBuffer {
   bool IsContinuous(const FrameIterator& it) const;
   void PropagateContinuity(const FrameIterator& frame_it);
   void FindNextAndLastDecodableTemporalUnit();
-  void Clear();
 
   const bool legacy_frame_id_jump_behavior_;
   const size_t max_size_;

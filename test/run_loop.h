@@ -30,6 +30,7 @@ class RunLoop {
   void Quit();
 
   void Flush();
+  void FlushImmediate();
 
   // Convenience methods since TaskQueueBase doesn't support this sort of magic.
   template <typename Closure>
