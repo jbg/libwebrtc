@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28200de2_5166534b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8231
+      },
+      "writtenOn": "2021-12-15T04:00:30Z",
+      "side": 1,
+      "message": "I have corrected the \"Bug:\" footer.",
+      "revId": "2cc75d9e513b9d990d3746329f1d268d12afb2d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
