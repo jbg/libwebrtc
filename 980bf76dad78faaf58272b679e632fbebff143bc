@@ -104,6 +104,30 @@
       },
       "revId": "980bf76dad78faaf58272b679e632fbebff143bc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f809bd1_bcfaeb5a",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-12-15T15:41:18Z",
+      "side": 1,
+      "message": "Updated to use EncoderInfo after offline discussion, PTAL.",
+      "parentUuid": "f1143dc0_89449b87",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 59
+      },
+      "revId": "980bf76dad78faaf58272b679e632fbebff143bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
