@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99134dd9_e9022268",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-12-15T11:34:55Z",
+      "side": 1,
+      "message": "Hi Niels and Erik, PTAL on this CL which implements repeat 0-hz repeated frame slow-down on quality convergence.\nNiels, adding you as owner of the encoded image interface. Do you think this method of modifying the encoded image to convey quality convergence info between encoder/VSE makes sense and if not, what would you recommend as a reasonable alternative?",
+      "revId": "980bf76dad78faaf58272b679e632fbebff143bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
