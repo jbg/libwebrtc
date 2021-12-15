@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a632d031_88f2a72e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-15T17:18:16Z",
+      "side": 1,
+      "message": "lgtm % nits",
+      "revId": "2b2d14d3e305aefa6cd5b36a13de83315a4b8716",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88c18814_aa9a7196",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-15T17:18:16Z",
+      "side": 1,
+      "message": "So I know it\u0027s set to verbose level, but logging what functions you call for each frame seems verbose even for verbose? :)",
+      "range": {
+        "startLine": 287,
+        "startChar": 2,
+        "endLine": 287,
+        "endChar": 34
+      },
+      "revId": "2b2d14d3e305aefa6cd5b36a13de83315a4b8716",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29d2fb4c_5877f792",
+        "filename": "video/frame_cadence_adapter_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-15T17:18:16Z",
+      "side": 1,
+      "message": "maybe have an alias somewhere in the test for FrameCadenceAdapterInterface::kZeroHertzIdleRepeatRatePeriod and test\n\nExpectFrameEntriesAtDelaysFromNow(\n    kFirstDelay,\n    kFirstDelay + kIdlePeriod, \n    kFirstDelay + 2 * kIdlePeriod,\n    \neasier both to understand and maintain...",
+      "range": {
+        "startLine": 401,
+        "startChar": 24,
+        "endLine": 401,
+        "endChar": 28
+      },
+      "revId": "2b2d14d3e305aefa6cd5b36a13de83315a4b8716",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73196c38_c385306c",
+        "filename": "video/frame_cadence_adapter_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-15T17:18:16Z",
+      "side": 1,
+      "message": "ditto, this comes from from max_fps in OnConstraintsChanged in the setup?",
+      "range": {
+        "startLine": 413,
+        "startChar": 24,
+        "endLine": 413,
+        "endChar": 27
+      },
+      "revId": "2b2d14d3e305aefa6cd5b36a13de83315a4b8716",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91686dbc_b10f685b",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-15T17:18:16Z",
+      "side": 1,
+      "message": "does this default value really help?",
+      "range": {
+        "startLine": 126,
+        "startChar": 23,
+        "endLine": 126,
+        "endChar": 27
+      },
+      "revId": "2b2d14d3e305aefa6cd5b36a13de83315a4b8716",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0940bfb_60794ea6",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 8949,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2021-12-15T17:18:16Z",
+      "side": 1,
+      "message": "Would prefer the somewhat more verbose\n\nencoded_image.qp_ \u003d encoded_image.SpatialIndex() \u003d\u003d 0\n  ? SimpleVideoStreamEncoderFactory::kSteadyStateQP\n  : SimpleVideoStreamEncoderFactory::kSteadyStateQP + 1;",
+      "range": {
+        "startLine": 8948,
+        "startChar": 0,
+        "endLine": 8949,
+        "endChar": 64
+      },
+      "revId": "2b2d14d3e305aefa6cd5b36a13de83315a4b8716",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
