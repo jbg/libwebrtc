@@ -25,7 +25,6 @@
 #include "call/video_receive_stream.h"
 #include "modules/rtp_rtcp/include/flexfec_receiver.h"
 #include "modules/rtp_rtcp/source/source_tracker.h"
-#include "modules/video_coding/frame_buffer2.h"
 #include "modules/video_coding/nack_requester.h"
 #include "modules/video_coding/video_receiver2.h"
 #include "rtc_base/system/no_unique_address.h"
@@ -77,13 +76,48 @@ struct VideoFrameMetaData {
   const Timestamp decode_timestamp;
 };
 
+class FrameSchedulingReceiver {
+ public:
+  virtual ~FrameSchedulingReceiver() = default;
+
+  virtual void OnEncodedFrame(std::unique_ptr<EncodedFrame> frame) = 0;
+  virtual void OnDecodableFrameTimeout(TimeDelta wait_time) = 0;
+};
+
+class FrameBufferProxy {
+ public:
+  static std::unique_ptr<FrameBufferProxy> CreateFromFieldTrial(
+      Clock* clock,
+      TaskQueueBase* worker_queue,
+      VCMTiming* timing,
+      VCMReceiveStatisticsCallback* stats_proxy,
+      rtc::TaskQueue* decode_queue,
+      FrameSchedulingReceiver* receiver,
+      TimeDelta max_wait_for_keyframe,
+      TimeDelta max_wait_for_frame);
+  virtual ~FrameBufferProxy() = default;
+
+  // Run on the worker thread.
+  virtual void StopOnWorker() = 0;
+  virtual void SetProtectionMode(VCMVideoProtection protection_mode) = 0;
+  virtual void Clear() = 0;
+  virtual absl::optional<int64_t> InsertFrame(
+      std::unique_ptr<EncodedFrame> frame) = 0;
+  virtual void UpdateRtt(int64_t max_rtt_ms) = 0;
+  virtual int Size() = 0;
+
+  // Run on either the worker thread or the decode thread.
+  virtual void StartNextDecode(bool keyframe_required) = 0;
+};
+
 class VideoReceiveStream2
     : public webrtc::VideoReceiveStream,
       public rtc::VideoSinkInterface<VideoFrame>,
       public NackSender,
       public RtpVideoStreamReceiver2::OnCompleteFrameCallback,
       public Syncable,
-      public CallStatsObserver {
+      public CallStatsObserver,
+      public FrameSchedulingReceiver {
  public:
   // The default number of milliseconds to pass before re-requesting a key frame
   // to be sent.
@@ -184,6 +218,8 @@ class VideoReceiveStream2
   void GenerateKeyFrame() override;
 
  private:
+  void OnEncodedFrame(std::unique_ptr<EncodedFrame> frame) override;
+  void OnDecodableFrameTimeout(TimeDelta wait_time) override;
   void CreateAndRegisterExternalDecoder(const Decoder& decoder);
   int64_t GetMaxWaitMs() const RTC_RUN_ON(decode_queue_);
   void StartNextDecode() RTC_RUN_ON(decode_queue_);
@@ -248,7 +284,7 @@ class VideoReceiveStream2
   std::vector<std::unique_ptr<VideoDecoder>> video_decoders_;
 
   // Members for the new jitter buffer experiment.
-  std::unique_ptr<video_coding::FrameBuffer> frame_buffer_;
+  std::unique_ptr<FrameBufferProxy> frame_buffer_;
 
   std::unique_ptr<RtpStreamReceiverInterface> media_receiver_
       RTC_GUARDED_BY(packet_sequence_checker_);
