@@ -20,11 +20,13 @@
 #include <utility>
 
 #include "absl/algorithm/container.h"
+#include "absl/container/inlined_vector.h"
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/crypto/frame_decryptor_interface.h"
 #include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
+#include "api/task_queue/task_queue_base.h"
 #include "api/units/time_delta.h"
 #include "api/video/encoded_image.h"
 #include "api/video_codecs/h264_profile_level_id.h"
@@ -36,12 +38,18 @@
 #include "call/rtx_receive_stream.h"
 #include "common_video/include/incoming_video_stream.h"
 #include "modules/video_coding/frame_buffer2.h"
+#include "modules/video_coding/frame_buffer3.h"
+#include "modules/video_coding/frame_helpers.h"
+#include "modules/video_coding/frame_scheduler.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/include/video_coding_defines.h"
 #include "modules/video_coding/include/video_error_codes.h"
+#include "modules/video_coding/inter_frame_delay.h"
+#include "modules/video_coding/jitter_estimator.h"
 #include "modules/video_coding/timing.h"
 #include "modules/video_coding/utility/vp8_header_parser.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/experiments/rtt_mult_experiment.h"
 #include "rtc_base/location.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/strings/string_builder.h"
@@ -50,6 +58,7 @@
 #include "rtc_base/task_queue.h"
 #include "rtc_base/task_utils/pending_task_safety_flag.h"
 #include "rtc_base/task_utils/to_queued_task.h"
+#include "rtc_base/thread_annotations.h"
 #include "rtc_base/time_utils.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/clock.h"
@@ -259,7 +268,7 @@ VideoReceiveStream2::VideoReceiveStream2(
   timing_->set_render_delay(config_.render_delay_ms);
 
   frame_buffer_ = FrameBufferProxy::CreateFromFieldTrial(
-      clock_, call->worker_thread(), timing_.get(), &stats_proxy_,
+      clock_, call_->worker_thread(), timing_.get(), &stats_proxy_,
       &decode_queue_, this, TimeDelta::Millis(max_wait_for_keyframe_ms_),
       TimeDelta::Millis(max_wait_for_frame_ms_));
 
@@ -404,8 +413,8 @@ void VideoReceiveStream2::Start() {
   decode_queue_.PostTask([this] {
     RTC_DCHECK_RUN_ON(&decode_queue_);
     decoder_stopped_ = false;
-    StartNextDecode();
   });
+  frame_buffer_->StartNextDecode(true);
   decoder_running_ = true;
 
   {
@@ -730,8 +739,10 @@ void VideoReceiveStream2::OnEncodedFrame(std::unique_ptr<EncodedFrame> frame) {
     return;
   }
   RTC_DCHECK_RUN_ON(&decode_queue_);
+  if (decoder_stopped_)
+    return;
   HandleEncodedFrame(std::move(frame));
-  StartNextDecode();
+  frame_buffer_->StartNextDecode(keyframe_required_);
 }
 
 void VideoReceiveStream2::OnDecodableFrameTimeout(TimeDelta wait_time) {
@@ -746,10 +757,6 @@ void VideoReceiveStream2::OnDecodableFrameTimeout(TimeDelta wait_time) {
   int64_t now_ms = clock_->TimeInMilliseconds();
   HandleFrameBufferTimeout(now_ms, wait_time.ms());
   return;
-}
-
-void VideoReceiveStream2::StartNextDecode() {
-  frame_buffer_->StartNextDecode(keyframe_required_);
 }
 
 void VideoReceiveStream2::HandleEncodedFrame(
