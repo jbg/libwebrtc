@@ -51,7 +51,7 @@ constexpr int kSurplusCompressionGain = 6;
 
 // History size for the clipping predictor evaluator (unit: number of 10 ms
 // frames).
-constexpr int kClippingPredictorEvaluatorHistorySize = 32;
+constexpr int kClippingPredictorEvaluatorHistorySize = 500;
 
 using ClippingPredictorConfig = AudioProcessing::Config::GainController1::
     AnalogGainController::ClippingPredictor;
@@ -610,8 +610,10 @@ void AgcManagerDirect::AnalyzePreProcess(const float* const* audio,
       }
     }
     // Clipping prediction evaluation.
+    const bool no_clipped_samples =
+        clipped_ratio < (1.0f / samples_per_channel);
     absl::optional<int> prediction_interval =
-        clipping_predictor_evaluator_.Observe(clipping_detected,
+        clipping_predictor_evaluator_.Observe(!no_clipped_samples,
                                               clipping_predicted);
     if (prediction_interval.has_value()) {
       RTC_HISTOGRAM_COUNTS_LINEAR(
