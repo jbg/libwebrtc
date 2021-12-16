@@ -257,6 +257,13 @@ class RTC_EXPORT VideoEncoder {
     // Indicates whether or not QP value encoder writes into frame/slice/tile
     // header can be interpreted as average frame/slice/tile QP.
     absl::optional<bool> is_qp_trusted;
+
+    // If set, indicates what the steady-state QP level is for this encoder i.e.
+    // images having QP at this level or below should be considered good
+    // quality.
+    // TODO(crbug/1255737): This is a temporary interface which should be
+    // replaced with a permanent solution later on.
+    absl::optional<int> steady_state_qp;
   };
 
   struct RTC_EXPORT RateControlParameters {
