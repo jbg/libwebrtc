@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72c136dd_8125c58f",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-12-16T14:55:44Z",
+      "side": 1,
+      "message": "Replace commented code with // TODO(bugref): Add the other ...",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 54
+      },
+      "revId": "e0f2a50d8b652ef781c097473a12c8d8c0925b35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baebdaf6_083f75a8",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-12-16T14:55:44Z",
+      "side": 1,
+      "message": "introduce new var instead, and use a name that hints at the difference from the prior key, consider if you might want to add a _short_ comment on whats going on as well.",
+      "range": {
+        "startLine": 140,
+        "startChar": 2,
+        "endLine": 140,
+        "endChar": 64
+      },
+      "revId": "e0f2a50d8b652ef781c097473a12c8d8c0925b35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff4547ce_5b624871",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2021-12-16T14:55:44Z",
+      "side": 1,
+      "message": "Isn\u0027t static_cast from unit64 to 32 defined to truncate already? Either way, add a comment explaining why we can\u0027t simply store a uint32 in the event_groups map",
+      "range": {
+        "startLine": 145,
+        "startChar": 25,
+        "endLine": 145,
+        "endChar": 48
+      },
+      "revId": "e0f2a50d8b652ef781c097473a12c8d8c0925b35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
