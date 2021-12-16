@@ -39,6 +39,30 @@
       },
       "revId": "bce262870eb6b44f3784d2185feb22776a4e1c2e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79407eb3_51e764de",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-12-16T10:03:02Z",
+      "side": 1,
+      "message": "Summarizing offline discussion: the solution using a steady_state_qp turned out both hacky and brittle as there are classes (SimulcastEncoderAdapter) that need to aggregate several instances of this info. The other solution using EncodedImage didn\u0027t have that problem, and the information is naturally normalized. PS6 contains the new implementation with a name twist.",
+      "parentUuid": "86bdd7bd_60523b69",
+      "range": {
+        "startLine": 266,
+        "startChar": 24,
+        "endLine": 266,
+        "endChar": 36
+      },
+      "revId": "bce262870eb6b44f3784d2185feb22776a4e1c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
