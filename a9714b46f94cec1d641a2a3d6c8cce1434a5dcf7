@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15efaf42_2ee45876",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-16T10:08:55Z",
+      "side": 1,
+      "message": "api/ lgtm % nits",
+      "revId": "a9714b46f94cec1d641a2a3d6c8cce1434a5dcf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1c3b4b_c9759910",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-16T10:08:55Z",
+      "side": 1,
+      "message": "For completeness, I\u0027d expect some way to change the flag back to false. But I guess it could be added later when there\u0027s some usecase for it?\n\nAnd formatting nit: Member methods should go above the member data members.",
+      "range": {
+        "startLine": 190,
+        "startChar": 7,
+        "endLine": 190,
+        "endChar": 25
+      },
+      "revId": "a9714b46f94cec1d641a2a3d6c8cce1434a5dcf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
