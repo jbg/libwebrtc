@@ -39,6 +39,30 @@
       },
       "revId": "a9714b46f94cec1d641a2a3d6c8cce1434a5dcf7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2afe15_39a119f3",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2021-12-16T10:37:44Z",
+      "side": 1,
+      "message": "Both done! I think I avoided two branches with explicit flag setting.",
+      "parentUuid": "0a1c3b4b_c9759910",
+      "range": {
+        "startLine": 190,
+        "startChar": 7,
+        "endLine": 190,
+        "endChar": 25
+      },
+      "revId": "a9714b46f94cec1d641a2a3d6c8cce1434a5dcf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
