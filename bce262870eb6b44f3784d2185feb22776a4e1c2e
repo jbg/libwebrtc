@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22e3c392_0eaf74d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-16T07:53:50Z",
+      "side": 1,
+      "message": "api/ lgtm",
+      "revId": "bce262870eb6b44f3784d2185feb22776a4e1c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86bdd7bd_60523b69",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2021-12-16T07:53:50Z",
+      "side": 1,
+      "message": "nit: Still nor sure \"steady state\" is the right term here. It makes some sense if we expect quality to always reach this level (assuming we don\u0027t have constant scene changes), but perhaps `good_enough_qp` or `target_qp` would be clearer.\n\nAnd the TODO item isn\u0027t particularly actionable, could you describe briefly what the replacement is expected to look like? Normalized qp, or some measure of incremental quality per bit, ...",
+      "range": {
+        "startLine": 266,
+        "startChar": 24,
+        "endLine": 266,
+        "endChar": 36
+      },
+      "revId": "bce262870eb6b44f3784d2185feb22776a4e1c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
