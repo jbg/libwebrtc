@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '1a1202bd47277906b5821c1414e9c439de7f7c6f',
+  'chromium_revision': 'dae0365b2e5201853e8be1fc01841b375122be99',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -23,9 +23,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@1ac389ecf6eeaea905f6f58289fcd64d87d06af3',
+    'https://chromium.googlesource.com/chromium/src/base@45cac45e1481fe9a0746c0ca91e2692fb2852940',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@5ab104d330add557005154e64bde38178d50b6fc',
+    'https://chromium.googlesource.com/chromium/src/build@1a7d92e5e8eba18adb7e67c9e991e58a9d30e5b0',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@d7bdd6f0386aaf20cd00a01d499e8ce1cbf6063e',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -40,7 +40,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@43b83d3c09af61dc50d1dc3932797712ec158f54',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@be626ec5da704caf279f1811fe107484a0d8a8ec',
+    'https://chromium.googlesource.com/chromium/src/third_party@9c44a59f65bf4dd01e76f0323ad0964ca87e02ec',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -117,7 +117,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_build_tools/aapt2',
-              'version': 'GlCdqxHxlg-8YkDGgj5cie-6COsEAZga9jyq-LAYxY4C',
+              'version': 'ZHiDoiurxMLwajQq_CwBH9zaDW5xwYWYGbedxIslTm8C',
           },
       ],
       'condition': 'checkout_android',
@@ -140,7 +140,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@3846f6d297339c17663d7a797ba481b3411f13ad',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@d6ef4a8af654ca24f8adca2a892f6f7857d57d2f',
+    'https://chromium.googlesource.com/catapult.git@22e558b5843a77389ca3883d0950f0f34e6f690c',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
@@ -285,7 +285,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@7233953559e4bee7333ec22b81271c907a8e4d3f',
+    'https://chromium.googlesource.com/chromium/src/tools@d5681e9ffdc4bfb2e851713d71d932f8132a893d',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
