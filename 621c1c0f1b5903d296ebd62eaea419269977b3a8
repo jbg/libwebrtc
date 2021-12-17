@@ -70,6 +70,24 @@
       "parentUuid": "109eb0d4_d85a729d",
       "revId": "621c1c0f1b5903d296ebd62eaea419269977b3a8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fff0ac34_e0628296",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 8231
+      },
+      "writtenOn": "2021-12-17T00:48:09Z",
+      "side": 1,
+      "message": "With reference to the lack of .h file changes. source_tracker_ is not a reference or pointer, so making it const would prevent sources from being updated.",
+      "parentUuid": "275b0f82_e089d3fc",
+      "revId": "621c1c0f1b5903d296ebd62eaea419269977b3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
