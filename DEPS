@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '86db3c937688d6bc20df0ddfe054a629d1a7d421',
+  'chromium_revision': 'a468dcc39c4299f010ee952535c111d5b2f5e7bd',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -38,9 +38,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@b92291ea680f6caac13a5d8151c90d246205a0aa',
+    'https://chromium.googlesource.com/chromium/src/testing@6a8a568eadad5e1bffe51d31caab3c178ca37c11',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@94dabc8bb302a9f5fbaf71f4399bdd301b668249',
+    'https://chromium.googlesource.com/chromium/src/third_party@e74c8ea1c9570bb275089b37d4f6c0d6da7b7f85',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -285,7 +285,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@7ba90be5cdc7b1861bb8c250863dbeeb946b866a',
+    'https://chromium.googlesource.com/chromium/src/tools@a037bc59ad17bdfdd20d39021c7f16290e70b52a',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
