@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64cc8af_2b14c2e8",
+        "filename": "modules/video_coding/utility/ivf_file_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 18134
+      },
+      "writtenOn": "2021-12-21T11:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cbc5e40_8aa58be5",
+      "range": {
+        "startLine": 28,
+        "startChar": 34,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "a10cf1e692b47ec6912b4ef1ade376ad13925ea8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c3349ba_39577446",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-12-21T10:35:29Z",
       "side": 1,
       "message": "I would recommend to make this logic codec agnostic, not AV1 specific:\n\nif (encoded_image._encodedWidth \u003d\u003d 0 || encoded_image._encodedHeight \u003d\u003d 0) {\n width_ \u003d kDefaultWidth;\n height_ \u003d kDefaultHeight;\n} else {\n ...\n}\n\nThen RTC_CHECK_GTs can be removed.",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 27
+      },
+      "revId": "a10cf1e692b47ec6912b4ef1ade376ad13925ea8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffc56ab3_41e97302",
+        "filename": "modules/video_coding/utility/ivf_file_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 18134
+      },
+      "writtenOn": "2021-12-21T11:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c3349ba_39577446",
       "range": {
         "startLine": 130,
         "startChar": 0,
