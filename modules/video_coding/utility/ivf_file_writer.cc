@@ -23,6 +23,12 @@
 
 namespace webrtc {
 
+namespace {
+
+constexpr int kDefaultWidthWhenNotProvide = 1280;
+constexpr int kDefaultHeightWhenNotProvide = 720;
+}  // namespace
+
 IvfFileWriter::IvfFileWriter(FileWrapper file, size_t byte_limit)
     : codec_type_(kVideoCodecGeneric),
       bytes_written_(0),
@@ -121,8 +127,19 @@ bool IvfFileWriter::WriteHeader() {
 
 bool IvfFileWriter::InitFromFirstFrame(const EncodedImage& encoded_image,
                                        VideoCodecType codec_type) {
-  width_ = encoded_image._encodedWidth;
-  height_ = encoded_image._encodedHeight;
+  // According to https://aomediacodec.github.io/av1-rtp-spec/, it will not fill
+  // the width and height to AV1 RtpHeader. Would be good to avoid parsing
+  // AV1 stream when video_rtp_depacketizer_av1.cc doesn't fill the data. Use
+  // default hardcoded width and height in IVF writer when those are not
+  // provided until the spec update.
+  if (codec_type == VideoCodecType::kVideoCodecAV1) {
+    width_ = kDefaultWidthWhenNotProvide;
+    height_ = kDefaultHeightWhenNotProvide;
+  } else {
+    width_ = encoded_image._encodedWidth;
+    height_ = encoded_image._encodedHeight;
+  }
+
   RTC_CHECK_GT(width_, 0);
   RTC_CHECK_GT(height_, 0);
   using_capture_timestamps_ = encoded_image.Timestamp() == 0;
