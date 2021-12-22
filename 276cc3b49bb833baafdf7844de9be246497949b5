@@ -16,6 +16,23 @@
       "message": "Added some unit tests. PTAL, thanks!",
       "revId": "276cc3b49bb833baafdf7844de9be246497949b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69c54cb_6dca7e64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2021-12-22T10:18:58Z",
+      "side": 1,
+      "message": "LGTM.",
+      "revId": "276cc3b49bb833baafdf7844de9be246497949b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
