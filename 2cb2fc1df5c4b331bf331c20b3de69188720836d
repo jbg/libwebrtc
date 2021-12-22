@@ -16,6 +16,24 @@
       "message": "This is a follow up to an issue we noticed in https://webrtc-review.googlesource.com/c/src/+/239460.\n\nA new delegate method is added which is marked as optional, but the implementation does not check respondsToSelector, causing crashes for any client that doesn\u0027t implement the method (which is all of them, since it is a new method).",
       "revId": "2cb2fc1df5c4b331bf331c20b3de69188720836d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8799c855_406681b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17729
+      },
+      "writtenOn": "2021-12-22T01:25:11Z",
+      "side": 1,
+      "message": "Thank you for correcting my mistake.",
+      "parentUuid": "b7a37e32_0faa13b5",
+      "revId": "2cb2fc1df5c4b331bf331c20b3de69188720836d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
