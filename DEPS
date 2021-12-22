@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '1ff9e57c996d71b0d54d537cf51b632891b6f935',
+  'chromium_revision': '81bc9fa533c2db1d161d2ebb6952bba6e159c247',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -23,7 +23,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@2135f41014aa489e1e610e0058ac0f70d3833d02',
+    'https://chromium.googlesource.com/chromium/src/base@221558206e5c35932127b5a83d589a9c2698dc01',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@773059e83990e73a81be473aa30d7373928cd6bf',
   'src/buildtools':
@@ -34,13 +34,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@fd05fadc9ddfd71069bce6bc432d236b706f17f8',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@8fdfdd936edd096a293b5fe1a892ac229d220a57',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@6a8a568eadad5e1bffe51d31caab3c178ca37c11',
+    'https://chromium.googlesource.com/chromium/src/testing@334c844c046b6d1928e841548ffc61805485497e',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@660e5e8431176431f7cbbb5e0f2c2805e206bdbc',
+    'https://chromium.googlesource.com/chromium/src/third_party@fc3f5aad08a648712b6b801147ada990ce4c14d2',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -182,7 +182,7 @@ deps = {
       'dep_type': 'cipd',
   },
   'src/third_party/googletest/src':
-    'https://chromium.googlesource.com/external/github.com/google/googletest.git@9a32aee22d771387c494be2d8519fbdf46a713b2',
+    'https://chromium.googlesource.com/external/github.com/google/googletest.git@71d4e2f7423274d178b446e94b88082559f2fa7a',
   'src/third_party/icu': {
     'url': 'https://chromium.googlesource.com/chromium/deps/icu.git@fbc6faf1c2c429cd27fabe615a89f0b217aa4213',
   },
@@ -285,7 +285,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@763ab775fcf96792ac44fc1074e042f2f9235a9a',
+    'https://chromium.googlesource.com/chromium/src/tools@6f1ed484c1aa8094efb393371dfd31ade432ab55',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
@@ -384,7 +384,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': 'vmWZ1WUPgUEe8dpm2UVl-azbGg4DDN1As69u4IhVXpgC',
+          'version': 'K8aeAs5MkvnmLZFsOrHD-cM2_a12D7iuNy1l7xDKWZEC',
       },
     ],
     'condition': 'checkout_android',
