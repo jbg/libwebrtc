@@ -267,10 +267,8 @@ class BaseChannel : public ChannelInterface,
 
   void UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
                             webrtc::SdpType type) RTC_RUN_ON(worker_thread());
-  bool UpdateRemoteStreams_w(const std::vector<StreamParams>& streams,
-                             webrtc::SdpType type,
-                             std::string& error_desc)
-      RTC_RUN_ON(worker_thread());
+  void UpdateRemoteStreams_w(const std::vector<StreamParams>& streams,
+                             webrtc::SdpType type) RTC_RUN_ON(worker_thread());
   virtual bool SetLocalContent_w(const MediaContentDescription* content,
                                  webrtc::SdpType type,
                                  std::string& error_desc)
