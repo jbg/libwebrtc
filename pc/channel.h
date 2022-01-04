@@ -252,9 +252,6 @@ class BaseChannel : public ChannelInterface,
   void ChannelWritable_n() RTC_RUN_ON(network_thread());
   void ChannelNotWritable_n() RTC_RUN_ON(network_thread());
 
-  bool AddRecvStream_w(const StreamParams& sp) RTC_RUN_ON(worker_thread());
-  bool RemoveRecvStream_w(uint32_t ssrc) RTC_RUN_ON(worker_thread());
-  void ResetUnsignaledRecvStream_w() RTC_RUN_ON(worker_thread());
   bool SetPayloadTypeDemuxingEnabled_w(bool enabled)
       RTC_RUN_ON(worker_thread());
   bool AddSendStream_w(const StreamParams& sp) RTC_RUN_ON(worker_thread());
@@ -267,10 +264,8 @@ class BaseChannel : public ChannelInterface,
 
   void UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
                             webrtc::SdpType type) RTC_RUN_ON(worker_thread());
-  bool UpdateRemoteStreams_w(const std::vector<StreamParams>& streams,
-                             webrtc::SdpType type,
-                             std::string& error_desc)
-      RTC_RUN_ON(worker_thread());
+  void UpdateRemoteStreams_w(const std::vector<StreamParams>& streams,
+                             webrtc::SdpType type) RTC_RUN_ON(worker_thread());
   virtual bool SetLocalContent_w(const MediaContentDescription* content,
                                  webrtc::SdpType type,
                                  std::string& error_desc)
