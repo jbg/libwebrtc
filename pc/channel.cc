@@ -596,6 +596,7 @@ bool BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
         GetStream(streams, StreamFinder(&old_stream))) {
       continue;
     }
+    RTC_DCHECK(false);
     if (!media_channel()->RemoveSendStream(old_stream.first_ssrc())) {
       error_desc = StringFormat(
           "Failed to remove send stream with ssrc %u from m-section with "
@@ -639,6 +640,7 @@ bool BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
                                /* flex_fec = */ false, ssrc_generator_);
     }
 
+    RTC_DCHECK(false);
     if (media_channel()->AddSendStream(new_stream)) {
       RTC_LOG(LS_INFO) << "Add send stream ssrc: " << new_stream.ssrcs[0]
                        << " into " << ToString();
