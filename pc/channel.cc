@@ -647,12 +647,13 @@ void BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
   local_streams_ = all_streams;
 }
 
-bool BaseChannel::UpdateRemoteStreams_w(
+void BaseChannel::UpdateRemoteStreams_w(
     const std::vector<StreamParams>& streams,
-    SdpType type,
-    std::string& error_desc) {
+    SdpType type) {
+  // TODO(tommi): Detect modifications to demuxer_criteria_ and return true
+  // if a call to RegisterRtpDemuxerSink_w is needed.
+
   // Check for streams that have been removed.
-  bool ret = true;
   for (const StreamParams& old_stream : remote_streams_) {
     // If we no longer have an unsignaled stream, we would like to remove
     // the unsignaled stream params that are cached.
@@ -666,11 +667,9 @@ bool BaseChannel::UpdateRemoteStreams_w(
         RTC_LOG(LS_INFO) << "Remove remote ssrc: " << old_stream.first_ssrc()
                          << " from " << ToString() << ".";
       } else {
-        error_desc = StringFormat(
-            "Failed to remove remote stream with ssrc %u from m-section with "
-            "mid='%s'.",
-            old_stream.first_ssrc(), content_name().c_str());
-        ret = false;
+        RTC_DLOG(LS_WARNING) << "Failed to remove remote stream with ssrc "
+                             << old_stream.first_ssrc()
+                             << " from m-section with mid=" << content_name();
       }
     }
   }
@@ -689,13 +688,12 @@ bool BaseChannel::UpdateRemoteStreams_w(
                                  : "unsignaled")
                          << " to " << ToString();
       } else {
-        error_desc =
-            StringFormat("Failed to add remote stream ssrc: %s to %s",
-                         new_stream.has_ssrcs()
-                             ? std::to_string(new_stream.first_ssrc()).c_str()
-                             : "unsignaled",
-                         ToString().c_str());
-        ret = false;
+        RTC_DLOG(LS_WARNING)
+            << "Failed to add remote stream ssrc: "
+            << (new_stream.has_ssrcs()
+                    ? std::to_string(new_stream.first_ssrc()).c_str()
+                    : "unsignaled")
+            << " to " << ToString();
       }
     }
     // Update the receiving SSRCs.
@@ -703,12 +701,11 @@ bool BaseChannel::UpdateRemoteStreams_w(
                                      new_stream.ssrcs.end());
   }
   // Re-register the sink to update the receiving ssrcs.
-  if (!RegisterRtpDemuxerSink_w()) {
+  /*if (!RegisterRtpDemuxerSink_w()) {
     RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
     ret = false;
-  }
+  }*/
   remote_streams_ = streams;
-  return ret;
 }
 
 RtpHeaderExtensions BaseChannel::GetDeduplicatedRtpHeaderExtensions(
@@ -874,13 +871,16 @@ bool VoiceChannel::SetRemoteContent_w(const MediaContentDescription* content,
   // and only give it to the media channel once we have a local
   // description too (without a local description, we won't be able to
   // recv them anyway).
-  if (!UpdateRemoteStreams_w(audio->streams(), type, error_desc)) {
-    error_desc = StringFormat(
-        "Failed to set remote audio description streams for m-section with "
-        "mid='%s'.",
-        content_name().c_str());
-    return false;
+  UpdateRemoteStreams_w(audio->streams(), type);
+
+  //////////////
+  // From: UpdateRemoteStreams_w
+  // Re-register the sink to update the receiving ssrcs.
+  // (note that it's already been called above.)
+  if (!RegisterRtpDemuxerSink_w()) {
+    RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
   }
+  //////////////
 
   set_remote_content_direction(content->direction());
   UpdateMediaSendRecvState_w();
@@ -1088,13 +1088,17 @@ bool VideoChannel::SetRemoteContent_w(const MediaContentDescription* content,
   // and only give it to the media channel once we have a local
   // description too (without a local description, we won't be able to
   // recv them anyway).
-  if (!UpdateRemoteStreams_w(video->streams(), type, error_desc)) {
-    error_desc = StringFormat(
-        "Failed to set remote video description streams for m-section with "
-        "mid='%s'.",
-        content_name().c_str());
-    return false;
+  UpdateRemoteStreams_w(video->streams(), type);
+
+  //////////////
+  // From: UpdateRemoteStreams_w
+  // Re-register the sink to update the receiving ssrcs.
+  // (note that it's already been called above.)
+  if (!RegisterRtpDemuxerSink_w()) {
+    RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
   }
+  //////////////
+
   set_remote_content_direction(content->direction());
   UpdateMediaSendRecvState_w();
   return true;
