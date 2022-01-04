@@ -575,9 +575,8 @@ bool BaseChannel::SetPayloadTypeDemuxingEnabled_w(bool enabled) {
   return RegisterRtpDemuxerSink_w();
 }
 
-bool BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
-                                       SdpType type,
-                                       std::string& error_desc) {
+void BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
+                                       SdpType type) {
   // In the case of RIDs (where SSRCs are not negotiated), this method will
   // generate an SSRC for each layer in StreamParams. That representation will
   // be stored internally in `local_streams_`.
@@ -590,20 +589,18 @@ bool BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
   // in which niether SSRCs or RIDs are negotiated.
 
   // Check for streams that have been removed.
-  bool ret = true;
   for (const StreamParams& old_stream : local_streams_) {
     if (!old_stream.has_ssrcs() ||
         GetStream(streams, StreamFinder(&old_stream))) {
       continue;
     }
     if (!media_channel()->RemoveSendStream(old_stream.first_ssrc())) {
-      error_desc = StringFormat(
-          "Failed to remove send stream with ssrc %u from m-section with "
-          "mid='%s'.",
-          old_stream.first_ssrc(), content_name().c_str());
-      ret = false;
+      RTC_DLOG(LS_WARNING) << "Failed to remove send stream with ssrc "
+                           << old_stream.first_ssrc()
+                           << " from m-section with mid=" << content_name();
     }
   }
+
   // Check for new streams.
   std::vector<StreamParams> all_streams;
   for (const StreamParams& stream : streams) {
@@ -623,11 +620,10 @@ bool BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
 
     RTC_DCHECK(new_stream.has_ssrcs() || new_stream.has_rids());
     if (new_stream.has_ssrcs() && new_stream.has_rids()) {
-      error_desc = StringFormat(
-          "Failed to add send stream: %u into m-section with mid='%s'. Stream "
-          "has both SSRCs and RIDs.",
-          new_stream.first_ssrc(), content_name().c_str());
-      ret = false;
+      RTC_DLOG(LS_WARNING)
+          << "Failed to add send stream " << new_stream.first_ssrc()
+          << " with both SSRCs and RIDs into m-section with mid="
+          << content_name();
       continue;
     }
 
@@ -640,17 +636,15 @@ bool BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
     }
 
     if (media_channel()->AddSendStream(new_stream)) {
-      RTC_LOG(LS_INFO) << "Add send stream ssrc: " << new_stream.ssrcs[0]
-                       << " into " << ToString();
+      RTC_DLOG(LS_INFO) << "Add send stream ssrc: " << new_stream.ssrcs[0]
+                        << " into " << ToString();
     } else {
-      error_desc = StringFormat(
-          "Failed to add send stream ssrc: %u into m-section with mid='%s'",
-          new_stream.first_ssrc(), content_name().c_str());
-      ret = false;
+      RTC_DLOG(LS_WARNING) << "Failed to add send stream ssrc: "
+                           << new_stream.first_ssrc()
+                           << " into m-section with mid=" << content_name();
     }
   }
   local_streams_ = all_streams;
-  return ret;
 }
 
 bool BaseChannel::UpdateRemoteStreams_w(
@@ -831,10 +825,7 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
   // only give it to the media channel once we have a remote
   // description too (without a remote description, we won't be able
   // to send them anyway).
-  if (!UpdateLocalStreams_w(content->as_audio()->streams(), type, error_desc)) {
-    RTC_DCHECK(!error_desc.empty());
-    return false;
-  }
+  UpdateLocalStreams_w(content->as_audio()->streams(), type);
 
   set_local_content_direction(content->direction());
   UpdateMediaSendRecvState_w();
@@ -1015,10 +1006,7 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
   // only give it to the media channel once we have a remote
   // description too (without a remote description, we won't be able
   // to send them anyway).
-  if (!UpdateLocalStreams_w(content->as_video()->streams(), type, error_desc)) {
-    RTC_DCHECK(!error_desc.empty());
-    return false;
-  }
+  UpdateLocalStreams_w(content->as_video()->streams(), type);
 
   set_local_content_direction(content->direction());
   UpdateMediaSendRecvState_w();
