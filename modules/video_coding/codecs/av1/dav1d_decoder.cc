@@ -84,8 +84,8 @@ bool Dav1dDecoder::Configure(const Settings& settings) {
   Dav1dSettings s;
   dav1d_default_settings(&s);
 
-  s.n_threads = std::max(2, settings.number_of_cores());
-  s.max_frame_delay = 1;   // For low latency decoding.
+  //   s.n_threads = std::max(2, settings.number_of_cores());
+  //   s.max_frame_delay = 1;   // For low latency decoding.
   s.all_layers = 0;        // Don't output a frame for every spatial layer.
   s.operating_point = 31;  // Decode all operating points.
 

@@ -18,6 +18,7 @@
 #include "api/scoped_refptr.h"
 #include "modules/desktop_capture/desktop_frame.h"
 #include "modules/desktop_capture/linux/wayland/egl_dmabuf.h"
+#include "modules/desktop_capture/mouse_cursor.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/system/rtc_export.h"
@@ -34,6 +35,8 @@ class RTC_EXPORT SharedScreenCastStream
   bool StartScreenCastStream(uint32_t stream_node_id, int32_t fd);
   void StopScreenCastStream();
   std::unique_ptr<DesktopFrame> CaptureFrame();
+  std::unique_ptr<MouseCursor> CaptureCursor();
+  DesktopVector CaptureCursorPosition();
 
   ~SharedScreenCastStream();
 
