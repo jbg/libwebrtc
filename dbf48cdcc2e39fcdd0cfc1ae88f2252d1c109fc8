@@ -18,6 +18,29 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c64fa506_960be48b",
+        "filename": "api/rtp_packet_infos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-05T11:37:20Z",
+      "side": 1,
+      "message": "nit. \nhttps://abseil.io/tips/131\n\n“Prefer \u003ddefault over writing an equivalent implementation by hand, even if that implementation is just {}”",
+      "range": {
+        "startLine": 107,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 14
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a66695af_121c9ac0",
@@ -43,6 +66,76 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cac58a30_67ddf0ca",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-05T11:37:20Z",
+      "side": 1,
+      "message": "I would try to remove explicit default constructors, keep just \"using T::T\" and see if all bots pass. With the move to C++17 they should.\n(\"until c++17\" mean that there is no need to keep it once c++14 support is dropped, which is now)",
+      "parentUuid": "a66695af_121c9ac0",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "130f7742_ed341e78",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-05T11:37:20Z",
+      "side": 1,
+      "message": "why Release method needs to return this Status? scoped_refptr doesn\u0027t use it.\n\n(afaik there are objects used with scoped_refptr that have \"void Release()\")",
+      "range": {
+        "startLine": 130,
+        "startChar": 3,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5824beec_94e0bbf4",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-05T11:37:20Z",
+      "side": 1,
+      "message": "nit: with c++17 this can be written as\nstd::is_same_v\u003c\u003cdecltype(Test\u003cT\u003e(0)), int\u003e;\n\nhttps://en.cppreference.com/w/cpp/types/is_same",
+      "range": {
+        "startLine": 143,
+        "startChar": 32,
+        "endLine": 143,
+        "endChar": 78
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "366f8241_a5e78805",
         "filename": "rtc_base/ref_counted_object.h",
         "patchSetId": 2
@@ -54,6 +147,30 @@
       "writtenOn": "2022-01-05T11:03:02Z",
       "side": 1,
       "message": "Cargo-culted based on HasDataAndSize in rtc_base/type_traits.h. Template magic is a bit beyond me, but I think the point is to ensure that the Release() method is reference at a place where a non-existing method isn\u0027t a compile error.\n\nIt doesn\u0027t seem right to have this (and the HasDataAndSize) directly in the rtc:: name space, but not sure what\u0027s the right place.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b3f92f0_3bbbbf55",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-05T11:37:20Z",
+      "side": 1,
+      "message": "may be rtc_scoped_refptr_internal (or similar named internal) namespace would be better.",
+      "parentUuid": "366f8241_a5e78805",
       "range": {
         "startLine": 129,
         "startChar": 0,
