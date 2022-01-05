@@ -539,18 +539,6 @@ void BaseChannel::ChannelNotWritable_n() {
   RTC_LOG(LS_INFO) << "Channel not writable (" << ToString() << ")";
 }
 
-bool BaseChannel::AddRecvStream_w(const StreamParams& sp) {
-  return media_channel()->AddRecvStream(sp);
-}
-
-bool BaseChannel::RemoveRecvStream_w(uint32_t ssrc) {
-  return media_channel()->RemoveRecvStream(ssrc);
-}
-
-void BaseChannel::ResetUnsignaledRecvStream_w() {
-  media_channel()->ResetUnsignaledRecvStream();
-}
-
 bool BaseChannel::SetPayloadTypeDemuxingEnabled_w(bool enabled) {
   if (enabled == payload_type_demuxing_enabled_) {
     return true;
@@ -573,6 +561,15 @@ bool BaseChannel::SetPayloadTypeDemuxingEnabled_w(bool enabled) {
 
   // Note: This synchronously hops to the network thread.
   return RegisterRtpDemuxerSink_w();
+}
+
+bool BaseChannel::SetDemuxReceiveSsrcs_w(webrtc::flat_set<uint32_t> ssrcs) {
+  if (demuxer_criteria_.ssrcs() == ssrcs)
+    return false;
+
+  demuxer_criteria_.ssrcs() = std::move(ssrcs);
+
+  return true;
 }
 
 void BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
@@ -647,68 +644,74 @@ void BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
   local_streams_ = all_streams;
 }
 
-bool BaseChannel::UpdateRemoteStreams_w(
+webrtc::flat_set<uint32_t> BaseChannel::UpdateRemoteStreams_w(
     const std::vector<StreamParams>& streams,
-    SdpType type,
-    std::string& error_desc) {
+    SdpType type) {
+  // TODO(tommi): Detect modifications to demuxer_criteria_ and return true
+  // if a call to RegisterRtpDemuxerSink_w is needed.
+
+  const bool new_has_unsignaled_ssrcs = HasStreamWithNoSsrcs(streams);
+  const bool old_has_unsignaled_ssrcs = HasStreamWithNoSsrcs(remote_streams_);
+
   // Check for streams that have been removed.
-  bool ret = true;
   for (const StreamParams& old_stream : remote_streams_) {
     // If we no longer have an unsignaled stream, we would like to remove
     // the unsignaled stream params that are cached.
-    if (!old_stream.has_ssrcs() && !HasStreamWithNoSsrcs(streams)) {
-      ResetUnsignaledRecvStream_w();
+    if (!old_stream.has_ssrcs() && !new_has_unsignaled_ssrcs) {
+      media_channel()->ResetUnsignaledRecvStream();
       RTC_LOG(LS_INFO) << "Reset unsignaled remote stream for " << ToString()
                        << ".";
     } else if (old_stream.has_ssrcs() &&
                !GetStreamBySsrc(streams, old_stream.first_ssrc())) {
-      if (RemoveRecvStream_w(old_stream.first_ssrc())) {
+      if (media_channel()->RemoveRecvStream(old_stream.first_ssrc())) {
         RTC_LOG(LS_INFO) << "Remove remote ssrc: " << old_stream.first_ssrc()
                          << " from " << ToString() << ".";
       } else {
-        error_desc = StringFormat(
-            "Failed to remove remote stream with ssrc %u from m-section with "
-            "mid='%s'.",
-            old_stream.first_ssrc(), content_name().c_str());
-        ret = false;
+        RTC_DLOG(LS_WARNING) << "Failed to remove remote stream with ssrc "
+                             << old_stream.first_ssrc()
+                             << " from m-section with mid=" << content_name();
+        RTC_DCHECK_NOTREACHED();
       }
     }
   }
-  demuxer_criteria_.ssrcs().clear();
+  // demuxer_criteria_.ssrcs().clear();
+  webrtc::flat_set<uint32_t> receive_ssrcs;
   // Check for new streams.
   for (const StreamParams& new_stream : streams) {
     // We allow a StreamParams with an empty list of SSRCs, in which case the
     // MediaChannel will cache the parameters and use them for any unsignaled
     // stream received later.
-    if ((!new_stream.has_ssrcs() && !HasStreamWithNoSsrcs(remote_streams_)) ||
+    if ((!new_stream.has_ssrcs() && !old_has_unsignaled_ssrcs) ||
         !GetStreamBySsrc(remote_streams_, new_stream.first_ssrc())) {
-      if (AddRecvStream_w(new_stream)) {
+      if (media_channel()->AddRecvStream(new_stream)) {
         RTC_LOG(LS_INFO) << "Add remote ssrc: "
                          << (new_stream.has_ssrcs()
                                  ? std::to_string(new_stream.first_ssrc())
                                  : "unsignaled")
                          << " to " << ToString();
       } else {
-        error_desc =
-            StringFormat("Failed to add remote stream ssrc: %s to %s",
-                         new_stream.has_ssrcs()
-                             ? std::to_string(new_stream.first_ssrc()).c_str()
-                             : "unsignaled",
-                         ToString().c_str());
-        ret = false;
+        RTC_DLOG(LS_WARNING)
+            << "Failed to add remote stream ssrc: "
+            << (new_stream.has_ssrcs()
+                    ? std::to_string(new_stream.first_ssrc()).c_str()
+                    : "unsignaled")
+            << " to " << ToString();
+        RTC_DCHECK_NOTREACHED();
       }
     }
     // Update the receiving SSRCs.
-    demuxer_criteria_.ssrcs().insert(new_stream.ssrcs.begin(),
-                                     new_stream.ssrcs.end());
+    // demuxer_criteria_.ssrcs().insert(new_stream.ssrcs.begin(),
+    //                                 new_stream.ssrcs.end());
+    receive_ssrcs.insert(new_stream.ssrcs.begin(), new_stream.ssrcs.end());
   }
   // Re-register the sink to update the receiving ssrcs.
-  if (!RegisterRtpDemuxerSink_w()) {
+  /*if (!RegisterRtpDemuxerSink_w()) {
     RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
     ret = false;
-  }
+  }*/
   remote_streams_ = streams;
-  return ret;
+
+  return receive_ssrcs;
 }
 
 RtpHeaderExtensions BaseChannel::GetDeduplicatedRtpHeaderExtensions(
@@ -859,28 +862,39 @@ bool VoiceChannel::SetRemoteContent_w(const MediaContentDescription* content,
   }
   last_send_params_ = send_params;
 
+  bool register_needed = false;
+
   if (!webrtc::RtpTransceiverDirectionHasSend(content->direction())) {
     RTC_DLOG(LS_VERBOSE) << "SetRemoteContent_w: remote side will not send - "
                             "disable payload type demuxing for "
                          << ToString();
     ClearHandledPayloadTypes();
+    /*
     if (!RegisterRtpDemuxerSink_w()) {
       RTC_LOG(LS_ERROR) << "Failed to update audio demuxing for " << ToString();
       return false;
-    }
+    }*/
+    register_needed = true;
   }
 
   // TODO(pthatcher): Move remote streams into AudioRecvParameters,
   // and only give it to the media channel once we have a local
   // description too (without a local description, we won't be able to
   // recv them anyway).
-  if (!UpdateRemoteStreams_w(audio->streams(), type, error_desc)) {
-    error_desc = StringFormat(
-        "Failed to set remote audio description streams for m-section with "
-        "mid='%s'.",
-        content_name().c_str());
-    return false;
+  if (SetDemuxReceiveSsrcs_w(UpdateRemoteStreams_w(audio->streams(), type))) {
+    register_needed = true;
   }
+
+  //////////////
+  // From: UpdateRemoteStreams_w
+  // Re-register the sink to update the receiving ssrcs.
+  // (note that it's already been called above.)
+  if (register_needed) {
+    if (!RegisterRtpDemuxerSink_w()) {
+      RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
+    }
+  }
+  //////////////
 
   set_remote_content_direction(content->direction());
   UpdateMediaSendRecvState_w();
@@ -911,12 +925,15 @@ VideoChannel::~VideoChannel() {
   Deinit();
 }
 
+// TODO(tommi): Make this the default implementation in BaseChannel, remove
+// the VideoChannel implementation and call the default from VoiceChannel
+// (where this code is currently copied).
 void VideoChannel::UpdateMediaSendRecvState_w() {
   // Send outgoing data if we're the active call, we have the remote content,
   // and we have had some form of connectivity.
   bool send = IsReadyToSendMedia_w();
   if (!media_channel()->SetSend(send)) {
-    RTC_LOG(LS_ERROR) << "Failed to SetSend on video channel: " + ToString();
+    RTC_LOG(LS_ERROR) << "Failed to SetSend on video channel: " << ToString();
     // TODO(gangji): Report error back to server.
   }
 
@@ -1073,28 +1090,39 @@ bool VideoChannel::SetRemoteContent_w(const MediaContentDescription* content,
     last_recv_params_ = recv_params;
   }
 
+  bool register_needed = false;
+
   if (!webrtc::RtpTransceiverDirectionHasSend(content->direction())) {
     RTC_DLOG(LS_VERBOSE) << "SetRemoteContent_w: remote side will not send - "
                             "disable payload type demuxing for "
                          << ToString();
     ClearHandledPayloadTypes();
-    if (!RegisterRtpDemuxerSink_w()) {
+    /*if (!RegisterRtpDemuxerSink_w()) {
       RTC_LOG(LS_ERROR) << "Failed to update video demuxing for " << ToString();
       return false;
-    }
+    }*/
+    register_needed = true;
   }
 
   // TODO(pthatcher): Move remote streams into VideoRecvParameters,
   // and only give it to the media channel once we have a local
   // description too (without a local description, we won't be able to
   // recv them anyway).
-  if (!UpdateRemoteStreams_w(video->streams(), type, error_desc)) {
-    error_desc = StringFormat(
-        "Failed to set remote video description streams for m-section with "
-        "mid='%s'.",
-        content_name().c_str());
-    return false;
+  if (SetDemuxReceiveSsrcs_w(UpdateRemoteStreams_w(video->streams(), type))) {
+    register_needed = true;
   }
+
+  //////////////
+  // From: UpdateRemoteStreams_w
+  // Re-register the sink to update the receiving ssrcs.
+  // (note that it's already been called above.)
+  if (register_needed) {
+    if (!RegisterRtpDemuxerSink_w()) {
+      RTC_LOG(LS_ERROR) << "Failed to set up demuxing for " << ToString();
+    }
+  }
+  //////////////
+
   set_remote_content_direction(content->direction());
   UpdateMediaSendRecvState_w();
   return true;

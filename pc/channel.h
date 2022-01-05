@@ -252,13 +252,14 @@ class BaseChannel : public ChannelInterface,
   void ChannelWritable_n() RTC_RUN_ON(network_thread());
   void ChannelNotWritable_n() RTC_RUN_ON(network_thread());
 
-  bool AddRecvStream_w(const StreamParams& sp) RTC_RUN_ON(worker_thread());
-  bool RemoveRecvStream_w(uint32_t ssrc) RTC_RUN_ON(worker_thread());
-  void ResetUnsignaledRecvStream_w() RTC_RUN_ON(worker_thread());
   bool SetPayloadTypeDemuxingEnabled_w(bool enabled)
       RTC_RUN_ON(worker_thread());
-  bool AddSendStream_w(const StreamParams& sp) RTC_RUN_ON(worker_thread());
-  bool RemoveSendStream_w(uint32_t ssrc) RTC_RUN_ON(worker_thread());
+
+  // Updates the demuxer criteria with a new set of ssrcs.
+  // If the demuxer criteria already contains these ssrcs and no change is
+  // needed (i.e. re-registration is not necessary), the return value is false.
+  bool SetDemuxReceiveSsrcs_w(webrtc::flat_set<uint32_t> ssrcs)
+      RTC_RUN_ON(worker_thread());
 
   // Should be called whenever the conditions for
   // IsReadyToReceiveMedia/IsReadyToSendMedia are satisfied (or unsatisfied).
@@ -267,10 +268,14 @@ class BaseChannel : public ChannelInterface,
 
   void UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
                             webrtc::SdpType type) RTC_RUN_ON(worker_thread());
-  bool UpdateRemoteStreams_w(const std::vector<StreamParams>& streams,
-                             webrtc::SdpType type,
-                             std::string& error_desc)
-      RTC_RUN_ON(worker_thread());
+  // Checks for removed/added streams and notifies the media_channel() of the
+  // same or if unsignaled streams should be reset on account of now having
+  // signaled stream params.
+  // Returns a set of ssrcs for all the streams to be used with the demuxer
+  // criteria.
+  webrtc::flat_set<uint32_t> UpdateRemoteStreams_w(
+      const std::vector<StreamParams>& streams,
+      webrtc::SdpType type) RTC_RUN_ON(worker_thread());
   virtual bool SetLocalContent_w(const MediaContentDescription* content,
                                  webrtc::SdpType type,
                                  std::string& error_desc)
