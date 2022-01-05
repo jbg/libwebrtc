@@ -265,10 +265,8 @@ class BaseChannel : public ChannelInterface,
   // Updates the send/recv state of the media channel.
   virtual void UpdateMediaSendRecvState_w() RTC_RUN_ON(worker_thread()) = 0;
 
-  bool UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
-                            webrtc::SdpType type,
-                            std::string& error_desc)
-      RTC_RUN_ON(worker_thread());
+  void UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
+                            webrtc::SdpType type) RTC_RUN_ON(worker_thread());
   bool UpdateRemoteStreams_w(const std::vector<StreamParams>& streams,
                              webrtc::SdpType type,
                              std::string& error_desc)
