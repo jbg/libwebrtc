@@ -15,7 +15,6 @@
 #include <utility>
 #include <vector>
 
-#include "api/ref_counted_base.h"
 #include "api/rtp_packet_info.h"
 #include "api/scoped_refptr.h"
 #include "rtc_base/system/rtc_export.h"
@@ -47,17 +46,16 @@ class RTC_EXPORT RtpPacketInfos {
   using iterator = const_iterator;
   using reverse_iterator = const_reverse_iterator;
 
-  RtpPacketInfos() {}
-  explicit RtpPacketInfos(const vector_type& entries)
-      : data_(Data::Create(entries)) {}
+  RtpPacketInfos();
+  explicit RtpPacketInfos(const vector_type& entries);
+  explicit RtpPacketInfos(vector_type&& entries);
 
-  explicit RtpPacketInfos(vector_type&& entries)
-      : data_(Data::Create(std::move(entries))) {}
+  RtpPacketInfos(const RtpPacketInfos& other);
+  RtpPacketInfos(RtpPacketInfos&& other);
+  RtpPacketInfos& operator=(const RtpPacketInfos& other);
+  RtpPacketInfos& operator=(RtpPacketInfos&& other);
 
-  RtpPacketInfos(const RtpPacketInfos& other) = default;
-  RtpPacketInfos(RtpPacketInfos&& other) = default;
-  RtpPacketInfos& operator=(const RtpPacketInfos& other) = default;
-  RtpPacketInfos& operator=(RtpPacketInfos&& other) = default;
+  ~RtpPacketInfos();
 
   const_reference operator[](size_type pos) const { return entries()[pos]; }
 
@@ -79,49 +77,9 @@ class RTC_EXPORT RtpPacketInfos {
   size_type size() const { return entries().size(); }
 
  private:
-  class Data : public rtc::RefCountedBase {
-   public:
-    static rtc::scoped_refptr<Data> Create(const vector_type& entries) {
-      // Performance optimization for the empty case.
-      if (entries.empty()) {
-        return nullptr;
-      }
+  class Data;
 
-      return new Data(entries);
-    }
-
-    static rtc::scoped_refptr<Data> Create(vector_type&& entries) {
-      // Performance optimization for the empty case.
-      if (entries.empty()) {
-        return nullptr;
-      }
-
-      return new Data(std::move(entries));
-    }
-
-    const vector_type& entries() const { return entries_; }
-
-   private:
-    explicit Data(const vector_type& entries) : entries_(entries) {}
-    explicit Data(vector_type&& entries) : entries_(std::move(entries)) {}
-    ~Data() override {}
-
-    const vector_type entries_;
-  };
-
-  static const vector_type& empty_entries() {
-    static const vector_type& value = *new vector_type();
-    return value;
-  }
-
-  const vector_type& entries() const {
-    if (data_ != nullptr) {
-      return data_->entries();
-    } else {
-      return empty_entries();
-    }
-  }
-
+  const vector_type& entries() const;
   rtc::scoped_refptr<Data> data_;
 };
 

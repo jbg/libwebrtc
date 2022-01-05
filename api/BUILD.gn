@@ -84,6 +84,7 @@ rtc_library("rtp_packet_info") {
   sources = [
     "rtp_packet_info.cc",
     "rtp_packet_info.h",
+    "rtp_packet_infos.cc",
     "rtp_packet_infos.h",
   ]
   deps = [
