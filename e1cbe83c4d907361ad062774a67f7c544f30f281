@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f127aa4b_fe672526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-01-05T09:55:21Z",
+      "side": 1,
+      "message": "LGTM, sending it off to the commit queue",
+      "revId": "e1cbe83c4d907361ad062774a67f7c544f30f281",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
