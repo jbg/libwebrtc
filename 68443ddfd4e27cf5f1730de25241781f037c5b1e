@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "845e3ed2_5dd45c37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-01-05T09:03:26Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "68443ddfd4e27cf5f1730de25241781f037c5b1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2260db0_623e3a72",
+        "filename": "AUTHORS",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-01-05T09:03:26Z",
+      "side": 1,
+      "message": "nit: This should be sorted alphabetically, can you move it up (after Xiaolei and before Yura)",
+      "revId": "68443ddfd4e27cf5f1730de25241781f037c5b1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
