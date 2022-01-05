@@ -106,8 +106,13 @@ class FinalRefCountedObject final : public T {
 //
 //   auto p = scoped_refptr<Foo>(new RefCountedObject<Foo>("bar", 123));
 //
-// If the class does not inherit from RefCountInterface, the example is
-// equivalent to:
+// If the class does not inherit from RefCountInterface, but does have
+// AddRef/Release methods (so a T* is convertible to rtc::scoped_refptr), this
+// is equivalent to just
+//
+//   auto p = scoped_refptr<Foo>(new Foo("bar", 123));
+//
+// Otherwise, the example is equivalent to:
 //
 //   auto p = scoped_refptr<FinalRefCountedObject<Foo>>(
 //       new FinalRefCountedObject<Foo>("bar", 123));
@@ -121,6 +126,23 @@ class FinalRefCountedObject final : public T {
 // Note that in some cases, using RefCountedObject directly may still be what's
 // needed.
 
+// Determines if the given class has a Release method returning a
+// RefCountReleaseStatus.
+template <typename T>
+class HasRelease {
+ private:
+  template <typename C,
+            typename std::enable_if<
+                std::is_same<decltype(std::declval<C>().Release()),
+                             RefCountReleaseStatus>::value>::type* = nullptr>
+  static int Test(int);
+  template <typename>
+  static char Test(...);
+
+ public:
+  static constexpr bool value = std::is_same<decltype(Test<T>(0)), int>::value;
+};
+
 // `make_ref_counted` for classes that are convertible to RefCountInterface.
 template <
     typename T,
@@ -132,12 +154,26 @@ scoped_refptr<T> make_ref_counted(Args&&... args) {
 }
 
 // `make_ref_counted` for complete classes that are not convertible to
-// RefCountInterface.
-template <
-    typename T,
-    typename... Args,
-    typename std::enable_if<!std::is_convertible<T*, RefCountInterface*>::value,
-                            T>::type* = nullptr>
+// RefCountInterface and already carry a ref count.
+template <typename T,
+          typename... Args,
+          typename std::enable_if<
+              !std::is_convertible<T*, RefCountInterface*>::value &&
+                  HasRelease<T>::value,
+              T>::type* = nullptr>
+scoped_refptr<T> make_ref_counted(Args&&... args) {
+  return scoped_refptr<T>(new T(std::forward<Args>(args)...));
+}
+
+// `make_ref_counted` for complete classes that are not convertible to
+// RefCountInterface and have no ref count of their own.
+template <typename T,
+          typename... Args,
+          typename std::enable_if<
+              !std::is_convertible<T*, RefCountInterface*>::value &&
+                  !HasRelease<T>::value,
+
+              T>::type* = nullptr>
 scoped_refptr<FinalRefCountedObject<T>> make_ref_counted(Args&&... args) {
   return new FinalRefCountedObject<T>(std::forward<Args>(args)...);
 }
@@ -187,10 +223,8 @@ scoped_refptr<FinalRefCountedObject<T>> make_ref_counted(Args&&... args) {
 // * scoped_refptr<Ref<Foo>::Type> my_ptr;
 template <typename T>
 struct Ref {
-  typedef typename std::conditional<
-      std::is_convertible<T*, RefCountInterface*>::value,
-      T,
-      FinalRefCountedObject<T>>::type Type;
+  typedef typename std::
+      conditional<HasRelease<T>::value, T, FinalRefCountedObject<T>>::type Type;
 
   typedef scoped_refptr<Type> Ptr;
 };
