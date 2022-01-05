@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "077c6cf5_934f1adf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-05T11:03:02Z",
+      "side": 1,
+      "message": "PTAL.",
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a66695af_121c9ac0",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-05T11:03:02Z",
+      "side": 1,
+      "message": "How should this be simplified now that we can depend on C++17? Keep the using declaration, and delete the constructors? Or does \"Until C++17\" mean this can\u0027t be updated until we get to C++20 ?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "366f8241_a5e78805",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-05T11:03:02Z",
+      "side": 1,
+      "message": "Cargo-culted based on HasDataAndSize in rtc_base/type_traits.h. Template magic is a bit beyond me, but I think the point is to ensure that the Release() method is reference at a place where a non-existing method isn\u0027t a compile error.\n\nIt doesn\u0027t seem right to have this (and the HasDataAndSize) directly in the rtc:: name space, but not sure what\u0027s the right place.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
