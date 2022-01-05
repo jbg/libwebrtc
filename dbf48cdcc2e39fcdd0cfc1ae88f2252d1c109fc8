@@ -137,6 +137,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "56d46240_1692b111",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-05T12:29:33Z",
+      "side": 1,
+      "message": "I guess it doesn\u0027t hurt to have such return status on Release function (binary size increase is neglitable),\nbut I think it does hurt to require/rely on it when picking which type to create with the make_ref_counted helper.\n\nIf class has `void Release` (and `void AddRef`), then make_ref_counted wouldn\u0027t detect it and would add a different reference counter on top of it.\n\ne.g. try to add a test:\n  class ClassWithRefCounting {\n   public:\n    ClassWithRefCounting() \u003d default;\n    ~ClassWithRefCounting() \u003d default;\n\n    void AddRef() { ++counter_; }\n    void Release() { CHECK_GT(counter_, 0); if (--counter_ \u003d\u003d 0) delete this; }\n\n   private:\n    int counter_ \u003d 0;\n  };\n\n  scoped_refptr\u003cClassWithRefCounting\u003e a_pointer \u003d \n  rtc::make_ref_counter\u003cClassWithRefCounting\u003e();\n\nor larger, but more practical code:\n\n  rtc::scoped_refptr\u003cClassWithRefCounting\u003e CreatePointer() {\n    return rtc::make_ref_counter\u003cClassWithRefCounting\u003e();\n  }\n  auto a_pointer \u003d CreatePointer();\n\nwould it compile? would it produce expected result?",
+      "parentUuid": "e444d02f_5f3d6d9e",
+      "range": {
+        "startLine": 130,
+        "startChar": 3,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5824beec_94e0bbf4",
         "filename": "rtc_base/ref_counted_object.h",
         "patchSetId": 2
