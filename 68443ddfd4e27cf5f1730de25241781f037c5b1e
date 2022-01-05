@@ -33,6 +33,24 @@
       "message": "nit: This should be sorted alphabetically, can you move it up (after Xiaolei and before Yura)",
       "revId": "68443ddfd4e27cf5f1730de25241781f037c5b1e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "157d4756_572d55ee",
+        "filename": "AUTHORS",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 18739
+      },
+      "writtenOn": "2022-01-05T09:53:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2260db0_623e3a72",
+      "revId": "68443ddfd4e27cf5f1730de25241781f037c5b1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
