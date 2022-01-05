@@ -808,7 +808,9 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
                                      SdpType type,
                                      std::string& error_desc) {
   TRACE_EVENT0("webrtc", "VoiceChannel::SetLocalContent_w");
-  RTC_LOG(LS_INFO) << "Setting local voice description for " << ToString();
+  RTC_DLOG(LS_INFO) << "Setting local voice description for " << ToString();
+
+  rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
 
   RtpHeaderExtensions rtp_header_extensions =
       GetDeduplicatedRtpHeaderExtensions(content->rtp_header_extensions());
@@ -926,10 +928,14 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
                                      SdpType type,
                                      std::string& error_desc) {
   TRACE_EVENT0("webrtc", "VideoChannel::SetLocalContent_w");
-  RTC_LOG(LS_INFO) << "Setting local video description for " << ToString();
+  RTC_DLOG(LS_INFO) << "Setting local video description for " << ToString();
+
+  rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
 
   RtpHeaderExtensions rtp_header_extensions =
       GetDeduplicatedRtpHeaderExtensions(content->rtp_header_extensions());
+  // TODO(tommi): There's a hop to the network thread here.
+  // some of the below is also network thread related.
   UpdateRtpHeaderExtensionMap(rtp_header_extensions);
   media_channel()->SetExtmapAllowMixed(content->extmap_allow_mixed());
 
