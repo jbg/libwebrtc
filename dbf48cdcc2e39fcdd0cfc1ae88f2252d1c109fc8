@@ -113,6 +113,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e444d02f_5f3d6d9e",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-05T12:04:24Z",
+      "side": 1,
+      "message": "There are a few examples in the code where HasOneRef() and kDroppedLastRef/kOtherRefsRemained are used by a surrogate object to do cleanup when no outstanding references remain and I think that some tests use this for testing for correctness (making sure we\u0027re not leaking or that there are circular dependencies etc). So from my perspective, it doesn\u0027t hurt.",
+      "parentUuid": "130f7742_ed341e78",
+      "range": {
+        "startLine": 130,
+        "startChar": 3,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5824beec_94e0bbf4",
         "filename": "rtc_base/ref_counted_object.h",
         "patchSetId": 2
