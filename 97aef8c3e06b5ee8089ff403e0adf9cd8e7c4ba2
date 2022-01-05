@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f128d0ee_f0811098",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-01-05T12:22:01Z",
+      "side": 1,
+      "message": "found some leftover code. What is odd is that the check SHOULD have triggered when this was removed from RTCConfiguration, no?",
+      "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
