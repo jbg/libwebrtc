@@ -570,6 +570,29 @@ bool BaseChannel::SetPayloadTypeDemuxingEnabled_w(bool enabled) {
   return RegisterRtpDemuxerSink_w();
 }
 
+void BaseChannel::UpdateTransport(
+    bool update_demuxer,
+    absl::optional<RtpHeaderExtensions> extensions) {
+  if (!update_demuxer && !extensions)
+    return;
+
+  // TODO(tommi): See if we can do this asynchronously.
+
+  if (update_demuxer)
+    media_channel()->OnDemuxerCriteriaUpdatePending();
+
+  network_thread()->Invoke<void>(RTC_FROM_HERE, [&]() mutable {
+    RTC_DCHECK_RUN_ON(network_thread());
+    if (extensions)
+      rtp_transport_->UpdateRtpHeaderExtensionMap(*extensions);
+    if (update_demuxer)
+      rtp_transport_->RegisterRtpDemuxerSink(demuxer_criteria_, this);
+  });
+
+  if (update_demuxer)
+    media_channel()->OnDemuxerCriteriaUpdateComplete();
+}
+
 bool BaseChannel::UpdateLocalStreams_w(const std::vector<StreamParams>& streams,
                                        SdpType type,
                                        std::string& error_desc) {
@@ -742,14 +765,17 @@ RtpHeaderExtensions BaseChannel::GetDeduplicatedRtpHeaderExtensions(
                                                            extensions_filter_);
 }
 
-void BaseChannel::MaybeAddHandledPayloadType(int payload_type) {
+bool BaseChannel::MaybeAddHandledPayloadType(int payload_type) {
+  bool demuxer_criteria_modified = false;
   if (payload_type_demuxing_enabled_) {
-    demuxer_criteria_.payload_types().insert(
-        static_cast<uint8_t>(payload_type));
+    demuxer_criteria_modified = demuxer_criteria_.payload_types()
+                                    .insert(static_cast<uint8_t>(payload_type))
+                                    .second;
   }
   // Even if payload type demuxing is currently disabled, we need to remember
   // the payload types in case it's re-enabled later.
   payload_types_.insert(static_cast<uint8_t>(payload_type));
+  return demuxer_criteria_modified;
 }
 
 bool BaseChannel::ClearHandledPayloadTypes() {
@@ -808,18 +834,22 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
                                      SdpType type,
                                      std::string& error_desc) {
   TRACE_EVENT0("webrtc", "VoiceChannel::SetLocalContent_w");
-  RTC_LOG(LS_INFO) << "Setting local voice description for " << ToString();
+  RTC_DLOG(LS_INFO) << "Setting local voice description for " << ToString();
 
-  RtpHeaderExtensions rtp_header_extensions =
+  RTC_LOG_THREAD_BLOCK_COUNT();
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
+
+  RtpHeaderExtensions header_extensions =
       GetDeduplicatedRtpHeaderExtensions(content->rtp_header_extensions());
-  // TODO(tommi): There's a hop to the network thread here.
-  // some of the below is also network thread related.
-  UpdateRtpHeaderExtensionMap(rtp_header_extensions);
+  bool update_header_extensions = true;
   media_channel()->SetExtmapAllowMixed(content->extmap_allow_mixed());
+
+  int block_count = 1;  // UpdateRtpHeaderExtensionMap
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
 
   AudioRecvParameters recv_params = last_recv_params_;
   RtpParametersFromMediaDescription(
-      content->as_audio(), rtp_header_extensions,
+      content->as_audio(), header_extensions,
       webrtc::RtpTransceiverDirectionHasRecv(content->direction()),
       &recv_params);
 
@@ -831,17 +861,28 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
     return false;
   }
 
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
+  bool criteria_modified = false;
   if (webrtc::RtpTransceiverDirectionHasRecv(content->direction())) {
     for (const AudioCodec& codec : content->as_audio()->codecs()) {
-      MaybeAddHandledPayloadType(codec.id);
+      if (MaybeAddHandledPayloadType(codec.id)) {
+        criteria_modified = true;
+      }
     }
-    // Need to re-register the sink to update the handled payload.
-    if (!RegisterRtpDemuxerSink_w()) {
-      error_desc = StringFormat("Failed to set up audio demuxing for mid='%s'.",
-                                content_name().c_str());
-      return false;
-    }
+    /*
+        // Need to re-register the sink to update the handled payload.
+        if (criteria_modified && !RegisterRtpDemuxerSink_w()) {
+          error_desc = StringFormat("Failed to set up audio demuxing for
+       mid='%s'.", content_name().c_str()); return false;
+        }
+
+        if (criteria_modified)
+          ++block_count;  // RegisterRtpDemuxerSink_w
+    */
   }
+
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
 
   last_recv_params_ = recv_params;
 
@@ -854,8 +895,23 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
     return false;
   }
 
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
   set_local_content_direction(content->direction());
   UpdateMediaSendRecvState_w();
+
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+#if RTC_DCHECK_IS_ON
+  RTC_LOG(LS_WARNING) << "Blocking " << __func__ << ": total="
+                      << blocked_call_count_printer.GetTotalBlockedCallCount();
+#endif
+
+  UpdateTransport(
+      criteria_modified,
+      update_header_extensions
+          ? absl::optional<RtpHeaderExtensions>(std::move(header_extensions))
+          : absl::optional<RtpHeaderExtensions>());
+
   return true;
 }
 
@@ -926,17 +982,23 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
                                      SdpType type,
                                      std::string& error_desc) {
   TRACE_EVENT0("webrtc", "VideoChannel::SetLocalContent_w");
-  RTC_LOG(LS_INFO) << "Setting local video description for " << ToString();
+  RTC_DLOG(LS_INFO) << "Setting local video description for " << ToString();
 
-  RtpHeaderExtensions rtp_header_extensions =
+  RTC_LOG_THREAD_BLOCK_COUNT();
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
+
+  RtpHeaderExtensions header_extensions =
       GetDeduplicatedRtpHeaderExtensions(content->rtp_header_extensions());
-  UpdateRtpHeaderExtensionMap(rtp_header_extensions);
+  bool update_header_extensions = true;
   media_channel()->SetExtmapAllowMixed(content->extmap_allow_mixed());
+
+  int block_count = 1;  // UpdateRtpHeaderExtensionMap
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
 
   VideoRecvParameters recv_params = last_recv_params_;
 
   RtpParametersFromMediaDescription(
-      content->as_video(), rtp_header_extensions,
+      content->as_video(), header_extensions,
       webrtc::RtpTransceiverDirectionHasRecv(content->direction()),
       &recv_params);
 
@@ -961,6 +1023,8 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
     }
   }
 
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
   if (!media_channel()->SetRecvParameters(recv_params)) {
     error_desc = StringFormat(
         "Failed to set local video description recv parameters for m-section "
@@ -969,17 +1033,27 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
     return false;
   }
 
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
+  bool criteria_modified = false;
   if (webrtc::RtpTransceiverDirectionHasRecv(content->direction())) {
     for (const VideoCodec& codec : content->as_video()->codecs()) {
-      MaybeAddHandledPayloadType(codec.id);
+      if (MaybeAddHandledPayloadType(codec.id))
+        criteria_modified = true;
     }
+    /*
     // Need to re-register the sink to update the handled payload.
-    if (!RegisterRtpDemuxerSink_w()) {
+    if (criteria_modified && !RegisterRtpDemuxerSink_w()) {
       error_desc = StringFormat("Failed to set up video demuxing for mid='%s'.",
                                 content_name().c_str());
       return false;
     }
+    if (criteria_modified)
+      ++block_count;  // RegisterRtpDemuxerSink_w.
+    */
   }
+
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
 
   last_recv_params_ = recv_params;
 
@@ -1002,8 +1076,23 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
     return false;
   }
 
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
   set_local_content_direction(content->direction());
   UpdateMediaSendRecvState_w();
+
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
+#if RTC_DCHECK_IS_ON
+  RTC_LOG(LS_WARNING) << "Blocking " << __func__ << ": total="
+                      << blocked_call_count_printer.GetTotalBlockedCallCount();
+#endif
+  UpdateTransport(
+      criteria_modified,
+      update_header_extensions
+          ? absl::optional<RtpHeaderExtensions>(std::move(header_extensions))
+          : absl::optional<RtpHeaderExtensions>());
+
   return true;
 }
 
