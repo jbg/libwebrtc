@@ -808,7 +808,10 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
                                      SdpType type,
                                      std::string& error_desc) {
   TRACE_EVENT0("webrtc", "VoiceChannel::SetLocalContent_w");
-  RTC_LOG(LS_INFO) << "Setting local voice description for " << ToString();
+  RTC_DLOG(LS_INFO) << "Setting local voice description for " << ToString();
+
+  RTC_LOG_THREAD_BLOCK_COUNT();
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
 
   RtpHeaderExtensions rtp_header_extensions =
       GetDeduplicatedRtpHeaderExtensions(content->rtp_header_extensions());
@@ -816,6 +819,9 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
   // some of the below is also network thread related.
   UpdateRtpHeaderExtensionMap(rtp_header_extensions);
   media_channel()->SetExtmapAllowMixed(content->extmap_allow_mixed());
+
+  int block_count = 1;  // UpdateRtpHeaderExtensionMap
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
 
   AudioRecvParameters recv_params = last_recv_params_;
   RtpParametersFromMediaDescription(
@@ -831,6 +837,8 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
     return false;
   }
 
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
   if (webrtc::RtpTransceiverDirectionHasRecv(content->direction())) {
     for (const AudioCodec& codec : content->as_audio()->codecs()) {
       MaybeAddHandledPayloadType(codec.id);
@@ -841,7 +849,10 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
                                 content_name().c_str());
       return false;
     }
+    ++block_count;  // RegisterRtpDemuxerSink_w
   }
+
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
 
   last_recv_params_ = recv_params;
 
@@ -854,8 +865,13 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
     return false;
   }
 
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
   set_local_content_direction(content->direction());
   UpdateMediaSendRecvState_w();
+
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
   return true;
 }
 
@@ -926,12 +942,20 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
                                      SdpType type,
                                      std::string& error_desc) {
   TRACE_EVENT0("webrtc", "VideoChannel::SetLocalContent_w");
-  RTC_LOG(LS_INFO) << "Setting local video description for " << ToString();
+  RTC_DLOG(LS_INFO) << "Setting local video description for " << ToString();
+
+  RTC_LOG_THREAD_BLOCK_COUNT();
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
 
   RtpHeaderExtensions rtp_header_extensions =
       GetDeduplicatedRtpHeaderExtensions(content->rtp_header_extensions());
+  // TODO(tommi): There's a hop to the network thread here.
+  // some of the below is also network thread related.
   UpdateRtpHeaderExtensionMap(rtp_header_extensions);
   media_channel()->SetExtmapAllowMixed(content->extmap_allow_mixed());
+
+  int block_count = 1;  // UpdateRtpHeaderExtensionMap
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
 
   VideoRecvParameters recv_params = last_recv_params_;
 
@@ -961,6 +985,8 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
     }
   }
 
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
   if (!media_channel()->SetRecvParameters(recv_params)) {
     error_desc = StringFormat(
         "Failed to set local video description recv parameters for m-section "
@@ -968,6 +994,8 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
         content_name().c_str());
     return false;
   }
+
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
 
   if (webrtc::RtpTransceiverDirectionHasRecv(content->direction())) {
     for (const VideoCodec& codec : content->as_video()->codecs()) {
@@ -979,7 +1007,10 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
                                 content_name().c_str());
       return false;
     }
+    ++block_count;  // RegisterRtpDemuxerSink_w.
   }
+
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
 
   last_recv_params_ = recv_params;
 
@@ -1002,8 +1033,13 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
     return false;
   }
 
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
   set_local_content_direction(content->direction());
   UpdateMediaSendRecvState_w();
+
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(block_count);
+
   return true;
 }
 
