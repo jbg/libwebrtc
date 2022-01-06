@@ -141,6 +141,24 @@
       "parentUuid": "c1b1fade_919e40cd",
       "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1459f52e_2019975c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-01-06T12:57:33Z",
+      "side": 1,
+      "message": "Good question. I am tempted to say that the code should be removed since a reviewer will rely on it while it is not always working.\n\nI opened https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d13539 to discuss more.",
+      "parentUuid": "4ba719ca_be110431",
+      "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
