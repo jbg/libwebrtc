@@ -123,6 +123,24 @@
       "parentUuid": "00af1efc_2d3a8052",
       "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ba719ca_be110431",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-01-06T09:58:29Z",
+      "side": 1,
+      "message": "thank you, that explains it.\nI don\u0027t think i have seen that pattern elsewhere but this limitation means we shouldn\u0027t use it more :-(\nIt will still catch \"large\" changes though so lets keep it?",
+      "parentUuid": "c1b1fade_919e40cd",
+      "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
