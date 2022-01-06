@@ -69,6 +69,24 @@
       "message": "mbonadei: can you explain why this didn\u0027t catch things? You are our only hope :-)\n\nsubmitting anyway",
       "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a2d905d_7f1e2d22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-01-06T07:51:50Z",
+      "side": 1,
+      "message": "Do you mean why the following code didn\u0027t catch the problem?\n\nstatic_assert(sizeof(stuff_being_tested_for_equality) \u003d\u003d sizeof(*this),\n                \"Did you add something to RTCConfiguration and forget to \"\n                \"update operator\u003d\u003d?\");",
+      "parentUuid": "db048031_8c5e4ac5",
+      "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
