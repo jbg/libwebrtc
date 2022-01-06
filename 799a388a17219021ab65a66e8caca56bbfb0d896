@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "240f82bd_e3efa1fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-06T10:41:08Z",
+      "side": 1,
+      "message": "Looks good - lots of nits, none that should need a second review.\n",
+      "revId": "799a388a17219021ab65a66e8caca56bbfb0d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a339df81_e69c879c",
+        "filename": "api/rtp_parameters.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-06T10:41:08Z",
+      "side": 1,
+      "message": "Comment nit: 1) say that you sort with URI as highest priority (I had to read up on std::tie before being sure of this), 2) it\u0027s to make comparisons of header extension lists reliable, not header extensions.",
+      "revId": "799a388a17219021ab65a66e8caca56bbfb0d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a12098_6ebb535e",
+        "filename": "api/rtp_parameters_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-06T10:41:08Z",
+      "side": 1,
+      "message": "english nit: layed -\u003e laid",
+      "revId": "799a388a17219021ab65a66e8caca56bbfb0d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3504748a_273f6c5e",
+        "filename": "pc/channel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-06T10:41:08Z",
+      "side": 1,
+      "message": "Naming nit: \"UpdateTransport\" doesn\u0027t say much - \"MaybeUpdateRtpExtensionsInTransport_w\" is longwinded, but more descriptive.",
+      "revId": "799a388a17219021ab65a66e8caca56bbfb0d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a95f9d28_d8bab72a",
+        "filename": "pc/channel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-06T10:41:08Z",
+      "side": 1,
+      "message": "Can we CHECK on that? For Chrome-to-Chrome we should be fine, but this has to interoperate - and bugs have shown that partners do weird stuff.",
+      "revId": "799a388a17219021ab65a66e8caca56bbfb0d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf35ddab_f10646c7",
+        "filename": "pc/channel.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-06T10:41:08Z",
+      "side": 1,
+      "message": "I suppose there\u0027s a type inference reason why absl::nullopt won\u0027t work here?",
+      "revId": "799a388a17219021ab65a66e8caca56bbfb0d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96751a4a_c3ab4783",
+        "filename": "pc/channel.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-06T10:41:08Z",
+      "side": 1,
+      "message": "Style: I don\u0027t like \"iff\" - it looks like a spelling mistake; can we write it out in full as \"if and only if\"? Or even leave it as \"if\"?",
+      "revId": "799a388a17219021ab65a66e8caca56bbfb0d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beef9c89_d00693c4",
+        "filename": "pc/channel.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-06T10:41:08Z",
+      "side": 1,
+      "message": "nit: networkt -\u003e network",
+      "revId": "799a388a17219021ab65a66e8caca56bbfb0d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972ea945_6d2fd4a3",
+        "filename": "pc/channel.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-06T10:41:08Z",
+      "side": 1,
+      "message": "Nit: \"extensions\" is not a flag. \"either of these arguments\"?",
+      "revId": "799a388a17219021ab65a66e8caca56bbfb0d896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
