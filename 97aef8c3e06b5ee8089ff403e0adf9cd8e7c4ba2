@@ -87,6 +87,24 @@
       "parentUuid": "db048031_8c5e4ac5",
       "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00af1efc_2d3a8052",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-01-06T07:56:12Z",
+      "side": 1,
+      "message": "yes. Even though that comment says \"add\" it should apply to \"remove\" as well.",
+      "parentUuid": "5a2d905d_7f1e2d22",
+      "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
