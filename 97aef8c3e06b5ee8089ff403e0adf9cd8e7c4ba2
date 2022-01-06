@@ -105,6 +105,24 @@
       "parentUuid": "5a2d905d_7f1e2d22",
       "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b1fade_919e40cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-01-06T08:27:51Z",
+      "side": 1,
+      "message": "That check doesn\u0027t work as expected because it doesn\u0027t take into account padding and struct alignment. That means it is possible to add/remove fields from stuff_being_tested_for_equality without affecting the sizeof() of the struct. For example, if there are 5 bytes of padding and a bool gets added then the padding decreases and the size stays the same.\n\nI think this check should be fixed or somehow check padding as well.",
+      "parentUuid": "00af1efc_2d3a8052",
+      "revId": "97aef8c3e06b5ee8089ff403e0adf9cd8e7c4ba2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
