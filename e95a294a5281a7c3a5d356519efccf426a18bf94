@@ -33,6 +33,23 @@
       "message": "Looks OK but I am not an owner in this area.",
       "revId": "e95a294a5281a7c3a5d356519efccf426a18bf94",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7f67c9_63d0b19e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-01-06T08:13:17Z",
+      "side": 1,
+      "message": "Kári, could you please take a look?\nOr is it ok to land this CL now because Peter is also the owner of sdk/objc?",
+      "revId": "e95a294a5281a7c3a5d356519efccf426a18bf94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
