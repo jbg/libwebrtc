@@ -259,6 +259,15 @@ class BaseChannel : public ChannelInterface,
   bool SetPayloadTypeDemuxingEnabled_w(bool enabled)
       RTC_RUN_ON(worker_thread());
 
+  // Hops to the networkt thread to update the transport if an update is
+  // requested. If `update_demuxer` is false and `extensions` is not set, the
+  // function simply returns. If either of these flags is set, the function
+  // updates the transport with either or both of the demuxer criteria and
+  // the supplied rtp header extensions.
+  void MaybeUpdateTransport_w(bool update_demuxer,
+                              absl::optional<RtpHeaderExtensions> extensions)
+      RTC_RUN_ON(worker_thread());
+
   // Should be called whenever the conditions for
   // IsReadyToReceiveMedia/IsReadyToSendMedia are satisfied (or unsatisfied).
   // Updates the send/recv state of the media channel.
@@ -289,14 +298,13 @@ class BaseChannel : public ChannelInterface,
 
   // Add `payload_type` to `demuxer_criteria_` if payload type demuxing is
   // enabled.
-  void MaybeAddHandledPayloadType(int payload_type) RTC_RUN_ON(worker_thread());
+  // Returns true iff the demuxer payload type changed and a re-registration
+  // is needed.
+  bool MaybeAddHandledPayloadType(int payload_type) RTC_RUN_ON(worker_thread());
 
   // Returns true iff the demuxer payload type criteria was non-empty before
   // clearing.
   bool ClearHandledPayloadTypes() RTC_RUN_ON(worker_thread());
-
-  void UpdateRtpHeaderExtensionMap(
-      const RtpHeaderExtensions& header_extensions);
 
   bool RegisterRtpDemuxerSink_w() RTC_RUN_ON(worker_thread());
 
@@ -332,6 +340,9 @@ class BaseChannel : public ChannelInterface,
   // based on the supplied CryptoOptions.
   const webrtc::RtpExtension::Filter extensions_filter_;
 
+  // A stored copy of the rtp header extensions as applied to the transport.
+  RtpHeaderExtensions rtp_header_extensions_ RTC_GUARDED_BY(worker_thread());
+
   // MediaChannel related members that should be accessed from the worker
   // thread.
   const std::unique_ptr<MediaChannel> media_channel_;
@@ -349,7 +360,7 @@ class BaseChannel : public ChannelInterface,
       worker_thread()) = webrtc::RtpTransceiverDirection::kInactive;
 
   // Cached list of payload types, used if payload type demuxing is re-enabled.
-  std::set<uint8_t> payload_types_ RTC_GUARDED_BY(worker_thread());
+  webrtc::flat_set<uint8_t> payload_types_ RTC_GUARDED_BY(worker_thread());
   // TODO(bugs.webrtc.org/12239): Modified on worker thread, accessed
   // on network thread in RegisterRtpDemuxerSink_n (called from Init_w)
   webrtc::RtpDemuxerCriteria demuxer_criteria_;
