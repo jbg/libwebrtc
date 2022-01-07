@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03c3f8aa_46bd3f40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-07T16:26:15Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with this code though, but change look just like a simple refactoring",
+      "revId": "4b75d2d93916bb0feeea01e75d3ea0010cfb238d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
