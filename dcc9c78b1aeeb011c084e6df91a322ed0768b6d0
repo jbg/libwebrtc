@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a4fdc06_beb6486f",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1712,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-07T16:53:37Z",
+      "side": 1,
+      "message": "This function is a cut/paste of the above. I only changed the SdpType variable name from \u0027type\u0027 to \u0027sdp_type\u0027.",
+      "revId": "dcc9c78b1aeeb011c084e6df91a322ed0768b6d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

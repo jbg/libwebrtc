@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "929d7ab0_0abc1e00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-07T16:53:37Z",
+      "side": 1,
+      "message": "Thanks for reviewing the other CL, this one was on the way as well (don\u0027t have plans for more) but you were quicker.",
+      "revId": "c38f45ee31e40f24fe7dbea48a19e9ed99f09b0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
