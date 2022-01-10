@@ -34,6 +34,24 @@
       "parentUuid": "14c9eb95_5053e04e",
       "revId": "53d3fc9b1c011ff31ef9ba29f00844f278e7228a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5184786e_e2c864a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2022-01-10T17:22:44Z",
+      "side": 1,
+      "message": "Oops, you\u0027re absolutely right. I must have only tested with OpenGL enabled, which includes Metal transitively (can\u0027t remember why off the top of my head). Thanks for fixing this, Mirko!",
+      "parentUuid": "6b62c9c1_dc419cc4",
+      "revId": "53d3fc9b1c011ff31ef9ba29f00844f278e7228a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
