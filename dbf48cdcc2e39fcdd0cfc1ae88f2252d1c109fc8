@@ -65,6 +65,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4497bc04_c72840d0",
+        "filename": "api/rtp_packet_infos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-10T11:50:59Z",
+      "side": 1,
+      "message": "I think there is no strong reason.\n\nPersonally I prefer to always declare destructor. In particular declare public default destructor to note that it is public. (when reading code it is easier to spot public destructor than to check there is no private one)\n`override` on that default destructor would also add a hint an object of that class can be safely deleted by base pointer.",
+      "parentUuid": "3879763b_ced8a9cb",
+      "range": {
+        "startLine": 107,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 14
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a66695af_121c9ac0",
@@ -126,6 +150,30 @@
       "side": 1,
       "message": "Tried deleting, I get the below rather intimidating compile error.\n\nIt appears to only be the FinalRefCountedObject(T\u0026\u0026 other) that cause some trouble, the other two constructors can be deleted without complaints from the compiler.\n\n\n../../modules/desktop_capture/shared_desktop_frame.cc:25:34: error: no matching constructor for initialization of \u0027webrtc::SharedDesktopFrame::Core\u0027 (aka \u0027FinalRefCountedObject\u003cstd::unique_ptr\u003cDesktopFrame\u003e\u003e\u0027)\n      new SharedDesktopFrame(new Core(std::move(desktop_frame))));\n                                 ^    ~~~~~~~~~~~~~~~~~~~~~~~~\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:182:21: note: candidate inherited constructor not viable: no known conversion from \u0027typename remove_reference\u003cunique_ptr\u003cDesktopFrame\u003e \u0026\u003e::type\u0027 (aka \u0027std::unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027) to \u0027std::nullptr_t\u0027 for 1st argument\n  _LIBCPP_CONSTEXPR unique_ptr(nullptr_t) _NOEXCEPT : __ptr_(pointer(), __default_init_tag()) {}\n                    ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:187:12: note: candidate inherited constructor not viable: no known conversion from \u0027typename remove_reference\u003cunique_ptr\u003cDesktopFrame\u003e \u0026\u003e::type\u0027 (aka \u0027std::unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027) to \u0027std::unique_ptr\u003cwebrtc::DesktopFrame\u003e::pointer\u0027 (aka \u0027webrtc::DesktopFrame *\u0027) for 1st argument\n  explicit unique_ptr(pointer __p) _NOEXCEPT : __ptr_(__p, __default_init_tag()) {}\n           ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../rtc_base/ref_counted_object.h:68:3: note: candidate constructor not viable: no known conversion from \u0027typename remove_reference\u003cunique_ptr\u003cDesktopFrame\u003e \u0026\u003e::type\u0027 (aka \u0027std::unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027) to \u0027const rtc::FinalRefCountedObject\u003cstd::unique_ptr\u003cwebrtc::DesktopFrame\u003e\u003e\u0027 for 1st argument\n  FinalRefCountedObject(const FinalRefCountedObject\u0026) \u003d delete;\n  ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:219:3: note: candidate template ignored: inherited constructor cannot be used to move object\n  unique_ptr(unique_ptr\u003c_Up, _Ep\u003e\u0026\u0026 __u) _NOEXCEPT\n  ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:177:21: note: candidate inherited constructor not viable: requires 0 arguments, but 1 was provided\n  _LIBCPP_CONSTEXPR unique_ptr() _NOEXCEPT : __ptr_(pointer(), __default_init_tag()) {}\n                    ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../rtc_base/ref_counted_object.h:64:7: note: candidate constructor (the implicit default constructor) not viable: requires 0 arguments, but 1 was provided\nclass FinalRefCountedObject final : public T {\n      ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:192:3: note: candidate inherited constructor not viable: requires 2 arguments, but 1 was provided\n  unique_ptr(pointer __p, _LValRefType\u003c_Dummy\u003e __d) _NOEXCEPT\n  ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:198:3: note: candidate inherited constructor not viable: requires 2 arguments, but 1 was provided\n  unique_ptr(pointer __p, _GoodRValRefType\u003c_Dummy\u003e __d) _NOEXCEPT\n  ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:207:3: note: candidate inherited constructor not viable: requires 2 arguments, but 1 was provided\n  unique_ptr(pointer __p, _BadRValRefType\u003c_Dummy\u003e __d) \u003d delete;\n  ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n1 error generated.",
       "parentUuid": "cac58a30_67ddf0ca",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c482458f_45b5ccf9",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-10T11:50:59Z",
+      "side": 1,
+      "message": "right, it seems using T::T propagates move constructor as\nFinalRefCountedObject(FinalRefCountedObject\u0026\u0026 other)\ninstead of as\nFinalRefCountedObject(T\u0026\u0026 other)\n\nyep, in such case there should be an extra \nFinalRefCountedObject(T\u0026\u0026) or\nFinalRefCountedObject(T) constructor\n\n1st one technically violates style guide as it no longer \u0027move\u0027 constructor\nhttps://google.github.io/styleguide/cppguide.html#Rvalue_references",
+      "parentUuid": "dbaa6895_151b6771",
       "range": {
         "startLine": 66,
         "startChar": 0,
@@ -221,6 +269,30 @@
       "side": 1,
       "message": "My intention was to make the check rather narrow, and only match our own Release methods, but I\u0027m open to extending that. What\u0027s the standard way to check if a method is present on a class, regardless of return type?",
       "parentUuid": "56d46240_1692b111",
+      "range": {
+        "startLine": 130,
+        "startChar": 3,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c86824e_29334fc9",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-10T11:50:59Z",
+      "side": 1,
+      "message": "I\u0027m not sure what is the standard way, but one of the ways is to try to replace\n\ntemplate\u003ctypename C, ...\u003e\nint Test(int);\n\nwith\ntemplate\u003ctypename C, decltype(std::declval\u003cC\u003e().Release())* \u003d nullptr\u003e\nint Test(int);",
+      "parentUuid": "cf474929_b7f22b61",
       "range": {
         "startLine": 130,
         "startChar": 3,
