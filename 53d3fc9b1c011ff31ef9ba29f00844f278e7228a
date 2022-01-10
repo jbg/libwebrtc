@@ -16,6 +16,24 @@
       "message": "Hi guys, you forgot to include :metal_objc dependency for the Catalyst. Catalyst version should include RTCMTLVideoView.m and others metal_objc. Headers are included in the resulting framework, but unfortunately the :metal_objc is not included.\n\nPlease consider adding this target_environment check for sdk/BUILD.gn:\n\n```:1331\nif (rtc_ios_macos_use_opengl_rendering) {\n  deps +\u003d [ \":opengl_ui_objc\" ]\n}\n+if (target_environment \u003d\u003d \"catalyst\") {\n+  deps +\u003d [ \":metal_objc\" ]\n+}\n```\n\nThanks",
       "revId": "53d3fc9b1c011ff31ef9ba29f00844f278e7228a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b62c9c1_dc419cc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-01-10T07:28:04Z",
+      "side": 1,
+      "message": "Thanks. I created https://webrtc-review.googlesource.com/c/src/+/245400, please take a look.",
+      "parentUuid": "14c9eb95_5053e04e",
+      "revId": "53d3fc9b1c011ff31ef9ba29f00844f278e7228a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
