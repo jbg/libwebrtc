@@ -89,6 +89,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5587f276_26e44106",
+        "filename": "api/rtp_packet_infos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-10T16:05:32Z",
+      "side": 1,
+      "message": "Ok, added back a ~Data() \u003d default;",
+      "parentUuid": "4497bc04_c72840d0",
+      "range": {
+        "startLine": 107,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 14
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a66695af_121c9ac0",
@@ -174,6 +198,30 @@
       "side": 1,
       "message": "right, it seems using T::T propagates move constructor as\nFinalRefCountedObject(FinalRefCountedObject\u0026\u0026 other)\ninstead of as\nFinalRefCountedObject(T\u0026\u0026 other)\n\nyep, in such case there should be an extra \nFinalRefCountedObject(T\u0026\u0026) or\nFinalRefCountedObject(T) constructor\n\n1st one technically violates style guide as it no longer \u0027move\u0027 constructor\nhttps://google.github.io/styleguide/cppguide.html#Rvalue_references",
       "parentUuid": "dbaa6895_151b6771",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83556c3b_40422301",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-10T16:05:32Z",
+      "side": 1,
+      "message": "Thanks for explaining. Keeping the T\u0026\u0026 constructor with a comment (could probably change to by-value T constructor (which would require callers to use std::move where needed to avoid a T copy, right?). But seems out of scope for this change).",
+      "parentUuid": "c482458f_45b5ccf9",
       "range": {
         "startLine": 66,
         "startChar": 0,
@@ -305,6 +353,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a30da637_5f000d9d",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-10T16:05:32Z",
+      "side": 1,
+      "message": "Thanks, done. Also moved into an internal namespace.",
+      "parentUuid": "6c86824e_29334fc9",
+      "range": {
+        "startLine": 130,
+        "startChar": 3,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5824beec_94e0bbf4",
         "filename": "rtc_base/ref_counted_object.h",
         "patchSetId": 2
@@ -411,6 +483,30 @@
       "side": 1,
       "message": "Would it make sense to have it publicly visible as rtc::scoped_refptr::HasRefCountMethods? If we don\u0027t move make_ref_counted into scoped_refptr.h, it seems a bit odd to reference a ...scoped_refptr_internal namespace.",
       "parentUuid": "6b3f92f0_3bbbbf55",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1786213_9c99a554",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-10T16:05:32Z",
+      "side": 1,
+      "message": "Moved to namespace webrtc_make_ref_counted_internal for now.",
+      "parentUuid": "dc949163_a7cb7822",
       "range": {
         "startLine": 129,
         "startChar": 0,
