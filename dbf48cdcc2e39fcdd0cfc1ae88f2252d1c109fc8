@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3879763b_ced8a9cb",
+        "filename": "api/rtp_packet_infos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-10T08:34:53Z",
+      "side": 1,
+      "message": "Is there any reason to declare the destructor at all? Compiler seems happy if I just delete it and rely on default behavior.",
+      "parentUuid": "c64fa506_960be48b",
+      "range": {
+        "startLine": 107,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 14
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a66695af_121c9ac0",
         "filename": "rtc_base/ref_counted_object.h",
         "patchSetId": 2
@@ -78,6 +102,30 @@
       "side": 1,
       "message": "I would try to remove explicit default constructors, keep just \"using T::T\" and see if all bots pass. With the move to C++17 they should.\n(\"until c++17\" mean that there is no need to keep it once c++14 support is dropped, which is now)",
       "parentUuid": "a66695af_121c9ac0",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbaa6895_151b6771",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-10T08:34:53Z",
+      "side": 1,
+      "message": "Tried deleting, I get the below rather intimidating compile error.\n\nIt appears to only be the FinalRefCountedObject(T\u0026\u0026 other) that cause some trouble, the other two constructors can be deleted without complaints from the compiler.\n\n\n../../modules/desktop_capture/shared_desktop_frame.cc:25:34: error: no matching constructor for initialization of \u0027webrtc::SharedDesktopFrame::Core\u0027 (aka \u0027FinalRefCountedObject\u003cstd::unique_ptr\u003cDesktopFrame\u003e\u003e\u0027)\n      new SharedDesktopFrame(new Core(std::move(desktop_frame))));\n                                 ^    ~~~~~~~~~~~~~~~~~~~~~~~~\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:182:21: note: candidate inherited constructor not viable: no known conversion from \u0027typename remove_reference\u003cunique_ptr\u003cDesktopFrame\u003e \u0026\u003e::type\u0027 (aka \u0027std::unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027) to \u0027std::nullptr_t\u0027 for 1st argument\n  _LIBCPP_CONSTEXPR unique_ptr(nullptr_t) _NOEXCEPT : __ptr_(pointer(), __default_init_tag()) {}\n                    ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:187:12: note: candidate inherited constructor not viable: no known conversion from \u0027typename remove_reference\u003cunique_ptr\u003cDesktopFrame\u003e \u0026\u003e::type\u0027 (aka \u0027std::unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027) to \u0027std::unique_ptr\u003cwebrtc::DesktopFrame\u003e::pointer\u0027 (aka \u0027webrtc::DesktopFrame *\u0027) for 1st argument\n  explicit unique_ptr(pointer __p) _NOEXCEPT : __ptr_(__p, __default_init_tag()) {}\n           ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../rtc_base/ref_counted_object.h:68:3: note: candidate constructor not viable: no known conversion from \u0027typename remove_reference\u003cunique_ptr\u003cDesktopFrame\u003e \u0026\u003e::type\u0027 (aka \u0027std::unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027) to \u0027const rtc::FinalRefCountedObject\u003cstd::unique_ptr\u003cwebrtc::DesktopFrame\u003e\u003e\u0027 for 1st argument\n  FinalRefCountedObject(const FinalRefCountedObject\u0026) \u003d delete;\n  ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:219:3: note: candidate template ignored: inherited constructor cannot be used to move object\n  unique_ptr(unique_ptr\u003c_Up, _Ep\u003e\u0026\u0026 __u) _NOEXCEPT\n  ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:177:21: note: candidate inherited constructor not viable: requires 0 arguments, but 1 was provided\n  _LIBCPP_CONSTEXPR unique_ptr() _NOEXCEPT : __ptr_(pointer(), __default_init_tag()) {}\n                    ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../rtc_base/ref_counted_object.h:64:7: note: candidate constructor (the implicit default constructor) not viable: requires 0 arguments, but 1 was provided\nclass FinalRefCountedObject final : public T {\n      ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:192:3: note: candidate inherited constructor not viable: requires 2 arguments, but 1 was provided\n  unique_ptr(pointer __p, _LValRefType\u003c_Dummy\u003e __d) _NOEXCEPT\n  ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:198:3: note: candidate inherited constructor not viable: requires 2 arguments, but 1 was provided\n  unique_ptr(pointer __p, _GoodRValRefType\u003c_Dummy\u003e __d) _NOEXCEPT\n  ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n../../buildtools/third_party/libc++/trunk/include/__memory/unique_ptr.h:207:3: note: candidate inherited constructor not viable: requires 2 arguments, but 1 was provided\n  unique_ptr(pointer __p, _BadRValRefType\u003c_Dummy\u003e __d) \u003d delete;\n  ^\n../../rtc_base/ref_counted_object.h:66:12: note: constructor from base class \u0027unique_ptr\u003cwebrtc::DesktopFrame\u003e\u0027 inherited here\n  using T::T;\n           ^\n1 error generated.",
+      "parentUuid": "cac58a30_67ddf0ca",
       "range": {
         "startLine": 66,
         "startChar": 0,
@@ -161,6 +209,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "cf474929_b7f22b61",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-10T08:34:53Z",
+      "side": 1,
+      "message": "My intention was to make the check rather narrow, and only match our own Release methods, but I\u0027m open to extending that. What\u0027s the standard way to check if a method is present on a class, regardless of return type?",
+      "parentUuid": "56d46240_1692b111",
+      "range": {
+        "startLine": 130,
+        "startChar": 3,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5824beec_94e0bbf4",
         "filename": "rtc_base/ref_counted_object.h",
         "patchSetId": 2
@@ -172,6 +244,30 @@
       "writtenOn": "2022-01-05T11:37:20Z",
       "side": 1,
       "message": "nit: with c++17 this can be written as\nstd::is_same_v\u003c\u003cdecltype(Test\u003cT\u003e(0)), int\u003e;\n\nhttps://en.cppreference.com/w/cpp/types/is_same",
+      "range": {
+        "startLine": 143,
+        "startChar": 32,
+        "endLine": 143,
+        "endChar": 78
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb39c115_64e67c13",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-10T08:34:53Z",
+      "side": 1,
+      "message": "Thanks, done. (And also on line 136 above).",
+      "parentUuid": "5824beec_94e0bbf4",
       "range": {
         "startLine": 143,
         "startChar": 32,
@@ -219,6 +315,30 @@
       "side": 1,
       "message": "may be rtc_scoped_refptr_internal (or similar named internal) namespace would be better.",
       "parentUuid": "366f8241_a5e78805",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "dbf48cdcc2e39fcdd0cfc1ae88f2252d1c109fc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc949163_a7cb7822",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-10T08:34:53Z",
+      "side": 1,
+      "message": "Would it make sense to have it publicly visible as rtc::scoped_refptr::HasRefCountMethods? If we don\u0027t move make_ref_counted into scoped_refptr.h, it seems a bit odd to reference a ...scoped_refptr_internal namespace.",
+      "parentUuid": "6b3f92f0_3bbbbf55",
       "range": {
         "startLine": 129,
         "startChar": 0,
