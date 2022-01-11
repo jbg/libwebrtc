@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf143c42_3eafc5b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2022-01-11T18:08:04Z",
+      "side": 1,
+      "message": "Need to disable yet another affected test.",
+      "revId": "c22e3a0a21781458f14163667b4a23f7a53f3675",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
