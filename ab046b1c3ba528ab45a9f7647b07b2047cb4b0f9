@@ -16,6 +16,86 @@
       "message": "Tommi, Danil, do you want to have another look at the updated version, before I land this?",
       "revId": "ab046b1c3ba528ab45a9f7647b07b2047cb4b0f9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b08beac_c3dd44fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-11T11:00:52Z",
+      "side": 1,
+      "message": "just some nit comments, feel free to skip them.",
+      "revId": "ab046b1c3ba528ab45a9f7647b07b2047cb4b0f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44fd15e1_e211b0f7",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-11T11:00:52Z",
+      "side": 1,
+      "message": "nit: may be add \nstatic_assert(std::is_same_v\u003cRef\u003cT\u003e::Type, T\u003e);\n\nto helper reader see that make_ref_counted always returns Ref\u003cT\u003e::Ptr",
+      "revId": "ab046b1c3ba528ab45a9f7647b07b2047cb4b0f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "493c388d_c2b1da52",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-11T11:00:52Z",
+      "side": 1,
+      "message": "nit: or is_convertible_v (since c++17)",
+      "range": {
+        "startLine": 161,
+        "startChar": 14,
+        "endLine": 161,
+        "endChar": 28
+      },
+      "revId": "ab046b1c3ba528ab45a9f7647b07b2047cb4b0f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c383c98e_da63da6e",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-11T11:00:52Z",
+      "side": 1,
+      "message": "this and previous cases probably can be joined into one using helper below:\n  template\u003ctypename T, typename... Args,\n           typename enable_if\u003c!is_convertable\u003c...\u003e\u003e\u003e\n  scoped_refptr\u003cRef\u003cT\u003e\u003e make_ref_counted(Args\u0026\u0026... args) {\n    return scoped_refptr\u003cRef\u003cT\u003e\u003e(new Ref\u003cT\u003e(std::forward\u003cArgs\u003e(args)...);\n  }",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 1
+      },
+      "revId": "ab046b1c3ba528ab45a9f7647b07b2047cb4b0f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
