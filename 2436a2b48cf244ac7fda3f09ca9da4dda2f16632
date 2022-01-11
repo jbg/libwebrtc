@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b304f382_70f58f88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-11T14:44:46Z",
+      "side": 1,
+      "message": "+1 to get out of the way. I would like to see Kari give lgtm, since I know zero about Metal.\n",
+      "revId": "2436a2b48cf244ac7fda3f09ca9da4dda2f16632",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
