@@ -100,6 +100,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b6315501_be810832",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-11T14:41:23Z",
+      "side": 1,
+      "message": "Done (three places).",
+      "parentUuid": "493c388d_c2b1da52",
+      "range": {
+        "startLine": 161,
+        "startChar": 14,
+        "endLine": 161,
+        "endChar": 28
+      },
+      "revId": "ab046b1c3ba528ab45a9f7647b07b2047cb4b0f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c383c98e_da63da6e",
         "filename": "rtc_base/ref_counted_object.h",
         "patchSetId": 4
@@ -111,6 +135,30 @@
       "writtenOn": "2022-01-11T11:00:52Z",
       "side": 1,
       "message": "this and previous cases probably can be joined into one using helper below:\n  template\u003ctypename T, typename... Args,\n           typename enable_if\u003c!is_convertable\u003c...\u003e\u003e\u003e\n  scoped_refptr\u003cRef\u003cT\u003e\u003e make_ref_counted(Args\u0026\u0026... args) {\n    return scoped_refptr\u003cRef\u003cT\u003e\u003e(new Ref\u003cT\u003e(std::forward\u003cArgs\u003e(args)...);\n  }",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 1
+      },
+      "revId": "ab046b1c3ba528ab45a9f7647b07b2047cb4b0f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0344d4f_1ebdb1da",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-11T14:41:23Z",
+      "side": 1,
+      "message": "Interesting idea. Leaving as is for now, I think it\u0027s clearer to keep the three cases separate.",
+      "parentUuid": "c383c98e_da63da6e",
       "range": {
         "startLine": 168,
         "startChar": 0,
