@@ -37,6 +37,29 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ce189d08_af61511a",
+        "filename": "api/rtp_packet_infos.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-11T11:03:17Z",
+      "side": 1,
+      "message": "side note: This destructor actually shows that this class doesn\u0027t something uncommon: class uses inheritance, but the destructor is not virtual.\n\n(this particular class does that for a reason and does that carefully, both by declaring the class final, and keeping the class private)",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 107,
+        "endChar": 12
+      },
+      "revId": "ab046b1c3ba528ab45a9f7647b07b2047cb4b0f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "44fd15e1_e211b0f7",
         "filename": "rtc_base/ref_counted_object.h",
         "patchSetId": 4
