@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aa59ebf_4142aab5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-11T08:50:33Z",
+      "side": 1,
+      "message": "Tommi, Danil, do you want to have another look at the updated version, before I land this?",
+      "revId": "ab046b1c3ba528ab45a9f7647b07b2047cb4b0f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
