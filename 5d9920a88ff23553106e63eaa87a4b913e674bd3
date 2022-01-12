@@ -16,6 +16,29 @@
       "message": "Hi Alessio, can you please take a look? Thanks!",
       "revId": "5d9920a88ff23553106e63eaa87a4b913e674bd3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c51dfe8_b76f482d",
+        "filename": "modules/audio_processing/agc/agc_manager_direct.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-01-12T10:19:55Z",
+      "side": 1,
+      "message": "- I would clarify why the existing `clipping_detected` is not used\n- better to avoid double negations for readability\n\nsuggested edit (feel free to adapt)\n\n    // `clipping_detected` is not used to evaluate the clipping predictor\n    // since for this purpose a single clipping sample counts as clipping. \n    const bool one_or_more_clipped_samples \u003d\n        clipped_ratio \u003e\u003d (1.0f / samples_per_channel);\n    absl::optional\u003cint\u003e prediction_interval \u003d\n        clipping_predictor_evaluator_.Observe(\n            /*clipping_detected\u003d*/one_or_more_clipped_samples,\n            clipping_predicted);",
+      "range": {
+        "startLine": 613,
+        "startChar": 0,
+        "endLine": 617,
+        "endChar": 66
+      },
+      "revId": "5d9920a88ff23553106e63eaa87a4b913e674bd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
