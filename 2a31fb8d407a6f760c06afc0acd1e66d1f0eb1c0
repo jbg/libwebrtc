@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24719efd_933c781f",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-12T13:59:30Z",
+      "side": 1,
+      "message": "I don\u0027t see this being used anywhere else in this CL, except for the \"video_coding\" target. Why does it need to be a separate target?",
+      "range": {
+        "startLine": 192,
+        "startChar": 13,
+        "endLine": 192,
+        "endChar": 28
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be2e3529_e956e679",
+        "filename": "modules/video_coding/frame_scheduler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-12T13:59:30Z",
+      "side": 1,
+      "message": "This is run on bookkeeping queue? Add DCHECK then.",
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "764189b7_99001344",
+        "filename": "modules/video_coding/frame_scheduler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-12T13:59:30Z",
+      "side": 1,
+      "message": "But the method is void. Please update the comment.",
+      "range": {
+        "startLine": 130,
+        "startChar": 2,
+        "endLine": 130,
+        "endChar": 10
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0873e899_5cf41ac8",
+        "filename": "modules/video_coding/frame_scheduler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-12T13:59:30Z",
+      "side": 1,
+      "message": "Can\u0027t it happen what before the task is executed an old packet was received and a lower RTP timestamps frame is now available?\n\nI see what OnFrameBufferChanged is supposed to fix it, but I\u0027m concerned some kind of race can happen here.",
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87d82dc2_2fea231b",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-12T13:59:30Z",
+      "side": 1,
+      "message": "nit: |Callback| is a better name as it\u0027s a single instance, not a collection of them.",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 18
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19717412_ef1f082c",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-12T13:59:30Z",
+      "side": 1,
+      "message": "What does it mean that the FB has changed? A new instance? Some update happened to it? A more concrete name and condition should be specified here. E.g. OnNewFrameInBuffer.",
+      "range": {
+        "startLine": 83,
+        "startChar": 36,
+        "endLine": 83,
+        "endChar": 60
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c70158c1_98b1a7ee",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-12T13:59:30Z",
+      "side": 1,
+      "message": "nit: a better name is needed.\n\nE.g. IsTimestampOutOfOrder or IsTimestampOlderThanDecoded.",
+      "range": {
+        "startLine": 99,
+        "startChar": 7,
+        "endLine": 99,
+        "endChar": 35
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe0ef736_6a286e6c",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-12T13:59:30Z",
+      "side": 1,
+      "message": "IsTooManyFramesQueued?",
+      "range": {
+        "startLine": 100,
+        "startChar": 7,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
