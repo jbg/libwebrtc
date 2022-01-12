@@ -149,6 +149,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0ffc79f6_2f85c8f5",
+        "filename": "modules/video_coding/frame_scheduler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-12T16:01:26Z",
+      "side": 1,
+      "message": "There will not be a race since both the frame buffer and this class should be used on the same sequence. In the case that an old frame was received with a lower RTP, it should also have a lower frame id and be dropped by frame buffer 3.",
+      "parentUuid": "0873e899_5cf41ac8",
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "87d82dc2_2fea231b",
         "filename": "modules/video_coding/frame_scheduler.h",
         "patchSetId": 8
