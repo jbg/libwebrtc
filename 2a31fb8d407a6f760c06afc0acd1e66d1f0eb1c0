@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46963fcb_bd40395d",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-12T15:54:25Z",
+      "side": 1,
+      "message": "I guess it might be simpler to have it as one target - I don\u0027t know what best GN practices are, but figured it is better as an isolated target since it does not have visibility[*]. I can merge it into the main one if that makes sense. WDYT?",
+      "parentUuid": "24719efd_933c781f",
+      "range": {
+        "startLine": 192,
+        "startChar": 13,
+        "endLine": 192,
+        "endChar": 28
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be2e3529_e956e679",
         "filename": "modules/video_coding/frame_scheduler.cc",
         "patchSetId": 8
@@ -37,6 +61,24 @@
       "writtenOn": "2022-01-12T13:59:30Z",
       "side": 1,
       "message": "This is run on bookkeeping queue? Add DCHECK then.",
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c875bd2_dc43653a",
+        "filename": "modules/video_coding/frame_scheduler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-12T15:54:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be2e3529_e956e679",
       "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -54,6 +96,30 @@
       "writtenOn": "2022-01-12T13:59:30Z",
       "side": 1,
       "message": "But the method is void. Please update the comment.",
+      "range": {
+        "startLine": 130,
+        "startChar": 2,
+        "endLine": 130,
+        "endChar": 10
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "775641a7_e1284846",
+        "filename": "modules/video_coding/frame_scheduler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-12T15:54:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "764189b7_99001344",
       "range": {
         "startLine": 130,
         "startChar": 2,
@@ -104,6 +170,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44dfeb61_eb588501",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-12T15:54:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87d82dc2_2fea231b",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 18
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19717412_ef1f082c",
@@ -117,6 +207,30 @@
       "writtenOn": "2022-01-12T13:59:30Z",
       "side": 1,
       "message": "What does it mean that the FB has changed? A new instance? Some update happened to it? A more concrete name and condition should be specified here. E.g. OnNewFrameInBuffer.",
+      "range": {
+        "startLine": 83,
+        "startChar": 36,
+        "endLine": 83,
+        "endChar": 60
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dd0993e_edeaab45",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-12T15:54:25Z",
+      "side": 1,
+      "message": "This is triggered when a new frame is inserted, or it was cleared. I have updated the method name and comment.",
+      "parentUuid": "19717412_ef1f082c",
       "range": {
         "startLine": 83,
         "startChar": 36,
@@ -152,6 +266,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "295aef24_8399d4ca",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-12T15:54:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c70158c1_98b1a7ee",
+      "range": {
+        "startLine": 99,
+        "startChar": 7,
+        "endLine": 99,
+        "endChar": 35
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fe0ef736_6a286e6c",
         "filename": "modules/video_coding/frame_scheduler.h",
         "patchSetId": 8
@@ -163,6 +301,30 @@
       "writtenOn": "2022-01-12T13:59:30Z",
       "side": 1,
       "message": "IsTooManyFramesQueued?",
+      "range": {
+        "startLine": 100,
+        "startChar": 7,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0f4fb81_415038a3",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-12T15:54:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe0ef736_6a286e6c",
       "range": {
         "startLine": 100,
         "startChar": 7,
