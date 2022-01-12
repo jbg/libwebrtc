@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e159bfc3_ecb2f47b",
+        "filename": "audio/test/low_bandwidth_audio_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-01-12T09:55:27Z",
+      "side": 0,
+      "message": "This warning is telling that there is code after a return statement.\nI don\u0027t see a reason to have it disabled.",
+      "range": {
+        "startLine": 265,
+        "startChar": 2,
+        "endLine": 265,
+        "endChar": 25
+      },
+      "revId": "f490d6f818fb7ade9f2c24b83bd51054943cc4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed779cfe_f0493082",
+        "filename": "tools_webrtc/flags_compatibility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-01-12T09:55:27Z",
+      "side": 0,
+      "message": "This warning is telling that there is code after a return statement.\nI don\u0027t see a reason to have it disabled.",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 27
+      },
+      "revId": "f490d6f818fb7ade9f2c24b83bd51054943cc4a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
