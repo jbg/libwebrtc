@@ -165,6 +165,8 @@ public class PeerConnectionTest {
             .setPassword("fakePassword")
             .createIceServer());
     PeerConnection.RTCConfiguration config = new PeerConnection.RTCConfiguration(iceServers);
+    // Can we migrate to Unified Plan here?
+    config.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
 
     // Test configuration options.
     config.continualGatheringPolicy = PeerConnection.ContinualGatheringPolicy.GATHER_CONTINUALLY;
@@ -179,6 +181,8 @@ public class PeerConnectionTest {
   public void testCreationWithCertificate() throws Exception {
     PeerConnectionFactory factory = PeerConnectionFactory.builder().createPeerConnectionFactory();
     PeerConnection.RTCConfiguration config = new PeerConnection.RTCConfiguration(Arrays.asList());
+    // Can we migrate to Unified Plan here?
+    config.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
 
     // Test certificate.
     RtcCertificatePem originalCert = RtcCertificatePem.generateCertificate();
@@ -197,6 +201,8 @@ public class PeerConnectionTest {
   public void testCreationWithCryptoOptions() throws Exception {
     PeerConnectionFactory factory = PeerConnectionFactory.builder().createPeerConnectionFactory();
     PeerConnection.RTCConfiguration config = new PeerConnection.RTCConfiguration(Arrays.asList());
+    // Can we migrate to Unified Plan here?
+    config.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
 
     assertNull(config.cryptoOptions);
 
