@@ -680,6 +680,8 @@ public class PeerConnectionEndToEndTest {
                        .createIceServer());
 
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
+    // TODO(https://crbug.com/webrtc/13528): Migare this test to UNIFIED_PLAN.
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
 
     ObserverExpectations offeringExpectations = new ObserverExpectations("PCTest:offerer");
     PeerConnection offeringPC = factory.createPeerConnection(rtcConfig, offeringExpectations);
@@ -946,6 +948,8 @@ public class PeerConnectionEndToEndTest {
                        .createIceServer());
 
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
+    // TODO(https://crbug.com/webrtc/13528): Migare this test to UNIFIED_PLAN.
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
 
     ObserverExpectations offeringExpectations = new ObserverExpectations("PCTest:offerer");
     PeerConnection offeringPC = factory.createPeerConnection(rtcConfig, offeringExpectations);
@@ -1108,6 +1112,8 @@ public class PeerConnectionEndToEndTest {
 
     PeerConnection.RTCConfiguration rtcConfig =
         new PeerConnection.RTCConfiguration(Arrays.asList());
+    // TODO(https://crbug.com/webrtc/13528): Migare this test to UNIFIED_PLAN.
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
     // NONE would prevent any candidate being signaled to the PC.
     rtcConfig.iceTransportsType = PeerConnection.IceTransportsType.NONE;
     // We must have the continual gathering enabled to allow the surfacing of candidates on the ICE
@@ -1493,7 +1499,8 @@ public class PeerConnectionEndToEndTest {
   public void testRollback() throws Exception {
     PeerConnectionFactory factory = PeerConnectionFactory.builder().createPeerConnectionFactory();
     PeerConnection.RTCConfiguration config = new PeerConnection.RTCConfiguration(Arrays.asList());
-    config.sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN;
+    // TODO(https://crbug.com/webrtc/13528): Migare this test to UNIFIED_PLAN.
+    config.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
 
     ObserverExpectations offeringExpectations = new ObserverExpectations("PCTest:offerer");
     PeerConnection pc = factory.createPeerConnection(config, offeringExpectations);
