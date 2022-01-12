@@ -653,7 +653,12 @@ public class PeerConnectionEndToEndTest {
     lMS.addTrack(videoTrack);
     lMS.addTrack(
         factory.createAudioTrack(audioTrackId, factory.createAudioSource(new MediaConstraints())));
-    pc.addStream(lMS);
+    for (AudioTrack track : lMS.audioTracks) {
+      pc.addTrack(track, Arrays.asList(lMS.getId()));
+    }
+    for (VideoTrack track : lMS.videoTracks) {
+      pc.addTrack(track, Arrays.asList(lMS.getId()));
+    }
     return new WeakReference<MediaStream>(lMS);
   }
 
@@ -680,6 +685,7 @@ public class PeerConnectionEndToEndTest {
                        .createIceServer());
 
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN;
 
     ObserverExpectations offeringExpectations = new ObserverExpectations("PCTest:offerer");
     PeerConnection offeringPC = factory.createPeerConnection(rtcConfig, offeringExpectations);
@@ -946,6 +952,7 @@ public class PeerConnectionEndToEndTest {
                        .createIceServer());
 
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN;
 
     ObserverExpectations offeringExpectations = new ObserverExpectations("PCTest:offerer");
     PeerConnection offeringPC = factory.createPeerConnection(rtcConfig, offeringExpectations);
@@ -1108,6 +1115,7 @@ public class PeerConnectionEndToEndTest {
 
     PeerConnection.RTCConfiguration rtcConfig =
         new PeerConnection.RTCConfiguration(Arrays.asList());
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN;
     // NONE would prevent any candidate being signaled to the PC.
     rtcConfig.iceTransportsType = PeerConnection.IceTransportsType.NONE;
     // We must have the continual gathering enabled to allow the surfacing of candidates on the ICE
@@ -1173,6 +1181,8 @@ public class PeerConnectionEndToEndTest {
         PeerConnection.IceServer.builder("stun:stun.l.google.com:19302").createIceServer());
 
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
+    // TODO(https://crbug.com/webrtc/13528): Update test not to use Plan B.
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
 
     ObserverExpectations offeringExpectations = new ObserverExpectations("PCTest:offerer");
     PeerConnection offeringPC = factory.createPeerConnection(rtcConfig, offeringExpectations);
@@ -1376,8 +1386,10 @@ public class PeerConnectionEndToEndTest {
                                         .setVideoDecoderFactory(new SoftwareVideoDecoderFactory())
                                         .createPeerConnectionFactory();
 
-    // This test is fine with no ICE servers.
-    List<PeerConnection.IceServer> iceServers = new ArrayList<>();
+    // TODO(https://crbug.com/webrtc/13528): Update test not to use Plan B.
+    PeerConnection.RTCConfiguration planBConfig =
+        new PeerConnection.RTCConfiguration(Arrays.asList());
+    planBConfig.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
 
     // Use OfferToReceiveAudio/Video to ensure every offer has an audio and
     // video m= section. Simplifies the test because it means we don't have to
@@ -1391,11 +1403,11 @@ public class PeerConnectionEndToEndTest {
 
     // This PeerConnection will only be used to generate offers.
     ObserverExpectations offeringExpectations = new ObserverExpectations("offerer");
-    PeerConnection offeringPC = factory.createPeerConnection(iceServers, offeringExpectations);
+    PeerConnection offeringPC = factory.createPeerConnection(planBConfig, offeringExpectations);
     assertNotNull(offeringPC);
 
     ObserverExpectations expectations = new ObserverExpectations("PC under test");
-    PeerConnection pcUnderTest = factory.createPeerConnection(iceServers, expectations);
+    PeerConnection pcUnderTest = factory.createPeerConnection(planBConfig, expectations);
     assertNotNull(pcUnderTest);
 
     // Add offerer media stream with just an audio track.
@@ -1403,9 +1415,9 @@ public class PeerConnectionEndToEndTest {
     AudioTrack localAudioTrack =
         factory.createAudioTrack("audio", factory.createAudioSource(new MediaConstraints()));
     localStream.addTrack(localAudioTrack);
-    // TODO(deadbeef): Use addTrack once that's available.
     offeringExpectations.expectRenegotiationNeeded();
-    offeringPC.addStream(localStream);
+    RtpSender audioSender =
+        offeringPC.addTrack(localAudioTrack, Arrays.asList(localStream.getId()));
     // Create offer.
     SdpObserverLatch sdpLatch = new SdpObserverLatch();
     offeringPC.createOffer(sdpLatch, offerConstraints);
@@ -1435,6 +1447,7 @@ public class PeerConnectionEndToEndTest {
     VideoTrack videoTrack = factory.createVideoTrack("video", videoSource);
     offeringExpectations.expectRenegotiationNeeded();
     localStream.addTrack(videoTrack);
+    offeringPC.addTrack(videoTrack, Arrays.asList(localStream.getId()));
     // ... and create an updated offer.
     sdpLatch = new SdpObserverLatch();
     offeringPC.createOffer(sdpLatch, offerConstraints);
@@ -1453,6 +1466,7 @@ public class PeerConnectionEndToEndTest {
     offeringExpectations.expectRenegotiationNeeded();
     localStream.removeTrack(localAudioTrack);
     localAudioTrack.dispose();
+    offeringPC.removeTrack(audioSender);
     sdpLatch = new SdpObserverLatch();
     offeringPC.createOffer(sdpLatch, offerConstraints);
     assertTrue(sdpLatch.await());
