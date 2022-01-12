@@ -16,6 +16,29 @@
       "message": "+1 to get out of the way. I would like to see Kari give lgtm, since I know zero about Metal.\n",
       "revId": "2436a2b48cf244ac7fda3f09ca9da4dda2f16632",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "366aaf70_4aa39a31",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2022-01-12T11:46:49Z",
+      "side": 1,
+      "message": "Why not add it to deps above?",
+      "range": {
+        "startLine": 1338,
+        "startChar": 22,
+        "endLine": 1338,
+        "endChar": 32
+      },
+      "revId": "2436a2b48cf244ac7fda3f09ca9da4dda2f16632",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
