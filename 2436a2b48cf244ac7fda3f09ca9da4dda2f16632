@@ -39,6 +39,30 @@
       },
       "revId": "2436a2b48cf244ac7fda3f09ca9da4dda2f16632",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8254f84a_69246444",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-01-12T12:06:25Z",
+      "side": 1,
+      "message": "Ah, so they are not exclusive? (I am not an expert on these things).\n\nOpenGL is only available on !catalyst while Metal is always there?",
+      "parentUuid": "366aaf70_4aa39a31",
+      "range": {
+        "startLine": 1338,
+        "startChar": 22,
+        "endLine": 1338,
+        "endChar": 32
+      },
+      "revId": "2436a2b48cf244ac7fda3f09ca9da4dda2f16632",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
