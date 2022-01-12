@@ -653,7 +653,12 @@ public class PeerConnectionEndToEndTest {
     lMS.addTrack(videoTrack);
     lMS.addTrack(
         factory.createAudioTrack(audioTrackId, factory.createAudioSource(new MediaConstraints())));
-    pc.addStream(lMS);
+    for (AudioTrack audioTrack : lMS.audioTracks) {
+      pc.addTrack(audioTrack, Arrays.asList(lMS.getId()));
+    }
+    for (VideoTrack videoTrack : lMS.videoTracks) {
+      pc.addTrack(videoTrack, Arrays.asList(lMS.getId()));
+    }
     return new WeakReference<MediaStream>(lMS);
   }
 
@@ -680,6 +685,7 @@ public class PeerConnectionEndToEndTest {
                        .createIceServer());
 
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN;
 
     ObserverExpectations offeringExpectations = new ObserverExpectations("PCTest:offerer");
     PeerConnection offeringPC = factory.createPeerConnection(rtcConfig, offeringExpectations);
@@ -946,6 +952,7 @@ public class PeerConnectionEndToEndTest {
                        .createIceServer());
 
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN;
 
     ObserverExpectations offeringExpectations = new ObserverExpectations("PCTest:offerer");
     PeerConnection offeringPC = factory.createPeerConnection(rtcConfig, offeringExpectations);
@@ -1108,6 +1115,7 @@ public class PeerConnectionEndToEndTest {
 
     PeerConnection.RTCConfiguration rtcConfig =
         new PeerConnection.RTCConfiguration(Arrays.asList());
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN;
     // NONE would prevent any candidate being signaled to the PC.
     rtcConfig.iceTransportsType = PeerConnection.IceTransportsType.NONE;
     // We must have the continual gathering enabled to allow the surfacing of candidates on the ICE
@@ -1403,9 +1411,8 @@ public class PeerConnectionEndToEndTest {
     AudioTrack localAudioTrack =
         factory.createAudioTrack("audio", factory.createAudioSource(new MediaConstraints()));
     localStream.addTrack(localAudioTrack);
-    // TODO(deadbeef): Use addTrack once that's available.
     offeringExpectations.expectRenegotiationNeeded();
-    offeringPC.addStream(localStream);
+    offeringPC.addTrack(localAudioTrack, Arrays.asList(localStream.getId()));
     // Create offer.
     SdpObserverLatch sdpLatch = new SdpObserverLatch();
     offeringPC.createOffer(sdpLatch, offerConstraints);
@@ -1511,8 +1518,6 @@ public class PeerConnectionEndToEndTest {
     SessionDescription rollback = new SessionDescription(SessionDescription.Type.ROLLBACK, "");
     sdpLatch = new SdpObserverLatch();
     offeringExpectations.expectSignalingChange(SignalingState.STABLE);
-    // TODO(bugs.webrtc.org/11970): determine if triggering ONN (twice even) is correct.
-    offeringExpectations.expectRenegotiationNeeded();
     offeringExpectations.expectRenegotiationNeeded();
     pc.setLocalDescription(sdpLatch, rollback);
     assertTrue(sdpLatch.await());
