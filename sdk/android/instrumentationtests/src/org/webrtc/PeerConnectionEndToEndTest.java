@@ -680,6 +680,8 @@ public class PeerConnectionEndToEndTest {
                        .createIceServer());
 
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
+    // Can we migrate to Unified Plan here?
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
 
     ObserverExpectations offeringExpectations = new ObserverExpectations("PCTest:offerer");
     PeerConnection offeringPC = factory.createPeerConnection(rtcConfig, offeringExpectations);
@@ -946,6 +948,8 @@ public class PeerConnectionEndToEndTest {
                        .createIceServer());
 
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
+    // Can we migrate to Unified Plan here?
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
 
     ObserverExpectations offeringExpectations = new ObserverExpectations("PCTest:offerer");
     PeerConnection offeringPC = factory.createPeerConnection(rtcConfig, offeringExpectations);
@@ -1108,6 +1112,8 @@ public class PeerConnectionEndToEndTest {
 
     PeerConnection.RTCConfiguration rtcConfig =
         new PeerConnection.RTCConfiguration(Arrays.asList());
+    // Can we migrate to Unified Plan here?
+    rtcConfig.sdpSemantics = PeerConnection.SdpSemantics.PLAN_B;
     // NONE would prevent any candidate being signaled to the PC.
     rtcConfig.iceTransportsType = PeerConnection.IceTransportsType.NONE;
     // We must have the continual gathering enabled to allow the surfacing of candidates on the ICE
