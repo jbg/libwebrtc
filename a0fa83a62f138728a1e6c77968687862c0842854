@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc68d39c_b31d9c62",
+        "filename": "tools_webrtc/gtest-parallel-wrapper.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-01-12T10:29:30Z",
+      "side": 1,
+      "message": "Yes, good to mention it now since these flags might be tricky with c++ binaries.\n\nabsl::flags doesn\u0027t accept \"-\" in the flag name. So we need to use \"_\", this is a challenge sometimes.\n\nJust FYI because I am quite sure you will hit this later at some point.",
+      "range": {
+        "startLine": 167,
+        "startChar": 2,
+        "endLine": 171,
+        "endChar": 3
+      },
+      "revId": "a0fa83a62f138728a1e6c77968687862c0842854",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
