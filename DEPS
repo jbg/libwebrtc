@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '6f6d42e1df0f86b22d071784a9bed9ad5dde2cb0',
+  'chromium_revision': '710877608ba6a466e4ccf37532695761adfc537e',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -23,9 +23,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@94f5ba8cd5a8e4ae50a8cef9f1fd0222f5285b58',
+    'https://chromium.googlesource.com/chromium/src/base@c2d83a39e574db59b158e80700d0f1cbf4e3a0e6',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@fdb3611477b4a29905d777b68aa1beb0af535108',
+    'https://chromium.googlesource.com/chromium/src/build@17425b16ce081b98f26ed55223264bf6f4d929df',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@f78b4b9f33bd8ef9944d5ce643daff1c31880189',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -34,13 +34,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@d5c8012cf51f262c18afd403c0ee32fa5127ea98',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@987a40c5b7b4c3c456cbdd21d71bdc72458fb63b',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@a78ed44be9e498a5a85a49a10de3c67627cbb1a3',
+    'https://chromium.googlesource.com/chromium/src/testing@5cdf2fab00c5c89c5aba9e25f76023172e087e95',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@112a990ec10d0f81c3f66b42b09a185c968e5710',
+    'https://chromium.googlesource.com/chromium/src/third_party@a972ed7dca44bde18736c9016f1c6f4e554c373b',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -140,7 +140,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@bbf740148d4fbd77b6ac103c22d83703f9488da0',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@486f67f3ec352fcd8275b8de68a29a38e2face70',
+    'https://chromium.googlesource.com/catapult.git@17bc902374b7a8d2ae9024c603b890a028080a17',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
@@ -285,7 +285,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@a35a477395f33325848e888acbacd821248c094f',
+    'https://chromium.googlesource.com/chromium/src/tools@b46870252cb89f63b3f00d4ee42c9d864b61028f',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
