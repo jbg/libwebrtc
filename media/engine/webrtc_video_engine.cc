@@ -529,8 +529,11 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ConfigureVideoEncoderSettings(
           {{"off", webrtc::InterLayerPredMode::kOff},
            {"on", webrtc::InterLayerPredMode::kOn},
            {"onkeypic", webrtc::InterLayerPredMode::kOnKeyPic}});
+      webrtc::FieldTrialFlag force_flexible_mode =
+          webrtc::FieldTrialFlag("ForceFlexibleMode");
       webrtc::ParseFieldTrial(
-          {&interlayer_pred_experiment_enabled, &inter_layer_pred_mode},
+          {&interlayer_pred_experiment_enabled, &inter_layer_pred_mode,
+           &force_flexible_mode},
           call_->trials().Lookup("WebRTC-Vp9InterLayerPred"));
       if (interlayer_pred_experiment_enabled) {
         vp9_settings.interLayerPred = inter_layer_pred_mode;
@@ -538,6 +541,7 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ConfigureVideoEncoderSettings(
         // Limit inter-layer prediction to key pictures by default.
         vp9_settings.interLayerPred = webrtc::InterLayerPredMode::kOnKeyPic;
       }
+      vp9_settings.flexibleMode = force_flexible_mode.Get();
     } else {
       // Multiple spatial layers vp9 screenshare needs flexible mode.
       vp9_settings.flexibleMode = vp9_settings.numberOfSpatialLayers > 1;
