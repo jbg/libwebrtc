@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a91f2683_16d3b8e9",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-13T10:56:39Z",
+      "side": 1,
+      "message": "Pending the discussion on the parent patch regarding smaller libraries, I will merge this into the larger target.",
+      "range": {
+        "startLine": 151,
+        "startChar": 13,
+        "endLine": 151,
+        "endChar": 26
+      },
+      "revId": "753e03bb982355bca609c9fe962a4ea6e79fcff3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
