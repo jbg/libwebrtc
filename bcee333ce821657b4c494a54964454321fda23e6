@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "bcee333ce821657b4c494a54964454321fda23e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34725ecf_c5c38f77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-13T11:49:41Z",
+      "side": 1,
+      "message": "LGTM, encourage to wait for OK from Henrik.\n",
+      "revId": "bcee333ce821657b4c494a54964454321fda23e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "820769d2_6303b12f",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-13T11:49:41Z",
+      "side": 1,
+      "message": "Should you add the \"explicit new to access protected constructor\" here too?",
+      "revId": "bcee333ce821657b4c494a54964454321fda23e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
