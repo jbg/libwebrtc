@@ -16,6 +16,23 @@
       "message": "PTAL. ",
       "revId": "1abe91f7f90abbfa27f63de39d97ca3ac60052e3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "540f7432_a33a081a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-13T14:36:54Z",
+      "side": 1,
+      "message": "The NULL --\u003e nullptr changes are needed to be able two have two separate rtc::scoped_refptr constructors for T* and nullptr_t, where only the latter should be implicit. Since NULL (i.e., 0) is convertible to both T* and nullptr_t, using it makes construction ambiguous.",
+      "revId": "1abe91f7f90abbfa27f63de39d97ca3ac60052e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
