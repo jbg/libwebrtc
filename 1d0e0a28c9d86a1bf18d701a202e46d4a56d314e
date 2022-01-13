@@ -34,6 +34,23 @@
       "parentUuid": "78d5e753_3ef11c11",
       "revId": "1d0e0a28c9d86a1bf18d701a202e46d4a56d314e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc72b608_eaa313a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-01-13T23:45:14Z",
+      "side": 1,
+      "message": "Sorry, this slipped through the cracks during the holidays.\n\nThe only real remaining issue I see is the additional mutex acquisitions. The new class isn\u0027t doing anything that the existing implementation wasn\u0027t already, so I\u0027d be inclined to get rid of the mutexes and leave a todo to enforce thread safety.\n\nI\u0027m quite sure the WebRTC stack will always use the socket server and it sockets on its parent thread, so it\u0027s a nonissue for us. Maybe we can start enforcing this; we could always add DCHECKs and see if anyone complains.",
+      "revId": "1d0e0a28c9d86a1bf18d701a202e46d4a56d314e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

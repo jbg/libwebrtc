@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ade4f84_43b118ee",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-01-13T23:45:14Z",
+      "side": 1,
+      "message": "The factory method approach sounds good.\n\nDE_CLOSE can happen even if it\u0027s not a requested event if using epoll. See: https://man7.org/linux/man-pages/man2/epoll_ctl.2.html\n\nEPOLLERR and EPOLLHUP have comments that say \"epoll_wait(2) will always report for this event; it is not necessary to set it in events when calling epoll_ctl().\" And these events will be translated as DE_CLOSE.\n\nAnd on Windows we just always register for FD_CLOSE regardless of the requested events: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/rtc_base/physical_socket_server.cc;l\u003d999;drc\u003d2df36da930f2ac9d0afb0abe29dfa7dc65dfd7cf\n\nAnyway, I see the problem of is_closed_ being accessed by Bind/Listen. But this is already a problem with existing code accessing state_...",
+      "parentUuid": "da8ddc2f_2cb8bdb8",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f9cb7cc_8850d260",
         "filename": "rtc_base/physical_socket_server.cc",
         "patchSetId": 12
@@ -106,6 +124,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6141af71_a1a355f8",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-01-13T23:45:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c205dbb9_5e83d223",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21cf73bf_c5d60ded",
@@ -119,6 +155,24 @@
       "writtenOn": "2021-12-07T21:07:28Z",
       "side": 1,
       "message": "I don\u0027t think it\u0027s possible to get DE_ACCEPT with an error anymore, see ProcessEvents",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34660dab_0f46ac5f",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-01-13T23:45:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "21cf73bf_c5d60ded",
       "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -154,6 +208,24 @@
       "side": 1,
       "message": "Not sure if that is useful, since we don\u0027t tell the application that anything went wrong, and if we have some spurious wakeups resulting in EWOULDBLOCK, that should probably be ignored.\n\nLet me know if you really think saving the error is useful, otherwise I\u0027d be inclined to just ignore (and possibly log) errors here..",
       "parentUuid": "c38746db_6dd4be11",
+      "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfea1825_01c1a6b0",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-01-13T23:45:14Z",
+      "side": 1,
+      "message": "Right. Just logging sounds good then.",
+      "parentUuid": "efe6c88c_29ffa799",
       "revId": "0bae27b17fcbe13cb73d60e9daa84d097e5b7c2e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

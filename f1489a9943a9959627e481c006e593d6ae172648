@@ -296,6 +296,24 @@
       "parentUuid": "4d66d335_38606755",
       "revId": "f1489a9943a9959627e481c006e593d6ae172648",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf22abae_466cbf11",
+        "filename": "rtc_base/socket.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-01-13T23:45:14Z",
+      "side": 1,
+      "message": "Well, if this would only be used for logging, for now we can just log the error at the PhysicalSocketServer level",
+      "parentUuid": "0d5655b6_fd565531",
+      "revId": "f1489a9943a9959627e481c006e593d6ae172648",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

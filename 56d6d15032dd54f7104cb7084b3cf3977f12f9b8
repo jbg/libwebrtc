@@ -333,6 +333,24 @@
       "parentUuid": "0a7a2cce_c4bf4d17",
       "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0832a631_1dc26fbc",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-01-13T23:45:14Z",
+      "side": 1,
+      "message": "Looks resolved.",
+      "parentUuid": "399246e0_ae8774b9",
+      "revId": "56d6d15032dd54f7104cb7084b3cf3977f12f9b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
