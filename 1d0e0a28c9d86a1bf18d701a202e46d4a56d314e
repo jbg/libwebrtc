@@ -16,6 +16,24 @@
       "message": "This is a big change, so leaving it open forever is going to cause more work.\nIs it ready? Taylor?\n",
       "revId": "1d0e0a28c9d86a1bf18d701a202e46d4a56d314e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2b88c67_5b127124",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-13T13:20:09Z",
+      "side": 1,
+      "message": "Once we can agree that the design and end result is reasonable, we need to have a plan on how to get there. Maybe we can break it down like\n\n1. Add new interface classes.\n\n2. Implement new ListenSocket in the various socket servers.\n\n3. Convert one part at a time to use new interfaces.\n\n4. Delete old interface.\n\nAnd since I can\u0027t allocate that much time for it, it would be good if someone more could commit to drive it to conclusion in a reasonable time.",
+      "parentUuid": "78d5e753_3ef11c11",
+      "revId": "1d0e0a28c9d86a1bf18d701a202e46d4a56d314e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
