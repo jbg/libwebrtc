@@ -50,6 +50,24 @@
       "message": "Should you add the \"explicit new to access protected constructor\" here too?",
       "revId": "bcee333ce821657b4c494a54964454321fda23e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39160578_4c1ed247",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-13T11:55:52Z",
+      "side": 1,
+      "message": "This is the implementation of make_ref_counted, do you see any alternative to using new, assuming all involved constructors were public? Maybe make_ref_counted\u003cFinalRefCountedObject\u003cT\u003e\u003e(...) ?",
+      "parentUuid": "820769d2_6303b12f",
+      "revId": "bcee333ce821657b4c494a54964454321fda23e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
