@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c537303_acd16c9b",
+        "filename": "api/audio_options.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-01-13T14:22:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d457b13c_1bfd091c",
+      "range": {
+        "startLine": 86,
+        "startChar": 5,
+        "endLine": 86,
+        "endChar": 16
+      },
+      "revId": "e6e10b71d205ef97f26e146bf97103aa5acca935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eeb368c3_b494521d",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-01-13T13:25:39Z",
       "side": 1,
       "message": "Initialize",
+      "range": {
+        "startLine": 1869,
+        "startChar": 7,
+        "endLine": 1869,
+        "endChar": 18
+      },
+      "revId": "e6e10b71d205ef97f26e146bf97103aa5acca935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae77334e_527f2726",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1869,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-01-13T14:22:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeb368c3_b494521d",
       "range": {
         "startLine": 1869,
         "startChar": 7,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9685d012_d16c6b56",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-01-13T14:22:03Z",
+      "side": 1,
+      "message": "I don’t know of any bug for that. But InitRecording() doesn’t mention any reentrancy contract, so that seems like a reasonable check to keep.",
+      "parentUuid": "020307c3_65435063",
+      "range": {
+        "startLine": 1872,
+        "startChar": 9,
+        "endLine": 1872,
+        "endChar": 11
+      },
+      "revId": "e6e10b71d205ef97f26e146bf97103aa5acca935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f10338c3_5a4baf7d",
@@ -100,6 +172,24 @@
       "writtenOn": "2022-01-13T13:25:39Z",
       "side": 1,
       "message": "Nice",
+      "revId": "e6e10b71d205ef97f26e146bf97103aa5acca935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "028cbad0_2ad3ade6",
+        "filename": "media/engine/webrtc_voice_engine_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3143,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-01-13T14:22:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f10338c3_5a4baf7d",
       "revId": "e6e10b71d205ef97f26e146bf97103aa5acca935",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
