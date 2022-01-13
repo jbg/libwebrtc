@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "c092b2141af0fa7f8073c03fafa1f602fe6d429a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26232438_b0b5159b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-13T20:44:32Z",
+      "side": 1,
+      "message": "one little request, with that addressed, lgtm",
+      "revId": "c092b2141af0fa7f8073c03fafa1f602fe6d429a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c10f5a4_6a799fe9",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-13T20:44:32Z",
+      "side": 1,
+      "message": "can we move make_ref_counted into a factory function inside of SharedModuleThread and make the constructor private?  As is, it makes me a bit uneasy that it\u0027s relatively easy to use the class incorrectly.",
+      "revId": "c092b2141af0fa7f8073c03fafa1f602fe6d429a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
