@@ -40,14 +40,12 @@ namespace webrtc {
 // SharedModuleThread supports a callback that is issued when only one reference
 // remains, which is used to indicate to the original owner that the thread may
 // be discarded.
-class SharedModuleThread : public rtc::RefCountInterface {
- protected:
+class SharedModuleThread final {
+ public:
   SharedModuleThread(std::unique_ptr<ProcessThread> process_thread,
                      std::function<void()> on_one_ref_remaining);
-  friend class rtc::scoped_refptr<SharedModuleThread>;
-  ~SharedModuleThread() override;
+  ~SharedModuleThread();
 
- public:
   // Allows injection of an externally created process thread.
   static rtc::scoped_refptr<SharedModuleThread> Create(
       std::unique_ptr<ProcessThread> process_thread,
@@ -57,10 +55,10 @@ class SharedModuleThread : public rtc::RefCountInterface {
 
   ProcessThread* process_thread();
 
- private:
-  void AddRef() const override;
-  rtc::RefCountReleaseStatus Release() const override;
+  void AddRef() const;
+  rtc::RefCountReleaseStatus Release() const;
 
+ private:
   class Impl;
   mutable std::unique_ptr<Impl> impl_;
 };
