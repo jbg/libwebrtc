@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b87d001_d1bd80ca",
+        "filename": "test/win/d3d_renderer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-13T12:56:03Z",
+      "side": 1,
+      "message": "Needed because when rtc::scoped_refptr\u003cT\u003e(T*) constructor is marked explicit, we\u0027ll  need a separate constructor rtc::scoped_refptr\u003cT\u003e(nullptr_t) to allow that conversion to be done implicitly. And then passing NULL (i.e., 0 integer) as constructor argument becomes ambiguous.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "989b6fe107ceaaa2fa205a0a7102b0fb33517113",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
