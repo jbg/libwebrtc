@@ -33,6 +33,24 @@
       "message": "Assuming that we\u0027ll eventually want to remove this config option, can you add a comment with a TODO similar to the one above for webrtc:11717 to signal to api/ users that this is a workaround at the moment that will be removed? Ideally we won\u0027t accrue any long term dependencies on this new option.",
       "revId": "5d55ec12c9b5f80b91a639a466304fc081a53b20",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62f76d57_61ed8a4f",
+        "filename": "api/audio_options.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-01-13T16:07:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c740a648_ca52c896",
+      "revId": "5d55ec12c9b5f80b91a639a466304fc081a53b20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
