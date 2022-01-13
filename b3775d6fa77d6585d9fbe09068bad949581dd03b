@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0cd5590_0a04e1b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-01-13T15:35:41Z",
+      "side": 1,
+      "message": "This is the follow-up after https://webrtc-review.googlesource.com/c/src/+/246000 has landed and stuck for a while",
+      "revId": "b3775d6fa77d6585d9fbe09068bad949581dd03b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
