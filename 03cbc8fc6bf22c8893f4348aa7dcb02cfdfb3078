@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f37e5b7_8a9ff9ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-13T09:17:13Z",
+      "side": 1,
+      "message": "It\u0027s unclear to me if this Video class really needs to be refcounted, and if so, if it really needs to do that via RefCountInterface. But no changes to that in this cl.",
+      "revId": "03cbc8fc6bf22c8893f4348aa7dcb02cfdfb3078",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
