@@ -22,6 +22,29 @@
       },
       "revId": "753e03bb982355bca609c9fe962a4ea6e79fcff3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f8be612_e85cd019",
+        "filename": "modules/video_coding/frame_buffer2.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-13T11:00:46Z",
+      "side": 1,
+      "message": "Using old CombineAndDeleteFrames since absl::InlineVector and std::vector can not be moved into each other, and I think a templated version is probably overkill.",
+      "range": {
+        "startLine": 154,
+        "startChar": 32,
+        "endLine": 154,
+        "endChar": 54
+      },
+      "revId": "753e03bb982355bca609c9fe962a4ea6e79fcff3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
