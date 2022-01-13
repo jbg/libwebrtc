@@ -77,55 +77,55 @@ RtcEventLogEncoderV3::RtcEventLogEncoderV3() {
   encoders_[static_cast<uint32_t>(RtcEvent::Type::AlrStateEvent)] =
       RtcEventAlrState::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::AudioNetworkAdaptation] =
-  //  RtcEventAudioNetworkAdaptation::CreateEncoder();
-  //  encoders_[static_cast<uint32_t>(RtcEvent::Type::AudioPlayout] =
-  //  RtcEventAudioPlayout::CreateEncoder();
+  //  RtcEventAudioNetworkAdaptation::Encode;
+  encoders_[static_cast<uint32_t>(RtcEvent::Type::AudioPlayout)] =
+      RtcEventAudioPlayout::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::AudioReceiveStreamConfig]
-  //  = RtcEventAudioReceiveStreamConfig::CreateEncoder();
+  //  = RtcEventAudioReceiveStreamConfig::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::AudioSendStreamConfig] =
-  //  RtcEventAudioSendStreamConfig::CreateEncoder();
-  //  encoders_[static_cast<uint32_t>(RtcEvent::Type::BweUpdateDelayBased] =
-  //  RtcEventBweUpdateDelayBased::CreateEncoder();
+  //  RtcEventAudioSendStreamConfig::Encode;
+  encoders_[static_cast<uint32_t>(RtcEvent::Type::BweUpdateDelayBased)] =
+      RtcEventBweUpdateDelayBased::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::BweUpdateLossBased] =
-  //  RtcEventBweUpdateLossBased::CreateEncoder();
+  //  RtcEventBweUpdateLossBased::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::DtlsTransportState] =
-  //  RtcEventDtlsTransportState::CreateEncoder();
+  //  RtcEventDtlsTransportState::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::DtlsWritableState] =
-  //  RtcEventDtlsWritableState::CreateEncoder();
+  //  RtcEventDtlsWritableState::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::FrameDecoded] =
-  //  RtcEventFrameDecoded::CreateEncoder();
+  //  RtcEventFrameDecoded::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::GenericAckReceived] =
-  //  RtcEventGenericAckReceived::CreateEncoder();
+  //  RtcEventGenericAckReceived::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::GenericPacketReceived] =
-  //  RtcEventGenericPacketReceived::CreateEncoder();
+  //  RtcEventGenericPacketReceived::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::GenericPacketSent] =
-  //  RtcEventGenericPacketSent::CreateEncoder();
+  //  RtcEventGenericPacketSent::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::IceCandidatePairConfig] =
-  //  RtcEventIceCandidatePairConfig::CreateEncoder();
+  //  RtcEventIceCandidatePairConfig::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::IceCandidatePairEvent] =
-  //  RtcEventIceCandidatePair::CreateEncoder();
+  //  RtcEventIceCandidatePair::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::ProbeClusterCreated] =
-  //  RtcEventProbeClusterCreated::CreateEncoder();
+  //  RtcEventProbeClusterCreated::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::ProbeResultFailure] =
-  //  RtcEventProbeResultFailure::CreateEncoder();
+  //  RtcEventProbeResultFailure::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::ProbeResultSuccess] =
-  //  RtcEventProbeResultSuccess::CreateEncoder();
+  //  RtcEventProbeResultSuccess::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::RemoteEstimateEvent] =
-  //  RtcEventRemoteEstimate::CreateEncoder();
+  //  RtcEventRemoteEstimate::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::RouteChangeEvent] =
-  //  RtcEventRouteChange::CreateEncoder();
+  //  RtcEventRouteChange::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::RtcpPacketIncoming] =
-  //  RtcEventRtcpPacketIncoming::CreateEncoder();
+  //  RtcEventRtcpPacketIncoming::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::RtcpPacketOutgoing] =
-  //  RtcEventRtcpPacketOutgoing::CreateEncoder();
+  //  RtcEventRtcpPacketOutgoing::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::RtpPacketIncoming] =
-  //  RtcEventRtpPacketIncoming::CreateEncoder();
+  //  RtcEventRtpPacketIncoming::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::RtpPacketOutgoing] =
-  //  RtcEventRtpPacketOutgoing::CreateEncoder();
+  //  RtcEventRtpPacketOutgoing::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::VideoReceiveStreamConfig]
-  //  = RtcEventVideoReceiveStreamConfig::CreateEncoder();
+  //  = RtcEventVideoReceiveStreamConfig::Encode;
   //  encoders_[static_cast<uint32_t>(RtcEvent::Type::VideoSendStreamConfig] =
-  //  RtcEventVideoSendStreamConfig::CreateEncoder();
+  //  RtcEventVideoSendStreamConfig::Encode;
 }
 
 std::string RtcEventLogEncoderV3::EncodeBatch(
