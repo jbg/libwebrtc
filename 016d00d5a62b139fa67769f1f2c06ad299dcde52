@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8729bfe1_445f0145",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-01-13T07:56:47Z",
+      "side": 1,
+      "message": "Xavier, can you please take a look? Plan B has now been deprecated on the web and I\u0027m slowly but surely updating all internal use cases to explicitly set sdpSemantics. When we have no more dependencies on default values, I will land this CL.",
+      "revId": "016d00d5a62b139fa67769f1f2c06ad299dcde52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
