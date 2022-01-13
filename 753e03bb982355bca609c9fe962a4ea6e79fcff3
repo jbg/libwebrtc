@@ -45,6 +45,30 @@
       },
       "revId": "753e03bb982355bca609c9fe962a4ea6e79fcff3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07a95907_23425dbe",
+        "filename": "modules/video_coding/frame_buffer2.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-13T11:10:07Z",
+      "side": 1,
+      "message": "To ensure that the separated helper functions are just copies, could you please call the helper function from inside this method by manually constructing inline vector from the vector?",
+      "parentUuid": "8f8be612_e85cd019",
+      "range": {
+        "startLine": 154,
+        "startChar": 32,
+        "endLine": 154,
+        "endChar": 54
+      },
+      "revId": "753e03bb982355bca609c9fe962a4ea6e79fcff3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
