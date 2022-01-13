@@ -83,6 +83,8 @@ struct RTC_EXPORT AudioOptions {
   absl::optional<bool> audio_network_adaptor;
   // Config string for audio network adaptor.
   absl::optional<std::string> audio_network_adaptor_config;
+  // Initialize the ADM for recording when starting to send.
+  bool init_recording_on_send = true;
 };
 
 }  // namespace cricket
