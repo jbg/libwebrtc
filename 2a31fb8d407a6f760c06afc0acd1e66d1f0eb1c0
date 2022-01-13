@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a90da6e3_61f32c3d",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-13T10:08:56Z",
+      "side": 1,
+      "message": "I think it\u0027s better not to make new targets if not necessary.",
+      "parentUuid": "46963fcb_bd40395d",
+      "range": {
+        "startLine": 192,
+        "startChar": 13,
+        "endLine": 192,
+        "endChar": 28
+      },
+      "revId": "2a31fb8d407a6f760c06afc0acd1e66d1f0eb1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be2e3529_e956e679",
         "filename": "modules/video_coding/frame_scheduler.cc",
         "patchSetId": 8
