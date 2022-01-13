@@ -22,6 +22,30 @@
       },
       "revId": "989b6fe107ceaaa2fa205a0a7102b0fb33517113",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5da0091_a7c7a1ea",
+        "filename": "test/win/d3d_renderer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-01-13T13:43:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3b87d001_d1bd80ca",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "989b6fe107ceaaa2fa205a0a7102b0fb33517113",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
