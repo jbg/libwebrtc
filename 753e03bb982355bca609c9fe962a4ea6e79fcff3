@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae0f4a81_2726b201",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-13T12:16:06Z",
+      "side": 1,
+      "message": "As decided in parent, small targets are good. Resolved.",
+      "parentUuid": "a91f2683_16d3b8e9",
+      "range": {
+        "startLine": 151,
+        "startChar": 13,
+        "endLine": 151,
+        "endChar": 26
+      },
+      "revId": "753e03bb982355bca609c9fe962a4ea6e79fcff3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f8be612_e85cd019",
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "To ensure that the separated helper functions are just copies, could you please call the helper function from inside this method by manually constructing inline vector from the vector?",
       "parentUuid": "8f8be612_e85cd019",
+      "range": {
+        "startLine": 154,
+        "startChar": 32,
+        "endLine": 154,
+        "endChar": 54
+      },
+      "revId": "753e03bb982355bca609c9fe962a4ea6e79fcff3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e60c4007_af785a26",
+        "filename": "modules/video_coding/frame_buffer2.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-13T12:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07a95907_23425dbe",
       "range": {
         "startLine": 154,
         "startChar": 32,
