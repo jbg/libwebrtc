@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c769ddbf_e24f422b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-13T10:10:45Z",
+      "side": 1,
+      "message": "Housecleaning activity.\n",
+      "revId": "f54dc1c56c51c7e22809751327e2d2c8fcbfecf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
