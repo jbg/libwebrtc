@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "649da0e1_a4847820",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-01-14T08:19:39Z",
+      "side": 1,
+      "message": "Reverted most changes to SharedModuleThread, and construct it using rtc::scoped_refptr\u003cSharedModuleThread\u003e(new SharedModuleThread(...)). Kept changes to mark the class final and without vtable.",
+      "revId": "c092b2141af0fa7f8073c03fafa1f602fe6d429a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c10f5a4_6a799fe9",
