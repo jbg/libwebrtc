@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18e1afea_4f1fb6b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-01-14T09:45:20Z",
+      "side": 1,
+      "message": "There is just a single internal usage that needs to be updated to specify sdpSemantics before this CL can land... hype!",
+      "revId": "3fecabc1ee1a438449fc5e254bccc4c3767ac676",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
