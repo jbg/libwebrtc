@@ -1071,6 +1071,24 @@ webrtc::RtpParameters WebRtcVideoChannel::GetRtpSendParameters(
   for (const VideoCodec& codec : send_params_.codecs) {
     rtp_params.codecs.push_back(codec.ToCodecParameters());
   }
+
+  if (send_codec_) {
+    // Move the current send codec to the front of the codecs list.
+    const webrtc::RtpCodecParameters send_codec =
+        send_codec_->codec.ToCodecParameters();
+    auto it = std::find(rtp_params.codecs.begin(), rtp_params.codecs.end(),
+                        send_codec);
+    if (it != rtp_params.codecs.begin()) {
+      if (it != rtp_params.codecs.end()) {
+        rtp_params.codecs.erase(it);
+        rtp_params.codecs.insert(rtp_params.codecs.begin(), send_codec);
+      } else {
+        RTC_LOG(LS_WARNING) << "Send codec " << send_codec_->codec.ToString()
+                            << " is not found in send RTP parameters.";
+      }
+    }
+  }
+
   return rtp_params;
 }
 
