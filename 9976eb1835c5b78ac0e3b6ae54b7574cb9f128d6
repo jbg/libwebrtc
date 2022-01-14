@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a347b8c2_bd93e34a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-14T08:10:47Z",
+      "side": 1,
+      "message": "This fuzzer isn\u0027t run automatically due to an issue with compiling mocks in Chrome, but I\u0027m polishing it a bit once in a while.",
+      "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
