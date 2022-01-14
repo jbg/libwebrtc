@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bf96234_f2058ace",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-14T10:38:07Z",
+      "side": 1,
+      "message": "Can we wait with the revert for Mark, whether he finds this a problem? He was already about to merge that that change as I fixed all review comments. Maybe this doesn\u0027t need to be reverted after all.",
+      "revId": "34b055b1f574e546bacd877f158145f2ad646735",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
