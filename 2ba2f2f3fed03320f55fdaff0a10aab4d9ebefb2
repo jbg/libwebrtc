@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d682791_bda0c251",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionEndToEndTest.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-01-14T09:44:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "688a1611_631fde81",
+      "range": {
+        "startLine": 1407,
+        "startChar": 44,
+        "endLine": 1407,
+        "endChar": 59
+      },
+      "revId": "2ba2f2f3fed03320f55fdaff0a10aab4d9ebefb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59c233f3_286be099",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-14T08:30:46Z",
       "side": 1,
       "message": "Prefer Collections.singletonList() (otherwise it’s unclear if the parameter is a String and you’re making a singleton list or a String[] and you’re wrapping it as a list).\n\nSame thing in other places in this file.",
+      "range": {
+        "startLine": 1436,
+        "startChar": 45,
+        "endLine": 1436,
+        "endChar": 79
+      },
+      "revId": "2ba2f2f3fed03320f55fdaff0a10aab4d9ebefb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb476668_19eac757",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionEndToEndTest.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1436,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-01-14T09:44:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59c233f3_286be099",
       "range": {
         "startLine": 1436,
         "startChar": 45,
