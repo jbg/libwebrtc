@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97e07ca0_566b5e7e",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-01-14T17:03:44Z",
+      "side": 1,
+      "message": "During development, it is convenient to be able to turn events on and off. All of them need to be implemented before the v3 format can be deployed, of course. How about I upload a separate CL that defines a dummy encoder function for each event type?",
+      "parentUuid": "72c136dd_8125c58f",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 54
+      },
+      "revId": "e0f2a50d8b652ef781c097473a12c8d8c0925b35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baebdaf6_083f75a8",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-16T14:55:44Z",
       "side": 1,
       "message": "introduce new var instead, and use a name that hints at the difference from the prior key, consider if you might want to add a _short_ comment on whats going on as well.",
+      "range": {
+        "startLine": 140,
+        "startChar": 2,
+        "endLine": 140,
+        "endChar": 64
+      },
+      "revId": "e0f2a50d8b652ef781c097473a12c8d8c0925b35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43f5c345_ac08b8d9",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-01-14T17:03:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baebdaf6_083f75a8",
       "range": {
         "startLine": 140,
         "startChar": 2,
@@ -60,6 +108,30 @@
       "writtenOn": "2021-12-16T14:55:44Z",
       "side": 1,
       "message": "Isn\u0027t static_cast from unit64 to 32 defined to truncate already? Either way, add a comment explaining why we can\u0027t simply store a uint32 in the event_groups map",
+      "range": {
+        "startLine": 145,
+        "startChar": 25,
+        "endLine": 145,
+        "endChar": 48
+      },
+      "revId": "e0f2a50d8b652ef781c097473a12c8d8c0925b35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc5c5ca5_916b4d2c",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-01-14T17:03:44Z",
+      "side": 1,
+      "message": "Just static_cast would work, but I\u0027d like to make it explicit that we are discarding the upper 32 bits which can be used to store the SSRC (for events which we wish to group by SSRC) or a similar secondary key. Added a comment above.",
+      "parentUuid": "ff4547ce_5b624871",
       "range": {
         "startLine": 145,
         "startChar": 25,
