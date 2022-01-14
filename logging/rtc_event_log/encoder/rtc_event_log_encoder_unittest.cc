@@ -1274,8 +1274,7 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::Combine(/* Random seed*: */ ::testing::Values(1, 2, 3, 4, 5),
                        /* Encoding: */
                        ::testing::Values(RtcEventLog::EncodingType::Legacy,
-                                         RtcEventLog::EncodingType::NewFormat,
-                                         RtcEventLog::EncodingType::ProtoFree),
+                                         RtcEventLog::EncodingType::NewFormat),
                        /* Event count: */ ::testing::Values(1, 2, 10, 100),
                        /* Repeated fields: */ ::testing::Bool()));
 
