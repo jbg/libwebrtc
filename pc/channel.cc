@@ -183,17 +183,14 @@ void BaseChannel::DisconnectFromRtpTransport_n() {
   rtp_transport_->SignalNetworkRouteChanged.disconnect(this);
   rtp_transport_->SignalWritableState.disconnect(this);
   rtp_transport_->SignalSentPacket.disconnect(this);
+  rtp_transport_ = nullptr;
 }
 
-void BaseChannel::Init_w(webrtc::RtpTransportInternal* rtp_transport) {
-  RTC_DCHECK_RUN_ON(worker_thread());
-
-  network_thread_->Invoke<void>(RTC_FROM_HERE, [this, rtp_transport] {
-    SetRtpTransport(rtp_transport);
-    // Both RTP and RTCP channels should be set, we can call SetInterface on
-    // the media channel and it can set network options.
-    media_channel_->SetInterface(this);
-  });
+void BaseChannel::Init_n(webrtc::RtpTransportInternal* rtp_transport) {
+  SetRtpTransport(rtp_transport);
+  // Both RTP and RTCP channels should be set, we can call SetInterface on
+  // the media channel and it can set network options.
+  media_channel_->SetInterface(this);
 }
 
 void BaseChannel::Deinit() {
@@ -201,14 +198,21 @@ void BaseChannel::Deinit() {
   // Packets arrive on the network thread, processing packets calls virtual
   // functions, so need to stop this process in Deinit that is called in
   // derived classes destructor.
+  /*
   network_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
     RTC_DCHECK_RUN_ON(network_thread());
-    media_channel_->SetInterface(/*iface=*/nullptr);
+    Deinit_n();
+  });*/
+}
 
-    if (rtp_transport_) {
-      DisconnectFromRtpTransport_n();
-    }
-  });
+void BaseChannel::Deinit_n() {
+  // Packets arrive on the network thread, processing packets calls virtual
+  // functions, so need to stop this process in Deinit that is called in
+  // derived classes destructor.
+  media_channel_->SetInterface(/*iface=*/nullptr);
+  if (rtp_transport_) {
+    DisconnectFromRtpTransport_n();
+  }
 }
 
 bool BaseChannel::SetRtpTransport(webrtc::RtpTransportInternal* rtp_transport) {
@@ -363,6 +367,13 @@ void BaseChannel::SetFirstPacketReceivedCallback(
     std::function<void()> callback) {
   RTC_DCHECK_RUN_ON(network_thread());
   RTC_DCHECK(!on_first_packet_received_ || !callback);
+
+  // TODO(tommi): Rename SetFirstPacketReceivedCallback to something that
+  // indicates network thread initialization/uninitialization and call
+  // Init_n() / Deinit_n() respectively.
+  // if (!callback)
+  //   Deinit_n();
+
   on_first_packet_received_ = std::move(callback);
 }
 
