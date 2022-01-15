@@ -114,11 +114,13 @@ class BaseChannel : public ChannelInterface,
               webrtc::CryptoOptions crypto_options,
               rtc::UniqueRandomIdGenerator* ssrc_generator);
   virtual ~BaseChannel();
-  virtual void Init_w(webrtc::RtpTransportInternal* rtp_transport);
+  void Init_n(webrtc::RtpTransportInternal* rtp_transport)
+      RTC_RUN_ON(network_thread());
 
   // Deinit may be called multiple times and is simply ignored if it's already
   // done.
   void Deinit();
+  void Deinit_n() RTC_RUN_ON(network_thread());
 
   rtc::Thread* worker_thread() const { return worker_thread_; }
   rtc::Thread* network_thread() const { return network_thread_; }
@@ -219,6 +221,10 @@ class BaseChannel : public ChannelInterface,
 
   bool enabled() const RTC_RUN_ON(worker_thread()) { return enabled_; }
   rtc::Thread* signaling_thread() const { return signaling_thread_; }
+
+  bool network_initialized() RTC_RUN_ON(network_thread()) {
+    return media_channel_->HasNetworkInterface();
+  }
 
   // Call to verify that:
   // * The required content description directions have been set.
