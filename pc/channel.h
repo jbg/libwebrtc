@@ -114,11 +114,13 @@ class BaseChannel : public ChannelInterface,
               webrtc::CryptoOptions crypto_options,
               rtc::UniqueRandomIdGenerator* ssrc_generator);
   virtual ~BaseChannel();
-  virtual void Init_w(webrtc::RtpTransportInternal* rtp_transport);
+  void Init_n(webrtc::RtpTransportInternal* rtp_transport)
+      RTC_RUN_ON(network_thread());
 
   // Deinit may be called multiple times and is simply ignored if it's already
   // done.
   void Deinit();
+  void Deinit_n() RTC_RUN_ON(network_thread());
 
   rtc::Thread* worker_thread() const { return worker_thread_; }
   rtc::Thread* network_thread() const { return network_thread_; }
