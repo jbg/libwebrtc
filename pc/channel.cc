@@ -189,11 +189,16 @@ void BaseChannel::Init_w(webrtc::RtpTransportInternal* rtp_transport) {
   RTC_DCHECK_RUN_ON(worker_thread());
 
   network_thread_->Invoke<void>(RTC_FROM_HERE, [this, rtp_transport] {
-    SetRtpTransport(rtp_transport);
-    // Both RTP and RTCP channels should be set, we can call SetInterface on
-    // the media channel and it can set network options.
-    media_channel_->SetInterface(this);
+    RTC_DCHECK_RUN_ON(network_thread());
+    Init_n(rtp_transport);
   });
+}
+
+void BaseChannel::Init_n(webrtc::RtpTransportInternal* rtp_transport) {
+  SetRtpTransport(rtp_transport);
+  // Both RTP and RTCP channels should be set, we can call SetInterface on
+  // the media channel and it can set network options.
+  media_channel_->SetInterface(this);
 }
 
 void BaseChannel::Deinit() {
