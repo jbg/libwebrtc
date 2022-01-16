@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcdca03a_6bdc833e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-16T14:57:12Z",
+      "side": 1,
+      "message": "I wondered if we could get rid of Channel::OnTransportReadyToSend, but this CL removes only one of two usages (the other is a signal handler).\n",
+      "revId": "5e2368f89156f519dfd94a47cb16cc342706ed20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
