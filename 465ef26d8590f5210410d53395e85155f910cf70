@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29eeb4d4_5247bb1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "I understand. I would like to just point out that the xdg-portal/pipewire split doesn\u0027t introduce any new code related to xdg-desktop-portal or pipewire, it just splits the code into separate classes and stores a PW stream in the options.",
+      "parentUuid": "329d02e2_8568023f",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ddbe20c_203bc32d",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-01-14T20:11:15Z",
       "side": 1,
       "message": "What about mode \u003d\u003d SHAPE_ONLY?",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc6b15d3_86570811",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ddbe20c_203bc32d",
       "revId": "465ef26d8590f5210410d53395e85155f910cf70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d41f5ef7_a33eba00",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb8520e_a1befc98",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30cc384f_bad435f8",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-01-14T20:11:15Z",
       "side": 1,
       "message": "Is (0,0) a valid coordinate?",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbcf4ccd_bfd270a7",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "I think it is the top left corner. If I print some output, then the bottom right corner has pos(2559,1439).\n\nI initialized mouse_cursor_position to pos(-1,-1) so the initial value is invalid.",
+      "parentUuid": "30cc384f_bad435f8",
       "revId": "465ef26d8590f5210410d53395e85155f910cf70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -86,6 +158,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22c4636f_a19a96a2",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "Yes, I thought they have to be implemented.",
+      "parentUuid": "c7d6d49a_4fa6d366",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50aad8d7_6a7c4b30",
@@ -99,6 +189,24 @@
       "writtenOn": "2022-01-14T20:11:15Z",
       "side": 1,
       "message": "Since this is initialized in the ctor you shouldn\u0027t need a default value here.",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd7e3c3_ab1c0f19",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50aad8d7_6a7c4b30",
       "revId": "465ef26d8590f5210410d53395e85155f910cf70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -120,6 +228,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f7951ba_faad63ed",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25836dc2_c2e031c7",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28278eca_da6b8519",
@@ -133,6 +259,24 @@
       "writtenOn": "2022-01-14T20:11:15Z",
       "side": 1,
       "message": "Prefer to declare this as normal constexpr values, instead of using preprocessor defines.",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93db1f77_c2471b14",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28278eca_da6b8519",
       "revId": "465ef26d8590f5210410d53395e85155f910cf70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -154,6 +298,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2786f64_3d64629a",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b78a6d43_337a35c9",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80a37f79_ee41ed19",
@@ -167,6 +329,24 @@
       "writtenOn": "2022-01-14T20:11:15Z",
       "side": 1,
       "message": "How does the caller know when it\u0027s safe to call CaptureCursor?  Should this take a callback to invoke after the next ProcessBuffer()?\n\nOr is the idea that the caller always calls this on a frame capture to get the latest cursor data (if there is any)?",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5cf1f20_51893a7b",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "Yes, it\u0027s same as with the CaptureFrame(), basically the caller is supposed to get the latest known cursor data or frame. \n\nI think Chromium or whoever uses capturers calls DesktopCapturer::CaptureFrame() independently and we should always provide the latest one we have. I don\u0027t think you can actually do it the other way around, that you can tell the consumer to capture a frame when you want to.",
+      "parentUuid": "80a37f79_ee41ed19",
       "revId": "465ef26d8590f5210410d53395e85155f910cf70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -188,6 +368,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3686fc91_49eb0a19",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "Everything in the spa_buffer is set by the compositor. PipeWire only seem to check whether the ID of that spa_meta_cursor is valid, I don\u0027t know whether they do some other checks internally, for example when the metadata exceeds size both sides settled on. \n\nKWin does it here: https://invent.kde.org/plasma/kwin/-/blob/master/src/plugins/screencast/screencaststream.cpp#L606\n\nMutter does it here:https://gitlab.gnome.org/GNOME/mutter/-/blob/main/src/backends/meta-screen-cast-stream-src.c#L300\n\nBoth don\u0027t to be doing anything potentionally wrong.",
+      "parentUuid": "f1cc72b7_b53ed858",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76e4cda5_e80a8826",
@@ -201,6 +399,24 @@
       "writtenOn": "2022-01-14T20:11:15Z",
       "side": 1,
       "message": "Does Pipewire sanity-check the values of width and height (i.e. no larger than 256x256 or some reasonable value)?  If not, can we do that here?",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6dcd50d_50751089",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "We specify the size in stream parameters so the cursor will use size without our boundaries. I set it to 1024, but that\u0027s probably unreasonably high. I\u0027ll make it smaller.",
+      "parentUuid": "76e4cda5_e80a8826",
       "revId": "465ef26d8590f5210410d53395e85155f910cf70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -224,6 +440,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f79b8ee6_590d314b",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "I think it depends on the implementation.",
+      "parentUuid": "068f5fc0_d2fd0c0f",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2063479_b3b7dc6c",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "It depends on the implementation, I can for example see that KWin (KDE Plasma) does this only on cursor change, but the position is updated on every position change (that\u0027s what I actually had to fix in KWin recently).",
+      "parentUuid": "068f5fc0_d2fd0c0f",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2a75676_e0f37067",
         "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
         "patchSetId": 3
@@ -235,6 +487,24 @@
       "writtenOn": "2022-01-14T20:11:15Z",
       "side": 1,
       "message": "What is the difference between the values of cursor-\u003ehotspot and cursor-\u003eposition for pipewire?",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55c99642_136043ac",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "For a regular arrow both will be same, but for example when the cursor has a shape of hand, then the hotspot has a different position. I don\u0027t know what difference it does make when sharing a screen, but MouseCursor constructor takes a DesktopVector with the hotspot position.",
+      "parentUuid": "a2a75676_e0f37067",
       "revId": "465ef26d8590f5210410d53395e85155f910cf70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -252,6 +522,24 @@
       "writtenOn": "2022-01-14T20:11:15Z",
       "side": 1,
       "message": "Please document these two methods, particularly under what conditions that CaptureCursor() actually returns a value.",
+      "revId": "465ef26d8590f5210410d53395e85155f910cf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a75945a_41570ac1",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:11:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2297d391_50538f93",
       "revId": "465ef26d8590f5210410d53395e85155f910cf70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
