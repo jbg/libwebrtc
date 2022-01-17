@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2e949af_33ded4ed",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-17T08:50:12Z",
+      "side": 1,
+      "message": "Could we store the event type explicit in this one? Maybe using a struct with explicit fields as kay would make sense? Packing and unpacking the type is harder to read and a maintenance risk IMO (easy for someone to make a subtle change breaking stuff without it being noticed or caught by tests)\n\nthe the code below would read nicer, something like: event_groups[{(*it)-\u003eGetGroupKey()}, (*it)-\u003eGetType()].push...",
+      "range": {
+        "startLine": 136,
+        "startChar": 2,
+        "endLine": 136,
+        "endChar": 49
+      },
+      "revId": "9d40d9d92afda4f6ceda27c86a069a853bd61652",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
