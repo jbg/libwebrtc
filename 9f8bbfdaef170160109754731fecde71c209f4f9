@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72a43a29_61d2206f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-01-17T13:28:03Z",
+      "side": 1,
+      "message": "Fails to build, because it needs https://webrtc-review.googlesource.com/c/src/+/241086 to land first.",
+      "revId": "9f8bbfdaef170160109754731fecde71c209f4f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
