@@ -263,6 +263,7 @@ RtpTransmissionManager::CreateAndAddTransceiver(
     rtc::scoped_refptr<RtpReceiverProxyWithInternal<RtpReceiverInternal>>
         receiver) {
   RTC_DCHECK_RUN_ON(signaling_thread());
+  RTC_LOG_THREAD_BLOCK_COUNT();
   // Ensure that the new sender does not have an ID that is already in use by
   // another sender.
   // Allow receiver IDs to conflict since those come from remote SDP (which
@@ -281,6 +282,7 @@ RtpTransmissionManager::CreateAndAddTransceiver(
             }
           }));
   transceivers()->Add(transceiver);
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
   return transceiver;
 }
 
