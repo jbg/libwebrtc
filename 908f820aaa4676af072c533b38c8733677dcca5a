@@ -22,6 +22,30 @@
       },
       "revId": "908f820aaa4676af072c533b38c8733677dcca5a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb15c627_c879d661",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 13
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-17T10:08:03Z",
+      "side": 1,
+      "message": "It think putting it in video_receive_stream2 might be clearer. Because right now there are frame_buffer, frame_buffer2 and frame_buffer_proxy, which is actually about frame_buffer2 (and 3 in the future). Despite it having a very similar name to frame_buffer. Naming it frame_buffer2_proxy would also be confusing since it will be selecting between 2 and 3.",
+      "parentUuid": "967e1ecc_95b4ebf9",
+      "range": {
+        "startLine": 242,
+        "startChar": 5,
+        "endLine": 242,
+        "endChar": 23
+      },
+      "revId": "908f820aaa4676af072c533b38c8733677dcca5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

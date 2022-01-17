@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fee6fcb8_b1156d65",
+        "filename": "modules/video_coding/frame_buffer_proxy.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-01-17T10:08:03Z",
+      "side": 1,
+      "message": "Maybe add here a comment like \"TODO: create FB2Proxy of FB3 based on field trial\" to justify existence of this method. Otherwise it would make sense just to inline it.",
+      "range": {
+        "startLine": 119,
+        "startChar": 52,
+        "endLine": 119,
+        "endChar": 72
+      },
+      "revId": "441cbb4a7f54db2cc7eee03926cde6e596f339fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
