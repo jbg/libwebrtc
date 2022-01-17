@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0891ef2d_95e644b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-17T07:54:44Z",
+      "side": 1,
+      "message": "Hm.",
+      "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9fe871c_04c955e9",
@@ -37,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2faf7b2b_9ba3fa1a",
+        "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-17T07:54:44Z",
+      "side": 1,
+      "message": "This is not really a test, it\u0027s a fuzzer using the framework for PeerConnectionIntegrationTest. TestBody() does not have parameters. Might need more comments to explain that this is not a test.\n\nI could declare a function that sets a class-local variable and calls TestBody(). That would pass the style guide, I assume.",
+      "parentUuid": "a9fe871c_04c955e9",
+      "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7d4ce15_5344fcfc",
         "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
         "patchSetId": 1
@@ -48,6 +83,30 @@
       "writtenOn": "2022-01-14T10:22:56Z",
       "side": 1,
       "message": "gtest documentation explicitly tells not to override TestBody:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/googletest/src/googletest/include/gtest/gtest.h;l\u003d495;drc\u003daa486f165e982e82e2112d20a7561f64736d4b42\n\nwhy are you moving all code into this function? (extending ::testing::Test misuse)\n\nif you need access to the protected functions of the PeerConnectionIntegrationBaseTest, then simple workaround could be to introduce own function (e.g. `void Run(const std::string\u0026 message)`)",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 27
+      },
+      "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3a2fa51_0c33f5be",
+        "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-17T07:54:44Z",
+      "side": 1,
+      "message": "It turns out that using HasFailure() to break on assert failures can\u0027t be done outside of TestBody. I first tried calling HasFailure() in the calling function, but it did not work. I don\u0027t understand why.\n\nTestBody() is null-declared in the ::Test class, so I have to override it somewhere; the previous version made it an empty body. It seemed cleaner to override it.\n\nThe TEST() macro is in fact a very decorated overriding of the TestBody() function, so I don\u0027t think it\u0027s entirely out of line to do it this way.",
+      "parentUuid": "d7d4ce15_5344fcfc",
       "range": {
         "startLine": 25,
         "startChar": 2,
