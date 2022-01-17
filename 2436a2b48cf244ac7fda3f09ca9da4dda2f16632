@@ -63,6 +63,30 @@
       },
       "revId": "2436a2b48cf244ac7fda3f09ca9da4dda2f16632",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f15f0b9e_17359647",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2022-01-17T09:08:29Z",
+      "side": 1,
+      "message": "I\u0027m confused as to why this isn\u0027t already in here? This is the framework target right?\n\nIn any case, openGL should be excluded from iOS by default, and I can\u0027t think of a reason why Metal should ever _not_ be there, but maybe I\u0027m overlooking something.",
+      "parentUuid": "8254f84a_69246444",
+      "range": {
+        "startLine": 1338,
+        "startChar": 22,
+        "endLine": 1338,
+        "endChar": 32
+      },
+      "revId": "2436a2b48cf244ac7fda3f09ca9da4dda2f16632",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
