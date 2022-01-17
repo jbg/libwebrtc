@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0023799e_cb40ae52",
+        "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-17T10:01:52Z",
+      "side": 1,
+      "message": "There are no exception for fuzzer either. (personally I consider fuzzers to be tests, though not unit tests. That is irrelevant here though.)\n\nAdd a setter or pass `message` in the constructor.\n(though I still do not understand why fuzzer need to call TestBody function, not any other custom function, but I do not need to)",
+      "parentUuid": "2faf7b2b_9ba3fa1a",
+      "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7d4ce15_5344fcfc",
         "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
         "patchSetId": 1
@@ -111,6 +129,76 @@
         "startLine": 25,
         "startChar": 2,
         "endLine": 25,
+        "endChar": 27
+      },
+      "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "746bd323_d7f2e403",
+        "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-17T10:01:52Z",
+      "side": 1,
+      "message": "That feels like relying on implementation details without even fully understanding them.\nDocumentation for the TestBody clearly tells not to do what is done here.\nRoot issue here is using a class derived from ::testing::Test outside unit testing. It is not designed for that.\nProper solution is probably change PeerConnectionIntegrationBaseTest helper not to derive from ::testing::Test, move that inheritance inside unit test files. Then this class will be reusable for fuzzing (won\u0027t have TestBody abstract function, wouldn\u0027t rely on EXPECT_x macros)\nOr avoid using PeerConnectionIntegrationBaseTest helper (I\u0027m not familiar with it, so not sure if it is feasible to test whatever this fuzzer is testing without that helper. Reading the test name and implementation I\u0027m not even sure what is the code under test here).",
+      "parentUuid": "a3a2fa51_0c33f5be",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 27
+      },
+      "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "098d02cb_c251628e",
+        "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-17T10:01:52Z",
+      "side": 1,
+      "message": "this code is already in the webrtc namespace, so repeating namespace is not needed.\n(though same issue exists before this change, so won\u0027t insist to change it now)",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 12
+      },
+      "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043ae994_2babc036",
+        "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-17T10:01:52Z",
+      "side": 1,
+      "message": "this code is already withing FuzzerTest class, so repeating class shouldn\u0027t be needed.",
+      "range": {
+        "startLine": 50,
+        "startChar": 15,
+        "endLine": 50,
         "endChar": 27
       },
       "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
