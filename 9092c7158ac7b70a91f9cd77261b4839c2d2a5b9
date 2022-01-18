@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c51d1ab_57f7e34f",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-18T11:03:54Z",
+      "side": 1,
+      "message": "Could we avoid injecting the FrameBuffer into the scheduler and just let the buffer and scheduler live side by side, glued together by the video receive stream instead?",
+      "range": {
+        "startLine": 68,
+        "startChar": 17,
+        "endLine": 68,
+        "endChar": 42
+      },
+      "revId": "9092c7158ac7b70a91f9cd77261b4839c2d2a5b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
