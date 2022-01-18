@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a612fcb0_736899d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-01-18T00:52:10Z",
+      "side": 1,
+      "message": "Hi, this is another CL for removing `RTC_DISALLALL_COPY_AND_ASSIGN`.\nLike previous CL( https://webrtc-review.googlesource.com/c/src/+/245680 ), the code changed here was automatically written by the tool I created. Please take a look.\n\ncall/ and logging/ for terelius@\ntest/ for titovartem@\nand api/, p2p/ and pc/ for tommi@ .",
+      "revId": "54baecb614c8fed44be86c399a11968004de7437",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
