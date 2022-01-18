@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'a6153084c5e05ae4b9767e0aafd6f2c9c9ace5b9',
+  'chromium_revision': 'ff98bff1f0b6007766f55bfe7da3b7f7fc24b084',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -34,13 +34,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@3cb45b62c6df11f47b8bfecb0d566321765c8df4',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@e418ebda3fafe7b8f5faaa1c40cdf282783e1aab',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@469fa94ee5909b902e865b820a618cdd6019e4c4',
+    'https://chromium.googlesource.com/chromium/src/testing@c54a1febf3a81816190c34b4ea995b729af56eac',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@0a005ea063d452c744eceda29d42cbd6d1662f99',
+    'https://chromium.googlesource.com/chromium/src/third_party@bacf77ecd8c448eed3db9ff9bdc3be0714bd889e',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -78,7 +78,7 @@ deps = {
   'src/buildtools/third_party/libc++/trunk':
     'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git@79a2e924d96e2fc1e4b937c42efd08898fa472d7',
   'src/buildtools/third_party/libc++abi/trunk':
-    'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git@d78d7bf604c8010cba334c215cf66e568bc9d816',
+    'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git@94855f7b7cdadf1aa5c58ac3ccf522e204e27087',
   'src/buildtools/third_party/libunwind/trunk':
     'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libunwind.git@c27c97a625d5327a39a056453172827535762c4c',
 
@@ -285,7 +285,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@7162c419f69d8697fff628b66e72eb3f0709ed23',
+    'https://chromium.googlesource.com/chromium/src/tools@1ac202c450e90ce2378f7bda72dcabf0a2e75576',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
