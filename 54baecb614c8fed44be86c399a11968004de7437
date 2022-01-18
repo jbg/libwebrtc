@@ -16,6 +16,52 @@
       "message": "Hi, this is another CL for removing `RTC_DISALLALL_COPY_AND_ASSIGN`.\nLike previous CL( https://webrtc-review.googlesource.com/c/src/+/245680 ), the code changed here was automatically written by the tool I created. Please take a look.\n\ncall/ and logging/ for terelius@\ntest/ for titovartem@\nand api/, p2p/ and pc/ for tommi@ .",
       "revId": "54baecb614c8fed44be86c399a11968004de7437",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a2146dc_267c9887",
+        "filename": "modules/video_coding/utility/ivf_file_reader.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-01-18T10:37:10Z",
+      "side": 1,
+      "message": "Do we want to remove this one?",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 30
+      },
+      "revId": "54baecb614c8fed44be86c399a11968004de7437",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b090311d_d2ed8e3c",
+        "filename": "test/network/network_emulation.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-01-18T10:37:10Z",
+      "side": 1,
+      "message": "Do we want to remove this one?",
+      "range": {
+        "startLine": 470,
+        "startChar": 2,
+        "endLine": 470,
+        "endChar": 30
+      },
+      "revId": "54baecb614c8fed44be86c399a11968004de7437",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
