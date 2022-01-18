@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68c416b7_9a8ac15d",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-18T09:01:06Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "97e07ca0_566b5e7e",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 54
+      },
+      "revId": "e0f2a50d8b652ef781c097473a12c8d8c0925b35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baebdaf6_083f75a8",
         "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
         "patchSetId": 2
