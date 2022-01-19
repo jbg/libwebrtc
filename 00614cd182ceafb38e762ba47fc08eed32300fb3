@@ -46,6 +46,30 @@
       },
       "revId": "00614cd182ceafb38e762ba47fc08eed32300fb3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edd83e69_56c2c989",
+        "filename": "sdk/objc/components/video_codec/RTCVideoDecoderH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 17629
+      },
+      "writtenOn": "2022-01-19T21:42:25Z",
+      "side": 1,
+      "message": "The Metal surface renders on device regardless of these compiler directives, for some reason.\n\nAdded the change to RTCVideoEncoderH264.mm.",
+      "parentUuid": "55cf39bd_a75dcccd",
+      "range": {
+        "startLine": 212,
+        "startChar": 53,
+        "endLine": 212,
+        "endChar": 72
+      },
+      "revId": "00614cd182ceafb38e762ba47fc08eed32300fb3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
