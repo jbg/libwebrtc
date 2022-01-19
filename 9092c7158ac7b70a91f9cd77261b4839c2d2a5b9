@@ -46,6 +46,30 @@
       },
       "revId": "9092c7158ac7b70a91f9cd77261b4839c2d2a5b9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d3091f_d67dd619",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-19T09:02:07Z",
+      "side": 1,
+      "message": "Taken offline.\n\nI will try out a solution where the frame buffer management will be moved into the VideoReceiveStream2 (FrameBufferProxy) and the scheduler will purely handle the timing of the decoding.",
+      "parentUuid": "ff1bad02_01d265c8",
+      "range": {
+        "startLine": 68,
+        "startChar": 17,
+        "endLine": 68,
+        "endChar": 42
+      },
+      "revId": "9092c7158ac7b70a91f9cd77261b4839c2d2a5b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
