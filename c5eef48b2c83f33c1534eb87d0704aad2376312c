@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bef7c72b_6953aef0",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-19T13:05:02Z",
+      "side": 1,
+      "message": "My idea was more along the lines of:\n\n  struct FrameSchedule {\n    rtc::Timestamp decode;\n    rtc::Timestamp render;\n  }\n  absl::optional\u003cFrameSchedule\u003e \n  OnFrameBufferUpdated(uint32_t next_temporal_unit_rtp,\n                       uint32_t last_temporal_unit_rtp);\n\nand then either return decode/render timestamps for the temporal unit or simply return an empty optional if the temporal unit should be dropped. Actually posting of the delaytask can be done in the video receive stream.\n\nWDYT?",
+      "range": {
+        "startLine": 168,
+        "startChar": 7,
+        "endLine": 168,
+        "endChar": 27
+      },
+      "revId": "c5eef48b2c83f33c1534eb87d0704aad2376312c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
