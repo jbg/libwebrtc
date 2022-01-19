@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68f96137_415d5956",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-19T13:51:50Z",
+      "side": 1,
+      "message": "LGTM, some nits",
+      "revId": "fa9eb5cbee3152da467a453bc300d55d31e024c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af31d93f_e7067ff3",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-19T13:51:50Z",
+      "side": 1,
+      "message": "nit:  add the previous comment here:\n// Events are grouped by event type. For compression efficiency,\n// events can optionally have a secondary key, in most cases the\n// SSRC.",
+      "range": {
+        "startLine": 87,
+        "startChar": 13,
+        "endLine": 87,
+        "endChar": 32
+      },
+      "revId": "fa9eb5cbee3152da467a453bc300d55d31e024c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf319e5_c8f79e09",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-19T13:51:50Z",
+      "side": 1,
+      "message": "nit: skip this line imo, can just as well use the value inline.",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 46
+      },
+      "revId": "fa9eb5cbee3152da467a453bc300d55d31e024c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d50d2bfe_3b4a9633",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-19T13:51:50Z",
+      "side": 1,
+      "message": "nit: Can be inlined? If not, rename from encoding to encoded.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 48
+      },
+      "revId": "fa9eb5cbee3152da467a453bc300d55d31e024c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dacf84b_552fe621",
+        "filename": "logging/rtc_event_log/events/rtc_event_definition.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-19T13:51:50Z",
+      "side": 1,
+      "message": "nit: \"log timestamp field is implicitly added for all events.\"\n\nnow it reads like it\u0027s assumed the reader knows about the field, good to phrase it as we\u0027re telling the reader instead.",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 63
+      },
+      "revId": "fa9eb5cbee3152da467a453bc300d55d31e024c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
