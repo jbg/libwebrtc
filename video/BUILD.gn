@@ -287,6 +287,19 @@ rtc_library("frame_cadence_adapter") {
   ]
 }
 
+rtc_library("video_receive_stream_timeout_tracker") {
+  sources = [
+    "video_receive_stream_timeout_tracker.cc",
+    "video_receive_stream_timeout_tracker.h",
+  ]
+  deps = [
+    "../api/task_queue",
+    "../api/units:time_delta",
+    "../rtc_base/task_utils:repeating_task",
+    "../system_wrappers",
+  ]
+}
+
 rtc_library("video_stream_encoder_impl") {
   visibility = [ "*" ]
 
@@ -657,6 +670,7 @@ if (rtc_include_tests) {
       "stats_counter_unittest.cc",
       "stream_synchronization_unittest.cc",
       "video_receive_stream2_unittest.cc",
+      "video_receive_stream_timeout_tracker_unittest.cc",
       "video_send_stream_impl_unittest.cc",
       "video_send_stream_tests.cc",
       "video_source_sink_controller_unittest.cc",
@@ -667,6 +681,7 @@ if (rtc_include_tests) {
       ":frame_cadence_adapter",
       ":video",
       ":video_mocks",
+      ":video_receive_stream_timeout_tracker",
       ":video_stream_decoder_impl",
       ":video_stream_encoder_impl",
       "../api:create_frame_generator",
