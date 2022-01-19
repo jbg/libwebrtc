@@ -15,8 +15,6 @@
 #include "modules/desktop_capture/win/full_screen_win_application_handler.h"
 #endif
 
-#include "rtc_base/ref_counted_object.h"
-
 namespace webrtc {
 
 DesktopCaptureOptions::DesktopCaptureOptions() {}
@@ -38,15 +36,12 @@ DesktopCaptureOptions DesktopCaptureOptions::CreateDefault() {
   result.set_x_display(SharedXDisplay::CreateDefault());
 #endif
 #if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
-  result.set_configuration_monitor(
-      rtc::make_ref_counted<DesktopConfigurationMonitor>());
+  result.set_configuration_monitor(new DesktopConfigurationMonitor());
   result.set_full_screen_window_detector(
-      rtc::make_ref_counted<FullScreenWindowDetector>(
-          CreateFullScreenMacApplicationHandler));
+      new FullScreenWindowDetector(CreateFullScreenMacApplicationHandler));
 #elif defined(WEBRTC_WIN)
   result.set_full_screen_window_detector(
-      rtc::make_ref_counted<FullScreenWindowDetector>(
-          CreateFullScreenWinApplicationHandler));
+      new FullScreenWindowDetector(CreateFullScreenWinApplicationHandler));
 #endif
   return result;
 }

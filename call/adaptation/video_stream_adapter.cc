@@ -375,7 +375,7 @@ VideoStreamAdapter::RestrictionsOrState VideoStreamAdapter::GetAdaptationUpStep(
         return increase_frame_rate;
       }
       // else, increase resolution.
-      [[fallthrough]];
+      ABSL_FALLTHROUGH_INTENDED;
     }
     case DegradationPreference::MAINTAIN_FRAMERATE: {
       // Attempt to increase pixel count.
@@ -459,7 +459,7 @@ VideoStreamAdapter::GetAdaptationDownStep(
         return decrease_frame_rate;
       }
       // else, decrease resolution.
-      [[fallthrough]];
+      ABSL_FALLTHROUGH_INTENDED;
     }
     case DegradationPreference::MAINTAIN_FRAMERATE: {
       return DecreaseResolution(input_state, current_restrictions);

@@ -764,8 +764,7 @@ static ScopedJavaLocalRef<jobject> JNI_PeerConnection_AddTrack(
     const JavaParamRef<jobject>& j_stream_labels) {
   RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>> result =
       ExtractNativePC(jni, j_pc)->AddTrack(
-          rtc::scoped_refptr<MediaStreamTrackInterface>(
-              reinterpret_cast<MediaStreamTrackInterface*>(native_track)),
+          reinterpret_cast<MediaStreamTrackInterface*>(native_track),
           JavaListToNativeVector<std::string, jstring>(jni, j_stream_labels,
                                                        &JavaToNativeString));
   if (!result.ok()) {
@@ -793,8 +792,7 @@ static ScopedJavaLocalRef<jobject> JNI_PeerConnection_AddTransceiverWithTrack(
     const JavaParamRef<jobject>& j_init) {
   RTCErrorOr<rtc::scoped_refptr<RtpTransceiverInterface>> result =
       ExtractNativePC(jni, j_pc)->AddTransceiver(
-          rtc::scoped_refptr<MediaStreamTrackInterface>(
-              reinterpret_cast<MediaStreamTrackInterface*>(native_track)),
+          reinterpret_cast<MediaStreamTrackInterface*>(native_track),
           JavaToNativeRtpTransceiverInit(jni, j_init));
   if (!result.ok()) {
     RTC_LOG(LS_ERROR) << "Failed to add transceiver: "

@@ -176,10 +176,7 @@ VoiceChannel* ChannelManager::CreateVoiceChannel(
       absl::WrapUnique(media_channel), content_name, srtp_required,
       crypto_options, ssrc_generator);
 
-  network_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
-    RTC_DCHECK_RUN_ON(voice_channel->network_thread());
-    voice_channel->Init_n(rtp_transport);
-  });
+  voice_channel->Init_w(rtp_transport);
 
   VoiceChannel* voice_channel_ptr = voice_channel.get();
   voice_channels_.push_back(std::move(voice_channel));
@@ -189,11 +186,6 @@ VoiceChannel* ChannelManager::CreateVoiceChannel(
 void ChannelManager::DestroyVoiceChannel(VoiceChannel* voice_channel) {
   TRACE_EVENT0("webrtc", "ChannelManager::DestroyVoiceChannel");
   RTC_DCHECK(voice_channel);
-
-  network_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
-    RTC_DCHECK_RUN_ON(voice_channel->network_thread());
-    voice_channel->Deinit_n();
-  });
 
   if (!worker_thread_->IsCurrent()) {
     worker_thread_->Invoke<void>(RTC_FROM_HERE,
@@ -248,10 +240,7 @@ VideoChannel* ChannelManager::CreateVideoChannel(
       absl::WrapUnique(media_channel), content_name, srtp_required,
       crypto_options, ssrc_generator);
 
-  network_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
-    RTC_DCHECK_RUN_ON(video_channel->network_thread());
-    video_channel->Init_n(rtp_transport);
-  });
+  video_channel->Init_w(rtp_transport);
 
   VideoChannel* video_channel_ptr = video_channel.get();
   video_channels_.push_back(std::move(video_channel));
@@ -261,11 +250,6 @@ VideoChannel* ChannelManager::CreateVideoChannel(
 void ChannelManager::DestroyVideoChannel(VideoChannel* video_channel) {
   TRACE_EVENT0("webrtc", "ChannelManager::DestroyVideoChannel");
   RTC_DCHECK(video_channel);
-
-  network_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
-    RTC_DCHECK_RUN_ON(video_channel->network_thread());
-    video_channel->Deinit_n();
-  });
 
   if (!worker_thread_->IsCurrent()) {
     worker_thread_->Invoke<void>(RTC_FROM_HERE,

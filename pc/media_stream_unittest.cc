@@ -63,7 +63,7 @@ class MediaStreamTest : public ::testing::Test {
     ASSERT_TRUE(video_track_.get() != NULL);
     EXPECT_EQ(MediaStreamTrackInterface::kLive, video_track_->state());
 
-    audio_track_ = AudioTrack::Create(kAudioTrackId, nullptr);
+    audio_track_ = AudioTrack::Create(kAudioTrackId, NULL);
 
     ASSERT_TRUE(audio_track_.get() != NULL);
     EXPECT_EQ(MediaStreamTrackInterface::kLive, audio_track_->state());

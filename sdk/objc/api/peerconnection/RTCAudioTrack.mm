@@ -48,10 +48,11 @@
 
 - (RTC_OBJC_TYPE(RTCAudioSource) *)source {
   if (!_source) {
-    rtc::scoped_refptr<webrtc::AudioSourceInterface> source(self.nativeAudioTrack->GetSource());
+    rtc::scoped_refptr<webrtc::AudioSourceInterface> source =
+        self.nativeAudioTrack->GetSource();
     if (source) {
       _source = [[RTC_OBJC_TYPE(RTCAudioSource) alloc] initWithFactory:self.factory
-                                                     nativeAudioSource:source];
+                                                     nativeAudioSource:source.get()];
     }
   }
   return _source;
@@ -60,8 +61,7 @@
 #pragma mark - Private
 
 - (rtc::scoped_refptr<webrtc::AudioTrackInterface>)nativeAudioTrack {
-  return rtc::scoped_refptr<webrtc::AudioTrackInterface>(
-      static_cast<webrtc::AudioTrackInterface *>(self.nativeTrack.get()));
+  return static_cast<webrtc::AudioTrackInterface *>(self.nativeTrack.get());
 }
 
 @end

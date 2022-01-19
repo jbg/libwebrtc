@@ -143,7 +143,7 @@ rtc::scoped_refptr<I444Buffer> VideoFrameBufferPool::CreateI444Buffer(
     return nullptr;
   // Allocate new buffer.
   rtc::scoped_refptr<I444Buffer> buffer =
-      rtc::make_ref_counted<I444Buffer>(width, height);
+      new rtc::RefCountedObject<I444Buffer>(width, height);
 
   if (zero_initialize_)
     buffer->InitializeData();

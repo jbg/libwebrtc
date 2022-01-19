@@ -265,7 +265,7 @@ void CreateOfferObserver::OnSuccess(webrtc::SessionDescriptionInterface* desc) {
       webrtc::CreateSessionDescription(webrtc::SdpType::kAnswer, sdp));
   pc_->SetRemoteDescription(
       std::move(answer),
-      rtc::make_ref_counted<SetRemoteSessionDescriptionObserver>());
+      new rtc::RefCountedObject<SetRemoteSessionDescriptionObserver>());
 }
 
 void CreateOfferObserver::OnFailure(webrtc::RTCError error) {

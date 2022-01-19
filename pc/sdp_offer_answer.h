@@ -232,14 +232,10 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
       std::unique_ptr<SessionDescriptionInterface> desc,
       const std::map<std::string, const cricket::ContentGroup*>&
           bundle_groups_by_mid);
-  void ApplyRemoteDescription(
-      std::unique_ptr<RemoteDescriptionOperation> operation);
-
-  RTCError ReplaceRemoteDescription(
+  RTCError ApplyRemoteDescription(
       std::unique_ptr<SessionDescriptionInterface> desc,
-      SdpType sdp_type,
-      std::unique_ptr<SessionDescriptionInterface>* replaced_description)
-      RTC_RUN_ON(signaling_thread());
+      const std::map<std::string, const cricket::ContentGroup*>&
+          bundle_groups_by_mid);
 
   // Part of ApplyRemoteDescription steps specific to Unified Plan.
   void ApplyRemoteDescriptionUpdateTransceiverState(SdpType sdp_type);
@@ -500,11 +496,9 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
   // exist.
   void UpdateEndedRemoteMediaStreams();
 
-  // Uses all remote candidates in the currently set remote_description().
-  // If no remote description is currently set (nullptr), the return value will
-  // be true. If `UseCandidate()` fails for any candidate in the remote
-  // description, the return value will be false.
-  bool UseCandidatesInRemoteDescription();
+  // Uses all remote candidates in `remote_desc` in this session.
+  bool UseCandidatesInSessionDescription(
+      const SessionDescriptionInterface* remote_desc);
   // Uses `candidate` in this session.
   bool UseCandidate(const IceCandidateInterface* candidate);
   // Returns true if we are ready to push down the remote candidate.
