@@ -22,6 +22,30 @@
       },
       "revId": "00614cd182ceafb38e762ba47fc08eed32300fb3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55cf39bd_a75dcccd",
+        "filename": "sdk/objc/components/video_codec/RTCVideoDecoderH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 17904
+      },
+      "writtenOn": "2022-01-19T19:28:15Z",
+      "side": 1,
+      "message": "At one point WebRTC supported versions of iOS that didn\u0027t have Metal, and if that\u0027s still true we might need a more complicated condition here. That isn\u0027t true for Catalyst, which is good because neither OpenGL or OpenGLES are available in Catalyst.\n\nHowever, I updated this for Catalyst just so that we\u0027d pass *something* but I don\u0027t actually know how any of it works. It\u0027s definitely underdocumented, and from what I could glean I don\u0027t think WebRTC is using it in a meaningful way at all. I didn\u0027t want to rock the boat more than I needed to, though. (Anders, if you\u0027re still at Apple maybe you can poke the right people?)",
+      "parentUuid": "90fa5942_4f1ad63e",
+      "range": {
+        "startLine": 212,
+        "startChar": 53,
+        "endLine": 212,
+        "endChar": 72
+      },
+      "revId": "00614cd182ceafb38e762ba47fc08eed32300fb3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
