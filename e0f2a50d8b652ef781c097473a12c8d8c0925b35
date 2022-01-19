@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "312a4113_d94c6aa6",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-01-19T13:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68c416b7_9a8ac15d",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 54
+      },
+      "revId": "e0f2a50d8b652ef781c097473a12c8d8c0925b35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baebdaf6_083f75a8",

@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f67e8e0_c1006763",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_v3.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-01-19T13:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2e949af_33ded4ed",
+      "range": {
+        "startLine": 136,
+        "startChar": 2,
+        "endLine": 136,
+        "endChar": 49
+      },
+      "revId": "9d40d9d92afda4f6ceda27c86a069a853bd61652",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b42ea57_1b1e007e",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-18T09:01:06Z",
       "side": 1,
       "message": "maybe a short comment on purpose and structure?",
+      "range": {
+        "startLine": 81,
+        "startChar": 6,
+        "endLine": 81,
+        "endChar": 24
+      },
+      "revId": "9d40d9d92afda4f6ceda27c86a069a853bd61652",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac72c786_5a99ff27",
+        "filename": "logging/rtc_event_log/events/rtc_event_definition.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-01-19T13:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b42ea57_1b1e007e",
       "range": {
         "startLine": 81,
         "startChar": 6,
