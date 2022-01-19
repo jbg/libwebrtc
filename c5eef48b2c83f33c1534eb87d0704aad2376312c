@@ -22,6 +22,30 @@
       },
       "revId": "c5eef48b2c83f33c1534eb87d0704aad2376312c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "175f3304_cb5e669f",
+        "filename": "modules/video_coding/frame_scheduler.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-19T14:29:22Z",
+      "side": 1,
+      "message": "The idea is that this class will be merged into FrameBufferProxy so this method will not exist. I like the idea of this frame timing helper though, it would make things even simpler, separating the Task scheduling from the VCMTiming logic.",
+      "parentUuid": "bef7c72b_6953aef0",
+      "range": {
+        "startLine": 168,
+        "startChar": 7,
+        "endLine": 168,
+        "endChar": 27
+      },
+      "revId": "c5eef48b2c83f33c1534eb87d0704aad2376312c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
