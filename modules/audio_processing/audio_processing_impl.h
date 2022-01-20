@@ -413,10 +413,10 @@ class AudioProcessingImpl : public AudioProcessing {
   struct ApmFormatState {
     ApmFormatState()
         :  // Format of processing streams at input/output call sites.
-          api_format({{{kSampleRate16kHz, 1, false},
-                       {kSampleRate16kHz, 1, false},
-                       {kSampleRate16kHz, 1, false},
-                       {kSampleRate16kHz, 1, false}}}),
+          api_format({{{kSampleRate16kHz, 1},
+                       {kSampleRate16kHz, 1},
+                       {kSampleRate16kHz, 1},
+                       {kSampleRate16kHz, 1}}}),
           render_processing_format(kSampleRate16kHz, 1) {}
     ProcessingConfig api_format;
     StreamConfig render_processing_format;

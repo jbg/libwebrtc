@@ -51,20 +51,6 @@ namespace webrtc {
 
 namespace {
 
-static bool LayoutHasKeyboard(AudioProcessing::ChannelLayout layout) {
-  switch (layout) {
-    case AudioProcessing::kMono:
-    case AudioProcessing::kStereo:
-      return false;
-    case AudioProcessing::kMonoAndKeyboard:
-    case AudioProcessing::kStereoAndKeyboard:
-      return true;
-  }
-
-  RTC_DCHECK_NOTREACHED();
-  return false;
-}
-
 bool SampleRateSupportsMultiBand(int sample_rate_hz) {
   return sample_rate_hz == AudioProcessing::kSampleRate32kHz ||
          sample_rate_hz == AudioProcessing::kSampleRate48kHz;
@@ -319,15 +305,11 @@ int AudioProcessingImpl::Initialize(int capture_input_sample_rate_hz,
                                     ChannelLayout capture_output_layout,
                                     ChannelLayout render_input_layout) {
   const ProcessingConfig processing_config = {
-      {{capture_input_sample_rate_hz, ChannelsFromLayout(capture_input_layout),
-        LayoutHasKeyboard(capture_input_layout)},
+      {{capture_input_sample_rate_hz, ChannelsFromLayout(capture_input_layout)},
        {capture_output_sample_rate_hz,
-        ChannelsFromLayout(capture_output_layout),
-        LayoutHasKeyboard(capture_output_layout)},
-       {render_input_sample_rate_hz, ChannelsFromLayout(render_input_layout),
-        LayoutHasKeyboard(render_input_layout)},
-       {render_input_sample_rate_hz, ChannelsFromLayout(render_input_layout),
-        LayoutHasKeyboard(render_input_layout)}}};
+        ChannelsFromLayout(capture_output_layout)},
+       {render_input_sample_rate_hz, ChannelsFromLayout(render_input_layout)},
+       {render_input_sample_rate_hz, ChannelsFromLayout(render_input_layout)}}};
 
   return Initialize(processing_config);
 }
@@ -2165,11 +2147,7 @@ AudioProcessingImpl::ApmCaptureState::~ApmCaptureState() = default;
 void AudioProcessingImpl::ApmCaptureState::KeyboardInfo::Extract(
     const float* const* data,
     const StreamConfig& stream_config) {
-  if (stream_config.has_keyboard()) {
-    keyboard_data = data[stream_config.num_channels()];
-  } else {
-    keyboard_data = NULL;
-  }
+  keyboard_data = NULL;
   num_keyboard_frames = stream_config.num_frames();
 }
 
