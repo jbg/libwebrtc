@@ -258,6 +258,16 @@ void ChannelManager::DestroyVideoChannel(VideoChannel* video_channel) {
       }));
 }
 
+void ChannelManager::DestroyChannel(ChannelInterface* channel) {
+  RTC_DCHECK(channel);
+  if (channel->media_type() == MEDIA_TYPE_AUDIO) {
+    DestroyVoiceChannel(static_cast<VoiceChannel*>(channel));
+  } else {
+    RTC_DCHECK_EQ(channel->media_type(), MEDIA_TYPE_VIDEO);
+    DestroyVideoChannel(static_cast<VideoChannel*>(channel));
+  }
+}
+
 bool ChannelManager::StartAecDump(webrtc::FileWrapper file,
                                   int64_t max_size_bytes) {
   RTC_DCHECK_RUN_ON(worker_thread_);
