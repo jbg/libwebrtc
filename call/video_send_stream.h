@@ -191,7 +191,7 @@ class VideoSendStream {
     rtc::scoped_refptr<webrtc::FrameEncryptorInterface> frame_encryptor;
 
     // Per PeerConnection cryptography options.
-    CryptoOptions crypto_options;
+    // CryptoOptions crypto_options;
 
     rtc::scoped_refptr<webrtc::FrameTransformerInterface> frame_transformer;
 

@@ -42,7 +42,9 @@ class DecryptedFrameObserver : public test::EndToEndTest,
     send_config->rtp.payload_name = "VP8";
     send_config->rtp.payload_type = test::CallTest::kVideoSendPayloadType;
     send_config->frame_encryptor = new FakeFrameEncryptor();
+#if 0
     send_config->crypto_options.sframe.require_frame_encryption = true;
+#endif
     encoder_config->codec_type = kVideoCodecVP8;
     VideoReceiveStream::Decoder decoder =
         test::CreateMatchingDecoder(*send_config);

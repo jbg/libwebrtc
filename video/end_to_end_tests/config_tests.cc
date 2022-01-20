@@ -62,10 +62,12 @@ TEST_F(ConfigEndToEndTest, VerifyDefaultSendConfigParameters) {
       << "Enabling RTP extensions require negotiation.";
   EXPECT_EQ(nullptr, default_send_config.frame_encryptor)
       << "Enabling Frame Encryption requires a frame encryptor to be attached";
+#if 0
   EXPECT_FALSE(
       default_send_config.crypto_options.sframe.require_frame_encryption)
       << "Enabling Require Frame Encryption means an encryptor must be "
          "attached";
+#endif
 
   VerifyEmptyNackConfig(default_send_config.rtp.nack);
   VerifyEmptyUlpfecConfig(default_send_config.rtp.ulpfec);

@@ -1371,7 +1371,9 @@ bool WebRtcVideoChannel::AddSendStream(const StreamParams& sp) {
   config.encoder_settings.bitrate_allocator_factory =
       bitrate_allocator_factory_;
   config.encoder_settings.encoder_switch_request_callback = this;
+#if 0
   config.crypto_options = crypto_options_;
+#endif
   config.rtp.extmap_allow_mixed = ExtmapAllowMixed();
   config.rtcp_report_interval_ms = video_config_.rtcp_report_interval_ms;
 
