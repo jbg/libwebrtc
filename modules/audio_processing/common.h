@@ -23,10 +23,8 @@ constexpr int RuntimeSettingQueueSize() {
 static inline size_t ChannelsFromLayout(AudioProcessing::ChannelLayout layout) {
   switch (layout) {
     case AudioProcessing::kMono:
-    case AudioProcessing::kMonoAndKeyboard:
       return 1;
     case AudioProcessing::kStereo:
-    case AudioProcessing::kStereoAndKeyboard:
       return 2;
   }
   RTC_DCHECK_NOTREACHED();
