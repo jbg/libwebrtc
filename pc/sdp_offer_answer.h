@@ -682,14 +682,6 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
   cricket::AudioOptions audio_options_ RTC_GUARDED_BY(signaling_thread());
   cricket::VideoOptions video_options_ RTC_GUARDED_BY(signaling_thread());
 
-  // This object should be used to generate any SSRC that is not explicitly
-  // specified by the user (or by the remote party).
-  // The generator is not used directly, instead it is passed on to the
-  // channel manager and the session description factory.
-  // TODO(bugs.webrtc.org/12666): This variable is used from both the signaling
-  // and worker threads. See if we can't restrict usage to a single thread.
-  rtc::UniqueRandomIdGenerator ssrc_generator_;
-
   // A video bitrate allocator factory.
   // This can be injected using the PeerConnectionDependencies,
   // or else the CreateBuiltinVideoBitrateAllocatorFactory() will be called.

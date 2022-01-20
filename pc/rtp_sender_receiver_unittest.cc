@@ -124,12 +124,11 @@ class RtpSenderReceiverTest
     voice_channel_ = channel_manager_->CreateVoiceChannel(
         &fake_call_, cricket::MediaConfig(), rtc::Thread::Current(),
         cricket::CN_AUDIO, srtp_required, webrtc::CryptoOptions(),
-        &ssrc_generator_, cricket::AudioOptions());
+        cricket::AudioOptions());
     video_channel_ = channel_manager_->CreateVideoChannel(
         &fake_call_, cricket::MediaConfig(), rtc::Thread::Current(),
         cricket::CN_VIDEO, srtp_required, webrtc::CryptoOptions(),
-        &ssrc_generator_, cricket::VideoOptions(),
-        video_bitrate_allocator_factory_.get());
+        cricket::VideoOptions(), video_bitrate_allocator_factory_.get());
 
     voice_channel_->SetRtpTransport(rtp_transport_.get());
     video_channel_->SetRtpTransport(rtp_transport_.get());
@@ -542,7 +541,6 @@ class RtpSenderReceiverTest
   rtc::scoped_refptr<VideoTrackInterface> video_track_;
   rtc::scoped_refptr<AudioTrackInterface> audio_track_;
   bool audio_sender_destroyed_signal_fired_ = false;
-  rtc::UniqueRandomIdGenerator ssrc_generator_;
 };
 
 // Test that `voice_channel_` is updated when an audio track is associated
