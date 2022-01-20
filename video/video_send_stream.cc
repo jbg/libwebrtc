@@ -67,9 +67,13 @@ GetBitrateAllocationCallbackType(const VideoSendStream::Config& config) {
   if (webrtc::RtpExtension::FindHeaderExtensionByUri(
           config.rtp.extensions,
           webrtc::RtpExtension::kVideoLayersAllocationUri,
+#if 1
+          RtpExtension::Filter::kPreferEncryptedExtension)) {
+#else
           config.crypto_options.srtp.enable_encrypted_rtp_header_extensions
               ? RtpExtension::Filter::kPreferEncryptedExtension
               : RtpExtension::Filter::kDiscardEncryptedExtension)) {
+#endif
     return VideoStreamEncoder::BitrateAllocationCallbackType::
         kVideoLayersAllocation;
   }
@@ -85,7 +89,9 @@ RtpSenderFrameEncryptionConfig CreateFrameEncryptionConfig(
     const VideoSendStream::Config* config) {
   RtpSenderFrameEncryptionConfig frame_encryption_config;
   frame_encryption_config.frame_encryptor = config->frame_encryptor;
+#if 0
   frame_encryption_config.crypto_options = config->crypto_options;
+#endif
   return frame_encryption_config;
 }
 
