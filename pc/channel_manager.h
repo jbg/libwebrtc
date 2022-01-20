@@ -43,7 +43,7 @@ namespace cricket {
 // voice or just video channels.
 // ChannelManager also allows the application to discover what devices it has
 // using device manager.
-class ChannelManager final {
+class ChannelManager final : public ChannelFactoryInterface {
  public:
   // Returns an initialized instance of ChannelManager.
   // If media_engine is non-nullptr, then the returned ChannelManager instance
@@ -55,7 +55,7 @@ class ChannelManager final {
       rtc::Thread* network_thread);
 
   ChannelManager() = delete;
-  ~ChannelManager();
+  ~ChannelManager() override;
 
   rtc::Thread* worker_thread() const { return worker_thread_; }
   rtc::Thread* network_thread() const { return network_thread_; }
@@ -86,7 +86,7 @@ class ChannelManager final {
                                    bool srtp_required,
                                    const webrtc::CryptoOptions& crypto_options,
                                    rtc::UniqueRandomIdGenerator* ssrc_generator,
-                                   const AudioOptions& options);
+                                   const AudioOptions& options) override;
   // Destroys a voice channel created by CreateVoiceChannel.
   void DestroyVoiceChannel(VoiceChannel* voice_channel);
 
@@ -102,9 +102,12 @@ class ChannelManager final {
       const webrtc::CryptoOptions& crypto_options,
       rtc::UniqueRandomIdGenerator* ssrc_generator,
       const VideoOptions& options,
-      webrtc::VideoBitrateAllocatorFactory* video_bitrate_allocator_factory);
+      webrtc::VideoBitrateAllocatorFactory* video_bitrate_allocator_factory)
+      override;
   // Destroys a video channel created by CreateVideoChannel.
   void DestroyVideoChannel(VideoChannel* video_channel);
+
+  void DestroyChannel(ChannelInterface* channel) override;
 
   // Starts AEC dump using existing file, with a specified maximum file size in
   // bytes. When the limit is reached, logging will stop and the file will be
