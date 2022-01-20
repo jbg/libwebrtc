@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfe25a19_a26d6d9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-01-20T19:49:05Z",
+      "side": 1,
+      "message": "I\u0027m not sure there are other stuff to remove, cannot find any references to this test in the README files.\nAlso I\u0027m not even sure this test should be removed.",
+      "revId": "2e8758984746a8bc3552376c1544b29c6075d720",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
