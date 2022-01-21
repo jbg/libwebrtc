@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '2962054fb0bddb248f7b3bace990ea7d5559903d',
+  'chromium_revision': 'a32abc0e979c64dfeccae3a170823b760ce54507',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -23,7 +23,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@e622bde14a09d4b2a7c4164711d9113787d11be8',
+    'https://chromium.googlesource.com/chromium/src/base@137c4a56eab65515d7e2eb841113fb9ceef585ae',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@906b90c327abe9b4280ab4f18e5059cabe639dcf',
   'src/buildtools':
@@ -40,7 +40,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@9ef62302b2e67278101622758ce95f7968960f18',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@b4a203e0e471ce9c4007d56428a9679ddddcda6b',
+    'https://chromium.googlesource.com/chromium/src/third_party@797f35729b3c8d58107c59849dbad605c24e78ff',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -149,7 +149,7 @@ deps = {
   'src/third_party/crc32c/src':
     'https://chromium.googlesource.com/external/github.com/google/crc32c.git@fa5ade41ee480003d9c5af6f43567ba22e4e17e6',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@b8f1ca305854ce7fe7d9310dd3c166b68db369e1',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@6bfbe35cce2380773e38bd622b35caed86d8aec0',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@1edb3eb4914e0545e9775939ead4a5795746f993',
   'src/third_party/findbugs': {
@@ -285,7 +285,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@7f4059797720b5cbe1e592acb9ef0e76e1d70af2',
+    'https://chromium.googlesource.com/chromium/src/tools@84e594ecc5053f7a911e996ec592e04faace5fc3',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
