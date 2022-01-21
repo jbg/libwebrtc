@@ -1269,6 +1269,10 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
     }
   }
 
+  if (submodules_.transient_suppressor) {
+    submodules_.transient_suppressor->AnalyzeUnprocessed(*capture_buffer);
+  }
+
   if (submodules_.gain_control) {
     // TODO(peah): Add reporting from AEC3 whether there is echo.
     RETURN_ON_ERR(submodules_.gain_control->ProcessCaptureAudio(

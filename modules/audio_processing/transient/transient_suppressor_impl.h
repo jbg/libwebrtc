@@ -16,6 +16,7 @@
 
 #include <memory>
 
+#include "modules/audio_processing/audio_buffer.h"
 #include "modules/audio_processing/transient/transient_suppressor.h"
 #include "rtc_base/gtest_prod_util.h"
 
@@ -34,6 +35,10 @@ class TransientSuppressorImpl : public TransientSuppressor {
                  int detector_rate_hz,
                  int num_channels) override;
 
+  // Analyzes the unprocessed audio. Must be called before `Suppress()` or the
+  // transient suppression behavior will be undefined.
+  void AnalyzeUnprocessed(const AudioBuffer& audio) override;
+
   // Processes a `data` chunk, and returns it with keystrokes suppressed from
   // it. The float format is assumed to be int16 ranged. If there are more than
   // one channel, the chunks are concatenated one after the other in `data`.
@@ -51,6 +56,7 @@ class TransientSuppressorImpl : public TransientSuppressor {
   // always be set to 1.
   // `key_pressed` determines if a key was pressed on this audio chunk.
   // Returns 0 on success and -1 otherwise.
+  // TODO(): Remove `voice_probability`.
   int Suppress(float* data,
                size_t data_length,
                int num_channels,
@@ -67,7 +73,7 @@ class TransientSuppressorImpl : public TransientSuppressor {
   void Suppress(float* in_ptr, float* spectral_mean, float* out_ptr);
 
   void UpdateKeypress(bool key_pressed);
-  void UpdateRestoration(float voice_probability);
+  void UpdateRestoration(bool is_silence);
 
   void UpdateBuffers(float* data);
 
@@ -75,6 +81,11 @@ class TransientSuppressorImpl : public TransientSuppressor {
   void SoftRestoration(float* spectral_mean);
 
   std::unique_ptr<TransientDetector> detector_;
+
+  // When true, the `voice_probability` argument passed to
+  // `TransientSuppressorImpl::Suppress()` is ignored and `is_silence_` is used.
+  const bool use_silence_detector_;
+  bool is_silence_;
 
   size_t data_length_;
   size_t detection_length_;
