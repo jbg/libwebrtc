@@ -1223,7 +1223,7 @@ void SdpOfferAnswerHandler::Initialize(
       std::make_unique<WebRtcSessionDescriptionFactory>(
           signaling_thread(), channel_manager(), this, pc_->session_id(),
           pc_->dtls_enabled(), std::move(dependencies.cert_generator),
-          certificate, &ssrc_generator_,
+          certificate,
           [this](const rtc::scoped_refptr<rtc::RTCCertificate>& certificate) {
             transport_controller()->SetLocalCertificate(certificate);
           });
@@ -4760,9 +4760,8 @@ cricket::VoiceChannel* SdpOfferAnswerHandler::CreateVoiceChannel(
   // worker thread. We shouldn't be using the `call_ptr_` hack here but simply
   // be on the worker thread and use `call_` (update upstream code).
   return channel_manager()->CreateVoiceChannel(
-      pc_->call_ptr(), pc_->configuration()->media_config, signaling_thread(),
-      mid, pc_->SrtpRequired(), pc_->GetCryptoOptions(), &ssrc_generator_,
-      audio_options());
+      pc_->call_ptr(), pc_->configuration()->media_config, mid,
+      pc_->SrtpRequired(), pc_->GetCryptoOptions(), audio_options());
 }
 
 // TODO(steveanton): Perhaps this should be managed by the RtpTransceiver.
@@ -4777,9 +4776,9 @@ cricket::VideoChannel* SdpOfferAnswerHandler::CreateVideoChannel(
   // worker thread. We shouldn't be using the `call_ptr_` hack here but simply
   // be on the worker thread and use `call_` (update upstream code).
   return channel_manager()->CreateVideoChannel(
-      pc_->call_ptr(), pc_->configuration()->media_config, signaling_thread(),
-      mid, pc_->SrtpRequired(), pc_->GetCryptoOptions(), &ssrc_generator_,
-      video_options(), video_bitrate_allocator_factory_.get());
+      pc_->call_ptr(), pc_->configuration()->media_config, mid,
+      pc_->SrtpRequired(), pc_->GetCryptoOptions(), video_options(),
+      video_bitrate_allocator_factory_.get());
 }
 
 bool SdpOfferAnswerHandler::CreateDataChannel(const std::string& mid) {
@@ -4856,30 +4855,12 @@ void SdpOfferAnswerHandler::DestroyChannelInterface(
   RTC_DCHECK(channel_manager()->media_engine());
   RTC_DCHECK(channel);
 
-  // TODO(bugs.webrtc.org/11992): All the below methods should be called on the
-  // worker thread. (they switch internally anyway). Change
-  // DestroyChannelInterface to either be called on the worker thread, or do
-  // this asynchronously on the worker.
+  // TODO(bugs.webrtc.org/11992): All the below method should be called on the
+  // worker thread (it switches internally anyway). Change to either be called
+  // on the worker thread, or do this asynchronously on the worker.
   RTC_LOG_THREAD_BLOCK_COUNT();
 
-  switch (channel->media_type()) {
-    case cricket::MEDIA_TYPE_AUDIO:
-      channel_manager()->DestroyVoiceChannel(
-          static_cast<cricket::VoiceChannel*>(channel));
-      break;
-    case cricket::MEDIA_TYPE_VIDEO:
-      channel_manager()->DestroyVideoChannel(
-          static_cast<cricket::VideoChannel*>(channel));
-      break;
-    case cricket::MEDIA_TYPE_DATA:
-      RTC_DCHECK_NOTREACHED()
-          << "Trying to destroy datachannel through DestroyChannelInterface";
-      break;
-    default:
-      RTC_DCHECK_NOTREACHED()
-          << "Unknown media type: " << channel->media_type();
-      break;
-  }
+  channel_manager()->DestroyChannel(channel);
 
   // TODO(tommi): Figure out why we can get 2 blocking calls when running
   // PeerConnectionCryptoTest.CreateAnswerWithDifferentSslRoles.
