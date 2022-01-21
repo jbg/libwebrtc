@@ -53,11 +53,25 @@ ChannelManager::ChannelManager(
       enable_rtx_(enable_rtx) {
   RTC_DCHECK(worker_thread_);
   RTC_DCHECK(network_thread_);
-  RTC_DCHECK_RUN_ON(worker_thread_);
+
+  if (media_engine_) {
+    // TODO(tommi): Change VoiceEngine to do ctor time initialization so that
+    // this isn't necessary.
+    worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] { media_engine_->Init(); });
+  }
 }
 
 ChannelManager::~ChannelManager() {
-  RTC_DCHECK_RUN_ON(worker_thread_);
+  if (media_engine_) {
+    // While `media_engine_` is const throughout the ChannelManager's lifetime,
+    // it requires destruction to happen on the worker thread. Instead of
+    // marking the pointer as non-const, we live with this const_cast<> in the
+    // destructor.
+    worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
+      const_cast<std::unique_ptr<MediaEngineInterface>&>(media_engine_).reset();
+    });
+  }
+
   RTC_DCHECK(voice_channels_.empty());
   RTC_DCHECK(video_channels_.empty());
 }
@@ -147,7 +161,6 @@ VoiceChannel* ChannelManager::CreateVoiceChannel(
     const std::string& content_name,
     bool srtp_required,
     const webrtc::CryptoOptions& crypto_options,
-    rtc::UniqueRandomIdGenerator* ssrc_generator,
     const AudioOptions& options) {
   RTC_DCHECK(call);
   RTC_DCHECK(media_engine_);
@@ -158,7 +171,7 @@ VoiceChannel* ChannelManager::CreateVoiceChannel(
     return worker_thread_->Invoke<VoiceChannel*>(RTC_FROM_HERE, [&] {
       return CreateVoiceChannel(call, media_config, signaling_thread,
                                 content_name, srtp_required, crypto_options,
-                                ssrc_generator, options);
+                                options);
     });
   }
 
@@ -173,7 +186,7 @@ VoiceChannel* ChannelManager::CreateVoiceChannel(
   auto voice_channel = std::make_unique<VoiceChannel>(
       worker_thread_, network_thread_, signaling_thread,
       absl::WrapUnique(media_channel), content_name, srtp_required,
-      crypto_options, ssrc_generator);
+      crypto_options, &ssrc_generator_);
 
   VoiceChannel* voice_channel_ptr = voice_channel.get();
   voice_channels_.push_back(std::move(voice_channel));
@@ -205,7 +218,6 @@ VideoChannel* ChannelManager::CreateVideoChannel(
     const std::string& content_name,
     bool srtp_required,
     const webrtc::CryptoOptions& crypto_options,
-    rtc::UniqueRandomIdGenerator* ssrc_generator,
     const VideoOptions& options,
     webrtc::VideoBitrateAllocatorFactory* video_bitrate_allocator_factory) {
   RTC_DCHECK(call);
@@ -217,8 +229,7 @@ VideoChannel* ChannelManager::CreateVideoChannel(
     return worker_thread_->Invoke<VideoChannel*>(RTC_FROM_HERE, [&] {
       return CreateVideoChannel(call, media_config, signaling_thread,
                                 content_name, srtp_required, crypto_options,
-                                ssrc_generator, options,
-                                video_bitrate_allocator_factory);
+                                options, video_bitrate_allocator_factory);
     });
   }
 
@@ -234,7 +245,7 @@ VideoChannel* ChannelManager::CreateVideoChannel(
   auto video_channel = std::make_unique<VideoChannel>(
       worker_thread_, network_thread_, signaling_thread,
       absl::WrapUnique(media_channel), content_name, srtp_required,
-      crypto_options, ssrc_generator);
+      crypto_options, &ssrc_generator_);
 
   VideoChannel* video_channel_ptr = video_channel.get();
   video_channels_.push_back(std::move(video_channel));
@@ -256,6 +267,16 @@ void ChannelManager::DestroyVideoChannel(VideoChannel* video_channel) {
       video_channels_, [&](const std::unique_ptr<VideoChannel>& p) {
         return p.get() == video_channel;
       }));
+}
+
+void ChannelManager::DestroyChannel(ChannelInterface* channel) {
+  RTC_DCHECK(channel);
+  if (channel->media_type() == MEDIA_TYPE_AUDIO) {
+    DestroyVoiceChannel(static_cast<VoiceChannel*>(channel));
+  } else {
+    RTC_DCHECK_EQ(channel->media_type(), MEDIA_TYPE_VIDEO);
+    DestroyVideoChannel(static_cast<VideoChannel*>(channel));
+  }
 }
 
 bool ChannelManager::StartAecDump(webrtc::FileWrapper file,

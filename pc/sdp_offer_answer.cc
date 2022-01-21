@@ -1223,7 +1223,7 @@ void SdpOfferAnswerHandler::Initialize(
       std::make_unique<WebRtcSessionDescriptionFactory>(
           signaling_thread(), channel_manager(), this, pc_->session_id(),
           pc_->dtls_enabled(), std::move(dependencies.cert_generator),
-          certificate, &ssrc_generator_,
+          certificate,
           [this](const rtc::scoped_refptr<rtc::RTCCertificate>& certificate) {
             transport_controller()->SetLocalCertificate(certificate);
           });
@@ -4761,8 +4761,7 @@ cricket::VoiceChannel* SdpOfferAnswerHandler::CreateVoiceChannel(
   // be on the worker thread and use `call_` (update upstream code).
   return channel_manager()->CreateVoiceChannel(
       pc_->call_ptr(), pc_->configuration()->media_config, signaling_thread(),
-      mid, pc_->SrtpRequired(), pc_->GetCryptoOptions(), &ssrc_generator_,
-      audio_options());
+      mid, pc_->SrtpRequired(), pc_->GetCryptoOptions(), audio_options());
 }
 
 // TODO(steveanton): Perhaps this should be managed by the RtpTransceiver.
@@ -4778,8 +4777,8 @@ cricket::VideoChannel* SdpOfferAnswerHandler::CreateVideoChannel(
   // be on the worker thread and use `call_` (update upstream code).
   return channel_manager()->CreateVideoChannel(
       pc_->call_ptr(), pc_->configuration()->media_config, signaling_thread(),
-      mid, pc_->SrtpRequired(), pc_->GetCryptoOptions(), &ssrc_generator_,
-      video_options(), video_bitrate_allocator_factory_.get());
+      mid, pc_->SrtpRequired(), pc_->GetCryptoOptions(), video_options(),
+      video_bitrate_allocator_factory_.get());
 }
 
 bool SdpOfferAnswerHandler::CreateDataChannel(const std::string& mid) {

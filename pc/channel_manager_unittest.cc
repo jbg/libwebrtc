@@ -71,14 +71,13 @@ class ChannelManagerTest : public ::testing::Test {
     cricket::VoiceChannel* voice_channel = cm_->CreateVoiceChannel(
         &fake_call_, cricket::MediaConfig(), rtc::Thread::Current(),
         cricket::CN_AUDIO, kDefaultSrtpRequired, webrtc::CryptoOptions(),
-        &ssrc_generator_, AudioOptions());
+        AudioOptions());
     ASSERT_TRUE(voice_channel != nullptr);
 
     cricket::VideoChannel* video_channel = cm_->CreateVideoChannel(
         &fake_call_, cricket::MediaConfig(), rtc::Thread::Current(),
         cricket::CN_VIDEO, kDefaultSrtpRequired, webrtc::CryptoOptions(),
-        &ssrc_generator_, VideoOptions(),
-        video_bitrate_allocator_factory_.get());
+        VideoOptions(), video_bitrate_allocator_factory_.get());
     ASSERT_TRUE(video_channel != nullptr);
 
     cm_->DestroyVideoChannel(video_channel);
@@ -91,7 +90,6 @@ class ChannelManagerTest : public ::testing::Test {
       video_bitrate_allocator_factory_;
   std::unique_ptr<cricket::ChannelManager> cm_;
   cricket::FakeCall fake_call_;
-  rtc::UniqueRandomIdGenerator ssrc_generator_;
 };
 
 TEST_F(ChannelManagerTest, SetVideoRtxEnabled) {
