@@ -10,6 +10,7 @@ import("../../../webrtc.gni")
 
 rtc_source_set("transient_suppressor_api") {
   sources = [ "transient_suppressor.h" ]
+  deps = [ "..:audio_buffer" ]
 }
 
 rtc_library("transient_suppressor_impl") {
@@ -37,6 +38,7 @@ rtc_library("transient_suppressor_impl") {
   ]
   deps = [
     ":transient_suppressor_api",
+    "..:audio_buffer",
     "../../../common_audio:common_audio",
     "../../../common_audio:common_audio_c",
     "../../../common_audio:fir_filter",
@@ -45,6 +47,7 @@ rtc_library("transient_suppressor_impl") {
     "../../../rtc_base:checks",
     "../../../rtc_base:gtest_prod",
     "../../../rtc_base:logging",
+    "../../../system_wrappers:field_trial",
   ]
 }
 

@@ -22,17 +22,18 @@
 #include "common_audio/include/audio_util.h"
 #include "common_audio/signal_processing/include/signal_processing_library.h"
 #include "common_audio/third_party/ooura/fft_size_256/fft4g.h"
+#include "modules/audio_processing/audio_buffer.h"
 #include "modules/audio_processing/transient/common.h"
 #include "modules/audio_processing/transient/transient_detector.h"
 #include "modules/audio_processing/transient/transient_suppressor.h"
 #include "modules/audio_processing/transient/windows_private.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 
 static const float kMeanIIRCoefficient = 0.5f;
-static const float kVoiceThreshold = 0.02f;
 
 // TODO(aluebs): Check if these values work also for 48kHz.
 static const size_t kMinVoiceBin = 3;
@@ -44,10 +45,19 @@ float ComplexMagnitude(float a, float b) {
   return std::abs(a) + std::abs(b);
 }
 
+bool UseSilenceDetector() {
+  if (field_trial::IsEnabled("WebRTC-TsSilenceDetectorKillSwitch")) {
+    return false;
+  }
+  return true;
+}
+
 }  // namespace
 
 TransientSuppressorImpl::TransientSuppressorImpl()
-    : data_length_(0),
+    : use_silence_detector_(UseSilenceDetector()),
+      is_silence_(false),
+      data_length_(0),
       detection_length_(0),
       analysis_length_(0),
       buffer_delay_(0),
@@ -158,6 +168,31 @@ int TransientSuppressorImpl::Initialize(int sample_rate_hz,
   return 0;
 }
 
+void TransientSuppressorImpl::AnalyzeUnprocessed(const AudioBuffer& audio) {
+  if (!use_silence_detector_) {
+    return;
+  }
+  RTC_DCHECK_EQ(audio.num_channels(), num_channels_);
+
+  // Detect silence if all the channels contain silence.
+  is_silence_ = true;
+  const size_t frame_size = audio.num_frames_per_band();
+  for (size_t c = 0; c < audio.num_channels(); ++c) {
+    const float* data = audio.split_bands_const(/*channel=*/c)[kBand0To8kHz];
+    // Detect silence by checking if the RMS level is below a threshold.
+    float energy = 0.0f;
+    for (size_t i = 0; i < frame_size; ++i) {
+      energy += data[i] * data[i];
+    }
+    float rms_square = energy / data_length_;
+    constexpr int kSilenceRms = 5;
+    if (rms_square >= kSilenceRms * kSilenceRms) {
+      is_silence_ = false;
+      break;
+    }
+  }
+}
+
 int TransientSuppressorImpl::Suppress(float* data,
                                       size_t data_length,
                                       int num_channels,
@@ -178,7 +213,12 @@ int TransientSuppressorImpl::Suppress(float* data,
 
   int result = 0;
   if (detection_enabled_) {
-    UpdateRestoration(voice_probability);
+    if (use_silence_detector_) {
+      UpdateRestoration(is_silence_);
+    } else {
+      constexpr float kVoiceThreshold = 0.02f;
+      UpdateRestoration(/*is_silence=*/voice_probability < kVoiceThreshold);
+    }
 
     if (!detection_data) {
       // Use the input data  of the first channel if special detection data is
@@ -303,13 +343,11 @@ void TransientSuppressorImpl::UpdateKeypress(bool key_pressed) {
   }
 }
 
-void TransientSuppressorImpl::UpdateRestoration(float voice_probability) {
+void TransientSuppressorImpl::UpdateRestoration(bool is_silence) {
   const int kHardRestorationOffsetDelay = 3;
   const int kHardRestorationOnsetDelay = 80;
 
-  bool not_voiced = voice_probability < kVoiceThreshold;
-
-  if (not_voiced == use_hard_restoration_) {
+  if (is_silence == use_hard_restoration_) {
     chunks_since_voice_change_ = 0;
   } else {
     ++chunks_since_voice_change_;
@@ -318,7 +356,7 @@ void TransientSuppressorImpl::UpdateRestoration(float voice_probability) {
          chunks_since_voice_change_ > kHardRestorationOffsetDelay) ||
         (!use_hard_restoration_ &&
          chunks_since_voice_change_ > kHardRestorationOnsetDelay)) {
-      use_hard_restoration_ = not_voiced;
+      use_hard_restoration_ = is_silence;
       chunks_since_voice_change_ = 0;
     }
   }

@@ -16,6 +16,7 @@
 
 #include <memory>
 
+#include "modules/audio_processing/audio_buffer.h"
 #include "modules/audio_processing/transient/transient_suppressor.h"
 #include "rtc_base/gtest_prod_util.h"
 
@@ -34,23 +35,8 @@ class TransientSuppressorImpl : public TransientSuppressor {
                  int detector_rate_hz,
                  int num_channels) override;
 
-  // Processes a `data` chunk, and returns it with keystrokes suppressed from
-  // it. The float format is assumed to be int16 ranged. If there are more than
-  // one channel, the chunks are concatenated one after the other in `data`.
-  // `data_length` must be equal to `data_length_`.
-  // `num_channels` must be equal to `num_channels_`.
-  // A sub-band, ideally the higher, can be used as `detection_data`. If it is
-  // NULL, `data` is used for the detection too. The `detection_data` is always
-  // assumed mono.
-  // If a reference signal (e.g. keyboard microphone) is available, it can be
-  // passed in as `reference_data`. It is assumed mono and must have the same
-  // length as `data`. NULL is accepted if unavailable.
-  // This suppressor performs better if voice information is available.
-  // `voice_probability` is the probability of voice being present in this chunk
-  // of audio. If voice information is not available, `voice_probability` must
-  // always be set to 1.
-  // `key_pressed` determines if a key was pressed on this audio chunk.
-  // Returns 0 on success and -1 otherwise.
+  void AnalyzeUnprocessed(const AudioBuffer& audio) override;
+
   int Suppress(float* data,
                size_t data_length,
                int num_channels,
@@ -67,7 +53,7 @@ class TransientSuppressorImpl : public TransientSuppressor {
   void Suppress(float* in_ptr, float* spectral_mean, float* out_ptr);
 
   void UpdateKeypress(bool key_pressed);
-  void UpdateRestoration(float voice_probability);
+  void UpdateRestoration(bool is_silence);
 
   void UpdateBuffers(float* data);
 
@@ -75,6 +61,11 @@ class TransientSuppressorImpl : public TransientSuppressor {
   void SoftRestoration(float* spectral_mean);
 
   std::unique_ptr<TransientDetector> detector_;
+
+  // When true, the `voice_probability` argument passed to
+  // `TransientSuppressorImpl::Suppress()` is ignored and `is_silence_` is used.
+  const bool use_silence_detector_;
+  bool is_silence_;
 
   size_t data_length_;
   size_t detection_length_;

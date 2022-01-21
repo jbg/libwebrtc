@@ -13,7 +13,10 @@
 
 #include <stddef.h>
 #include <stdint.h>
+
 #include <memory>
+
+#include "modules/audio_processing/audio_buffer.h"
 
 namespace webrtc {
 
@@ -26,6 +29,10 @@ class TransientSuppressor {
   virtual int Initialize(int sample_rate_hz,
                          int detector_rate_hz,
                          int num_channels) = 0;
+
+  // Analyzes the unprocessed audio. Must be called before `Suppress()` or the
+  // transient suppression behavior will be undefined.
+  virtual void AnalyzeUnprocessed(const AudioBuffer& audio) = 0;
 
   // Processes a `data` chunk, and returns it with keystrokes suppressed from
   // it. The float format is assumed to be int16 ranged. If there are more than
@@ -44,6 +51,7 @@ class TransientSuppressor {
   // always be set to 1.
   // `key_pressed` determines if a key was pressed on this audio chunk.
   // Returns 0 on success and -1 otherwise.
+  // TODO(bugs.webrtc.org/13601): Remove `voice_probability`.
   virtual int Suppress(float* data,
                        size_t data_length,
                        int num_channels,
