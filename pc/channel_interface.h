@@ -20,9 +20,17 @@
 #include "media/base/media_channel.h"
 #include "pc/rtp_transport_internal.h"
 
+namespace webrtc {
+class Call;
+class VideoBitrateAllocatorFactory;
+}  // namespace webrtc
+
 namespace cricket {
 
 class MediaContentDescription;
+class VideoChannel;
+class VoiceChannel;
+struct MediaConfig;
 
 // ChannelInterface contains methods common to voice, video and data channels.
 // As more methods are added to BaseChannel, they should be included in the
@@ -70,6 +78,34 @@ class ChannelInterface {
 
  protected:
   virtual ~ChannelInterface() = default;
+};
+
+class ChannelFactoryInterface {
+ public:
+  virtual VideoChannel* CreateVideoChannel(
+      webrtc::Call* call,
+      const MediaConfig& media_config,
+      rtc::Thread* signaling_thread,
+      const std::string& content_name,
+      bool srtp_required,
+      const webrtc::CryptoOptions& crypto_options,
+      const VideoOptions& options,
+      webrtc::VideoBitrateAllocatorFactory*
+          video_bitrate_allocator_factory) = 0;
+
+  virtual VoiceChannel* CreateVoiceChannel(
+      webrtc::Call* call,
+      const MediaConfig& media_config,
+      rtc::Thread* signaling_thread,
+      const std::string& content_name,
+      bool srtp_required,
+      const webrtc::CryptoOptions& crypto_options,
+      const AudioOptions& options) = 0;
+
+  virtual void DestroyChannel(ChannelInterface* channel) = 0;
+
+ protected:
+  virtual ~ChannelFactoryInterface() = default;
 };
 
 }  // namespace cricket
