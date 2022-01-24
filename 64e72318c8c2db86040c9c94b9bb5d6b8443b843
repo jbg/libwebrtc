@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efb916fc_e052e4ae",
+        "filename": "pc/channel_interface.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-24T07:48:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0d401de_dbbd7b1c",
+      "revId": "64e72318c8c2db86040c9c94b9bb5d6b8443b843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebb30b65_a1ef697f",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-01-24T06:15:59Z",
       "side": 1,
       "message": "Call, srtp_required and crypto_options should all be constant for all calls to this function - and probably AudioOptions / VideoOptions and the VideoBitrateAllocatorFactory too. Is it part of the plan to move these arguments to the ChannelFactoryInterface constructor?",
+      "revId": "64e72318c8c2db86040c9c94b9bb5d6b8443b843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f89bfa4d_78ed03d8",
+        "filename": "pc/channel_interface.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-24T07:48:35Z",
+      "side": 1,
+      "message": "I\u0027d like to do that but hit a problem with build dependencies that might get hairy to fix. I\u0027d like to do that though, so yes, but we\u0027ll need to do it separately.",
+      "parentUuid": "ebb30b65_a1ef697f",
       "revId": "64e72318c8c2db86040c9c94b9bb5d6b8443b843",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
