@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9a198cb_f2b995c4",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-24T14:11:41Z",
+      "side": 1,
+      "message": "I would prefer to not implement a Clear function on FB3, we could use a unique_ptr and simply recreate the buffer instead.",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 20
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "877cb0a5_3e8f86f7",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-24T14:11:41Z",
+      "side": 1,
+      "message": "I can\u0027t figure out what encoder_waiting_for_frame_ tracks, why is it needed?",
+      "range": {
+        "startLine": 412,
+        "startChar": 9,
+        "endLine": 412,
+        "endChar": 35
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e906863_9f54adb2",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-24T14:11:41Z",
+      "side": 1,
+      "message": "Why not \n  RTC_CHECK(!buffer_.LastDecodableTemporalUnitRtpTimestamp())\n?",
+      "range": {
+        "startLine": 420,
+        "startChar": 0,
+        "endLine": 423,
+        "endChar": 5
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5788e0c7_e233186e",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-24T14:11:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure what this is suppose to guard against? I can see two situations where this happens, first is we receive garbage, in which case we can only expect garbage out, second is a bug in FB3, which is bad ofc, but doing this will only mask the problem.\n\nHow does this interact with FrameHasBadRenderTiming?",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 7
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7724a9a7_e14bd083",
+        "filename": "video/frame_decode_timing.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-24T14:11:41Z",
+      "side": 1,
+      "message": "nit: Would prefer if this condition was inverted and we returned absl::nullopt here instead.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 57
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
