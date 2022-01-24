@@ -578,7 +578,9 @@ bool FrameBuffer::UpdateFrameInfoWithIncomingFrame(const EncodedFrame& frame,
     if (dep.continuous)
       --info->second.num_missing_continuous;
 
-    frames_[dep.frame_id].dependent_frames.push_back(frame.Id());
+    auto it = frames_.find(dep.frame_id);
+    if (it != frames_.end())
+      it->second.dependent_frames.push_back(frame.Id());
   }
 
   return true;
