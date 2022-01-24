@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c8d8a9a_62ab3ff3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-24T06:15:59Z",
+      "side": 1,
+      "message": "Checking for whether or not further simplifications are on the way...\n",
+      "revId": "64e72318c8c2db86040c9c94b9bb5d6b8443b843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0d401de_dbbd7b1c",
+        "filename": "pc/channel_interface.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-24T06:15:59Z",
+      "side": 1,
+      "message": "would it be burdensome to rename this to \"mid\"?\nThe content_name concept is a confusing synonym for mid, AFAIK.\n(probably it is mostly called content_name in cricket:: and mid in webrtc:: - the duality is irritating, but you may want to hold off on fixing it.)",
+      "revId": "64e72318c8c2db86040c9c94b9bb5d6b8443b843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebb30b65_a1ef697f",
+        "filename": "pc/channel_interface.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-24T06:15:59Z",
+      "side": 1,
+      "message": "Call, srtp_required and crypto_options should all be constant for all calls to this function - and probably AudioOptions / VideoOptions and the VideoBitrateAllocatorFactory too. Is it part of the plan to move these arguments to the ChannelFactoryInterface constructor?",
+      "revId": "64e72318c8c2db86040c9c94b9bb5d6b8443b843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
