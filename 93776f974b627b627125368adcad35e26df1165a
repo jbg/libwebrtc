@@ -16,6 +16,24 @@
       "message": "Hi Break, thanks for the CL, please add a unit test to test this particular behavior.",
       "revId": "93776f974b627b627125368adcad35e26df1165a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1d454b0_6c154165",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18834
+      },
+      "writtenOn": "2022-01-25T07:01:11Z",
+      "side": 1,
+      "message": "This error is a internal state, I can\u0027t unit test it easyly as FrameBuffer\u0027s current code. I can describe two ways to reproduce this error.\nfirst methord:\n1. insert 800(kMaxFramesBuffered) frames into the FrameBuffer at a moment and don\u0027t extract any frames;\n2. insert one P frame, marked as 801, this will be droped because the buffer is full;\n3. extract only one frame, that will be the first I frame;\n4. insert another P frame, marked as 802 reference 801, this will insert both 802 and 801, but 801 is empty;\n5. the 801 frame is the invalid frame I said in this patch;\nsecond methord:\n1. the FrameBuffer is empty;\n2. insert a P frame 2 reference 1 into the FrameBuffer;\n3. FrameBuffer will has 2 frames in it, frame 1 is empty and will prevent the valid frame 1 to be inserted;\n\nCould you give me some directions.",
+      "parentUuid": "94a58137_1319d59d",
+      "revId": "93776f974b627b627125368adcad35e26df1165a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
