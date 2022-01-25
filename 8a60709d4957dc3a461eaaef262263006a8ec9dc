@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd7e3240_3c66f2ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-01-25T09:51:16Z",
+      "side": 1,
+      "message": "This CL just changes the order of declaration in RTC event log events.",
+      "revId": "8a60709d4957dc3a461eaaef262263006a8ec9dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
