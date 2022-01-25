@@ -677,8 +677,7 @@ VideoStreamEncoder::VideoStreamEncoder(
   frame_cadence_adapter_->Initialize(&cadence_callback_);
   stream_resource_manager_.Initialize(&encoder_queue_);
 
-  rtc::Event initialize_processor_event;
-  encoder_queue_.PostTask([this, &initialize_processor_event] {
+  encoder_queue_.PostTask([this] {
     RTC_DCHECK_RUN_ON(&encoder_queue_);
     resource_adaptation_processor_->SetTaskQueue(encoder_queue_.Get());
     stream_resource_manager_.SetAdaptationProcessor(
@@ -694,9 +693,7 @@ VideoStreamEncoder::VideoStreamEncoder(
     for (auto* constraint : adaptation_constraints_) {
       video_stream_adapter_->AddAdaptationConstraint(constraint);
     }
-    initialize_processor_event.Set();
   });
-  initialize_processor_event.Wait(rtc::Event::kForever);
 }
 
 VideoStreamEncoder::~VideoStreamEncoder() {
@@ -760,22 +757,31 @@ void VideoStreamEncoder::AddAdaptationResource(
   // of this MapResourceToReason() call.
   TRACE_EVENT_ASYNC_BEGIN0(
       "webrtc", "VideoStreamEncoder::AddAdaptationResource(latency)", this);
-  rtc::Event map_resource_event;
-  encoder_queue_.PostTask([this, resource, &map_resource_event] {
+  encoder_queue_.PostTask([this, resource = std::move(resource)] {
     TRACE_EVENT_ASYNC_END0(
         "webrtc", "VideoStreamEncoder::AddAdaptationResource(latency)", this);
     RTC_DCHECK_RUN_ON(&encoder_queue_);
     additional_resources_.push_back(resource);
     stream_resource_manager_.AddResource(resource, VideoAdaptationReason::kCpu);
-    map_resource_event.Set();
   });
-  map_resource_event.Wait(rtc::Event::kForever);
 }
 
 std::vector<rtc::scoped_refptr<Resource>>
 VideoStreamEncoder::GetAdaptationResources() {
   RTC_DCHECK_RUN_ON(worker_queue_);
-  return resource_adaptation_processor_->GetResources();
+  // In practice, this method is only called by tests to verify operations that
+  // run on the encoder queue. So rather than force PostTask() operations to
+  // be accompanied by an event and a `Wait()`, we'll use PostTask + Wait()
+  // here.
+  rtc::Event event;
+  std::vector<rtc::scoped_refptr<Resource>> resources;
+  encoder_queue_.PostTask([&] {
+    RTC_DCHECK_RUN_ON(&encoder_queue_);
+    resources = resource_adaptation_processor_->GetResources();
+    event.Set();
+  });
+  event.Wait(rtc::Event::kForever);
+  return resources;
 }
 
 void VideoStreamEncoder::SetSource(
@@ -2349,14 +2355,11 @@ void VideoStreamEncoder::CheckForAnimatedContent(
 void VideoStreamEncoder::InjectAdaptationResource(
     rtc::scoped_refptr<Resource> resource,
     VideoAdaptationReason reason) {
-  rtc::Event map_resource_event;
-  encoder_queue_.PostTask([this, resource, reason, &map_resource_event] {
+  encoder_queue_.PostTask([this, resource = std::move(resource), reason] {
     RTC_DCHECK_RUN_ON(&encoder_queue_);
     additional_resources_.push_back(resource);
     stream_resource_manager_.AddResource(resource, reason);
-    map_resource_event.Set();
   });
-  map_resource_event.Wait(rtc::Event::kForever);
 }
 
 void VideoStreamEncoder::InjectAdaptationConstraint(
