@@ -33,6 +33,24 @@
       "message": "lgtm but I dont understand why order matters? ",
       "revId": "8a60709d4957dc3a461eaaef262263006a8ec9dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f727727_7dbfea41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-01-25T10:05:45Z",
+      "side": 1,
+      "message": "Oh, sorry. I have another CL that will use the LoggedFoo from the RtcEventFoo, so the LoggedFoo has to come first. This CL splits off the pure \"moving code around\" part to get a cleaner and smaller follow-up CL.",
+      "parentUuid": "acf09cb6_75ad42f9",
+      "revId": "8a60709d4957dc3a461eaaef262263006a8ec9dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
