@@ -106,6 +106,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b52894c_a63b2710",
+        "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-26T11:12:50Z",
+      "side": 1,
+      "message": "That\u0027s an improvement over current state.",
+      "parentUuid": "5d67627a_2c5e67f6",
+      "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7d4ce15_5344fcfc",
@@ -191,6 +209,30 @@
       "side": 1,
       "message": "The fuzzer takes a fuzz framework-generated string and tries to use it as a remote SDP offer. If that call succeeds, it tries to generate an answer.\n\nThis has uncovered bugs that would otherwise be unreachable for fuzzing.\n\nThe helpers in PeerConnectionIntegrationBaseTest were a lot simpler to attach to than rewriting the whole thing - but it brings with it the need to discover errors detected by those helpers, which are flagged using EXPECT statements.",
       "parentUuid": "746bd323_d7f2e403",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 27
+      },
+      "revId": "9976eb1835c5b78ac0e3b6ae54b7574cb9f128d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5be11616_5b8701bb",
+        "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-26T11:12:50Z",
+      "side": 1,
+      "message": "Yep, rewriting the whole thing is a lot effort, better be separate from what you\u0027re fixing here.",
+      "parentUuid": "d92c464b_4fd96510",
       "range": {
         "startLine": 25,
         "startChar": 2,
