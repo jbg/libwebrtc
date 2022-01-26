@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0693d7c_789e923f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-26T08:41:23Z",
+      "side": 1,
+      "message": "Tried another style that looks better. Not sure if HasErrors works now (didn\u0027t trigger in the test run).",
+      "revId": "34f3b203f80d1aa90793e6fa9a20763b858ac799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
