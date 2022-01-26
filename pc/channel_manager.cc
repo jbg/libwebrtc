@@ -176,6 +176,8 @@ VoiceChannel* ChannelManager::CreateVoiceChannel(
 
   RTC_DCHECK_RUN_ON(worker_thread_);
 
+  RTC_LOG_THREAD_BLOCK_COUNT();
+
   VoiceMediaChannel* media_channel = media_engine_->voice().CreateMediaChannel(
       call, media_config, options, crypto_options);
   if (!media_channel) {
@@ -189,6 +191,10 @@ VoiceChannel* ChannelManager::CreateVoiceChannel(
 
   VoiceChannel* voice_channel_ptr = voice_channel.get();
   voice_channels_.push_back(std::move(voice_channel));
+
+  // TODO(tommi): This invoke has been removed in a separate cl.
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(1);
+
   return voice_channel_ptr;
 }
 
