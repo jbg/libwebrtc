@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c316f4_1d948da4",
+        "filename": "logging/rtc_event_log/events/rtc_event_bwe_update_delay_based.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-26T09:42:35Z",
+      "side": 1,
+      "message": "Would be nice with a comment explaining why we don\u0027t use a mapping instead of two explicit and verbose conversion functions. (I assume performance?)",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84689ad_cef36a1a",
+        "filename": "logging/rtc_event_log/events/rtc_event_bwe_update_delay_based.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-26T09:42:35Z",
+      "side": 1,
+      "message": "IMO better to inline this as to make it obvious that it won\u0027t be used in practice, now it looks like it\u0027s a valid option just like the ones above.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 78
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fdc453f_d3d5b01e",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-26T09:42:35Z",
+      "side": 1,
+      "message": "EncodeRtcEventMember? Or if you think the extraction is important to tell about, ExtractAndEncode...",
+      "range": {
+        "startLine": 107,
+        "startChar": 22,
+        "endLine": 107,
+        "endChar": 29
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a71b15f5_e0c432ca",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-26T09:42:35Z",
+      "side": 1,
+      "message": "To make this more refactor safe, refer to the function name or better if it\u0027s possible to write it without a dependency.\n\nMaybe keep a comment before all of the functions that covers them all barring the special details for valueswithpositions?",
+      "range": {
+        "startLine": 120,
+        "startChar": 3,
+        "endLine": 120,
+        "endChar": 16
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2f94d99_b1f6fc1e",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-26T09:42:35Z",
+      "side": 1,
+      "message": "Same as above.",
+      "range": {
+        "startLine": 145,
+        "startChar": 3,
+        "endLine": 145,
+        "endChar": 17
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d52abd3_60c44813",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_encoding.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-26T09:42:35Z",
+      "side": 1,
+      "message": "Same as above.",
+      "range": {
+        "startLine": 162,
+        "startChar": 3,
+        "endLine": 162,
+        "endChar": 16
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc184907_dc161797",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_extraction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-26T09:42:35Z",
+      "side": 1,
+      "message": "Could you expand on this comment, this is hard to understand without full context.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 61
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24fea96a_6a963565",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_extraction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-26T09:42:35Z",
+      "side": 1,
+      "message": "There\u0027s no better way to do this?",
+      "range": {
+        "startLine": 62,
+        "startChar": 16,
+        "endLine": 62,
+        "endChar": 38
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b56a1fa7_00ee7368",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_extraction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-26T09:42:35Z",
+      "side": 1,
+      "message": "This reads a bit confusing as an error message. Maybe describe the error instead, eg. \"Missing specialisation of RtcEventLogEnum for type\" and context in a comment nearby in the code?",
+      "range": {
+        "startLine": 63,
+        "startChar": 17,
+        "endLine": 63,
+        "endChar": 62
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b13b5433_8c6aa4a0",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1436,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-01-26T09:42:35Z",
+      "side": 1,
+      "message": "They should not be sorted?",
+      "range": {
+        "startLine": 1436,
+        "startChar": 8,
+        "endLine": 1436,
+        "endChar": 30
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
