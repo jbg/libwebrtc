@@ -16,6 +16,29 @@
       "message": "Tried another style that looks better. Not sure if HasErrors works now (didn\u0027t trigger in the test run).",
       "revId": "34f3b203f80d1aa90793e6fa9a20763b858ac799",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5492f73d_03b68835",
+        "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-01-26T11:16:30Z",
+      "side": 1,
+      "message": "I wish it could be absl::string_view so that there would be no need to copy the fuzzed buffer each test,\nbut CreateSessionDescription takes const std::string\u0026 anyway.\n\n(may be still good idea to pass as string_view and convert to std::string later, this way would be easier to update it if/when CreateSessionDescription would take string_view)",
+      "range": {
+        "startLine": 23,
+        "startChar": 25,
+        "endLine": 23,
+        "endChar": 36
+      },
+      "revId": "34f3b203f80d1aa90793e6fa9a20763b858ac799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
