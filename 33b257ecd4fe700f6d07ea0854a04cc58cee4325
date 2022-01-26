@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3b85e46_355ce228",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-26T12:02:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9a198cb_f2b995c4",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 20
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "877cb0a5_3e8f86f7",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-24T14:11:41Z",
       "side": 1,
       "message": "I can\u0027t figure out what encoder_waiting_for_frame_ tracks, why is it needed?",
+      "range": {
+        "startLine": 412,
+        "startChar": 9,
+        "endLine": 412,
+        "endChar": 35
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40b460b1_4fd4cf12",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-26T12:02:19Z",
+      "side": 1,
+      "message": "This guards against a new frame/timeout occurring during decoding, but the name is wrong, should be |decoding_ready_for_next_frame_| or something like that. \n\nWithout this flag, flags will just pile up in the decoder queue, and behaviours like fast-forwarding frames when the decoder is slow are not possible. I will document that and change the flags name.",
+      "parentUuid": "877cb0a5_3e8f86f7",
       "range": {
         "startLine": 412,
         "startChar": 9,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "244ab37e_4a9353c2",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-26T12:02:19Z",
+      "side": 1,
+      "message": "This is also ok. I would like to update the frame buffer in a future patch to return the [next, last] pair always so only 1 optional needs to be checked - we know next/last are both present.",
+      "parentUuid": "9e906863_9f54adb2",
+      "range": {
+        "startLine": 420,
+        "startChar": 0,
+        "endLine": 423,
+        "endChar": 5
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5788e0c7_e233186e",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-01-24T14:11:41Z",
       "side": 1,
       "message": "I\u0027m not sure what this is suppose to guard against? I can see two situations where this happens, first is we receive garbage, in which case we can only expect garbage out, second is a bug in FB3, which is bad ofc, but doing this will only mask the problem.\n\nHow does this interact with FrameHasBadRenderTiming?",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 7
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15853a53_30f32fd0",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-26T12:02:19Z",
+      "side": 1,
+      "message": "I think that this should move into FB3 personally. I remember actually needing to add this check to make some of the larger integration tests pass. I will try to replicate this behaviour. Bug is here https://bugs.webrtc.org/9974",
+      "parentUuid": "5788e0c7_e233186e",
       "range": {
         "startLine": 434,
         "startChar": 0,
