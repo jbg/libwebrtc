@@ -39,6 +39,30 @@
       },
       "revId": "34f3b203f80d1aa90793e6fa9a20763b858ac799",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a2fd1af_ed3024ed",
+        "filename": "test/fuzzers/sdp_integration_fuzzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-26T13:48:47Z",
+      "side": 1,
+      "message": "Yeah, this can be done. Saved a copy or two. Added.",
+      "parentUuid": "5492f73d_03b68835",
+      "range": {
+        "startLine": 23,
+        "startChar": 25,
+        "endLine": 23,
+        "endChar": 36
+      },
+      "revId": "34f3b203f80d1aa90793e6fa9a20763b858ac799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
