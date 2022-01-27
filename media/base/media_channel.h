@@ -356,7 +356,9 @@ struct MediaSenderInfo {
     return retval;
   }
   // Returns true if the media has been connected.
-  bool connected() const { return local_stats.size() > 0; }
+  bool connected() const {
+    return codec_payload_type && local_stats.size() > 0;
+  }
   // Utility accessor for clients that make the assumption only one ssrc
   // exists per media.
   // This will eventually go away.
