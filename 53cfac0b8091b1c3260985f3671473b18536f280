@@ -16,6 +16,91 @@
       "message": "LGTM but not an owner",
       "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bb6657d_2b04b224",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-01-27T19:46:08Z",
+      "side": 1,
+      "message": "Thanks for pulling this out.\n\nIf you want to use this outside of the wayland capturer it should probably go in rtc_base/ or elsewhere outside the desktop_capture module.",
+      "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a618623_a70ffdf8",
+        "filename": "modules/desktop_capture/linux/wayland/utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-01-27T19:46:08Z",
+      "side": 1,
+      "message": "Add newline after #include.",
+      "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76df1035_a9944ee9",
+        "filename": "modules/desktop_capture/linux/wayland/utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-01-27T19:46:08Z",
+      "side": 1,
+      "message": "Since this file is declaring Scoped for glib types, prefer to name it scoped_glib.cc.",
+      "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0029c456_5751fde1",
+        "filename": "modules/desktop_capture/linux/wayland/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-01-27T19:46:08Z",
+      "side": 1,
+      "message": "Please name this something more specific.  Suggest scoped.h",
+      "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3565c6d8_842c738f",
+        "filename": "modules/desktop_capture/linux/wayland/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-01-27T19:46:08Z",
+      "side": 1,
+      "message": "Can this go in the .cc?",
+      "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
