@@ -142,6 +142,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e348e014_f4532af3",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-27T13:52:25Z",
+      "side": 1,
+      "message": "Right, I think that\u0027s a good idea.",
+      "parentUuid": "244ab37e_4a9353c2",
+      "range": {
+        "startLine": 420,
+        "startChar": 0,
+        "endLine": 423,
+        "endChar": 5
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5788e0c7_e233186e",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "I think that this should move into FB3 personally. I remember actually needing to add this check to make some of the larger integration tests pass. I will try to replicate this behaviour. Bug is here https://bugs.webrtc.org/9974",
       "parentUuid": "5788e0c7_e233186e",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 7
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28e75902_5a98d557",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-27T13:52:25Z",
+      "side": 1,
+      "message": "Does it really guard against that bug? Maybe I\u0027m missing something but I don\u0027t think it does.\n\nThe way I see it is that FB3 does not care about timestamps unless the legacy field trial is enabled, in which case it only cares if the frame has a preceding frame id but newer timestamp. This bug represents the opposite problem, where the frame id is subsequent but the timestamp is older.",
+      "parentUuid": "15853a53_30f32fd0",
       "range": {
         "startLine": 434,
         "startChar": 0,

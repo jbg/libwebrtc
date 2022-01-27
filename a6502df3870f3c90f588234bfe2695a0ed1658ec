@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9f8ad0a_69fb51a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-27T13:52:25Z",
+      "side": 1,
+      "message": "LG, mostly nits",
+      "revId": "a6502df3870f3c90f588234bfe2695a0ed1658ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0530965_e453ab12",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-27T13:52:25Z",
+      "side": 1,
+      "message": "Cool, wasn\u0027t aware this annotation was possible, is there a reason you sometime annotate like this and other times in the function body (like OnTimeout)?",
+      "range": {
+        "startLine": 350,
+        "startChar": 28,
+        "endLine": 350,
+        "endChar": 65
+      },
+      "revId": "a6502df3870f3c90f588234bfe2695a0ed1658ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53cc071e_d1980afa",
+        "filename": "video/frame_decode_scheduler.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-27T13:52:25Z",
+      "side": 1,
+      "message": "nit: why not `uint32_t rtp_timestamp` ?\n\nPlease add a comment for `FrameReleaseCallback`.",
+      "range": {
+        "startLine": 30,
+        "startChar": 25,
+        "endLine": 30,
+        "endChar": 42
+      },
+      "revId": "a6502df3870f3c90f588234bfe2695a0ed1658ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
