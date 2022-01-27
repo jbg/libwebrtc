@@ -226,7 +226,7 @@ def main():
   if test_artifacts_dir and not os.path.isdir(test_artifacts_dir):
     os.makedirs(test_artifacts_dir)
 
-  print 'gtest-parallel-wrapper: Executing command %s' % ' '.join(command)
+  print('gtest-parallel-wrapper: Executing command %s' % ' '.join(command))
   sys.stdout.flush()
 
   exit_code = subprocess.call(command, env=test_env, cwd=os.getcwd())
