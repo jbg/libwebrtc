@@ -76,18 +76,25 @@ rtc::AdapterType GuessAdapterTypeFromNetworkCost(int network_cost) {
   // this method.
   switch (network_cost) {
     case rtc::kNetworkCostMin:
+    case rtc::kNetworkCostMin + rtc::kNetworkCostVpn:
       return rtc::ADAPTER_TYPE_ETHERNET;
     case rtc::kNetworkCostLow:
+    case rtc::kNetworkCostLow + rtc::kNetworkCostVpn:
       return rtc::ADAPTER_TYPE_WIFI;
     case rtc::kNetworkCostCellular:
+    case rtc::kNetworkCostCellular + rtc::kNetworkCostVpn:
       return rtc::ADAPTER_TYPE_CELLULAR;
     case rtc::kNetworkCostCellular2G:
+    case rtc::kNetworkCostCellular2G + rtc::kNetworkCostVpn:
       return rtc::ADAPTER_TYPE_CELLULAR_2G;
     case rtc::kNetworkCostCellular3G:
+    case rtc::kNetworkCostCellular3G + rtc::kNetworkCostVpn:
       return rtc::ADAPTER_TYPE_CELLULAR_3G;
     case rtc::kNetworkCostCellular4G:
+    case rtc::kNetworkCostCellular4G + rtc::kNetworkCostVpn:
       return rtc::ADAPTER_TYPE_CELLULAR_4G;
     case rtc::kNetworkCostCellular5G:
+    case rtc::kNetworkCostCellular5G + rtc::kNetworkCostVpn:
       return rtc::ADAPTER_TYPE_CELLULAR_5G;
     case rtc::kNetworkCostUnknown:
       return rtc::ADAPTER_TYPE_UNKNOWN;
