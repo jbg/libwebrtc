@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c37c305c_d5b54f88",
+        "filename": "pc/channel.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 5686
+      },
+      "writtenOn": "2022-01-27T21:38:27Z",
+      "side": 0,
+      "message": "Are we not checking the return value anymore? I guess RtpDemuxer will still log an error, but this seems worth treating as a hard error and causing SetRemoteDescription to fail since it would typically mean you have conflicting SDP.",
+      "revId": "ac72dda645f02dd45868ee554d658f2ad9ace132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
