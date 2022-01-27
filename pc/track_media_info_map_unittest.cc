@@ -135,6 +135,7 @@ class TrackMediaInfoMapTest : public ::testing::Test {
         voice_sender_info.local_stats.push_back(cricket::SsrcSenderInfo());
         voice_sender_info.local_stats[i++].ssrc = ssrc;
       }
+      voice_sender_info.codec_payload_type = 0;
       voice_media_info_->senders.push_back(voice_sender_info);
     } else {
       cricket::VideoSenderInfo video_sender_info;
@@ -143,6 +144,7 @@ class TrackMediaInfoMapTest : public ::testing::Test {
         video_sender_info.local_stats.push_back(cricket::SsrcSenderInfo());
         video_sender_info.local_stats[i++].ssrc = ssrc;
       }
+      video_sender_info.codec_payload_type = 1;
       video_media_info_->senders.push_back(video_sender_info);
       video_media_info_->aggregated_senders.push_back(video_sender_info);
     }

@@ -533,6 +533,7 @@ void InitVoiceSenderInfo(cricket::VoiceSenderInfo* voice_sender_info,
                          uint32_t ssrc = kSsrcOfTrack) {
   voice_sender_info->add_ssrc(ssrc);
   voice_sender_info->codec_name = "fake_codec";
+  voice_sender_info->codec_payload_type = 0;
   voice_sender_info->payload_bytes_sent = 88;
   voice_sender_info->header_and_padding_bytes_sent = 12;
   voice_sender_info->packets_sent = 101;
@@ -1097,6 +1098,7 @@ TEST_P(StatsCollectorTrackTest, TrackAndSsrcObjectExistAfterUpdateSsrcStats) {
   video_sender_info.add_ssrc(1234);
   video_sender_info.payload_bytes_sent = kBytesSent - 12;
   video_sender_info.header_and_padding_bytes_sent = 12;
+  video_sender_info.codec_payload_type = 0;
   VideoMediaInfo video_info;
   video_info.aggregated_senders.push_back(video_sender_info);
 
@@ -1510,6 +1512,7 @@ TEST_P(StatsCollectorTrackTest, FilterOutNegativeInitialValues) {
 
   VoiceSenderInfo voice_sender_info;
   voice_sender_info.add_ssrc(kSsrcOfTrack);
+  voice_sender_info.codec_payload_type = 0;
   // These values are set to -1 initially in audio_send_stream.
   // The voice_sender_info will read the values from audio_send_stream.
   voice_sender_info.rtt_ms = -1;

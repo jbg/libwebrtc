@@ -1695,6 +1695,7 @@ TEST_F(RTCStatsCollectorTest,
       static_cast<AudioTrackInterface*>(local_audio_track.get()));
 
   cricket::VoiceSenderInfo voice_sender_info_ssrc1;
+  voice_sender_info_ssrc1.codec_payload_type = 0;
   voice_sender_info_ssrc1.local_stats.push_back(cricket::SsrcSenderInfo());
   voice_sender_info_ssrc1.local_stats[0].ssrc = 1;
   voice_sender_info_ssrc1.apm_statistics.echo_return_loss = 42.0;
@@ -1835,6 +1836,7 @@ TEST_F(RTCStatsCollectorTest,
       static_cast<VideoTrackInterface*>(local_video_track.get()));
 
   cricket::VideoSenderInfo video_sender_info_ssrc1;
+  video_sender_info_ssrc1.codec_payload_type = 1;
   video_sender_info_ssrc1.local_stats.push_back(cricket::SsrcSenderInfo());
   video_sender_info_ssrc1.local_stats[0].ssrc = 1;
   video_sender_info_ssrc1.send_frame_width = 1234;
@@ -2644,6 +2646,7 @@ TEST_F(RTCStatsCollectorTest, RTCAudioSourceStatsCollectedForSenderWithTrack) {
 
   cricket::VoiceMediaInfo voice_media_info;
   voice_media_info.senders.push_back(cricket::VoiceSenderInfo());
+  voice_media_info.senders[0].codec_payload_type = 0;
   voice_media_info.senders[0].local_stats.push_back(cricket::SsrcSenderInfo());
   voice_media_info.senders[0].local_stats[0].ssrc = kSsrc;
   voice_media_info.senders[0].audio_level = 32767;  // [0,32767]
@@ -2684,11 +2687,13 @@ TEST_F(RTCStatsCollectorTest, RTCVideoSourceStatsCollectedForSenderWithTrack) {
   cricket::VideoMediaInfo video_media_info;
   video_media_info.aggregated_senders.push_back(cricket::VideoSenderInfo());
   video_media_info.senders.push_back(cricket::VideoSenderInfo());
+  video_media_info.senders[0].codec_payload_type = 1;
   video_media_info.senders[0].local_stats.push_back(cricket::SsrcSenderInfo());
   video_media_info.senders[0].local_stats[0].ssrc = kSsrc;
   video_media_info.senders[0].framerate_input = 29.0;
   video_media_info.aggregated_senders[0].local_stats.push_back(
       cricket::SsrcSenderInfo());
+  video_media_info.aggregated_senders[0].codec_payload_type = 1;
   video_media_info.aggregated_senders[0].local_stats[0].ssrc = kSsrc;
   video_media_info.aggregated_senders[0].framerate_input = 29.0;
   video_media_info.aggregated_senders[0].frames = 10001;
@@ -2920,8 +2925,11 @@ TEST_P(RTCStatsCollectorTestWithParamKind,
     report_block_data.AddRoundTripTimeSample(kRoundTripTimeSample2Ms);
     report_block_datas.push_back(report_block_data);
   }
-  AddSenderInfoAndMediaChannel("TransportName", report_block_datas,
-                               absl::nullopt);
+  RtpCodecParameters codec;
+  codec.payload_type = 3;
+  codec.kind = media_type_;
+  codec.clock_rate = 1000;
+  AddSenderInfoAndMediaChannel("TransportName", report_block_datas, codec);
 
   rtc::scoped_refptr<const RTCStatsReport> report = stats_->GetStatsReport();
   for (auto ssrc : ssrcs) {
@@ -2943,8 +2951,8 @@ TEST_P(RTCStatsCollectorTestWithParamKind,
     expected_remote_inbound_rtp.total_round_trip_time =
         kRoundTripTimeSample1Seconds + kRoundTripTimeSample2Seconds;
     expected_remote_inbound_rtp.round_trip_time_measurements = 2;
-    // This test does not set up RTCCodecStats, so `codec_id` and `jitter` are
-    // expected to be missing. These are tested separately.
+    expected_remote_inbound_rtp.codec_id = "RTCCodec_mid_Outbound_3";
+    expected_remote_inbound_rtp.jitter = 0;
 
     ASSERT_TRUE(report->Get(expected_remote_inbound_rtp.id()));
     EXPECT_EQ(report->Get(expected_remote_inbound_rtp.id())
@@ -3050,8 +3058,12 @@ TEST_P(RTCStatsCollectorTestWithParamKind,
   rtcp_transport_channel_stats.dtls_state = DtlsTransportState::kNew;
   pc_->SetTransportStats("TransportName", {rtp_transport_channel_stats,
                                            rtcp_transport_channel_stats});
-  AddSenderInfoAndMediaChannel("TransportName", {report_block_data},
-                               absl::nullopt);
+
+  RtpCodecParameters codec;
+  codec.payload_type = 3;
+  codec.kind = media_type_;
+  codec.clock_rate = 1000;
+  AddSenderInfoAndMediaChannel("TransportName", {report_block_data}, codec);
 
   rtc::scoped_refptr<const RTCStatsReport> report = stats_->GetStatsReport();
 
@@ -3148,6 +3160,7 @@ TEST_F(RTCStatsCollectorTest, CollectEchoReturnLossFromTrackAudioProcessor) {
   cricket::VoiceSenderInfo voice_sender_info_ssrc1;
   voice_sender_info_ssrc1.local_stats.push_back(cricket::SsrcSenderInfo());
   voice_sender_info_ssrc1.local_stats[0].ssrc = 1;
+  voice_sender_info_ssrc1.codec_payload_type = 0;
 
   stats_->CreateMockRtpSendersReceiversAndChannels(
       {std::make_pair(local_audio_track.get(), voice_sender_info_ssrc1)}, {},
