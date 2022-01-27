@@ -33,6 +33,23 @@
       "message": "kthelgason@webrtc.org could you review, please?",
       "revId": "9a5a69eaee3f6c3be95f46d5824097cc6c392534",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daea7609_9abde438",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2022-01-27T13:48:26Z",
+      "side": 1,
+      "message": "I don\u0027t know the current state of Metal/openGL support on simulators, it used to be the case that metal would not work at all on simulators. Jake, are you running this on an M1-based mac? Might that be a factor?\n\nIn any case, this is a low-risk change, and if it breaks something on simulators that somehow the tests don\u0027t catch, I guess we\u0027ll soon find out 😊\n\nLGTM",
+      "revId": "9a5a69eaee3f6c3be95f46d5824097cc6c392534",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
