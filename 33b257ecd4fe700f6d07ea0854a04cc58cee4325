@@ -237,6 +237,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c9e3935_bb1226b8",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-27T15:50:55Z",
+      "side": 1,
+      "message": "I am good with removing this check completely. I have tried the whole suite with this removed, and it still passes all tests other than the tests explicitly testing this behaviour. I have removed the check since that is the case. I can add a follow-up CL to implement this behaviour in frame_buffer3 if that makes sense to you. WDYT?",
+      "parentUuid": "28e75902_5a98d557",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 7
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7724a9a7_e14bd083",
