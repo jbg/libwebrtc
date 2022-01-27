@@ -16,6 +16,24 @@
       "message": "Are we not checking the return value anymore? I guess RtpDemuxer will still log an error, but this seems worth treating as a hard error and causing SetRemoteDescription to fail since it would typically mean you have conflicting SDP.",
       "revId": "ac72dda645f02dd45868ee554d658f2ad9ace132",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b877c94_40b243b9",
+        "filename": "pc/channel.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-27T21:58:31Z",
+      "side": 0,
+      "message": "Hmm,yes we\u0027d have to do that in MaybeUpdateDemuxerAndRtpExtensions_w now.\nI did look into that though and seem to recall that there were a couple of other SDP checks that would check the same thing, which would cause the operation to fail. However, assuming that\u0027s the case, we should at least have a DCHECK here.\n\nDo you have an example test case that could fail? We could add more tests like SetRemoteDescriptionFailsWithDuplicateMids to cover that.",
+      "parentUuid": "c37c305c_d5b54f88",
+      "revId": "ac72dda645f02dd45868ee554d658f2ad9ace132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
