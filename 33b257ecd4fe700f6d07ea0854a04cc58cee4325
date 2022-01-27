@@ -263,6 +263,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c2f64d03_cbeef6e7",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-27T17:28:55Z",
+      "side": 1,
+      "message": "No, this does not belong in FB3 (since it shouldn\u0027t care about timestamps). If there is a 6h gap between two frames it\u0027s up to the scheduler to decide on how to continue decoding the stream.",
+      "parentUuid": "8c9e3935_bb1226b8",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 7
+      },
+      "revId": "33b257ecd4fe700f6d07ea0854a04cc58cee4325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7724a9a7_e14bd083",
         "filename": "video/frame_decode_timing.cc",
         "patchSetId": 19
