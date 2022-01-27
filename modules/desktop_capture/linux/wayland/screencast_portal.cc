@@ -13,91 +13,34 @@
 #include <gio/gunixfdlist.h>
 #include <glib-object.h>
 
+#include "absl/functional/bind_front.h"
+#include "modules/desktop_capture/linux/wayland/constants.h"
+#include "modules/desktop_capture/linux/wayland/glib_utils.h"
+#include "modules/desktop_capture/linux/wayland/scoped_glib.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 
 namespace webrtc {
 
-const char kDesktopBusName[] = "org.freedesktop.portal.Desktop";
-const char kDesktopObjectPath[] = "/org/freedesktop/portal/desktop";
-const char kDesktopRequestObjectPath[] =
-    "/org/freedesktop/portal/desktop/request";
-const char kSessionInterfaceName[] = "org.freedesktop.portal.Session";
-const char kRequestInterfaceName[] = "org.freedesktop.portal.Request";
-const char kScreenCastInterfaceName[] = "org.freedesktop.portal.ScreenCast";
-
-template <class T>
-class Scoped {
- public:
-  Scoped() {}
-  explicit Scoped(T* val) { ptr_ = val; }
-  ~Scoped() { RTC_DCHECK_NOTREACHED(); }
-
-  T* operator->() { return ptr_; }
-
-  bool operator!() { return ptr_ == nullptr; }
-
-  T* get() { return ptr_; }
-
-  T** receive() {
-    RTC_CHECK(!ptr_);
-    return &ptr_;
-  }
-
-  Scoped& operator=(T* val) {
-    ptr_ = val;
-    return *this;
-  }
-
- protected:
-  T* ptr_ = nullptr;
-};
-
-template <>
-Scoped<GError>::~Scoped() {
-  if (ptr_) {
-    g_error_free(ptr_);
-  }
-}
-
-template <>
-Scoped<char>::~Scoped() {
-  if (ptr_) {
-    g_free(ptr_);
-  }
-}
-
-template <>
-Scoped<GVariant>::~Scoped() {
-  if (ptr_) {
-    g_variant_unref(ptr_);
-  }
-}
-
-template <>
-Scoped<GVariantIter>::~Scoped() {
-  if (ptr_) {
-    g_variant_iter_free(ptr_);
-  }
-}
-
-template <>
-Scoped<GDBusMessage>::~Scoped() {
-  if (ptr_) {
-    g_object_unref(ptr_);
-  }
-}
-
-template <>
-Scoped<GUnixFDList>::~Scoped() {
-  if (ptr_) {
-    g_object_unref(ptr_);
-  }
-}
-
 ScreenCastPortal::ScreenCastPortal(CaptureSourceType source_type,
                                    PortalNotifier* notifier)
-    : notifier_(notifier), capture_source_type_(source_type) {}
+    : notifier_(notifier),
+      capture_source_type_(source_type),
+      proxy_request_response_handler_(OnProxyRequested),
+      sources_request_response_signal_handler_(OnSourcesRequestResponseSignal) {
+}
+
+ScreenCastPortal::ScreenCastPortal(
+    CaptureSourceType source_type,
+    PortalNotifier* notifier,
+    ProxyRequestResponseHandler proxy_request_response_handler,
+    SourcesRequestResponseSignalHandler sources_request_response_signal_handler)
+    : notifier_(notifier),
+      capture_source_type_(source_type),
+      proxy_request_response_handler_(
+          std::move(proxy_request_response_handler)),
+      sources_request_response_signal_handler_(
+          std::move(sources_request_response_signal_handler)) {}
 
 ScreenCastPortal::~ScreenCastPortal() {
   if (start_request_signal_id_) {
@@ -148,21 +91,13 @@ void ScreenCastPortal::Start() {
   g_dbus_proxy_new_for_bus(
       G_BUS_TYPE_SESSION, G_DBUS_PROXY_FLAGS_NONE, /*info=*/nullptr,
       kDesktopBusName, kDesktopObjectPath, kScreenCastInterfaceName,
-      cancellable_, reinterpret_cast<GAsyncReadyCallback>(OnProxyRequested),
+      cancellable_,
+      reinterpret_cast<GAsyncReadyCallback>(&proxy_request_response_handler_),
       this);
 }
 
 void ScreenCastPortal::PortalFailed(RequestResponse result) {
   notifier_->OnScreenCastRequestResult(result, pw_stream_node_id_, pw_fd_);
-}
-
-uint32_t ScreenCastPortal::SetupRequestResponseSignal(
-    const char* object_path,
-    GDBusSignalCallback callback) {
-  return g_dbus_connection_signal_subscribe(
-      connection_, kDesktopBusName, kRequestInterfaceName, "Response",
-      object_path, /*arg0=*/nullptr, G_DBUS_SIGNAL_FLAGS_NO_MATCH_RULE,
-      callback, this, /*user_data_free_func=*/nullptr);
 }
 
 // static
@@ -190,23 +125,6 @@ void ScreenCastPortal::OnProxyRequested(GObject* /*object*/,
   that->SessionRequest();
 }
 
-// static
-std::string ScreenCastPortal::PrepareSignalHandle(GDBusConnection* connection,
-                                                  const char* token) {
-  Scoped<char> sender(
-      g_strdup(g_dbus_connection_get_unique_name(connection) + 1));
-  for (int i = 0; sender.get()[i]; ++i) {
-    if (sender.get()[i] == '.') {
-      sender.get()[i] = '_';
-    }
-  }
-
-  const char* handle = g_strconcat(kDesktopRequestObjectPath, "/", sender.get(),
-                                   "/", token, /*end of varargs*/ nullptr);
-
-  return handle;
-}
-
 void ScreenCastPortal::SessionRequest() {
   GVariantBuilder builder;
   Scoped<char> variant_string;
@@ -221,8 +139,9 @@ void ScreenCastPortal::SessionRequest() {
                         g_variant_new_string(variant_string.get()));
 
   portal_handle_ = PrepareSignalHandle(connection_, variant_string.get());
-  session_request_signal_id_ = SetupRequestResponseSignal(
-      portal_handle_.c_str(), OnSessionRequestResponseSignal);
+  session_request_signal_id_ =
+      SetupRequestResponseSignal(connection_, portal_handle_.c_str(),
+                                 OnSessionRequestResponseSignal, this);
 
   RTC_LOG(LS_INFO) << "Screen cast session requested.";
   g_dbus_proxy_call(proxy_, "CreateSession", g_variant_new("(a{sv})", &builder),
@@ -358,8 +277,11 @@ void ScreenCastPortal::SourcesRequest() {
                         g_variant_new_string(variant_string.get()));
 
   sources_handle_ = PrepareSignalHandle(connection_, variant_string.get());
-  sources_request_signal_id_ = SetupRequestResponseSignal(
-      sources_handle_.c_str(), OnSourcesRequestResponseSignal);
+  sources_request_signal_id_ =
+      SetupRequestResponseSignal(connection_, sources_handle_.c_str(),
+                                 reinterpret_cast<GDBusSignalCallback>(
+                                     &sources_request_response_signal_handler_),
+                                 this);
 
   RTC_LOG(LS_INFO) << "Requesting sources from the screen cast session.";
   g_dbus_proxy_call(
@@ -442,7 +364,7 @@ void ScreenCastPortal::StartRequest() {
 
   start_handle_ = PrepareSignalHandle(connection_, variant_string.get());
   start_request_signal_id_ = SetupRequestResponseSignal(
-      start_handle_.c_str(), OnStartRequestResponseSignal);
+      connection_, start_handle_.c_str(), OnStartRequestResponseSignal, this);
 
   // "Identifier for the application window", this is Wayland, so not "x11:...".
   const char parent_window[] = "";
@@ -533,8 +455,7 @@ void ScreenCastPortal::OnStartRequestResponseSignal(GDBusConnection* connection,
       RTC_DCHECK(options.get());
 
       if (g_variant_lookup(options.get(), "source_type", "u", &type)) {
-        that->capture_source_type_ =
-            static_cast<ScreenCastPortal::CaptureSourceType>(type);
+        that->capture_source_type_ = static_cast<CaptureSourceType>(type);
       }
 
       that->pw_stream_node_id_ = stream_id;
@@ -544,6 +465,27 @@ void ScreenCastPortal::OnStartRequestResponseSignal(GDBusConnection* connection,
   }
 
   that->OpenPipeWireRemote();
+}
+
+void ScreenCastPortal::SetSessionHandle(std::string session_handle) {
+  session_handle_ = std::move(session_handle);
+}
+
+void ScreenCastPortal::SetProxyConnection(GDBusProxy* proxy) {
+  proxy_ = proxy;
+  connection_ = g_dbus_proxy_get_connection(proxy_);
+}
+
+void ScreenCastPortal::SetPipewireStreamNodeId(uint32_t pw_stream_node_id) {
+  pw_stream_node_id_ = pw_stream_node_id;
+}
+
+uint32_t ScreenCastPortal::pipewire_stream_node_id() {
+  return pw_stream_node_id_;
+}
+
+int ScreenCastPortal::pipewire_socket_fd() {
+  return pw_fd_;
 }
 
 void ScreenCastPortal::OpenPipeWireRemote() {
@@ -593,8 +535,7 @@ void ScreenCastPortal::OnOpenPipeWireRemoteRequested(GDBusProxy* proxy,
   }
 
   that->notifier_->OnScreenCastRequestResult(
-      ScreenCastPortal::RequestResponse::kSuccess, that->pw_stream_node_id_,
-      that->pw_fd_);
+      RequestResponse::kSuccess, that->pw_stream_node_id_, that->pw_fd_);
 }
 
 }  // namespace webrtc
