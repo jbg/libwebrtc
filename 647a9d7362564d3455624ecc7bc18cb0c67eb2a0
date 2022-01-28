@@ -33,6 +33,24 @@
       "message": "You beat me to it, I was looking into this as well. I.e. Running recipes in python3 is not a \"runs all your sub scripts in py3\" solution :)  ",
       "revId": "647a9d7362564d3455624ecc7bc18cb0c67eb2a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "371849af_59dc89ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-01-28T07:38:51Z",
+      "side": 1,
+      "message": "It was thanks to Michael (then I created a CL out of curiosity). 😊\n\nChris, is this invoke in the recipes also requiring some changes https://source.chromium.org/chromium/chromium/tools/build/+/main:recipes/recipes/webrtc/auto_roll_webrtc_deps.py;l\u003d104;drc\u003d5e554798536d9aa822c85bac69e5a0292697bede ?",
+      "parentUuid": "fac7adec_a358e778",
+      "revId": "647a9d7362564d3455624ecc7bc18cb0c67eb2a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
