@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15ba2c96_7dc15706",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-28T15:46:58Z",
+      "side": 1,
+      "message": "LGTM*2",
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38cb32de_fe110a27",
+        "filename": "video/frame_buffer_proxy_unittest.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-28T15:46:58Z",
+      "side": 1,
+      "message": "Should we keep this test? Keep it if you think it\u0027s useful.",
+      "range": {
+        "startLine": 620,
+        "startChar": 29,
+        "endLine": 620,
+        "endChar": 49
+      },
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b84f1a_5f6e83eb",
+        "filename": "video/frame_buffer_proxy_unittest.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-28T15:46:58Z",
+      "side": 1,
+      "message": "nit: WDYT about `VeryLongStreamPause` or `NextFrameWithOldTimestamp`?\n\nnit: Could this test be simplified? Would it be possible to just insert two frames?",
+      "range": {
+        "startLine": 659,
+        "startChar": 29,
+        "endLine": 659,
+        "endChar": 41
+      },
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
