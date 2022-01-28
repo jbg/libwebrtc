@@ -34,6 +34,24 @@
       "parentUuid": "c37c305c_d5b54f88",
       "revId": "ac72dda645f02dd45868ee554d658f2ad9ace132",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31cd75a8_44d39223",
+        "filename": "pc/channel.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 5686
+      },
+      "writtenOn": "2022-01-28T01:23:21Z",
+      "side": 0,
+      "message": "The most obvious test case would be duplicate \"a\u003dssrc\"s in different m\u003d sections. \n\nThere are also some unexpected situations where this can fail (where it really shouldn\u0027t), like if an SSRC was initially associated with a sink due to MID or payload type (via AddSsrcSinkBinding) and then another m\u003d section adds it explicitly in an a\u003dssrc. Here\u0027s a bug since I couldn\u0027t find one already, though I know it\u0027s been discussed in various comments: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d13623",
+      "parentUuid": "1b877c94_40b243b9",
+      "revId": "ac72dda645f02dd45868ee554d658f2ad9ace132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
