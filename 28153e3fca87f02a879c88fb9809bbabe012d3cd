@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3a8a9e9_834b1de8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-28T12:13:44Z",
+      "side": 1,
+      "message": "This SHOULD have returned rtc::ADAPTER_TYPE_UNKNOWN for all VPNs previous to this CL.\n\nCan you add an unit test that verifies that it doesn\u0027t?\n",
+      "revId": "28153e3fca87f02a879c88fb9809bbabe012d3cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7d480c5_60c5c484",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-01-28T12:13:44Z",
+      "side": 1,
+      "message": "Given this particular failure, it seems prudent to add a \"default: LOG(LS_VERBOSE) \u003c\u003c \"Unknown network cost encountered\"; return rtc::ADAPTER_TYPE_UNKNOWN\" to the switch, so that at least verbose logging will show you what you did wrong.\n\n(Since this is a number that comes from external sources, LS_ERROR is clearly not prudent, and even LS_INFO might generate log spew).",
+      "revId": "28153e3fca87f02a879c88fb9809bbabe012d3cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
