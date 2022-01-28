@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41978411_77a96e03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-01-28T07:54:07Z",
+      "side": 1,
+      "message": "Skipping presubmit complaining on py2 coding standards.",
+      "revId": "9d306ee346a4a718d3bf07e71d25d566ddef4301",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
