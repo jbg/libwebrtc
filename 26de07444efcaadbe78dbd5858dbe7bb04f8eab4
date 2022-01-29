@@ -18,6 +18,74 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcaa31be_c024318b",
+        "filename": "test/run_loop.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-29T09:33:27Z",
+      "side": 1,
+      "message": "can you document the difference between the two flush methods?\nIt would also be good to add a test for it, similar to RunLoopTest.Flush that both tests the correct functionality and helps understand when one would need the \u0027Immediate\u0027 method.",
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68ff423a_f869d353",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-29T09:33:27Z",
+      "side": 1,
+      "message": "Class docs?",
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30a227c6_51f46708",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-29T09:33:27Z",
+      "side": 1,
+      "message": "there\u0027s a lot of logic in this implementation, so I\u0027m going to lean on Philip as the frame buffer expert 😊",
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e6cf02_5851046d",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-29T09:33:27Z",
+      "side": 1,
+      "message": "nit: this \u0027else\u0027 isn\u0027t needed since the preceding scope is an early return.\n\nThis pattern:\n\n  int Method() {\n    if (foo) {\n      return Bar();\n    } else {\n      return NotBar();\n    }\n  }\n\nTends to read as if there are three exit paths for the function (as if the return type was void), whereas this makes it clear where the return paths are:\n\n  int Method() {\n    if (foo) {\n      return Bar();\n    }\n    return NotBar();\n  }",
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "38cb32de_fe110a27",
@@ -60,6 +128,23 @@
         "endLine": 659,
         "endChar": 41
       },
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aff72d5_d7a859e9",
+        "filename": "video/frame_decode_timing.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-29T09:33:27Z",
+      "side": 1,
+      "message": "thanks for using dlog!",
       "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
