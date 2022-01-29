@@ -52,6 +52,24 @@
       "parentUuid": "1b877c94_40b243b9",
       "revId": "ac72dda645f02dd45868ee554d658f2ad9ace132",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fbb925d_bcc10ad8",
+        "filename": "pc/channel.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-01-29T02:08:11Z",
+      "side": 0,
+      "message": "Thanks Taylor - I\u0027ll take a look. In the meantime, restoring the check here:\nhttps://webrtc-review.googlesource.com/c/src/+/249940/",
+      "parentUuid": "31cd75a8_44d39223",
+      "revId": "ac72dda645f02dd45868ee554d658f2ad9ace132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
