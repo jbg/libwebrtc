@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee9dbb53_d669a80c",
+        "filename": "test/run_loop.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-31T09:34:13Z",
+      "side": 1,
+      "message": "Looking at this again, I think that the FlushImmediate method could be removed. The real difference is that if there is a test clock, Flush() does not work since the process loop must run either forever or 0ms. Due to the condition   \n\n RTC_DCHECK(GetClockForTesting() \u003d\u003d nullptr || cmsLoop \u003d\u003d 0 || cmsLoop \u003d\u003d \n kForever);\n \nI can perhaps change `Flush()` to instead check `GetClockForTesting` and use 0 for the delay in the case there is a testing clock. WDYT?",
+      "parentUuid": "fcaa31be_c024318b",
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68ff423a_f869d353",
         "filename": "video/frame_buffer_proxy.cc",
         "patchSetId": 24
@@ -48,6 +66,24 @@
       "writtenOn": "2022-01-29T09:33:27Z",
       "side": 1,
       "message": "Class docs?",
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12223ace_5b37aa28",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-31T09:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68ff423a_f869d353",
       "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2022-01-29T09:33:27Z",
       "side": 1,
       "message": "there\u0027s a lot of logic in this implementation, so I\u0027m going to lean on Philip as the frame buffer expert 😊",
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9975b017_3f1a0b57",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-31T09:34:13Z",
+      "side": 1,
+      "message": "Yes agreed! Once this is merged into VideoReceiveStream2 a lot of things can hopefully be cleaned up",
+      "parentUuid": "30a227c6_51f46708",
       "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -88,6 +142,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a3554be4_edbff924",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-31T09:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12e6cf02_5851046d",
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "38cb32de_fe110a27",
         "filename": "video/frame_buffer_proxy_unittest.cc",
         "patchSetId": 24
@@ -99,6 +171,30 @@
       "writtenOn": "2022-01-28T15:46:58Z",
       "side": 1,
       "message": "Should we keep this test? Keep it if you think it\u0027s useful.",
+      "range": {
+        "startLine": 620,
+        "startChar": 29,
+        "endLine": 620,
+        "endChar": 49
+      },
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13fe195c_c89225d0",
+        "filename": "video/frame_buffer_proxy_unittest.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-31T09:34:13Z",
+      "side": 1,
+      "message": "It can be removed as it is covered by the following test.",
+      "parentUuid": "38cb32de_fe110a27",
       "range": {
         "startLine": 620,
         "startChar": 29,
@@ -132,6 +228,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b09e5262_6c3b4b2c",
+        "filename": "video/frame_buffer_proxy_unittest.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-31T09:34:13Z",
+      "side": 1,
+      "message": "You are correct, 2 frames work! I will clean this.",
+      "parentUuid": "c7b84f1a_5f6e83eb",
+      "range": {
+        "startLine": 659,
+        "startChar": 29,
+        "endLine": 659,
+        "endChar": 41
+      },
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aff72d5_d7a859e9",
@@ -145,6 +265,24 @@
       "writtenOn": "2022-01-29T09:33:27Z",
       "side": 1,
       "message": "thanks for using dlog!",
+      "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5060b57_c5d1cf16",
+        "filename": "video/frame_decode_timing.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-01-31T09:34:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6aff72d5_d7a859e9",
       "revId": "26de07444efcaadbe78dbd5858dbe7bb04f8eab4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
