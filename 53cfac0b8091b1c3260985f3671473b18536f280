@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9802077a_a8f1b71f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-01-31T15:01:19Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, Mark. The usage will stay inside desktop_capturer. We can pull it to rtc_base/ or above if needed later.",
+      "parentUuid": "7bb6657d_2b04b224",
+      "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a618623_a70ffdf8",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-01-27T19:46:08Z",
       "side": 1,
       "message": "Add newline after #include.",
+      "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "093418cb_1df48393",
+        "filename": "modules/desktop_capture/linux/wayland/utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-01-31T15:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a618623_a70ffdf8",
       "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13523984_7424acc6",
+        "filename": "modules/desktop_capture/linux/wayland/utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-01-31T15:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76df1035_a9944ee9",
+      "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0029c456_5751fde1",
@@ -86,6 +140,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "994ce70d_7120230b",
+        "filename": "modules/desktop_capture/linux/wayland/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-01-31T15:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0029c456_5751fde1",
+      "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3565c6d8_842c738f",
@@ -99,6 +171,24 @@
       "writtenOn": "2022-01-27T19:46:08Z",
       "side": 1,
       "message": "Can this go in the .cc?",
+      "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c55e59b_64a4cca2",
+        "filename": "modules/desktop_capture/linux/wayland/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-01-31T15:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3565c6d8_842c738f",
       "revId": "53cfac0b8091b1c3260985f3671473b18536f280",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
