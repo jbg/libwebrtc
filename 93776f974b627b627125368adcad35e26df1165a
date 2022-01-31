@@ -34,6 +34,24 @@
       "parentUuid": "94a58137_1319d59d",
       "revId": "93776f974b627b627125368adcad35e26df1165a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0723dc29_7d682fdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-01-31T12:39:43Z",
+      "side": 1,
+      "message": "Sorry for the delay.\n\nThere is a lot work going on regarding frame buffers (see frame_buffer3.cc), and this class will (hopefully) be deprecated soon. I don\u0027t think we should land any changes, especially changes we can\u0027t test.",
+      "parentUuid": "a1d454b0_6c154165",
+      "revId": "93776f974b627b627125368adcad35e26df1165a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
