@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "650295fb_5f7c0d83",
+        "filename": "rtc_tools/rtc_event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-02-02T14:05:23Z",
+      "side": 0,
+      "message": "Not converting the time to the call timeline looks like a bug. However, it won\u0027t be visible in the output since it just means that the last state remains longer than the call.",
+      "range": {
+        "startLine": 970,
+        "startChar": 68,
+        "endLine": 970,
+        "endChar": 77
+      },
+      "revId": "7e031b1de040bf4a2cfc1bc44654345dd00bedee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70ea7cb8_1170af10",
+        "filename": "rtc_tools/rtc_event_log_visualizer/plot_base.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-02-02T14:05:23Z",
+      "side": 0,
+      "message": "Lingering comment from a previous refactoring.",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 12
+      },
+      "revId": "7e031b1de040bf4a2cfc1bc44654345dd00bedee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

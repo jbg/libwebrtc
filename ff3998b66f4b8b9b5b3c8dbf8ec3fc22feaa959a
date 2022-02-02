@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c141c3e_b3e841ca",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-02-02T14:05:23Z",
+      "side": 1,
+      "message": "first_timestamp and last_timestamp is initialized to +Infinity and -Infinity, respectively and then for each event updated to the minimum and maximum of the timestamps. If no events exists in the log, the first_timestamp and last_timestamp will contain the bogus values. This seems like a cleaner way to catch the out-of-order timestamps.",
+      "range": {
+        "startLine": 1296,
+        "startChar": 6,
+        "endLine": 1296,
+        "endChar": 40
+      },
+      "revId": "ff3998b66f4b8b9b5b3c8dbf8ec3fc22feaa959a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930ad8c8_972f1b3f",
+        "filename": "rtc_tools/rtc_event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-02-02T14:05:23Z",
+      "side": 1,
+      "message": "The result was assigned from a float anyway and cast to a float again when used.",
+      "range": {
+        "startLine": 944,
+        "startChar": 2,
+        "endLine": 944,
+        "endChar": 7
+      },
+      "revId": "ff3998b66f4b8b9b5b3c8dbf8ec3fc22feaa959a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
