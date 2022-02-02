@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b164783_dc593fa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-02-02T21:11:15Z",
+      "side": 1,
+      "message": "so far it is not spec conformant. The spec would require to check that \u003e 0 bytes have been sent. Not impossible to do with a very similar change but I think that this behavior is improving and does not break.\n\nWill wait for spec issue to come to a conclusion.",
+      "parentUuid": "c4d56d69_6792a733",
+      "revId": "d1258049646f49146b0ab8757dc19866cd45c3f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2b1f04a_c327b5e2",
         "filename": "pc/rtc_stats_collector_unittest.cc",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2022-01-29T10:58:52Z",
       "side": 1,
       "message": "I know we have a ton of those hardcoded stats IDs in the tests, they are still a Bad Thing. The right thing to check for is that there is a codec stat with a codec_id that matches this id, and that its payload type is 3.\n\nWon\u0027t insist on doing it right in this CL, since all the rest of the code is wrong.",
+      "revId": "d1258049646f49146b0ab8757dc19866cd45c3f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f94568_bdadc13e",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2954,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-02-02T21:11:15Z",
+      "side": 1,
+      "message": "lets settle for \"once hbos gets really annoyed and randomizes all ids he\u0027ll have to fix this\"? Trying to not incentivise him ;-)",
+      "parentUuid": "d2b1f04a_c327b5e2",
       "revId": "d1258049646f49146b0ab8757dc19866cd45c3f4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
