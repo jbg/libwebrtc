@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9882e678_5c138e8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6262
+      },
+      "writtenOn": "2022-02-02T14:56:34Z",
+      "side": 1,
+      "message": "My C++ is really bad, bad lgtm :)",
+      "revId": "ff3998b66f4b8b9b5b3c8dbf8ec3fc22feaa959a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c141c3e_b3e841ca",
@@ -42,6 +59,29 @@
         "startChar": 2,
         "endLine": 944,
         "endChar": 7
+      },
+      "revId": "ff3998b66f4b8b9b5b3c8dbf8ec3fc22feaa959a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09afbddb_14382a10",
+        "filename": "rtc_tools/rtc_event_log_visualizer/proto/chart.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6262
+      },
+      "writtenOn": "2022-02-02T14:56:34Z",
+      "side": 1,
+      "message": "Could you add a comment explaining what this contains?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 31
       },
       "revId": "ff3998b66f4b8b9b5b3c8dbf8ec3fc22feaa959a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
