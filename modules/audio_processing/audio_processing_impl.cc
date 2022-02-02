@@ -50,20 +50,6 @@ namespace webrtc {
 
 namespace {
 
-static bool LayoutHasKeyboard(AudioProcessing::ChannelLayout layout) {
-  switch (layout) {
-    case AudioProcessing::kMono:
-    case AudioProcessing::kStereo:
-      return false;
-    case AudioProcessing::kMonoAndKeyboard:
-    case AudioProcessing::kStereoAndKeyboard:
-      return true;
-  }
-
-  RTC_DCHECK_NOTREACHED();
-  return false;
-}
-
 bool SampleRateSupportsMultiBand(int sample_rate_hz) {
   return sample_rate_hz == AudioProcessing::kSampleRate32kHz ||
          sample_rate_hz == AudioProcessing::kSampleRate48kHz;
@@ -309,26 +295,6 @@ int AudioProcessingImpl::Initialize() {
   MutexLock lock_capture(&mutex_capture_);
   InitializeLocked();
   return kNoError;
-}
-
-int AudioProcessingImpl::Initialize(int capture_input_sample_rate_hz,
-                                    int capture_output_sample_rate_hz,
-                                    int render_input_sample_rate_hz,
-                                    ChannelLayout capture_input_layout,
-                                    ChannelLayout capture_output_layout,
-                                    ChannelLayout render_input_layout) {
-  const ProcessingConfig processing_config = {
-      {{capture_input_sample_rate_hz, ChannelsFromLayout(capture_input_layout),
-        LayoutHasKeyboard(capture_input_layout)},
-       {capture_output_sample_rate_hz,
-        ChannelsFromLayout(capture_output_layout),
-        LayoutHasKeyboard(capture_output_layout)},
-       {render_input_sample_rate_hz, ChannelsFromLayout(render_input_layout),
-        LayoutHasKeyboard(render_input_layout)},
-       {render_input_sample_rate_hz, ChannelsFromLayout(render_input_layout),
-        LayoutHasKeyboard(render_input_layout)}}};
-
-  return Initialize(processing_config);
 }
 
 int AudioProcessingImpl::Initialize(const ProcessingConfig& processing_config) {

@@ -530,16 +530,6 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
   // number of channels as the input.
   virtual int Initialize(const ProcessingConfig& processing_config) = 0;
 
-  // Initialize with unpacked parameters. See Initialize() above for details.
-  //
-  // TODO(mgraczyk): Remove once clients are updated to use the new interface.
-  virtual int Initialize(int capture_input_sample_rate_hz,
-                         int capture_output_sample_rate_hz,
-                         int render_sample_rate_hz,
-                         ChannelLayout capture_input_layout,
-                         ChannelLayout capture_output_layout,
-                         ChannelLayout render_input_layout) = 0;
-
   // TODO(peah): This method is a temporary solution used to take control
   // over the parameters in the audio processing module and is likely to change.
   virtual void ApplyConfig(const Config& config) = 0;

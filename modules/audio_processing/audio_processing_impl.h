@@ -63,12 +63,6 @@ class AudioProcessingImpl : public AudioProcessing {
                       std::unique_ptr<CustomAudioAnalyzer> capture_analyzer);
   ~AudioProcessingImpl() override;
   int Initialize() override;
-  int Initialize(int capture_input_sample_rate_hz,
-                 int capture_output_sample_rate_hz,
-                 int render_sample_rate_hz,
-                 ChannelLayout capture_input_layout,
-                 ChannelLayout capture_output_layout,
-                 ChannelLayout render_input_layout) override;
   int Initialize(const ProcessingConfig& processing_config) override;
   void ApplyConfig(const AudioProcessing::Config& config) override;
   bool CreateAndAttachAecDump(const std::string& file_name,
