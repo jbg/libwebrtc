@@ -34,6 +34,41 @@
       "parentUuid": "120d9927_b58ec054",
       "revId": "dc5568661598b813106a0d68b36417888651d1f7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdf6e343_de059f87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-02-03T07:32:36Z",
+      "side": 1,
+      "message": "But none that make a difference based on this patch (or they would have failed).\nSetting the hostname to \"localhost\" should do it. For other names, you would have to inject a custom DNS resolver in order to make the test hermetic.",
+      "parentUuid": "991a45a0_04502643",
+      "revId": "dc5568661598b813106a0d68b36417888651d1f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5566cdc_ecd9e8fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-02-03T07:32:36Z",
+      "side": 1,
+      "message": "But no tests fail....",
+      "revId": "dc5568661598b813106a0d68b36417888651d1f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
