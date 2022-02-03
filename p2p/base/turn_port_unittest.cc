@@ -112,6 +112,9 @@ static const cricket::ProtocolAddress kTurnPort80ProtoAddr(kTurnPort80Addr,
                                                            cricket::PROTO_TCP);
 static const cricket::ProtocolAddress kTurnPort443ProtoAddr(kTurnPort443Addr,
                                                             cricket::PROTO_TCP);
+static const cricket::ProtocolAddress kTurnPortHostnameProtoAddr(
+    kTurnInvalidAddr,
+    cricket::PROTO_UDP);
 
 static const unsigned int MSG_TESTFINISH = 0;
 
@@ -816,6 +819,18 @@ TEST_F(TurnPortTest, TestReconstructedServerUrlForTls) {
   turn_server_.AddInternalSocket(kTurnTcpIntAddr, PROTO_TLS);
   CreateTurnPort(kTurnUsername, kTurnPassword, kTurnTlsProtoAddr);
   TestReconstructedServerUrl(PROTO_TLS, "turns:99.99.99.4:3478?transport=tcp");
+}
+
+TEST_F(TurnPortTest, TestReconstructedServerUrlForHostname) {
+  CreateTurnPort(kTurnUsername, kTurnPassword, kTurnPortHostnameProtoAddr);
+  // This test follows the pattern from TestTurnTcpOnAddressResolveFailure.
+  // As VSS doesn't provide a DNS resolution, name resolve will fail,
+  // the error will be set and contain the url.
+  turn_port_->PrepareAddress();
+  EXPECT_TRUE_WAIT(turn_error_, kResolverTimeout);
+  std::string server_url =
+      "turn:" + kTurnInvalidAddr.ToString() + "?transport=udp";
+  ASSERT_EQ(error_event_.url, server_url);
 }
 
 // Do a normal TURN allocation.
