@@ -14,10 +14,6 @@ if (is_android) {
   import("//build/config/android/rules.gni")
 }
 
-config("threading_chromium_config") {
-  defines = [ "NO_MAIN_THREAD_WRAPPING" ]
-}
-
 if (!rtc_build_ssl) {
   config("external_ssl_library") {
     assert(rtc_ssl_root != "",
