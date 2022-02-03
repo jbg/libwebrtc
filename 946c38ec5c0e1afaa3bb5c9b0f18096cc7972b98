@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b88b53_994fe4f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-03T18:29:54Z",
+      "side": 1,
+      "message": "LGTM, recognizing that my comments are with the pre-existing implementation; if you can address any of them, that would be appreciated.",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320e0f01_6403934d",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-03T18:29:54Z",
+      "side": 1,
+      "message": "If someone uses Scoped\u003cFoo\u003e without defining ~Scoped\u003cFoo\u003e, what happens?  If you leave this declaration out, does that become a compilation failure instead?",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560402e7_0277dc37",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-03T18:29:54Z",
+      "side": 1,
+      "message": "Should be marked const.",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "187e82d3_37fb1ccf",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-03T18:29:54Z",
+      "side": 1,
+      "message": "What about plain a bool operator(), so callers can write if (scoped)?",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a81727d8_ae530539",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-03T18:29:54Z",
+      "side": 1,
+      "message": "Should be marked const.",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b20606b_28e3fd36",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-03T18:29:54Z",
+      "side": 1,
+      "message": "const",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54f8838d_62da6106",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-03T18:29:54Z",
+      "side": 1,
+      "message": "On assignment with nullptr, std::unique_ptr deletes the previous object, while this allows it to leak.  It would be good to either document that explicitly, or DCHECK() to prevent assignment to nullptr (preferred)",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
