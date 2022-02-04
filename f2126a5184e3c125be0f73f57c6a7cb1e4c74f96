@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cfdfa15_151f6fe1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-02-04T08:50:54Z",
+      "side": 1,
+      "message": "I think the problem should be fixed with https://github.com/google/nearby/commit/71292b991bdaaeade081ddb1a1bb7f8c62c23b92.\n\nQuestion: When will that be rolled into chromium and/or chromeos? How to test, prior to reland?",
+      "revId": "f2126a5184e3c125be0f73f57c6a7cb1e4c74f96",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
