@@ -16,6 +16,23 @@
       "message": "Mark PTAL",
       "revId": "50ac3ab80d4d4d9a9fa6c8942b6f4fc97e9e739f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5379d960_c490df97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-04T22:29:59Z",
+      "side": 1,
+      "message": "There is probably not much point in running CFI on any of the wayland/pipewire specific code because of the number of calls in/out of shared libraries.  I wonder if there is a way to denylist CFI for entire files/folders so we don\u0027t end up with random crashers downstream as code moves around here.\n\n",
+      "revId": "50ac3ab80d4d4d9a9fa6c8942b6f4fc97e9e739f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
