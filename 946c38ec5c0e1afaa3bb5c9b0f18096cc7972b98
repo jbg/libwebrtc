@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ae8eb3_93a54e37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-02-04T00:09:16Z",
+      "side": 1,
+      "message": "I have addressed most of the comments/suggestions. Enforcing a compile time exception instead of runtime would involve more restructuring and I will be happy to take it on if need be. kindly let me know of your thoughts when you take another look at the change.",
+      "parentUuid": "c0b88b53_994fe4f4",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "320e0f01_6403934d",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-02-03T18:29:54Z",
       "side": 1,
       "message": "If someone uses Scoped\u003cFoo\u003e without defining ~Scoped\u003cFoo\u003e, what happens?  If you leave this declaration out, does that become a compilation failure instead?",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fca31c6_886dbd2e",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-02-04T00:09:16Z",
+      "side": 1,
+      "message": "I believe it will be a runtime exception rather than compile time if ~Scoped is not overridden which I agree is not great. Making it virtual would enforce the error on compile time but then we would need to define the wrapper classes for all (currently) scoped glib objects and use them wherever we are using glib object types -- let me know if you think that is preferable instead.",
+      "parentUuid": "320e0f01_6403934d",
       "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92cef6a1_b9c59554",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-02-04T00:09:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "560402e7_0277dc37",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "187e82d3_37fb1ccf",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-02-03T18:29:54Z",
       "side": 1,
       "message": "What about plain a bool operator(), so callers can write if (scoped)?",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1d86b2_88ee21f2",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-02-04T00:09:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "187e82d3_37fb1ccf",
       "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -86,6 +158,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a585897d_ea74d561",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-02-04T00:09:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a81727d8_ae530539",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b20606b_28e3fd36",
@@ -103,6 +193,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0849fdf5_77bb97bc",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-02-04T00:09:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b20606b_28e3fd36",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54f8838d_62da6106",
@@ -116,6 +224,24 @@
       "writtenOn": "2022-02-03T18:29:54Z",
       "side": 1,
       "message": "On assignment with nullptr, std::unique_ptr deletes the previous object, while this allows it to leak.  It would be good to either document that explicitly, or DCHECK() to prevent assignment to nullptr (preferred)",
+      "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09401fe5_f5837f99",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-02-04T00:09:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54f8838d_62da6106",
       "revId": "946c38ec5c0e1afaa3bb5c9b0f18096cc7972b98",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
