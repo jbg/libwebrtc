@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af7d0033_1800e422",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-05T12:47:38Z",
+      "side": 1,
+      "message": "Hi, I see you are working on many changes for remote desktop portal, can you add me at least to CC for all the changes you have and will have in the future? I would like to have a track of what\u0027s going on so we don\u0027t simultaneously make changes causing conflicts between our changes.",
+      "revId": "b22d111e4f161dd46a6bc27812e91c8a9f2f8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
