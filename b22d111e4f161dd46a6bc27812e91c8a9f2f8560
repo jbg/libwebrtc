@@ -16,6 +16,23 @@
       "message": "Hi, I see you are working on many changes for remote desktop portal, can you add me at least to CC for all the changes you have and will have in the future? I would like to have a track of what\u0027s going on so we don\u0027t simultaneously make changes causing conflicts between our changes.",
       "revId": "b22d111e4f161dd46a6bc27812e91c8a9f2f8560",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba3c0dc9_c6570034",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-05T14:53:06Z",
+      "side": 1,
+      "message": "This change makes Chromium crash for some reason:\n\n# Fatal error in: ../../third_party/webrtc/modules/desktop_capture/linux/wayland/scoped_glib.h, line 23\n# last system error: 11\n# Check failed: false\n# [0205/154810.490532:ERROR:elf_dynamic_array_reader.h(64)] tag not found\nReceived signal 6\n#0 0x55ceebbae359 base::debug::CollectStackTrace()\n#1 0x55ceebad18b3 base::debug::StackTrace::StackTrace()\n#2 0x55ceebbade11 base::debug::(anonymous namespace)::StackDumpSignalHandler()\n#3 0x7fd77d048750 (/usr/lib64/libc.so.6+0x4274f)\n#4 0x7fd77d09588c __pthread_kill_implementation\n#5 0x7fd77d0486a6 __GI_raise\n#6 0x7fd77d0327d3 __GI_abort\n#7 0x55ceec8c0551 (anonymous namespace)::WriteFatalLogAndAbort()\n#8 0x55ceec8c050b rtc::webrtc_checks_impl::FatalLog()\n#9 0x55ceecde0494 webrtc::ScreenCastPortal::SessionRequest()\n#10 0x55ceecde02e5 webrtc::ScreenCastPortal::OnProxyRequested()\n\nFails on:\n  ~Scoped() { RTC_DCHECK_NOTREACHED(); }\n\nI will try to investigate this later.",
+      "revId": "b22d111e4f161dd46a6bc27812e91c8a9f2f8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
