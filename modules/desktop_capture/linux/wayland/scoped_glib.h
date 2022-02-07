@@ -48,42 +48,42 @@ class Scoped {
 };
 
 template <>
-Scoped<GError>::~Scoped() {
+inline Scoped<GError>::~Scoped() {
   if (ptr_) {
     g_error_free(ptr_);
   }
 }
 
 template <>
-Scoped<char>::~Scoped() {
+inline Scoped<char>::~Scoped() {
   if (ptr_) {
     g_free(ptr_);
   }
 }
 
 template <>
-Scoped<GVariant>::~Scoped() {
+inline Scoped<GVariant>::~Scoped() {
   if (ptr_) {
     g_variant_unref(ptr_);
   }
 }
 
 template <>
-Scoped<GVariantIter>::~Scoped() {
+inline Scoped<GVariantIter>::~Scoped() {
   if (ptr_) {
     g_variant_iter_free(ptr_);
   }
 }
 
 template <>
-Scoped<GDBusMessage>::~Scoped() {
+inline Scoped<GDBusMessage>::~Scoped() {
   if (ptr_) {
     g_object_unref(ptr_);
   }
 }
 
 template <>
-Scoped<GUnixFDList>::~Scoped() {
+inline Scoped<GUnixFDList>::~Scoped() {
   if (ptr_) {
     g_object_unref(ptr_);
   }
