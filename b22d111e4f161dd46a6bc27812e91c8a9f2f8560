@@ -87,6 +87,24 @@
       "parentUuid": "de7792b8_117f8575",
       "revId": "b22d111e4f161dd46a6bc27812e91c8a9f2f8560",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfca5517_4c1e81bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-07T16:25:52Z",
+      "side": 1,
+      "message": "I think in case of templates they have to be defined in the header file. In this case Scoped\u003cchar\u003e was not defined (it was the first usage of this class in the code) and it reached the assertion.\n\nIt was not caught before submit because we don\u0027t have tests for PipeWire capturer and I just hit it once I tried to use it, since I do that on daily basis when working on it.",
+      "parentUuid": "8f593b41_d5ff921e",
+      "revId": "b22d111e4f161dd46a6bc27812e91c8a9f2f8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
