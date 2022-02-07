@@ -51,6 +51,42 @@
       "parentUuid": "ba3c0dc9_c6570034",
       "revId": "b22d111e4f161dd46a6bc27812e91c8a9f2f8560",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b546080_b932f677",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-02-07T15:13:18Z",
+      "side": 1,
+      "message": "Sure, will keep you in the loop for upcoming changes.",
+      "parentUuid": "af7d0033_1800e422",
+      "revId": "b22d111e4f161dd46a6bc27812e91c8a9f2f8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f593b41_d5ff921e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-02-07T15:13:18Z",
+      "side": 1,
+      "message": "Thanks for the quick fix, Jan!\n\nI am not sure how this assertion was reached. Since scoped_glib.cc was included in the sources, the modules using the library should have gotten the template instantiation of the \"Scoped\" class destructor rather than reaching the assertion, or at least that is my understanding.\n\nAny ideas why this was not caught before submit? Also curious to know how did you run into this assertion? Thank you.",
+      "parentUuid": "de7792b8_117f8575",
+      "revId": "b22d111e4f161dd46a6bc27812e91c8a9f2f8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
