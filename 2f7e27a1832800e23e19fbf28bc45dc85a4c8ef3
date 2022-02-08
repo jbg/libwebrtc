@@ -517,6 +517,30 @@
       },
       "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74269751_a92ccef2",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1436,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-02-08T17:21:37Z",
+      "side": 1,
+      "message": "Ack. Removed",
+      "parentUuid": "1ebadce1_fe7e287e",
+      "range": {
+        "startLine": 1436,
+        "startChar": 8,
+        "endLine": 1436,
+        "endChar": 30
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
