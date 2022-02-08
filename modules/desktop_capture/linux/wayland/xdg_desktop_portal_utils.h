@@ -11,7 +11,10 @@
 #ifndef MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_XDG_DESKTOP_PORTAL_UTILS_H_
 #define MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_XDG_DESKTOP_PORTAL_UTILS_H_
 
+#include <gio/gio.h>
 #include <stdint.h>
+
+#include <string>
 
 namespace webrtc {
 
@@ -56,6 +59,17 @@ enum class RequestResponse {
 
   kMaxValue = kError
 };
+
+// Returns a string path for signal handle based on the provided connection and
+// token.
+std::string PrepareSignalHandle(GDBusConnection* connection, const char* token);
+
+// Sets up the callback to execute when a response signal is received for the
+// given object.
+uint32_t SetupRequestResponseSignal(GDBusConnection* connection,
+                                    const char* object_path,
+                                    GDBusSignalCallback callback,
+                                    gpointer user_data);
 
 }  // namespace webrtc
 
