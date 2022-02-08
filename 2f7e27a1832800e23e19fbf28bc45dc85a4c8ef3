@@ -377,6 +377,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "445789d7_b0f3c0fa",
+        "filename": "logging/rtc_event_log/events/rtc_event_field_extraction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-02-08T16:22:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5d6924a9_a0e55ec3",
+      "range": {
+        "startLine": 62,
+        "startChar": 16,
+        "endLine": 62,
+        "endChar": 38
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b56a1fa7_00ee7368",
@@ -461,6 +485,30 @@
       "side": 1,
       "message": "Possibly. My idea was to have label that helps you find all the places that need to be updated when adding a new event type. Wdyt?",
       "parentUuid": "b13b5433_8c6aa4a0",
+      "range": {
+        "startLine": 1436,
+        "startChar": 8,
+        "endLine": 1436,
+        "endChar": 30
+      },
+      "revId": "2f7e27a1832800e23e19fbf28bc45dc85a4c8ef3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ebadce1_fe7e287e",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1436,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2022-02-08T16:22:57Z",
+      "side": 1,
+      "message": "I don\u0027t think such a system would carry its own weight really. Doesn\u0027t take much for it to get out of date and more confusing that clarifying. Usually code search will be helpful enough anyway. Rather, trying to keep the number of places to change low is the way tio go IMO.",
+      "parentUuid": "60beecbe_88eae7ea",
       "range": {
         "startLine": 1436,
         "startChar": 8,
