@@ -126,11 +126,12 @@ ABSL_FLAG(bool,
           false,
           "Activate all of the default components (will be overridden by any "
           "other settings)");
-ABSL_FLAG(int,
-          analog_agc_disable_digital_adaptive,
-          kParameterNotSpecifiedValue,
-          "Force-deactivate (1) digital adaptation in "
-          "experimental AGC. Digital adaptation is active by default (0).");
+ABSL_FLAG(
+    int,
+    analog_agc_digital_adaptive,
+    kParameterNotSpecifiedValue,
+    "Activate (1) or deactivate (0) digital adaptation in experimental AGC. "
+    "Digital adaptation is active by default.");
 ABSL_FLAG(int,
           agc_mode,
           kParameterNotSpecifiedValue,
@@ -418,8 +419,8 @@ SimulationSettings CreateSettings() {
   SetSettingIfFlagSet(absl::GetFlag(FLAGS_analog_agc),
                       &settings.use_analog_agc);
   SetSettingIfFlagSet(absl::GetFlag(FLAGS_vad), &settings.use_vad);
-  SetSettingIfFlagSet(absl::GetFlag(FLAGS_analog_agc_disable_digital_adaptive),
-                      &settings.analog_agc_disable_digital_adaptive);
+  SetSettingIfFlagSet(absl::GetFlag(FLAGS_analog_agc_digital_adaptive),
+                      &settings.analog_agc_digital_adaptive);
   SetSettingIfSpecified(absl::GetFlag(FLAGS_agc_mode), &settings.agc_mode);
   SetSettingIfSpecified(absl::GetFlag(FLAGS_agc_target_level),
                         &settings.agc_target_level);
