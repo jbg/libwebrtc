@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d64024e1_65e9097e",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-08T17:08:45Z",
+      "side": 1,
+      "message": "Chromium style discourages inline functions.  Can you declare the specializations here and move the definitions to the .cc?",
+      "revId": "7aaf0068024197efa76baf2dec3270ed62af3564",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
