@@ -50,6 +50,23 @@
       "message": "Do we know why exactly the previous version of the CL has broken transciever transition from recvonly to sendrecv? (https://crbug.com/1291956)",
       "revId": "0c8e05f6e9eb66cbccda333db6c11990a3c9e2b0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2c2c607_73d9994b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-02-09T09:08:04Z",
+      "side": 1,
+      "message": "+cc hbos@, did you already land the tests for recvonly-\u003esendrecv transition? Is it only chromium test, or are there any webrtc unittests?",
+      "revId": "0c8e05f6e9eb66cbccda333db6c11990a3c9e2b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
