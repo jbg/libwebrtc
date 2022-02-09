@@ -33,6 +33,23 @@
       "message": "api/ lgtm. \n\nFor test coverage, could you add support for the new format in these tests?\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_video/video_frame_unittest.cc;l\u003d438\n\n(It\u0027s a bit unfortunate that tests for crop, scale and rotate methods is that far from implementation).",
       "revId": "0c8e05f6e9eb66cbccda333db6c11990a3c9e2b0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7e269d5_be73c3c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-02-09T09:05:48Z",
+      "side": 1,
+      "message": "Do we know why exactly the previous version of the CL has broken transciever transition from recvonly to sendrecv? (https://crbug.com/1291956)",
+      "revId": "0c8e05f6e9eb66cbccda333db6c11990a3c9e2b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
