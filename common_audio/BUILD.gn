@@ -394,5 +394,8 @@ if (rtc_include_tests && !build_with_chromium) {
 
       shard_timeout = 900
     }
+    if (is_ios) {
+      data = [ "$root_out_dir" ]
+    }
   }
 }
