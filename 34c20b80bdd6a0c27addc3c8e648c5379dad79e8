@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22e41613_53570454",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-09T16:34:57Z",
+      "side": 1,
+      "message": "Tested and screensharing still works.\n\n+1 from my side.",
+      "revId": "34c20b80bdd6a0c27addc3c8e648c5379dad79e8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
