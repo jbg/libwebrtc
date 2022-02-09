@@ -901,6 +901,7 @@ class MetaBuildWrapper(object):
 
     is_android = 'target_os="android"' in vals['gn_args']
     is_linux = self.platform.startswith('linux') and not is_android
+    is_ios = 'target_os="ios"' in vals['gn_args']
 
     if test_type == 'nontest':
       self.WriteFailureAndRaise('We should not be isolating %s.' % target,
@@ -932,6 +933,20 @@ class MetaBuildWrapper(object):
           '--target', target, '--logdog-bin-cmd', '../../bin/logdog_butler',
           '--logcat-output-file', '${ISOLATED_OUTDIR}/logcats',
           '--store-tombstones'
+      ]
+    elif is_ios:
+      cmdline += [
+          'bin/run_%s' % target, '--out-dir', '${ISOLATED_OUTDIR}',
+          '--xcode-build-version', '12d4e', '--xctest'
+          #'--platform',
+          #'iPhone X',
+          #'--version',
+          #'14.7',
+          #'--args-json',
+          #'{"test_args":
+          #  ["--undefok=\"enable-run-ios-unittests-with-xctest\""]}',
+          #'--iossim', 'src/out/Debug-iphonesimulator/iossim', '--platform',
+          #'iPhone 11', '--version', '14.7', '--xctest'
       ]
     else:
       if test_type == 'raw':
