@@ -29,13 +29,18 @@ import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Build;
 import android.telephony.TelephonyManager;
+import androidx.annotation.GuardedBy;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Borrowed from Chromium's
@@ -93,11 +98,21 @@ public class NetworkMonitorAutoDetect extends BroadcastReceiver implements Netwo
    * and above.
    */
   @SuppressLint("NewApi")
-  private class SimpleNetworkCallback extends NetworkCallback {
+  @VisibleForTesting()
+  class SimpleNetworkCallback extends NetworkCallback {
+    @GuardedBy("availableNetworks") final Set<Network> availableNetworks;
+
+    SimpleNetworkCallback(Set<Network> availableNetworks) {
+      this.availableNetworks = availableNetworks;
+    }
+
     @Override
     public void onAvailable(Network network) {
       Logging.d(TAG, "Network becomes available: " + network.toString());
       onNetworkChanged(network);
+      synchronized (availableNetworks) {
+        availableNetworks.add(network);
+      }
     }
 
     @Override
@@ -131,6 +146,10 @@ public class NetworkMonitorAutoDetect extends BroadcastReceiver implements Netwo
     public void onLost(Network network) {
       Logging.d(TAG, "Network " + network.toString() + " is disconnected");
       observer.onNetworkDisconnect(networkToNetId(network));
+
+      synchronized (availableNetworks) {
+        availableNetworks.remove(network);
+      }
     }
 
     private void onNetworkChanged(Network network) {
@@ -149,15 +168,19 @@ public class NetworkMonitorAutoDetect extends BroadcastReceiver implements Netwo
      */
     @Nullable private final ConnectivityManager connectivityManager;
 
-    ConnectivityManagerDelegate(Context context) {
+    @NonNull @GuardedBy("availableNetworks") private final Set<Network> availableNetworks;
+
+    ConnectivityManagerDelegate(Context context, Set<Network> availableNetworks) {
       connectivityManager =
           (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+      this.availableNetworks = availableNetworks;
     }
 
     // For testing.
-    ConnectivityManagerDelegate() {
+    ConnectivityManagerDelegate(Set<Network> availableNetworks) {
       // All the methods below should be overridden.
       connectivityManager = null;
+      this.availableNetworks = availableNetworks;
     }
 
     /**
@@ -265,6 +288,13 @@ public class NetworkMonitorAutoDetect extends BroadcastReceiver implements Netwo
       if (connectivityManager == null) {
         return new Network[0];
       }
+
+      synchronized (availableNetworks) {
+        if (!availableNetworks.isEmpty()) {
+          return availableNetworks.toArray(new Network[0]);
+        }
+      }
+
       return connectivityManager.getAllNetworks();
     }
 
@@ -388,6 +418,7 @@ public class NetworkMonitorAutoDetect extends BroadcastReceiver implements Netwo
     /** Only callable on Lollipop and newer releases. */
     @SuppressLint("NewApi")
     public void registerNetworkCallback(NetworkCallback networkCallback) {
+      // Requests the following capabilities by default: NOT_VPN, NOT_RESTRICTED, TRUSTED
       connectivityManager.registerNetworkCallback(
           new NetworkRequest.Builder()
               .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
@@ -567,6 +598,8 @@ public class NetworkMonitorAutoDetect extends BroadcastReceiver implements Netwo
   private WifiDirectManagerDelegate wifiDirectManagerDelegate;
   private static boolean includeWifiDirect;
 
+  @GuardedBy("availableNetworks") final Set<Network> availableNetworks = new HashSet<>();
+
   private boolean isRegistered;
   private NetworkChangeDetector.ConnectionType connectionType;
   private String wifiSSID;
@@ -576,7 +609,7 @@ public class NetworkMonitorAutoDetect extends BroadcastReceiver implements Netwo
   public NetworkMonitorAutoDetect(NetworkChangeDetector.Observer observer, Context context) {
     this.observer = observer;
     this.context = context;
-    connectivityManagerDelegate = new ConnectivityManagerDelegate(context);
+    connectivityManagerDelegate = new ConnectivityManagerDelegate(context, availableNetworks);
     wifiManagerDelegate = new WifiManagerDelegate(context);
 
     final NetworkState networkState = connectivityManagerDelegate.getNetworkState();
@@ -600,7 +633,7 @@ public class NetworkMonitorAutoDetect extends BroadcastReceiver implements Netwo
         tempNetworkCallback = null;
       }
       mobileNetworkCallback = tempNetworkCallback;
-      allNetworkCallback = new SimpleNetworkCallback();
+      allNetworkCallback = new SimpleNetworkCallback(availableNetworks);
       connectivityManagerDelegate.registerNetworkCallback(allNetworkCallback);
     } else {
       mobileNetworkCallback = null;

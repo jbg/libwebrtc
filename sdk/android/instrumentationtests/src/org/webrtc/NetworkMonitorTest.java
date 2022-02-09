@@ -10,11 +10,14 @@
 
 package org.webrtc;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.mock;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,7 +31,10 @@ import android.support.test.InstrumentationRegistry;
 import androidx.annotation.Nullable;
 import androidx.test.filters.MediumTest;
 import androidx.test.filters.SmallTest;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.chromium.base.test.BaseJUnit4ClassRunner;
 import org.chromium.base.test.UiThreadTest;
 import org.junit.Before;
@@ -82,6 +88,14 @@ public class NetworkMonitorTest {
     private int networkSubtype;
     private int underlyingNetworkTypeForVpn;
     private int underlyingNetworkSubtypeForVpn;
+
+    MockConnectivityManagerDelegate() {
+      this(new HashSet<>());
+    }
+
+    MockConnectivityManagerDelegate(Set<Network> availableNetworks) {
+      super(availableNetworks);
+    }
 
     @Override
     public NetworkState getNetworkState() {
@@ -275,8 +289,8 @@ public class NetworkMonitorTest {
   @UiThreadTest
   @SmallTest
   public void testConnectivityManagerDelegateDoesNotCrash() {
-    ConnectivityManagerDelegate delegate =
-        new ConnectivityManagerDelegate(InstrumentationRegistry.getTargetContext());
+    ConnectivityManagerDelegate delegate = new ConnectivityManagerDelegate(
+        InstrumentationRegistry.getTargetContext(), new HashSet<>());
     delegate.getNetworkState();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       Network[] networks = delegate.getAllNetworks();
@@ -286,6 +300,46 @@ public class NetworkMonitorTest {
       }
       delegate.getDefaultNetId();
     }
+  }
+
+  /**
+   * Tests that ConnectivityManagerDelegate preferentially reads from the cache
+   */
+  @Test
+  @SmallTest
+  public void testConnectivityManagerDelegatePreferentiallyReadsFromCache() {
+    final Set<Network> availableNetworks = new HashSet<>();
+    ConnectivityManagerDelegate delegate = new ConnectivityManagerDelegate(
+        InstrumentationRegistry.getTargetContext(), availableNetworks);
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      Network[] networks = delegate.getAllNetworks();
+
+      final Network mockNetwork = mock(Network.class, CALLS_REAL_METHODS);
+      availableNetworks.add(mockNetwork);
+
+      assertFalse(Arrays.equals(networks, delegate.getAllNetworks()));
+      assertArrayEquals(new Network[] {mockNetwork}, delegate.getAllNetworks());
+    }
+  }
+
+  /**
+   * Tests that ConnectivityManagerDelegate preferentially reads from the cache
+   */
+  @Test
+  @SmallTest
+  public void testNetworkCallbackPopulatesCache() {
+    final Set<Network> availableNetworks = new HashSet<>();
+
+    final SimpleNetworkCallback cb = new SimpleNetworkCallback(availableNetworks);
+    final Network mockNetwork = mock(Network.class, CALLS_REAL_METHODS);
+    assertEquals(Collections.emptySet(), availableNetworks);
+
+    cb.onAvailable(mockNetwork);
+    assertEquals(Collections.singleton(mockNetwork), availableNetworks);
+
+    cb.onLost(mockNetwork);
+    assertEquals(Collections.emptySet(), availableNetworks);
   }
 
   /**
