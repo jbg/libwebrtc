@@ -16,6 +16,24 @@
       "message": "Chromium style discourages inline functions.  Can you declare the specializations here and move the definitions to the .cc?",
       "revId": "7aaf0068024197efa76baf2dec3270ed62af3564",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a662be0f_2972d269",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-02-09T15:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d64024e1_65e9097e",
+      "revId": "7aaf0068024197efa76baf2dec3270ed62af3564",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
