@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e3ad299_78e65888",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2022-02-10T19:45:49Z",
+      "side": 1,
+      "message": "Rasmus, can you take a look? (Harsh: you already did ofc)\nI had a lot of fun with the properties of XOR this week...\n\nFun fact: frames with an even number of packets will have a TS recovery of 0. Looked like a bug to me until I did the math!",
+      "revId": "526870f7e1f7bbdf4e9012da8643330d30ff9cf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
