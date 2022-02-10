@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "005fd8ba_05f1a6e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-10T19:49:31Z",
+      "side": 1,
+      "message": "Can we make the downstream code understand an empty source list rather than propagating hacks? That seems to be what is happening here (the user has not yet chosen a source).",
+      "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a9ced6b_3df9d940",
@@ -37,6 +54,23 @@
         "endLine": 81,
         "endChar": 79
       },
+      "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c122bbd_a19b38f2",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-10T19:49:31Z",
+      "side": 1,
+      "message": "Isn\u0027t this manufacturing an invalid pointer (the underlying type of SourceId appears to be intptr_t)?  That seems like a very bad idea as it will pass null-checks, and code that attempts to de-reference will hopefully just crash (and not be exploitable).",
       "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
