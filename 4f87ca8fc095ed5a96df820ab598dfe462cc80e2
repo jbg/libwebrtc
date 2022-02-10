@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed04aaf4_19e6612f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-10T18:22:32Z",
+      "side": 1,
+      "message": "Mark PTAL, let me know if you have any objections or want me to add an explicit constant to \"document\" Null ScreenId to desktop_capture_types.h as well.\n\nI started to patch this in chromium, but Elad pointed out that using the Null ID could cause problems down the line somewhere: https://chromium-review.googlesource.com/c/chromium/src/+/3449796/comments/e23ddfcd_ae1f72bb",
+      "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9ced6b_3df9d940",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-10T18:22:32Z",
+      "side": 1,
+      "message": "This is explicitly called out for WindowId, but not necessarily ScreenId: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/desktop_capture_types.h;drc\u003d62b77bef90de54f0136b51935fa2d5814a1b4da9;l\u003d24\n\n(The Source type in the SourceList stores ID as a SourceID, which is statically asserted to be the same type as ScreenId)",
+      "range": {
+        "startLine": 81,
+        "startChar": 74,
+        "endLine": 81,
+        "endChar": 79
+      },
+      "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
