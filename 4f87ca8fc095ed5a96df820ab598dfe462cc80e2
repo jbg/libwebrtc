@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddcb86ad_7a622c24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-10T20:09:50Z",
+      "side": 1,
+      "message": "This list never actually updates even once the user *has* chosen a source, so passing a synthetic one (since it doesn\u0027t impact what\u0027s captured/shown) seems reasonable; in order to show a preview/technically allow the source to be selected we have to supply *some* source eventually which will still require manufacturing something here.",
+      "parentUuid": "005fd8ba_05f1a6e5",
+      "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a9ced6b_3df9d940",
@@ -71,6 +89,24 @@
       "writtenOn": "2022-02-10T19:49:31Z",
       "side": 1,
       "message": "Isn\u0027t this manufacturing an invalid pointer (the underlying type of SourceId appears to be intptr_t)?  That seems like a very bad idea as it will pass null-checks, and code that attempts to de-reference will hopefully just crash (and not be exploitable).",
+      "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5394b56f_d372a903",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-10T20:09:50Z",
+      "side": 1,
+      "message": "I think it\u0027s intptr_t because that matches the underlying types/handles. ChromeOS was recently updated to use an int64_t. Comments here seem to make me think that actually treating these types as a pointer (at least outside of the capturers) is a bad idea: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/desktop_capture_types.h;drc\u003d1d99f49cda836815d326e43e4d09031af0ae884d;l\u003d20\n\nFurther, there\u0027s already a reserved special constant for Fullscreens that would be an invalid pointer as well: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/desktop_capture_types.h;drc\u003d1d99f49cda836815d326e43e4d09031af0ae884d;l\u003d40\n\nI could switch to using that value (kFullDesktopScreenId) instead if you feel that would be safer.",
+      "parentUuid": "8c122bbd_a19b38f2",
       "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
