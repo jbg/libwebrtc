@@ -127,6 +127,24 @@
       "parentUuid": "5394b56f_d372a903",
       "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a02e3d0_58421769",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-10T21:13:53Z",
+      "side": 1,
+      "message": "I agree; and I think that despite the underlying type being intptr_t SourceId/ScreenId shouldn\u0027t *actually* be treated as Pointers. (There\u0027s perhaps some exceptions for the capturers *themselves* to do so if they know they\u0027ve handed out a valid pointer, e.g. an HWND).\n\nEven if PipeWire gave us an ID, it\u0027s just as possible that that would also technically be an invalid pointer; and none of the comments above ScreenId lead me to believe that the types are actually valid pointers, but rather are whatever unique identifier is used by that capturer.",
+      "parentUuid": "18d881bc_e1fe44ee",
+      "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
