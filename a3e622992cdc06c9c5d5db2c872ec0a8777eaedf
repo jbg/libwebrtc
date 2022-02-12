@@ -16,6 +16,40 @@
       "message": "Hi, I would like to have this in Chromium 100, would it be possible to review this before we are past the deadline? ",
       "revId": "a3e622992cdc06c9c5d5db2c872ec0a8777eaedf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f477777_440cb681",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-02-12T14:25:08Z",
+      "side": 1,
+      "message": "is it possible to remove the Init call, supply these via the ctor and make callback_ + mode_ const?",
+      "revId": "a3e622992cdc06c9c5d5db2c872ec0a8777eaedf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "100e702e_dfd10780",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-02-12T14:25:08Z",
+      "side": 1,
+      "message": "can you add RTC_GUARDED_BY and sequence checkers for the member variables?",
+      "revId": "a3e622992cdc06c9c5d5db2c872ec0a8777eaedf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
