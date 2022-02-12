@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6809223_33ec9c09",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-12T15:57:06Z",
+      "side": 1,
+      "message": "The Init() method is part of MouseCursorMonitor implementation and I just overloaded it.",
+      "parentUuid": "9f477777_440cb681",
+      "revId": "a3e622992cdc06c9c5d5db2c872ec0a8777eaedf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "100e702e_dfd10780",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-02-12T14:25:08Z",
       "side": 1,
       "message": "can you add RTC_GUARDED_BY and sequence checkers for the member variables?",
+      "revId": "a3e622992cdc06c9c5d5db2c872ec0a8777eaedf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "586cc29e_55ac4879",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-12T15:57:06Z",
+      "side": 1,
+      "message": "I know what is RTC_GUARDED_BY, I used it once to make sure we don\u0027t have concurrent access to a variable. This is not a problem in this case as we access only to options.screencast_stream() and both calls on ScreenCastTream we make (CaptureCursor() and CaptureCursorPosition()) just return latest cursor or its position, but I can add it if you want me to. And I also don\u0027t think that the MouseCursorMonitor::Capture() method is called from multiple places and the X11::MouseCursorMonitor also doesn\u0027t do such protections.\n\nI don\u0027t know what you mean by sequence checkers? Can you please explain?",
+      "parentUuid": "100e702e_dfd10780",
       "revId": "a3e622992cdc06c9c5d5db2c872ec0a8777eaedf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
