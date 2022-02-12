@@ -86,6 +86,24 @@
       "parentUuid": "100e702e_dfd10780",
       "revId": "a3e622992cdc06c9c5d5db2c872ec0a8777eaedf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "087ef099_b7929688",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-02-12T21:32:05Z",
+      "side": 1,
+      "message": "webrtc::SequenceChecker acts as a lock to the compiler when used in combination with RTC_GUARDED_BY. It makes sure that a variable is always guarded by the checker.\n\nIn dcheck enabled builds, a RTC_DCHECK_RUNS_ON check at the beginning of a function will check if the call is being made on the thread (or task queue as appropriate) that the developer expected.\n\nIn non-dcheck release builds, the sequence checker does nothing. When you add it as a member variable of a class with RTC_NO_UNIQUE_ADDRESS, it also doesn\u0027t occupy allocation space.\n\nThere are several examples of how it\u0027s used across the code. An important benefit of using it, is that it also makes it clear to other developers how the code behaves, on what threads callbacks happen etc, and help avoid forgetting to grab the \"lock\" appropriately - or call out when accessing a variable wouldn\u0027t be safe.",
+      "parentUuid": "586cc29e_55ac4879",
+      "revId": "a3e622992cdc06c9c5d5db2c872ec0a8777eaedf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
