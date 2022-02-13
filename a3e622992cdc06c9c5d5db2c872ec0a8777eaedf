@@ -104,6 +104,24 @@
       "parentUuid": "586cc29e_55ac4879",
       "revId": "a3e622992cdc06c9c5d5db2c872ec0a8777eaedf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24cdf060_420d7763",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-13T11:13:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "087ef099_b7929688",
+      "revId": "a3e622992cdc06c9c5d5db2c872ec0a8777eaedf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
