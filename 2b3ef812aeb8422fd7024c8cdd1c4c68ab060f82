@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "612e1d55_24f6751e",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77c0c9d1_d8482e7d",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cec9cba_d78ca681",
@@ -49,6 +67,24 @@
       "writtenOn": "2022-02-14T19:16:14Z",
       "side": 1,
       "message": "Please make the constructor private if the object is supposed to be created through a factory function.",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46b2168c_4c3f6df4",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "Cannot be private/protected. It is used by the static Create() function below.",
+      "parentUuid": "4cec9cba_d78ca681",
       "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -70,6 +106,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1d87a27_19396b27",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a1afde0_2e625f2a",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04c460de_68a5ad33",
@@ -83,6 +137,24 @@
       "writtenOn": "2022-02-14T19:16:14Z",
       "side": 1,
       "message": "Can cursor be declared *const?",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f13273b2_fdbad022",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04c460de_68a5ad33",
       "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -104,6 +176,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff1a8dcb_e549eaf4",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "I cannot say for all implementations, but for example KWin (Wayland compositor in KDE Plasma) does provide cursor image only on change so most of the time we update only the position.\n\nAnd it should include only the cursor.",
+      "parentUuid": "1e295c54_dd363fb9",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0afe8a1d_b348c527",
@@ -117,6 +207,24 @@
       "writtenOn": "2022-02-14T19:16:14Z",
       "side": 1,
       "message": "If Pipewire fails to provide cursor information in this buffer, should the caller conclude that the previously-captured cursor hotspot is valid?",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2e3c1e7_9d0b33e8",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "It is probably invalid, but once we pass/send back the cursor, there is no way how to update the hotspot again. I checked X11MouseCursorMonitor and they do the same. They have cursor shape available only on change and once they release it, they don\u0027t update it.",
+      "parentUuid": "0afe8a1d_b348c527",
       "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -138,6 +246,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81e42f6d_ed791b8a",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "You mean to implement something like ScreenCaptureFrameQueue? That should be doable and I would prefer doing this as a followup change.",
+      "parentUuid": "9c151d84_e68cf5ae",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b2e7cef_81c470d0",
@@ -151,6 +277,24 @@
       "writtenOn": "2022-02-14T19:16:14Z",
       "side": 1,
       "message": "If Pipewire fails to provide updated cursor metadata in |buffer| can the caller always conclude that the cursor has not moved?",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab4c44e_5ab3e3f6",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "Yes, every |buffer| doesn\u0027t need to carry information about the cursor, it\u0027s up to the wayland compositor to send metadata on change. KWin includes metadata only when there is a change (shape or position).",
+      "parentUuid": "9b2e7cef_81c470d0",
       "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -172,6 +316,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "006a9ba7_7e5962ac",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22ae9ce6_61534dc6",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25b10336_839a3a85",
@@ -185,6 +347,24 @@
       "writtenOn": "2022-02-14T19:16:14Z",
       "side": 1,
       "message": "Typo in actual",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b77ab49_fe072f25",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25b10336_839a3a85",
       "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -206,6 +386,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbc446a8_1909687c",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3944895e_f14c28c1",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b222c66_6a9aa42d",
@@ -223,6 +421,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e5e623f_f76ca3c0",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "Updated the comment to mention the position will be pos(-1, -1).",
+      "parentUuid": "9b222c66_6a9aa42d",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e1a59ef_cf31fdf5",
@@ -236,6 +452,24 @@
       "writtenOn": "2022-02-14T19:16:14Z",
       "side": 1,
       "message": "What is the difference between the cursor position and the cursor hotspot?  Is the position the center of the cursor frame on the screen, while the hotspot is e.g. the tip of the arrow in the coordinates of the cursor frame?",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd3ece3_aa05822f",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-14T20:39:13Z",
+      "side": 1,
+      "message": "Yes, I think I answered this before already.",
+      "parentUuid": "5e1a59ef_cf31fdf5",
       "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
