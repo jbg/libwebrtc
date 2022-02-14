@@ -72,6 +72,7 @@ class VideoTrack : public MediaStreamTrack<VideoTrackInterface>,
       video_source_;
 
   ContentHint content_hint_ RTC_GUARDED_BY(worker_thread_);
+  bool enabled_w_ RTC_GUARDED_BY(worker_thread_) = true;
 };
 
 }  // namespace webrtc
