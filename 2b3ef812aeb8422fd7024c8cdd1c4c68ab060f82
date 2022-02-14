@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77c0c9d1_d8482e7d",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:18:13Z",
+      "side": 1,
+      "message": "It looks like by \"empty\" you mean \"nullptr\" in mouse_cursor.  Maybe s/empty/nullptr/ in the CaptureCursor documentation string would avoid any confusion.",
+      "parentUuid": "a7eb5f3a_4e6e3f62",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4cec9cba_d78ca681",
         "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
         "patchSetId": 11
