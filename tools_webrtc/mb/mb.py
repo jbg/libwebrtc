@@ -900,11 +900,12 @@ class MetaBuildWrapper:
 
     is_android = 'target_os="android"' in vals['gn_args']
     is_linux = self.platform.startswith('linux') and not is_android
+    is_ios = 'target_os="ios"' in vals['gn_args']
 
     if test_type == 'nontest':
       self.WriteFailureAndRaise('We should not be isolating %s.' % target,
                                 output_path=None)
-    if test_type not in ('console_test_launcher', 'windowed_test_launcher',
+    if test_type not in ('generated_script', 'console_test_launcher', 'windowed_test_launcher',
                          'non_parallel_console_test_launcher', 'raw',
                          'additional_compile_target', 'junit_test', 'script'):
       self.WriteFailureAndRaise('No command line for '
@@ -931,6 +932,20 @@ class MetaBuildWrapper:
           '--target', target, '--logdog-bin-cmd', '../../bin/logdog_butler',
           '--logcat-output-file', '${ISOLATED_OUTDIR}/logcats',
           '--store-tombstones'
+      ]
+    elif is_ios:
+      cmdline += [
+          'bin/run_%s' % target, '--out-dir', '${ISOLATED_OUTDIR}',
+          '--xcode-build-version', '12d4e', '--xctest'
+          #'--platform',
+          #'iPhone X',
+          #'--version',
+          #'14.7',
+          #'--args-json',
+          #'{"test_args":
+          #  ["--undefok=\"enable-run-ios-unittests-with-xctest\""]}',
+          #'--iossim', 'src/out/Debug-iphonesimulator/iossim', '--platform',
+          #'iPhone 11', '--version', '14.7', '--xctest'
       ]
     else:
       if test_type == 'raw':
