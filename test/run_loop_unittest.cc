@@ -39,7 +39,7 @@ TEST(RunLoopTest, Delayed) {
         ran = true;
         loop.Quit();
       },
-      100);
+      TimeDelta::Millis(100));
   loop.Flush();
   EXPECT_FALSE(ran);
   loop.Run();

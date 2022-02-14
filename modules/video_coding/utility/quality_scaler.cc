@@ -136,7 +136,7 @@ class QualityScaler::CheckQpTask {
           // `this` has been deleted.
           quality_scaler_->StartNextCheckQpTask();
         }),
-        GetCheckingQpDelayMs());
+        TimeDelta::Millis(GetCheckingQpDelayMs()));
   }
 
   bool HasCompletedTask() const { return state_ == State::kCompleted; }

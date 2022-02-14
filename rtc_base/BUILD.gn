@@ -285,7 +285,7 @@ rtc_library("rtc_event") {
 }
 
 config("chromium_logging_config") {
-  defines = ["LOGGING_INSIDE_WEBRTC"]
+  defines = [ "LOGGING_INSIDE_WEBRTC" ]
 }
 
 rtc_library("logging") {
@@ -312,12 +312,13 @@ rtc_library("logging") {
       "../../webrtc_overrides/rtc_base/logging.cc",
       "../../webrtc_overrides/rtc_base/logging.h",
     ]
+
     # This macro needs to be both present in all WebRTC targets (see its
     # definition in //BUILD.gn but also propagated to all the targets
     # depending on the Chromium component defined in
     # //third_party/webrtc_overrides:webrtc_component. This public_config
     # allows GN to propagate the macro accordingly.
-    public_configs = [":chromium_logging_config"]
+    public_configs = [ ":chromium_logging_config" ]
   } else {
     sources = [
       "logging.cc",
@@ -488,6 +489,7 @@ rtc_library("rtc_task_queue") {
   deps = [
     ":macromagic",
     "../api/task_queue",
+    "../api/units:time_delta",
     "system:rtc_export",
     "task_utils:to_queued_task",
   ]
@@ -817,6 +819,7 @@ rtc_library("threading") {
     "../api:scoped_refptr",
     "../api:sequence_checker",
     "../api/task_queue",
+    "../api/units:time_delta",
     "synchronization:mutex",
     "system:no_unique_address",
     "system:rtc_export",

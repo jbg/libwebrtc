@@ -68,7 +68,7 @@ class TestNackRequester : public ::testing::TestWithParam<bool>,
           timed_out_ = true;
           loop_.Quit();
         },
-        1000);
+        TimeDelta::Seconds(1));
 
     loop_.Run();
 

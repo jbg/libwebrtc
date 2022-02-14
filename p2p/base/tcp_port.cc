@@ -509,7 +509,7 @@ void TCPConnection::OnClose(rtc::AsyncPacketSocket* socket, int error) {
                                  Destroy();
                                }
                              }),
-        reconnection_timeout());
+        webrtc::TimeDelta::Millis(reconnection_timeout()));
   } else if (!pretending_to_be_writable_) {
     // OnClose could be called when the underneath socket times out during the
     // initial connect() (i.e. `pretending_to_be_writable_` is false) . We have

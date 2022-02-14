@@ -31,7 +31,7 @@ class MockTaskQueue : public TaskQueueBase {
   MOCK_METHOD(void, PostTask, (std::unique_ptr<QueuedTask>), (override));
   MOCK_METHOD(void,
               PostDelayedTask,
-              (std::unique_ptr<QueuedTask>, uint32_t),
+              (std::unique_ptr<QueuedTask>, TimeDelta),
               (override));
 
  private:
