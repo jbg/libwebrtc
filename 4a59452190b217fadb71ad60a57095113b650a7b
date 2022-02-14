@@ -39,6 +39,30 @@
       },
       "revId": "4a59452190b217fadb71ad60a57095113b650a7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b93cc067_3ae765c8",
+        "filename": "video/frame_buffer_proxy_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-02-14T13:04:43Z",
+      "side": 1,
+      "message": "I have added a test but the 0/0 mode doesn\u0027t seem to do anything other than make the MaxWait time largely negative. Is this a bug?\n\nFor a frame with 0/0:\n- Min+Max delay are 0, so render_time \u003d 0 [1]\n- Decode delay is large and negative since the max_playout_delay_ms \u003d\u003d 0, so the decode delay is \n  render_time_ms - now_ms - RequiredDecodeTimeMs() - render_delay_ms_;\n\nwhich in the test is\n  0 - 1000 - 10 - 0 \u003d -1010ms\n  a\nThis in practice means the frame will be decoded right away but I would have expected 0 rather than a large negative number. \n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/timing.cc;l\u003d189;drc\u003d197ed39fa22e5ce84a2ea31aef039b5179a549ff\n[2] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/timing.cc;l\u003d238;drc\u003d197ed39fa22e5ce84a2ea31aef039b5179a549ff",
+      "parentUuid": "50ec9002_237befdc",
+      "range": {
+        "startLine": 715,
+        "startChar": 0,
+        "endLine": 716,
+        "endChar": 36
+      },
+      "revId": "4a59452190b217fadb71ad60a57095113b650a7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
