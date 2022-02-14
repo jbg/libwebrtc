@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7eb5f3a_4e6e3f62",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "The documentation for CaptureCursor() says that it will always return a value, but possibly an \"empty cursor\".  Should you write this as RTC_DCHECK(mouse_cursor), and explicitly check for an empty cursor?",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cec9cba_d78ca681",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "Please make the constructor private if the object is supposed to be created through a factory function.",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a1afde0_2e625f2a",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "Add a comment before Init\n\n// MouseCursorMonitor:\n\nto indicate these are overriding declarations from MCM.",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c460de_68a5ad33",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "Can cursor be declared *const?",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e295c54_dd363fb9",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "Is this copying the pixels of just the cursor itself, or does it capture background pixels (blended or unblended)?\n\nIf there is no background capture, then won\u0027t the pixels be identical to the previous cursor frame 99% of the time?  Can Pipwire provide damage information on the mouse cursor?",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0afe8a1d_b348c527",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "If Pipewire fails to provide cursor information in this buffer, should the caller conclude that the previously-captured cursor hotspot is valid?",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c151d84_e68cf5ae",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "It would be an optimization to allocate two cursor frames and do a copy-and-swap, versus allocating a new cursor frame every time.  (This is a followup optimization - not asking for changes here.)",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b2e7cef_81c470d0",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "If Pipewire fails to provide updated cursor metadata in |buffer| can the caller always conclude that the cursor has not moved?",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ae9ce6_61534dc6",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "I think RTC_DLOG() would be more appropriate as this could log up to once per frame.  (If you need to log at all.)",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25b10336_839a3a85",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "Typo in actual",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3944895e_f14c28c1",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "Nit: Add period after buffer",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b222c66_6a9aa42d",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "DesktopVector doesn\u0027t have a concept of valid/invalid, so better to return absl::optional\u003cDesktopVector\u003e here.",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e1a59ef_cf31fdf5",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-14T19:16:14Z",
+      "side": 1,
+      "message": "What is the difference between the cursor position and the cursor hotspot?  Is the position the center of the cursor frame on the screen, while the hotspot is e.g. the tip of the arrow in the coordinates of the cursor frame?",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
