@@ -12,6 +12,7 @@
 
 #include "api/task_queue/task_queue_base.h"
 #include "api/test/simulated_network.h"
+#include "api/units/time_delta.h"
 #include "api/video/builtin_video_bitrate_allocator_factory.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "call/fake_network_pipe.h"
@@ -284,7 +285,8 @@ TEST_F(BandwidthEndToEndTest, RembWithSendSideBwe) {
           break;
       }
 
-      task_queue_->PostDelayedTask(ToQueuedTask([this] { PollStats(); }), 1000);
+      task_queue_->PostDelayedTask(ToQueuedTask([this] { PollStats(); }),
+                                   TimeDelta::Seconds(1));
     }
 
     void PerformTest() override {
