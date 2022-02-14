@@ -365,7 +365,7 @@ void ZeroHertzAdapterMode::OnFrame(Timestamp post_time,
                      RTC_DCHECK_RUN_ON(&sequence_checker_);
                      ProcessOnDelayedCadence();
                    }),
-      frame_delay_.ms());
+      frame_delay_);
 }
 
 absl::optional<uint32_t> ZeroHertzAdapterMode::GetInputFrameRateFps() {
@@ -482,7 +482,7 @@ void ZeroHertzAdapterMode::ScheduleRepeat(int frame_id, bool idle_repeat) {
                      RTC_DCHECK_RUN_ON(&sequence_checker_);
                      ProcessRepeatedFrameOnDelayedCadence(frame_id);
                    }),
-      repeat_delay.ms());
+      repeat_delay);
 }
 
 // RTC_RUN_ON(&sequence_checker_)

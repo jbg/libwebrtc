@@ -86,7 +86,7 @@ void TaskQueueTimeoutFactory::TaskQueueTimeout::Start(DurationMs duration_ms,
               }
             }
           }),
-      duration_ms.value());
+      webrtc::TimeDelta::Millis(duration_ms.value()));
 }
 
 void TaskQueueTimeoutFactory::TaskQueueTimeout::Stop() {

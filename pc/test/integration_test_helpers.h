@@ -958,7 +958,7 @@ class PeerConnectionIntegrationWrapper : public webrtc::PeerConnectionObserver,
                        [this, type, msg] {
                          RelaySdpMessageIfReceiverExists(type, msg);
                        }),
-          signaling_delay_ms_);
+          TimeDelta::Millis(signaling_delay_ms_));
     }
   }
 
@@ -982,7 +982,7 @@ class PeerConnectionIntegrationWrapper : public webrtc::PeerConnectionObserver,
                          RelayIceMessageIfReceiverExists(sdp_mid,
                                                          sdp_mline_index, msg);
                        }),
-          signaling_delay_ms_);
+          TimeDelta::Millis(signaling_delay_ms_));
     }
   }
 
