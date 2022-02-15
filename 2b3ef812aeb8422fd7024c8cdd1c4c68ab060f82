@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b807c107_89e41338",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-15T18:41:09Z",
+      "side": 1,
+      "message": "It\u0027s worth noting that the chromium c++ Do\u0027s/Dont\u0027s explicitly recommend *against* friending std::make_unique:\nhttps://source.chromium.org/chromium/chromium/src/+/main:styleguide/c++/c++-dos-and-donts.md\n\nThey also suggest that if ::Create doesn\u0027t add much/any value that maybe it\u0027s not worth doing.\n\nUpstream also has the base::PassKey type, which helps guard *who* can actually use a constructor that is public: https://source.chromium.org/chromium/chromium/src/+/main:base/types/pass_key.h;l\u003d38",
+      "parentUuid": "1dc7dbd6_70054745",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a1afde0_2e625f2a",
         "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
         "patchSetId": 11
