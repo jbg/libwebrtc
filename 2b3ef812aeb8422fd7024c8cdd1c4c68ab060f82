@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d458a14_82a418dd",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-15T19:52:10Z",
+      "side": 1,
+      "message": "There\u0027s a few options, all of which I\u0027m fine with, but unsure of your opinions:\n\n1) There appear to be instances of absl::WrapUnique in webrtc, which the Do\u0027s/Dont\u0027s page call out as acceptable, particularly in a Create method:\n`absl::WrapUnique(new Foo(...))`\n2) Remove ::Create and simply RTC_CHECK that options.screencast_stream() is set\n  2a) Actually, it looks like though MouseCursorMonitorPipeWire caches all of the options, it only uses screencast_stream, so it could just take that and assert it\u0027s not null.\n  \n3) Port base::PassKey down, it\u0027s a fairly simple class, I\u0027m not sure that it even strictly guarantees that only the named class creates a PassKey, but is more a signal to readers than anything\n4) Leave the constructor public; though I think you are against this one, I feel like the chromium code base has a precedent for this.\n\nRegardless of path taken, 2a may be worth considering.",
+      "parentUuid": "e025cf83_a148bba3",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a1afde0_2e625f2a",
         "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
         "patchSetId": 11
