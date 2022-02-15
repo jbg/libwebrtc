@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3138d9a4_d92da8dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-02-15T13:45:38Z",
+      "side": 1,
+      "message": "the proxy map is not your friend.... well spotted.\n",
+      "revId": "8545991b4fca7a3e1dfb0e6ead18f01920b29b76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6af608e0_26dfa6f9",
+        "filename": "pc/video_track.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-02-15T13:45:38Z",
+      "side": 1,
+      "message": "Is it necessary to use Invoke here, or would PostTask be safe too?",
+      "revId": "8545991b4fca7a3e1dfb0e6ead18f01920b29b76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
