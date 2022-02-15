@@ -8878,7 +8878,7 @@ TEST(VideoStreamEncoderSimpleTest, CreateDestroy) {
       // meh.
     }
     void PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                         uint32_t milliseconds) override {
+                         TimeDelta duration) override {
       ASSERT_TRUE(false);
     }
   };

@@ -77,7 +77,8 @@ TEST_P(TaskQueueTest, PostDelayedZero) {
   rtc::Event event;
   auto queue = CreateTaskQueue(factory, "PostDelayedZero");
 
-  queue->PostDelayedTask(ToQueuedTask([&event] { event.Set(); }), 0);
+  queue->PostDelayedTask(ToQueuedTask([&event] { event.Set(); }),
+                         TimeDelta::Zero());
   EXPECT_TRUE(event.Wait(1000));
 }
 
@@ -103,7 +104,7 @@ TEST_P(TaskQueueTest, PostDelayed) {
                            EXPECT_TRUE(queue->IsCurrent());
                            event.Set();
                          }),
-                         100);
+                         TimeDelta::Millis(100));
   EXPECT_TRUE(event.Wait(1000));
   int64_t end = rtc::TimeMillis();
   // These tests are a little relaxed due to how "powerful" our test bots can
@@ -124,7 +125,7 @@ TEST_P(TaskQueueTest, PostMultipleDelayed) {
                              EXPECT_TRUE(queue->IsCurrent());
                              event->Set();
                            }),
-                           i);
+                           TimeDelta::Millis(i));
   }
 
   for (rtc::Event& e : events)
@@ -137,7 +138,8 @@ TEST_P(TaskQueueTest, PostDelayedAfterDestruct) {
   rtc::Event deleted;
   auto queue = CreateTaskQueue(factory, "PostDelayedAfterDestruct");
   queue->PostDelayedTask(
-      ToQueuedTask([&run] { run.Set(); }, [&deleted] { deleted.Set(); }), 100);
+      ToQueuedTask([&run] { run.Set(); }, [&deleted] { deleted.Set(); }),
+      TimeDelta::Millis(100));
   // Destroy the queue.
   queue = nullptr;
   // Task might outlive the TaskQueue, but still should be deleted.

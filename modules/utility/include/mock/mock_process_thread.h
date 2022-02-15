@@ -28,7 +28,7 @@ class MockProcessThread : public ProcessThread {
   MOCK_METHOD(void, PostTask, (std::unique_ptr<QueuedTask>), (override));
   MOCK_METHOD(void,
               PostDelayedTask,
-              (std::unique_ptr<QueuedTask>, uint32_t),
+              (std::unique_ptr<QueuedTask>, TimeDelta),
               (override));
   MOCK_METHOD(void,
               RegisterModule,
