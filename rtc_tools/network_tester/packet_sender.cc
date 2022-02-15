@@ -40,7 +40,7 @@ class SendPacketTask : public QueuedTask {
       int64_t delay_ms = std::max(static_cast<int64_t>(0),
                                   target_time_ms_ - rtc::TimeMillis());
       TaskQueueBase::Current()->PostDelayedTask(
-          std::unique_ptr<QueuedTask>(this), delay_ms);
+          std::unique_ptr<QueuedTask>(this), TimeDelta::Millis(delay_ms));
       return false;
     } else {
       return true;
@@ -64,7 +64,8 @@ class UpdateTestSettingTask : public QueuedTask {
       packet_sender_->UpdateTestSetting((*config).packet_size,
                                         (*config).packet_send_interval_ms);
       TaskQueueBase::Current()->PostDelayedTask(
-          std::unique_ptr<QueuedTask>(this), (*config).execution_time_ms);
+          std::unique_ptr<QueuedTask>(this),
+          TimeDelta::Millis(config->execution_time_ms));
       return false;
     } else {
       packet_sender_->StopSending();

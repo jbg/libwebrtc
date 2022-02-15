@@ -40,7 +40,7 @@ class SimulatedTaskQueue : public TaskQueueBase,
   void Delete() override;
   void PostTask(std::unique_ptr<QueuedTask> task) override;
   void PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                       uint32_t milliseconds) override;
+                       TimeDelta duration) override;
 
  private:
   sim_time_impl::SimulatedTimeControllerImpl* const handler_;
