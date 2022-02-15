@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1dc7dbd6_70054745",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-15T18:33:15Z",
+      "side": 1,
+      "message": "Normally that\u0027s handled by adding a friend declaration.",
+      "parentUuid": "46b2168c_4c3f6df4",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a1afde0_2e625f2a",
         "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
         "patchSetId": 11
@@ -194,6 +212,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "484797ec_69d10510",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-15T18:33:15Z",
+      "side": 1,
+      "message": "Thanks, your comment in the .h helps explain that it is an implementation specific behavior.",
+      "parentUuid": "ff1a8dcb_e549eaf4",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0afe8a1d_b348c527",
@@ -247,6 +283,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03d2a202_f874da54",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-15T18:33:15Z",
+      "side": 1,
+      "message": "OK.  The remote desktop folks will probably have to do some testing/debugging to work out these implementation specific differences among Wayland implementations.  It\u0027s too bad that Wayland behavior is under-specified in this area.",
+      "parentUuid": "ca8a1e9d_20179c12",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c151d84_e68cf5ae",
@@ -278,6 +332,24 @@
       "side": 1,
       "message": "You mean to implement something like ScreenCaptureFrameQueue? That should be doable and I would prefer doing this as a followup change.",
       "parentUuid": "9c151d84_e68cf5ae",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ff2b1a9_ae45beb2",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-15T18:33:15Z",
+      "side": 1,
+      "message": "No problem. If it\u0027s actually the case that images are only provided on shape change then it\u0027s probably not worth it.",
+      "parentUuid": "81e42f6d_ed791b8a",
       "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -453,6 +525,24 @@
       "side": 1,
       "message": "Updated the comment to mention the position will be pos(-1, -1).",
       "parentUuid": "9b222c66_6a9aa42d",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4522cbb3_a2c35861",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-15T18:33:15Z",
+      "side": 1,
+      "message": "Sorry for not being clearer.   My point was that code that holds a DesktopVector has no API to test whether it is a valid DesktopVector, or some magic value that comes from this method.  That is why returning an absl::optional\u003cDesktopVector\u003e is a better API here since code will know for sure whether it is valid or missing.",
+      "parentUuid": "5e5e623f_f76ca3c0",
       "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
