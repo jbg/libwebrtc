@@ -161,6 +161,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7bce523_ba418c12",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-15T20:25:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d458a14_82a418dd",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a1afde0_2e625f2a",
@@ -351,6 +369,24 @@
       "side": 1,
       "message": "OK.  The remote desktop folks will probably have to do some testing/debugging to work out these implementation specific differences among Wayland implementations.  It\u0027s too bad that Wayland behavior is under-specified in this area.",
       "parentUuid": "ca8a1e9d_20179c12",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e58fa3c7_43589a6f",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-15T20:25:22Z",
+      "side": 1,
+      "message": "Actually, they don\u0027t have to. I just checked and the hotspot is relative position to the cursor so it is actually valid all the time.",
+      "parentUuid": "03d2a202_f874da54",
       "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -597,6 +633,24 @@
       "side": 1,
       "message": "Sorry for not being clearer.   My point was that code that holds a DesktopVector has no API to test whether it is a valid DesktopVector, or some magic value that comes from this method.  That is why returning an absl::optional\u003cDesktopVector\u003e is a better API here since code will know for sure whether it is valid or missing.",
       "parentUuid": "5e5e623f_f76ca3c0",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e85aa4_9ff8c9a4",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-15T20:25:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4522cbb3_a2c35861",
       "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
