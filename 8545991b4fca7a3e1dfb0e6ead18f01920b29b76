@@ -33,6 +33,24 @@
       "message": "Is it necessary to use Invoke here, or would PostTask be safe too?",
       "revId": "8545991b4fca7a3e1dfb0e6ead18f01920b29b76",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a49c27_340adc1d",
+        "filename": "pc/video_track.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-02-15T21:48:54Z",
+      "side": 1,
+      "message": "after going back and forth on it a bit I ended up with this being the more conservative option since it maintains the invariant that when the function returns, the state on the worker thread is consistent with the signaling thread. I\u0027d like to get rid of the invoke eventually though but it\u0027s not clear to be what is the best way to do that without rocking the boat for downstream implementations that depend on this class in ways that are slightly different from vanilla webrtc.",
+      "parentUuid": "6af608e0_26dfa6f9",
+      "revId": "8545991b4fca7a3e1dfb0e6ead18f01920b29b76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
