@@ -533,8 +533,7 @@ class ZeroHertzLayerQualityConvergenceTest : public ::testing::Test {
 
   void ScheduleDelayed(TimeDelta delay, std::function<void()> function) {
     TaskQueueBase::Current()->PostDelayedTask(
-        ToQueuedTask([function = std::move(function)] { function(); }),
-        delay.ms());
+        ToQueuedTask([function = std::move(function)] { function(); }), delay);
   }
 
  protected:

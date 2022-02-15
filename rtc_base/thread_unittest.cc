@@ -676,8 +676,8 @@ TEST(ThreadManager, ProcessAllMessageQueues) {
   // Post messages (both delayed and non delayed) to both threads.
   a->PostTask(ToQueuedTask(incrementer));
   b->PostTask(ToQueuedTask(incrementer));
-  a->PostDelayedTask(ToQueuedTask(incrementer), 0);
-  b->PostDelayedTask(ToQueuedTask(incrementer), 0);
+  a->PostDelayedTask(ToQueuedTask(incrementer), webrtc::TimeDelta::Zero());
+  b->PostDelayedTask(ToQueuedTask(incrementer), webrtc::TimeDelta::Zero());
   rtc::Thread::Current()->PostTask(ToQueuedTask(event_signaler));
 
   ThreadManager::ProcessAllMessageQueuesForTesting();
@@ -1083,7 +1083,7 @@ TEST(ThreadPostDelayedTaskTest, InvokesAsynchronously) {
         WaitAndSetEvent(&event_set_by_test_thread,
                         &event_set_by_background_thread);
       },
-      /*milliseconds=*/10);
+      webrtc::TimeDelta::Millis(10));
   event_set_by_test_thread.Set();
   event_set_by_background_thread.Wait(Event::kForever);
 }
@@ -1100,13 +1100,13 @@ TEST(ThreadPostDelayedTaskTest, InvokesInDelayOrder) {
 
   background_thread->PostDelayedTask(
       [&third, &fourth] { WaitAndSetEvent(&third, &fourth); },
-      /*milliseconds=*/11);
+      webrtc::TimeDelta::Millis(11));
   background_thread->PostDelayedTask(
       [&first, &second] { WaitAndSetEvent(&first, &second); },
-      /*milliseconds=*/9);
+      webrtc::TimeDelta::Millis(9));
   background_thread->PostDelayedTask(
       [&second, &third] { WaitAndSetEvent(&second, &third); },
-      /*milliseconds=*/10);
+      webrtc::TimeDelta::Millis(10));
 
   // All tasks have been posted before the first one is unblocked.
   first.Set();

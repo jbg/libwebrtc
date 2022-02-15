@@ -104,7 +104,7 @@ TEST_P(SimulatedRealTimeControllerConformanceTest, ThreadPostDelayedOrderTest) {
 
   ExecutionOrderKeeper execution_order;
   thread->PostDelayedTask(ToQueuedTask([&]() { execution_order.Executed(2); }),
-                          /*milliseconds=*/500);
+                          TimeDelta::Millis(500));
   thread->PostTask(ToQueuedTask([&]() { execution_order.Executed(1); }));
   time_controller->AdvanceTime(TimeDelta::Millis(600));
   EXPECT_THAT(execution_order.order(), ElementsAreArray({1, 2}));

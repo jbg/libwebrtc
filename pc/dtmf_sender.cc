@@ -173,7 +173,7 @@ void DtmfSender::QueueInsertDtmf(const rtc::Location& posted_from,
                      RTC_DCHECK_RUN_ON(signaling_thread_);
                      DoInsertDtmf();
                    }),
-      delay_ms);
+      TimeDelta::Millis(delay_ms));
 }
 
 void DtmfSender::DoInsertDtmf() {

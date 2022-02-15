@@ -834,7 +834,7 @@ void ModuleRtpRtcpImpl2::ScheduleMaybeSendRtcpAtOrAfterTimestamp(
                      RTC_DCHECK_RUN_ON(worker_queue_);
                      MaybeSendRtcpAtOrAfterTimestamp(execution_time);
                    }),
-      DelayMillisForDuration(duration));
+      TimeDelta::Millis(DelayMillisForDuration(duration)));
 }
 
 }  // namespace webrtc

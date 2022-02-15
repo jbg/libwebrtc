@@ -235,7 +235,7 @@ void TcpMessageRouteImpl::SendPackets(Timestamp at_time) {
                                    HandlePacketTimeout(seq_num,
                                                        clock_->CurrentTime());
                                  }),
-                                 kPacketTimeout.ms());
+                                 kPacketTimeout);
   }
 }
 

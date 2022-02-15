@@ -433,9 +433,9 @@ TEST_F(DcSctpSocketNetworkTest, CanSendMessagesReliablyWithLowBandwidth) {
 
   Sleep(kAWhile);
 
-  // Verify that the bitrates are in the range of 0.5-1.0 Mbps.
+  // Verify that the bitrates are in the range of 0.7-1.2 Mbps.
   double bitrate = receiver.avg_received_bitrate_mbps();
-  EXPECT_THAT(bitrate, AllOf(Ge(0.5), Le(1.0)));
+  EXPECT_THAT(bitrate, AllOf(Ge(0.7), Le(1.2)));
 }
 
 TEST_F(DcSctpSocketNetworkTest,
