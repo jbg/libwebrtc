@@ -54,7 +54,7 @@ bool RepeatingTaskBase::Run() {
   delay = std::max(delay, TimeDelta::Zero());
 
   task_queue_->PostDelayedTaskWithPrecision(precision_, absl::WrapUnique(this),
-                                            delay.ms());
+                                            delay);
 
   // Return false to tell the TaskQueue to not destruct this object since we
   // have taken ownership with absl::WrapUnique.

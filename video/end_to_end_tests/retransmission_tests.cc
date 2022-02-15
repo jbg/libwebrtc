@@ -14,6 +14,7 @@
 #include "api/task_queue/task_queue_base.h"
 #include "api/test/simulated_network.h"
 #include "api/test/video/function_video_encoder_factory.h"
+#include "api/units/time_delta.h"
 #include "call/fake_network_pipe.h"
 #include "call/simulated_network.h"
 #include "modules/rtp_rtcp/source/rtp_packet.h"
@@ -229,7 +230,8 @@ TEST_F(RetransmissionEndToEndTest,
       if (receive_stream_->GetStats().frames_decoded > 0) {
         frame_decoded_ = true;
       } else if (clock_->TimeInMilliseconds() - start_time_ < 5000) {
-        task_queue_->PostDelayedTask(std::unique_ptr<QueuedTask>(this), 100);
+        task_queue_->PostDelayedTask(std::unique_ptr<QueuedTask>(this),
+                                     TimeDelta::Millis(100));
         return false;
       }
       return true;

@@ -171,10 +171,9 @@ void SimulatedProcessThread::PostTask(std::unique_ptr<QueuedTask> task) {
 }
 
 void SimulatedProcessThread::PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                                             uint32_t milliseconds) {
+                                             TimeDelta duration) {
   MutexLock lock(&lock_);
-  Timestamp target_time =
-      handler_->CurrentTime() + TimeDelta::Millis(milliseconds);
+  Timestamp target_time = handler_->CurrentTime() + duration;
   delayed_tasks_[target_time].push_back(std::move(task));
   next_run_time_ = std::min(next_run_time_, target_time);
 }

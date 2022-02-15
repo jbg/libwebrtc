@@ -94,7 +94,7 @@ class StatsPollTask : public QueuedTask {
     Call::Stats call_stats = sender_call_->GetStats();
     EXPECT_GT(call_stats.send_bandwidth_bps, 25000);
     TaskQueueBase::Current()->PostDelayedTask(std::unique_ptr<QueuedTask>(this),
-                                              100);
+                                              TimeDelta::Millis(100));
     return false;
   }
   Call* sender_call_;
@@ -145,7 +145,7 @@ class NoBandwidthDropAfterDtx : public AudioBweTest {
 
   void PerformTest() override {
     stats_poller_.PostDelayedTask(std::make_unique<StatsPollTask>(sender_call_),
-                                  100);
+                                  TimeDelta::Millis(100));
     sender_call_->OnAudioTransportOverheadChanged(0);
     AudioBweTest::PerformTest();
   }

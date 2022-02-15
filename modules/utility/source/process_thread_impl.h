@@ -38,7 +38,7 @@ class ProcessThreadImpl : public ProcessThread {
   void WakeUp(Module* module) override;
   void PostTask(std::unique_ptr<QueuedTask> task) override;
   void PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                       uint32_t milliseconds) override;
+                       TimeDelta duration) override;
 
   void RegisterModule(Module* module, const rtc::Location& from) override;
   void DeRegisterModule(Module* module) override;
