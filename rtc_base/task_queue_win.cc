@@ -160,7 +160,7 @@ class TaskQueueWin : public TaskQueueBase {
   void Delete() override;
   void PostTask(std::unique_ptr<QueuedTask> task) override;
   void PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                       uint32_t milliseconds) override;
+                       TimeDelta duration) override;
 
   void RunPendingTasks();
 
@@ -228,8 +228,8 @@ void TaskQueueWin::PostTask(std::unique_ptr<QueuedTask> task) {
 }
 
 void TaskQueueWin::PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                                   uint32_t milliseconds) {
-  if (!milliseconds) {
+                                   TimeDelta duration) {
+  if (duration.IsZero()) {
     PostTask(std::move(task));
     return;
   }
@@ -238,7 +238,7 @@ void TaskQueueWin::PostDelayedTask(std::unique_ptr<QueuedTask> task,
   // the timestamp stored in the task info object, is a 64bit timestamp
   // and WPARAM is 32bits in 32bit builds.  Otherwise, we could pass the
   // task pointer and timestamp as LPARAM and WPARAM.
-  auto* task_info = new DelayedTaskInfo(milliseconds, std::move(task));
+  auto* task_info = new DelayedTaskInfo(duration.ms(), std::move(task));
   RTC_CHECK(thread_.GetHandle() != absl::nullopt);
   if (!::PostThreadMessage(GetThreadId(*thread_.GetHandle()),
                            WM_QUEUE_DELAYED_TASK, 0,

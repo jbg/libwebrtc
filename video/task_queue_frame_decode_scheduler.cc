@@ -56,7 +56,7 @@ void TaskQueueFrameDecodeScheduler::ScheduleFrame(
                      scheduled_rtp_ = absl::nullopt;
                      cb(rtp, schedule.render_time);
                    }),
-      wait.ms());
+      wait);
 }
 
 void TaskQueueFrameDecodeScheduler::CancelOutstanding() {

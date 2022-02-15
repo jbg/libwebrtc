@@ -22,6 +22,8 @@
 #include <type_traits>
 #include <vector>
 
+#include "api/units/time_delta.h"
+
 #if defined(WEBRTC_POSIX)
 #include <pthread.h>
 #endif
@@ -418,6 +420,15 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   // From TaskQueueBase
   void PostTask(std::unique_ptr<webrtc::QueuedTask> task) override;
   void PostDelayedTask(std::unique_ptr<webrtc::QueuedTask> task,
+                       webrtc::TimeDelta duration) override {
+    PostDelayedTask(std::move(task), static_cast<uint32_t>(duration.ms()));
+  }
+  void PostDelayedHighPrecisionTask(std::unique_ptr<webrtc::QueuedTask> task,
+                                    webrtc::TimeDelta duration) override {
+    PostDelayedHighPrecisionTask(std::move(task),
+                                 static_cast<uint32_t>(duration.ms()));
+  }
+  void PostDelayedTask(std::unique_ptr<webrtc::QueuedTask> task,
                        uint32_t milliseconds) override;
   void PostDelayedHighPrecisionTask(std::unique_ptr<webrtc::QueuedTask> task,
                                     uint32_t milliseconds) override;
@@ -435,17 +446,18 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
             typename std::enable_if<!std::is_convertible<
                 Closure,
                 std::unique_ptr<webrtc::QueuedTask>>::value>::type* = nullptr>
-  void PostDelayedTask(Closure&& closure, uint32_t milliseconds) {
+  void PostDelayedTask(Closure&& closure, webrtc::TimeDelta duration) {
     PostDelayedTask(webrtc::ToQueuedTask(std::forward<Closure>(closure)),
-                    milliseconds);
+                    duration);
   }
   template <class Closure,
             typename std::enable_if<!std::is_convertible<
                 Closure,
                 std::unique_ptr<webrtc::QueuedTask>>::value>::type* = nullptr>
-  void PostDelayedHighPrecisionTask(Closure&& closure, uint32_t milliseconds) {
+  void PostDelayedHighPrecisionTask(Closure&& closure,
+                                    webrtc::TimeDelta duration) {
     PostDelayedHighPrecisionTask(
-        webrtc::ToQueuedTask(std::forward<Closure>(closure)), milliseconds);
+        webrtc::ToQueuedTask(std::forward<Closure>(closure)), duration);
   }
 
   // ProcessMessages will process I/O and dispatch messages until:

@@ -50,7 +50,7 @@ constexpr uint8_t kVpns[2][6] = {
 };
 
 // Fetch list of networks every two seconds.
-const int kNetworksUpdateIntervalMs = 2000;
+const webrtc::TimeDelta kNetworksUpdateInterval = webrtc::TimeDelta::Seconds(2);
 
 const int kHighestNetworkPreference = 127;
 
@@ -1026,7 +1026,7 @@ void BasicNetworkManager::UpdateNetworksContinually() {
                                           RTC_DCHECK_RUN_ON(thread_);
                                           UpdateNetworksContinually();
                                         }),
-                           kNetworksUpdateIntervalMs);
+                           kNetworksUpdateInterval);
 }
 
 void BasicNetworkManager::DumpNetworks() {

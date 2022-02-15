@@ -73,7 +73,7 @@ bool DegradedCall::FakeNetworkPipeOnTaskQueue::Process() {
               next_process_ms_.reset();
             }
           },
-          *time_to_next);
+          TimeDelta::Millis(*time_to_next));
     }
   });
 
@@ -147,7 +147,7 @@ DegradedCall::DegradedCall(
     if (receive_configs_.size() > 1) {
       call_->network_thread()->PostDelayedTask(
           ToQueuedTask(task_safety_, [this] { UpdateReceiveNetworkConfig(); }),
-          receive_configs_[0].duration.ms());
+          receive_configs_[0].duration);
     }
   }
   if (!send_configs_.empty()) {
@@ -158,7 +158,7 @@ DegradedCall::DegradedCall(
     if (send_configs_.size() > 1) {
       call_->network_thread()->PostDelayedTask(
           ToQueuedTask(task_safety_, [this] { UpdateSendNetworkConfig(); }),
-          send_configs_[0].duration.ms());
+          send_configs_[0].duration);
     }
   }
 }
@@ -343,7 +343,7 @@ void DegradedCall::UpdateSendNetworkConfig() {
   send_simulated_network_->SetConfig(send_configs_[send_config_index_]);
   call_->network_thread()->PostDelayedTask(
       ToQueuedTask(task_safety_, [this] { UpdateSendNetworkConfig(); }),
-      send_configs_[send_config_index_].duration.ms());
+      send_configs_[send_config_index_].duration);
 }
 
 void DegradedCall::UpdateReceiveNetworkConfig() {
@@ -352,6 +352,6 @@ void DegradedCall::UpdateReceiveNetworkConfig() {
       receive_configs_[receive_config_index_]);
   call_->network_thread()->PostDelayedTask(
       ToQueuedTask(task_safety_, [this] { UpdateReceiveNetworkConfig(); }),
-      receive_configs_[receive_config_index_].duration.ms());
+      receive_configs_[receive_config_index_].duration);
 }
 }  // namespace webrtc
