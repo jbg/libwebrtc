@@ -53,6 +53,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d56c1758_47148a60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-02-15T11:58:44Z",
+      "side": 1,
+      "message": "To the import of ScopedGeneric:\n\nI\u0027m a bit nervous about creating differences between ScopedGeneric in Chrome and WebRTC; these things have a tendency to come back to bite us.\nThe size change resulting from this CL is minuscule, which suggests that there\u0027s no code size impact to using this construct (at least in this case).\n\nIt looks like an useful tool. Want to ensure that we adopt it thoughtfully.",
+      "revId": "ae3fea039ccdc4a5359b5570b2c7c59120903995",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24f667a4_474f1feb",
