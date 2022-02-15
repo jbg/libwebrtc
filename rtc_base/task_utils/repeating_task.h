@@ -145,7 +145,7 @@ class RepeatingTaskHandle {
             webrtc_repeating_task_impl::RepeatingTaskImpl<Closure>>(
             task_queue, precision, first_delay, std::forward<Closure>(closure),
             clock, alive_flag),
-        first_delay.ms());
+        first_delay);
     return RepeatingTaskHandle(std::move(alive_flag));
   }
 

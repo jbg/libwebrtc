@@ -52,7 +52,7 @@ class TaskQueueStdlib final : public TaskQueueBase {
   void Delete() override;
   void PostTask(std::unique_ptr<QueuedTask> task) override;
   void PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                       uint32_t milliseconds) override;
+                       TimeDelta duration) override;
 
  private:
   using OrderId = uint64_t;
@@ -155,8 +155,8 @@ void TaskQueueStdlib::PostTask(std::unique_ptr<QueuedTask> task) {
 }
 
 void TaskQueueStdlib::PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                                      uint32_t milliseconds) {
-  auto fire_at = rtc::TimeMillis() + milliseconds;
+                                      TimeDelta duration) {
+  auto fire_at = rtc::TimeMillis() + duration.ms();
 
   DelayedEntryTimeout delay;
   delay.next_fire_at_ms_ = fire_at;

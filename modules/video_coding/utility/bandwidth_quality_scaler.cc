@@ -85,7 +85,7 @@ void BandwidthQualityScaler::StartCheckForBitrate() {
         }
         StartCheckForBitrate();
       }),
-      kBitrateStateUpdateInterval.ms());
+      kBitrateStateUpdateInterval);
 }
 
 void BandwidthQualityScaler::ReportEncodeInfo(int frame_size_bytes,
