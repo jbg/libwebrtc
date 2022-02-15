@@ -66,7 +66,7 @@ int32_t FakeDecoder::Decode(const EncodedImage& input,
           VideoFrame copy = frame;
           callback_->Decoded(copy);
         },
-        decode_delay_ms_);
+        TimeDelta::Millis(decode_delay_ms_));
   }
 
   return WEBRTC_VIDEO_CODEC_OK;

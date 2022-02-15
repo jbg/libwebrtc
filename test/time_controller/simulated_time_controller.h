@@ -114,7 +114,7 @@ class TokenTaskQueue : public TaskQueueBase {
     RTC_DCHECK_NOTREACHED();
   }
   void PostDelayedTask(std::unique_ptr<QueuedTask> /*task*/,
-                       uint32_t /*milliseconds*/) override {
+                       TimeDelta /*duration*/) override {
     RTC_DCHECK_NOTREACHED();
   }
 };

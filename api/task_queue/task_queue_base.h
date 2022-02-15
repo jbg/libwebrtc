@@ -14,6 +14,7 @@
 #include <utility>
 
 #include "api/task_queue/queued_task.h"
+#include "api/units/time_delta.h"
 #include "rtc_base/system/rtc_export.h"
 #include "rtc_base/thread_annotations.h"
 
@@ -62,13 +63,13 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueueBase {
   // Prefer PostDelayedTask() over PostDelayedHighPrecisionTask() whenever
   // possible.
   //
-  // Schedules a task to execute a specified number of milliseconds from when
-  // the call is made, using "low" precision. All scheduling is affected by
-  // OS-specific leeway and current workloads which means that in terms of
-  // precision there are no hard guarantees, but in addition to the OS induced
-  // leeway, "low" precision adds up to a 17 ms additional leeway. The purpose
-  // of this leeway is to achieve more efficient CPU scheduling and reduce Idle
-  // Wake Up frequency.
+  // Schedules a task to execute a specified duration from when the call is
+  // made, using "low" precision. All scheduling is affected by OS-specific
+  // leeway and current workloads which means that in terms of precision there
+  // are no hard guarantees, but in addition to the OS induced leeway, "low"
+  // precision adds up to a 17 ms additional leeway. The purpose of this leeway
+  // is to achieve more efficient CPU scheduling and reduce Idle Wake Up
+  // frequency.
   //
   // The task may execute with [-1, 17 + OS induced leeway) ms additional delay.
   //
@@ -83,15 +84,17 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueueBase {
   //
   // May be called on any thread or task queue, including this task queue.
   virtual void PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                               uint32_t milliseconds) = 0;
+                               TimeDelta duration) {
+    PostDelayedTask(std::move(task), duration.ms());
+  }
 
   // Prefer PostDelayedTask() over PostDelayedHighPrecisionTask() whenever
   // possible.
   //
-  // Schedules a task to execute a specified number of milliseconds from when
-  // the call is made, using "high" precision. All scheduling is affected by
-  // OS-specific leeway and current workloads which means that in terms of
-  // precision there are no hard guarantees.
+  // Schedules a task to execute a specified duration from when the call is
+  // made, using "high" precision. All scheduling is affected by OS-specific
+  // leeway and current workloads which means that in terms of precision there
+  // are no hard guarantees.
   //
   // The task may execute with [-1, OS induced leeway] ms additional delay.
   //
@@ -102,23 +105,33 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueueBase {
   //
   // May be called on any thread or task queue, including this task queue.
   virtual void PostDelayedHighPrecisionTask(std::unique_ptr<QueuedTask> task,
-                                            uint32_t milliseconds) {
+                                            TimeDelta duration) {
     // Remove default implementation when dependencies have implemented this
     // method.
-    PostDelayedTask(std::move(task), milliseconds);
+    PostDelayedTask(std::move(task), duration);
   }
 
+  // Downstream compatibility wrappers. Use TimeDelta variants for new code.
+  // TODO(bugs.webrtc.org/13684): delete once downstream consumers start using.
+  virtual void PostDelayedTask(std::unique_ptr<QueuedTask> task,
+                               uint32_t milliseconds) {
+    PostDelayedTask(std::move(task), TimeDelta::Millis(milliseconds));
+  }
+  virtual void PostDelayedHighPrecisionTask(std::unique_ptr<QueuedTask> task,
+                                            uint32_t milliseconds) {
+    PostDelayedTask(std::move(task), milliseconds);
+  }
   // As specified by |precision|, calls either PostDelayedTask() or
   // PostDelayedHighPrecisionTask().
   void PostDelayedTaskWithPrecision(DelayPrecision precision,
                                     std::unique_ptr<QueuedTask> task,
-                                    uint32_t milliseconds) {
+                                    TimeDelta duration) {
     switch (precision) {
       case DelayPrecision::kLow:
-        PostDelayedTask(std::move(task), milliseconds);
+        PostDelayedTask(std::move(task), duration);
         break;
       case DelayPrecision::kHigh:
-        PostDelayedHighPrecisionTask(std::move(task), milliseconds);
+        PostDelayedHighPrecisionTask(std::move(task), duration);
         break;
     }
   }
