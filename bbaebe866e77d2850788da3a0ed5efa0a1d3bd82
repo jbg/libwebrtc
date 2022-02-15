@@ -16,6 +16,23 @@
       "message": "Do you have anything else left to be fixed? I really want this in Chromium 100 and if I checked correctly, I have two days. Thank you.",
       "revId": "bbaebe866e77d2850788da3a0ed5efa0a1d3bd82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7622cbc1_2385ffc7",
+        "filename": "modules/desktop_capture/linux/wayland/mouse_cursor_monitor_pipewire.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-02-15T21:40:06Z",
+      "side": 1,
+      "message": "If you want to be paranoid, you could add RTC_DCHECKs here for options.screencast_stream() and options.allow_pipewire().  Fine to do in a later patch though.",
+      "revId": "bbaebe866e77d2850788da3a0ed5efa0a1d3bd82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
