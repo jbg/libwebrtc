@@ -76,6 +76,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b172c0_b9c2c83f",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-15T00:42:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a9ced6b_3df9d940",
+      "range": {
+        "startLine": 81,
+        "startChar": 74,
+        "endLine": 81,
+        "endChar": 79
+      },
+      "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c122bbd_a19b38f2",
@@ -161,6 +185,24 @@
       "side": 1,
       "message": "Can you find a solution that doesn\u0027t involve passing around invalid pointers?",
       "parentUuid": "4a02e3d0_58421769",
+      "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20f95dc8_374d2f8f",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-15T00:42:33Z",
+      "side": 1,
+      "message": "Spoke offline; though the type is a pointer, the only code that would consider using it in such a way is the pipewire capturer itself. When we start looking at the tokens that will allow us to re-use streams, will re-evaluate the ID type then.",
+      "parentUuid": "ce702c97_0e2eafa2",
       "revId": "4f87ca8fc095ed5a96df820ab598dfe462cc80e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
