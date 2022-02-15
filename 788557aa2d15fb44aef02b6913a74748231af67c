@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97dc08e1_8909c17b",
+        "filename": "net/dcsctp/timer/task_queue_timeout.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 17375
+      },
+      "writtenOn": "2022-02-15T11:12:09Z",
+      "side": 1,
+      "message": "As discussed offline, this increases the precision of timers (from integral milliseconds to microseconds), which affects performance tests.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/net/dcsctp/socket/dcsctp_socket_network_test.cc;l\u003d436?q\u003dCanSendMessagesReliablyWithLowBandwidth\u0026ss\u003dchromium changes from ~0.89 to 1.04Mbps, and it\u0027s within the error margin. It\u0027s okey to modify the valid range of throughput from 0.5-1.0Mbps to 0.7 to 1.2Mbps (+-0.2Mbps from what has been measured)",
+      "range": {
+        "startLine": 89,
+        "startChar": 6,
+        "endLine": 89,
+        "endChar": 54
+      },
+      "revId": "788557aa2d15fb44aef02b6913a74748231af67c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
