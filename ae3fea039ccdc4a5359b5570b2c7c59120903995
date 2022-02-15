@@ -70,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29becf3b_c579cae4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-02-15T14:40:01Z",
+      "side": 1,
+      "message": "Now the copied code is almost identical to the code in Chromium.",
+      "parentUuid": "d56c1758_47148a60",
+      "revId": "ae3fea039ccdc4a5359b5570b2c7c59120903995",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24f667a4_474f1feb",
@@ -83,6 +101,30 @@
       "writtenOn": "2022-02-14T13:37:57Z",
       "side": 1,
       "message": "Maybe I\u0027m missing something, but can it be defined as\nabsl::optional\u003cFdHandle\u003e\n\nwhere FdHandle own file descriptor and close it on destruction?",
+      "range": {
+        "startLine": 160,
+        "startChar": 2,
+        "endLine": 160,
+        "endChar": 45
+      },
+      "revId": "ae3fea039ccdc4a5359b5570b2c7c59120903995",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baaa41f9_0d5a74f7",
+        "filename": "rtc_base/ifaddrs_android.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-02-15T14:40:01Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand the question. Could you explain more?\nThe goal of using `ScopedGeneric` is to reduce boilerplate and have a consistent object lifecycle, just like `unique_ptr` does.",
+      "parentUuid": "24f667a4_474f1feb",
       "range": {
         "startLine": 160,
         "startChar": 2,
@@ -118,6 +160,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2732da9_100e48c0",
+        "filename": "rtc_base/scoped_generic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-02-15T14:40:01Z",
+      "side": 1,
+      "message": "I think it\u0027s a typo, but I\u0027d like to keep the original from Chromium if possible.",
+      "parentUuid": "c54ef02c_691a53f7",
+      "range": {
+        "startLine": 23,
+        "startChar": 34,
+        "endLine": 23,
+        "endChar": 43
+      },
+      "revId": "ae3fea039ccdc4a5359b5570b2c7c59120903995",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2910cdd_55d6f8ba",
         "filename": "rtc_base/scoped_generic.h",
         "patchSetId": 1
@@ -141,6 +207,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9dceaa52_5b013751",
+        "filename": "rtc_base/scoped_generic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-02-15T14:40:01Z",
+      "side": 1,
+      "message": "I think it is handled by the `Traits` template parameter.",
+      "parentUuid": "f2910cdd_55d6f8ba",
+      "range": {
+        "startLine": 59,
+        "startChar": 19,
+        "endLine": 59,
+        "endChar": 20
+      },
+      "revId": "ae3fea039ccdc4a5359b5570b2c7c59120903995",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9cb27fc9_c8065a38",
         "filename": "rtc_base/scoped_generic.h",
         "patchSetId": 1
@@ -152,6 +242,30 @@
       "writtenOn": "2022-02-14T13:37:57Z",
       "side": 1,
       "message": "Let\u0027s move it to the move constructor to keep them together",
+      "range": {
+        "startLine": 96,
+        "startChar": 2,
+        "endLine": 100,
+        "endChar": 3
+      },
+      "revId": "ae3fea039ccdc4a5359b5570b2c7c59120903995",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "790b1e52_176f9847",
+        "filename": "rtc_base/scoped_generic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-02-15T14:40:01Z",
+      "side": 1,
+      "message": "I\u0027d like to keep the original from Chromium if possible.",
+      "parentUuid": "9cb27fc9_c8065a38",
       "range": {
         "startLine": 96,
         "startChar": 2,
