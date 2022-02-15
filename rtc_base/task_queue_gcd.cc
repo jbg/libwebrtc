@@ -47,7 +47,7 @@ class TaskQueueGcd : public TaskQueueBase {
   void Delete() override;
   void PostTask(std::unique_ptr<QueuedTask> task) override;
   void PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                       uint32_t milliseconds) override;
+                       TimeDelta duration) override;
 
  private:
   struct TaskContext {
@@ -103,10 +103,10 @@ void TaskQueueGcd::PostTask(std::unique_ptr<QueuedTask> task) {
 }
 
 void TaskQueueGcd::PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                                   uint32_t milliseconds) {
+                                   TimeDelta duration) {
   auto* context = new TaskContext(this, std::move(task));
   dispatch_after_f(
-      dispatch_time(DISPATCH_TIME_NOW, milliseconds * NSEC_PER_MSEC), queue_,
+      dispatch_time(DISPATCH_TIME_NOW, duration.us() * NSEC_PER_USEC), queue_,
       context, &RunTask);
 }
 

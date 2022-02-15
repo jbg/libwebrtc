@@ -164,8 +164,8 @@ void ProcessThreadImpl::PostTask(std::unique_ptr<QueuedTask> task) {
 }
 
 void ProcessThreadImpl::PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                                        uint32_t milliseconds) {
-  int64_t run_at_ms = rtc::TimeMillis() + milliseconds;
+                                        TimeDelta duration) {
+  int64_t run_at_ms = rtc::TimeMillis() + duration.ms();
   bool recalculate_wakeup_time;
   {
     MutexLock lock(&mutex_);

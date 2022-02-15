@@ -872,7 +872,7 @@ TEST_F(VideoSendStreamImplTest, DisablesPaddingOnPausedEncoder) {
         vss_impl->Stop();
         done.Set();
       },
-      5000);
+      TimeDelta::Seconds(5));
 
   // Pause the test suite so that the last delayed task executes.
   ASSERT_TRUE(done.Wait(10000));
@@ -908,7 +908,7 @@ TEST_F(VideoSendStreamImplTest, KeepAliveOnDroppedFrame) {
         vss_impl->Stop();
         done.Set();
       },
-      2000);
+      TimeDelta::Seconds(2));
   ASSERT_TRUE(done.Wait(5000));
 }
 

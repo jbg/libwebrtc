@@ -460,7 +460,7 @@ void StunProber::MaybeScheduleStunRequests() {
     thread_->PostDelayedTask(
         webrtc::ToQueuedTask(task_safety_.flag(),
                              [this] { ReportOnFinished(SUCCESS); }),
-        timeout_ms_);
+        webrtc::TimeDelta::Millis(timeout_ms_));
     return;
   }
   if (should_send_next_request(now)) {
@@ -473,7 +473,7 @@ void StunProber::MaybeScheduleStunRequests() {
   thread_->PostDelayedTask(
       webrtc::ToQueuedTask(task_safety_.flag(),
                            [this] { MaybeScheduleStunRequests(); }),
-      get_wake_up_interval_ms());
+      webrtc::TimeDelta::Millis(get_wake_up_interval_ms()));
 }
 
 bool StunProber::GetStats(StunProber::Stats* prob_stats) const {

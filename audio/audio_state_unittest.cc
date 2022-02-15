@@ -45,7 +45,7 @@ struct FakeAsyncAudioProcessingHelper {
     }
     MOCK_METHOD(void,
                 PostDelayedTask,
-                (std::unique_ptr<QueuedTask> task, uint32_t milliseconds),
+                (std::unique_ptr<QueuedTask> task, TimeDelta),
                 (override));
   };
 

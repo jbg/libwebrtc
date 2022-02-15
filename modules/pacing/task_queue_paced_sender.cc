@@ -273,7 +273,7 @@ void TaskQueuePacedSender::MaybeProcessPackets(
 
     task_queue_.PostDelayedHighPrecisionTask(
         [this, next_process_time]() { MaybeProcessPackets(next_process_time); },
-        time_to_next_process->ms<uint32_t>());
+        time_to_next_process.value());
   }
 
   UpdateStats();

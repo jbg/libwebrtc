@@ -38,9 +38,9 @@ class RunLoop {
   }
 
   template <typename Closure>
-  void PostDelayedTask(Closure&& task, uint32_t milliseconds) {
+  void PostDelayedTask(Closure&& task, TimeDelta duration) {
     task_queue()->PostDelayedTask(ToQueuedTask(std::forward<Closure>(task)),
-                                  milliseconds);
+                                  duration);
   }
 
  private:
