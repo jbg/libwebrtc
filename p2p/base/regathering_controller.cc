@@ -72,7 +72,7 @@ void BasicRegatheringController::
                      }
                      ScheduleRecurringRegatheringOnFailedNetworks();
                    }),
-      config_.regather_on_failed_networks_interval);
+      TimeDelta::Millis(config_.regather_on_failed_networks_interval));
 }
 
 }  // namespace webrtc

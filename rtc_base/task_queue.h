@@ -20,6 +20,7 @@
 #include "api/task_queue/queued_task.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/task_queue/task_queue_factory.h"
+#include "api/units/time_delta.h"
 #include "rtc_base/system/rtc_export.h"
 #include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/thread_annotations.h"
@@ -97,9 +98,9 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueue {
   void PostTask(std::unique_ptr<webrtc::QueuedTask> task);
   // See webrtc::TaskQueueBase for precision expectations.
   void PostDelayedTask(std::unique_ptr<webrtc::QueuedTask> task,
-                       uint32_t milliseconds);
+                       webrtc::TimeDelta duration);
   void PostDelayedHighPrecisionTask(std::unique_ptr<webrtc::QueuedTask> task,
-                                    uint32_t milliseconds);
+                                    webrtc::TimeDelta duration);
 
   // std::enable_if is used here to make sure that calls to PostTask() with
   // std::unique_ptr<SomeClassDerivedFromQueuedTask> would not end up being
@@ -111,6 +112,25 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueue {
   void PostTask(Closure&& closure) {
     PostTask(webrtc::ToQueuedTask(std::forward<Closure>(closure)));
   }
+  template <class Closure,
+            typename std::enable_if<!std::is_convertible<
+                Closure,
+                std::unique_ptr<webrtc::QueuedTask>>::value>::type* = nullptr>
+  void PostDelayedTask(Closure&& closure, webrtc::TimeDelta duration) {
+    PostDelayedTask(webrtc::ToQueuedTask(std::forward<Closure>(closure)),
+                    duration);
+  }
+  template <class Closure,
+            typename std::enable_if<!std::is_convertible<
+                Closure,
+                std::unique_ptr<webrtc::QueuedTask>>::value>::type* = nullptr>
+  void PostDelayedHighPrecisionTask(Closure&& closure,
+                                    webrtc::TimeDelta duration) {
+    PostDelayedHighPrecisionTask(
+        webrtc::ToQueuedTask(std::forward<Closure>(closure)), duration);
+  }
+  // TODO(bugs.webrtc.org/13684): Remove after downstream consumers migrates to
+  // TimeDelta variant.
   template <class Closure,
             typename std::enable_if<!std::is_convertible<
                 Closure,

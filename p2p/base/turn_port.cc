@@ -1276,7 +1276,7 @@ void TurnPort::HandleConnectionDestroyed(Connection* conn) {
                                            DestroyEntryIfNotCancelled(
                                                entry, timestamp);
                                          }),
-                            TURN_PERMISSION_TIMEOUT);
+                            webrtc::TimeDelta::Millis(TURN_PERMISSION_TIMEOUT));
 }
 
 bool TurnPort::SetEntryChannelId(const rtc::SocketAddress& address,

@@ -273,7 +273,7 @@ TEST(FakeClock, SettingTimeWakesThreads) {
   worker->PostDelayedTask(webrtc::ToQueuedTask([&message_handler_dispatched] {
                             message_handler_dispatched.Set();
                           }),
-                          /*milliseconds=*/60000);
+                          webrtc::TimeDelta::Seconds(60));
 
   // Wait for a bit for the worker thread to be started and enter its socket
   // select(). Otherwise this test would be trivial since the worker thread

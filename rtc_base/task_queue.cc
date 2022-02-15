@@ -34,14 +34,14 @@ void TaskQueue::PostTask(std::unique_ptr<webrtc::QueuedTask> task) {
 }
 
 void TaskQueue::PostDelayedTask(std::unique_ptr<webrtc::QueuedTask> task,
-                                uint32_t milliseconds) {
-  return impl_->PostDelayedTask(std::move(task), milliseconds);
+                                webrtc::TimeDelta duration) {
+  return impl_->PostDelayedTask(std::move(task), duration);
 }
 
 void TaskQueue::PostDelayedHighPrecisionTask(
     std::unique_ptr<webrtc::QueuedTask> task,
-    uint32_t milliseconds) {
-  return impl_->PostDelayedHighPrecisionTask(std::move(task), milliseconds);
+    webrtc::TimeDelta duration) {
+  return impl_->PostDelayedHighPrecisionTask(std::move(task), duration);
 }
 
 }  // namespace rtc

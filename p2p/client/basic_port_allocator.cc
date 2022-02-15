@@ -1406,7 +1406,7 @@ void AllocationSequence::Process(int epoch) {
     session_->network_thread()->PostDelayedTask(
         webrtc::ToQueuedTask(safety_,
                              [this, epoch = epoch_] { Process(epoch); }),
-        session_->allocator()->step_delay());
+        webrtc::TimeDelta::Millis(session_->allocator()->step_delay()));
   } else {
     // No allocation steps needed further if all phases in AllocationSequence
     // are completed. Cause further Process calls in the previous epoch to be
