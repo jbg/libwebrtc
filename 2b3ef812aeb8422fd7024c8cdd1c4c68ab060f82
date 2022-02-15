@@ -229,6 +229,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca8a1e9d_20179c12",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-02-15T07:13:34Z",
+      "side": 1,
+      "message": "I think it shouldn\u0027t be a problem at all given the hotspot is probably useless value for screen sharing, I think it is used mostly in case of remote desktop. If we identify we need to somehow update it, once the remote desktop is implemented, I will try to figure out.",
+      "parentUuid": "d2e3c1e7_9d0b33e8",
+      "revId": "2b3ef812aeb8422fd7024c8cdd1c4c68ab060f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c151d84_e68cf5ae",
