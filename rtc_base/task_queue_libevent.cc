@@ -108,7 +108,7 @@ class TaskQueueLibevent final : public TaskQueueBase {
   void Delete() override;
   void PostTask(std::unique_ptr<QueuedTask> task) override;
   void PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                       uint32_t milliseconds) override;
+                       TimeDelta duration) override;
 
  private:
   class SetTimerTask;
@@ -155,8 +155,9 @@ class TaskQueueLibevent::SetTimerTask : public QueuedTask {
     // and until we got here.
     uint32_t post_time = rtc::Time32() - posted_;
     TaskQueueLibevent::Current()->PostDelayedTask(
-        std::move(task_),
-        post_time > milliseconds_ ? 0 : milliseconds_ - post_time);
+        std::move(task_), TimeDelta::Millis(post_time > milliseconds_
+                                                ? 0
+                                                : milliseconds_ - post_time));
     return true;
   }
 
@@ -243,7 +244,8 @@ void TaskQueueLibevent::PostTask(std::unique_ptr<QueuedTask> task) {
 }
 
 void TaskQueueLibevent::PostDelayedTask(std::unique_ptr<QueuedTask> task,
-                                        uint32_t milliseconds) {
+                                        TimeDelta duration) {
+  int milliseconds = duration.ms();
   if (IsCurrent()) {
     TimerEvent* timer = new TimerEvent(this, std::move(task));
     EventAssign(&timer->ev, event_base_, -1, 0, &TaskQueueLibevent::RunTimer,

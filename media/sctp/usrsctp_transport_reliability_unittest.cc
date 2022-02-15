@@ -97,8 +97,8 @@ class SimulatedPacketTransport final : public rtc::PacketTransportInternal {
     actual_send_delay += reorder_delay;
 
     if (actual_send_delay > 0) {
-      destination->transport_thread_->PostDelayedTask(std::move(send_task),
-                                                      actual_send_delay);
+      destination->transport_thread_->PostDelayedTask(
+          std::move(send_task), webrtc::TimeDelta::Millis(actual_send_delay));
     } else {
       destination->transport_thread_->PostTask(std::move(send_task));
     }
@@ -212,7 +212,7 @@ class SctpDataSender final {
         // retry after timeout
         thread_->PostDelayedTask(
             ToQueuedTask(task_safety_.flag(), [this] { SendNextMessage(); }),
-            500);
+            webrtc::TimeDelta::Millis(500));
         break;
       case cricket::SDR_SUCCESS:
         // send next

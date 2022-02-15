@@ -311,7 +311,7 @@ TEST(RtcpTransceiverImplTest, SendCompoundPacketDelaysPeriodicSendPackets) {
         rtcp_transceiver->SendCompoundPacket();
         non_periodic.Set();
       },
-      config.report_period_ms / 2);
+      TimeDelta::Millis(config.report_period_ms / 2));
   // Though non-periodic packet is scheduled just in between periodic, due to
   // small period and task queue flakiness it migth end-up 1ms after next
   // periodic packet. To be sure duration after non-periodic packet is tested

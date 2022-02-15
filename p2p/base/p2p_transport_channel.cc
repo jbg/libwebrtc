@@ -318,7 +318,7 @@ bool P2PTransportChannel::MaybeSwitchSelectedConnection(
                      [this, recheck = *result.recheck_event]() {
                        SortConnectionsAndUpdateState(recheck);
                      }),
-        result.recheck_event->recheck_delay_ms);
+        webrtc::TimeDelta::Millis(result.recheck_event->recheck_delay_ms));
   }
 
   for (const auto* con : result.connections_to_forget_state_on) {
@@ -2045,7 +2045,8 @@ void P2PTransportChannel::CheckAndPing() {
   }
 
   network_thread_->PostDelayedTask(
-      ToQueuedTask(task_safety_, [this]() { CheckAndPing(); }), delay);
+      ToQueuedTask(task_safety_, [this]() { CheckAndPing(); }),
+      webrtc::TimeDelta::Millis(delay));
 }
 
 // This method is only for unit testing.

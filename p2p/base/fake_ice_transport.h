@@ -312,7 +312,7 @@ class FakeIceTransport : public IceTransportInternal {
                            RTC_DCHECK_RUN_ON(network_thread_);
                            FakeIceTransport::SendPacketInternal(packet);
                          }),
-            async_delay_ms_);
+            webrtc::TimeDelta::Millis(async_delay_ms_));
       } else {
         SendPacketInternal(packet);
       }
