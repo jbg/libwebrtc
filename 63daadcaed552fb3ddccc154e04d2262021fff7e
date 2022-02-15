@@ -16,6 +16,24 @@
       "message": "Per conversation:\n\nPlease file a crbug to change this to use a Pipewire-specific token, and typedef it to the SourceId, so callers into this code don\u0027t have to know about Pipewire implementation details.    (And link the crbug here :-)",
       "revId": "63daadcaed552fb3ddccc154e04d2262021fff7e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa6a891d_f48079dc",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-15T18:35:45Z",
+      "side": 1,
+      "message": "Done. Worth noting that we may not be able to do a PipeWire specific token though, as it\u0027s not necessarily a platform we can #ifdef (and using PipeWire doesn\u0027t necessarily mean not using X11)",
+      "parentUuid": "5e91ab88_344ba83d",
+      "revId": "63daadcaed552fb3ddccc154e04d2262021fff7e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
