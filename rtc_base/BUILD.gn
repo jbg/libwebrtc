@@ -285,7 +285,7 @@ rtc_library("rtc_event") {
 }
 
 config("chromium_logging_config") {
-  defines = ["LOGGING_INSIDE_WEBRTC"]
+  defines = [ "LOGGING_INSIDE_WEBRTC" ]
 }
 
 rtc_library("logging") {
@@ -312,12 +312,13 @@ rtc_library("logging") {
       "../../webrtc_overrides/rtc_base/logging.cc",
       "../../webrtc_overrides/rtc_base/logging.h",
     ]
+
     # This macro needs to be both present in all WebRTC targets (see its
     # definition in //BUILD.gn but also propagated to all the targets
     # depending on the Chromium component defined in
     # //third_party/webrtc_overrides:webrtc_component. This public_config
     # allows GN to propagate the macro accordingly.
-    public_configs = [":chromium_logging_config"]
+    public_configs = [ ":chromium_logging_config" ]
   } else {
     sources = [
       "logging.cc",
@@ -877,12 +878,18 @@ rtc_source_set("network_constants") {
   deps = [ ":checks" ]
 }
 
+rtc_source_set("scoped_generic") {
+  sources = [ "scoped_generic.h" ]
+  deps = [ ":checks" ]
+}
+
 if (is_android) {
   rtc_library("ifaddrs_android") {
     sources = [
       "ifaddrs_android.cc",
       "ifaddrs_android.h",
     ]
+    deps = [ ":scoped_generic" ]
     libs = [
       "log",
       "GLESv2",
@@ -1509,6 +1516,7 @@ if (rtc_include_tests) {
         "rolling_accumulator_unittest.cc",
         "rtc_certificate_generator_unittest.cc",
         "rtc_certificate_unittest.cc",
+        "scoped_generic_unittest.cc",
         "sigslot_tester_unittest.cc",
         "test_client_unittest.cc",
         "thread_unittest.cc",
@@ -1521,6 +1529,7 @@ if (rtc_include_tests) {
         ":net_helpers",
         ":null_socket_server",
         ":rtc_base_tests_utils",
+        ":scoped_generic",
         ":socket",
         ":socket_address",
         ":socket_factory",
