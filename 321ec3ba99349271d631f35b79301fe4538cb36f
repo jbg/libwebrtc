@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ece098d2_6d6ae790",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-02-16T08:28:24Z",
+      "side": 0,
+      "message": "I get that the straight memcpy\u0027s can be replaced by XOR(first_media, /*fec\u003d*/ {0}), but can you explain why this line can be replaced in a similar manner?",
+      "range": {
+        "startLine": 242,
+        "startChar": 10,
+        "endLine": 242,
+        "endChar": 79
+      },
+      "revId": "321ec3ba99349271d631f35b79301fe4538cb36f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
