@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d3a314_49a41597",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-02-16T13:05:50Z",
+      "side": 1,
+      "message": "I do get a bit confused between the varioius things being true and false, enabled and disabled.\nBut I assume that you have tested that this does the right thing for both cases when you start Chrome with the appropriate flags.\n\nApproving.\n",
+      "revId": "b17b1cb74dafe8148ab4ba85f3edae9a1177c6a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
