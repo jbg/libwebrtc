@@ -22,6 +22,30 @@
       },
       "revId": "321ec3ba99349271d631f35b79301fe4538cb36f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e80410_ef04ea81",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2022-02-16T11:42:05Z",
+      "side": 0,
+      "message": "see ForwardErrorCorrection::XorHeaders here:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/rtp_rtcp/source/forward_error_correction.cc;l\u003d612;drc\u003dc26af9bfc075bbed0c70d2371b9021d3a3479d92\n\n(the code is a bit hard to follow since it attempts doing ulp and flex in the same manner ... I am not looking forward to the attempt to add the final RFC version of flex but that is a problem for another day :-))",
+      "parentUuid": "ece098d2_6d6ae790",
+      "range": {
+        "startLine": 242,
+        "startChar": 10,
+        "endLine": 242,
+        "endChar": 79
+      },
+      "revId": "321ec3ba99349271d631f35b79301fe4538cb36f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
