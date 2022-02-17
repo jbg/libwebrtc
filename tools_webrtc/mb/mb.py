@@ -900,6 +900,7 @@ class MetaBuildWrapper:
 
     is_android = 'target_os="android"' in vals['gn_args']
     is_linux = self.platform.startswith('linux') and not is_android
+    is_ios = 'target_os="ios"' in vals['gn_args']
 
     if test_type == 'nontest':
       self.WriteFailureAndRaise('We should not be isolating %s.' % target,
@@ -931,6 +932,10 @@ class MetaBuildWrapper:
           '--target', target, '--logdog-bin-cmd', '../../bin/logdog_butler',
           '--logcat-output-file', '${ISOLATED_OUTDIR}/logcats',
           '--store-tombstones'
+      ]
+    elif is_ios:
+      cmdline += [
+          'bin/run_%s' % target, '--out-dir', '${ISOLATED_OUTDIR}'
       ]
     else:
       if test_type == 'raw':
