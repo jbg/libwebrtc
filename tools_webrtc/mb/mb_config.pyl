@@ -364,19 +364,16 @@
       'xctest', 'ios_no_chrome',
     ],
     'ios_internal_debug_bot_arm64': [
-      'ios', 'debug_bot', 'arm64', 'ios_use_goma_rbe',
+      'ios', 'debug_bot', 'arm64', 'no_ios_code_signing',
       'ios_code_signing_identity_description', 'xctest',
-      'ios_no_chrome',
     ],
     'ios_internal_release_bot_arm64': [
-      'ios', 'release_bot', 'arm64', 'ios_use_goma_rbe',
-      'ios_code_signing_identity_description', 'xctest',
-      'ios_no_chrome',
+      'ios', 'release_bot', 'arm64', 'no_ios_code_signing',
+      'ios_code_signing_identity_description',
     ],
     'ios_internal_pure_release_bot_arm64': [
-      'ios', 'pure_release_bot', 'arm64', 'ios_use_goma_rbe',
+      'ios', 'pure_release_bot', 'arm64',
       'ios_code_signing_identity_description', 'xctest',
-      'ios_no_chrome',
     ],
     'ios_debug_bot_x64': [
       'ios', 'debug_bot', 'x64', 'ios_use_goma_rbe', 'xctest',
@@ -571,6 +568,6 @@
     },
     'xctest': {
       'gn_args': 'enable_run_ios_unittests_with_xctest=true',
-    },
+    },    
   },
 }
