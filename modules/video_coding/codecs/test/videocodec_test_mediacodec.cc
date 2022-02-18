@@ -189,6 +189,7 @@ TEST_P(VideoCodecTestMediaCodecRateAdaptation, DISABLED_RateAdaptation) {
                       static_cast<size_t>(kConstRateIntervalSec *
                                           rate_profile.back().input_fps);
   config.encode_in_real_time = true;
+  config.print_frame_level_stats = true;
   config.SetCodecSettings(codec_name, 1, 1, 1, false, false, false, 1280, 720);
 
   auto fixture = CreateTestFixtureWithConfig(config);
@@ -235,7 +236,8 @@ INSTANTIATE_TEST_SUITE_P(
                                          kFrameRateHighLowHigh),
                        ::testing::Values(cricket::kVp8CodecName,
                                          cricket::kVp9CodecName,
-                                         cricket::kH264CodecName)));
+                                         cricket::kH264CodecName,
+                                         "H265")));
 
 }  // namespace test
 }  // namespace webrtc
