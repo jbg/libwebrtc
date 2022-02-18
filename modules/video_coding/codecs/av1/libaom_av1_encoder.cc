@@ -579,7 +579,9 @@ int32_t LibaomAv1Encoder::Encode(
   if (prepped_input_frame.video_frame_buffer()->type() !=
           VideoFrameBuffer::Type::kI420 &&
       prepped_input_frame.video_frame_buffer()->type() !=
-          VideoFrameBuffer::Type::kI420A) {
+          VideoFrameBuffer::Type::kI420A &&
+      prepped_input_frame.video_frame_buffer()->type() !=
+          VideoFrameBuffer::Type::kNV12) {
     rtc::scoped_refptr<I420BufferInterface> converted_buffer(
         prepped_input_frame.video_frame_buffer()->ToI420());
     if (!converted_buffer) {
@@ -594,18 +596,37 @@ int32_t LibaomAv1Encoder::Encode(
     prepped_input_frame = VideoFrame(converted_buffer, frame.timestamp(),
                                      frame.render_time_ms(), frame.rotation());
   }
-
-  // Set frame_for_encode_ data pointers and strides.
-  auto i420_buffer = prepped_input_frame.video_frame_buffer()->GetI420();
-  frame_for_encode_->planes[AOM_PLANE_Y] =
-      const_cast<unsigned char*>(i420_buffer->DataY());
-  frame_for_encode_->planes[AOM_PLANE_U] =
-      const_cast<unsigned char*>(i420_buffer->DataU());
-  frame_for_encode_->planes[AOM_PLANE_V] =
-      const_cast<unsigned char*>(i420_buffer->DataV());
-  frame_for_encode_->stride[AOM_PLANE_Y] = i420_buffer->StrideY();
-  frame_for_encode_->stride[AOM_PLANE_U] = i420_buffer->StrideU();
-  frame_for_encode_->stride[AOM_PLANE_V] = i420_buffer->StrideV();
+  switch (prepped_input_frame.video_frame_buffer()->type()) {
+    case VideoFrameBuffer::Type::kI420:
+    case VideoFrameBuffer::Type::kI420A: {
+      // Set frame_for_encode_ data pointers and strides.
+      auto i420_buffer = prepped_input_frame.video_frame_buffer()->GetI420();
+      frame_for_encode_->planes[AOM_PLANE_Y] =
+          const_cast<unsigned char*>(i420_buffer->DataY());
+      frame_for_encode_->planes[AOM_PLANE_U] =
+          const_cast<unsigned char*>(i420_buffer->DataU());
+      frame_for_encode_->planes[AOM_PLANE_V] =
+          const_cast<unsigned char*>(i420_buffer->DataV());
+      frame_for_encode_->stride[AOM_PLANE_Y] = i420_buffer->StrideY();
+      frame_for_encode_->stride[AOM_PLANE_U] = i420_buffer->StrideU();
+      frame_for_encode_->stride[AOM_PLANE_V] = i420_buffer->StrideV();
+      break;
+    }
+    case VideoFrameBuffer::Type::kNV12: {
+      auto nv12_buffer = prepped_input_frame.video_frame_buffer()->GetNV12();
+      frame_for_encode_->planes[AOM_PLANE_Y] =
+          const_cast<unsigned char*>(nv12_buffer->DataY());
+      frame_for_encode_->planes[AOM_PLANE_U] =
+          const_cast<unsigned char*>(nv12_buffer->DataUV());
+      frame_for_encode_->planes[AOM_PLANE_V] = nullptr;
+      frame_for_encode_->stride[AOM_PLANE_Y] = nv12_buffer->StrideY();
+      frame_for_encode_->stride[AOM_PLANE_U] = nv12_buffer->StrideUV();
+      frame_for_encode_->stride[AOM_PLANE_V] = 0;
+      break;
+    }
+    default:
+      return WEBRTC_VIDEO_CODEC_ENCODER_FAILURE;
+  }
 
   const uint32_t duration =
       kRtpTicksPerSecond / static_cast<float>(encoder_settings_.maxFramerate);
