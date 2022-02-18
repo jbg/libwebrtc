@@ -122,6 +122,10 @@ class RTC_EXPORT VideoCodec {
 
   uint32_t maxFramerate;
 
+  absl::optional<VideoCodecComplexity> complexity;
+  VideoCodecComplexity GetVideoEncoderComplexity() const;
+  void SetVideoEncoderComplexity(VideoCodecComplexity complexity_setting);
+
   // This enables/disables encoding and sending when there aren't multiple
   // simulcast streams,by allocating 0 bitrate if inactive.
   bool active;

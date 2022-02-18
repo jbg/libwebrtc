@@ -139,4 +139,23 @@ VideoCodecType PayloadStringToCodecType(const std::string& name) {
   return kVideoCodecGeneric;
 }
 
+VideoCodecComplexity VideoCodec::GetVideoEncoderComplexity() const {
+  if (complexity.has_value()) {
+    return complexity.value();
+  }
+  switch (codecType) {
+    case kVideoCodecVP8:
+      return VP8().complexity;
+    case kVideoCodecVP9:
+      return VP9().complexity;
+    default:
+      return VideoCodecComplexity::kComplexityNormal;
+  }
+}
+
+void VideoCodec::SetVideoEncoderComplexity(
+    VideoCodecComplexity complexity_setting) {
+  complexity = complexity_setting;
+}
+
 }  // namespace webrtc
