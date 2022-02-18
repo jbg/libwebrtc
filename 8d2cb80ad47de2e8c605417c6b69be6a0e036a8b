@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8239bb30_c8b2d11d",
+        "filename": "webrtc.gni",
+        "patchSetId": 51
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-02-18T09:04:27Z",
+      "side": 1,
+      "message": "Let\u0027s add a TODO linked to this bug about removing this temporary workaround?",
+      "range": {
+        "startLine": 533,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 5
+      },
+      "revId": "8d2cb80ad47de2e8c605417c6b69be6a0e036a8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
