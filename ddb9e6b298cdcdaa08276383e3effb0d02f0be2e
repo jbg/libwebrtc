@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d7671b7_4a8c44b5",
+        "filename": "api/video_codecs/video_codec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 7672
+      },
+      "writtenOn": "2022-02-19T17:10:16Z",
+      "side": 1,
+      "message": "Good suggestion. Done.",
+      "parentUuid": "419e326a_917e2af8",
+      "range": {
+        "startLine": 125,
+        "startChar": 2,
+        "endLine": 125,
+        "endChar": 50
+      },
+      "revId": "ddb9e6b298cdcdaa08276383e3effb0d02f0be2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d5c32bd_c5babd29",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-02-18T21:38:03Z",
       "side": 1,
       "message": "Move these two up, so they\u0027re below Set/GetScalabilityMode",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 0
+      },
+      "revId": "ddb9e6b298cdcdaa08276383e3effb0d02f0be2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1ecfce0_9bc0f802",
+        "filename": "api/video_codecs/video_codec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 7672
+      },
+      "writtenOn": "2022-02-19T17:10:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d5c32bd_c5babd29",
       "range": {
         "startLine": 126,
         "startChar": 0,
