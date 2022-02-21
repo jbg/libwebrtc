@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9597502_80737da0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2022-02-21T19:54:10Z",
+      "side": 1,
+      "message": "Yeah since it breaks the rule of the presubmit, unless we can make the histogram part of the python wheel or cipd that but then we need release management for it. Just having it on CQ I think would be a great improvement.",
+      "parentUuid": "2857bddf_6deb8c3d",
+      "revId": "d2cbaa58f74e48256fca110b682077e176684a68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a11929e_cdd3f487",
