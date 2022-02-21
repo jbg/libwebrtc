@@ -16,6 +16,46 @@
       "message": "I think this will do instead of https://chromium-review.googlesource.com/c/chromium/tools/depot_tools/+/3473363.",
       "revId": "d2cbaa58f74e48256fca110b682077e176684a68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2857bddf_6deb8c3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-02-21T18:06:47Z",
+      "side": 1,
+      "message": "I wonder if there is a way to automate this and avoid the manual part. Should we maybe run this on CQ (instead of presubmit)?",
+      "revId": "d2cbaa58f74e48256fca110b682077e176684a68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a11929e_cdd3f487",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-02-21T18:06:47Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 823,
+        "startChar": 56,
+        "endLine": 823,
+        "endChar": 57
+      },
+      "revId": "d2cbaa58f74e48256fca110b682077e176684a68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
