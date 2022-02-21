@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "83a21e0c_ad2203e4",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-02-21T12:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "572418f2_70f59650",
+      "range": {
+        "startLine": 648,
+        "startChar": 10,
+        "endLine": 648,
+        "endChar": 14
+      },
+      "revId": "dd43611e037b7fc603c86795fe6148a9915c307a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "68e0d80f_5abf1be6",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-21T11:26:38Z",
       "side": 1,
       "message": "the same",
+      "range": {
+        "startLine": 649,
+        "startChar": 16,
+        "endLine": 649,
+        "endChar": 20
+      },
+      "revId": "dd43611e037b7fc603c86795fe6148a9915c307a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65b7d314_01d6f58d",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-02-21T12:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68e0d80f_5abf1be6",
       "range": {
         "startLine": 649,
         "startChar": 16,
@@ -72,6 +120,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ae2ecb5f_7c17b1d2",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-02-21T12:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d595c3_f27f93d1",
+      "range": {
+        "startLine": 651,
+        "startChar": 35,
+        "endLine": 651,
+        "endChar": 49
+      },
+      "revId": "dd43611e037b7fc603c86795fe6148a9915c307a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "cc4662f7_b4b06ee2",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
         "patchSetId": 2
@@ -83,6 +155,30 @@
       "writtenOn": "2022-02-21T11:26:38Z",
       "side": 1,
       "message": "than it should?",
+      "range": {
+        "startLine": 652,
+        "startChar": 7,
+        "endLine": 652,
+        "endChar": 13
+      },
+      "revId": "dd43611e037b7fc603c86795fe6148a9915c307a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e55201ef_f67ad982",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-02-21T12:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc4662f7_b4b06ee2",
       "range": {
         "startLine": 652,
         "startChar": 7,
@@ -118,6 +214,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4aaac6b7_7127c27b",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-02-21T12:25:41Z",
+      "side": 1,
+      "message": "because then I need to remember which one I picked. I don\u0027t now.\n(changed to has_value())",
+      "parentUuid": "f67253ce_e445d877",
+      "range": {
+        "startLine": 675,
+        "startChar": 6,
+        "endLine": 675,
+        "endChar": 20
+      },
+      "revId": "dd43611e037b7fc603c86795fe6148a9915c307a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9781f303_5832159b",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
         "patchSetId": 2
@@ -129,6 +249,30 @@
       "writtenOn": "2022-02-21T11:26:38Z",
       "side": 1,
       "message": "Replies",
+      "range": {
+        "startLine": 1212,
+        "startChar": 30,
+        "endLine": 1212,
+        "endChar": 35
+      },
+      "revId": "dd43611e037b7fc603c86795fe6148a9915c307a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5715b8b1_f0ed4c13",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1212,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-02-21T12:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9781f303_5832159b",
       "range": {
         "startLine": 1212,
         "startChar": 30,
@@ -152,6 +296,30 @@
       "writtenOn": "2022-02-21T11:26:38Z",
       "side": 1,
       "message": "I don\u0027t fully understand why this is 1 s? I would\u0027ve thought it should be 0 s for this block and 0.5 s for the next block.",
+      "range": {
+        "startLine": 1244,
+        "startChar": 49,
+        "endLine": 1244,
+        "endChar": 68
+      },
+      "revId": "dd43611e037b7fc603c86795fe6148a9915c307a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a6c8732_8b134c07",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1244,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-02-21T12:25:41Z",
+      "side": 1,
+      "message": "I\u0027ve added name of that parameter and changes wait values to be non-symmetric.\nDoes it explains it now? or would you prefer a comment.",
+      "parentUuid": "68459b74_55b311e3",
       "range": {
         "startLine": 1244,
         "startChar": 49,
