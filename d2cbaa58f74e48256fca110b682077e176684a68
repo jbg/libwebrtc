@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eabfce43_d94b1604",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2022-02-21T18:02:42Z",
+      "side": 1,
+      "message": "I think this will do instead of https://chromium-review.googlesource.com/c/chromium/tools/depot_tools/+/3473363.",
+      "revId": "d2cbaa58f74e48256fca110b682077e176684a68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
