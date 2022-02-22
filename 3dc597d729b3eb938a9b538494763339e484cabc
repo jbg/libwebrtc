@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18cad751_2b118769",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-22T20:24:27Z",
+      "side": 1,
+      "message": "https://webrtc-review.googlesource.com/c/src/+/250661",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "3dc597d729b3eb938a9b538494763339e484cabc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
