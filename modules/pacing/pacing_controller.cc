@@ -94,6 +94,7 @@ const float PacingController::kDefaultPaceMultiplier = 2.5f;
 const TimeDelta PacingController::kPausedProcessInterval =
     kCongestedPacketInterval;
 const TimeDelta PacingController::kMinSleepTime = TimeDelta::Millis(1);
+const TimeDelta PacingController::kDefaultHoldBackWindow = TimeDelta::Millis(5);
 
 PacingController::PacingController(Clock* clock,
                                    PacketSender* packet_sender,

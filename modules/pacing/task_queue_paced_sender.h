@@ -50,7 +50,7 @@ class TaskQueuePacedSender : public RtpPacketPacer, public RtpPacketSender {
       RtcEventLog* event_log,
       const WebRtcKeyValueConfig* field_trials,
       TaskQueueFactory* task_queue_factory,
-      TimeDelta max_hold_back_window = PacingController::kMinSleepTime,
+      TimeDelta max_hold_back_window = PacingController::kDefaultHoldBackWindow,
       int max_hold_back_window_in_packets = -1);
 
   ~TaskQueuePacedSender() override;

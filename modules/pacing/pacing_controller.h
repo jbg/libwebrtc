@@ -79,6 +79,8 @@ class PacingController {
 
   static const TimeDelta kMinSleepTime;
 
+  static const TimeDelta kDefaultHoldBackWindow;
+
   PacingController(Clock* clock,
                    PacketSender* packet_sender,
                    RtcEventLog* event_log,
