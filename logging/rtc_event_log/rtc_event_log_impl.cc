@@ -26,6 +26,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/numerics/safe_minmax.h"
+#include "rtc_base/thread.h"
 #include "rtc_base/time_utils.h"
 
 namespace webrtc {
@@ -77,6 +78,9 @@ RtcEventLogImpl::~RtcEventLogImpl() {
   rtc::TaskQueue* tq = task_queue_.get();
   delete tq;
   task_queue_.release();
+
+  config_histories_.clear();
+  histories_.clear();
 }
 
 bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output,
@@ -140,31 +144,24 @@ void RtcEventLogImpl::StopLogging(std::function<void()> callback) {
 void RtcEventLogImpl::Log(std::unique_ptr<RtcEvent> event) {
   RTC_CHECK(event);
 
+  // No need to run this on TaskQueue as it is writing to a current thread
+  // buffer
+  LogToMemory(std::move(event));
+
   // Binding to `this` is safe because `this` outlives the `task_queue_`.
-  task_queue_->PostTask([this, event = std::move(event)]() mutable {
-    RTC_DCHECK_RUN_ON(task_queue_.get());
-    LogToMemory(std::move(event));
-    if (event_output_)
-      ScheduleOutput();
-  });
+  // Use PostDelayedTask here to make it involved by Metronome
+  // TODO: No need to post a task for every inconming event
+  task_queue_->PostDelayedTask(
+      [this, event = std::move(event)]() mutable {
+        RTC_DCHECK_RUN_ON(task_queue_.get());
+        if (event_output_)
+          ScheduleOutput();
+      },
+      0);
 }
 
 void RtcEventLogImpl::ScheduleOutput() {
   RTC_DCHECK(event_output_ && event_output_->IsActive());
-  if (history_.size() >= kMaxEventsInHistory) {
-    // We have to emergency drain the buffer. We can't wait for the scheduled
-    // output task because there might be other event incoming before that.
-    LogEventsFromMemoryToOutput();
-    return;
-  }
-
-  RTC_DCHECK(output_period_ms_.has_value());
-  if (*output_period_ms_ == kImmediateOutput) {
-    // We are already on the `task_queue_` so there is no reason to post a task
-    // if we want to output immediately.
-    LogEventsFromMemoryToOutput();
-    return;
-  }
 
   if (!output_scheduled_) {
     output_scheduled_ = true;
@@ -179,28 +176,87 @@ void RtcEventLogImpl::ScheduleOutput() {
     };
     const int64_t now_ms = rtc::TimeMillis();
     const int64_t time_since_output_ms = now_ms - last_output_ms_;
-    const uint32_t delay = rtc::SafeClamp(
-        *output_period_ms_ - time_since_output_ms, 0, *output_period_ms_);
+    const uint32_t delay =
+        rtc::SafeClamp(*output_period_ms_ - time_since_output_ms, 1, 16);
     task_queue_->PostDelayedTask(output_task, delay);
   }
 }
 
+std::deque<std::unique_ptr<RtcEvent>>& RtcEventLogImpl::GetContainer(
+    bool is_config_event) {
+  TaskQueueBase* current = rtc::ThreadManager::Instance()->CurrentThread();
+  auto& container_list = is_config_event ? config_histories_ : histories_;
+  auto it = container_list.find(current);
+  if (it == container_list.end()) {
+    MutexLock lock(&lock_);
+    container_list.insert(std::make_pair(current, EventQueue()));
+  }
+
+  return container_list[current];
+}
+
 void RtcEventLogImpl::LogToMemory(std::unique_ptr<RtcEvent> event) {
   std::deque<std::unique_ptr<RtcEvent>>& container =
-      event->IsConfigEvent() ? config_history_ : history_;
+      GetContainer(event->IsConfigEvent());
+
   const size_t container_max_size =
       event->IsConfigEvent() ? kMaxEventsInConfigHistory : kMaxEventsInHistory;
 
   if (container.size() >= container_max_size) {
-    RTC_DCHECK(!event_output_);  // Shouldn't lose events if we have an output.
     container.pop_front();
   }
+
   container.push_back(std::move(event));
+}
+
+// static
+void RtcEventLogImpl::MergeBuffer(ThreadEvents& buffers,
+                                  EventQueue& target,
+                                  Mutex* mutex) {
+  ThreadEvents cache;
+  MutexLock lock(mutex);
+  cache.swap(buffers);
+
+  int total_buffer_size = 0;
+  for (auto& pair : cache) {
+    total_buffer_size += pair.second.size();
+  }
+
+  for (int i = 0; i < total_buffer_size; i++) {
+    // Choose the element with least time stamp
+    // TODO: Refine the logics here
+    TaskQueueBase* earliest_event_key = nullptr;
+    for (auto& pair : cache) {
+      if (!pair.first)
+        continue;
+      if (!pair.second.front())
+        continue;
+      if (!pair.second.size()) {
+        // cache.erase(pair.first);
+        continue;
+      }
+      if (!earliest_event_key) {
+        earliest_event_key = pair.first;
+      }
+      if (pair.second.front()->timestamp_us() <
+          cache[earliest_event_key].front()->timestamp_us())
+        earliest_event_key = pair.first;
+    }
+    // Write to global list
+    if (earliest_event_key && cache[earliest_event_key].front()) {
+      // TODO: Check max size before push_back
+      target.push_back(std::move(cache[earliest_event_key].front()));
+      cache[earliest_event_key].pop_front();
+    }
+  }
 }
 
 void RtcEventLogImpl::LogEventsFromMemoryToOutput() {
   RTC_DCHECK(event_output_ && event_output_->IsActive());
   last_output_ms_ = rtc::TimeMillis();
+
+  MergeBuffer(histories_, history_, &lock_);
+  MergeBuffer(config_histories_, config_history_, &lock_);
 
   // Serialize all stream configurations that haven't already been written to
   // this output. `num_config_events_written_` is used to track which configs we

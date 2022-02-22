@@ -14,6 +14,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <deque>
+#include <map>
 #include <memory>
 #include <string>
 
@@ -29,6 +30,10 @@
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
+
+using ThreadEvents = std::map<webrtc::TaskQueueBase*,
+                              std::deque<std::unique_ptr<webrtc::RtcEvent>>>;
+using EventQueue = std::deque<std::unique_ptr<webrtc::RtcEvent>>;
 
 class RtcEventLogImpl final : public RtcEventLog {
  public:
@@ -49,7 +54,7 @@ class RtcEventLogImpl final : public RtcEventLog {
   void Log(std::unique_ptr<RtcEvent> event) override;
 
  private:
-  void LogToMemory(std::unique_ptr<RtcEvent> event) RTC_RUN_ON(task_queue_);
+  void LogToMemory(std::unique_ptr<RtcEvent> event);
   void LogEventsFromMemoryToOutput() RTC_RUN_ON(task_queue_);
 
   void StopOutput() RTC_RUN_ON(task_queue_);
@@ -63,12 +68,23 @@ class RtcEventLogImpl final : public RtcEventLog {
 
   void ScheduleOutput() RTC_RUN_ON(task_queue_);
 
+  std::deque<std::unique_ptr<RtcEvent>>& GetContainer(bool is_config_event);
+  static void MergeBuffer(ThreadEvents& buffers,
+                          EventQueue& target,
+                          Mutex* lock);
+
   // History containing all past configuration events.
   std::deque<std::unique_ptr<RtcEvent>> config_history_
       RTC_GUARDED_BY(*task_queue_);
 
   // History containing the most recent (non-configuration) events (~10s).
   std::deque<std::unique_ptr<RtcEvent>> history_ RTC_GUARDED_BY(*task_queue_);
+
+  // Maps to store log events seperatedly per thread.
+  std::map<TaskQueueBase*, std::deque<std::unique_ptr<RtcEvent>>> histories_;
+  std::map<TaskQueueBase*, std::deque<std::unique_ptr<RtcEvent>>>
+      config_histories_;
+  Mutex lock_;
 
   std::unique_ptr<RtcEventLogEncoder> event_encoder_
       RTC_GUARDED_BY(*task_queue_);
