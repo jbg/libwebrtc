@@ -257,6 +257,7 @@ PeerConnectionFactoryDependencies CreatePCFDependencies(
 // from InjectableComponents::PeerConnectionComponents.
 PeerConnectionDependencies CreatePCDependencies(
     MockPeerConnectionObserver* observer,
+    uint32_t port_allocator_extra_flags,
     std::unique_ptr<PeerConnectionComponents> pc_dependencies) {
   PeerConnectionDependencies pc_deps(observer);
 
@@ -264,7 +265,11 @@ PeerConnectionDependencies CreatePCDependencies(
       pc_dependencies->network_manager, pc_dependencies->packet_socket_factory);
 
   // This test does not support TCP
-  int flags = cricket::PORTALLOCATOR_DISABLE_TCP;
+  RTC_CHECK_EQ(port_allocator_extra_flags & cricket::PORTALLOCATOR_DISABLE_TCP,
+               0)
+      << "TCP ICE candidates aren't supported to preserve compatibility with "
+      << "emulated network";
+  int flags = port_allocator_extra_flags | cricket::PORTALLOCATOR_DISABLE_TCP;
   port_allocator->set_flags(port_allocator->flags() | flags);
 
   pc_deps.allocator = std::move(port_allocator);
@@ -344,8 +349,9 @@ std::unique_ptr<TestPeer> TestPeerFactory::CreateTestPeer(
       CreateModularPeerConnectionFactory(std::move(pcf_deps));
 
   // Create peer connection.
-  PeerConnectionDependencies pc_deps = CreatePCDependencies(
-      observer.get(), std::move(components->pc_dependencies));
+  PeerConnectionDependencies pc_deps =
+      CreatePCDependencies(observer.get(), params->port_allocator_extra_flags,
+                           std::move(components->pc_dependencies));
   rtc::scoped_refptr<PeerConnectionInterface> peer_connection =
       peer_connection_factory
           ->CreatePeerConnectionOrError(params->rtc_configuration,
