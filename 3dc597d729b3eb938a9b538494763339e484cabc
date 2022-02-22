@@ -22,6 +22,23 @@
       },
       "revId": "3dc597d729b3eb938a9b538494763339e484cabc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5325a04_5b4cfbb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-02-22T20:42:18Z",
+      "side": 1,
+      "message": "Windows failures appear to be infra and unrelated to this change.",
+      "revId": "3dc597d729b3eb938a9b538494763339e484cabc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
