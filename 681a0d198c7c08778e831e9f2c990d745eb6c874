@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "801bbb34_0681cbb7",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-02-23T14:57:47Z",
+      "side": 1,
+      "message": "Drive-by comment: Is this orthogonal to this method on RTCConfiguration which I added a while ago? Those flags applies when port allocator is not injected.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/peer_connection_interface.h;drc\u003d7c023f578ecff49758c5a33229c22d76e90a8d93;l\u003d396",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 34
+      },
+      "revId": "681a0d198c7c08778e831e9f2c990d745eb6c874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
