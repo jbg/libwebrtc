@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec1a90f6_19609fd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-02-23T13:00:30Z",
+      "side": 1,
+      "message": "Please take a look on allowing importing of p2p/base/port_allocator.h in test/DEPS file",
+      "revId": "4461c76df758a3da619657aebc0021b2ac3a371f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
