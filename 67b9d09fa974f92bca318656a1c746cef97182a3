@@ -16,6 +16,23 @@
       "message": "Collect feedback for this CL.",
       "revId": "67b9d09fa974f92bca318656a1c746cef97182a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73abf16_38b6d5c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-02-23T07:48:04Z",
+      "side": 1,
+      "message": "Makes sense not to wake up every 1 ms. Erik is this safe?\n\n(Somewhat related but separate from this CL: I\u0027m very much interested in splitting up the packets into those that need high or those that need low precision in order to get rid of most wakeups for when low precision TQs are available. I may be able to do this soon, but metronome TQ is still very much experimental.)",
+      "revId": "67b9d09fa974f92bca318656a1c746cef97182a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
