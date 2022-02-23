@@ -16,6 +16,29 @@
       "message": "Please take a look on allowing importing of p2p/base/port_allocator.h in test/DEPS file",
       "revId": "4461c76df758a3da619657aebc0021b2ac3a371f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cd8f3b5_83bdc117",
+        "filename": "test/pc/e2e/test_peer_factory.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 8527
+      },
+      "writtenOn": "2022-02-23T14:00:06Z",
+      "side": 1,
+      "message": "nit: why can\u0027t \"user\" be allowed to set PORTALLOCATOR_DISABLE_TCP\nin the extra_flags ? (since it will be set anyway??)",
+      "range": {
+        "startLine": 268,
+        "startChar": 2,
+        "endLine": 268,
+        "endChar": 14
+      },
+      "revId": "4461c76df758a3da619657aebc0021b2ac3a371f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
