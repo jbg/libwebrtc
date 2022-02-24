@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31699b7b_a53daace",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-02-24T11:02:52Z",
+      "side": 1,
+      "message": "I don\u0027t think there are proper tests with NV12 input to av1 encoder right now.\n\n+cc hbos@, where do we have tests for NV12 input to libvpx?",
+      "parentUuid": "2c3c8c00_7725650f",
+      "revId": "5ae704cdc512c5a6fa3a094dfd79bf5a682cef48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0102e81_21b538ef",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
         "patchSetId": 7
