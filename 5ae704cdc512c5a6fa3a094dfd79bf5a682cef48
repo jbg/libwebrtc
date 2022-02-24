@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb1aa1dd_1f0ba454",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-02-24T11:45:00Z",
+      "side": 1,
+      "message": "There are some VideoStreamEncoderTests that test whether or not conversion happens depending on whether or not the underlying encoder does or doesn\u0027t support the input frame, some different combinations tested:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/video_stream_encoder_unittest.cc;l\u003d1764\n\nThis is mostly about whether or not to convert, then the individual encoders test the actual encoding, or at least that the library doesn\u0027t report error.\n\nThere\u0027s some encoder-specific tests, like for libvpx VP8 we have a TEST_P suite that tests both I420 and NV12 in a parameterized test:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/codecs/vp8/test/vp8_impl_unittest.cc;l\u003d723\n\nThere may be other tests too, I don\u0027t recall. See if you find a relevant test.\n\nDo we have test that does the actual encoding and decoding to make sure pixels make sense?",
+      "parentUuid": "31699b7b_a53daace",
+      "revId": "5ae704cdc512c5a6fa3a094dfd79bf5a682cef48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0102e81_21b538ef",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
         "patchSetId": 7
