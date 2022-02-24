@@ -33,6 +33,29 @@
       "message": "lgtm, do we already have test coverage for nv12 then via VideoStreamEncoder?\nI\u0027ll let ilnik@ be the main reviewer for this cl",
       "revId": "5ae704cdc512c5a6fa3a094dfd79bf5a682cef48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0102e81_21b538ef",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-02-24T10:56:42Z",
+      "side": 1,
+      "message": "Are you sure it will just work putting UV plane in U plane in I420 aom_img_t?\n\nAn encoder in chrome does correctly choose NV12 pixel format:\nhttps://source.chromium.org/chromium/chromium/src/+/main:media/video/av1_video_encoder.cc;l\u003d342;drc\u003dcb2455c7ed0cff0c6b20cab7808e4894f1ba4569\n\nIt might work because NV12 and I420 images have the same number of bytes, just a little different layout. But still I would prefer not to assume it will accidentally work. Libaom should be properly notified that the source format in NV12.",
+      "range": {
+        "startLine": 235,
+        "startChar": 29,
+        "endLine": 235,
+        "endChar": 45
+      },
+      "revId": "5ae704cdc512c5a6fa3a094dfd79bf5a682cef48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
