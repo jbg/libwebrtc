@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "5ae704cdc512c5a6fa3a094dfd79bf5a682cef48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c3c8c00_7725650f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-02-24T09:32:50Z",
+      "side": 1,
+      "message": "lgtm, do we already have test coverage for nv12 then via VideoStreamEncoder?\nI\u0027ll let ilnik@ be the main reviewer for this cl",
+      "revId": "5ae704cdc512c5a6fa3a094dfd79bf5a682cef48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
