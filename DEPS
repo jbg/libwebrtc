@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '0e95c9b57ef0976c45e1bc745832f1cf7d12ce29',
+  'chromium_revision': '0beb712cba5c788af0e4479437d50bc56a2ec04f',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -23,9 +23,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@42d67a004d1cf13b02017b474786a64fe259070f',
+    'https://chromium.googlesource.com/chromium/src/base@9c88231d0b2c4ab99fa0f1969a350a6460851138',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@9e7c4ed7523b9e7e05f307facf3567a96eaad26e',
+    'https://chromium.googlesource.com/chromium/src/build@1825abc1e53c0d637d60d68cf8426468d208f3d8',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@893aa038dd17d05f3c5ff5af98daebabc294a948',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -34,13 +34,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@eac958fe5ec2e399d0aced58e2f0c9de1bf6d495',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@070fb4f2cc8c86e9d09c7f8b1749ad40e25983db',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@e867c867ab4646cebb173ea71fe979f8cae1c35d',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@aea4a23ebb9b8ce66942b58e2aa0c910b66f3385',
+    'https://chromium.googlesource.com/chromium/src/third_party@f11d5641ebc8e77f9e5dc0b086499302f2e6a207',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -285,7 +285,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@d6bfa6aaf05643ea82f54448a6e88dd388fd4cc5',
+    'https://chromium.googlesource.com/chromium/src/tools@f530dd296fda58b47d83df928b6b403e4f34b482',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
