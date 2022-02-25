@@ -112,6 +112,47 @@ rtc_library("builtin_video_encoder_factory") {
   absl_deps = [ "//third_party/abseil-cpp/absl/strings" ]
 }
 
+rtc_library("video_encoder_factory_template") {
+  visibility = [ "*" ]
+  allow_poison = [ "software_video_codecs" ]
+  public = [ "video_encoder_factory_template.h" ]
+
+  deps = [ ":video_codecs_api" ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/algorithm:container" ]
+}
+
+rtc_library("video_encoder_factory_template_adapters") {
+  visibility = [ "*" ]
+  allow_poison = [ "software_video_codecs" ]
+  public = [ "video_encoder_factory_template_adapters.h" ]
+
+  deps = [
+    "../../modules/video_coding:webrtc_h264",
+    "../../modules/video_coding:webrtc_vp8",
+    "../../modules/video_coding:webrtc_vp9",
+    "../../modules/video_coding/codecs/av1:libaom_av1_encoder",
+    "../../modules/video_coding/svc:scalability_structures",
+  ]
+}
+
+rtc_library("video_encoder_factory_template_tests") {
+  visibility = [ "*" ]
+  testonly = true
+
+  #allow_poison = [
+  #  "software_video_codecs",
+  #]
+  sources = [ "video_encoder_factory_template_tests.cc" ]
+
+  deps = [
+    ":video_encoder_factory_template",
+    ":video_encoder_factory_template_adapters",
+    "//api:mock_video_encoder",
+    "//test:test_support",
+    "//testing/gtest",
+  ]
+}
+
 rtc_library("vp8_temporal_layers_factory") {
   visibility = [ "*" ]
   allow_poison = [ "software_video_codecs" ]
