@@ -16,6 +16,23 @@
       "message": "PTAL, thanks.",
       "revId": "e5692cb3924b2adc6cbec9760808b9b93b865c6d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "359dba18_da65a0c8",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-02-28T09:44:50Z",
+      "side": 1,
+      "message": "This is suboptimal. You are allocating image on each frame.\n\nI\u0027m not a libaom expert, but there\u0027s also aom_img_wrap [1], maybe it could be used instead, since actual pixel data isn\u0027t copied anywhere below?\n\nOr maybe, do something like libvpx_vp8_encoder.cc [2] does - it reallocates image only if the format has changed (also, if size has changed InitEncode will be called and it will have to reallocate images).\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/libaom/source/libaom/aom/aom_image.h;l\u003d257;drc\u003dd116cabb93d843e73329290f5e92694ff2eb0d63\n\n[2] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc;l\u003d1291;drc\u003d3147e29c4e15df274a2d4a271341f77df640f550",
+      "revId": "e5692cb3924b2adc6cbec9760808b9b93b865c6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
