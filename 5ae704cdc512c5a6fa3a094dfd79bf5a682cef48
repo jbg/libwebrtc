@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c01587d3_b7a7b307",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18134
+      },
+      "writtenOn": "2022-02-28T07:59:03Z",
+      "side": 1,
+      "message": "Here will test NV12 input to LibaomAv1Encoder::Encode whether conversion happens.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/video_stream_encoder_unittest.cc;l\u003d8515\n\n\u003e Do we have test that does the actual encoding and decoding to make sure pixels make sense?\n\nYes, I have tested it. If input is NV12, will use |nv12_buffer| to fill data to |frame_for_encode_|, the decoding is proper.",
+      "parentUuid": "eb1aa1dd_1f0ba454",
+      "revId": "5ae704cdc512c5a6fa3a094dfd79bf5a682cef48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0102e81_21b538ef",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
         "patchSetId": 7
@@ -84,6 +102,30 @@
       "writtenOn": "2022-02-24T10:56:42Z",
       "side": 1,
       "message": "Are you sure it will just work putting UV plane in U plane in I420 aom_img_t?\n\nAn encoder in chrome does correctly choose NV12 pixel format:\nhttps://source.chromium.org/chromium/chromium/src/+/main:media/video/av1_video_encoder.cc;l\u003d342;drc\u003dcb2455c7ed0cff0c6b20cab7808e4894f1ba4569\n\nIt might work because NV12 and I420 images have the same number of bytes, just a little different layout. But still I would prefer not to assume it will accidentally work. Libaom should be properly notified that the source format in NV12.",
+      "range": {
+        "startLine": 235,
+        "startChar": 29,
+        "endLine": 235,
+        "endChar": 45
+      },
+      "revId": "5ae704cdc512c5a6fa3a094dfd79bf5a682cef48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1d0c99d_4a0f7759",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 18134
+      },
+      "writtenOn": "2022-02-28T07:59:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0102e81_21b538ef",
       "range": {
         "startLine": 235,
         "startChar": 29,
