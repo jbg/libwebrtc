@@ -8517,7 +8517,6 @@ TEST_P(VideoStreamEncoderWithRealEncoderTest, EncoderMapsNativeNV12) {
       1, VideoFrameBuffer::Type::kNV12, codec_width_, codec_height_);
   video_source_.IncomingCapturedFrame(native_nv12_frame);
   WaitForEncodedFrame(codec_width_, codec_height_);
-
   auto mappable_native_buffer =
       test::GetMappableNativeBufferFromVideoFrame(native_nv12_frame);
   std::vector<rtc::scoped_refptr<VideoFrameBuffer>> mapped_frame_buffers =
@@ -8526,7 +8525,6 @@ TEST_P(VideoStreamEncoderWithRealEncoderTest, EncoderMapsNativeNV12) {
   EXPECT_EQ(mapped_frame_buffers[0]->width(), codec_width_);
   EXPECT_EQ(mapped_frame_buffers[0]->height(), codec_height_);
   EXPECT_EQ(mapped_frame_buffers[0]->type(), VideoFrameBuffer::Type::kNV12);
-
   if (!allow_i420_conversion_) {
     EXPECT_FALSE(mappable_native_buffer->DidConvertToI420());
   }
@@ -8694,7 +8692,7 @@ constexpr std::pair<VideoCodecType, bool> kVP8DisallowConversion =
 constexpr std::pair<VideoCodecType, bool> kVP9DisallowConversion =
     std::make_pair(kVideoCodecVP9, /*allow_i420_conversion=*/false);
 constexpr std::pair<VideoCodecType, bool> kAV1AllowConversion =
-    std::make_pair(kVideoCodecAV1, /*allow_i420_conversion=*/true);
+    std::make_pair(kVideoCodecAV1, /*allow_i420_conversion=*/false);
 constexpr std::pair<VideoCodecType, bool> kMultiplexDisallowConversion =
     std::make_pair(kVideoCodecMultiplex, /*allow_i420_conversion=*/false);
 #if defined(WEBRTC_USE_H264)
