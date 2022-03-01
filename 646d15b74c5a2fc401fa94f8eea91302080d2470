@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda331d2_d3eb0fb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-01T12:35:10Z",
+      "side": 1,
+      "message": "Seems the tests don\u0027t like it, but I like the code.\nAdded a few comments that you can fix while hunting the bug.",
+      "revId": "646d15b74c5a2fc401fa94f8eea91302080d2470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5411b23b_82a4a191",
+        "filename": "p2p/base/ice_transport_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-01T12:35:10Z",
+      "side": 1,
+      "message": "supernit: Note: This is not the same as .... since connections can be created and destroyed while the ICE transport is alive.",
+      "revId": "646d15b74c5a2fc401fa94f8eea91302080d2470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f485f24_875e9377",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-01T12:35:10Z",
+      "side": 1,
+      "message": "you don\u0027t need the else if you put \"return sent\" inside the if.",
+      "revId": "646d15b74c5a2fc401fa94f8eea91302080d2470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d11e49d1_75b24555",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2262,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-01T12:35:10Z",
+      "side": 1,
+      "message": "So packets_received get incremented when either it\u0027s the selected connection or if we can find the connection, but not when we can\u0027t find the connection?\n\nShould there be a packets_discarded_ somewhere that gets incremented for this case?",
+      "revId": "646d15b74c5a2fc401fa94f8eea91302080d2470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
