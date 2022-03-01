@@ -16,6 +16,23 @@
       "message": "thanks and PTAL",
       "revId": "5103f7343304015aad54379c32b3ca87c453fe0f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd082c41_eaad2388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-01T13:25:58Z",
+      "side": 1,
+      "message": "Looks good now. Still wanted \"The\" in front of that sentence, though...\n",
+      "revId": "5103f7343304015aad54379c32b3ca87c453fe0f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

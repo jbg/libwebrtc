@@ -121,6 +121,24 @@
       "parentUuid": "d11e49d1_75b24555",
       "revId": "646d15b74c5a2fc401fa94f8eea91302080d2470",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "500b8408_9f918625",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2262,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-01T13:25:58Z",
+      "side": 1,
+      "message": "hey, this is about whether it makes sense, not whether it\u0027s in the standard :-)\n\nLet\u0027s not forget that - it\u0027s convenient if we can make the blanket statement that \"if a packet is received, some counter somewhere goes up\". But not this CL.",
+      "parentUuid": "b500aa1f_ef9f82ca",
+      "revId": "646d15b74c5a2fc401fa94f8eea91302080d2470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
