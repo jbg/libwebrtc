@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd376aec_be2c12fd",
+        "filename": "p2p/base/ice_transport_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-01T12:56:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5411b23b_82a4a191",
+      "revId": "646d15b74c5a2fc401fa94f8eea91302080d2470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f485f24_875e9377",
@@ -52,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c78a422_c1954e4b",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-01T12:56:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f485f24_875e9377",
+      "revId": "646d15b74c5a2fc401fa94f8eea91302080d2470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d11e49d1_75b24555",
@@ -65,6 +101,24 @@
       "writtenOn": "2022-03-01T12:35:10Z",
       "side": 1,
       "message": "So packets_received get incremented when either it\u0027s the selected connection or if we can find the connection, but not when we can\u0027t find the connection?\n\nShould there be a packets_discarded_ somewhere that gets incremented for this case?",
+      "revId": "646d15b74c5a2fc401fa94f8eea91302080d2470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b500aa1f_ef9f82ca",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2262,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-01T12:56:11Z",
+      "side": 1,
+      "message": "The packets_discarded is only available on a RTCConnectionPairStats object,\nnot on the RTCTransportStats object.\n\nSo this is ok until \"you\" decided to add that to the standard too 😊",
+      "parentUuid": "d11e49d1_75b24555",
       "revId": "646d15b74c5a2fc401fa94f8eea91302080d2470",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
