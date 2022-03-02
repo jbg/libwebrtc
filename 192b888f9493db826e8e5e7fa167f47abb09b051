@@ -68,6 +68,24 @@
       "parentUuid": "cd1dd4e3_4f1faa7d",
       "revId": "192b888f9493db826e8e5e7fa167f47abb09b051",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fb29bad_51c04fae",
+        "filename": "api/notifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-02T22:33:13Z",
+      "side": 1,
+      "message": "Thanks for adding it!\n\nNot a problem in this code, but if someone writes\n\nclass Evil : public ObserverInterface\u003csomething\u003e {\nvoid StepOnObserver() {\n  observer_.clear();\n}\n};\n\nthat will not be caught by the other checks you added, but WILL be caught by an RTC_GUARDED_BY(sequence_checker_) statement.",
+      "parentUuid": "0365ba91_d6efe4c6",
+      "revId": "192b888f9493db826e8e5e7fa167f47abb09b051",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
