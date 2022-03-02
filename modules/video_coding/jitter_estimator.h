@@ -11,6 +11,9 @@
 #ifndef MODULES_VIDEO_CODING_JITTER_ESTIMATOR_H_
 #define MODULES_VIDEO_CODING_JITTER_ESTIMATOR_H_
 
+#include "absl/types/optional.h"
+#include "api/units/time_delta.h"
+#include "api/units/timestamp.h"
 #include "modules/video_coding/rtt_filter.h"
 #include "rtc_base/rolling_accumulator.h"
 
@@ -30,24 +33,24 @@ class VCMJitterEstimator {
   // Updates the jitter estimate with the new data.
   //
   // Input:
-  //          - frameDelay      : Delay-delta calculated by UTILDelayEstimate in
-  //                              milliseconds.
+  //          - frameDelay      : Delay-delta calculated by UTILDelayEstimate.
   //          - frameSize       : Frame size of the current frame.
   //          - incompleteFrame : Flags if the frame is used to update the
   //                              estimate before it was complete.
   //                              Default is false.
-  void UpdateEstimate(int64_t frameDelayMS,
+  void UpdateEstimate(TimeDelta frameDelay,
                       uint32_t frameSizeBytes,
                       bool incompleteFrame = false);
 
-  // Returns the current jitter estimate in milliseconds and adds an RTT
-  // dependent term in cases of retransmission.
+  // Returns the current jitter estimate and adds an RTT dependent term in cases
+  // of retransmission.
   //  Input:
   //          - rttMultiplier  : RTT param multiplier (when applicable).
+  //          - rttMultAddCap  : TODO
   //
-  // Return value              : Jitter estimate in milliseconds.
-  virtual int GetJitterEstimate(double rttMultiplier,
-                                absl::optional<double> rttMultAddCapMs);
+  // Return value              : Jitter estimate.
+  virtual TimeDelta GetJitterEstimate(double rttMultiplier,
+                                      absl::optional<TimeDelta> rttMultAddCap);
 
   // Updates the nack counter.
   void FrameNacked();
@@ -55,13 +58,13 @@ class VCMJitterEstimator {
   // Updates the RTT filter.
   //
   // Input:
-  //          - rttMs          : RTT in ms.
-  void UpdateRtt(int64_t rttMs);
+  //          - rtt          : Round trip time.
+  void UpdateRtt(TimeDelta rtt);
 
   // A constant describing the delay from the jitter buffer to the delay on the
   // receiving side which is not accounted for by the jitter buffer nor the
   // decoding delay estimate.
-  static const uint32_t OPERATING_SYSTEM_JITTER = 10;
+  static constexpr TimeDelta OPERATING_SYSTEM_JITTER = TimeDelta::Millis(10);
 
  protected:
   // These are protected for better testing possibilities.
@@ -73,11 +76,10 @@ class VCMJitterEstimator {
   // jitter.
   //
   // Input:
-  //          - frameDelayMS    : Delay-delta calculated by UTILDelayEstimate in
-  //                              milliseconds.
+  //          - frameDelay      : Delay-delta calculated by UTILDelayEstimate.
   //          - deltaFSBytes    : Frame size delta, i.e. frame size at time T
   //                            : minus frame size at time T-1.
-  void KalmanEstimateChannel(int64_t frameDelayMS, int32_t deltaFSBytes);
+  void KalmanEstimateChannel(TimeDelta frameDelay, int32_t deltaFSBytes);
 
   // Updates the random jitter estimate, i.e. the variance of the time
   // deviations from the line given by the Kalman filter.
@@ -92,8 +94,8 @@ class VCMJitterEstimator {
 
   // Calculates the current jitter estimate.
   //
-  // Return value                 : The current jitter estimate in milliseconds.
-  double CalculateEstimate();
+  // Return value                 : The current jitter estimate.
+  TimeDelta CalculateEstimate();
 
   // Post process the calculated estimate.
   void PostProcessEstimate();
@@ -102,13 +104,12 @@ class VCMJitterEstimator {
   // estimated by the Kalman filter.
   //
   // Input:
-  //          - frameDelayMS    : Delay-delta calculated by UTILDelayEstimate in
-  //                              milliseconds.
+  //          - frameDelay      : Delay-delta calculated by UTILDelayEstimate.
   //          - deltaFS         : Frame size delta, i.e. frame size at time
   //                              T minus frame size at time T-1.
   //
   // Return value               : The difference in milliseconds.
-  double DeviationFromExpectedDelay(int64_t frameDelayMS,
+  double DeviationFromExpectedDelay(TimeDelta frameDelay,
                                     int32_t deltaFSBytes) const;
 
   double GetFrameRate() const;
@@ -133,21 +134,24 @@ class VCMJitterEstimator {
   uint32_t _fsSum;
   uint32_t _fsCount;
 
-  int64_t _lastUpdateT;
-  double _prevEstimate;     // The previously returned jitter estimate
+  absl::optional<Timestamp> _lastUpdateT;
+  // The previously returned jitter estimate
+  absl::optional<TimeDelta> _prevEstimate;
   uint32_t _prevFrameSize;  // Frame size of the previous frame
   double _avgNoise;         // Average of the random jitter
   uint32_t _alphaCount;
-  double _filterJitterEstimate;  // The filtered sum of jitter estimates
+  // The filtered sum of jitter estimates
+  TimeDelta _filterJitterEstimate = TimeDelta::Zero();
 
   uint32_t _startupCount;
-
-  int64_t
-      _latestNackTimestamp;  // Timestamp in ms when the latest nack was seen
-  uint32_t _nackCount;       // Keeps track of the number of nacks received,
-                             // but never goes above _nackLimit
+  // Time when the latest nack was seen
+  Timestamp _latestNack = Timestamp::Zero();
+  // Keeps track of the number of nacks received,
+  // but never goes above _nackLimit
+  uint32_t _nackCount;
   VCMRttFilter _rttFilter;
 
+  // Tracks frame rates in microseconds.
   rtc::RollingAccumulator<uint64_t> fps_counter_;
   const double time_deviation_upper_bound_;
   const bool enable_reduced_delay_;
