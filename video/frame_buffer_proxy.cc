@@ -261,7 +261,7 @@ class FrameBuffer3Proxy : public FrameBufferProxy {
 
   void UpdateRtt(int64_t max_rtt_ms) override {
     RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
-    jitter_estimator_.UpdateRtt(max_rtt_ms);
+    jitter_estimator_.UpdateRtt(TimeDelta::Millis(max_rtt_ms));
   }
 
   void StartNextDecode(bool keyframe_required) override {
@@ -327,17 +327,19 @@ class FrameBuffer3Proxy : public FrameBufferProxy {
 
       if (inter_frame_delay_.CalculateDelay(first_frame.Timestamp(),
                                             &frame_delay, receive_time_ms)) {
-        jitter_estimator_.UpdateEstimate(frame_delay, superframe_size);
+        jitter_estimator_.UpdateEstimate(TimeDelta::Millis(frame_delay),
+                                         superframe_size);
       }
 
       float rtt_mult = protection_mode_ == kProtectionNackFEC ? 0.0 : 1.0;
-      absl::optional<float> rtt_mult_add_cap_ms = absl::nullopt;
+      absl::optional<TimeDelta> rtt_mult_add_cap_ms = absl::nullopt;
       if (rtt_mult_settings_.has_value()) {
         rtt_mult = rtt_mult_settings_->rtt_mult_setting;
-        rtt_mult_add_cap_ms = rtt_mult_settings_->rtt_mult_add_cap_ms;
+        rtt_mult_add_cap_ms =
+            TimeDelta::Millis(rtt_mult_settings_->rtt_mult_add_cap_ms);
       }
-      timing_->SetJitterDelay(TimeDelta::Millis(
-          jitter_estimator_.GetJitterEstimate(rtt_mult, rtt_mult_add_cap_ms)));
+      timing_->SetJitterDelay(
+          jitter_estimator_.GetJitterEstimate(rtt_mult, rtt_mult_add_cap_ms));
       timing_->UpdateCurrentDelay(render_time, now);
     } else if (RttMultExperiment::RttMultEnabled()) {
       jitter_estimator_.FrameNacked();
