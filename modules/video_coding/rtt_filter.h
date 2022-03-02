@@ -13,6 +13,9 @@
 
 #include <stdint.h>
 
+#include "absl/container/inlined_vector.h"
+#include "api/units/time_delta.h"
+
 namespace webrtc {
 
 class VCMRttFilter {
@@ -24,9 +27,9 @@ class VCMRttFilter {
   // Resets the filter.
   void Reset();
   // Updates the filter with a new sample.
-  void Update(int64_t rttMs);
-  // A getter function for the current RTT level in ms.
-  int64_t RttMs() const;
+  void Update(TimeDelta rtt);
+  // A getter function for the current RTT level.
+  TimeDelta Rtt() const;
 
  private:
   // The size of the drift and jump memory buffers
@@ -37,28 +40,28 @@ class VCMRttFilter {
   // samples and average to the standard deviation.
   // Returns true if the long time statistics should be updated
   // and false otherwise
-  bool JumpDetection(int64_t rttMs);
+  bool JumpDetection(TimeDelta rtt);
   // Detects RTT drifts by comparing the difference between
   // max and average to the standard deviation.
   // Returns true if the long time statistics should be updated
   // and false otherwise
-  bool DriftDetection(int64_t rttMs);
+  bool DriftDetection(TimeDelta rtt);
   // Computes the short time average and maximum of the vector buf.
-  void ShortRttFilter(int64_t* buf, uint32_t length);
+  void ShortRttFilter(
+      const absl::InlinedVector<TimeDelta, kMaxDriftJumpCount>& buf);
 
   bool _gotNonZeroUpdate;
-  double _avgRtt;
-  double _varRtt;
-  int64_t _maxRtt;
+  TimeDelta _avgRtt;
+  // Variance units are TimeDelta^2. Store as ms^2.
+  int64_t _varRtt;
+  TimeDelta _maxRtt;
   uint32_t _filtFactCount;
   const uint32_t _filtFactMax;
   const double _jumpStdDevs;
   const double _driftStdDevs;
-  int32_t _jumpCount;
-  int32_t _driftCount;
-  const int32_t _detectThreshold;
-  int64_t _jumpBuf[kMaxDriftJumpCount];
-  int64_t _driftBuf[kMaxDriftJumpCount];
+  const size_t _detectThreshold;
+  absl::InlinedVector<TimeDelta, kMaxDriftJumpCount> _jumpBuf;
+  absl::InlinedVector<TimeDelta, kMaxDriftJumpCount> _driftBuf;
 };
 
 }  // namespace webrtc
