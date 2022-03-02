@@ -1,7 +1,5 @@
-#!/usr/bin/env vpython3
-
 # -*- coding:utf-8 -*-
-# Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+# Copyright (c) 2022 The WebRTC project authors. All Rights Reserved.
 #
 # Use of this source code is governed by a BSD-style license
 # that can be found in the LICENSE file in the root of the source
@@ -11,15 +9,19 @@
 """This is a tool to transform a crt file into a C/C++ header.
 
 Usage:
-generate_sslroots.py cert_file.crt [--verbose | -v] [--full_cert | -f]
+generate_sslroots.py certfile.pem [--verbose | -v] [--full_cert | -f]
 
 Arguments:
   -v  Print output while running.
   -f  Add public key and certificate name.  Default is to skip and reduce
       generated file size.
+
+The supported cert files are:
+  - Google: https://pki.goog/roots.pem
+  - Mozilla: https://curl.se/docs/caextract.html
 """
 
-import subprocess
+import commands
 from optparse import OptionParser
 import os
 import re
@@ -38,6 +40,7 @@ _CERTIFICATE_SIZE_VARIABLE = 'CertificateSize'
 _INT_TYPE = 'size_t'
 _CHAR_TYPE = 'unsigned char* const'
 _VERBOSE = 'verbose'
+_MOZILLA_BUNDLE_CHECK = '## Certificate data from Mozilla as of:'
 
 
 def main():
@@ -57,16 +60,25 @@ def main():
 def _SplitCrt(source_file, options):
   sub_file_blocks = []
   label_name = ''
+  prev_line = None
   root_dir = os.path.dirname(os.path.abspath(source_file)) + '/'
   _PrintOutput(root_dir, options)
   f = open(source_file)
-  for line in f:
-    if line.startswith('# Label: '):
+  lines = f.readlines()
+  mozilla_bundle = any(l.startswith(_MOZILLA_BUNDLE_CHECK) for l in lines)
+  for line in lines:
+    if line.startswith('#'):
+      if mozilla_bundle:
+        continue
+      if line.startswith('# Label: '):
+        sub_file_blocks.append(line)
+        label = re.search(r'\".*\"', line)
+        temp_label = label.group(0)
+        end = len(temp_label) - 1
+        label_name = _SafeName(temp_label[1:end])
+    if mozilla_bundle and line.startswith('==='):
       sub_file_blocks.append(line)
-      label = re.search(r'\".*\"', line)
-      temp_label = label.group(0)
-      end = len(temp_label) - 1
-      label_name = _SafeName(temp_label[1:end])
+      label_name = _SafeName(prev_line)
     elif line.startswith('-----END CERTIFICATE-----'):
       sub_file_blocks.append(line)
       new_file_name = root_dir + _PREFIX + label_name + _EXTENSION
@@ -78,6 +90,7 @@ def _SplitCrt(source_file, options):
       sub_file_blocks = []
     else:
       sub_file_blocks.append(line)
+    prev_line = line
   f.close()
   return root_dir
 
@@ -132,7 +145,7 @@ def _Cleanup(root_dir):
 def _CreateCertSection(root_dir, source_file, label, options):
   command = 'openssl x509 -in %s%s -noout -C' % (root_dir, source_file)
   _PrintOutput(command, options)
-  output = subprocess.getstatusoutput(command)[1]
+  output = commands.getstatusoutput(command)[1]
   renamed_output = output.replace('unsigned char XXX_',
                                   'const unsigned char ' + label + '_')
   filtered_output = ''
@@ -166,11 +179,9 @@ def _CreateOutputHeader():
             ' */\n\n'
             '#ifndef RTC_BASE_SSL_ROOTS_H_\n'
             '#define RTC_BASE_SSL_ROOTS_H_\n\n'
-            '// This file is the root certificates in C form that are needed to'
-            ' connect to\n// Google.\n\n'
-            '// It was generated with the following command line:\n'
-            '// > vpython3 tools_webrtc/sslroots/generate_sslroots.py'
-            '\n//    https://pki.goog/roots.pem\n\n'
+            '// This file is the root certificates in C form.\n\n'
+            '// It was generated with the following script:\n'
+            '// tools_webrtc/sslroots/generate_sslroots.py\n\n'
             '// clang-format off\n'
             '// Don\'t bother formatting generated code,\n'
             '// also it would breaks subject/issuer lines.\n\n')
@@ -178,8 +189,7 @@ def _CreateOutputHeader():
 
 
 def _CreateOutputFooter():
-  output = ('// clang-format on\n\n#endif  // RTC_BASE_SSL_ROOTS_H_\n')
-  return output
+  return '// clang-format on\n\n#endif  // RTC_BASE_SSL_ROOTS_H_\n'
 
 
 def _CreateArraySectionHeader(type_name, type_type, options):
@@ -197,7 +207,7 @@ def _CreateArraySectionFooter():
 
 
 def _SafeName(original_file_name):
-  bad_chars = ' -./\\()áéíőú'
+  bad_chars = ' -./\\()áéíőú\r\n'
   replacement_chars = ''
   for _ in bad_chars:
     replacement_chars += '_'
