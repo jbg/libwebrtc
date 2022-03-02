@@ -68,6 +68,24 @@
       "parentUuid": "103fc066_059f4ba5",
       "revId": "c13fa18c0d1c43519e22deb83611feb6c96a6fc9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf37e8b_d185c9cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-02T15:36:56Z",
+      "side": 1,
+      "message": "Happy to do that. Would using some of the comments in the Mozilla one like \"## Certificate data from Mozilla as of:...\" be an acceptable way of detecting the bundle type?",
+      "parentUuid": "4bcda7b5_e6802f66",
+      "revId": "c13fa18c0d1c43519e22deb83611feb6c96a6fc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
