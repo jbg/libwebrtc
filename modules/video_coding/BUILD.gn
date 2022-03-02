@@ -285,6 +285,7 @@ rtc_library("video_coding") {
     "../../api:sequence_checker",
     "../../api/task_queue",
     "../../api/units:data_rate",
+    "../../api/units:frequency",
     "../../api/units:time_delta",
     "../../api/units:timestamp",
     "../../api/video:builtin_video_bitrate_allocator_factory",
