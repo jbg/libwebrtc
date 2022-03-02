@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'a797b62bc8f8094637f8007f42e46e3a050ec811',
+  'chromium_revision': '1cafdda0378d71d8cf66e0c0a440d1d7771941e0',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -23,9 +23,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@7664dd78db1a2ddb9eb2363701718ba7622db7f0',
+    'https://chromium.googlesource.com/chromium/src/base@d385116c249aee1083458f79ee527581b9da35af',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@4d94be0a535c3ff00764b058803ac35a228828a7',
+    'https://chromium.googlesource.com/chromium/src/build@c95faba04d476ef940e067250df8e34e638bd4d2',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@893aa038dd17d05f3c5ff5af98daebabc294a948',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -34,13 +34,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@7cb58f816a22d316c33fc04b6bdcc18d95a2cac1',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@eea366fe3edbdbbdbbb50a8c2c9327ba87751005',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@778f1ff21aaf4005d36c8a89fa8e4629cc5f27da',
+    'https://chromium.googlesource.com/chromium/src/testing@60def4b95cc262707a32147cd7e2c9c9ec86841a',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@f5db9971fa37ecfe193aec1d7854ca8d8f8f14f6',
+    'https://chromium.googlesource.com/chromium/src/third_party@3085093f17bea4c09db33f3db931ce2f2e387d1f',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -285,7 +285,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@57b2e41ea8dfdd005c23d95b16ab5b91ed1998e2',
+    'https://chromium.googlesource.com/chromium/src/tools@b09fbf27c588f6c31be71506e6fdab9216fe80a5',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
@@ -456,7 +456,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/robolectric',
-              'version': 'FihBToFLI9o7fW09ZtQ_5YruQy6sDWMo1Pv0g97eAxEC',
+              'version': 'WZ96VJuhBM63xzHb-_E72Tf46M9yIbfia6basI1YG4EC',
           },
       ],
       'condition': 'checkout_android',
@@ -1397,7 +1397,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/com_google_errorprone_error_prone_annotations',
-              'version': 'version:2@2.10.0.cr0',
+              'version': 'version:2@2.9.0.cr0',
           },
       ],
       'condition': 'checkout_android',
@@ -1936,7 +1936,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_ow2_asm_asm',
-              'version': 'version:2@9.0.cr0',
+              'version': 'version:2@9.2.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -1947,7 +1947,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_ow2_asm_asm_analysis',
-              'version': 'version:2@9.0.cr0',
+              'version': 'version:2@9.2.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -1958,7 +1958,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_ow2_asm_asm_commons',
-              'version': 'version:2@9.0.cr0',
+              'version': 'version:2@9.2.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -1969,7 +1969,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_ow2_asm_asm_tree',
-              'version': 'version:2@9.0.cr0',
+              'version': 'version:2@9.2.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -1980,7 +1980,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_ow2_asm_asm_util',
-              'version': 'version:2@9.0.cr0',
+              'version': 'version:2@9.2.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2002,7 +2002,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_annotations',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2013,7 +2013,18 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_junit',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
+          },
+      ],
+      'condition': 'checkout_android',
+      'dep_type': 'cipd',
+  },
+
+  'src/third_party/android_deps/libs/org_robolectric_nativeruntime': {
+      'packages': [
+          {
+              'package': 'chromium/third_party/android_deps/libs/org_robolectric_nativeruntime',
+              'version': 'version:2@4.7.3.cr0',
           },
       ],
       'condition': 'checkout_android',
@@ -2024,7 +2035,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_pluginapi',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2035,7 +2046,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_plugins_maven_dependency_resolver',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2046,7 +2057,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_resources',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2057,7 +2068,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_robolectric',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2068,7 +2079,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_sandbox',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2079,7 +2090,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_shadowapi',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2090,7 +2101,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_shadows_framework',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2101,7 +2112,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_shadows_multidex',
-              'version': 'version:2@4.6.1.cr1',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2112,7 +2123,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_shadows_playservices',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2123,7 +2134,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_utils',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
@@ -2134,7 +2145,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_robolectric_utils_reflector',
-              'version': 'version:2@4.6.1.cr0',
+              'version': 'version:2@4.7.3.cr1',
           },
       ],
       'condition': 'checkout_android',
