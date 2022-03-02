@@ -16,6 +16,40 @@
       "message": "Hello, Arthem. Could you please take a look?\nUsing `rtc_base/system/no_unique_address.h` in `api/` doesn\u0027t seem like the best way to go.",
       "revId": "192b888f9493db826e8e5e7fa167f47abb09b051",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b839a91_fbecc57c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-02T20:20:49Z",
+      "side": 1,
+      "message": "I think this is good. Let\u0027s just add belt AND suspenders...\n",
+      "revId": "192b888f9493db826e8e5e7fa167f47abb09b051",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd1dd4e3_4f1faa7d",
+        "filename": "api/notifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-02T20:20:49Z",
+      "side": 1,
+      "message": "Can you add RTC_GUARDED_BY(sequence_checkers_) to the observers_ variable and see that the compiler is happy with it?\n\nI think you have all the required RTC_DCHECK_RUN_ON in place, but it\u0027s nice to be sure that none of the class template instantiations will do something silly. Also, it\u0027s good documentation.",
+      "revId": "192b888f9493db826e8e5e7fa167f47abb09b051",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
