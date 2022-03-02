@@ -52,9 +52,13 @@ class MockRtpSenderInternal : public RtpSenderInternal {
               (),
               (const, override));
   MOCK_METHOD(RTCError, SetParameters, (const RtpParameters&), (override));
-  MOCK_METHOD(RTCError,
+  MOCK_METHOD(void,
+              SetParameters,
+              (const RtpParameters&, absl::AnyInvocable<void(RTCError) &&>),
+              (override));
+  MOCK_METHOD(void,
               SetParametersInternal,
-              (const RtpParameters&),
+              (const RtpParameters&, absl::AnyInvocable<void(RTCError) &&>),
               (override));
   MOCK_METHOD(RTCError,
               SetParametersInternalWithAllLayers,

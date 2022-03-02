@@ -212,7 +212,11 @@ class FakeVideoSendStream final
       rtc::VideoSourceInterface<webrtc::VideoFrame>* source,
       const webrtc::DegradationPreference& degradation_preference) override;
   webrtc::VideoSendStream::Stats GetStats() override;
+
   void ReconfigureVideoEncoder(webrtc::VideoEncoderConfig config) override;
+  void ReconfigureVideoEncoder(webrtc::VideoEncoderConfig config,
+                               absl::AnyInvocable<void(webrtc::RTCError) &&>
+                                   configuration_callback) override;
 
   bool sending_;
   webrtc::VideoSendStream::Config config_;

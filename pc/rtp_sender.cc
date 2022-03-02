@@ -88,6 +88,55 @@ RtpParameters RestoreEncodingLayers(
   return result;
 }
 
+class SignalingThreadCallback {
+ public:
+  SignalingThreadCallback(rtc::Thread* signaling_thread,
+                          absl::AnyInvocable<void(RTCError) &&> callback)
+      : signaling_thread_(signaling_thread), callback_(std::move(callback)) {
+    id_ = count++;
+  }
+  SignalingThreadCallback(SignalingThreadCallback&& other)
+      : signaling_thread_(other.signaling_thread_),
+        callback_(std::move(other.callback_)),
+        id_(other.id_) {
+    printf("======== move cb with id %d\n", id_);
+    other.callback_ = nullptr;
+  }
+
+  ~SignalingThreadCallback() {
+    if (callback_) {
+      printf("========= destroying cb with id %d\n", id_);
+      Resolve(RTCError(RTCErrorType::INTERNAL_ERROR));
+    }
+  }
+
+  void operator()(const RTCError& error) {
+    printf("========= resolving cb with id %d\n", id_);
+    Resolve(error);
+  }
+
+ private:
+  void Resolve(const RTCError& error) {
+    if (!signaling_thread_->IsCurrent()) {
+      signaling_thread_->PostTask(
+          [callback = std::move(callback_), error]() mutable {
+            std::move(callback)(error);
+          });
+      callback_ = nullptr;
+      return;
+    }
+
+    std::move(callback_)(error);
+    callback_ = nullptr;
+  }
+
+  rtc::Thread* signaling_thread_;
+  absl::AnyInvocable<void(RTCError) &&> callback_;
+  int id_;
+  static std::atomic<int> count;
+};
+std::atomic<int> SignalingThreadCallback::count;
+
 }  // namespace
 
 // Returns true if any RtpParameters member that isn't implemented contains a
@@ -189,14 +238,20 @@ RtpParameters RtpSenderBase::GetParameters() const {
   return result;
 }
 
-RTCError RtpSenderBase::SetParametersInternal(const RtpParameters& parameters) {
+void RtpSenderBase::SetParametersInternal(
+    const RtpParameters& parameters,
+    absl::AnyInvocable<void(RTCError) &&> callback) {
   RTC_DCHECK_RUN_ON(signaling_thread_);
   RTC_DCHECK(!stopped_);
 
   if (UnimplementedRtpParameterHasValue(parameters)) {
-    LOG_AND_RETURN_ERROR(
+    RTCError error(
         RTCErrorType::UNSUPPORTED_PARAMETER,
         "Attempted to set an unimplemented parameter of RtpParameters.");
+    RTC_LOG(LS_ERROR) << error.message() << " ("
+                      << ::webrtc::ToString(error.type()) << ")";
+    std::move(callback)(error);
+    return;
   }
   if (!media_channel_ || !ssrc_) {
     auto result = cricket::CheckRtpParametersInvalidModificationAndValues(
@@ -204,9 +259,11 @@ RTCError RtpSenderBase::SetParametersInternal(const RtpParameters& parameters) {
     if (result.ok()) {
       init_parameters_ = parameters;
     }
-    return result;
+    std::move(callback)(result);
+    return;
   }
-  return worker_thread_->BlockingCall([&] {
+  worker_thread_->PostTask([&, callback = std::move(callback),
+                            parameters = std::move(parameters)]() mutable {
     RtpParameters rtp_parameters = parameters;
     RtpParameters old_parameters = media_channel_->GetRtpSendParameters(ssrc_);
     if (!disabled_rids_.empty()) {
@@ -215,16 +272,24 @@ RTCError RtpSenderBase::SetParametersInternal(const RtpParameters& parameters) {
                                              old_parameters.encodings);
     }
 
-    auto result = cricket::CheckRtpParametersInvalidModificationAndValues(
+    RTCError result = cricket::CheckRtpParametersInvalidModificationAndValues(
         old_parameters, rtp_parameters, {});
-    if (!result.ok())
-      return result;
+    if (!result.ok()) {
+      std::move(callback)(result);
+      return;
+    }
 
     result = CheckSVCParameters(rtp_parameters);
-    if (!result.ok())
-      return result;
+    if (!result.ok()) {
+      std::move(callback)(result);
+      return;
+    }
 
-    return media_channel_->SetRtpSendParameters(ssrc_, rtp_parameters);
+    result = media_channel_->SetRtpSendParameters(ssrc_, rtp_parameters,
+                                                  std::move(callback));
+    if (!result.ok()) {
+      std::move(callback)(result);
+    }
   });
 }
 
@@ -252,9 +317,9 @@ RTCError RtpSenderBase::SetParametersInternalWithAllLayers(
   });
 }
 
-RTCError RtpSenderBase::SetParameters(const RtpParameters& parameters) {
+RTCError RtpSenderBase::SetParametersInternalCheck(
+    const RtpParameters& parameters) {
   RTC_DCHECK_RUN_ON(signaling_thread_);
-  TRACE_EVENT0("webrtc", "RtpSenderBase::SetParameters");
   if (is_transceiver_stopped_) {
     LOG_AND_RETURN_ERROR(
         RTCErrorType::INVALID_STATE,
@@ -281,9 +346,45 @@ RTCError RtpSenderBase::SetParameters(const RtpParameters& parameters) {
         " the last value returned from getParameters()");
   }
 
-  RTCError result = SetParametersInternal(parameters);
+  return {};
+}
+
+RTCError RtpSenderBase::SetParameters(const RtpParameters& parameters) {
+  RTC_DCHECK_RUN_ON(signaling_thread_);
+  TRACE_EVENT0("webrtc", "RtpSenderBase::SetParameters");
+  RTCError result = SetParametersInternalCheck(parameters);
+  if (!result.ok())
+    return result;
+
+  std::unique_ptr<rtc::Event> done_event = std::make_unique<rtc::Event>();
+  SetParametersInternal(parameters,
+                        [done = done_event.get(), &result](RTCError error) {
+                          done->Set();
+                          result = error;
+                        });
+  done_event->Wait(rtc::Event::kForever);
   last_transaction_id_.reset();
   return result;
+}
+
+void RtpSenderBase::SetParameters(
+    const RtpParameters& parameters,
+    absl::AnyInvocable<void(RTCError) &&> callback) {
+  RTC_DCHECK_RUN_ON(signaling_thread_);
+  RTC_DCHECK(callback);
+  TRACE_EVENT0("webrtc", "RtpSenderBase::SetParameters");
+  RTCError result = SetParametersInternalCheck(parameters);
+  if (!result.ok()) {
+    std::move(callback)(result);
+  }
+
+  SetParametersInternal(
+      parameters, SignalingThreadCallback(
+                      signaling_thread_, [this, callback = std::move(callback)](
+                                             RTCError error) mutable {
+                        last_transaction_id_.reset();
+                        std::move(callback)(error);
+                      }));
 }
 
 void RtpSenderBase::SetStreams(const std::vector<std::string>& stream_ids) {
@@ -372,7 +473,7 @@ void RtpSenderBase::SetSsrc(uint32_t ssrc) {
       }
       current_parameters.degradation_preference =
           init_parameters_.degradation_preference;
-      media_channel_->SetRtpSendParameters(ssrc_, current_parameters);
+      media_channel_->SetRtpSendParameters(ssrc_, current_parameters, nullptr);
       init_parameters_.encodings.clear();
       init_parameters_.degradation_preference = absl::nullopt;
     });

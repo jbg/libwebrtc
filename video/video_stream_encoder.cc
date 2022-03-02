@@ -639,6 +639,7 @@ VideoStreamEncoder::VideoStreamEncoder(
       max_framerate_(-1),
       pending_encoder_reconfiguration_(false),
       pending_encoder_creation_(false),
+      encoder_configuration_callback_(nullptr),
       crop_width_(0),
       crop_height_(0),
       encoder_target_bitrate_bps_(absl::nullopt),
@@ -862,42 +863,53 @@ void VideoStreamEncoder::SetStartBitrate(int start_bitrate_bps) {
 
 void VideoStreamEncoder::ConfigureEncoder(VideoEncoderConfig config,
                                           size_t max_data_payload_length) {
+  ConfigureEncoder(std::move(config), max_data_payload_length, nullptr);
+}
+
+void VideoStreamEncoder::ConfigureEncoder(
+    VideoEncoderConfig config,
+    size_t max_data_payload_length,
+    absl::AnyInvocable<void(RTCError) &&> encoder_configuration_callback) {
   RTC_DCHECK_RUN_ON(worker_queue_);
-  encoder_queue_.PostTask(
-      [this, config = std::move(config), max_data_payload_length]() mutable {
-        RTC_DCHECK_RUN_ON(&encoder_queue_);
-        RTC_DCHECK(sink_);
-        RTC_LOG(LS_INFO) << "ConfigureEncoder requested.";
+  encoder_queue_.PostTask([this, config = std::move(config),
+                           max_data_payload_length,
+                           encoder_configuration_callback = std::move(
+                               encoder_configuration_callback)]() mutable {
+    RTC_DCHECK_RUN_ON(&encoder_queue_);
+    RTC_DCHECK(sink_);
+    RTC_LOG(LS_INFO) << "ConfigureEncoder requested.";
 
-        // Set up the frame cadence adapter according to if we're going to do
-        // screencast. The final number of spatial layers is based on info
-        // in `send_codec_`, which is computed based on incoming frame
-        // dimensions which can only be determined later.
-        //
-        // Note: zero-hertz mode isn't enabled by this alone. Constraints also
-        // have to be set up with min_fps = 0 and max_fps > 0.
-        if (config.content_type == VideoEncoderConfig::ContentType::kScreen) {
-          frame_cadence_adapter_->SetZeroHertzModeEnabled(
-              FrameCadenceAdapterInterface::ZeroHertzModeParams{});
-        } else {
-          frame_cadence_adapter_->SetZeroHertzModeEnabled(absl::nullopt);
-        }
+    // Set up the frame cadence adapter according to if we're going to do
+    // screencast. The final number of spatial layers is based on info
+    // in `send_codec_`, which is computed based on incoming frame
+    // dimensions which can only be determined later.
+    //
+    // Note: zero-hertz mode isn't enabled by this alone. Constraints also
+    // have to be set up with min_fps = 0 and max_fps > 0.
+    if (config.content_type == VideoEncoderConfig::ContentType::kScreen) {
+      frame_cadence_adapter_->SetZeroHertzModeEnabled(
+          FrameCadenceAdapterInterface::ZeroHertzModeParams{});
+    } else {
+      frame_cadence_adapter_->SetZeroHertzModeEnabled(absl::nullopt);
+    }
 
-        pending_encoder_creation_ =
-            (!encoder_ || encoder_config_.video_format != config.video_format ||
-             max_data_payload_length_ != max_data_payload_length);
-        encoder_config_ = std::move(config);
-        max_data_payload_length_ = max_data_payload_length;
-        pending_encoder_reconfiguration_ = true;
+    pending_encoder_creation_ =
+        (!encoder_ || encoder_config_.video_format != config.video_format ||
+         max_data_payload_length_ != max_data_payload_length);
+    encoder_config_ = std::move(config);
+    max_data_payload_length_ = max_data_payload_length;
+    pending_encoder_reconfiguration_ = true;
 
-        // Reconfigure the encoder now if the frame resolution is known.
-        // Otherwise, the reconfiguration is deferred until the next frame to
-        // minimize the number of reconfigurations. The codec configuration
-        // depends on incoming video frame size.
-        if (last_frame_info_) {
-          ReconfigureEncoder();
-        }
-      });
+    encoder_configuration_callback_ = std::move(encoder_configuration_callback);
+
+    // Reconfigure the encoder now if the frame resolution is known.
+    // Otherwise, the reconfiguration is deferred until the next frame to
+    // minimize the number of reconfigurations. The codec configuration
+    // depends on incoming video frame size.
+    if (last_frame_info_) {
+      ReconfigureEncoder();
+    }
+  });
 }
 
 // We should reduce the number of 'full' ReconfigureEncoder(). If only need
@@ -1350,7 +1362,12 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   stream_resource_manager_.ConfigureQualityScaler(info);
   stream_resource_manager_.ConfigureBandwidthQualityScaler(info);
 
-  if (!encoder_initialized_) {
+  if (encoder_initialized_) {
+    if (encoder_configuration_callback_) {
+      std::move(encoder_configuration_callback_)(webrtc::RTCError::OK());
+      encoder_configuration_callback_ = nullptr;
+    }
+  } else {
     RTC_LOG(LS_WARNING) << "Failed to initialize "
                         << CodecTypeToPayloadString(codec.codecType)
                         << " encoder."
@@ -1359,6 +1376,12 @@ void VideoStreamEncoder::ReconfigureEncoder() {
 
     if (switch_encoder_on_init_failures_) {
       RequestEncoderSwitch();
+    } else {
+      if (encoder_configuration_callback_) {
+        std::move(encoder_configuration_callback_)(
+            webrtc::RTCError(RTCErrorType::UNSUPPORTED_OPERATION));
+        encoder_configuration_callback_ = nullptr;
+      }
     }
   }
 }

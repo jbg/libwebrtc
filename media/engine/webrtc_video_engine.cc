@@ -1017,7 +1017,8 @@ webrtc::RtpParameters WebRtcVideoChannel::GetRtpSendParameters(
 
 webrtc::RTCError WebRtcVideoChannel::SetRtpSendParameters(
     uint32_t ssrc,
-    const webrtc::RtpParameters& parameters) {
+    const webrtc::RtpParameters& parameters,
+    absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   TRACE_EVENT0("webrtc", "WebRtcVideoChannel::SetRtpSendParameters");
   auto it = send_streams_.find(ssrc);
@@ -1060,7 +1061,7 @@ webrtc::RTCError WebRtcVideoChannel::SetRtpSendParameters(
     SetPreferredDscp(new_dscp);
   }
 
-  return it->second->SetRtpParameters(parameters);
+  return it->second->SetRtpParameters(parameters, std::move(done_callback));
 }
 
 webrtc::RtpParameters WebRtcVideoChannel::GetRtpReceiveParameters(
@@ -2114,7 +2115,7 @@ bool WebRtcVideoChannel::WebRtcVideoSendStream::SetVideoSend(
       old_options.is_screencast = options->is_screencast;
     }
     if (parameters_.options != old_options) {
-      ReconfigureEncoder();
+      ReconfigureEncoder([](auto) {});
     }
   }
 
@@ -2241,7 +2242,7 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetSendParameters(
   }
   if (params.max_bandwidth_bps) {
     parameters_.max_bitrate_bps = *params.max_bandwidth_bps;
-    ReconfigureEncoder();
+    ReconfigureEncoder([](auto) {});
   }
   if (params.conference_mode) {
     parameters_.conference_mode = *params.conference_mode;
@@ -2263,7 +2264,8 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetSendParameters(
 }
 
 webrtc::RTCError WebRtcVideoChannel::WebRtcVideoSendStream::SetRtpParameters(
-    const webrtc::RtpParameters& new_parameters) {
+    const webrtc::RtpParameters& new_parameters,
+    absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   // This is checked higher in the stack (RtpSender), so this is only checking
   // for users accessing the private APIs, not specification conformance.
@@ -2319,7 +2321,12 @@ webrtc::RTCError WebRtcVideoChannel::WebRtcVideoSendStream::SetRtpParameters(
   // Codecs are currently handled at the WebRtcVideoChannel level.
   rtp_parameters_.codecs.clear();
   if (reconfigure_encoder || new_send_state) {
-    ReconfigureEncoder();
+    // Callback responsibility is delegated to ReconfigureEncoder()
+    printf("====== reconfiguring the encoder\n");
+    ReconfigureEncoder(std::move(done_callback));
+    printf("====== reconfiguring the encoder2\n");
+    done_callback = nullptr;
+    printf("====== reconfiguring the encoder3\n");
   }
   if (new_send_state) {
     UpdateSendState();
@@ -2328,6 +2335,10 @@ webrtc::RTCError WebRtcVideoChannel::WebRtcVideoSendStream::SetRtpParameters(
     if (source_ && stream_) {
       stream_->SetSource(source_, GetDegradationPreference());
     }
+  }
+  if (done_callback) {
+    printf("======= have not reconfigured the encoder\n");
+    std::move(done_callback)(webrtc::RTCError::OK());
   }
   return webrtc::RTCError::OK();
 }
@@ -2517,11 +2528,15 @@ WebRtcVideoChannel::WebRtcVideoSendStream::CreateVideoEncoderConfig(
   return encoder_config;
 }
 
-void WebRtcVideoChannel::WebRtcVideoSendStream::ReconfigureEncoder() {
+void WebRtcVideoChannel::WebRtcVideoSendStream::ReconfigureEncoder(
+    absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   if (!stream_) {
     // The webrtc::VideoSendStream `stream_` has not yet been created but other
     // parameters has changed.
+    if (done_callback) {
+      std::move(done_callback)(webrtc::RTCError::OK());
+    }
     return;
   }
 
@@ -2536,7 +2551,8 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::ReconfigureEncoder() {
   encoder_config.encoder_specific_settings =
       ConfigureVideoEncoderSettings(codec_settings.codec);
 
-  stream_->ReconfigureVideoEncoder(encoder_config.Copy());
+  stream_->ReconfigureVideoEncoder(encoder_config.Copy(),
+                                   std::move(done_callback));
 
   encoder_config.encoder_specific_settings = NULL;
 

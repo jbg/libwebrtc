@@ -491,6 +491,7 @@ if (rtc_include_tests) {
       ":rtc_simulcast_encoder_adapter",
       "../api:call_api",
       "../api:fec_controller_api",
+      "../api:rtc_error",
       "../api:scoped_refptr",
       "../api/task_queue",
       "../api/task_queue:pending_task_safety_flag",

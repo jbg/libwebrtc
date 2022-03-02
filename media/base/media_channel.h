@@ -277,7 +277,9 @@ class MediaChannel {
   virtual webrtc::RtpParameters GetRtpSendParameters(uint32_t ssrc) const = 0;
   virtual webrtc::RTCError SetRtpSendParameters(
       uint32_t ssrc,
-      const webrtc::RtpParameters& parameters) = 0;
+      const webrtc::RtpParameters& parameters,
+      absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback =
+          nullptr) = 0;
 
   virtual void SetEncoderToPacketizerFrameTransformer(
       uint32_t ssrc,
