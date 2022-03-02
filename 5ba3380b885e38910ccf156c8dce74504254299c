@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56dc7e52_23235253",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-02T16:16:29Z",
+      "side": 1,
+      "message": "Updated the script to cater for both CA bundles, PTAL!",
+      "revId": "5ba3380b885e38910ccf156c8dce74504254299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
