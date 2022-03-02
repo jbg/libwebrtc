@@ -16,6 +16,23 @@
       "message": "An attempt to update the builtin CA roots, PTAL!",
       "revId": "c13fa18c0d1c43519e22deb83611feb6c96a6fc9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "103fc066_059f4ba5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-03-02T14:45:51Z",
+      "side": 1,
+      "message": "oh kapten my kapten, I hear you like python (and you are an owner)",
+      "revId": "c13fa18c0d1c43519e22deb83611feb6c96a6fc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
