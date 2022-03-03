@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "601f8068_e9d5aa3d",
+        "filename": "tools_webrtc/sslroots/generate_sslroots.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-03T09:33:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6f3a065e_53c9c71f",
+      "revId": "5ba3380b885e38910ccf156c8dce74504254299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1967f01c_8a8188de",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-03-03T07:55:56Z",
       "side": 1,
       "message": "Could you use subprocess instead? commands is deprecated since Py v2.6.",
+      "revId": "5ba3380b885e38910ccf156c8dce74504254299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a70a5ce5_ed27c60a",
+        "filename": "tools_webrtc/sslroots/generate_sslroots.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-03T09:33:26Z",
+      "side": 1,
+      "message": "This was actually \"fixed\" by the presubmit linter, interesting.",
+      "parentUuid": "1967f01c_8a8188de",
       "revId": "5ba3380b885e38910ccf156c8dce74504254299c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
