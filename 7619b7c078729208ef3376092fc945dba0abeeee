@@ -34,6 +34,23 @@
       "parentUuid": "11fc03a2_e329ddac",
       "revId": "7619b7c078729208ef3376092fc945dba0abeeee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a951b2f3_c32fc200",
+        "filename": "tools_webrtc/sslroots/generate_sslroots.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2022-03-03T12:08:11Z",
+      "side": 0,
+      "message": "Keep this",
+      "revId": "7619b7c078729208ef3376092fc945dba0abeeee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
