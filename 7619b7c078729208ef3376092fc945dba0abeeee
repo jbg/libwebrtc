@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11fc03a2_e329ddac",
+        "filename": "tools_webrtc/sslroots/generate_sslroots.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2022-03-03T07:55:56Z",
+      "side": 0,
+      "message": "Could you use \"with open()\" instead? Then the file is closed automatically and close further down can be removed as well. Easier to keep track of the file state this way.\n\nhttps://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files",
+      "revId": "7619b7c078729208ef3376092fc945dba0abeeee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
