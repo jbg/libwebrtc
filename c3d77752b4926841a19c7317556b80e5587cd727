@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f6bb16e_4d8839b8",
+        "filename": "rtc_tools/data_channel_benchmark/grpc_signaling.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-03-03T11:25:17Z",
+      "side": 1,
+      "message": "nit: serialized_candidate",
+      "revId": "c3d77752b4926841a19c7317556b80e5587cd727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
