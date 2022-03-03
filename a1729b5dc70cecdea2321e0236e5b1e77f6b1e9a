@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec39b0dc_596c9c4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-03T13:55:04Z",
+      "side": 1,
+      "message": "Updated!",
+      "revId": "a1729b5dc70cecdea2321e0236e5b1e77f6b1e9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f799a48b_81ef2495",
@@ -31,6 +48,24 @@
       "writtenOn": "2022-03-03T12:08:11Z",
       "side": 1,
       "message": "Is this actually reachable? If mozilla_bundle is True, it will hit continue on line 72 and jump out not reach here and continue in the for loop?",
+      "revId": "a1729b5dc70cecdea2321e0236e5b1e77f6b1e9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1219252d_1957b39a",
+        "filename": "tools_webrtc/sslroots/generate_sslroots.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-03T13:55:04Z",
+      "side": 1,
+      "message": "It is because the previous condition is if line.startswith(\u0027#\u0027), and that will not hit in this case.",
+      "parentUuid": "f799a48b_81ef2495",
       "revId": "a1729b5dc70cecdea2321e0236e5b1e77f6b1e9a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
