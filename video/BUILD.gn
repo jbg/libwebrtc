@@ -308,6 +308,7 @@ rtc_library("frame_buffer_proxy") {
     "../api:sequence_checker",
     "../api/metronome",
     "../api/task_queue",
+    "../api/units:data_size",
     "../api/video:encoded_frame",
     "../api/video:video_rtp_headers",
     "../modules/video_coding",
