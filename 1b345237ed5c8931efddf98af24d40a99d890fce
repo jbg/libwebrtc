@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2d783bb_8f3547c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18904
+      },
+      "writtenOn": "2022-03-03T20:43:57Z",
+      "side": 1,
+      "message": "Forked to go/webrtc-gerrit/252284, and merged with flag changes. Abandoning this one",
+      "revId": "1b345237ed5c8931efddf98af24d40a99d890fce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
