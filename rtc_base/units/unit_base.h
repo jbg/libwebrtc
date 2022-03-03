@@ -109,7 +109,8 @@ class UnitBase {
     } else if (value == -std::numeric_limits<T>::infinity()) {
       return MinusInfinity();
     } else {
-      RTC_DCHECK(!std::isnan(value));
+      // Replace with constexpr std::isnan in C++23.
+      RTC_DCHECK(!(value != value));
       return FromValue(rtc::dchecked_cast<int64_t>(value));
     }
   }
