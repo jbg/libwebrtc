@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a64d6244_836a274b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-03T11:58:05Z",
+      "side": 1,
+      "message": "Updated and fixed some Python 3 compat issues I realized I had missed.",
+      "revId": "a1729b5dc70cecdea2321e0236e5b1e77f6b1e9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

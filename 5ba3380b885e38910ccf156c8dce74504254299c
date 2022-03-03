@@ -104,6 +104,24 @@
       "parentUuid": "a70a5ce5_ed27c60a",
       "revId": "5ba3380b885e38910ccf156c8dce74504254299c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c718144_1e3ae1e7",
+        "filename": "tools_webrtc/sslroots/generate_sslroots.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-03T11:58:05Z",
+      "side": 1,
+      "message": "I think I had an old depot_tools checkout. Updated and it\u0027s ok now!",
+      "parentUuid": "5eb2a592_7504cd4b",
+      "revId": "5ba3380b885e38910ccf156c8dce74504254299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
