@@ -86,6 +86,24 @@
       "parentUuid": "1967f01c_8a8188de",
       "revId": "5ba3380b885e38910ccf156c8dce74504254299c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eb2a592_7504cd4b",
+        "filename": "tools_webrtc/sslroots/generate_sslroots.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2022-03-03T09:45:19Z",
+      "side": 1,
+      "message": "Huh really? Are you using a recent version of the webrtc codebase and depot tools (gclient sync)?",
+      "parentUuid": "a70a5ce5_ed27c60a",
+      "revId": "5ba3380b885e38910ccf156c8dce74504254299c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
