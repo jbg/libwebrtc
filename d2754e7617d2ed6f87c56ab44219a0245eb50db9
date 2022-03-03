@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b2b4935_219c09b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-03-03T09:22:50Z",
+      "side": 1,
+      "message": "Nice, these classes really need a good cleaning :)",
+      "revId": "d2754e7617d2ed6f87c56ab44219a0245eb50db9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0912e738_68bba73a",
+        "filename": "modules/video_coding/rtt_filter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-03-03T09:22:50Z",
+      "side": 1,
+      "message": "nit: The two of\u0027s confused me at first. Maybe \"Unit of `_varRTT` is ms^2.\" ?",
+      "range": {
+        "startLine": 106,
+        "startChar": 5,
+        "endLine": 106,
+        "endChar": 35
+      },
+      "revId": "d2754e7617d2ed6f87c56ab44219a0245eb50db9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b628d4a4_2f5238f4",
+        "filename": "modules/video_coding/rtt_filter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-03-03T09:22:50Z",
+      "side": 1,
+      "message": "Since you\u0027re fixing this class up... would it be a lot of work to rename the members here to follow the style guide?",
+      "range": {
+        "startLine": 54,
+        "startChar": 12,
+        "endLine": 54,
+        "endChar": 19
+      },
+      "revId": "d2754e7617d2ed6f87c56ab44219a0245eb50db9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
