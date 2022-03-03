@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22bad5b2_c07b1917",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-03T22:05:07Z",
+      "side": 1,
+      "message": "The script mod seems OK to me, but I\u0027m skeptical of checking in the generated file.\nChrome security has warned us against doing anything that encourages people to go with a compiled-in cert file, and the choice of this particular (short) CA list is, among other things, intended to push people towards making their own CA file avaialble at runtime rather than depending on a compiled-in list.\n\nCan you drop ssl_roots.h from the CL?\n\nThere\u0027s also a README.md file in the same directory that needs to be consistent with the script - can you update it?\n\nApologies for the late pushback!\n",
+      "revId": "a7c4fe0f115f767ca4f54986507ddcf76035f630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42aea858_86ca4eba",
+        "filename": "tools_webrtc/sslroots/generate_sslroots.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-03T22:05:07Z",
+      "side": 1,
+      "message": "Can you include info here about whether the file was in Mozilla format or in Google format?\nI guess the filename would be meaningless, since it\u0027s the user\u0027s choice what he downloads the file to.",
+      "revId": "a7c4fe0f115f767ca4f54986507ddcf76035f630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
