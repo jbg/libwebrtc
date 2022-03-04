@@ -18,6 +18,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d5f909_f21f8f77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-04T13:14:16Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll drop the generated file.  Are you open to continuing the discussion in the original bug?  The current situation is not ideal...",
+      "parentUuid": "22bad5b2_c07b1917",
+      "revId": "a7c4fe0f115f767ca4f54986507ddcf76035f630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99381489_286be5d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-04T13:14:16Z",
+      "side": 1,
+      "message": "Updated as per Harald\u0027s feedback.",
+      "revId": "a7c4fe0f115f767ca4f54986507ddcf76035f630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42aea858_86ca4eba",
@@ -31,6 +66,24 @@
       "writtenOn": "2022-03-03T22:05:07Z",
       "side": 1,
       "message": "Can you include info here about whether the file was in Mozilla format or in Google format?\nI guess the filename would be meaningless, since it\u0027s the user\u0027s choice what he downloads the file to.",
+      "revId": "a7c4fe0f115f767ca4f54986507ddcf76035f630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a37c0f_51b950d0",
+        "filename": "tools_webrtc/sslroots/generate_sslroots.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-03-04T13:14:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "42aea858_86ca4eba",
       "revId": "a7c4fe0f115f767ca4f54986507ddcf76035f630",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
