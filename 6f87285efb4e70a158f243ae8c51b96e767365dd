@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5bc4948_381b1bac",
+        "filename": "modules/video_coding/rtt_filter.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2022-03-04T12:49:00Z",
+      "side": 1,
+      "message": "You could probably change this to a DCHECK with buf.size() \u003d\u003d kMaxDriftJumpCount",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 20
+      },
+      "revId": "6f87285efb4e70a158f243ae8c51b96e767365dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "341515a5_354193ad",
+        "filename": "modules/video_coding/rtt_filter_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2022-03-04T12:49:00Z",
+      "side": 1,
+      "message": "More than what?",
+      "range": {
+        "startLine": 26,
+        "startChar": 49,
+        "endLine": 26,
+        "endChar": 50
+      },
+      "revId": "6f87285efb4e70a158f243ae8c51b96e767365dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a0f2f94_f4e8a238",
+        "filename": "modules/video_coding/rtt_filter_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2022-03-04T12:49:00Z",
+      "side": 1,
+      "message": "I think what it really does is to detect if there\u0027s a consistent change in the offset of the estimate, and when that\u0027s the case it will reset the filter to the new max/avg (based on the last 5 samples). This is to avoid a very slow convergence to that new estimate.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "6f87285efb4e70a158f243ae8c51b96e767365dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db57b61_253db514",
+        "filename": "modules/video_coding/rtt_filter_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2022-03-04T12:49:00Z",
+      "side": 1,
+      "message": "These are not 5 negative jumps right?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 30
+      },
+      "revId": "6f87285efb4e70a158f243ae8c51b96e767365dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
