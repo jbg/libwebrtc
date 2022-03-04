@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d22645da_59234f13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-04T13:38:24Z",
+      "side": 1,
+      "message": "Thanks for doing this!\nLet\u0027s continue discussing how we document this in the original bug.\n",
+      "revId": "5630d219a9fda65d20985158c1a400b542c38aea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
