@@ -340,7 +340,7 @@ enum class HandoverMode {
   kPerformHandovers,
 };
 
-class DcSctpSocketParametrizedTest
+class DcSctpSocketWithHandoverTest
     : public ::testing::Test,
       public ::testing::WithParamInterface<HandoverMode> {
  protected:
@@ -372,7 +372,7 @@ class DcSctpSocketParametrizedTest
 };
 
 INSTANTIATE_TEST_SUITE_P(Handovers,
-                         DcSctpSocketParametrizedTest,
+                         DcSctpSocketWithHandoverTest,
                          testing::Values(HandoverMode::kNoHandover,
                                          HandoverMode::kPerformHandovers),
                          [](const auto& test_info) {
@@ -705,7 +705,7 @@ TEST(DcSctpSocketTest, DoesntSendMorePacketsUntilCookieAckHasBeenReceived) {
               SizeIs(kLargeMessageSize));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, ShutdownConnection) {
+TEST_P(DcSctpSocketWithHandoverTest, ShutdownConnection) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -802,7 +802,7 @@ TEST(DcSctpSocketTest, SendMessageAfterEstablished) {
   EXPECT_EQ(msg->stream_id(), StreamID(1));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, TimeoutResendsPacket) {
+TEST_P(DcSctpSocketWithHandoverTest, TimeoutResendsPacket) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -824,7 +824,7 @@ TEST_P(DcSctpSocketParametrizedTest, TimeoutResendsPacket) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, SendALotOfBytesMissedSecondPacket) {
+TEST_P(DcSctpSocketWithHandoverTest, SendALotOfBytesMissedSecondPacket) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -850,7 +850,7 @@ TEST_P(DcSctpSocketParametrizedTest, SendALotOfBytesMissedSecondPacket) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, SendingHeartbeatAnswersWithAck) {
+TEST_P(DcSctpSocketWithHandoverTest, SendingHeartbeatAnswersWithAck) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -878,7 +878,7 @@ TEST_P(DcSctpSocketParametrizedTest, SendingHeartbeatAnswersWithAck) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, ExpectHeartbeatToBeSent) {
+TEST_P(DcSctpSocketWithHandoverTest, ExpectHeartbeatToBeSent) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -908,7 +908,7 @@ TEST_P(DcSctpSocketParametrizedTest, ExpectHeartbeatToBeSent) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest,
+TEST_P(DcSctpSocketWithHandoverTest,
        CloseConnectionAfterTooManyLostHeartbeats) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
@@ -951,7 +951,7 @@ TEST_P(DcSctpSocketParametrizedTest,
   z = MaybeHandoverSocket(std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, RecoversAfterASuccessfulAck) {
+TEST_P(DcSctpSocketWithHandoverTest, RecoversAfterASuccessfulAck) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1007,7 +1007,7 @@ TEST_P(DcSctpSocketParametrizedTest, RecoversAfterASuccessfulAck) {
   EXPECT_EQ(another_packet.descriptors()[0].type, HeartbeatRequestChunk::kType);
 }
 
-TEST_P(DcSctpSocketParametrizedTest, ResetStream) {
+TEST_P(DcSctpSocketWithHandoverTest, ResetStream) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1039,7 +1039,7 @@ TEST_P(DcSctpSocketParametrizedTest, ResetStream) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, ResetStreamWillMakeChunksStartAtZeroSsn) {
+TEST_P(DcSctpSocketWithHandoverTest, ResetStreamWillMakeChunksStartAtZeroSsn) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1095,7 +1095,7 @@ TEST_P(DcSctpSocketParametrizedTest, ResetStreamWillMakeChunksStartAtZeroSsn) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest,
+TEST_P(DcSctpSocketWithHandoverTest,
        ResetStreamWillOnlyResetTheRequestedStreams) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
@@ -1180,7 +1180,7 @@ TEST_P(DcSctpSocketParametrizedTest,
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, OnePeerReconnects) {
+TEST_P(DcSctpSocketWithHandoverTest, OnePeerReconnects) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1210,7 +1210,7 @@ TEST_P(DcSctpSocketParametrizedTest, OnePeerReconnects) {
   EXPECT_THAT(msg->payload(), testing::ElementsAreArray(payload));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, SendMessageWithLimitedRtx) {
+TEST_P(DcSctpSocketWithHandoverTest, SendMessageWithLimitedRtx) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1269,7 +1269,7 @@ TEST_P(DcSctpSocketParametrizedTest, SendMessageWithLimitedRtx) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, SendManyFragmentedMessagesWithLimitedRtx) {
+TEST_P(DcSctpSocketWithHandoverTest, SendManyFragmentedMessagesWithLimitedRtx) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1366,7 +1366,7 @@ class FakeChunk : public Chunk, public TLVTrait<FakeChunkConfig> {
   std::string ToString() const override { return "FAKE"; }
 };
 
-TEST_P(DcSctpSocketParametrizedTest, ReceivingUnknownChunkRespondsWithError) {
+TEST_P(DcSctpSocketWithHandoverTest, ReceivingUnknownChunkRespondsWithError) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1392,7 +1392,7 @@ TEST_P(DcSctpSocketParametrizedTest, ReceivingUnknownChunkRespondsWithError) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, ReceivingErrorChunkReportsAsCallback) {
+TEST_P(DcSctpSocketWithHandoverTest, ReceivingErrorChunkReportsAsCallback) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1529,7 +1529,7 @@ TEST(DcSctpSocketTest, SetMaxMessageSize) {
   EXPECT_EQ(a.socket.options().max_message_size, 42u);
 }
 
-TEST_P(DcSctpSocketParametrizedTest, SendsMessagesWithLowLifetime) {
+TEST_P(DcSctpSocketWithHandoverTest, SendsMessagesWithLowLifetime) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1572,7 +1572,7 @@ TEST_P(DcSctpSocketParametrizedTest, SendsMessagesWithLowLifetime) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest,
+TEST_P(DcSctpSocketWithHandoverTest,
        DiscardsMessagesWithLowLifetimeIfMustBuffer) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
@@ -1634,7 +1634,7 @@ TEST_P(DcSctpSocketParametrizedTest,
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, HasReasonableBufferedAmountValues) {
+TEST_P(DcSctpSocketWithHandoverTest, HasReasonableBufferedAmountValues) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1667,7 +1667,7 @@ TEST(DcSctpSocketTest, HasDefaultOnBufferedAmountLowValueZero) {
   EXPECT_EQ(a.socket.buffered_amount_low_threshold(StreamID(1)), 0u);
 }
 
-TEST_P(DcSctpSocketParametrizedTest,
+TEST_P(DcSctpSocketWithHandoverTest,
        TriggersOnBufferedAmountLowWithDefaultValueZero) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
@@ -1686,7 +1686,7 @@ TEST_P(DcSctpSocketParametrizedTest,
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest,
+TEST_P(DcSctpSocketWithHandoverTest,
        DoesntTriggerOnBufferedAmountLowIfBelowThreshold) {
   static constexpr size_t kMessageSize = 1000;
   static constexpr size_t kBufferedAmountLowThreshold = kMessageSize * 10;
@@ -1714,7 +1714,7 @@ TEST_P(DcSctpSocketParametrizedTest,
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, TriggersOnBufferedAmountMultipleTimes) {
+TEST_P(DcSctpSocketWithHandoverTest, TriggersOnBufferedAmountMultipleTimes) {
   static constexpr size_t kMessageSize = 1000;
   static constexpr size_t kBufferedAmountLowThreshold = kMessageSize / 2;
 
@@ -1757,7 +1757,7 @@ TEST_P(DcSctpSocketParametrizedTest, TriggersOnBufferedAmountMultipleTimes) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest,
+TEST_P(DcSctpSocketWithHandoverTest,
        TriggersOnBufferedAmountLowOnlyWhenCrossingThreshold) {
   static constexpr size_t kMessageSize = 1000;
   static constexpr size_t kBufferedAmountLowThreshold = kMessageSize * 1.5;
@@ -1791,7 +1791,7 @@ TEST_P(DcSctpSocketParametrizedTest,
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest,
+TEST_P(DcSctpSocketWithHandoverTest,
        DoesntTriggerOnTotalBufferAmountLowWhenBelow) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
@@ -1810,7 +1810,7 @@ TEST_P(DcSctpSocketParametrizedTest,
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest,
+TEST_P(DcSctpSocketWithHandoverTest,
        TriggersOnTotalBufferAmountLowWhenCrossingThreshold) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
@@ -1919,7 +1919,7 @@ TEST(DcSctpSocketTest, RxAndTxPacketMetricsIncrease) {
   EXPECT_EQ(*a.socket.GetMetrics().peer_rwnd_bytes, initial_a_rwnd);
 }
 
-TEST_P(DcSctpSocketParametrizedTest, UnackDataAlsoIncludesSendQueue) {
+TEST_P(DcSctpSocketWithHandoverTest, UnackDataAlsoIncludesSendQueue) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1950,7 +1950,7 @@ TEST_P(DcSctpSocketParametrizedTest, UnackDataAlsoIncludesSendQueue) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, DoesntSendMoreThanMaxBurstPackets) {
+TEST_P(DcSctpSocketWithHandoverTest, DoesntSendMoreThanMaxBurstPackets) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -1973,7 +1973,7 @@ TEST_P(DcSctpSocketParametrizedTest, DoesntSendMoreThanMaxBurstPackets) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, SendsOnlyLargePackets) {
+TEST_P(DcSctpSocketWithHandoverTest, SendsOnlyLargePackets) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
@@ -2022,7 +2022,7 @@ TEST_P(DcSctpSocketParametrizedTest, SendsOnlyLargePackets) {
   MaybeHandoverSocketAndSendMessage(a, std::move(z));
 }
 
-TEST_P(DcSctpSocketParametrizedTest, DoesntBundleForwardTsnWithData) {
+TEST_P(DcSctpSocketWithHandoverTest, DoesntBundleForwardTsnWithData) {
   SocketUnderTest a("A");
   auto z = std::make_unique<SocketUnderTest>("Z");
 
