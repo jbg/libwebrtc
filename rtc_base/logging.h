@@ -107,12 +107,12 @@ class LogSink {
  public:
   LogSink() {}
   virtual ~LogSink() {}
-  virtual void OnLogMessage(const std::string& msg,
+  virtual void OnLogMessage(absl::string_view msg,
                             LoggingSeverity severity,
                             const char* tag);
-  virtual void OnLogMessage(const std::string& message,
+  virtual void OnLogMessage(absl::string_view message,
                             LoggingSeverity severity);
-  virtual void OnLogMessage(const std::string& message) = 0;
+  virtual void OnLogMessage(absl::string_view message) = 0;
 
  private:
   friend class ::rtc::LogMessage;
@@ -434,7 +434,7 @@ class LogMessage {
   LogMessage(const char* file,
              int line,
              LoggingSeverity sev,
-             const std::string& tag);
+             absl::string_view tag);
   ~LogMessage();
 
   LogMessage(const LogMessage&) = delete;

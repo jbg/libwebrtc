@@ -28,7 +28,7 @@ namespace rtc {
 // String Encoding Utilities
 //////////////////////////////////////////////////////////////////////
 
-std::string hex_encode(const std::string& str);
+std::string hex_encode(absl::string_view str);
 std::string hex_encode(const char* source, size_t srclen);
 std::string hex_encode_with_delimiter(const char* source,
                                       size_t srclen,
@@ -51,10 +51,10 @@ size_t hex_decode_with_delimiter(char* buffer,
                                  char delimiter);
 
 // Helper functions for hex_decode.
-size_t hex_decode(char* buffer, size_t buflen, const std::string& source);
+size_t hex_decode(char* buffer, size_t buflen, absl::string_view source);
 size_t hex_decode_with_delimiter(char* buffer,
                                  size_t buflen,
-                                 const std::string& source,
+                                 absl::string_view source,
                                  char delimiter);
 
 // Joins the source vector of strings into a single string, with each
@@ -88,8 +88,7 @@ bool tokenize_first(absl::string_view source,
 // TODO(jonasolsson): Remove these when absl::StrCat becomes available.
 std::string ToString(bool b);
 
-std::string ToString(const char* s);
-std::string ToString(std::string t);
+std::string ToString(absl::string_view t);
 
 std::string ToString(short s);
 std::string ToString(unsigned short s);
