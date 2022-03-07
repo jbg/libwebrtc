@@ -56,24 +56,24 @@ void ObjCNetworkMonitor::Stop() {
   started_ = false;
 }
 
-rtc::AdapterType ObjCNetworkMonitor::GetAdapterType(const std::string& interface_name) {
+rtc::AdapterType ObjCNetworkMonitor::GetAdapterType(absl::string_view interface_name) {
   RTC_DCHECK_RUN_ON(thread_);
-  if (adapter_type_by_name_.find(interface_name) == adapter_type_by_name_.end()) {
+  auto iter = adapter_type_by_name_.find(interface_name);
+  if (iter == adapter_type_by_name_.end()) {
     return rtc::ADAPTER_TYPE_UNKNOWN;
   }
-  return adapter_type_by_name_.at(interface_name);
+  return *iter;
 }
 
-rtc::AdapterType ObjCNetworkMonitor::GetVpnUnderlyingAdapterType(
-    const std::string& interface_name) {
+rtc::AdapterType ObjCNetworkMonitor::GetVpnUnderlyingAdapterType(absl::string_view interface_name) {
   return rtc::ADAPTER_TYPE_UNKNOWN;
 }
 
-rtc::NetworkPreference ObjCNetworkMonitor::GetNetworkPreference(const std::string& interface_name) {
+rtc::NetworkPreference ObjCNetworkMonitor::GetNetworkPreference(absl::string_view interface_name) {
   return rtc::NetworkPreference::NEUTRAL;
 }
 
-bool ObjCNetworkMonitor::IsAdapterAvailable(const std::string& interface_name) {
+bool ObjCNetworkMonitor::IsAdapterAvailable(absl::string_view interface_name) {
   RTC_DCHECK_RUN_ON(thread_);
   if (adapter_type_by_name_.empty()) {
     // If we have no path update, assume everything's available, because it's
