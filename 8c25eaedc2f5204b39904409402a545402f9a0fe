@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c53574_bf2acfcf",
+        "filename": "modules/video_coding/frame_buffer2.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2022-03-07T11:11:01Z",
+      "side": 1,
+      "message": "DataSize?",
+      "range": {
+        "startLine": 255,
+        "startChar": 2,
+        "endLine": 255,
+        "endChar": 8
+      },
+      "revId": "8c25eaedc2f5204b39904409402a545402f9a0fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e4f3353_d138e2c5",
+        "filename": "modules/video_coding/jitter_estimator.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2022-03-07T11:11:01Z",
+      "side": 1,
+      "message": "frame_size",
+      "range": {
+        "startLine": 40,
+        "startChar": 16,
+        "endLine": 40,
+        "endChar": 25
+      },
+      "revId": "8c25eaedc2f5204b39904409402a545402f9a0fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fca771db_c1c81b4a",
+        "filename": "modules/video_coding/jitter_estimator.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2022-03-07T11:11:01Z",
+      "side": 1,
+      "message": "delta_frame_size_bytes? And same for comment above.",
+      "range": {
+        "startLine": 85,
+        "startChar": 59,
+        "endLine": 85,
+        "endChar": 75
+      },
+      "revId": "8c25eaedc2f5204b39904409402a545402f9a0fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c028ef45_ea9677f3",
+        "filename": "modules/video_coding/jitter_estimator.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2022-03-07T11:11:01Z",
+      "side": 1,
+      "message": "delta_frame_size_bytes",
+      "range": {
+        "startLine": 111,
+        "startChar": 16,
+        "endLine": 111,
+        "endChar": 32
+      },
+      "revId": "8c25eaedc2f5204b39904409402a545402f9a0fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
