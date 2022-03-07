@@ -41,12 +41,12 @@ class ObjCNetworkMonitor : public rtc::NetworkMonitorInterface,
   void Start() override;
   void Stop() override;
 
-  rtc::AdapterType GetAdapterType(const std::string& interface_name) override;
+  rtc::AdapterType GetAdapterType(absl::string_view interface_name) override;
   rtc::AdapterType GetVpnUnderlyingAdapterType(
-      const std::string& interface_name) override;
+      absl::string_view interface_name) override;
   rtc::NetworkPreference GetNetworkPreference(
-      const std::string& interface_name) override;
-  bool IsAdapterAvailable(const std::string& interface_name) override;
+      absl::string_view interface_name) override;
+  bool IsAdapterAvailable(absl::string_view interface_name) override;
 
   // NetworkMonitorObserver override.
   // Fans out updates to observers on the correct thread.
