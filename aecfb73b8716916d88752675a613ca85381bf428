@@ -69,6 +69,47 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca6366cc_d8e43bef",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2022-03-08T23:53:24Z",
+      "side": 1,
+      "message": "This struct is also used for 3d textures, so front and back specify which \"slices\" of the \"box\" you want to write into. We just have a 2d texture so we\u0027re just using one \"slice\" of the box. I\u0027ve added a comment to clarify.",
+      "parentUuid": "606ef299_df01d8b4",
+      "revId": "aecfb73b8716916d88752675a613ca85381bf428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58b95b74_debc4c42",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2022-03-08T23:53:24Z",
+      "side": 1,
+      "message": "Reading the remarks for CopySubresourceRegion a little more closely, both textures are supposed to be the same size for this call. So we need to move the call to CreateMappedTexture up to be before this.\n\nI also verified that moving the call to CreateMappedTexture alone does not solve the artifact issue, we need to use CopySubresourceRegion as well.",
+      "range": {
+        "startLine": 285,
+        "startChar": 15,
+        "endLine": 285,
+        "endChar": 36
+      },
+      "revId": "aecfb73b8716916d88752675a613ca85381bf428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06c7c1f0_73c560c0",
@@ -82,6 +123,24 @@
       "writtenOn": "2022-03-08T22:46:43Z",
       "side": 1,
       "message": "Does this have some side effects that caused it to need to be moved after the assignment of the new size? (I don\u0027t have a problem with moving it, but if it was moved because something reacts to RecordGetFrameResult by querying the size, then we should comment that that\u0027s a possibility).",
+      "revId": "aecfb73b8716916d88752675a613ca85381bf428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f847d84_8efed500",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2022-03-08T23:53:24Z",
+      "side": 1,
+      "message": "No I was just getting rid of some extra new lines and thought that recording success should be the last thing we do.\n\nI also just decided to move the call to Unmap, so that we give the resource back to the GPU sooner, since we don\u0027t need it to construct the DesktopFrame. Just pre-empting your question ;)",
+      "parentUuid": "06c7c1f0_73c560c0",
       "revId": "aecfb73b8716916d88752675a613ca85381bf428",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
