@@ -43,7 +43,7 @@
 #include "rtc_base/string_encode.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/unique_id_generator.h"
-#include "test/field_trial.h"
+#include "test/explicit_key_value_config.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 
@@ -431,7 +431,8 @@ void PreferGcmCryptoParameters(CryptoParamsVec* cryptos) {
 class MediaSessionDescriptionFactoryTest : public ::testing::Test {
  public:
   MediaSessionDescriptionFactoryTest()
-      : f1_(&tdf1_, &ssrc_generator1), f2_(&tdf2_, &ssrc_generator2) {
+      : f1_(&tdf1_, &ssrc_generator1, field_trials),
+        f2_(&tdf2_, &ssrc_generator2, field_trials) {
     f1_.set_audio_codecs(MAKE_VECTOR(kAudioCodecs1),
                          MAKE_VECTOR(kAudioCodecs1));
     f1_.set_video_codecs(MAKE_VECTOR(kVideoCodecs1),
@@ -791,6 +792,7 @@ class MediaSessionDescriptionFactoryTest : public ::testing::Test {
   }
 
  protected:
+  webrtc::test::ExplicitKeyValueConfig field_trials;
   UniqueRandomIdGenerator ssrc_generator1;
   UniqueRandomIdGenerator ssrc_generator2;
   MediaSessionDescriptionFactory f1_;
@@ -4330,7 +4332,8 @@ TEST_F(MediaSessionDescriptionFactoryTest,
 class MediaProtocolTest : public ::testing::TestWithParam<const char*> {
  public:
   MediaProtocolTest()
-      : f1_(&tdf1_, &ssrc_generator1), f2_(&tdf2_, &ssrc_generator2) {
+      : f1_(&tdf1_, &ssrc_generator1, field_trials),
+        f2_(&tdf2_, &ssrc_generator2, field_trials) {
     f1_.set_audio_codecs(MAKE_VECTOR(kAudioCodecs1),
                          MAKE_VECTOR(kAudioCodecs1));
     f1_.set_video_codecs(MAKE_VECTOR(kVideoCodecs1),
@@ -4350,6 +4353,7 @@ class MediaProtocolTest : public ::testing::TestWithParam<const char*> {
   }
 
  protected:
+  webrtc::test::ExplicitKeyValueConfig field_trials;
   MediaSessionDescriptionFactory f1_;
   MediaSessionDescriptionFactory f2_;
   TransportDescriptionFactory tdf1_;
@@ -4391,7 +4395,8 @@ INSTANTIATE_TEST_SUITE_P(MediaProtocolDtlsPatternTest,
 TEST_F(MediaSessionDescriptionFactoryTest, TestSetAudioCodecs) {
   TransportDescriptionFactory tdf;
   UniqueRandomIdGenerator ssrc_generator;
-  MediaSessionDescriptionFactory sf(&tdf, &ssrc_generator);
+  webrtc::test::ExplicitKeyValueConfig field_trials;
+  MediaSessionDescriptionFactory sf(&tdf, &ssrc_generator, field_trials);
   std::vector<AudioCodec> send_codecs = MAKE_VECTOR(kAudioCodecs1);
   std::vector<AudioCodec> recv_codecs = MAKE_VECTOR(kAudioCodecs2);
 
@@ -4461,7 +4466,8 @@ bool CodecsMatch(const std::vector<Codec>& codecs1,
 void TestAudioCodecsOffer(RtpTransceiverDirection direction) {
   TransportDescriptionFactory tdf;
   UniqueRandomIdGenerator ssrc_generator;
-  MediaSessionDescriptionFactory sf(&tdf, &ssrc_generator);
+  webrtc::test::ExplicitKeyValueConfig field_trials;
+  MediaSessionDescriptionFactory sf(&tdf, &ssrc_generator, field_trials);
   const std::vector<AudioCodec> send_codecs = MAKE_VECTOR(kAudioCodecs1);
   const std::vector<AudioCodec> recv_codecs = MAKE_VECTOR(kAudioCodecs2);
   const std::vector<AudioCodec> sendrecv_codecs =
@@ -4559,8 +4565,11 @@ void TestAudioCodecsAnswer(RtpTransceiverDirection offer_direction,
   TransportDescriptionFactory offer_tdf;
   TransportDescriptionFactory answer_tdf;
   UniqueRandomIdGenerator ssrc_generator1, ssrc_generator2;
-  MediaSessionDescriptionFactory offer_factory(&offer_tdf, &ssrc_generator1);
-  MediaSessionDescriptionFactory answer_factory(&answer_tdf, &ssrc_generator2);
+  webrtc::test::ExplicitKeyValueConfig field_trials;
+  MediaSessionDescriptionFactory offer_factory(&offer_tdf, &ssrc_generator1,
+                                               field_trials);
+  MediaSessionDescriptionFactory answer_factory(&answer_tdf, &ssrc_generator2,
+                                                field_trials);
   offer_factory.set_audio_codecs(
       VectorFromIndices(kOfferAnswerCodecs, kOfferSendCodecs),
       VectorFromIndices(kOfferAnswerCodecs, kOfferRecvCodecs));

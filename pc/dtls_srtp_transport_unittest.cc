@@ -30,6 +30,7 @@
 #include "rtc_base/rtc_certificate.h"
 #include "rtc_base/ssl_identity.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
+#include "test/explicit_key_value_config.h"
 #include "test/gtest.h"
 
 using cricket::FakeDtlsTransport;
@@ -59,7 +60,7 @@ class DtlsSrtpTransportTest : public ::testing::Test,
       FakeDtlsTransport* rtcp_dtls,
       bool rtcp_mux_enabled) {
     auto dtls_srtp_transport =
-        std::make_unique<DtlsSrtpTransport>(rtcp_mux_enabled);
+        std::make_unique<DtlsSrtpTransport>(field_trials_, rtcp_mux_enabled);
 
     dtls_srtp_transport->SetDtlsTransports(rtp_dtls, rtcp_dtls);
 
@@ -256,6 +257,7 @@ class DtlsSrtpTransportTest : public ::testing::Test,
   webrtc::TransportObserver transport_observer2_;
 
   int sequence_number_ = 0;
+  webrtc::test::ExplicitKeyValueConfig field_trials_;
 };
 
 // Tests that if RTCP muxing is enabled and transports are set after RTP

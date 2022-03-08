@@ -18,6 +18,7 @@
 #include "api/candidate.h"
 #include "api/jsep.h"
 #include "p2p/base/transport_description.h"
+#include "test/explicit_key_value_config.h"
 #include "test/network/network_emulation_manager.h"
 
 namespace webrtc {
@@ -56,6 +57,8 @@ class ScenarioIceConnection {
   virtual EmulatedEndpoint* endpoint() = 0;
   virtual const cricket::TransportDescription& transport_description()
       const = 0;
+
+  webrtc::test::ExplicitKeyValueConfig field_trials;
 };
 
 }  // namespace webrtc

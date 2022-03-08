@@ -44,6 +44,7 @@
 #include "rtc_base/ssl_identity.h"
 #include "rtc_base/task_utils/pending_task_safety_flag.h"
 #include "rtc_base/task_utils/to_queued_task.h"
+#include "test/explicit_key_value_config.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 
@@ -317,7 +318,7 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
       cricket::DtlsTransportInternal* rtp_dtls_transport,
       cricket::DtlsTransportInternal* rtcp_dtls_transport) {
     auto dtls_srtp_transport = std::make_unique<webrtc::DtlsSrtpTransport>(
-        rtcp_dtls_transport == nullptr);
+        field_trials_, rtcp_dtls_transport == nullptr);
 
     network_thread_->Invoke<void>(
         RTC_FROM_HERE,
@@ -1441,6 +1442,7 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
   rtc::Buffer rtcp_packet_;
   cricket::CandidatePairInterface* last_selected_candidate_pair_;
   rtc::UniqueRandomIdGenerator ssrc_generator_;
+  webrtc::test::ExplicitKeyValueConfig field_trials_;
 };
 
 template <>

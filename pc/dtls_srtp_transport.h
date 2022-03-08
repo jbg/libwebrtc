@@ -32,7 +32,8 @@ namespace webrtc {
 // configures the SrtpSessions in the base class.
 class DtlsSrtpTransport : public SrtpTransport {
  public:
-  explicit DtlsSrtpTransport(bool rtcp_mux_enabled);
+  DtlsSrtpTransport(const WebRtcKeyValueConfig& field_trials,
+                    bool rtcp_mux_enabled);
 
   // Set P2P layer RTP/RTCP DtlsTransports. When using RTCP-muxing,
   // `rtcp_dtls_transport` is null.
