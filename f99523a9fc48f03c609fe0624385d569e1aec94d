@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c9a9aad_fb24b10e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "After a while, I switched to reviewing the .h and BUILD.gn files only.\n\nSeems that we need to establish some principles, like:\n\n- Whenever there\u0027s a \"config\" parameter, or a pointer to an object that has a \"config\" member that contains a field trial list, we should use that.\n- If we have to pass a field trial parameter, it should go last. Possibly we should even consistently default it to KeyValue(\"\").\n\nDetails below.\n",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d02db39_f8fe05c0",
+        "filename": "api/transport/webrtc_key_value_config.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "can you place a TODO(bug number): remove when all references are updated here?",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "447884f8_303f3c41",
+        "filename": "pc/dtls_srtp_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "hm. leaves a sour taste in my mouth to have this config shipped around this way.\nCould we make it the last argument of the init list, at least?\nDo we have a null value for field trials that we could default to?",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7f56261_81f3a579",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "Move into config?",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17e34ad0_10c309d6",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "Is there a reason not to make field trials part of JsepTransportController::Config?",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a804c858_ddf2a72f",
+        "filename": "pc/media_session.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "Can we have a default? Or maybe we can pull it out of TransportDescriptionFactory?",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6407b7f4_21538e8e",
+        "filename": "pc/sdp_offer_answer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "No. Make it part of dependencies.",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c0a847_dd8673b2",
+        "filename": "pc/srtp_transport.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "Move the field trials argument last. You have it last in most other cases.",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ba73074_a4966dde",
+        "filename": "pc/stats_collector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "You can pull this out of pc-\u003eContext.",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d87da2ad_918ae318",
+        "filename": "pc/test/integration_test_helpers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "You should pull the ExplicitKeyValueConfig argument up here - there\u0027s no excuse for passing an absl::optional\u003cstd::string\u003e to this function (except for making this CL smaller, in which case a TODO(bug) needs adding).",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26f8471c_b9aac9ce",
+        "filename": "pc/webrtc_session_description_factory.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "This constructor is a mess already, so adding another argument is just sliding further down into the muck at the bottom :-) Acceptable.",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "722514ec_3ea25520",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T12:12:51Z",
+      "side": 1,
+      "message": "Having multiple .cc files in a target is a Bad Trait.\nPlese make scoped_key_value_config its own target, and depend accordingly.",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
