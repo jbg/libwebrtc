@@ -33,6 +33,57 @@
       "message": "Hey Alex, PTAL at this CL that fixes the artifacts seen when resizing a capture source during capture with WGC.",
       "revId": "aecfb73b8716916d88752675a613ca85381bf428",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00ca606b_4908bfe4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-08T22:46:43Z",
+      "side": 1,
+      "message": "LGTM, a couple of clarifying questions.",
+      "revId": "aecfb73b8716916d88752675a613ca85381bf428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "606ef299_df01d8b4",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-08T22:46:43Z",
+      "side": 1,
+      "message": "What do front/back mean in this case?",
+      "revId": "aecfb73b8716916d88752675a613ca85381bf428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06c7c1f0_73c560c0",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-08T22:46:43Z",
+      "side": 1,
+      "message": "Does this have some side effects that caused it to need to be moved after the assignment of the new size? (I don\u0027t have a problem with moving it, but if it was moved because something reacts to RecordGetFrameResult by querying the size, then we should comment that that\u0027s a possibility).",
+      "revId": "aecfb73b8716916d88752675a613ca85381bf428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
