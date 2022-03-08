@@ -67,6 +67,7 @@
 #include "rtc_base/ref_counted_object.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
 #include "rtc_base/thread.h"
+#include "test/explicit_key_value_config.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 #include "test/run_loop.h"
@@ -186,8 +187,9 @@ class RtpSenderReceiverTest
   }
 
   std::unique_ptr<webrtc::RtpTransportInternal> CreateDtlsSrtpTransport() {
-    auto dtls_srtp_transport = std::make_unique<webrtc::DtlsSrtpTransport>(
-        /*rtcp_mux_required=*/true);
+    auto dtls_srtp_transport =
+        std::make_unique<webrtc::DtlsSrtpTransport>(field_trials_,
+                                                    /*rtcp_mux_required=*/true);
     dtls_srtp_transport->SetDtlsTransports(rtp_dtls_transport_.get(),
                                            /*rtcp_dtls_transport=*/nullptr);
     return dtls_srtp_transport;
@@ -544,6 +546,7 @@ class RtpSenderReceiverTest
   rtc::scoped_refptr<VideoTrackInterface> video_track_;
   rtc::scoped_refptr<AudioTrackInterface> audio_track_;
   bool audio_sender_destroyed_signal_fired_ = false;
+  webrtc::test::ExplicitKeyValueConfig field_trials_;
 };
 
 // Test that `voice_channel_` is updated when an audio track is associated

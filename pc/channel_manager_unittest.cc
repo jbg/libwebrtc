@@ -23,6 +23,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/location.h"
 #include "rtc_base/thread.h"
+#include "test/explicit_key_value_config.h"
 #include "test/gtest.h"
 
 namespace cricket {
@@ -88,6 +89,7 @@ class ChannelManagerTest : public ::testing::Test {
       video_bitrate_allocator_factory_;
   std::unique_ptr<cricket::ChannelManager> cm_;
   cricket::FakeCall fake_call_;
+  webrtc::test::ExplicitKeyValueConfig field_trials_;
 };
 
 TEST_F(ChannelManagerTest, SetVideoRtxEnabled) {
@@ -122,8 +124,9 @@ TEST_F(ChannelManagerTest, CreateDestroyChannels) {
   auto rtp_dtls_transport = std::make_unique<FakeDtlsTransport>(
       "fake_dtls_transport", cricket::ICE_CANDIDATE_COMPONENT_RTP,
       network_.get());
-  auto dtls_srtp_transport = std::make_unique<webrtc::DtlsSrtpTransport>(
-      /*rtcp_mux_required=*/true);
+  auto dtls_srtp_transport =
+      std::make_unique<webrtc::DtlsSrtpTransport>(field_trials_,
+                                                  /*rtcp_mux_required=*/true);
   network_->Invoke<void>(
       RTC_FROM_HERE, [&rtp_dtls_transport, &dtls_srtp_transport] {
         dtls_srtp_transport->SetDtlsTransports(rtp_dtls_transport.get(),

@@ -100,7 +100,8 @@ ScenarioIceConnectionImpl::ScenarioIceConnectionImpl(
           new JsepTransportController(network_thread_,
                                       port_allocator_.get(),
                                       /*async_resolver_factory*/ nullptr,
-                                      CreateJsepConfig())) {
+                                      CreateJsepConfig(),
+                                      field_trials)) {
   network_thread_->Invoke<void>(RTC_FROM_HERE, [this] {
     RTC_DCHECK_RUN_ON(network_thread_);
     uint32_t flags = cricket::PORTALLOCATOR_DISABLE_TCP;
