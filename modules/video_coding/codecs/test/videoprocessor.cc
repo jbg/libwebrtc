@@ -303,7 +303,7 @@ void VideoProcessor::ProcessFrame() {
 
   // Encode.
   const std::vector<VideoFrameType> frame_types =
-      (frame_number == 0)
+      (frame_number % 150) == 0
           ? std::vector<VideoFrameType>{VideoFrameType::kVideoFrameKey}
           : std::vector<VideoFrameType>{VideoFrameType::kVideoFrameDelta};
   const int encode_return_code = encoder_->Encode(input_frame, &frame_types);
