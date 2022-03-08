@@ -147,7 +147,8 @@ class JsepTransportController : public sigslot::has_slots<> {
       rtc::Thread* network_thread,
       cricket::PortAllocator* port_allocator,
       AsyncDnsResolverFactoryInterface* async_dns_resolver_factory,
-      Config config);
+      Config config,
+      const WebRtcKeyValueConfig& field_trials);
   virtual ~JsepTransportController();
 
   JsepTransportController(const JsepTransportController&) = delete;
@@ -481,6 +482,7 @@ class JsepTransportController : public sigslot::has_slots<> {
   rtc::scoped_refptr<rtc::RTCCertificate> certificate_;
 
   BundleManager bundles_;
+  const WebRtcKeyValueConfig& field_trials_;
 };
 
 }  // namespace webrtc
