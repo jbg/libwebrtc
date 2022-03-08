@@ -223,8 +223,8 @@ HRESULT WgcCaptureSession::GetFrame(
     return hr;
   }
 
-  // We need to get this CaptureFrame as an ID3D11Texture2D so that we can get
-  // the raw image data in the format required by the DesktopFrame interface.
+  // We need to get `capture_frame` as an `ID3D11Texture2D` so that we can get
+  // the raw image data in the format required by the `DesktopFrame` interface.
   ComPtr<ABI::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface>
       d3d_surface;
   hr = capture_frame->get_Surface(&d3d_surface);
@@ -261,16 +261,6 @@ HRESULT WgcCaptureSession::GetFrame(
   // Otherwise it would only be readable by the GPU.
   ComPtr<ID3D11DeviceContext> d3d_context;
   d3d11_device_->GetImmediateContext(&d3d_context);
-  d3d_context->CopyResource(mapped_texture_.Get(), texture_2D.Get());
-
-  D3D11_MAPPED_SUBRESOURCE map_info;
-  hr = d3d_context->Map(mapped_texture_.Get(), /*subresource_index=*/0,
-                        D3D11_MAP_READ, /*D3D11_MAP_FLAG_DO_NOT_WAIT=*/0,
-                        &map_info);
-  if (FAILED(hr)) {
-    RecordGetFrameResult(GetFrameResult::kMapFrameFailed);
-    return hr;
-  }
 
   ABI::Windows::Graphics::SizeInt32 new_size;
   hr = capture_frame->get_ContentSize(&new_size);
@@ -284,6 +274,28 @@ HRESULT WgcCaptureSession::GetFrame(
   // read stale data from the last frame.
   int image_height = std::min(previous_size_.Height, new_size.Height);
   int image_width = std::min(previous_size_.Width, new_size.Width);
+
+  D3D11_BOX copy_region;
+  copy_region.left = 0;
+  copy_region.top = 0;
+  copy_region.front = 0;
+  copy_region.right = image_width;
+  copy_region.bottom = image_height;
+  copy_region.back = 1;
+  d3d_context->CopySubresourceRegion(mapped_texture_.Get(),
+                                     /*dst_subresource_index=*/0, /*dst_x=*/0,
+                                     /*dst_y=*/0, /*dst_z=*/0, texture_2D.Get(),
+                                     /*src_subresource_index=*/0, &copy_region);
+
+  D3D11_MAPPED_SUBRESOURCE map_info;
+  hr = d3d_context->Map(mapped_texture_.Get(), /*subresource_index=*/0,
+                        D3D11_MAP_READ, /*D3D11_MAP_FLAG_DO_NOT_WAIT=*/0,
+                        &map_info);
+  if (FAILED(hr)) {
+    RecordGetFrameResult(GetFrameResult::kMapFrameFailed);
+    return hr;
+  }
+
   int row_data_length = image_width * DesktopFrame::kBytesPerPixel;
 
   // Make a copy of the data pointed to by `map_info.pData` so we are free to
@@ -305,8 +317,8 @@ HRESULT WgcCaptureSession::GetFrame(
 
   d3d_context->Unmap(mapped_texture_.Get(), 0);
 
-  // If the size changed, we must resize the texture and frame pool to fit the
-  // new size.
+  // If the size changed, we must resize `mapped_texture_` and `frame_pool_` to
+  // fit the new size.
   if (previous_size_.Height != new_size.Height ||
       previous_size_.Width != new_size.Width) {
     hr = CreateMappedTexture(texture_2D, new_size.Width, new_size.Height);
@@ -323,9 +335,8 @@ HRESULT WgcCaptureSession::GetFrame(
     }
   }
 
-  RecordGetFrameResult(GetFrameResult::kSuccess);
-
   previous_size_ = new_size;
+  RecordGetFrameResult(GetFrameResult::kSuccess);
   return hr;
 }
 
