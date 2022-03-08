@@ -595,8 +595,9 @@ void InitVoiceReceiverInfo(cricket::VoiceReceiverInfo* voice_receiver_info) {
 
 class StatsCollectorForTest : public StatsCollector {
  public:
-  explicit StatsCollectorForTest(PeerConnectionInternal* pc)
-      : StatsCollector(pc), time_now_(19477) {}
+  explicit StatsCollectorForTest(PeerConnectionInternal* pc,
+                                 const WebRtcKeyValueConfig& field_trials)
+      : StatsCollector(pc, field_trials), time_now_(19477) {}
 
   double GetTimeNow() override { return time_now_; }
 
@@ -612,7 +613,7 @@ class StatsCollectorTest : public ::testing::Test {
 
   std::unique_ptr<StatsCollectorForTest> CreateStatsCollector(
       PeerConnectionInternal* pc) {
-    return std::make_unique<StatsCollectorForTest>(pc);
+    return std::make_unique<StatsCollectorForTest>(pc, field_trials_);
   }
 
   void VerifyAudioTrackStats(FakeAudioTrack* audio_track,
@@ -740,6 +741,8 @@ class StatsCollectorTest : public ::testing::Test {
     EXPECT_EQ(rtc::SrtpCryptoSuiteToName(rtc::kSrtpAes128CmSha1_80),
               srtp_crypto_suite);
   }
+
+  FieldTrialBasedConfig field_trials_;
 };
 
 static rtc::scoped_refptr<MockRtpSenderInternal> CreateMockSender(
