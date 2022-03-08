@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9abb73b9_a7298754",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "thanks for review, fixed many but not all of your comments.\nI know this is painful, but remeber that we have a global thread unsafe string currently. Pushing the config onto the call-stack, make the code safe and transparent.\n\nThe really only other option would be some sort of thread local storage ?\ni.e doesn\u0027t each object have access to which thread it is supposed to run on ?\ncouldn\u0027t we stash it on that object ?\n\nPTAL",
+      "revId": "e888d48246cbf0e83b225d4b1998c8380be72885",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

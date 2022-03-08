@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0eaa204_7bb43afb",
+        "filename": "api/transport/webrtc_key_value_config.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d02db39_f8fe05c0",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "447884f8_303f3c41",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-03-08T12:12:51Z",
       "side": 1,
       "message": "hm. leaves a sour taste in my mouth to have this config shipped around this way.\nCould we make it the last argument of the init list, at least?\nDo we have a null value for field trials that we could default to?",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dd3ee7f_1a227937",
+        "filename": "pc/dtls_srtp_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "- sour taste: sure, but a global thread unsafe string that we have now, was is taste of that ?\n- moved to last\n- default, not that is not possible",
+      "parentUuid": "447884f8_303f3c41",
       "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50fbaf46_0a541f20",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "see above.",
+      "parentUuid": "c7f56261_81f3a579",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17e34ad0_10c309d6",
         "filename": "pc/jsep_transport_controller_unittest.cc",
         "patchSetId": 8
@@ -82,6 +136,24 @@
       "writtenOn": "2022-03-08T12:12:51Z",
       "side": 1,
       "message": "Is there a reason not to make field trials part of JsepTransportController::Config?",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a75164e_fa379b19",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "it\u0027s hard to put \u0026 (references) into struct like that.\nit\u0027s hard for a casual reader (me) to see how the fields are initilized.\nAn explicit argument is much easier.\nWDYT ?",
+      "parentUuid": "17e34ad0_10c309d6",
       "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27c4a54a_622d8067",
+        "filename": "pc/media_session.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "the TransportDescriptorFactory is instatiated lots and lots of places.\nMediaSessionDescriptorFactory only in a few.",
+      "parentUuid": "a804c858_ddf2a72f",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6407b7f4_21538e8e",
         "filename": "pc/sdp_offer_answer.h",
         "patchSetId": 8
@@ -116,6 +206,24 @@
       "writtenOn": "2022-03-08T12:12:51Z",
       "side": 1,
       "message": "No. Make it part of dependencies.",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99d45083_34f31984",
+        "filename": "pc/sdp_offer_answer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "this is an internal only method.\nthe \"factory\" method pulls it out of ConnectionContext\nIt is not part of PeerConnectionDependencies currently (only PeerConnectionFactoryDependencies)...and PeerConnectionDependencies is a public class so I prefer to do that later in recfatoring.\nWDYT ?",
+      "parentUuid": "6407b7f4_21538e8e",
       "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -137,6 +245,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00a8e25d_6da01622",
+        "filename": "pc/srtp_transport.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40c0a847_dd8673b2",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ba73074_a4966dde",
@@ -154,6 +280,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ec7a193_6ad68a00",
+        "filename": "pc/stats_collector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ba73074_a4966dde",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d87da2ad_918ae318",
@@ -167,6 +311,24 @@
       "writtenOn": "2022-03-08T12:12:51Z",
       "side": 1,
       "message": "You should pull the ExplicitKeyValueConfig argument up here - there\u0027s no excuse for passing an absl::optional\u003cstd::string\u003e to this function (except for making this CL smaller, in which case a TODO(bug) needs adding).",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "134f037c_cbe22467",
+        "filename": "pc/test/integration_test_helpers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d87da2ad_918ae318",
       "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -201,6 +363,24 @@
       "writtenOn": "2022-03-08T12:12:51Z",
       "side": 1,
       "message": "Having multiple .cc files in a target is a Bad Trait.\nPlese make scoped_key_value_config its own target, and depend accordingly.",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec9e8e1f_24bc4dbe",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-08T17:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "722514ec_3ea25520",
       "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
