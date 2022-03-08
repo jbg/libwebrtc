@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d04c32f_e8fa0690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T09:35:37Z",
+      "side": 1,
+      "message": "Looks good. Testing all loss patterns is *hard*!\n(could we write a fuzzer for that?)\n",
+      "revId": "fb636ade303c8064e64ddce9d7177535e7e19d9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2e1722f_40374029",
+        "filename": "net/dcsctp/rx/traditional_reassembly_streams.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T09:35:37Z",
+      "side": 1,
+      "message": "https://en.cppreference.com/w/cpp/container/map/emplace suggests that an element may be constructed and then immediately destroyed if the element already exists at that key - should you use try_emplace instead?",
+      "revId": "fb636ade303c8064e64ddce9d7177535e7e19d9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
