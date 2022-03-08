@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "163be222_efef458a",
+        "filename": "modules/remote_bitrate_estimator/aimd_rate_control.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 18864
+      },
+      "writtenOn": "2022-03-08T13:03:24Z",
+      "side": 1,
+      "message": "You might want to set the new_bitate after having the value of upper_bound.",
+      "range": {
+        "startLine": 384,
+        "startChar": 4,
+        "endLine": 386,
+        "endChar": 5
+      },
+      "revId": "6d3b0d00c3e99a6bebf10e6f9236118a3d147912",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
