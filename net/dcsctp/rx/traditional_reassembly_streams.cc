@@ -280,10 +280,8 @@ size_t TraditionalReassemblyStreams::HandleForwardTsn(
   }
 
   for (const auto& skipped_stream : skipped_streams) {
-    auto it = ordered_streams_.find(skipped_stream.stream_id);
-    if (it != ordered_streams_.end()) {
-      bytes_removed += it->second.EraseTo(skipped_stream.ssn);
-    }
+    auto it = ordered_streams_.emplace(skipped_stream.stream_id, this).first;
+    bytes_removed += it->second.EraseTo(skipped_stream.ssn);
   }
 
   return bytes_removed;
