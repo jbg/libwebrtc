@@ -711,9 +711,9 @@ JsepTransportController* PeerConnection::InitializeTransportController_n(
         }
       };
 
-  transport_controller_.reset(
-      new JsepTransportController(network_thread(), port_allocator_.get(),
-                                  async_dns_resolver_factory_.get(), config));
+  transport_controller_.reset(new JsepTransportController(
+      network_thread(), port_allocator_.get(),
+      async_dns_resolver_factory_.get(), config, context_->trials()));
 
   transport_controller_->SubscribeIceConnectionState(
       [this](cricket::IceConnectionState s) {

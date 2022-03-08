@@ -22,6 +22,7 @@
 #include "api/media_types.h"
 #include "api/rtp_parameters.h"
 #include "api/rtp_transceiver_direction.h"
+#include "api/webrtc_key_value_config.h"
 #include "media/base/media_constants.h"
 #include "media/base/rid_description.h"
 #include "media/base/stream_params.h"
@@ -136,12 +137,16 @@ class MediaSessionDescriptionFactory {
   // The TransportDescriptionFactory and the UniqueRandomIdGenerator are not
   // owned by MediaSessionDescriptionFactory, so they must be kept alive by the
   // user of this class.
-  MediaSessionDescriptionFactory(const TransportDescriptionFactory* factory,
-                                 rtc::UniqueRandomIdGenerator* ssrc_generator);
+  MediaSessionDescriptionFactory(
+      const TransportDescriptionFactory* factory,
+      rtc::UniqueRandomIdGenerator* ssrc_generator,
+      const webrtc::WebRtcKeyValueConfig& field_trials);
   // This helper automatically sets up the factory to get its configuration
   // from the specified ChannelManager.
-  MediaSessionDescriptionFactory(ChannelManager* cmanager,
-                                 const TransportDescriptionFactory* factory);
+  MediaSessionDescriptionFactory(
+      ChannelManager* cmanager,
+      const TransportDescriptionFactory* factory,
+      const webrtc::WebRtcKeyValueConfig& field_trials);
 
   const AudioCodecs& audio_sendrecv_codecs() const;
   const AudioCodecs& audio_send_codecs() const;
@@ -340,6 +345,7 @@ class MediaSessionDescriptionFactory {
   // and setter.
   SecurePolicy secure_ = SEC_DISABLED;
   const TransportDescriptionFactory* transport_desc_factory_;
+  const webrtc::WebRtcKeyValueConfig& field_trials_;
 };
 
 // Convenience functions.

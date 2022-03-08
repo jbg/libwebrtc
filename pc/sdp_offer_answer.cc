@@ -63,7 +63,6 @@
 #include "rtc_base/string_encode.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/trace_event.h"
-#include "system_wrappers/include/field_trial.h"
 #include "system_wrappers/include/metrics.h"
 
 using cricket::ContentInfo;
@@ -1186,13 +1185,14 @@ std::unique_ptr<SdpOfferAnswerHandler> SdpOfferAnswerHandler::Create(
     PeerConnectionDependencies& dependencies,
     ConnectionContext* context) {
   auto handler = absl::WrapUnique(new SdpOfferAnswerHandler(pc, context));
-  handler->Initialize(configuration, dependencies);
+  handler->Initialize(configuration, dependencies, context->trials());
   return handler;
 }
 
 void SdpOfferAnswerHandler::Initialize(
     const PeerConnectionInterface::RTCConfiguration& configuration,
-    PeerConnectionDependencies& dependencies) {
+    PeerConnectionDependencies& dependencies,
+    const webrtc::WebRtcKeyValueConfig& field_trials) {
   RTC_DCHECK_RUN_ON(signaling_thread());
   video_options_.screencast_min_bitrate_kbps =
       configuration.screencast_min_bitrate;
@@ -1228,7 +1228,8 @@ void SdpOfferAnswerHandler::Initialize(
           [this](const rtc::scoped_refptr<rtc::RTCCertificate>& certificate) {
             RTC_DCHECK_RUN_ON(signaling_thread());
             transport_controller_s()->SetLocalCertificate(certificate);
-          });
+          },
+          field_trials);
 
   if (pc_->options()->disable_encryption) {
     webrtc_session_desc_factory_->SetSdesPolicy(cricket::SEC_DISABLED);

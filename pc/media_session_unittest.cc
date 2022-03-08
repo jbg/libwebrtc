@@ -43,9 +43,9 @@
 #include "rtc_base/string_encode.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/unique_id_generator.h"
-#include "test/field_trial.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
+#include "test/scoped_key_value_config.h"
 
 #define ASSERT_CRYPTO(cd, s, cs)      \
   ASSERT_EQ(s, cd->cryptos().size()); \
@@ -431,7 +431,8 @@ void PreferGcmCryptoParameters(CryptoParamsVec* cryptos) {
 class MediaSessionDescriptionFactoryTest : public ::testing::Test {
  public:
   MediaSessionDescriptionFactoryTest()
-      : f1_(&tdf1_, &ssrc_generator1), f2_(&tdf2_, &ssrc_generator2) {
+      : f1_(&tdf1_, &ssrc_generator1, field_trials),
+        f2_(&tdf2_, &ssrc_generator2, field_trials) {
     f1_.set_audio_codecs(MAKE_VECTOR(kAudioCodecs1),
                          MAKE_VECTOR(kAudioCodecs1));
     f1_.set_video_codecs(MAKE_VECTOR(kVideoCodecs1),
@@ -791,6 +792,7 @@ class MediaSessionDescriptionFactoryTest : public ::testing::Test {
   }
 
  protected:
+  webrtc::test::ScopedKeyValueConfig field_trials;
   UniqueRandomIdGenerator ssrc_generator1;
   UniqueRandomIdGenerator ssrc_generator2;
   MediaSessionDescriptionFactory f1_;
@@ -3260,8 +3262,8 @@ TEST_F(MediaSessionDescriptionFactoryTest, SimSsrcsGenerateMultipleRtxSsrcs) {
 // Test that, when the FlexFEC codec is added, a FlexFEC ssrc is created
 // together with a FEC-FR grouping. Guarded by WebRTC-FlexFEC-03 trial.
 TEST_F(MediaSessionDescriptionFactoryTest, GenerateFlexfecSsrc) {
-  webrtc::test::ScopedFieldTrials override_field_trials(
-      "WebRTC-FlexFEC-03/Enabled/");
+  webrtc::test::ScopedKeyValueConfig override_field_trials(
+      field_trials, "WebRTC-FlexFEC-03/Enabled/");
   MediaSessionOptions opts;
   AddMediaDescriptionOptions(MEDIA_TYPE_VIDEO, "video",
                              RtpTransceiverDirection::kSendRecv, kActive,
@@ -3303,8 +3305,8 @@ TEST_F(MediaSessionDescriptionFactoryTest, GenerateFlexfecSsrc) {
 // TODO(brandtr): Remove this test when we support simulcast, either through
 // multiple FlexfecSenders, or through multistream protection.
 TEST_F(MediaSessionDescriptionFactoryTest, SimSsrcsGenerateNoFlexfecSsrcs) {
-  webrtc::test::ScopedFieldTrials override_field_trials(
-      "WebRTC-FlexFEC-03/Enabled/");
+  webrtc::test::ScopedKeyValueConfig override_field_trials(
+      field_trials, "WebRTC-FlexFEC-03/Enabled/");
   MediaSessionOptions opts;
   AddMediaDescriptionOptions(MEDIA_TYPE_VIDEO, "video",
                              RtpTransceiverDirection::kSendRecv, kActive,
@@ -4330,7 +4332,8 @@ TEST_F(MediaSessionDescriptionFactoryTest,
 class MediaProtocolTest : public ::testing::TestWithParam<const char*> {
  public:
   MediaProtocolTest()
-      : f1_(&tdf1_, &ssrc_generator1), f2_(&tdf2_, &ssrc_generator2) {
+      : f1_(&tdf1_, &ssrc_generator1, field_trials),
+        f2_(&tdf2_, &ssrc_generator2, field_trials) {
     f1_.set_audio_codecs(MAKE_VECTOR(kAudioCodecs1),
                          MAKE_VECTOR(kAudioCodecs1));
     f1_.set_video_codecs(MAKE_VECTOR(kVideoCodecs1),
@@ -4350,6 +4353,7 @@ class MediaProtocolTest : public ::testing::TestWithParam<const char*> {
   }
 
  protected:
+  webrtc::test::ScopedKeyValueConfig field_trials;
   MediaSessionDescriptionFactory f1_;
   MediaSessionDescriptionFactory f2_;
   TransportDescriptionFactory tdf1_;
@@ -4391,7 +4395,8 @@ INSTANTIATE_TEST_SUITE_P(MediaProtocolDtlsPatternTest,
 TEST_F(MediaSessionDescriptionFactoryTest, TestSetAudioCodecs) {
   TransportDescriptionFactory tdf;
   UniqueRandomIdGenerator ssrc_generator;
-  MediaSessionDescriptionFactory sf(&tdf, &ssrc_generator);
+  webrtc::test::ScopedKeyValueConfig field_trials;
+  MediaSessionDescriptionFactory sf(&tdf, &ssrc_generator, field_trials);
   std::vector<AudioCodec> send_codecs = MAKE_VECTOR(kAudioCodecs1);
   std::vector<AudioCodec> recv_codecs = MAKE_VECTOR(kAudioCodecs2);
 
@@ -4461,7 +4466,8 @@ bool CodecsMatch(const std::vector<Codec>& codecs1,
 void TestAudioCodecsOffer(RtpTransceiverDirection direction) {
   TransportDescriptionFactory tdf;
   UniqueRandomIdGenerator ssrc_generator;
-  MediaSessionDescriptionFactory sf(&tdf, &ssrc_generator);
+  webrtc::test::ScopedKeyValueConfig field_trials;
+  MediaSessionDescriptionFactory sf(&tdf, &ssrc_generator, field_trials);
   const std::vector<AudioCodec> send_codecs = MAKE_VECTOR(kAudioCodecs1);
   const std::vector<AudioCodec> recv_codecs = MAKE_VECTOR(kAudioCodecs2);
   const std::vector<AudioCodec> sendrecv_codecs =
@@ -4559,8 +4565,11 @@ void TestAudioCodecsAnswer(RtpTransceiverDirection offer_direction,
   TransportDescriptionFactory offer_tdf;
   TransportDescriptionFactory answer_tdf;
   UniqueRandomIdGenerator ssrc_generator1, ssrc_generator2;
-  MediaSessionDescriptionFactory offer_factory(&offer_tdf, &ssrc_generator1);
-  MediaSessionDescriptionFactory answer_factory(&answer_tdf, &ssrc_generator2);
+  webrtc::test::ScopedKeyValueConfig field_trials;
+  MediaSessionDescriptionFactory offer_factory(&offer_tdf, &ssrc_generator1,
+                                               field_trials);
+  MediaSessionDescriptionFactory answer_factory(&answer_tdf, &ssrc_generator2,
+                                                field_trials);
   offer_factory.set_audio_codecs(
       VectorFromIndices(kOfferAnswerCodecs, kOfferSendCodecs),
       VectorFromIndices(kOfferAnswerCodecs, kOfferRecvCodecs));
