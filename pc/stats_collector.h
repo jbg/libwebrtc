@@ -30,6 +30,7 @@
 #include "api/peer_connection_interface.h"
 #include "api/scoped_refptr.h"
 #include "api/stats_types.h"
+#include "api/webrtc_key_value_config.h"
 #include "p2p/base/connection_info.h"
 #include "p2p/base/port.h"
 #include "pc/peer_connection_internal.h"
@@ -58,7 +59,8 @@ class StatsCollector : public StatsCollectorInterface {
  public:
   // The caller is responsible for ensuring that the pc outlives the
   // StatsCollector instance.
-  explicit StatsCollector(PeerConnectionInternal* pc);
+  explicit StatsCollector(PeerConnectionInternal* pc,
+                          const WebRtcKeyValueConfig& field_trials);
   virtual ~StatsCollector();
 
   // Adds a MediaStream with tracks that can be used as a `selector` in a call

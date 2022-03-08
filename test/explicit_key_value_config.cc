@@ -10,14 +10,23 @@
 
 #include "test/explicit_key_value_config.h"
 
-#include "api/transport/webrtc_key_value_config.h"
+#include "api/webrtc_key_value_config.h"
 #include "rtc_base/checks.h"
-#include "system_wrappers/include/field_trial.h"
+#include "test/field_trial.h"
 
 namespace webrtc {
 namespace test {
 
-ExplicitKeyValueConfig::ExplicitKeyValueConfig(const std::string& s) {
+ExplicitKeyValueConfig::ExplicitKeyValueConfig()
+    : ExplicitKeyValueConfig(nullptr, "") {}
+
+ExplicitKeyValueConfig::ExplicitKeyValueConfig(const std::string& s)
+    : ExplicitKeyValueConfig(nullptr, s) {}
+
+ExplicitKeyValueConfig::ExplicitKeyValueConfig(
+    const ExplicitKeyValueConfig* parent,
+    const std::string& s)
+    : parent_(parent) {
   std::string::size_type field_start = 0;
   while (field_start < s.size()) {
     std::string::size_type separator_pos = s.find('/', field_start);
@@ -44,12 +53,20 @@ ExplicitKeyValueConfig::ExplicitKeyValueConfig(const std::string& s) {
   // We nevertheless keep the check to make it clear that the entire
   // string has been processed, and without indexing past the end.
   RTC_CHECK_EQ(field_start, s.size());
+
+  // Also store field trials in global string (until we get rid of it).
+  scoped_field_trials_ = std::make_unique<ScopedFieldTrials>(s);
 }
 
 std::string ExplicitKeyValueConfig::Lookup(absl::string_view key) const {
   auto it = key_value_map_.find(std::string(key));
   if (it != key_value_map_.end())
     return it->second;
+
+  if (parent_) {
+    return parent_->Lookup(key);
+  }
+
   return "";
 }
 

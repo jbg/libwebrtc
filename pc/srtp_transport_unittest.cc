@@ -26,6 +26,7 @@
 #include "rtc_base/containers/flat_set.h"
 #include "rtc_base/ssl_stream_adapter.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
+#include "test/explicit_key_value_config.h"
 #include "test/gtest.h"
 
 using rtc::kSrtpAeadAes128Gcm;
@@ -57,8 +58,10 @@ class SrtpTransportTest : public ::testing::Test, public sigslot::has_slots<> {
     rtp_packet_transport1_->SetDestination(rtp_packet_transport2_.get(),
                                            asymmetric);
 
-    srtp_transport1_ = std::make_unique<SrtpTransport>(rtcp_mux_enabled);
-    srtp_transport2_ = std::make_unique<SrtpTransport>(rtcp_mux_enabled);
+    srtp_transport1_ =
+        std::make_unique<SrtpTransport>(field_trials_, rtcp_mux_enabled);
+    srtp_transport2_ =
+        std::make_unique<SrtpTransport>(field_trials_, rtcp_mux_enabled);
 
     srtp_transport1_->SetRtpPacketTransport(rtp_packet_transport1_.get());
     srtp_transport2_->SetRtpPacketTransport(rtp_packet_transport2_.get());
@@ -333,6 +336,7 @@ class SrtpTransportTest : public ::testing::Test, public sigslot::has_slots<> {
   TransportObserver rtp_sink2_;
 
   int sequence_number_ = 0;
+  webrtc::test::ExplicitKeyValueConfig field_trials_;
 };
 
 class SrtpTransportTestWithExternalAuth
