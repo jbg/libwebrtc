@@ -317,8 +317,10 @@ class TestBasicNetworkManager : public BasicNetworkManager {
   TestBasicNetworkManager(NetworkMonitorFactory* network_monitor_factory,
                           SocketFactory* socket_factory)
       : BasicNetworkManager(network_monitor_factory, socket_factory) {}
+#if 0
   using BasicNetworkManager::QueryDefaultLocalAddress;
   using BasicNetworkManager::set_default_local_addresses;
+#endif
 };
 
 // Test that the Network ctor works properly.
@@ -1170,7 +1172,7 @@ TEST_F(NetworkTest, TestNetworkMonitoring) {
   manager.StopUpdating();
   EXPECT_FALSE(GetNetworkMonitor(manager)->started());
 }
-
+#if 0
 // Fails on Android: https://bugs.chromium.org/p/webrtc/issues/detail?id=4364.
 #if defined(WEBRTC_ANDROID)
 #define MAYBE_DefaultLocalAddress DISABLED_DefaultLocalAddress
@@ -1241,7 +1243,7 @@ TEST_F(NetworkTest, MAYBE_DefaultLocalAddress) {
 
   manager.StopUpdating();
 }
-
+#endif
 // Test that MergeNetworkList does not set change = true
 // when changing from cellular_X to cellular_Y.
 TEST_F(NetworkTest, TestWhenNetworkListChangeReturnsChangedFlag) {

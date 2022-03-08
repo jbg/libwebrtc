@@ -525,8 +525,10 @@ class BasicPortAllocatorTest : public FakeClockBase,
       const rtc::IPAddress& stun_candidate_addr,
       const rtc::IPAddress& relay_candidate_udp_transport_addr,
       const rtc::IPAddress& relay_candidate_tcp_transport_addr) {
+#if 0
     network_manager_.set_default_local_addresses(kPrivateAddr.ipaddr(),
                                                  rtc::IPAddress());
+#endif
     if (!session_) {
       ASSERT_TRUE(CreateSession(ICE_CANDIDATE_COMPONENT_RTP));
     }
@@ -1990,8 +1992,10 @@ TEST_F(BasicPortAllocatorTest, TestSharedSocketNoUdpAllowed) {
 // adapters, the PORTALLOCATOR_DISABLE_ADAPTER_ENUMERATION is specified
 // automatically.
 TEST_F(BasicPortAllocatorTest, TestNetworkPermissionBlocked) {
+#if 0
   network_manager_.set_default_local_addresses(kPrivateAddr.ipaddr(),
                                                rtc::IPAddress());
+#endif
   network_manager_.set_enumeration_permission(
       rtc::NetworkManager::ENUMERATION_BLOCKED);
   allocator().set_flags(allocator().flags() | PORTALLOCATOR_DISABLE_RELAY |

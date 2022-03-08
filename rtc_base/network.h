@@ -60,6 +60,7 @@ std::string MakeNetworkKey(const std::string& name,
 // mechanisms fail to determine the type.
 RTC_EXPORT AdapterType GetAdapterTypeFromName(const char* network_name);
 
+#if 0
 class DefaultLocalAddressProvider {
  public:
   virtual ~DefaultLocalAddressProvider() = default;
@@ -69,6 +70,7 @@ class DefaultLocalAddressProvider {
   // important to check the return value as a IP family may not be enabled.
   virtual bool GetDefaultLocalAddress(int family, IPAddress* ipaddr) const = 0;
 };
+#endif
 
 class MdnsResponderProvider {
  public:
@@ -109,7 +111,7 @@ class NetworkMask {
 //
 // This allows constructing a NetworkManager subclass on one thread and
 // passing it into an object that uses it on a different thread.
-class RTC_EXPORT NetworkManager : public DefaultLocalAddressProvider,
+class RTC_EXPORT NetworkManager : /* public DefaultLocalAddressProvider, */
                                   public MdnsResponderProvider {
  public:
   typedef std::vector<Network*> NetworkList;
@@ -166,8 +168,9 @@ class RTC_EXPORT NetworkManager : public DefaultLocalAddressProvider,
 
   // Dumps the current list of networks in the network manager.
   virtual void DumpNetworks() {}
+#if 0
   bool GetDefaultLocalAddress(int family, IPAddress* ipaddr) const override;
-
+#endif
   struct Stats {
     int ipv4_network_count;
     int ipv6_network_count;
@@ -194,8 +197,9 @@ class RTC_EXPORT NetworkManagerBase : public NetworkManager {
 
   EnumerationPermission enumeration_permission() const override;
 
+#if 0
   bool GetDefaultLocalAddress(int family, IPAddress* ipaddr) const override;
-
+#endif
   // Check if MAC address in |bytes| is one of the pre-defined
   // MAC addresses for know VPNs.
   static bool IsVpnMacAddress(rtc::ArrayView<const uint8_t> address);
@@ -218,9 +222,10 @@ class RTC_EXPORT NetworkManagerBase : public NetworkManager {
     enumeration_permission_ = state;
   }
 
+#if 0
   void set_default_local_addresses(const IPAddress& ipv4,
                                    const IPAddress& ipv6);
-
+#endif
   Network* GetNetworkFromAddress(const rtc::IPAddress& ip) const;
 
  private:
@@ -235,8 +240,10 @@ class RTC_EXPORT NetworkManagerBase : public NetworkManager {
   std::unique_ptr<rtc::Network> ipv4_any_address_network_;
   std::unique_ptr<rtc::Network> ipv6_any_address_network_;
 
+#if 0
   IPAddress default_local_ipv4_address_;
   IPAddress default_local_ipv6_address_;
+#endif
   // We use 16 bits to save the bandwidth consumption when sending the network
   // id over the Internet. It is OK that the 16-bit integer overflows to get a
   // network id 0 because we only compare the network ids in the old and the new
@@ -369,6 +376,7 @@ class RTC_EXPORT Network {
   // This signal is fired whenever network preference changes.
   sigslot::signal1<const Network*> SignalNetworkPreferenceChanged;
 
+#if 0
   const DefaultLocalAddressProvider* default_local_address_provider() {
     return default_local_address_provider_;
   }
@@ -376,7 +384,7 @@ class RTC_EXPORT Network {
       const DefaultLocalAddressProvider* provider) {
     default_local_address_provider_ = provider;
   }
-
+#endif
   void set_mdns_responder_provider(const MdnsResponderProvider* provider) {
     mdns_responder_provider_ = provider;
   }
@@ -531,7 +539,9 @@ class RTC_EXPORT Network {
   std::string ToString() const;
 
  private:
+#if 0
   const DefaultLocalAddressProvider* default_local_address_provider_ = nullptr;
+#endif
   const MdnsResponderProvider* mdns_responder_provider_ = nullptr;
   std::string name_;
   std::string description_;

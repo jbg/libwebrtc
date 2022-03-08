@@ -98,7 +98,9 @@ void EmulatedNetworkManager::UpdateNetworksOnce() {
   std::vector<rtc::Network*> networks;
   for (std::unique_ptr<rtc::Network>& net :
        endpoints_container_->GetEnabledNetworks()) {
+#if 0
     net->set_default_local_address_provider(this);
+#endif
     networks.push_back(net.release());
   }
 

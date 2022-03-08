@@ -99,9 +99,10 @@ class FakeNetworkManager : public NetworkManagerBase,
     }
   }
 
+#if 0
   using NetworkManagerBase::set_default_local_addresses;
+#endif
   using NetworkManagerBase::set_enumeration_permission;
-
   // rtc::NetworkManager override.
   webrtc::MdnsResponderInterface* GetMdnsResponder() const override {
     return mdns_responder_.get();
@@ -131,7 +132,9 @@ class FakeNetworkManager : public NetworkManagerBase,
       if (it->underlying_vpn_adapter_type.has_value()) {
         net->set_underlying_type_for_vpn(*it->underlying_vpn_adapter_type);
       }
+#if 0
       net->set_default_local_address_provider(this);
+#endif
       net->AddIP(it->socket_address.ipaddr());
       networks.push_back(net.release());
     }

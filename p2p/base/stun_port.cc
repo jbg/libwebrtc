@@ -468,18 +468,26 @@ void UDPPort::SendStunBindingRequest(const rtc::SocketAddress& stun_addr) {
 }
 
 bool UDPPort::MaybeSetDefaultLocalAddress(rtc::SocketAddress* addr) const {
-  if (!addr->IsAnyIP() || !emit_local_for_anyaddress_ ||
-      !Network()->default_local_address_provider()) {
+  if (!addr->IsAnyIP() || !emit_local_for_anyaddress_
+#if 0
+      || !Network()->default_local_address_provider()
+#endif
+  ) {
     return true;
   }
-  rtc::IPAddress default_address;
+#if 1
+  rtc::IPAddress default_address = Network()->GetBestIP();
+  if (!default_address.IsNil()) {
+    return false;
+  }
+#else
   bool result =
       Network()->default_local_address_provider()->GetDefaultLocalAddress(
           addr->family(), &default_address);
   if (!result || default_address.IsNil()) {
     return false;
   }
-
+#endif
   addr->SetIP(default_address);
   return true;
 }

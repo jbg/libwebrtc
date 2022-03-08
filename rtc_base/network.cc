@@ -270,10 +270,11 @@ NetworkManager::EnumerationPermission NetworkManager::enumeration_permission()
   return ENUMERATION_ALLOWED;
 }
 
+#if 0
 bool NetworkManager::GetDefaultLocalAddress(int family, IPAddress* addr) const {
   return false;
 }
-
+#endif
 webrtc::MdnsResponderInterface* NetworkManager::GetMdnsResponder() const {
   return nullptr;
 }
@@ -299,7 +300,9 @@ void NetworkManagerBase::GetAnyAddressNetworks(NetworkList* networks) {
     const rtc::IPAddress ipv4_any_address(INADDR_ANY);
     ipv4_any_address_network_.reset(
         new rtc::Network("any", "any", ipv4_any_address, 0, ADAPTER_TYPE_ANY));
+#if 0
     ipv4_any_address_network_->set_default_local_address_provider(this);
+#endif
     ipv4_any_address_network_->set_mdns_responder_provider(this);
     ipv4_any_address_network_->AddIP(ipv4_any_address);
   }
@@ -309,7 +312,9 @@ void NetworkManagerBase::GetAnyAddressNetworks(NetworkList* networks) {
     const rtc::IPAddress ipv6_any_address(in6addr_any);
     ipv6_any_address_network_.reset(
         new rtc::Network("any", "any", ipv6_any_address, 0, ADAPTER_TYPE_ANY));
+#if 0
     ipv6_any_address_network_->set_default_local_address_provider(this);
+#endif
     ipv6_any_address_network_->set_mdns_responder_provider(this);
     ipv6_any_address_network_->AddIP(ipv6_any_address);
   }
@@ -449,6 +454,7 @@ void NetworkManagerBase::MergeNetworkList(const NetworkList& new_networks,
   }
 }
 
+#if 0
 void NetworkManagerBase::set_default_local_addresses(const IPAddress& ipv4,
                                                      const IPAddress& ipv6) {
   if (ipv4.family() == AF_INET) {
@@ -478,7 +484,7 @@ bool NetworkManagerBase::GetDefaultLocalAddress(int family,
   }
   return false;
 }
-
+#endif
 Network* NetworkManagerBase::GetNetworkFromAddress(
     const rtc::IPAddress& ip) const {
   for (Network* network : networks_) {
@@ -629,7 +635,9 @@ void BasicNetworkManager::ConvertIfAddrs(struct ifaddrs* interfaces,
       std::unique_ptr<Network> network(
           new Network(cursor->ifa_name, cursor->ifa_name, prefix, prefix_length,
                       adapter_type));
+#if 0
       network->set_default_local_address_provider(this);
+#endif
       network->set_scope_id(scope_id);
       network->AddIP(ip);
       network->set_ignored(IsIgnoredNetwork(*network));
@@ -1010,8 +1018,10 @@ void BasicNetworkManager::UpdateNetworksOnce() {
     bool changed;
     NetworkManager::Stats stats;
     MergeNetworkList(list, &changed, &stats);
+#if 0
     set_default_local_addresses(QueryDefaultLocalAddress(AF_INET),
                                 QueryDefaultLocalAddress(AF_INET6));
+#endif
     if (changed || !sent_first_update_) {
       SignalNetworksChanged();
       sent_first_update_ = true;
