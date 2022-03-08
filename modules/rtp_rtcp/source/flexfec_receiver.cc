@@ -159,17 +159,25 @@ void FlexfecReceiver::ProcessReceivedPacket(
     // Set this flag first, since OnRecoveredPacket may end up here
     // again, with the same packet.
     recovered_packet->returned = true;
-    RTC_CHECK_GT(recovered_packet->pkt->data.size(), 0);
+    RTC_CHECK_GE(recovered_packet->pkt->data.size(), kRtpHeaderSize);
     recovered_packet_receiver_->OnRecoveredPacket(
         recovered_packet->pkt->data.cdata(),
         recovered_packet->pkt->data.size());
-    // Periodically log the incoming packets.
+    uint32_t media_ssrc =
+        ForwardErrorCorrection::ParseSsrc(recovered_packet->pkt->data.data());
+    uint16_t media_seq_num = ForwardErrorCorrection::ParseSequenceNumber(
+        recovered_packet->pkt->data.data());
+    RTC_LOG(LS_VERBOSE) << "Recovered media packet with SSRC: " << media_ssrc
+                        << " seq " << media_seq_num << " recovered length "
+                        << recovered_packet->pkt->data.size()
+                        << " from FlexFEC stream with SSRC: " << ssrc_;
+    // Periodically log the incoming packets at LS_INFO.
     int64_t now_ms = clock_->TimeInMilliseconds();
     if (now_ms - last_recovered_packet_ms_ > kPacketLogIntervalMs) {
-      uint32_t media_ssrc =
-          ForwardErrorCorrection::ParseSsrc(recovered_packet->pkt->data.data());
-      RTC_LOG(LS_VERBOSE) << "Recovered media packet with SSRC: " << media_ssrc
-                          << " from FlexFEC stream with SSRC: " << ssrc_ << ".";
+      RTC_LOG(LS_INFO) << "Recovered media packet with SSRC: " << media_ssrc
+                       << " seq " << media_seq_num << " recovered length "
+                       << recovered_packet->pkt->data.size()
+                       << " from FlexFEC stream with SSRC: " << ssrc_;
       last_recovered_packet_ms_ = now_ms;
     }
   }
