@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3821f13_54257900",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T19:42:09Z",
+      "side": 1,
+      "message": "which above? Below?",
+      "parentUuid": "50fbaf46_0a541f20",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17e34ad0_10c309d6",
         "filename": "pc/jsep_transport_controller_unittest.cc",
         "patchSetId": 8
@@ -154,6 +172,24 @@
       "side": 1,
       "message": "it\u0027s hard to put \u0026 (references) into struct like that.\nit\u0027s hard for a casual reader (me) to see how the fields are initilized.\nAn explicit argument is much easier.\nWDYT ?",
       "parentUuid": "17e34ad0_10c309d6",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b5a1cee_49fb8176",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T19:42:09Z",
+      "side": 1,
+      "message": "For any single argument, this argument can be made. But this isn\u0027t the first or the last need for \"just another argument\".\nThis constructor has 4 arguments already.\n\nEvery time we change an API, we have to change all the call sites.\nIf we change a config struct, we only have to change the sites that need to set it to something non-default.\n\nWRT references - yes, it has to be a pointer if you want to set it, I think. But you have pointers to it in other places, I think. Or make it absl::Optional.",
+      "parentUuid": "1a75164e_fa379b19",
       "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -195,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "067df12d_ef05561e",
+        "filename": "pc/media_session.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T19:42:09Z",
+      "side": 1,
+      "message": "Why does init count matter?\nIf this field needs to be consistent between TDF and MSDF, then we should have only one copy, and both users point to it.",
+      "parentUuid": "27c4a54a_622d8067",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6407b7f4_21538e8e",
         "filename": "pc/sdp_offer_answer.h",
         "patchSetId": 8
@@ -224,6 +278,24 @@
       "side": 1,
       "message": "this is an internal only method.\nthe \"factory\" method pulls it out of ConnectionContext\nIt is not part of PeerConnectionDependencies currently (only PeerConnectionFactoryDependencies)...and PeerConnectionDependencies is a public class so I prefer to do that later in recfatoring.\nWDYT ?",
       "parentUuid": "6407b7f4_21538e8e",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cb7ecfa_d1566fbb",
+        "filename": "pc/sdp_offer_answer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-08T19:42:09Z",
+      "side": 1,
+      "message": "OK, I\u0027ll give in on this one. It\u0027s a private function.",
+      "parentUuid": "99d45083_34f31984",
       "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
