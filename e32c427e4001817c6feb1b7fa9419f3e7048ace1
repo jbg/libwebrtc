@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15c0eb94_a52ca3e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-09T15:09:37Z",
+      "side": 1,
+      "message": "LGTM (I wonder if it is better to rename now that the usage is not widespread, like land this one and do the rename, WDYT?).",
+      "revId": "e32c427e4001817c6feb1b7fa9419f3e7048ace1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
