@@ -16,6 +16,23 @@
       "message": "Marking -1 so that it\u0027s not accidentally landed before downstream issues are resolved.\n\nsprang@ please rubberstamp lgtm this reland CL.",
       "revId": "bfa19bae1023a54c331f81c7de90830421424882",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b3cb2d_8f74f2c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-03-09T09:52:54Z",
+      "side": 1,
+      "message": "The downstream project has libaom updated now.",
+      "revId": "bfa19bae1023a54c331f81c7de90830421424882",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
