@@ -141,6 +141,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2662401_cd103fb3",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-09T08:36:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3821f13_54257900",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17e34ad0_10c309d6",
@@ -194,6 +212,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ce96bc5_9cc39a1e",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-09T08:36:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b5a1cee_49fb8176",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a804c858_ddf2a72f",
@@ -243,6 +279,24 @@
       "side": 1,
       "message": "Why does init count matter?\nIf this field needs to be consistent between TDF and MSDF, then we should have only one copy, and both users point to it.",
       "parentUuid": "27c4a54a_622d8067",
+      "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1780e04_8dfb3273",
+        "filename": "pc/media_session.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-09T08:36:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "067df12d_ef05561e",
       "revId": "f99523a9fc48f03c609fe0624385d569e1aec94d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
