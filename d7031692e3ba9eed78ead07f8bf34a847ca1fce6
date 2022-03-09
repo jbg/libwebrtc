@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c97aa49f_00a4fa72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-03-09T11:39:40Z",
+      "side": 1,
+      "message": "Nope, apparently downstream project wasn\u0027t fixed yet.\n\nShuhai, could you please create another reland?",
+      "revId": "d7031692e3ba9eed78ead07f8bf34a847ca1fce6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
