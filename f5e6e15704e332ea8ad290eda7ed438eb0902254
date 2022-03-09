@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d820368_e8a87938",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-09T08:19:33Z",
+      "side": 1,
+      "message": "You\u0027re also adding periodic logging at INFO level, whereas we previously had only periodic logging at VERBOSE level. Please make the CL description say that.",
+      "revId": "f5e6e15704e332ea8ad290eda7ed438eb0902254",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cfc850f0_62e4d309",
@@ -14,6 +31,40 @@
       "writtenOn": "2022-03-08T21:09:52Z",
       "side": 1,
       "message": "dont make me do debug builds please ;-)",
+      "revId": "f5e6e15704e332ea8ad290eda7ed438eb0902254",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d15b3a7_dabb98ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-09T08:19:33Z",
+      "side": 1,
+      "message": "I guess LS_VERBOSE is already spewy enough that more stuff doesn\u0027t matter.\nBut polish this a little more, please....",
+      "revId": "f5e6e15704e332ea8ad290eda7ed438eb0902254",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8104bb57_a27835ef",
+        "filename": "modules/rtp_rtcp/source/flexfec_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-09T08:19:33Z",
+      "side": 1,
+      "message": "Repeating the log format string doesn\u0027t look right to me, and logging the packet twice when the timeout happens looks even unrighter.\n\nCan you refactor to something like\n\nif (timeout has triggered) {\n  level \u003d LS_INFO\n} else {\n  level \u003d LS_VERBOSE\n}\nRTC_LOG(level) \u003c\u003c format-string-used-only-once\n\n?",
       "revId": "f5e6e15704e332ea8ad290eda7ed438eb0902254",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
