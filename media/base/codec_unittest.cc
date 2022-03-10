@@ -16,6 +16,7 @@
 #include "api/video_codecs/vp9_profile.h"
 #include "modules/video_coding/codecs/h264/include/h264.h"
 #include "rtc_base/gunit.h"
+#include "test/scoped_key_value_config.h"
 
 using cricket::AudioCodec;
 using cricket::Codec;
@@ -106,47 +107,48 @@ TEST(CodecTest, TestAudioCodecOperators) {
 
 TEST(CodecTest, TestAudioCodecMatches) {
   // Test a codec with a static payload type.
+  webrtc::test::ScopedKeyValueConfig field_trials;
   AudioCodec c0(34, "A", 44100, 20000, 1);
-  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 44100, 20000, 1)));
-  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 44100, 20000, 0)));
-  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 44100, 0, 0)));
-  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 0, 0, 0)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(96, "A", 44100, 20000, 1)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(96, "", 44100, 20000, 1)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 55100, 20000, 1)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 44100, 30000, 1)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 44100, 20000, 2)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 55100, 30000, 2)));
+  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 44100, 20000, 1), &field_trials));
+  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 44100, 20000, 0), &field_trials));
+  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 44100, 0, 0), &field_trials));
+  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 0, 0, 0), &field_trials));
+  EXPECT_FALSE(c0.Matches(AudioCodec(96, "A", 44100, 20000, 1), &field_trials));
+  EXPECT_FALSE(c0.Matches(AudioCodec(96, "", 44100, 20000, 1), &field_trials));
+  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 55100, 20000, 1), &field_trials));
+  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 44100, 30000, 1), &field_trials));
+  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 44100, 20000, 2), &field_trials));
+  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 55100, 30000, 2), &field_trials));
 
   // Test a codec with a dynamic payload type.
   AudioCodec c1(96, "A", 44100, 20000, 1);
-  EXPECT_TRUE(c1.Matches(AudioCodec(96, "A", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(97, "A", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(96, "a", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(97, "a", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(35, "a", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(42, "a", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(65, "a", 0, 0, 0)));
-  EXPECT_FALSE(c1.Matches(AudioCodec(95, "A", 0, 0, 0)));
-  EXPECT_FALSE(c1.Matches(AudioCodec(34, "A", 0, 0, 0)));
-  EXPECT_FALSE(c1.Matches(AudioCodec(96, "", 44100, 20000, 2)));
-  EXPECT_FALSE(c1.Matches(AudioCodec(96, "A", 55100, 30000, 1)));
+  EXPECT_TRUE(c1.Matches(AudioCodec(96, "A", 0, 0, 0), &field_trials));
+  EXPECT_TRUE(c1.Matches(AudioCodec(97, "A", 0, 0, 0), &field_trials));
+  EXPECT_TRUE(c1.Matches(AudioCodec(96, "a", 0, 0, 0), &field_trials));
+  EXPECT_TRUE(c1.Matches(AudioCodec(97, "a", 0, 0, 0), &field_trials));
+  EXPECT_TRUE(c1.Matches(AudioCodec(35, "a", 0, 0, 0), &field_trials));
+  EXPECT_TRUE(c1.Matches(AudioCodec(42, "a", 0, 0, 0), &field_trials));
+  EXPECT_TRUE(c1.Matches(AudioCodec(65, "a", 0, 0, 0), &field_trials));
+  EXPECT_FALSE(c1.Matches(AudioCodec(95, "A", 0, 0, 0), &field_trials));
+  EXPECT_FALSE(c1.Matches(AudioCodec(34, "A", 0, 0, 0), &field_trials));
+  EXPECT_FALSE(c1.Matches(AudioCodec(96, "", 44100, 20000, 2), &field_trials));
+  EXPECT_FALSE(c1.Matches(AudioCodec(96, "A", 55100, 30000, 1), &field_trials));
 
   // Test a codec with a dynamic payload type, and auto bitrate.
   AudioCodec c2(97, "A", 16000, 0, 1);
   // Use default bitrate.
-  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, 0, 1)));
-  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, 0, 0)));
+  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, 0, 1), &field_trials));
+  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, 0, 0), &field_trials));
   // Use explicit bitrate.
-  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, 32000, 1)));
+  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, 32000, 1), &field_trials));
   // Backward compatibility with clients that might send "-1" (for default).
-  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, -1, 1)));
+  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, -1, 1), &field_trials));
 
   // Stereo doesn't match channels = 0.
   AudioCodec c3(96, "A", 44100, 20000, 2);
-  EXPECT_TRUE(c3.Matches(AudioCodec(96, "A", 44100, 20000, 2)));
-  EXPECT_FALSE(c3.Matches(AudioCodec(96, "A", 44100, 20000, 1)));
-  EXPECT_FALSE(c3.Matches(AudioCodec(96, "A", 44100, 20000, 0)));
+  EXPECT_TRUE(c3.Matches(AudioCodec(96, "A", 44100, 20000, 2), &field_trials));
+  EXPECT_FALSE(c3.Matches(AudioCodec(96, "A", 44100, 20000, 1), &field_trials));
+  EXPECT_FALSE(c3.Matches(AudioCodec(96, "A", 44100, 20000, 0), &field_trials));
 }
 
 TEST(CodecTest, TestVideoCodecOperators) {
@@ -206,36 +208,39 @@ TEST(CodecTest, TestVideoCodecEqualsWithDifferentPacketization) {
 
 TEST(CodecTest, TestVideoCodecMatches) {
   // Test a codec with a static payload type.
+  webrtc::test::ScopedKeyValueConfig field_trials;
   VideoCodec c0(34, "V");
-  EXPECT_TRUE(c0.Matches(VideoCodec(34, "")));
-  EXPECT_FALSE(c0.Matches(VideoCodec(96, "")));
-  EXPECT_FALSE(c0.Matches(VideoCodec(96, "V")));
+  EXPECT_TRUE(c0.Matches(VideoCodec(34, ""), &field_trials));
+  EXPECT_FALSE(c0.Matches(VideoCodec(96, ""), &field_trials));
+  EXPECT_FALSE(c0.Matches(VideoCodec(96, "V"), &field_trials));
 
   // Test a codec with a dynamic payload type.
   VideoCodec c1(96, "V");
-  EXPECT_TRUE(c1.Matches(VideoCodec(96, "V")));
-  EXPECT_TRUE(c1.Matches(VideoCodec(97, "V")));
-  EXPECT_TRUE(c1.Matches(VideoCodec(96, "v")));
-  EXPECT_TRUE(c1.Matches(VideoCodec(97, "v")));
-  EXPECT_TRUE(c1.Matches(VideoCodec(35, "v")));
-  EXPECT_TRUE(c1.Matches(VideoCodec(42, "v")));
-  EXPECT_TRUE(c1.Matches(VideoCodec(65, "v")));
-  EXPECT_FALSE(c1.Matches(VideoCodec(96, "")));
-  EXPECT_FALSE(c1.Matches(VideoCodec(95, "V")));
-  EXPECT_FALSE(c1.Matches(VideoCodec(34, "V")));
+  EXPECT_TRUE(c1.Matches(VideoCodec(96, "V"), &field_trials));
+  EXPECT_TRUE(c1.Matches(VideoCodec(97, "V"), &field_trials));
+  EXPECT_TRUE(c1.Matches(VideoCodec(96, "v"), &field_trials));
+  EXPECT_TRUE(c1.Matches(VideoCodec(97, "v"), &field_trials));
+  EXPECT_TRUE(c1.Matches(VideoCodec(35, "v"), &field_trials));
+  EXPECT_TRUE(c1.Matches(VideoCodec(42, "v"), &field_trials));
+  EXPECT_TRUE(c1.Matches(VideoCodec(65, "v"), &field_trials));
+  EXPECT_FALSE(c1.Matches(VideoCodec(96, ""), &field_trials));
+  EXPECT_FALSE(c1.Matches(VideoCodec(95, "V"), &field_trials));
+  EXPECT_FALSE(c1.Matches(VideoCodec(34, "V"), &field_trials));
 }
 
 TEST(CodecTest, TestVideoCodecMatchesWithDifferentPacketization) {
+  webrtc::test::ScopedKeyValueConfig field_trials;
   VideoCodec c0(100, cricket::kVp8CodecName);
   VideoCodec c1(101, cricket::kVp8CodecName);
   c1.packetization = "raw";
 
-  EXPECT_TRUE(c0.Matches(c1));
-  EXPECT_TRUE(c1.Matches(c0));
+  EXPECT_TRUE(c0.Matches(c1, &field_trials));
+  EXPECT_TRUE(c1.Matches(c0, &field_trials));
 }
 
 // VP9 codecs compare profile information.
 TEST(CodecTest, TestVP9CodecMatches) {
+  webrtc::test::ScopedKeyValueConfig field_trials;
   const char kProfile0[] = "0";
   const char kProfile2[] = "2";
 
@@ -243,30 +248,31 @@ TEST(CodecTest, TestVP9CodecMatches) {
   VideoCodec c_profile0(95, cricket::kVp9CodecName);
   c_profile0.params[webrtc::kVP9FmtpProfileId] = kProfile0;
 
-  EXPECT_TRUE(c_profile0.Matches(c_no_profile));
+  EXPECT_TRUE(c_profile0.Matches(c_no_profile, &field_trials));
 
   {
     VideoCodec c_profile0_eq(95, cricket::kVp9CodecName);
     c_profile0_eq.params[webrtc::kVP9FmtpProfileId] = kProfile0;
-    EXPECT_TRUE(c_profile0.Matches(c_profile0_eq));
+    EXPECT_TRUE(c_profile0.Matches(c_profile0_eq, &field_trials));
   }
 
   {
     VideoCodec c_profile2(95, cricket::kVp9CodecName);
     c_profile2.params[webrtc::kVP9FmtpProfileId] = kProfile2;
-    EXPECT_FALSE(c_profile0.Matches(c_profile2));
-    EXPECT_FALSE(c_no_profile.Matches(c_profile2));
+    EXPECT_FALSE(c_profile0.Matches(c_profile2, &field_trials));
+    EXPECT_FALSE(c_no_profile.Matches(c_profile2, &field_trials));
   }
 
   {
     VideoCodec c_no_profile_eq(95, cricket::kVp9CodecName);
-    EXPECT_TRUE(c_no_profile.Matches(c_no_profile_eq));
+    EXPECT_TRUE(c_no_profile.Matches(c_no_profile_eq, &field_trials));
   }
 }
 
 // Matching H264 codecs also need to have matching profile-level-id and
 // packetization-mode.
 TEST(CodecTest, TestH264CodecMatches) {
+  webrtc::test::ScopedKeyValueConfig field_trials;
   const char kProfileLevelId1[] = "42e01f";
   const char kProfileLevelId2[] = "42a01e";
 
@@ -281,7 +287,7 @@ TEST(CodecTest, TestH264CodecMatches) {
         pli_1_pm_blank.params.find(cricket::kH264FmtpPacketizationMode));
 
     // Matches since if packetization-mode is not specified it defaults to "0".
-    EXPECT_TRUE(pli_1_pm_0.Matches(pli_1_pm_blank));
+    EXPECT_TRUE(pli_1_pm_0.Matches(pli_1_pm_blank, &field_trials));
   }
 
   {
@@ -290,7 +296,7 @@ TEST(CodecTest, TestH264CodecMatches) {
     pli_1_pm_1.params[cricket::kH264FmtpPacketizationMode] = "1";
 
     // Does not match since packetization-mode is different.
-    EXPECT_FALSE(pli_1_pm_0.Matches(pli_1_pm_1));
+    EXPECT_FALSE(pli_1_pm_0.Matches(pli_1_pm_1, &field_trials));
   }
 
   {
@@ -299,7 +305,7 @@ TEST(CodecTest, TestH264CodecMatches) {
     pli_2_pm_0.params[cricket::kH264FmtpPacketizationMode] = "0";
 
     // Does not match since profile-level-id is different.
-    EXPECT_FALSE(pli_1_pm_0.Matches(pli_2_pm_0));
+    EXPECT_FALSE(pli_1_pm_0.Matches(pli_2_pm_0, &field_trials));
   }
 }
 
