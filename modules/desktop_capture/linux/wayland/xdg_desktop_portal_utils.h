@@ -14,7 +14,7 @@
 #include <gio/gio.h>
 #include <stdint.h>
 
-#include <cstdio>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -32,7 +32,6 @@ const char kSessionInterfaceName[] = "org.freedesktop.portal.Session";
 const char kRequestInterfaceName[] = "org.freedesktop.portal.Request";
 const char kScreenCastInterfaceName[] = "org.freedesktop.portal.ScreenCast";
 
-using rtc::SimpleStringBuilder;
 using ProxyRequestCallback = void (*)(GObject*, GAsyncResult*, gpointer);
 using SessionRequestCallback = void (*)(GDBusProxy*, GAsyncResult*, gpointer);
 using SessionRequestResponseSignalHandler = void (*)(GDBusConnection*,
@@ -71,10 +70,11 @@ enum class RequestResponse {
   // The user interaction was ended in some other way.
   kError,
 
-  kMaxValue = kError,
+  kMaxValue = kError
+
 };
 
-std::string ToString(RequestResponse request);
+std::ostream& operator<<(std::ostream& out, RequestResponse request);
 
 // Returns a string path for signal handle based on the provided connection and
 // token.

@@ -14,16 +14,16 @@
 
 namespace webrtc {
 
-std::string ToString(RequestResponse request) {
+std::ostream& operator<<(std::ostream& out, RequestResponse request) {
   switch (request) {
     case RequestResponse::kSuccess:
-      return "kSuccess";
+      return out << "kSuccess";
     case RequestResponse::kUserCancelled:
-      return "kUserCancelled";
+      return out << "kUserCancelled";
     case RequestResponse::kError:
-      return "kError";
+      return out << "kError";
     default:
-      return "Uknown";
+      return out << "Uknown";
   }
 }
 
