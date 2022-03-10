@@ -20,8 +20,8 @@
 #include "media/base/fake_frame_source.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/time_utils.h"
-#include "test/field_trial.h"
 #include "test/gtest.h"
+#include "test/scoped_key_value_config.h"
 
 namespace cricket {
 namespace {
@@ -49,13 +49,13 @@ class VideoAdapterTest : public ::testing::Test,
   VideoAdapterTest() : VideoAdapterTest("", 1) {}
   explicit VideoAdapterTest(const std::string& field_trials,
                             int source_resolution_alignment)
-      : override_field_trials_(field_trials),
+      : field_trials_(field_trials),
         frame_source_(std::make_unique<FakeFrameSource>(
             kWidth,
             kHeight,
             VideoFormat::FpsToInterval(kDefaultFps) /
                 rtc::kNumNanosecsPerMicrosec)),
-        adapter_(source_resolution_alignment),
+        adapter_(source_resolution_alignment, field_trials_),
         adapter_wrapper_(std::make_unique<VideoAdapterWrapper>(&adapter_)),
         use_new_format_request_(GetParam()) {}
 
@@ -136,7 +136,7 @@ class VideoAdapterTest : public ::testing::Test,
                     cricket::FOURCC_I420));
   }
 
-  webrtc::test::ScopedFieldTrials override_field_trials_;
+  webrtc::test::ScopedKeyValueConfig field_trials_;
   const std::unique_ptr<FakeFrameSource> frame_source_;
   VideoAdapter adapter_;
   int cropped_width_;
@@ -999,7 +999,8 @@ TEST_P(VideoAdapterTest, TestAdaptToMax) {
 
 // Test adjusting to 16:9 in landscape, and 9:16 in portrait.
 TEST(VideoAdapterTestMultipleOrientation, TestNormal) {
-  VideoAdapter video_adapter;
+  webrtc::test::ScopedKeyValueConfig field_trials;
+  VideoAdapter video_adapter(field_trials);
   video_adapter.OnOutputFormatRequest(std::make_pair(640, 360), 640 * 360,
                                       std::make_pair(360, 640), 360 * 640, 30);
 
@@ -1027,7 +1028,8 @@ TEST(VideoAdapterTestMultipleOrientation, TestNormal) {
 
 // Force output to be 9:16, even for landscape input.
 TEST(VideoAdapterTestMultipleOrientation, TestForcePortrait) {
-  VideoAdapter video_adapter;
+  webrtc::test::ScopedKeyValueConfig field_trials;
+  VideoAdapter video_adapter(field_trials);
   video_adapter.OnOutputFormatRequest(std::make_pair(360, 640), 640 * 360,
                                       std::make_pair(360, 640), 360 * 640, 30);
 

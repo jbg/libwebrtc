@@ -14,15 +14,20 @@
 #include "api/video/i420_buffer.h"
 #include "api/video/video_frame_buffer.h"
 #include "api/video/video_rotation.h"
+#include "api/webrtc_key_value_config.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/time_utils.h"
 
 namespace rtc {
 
-AdaptedVideoTrackSource::AdaptedVideoTrackSource() = default;
+AdaptedVideoTrackSource::AdaptedVideoTrackSource(
+    const webrtc::WebRtcKeyValueConfig& field_trials)
+    : video_adapter_(field_trials) {}
 
-AdaptedVideoTrackSource::AdaptedVideoTrackSource(int required_alignment)
-    : video_adapter_(required_alignment) {}
+AdaptedVideoTrackSource::AdaptedVideoTrackSource(
+    int required_alignment,
+    const webrtc::WebRtcKeyValueConfig& field_trials)
+    : video_adapter_(required_alignment, field_trials) {}
 
 AdaptedVideoTrackSource::~AdaptedVideoTrackSource() = default;
 

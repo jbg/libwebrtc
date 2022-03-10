@@ -24,6 +24,7 @@
 #include "rtc_base/task_queue.h"
 #include "rtc_base/time_utils.h"
 #include "system_wrappers/include/clock.h"
+#include "test/scoped_key_value_config.h"
 #include "test/testsupport/file_utils.h"
 
 namespace webrtc {
@@ -47,8 +48,10 @@ FrameGeneratorCapturer::FrameGeneratorCapturer(
     Clock* clock,
     std::unique_ptr<FrameGeneratorInterface> frame_generator,
     int target_fps,
-    TaskQueueFactory& task_queue_factory)
-    : clock_(clock),
+    TaskQueueFactory& task_queue_factory,
+    std::unique_ptr<webrtc::WebRtcKeyValueConfig> field_trials)
+    : TestVideoCapturer(*field_trials.get()),
+      clock_(clock),
       sending_(true),
       sink_wants_observer_(nullptr),
       frame_generator_(std::move(frame_generator)),
@@ -61,6 +64,18 @@ FrameGeneratorCapturer::FrameGeneratorCapturer(
   RTC_DCHECK(frame_generator_);
   RTC_DCHECK_GT(target_fps, 0);
 }
+
+FrameGeneratorCapturer::FrameGeneratorCapturer(
+    Clock* clock,
+    std::unique_ptr<FrameGeneratorInterface> frame_generator,
+    int target_fps,
+    TaskQueueFactory& task_queue_factory)
+    : FrameGeneratorCapturer(
+          clock,
+          std::move(frame_generator),
+          target_fps,
+          task_queue_factory,
+          std::make_unique<webrtc::test::ScopedKeyValueConfig>()) {}
 
 FrameGeneratorCapturer::~FrameGeneratorCapturer() {
   Stop();

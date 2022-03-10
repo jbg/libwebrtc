@@ -503,7 +503,9 @@ class CroppingVideoStreamFactory
 class AdaptingFrameForwarder : public test::FrameForwarder {
  public:
   explicit AdaptingFrameForwarder(TimeController* time_controller)
-      : time_controller_(time_controller), adaptation_enabled_(false) {}
+      : time_controller_(time_controller),
+        adapter_(field_trials_),
+        adaptation_enabled_(false) {}
   ~AdaptingFrameForwarder() override {}
 
   void set_adaptation_enabled(bool enabled) {
@@ -598,6 +600,7 @@ class AdaptingFrameForwarder : public test::FrameForwarder {
     test::FrameForwarder::AddOrUpdateSinkLocked(sink, wants);
   }
 
+  webrtc::test::ScopedKeyValueConfig field_trials_;
   TimeController* const time_controller_;
   cricket::VideoAdapter adapter_;
   bool adaptation_enabled_ RTC_GUARDED_BY(mutex_);

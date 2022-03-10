@@ -32,6 +32,7 @@ class TestVideoCapturer : public rtc::VideoSourceInterface<VideoFrame> {
     virtual VideoFrame Preprocess(const VideoFrame& frame) = 0;
   };
 
+  TestVideoCapturer(const webrtc::WebRtcKeyValueConfig& field_trials);
   ~TestVideoCapturer() override;
 
   void AddOrUpdateSink(rtc::VideoSinkInterface<VideoFrame>* sink,

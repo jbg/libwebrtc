@@ -157,6 +157,14 @@ class FrameGeneratorCapturer : public TestVideoCapturer {
   bool Init();
 
  private:
+  // TODO(bugs.webrtc.org/10335): Temporary constructor.
+  FrameGeneratorCapturer(
+      Clock* clock,
+      std::unique_ptr<FrameGeneratorInterface> frame_generator,
+      int target_fps,
+      TaskQueueFactory& task_queue_factory,
+      std::unique_ptr<webrtc::WebRtcKeyValueConfig> field_trials);
+
   void InsertFrame();
   static bool Run(void* obj);
   int GetCurrentConfiguredFramerate();
@@ -180,6 +188,9 @@ class FrameGeneratorCapturer : public TestVideoCapturer {
 
   Mutex stats_lock_;
   absl::optional<Resolution> source_resolution_ RTC_GUARDED_BY(&stats_lock_);
+
+  // TODO(bugs.webrtc.org/10335): Plum field trials down on stack instead!
+  std::unique_ptr<webrtc::WebRtcKeyValueConfig> field_trials;
 
   // Must be the last field, so it will be deconstructed first as tasks
   // in the TaskQueue access other fields of the instance of this class.

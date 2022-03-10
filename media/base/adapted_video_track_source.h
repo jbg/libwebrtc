@@ -34,13 +34,15 @@ namespace rtc {
 class RTC_EXPORT AdaptedVideoTrackSource
     : public webrtc::Notifier<webrtc::VideoTrackSourceInterface> {
  public:
-  AdaptedVideoTrackSource();
+  explicit AdaptedVideoTrackSource(
+      const webrtc::WebRtcKeyValueConfig& field_trials);
   ~AdaptedVideoTrackSource() override;
 
  protected:
   // Allows derived classes to initialize `video_adapter_` with a custom
   // alignment.
-  explicit AdaptedVideoTrackSource(int required_alignment);
+  AdaptedVideoTrackSource(int required_alignment,
+                          const webrtc::WebRtcKeyValueConfig& field_trials);
   // Checks the apply_rotation() flag. If the frame needs rotation, and it is a
   // plain memory frame, it is rotated. Subclasses producing native frames must
   // handle apply_rotation() themselves.

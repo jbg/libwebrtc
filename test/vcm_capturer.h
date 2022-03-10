@@ -15,6 +15,7 @@
 
 #include "api/scoped_refptr.h"
 #include "modules/video_capture/video_capture.h"
+#include "test/scoped_key_value_config.h"
 #include "test/test_video_capturer.h"
 
 namespace webrtc {
@@ -32,13 +33,15 @@ class VcmCapturer : public TestVideoCapturer,
   void OnFrame(const VideoFrame& frame) override;
 
  private:
-  VcmCapturer();
+  VcmCapturer(std::unique_ptr<webrtc::WebRtcKeyValueConfig> field_trials_);
   bool Init(size_t width,
             size_t height,
             size_t target_fps,
             size_t capture_device_index);
   void Destroy();
 
+  // TODO(bugs.webrtc.org/10335): Plum field trials down on stack instead!
+  std::unique_ptr<webrtc::WebRtcKeyValueConfig> field_trials;
   rtc::scoped_refptr<VideoCaptureModule> vcm_;
   VideoCaptureCapability capability_;
 };

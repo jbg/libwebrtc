@@ -17,6 +17,7 @@
 
 #include "absl/types/optional.h"
 #include "api/video/video_source_interface.h"
+#include "api/webrtc_key_value_config.h"
 #include "common_video/framerate_controller.h"
 #include "media/base/video_common.h"
 #include "rtc_base/synchronization/mutex.h"
@@ -31,10 +32,11 @@ namespace cricket {
 // VideoAdapter is thread safe.
 class RTC_EXPORT VideoAdapter {
  public:
-  VideoAdapter();
+  explicit VideoAdapter(const webrtc::WebRtcKeyValueConfig& field_trials);
   // The source requests output frames whose width and height are divisible
   // by `source_resolution_alignment`.
-  explicit VideoAdapter(int source_resolution_alignment);
+  VideoAdapter(int source_resolution_alignment,
+               const webrtc::WebRtcKeyValueConfig& field_trials);
   virtual ~VideoAdapter();
 
   VideoAdapter(const VideoAdapter&) = delete;

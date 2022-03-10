@@ -21,7 +21,6 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/time_utils.h"
-#include "system_wrappers/include/field_trial.h"
 
 namespace {
 
@@ -125,22 +124,24 @@ Fraction FindScale(int input_width,
 
 namespace cricket {
 
-VideoAdapter::VideoAdapter(int source_resolution_alignment)
+VideoAdapter::VideoAdapter(int source_resolution_alignment,
+                           const webrtc::WebRtcKeyValueConfig& field_trials)
     : frames_in_(0),
       frames_out_(0),
       frames_scaled_(0),
       adaption_changes_(0),
       previous_width_(0),
       previous_height_(0),
-      variable_start_scale_factor_(webrtc::field_trial::IsEnabled(
-          "WebRTC-Video-VariableStartScaleFactor")),
+      variable_start_scale_factor_(
+          field_trials.IsEnabled("WebRTC-Video-VariableStartScaleFactor")),
       source_resolution_alignment_(source_resolution_alignment),
       resolution_alignment_(source_resolution_alignment),
       resolution_request_target_pixel_count_(std::numeric_limits<int>::max()),
       resolution_request_max_pixel_count_(std::numeric_limits<int>::max()),
       max_framerate_request_(std::numeric_limits<int>::max()) {}
 
-VideoAdapter::VideoAdapter() : VideoAdapter(1) {}
+VideoAdapter::VideoAdapter(const webrtc::WebRtcKeyValueConfig& field_trials)
+    : VideoAdapter(1, field_trials) {}
 
 VideoAdapter::~VideoAdapter() {}
 

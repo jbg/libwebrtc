@@ -19,6 +19,11 @@
 
 namespace webrtc {
 namespace test {
+
+TestVideoCapturer::TestVideoCapturer(
+    const webrtc::WebRtcKeyValueConfig& field_trials)
+    : video_adapter_(field_trials) {}
+
 TestVideoCapturer::~TestVideoCapturer() = default;
 
 void TestVideoCapturer::OnOutputFormatRequest(
