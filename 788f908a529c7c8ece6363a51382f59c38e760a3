@@ -16,6 +16,47 @@
       "message": "This is not something where I currently understand what\u0027s happening, and I\u0027m pretty sure Mirko does.\n",
       "revId": "788f908a529c7c8ece6363a51382f59c38e760a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c227a787_3853322a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-10T16:22:01Z",
+      "side": 1,
+      "message": "Yes, this are the configs of our CI and Trybots. Instead of having them in another branch, hard to find, Jeremy is moving them to \"main\".\n\nWell done Jeremy!",
+      "parentUuid": "8a25b9f9_cba37376",
+      "revId": "788f908a529c7c8ece6363a51382f59c38e760a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a508cf68_27506e16",
+        "filename": "infra/config/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-10T16:22:01Z",
+      "side": 1,
+      "message": "This part can be removed now.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 75
+      },
+      "revId": "788f908a529c7c8ece6363a51382f59c38e760a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
