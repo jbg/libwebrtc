@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afc00ecb_dff08f3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-10T11:30:09Z",
+      "side": 1,
+      "message": "Following up on a remark in some conversation....\n\nThis was triggered by starting to refactor rtc_pc_base and wondering whether all\nthese include files were really needed.\n\nTL;DR: They aren\u0027t.",
+      "revId": "9ff798fc42713430487483fda82ad5ba9e9ad926",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
