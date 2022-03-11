@@ -36,6 +36,7 @@
 #include "call/video_send_stream.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "rtc_base/buffer.h"
+#include "test/scoped_key_value_config.h"
 
 namespace cricket {
 class FakeAudioSendStream final : public webrtc::AudioSendStream {
@@ -353,6 +354,18 @@ class FakeCall final : public webrtc::Call, public webrtc::PacketReceiver {
   void SetClientBitratePreferences(
       const webrtc::BitrateSettings& preferences) override {}
 
+  void AddFieldTrial(const std::string& field_trial_string) {
+    if (trials_overrides_.empty()) {
+      trials_overrides_.push_back(
+          std::make_unique<webrtc::test::ScopedKeyValueConfig>(
+              trials_, field_trial_string));
+    } else {
+      trials_overrides_.push_back(
+          std::make_unique<webrtc::test::ScopedKeyValueConfig>(
+              *trials_overrides_.back().get(), field_trial_string));
+    }
+  }
+
  private:
   webrtc::AudioSendStream* CreateAudioSendStream(
       const webrtc::AudioSendStream::Config& config) override;
@@ -432,7 +445,9 @@ class FakeCall final : public webrtc::Call, public webrtc::PacketReceiver {
 
   int num_created_send_streams_;
   int num_created_receive_streams_;
-  webrtc::FieldTrialBasedConfig trials_;
+  webrtc::test::ScopedKeyValueConfig trials_;
+  std::vector<std::unique_ptr<webrtc::test::ScopedKeyValueConfig>>
+      trials_overrides_;
 };
 
 }  // namespace cricket
