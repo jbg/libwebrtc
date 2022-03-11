@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a049a31f_d9a54bd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-03-11T10:32:53Z",
+      "side": 1,
+      "message": "Hi Kári,\nCould you please review this CL? \nIt allow users of SDK to override TLS certificate validation.\nBy default WebRTC only allow small subset of root certificates, which causes inability to connect to TURN servers via TLS with server certificate issues LetsEncrypt.\n\nThanks a lot in advance,\nYury. ",
+      "revId": "94a1200775d9769de9106b63e55634853db5b6a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
