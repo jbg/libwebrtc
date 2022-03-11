@@ -612,7 +612,7 @@ class MockableSendStatisticsProxy : public SendStatisticsProxy {
   MockableSendStatisticsProxy(Clock* clock,
                               const VideoSendStream::Config& config,
                               VideoEncoderConfig::ContentType content_type)
-      : SendStatisticsProxy(clock, config, content_type) {}
+      : SendStatisticsProxy(clock, config, content_type, field_trials_) {}
 
   VideoSendStream::Stats GetStats() override {
     MutexLock lock(&lock_);
@@ -648,6 +648,7 @@ class MockableSendStatisticsProxy : public SendStatisticsProxy {
       on_frame_dropped_(reason);
   }
 
+  test::ScopedKeyValueConfig field_trials_;
   mutable Mutex lock_;
   absl::optional<VideoSendStream::Stats> mock_stats_ RTC_GUARDED_BY(lock_);
   std::function<void(DropReason)> on_frame_dropped_;
@@ -851,8 +852,8 @@ class VideoStreamEncoderTest : public ::testing::Test {
         "EncoderQueue", TaskQueueFactory::Priority::NORMAL);
     TaskQueueBase* encoder_queue_ptr = encoder_queue.get();
     std::unique_ptr<FrameCadenceAdapterInterface> cadence_adapter =
-        FrameCadenceAdapterInterface::Create(time_controller_.GetClock(),
-                                             encoder_queue_ptr);
+        FrameCadenceAdapterInterface::Create(
+            field_trials_, time_controller_.GetClock(), encoder_queue_ptr);
     video_stream_encoder_ = std::make_unique<VideoStreamEncoderUnderTest>(
         &time_controller_, std::move(cadence_adapter), std::move(encoder_queue),
         stats_proxy_.get(), video_send_config_.encoder_settings,
@@ -9200,7 +9201,8 @@ TEST(VideoStreamEncoderFrameCadenceTest,
   test::ScopedKeyValueConfig field_trials(
       "WebRTC-ZeroHertzScreenshare/Enabled/");
   auto adapter = FrameCadenceAdapterInterface::Create(
-      factory.GetTimeController()->GetClock(), encoder_queue.get());
+      field_trials, factory.GetTimeController()->GetClock(),
+      encoder_queue.get());
   FrameCadenceAdapterInterface* adapter_ptr = adapter.get();
 
   MockVideoSourceInterface mock_source;
