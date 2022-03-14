@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23eb17d1_cb2db5e4",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-03-14T14:28:55Z",
+      "side": 0,
+      "message": "In internal test triggered an edge case that can happen here - the probing state may switch from true to false during the iteration of this while-loop. If that happens and the next send time \u003c 1ms from now, the for-loop while continue to be true but ProcessPackets() will not advance the state so we get stuck in an infinite loop.\n\nProblem is fixed by changing to \nwhile (next_send_time \u003c\u003d now + (pacing_controller_.IsProbing()\n          ? PacingController::kMaxEarlyProbeProcessing\n          : TimeDelta::Zero())) {\n          \n...though maybe we want to just change the early processing to 1ms for all cases?\nRegardless, needs a fix and a test for this case.",
+      "range": {
+        "startLine": 243,
+        "startChar": 33,
+        "endLine": 243,
+        "endChar": 53
+      },
+      "revId": "f2970c8b37c7e55d708417d14e893d479850e37e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
