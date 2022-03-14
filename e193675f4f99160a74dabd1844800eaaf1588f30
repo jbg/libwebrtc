@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5d5736e_8b3f88ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-14T09:33:04Z",
+      "side": 1,
+      "message": "The TSan issue is not related, I am opening another bug for that one.",
+      "revId": "e193675f4f99160a74dabd1844800eaaf1588f30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
