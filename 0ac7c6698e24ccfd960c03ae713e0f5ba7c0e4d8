@@ -46,6 +46,30 @@
       },
       "revId": "0ac7c6698e24ccfd960c03ae713e0f5ba7c0e4d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e40042_41d6aebb",
+        "filename": "tools_webrtc/perf/webrtc_dashboard_upload.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2022-03-14T14:04:38Z",
+      "side": 1,
+      "message": "It\u0027s not bot either. It\u0027s the highest level group which can\u0027t be selected in CPD UI at all. But it is visible in the full path (as stated in the help): `machine_group/bot/perf_id/metric/subtest`",
+      "parentUuid": "f7afcdeb_94fc7b7e",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 58
+      },
+      "revId": "0ac7c6698e24ccfd960c03ae713e0f5ba7c0e4d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
