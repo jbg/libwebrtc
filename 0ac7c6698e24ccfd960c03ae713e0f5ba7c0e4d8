@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6967b133_2218551e",
+        "filename": "tools_webrtc/perf/catapult_uploader.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2022-03-14T14:16:53Z",
+      "side": 1,
+      "message": "Lets maybe use datetime.timedelta type right away, so we don\u0027t need to convert later. It used to be an integer only because it was a script argument.",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 36
+      },
+      "revId": "0ac7c6698e24ccfd960c03ae713e0f5ba7c0e4d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ae5a6df_71c8f24f",
         "filename": "tools_webrtc/perf/webrtc_dashboard_upload.py",
         "patchSetId": 5
