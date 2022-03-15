@@ -52,6 +52,24 @@
       "parentUuid": "bff3d2f8_15a0eed1",
       "revId": "805bcee44d20769027efa1af67874d81e3247c75",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8703224b_0005a50e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-15T18:17:22Z",
+      "side": 1,
+      "message": "To be specific, on missing metadata the \"cursor\" variable will be a nullptr and checking whether it\u0027s valid, which just checks its id, will crash on accessing a nullptr.",
+      "parentUuid": "d71bfe1c_d8322de7",
+      "revId": "805bcee44d20769027efa1af67874d81e3247c75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
