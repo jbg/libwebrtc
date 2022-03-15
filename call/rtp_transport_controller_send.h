@@ -211,6 +211,9 @@ class RtpTransportControllerSend final
   RepeatingTaskHandle pacer_queue_update_task_ RTC_GUARDED_BY(task_queue_);
   RepeatingTaskHandle controller_task_ RTC_GUARDED_BY(task_queue_);
 
+  DataSize congestion_window_size_ RTC_GUARDED_BY(task_queue_);
+  bool is_congested_ RTC_GUARDED_BY(task_queue_);
+
   // Protected by internal locks.
   RateLimiter retransmission_rate_limiter_;
 
