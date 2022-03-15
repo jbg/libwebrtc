@@ -22,6 +22,7 @@
 #include "test/gmock.h"
 #include "test/gtest.h"
 #include "test/mock_audio_encoder.h"
+#include "test/scoped_key_value_config.h"
 
 namespace webrtc {
 
@@ -66,7 +67,8 @@ struct AudioEncoderFakeApi {
   static std::unique_ptr<AudioEncoder> MakeAudioEncoder(
       const Config&,
       int payload_type,
-      absl::optional<AudioCodecPairId> /*codec_pair_id*/ = absl::nullopt) {
+      absl::optional<AudioCodecPairId> /*codec_pair_id*/ = absl::nullopt,
+      const WebRtcKeyValueConfig* field_trials = nullptr) {
     auto enc = std::make_unique<testing::StrictMock<MockAudioEncoder>>();
     EXPECT_CALL(*enc, SampleRateHz())
         .WillOnce(::testing::Return(Params::CodecInfo().sample_rate_hz));
@@ -77,9 +79,11 @@ struct AudioEncoderFakeApi {
 }  // namespace
 
 TEST(AudioEncoderFactoryTemplateTest, NoEncoderTypes) {
+  test::ScopedKeyValueConfig field_trials;
   rtc::scoped_refptr<AudioEncoderFactory> factory(
       rtc::make_ref_counted<
-          audio_encoder_factory_template_impl::AudioEncoderFactoryT<>>());
+          audio_encoder_factory_template_impl::AudioEncoderFactoryT<>>(
+          &field_trials));
   EXPECT_THAT(factory->GetSupportedEncoders(), ::testing::IsEmpty());
   EXPECT_EQ(absl::nullopt, factory->QueryAudioEncoder({"foo", 8000, 1}));
   EXPECT_EQ(nullptr,
@@ -87,7 +91,9 @@ TEST(AudioEncoderFactoryTemplateTest, NoEncoderTypes) {
 }
 
 TEST(AudioEncoderFactoryTemplateTest, OneEncoderType) {
-  auto factory = CreateAudioEncoderFactory<AudioEncoderFakeApi<BogusParams>>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioEncoderFactory<AudioEncoderFakeApi<BogusParams>>(
+      &field_trials);
   EXPECT_THAT(factory->GetSupportedEncoders(),
               ::testing::ElementsAre(
                   AudioCodecSpec{{"bogus", 8000, 1}, {8000, 1, 12345}}));
@@ -102,8 +108,10 @@ TEST(AudioEncoderFactoryTemplateTest, OneEncoderType) {
 }
 
 TEST(AudioEncoderFactoryTemplateTest, TwoEncoderTypes) {
-  auto factory = CreateAudioEncoderFactory<AudioEncoderFakeApi<BogusParams>,
-                                           AudioEncoderFakeApi<ShamParams>>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory =
+      CreateAudioEncoderFactory<AudioEncoderFakeApi<BogusParams>,
+                                AudioEncoderFakeApi<ShamParams>>(&field_trials);
   EXPECT_THAT(factory->GetSupportedEncoders(),
               ::testing::ElementsAre(
                   AudioCodecSpec{{"bogus", 8000, 1}, {8000, 1, 12345}},
@@ -129,7 +137,8 @@ TEST(AudioEncoderFactoryTemplateTest, TwoEncoderTypes) {
 }
 
 TEST(AudioEncoderFactoryTemplateTest, G711) {
-  auto factory = CreateAudioEncoderFactory<AudioEncoderG711>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioEncoderFactory<AudioEncoderG711>(&field_trials);
   EXPECT_THAT(factory->GetSupportedEncoders(),
               ::testing::ElementsAre(
                   AudioCodecSpec{{"PCMU", 8000, 1}, {8000, 1, 64000}},
@@ -148,7 +157,8 @@ TEST(AudioEncoderFactoryTemplateTest, G711) {
 }
 
 TEST(AudioEncoderFactoryTemplateTest, G722) {
-  auto factory = CreateAudioEncoderFactory<AudioEncoderG722>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioEncoderFactory<AudioEncoderG722>(&field_trials);
   EXPECT_THAT(factory->GetSupportedEncoders(),
               ::testing::ElementsAre(
                   AudioCodecSpec{{"G722", 8000, 1}, {16000, 1, 64000}}));
@@ -163,7 +173,8 @@ TEST(AudioEncoderFactoryTemplateTest, G722) {
 }
 
 TEST(AudioEncoderFactoryTemplateTest, Ilbc) {
-  auto factory = CreateAudioEncoderFactory<AudioEncoderIlbc>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioEncoderFactory<AudioEncoderIlbc>(&field_trials);
   EXPECT_THAT(factory->GetSupportedEncoders(),
               ::testing::ElementsAre(
                   AudioCodecSpec{{"ILBC", 8000, 1}, {8000, 1, 13333}}));
@@ -178,7 +189,8 @@ TEST(AudioEncoderFactoryTemplateTest, Ilbc) {
 }
 
 TEST(AudioEncoderFactoryTemplateTest, IsacFix) {
-  auto factory = CreateAudioEncoderFactory<AudioEncoderIsacFix>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioEncoderFactory<AudioEncoderIsacFix>(&field_trials);
   EXPECT_THAT(factory->GetSupportedEncoders(),
               ::testing::ElementsAre(AudioCodecSpec{
                   {"ISAC", 16000, 1}, {16000, 1, 32000, 10000, 32000}}));
@@ -199,7 +211,9 @@ TEST(AudioEncoderFactoryTemplateTest, IsacFix) {
 }
 
 TEST(AudioEncoderFactoryTemplateTest, IsacFloat) {
-  auto factory = CreateAudioEncoderFactory<AudioEncoderIsacFloat>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory =
+      CreateAudioEncoderFactory<AudioEncoderIsacFloat>(&field_trials);
   EXPECT_THAT(
       factory->GetSupportedEncoders(),
       ::testing::ElementsAre(
@@ -221,7 +235,8 @@ TEST(AudioEncoderFactoryTemplateTest, IsacFloat) {
 }
 
 TEST(AudioEncoderFactoryTemplateTest, L16) {
-  auto factory = CreateAudioEncoderFactory<AudioEncoderL16>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioEncoderFactory<AudioEncoderL16>(&field_trials);
   EXPECT_THAT(
       factory->GetSupportedEncoders(),
       ::testing::ElementsAre(
@@ -242,7 +257,8 @@ TEST(AudioEncoderFactoryTemplateTest, L16) {
 }
 
 TEST(AudioEncoderFactoryTemplateTest, Opus) {
-  auto factory = CreateAudioEncoderFactory<AudioEncoderOpus>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioEncoderFactory<AudioEncoderOpus>(&field_trials);
   AudioCodecInfo info = {48000, 1, 32000, 6000, 510000};
   info.allow_comfort_noise = false;
   info.supports_network_adaption = true;

@@ -48,6 +48,7 @@
 #include "rtc_base/thread.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
+#include "test/scoped_key_value_config.h"
 
 #ifdef WEBRTC_ANDROID
 #include "pc/test/android_test_initializer.h"
@@ -221,6 +222,7 @@ class PeerConnectionEndToEndBaseTest : public sigslot::has_slots<>,
 
  protected:
   rtc::PhysicalSocketServer pss_;
+  webrtc::test::ScopedKeyValueConfig field_trials_;
   std::unique_ptr<rtc::Thread> network_thread_;
   std::unique_ptr<rtc::Thread> worker_thread_;
   rtc::scoped_refptr<PeerConnectionTestWrapper> caller_;
@@ -460,22 +462,23 @@ TEST_P(PeerConnectionEndToEndTest, CallWithCustomCodec) {
 
   std::vector<webrtc::AudioCodecPairId> encoder_id1, encoder_id2, decoder_id1,
       decoder_id2;
-  CreatePcs(rtc::make_ref_counted<IdLoggingAudioEncoderFactory>(
-                webrtc::CreateAudioEncoderFactory<
-                    AudioEncoderUnicornSparklesRainbow>(),
-                &encoder_id1),
-            rtc::make_ref_counted<IdLoggingAudioDecoderFactory>(
-                webrtc::CreateAudioDecoderFactory<
-                    AudioDecoderUnicornSparklesRainbow>(),
-                &decoder_id1),
-            rtc::make_ref_counted<IdLoggingAudioEncoderFactory>(
-                webrtc::CreateAudioEncoderFactory<
-                    AudioEncoderUnicornSparklesRainbow>(),
-                &encoder_id2),
-            rtc::make_ref_counted<IdLoggingAudioDecoderFactory>(
-                webrtc::CreateAudioDecoderFactory<
-                    AudioDecoderUnicornSparklesRainbow>(),
-                &decoder_id2));
+  CreatePcs(
+      rtc::make_ref_counted<IdLoggingAudioEncoderFactory>(
+          webrtc::CreateAudioEncoderFactory<AudioEncoderUnicornSparklesRainbow>(
+              &field_trials_),
+          &encoder_id1),
+      rtc::make_ref_counted<IdLoggingAudioDecoderFactory>(
+          webrtc::CreateAudioDecoderFactory<AudioDecoderUnicornSparklesRainbow>(
+              &field_trials_),
+          &decoder_id1),
+      rtc::make_ref_counted<IdLoggingAudioEncoderFactory>(
+          webrtc::CreateAudioEncoderFactory<AudioEncoderUnicornSparklesRainbow>(
+              &field_trials_),
+          &encoder_id2),
+      rtc::make_ref_counted<IdLoggingAudioDecoderFactory>(
+          webrtc::CreateAudioDecoderFactory<AudioDecoderUnicornSparklesRainbow>(
+              &field_trials_),
+          &decoder_id2));
   GetAndAddUserMedia();
   Negotiate();
   WaitForCallEstablished();
