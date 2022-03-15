@@ -22,6 +22,7 @@
 #include "test/gmock.h"
 #include "test/gtest.h"
 #include "test/mock_audio_decoder.h"
+#include "test/scoped_key_value_config.h"
 
 namespace webrtc {
 
@@ -77,9 +78,11 @@ struct AudioDecoderFakeApi {
 }  // namespace
 
 TEST(AudioDecoderFactoryTemplateTest, NoDecoderTypes) {
+  test::ScopedKeyValueConfig field_trials;
   rtc::scoped_refptr<AudioDecoderFactory> factory(
       rtc::make_ref_counted<
-          audio_decoder_factory_template_impl::AudioDecoderFactoryT<>>());
+          audio_decoder_factory_template_impl::AudioDecoderFactoryT<>>(
+          &field_trials));
   EXPECT_THAT(factory->GetSupportedDecoders(), ::testing::IsEmpty());
   EXPECT_FALSE(factory->IsSupportedDecoder({"foo", 8000, 1}));
   EXPECT_EQ(nullptr,
@@ -87,7 +90,9 @@ TEST(AudioDecoderFactoryTemplateTest, NoDecoderTypes) {
 }
 
 TEST(AudioDecoderFactoryTemplateTest, OneDecoderType) {
-  auto factory = CreateAudioDecoderFactory<AudioDecoderFakeApi<BogusParams>>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioDecoderFactory<AudioDecoderFakeApi<BogusParams>>(
+      &field_trials);
   EXPECT_THAT(factory->GetSupportedDecoders(),
               ::testing::ElementsAre(
                   AudioCodecSpec{{"bogus", 8000, 1}, {8000, 1, 12345}}));
@@ -101,8 +106,10 @@ TEST(AudioDecoderFactoryTemplateTest, OneDecoderType) {
 }
 
 TEST(AudioDecoderFactoryTemplateTest, TwoDecoderTypes) {
-  auto factory = CreateAudioDecoderFactory<AudioDecoderFakeApi<BogusParams>,
-                                           AudioDecoderFakeApi<ShamParams>>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory =
+      CreateAudioDecoderFactory<AudioDecoderFakeApi<BogusParams>,
+                                AudioDecoderFakeApi<ShamParams>>(&field_trials);
   EXPECT_THAT(factory->GetSupportedDecoders(),
               ::testing::ElementsAre(
                   AudioCodecSpec{{"bogus", 8000, 1}, {8000, 1, 12345}},
@@ -126,7 +133,8 @@ TEST(AudioDecoderFactoryTemplateTest, TwoDecoderTypes) {
 }
 
 TEST(AudioDecoderFactoryTemplateTest, G711) {
-  auto factory = CreateAudioDecoderFactory<AudioDecoderG711>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioDecoderFactory<AudioDecoderG711>(&field_trials);
   EXPECT_THAT(factory->GetSupportedDecoders(),
               ::testing::ElementsAre(
                   AudioCodecSpec{{"PCMU", 8000, 1}, {8000, 1, 64000}},
@@ -145,7 +153,8 @@ TEST(AudioDecoderFactoryTemplateTest, G711) {
 }
 
 TEST(AudioDecoderFactoryTemplateTest, G722) {
-  auto factory = CreateAudioDecoderFactory<AudioDecoderG722>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioDecoderFactory<AudioDecoderG722>(&field_trials);
   EXPECT_THAT(factory->GetSupportedDecoders(),
               ::testing::ElementsAre(
                   AudioCodecSpec{{"G722", 8000, 1}, {16000, 1, 64000}}));
@@ -166,7 +175,8 @@ TEST(AudioDecoderFactoryTemplateTest, G722) {
 }
 
 TEST(AudioDecoderFactoryTemplateTest, Ilbc) {
-  auto factory = CreateAudioDecoderFactory<AudioDecoderIlbc>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioDecoderFactory<AudioDecoderIlbc>(&field_trials);
   EXPECT_THAT(factory->GetSupportedDecoders(),
               ::testing::ElementsAre(
                   AudioCodecSpec{{"ILBC", 8000, 1}, {8000, 1, 13300}}));
@@ -180,7 +190,8 @@ TEST(AudioDecoderFactoryTemplateTest, Ilbc) {
 }
 
 TEST(AudioDecoderFactoryTemplateTest, IsacFix) {
-  auto factory = CreateAudioDecoderFactory<AudioDecoderIsacFix>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioDecoderFactory<AudioDecoderIsacFix>(&field_trials);
   EXPECT_THAT(factory->GetSupportedDecoders(),
               ::testing::ElementsAre(AudioCodecSpec{
                   {"ISAC", 16000, 1}, {16000, 1, 32000, 10000, 32000}}));
@@ -195,7 +206,9 @@ TEST(AudioDecoderFactoryTemplateTest, IsacFix) {
 }
 
 TEST(AudioDecoderFactoryTemplateTest, IsacFloat) {
-  auto factory = CreateAudioDecoderFactory<AudioDecoderIsacFloat>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory =
+      CreateAudioDecoderFactory<AudioDecoderIsacFloat>(&field_trials);
   EXPECT_THAT(
       factory->GetSupportedDecoders(),
       ::testing::ElementsAre(
@@ -215,7 +228,8 @@ TEST(AudioDecoderFactoryTemplateTest, IsacFloat) {
 }
 
 TEST(AudioDecoderFactoryTemplateTest, L16) {
-  auto factory = CreateAudioDecoderFactory<AudioDecoderL16>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioDecoderFactory<AudioDecoderL16>(&field_trials);
   EXPECT_THAT(
       factory->GetSupportedDecoders(),
       ::testing::ElementsAre(
@@ -236,7 +250,8 @@ TEST(AudioDecoderFactoryTemplateTest, L16) {
 }
 
 TEST(AudioDecoderFactoryTemplateTest, Opus) {
-  auto factory = CreateAudioDecoderFactory<AudioDecoderOpus>();
+  test::ScopedKeyValueConfig field_trials;
+  auto factory = CreateAudioDecoderFactory<AudioDecoderOpus>(&field_trials);
   AudioCodecInfo opus_info{48000, 1, 64000, 6000, 510000};
   opus_info.allow_comfort_noise = false;
   opus_info.supports_network_adaption = true;
