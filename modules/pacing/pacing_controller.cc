@@ -131,8 +131,7 @@ PacingController::PacingController(Clock* clock,
       last_send_time_(last_process_time_),
       packet_queue_(last_process_time_, field_trials_),
       packet_counter_(0),
-      congestion_window_size_(DataSize::PlusInfinity()),
-      outstanding_data_(DataSize::Zero()),
+      congested_(false),
       queue_time_limit(kMaxExpectedQueueLength),
       account_for_audio_(false),
       include_overhead_(false) {
@@ -171,29 +170,11 @@ bool PacingController::IsPaused() const {
   return paused_;
 }
 
-void PacingController::SetCongestionWindow(DataSize congestion_window_size) {
-  const bool was_congested = Congested();
-  congestion_window_size_ = congestion_window_size;
-  if (was_congested && !Congested()) {
-    TimeDelta elapsed_time = UpdateTimeAndGetElapsed(CurrentTime());
-    UpdateBudgetWithElapsedTime(elapsed_time);
+void PacingController::SetCongested(bool congested) {
+  if (congested_ && !congested) {
+    UpdateBudgetWithElapsedTime(UpdateTimeAndGetElapsed(CurrentTime()));
   }
-}
-
-void PacingController::UpdateOutstandingData(DataSize outstanding_data) {
-  const bool was_congested = Congested();
-  outstanding_data_ = outstanding_data;
-  if (was_congested && !Congested()) {
-    TimeDelta elapsed_time = UpdateTimeAndGetElapsed(CurrentTime());
-    UpdateBudgetWithElapsedTime(elapsed_time);
-  }
-}
-
-bool PacingController::Congested() const {
-  if (congestion_window_size_.IsFinite()) {
-    return outstanding_data_ >= congestion_window_size_;
-  }
-  return false;
+  congested_ = congested;
 }
 
 bool PacingController::IsProbing() const {
@@ -329,7 +310,7 @@ TimeDelta PacingController::UpdateTimeAndGetElapsed(Timestamp now) {
 }
 
 bool PacingController::ShouldSendKeepalive(Timestamp now) const {
-  if (send_padding_if_silent_ || paused_ || Congested() ||
+  if (send_padding_if_silent_ || paused_ || congested_ ||
       packet_counter_ == 0) {
     // We send a padding packet every 500 ms to ensure we won't get stuck in
     // congested state due to no feedback being received.
@@ -375,7 +356,7 @@ Timestamp PacingController::NextSendTime() const {
     }
   }
 
-  if (Congested() || packet_counter_ == 0) {
+  if (congested_ || packet_counter_ == 0) {
     // We need to at least send keep-alive packets with some interval.
     return last_send_time_ + kCongestedPacketInterval;
   }
@@ -625,7 +606,7 @@ DataSize PacingController::PaddingToAdd(DataSize recommended_probe_size,
     return DataSize::Zero();
   }
 
-  if (Congested()) {
+  if (congested_) {
     // Don't add padding if congested, even if requested for probing.
     return DataSize::Zero();
   }
@@ -667,7 +648,7 @@ std::unique_ptr<RtpPacketToSend> PacingController::GetPendingPacket(
       !pace_audio_ && packet_queue_.LeadingAudioPacketEnqueueTime().has_value();
   bool is_probe = pacing_info.probe_cluster_id != PacedPacketInfo::kNotAProbe;
   if (!unpaced_audio_packet && !is_probe) {
-    if (Congested()) {
+    if (congested_) {
       // Don't send anything if congested.
       return nullptr;
     }
@@ -730,7 +711,6 @@ void PacingController::UpdateBudgetWithElapsedTime(TimeDelta delta) {
 }
 
 void PacingController::UpdateBudgetWithSentData(DataSize size) {
-  outstanding_data_ += size;
   if (mode_ == ProcessMode::kPeriodic) {
     media_budget_.UseBudget(size.bytes());
     padding_budget_.UseBudget(size.bytes());
