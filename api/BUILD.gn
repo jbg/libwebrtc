@@ -231,6 +231,19 @@ rtc_library("libjingle_peerconnection_api") {
   ]
 }
 
+rtc_source_set("ice_transport_interface") {
+  visibility = [ "*" ]
+  sources = [ "ice_transport_interface.h" ]
+  deps = [
+    ":async_dns_resolver",
+    ":packet_socket_factory",
+    ":rtc_error",
+    ":scoped_refptr",
+    "../rtc_base:refcount",
+    "rtc_event_log",
+  ]
+}
+
 rtc_source_set("frame_transformer_interface") {
   visibility = [ "*" ]
   sources = [ "frame_transformer_interface.h" ]
