@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8830369_d1cc72af",
+        "filename": "p2p/base/default_ice_transport_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-15T15:13:47Z",
+      "side": 1,
+      "message": "I know this is safe because it goes down in the call stack and then it is used and not stored but this looks error prone (taking an address of a stack allocated object).\n\nFor hta@: It might be for another CL/bug, but can\u0027t we make the factory move only and just move it down and define null factories?",
+      "range": {
+        "startLine": 47,
+        "startChar": 34,
+        "endLine": 47,
+        "endChar": 35
+      },
+      "revId": "ce519e4c44e7b0b2f3345a89a046e5b0bc3dbc71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
