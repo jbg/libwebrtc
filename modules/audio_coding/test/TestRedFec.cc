@@ -36,16 +36,18 @@
 namespace webrtc {
 
 TestRedFec::TestRedFec()
-    : encoder_factory_(CreateAudioEncoderFactory<AudioEncoderG711,
-                                                 AudioEncoderG722,
-                                                 AudioEncoderIsacFloat,
-                                                 AudioEncoderL16,
-                                                 AudioEncoderOpus>()),
-      decoder_factory_(CreateAudioDecoderFactory<AudioDecoderG711,
-                                                 AudioDecoderG722,
-                                                 AudioDecoderIsacFloat,
-                                                 AudioDecoderL16,
-                                                 AudioDecoderOpus>()),
+    : encoder_factory_(
+          CreateAudioEncoderFactory<AudioEncoderG711,
+                                    AudioEncoderG722,
+                                    AudioEncoderIsacFloat,
+                                    AudioEncoderL16,
+                                    AudioEncoderOpus>(&field_trials_)),
+      decoder_factory_(
+          CreateAudioDecoderFactory<AudioDecoderG711,
+                                    AudioDecoderG722,
+                                    AudioDecoderIsacFloat,
+                                    AudioDecoderL16,
+                                    AudioDecoderOpus>(&field_trials_)),
       _acmA(AudioCodingModule::Create(
           AudioCodingModule::Config(decoder_factory_))),
       _acmB(AudioCodingModule::Create(

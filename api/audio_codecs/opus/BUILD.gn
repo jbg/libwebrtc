@@ -46,6 +46,7 @@ rtc_library("audio_encoder_opus") {
   deps = [
     ":audio_encoder_opus_config",
     "..:audio_codecs_api",
+    "../../../api:webrtc_key_value_config",
     "../../../modules/audio_coding:webrtc_opus",
     "../../../rtc_base:rtc_base_approved",
     "../../../rtc_base/system:rtc_export",
@@ -65,6 +66,7 @@ rtc_library("audio_decoder_opus") {
   ]
   deps = [
     "..:audio_codecs_api",
+    "../../../api:webrtc_key_value_config",
     "../../../modules/audio_coding:webrtc_opus",
     "../../../rtc_base:rtc_base_approved",
     "../../../rtc_base/system:rtc_export",
@@ -82,6 +84,7 @@ rtc_library("audio_encoder_multiopus") {
   sources = [ "audio_encoder_multi_channel_opus.cc" ]
   deps = [
     "..:audio_codecs_api",
+    "../../../api:webrtc_key_value_config",
     "../../../modules/audio_coding:webrtc_multiopus",
     "../../../rtc_base:rtc_base_approved",
     "../../../rtc_base/system:rtc_export",
@@ -105,6 +108,7 @@ rtc_library("audio_decoder_multiopus") {
     "../../../rtc_base/system:rtc_export",
   ]
   absl_deps = [
+    "../../../api:webrtc_key_value_config",
     "//third_party/abseil-cpp/absl/memory",
     "//third_party/abseil-cpp/absl/strings",
     "//third_party/abseil-cpp/absl/types:optional",

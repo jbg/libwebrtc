@@ -18,6 +18,7 @@
 #include "api/audio_codecs/audio_codec_pair_id.h"
 #include "api/audio_codecs/audio_encoder.h"
 #include "api/audio_codecs/audio_format.h"
+#include "api/webrtc_key_value_config.h"
 #include "rtc_base/ref_count.h"
 
 namespace webrtc {

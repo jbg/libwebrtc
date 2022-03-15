@@ -18,6 +18,7 @@
 #include "api/rtc_event_log/rtc_event_log_factory.h"
 #include "api/stats/rtcstats_objects.h"
 #include "api/task_queue/default_task_queue_factory.h"
+#include "api/transport/field_trial_based_config.h"
 #include "api/video_codecs/builtin_video_decoder_factory.h"
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "media/engine/webrtc_media_engine.h"
@@ -27,15 +28,16 @@
 namespace webrtc {
 
 cricket::MediaEngineDependencies CreateSomeMediaDeps(
-    TaskQueueFactory* task_queue_factory) {
+    TaskQueueFactory* task_queue_factory,
+    const WebRtcKeyValueConfig* field_trials) {
   cricket::MediaEngineDependencies media_deps;
   media_deps.task_queue_factory = task_queue_factory;
   media_deps.adm = AudioDeviceModule::CreateForTest(
       AudioDeviceModule::kDummyAudio, task_queue_factory);
   media_deps.audio_encoder_factory =
-      webrtc::CreateAudioEncoderFactory<webrtc::AudioEncoderOpus>();
+      webrtc::CreateAudioEncoderFactory<webrtc::AudioEncoderOpus>(field_trials);
   media_deps.audio_decoder_factory =
-      webrtc::CreateAudioDecoderFactory<webrtc::AudioDecoderOpus>();
+      webrtc::CreateAudioDecoderFactory<webrtc::AudioDecoderOpus>(field_trials);
   media_deps.video_encoder_factory = CreateBuiltinVideoEncoderFactory();
   media_deps.video_decoder_factory = webrtc::CreateBuiltinVideoDecoderFactory();
   media_deps.audio_processing = webrtc::AudioProcessingBuilder().Create();
@@ -51,7 +53,9 @@ webrtc::PeerConnectionFactoryDependencies CreateSomePcfDeps() {
   pcf_deps.call_factory = webrtc::CreateCallFactory();
   pcf_deps.event_log_factory = std::make_unique<webrtc::RtcEventLogFactory>(
       pcf_deps.task_queue_factory.get());
-  auto media_deps = CreateSomeMediaDeps(pcf_deps.task_queue_factory.get());
+  pcf_deps.trials = std::make_unique<webrtc::FieldTrialBasedConfig>();
+  auto media_deps = CreateSomeMediaDeps(pcf_deps.task_queue_factory.get(),
+                                        pcf_deps.trials.get());
   pcf_deps.media_engine = cricket::CreateMediaEngine(std::move(media_deps));
   return pcf_deps;
 }
@@ -72,8 +76,10 @@ void TestCase1ModularFactory() {
 }
 
 void TestCase2RegularFactory() {
+  auto field_trials = std::make_unique<webrtc::FieldTrialBasedConfig>();
   auto task_queue_factory = CreateDefaultTaskQueueFactory();
-  auto media_deps = CreateSomeMediaDeps(task_queue_factory.get());
+  auto media_deps =
+      CreateSomeMediaDeps(task_queue_factory.get(), field_trials.get());
 
   auto peer_connection_factory = webrtc::CreatePeerConnectionFactory(
       rtc::Thread::Current(), rtc::Thread::Current(), rtc::Thread::Current(),
