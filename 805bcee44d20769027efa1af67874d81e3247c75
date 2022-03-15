@@ -34,6 +34,24 @@
       "parentUuid": "745af299_d8b8145c",
       "revId": "805bcee44d20769027efa1af67874d81e3247c75",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d71bfe1c_d8322de7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-15T18:14:30Z",
+      "side": 1,
+      "message": "This fixes a potential crash in case the server doesn\u0027t send cursor metadata. Fortunately none of KDE and GNOME doesn\u0027t seem to forget sending them, but if there is a server not doing this or a server not supporting cursor at all, we will crash the browser on it.",
+      "parentUuid": "bff3d2f8_15a0eed1",
+      "revId": "805bcee44d20769027efa1af67874d81e3247c75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
