@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d266ea3_06f5fab2",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-03-16T12:08:37Z",
+      "side": 1,
+      "message": "nit: Some duplicate logic here, should we have a private UpdateCongestedState()?",
+      "revId": "e0d14c96947386be071a170e05dd131786cc436f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d517a2de_ee745ecc",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-03-16T12:08:37Z",
+      "side": 1,
+      "message": "The UpdateOutstandingData path would sometimes skip the PostTask (checking IsCurrent), is this no longer applicable or should SetCongested have that same optimization?",
+      "revId": "e0d14c96947386be071a170e05dd131786cc436f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
