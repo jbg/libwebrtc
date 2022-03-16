@@ -36,6 +36,7 @@
 #include "test/gtest.h"
 #include "test/mock_audio_encoder.h"
 #include "test/mock_audio_encoder_factory.h"
+#include "test/scoped_key_value_config.h"
 
 namespace webrtc {
 namespace test {
@@ -196,7 +197,8 @@ struct ConfigHelper {
             Clock::GetRealTimeClock(), stream_config_, audio_state_,
             task_queue_factory_.get(), &rtp_transport_, &bitrate_allocator_,
             &event_log_, absl::nullopt,
-            std::unique_ptr<voe::ChannelSendInterface>(channel_send_)));
+            std::unique_ptr<voe::ChannelSendInterface>(channel_send_),
+            field_trials_));
   }
 
   AudioSendStream::Config& config() { return stream_config_; }
@@ -323,6 +325,7 @@ struct ConfigHelper {
 
  private:
   SimulatedClock clock_;
+  test::ScopedKeyValueConfig field_trials_;
   std::unique_ptr<TaskQueueFactory> task_queue_factory_;
   rtc::scoped_refptr<AudioState> audio_state_;
   AudioSendStream::Config stream_config_;
