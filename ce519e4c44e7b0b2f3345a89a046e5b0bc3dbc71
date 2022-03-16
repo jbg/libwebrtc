@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f841dc5_86b6f3ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-16T08:14:22Z",
+      "side": 1,
+      "message": "Making the .h file in api/ part of 2 targets seems like a no-no; the rest are nits.\n\n(I do miss Blaze\u0027s \"headers can be forwarded\" construct....)",
+      "revId": "ce519e4c44e7b0b2f3345a89a046e5b0bc3dbc71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "258e949d_4f881af4",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-16T08:14:22Z",
+      "side": 1,
+      "message": "If you want to take this file out of the libjingle_peerconnection_api target (something I\u0027m all in favor of as a general principle), you need to also remove it from there, otherwise we violate the \"one file should only be in one target\" rule. This may cause ripple effects on places that depend on being able to #include this file.",
+      "revId": "ce519e4c44e7b0b2f3345a89a046e5b0bc3dbc71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8830369_d1cc72af",
@@ -44,6 +78,40 @@
         "endLine": 47,
         "endChar": 35
       },
+      "revId": "ce519e4c44e7b0b2f3345a89a046e5b0bc3dbc71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ba794c_51cce300",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-16T08:14:22Z",
+      "side": 1,
+      "message": "Could we push this one level further and make a constructor that takes the init parameter?",
+      "revId": "ce519e4c44e7b0b2f3345a89a046e5b0bc3dbc71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77fffaf4_2e56bb4b",
+        "filename": "p2p/base/p2p_transport_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-16T08:14:22Z",
+      "side": 1,
+      "message": "can we mark this method [[deprecated(\"use init\")]], or is that a too large change for this CL?\n\nIf too large, add a \"TODO: deprecate and remove\" to it.",
       "revId": "ce519e4c44e7b0b2f3345a89a046e5b0bc3dbc71",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
