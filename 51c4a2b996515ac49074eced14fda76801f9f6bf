@@ -50,6 +50,23 @@
       "message": "thanks!",
       "revId": "51c4a2b996515ac49074eced14fda76801f9f6bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c75efe_e76d9135",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-16T08:29:09Z",
+      "side": 1,
+      "message": "I think this is minimal now (just making sure all the de/encoders pass the field_trial argument). I guess testing is going to happen in the CLs that actually use it.\n",
+      "revId": "51c4a2b996515ac49074eced14fda76801f9f6bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
