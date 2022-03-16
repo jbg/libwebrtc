@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2832c5f4_2cc3029f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-16T11:18:09Z",
+      "side": 1,
+      "message": "Looks to me like a straightforward replacement of lots-of-parameters with an init struct (that already exists). LGTM.\n",
+      "revId": "78149c4285347b64b94d99849e5dc0d8b1a697c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "029d20fd_4c613351",
+        "filename": "p2p/base/p2p_transport_channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-16T11:18:09Z",
+      "side": 1,
+      "message": "Nit: don\u0027t write comments that refer to the time it was added. In a year, this is old :-)\n\nSuggest not adding a comment here (it\u0027s obvious what it does), and adding comments to the other factory methods saying \"this will be depreated and removed\".",
+      "revId": "78149c4285347b64b94d99849e5dc0d8b1a697c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
