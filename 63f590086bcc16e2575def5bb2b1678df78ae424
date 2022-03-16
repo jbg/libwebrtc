@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb0bc0a5_fe79a4de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-16T07:56:26Z",
+      "side": 1,
+      "message": "LGTM (% a brief doc on the new template factory, just to show quickly how to use it).",
+      "revId": "63f590086bcc16e2575def5bb2b1678df78ae424",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe4383a_13f6a3a0",
+        "filename": "api/video_codecs/video_encoder_factory_template.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-16T07:56:26Z",
+      "side": 1,
+      "message": "Can you also add a small doc string on top to show how it is supposed to be used?",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "63f590086bcc16e2575def5bb2b1678df78ae424",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
