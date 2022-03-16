@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2612c562_4ce51326",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-03-16T13:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d266ea3_06f5fab2",
+      "revId": "e0d14c96947386be071a170e05dd131786cc436f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d517a2de_ee745ecc",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-03-16T12:08:37Z",
       "side": 1,
       "message": "The UpdateOutstandingData path would sometimes skip the PostTask (checking IsCurrent), is this no longer applicable or should SetCongested have that same optimization?",
+      "revId": "e0d14c96947386be071a170e05dd131786cc436f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "253b93a6_bcb5e390",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-03-16T13:21:39Z",
+      "side": 1,
+      "message": "I don\u0027t think that optimization was very effective, looking at the code these calls would all be posted from the task queue backing RtpTransportControllerSend...\nI have a separate pending CL joining these two thread pools, but even then this will almost never be called now so I don\u0027t think it\u0027s worth the extra code.",
+      "parentUuid": "d517a2de_ee745ecc",
       "revId": "e0d14c96947386be071a170e05dd131786cc436f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
