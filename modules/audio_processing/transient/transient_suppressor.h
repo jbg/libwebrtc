@@ -39,9 +39,9 @@ class TransientSuppressor {
 
   virtual ~TransientSuppressor() {}
 
-  virtual int Initialize(int sample_rate_hz,
-                         int detector_rate_hz,
-                         int num_channels) = 0;
+  virtual void Initialize(int sample_rate_hz,
+                          int detector_rate_hz,
+                          int num_channels) = 0;
 
   // Processes a `data` chunk, and returns it with keystrokes suppressed from
   // it. The float format is assumed to be int16 ranged. If there are more than
@@ -59,16 +59,15 @@ class TransientSuppressor {
   // of audio. If voice information is not available, `voice_probability` must
   // always be set to 1.
   // `key_pressed` determines if a key was pressed on this audio chunk.
-  // Returns 0 on success and -1 otherwise.
-  virtual int Suppress(float* data,
-                       size_t data_length,
-                       int num_channels,
-                       const float* detection_data,
-                       size_t detection_length,
-                       const float* reference_data,
-                       size_t reference_length,
-                       float voice_probability,
-                       bool key_pressed) = 0;
+  virtual void Suppress(float* data,
+                        size_t data_length,
+                        int num_channels,
+                        const float* detection_data,
+                        size_t detection_length,
+                        const float* reference_data,
+                        size_t reference_length,
+                        float voice_probability,
+                        bool key_pressed) = 0;
 };
 
 }  // namespace webrtc
