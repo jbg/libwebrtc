@@ -86,6 +86,7 @@ rtc_library("rtc_p2p") {
   deps = [
     "../api:array_view",
     "../api:async_dns_resolver",
+    "../api:ice_transport_interface",
     "../api:libjingle_peerconnection_api",
     "../api:packet_socket_factory",
     "../api:rtc_error",
@@ -144,6 +145,7 @@ if (rtc_include_tests) {
     sources = [ "base/fake_ice_transport.h" ]
     deps = [
       ":rtc_p2p",
+      "../api:ice_transport_interface",
       "../api:libjingle_peerconnection_api",
       "../rtc_base",
       "../rtc_base:rtc_base_approved",
