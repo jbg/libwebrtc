@@ -16,6 +16,23 @@
       "message": "Still LGTM :)",
       "revId": "3c162969c1cc5b1767da1d6ab4961976f86ec1c4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba96e58e_e0233b3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-03-16T14:39:44Z",
+      "side": 1,
+      "message": "Thanks Alessio!",
+      "revId": "3c162969c1cc5b1767da1d6ab4961976f86ec1c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
