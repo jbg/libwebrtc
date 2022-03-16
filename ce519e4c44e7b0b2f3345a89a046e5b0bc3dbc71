@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6cfcb81_87741398",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-16T09:32:10Z",
+      "side": 1,
+      "message": "Comment removed by: Mirko Bonadei; Reason:  ",
+      "parentUuid": "258e949d_4f881af4",
+      "revId": "ce519e4c44e7b0b2f3345a89a046e5b0bc3dbc71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8830369_d1cc72af",
@@ -99,6 +117,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b197fa4c_f26f5ae1",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-16T09:32:10Z",
+      "side": 1,
+      "message": "hmm...it is sort of nice to have a factory method,\neasier to write the if-statements...i think...",
+      "parentUuid": "f0ba794c_51cce300",
+      "revId": "ce519e4c44e7b0b2f3345a89a046e5b0bc3dbc71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77fffaf4_2e56bb4b",
@@ -112,6 +148,24 @@
       "writtenOn": "2022-03-16T08:14:22Z",
       "side": 1,
       "message": "can we mark this method [[deprecated(\"use init\")]], or is that a too large change for this CL?\n\nIf too large, add a \"TODO: deprecate and remove\" to it.",
+      "revId": "ce519e4c44e7b0b2f3345a89a046e5b0bc3dbc71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27bfb00f_94d0b452",
+        "filename": "p2p/base/p2p_transport_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-16T09:32:10Z",
+      "side": 1,
+      "message": "Comment removed by: Mirko Bonadei; Reason:  ",
+      "parentUuid": "77fffaf4_2e56bb4b",
       "revId": "ce519e4c44e7b0b2f3345a89a046e5b0bc3dbc71",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
