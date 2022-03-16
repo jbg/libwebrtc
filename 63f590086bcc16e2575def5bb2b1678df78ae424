@@ -35,6 +35,46 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce497a94_d18f28d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-03-16T10:32:31Z",
+      "side": 1,
+      "message": "lgtm % comments",
+      "revId": "63f590086bcc16e2575def5bb2b1678df78ae424",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "733f5669_9aba2f0a",
+        "filename": "api/video_codecs/test/video_encoder_factory_template_tests.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-03-16T10:32:31Z",
+      "side": 1,
+      "message": "I think profile 2 might not always be available? Not(IsEmpty()) might be enough here - or are we aiming to add test coverage for SupportedVP9Codecs()?\n\nNot sure about h264 below...",
+      "range": {
+        "startLine": 128,
+        "startChar": 23,
+        "endLine": 128,
+        "endChar": 38
+      },
+      "revId": "63f590086bcc16e2575def5bb2b1678df78ae424",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfe4383a_13f6a3a0",
@@ -53,6 +93,53 @@
         "startChar": 6,
         "endLine": 24,
         "endChar": 33
+      },
+      "revId": "63f590086bcc16e2575def5bb2b1678df78ae424",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00ba3dbd_38071a50",
+        "filename": "api/video_codecs/video_encoder_factory_template.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-03-16T10:32:31Z",
+      "side": 1,
+      "message": "+1\nalso specify that the order of the template arguments matter, CreateVideoEncoder() will return a result from the first one that supports the given format",
+      "parentUuid": "bfe4383a_13f6a3a0",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "63f590086bcc16e2575def5bb2b1678df78ae424",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9fa8c39_6e710aa0",
+        "filename": "api/video_codecs/video_encoder_factory_template.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-03-16T10:32:31Z",
+      "side": 1,
+      "message": "Suggest either adding merging of duplicates (should be easy enough) or linking to a bug if this is something you truly intend to come back and fix.",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 49
       },
       "revId": "63f590086bcc16e2575def5bb2b1678df78ae424",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
