@@ -32,6 +32,7 @@
 #include "modules/pacing/rtp_packet_pacer.h"
 #include "modules/pacing/task_queue_paced_sender.h"
 #include "modules/utility/include/process_thread.h"
+#include "rtc_base/inline_task_queue_adapter.h"
 #include "rtc_base/network_route.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/task_queue.h"
@@ -217,7 +218,8 @@ class RtpTransportControllerSend final
   // TODO(perkj): `task_queue_` is supposed to replace `process_thread_`.
   // `task_queue_` is defined last to ensure all pending tasks are cancelled
   // and deleted before any other members.
-  rtc::TaskQueue task_queue_;
+  rtc::TaskQueue task_queue_holder_;
+  InlineTaskQueueAdapter task_queue_;
 
   const WebRtcKeyValueConfig& field_trials_;
 };
