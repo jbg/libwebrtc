@@ -16,6 +16,24 @@
       "message": "What about https://webrtc.googlesource.com/src/+/refs/heads/main/presubmit_test.py and https://webrtc.googlesource.com/src/+/refs/heads/main/presubmit_test_mocks.py ?",
       "revId": "53742f80b38ed49c33194cfcba4546e662664bc5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a90ba2b_d606beb2",
+        "filename": "OWNERS",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-03-17T14:11:04Z",
+      "side": 1,
+      "message": "Added .py, do you think I should list the files instead ?",
+      "parentUuid": "8378eee6_75082a5d",
+      "revId": "53742f80b38ed49c33194cfcba4546e662664bc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
