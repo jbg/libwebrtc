@@ -24,6 +24,7 @@
 #include "api/sequence_checker.h"
 #include "api/task_queue/task_queue_factory.h"
 #include "logging/rtc_event_log/encoder/rtc_event_log_encoder.h"
+#include "rtc_base/inline_task_queue_adapter.h"
 #include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/thread_annotations.h"
@@ -65,19 +66,19 @@ class RtcEventLogImpl final : public RtcEventLog {
 
   // History containing all past configuration events.
   std::deque<std::unique_ptr<RtcEvent>> config_history_
-      RTC_GUARDED_BY(*task_queue_);
+      RTC_GUARDED_BY(task_queue_);
 
   // History containing the most recent (non-configuration) events (~10s).
-  std::deque<std::unique_ptr<RtcEvent>> history_ RTC_GUARDED_BY(*task_queue_);
+  std::deque<std::unique_ptr<RtcEvent>> history_ RTC_GUARDED_BY(task_queue_);
 
   std::unique_ptr<RtcEventLogEncoder> event_encoder_
-      RTC_GUARDED_BY(*task_queue_);
-  std::unique_ptr<RtcEventLogOutput> event_output_ RTC_GUARDED_BY(*task_queue_);
+      RTC_GUARDED_BY(task_queue_);
+  std::unique_ptr<RtcEventLogOutput> event_output_ RTC_GUARDED_BY(task_queue_);
 
-  size_t num_config_events_written_ RTC_GUARDED_BY(*task_queue_);
-  absl::optional<int64_t> output_period_ms_ RTC_GUARDED_BY(*task_queue_);
-  int64_t last_output_ms_ RTC_GUARDED_BY(*task_queue_);
-  bool output_scheduled_ RTC_GUARDED_BY(*task_queue_);
+  size_t num_config_events_written_ RTC_GUARDED_BY(task_queue_);
+  absl::optional<int64_t> output_period_ms_ RTC_GUARDED_BY(task_queue_);
+  int64_t last_output_ms_ RTC_GUARDED_BY(task_queue_);
+  bool output_scheduled_ RTC_GUARDED_BY(task_queue_);
 
   RTC_NO_UNIQUE_ADDRESS SequenceChecker logging_state_checker_;
   bool logging_state_started_ RTC_GUARDED_BY(logging_state_checker_);
@@ -86,7 +87,8 @@ class RtcEventLogImpl final : public RtcEventLog {
   // log and its members outlive `task_queue_`. Keep the `task_queue_`
   // last to ensure it destructs first, or else tasks living on the queue might
   // access other members after they've been torn down.
-  std::unique_ptr<rtc::TaskQueue> task_queue_;
+  rtc::TaskQueue task_queue_holder_;
+  InlineTaskQueueAdapter task_queue_;
 };
 
 }  // namespace webrtc
