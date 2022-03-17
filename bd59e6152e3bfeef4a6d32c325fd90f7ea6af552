@@ -33,6 +33,23 @@
       "message": "make_ref_counted already works for RefCountedInterface and in such a case, adds RefCountedObject.\nWhat are the cases where changing make_ref_counted is the right thing to do and not removing the RefCountedObject inheritance from the class?",
       "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b28830ea_f91b6d39",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-17T16:29:22Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused by this. \"make ref counted\" should not be needed for classes that already carry a ref count - right?",
+      "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
