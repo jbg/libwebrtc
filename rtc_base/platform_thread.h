@@ -65,6 +65,9 @@ class PlatformThread final {
   // already exited.
   virtual ~PlatformThread();
 
+  // Returns true if the caller is executing on the PlatformThread.
+  bool IsCurrent() const;
+
   // Finalizes any allocated resources.
   // For a PlatformThread that's been spawned joinable, Finalize() suspends
   // the calling thread until the created thread exits unless the thread has

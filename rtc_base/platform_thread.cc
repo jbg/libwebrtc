@@ -114,6 +114,14 @@ PlatformThread::PlatformThread(PlatformThread&& rhs)
   rhs.handle_ = absl::nullopt;
 }
 
+bool PlatformThread::IsCurrent() const {
+#if defined(WEBRTC_WIN)
+  return handle_ == GetCurrentThread();
+#else
+  return handle_ == pthread_self();
+#endif
+}
+
 PlatformThread& PlatformThread::operator=(PlatformThread&& rhs) {
   Finalize();
   handle_ = rhs.handle_;

@@ -193,7 +193,7 @@ TaskQueueLibevent::TaskQueueLibevent(absl::string_view queue_name,
 }
 
 void TaskQueueLibevent::Delete() {
-  RTC_DCHECK(!IsCurrent());
+  RTC_DCHECK(!thread_.IsCurrent());
   struct timespec ts;
   char message = kQuit;
   while (write(wakeup_pipe_in_, &message, sizeof(message)) != sizeof(message)) {
@@ -244,7 +244,7 @@ void TaskQueueLibevent::PostTask(std::unique_ptr<QueuedTask> task) {
 
 void TaskQueueLibevent::PostDelayedTask(std::unique_ptr<QueuedTask> task,
                                         uint32_t milliseconds) {
-  if (IsCurrent()) {
+  if (thread_.IsCurrent()) {
     TimerEvent* timer = new TimerEvent(this, std::move(task));
     EventAssign(&timer->ev, event_base_, -1, 0, &TaskQueueLibevent::RunTimer,
                 timer);
