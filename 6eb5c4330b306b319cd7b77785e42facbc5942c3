@@ -16,6 +16,46 @@
       "message": "This should finish off the rtc_pc_base project.\n",
       "revId": "6eb5c4330b306b319cd7b77785e42facbc5942c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49d95a99_1f3957b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-17T16:56:04Z",
+      "side": 1,
+      "message": "It looks like there is a missing dependency detected on iOS bots.",
+      "revId": "6eb5c4330b306b319cd7b77785e42facbc5942c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2d1416c_1213802e",
+        "filename": "pc/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-17T16:56:04Z",
+      "side": 1,
+      "message": "Are you also going to remove this one in a follow-up?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "6eb5c4330b306b319cd7b77785e42facbc5942c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
