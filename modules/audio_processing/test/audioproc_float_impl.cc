@@ -218,6 +218,14 @@ ABSL_FLAG(int,
           simulated_mic_kind,
           kParameterNotSpecifiedValue,
           "Specify which microphone kind to use for microphone simulation");
+ABSL_FLAG(
+    int,
+    override_key_pressed,
+    kParameterNotSpecifiedValue,
+    "Set the key press state to false (0) or true (1) before each capture "
+    "process call. If unspecified, false is set when simulating APM on a Wav "
+    "file; otherwise, when simulating APM on an AEC dump, the event from the "
+    "dump is used.");
 ABSL_FLAG(int,
           frame_for_sending_capture_output_used_false,
           kParameterNotSpecifiedValue,
@@ -459,6 +467,8 @@ SimulationSettings CreateSettings() {
   settings.simulate_mic_gain = absl::GetFlag(FLAGS_simulate_mic_gain);
   SetSettingIfSpecified(absl::GetFlag(FLAGS_simulated_mic_kind),
                         &settings.simulated_mic_kind);
+  SetSettingIfFlagSet(absl::GetFlag(FLAGS_override_key_pressed),
+                      &settings.override_key_pressed);
   SetSettingIfSpecified(
       absl::GetFlag(FLAGS_frame_for_sending_capture_output_used_false),
       &settings.frame_for_sending_capture_output_used_false);
