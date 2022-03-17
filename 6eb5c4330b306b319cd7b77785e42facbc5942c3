@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb3f8fe3_336fcfa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-17T16:02:09Z",
+      "side": 1,
+      "message": "This should finish off the rtc_pc_base project.\n",
+      "revId": "6eb5c4330b306b319cd7b77785e42facbc5942c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
