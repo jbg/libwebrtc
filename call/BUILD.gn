@@ -205,6 +205,7 @@ rtc_library("rtp_sender") {
     "../modules/video_coding:video_codec_interface",
     "../rtc_base",
     "../rtc_base:checks",
+    "../rtc_base:inline_task_queue_adapter",
     "../rtc_base:rate_limiter",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:rtc_task_queue",
