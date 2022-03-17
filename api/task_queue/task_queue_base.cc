@@ -26,6 +26,10 @@ TaskQueueBase* TaskQueueBase::Current() {
   return current;
 }
 
+void TaskQueueBase::SetCurrent(TaskQueueBase* queue) {
+  current = queue;
+}
+
 TaskQueueBase::CurrentTaskQueueSetter::CurrentTaskQueueSetter(
     TaskQueueBase* task_queue)
     : previous_(current) {
