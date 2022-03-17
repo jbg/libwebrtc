@@ -98,6 +98,30 @@
       },
       "revId": "6eb5c4330b306b319cd7b77785e42facbc5942c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df143df7_63033844",
+        "filename": "pc/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-17T19:55:11Z",
+      "side": 1,
+      "message": "Yes, it is possible there are some linking problems but we can give it a try.\n\nThe effort to keep .h and .cc in the same build target is to make linking predictable but indeed there are ways to escape that.\n\nBut, let\u0027s try. If you are going to create a CL I am willing to help untangling the linker issues.",
+      "parentUuid": "59ec6835_0d010f1e",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "6eb5c4330b306b319cd7b77785e42facbc5942c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

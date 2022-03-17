@@ -16,6 +16,24 @@
       "message": "Found one IOS dependency at least.\n",
       "revId": "097c45a3f552aed432a7e12ea0ff60422ead7f07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e133c4d_9f8c0cce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-17T19:55:11Z",
+      "side": 1,
+      "message": "There is another one:\n\nERROR at //webrtc.gni:753:3: Dependency not allowed.\n  target(target_type, target_name) {\n    ^---------------------------------\n    The item //sdk:videosource_objc\\ncan not depend on //pc:video_track_source_proxy\n    because it is not in //pc:video_track_source_proxy\u0027s visibility list: [\n      //pc:*\n      ]",
+      "parentUuid": "de060832_27d2a0f9",
+      "revId": "097c45a3f552aed432a7e12ea0ff60422ead7f07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
