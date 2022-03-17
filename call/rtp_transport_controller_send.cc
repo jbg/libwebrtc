@@ -130,9 +130,10 @@ RtpTransportControllerSend::RtpTransportControllerSend(
       transport_overhead_bytes_per_packet_(0),
       network_available_(false),
       retransmission_rate_limiter_(clock, kRetransmitWindowSizeMs),
-      task_queue_(task_queue_factory->CreateTaskQueue(
+      task_queue_holder_(task_queue_factory->CreateTaskQueue(
           "rtp_send_controller",
           TaskQueueFactory::Priority::NORMAL)),
+      task_queue_(task_queue_holder_.Get()),
       field_trials_(trials) {
   ParseFieldTrial({&relay_bandwidth_cap_},
                   trials.Lookup("WebRTC-Bwe-NetworkRouteConstraints"));
@@ -217,7 +218,7 @@ const RtpPacketPacer* RtpTransportControllerSend::pacer() const {
 }
 
 rtc::TaskQueue* RtpTransportControllerSend::GetWorkerQueue() {
-  return &task_queue_;
+  return &task_queue_holder_;
 }
 
 PacketRouter* RtpTransportControllerSend::packet_router() {
@@ -642,7 +643,7 @@ void RtpTransportControllerSend::UpdateInitialConstraints(
 void RtpTransportControllerSend::StartProcessPeriodicTasks() {
   if (!pacer_queue_update_task_.Running()) {
     pacer_queue_update_task_ = RepeatingTaskHandle::DelayedStart(
-        task_queue_.Get(), kPacerQueueUpdateInterval, [this]() {
+        task_queue_holder_.Get(), kPacerQueueUpdateInterval, [this]() {
           RTC_DCHECK_RUN_ON(&task_queue_);
           TimeDelta expected_queue_time = pacer()->ExpectedQueueTime();
           control_handler_->SetPacerQueue(expected_queue_time);
@@ -653,7 +654,7 @@ void RtpTransportControllerSend::StartProcessPeriodicTasks() {
   controller_task_.Stop();
   if (process_interval_.IsFinite()) {
     controller_task_ = RepeatingTaskHandle::DelayedStart(
-        task_queue_.Get(), process_interval_, [this]() {
+        task_queue_holder_.Get(), process_interval_, [this]() {
           RTC_DCHECK_RUN_ON(&task_queue_);
           UpdateControllerWithTimeInterval();
           return process_interval_;
