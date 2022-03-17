@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "319496b5_6bb3c7c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-17T14:38:29Z",
+      "side": 1,
+      "message": "PTAL, extracted from https://webrtc-review.googlesource.com/c/src/+/252441, to try to get that landed in smaller pieces.",
+      "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
