@@ -18,3 +18,5 @@ per-file WATCHLISTS=*
 per-file native-api.md=mbonadei@webrtc.org
 per-file ....lua=titovartem@webrtc.org
 per-file .style.yapf=jleconte@webrtc.org
+per-file PRESUBMIT.py=jansson@webrtc.org
+per-file PRESUBMIT.py=jleconte@webrtc.org
