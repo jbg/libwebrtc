@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8da964d_e76b285d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-03-18T13:16:55Z",
+      "side": 1,
+      "message": "nice work making the API safer",
+      "revId": "19a10c4f5c13b35fcb25cbb3143f9a7fdf9f0a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e4e42d9_24eb9b40",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1715,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-03-18T13:16:55Z",
+      "side": 1,
+      "message": "The warning in code chunk C is never logged. Here is what this code looks like:\n```\nif (!submodules_.transient_suppressor) {\n  // code chunk A\n} else if (submodules_.transient_suppressor) {\n  // code chunk B\n} else {\n  // code chunk C \u003c--- logically dead\n}\n```\n\nA possible fix:\n```\nif (!submodules_.transient_suppressor) {\n  // code chunk A\n} else {\n  // code chunk B\n}\nif (!submodules_.transient_suppressor) {\n  // code chunk C\n}\n```\nOr:\n```\nif (!submodules_.transient_suppressor) {\n  // code chunk A\n  if (!submodules_.transient_suppressor) {\n  // code chunk C\n  }\n} else {\n  // code chunk B\n}\n```\n.. or something else.",
+      "range": {
+        "startLine": 1706,
+        "startChar": 0,
+        "endLine": 1715,
+        "endChar": 12
+      },
+      "revId": "19a10c4f5c13b35fcb25cbb3143f9a7fdf9f0a24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
