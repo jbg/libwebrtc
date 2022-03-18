@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7cbeab1_6c9a14c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-18T22:57:28Z",
+      "side": 1,
+      "message": "Hm. If I just +1 this CL, it will be submitted due to autosubmit. So holding over a minor point.....",
+      "revId": "5eec89a4b961e8c9834f2c886718624844deaf35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
