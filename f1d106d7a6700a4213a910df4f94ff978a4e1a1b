@@ -16,6 +16,24 @@
       "message": "I think there used to be references to this from chromium tests. But if chromium now defines its own mock class, deleting should be fine.",
       "revId": "f1d106d7a6700a4213a910df4f94ff978a4e1a1b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43959109_f19b87ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T15:39:30Z",
+      "side": 1,
+      "message": "Ah, there\u0027s downstream use outside of chromium. Not clear to me if it\u0027s preferable to keep the mock class here (then it may be easier to keep it up to date if new methods are added, e.g.) or if it\u0027s better to let down stream users have their own mocks.",
+      "parentUuid": "4abd1c94_c9d045a0",
+      "revId": "f1d106d7a6700a4213a910df4f94ff978a4e1a1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
