@@ -16,6 +16,29 @@
       "message": "thanks and PTAL",
       "revId": "a1cad8ebc8e5ac418510cb755af40b09852e8519",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf90cbf_2e61a206",
+        "filename": "rtc_base/memory/maybe_owning_pointer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T12:57:06Z",
+      "side": 1,
+      "message": "Add an operator-\u003e() as well.\n\nI take it pointer_ can never be null? Otherwise, an (explicit!) conversion-to-bool operator could be useful too.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 24
+      },
+      "revId": "a1cad8ebc8e5ac418510cb755af40b09852e8519",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
