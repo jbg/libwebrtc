@@ -122,6 +122,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4d67d0c_abedd827",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-18T12:00:24Z",
+      "side": 1,
+      "message": "I have exactly the same pattern in ConnectionContext (split off from PeerConnectionFoactory) with regard to the owned threads created when no thread is passed.",
+      "parentUuid": "0bc4b77d_63fe0c36",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e43cbe7_601ce05c",
         "filename": "rtc_base/maybe_owning_pointer.h",
         "patchSetId": 1
