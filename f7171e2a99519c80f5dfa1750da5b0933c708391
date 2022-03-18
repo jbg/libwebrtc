@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ab0711e3_ee786c59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T14:19:45Z",
+      "side": 1,
+      "message": "Changed the phrasing to try to be more clear.",
+      "parentUuid": "278fafea_9edae77c",
+      "range": {
+        "startLine": 10,
+        "startChar": 24,
+        "endLine": 10,
+        "endChar": 28
+      },
+      "revId": "f7171e2a99519c80f5dfa1750da5b0933c708391",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fb4cb7c1_0afef802",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
