@@ -155,6 +155,24 @@
       "parentUuid": "da504ea8_5268cc8a",
       "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e965ae01_9f5d8f5c",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T08:44:03Z",
+      "side": 1,
+      "message": "The change makes this acceptable:\n\nclass Foo :\n  public RefCountedObject\u003cInterface1\u003e,\n  public RefCountedObject\u003cInterface2\u003e {\n...\n};\n\nThis is a problem, but we do have classes that inherit from RefCountedObject, which I understand we want to get onboard with make_ref_counted. My preference is to fix those classes rather than give the green light to that pattern in general.",
+      "parentUuid": "a436203d_485fb182",
+      "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
