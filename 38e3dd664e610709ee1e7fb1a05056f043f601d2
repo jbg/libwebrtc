@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d18c6957_e4f3e994",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-18T12:50:44Z",
+      "side": 1,
+      "message": "I moved it to memory/\nwas that correct ?",
+      "parentUuid": "e50885b2_53284394",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b5fae6d_01e69e84",
         "filename": "rtc_base/maybe_owning_pointer.h",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "writtenOn": "2022-03-18T11:55:50Z",
       "side": 1,
       "message": "it\u0027s 2022 😊",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1200f68_337fe0ef",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-18T12:50:44Z",
+      "side": 1,
+      "message": "damn it! time flies...i was living in a world where i still is in my thirties... :)",
+      "parentUuid": "3b5fae6d_01e69e84",
       "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -122,6 +158,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6267a37_a5752ba7",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-18T12:50:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6400e989_1ee47c64",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "422d466f_0251b77d",
@@ -135,6 +189,24 @@
       "writtenOn": "2022-03-18T11:55:50Z",
       "side": 1,
       "message": "just from looking at the class, it\u0027s very unclear what it\u0027s for. A comment would be useful.",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f95e6747_0bf98c3f",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-18T12:50:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "422d466f_0251b77d",
       "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -170,6 +242,24 @@
       "side": 1,
       "message": "Alternatively, pass a FunctionView which returns a unique_ptr\u003cInterface\u003e if called?",
       "parentUuid": "77b492b4_2ec54e9f",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a62d6c14_4384d76a",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-18T12:50:44Z",
+      "side": 1,
+      "message": "I like both options, but can we add them in iterator \u003e 1 ?",
+      "parentUuid": "adf4cb6e_2ddb6673",
       "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -211,6 +301,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b1f5db9_42309d81",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-18T12:50:44Z",
+      "side": 1,
+      "message": "I have used this pattern now several times...\nbut as always, raw pointers are a potential uaf...with/without this class.\nPTAL",
+      "parentUuid": "c4d67d0c_abedd827",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e43cbe7_601ce05c",
         "filename": "rtc_base/maybe_owning_pointer.h",
         "patchSetId": 1
@@ -222,6 +330,24 @@
       "writtenOn": "2022-03-18T11:58:17Z",
       "side": 1,
       "message": "Should we have a template\u003ctypename Interface\u003e class MaybeOwningPointer that expands to MaybeOwningPointer\u003cInterface, Interface\u003e?",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a24f45a9_4c76d591",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-18T12:50:44Z",
+      "side": 1,
+      "message": "I like, but can we add it in iterator \u003e 1 ?",
+      "parentUuid": "6e43cbe7_601ce05c",
       "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
