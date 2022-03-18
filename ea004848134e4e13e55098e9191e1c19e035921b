@@ -88,6 +88,24 @@
       "parentUuid": "078de445_b206754b",
       "revId": "ea004848134e4e13e55098e9191e1c19e035921b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d122384_916d1046",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T13:03:53Z",
+      "side": 1,
+      "message": "Right - thanks for clarifying - it doesn\u0027t change the ownership. It just makes it explicit that ref counted objects passed to the Create function, are passed as scoped_refptr, not the raw interface pointer.",
+      "parentUuid": "fc382d35_0630bfda",
+      "revId": "ea004848134e4e13e55098e9191e1c19e035921b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
