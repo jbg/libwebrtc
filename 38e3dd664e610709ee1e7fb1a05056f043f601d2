@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24399b34_5d4bc1d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T12:11:38Z",
+      "side": 1,
+      "message": "I think it should be moved to a subdirectory, e.g., rtc_base/memory/, to make it less exposed to downstream code.\n\nIt would make things a bit clearer to convert one of the existing usecases to use the new facility, in the same cl.",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b5fae6d_01e69e84",
@@ -99,6 +116,24 @@
       "writtenOn": "2022-03-18T11:58:17Z",
       "side": 1,
       "message": "Can you use parameter forwarding so that Default() can take parameters?\nThis would allow doing\n\nauto x \u003d MaybeOwningPointer\u003cFoo, Bar\u003e(nullptr, \"bar-instantiation-parameter\").",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adf4cb6e_2ddb6673",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T12:11:38Z",
+      "side": 1,
+      "message": "Alternatively, pass a FunctionView which returns a unique_ptr\u003cInterface\u003e if called?",
+      "parentUuid": "77b492b4_2ec54e9f",
       "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
