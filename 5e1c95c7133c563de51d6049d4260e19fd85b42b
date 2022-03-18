@@ -52,6 +52,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9145830e_024205df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-18T14:04:46Z",
+      "side": 1,
+      "message": "thanks!",
+      "revId": "5e1c95c7133c563de51d6049d4260e19fd85b42b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3bc5731_21a58516",
@@ -89,6 +106,30 @@
       "side": 1,
       "message": "ah, good point. or a get()? (basically whatever is most compatible with other smart pointer types)",
       "parentUuid": "b3bc5731_21a58516",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "5e1c95c7133c563de51d6049d4260e19fd85b42b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5e4025d_77d08167",
+        "filename": "rtc_base/memory/always_valid_pointer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-18T14:04:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bcbd2b0_39c50c24",
       "range": {
         "startLine": 29,
         "startChar": 2,
