@@ -1601,3 +1601,7 @@ if (is_android) {
     visibility = [ "*" ]
   }
 }
+
+rtc_source_set("maybe_owning_pointer") {
+  sources = [ "maybe_owning_pointer.h" ]
+}
