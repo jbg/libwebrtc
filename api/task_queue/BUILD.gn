@@ -104,6 +104,10 @@ if (rtc_include_tests) {
     deps = [
       ":default_task_queue_factory",
       ":task_queue_test",
+      "../../rtc_base:inline_task_queue_adapter",
+      "../../rtc_base:logging",
+      "../../rtc_base/synchronization:mutex",
+      "../../rtc_base/task_utils:to_queued_task",
       "../../test:test_support",
     ]
   }

@@ -365,10 +365,12 @@ if (rtc_enable_protobuf) {
       "../api/rtc_event_log",
       "../api/task_queue",
       "../rtc_base:checks",
+      "../rtc_base:inline_task_queue_adapter",
       "../rtc_base:rtc_base_approved",
       "../rtc_base:rtc_task_queue",
       "../rtc_base:safe_minmax",
       "../rtc_base/system:no_unique_address",
+      "../rtc_base/task_utils:to_queued_task",
     ]
     absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
   }
