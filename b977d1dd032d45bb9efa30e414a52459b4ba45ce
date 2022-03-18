@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8489a2b_62dbe533",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-03-18T12:02:08Z",
+      "side": 1,
+      "message": "starting implementing rtcp messages for rtp media sender,\ngoing for simple messages first (Nack, Pli),\nleaving more complicated handling (report block, Fir) for a bit later.",
+      "revId": "b977d1dd032d45bb9efa30e414a52459b4ba45ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
