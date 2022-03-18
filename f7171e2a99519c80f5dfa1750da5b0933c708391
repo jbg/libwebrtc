@@ -81,6 +81,24 @@
       "parentUuid": "fb4cb7c1_0afef802",
       "revId": "f7171e2a99519c80f5dfa1750da5b0933c708391",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aba03bfe_59b00fbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T14:23:01Z",
+      "side": 1,
+      "message": "Thanks - looks like it was removed in 2018:\nhttps://webrtc-review.googlesource.com/c/src/+/107645",
+      "parentUuid": "cb8d2f66_ee99704c",
+      "revId": "f7171e2a99519c80f5dfa1750da5b0933c708391",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
