@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b4d8026_c11d3c9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-18T12:15:45Z",
+      "side": 1,
+      "message": "I suppose there\u0027s no way to stamp out the external use of rtc_base entirely, but in principle, it should be internal-only.\nNote that the default visibility for rtc_source_set targets is \"//*\" (this repo only), so it can\u0027t be used outside webrtc without overriding visibility.",
+      "parentUuid": "24399b34_5d4bc1d4",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b5fae6d_01e69e84",
