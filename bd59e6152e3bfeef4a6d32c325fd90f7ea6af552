@@ -209,6 +209,24 @@
       "parentUuid": "e965ae01_9f5d8f5c",
       "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1960f9d1_118f77cc",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T09:40:59Z",
+      "side": 1,
+      "message": "My preference would still be to do what your suggest as an alternative (last paragraph above) and what you worked on some years ago (and continuously improve). I\u0027ve done changes to that end as well and would like to continue that. We\u0027ve taken many steps since then so I\u0027m hopeful it\u0027s not going to be that difficult. I can take a look at RtpTransceiver for example.\n\nBtw, as far as not having time to experiment - my understanding is that this isn\u0027t urgent - is there some urgency that I\u0027m not aware of?",
+      "parentUuid": "88c6aa22_93e81205",
+      "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
