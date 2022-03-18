@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eff3e684_a486836a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T10:33:46Z",
+      "side": 1,
+      "message": "Thanks.",
+      "revId": "2b48e2eabfe6bf0be3b5c78800c37c17f0652aa6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "607695a4_43527870",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T10:33:46Z",
+      "side": 1,
+      "message": "Note that this will be implicitly converted back to raw pointer, for calling the proxy Create method. :-(",
+      "range": {
+        "startLine": 652,
+        "startChar": 12,
+        "endLine": 653,
+        "endChar": 69
+      },
+      "revId": "2b48e2eabfe6bf0be3b5c78800c37c17f0652aa6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
