@@ -227,6 +227,24 @@
       "parentUuid": "88c6aa22_93e81205",
       "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b174a3a_d77f5aec",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T09:54:03Z",
+      "side": 1,
+      "message": "No, there\u0027s nothing urgent, I just wanted to make a little progress with https://webrtc-review.googlesource.com/c/src/+/252441, which is blocked on use-after-free issues I don\u0027t understand, and which is a prerequisite for progress on https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d13464\n\nI get only 17 matches for `git grep \u0027public rtc::RefCountedObject\u003c\u0027` in webrtc, most of them under api/test/. And there\u0027s also downstream code imitating this pattern when implementing webrtc interfaces.\n\nIf RtpTransceiver case is updated, my larger cl can be adjusted to not depend on this change.",
+      "parentUuid": "1960f9d1_118f77cc",
+      "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
