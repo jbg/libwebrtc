@@ -70,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e50885b2_53284394",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T12:19:09Z",
+      "side": 1,
+      "message": "The docs say that \"legacy api directories\" includes rtc_base/, but *not* its subdirectories. So we try to keep new utilities in subdirs.",
+      "parentUuid": "9b4d8026_c11d3c9f",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b5fae6d_01e69e84",
