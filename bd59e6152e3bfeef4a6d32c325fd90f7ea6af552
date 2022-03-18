@@ -50,6 +50,24 @@
       "message": "I\u0027m a bit confused by this. \"make ref counted\" should not be needed for classes that already carry a ref count - right?",
       "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da504ea8_5268cc8a",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T08:21:18Z",
+      "side": 1,
+      "message": "Depends on what you mean by \"needed\"?\n\n  make_ref_counted\u003cFoo\u003e(...)\n\nlooks clearer to me than\n\n  rtc::scoped_refptr\u003cFoo\u003e(new Foo(...))\n\neven though they\u0027re equivalent in the case that the Foo class already carries a ref count. In this case, it\u0027s a convenience in about the same way as std::make_unique.",
+      "parentUuid": "b28830ea_f91b6d39",
+      "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
