@@ -16,6 +16,57 @@
       "message": "After having written \"this code\" +5 times as part of webrtc:10335\nhta@ suggested that I put into a class and send it for review to you.\nPTAL",
       "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b5fae6d_01e69e84",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T11:55:50Z",
+      "side": 1,
+      "message": "it\u0027s 2022 😊",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422d466f_0251b77d",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T11:55:50Z",
+      "side": 1,
+      "message": "just from looking at the class, it\u0027s very unclear what it\u0027s for. A comment would be useful.",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc4b77d_63fe0c36",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T11:55:50Z",
+      "side": 1,
+      "message": "if the class sometimes contains a raw pointer and sometimes not, that does makes me wonder if could be adding more ambiguity (and therefore potential for uaf) to the implementation rather than adding clarity?",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
