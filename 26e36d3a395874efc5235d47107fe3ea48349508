@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b0e4d0a_6e679081",
+        "filename": "rtc_base/memory/maybe_owning_pointer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T13:27:20Z",
+      "side": 1,
+      "message": "oh - this is not at all what I thought the class was for.\n\nSo, is it fair to assume that pointer_ will never be nullptr?\n\nFrom that standpoint, it sounds like the template guarantees that there will always be a valid object pointed to by the template and that whether or not it\u0027s the default implementation, is an implementation detail - correct?\n\nIf so, then wdyt about \"AlwaysValidPointer\" vs \"MaybeOwningPointer\"? I don\u0027t feel strongly about it though, just thinking about a descriptive name from the usage pov.",
+      "revId": "26e36d3a395874efc5235d47107fe3ea48349508",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32379ee7_b8c56173",
+        "filename": "rtc_base/memory/maybe_owning_pointer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T13:27:20Z",
+      "side": 1,
+      "message": "can you add a RTC_DCHECK(pointer_) chek to the ctor to make it clear that nullptr is not an option.",
+      "revId": "26e36d3a395874efc5235d47107fe3ea48349508",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c259f38_df54a575",
+        "filename": "rtc_base/memory/maybe_owning_pointer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T13:27:20Z",
+      "side": 1,
+      "message": "this can be const too",
+      "revId": "26e36d3a395874efc5235d47107fe3ea48349508",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
