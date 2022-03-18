@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f2f3d3_4e90f414",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T15:00:41Z",
+      "side": 1,
+      "message": "updated the SECONDARY_PROXY_MAP_BOILERPLATE macro as well after landing the removal of the \u0027owned\u0027 proxy macros and updated the description.",
+      "revId": "46d51adbedf545ab2bfd11b8be1581493fa232c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
