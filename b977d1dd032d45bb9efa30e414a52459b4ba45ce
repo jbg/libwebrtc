@@ -16,6 +16,46 @@
       "message": "starting implementing rtcp messages for rtp media sender,\ngoing for simple messages first (Nack, Pli),\nleaving more complicated handling (report block, Fir) for a bit later.",
       "revId": "b977d1dd032d45bb9efa30e414a52459b4ba45ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8b82cc_668473b5",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-03-18T12:20:05Z",
+      "side": 1,
+      "message": "Do you feel the need to add a default case to e.g. log unimplemented messages?",
+      "revId": "b977d1dd032d45bb9efa30e414a52459b4ba45ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3098b8b4_e76aed7f",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-03-18T12:20:05Z",
+      "side": 1,
+      "message": "Nit: static constexpr?",
+      "range": {
+        "startLine": 1053,
+        "startChar": 2,
+        "endLine": 1053,
+        "endChar": 7
+      },
+      "revId": "b977d1dd032d45bb9efa30e414a52459b4ba45ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
