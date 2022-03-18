@@ -85,6 +85,24 @@
       "parentUuid": "b28830ea_f91b6d39",
       "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcfeb538_7e218984",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T08:34:30Z",
+      "side": 1,
+      "message": "My point is that \"make ref counted\" isn\u0027t the same thing as \"construct a scoped_refptr\". The point of this utility is to add an implementation to the contained class, that has state. While similar, it\u0027s not the same thing as std::make_unique\u003c\u003e (or a hypothetical make_scoped_refptr\u003c\u003e).\n\nBut regardless, I think that this change is adding flexibility to allow for something we don\u0027t want to encourage, which is for RefCountedObject to not be the most derived class.",
+      "parentUuid": "da504ea8_5268cc8a",
+      "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
