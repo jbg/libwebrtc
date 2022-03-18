@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "511f231a_cbcb8f2c",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T09:16:45Z",
+      "side": 1,
+      "message": "That\u0027s my understanding too.",
+      "parentUuid": "14273860_157713c2",
+      "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b28830ea_f91b6d39",
         "filename": "rtc_base/ref_counted_object.h",
         "patchSetId": 1
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "The change makes this acceptable:\n\nclass Foo :\n  public RefCountedObject\u003cInterface1\u003e,\n  public RefCountedObject\u003cInterface2\u003e {\n...\n};\n\nThis is a problem, but we do have classes that inherit from RefCountedObject, which I understand we want to get onboard with make_ref_counted. My preference is to fix those classes rather than give the green light to that pattern in general.",
       "parentUuid": "a436203d_485fb182",
+      "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88c6aa22_93e81205",
+        "filename": "rtc_base/ref_counted_object.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-18T09:16:45Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me what mechanisms we have to prevent invalid double inheritance of RefCountedObject, either before or after this change (and I\u0027m afraid I don\u0027t have the time right now to experiment).\n\nThe inheritance hierarchy that prompted this change was\n\n  class RtpTranscieverInterface : public rtc::RefCountInterface {...}\n\n  class RtpTransciever final : public rtc::RefCountedObject\u003cRtpTransceiverInterface\u003e ... {...}\n\nThen without this change, rtc:make_ref_counted\u003cRtpTransciever\u003e fails, because it attempts to create an rtc::RefCountedObject\u003cRtpTransciever\u003e, i.e., a type inheriting RefCountedObject twice. And luckily, the `final` keyword above makes it fail at compile time.\n\nSo we\u0027d have to stick to explicit new when creating instances of RtpTransceiver, as is done here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/peer_connection.cc;drc\u003d88989bcd7983c93c8d294e1472160d0718299f62;l\u003d652\n\nTo me it makes sense to migrate from explicit new to rtc::make_ref_counted, even when it\u0027s just syntactic sugar.\n\nRegarding reviewer selection, since you\u0027ve all lgtm:ed the cl this change was copied from, I figured it was sufficient with owner approval from one of you... But let\u0027s continue discussion if value of this change is still unclear.\n\nThe alternative I see is to change inheritance of RtpTransceiver and all other classes using this pattern, to not inherit RefCountedObject. I have no strong opinion on the right approach. I know it\u0027s a fairly wide spread pattern (which is why my attempts to make the RefCountedObject class final some years ago was never completed). The pattern is also consistent with how the more recent rtc::RefCountedNonVirtual is intended to be used.",
+      "parentUuid": "e965ae01_9f5d8f5c",
       "revId": "bd59e6152e3bfeef4a6d32c325fd90f7ea6af552",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
