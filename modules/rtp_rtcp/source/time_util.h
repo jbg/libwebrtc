@@ -13,6 +13,7 @@
 
 #include <stdint.h>
 
+#include "api/units/time_delta.h"
 #include "system_wrappers/include/ntp_time.h"
 
 namespace webrtc {
@@ -26,17 +27,18 @@ namespace webrtc {
 // appropriate, only the middle 32 bits are used; that is, the low 16
 // bits of the integer part and the high 16 bits of the fractional part.
 inline uint32_t CompactNtp(NtpTime ntp) {
-  return (ntp.seconds() << 16) | (ntp.fractions() >> 16);
+  return static_cast<uint32_t>(static_cast<uint64_t>(ntp) >> 16);
 }
 
-// Converts interval in microseconds to compact ntp (1/2^16 seconds) resolution.
+// Converts interval to compact ntp (1/2^16 seconds) resolution.
 // Negative values converted to 0, Overlarge values converted to max uint32_t.
-uint32_t SaturatedUsToCompactNtp(int64_t us);
+uint32_t SaturatedToCompactNtp(TimeDelta delta);
 
-// Converts interval between compact ntp timestamps to milliseconds.
+// Converts interval between compact ntp timestamps to TimeDelta.
 // This interval can be up to ~9.1 hours (2^15 seconds).
-// Values close to 2^16 seconds consider negative and result in minimum rtt = 1.
-int64_t CompactNtpRttToMs(uint32_t compact_ntp_interval);
+// Values close to 2^16 seconds consider negative and result in minimum rtt =
+// 1ms.
+TimeDelta CompactNtpRttToTimeDelta(uint32_t compact_ntp_interval);
 
 }  // namespace webrtc
 #endif  // MODULES_RTP_RTCP_SOURCE_TIME_UTIL_H_
