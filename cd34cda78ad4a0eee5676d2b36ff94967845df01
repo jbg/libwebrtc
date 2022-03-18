@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e83fe9_11cec174",
+        "filename": "rtc_base/network_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-18T12:11:16Z",
+      "side": 1,
+      "message": "we could maintain such an invariant by sorting, but since this caused flakiness, we haven\u0027t maintained this property in the past, so we shouldn\u0027t start assuming it.",
+      "revId": "cd34cda78ad4a0eee5676d2b36ff94967845df01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
