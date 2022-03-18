@@ -10,7 +10,13 @@
 
 #include "api/task_queue/default_task_queue_factory.h"
 
+#include <utility>
+
 #include "api/task_queue/task_queue_test.h"
+#include "rtc_base/inline_task_queue_adapter.h"
+#include "rtc_base/logging.h"
+#include "rtc_base/synchronization/mutex.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "test/gtest.h"
 
 namespace webrtc {
@@ -19,6 +25,137 @@ namespace {
 INSTANTIATE_TEST_SUITE_P(Default,
                          TaskQueueTest,
                          ::testing::Values(CreateDefaultTaskQueueFactory));
+
+std::unique_ptr<TaskQueueBase, TaskQueueDeleter> CreateInlineTaskQueue(
+    std::unique_ptr<TaskQueueBase, TaskQueueDeleter> task_queue) {
+  return std::unique_ptr<TaskQueueBase, TaskQueueDeleter>(
+      new InlineTaskQueueAdapter(std::move(task_queue)));
+}
+
+class MutexMaster {
+ public:
+  static constexpr bool kPrintf = true;
+
+  MutexMaster(InlineTaskQueueAdapter* task_queue0,
+              InlineTaskQueueAdapter* task_queue1,
+              InlineTaskQueueAdapter* task_queue2,
+              InlineTaskQueueAdapter* task_queue3)
+      : num_pending_tasks_(0),
+        task_queue0_(task_queue0),
+        task_queue1_(task_queue1),
+        task_queue2_(task_queue2),
+        task_queue3_(task_queue3) {}
+
+  void PostPendingTasks() {
+    num_pending_tasks_ += 2;
+    // Don't printf here regardless of flag because if deadlock happens this
+    // gets too spammy.
+    // if (kPrintf) {
+    //   RTC_LOG(LS_ERROR) << "num_pending_tasks_ += 2: " << num_pending_tasks_;
+    // }
+    // Purposefully avoid inline execution using ToQueuedTask(), otherwise we'll
+    // never have a race.
+    task_queue0_->PostTask(ToQueuedTask(
+        [this]() { DoSomethingWithM0AndPostToDoSomethingWithM1(); }));
+    task_queue1_->PostTask(ToQueuedTask(
+        [this]() { DoSomethingWithM1AndPostToDoSomethingWithM0(); }));
+  }
+
+  void WaitUntilPendingTasksIsZero() {
+    while (num_pending_tasks_ > 0) {
+      // Zzz...
+    }
+  }
+
+ protected:
+  void DoSomethingWithM0AndPostToDoSomethingWithM1() {
+    if (kPrintf) {
+      RTC_LOG(LS_ERROR) << "Try m0";
+    }
+    MutexLock lock_m0(&m0_);
+    // MutexLock temp_lock_m1(&m1_);
+    if (kPrintf) {
+      RTC_LOG(LS_ERROR) << "Got m0";
+    }
+    task_queue2_->PostTask([this]() { DoSomethingWithM1(); });
+  }
+
+  void DoSomethingWithM1AndPostToDoSomethingWithM0() {
+    if (kPrintf) {
+      RTC_LOG(LS_ERROR) << "Try m1";
+    }
+    MutexLock lock_m1(&m1_);
+    // MutexLock temp_lock_m0(&m0_);
+    if (kPrintf) {
+      RTC_LOG(LS_ERROR) << "Got m1";
+    }
+    task_queue3_->PostTask([this]() { DoSomethingWithM0(); });
+  }
+
+  void DoSomethingWithM0() {
+    if (kPrintf) {
+      RTC_LOG(LS_ERROR) << "Try m0";
+    }
+    MutexLock lock_m0(&m0_);
+    if (kPrintf) {
+      RTC_LOG(LS_ERROR) << "Got m0";
+    }
+    --num_pending_tasks_;
+    if (kPrintf) {
+      RTC_LOG(LS_ERROR) << "--num_pending_tasks_: " << num_pending_tasks_;
+    }
+  }
+
+  void DoSomethingWithM1() {
+    if (kPrintf) {
+      RTC_LOG(LS_ERROR) << "Try m1";
+    }
+    MutexLock lock_m1(&m1_);
+    if (kPrintf) {
+      RTC_LOG(LS_ERROR) << "Got m1";
+    }
+    --num_pending_tasks_;
+    if (kPrintf) {
+      RTC_LOG(LS_ERROR) << "--num_pending_tasks_: " << num_pending_tasks_;
+    }
+  }
+
+ public:
+  std::atomic<size_t> num_pending_tasks_;
+  InlineTaskQueueAdapter* task_queue0_;
+  InlineTaskQueueAdapter* task_queue1_;
+  InlineTaskQueueAdapter* task_queue2_;
+  InlineTaskQueueAdapter* task_queue3_;
+  Mutex m0_;
+  Mutex m1_;
+};
+
+TEST(MarkusOwesMeA, FreeBeer) {
+  auto task_queue_factory = CreateDefaultTaskQueueFactory();
+
+  std::unique_ptr<TaskQueueBase, TaskQueueDeleter> task_queue0 =
+      CreateInlineTaskQueue(task_queue_factory->CreateTaskQueue(
+          "task_queue0", TaskQueueFactory::Priority::HIGH));
+  std::unique_ptr<TaskQueueBase, TaskQueueDeleter> task_queue1 =
+      CreateInlineTaskQueue(task_queue_factory->CreateTaskQueue(
+          "task_queue1", TaskQueueFactory::Priority::HIGH));
+  std::unique_ptr<TaskQueueBase, TaskQueueDeleter> task_queue2 =
+      CreateInlineTaskQueue(task_queue_factory->CreateTaskQueue(
+          "task_queue2", TaskQueueFactory::Priority::HIGH));
+  std::unique_ptr<TaskQueueBase, TaskQueueDeleter> task_queue3 =
+      CreateInlineTaskQueue(task_queue_factory->CreateTaskQueue(
+          "task_queue3", TaskQueueFactory::Priority::HIGH));
+
+  MutexMaster mutex_master(
+      static_cast<InlineTaskQueueAdapter*>(task_queue0.get()),
+      static_cast<InlineTaskQueueAdapter*>(task_queue1.get()),
+      static_cast<InlineTaskQueueAdapter*>(task_queue2.get()),
+      static_cast<InlineTaskQueueAdapter*>(task_queue3.get()));
+  for (size_t i = 0; i < 100000; ++i) {
+    mutex_master.PostPendingTasks();
+  }
+  mutex_master.WaitUntilPendingTasksIsZero();
+}
 
 }  // namespace
 }  // namespace webrtc
