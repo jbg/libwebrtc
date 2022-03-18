@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08fcd8c6_d686d119",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-18T11:58:17Z",
+      "side": 1,
+      "message": "Random comments.... I think the template is useful already, seeing if it can be even more useful. Feel free to ignore for this iteration.\n",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b5fae6d_01e69e84",
@@ -31,6 +48,23 @@
       "writtenOn": "2022-03-18T11:55:50Z",
       "side": 1,
       "message": "it\u0027s 2022 😊",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6400e989_1ee47c64",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-18T11:58:17Z",
+      "side": 1,
+      "message": "Comment ....\n\nThis template allows the instantiation of a pointer to Interface in such a way that if it is passed a null pointer, an object of class Default will be created, which will be deallocated when the pointer is deleted.",
       "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -54,6 +88,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77b492b4_2ec54e9f",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-18T11:58:17Z",
+      "side": 1,
+      "message": "Can you use parameter forwarding so that Default() can take parameters?\nThis would allow doing\n\nauto x \u003d MaybeOwningPointer\u003cFoo, Bar\u003e(nullptr, \"bar-instantiation-parameter\").",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bc4b77d_63fe0c36",
         "filename": "rtc_base/maybe_owning_pointer.h",
         "patchSetId": 1
@@ -65,6 +116,23 @@
       "writtenOn": "2022-03-18T11:55:50Z",
       "side": 1,
       "message": "if the class sometimes contains a raw pointer and sometimes not, that does makes me wonder if could be adding more ambiguity (and therefore potential for uaf) to the implementation rather than adding clarity?",
+      "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e43cbe7_601ce05c",
+        "filename": "rtc_base/maybe_owning_pointer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-18T11:58:17Z",
+      "side": 1,
+      "message": "Should we have a template\u003ctypename Interface\u003e class MaybeOwningPointer that expands to MaybeOwningPointer\u003cInterface, Interface\u003e?",
       "revId": "38e3dd664e610709ee1e7fb1a05056f043f601d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
