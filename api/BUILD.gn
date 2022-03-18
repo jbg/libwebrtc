@@ -1038,7 +1038,6 @@ if (rtc_include_tests) {
     sources = [
       "test/mock_rtp_transceiver.h",
       "test/mock_rtpreceiver.h",
-      "test/mock_rtpsender.h",
     ]
 
     deps = [
