@@ -16,6 +16,24 @@
       "message": "The windows asan failures look like they\u0027re the same ones I saw on https://webrtc-review.googlesource.com/c/src/+/252441.",
       "revId": "ea004848134e4e13e55098e9191e1c19e035921b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b131d0_e04a189b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-18T12:26:00Z",
+      "side": 1,
+      "message": "yes - I got the \"brilliant\" idea of updating the proxy to explicitly use a scoped_refptr and get rid of the problem with external ownership 😊 I may have bitten off more than I can chew, but will take a closer look as soon as I\u0027m done in this current meeting",
+      "parentUuid": "b6efd0fc_ff1028be",
+      "revId": "ea004848134e4e13e55098e9191e1c19e035921b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
