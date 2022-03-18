@@ -53,3 +53,7 @@ rtc_library("unittests") {
     "../../test:test_support",
   ]
 }
+
+rtc_source_set("maybe_owning_pointer") {
+  sources = [ "maybe_owning_pointer.h" ]
+}
