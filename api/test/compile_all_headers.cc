@@ -38,7 +38,6 @@
 #include "api/test/mock_frame_encryptor.h"
 #include "api/test/mock_media_stream_interface.h"
 #include "api/test/mock_peer_connection_factory_interface.h"
-#include "api/test/mock_peerconnectioninterface.h"
 #include "api/test/mock_rtp_transceiver.h"
 #include "api/test/mock_rtpreceiver.h"
 #include "api/test/mock_rtpsender.h"
