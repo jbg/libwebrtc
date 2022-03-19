@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'f55241d0144f3599fa90e4e6038b96634d2b4d42',
+  'chromium_revision': '58ceb5396802ea68ab4d576b2b2376ed8698cfd8',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -23,9 +23,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@bee216d6736d6a471879c5fcd32c8aba863d4755',
+    'https://chromium.googlesource.com/chromium/src/base@bba9c68f4d81285f2ebea543eba07f6cdccb3e6e',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@b42b2033819f95b3e43f24e541938c671110966d',
+    'https://chromium.googlesource.com/chromium/src/build@45518b3105a7e0d69a1233000178ac4070c58458',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@d8c375426d8f7f4147f7d4109bb63c12655fb8d6',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -34,13 +34,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@043ae4b9e442fed9d4a53c88ab708775f8e079cd',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@91ce947590d8352df90a2400293cdda90a774503',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@c4769e51cb122096ea4cdc5ed6f7e57aa2315447',
+    'https://chromium.googlesource.com/chromium/src/testing@bcf1a938d145d2f4b96b578da8b4bebf63f8ac7e',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@7835795588c74a353beb1e03b74d45fabfdf295f',
+    'https://chromium.googlesource.com/chromium/src/third_party@c3d3343b2823e24679702b690c59f57b83255611',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -140,7 +140,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@08bd844599bf04c71707e8f59a8013a941264695',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@389f33bb40a3345b73a68613178c789476ceaecf',
+    'https://chromium.googlesource.com/catapult.git@54219055fcf8c7ace26e9095715dd1587ea3fbe6',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
@@ -149,7 +149,7 @@ deps = {
   'src/third_party/crc32c/src':
     'https://chromium.googlesource.com/external/github.com/google/crc32c.git@fa5ade41ee480003d9c5af6f43567ba22e4e17e6',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@bc93924b3b2b84515d91ba49bb60ac0b89d928e1',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@fbb927599f97cd1636493c40f0a87a18c8d335c4',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@574c39cce3231c69bc9a02ac475c27d944bdb113',
   'src/third_party/findbugs': {
@@ -157,7 +157,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/third_party/grpc/src': {
-    'url': 'https://chromium.googlesource.com/external/github.com/grpc/grpc.git@2a0d6234cb2ccebb265c035ffd09ecc9a347b4bf',
+    'url': 'https://chromium.googlesource.com/external/github.com/grpc/grpc.git@208619cdce3b7cdc681cb50c29db619e46dd5af6',
   },
   # Used for embedded builds. CrOS & Linux use the system version.
   'src/third_party/fontconfig/src': {
@@ -288,7 +288,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@3c7dc0d25c91195a7d9b31947b14739d57f6c728',
+    'https://chromium.googlesource.com/chromium/src/tools@c1295409a6d95779497dcf6626978a870390908f',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
