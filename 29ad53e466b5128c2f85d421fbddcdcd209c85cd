@@ -16,6 +16,24 @@
       "message": "I don\u0027t understand why this test has to be deleted - the class is still non-abstract, isn\u0027t it?\n\n(it\u0027s an useful test so that you get a clear message when you add function #102 to PeerConnectionInterface and forget to add it to the mock.)",
       "revId": "29ad53e466b5128c2f85d421fbddcdcd209c85cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad241f26_19f4a027",
+        "filename": "api/test/mock_peerconnectioninterface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-03-19T15:28:33Z",
+      "side": 0,
+      "message": "The check fails because AddRef/Release don\u0027t have an implementation once the inheritance from RefCountedObject goes away. However, we can restore the check by simply giving the check a bit more context.",
+      "parentUuid": "c6025bee_c1259d4d",
+      "revId": "29ad53e466b5128c2f85d421fbddcdcd209c85cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
