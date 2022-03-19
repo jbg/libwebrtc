@@ -34,6 +34,24 @@
       "parentUuid": "4abd1c94_c9d045a0",
       "revId": "f1d106d7a6700a4213a910df4f94ff978a4e1a1b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9112285e_cca5245e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-19T07:52:51Z",
+      "side": 1,
+      "message": "Downstream using their own mocks (which requires them to override *all* virtual methods of the interface) is a major drag on changes that require API changes.\n\nThis problem was the reason for creating api/test/mock* in the first place.",
+      "parentUuid": "43959109_f19b87ad",
+      "revId": "f1d106d7a6700a4213a910df4f94ff978a4e1a1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
