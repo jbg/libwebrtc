@@ -171,6 +171,47 @@
       "message": "\"Feels\" like at least one of the objects already passed should have field trials in them. (Alterntatively, the NackRequester should be owning them, and they should be passed via std::unique_ptr - different question).",
       "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "635d2ef6_6e0f2300",
+        "filename": "modules/video_coding/nack_requester.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-21T15:44:35Z",
+      "side": 1,
+      "message": "I think this is a question between allowing access to FT via other dependencies or prefer direct dependency.\n\nI don\u0027t have a clear choice here but I tend to prefer the direct dependency because it allows to clean a dependency on FT as soon they are not used anymore. For example, if NackPeriodicProcessor stops using FTs, we can remove its dep on them instead of having to keep it because NackRequester accesses them indirectly.\n\nDoes that make sense?",
+      "parentUuid": "85401199_74761d94",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0492160e_85aaa473",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-21T15:44:35Z",
+      "side": 1,
+      "message": "This is similar to what hta@ was mentioning before.\n\nShould we allow indirect dependency on FT or is it better to avoid?",
+      "range": {
+        "startLine": 229,
+        "startChar": 45,
+        "endLine": 229,
+        "endChar": 59
+      },
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
