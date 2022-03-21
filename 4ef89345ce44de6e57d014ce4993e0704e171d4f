@@ -127,6 +127,57 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6712bd28_d364b60d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5348
+      },
+      "writtenOn": "2022-03-21T20:53:46Z",
+      "side": 1,
+      "message": "Drive-by; no need to wait for my LGTM.",
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80be5664_4d53102f",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5348
+      },
+      "writtenOn": "2022-03-21T20:53:46Z",
+      "side": 1,
+      "message": "Should this be initialized to something invalid? Otherwise you\u0027ve changed the semantics of IsCurrentSessionSupported for the failure case.",
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "859f49a1_df0f881e",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5348
+      },
+      "writtenOn": "2022-03-21T20:53:46Z",
+      "side": 1,
+      "message": "Optional: In the interest of code simplification, would be so bad if we just always set this to 5? It\u0027s less than an extra 0.1s of perceived connection setup latency, right?",
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3718c915_5b86b155",
