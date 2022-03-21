@@ -51,6 +51,23 @@
       "parentUuid": "037e3428_4f8b5a3d",
       "revId": "94a1200775d9769de9106b63e55634853db5b6a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "082aca89_795f4813",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-03-21T15:20:08Z",
+      "side": 1,
+      "message": "Kári and Harald thank you very much for review! Just a quick question before I\u0027ll land this CL: what do you think, is it worth for iOS SDK to have default implementation of proposed protocol (e.g. https://gist.github.com/mstyura/566a053f7535948b5a3e6bfedfe6e56b written in Obj-C), if so I could prepare next CL with default implementation of SSL verifier based on OS-provided mechanisms?",
+      "revId": "94a1200775d9769de9106b63e55634853db5b6a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
