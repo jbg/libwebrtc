@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93d1ce2f_09a06fe8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-03-21T22:14:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7af47b12_1486bc5a",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 73
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac13f646_5df42754",
@@ -70,6 +94,54 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9514ed6_406678ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-03-21T22:14:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac13f646_5df42754",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 31
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7476594_33d761b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-03-21T22:14:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93cabdba_f6bcae2e",
+      "range": {
+        "startLine": 22,
+        "startChar": 32,
+        "endLine": 22,
+        "endChar": 36
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1b7968a_e009b1ed",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-03-21T20:44:17Z",
       "side": 1,
       "message": "+1 seems like overkill",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 45
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cada75bb_b3d93f6e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-03-21T22:14:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d1b7968a_e009b1ed",
       "range": {
         "startLine": 30,
         "startChar": 0,
@@ -163,6 +259,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f0e785b5_a24bf4d4",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-03-21T22:14:46Z",
+      "side": 1,
+      "message": "IsCurrentSessionSupported() will still return false with this change but I\u0027m fine returning a value which indicates a failure to retrieve the current session ID.",
+      "parentUuid": "80be5664_4d53102f",
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "859f49a1_df0f881e",
         "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
         "patchSetId": 2
@@ -174,6 +288,24 @@
       "writtenOn": "2022-03-21T20:53:46Z",
       "side": 1,
       "message": "Optional: In the interest of code simplification, would be so bad if we just always set this to 5? It\u0027s less than an extra 0.1s of perceived connection setup latency, right?",
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0383518_33be1c74",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-03-21T22:14:46Z",
+      "side": 1,
+      "message": "I wanted to limit the scope of this change because it\u0027s possible that if the desktop being captured isn\u0027t updated frequently enough, this function won\u0027t complete within 500ms and the capturer will be reinitialized.\n\nIn the detached session we are seeing a video freeze so this drawback seems like a reasonable trade-off, especially since there isn\u0027t any indication that anything has failed, but I wouldn\u0027t want to introduce that potential issue for consumers using the capturer in other contexts where no issues have been reported.",
+      "parentUuid": "859f49a1_df0f881e",
       "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -201,6 +333,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3acef480_ca10f4c8",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-03-21T22:14:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3718c915_5b86b155",
+      "range": {
+        "startLine": 448,
+        "startChar": 24,
+        "endLine": 448,
+        "endChar": 37
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e09003f6_57073c12",
@@ -214,6 +370,30 @@
       "writtenOn": "2022-03-21T20:44:17Z",
       "side": 1,
       "message": "Maybe worth a comment to see if we still need to capture frames after DoDuplicateAll? I was trying to figure out some way to avoid this, but I don\u0027t think there\u0027s a clean one.",
+      "range": {
+        "startLine": 481,
+        "startChar": 2,
+        "endLine": 483,
+        "endChar": 5
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b29e6612_64977d44",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-03-21T22:14:46Z",
+      "side": 1,
+      "message": "I\u0027ll add a comment.  In an earlier iteration I tried integrating the EnsureFrameCaptured logic into DoDuplicate so we could just return the frame but it was a lot messier.\n\nThe problem with skipping the following DoDuplicateAll/DoDuplicateOne call is that it\u0027s possible that the frame was captured using the local |fallback_frame| which seems like it will just get cleaned up on return.  Also though, I haven\u0027t seen how that code would be triggered as the new resolution is always picked up before this method is called.\n\nSince I will want to merge this for M101 I\u0027d prefer to keep this CL as simple as possible but it seems like there could be areas to revisit and clean up later.",
+      "parentUuid": "e09003f6_57073c12",
       "range": {
         "startLine": 481,
         "startChar": 2,
