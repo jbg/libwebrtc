@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bcbe11c_a1b8e0f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-03-21T17:08:27Z",
+      "side": 1,
+      "message": "Thanks, this helps keep the main implementation files smaller and easier to maintain.",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87fb7428_5eaf3da6",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-03-21T17:08:27Z",
+      "side": 1,
+      "message": "Nit: The struct has default initializers so you can just return {} here.",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15409b40_3262282b",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-03-21T17:08:27Z",
+      "side": 1,
+      "message": "Can resolution be passed as const?",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73dde8ea_b034de25",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-03-21T17:08:27Z",
+      "side": 1,
+      "message": "You don\u0027t need any Pipewire includes here since the pipewire types are only referenced by pointer.  You can forward declare them as\n\nstruct pw_thread_loop;\nstruct spa_pod_builder;\n\netc.",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8681348_6f3a5910",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-03-21T17:08:27Z",
+      "side": 1,
+      "message": "Nit: *const",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c3a2b77_393823b0",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-03-21T17:08:27Z",
+      "side": 1,
+      "message": "PipeWireThreadLoopLock and PipeWireVersion-related functions seem to be generic to PipeWire, so I would be fine moving them to a separate file like pipwire_utils.h.  Up to you if you think that is useful in the future.",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4752fa85_488d99cb",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-03-21T17:08:27Z",
+      "side": 1,
+      "message": "Nit: #include \u003cstdint.h\u003e",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
