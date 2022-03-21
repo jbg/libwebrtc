@@ -51,6 +51,126 @@
       "parentUuid": "4de9b2fb_cc5c976f",
       "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af5b1267_a44312fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-21T12:46:32Z",
+      "side": 1,
+      "message": "Now with context (and a little more nitpicking)....\n",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f467a59_c6c1783a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-21T12:46:32Z",
+      "side": 1,
+      "message": "the two",
+      "parentUuid": "413b2d95_75d7e3bb",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c1b783f_785ef522",
+        "filename": "api/video/video_stream_decoder_create.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-21T12:46:32Z",
+      "side": 1,
+      "message": "This passes a VideoDecoderFactory too.",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a75a4575_769c973c",
+        "filename": "api/video/video_stream_decoder_create.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-21T12:46:32Z",
+      "side": 1,
+      "message": "This passes a VideoDecoderFactory too.",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f058413_c6ae5a90",
+        "filename": "modules/video_coding/deprecated/nack_module.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-21T12:46:32Z",
+      "side": 1,
+      "message": "Can we leave the DEPRECATED class alone? Or perhaps delete its field trials (if any)?",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e81908e_10b6e997",
+        "filename": "modules/video_coding/frame_buffer3.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-21T12:46:32Z",
+      "side": 1,
+      "message": "Doing FrameBuffers with field trials seems like architecturally wrong (even though it\u0027s just a reference). These are objects that are created and destroyed throughout the lifetime of the connection.\n\nRemoving the existing field trials would require looking at the rest of the environment in which they are used and finding other objects that already have field trials, so may be a big effort (far from mechanical!)\n\nTODO?",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85401199_74761d94",
+        "filename": "modules/video_coding/nack_requester.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-21T12:46:32Z",
+      "side": 1,
+      "message": "\"Feels\" like at least one of the objects already passed should have field trials in them. (Alterntatively, the NackRequester should be owning them, and they should be passed via std::unique_ptr - different question).",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
