@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a52aa7d_682db34e",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:24:04Z",
+      "side": 1,
+      "message": "Is there a reason to not just directly take a std::string or absl::string_view (what rtc::split takes) here?",
+      "range": {
+        "startLine": 38,
+        "startChar": 37,
+        "endLine": 38,
+        "endChar": 56
+      },
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87fb7428_5eaf3da6",
         "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
         "patchSetId": 4
@@ -37,6 +60,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa2f48f8_e34fa464",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:24:04Z",
+      "side": 1,
+      "message": "I think this should be minor?",
+      "range": {
+        "startLine": 54,
+        "startChar": 25,
+        "endLine": 54,
+        "endChar": 30
+      },
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15409b40_3262282b",
         "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
         "patchSetId": 4
@@ -48,6 +94,29 @@
       "writtenOn": "2022-03-21T17:08:27Z",
       "side": 1,
       "message": "Can resolution be passed as const?",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a3f248_362df3b1",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:24:04Z",
+      "side": 1,
+      "message": "NIT: Move this above the for loop that uses it?",
+      "range": {
+        "startLine": 87,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 12
+      },
       "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -99,6 +168,29 @@
       "writtenOn": "2022-03-21T17:08:27Z",
       "side": 1,
       "message": "PipeWireThreadLoopLock and PipeWireVersion-related functions seem to be generic to PipeWire, so I would be fine moving them to a separate file like pipwire_utils.h.  Up to you if you think that is useful in the future.",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4890b289_720998bb",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:24:04Z",
+      "side": 1,
+      "message": "Personally I would prefer if these were defined on the struct itself (Parse can either be a static method re-named \"Parse\" or a constructor). (Optionally can convert the struct to a class, if we don\u0027t need major/minor/micro exposed and want to encourage just building/comparing to another version object)",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 58
+      },
       "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
