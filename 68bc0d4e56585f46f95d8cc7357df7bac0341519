@@ -16,6 +16,24 @@
       "message": "Looks good. Do you have a test you can update? ",
       "revId": "68bc0d4e56585f46f95d8cc7357df7bac0341519",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "816caee0_a0498e06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-03-21T09:42:44Z",
+      "side": 1,
+      "message": "There already has a test NotUseAckedBitrateInNormalState to cover this case, so no additional test needed.",
+      "parentUuid": "a423001d_9938bef8",
+      "revId": "68bc0d4e56585f46f95d8cc7357df7bac0341519",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
