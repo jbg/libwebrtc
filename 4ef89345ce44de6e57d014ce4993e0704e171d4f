@@ -402,6 +402,30 @@
       },
       "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0873b50_d4edd9e1",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T22:38:15Z",
+      "side": 1,
+      "message": "AFAIU (I recently also had to dig into some logic on this), the local fallback_frame\u0027s underlying shared memory gets an additional reference taken by the DxgiOutputDuplicator, so that shouldn\u0027t get wiped. But the Target wouldn\u0027t be set/have frame data set.\n\nMy comment was mostly about how we\u0027re essentially re-checking the top conditional of the while loop, which felt a little weird, so I mainly meant a comment that \"DoDuplicateAll\" would increment GetFramesCaptured()",
+      "parentUuid": "b29e6612_64977d44",
+      "range": {
+        "startLine": 481,
+        "startChar": 2,
+        "endLine": 483,
+        "endChar": 5
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
