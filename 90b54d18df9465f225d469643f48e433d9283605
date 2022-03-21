@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a4e33b_71e55c27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-03-21T09:40:40Z",
+      "side": 1,
+      "message": "+Markus FYI the problematic case we\u0027ll want to avoid.\n\nShould we handle this case by simply opting out on a case-by-case basis if we discover use cases of performing PostTask whilst holding a lock?\n\nNot opting out in such cases could easily become foot guns if a new lock is added or another inline PostTask to something else that indirectly gets a lock. Just a matter of time before mutex order is inverted.",
+      "revId": "90b54d18df9465f225d469643f48e433d9283605",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
