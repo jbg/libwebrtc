@@ -1,6 +1,98 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7af47b12_1486bc5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:44:17Z",
+      "side": 1,
+      "message": "Can you hardwrap all lines at 72? A couple look to be just 1-2 characters over.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 73
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac13f646_5df42754",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:44:17Z",
+      "side": 1,
+      "message": "NIT: Typo, I think a word got omitted accidentally?",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 31
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93cabdba_f6bcae2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:44:17Z",
+      "side": 1,
+      "message": "NIT: Typo: after",
+      "range": {
+        "startLine": 22,
+        "startChar": 32,
+        "endLine": 22,
+        "endChar": 36
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1b7968a_e009b1ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:44:17Z",
+      "side": 1,
+      "message": "+1 seems like overkill",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 45
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "029cd50a_6f78a9f1",
@@ -14,6 +106,69 @@
       "writtenOn": "2022-03-21T20:27:11Z",
       "side": 1,
       "message": "PTAL!",
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fea440d9_1873a10b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:44:17Z",
+      "side": 1,
+      "message": "Mostly LGTM, a few minor edits",
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3718c915_5b86b155",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:44:17Z",
+      "side": 1,
+      "message": "To clarify, a \"local sesssion\" is a Console Session? Can we update the comment or method to align on terminology?",
+      "range": {
+        "startLine": 448,
+        "startChar": 24,
+        "endLine": 448,
+        "endChar": 37
+      },
+      "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e09003f6_57073c12",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-21T20:44:17Z",
+      "side": 1,
+      "message": "Maybe worth a comment to see if we still need to capture frames after DoDuplicateAll? I was trying to figure out some way to avoid this, but I don\u0027t think there\u0027s a clean one.",
+      "range": {
+        "startLine": 481,
+        "startChar": 2,
+        "endLine": 483,
+        "endChar": 5
+      },
       "revId": "4ef89345ce44de6e57d014ce4993e0704e171d4f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
