@@ -101,7 +101,7 @@ class VideoReceiveStream2Test : public ::testing::Test {
     config_.decoders.push_back(h264_decoder);
 
     clock_ = Clock::GetRealTimeClock();
-    timing_ = new VCMTiming(clock_);
+    timing_ = new VCMTiming(clock_, fake_call_.trials());
 
     video_receive_stream_ =
         std::make_unique<webrtc::internal::VideoReceiveStream2>(
@@ -282,7 +282,7 @@ class VideoReceiveStream2TestWithFakeDecoder : public ::testing::Test {
       video_receive_stream_->UnregisterFromTransport();
       video_receive_stream_ = nullptr;
     }
-    timing_ = new VCMTiming(clock_);
+    timing_ = new VCMTiming(clock_, fake_call_.trials());
     video_receive_stream_.reset(new webrtc::internal::VideoReceiveStream2(
         task_queue_factory_.get(), &fake_call_, kDefaultNumCpuCores,
         &packet_router_, config_.Copy(), &call_stats_, clock_, timing_,
@@ -545,16 +545,17 @@ class VideoReceiveStream2TestWithSimulatedClock
                           &fake_decoder_factory_,
                           &fake_renderer_)),
         call_stats_(time_controller_.GetClock(), loop_.task_queue()),
-        video_receive_stream_(time_controller_.GetTaskQueueFactory(),
-                              &fake_call_,
-                              /*num_cores=*/2,
-                              &packet_router_,
-                              config_.Copy(),
-                              &call_stats_,
-                              time_controller_.GetClock(),
-                              new VCMTiming(time_controller_.GetClock()),
-                              &nack_periodic_processor_,
-                              nullptr) {
+        video_receive_stream_(
+            time_controller_.GetTaskQueueFactory(),
+            &fake_call_,
+            /*num_cores=*/2,
+            &packet_router_,
+            config_.Copy(),
+            &call_stats_,
+            time_controller_.GetClock(),
+            new VCMTiming(time_controller_.GetClock(), fake_call_.trials()),
+            &nack_periodic_processor_,
+            nullptr) {
     if (std::get<1>(GetParam())) {
       fake_call_.SetFieldTrial("WebRTC-FrameBuffer3/arm:FrameBuffer3/");
     } else {
@@ -736,7 +737,7 @@ class VideoReceiveStream2TestWithLazyDecoderCreation : public ::testing::Test {
     config_.decoders.push_back(h264_decoder);
 
     clock_ = Clock::GetRealTimeClock();
-    timing_ = new VCMTiming(clock_);
+    timing_ = new VCMTiming(clock_, fake_call_.trials());
 
     video_receive_stream_ =
         std::make_unique<webrtc::internal::VideoReceiveStream2>(
