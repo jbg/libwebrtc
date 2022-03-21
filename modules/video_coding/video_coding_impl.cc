@@ -15,6 +15,7 @@
 
 #include "api/sequence_checker.h"
 #include "api/video/encoded_image.h"
+#include "api/webrtc_key_value_config.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/timing.h"
 #include "system_wrappers/include/clock.h"
@@ -41,10 +42,11 @@ namespace {
 
 class VideoCodingModuleImpl : public VideoCodingModule {
  public:
-  explicit VideoCodingModuleImpl(Clock* clock)
+  explicit VideoCodingModuleImpl(Clock* clock,
+                                 const WebRtcKeyValueConfig& field_trials)
       : VideoCodingModule(),
-        timing_(new VCMTiming(clock)),
-        receiver_(clock, timing_.get()) {}
+        timing_(new VCMTiming(clock, field_trials)),
+        receiver_(clock, timing_.get(), field_trials) {}
 
   ~VideoCodingModuleImpl() override {}
 
@@ -112,9 +114,11 @@ class VideoCodingModuleImpl : public VideoCodingModule {
 
 // DEPRECATED.  Create method for current interface, will be removed when the
 // new jitter buffer is in place.
-VideoCodingModule* VideoCodingModule::Create(Clock* clock) {
+VideoCodingModule* VideoCodingModule::Create(
+    Clock* clock,
+    const WebRtcKeyValueConfig& field_trials) {
   RTC_DCHECK(clock);
-  return new VideoCodingModuleImpl(clock);
+  return new VideoCodingModuleImpl(clock, field_trials);
 }
 
 }  // namespace webrtc
