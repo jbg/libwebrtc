@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61442239_e4851f70",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-21T07:59:24Z",
+      "side": 1,
+      "message": "Do I read this code correctly in that ext_proto is never used?",
+      "revId": "f643e85de117e7d821784db205948eabb9a00ffa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
