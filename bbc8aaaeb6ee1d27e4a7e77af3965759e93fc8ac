@@ -16,6 +16,23 @@
       "message": "2 digit patch number, will we reach 3??",
       "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4de9b2fb_cc5c976f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-21T12:17:43Z",
+      "side": 1,
+      "message": "Are you sure it doesn\u0027t make sense to put the field trials inside VideoDecoderFactory?\n\nThe only argument I can see against that is if there are cases where it makes sense to pass a null VideoDecoderFactory *and* a non-null field_trials.\n",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
