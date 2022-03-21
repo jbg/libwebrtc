@@ -33,6 +33,24 @@
       "message": "Hi Kári,\n\nHope you are well. In case you are busy could you please suggest other reviewer for this CL from those who is still kind of actively involved in maintaining iOS SDK?\n\nThanks a lot,\nYury.",
       "revId": "94a1200775d9769de9106b63e55634853db5b6a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d31f42a2_448949e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2022-03-21T09:26:16Z",
+      "side": 1,
+      "message": "Hi Yura, sorry for the delayed review, I\u0027ve been away on vacation.\n\nThanks for adding this! All of the code LGTM, but I want to get a stamp from hta@ as well just to confirm that folks are aware of this change and in agreement.",
+      "parentUuid": "037e3428_4f8b5a3d",
+      "revId": "94a1200775d9769de9106b63e55634853db5b6a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
