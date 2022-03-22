@@ -18,6 +18,86 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb92c0ac_1f1837e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-22T20:13:03Z",
+      "side": 1,
+      "message": "A couple of minor bugs to fix before merging, otherwise LGTM",
+      "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7858a416_48914096",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-22T20:13:03Z",
+      "side": 1,
+      "message": "!micro",
+      "range": {
+        "startLine": 61,
+        "startChar": 26,
+        "endLine": 61,
+        "endChar": 31
+      },
+      "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd8ffc5_76ce5162",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-22T20:13:03Z",
+      "side": 1,
+      "message": "!micro",
+      "range": {
+        "startLine": 71,
+        "startChar": 26,
+        "endLine": 71,
+        "endChar": 31
+      },
+      "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc24f6a_6ce4c301",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-22T20:13:03Z",
+      "side": 1,
+      "message": "Needs to be outside the loop, up a line.",
+      "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81096007_c1d392ae",
@@ -31,6 +111,29 @@
       "writtenOn": "2022-03-22T16:35:05Z",
       "side": 1,
       "message": "Nit: Passing absl::string_view is slightly better since it won\u0027t copy the data when passed a const char*.",
+      "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92477865_7310dde1",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-22T20:13:03Z",
+      "side": 1,
+      "message": "NIT: Rename \"other\" per class operator conventions (same below/in impl)",
+      "range": {
+        "startLine": 40,
+        "startChar": 41,
+        "endLine": 40,
+        "endChar": 60
+      },
       "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
