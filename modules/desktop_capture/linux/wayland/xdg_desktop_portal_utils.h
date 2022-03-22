@@ -39,6 +39,15 @@ struct SessionDetails {
   uint32_t pipewire_stream_node_id;
 };
 
+// An interface for portals that can capture desktop/screen.
+class ScreenCapturePortalInterface {
+ public:
+  virtual ~ScreenCapturePortalInterface() {}
+  virtual void GetSessionDetails(SessionDetails& session_details) {}
+
+  virtual void Start() = 0;
+};
+
 using ProxyRequestCallback = void (*)(GObject*, GAsyncResult*, gpointer);
 using SessionRequestCallback = void (*)(GDBusProxy*, GAsyncResult*, gpointer);
 using SessionRequestResponseSignalHandler = void (*)(GDBusConnection*,

@@ -19,7 +19,7 @@
 
 namespace webrtc {
 
-class ScreenCastPortal {
+class ScreenCastPortal : public xdg_portal::ScreenCapturePortalInterface {
  public:
   using ProxyRequestResponseHandler = void (*)(GObject* object,
                                                GAsyncResult* result,
