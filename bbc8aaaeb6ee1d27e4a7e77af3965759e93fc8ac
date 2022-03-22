@@ -318,6 +318,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "207218d2_a75ce392",
+        "filename": "modules/video_coding/nack_requester.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-22T07:45:15Z",
+      "side": 1,
+      "message": "Ok, let\u0027s keep this pragmatic approach but adding them to TaskQueueBase when not needed there just to avoid them here it looks strange (for example, why TQB and not Clock?).",
+      "parentUuid": "da63756c_c8c823ba",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0492160e_85aaa473",
         "filename": "video/video_receive_stream2.cc",
         "patchSetId": 5
