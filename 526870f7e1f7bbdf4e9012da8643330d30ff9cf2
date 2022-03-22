@@ -34,6 +34,23 @@
       "parentUuid": "3e3ad299_78e65888",
       "revId": "526870f7e1f7bbdf4e9012da8643330d30ff9cf2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ec47ff5_dca82f16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2022-03-22T14:41:25Z",
+      "side": 1,
+      "message": "ping (feel free to +2, I don\u0027t have the right permissions to do so here)",
+      "revId": "526870f7e1f7bbdf4e9012da8643330d30ff9cf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
