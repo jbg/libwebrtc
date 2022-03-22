@@ -23,6 +23,9 @@ class BaseCapturerPipeWire : public DesktopCapturer,
                              public ScreenCastPortal::PortalNotifier {
  public:
   BaseCapturerPipeWire(const DesktopCaptureOptions& options);
+  BaseCapturerPipeWire(
+      const DesktopCaptureOptions& options,
+      std::unique_ptr<xdg_portal::ScreenCapturePortalInterface> portal);
   ~BaseCapturerPipeWire() override;
 
   BaseCapturerPipeWire(const BaseCapturerPipeWire&) = delete;
@@ -40,11 +43,13 @@ class BaseCapturerPipeWire : public DesktopCapturer,
                                  int fd) override;
   void OnScreenCastSessionClosed() override;
 
+  void GetSessionDetails(xdg_portal::SessionDetails& session_details);
+
  private:
   DesktopCaptureOptions options_ = {};
   Callback* callback_ = nullptr;
   bool capturer_failed_ = false;
-  std::unique_ptr<ScreenCastPortal> screencast_portal_;
+  std::unique_ptr<xdg_portal::ScreenCapturePortalInterface> portal_;
 };
 
 }  // namespace webrtc
