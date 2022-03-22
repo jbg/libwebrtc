@@ -105,6 +105,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3143a8f8_b4596dd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T08:34:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9f467a59_c6c1783a",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d72273af_7730496a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T08:34:56Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c1b783f_785ef522",
@@ -136,6 +171,24 @@
       "side": 1,
       "message": "Do you think I should add field trials to VideoDecoderFactory ??",
       "parentUuid": "2c1b783f_785ef522",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa06e7e_a09158ab",
+        "filename": "api/video/video_stream_decoder_create.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T08:34:56Z",
+      "side": 1,
+      "message": "I think I should add it to both VideoEncoder and VideoDecoder factory (and Audio)\nBut I plan to do this \"next\", it is hard work...\n\nAdded section in doc about the \"non optimal states\" that I find unavoidable,\nhttps://docs.google.com/document/d/1TNJPIVBpA3htVD-wUf2PcTTCvRisFDjAeAyaVW__rt4/edit#bookmark\u003did.quunykq9p2hu\n\nWDYT ?",
+      "parentUuid": "1ba0cdc1_f10f3a09",
       "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -330,6 +383,24 @@
       "side": 1,
       "message": "Ok, let\u0027s keep this pragmatic approach but adding them to TaskQueueBase when not needed there just to avoid them here it looks strange (for example, why TQB and not Clock?).",
       "parentUuid": "da63756c_c8c823ba",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92400758_029e91aa",
+        "filename": "modules/video_coding/nack_requester.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T08:34:56Z",
+      "side": 1,
+      "message": "😊\nAnyway, non of the other objects here has field trials.",
+      "parentUuid": "207218d2_a75ce392",
       "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
