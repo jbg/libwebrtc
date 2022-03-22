@@ -193,6 +193,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4463198c_a96008b3",
+        "filename": "modules/video_coding/nack_requester.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-22T07:30:48Z",
+      "side": 1,
+      "message": "I kind of go the opposite way - if there is already a natural dependency of A on B, and B already needs to know about field trials, and field trials have to be consistent between A and B, then it makes sense for only B to store the pointer to the field trial. This minimizes the risk of inconsistent pointers at runtime.\n\nIf A and B can exist independently of each other, they need their own pointers, of course.\n\nAlso, objects that are created and destroyed while processing data (such as frames and buffers) should have constructors and destructors that are as simple as possible. Adding more arguments adds more cost (even though it\u0027s not that much overhead for storing a single pointer).",
+      "parentUuid": "635d2ef6_6e0f2300",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0492160e_85aaa473",
         "filename": "video/video_receive_stream2.cc",
         "patchSetId": 5
