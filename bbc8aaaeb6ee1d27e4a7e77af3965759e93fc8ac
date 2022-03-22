@@ -88,6 +88,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4638039f_ac8cfb48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T07:36:13Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c1b783f_785ef522",
@@ -101,6 +118,24 @@
       "writtenOn": "2022-03-21T12:46:32Z",
       "side": 1,
       "message": "This passes a VideoDecoderFactory too.",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba0cdc1_f10f3a09",
+        "filename": "api/video/video_stream_decoder_create.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T07:36:13Z",
+      "side": 1,
+      "message": "Do you think I should add field trials to VideoDecoderFactory ??",
+      "parentUuid": "2c1b783f_785ef522",
       "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -122,6 +157,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33256c93_6a584e33",
+        "filename": "api/video/video_stream_decoder_create.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T07:36:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a75a4575_769c973c",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f058413_c6ae5a90",
@@ -139,6 +192,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7bdd49a_30e07000",
+        "filename": "modules/video_coding/deprecated/nack_module.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T07:36:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f058413_c6ae5a90",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e81908e_10b6e997",
@@ -152,6 +223,24 @@
       "writtenOn": "2022-03-21T12:46:32Z",
       "side": 1,
       "message": "Doing FrameBuffers with field trials seems like architecturally wrong (even though it\u0027s just a reference). These are objects that are created and destroyed throughout the lifetime of the connection.\n\nRemoving the existing field trials would require looking at the rest of the environment in which they are used and finding other objects that already have field trials, so may be a big effort (far from mechanical!)\n\nTODO?",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c797e059_1e94e3cb",
+        "filename": "modules/video_coding/frame_buffer3.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T07:36:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e81908e_10b6e997",
       "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -211,6 +300,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da63756c_c8c823ba",
+        "filename": "modules/video_coding/nack_requester.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T07:36:13Z",
+      "side": 1,
+      "message": "I think I prefer the same as hta@.\nBut that discussion is moot in this case,\nnone of the arguments to the constructor has field-trials yet.\n\nwe could add it to TaskQueueBase ??",
+      "parentUuid": "4463198c_a96008b3",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0492160e_85aaa473",
         "filename": "video/video_receive_stream2.cc",
         "patchSetId": 5
@@ -222,6 +329,30 @@
       "writtenOn": "2022-03-21T15:44:35Z",
       "side": 1,
       "message": "This is similar to what hta@ was mentioning before.\n\nShould we allow indirect dependency on FT or is it better to avoid?",
+      "range": {
+        "startLine": 229,
+        "startChar": 45,
+        "endLine": 229,
+        "endChar": 59
+      },
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16e9d766_8306e46b",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-22T07:36:13Z",
+      "side": 1,
+      "message": "better avoid.",
+      "parentUuid": "0492160e_85aaa473",
       "range": {
         "startLine": 229,
         "startChar": 45,
