@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca8f6736_59e609de",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-22T14:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a52aa7d_682db34e",
+      "range": {
+        "startLine": 38,
+        "startChar": 37,
+        "endLine": 38,
+        "endChar": 56
+      },
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87fb7428_5eaf3da6",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-03-21T17:08:27Z",
       "side": 1,
       "message": "Nit: The struct has default initializers so you can just return {} here.",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e2f2ac3_368bed59",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-22T14:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87fb7428_5eaf3da6",
       "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -81,6 +123,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de00fb6_dc0c1902",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-22T14:19:06Z",
+      "side": 1,
+      "message": "Good catch. It was already wrong in the original code.",
+      "parentUuid": "fa2f48f8_e34fa464",
+      "range": {
+        "startLine": 54,
+        "startChar": 25,
+        "endLine": 54,
+        "endChar": 30
+      },
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15409b40_3262282b",
@@ -94,6 +160,24 @@
       "writtenOn": "2022-03-21T17:08:27Z",
       "side": 1,
       "message": "Can resolution be passed as const?",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4daece04_37a96fa0",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-22T14:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15409b40_3262282b",
       "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -121,6 +205,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dbfd714_6fac36d6",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-22T14:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11a3f248_362df3b1",
+      "range": {
+        "startLine": 87,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 12
+      },
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73dde8ea_b034de25",
@@ -134,6 +242,24 @@
       "writtenOn": "2022-03-21T17:08:27Z",
       "side": 1,
       "message": "You don\u0027t need any Pipewire includes here since the pipewire types are only referenced by pointer.  You can forward declare them as\n\nstruct pw_thread_loop;\nstruct spa_pod_builder;\n\netc.",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "153f67d2_c2cf9bd3",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-22T14:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73dde8ea_b034de25",
       "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -155,6 +281,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e57b18ce_5d348301",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-22T14:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8681348_6f3a5910",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c3a2b77_393823b0",
@@ -168,6 +312,24 @@
       "writtenOn": "2022-03-21T17:08:27Z",
       "side": 1,
       "message": "PipeWireThreadLoopLock and PipeWireVersion-related functions seem to be generic to PipeWire, so I would be fine moving them to a separate file like pipwire_utils.h.  Up to you if you think that is useful in the future.",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72a3afab_2c671d2a",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-22T14:19:06Z",
+      "side": 1,
+      "message": "Possibly, at this moment there is no other PipeWire consumer so it can be moved out later.",
+      "parentUuid": "1c3a2b77_393823b0",
       "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -195,6 +357,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dac14ec_4f215ed7",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-22T14:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4890b289_720998bb",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 58
+      },
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4752fa85_488d99cb",
@@ -208,6 +394,24 @@
       "writtenOn": "2022-03-21T17:08:27Z",
       "side": 1,
       "message": "Nit: #include \u003cstdint.h\u003e",
+      "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c11c72b_91f75e82",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-22T14:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4752fa85_488d99cb",
       "revId": "a8924f87f3e502299b214c19878f2bcf4a900e17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
