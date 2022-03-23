@@ -263,6 +263,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "571011a5_d9a8888f",
+        "filename": "modules/video_coding/deprecated/nack_module.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-03-23T08:06:54Z",
+      "side": 1,
+      "message": "Undone.\nIf you remove the deprecated code, I will not update it.\nOtherwise, it is just hard work to keep track of which part that should not\nbe touched. There is \"plenty\" of code that is marked deprecated that is still used\ndownstreams.",
+      "parentUuid": "d7bdd49a_30e07000",
+      "revId": "bbc8aaaeb6ee1d27e4a7e77af3965759e93fc8ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e81908e_10b6e997",
