@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3447b837_f724b6c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T16:51:30Z",
+      "side": 1,
+      "message": "So to understand; this is a no-op for everything in WebRTC right now, but presumably the CRD capturer has an implementation to call the base_pipewire_capturer GetSessionDetails?\n\nIs there another CRD-specific type that this can be implemented on? (I think this is a case where we may need to know about the specific type, which as long as we\u0027re doing a \"USE_PIPEWIRE\" ifdef seems fine to me for the BaseCapturerPipeWire since it\u0027s almost an OS-level decision.\n\nI\u0027m not the biggest fan of this generic void* method that has no examples of usage in the WebRTC code, as it feels like that *also* requires a level of knowledge about platform/OS-specific types",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 61
+      },
+      "revId": "f70461147f5df82bdb2dbbb1e8aebc65922d8315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3d57b0f_97e1fb3c",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T16:51:30Z",
+      "side": 1,
+      "message": "Prefer to define one constructor in terms of the other if possible.",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 31,
+        "endChar": 68
+      },
+      "revId": "f70461147f5df82bdb2dbbb1e8aebc65922d8315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8e60b4_dee241f6",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T16:51:30Z",
+      "side": 1,
+      "message": "There doesn\u0027t seem to be a reason why session_details needs to be a mutable reference rather than just the return value? Similarly, if Start is going to make the class pure virtual, this could be as well?",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 68
+      },
+      "revId": "f70461147f5df82bdb2dbbb1e8aebc65922d8315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f721514c_d79a5c91",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T16:51:30Z",
+      "side": 1,
+      "message": "This should probably be in it\u0027s own file and in a /public type folder. (Or maybe the top level modules/desktop_capture folder?)",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 2
+      },
+      "revId": "f70461147f5df82bdb2dbbb1e8aebc65922d8315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
