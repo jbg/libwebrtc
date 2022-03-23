@@ -186,6 +186,10 @@ bool DesktopCapturerDifferWrapper::IsOccluded(const DesktopVector& pos) {
   return base_capturer_->IsOccluded(pos);
 }
 
+DesktopCaptureMetadata DesktopCapturerDifferWrapper::GetMetadata() {
+  return base_capturer_->GetMetadata();
+}
+
 void DesktopCapturerDifferWrapper::OnCaptureResult(
     Result result,
     std::unique_ptr<DesktopFrame> input_frame) {
