@@ -19,6 +19,7 @@
 #include <type_traits>
 #include <vector>
 
+#include "modules/desktop_capture/desktop_capture_metadata.h"
 #include "modules/desktop_capture/desktop_capture_types.h"
 #include "modules/desktop_capture/desktop_frame.h"
 #include "modules/desktop_capture/shared_memory.h"
@@ -142,6 +143,10 @@ class RTC_EXPORT DesktopCapturer {
 #if defined(WEBRTC_USE_PIPEWIRE) || defined(WEBRTC_USE_X11)
   static bool IsRunningUnderWayland();
 #endif  // defined(WEBRTC_USE_PIPEWIRE) || defined(WEBRTC_USE_X11)
+
+  // Populates implementation specific metadata into the passed in pointer.
+  // Classes can choose to override it or use the default no-op implementation.
+  virtual DesktopCaptureMetadata GetMetadata() { return {}; }
 
  protected:
   // CroppingWindowCapturer needs to create raw capturers without wrappers, so
