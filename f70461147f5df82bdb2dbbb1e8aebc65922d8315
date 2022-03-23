@@ -24,6 +24,47 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66c654af_3162fd89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-23T19:35:49Z",
+      "side": 1,
+      "message": "\u003e So to understand; this is a no-op for everything in WebRTC right now, but presumably the CRD capturer has an implementation to call the base_pipewire_capturer GetSessionDetails?\n\nYes.\n\n\u003e I\u0027m not the biggest fan of this generic void* method that has no examples of usage in the WebRTC code, as it feels like that *also* requires a level of knowledge about platform/OS-specific types\n\nSure, I have defined another type and got rid of void* so as to avoid any confusion and type check problems later down the line.",
+      "parentUuid": "3447b837_f724b6c0",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 61
+      },
+      "revId": "f70461147f5df82bdb2dbbb1e8aebc65922d8315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10ca876d_59786923",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-23T19:35:49Z",
+      "side": 1,
+      "message": "Thanks for the review. PTAL",
+      "revId": "f70461147f5df82bdb2dbbb1e8aebc65922d8315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3d57b0f_97e1fb3c",
@@ -37,6 +78,30 @@
       "writtenOn": "2022-03-23T16:51:30Z",
       "side": 1,
       "message": "Prefer to define one constructor in terms of the other if possible.",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 31,
+        "endChar": 68
+      },
+      "revId": "f70461147f5df82bdb2dbbb1e8aebc65922d8315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86c002cc_62851181",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-23T19:35:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3d57b0f_97e1fb3c",
       "range": {
         "startLine": 29,
         "startChar": 6,
@@ -70,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74cba85d_00ca97ff",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-23T19:35:49Z",
+      "side": 1,
+      "message": "This method is not required to be implemented by Screencast portal so I had the optional implementation here. Moved it to the screencast portal now and marked it pure virtual now.",
+      "parentUuid": "0c8e60b4_dee241f6",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 68
+      },
+      "revId": "f70461147f5df82bdb2dbbb1e8aebc65922d8315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f721514c_d79a5c91",
@@ -83,6 +172,30 @@
       "writtenOn": "2022-03-23T16:51:30Z",
       "side": 1,
       "message": "This should probably be in it\u0027s own file and in a /public type folder. (Or maybe the top level modules/desktop_capture folder?)",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 2
+      },
+      "revId": "f70461147f5df82bdb2dbbb1e8aebc65922d8315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d60c2630_10acb133",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-23T19:35:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f721514c_d79a5c91",
       "range": {
         "startLine": 42,
         "startChar": 0,
