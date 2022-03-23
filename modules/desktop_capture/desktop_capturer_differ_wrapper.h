@@ -13,6 +13,7 @@
 
 #include <memory>
 
+#include "modules/desktop_capture/desktop_capture_metadata.h"
 #include "modules/desktop_capture/desktop_capture_types.h"
 #include "modules/desktop_capture/desktop_capturer.h"
 #include "modules/desktop_capture/desktop_frame.h"
@@ -52,6 +53,7 @@ class RTC_EXPORT DesktopCapturerDifferWrapper
   bool SelectSource(SourceId id) override;
   bool FocusOnSelectedSource() override;
   bool IsOccluded(const DesktopVector& pos) override;
+  DesktopCaptureMetadata GetMetadata() override;
 
  private:
   // DesktopCapturer::Callback interface.
