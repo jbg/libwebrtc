@@ -13,6 +13,7 @@
 
 #include <memory>
 
+#include "modules/desktop_capture/desktop_capture_metadata.h"
 #include "modules/desktop_capture/desktop_capture_options.h"
 #include "modules/desktop_capture/desktop_capture_types.h"
 #include "modules/desktop_capture/desktop_capturer.h"
@@ -59,6 +60,7 @@ class RTC_EXPORT DesktopAndCursorComposer
   bool SelectSource(SourceId id) override;
   bool FocusOnSelectedSource() override;
   bool IsOccluded(const DesktopVector& pos) override;
+  DesktopCaptureMetadata GetMetadata() override;
 
   // MouseCursorMonitor::Callback interface.
   void OnMouseCursor(MouseCursor* cursor) override;
