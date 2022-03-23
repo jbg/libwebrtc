@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c89140_a26fa06e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T20:30:58Z",
+      "side": 1,
+      "message": "Thanks. I feel better about this type than the void*; I\u0027m going to guess without looking that the build breaks are because you didn\u0027t wrap the Pipewire-only struct with appropriate include guards in the Metadata object.",
+      "revId": "e70c46684fa1c7ade338c2741eee3b6941644422",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dea82d2_ca8dbfdd",
+        "filename": "modules/desktop_capture/desktop_capture_metadata.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T20:30:58Z",
+      "side": 1,
+      "message": "Probably want to be wrapped in #if defined(WEBRTC_USE_PIPEWIRE) (and the include)",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "e70c46684fa1c7ade338c2741eee3b6941644422",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90a64b7c_00d0f17f",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T20:30:58Z",
+      "side": 1,
+      "message": "Ah, this can be replaced with:\n\noptions_(options)\nportal_(std::move(portal)) {}",
+      "range": {
+        "startLine": 39,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 1
+      },
+      "revId": "e70c46684fa1c7ade338c2741eee3b6941644422",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6115dc_3e807a84",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T20:30:58Z",
+      "side": 1,
+      "message": "As a stand-alone class, this doesn\u0027t need to be in the xdg_portal namespace; the main purpose of the xdg_portal namespace that I\u0027d requested was to wrap some of the \"loose\" constants and methods to avoid namespace pollution of those values.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "e70c46684fa1c7ade338c2741eee3b6941644422",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c26fa54f_fdef990e",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T20:30:58Z",
+      "side": 1,
+      "message": "We should probably assign default values to these. And since we want to expose them from another spot, they should probably also be in their own file (or maybe just in the desktop_capture_metadata or similar for now since it\u0027s a POD). Note that as a struct this doesn\u0027t/shouldn\u0027t be in the nested namespace. Sorry for not catching that earlier.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 2
+      },
+      "revId": "e70c46684fa1c7ade338c2741eee3b6941644422",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

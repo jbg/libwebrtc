@@ -159,6 +159,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a64adb9_9b05c4f7",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T20:30:58Z",
+      "side": 1,
+      "message": "If you want to leave a default version that just returns a no-op I guess that\u0027s fine, but then we start to mix inheritance and composition a bit.",
+      "parentUuid": "74cba85d_00ca97ff",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 68
+      },
+      "revId": "f70461147f5df82bdb2dbbb1e8aebc65922d8315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f721514c_d79a5c91",
