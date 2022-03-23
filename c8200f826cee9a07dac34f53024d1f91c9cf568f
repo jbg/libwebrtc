@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "761200ed_08dd512b",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-23T07:57:00Z",
+      "side": 1,
+      "message": "Good catch.",
+      "parentUuid": "7858a416_48914096",
+      "range": {
+        "startLine": 61,
+        "startChar": 26,
+        "endLine": 61,
+        "endChar": 31
+      },
+      "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfd8ffc5_76ce5162",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-03-22T20:13:03Z",
       "side": 1,
       "message": "!micro",
+      "range": {
+        "startLine": 71,
+        "startChar": 26,
+        "endLine": 71,
+        "endChar": 31
+      },
+      "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf4f1339_543464e2",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-23T07:57:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfd8ffc5_76ce5162",
       "range": {
         "startLine": 71,
         "startChar": 26,
@@ -98,6 +146,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0372f01e_204bea2b",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-23T07:57:00Z",
+      "side": 1,
+      "message": "Ups.",
+      "parentUuid": "7cc24f6a_6ce4c301",
+      "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81096007_c1d392ae",
@@ -115,6 +181,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "071204db_880b74d0",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-23T07:57:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81096007_c1d392ae",
+      "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92477865_7310dde1",
@@ -128,6 +212,30 @@
       "writtenOn": "2022-03-22T20:13:03Z",
       "side": 1,
       "message": "NIT: Rename \"other\" per class operator conventions (same below/in impl)",
+      "range": {
+        "startLine": 40,
+        "startChar": 41,
+        "endLine": 40,
+        "endChar": 60
+      },
+      "revId": "c8200f826cee9a07dac34f53024d1f91c9cf568f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fccaa01b_44cdc78f",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_stream_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-03-23T07:57:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92477865_7310dde1",
       "range": {
         "startLine": 40,
         "startChar": 41,
