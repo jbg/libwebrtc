@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2494128_1dd97c6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T23:12:45Z",
+      "side": 1,
+      "message": "Question about changes to BUILD.gn",
+      "revId": "0cefe9e4e0877dc99a80dfaa3d726a4fe16cc843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62ec953b_d68c0389",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T23:12:45Z",
+      "side": 1,
+      "message": "This should either be included with the other top-level things (even if it\u0027s an empty struct for them) or moved to linux/wayland, and at that point maybe renamed to something like xdg_portal_metadata ?\n\nFurther, it seems to me that if this is going to be a requirement (e.g. can\u0027t be built except with USE_PIPEWIRE), that there may be some check or cast or some level of the CRD code with enough knowledge to extract this directly from e.g. base_capturer_pipewire that doesn\u0027t require modification to the public interface? Or is it because we need to extract it from the desktop_and_cursor_composer?",
+      "range": {
+        "startLine": 565,
+        "startChar": 7,
+        "endLine": 565,
+        "endChar": 31
+      },
+      "revId": "0cefe9e4e0877dc99a80dfaa3d726a4fe16cc843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6d4a7a8_6d30a69b",
+        "filename": "modules/desktop_capture/desktop_capture_metadata.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T23:12:45Z",
+      "side": 1,
+      "message": "If this is going to live under a build definition that requires this, then no need to clutter the file with the include guards.",
+      "range": {
+        "startLine": 14,
+        "startChar": 12,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "0cefe9e4e0877dc99a80dfaa3d726a4fe16cc843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f65fca0_311fc7f9",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T23:12:45Z",
+      "side": 1,
+      "message": "Interesting; I could\u0027ve sworn git cl format would\u0027ve put this on it\u0027s own line.",
+      "range": {
+        "startLine": 39,
+        "startChar": 25,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "0cefe9e4e0877dc99a80dfaa3d726a4fe16cc843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

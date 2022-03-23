@@ -159,6 +159,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9cc3c5d_5a0a1bce",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-23T23:12:45Z",
+      "side": 1,
+      "message": "I think the name does a good job of indicating that; so I think it\u0027s slightly redundant but I don\u0027t feel too strongly.",
+      "parentUuid": "b64e3641_939814c9",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "e70c46684fa1c7ade338c2741eee3b6941644422",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c26fa54f_fdef990e",
