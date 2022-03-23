@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9929be49_4026cc7a",
+        "filename": "modules/desktop_capture/desktop_capture_metadata.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-23T21:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dea82d2_ca8dbfdd",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "e70c46684fa1c7ade338c2741eee3b6941644422",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90a64b7c_00d0f17f",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-03-23T20:30:58Z",
       "side": 1,
       "message": "Ah, this can be replaced with:\n\noptions_(options)\nportal_(std::move(portal)) {}",
+      "range": {
+        "startLine": 39,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 1
+      },
+      "revId": "e70c46684fa1c7ade338c2741eee3b6941644422",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eee407d0_540e5c17",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-23T21:59:04Z",
+      "side": 1,
+      "message": "Sorry, my bad. Done now.",
+      "parentUuid": "90a64b7c_00d0f17f",
       "range": {
         "startLine": 39,
         "startChar": 23,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64e3641_939814c9",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-23T21:59:04Z",
+      "side": 1,
+      "message": "I think it makes sense to keep it in this namespace given that the interface is only applicable to XDG desktop portals. Let me know if there is still a problem with encapsulating in this namespace.",
+      "parentUuid": "9e6115dc_3e807a84",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "e70c46684fa1c7ade338c2741eee3b6941644422",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c26fa54f_fdef990e",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-03-23T20:30:58Z",
       "side": 1,
       "message": "We should probably assign default values to these. And since we want to expose them from another spot, they should probably also be in their own file (or maybe just in the desktop_capture_metadata or similar for now since it\u0027s a POD). Note that as a struct this doesn\u0027t/shouldn\u0027t be in the nested namespace. Sorry for not catching that earlier.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 2
+      },
+      "revId": "e70c46684fa1c7ade338c2741eee3b6941644422",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684e0811_11082bf5",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-23T21:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c26fa54f_fdef990e",
       "range": {
         "startLine": 35,
         "startChar": 0,
