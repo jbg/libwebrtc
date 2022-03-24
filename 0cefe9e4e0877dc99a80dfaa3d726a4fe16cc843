@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d6bda10_8943d251",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-24T00:02:26Z",
+      "side": 1,
+      "message": "Done: Moved to top-level. It will be empty for non-pipewire runs.",
+      "parentUuid": "62ec953b_d68c0389",
+      "range": {
+        "startLine": 565,
+        "startChar": 7,
+        "endLine": 565,
+        "endChar": 31
+      },
+      "revId": "0cefe9e4e0877dc99a80dfaa3d726a4fe16cc843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6d4a7a8_6d30a69b",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-03-23T23:12:45Z",
       "side": 1,
       "message": "If this is going to live under a build definition that requires this, then no need to clutter the file with the include guards.",
+      "range": {
+        "startLine": 14,
+        "startChar": 12,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "0cefe9e4e0877dc99a80dfaa3d726a4fe16cc843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff6091a6_d51223fd",
+        "filename": "modules/desktop_capture/desktop_capture_metadata.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-24T00:02:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c6d4a7a8_6d30a69b",
       "range": {
         "startLine": 14,
         "startChar": 12,
