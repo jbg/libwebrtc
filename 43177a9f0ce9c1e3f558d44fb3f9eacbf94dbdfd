@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4f13e0b_22908fc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-03-24T09:20:45Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "43177a9f0ce9c1e3f558d44fb3f9eacbf94dbdfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8908ccd3_ae1e1c8a",
@@ -31,6 +48,24 @@
       "writtenOn": "2022-03-22T13:50:58Z",
       "side": 1,
       "message": "This seems a little weird because UpdateAckState will be called below in 2 states, leading to worry that it may get called twice when reading the code.\n\nCan this be written more simply, for instance by having a force_update_ack bool that is set and causes the ack to be sent?\n\nThe \"already seen before\" blocks are duplicate code (and duplicate comment), which also looks a bit strange.",
+      "revId": "43177a9f0ce9c1e3f558d44fb3f9eacbf94dbdfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4fef70a_13ead13d",
+        "filename": "net/dcsctp/rx/data_tracker.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-03-24T09:20:45Z",
+      "side": 1,
+      "message": "I agree that the code might benefit from some refactorings soon. You are correct that UpdateAckState might be called numerous times in this method, and that is actually allowed and by design, as it would only set it to \"Immediate\" which is the highest state it could transition to.\n\nI\u0027ll do a follow-up CL to refactor it.",
+      "parentUuid": "8908ccd3_ae1e1c8a",
       "revId": "43177a9f0ce9c1e3f558d44fb3f9eacbf94dbdfd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
