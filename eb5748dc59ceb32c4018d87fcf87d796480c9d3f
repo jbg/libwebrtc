@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49a6faef_d5da870d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-03-24T18:01:31Z",
+      "side": 1,
+      "message": "Björn, ptal as rtc_tools/rtc_event_log_visualizer only owner",
+      "revId": "eb5748dc59ceb32c4018d87fcf87d796480c9d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
