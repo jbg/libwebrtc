@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9c25f5b_ed851341",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-24T16:49:17Z",
+      "side": 1,
+      "message": "LGTM.\n\nFYI I *think* you may need to remove your self+1 before submitting, as I thought that at least in the chromium repo that caused some issues.",
+      "revId": "e40f8345c98847b4b1e99b65c3aa04942ce309e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
