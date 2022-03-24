@@ -16,6 +16,24 @@
       "message": "LGTM.\n\nFYI I *think* you may need to remove your self+1 before submitting, as I thought that at least in the chromium repo that caused some issues.",
       "revId": "e40f8345c98847b4b1e99b65c3aa04942ce309e7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29c38258_4bd00bf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-03-24T16:52:54Z",
+      "side": 1,
+      "message": "I know it caused a problem with the rubber stamper, maybe it\u0027ll cause issues here as well.  IDK : )  I suppose there is some question as to the legitimacy of +1\u0027ing my own CL : )",
+      "parentUuid": "a9c25f5b_ed851341",
+      "revId": "e40f8345c98847b4b1e99b65c3aa04942ce309e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ],
   "submitRequirementResults": [
