@@ -27,9 +27,10 @@ TEST(TimeUtilTest, CompactNtpRttToMs) {
   int64_t ms_diff = ntp2.ToMs() - ntp1.ToMs();
   uint32_t ntp_diff = CompactNtp(ntp2) - CompactNtp(ntp1);
 
-  int64_t ntp_to_ms_diff = CompactNtpRttToMs(ntp_diff);
-
-  EXPECT_NEAR(ms_diff, ntp_to_ms_diff, 1);
+  TimeDelta diff = CompactNtpRttToTimeDelta(ntp_diff);
+  // Expect 1ms precision.
+  EXPECT_GT(diff, TimeDelta::Millis(ms_diff - 1));
+  EXPECT_LT(diff, TimeDelta::Millis(ms_diff + 1));
 }
 
 TEST(TimeUtilTest, CompactNtpRttToMsWithWrap) {
@@ -43,9 +44,10 @@ TEST(TimeUtilTest, CompactNtpRttToMsWithWrap) {
   ASSERT_LT(CompactNtp(ntp2), CompactNtp(ntp1));
 
   uint32_t ntp_diff = CompactNtp(ntp2) - CompactNtp(ntp1);
-  int64_t ntp_to_ms_diff = CompactNtpRttToMs(ntp_diff);
+  TimeDelta diff = CompactNtpRttToTimeDelta(ntp_diff);
 
-  EXPECT_NEAR(ms_diff, ntp_to_ms_diff, 1);
+  EXPECT_GT(diff, TimeDelta::Millis(ms_diff - 1));
+  EXPECT_LT(diff, TimeDelta::Millis(ms_diff + 1));
 }
 
 TEST(TimeUtilTest, CompactNtpRttToMsLarge) {
@@ -55,9 +57,10 @@ TEST(TimeUtilTest, CompactNtpRttToMsLarge) {
   // Ntp difference close to 2^15 seconds should convert correctly too.
   ASSERT_NEAR(ms_diff, ((1 << 15) - 1) * 1000, 1);
   uint32_t ntp_diff = CompactNtp(ntp2) - CompactNtp(ntp1);
-  int64_t ntp_to_ms_diff = CompactNtpRttToMs(ntp_diff);
+  TimeDelta diff = CompactNtpRttToTimeDelta(ntp_diff);
 
-  EXPECT_NEAR(ms_diff, ntp_to_ms_diff, 1);
+  EXPECT_GT(diff, TimeDelta::Millis(ms_diff - 1));
+  EXPECT_LT(diff, TimeDelta::Millis(ms_diff + 1));
 }
 
 TEST(TimeUtilTest, CompactNtpRttToMsNegative) {
@@ -67,27 +70,38 @@ TEST(TimeUtilTest, CompactNtpRttToMsNegative) {
   ASSERT_GT(0, ms_diff);
   // Ntp difference close to 2^16 seconds should be treated as negative.
   uint32_t ntp_diff = CompactNtp(ntp2) - CompactNtp(ntp1);
-  int64_t ntp_to_ms_diff = CompactNtpRttToMs(ntp_diff);
-  EXPECT_EQ(1, ntp_to_ms_diff);
+  EXPECT_EQ(CompactNtpRttToTimeDelta(ntp_diff), TimeDelta::Millis(1));
 }
 
 TEST(TimeUtilTest, SaturatedUsToCompactNtp) {
   // Converts negative to zero.
-  EXPECT_EQ(SaturatedUsToCompactNtp(-1), 0u);
-  EXPECT_EQ(SaturatedUsToCompactNtp(0), 0u);
+  EXPECT_EQ(SaturatedToCompactNtp(TimeDelta::Micros(-1)), 0u);
+  EXPECT_EQ(SaturatedToCompactNtp(TimeDelta::Zero()), 0u);
   // Converts values just above and just below max uint32_t.
-  EXPECT_EQ(SaturatedUsToCompactNtp(65536000000), 0xffffffff);
-  EXPECT_EQ(SaturatedUsToCompactNtp(65535999985), 0xffffffff);
-  EXPECT_EQ(SaturatedUsToCompactNtp(65535999970), 0xfffffffe);
+  EXPECT_EQ(SaturatedToCompactNtp(TimeDelta::Micros(65536000000)), 0xffffffff);
+  EXPECT_EQ(SaturatedToCompactNtp(TimeDelta::Micros(65535999985)), 0xffffffff);
+  EXPECT_EQ(SaturatedToCompactNtp(TimeDelta::Micros(65535999970)), 0xfffffffe);
   // Converts half-seconds.
-  EXPECT_EQ(SaturatedUsToCompactNtp(500000), 0x8000u);
-  EXPECT_EQ(SaturatedUsToCompactNtp(1000000), 0x10000u);
-  EXPECT_EQ(SaturatedUsToCompactNtp(1500000), 0x18000u);
-  // Convert us -> compact_ntp -> ms. Compact ntp precision is ~15us.
-  EXPECT_EQ(CompactNtpRttToMs(SaturatedUsToCompactNtp(1516)), 2);
-  EXPECT_EQ(CompactNtpRttToMs(SaturatedUsToCompactNtp(15000)), 15);
-  EXPECT_EQ(CompactNtpRttToMs(SaturatedUsToCompactNtp(5485)), 5);
-  EXPECT_EQ(CompactNtpRttToMs(SaturatedUsToCompactNtp(5515)), 6);
+  EXPECT_EQ(SaturatedToCompactNtp(TimeDelta::Millis(500)), 0x8000u);
+  EXPECT_EQ(SaturatedToCompactNtp(TimeDelta::Seconds(1)), 0x10000u);
+  EXPECT_EQ(SaturatedToCompactNtp(TimeDelta::Millis(1'500)), 0x18000u);
+  // Convert us -> compact_ntp -> TimeDelta. Compact ntp precision is ~15us.
+  EXPECT_NEAR(
+      CompactNtpRttToTimeDelta(SaturatedToCompactNtp(TimeDelta::Micros(1'516)))
+          .us(),
+      1'516, 16);
+  EXPECT_NEAR(
+      CompactNtpRttToTimeDelta(SaturatedToCompactNtp(TimeDelta::Millis(15)))
+          .us(),
+      15'000, 16);
+  EXPECT_NEAR(
+      CompactNtpRttToTimeDelta(SaturatedToCompactNtp(TimeDelta::Micros(5'485)))
+          .us(),
+      5'485, 16);
+  EXPECT_NEAR(
+      CompactNtpRttToTimeDelta(SaturatedToCompactNtp(TimeDelta::Micros(5'515)))
+          .us(),
+      5'515, 16);
 }
 
 }  // namespace webrtc
