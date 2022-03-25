@@ -316,6 +316,10 @@ specific_include_rules = {
     "+modules/video_coding",
   ],
 
+  "simulcast_proxy_video_encoder_factory\.h": [
+    "+media",
+  ],
+
   # .cc files in api/ should not be restricted in what they can #include,
   # so we re-add all the top-level directories here. (That's because .h
   # files leak their #includes to whoever's #including them, but .cc files
