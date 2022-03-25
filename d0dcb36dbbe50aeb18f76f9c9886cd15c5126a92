@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf49a41_94dc5198",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-25T13:20:47Z",
+      "side": 1,
+      "message": "lgtm % possible syntax error.",
+      "revId": "d0dcb36dbbe50aeb18f76f9c9886cd15c5126a92",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5ad2061_4ea59a45",
+        "filename": "test/testsupport/file_utils_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-25T13:20:47Z",
+      "side": 1,
+      "message": "Looks odd, does this compile?",
+      "range": {
+        "startLine": 201,
+        "startChar": 51,
+        "endLine": 201,
+        "endChar": 52
+      },
+      "revId": "d0dcb36dbbe50aeb18f76f9c9886cd15c5126a92",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
