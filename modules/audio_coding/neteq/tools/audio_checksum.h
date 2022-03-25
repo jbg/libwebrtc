@@ -14,6 +14,7 @@
 #include <memory>
 #include <string>
 
+#include "absl/strings/string_view.h"
 #include "modules/audio_coding/neteq/tools/audio_sink.h"
 #include "rtc_base/buffer.h"
 #include "rtc_base/message_digest.h"
@@ -50,8 +51,8 @@ class AudioChecksum : public AudioSink {
       finished_ = true;
       checksum_->Finish(checksum_result_.data(), checksum_result_.size());
     }
-    return rtc::hex_encode(checksum_result_.data<char>(),
-                           checksum_result_.size());
+    return rtc::hex_encode(absl::string_view(checksum_result_.data<char>(),
+                                             checksum_result_.size()));
   }
 
  private:
