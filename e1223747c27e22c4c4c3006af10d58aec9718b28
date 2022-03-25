@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7482348f_5d8649dc",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_session_details.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-03-25T09:25:41Z",
+      "side": 0,
+      "message": "This becomes \"file not found\" on cast_shell_linux",
+      "revId": "e1223747c27e22c4c4c3006af10d58aec9718b28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
