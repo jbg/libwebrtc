@@ -15,6 +15,8 @@
 #include <limits>
 #include <string>
 
+#include "absl/strings/string_view.h"
+#include "absl/types/optional.h"
 #include "test/gtest.h"
 
 namespace rtc {
@@ -92,6 +94,14 @@ TYPED_TEST_P(BasicNumberTest, TestInvalidInputs) {
   EXPECT_EQ(absl::nullopt, StringToNumber<T>("- 5"));
   EXPECT_EQ(absl::nullopt, StringToNumber<T>(" -5"));
   EXPECT_EQ(absl::nullopt, StringToNumber<T>("5 "));
+  // Test various types of empty inputs
+  EXPECT_EQ(absl::nullopt, StringToNumber<T>(nullptr));
+  EXPECT_EQ(absl::nullopt, StringToNumber<T>(""));
+  EXPECT_EQ(absl::nullopt, StringToNumber<T>(std::string()));
+  EXPECT_EQ(absl::nullopt, StringToNumber<T>(std::string("")));
+  EXPECT_EQ(absl::nullopt, StringToNumber<T>(absl::string_view()));
+  EXPECT_EQ(absl::nullopt, StringToNumber<T>(absl::string_view(nullptr)));
+  EXPECT_EQ(absl::nullopt, StringToNumber<T>(absl::string_view("")));
 }
 
 REGISTER_TYPED_TEST_SUITE_P(BasicNumberTest,
