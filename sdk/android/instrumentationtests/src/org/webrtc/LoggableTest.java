@@ -13,7 +13,7 @@ package org.webrtc;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import android.support.test.InstrumentationRegistry;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.SmallTest;
 import java.util.ArrayList;
 import org.junit.Test;
@@ -62,7 +62,7 @@ public class LoggableTest {
   @SmallTest
   public void testLoggableSetWithoutError() throws InterruptedException {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setInjectableLogger(mockLoggable, Severity.LS_INFO)
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
@@ -72,7 +72,7 @@ public class LoggableTest {
   @SmallTest
   public void testMessageIsLoggedCorrectly() throws InterruptedException {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setInjectableLogger(mockLoggable, Severity.LS_INFO)
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
@@ -86,7 +86,7 @@ public class LoggableTest {
   public void testLowSeverityIsFiltered() throws InterruptedException {
     // Set severity to LS_WARNING to filter out LS_INFO and below.
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setInjectableLogger(mockLoggable, Severity.LS_WARNING)
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
@@ -99,13 +99,13 @@ public class LoggableTest {
   @SmallTest
   public void testLoggableDoesNotReceiveMessagesAfterUnsetting() {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setInjectableLogger(mockLoggable, Severity.LS_INFO)
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
     // Reinitialize without Loggable
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
     String msg = "Message that should NOT be logged";
@@ -117,7 +117,7 @@ public class LoggableTest {
   @SmallTest
   public void testNativeMessageIsLoggedCorrectly() throws InterruptedException {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setInjectableLogger(mockLoggable, Severity.LS_INFO)
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
@@ -130,7 +130,7 @@ public class LoggableTest {
   @SmallTest
   public void testNativeLowSeverityIsFiltered() throws InterruptedException {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setInjectableLogger(mockLoggable, Severity.LS_WARNING)
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
@@ -143,13 +143,13 @@ public class LoggableTest {
   @SmallTest
   public void testNativeLoggableDoesNotReceiveMessagesAfterUnsetting() {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setInjectableLogger(mockLoggable, Severity.LS_INFO)
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
     // Reinitialize without Loggable
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
     String msg = "Message that should NOT be logged";

@@ -11,7 +11,7 @@
 package org.webrtc;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.LargeTest;
 import androidx.test.filters.MediumTest;
 import androidx.test.filters.SmallTest;
@@ -30,7 +30,7 @@ public class Camera1CapturerUsingTextureTest {
 
     @Override
     public Context getAppContext() {
-      return InstrumentationRegistry.getTargetContext();
+      return ApplicationProvider.getApplicationContext();
     }
 
     @SuppressWarnings("deprecation")

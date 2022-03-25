@@ -13,7 +13,7 @@ package org.webrtc;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import android.support.test.InstrumentationRegistry;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.SmallTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class VideoTrackTest {
   @Before
   public void setUp() {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
 

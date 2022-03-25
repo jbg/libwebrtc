@@ -15,11 +15,11 @@ import static org.junit.Assert.fail;
 
 import android.annotation.SuppressLint;
 import android.graphics.Point;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.annotation.UiThreadTest;
-import android.support.test.rule.UiThreadTestRule;
 import android.view.View.MeasureSpec;
+import androidx.test.annotation.UiThreadTest;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.MediumTest;
+import androidx.test.rule.UiThreadTestRule;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
@@ -86,7 +86,7 @@ public class SurfaceViewRendererOnMeasureTest {
   @MediumTest
   public void testNoFrame() {
     final SurfaceViewRenderer surfaceViewRenderer =
-        new SurfaceViewRenderer(InstrumentationRegistry.getContext());
+        new SurfaceViewRenderer(ApplicationProvider.getApplicationContext());
     final String frameDimensions = "null";
 
     // Test behaviour before SurfaceViewRenderer.init() is called.
@@ -125,7 +125,7 @@ public class SurfaceViewRendererOnMeasureTest {
   @MediumTest
   public void testFrame1280x720() throws InterruptedException {
     final SurfaceViewRenderer surfaceViewRenderer =
-        new SurfaceViewRenderer(InstrumentationRegistry.getContext());
+        new SurfaceViewRenderer(ApplicationProvider.getApplicationContext());
     /**
      * Mock renderer events with blocking wait functionality for frame size changes.
      */

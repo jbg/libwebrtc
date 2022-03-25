@@ -10,7 +10,7 @@
 
 package org.webrtc;
 
-import android.support.test.InstrumentationRegistry;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.SmallTest;
 import org.junit.Test;
 import org.webrtc.PeerConnectionFactory;
@@ -23,7 +23,7 @@ public class WebRtcJniBootTest {
   @SmallTest
   public void testJniLoadsWithoutError() throws InterruptedException {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
     PeerConnectionFactory.builder().createPeerConnectionFactory();
