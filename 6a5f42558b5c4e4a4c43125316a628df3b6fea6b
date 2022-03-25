@@ -16,6 +16,29 @@
       "message": "Adding nisse@ as reviewer for an extra pair of eyes on this CL that makes slight changes to the number parsing functions in rtc_base.",
       "revId": "6a5f42558b5c4e4a4c43125316a628df3b6fea6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fca1ec3_7f825c05",
+        "filename": "rtc_base/string_to_number.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-25T12:00:10Z",
+      "side": 1,
+      "message": "I think all these functions should explicitly reject inputs with embedded NUL characters. One way to do that would be to change the check `end \u0026\u0026 *end \u003d\u003d \u0027\\0\u0027` with `end \u003d\u003d str_str.c_str() + str.size()`\n\nWould also need a test for this behavior.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 1
+      },
+      "revId": "6a5f42558b5c4e4a4c43125316a628df3b6fea6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
