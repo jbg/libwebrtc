@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e7526b_b0048379",
+        "filename": "rtc_base/string_to_number.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-25T13:16:55Z",
+      "side": 1,
+      "message": "Do we really have a use case for long double?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 1
+      },
+      "revId": "f6d6c356008a12c81662d4881493f5f41c59a901",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b532d1ed_04630382",
+        "filename": "rtc_base/string_to_number.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-25T13:16:55Z",
+      "side": 1,
+      "message": "I think this should also be updated to reject embedded  NULs.",
+      "range": {
+        "startLine": 93,
+        "startChar": 6,
+        "endLine": 93,
+        "endChar": 25
+      },
+      "revId": "f6d6c356008a12c81662d4881493f5f41c59a901",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
