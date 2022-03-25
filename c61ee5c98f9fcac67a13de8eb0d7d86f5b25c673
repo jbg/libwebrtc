@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0cb589d_4822005b",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 4
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-03-25T12:46:06Z",
+      "side": 1,
+      "message": "Copied from chromium\u0027s mb_config.pyl:\nhttps://source.chromium.org/chromium/chromium/src/+/main:tools/mb/mb_config.pyl;l\u003d3639;drc\u003dafc427396abeff714304a643d0654d4215ee076a;bpv\u003d1;bpt\u003d0",
+      "parentUuid": "a8caea7c_c3b0e5ec",
+      "range": {
+        "startLine": 443,
+        "startChar": 5,
+        "endLine": 443,
+        "endChar": 15
+      },
+      "revId": "c61ee5c98f9fcac67a13de8eb0d7d86f5b25c673",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73e76f3b_8973b742",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-25T12:42:05Z",
       "side": 1,
       "message": "Why do we need this?",
+      "range": {
+        "startLine": 511,
+        "startChar": 37,
+        "endLine": 511,
+        "endChar": 47
+      },
+      "revId": "c61ee5c98f9fcac67a13de8eb0d7d86f5b25c673",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22a8e88e_42a5c89c",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 4
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-03-25T12:46:06Z",
+      "side": 1,
+      "message": "It\u0027s to fix this check:\nhttps://crsrc.org/c/tools/mb/lib/validation.py;l\u003d160;drc\u003df4d455ea237dbd6b8a493c0f2eb99c2b6ae1e758;bpv\u003d1;bpt\u003d0\nAlso I think it makes sense from the comment above.",
+      "parentUuid": "73e76f3b_8973b742",
       "range": {
         "startLine": 511,
         "startChar": 37,
