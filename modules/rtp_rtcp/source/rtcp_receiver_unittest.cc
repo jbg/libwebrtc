@@ -15,7 +15,6 @@
 #include <utility>
 
 #include "api/array_view.h"
-#include "api/units/time_delta.h"
 #include "api/units/timestamp.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video/video_bitrate_allocator.h"
@@ -245,15 +244,15 @@ TEST(RtcpReceiverTest, InjectSrPacketCalculatesRTT) {
   RTCPReceiver receiver(DefaultConfiguration(&mocks), &mocks.rtp_rtcp_impl);
   receiver.SetRemoteSSRC(kSenderSsrc);
 
-  const TimeDelta kRtt = TimeDelta::Millis(123);
+  const int64_t kRttMs = 123;
   const uint32_t kDelayNtp = 0x4321;
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
 
   int64_t rtt_ms = 0;
   EXPECT_EQ(-1, receiver.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
 
   uint32_t sent_ntp = CompactNtp(mocks.clock.CurrentNtpTime());
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::SenderReport sr;
   sr.SetSenderSsrc(kSenderSsrc);
@@ -268,7 +267,7 @@ TEST(RtcpReceiverTest, InjectSrPacketCalculatesRTT) {
   receiver.IncomingPacket(sr.Build());
 
   EXPECT_EQ(0, receiver.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
-  EXPECT_NEAR(rtt_ms, kRtt.ms(), 1);
+  EXPECT_NEAR(kRttMs, rtt_ms, 1);
 }
 
 TEST(RtcpReceiverTest, InjectSrPacketCalculatesNegativeRTTAsOne) {
@@ -276,15 +275,15 @@ TEST(RtcpReceiverTest, InjectSrPacketCalculatesNegativeRTTAsOne) {
   RTCPReceiver receiver(DefaultConfiguration(&mocks), &mocks.rtp_rtcp_impl);
   receiver.SetRemoteSSRC(kSenderSsrc);
 
-  const TimeDelta kRtt = TimeDelta::Millis(-13);
+  const int64_t kRttMs = -13;
   const uint32_t kDelayNtp = 0x4321;
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
 
   int64_t rtt_ms = 0;
   EXPECT_EQ(-1, receiver.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
 
   uint32_t sent_ntp = CompactNtp(mocks.clock.CurrentNtpTime());
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::SenderReport sr;
   sr.SetSenderSsrc(kSenderSsrc);
@@ -309,12 +308,12 @@ TEST(RtcpReceiverTest,
   RTCPReceiver receiver(DefaultConfiguration(&mocks), &mocks.rtp_rtcp_impl);
   receiver.SetRemoteSSRC(kSenderSsrc);
 
-  const TimeDelta kRtt = TimeDelta::Millis(120);
+  const int64_t kRttMs = 120;
   const uint32_t kDelayNtp = 123000;
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
 
   uint32_t sent_ntp = CompactNtp(mocks.clock.CurrentNtpTime());
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::SenderReport sr;
   sr.SetSenderSsrc(kSenderSsrc);
@@ -329,7 +328,7 @@ TEST(RtcpReceiverTest,
 
   EXPECT_CALL(mocks.rtp_rtcp_impl, OnReceivedRtcpReportBlocks(SizeIs(2)));
   EXPECT_CALL(mocks.bandwidth_observer,
-              OnReceivedRtcpReceiverReport(SizeIs(2), kRtt.ms(), _));
+              OnReceivedRtcpReceiverReport(SizeIs(2), kRttMs, _));
   receiver.IncomingPacket(sr.Build());
 }
 
@@ -831,7 +830,7 @@ TEST(RtcpReceiverTest, InjectExtendedReportsDlrrPacketWithSubBlock) {
   uint32_t compact_ntp_now = CompactNtp(mocks.clock.CurrentNtpTime());
   EXPECT_TRUE(receiver.GetAndResetXrRrRtt(&rtt_ms));
   uint32_t rtt_ntp = compact_ntp_now - kDelay - kLastRR;
-  EXPECT_NEAR(CompactNtpRttToTimeDelta(rtt_ntp).ms(), rtt_ms, 1);
+  EXPECT_NEAR(CompactNtpRttToMs(rtt_ntp), rtt_ms, 1);
   RTCPReceiver::NonSenderRttStats non_sender_rtt_stats =
       receiver.GetNonSenderRTT();
   EXPECT_GT(non_sender_rtt_stats.round_trip_time(), TimeDelta::Zero());
@@ -861,7 +860,7 @@ TEST(RtcpReceiverTest, InjectExtendedReportsDlrrPacketWithMultipleSubBlocks) {
   int64_t rtt_ms = 0;
   EXPECT_TRUE(receiver.GetAndResetXrRrRtt(&rtt_ms));
   uint32_t rtt_ntp = compact_ntp_now - kDelay - kLastRR;
-  EXPECT_NEAR(CompactNtpRttToTimeDelta(rtt_ntp).ms(), rtt_ms, 1);
+  EXPECT_NEAR(CompactNtpRttToMs(rtt_ntp), rtt_ms, 1);
   RTCPReceiver::NonSenderRttStats non_sender_rtt_stats =
       receiver.GetNonSenderRTT();
   EXPECT_GT(non_sender_rtt_stats.round_trip_time(), TimeDelta::Zero());
@@ -948,12 +947,12 @@ TEST(RtcpReceiverTest, RttCalculatedAfterExtendedReportsDlrr) {
   receiver.SetRemoteSSRC(kSenderSsrc);
 
   Random rand(0x0123456789abcdef);
-  const TimeDelta kRtt = TimeDelta::Millis(rand.Rand(1, 9 * 3600 * 1000));
+  const int64_t kRttMs = rand.Rand(1, 9 * 3600 * 1000);
   const uint32_t kDelayNtp = rand.Rand(0, 0x7fffffff);
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
   NtpTime now = mocks.clock.CurrentNtpTime();
   uint32_t sent_ntp = CompactNtp(now);
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::ExtendedReports xr;
   xr.SetSenderSsrc(kSenderSsrc);
@@ -963,7 +962,7 @@ TEST(RtcpReceiverTest, RttCalculatedAfterExtendedReportsDlrr) {
 
   int64_t rtt_ms = 0;
   EXPECT_TRUE(receiver.GetAndResetXrRrRtt(&rtt_ms));
-  EXPECT_NEAR(kRtt.ms(), rtt_ms, 1);
+  EXPECT_NEAR(kRttMs, rtt_ms, 1);
   RTCPReceiver::NonSenderRttStats non_sender_rtt_stats =
       receiver.GetNonSenderRTT();
   EXPECT_TRUE(non_sender_rtt_stats.round_trip_time().has_value());
@@ -983,12 +982,12 @@ TEST(RtcpReceiverTest, SetterEnablesReceiverRtt) {
   receiver.SetNonSenderRttMeasurement(true);
 
   Random rand(0x0123456789abcdef);
-  const TimeDelta kRtt = TimeDelta::Millis(rand.Rand(1, 9 * 3600 * 1000));
+  const int64_t kRttMs = rand.Rand(1, 9 * 3600 * 1000);
   const uint32_t kDelayNtp = rand.Rand(0, 0x7fffffff);
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
   NtpTime now = mocks.clock.CurrentNtpTime();
   uint32_t sent_ntp = CompactNtp(now);
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::ExtendedReports xr;
   xr.SetSenderSsrc(kSenderSsrc);
@@ -998,7 +997,7 @@ TEST(RtcpReceiverTest, SetterEnablesReceiverRtt) {
 
   int64_t rtt_ms = 0;
   EXPECT_TRUE(receiver.GetAndResetXrRrRtt(&rtt_ms));
-  EXPECT_NEAR(rtt_ms, kRtt.ms(), 1);
+  EXPECT_NEAR(rtt_ms, kRttMs, 1);
   RTCPReceiver::NonSenderRttStats non_sender_rtt_stats =
       receiver.GetNonSenderRTT();
   EXPECT_TRUE(non_sender_rtt_stats.round_trip_time().has_value());
@@ -1018,12 +1017,12 @@ TEST(RtcpReceiverTest, DoesntCalculateRttOnReceivedDlrr) {
   receiver.SetNonSenderRttMeasurement(false);
 
   Random rand(0x0123456789abcdef);
-  const TimeDelta kRtt = TimeDelta::Millis(rand.Rand(1, 9 * 3600 * 1000));
+  const int64_t kRttMs = rand.Rand(1, 9 * 3600 * 1000);
   const uint32_t kDelayNtp = rand.Rand(0, 0x7fffffff);
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
   NtpTime now = mocks.clock.CurrentNtpTime();
   uint32_t sent_ntp = CompactNtp(now);
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::ExtendedReports xr;
   xr.SetSenderSsrc(kSenderSsrc);
@@ -1049,12 +1048,12 @@ TEST(RtcpReceiverTest, XrDlrrCalculatesNegativeRttAsOne) {
   receiver.SetRemoteSSRC(kSenderSsrc);
 
   Random rand(0x0123456789abcdef);
-  const TimeDelta kRtt = TimeDelta::Millis(rand.Rand(-3600 * 1000, -1));
+  const int64_t kRttMs = rand.Rand(-3600 * 1000, -1);
   const uint32_t kDelayNtp = rand.Rand(0, 0x7fffffff);
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
   NtpTime now = mocks.clock.CurrentNtpTime();
   uint32_t sent_ntp = CompactNtp(now);
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::ExtendedReports xr;
   xr.SetSenderSsrc(kSenderSsrc);
@@ -1082,12 +1081,12 @@ TEST(RtcpReceiverTest, ReceiverRttWithMultipleMeasurements) {
   receiver.SetRemoteSSRC(kSenderSsrc);
 
   Random rand(0x0123456789abcdef);
-  const TimeDelta kRtt = TimeDelta::Millis(rand.Rand(1, 9 * 3600 * 1000));
+  const int64_t kRttMs = rand.Rand(1, 9 * 3600 * 1000);
   const uint32_t kDelayNtp = rand.Rand(0, 0x7fffffff);
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
   NtpTime now = mocks.clock.CurrentNtpTime();
   uint32_t sent_ntp = CompactNtp(now);
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::ExtendedReports xr;
   xr.SetSenderSsrc(kSenderSsrc);
@@ -1100,7 +1099,7 @@ TEST(RtcpReceiverTest, ReceiverRttWithMultipleMeasurements) {
   RTCPReceiver::NonSenderRttStats non_sender_rtt_stats =
       receiver.GetNonSenderRTT();
   EXPECT_TRUE(non_sender_rtt_stats.round_trip_time().has_value());
-  EXPECT_NEAR(non_sender_rtt_stats.round_trip_time()->ms(), kRtt.ms(), 1);
+  EXPECT_NEAR(non_sender_rtt_stats.round_trip_time()->ms(), kRttMs, 1);
   EXPECT_EQ(non_sender_rtt_stats.round_trip_time_measurements(), 1);
   EXPECT_EQ(non_sender_rtt_stats.total_round_trip_time().ms(),
             non_sender_rtt_stats.round_trip_time()->ms());
@@ -1108,7 +1107,7 @@ TEST(RtcpReceiverTest, ReceiverRttWithMultipleMeasurements) {
   // Generate another XR report with the same RTT and delay.
   NtpTime now2 = mocks.clock.CurrentNtpTime();
   uint32_t sent_ntp2 = CompactNtp(now2);
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::ExtendedReports xr2;
   xr2.SetSenderSsrc(kSenderSsrc);
@@ -1120,10 +1119,9 @@ TEST(RtcpReceiverTest, ReceiverRttWithMultipleMeasurements) {
   // the values are as expected.
   non_sender_rtt_stats = receiver.GetNonSenderRTT();
   EXPECT_TRUE(non_sender_rtt_stats.round_trip_time().has_value());
-  EXPECT_NEAR(non_sender_rtt_stats.round_trip_time()->ms(), kRtt.ms(), 1);
+  EXPECT_NEAR(non_sender_rtt_stats.round_trip_time()->ms(), kRttMs, 1);
   EXPECT_EQ(non_sender_rtt_stats.round_trip_time_measurements(), 2);
-  EXPECT_NEAR(non_sender_rtt_stats.total_round_trip_time().ms(), 2 * kRtt.ms(),
-              2);
+  EXPECT_NEAR(non_sender_rtt_stats.total_round_trip_time().ms(), 2 * kRttMs, 2);
 }
 
 // Test that the receiver RTT stat resets when receiving a SR without XR. This
@@ -1137,12 +1135,12 @@ TEST(RtcpReceiverTest, ReceiverRttResetOnSrWithoutXr) {
   receiver.SetRemoteSSRC(kSenderSsrc);
 
   Random rand(0x0123456789abcdef);
-  const TimeDelta kRtt = TimeDelta::Millis(rand.Rand(1, 9 * 3600 * 1000));
+  const int64_t kRttMs = rand.Rand(1, 9 * 3600 * 1000);
   const uint32_t kDelayNtp = rand.Rand(0, 0x7fffffff);
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
   NtpTime now = mocks.clock.CurrentNtpTime();
   uint32_t sent_ntp = CompactNtp(now);
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::ExtendedReports xr;
   xr.SetSenderSsrc(kSenderSsrc);
@@ -1153,7 +1151,7 @@ TEST(RtcpReceiverTest, ReceiverRttResetOnSrWithoutXr) {
   RTCPReceiver::NonSenderRttStats non_sender_rtt_stats =
       receiver.GetNonSenderRTT();
   EXPECT_TRUE(non_sender_rtt_stats.round_trip_time().has_value());
-  EXPECT_NEAR(non_sender_rtt_stats.round_trip_time()->ms(), kRtt.ms(), 1);
+  EXPECT_NEAR(non_sender_rtt_stats.round_trip_time()->ms(), kRttMs, 1);
 
   // Generate a SR without XR.
   rtcp::ReportBlock rb;
@@ -1182,12 +1180,12 @@ TEST(RtcpReceiverTest, ReceiverRttResetOnDlrrWithZeroTimestamp) {
   receiver.SetRemoteSSRC(kSenderSsrc);
 
   Random rand(0x0123456789abcdef);
-  const TimeDelta kRtt = TimeDelta::Millis(rand.Rand(1, 9 * 3600 * 1000));
+  const int64_t kRttMs = rand.Rand(1, 9 * 3600 * 1000);
   const uint32_t kDelayNtp = rand.Rand(0, 0x7fffffff);
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
   NtpTime now = mocks.clock.CurrentNtpTime();
   uint32_t sent_ntp = CompactNtp(now);
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::ExtendedReports xr;
   xr.SetSenderSsrc(kSenderSsrc);
@@ -1198,12 +1196,12 @@ TEST(RtcpReceiverTest, ReceiverRttResetOnDlrrWithZeroTimestamp) {
   RTCPReceiver::NonSenderRttStats non_sender_rtt_stats =
       receiver.GetNonSenderRTT();
   EXPECT_TRUE(non_sender_rtt_stats.round_trip_time().has_value());
-  EXPECT_NEAR(non_sender_rtt_stats.round_trip_time()->ms(), kRtt.ms(), 1);
+  EXPECT_NEAR(non_sender_rtt_stats.round_trip_time()->ms(), kRttMs, 1);
 
   // Generate an XR+DLRR with zero timestamp.
   rtcp::ExtendedReports xr2;
   xr2.SetSenderSsrc(kSenderSsrc);
-  xr2.AddDlrrItem(ReceiveTimeInfo(kReceiverMainSsrc, 0, kDelayNtp));
+  xr2.AddDlrrItem(ReceiveTimeInfo(kReceiverMainSsrc, 0, kDelayMs));
 
   receiver.IncomingPacket(xr2.Build());
 
@@ -1222,12 +1220,12 @@ TEST(RtcpReceiverTest, ReceiverRttWithMultipleRemoteSsrcs) {
   receiver.SetNonSenderRttMeasurement(true);
 
   Random rand(0x0123456789abcdef);
-  const TimeDelta kRtt = TimeDelta::Millis(rand.Rand(1, 9 * 3600 * 1000));
+  const int64_t kRttMs = rand.Rand(1, 9 * 3600 * 1000);
   const uint32_t kDelayNtp = rand.Rand(0, 0x7fffffff);
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
   NtpTime now = mocks.clock.CurrentNtpTime();
   uint32_t sent_ntp = CompactNtp(now);
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::ExtendedReports xr;
   xr.SetSenderSsrc(kSenderSsrc);
@@ -1236,12 +1234,12 @@ TEST(RtcpReceiverTest, ReceiverRttWithMultipleRemoteSsrcs) {
   receiver.IncomingPacket(xr.Build());
 
   // Generate an XR report for another SSRC.
-  const TimeDelta kRtt2 = TimeDelta::Millis(rand.Rand(1, 9 * 3600 * 1000));
+  const int64_t kRttMs2 = rand.Rand(1, 9 * 3600 * 1000);
   const uint32_t kDelayNtp2 = rand.Rand(0, 0x7fffffff);
-  const TimeDelta kDelay2 = CompactNtpRttToTimeDelta(kDelayNtp2);
+  const int64_t kDelayMs2 = CompactNtpRttToMs(kDelayNtp2);
   NtpTime now2 = mocks.clock.CurrentNtpTime();
   uint32_t sent_ntp2 = CompactNtp(now2);
-  mocks.clock.AdvanceTime(kRtt2 + kDelay2);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs2 + kDelayMs2);
 
   rtcp::ExtendedReports xr2;
   xr2.SetSenderSsrc(kSenderSsrc + 1);
@@ -1253,7 +1251,7 @@ TEST(RtcpReceiverTest, ReceiverRttWithMultipleRemoteSsrcs) {
   RTCPReceiver::NonSenderRttStats non_sender_rtt_stats =
       receiver.GetNonSenderRTT();
   EXPECT_TRUE(non_sender_rtt_stats.round_trip_time().has_value());
-  EXPECT_NEAR(non_sender_rtt_stats.round_trip_time()->ms(), kRtt.ms(), 1);
+  EXPECT_NEAR(non_sender_rtt_stats.round_trip_time()->ms(), kRttMs, 1);
   EXPECT_FALSE(non_sender_rtt_stats.total_round_trip_time().IsZero());
   EXPECT_GT(non_sender_rtt_stats.round_trip_time_measurements(), 0);
 
@@ -1262,7 +1260,7 @@ TEST(RtcpReceiverTest, ReceiverRttWithMultipleRemoteSsrcs) {
   RTCPReceiver::NonSenderRttStats non_sender_rtt_stats2 =
       receiver.GetNonSenderRTT();
   EXPECT_TRUE(non_sender_rtt_stats2.round_trip_time().has_value());
-  EXPECT_NEAR(non_sender_rtt_stats2.round_trip_time()->ms(), kRtt2.ms(), 1);
+  EXPECT_NEAR(non_sender_rtt_stats2.round_trip_time()->ms(), kRttMs2, 1);
   EXPECT_FALSE(non_sender_rtt_stats2.total_round_trip_time().IsZero());
   EXPECT_GT(non_sender_rtt_stats2.round_trip_time_measurements(), 0);
 }
@@ -1617,12 +1615,12 @@ TEST(RtcpReceiverTest, VerifyRttObtainedFromReportBlockDataObserver) {
   RTCPReceiver receiver(config, &mocks.rtp_rtcp_impl);
   receiver.SetRemoteSSRC(kSenderSsrc);
 
-  const TimeDelta kRtt = TimeDelta::Millis(120);
+  const int64_t kRttMs = 120;
   const uint32_t kDelayNtp = 123000;
-  const TimeDelta kDelay = CompactNtpRttToTimeDelta(kDelayNtp);
+  const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
 
   uint32_t sent_ntp = CompactNtp(mocks.clock.CurrentNtpTime());
-  mocks.clock.AdvanceTime(kRtt + kDelay);
+  mocks.clock.AdvanceTimeMilliseconds(kRttMs + kDelayMs);
 
   rtcp::SenderReport sr;
   sr.SetSenderSsrc(kSenderSsrc);
@@ -1643,10 +1641,10 @@ TEST(RtcpReceiverTest, VerifyRttObtainedFromReportBlockDataObserver) {
         EXPECT_EQ(kReceiverMainSsrc,
                   report_block_data.report_block().source_ssrc);
         EXPECT_EQ(1u, report_block_data.num_rtts());
-        EXPECT_EQ(kRtt.ms(), report_block_data.min_rtt_ms());
-        EXPECT_EQ(kRtt.ms(), report_block_data.max_rtt_ms());
-        EXPECT_EQ(kRtt.ms(), report_block_data.sum_rtt_ms());
-        EXPECT_EQ(kRtt.ms(), report_block_data.last_rtt_ms());
+        EXPECT_EQ(kRttMs, report_block_data.min_rtt_ms());
+        EXPECT_EQ(kRttMs, report_block_data.max_rtt_ms());
+        EXPECT_EQ(kRttMs, report_block_data.sum_rtt_ms());
+        EXPECT_EQ(kRttMs, report_block_data.last_rtt_ms());
       });
   EXPECT_CALL(observer, OnReportBlockDataUpdated)
       .WillOnce([](ReportBlockData report_block_data) {
