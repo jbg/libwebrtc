@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862cf049_08e02763",
+        "filename": "rtc_base/string_to_number.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-25T08:22:48Z",
+      "side": 1,
+      "message": "Can we add a test case for these in https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/rtc_base/string_to_number_unittest.cc?\n\nIIUC DCHECK was never hit, and I suspect not tested. :)",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 18
+      },
+      "revId": "acdabbf871e9e39c990466df46d9a784e0281583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
