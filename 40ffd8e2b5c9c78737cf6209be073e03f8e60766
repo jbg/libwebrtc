@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c46600ba_e29aaa58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-03-25T07:02:38Z",
+      "side": 1,
+      "message": "PTAL. So apparently there are no bots that compile with openssl. These updates were missed in the big batch of string_view changes under rtc_base/.",
+      "revId": "40ffd8e2b5c9c78737cf6209be073e03f8e60766",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
