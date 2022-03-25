@@ -18,6 +18,8 @@
   # The builders should be sorted by the order they appear in the /builders
   # page on the buildbots, *not* alphabetically.
   'builder_groups': {
+    # TODO(jleconte): Remove this and don't overwrite mb's default config.
+    'chromium': {},
     'client.webrtc': {
       # iOS
       'iOS64 Debug': 'ios_debug_bot_arm64',
@@ -440,6 +442,10 @@
       'gn_args': 'dcheck_always_on=true',
     },
 
+    'dcheck_off': {
+      'gn_args': 'dcheck_always_on=false',
+    },
+
     'debug': {
       'gn_args': 'is_debug=true',
     },
@@ -504,7 +510,7 @@
     # 100% release build without DCHECKs while 'release_bot' is a partial
     # release configs since `dcheck_always_on` is set to true.
     'pure_release_bot': {
-      'mixins': ['release', 'goma'],
+      'mixins': ['release', 'goma', 'dcheck_off'],
     },
     'release_bot': {
       'mixins': ['pure_release_bot', 'dcheck_always_on'],
