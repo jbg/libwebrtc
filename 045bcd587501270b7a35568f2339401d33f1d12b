@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7aee48_9464f0f8",
+        "filename": "rtc_base/string_encode.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-26T09:23:39Z",
+      "side": 1,
+      "message": "Hmm, I am not sure what is happening here:\n\n```\n../../rtc_base/string_encode_unittest.cc:272: Failure\nExpected equality of these values:\n  ToString(c)\n    Which is: \"0x56639d9b\"\n  c\n    Which is: \"message\"\n```\n\nIt looks like it is converting the pointer to string (e.g. matching the `std::string ToString(const void* const p)` one).",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 1
+      },
+      "revId": "045bcd587501270b7a35568f2339401d33f1d12b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
