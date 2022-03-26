@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '66ebc2db72227eef53194baab3df1fc63928e68a',
+  'chromium_revision': 'cc5b50d09bba04ee406dbac8eee2e8af802ffc1b',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -23,9 +23,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@657974b7c57f951ec963829ffb7f2f864b078482',
+    'https://chromium.googlesource.com/chromium/src/base@f8ec8d1d675996ddba70ece8dccf0aa33c5e2f17',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@4f3fab4144dc84c8bb8b4124fd3c5b4c3e686067',
+    'https://chromium.googlesource.com/chromium/src/build@6f9c4859211fbdc339dc775a1a5f47d1ead53282',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@e1471b21ee9c6765ee95e9db0c76fe997ccad35c',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -34,19 +34,19 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@121de3a87002242fa04a9ab3e00b4b311ac24b58',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@e7f253aff7ee45f0c04afaf2588c2c761a7c6113',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@19ffb8b393085ae04fbc9e05f415b392705110f9',
+    'https://chromium.googlesource.com/chromium/src/testing@965fe5b5f64f57028a048a7c1447985d4e393223',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@dadd5c03778501642bbf24dff81a9333bab81601',
+    'https://chromium.googlesource.com/chromium/src/third_party@a6ac4c3894c79f5705b03a41b80f51db020f6b05',
 
   'src/buildtools/linux64': {
     'packages': [
       {
         'package': 'gn/gn/linux-amd64',
-        'version': 'git_revision:bd99dbf98cbdefe18a4128189665c5761263bcfb',
+        'version': 'git_revision:ff14fc1112e0a8dd2c3910fb89539741cb3d3f23',
       }
     ],
     'dep_type': 'cipd',
@@ -56,7 +56,7 @@ deps = {
     'packages': [
       {
         'package': 'gn/gn/mac-${{arch}}',
-        'version': 'git_revision:bd99dbf98cbdefe18a4128189665c5761263bcfb',
+        'version': 'git_revision:ff14fc1112e0a8dd2c3910fb89539741cb3d3f23',
       }
     ],
     'dep_type': 'cipd',
@@ -66,7 +66,7 @@ deps = {
     'packages': [
       {
         'package': 'gn/gn/windows-amd64',
-        'version': 'git_revision:bd99dbf98cbdefe18a4128189665c5761263bcfb',
+        'version': 'git_revision:ff14fc1112e0a8dd2c3910fb89539741cb3d3f23',
       }
     ],
     'dep_type': 'cipd',
@@ -235,7 +235,7 @@ deps = {
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@bf672f23a5336cb54dbcb2e4417142139f44cc3e',
   'src/third_party/libyuv':
-    'https://chromium.googlesource.com/libyuv/libyuv.git@3aebf69d668177e7ee6dbbe0025e5c3dbb525ff2',
+    'https://chromium.googlesource.com/libyuv/libyuv.git@f4d25308467cbd50c2706a46fa0ddcef939e715a',
   'src/third_party/lss': {
     'url': 'https://chromium.googlesource.com/linux-syscall-support.git@92a65a8f5d705d1928874420c8d0d15bde8c89e5',
     'condition': 'checkout_android or checkout_linux',
@@ -288,7 +288,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@61e889d3a724cfd98d0cf0547768a0e5c2bbd8a5',
+    'https://chromium.googlesource.com/chromium/src/tools@f9096824009c2c25dde811650876229535b86b1c',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
