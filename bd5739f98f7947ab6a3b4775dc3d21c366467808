@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da65817b_4f3ab227",
+        "filename": "tools_webrtc/mb/mb.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-26T09:36:46Z",
+      "side": 1,
+      "message": "I think this is fine.\n\nIf we want to have a nice error message in case like Chromium changes them maybe we should assert (or another check) these fields are initialized the way we expect and get a nice message if not?",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 78
+      },
+      "revId": "bd5739f98f7947ab6a3b4775dc3d21c366467808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc59751a_e9a042dc",
+        "filename": "tools_webrtc/mb/mb.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-26T09:36:46Z",
+      "side": 1,
+      "message": "Since you are here. :) \n\nDo you know why do we have these? Are our binaries reading these flags?",
+      "range": {
+        "startLine": 145,
+        "startChar": 6,
+        "endLine": 150,
+        "endChar": 8
+      },
+      "revId": "bd5739f98f7947ab6a3b4775dc3d21c366467808",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
