@@ -22,6 +22,30 @@
       },
       "revId": "045bcd587501270b7a35568f2339401d33f1d12b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7cc12ec_f802710d",
+        "filename": "rtc_base/string_encode.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-03-27T12:33:00Z",
+      "side": 1,
+      "message": "I added back the const char* version to make sure the overload resolution works as intended.",
+      "parentUuid": "9b7aee48_9464f0f8",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 1
+      },
+      "revId": "045bcd587501270b7a35568f2339401d33f1d12b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
