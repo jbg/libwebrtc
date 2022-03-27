@@ -12,6 +12,7 @@
 
 #include <vector>
 
+#include "absl/strings/string_view.h"
 #include "rtc_base/ignore_wundef.h"
 #include "rtc_base/message_digest.h"
 #include "rtc_base/string_encode.h"
@@ -94,7 +95,8 @@ void ResultSink::VerifyChecksum(const std::string& checksum) {
   std::vector<char> buffer;
   buffer.resize(digest_->Size());
   digest_->Finish(&buffer[0], buffer.size());
-  const std::string result = rtc::hex_encode(&buffer[0], digest_->Size());
+  const std::string result =
+      rtc::hex_encode(absl::string_view(&buffer[0], digest_->Size()));
   if (checksum.size() == result.size()) {
     EXPECT_EQ(checksum, result);
   } else {

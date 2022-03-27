@@ -68,6 +68,7 @@ rtc_library("read_auth_file") {
     "turnserver/read_auth_file.h",
   ]
   deps = [ "../rtc_base" ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/strings:strings" ]
 }
 
 if (rtc_include_tests) {
