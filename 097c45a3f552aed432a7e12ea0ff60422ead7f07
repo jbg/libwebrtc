@@ -52,6 +52,24 @@
       "parentUuid": "1e133c4d_9f8c0cce",
       "revId": "097c45a3f552aed432a7e12ea0ff60422ead7f07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48dc9d84_a5cbd823",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-28T11:14:54Z",
+      "side": 1,
+      "message": "It was also used in Chrome, so just making visibility \u003d *.",
+      "parentUuid": "c4df76c1_241af910",
+      "revId": "097c45a3f552aed432a7e12ea0ff60422ead7f07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
