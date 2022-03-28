@@ -318,6 +318,7 @@ if (is_mac) {
 
 rtc_library("desktop_capture_generic") {
   defines = []
+  depends = []
   public_configs = [ ":x11_config" ]
   visibility = [
     ":desktop_capture",
@@ -398,9 +399,15 @@ rtc_library("desktop_capture_generic") {
 
   if (rtc_use_x11_extensions || rtc_use_pipewire) {
     sources += [
+      "desktop_capture_metadata.h",
       "mouse_cursor_monitor_linux.cc",
       "screen_capturer_linux.cc",
       "window_capturer_linux.cc",
+    ]
+    depends += [
+      "gio-2.0",
+      "gobject-2.0",
+      "glib-2.0",
     ]
 
     if (build_with_mozilla && (is_linux || is_chromeos)) {
@@ -570,6 +577,7 @@ rtc_library("desktop_capture_generic") {
       "linux/wayland/mouse_cursor_monitor_pipewire.h",
       "linux/wayland/scoped_glib.cc",
       "linux/wayland/scoped_glib.h",
+      "linux/wayland/screen_capture_portal_interface.h",
       "linux/wayland/screencast_portal.cc",
       "linux/wayland/screencast_portal.h",
       "linux/wayland/screencast_stream_utils.cc",
@@ -578,6 +586,7 @@ rtc_library("desktop_capture_generic") {
       "linux/wayland/shared_screencast_stream.h",
       "linux/wayland/xdg_desktop_portal_utils.cc",
       "linux/wayland/xdg_desktop_portal_utils.h",
+      "linux/wayland/xdg_session_details.h",
     ]
 
     configs += [
