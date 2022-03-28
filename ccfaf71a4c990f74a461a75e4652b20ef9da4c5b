@@ -33,6 +33,23 @@
       "message": "nisse@ - do you mind taking one more look since I changed the approach?",
       "revId": "ccfaf71a4c990f74a461a75e4652b20ef9da4c5b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33723d39_03cc54dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-28T07:07:44Z",
+      "side": 1,
+      "message": "This version also lgtm.",
+      "revId": "ccfaf71a4c990f74a461a75e4652b20ef9da4c5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
