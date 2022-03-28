@@ -16,6 +16,161 @@
       "message": "Sorry about the tests. Had to add back the const char* version of ToString to make sure the overload resolution works as expected. All green now.",
       "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19e8d4dd_2b31c524",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-28T13:45:39Z",
+      "side": 1,
+      "message": "A couple of questions and comments after a first look.",
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db464481_4dbddb5e",
+        "filename": "examples/turnserver/read_auth_file.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-28T13:45:39Z",
+      "side": 1,
+      "message": "Maybe clearer as absl::string_view(line).substr(sep + 1)",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 73
+      },
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3beebed_ce080716",
+        "filename": "modules/audio_coding/acm2/audio_coding_module_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-28T13:45:39Z",
+      "side": 1,
+      "message": "Should we have implicit conversion from rtc::Buffer to string_view?",
+      "range": {
+        "startLine": 1118,
+        "startChar": 38,
+        "endLine": 1119,
+        "endChar": 61
+      },
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6524c5e1_c93cd596",
+        "filename": "modules/audio_coding/neteq/test/result_sink.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-28T13:45:39Z",
+      "side": 1,
+      "message": "Would this be simpler with std::string?",
+      "range": {
+        "startLine": 95,
+        "startChar": 2,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ca5f111_b89d0977",
+        "filename": "modules/audio_coding/neteq/test/result_sink.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-28T13:45:39Z",
+      "side": 1,
+      "message": "I think .data() is more common in recent code.",
+      "range": {
+        "startLine": 97,
+        "startChar": 18,
+        "endLine": 97,
+        "endChar": 28
+      },
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e72d666_db96eb70",
+        "filename": "modules/audio_coding/neteq/test/result_sink.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-28T13:45:39Z",
+      "side": 1,
+      "message": "if digest_-\u003eSize() is the same as buffer.size(), I think implicit conversion of buffer will do.",
+      "range": {
+        "startLine": 99,
+        "startChar": 22,
+        "endLine": 99,
+        "endChar": 68
+      },
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9b20a02_d92f7e9c",
+        "filename": "rtc_base/string_encode.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-28T13:45:39Z",
+      "side": 1,
+      "message": "I wonder if string_view or ArrayView is most appropriate, given that input is binary data rather than text?",
+      "range": {
+        "startLine": 31,
+        "startChar": 23,
+        "endLine": 31,
+        "endChar": 44
+      },
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
