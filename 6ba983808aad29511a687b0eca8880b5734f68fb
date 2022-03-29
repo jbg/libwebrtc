@@ -131,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6e5b109_2d0c20b9",
+        "filename": "modules/audio_coding/acm2/audio_coding_module_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-29T11:58:26Z",
+      "side": 1,
+      "message": "Worth exploring, I think it should be possibly to add a string_view conversion operator that is enabled only if T is char.\n\nIf it were an rtc::ArrayView rather than string_view, then it wouldn\u0027t need a conversion operator, it should be sufficient with a plain .data() method. Maybe string_view will get the same in C++23, but I don\u0027t quite understand the meaning of overload (6) at https://en.cppreference.com/w/cpp/string/basic_string_view/basic_string_view.",
+      "parentUuid": "1edce2e7_750efe35",
+      "range": {
+        "startLine": 1118,
+        "startChar": 38,
+        "endLine": 1119,
+        "endChar": 61
+      },
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6524c5e1_c93cd596",
         "filename": "modules/audio_coding/neteq/test/result_sink.cc",
         "patchSetId": 2
@@ -307,6 +331,30 @@
       "side": 1,
       "message": "I don\u0027t have a strong opinion, but since this is often called with std::string I would vote to just keep it as is. I personally don\u0027t think using arrayview makes that big a difference semantically when you only want to support dealing with chars.",
       "parentUuid": "a9b20a02_d92f7e9c",
+      "range": {
+        "startLine": 31,
+        "startChar": 23,
+        "endLine": 31,
+        "endChar": 44
+      },
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7b930d_65e60c4e",
+        "filename": "rtc_base/string_encode.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-29T11:58:26Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong opinion. However, you could use ArrayView for the output buffers, instead of char* buffer, size_t buflen.",
+      "parentUuid": "fbd82ecf_ca4eab0e",
       "range": {
         "startLine": 31,
         "startChar": 23,

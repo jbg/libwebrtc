@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25f565f6_20d0303f",
+        "filename": "modules/audio_coding/neteq/tools/audio_checksum.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-29T11:58:26Z",
+      "side": 1,
+      "message": "Again, some kind of implicit conversion/construction would be nice.",
+      "range": {
+        "startLine": 54,
+        "startChar": 27,
+        "endLine": 55,
+        "endChar": 69
+      },
+      "revId": "6f3dac48442b7237cf8a84eb7e0ea5c897ef1e60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0829c33_2e1bcc8b",
+        "filename": "rtc_base/message_digest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-29T11:58:26Z",
+      "side": 1,
+      "message": "Would be nice to delete the non-string_view versions, but perhaps in a different cl?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 1
+      },
+      "revId": "6f3dac48442b7237cf8a84eb7e0ea5c897ef1e60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ec6e72d_9995ac44",
+        "filename": "rtc_base/message_digest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-29T11:58:26Z",
+      "side": 1,
+      "message": "Please change to std::string or std::vector\u003cchar\u003e.",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "6f3dac48442b7237cf8a84eb7e0ea5c897ef1e60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc6055c4_28dc66a9",
+        "filename": "rtc_base/message_digest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-29T11:58:26Z",
+      "side": 1,
+      "message": "And then this can be just output, with implicit conversion to string_view.",
+      "range": {
+        "startLine": 77,
+        "startChar": 20,
+        "endLine": 77,
+        "endChar": 67
+      },
+      "revId": "6f3dac48442b7237cf8a84eb7e0ea5c897ef1e60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "207ac560_a9a451fa",
+        "filename": "rtc_base/ssl_fingerprint.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-29T11:58:26Z",
+      "side": 1,
+      "message": "Could be passed as an ArrayView, which supports referring to non-const data.",
+      "range": {
+        "startLine": 72,
+        "startChar": 37,
+        "endLine": 72,
+        "endChar": 57
+      },
+      "revId": "6f3dac48442b7237cf8a84eb7e0ea5c897ef1e60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
