@@ -6,6 +6,7 @@
 # in the file PATENTS.  All contributing project authors may
 # be found in the AUTHORS file in the root of the source tree.
 
+import("//build/config/linux/gtk/gtk.gni")
 import("//build/config/linux/pkg_config.gni")
 import("//build/config/ui.gni")
 import("//tools/generate_stubs/rules.gni")
@@ -277,6 +278,19 @@ rtc_source_set("desktop_capture") {
   if (is_mac) {
     public_deps += [ ":desktop_capture_objc" ]
   }
+  if (is_linux) {
+    defines = [ "WEBRTC_USE_GIO" ]
+    sources = [ "desktop_capture_metadata.h" ]
+    configs += [
+      "//build/linux:gio_config",
+      ":pipewire_config",
+    ]
+    libs = [
+      "gio-2.0",
+      "gobject-2.0",
+      "glib-2.0",
+    ]
+  }
 }
 
 if (is_mac) {
@@ -318,6 +332,7 @@ if (is_mac) {
 
 rtc_library("desktop_capture_generic") {
   defines = []
+  libs = []
   public_configs = [ ":x11_config" ]
   visibility = [
     ":desktop_capture",
@@ -395,7 +410,6 @@ rtc_library("desktop_capture_generic") {
       ]
     }
   }
-
   if (rtc_use_x11_extensions || rtc_use_pipewire) {
     sources += [
       "mouse_cursor_monitor_linux.cc",
@@ -438,7 +452,7 @@ rtc_library("desktop_capture_generic") {
       "linux/x11/x_window_property.cc",
       "linux/x11/x_window_property.h",
     ]
-    libs = [
+    libs += [
       "X11",
       "Xcomposite",
       "Xdamage",
@@ -570,6 +584,7 @@ rtc_library("desktop_capture_generic") {
       "linux/wayland/mouse_cursor_monitor_pipewire.h",
       "linux/wayland/scoped_glib.cc",
       "linux/wayland/scoped_glib.h",
+      "linux/wayland/screen_capture_portal_interface.h",
       "linux/wayland/screencast_portal.cc",
       "linux/wayland/screencast_portal.h",
       "linux/wayland/screencast_stream_utils.cc",
@@ -578,6 +593,7 @@ rtc_library("desktop_capture_generic") {
       "linux/wayland/shared_screencast_stream.h",
       "linux/wayland/xdg_desktop_portal_utils.cc",
       "linux/wayland/xdg_desktop_portal_utils.h",
+      "linux/wayland/xdg_session_details.h",
     ]
 
     configs += [
