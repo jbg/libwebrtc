@@ -1113,7 +1113,10 @@ rtc_library("neteq_test_tools") {
     "../../test:rtp_test_utils",
     "../rtp_rtcp:rtp_rtcp_format",
   ]
-  absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
+  absl_deps = [
+    "//third_party/abseil-cpp/absl/strings:strings",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
 
   public_deps = [
     ":neteq_tools",
