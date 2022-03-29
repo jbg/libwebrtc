@@ -52,16 +52,16 @@ size_t hex_encode_output_length(size_t srclen, char delimiter) {
 // hex_encode shows the hex representation of binary data in ascii, with
 // `delimiter` between bytes, or none if `delimiter` == 0.
 void hex_encode_with_delimiter(char* buffer,
-                               const char* csource,
-                               size_t srclen,
+                               absl::string_view source,
                                char delimiter) {
   RTC_DCHECK(buffer);
 
   // Init and check bounds.
   const unsigned char* bsource =
-      reinterpret_cast<const unsigned char*>(csource);
+      reinterpret_cast<const unsigned char*>(source.data());
   size_t srcpos = 0, bufpos = 0;
 
+  size_t srclen = source.length();
   while (srcpos < srclen) {
     unsigned char ch = bsource[srcpos++];
     buffer[bufpos] = hex_encode((ch >> 4) & 0xF);
@@ -79,32 +79,19 @@ void hex_encode_with_delimiter(char* buffer,
 }  // namespace
 
 std::string hex_encode(absl::string_view str) {
-  return hex_encode(str.data(), str.size());
+  return hex_encode_with_delimiter(str, 0);
 }
 
-std::string hex_encode(const char* source, size_t srclen) {
-  return hex_encode_with_delimiter(source, srclen, 0);
-}
-
-std::string hex_encode_with_delimiter(const char* source,
-                                      size_t srclen,
+std::string hex_encode_with_delimiter(absl::string_view source,
                                       char delimiter) {
-  std::string s(hex_encode_output_length(srclen, delimiter), 0);
-  hex_encode_with_delimiter(&s[0], source, srclen, delimiter);
+  std::string s(hex_encode_output_length(source.length(), delimiter), 0);
+  hex_encode_with_delimiter(&s[0], source, delimiter);
   return s;
-}
-
-size_t hex_decode(char* cbuffer,
-                  size_t buflen,
-                  const char* source,
-                  size_t srclen) {
-  return hex_decode_with_delimiter(cbuffer, buflen, source, srclen, 0);
 }
 
 size_t hex_decode_with_delimiter(char* cbuffer,
                                  size_t buflen,
-                                 const char* source,
-                                 size_t srclen,
+                                 absl::string_view source,
                                  char delimiter) {
   RTC_DCHECK(cbuffer);  // TODO(kwiberg): estimate output size
   if (buflen == 0)
@@ -113,6 +100,8 @@ size_t hex_decode_with_delimiter(char* cbuffer,
   // Init and bounds check.
   unsigned char* bbuffer = reinterpret_cast<unsigned char*>(cbuffer);
   size_t srcpos = 0, bufpos = 0;
+  size_t srclen = source.length();
+
   size_t needed = (delimiter) ? (srclen + 1) / 3 : srclen / 2;
   if (buflen < needed)
     return 0;
@@ -144,13 +133,6 @@ size_t hex_decode_with_delimiter(char* cbuffer,
 
 size_t hex_decode(char* buffer, size_t buflen, absl::string_view source) {
   return hex_decode_with_delimiter(buffer, buflen, source, 0);
-}
-size_t hex_decode_with_delimiter(char* buffer,
-                                 size_t buflen,
-                                 absl::string_view source,
-                                 char delimiter) {
-  return hex_decode_with_delimiter(buffer, buflen, source.data(),
-                                   source.length(), delimiter);
 }
 
 size_t tokenize(absl::string_view source,
@@ -243,11 +225,11 @@ std::string ToString(const bool b) {
   return b ? "true" : "false";
 }
 
-std::string ToString(const char* const s) {
+std::string ToString(absl::string_view s) {
   return std::string(s);
 }
 
-std::string ToString(absl::string_view s) {
+std::string ToString(const char* s) {
   return std::string(s);
 }
 
@@ -321,7 +303,7 @@ std::string ToString(const void* const p) {
   return std::string(&buf[0], len);
 }
 
-bool FromString(const std::string& s, bool* b) {
+bool FromString(absl::string_view s, bool* b) {
   if (s == "false") {
     *b = false;
     return true;
