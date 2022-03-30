@@ -10,7 +10,7 @@
 
 package org.webrtc;
 
-import android.support.test.InstrumentationRegistry;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.SmallTest;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class PeerConnectionFactoryTest {
   @Test
   public void testInitialize() {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
   }
@@ -28,11 +28,11 @@ public class PeerConnectionFactoryTest {
   @Test
   public void testInitializeTwice() {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
   }
@@ -41,12 +41,12 @@ public class PeerConnectionFactoryTest {
   @Test
   public void testInitializeTwiceWithTracer() {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setEnableInternalTracer(true)
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setEnableInternalTracer(true)
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
@@ -56,7 +56,7 @@ public class PeerConnectionFactoryTest {
   @Test
   public void testInitializeWithTracerAndShutdown() {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setEnableInternalTracer(true)
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());

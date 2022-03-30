@@ -29,8 +29,8 @@ import android.net.NetworkRequest;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.test.InstrumentationRegistry;
 import androidx.annotation.Nullable;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.MediumTest;
 import androidx.test.filters.SmallTest;
 import java.util.Arrays;
@@ -183,7 +183,7 @@ public class NetworkMonitorTest {
    * Helper method to create a network monitor and delegates for testing.
    */
   private void createTestMonitor() {
-    Context context = InstrumentationRegistry.getTargetContext();
+    Context context = ApplicationProvider.getApplicationContext();
 
     NetworkMonitor.getInstance().setNetworkChangeDetectorFactory(
         new NetworkChangeDetectorFactory() {
@@ -214,7 +214,7 @@ public class NetworkMonitorTest {
 
   @Before
   public void setUp() {
-    ContextUtils.initialize(InstrumentationRegistry.getTargetContext());
+    ContextUtils.initialize(ApplicationProvider.getApplicationContext());
     createTestMonitor();
   }
 
@@ -224,7 +224,7 @@ public class NetworkMonitorTest {
   @Test
   @SmallTest
   public void testNetworkMonitorRegistersInConstructor() throws InterruptedException {
-    Context context = InstrumentationRegistry.getTargetContext();
+    Context context = ApplicationProvider.getApplicationContext();
 
     NetworkMonitorAutoDetect.Observer observer = new TestNetworkMonitorAutoDetectObserver();
 
@@ -242,39 +242,39 @@ public class NetworkMonitorTest {
   public void testNetworkMonitorJavaObservers() throws InterruptedException {
     // Initialize the NetworkMonitor with a connection.
     Intent connectivityIntent = new Intent(ConnectivityManager.CONNECTIVITY_ACTION);
-    receiver.onReceive(InstrumentationRegistry.getTargetContext(), connectivityIntent);
+    receiver.onReceive(ApplicationProvider.getApplicationContext(), connectivityIntent);
 
     // We shouldn't be re-notified if the connection hasn't actually changed.
     NetworkMonitorTestObserver observer = new NetworkMonitorTestObserver();
     NetworkMonitor.addNetworkObserver(observer);
-    receiver.onReceive(InstrumentationRegistry.getTargetContext(), connectivityIntent);
+    receiver.onReceive(ApplicationProvider.getApplicationContext(), connectivityIntent);
     assertFalse(observer.hasReceivedNotification());
 
     // We shouldn't be notified if we're connected to non-Wifi and the Wifi SSID changes.
     wifiDelegate.setWifiSSID("bar");
-    receiver.onReceive(InstrumentationRegistry.getTargetContext(), connectivityIntent);
+    receiver.onReceive(ApplicationProvider.getApplicationContext(), connectivityIntent);
     assertFalse(observer.hasReceivedNotification());
 
     // We should be notified when we change to Wifi.
     connectivityDelegate.setNetworkType(ConnectivityManager.TYPE_WIFI);
-    receiver.onReceive(InstrumentationRegistry.getTargetContext(), connectivityIntent);
+    receiver.onReceive(ApplicationProvider.getApplicationContext(), connectivityIntent);
     assertTrue(observer.hasReceivedNotification());
     observer.resetHasReceivedNotification();
 
     // We should be notified when the Wifi SSID changes.
     wifiDelegate.setWifiSSID("foo");
-    receiver.onReceive(InstrumentationRegistry.getTargetContext(), connectivityIntent);
+    receiver.onReceive(ApplicationProvider.getApplicationContext(), connectivityIntent);
     assertTrue(observer.hasReceivedNotification());
     observer.resetHasReceivedNotification();
 
     // We shouldn't be re-notified if the Wifi SSID hasn't actually changed.
-    receiver.onReceive(InstrumentationRegistry.getTargetContext(), connectivityIntent);
+    receiver.onReceive(ApplicationProvider.getApplicationContext(), connectivityIntent);
     assertFalse(observer.hasReceivedNotification());
 
     // Mimic that connectivity has been lost and ensure that the observer gets the notification.
     connectivityDelegate.setActiveNetworkExists(false);
     Intent noConnectivityIntent = new Intent(ConnectivityManager.CONNECTIVITY_ACTION);
-    receiver.onReceive(InstrumentationRegistry.getTargetContext(), noConnectivityIntent);
+    receiver.onReceive(ApplicationProvider.getApplicationContext(), noConnectivityIntent);
     assertTrue(observer.hasReceivedNotification());
   }
 
@@ -287,7 +287,7 @@ public class NetworkMonitorTest {
   @SmallTest
   public void testConnectivityManagerDelegateDoesNotCrash() {
     ConnectivityManagerDelegate delegate = new ConnectivityManagerDelegate(
-        InstrumentationRegistry.getTargetContext(), new HashSet<>());
+        ApplicationProvider.getApplicationContext(), new HashSet<>());
     delegate.getNetworkState();
     Network[] networks = delegate.getAllNetworks();
     if (networks.length >= 1) {
@@ -303,7 +303,7 @@ public class NetworkMonitorTest {
   public void testConnectivityManagerDelegatePreferentiallyReadsFromCache() {
     final Set<Network> availableNetworks = new HashSet<>();
     ConnectivityManagerDelegate delegate = new ConnectivityManagerDelegate(
-        (ConnectivityManager) InstrumentationRegistry.getTargetContext().getSystemService(
+        (ConnectivityManager) ApplicationProvider.getApplicationContext().getSystemService(
             Context.CONNECTIVITY_SERVICE),
         availableNetworks, "getAllNetworksFromCache:true");
 
@@ -374,7 +374,7 @@ public class NetworkMonitorTest {
   public void testQueryableAPIsDoNotCrash() {
     NetworkMonitorAutoDetect.Observer observer = new TestNetworkMonitorAutoDetectObserver();
     NetworkMonitorAutoDetect ncn =
-        new NetworkMonitorAutoDetect(observer, InstrumentationRegistry.getTargetContext());
+        new NetworkMonitorAutoDetect(observer, ApplicationProvider.getApplicationContext());
     ncn.getDefaultNetId();
   }
 

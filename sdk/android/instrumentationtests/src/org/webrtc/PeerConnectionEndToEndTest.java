@@ -17,8 +17,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import android.support.test.InstrumentationRegistry;
 import androidx.annotation.Nullable;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.MediumTest;
 import androidx.test.filters.SmallTest;
 import java.lang.ref.WeakReference;
@@ -52,7 +52,7 @@ public class PeerConnectionEndToEndTest {
   @Before
   public void setUp() {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
   }
@@ -715,7 +715,7 @@ public class PeerConnectionEndToEndTest {
     final SurfaceTextureHelper surfaceTextureHelper =
         SurfaceTextureHelper.create("SurfaceTextureHelper", /* sharedContext= */ null);
     final VideoSource videoSource = factory.createVideoSource(/* isScreencast= */ false);
-    videoCapturer.initialize(surfaceTextureHelper, InstrumentationRegistry.getTargetContext(),
+    videoCapturer.initialize(surfaceTextureHelper, ApplicationProvider.getApplicationContext(),
         videoSource.getCapturerObserver());
     videoCapturer.startCapture(640, 480, 30);
 
@@ -1212,7 +1212,7 @@ public class PeerConnectionEndToEndTest {
     final SurfaceTextureHelper surfaceTextureHelper =
         SurfaceTextureHelper.create("SurfaceTextureHelper", /* sharedContext= */ null);
     final VideoSource videoSource = factory.createVideoSource(/* isScreencast= */ false);
-    videoCapturer.initialize(surfaceTextureHelper, InstrumentationRegistry.getTargetContext(),
+    videoCapturer.initialize(surfaceTextureHelper, ApplicationProvider.getApplicationContext(),
         videoSource.getCapturerObserver());
     videoCapturer.startCapture(640, 480, 30);
 
@@ -1456,7 +1456,7 @@ public class PeerConnectionEndToEndTest {
     final SurfaceTextureHelper surfaceTextureHelper =
         SurfaceTextureHelper.create("SurfaceTextureHelper", /* sharedContext= */ null);
     final VideoSource videoSource = factory.createVideoSource(/* isScreencast= */ false);
-    videoCapturer.initialize(surfaceTextureHelper, InstrumentationRegistry.getTargetContext(),
+    videoCapturer.initialize(surfaceTextureHelper, ApplicationProvider.getApplicationContext(),
         videoSource.getCapturerObserver());
     VideoTrack videoTrack = factory.createVideoTrack("video", videoSource);
     offeringExpectations.expectRenegotiationNeeded();

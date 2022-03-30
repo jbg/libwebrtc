@@ -18,8 +18,8 @@ import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.test.InstrumentationRegistry;
 import androidx.annotation.Nullable;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.LargeTest;
 import androidx.test.filters.MediumTest;
 import androidx.test.filters.SmallTest;
@@ -156,7 +156,7 @@ public class Camera2CapturerTest {
 
     @Override
     public Context getAppContext() {
-      return InstrumentationRegistry.getTargetContext();
+      return ApplicationProvider.getApplicationContext();
     }
 
     @SuppressWarnings("deprecation")

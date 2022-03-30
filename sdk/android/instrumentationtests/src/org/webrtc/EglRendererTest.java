@@ -21,7 +21,7 @@ import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
-import android.support.test.InstrumentationRegistry;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.SmallTest;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -110,7 +110,7 @@ public class EglRendererTest {
   @Before
   public void setUp() throws Exception {
     PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions
-                                         .builder(InstrumentationRegistry.getTargetContext())
+                                         .builder(ApplicationProvider.getApplicationContext())
                                          .setNativeLibraryName(TestConstants.NATIVE_LIBRARY)
                                          .createInitializationOptions());
     eglRenderer = new EglRenderer("TestRenderer: ");
