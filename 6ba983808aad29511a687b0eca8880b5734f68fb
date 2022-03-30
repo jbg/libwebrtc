@@ -153,6 +153,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00dcf7b7_35a812ea",
+        "filename": "modules/audio_coding/acm2/audio_coding_module_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-03-30T18:06:42Z",
+      "side": 1,
+      "message": "I made an attempt at providing an implicit conversion to absl::string_view whenever T is compatible with char. PTAL. (this breaks our internal tests, but I have a CL in progress for that)",
+      "parentUuid": "e6e5b109_2d0c20b9",
+      "range": {
+        "startLine": 1118,
+        "startChar": 38,
+        "endLine": 1119,
+        "endChar": 61
+      },
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6524c5e1_c93cd596",
@@ -355,6 +379,30 @@
       "side": 1,
       "message": "I don\u0027t have a strong opinion. However, you could use ArrayView for the output buffers, instead of char* buffer, size_t buflen.",
       "parentUuid": "fbd82ecf_ca4eab0e",
+      "range": {
+        "startLine": 31,
+        "startChar": 23,
+        "endLine": 31,
+        "endChar": 44
+      },
+      "revId": "6ba983808aad29511a687b0eca8880b5734f68fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fa2a581_471e329b",
+        "filename": "rtc_base/string_encode.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-03-30T18:06:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df7b930d_65e60c4e",
       "range": {
         "startLine": 31,
         "startChar": 23,
