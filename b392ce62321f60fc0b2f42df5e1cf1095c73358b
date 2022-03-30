@@ -52,6 +52,29 @@
       "parentUuid": "f7dd102d_67864715",
       "revId": "b392ce62321f60fc0b2f42df5e1cf1095c73358b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2fcea74_08f8ce67",
+        "filename": "modules/desktop_capture/desktop_capture_metadata.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-30T17:31:41Z",
+      "side": 1,
+      "message": "I don\u0027t love this, because there are other .cc files that *also* include gio and this header isn\u0027t in a build-guard for it in BUILD.gn.\n\nI\u0027m okay to land this as-is for now; but please file a bug to help figure out why cast_shell_linux overrode WEBRTC_USE_PIPEWIRE in what I\u0027d argue is an unsupported way (and perhaps tag either the config or this #define with that bug)",
+      "range": {
+        "startLine": 14,
+        "startChar": 33,
+        "endLine": 14,
+        "endChar": 59
+      },
+      "revId": "b392ce62321f60fc0b2f42df5e1cf1095c73358b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
