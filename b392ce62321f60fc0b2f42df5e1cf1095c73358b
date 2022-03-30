@@ -16,6 +16,24 @@
       "message": "Requesting Mirko to review the changes in modules/desktop_capture/BUILD.gn. This is a roll forward of a previously reviewed CL that caused compilation error for `cast_shell_linux` check in chrome. Summary of changes from the previously submitted and reverted CL can be found here: https://webrtc-review.googlesource.com/c/src/+/257000/1..27/. Please let me know if any other checks will be good to run before submitting this CL so as to not affect any builds.",
       "revId": "b392ce62321f60fc0b2f42df5e1cf1095c73358b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7dd102d_67864715",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-30T15:17:10Z",
+      "side": 1,
+      "message": "BUILD.gn LGTM.\n\nI think this is fine, the only real check would be to create a Chromium CL and run trybots on it to ensure it will not break the roll, but that happens daily so my advice is to land as is and see.\n\nIf this breaks something in Chromium post-submit there is no easy way to know now.",
+      "parentUuid": "c3f3fdbf_a5472575",
+      "revId": "b392ce62321f60fc0b2f42df5e1cf1095c73358b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
