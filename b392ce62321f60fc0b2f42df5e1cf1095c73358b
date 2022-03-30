@@ -99,6 +99,30 @@
       },
       "revId": "b392ce62321f60fc0b2f42df5e1cf1095c73358b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825f4ee9_eb7b1365",
+        "filename": "modules/desktop_capture/desktop_capture_metadata.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-03-30T21:53:22Z",
+      "side": 1,
+      "message": "Right; but it sounded like modifying the `rtc_use_pipewire` definition (https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/webrtc.gni;l\u003d138) to include `\u0026\u0026 !is_chromecast` wasn\u0027t sufficient to fix this? (I\u0027ll note that there are a few places that do seem to override it to this already).",
+      "parentUuid": "32097f29_389b4ad8",
+      "range": {
+        "startLine": 14,
+        "startChar": 33,
+        "endLine": 14,
+        "endChar": 59
+      },
+      "revId": "b392ce62321f60fc0b2f42df5e1cf1095c73358b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
