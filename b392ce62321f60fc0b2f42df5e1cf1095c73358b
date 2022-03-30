@@ -75,6 +75,30 @@
       },
       "revId": "b392ce62321f60fc0b2f42df5e1cf1095c73358b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32097f29_389b4ad8",
+        "filename": "modules/desktop_capture/desktop_capture_metadata.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-30T20:29:29Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t love this, because there are other .cc files that *also* include gio and this header isn\u0027t in a build-guard for it in BUILD.gn.\n\nGuarded the header in BUILD.gn with the same conditions that are used to define the new `WEBRTC_USE_GIO` symbol and replaced all the macros conditional on this new symbol now. PTAL.\n\n\u003e why cast_shell_linux overrode WEBRTC_USE_PIPEWIRE \n\nMy understanding has evolved a little since last time we spoke. I think the problem here is not the overriding but it is related to the gio header missing when the build config uses `is_chromecast` argument. With this change we are basically avoiding dependency on gio.h when `is_chromecast` is set and that is likely why the `cast_shell_linux` check is passing now (it uses `is_chromecast \u003d true` in the build config: https://ci.chromium.org/ui/p/chromium/builders/try/cast_shell_linux/1171403/overview). I can open a bug to track why the gio.h might be missing for chromecast builds. Let me know if that makes sense.",
+      "parentUuid": "e2fcea74_08f8ce67",
+      "range": {
+        "startLine": 14,
+        "startChar": 33,
+        "endLine": 14,
+        "endChar": 59
+      },
+      "revId": "b392ce62321f60fc0b2f42df5e1cf1095c73358b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
