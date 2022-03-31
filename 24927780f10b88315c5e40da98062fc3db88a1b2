@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "397741f8_71422150",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-31T19:17:46Z",
+      "side": 0,
+      "message": "Can you also send me a CL to remove this from Chromium\u0027s //DEPS?",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 117
+      },
+      "revId": "24927780f10b88315c5e40da98062fc3db88a1b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

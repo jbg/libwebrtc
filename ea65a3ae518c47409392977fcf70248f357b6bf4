@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12aaed06_6e2468a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-31T19:17:46Z",
+      "side": 1,
+      "message": "Congratulations! 😊",
+      "revId": "ea65a3ae518c47409392977fcf70248f357b6bf4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d1c9872_d4b35c34",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-03-31T19:17:46Z",
+      "side": 1,
+      "message": "In a follow-up CL, is it possible to merge these two?",
+      "range": {
+        "startLine": 432,
+        "startChar": 2,
+        "endLine": 434,
+        "endChar": 3
+      },
+      "revId": "ea65a3ae518c47409392977fcf70248f357b6bf4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
