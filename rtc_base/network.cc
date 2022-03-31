@@ -732,7 +732,9 @@ bool BasicNetworkManager::CreateNetworks(bool include_ignored,
   if (ret != ERROR_SUCCESS) {
     return false;
   }
+#if defined(NDEBUG)
   int count = 0;
+#endif
   while (adapter_addrs) {
     if (adapter_addrs->OperStatus == IfOperStatusUp) {
       PIP_ADAPTER_UNICAST_ADDRESS address = adapter_addrs->FirstUnicastAddress;
@@ -839,9 +841,11 @@ bool BasicNetworkManager::CreateNetworks(bool include_ignored,
           (*existing_network).second->AddIP(ip);
         }
       }
+#if defined(NDEBUG)
       // Count is per-adapter - all 'Networks' created from the same
       // adapter need to have the same name.
       ++count;
+#endif
     }
     adapter_addrs = adapter_addrs->Next;
   }
