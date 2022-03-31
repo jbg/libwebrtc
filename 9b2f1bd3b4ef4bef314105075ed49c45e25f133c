@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b47f5c6a_9ec19f7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-31T21:11:31Z",
+      "side": 1,
+      "message": "When I read the description, I thought you were moving infra/config/OWNERS to infra/config/something/OWNERS.\nI think of \"up\" as \"towards the root of the tree\", and \"down\" as \"towards the leaves of the tree\". This makes \"below\" quite confusing.\n\nCan you change this to \"Move infra/config/OWNERS to infra/OWNERS\"?",
+      "revId": "9b2f1bd3b4ef4bef314105075ed49c45e25f133c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ac636c6_923d2577",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-03-31T21:11:31Z",
+      "side": 1,
+      "message": "I see no reason not to approve this, but please make a less confusing title.\n",
+      "revId": "9b2f1bd3b4ef4bef314105075ed49c45e25f133c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
