@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de1ee08_7eb66b74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-31T13:36:43Z",
+      "side": 1,
+      "message": "PTAL. Intended to help fixing https://chromium-review.googlesource.com/c/chromium/src/+/3557271.",
+      "revId": "ef3a3c4bf1f0f8b5e59c9cb4f7f6e504296c7efb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
