@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eec91f4_9fb9f1e4",
+        "filename": "rtc_base/string_encode.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-03-31T08:54:59Z",
+      "side": 1,
+      "message": "Note: This needs to be kept temporarily until I get a fix in for some internal code.",
+      "revId": "eaeea047f7e96a71d411eaef23d0d3229ca37107",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
