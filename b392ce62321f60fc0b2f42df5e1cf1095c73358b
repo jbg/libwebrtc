@@ -123,6 +123,30 @@
       },
       "revId": "b392ce62321f60fc0b2f42df5e1cf1095c73358b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad2fd4a3_6d9556ea",
+        "filename": "modules/desktop_capture/desktop_capture_metadata.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-03-31T14:58:17Z",
+      "side": 1,
+      "message": "Created a bug and added comments around new guard definition.",
+      "parentUuid": "825f4ee9_eb7b1365",
+      "range": {
+        "startLine": 14,
+        "startChar": 33,
+        "endLine": 14,
+        "endChar": 59
+      },
+      "revId": "b392ce62321f60fc0b2f42df5e1cf1095c73358b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
