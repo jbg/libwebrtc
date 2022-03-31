@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22cdf2e1_68103c1c",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-31T08:02:46Z",
+      "side": 1,
+      "message": "Can we do this without the U template parameter?",
+      "range": {
+        "startLine": 122,
+        "startChar": 21,
+        "endLine": 122,
+        "endChar": 25
+      },
+      "revId": "62d72e019769e6e089dc230cdd19cb1720054226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "483d80ec_5f883777",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-03-31T08:02:46Z",
+      "side": 1,
+      "message": "Maybe BufferCompat is overkill, could perhaps just use std::is_convertible_v\u003cT*, const char*\u003e.\n\nOr do we need conversions also from Buffer\u003cuint8_t\u003e, then I guess BufferCompat is right?",
+      "range": {
+        "startLine": 123,
+        "startChar": 35,
+        "endLine": 123,
+        "endChar": 73
+      },
+      "revId": "62d72e019769e6e089dc230cdd19cb1720054226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
