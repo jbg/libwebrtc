@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "412fff64_748515a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-04-01T10:47:01Z",
+      "side": 1,
+      "message": "thanks!",
+      "revId": "eb6613309000f9b83339e7f6e076a73bdc11af4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6ab0989_511d2e7e",
@@ -31,6 +48,24 @@
       "writtenOn": "2022-04-01T10:37:24Z",
       "side": 1,
       "message": "Nit: I think it is clearer if this is before the if statement it pertain to, also would be clearer if you said \"substring match\" rather than \"partial match\", since that\u0027s a more well defined term.",
+      "revId": "eb6613309000f9b83339e7f6e076a73bdc11af4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7bc027e_a638985b",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-04-01T10:47:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6ab0989_511d2e7e",
       "revId": "eb6613309000f9b83339e7f6e076a73bdc11af4b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
