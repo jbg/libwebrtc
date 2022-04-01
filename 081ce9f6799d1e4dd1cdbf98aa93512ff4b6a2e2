@@ -67,6 +67,24 @@
       "message": "this is where it gets used",
       "revId": "081ce9f6799d1e4dd1cdbf98aa93512ff4b6a2e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1c0bc4_aaa95801",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 8527
+      },
+      "writtenOn": "2022-04-01T06:02:48Z",
+      "side": 1,
+      "message": "how about \n1) removing #ifdef around code using/setting count\nthis is anyway the production code,\n\n2) move the setting of friendly-name to after the setting of the name to rtc::ToString(count);\nstill inside a #ifdef\n\ni.e in debug, let the code first initialize name to count\nand the overwrite it with friendly-name",
+      "parentUuid": "a226bcdc_142a56e0",
+      "revId": "081ce9f6799d1e4dd1cdbf98aa93512ff4b6a2e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
