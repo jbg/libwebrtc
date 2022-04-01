@@ -250,6 +250,8 @@ void AndroidNetworkMonitor::Start() {
           "WebRTC-FindNetworkHandleWithoutIpv6TemporaryPart");
   bind_using_ifname_ =
       !webrtc::field_trial::IsDisabled("WebRTC-BindUsingInterfaceName");
+  disable_is_adapter_available_ = webrtc::field_trial::IsDisabled(
+      "WebRTC-AndroidNetworkMonitor-IsAdapterAvailable");
 
   // This pointer is also accessed by the methods called from java threads.
   // Assigning it here is safe, because the java monitor is in a stopped state,
@@ -564,6 +566,28 @@ rtc::NetworkPreference AndroidNetworkMonitor::GetNetworkPreference(
   }
 
   return preference_iter->second;
+}
+
+// Check if adapter is avaiable, and only return true for the interface
+// that has been discovered by NetworkMonitorAutoDetect.java.
+bool AndroidNetworkMonitor::IsAdapterAvailable(absl::string_view if_name) {
+  RTC_DCHECK_RUN_ON(network_thread_);
+  if (disable_is_adapter_available_) {
+    return true;
+  }
+  bool val = adapter_type_by_name_.find(if_name) != adapter_type_by_name_.end();
+  if (!val && bind_using_ifname_) {
+    for (auto const& iter : network_info_by_handle_) {
+      if (if_name.find(iter.second.interface_name) != absl::string_view::npos) {
+        // Use partial match so that e.g if_name="v4-wlan0" is matched
+        // agains iter.first="wlan0"
+        val = true;
+        break;
+      }
+    }
+  }
+
+  return val;
 }
 
 AndroidNetworkMonitorFactory::AndroidNetworkMonitorFactory()
