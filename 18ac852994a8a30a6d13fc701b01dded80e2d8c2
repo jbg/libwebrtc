@@ -16,6 +16,23 @@
       "message": "Trying Jonas\u0027s suggestion. Please take another look.",
       "revId": "18ac852994a8a30a6d13fc701b01dded80e2d8c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3740ae2_25fb8e5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5444
+      },
+      "writtenOn": "2022-04-01T09:25:03Z",
+      "side": 1,
+      "message": "Thanks!\n\nHarald, please take an owner\u0027s look.",
+      "revId": "18ac852994a8a30a6d13fc701b01dded80e2d8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
