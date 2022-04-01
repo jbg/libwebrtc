@@ -233,7 +233,7 @@ class LibvpxVp9Encoder : public VP9Encoder {
   // specified in `codec_.spatialLayer[i]`.
   std::vector<PerformanceFlags::ParameterSet>
       performance_flags_by_spatial_index_;
-  void UpdatePerformanceFlags();
+  void UpdatePerformanceFlags(bool is_low_tier);
   static PerformanceFlags ParsePerformanceFlagsFromTrials(
       const FieldTrialsView& trials);
   static PerformanceFlags GetDefaultPerformanceFlags();

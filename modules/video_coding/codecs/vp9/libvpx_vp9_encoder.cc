@@ -795,7 +795,8 @@ int LibvpxVp9Encoder::InitAndSetControlSettings(const VideoCodec* inst) {
     }
   }
 
-  UpdatePerformanceFlags();
+  UpdatePerformanceFlags(/*is_low_tier=*/inst->GetVideoEncoderComplexity() ==
+                         VideoCodecComplexity::kComplexityLow);
   RTC_DCHECK_EQ(performance_flags_by_spatial_index_.size(),
                 static_cast<size_t>(num_spatial_layers_));
 
@@ -1873,15 +1874,24 @@ LibvpxVp9Encoder::ParseQualityScalerConfig(const FieldTrialsView& trials) {
   return config;
 }
 
-void LibvpxVp9Encoder::UpdatePerformanceFlags() {
+void LibvpxVp9Encoder::UpdatePerformanceFlags(bool is_low_tier) {
+  std::map<int, PerformanceFlags::ParameterSet> params_by_resolution;
+  if (is_low_tier) {
+    // For low tier devices, always use speed 9. Only disable upper
+    // layer deblocking below QCIF.
+    performance_flags_by_spatial_index_[0] = {9, 9, 1, true};
+    performance_flags_by_spatial_index_[352 * 288] = {9, 9, 0, true};
+  } else {
+    params_by_resolution = performance_flags_.settings_by_resolution;
+  }
+
   const auto find_speed = [&](int min_pixel_count) {
-    RTC_DCHECK(!performance_flags_.settings_by_resolution.empty());
-    auto it =
-        performance_flags_.settings_by_resolution.upper_bound(min_pixel_count);
+    RTC_DCHECK(!params_by_resolution.empty());
+    auto it = params_by_resolution.upper_bound(min_pixel_count);
     return std::prev(it)->second;
   };
-
   performance_flags_by_spatial_index_.clear();
+
   if (is_svc_) {
     for (int si = 0; si < num_spatial_layers_; ++si) {
       performance_flags_by_spatial_index_.push_back(find_speed(
