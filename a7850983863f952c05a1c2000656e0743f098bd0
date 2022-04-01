@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "511135ac_c532650e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-01T16:15:32Z",
+      "side": 1,
+      "message": "Makes sense to me - make it explicit that subclasses call the non-virtual function.\n",
+      "revId": "a7850983863f952c05a1c2000656e0743f098bd0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
