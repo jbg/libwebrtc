@@ -22,6 +22,30 @@
       },
       "revId": "24927780f10b88315c5e40da98062fc3db88a1b2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58e3bcc6_2e103bd5",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-04-04T09:10:51Z",
+      "side": 0,
+      "message": "Will do when it lands in Chrome!",
+      "parentUuid": "397741f8_71422150",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 117
+      },
+      "revId": "24927780f10b88315c5e40da98062fc3db88a1b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
