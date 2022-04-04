@@ -37,7 +37,6 @@ rtc_library("audio_coding") {
   defines = []
 
   deps = [
-  "../../rtc_base:macromagic",
     ":audio_coding_module_typedefs",
     ":default_neteq_factory",
     ":neteq",
@@ -53,6 +52,7 @@ rtc_library("audio_coding") {
     "../../rtc_base:audio_format_to_string",
     "../../rtc_base:checks",
     "../../rtc_base:logging",
+    "../../rtc_base:macromagic",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base/synchronization:mutex",
     "../../system_wrappers",
@@ -749,7 +749,6 @@ rtc_library("webrtc_opus") {
   ]
 
   deps = [
-  "../../rtc_base:macromagic",
     ":audio_coding_opus_common",
     ":audio_network_adaptor",
     "../../api:array_view",
@@ -758,6 +757,7 @@ rtc_library("webrtc_opus") {
     "../../common_audio",
     "../../rtc_base:checks",
     "../../rtc_base:logging",
+    "../../rtc_base:macromagic",
     "../../rtc_base:protobuf_utils",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:rtc_numerics",
@@ -791,7 +791,6 @@ rtc_library("webrtc_multiopus") {
   ]
 
   deps = [
-  "../../rtc_base:macromagic",
     ":audio_coding_opus_common",
     "../../api/audio_codecs:audio_codecs_api",
     "../../api/audio_codecs/opus:audio_decoder_opus_config",
@@ -799,6 +798,7 @@ rtc_library("webrtc_multiopus") {
     "../../api/units:time_delta",
     "../../rtc_base:checks",
     "../../rtc_base:logging",
+    "../../rtc_base:macromagic",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:safe_minmax",
     "../../rtc_base:stringutils",
@@ -999,7 +999,6 @@ rtc_library("neteq") {
   ]
 
   deps = [
-  "../../rtc_base:macromagic",
     ":audio_coding_module_typedefs",
     ":webrtc_cng",
     "..:module_api_public",
@@ -1018,6 +1017,7 @@ rtc_library("neteq") {
     "../../rtc_base:checks",
     "../../rtc_base:gtest_prod",
     "../../rtc_base:logging",
+    "../../rtc_base:macromagic",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:safe_minmax",
     "../../rtc_base:sanitizer",
@@ -1376,7 +1376,6 @@ if (rtc_include_tests) {
       "test/target_delay_unittest.cc",
     ]
     deps = [
-  "../../rtc_base:macromagic",
       ":audio_coding",
       ":audio_coding_module_typedefs",
       ":audio_coding_modules_tests_shared",
@@ -1405,6 +1404,7 @@ if (rtc_include_tests) {
       "../../common_audio",
       "../../rtc_base:checks",
       "../../rtc_base:logging",
+      "../../rtc_base:macromagic",
       "../../rtc_base:rtc_base_approved",
       "../../rtc_base/synchronization:mutex",
       "../../test:fileutils",
@@ -1427,10 +1427,10 @@ if (rtc_include_tests) {
       "neteq/test/neteq_performance_unittest.cc",
     ]
     deps = [
-  "../../rtc_base:macromagic",
       ":neteq_test_support",
       ":neteq_test_tools",
       "../../api/audio_codecs/opus:audio_encoder_opus",
+      "../../rtc_base:macromagic",
       "../../rtc_base:rtc_base_approved",
       "../../system_wrappers",
       "../../system_wrappers:field_trial",
@@ -1540,6 +1540,7 @@ if (rtc_include_tests) {
       defines = audio_codec_defines
       deps = [
         "../../rtc_base:checks",
+        "../../rtc_base:refcount",
         "../../test:fileutils",
       ]
       absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
@@ -1600,8 +1601,10 @@ if (rtc_include_tests) {
     rtc_test("audio_codec_speed_tests") {
       testonly = true
       defines = []
-      deps = [ "../../test:fileutils",
-  "../../rtc_base:macromagic",]
+      deps = [
+        "../../rtc_base:macromagic",
+        "../../test:fileutils",
+      ]
       sources = [
         "codecs/isac/fix/test/isac_speed_test.cc",
         "codecs/opus/opus_speed_test.cc",
@@ -1867,9 +1870,9 @@ if (rtc_include_tests) {
       sources = [ "codecs/isac/main/test/simpleKenny.c" ]
 
       deps = [
-  "../../rtc_base:macromagic",
         ":isac",
         ":isac_test_util",
+        "../../rtc_base:macromagic",
         "../../rtc_base:rtc_base_approved",
       ]
     }
@@ -1898,9 +1901,9 @@ if (rtc_include_tests) {
       sources = [ "codecs/isac/main/test/ReleaseTest-API/ReleaseTest-API.cc" ]
 
       deps = [
-  "../../rtc_base:macromagic",
         ":isac",
         ":isac_test_util",
+        "../../rtc_base:macromagic",
         "../../rtc_base:rtc_base_approved",
       ]
     }
@@ -1933,9 +1936,9 @@ if (rtc_include_tests) {
       sources = [ "codecs/opus/opus_fec_test.cc" ]
 
       deps = [
-  "../../rtc_base:macromagic",
         ":webrtc_opus",
         "../../common_audio",
+        "../../rtc_base:macromagic",
         "../../rtc_base:rtc_base_approved",
         "../../test:fileutils",
         "../../test:test_main",
@@ -2030,7 +2033,6 @@ if (rtc_include_tests) {
       ]
 
       deps = [
-  "../../rtc_base:macromagic",
         ":acm_receive_test",
         ":acm_send_test",
         ":audio_coding",
@@ -2085,6 +2087,8 @@ if (rtc_include_tests) {
         "../../rtc_base",
         "../../rtc_base:checks",
         "../../rtc_base:ignore_wundef",
+        "../../rtc_base:macromagic",
+        "../../rtc_base:refcount",
         "../../rtc_base:rtc_base_approved",
         "../../rtc_base:rtc_base_tests_utils",
         "../../rtc_base:sanitizer",
