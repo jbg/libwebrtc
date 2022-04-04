@@ -180,7 +180,6 @@ rtc_library("rtc_base_approved") {
   public_deps += [  # no-presubmit-check TODO(webrtc:8603)
     ":platform_thread",
     ":platform_thread_types",
-    ":stringutils",
     ":timeutils",
     "../api:sequence_checker",
   ]
@@ -1240,6 +1239,7 @@ rtc_library("rtc_base_tests_utils") {
     ":socket_address",
     ":socket_factory",
     ":socket_server",
+    ":stringutils",
     ":threading",
     "../api/units:time_delta",
     "../api/units:timestamp",
