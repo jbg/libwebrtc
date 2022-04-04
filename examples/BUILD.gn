@@ -70,6 +70,7 @@ rtc_library("read_auth_file") {
   deps = [
     "../api:array_view",
     "../rtc_base",
+    "../rtc_base:stringutils",
   ]
   absl_deps = [ "//third_party/abseil-cpp/absl/strings:strings" ]
 }
