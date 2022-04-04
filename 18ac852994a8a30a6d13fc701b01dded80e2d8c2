@@ -33,6 +33,23 @@
       "message": "Thanks!\n\nHarald, please take an owner\u0027s look.",
       "revId": "18ac852994a8a30a6d13fc701b01dded80e2d8c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c5636c1_9a9e7a96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-04T07:27:20Z",
+      "side": 1,
+      "message": "Yes, this solves the C++ warning problem, but I still don\u0027t understand why anyone would want names to be constructed this way.\n\nApproved - the naming is a different problem.",
+      "revId": "18ac852994a8a30a6d13fc701b01dded80e2d8c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
