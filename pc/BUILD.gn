@@ -186,7 +186,10 @@ rtc_source_set("external_hmac") {
     "external_hmac.cc",
     "external_hmac.h",
   ]
-  deps = [ "../rtc_base:rtc_base_approved" ]
+  deps = [
+    "../rtc_base:logging",
+    "../rtc_base:rtc_base_approved",
+  ]
   if (rtc_build_libsrtp) {
     deps += [ "//third_party/libsrtp" ]
   }
@@ -318,6 +321,7 @@ rtc_source_set("media_session") {
     "media_session.h",
   ]
   deps = [
+  "../rtc_base:logging",
     ":channel_manager",
     ":jsep_transport",
     ":media_protocol_names",
@@ -491,6 +495,7 @@ rtc_source_set("sctp_transport") {
     "sctp_transport.h",
   ]
   deps = [
+  "../rtc_base:logging",
     ":dtls_transport",
     "../api:libjingle_peerconnection_api",
     "../api:scoped_refptr",
@@ -517,6 +522,7 @@ rtc_source_set("sctp_utils") {
     "sctp_utils.h",
   ]
   deps = [
+  "../rtc_base:logging",
     "../api:libjingle_peerconnection_api",
     "../api:priority",
     "../api/transport:datagram_transport_interface",
@@ -582,6 +588,7 @@ rtc_source_set("srtp_transport") {
     "srtp_transport.h",
   ]
   deps = [
+  "../rtc_base:logging",
     ":rtp_transport",
     ":srtp_session",
     "../api:field_trials_view",
@@ -1568,6 +1575,7 @@ rtc_library("rtp_transmission_manager") {
     "rtp_transmission_manager.h",
   ]
   deps = [
+  "../rtc_base:logging",
     ":audio_rtp_receiver",
     ":channel",
     ":channel_manager",
@@ -1695,6 +1703,7 @@ rtc_library("video_rtp_receiver") {
     "video_rtp_receiver.h",
   ]
   deps = [
+  "../rtc_base:logging",
     ":jitter_buffer_delay",
     ":media_stream",
     ":media_stream_track_proxy",
@@ -1842,6 +1851,7 @@ rtc_library("rtp_sender") {
     "rtp_sender.h",
   ]
   deps = [
+  "../rtc_base:logging",
     ":dtmf_sender",
     ":stats_collector_interface",
     "../api:audio_options_api",
@@ -1874,6 +1884,7 @@ rtc_library("rtp_parameters_conversion") {
     "rtp_parameters_conversion.h",
   ]
   deps = [
+  "../rtc_base:logging",
     ":session_description",
     "../api:array_view",
     "../api:libjingle_peerconnection_api",
@@ -1897,6 +1908,7 @@ rtc_library("dtmf_sender") {
     "dtmf_sender.h",
   ]
   deps = [
+  "../rtc_base:logging",
     ":proxy",
     "../api:libjingle_peerconnection_api",
     "../api:scoped_refptr",
@@ -2007,6 +2019,7 @@ if (rtc_include_tests && !build_with_chromium) {
     }
 
     deps = [
+  "../rtc_base:logging",
       ":audio_rtp_receiver",
       ":channel",
       ":channel_manager",
@@ -2136,6 +2149,7 @@ if (rtc_include_tests && !build_with_chromium) {
       "peer_connection_wrapper.h",
     ]
     deps = [
+  "../rtc_base:logging",
       ":pc_test_utils",
       ":peerconnection",
       ":sdp_utils",
@@ -2203,6 +2217,7 @@ if (rtc_include_tests && !build_with_chromium) {
     ]
 
     deps = [
+  "../rtc_base:logging",
       ":audio_rtp_receiver",
       ":audio_track",
       ":channel",
@@ -2408,6 +2423,7 @@ if (rtc_include_tests && !build_with_chromium) {
       "test/integration_test_helpers.h",
     ]
     deps = [
+  "../rtc_base:logging",
       ":audio_rtp_receiver",
       ":audio_track",
       ":dtmf_sender",
@@ -2540,6 +2556,7 @@ if (rtc_include_tests && !build_with_chromium) {
     ]
 
     deps = [
+  "../rtc_base:logging",
       ":channel_interface",
       ":jitter_buffer_delay",
       ":libjingle_peerconnection",
