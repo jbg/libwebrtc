@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7881bbcd_7a9cf5af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-04T18:41:33Z",
+      "side": 1,
+      "message": "No-Try: True because CQ doesn\u0027t work on branches when infra changes happen after the branch cut.",
+      "revId": "7189d2ea18c2a31d5c6e7fbbd2c80957f1b710d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
