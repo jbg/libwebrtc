@@ -317,6 +317,7 @@ if (is_mac) {
       "../../api:scoped_refptr",
       "../../rtc_base",
       "../../rtc_base:checks",
+      "../../rtc_base:logging",
       "../../rtc_base:rtc_base_approved",
       "../../rtc_base/system:rtc_export",
       "../../sdk:helpers_objc",
