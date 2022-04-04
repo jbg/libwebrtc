@@ -698,6 +698,7 @@ if (current_os == "linux" || is_android) {
       "../../rtc_base:rtc_task_queue",
       "../../rtc_base:safe_conversions",
       "../../rtc_base:threading",
+      "../../rtc_base:timeutils",
       "../../rtc_base/synchronization:mutex",
       "../../rtc_base/task_utils:to_queued_task",
       "//third_party/libyuv",
@@ -1140,6 +1141,7 @@ if (current_os == "linux" || is_android) {
       "../../rtc_base:checks",
       "../../rtc_base:refcount",
       "../../rtc_base:rtc_base_approved",
+      "../../rtc_base:timeutils",
     ]
   }
 
@@ -1206,6 +1208,7 @@ if (current_os == "linux" || is_android) {
       "../../rtc_base:logging",
       "../../rtc_base:macromagic",
       "../../rtc_base:rtc_base_approved",
+      "../../rtc_base:timeutils",
       "../../system_wrappers:field_trial",
       "../../system_wrappers:metrics",
     ]
@@ -1263,6 +1266,7 @@ if (current_os == "linux" || is_android) {
       "../../rtc_base:logging",
       "../../rtc_base:macromagic",
       "../../rtc_base:rtc_base_approved",
+      "../../rtc_base:timeutils",
     ]
     absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
   }
@@ -1645,6 +1649,7 @@ if (is_android) {
       "../../rtc_base:rtc_event",
       "../../rtc_base:stringutils",
       "../../rtc_base:threading",
+      "../../rtc_base:timeutils",
       "../../rtc_base/synchronization:mutex",
       "../../rtc_base/system:inline",
       "../../system_wrappers",
