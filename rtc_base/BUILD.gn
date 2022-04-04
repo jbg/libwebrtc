@@ -83,6 +83,7 @@ rtc_library("rtc_base_approved") {
     ":atomicops",
     ":checks",
     ":logging",
+    ":macromagic",
     ":rtc_task_queue",
     ":safe_compare",
     ":type_traits",
@@ -174,7 +175,6 @@ rtc_library("rtc_base_approved") {
   }
 
   public_deps += [  # no-presubmit-check TODO(webrtc:8603)
-    ":macromagic",
     ":platform_thread",
     ":platform_thread_types",
     ":refcount",
@@ -369,6 +369,7 @@ rtc_library("rate_limiter") {
     "rate_limiter.h",
   ]
   deps = [
+    ":macromagic",
     ":rtc_base_approved",
     "../system_wrappers",
     "synchronization:mutex",
@@ -934,6 +935,7 @@ rtc_library("rtc_base") {
     ":checks",
     ":ip_address",
     ":logging",
+    ":macromagic",
     ":network_constants",
     ":null_socket_server",
     ":rtc_task_queue",
@@ -1227,6 +1229,7 @@ rtc_library("rtc_base_tests_utils") {
     ":checks",
     ":ip_address",
     ":logging",
+    ":macromagic",
     ":rtc_base",
     ":socket",
     ":socket_address",
@@ -1258,6 +1261,7 @@ rtc_library("task_queue_for_test") {
   ]
   deps = [
     ":checks",
+    ":macromagic",
     ":rtc_base_approved",
     ":rtc_event",
     ":rtc_task_queue",
@@ -1324,6 +1328,7 @@ if (rtc_include_tests) {
         ":gunit_helpers",
         ":ip_address",
         ":logging",
+        ":macromagic",
         ":net_helpers",
         ":null_socket_server",
         ":rtc_base",
@@ -1405,6 +1410,7 @@ if (rtc_include_tests) {
         ":gunit_helpers",
         ":ip_address",
         ":logging",
+        ":macromagic",
         ":null_socket_server",
         ":rate_limiter",
         ":rtc_base",
@@ -1542,6 +1548,7 @@ if (rtc_include_tests) {
         ":gunit_helpers",
         ":ip_address",
         ":logging",
+        ":macromagic",
         ":net_helpers",
         ":null_socket_server",
         ":rtc_base_tests_utils",
