@@ -211,7 +211,7 @@ void decompressionOutputCallback(void *decoderRef,
 #elif defined(WEBRTC_IOS)
   keys.push_back(kCVPixelBufferOpenGLESCompatibilityKey);
   values.push_back(kCFBooleanTrue);
-#elif defined(WEBRTC_MAC)
+#elif defined(WEBRTC_MAC) && !defined(WEBRTC_ARCH_ARM64)
   keys.push_back(kCVPixelBufferOpenGLCompatibilityKey);
   values.push_back(kCFBooleanTrue);
 #endif
