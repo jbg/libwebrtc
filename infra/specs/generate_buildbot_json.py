@@ -10,8 +10,9 @@
 ADDITIONAL_MIXINS dictonary. Calls Chromium's generate_buildbot_json.
 """
 
-import json
+import ast
 import os
+import subprocess
 import sys
 
 _SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -22,13 +23,7 @@ sys.path.insert(0, os.path.join(_SRC_DIR, 'testing', 'buildbot'))
 from testing.buildbot import generate_buildbot_json
 
 # Add custom mixins here.
-ADDITIONAL_MIXINS = {
-    'result_adapter': {
-        'resultdb': {
-            'result_format': 'json'
-        },
-    },
-}
+WEBRTC_MIXIN_FILE_NAME = os.path.join(_SCRIPT_DIR, 'mixins_webrtc.pyl')
 MIXIN_FILE_NAME = os.path.join(_SCRIPT_DIR, 'mixins.pyl')
 MIXINS_PYL_TEMPLATE = """\
 # GENERATED FILE - DO NOT EDIT.
@@ -47,42 +42,48 @@ MIXINS_PYL_TEMPLATE = """\
 """
 
 
-def main():
+def generate_mixins_file_from_used_mixins(generator):
   chromium_args = generate_buildbot_json.BBJSONGenerator.parse_args(argv=None)
   chromium_generator = generate_buildbot_json.BBJSONGenerator(chromium_args)
   chromium_generator.load_configuration_files()
 
-  override_args = ['--pyl-files-dir', _SCRIPT_DIR]
-  webrtc_args = generate_buildbot_json.BBJSONGenerator.parse_args(override_args)
-  webrtc_generator = generate_buildbot_json.BBJSONGenerator(webrtc_args)
-  webrtc_generator.load_configuration_files()
-  webrtc_generator.resolve_configuration_files()
-
   seen_mixins = set()
-  for waterfall in webrtc_generator.waterfalls:
+  for waterfall in generator.waterfalls:
     seen_mixins = seen_mixins.union(waterfall.get('mixins', set()))
     for bot_name, tester in waterfall['machines'].items():
       del bot_name
       seen_mixins = seen_mixins.union(tester.get('mixins', set()))
-  for suite in webrtc_generator.test_suites.values():
+  for suite in generator.test_suites.values():
     for test in suite.values():
       seen_mixins = seen_mixins.union(test.get('mixins', set()))
 
-  found_mixins = ADDITIONAL_MIXINS.copy()
+  found_mixins = ast.literal_eval(open(WEBRTC_MIXIN_FILE_NAME).read())
   for mixin in seen_mixins:
     if mixin not in found_mixins:
       found_mixins[mixin] = chromium_generator.mixins[mixin]
+    elif mixin in chromium_generator.mixins:
+      assert False, '"%s" is already defined in Chromium\'s mixins.pyl' % mixin
 
   format_data = {
       'script_name': os.path.basename(__file__),
-      'data_source': 'waterfall.pyl and Chromium\'s mixins.pyl',
-      'mixin_data': json.dumps(dict(sorted(found_mixins.items())), indent=2),
+      'data_source': 'mixins_webrtc.pyl and Chromium\'s mixins.pyl',
+      'mixin_data': dict(sorted(found_mixins.items())),
   }
   with open(MIXIN_FILE_NAME, 'w') as f:
     f.write(MIXINS_PYL_TEMPLATE.format(**format_data))
-    f.close()
 
-  return webrtc_generator.main()
+  return subprocess.call(['yapf', '-i', MIXIN_FILE_NAME])
+
+
+def main():
+  override_args = ['--pyl-files-dir', _SCRIPT_DIR]
+  args = generate_buildbot_json.BBJSONGenerator.parse_args(override_args)
+  generator = generate_buildbot_json.BBJSONGenerator(args)
+  generator.load_configuration_files()
+  generator.resolve_configuration_files()
+
+  generate_mixins_file_from_used_mixins(generator)
+  return generator.main()
 
 
 if __name__ == '__main__':  # pragma: no cover
