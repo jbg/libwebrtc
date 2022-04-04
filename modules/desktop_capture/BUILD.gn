@@ -39,6 +39,7 @@ rtc_library("primitives") {
   deps = [
     "../../api:scoped_refptr",
     "../../rtc_base:checks",
+    "../../rtc_base:refcount",
     "../../rtc_base/system:rtc_export",
     "//third_party/libyuv",
   ]
@@ -121,6 +122,7 @@ if (rtc_include_tests) {
       ":primitives",
       "../../rtc_base:checks",
       "../../rtc_base:logging",
+      "../../rtc_base:macromagic",
 
       # TODO(bugs.webrtc.org/9987): Remove this dep on rtc_base:rtc_base once
       # rtc_base:threading is fully defined.
@@ -480,6 +482,8 @@ rtc_library("desktop_capture_generic") {
     "../../rtc_base",  # TODO(kjellander): Cleanup in bugs.webrtc.org/3806.
     "../../rtc_base:checks",
     "../../rtc_base:logging",
+    "../../rtc_base:macromagic",
+    "../../rtc_base:refcount",
     "../../rtc_base/synchronization:mutex",
     "../../rtc_base/system:arch",
     "../../rtc_base/system:no_unique_address",
