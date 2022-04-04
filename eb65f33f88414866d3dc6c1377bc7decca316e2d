@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "409e9377_d867bf29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-04T19:17:31Z",
+      "side": 1,
+      "message": "No-Try: True because CQ doesn\u0027t work well on branches.",
+      "revId": "eb65f33f88414866d3dc6c1377bc7decca316e2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
