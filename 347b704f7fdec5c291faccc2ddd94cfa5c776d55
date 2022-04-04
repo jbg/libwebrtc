@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5028ceef_7ba2774c",
+        "filename": "api/video_codecs/video_codec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-04T10:09:08Z",
+      "side": 1,
+      "message": "Any reason to re-balance these to start at 0?",
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb3427b0_0637cba7",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1878,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-04T10:09:08Z",
+      "side": 1,
+      "message": "What about rtc::flat_map or absl::flat_hash_map?",
+      "range": {
+        "startLine": 1878,
+        "startChar": 2,
+        "endLine": 1878,
+        "endChar": 10
+      },
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157baaca_49bcc7a9",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1882,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-04T10:09:08Z",
+      "side": 1,
+      "message": "Since designated initializers seems to be allowed nowadays, write this as\n{.base_layer_speed \u003d 9, .high_layer_speed \u003d 9, [...]}",
+      "range": {
+        "startLine": 1882,
+        "startChar": 46,
+        "endLine": 1882,
+        "endChar": 59
+      },
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e803f3_4fc96aa4",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-04T10:09:08Z",
+      "side": 1,
+      "message": "Nit: Why not take VideoCodecComplexity here?",
+      "range": {
+        "startLine": 236,
+        "startChar": 30,
+        "endLine": 236,
+        "endChar": 46
+      },
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "272b73a9_eafe5859",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-04T10:09:08Z",
+      "side": 1,
+      "message": "It\u0027s probably a good idea to add a unit test to make sure the kill-switch WAI",
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf89157_6b6c063e",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-04T10:09:08Z",
+      "side": 1,
+      "message": "Disabled?",
+      "range": {
+        "startLine": 507,
+        "startChar": 35,
+        "endLine": 507,
+        "endChar": 43
+      },
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
