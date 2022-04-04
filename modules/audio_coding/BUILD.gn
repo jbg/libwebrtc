@@ -37,6 +37,7 @@ rtc_library("audio_coding") {
   defines = []
 
   deps = [
+  "../../rtc_base:macromagic",
     ":audio_coding_module_typedefs",
     ":default_neteq_factory",
     ":neteq",
@@ -748,6 +749,7 @@ rtc_library("webrtc_opus") {
   ]
 
   deps = [
+  "../../rtc_base:macromagic",
     ":audio_coding_opus_common",
     ":audio_network_adaptor",
     "../../api:array_view",
@@ -789,6 +791,7 @@ rtc_library("webrtc_multiopus") {
   ]
 
   deps = [
+  "../../rtc_base:macromagic",
     ":audio_coding_opus_common",
     "../../api/audio_codecs:audio_codecs_api",
     "../../api/audio_codecs/opus:audio_decoder_opus_config",
@@ -996,6 +999,7 @@ rtc_library("neteq") {
   ]
 
   deps = [
+  "../../rtc_base:macromagic",
     ":audio_coding_module_typedefs",
     ":webrtc_cng",
     "..:module_api_public",
@@ -1372,6 +1376,7 @@ if (rtc_include_tests) {
       "test/target_delay_unittest.cc",
     ]
     deps = [
+  "../../rtc_base:macromagic",
       ":audio_coding",
       ":audio_coding_module_typedefs",
       ":audio_coding_modules_tests_shared",
@@ -1422,6 +1427,7 @@ if (rtc_include_tests) {
       "neteq/test/neteq_performance_unittest.cc",
     ]
     deps = [
+  "../../rtc_base:macromagic",
       ":neteq_test_support",
       ":neteq_test_tools",
       "../../api/audio_codecs/opus:audio_encoder_opus",
@@ -1594,7 +1600,8 @@ if (rtc_include_tests) {
     rtc_test("audio_codec_speed_tests") {
       testonly = true
       defines = []
-      deps = [ "../../test:fileutils" ]
+      deps = [ "../../test:fileutils",
+  "../../rtc_base:macromagic",]
       sources = [
         "codecs/isac/fix/test/isac_speed_test.cc",
         "codecs/opus/opus_speed_test.cc",
@@ -1860,6 +1867,7 @@ if (rtc_include_tests) {
       sources = [ "codecs/isac/main/test/simpleKenny.c" ]
 
       deps = [
+  "../../rtc_base:macromagic",
         ":isac",
         ":isac_test_util",
         "../../rtc_base:rtc_base_approved",
@@ -1890,6 +1898,7 @@ if (rtc_include_tests) {
       sources = [ "codecs/isac/main/test/ReleaseTest-API/ReleaseTest-API.cc" ]
 
       deps = [
+  "../../rtc_base:macromagic",
         ":isac",
         ":isac_test_util",
         "../../rtc_base:rtc_base_approved",
@@ -1924,6 +1933,7 @@ if (rtc_include_tests) {
       sources = [ "codecs/opus/opus_fec_test.cc" ]
 
       deps = [
+  "../../rtc_base:macromagic",
         ":webrtc_opus",
         "../../common_audio",
         "../../rtc_base:rtc_base_approved",
@@ -2020,6 +2030,7 @@ if (rtc_include_tests) {
       ]
 
       deps = [
+  "../../rtc_base:macromagic",
         ":acm_receive_test",
         ":acm_send_test",
         ":audio_coding",
