@@ -28,6 +28,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/time_utils.h"
 #include "sdk/objc/components/video_codec/nalu_rewriter.h"
+#include "sdk/objc/helpers/scoped_cftyperef.h"
 
 // Struct that we pass to the decoder per frame to decode. We receive it again
 // in the decoder callback.
@@ -202,48 +203,40 @@ void decompressionOutputCallback(void *decoderRef,
   // CVPixelBuffers directly to the renderer.
   // TODO(tkchin): Maybe only set OpenGL/IOSurface keys if we know that that
   // we can pass CVPixelBuffers as native handles in decoder output.
-#if TARGET_OS_SIMULATOR
-  static size_t const attributesSize = 2;
-#else
-  static size_t const attributesSize = 3;
-#endif
-
-  CFTypeRef keys[attributesSize] = {
+  std::vector<CFTypeRef> keys;
+  std::vector<CFTypeRef> values;
 #if defined(WEBRTC_IOS) && (TARGET_OS_MACCATALYST || TARGET_OS_SIMULATOR)
-      kCVPixelBufferMetalCompatibilityKey,
+  keys.push_back(kCVPixelBufferMetalCompatibilityKey);
+  values.push_back(kCFBooleanTrue);
 #elif defined(WEBRTC_IOS)
-      kCVPixelBufferOpenGLESCompatibilityKey,
+  keys.push_back(kCVPixelBufferOpenGLESCompatibilityKey);
+  values.push_back(kCFBooleanTrue);
 #elif defined(WEBRTC_MAC)
-      kCVPixelBufferOpenGLCompatibilityKey,
-#endif
-#if !(TARGET_OS_SIMULATOR)
-      kCVPixelBufferIOSurfacePropertiesKey,
-#endif
-      kCVPixelBufferPixelFormatTypeKey};
-  CFDictionaryRef ioSurfaceValue = CreateCFTypeDictionary(nullptr, nullptr, 0);
-  int64_t nv12type = kCVPixelFormatType_420YpCbCr8BiPlanarFullRange;
-  CFNumberRef pixelFormat = CFNumberCreate(nullptr, kCFNumberLongType, &nv12type);
-#if TARGET_OS_SIMULATOR
-  CFTypeRef values[attributesSize] = {kCFBooleanTrue, pixelFormat};
-#else
-  CFTypeRef values[attributesSize] = {kCFBooleanTrue, ioSurfaceValue, pixelFormat};
+  keys.push_back(kCVPixelBufferOpenGLCompatibilityKey);
+  values.push_back(kCFBooleanTrue);
 #endif
 
-  CFDictionaryRef attributes = CreateCFTypeDictionary(keys, values, attributesSize);
-  if (ioSurfaceValue) {
-    CFRelease(ioSurfaceValue);
-    ioSurfaceValue = nullptr;
-  }
-  if (pixelFormat) {
-    CFRelease(pixelFormat);
-    pixelFormat = nullptr;
-  }
+#if !(TARGET_OS_SIMULATOR)
+  rtc::ScopedCFTypeRef<CFDictionaryRef> ioSurfaceValue =
+      rtc::ScopedCF(CreateCFTypeDictionary(nullptr, nullptr, 0));
+  keys.push_back(kCVPixelBufferIOSurfacePropertiesKey);
+  values.push_back(ioSurfaceValue.get());
+#endif
+  int64_t nv12type = kCVPixelFormatType_420YpCbCr8BiPlanarFullRange;
+  rtc::ScopedCFTypeRef<CFNumberRef> pixelFormat =
+      rtc::ScopedCF(CFNumberCreate(nullptr, kCFNumberLongType, &nv12type));
+  keys.push_back(kCVPixelBufferPixelFormatTypeKey);
+  values.push_back(pixelFormat.get());
+
+  RTC_DCHECK_EQ(keys.size(), values.size());
+  rtc::ScopedCFTypeRef<CFDictionaryRef> attributes =
+      rtc::ScopedCF(CreateCFTypeDictionary(keys.data(), values.data(), keys.size()));
+
   VTDecompressionOutputCallbackRecord record = {
       decompressionOutputCallback, (__bridge void *)self,
   };
   OSStatus status = VTDecompressionSessionCreate(
-      nullptr, _videoFormat, nullptr, attributes, &record, &_decompressionSession);
-  CFRelease(attributes);
+      nullptr, _videoFormat, nullptr, attributes.get(), &record, &_decompressionSession);
   if (status != noErr) {
     RTC_LOG(LS_ERROR) << "Failed to create decompression session: " << status;
     [self destroyDecompressionSession];
