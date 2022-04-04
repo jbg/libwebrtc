@@ -94,6 +94,7 @@ if (is_mac || is_ios) {
 rtc_source_set("thread_registry") {
   sources = [ "thread_registry.h" ]
   deps = [
+    "..:logging",
     "..:rtc_base_approved",
     "../synchronization:mutex",
   ]
