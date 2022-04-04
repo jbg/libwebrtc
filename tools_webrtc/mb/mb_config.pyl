@@ -307,7 +307,7 @@
       'clang', 'openh264', 'pure_release_bot', 'x86',
     ],
     'win_clang_debug_bot_x64': [
-      'clang', 'openh264', 'debug_bot', 'x64',
+      'windows', 'clang', 'openh264', 'debug_bot', 'x64',
     ],
     'win_clang_release_bot_x64': [
       'clang', 'openh264', 'release_bot', 'x64',
@@ -527,6 +527,10 @@
 
     'ubsan_vptr': {
       'gn_args': 'is_ubsan_vptr=true is_ubsan_no_recover=true',
+    },
+
+    'windows': {
+      'gn_args': 'target_os="win"',
     },
 
     'win_fastlink': {
