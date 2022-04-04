@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32f302ad_ef38b6d1",
+        "filename": "infra/specs/client.webrtc.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-04T14:56:02Z",
+      "side": 1,
+      "message": "Double checking. This is not perf so we don\u0027t care about the OS version and hence we can be more relaxed?",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 29
+      },
+      "revId": "b840077f39c8a98992b8b5502e09fa59fdac6a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
