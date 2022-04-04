@@ -22,6 +22,30 @@
       },
       "revId": "b840077f39c8a98992b8b5502e09fa59fdac6a11",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "282a16bc_e9b9b379",
+        "filename": "infra/specs/client.webrtc.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-04-04T15:01:40Z",
+      "side": 1,
+      "message": "It\u0027s because there is only one Linux machine on the baremetal pool, so we just want to pick this one.\nhttps://crsrc.org/b/recipes/recipe_modules/webrtc/builders.py;l\u003d351;bpv\u003d1;bpt\u003d0;drc\u003d177e854db2e9ddbc9377a6f13474fb3234937cdf",
+      "parentUuid": "32f302ad_ef38b6d1",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 29
+      },
+      "revId": "b840077f39c8a98992b8b5502e09fa59fdac6a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
