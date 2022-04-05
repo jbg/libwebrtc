@@ -11,6 +11,13 @@
 # be found in the AUTHORS file in the root of the source tree.
 
 {
+  'android-devices': {
+    'swarming': {
+      'dimensions': {
+        'android_devices': '1'
+      }
+    }
+  },
   'baremetal-pool': {
     'swarming': {
       'dimensions': {
@@ -22,6 +29,49 @@
     'swarming': {
       'dimensions': {
         'pool': 'WebRTC-baremetal-try'
+      }
+    }
+  },
+  'bullhead': {
+    'swarming': {
+      'dimensions': {
+        'device_type': 'bullhead',
+        'os': 'Android'
+      }
+    }
+  },
+  'chrome-tester-service-account': {
+    'swarming': {
+      'service_account':
+      'chrome-tester@chops-service-accounts.iam.gserviceaccount.com'
+    }
+  },
+  'chromium-tester-service-account': {
+    'swarming': {
+      'service_account':
+      'chromium-tester@chops-service-accounts.iam.gserviceaccount.com'
+    }
+  },
+  'ios-device-15.3': {
+    'swarming': {
+      'dimensions': {
+        'os': 'iOS-15.3',
+        'pool': 'chrome.tests'
+      }
+    }
+  },
+  'ios-simulator-14': {
+    '$mixin_append': {
+      'args': ['--platform', 'iPhone X', '--version', '14.0']
+    }
+  },
+  'ios_runtime_cache_14_0': {
+    '$mixin_append': {
+      'swarming': {
+        'named_caches': [{
+          'name': 'runtime_ios_14_0',
+          'path': 'Runtime-ios-14.0'
+        }]
       }
     }
   },
@@ -39,6 +89,18 @@
       }
     }
   },
+  'logdog-butler': {
+    'swarming': {
+      'cipd_packages': [{
+        'cipd_package':
+        'infra/tools/luci/logdog/butler/${platform}',
+        'location':
+        'bin',
+        'revision':
+        'git_revision:ff387eadf445b24c935f1cf7d6ddd279f8a6b04c'
+      }]
+    }
+  },
   'mac': {
     'swarming': {
       'dimensions': {
@@ -50,6 +112,13 @@
     'swarming': {
       'dimensions': {
         'os': 'Mac-11'
+      }
+    }
+  },
+  'marshmallow': {
+    'swarming': {
+      'dimensions': {
+        'device_os': 'MMB29Q'
       }
     }
   },
@@ -73,6 +142,11 @@
       'result_format': 'json'
     }
   },
+  'webrtc-xctest': {
+    '$mixin_append': {
+      'args': ['--xctest', '--undefok=enable-run-ios-unittests-with-xctest']
+    }
+  },
   'win': {
     'swarming': {
       'dimensions': {
@@ -92,6 +166,22 @@
       'dimensions': {
         'cpu': 'x86-64'
       }
+    }
+  },
+  'xcode_13_main': {
+    '$mixin_append': {
+      'args': ['--xcode-build-version', '13c100']
+    },
+    'swarming': {
+      'named_caches': [{
+        'name': 'xcode_ios_13c100',
+        'path': 'Xcode.app'
+      }]
+    }
+  },
+  'xcode_parallelization': {
+    '$mixin_append': {
+      'args': ['--xcode-parallelization']
     }
   }
 }

@@ -11,25 +11,57 @@
     'name': 'client.webrtc',
     'mixins': [],
     'machines': {
+      'Android32 (M Nexus5X)': {
+        'mixins':
+        ['bullhead', 'marshmallow', 'android-devices', 'logdog-butler'],
+        'test_suites': {
+          'isolated_scripts': 'android_tests',
+          'junit_tests': 'android_junit_tests',
+        },
+      },
       'Linux64 Release': {
         'os_type': 'linux',
         'mixins': ['linux-bionic', 'x86-64', 'resultdb-json-format'],
         'test_suites': {
-          'isolated_scripts': 'desktop_tests_linux',
+          'isolated_scripts': 'linux_tests',
         },
       },
       'Mac64 Release': {
         'os_type': 'mac',
         'mixins': ['mac11', 'x86-64', 'resultdb-json-format'],
         'test_suites': {
-          'isolated_scripts': 'desktop_tests_mac',
+          'isolated_scripts': 'mac_tests',
         },
       },
       'Win32 Release (Clang)': {
         'os_type': 'win',
         'mixins': ['win7', 'x86-64', 'resultdb-json-format'],
         'test_suites': {
-          'isolated_scripts': 'desktop_tests_win',
+          'isolated_scripts': 'win_tests',
+        },
+      },
+      'iOS64 Sim Debug (iOS 14.0)': {
+        'mixins': [
+          'mac11', 'chromium-tester-service-account', 'ios-simulator-14',
+          'ios_runtime_cache_14_0', 'xcode_13_main'
+        ],
+        'test_suites': {
+          'isolated_scripts': 'ios_simulator_tests',
+        },
+      },
+    },
+  },
+  {
+    'name': 'internal.client.webrtc',
+    'mixins': [],
+    'machines': {
+      'iOS64 Release': {
+        'mixins': [
+          'ios-device-15.3', 'webrtc-xctest', 'chrome-tester-service-account',
+          'xcode_13_main'
+        ],
+        'test_suites': {
+          'isolated_scripts': 'ios_device_tests',
         },
       },
     },
@@ -38,25 +70,33 @@
     'name': 'tryserver.webrtc',
     'mixins': [],
     'machines': {
+      'android_arm_rel': {
+        'mixins':
+        ['bullhead', 'marshmallow', 'android-devices', 'logdog-butler'],
+        'test_suites': {
+          'isolated_scripts': 'android_tests_tryserver',
+          'junit_tests': 'android_junit_tests',
+        },
+      },
       'linux_rel': {
         'os_type': 'linux',
         'mixins': ['linux-bionic', 'x86-64', 'resultdb-json-format'],
         'test_suites': {
-          'isolated_scripts': 'desktop_tests_linux_tryserver',
+          'isolated_scripts': 'linux_tests_tryserver',
         },
       },
       'mac_rel': {
         'os_type': 'mac',
         'mixins': ['mac11', 'x86-64', 'resultdb-json-format'],
         'test_suites': {
-          'isolated_scripts': 'desktop_tests_mac_tryserver',
+          'isolated_scripts': 'mac_tests_tryserver',
         },
       },
       'win_x86_clang_rel': {
         'os_type': 'win',
         'mixins': ['win7', 'x86-64', 'resultdb-json-format'],
         'test_suites': {
-          'isolated_scripts': 'desktop_tests_win_tryserver',
+          'isolated_scripts': 'win_tests_tryserver',
         },
       },
     },
