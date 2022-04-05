@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "479840bd_16ecaa60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-05T07:44:54Z",
+      "side": 1,
+      "message": "PTAL. Added in 2019, apparently unused.",
+      "revId": "f1dc4df71e54b146c35ffc0e77dcffac97ee6582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
