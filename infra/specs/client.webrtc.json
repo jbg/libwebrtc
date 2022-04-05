@@ -10,6 +10,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "AppRTCMobile_test_apk",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -37,6 +41,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "android_instrumentation_test_apk",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -64,6 +72,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "audio_decoder_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -91,6 +103,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "common_audio_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -118,6 +134,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "common_video_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -145,6 +165,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "dcsctp_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -172,6 +196,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "modules_tests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -200,6 +228,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "modules_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -228,6 +260,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "peerconnection_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -256,6 +292,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "rtc_media_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -283,6 +323,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "rtc_pc_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -310,6 +354,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "rtc_stats_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -337,6 +385,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "rtc_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -365,6 +417,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "system_wrappers_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -392,6 +448,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "test_support_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -419,6 +479,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "tools_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -446,6 +510,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "video_engine_tests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -474,6 +542,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "voip_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -501,6 +573,10 @@
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
         "name": "webrtc_nonparallel_tests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {
           "can_use_on_swarming_builders": true,
           "cipd_packages": [
@@ -525,12 +601,20 @@
     "junit_tests": [
       {
         "name": "android_examples_junit_tests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {},
         "test": "android_examples_junit_tests",
         "test_id_prefix": "ninja://examples:android_examples_junit_tests/"
       },
       {
         "name": "android_sdk_junit_tests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
         "swarming": {},
         "test": "android_sdk_junit_tests",
         "test_id_prefix": "ninja://sdk/android:android_sdk_junit_tests/"
@@ -1759,6 +1843,866 @@
               "os": "Windows-7-SP1"
             }
           ]
+        },
+        "test_id_prefix": "ninja://:webrtc_nonparallel_tests/"
+      }
+    ]
+  },
+  "iOS64 Sim Debug (iOS 14.0)": {
+    "isolated_scripts": [
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "audio_decoder_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "audio_decoder_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://modules/audio_coding:audio_decoder_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "common_audio_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "common_audio_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://common_audio:common_audio_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "common_video_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "common_video_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://common_video:common_video_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "dcsctp_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "dcsctp_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://net/dcsctp:dcsctp_unittests/"
+      },
+      {
+        "$mixin_append": {
+          "args": [
+            "--readline-timeout=360"
+          ]
+        },
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "modules_tests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "modules_tests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com",
+          "shards": 2
+        },
+        "test_id_prefix": "ninja://modules:modules_tests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "modules_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "modules_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com",
+          "shards": 6
+        },
+        "test_id_prefix": "ninja://modules:modules_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "rtc_media_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "rtc_media_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://media:rtc_media_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "rtc_pc_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "rtc_pc_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://pc:rtc_pc_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "rtc_stats_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "rtc_stats_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://stats:rtc_stats_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "rtc_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "rtc_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com",
+          "shards": 6
+        },
+        "test_id_prefix": "ninja://:rtc_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209",
+          "--xcode-parallelization"
+        ],
+        "isolate_name": "sdk_framework_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "sdk_framework_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://sdk:sdk_framework_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "system_wrappers_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "system_wrappers_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://system_wrappers:system_wrappers_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "test_support_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "test_support_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://test:test_support_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "tools_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "tools_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://rtc_tools:tools_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "video_capture_tests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "video_capture_tests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://modules/video_capture:video_capture_tests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "video_engine_tests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "video_engine_tests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com",
+          "shards": 4
+        },
+        "test_id_prefix": "ninja://:video_engine_tests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "voip_unittests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "voip_unittests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
+        },
+        "test_id_prefix": "ninja://:voip_unittests/"
+      },
+      {
+        "args": [
+          "--platform",
+          "iPhone X",
+          "--version",
+          "14.0",
+          "--xcode-build-version",
+          "12a7209"
+        ],
+        "isolate_name": "webrtc_nonparallel_tests",
+        "merge": {
+          "args": [],
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "webrtc_nonparallel_tests",
+        "resultdb": {
+          "enable": true,
+          "has_native_resultdb_integration": true
+        },
+        "swarming": {
+          "can_use_on_swarming_builders": true,
+          "cipd_packages": [
+            {
+              "cipd_package": "infra/tools/mac_toolchain/${platform}",
+              "location": ".",
+              "revision": "git_revision:723fc1a6c8cdf2631a57851f5610e598db0c1de1"
+            }
+          ],
+          "dimension_sets": [
+            {
+              "os": "Mac-11"
+            }
+          ],
+          "named_caches": [
+            {
+              "name": "xcode_ios_12a7209",
+              "path": "Xcode.app"
+            },
+            {
+              "name": "runtime_ios_14_0",
+              "path": "Runtime-ios-14.0"
+            }
+          ],
+          "service_account": "chromium-tester@chops-service-accounts.iam.gserviceaccount.com"
         },
         "test_id_prefix": "ninja://:webrtc_nonparallel_tests/"
       }
