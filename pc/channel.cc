@@ -956,8 +956,10 @@ VideoChannel::VideoChannel(rtc::Thread* worker_thread,
 
 VideoChannel::~VideoChannel() {
   TRACE_EVENT0("webrtc", "VideoChannel::~VideoChannel");
+  RTC_LOG_THREAD_BLOCK_COUNT();
   // this can't be done in the base class, since it calls a virtual
   DisableMedia_w();
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
 }
 
 void VideoChannel::UpdateMediaSendRecvState_w() {
