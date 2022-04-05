@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7baaf3b_2e7b463e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-05T18:49:02Z",
+      "side": 1,
+      "message": "DEPS file will be reverted before submission. It is added for now to check that there are no any other issues in the chromium roll.",
+      "revId": "8d03ca360a6d501a265844f24ebe12ca9c937f08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
