@@ -16,6 +16,23 @@
       "message": "PTAL. Added in 2019, apparently unused.",
       "revId": "f1dc4df71e54b146c35ffc0e77dcffac97ee6582",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02084b93_756dc7d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2022-04-05T08:58:02Z",
+      "side": 1,
+      "message": "Just for context - this was added as a tool to debug deadlocking in internal WebRTC. This used to be a severe issue, but I don\u0027t know the current status of threading in WebRTC. Anyway, if it\u0027s not used we can remove it (we can always resurrect it if/when needed).",
+      "revId": "f1dc4df71e54b146c35ffc0e77dcffac97ee6582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
