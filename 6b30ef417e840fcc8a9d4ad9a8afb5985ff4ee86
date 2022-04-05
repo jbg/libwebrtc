@@ -152,6 +152,30 @@
       },
       "revId": "6b30ef417e840fcc8a9d4ad9a8afb5985ff4ee86",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09a4f54d_0da99402",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2022-04-05T13:37:20Z",
+      "side": 1,
+      "message": "resolving.",
+      "parentUuid": "e8df02fd_9da4aeaa",
+      "range": {
+        "startLine": 609,
+        "startChar": 2,
+        "endLine": 620,
+        "endChar": 6
+      },
+      "revId": "6b30ef417e840fcc8a9d4ad9a8afb5985ff4ee86",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
