@@ -56,6 +56,30 @@
       },
       "revId": "6b30ef417e840fcc8a9d4ad9a8afb5985ff4ee86",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f872e993_b3d27256",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-04-05T08:31:41Z",
+      "side": 1,
+      "message": "Hmm. I also don\u0027t like repeating `values.push_back(kCFBooleanTrue)` three times.\nHowever, I think it\u0027s important not to rely on a fixed value of `attributesSize` to apply a fix like https://webrtc-review.googlesource.com/c/src/+/257921.",
+      "parentUuid": "5215b1d1_34962e4e",
+      "range": {
+        "startLine": 609,
+        "startChar": 2,
+        "endLine": 620,
+        "endChar": 6
+      },
+      "revId": "6b30ef417e840fcc8a9d4ad9a8afb5985ff4ee86",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
