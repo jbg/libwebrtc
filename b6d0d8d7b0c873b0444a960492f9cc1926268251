@@ -33,6 +33,24 @@
       "message": "Hey Taylor, can you rebase this? :^)\n\nOr probably just abandon since usrsctp is now gone ;)",
       "revId": "b6d0d8d7b0c873b0444a960492f9cc1926268251",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24d0fe36_dcb764e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-04-05T19:15:13Z",
+      "side": 1,
+      "message": "The main point of this was to insulate us from usrsctp race conditions, which isn\u0027t applicable anymore, so I\u0027ll gladly abandon it",
+      "parentUuid": "ea5436c7_f227c8cf",
+      "revId": "b6d0d8d7b0c873b0444a960492f9cc1926268251",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
