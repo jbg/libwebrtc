@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c407058c_ed92bd1c",
+        "filename": "api/video_codecs/video_codec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-06T11:14:07Z",
+      "side": 1,
+      "message": "The reason not to rebalance is that at least one places appear to initialize the VideoCodecVp9 struct using memset() to all 0. I vaguely recall there being more...\nI\u0027ve updated the GetDefaultSettings() method to explicitly set it to kNormal, but there are many code paths that are hard to follow, so I\u0027m a bit scared to trust that that actually covers all cases.",
+      "parentUuid": "5028ceef_7ba2774c",
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb3427b0_0637cba7",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-04-04T10:09:08Z",
       "side": 1,
       "message": "What about rtc::flat_map or absl::flat_hash_map?",
+      "range": {
+        "startLine": 1878,
+        "startChar": 2,
+        "endLine": 1878,
+        "endChar": 10
+      },
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94131e34_670d701c",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1878,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-06T11:14:07Z",
+      "side": 1,
+      "message": "Sure. Needs to be sorted, so flat_map it is.\nI\u0027ll replace usage in the whole file.",
+      "parentUuid": "cb3427b0_0637cba7",
       "range": {
         "startLine": 1878,
         "startChar": 2,
@@ -66,6 +108,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "26d69123_b2d6c218",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1882,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-06T11:14:07Z",
+      "side": 1,
+      "message": "Oh, when did that change? I must have missed webrtc starting to allow that...\nAnyway, done.",
+      "parentUuid": "157baaca_49bcc7a9",
+      "range": {
+        "startLine": 1882,
+        "startChar": 46,
+        "endLine": 1882,
+        "endChar": 59
+      },
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "40e803f3_4fc96aa4",
         "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.h",
         "patchSetId": 1
@@ -77,6 +143,30 @@
       "writtenOn": "2022-04-04T10:09:08Z",
       "side": 1,
       "message": "Nit: Why not take VideoCodecComplexity here?",
+      "range": {
+        "startLine": 236,
+        "startChar": 30,
+        "endLine": 236,
+        "endChar": 46
+      },
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e0f46b_fd50efda",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-06T11:14:07Z",
+      "side": 1,
+      "message": "Good question, why a parameter at all? This is not a static method so will just look at codec_.GetVideoCodecComplexity() instead...",
+      "parentUuid": "40e803f3_4fc96aa4",
       "range": {
         "startLine": 236,
         "startChar": 30,
@@ -104,6 +194,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6969121_f18b412e",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-06T11:14:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "272b73a9_eafe5859",
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bf89157_6b6c063e",
@@ -117,6 +225,30 @@
       "writtenOn": "2022-04-04T10:09:08Z",
       "side": 1,
       "message": "Disabled?",
+      "range": {
+        "startLine": 507,
+        "startChar": 35,
+        "endLine": 507,
+        "endChar": 43
+      },
+      "revId": "347b704f7fdec5c291faccc2ddd94cfa5c776d55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4570dca_f94df41d",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-06T11:14:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bf89157_6b6c063e",
       "range": {
         "startLine": 507,
         "startChar": 35,
