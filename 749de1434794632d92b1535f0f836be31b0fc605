@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f667472e_00a5a400",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-06T07:46:16Z",
+      "side": 1,
+      "message": "PTAL. This is the last use of the GlobalMutex thing.",
+      "revId": "749de1434794632d92b1535f0f836be31b0fc605",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108d7f3b_ad4098dd",
+        "filename": "sdk/android/native_api/stacktrace/stacktrace.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-06T07:46:16Z",
+      "side": 1,
+      "message": "For things to work correctly, this Signal operations must include a memory barrier, to ensure writes by the thread calling Signal() are visible to the other thread by the time its Wait() returns. I have no idea of the futex syscalls somehow imply a memory barrier or not.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 3
+      },
+      "revId": "749de1434794632d92b1535f0f836be31b0fc605",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
