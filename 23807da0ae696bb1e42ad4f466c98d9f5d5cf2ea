@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8cd346d_9464bd29",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 8321,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-06T14:39:44Z",
+      "side": 1,
+      "message": "Nit: /*width\u003d*/320, /*height\u003d*/180, to remove the single-use variables",
+      "range": {
+        "startLine": 8321,
+        "startChar": 21,
+        "endLine": 8321,
+        "endChar": 46
+      },
+      "revId": "23807da0ae696bb1e42ad4f466c98d9f5d5cf2ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
