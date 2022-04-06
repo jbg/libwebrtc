@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a01e41a9_505b3c22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-04-06T09:16:28Z",
+      "side": 1,
+      "message": "Hi, Artem. I\u0027m trying to add a test, but I\u0027m not sure if it\u0027s in the right place. Please take a look. Thanks.",
+      "revId": "fdf5ebf3667a7a9d7ef5375187b5953b61bf3b42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
