@@ -49,6 +49,10 @@ std::unique_ptr<EncodedFrame> CombineAndDeleteFrames(
   RTC_DCHECK(!frames.empty());
 
   if (frames.size() == 1) {
+    // This frame consists of a single spatial layer. Remove spatial index to
+    // indicate that the frame doesn't have layering. This unblocks decoding of
+    // independent VP9 spatial layers with HW decoders which do not support SVC.
+    frames[0]->SetSpatialIndex(absl::nullopt);
     return std::move(frames[0]);
   }
 
