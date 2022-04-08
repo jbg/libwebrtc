@@ -50,6 +50,23 @@
       "message": "This will have an impact in on certain applications.\nFor sure, this is not a change I would do without at least an A/B test and I think\nthat energy would better spent testing dynamic holdback or split priority with\nmetronome.",
       "revId": "67b9d09fa974f92bca318656a1c746cef97182a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca596661_4a1b9faa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-08T07:21:45Z",
+      "side": 1,
+      "message": "This CL is now outdated - you may want to abandon it?\nhttps://webrtc-review.googlesource.com/c/src/+/257301",
+      "revId": "67b9d09fa974f92bca318656a1c746cef97182a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
