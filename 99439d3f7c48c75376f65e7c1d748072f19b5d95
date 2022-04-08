@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3cc165f_1d0c4e8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-08T06:18:39Z",
+      "side": 1,
+      "message": "Can you name the version that does one thing or the other, so that we know if this is a backwards-compatibility patch or a forward-compatibility patch?",
+      "revId": "99439d3f7c48c75376f65e7c1d748072f19b5d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e77e2a_0c8c8bb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-08T06:18:39Z",
+      "side": 1,
+      "message": "Tests would have been good, but are missing for this file, so not insisting on that.\n",
+      "revId": "99439d3f7c48c75376f65e7c1d748072f19b5d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
