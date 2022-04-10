@@ -186,17 +186,17 @@ bool StunRequestManager::CheckResponse(const char* data, size_t size) {
   return CheckResponse(response.get());
 }
 
-StunRequest::StunRequest()
+StunRequest::StunRequest(StunRequestManager* manager)
     : count_(0),
       timeout_(false),
-      manager_(0),
+      manager_(manager),
       msg_(new StunMessage()),
       tstamp_(0) {
   msg_->SetTransactionID(rtc::CreateRandomString(kStunTransactionIdLength));
 }
 
-StunRequest::StunRequest(StunMessage* request)
-    : count_(0), timeout_(false), manager_(0), msg_(request), tstamp_(0) {
+StunRequest::StunRequest(StunRequestManager* manager, StunMessage* request)
+    : count_(0), timeout_(false), manager_(manager), msg_(request), tstamp_(0) {
   msg_->SetTransactionID(rtc::CreateRandomString(kStunTransactionIdLength));
 }
 
@@ -233,9 +233,11 @@ int StunRequest::Elapsed() const {
   return static_cast<int>(rtc::TimeMillis() - tstamp_);
 }
 
+// TODO(tommi): Remove method.
 void StunRequest::set_manager(StunRequestManager* manager) {
-  RTC_DCHECK(!manager_);
-  manager_ = manager;
+  // RTC_DCHECK(!manager_);
+  RTC_DCHECK_EQ(manager, manager_);
+  // manager_ = manager;
 }
 
 void StunRequest::OnMessage(rtc::Message* pmsg) {
