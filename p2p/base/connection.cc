@@ -1623,11 +1623,6 @@ ProxyConnection::ProxyConnection(rtc::WeakPtr<Port> port,
                                  const Candidate& remote_candidate)
     : Connection(std::move(port), index, remote_candidate) {}
 
-ProxyConnection::ProxyConnection(Port* port,
-                                 size_t index,
-                                 const Candidate& remote_candidate)
-    : ProxyConnection(port->NewWeakPtr(), index, remote_candidate) {}
-
 int ProxyConnection::Send(const void* data,
                           size_t size,
                           const rtc::PacketOptions& options) {
