@@ -118,6 +118,8 @@ class UDPPort : public Port {
     return requests_.HasRequest(msg_type);
   }
 
+  StunRequestManager* request_manager() { return &requests_; }
+
  protected:
   UDPPort(rtc::Thread* thread,
           rtc::PacketSocketFactory* factory,

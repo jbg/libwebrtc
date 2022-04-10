@@ -83,8 +83,8 @@ class StunRequestManager {
 // constructed beforehand or built on demand.
 class StunRequest : public rtc::MessageHandler {
  public:
-  StunRequest();
-  explicit StunRequest(StunMessage* request);
+  explicit StunRequest(StunRequestManager* manager);
+  StunRequest(StunRequestManager* manager, StunMessage* request);
   ~StunRequest() override;
 
   // Causes our wrapped StunMessage to be Prepared
@@ -130,13 +130,17 @@ class StunRequest : public rtc::MessageHandler {
   // Returns the next delay for resends.
   virtual int resend_delay();
 
+  // TaskQueueBase* network_thread() const {
+  //   return manager_->thread_;
+  // }
+
  private:
   void set_manager(StunRequestManager* manager);
 
   // Handles messages for sending and timeout.
   void OnMessage(rtc::Message* pmsg) override;
 
-  StunRequestManager* manager_;
+  StunRequestManager* const manager_;
   StunMessage* msg_;
   int64_t tstamp_;
 
