@@ -56,7 +56,7 @@ void StunRequestManager::Send(StunRequest* request) {
 }
 
 void StunRequestManager::SendDelayed(StunRequest* request, int delay) {
-  request->set_manager(this);
+  RTC_DCHECK_EQ(this, request->manager());
   RTC_DCHECK(requests_.find(request->id()) == requests_.end());
   request->Construct();
   requests_[request->id()] = request;
@@ -186,17 +186,17 @@ bool StunRequestManager::CheckResponse(const char* data, size_t size) {
   return CheckResponse(response.get());
 }
 
-StunRequest::StunRequest()
-    : count_(0),
-      timeout_(false),
-      manager_(0),
+StunRequest::StunRequest(StunRequestManager* manager)
+    : manager_(manager),
       msg_(new StunMessage()),
-      tstamp_(0) {
+      tstamp_(0),
+      count_(0),
+      timeout_(false) {
   msg_->SetTransactionID(rtc::CreateRandomString(kStunTransactionIdLength));
 }
 
-StunRequest::StunRequest(StunMessage* request)
-    : count_(0), timeout_(false), manager_(0), msg_(request), tstamp_(0) {
+StunRequest::StunRequest(StunRequestManager* manager, StunMessage* request)
+    : manager_(manager), msg_(request), tstamp_(0), count_(0), timeout_(false) {
   msg_->SetTransactionID(rtc::CreateRandomString(kStunTransactionIdLength));
 }
 
@@ -206,12 +206,11 @@ StunRequest::~StunRequest() {
     manager_->Remove(this);
     manager_->thread_->Clear(this);
   }
-  delete msg_;
 }
 
 void StunRequest::Construct() {
   if (msg_->type() == 0) {
-    Prepare(msg_);
+    Prepare(msg_.get());
     RTC_DCHECK(msg_->type() != 0);
   }
 }
@@ -222,24 +221,20 @@ int StunRequest::type() {
 }
 
 const StunMessage* StunRequest::msg() const {
-  return msg_;
+  return msg_.get();
 }
 
 StunMessage* StunRequest::mutable_msg() {
-  return msg_;
+  return msg_.get();
 }
 
 int StunRequest::Elapsed() const {
+  RTC_DCHECK_RUN_ON(network_thread());
   return static_cast<int>(rtc::TimeMillis() - tstamp_);
 }
 
-void StunRequest::set_manager(StunRequestManager* manager) {
-  RTC_DCHECK(!manager_);
-  manager_ = manager;
-}
-
 void StunRequest::OnMessage(rtc::Message* pmsg) {
-  RTC_DCHECK(manager_ != NULL);
+  RTC_DCHECK_RUN_ON(network_thread());
   RTC_DCHECK(pmsg->message_id == MSG_STUN_SEND);
 
   if (timeout_) {
@@ -260,6 +255,7 @@ void StunRequest::OnMessage(rtc::Message* pmsg) {
 }
 
 void StunRequest::OnSent() {
+  RTC_DCHECK_RUN_ON(network_thread());
   count_ += 1;
   int retransmissions = (count_ - 1);
   if (retransmissions >= STUN_MAX_RETRANSMISSIONS) {
@@ -270,12 +266,18 @@ void StunRequest::OnSent() {
 }
 
 int StunRequest::resend_delay() {
+  RTC_DCHECK_RUN_ON(network_thread());
   if (count_ == 0) {
     return 0;
   }
   int retransmissions = (count_ - 1);
   int rto = STUN_INITIAL_RTO << retransmissions;
   return std::min(rto, STUN_MAX_RTO);
+}
+
+void StunRequest::set_timed_out() {
+  RTC_DCHECK_RUN_ON(network_thread());
+  timeout_ = true;
 }
 
 }  // namespace cricket

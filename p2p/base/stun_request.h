@@ -15,6 +15,7 @@
 #include <stdint.h>
 
 #include <map>
+#include <memory>
 #include <string>
 
 #include "api/transport/stun.h"
@@ -74,7 +75,7 @@ class StunRequestManager {
   typedef std::map<std::string, StunRequest*> RequestMap;
 
   rtc::Thread* const thread_;
-  RequestMap requests_;
+  RequestMap requests_ /* RTC_GUARDED_BY(thread_) */;
 
   friend class StunRequest;
 };
@@ -83,8 +84,8 @@ class StunRequestManager {
 // constructed beforehand or built on demand.
 class StunRequest : public rtc::MessageHandler {
  public:
-  StunRequest();
-  explicit StunRequest(StunMessage* request);
+  explicit StunRequest(StunRequestManager* manager);
+  StunRequest(StunRequestManager* manager, StunMessage* request);
   ~StunRequest() override;
 
   // Causes our wrapped StunMessage to be Prepared
@@ -114,8 +115,7 @@ class StunRequest : public rtc::MessageHandler {
   int Elapsed() const;
 
  protected:
-  int count_;
-  bool timeout_;
+  friend class StunRequestManager;
 
   // Fills in a request object to be sent.  Note that request's transaction ID
   // will already be set and cannot be changed.
@@ -130,17 +130,19 @@ class StunRequest : public rtc::MessageHandler {
   // Returns the next delay for resends.
   virtual int resend_delay();
 
- private:
-  void set_manager(StunRequestManager* manager);
+  webrtc::TaskQueueBase* network_thread() const { return manager_->thread_; }
 
+  void set_timed_out();
+
+ private:
   // Handles messages for sending and timeout.
   void OnMessage(rtc::Message* pmsg) override;
 
-  StunRequestManager* manager_;
-  StunMessage* msg_;
-  int64_t tstamp_;
-
-  friend class StunRequestManager;
+  StunRequestManager* const manager_;
+  const std::unique_ptr<StunMessage> msg_;
+  int64_t tstamp_ RTC_GUARDED_BY(network_thread());
+  int count_ RTC_GUARDED_BY(network_thread());
+  bool timeout_ RTC_GUARDED_BY(network_thread());
 };
 
 }  // namespace cricket
