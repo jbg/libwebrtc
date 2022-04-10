@@ -171,6 +171,7 @@ class TurnPort : public Port {
   void OnAllocateMismatch();
 
   rtc::AsyncPacketSocket* socket() const { return socket_; }
+  StunRequestManager* request_manager() { return &request_manager_; }
 
   // Signal with resolved server address.
   // Parameters are port, server address and resolved server address.
