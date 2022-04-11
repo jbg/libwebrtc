@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f4a884b_406a092e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-11T13:10:58Z",
+      "side": 1,
+      "message": "Seems like a good change.\nSome nits and comments, but I\u0027m slow in reviewing while Easter, so approving now.",
+      "revId": "5e0f99d8ab1159f6b78d1a9cd96e86b1761a8a21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ace177f_8770dfc9",
+        "filename": "p2p/base/stun_port.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-11T13:10:58Z",
+      "side": 1,
+      "message": "This makes it clear that the manager field has an extremely odd internal name.\nCan we rename the internal member from requests_ to request_manager_?",
+      "revId": "5e0f99d8ab1159f6b78d1a9cd96e86b1761a8a21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d998a217_f170cc50",
+        "filename": "p2p/base/stun_request.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-11T13:10:58Z",
+      "side": 1,
+      "message": "as a matter of principle, if manager_ is not allowed to be null, should we pass a reference rather than a pointer?\n\nI still feel uncomfortable about reference member variables, but if I think of them purely as \"pointers where null is not allowed\", it seems to make sense - but passing a reference as an argument may make sense even if not changing the type of the member.",
+      "revId": "5e0f99d8ab1159f6b78d1a9cd96e86b1761a8a21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "176eed67_1001c596",
+        "filename": "p2p/base/turn_port.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1635,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-11T13:10:58Z",
+      "side": 1,
+      "message": "Not for this CL, but does the large number of \"new\" arguments to StunRequest indicate that the TurnMessage argument should be a scoped_refptr?",
+      "revId": "5e0f99d8ab1159f6b78d1a9cd96e86b1761a8a21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
