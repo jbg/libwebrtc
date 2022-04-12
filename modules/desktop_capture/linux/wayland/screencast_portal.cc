@@ -124,8 +124,8 @@ void ScreenCastPortal::OnPortalDone(RequestResponse result) {
 void ScreenCastPortal::OnProxyRequested(GObject* gobject,
                                         GAsyncResult* result,
                                         gpointer user_data) {
-  RequestSessionUsingProxy<ScreenCastPortal>(
-      static_cast<ScreenCastPortal*>(user_data), gobject, result);
+  RequestSessionUsingProxy(static_cast<ScreenCastPortal*>(user_data), gobject,
+                           result);
 }
 
 void ScreenCastPortal::SessionRequest(GDBusProxy* proxy) {
