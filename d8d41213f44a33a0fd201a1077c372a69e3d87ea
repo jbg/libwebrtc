@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f52163e_45028b67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-12T08:22:04Z",
+      "side": 1,
+      "message": "Seems to me you are making a change that will have an effect when you zero the length of the info list and then call the function you changed (when the length will be zero, and you now update instead of skipping). Not 100% sure if that path is tested by the additional tests.\n\nOtherwise, logic looks good. ",
+      "revId": "d8d41213f44a33a0fd201a1077c372a69e3d87ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a2f16c_90e0645a",
+        "filename": "sdk/android/api/org/webrtc/NetworkMonitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-12T08:22:04Z",
+      "side": 1,
+      "message": "Nit: observer expect -\u003e observer expects",
+      "revId": "d8d41213f44a33a0fd201a1077c372a69e3d87ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
