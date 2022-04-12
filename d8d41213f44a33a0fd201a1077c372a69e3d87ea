@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36b28ddd_3c0cc53b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-04-12T09:05:59Z",
+      "side": 1,
+      "message": "The change to NetworkMonitor (call the JNI even with 0 elements)\nshould be a NOP. But the code in c++ was unclear about what should happen.\nNow it\u0027s simpler, the method is always called.",
+      "parentUuid": "9f52163e_45028b67",
+      "revId": "d8d41213f44a33a0fd201a1077c372a69e3d87ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36a2f16c_90e0645a",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-12T08:22:04Z",
       "side": 1,
       "message": "Nit: observer expect -\u003e observer expects",
+      "revId": "d8d41213f44a33a0fd201a1077c372a69e3d87ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86fe0662_f54b088f",
+        "filename": "sdk/android/api/org/webrtc/NetworkMonitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-04-12T09:05:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36a2f16c_90e0645a",
       "revId": "d8d41213f44a33a0fd201a1077c372a69e3d87ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
