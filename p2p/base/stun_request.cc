@@ -67,7 +67,7 @@ void StunRequestManager::FlushForTest(int msg_type) {
   RTC_DCHECK_RUN_ON(thread_);
   for (const auto& kv : requests_) {
     StunRequest* request = kv.second.get();
-    if (msg_type == kAllRequests || msg_type == request->type()) {
+    if (msg_type == kAllRequestsForTest || msg_type == request->type()) {
       thread_->Clear(request, MSG_STUN_SEND);
       thread_->Send(RTC_FROM_HERE, request, MSG_STUN_SEND, NULL);
     }
@@ -77,7 +77,7 @@ void StunRequestManager::FlushForTest(int msg_type) {
 bool StunRequestManager::HasRequestForTest(int msg_type) {
   RTC_DCHECK_RUN_ON(thread_);
   for (const auto& kv : requests_) {
-    if (msg_type == kAllRequests || msg_type == kv.second->type()) {
+    if (msg_type == kAllRequestsForTest || msg_type == kv.second->type()) {
       return true;
     }
   }
