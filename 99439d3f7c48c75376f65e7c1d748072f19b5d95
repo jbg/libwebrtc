@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f2292b94_c3547ef4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 10184
+      },
+      "writtenOn": "2022-04-12T10:24:04Z",
+      "side": 1,
+      "message": "Merged with this pull request https://github.com/openssl/openssl/pull/4398\nin 2017.",
+      "parentUuid": "0f695c04_4c47b20e",
+      "revId": "99439d3f7c48c75376f65e7c1d748072f19b5d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "10e77e2a_0c8c8bb8",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
