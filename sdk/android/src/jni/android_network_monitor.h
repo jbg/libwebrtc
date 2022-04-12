@@ -120,6 +120,7 @@ class AndroidNetworkMonitor : public rtc::NetworkMonitorInterface {
       absl::string_view ifname) const;
 
  private:
+  void reset();
   void OnNetworkConnected_n(const NetworkInformation& network_info);
   void OnNetworkDisconnected_n(NetworkHandle network_handle);
   void OnNetworkPreference_n(NetworkType type,
