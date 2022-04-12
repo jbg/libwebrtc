@@ -10,6 +10,7 @@
 
 #include "p2p/base/stun_request.h"
 
+#include <utility>
 #include <vector>
 
 #include "rtc_base/fake_clock.h"
@@ -47,9 +48,10 @@ class StunRequestTest : public ::testing::Test, public sigslot::has_slots<> {
   void OnTimeout() { timeout_ = true; }
 
  protected:
-  static StunMessage* CreateStunMessage(StunMessageType type,
-                                        StunMessage* req) {
-    StunMessage* msg = new StunMessage();
+  static std::unique_ptr<StunMessage> CreateStunMessage(
+      StunMessageType type,
+      const StunMessage* req) {
+    std::unique_ptr<StunMessage> msg = std::make_unique<StunMessage>();
     msg->SetType(type);
     if (req) {
       msg->SetTransactionID(req->transaction_id());
@@ -73,9 +75,12 @@ class StunRequestTest : public ::testing::Test, public sigslot::has_slots<> {
 // Forwards results to the test class.
 class StunRequestThunker : public StunRequest {
  public:
-  StunRequestThunker(StunMessage* msg, StunRequestTest* test)
-      : StunRequest(msg), test_(test) {}
-  explicit StunRequestThunker(StunRequestTest* test) : test_(test) {}
+  StunRequestThunker(StunRequestManager* manager,
+                     std::unique_ptr<StunMessage> msg,
+                     StunRequestTest* test)
+      : StunRequest(manager, std::move(msg)), test_(test) {}
+  StunRequestThunker(StunRequestManager* manager, StunRequestTest* test)
+      : StunRequest(manager), test_(test) {}
 
  private:
   virtual void OnResponse(StunMessage* res) { test_->OnResponse(res); }
@@ -93,57 +98,60 @@ class StunRequestThunker : public StunRequest {
 
 // Test handling of a normal binding response.
 TEST_F(StunRequestTest, TestSuccess) {
-  StunMessage* req = CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> req =
+      CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> res =
+      CreateStunMessage(STUN_BINDING_RESPONSE, req.get());
+  manager_.Send(new StunRequestThunker(&manager_, std::move(req), this));
+  EXPECT_TRUE(manager_.CheckResponse(res.get()));
 
-  manager_.Send(new StunRequestThunker(req, this));
-  StunMessage* res = CreateStunMessage(STUN_BINDING_RESPONSE, req);
-  EXPECT_TRUE(manager_.CheckResponse(res));
-
-  EXPECT_TRUE(response_ == res);
+  EXPECT_TRUE(response_ == res.get());
   EXPECT_TRUE(success_);
   EXPECT_FALSE(failure_);
   EXPECT_FALSE(timeout_);
-  delete res;
 }
 
 // Test handling of an error binding response.
 TEST_F(StunRequestTest, TestError) {
-  StunMessage* req = CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> req =
+      CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> res =
+      CreateStunMessage(STUN_BINDING_ERROR_RESPONSE, req.get());
+  manager_.Send(new StunRequestThunker(&manager_, std::move(req), this));
+  EXPECT_TRUE(manager_.CheckResponse(res.get()));
 
-  manager_.Send(new StunRequestThunker(req, this));
-  StunMessage* res = CreateStunMessage(STUN_BINDING_ERROR_RESPONSE, req);
-  EXPECT_TRUE(manager_.CheckResponse(res));
-
-  EXPECT_TRUE(response_ == res);
+  EXPECT_TRUE(response_ == res.get());
   EXPECT_FALSE(success_);
   EXPECT_TRUE(failure_);
   EXPECT_FALSE(timeout_);
-  delete res;
 }
 
 // Test handling of a binding response with the wrong transaction id.
 TEST_F(StunRequestTest, TestUnexpected) {
-  StunMessage* req = CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> req =
+      CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> res =
+      CreateStunMessage(STUN_BINDING_RESPONSE, NULL);
 
-  manager_.Send(new StunRequestThunker(req, this));
-  StunMessage* res = CreateStunMessage(STUN_BINDING_RESPONSE, NULL);
-  EXPECT_FALSE(manager_.CheckResponse(res));
+  manager_.Send(new StunRequestThunker(&manager_, std::move(req), this));
+  EXPECT_FALSE(manager_.CheckResponse(res.get()));
 
   EXPECT_TRUE(response_ == NULL);
   EXPECT_FALSE(success_);
   EXPECT_FALSE(failure_);
   EXPECT_FALSE(timeout_);
-  delete res;
 }
 
 // Test that requests are sent at the right times.
 TEST_F(StunRequestTest, TestBackoff) {
   rtc::ScopedFakeClock fake_clock;
-  StunMessage* req = CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> req =
+      CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> res =
+      CreateStunMessage(STUN_BINDING_RESPONSE, req.get());
 
   int64_t start = rtc::TimeMillis();
-  manager_.Send(new StunRequestThunker(req, this));
-  StunMessage* res = CreateStunMessage(STUN_BINDING_RESPONSE, req);
+  manager_.Send(new StunRequestThunker(&manager_, std::move(req), this));
   for (int i = 0; i < 9; ++i) {
     EXPECT_TRUE_SIMULATED_WAIT(request_count_ != i, STUN_TOTAL_TIMEOUT,
                                fake_clock);
@@ -152,68 +160,69 @@ TEST_F(StunRequestTest, TestBackoff) {
                      << " ms";
     EXPECT_EQ(TotalDelay(i), elapsed);
   }
-  EXPECT_TRUE(manager_.CheckResponse(res));
+  EXPECT_TRUE(manager_.CheckResponse(res.get()));
 
-  EXPECT_TRUE(response_ == res);
+  EXPECT_TRUE(response_ == res.get());
   EXPECT_TRUE(success_);
   EXPECT_FALSE(failure_);
   EXPECT_FALSE(timeout_);
-  delete res;
 }
 
 // Test that we timeout properly if no response is received.
 TEST_F(StunRequestTest, TestTimeout) {
   rtc::ScopedFakeClock fake_clock;
-  StunMessage* req = CreateStunMessage(STUN_BINDING_REQUEST, NULL);
-  StunMessage* res = CreateStunMessage(STUN_BINDING_RESPONSE, req);
+  std::unique_ptr<StunMessage> req =
+      CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> res =
+      CreateStunMessage(STUN_BINDING_RESPONSE, req.get());
 
-  manager_.Send(new StunRequestThunker(req, this));
+  manager_.Send(new StunRequestThunker(&manager_, std::move(req), this));
   SIMULATED_WAIT(false, cricket::STUN_TOTAL_TIMEOUT, fake_clock);
 
-  EXPECT_FALSE(manager_.CheckResponse(res));
+  EXPECT_FALSE(manager_.CheckResponse(res.get()));
   EXPECT_TRUE(response_ == NULL);
   EXPECT_FALSE(success_);
   EXPECT_FALSE(failure_);
   EXPECT_TRUE(timeout_);
-  delete res;
 }
 
 // Regression test for specific crash where we receive a response with the
 // same id as a request that doesn't have an underlying StunMessage yet.
 TEST_F(StunRequestTest, TestNoEmptyRequest) {
-  StunRequestThunker* request = new StunRequestThunker(this);
+  StunRequestThunker* request = new StunRequestThunker(&manager_, this);
 
   manager_.SendDelayed(request, 100);
 
   StunMessage dummy_req;
   dummy_req.SetTransactionID(request->id());
-  StunMessage* res = CreateStunMessage(STUN_BINDING_RESPONSE, &dummy_req);
+  std::unique_ptr<StunMessage> res =
+      CreateStunMessage(STUN_BINDING_RESPONSE, &dummy_req);
 
-  EXPECT_TRUE(manager_.CheckResponse(res));
+  EXPECT_TRUE(manager_.CheckResponse(res.get()));
 
-  EXPECT_TRUE(response_ == res);
+  EXPECT_TRUE(response_ == res.get());
   EXPECT_TRUE(success_);
   EXPECT_FALSE(failure_);
   EXPECT_FALSE(timeout_);
-  delete res;
 }
 
 // If the response contains an attribute in the "comprehension required" range
 // which is not recognized, the transaction should be considered a failure and
 // the response should be ignored.
 TEST_F(StunRequestTest, TestUnrecognizedComprehensionRequiredAttribute) {
-  StunMessage* req = CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> req =
+      CreateStunMessage(STUN_BINDING_REQUEST, NULL);
+  std::unique_ptr<StunMessage> res =
+      CreateStunMessage(STUN_BINDING_ERROR_RESPONSE, req.get());
 
-  manager_.Send(new StunRequestThunker(req, this));
-  StunMessage* res = CreateStunMessage(STUN_BINDING_ERROR_RESPONSE, req);
+  manager_.Send(new StunRequestThunker(&manager_, std::move(req), this));
   res->AddAttribute(StunAttribute::CreateUInt32(0x7777));
-  EXPECT_FALSE(manager_.CheckResponse(res));
+  EXPECT_FALSE(manager_.CheckResponse(res.get()));
 
   EXPECT_EQ(nullptr, response_);
   EXPECT_FALSE(success_);
   EXPECT_FALSE(failure_);
   EXPECT_FALSE(timeout_);
-  delete res;
 }
 
 }  // namespace cricket
