@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "617d96e0_59a77c8d",
+        "filename": "rtc_base/win/windows_version.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-04-12T22:54:24Z",
+      "side": 0,
+      "message": "Should probably leave this comment and update the corresponding locations?",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 46
+      },
+      "revId": "278b19da385c4226d8a9489c72fa1a897a27ee26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
