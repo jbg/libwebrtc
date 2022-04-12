@@ -97,6 +97,16 @@ rtc_library("field_trial") {
   absl_deps = [ "//third_party/abseil-cpp/absl/strings" ]
 }
 
+rtc_library("features") {
+  visibility = [ "*" ]
+  public = [ "include/features.h" ]
+  sources = [ "source/features.cc" ]
+  if (rtc_exclude_features_default) {
+    defines = [ "WEBRTC_EXCLUDE_FEATURES_DEFAULT" ]
+  }
+  deps = [ "../rtc_base:checks" ]
+}
+
 rtc_library("metrics") {
   visibility = [ "*" ]
   public = [ "include/metrics.h" ]
