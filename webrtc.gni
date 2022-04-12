@@ -70,6 +70,12 @@ declare_args() {
     rtc_exclude_field_trial_default = false
   }
 
+  # Setting this to true will define WEBRTC_EXCLUDE_FEATURES_DEFAULT which
+  # will tell the pre-processor to remove the default definition of symbols
+  # needed to use feature API. In that case a new implementation needs to be
+  # provided.
+  rtc_exclude_features_default = build_with_chromium
+
   # Setting this to true will define WEBRTC_EXCLUDE_METRICS_DEFAULT which
   # will tell the pre-processor to remove the default definition of symbols
   # needed to use metrics. In that case a new implementation needs to be
