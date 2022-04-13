@@ -22,6 +22,30 @@
       },
       "revId": "278b19da385c4226d8a9489c72fa1a897a27ee26",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7400f821_e7db9600",
+        "filename": "rtc_base/win/windows_version.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 18789
+      },
+      "writtenOn": "2022-04-13T21:32:51Z",
+      "side": 0,
+      "message": "Unfortunately, I couldn\u0027t find proper replacement of it.",
+      "parentUuid": "617d96e0_59a77c8d",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 46
+      },
+      "revId": "278b19da385c4226d8a9489c72fa1a897a27ee26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
