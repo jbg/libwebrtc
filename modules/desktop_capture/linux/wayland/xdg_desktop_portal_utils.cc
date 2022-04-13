@@ -30,6 +30,114 @@ std::string RequestResponseToString(RequestResponse request) {
   }
 }
 
+void RequestSessionUsingProxy(ScreenCapturePortalInterface* portal,
+                              GObject* gobject,
+                              GAsyncResult* result) {
+  RTC_DCHECK(portal);
+  Scoped<GError> error;
+  GDBusProxy* proxy = g_dbus_proxy_new_finish(result, error.receive());
+  if (!proxy) {
+    // Ignore the error caused by user cancelling the request via `cancellable_`
+    if (g_error_matches(error.get(), G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      return;
+    RTC_LOG(LS_ERROR) << "Failed to get a proxy for the portal: "
+                      << error->message;
+    portal->OnPortalDone(RequestResponse::kError);
+    return;
+  }
+
+  RTC_LOG(LS_INFO) << "Successfully created proxy for the portal.";
+  portal->SessionRequest(proxy);
+}
+
+void SessionRequestHandler(ScreenCapturePortalInterface* portal,
+                           GDBusProxy* proxy,
+                           GAsyncResult* result,
+                           gpointer user_data) {
+  RTC_DCHECK(portal);
+
+  Scoped<GError> error;
+  Scoped<GVariant> variant(
+      g_dbus_proxy_call_finish(proxy, result, error.receive()));
+  if (!variant) {
+    // Ignore the error caused by user cancelling the request via `cancellable_`
+    if (g_error_matches(error.get(), G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      return;
+    RTC_LOG(LS_ERROR) << "Failed to request session: " << error->message;
+    portal->OnPortalDone(RequestResponse::kError);
+    return;
+  }
+
+  RTC_LOG(LS_INFO) << "Initializing the session.";
+
+  Scoped<char> handle;
+  g_variant_get_child(variant.get(), /*index=*/0, /*format_string=*/"o",
+                      &handle);
+  if (!handle) {
+    RTC_LOG(LS_ERROR) << "Failed to initialize the session.";
+    portal->UnsubscribeSignalHandlers();
+    portal->OnPortalDone(RequestResponse::kError);
+    return;
+  }
+}
+
+void SessionRequestResponseSignalHelper(
+    const SessionClosedSignalHandler session_close_signal_handler,
+    ScreenCapturePortalInterface* portal,
+    GDBusConnection* connection,
+    std::string& session_handle,
+    GVariant* parameters,
+    guint& session_closed_signal_id) {
+  uint32_t portal_response;
+  Scoped<GVariant> response_data;
+  g_variant_get(parameters, /*format_string=*/"(u@a{sv})", &portal_response,
+                response_data.receive());
+  Scoped<GVariant> g_session_handle(
+      g_variant_lookup_value(response_data.get(), /*key=*/"session_handle",
+                             /*expected_type=*/nullptr));
+  session_handle = g_variant_dup_string(
+      /*value=*/g_session_handle.get(), /*length=*/nullptr);
+
+  if (session_handle.empty() || portal_response) {
+    RTC_LOG(LS_ERROR) << "Failed to request the session subscription.";
+    portal->OnPortalDone(RequestResponse::kError);
+    return;
+  }
+
+  session_closed_signal_id = g_dbus_connection_signal_subscribe(
+      connection, kDesktopBusName, kSessionInterfaceName, /*member=*/"Closed",
+      session_handle.c_str(), /*arg0=*/nullptr, G_DBUS_SIGNAL_FLAGS_NONE,
+      session_close_signal_handler, portal, /*user_data_free_func=*/nullptr);
+}
+
+void StartRequestedHandler(ScreenCapturePortalInterface* portal,
+                           GDBusProxy* proxy,
+                           GAsyncResult* result) {
+  RTC_DCHECK(portal);
+  Scoped<GError> error;
+  Scoped<GVariant> variant(
+      g_dbus_proxy_call_finish(proxy, result, error.receive()));
+  if (!variant) {
+    if (g_error_matches(error.get(), G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      return;
+    RTC_LOG(LS_ERROR) << "Failed to start the portal session: "
+                      << error->message;
+    portal->OnPortalDone(RequestResponse::kError);
+    return;
+  }
+
+  Scoped<char> handle;
+  g_variant_get_child(variant.get(), 0, "o", handle.receive());
+  if (!handle) {
+    RTC_LOG(LS_ERROR) << "Failed to initialize the start portal session.";
+    portal->UnsubscribeSignalHandlers();
+    portal->OnPortalDone(RequestResponse::kError);
+    return;
+  }
+
+  RTC_LOG(LS_INFO) << "Subscribed to the start signal.";
+}
+
 std::string PrepareSignalHandle(const char* token,
                                 GDBusConnection* connection) {
   Scoped<char> sender(
