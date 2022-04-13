@@ -157,6 +157,30 @@
       },
       "revId": "a5e42194f75a52ee5f9a8ae409f19b14fbce63de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba003305_7b938791",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-04-13T18:07:58Z",
+      "side": 1,
+      "message": "I\u0027m not sure that the way this is done right now actually avoids that in a meaningful way. Do we expect other implementations of the ScreenCapturePortalInterface to call these functions?\n\nRight now, it feels like all these methods do is split the implementation into two files. I think it\u0027s one thing to have a base class that we inherit from like BaseCapturerPipeWire where we\u0027d override methods with a lot of logic and another to have a base class like ScreenCapturePortalInterface that has a *limited* number of Helper functions that are not allowed to be overriden.\n\nI\u0027m also thinking that the pure-abstract methods like we have right now are not necessarily viable long term, as anytime we add one of these in the future it will likely break the build on a roll.",
+      "parentUuid": "145d62aa_2f2a4691",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 67
+      },
+      "revId": "a5e42194f75a52ee5f9a8ae409f19b14fbce63de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
