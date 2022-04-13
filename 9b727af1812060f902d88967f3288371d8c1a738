@@ -33,6 +33,23 @@
       "message": "LGTM, FYI that you\u0027ll need someone from https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/rtc_base/OWNERS to review as well.",
       "revId": "9b727af1812060f902d88967f3288371d8c1a738",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81da6abe_571c50a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2022-04-13T22:20:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9b727af1812060f902d88967f3288371d8c1a738",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
