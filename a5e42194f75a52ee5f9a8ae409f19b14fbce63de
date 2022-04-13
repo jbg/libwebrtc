@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c5e1bf7_05b62aff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-13T10:25:39Z",
+      "side": 1,
+      "message": "Thanks for taking a look, Alex. I have addressed the comments. PTAL.",
+      "revId": "a5e42194f75a52ee5f9a8ae409f19b14fbce63de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86651ef9_21745b53",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-04-12T20:36:50Z",
       "side": 1,
       "message": "Maybe worth a comment why we just ignore these errors silently?",
+      "range": {
+        "startLine": 40,
+        "startChar": 5,
+        "endLine": 40,
+        "endChar": 71
+      },
+      "revId": "a5e42194f75a52ee5f9a8ae409f19b14fbce63de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57721386_d35d5de1",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-13T10:25:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86651ef9_21745b53",
       "range": {
         "startLine": 40,
         "startChar": 5,
@@ -47,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89389006_6e6c23b6",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-13T10:25:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6d35afe_d27b1a48",
+      "range": {
+        "startLine": 64,
+        "startChar": 33,
+        "endLine": 64,
+        "endChar": 35
+      },
+      "revId": "a5e42194f75a52ee5f9a8ae409f19b14fbce63de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1981ae14_45f41d55",
@@ -60,6 +125,30 @@
       "writtenOn": "2022-04-12T20:36:50Z",
       "side": 1,
       "message": "Rather than publicly exposing the methods that these use on the interface, is there any reason that we can\u0027t put these on the interface and put the methods that are needed as pure-virtual protected methods?\n\nIt feels like that describes the contract a bit more cleanly?",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 67
+      },
+      "revId": "a5e42194f75a52ee5f9a8ae409f19b14fbce63de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "145d62aa_2f2a4691",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-13T10:25:39Z",
+      "side": 1,
+      "message": "\u003e is there any reason that we can\u0027t put these on the interface and put the methods that are needed as pure-virtual protected methods?\n\nImplementation will be duplicated for both the portals if we do this. Other way is to have a base class but we didn\u0027t want to use it so as to avoid class inheritance across lib boundaries.",
+      "parentUuid": "1981ae14_45f41d55",
       "range": {
         "startLine": 113,
         "startChar": 0,
