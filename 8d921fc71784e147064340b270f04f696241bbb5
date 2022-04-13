@@ -41,6 +41,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92485cec_e5bb60ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-04-13T07:39:20Z",
+      "side": 1,
+      "message": "Can you please provide some details about why this new feature is added and what a typical use case is. Thanks.",
+      "revId": "8d921fc71784e147064340b270f04f696241bbb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddb432fc_c2514619",
