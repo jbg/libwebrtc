@@ -46,6 +46,30 @@
       },
       "revId": "278b19da385c4226d8a9489c72fa1a897a27ee26",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e351bb79_4c42e3c9",
+        "filename": "rtc_base/win/windows_version.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-04-13T21:53:36Z",
+      "side": 0,
+      "message": "Ah, it looks like it\u0027s been removed.",
+      "parentUuid": "7400f821_e7db9600",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 46
+      },
+      "revId": "278b19da385c4226d8a9489c72fa1a897a27ee26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
