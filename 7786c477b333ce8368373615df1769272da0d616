@@ -16,6 +16,29 @@
       "message": "Hi Alex, PTAL at this CL that avoids the test failure in Chromium when attempting screen capture on a system with no displays.",
       "revId": "7786c477b333ce8368373615df1769272da0d616",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d63a481_2b4f1ec6",
+        "filename": "modules/desktop_capture/win/screen_capture_utils_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-04-14T17:05:41Z",
+      "side": 1,
+      "message": "I think rather than skipping the test, we should return that WGC isn\u0027t supported when no monitors are attached (which we can also tie to the necessary version check), to allow falling back to the other capturers; as otherwise this will end up as a regression for users with no monitors attached. (Though I do think a redundant check where you have it may also be a good idea)",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 17
+      },
+      "revId": "7786c477b333ce8368373615df1769272da0d616",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
