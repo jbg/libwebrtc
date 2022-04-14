@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df662d20_8511444d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-04-14T20:43:02Z",
+      "side": 1,
+      "message": "Can you swap this with chromium:1316478 ?",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "cf69a9a9fde878d0ea54b4c475e6611d5163fd60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
