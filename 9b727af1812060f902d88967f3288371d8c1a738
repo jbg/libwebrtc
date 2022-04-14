@@ -50,6 +50,23 @@
       "message": "LGTM",
       "revId": "9b727af1812060f902d88967f3288371d8c1a738",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dff9c60e_72f9270b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18789
+      },
+      "writtenOn": "2022-04-14T00:41:00Z",
+      "side": 1,
+      "message": "Hello Mirko,\n\nCan you review windows_version.h/cc change?\n\nThanks,\nSunggook",
+      "revId": "9b727af1812060f902d88967f3288371d8c1a738",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
