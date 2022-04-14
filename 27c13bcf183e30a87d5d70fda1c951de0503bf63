@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4ca740d_e8e3b57c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-04-14T18:50:57Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "27c13bcf183e30a87d5d70fda1c951de0503bf63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f614b06_11c00ece",
+        "filename": "modules/desktop_capture/win/screen_capture_utils.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-04-14T18:50:57Z",
+      "side": 1,
+      "message": "NIT: Consider a helper for this `HasConnectedDisplays` or similar",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 19
+      },
+      "revId": "27c13bcf183e30a87d5d70fda1c951de0503bf63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
