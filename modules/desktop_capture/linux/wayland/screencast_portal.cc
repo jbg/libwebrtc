@@ -25,12 +25,8 @@ using xdg_portal::kScreenCastInterfaceName;
 using xdg_portal::PrepareSignalHandle;
 using xdg_portal::RequestResponse;
 using xdg_portal::RequestSessionProxy;
-using xdg_portal::RequestSessionUsingProxy;
-using xdg_portal::SessionRequestHandler;
-using xdg_portal::SessionRequestResponseSignalHelper;
 using xdg_portal::SetupRequestResponseSignal;
 using xdg_portal::SetupSessionRequestHandlers;
-using xdg_portal::StartRequestedHandler;
 using xdg_portal::StartSessionRequest;
 using xdg_portal::TearDownSession;
 
@@ -124,8 +120,8 @@ void ScreenCastPortal::OnPortalDone(RequestResponse result) {
 void ScreenCastPortal::OnProxyRequested(GObject* gobject,
                                         GAsyncResult* result,
                                         gpointer user_data) {
-  RequestSessionUsingProxy<ScreenCastPortal>(
-      static_cast<ScreenCastPortal*>(user_data), gobject, result);
+  static_cast<ScreenCastPortal*>(user_data)->RequestSessionUsingProxy(gobject,
+                                                                      result);
 }
 
 void ScreenCastPortal::SessionRequest(GDBusProxy* proxy) {
@@ -140,8 +136,8 @@ void ScreenCastPortal::SessionRequest(GDBusProxy* proxy) {
 void ScreenCastPortal::OnSessionRequested(GDBusProxy* proxy,
                                           GAsyncResult* result,
                                           gpointer user_data) {
-  SessionRequestHandler(static_cast<ScreenCastPortal*>(user_data), proxy,
-                        result, user_data);
+  static_cast<ScreenCastPortal*>(user_data)->SessionRequestHandler(
+      proxy, result, user_data);
 }
 
 // static
@@ -155,8 +151,8 @@ void ScreenCastPortal::OnSessionRequestResponseSignal(
     gpointer user_data) {
   ScreenCastPortal* that = static_cast<ScreenCastPortal*>(user_data);
   RTC_DCHECK(that);
-  SessionRequestResponseSignalHelper(
-      OnSessionClosedSignal, that, that->connection_, that->session_handle_,
+  that->SessionRequestResponseSignalHelper(
+      OnSessionClosedSignal, that->connection_, that->session_handle_,
       parameters, that->session_closed_signal_id_);
   that->SourcesRequest();
 }
@@ -298,8 +294,8 @@ void ScreenCastPortal::StartRequest() {
 void ScreenCastPortal::OnStartRequested(GDBusProxy* proxy,
                                         GAsyncResult* result,
                                         gpointer user_data) {
-  StartRequestedHandler(static_cast<ScreenCastPortal*>(user_data), proxy,
-                        result);
+  static_cast<ScreenCastPortal*>(user_data)->StartRequestedHandler(proxy,
+                                                                   result);
 }
 
 // static
