@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a28a14f_04d7df62",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-14T08:54:01Z",
+      "side": 1,
+      "message": "In a future iteration, can this be the return value?",
+      "range": {
+        "startLine": 355,
+        "startChar": 4,
+        "endLine": 355,
+        "endChar": 18
+      },
+      "revId": "d9844cb04a61cd6f2f8841cb26eef8142005c669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f5e9925_11ad0480",
         "filename": "rtc_base/network.h",
         "patchSetId": 6
@@ -43,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f04b117e_787fa3be",
+        "filename": "rtc_base/network.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-14T08:54:01Z",
+      "side": 1,
+      "message": "Maybe something along the lines of:\n\n\"\"\"\n// The returned vector of Network* is valid as long as the NetworkManager is alive.\n\"\"\"",
+      "parentUuid": "9f5e9925_11ad0480",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 38
+      },
+      "revId": "d9844cb04a61cd6f2f8841cb26eef8142005c669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b9078b4_b90ac17e",
         "filename": "rtc_base/network_unittest.cc",
         "patchSetId": 6
@@ -54,6 +101,30 @@
       "writtenOn": "2022-04-14T08:16:39Z",
       "side": 1,
       "message": "All if this #if:ed out test code needs fixing before land.",
+      "range": {
+        "startLine": 569,
+        "startChar": 0,
+        "endLine": 570,
+        "endChar": 23
+      },
+      "revId": "d9844cb04a61cd6f2f8841cb26eef8142005c669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ede73ca5_c8e7bac1",
+        "filename": "rtc_base/network_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-14T08:54:01Z",
+      "side": 1,
+      "message": "What is the plan here?\n\nShould we just have a vector of pointers after SetupNetworks and use it here?",
+      "parentUuid": "1b9078b4_b90ac17e",
       "range": {
         "startLine": 569,
         "startChar": 0,
