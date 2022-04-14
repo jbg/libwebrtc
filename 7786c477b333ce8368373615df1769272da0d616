@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3e0a6da_66fa98f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2022-04-14T16:44:32Z",
+      "side": 1,
+      "message": "Hi Alex, PTAL at this CL that avoids the test failure in Chromium when attempting screen capture on a system with no displays.",
+      "revId": "7786c477b333ce8368373615df1769272da0d616",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
