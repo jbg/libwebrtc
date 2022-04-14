@@ -88,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff072063_ed5db190",
+        "filename": "rtc_base/network.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-14T10:07:32Z",
+      "side": 1,
+      "message": "Done. I considered also writing something about thread safety. It\u0027s not clear to me if properties of a Network returned by this method are ever changed; if so, it can be accessed safely only on the network thread.",
+      "parentUuid": "f04b117e_787fa3be",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 38
+      },
+      "revId": "d9844cb04a61cd6f2f8841cb26eef8142005c669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b9078b4_b90ac17e",
@@ -125,6 +149,30 @@
       "side": 1,
       "message": "What is the plan here?\n\nShould we just have a vector of pointers after SetupNetworks and use it here?",
       "parentUuid": "1b9078b4_b90ac17e",
+      "range": {
+        "startLine": 569,
+        "startChar": 0,
+        "endLine": 570,
+        "endChar": 23
+      },
+      "revId": "d9844cb04a61cd6f2f8841cb26eef8142005c669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "806e8951_299d4272",
+        "filename": "rtc_base/network_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-14T10:07:32Z",
+      "side": 1,
+      "message": "Will have to look at it case-by-case. For some tests, I think it\u0027ll work to make copies, one copy owned by the test, the other owned by the network manager. For others, we probably have to record raw pointers to the Network objects before they are passed to MergeNetworks (in this case, raw pointers to the original_list members before the move, updated in latest patchset).",
+      "parentUuid": "ede73ca5_c8e7bac1",
       "range": {
         "startLine": 569,
         "startChar": 0,
