@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f85a1b_423847af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-14T19:35:49Z",
+      "side": 1,
+      "message": "Thanks for the inputs Alex. I have adjusted the CL. PTAL",
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

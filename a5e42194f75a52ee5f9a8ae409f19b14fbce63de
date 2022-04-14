@@ -181,6 +181,30 @@
       },
       "revId": "a5e42194f75a52ee5f9a8ae409f19b14fbce63de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c20863a6_707efb65",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-14T19:35:49Z",
+      "side": 1,
+      "message": "That is a good point. I think a long term solution would be to put both portal implementation in a common module that webrtc/CRD could depend on -- that way they can grow together and not cause issues on autoroll (or later something that can still happen with non-virtual methods in the base class).\n\nI will change these methods to non-overridable on the base class but other existing methods would stay virtual since each portal overrides them. I have also added a note cautioning about adding new pure-virtual methods.",
+      "parentUuid": "ba003305_7b938791",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 67
+      },
+      "revId": "a5e42194f75a52ee5f9a8ae409f19b14fbce63de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
