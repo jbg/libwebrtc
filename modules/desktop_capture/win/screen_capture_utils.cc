@@ -91,6 +91,16 @@ bool IsMonitorValid(const HMONITOR monitor) {
   // An HMONITOR of 0 refers to a virtual monitor that spans all physical
   // monitors.
   if (monitor == 0) {
+    // There is a bug in a Windows OS API that causes a crash when capturing if
+    // no displays are connected. We must ensure a display is connected before
+    // returning true.
+    DesktopCapturer::SourceList screens;
+    if (!GetScreenList(&screens))
+      return false;
+
+    if (screens.size() < 1)
+      return false;
+
     return true;
   }
 
