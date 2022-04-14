@@ -381,6 +381,8 @@ class Port : public PortInterface,
                                        const std::string& relay_protocol,
                                        const rtc::SocketAddress& base_address);
 
+  void DeleteConnection(Connection* connection);
+
   // TODO(tommi): Make protected after updating ProxyConnection.
   rtc::WeakPtr<Port> NewWeakPtr() { return weak_factory_.GetWeakPtr(); }
 
@@ -453,8 +455,6 @@ class Port : public PortInterface,
 
  private:
   void Construct();
-  // Called when one of our connections deletes itself.
-  void OnConnectionDestroyed(Connection* conn);
 
   void OnNetworkTypeChanged(const rtc::Network* network);
 

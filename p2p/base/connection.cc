@@ -18,7 +18,6 @@
 #include <vector>
 
 #include "absl/algorithm/container.h"
-#include "absl/memory/memory.h"
 #include "absl/strings/match.h"
 #include "p2p/base/port_allocator.h"
 #include "rtc_base/checks.h"
@@ -846,18 +845,9 @@ void Connection::Destroy() {
 
   LogCandidatePairConfig(webrtc::IceCandidatePairConfigType::kDestroyed);
 
-  // Reset the `port_` after logging and firing the destroyed signal since
-  // information required for logging needs access to `port_`.
-  port_.reset();
-
-  // Unwind the stack before deleting the object in case upstream callers
-  // need to refer to the Connection's state as part of teardown.
-  // NOTE: We move ownership of 'this' into the capture section of the lambda
-  // so that the object will always be deleted, including if PostTask fails.
-  // In such a case (only tests), deletion would happen inside of the call
-  // to `Destroy()`.
-  network_thread_->PostTask(
-      webrtc::ToQueuedTask([me = absl::WrapUnique(this)]() {}));
+  auto port = std::move(port_);
+  RTC_DCHECK(!port_);
+  port->DeleteConnection(this);
 }
 
 void Connection::FailAndDestroy() {
