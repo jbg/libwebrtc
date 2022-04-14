@@ -15,6 +15,7 @@
 
 #include <string>
 
+#include "modules/desktop_capture/linux/wayland/portal_request_response.h"
 #include "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h"
 #include "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h"
 #include "modules/desktop_capture/linux/wayland/xdg_session_details.h"
@@ -92,12 +93,12 @@ class ScreenCastPortal : public xdg_portal::ScreenCapturePortalInterface {
   xdg_portal::SessionDetails GetSessionDetails() override;
 
   // Method to notify the reason for failure of a portal request.
-  void OnPortalDone(xdg_portal::RequestResponse result);
+  void OnPortalDone(xdg_portal::RequestResponse result) override;
 
   // Sends a create session request to the portal.
-  void SessionRequest(GDBusProxy* proxy);
+  void SessionRequest(GDBusProxy* proxy) override;
 
-  void UnsubscribeSignalHandlers();
+  void UnsubscribeSignalHandlers() override;
 
   // Set of methods leveraged by remote desktop portal to setup a common session
   // with screen cast portal.
