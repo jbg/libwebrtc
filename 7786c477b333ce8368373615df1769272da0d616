@@ -39,6 +39,30 @@
       },
       "revId": "7786c477b333ce8368373615df1769272da0d616",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc592672_c7aaf53a",
+        "filename": "modules/desktop_capture/win/screen_capture_utils_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2022-04-14T18:44:35Z",
+      "side": 1,
+      "message": "Right, we should have a check for this in IsWgcSupported, that\u0027s done. \n\nWe still have to skip this test though, it is not a capture test, just a test for the IsMonitorValid utility function, which is only used by WGC. I\u0027ve updated the skip message to be more clear.\n\nI\u0027ve added a new test that ensures WGC is not supported when no monitors are attached.",
+      "parentUuid": "7d63a481_2b4f1ec6",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 17
+      },
+      "revId": "7786c477b333ce8368373615df1769272da0d616",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
