@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e473ebe5_aef7d77d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18789
+      },
+      "writtenOn": "2022-04-15T23:44:10Z",
+      "side": 1,
+      "message": "Thanks Alex for taking care of this one. \n\nbtw, Windows OS team said that it was known issue for Win10 and fix was made for Win11. We are trying to bring the fix to the Win10 now.",
+      "revId": "8a411c4e2c1fae1b5804ba40e5d10a2aa26240bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
