@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63cc974a_fe95b3a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18789
+      },
+      "writtenOn": "2022-04-15T19:29:39Z",
+      "side": 1,
+      "message": "Hi Alex,\n\nDo you think I need more people to review to auto submit or someone like you (committer) need to submit manually for this CL?",
+      "revId": "9d197458d1591a1bce20791463838e4290309de6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
