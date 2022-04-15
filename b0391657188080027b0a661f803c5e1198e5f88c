@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7419e465_2202fa03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18789
+      },
+      "writtenOn": "2022-04-15T21:21:40Z",
+      "side": 1,
+      "message": "Thanks Alex for finding a glitch, I\u0027ve updated the comment and it shows Submit button but not allow me to submit though.",
+      "revId": "b0391657188080027b0a661f803c5e1198e5f88c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
