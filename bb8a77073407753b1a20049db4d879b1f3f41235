@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e11f12d1_de9bb44d",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a0e14e0_fa1c758b",
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e5ddcdb_5b2a0a33",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-04-14T20:22:34Z",
       "side": 1,
       "message": "Is there still outstanding cleanup via OnPortalDone that may need to be done in this case?",
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64ab3fbf_ebc0c2e5",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e5ddcdb_5b2a0a33",
       "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -92,6 +128,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4db1648_cbe62fec",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6500439c_b0145ee5",
+      "range": {
+        "startLine": 40,
+        "startChar": 57,
+        "endLine": 40,
+        "endChar": 75
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a084499_a3441794",
@@ -109,6 +169,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d38870b9_4e9549e6",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a084499_a3441794",
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13d6e385_e0c065a0",
@@ -122,6 +200,30 @@
       "writtenOn": "2022-04-14T20:22:34Z",
       "side": 1,
       "message": "I\u0027m not sure I understand what\u0027s going on here, since the handle never leaves this scope; this is existing, but if you have a minute to explain (or perhaps to add a comment) that would be appreciated.\n\nIf it\u0027s just that we need to \"fire and forget\" something to start some setup in the background that\u0027s fine.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 31
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36693584_64edbb69",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "I believe this is an additional validation i.e. whether session handle is populated or not before we retrieve it as part of (now) `RegisterSessionClosedSignalHandler` method.",
+      "parentUuid": "13d6e385_e0c065a0",
       "range": {
         "startLine": 55,
         "startChar": 0,
@@ -155,6 +257,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d389c880_119fb41a",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "040121c1_2fb44333",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 25
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5410777d_709cdd84",
@@ -168,6 +294,30 @@
       "writtenOn": "2022-04-14T20:22:34Z",
       "side": 1,
       "message": "I think we hit some cast build issues with this earlier; since we\u0027re adding it to the header, can you make sure we run that bot?",
+      "range": {
+        "startLine": 14,
+        "startChar": 1,
+        "endLine": 14,
+        "endChar": 8
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dd3fe2c_9947cd32",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Thanks for the reminder. It looks ok (likely due to us guarding against chromecast flag last time around).",
+      "parentUuid": "5410777d_709cdd84",
       "range": {
         "startLine": 14,
         "startChar": 1,
@@ -201,6 +351,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bfb5ea4_7186835e",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b295661_3613fc4e",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 66
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00b79340_998e831f",
@@ -214,6 +388,30 @@
       "writtenOn": "2022-04-14T20:22:34Z",
       "side": 1,
       "message": "If we\u0027re not doing any direct subscribing, and merely calling this after OnPortalDone with an error, we should probably defer this to the downstream/child classes.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 45
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c256a61_3a2766ec",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00b79340_998e831f",
       "range": {
         "startLine": 49,
         "startChar": 0,
@@ -247,6 +445,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c8169cf_d4500cad",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdccedac_209853da",
+      "range": {
+        "startLine": 51,
+        "startChar": 15,
+        "endLine": 51,
+        "endChar": 29
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a497076_b4b469ff",
@@ -264,6 +486,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce558443_f6367193",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a497076_b4b469ff",
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b9291ec_5953af29",
@@ -277,6 +517,30 @@
       "writtenOn": "2022-04-14T20:22:34Z",
       "side": 1,
       "message": "NIT: This is existing, but it\u0027s named like an object, Can we change it to something like OnSessionRequestResult ?",
+      "range": {
+        "startLine": 56,
+        "startChar": 7,
+        "endLine": 56,
+        "endChar": 28
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "132b031b_f5d2f288",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b9291ec_5953af29",
       "range": {
         "startLine": 56,
         "startChar": 7,
@@ -310,6 +574,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c50a7f_667b0415",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55d7581f_19101412",
+      "range": {
+        "startLine": 60,
+        "startChar": 7,
+        "endLine": 60,
+        "endChar": 41
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "260311ad_610625f6",
@@ -333,6 +621,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc65a9a_247bc787",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "260311ad_610625f6",
+      "range": {
+        "startLine": 67,
+        "startChar": 7,
+        "endLine": 67,
+        "endChar": 28
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a6ab0b3_dea5d24e",
@@ -346,6 +658,30 @@
       "writtenOn": "2022-04-14T20:22:34Z",
       "side": 1,
       "message": "Now that this is a member method, this pattern feels a bit odd, but I think it\u0027s necessary for the goal we have here of not trying to make this *too much* like a base class (e.g. where if we wanted to change the name of one of these in a sub-class or have them completely ignore it that\u0027s fine, and it doesn\u0027t necessarily make sense to have a setter for all of them.\n\nThat said, if you think it\u0027s reasonable to have setters for connection_/session_handle_/session_closed_signal_id_ (or a callback that they are passed to that the sub-class can declare), it\u0027d probably be fine.",
+      "range": {
+        "startLine": 155,
+        "startChar": 29,
+        "endLine": 156,
+        "endChar": 49
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca91d0f5_44d428f2",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_portal.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:58:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8a6ab0b3_dea5d24e",
       "range": {
         "startLine": 155,
         "startChar": 29,
