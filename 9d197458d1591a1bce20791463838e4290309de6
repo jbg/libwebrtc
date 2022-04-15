@@ -16,6 +16,24 @@
       "message": "Hi Alex,\n\nDo you think I need more people to review to auto submit or someone like you (committer) need to submit manually for this CL?",
       "revId": "9d197458d1591a1bce20791463838e4290309de6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73c97ac_93e56d90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-04-15T20:04:12Z",
+      "side": 1,
+      "message": "Ah, sorry I thought you could. I can submit it.",
+      "parentUuid": "63cc974a_fe95b3a4",
+      "revId": "9d197458d1591a1bce20791463838e4290309de6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
