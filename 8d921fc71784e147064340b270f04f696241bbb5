@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "568b5931_5eb482b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5584
+      },
+      "writtenOn": "2022-04-15T23:45:13Z",
+      "side": 1,
+      "message": "FieldTrial API has been deprecated for a long time, and basically all new experiments in Chromium use it except for WebRTC. I\u0027m mostly aiming to unblock switching to it for new WebRTC experiments for now. Eventually, I\u0027d like to remove the old API, but there isn\u0027t any specific timeline for that, and chromium still has some legacy experiments that need to be cleaned up too.",
+      "parentUuid": "7ecdebc3_fba974c4",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "8d921fc71784e147064340b270f04f696241bbb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e0168038_17aa0148",
@@ -60,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "753235e9_c72ced87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5584
+      },
+      "writtenOn": "2022-04-15T23:45:13Z",
+      "side": 1,
+      "message": "I\u0027ll add some more docs and example usage if this is the right place for this to be added / there is no blocking directional feedback.\n\nBasically this is added because field_trial::FindFullName is deprecated and in general we want to avoid exposing field trials to code directly and instead have them depend on configurable features/parameters that field trials can modify (typically in addition to command line parameters / chrome://flags etc).\n\nThis avoid the need to depend on group/study names for functionality changes, like group name for contains \"Enabled\" or parsing some parameters out of group names like:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/rtc_base/experiments/normalize_simulcast_size_experiment.cc;drc\u003ddd12c1c88dda05cccfb2bf9b9c9341ca8bdb3d1b;l\u003d36\n\nThat allows a more clean separation of behavior impacting vs tagging / shuffling  impacting changes in experiments, which simplifies testing / monitoring / avoids some problems at experiment configuration time.",
+      "parentUuid": "92485cec_e5bb60ff",
+      "revId": "8d921fc71784e147064340b270f04f696241bbb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ddb432fc_c2514619",
         "filename": "system_wrappers/include/features.h",
         "patchSetId": 4
@@ -71,6 +113,30 @@
       "writtenOn": "2022-04-13T05:52:45Z",
       "side": 1,
       "message": "Do we really need a sub-namespace?\n\n\"features\" looks generic enough we can get conflicts with top level namespaces. See https://abseil.io/tips/130.\n\nI think we can keep everything in the webrtc namespace and just use different names for functions (e.g. GetParamValue -\u003e GetFeatureParamValue).",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 20
+      },
+      "revId": "8d921fc71784e147064340b270f04f696241bbb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1de723b7_4d79e205",
+        "filename": "system_wrappers/include/features.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5584
+      },
+      "writtenOn": "2022-04-15T23:45:13Z",
+      "side": 1,
+      "message": "Sure, I was copying the style from the field_trial wrapper, I\u0027ll flatten out the namespace.",
+      "parentUuid": "ddb432fc_c2514619",
       "range": {
         "startLine": 21,
         "startChar": 0,
