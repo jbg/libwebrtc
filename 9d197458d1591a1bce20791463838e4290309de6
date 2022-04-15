@@ -34,6 +34,24 @@
       "parentUuid": "63cc974a_fe95b3a4",
       "revId": "9d197458d1591a1bce20791463838e4290309de6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d1b9635_69b02f65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-04-15T20:53:08Z",
+      "side": 1,
+      "message": "Ah, it looks like when Mirko edited the commit message, it discounted his +1 so we didn\u0027t have a sufficient breadth of OWNERS approving. I thought Mirko also owned the DesktopCapture stuff, but I guess not as the OWNERS requirement still isn\u0027t satisfied when I edited it.  You\u0027ll need to edit the commit description (just add a space between bug: and chromium:), and then I can hit CQ+2 for you\n\n@Mirko, are you aware of if this behavior is intended? (editting the commit description counts you as the uploader and thus your CR+1 is now counted as a \"self\" +1 and discounted, but since you aren\u0027t the OWNER your OWNERSHIP doesn\u0027t count either?)",
+      "parentUuid": "c73c97ac_93e56d90",
+      "revId": "9d197458d1591a1bce20791463838e4290309de6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
