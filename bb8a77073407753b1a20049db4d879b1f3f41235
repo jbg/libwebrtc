@@ -375,6 +375,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "465e1b72_c991e297",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-04-15T00:59:41Z",
+      "side": 1,
+      "message": "This is called by RemoteDesktopPortal on a ScreenCastPortal instance and hence it is public.",
+      "parentUuid": "7bfb5ea4_7186835e",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 66
+      },
+      "revId": "bb8a77073407753b1a20049db4d879b1f3f41235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00b79340_998e831f",
