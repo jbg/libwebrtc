@@ -117,6 +117,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5f9f911_dbc30c23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-18T20:59:29Z",
+      "side": 1,
+      "message": "This looks like it\u0027s trying to modify the global string that Jonas has been working to get rid of (replacing it with injectable parameter objects).\n\nI\u0027ll wait for his comments before reviewing further.\n",
+      "revId": "8d921fc71784e147064340b270f04f696241bbb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddb432fc_c2514619",
