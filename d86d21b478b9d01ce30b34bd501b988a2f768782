@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b7f43c6_ade18c17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-19T20:25:09Z",
+      "side": 1,
+      "message": "funny - I thought this would be even more widely used.\nApproved with a small trepidation (see comment).\n",
+      "revId": "d86d21b478b9d01ce30b34bd501b988a2f768782",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "497e21c6_da9aace1",
+        "filename": "modules/audio_coding/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-19T20:25:09Z",
+      "side": 1,
+      "message": "This assumes that the deps are order independent. Is that always true?",
+      "revId": "d86d21b478b9d01ce30b34bd501b988a2f768782",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
