@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e307d7_5bb12bb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-19T14:57:07Z",
+      "side": 1,
+      "message": "This method appears unused. Had a quick look in git history, and I think it\u0027s been unused since https://codereview.webrtc.org/1393563002, 2015.",
+      "revId": "6e4a2c6e205843d73204fbc8fd3f87b1a6d008ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
