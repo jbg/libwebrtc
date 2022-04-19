@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "590069f6_c923195d",
+        "filename": "tools_webrtc/mb/mb.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2022-04-19T12:05:39Z",
+      "side": 0,
+      "message": "Does this translation also happen if you run locally on a Windows machine?",
+      "revId": "d959f3a665d2344fcc8993e5ce9f31b975ccc4fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
