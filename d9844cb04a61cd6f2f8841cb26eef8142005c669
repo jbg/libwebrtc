@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb2ca6ff_de07a244",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-19T08:55:29Z",
+      "side": 1,
+      "message": "Agree that makes sense as a later cleanup.",
+      "parentUuid": "3a28a14f_04d7df62",
+      "range": {
+        "startLine": 355,
+        "startChar": 4,
+        "endLine": 355,
+        "endChar": 18
+      },
+      "revId": "d9844cb04a61cd6f2f8841cb26eef8142005c669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f5e9925_11ad0480",
@@ -197,6 +221,30 @@
       "side": 1,
       "message": "Ok, ping me when this is ready for the final review.\n\nThanks for this work!",
       "parentUuid": "806e8951_299d4272",
+      "range": {
+        "startLine": 569,
+        "startChar": 0,
+        "endLine": 570,
+        "endChar": 23
+      },
+      "revId": "d9844cb04a61cd6f2f8841cb26eef8142005c669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa7c2e5a_36c20334",
+        "filename": "rtc_base/network_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-19T08:55:29Z",
+      "side": 1,
+      "message": "Tests now updated.",
+      "parentUuid": "5c34db28_af4fd8c1",
       "range": {
         "startLine": 569,
         "startChar": 0,
