@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37d02fe1_f0ec5e9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-20T12:29:24Z",
+      "side": 1,
+      "message": "We\u0027ll then get two conversion paths, scoped_refptr\u003cT\u003e --\u003e bool (explicit) and scoped_refptr\u003cT\u003e --\u003e T* --\u003e bool (both implicit). I\u0027m not enough of a C++ guru to say if the shorter path wins. I can give it a try.\n\nPer style guide, the new conversion should be explicit. So may not apply in all cases where the old conversion does. But we can look into that later, when the old conversion is actually deprecated and deleted",
+      "parentUuid": "8a556ff1_45a48935",
+      "revId": "358faebd6e5987b2d8d830981dc1533b60d18cbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23e16a28_4773fdb0",
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "Yes, there\u0027s even a TODO to that effect in third_party/webrtc/api/media_stream_interface.h",
       "parentUuid": "23e16a28_4773fdb0",
+      "range": {
+        "startLine": 268,
+        "startChar": 6,
+        "endLine": 268,
+        "endChar": 36
+      },
+      "revId": "358faebd6e5987b2d8d830981dc1533b60d18cbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f09b2e3b_27eb4a5c",
+        "filename": "pc/audio_rtp_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-20T12:29:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e7b9bc8c_db85a1f0",
       "range": {
         "startLine": 268,
         "startChar": 6,
@@ -136,6 +178,30 @@
       "side": 1,
       "message": "The underlying interface takes a scoped_refptr, so yes.",
       "parentUuid": "3c5c8939_f32159ff",
+      "range": {
+        "startLine": 68,
+        "startChar": 6,
+        "endLine": 68,
+        "endChar": 78
+      },
+      "revId": "358faebd6e5987b2d8d830981dc1533b60d18cbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f44fae3d_5da3877d",
+        "filename": "pc/peer_connection_adaptation_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-20T12:29:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7cb952f2_fc0a1d57",
       "range": {
         "startLine": 68,
         "startChar": 6,
