@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1a91470_a9a890c1",
+        "filename": "api/test/peerconnection_quality_test_fixture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-20T17:46:03Z",
+      "side": 1,
+      "message": "That one is not landed yet, so will update it later during clean up.",
+      "parentUuid": "a49ed497_361f70ca",
+      "revId": "a9dfa87ab7f6dd5cf9c9480c0bd974601afbdcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1dd4cf0_415849c3",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-20T17:34:24Z",
       "side": 1,
       "message": "Maybe use const auto\u0026",
+      "revId": "a9dfa87ab7f6dd5cf9c9480c0bd974601afbdcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead86e2b_467dd4c9",
+        "filename": "api/test/peerconnection_quality_test_fixture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-20T17:46:03Z",
+      "side": 1,
+      "message": "I think from https://google.github.io/styleguide/cppguide.html#Type_deduction it\u0027s better to keep the type here for clarity.",
+      "parentUuid": "b1dd4cf0_415849c3",
       "revId": "a9dfa87ab7f6dd5cf9c9480c0bd974601afbdcfa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
