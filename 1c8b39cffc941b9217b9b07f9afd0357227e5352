@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8cefc86_dfd299f7",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-20T13:16:56Z",
+      "side": 1,
+      "message": "Nit: static constexpr",
+      "range": {
+        "startLine": 196,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 11
+      },
+      "revId": "1c8b39cffc941b9217b9b07f9afd0357227e5352",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cb0dda9_804ef651",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-20T13:16:56Z",
+      "side": 1,
+      "message": "Consider logging the value of kMaxRate so the reader understands what \"very high\" means",
+      "range": {
+        "startLine": 200,
+        "startChar": 28,
+        "endLine": 200,
+        "endChar": 37
+      },
+      "revId": "1c8b39cffc941b9217b9b07f9afd0357227e5352",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13b32195_e2ca7aaa",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-20T13:16:56Z",
+      "side": 1,
+      "message": "Nit: static constexpr",
+      "range": {
+        "startLine": 490,
+        "startChar": 2,
+        "endLine": 490,
+        "endChar": 11
+      },
+      "revId": "1c8b39cffc941b9217b9b07f9afd0357227e5352",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c69c95b_1067536a",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-20T13:16:56Z",
+      "side": 1,
+      "message": "This will never happen since `iteration` will be `kMaxIterations + 1` if the loop never breaks.\n\nIf you had written the loop like this things would be fine since the last increment wouldn\u0027t happen:\n\n```\nfor (iteration \u003d 0; iteration \u003c kMaxIterations; ++iteration) { ... }\n```\n\nEither way, I\u0027d suggest you write this more defensively like\n\n```\nif (iteration \u003e\u003d kMaxIterations) { ... }\n```",
+      "range": {
+        "startLine": 564,
+        "startChar": 16,
+        "endLine": 564,
+        "endChar": 18
+      },
+      "revId": "1c8b39cffc941b9217b9b07f9afd0357227e5352",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
