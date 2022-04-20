@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a49ed497_361f70ca",
+        "filename": "api/test/peerconnection_quality_test_fixture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2022-04-20T17:34:24Z",
+      "side": 1,
+      "message": "Maybe use GetResolution method that we\u0027ve added at https://webrtc-review.googlesource.com/c/src/+/259523",
+      "revId": "a9dfa87ab7f6dd5cf9c9480c0bd974601afbdcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1dd4cf0_415849c3",
+        "filename": "api/test/peerconnection_quality_test_fixture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2022-04-20T17:34:24Z",
+      "side": 1,
+      "message": "Maybe use const auto\u0026",
+      "revId": "a9dfa87ab7f6dd5cf9c9480c0bd974601afbdcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
