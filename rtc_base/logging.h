@@ -117,7 +117,7 @@ class LogSink {
                             const char* tag);
   virtual void OnLogMessage(absl::string_view message,
                             LoggingSeverity severity);
-  virtual void OnLogMessage(absl::string_view message);
+  virtual void OnLogMessage(absl::string_view message) = 0;
 
  private:
   friend class ::rtc::LogMessage;
