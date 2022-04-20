@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bcff413_85576a96",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-04-20T14:27:34Z",
+      "side": 1,
+      "message": "Nit: Remove since you\u0027re already initializing above",
+      "range": {
+        "startLine": 494,
+        "startChar": 7,
+        "endLine": 494,
+        "endChar": 20
+      },
+      "revId": "519550168ced188082c100aee061c3c5d1e5b569",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
