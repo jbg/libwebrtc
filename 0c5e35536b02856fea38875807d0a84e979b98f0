@@ -33,6 +33,24 @@
       "message": "Awesome! Thanks for taking the time to implement this.",
       "revId": "0c5e35536b02856fea38875807d0a84e979b98f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29a25d51_e48f070d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-04-20T12:34:54Z",
+      "side": 1,
+      "message": "You\u0027re welcome. Thanks for the review as always!",
+      "parentUuid": "0fdcb182_956182c3",
+      "revId": "0c5e35536b02856fea38875807d0a84e979b98f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
