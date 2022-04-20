@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1ef403_39ed5c5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-20T08:46:52Z",
+      "side": 1,
+      "message": "PTAL. Some of the added .get() calls are signs of poor api.\n\nFor reference, larger cl deleting all the conversions: https://webrtc-review.googlesource.com/c/src/+/249087. This one is the same, limited to the pc/ directory.",
+      "revId": "358faebd6e5987b2d8d830981dc1533b60d18cbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23e16a28_4773fdb0",
+        "filename": "pc/audio_rtp_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-20T08:46:52Z",
+      "side": 1,
+      "message": "This method should probably take a scoped_refptr",
+      "range": {
+        "startLine": 268,
+        "startChar": 6,
+        "endLine": 268,
+        "endChar": 36
+      },
+      "revId": "358faebd6e5987b2d8d830981dc1533b60d18cbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c5c8939_f32159ff",
+        "filename": "pc/peer_connection_adaptation_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-20T08:46:52Z",
+      "side": 1,
+      "message": "And this should also take a scoped_refptr for the source.",
+      "range": {
+        "startLine": 68,
+        "startChar": 6,
+        "endLine": 68,
+        "endChar": 78
+      },
+      "revId": "358faebd6e5987b2d8d830981dc1533b60d18cbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
