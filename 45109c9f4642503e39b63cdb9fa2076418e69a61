@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1f8c295_ec54d917",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-20T14:48:26Z",
+      "side": 1,
+      "message": "PTAL. Extracted from the larger cl https://webrtc-review.googlesource.com/c/src/+/249087, for ease of review.",
+      "revId": "45109c9f4642503e39b63cdb9fa2076418e69a61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
