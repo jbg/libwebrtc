@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58dfa7fa_9a01971b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-04-21T07:56:52Z",
+      "side": 1,
+      "message": "I\u0027ve set the base hash to a version before https://chromium-review.googlesource.com/c/chromium/src/+/3594381 to ensure the perfetto roll lands to ensure things exists before they are used.",
+      "revId": "c58296962ec4cb6f67416dbda9ff6b150662980d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
