@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e34eecf_42f89443",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-21T14:34:36Z",
+      "side": 1,
+      "message": "PTAL. I think all downstream issues are fixed.",
+      "revId": "dd678f6f91415c1d1795b28b96c5fd9b8eab1c85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
