@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd9e206_4b36aee6",
+        "filename": "api/test/mock_media_stream_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-04-22T07:57:20Z",
+      "side": 1,
+      "message": "If this is unused in webrtc tests, consider adding a static_assert saying that RefCountedObject\u003cMockMediaStreamInterface\u003e isn\u0027t abstract. Example in mock_rtpsender.h.",
+      "range": {
+        "startLine": 87,
+        "startChar": 6,
+        "endLine": 87,
+        "endChar": 30
+      },
+      "revId": "a66ff425c7347f9a7c65cf0c1279a7759175da9c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
