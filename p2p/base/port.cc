@@ -18,6 +18,7 @@
 #include <vector>
 
 #include "absl/algorithm/container.h"
+#include "absl/memory/memory.h"
 #include "absl/strings/match.h"
 #include "absl/strings/string_view.h"
 #include "p2p/base/connection.h"
@@ -187,21 +188,9 @@ Port::~Port() {
   RTC_DCHECK_RUN_ON(thread_);
   CancelPendingTasks();
 
-  // Delete all of the remaining connections.  We copy the list up front
-  // because each deletion will cause it to be modified.
+  DestroyAllConnections();
 
-  std::vector<Connection*> list;
-
-  AddressMap::iterator iter = connections_.begin();
-  while (iter != connections_.end()) {
-    list.push_back(iter->second);
-    ++iter;
-  }
-
-  for (uint32_t i = 0; i < list.size(); i++) {
-    list[i]->SignalDestroyed.disconnect(this);
-    delete list[i];
-  }
+  CancelPendingTasks();
 }
 
 const std::string& Port::Type() const {
@@ -352,11 +341,16 @@ void Port::AddOrReplaceConnection(Connection* conn) {
         << ": A new connection was created on an existing remote address. "
            "New remote candidate: "
         << conn->remote_candidate().ToSensitiveString();
-    ret.first->second->SignalDestroyed.disconnect(this);
+#if 0
+    // Calling Destroy() causes a callback to DeleteConnection which
+    // removes from the map (which we don't want here) and invalidates
+    // the iterator...
     ret.first->second->Destroy();
+#else
+    delete ret.first->second;
+#endif
     ret.first->second = conn;
   }
-  conn->SignalDestroyed.connect(this, &Port::OnConnectionDestroyed);
 }
 
 void Port::OnReadPacket(const char* data,
@@ -614,11 +608,15 @@ rtc::DiffServCodePoint Port::StunDscpValue() const {
 
 void Port::DestroyAllConnections() {
   RTC_DCHECK_RUN_ON(thread_);
-  for (auto kv : connections_) {
-    kv.second->SignalDestroyed.disconnect(this);
-    kv.second->Destroy();
-  }
-  connections_.clear();
+
+  std::vector<Connection*> connections;
+  for (const auto& [unused, connection] : connections_)
+    connections.push_back(connection);
+
+  for (auto* c : connections)
+    c->Destroy();
+
+  RTC_DCHECK(connections_.empty());
 }
 
 void Port::set_timeout_delay(int delay) {
@@ -909,12 +907,21 @@ void Port::EnablePortPackets() {
   enable_port_packets_ = true;
 }
 
-void Port::OnConnectionDestroyed(Connection* conn) {
+void Port::DeleteConnection(Connection* conn) {
   AddressMap::iterator iter =
       connections_.find(conn->remote_candidate().address());
   RTC_DCHECK(iter != connections_.end());
   connections_.erase(iter);
   HandleConnectionDestroyed(conn);
+
+  // Unwind the stack before deleting the object in case upstream callers
+  // need to refer to the Connection's state as part of teardown (e.g. when
+  // called from within an event handler).
+  // NOTE: We move ownership of 'conn' into the capture section of the lambda
+  // so that the object will always be deleted, including if PostTask fails.
+  // In such a case (only tests), deletion happens inside of the call to
+  // `DeleteConnection()`.
+  thread_->PostTask(webrtc::ToQueuedTask([c = absl::WrapUnique(conn)]() {}));
 
   // Ports time out after all connections fail if it is not marked as
   // "keep alive until pruned."
