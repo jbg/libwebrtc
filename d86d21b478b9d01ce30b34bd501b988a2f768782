@@ -33,6 +33,24 @@
       "message": "This assumes that the deps are order independent. Is that always true?",
       "revId": "d86d21b478b9d01ce30b34bd501b988a2f768782",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc614092_4bd6add3",
+        "filename": "modules/audio_coding/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-04-22T20:08:35Z",
+      "side": 1,
+      "message": "If the deps require a specific order, then they need to have a regular dependency. If they don\u0027t, it\u0027s ill formed.\n\nIn practice, this is just allowing \"gn format\" and other scripts to work.",
+      "parentUuid": "497e21c6_da9aace1",
+      "revId": "d86d21b478b9d01ce30b34bd501b988a2f768782",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
