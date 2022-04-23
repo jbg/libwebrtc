@@ -2219,7 +2219,7 @@ bool VideoStreamEncoder::DropDueToSize(uint32_t pixel_count) const {
            static_cast<uint32_t>(encoder_bitrate_limits->min_start_bitrate_bps);
   }
 
-  if (bitrate_bps < 300000 /* qvga */) {
+  if (bitrate_bps < 282640 /* qvga */) {
     return pixel_count > 320 * 240;
   } else if (bitrate_bps < 500000 /* vga */) {
     return pixel_count > 640 * 480;
