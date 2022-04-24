@@ -33,6 +33,24 @@
       "message": "is this worthy of a TODO() to disentangle further?",
       "revId": "9e816842e728be0cc15d1ae6e8c59ef4982182da",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b5454e_498e0446",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-04-24T13:55:40Z",
+      "side": 1,
+      "message": "There\u0027s a circular dependency, it\u0027s probably fine.",
+      "parentUuid": "a80bd048_737e65ff",
+      "revId": "9e816842e728be0cc15d1ae6e8c59ef4982182da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
