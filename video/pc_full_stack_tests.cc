@@ -1311,6 +1311,35 @@ TEST(PCFullStackTest, Pc_Screenshare_Slides_Vp9_3sl_High_Fps) {
   fixture->Run(RunParams(TimeDelta::Seconds(kTestDurationSec)));
 }
 
+TEST(PCFullStackTest, Pc_Bllaaaaaa) {
+  webrtc::test::ScopedFieldTrials override_trials(
+      AppendFieldTrials("WebRTC-Vp9InterLayerPred/"
+                        "Enabled,inter_layer_pred_mode:on/"));
+  std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
+      CreateNetworkEmulationManager();
+  auto fixture = CreateTestFixture(
+      "pc_screenshare_slides_vp9_3sl_high_fps",
+      *network_emulation_manager->time_controller(),
+      CreateTwoNetworkLinks(network_emulation_manager.get(),
+                            BuiltInNetworkBehaviorConfig()),
+      [](PeerConfigurer* alice) {
+        VideoConfig video(1850, 1110, 30);
+        video.stream_label = "alice-video";
+        RtpEncodingParameters parameters;
+        parameters.scalability_mode = "L1T3";
+        video.encoding_params.push_back(parameters);
+        auto frame_generator = CreateScreenShareFrameGenerator(
+            video, ScreenShareConfig(TimeDelta::Seconds(10)));
+        alice->AddVideoConfig(std::move(video), std::move(frame_generator));
+        alice->SetVideoCodecs({VideoCodecConfig(
+            /*name=*/cricket::kVp9CodecName, /*required_params=*/{
+                {kVP9FmtpProfileId,
+                 VP9ProfileToString(VP9Profile::kProfile0)}})});
+      },
+      [](PeerConfigurer* bob) {});
+  fixture->Run(RunParams(TimeDelta::Seconds(1)));
+}
+
 TEST(PCFullStackTest, Pc_Vp9svc_3sl_High) {
   webrtc::test::ScopedFieldTrials override_trials(
       AppendFieldTrials("WebRTC-Vp9InterLayerPred/"
