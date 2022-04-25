@@ -68,6 +68,30 @@
       },
       "revId": "6bf8e3e7cca75f767d9dc7d048d4a14edfd87e3e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e49e5af9_32e10ba8",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-04-25T23:12:40Z",
+      "side": 1,
+      "message": "What do you think of actually removing the values in video_config and have users create an encoding parameter to set those?\nIt might actually make more sense.",
+      "parentUuid": "1dbebdbf_4b5ff53b",
+      "range": {
+        "startLine": 500,
+        "startChar": 6,
+        "endLine": 500,
+        "endChar": 71
+      },
+      "revId": "6bf8e3e7cca75f767d9dc7d048d4a14edfd87e3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
