@@ -142,9 +142,9 @@ void PeerParamsPreprocessor::ValidateParams(const PeerConfigurerImpl& peer) {
       RTC_CHECK(!video_config.min_encode_bitrate_bps)
           << "Setting min encode bitrate is not implemented for simulcast.";
       if (p.video_codecs[0].name == cricket::kVp8CodecName &&
-          !video_config.simulcast_config->encoding_params.empty()) {
+          !video_config.encoding_params.empty()) {
         RTC_CHECK_EQ(video_config.simulcast_config->simulcast_streams_count,
-                     video_config.simulcast_config->encoding_params.size())
+                     video_config.encoding_params.size())
             << "|encoding_params| have to be specified for each simulcast "
             << "stream in |simulcast_config|.";
       }
