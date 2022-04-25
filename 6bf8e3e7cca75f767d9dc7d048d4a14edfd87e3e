@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea857d8_8d6a2151",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-25T22:00:10Z",
+      "side": 1,
+      "message": "Let\u0027s update the comment to reflect how it will behave if simulcast config isn\u0027t set at all and what is simulcast layer in such case. Also what is expected behavior \nif simulcast config isn\u0027t set and this vector contains multiple elements?",
+      "range": {
+        "startLine": 251,
+        "startChar": 4,
+        "endLine": 255,
+        "endChar": 36
+      },
+      "revId": "6bf8e3e7cca75f767d9dc7d048d4a14edfd87e3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7851bd79_83c98a0b",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-25T22:00:10Z",
+      "side": 1,
+      "message": "Let\u0027s do this assertion in PeerParamsPreprocessor::ValidateParams. The idea of that method that it should guarantee that parameters are correct if it didn\u0027t fail.",
+      "range": {
+        "startLine": 494,
+        "startChar": 6,
+        "endLine": 494,
+        "endChar": 59
+      },
+      "revId": "6bf8e3e7cca75f767d9dc7d048d4a14edfd87e3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dbebdbf_4b5ff53b",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-25T22:00:10Z",
+      "side": 1,
+      "message": "Let\u0027s document that even if encoding_params are specified, min and max bitrates will be overwritten. Or maybe remove video_config.(min|max)_encode_bitrate_bps in favor of encoding_params?",
+      "range": {
+        "startLine": 500,
+        "startChar": 6,
+        "endLine": 500,
+        "endChar": 71
+      },
+      "revId": "6bf8e3e7cca75f767d9dc7d048d4a14edfd87e3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
