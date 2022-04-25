@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bdcf50e_d241a857",
+        "filename": "test/pc/e2e/test_peer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-25T19:09:33Z",
+      "side": 1,
+      "message": "Can we go one step further (maybe that is the plan?) and also pass here by value?",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 28
+      },
+      "revId": "b01e35b0b5e9936790b4fb7763da06ad53496f23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
