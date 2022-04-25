@@ -937,6 +937,7 @@ if (rtc_include_tests) {
       "../system_wrappers:metrics",
       "../test:direct_transport",
       "../test:encoder_settings",
+      "../test:fake_encoded_frame",
       "../test:fake_video_codecs",
       "../test:field_trial",
       "../test:fileutils",
@@ -953,6 +954,7 @@ if (rtc_include_tests) {
       "../test/time_controller",
       "adaptation:video_adaptation",
       "//testing/gtest",
+      "//third_party/googletest:gmock",
     ]
     absl_deps = [
       "//third_party/abseil-cpp/absl/algorithm:container",
