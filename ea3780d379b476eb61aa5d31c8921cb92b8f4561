@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26e1ca06_0d0ac7d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-04-26T09:37:12Z",
+      "side": 1,
+      "message": "Hi Alessio, PTAL! This should be the last piece of the puzzle.",
+      "revId": "ea3780d379b476eb61aa5d31c8921cb92b8f4561",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
