@@ -16,6 +16,24 @@
       "message": "if you have ideas for tests I\u0027m all ears!",
       "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21449110_b8eebb08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8070
+      },
+      "writtenOn": "2022-04-26T19:55:13Z",
+      "side": 1,
+      "message": "SSL_CTX_set_current_time_cb, which you all are using, lets you mock out BoringSSL\u0027s clock. From there you should be able to simulate enough timeouts that it, eventually, gives up and hits this point.",
+      "parentUuid": "615ce3bc_bd1b14ee",
+      "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
