@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2a8f433_92ff938c",
+        "filename": "test/pc/e2e/media/media_helper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-26T13:39:44Z",
+      "side": 1,
+      "message": "It\u0027s configurer. It holds this object only while we do validation and filling of default values, so here we want to return a reference, because we won\u0027t mutate it from multiple threads here. But in TestPeer we want to return a copy and have lock protection",
+      "parentUuid": "79e736d9_75ea9e4a",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "36649e0749131c021da00f4112794a0d1f93a94c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69d75207_614a0214",
@@ -47,6 +71,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b03664e_eff5b090",
+        "filename": "test/pc/e2e/peer_configurer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-26T13:39:44Z",
+      "side": 1,
+      "message": "I don\u0027t remember why we have unique pointers here, so decided to repeat for now. But we can rethink it in future.",
+      "parentUuid": "69d75207_614a0214",
+      "range": {
+        "startLine": 285,
+        "startChar": 2,
+        "endLine": 286,
+        "endChar": 59
+      },
+      "revId": "36649e0749131c021da00f4112794a0d1f93a94c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be056c9e_d1d51f91",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-04-26T13:12:11Z",
       "side": 1,
       "message": "Do we need a lock to protect this or are you going to add it later?",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 157,
+        "endChar": 42
+      },
+      "revId": "36649e0749131c021da00f4112794a0d1f93a94c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b3cd593_e8150683",
+        "filename": "test/pc/e2e/test_peer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-26T13:39:44Z",
+      "side": 1,
+      "message": "I\u0027m going to add it later together with mutators.",
+      "parentUuid": "be056c9e_d1d51f91",
       "range": {
         "startLine": 157,
         "startChar": 2,
