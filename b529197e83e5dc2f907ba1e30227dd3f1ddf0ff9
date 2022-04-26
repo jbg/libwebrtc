@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39a7c246_ca74e381",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-04-26T09:40:44Z",
+      "side": 1,
+      "message": "I think it would be better to specify which win version to use.\nThe generic \u0027win\u0027 mixins is only used for the WebRTC pool because there are only very few machines.",
+      "revId": "b529197e83e5dc2f907ba1e30227dd3f1ddf0ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
