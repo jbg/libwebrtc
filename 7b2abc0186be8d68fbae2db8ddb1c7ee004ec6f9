@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08e376e5_7d63e685",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-04-26T13:32:52Z",
+      "side": 1,
+      "message": "Blocked on https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d14002",
+      "revId": "7b2abc0186be8d68fbae2db8ddb1c7ee004ec6f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
