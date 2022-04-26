@@ -61,12 +61,12 @@ std::string DefaultNamesProvider::GenerateNameInternal() {
 }
 
 PeerParamsPreprocessor::PeerParamsPreprocessor()
-    : peer_names_provider("peer_", kDefaultNames) {}
+    : peer_names_provider_("peer_", kDefaultNames) {}
 
 void PeerParamsPreprocessor::SetDefaultValuesForMissingParams(
     PeerConfigurerImpl& peer) {
   auto* p = peer.params();
-  peer_names_provider.MaybeSetName(p->name);
+  peer_names_provider_.MaybeSetName(p->name);
   DefaultNamesProvider video_stream_names_provider(*p->name +
                                                    "_auto_video_stream_label_");
   for (VideoConfig& video_config : p->video_configs) {
@@ -93,21 +93,16 @@ void PeerParamsPreprocessor::ValidateParams(const PeerConfigurerImpl& peer) {
 
   {
     RTC_CHECK(p.name);
-    bool inserted = peer_names.insert(p.name.value()).second;
+    bool inserted = peer_names_.insert(p.name.value()).second;
     RTC_CHECK(inserted) << "Duplicate name=" << p.name.value();
   }
-
-  if (p.audio_config) {
-    media_streams_count++;
-  }
-  media_streams_count += p.video_configs.size();
 
   // Validate that all video stream labels are unique and sync groups are
   // valid.
   for (const VideoConfig& video_config : p.video_configs) {
     RTC_CHECK(video_config.stream_label);
     bool inserted =
-        video_labels.insert(video_config.stream_label.value()).second;
+        video_labels_.insert(video_config.stream_label.value()).second;
     RTC_CHECK(inserted) << "Duplicate video_config.stream_label="
                         << video_config.stream_label.value();
 
@@ -124,7 +119,7 @@ void PeerParamsPreprocessor::ValidateParams(const PeerConfigurerImpl& peer) {
     // more than two streams is supported.
     if (video_config.sync_group.has_value()) {
       bool sync_group_inserted =
-          video_sync_groups.insert(video_config.sync_group.value()).second;
+          video_sync_groups_.insert(video_config.sync_group.value()).second;
       RTC_CHECK(sync_group_inserted)
           << "Sync group shouldn't consist of more than two streams (one "
              "video and one audio). Duplicate video_config.sync_group="
@@ -152,14 +147,14 @@ void PeerParamsPreprocessor::ValidateParams(const PeerConfigurerImpl& peer) {
   }
   if (p.audio_config) {
     bool inserted =
-        audio_labels.insert(p.audio_config->stream_label.value()).second;
+        audio_labels_.insert(p.audio_config->stream_label.value()).second;
     RTC_CHECK(inserted) << "Duplicate audio_config.stream_label="
                         << p.audio_config->stream_label.value();
     // TODO(bugs.webrtc.org/4762): remove this check after synchronization of
     // more than two streams is supported.
     if (p.audio_config->sync_group.has_value()) {
       bool sync_group_inserted =
-          audio_sync_groups.insert(p.audio_config->sync_group.value()).second;
+          audio_sync_groups_.insert(p.audio_config->sync_group.value()).second;
       RTC_CHECK(sync_group_inserted)
           << "Sync group shouldn't consist of more than two streams (one "
              "video and one audio). Duplicate audio_config.sync_group="
