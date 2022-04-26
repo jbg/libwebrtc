@@ -851,6 +851,7 @@ if (rtc_include_tests) {
       "../api:simulated_network_api",
       "../api:transport_api",
       "../api/adaptation:resource_adaptation_api",
+      "../api/audio_codecs:audio_codecs_api",
       "../api/crypto:options",
       "../api/metronome/test:fake_metronome",
       "../api/rtc_event_log",

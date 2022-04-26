@@ -319,11 +319,6 @@ class VideoReceiveStream2
   // queue.
   FieldTrialParameter<bool> low_latency_renderer_include_predecode_buffer_;
 
-  // Set by the field trial WebRTC-PreStreamDecoders. The parameter `max`
-  // determines the maximum number of decoders that are created up front before
-  // any video frame has been received.
-  FieldTrialParameter<int> maximum_pre_stream_decoders_;
-
   DecodeSynchronizer* decode_sync_;
 
   // Defined last so they are destroyed before all other members.

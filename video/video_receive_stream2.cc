@@ -81,7 +81,7 @@ constexpr int kMaxWaitForFrameMs = 3000;
 
 // Create a decoder for the preferred codec before the stream starts and any
 // other decoder lazily on demand.
-constexpr int kDefaultMaximumPreStreamDecoders = 1;
+constexpr int kMaximumPreStreamDecoders = 1;
 
 // Concrete instance of RecordableEncodedFrame wrapping needed content
 // from EncodedFrame.
@@ -247,7 +247,6 @@ VideoReceiveStream2::VideoReceiveStream2(
       low_latency_renderer_enabled_("enabled", true),
       low_latency_renderer_include_predecode_buffer_("include_predecode_buffer",
                                                      true),
-      maximum_pre_stream_decoders_("max", kDefaultMaximumPreStreamDecoders),
       decode_sync_(decode_sync),
       decode_queue_(task_queue_factory_->CreateTaskQueue(
           "DecodingQueue",
@@ -289,11 +288,6 @@ VideoReceiveStream2::VideoReceiveStream2(
   ParseFieldTrial({&low_latency_renderer_enabled_,
                    &low_latency_renderer_include_predecode_buffer_},
                   call_->trials().Lookup("WebRTC-LowLatencyRenderer"));
-  ParseFieldTrial(
-      {
-          &maximum_pre_stream_decoders_,
-      },
-      call_->trials().Lookup("WebRTC-PreStreamDecoders"));
 }
 
 VideoReceiveStream2::~VideoReceiveStream2() {
@@ -381,7 +375,7 @@ void VideoReceiveStream2::Start() {
     // Create up to maximum_pre_stream_decoders_ up front, wait the the other
     // decoders until they are requested (i.e., we receive the corresponding
     // payload).
-    if (decoders_count < maximum_pre_stream_decoders_) {
+    if (decoders_count < kMaximumPreStreamDecoders) {
       CreateAndRegisterExternalDecoder(decoder);
       ++decoders_count;
     }
