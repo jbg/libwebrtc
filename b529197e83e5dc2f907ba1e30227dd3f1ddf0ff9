@@ -16,6 +16,24 @@
       "message": "I think it would be better to specify which win version to use.\nThe generic \u0027win\u0027 mixins is only used for the WebRTC pool because there are only very few machines.",
       "revId": "b529197e83e5dc2f907ba1e30227dd3f1ddf0ff9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a49d9dc_c86eaf80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-04-26T09:58:14Z",
+      "side": 1,
+      "message": "Roger, I omitted adding the Win 10 build number in the mixin as it autopopulates that in the dimensions and thus will change. Also to signal that we do not really care about which specific version of win 10 we are using, at least not for these bots.",
+      "parentUuid": "39a7c246_ca74e381",
+      "revId": "b529197e83e5dc2f907ba1e30227dd3f1ddf0ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
