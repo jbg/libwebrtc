@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79e736d9_75ea9e4a",
+        "filename": "test/pc/e2e/media/media_helper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-26T13:12:11Z",
+      "side": 1,
+      "message": "Why const\u0026? Should we just have a \"const ConfigurableParams\" here?",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "36649e0749131c021da00f4112794a0d1f93a94c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69d75207_614a0214",
+        "filename": "test/pc/e2e/peer_configurer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-26T13:12:11Z",
+      "side": 1,
+      "message": "Do we plan to keep these heap allocated or are we going to move them to copyable types in the future?",
+      "range": {
+        "startLine": 285,
+        "startChar": 2,
+        "endLine": 286,
+        "endChar": 59
+      },
+      "revId": "36649e0749131c021da00f4112794a0d1f93a94c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be056c9e_d1d51f91",
+        "filename": "test/pc/e2e/test_peer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-26T13:12:11Z",
+      "side": 1,
+      "message": "Do we need a lock to protect this or are you going to add it later?",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 157,
+        "endChar": 42
+      },
+      "revId": "36649e0749131c021da00f4112794a0d1f93a94c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
