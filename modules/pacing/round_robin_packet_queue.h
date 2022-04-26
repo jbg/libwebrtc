@@ -25,37 +25,34 @@
 #include "api/units/data_size.h"
 #include "api/units/time_delta.h"
 #include "api/units/timestamp.h"
+#include "modules/pacing/pacing_controller.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
 #include "system_wrappers/include/clock.h"
 
 namespace webrtc {
 
-class RoundRobinPacketQueue {
+class RoundRobinPacketQueue : public PacingController::PacketQueue {
  public:
   explicit RoundRobinPacketQueue(Timestamp start_time);
   ~RoundRobinPacketQueue();
 
   void Push(Timestamp enqueue_time,
-            uint64_t enqueue_order,
-            std::unique_ptr<RtpPacketToSend> packet);
-  std::unique_ptr<RtpPacketToSend> Pop();
+            std::unique_ptr<RtpPacketToSend> packet) override;
+  std::unique_ptr<RtpPacketToSend> Pop() override;
 
-  bool Empty() const;
-  size_t SizeInPackets() const;
-  DataSize Size() const;
+  size_t SizeInPackets() const override;
+  DataSize SizeInPayloadBytes() const override;
   // If the next packet, that would be returned by Pop() if called
   // now, is an audio packet this method returns the enqueue time
   // of that packet. If queue is empty or top packet is not audio,
   // returns nullopt.
-  absl::optional<Timestamp> LeadingAudioPacketEnqueueTime() const;
+  absl::optional<Timestamp> LeadingAudioPacketEnqueueTime() const override;
 
-  Timestamp OldestEnqueueTime() const;
-  TimeDelta AverageQueueTime() const;
-  void UpdateQueueTime(Timestamp now);
-  void SetPauseState(bool paused, Timestamp now);
-  void SetIncludeOverhead();
-  void SetTransportOverhead(DataSize overhead_per_packet);
+  Timestamp OldestEnqueueTime() const override;
+  TimeDelta AverageQueueTime() const override;
+  void UpdateQueueTime(Timestamp now) override;
+  void SetPauseState(bool paused, Timestamp now) override;
 
  private:
   struct QueuedPacket {
@@ -146,6 +143,8 @@ class RoundRobinPacketQueue {
   DataSize transport_overhead_per_packet_;
 
   Timestamp time_last_updated_;
+
+  uint64_t enqueue_count_;
 
   bool paused_;
   size_t size_packets_;

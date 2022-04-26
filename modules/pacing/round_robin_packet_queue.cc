@@ -134,6 +134,7 @@ RoundRobinPacketQueue::Stream::~Stream() = default;
 RoundRobinPacketQueue::RoundRobinPacketQueue(Timestamp start_time)
     : transport_overhead_per_packet_(DataSize::Zero()),
       time_last_updated_(start_time),
+      enqueue_count_(0),
       paused_(false),
       size_packets_(0),
       size_(DataSize::Zero()),
@@ -144,20 +145,19 @@ RoundRobinPacketQueue::RoundRobinPacketQueue(Timestamp start_time)
 
 RoundRobinPacketQueue::~RoundRobinPacketQueue() {
   // Make sure to release any packets owned by raw pointer in QueuedPacket.
-  while (!Empty()) {
+  while (size_packets_ > 0) {
     Pop();
   }
 }
 
 void RoundRobinPacketQueue::Push(Timestamp enqueue_time,
-                                 uint64_t enqueue_order,
                                  std::unique_ptr<RtpPacketToSend> packet) {
   RTC_DCHECK(packet->packet_type().has_value());
   int priority = GetPriorityForType(*packet->packet_type());
   if (size_packets_ == 0) {
     // Single packet fast-path.
     single_packet_queue_.emplace(
-        QueuedPacket(priority, enqueue_time, enqueue_order,
+        QueuedPacket(priority, enqueue_time, enqueue_count_++,
                      enqueue_times_.end(), std::move(packet)));
     UpdateQueueTime(enqueue_time);
     single_packet_queue_->SubtractPauseTime(pause_time_sum_);
@@ -165,7 +165,7 @@ void RoundRobinPacketQueue::Push(Timestamp enqueue_time,
     size_ += PacketSize(*single_packet_queue_);
   } else {
     MaybePromoteSinglePacketToNormalQueue();
-    Push(QueuedPacket(priority, enqueue_time, enqueue_order,
+    Push(QueuedPacket(priority, enqueue_time, enqueue_count_++,
                       enqueue_times_.insert(enqueue_time), std::move(packet)));
   }
 }
@@ -182,7 +182,7 @@ std::unique_ptr<RtpPacketToSend> RoundRobinPacketQueue::Pop() {
     return rtp_packet;
   }
 
-  RTC_DCHECK(!Empty());
+  RTC_DCHECK_GT(size_packets_, 0u);
   Stream* stream = GetHighestPriorityStream();
   const QueuedPacket& queued_packet = stream->packet_queue.top();
 
@@ -231,20 +231,11 @@ std::unique_ptr<RtpPacketToSend> RoundRobinPacketQueue::Pop() {
   return rtp_packet;
 }
 
-bool RoundRobinPacketQueue::Empty() const {
-  if (size_packets_ == 0) {
-    RTC_DCHECK(!single_packet_queue_.has_value() && stream_priorities_.empty());
-    return true;
-  }
-  RTC_DCHECK(single_packet_queue_.has_value() || !stream_priorities_.empty());
-  return false;
-}
-
 size_t RoundRobinPacketQueue::SizeInPackets() const {
   return size_packets_;
 }
 
-DataSize RoundRobinPacketQueue::Size() const {
+DataSize RoundRobinPacketQueue::SizeInPayloadBytes() const {
   return size_;
 }
 
@@ -274,7 +265,7 @@ Timestamp RoundRobinPacketQueue::OldestEnqueueTime() const {
     return single_packet_queue_->EnqueueTime();
   }
 
-  if (Empty())
+  if (size_packets_ == 0)
     return Timestamp::MinusInfinity();
   RTC_CHECK(!enqueue_times_.empty());
   return *enqueue_times_.begin();
@@ -303,34 +294,8 @@ void RoundRobinPacketQueue::SetPauseState(bool paused, Timestamp now) {
   paused_ = paused;
 }
 
-void RoundRobinPacketQueue::SetIncludeOverhead() {
-  MaybePromoteSinglePacketToNormalQueue();
-  include_overhead_ = true;
-  // We need to update the size to reflect overhead for existing packets.
-  for (const auto& stream : streams_) {
-    for (const QueuedPacket& packet : stream.second.packet_queue) {
-      size_ += DataSize::Bytes(packet.RtpPacket()->headers_size()) +
-               transport_overhead_per_packet_;
-    }
-  }
-}
-
-void RoundRobinPacketQueue::SetTransportOverhead(DataSize overhead_per_packet) {
-  MaybePromoteSinglePacketToNormalQueue();
-  if (include_overhead_) {
-    DataSize previous_overhead = transport_overhead_per_packet_;
-    // We need to update the size to reflect overhead for existing packets.
-    for (const auto& stream : streams_) {
-      int packets = stream.second.packet_queue.size();
-      size_ -= packets * previous_overhead;
-      size_ += packets * overhead_per_packet;
-    }
-  }
-  transport_overhead_per_packet_ = overhead_per_packet;
-}
-
 TimeDelta RoundRobinPacketQueue::AverageQueueTime() const {
-  if (Empty())
+  if (size_packets_ == 0)
     return TimeDelta::Zero();
   return queue_time_sum_ / size_packets_;
 }
