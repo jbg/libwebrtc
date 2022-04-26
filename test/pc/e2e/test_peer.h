@@ -35,9 +35,6 @@ class TestPeer final {
  public:
   const Params& params() const { return params_; }
 
-  // TODO(titovartem): delete when downstreams will migrate to the new method.
-  const Params& params2() const { return params_; }
-
   PeerConfigurerImpl::VideoSource ReleaseVideoSource(size_t i) {
     RTC_CHECK(wrapper_) << "TestPeer is already closed";
     return std::move(video_sources_[i]);
