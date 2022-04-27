@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a67d92d_2703a5b9",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-27T07:47:54Z",
+      "side": 1,
+      "message": "Yeah, but I\u0027m not sure that it will be easy to change this type, because it was part of public API.",
+      "parentUuid": "66b29186_5693f3ec",
+      "range": {
+        "startLine": 236,
+        "startChar": 4,
+        "endLine": 236,
+        "endChar": 10
+      },
+      "revId": "9590cc4018204b8f9bfa7aaafa6265d6ec91b9e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f7a425d_f31fa0dd",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-27T07:26:25Z",
       "side": 1,
       "message": "Shouldn\u0027t this be the other way around? (start \"false\" and then change to \"true\")",
+      "range": {
+        "startLine": 65,
+        "startChar": 6,
+        "endLine": 65,
+        "endChar": 29
+      },
+      "revId": "9590cc4018204b8f9bfa7aaafa6265d6ec91b9e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ff684fe_f7526fd3",
+        "filename": "test/pc/e2e/test_peer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-04-27T07:47:54Z",
+      "side": 1,
+      "message": "Good point, thank you",
+      "parentUuid": "4f7a425d_f31fa0dd",
       "range": {
         "startLine": 65,
         "startChar": 6,
