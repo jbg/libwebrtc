@@ -77,10 +77,7 @@ class WgcCapturerWinTest : public ::testing::TestWithParam<CaptureType>,
         std::make_unique<ScopedCOMInitializer>(ScopedCOMInitializer::kMTA);
     EXPECT_TRUE(com_initializer_->Succeeded());
 
-    // Most tests (except `CaptureAllMonitors`) avoid the bug in screen capture,
-    // so we check support for window capture so these tests can run on more
-    // systems.
-    if (!IsWgcSupported(CaptureType::kWindow)) {
+    if (!IsWgcSupported(GetParam())) {
       RTC_LOG(LS_INFO)
           << "Skipping WgcCapturerWinTests on unsupported platforms.";
       GTEST_SKIP();
@@ -335,33 +332,7 @@ INSTANTIATE_TEST_SUITE_P(SourceAgnostic,
                          ::testing::Values(CaptureType::kWindow,
                                            CaptureType::kScreen));
 
-// Monitor specific tests.
-TEST_F(WgcCapturerWinTest, FocusOnMonitor) {
-  SetUpForScreenCapture();
-  EXPECT_TRUE(capturer_->SelectSource(0));
-
-  // You can't set focus on a monitor.
-  EXPECT_FALSE(capturer_->FocusOnSelectedSource());
-}
-
-TEST_F(WgcCapturerWinTest, CaptureAllMonitors) {
-  // Trying to capture all monitors causes a crash on Windows versions <20H1.
-  if (!IsWgcSupported(CaptureType::kScreen)) {
-    RTC_LOG(LS_INFO)
-        << "Skipping CaptureAllMonitors test on unsupported platforms.";
-    GTEST_SKIP();
-  }
-
-  SetUpForScreenCapture();
-  EXPECT_TRUE(capturer_->SelectSource(kFullDesktopScreenId));
-
-  capturer_->Start(this);
-  DoCapture();
-  EXPECT_GT(frame_->size().width(), 0);
-  EXPECT_GT(frame_->size().height(), 0);
-}
-
-TEST_F(WgcCapturerWinTest, NoMonitors) {
+TEST(WgcCapturerNoMonitorTest, NoMonitors) {
   if (HasActiveDisplay()) {
     RTC_LOG(LS_INFO) << "Skip WgcCapturerWinTest designed specifically for "
                         "systems with no monitors";
@@ -373,8 +344,55 @@ TEST_F(WgcCapturerWinTest, NoMonitors) {
   EXPECT_FALSE(IsWgcSupported(CaptureType::kScreen));
 }
 
-// Window specific tests.
-TEST_F(WgcCapturerWinTest, FocusOnWindow) {
+class WgcCapturerMonitorTest : public WgcCapturerWinTest {
+ public:
+  void SetUp() {
+    com_initializer_ =
+        std::make_unique<ScopedCOMInitializer>(ScopedCOMInitializer::kMTA);
+    EXPECT_TRUE(com_initializer_->Succeeded());
+
+    if (!IsWgcSupported(CaptureType::kScreen)) {
+      RTC_LOG(LS_INFO)
+          << "Skipping WgcCapturerWinTests on unsupported platforms.";
+      GTEST_SKIP();
+    }
+  }
+};
+
+TEST_F(WgcCapturerMonitorTest, FocusOnMonitor) {
+  SetUpForScreenCapture();
+  EXPECT_TRUE(capturer_->SelectSource(0));
+
+  // You can't set focus on a monitor.
+  EXPECT_FALSE(capturer_->FocusOnSelectedSource());
+}
+
+TEST_F(WgcCapturerMonitorTest, CaptureAllMonitors) {
+  SetUpForScreenCapture();
+  EXPECT_TRUE(capturer_->SelectSource(kFullDesktopScreenId));
+
+  capturer_->Start(this);
+  DoCapture();
+  EXPECT_GT(frame_->size().width(), 0);
+  EXPECT_GT(frame_->size().height(), 0);
+}
+
+class WgcCapturerWindowTest : public WgcCapturerWinTest {
+ public:
+  void SetUp() {
+    com_initializer_ =
+        std::make_unique<ScopedCOMInitializer>(ScopedCOMInitializer::kMTA);
+    EXPECT_TRUE(com_initializer_->Succeeded());
+
+    if (!IsWgcSupported(CaptureType::kWindow)) {
+      RTC_LOG(LS_INFO)
+          << "Skipping WgcCapturerWinTests on unsupported platforms.";
+      GTEST_SKIP();
+    }
+  }
+};
+
+TEST_F(WgcCapturerWindowTest, FocusOnWindow) {
   capturer_ = WgcCapturerWin::CreateRawWindowCapturer(
       DesktopCaptureOptions::CreateDefault());
   window_info_ = CreateTestWindow(kWindowTitle);
@@ -390,7 +408,7 @@ TEST_F(WgcCapturerWinTest, FocusOnWindow) {
   DestroyTestWindow(window_info_);
 }
 
-TEST_F(WgcCapturerWinTest, SelectMinimizedWindow) {
+TEST_F(WgcCapturerWindowTest, SelectMinimizedWindow) {
   SetUpForWindowCapture();
   MinimizeTestWindow(reinterpret_cast<HWND>(source_id_));
   EXPECT_FALSE(capturer_->SelectSource(source_id_));
@@ -399,7 +417,7 @@ TEST_F(WgcCapturerWinTest, SelectMinimizedWindow) {
   EXPECT_TRUE(capturer_->SelectSource(source_id_));
 }
 
-TEST_F(WgcCapturerWinTest, SelectClosedWindow) {
+TEST_F(WgcCapturerWindowTest, SelectClosedWindow) {
   SetUpForWindowCapture();
   EXPECT_TRUE(capturer_->SelectSource(source_id_));
 
@@ -407,7 +425,7 @@ TEST_F(WgcCapturerWinTest, SelectClosedWindow) {
   EXPECT_FALSE(capturer_->SelectSource(source_id_));
 }
 
-TEST_F(WgcCapturerWinTest, UnsupportedWindowStyle) {
+TEST_F(WgcCapturerWindowTest, UnsupportedWindowStyle) {
   // Create a window with the WS_EX_TOOLWINDOW style, which WGC does not
   // support.
   window_info_ = CreateTestWindow(kWindowTitle, kMediumWindowWidth,
@@ -426,7 +444,7 @@ TEST_F(WgcCapturerWinTest, UnsupportedWindowStyle) {
   DestroyTestWindow(window_info_);
 }
 
-TEST_F(WgcCapturerWinTest, IncreaseWindowSizeMidCapture) {
+TEST_F(WgcCapturerWindowTest, IncreaseWindowSizeMidCapture) {
   SetUpForWindowCapture(kSmallWindowWidth, kSmallWindowHeight);
   EXPECT_TRUE(capturer_->SelectSource(source_id_));
 
@@ -447,7 +465,7 @@ TEST_F(WgcCapturerWinTest, IncreaseWindowSizeMidCapture) {
   ValidateFrame(kLargeWindowWidth, kMediumWindowHeight);
 }
 
-TEST_F(WgcCapturerWinTest, ReduceWindowSizeMidCapture) {
+TEST_F(WgcCapturerWindowTest, ReduceWindowSizeMidCapture) {
   SetUpForWindowCapture(kLargeWindowWidth, kLargeWindowHeight);
   EXPECT_TRUE(capturer_->SelectSource(source_id_));
 
@@ -466,7 +484,7 @@ TEST_F(WgcCapturerWinTest, ReduceWindowSizeMidCapture) {
   ValidateFrame(kSmallWindowWidth, kMediumWindowHeight);
 }
 
-TEST_F(WgcCapturerWinTest, MinimizeWindowMidCapture) {
+TEST_F(WgcCapturerWindowTest, MinimizeWindowMidCapture) {
   SetUpForWindowCapture();
   EXPECT_TRUE(capturer_->SelectSource(source_id_));
 
@@ -487,7 +505,7 @@ TEST_F(WgcCapturerWinTest, MinimizeWindowMidCapture) {
   // a good test.
 }
 
-TEST_F(WgcCapturerWinTest, CloseWindowMidCapture) {
+TEST_F(WgcCapturerWindowTest, CloseWindowMidCapture) {
   SetUpForWindowCapture();
   EXPECT_TRUE(capturer_->SelectSource(source_id_));
 
