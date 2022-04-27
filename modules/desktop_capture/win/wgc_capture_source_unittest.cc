@@ -19,10 +19,10 @@
 #include "modules/desktop_capture/desktop_geometry.h"
 #include "modules/desktop_capture/win/screen_capture_utils.h"
 #include "modules/desktop_capture/win/test_support/test_window.h"
+#include "modules/desktop_capture/win/wgc_capturer_win.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/win/scoped_com_initializer.h"
-#include "rtc_base/win/windows_version.h"
 #include "test/gtest.h"
 
 namespace webrtc {
@@ -42,12 +42,6 @@ enum SourceType { kWindowSource = 0, kScreenSource = 1 };
 class WgcCaptureSourceTest : public ::testing::TestWithParam<SourceType> {
  public:
   void SetUp() override {
-    if (rtc::rtc_win::GetVersion() < rtc::rtc_win::Version::VERSION_WIN10_RS5) {
-      RTC_LOG(LS_INFO)
-          << "Skipping WgcCaptureSourceTests on Windows versions < RS5.";
-      GTEST_SKIP();
-    }
-
     com_initializer_ =
         std::make_unique<ScopedCOMInitializer>(ScopedCOMInitializer::kMTA);
     ASSERT_TRUE(com_initializer_->Succeeded());
@@ -60,6 +54,12 @@ class WgcCaptureSourceTest : public ::testing::TestWithParam<SourceType> {
   }
 
   void SetUpForWindowSource() {
+    if (!IsWgcSupported(CaptureType::kWindow)) {
+      RTC_LOG(LS_INFO)
+          << "Skipping WgcCapturerWinTests on unsupported platforms.";
+      GTEST_SKIP();
+    }
+
     window_info_ = CreateTestWindow(kWindowTitle);
     window_open_ = true;
     source_id_ = reinterpret_cast<DesktopCapturer::SourceId>(window_info_.hwnd);
@@ -67,6 +67,12 @@ class WgcCaptureSourceTest : public ::testing::TestWithParam<SourceType> {
   }
 
   void SetUpForScreenSource() {
+    if (!IsWgcSupported(CaptureType::kScreen)) {
+      RTC_LOG(LS_INFO)
+          << "Skipping WgcCapturerWinTests on unsupported platforms.";
+      GTEST_SKIP();
+    }
+
     source_id_ = kFullDesktopScreenId;
     source_factory_ = std::make_unique<WgcScreenSourceFactory>();
   }
