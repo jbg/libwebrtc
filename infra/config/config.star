@@ -661,7 +661,7 @@ mac_builder, mac_try_job = normal_builder_factory(
 )
 
 ios_builder, ios_try_job = normal_builder_factory(
-    dimensions = {"os": "Mac-10.15"},
+    dimensions = {"os": "Mac-11"},
     properties = {"xcode_build_version": WEBRTC_IOS_XCODE_VERSION},
     caches = [swarming.cache(
         name = "xcode_ios_" + WEBRTC_IOS_XCODE_VERSION,
@@ -848,6 +848,7 @@ lkgr_config = {
                 "WebRTC Chromium FYI Win Builder (dbg)",
                 "WebRTC Chromium FYI Win Builder",
                 "WebRTC Chromium FYI Win10 Tester",
+                "WebRTC Chromium FYI Win7 Tester",
                 "WebRTC Chromium FYI ios-device",
                 "WebRTC Chromium FYI ios-simulator",
             ],
