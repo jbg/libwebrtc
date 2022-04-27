@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b29186_5693f3ec",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-27T07:26:25Z",
+      "side": 1,
+      "message": "I wonder if we should switch to \"int\" here, see https://google.github.io/styleguide/cppguide.html#Integer_Types:\n\n```\nYou should not use the unsigned integer types such as uint32_t, unless there is a valid reason such as representing a bit pattern rather than a number, or you need defined overflow modulo 2^N. In particular, do not use unsigned types to say a number will never be negative. Instead, use assertions for this.\n```",
+      "range": {
+        "startLine": 236,
+        "startChar": 4,
+        "endLine": 236,
+        "endChar": 10
+      },
+      "revId": "9590cc4018204b8f9bfa7aaafa6265d6ec91b9e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f7a425d_f31fa0dd",
+        "filename": "test/pc/e2e/test_peer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-27T07:26:25Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be the other way around? (start \"false\" and then change to \"true\")",
+      "range": {
+        "startLine": 65,
+        "startChar": 6,
+        "endLine": 65,
+        "endChar": 29
+      },
+      "revId": "9590cc4018204b8f9bfa7aaafa6265d6ec91b9e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
