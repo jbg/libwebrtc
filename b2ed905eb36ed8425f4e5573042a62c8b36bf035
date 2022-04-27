@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f082e406_32b475bb",
+        "filename": "modules/pacing/round_robin_packet_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-04-27T09:26:53Z",
+      "side": 0,
+      "message": "why remove this function. \nI think internally it reads nicer than `size_packets_ \u003d\u003d 0`",
+      "revId": "b2ed905eb36ed8425f4e5573042a62c8b36bf035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "456f15d5_acf564a9",
+        "filename": "modules/pacing/round_robin_packet_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-04-27T09:26:53Z",
+      "side": 0,
+      "message": "this function is no longer called on overhead change, is it intended?",
+      "range": {
+        "startLine": 307,
+        "startChar": 2,
+        "endLine": 307,
+        "endChar": 39
+      },
+      "revId": "b2ed905eb36ed8425f4e5573042a62c8b36bf035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

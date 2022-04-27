@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f619757d_d3daccfc",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-04-27T09:26:53Z",
+      "side": 1,
+      "message": "looking how this interface is used, I think it would be more readable to keep the Empty function, even if it would always call SizeInPackets:\n\nbool Empty() const { return SizeInPackets() \u003d\u003d 0; }\nvirtual size_t SizeInPackets() const \u003d 0;",
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "164d614c_7c8d4417",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-04-27T09:26:53Z",
+      "side": 1,
+      "message": "http://go/c-readability-advice#empty-lines-for-readability\n\n“Consider having empty lines between the last non-comment line and the first comment line for readability.”",
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e97afbaf_1c529d9b",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-04-27T09:26:53Z",
+      "side": 1,
+      "message": "can it make sense to return Timestamap::PlusInfinity() or Timestamp::MinusInfinity() instead?\n(the return type would be a bit simpler then)",
+      "range": {
+        "startLine": 78,
+        "startChar": 23,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e28a0448_29dc9ede",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-04-27T09:26:53Z",
+      "side": 1,
+      "message": "what should this function return when the queue is empty?\nit it allowed to call this function when the queue is empty?",
+      "range": {
+        "startLine": 82,
+        "startChar": 27,
+        "endLine": 82,
+        "endChar": 41
+      },
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d1e425_95884c91",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-04-27T09:26:53Z",
+      "side": 1,
+      "message": "Looking at the comment function name I do not understand what this function suppose to do or when would it be called.\n\nCan you please clarify with better name (or more detailed comment)",
+      "range": {
+        "startLine": 88,
+        "startChar": 7,
+        "endLine": 88,
+        "endChar": 38
+      },
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f943a664_90695fb1",
+        "filename": "modules/pacing/round_robin_packet_queue.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-04-27T09:26:53Z",
+      "side": 1,
+      "message": "why unsigned? prefer int64_t [if plain int might not be enough]\n\nhttps://google.github.io/styleguide/cppguide.html#Integer_Types\n\n“You should not use the unsigned integer types such as uint32_t, unless there is a valid reason such as representing a bit pattern rather than a number, or you need defined overflow modulo 2^N.”",
+      "range": {
+        "startLine": 147,
+        "startChar": 2,
+        "endLine": 147,
+        "endChar": 10
+      },
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
