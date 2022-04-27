@@ -39,6 +39,30 @@
       },
       "revId": "b2ed905eb36ed8425f4e5573042a62c8b36bf035",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9900388_6a27e9f2",
+        "filename": "modules/pacing/round_robin_packet_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-27T10:39:04Z",
+      "side": 0,
+      "message": "Forgot to respond to this. Yes, that\u0027s OK. That was really only there to avoid yet another code path for recalculating the overhead when the single-packet queue was active.\n\nThe whole overhead calculation has been removed from the queue, so we don\u0027t need to  care about that and all other operations will work regardless if single-packet or normal queue mode (even with a single packet) is running.",
+      "parentUuid": "456f15d5_acf564a9",
+      "range": {
+        "startLine": 307,
+        "startChar": 2,
+        "endLine": 307,
+        "endChar": 39
+      },
+      "revId": "b2ed905eb36ed8425f4e5573042a62c8b36bf035",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
