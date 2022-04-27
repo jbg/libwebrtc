@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da0d0993_db3b9898",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16681
+      },
+      "writtenOn": "2022-04-27T15:10:30Z",
+      "side": 1,
+      "message": "I relaxed the resolution alignment requirement from 16 to 2.",
+      "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
