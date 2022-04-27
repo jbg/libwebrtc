@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "498431ea_a49f3323",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-04-27T23:35:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aea857d8_8d6a2151",
+      "range": {
+        "startLine": 251,
+        "startChar": 4,
+        "endLine": 255,
+        "endChar": 36
+      },
+      "revId": "6bf8e3e7cca75f767d9dc7d048d4a14edfd87e3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7851bd79_83c98a0b",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-25T22:00:10Z",
       "side": 1,
       "message": "Let\u0027s do this assertion in PeerParamsPreprocessor::ValidateParams. The idea of that method that it should guarantee that parameters are correct if it didn\u0027t fail.",
+      "range": {
+        "startLine": 494,
+        "startChar": 6,
+        "endLine": 494,
+        "endChar": 59
+      },
+      "revId": "6bf8e3e7cca75f767d9dc7d048d4a14edfd87e3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "529eba09_8bc83eaa",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-04-27T23:35:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7851bd79_83c98a0b",
       "range": {
         "startLine": 494,
         "startChar": 6,
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "What do you think of actually removing the values in video_config and have users create an encoding parameter to set those?\nIt might actually make more sense.",
       "parentUuid": "1dbebdbf_4b5ff53b",
+      "range": {
+        "startLine": 500,
+        "startChar": 6,
+        "endLine": 500,
+        "endChar": 71
+      },
+      "revId": "6bf8e3e7cca75f767d9dc7d048d4a14edfd87e3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f32285a_a42d5b15",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-04-27T23:35:39Z",
+      "side": 1,
+      "message": "Updated our usage of min/max_encode_bitrate_bps to use an RtpEncodingParameters entry instead.\nWill remove those fields after migrating internal usage.",
+      "parentUuid": "e49e5af9_32e10ba8",
       "range": {
         "startLine": 500,
         "startChar": 6,
