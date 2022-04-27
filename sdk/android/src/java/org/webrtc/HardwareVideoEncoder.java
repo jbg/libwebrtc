@@ -50,8 +50,8 @@ class HardwareVideoEncoder implements VideoEncoder {
   private static final int MEDIA_CODEC_RELEASE_TIMEOUT_MS = 5000;
   private static final int DEQUEUE_OUTPUT_BUFFER_TIMEOUT_US = 100000;
 
-  // Size of the input frames should be multiple of 16 for the H/W encoder.
-  private static final int REQUIRED_RESOLUTION_ALIGNMENT = 16;
+  // Size of the input frames should be multiple of 2 for the H/W encoder.
+  private static final int REQUIRED_RESOLUTION_ALIGNMENT = 2;
 
   /**
    * Keeps track of the number of output buffers that have been passed down the pipeline and not yet
@@ -213,7 +213,7 @@ class HardwareVideoEncoder implements VideoEncoder {
 
     if (settings.width % REQUIRED_RESOLUTION_ALIGNMENT != 0
         || settings.height % REQUIRED_RESOLUTION_ALIGNMENT != 0) {
-      Logging.e(TAG, "MediaCodec is only tested with resolutions that are 16x16 aligned.");
+      Logging.e(TAG, "Illegal resolution.");
       return VideoCodecStatus.ERR_SIZE;
     }
     this.width = settings.width;
@@ -513,8 +513,7 @@ class HardwareVideoEncoder implements VideoEncoder {
 
   @Override
   public EncoderInfo getEncoderInfo() {
-    // Since our MediaCodec is guaranteed to encode 16-pixel-aligned frames only, we set alignment
-    // value to be 16. Additionally, this encoder produces a single stream. So it should not require
+    // This encoder produces a single stream. So it should not require
     // alignment for all layers.
     return new EncoderInfo(
         /* requestedResolutionAlignment= */ REQUIRED_RESOLUTION_ALIGNMENT,
@@ -530,7 +529,7 @@ class HardwareVideoEncoder implements VideoEncoder {
 
     if (newWidth % REQUIRED_RESOLUTION_ALIGNMENT != 0
         || newHeight % REQUIRED_RESOLUTION_ALIGNMENT != 0) {
-      Logging.e(TAG, "MediaCodec is only tested with resolutions that are 16x16 aligned.");
+      Logging.e(TAG, "Illegal resolution.");
       return VideoCodecStatus.ERR_SIZE;
     }
     width = newWidth;
