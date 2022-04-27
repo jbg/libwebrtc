@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f7004dca_c46255e2",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-27T10:35:02Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f619757d_d3daccfc",
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "164d614c_7c8d4417",
         "filename": "modules/pacing/pacing_controller.h",
         "patchSetId": 1
@@ -37,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "545e2f35_9f77704c",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-27T10:35:02Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "164d614c_7c8d4417",
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e97afbaf_1c529d9b",
         "filename": "modules/pacing/pacing_controller.h",
         "patchSetId": 1
@@ -48,6 +84,30 @@
       "writtenOn": "2022-04-27T09:26:53Z",
       "side": 1,
       "message": "can it make sense to return Timestamap::PlusInfinity() or Timestamp::MinusInfinity() instead?\n(the return type would be a bit simpler then)",
+      "range": {
+        "startLine": 78,
+        "startChar": 23,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddf2b3dc_d41d8584",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-27T10:35:02Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "e97afbaf_1c529d9b",
       "range": {
         "startLine": 78,
         "startChar": 23,
@@ -81,6 +141,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7f881e6_5b42b9ef",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-27T10:35:02Z",
+      "side": 1,
+      "message": "Updated comment.",
+      "parentUuid": "e28a0448_29dc9ede",
+      "range": {
+        "startLine": 82,
+        "startChar": 27,
+        "endLine": 82,
+        "endChar": 41
+      },
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2d1e425_95884c91",
@@ -104,6 +188,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e9de14c_7890b713",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-27T10:35:02Z",
+      "side": 1,
+      "message": "Updated the comment.",
+      "parentUuid": "d2d1e425_95884c91",
+      "range": {
+        "startLine": 88,
+        "startChar": 7,
+        "endLine": 88,
+        "endChar": 38
+      },
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f943a664_90695fb1",
@@ -117,6 +225,30 @@
       "writtenOn": "2022-04-27T09:26:53Z",
       "side": 1,
       "message": "why unsigned? prefer int64_t [if plain int might not be enough]\n\nhttps://google.github.io/styleguide/cppguide.html#Integer_Types\n\n“You should not use the unsigned integer types such as uint32_t, unless there is a valid reason such as representing a bit pattern rather than a number, or you need defined overflow modulo 2^N.”",
+      "range": {
+        "startLine": 147,
+        "startChar": 2,
+        "endLine": 147,
+        "endChar": 10
+      },
+      "revId": "cdad5a19a9d992c01cf37adb9fb00f5bff1ea30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7039300b_6a0f7391",
+        "filename": "modules/pacing/round_robin_packet_queue.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-04-27T10:35:02Z",
+      "side": 1,
+      "message": "Done. Updated other usage in this class too.",
+      "parentUuid": "f943a664_90695fb1",
       "range": {
         "startLine": 147,
         "startChar": 2,
