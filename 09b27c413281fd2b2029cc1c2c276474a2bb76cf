@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "457a7585_94648bae",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-28T13:52:08Z",
+      "side": 1,
+      "message": "Can this ever happen? Isn\u0027t `video_config.encoding_params.size()` supposed to be equal to `video_config.simulcast_config-\u003esimulcast_streams_count`?",
+      "range": {
+        "startLine": 489,
+        "startChar": 10,
+        "endLine": 489,
+        "endChar": 54
+      },
+      "revId": "09b27c413281fd2b2029cc1c2c276474a2bb76cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f9356d_e036e44c",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-28T13:52:08Z",
+      "side": 1,
+      "message": "WDYT about:\n\n```\nif (!video_config.encoding_params.empty()) {\n  RTC_CHECK_EQ(video_config.encoding_params.size(), 1);\n  enc_params \u003d video_config.encoding_params[0];\n}\n```\n\nThe `video_config.encoding_params.size() \u003d\u003d 1` is a bit strange, if the are more than 1 is a violation of the invariant, let\u0027s crash and ask for a fix earlier.",
+      "range": {
+        "startLine": 501,
+        "startChar": 6,
+        "endLine": 503,
+        "endChar": 7
+      },
+      "revId": "09b27c413281fd2b2029cc1c2c276474a2bb76cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
