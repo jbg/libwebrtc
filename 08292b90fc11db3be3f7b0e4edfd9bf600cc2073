@@ -68,6 +68,24 @@
       "parentUuid": "7cdfeac2_9396b024",
       "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10953b86_c3dcbf48",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-04-28T06:05:11Z",
+      "side": 1,
+      "message": "\u003e After researching, I found several fields as follows and test codes using field trial.\n\u003e \n\u003e - WebRTC-GetEncoderInfoOverride/requested_resolution_alignment:3/\n\u003e - WebRTC-VP8-GetEncoderInfoOverride/requested_resolution_alignment:2/\n\u003e \n\u003e I tested it with the following Kotlin code to override requested_resolution_alignment but it didn\u0027t work.\n\n\nThe field trials you mentioned aren\u0027t for this, and you need to make another one to implement what you want.\n\n\u003e Please tell me if my understanding is correct:\n\u003e \n\u003e - Need to define a new field to override requested_resolution_alignment of Android\u0027s HardwareVideoEncoder\n\u003e - If the field specified, the default value (currently 16) should be overridden with the specified value\n\nIt seems like your description is a correct way to implement it.\n\n\u003e Additionally, if there are any documents I should read to lean field trial, please let me aknow.\n\u003e For example, is there a comprehensive list of all field trials?\n\nThere isn\u0027t a complete list of all field trials, but you\u0027ll find lots of field trials from the WebRTC codebase.\nhttps://source.chromium.org/search?q\u003dfield_%3Ftrial%20f:webrtc%20(lang:c%2B%2B%20OR%20lang:java)\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nFor example, \"WebRTC-Audio-MinimizeResamplingOnMobile\" is used as a boolean value in media/engine/webrtc_voice_engine.cc.",
+      "parentUuid": "f1e56394_586a5b38",
+      "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
