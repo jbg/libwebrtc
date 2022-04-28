@@ -50,6 +50,24 @@
       "message": "In my comment (https://bugs.webrtc.org/13973#c5), I meant that you could add alternative behavior (for example, pixel alignment requirement 2 or using MediaCodecInfo.VideoCapabilities). However, these changes should be behind the field trial, so other users of WebRTC Android don\u0027t affect. (i.e., Using with pixel alignment requirement 16)",
       "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1e56394_586a5b38",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 16681
+      },
+      "writtenOn": "2022-04-28T05:21:06Z",
+      "side": 1,
+      "message": "Sorry for misunderstanding.\n\nAfter researching, I found several fields as follows and test codes using field trial.\n\n- WebRTC-GetEncoderInfoOverride/requested_resolution_alignment:3/\n- WebRTC-VP8-GetEncoderInfoOverride/requested_resolution_alignment:2/\n\nI tested it with the following Kotlin code to override requested_resolution_alignment but it didn\u0027t work.\n\n```\n                val options \u003d PeerConnectionFactory.InitializationOptions\n                    .builder(context)\n                    .setEnableInternalTracer(false)\n                    .setFieldTrials(\"WebRTC-GetEncoderInfoOverride/requested_resolution_alignment:9/\")\n                    .createInitializationOptions()\n                PeerConnectionFactory.initialize(options)\n```\n\nPlease tell me if my understanding is correct:\n\n- Need to define a new field to override requested_resolution_alignment of Android\u0027s HardwareVideoEncoder\n- If the field specified, the default value (currently 16) should be overridden with the specified value\n\nAdditionally, if there are any documents I should read to lean field trial, please let me aknow.\nFor example, is there a comprehensive list of all field trials?",
+      "parentUuid": "7cdfeac2_9396b024",
+      "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
