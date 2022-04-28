@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a2ed406_b0097fb0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-28T11:19:18Z",
+      "side": 1,
+      "message": "add? .. and add it to TCPConnetion, which uses it.",
+      "revId": "2215e6d220795ccd0fece32ba1f2a6342dc771b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
