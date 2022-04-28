@@ -120,6 +120,7 @@ HRESULT WgcCaptureSession::StartCapture() {
   EventRegistrationToken item_closed_token;
   HRESULT hr = item_->add_Closed(closed_handler.Get(), &item_closed_token);
   if (FAILED(hr)) {
+    RTC_LOG(LS_ERROR) << "Adding closed handler failed.";
     RecordStartCaptureResult(StartCaptureResult::kAddClosedFailed);
     return hr;
   }
@@ -127,17 +128,20 @@ HRESULT WgcCaptureSession::StartCapture() {
   ComPtr<IDXGIDevice> dxgi_device;
   hr = d3d11_device_->QueryInterface(IID_PPV_ARGS(&dxgi_device));
   if (FAILED(hr)) {
+    RTC_LOG(LS_ERROR) << "DXGI device cast failed: " << hr;
     RecordStartCaptureResult(StartCaptureResult::kDxgiDeviceCastFailed);
     return hr;
   }
 
   if (!ResolveCoreWinRTDirect3DDelayload()) {
+    RTC_LOG(LS_ERROR) << "D3D delay load failed: " << hr;
     RecordStartCaptureResult(StartCaptureResult::kD3dDelayLoadFailed);
     return E_FAIL;
   }
 
   hr = CreateDirect3DDeviceFromDXGIDevice(dxgi_device.Get(), &direct3d_device_);
   if (FAILED(hr)) {
+    RTC_LOG(LS_ERROR) << "D3D device creation failed: " << hr;
     RecordStartCaptureResult(StartCaptureResult::kD3dDeviceCreationFailed);
     return hr;
   }
@@ -148,6 +152,7 @@ HRESULT WgcCaptureSession::StartCapture() {
       RuntimeClass_Windows_Graphics_Capture_Direct3D11CaptureFramePool>(
       &frame_pool_statics);
   if (FAILED(hr)) {
+    RTC_LOG(LS_ERROR) << "FramePoolStatics creation failed: " << hr;
     RecordStartCaptureResult(StartCaptureResult::kFramePoolActivationFailed);
     return hr;
   }
@@ -158,6 +163,7 @@ HRESULT WgcCaptureSession::StartCapture() {
   ComPtr<WGC::IDirect3D11CaptureFramePoolStatics2> frame_pool_statics2;
   hr = frame_pool_statics->QueryInterface(IID_PPV_ARGS(&frame_pool_statics2));
   if (FAILED(hr)) {
+    RTC_LOG(LS_ERROR) << "Cast to FramePoolStatics2 failed: " << hr;
     RecordStartCaptureResult(StartCaptureResult::kFramePoolCastFailed);
     return hr;
   }
@@ -165,9 +171,22 @@ HRESULT WgcCaptureSession::StartCapture() {
   ABI::Windows::Graphics::SizeInt32 item_size;
   hr = item_.Get()->get_Size(&item_size);
   if (FAILED(hr)) {
+    RTC_LOG(LS_ERROR) << "get_Size failed: " << hr;
     RecordStartCaptureResult(StartCaptureResult::kGetItemSizeFailed);
     return hr;
   }
+
+  RTC_LOG(LS_ERROR) << (direct3d_device_ == nullptr);
+  RTC_LOG(LS_ERROR) << kPixelFormat;
+  RTC_LOG(LS_ERROR) << kNumBuffers;
+  RTC_LOG(LS_ERROR) << item_size.Height;
+  RTC_LOG(LS_ERROR) << item_size.Width;
+
+  if (item_size.Height == 0)
+    item_size.Height = 1;
+
+  if (item_size.Width == 0)
+    item_size.Width = 1;
 
   previous_size_ = item_size;
 
@@ -175,12 +194,14 @@ HRESULT WgcCaptureSession::StartCapture() {
                                                kPixelFormat, kNumBuffers,
                                                item_size, &frame_pool_);
   if (FAILED(hr)) {
+    RTC_LOG(LS_ERROR) << "CreateFreeThreaded failed: " << hr;
     RecordStartCaptureResult(StartCaptureResult::kCreateFreeThreadedFailed);
     return hr;
   }
 
   hr = frame_pool_->CreateCaptureSession(item_.Get(), &session_);
   if (FAILED(hr)) {
+    RTC_LOG(LS_ERROR) << "CreateCaptureSession failed: " << hr;
     RecordStartCaptureResult(StartCaptureResult::kCreateCaptureSessionFailed);
     return hr;
   }
