@@ -291,6 +291,15 @@
           'isolated_scripts': 'desktop_perf_tests',
         },
       },
+      'Perf Mac M1 11': {
+        'os_type':
+        'mac',
+        'mixins':
+        ['mac-m1', 'perf-pool', 'timeout-3h', 'resultdb-gtest-json-format'],
+        'test_suites': {
+          'isolated_scripts': 'desktop_perf_tests',
+        },
+      },
       'Perf Win7': {
         'os_type':
         'win',
