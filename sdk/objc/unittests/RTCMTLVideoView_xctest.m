@@ -76,6 +76,8 @@
     OCMStub([frameMock buffer])
         .andReturn([[RTC_OBJC_TYPE(RTCI420Buffer) alloc] initWithWidth:200 height:200]);
   }
+  OCMStub([((RTC_OBJC_TYPE(RTCVideoFrame) *)frameMock) width]).andReturn(200);
+  OCMStub([((RTC_OBJC_TYPE(RTCVideoFrame) *)frameMock) height]).andReturn(200);
   OCMStub([frameMock timeStampNs]).andReturn(arc4random_uniform(INT_MAX));
   return frameMock;
 }
@@ -131,8 +133,6 @@
   [self.classMock verify];
 }
 
-// TODO(crbug.com/webrtc/13990): method was not invoked: drawFrame.
-#if !TARGET_IPHONE_SIMULATOR
 - (void)testRTCVideoRenderFrameCallbackI420 {
   // given
   OCMStub([self.classMock isMetalAvailable]).andReturn(YES);
@@ -257,7 +257,6 @@
 
   [self.rendererNV12Mock verify];
 }
-#endif
 
 - (void)testReportsSizeChangesToDelegate {
   OCMStub([self.classMock isMetalAvailable]).andReturn(YES);
