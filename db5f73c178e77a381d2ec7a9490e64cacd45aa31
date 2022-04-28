@@ -34,6 +34,41 @@
       "parentUuid": "615ce3bc_bd1b14ee",
       "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a4c5d6_8f537145",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-28T07:03:22Z",
+      "side": 1,
+      "message": "If you use a network emulator (replacement of the visual socket server) to connect two entities and never call the DTLS answer function, that should work.... there are some unit tests for openssl_stream_adapter that probably do something like that.",
+      "parentUuid": "615ce3bc_bd1b14ee",
+      "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "059eb0e2_3fc74e7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-28T07:03:22Z",
+      "side": 1,
+      "message": "If the hints don\u0027t lead to a reasonable test with reasonable effort, re-ping!\n",
+      "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
