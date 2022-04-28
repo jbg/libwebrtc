@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "710a3009_24630ef6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-04-28T23:44:25Z",
+      "side": 1,
+      "message": "Looks like I broke some tests a few months ago. Now it will work as expected. PTAL.",
+      "revId": "010713d6d97aa169058d5582600710420071d529",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
