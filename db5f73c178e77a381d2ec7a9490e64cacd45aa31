@@ -69,6 +69,24 @@
       "message": "If the hints don\u0027t lead to a reasonable test with reasonable effort, re-ping!\n",
       "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1e3ff96_81dada62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-04-28T07:40:53Z",
+      "side": 1,
+      "message": "Given that the total wait time for a 12 timeouts is \u003e2 minutes we need to accelerate the test somehow.\n\nTestDTLSConnectWithLostFirstPacketDelay2s seems closest (it drops one packet).\n\nThe TimeCallback (set via SSL_CTX_set_current_time_cb) gets called when running it but I don\u0027t see a way to call the (fake) clock\u0027s AdvanceTime",
+      "parentUuid": "74a4c5d6_8f537145",
+      "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
