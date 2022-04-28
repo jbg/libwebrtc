@@ -104,6 +104,24 @@
       "message": "LGTM assuming you get the testing situation resolved!",
       "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5358e09a_2483c6f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8070
+      },
+      "writtenOn": "2022-04-28T16:11:48Z",
+      "side": 1,
+      "message": "I would assume being able to advance it is the point of a fake clock. :-P\n\nWhat\u0027s the issue? Looking at the code, it just calls into the global ClockInterface implementation and you can install your own via SetClockForTesting. There also seems to be a pre-made FakeClock and ScopedBaseFakeClock.",
+      "parentUuid": "f1e3ff96_81dada62",
+      "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
