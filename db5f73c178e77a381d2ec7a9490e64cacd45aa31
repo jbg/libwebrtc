@@ -87,6 +87,23 @@
       "parentUuid": "74a4c5d6_8f537145",
       "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3fd39a3_f01de195",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-04-28T08:09:22Z",
+      "side": 1,
+      "message": "LGTM assuming you get the testing situation resolved!",
+      "revId": "db5f73c178e77a381d2ec7a9490e64cacd45aa31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
