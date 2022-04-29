@@ -16,6 +16,23 @@
       "message": "Hi, Artem. This CL is for minor cleanup in the documentation. I want to clarify to bug reporters using cl.exe that MSVC is not officially supported, but patches are welcome.",
       "revId": "a5feef8a503efaea3a0d9e29d6e10e15ea1fdb80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11133179_8b53a3fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-29T20:00:18Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "a5feef8a503efaea3a0d9e29d6e10e15ea1fdb80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
