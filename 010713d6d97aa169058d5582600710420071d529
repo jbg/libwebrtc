@@ -16,6 +16,23 @@
       "message": "Looks like I broke some tests a few months ago. Now it will work as expected. PTAL.",
       "revId": "010713d6d97aa169058d5582600710420071d529",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91569377_8700334a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-04-29T04:51:39Z",
+      "side": 1,
+      "message": "Thank you for the fix !",
+      "revId": "010713d6d97aa169058d5582600710420071d529",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
