@@ -59,16 +59,17 @@ static const AudioUnitElement kOutputBus = 0;
 // Returns the automatic gain control (AGC) state on the processed microphone
 // signal. Should be on by default for Voice Processing audio units.
 static OSStatus GetAGCState(AudioUnit audio_unit, UInt32* enabled) {
-  RTC_DCHECK(audio_unit);
-  UInt32 size = sizeof(*enabled);
-  OSStatus result = AudioUnitGetProperty(audio_unit,
-                                         kAUVoiceIOProperty_VoiceProcessingEnableAGC,
-                                         kAudioUnitScope_Global,
-                                         kInputBus,
-                                         enabled,
-                                         &size);
-  RTCLog(@"VPIO unit AGC: %u", static_cast<unsigned int>(*enabled));
-  return result;
+  RTC_FATAL() << "Intended Crash";
+  //  RTC_DCHECK(audio_unit);
+  //  UInt32 size = sizeof(*enabled);
+  //  OSStatus result = AudioUnitGetProperty(audio_unit,
+  //                                         kAUVoiceIOProperty_VoiceProcessingEnableAGC,
+  //                                         kAudioUnitScope_Global,
+  //                                         kInputBus,
+  //                                         enabled,
+  //                                         &size);
+  //  RTCLog(@"VPIO unit AGC: %u", static_cast<unsigned int>(*enabled));
+  //  return result;
 }
 
 VoiceProcessingAudioUnit::VoiceProcessingAudioUnit(bool bypass_voice_processing,
