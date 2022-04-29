@@ -86,6 +86,24 @@
       "parentUuid": "f1e56394_586a5b38",
       "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66da1310_aa5f00a0",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 16681
+      },
+      "writtenOn": "2022-04-29T09:07:13Z",
+      "side": 1,
+      "message": "Thank you.\nCould you give me additional advice?\n\nAt first, I tried and was able to access field trial values in sdk/android/src/jni/video_encoder_wrapper.cc.\nHowever, I could only update requested_resolution_alignment in C++. In Java, it\u0027s defined as a final variable.\n\nThen, I tried to use PeerConnectionFactory.fieldTrialsFindFullName in HardwareVideoEncoder.java. Unfortunately, I couldn\u0027t build it due to a dependency cycle error.\n\nNow I\u0027m thinking about implementing a wrapper function of webrtc::field_trial::FindFullName to Java EncoderInfo class or somewhere and use it from HardwareVideoEncoder.java.\n\nIs there any other straight-forward way to access field trial values?",
+      "parentUuid": "10953b86_c3dcbf48",
+      "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
