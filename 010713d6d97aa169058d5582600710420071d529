@@ -56,6 +56,30 @@
       },
       "revId": "010713d6d97aa169058d5582600710420071d529",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4488fc28_f4e2c418",
+        "filename": "sdk/objc/unittests/RTCMTLVideoView_xctest.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-04-29T07:11:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8020a37b_ff0eb1d3",
+      "range": {
+        "startLine": 72,
+        "startChar": 29,
+        "endLine": 72,
+        "endChar": 37
+      },
+      "revId": "010713d6d97aa169058d5582600710420071d529",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
