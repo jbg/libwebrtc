@@ -104,6 +104,24 @@
       "parentUuid": "10953b86_c3dcbf48",
       "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b93ffe_0ea24f49",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-04-29T09:36:19Z",
+      "side": 1,
+      "message": "Hmm. In that case, I don\u0027t know.\n\njonaso@, it looks like you\u0027ve been working on field trials lately. Can you give us some advice?",
+      "parentUuid": "66da1310_aa5f00a0",
+      "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

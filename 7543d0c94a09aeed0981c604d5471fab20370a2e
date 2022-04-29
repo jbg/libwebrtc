@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fafe20a1_e3b242f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-04-29T09:36:19Z",
+      "side": 1,
+      "message": "Added jonaso@ to CC for asking for some advice.",
+      "revId": "7543d0c94a09aeed0981c604d5471fab20370a2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
