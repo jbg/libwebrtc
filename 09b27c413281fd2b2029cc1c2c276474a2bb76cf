@@ -93,6 +93,30 @@
       },
       "revId": "09b27c413281fd2b2029cc1c2c276474a2bb76cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "320881d8_4b21bbe8",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-04-29T18:10:20Z",
+      "side": 1,
+      "message": "Yes, that is slightly more readable (less questions when reading it in the future, lower feeling that that index 0 is special) even if an absl::optional would be better but we can\u0027t without more changes.\n\nI wonder if the VideoConfig should become a class and hide these things behind methods (in this case GetSinglecastEncodingParams() which returns an optional).\n\nBut this is for another CL :)",
+      "parentUuid": "f07b82ca_fcaabcd8",
+      "range": {
+        "startLine": 501,
+        "startChar": 6,
+        "endLine": 503,
+        "endChar": 7
+      },
+      "revId": "09b27c413281fd2b2029cc1c2c276474a2bb76cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
