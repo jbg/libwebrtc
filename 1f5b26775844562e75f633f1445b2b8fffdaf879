@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fda86001_711856a1",
+        "filename": "rtc_base/task_queue.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-04-30T16:13:24Z",
+      "side": 1,
+      "message": "Can you add [deprected] to these versions of the API, so that it doesn\u0027t sneak back?",
+      "revId": "1f5b26775844562e75f633f1445b2b8fffdaf879",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
