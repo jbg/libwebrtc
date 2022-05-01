@@ -171,6 +171,8 @@ std::unique_ptr<VoiceChannel> ChannelManager::CreateVoiceChannel(
 
   RTC_DCHECK_RUN_ON(worker_thread_);
 
+  RTC_LOG_THREAD_BLOCK_COUNT();
+
   VoiceMediaChannel* media_channel = media_engine_->voice().CreateMediaChannel(
       call, media_config, options, crypto_options);
   if (!media_channel) {

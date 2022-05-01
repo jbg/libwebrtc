@@ -770,8 +770,10 @@ class SdpOfferAnswerHandler::RemoteDescriptionOperation {
   // inconsistent state so fail right away.
   bool HaveSessionError() {
     RTC_DCHECK(ok());
+    RTC_LOG_THREAD_BLOCK_COUNT();
     if (handler_->session_error() != SessionError::kNone)
       InternalError(handler_->GetSessionErrorMsg());
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
     return !ok();
   }
 
@@ -781,6 +783,9 @@ class SdpOfferAnswerHandler::RemoteDescriptionOperation {
   bool MaybeRollback() {
     RTC_DCHECK_RUN_ON(handler_->signaling_thread());
     RTC_DCHECK(ok());
+
+    RTC_LOG_THREAD_BLOCK_COUNT();
+
     if (type_ != SdpType::kRollback) {
       // Check if we can do an implicit rollback.
       if (type_ == SdpType::kOffer && unified_plan_ &&
@@ -798,16 +803,22 @@ class SdpOfferAnswerHandler::RemoteDescriptionOperation {
       Unsupported("Rollback not supported in Plan B");
     }
 
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
+
     return true;
   }
 
   // Report to UMA the format of the received offer or answer.
   void ReportOfferAnswerUma() {
     RTC_DCHECK(ok());
+    RTC_LOG_THREAD_BLOCK_COUNT();
+
     if (type_ == SdpType::kOffer || type_ == SdpType::kAnswer) {
       handler_->pc_->ReportSdpFormatReceived(*desc_.get());
       handler_->pc_->ReportSdpBundleUsage(*desc_.get());
     }
+
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
   }
 
   // Checks if the session description for the operation is valid. If not, the
@@ -817,9 +828,11 @@ class SdpOfferAnswerHandler::RemoteDescriptionOperation {
     RTC_DCHECK_RUN_ON(handler_->signaling_thread());
     RTC_DCHECK(ok());
     RTC_DCHECK(bundle_groups_by_mid_.empty()) << "Already called?";
+    RTC_LOG_THREAD_BLOCK_COUNT();
     bundle_groups_by_mid_ = GetBundleGroupsByMid(description());
     error_ = handler_->ValidateSessionDescription(
         desc_.get(), cricket::CS_REMOTE, bundle_groups_by_mid_);
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
     return ok();
   }
 
@@ -829,6 +842,9 @@ class SdpOfferAnswerHandler::RemoteDescriptionOperation {
     RTC_DCHECK(ok());
     RTC_DCHECK(desc_);
     RTC_DCHECK(!replaced_remote_description_);
+
+    RTC_LOG_THREAD_BLOCK_COUNT();
+
 #if RTC_DCHECK_IS_ON
     const auto* existing_remote_description = handler_->remote_description();
 #endif
@@ -847,12 +863,19 @@ class SdpOfferAnswerHandler::RemoteDescriptionOperation {
       SetAsSessionError();
     }
 
+    // TODO(bugs.webrtc.org/webrtc:13540): `Do
+    // transport_controller()->SetRemoteDescription` asynchronously on the
+    // network thread.
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(1);
+
     return ok();
   }
 
   bool UpdateChannels() {
     RTC_DCHECK(ok());
     RTC_DCHECK(!desc_) << "ReplaceRemoteDescription hasn't been called";
+
+    RTC_LOG_THREAD_BLOCK_COUNT();
 
     const auto* remote_description = handler_->remote_description();
 
@@ -865,6 +888,7 @@ class SdpOfferAnswerHandler::RemoteDescriptionOperation {
           cricket::CS_REMOTE, *remote_description,
           handler_->local_description(), old_remote_description(),
           bundle_groups_by_mid_);
+      RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
     } else {
       // Media channels will be created only when offer is set. These may use
       // new transports just created by PushdownTransportDescription.
@@ -882,20 +906,27 @@ class SdpOfferAnswerHandler::RemoteDescriptionOperation {
 
   bool UpdateSessionState() {
     RTC_DCHECK(ok());
+    RTC_LOG_THREAD_BLOCK_COUNT();
+
     error_ = handler_->UpdateSessionState(
         type_, cricket::CS_REMOTE,
         handler_->remote_description()->description(), bundle_groups_by_mid_);
     if (!ok())
       SetAsSessionError();
+
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
+
     return ok();
   }
 
   bool UseCandidatesInRemoteDescription() {
     RTC_DCHECK(ok());
+    RTC_LOG_THREAD_BLOCK_COUNT();
     if (handler_->local_description() &&
         !handler_->UseCandidatesInRemoteDescription()) {
       InvalidParam(kInvalidCandidates);
     }
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
     return ok();
   }
 
@@ -1843,6 +1874,7 @@ void SdpOfferAnswerHandler::ApplyRemoteDescription(
     return;
 
   if (operation->old_remote_description()) {
+    RTC_LOG_THREAD_BLOCK_COUNT();
     for (const cricket::ContentInfo& content :
          operation->old_remote_description()->description()->contents()) {
       // Check if this new SessionDescription contains new ICE ufrag and
@@ -1868,6 +1900,7 @@ void SdpOfferAnswerHandler::ApplyRemoteDescription(
             mutable_remote_description());
       }
     }
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
   }
 
   if (operation->HaveSessionError())
@@ -3357,6 +3390,8 @@ RTCError SdpOfferAnswerHandler::UpdateTransceiversAndDataChannels(
   RTC_DCHECK_RUN_ON(signaling_thread());
   RTC_DCHECK(IsUnifiedPlan());
 
+  RTC_LOG_THREAD_BLOCK_COUNT();
+
   if (new_session.GetType() == SdpType::kOffer) {
     // If the BUNDLE policy is max-bundle, then we know for sure that all
     // transports will be bundled from the start. Return an error if
@@ -3372,13 +3407,21 @@ RTCError SdpOfferAnswerHandler::UpdateTransceiversAndDataChannels(
   }
 
   const ContentInfos& new_contents = new_session.description()->contents();
+
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
+
   for (size_t i = 0; i < new_contents.size(); ++i) {
+    RTC_LOG_THREAD_BLOCK_COUNT();
+
     const cricket::ContentInfo& new_content = new_contents[i];
     cricket::MediaType media_type = new_content.media_description()->type();
     mid_generator_.AddKnownId(new_content.name);
     auto it = bundle_groups_by_mid.find(new_content.name);
     const cricket::ContentGroup* bundle_group =
         it != bundle_groups_by_mid.end() ? it->second : nullptr;
+
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
+
     if (media_type == cricket::MEDIA_TYPE_AUDIO ||
         media_type == cricket::MEDIA_TYPE_VIDEO) {
       const cricket::ContentInfo* old_local_content = nullptr;
@@ -3393,9 +3436,15 @@ RTCError SdpOfferAnswerHandler::UpdateTransceiversAndDataChannels(
         old_remote_content =
             &old_remote_description->description()->contents()[i];
       }
+
+      RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
+
       auto transceiver_or_error =
           AssociateTransceiver(source, new_session.GetType(), i, new_content,
                                old_local_content, old_remote_content);
+
+      RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
+
       if (!transceiver_or_error.ok()) {
         // In the case where a transceiver is rejected locally prior to being
         // associated, we don't expect to find a transceiver, but might find it
@@ -3405,6 +3454,9 @@ RTCError SdpOfferAnswerHandler::UpdateTransceiversAndDataChannels(
         }
         return transceiver_or_error.MoveError();
       }
+
+      RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
+
       auto transceiver = transceiver_or_error.MoveValue();
       RTCError error =
           UpdateTransceiverChannel(transceiver, new_content, bundle_group);
@@ -3448,10 +3500,12 @@ RTCError SdpOfferAnswerHandler::UpdateTransceiversAndDataChannels(
                          << new_content.name;
         continue;
       }
+      RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(4);
       RTCError error = UpdateDataChannel(source, new_content, bundle_group);
       if (!error.ok()) {
         return error;
       }
+      RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(4);
     } else if (media_type == cricket::MEDIA_TYPE_UNSUPPORTED) {
       RTC_LOG(LS_INFO) << "Ignoring unsupported media type";
     } else {
@@ -3606,12 +3660,17 @@ RTCError SdpOfferAnswerHandler::UpdateTransceiverChannel(
   TRACE_EVENT0("webrtc", "SdpOfferAnswerHandler::UpdateTransceiverChannel");
   RTC_DCHECK(IsUnifiedPlan());
   RTC_DCHECK(transceiver);
+
+  RTC_LOG_THREAD_BLOCK_COUNT();
+
   cricket::ChannelInterface* channel = transceiver->internal()->channel();
   if (content.rejected) {
     if (channel) {
       transceiver->internal()->ClearChannel();
     }
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
   } else {
+    RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(0);
     if (!channel) {
       std::unique_ptr<cricket::ChannelInterface> new_channel;
       if (transceiver->media_type() == cricket::MEDIA_TYPE_AUDIO) {
@@ -4849,15 +4908,25 @@ std::unique_ptr<cricket::VoiceChannel>
 SdpOfferAnswerHandler::CreateVoiceChannel(const std::string& mid) {
   TRACE_EVENT0("webrtc", "SdpOfferAnswerHandler::CreateVoiceChannel");
   RTC_DCHECK_RUN_ON(signaling_thread());
+
+  RTC_LOG_THREAD_BLOCK_COUNT();
+
   if (!channel_manager()->media_engine())
     return nullptr;
 
   // TODO(bugs.webrtc.org/11992): CreateVoiceChannel internally switches to the
   // worker thread. We shouldn't be using the `call_ptr_` hack here but simply
   // be on the worker thread and use `call_` (update upstream code).
-  return channel_manager()->CreateVoiceChannel(
+  // TODO(tommi): This hops to the worker and from the worker to the network
+  // thread (blocking both signal and worker).
+  auto ret = channel_manager()->CreateVoiceChannel(
       pc_->call_ptr(), pc_->configuration()->media_config, mid,
       pc_->SrtpRequired(), pc_->GetCryptoOptions(), audio_options());
+
+  // TODO(tommi): These invokes have been removed in separate cl.
+  RTC_DCHECK_BLOCK_COUNT_NO_MORE_THAN(2);
+
+  return ret;
 }
 
 // TODO(steveanton): Perhaps this should be managed by the RtpTransceiver.
