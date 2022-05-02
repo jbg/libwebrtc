@@ -22,6 +22,30 @@
       },
       "revId": "9df44d6b623c41b4a652c62e1711266bd6652137",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c47d3c02_cb9aef3e",
+        "filename": "test/pc/e2e/peer_configurer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-02T10:08:37Z",
+      "side": 1,
+      "message": "True, we also have support for H264 simulcast, we shouldn\u0027t have this check. I was just trying to keep the same conditions as the original code.",
+      "parentUuid": "fd18a05b_b7f63491",
+      "range": {
+        "startLine": 143,
+        "startChar": 8,
+        "endLine": 146,
+        "endChar": 33
+      },
+      "revId": "9df44d6b623c41b4a652c62e1711266bd6652137",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
