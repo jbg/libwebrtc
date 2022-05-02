@@ -21,6 +21,8 @@
 #define SOCKET_EACCES EACCES
 #endif
 
+#include <functional>
+
 #if defined(WEBRTC_WIN)
 #include "rtc_base/win32.h"
 #endif
@@ -103,8 +105,6 @@ class Socket {
                        size_t cb,
                        SocketAddress* paddr,
                        int64_t* timestamp) = 0;
-  virtual int Listen(int backlog) = 0;
-  virtual Socket* Accept(SocketAddress* paddr) = 0;
   virtual int Close() = 0;
   virtual int GetError() const = 0;
   virtual void SetError(int error) = 0;
@@ -140,6 +140,25 @@ class Socket {
 
  protected:
   Socket() {}
+};
+
+// Interface representing a port listened on, usually for TCP.
+class ListenSocket {
+ public:
+  ListenSocket(const ListenSocket&) = delete;
+  ListenSocket& operator=(const ListenSocket&) = delete;
+
+  virtual ~ListenSocket() {}
+
+  virtual int Bind(const SocketAddress& addr) = 0;
+  virtual int Listen(int backlog,
+                     std::function<void(const SocketAddress&,
+                                        std::unique_ptr<Socket>)> callback) = 0;
+  virtual int GetError() const = 0;
+  virtual SocketAddress GetLocalAddress() const = 0;
+
+ protected:
+  ListenSocket() {}
 };
 
 }  // namespace rtc

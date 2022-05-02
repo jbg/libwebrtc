@@ -38,6 +38,9 @@ class NATInternalSocketFactory {
                                        int type,
                                        const SocketAddress& local_addr,
                                        SocketAddress* nat_addr) = 0;
+  virtual std::unique_ptr<ListenSocket> CreateInternalListenSocket(
+      int family,
+      const SocketAddress& local_addr) = 0;
 };
 
 // Creates sockets that will send all traffic through a NAT, using an existing
@@ -54,12 +57,16 @@ class NATSocketFactory : public SocketFactory, public NATInternalSocketFactory {
 
   // SocketFactory implementation
   Socket* CreateSocket(int family, int type) override;
+  std::unique_ptr<ListenSocket> CreateListenSocket(int family) override;
 
   // NATInternalSocketFactory implementation
   Socket* CreateInternalSocket(int family,
                                int type,
                                const SocketAddress& local_addr,
                                SocketAddress* nat_addr) override;
+  std::unique_ptr<ListenSocket> CreateInternalListenSocket(
+      int family,
+      const SocketAddress& local_addr) override;
 
  private:
   SocketFactory* factory_;
@@ -150,6 +157,7 @@ class NATSocketServer : public SocketServer, public NATInternalSocketFactory {
 
   // SocketServer implementation
   Socket* CreateSocket(int family, int type) override;
+  std::unique_ptr<ListenSocket> CreateListenSocket(int family) override;
 
   void SetMessageQueue(Thread* queue) override;
   bool Wait(int cms, bool process_io) override;
@@ -160,6 +168,9 @@ class NATSocketServer : public SocketServer, public NATInternalSocketFactory {
                                int type,
                                const SocketAddress& local_addr,
                                SocketAddress* nat_addr) override;
+  std::unique_ptr<ListenSocket> CreateInternalListenSocket(
+      int family,
+      const SocketAddress& local_addr) override;
 
  private:
   SocketServer* server_;
