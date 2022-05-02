@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d162f6d_b56c6456",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2022-05-02T14:34:06Z",
+      "side": 1,
+      "message": "nonstandard stat (for now). I wonder if it should be frame assembly delay similar to total processing delay?",
+      "revId": "eb0e0bf851cb1265cab2d07afb2df2eb6ba028ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
