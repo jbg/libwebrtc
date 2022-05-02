@@ -13,6 +13,7 @@
 
 #include <memory>
 #include <string>
+#include <unordered_set>
 
 #include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
@@ -21,6 +22,7 @@
 #include "media/sctp/sctp_transport_internal.h"
 #include "net/dcsctp/public/dcsctp_options.h"
 #include "net/dcsctp/public/dcsctp_socket.h"
+#include "net/dcsctp/public/dcsctp_socket_factory.h"
 #include "net/dcsctp/public/types.h"
 #include "net/dcsctp/timer/task_queue_timeout.h"
 #include "p2p/base/packet_transport_internal.h"
@@ -39,6 +41,10 @@ class DcSctpTransport : public cricket::SctpTransportInternal,
   DcSctpTransport(rtc::Thread* network_thread,
                   rtc::PacketTransportInternal* transport,
                   Clock* clock);
+  DcSctpTransport(rtc::Thread* network_thread,
+                  rtc::PacketTransportInternal* transport,
+                  Clock* clock,
+                  std::unique_ptr<dcsctp::DcSctpSocketFactory> socket_factory);
   ~DcSctpTransport() override;
 
   // cricket::SctpTransportInternal
@@ -99,11 +105,13 @@ class DcSctpTransport : public cricket::SctpTransportInternal,
   Clock* clock_;
   Random random_;
 
+  std::unique_ptr<dcsctp::DcSctpSocketFactory> socket_factory_;
   dcsctp::TaskQueueTimeoutFactory task_queue_timeout_factory_;
   std::unique_ptr<dcsctp::DcSctpSocketInterface> socket_;
   std::string debug_name_ = "DcSctpTransport";
   rtc::CopyOnWriteBuffer receive_buffer_;
 
+  std::unordered_set<uint16_t> local_close_;
   bool ready_to_send_data_ = false;
 };
 
