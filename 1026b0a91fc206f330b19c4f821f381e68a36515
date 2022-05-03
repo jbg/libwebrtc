@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0484d089_8a3915d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2022-05-03T12:25:45Z",
+      "side": 1,
+      "message": "Changing the default sounds risky. There is no optimal value for all scenarios. I think we should either make resolution rampup faster when BWE increases rapidly in the beginning of call or make the initial BWE configurable in PeerConnection.",
+      "revId": "1026b0a91fc206f330b19c4f821f381e68a36515",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
