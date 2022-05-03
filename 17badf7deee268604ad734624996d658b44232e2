@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a70ca2d8_a9c0a7c4",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-03T21:37:13Z",
+      "side": 1,
+      "message": "webrtc::flat_set has contains(), problem solved.",
+      "parentUuid": "d5ea7b81_e2b9a788",
+      "range": {
+        "startLine": 487,
+        "startChar": 21,
+        "endLine": 487,
+        "endChar": 26
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50d6c88b_a6f70d3c",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-05-03T08:15:18Z",
       "side": 1,
       "message": "same",
+      "range": {
+        "startLine": 501,
+        "startChar": 21,
+        "endLine": 501,
+        "endChar": 26
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f218058_a92f60b9",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-03T21:37:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50d6c88b_a6f70d3c",
       "range": {
         "startLine": 501,
         "startChar": 21,
@@ -110,6 +158,54 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ef76ffc_65d4d73e",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-03T21:37:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b40d464d_0db2004e",
+      "range": {
+        "startLine": 114,
+        "startChar": 7,
+        "endLine": 114,
+        "endChar": 20
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31465d5e_579e51c1",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-03T21:37:13Z",
+      "side": 1,
+      "message": "There was no std::hash for dcsctp::StreamID, so I used that. But you provide a hash for the webrtc::flat_set somehow, so I could use it.",
+      "parentUuid": "8fc3264e_4f7a3332",
+      "range": {
+        "startLine": 114,
+        "startChar": 21,
+        "endLine": 114,
+        "endChar": 29
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f8df340_7636658a",
@@ -133,6 +229,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c91bb2a_d2e10889",
+        "filename": "media/sctp/dcsctp_transport_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-03T21:37:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f8df340_7636658a",
+      "range": {
+        "startLine": 80,
+        "startChar": 6,
+        "endLine": 80,
+        "endChar": 25
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "103c09c8_83e87690",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-05-03T08:15:18Z",
       "side": 1,
       "message": "Nice test! Would it make sense to have a similar test, but when OnIncomingStreamsReset and OnStreamsResetPerformed are performed in different order?",
+      "range": {
+        "startLine": 100,
+        "startChar": 28,
+        "endLine": 100,
+        "endChar": 41
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "100650a8_3dbab85c",
+        "filename": "media/sctp/dcsctp_transport_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-03T21:37:13Z",
+      "side": 1,
+      "message": "They won\u0027t happen in a different order in this test because of the mock and actions set up on it. We\u0027d need to provide a different fake with a runloop and properly asynchronous events.\nWhile it can be done, maybe it\u0027s something to consider in the future instead.",
+      "parentUuid": "103c09c8_83e87690",
       "range": {
         "startLine": 100,
         "startChar": 28,
