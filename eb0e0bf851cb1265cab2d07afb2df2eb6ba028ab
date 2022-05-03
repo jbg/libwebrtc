@@ -16,6 +16,23 @@
       "message": "nonstandard stat (for now). I wonder if it should be frame assembly delay similar to total processing delay?",
       "revId": "eb0e0bf851cb1265cab2d07afb2df2eb6ba028ab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0c1ecdd_5208b335",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-03T05:35:15Z",
+      "side": 1,
+      "message": "can you provide a link to a stats-extensions PR?\n",
+      "revId": "eb0e0bf851cb1265cab2d07afb2df2eb6ba028ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
