@@ -16,6 +16,144 @@
       "message": "LGTM for BUILD.gn and general code but wait for Victor\u0027s SCTP review.",
       "revId": "17badf7deee268604ad734624996d658b44232e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5ea7b81_e2b9a788",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-05-03T08:15:18Z",
+      "side": 1,
+      "message": "Nit: While it technically doesn\u0027t make any difference in a set, count() can be less efficient than find() in e.g. a multi_set. Also, I think it\u0027s better to signal intent, so if you want to check if something exists in a set (can be found in a set), I would use find() instead.",
+      "range": {
+        "startLine": 487,
+        "startChar": 21,
+        "endLine": 487,
+        "endChar": 26
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50d6c88b_a6f70d3c",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-05-03T08:15:18Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 501,
+        "startChar": 21,
+        "endLine": 501,
+        "endChar": 26
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b40d464d_0db2004e",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-05-03T08:15:18Z",
+      "side": 1,
+      "message": "TL;DR: Please consider webrtc::flat_set\u003cStreamID\u003e\n\nunordered_set is quite (very) inefficient, and banned in Chromium. It\u0027s often better to just using std::set instead as it\u0027s using very little code size. An alternative is webrtc::flat_set, which is very RAM and performance efficient, but use somewhat more code... But as we use webrtc::flat_set\u003cStreamID\u003e in dcsctp already, you would get it for free.",
+      "range": {
+        "startLine": 114,
+        "startChar": 7,
+        "endLine": 114,
+        "endChar": 20
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc3264e_4f7a3332",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-05-03T08:15:18Z",
+      "side": 1,
+      "message": "Maybe use dcsctp::StreamID here? It would simplify some of the code, and also makes it more obvious what this one contains.\n\nAlso, consider adding a comment stating when streams are added here - it\u0027s not all streams at all times.",
+      "range": {
+        "startLine": 114,
+        "startChar": 21,
+        "endLine": 114,
+        "endChar": 29
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f8df340_7636658a",
+        "filename": "media/sctp/dcsctp_transport_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-05-03T08:15:18Z",
+      "side": 1,
+      "message": "You don\u0027t have anything here, so please remove this one, and make tests without fixtures. They are always recommended over tests with fixtures, as they are easier to follow",
+      "range": {
+        "startLine": 80,
+        "startChar": 6,
+        "endLine": 80,
+        "endChar": 25
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "103c09c8_83e87690",
+        "filename": "media/sctp/dcsctp_transport_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-05-03T08:15:18Z",
+      "side": 1,
+      "message": "Nice test! Would it make sense to have a similar test, but when OnIncomingStreamsReset and OnStreamsResetPerformed are performed in different order?",
+      "range": {
+        "startLine": 100,
+        "startChar": 28,
+        "endLine": 100,
+        "endChar": 41
+      },
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
