@@ -16,6 +16,24 @@
       "message": "Changing the default sounds risky. There is no optimal value for all scenarios. I think we should either make resolution rampup faster when BWE increases rapidly in the beginning of call or make the initial BWE configurable in PeerConnection.",
       "revId": "1026b0a91fc206f330b19c4f821f381e68a36515",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e0c7946_431c2b99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-05-03T12:28:49Z",
+      "side": 1,
+      "message": "but the risk comes from WebRTC-SendSideBwe-WithOverhead which changed the behavior already - not in good ways if you look at the ramp-up times noted in the bug",
+      "parentUuid": "0484d089_8a3915d8",
+      "revId": "1026b0a91fc206f330b19c4f821f381e68a36515",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
