@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2088a38_f8f62a49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-03T06:50:26Z",
+      "side": 1,
+      "message": "LGTM for BUILD.gn and general code but wait for Victor\u0027s SCTP review.",
+      "revId": "17badf7deee268604ad734624996d658b44232e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
