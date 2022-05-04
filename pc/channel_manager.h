@@ -37,13 +37,9 @@
 namespace cricket {
 
 // ChannelManager allows the MediaEngine to run on a separate thread, and takes
-// care of marshalling calls between threads. It also creates and keeps track of
-// voice and video channels; by doing so, it can temporarily pause all the
-// channels when a new audio or video device is chosen. The voice and video
-// channels are stored in separate vectors, to easily allow operations on just
-// voice or just video channels.
-// ChannelManager also allows the application to discover what devices it has
-// using device manager.
+// care of marshalling calls between threads.
+// It contains functions for creating Channels, but gives up ownership
+// of them.
 class ChannelManager : public ChannelFactoryInterface {
  public:
   // Returns an initialized instance of ChannelManager.

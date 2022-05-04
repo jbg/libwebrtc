@@ -51,7 +51,7 @@ ChannelManager::ChannelManager(
   RTC_DCHECK_RUN_ON(signaling_thread_);
   RTC_DCHECK(worker_thread_);
   RTC_DCHECK(network_thread_);
-
+  RTC_CHECK(media_engine_) << "DEBUG: Does this ever happen?";
   if (media_engine_) {
     // TODO(tommi): Change VoiceEngine to do ctor time initialization so that
     // this isn't necessary.
