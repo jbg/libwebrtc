@@ -33,6 +33,24 @@
       "message": "This LGTM for me but let\u0027s wait for Björn as well.",
       "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61c69dbc_9a1487e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-05-04T13:03:48Z",
+      "side": 1,
+      "message": "The (potential) issue is that //build and //testing depends on //base. While these also mostly seem to be for Android development, it\u0027s a bit unclear to me\n1) whether any tools will be affected\n2) how cross compile will be affected\n3) how robust the build will be to future chromium changes in //build and //testing.",
+      "parentUuid": "de5a7ffb_e0561a03",
+      "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
