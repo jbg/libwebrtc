@@ -16,6 +16,23 @@
       "message": "Since //base is only used by //base/third_party/libevent and //base:base_java, there is no need to checkout on other platforms. PTAL.",
       "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a39ace_51054b26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-04T12:17:49Z",
+      "side": 1,
+      "message": "This LGTM for me but let\u0027s wait for Björn as well.",
+      "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
