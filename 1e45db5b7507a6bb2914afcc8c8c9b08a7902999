@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9fe6ad3_3cc45284",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-04T12:57:03Z",
+      "side": 1,
+      "message": "Pure \"let\u0027s ensure that changes won\u0027t affect unexpected places\".\n",
+      "revId": "1e45db5b7507a6bb2914afcc8c8c9b08a7902999",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
