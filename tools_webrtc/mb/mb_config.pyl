@@ -5,12 +5,10 @@
 # tree. An additional intellectual property rights grant can be found
 # in the file PATENTS.  All contributing project authors may
 # be found in the AUTHORS file in the root of the source tree.
-
 # FOR DETAILS ON THIS FILE SEE THE MAIN COPY IN //tools/mb/mb_config.pyl.
 # This is configuration for standalone WebRTC bots. It is used to keep the bot
 # configurations source-side instead of in the buildbot scripts. That makes it
 # easy to try different configurations of GN args in tryjob patches.
-
 {
   # This is a map of buildbot builder group names -> buildbot builder names ->
   # config names (where each config name is a key in the 'configs' dict,
@@ -46,7 +44,6 @@
       'Android64 (M Nexus5X)(dbg)': 'android_debug_static_bot_arm64',
       'Android64 Builder arm64': 'android_pure_release_bot_arm64',
       'Android64 Builder x64 (dbg)': 'android_debug_static_bot_x64',
-
       # Linux
       # "More configs" bots will build all the following configs in sequence.
       # This is using MB's "phases" feature.
@@ -71,14 +68,13 @@
       'Linux64 Release': 'release_bot_x64',
       'Linux64 Release (ARM)': 'release_bot_arm64',
       'Linux64 Release (Libfuzzer)': 'libfuzzer_asan_release_bot_x64',
-
       # Mac
       'Mac Asan': 'mac_asan_clang_release_bot_x64',
       'Mac64 Builder': 'pure_release_bot_x64',
+      'MacArm64 Builder': 'release_bot_arm64', 
       'Mac64 Debug': 'debug_bot_x64',
       'Mac64 Release': 'release_bot_x64',
       'MacARM64 M1 Release': 'release_bot_arm64',
-
       # Windows
       'Win (more configs)': {
         'bwe_test_logging': 'bwe_test_logging_x86',
@@ -92,7 +88,6 @@
       'Win64 ASan': 'win_asan_clang_release_bot_x64',
       'Win64 Debug (Clang)': 'win_clang_debug_bot_x64',
       'Win64 Release (Clang)': 'win_clang_release_bot_x64',
-
       # iOS
       'iOS64 Debug': 'ios_debug_bot_arm64',
       'iOS64 Release': 'ios_release_bot_arm64',
@@ -104,10 +99,8 @@
       # Android
       'Android ASan (swarming)': 'android_asan_shared_release_bot_arm',
       'Android Perf (swarming)': 'android_pure_release_bot_arm',
-
       # Mac
       'Mac (swarming)': 'release_bot_x64',
-
       # Windows
       'Win (swarming)': 'release_bot_x86',
       'Win64 Debug (Win10)': 'debug_bot_x64',
@@ -126,7 +119,30 @@
       'Perf Linux Bionic': 'release_bot_x64',
       'Perf Linux Trusty': 'release_bot_x64',
       'Perf Mac 11': 'release_bot_x64',
+      'Perf Mac M1 Arm64 12': 'release_bot_arm64',
       'Perf Win7': 'release_bot_x64',
+      'Perf Mac M1 Arm64 12': 'release_bot_arm64',
+    },
+
+    'client.webrtc.fyi': {
+      # Mac
+      'Mac (swarming)': 'release_bot_x64',
+
+      # Android
+      'Android Perf (swarming)': 'android_pure_release_bot_arm',
+      'Android ASan (swarming)': 'android_asan_shared_release_bot_arm',
+      # Windows
+      'Win (swarming)': 'release_bot_x86',
+      'Win64 Debug (Win8)': 'debug_bot_x64',
+      'Win64 Debug (Win10)': 'debug_bot_x64',
+    },
+    'chromium.infra.codesearch': {
+      'codesearch-gen-webrtc-android': {
+        'android': 'android_debug_static_bot_arm',
+      },
+      'codesearch-gen-webrtc-linux': {
+        'linux': 'codesearch_gen_linux_bot',
+      }
     },
     'internal.client.webrtc': {
       'iOS64 Debug': 'ios_internal_debug_bot_arm64',
@@ -158,14 +174,12 @@
       'android_compile_x64_rel': 'android_release_bot_x64',
       'android_compile_x86_dbg': 'android_debug_static_bot_x86',
       'android_compile_x86_rel': 'android_release_bot_x86',
-
       # iOS
       'ios_compile_arm64_dbg': 'ios_debug_bot_arm64',
       'ios_compile_arm64_rel': 'ios_release_bot_arm64',
       'ios_sim_x64_dbg_ios12': 'ios_debug_bot_x64',
       'ios_sim_x64_dbg_ios13': 'ios_debug_bot_x64',
       'ios_sim_x64_dbg_ios14': 'ios_debug_bot_x64',
-
       # Linux
       'linux_asan': 'asan_lsan_clang_release_bot_x64',
       'linux_compile_arm64_dbg': 'debug_bot_arm64',
@@ -191,7 +205,6 @@
       'linux_ubsan_vptr': 'ubsan_vptr_clang_release_bot_x64',
       'linux_x86_dbg': 'no_h264_debug_bot_x86',
       'linux_x86_rel': 'release_bot_x86',
-
       # Mac
       'mac_asan': 'mac_asan_clang_release_bot_x64',
       'mac_compile_dbg': 'debug_bot_x64',
@@ -200,7 +213,6 @@
       'mac_dbg_m1': 'debug_bot_arm64',
       'mac_rel': 'release_bot_x64',
       'mac_rel_m1': 'release_bot_arm64',
-
       # Windows
       'win_asan': 'win_asan_clang_release_bot_x64',
       'win_compile_x64_clang_dbg': 'win_clang_debug_bot_x64',
@@ -220,7 +232,6 @@
       },
     }
   },
-
   # This is the list of configs that you can pass to mb; each config
   # represents a particular combination of gn args that we must support.
   # A given config *may* be platform-specific but is not necessarily so (i.e.,
@@ -275,7 +286,6 @@
     ],
     'ios_release_bot_arm64':
     ['ios', 'release_bot', 'arm64', 'no_ios_code_signing', 'xctest'],
-
     'libfuzzer_asan_release_bot_x64': [
       'libfuzzer', 'asan', 'optimize_for_fuzzing', 'openh264',
       'pure_release_bot', 'x64'
@@ -348,7 +358,6 @@
       'x86',
     ],
   },
-
   # This is a dict mapping a given 'mixin' name to a dict of settings that
   # mb should use. See //tools/mb/docs/user_guide.md for more information.
   'mixins': {
