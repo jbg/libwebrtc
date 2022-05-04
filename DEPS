@@ -22,8 +22,10 @@ vars = {
 deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
-  'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@1eefedb688019f80838b0276be69bd7d1e2dfc59',
+  'src/base': {
+    'url': 'https://chromium.googlesource.com/chromium/src/base@1eefedb688019f80838b0276be69bd7d1e2dfc59',
+    'condition': 'checkout_linux or checkout_android',
+  },
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@d7c4eab611c66e6d44eadba8c2de3acf04843fb6',
   'src/buildtools':
