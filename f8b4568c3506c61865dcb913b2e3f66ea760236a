@@ -16,6 +16,23 @@
       "message": "+test, PTAL",
       "revId": "f8b4568c3506c61865dcb913b2e3f66ea760236a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56b7a0f5_4ba6fd0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-05-04T07:31:01Z",
+      "side": 1,
+      "message": "LGTM on the code. What to do about stats definition? webrtc-provisional-stats?",
+      "revId": "f8b4568c3506c61865dcb913b2e3f66ea760236a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
