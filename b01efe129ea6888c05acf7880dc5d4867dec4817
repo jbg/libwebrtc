@@ -69,6 +69,24 @@
       "parentUuid": "61c69dbc_9a1487e6",
       "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "235ded80_4ae587ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-05-04T13:16:05Z",
+      "side": 1,
+      "message": "The only problem is the Android(as it depends on //testing), and since we keep checkout //base for Android, this change wouldn\u0027t break anything at this moment, right? So if some change affects WebRTC\u0027s build, we can easily find what\u0027s going on by autorollers.",
+      "parentUuid": "80340f7e_4332cbe8",
+      "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
