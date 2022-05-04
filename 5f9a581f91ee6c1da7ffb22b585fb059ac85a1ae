@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "970eecbe_c6bdd3f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-05-04T18:02:28Z",
+      "side": 1,
+      "message": "while the chrome test is disabled... LETS SHIP MORE STATS :-)",
+      "revId": "5f9a581f91ee6c1da7ffb22b585fb059ac85a1ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
