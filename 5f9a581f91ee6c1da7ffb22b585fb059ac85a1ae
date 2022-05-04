@@ -16,6 +16,23 @@
       "message": "while the chrome test is disabled... LETS SHIP MORE STATS :-)",
       "revId": "5f9a581f91ee6c1da7ffb22b585fb059ac85a1ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3ee200b_e81ccae4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-04T19:54:34Z",
+      "side": 1,
+      "message": "Will you do a WPT checking that the stats are sensible when exposed to JS?",
+      "revId": "5f9a581f91ee6c1da7ffb22b585fb059ac85a1ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
