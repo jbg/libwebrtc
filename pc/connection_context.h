@@ -24,7 +24,6 @@
 #include "api/transport/sctp_transport_factory_interface.h"
 #include "media/base/media_engine.h"
 #include "p2p/base/basic_packet_socket_factory.h"
-#include "pc/channel_manager.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/network.h"
 #include "rtc_base/network_monitor_factory.h"
@@ -32,6 +31,10 @@
 #include "rtc_base/socket_factory.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/thread_annotations.h"
+
+namespace cricket {
+class ChannelManager;
+}
 
 namespace rtc {
 class BasicNetworkManager;

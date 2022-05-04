@@ -40,12 +40,15 @@
 #include "call/call.h"
 #include "call/rtp_transport_controller_send_factory_interface.h"
 #include "p2p/base/port_allocator.h"
-#include "pc/channel_manager.h"
 #include "pc/connection_context.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/rtc_certificate_generator.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/thread_annotations.h"
+
+namespace cricket {
+class ChannelManager;
+}
 
 namespace rtc {
 class BasicNetworkManager;
