@@ -51,6 +51,24 @@
       "parentUuid": "de5a7ffb_e0561a03",
       "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80340f7e_4332cbe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-04T13:08:03Z",
+      "side": 1,
+      "message": "Yeah, I was expecting some issues at GN evaluation time but this is not happening it seems.\n\n\u003e 3) how robust the build will be to future chromium changes in //build and //testing.\n\nThis is a concern yes.",
+      "parentUuid": "61c69dbc_9a1487e6",
+      "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
