@@ -596,6 +596,7 @@ class PeerConnection : public PeerConnectionInternal,
   cricket::ChannelManager* channel_manager() {
     return context_->channel_manager();
   }
+  cricket::MediaEngineInterface* media_engine();
 
   const rtc::scoped_refptr<ConnectionContext> context_;
   // Field trials active for this PeerConnection is the first of:
