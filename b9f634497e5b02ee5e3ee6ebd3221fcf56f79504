@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db259e2c_a3e6df02",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionEndToEndTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-05T05:59:34Z",
+      "side": 0,
+      "message": "Seems a bit odd - does this mean that close() won\u0027t be called on the answering side any more, since the reset now covers closing both ends?\n\nI see that this is a junit test, haven\u0027t used that one.",
+      "revId": "b9f634497e5b02ee5e3ee6ebd3221fcf56f79504",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78e4a9b5_aa9d6a8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-05T05:59:34Z",
+      "side": 1,
+      "message": "Looks good. Approving on the assumption that I understand it right.\n",
+      "revId": "ab0e05b01484c5d9f1e0bd2b202fbe7040fcb33f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
