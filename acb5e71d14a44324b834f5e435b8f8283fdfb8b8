@@ -33,6 +33,23 @@
       "message": "LGTM, I wonder if this shouldn\u0027t be coming from pipewire_stubs somehow though",
       "revId": "acb5e71d14a44324b834f5e435b8f8283fdfb8b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56dee667_aacb8fae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-05-05T18:12:02Z",
+      "side": 1,
+      "message": "Thanks for the fix.\n\nI\u0027m wondering if we should proatively turn off the sanitizer on all the calls to dlopen\u0027ed functions, instead of fixing them one as a time as the downstream address sanitizer builds find them, presumably when running tests?\n",
+      "revId": "acb5e71d14a44324b834f5e435b8f8283fdfb8b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
