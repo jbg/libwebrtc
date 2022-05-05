@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0767e5fc_9a229f3c",
+        "filename": "binary-size.config",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-05T13:46:53Z",
+      "side": 0,
+      "message": "Ah, is this CL an attempt to bring the measurements back?",
+      "parentUuid": "9cbef3ec_fbb13f8f",
+      "revId": "ad767821f5b7b0a10c313173a7644570bce82366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43e56850_b1115d2b",
         "filename": "binary-size.config",
         "patchSetId": 2
