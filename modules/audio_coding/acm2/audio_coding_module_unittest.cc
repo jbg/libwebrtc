@@ -895,28 +895,28 @@ class AcmReceiverBitExactnessOldApi : public ::testing::Test {
     defined(WEBRTC_ARCH_X86_64)
 TEST_F(AcmReceiverBitExactnessOldApi, 8kHzOutput) {
   std::string checksum_reference = GetCPUInfo(kAVX2) != 0
-                                       ? "f531f3b7dabe96d9e928dece1d3a340b"
+                                       ? "a5e024c6cfbe20c56c1ea95a5f8b8d53"
                                        : "4710c99559aec2f9f02a983ba2146f2d";
   Run(/*output_freq_hz=*/8000, checksum_reference);
 }
 
 TEST_F(AcmReceiverBitExactnessOldApi, 16kHzOutput) {
   std::string checksum_reference = GetCPUInfo(kAVX2) != 0
-                                       ? "c68d7ee520bb35b6d053e017b37bc2b3"
+                                       ? "83424ac515020f22a856bd1d8f5e2328"
                                        : "70b3217df49834b7093c631531068bd0";
   Run(/*output_freq_hz=*/16000, checksum_reference);
 }
 
 TEST_F(AcmReceiverBitExactnessOldApi, 32kHzOutput) {
   std::string checksum_reference = GetCPUInfo(kAVX2) != 0
-                                       ? "dc790e447442ff6105467f29ab7315ae"
+                                       ? "1bbea6257b33db6e554cefcff2a239f8"
                                        : "2679e4e596e33259228c62df545eb635";
   Run(/*output_freq_hz=*/32000, checksum_reference);
 }
 
 TEST_F(AcmReceiverBitExactnessOldApi, 48kHzOutput) {
   std::string checksum_reference = GetCPUInfo(kAVX2) != 0
-                                       ? "d118436e154a976009171c4d451d5574"
+                                       ? "2a465b973f13e86e916e7dfe443e5da3"
                                        : "f0148c5ef84e74e019ac7057af839102";
   Run(/*output_freq_hz=*/48000, checksum_reference);
 }
@@ -996,7 +996,7 @@ TEST_F(AcmReceiverBitExactnessOldApi, 48kHzOutputExternalDecoder) {
 
   auto factory = rtc::make_ref_counted<ADFactory>();
   std::string checksum_reference = GetCPUInfo(kAVX2) != 0
-                                       ? "d118436e154a976009171c4d451d5574"
+                                       ? "2a465b973f13e86e916e7dfe443e5da3"
                                        : "f0148c5ef84e74e019ac7057af839102";
   Run(48000, checksum_reference, factory,
       [](AudioCodingModule* acm) {
@@ -1235,7 +1235,7 @@ TEST_F(AcmSenderBitExactnessOldApi, IsacWb60ms) {
     defined(WEBRTC_ARCH_X86_64)
 TEST_F(AcmSenderBitExactnessOldApi, IsacSwb30ms) {
   ASSERT_NO_FATAL_FAILURE(SetUpTest("ISAC", 32000, 1, 104, 960, 960));
-  Run(/*audio_checksum_ref=*/"f4cf577f28a0dcbac33358b757518e0c",
+  Run(/*audio_checksum_ref=*/"a1b8c0eca14569a3a72141a293e2995a",
       /*payload_checksum_ref=*/"ce86106a93419aefb063097108ec94ab",
       /*expected_packets=*/33,
       /*expected_channels=*/test::AcmReceiveTestOldApi::kMonoOutput);
