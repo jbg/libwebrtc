@@ -25,7 +25,7 @@
 #include "net/dcsctp/public/types.h"
 #include "net/dcsctp/timer/task_queue_timeout.h"
 #include "p2p/base/packet_transport_internal.h"
-#include "rtc_base/containers/flat_set.h"
+#include "rtc_base/containers/flat_map.h"
 #include "rtc_base/copy_on_write_buffer.h"
 #include "rtc_base/random.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
@@ -111,7 +111,21 @@ class DcSctpTransport : public cricket::SctpTransportInternal,
   std::string debug_name_ = "DcSctpTransport";
   rtc::CopyOnWriteBuffer receive_buffer_;
 
-  flat_set<dcsctp::StreamID> local_close_;
+  // Used to keep track of the closing state of the data channel.
+  // Reset needs to happen both ways before signaling the transport
+  // is closed.
+  struct ClosingState {
+    // True when the peer has initiated the reset.
+    // If the peer receives a reset, it needs to fire the signal
+    // SignalClosingProcedureStartedRemotely.
+    bool closure_initiated = false;
+    // True when the peer received OnIncomingStreamsReset
+    bool incoming_reset_done = false;
+    // True when the peer received OnStreamsResetPerformed
+    bool outgoing_reset_done = false;
+  };
+
+  flat_map<dcsctp::StreamID, ClosingState> closing_states_;
   bool ready_to_send_data_ = false;
 };
 
