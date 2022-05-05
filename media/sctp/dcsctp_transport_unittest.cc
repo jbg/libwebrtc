@@ -100,30 +100,31 @@ TEST(DcSctpTransportTest, CloseSequence) {
     InSequence sequence;
 
     EXPECT_CALL(*peer_a.socket_, ResetStreams(ElementsAre(dcsctp::StreamID(1))))
-        .WillOnce(DoAll(
-            Invoke(peer_b.sctp_transport_.get(),
-                   &dcsctp::DcSctpSocketCallbacks::OnIncomingStreamsReset),
-            Invoke(peer_a.sctp_transport_.get(),
-                   &dcsctp::DcSctpSocketCallbacks::OnStreamsResetPerformed),
-            Return(dcsctp::ResetStreamsStatus::kPerformed)));
+        .WillOnce(Return(dcsctp::ResetStreamsStatus::kPerformed));
 
     EXPECT_CALL(*peer_b.socket_, ResetStreams(ElementsAre(dcsctp::StreamID(1))))
-        .WillOnce(DoAll(
-            Invoke(peer_a.sctp_transport_.get(),
-                   &dcsctp::DcSctpSocketCallbacks::OnIncomingStreamsReset),
-            Invoke(peer_b.sctp_transport_.get(),
-                   &dcsctp::DcSctpSocketCallbacks::OnStreamsResetPerformed),
-            Return(dcsctp::ResetStreamsStatus::kPerformed)));
+        .WillOnce(Return(dcsctp::ResetStreamsStatus::kPerformed));
 
+    EXPECT_CALL(peer_b.observer_, OnSignalClosingProcedureStartedRemotely(1));
     EXPECT_CALL(peer_a.observer_, OnSignalClosingProcedureComplete(1));
     EXPECT_CALL(peer_b.observer_, OnSignalClosingProcedureComplete(1));
-    EXPECT_CALL(peer_b.observer_, OnSignalClosingProcedureStartedRemotely(1));
   }
 
   peer_a.sctp_transport_->Start(5000, 5000, 256 * 1024);
   peer_b.sctp_transport_->Start(5000, 5000, 256 * 1024);
   peer_a.sctp_transport_->OpenStream(1);
   peer_a.sctp_transport_->ResetStream(1);
+
+  // Simulate the callbacks from the stream resets
+  dcsctp::StreamID streams[1] = {dcsctp::StreamID(1)};
+  static_cast<dcsctp::DcSctpSocketCallbacks*>(peer_a.sctp_transport_.get())
+      ->OnStreamsResetPerformed(streams);
+  static_cast<dcsctp::DcSctpSocketCallbacks*>(peer_b.sctp_transport_.get())
+      ->OnIncomingStreamsReset(streams);
+  static_cast<dcsctp::DcSctpSocketCallbacks*>(peer_a.sctp_transport_.get())
+      ->OnIncomingStreamsReset(streams);
+  static_cast<dcsctp::DcSctpSocketCallbacks*>(peer_b.sctp_transport_.get())
+      ->OnStreamsResetPerformed(streams);
 }
 
 }  // namespace webrtc
