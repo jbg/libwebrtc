@@ -50,6 +50,24 @@
       "message": "Thanks for the fix.\n\nI\u0027m wondering if we should proatively turn off the sanitizer on all the calls to dlopen\u0027ed functions, instead of fixing them one as a time as the downstream address sanitizer builds find them, presumably when running tests?\n",
       "revId": "acb5e71d14a44324b834f5e435b8f8283fdfb8b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b584275_bf5d3641",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-05-05T18:22:24Z",
+      "side": 1,
+      "message": "Sadly, it\u0027s not the downstream tests that cause them. The only way I\u0027ve been able to repro is with \"is_official_build\", though I think I had been pointed to the \"use_cfi_icall\" arg by pcc@, I can\u0027t remember at the moment if it worked.\n\nEssentially yes though, all dlopen\u0027ed function calls need to have this IIUC. Calls into the PipeWire stubs seem to be fine *except* for the initialize function (which may be a bug worth following up on).\n\nChrome upstream used to have a file that blanket applied cfi-icall to a given file but:\n1) This is a lot harder to update in sync to the code as we split new files\n2) They want to move away from/deprecate it and make call-sites explicitly declare it.\n\nIf there\u0027s some tool to help audit if a new dlopen function call (or a call to a function that comes from dlopen) that would be great. But perhaps for now the best we can do is ensure extra scrutiny of added \"pw_foo\" calls that likely come from a dlopen.",
+      "parentUuid": "56dee667_aacb8fae",
+      "revId": "acb5e71d14a44324b834f5e435b8f8283fdfb8b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ],
   "submitRequirementResults": [
