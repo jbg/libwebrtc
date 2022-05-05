@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60256928_2300a75d",
+        "filename": "binary-size.config",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-05-05T13:51:06Z",
+      "side": 0,
+      "message": "Yes exactly, it\u0027s been broken since I changed the bucket of the CI bots computing the binary size.",
+      "parentUuid": "0767e5fc_9a229f3c",
+      "revId": "ad767821f5b7b0a10c313173a7644570bce82366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43e56850_b1115d2b",
@@ -49,6 +67,30 @@
       "writtenOn": "2022-05-05T13:46:19Z",
       "side": 0,
       "message": "Which old info is this referring to?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 38
+      },
+      "revId": "ad767821f5b7b0a10c313173a7644570bce82366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "938533c0_32d38b05",
+        "filename": "binary-size.config",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-05-05T13:51:06Z",
+      "side": 0,
+      "message": "Added the link in the description.\nI tried to keep the former config in the Obsolete section but I don\u0027t think it was relevant for my case.",
+      "parentUuid": "43e56850_b1115d2b",
       "range": {
         "startLine": 14,
         "startChar": 0,
