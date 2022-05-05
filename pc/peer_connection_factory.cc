@@ -129,14 +129,14 @@ RtpCapabilities PeerConnectionFactory::GetRtpSenderCapabilities(
   switch (kind) {
     case cricket::MEDIA_TYPE_AUDIO: {
       cricket::AudioCodecs cricket_codecs;
-      channel_manager()->GetSupportedAudioSendCodecs(&cricket_codecs);
+      cricket_codecs = media_engine()->voice().send_codecs();
       return ToRtpCapabilities(
           cricket_codecs,
           channel_manager()->GetDefaultEnabledAudioRtpHeaderExtensions());
     }
     case cricket::MEDIA_TYPE_VIDEO: {
       cricket::VideoCodecs cricket_codecs;
-      channel_manager()->GetSupportedVideoSendCodecs(&cricket_codecs);
+      cricket_codecs = media_engine()->video().send_codecs();
       return ToRtpCapabilities(
           cricket_codecs,
           channel_manager()->GetDefaultEnabledVideoRtpHeaderExtensions());
@@ -156,7 +156,7 @@ RtpCapabilities PeerConnectionFactory::GetRtpReceiverCapabilities(
   switch (kind) {
     case cricket::MEDIA_TYPE_AUDIO: {
       cricket::AudioCodecs cricket_codecs;
-      channel_manager()->GetSupportedAudioReceiveCodecs(&cricket_codecs);
+      cricket_codecs = media_engine()->voice().send_codecs();
       return ToRtpCapabilities(
           cricket_codecs,
           channel_manager()->GetDefaultEnabledAudioRtpHeaderExtensions());
@@ -193,6 +193,12 @@ bool PeerConnectionFactory::StartAecDump(FILE* file, int64_t max_size_bytes) {
 void PeerConnectionFactory::StopAecDump() {
   RTC_DCHECK_RUN_ON(worker_thread());
   channel_manager()->StopAecDump();
+}
+
+cricket::MediaEngineInterface* PeerConnectionFactory::media_engine() const {
+  RTC_DCHECK(context_);
+  RTC_DCHECK(context_->channel_manager());
+  return context_->channel_manager()->media_engine();
 }
 
 RTCErrorOr<rtc::scoped_refptr<PeerConnectionInterface>>

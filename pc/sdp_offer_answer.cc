@@ -1258,10 +1258,17 @@ void SdpOfferAnswerHandler::Initialize(
 }
 
 // ==================================================================
-// Access to pc_ variables
+// Access to pc_ and context_ variables
 cricket::ChannelManager* SdpOfferAnswerHandler::channel_manager() const {
   return context_->channel_manager();
 }
+
+cricket::MediaEngineInterface* SdpOfferAnswerHandler::media_engine() const {
+  RTC_DCHECK(context_);
+  RTC_DCHECK(context_->channel_manager());
+  return context_->channel_manager()->media_engine();
+}
+
 TransceiverList* SdpOfferAnswerHandler::transceivers() {
   if (!pc_->rtp_manager()) {
     return nullptr;
@@ -3893,7 +3900,7 @@ void SdpOfferAnswerHandler::GetOptionsForPlanBOffer(
         cricket::MEDIA_TYPE_AUDIO, cricket::CN_AUDIO,
         RtpTransceiverDirectionFromSendRecv(send_audio, recv_audio), false);
     options.header_extensions =
-        channel_manager()->GetSupportedAudioRtpHeaderExtensions();
+        media_engine()->voice().GetRtpHeaderExtensions();
     session_options->media_description_options.push_back(options);
     audio_index = session_options->media_description_options.size() - 1;
   }
@@ -3902,7 +3909,7 @@ void SdpOfferAnswerHandler::GetOptionsForPlanBOffer(
         cricket::MEDIA_TYPE_VIDEO, cricket::CN_VIDEO,
         RtpTransceiverDirectionFromSendRecv(send_video, recv_video), false);
     options.header_extensions =
-        channel_manager()->GetSupportedVideoRtpHeaderExtensions();
+        media_engine()->video().GetRtpHeaderExtensions();
     session_options->media_description_options.push_back(options);
     video_index = session_options->media_description_options.size() - 1;
   }
@@ -4967,7 +4974,7 @@ void SdpOfferAnswerHandler::GenerateMediaDescriptionOptions(
         *audio_index = session_options->media_description_options.size() - 1;
       }
       session_options->media_description_options.back().header_extensions =
-          channel_manager()->GetSupportedAudioRtpHeaderExtensions();
+          media_engine()->voice().GetRtpHeaderExtensions();
     } else if (IsVideoContent(&content)) {
       // If we already have an video m= section, reject this extra one.
       if (*video_index) {
@@ -4984,7 +4991,7 @@ void SdpOfferAnswerHandler::GenerateMediaDescriptionOptions(
         *video_index = session_options->media_description_options.size() - 1;
       }
       session_options->media_description_options.back().header_extensions =
-          channel_manager()->GetSupportedVideoRtpHeaderExtensions();
+          media_engine()->video().GetRtpHeaderExtensions();
     } else if (IsUnsupportedContent(&content)) {
       session_options->media_description_options.push_back(
           cricket::MediaDescriptionOptions(cricket::MEDIA_TYPE_UNSUPPORTED,
