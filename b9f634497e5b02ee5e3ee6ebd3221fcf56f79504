@@ -16,6 +16,24 @@
       "message": "Seems a bit odd - does this mean that close() won\u0027t be called on the answering side any more, since the reset now covers closing both ends?\n\nI see that this is a junit test, haven\u0027t used that one.",
       "revId": "b9f634497e5b02ee5e3ee6ebd3221fcf56f79504",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9968f5_10fb447d",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionEndToEndTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-05T08:42:08Z",
+      "side": 0,
+      "message": "dataChannel is an actually data channel, not a mock object where you set expectations (you do that with all the other .expect*() methods).\n\nSo the test was actually trying to close the channel twice, from each end. Closing from one direction is enough!",
+      "parentUuid": "db259e2c_a3e6df02",
+      "revId": "b9f634497e5b02ee5e3ee6ebd3221fcf56f79504",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
