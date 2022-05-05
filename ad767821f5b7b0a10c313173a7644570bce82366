@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cbef3ec_fbb13f8f",
+        "filename": "binary-size.config",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-05T13:46:19Z",
+      "side": 0,
+      "message": "Speaking of binary size, the new gerrit UI kind of hide it. Are we sure this is still working?\n\nI checked a couple of CLs and there were only iOS binary size..",
+      "revId": "ad767821f5b7b0a10c313173a7644570bce82366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e56850_b1115d2b",
+        "filename": "binary-size.config",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-05T13:46:19Z",
+      "side": 0,
+      "message": "Which old info is this referring to?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 38
+      },
+      "revId": "ad767821f5b7b0a10c313173a7644570bce82366",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
