@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "499150b8_ea750355",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2022-05-05T14:45:01Z",
+      "side": 1,
+      "message": "can we do this once it has proven to show the desired effect? (for which having it in webrtc-internals should suffice)",
+      "parentUuid": "513135de_5ded59fa",
+      "revId": "eb0e0bf851cb1265cab2d07afb2df2eb6ba028ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94d9b4de_b862084f",
         "filename": "video/receive_statistics_proxy2.cc",
         "patchSetId": 1
@@ -135,6 +153,24 @@
       "side": 1,
       "message": "Thoughts?",
       "parentUuid": "94d9b4de_b862084f",
+      "revId": "eb0e0bf851cb1265cab2d07afb2df2eb6ba028ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ad49cb_972fe115",
+        "filename": "video/receive_statistics_proxy2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2022-05-05T14:45:01Z",
+      "side": 1,
+      "message": "why not. The error is relatively small but might be important for things like thumbnail-sized simulcast streams.\nThe mechanics of this is a bit awkward since it now looks for an exact zero which technically covers frames with two packets at  the same time but this should not be an issue.",
+      "parentUuid": "ff020cbe_38bc5ad7",
       "revId": "eb0e0bf851cb1265cab2d07afb2df2eb6ba028ab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
