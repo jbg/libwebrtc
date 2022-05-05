@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3456ff70_105deea6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-05T12:58:19Z",
+      "side": 1,
+      "message": "This crash is reported here https://github.com/emersion/xdg-desktop-portal-wlr/issues/205. It can be reproduced with Chromium using \"is_official_build\u003dtrue\" build option. With this one line added I can no longer reproduce the crash.",
+      "revId": "acb5e71d14a44324b834f5e435b8f8283fdfb8b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
