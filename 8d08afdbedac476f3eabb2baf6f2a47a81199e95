@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dc37760_aeca63f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T11:06:04Z",
+      "side": 1,
+      "message": "Some questions on the approach of a new map containing channel info + the choice of 3 booleans as a state representation.\n\nOtherwise nits.",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ed7c8b_58969326",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T11:06:04Z",
+      "side": 1,
+      "message": "Is it correct that if closure_initiated and outgoing_reset_done are both true on entry to this function, both blocks should be executed?",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90634ed9_2a66330b",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T11:06:04Z",
+      "side": 1,
+      "message": "DataChannelClosingState?\nThis is not the closing state of the transport.",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "149c1a8f_2d316013",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T11:06:04Z",
+      "side": 1,
+      "message": "Which party does \"the peer\" refer to here?\nIt would be logical to think that it refers to the other end of the connection, but that\u0027s not observable (it\u0027s remote), so it has to refer to the local connection.\n\n\"The connection\" might be clearer.",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a07782c_039440fd",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T11:06:04Z",
+      "side": 1,
+      "message": "Are all 8 combinations of these states possible?\nIf not, it might be worth considering if this should be an enum of fewer states.",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5072dfda_6252d1c8",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T11:06:04Z",
+      "side": 1,
+      "message": "I\u0027m nervous when stream state is kept in a container separate from the streams themselves. Do we have a stream object anywhere where state of streams is already stored, or is the stream only represented by its sid?",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09380154_67d5c13c",
+        "filename": "pc/data_channel_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T11:06:04Z",
+      "side": 1,
+      "message": "The difference doesn\u0027t seem to matter, given that the caller and callee are independent. Is this just so that we get both sequences tested?\nIf so, I\u0027d consider using a modulus of 3, just so that we don\u0027t replicate the odd/even sequence of data channel ID usage in the datachannel RFC.",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde8fd3e_b96b341f",
+        "filename": "pc/data_channel_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T11:06:04Z",
+      "side": 1,
+      "message": "TODO(bug number) for the DISABLED_?",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
