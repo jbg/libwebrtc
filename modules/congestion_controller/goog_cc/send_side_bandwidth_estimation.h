@@ -98,9 +98,10 @@ class SendSideBandwidthEstimation {
   void UpdateReceiverEstimate(Timestamp at_time, DataRate bandwidth);
 
   // Call when a new delay-based estimate is available.
-  void UpdateDelayBasedEstimate(Timestamp at_time,
-                                DataRate bitrate,
-                                BandwidthUsage delay_detector_state);
+  void UpdateDelayBasedEstimate(Timestamp at_time, DataRate bitrate);
+
+  // Call to update the delay-based state when receiving PacketsFeedback.
+  void UpdateDelayBasedState(BandwidthUsage delay_detector_state);
 
   // Call when we receive a RTCP message with a ReceiveBlock.
   void UpdatePacketsLost(int64_t packets_lost,
