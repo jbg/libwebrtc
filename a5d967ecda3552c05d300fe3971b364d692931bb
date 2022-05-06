@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6884d909_59f2a9d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2022-05-06T21:27:42Z",
+      "side": 1,
+      "message": "Hi Alex, PTAL at this CL that fixes some issues in WGC so we can update the WebRTC trybots.",
+      "revId": "a5d967ecda3552c05d300fe3971b364d692931bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
