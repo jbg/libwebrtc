@@ -193,6 +193,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "834e1bf8_35bcabfb",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T13:08:20Z",
+      "side": 1,
+      "message": "Heh, the word \"transport\" is ambiguous when it comes to datachannels over SCTP :-)\nLooks good now.",
+      "parentUuid": "6f10662d_08f5f537",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09380154_67d5c13c",
@@ -224,6 +242,24 @@
       "side": 1,
       "message": "It\u0027s just to make sure that we can have simultaneous close sequence happening on both sides at the same time, it feels better than one side doing all the open and close and the other one answering.\nMoved to a mod 3 sequence as suggested.",
       "parentUuid": "09380154_67d5c13c",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1892d694_fad0b2a0",
+        "filename": "pc/data_channel_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T13:08:20Z",
+      "side": 1,
+      "message": "Perhaps worth making a comment on why it\u0027s that way?\nBut looks good.",
+      "parentUuid": "27e9b122_4bb02489",
       "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
