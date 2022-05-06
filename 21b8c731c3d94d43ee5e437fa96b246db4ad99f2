@@ -1,0 +1,337 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80d7f39a_aa4e5530",
+        "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Why not declare it as default here? Otherwise you prevent it from becoming trivial since the dtor is user-provided.",
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11f9b2dd_6e54d785",
+        "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Nit: Depending the context you read this it may be better to say\n\n\"Use UpdateRtcpTimestamp with NtpTime as a parameter.\"\n\ninstead of \"below\".",
+      "range": {
+        "startLine": 39,
+        "startChar": 43,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "889d28a7_71824831",
+        "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "At a glance this looks a bit strange since it circumvents the \"fail fast\" pattern. I get that ntp_time will be out of scope if you try to do it the other way around, but I\u0027m not sure of it\u0027s warranted to have it in its own scope in such a tiny function anyway... I guess we have to wait and see how things develop with this new type of if statement.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 14
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "815d4fe7_045cf192",
+        "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Nit: remove (and add a period at the end)",
+      "range": {
+        "startLine": 67,
+        "startChar": 56,
+        "endLine": 67,
+        "endChar": 61
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05fa4764_53ee6a92",
+        "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "I\u0027d rather say 0.25 ns",
+      "range": {
+        "startLine": 77,
+        "startChar": 71,
+        "endLine": 77,
+        "endChar": 77
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbf5a2e7_46b6ca0f",
+        "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 84,
+        "startChar": 5,
+        "endLine": 84,
+        "endChar": 11
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c31ab7e8_dd05b19f",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Why not add operator- to NtpTime?",
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "965eace4_2f3313cb",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Nit: RTT and NTP",
+      "range": {
+        "startLine": 68,
+        "startChar": 13,
+        "endLine": 68,
+        "endChar": 16
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c98ea46d_1583f8e7",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Enclose this in () to make complement the point you\u0027re making in the comment above",
+      "range": {
+        "startLine": 72,
+        "startChar": 20,
+        "endLine": 72,
+        "endChar": 49
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "207bf826_b06d2eb0",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Consider making this a (constexpr) factory function instead of a constant to be able to write this in a more readable way.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 14
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1602f05_8b9ca9ae",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "You shouldn\u0027t use ASSERT in helper functions since an early return here won\u0027t abort the actual test. Consider RTC_DCHECK instead.",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 15
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c90929_6ad8b959",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Nit: Enclose in ()",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 62
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7833f717_e9d3ce25",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 15
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc8231e8_116902f4",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Is it really appropriate to use brace intialization for all of these?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 51
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79491d1b_2a723914",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-06T12:26:50Z",
+      "side": 1,
+      "message": "Nit: Extract this to a separate test?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 80
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
