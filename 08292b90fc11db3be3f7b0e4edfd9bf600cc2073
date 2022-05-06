@@ -140,6 +140,24 @@
       "parentUuid": "e7b93ffe_0ea24f49",
       "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63516ee2_6b373de3",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-05-06T06:23:32Z",
+      "side": 1,
+      "message": "Aha, I thought `fieldTrialsFindFullName` was a non-static method, so I wondered if we should send the field trial string from C++ to Java as `NetworkMonitor.java does`. But, that method was static, so it is okay then.",
+      "parentUuid": "6f2156df_158a0fab",
+      "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
