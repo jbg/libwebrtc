@@ -122,6 +122,24 @@
       "parentUuid": "66da1310_aa5f00a0",
       "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f2156df_158a0fab",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 8527
+      },
+      "writtenOn": "2022-05-06T06:09:31Z",
+      "side": 1,
+      "message": "Hi,\n\nSorry for late reply.\n\n1) About the change: Why do you want to change this ?\nThe current value 16, is most certainly set to avoid bugs in hw-encoders\non misc chipsets. Bugs in hw-encoders are not uncommon and using safety margin\nis \"standard procedure\".\n\nSpeculation: if you want to use hw-encoder on a resolution that is not a multiple of 16, then maybe you can capture a multiple of 16, and then crop away the part that you don\u0027t want ?\n\n2) Using PeerConnectionFactory.fieldTrialsFindFullName is the \"correct\" solution.\nCan you do a version with that, and I can help fix build problem ?\n\nWDYT ?",
+      "parentUuid": "e7b93ffe_0ea24f49",
+      "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
