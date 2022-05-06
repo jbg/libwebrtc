@@ -16,6 +16,46 @@
       "message": "Hi Alex, PTAL at this CL that fixes some issues in WGC so we can update the WebRTC trybots.",
       "revId": "a5d967ecda3552c05d300fe3971b364d692931bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c3a729a_5c50aee8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-05-06T21:57:20Z",
+      "side": 1,
+      "message": "LGTM, one comment NIT.",
+      "revId": "a5d967ecda3552c05d300fe3971b364d692931bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2547afd3_32295831",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-05-06T21:57:20Z",
+      "side": 1,
+      "message": "NIT: Not quite accurate anymore? (Well, still partially accurate, but now we store it for other reasons as well?)",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 31
+      },
+      "revId": "a5d967ecda3552c05d300fe3971b364d692931bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
