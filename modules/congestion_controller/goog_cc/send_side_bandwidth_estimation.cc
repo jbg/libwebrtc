@@ -333,16 +333,18 @@ void SendSideBandwidthEstimation::UpdateReceiverEstimate(Timestamp at_time,
   ApplyTargetLimits(at_time);
 }
 
-void SendSideBandwidthEstimation::UpdateDelayBasedEstimate(
-    Timestamp at_time,
-    DataRate bitrate,
-    BandwidthUsage delay_detector_state) {
+void SendSideBandwidthEstimation::UpdateDelayBasedEstimate(Timestamp at_time,
+                                                           DataRate bitrate) {
   link_capacity_.UpdateDelayBasedEstimate(at_time, bitrate);
-  delay_detector_state_ = delay_detector_state;
   // TODO(srte): Ensure caller passes PlusInfinity, not zero, to represent no
   // limitation.
   delay_based_limit_ = bitrate.IsZero() ? DataRate::PlusInfinity() : bitrate;
   ApplyTargetLimits(at_time);
+}
+
+void SendSideBandwidthEstimation::UpdateDelayBasedState(
+    BandwidthUsage delay_detector_state) {
+  delay_detector_state_ = delay_detector_state;
 }
 
 void SendSideBandwidthEstimation::SetAcknowledgedRate(
