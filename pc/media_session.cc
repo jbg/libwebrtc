@@ -1566,12 +1566,14 @@ MediaSessionDescriptionFactory::MediaSessionDescriptionFactory(
     const TransportDescriptionFactory* transport_desc_factory)
     : MediaSessionDescriptionFactory(transport_desc_factory,
                                      &channel_manager->ssrc_generator()) {
-  channel_manager->GetSupportedAudioSendCodecs(&audio_send_codecs_);
-  channel_manager->GetSupportedAudioReceiveCodecs(&audio_recv_codecs_);
-  channel_manager->GetSupportedVideoSendCodecs(&video_send_codecs_);
-  channel_manager->GetSupportedVideoReceiveCodecs(&video_recv_codecs_);
-  ComputeAudioCodecsIntersectionAndUnion();
-  ComputeVideoCodecsIntersectionAndUnion();
+  if (channel_manager) {
+    audio_send_codecs_ = channel_manager->media_engine()->voice().send_codecs();
+    audio_recv_codecs_ = channel_manager->media_engine()->voice().recv_codecs();
+    channel_manager->GetSupportedVideoSendCodecs(&video_send_codecs_);
+    channel_manager->GetSupportedVideoReceiveCodecs(&video_recv_codecs_);
+    ComputeAudioCodecsIntersectionAndUnion();
+    ComputeVideoCodecsIntersectionAndUnion();
+  }
 }
 
 const AudioCodecs& MediaSessionDescriptionFactory::audio_sendrecv_codecs()
