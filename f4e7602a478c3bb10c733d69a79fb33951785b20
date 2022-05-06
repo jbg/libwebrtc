@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d1a1c5_cd2ef228",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T13:00:15Z",
+      "side": 1,
+      "message": "Review best done with \"ignore whitespace\" on. There are some large pieces of code that have been wrapped in an IF statement.\n\nThere was code that ran without a MediaEngine, so I made sure the tests covered that case.\n\nThe ultimate goal here is to destroy the ChannelManager class - it seems to consist of a frontend for the MediaEngine + two Create functions where it doesn\u0027t even hold the data for most of the parameters, and that\u0027s not enough role for a whole class.",
+      "revId": "f4e7602a478c3bb10c733d69a79fb33951785b20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
