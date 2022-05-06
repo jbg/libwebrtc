@@ -558,9 +558,7 @@ rtc_library("desktop_capture_generic") {
       "d3d11.lib",
       "dxgi.lib",
     ]
-    deps += [
-      "../../rtc_base:win32",
-    ]
+    deps += [ "../../rtc_base:win32" ]
   }
 
   absl_deps = [
@@ -636,6 +634,8 @@ rtc_library("desktop_capture_generic") {
       "win/wgc_desktop_frame.cc",
       "win/wgc_desktop_frame.h",
     ]
+
+    libs += [ "dwmapi.lib" ]
   }
 }
 
