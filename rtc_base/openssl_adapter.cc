@@ -166,6 +166,19 @@ static void LogSslError() {
 
 namespace rtc {
 
+namespace {
+std::string StrJoin(const std::vector<std::string> list, char delimiter) {
+  RTC_CHECK(!list.empty());
+  StringBuilder sb;
+  sb << list[0];
+  for (size_t i = 1; i < list.size(); i++) {
+    sb.AppendFormat("%c", delimiter);
+    sb << list[i];
+  }
+  return sb.Release();
+}
+}  // namespace
+
 bool OpenSSLAdapter::InitializeSSL() {
   if (!SSL_library_init())
     return false;
@@ -354,7 +367,7 @@ int OpenSSLAdapter::BeginSSL() {
   }
 
   if (!elliptic_curves_.empty()) {
-    SSL_set1_curves_list(ssl_, rtc::join(elliptic_curves_, ':').c_str());
+    SSL_set1_curves_list(ssl_, StrJoin(elliptic_curves_, ':').c_str());
   }
 
   // Now that the initial config is done, transfer ownership of `bio` to the
