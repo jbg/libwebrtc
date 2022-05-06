@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be66fd88_6b08cb23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T15:15:50Z",
+      "side": 1,
+      "message": "A lot of pushback - want to get this underway so that I can make smaller CLs. This CL is already too big for comfort.",
+      "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d82f11d_9f8e4c7b",
@@ -14,6 +31,24 @@
       "writtenOn": "2022-05-06T14:58:15Z",
       "side": 1,
       "message": "Close() is getting to be long and harder to read  with every special case that gets added. Can this be moved to a separate function, e.g. StopTransceivers() that does the media check + loop?",
+      "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f73406e_c1d90976",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T15:15:50Z",
+      "side": 1,
+      "message": "I was a bit surprised to see how much code we actually have that\u0027s special-cased on the media support. I\u0027d like to land this (smallest possible change) and refactor.\n\nThat someone was actually using WebRTC without injecting a media engine was actually a surprise to me - this inspired a number of the changes!\n\nThis should probably be made into a rtp_manager()-\u003eCloseAllTransceivers() method.",
+      "parentUuid": "6d82f11d_9f8e4c7b",
       "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -37,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9bd0fa1_f932154b",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1854,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T15:15:50Z",
+      "side": 1,
+      "message": "I\u0027ve had so many experiences with stuff that has to be done in a specific sequence that I\u0027m afraid to move things around.... once I\u0027ve checked who calls RtpTransmissionManager::Close(), it might simply merge into that. But want to do that in the next CL(s).",
+      "parentUuid": "e51b7fa6_13ce67d0",
+      "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "254919e5_82436f28",
         "filename": "pc/peer_connection.h",
         "patchSetId": 5
@@ -48,6 +101,24 @@
       "writtenOn": "2022-05-06T14:58:15Z",
       "side": 1,
       "message": "don\u0027t need else since the if () is an early return.",
+      "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef3cbd8c_0659696a",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-06T15:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "254919e5_82436f28",
       "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
