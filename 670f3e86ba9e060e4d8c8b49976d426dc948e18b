@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1d49957_1c30a279",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-05-06T07:00:24Z",
+      "side": 1,
+      "message": "This is always evaluating to true - consider skipping?",
+      "range": {
+        "startLine": 499,
+        "startChar": 8,
+        "endLine": 499,
+        "endChar": 41
+      },
+      "revId": "670f3e86ba9e060e4d8c8b49976d426dc948e18b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49276117_95664536",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-05-06T07:00:24Z",
+      "side": 1,
+      "message": "Same here. This is always true",
+      "range": {
+        "startLine": 526,
+        "startChar": 8,
+        "endLine": 526,
+        "endChar": 41
+      },
+      "revId": "670f3e86ba9e060e4d8c8b49976d426dc948e18b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "037016c7_67eddc81",
+        "filename": "media/sctp/dcsctp_transport_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-05-06T07:00:24Z",
+      "side": 1,
+      "message": "I would\u0027ve expected more unit tests to test the different sequences - could you add some?",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 1
+      },
+      "revId": "670f3e86ba9e060e4d8c8b49976d426dc948e18b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
