@@ -56,6 +56,30 @@
       },
       "revId": "a5d967ecda3552c05d300fe3971b364d692931bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddf96266_aa669fb8",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2022-05-06T22:53:43Z",
+      "side": 1,
+      "message": "We still store it for the same reasons, but you\u0027re right this comment could be updated. Mainly I renamed this because \"previous\" wasn\u0027t exactly correct, it is the current size of the buffers in the frame pool. It was more like \"last observed size\" but now that it\u0027s provided at construction I just shortened it to size_.",
+      "parentUuid": "2547afd3_32295831",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 31
+      },
+      "revId": "a5d967ecda3552c05d300fe3971b364d692931bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
