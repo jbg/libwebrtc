@@ -273,7 +273,11 @@ class PeerConnection : public PeerConnectionInternal,
       rtc::scoped_refptr<RtpTransceiverProxyWithInternal<RtpTransceiver>>>
   GetTransceiversInternal() const override {
     RTC_DCHECK_RUN_ON(signaling_thread());
-    return rtp_manager()->transceivers()->List();
+    if (ConfiguredForMedia()) {
+      return rtp_manager()->transceivers()->List();
+    } else {
+      return {};
+    }
   }
 
   sigslot::signal1<SctpDataChannel*>& SignalSctpDataChannelCreated() override {
@@ -596,6 +600,7 @@ class PeerConnection : public PeerConnectionInternal,
   cricket::ChannelManager* channel_manager() {
     return context_->channel_manager();
   }
+  cricket::MediaEngineInterface* media_engine();
 
   const rtc::scoped_refptr<ConnectionContext> context_;
   // Field trials active for this PeerConnection is the first of:
