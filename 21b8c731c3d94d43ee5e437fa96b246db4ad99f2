@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7901e51c_089130cb",
+        "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "chromium habbit.\nBecause of binary size\nthere used to be a strict rule that non-trivial destructors shouldn\u0027t be inlined.\nThis class is complicated enough, I doubt its destructor can be trivial.\n\n[I do not like that rule to be strict anyway. even from binary size point of view sometimes forcing destructor not to be inlined increases binary size]",
+      "parentUuid": "80d7f39a_aa4e5530",
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "11f9b2dd_6e54d785",
         "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
         "patchSetId": 1
@@ -43,6 +61,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0b3219b2_ddfa6292",
+        "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "11f9b2dd_6e54d785",
+      "range": {
+        "startLine": 39,
+        "startChar": 43,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "889d28a7_71824831",
         "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
         "patchSetId": 1
@@ -54,6 +96,30 @@
       "writtenOn": "2022-05-06T12:26:50Z",
       "side": 1,
       "message": "At a glance this looks a bit strange since it circumvents the \"fail fast\" pattern. I get that ntp_time will be out of scope if you try to do it the other way around, but I\u0027m not sure of it\u0027s warranted to have it in its own scope in such a tiny function anyway... I guess we have to wait and see how things develop with this new type of if statement.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 14
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c24db17_ebf5d99d",
+        "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "I think this function is short enough, so that arguments for \u0027avoid context where ntp_time is invalid\u0027 and for \u0027early return\u0027 are both weak.\n\nrewrote to a more classical style.",
+      "parentUuid": "889d28a7_71824831",
       "range": {
         "startLine": 55,
         "startChar": 0,
@@ -112,6 +178,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bcb50621_7418d084",
+        "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "I think one digit after the dot is more than enough for this precision.",
+      "parentUuid": "05fa4764_53ee6a92",
+      "range": {
+        "startLine": 77,
+        "startChar": 71,
+        "endLine": 77,
+        "endChar": 77
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dbf5a2e7_46b6ca0f",
         "filename": "modules/rtp_rtcp/include/remote_ntp_time_estimator.h",
         "patchSetId": 1
@@ -150,6 +240,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c21300_370b6395",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "because there is no type to represent NtpTimeDiff, and I do not feel there is enough usage of it to introduce it.\noperator- that would return plain int feels unsafe.\n\nintroducing operator- just for this file goes against etiquette https://abseil.io/tips/99",
+      "parentUuid": "c31ab7e8_dd05b19f",
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "965eace4_2f3313cb",
@@ -163,6 +271,30 @@
       "writtenOn": "2022-05-06T12:26:50Z",
       "side": 1,
       "message": "Nit: RTT and NTP",
+      "range": {
+        "startLine": 68,
+        "startChar": 13,
+        "endLine": 68,
+        "endChar": 16
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78093c9f_5bfe4a41",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "965eace4_2f3313cb",
       "range": {
         "startLine": 68,
         "startChar": 13,
@@ -198,6 +330,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "92664d04_db5a6330",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c98ea46d_1583f8e7",
+      "range": {
+        "startLine": 72,
+        "startChar": 20,
+        "endLine": 72,
+        "endChar": 49
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "207bf826_b06d2eb0",
         "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
         "patchSetId": 1
@@ -209,6 +365,30 @@
       "writtenOn": "2022-05-06T12:26:50Z",
       "side": 1,
       "message": "Consider making this a (constexpr) factory function instead of a constant to be able to write this in a more readable way.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 14
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15c39aed_ec2e7f5f",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "207bf826_b06d2eb0",
       "range": {
         "startLine": 25,
         "startChar": 0,
@@ -244,6 +424,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "917e8448_43ca4e50",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1602f05_8b9ca9ae",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 15
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "52c90929_6ad8b959",
         "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
         "patchSetId": 1
@@ -255,6 +459,30 @@
       "writtenOn": "2022-05-06T12:26:50Z",
       "side": 1,
       "message": "Nit: Enclose in ()",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 62
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f37da6a_6bdfd4e4",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "instead reused helper to convert TimeDelta to ntp units.",
+      "parentUuid": "52c90929_6ad8b959",
       "range": {
         "startLine": 53,
         "startChar": 8,
@@ -278,6 +506,30 @@
       "writtenOn": "2022-05-06T12:26:50Z",
       "side": 1,
       "message": "Ditto",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 15
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4418bb9c_74191193",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7833f717_e9d3ce25",
       "range": {
         "startLine": 57,
         "startChar": 4,
@@ -313,6 +565,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5fdd492e_f8d4f7ce",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "Other initialisations won\u0027t compile.\n\nhttps://abseil.io/tips/88\n\n“Use {} initialization without the \u003d only if the above options don’t compile”",
+      "parentUuid": "fc8231e8_116902f4",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 51
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "79491d1b_2a723914",
         "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
         "patchSetId": 1
@@ -324,6 +600,30 @@
       "writtenOn": "2022-05-06T12:26:50Z",
       "side": 1,
       "message": "Nit: Extract this to a separate test?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 80
+      },
+      "revId": "21b8c731c3d94d43ee5e437fa96b246db4ad99f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d80ae2e2_dbfd3dab",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-06T13:31:09Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "79491d1b_2a723914",
       "range": {
         "startLine": 65,
         "startChar": 0,
