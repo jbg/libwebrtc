@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d82f11d_9f8e4c7b",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-06T14:58:15Z",
+      "side": 1,
+      "message": "Close() is getting to be long and harder to read  with every special case that gets added. Can this be moved to a separate function, e.g. StopTransceivers() that does the media check + loop?",
+      "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e51b7fa6_13ce67d0",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1854,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-06T14:58:15Z",
+      "side": 1,
+      "message": "repeating a check that\u0027s done a few lines above. Can this be consolidated?",
+      "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254919e5_82436f28",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-06T14:58:15Z",
+      "side": 1,
+      "message": "don\u0027t need else since the if () is an early return.",
+      "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3b88ba3_a7f6e255",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1567,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-06T14:58:15Z",
+      "side": 1,
+      "message": "instead of one more if(), factor out into separate function?",
+      "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a69b3b75_25a7249a",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4060,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-06T14:58:15Z",
+      "side": 1,
+      "message": "would be nice to break this away too",
+      "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "288c7ff8_c6f7be2d",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4543,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-06T14:58:15Z",
+      "side": 1,
+      "message": "ditto - I guess these are good in the sense that they highlight parts of the code that are separate from the general path",
+      "revId": "b3be7faed5530c3d0f765d92249e0558123cb81b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
