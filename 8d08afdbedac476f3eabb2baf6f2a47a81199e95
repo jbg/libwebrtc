@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1ec2f1d_58ff438e",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-06T12:51:06Z",
+      "side": 1,
+      "message": "The first block is only executed when closure_initiated is false. It allows the transport to signal the DC manager to transition the DC to a closing state. If you close a DC locally, the state should already be closing at this point.\n\nThe second block will be executed if outgoing_reset_done is true. I feel like the previous version was a bit more obvious when I had checks in both OnStreamResetPerformed and OnIncomingStreamsReset for `if (outgoing_reset_done \u0026\u0026 incoming_reset_done)`.",
+      "parentUuid": "43ed7c8b_58969326",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90634ed9_2a66330b",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-05-06T11:06:04Z",
       "side": 1,
       "message": "DataChannelClosingState?\nThis is not the closing state of the transport.",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e17f0f6_b8eeee5d",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-06T12:51:06Z",
+      "side": 1,
+      "message": "Renamed to StreamClosingState.",
+      "parentUuid": "90634ed9_2a66330b",
       "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "913974b6_d4063e7b",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-06T12:51:06Z",
+      "side": 1,
+      "message": "Reworded the section, let me know what you think.",
+      "parentUuid": "149c1a8f_2d316013",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a07782c_039440fd",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-05-06T11:06:04Z",
       "side": 1,
       "message": "Are all 8 combinations of these states possible?\nIf not, it might be worth considering if this should be an enum of fewer states.",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b622396_27b0bddc",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-06T12:51:06Z",
+      "side": 1,
+      "message": "Most are definitely possible. I considered a single enum, but since we need to keep track of the reset both ways and we need to handle races, it becomes too tricky.\nThis is the cleanest way to represent it I could find, and the old usrsctp transport had something very similar.",
+      "parentUuid": "5a07782c_039440fd",
       "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -103,6 +175,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f10662d_08f5f537",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-06T12:51:06Z",
+      "side": 1,
+      "message": "This is transport level state, not pure SCTP state nor data channel state.\nWe don\u0027t have anything else tracking the streams in the transport, it\u0027s all otherwise managed by dcSCTP internally.",
+      "parentUuid": "5072dfda_6252d1c8",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09380154_67d5c13c",
@@ -120,6 +210,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e9b122_4bb02489",
+        "filename": "pc/data_channel_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-06T12:51:06Z",
+      "side": 1,
+      "message": "It\u0027s just to make sure that we can have simultaneous close sequence happening on both sides at the same time, it feels better than one side doing all the open and close and the other one answering.\nMoved to a mod 3 sequence as suggested.",
+      "parentUuid": "09380154_67d5c13c",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bde8fd3e_b96b341f",
@@ -133,6 +241,24 @@
       "writtenOn": "2022-05-06T11:06:04Z",
       "side": 1,
       "message": "TODO(bug number) for the DISABLED_?",
+      "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69dfcc28_0f842ed9",
+        "filename": "pc/data_channel_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-05-06T12:51:06Z",
+      "side": 1,
+      "message": "I\u0027ll wait for https://webrtc-review.googlesource.com/c/src/+/261310 to land and just enable it directly when landing the CL then.",
+      "parentUuid": "bde8fd3e_b96b341f",
       "revId": "8d08afdbedac476f3eabb2baf6f2a47a81199e95",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
