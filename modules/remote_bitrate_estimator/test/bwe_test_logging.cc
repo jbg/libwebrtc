@@ -18,7 +18,6 @@
 #include <algorithm>
 
 #include "rtc_base/checks.h"
-#include "rtc_base/format_macros.h"
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/strings/string_builder.h"
 
