@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fe65851_c175f5b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-05-07T23:07:50Z",
+      "side": 1,
+      "message": "Hello Xavier. This CL is intended to fix a GN dependency issue at https://webrtc-review.googlesource.com/c/src/+/260220. Please take a look. Thanks.",
+      "revId": "edc3fec3797ff89bdb7d1b7a38a9a5b1b73bab0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
