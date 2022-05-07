@@ -25,6 +25,7 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 import org.webrtc.ThreadUtils.ThreadChecker;
+import org.webrtc.PeerConnectionFactory;
 
 /**
  * Android hardware video encoder.
@@ -211,13 +212,20 @@ class HardwareVideoEncoder implements VideoEncoder {
     this.callback = callback;
     automaticResizeOn = settings.automaticResizeOn;
 
-    if (settings.width % REQUIRED_RESOLUTION_ALIGNMENT != 0
-        || settings.height % REQUIRED_RESOLUTION_ALIGNMENT != 0) {
-      Logging.e(TAG, "MediaCodec is only tested with resolutions that are 16x16 aligned.");
-      return VideoCodecStatus.ERR_SIZE;
-    }
     this.width = settings.width;
     this.height = settings.height;
+
+    EncoderInfo encoderInfo = getEncoderInfo();
+    int requestedResolutionAlignment = encoderInfo.requestedResolutionAlignment;
+    if (settings.width % requestedResolutionAlignment != 0
+        || settings.height % requestedResolutionAlignment != 0) {
+      Logging.e(TAG,
+          "Illegal resolution. " + width + "x" + height
+              + " doens not meet the requested resolution alignment: "
+              + requestedResolutionAlignment);
+      return VideoCodecStatus.ERR_SIZE;
+    }
+
     useSurfaceMode = canUseSurface();
 
     if (settings.startBitrate != 0 && settings.maxFramerate != 0) {
@@ -516,8 +524,13 @@ class HardwareVideoEncoder implements VideoEncoder {
     // Since our MediaCodec is guaranteed to encode 16-pixel-aligned frames only, we set alignment
     // value to be 16. Additionally, this encoder produces a single stream. So it should not require
     // alignment for all layers.
+    int requestedResolutionAlignment = REQUIRED_RESOLUTION_ALIGNMENT;
+
+    if (PeerConnectionFactory.fieldTrialsFindFullName("WebRTC-Android-RelaxHWVideoEncoderResolutionAlignment").equals("Enabled")) {
+      requestedResolutionAlignment = 2;
+    }
     return new EncoderInfo(
-        /* requestedResolutionAlignment= */ REQUIRED_RESOLUTION_ALIGNMENT,
+        /* requestedResolutionAlignment= */ requestedResolutionAlignment,
         /* applyAlignmentToAllSimulcastLayers= */ false);
   }
 
@@ -528,9 +541,14 @@ class HardwareVideoEncoder implements VideoEncoder {
       return status;
     }
 
-    if (newWidth % REQUIRED_RESOLUTION_ALIGNMENT != 0
-        || newHeight % REQUIRED_RESOLUTION_ALIGNMENT != 0) {
-      Logging.e(TAG, "MediaCodec is only tested with resolutions that are 16x16 aligned.");
+    EncoderInfo encoderInfo = getEncoderInfo();
+    int requestedResolutionAlignment = encoderInfo.requestedResolutionAlignment;
+    if (newWidth % requestedResolutionAlignment != 0
+        || newHeight % requestedResolutionAlignment != 0) {
+      Logging.e(TAG,
+          "Illegal resolution. " + newWidth + "x" + newHeight
+              + " doens not meet the requested resolution alignment: "
+              + requestedResolutionAlignment);
       return VideoCodecStatus.ERR_SIZE;
     }
     width = newWidth;
