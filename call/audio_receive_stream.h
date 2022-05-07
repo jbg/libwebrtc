@@ -194,6 +194,8 @@ class AudioReceiveStream : public MediaReceiveStream {
   // Returns current value of base minimum delay in milliseconds.
   virtual int GetBaseMinimumPlayoutDelayMs() const = 0;
 
+  virtual uint32_t remote_ssrc() const = 0;
+
  protected:
   virtual ~AudioReceiveStream() {}
 };
