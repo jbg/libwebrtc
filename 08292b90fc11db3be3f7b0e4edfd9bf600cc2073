@@ -158,6 +158,24 @@
       "parentUuid": "6f2156df_158a0fab",
       "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44571ef4_3c3b559f",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 16681
+      },
+      "writtenOn": "2022-05-07T10:32:44Z",
+      "side": 1,
+      "message": "jonaso@\n\nHi,\n\nThanks for the reply.\n\n\u003e 1) About the change: Why do you want to change this ?\n\u003e ...\n\nAs I mentioned previously, in the following issue, I think it\u0027s nice to have a way to opt-out of the restriction.\nI don\u0027t mean to change the default behavior.\nThat\u0027s why I want to use field trials.\n\nhttps://bugs.chromium.org/p/webrtc/issues/detail?id\u003d13973\n\u003e - Some well-used resolutions like FHD: 1920x1080 are affected.\n\u003e - Some products are developed for specific Android devices and specific resolution. For those use cases, no need to implement the strict check on libwebrtc.\n\n\u003e 2) Using PeerConnectionFactory.fieldTrialsFindFullName is the \"correct\" solution.\n\u003e Can you do a version with that, and I can help fix build problem ?\n\nAppreciate your help.\n\nI updated a new patchset.\nIn that patchset. I tried to use PeerConnectionFactory.fieldTrialsFindFullName in HardwareVideoEncoder.java but I got the error as follows.\nCould you give me advice on this?\n\n\u003e ...\n\u003e INFO:root:Arch: x86_64\n\u003e INFO:root:Building: arm64-v8a\n\u003e ERROR Dependency cycle:\n\u003e   //sdk/android:default_video_codec_factory_java__build_config_crbug_908819 -\u003e\n\u003e   //sdk/android:hwcodecs_java__build_config_crbug_908819 -\u003e\n\u003e   //sdk/android:peerconnection_java__build_config_crbug_908819 -\u003e\n\u003e   //sdk/android:default_video_codec_factory_java__build_config_crbug_908819\n\u003e ...",
+      "parentUuid": "63516ee2_6b373de3",
+      "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
