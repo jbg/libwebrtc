@@ -167,6 +167,10 @@ if (is_android) {
     deps = [ "//third_party/androidx:androidx_annotation_annotation_java" ]
   }
 
+  rtc_android_library("field_trial_java") {
+    sources = [ "api/org/webrtc/FieldTrial.java" ]
+  }
+
   rtc_android_library("audio_api_java") {
     visibility = [ "*" ]
     sources = [
@@ -309,6 +313,7 @@ if (is_android) {
       ":base_java",
       ":builtin_audio_codecs_java",
       ":default_video_codec_factory_java",
+      ":field_trial_java",
 
       #TODO(bugs.webrtc.org/7452): Make injection mandatory and remove this dep.
       ":java_audio_device_module_java",
