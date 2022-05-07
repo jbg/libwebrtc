@@ -207,4 +207,9 @@ void FlexfecReceiveStreamImpl::SetRtpExtensions(
   config_.rtp.extensions = std::move(extensions);
 }
 
+const std::vector<RtpExtension>& FlexfecReceiveStreamImpl::GetRtpExtensions() {
+  RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
+  return config_.rtp.extensions;
+}
+
 }  // namespace webrtc

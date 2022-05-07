@@ -54,6 +54,7 @@ class ReceiveStream {
   // Set/change the rtp header extensions. Must be called on the packet
   // delivery thread.
   virtual void SetRtpExtensions(std::vector<RtpExtension> extensions) = 0;
+  virtual const std::vector<RtpExtension>& GetRtpExtensions() = 0;
 
   // Called on the packet delivery thread since some members of the config may
   // change mid-stream (e.g. the local ssrc). All mutation must also happen on
