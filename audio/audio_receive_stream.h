@@ -128,13 +128,14 @@ class AudioReceiveStream final : public webrtc::AudioReceiveStream,
 
   uint32_t local_ssrc() const;
 
-  uint32_t remote_ssrc() const {
+  uint32_t remote_ssrc() const override {
     // The remote_ssrc member variable of config_ will never change and can be
     // considered const.
     return config_.rtp.remote_ssrc;
   }
 
-  const webrtc::AudioReceiveStream::Config& config() const;
+  const std::string& sync_group() const;
+
   const AudioSendStream* GetAssociatedSendStreamForTesting() const;
 
   // TODO(tommi): Remove this method.

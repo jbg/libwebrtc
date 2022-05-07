@@ -1009,8 +1009,9 @@ void Call::DestroyAudioReceiveStream(
   audio_receive_stream->UnregisterFromTransport();
 
   uint32_t ssrc = audio_receive_stream->remote_ssrc();
-  const AudioReceiveStream::Config& config = audio_receive_stream->config();
-  receive_side_cc_.GetRemoteBitrateEstimator(UseSendSideBwe(config.rtp))
+  receive_side_cc_
+      .GetRemoteBitrateEstimator(
+          UseSendSideBwe(audio_receive_stream->rtp_config()))
       ->RemoveStream(ssrc);
 
   audio_receive_streams_.erase(audio_receive_stream);
@@ -1018,7 +1019,7 @@ void Call::DestroyAudioReceiveStream(
   // After calling erase(), call ConfigureSync. This will clear associated
   // video streams or associate them with a different audio stream if one exists
   // for this sync_group.
-  ConfigureSync(audio_receive_stream->config().sync_group);
+  ConfigureSync(audio_receive_stream->sync_group());
 
   UnregisterReceiveStream(ssrc);
 
@@ -1244,16 +1245,17 @@ void Call::DestroyFlexfecReceiveStream(FlexfecReceiveStream* receive_stream) {
   // TODO(bugs.webrtc.org/11993): Unregister on the network thread.
   receive_stream_impl->UnregisterFromTransport();
 
-  RTC_DCHECK(receive_stream != nullptr);
-  const FlexfecReceiveStream::RtpConfig& rtp = receive_stream->rtp_config();
-  UnregisterReceiveStream(rtp.remote_ssrc);
+  auto ssrc = receive_stream_impl->remote_ssrc();
+  UnregisterReceiveStream(ssrc);
 
   // Remove all SSRCs pointing to the FlexfecReceiveStreamImpl to be
   // destroyed.
-  receive_side_cc_.GetRemoteBitrateEstimator(UseSendSideBwe(rtp))
-      ->RemoveStream(rtp.remote_ssrc);
+  receive_side_cc_
+      .GetRemoteBitrateEstimator(
+          UseSendSideBwe(receive_stream_impl->rtp_config()))
+      ->RemoveStream(ssrc);
 
-  delete receive_stream;
+  delete receive_stream_impl;
 }
 
 void Call::AddAdaptationResource(rtc::scoped_refptr<Resource> resource) {
@@ -1471,7 +1473,7 @@ AudioReceiveStream* Call::FindAudioStreamForSyncGroup(
   RTC_DCHECK_RUN_ON(&receive_11993_checker_);
   if (!sync_group.empty()) {
     for (AudioReceiveStream* stream : audio_receive_streams_) {
-      if (stream->config().sync_group == sync_group)
+      if (stream->sync_group() == sync_group)
         return stream;
     }
   }
