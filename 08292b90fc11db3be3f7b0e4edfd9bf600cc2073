@@ -176,6 +176,24 @@
       "parentUuid": "63516ee2_6b373de3",
       "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25281672_49e410de",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-05-07T23:08:06Z",
+      "side": 1,
+      "message": "Oh, I see. That\u0027s because of the GN dependency.\n\n`PeerConnectionFactory.fieldTrialsFindFullName` was previously used in `NetworkMonitorAutoDetect.java`. (The usage is now gone by https://webrtc-review.googlesource.com/c/src/+/257081) The `NetworkMonitorAutoDetect.java` file is in the `peerconnection_java` GN target but has a comment like `TODO(sakal): Break dependencies and move to base_java`.\nHowever, since `HardwareVideoEncoder.java` is in another GN target called `hwcodecs_java`, and `peerconnection_java` already depends on `hwcodecs_java`, so `hwcodec_java` cannot depend on `peerconnection_java`.\nThe solution is to break the dependency by extracting the FieldTrial related code. I have CL for this. https://webrtc-review.googlesource.com/c/src/+/261500",
+      "parentUuid": "44571ef4_3c3b559f",
+      "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
