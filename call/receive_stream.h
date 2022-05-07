@@ -62,6 +62,14 @@ class ReceiveStream {
   // only be used in the calling context (on the stack basically).
   virtual const RtpConfig& rtp_config() const = 0;
 
+  // Returns a bool for whether feedback for send side bandwidth estimation is
+  // enabled. See
+  // https://tools.ietf.org/html/draft-holmer-rmcat-transport-wide-cc-extensions
+  // for details.
+  // This value may change mid-stream and must be done on the same thread
+  // that the value is read on (i.e. packet delivery).
+  virtual bool transport_cc() const = 0;
+
  protected:
   virtual ~ReceiveStream() {}
 };
