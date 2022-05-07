@@ -56,11 +56,13 @@ class ReceiveStream {
   virtual void SetRtpExtensions(std::vector<RtpExtension> extensions) = 0;
   virtual const std::vector<RtpExtension>& GetRtpExtensions() const = 0;
 
-  // Called on the packet delivery thread since some members of the config may
-  // change mid-stream (e.g. the local ssrc). All mutation must also happen on
-  // the packet delivery thread. Return value can be assumed to
-  // only be used in the calling context (on the stack basically).
-  virtual const RtpConfig& rtp_config() const = 0;
+  // Returns a bool for whether feedback for send side bandwidth estimation is
+  // enabled. See
+  // https://tools.ietf.org/html/draft-holmer-rmcat-transport-wide-cc-extensions
+  // for details.
+  // This value may change mid-stream and must be done on the same thread
+  // that the value is read on (i.e. packet delivery).
+  virtual bool transport_cc() const = 0;
 
  protected:
   virtual ~ReceiveStream() {}
