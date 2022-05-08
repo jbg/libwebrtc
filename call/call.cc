@@ -79,10 +79,10 @@ bool SendPeriodicFeedback(const std::vector<RtpExtension>& extensions) {
   return true;
 }
 
-bool UseSendSideBwe(const ReceiveStream::RtpConfig& rtp) {
-  if (!rtp.transport_cc)
+bool UseSendSideBwe(const ReceiveStream* stream) {
+  if (!stream->rtp_config().transport_cc)
     return false;
-  for (const auto& extension : rtp.extensions) {
+  for (const auto& extension : stream->GetRtpExtensions()) {
     if (extension.uri == RtpExtension::kTransportSequenceNumberUri ||
         extension.uri == RtpExtension::kTransportSequenceNumberV2Uri)
       return true;
@@ -1182,6 +1182,7 @@ void Call::DestroyVideoReceiveStream(
   // TODO(bugs.webrtc.org/11993): Unregister on the network thread.
   receive_stream_impl->UnregisterFromTransport();
 
+  // TODO(tommi): Remove `rtp()` accessor.
   const webrtc::VideoReceiveStream::Config::Rtp& rtp =
       receive_stream_impl->rtp();
 
@@ -1194,7 +1195,8 @@ void Call::DestroyVideoReceiveStream(
   video_receive_streams_.erase(receive_stream_impl);
   ConfigureSync(receive_stream_impl->sync_group());
 
-  receive_side_cc_.GetRemoteBitrateEstimator(UseSendSideBwe(rtp))
+  receive_side_cc_
+      .GetRemoteBitrateEstimator(UseSendSideBwe(receive_stream_impl))
       ->RemoveStream(rtp.remote_ssrc);
 
   UpdateAggregateNetworkState();
@@ -1244,8 +1246,7 @@ void Call::DestroyFlexfecReceiveStream(FlexfecReceiveStream* receive_stream) {
   // Remove all SSRCs pointing to the FlexfecReceiveStreamImpl to be
   // destroyed.
   receive_side_cc_
-      .GetRemoteBitrateEstimator(
-          UseSendSideBwe(receive_stream_impl->rtp_config()))
+      .GetRemoteBitrateEstimator(UseSendSideBwe(receive_stream_impl))
       ->RemoveStream(ssrc);
 
   delete receive_stream_impl;
@@ -1687,10 +1688,10 @@ bool Call::IdentifyReceivedPacket(RtpPacketReceived& packet,
   }
 
   packet.IdentifyExtensions(
-      RtpHeaderExtensionMap(it->second->rtp_config().extensions));
+      RtpHeaderExtensionMap(it->second->GetRtpExtensions()));
 
   if (use_send_side_bwe) {
-    *use_send_side_bwe = UseSendSideBwe(it->second->rtp_config());
+    *use_send_side_bwe = UseSendSideBwe(it->second);
   }
 
   return true;
