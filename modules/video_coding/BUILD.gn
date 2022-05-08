@@ -1286,4 +1286,20 @@ if (rtc_include_tests) {
       deps += [ rtc_libvpx_dir ]
     }
   }
+
+  rtc_test("av1_perf_tests") {
+    testonly = true
+
+    sources = [ "codecs/test/videocodec_perf_test_av1.cc" ]
+
+    deps = [
+      "../../api:create_videocodec_test_fixture_api",
+      "../../media:rtc_media_base",
+      "../../test:fileutils",
+      "../../test:test_main",
+      "../../test:test_support",
+    ]
+
+    data = [ "../../resources/ConferenceMotion_1280_720_50.yuv" ]
+  }
 }
