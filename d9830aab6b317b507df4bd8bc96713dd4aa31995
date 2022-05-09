@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2026cc6_b0a52acd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-09T10:54:58Z",
+      "side": 1,
+      "message": "also not implemented for frames that fail decoding for other reasons (if any).",
+      "revId": "d9830aab6b317b507df4bd8bc96713dd4aa31995",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b74577e_efd3a5be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-09T10:54:58Z",
+      "side": 1,
+      "message": "Looks good to me. One suggested tweak in definition text.\n",
+      "revId": "d9830aab6b317b507df4bd8bc96713dd4aa31995",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
