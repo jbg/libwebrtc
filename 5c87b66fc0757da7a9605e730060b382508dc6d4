@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "525b858e_ba27dbff",
+        "filename": "infra/specs/mixins_webrtc.pyl",
+        "patchSetId": 8
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-05-09T14:18:54Z",
+      "side": 1,
+      "message": "Maybe add the \u0027mac\u0027 mixins in \u0027MacARM64 M1 Release\u0027 and rename this mac-cpu-m1 or something like that.",
+      "parentUuid": "8a8d25c8_399a8f64",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 20
+      },
+      "revId": "5c87b66fc0757da7a9605e730060b382508dc6d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e94b533e_493354dd",
         "filename": "infra/specs/waterfalls.pyl",
         "patchSetId": 8
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "But this is Arm64, not x86.",
       "parentUuid": "e94b533e_493354dd",
+      "range": {
+        "startLine": 299,
+        "startChar": 21,
+        "endLine": 299,
+        "endChar": 26
+      },
+      "revId": "5c87b66fc0757da7a9605e730060b382508dc6d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01bac8f7_a5385f85",
+        "filename": "infra/specs/waterfalls.pyl",
+        "patchSetId": 8
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-05-09T14:18:54Z",
+      "side": 1,
+      "message": "Right, there is a \u0027mac_12_beta_arm64\u0027 that should work.",
+      "parentUuid": "ae722175_ebf6908f",
       "range": {
         "startLine": 299,
         "startChar": 21,
