@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a00b506f_9a95cd3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-09T08:11:16Z",
+      "side": 1,
+      "message": "I first implemented this in chromium (https://chromium-review.googlesource.com/c/chromium/src/+/3308882) but we decided that it would be better to implement this in webrtc. I\u0027ll update that code to build on top of this.\n\nThis is still very much WIP so a detailed review of the code doesn\u0027t make sense yet, but I\u0027d like some feedback about the architecture.\n\nThere are several changed needed. Some for portal/pipewire and some to integrate this in chromium:\n\n1. I\u0027ve added a capture options object to share the pipewire connection between the devive enumeration and the capture object creation.\n2. I\u0027ve added a new API so that chromium can access the raw video frames. It has its own code that copies and converts the frame. Without this the frame is copied twice.\n3. The build system changes are a mess. I think the libpipewire detection etc. should probably be shared somehow with the desktop capture code, but I\u0027m not sure where to put this. Some D-Bus portal code has the same issue.\n\nOnce I know where this is going, I should probably split things out and submit them separately.\n\nJan, you probably have something to say about the portal / pipewire stuff. Do you know who else should be involved in the architecture and API discussion?",
+      "revId": "f431d1e4fe02bdb012aa032ca9a626481b8648d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
