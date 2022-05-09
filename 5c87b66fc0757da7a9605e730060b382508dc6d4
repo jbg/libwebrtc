@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed8a4220_d27c3687",
+        "filename": "infra/specs/mixins_webrtc.pyl",
+        "patchSetId": 8
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-05-09T14:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "525b858e_ba27dbff",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 20
+      },
+      "revId": "5c87b66fc0757da7a9605e730060b382508dc6d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e94b533e_493354dd",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "Right, there is a \u0027mac_12_beta_arm64\u0027 that should work.",
       "parentUuid": "ae722175_ebf6908f",
+      "range": {
+        "startLine": 299,
+        "startChar": 21,
+        "endLine": 299,
+        "endChar": 26
+      },
+      "revId": "5c87b66fc0757da7a9605e730060b382508dc6d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56d1af62_3e924d05",
+        "filename": "infra/specs/waterfalls.pyl",
+        "patchSetId": 8
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-05-09T14:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01bac8f7_a5385f85",
       "range": {
         "startLine": 299,
         "startChar": 21,
