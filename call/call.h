@@ -126,6 +126,7 @@ class Call {
   // In order for a created VideoReceiveStream to be aware that it is
   // protected by a FlexfecReceiveStream, the latter should be created before
   // the former.
+  // TODO(tommi): Pass config by value as with other Create methods.
   virtual FlexfecReceiveStream* CreateFlexfecReceiveStream(
       const FlexfecReceiveStream::Config& config) = 0;
   virtual void DestroyFlexfecReceiveStream(
