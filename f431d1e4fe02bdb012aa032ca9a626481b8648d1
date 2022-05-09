@@ -33,6 +33,24 @@
       "message": "Hi, thank you for moving this change into WebRTC. I would suggest one thing, guessing others would suggest it anyway, that is to split this change into smaller changes, at least making the video capture to support different backends should be a separate change.",
       "revId": "f431d1e4fe02bdb012aa032ca9a626481b8648d1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f793a4b_a131ee68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-09T09:04:21Z",
+      "side": 1,
+      "message": "Yes, definitely. Moving the v4l2 code is already a separate commit in my local branch. I  can start with that.",
+      "parentUuid": "bc79c472_bca0708c",
+      "revId": "f431d1e4fe02bdb012aa032ca9a626481b8648d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
