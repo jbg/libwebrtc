@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d1ea916_2102cc77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-09T20:48:45Z",
+      "side": 1,
+      "message": "OK, followup it is.",
+      "revId": "2e4eee8fa3e40db157f7853ceac20e1710bf2021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fca832c0_6783e8cd",
@@ -66,6 +83,24 @@
       "side": 1,
       "message": "that is a general problem (DtlsTransportStateToRTCDtlsTransportState), would like to fix in follow-up CL.\n\nOddly I thought we already had this fixed for the whole chromium states... but not in a way we can use here :-(",
       "parentUuid": "fca832c0_6783e8cd",
+      "revId": "2e4eee8fa3e40db157f7853ceac20e1710bf2021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b18d1f15_d72bb0fd",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-09T20:48:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7d8e0dcf_e265348f",
       "revId": "2e4eee8fa3e40db157f7853ceac20e1710bf2021",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
