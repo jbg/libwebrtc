@@ -172,6 +172,13 @@
       }
     }
   },
+  'mac12': {
+    'swarming': {
+      'dimensions': {
+        'os': 'Mac-12'
+      }
+    }
+  },
   'mac_toolchain': {
     'swarming': {
       'cipd_packages': [{
