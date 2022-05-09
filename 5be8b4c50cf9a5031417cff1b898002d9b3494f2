@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9971fb73_2f757687",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-05-09T17:00:21Z",
+      "side": 1,
+      "message": "I\u0027m happy to review based on my experience with the pipewire-desktop capture integration.  But you\u0027ll also need to get approval from one or more of the reviewers in modules/video_capture/OWNERS.\n\n",
+      "revId": "5be8b4c50cf9a5031417cff1b898002d9b3494f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
