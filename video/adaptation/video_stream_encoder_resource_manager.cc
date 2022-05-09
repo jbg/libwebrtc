@@ -26,6 +26,7 @@
 #include "api/video/video_adaptation_reason.h"
 #include "api/video/video_source_interface.h"
 #include "call/adaptation/video_source_restrictions.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
@@ -823,7 +824,15 @@ bool VideoStreamEncoderResourceManager::IsSimulcast(
     return false;
   }
 
-  if (simulcast_layers[0].active) {
+  bool svc_with_one_spatial_layer = false;
+  if (simulcast_layers[0].scalability_mode.has_value() &&
+      encoder_config.number_of_streams == 1) {
+    svc_with_one_spatial_layer =
+        ScalabilityModeToNumSpatialLayers(
+            *simulcast_layers[0].scalability_mode) == 1;
+  }
+
+  if (simulcast_layers[0].active && !svc_with_one_spatial_layer) {
     // We can't distinguish between simulcast and singlecast when only the
     // lowest spatial layer is active. Treat this case as simulcast.
     return true;
