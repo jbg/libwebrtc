@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "941e5414_8cfde2d2",
+        "filename": "modules/rtp_rtcp/source/time_util.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-09T12:45:19Z",
+      "side": 1,
+      "message": "Nit: [...] 0.2 ns resolution).",
+      "range": {
+        "startLine": 37,
+        "startChar": 55,
+        "endLine": 37,
+        "endChar": 72
+      },
+      "revId": "eeb5b780c82133eff9dd578af703c1d864c723ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f84e16b_52300f36",
+        "filename": "modules/rtp_rtcp/source/time_util_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-05-09T12:45:19Z",
+      "side": 1,
+      "message": "NTP",
+      "range": {
+        "startLine": 109,
+        "startChar": 22,
+        "endLine": 109,
+        "endChar": 25
+      },
+      "revId": "eeb5b780c82133eff9dd578af703c1d864c723ff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
