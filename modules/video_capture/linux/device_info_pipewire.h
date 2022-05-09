@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2012 The WebRTC project authors. All Rights Reserved.
+ *  Copyright (c) 2022 The WebRTC project authors. All Rights Reserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -8,26 +8,27 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_VIDEO_CAPTURE_MAIN_SOURCE_LINUX_DEVICE_INFO_LINUX_H_
-#define MODULES_VIDEO_CAPTURE_MAIN_SOURCE_LINUX_DEVICE_INFO_LINUX_H_
+#ifndef MODULES_VIDEO_CAPTURE_LINUX_DEVICE_INFO_PIPEWIRE_H_
+#define MODULES_VIDEO_CAPTURE_LINUX_DEVICE_INFO_PIPEWIRE_H_
 
 #include <stdint.h>
 
 #include "modules/video_capture/device_info_impl.h"
+#include "modules/video_capture/linux/pipewire_session.h"
 
 namespace webrtc {
 namespace videocapturemodule {
-class DeviceInfoLinux : public DeviceInfoImpl {
+class DeviceInfoPipewire : public DeviceInfoImpl {
  public:
-  DeviceInfoLinux();
-  ~DeviceInfoLinux() override;
+  explicit DeviceInfoPipewire(VideoCaptureOptions* options);
+  ~DeviceInfoPipewire() override;
   uint32_t NumberOfDevices() override;
   int32_t GetDeviceName(uint32_t deviceNumber,
                         char* deviceNameUTF8,
                         uint32_t deviceNameLength,
                         char* deviceUniqueIdUTF8,
                         uint32_t deviceUniqueIdUTF8Length,
-                        char* productUniqueIdUTF8 = 0,
+                        char* productUniqueIdUTF8 = nullptr,
                         uint32_t productUniqueIdUTF8Length = 0) override;
   /*
    * Fills the membervariable _captureCapabilities with capabilites for the
@@ -40,12 +41,12 @@ class DeviceInfoLinux : public DeviceInfoImpl {
                                           void* /*parentWindow*/,
                                           uint32_t /*positionX*/,
                                           uint32_t /*positionY*/) override;
-  int32_t FillCapabilities(int fd) RTC_EXCLUSIVE_LOCKS_REQUIRED(_apiLock);
   int32_t Init() override;
 
  private:
   bool IsDeviceNameMatches(const char* name, const char* deviceUniqueIdUTF8);
+  rtc::scoped_refptr<PipewireSession> pipewire_session_;
 };
 }  // namespace videocapturemodule
 }  // namespace webrtc
-#endif  // MODULES_VIDEO_CAPTURE_MAIN_SOURCE_LINUX_DEVICE_INFO_LINUX_H_
+#endif  // MODULES_VIDEO_CAPTURE_LINUX_DEVICE_INFO_PIPEWIRE_H_
