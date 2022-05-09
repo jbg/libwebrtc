@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37c6e503_4534dfd8",
+        "filename": "call/flexfec_receive_stream_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-09T10:37:32Z",
+      "side": 1,
+      "message": "Yes, it\u0027s going away in this cl:\nhttps://webrtc-review.googlesource.com/c/src/+/261318/",
+      "parentUuid": "a1e3dba2_87074339",
+      "range": {
+        "startLine": 63,
+        "startChar": 19,
+        "endLine": 63,
+        "endChar": 29
+      },
+      "revId": "bb3c62fec6d2a7d763c9607dff4c9e23023b30fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0c3acd1_19278a88",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-09T07:47:50Z",
       "side": 1,
       "message": "Do we need this requirement, if the ssrc is essentially const?",
+      "range": {
+        "startLine": 65,
+        "startChar": 1,
+        "endLine": 65,
+        "endChar": 49
+      },
+      "revId": "bb3c62fec6d2a7d763c9607dff4c9e23023b30fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01c64442_4bc0eeb4",
+        "filename": "call/flexfec_receive_stream_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-09T10:37:32Z",
+      "side": 1,
+      "message": "indeed - removed the DCHECK, made `config_` const but temporarily need a const_cast\u003c\u003e while the header extension variable is still owned there.",
+      "parentUuid": "b0c3acd1_19278a88",
       "range": {
         "startLine": 65,
         "startChar": 1,
