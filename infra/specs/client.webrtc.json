@@ -8042,6 +8042,7 @@
       }
     ]
   },
+  "MacArm64 Builder": {},
   "Win (more configs)": {
     "isolated_scripts": [
       {
