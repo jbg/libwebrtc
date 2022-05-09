@@ -22,6 +22,30 @@
       },
       "revId": "bd4968f13261a6eba92d900c0f6eefb345e4c6ab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24bd1850_1202c548",
+        "filename": "modules/video_coding/codecs/vp8/include/vp8.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-09T12:36:10Z",
+      "side": 1,
+      "message": "Done. Also dropped corresponding dependency.",
+      "parentUuid": "c5694fe9_800c287e",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 46
+      },
+      "revId": "bd4968f13261a6eba92d900c0f6eefb345e4c6ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
