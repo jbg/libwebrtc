@@ -79,15 +79,14 @@ bool SendPeriodicFeedback(const std::vector<RtpExtension>& extensions) {
   return true;
 }
 
+bool HasTransportSequenceNumber(const RtpHeaderExtensionMap& map) {
+  return map.IsRegistered(kRtpExtensionTransportSequenceNumber) ||
+         map.IsRegistered(kRtpExtensionTransportSequenceNumber02);
+}
+
 bool UseSendSideBwe(const ReceiveStream* stream) {
-  if (!stream->transport_cc())
-    return false;
-  for (const auto& extension : stream->GetRtpExtensions()) {
-    if (extension.uri == RtpExtension::kTransportSequenceNumberUri ||
-        extension.uri == RtpExtension::kTransportSequenceNumberV2Uri)
-      return true;
-  }
-  return false;
+  return stream->transport_cc() &&
+         HasTransportSequenceNumber(stream->GetRtpExtensionMap());
 }
 
 const int* FindKeyByValue(const std::map<int, int>& m, int v) {
@@ -1220,13 +1219,14 @@ FlexfecReceiveStream* Call::CreateFlexfecReceiveStream(
   // constructor while on the worker thread ensures that we don't call
   // OnRtpPacket until the constructor is finished and the object is
   // in a valid state, since OnRtpPacket runs on the same thread.
-  receive_stream = new FlexfecReceiveStreamImpl(
-      clock_, config, recovered_packet_receiver, call_stats_->AsRtcpRttStats());
+  receive_stream = new FlexfecReceiveStreamImpl(clock_, std::move(config),
+                                                recovered_packet_receiver,
+                                                call_stats_->AsRtcpRttStats());
 
   // TODO(bugs.webrtc.org/11993): Set this up asynchronously on the network
   // thread.
   receive_stream->RegisterWithTransport(&video_receiver_controller_);
-  RegisterReceiveStream(config.rtp.remote_ssrc, receive_stream);
+  RegisterReceiveStream(receive_stream->remote_ssrc(), receive_stream);
 
   // TODO(brandtr): Store config in RtcEventLog here.
 
@@ -1689,8 +1689,7 @@ bool Call::IdentifyReceivedPacket(RtpPacketReceived& packet,
     return false;
   }
 
-  packet.IdentifyExtensions(
-      RtpHeaderExtensionMap(it->second->GetRtpExtensions()));
+  packet.IdentifyExtensions(it->second->GetRtpExtensionMap());
 
   if (use_send_side_bwe) {
     *use_send_side_bwe = UseSendSideBwe(it->second);
