@@ -1,6 +1,7 @@
 # UUID                                  	Group Name
 #
 0e412edb68edede4a0973399c4f358016ab8e620	lkgr-updaters
+5f3eac8c281fedb943d37209d7b1d79968f5c3ba	bot-commit-bots
 ad4c2627af83fc3af20913368007c3b0afb7087b	webrtc-releasers
 cria:project-webrtc-admins              	cria/project-webrtc-admins
 cria:project-webrtc-committers          	cria/project-webrtc-committers
