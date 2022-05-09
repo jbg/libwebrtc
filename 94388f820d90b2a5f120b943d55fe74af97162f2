@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "958137cd_b6ed5c53",
+        "filename": "modules/rtp_rtcp/source/remote_ntp_time_estimator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-05-09T14:09:33Z",
+      "side": 1,
+      "message": "I guess it\u0027s not worth adding operator overloads to NtpTime just for this?",
+      "revId": "94388f820d90b2a5f120b943d55fe74af97162f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
