@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e151a3_d22ec899",
+        "filename": "call/receive_stream.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-09T08:12:37Z",
+      "side": 1,
+      "message": "Say something more explicit about lifetime of the returned value? I take it it\u0027s fine to call on the packet delivery thread, use in the caller, but not store the reference anywhere for later use.\n\nPerhaps an ArrayView return value would be more appropriate?",
+      "range": {
+        "startLine": 57,
+        "startChar": 43,
+        "endLine": 57,
+        "endChar": 59
+      },
+      "revId": "d1dd07bddade1adc5771e4ac45fd9a314bf2e491",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
