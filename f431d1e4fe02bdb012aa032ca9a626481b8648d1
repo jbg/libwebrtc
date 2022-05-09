@@ -69,6 +69,24 @@
       "parentUuid": "7f793a4b_a131ee68",
       "revId": "f431d1e4fe02bdb012aa032ca9a626481b8648d1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11785ada_438b68ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-09T09:40:54Z",
+      "side": 1,
+      "message": "Yes, I usually do:\n1) Create a branch \u0027branch-A\u0027\n2) Create a branch \u0027branch-B\u0027 from \u0027branch-A\u0027 depending on changes there\n3) In branch \u0027B\u0027 I run \"git branch --set-upstream-to\u003dbranch-A\n\nYou can read about it here: https://chromium.googlesource.com/openscreen/+/5fce9d2d907b86fb524c160a06e1ebbc504b1257/advanced_gerrit.md",
+      "parentUuid": "d6b01bb9_011e1281",
+      "revId": "f431d1e4fe02bdb012aa032ca9a626481b8648d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
