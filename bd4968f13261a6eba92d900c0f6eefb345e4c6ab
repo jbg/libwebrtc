@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5694fe9_800c287e",
+        "filename": "modules/video_coding/codecs/vp8/include/vp8.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2022-05-09T11:52:11Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 46
+      },
+      "revId": "bd4968f13261a6eba92d900c0f6eefb345e4c6ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
