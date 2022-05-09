@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ad2626a_145235c2",
+        "filename": "infra/specs/mixins_webrtc.pyl",
+        "patchSetId": 8
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-05-09T13:57:27Z",
+      "side": 1,
+      "message": "The os can be removed here since this cpu is only for Mac anyway.\nCurrently the added builder is defining the os times.",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 20
+      },
+      "revId": "5c87b66fc0757da7a9605e730060b382508dc6d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94b533e_493354dd",
+        "filename": "infra/specs/waterfalls.pyl",
+        "patchSetId": 8
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-05-09T13:57:27Z",
+      "side": 1,
+      "message": "Probably should use an existing mixins here:\nhttps://crsrc.org/c/testing/buildbot/mixins.pyl;l\u003d820?q\u003d%27Mac-12%27",
+      "range": {
+        "startLine": 299,
+        "startChar": 21,
+        "endLine": 299,
+        "endChar": 26
+      },
+      "revId": "5c87b66fc0757da7a9605e730060b382508dc6d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
