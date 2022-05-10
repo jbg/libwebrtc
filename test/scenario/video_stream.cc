@@ -200,12 +200,15 @@ CreateH264SpecificSettings(VideoStreamConfig config) {
   RTC_DCHECK_EQ(config.encoder.layers.temporal, 1);
   RTC_DCHECK_EQ(config.encoder.layers.spatial, 1);
 
+#if 0
   VideoCodecH264 h264_settings = VideoEncoder::GetDefaultH264Settings();
   h264_settings.frameDroppingOn = config.encoder.frame_dropping;
   h264_settings.keyFrameInterval =
       config.encoder.key_frame_interval.value_or(0);
   return rtc::make_ref_counted<VideoEncoderConfig::H264EncoderSpecificSettings>(
       h264_settings);
+#endif
+  return nullptr;
 }
 
 rtc::scoped_refptr<VideoEncoderConfig::EncoderSpecificSettings>

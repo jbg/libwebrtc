@@ -8771,11 +8771,14 @@ TEST_P(VideoStreamEncoderWithRealEncoderTest, HandlesLayerToggling) {
       config.simulcast_layers[i].active = true;
     }
     if (codec_type_ == VideoCodecType::kVideoCodecH264) {
+#if 0
       // Turn off frame dropping to prevent flakiness.
       VideoCodecH264 h264_settings = VideoEncoder::GetDefaultH264Settings();
       h264_settings.frameDroppingOn = false;
       config.encoder_specific_settings = rtc::make_ref_counted<
           VideoEncoderConfig::H264EncoderSpecificSettings>(h264_settings);
+#endif
+      config.encoder_specific_settings = nullptr;
     }
   }
 
