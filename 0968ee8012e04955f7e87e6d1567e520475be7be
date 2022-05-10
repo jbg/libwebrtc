@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a8e2fbd_0128c92e",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-10T12:11:36Z",
+      "side": 1,
+      "message": "linux_mac_crosscompile?",
+      "range": {
+        "startLine": 130,
+        "startChar": 31,
+        "endLine": 130,
+        "endChar": 43
+      },
+      "revId": "0968ee8012e04955f7e87e6d1567e520475be7be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
