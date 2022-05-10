@@ -127,7 +127,7 @@
       'Perf Linux Bionic': 'release_bot_x64',
       'Perf Linux Trusty': 'release_bot_x64',
       'Perf Mac 11': 'release_bot_x64',
-      'Perf Mac M1 Arm64 12': 'release_bot_arm64',
+      'Perf Mac M1 Arm64 12': 'mac_on_linux_release_bot_arm64',
       'Perf Win7': 'release_bot_x64',
     },
     'internal.client.webrtc': {
@@ -283,6 +283,11 @@
       'pure_release_bot',
       'x64',
     ],
+    'mac_on_linux_release_bot_arm64': [
+      'release_bot',
+      'arm64',
+      'mac',
+    ],
     'msan_clang_release_bot_x64':
     ['msan', 'clang', 'openh264', 'pure_release_bot', 'x64'],
     'no_h264_debug_bot_x86': ['debug_bot', 'x86'],
@@ -402,6 +407,9 @@
     },
     'lsan': {
       'gn_args': 'is_lsan=true',
+    },
+    'mac': {
+      'gn_args': 'target_os="mac"'
     },
     'minimal_symbols': {
       'gn_args': 'symbol_level=1',
