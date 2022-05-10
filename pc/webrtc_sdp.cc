@@ -218,7 +218,6 @@ static const char kSdpDelimiterColonChar = ':';
 static const char kSdpDelimiterSemicolon[] = ";";
 static const char kSdpDelimiterSemicolonChar = ';';
 static const char kSdpDelimiterSlashChar = '/';
-static const char kNewLine[] = "\n";
 static const char kNewLineChar = '\n';
 static const char kReturnChar = '\r';
 static const char kLineBreak[] = "\r\n";
@@ -401,7 +400,7 @@ static bool ParseFailed(absl::string_view message,
                         SdpParseError* error) {
   // Get the first line of `message` from `line_start`.
   absl::string_view first_line;
-  size_t line_end = message.find(kNewLine, line_start);
+  size_t line_end = message.find(kNewLineChar, line_start);
   if (line_end != std::string::npos) {
     if (line_end > 0 && (message.at(line_end - 1) == kReturnChar)) {
       --line_end;
@@ -490,19 +489,25 @@ static bool AddLine(absl::string_view line, std::string* message) {
   return true;
 }
 
-static bool GetLine(absl::string_view message, size_t* pos, std::string* line) {
-  size_t line_begin = *pos;
-  size_t line_end = message.find(kNewLine, line_begin);
+// Trim return character, if any.
+static absl::string_view TrimReturnChar(absl::string_view line) {
+  if (line.empty() || line[line.length() - 1] != kReturnChar) {
+    return line;
+  }
+  return line.substr(0, line.length() - 1);
+}
+
+// Gets line of `message` starting at `pos`, and checks overall SDP syntax. On
+// success, advances `pos` to the next line.
+static absl::optional<absl::string_view> GetLine(absl::string_view message,
+                                                 size_t* pos) {
+  size_t line_end = message.find(kNewLineChar, *pos);
   if (line_end == absl::string_view::npos) {
-    return false;
+    return absl::nullopt;
   }
-  // Update the new start position
-  *pos = line_end + 1;
-  if (line_end > 0 && (message.at(line_end - 1) == kReturnChar)) {
-    --line_end;
-  }
-  *line = std::string(message.substr(line_begin, (line_end - line_begin)));
-  const char* cline = line->c_str();
+  absl::string_view line =
+      TrimReturnChar(message.substr(*pos, line_end - *pos));
+
   // RFC 4566
   // An SDP session description consists of a number of lines of text of
   // the form:
@@ -516,14 +521,13 @@ static bool GetLine(absl::string_view message, size_t* pos, std::string* line) {
   //
   //   If a session has no meaningful name, the value "s= " SHOULD be used
   //   (i.e., a single space as the session name).
-  if (line->length() < 3 || !islower(cline[0]) ||
-      cline[1] != kSdpDelimiterEqualChar ||
-      (cline[0] != kLineTypeSessionName &&
-       cline[2] == kSdpDelimiterSpaceChar)) {
-    *pos = line_begin;
-    return false;
+  if (line.length() < 3 || !islower(static_cast<unsigned char>(line[0])) ||
+      line[1] != kSdpDelimiterEqualChar ||
+      (line[0] != kLineTypeSessionName && line[2] == kSdpDelimiterSpaceChar)) {
+    return absl::nullopt;
   }
-  return true;
+  *pos = line_end + 1;
+  return line;
 }
 
 // Init `os` to "`type`=`value`".
@@ -563,18 +567,12 @@ static bool IsLineType(absl::string_view line, const char type) {
   return IsLineType(line, type, 0);
 }
 
-static bool GetLineWithType(absl::string_view message,
-                            size_t* pos,
-                            std::string* line,
-                            const char type) {
-  if (!IsLineType(message, type, *pos)) {
-    return false;
+static absl::optional<absl::string_view>
+GetLineWithType(absl::string_view message, size_t* pos, const char type) {
+  if (IsLineType(message, *pos, type)) {
+    return GetLine(message, pos);
   }
-
-  if (!GetLine(message, pos, line))
-    return false;
-
-  return true;
+  return absl::nullopt;
 }
 
 static bool HasAttribute(absl::string_view line, absl::string_view attribute) {
@@ -1038,19 +1036,15 @@ bool ParseCandidate(absl::string_view message,
                     bool is_raw) {
   RTC_DCHECK(candidate != NULL);
 
-  // Get the first line from `message`.
-  std::string first_line = std::string(message);
-  size_t pos = 0;
-  GetLine(message, &pos, &first_line);
-
   // Makes sure `message` contains only one line.
-  if (message.size() > first_line.size()) {
-    std::string left, right;
-    if (rtc::tokenize_first(message, kNewLineChar, &left, &right) &&
-        !right.empty()) {
-      return ParseFailed(message, 0, "Expect one line only", error);
-    }
+  size_t line_end = message.find(kNewLineChar);
+  if (message.empty() || line_end != message.size() - 1) {
+    return ParseFailed(message, 0, "Expect one line only", error);
   }
+
+  // Trim newline and return char, if any.
+  absl::string_view first_line =
+      TrimReturnChar(message.substr(0, message.size() - 1));
 
   // From WebRTC draft section 4.8.1.1 candidate-attribute should be
   // candidate:<candidate> when trickled, but we still support
@@ -2097,69 +2091,74 @@ bool ParseSessionDescription(absl::string_view message,
                              rtc::SocketAddress* connection_addr,
                              cricket::SessionDescription* desc,
                              SdpParseError* error) {
-  std::string line;
+  absl::optional<absl::string_view> line;
 
   desc->set_msid_supported(false);
   desc->set_extmap_allow_mixed(false);
   // RFC 4566
   // v=  (protocol version)
-  if (!GetLineWithType(message, pos, &line, kLineTypeVersion)) {
+  line = GetLineWithType(message, pos, kLineTypeVersion);
+  if (!line) {
     return ParseFailedExpectLine(message, *pos, kLineTypeVersion, std::string(),
                                  error);
   }
   // RFC 4566
   // o=<username> <sess-id> <sess-version> <nettype> <addrtype>
   // <unicast-address>
-  if (!GetLineWithType(message, pos, &line, kLineTypeOrigin)) {
+  line = GetLineWithType(message, pos, kLineTypeOrigin);
+  if (!line) {
     return ParseFailedExpectLine(message, *pos, kLineTypeOrigin, std::string(),
                                  error);
   }
   std::vector<std::string> fields;
-  rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+  rtc::split(line->substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
   const size_t expected_fields = 6;
   if (fields.size() != expected_fields) {
-    return ParseFailedExpectFieldNum(line, expected_fields, error);
+    return ParseFailedExpectFieldNum(*line, expected_fields, error);
   }
   *session_id = fields[1];
   *session_version = fields[2];
 
   // RFC 4566
   // s=  (session name)
-  if (!GetLineWithType(message, pos, &line, kLineTypeSessionName)) {
+  line = GetLineWithType(message, pos, kLineTypeSessionName);
+  if (!line) {
     return ParseFailedExpectLine(message, *pos, kLineTypeSessionName,
                                  std::string(), error);
   }
 
-  // absl::optional lines
+  // optional lines
   // Those are the optional lines, so shouldn't return false if not present.
   // RFC 4566
   // i=* (session information)
-  GetLineWithType(message, pos, &line, kLineTypeSessionInfo);
+  GetLineWithType(message, pos, kLineTypeSessionInfo);
 
   // RFC 4566
   // u=* (URI of description)
-  GetLineWithType(message, pos, &line, kLineTypeSessionUri);
+  GetLineWithType(message, pos, kLineTypeSessionUri);
 
   // RFC 4566
   // e=* (email address)
-  GetLineWithType(message, pos, &line, kLineTypeSessionEmail);
+  GetLineWithType(message, pos, kLineTypeSessionEmail);
 
   // RFC 4566
   // p=* (phone number)
-  GetLineWithType(message, pos, &line, kLineTypeSessionPhone);
+  GetLineWithType(message, pos, kLineTypeSessionPhone);
 
   // RFC 4566
   // c=* (connection information -- not required if included in
   //      all media)
-  if (GetLineWithType(message, pos, &line, kLineTypeConnection)) {
-    if (!ParseConnectionData(line, connection_addr, error)) {
+  if (absl::optional<absl::string_view> cline =
+          GetLineWithType(message, pos, kLineTypeConnection);
+      cline.has_value()) {
+    if (!ParseConnectionData(*cline, connection_addr, error)) {
       return false;
     }
   }
 
   // RFC 4566
   // b=* (zero or more bandwidth information lines)
-  while (GetLineWithType(message, pos, &line, kLineTypeSessionBandwidth)) {
+  while (GetLineWithType(message, pos, kLineTypeSessionBandwidth).has_value()) {
     // By pass zero or more b lines.
   }
 
@@ -2168,80 +2167,81 @@ bool ParseSessionDescription(absl::string_view message,
   // t=  (time the session is active)
   // r=* (zero or more repeat times)
   // Ensure there's at least one time description
-  if (!GetLineWithType(message, pos, &line, kLineTypeTiming)) {
+  if (!GetLineWithType(message, pos, kLineTypeTiming).has_value()) {
     return ParseFailedExpectLine(message, *pos, kLineTypeTiming, std::string(),
                                  error);
   }
 
-  while (GetLineWithType(message, pos, &line, kLineTypeRepeatTimes)) {
+  while (GetLineWithType(message, pos, kLineTypeRepeatTimes).has_value()) {
     // By pass zero or more r lines.
   }
 
   // Go through the rest of the time descriptions
-  while (GetLineWithType(message, pos, &line, kLineTypeTiming)) {
-    while (GetLineWithType(message, pos, &line, kLineTypeRepeatTimes)) {
+  while (GetLineWithType(message, pos, kLineTypeTiming).has_value()) {
+    while (GetLineWithType(message, pos, kLineTypeRepeatTimes).has_value()) {
       // By pass zero or more r lines.
     }
   }
 
   // RFC 4566
   // z=* (time zone adjustments)
-  GetLineWithType(message, pos, &line, kLineTypeTimeZone);
+  GetLineWithType(message, pos, kLineTypeTimeZone);
 
   // RFC 4566
   // k=* (encryption key)
-  GetLineWithType(message, pos, &line, kLineTypeEncryptionKey);
+  GetLineWithType(message, pos, kLineTypeEncryptionKey);
 
   // RFC 4566
   // a=* (zero or more session attribute lines)
-  while (GetLineWithType(message, pos, &line, kLineTypeAttributes)) {
-    if (HasAttribute(line, kAttributeGroup)) {
-      if (!ParseGroupAttribute(line, desc, error)) {
+  while (absl::optional<absl::string_view> aline =
+             GetLineWithType(message, pos, kLineTypeAttributes)) {
+    if (HasAttribute(*aline, kAttributeGroup)) {
+      if (!ParseGroupAttribute(*aline, desc, error)) {
         return false;
       }
-    } else if (HasAttribute(line, kAttributeIceUfrag)) {
-      if (!GetValue(line, kAttributeIceUfrag, &(session_td->ice_ufrag),
+    } else if (HasAttribute(*aline, kAttributeIceUfrag)) {
+      if (!GetValue(*aline, kAttributeIceUfrag, &(session_td->ice_ufrag),
                     error)) {
         return false;
       }
-    } else if (HasAttribute(line, kAttributeIcePwd)) {
-      if (!GetValue(line, kAttributeIcePwd, &(session_td->ice_pwd), error)) {
+    } else if (HasAttribute(*aline, kAttributeIcePwd)) {
+      if (!GetValue(*aline, kAttributeIcePwd, &(session_td->ice_pwd), error)) {
         return false;
       }
-    } else if (HasAttribute(line, kAttributeIceLite)) {
+    } else if (HasAttribute(*aline, kAttributeIceLite)) {
       session_td->ice_mode = cricket::ICEMODE_LITE;
-    } else if (HasAttribute(line, kAttributeIceOption)) {
-      if (!ParseIceOptions(line, &(session_td->transport_options), error)) {
+    } else if (HasAttribute(*aline, kAttributeIceOption)) {
+      if (!ParseIceOptions(*aline, &(session_td->transport_options), error)) {
         return false;
       }
-    } else if (HasAttribute(line, kAttributeFingerprint)) {
+    } else if (HasAttribute(*aline, kAttributeFingerprint)) {
       if (session_td->identity_fingerprint.get()) {
         return ParseFailed(
-            line,
+            *aline,
             "Can't have multiple fingerprint attributes at the same level.",
             error);
       }
       std::unique_ptr<rtc::SSLFingerprint> fingerprint;
-      if (!ParseFingerprintAttribute(line, &fingerprint, error)) {
+      if (!ParseFingerprintAttribute(*aline, &fingerprint, error)) {
         return false;
       }
       session_td->identity_fingerprint = std::move(fingerprint);
-    } else if (HasAttribute(line, kAttributeSetup)) {
-      if (!ParseDtlsSetup(line, &(session_td->connection_role), error)) {
+    } else if (HasAttribute(*aline, kAttributeSetup)) {
+      if (!ParseDtlsSetup(*aline, &(session_td->connection_role), error)) {
         return false;
       }
-    } else if (HasAttribute(line, kAttributeMsidSemantics)) {
+    } else if (HasAttribute(*aline, kAttributeMsidSemantics)) {
       std::string semantics;
-      if (!GetValue(line, kAttributeMsidSemantics, &semantics, error)) {
+      if (!GetValue(*aline, kAttributeMsidSemantics, &semantics, error)) {
         return false;
       }
       desc->set_msid_supported(
           CaseInsensitiveFind(semantics, kMediaStreamSemantic));
-    } else if (HasAttribute(line, kAttributeExtmapAllowMixed)) {
+    } else if (HasAttribute(*aline, kAttributeExtmapAllowMixed)) {
       desc->set_extmap_allow_mixed(true);
-    } else if (HasAttribute(line, kAttributeExtmap)) {
+    } else if (HasAttribute(*aline, kAttributeExtmap)) {
       RtpExtension extmap;
-      if (!ParseExtmap(line, &extmap, error)) {
+      if (!ParseExtmap(*aline, &extmap, error)) {
         return false;
       }
       session_extmaps->push_back(extmap);
@@ -2607,22 +2607,23 @@ bool ParseMediaDescription(
     std::vector<std::unique_ptr<JsepIceCandidate>>* candidates,
     SdpParseError* error) {
   RTC_DCHECK(desc != NULL);
-  std::string line;
   int mline_index = -1;
   int msid_signaling = 0;
 
   // Zero or more media descriptions
   // RFC 4566
   // m=<media> <port> <proto> <fmt>
-  while (GetLineWithType(message, pos, &line, kLineTypeMedia)) {
+  while (absl::optional<absl::string_view> mline =
+             GetLineWithType(message, pos, kLineTypeMedia)) {
     ++mline_index;
 
     std::vector<std::string> fields;
-    rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+    rtc::split(mline->substr(kLinePrefixLength), kSdpDelimiterSpaceChar,
+               &fields);
 
     const size_t expected_min_fields = 4;
     if (fields.size() < expected_min_fields) {
-      return ParseFailedExpectMinFieldNum(line, expected_min_fields, error);
+      return ParseFailedExpectMinFieldNum(*mline, expected_min_fields, error);
     }
     bool port_rejected = false;
     // RFC 3264
@@ -2634,7 +2635,7 @@ bool ParseMediaDescription(
 
     int port = 0;
     if (!rtc::FromString<int>(fields[1], &port) || !IsValidPort(port)) {
-      return ParseFailed(line, "The port number is invalid", error);
+      return ParseFailed(*mline, "The port number is invalid", error);
     }
     const std::string& protocol = fields[2];
 
@@ -2643,7 +2644,7 @@ bool ParseMediaDescription(
     if (cricket::IsRtpProtocol(protocol)) {
       for (size_t j = 3; j < fields.size(); ++j) {
         int pl = 0;
-        if (!GetPayloadTypeFromString(line, fields[j], &pl, error)) {
+        if (!GetPayloadTypeFromString(*mline, fields[j], &pl, error)) {
           return false;
         }
         payload_types.push_back(pl);
@@ -2664,7 +2665,7 @@ bool ParseMediaDescription(
     const std::string& media_type = fields[0];
     if ((media_type == kMediaTypeVideo || media_type == kMediaTypeAudio) &&
         !cricket::IsRtpProtocol(protocol)) {
-      return ParseFailed(line, "Unsupported protocol for media type", error);
+      return ParseFailed(*mline, "Unsupported protocol for media type", error);
     }
     if (media_type == kMediaTypeVideo) {
       content = ParseContentDescription<VideoContentDescription>(
@@ -2703,10 +2704,11 @@ bool ParseMediaDescription(
         data_desc->set_protocol(protocol);
         content = std::move(data_desc);
       } else {
-        return ParseFailed(line, "Unsupported protocol for media type", error);
+        return ParseFailed(*mline, "Unsupported protocol for media type",
+                           error);
       }
     } else {
-      RTC_LOG(LS_WARNING) << "Unsupported media type: " << line;
+      RTC_LOG(LS_WARNING) << "Unsupported media type: " << *mline;
       auto unsupported_desc =
           std::make_unique<UnsupportedContentDescription>(media_type);
       if (!ParseContent(message, cricket::MEDIA_TYPE_UNSUPPORTED, mline_index,
@@ -2987,7 +2989,7 @@ bool ParseContent(absl::string_view message,
 
   // Loop until the next m line
   while (!IsLineType(message, kLineTypeMedia, *pos)) {
-    if (!GetLine(message, pos, &line)) {
+    if (!GetLine(message, pos).has_value()) {
       if (*pos >= message.size()) {
         break;  // Done parsing
       } else {
