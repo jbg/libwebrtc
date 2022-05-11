@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7283b45_61af6616",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-11T21:02:50Z",
+      "side": 1,
+      "message": "just to release my unsent comments",
+      "revId": "cf30a87b289132f173a12de86406088c59dc6ff5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dacc894c_17e48413",
@@ -220,6 +237,99 @@
         "startChar": 0,
         "endLine": 63,
         "endChar": 57
+      },
+      "revId": "cf30a87b289132f173a12de86406088c59dc6ff5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f766cf_6fbee76d",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-11T21:02:50Z",
+      "side": 1,
+      "message": "struct PacketArrival {\n    PacketArrival(uint32_t rtp_timestamp_ms, int arrival_time_ms)\n        : rtp_timestamp_ms(rtp_timestamp_ms),\n          arrival_time_ms(arrival_time_ms),\n          arrival_delay(arrival_time_ms - rtp_timestamp_ms) {}\n    // Unwrapped rtp timestamp scaled to milliseconds.\n    const int64_t rtp_timestamp_ms;\n    const int64_t arrival_time_ms;\n    const int64_t arrival_delay;\n    bool operator\u003d\u003d(const PacketArrival\u0026 other) const {\n      return rtp_timestamp_ms \u003d\u003d other.rtp_timestamp_ms \u0026\u0026\n             arrival_time_ms \u003d\u003d other.arrival_time_ms;\n    }\n    int64_t operator\u003c(const PacketArrival\u0026 other) const {\n      return arrival_delay \u003c other.arrival_delay;\n    }\n  };",
+      "parentUuid": "332e02e1_b9a1f492",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 57
+      },
+      "revId": "cf30a87b289132f173a12de86406088c59dc6ff5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af324244_2fd26458",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-11T21:02:50Z",
+      "side": 1,
+      "message": "packet_min_arrival_delay_",
+      "range": {
+        "startLine": 69,
+        "startChar": 32,
+        "endLine": 69,
+        "endChar": 49
+      },
+      "revId": "cf30a87b289132f173a12de86406088c59dc6ff5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "137e21ae_47fc7e93",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-11T21:02:50Z",
+      "side": 1,
+      "message": "I would prefer std::deque\u003cPacketArrival\u003e::iterator or a pointer to PacketArrival",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 31
+      },
+      "revId": "cf30a87b289132f173a12de86406088c59dc6ff5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "addd6891_f52a1a1c",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-11T21:02:50Z",
+      "side": 1,
+      "message": "packet_max_arrival_delay_",
+      "range": {
+        "startLine": 70,
+        "startChar": 32,
+        "endLine": 70,
+        "endChar": 47
       },
       "revId": "cf30a87b289132f173a12de86406088c59dc6ff5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
