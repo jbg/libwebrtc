@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e47421b5_72b1f5cd",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-11T12:12:44Z",
+      "side": 1,
+      "message": "It\u0027s somewhat confusing that this is called on lines with and without terminating new line. Can we make this non-public, and expose only SdpDeserializeCandidate?",
+      "range": {
+        "startLine": 1039,
+        "startChar": 2,
+        "endLine": 1039,
+        "endChar": 49
+      },
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
