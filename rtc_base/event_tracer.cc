@@ -124,7 +124,7 @@ class EventLogger final {
   void Log() {
     RTC_DCHECK(output_file_);
     static const int kLoggingIntervalMs = 100;
-    fprintf(output_file_, "{ \"traceEvents\": [\n");
+    fprintf(output_file_, "[\n");
     bool has_logged_event = false;
     while (true) {
       bool shutting_down = shutdown_event_.Wait(kLoggingIntervalMs);
@@ -177,7 +177,7 @@ class EventLogger final {
       if (shutting_down)
         break;
     }
-    fprintf(output_file_, "]}\n");
+    fprintf(output_file_, "]\n");
     if (output_file_owned_)
       fclose(output_file_);
     output_file_ = nullptr;
