@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "783be5ff_229d61dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2022-05-11T01:32:45Z",
+      "side": 1,
+      "message": "Identified the fixing by comparing with the chromium counterpart which use simple `JSON Array Format` for output.\n\ntrace_log.h - Chromium Code Search\nhttps://source.chromium.org/chromium/chromium/src/+/main:base/trace_event/trace_log.h?q\u003dbase::trace_event::TraceLog\n\nTrace Event Format - Google Docs\nhttps://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview#heading\u003dh.q8di1j2nawlp\n",
+      "revId": "4e5c6d1c3f442cde324763b57cd9ea6ae5021264",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
