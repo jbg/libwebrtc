@@ -68,6 +68,24 @@
       "parentUuid": "4a85aefa_1280738a",
       "revId": "4e5c6d1c3f442cde324763b57cd9ea6ae5021264",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "babc24da_da912d2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-11T08:48:03Z",
+      "side": 1,
+      "message": "Yes, you said that in the original description.\n\nIt took me a while to figure out that the Trace Viewer referred to in the linked-to doc is supposed to be the code underlying chrome://tracing.\n\nWaiting for sakal@ to comment - if there are apps consuming the current format that are in use and would be broken by this change, we need to know.",
+      "parentUuid": "0f99fe15_a225aabb",
+      "revId": "4e5c6d1c3f442cde324763b57cd9ea6ae5021264",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
