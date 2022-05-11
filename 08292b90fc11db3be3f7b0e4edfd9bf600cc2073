@@ -194,6 +194,24 @@
       "parentUuid": "44571ef4_3c3b559f",
       "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da81ad8_ca6ca3d0",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 16681
+      },
+      "writtenOn": "2022-05-11T14:26:01Z",
+      "side": 1,
+      "message": "Thanks for your CL.\n\nI thought I needed to write a wrapper function to access field trials using webrtc::field_trial::IsEnabled for HardwareaVideoEncoder.java to solve dependency error like here \nhttps://webrtc-review.googlesource.com/c/src/+/257081/5/sdk/android/src/jni/android_network_monitor.cc but it\u0027s redundant.\n\nYour approach of extracting FieldTrial related code looks very nice.\nI\u0027m waiting for your CL to get merged.\n\nThanks again.",
+      "parentUuid": "25281672_49e410de",
+      "revId": "08292b90fc11db3be3f7b0e4edfd9bf600cc2073",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
