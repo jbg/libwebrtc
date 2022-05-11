@@ -50,6 +50,24 @@
       "message": "Adding author sakal@ to reviewers.\n",
       "revId": "4e5c6d1c3f442cde324763b57cd9ea6ae5021264",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f99fe15_a225aabb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18554
+      },
+      "writtenOn": "2022-05-11T07:04:35Z",
+      "side": 1,
+      "message": "I checked perfetto UI and chrome://tracing, the original output file can not be viewed.\n\nWith this change, the output file can be viewed by both Apps.",
+      "parentUuid": "4a85aefa_1280738a",
+      "revId": "4e5c6d1c3f442cde324763b57cd9ea6ae5021264",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
