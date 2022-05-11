@@ -16,6 +16,23 @@
       "message": "Identified the fixing by comparing with the chromium counterpart which use simple `JSON Array Format` for output.\n\ntrace_log.h - Chromium Code Search\nhttps://source.chromium.org/chromium/chromium/src/+/main:base/trace_event/trace_log.h?q\u003dbase::trace_event::TraceLog\n\nTrace Event Format - Google Docs\nhttps://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview#heading\u003dh.q8di1j2nawlp\n",
       "revId": "4e5c6d1c3f442cde324763b57cd9ea6ae5021264",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a85aefa_1280738a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-11T06:46:42Z",
+      "side": 1,
+      "message": "Have you checked that the applications for parsing trace files mentioned in https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview still work with this change?\n",
+      "revId": "4e5c6d1c3f442cde324763b57cd9ea6ae5021264",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
