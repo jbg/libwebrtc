@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "151c1a55_cdc5d00a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-11T21:36:56Z",
+      "side": 1,
+      "message": "Lots of typing - looks good!\n",
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e47421b5_72b1f5cd",
@@ -20,6 +37,64 @@
         "endLine": 1039,
         "endChar": 49
       },
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba5a7206_304e917d",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-11T21:36:56Z",
+      "side": 1,
+      "message": "I think this is called both on candidates in SDP and candidates passed in by AddCandidate, so I suspect this is the \"be liberal in what you receive\" rule.\nCheck up the stack - we shouldn\u0027t expect users to crlf-terminate candidates for AddCandidate.",
+      "parentUuid": "e47421b5_72b1f5cd",
+      "range": {
+        "startLine": 1039,
+        "startChar": 2,
+        "endLine": 1039,
+        "endChar": 49
+      },
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8340a00_e2569fcd",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2156,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-11T21:36:56Z",
+      "side": 1,
+      "message": "would auto be inappropriate for some reason?",
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2a5837d_47a04f08",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-11T21:36:56Z",
+      "side": 1,
+      "message": "First time I\u0027ve seen a semicolon in an if statement. Is it simply \"do these two things and return the value of the last one\"?",
       "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
