@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9de8d682_11eca38f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-12T07:27:51Z",
+      "side": 1,
+      "message": "LGTM stands!\n",
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e47421b5_72b1f5cd",
@@ -100,6 +117,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6320d600_c00ec490",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2156,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-12T07:27:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a0045f00_73f121c5",
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2a5837d_47a04f08",
@@ -131,6 +166,24 @@
       "side": 1,
       "message": "https://abseil.io/tips/165\n\nFor some reason, the same syntax seems to *not* work for the condition in a while (...) {... } loop.\n\nNot sure where I picked up the recommendation on being explicit about the .has_value() condition, rather than just relying on conversion from optional to bool.\n\nIt would have the same effect without that,\n\n  if (...optional... cline \u003d Getline(...)) {...}",
       "parentUuid": "d2a5837d_47a04f08",
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8226c92_91d6506d",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-12T07:27:51Z",
+      "side": 1,
+      "message": "If: Ah, new in C++ 17! Will certainly use.\nI\u0027ve also seen a recommendation to use x.value() rather than *x, but I haven\u0027t found where I got that one from either.",
+      "parentUuid": "d3facea7_03b50e3d",
       "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
