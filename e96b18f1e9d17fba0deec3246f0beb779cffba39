@@ -84,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0045f00_73f121c5",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2156,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-12T07:15:18Z",
+      "side": 1,
+      "message": "It\u0027s somewhat inappropriate because type isn\u0027t obvious from local context.",
+      "parentUuid": "f8340a00_e2569fcd",
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2a5837d_47a04f08",
         "filename": "pc/webrtc_sdp.cc",
         "patchSetId": 3
@@ -95,6 +113,24 @@
       "writtenOn": "2022-05-11T21:36:56Z",
       "side": 1,
       "message": "First time I\u0027ve seen a semicolon in an if statement. Is it simply \"do these two things and return the value of the last one\"?",
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3facea7_03b50e3d",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-12T07:15:18Z",
+      "side": 1,
+      "message": "https://abseil.io/tips/165\n\nFor some reason, the same syntax seems to *not* work for the condition in a while (...) {... } loop.\n\nNot sure where I picked up the recommendation on being explicit about the .has_value() condition, rather than just relying on conversion from optional to bool.\n\nIt would have the same effect without that,\n\n  if (...optional... cline \u003d Getline(...)) {...}",
+      "parentUuid": "d2a5837d_47a04f08",
       "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
