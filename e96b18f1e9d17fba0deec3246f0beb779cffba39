@@ -186,6 +186,24 @@
       "parentUuid": "d3facea7_03b50e3d",
       "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef5e18b5_a89b3ec7",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-12T07:42:47Z",
+      "side": 1,
+      "message": "\u003e I\u0027ve also seen a recommendation to use x.value() rather than *x, but I haven\u0027t found where I got that one from either.\n\nI\u0027ve gotten the opposite recommendation on code review fairly recently.",
+      "parentUuid": "a8226c92_91d6506d",
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
