@@ -42,7 +42,9 @@ class SafetyClosureTask : public QueuedTask {
   explicit SafetyClosureTask(rtc::scoped_refptr<PendingTaskSafetyFlag> safety,
                              Closure&& closure)
       : closure_(std::forward<Closure>(closure)),
-        safety_flag_(std::move(safety)) {}
+        safety_flag_(std::move(safety)) {
+    RTC_DCHECK(safety_flag_);
+  }
 
  private:
   bool Run() override {
