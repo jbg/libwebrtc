@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e05eb1c_706d0d18",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-12T20:51:44Z",
+      "side": 1,
+      "message": "I would hope this to be more explicit. In my views, the \"delay\" is defined on PacketArrivalHistory, not on PacketArrival. See that we always use min_packet_arrival as reference, and don\u0027t necessarily care the diff between two arbitrary PacketArrival.\n\nI would change the operator- in PacketArrival, to a private method in PacketArrivalHistory::GetDelayMs(const PacketArrival\u0026 arrival).",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 53
+      },
+      "revId": "099769826603ffe31902521de66f83421bf252f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f05d1a12_f7db97c3",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-12T20:51:44Z",
+      "side": 1,
+      "message": "lgtm, it removes confusion if we don\u0027t define \"packet delay\".",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 10
+      },
+      "revId": "099769826603ffe31902521de66f83421bf252f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8569d537_3bb29687",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-12T20:51:44Z",
+      "side": 1,
+      "message": "lgtm as PacketArrival has a comparator and it is clear what min and max means.",
+      "range": {
+        "startLine": 72,
+        "startChar": 23,
+        "endLine": 72,
+        "endChar": 42
+      },
+      "revId": "099769826603ffe31902521de66f83421bf252f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
