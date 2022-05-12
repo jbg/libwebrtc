@@ -35,6 +35,46 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a57e7c4_d4e8440a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-05-12T08:03:04Z",
+      "side": 1,
+      "message": "Just left one minor suggestion. otherwise lgtm.",
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d6a03d_c20f548d",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-05-12T08:03:04Z",
+      "side": 1,
+      "message": "Wdyt about this (maybe more concise?):\n\n  if (!line.empty() \u0026\u0026 line.back() \u003d\u003d kReturnChar)\n    line.remove_suffix(1);\n  return line;",
+      "range": {
+        "startLine": 493,
+        "startChar": 0,
+        "endLine": 498,
+        "endChar": 1
+      },
+      "revId": "e96b18f1e9d17fba0deec3246f0beb779cffba39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e47421b5_72b1f5cd",
