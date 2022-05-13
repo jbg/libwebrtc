@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9442c579_85f65ab6",
+        "filename": "rtc_base/system/arch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-13T07:34:20Z",
+      "side": 1,
+      "message": "Isn\u0027t this inside the \"defined(__MIPSEL__) || defined(__MIPSEB__)\"?",
+      "revId": "f12245631bee7f596e9f4890f13f2351a39655fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdef27b1_bfb98cf7",
+        "filename": "rtc_base/system/arch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-13T07:34:20Z",
+      "side": 1,
+      "message": "Where is WEBRTC_ARCH_PPC_FAMILY used? Are you planning to use it in a follow-up CL?",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 30
+      },
+      "revId": "f12245631bee7f596e9f4890f13f2351a39655fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a72103c_a00ef7f5",
+        "filename": "rtc_base/system/arch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-13T07:34:20Z",
+      "side": 1,
+      "message": "I see a PPC block here, I think it would be good if we can move the change you are doing between lines 49 and 60 into this PPC block.",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 6
+      },
+      "revId": "f12245631bee7f596e9f4890f13f2351a39655fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
