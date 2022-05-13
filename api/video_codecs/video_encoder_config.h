@@ -93,15 +93,6 @@ class VideoEncoderConfig {
     friend class VideoEncoderConfig;
   };
 
-  class H264EncoderSpecificSettings : public EncoderSpecificSettings {
-   public:
-    explicit H264EncoderSpecificSettings(const VideoCodecH264& specifics);
-    void FillVideoCodecH264(VideoCodecH264* h264_settings) const override;
-
-   private:
-    VideoCodecH264 specifics_;
-  };
-
   class Vp8EncoderSpecificSettings : public EncoderSpecificSettings {
    public:
     explicit Vp8EncoderSpecificSettings(const VideoCodecVP8& specifics);
