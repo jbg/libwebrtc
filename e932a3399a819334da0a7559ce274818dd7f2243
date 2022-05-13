@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8309819b_4f18f1c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-05-13T21:10:36Z",
+      "side": 1,
+      "message": "Made some changes so that bit-exactness tests are not affected. This unfortunately introduces some ugly repetition in ExpectedPacketAvailable(), but it is only temporary until we roll the new behavior out. What made it non-bitexact was some rounding when filtered_current_level and low_limit/high_limit was converted to milliseconds.",
+      "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
