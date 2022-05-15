@@ -16,6 +16,139 @@
       "message": "Made some changes so that bit-exactness tests are not affected. This unfortunately introduces some ugly repetition in ExpectedPacketAvailable(), but it is only temporary until we roll the new behavior out. What made it non-bitexact was some rounding when filtered_current_level and low_limit/high_limit was converted to milliseconds.",
       "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca4bbb32_c0cb6fbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-15T20:42:06Z",
+      "side": 1,
+      "message": "Thanks for doing this! I think this is clean enough and it is minimal change to guarantee bit exactness",
+      "parentUuid": "8309819b_4f18f1c7",
+      "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba5d6cdb_91293fa5",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history_unittest.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-15T20:42:06Z",
+      "side": 1,
+      "message": "nit: KHz",
+      "range": {
+        "startLine": 22,
+        "startChar": 14,
+        "endLine": 22,
+        "endChar": 20
+      },
+      "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b03d33_35c8097b",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history_unittest.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-15T20:42:06Z",
+      "side": 1,
+      "message": "nit: since we have line 100, would be good to add GetMaxDelayMs check here too.",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 55
+      },
+      "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "695f4f22_509432ca",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history_unittest.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-15T20:42:06Z",
+      "side": 1,
+      "message": "nit: WrapAround",
+      "range": {
+        "startLine": 103,
+        "startChar": 42,
+        "endLine": 103,
+        "endChar": 52
+      },
+      "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d3ef632_a7654718",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history_unittest.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-15T20:42:06Z",
+      "side": 1,
+      "message": "wrap around",
+      "range": {
+        "startLine": 111,
+        "startChar": 40,
+        "endLine": 111,
+        "endChar": 50
+      },
+      "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a9f0b01_d173af10",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history_unittest.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2022-05-15T20:42:06Z",
+      "side": 1,
+      "message": "wrap around",
+      "range": {
+        "startLine": 114,
+        "startChar": 46,
+        "endLine": 114,
+        "endChar": 56
+      },
+      "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
