@@ -563,8 +563,6 @@ if (current_os == "linux" || is_android) {
       "src/jni/android_histogram.cc",
       "src/jni/android_network_monitor.cc",
       "src/jni/android_network_monitor.h",
-      "src/jni/class_loader.h",
-      "src/jni/class_reference_holder.h",
       "src/jni/jni_common.cc",
       "src/jni/jni_helpers.cc",
       "src/jni/jni_helpers.h",
