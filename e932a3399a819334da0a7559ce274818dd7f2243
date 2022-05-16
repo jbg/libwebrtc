@@ -36,6 +36,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a27d6a5_707db06f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2022-05-16T06:32:25Z",
+      "side": 1,
+      "message": "Drive-by counter-nits. 😊\n",
+      "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba5d6cdb_91293fa5",
@@ -49,6 +66,30 @@
       "writtenOn": "2022-05-15T20:42:06Z",
       "side": 1,
       "message": "nit: KHz",
+      "range": {
+        "startLine": 22,
+        "startChar": 14,
+        "endLine": 22,
+        "endChar": 20
+      },
+      "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4393a70_df459747",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history_unittest.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2022-05-16T06:32:25Z",
+      "side": 1,
+      "message": "No. Should be kFsKhz as it is now. It clearly violates how we write normally (kHz), but the style guide says we should write it like this.",
+      "parentUuid": "ba5d6cdb_91293fa5",
       "range": {
         "startLine": 22,
         "startChar": 14,
@@ -95,6 +136,30 @@
       "writtenOn": "2022-05-15T20:42:06Z",
       "side": 1,
       "message": "nit: WrapAround",
+      "range": {
+        "startLine": 103,
+        "startChar": 42,
+        "endLine": 103,
+        "endChar": 52
+      },
+      "revId": "e932a3399a819334da0a7559ce274818dd7f2243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f066b0d_0eb56fab",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history_unittest.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2022-05-16T06:32:25Z",
+      "side": 1,
+      "message": "Wiktionary says no: https://en.wiktionary.org/wiki/wraparound",
+      "parentUuid": "695f4f22_509432ca",
       "range": {
         "startLine": 103,
         "startChar": 42,
