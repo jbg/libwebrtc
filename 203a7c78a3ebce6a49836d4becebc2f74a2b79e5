@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff0eb97_38dcd8c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-16T08:57:39Z",
+      "side": 1,
+      "message": "lgtm.",
+      "revId": "203a7c78a3ebce6a49836d4becebc2f74a2b79e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0f7463c_5bccaecc",
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "The current way for configuring spatial layers: line 533. And automatic resize is based on number of active layers, line 500.",
       "parentUuid": "e0f7463c_5bccaecc",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 543,
+        "endChar": 76
+      },
+      "revId": "203a7c78a3ebce6a49836d4becebc2f74a2b79e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2591aace_f2083359",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-16T08:57:39Z",
+      "side": 1,
+      "message": "Thanks. Do I get it right, that NumActiveStreams counts number of active *simulcast* streams, and the old way of svc config replaces simulcast with spatial layering?",
+      "parentUuid": "88da60fd_ed850836",
       "range": {
         "startLine": 543,
         "startChar": 0,
