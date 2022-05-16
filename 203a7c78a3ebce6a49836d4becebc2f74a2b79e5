@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f7463c_5bccaecc",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-16T07:01:38Z",
+      "side": 1,
+      "message": "Do we have similar logic (nearby?) for the old way of configuring spatial layers?",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 543,
+        "endChar": 76
+      },
+      "revId": "203a7c78a3ebce6a49836d4becebc2f74a2b79e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
