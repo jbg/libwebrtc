@@ -85,7 +85,10 @@ class SharedScreenCastStreamPrivate {
   SharedScreenCastStreamPrivate();
   ~SharedScreenCastStreamPrivate();
 
-  bool StartScreenCastStream(uint32_t stream_node_id, int fd);
+  bool StartScreenCastStream(uint32_t stream_node_id,
+                             int fd,
+                             uint32_t width = 0,
+                             uint32_t height = 0);
   void StopScreenCastStream();
   std::unique_ptr<DesktopFrame> CaptureFrame();
   std::unique_ptr<MouseCursor> CaptureCursor();
@@ -135,6 +138,7 @@ class SharedScreenCastStreamPrivate {
 
   void ProcessBuffer(pw_buffer* buffer);
   void ConvertRGBxToBGRx(uint8_t* frame, uint32_t size);
+  void Cleanup();
 
   // PipeWire callbacks
   static void OnCoreError(void* data,
@@ -343,7 +347,7 @@ void SharedScreenCastStreamPrivate::OnRenegotiateFormat(void* data, uint64_t) {
 
 SharedScreenCastStreamPrivate::SharedScreenCastStreamPrivate() {}
 
-SharedScreenCastStreamPrivate::~SharedScreenCastStreamPrivate() {
+void SharedScreenCastStreamPrivate::Cleanup() {
   if (pw_main_loop_) {
     pw_thread_loop_stop(pw_main_loop_);
   }
@@ -363,12 +367,22 @@ SharedScreenCastStreamPrivate::~SharedScreenCastStreamPrivate() {
   if (pw_main_loop_) {
     pw_thread_loop_destroy(pw_main_loop_);
   }
+
+  if (egl_dmabuf_) {
+    egl_dmabuf_.release();
+  }
+}
+
+SharedScreenCastStreamPrivate::~SharedScreenCastStreamPrivate() {
+  Cleanup();
 }
 
 RTC_NO_SANITIZE("cfi-icall")
 bool SharedScreenCastStreamPrivate::StartScreenCastStream(
     uint32_t stream_node_id,
-    int fd) {
+    int fd,
+    uint32_t width,
+    uint32_t height) {
 #if defined(WEBRTC_DLOPEN_PIPEWIRE)
   StubPathMap paths;
 
@@ -463,6 +477,12 @@ bool SharedScreenCastStreamPrivate::StartScreenCastStream(
         pw_client_version_ >= kDmaBufModifierMinVersion;
     const bool has_required_pw_server_version =
         pw_server_version_ >= kDmaBufModifierMinVersion;
+    struct spa_rectangle resolution;
+    bool set_resolution = false;
+    if (width && height) {
+      resolution = SPA_RECTANGLE(width, height);
+      set_resolution = true;
+    }
     for (uint32_t format : {SPA_VIDEO_FORMAT_BGRA, SPA_VIDEO_FORMAT_RGBA,
                             SPA_VIDEO_FORMAT_BGRx, SPA_VIDEO_FORMAT_RGBx}) {
       // Modifiers can be used with PipeWire >= 0.3.33
@@ -471,12 +491,12 @@ bool SharedScreenCastStreamPrivate::StartScreenCastStream(
 
         if (!modifiers_.empty()) {
           params.push_back(BuildFormat(&builder, format, modifiers_,
-                                       /*resolution=*/nullptr));
+                                       set_resolution ? &resolution : nullptr));
         }
       }
 
       params.push_back(BuildFormat(&builder, format, /*modifiers=*/{},
-                                   /*resolution=*/nullptr));
+                                   set_resolution ? &resolution : nullptr));
     }
 
     if (pw_stream_connect(pw_stream_, PW_DIRECTION_INPUT, pw_stream_node_id_,
@@ -733,8 +753,10 @@ bool SharedScreenCastStream::StartScreenCastStream(uint32_t stream_node_id) {
 }
 
 bool SharedScreenCastStream::StartScreenCastStream(uint32_t stream_node_id,
-                                                   int fd) {
-  return private_->StartScreenCastStream(stream_node_id, fd);
+                                                   int fd,
+                                                   uint32_t width,
+                                                   uint32_t height) {
+  return private_->StartScreenCastStream(stream_node_id, fd, width, height);
 }
 
 void SharedScreenCastStream::StopScreenCastStream() {

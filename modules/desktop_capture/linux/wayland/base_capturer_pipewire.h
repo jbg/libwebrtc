@@ -43,7 +43,9 @@ class BaseCapturerPipeWire : public DesktopCapturer,
   // ScreenCastPortal::PortalNotifier interface.
   void OnScreenCastRequestResult(xdg_portal::RequestResponse result,
                                  uint32_t stream_node_id,
-                                 int fd) override;
+                                 int fd,
+                                 uint32_t width,
+                                 uint32_t height) override;
   void OnScreenCastSessionClosed() override;
 
   xdg_portal::SessionDetails GetSessionDetails();

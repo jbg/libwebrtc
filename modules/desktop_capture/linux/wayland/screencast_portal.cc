@@ -118,7 +118,8 @@ xdg_portal::SessionDetails ScreenCastPortal::GetSessionDetails() {
 }
 
 void ScreenCastPortal::OnPortalDone(RequestResponse result) {
-  notifier_->OnScreenCastRequestResult(result, pw_stream_node_id_, pw_fd_);
+  notifier_->OnScreenCastRequestResult(result, pw_stream_node_id_, pw_fd_,
+                                       /*width=*/0, /*height=*/0);
   if (result != RequestResponse::kSuccess) {
     Cleanup();
   }

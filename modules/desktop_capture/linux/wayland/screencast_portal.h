@@ -63,7 +63,9 @@ class ScreenCastPortal : public xdg_portal::ScreenCapturePortalInterface {
    public:
     virtual void OnScreenCastRequestResult(xdg_portal::RequestResponse result,
                                            uint32_t stream_node_id,
-                                           int fd) = 0;
+                                           int fd,
+                                           uint32_t width,
+                                           uint32_t height) = 0;
     virtual void OnScreenCastSessionClosed() = 0;
 
    protected:
