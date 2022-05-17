@@ -16,6 +16,23 @@
       "message": "Adding silen@ as reviewer since she knows this code better than me.",
       "revId": "669762b80723f7ea0ab8ccabcf0501a6566ad120",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ba99c3f_11350b0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-05-17T11:16:08Z",
+      "side": 1,
+      "message": "Thanks Jeremy! LGTM",
+      "revId": "669762b80723f7ea0ab8ccabcf0501a6566ad120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
