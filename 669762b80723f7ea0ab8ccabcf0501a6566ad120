@@ -33,6 +33,23 @@
       "message": "Thanks Jeremy! LGTM",
       "revId": "669762b80723f7ea0ab8ccabcf0501a6566ad120",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bb40f28_9fff999a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-05-17T11:21:31Z",
+      "side": 1,
+      "message": "Thanks for the CL!",
+      "revId": "669762b80723f7ea0ab8ccabcf0501a6566ad120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
