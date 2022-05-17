@@ -349,8 +349,8 @@ class Call final : public webrtc::Call,
                             rtc::CopyOnWriteBuffer packet,
                             int64_t packet_time_us) RTC_RUN_ON(worker_thread_);
 
-  AudioReceiveStream* FindAudioStreamForSyncGroup(const std::string& sync_group)
-      RTC_RUN_ON(worker_thread_);
+  AudioReceiveStreamImpl* FindAudioStreamForSyncGroup(
+      const std::string& sync_group) RTC_RUN_ON(worker_thread_);
   void ConfigureSync(const std::string& sync_group) RTC_RUN_ON(worker_thread_);
 
   void NotifyBweOfReceivedPacket(const RtpPacketReceived& packet,
@@ -397,7 +397,7 @@ class Call final : public webrtc::Call,
   // creates them.
   // TODO(bugs.webrtc.org/11993): Move audio_receive_streams_,
   // video_receive_streams_ over to the network thread.
-  std::set<AudioReceiveStream*> audio_receive_streams_
+  std::set<AudioReceiveStreamImpl*> audio_receive_streams_
       RTC_GUARDED_BY(worker_thread_);
   std::set<VideoReceiveStream2*> video_receive_streams_
       RTC_GUARDED_BY(worker_thread_);
@@ -926,7 +926,7 @@ webrtc::AudioSendStream* Call::CreateAudioSendStream(
 
   // TODO(bugs.webrtc.org/11993): call AssociateSendStream and
   // UpdateAggregateNetworkState asynchronously on the network thread.
-  for (AudioReceiveStream* stream : audio_receive_streams_) {
+  for (AudioReceiveStreamImpl* stream : audio_receive_streams_) {
     if (stream->local_ssrc() == config.rtp.ssrc) {
       stream->AssociateSendStream(send_stream);
     }
@@ -954,7 +954,7 @@ void Call::DestroyAudioSendStream(webrtc::AudioSendStream* send_stream) {
 
   // TODO(bugs.webrtc.org/11993): call AssociateSendStream and
   // UpdateAggregateNetworkState asynchronously on the network thread.
-  for (AudioReceiveStream* stream : audio_receive_streams_) {
+  for (AudioReceiveStreamImpl* stream : audio_receive_streams_) {
     if (stream->local_ssrc() == ssrc) {
       stream->AssociateSendStream(nullptr);
     }
@@ -973,7 +973,7 @@ webrtc::AudioReceiveStream* Call::CreateAudioReceiveStream(
   event_log_->Log(std::make_unique<RtcEventAudioReceiveStreamConfig>(
       CreateRtcLogStreamConfig(config)));
 
-  AudioReceiveStream* receive_stream = new AudioReceiveStream(
+  AudioReceiveStreamImpl* receive_stream = new AudioReceiveStreamImpl(
       clock_, transport_send_->packet_router(), config_.neteq_factory, config,
       config_.audio_state, event_log_);
   audio_receive_streams_.insert(receive_stream);
@@ -1004,8 +1004,8 @@ void Call::DestroyAudioReceiveStream(
   TRACE_EVENT0("webrtc", "Call::DestroyAudioReceiveStream");
   RTC_DCHECK_RUN_ON(worker_thread_);
   RTC_DCHECK(receive_stream != nullptr);
-  webrtc::internal::AudioReceiveStream* audio_receive_stream =
-      static_cast<webrtc::internal::AudioReceiveStream*>(receive_stream);
+  webrtc::AudioReceiveStreamImpl* audio_receive_stream =
+      static_cast<webrtc::AudioReceiveStreamImpl*>(receive_stream);
 
   // TODO(bugs.webrtc.org/11993): Access the map, rtp config, call ConfigureSync
   // and UpdateAggregateNetworkState on the network thread. The call to
@@ -1382,8 +1382,8 @@ void Call::UpdateAggregateNetworkState() {
 void Call::OnLocalSsrcUpdated(webrtc::AudioReceiveStream& stream,
                               uint32_t local_ssrc) {
   RTC_DCHECK_RUN_ON(worker_thread_);
-  webrtc::internal::AudioReceiveStream& receive_stream =
-      static_cast<webrtc::internal::AudioReceiveStream&>(stream);
+  webrtc::AudioReceiveStreamImpl& receive_stream =
+      static_cast<webrtc::AudioReceiveStreamImpl&>(stream);
 
   receive_stream.SetLocalSsrc(local_ssrc);
   auto it = audio_send_ssrcs_.find(local_ssrc);
@@ -1406,8 +1406,8 @@ void Call::OnLocalSsrcUpdated(FlexfecReceiveStream& stream,
 void Call::OnUpdateSyncGroup(webrtc::AudioReceiveStream& stream,
                              const std::string& sync_group) {
   RTC_DCHECK_RUN_ON(worker_thread_);
-  webrtc::internal::AudioReceiveStream& receive_stream =
-      static_cast<webrtc::internal::AudioReceiveStream&>(stream);
+  webrtc::AudioReceiveStreamImpl& receive_stream =
+      static_cast<webrtc::AudioReceiveStreamImpl&>(stream);
   receive_stream.SetSyncGroup(sync_group);
   ConfigureSync(sync_group);
 }
@@ -1476,11 +1476,11 @@ void Call::OnAllocationLimitsChanged(BitrateAllocationLimits limits) {
 }
 
 // RTC_RUN_ON(worker_thread_)
-AudioReceiveStream* Call::FindAudioStreamForSyncGroup(
+AudioReceiveStreamImpl* Call::FindAudioStreamForSyncGroup(
     const std::string& sync_group) {
   RTC_DCHECK_RUN_ON(&receive_11993_checker_);
   if (!sync_group.empty()) {
-    for (AudioReceiveStream* stream : audio_receive_streams_) {
+    for (AudioReceiveStreamImpl* stream : audio_receive_streams_) {
       if (stream->sync_group() == sync_group)
         return stream;
     }
@@ -1493,7 +1493,8 @@ AudioReceiveStream* Call::FindAudioStreamForSyncGroup(
 // RTC_RUN_ON(worker_thread_)
 void Call::ConfigureSync(const std::string& sync_group) {
   // `audio_stream` may be nullptr when clearing the audio stream for a group.
-  AudioReceiveStream* audio_stream = FindAudioStreamForSyncGroup(sync_group);
+  AudioReceiveStreamImpl* audio_stream =
+      FindAudioStreamForSyncGroup(sync_group);
 
   size_t num_synced_streams = 0;
   for (VideoReceiveStream2* video_stream : video_receive_streams_) {
@@ -1542,7 +1543,7 @@ void Call::DeliverRtcp(MediaType media_type, rtc::CopyOnWriteBuffer packet) {
             rtcp_delivered = true;
         }
 
-        for (AudioReceiveStream* stream : audio_receive_streams_) {
+        for (AudioReceiveStreamImpl* stream : audio_receive_streams_) {
           stream->DeliverRtcp(packet.cdata(), packet.size());
           rtcp_delivered = true;
         }
