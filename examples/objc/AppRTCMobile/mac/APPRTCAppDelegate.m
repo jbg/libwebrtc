@@ -30,7 +30,7 @@
                                  NSMidY(visibleRect),
                                  1320,
                                  1140);
-  NSUInteger styleMask = NSTitledWindowMask | NSClosableWindowMask;
+  NSUInteger styleMask = NSWindowStyleMaskTitled | NSClosableWindowMask;
   _window = [[NSWindow alloc] initWithContentRect:windowRect
                                         styleMask:styleMask
                                           backing:NSBackingStoreBuffered
