@@ -15,6 +15,7 @@
 
 #include "api/sequence_checker.h"
 #include "call/adaptation/video_stream_adapter.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "video/adaptation/video_stream_encoder_resource_manager.h"
 
 namespace webrtc {
@@ -56,6 +57,16 @@ bool BitrateConstraint::IsAdaptationUpAllowed(
     if (VideoStreamEncoderResourceManager::IsSimulcast(
             encoder_settings_->encoder_config())) {
       // Resolution bitrate limits usage is restricted to singlecast.
+      return true;
+    }
+
+    const std::vector<VideoStream>& simulcast_layers =
+        encoder_settings_->encoder_config().simulcast_layers;
+    if (encoder_settings_->encoder_config().number_of_streams == 1 &&
+        !simulcast_layers.empty() &&
+        simulcast_layers[0].scalability_mode.has_value() &&
+        ScalabilityModeToNumSpatialLayers(
+            *simulcast_layers[0].scalability_mode) > 1) {
       return true;
     }
 
