@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e272b201_fff138c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-18T10:25:02Z",
+      "side": 1,
+      "message": "comments for the reland (since this cl seems to be breaking chromium atm)",
+      "revId": "cc1b9b060d71c92fd6a93139393d5e0628a82c61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a5e9d5_2e30ed21",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-18T10:25:02Z",
+      "side": 1,
+      "message": "Can we change this to not be pointers but rather be arrays? Actually, better yet, string_view?\n\nAt the very least, the new functions and types that are associated with the struct, should use string_view.",
+      "range": {
+        "startLine": 102,
+        "startChar": 27,
+        "endLine": 102,
+        "endChar": 35
+      },
+      "revId": "cc1b9b060d71c92fd6a93139393d5e0628a82c61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad1a146_33cfe572",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-18T10:25:02Z",
+      "side": 1,
+      "message": "absl::string_view instead of std::string",
+      "range": {
+        "startLine": 711,
+        "startChar": 22,
+        "endLine": 711,
+        "endChar": 28
+      },
+      "revId": "cc1b9b060d71c92fd6a93139393d5e0628a82c61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76fc2681_f2396a36",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-18T10:25:02Z",
+      "side": 1,
+      "message": "absl::string_view IceRoleToRTCIceRole(cricket::IceRole role) {",
+      "range": {
+        "startLine": 213,
+        "startChar": 6,
+        "endLine": 213,
+        "endChar": 10
+      },
+      "revId": "cc1b9b060d71c92fd6a93139393d5e0628a82c61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e279b1d8_a5a57d51",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-18T10:25:02Z",
+      "side": 1,
+      "message": "remove the default, catch-all, label so that we\u0027ll get a compile time error if the enum goes out of sync with this implementation.",
+      "range": {
+        "startLine": 221,
+        "startChar": 4,
+        "endLine": 221,
+        "endChar": 11
+      },
+      "revId": "cc1b9b060d71c92fd6a93139393d5e0628a82c61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1f4a4c5_250c3221",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-18T10:25:02Z",
+      "side": 1,
+      "message": "static constexpr char RTCIceRole::kUnknown[] \u003d \"unknown\";\nor\nstatic constexpr absl::string_view RTCIceRole::kUnknown \u003d \"unknown\";",
+      "range": {
+        "startLine": 71,
+        "startChar": 30,
+        "endLine": 71,
+        "endChar": 38
+      },
+      "revId": "cc1b9b060d71c92fd6a93139393d5e0628a82c61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
