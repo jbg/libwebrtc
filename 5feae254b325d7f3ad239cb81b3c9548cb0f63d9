@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f2dafd_dc8276d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-18T11:20:53Z",
+      "side": 1,
+      "message": "PTAL, it seems we never use settings via this class.",
+      "revId": "5feae254b325d7f3ad239cb81b3c9548cb0f63d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
