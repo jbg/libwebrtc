@@ -28,7 +28,8 @@ class BaseCapturerPipeWire : public DesktopCapturer,
   explicit BaseCapturerPipeWire(const DesktopCaptureOptions& options);
   BaseCapturerPipeWire(
       const DesktopCaptureOptions& options,
-      std::unique_ptr<xdg_portal::ScreenCapturePortalInterface> portal);
+      std::unique_ptr<xdg_portal::ScreenCapturePortalInterface> portal,
+      uint32_t width, uint32_t height);
   ~BaseCapturerPipeWire() override;
 
   BaseCapturerPipeWire(const BaseCapturerPipeWire&) = delete;
@@ -43,7 +44,9 @@ class BaseCapturerPipeWire : public DesktopCapturer,
   // ScreenCastPortal::PortalNotifier interface.
   void OnScreenCastRequestResult(xdg_portal::RequestResponse result,
                                  uint32_t stream_node_id,
-                                 int fd) override;
+                                 int fd,
+                                 uint32_t width,
+                                 uint32_t height) override;
   void OnScreenCastSessionClosed() override;
 
   xdg_portal::SessionDetails GetSessionDetails();
@@ -51,6 +54,8 @@ class BaseCapturerPipeWire : public DesktopCapturer,
  private:
   DesktopCaptureOptions options_ = {};
   Callback* callback_ = nullptr;
+  uint32_t width_ = 0;
+  uint32_t height_ = 0;
   bool capturer_failed_ = false;
   std::unique_ptr<xdg_portal::ScreenCapturePortalInterface> portal_;
 };
