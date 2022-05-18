@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aaf207f_ff575cef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-18T07:29:30Z",
+      "side": 1,
+      "message": "One step more towards being able to delete the channel manager class.\n",
+      "revId": "4e4b9cabe2d9118fbae6955709c1b6cfb0d792f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
