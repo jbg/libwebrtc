@@ -119,7 +119,7 @@ class RtpSenderReceiverTest
         local_stream_(MediaStream::Create(kStreamId1)) {
     worker_thread_->Invoke<void>(RTC_FROM_HERE, [&]() {
       channel_manager_ = cricket::ChannelManager::Create(
-          absl::WrapUnique(media_engine_), false, worker_thread_,
+          media_engine_, &ssrc_generator_, false, worker_thread_,
           network_thread_);
     });
 
@@ -528,6 +528,7 @@ class RtpSenderReceiverTest
       video_bitrate_allocator_factory_;
   // `media_engine_` is actually owned by `channel_manager_`.
   cricket::FakeMediaEngine* media_engine_;
+  rtc::UniqueRandomIdGenerator ssrc_generator_;
   std::unique_ptr<cricket::ChannelManager> channel_manager_;
   cricket::FakeCall fake_call_;
   std::unique_ptr<cricket::VoiceChannel> voice_channel_;
