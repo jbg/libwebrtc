@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6de237b_6047348b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-18T13:17:36Z",
+      "side": 1,
+      "message": "Code change looks ok, but I think it deserves some more docs.",
+      "revId": "2660d63a0aeffeba56c8902370cad5d8370a198f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a67e53fa_633c3a0b",
+        "filename": "video/adaptation/bitrate_constraint.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-18T13:17:36Z",
+      "side": 1,
+      "message": "I don\u0027t have the full context, but maybe a brief comment on why we have this condition? May also help with a function-level comment giving some background on what the various conditions in this method try to achieve.\n\nAs I read this code block, this means that if we have a single simulcast stream, and that stream is configured with multiple spatial layers, then we always allow \"adaptation up\", and ignore any bitrate limits? But it\u0027s not obvious why that\u0027s the right thing to do.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "2660d63a0aeffeba56c8902370cad5d8370a198f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
