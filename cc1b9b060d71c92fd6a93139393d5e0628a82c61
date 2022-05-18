@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "970af2d2_a9f9d338",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-05-18T11:49:20Z",
+      "side": 1,
+      "message": "no, this has rolled. The revert was because the (second) chrome allowlist hadn\u0027t been updated in time which has since been fixed.",
+      "parentUuid": "e272b201_fff138c6",
+      "revId": "cc1b9b060d71c92fd6a93139393d5e0628a82c61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54a5e9d5_2e30ed21",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-05-18T10:25:02Z",
       "side": 1,
       "message": "Can we change this to not be pointers but rather be arrays? Actually, better yet, string_view?\n\nAt the very least, the new functions and types that are associated with the struct, should use string_view.",
+      "range": {
+        "startLine": 102,
+        "startChar": 27,
+        "endLine": 102,
+        "endChar": 35
+      },
+      "revId": "cc1b9b060d71c92fd6a93139393d5e0628a82c61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fce637b5_6873e9c1",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-05-18T11:49:20Z",
+      "side": 1,
+      "message": "already suggested in https://webrtc-review.googlesource.com/c/src/+/261720/comments/fca832c0_6783e8cd\nI generally agree but my attempt to clean this up ended up being even more messy... will upload it somewhere for inspection.",
+      "parentUuid": "54a5e9d5_2e30ed21",
       "range": {
         "startLine": 102,
         "startChar": 27,
