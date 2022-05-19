@@ -241,6 +241,7 @@ class RTCStatsMemberInterface {
 
     kMapStringUint64,  // std::map<std::string, uint64_t>
     kMapStringDouble,  // std::map<std::string, double>
+    kAbslStringView,   // absl::string_view
   };
 
   virtual ~RTCStatsMemberInterface() {}
