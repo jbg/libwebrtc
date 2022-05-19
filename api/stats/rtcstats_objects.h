@@ -24,12 +24,27 @@
 namespace webrtc {
 
 // https://w3c.github.io/webrtc-pc/#idl-def-rtcdatachannelstate
-struct RTCDataChannelState {
-  static const char* const kConnecting;
-  static const char* const kOpen;
-  static const char* const kClosing;
-  static const char* const kClosed;
+enum class RTCDataChannelState {
+  kConnecting,
+  kOpen,
+  kClosing,
+  kClosed,
 };
+
+inline constexpr absl::string_view AsString(const RTCDataChannelState& state) {
+  switch (state) {
+    case RTCDataChannelState::kConnecting:
+      return "connecting";
+    case RTCDataChannelState::kOpen:
+      return "open";
+    case RTCDataChannelState::kClosing:
+      return "closing";
+    case RTCDataChannelState::kClosed:
+      return "closed";
+  }
+  RTC_CHECK_NOTREACHED();
+  return "";
+}
 
 // https://w3c.github.io/webrtc-stats/#dom-rtcstatsicecandidatepairstate
 struct RTCStatsIceCandidatePairState {
@@ -177,7 +192,7 @@ class RTC_EXPORT RTCDataChannelStats final : public RTCStats {
   RTCStatsMember<std::string> protocol;
   RTCStatsMember<int32_t> data_channel_identifier;
   // TODO(hbos): Support enum types? "RTCStatsMember<RTCDataChannelState>"?
-  RTCStatsMember<std::string> state;
+  RTCStatsMember<absl::string_view> state;
   RTCStatsMember<uint32_t> messages_sent;
   RTCStatsMember<uint64_t> bytes_sent;
   RTCStatsMember<uint32_t> messages_received;

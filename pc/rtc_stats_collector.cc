@@ -176,7 +176,7 @@ const char* CandidateTypeToRTCIceCandidateType(const std::string& type) {
   return nullptr;
 }
 
-const char* DataStateToRTCDataChannelState(
+RTCDataChannelState DataStateToRTCDataChannelState(
     DataChannelInterface::DataState state) {
   switch (state) {
     case DataChannelInterface::kConnecting:
@@ -189,7 +189,7 @@ const char* DataStateToRTCDataChannelState(
       return RTCDataChannelState::kClosed;
     default:
       RTC_DCHECK_NOTREACHED();
-      return nullptr;
+      return RTCDataChannelState::kConnecting;
   }
 }
 
@@ -1607,7 +1607,8 @@ void RTCStatsCollector::ProduceDataChannelStats_s(
     data_channel_stats->label = std::move(stats.label);
     data_channel_stats->protocol = std::move(stats.protocol);
     data_channel_stats->data_channel_identifier = stats.id;
-    data_channel_stats->state = DataStateToRTCDataChannelState(stats.state);
+    data_channel_stats->state =
+        AsString(DataStateToRTCDataChannelState(stats.state));
     data_channel_stats->messages_sent = stats.messages_sent;
     data_channel_stats->bytes_sent = stats.bytes_sent;
     data_channel_stats->messages_received = stats.messages_received;
@@ -2368,7 +2369,7 @@ const char* CandidateTypeToRTCIceCandidateTypeForTesting(
 
 const char* DataStateToRTCDataChannelStateForTesting(
     DataChannelInterface::DataState state) {
-  return DataStateToRTCDataChannelState(state);
+  return AsString(DataStateToRTCDataChannelState(state)).data();
 }
 
 }  // namespace webrtc
