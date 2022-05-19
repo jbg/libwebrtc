@@ -63,6 +63,30 @@
       },
       "revId": "2660d63a0aeffeba56c8902370cad5d8370a198f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0759a18c_ac0da970",
+        "filename": "video/adaptation/bitrate_constraint.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-19T14:26:35Z",
+      "side": 1,
+      "message": "Thanks. Still not crystal clear what this means for spatial layer (\"single active stream\" in the comment, that refers to simulcast streams, right?).",
+      "parentUuid": "8e4ccc85_52025596",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "2660d63a0aeffeba56c8902370cad5d8370a198f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
