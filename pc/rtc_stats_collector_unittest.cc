@@ -2138,7 +2138,8 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Video) {
   video_media_info.receivers[0].key_frames_decoded = 3;
   video_media_info.receivers[0].frames_dropped = 13;
   video_media_info.receivers[0].qp_sum = absl::nullopt;
-  video_media_info.receivers[0].total_decode_time_ms = 9000;
+  video_media_info.receivers[0].total_decode_time =
+      webrtc::TimeDelta::Millis(9000);
   video_media_info.receivers[0].total_processing_delay =
       webrtc::TimeDelta::Millis(600);
   video_media_info.receivers[0].total_assembly_time =
