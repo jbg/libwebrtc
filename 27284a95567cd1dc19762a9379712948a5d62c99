@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f65e78_b4ee3834",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 8
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-05-19T08:09:33Z",
+      "side": 1,
+      "message": "Don\u0027t need to add win10 here, it\u0027s already done in waterfalls.pyl",
+      "range": {
+        "startLine": 240,
+        "startChar": 20,
+        "endLine": 240,
+        "endChar": 25
+      },
+      "revId": "27284a95567cd1dc19762a9379712948a5d62c99",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38b86c91_e6d7d563",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 8
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-05-19T08:09:33Z",
+      "side": 1,
+      "message": "Same",
+      "range": {
+        "startLine": 245,
+        "startChar": 20,
+        "endLine": 245,
+        "endChar": 25
+      },
+      "revId": "27284a95567cd1dc19762a9379712948a5d62c99",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91bea4a1_774bf4a5",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 8
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-05-19T08:09:33Z",
+      "side": 1,
+      "message": "and same again",
+      "range": {
+        "startLine": 252,
+        "startChar": 11,
+        "endLine": 252,
+        "endChar": 16
+      },
+      "revId": "27284a95567cd1dc19762a9379712948a5d62c99",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
