@@ -736,7 +736,7 @@ void ReceiveStatisticsProxy::OnCname(uint32_t ssrc, absl::string_view cname) {
 
 void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrame& frame,
                                             absl::optional<uint8_t> qp,
-                                            int32_t decode_time_ms,
+                                            TimeDelta decode_time,
                                             VideoContentType content_type) {
   MutexLock lock(&mutex_);
 
@@ -770,11 +770,11 @@ void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrame& frame,
         << "QP sum was already set and no QP was given for a frame.";
     stats_.qp_sum.reset();
   }
-  decode_time_counter_.Add(decode_time_ms);
-  stats_.decode_ms = decode_time_ms;
-  stats_.total_decode_time_ms += decode_time_ms;
+  decode_time_counter_.Add(decode_time.ms());
+  stats_.decode_ms = decode_time.ms();
+  stats_.total_decode_time += decode_time;
   if (enable_decode_time_histograms_) {
-    UpdateDecodeTimeHistograms(frame.width(), frame.height(), decode_time_ms);
+    UpdateDecodeTimeHistograms(frame.width(), frame.height(), decode_time.ms());
   }
 
   last_content_type_ = content_type;
