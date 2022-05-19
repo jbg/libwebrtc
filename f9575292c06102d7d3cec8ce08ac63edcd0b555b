@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a62d3c1_c8b66712",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-05-19T18:46:45Z",
+      "side": 1,
+      "message": "I realized that AcmReceiver really only does resampling so I think these bit-exactness tests are redundant (if we want to test for bit-exactness of the resampling then we should do that separately without NetEq). I eventually think we should remove AcmReceiver as well and move the resampling someplace else like AudioReceiveStream (or perhaps NetEq?).\n\nPlease let me know if you do not agree :)",
+      "revId": "f9575292c06102d7d3cec8ce08ac63edcd0b555b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
