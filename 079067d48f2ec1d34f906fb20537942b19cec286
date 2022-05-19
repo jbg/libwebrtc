@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64ab9194_f748bb33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-19T13:57:39Z",
+      "side": 1,
+      "message": "PTAL. An alternative might be to change the default at\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/video_codecs/video_encoder_config.cc;drc\u003dcf2c8915f4e2c1330245ef31ba237318bc70dc3e;l\u003d55\n\nBut I think it\u0027s also reasonable to have tests set this explicitly.",
+      "revId": "079067d48f2ec1d34f906fb20537942b19cec286",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
