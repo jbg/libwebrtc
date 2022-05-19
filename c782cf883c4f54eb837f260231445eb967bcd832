@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c885ad_fb95a593",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2022-05-19T18:52:53Z",
+      "side": 1,
+      "message": "not totally related, but just seeing it again here - would be interesting, rather than having a \u0027fast accelerate vs accelerate\u0027, to do this generically - return a value based on the difference between playout delay vs target delay (and in future, possibly based on % chance underrun as well, or even how long we\u0027ve been in this state, etc) - and use this value for the correlation_threshold in accelerate [1]/preemptive expand. \nSo we become more accepting of what we\u0027ll time stretch as the difference gets larger.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_coding/neteq/accelerate.cc;l\u003d56;drc\u003d8a609a649e36c8099c6801d41aca1ec3b0b3af73;bpv\u003d0;bpt\u003d1",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d6cf59_44b04a91",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2022-05-19T18:52:53Z",
+      "side": 1,
+      "message": "it would be cool in the future to have these probability based - i.e. \"theres a \u003e x% chance we will underrun\"",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c9a49b1_7b2d017c",
+        "filename": "modules/audio_coding/neteq/packet_arrival_history.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2022-05-19T18:52:53Z",
+      "side": 1,
+      "message": "nit - probably not too important, but if the additional delays were a wide guassian (a high std), it might make more sense to use something like the p90 (p50? mean?) fastest arriving or some other smoothing, so a highly varying min arrival wouldn\u0027t cause big changes as the window slides (a p99.9 fast packet vs a p95). \nBut also, I doubt many networks would really look like that, especially with a 2s window, unless you maybe had some very specific variable cross traffic? But tests[1] can :) \n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/call/simulated_network.cc;l\u003d228-229;drc\u003d8a609a649e36c8099c6801d41aca1ec3b0b3af73;bpv\u003d0;bpt\u003d1",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
