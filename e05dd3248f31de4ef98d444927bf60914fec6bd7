@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5d34bf6_778e1df8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-20T07:27:17Z",
+      "side": 1,
+      "message": "PTAL. Do you think this makes sense as a first step? Plan is to next make SimulcastStream a separate struct type (see https://webrtc-review.googlesource.com/c/src/+/262255, which isn\u0027t landable now because it breaks some downstream code), and then we can add a scalability mode member to the new struct.",
+      "revId": "e05dd3248f31de4ef98d444927bf60914fec6bd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
