@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1bf011f_62b011f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-05-20T11:38:10Z",
+      "side": 1,
+      "message": "Sorry, had to revert previous CL, marking this CL as WIP again.",
+      "revId": "a345cc98811d76056c2b9a9501a8f1b2fdbb7bfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
