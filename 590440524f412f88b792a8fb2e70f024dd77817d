@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "119352cc_cb2d42b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-20T12:37:59Z",
+      "side": 1,
+      "message": "generally internal is an acceptable subnamespace (it clearly communicates symbol shouldn\u0027t be used outside, better than \u0027Impl\u0027 suffix does)\nSee http://go/totw/56\n\nBut in this case there is already symbol AudioReceiveStream in webrtc namespace, having same name in the \u0027internal\u0027 subnamespace adds confusion.",
+      "revId": "590440524f412f88b792a8fb2e70f024dd77817d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
