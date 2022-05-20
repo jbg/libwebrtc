@@ -22,6 +22,30 @@
       },
       "revId": "ddcf0243ea7b0dd09de2fce16b825806371adab1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "802226d8_daa7d3c0",
+        "filename": "video/adaptation/bitrate_constraint.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2022-05-20T11:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac3c9bb7_0947d318",
+      "range": {
+        "startLine": 67,
+        "startChar": 3,
+        "endLine": 76,
+        "endChar": 5
+      },
+      "revId": "ddcf0243ea7b0dd09de2fce16b825806371adab1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
