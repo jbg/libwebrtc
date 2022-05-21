@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa98aaaf_c99369d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-05-21T09:16:18Z",
+      "side": 1,
+      "message": "Hi Tommi. I\u0027ll be OOO on vacation until May 31. Feel free to pass this review on to someone else, otherwise I\u0027ll get back to you as soon as I can.",
+      "revId": "42b15b28208859d437e8eeefa7ae14f14f7ccf56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
