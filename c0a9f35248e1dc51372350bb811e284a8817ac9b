@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df05e7e0_2e185a75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-21T15:27:27Z",
+      "side": 1,
+      "message": "I don\u0027t think you should do this.\n\nSimulcast is the simultaneous sending of two streams with no interdependencies; it may involve sending at two different sizes, two different framerates, or even two different codecs, sent on different SSRCs.\n\nSpatial layers are frames with different resolutions, they can have dependencies on frames from different layers.\n\nUsing \"Simulcast\" for spatial layers will be confusing to code readers.\n\nNote - if the concept in the code is indeed simulcast streams, it\u0027s the wrong name, and it is indeed right to change it. But mixing the two terms is dangerous; they\u0027re very different.\n",
+      "revId": "c0a9f35248e1dc51372350bb811e284a8817ac9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
