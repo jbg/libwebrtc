@@ -81,6 +81,7 @@ if (rtc_enable_protobuf) {
     deps = [
       ":network_tester",
       "../../rtc_base:gunit_helpers",
+      "../../rtc_base:threading",
       "../../test:fileutils",
       "../../test:test_support",
       "//testing/gtest",
@@ -98,7 +99,10 @@ if (rtc_enable_protobuf) {
   rtc_executable("network_tester_server") {
     sources = [ "server.cc" ]
 
-    deps = [ ":network_tester" ]
+    deps = [
+      ":network_tester",
+      "../../rtc_base:threading",
+    ]
   }
 }
 
