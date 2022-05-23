@@ -76,9 +76,11 @@ void PeerConnectionTestWrapper::Connect(PeerConnectionTestWrapper* caller,
 
 PeerConnectionTestWrapper::PeerConnectionTestWrapper(
     const std::string& name,
+    rtc::SocketServer* socket_server,
     rtc::Thread* network_thread,
     rtc::Thread* worker_thread)
     : name_(name),
+      socket_server_(socket_server),
       network_thread_(network_thread),
       worker_thread_(worker_thread),
       pending_negotiation_(false) {
@@ -100,8 +102,11 @@ bool PeerConnectionTestWrapper::CreatePc(
     const webrtc::PeerConnectionInterface::RTCConfiguration& config,
     rtc::scoped_refptr<webrtc::AudioEncoderFactory> audio_encoder_factory,
     rtc::scoped_refptr<webrtc::AudioDecoderFactory> audio_decoder_factory) {
+  std::unique_ptr<rtc::PacketSocketFactory> packet_socket_factory(
+      new rtc::BasicPacketSocketFactory(socket_server_));
   std::unique_ptr<cricket::PortAllocator> port_allocator(
-      new cricket::FakePortAllocator(network_thread_, nullptr));
+      new cricket::FakePortAllocator(network_thread_,
+                                     packet_socket_factory.get()));
 
   RTC_DCHECK_RUN_ON(&pc_thread_checker_);
 
@@ -124,6 +129,7 @@ bool PeerConnectionTestWrapper::CreatePc(
   std::unique_ptr<rtc::RTCCertificateGeneratorInterface> cert_generator(
       new FakeRTCCertificateGenerator());
   webrtc::PeerConnectionDependencies deps(this);
+  deps.packet_socket_factory = std::move(packet_socket_factory);
   deps.allocator = std::move(port_allocator);
   deps.cert_generator = std::move(cert_generator);
   auto result = peer_connection_factory_->CreatePeerConnectionOrError(
