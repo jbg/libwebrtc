@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42e765f_29fc9803",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2022-05-23T12:50:09Z",
+      "side": 1,
+      "message": "but min\u003d0 max\u003d0 is a valid case according to the \"spec\":\nIn these cases, the RTP sender would like to disable all smoothing at receiver (min delay \u003d max delay \u003d 0)\n-- https://webrtc.googlesource.com/src/+/refs/heads/main/docs/native-code/rtp-hdrext/playout-delay/",
+      "revId": "8a25ef2c3ff8d50bde04959028dbc245c1104f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
