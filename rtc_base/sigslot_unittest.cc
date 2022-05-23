@@ -382,3 +382,21 @@ TEST(SigslotRepeaterTest, StopsRepeatingSignalsAfterStopCalled) {
   signal();
   EXPECT_EQ(1, receiver.signal_count());
 }
+
+TEST(Sigslot, Movable) {
+  sigslot::signal<> signal;
+  SigslotReceiver<> receiver;
+  receiver.Connect(&signal);
+
+  EXPECT_FALSE(signal.is_empty());
+
+  // Move `signal` to `moved_signal` and expect references of the slots to no
+  // longer be in `signal`.
+  sigslot::signal<> moved_signal = std::move(signal);
+  EXPECT_FALSE(moved_signal.is_empty());
+  EXPECT_TRUE(signal.is_empty());
+
+  // Fire the moved signal, expecting the receiver to be notified.
+  moved_signal();
+  EXPECT_EQ(1, receiver.signal_count());
+}
