@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ba0a8b0_afd3e7e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-23T13:51:49Z",
+      "side": 1,
+      "message": "switching back to not-ready - I need to take a look at the _signal_base_interface class. Will ping back.",
+      "revId": "c7a8fed5a77b8b8b313319e3eb66944b605697a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
