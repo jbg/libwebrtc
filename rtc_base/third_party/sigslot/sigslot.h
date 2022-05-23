@@ -370,6 +370,8 @@ class _signal_base : public _signal_base_interface, public mt_policy {
     }
   }
 
+  _signal_base(_signal_base&& o) = default;
+
   bool is_empty() {
     lock_block<mt_policy> lock(this);
     return m_connected_slots.empty();
