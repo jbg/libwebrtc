@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d7e4d88_2b179f72",
+        "filename": "rtc_base/third_party/sigslot/sigslot.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-23T11:30:35Z",
+      "side": 1,
+      "message": "move would likely invalidate this iterator, it might be good idea to reset it to m_connected_slots.end() after the move.\n(and test that it works)",
+      "range": {
+        "startLine": 477,
+        "startChar": 29,
+        "endLine": 477,
+        "endChar": 47
+      },
+      "revId": "a49b5b5d3600000e2f1555aef60e21ca877169ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
