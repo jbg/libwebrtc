@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30a8f00f_76e8256c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-05-23T15:45:35Z",
+      "side": 1,
+      "message": "Thanks! My spell checker is disabled it seems (many mistakes here) :)",
+      "parentUuid": "1f5d633d_0e8482ad",
+      "revId": "8a25ef2c3ff8d50bde04959028dbc245c1104f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e42e765f_29fc9803",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "This is a valid case yes, the problem is when min !\u003d 0 and max \u003d 0, which can happen if another playout delay is set for some reason. The logging will not be triggered if min\u003dmax\u003d0.",
       "parentUuid": "e42e765f_29fc9803",
+      "revId": "8a25ef2c3ff8d50bde04959028dbc245c1104f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d31beb_af119af0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-05-23T15:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f4b0d6a_b3af2e30",
       "revId": "8a25ef2c3ff8d50bde04959028dbc245c1104f72",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

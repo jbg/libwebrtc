@@ -105,6 +105,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ff36e0_e5469d4e",
+        "filename": "modules/video_coding/timing.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-05-23T15:45:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e5506f1_629767d9",
+      "range": {
+        "startLine": 84,
+        "startChar": 58,
+        "endLine": 84,
+        "endChar": 59
+      },
+      "revId": "c95303c21f32752f6f3176e5af6161569b86a22f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1b2e8e1_7fab41b2",
@@ -153,6 +177,30 @@
       "writtenOn": "2022-05-23T12:56:39Z",
       "side": 1,
       "message": "Not sure if it makes any difference, but what do you think of avoiding this call (to avoid taking the extra lock for every frame)? Either by inferring from min_delays or changing the order of the comparisons?",
+      "range": {
+        "startLine": 992,
+        "startChar": 8,
+        "endLine": 992,
+        "endChar": 36
+      },
+      "revId": "c95303c21f32752f6f3176e5af6161569b86a22f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fdccf84_59fcd26b",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-05-23T15:45:35Z",
+      "side": 1,
+      "message": "I have reversed the comparisons to avoid logging on each frame. The lock will be hit on each frame in the case that multiple delays are set. I don\u0027t think there is a good way to manage the delay without the lock (btw, this lock should be removed someday I think. All access could be on the worker thread once some of the older uses go away.)",
+      "parentUuid": "97645ad6_f5bee6c2",
       "range": {
         "startLine": 992,
         "startChar": 8,
