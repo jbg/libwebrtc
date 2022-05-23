@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "225140e7_1953b1cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-23T06:53:08Z",
+      "side": 1,
+      "message": "LGTM for build changes, adding ilnik@ for the question about video_capture.",
+      "revId": "399c216f51466449f5a2af5f52c3f06d15ac21f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
