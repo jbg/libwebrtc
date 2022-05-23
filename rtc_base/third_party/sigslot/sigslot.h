@@ -370,6 +370,16 @@ class _signal_base : public _signal_base_interface, public mt_policy {
     }
   }
 
+  _signal_base(_signal_base&& o)
+      : _signal_base_interface(&_signal_base::do_slot_disconnect,
+                               &_signal_base::do_slot_duplicate),
+        m_connected_slots(std::move(o.m_connected_slots)),
+        m_current_iterator(o.m_current_iterator),
+        m_erase_current_iterator(o.m_erase_current_iterator) {
+    o.m_erase_current_iterator = false;
+    o.m_current_iterator = o.m_connected_slots.end();
+  }
+
   bool is_empty() {
     lock_block<mt_policy> lock(this);
     return m_connected_slots.empty();
