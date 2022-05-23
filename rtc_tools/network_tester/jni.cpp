@@ -19,8 +19,10 @@ extern "C" JNIEXPORT jlong JNICALL
 Java_com_google_media_networktester_NetworkTester_CreateTestController(
     JNIEnv* jni,
     jclass) {
+  auto [thread, socket_server] =
+      rtc::ThreadManager::Instance()->WrapCurrentThreadWithSocketServer();
   return reinterpret_cast<intptr_t>(new webrtc::TestController(
-      0, 0, "/mnt/sdcard/network_tester_client_config.dat",
+      socket_server, 0, 0, "/mnt/sdcard/network_tester_client_config.dat",
       "/mnt/sdcard/network_tester_client_packet_log.dat"));
 }
 
