@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50c590fc_d8182cd8",
+        "filename": "modules/video_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 19214
+      },
+      "writtenOn": "2022-05-23T03:56:22Z",
+      "side": 1,
+      "message": "The idea is based on this: https://webrtc.googlesource.com/src/+/refs/heads/main/modules/desktop_capture/BUILD.gn#481\n\nI don\u0027t confidently know all the platforms that are supported but maybe the condition should be more like: `if (!is_linux \u0026\u0026 !is_chromeos \u0026\u0026 !is_win \u0026\u0026 !is_android)`",
+      "revId": "030114d98659d5b0e5e00f6d169cd4054d1561ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
