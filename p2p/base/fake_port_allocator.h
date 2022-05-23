@@ -13,6 +13,7 @@
 
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "p2p/base/basic_packet_socket_factory.h"
@@ -212,22 +213,22 @@ class FakePortAllocatorSession : public PortAllocatorSession {
 
 class FakePortAllocator : public cricket::PortAllocator {
  public:
-  // TODO(bugs.webrtc.org/13145): Require non-null `factory`.
   FakePortAllocator(rtc::Thread* network_thread,
                     rtc::PacketSocketFactory* factory)
       : network_thread_(network_thread), factory_(factory) {
-    if (factory_ == NULL) {
-      owned_factory_.reset(new rtc::BasicPacketSocketFactory(
-          network_thread_ ? network_thread_->socketserver() : nullptr));
-      factory_ = owned_factory_.get();
-    }
-
+    RTC_DCHECK(factory_);
     if (network_thread_ == nullptr) {
       network_thread_ = rtc::Thread::Current();
       Initialize();
       return;
     }
     network_thread_->Invoke<void>(RTC_FROM_HERE, [this] { Initialize(); });
+  }
+
+  FakePortAllocator(rtc::Thread* network_thread,
+                    std::unique_ptr<rtc::PacketSocketFactory> factory)
+      : FakePortAllocator(network_thread, factory.get()) {
+    owned_factory_ = std::move(factory);
   }
 
   void SetNetworkIgnoreMask(int network_ignore_mask) override {}
@@ -256,7 +257,7 @@ class FakePortAllocator : public cricket::PortAllocator {
   webrtc::test::ScopedKeyValueConfig field_trials_;
   rtc::Thread* network_thread_;
   rtc::PacketSocketFactory* factory_;
-  std::unique_ptr<rtc::BasicPacketSocketFactory> owned_factory_;
+  std::unique_ptr<rtc::PacketSocketFactory> owned_factory_;
   bool mdns_obfuscation_enabled_ = false;
 };
 
