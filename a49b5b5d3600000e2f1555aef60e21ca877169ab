@@ -22,6 +22,30 @@
       },
       "revId": "a49b5b5d3600000e2f1555aef60e21ca877169ab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1d90e9_fc897a27",
+        "filename": "rtc_base/third_party/sigslot/sigslot.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-23T11:58:52Z",
+      "side": 1,
+      "message": "Added an explicit implementation for this and did some manual testing. I think I\u0027d have to make some further changes to the class in order to inspect if the iterator points to an item in the list or .end().\n\nBtw, the purpose of m_current_iterator seems to be only for the specific case of when a slot is removed while inside a callback. I would have added a dcheck that the move operation would not be done while the iterator is anything but .end(), but that would mean adding a dependency on the check header, which I haven\u0027t done.",
+      "parentUuid": "9d7e4d88_2b179f72",
+      "range": {
+        "startLine": 477,
+        "startChar": 29,
+        "endLine": 477,
+        "endChar": 47
+      },
+      "revId": "a49b5b5d3600000e2f1555aef60e21ca877169ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
