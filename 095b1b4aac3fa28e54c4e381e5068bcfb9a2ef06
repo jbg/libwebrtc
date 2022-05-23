@@ -50,6 +50,23 @@
       "message": "What to do next？ Can it be merged?",
       "revId": "095b1b4aac3fa28e54c4e381e5068bcfb9a2ef06",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5179cf4c_3b26bef4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-23T06:55:18Z",
+      "side": 1,
+      "message": "LGTM, but waiting for Xavier or Sergey to approve (I am not an owner of some files).",
+      "revId": "095b1b4aac3fa28e54c4e381e5068bcfb9a2ef06",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
