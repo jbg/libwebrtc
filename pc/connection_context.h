@@ -117,7 +117,7 @@ class ConnectionContext final
   // The following three variables are used to communicate between the
   // constructor and the destructor, and are never exposed externally.
   bool wraps_current_thread_;
-  std::unique_ptr<rtc::SocketFactory> owned_socket_factory_;
+  std::unique_ptr<rtc::SocketServer> owned_socket_server_;
   std::unique_ptr<rtc::Thread> owned_network_thread_
       RTC_GUARDED_BY(signaling_thread_);
   rtc::Thread* const network_thread_;

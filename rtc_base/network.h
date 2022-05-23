@@ -31,6 +31,7 @@
 #include "rtc_base/network_monitor.h"
 #include "rtc_base/network_monitor_factory.h"
 #include "rtc_base/socket_factory.h"
+#include "rtc_base/socket_server.h"
 #include "rtc_base/system/rtc_export.h"
 #include "rtc_base/task_utils/pending_task_safety_flag.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
@@ -269,18 +270,18 @@ class RTC_EXPORT BasicNetworkManager : public NetworkManagerBase,
       const webrtc::FieldTrialsView* field_trials = nullptr)
       : BasicNetworkManager(
             /* network_monitor_factory= */ nullptr,
-            /* socket_factory= */ nullptr,
+            /* socket_server= */ nullptr,
             field_trials) {}
 
   // This is used by lots of downstream code.
-  BasicNetworkManager(SocketFactory* socket_factory,
+  BasicNetworkManager(SocketServer* socket_server,
                       const webrtc::FieldTrialsView* field_trials = nullptr)
       : BasicNetworkManager(/* network_monitor_factory= */ nullptr,
-                            socket_factory,
+                            socket_server,
                             field_trials) {}
 
   BasicNetworkManager(NetworkMonitorFactory* network_monitor_factory,
-                      SocketFactory* socket_factory,
+                      SocketServer* socket_server,
                       const webrtc::FieldTrialsView* field_trials = nullptr);
   ~BasicNetworkManager() override;
 
@@ -362,7 +363,7 @@ class RTC_EXPORT BasicNetworkManager : public NetworkManagerBase,
       field_trials_;
   std::vector<std::string> network_ignore_list_;
   NetworkMonitorFactory* const network_monitor_factory_;
-  SocketFactory* const socket_factory_;
+  SocketServer* const socket_server_;
   std::unique_ptr<NetworkMonitorInterface> network_monitor_
       RTC_GUARDED_BY(thread_);
   bool allow_mac_based_ipv6_ RTC_GUARDED_BY(thread_) = false;
