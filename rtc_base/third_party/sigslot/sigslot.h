@@ -370,6 +370,16 @@ class _signal_base : public _signal_base_interface, public mt_policy {
     }
   }
 
+  _signal_base(_signal_base&& o)
+      : _signal_base_interface(&_signal_base::do_slot_disconnect,
+                               &_signal_base::do_slot_duplicate) {
+    lock_block<mt_policy> lock(&o);
+    m_connected_slots = o.m_connected_slots;
+    m_current_iterator = m_connected_slots.end();
+    m_erase_current_iterator = false;
+    o.disconnect_all_locked();
+  }
+
   bool is_empty() {
     lock_block<mt_policy> lock(this);
     return m_connected_slots.empty();
@@ -377,16 +387,7 @@ class _signal_base : public _signal_base_interface, public mt_policy {
 
   void disconnect_all() {
     lock_block<mt_policy> lock(this);
-
-    while (!m_connected_slots.empty()) {
-      has_slots_interface* pdest = m_connected_slots.front().getdest();
-      m_connected_slots.pop_front();
-      pdest->signal_disconnect(static_cast<_signal_base_interface*>(this));
-    }
-    // If disconnect_all is called while the signal is firing, advance the
-    // current slot iterator to the end to avoid an invalidated iterator from
-    // being dereferenced.
-    m_current_iterator = m_connected_slots.end();
+    disconnect_all_locked();
   }
 
 #if !defined(NDEBUG)
@@ -425,6 +426,18 @@ class _signal_base : public _signal_base_interface, public mt_policy {
   }
 
  private:
+  void disconnect_all_locked() {
+    while (!m_connected_slots.empty()) {
+      has_slots_interface* pdest = m_connected_slots.front().getdest();
+      m_connected_slots.pop_front();
+      pdest->signal_disconnect(static_cast<_signal_base_interface*>(this));
+    }
+    // If disconnect_all is called while the signal is firing, advance the
+    // current slot iterator to the end to avoid an invalidated iterator from
+    // being dereferenced.
+    m_current_iterator = m_connected_slots.end();
+  }
+
   static void do_slot_disconnect(_signal_base_interface* p,
                                  has_slots_interface* pslot) {
     _signal_base* const self = static_cast<_signal_base*>(p);
