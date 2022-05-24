@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8335775a_a1a55b79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-05-24T09:24:17Z",
+      "side": 1,
+      "message": "Good point! I have tested with multi-channel capture/render and it\u0027s still bit-exact.",
+      "parentUuid": "a58e6454_f7ed1278",
+      "revId": "97a33a49cc09dca6a282aefbdebc86c3b963eb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e219205_a9e48d33",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-05-24T08:32:31Z",
       "side": 1,
       "message": "Is there any information or summary that would help someone who is entirely new to the AEC3 code, that is worth putting in a top-level class description here?\nLike..\n```\n// Represents a block of time-domain audio data split into one or more channels and bands.\n```\nAll of that (except time-domain) is implicit or explicit in the code, but still. I have never been hindered by an unnecessary class comment, but often by the lack of one.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 1
+      },
+      "revId": "97a33a49cc09dca6a282aefbdebc86c3b963eb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9385401c_75e4bda4",
+        "filename": "modules/audio_processing/aec3/block.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-05-24T09:24:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e219205_a9e48d33",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a1004d_fcda0d3e",
+        "filename": "modules/audio_processing/aec3/block.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-05-24T09:24:17Z",
+      "side": 1,
+      "message": "Added a comment and also added zeroing of the vector.",
+      "parentUuid": "9cb6fa0b_b9943342",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 37
+      },
+      "revId": "97a33a49cc09dca6a282aefbdebc86c3b963eb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4728560f_5dbdc5ae",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-05-24T08:32:31Z",
       "side": 1,
       "message": "nit: can this be const? It would make it clearer what is mutable and what is not.",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 16
+      },
+      "revId": "97a33a49cc09dca6a282aefbdebc86c3b963eb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58fa3bfa_8a39cb13",
+        "filename": "modules/audio_processing/aec3/block.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-05-24T09:24:17Z",
+      "side": 1,
+      "message": "Actually it was in my first patch set, but that makes the Swap method somewhat awkward (like: you can swap, but only if the number of bands doesn\u0027t change). Therefore I ended up making it non-const.",
+      "parentUuid": "4728560f_5dbdc5ae",
       "range": {
         "startLine": 81,
         "startChar": 2,
