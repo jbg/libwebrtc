@@ -63,6 +63,7 @@ class SdpOfferAnswerTest : public ::testing::Test {
             CreatePeerConnectionFactory(nullptr,
                                         nullptr,
                                         signaling_thread_.get(),
+                                        nullptr,
                                         FakeAudioCaptureModule::Create(),
                                         CreateBuiltinAudioEncoderFactory(),
                                         CreateBuiltinAudioDecoderFactory(),
