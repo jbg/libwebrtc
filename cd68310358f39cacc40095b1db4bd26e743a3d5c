@@ -16,6 +16,23 @@
       "message": "Thanks for the review. I have tried to address your comments. Please take another look.",
       "revId": "cd68310358f39cacc40095b1db4bd26e743a3d5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed52004f_d1f330f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-05-24T09:33:38Z",
+      "side": 1,
+      "message": "Nice work! Cool that the change is entirely transparent, internal to block.h.",
+      "revId": "cd68310358f39cacc40095b1db4bd26e743a3d5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
