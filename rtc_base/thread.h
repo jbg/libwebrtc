@@ -279,8 +279,6 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   uint32_t GetCouldBeBlockingCallCount() const;
 #endif
 
-  SocketServer* socketserver();
-
   // Note: The behavior of Thread has changed.  When a thread is stopped,
   // futher Posts and Sends will fail.  However, any pending Sends and *ready*
   // Posts (as opposed to unexpired delayed Posts) will be delivered before
@@ -533,6 +531,8 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
     container_type& container() { return c; }
     void reheap() { make_heap(c.begin(), c.end(), comp); }
   };
+
+  SocketServer* socketserver();
 
   void DoDelayPost(const Location& posted_from,
                    int64_t cmsDelay,

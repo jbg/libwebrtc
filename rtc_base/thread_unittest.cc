@@ -223,14 +223,17 @@ TEST(ThreadTest, DISABLED_Main) {
   const SocketAddress addr("127.0.0.1", 0);
 
   // Create the messaging client on its own thread.
-  auto th1 = Thread::CreateWithSocketServer();
-  Socket* socket = th1->socketserver()->CreateSocket(addr.family(), SOCK_DGRAM);
+  std::unique_ptr<SocketServer> socket_server1 =
+      rtc::CreateDefaultSocketServer();
+  std::unique_ptr<Thread> th1 = std::make_unique<Thread>(socket_server1.get());
+  Socket* socket = socket_server1->CreateSocket(addr.family(), SOCK_DGRAM);
   MessageClient msg_client(th1.get(), socket);
 
   // Create the socket client on its own thread.
-  auto th2 = Thread::CreateWithSocketServer();
-  Socket* asocket =
-      th2->socketserver()->CreateSocket(addr.family(), SOCK_DGRAM);
+  std::unique_ptr<SocketServer> socket_server2 =
+      rtc::CreateDefaultSocketServer();
+  std::unique_ptr<Thread> th2 = std::make_unique<Thread>(socket_server2.get());
+  Socket* asocket = socket_server2->CreateSocket(addr.family(), SOCK_DGRAM);
   SocketClient sock_client(asocket, addr, th1.get(), &msg_client);
 
   socket->Connect(sock_client.address());
