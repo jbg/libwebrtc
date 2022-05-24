@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e7fe5a_a2324262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-24T05:58:17Z",
+      "side": 1,
+      "message": "Changed the implementation such that the \"disconnect all\" operation is used to reset the state of the moved-from object.",
+      "revId": "036df40fa1a0b99ec0b1583005120875e7f9a6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
