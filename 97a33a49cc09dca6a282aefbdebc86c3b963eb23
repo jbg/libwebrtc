@@ -16,6 +16,92 @@
       "message": "Sam, could you please take a look?",
       "revId": "97a33a49cc09dca6a282aefbdebc86c3b963eb23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a58e6454_f7ed1278",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-05-24T08:32:31Z",
+      "side": 1,
+      "message": "Is audioproc_f also bitexact with --multi_channel_render\u003d1 --multi_channel_capture\u003d1 ?\nSince it is disabled by default, but Chrome always enables multichannel render (and capture conditionally).",
+      "revId": "97a33a49cc09dca6a282aefbdebc86c3b963eb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e219205_a9e48d33",
+        "filename": "modules/audio_processing/aec3/block.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-05-24T08:32:31Z",
+      "side": 1,
+      "message": "Is there any information or summary that would help someone who is entirely new to the AEC3 code, that is worth putting in a top-level class description here?\nLike..\n```\n// Represents a block of time-domain audio data split into one or more channels and bands.\n```\nAll of that (except time-domain) is implicit or explicit in the code, but still. I have never been hindered by an unnecessary class comment, but often by the lack of one.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 1
+      },
+      "revId": "97a33a49cc09dca6a282aefbdebc86c3b963eb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cb6fa0b_b9943342",
+        "filename": "modules/audio_processing/aec3/block.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-05-24T08:32:31Z",
+      "side": 1,
+      "message": "This comment should mention that it invalidates any existing data, since it changes the stride of the band index.",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 37
+      },
+      "revId": "97a33a49cc09dca6a282aefbdebc86c3b963eb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4728560f_5dbdc5ae",
+        "filename": "modules/audio_processing/aec3/block.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-05-24T08:32:31Z",
+      "side": 1,
+      "message": "nit: can this be const? It would make it clearer what is mutable and what is not.",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 16
+      },
+      "revId": "97a33a49cc09dca6a282aefbdebc86c3b963eb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
