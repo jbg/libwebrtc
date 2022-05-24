@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc3cedb3_1a47ee81",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-05-24T15:09:22Z",
+      "side": 1,
+      "message": "yes I think this is basically what I should do instead. I\u0027ll look into that and if that works, then I think I\u0027ll just abandon this CL. Thanks for the advice.",
+      "parentUuid": "48724341_20305c2e",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "948c9ef6ed86e07a73bbc39c0bc3f0790fe6567a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a25c7183_cb48791e",
