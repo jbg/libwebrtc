@@ -326,10 +326,10 @@ class NetworkTest : public ::testing::Test, public sigslot::has_slots<> {
 class TestBasicNetworkManager : public BasicNetworkManager {
  public:
   TestBasicNetworkManager(NetworkMonitorFactory* network_monitor_factory,
-                          SocketFactory* socket_factory,
+                          SocketServer* socket_server,
                           const webrtc::FieldTrialsView& field_trials)
       : BasicNetworkManager(network_monitor_factory,
-                            socket_factory,
+                            socket_server,
                             &field_trials) {}
   using BasicNetworkManager::QueryDefaultLocalAddress;
   using BasicNetworkManager::set_default_local_addresses;
