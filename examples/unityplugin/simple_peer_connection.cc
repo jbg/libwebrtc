@@ -127,6 +127,7 @@ bool SimplePeerConnection::InitializePeerConnection(const char** turn_urls,
     g_signaling_thread = rtc::Thread::Create();
     g_signaling_thread->Start();
 
+    // TODO(daniel.l)
     g_peer_connection_factory = webrtc::CreatePeerConnectionFactory(
         g_worker_thread.get(), g_worker_thread.get(), g_signaling_thread.get(),
         nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),

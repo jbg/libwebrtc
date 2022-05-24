@@ -42,6 +42,7 @@ CreatePeerConnectionFactory(
     rtc::Thread* network_thread,
     rtc::Thread* worker_thread,
     rtc::Thread* signaling_thread,
+    rtc::SocketServer* socket_server,
     rtc::scoped_refptr<AudioDeviceModule> default_adm,
     rtc::scoped_refptr<AudioEncoderFactory> audio_encoder_factory,
     rtc::scoped_refptr<AudioDecoderFactory> audio_decoder_factory,

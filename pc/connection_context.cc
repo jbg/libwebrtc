@@ -127,22 +127,19 @@ ConnectionContext::ConnectionContext(
   if (socket_server == nullptr) {
     if (owned_socket_server_) {
       socket_server = owned_socket_server_.get();
-    } else {
-      // TODO(bugs.webrtc.org/13145): This case should be deleted. Either
-      // require that a PacketSocketFactory and NetworkManager always are
-      // injected (with no need to construct these default objects), or require
-      // that if a network_thread is injected, an approprite rtc::SocketServer
-      // should be injected too.
-      socket_server = network_thread()->socketserver();
     }
   }
-  // If network_monitor_factory_ is non-null, it will be used to create a
-  // network monitor while on the network thread.
-  default_network_manager_ = std::make_unique<rtc::BasicNetworkManager>(
-      network_monitor_factory_.get(), socket_server, &field_trials());
+  if (socket_server != nullptr) {
+    // If network_monitor_factory_ is non-null, it will be used to create a
+    // network monitor while on the network thread.
+    default_network_manager_ = std::make_unique<rtc::BasicNetworkManager>(
+        network_monitor_factory_.get(), socket_server, &field_trials());
+  }
 
-  default_socket_factory_ =
-      std::make_unique<rtc::BasicPacketSocketFactory>(socket_server);
+  if (socket_server != nullptr) {
+    default_socket_factory_ =
+        std::make_unique<rtc::BasicPacketSocketFactory>(socket_server);
+  }
 
   // Set warning levels on the threads, to give warnings when response
   // may be slower than is expected of the thread.
