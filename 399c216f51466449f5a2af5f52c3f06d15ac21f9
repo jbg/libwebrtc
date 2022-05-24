@@ -33,6 +33,23 @@
       "message": "Adding ilnik@ for video capture and minyue@ for audio_coding owners",
       "revId": "399c216f51466449f5a2af5f52c3f06d15ac21f9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d51e73ed_c60e3ce8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-05-24T07:52:31Z",
+      "side": 1,
+      "message": "modules/video_capture lgtm",
+      "revId": "399c216f51466449f5a2af5f52c3f06d15ac21f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
