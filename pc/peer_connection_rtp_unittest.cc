@@ -48,6 +48,7 @@
 #include "pc/test/mock_peer_connection_observers.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/gunit.h"
+#include "rtc_base/internal/default_socket_server.h"
 #include "rtc_base/ref_counted_object.h"
 #include "rtc_base/rtc_certificate_generator.h"
 #include "rtc_base/thread.h"
@@ -88,10 +89,13 @@ class PeerConnectionRtpBaseTest : public ::testing::Test {
  public:
   explicit PeerConnectionRtpBaseTest(SdpSemantics sdp_semantics)
       : sdp_semantics_(sdp_semantics),
+        socket_server_(rtc::CreateDefaultSocketServer()),
+        main_thread_(socket_server_.get()),
         pc_factory_(
             CreatePeerConnectionFactory(rtc::Thread::Current(),
                                         rtc::Thread::Current(),
                                         rtc::Thread::Current(),
+                                        socket_server_.get(),
                                         FakeAudioCaptureModule::Create(),
                                         CreateBuiltinAudioEncoderFactory(),
                                         CreateBuiltinAudioDecoderFactory(),
@@ -127,6 +131,8 @@ class PeerConnectionRtpBaseTest : public ::testing::Test {
 
  protected:
   const SdpSemantics sdp_semantics_;
+  std::unique_ptr<rtc::SocketServer> socket_server_;
+  rtc::AutoSocketServerThread main_thread_;
   rtc::scoped_refptr<PeerConnectionFactoryInterface> pc_factory_;
 
  private:
@@ -142,8 +148,6 @@ class PeerConnectionRtpBaseTest : public ::testing::Test {
     return std::make_unique<PeerConnectionWrapper>(
         pc_factory_, result.MoveValue(), std::move(observer));
   }
-
-  rtc::AutoThread main_thread_;
 };
 
 class PeerConnectionRtpTest

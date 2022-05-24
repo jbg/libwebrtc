@@ -860,6 +860,7 @@ if (is_win || is_android) {
       "../pc:libjingle_peerconnection",
       "../pc:video_track_source",
       "../rtc_base",
+      "../rtc_base:threading",
       "../test:platform_video_capturer",
       "../test:video_test_common",
       "//third_party/abseil-cpp/absl/memory",

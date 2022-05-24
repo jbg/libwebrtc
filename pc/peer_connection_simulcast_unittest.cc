@@ -124,6 +124,7 @@ class PeerConnectionSimulcastTests : public ::testing::Test {
             CreatePeerConnectionFactory(rtc::Thread::Current(),
                                         rtc::Thread::Current(),
                                         rtc::Thread::Current(),
+                                        nullptr,
                                         FakeAudioCaptureModule::Create(),
                                         CreateBuiltinAudioEncoderFactory(),
                                         CreateBuiltinAudioDecoderFactory(),
