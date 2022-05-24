@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48724341_20305c2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-24T08:56:03Z",
+      "side": 1,
+      "message": "may be, just may be, instead such code should be\nauto copied_sigslot \u003d MyOneTimeEvent;\nMyOneTimeEvent.disconnect_all();\ncopied_sigslot();",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "948c9ef6ed86e07a73bbc39c0bc3f0790fe6567a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25c7183_cb48791e",
+        "filename": "rtc_base/sigslot_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-24T08:56:03Z",
+      "side": 1,
+      "message": "looking at the CL description I suspect you also want to validate that triggerring moved-from signal wouldn\u0027t notify the receiver.",
+      "revId": "948c9ef6ed86e07a73bbc39c0bc3f0790fe6567a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a3750fe_f0197e20",
+        "filename": "rtc_base/third_party/sigslot/sigslot.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-24T08:56:03Z",
+      "side": 1,
+      "message": "looking at the copy constructor, is it enough?\nor should you call signal_connect function for each slot?\n\n(I\u0027m not familiar enough with sigslot implementation to be sure)",
+      "range": {
+        "startLine": 377,
+        "startChar": 4,
+        "endLine": 377,
+        "endChar": 44
+      },
+      "revId": "948c9ef6ed86e07a73bbc39c0bc3f0790fe6567a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45bc7fd7_0dc1db78",
+        "filename": "rtc_base/third_party/sigslot/sigslot.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-24T08:56:03Z",
+      "side": 1,
+      "message": "because you\u0027ve added move constructor,\nit is a good idea to also add the move assign operator",
+      "revId": "948c9ef6ed86e07a73bbc39c0bc3f0790fe6567a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
