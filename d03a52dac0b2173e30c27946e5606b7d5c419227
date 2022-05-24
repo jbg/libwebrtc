@@ -33,6 +33,23 @@
       "message": "Please also run Dry-Run because looks like I have no permissions for it on WebRTC project.",
       "revId": "d03a52dac0b2173e30c27946e5606b7d5c419227",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "971ab311_d0e75a9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-05-24T08:39:43Z",
+      "side": 1,
+      "message": "Thanks, Ivan. LGTM.",
+      "revId": "d03a52dac0b2173e30c27946e5606b7d5c419227",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
