@@ -23,6 +23,7 @@
 #include "modules/audio_processing/include/audio_processing.h"
 #include "modules/video_capture/video_capture_factory.h"
 #include "pc/video_track_source.h"
+#include "rtc_base/internal/default_socket_server.h"
 #include "test/vcm_capturer.h"
 
 #if defined(WEBRTC_ANDROID)
@@ -39,6 +40,7 @@ const char kStreamId[] = "stream_id";
 
 namespace {
 static int g_peer_count = 0;
+static std::unique_ptr<rtc::SocketServer> g_socket_server;
 static std::unique_ptr<rtc::Thread> g_worker_thread;
 static std::unique_ptr<rtc::Thread> g_signaling_thread;
 static rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface>
@@ -122,14 +124,17 @@ bool SimplePeerConnection::InitializePeerConnection(const char** turn_urls,
   RTC_DCHECK(peer_connection_.get() == nullptr);
 
   if (g_peer_connection_factory == nullptr) {
-    g_worker_thread = rtc::Thread::Create();
+    g_socket_server = rtc::CreateDefaultSocketServer();
+    g_worker_thread.reset(new rtc::Thread(g_socket_server.get()));
     g_worker_thread->Start();
     g_signaling_thread = rtc::Thread::Create();
     g_signaling_thread->Start();
 
+    // TODO(daniel.l)
     g_peer_connection_factory = webrtc::CreatePeerConnectionFactory(
         g_worker_thread.get(), g_worker_thread.get(), g_signaling_thread.get(),
-        nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),
+        g_socket_server.get(), nullptr,
+        webrtc::CreateBuiltinAudioEncoderFactory(),
         webrtc::CreateBuiltinAudioDecoderFactory(),
         std::unique_ptr<webrtc::VideoEncoderFactory>(
             new webrtc::MultiplexEncoderFactory(
@@ -227,6 +232,7 @@ void SimplePeerConnection::DeletePeerConnection() {
     g_peer_connection_factory = nullptr;
     g_signaling_thread.reset();
     g_worker_thread.reset();
+    g_socket_server.release();
   }
 }
 

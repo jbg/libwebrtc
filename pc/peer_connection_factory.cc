@@ -221,9 +221,19 @@ PeerConnectionFactory::CreatePeerConnectionOrError(
       packet_socket_factory = dependencies.packet_socket_factory.get();
     else
       packet_socket_factory = context_->default_socket_factory();
+    if (packet_socket_factory == nullptr) {
+      return RTCError(RTCErrorType::INTERNAL_ERROR,
+                      "packet_socket_factory is null");
+    }
 
+    rtc::BasicNetworkManager* default_network_manager =
+        context_->default_network_manager();
+    if (default_network_manager == nullptr) {
+      return RTCError(RTCErrorType::INTERNAL_ERROR,
+                      "default_network_manager is null");
+    }
     dependencies.allocator = std::make_unique<cricket::BasicPortAllocator>(
-        context_->default_network_manager(), packet_socket_factory,
+        default_network_manager, packet_socket_factory,
         configuration.turn_customizer);
     dependencies.allocator->SetPortRange(
         configuration.port_allocator_config.min_port,

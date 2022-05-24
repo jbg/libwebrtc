@@ -157,6 +157,7 @@ class PeerConnectionRampUpTest : public ::testing::Test {
     virtual_socket_server_->set_bandwidth(kNetworkBandwidth / 8);
     pc_factory_ = CreatePeerConnectionFactory(
         network_thread_.get(), worker_thread_.get(), rtc::Thread::Current(),
+        firewall_socket_server_.get(),
         rtc::scoped_refptr<AudioDeviceModule>(FakeAudioCaptureModule::Create()),
         CreateBuiltinAudioEncoderFactory(), CreateBuiltinAudioDecoderFactory(),
         CreateBuiltinVideoEncoderFactory(), CreateBuiltinVideoDecoderFactory(),

@@ -112,6 +112,7 @@ class PeerConnectionFactoryTest : public ::testing::Test {
     // parallel.
     factory_ = webrtc::CreatePeerConnectionFactory(
         rtc::Thread::Current(), rtc::Thread::Current(), rtc::Thread::Current(),
+        socket_server_.get(),
         rtc::scoped_refptr<webrtc::AudioDeviceModule>(
             FakeAudioCaptureModule::Create()),
         webrtc::CreateBuiltinAudioEncoderFactory(),
@@ -188,8 +189,8 @@ TEST(PeerConnectionFactoryTestInternal, DISABLED_CreatePCUsingInternalModules) {
   rtc::scoped_refptr<PeerConnectionFactoryInterface> factory(
       webrtc::CreatePeerConnectionFactory(
           nullptr /* network_thread */, nullptr /* worker_thread */,
-          nullptr /* signaling_thread */, nullptr /* default_adm */,
-          webrtc::CreateBuiltinAudioEncoderFactory(),
+          nullptr /* signaling_thread */, nullptr /* socket_server */,
+          nullptr /* default_adm */, webrtc::CreateBuiltinAudioEncoderFactory(),
           webrtc::CreateBuiltinAudioDecoderFactory(),
           webrtc::CreateBuiltinVideoEncoderFactory(),
           webrtc::CreateBuiltinVideoDecoderFactory(), nullptr /* audio_mixer */,
