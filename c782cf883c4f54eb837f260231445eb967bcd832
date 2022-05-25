@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20dc2132_ec0555f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17969
+      },
+      "writtenOn": "2022-05-25T05:30:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9397eacd_8d876ed7",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87c885ad_fb95a593",
@@ -108,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d20a774c_23d8761f",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 17969
+      },
+      "writtenOn": "2022-05-25T05:30:06Z",
+      "side": 1,
+      "message": "Besides target level changes, a permanent increase in network travel time will also causes preemptive expand.",
+      "parentUuid": "bf833681_5cae67b9",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca4afd72_e9af3090",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 19
@@ -119,6 +155,24 @@
       "writtenOn": "2022-05-25T04:58:11Z",
       "side": 1,
       "message": "Curious under what cases TargetLevelMs() isn\u0027t enough such that we need to use GetMaxDelayMs()?",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3fb8b54_597bce5a",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 17969
+      },
+      "writtenOn": "2022-05-25T05:30:06Z",
+      "side": 1,
+      "message": "NVM, saw the CL summary.",
+      "parentUuid": "ca4afd72_e9af3090",
       "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
