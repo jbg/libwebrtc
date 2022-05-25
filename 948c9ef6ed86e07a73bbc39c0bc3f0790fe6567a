@@ -48,6 +48,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ef491b5_57a5fc7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-25T09:14:18Z",
+      "side": 1,
+      "message": "Would this type of change make it possible to fix https://crbug.com/webrtc/12651 ?\n\n(I ran across this while trying to replace some sigslot interfaces)\n",
+      "revId": "948c9ef6ed86e07a73bbc39c0bc3f0790fe6567a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a25c7183_cb48791e",
