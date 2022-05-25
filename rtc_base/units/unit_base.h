@@ -50,39 +50,39 @@ class UnitBase {
     return value_ == MinusInfinityVal();
   }
 
-  constexpr bool operator==(const UnitBase<Unit_T>& other) const {
-    return value_ == other.value_;
+  friend constexpr bool operator==(Unit_T lhs, Unit_T rhs) {
+    return lhs.value_ == rhs.value_;
   }
-  constexpr bool operator!=(const UnitBase<Unit_T>& other) const {
-    return value_ != other.value_;
+  friend constexpr bool operator!=(Unit_T lhs, Unit_T rhs) {
+    return lhs.value_ != rhs.value_;
   }
-  constexpr bool operator<=(const UnitBase<Unit_T>& other) const {
-    return value_ <= other.value_;
+  friend constexpr bool operator<=(Unit_T lhs, Unit_T rhs) {
+    return lhs.value_ <= rhs.value_;
   }
-  constexpr bool operator>=(const UnitBase<Unit_T>& other) const {
-    return value_ >= other.value_;
+  friend constexpr bool operator>=(Unit_T lhs, Unit_T rhs) {
+    return lhs.value_ >= rhs.value_;
   }
-  constexpr bool operator>(const UnitBase<Unit_T>& other) const {
-    return value_ > other.value_;
+  friend constexpr bool operator>(Unit_T lhs, Unit_T rhs) {
+    return lhs.value_ > rhs.value_;
   }
-  constexpr bool operator<(const UnitBase<Unit_T>& other) const {
-    return value_ < other.value_;
+  friend constexpr bool operator<(Unit_T lhs, Unit_T rhs) {
+    return lhs.value_ < rhs.value_;
   }
-  constexpr Unit_T RoundTo(const Unit_T& resolution) const {
+  constexpr Unit_T RoundTo(Unit_T resolution) const {
     RTC_DCHECK(IsFinite());
     RTC_DCHECK(resolution.IsFinite());
     RTC_DCHECK_GT(resolution.value_, 0);
     return Unit_T((value_ + resolution.value_ / 2) / resolution.value_) *
            resolution.value_;
   }
-  constexpr Unit_T RoundUpTo(const Unit_T& resolution) const {
+  constexpr Unit_T RoundUpTo(Unit_T resolution) const {
     RTC_DCHECK(IsFinite());
     RTC_DCHECK(resolution.IsFinite());
     RTC_DCHECK_GT(resolution.value_, 0);
     return Unit_T((value_ + resolution.value_ - 1) / resolution.value_) *
            resolution.value_;
   }
-  constexpr Unit_T RoundDownTo(const Unit_T& resolution) const {
+  constexpr Unit_T RoundDownTo(Unit_T resolution) const {
     RTC_DCHECK(IsFinite());
     RTC_DCHECK(resolution.IsFinite());
     RTC_DCHECK_GT(resolution.value_, 0);
@@ -90,9 +90,8 @@ class UnitBase {
   }
 
  protected:
-  template <
-      typename T,
-      typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
+  template <typename T,
+            typename std::enable_if_t<std::is_integral_v<T>>* = nullptr>
   static constexpr Unit_T FromValue(T value) {
     if (Unit_T::one_sided)
       RTC_DCHECK_GE(value, 0);
@@ -101,8 +100,7 @@ class UnitBase {
     return Unit_T(rtc::dchecked_cast<int64_t>(value));
   }
   template <typename T,
-            typename std::enable_if<std::is_floating_point<T>::value>::type* =
-                nullptr>
+            typename std::enable_if_t<std::is_floating_point_v<T>>* = nullptr>
   static constexpr Unit_T FromValue(T value) {
     if (value == std::numeric_limits<T>::infinity()) {
       return PlusInfinity();
@@ -114,9 +112,8 @@ class UnitBase {
     }
   }
 
-  template <
-      typename T,
-      typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
+  template <typename T,
+            typename std::enable_if_t<std::is_integral_v<T>>* = nullptr>
   static constexpr Unit_T FromFraction(int64_t denominator, T value) {
     if (Unit_T::one_sided)
       RTC_DCHECK_GE(value, 0);
@@ -125,21 +122,20 @@ class UnitBase {
     return Unit_T(rtc::dchecked_cast<int64_t>(value * denominator));
   }
   template <typename T,
-            typename std::enable_if<std::is_floating_point<T>::value>::type* =
-                nullptr>
+            typename std::enable_if_t<std::is_floating_point_v<T>>* = nullptr>
   static constexpr Unit_T FromFraction(int64_t denominator, T value) {
     return FromValue(value * denominator);
   }
 
   template <typename T = int64_t>
-  constexpr typename std::enable_if<std::is_integral<T>::value, T>::type
-  ToValue() const {
+  constexpr typename std::enable_if_t<std::is_integral_v<T>, T> ToValue()
+      const {
     RTC_DCHECK(IsFinite());
     return rtc::dchecked_cast<T>(value_);
   }
   template <typename T>
-  constexpr typename std::enable_if<std::is_floating_point<T>::value, T>::type
-  ToValue() const {
+  constexpr typename std::enable_if_t<std::is_floating_point_v<T>, T> ToValue()
+      const {
     return IsPlusInfinity()
                ? std::numeric_limits<T>::infinity()
                : IsMinusInfinity() ? -std::numeric_limits<T>::infinity()
@@ -151,8 +147,8 @@ class UnitBase {
   }
 
   template <int64_t Denominator, typename T = int64_t>
-  constexpr typename std::enable_if<std::is_integral<T>::value, T>::type
-  ToFraction() const {
+  constexpr typename std::enable_if_t<std::is_integral_v<T>, T> ToFraction()
+      const {
     RTC_DCHECK(IsFinite());
     if (Unit_T::one_sided) {
       return rtc::dchecked_cast<T>(
@@ -162,7 +158,7 @@ class UnitBase {
     }
   }
   template <int64_t Denominator, typename T>
-  constexpr typename std::enable_if<std::is_floating_point<T>::value, T>::type
+  constexpr typename std::enable_if_t<std::is_floating_point_v<T>, T>
   ToFraction() const {
     return ToValue<T>() * (1 / static_cast<T>(Denominator));
   }
@@ -176,14 +172,14 @@ class UnitBase {
   }
 
   template <int64_t Factor, typename T = int64_t>
-  constexpr typename std::enable_if<std::is_integral<T>::value, T>::type
-  ToMultiple() const {
+  constexpr typename std::enable_if_t<std::is_integral_v<T>, T> ToMultiple()
+      const {
     RTC_DCHECK_GE(ToValue(), std::numeric_limits<T>::min() / Factor);
     RTC_DCHECK_LE(ToValue(), std::numeric_limits<T>::max() / Factor);
     return rtc::dchecked_cast<T>(ToValue() * Factor);
   }
   template <int64_t Factor, typename T>
-  constexpr typename std::enable_if<std::is_floating_point<T>::value, T>::type
+  constexpr typename std::enable_if_t<std::is_floating_point_v<T>, T>
   ToMultiple() const {
     return ToValue<T>() * Factor;
   }
@@ -230,90 +226,85 @@ class RelativeUnit : public UnitBase<Unit_T> {
   constexpr void Clamp(Unit_T min_value, Unit_T max_value) {
     *this = Clamped(min_value, max_value);
   }
-  constexpr Unit_T operator+(const Unit_T other) const {
-    if (this->IsPlusInfinity() || other.IsPlusInfinity()) {
-      RTC_DCHECK(!this->IsMinusInfinity());
-      RTC_DCHECK(!other.IsMinusInfinity());
-      return this->PlusInfinity();
-    } else if (this->IsMinusInfinity() || other.IsMinusInfinity()) {
-      RTC_DCHECK(!this->IsPlusInfinity());
-      RTC_DCHECK(!other.IsPlusInfinity());
-      return this->MinusInfinity();
+  friend constexpr Unit_T operator+(Unit_T lhs, Unit_T rhs) {
+    if (lhs.IsPlusInfinity() || rhs.IsPlusInfinity()) {
+      RTC_DCHECK(!lhs.IsMinusInfinity());
+      RTC_DCHECK(!rhs.IsMinusInfinity());
+      return Unit_T::PlusInfinity();
     }
-    return UnitBase<Unit_T>::FromValue(this->ToValue() + other.ToValue());
-  }
-  constexpr Unit_T operator-(const Unit_T other) const {
-    if (this->IsPlusInfinity() || other.IsMinusInfinity()) {
-      RTC_DCHECK(!this->IsMinusInfinity());
-      RTC_DCHECK(!other.IsPlusInfinity());
-      return this->PlusInfinity();
-    } else if (this->IsMinusInfinity() || other.IsPlusInfinity()) {
-      RTC_DCHECK(!this->IsPlusInfinity());
-      RTC_DCHECK(!other.IsMinusInfinity());
-      return this->MinusInfinity();
+    if (lhs.IsMinusInfinity() || rhs.IsMinusInfinity()) {
+      RTC_DCHECK(!lhs.IsPlusInfinity());
+      RTC_DCHECK(!rhs.IsPlusInfinity());
+      return Unit_T::MinusInfinity();
     }
-    return UnitBase<Unit_T>::FromValue(this->ToValue() - other.ToValue());
+    return Unit_T::FromValue(lhs.ToValue() + rhs.ToValue());
   }
-  constexpr Unit_T& operator+=(const Unit_T other) {
-    *this = *this + other;
+  friend constexpr Unit_T operator-(Unit_T lhs, Unit_T rhs) {
+    if (lhs.IsPlusInfinity() || rhs.IsMinusInfinity()) {
+      RTC_DCHECK(!lhs.IsMinusInfinity());
+      RTC_DCHECK(!rhs.IsPlusInfinity());
+      return Unit_T::PlusInfinity();
+    }
+    if (lhs.IsMinusInfinity() || rhs.IsPlusInfinity()) {
+      RTC_DCHECK(!lhs.IsPlusInfinity());
+      RTC_DCHECK(!rhs.IsMinusInfinity());
+      return Unit_T::MinusInfinity();
+    }
+    return Unit_T::FromValue(lhs.ToValue() - rhs.ToValue());
+  }
+  constexpr Unit_T& operator+=(Unit_T other) {
+    *this = this->AsSubClassRef() + other;
     return this->AsSubClassRef();
   }
-  constexpr Unit_T& operator-=(const Unit_T other) {
-    *this = *this - other;
+  constexpr Unit_T& operator-=(Unit_T other) {
+    *this = this->AsSubClassRef() - other;
     return this->AsSubClassRef();
   }
-  constexpr double operator/(const Unit_T other) const {
-    return UnitBase<Unit_T>::template ToValue<double>() /
-           other.template ToValue<double>();
+  friend constexpr double operator/(Unit_T lhs, Unit_T rhs) {
+    return lhs.template ToValue<double>() / rhs.template ToValue<double>();
   }
   template <typename T>
-  constexpr typename std::enable_if<std::is_arithmetic<T>::value, Unit_T>::type
-  operator/(const T& scalar) const {
-    return UnitBase<Unit_T>::FromValue(
-        std::round(UnitBase<Unit_T>::template ToValue<int64_t>() / scalar));
+  constexpr typename std::enable_if_t<std::is_arithmetic_v<T>, Unit_T> friend
+  operator/(Unit_T lhs, T scalar) {
+    return Unit_T::FromValue(std::round(lhs.ToValue() / scalar));
   }
-  constexpr Unit_T operator*(double scalar) const {
-    return UnitBase<Unit_T>::FromValue(std::round(this->ToValue() * scalar));
+
+  friend constexpr Unit_T operator*(Unit_T lhs, double rhs) {
+    return Unit_T::FromValue(std::round(lhs.ToValue() * rhs));
   }
-  constexpr Unit_T operator*(int64_t scalar) const {
-    return UnitBase<Unit_T>::FromValue(this->ToValue() * scalar);
+  friend constexpr Unit_T operator*(double lhs, Unit_T rhs) {
+    return rhs * lhs;
   }
-  constexpr Unit_T operator*(int32_t scalar) const {
-    return UnitBase<Unit_T>::FromValue(this->ToValue() * scalar);
+  friend constexpr Unit_T operator*(Unit_T lhs, int64_t rhs) {
+    return Unit_T::FromValue(lhs.ToValue() * rhs);
   }
-  constexpr Unit_T operator*(size_t scalar) const {
-    return UnitBase<Unit_T>::FromValue(this->ToValue() * scalar);
+  friend constexpr Unit_T operator*(int64_t lhs, Unit_T rhs) {
+    return rhs * lhs;
+  }
+  friend constexpr Unit_T operator*(Unit_T lhs, int32_t rhs) {
+    return Unit_T::FromValue(lhs.ToValue() * rhs);
+  }
+  friend constexpr Unit_T operator*(int32_t lhs, Unit_T rhs) {
+    return rhs * lhs;
+  }
+  friend constexpr Unit_T operator*(Unit_T lhs, size_t rhs) {
+    return Unit_T::FromValue(lhs.ToValue() * rhs);
+  }
+  friend constexpr Unit_T operator*(size_t lhs, Unit_T rhs) {
+    return rhs * lhs;
+  }
+
+  friend constexpr Unit_T operator-(Unit_T other) {
+    if (other.IsPlusInfinity())
+      return Unit_T::MinusInfinity();
+    if (other.IsMinusInfinity())
+      return Unit_T::PlusInfinity();
+    return -1 * other;
   }
 
  protected:
   using UnitBase<Unit_T>::UnitBase;
 };
-
-template <class Unit_T>
-inline constexpr Unit_T operator*(double scalar, RelativeUnit<Unit_T> other) {
-  return other * scalar;
-}
-template <class Unit_T>
-inline constexpr Unit_T operator*(int64_t scalar, RelativeUnit<Unit_T> other) {
-  return other * scalar;
-}
-template <class Unit_T>
-inline constexpr Unit_T operator*(int32_t scalar, RelativeUnit<Unit_T> other) {
-  return other * scalar;
-}
-template <class Unit_T>
-inline constexpr Unit_T operator*(size_t scalar, RelativeUnit<Unit_T> other) {
-  return other * scalar;
-}
-
-template <class Unit_T>
-inline constexpr Unit_T operator-(RelativeUnit<Unit_T> other) {
-  if (other.IsPlusInfinity())
-    return UnitBase<Unit_T>::MinusInfinity();
-  if (other.IsMinusInfinity())
-    return UnitBase<Unit_T>::PlusInfinity();
-  return -1 * other;
-}
 
 }  // namespace rtc_units_impl
 
