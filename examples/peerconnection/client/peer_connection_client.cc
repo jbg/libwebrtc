@@ -23,9 +23,10 @@ const char kByeMessage[] = "BYE";
 const int kReconnectDelay = 2000;
 
 rtc::Socket* CreateClientSocket(int family) {
-  rtc::Thread* thread = rtc::Thread::Current();
+  auto [thread, socket_server] = rtc::Thread::CurrentWithSocketServer();
   RTC_DCHECK(thread != NULL);
-  return thread->socketserver()->CreateSocket(family, SOCK_STREAM);
+  RTC_DCHECK(socket_server != NULL);
+  return socket_server->CreateSocket(family, SOCK_STREAM);
 }
 
 }  // namespace

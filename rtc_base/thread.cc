@@ -260,6 +260,17 @@ Thread* Thread::Current() {
   return thread;
 }
 
+// static
+std::pair<Thread*, rtc::SocketServer*> Thread::CurrentWithSocketServer() {
+  ThreadManager* manager = ThreadManager::Instance();
+  Thread* thread = manager->CurrentThread();
+  if (thread == nullptr) {
+    return std::make_pair(nullptr, nullptr);
+  }
+  // TODO(bugs.webrtc.org/13145): Remove socketserver() usage
+  return std::make_pair(thread, thread->socketserver());
+}
+
 #if defined(WEBRTC_POSIX)
 ThreadManager::ThreadManager() {
 #if defined(WEBRTC_MAC)

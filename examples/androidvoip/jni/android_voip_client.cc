@@ -12,6 +12,7 @@
 
 #include <errno.h>
 #include <sys/socket.h>
+
 #include <algorithm>
 #include <map>
 #include <memory>
@@ -28,6 +29,7 @@
 #include "api/voip/voip_engine_factory.h"
 #include "api/voip/voip_network.h"
 #include "examples/androidvoip/generated_jni/VoipClient_jni.h"
+#include "rtc_base/internal/default_socket_server.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/network.h"
 #include "rtc_base/socket_server.h"
@@ -51,17 +53,17 @@ namespace {
 // internally, it returns the default local address on a multi-homed
 // endpoint. Implementation copied from
 // BasicNetworkManager::QueryDefaultLocalAddress.
-rtc::IPAddress QueryDefaultLocalAddress(int family) {
+rtc::IPAddress QueryDefaultLocalAddress(rtc::SocketServer* socket_server,
+                                        int family) {
   const char kPublicIPv4Host[] = "8.8.8.8";
   const char kPublicIPv6Host[] = "2001:4860:4860::8888";
   const int kPublicPort = 53;
-  std::unique_ptr<rtc::Thread> thread = rtc::Thread::CreateWithSocketServer();
 
-  RTC_DCHECK(thread->socketserver() != nullptr);
+  RTC_DCHECK(socket_server != nullptr);
   RTC_DCHECK(family == AF_INET || family == AF_INET6);
 
   std::unique_ptr<rtc::Socket> socket(
-      thread->socketserver()->CreateSocket(family, SOCK_DGRAM));
+      socket_server->CreateSocket(family, SOCK_DGRAM));
   if (!socket) {
     RTC_LOG_ERR(LS_ERROR) << "Socket creation failed";
     return rtc::IPAddress();
@@ -163,6 +165,13 @@ AndroidVoipClient::~AndroidVoipClient() {
   voip_thread_->Stop();
 }
 
+AndroidVoipClient::AndroidVoipClient(
+    JNIEnv* env,
+    const webrtc::JavaParamRef<jobject>& j_voip_client)
+    : socket_server_(rtc::CreateDefaultSocketServer()),
+      voip_thread_(new rtc::Thread(socket_server_.get())),
+      j_voip_client_(env, j_voip_client) {}
+
 AndroidVoipClient* AndroidVoipClient::Create(
     JNIEnv* env,
     const webrtc::JavaParamRef<jobject>& application_context,
@@ -191,11 +200,13 @@ void AndroidVoipClient::GetLocalIPAddress(JNIEnv* env) {
   RUN_ON_VOIP_THREAD(GetLocalIPAddress, env);
 
   std::string local_ip_address;
-  rtc::IPAddress ipv4_address = QueryDefaultLocalAddress(AF_INET);
+  rtc::IPAddress ipv4_address =
+      QueryDefaultLocalAddress(socket_server_.get(), AF_INET);
   if (!ipv4_address.IsNil()) {
     local_ip_address = ipv4_address.ToString();
   } else {
-    rtc::IPAddress ipv6_address = QueryDefaultLocalAddress(AF_INET6);
+    rtc::IPAddress ipv6_address =
+        QueryDefaultLocalAddress(socket_server_.get(), AF_INET6);
     if (!ipv6_address.IsNil()) {
       local_ip_address = ipv6_address.ToString();
     }
@@ -304,8 +315,8 @@ void AndroidVoipClient::StartSession(JNIEnv* env) {
   // CreateChannel guarantees to return valid channel id.
   channel_ = voip_engine_->Base().CreateChannel(this, absl::nullopt);
 
-  rtp_socket_.reset(rtc::AsyncUDPSocket::Create(voip_thread_->socketserver(),
-                                                rtp_local_address_));
+  rtp_socket_.reset(
+      rtc::AsyncUDPSocket::Create(socket_server_.get(), rtp_local_address_));
   if (!rtp_socket_) {
     RTC_LOG_ERR(LS_ERROR) << "Socket creation failed";
     Java_VoipClient_onStartSessionCompleted(env_, j_voip_client_,
@@ -315,8 +326,8 @@ void AndroidVoipClient::StartSession(JNIEnv* env) {
   rtp_socket_->SignalReadPacket.connect(
       this, &AndroidVoipClient::OnSignalReadRTPPacket);
 
-  rtcp_socket_.reset(rtc::AsyncUDPSocket::Create(voip_thread_->socketserver(),
-                                                 rtcp_local_address_));
+  rtcp_socket_.reset(
+      rtc::AsyncUDPSocket::Create(socket_server_.get(), rtcp_local_address_));
   if (!rtcp_socket_) {
     RTC_LOG_ERR(LS_ERROR) << "Socket creation failed";
     Java_VoipClient_onStartSessionCompleted(env_, j_voip_client_,
