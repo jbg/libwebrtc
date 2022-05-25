@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52910e3f_79f58591",
+        "filename": "api/video_codecs/video_codec.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-25T07:56:32Z",
+      "side": 0,
+      "message": "Harald: This is where we use SpatialLayer to represent a simulcast stream. This cl is initial step to stop doing that.",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 139,
+        "endChar": 53
+      },
+      "revId": "1c633c8b87ec2fb20cf4310befb658c13191441c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
