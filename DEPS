@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'fdb681e7cbc2de28152880cc42818af215a1c9c3',
+  'chromium_revision': 'b76110d13c967bbf05b43ad81ce4f59bab186385',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -23,7 +23,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@7351a3bd25d583a27b892985b41c2e61a539a180',
+    'https://chromium.googlesource.com/chromium/src/base@dcc049948c9fee1dd5100b12e082e2f01233cb09',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@8a435a94bff19dc97f5d79d329a4e3a2e8c1003a',
   'src/buildtools':
@@ -34,13 +34,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@e7e46ec74342be5f03d6a2cf9aa768912af79703',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@f840b8c5ab7ca54879692ce657a8bba9a47618b9',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@f6b674ee59c07932e72b77fa499db5b1f77eada6',
+    'https://chromium.googlesource.com/chromium/src/testing@ee52b333482b7d30975ec491322a8ea1c28fd90f',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@805323e77f1f94decf79dd9f4f761944b3da33d1',
+    'https://chromium.googlesource.com/chromium/src/third_party@b8a1c691d95f2c610c9a634e0fb09d9c44235f42',
 
   'src/buildtools/linux64': {
     'packages': [
