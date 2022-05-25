@@ -73,6 +73,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "263f7923_cbb4de65",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 17969
+      },
+      "writtenOn": "2022-05-25T06:05:25Z",
+      "side": 1,
+      "message": "Any special consideration to do expand instead of CNG? Quality should be the same, but it weakens signals of expand/plc/plccng.",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20d6cf59_44b04a91",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 19
@@ -173,6 +190,24 @@
       "side": 1,
       "message": "NVM, saw the CL summary.",
       "parentUuid": "ca4afd72_e9af3090",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "050f6b3b_bc8bd616",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 17969
+      },
+      "writtenOn": "2022-05-25T06:05:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3fb8b54_597bce5a",
       "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
