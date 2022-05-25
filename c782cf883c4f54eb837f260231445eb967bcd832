@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4587ec59_a2f66a33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17969
+      },
+      "writtenOn": "2022-05-25T07:14:02Z",
+      "side": 1,
+      "message": "\u003e Maybe also update this place for AVSync, which currently uses filtered buffer level.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/audio/channel_receive.cc;l\u003d1035;drc\u003dba5c73c21e6bfbd7bcd67a2cc1625740786f192b;bpv\u003d1;bpt\u003d1",
+      "parentUuid": "3a32a9c7_71048c52",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87c885ad_fb95a593",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 19
