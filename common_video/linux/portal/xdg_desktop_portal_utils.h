@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_XDG_DESKTOP_PORTAL_UTILS_H_
-#define MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_XDG_DESKTOP_PORTAL_UTILS_H_
+#ifndef COMMON_VIDEO_LINUX_PORTAL_XDG_DESKTOP_PORTAL_UTILS_H_
+#define COMMON_VIDEO_LINUX_PORTAL_XDG_DESKTOP_PORTAL_UTILS_H_
 
 #include <gio/gio.h>
 #include <stdint.h>
@@ -17,9 +17,9 @@
 #include <string>
 #include <vector>
 
-#include "modules/desktop_capture/linux/wayland/portal_request_response.h"
-#include "modules/desktop_capture/linux/wayland/scoped_glib.h"
-#include "modules/desktop_capture/linux/wayland/xdg_session_details.h"
+#include "common_video/linux/portal/portal_request_response.h"
+#include "common_video/linux/portal/scoped_glib.h"
+#include "common_video/linux/portal/xdg_session_details.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 
@@ -105,4 +105,4 @@ void TearDownSession(std::string session_handle,
 }  // namespace xdg_portal
 }  // namespace webrtc
 
-#endif  // MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_XDG_DESKTOP_PORTAL_UTILS_H_
+#endif  // COMMON_VIDEO_LINUX_PORTAL_XDG_DESKTOP_PORTAL_UTILS_H_

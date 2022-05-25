@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_PORTAL_REQUEST_RESPONSE_H_
-#define MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_PORTAL_REQUEST_RESPONSE_H_
+#ifndef COMMON_VIDEO_LINUX_PORTAL_PORTAL_REQUEST_RESPONSE_H_
+#define COMMON_VIDEO_LINUX_PORTAL_PORTAL_REQUEST_RESPONSE_H_
 
 namespace webrtc {
 namespace xdg_portal {
@@ -31,4 +31,4 @@ enum class RequestResponse {
 
 }  // namespace xdg_portal
 }  // namespace webrtc
-#endif  // MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_PORTAL_REQUEST_RESPONSE_H_
+#endif  // COMMON_VIDEO_LINUX_PORTAL_PORTAL_REQUEST_RESPONSE_H_
