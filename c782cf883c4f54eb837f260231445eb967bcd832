@@ -36,6 +36,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a32a9c7_71048c52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17969
+      },
+      "writtenOn": "2022-05-25T07:07:41Z",
+      "side": 1,
+      "message": "Maybe also update this place for AVSync, which currently uses filtered buffer level.",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87c885ad_fb95a593",
