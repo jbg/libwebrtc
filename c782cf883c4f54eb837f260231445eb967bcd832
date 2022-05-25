@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9397eacd_8d876ed7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17969
+      },
+      "writtenOn": "2022-05-25T04:58:11Z",
+      "side": 1,
+      "message": "Added some questions.",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87c885ad_fb95a593",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 19
@@ -67,6 +84,41 @@
       "side": 1,
       "message": "Yes this 75% is a bit arbitrary. The idea is that we expect to see more delay variation when the target delay is high, so we accept a larger diff compared to the target in this case (that made sense when using the buffer level filter but not sure if it does with the new, \"more stable\", delay estimation).\n\nIn practice, we rarely do preemptive expand. We usually increase the target delay after an underrun and in that case the playout delay is most likely already high (due to the delayed packet arrival).",
       "parentUuid": "20d6cf59_44b04a91",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf833681_5cae67b9",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 17969
+      },
+      "writtenOn": "2022-05-25T04:58:11Z",
+      "side": 1,
+      "message": "Let\u0027s have two wild assumptions: 1. target level doesn\u0027t change; 2. delay manager gives us perfect target level which will be larger than all future jitters by a just small margin. \n\nWith above conditions, do we really need any preemptive expand at all to prevent underrun? In other words, if we have perfect jitter estimation, then we don\u0027t ever need preemptive expand unless target level changes. \n\nThis CL greatly reduces preemptive expands, which would\u0027ve happened with previous SpanSamples calculation. Is this intentional? : )\n\nCan we expect zero preemptive expand when target level doesn\u0027t change? Any caveat?",
+      "parentUuid": "82cef225_fd0a5d93",
+      "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca4afd72_e9af3090",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 17969
+      },
+      "writtenOn": "2022-05-25T04:58:11Z",
+      "side": 1,
+      "message": "Curious under what cases TargetLevelMs() isn\u0027t enough such that we need to use GetMaxDelayMs()?",
       "revId": "c782cf883c4f54eb837f260231445eb967bcd832",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
