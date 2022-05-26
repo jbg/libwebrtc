@@ -102,6 +102,24 @@
       "parentUuid": "094726a4_84d8488e",
       "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9bad554_0f913b76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6092
+      },
+      "writtenOn": "2022-05-26T17:11:02Z",
+      "side": 1,
+      "message": "What exactly is the change that breaks remoting?\n\nFor example, if you\u0027re just moving header files, you could leave shim headers in the old locations? Then remove the shims after you\u0027re confident that downstream code is updated?\n\nPlease could you edit the CL description\u0027s main body to describe the change in detail? For example, explain that headers are being moved from old/path to new/path? Or explain any changes you\u0027re making to public APIs?\n\nDisabling |remoting_use_wayland| is fine for getting this landed in a non-breaking way. But it sounds like there are other ways?",
+      "parentUuid": "056b6850_ee15d44a",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
