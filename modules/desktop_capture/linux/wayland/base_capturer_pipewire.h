@@ -52,6 +52,9 @@ class BaseCapturerPipeWire : public DesktopCapturer,
   DesktopCaptureOptions options_ = {};
   Callback* callback_ = nullptr;
   bool capturer_failed_ = false;
+  bool is_screencast_portal_ = false;
+  SourceId selected_source_id_ = 0;
+  SourceId source_id_ = 0;
   std::unique_ptr<xdg_portal::ScreenCapturePortalInterface> portal_;
 };
 
