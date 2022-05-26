@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "150716a2_b7537528",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-26T10:04:16Z",
+      "side": 1,
+      "message": "You definitely use functions from PipeWire library that are not defined in pipewire.sigs. Try to build with \"rtc_link_pipewire\u003dfalse\", you should get undefined references if I\u0027m correct so you will have to add definitions for these.",
+      "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
