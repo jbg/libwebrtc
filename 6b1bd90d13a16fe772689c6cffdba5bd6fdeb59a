@@ -16,6 +16,74 @@
       "message": "You definitely use functions from PipeWire library that are not defined in pipewire.sigs. Try to build with \"rtc_link_pipewire\u003dfalse\", you should get undefined references if I\u0027m correct so you will have to add definitions for these.",
       "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f749ce4_0d289e57",
+        "filename": "modules/video_capture/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-26T10:59:57Z",
+      "side": 1,
+      "message": "I believe you don\u0027t need gbm, egl and libdrm libraries. We use these to import DMA buffers using OpenGL.",
+      "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4375cb9a_05222368",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-26T10:59:57Z",
+      "side": 1,
+      "message": "You don\u0027t need to lock the pw_loop here, you can do it once you start the loop, but in your case you don\u0027t do anything with it later so maybe the lock is not needed at all.",
+      "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ed7fd5_95b5165b",
+        "filename": "modules/video_capture/linux/pipewire_session.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-26T10:59:57Z",
+      "side": 1,
+      "message": "This one and following methods can be `const`.",
+      "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ff30958_5234149f",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-26T10:59:57Z",
+      "side": 1,
+      "message": "Unlock before this check? Otherwise on failure it will remain locked.",
+      "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
