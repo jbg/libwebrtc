@@ -50,6 +50,23 @@
       "message": "How do I handle the ownership of the new files? It\u0027s mostly moving code but into a new directory so the owner changes implicitly. Should I add a new OWNERS file? If yes, who should be in it?",
       "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "056b6850_ee15d44a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-05-26T15:36:06Z",
+      "side": 1,
+      "message": "Thanks for adding me here Jan!\n\nI think the file moves are going to be problematic for the users in the chromium\u0027s remoting code downstream e.g. here are some existing usage of the files being renamed -- this has potential to cause breakage upon autoroll:\n\n$ git grep portal_request_response.h remoting/host/\nremoting/host/linux/remote_desktop_portal.h:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/portal_request_response.h\"\nremoting/host/linux/remote_desktop_portal_injector.cc:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/portal_request_response.h\"\n\n$ git grep scoped_glib remoting/host/\nremoting/host/linux/input_injector_wayland.cc:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/scoped_glib.h\"\nremoting/host/linux/remote_desktop_portal.h:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/scoped_glib.h\"\nremoting/host/linux/remote_desktop_portal_injector.cc:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/scoped_glib.h\"\n\ngit grep xdg_desktop_portal_utils remoting/\nremoting/host/client_session.cc:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h\"\nremoting/host/client_session.cc:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h\"\nremoting/host/input_injector_metadata.h:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h\"\nremoting/host/linux/input_injector_wayland.cc:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h\"\nremoting/host/linux/remote_desktop_portal.cc:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h\"\nremoting/host/linux/remote_desktop_portal.h:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h\"\nremoting/host/linux/remote_desktop_portal_injector.cc:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h\"\nremoting/host/linux/remote_desktop_portal_injector.h:#include \"third_party/webrtc/modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h\"\n\nIdeally, we should update the paths on the caller at the same time (and atomically) as this change but given that `remoting/` is in a separate repo than WebRTC, I don\u0027t think there is a way to do this atomically. One way to go about it is to disable the builds for the code path on the caller side (e.g. removing `remoting_use_wayland` in https://source.chromium.org/chromium/chromium/src/+/main:tools/mb/mb_config.pyl;l\u003d2733?q\u003dtools%2Fmb%2Fmb_config.pyl) and getting your change in, then adjusting the `remoting/` code to use new paths and then re-enabling the buildbot to build the remoting side code. Note that disabling `remoting_use_wayland` flag is ok now only due to the fact that it is not being used actively right now, as it is still under development. May be Mark has an alternative/better strategy about how such changes are handled in general.",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
