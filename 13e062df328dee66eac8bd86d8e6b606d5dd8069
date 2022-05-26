@@ -84,6 +84,24 @@
       "message": "Looping in Lambros/Jamie as well in case he has more thoughts as to how this change can be merged without breaking remoting.",
       "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfa8af2b_8e89bdfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-05-26T15:53:18Z",
+      "side": 1,
+      "message": "I believe if there is no OWNERS file in the current directory where the new files reside, then they will be inherited by OWNERS of the parent directory unless you add an OWNERS file and use `set noparent` (https://chromium.googlesource.com/chromium/src/+/HEAD/docs/code_reviews.md#owners-file-details). BTW, clicking on `SUGGEST OWNERS` button, I see that all the files have owners associated already (even for the new files).",
+      "parentUuid": "094726a4_84d8488e",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
