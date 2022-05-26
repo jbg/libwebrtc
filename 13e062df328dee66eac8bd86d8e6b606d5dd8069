@@ -120,6 +120,24 @@
       "parentUuid": "056b6850_ee15d44a",
       "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3403d91_281c8d79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18829
+      },
+      "writtenOn": "2022-05-26T17:13:26Z",
+      "side": 1,
+      "message": "\u003e For example, if you\u0027re just moving header files, you could leave shim headers in the old locations? Then remove the shims after you\u0027re confident that downstream code is updated?\n\nThat is a great suggestion!\n\n\u003e Disabling |remoting_use_wayland| is fine for getting this landed in a non-breaking way. But it sounds like there are other ways?\n\nI had a feeling that there would be a better(less complicated) alternatives. Thanks for proposing them here!",
+      "parentUuid": "c9bad554_0f913b76",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
