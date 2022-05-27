@@ -60,6 +60,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "96bd7177_9ac4204e",
+        "filename": "modules/pacing/pacing_controller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-05-27T11:15:35Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "1ad5f177_623992a6",
+      "range": {
+        "startLine": 37,
+        "startChar": 10,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "048f1ab265a1fec532b571031aa969f525fb71c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3b912ae9_c2b90c1a",
         "filename": "modules/pacing/pacing_controller_unittest.cc",
         "patchSetId": 1
@@ -71,6 +95,30 @@
       "writtenOn": "2022-05-27T08:47:52Z",
       "side": 1,
       "message": "Suggestion: Use only this function instead of `BuildRtpPacket` and `MediaStream`.\n\nSuggestion: Update this to a builder pattern, or create a struct and use designated initialization to build the packets.",
+      "range": {
+        "startLine": 56,
+        "startChar": 33,
+        "endLine": 56,
+        "endChar": 44
+      },
+      "revId": "048f1ab265a1fec532b571031aa969f525fb71c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b9b423b_7c630b42",
+        "filename": "modules/pacing/pacing_controller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-05-27T11:15:35Z",
+      "side": 1,
+      "message": "For now removed BuildRtpPacket but keep MediaStream as a mean to build packets easely.",
+      "parentUuid": "3b912ae9_c2b90c1a",
       "range": {
         "startLine": 56,
         "startChar": 33,
