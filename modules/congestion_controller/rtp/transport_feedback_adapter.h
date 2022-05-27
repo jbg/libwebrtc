@@ -91,7 +91,7 @@ class TransportFeedbackAdapter {
   InFlightBytesTracker in_flight_;
 
   Timestamp current_offset_ = Timestamp::MinusInfinity();
-  TimeDelta last_timestamp_ = TimeDelta::MinusInfinity();
+  Timestamp last_timestamp_ = Timestamp::MinusInfinity();
 
   rtc::NetworkRoute network_route_;
 };
