@@ -353,8 +353,8 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
 
   private final Context context;
   private final AudioManager audioManager;
-  private final WebRtcAudioRecord audioInput;
-  private final WebRtcAudioTrack audioOutput;
+  private final BaseWebRtcAudioRecord audioInput;
+  private final BaseWebRtcAudioTrack audioOutput;
   private final int inputSampleRate;
   private final int outputSampleRate;
   private final boolean useStereoInput;
@@ -364,7 +364,7 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
   private long nativeAudioDeviceModule;
 
   private JavaAudioDeviceModule(Context context, AudioManager audioManager,
-      WebRtcAudioRecord audioInput, WebRtcAudioTrack audioOutput, int inputSampleRate,
+      BaseWebRtcAudioRecord audioInput, BaseWebRtcAudioTrack audioOutput, int inputSampleRate,
       int outputSampleRate, boolean useStereoInput, boolean useStereoOutput) {
     this.context = context;
     this.audioManager = audioManager;
@@ -422,6 +422,6 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
   }
 
   private static native long nativeCreateAudioDeviceModule(Context context,
-      AudioManager audioManager, WebRtcAudioRecord audioInput, WebRtcAudioTrack audioOutput,
+      AudioManager audioManager, BaseWebRtcAudioRecord audioInput, BaseWebRtcAudioTrack audioOutput,
       int inputSampleRate, int outputSampleRate, boolean useStereoInput, boolean useStereoOutput);
 }
