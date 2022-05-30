@@ -8,9 +8,12 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_SCOPED_GLIB_H_
-#define MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_SCOPED_GLIB_H_
+#ifndef COMMON_VIDEO_LINUX_PORTAL_PIPEWIRE_SETUP_H_
+#define COMMON_VIDEO_LINUX_PORTAL_PIPEWIRE_SETUP_H_
 
-#include "common_video/linux/portal/scoped_glib.h"
+namespace webrtc {
 
-#endif  // MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_SCOPED_GLIB_H_
+bool InitializePipewire();
+
+}  // namespace webrtc
+#endif  // COMMON_VIDEO_LINUX_PORTAL_PIPEWIRE_SETUP_H_
