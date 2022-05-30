@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83a14f89_5834977d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-30T12:41:32Z",
+      "side": 1,
+      "message": "I\u0027ve moved PipeWireThreadLoopLock to the shared code as well so it can be reused.",
+      "revId": "9b3d04967e11f7558052afff028dc0cbd92a1ec6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
