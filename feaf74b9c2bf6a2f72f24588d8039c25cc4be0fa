@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b1d7f7d_ef204b4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-30T13:07:38Z",
+      "side": 1,
+      "message": "\"git cl upload\" currently produced this error:\n\n ERROR at //modules/video_capture/video_capture_options.cc:13:11: Include not allowed.\n #include \"modules/video_capture/linux/pipewire_session.h\"\n           ^---------------------------------------------\n It is not in any dependency of\n   //modules/video_capture:video_capture_module\n The include file is in the target(s):\n   //modules/video_capture:video_capture_internal_impl\n which should somehow be reachable.\n\nI suppose I could move `pipewire_session.{cc,h}` from `video_capture_internal_impl` to `video_capture_module`. Or are there any better options?\n",
+      "revId": "feaf74b9c2bf6a2f72f24588d8039c25cc4be0fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
