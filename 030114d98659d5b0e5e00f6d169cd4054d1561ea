@@ -34,6 +34,24 @@
       "parentUuid": "50c590fc_d8182cd8",
       "revId": "030114d98659d5b0e5e00f6d169cd4054d1561ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b7afe8_76be1bea",
+        "filename": "modules/video_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-05-30T08:51:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "20bf3ac0_37cbd3a5",
+      "revId": "030114d98659d5b0e5e00f6d169cd4054d1561ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
