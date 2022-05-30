@@ -16,6 +16,40 @@
       "message": "hbos, please don\u0027t make me (or anyone) use the \"legacy stats\" dropdown to get that information :-)",
       "revId": "08cb9745fe32b4a117dee3741e378dac48c0cd4c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1388d4d_358b20ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-05-30T09:26:35Z",
+      "side": 1,
+      "message": "No objection, since it\u0027s RTCNonStandard (not exposed in JS, only webrtc-internals)",
+      "revId": "08cb9745fe32b4a117dee3741e378dac48c0cd4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a53de75_c1f2ac42",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-05-30T09:26:35Z",
+      "side": 1,
+      "message": "Please \"git cl format .\", this does not fit the line",
+      "revId": "08cb9745fe32b4a117dee3741e378dac48c0cd4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
