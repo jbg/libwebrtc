@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2348a69d_37cd09c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-30T10:28:13Z",
+      "side": 1,
+      "message": "It\u0027s done, but I wanted to test this more (e.g. with other DEs) before merging.",
+      "parentUuid": "cde0606b_4d36575f",
+      "revId": "670164bc78d1693c26c403eee91cf3cc58fb0521",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d996f3d_5ec3cb19",
@@ -35,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bf7989e_a1ab2a63",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-30T10:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d996f3d_5ec3cb19",
+      "revId": "670164bc78d1693c26c403eee91cf3cc58fb0521",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb1aebba_934443fa",
@@ -48,6 +84,30 @@
       "writtenOn": "2022-05-27T23:49:49Z",
       "side": 1,
       "message": "Other singletons I\u0027m seeing in WebRTC just simply declare the item as either a function-local static or as a static pointer in an anonymous namespace in the .cc file. I believe this side-steps some issues with the lifetime if it\u0027s essentially a static member of the class; where I think it could end up creating multiple instances.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 1
+      },
+      "revId": "670164bc78d1693c26c403eee91cf3cc58fb0521",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e38d5a06_ca45e34d",
+        "filename": "modules/desktop_capture/linux/wayland/restore_token_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-30T10:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb1aebba_934443fa",
       "range": {
         "startLine": 23,
         "startChar": 0,
@@ -81,6 +141,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d4ac75_04152626",
+        "filename": "modules/desktop_capture/linux/wayland/restore_token_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-30T10:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af3113e1_79e377d3",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 53
+      },
+      "revId": "670164bc78d1693c26c403eee91cf3cc58fb0521",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca6a7cf3_7b6f4f08",
@@ -104,6 +188,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e1bdd78_0fa7ddfb",
+        "filename": "modules/desktop_capture/linux/wayland/restore_token_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-30T10:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca6a7cf3_7b6f4f08",
+      "range": {
+        "startLine": 38,
+        "startChar": 7,
+        "endLine": 38,
+        "endChar": 10
+      },
+      "revId": "670164bc78d1693c26c403eee91cf3cc58fb0521",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bce3b302_cb66ee00",
@@ -117,6 +225,30 @@
       "writtenOn": "2022-05-27T23:49:49Z",
       "side": 1,
       "message": "Is this intended to be cast from a set PersistMode ?",
+      "range": {
+        "startLine": 223,
+        "startChar": 71,
+        "endLine": 223,
+        "endChar": 72
+      },
+      "revId": "670164bc78d1693c26c403eee91cf3cc58fb0521",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07e8f1e3_6d79c01d",
+        "filename": "modules/desktop_capture/linux/wayland/screencast_portal.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-05-30T10:28:13Z",
+      "side": 1,
+      "message": "Ups, it is a leftover from my testing.",
+      "parentUuid": "bce3b302_cb66ee00",
       "range": {
         "startLine": 223,
         "startChar": 71,
