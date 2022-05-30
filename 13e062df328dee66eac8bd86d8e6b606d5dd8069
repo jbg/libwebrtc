@@ -138,6 +138,42 @@
       "parentUuid": "c9bad554_0f913b76",
       "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae9667aa_6226147e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-30T10:53:30Z",
+      "side": 1,
+      "message": "\u003e Mark, can you take a look? I\u0027m a bit unsure about the build-system changes. This requires changes to chromium to find the `pipewire_config`. Is that ok?\n\nI\u0027ve readded the pipewire_config in desktop_capture/. It just includes the new one from common_video now. So chromium builds without changes. This can be removed when chromium us updated to use the new location.",
+      "parentUuid": "6d915a02_45f5c795",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d7d171_90787cbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-30T10:53:30Z",
+      "side": 1,
+      "message": "I\u0027ve uploaded a new version that adds shim headers. Id did some build tests, but I\u0027m not sure if I enabled all necessary options.",
+      "parentUuid": "c3403d91_281c8d79",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
