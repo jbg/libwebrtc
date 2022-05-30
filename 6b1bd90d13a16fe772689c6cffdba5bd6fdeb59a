@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d94fde0e_781d8bd8",
+        "filename": "modules/video_capture/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-30T13:00:50Z",
+      "side": 1,
+      "message": "Indeed. I\u0027ve removed those.",
+      "parentUuid": "0f749ce4_0d289e57",
+      "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4375cb9a_05222368",
@@ -66,6 +84,24 @@
       "writtenOn": "2022-05-26T10:59:57Z",
       "side": 1,
       "message": "You don\u0027t need to lock the pw_loop here, you can do it once you start the loop, but in your case you don\u0027t do anything with it later so maybe the lock is not needed at all.",
+      "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "982f5f18_be5b97ac",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-30T13:00:50Z",
+      "side": 1,
+      "message": "Right, I\u0027ve removed the lock here.",
+      "parentUuid": "4375cb9a_05222368",
       "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -87,6 +123,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b18a7da6_dcd1ad00",
+        "filename": "modules/video_capture/linux/pipewire_session.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-30T13:00:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2ed7fd5_95b5165b",
+      "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ff30958_5234149f",
@@ -100,6 +154,24 @@
       "writtenOn": "2022-05-26T10:59:57Z",
       "side": 1,
       "message": "Unlock before this check? Otherwise on failure it will remain locked.",
+      "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d09f3b49_ea428c07",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-30T13:00:50Z",
+      "side": 1,
+      "message": "I\u0027ve changed this to use PipeWireThreadLoopLock. That makes it easier to avoid issues like this.",
+      "parentUuid": "8ff30958_5234149f",
       "revId": "6b1bd90d13a16fe772689c6cffdba5bd6fdeb59a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
