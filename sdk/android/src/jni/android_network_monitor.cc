@@ -113,6 +113,7 @@ static rtc::AdapterType AdapterTypeFromNetworkType(
     NetworkType network_type,
     bool surface_cellular_types) {
   switch (network_type) {
+    case NETWORK_NONE:
     case NETWORK_UNKNOWN:
       return rtc::ADAPTER_TYPE_UNKNOWN;
     case NETWORK_ETHERNET:
