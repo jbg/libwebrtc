@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_XDG_SESSION_DETAILS_H_
-#define MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_XDG_SESSION_DETAILS_H_
+#ifndef COMMON_VIDEO_LINUX_PORTAL_XDG_SESSION_DETAILS_H_
+#define COMMON_VIDEO_LINUX_PORTAL_XDG_SESSION_DETAILS_H_
 
 #include <gio/gio.h>
 
@@ -30,4 +30,4 @@ struct SessionDetails {
 }  // namespace xdg_portal
 }  // namespace webrtc
 
-#endif  // MODULES_DESKTOP_CAPTURE_LINUX_WAYLAND_XDG_SESSION_DETAILS_H_
+#endif  // COMMON_VIDEO_LINUX_PORTAL_XDG_SESSION_DETAILS_H_
