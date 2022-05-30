@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0798387d_af358aff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2022-05-30T08:38:54Z",
+      "side": 1,
+      "message": "hbos, please don\u0027t make me (or anyone) use the \"legacy stats\" dropdown to get that information :-)",
+      "revId": "08cb9745fe32b4a117dee3741e378dac48c0cd4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
