@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f1e796d5_d221c998",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-31T08:46:56Z",
+      "side": 1,
+      "message": "Agree auto formatting is a bit weird. Prefer to keep as is, to not have to change build dependencies.",
+      "parentUuid": "edf35d13_f215ca43",
+      "range": {
+        "startLine": 265,
+        "startChar": 64,
+        "endLine": 265,
+        "endChar": 65
+      },
+      "revId": "164b99ecf5abbb03bb7111e0bb31f52dca8ae5e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ccc2b567_0b3fb631",
         "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2022-05-31T08:40:38Z",
       "side": 1,
       "message": "personally prefer size() function.\nmay be because it is shorter, but in this case it also better aligns with kMaxValue_Size_Bytes",
+      "range": {
+        "startLine": 189,
+        "startChar": 21,
+        "endLine": 189,
+        "endChar": 27
+      },
+      "revId": "164b99ecf5abbb03bb7111e0bb31f52dca8ae5e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab13f351_50eb11c1",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-31T08:46:56Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "ccc2b567_0b3fb631",
       "range": {
         "startLine": 189,
         "startChar": 21,
