@@ -31,6 +31,7 @@
 #include "p2p/base/port_interface.h"
 #include "pc/test/fake_audio_capture_module.h"
 #include "pc/test/fake_video_track_source.h"
+#include "rtc_base/internal/default_socket_server.h"
 #include "rtc_base/rtc_certificate_generator.h"
 #include "rtc_base/socket_address.h"
 #include "rtc_base/time_utils.h"
@@ -96,6 +97,12 @@ class NullPeerConnectionObserver : public PeerConnectionObserver {
 }  // namespace
 
 class PeerConnectionFactoryTest : public ::testing::Test {
+ public:
+  PeerConnectionFactoryTest()
+      : socket_server_(rtc::CreateDefaultSocketServer()),
+        main_thread_(socket_server_.get()) {}
+
+ private:
   void SetUp() {
 #ifdef WEBRTC_ANDROID
     webrtc::InitializeAndroidObjects();
@@ -114,8 +121,10 @@ class PeerConnectionFactoryTest : public ::testing::Test {
         nullptr /* audio_processing */);
 
     ASSERT_TRUE(factory_.get() != NULL);
-    port_allocator_.reset(
-        new cricket::FakePortAllocator(rtc::Thread::Current(), nullptr));
+    packet_socket_factory_.reset(
+        new rtc::BasicPacketSocketFactory(socket_server_.get()));
+    port_allocator_.reset(new cricket::FakePortAllocator(
+        rtc::Thread::Current(), packet_socket_factory_.get()));
     raw_port_allocator_ = port_allocator_.get();
   }
 
@@ -154,9 +163,11 @@ class PeerConnectionFactoryTest : public ::testing::Test {
     EXPECT_GT(codec.clock_rate, 0);
   }
 
-  rtc::AutoThread main_thread_;
+  std::unique_ptr<rtc::SocketServer> socket_server_;
+  rtc::AutoSocketServerThread main_thread_;
   rtc::scoped_refptr<PeerConnectionFactoryInterface> factory_;
   NullPeerConnectionObserver observer_;
+  std::unique_ptr<rtc::PacketSocketFactory> packet_socket_factory_;
   std::unique_ptr<cricket::FakePortAllocator> port_allocator_;
   // Since the PC owns the port allocator after it's been initialized,
   // this should only be used when known to be safe.
