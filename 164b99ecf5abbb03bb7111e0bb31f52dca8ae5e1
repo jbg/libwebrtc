@@ -16,6 +16,52 @@
       "message": "PTAL. Deprecation only of old setter, so downstream code can be updated.",
       "revId": "164b99ecf5abbb03bb7111e0bb31f52dca8ae5e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edf35d13_f215ca43",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-31T08:40:38Z",
+      "side": 1,
+      "message": "because of formatting I would prefer ABSL_DEPRECATED macro instead,\nbut won\u0027t insist. This code likely would be deleted soon anyway.",
+      "range": {
+        "startLine": 265,
+        "startChar": 64,
+        "endLine": 265,
+        "endChar": 65
+      },
+      "revId": "164b99ecf5abbb03bb7111e0bb31f52dca8ae5e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccc2b567_0b3fb631",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-05-31T08:40:38Z",
+      "side": 1,
+      "message": "personally prefer size() function.\nmay be because it is shorter, but in this case it also better aligns with kMaxValue_Size_Bytes",
+      "range": {
+        "startLine": 189,
+        "startChar": 21,
+        "endLine": 189,
+        "endChar": 27
+      },
+      "revId": "164b99ecf5abbb03bb7111e0bb31f52dca8ae5e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
