@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a537c7_29153619",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-05-31T06:53:30Z",
+      "side": 1,
+      "message": "This seems to be the only placed where its used. Can it be an argument to this method and not stored as a memeber?",
+      "range": {
+        "startLine": 368,
+        "startChar": 36,
+        "endLine": 368,
+        "endChar": 42
+      },
+      "revId": "cacbd912be9dd83650c27657ac461dbc3c4ac2c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
