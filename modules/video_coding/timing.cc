@@ -223,6 +223,18 @@ TimeDelta VCMTiming::TargetDelayInternal() const {
                   jitter_delay_ + RequiredDecodeTime() + render_delay_);
 }
 
+bool VCMTiming::IsLowLatencyStream() const {
+  MutexLock lock(&mutex_);
+  return IsLowLatencyStreamInternal();
+}
+
+bool VCMTiming::IsLowLatencyStreamInternal() const {
+  // min_playout_delay_==0, max_playout_delay_>=0 indicates that the low-latency
+  // path should be used, which means that frames should be decoded as soon as
+  // possible.
+  return min_playout_delay_.IsZero() && max_playout_delay_ >= TimeDelta::Zero();
+}
+
 VCMTiming::VideoDelayTimings VCMTiming::GetTimings() const {
   MutexLock lock(&mutex_);
   return VideoDelayTimings{.max_decode_duration = RequiredDecodeTime(),
