@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d85fa41a_2b0d422c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-05-31T08:28:49Z",
+      "side": 1,
+      "message": "PTAL. Deprecation only of old setter, so downstream code can be updated.",
+      "revId": "164b99ecf5abbb03bb7111e0bb31f52dca8ae5e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
