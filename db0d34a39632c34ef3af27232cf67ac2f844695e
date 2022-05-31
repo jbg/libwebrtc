@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "08847077_1b962d74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-05-31T09:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad3209e5_82fdd693",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "78ef70c2_f2547cc4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -52,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e066c9_d8a81794",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-05-31T09:34:53Z",
+      "side": 1,
+      "message": "I had a hard-coding of \"lo\" in AndroidNetworkMonitor...that I moved here instead.\nI think this is nicer.",
+      "parentUuid": "ba78792a_8fbb2707",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf11d6ea_115ca10a",
@@ -65,6 +101,24 @@
       "writtenOn": "2022-05-31T08:58:21Z",
       "side": 1,
       "message": "Since the previous block ends in an unconditional \"continue\", you don\u0027t need \"else\" here - I think the flow is cleraer if you skip \"else\".",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44df4011_f65321af",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-05-31T09:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf11d6ea_115ca10a",
       "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -86,6 +140,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9121d04_128905c1",
+        "filename": "rtc_base/network_monitor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-05-31T09:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "375af82e_fb927ba3",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bb3c69f_eb05d9d4",
@@ -99,6 +171,24 @@
       "writtenOn": "2022-05-31T08:58:21Z",
       "side": 1,
       "message": "Should add: \"Owner\" is defined by the network_handle_by_if_name_ table.\n\nPerhaps also add \"This menas that network_info_by_handle can have more entries than network_handle_by_if_name_\" - in case that\u0027s not obvious.",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "030b75ed_55bf00fb",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-05-31T09:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bb3c69f_eb05d9d4",
       "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
