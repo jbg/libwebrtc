@@ -174,6 +174,24 @@
       "parentUuid": "c3403d91_281c8d79",
       "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e918eab1_e16e7684",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-05-31T07:00:05Z",
+      "side": 1,
+      "message": "I understand how the OWNERS files work on a technical level. What I\u0027m asking is this:\nWithout a new OWNERS file, the owners of `common_video` now own the moved files and the probably don\u0027t know a lot about pipewire and xdg-desktop-portal. So should I create a new OWNERS file and who should be listed there?",
+      "parentUuid": "cfa8af2b_8e89bdfe",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
