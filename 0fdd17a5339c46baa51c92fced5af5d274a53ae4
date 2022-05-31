@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d42655a4_28d023f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-05-31T16:55:48Z",
+      "side": 1,
+      "message": "Mostly looks good to me; but one question about the singleton pattern to mark.",
+      "revId": "0fdd17a5339c46baa51c92fced5af5d274a53ae4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae3ebcfc_af0a9150",
+        "filename": "modules/desktop_capture/linux/wayland/restore_token_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-05-31T16:55:48Z",
+      "side": 1,
+      "message": "NIT: Since we\u0027re doing the remove of the Token now, maybe \"TakeToken\" or something similar so it\u0027s explicit?",
+      "range": {
+        "startLine": 30,
+        "startChar": 14,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "0fdd17a5339c46baa51c92fced5af5d274a53ae4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
