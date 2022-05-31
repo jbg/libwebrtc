@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad3209e5_82fdd693",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-31T08:58:21Z",
+      "side": 1,
+      "message": "Perhaps change the title to not say \"Reland\" any more?",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78ef70c2_f2547cc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-31T08:58:21Z",
+      "side": 1,
+      "message": "Looks good. Comments on comments mostly.\nMuch tidier than previous version!\n\n(btw, you still use [] on the LHS for inserting new elements.... mumble....)",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba78792a_8fbb2707",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-31T08:58:21Z",
+      "side": 1,
+      "message": "So the network monitor doesn\u0027t monitor loopback interfaces?\nKind of makes sense....",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf11d6ea_115ca10a",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-31T08:58:21Z",
+      "side": 1,
+      "message": "Since the previous block ends in an unconditional \"continue\", you don\u0027t need \"else\" here - I think the flow is cleraer if you skip \"else\".",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "375af82e_fb927ba3",
+        "filename": "rtc_base/network_monitor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-31T08:58:21Z",
+      "side": 1,
+      "message": "Nit: These -\u003e The",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb3c69f_eb05d9d4",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-05-31T08:58:21Z",
+      "side": 1,
+      "message": "Should add: \"Owner\" is defined by the network_handle_by_if_name_ table.\n\nPerhaps also add \"This menas that network_info_by_handle can have more entries than network_handle_by_if_name_\" - in case that\u0027s not obvious.",
+      "revId": "db0d34a39632c34ef3af27232cf67ac2f844695e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
