@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff78f96d_288866f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-06-01T10:52:31Z",
+      "side": 1,
+      "message": "Added phensman@ who landed the port to sdk/ in case there are any known issues that prevented the delete back in the days.",
+      "revId": "eebd4b641593efd85316edfa7a04e97c3217db3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
