@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5dd2740_c61300ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-01T10:18:19Z",
+      "side": 1,
+      "message": "I\u0027ve uploaded a new versions. Some parts are split out into separate CLs. I\u0027ve done some cleanup and removed some unused code. I\u0027ve removed the \u0027WIP\u0027 from the subject, because I thinks this is ready now.",
+      "revId": "a0c5a4c09ed784e7c4c985a769a7670b2a9800bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
