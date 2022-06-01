@@ -142,6 +142,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b98501_7d43e524",
+        "filename": "modules/desktop_capture/linux/wayland/restore_token_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-06-01T06:32:35Z",
+      "side": 1,
+      "message": "Alright, I changed it. I",
+      "parentUuid": "3d9eb6b3_5f916f27",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 1
+      },
+      "revId": "670164bc78d1693c26c403eee91cf3cc58fb0521",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af3113e1_79e377d3",

@@ -39,6 +39,30 @@
       },
       "revId": "0fdd17a5339c46baa51c92fced5af5d274a53ae4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cde7641_c72e173f",
+        "filename": "modules/desktop_capture/linux/wayland/restore_token_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-06-01T06:32:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae3ebcfc_af0a9150",
+      "range": {
+        "startLine": 30,
+        "startChar": 14,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "0fdd17a5339c46baa51c92fced5af5d274a53ae4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
