@@ -60,19 +60,43 @@ if (!build_with_chromium) {
       "../../rtc_base:refcount",
       "../../rtc_base:stringutils",
       "../../rtc_base/synchronization:mutex",
+      "../../rtc_base/system:rtc_export",
       "../../system_wrappers",
+    ]
+    sources = [
+      "video_capture_options.cc",
+      "video_capture_options.h",
     ]
 
     if (is_linux || is_chromeos) {
-      sources = [
+      sources += [
         "linux/device_info_linux.cc",
+        "linux/device_info_pipewire.cc",
+        "linux/device_info_pipewire.h",
         "linux/device_info_v4l2.cc",
         "linux/device_info_v4l2.h",
+        "linux/pipewire_session.cc",
+        "linux/pipewire_session.h",
         "linux/video_capture_linux.cc",
+        "linux/video_capture_pipewire.cc",
+        "linux/video_capture_pipewire.h",
         "linux/video_capture_v4l2.cc",
         "linux/video_capture_v4l2.h",
       ]
-      deps += [ "../../media:rtc_media_base" ]
+      configs += [
+        "../../common_video/linux:gio",
+        "../../common_video/linux:pipewire",
+        "../../common_video/linux:pipewire_config",
+      ]
+
+      public_configs = [ "../../common_video/linux:pipewire_config" ]
+
+      deps += [
+        "../../api:refcountedbase",
+        "../../common_video",
+        "../../common_video/linux",
+        "../../media:rtc_media_base",
+      ]
     }
     if (is_win) {
       sources = [
