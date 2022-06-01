@@ -7,9 +7,7 @@
 # be found in the AUTHORS file in the root of the source tree.
 
 import("//build/config/linux/gtk/gtk.gni")
-import("//build/config/linux/pkg_config.gni")
 import("//build/config/ui.gni")
-import("//tools/generate_stubs/rules.gni")
 import("../../webrtc.gni")
 
 use_desktop_capture_differ_sse2 = current_cpu == "x86" || current_cpu == "x64"
@@ -225,71 +223,8 @@ if (rtc_include_tests) {
 
 if (is_linux || is_chromeos) {
   if (rtc_use_pipewire) {
-    pkg_config("gio") {
-      packages = [
-        "gio-2.0",
-        "gio-unix-2.0",
-      ]
-    }
-
-    pkg_config("pipewire") {
-      packages = [ "libpipewire-0.3" ]
-      if (!rtc_link_pipewire) {
-        ignore_libs = true
-      }
-    }
-
-    pkg_config("gbm") {
-      packages = [ "gbm" ]
-    }
-    pkg_config("egl") {
-      packages = [ "egl" ]
-    }
-    pkg_config("epoxy") {
-      packages = [ "epoxy" ]
-      ignore_libs = true
-    }
-    pkg_config("libdrm") {
-      packages = [ "libdrm" ]
-      if (!rtc_link_pipewire) {
-        ignore_libs = true
-      }
-    }
-
-    if (!rtc_link_pipewire) {
-      # When libpipewire is not directly linked, use stubs to allow for dlopening of
-      # the binary.
-      generate_stubs("pipewire_stubs") {
-        configs = [
-          "../../:common_config",
-          ":pipewire",
-          ":libdrm",
-        ]
-        deps = [ "../../rtc_base" ]
-        extra_header = "linux/wayland/pipewire_stub_header.fragment"
-        logging_function = "RTC_LOG(LS_VERBOSE)"
-        logging_include = "rtc_base/logging.h"
-        output_name = "linux/wayland/pipewire_stubs"
-        path_from_source = "modules/desktop_capture/linux/wayland"
-        sigs = [
-          "linux/wayland/pipewire.sigs",
-          "linux/wayland/drm.sigs",
-        ]
-      }
-    }
-
     config("pipewire_config") {
-      defines = [ "WEBRTC_USE_PIPEWIRE" ]
-      if (!rtc_link_pipewire) {
-        defines += [ "WEBRTC_DLOPEN_PIPEWIRE" ]
-      }
-
-      # Chromecast build config overrides `WEBRTC_USE_PIPEWIRE` even when
-      # `rtc_use_pipewire` is not set, which causes pipewire_config to not be
-      # included in targets. More details in: webrtc:13898
-      if (is_linux && !is_chromecast) {
-        defines += [ "WEBRTC_USE_GIO" ]
-      }
+      configs = [ "../../common_video/linux:pipewire_config" ]
     }
   }
 }
@@ -604,7 +539,6 @@ rtc_library("desktop_capture_generic") {
       "linux/wayland/mouse_cursor_monitor_pipewire.cc",
       "linux/wayland/mouse_cursor_monitor_pipewire.h",
       "linux/wayland/portal_request_response.h",
-      "linux/wayland/scoped_glib.cc",
       "linux/wayland/scoped_glib.h",
       "linux/wayland/screen_capture_portal_interface.cc",
       "linux/wayland/screen_capture_portal_interface.h",
@@ -614,27 +548,25 @@ rtc_library("desktop_capture_generic") {
       "linux/wayland/screencast_stream_utils.h",
       "linux/wayland/shared_screencast_stream.cc",
       "linux/wayland/shared_screencast_stream.h",
-      "linux/wayland/xdg_desktop_portal_utils.cc",
       "linux/wayland/xdg_desktop_portal_utils.h",
       "linux/wayland/xdg_session_details.h",
     ]
 
     configs += [
-      ":gio",
-      ":pipewire",
-      ":gbm",
-      ":egl",
-      ":epoxy",
-      ":libdrm",
+      "../../common_video/linux:gio",
+      "../../common_video/linux:pipewire",
+      "../../common_video/linux:gbm",
+      "../../common_video/linux:egl",
+      "../../common_video/linux:epoxy",
+      "../../common_video/linux:libdrm",
     ]
 
-    if (!rtc_link_pipewire) {
-      deps += [ ":pipewire_stubs" ]
-    }
+    public_configs += [ "../../common_video/linux:pipewire_config" ]
 
-    public_configs += [ ":pipewire_config" ]
-
-    deps += [ "../../rtc_base:sanitizer" ]
+    deps += [
+      "../../common_video/linux",
+      "../../rtc_base:sanitizer",
+    ]
   }
 
   if (rtc_enable_win_wgc) {
