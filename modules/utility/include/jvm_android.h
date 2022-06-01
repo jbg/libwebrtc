@@ -177,6 +177,12 @@ class JVM {
   // TODO(henrika): can we make these private?
   JavaVM* jvm() const { return jvm_; }
 
+  jobject GetContext() const { return global_app_context_; }
+
+  void SetContext(jobject context) {
+    global_app_context_ = context;
+  }
+
  protected:
   JVM(JavaVM* jvm);
   ~JVM();
@@ -186,6 +192,7 @@ class JVM {
 
   SequenceChecker thread_checker_;
   JavaVM* const jvm_;
+  jobject global_app_context_;
 };
 
 }  // namespace webrtc
