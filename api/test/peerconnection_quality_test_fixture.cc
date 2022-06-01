@@ -105,6 +105,20 @@ PeerConnectionE2EQualityTestFixture::VideoSubscription::GetMaxResolution(
   return max_resolution;
 }
 
+std::string PeerConnectionE2EQualityTestFixture::VideoSubscription::ToString()
+    const {
+  std::string default_resolution_str = default_resolution_.has_value()
+                                           ? default_resolution_->ToString()
+                                           : "undefined";
+  rtc::StringBuilder out;
+  out << "{ default_resolution_=[" << default_resolution_str << "], {";
+  for (const auto& [peer_name, resolution] : peers_resolution_) {
+    out << "[" << peer_name << ": " << resolution.ToString() << "], ";
+  }
+  out << "} }";
+  return out.Release();
+}
+
 PeerConnectionE2EQualityTestFixture::VideoConfig::VideoConfig(
     const VideoResolution& resolution)
     : width(resolution.width()),
