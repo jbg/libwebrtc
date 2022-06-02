@@ -88,10 +88,22 @@ bool SimulcastUtility::IsConferenceModeScreenshare(const VideoCodec& codec) {
          codec.legacy_conference_mode;
 }
 
+int SimulcastUtility::Vp8NumberOfTemporalLayers(const VideoCodec& codec) {
+  RTC_DCHECK_EQ(codec.codecType, kVideoCodecVP8);
+
+  if (codec.GetScalabilityMode() == ScalabilityMode::kL1T2) {
+    return 2;
+  } else if (codec.GetScalabilityMode() == ScalabilityMode::kL1T3) {
+    return 3;
+  } else {
+    // TODO(bugs.webrtc.org/11607): Fail in some way for unsupported modes.
+    return 1;
+  }
+}
+
 int SimulcastUtility::NumberOfTemporalLayers(const VideoCodec& codec,
                                              int spatial_id) {
-  uint8_t num_temporal_layers =
-      std::max<uint8_t>(1, codec.VP8().numberOfTemporalLayers);
+  uint8_t num_temporal_layers = Vp8NumberOfTemporalLayers(codec);
   if (codec.numberOfSimulcastStreams > 0) {
     RTC_DCHECK_LT(spatial_id, codec.numberOfSimulcastStreams);
     num_temporal_layers =

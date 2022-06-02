@@ -588,11 +588,10 @@ void SimulcastTestFixtureImpl::SwitchingToOneStream(int width, int height) {
   const int* temporal_layer_profile = nullptr;
   // Disable all streams except the last and set the bitrate of the last to
   // 100 kbps. This verifies the way GTP switches to screenshare mode.
+  settings_.SetScalabilityMode(ScalabilityMode::kL1T1);
   if (codec_type_ == kVideoCodecVP8) {
-    settings_.VP8()->numberOfTemporalLayers = 1;
     temporal_layer_profile = kDefaultTemporalLayerProfile;
   } else {
-    settings_.H264()->numberOfTemporalLayers = 1;
     temporal_layer_profile = kNoTemporalLayerProfile;
   }
   settings_.maxBitrate = 100;

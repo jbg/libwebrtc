@@ -23,6 +23,7 @@ class SimulcastUtility {
   static int NumberOfSimulcastStreams(const VideoCodec& codec);
   static bool ValidSimulcastParameters(const VideoCodec& codec,
                                        int num_streams);
+  static int Vp8NumberOfTemporalLayers(const VideoCodec& codec);
   static int NumberOfTemporalLayers(const VideoCodec& codec, int spatial_id);
   // TODO(sprang): Remove this hack when ScreenshareLayers is gone.
   static bool IsConferenceModeScreenshare(const VideoCodec& codec);
