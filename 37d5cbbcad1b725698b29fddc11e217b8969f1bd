@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04e1dfb9_0112bf64",
+        "filename": "api/test/peerconnection_quality_test_fixture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-06-02T07:00:40Z",
+      "side": 1,
+      "message": "Why not:\n\n```\nif (default_resolution_.has_value()) {\n  out \u003c\u003c default_resolution_-\u003eToString();\n} else {\n  out \u003c\u003c \"undefined\";\n}\n```",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 57
+      },
+      "revId": "37d5cbbcad1b725698b29fddc11e217b8969f1bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
