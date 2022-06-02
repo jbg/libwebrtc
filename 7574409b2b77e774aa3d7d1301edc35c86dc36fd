@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce568979_1a786b35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-02T20:02:37Z",
+      "side": 1,
+      "message": "Overall looks good with a couple of comments.\n\nIt would be better if the token could be passed to/from the caller instead of being stored in a singleton.  Singletons in a library like this create headaches because they will leak memory if WebRTC is loaded and unloaded as a shared object from the calling application.\n\nThe current design, however, does not allow the same Wayland capturer object to be used both for interaction with the portal, and for creating the capturer, so we need to stash the token somewhere inside WebRTC.  What is the possibility of passing the token back and forth in the future?",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac16199e_4854c955",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-02T20:02:37Z",
+      "side": 1,
+      "message": "Update this logging message? The failure looks like it happened when starting the capturer, not interacting with the portal.",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e32fc834_ef75562d",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-02T20:02:37Z",
+      "side": 1,
+      "message": "Should RestoreToken() be added to ScreenCapturePortalInterface?  Then you don\u0027t need to cast the portal_ instance here.",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f525197d_8059fc23",
+        "filename": "modules/desktop_capture/linux/wayland/restore_token_manager.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-02T20:02:37Z",
+      "side": 1,
+      "message": "Prefer to return a reference here.",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
