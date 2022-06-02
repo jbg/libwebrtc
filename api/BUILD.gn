@@ -869,6 +869,7 @@ if (rtc_include_tests) {
       "../modules/video_coding:video_codec_interface",
       "../rtc_base:stringutils",
       "video:video_frame_type",
+      "video_codecs:scalability_mode",
       "video_codecs:video_codecs_api",
     ]
   }

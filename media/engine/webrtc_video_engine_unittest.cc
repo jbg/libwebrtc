@@ -3663,10 +3663,7 @@ TEST_F(Vp9SettingsTest, MultipleSsrcsEnablesSvc) {
   ASSERT_TRUE(stream->GetVp9Settings(&vp9_settings)) << "No VP9 config set.";
 
   const size_t kNumSpatialLayers = ssrcs.size();
-  const size_t kNumTemporalLayers = 3;
   EXPECT_EQ(vp9_settings.numberOfSpatialLayers, kNumSpatialLayers);
-  EXPECT_EQ(vp9_settings.numberOfTemporalLayers, kNumTemporalLayers);
-
   EXPECT_TRUE(channel_->SetVideoSend(ssrcs[0], nullptr, nullptr));
 }
 
@@ -3761,7 +3758,9 @@ class Vp9SettingsTestWithFieldTrial
     webrtc::VideoCodecVP9 vp9_settings;
     ASSERT_TRUE(stream->GetVp9Settings(&vp9_settings)) << "No VP9 config set.";
     EXPECT_EQ(num_spatial_layers, vp9_settings.numberOfSpatialLayers);
+#if 0
     EXPECT_EQ(num_temporal_layers, vp9_settings.numberOfTemporalLayers);
+#endif
     EXPECT_EQ(inter_layer_pred_mode_, vp9_settings.interLayerPred);
 
     EXPECT_TRUE(channel_->SetVideoSend(last_ssrc_, nullptr, nullptr));

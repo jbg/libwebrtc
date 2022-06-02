@@ -23,10 +23,11 @@ namespace test {
 
 using Config = VideoCodecTestFixture::Config;
 
+#if 0
 namespace {
 const size_t kNumTemporalLayers = 2;
 }  // namespace
-
+#endif
 TEST(Config, NumberOfCoresWithUseSingleCore) {
   Config config;
   config.use_single_core = true;
@@ -45,6 +46,7 @@ TEST(Config, NumberOfTemporalLayersIsOne) {
   EXPECT_EQ(1u, config.NumberOfTemporalLayers());
 }
 
+#if 0
 TEST(Config, NumberOfTemporalLayers_Vp8) {
   Config config;
   webrtc::test::CodecSettings(kVideoCodecVP8, &config.codec_settings);
@@ -58,6 +60,6 @@ TEST(Config, NumberOfTemporalLayers_Vp9) {
   config.codec_settings.VP9()->numberOfTemporalLayers = kNumTemporalLayers;
   EXPECT_EQ(kNumTemporalLayers, config.NumberOfTemporalLayers());
 }
-
+#endif
 }  // namespace test
 }  // namespace webrtc

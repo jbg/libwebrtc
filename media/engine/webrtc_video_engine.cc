@@ -532,12 +532,13 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ConfigureVideoEncoderSettings(
 
     vp9_settings.numberOfSpatialLayers = std::min<unsigned char>(
         parameters_.config.rtp.ssrcs.size(), kConferenceMaxNumSpatialLayers);
+#if 0
     vp9_settings.numberOfTemporalLayers =
         std::min<unsigned char>(parameters_.config.rtp.ssrcs.size() > 1
                                     ? kConferenceDefaultNumTemporalLayers
                                     : 1,
                                 kConferenceMaxNumTemporalLayers);
-
+#endif
     // VP9 denoising is disabled by default.
     vp9_settings.denoisingOn = codec_default_denoising ? true : denoising;
     // Disable automatic resize if more than one spatial layer is requested.
@@ -3625,7 +3626,9 @@ EncoderStreamFactory::CreateDefaultVideoStreams(
     // though field trial in ConfigureVideoEncoderSettings.
     webrtc::VideoCodecVP9 vp9_settings;
     encoder_config.encoder_specific_settings->FillVideoCodecVp9(&vp9_settings);
+#if 0
     layer.num_temporal_layers = vp9_settings.numberOfTemporalLayers;
+#endif
   }
 
   if (IsTemporalLayersSupported(codec_name_)) {

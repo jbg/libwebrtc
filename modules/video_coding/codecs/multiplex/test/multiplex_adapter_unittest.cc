@@ -76,7 +76,7 @@ class TestMultiplexAdapter : public VideoCodecUnitTest,
 
   void ModifyCodecSettings(VideoCodec* codec_settings) override {
     webrtc::test::CodecSettings(kMultiplexAssociatedCodecType, codec_settings);
-    codec_settings->VP9()->numberOfTemporalLayers = 1;
+    codec_settings->SetScalabilityMode(ScalabilityMode::kL1T1);
     codec_settings->VP9()->numberOfSpatialLayers = 1;
     codec_settings->codecType = webrtc::kVideoCodecMultiplex;
   }
