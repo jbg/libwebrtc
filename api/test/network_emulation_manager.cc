@@ -14,6 +14,31 @@
 
 namespace webrtc {
 
+bool AbslParseFlag(absl::string_view text, TimeMode* mode, std::string* error) {
+  if (text == "realtime") {
+    *mode = TimeMode::kRealTime;
+    return true;
+  }
+  if (text == "simulated") {
+    *mode = TimeMode::kSimulated;
+    return true;
+  }
+  *error =
+      "Unknown value for TimeMode enum. Options are 'realtime' or 'simulated'";
+  return false;
+}
+
+std::string AbslUnparseFlag(TimeMode mode) {
+  switch (mode) {
+    case TimeMode::kRealTime:
+      return "realtime";
+    case TimeMode::kSimulated:
+      return "simulated";
+  }
+  RTC_CHECK_NOTREACHED();
+  return "unknown";
+}
+
 NetworkEmulationManager::SimulatedNetworkNode::Builder&
 NetworkEmulationManager::SimulatedNetworkNode::Builder::config(
     BuiltInNetworkBehaviorConfig config) {
