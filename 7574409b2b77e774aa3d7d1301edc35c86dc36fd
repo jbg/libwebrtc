@@ -18,6 +18,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83a818ec_7b0df9ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-06-02T20:07:41Z",
+      "side": 1,
+      "message": "I think we\u0027d need to modify the WebRTC Source type to allow this and then Chrome code to forward it around; and finally the DesktopCapturer \"SelectSource\" type would probably need to take something more complex than the SourceId. (The token is a string type and I think we cannot just typedef \"SourceId\" to string for Wayland and have it just work.)",
+      "parentUuid": "ce568979_1a786b35",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2be7a117_aede2275",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-06-02T20:07:41Z",
+      "side": 1,
+      "message": "LGTM with Mark\u0027s comments addressed.",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac16199e_4854c955",
