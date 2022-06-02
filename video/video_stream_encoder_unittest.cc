@@ -4808,7 +4808,9 @@ TEST_F(VideoStreamEncoderTest,
       VideoEncoderConfig::ContentType::kRealtimeVideo;
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 2;
+#if 0
   vp9_settings.numberOfTemporalLayers = 2;
+#endif
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
   vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
@@ -4861,7 +4863,9 @@ TEST_F(VideoStreamEncoderTest,
       VideoEncoderConfig::ContentType::kRealtimeVideo;
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 2;
+#if 0
   vp9_settings.numberOfTemporalLayers = 2;
+#endif
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
   vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
@@ -4907,7 +4911,9 @@ TEST_F(VideoStreamEncoderTest,
       VideoEncoderConfig::ContentType::kRealtimeVideo;
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 2;
+#if 0
   vp9_settings.numberOfTemporalLayers = 2;
+#endif
   vp9_settings.interLayerPred = InterLayerPredMode::kOnKeyPic;
   vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
@@ -4953,7 +4959,9 @@ TEST_F(VideoStreamEncoderTest,
       VideoEncoderConfig::ContentType::kRealtimeVideo;
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 3;
+#if 0
   vp9_settings.numberOfTemporalLayers = 2;
+#endif
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
   vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
@@ -5010,7 +5018,6 @@ TEST_F(VideoStreamEncoderTest,
       VideoEncoderConfig::ContentType::kRealtimeVideo;
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 3;
-  vp9_settings.numberOfTemporalLayers = 2;
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
   vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
@@ -5018,7 +5025,14 @@ TEST_F(VideoStreamEncoderTest,
           vp9_settings);
   // Simulcast layers are used for enabling/disabling streams.
   video_encoder_config.simulcast_layers.resize(3);
+  video_encoder_config.simulcast_layers[0].scalability_mode =
+      ScalabilityMode::kL3T2;
+  video_encoder_config.simulcast_layers[1].scalability_mode =
+      ScalabilityMode::kL3T2;
+  video_encoder_config.simulcast_layers[2].scalability_mode =
+      ScalabilityMode::kL3T2;
   video_encoder_config.simulcast_layers[2].active = false;
+
   ConfigureEncoder(std::move(video_encoder_config),
                    VideoStreamEncoder::BitrateAllocationCallbackType::
                        kVideoLayersAllocation);
@@ -5060,7 +5074,6 @@ TEST_F(VideoStreamEncoderTest,
       VideoEncoderConfig::ContentType::kRealtimeVideo;
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 3;
-  vp9_settings.numberOfTemporalLayers = 2;
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
   vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
@@ -5068,6 +5081,12 @@ TEST_F(VideoStreamEncoderTest,
           vp9_settings);
   // Simulcast layers are used for enabling/disabling streams.
   video_encoder_config.simulcast_layers.resize(3);
+  video_encoder_config.simulcast_layers[0].scalability_mode =
+      ScalabilityMode::kL3T2;
+  video_encoder_config.simulcast_layers[1].scalability_mode =
+      ScalabilityMode::kL3T2;
+  video_encoder_config.simulcast_layers[2].scalability_mode =
+      ScalabilityMode::kL3T2;
   video_encoder_config.simulcast_layers[0].active = false;
   video_encoder_config.simulcast_layers[1].active = false;
   video_encoder_config.simulcast_layers[2].active = true;
@@ -8749,7 +8768,6 @@ TEST_P(VideoStreamEncoderWithRealEncoderTest, HandlesLayerToggling) {
     config.max_bitrate_bps = kSimulcastTargetBitrate.bps();
     VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
     vp9_settings.numberOfSpatialLayers = kNumSpatialLayers;
-    vp9_settings.numberOfTemporalLayers = 3;
     vp9_settings.automaticResizeOn = false;
     config.encoder_specific_settings =
         rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
@@ -8976,8 +8994,8 @@ class ReconfigureEncoderTest : public VideoStreamEncoderTest {
               kWidth / expected.scale_resolution_down_by);
     EXPECT_EQ(actual.simulcastStream[0].height,
               kHeight / expected.scale_resolution_down_by);
-    EXPECT_EQ(actual.simulcastStream[0].numberOfTemporalLayers,
-              expected.num_temporal_layers);
+    EXPECT_EQ(actual.simulcastStream[0].scalability_mode,
+              expected.scalability_mode.value_or(ScalabilityMode::kL1T1));
     EXPECT_EQ(actual.GetScalabilityMode(), expected.scalability_mode);
   }
 

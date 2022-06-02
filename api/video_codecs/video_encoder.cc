@@ -23,7 +23,6 @@ VideoCodecVP8 VideoEncoder::GetDefaultVp8Settings() {
   VideoCodecVP8 vp8_settings;
   memset(&vp8_settings, 0, sizeof(vp8_settings));
 
-  vp8_settings.numberOfTemporalLayers = 1;
   vp8_settings.denoisingOn = true;
   vp8_settings.automaticResizeOn = false;
   vp8_settings.keyFrameInterval = 3000;
@@ -35,7 +34,6 @@ VideoCodecVP9 VideoEncoder::GetDefaultVp9Settings() {
   VideoCodecVP9 vp9_settings;
   memset(&vp9_settings, 0, sizeof(vp9_settings));
 
-  vp9_settings.numberOfTemporalLayers = 1;
   vp9_settings.denoisingOn = true;
   vp9_settings.keyFrameInterval = 3000;
   vp9_settings.adaptiveQpMode = true;
@@ -52,7 +50,6 @@ VideoCodecH264 VideoEncoder::GetDefaultH264Settings() {
   memset(&h264_settings, 0, sizeof(h264_settings));
 
   h264_settings.keyFrameInterval = 3000;
-  h264_settings.numberOfTemporalLayers = 1;
 
   return h264_settings;
 }

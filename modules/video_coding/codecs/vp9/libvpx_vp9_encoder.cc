@@ -82,12 +82,10 @@ std::pair<size_t, size_t> GetActiveLayers(
 std::unique_ptr<ScalableVideoController> CreateVp9ScalabilityStructure(
     const VideoCodec& codec) {
   int num_spatial_layers = codec.VP9().numberOfSpatialLayers;
-  int num_temporal_layers =
-      std::max(1, int{codec.VP9().numberOfTemporalLayers});
-  if (num_spatial_layers == 1 && num_temporal_layers == 1) {
+  if (num_spatial_layers == 1) {
     return std::make_unique<ScalableVideoControllerNoLayering>();
   }
-
+  int num_temporal_layers = 1;
   char name[20];
   rtc::SimpleStringBuilder ss(name);
   if (codec.mode == VideoCodecMode::kScreensharing) {
@@ -538,9 +536,7 @@ int LibvpxVp9Encoder::InitEncode(const VideoCodec* inst,
   if (settings.number_of_cores < 1) {
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
   }
-  if (inst->VP9().numberOfTemporalLayers > 3) {
-    return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
-  }
+
   // libvpx probably does not support more than 3 spatial layers.
   if (inst->VP9().numberOfSpatialLayers > 3) {
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
@@ -588,10 +584,10 @@ int LibvpxVp9Encoder::InitEncode(const VideoCodec* inst,
   } else {
     num_spatial_layers_ = inst->VP9().numberOfSpatialLayers;
     RTC_DCHECK_GT(num_spatial_layers_, 0);
-    num_temporal_layers_ = inst->VP9().numberOfTemporalLayers;
-    if (num_temporal_layers_ == 0) {
-      num_temporal_layers_ = 1;
-    }
+    num_temporal_layers_ = ScalabilityModeToNumTemporalLayers(
+        inst->GetScalabilityMode().value_or(ScalabilityMode::kL1T1));
+    RTC_DCHECK_GT(num_temporal_layers_, 0);
+    RTC_DCHECK_LE(num_temporal_layers_, 3);
     inter_layer_pred_ = inst->VP9().interLayerPred;
     svc_controller_ = CreateVp9ScalabilityStructure(*inst);
   }

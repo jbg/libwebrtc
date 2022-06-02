@@ -19,6 +19,7 @@
 #include "modules/video_coding/codecs/interface/common_constants.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/include/video_error_codes.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "modules/video_coding/utility/simulcast_utility.h"
 
 namespace {
@@ -114,8 +115,8 @@ VideoEncoder::EncoderInfo FakeVp8Encoder::GetEncoderInfo() const {
   info.implementation_name = "FakeVp8Encoder";
   MutexLock lock(&mutex_);
   for (int sid = 0; sid < config_.numberOfSimulcastStreams; ++sid) {
-    int number_of_temporal_layers =
-        config_.simulcastStream[sid].numberOfTemporalLayers;
+    int number_of_temporal_layers = ScalabilityModeToNumTemporalLayers(
+        config_.simulcastStream[sid].scalability_mode);
     info.fps_allocation[sid].clear();
     for (int tid = 0; tid < number_of_temporal_layers; ++tid) {
       // {1/4, 1/2, 1} allocation for num layers = 3.

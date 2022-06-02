@@ -75,7 +75,9 @@ VideoCodec DefaultCodecSettings() {
   webrtc::test::CodecSettings(kVideoCodecVP9, &codec_settings);
   codec_settings.width = kWidth;
   codec_settings.height = kHeight;
+#if 0
   codec_settings.VP9()->numberOfTemporalLayers = 1;
+#endif
   codec_settings.VP9()->numberOfSpatialLayers = 1;
   return codec_settings;
 }
@@ -84,7 +86,9 @@ void ConfigureSvc(VideoCodec& codec_settings,
                   int num_spatial_layers,
                   int num_temporal_layers = 1) {
   codec_settings.VP9()->numberOfSpatialLayers = num_spatial_layers;
+#if 0
   codec_settings.VP9()->numberOfTemporalLayers = num_temporal_layers;
+#endif
   codec_settings.SetFrameDropEnabled(false);
 
   std::vector<SpatialLayer> layers = GetSvcConfig(
@@ -111,7 +115,9 @@ class TestVp9Impl : public VideoCodecUnitTest {
     webrtc::test::CodecSettings(kVideoCodecVP9, codec_settings);
     codec_settings->width = kWidth;
     codec_settings->height = kHeight;
+#if 0
     codec_settings->VP9()->numberOfTemporalLayers = 1;
+#endif
     codec_settings->VP9()->numberOfSpatialLayers = 1;
   }
 };
@@ -279,7 +285,9 @@ TEST(Vp9ImplTest, EncodeAttachesTemplateStructureWithSvcController) {
 TEST(Vp9ImplTest, EncoderWith2TemporalLayers) {
   std::unique_ptr<VideoEncoder> encoder = VP9Encoder::Create();
   VideoCodec codec_settings = DefaultCodecSettings();
+#if 0
   codec_settings.VP9()->numberOfTemporalLayers = 2;
+#endif
   // Tl0PidIdx is only used in non-flexible mode.
   codec_settings.VP9()->flexibleMode = false;
   EXPECT_EQ(encoder->InitEncode(&codec_settings, kSettings),
@@ -301,7 +309,9 @@ TEST(Vp9ImplTest, EncoderWith2TemporalLayers) {
 TEST(Vp9ImplTest, EncodeTemporalLayersWithSvcController) {
   std::unique_ptr<VideoEncoder> encoder = VP9Encoder::Create();
   VideoCodec codec_settings = DefaultCodecSettings();
+#if 0
   codec_settings.VP9()->numberOfTemporalLayers = 2;
+#endif
   EXPECT_EQ(encoder->InitEncode(&codec_settings, kSettings),
             WEBRTC_VIDEO_CODEC_OK);
 
@@ -376,7 +386,9 @@ TEST(Vp9ImplTest, EncodeSpatialLayersWithSvcController) {
 
 TEST_F(TestVp9Impl, EncoderExplicitLayering) {
   // Override default settings.
+#if 0
   codec_settings_.VP9()->numberOfTemporalLayers = 1;
+#endif
   codec_settings_.VP9()->numberOfSpatialLayers = 2;
 
   codec_settings_.width = 960;
@@ -1730,12 +1742,14 @@ TEST_F(TestVp9Impl, EncoderInfoWithBitrateLimitsFromFieldTrial) {
 
 TEST_F(TestVp9Impl, EncoderInfoFpsAllocation) {
   const uint8_t kNumSpatialLayers = 3;
+#if 0
   const uint8_t kNumTemporalLayers = 3;
-
+#endif
   codec_settings_.maxFramerate = 30;
   codec_settings_.VP9()->numberOfSpatialLayers = kNumSpatialLayers;
+#if 0
   codec_settings_.VP9()->numberOfTemporalLayers = kNumTemporalLayers;
-
+#endif
   for (uint8_t sl_idx = 0; sl_idx < kNumSpatialLayers; ++sl_idx) {
     codec_settings_.spatialLayers[sl_idx].width = codec_settings_.width;
     codec_settings_.spatialLayers[sl_idx].height = codec_settings_.height;
@@ -1768,7 +1782,9 @@ TEST_F(TestVp9Impl, EncoderInfoFpsAllocationFlexibleMode) {
 
   codec_settings_.maxFramerate = 30;
   codec_settings_.VP9()->numberOfSpatialLayers = kNumSpatialLayers;
+#if 0
   codec_settings_.VP9()->numberOfTemporalLayers = 1;
+#endif
   codec_settings_.VP9()->flexibleMode = true;
 
   VideoEncoder::RateControlParameters rate_params;
@@ -1841,7 +1857,9 @@ TEST_P(Vp9ImplWithLayeringTest, FlexibleMode) {
   codec_settings.VP9()->flexibleMode = true;
   codec_settings.SetFrameDropEnabled(false);
   codec_settings.VP9()->numberOfSpatialLayers = num_spatial_layers_;
+#if 0
   codec_settings.VP9()->numberOfTemporalLayers = num_temporal_layers_;
+#endif
   EXPECT_EQ(encoder->InitEncode(&codec_settings, kSettings),
             WEBRTC_VIDEO_CODEC_OK);
 
@@ -2090,7 +2108,9 @@ TEST_F(TestVp9Impl, ReenablingUpperLayerAfterKFWithInterlayerPredIsEnabled) {
   codec_settings_.VP9()->flexibleMode = true;
   codec_settings_.SetFrameDropEnabled(false);
   codec_settings_.VP9()->numberOfSpatialLayers = num_spatial_layers;
+#if 0
   codec_settings_.VP9()->numberOfTemporalLayers = 1;
+#endif
   codec_settings_.VP9()->interLayerPred = InterLayerPredMode::kOn;
   // Force low frame-rate, so all layers are present for all frames.
   codec_settings_.maxFramerate = 5;
