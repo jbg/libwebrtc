@@ -20,6 +20,7 @@
 #include <tuple>
 #include <vector>
 
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/experiments/rate_control_settings.h"
 #include "system_wrappers/include/field_trial.h"
@@ -329,11 +330,15 @@ const VideoCodec& webrtc::SimulcastRateAllocator::GetCodec() const {
 }
 
 int SimulcastRateAllocator::NumTemporalStreams(size_t simulcast_id) const {
-  return std::max<uint8_t>(
-      1,
-      codec_.codecType == kVideoCodecVP8 && codec_.numberOfSimulcastStreams == 0
-          ? codec_.VP8().numberOfTemporalLayers
-          : codec_.simulcastStream[simulcast_id].numberOfTemporalLayers);
+  if (codec_.numberOfSimulcastStreams == 0) {
+    return ScalabilityModeToNumTemporalLayers(
+        codec_.GetScalabilityMode().value_or(ScalabilityMode::kL1T1));
+  }
+  RTC_DCHECK_LT(simulcast_id, codec_.numberOfSimulcastStreams);
+  return std::max<int>(
+      codec_.simulcastStream[simulcast_id].numberOfTemporalLayers,
+      ScalabilityModeToNumTemporalLayers(
+          codec_.simulcastStream[simulcast_id].scalability_mode));
 }
 
 void SimulcastRateAllocator::SetLegacyConferenceMode(bool enabled) {
