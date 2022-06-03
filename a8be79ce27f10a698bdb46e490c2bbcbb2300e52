@@ -34,6 +34,24 @@
       "parentUuid": "7603654f_d133e373",
       "revId": "a8be79ce27f10a698bdb46e490c2bbcbb2300e52",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d94c67a_ab88575f",
+        "filename": "p2p/base/fake_port_allocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-06-03T14:20:24Z",
+      "side": 0,
+      "message": "The constructor of the port requires a network thread, a PacketSocketFactory, etc.\n\nWe could make PortInterface a little more useful, but since Port/PortInterface has a lot of interfaces to implement, I think it\u0027s better to use the existing implementation.",
+      "parentUuid": "aae105a6_4954ae54",
+      "revId": "a8be79ce27f10a698bdb46e490c2bbcbb2300e52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
