@@ -192,6 +192,23 @@
       "parentUuid": "cfa8af2b_8e89bdfe",
       "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13b80707_3be7b8c7",
+        "filename": "common_video/linux/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-03T23:55:16Z",
+      "side": 1,
+      "message": "This should only be linked when is_linux is true.  Can you remove is_chromeos here and assert(is_linux)?\n\nSee the comments here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/webrtc.gni;drc\u003d49850c328cd4ba9c0ddeb0e8763bf13718188433;l\u003d134\n\nWe should go through and remove references to is_chromeos from the remainder of the desktop_capture module.  I filed https://crbug.com/1332905.",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

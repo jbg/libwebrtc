@@ -34,6 +34,108 @@
       "parentUuid": "f753fadc_d01ba2c0",
       "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d36cd98c_f9b1d4dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-03T23:55:16Z",
+      "side": 1,
+      "message": "Thanks for doing this, it looks good but did have feedback on some of the BUILD file changes.",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41652db_d0cec98f",
+        "filename": "common_video/linux/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-03T23:55:16Z",
+      "side": 1,
+      "message": "None of the source code here can compile without pipewire.  Please assert(rtc_use_pipewire) and adjust downstream dependencies appropriately.\n\nCan this BUILD.gn go into common_video/linux/portal since that is where the source files actually live?",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8550d807_b214e3cf",
+        "filename": "common_video/linux/portal/pipewire_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-03T23:55:16Z",
+      "side": 1,
+      "message": "This appears to already be defined in the generated pipewire stubs, can you check that there is no possible conflict?",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e544cafa_516ca301",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-03T23:55:16Z",
+      "side": 1,
+      "message": "TODO(crbug.com/1332905): Remove is_chromeos",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16aa8c28_eec923f6",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-03T23:55:16Z",
+      "side": 1,
+      "message": "Is this still used?  If so, can those places be updated to use the new config location in common_video?",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7307baf4_a758ae06",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-03T23:55:16Z",
+      "side": 1,
+      "message": "Can you declare one config in the other BUILD.gn that includes all of these?",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
