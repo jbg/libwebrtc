@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7603654f_d133e373",
+        "filename": "p2p/base/fake_port_allocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-03T13:09:36Z",
+      "side": 0,
+      "message": "If we stopped supporting the \"injected network thread and no factory\" use case, we could write the replacement more simply as\n\nRTC_CHECK(factory || !network_thread) \u003c\u003c \"Must give factory when giving network thread\";\nfactory_ \u003d AlwaysValidPointer\u003crtc::PacketSocketFactory, BasicPacketSocketFactory\u003e(factory, nullptr)\n\n(second argument to initializer is the initializer list for the one-argument constructor of BasicPacketSocketFactory).\n\nNisse, are there any of the downstream usages that would fail?",
+      "revId": "a8be79ce27f10a698bdb46e490c2bbcbb2300e52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

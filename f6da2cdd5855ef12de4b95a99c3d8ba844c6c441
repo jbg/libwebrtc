@@ -34,6 +34,57 @@
       "parentUuid": "2de85d2a_43d60b23",
       "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ac282b_b04a161c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-03T13:09:36Z",
+      "side": 1,
+      "message": "I think it could be simpler and support more cases...\n\n",
+      "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e769919_9289efa1",
+        "filename": "p2p/base/fake_port_allocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-03T13:09:36Z",
+      "side": 1,
+      "message": "Since an AlwaysValidPointer is movable, you can write the hidden constructor to take an AlwaysValidPointerNoDefault argument and do the initialization here. I think that\u0027s slightly more readable, and will cause the CHECK to happen one layer further up the stack.",
+      "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63712087_0c674e14",
+        "filename": "p2p/base/fake_port_allocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-03T13:09:36Z",
+      "side": 1,
+      "message": "This will cause a CHECK if there is no factory. I take it that\u0027s intentional.",
+      "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
