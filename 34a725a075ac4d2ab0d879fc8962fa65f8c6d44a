@@ -33,6 +33,24 @@
       "message": "If you the token API is specific to the ScreenCastPortal interface, then it would make more sense for this to be held as std::unique_ptr\u003cScreenCastPortal\u003e.",
       "revId": "34a725a075ac4d2ab0d879fc8962fa65f8c6d44a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efb5caaf_1bd182c0",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-06-03T17:57:19Z",
+      "side": 1,
+      "message": "I think the thing is that the RemoteDesktop code (outside of WebRTC) also uses this code; so won\u0027t always have the portal as a ScreenCastPortal explicitly.",
+      "parentUuid": "1194718b_5fcb7890",
+      "revId": "34a725a075ac4d2ab0d879fc8962fa65f8c6d44a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
