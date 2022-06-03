@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a28d4b0_b46c531a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-06-03T06:26:40Z",
+      "side": 1,
+      "message": "The thing is:\n1) Even though I care mostly about Firefox (where this is not necessary) and Chrome, I\u0027m trying to make it work with current WebRTC API the way it will automatically work for any other consumer, not just only Chrome.\n2) The thing that all portal calls are asynchronous make it more complicated, because at the time we return a `SourceId` from `GetSourceList()` we still don\u0027t have the restore token so we would need to either make it blocking or make it blocking/async in Chrome so it requests `SourceList` only when we are ready.",
+      "parentUuid": "83a818ec_7b0df9ca",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac16199e_4854c955",
@@ -66,6 +84,24 @@
       "writtenOn": "2022-06-02T20:02:37Z",
       "side": 1,
       "message": "Update this logging message? The failure looks like it happened when starting the capturer, not interacting with the portal.",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60827989_9a649dc0",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-06-03T06:26:40Z",
+      "side": 1,
+      "message": "The condition checks both the response from the portal and the result from starting the stream. Maybe we can make them separate and add logging message for both separately, but this is not related to this change and hasn\u0027t changed in this change.",
+      "parentUuid": "ac16199e_4854c955",
       "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -87,6 +123,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7e93bb2_7a8c261a",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-06-03T06:26:40Z",
+      "side": 1,
+      "message": "I was thinking about it, but it would make more sense in case it can be also used by the RemoteDesktop portal, since the ScreenCapturePortalInterface is base for both. Adding new stuff to the base that is specific only to one of the portals doesn\u0027t make sense to me, but I\u0027ll move it there if you want me to.",
+      "parentUuid": "e32fc834_ef75562d",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f525197d_8059fc23",
@@ -100,6 +154,24 @@
       "writtenOn": "2022-06-02T20:02:37Z",
       "side": 1,
       "message": "Prefer to return a reference here.",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da8ffb03_7cb7c6ca",
+        "filename": "modules/desktop_capture/linux/wayland/restore_token_manager.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-06-03T06:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f525197d_8059fc23",
       "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
