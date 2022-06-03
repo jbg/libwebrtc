@@ -53,6 +53,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86849f71_65ae4cab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-03T14:28:09Z",
+      "side": 1,
+      "message": "Adding Jonas as CC to discuss about whether AlwaysValidPointer is movable.\n",
+      "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e769919_9289efa1",
@@ -84,6 +101,24 @@
       "side": 1,
       "message": "I don\u0027t think they are movable because there is no move ctor / assignment operator. Also, being a movable object means that the class must allow an empty state, which I think goes against the purpose of this class.\nI agree that current constructor calls are a bit confusing. I\u0027ll add the function parameter names along with the comments.",
       "parentUuid": "4e769919_9289efa1",
+      "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef9d00e_6906ac3e",
+        "filename": "p2p/base/fake_port_allocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-03T14:28:09Z",
+      "side": 1,
+      "message": "I think it\u0027s movable because the move ctor has not been deleted, and all its components are movable. See https://en.cppreference.com/w/cpp/language/move_constructor\n\nJonas, does it make sense to explicitly delete the move constructor, given the concerns about the result being an invalid AlwaysValidPointer?",
+      "parentUuid": "e426879e_8630dd17",
       "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
