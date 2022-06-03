@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96116508_0021266e",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-03T17:16:07Z",
+      "side": 1,
+      "message": "Should this function even attempt to call StartScreenCastStream() if is_screencast_portal_ is true?  Maybe the is_screencast_portal_ check should happen first.",
+      "parentUuid": "60827989_9a649dc0",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e32fc834_ef75562d",
         "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
         "patchSetId": 3

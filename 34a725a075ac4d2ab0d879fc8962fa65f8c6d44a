@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46fc7920_b09fcef9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-03T17:16:07Z",
+      "side": 1,
+      "message": "I do think ultimately we want the caller to keep track of any permissions-bearing tokens since the caller is in charge of the UI flow for requesting permissions and starting capture.  It knows when the token should be generated, consumed, and/or discarded. However the WebRTC APIs are very limiting in giving us that flexibility, so the flow we want will likely have to wait until we undertake a bigger effort to iterate on them.\n\nThere are a couple of other things I noted to look at.\n",
+      "revId": "34a725a075ac4d2ab0d879fc8962fa65f8c6d44a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1194718b_5fcb7890",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-03T17:16:07Z",
+      "side": 1,
+      "message": "If you the token API is specific to the ScreenCastPortal interface, then it would make more sense for this to be held as std::unique_ptr\u003cScreenCastPortal\u003e.",
+      "revId": "34a725a075ac4d2ab0d879fc8962fa65f8c6d44a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
