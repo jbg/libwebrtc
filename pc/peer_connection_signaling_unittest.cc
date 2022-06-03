@@ -133,6 +133,7 @@ class PeerConnectionSignalingBaseTest : public ::testing::Test {
 #endif
     pc_factory_ = CreatePeerConnectionFactory(
         rtc::Thread::Current(), rtc::Thread::Current(), rtc::Thread::Current(),
+        vss_.get(),
         rtc::scoped_refptr<AudioDeviceModule>(FakeAudioCaptureModule::Create()),
         CreateBuiltinAudioEncoderFactory(), CreateBuiltinAudioDecoderFactory(),
         CreateBuiltinVideoEncoderFactory(), CreateBuiltinVideoDecoderFactory(),

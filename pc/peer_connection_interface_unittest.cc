@@ -671,6 +671,7 @@ class PeerConnectionInterfaceBaseTest : public ::testing::Test {
     fake_audio_capture_module_ = FakeAudioCaptureModule::Create();
     pc_factory_ = webrtc::CreatePeerConnectionFactory(
         rtc::Thread::Current(), rtc::Thread::Current(), rtc::Thread::Current(),
+        vss_.get(),
         rtc::scoped_refptr<webrtc::AudioDeviceModule>(
             fake_audio_capture_module_),
         webrtc::CreateBuiltinAudioEncoderFactory(),
@@ -1386,7 +1387,7 @@ TEST_P(PeerConnectionInterfaceTest,
   rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> pc_factory(
       webrtc::CreatePeerConnectionFactory(
           rtc::Thread::Current(), rtc::Thread::Current(),
-          rtc::Thread::Current(), fake_audio_capture_module_,
+          rtc::Thread::Current(), socket_server(), fake_audio_capture_module_,
           webrtc::CreateBuiltinAudioEncoderFactory(),
           webrtc::CreateBuiltinAudioDecoderFactory(),
           webrtc::CreateBuiltinVideoEncoderFactory(),

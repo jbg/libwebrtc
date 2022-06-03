@@ -31,6 +31,7 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
     rtc::Thread* network_thread,
     rtc::Thread* worker_thread,
     rtc::Thread* signaling_thread,
+    rtc::SocketServer* socket_server,
     rtc::scoped_refptr<AudioDeviceModule> default_adm,
     rtc::scoped_refptr<AudioEncoderFactory> audio_encoder_factory,
     rtc::scoped_refptr<AudioDecoderFactory> audio_decoder_factory,
@@ -44,6 +45,7 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
   dependencies.network_thread = network_thread;
   dependencies.worker_thread = worker_thread;
   dependencies.signaling_thread = signaling_thread;
+  dependencies.socket_server = socket_server;
   dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
   dependencies.call_factory = CreateCallFactory();
   dependencies.event_log_factory = std::make_unique<RtcEventLogFactory>(
@@ -54,10 +56,6 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
     dependencies.trials = std::make_unique<webrtc::FieldTrialBasedConfig>();
   }
 
-  if (network_thread) {
-    // TODO(bugs.webrtc.org/13145): Add an rtc::SocketFactory* argument.
-    dependencies.socket_server = network_thread->socketserver();
-  }
   cricket::MediaEngineDependencies media_dependencies;
   media_dependencies.task_queue_factory = dependencies.task_queue_factory.get();
   media_dependencies.adm = std::move(default_adm);

@@ -115,7 +115,7 @@ bool PeerConnectionTestWrapper::CreatePc(
   }
 
   peer_connection_factory_ = webrtc::CreatePeerConnectionFactory(
-      network_thread_, worker_thread_, rtc::Thread::Current(),
+      network_thread_, worker_thread_, rtc::Thread::Current(), socket_server_,
       rtc::scoped_refptr<webrtc::AudioDeviceModule>(fake_audio_capture_module_),
       audio_encoder_factory, audio_decoder_factory,
       webrtc::CreateBuiltinVideoEncoderFactory(),
