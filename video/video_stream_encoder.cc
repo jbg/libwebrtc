@@ -35,6 +35,7 @@
 #include "call/adaptation/resource_adaptation_processor.h"
 #include "call/adaptation/video_stream_adapter.h"
 #include "modules/video_coding/include/video_codec_initializer.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "modules/video_coding/svc/svc_rate_allocator.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
@@ -1227,21 +1228,8 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     pending_encoder_creation_ = false;
   }
 
-  int num_layers;
-  if (codec.codecType == kVideoCodecVP8) {
-    num_layers = codec.VP8()->numberOfTemporalLayers;
-  } else if (codec.codecType == kVideoCodecVP9) {
-    num_layers = codec.VP9()->numberOfTemporalLayers;
-  } else if (codec.codecType == kVideoCodecH264) {
-    num_layers = codec.H264()->numberOfTemporalLayers;
-  } else if (codec.codecType == kVideoCodecGeneric &&
-             codec.numberOfSimulcastStreams > 0) {
-    // This is mainly for unit testing, disabling frame dropping.
-    // TODO(sprang): Add a better way to disable frame dropping.
-    num_layers = codec.simulcastStream[0].numberOfTemporalLayers;
-  } else {
-    num_layers = 1;
-  }
+  int num_layers = ScalabilityModeToNumTemporalLayers(
+      codec.GetScalabilityMode().value_or(ScalabilityMode::kL1T1));
 
   frame_dropper_.Reset();
   frame_dropper_.SetRates(codec.startBitrate, max_framerate_);

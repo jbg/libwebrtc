@@ -566,6 +566,8 @@ void DefaultTemporalLayers::OnEncodeDone(size_t stream_index,
       vp8_info.layerSync = frame_config.layer_sync;
     }
   }
+  RTC_LOG(LS_ERROR) << "XXX num_layers_: " << num_layers_
+                    << ", temporalIdx: " << vp8_info.temporalIdx;
 
   vp8_info.useExplicitDependencies = true;
   RTC_DCHECK_EQ(vp8_info.referencedBuffersCount, 0u);
