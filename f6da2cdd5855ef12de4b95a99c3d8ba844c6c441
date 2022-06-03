@@ -16,6 +16,24 @@
       "message": "Hello Harald and Niels. This CL is another cleanup for `rtc::Thread::socketserver()`. Since FakePortAllocator is not expected to be used outside of the WebRTC project, I expect this patch to be safe. If not, please tell me.",
       "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dce68123_fba73079",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-03T09:55:58Z",
+      "side": 1,
+      "message": "I\u0027m afraid it is used in a few places in internal projects, so will need a bit of cleanup before this can be submitted.\n\nI also wonder why this \"fake\" class needs a network thread and a socket factory? I looks like the thread is needed for TestUDPPort, which looks like inherits the production UDPPort class and just adds a static Create method. It\u0027s very unclear to what\u0027s really needed.",
+      "parentUuid": "2de85d2a_43d60b23",
+      "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
