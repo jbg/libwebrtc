@@ -228,6 +228,7 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   static std::unique_ptr<Thread> CreateWithSocketServer();
   static std::unique_ptr<Thread> Create();
   static Thread* Current();
+  static std::pair<Thread*, rtc::SocketServer*> CurrentWithSocketServer();
 
   // Used to catch performance regressions. Use this to disallow blocking calls
   // (Invoke) for a given scope.  If a synchronous call is made while this is in
@@ -278,8 +279,6 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   uint32_t GetBlockingCallCount() const;
   uint32_t GetCouldBeBlockingCallCount() const;
 #endif
-
-  SocketServer* socketserver();
 
   // Note: The behavior of Thread has changed.  When a thread is stopped,
   // futher Posts and Sends will fail.  However, any pending Sends and *ready*
@@ -533,6 +532,8 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
     container_type& container() { return c; }
     void reheap() { make_heap(c.begin(), c.end(), comp); }
   };
+
+  SocketServer* socketserver();
 
   void DoDelayPost(const Location& posted_from,
                    int64_t cmsDelay,
