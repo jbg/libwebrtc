@@ -28,7 +28,7 @@ import org.webrtc.audio.JavaAudioDeviceModule.AudioTrackStartErrorCode;
 import org.webrtc.audio.JavaAudioDeviceModule.AudioTrackStateCallback;
 import org.webrtc.audio.LowLatencyAudioBufferManager;
 
-class WebRtcAudioTrack {
+class WebRtcAudioTrack implements BaseWebRtcAudioTrack {
   private static final String TAG = "WebRtcAudioTrackExternal";
 
   // Default audio data format is PCM 16 bit per sample.
@@ -171,13 +171,13 @@ class WebRtcAudioTrack {
     Logging.d(TAG, "ctor" + WebRtcAudioUtils.getThreadInfo());
   }
 
-  @CalledByNative
+  @Override
   public void setNativeAudioTrack(long nativeAudioTrack) {
     this.nativeAudioTrack = nativeAudioTrack;
   }
 
-  @CalledByNative
-  private int initPlayout(int sampleRate, int channels, double bufferSizeFactor) {
+  @Override
+  public int initPlayout(int sampleRate, int channels, double bufferSizeFactor) {
     threadChecker.checkIsOnValidThread();
     Logging.d(TAG,
         "initPlayout(sampleRate=" + sampleRate + ", channels=" + channels
@@ -263,8 +263,8 @@ class WebRtcAudioTrack {
     return minBufferSizeInBytes;
   }
 
-  @CalledByNative
-  private boolean startPlayout() {
+  @Override
+  public boolean startPlayout() {
     threadChecker.checkIsOnValidThread();
     volumeLogger.start();
     Logging.d(TAG, "startPlayout");
@@ -295,8 +295,8 @@ class WebRtcAudioTrack {
     return true;
   }
 
-  @CalledByNative
-  private boolean stopPlayout() {
+  @Override
+  public boolean stopPlayout() {
     threadChecker.checkIsOnValidThread();
     volumeLogger.stop();
     Logging.d(TAG, "stopPlayout");
@@ -327,16 +327,16 @@ class WebRtcAudioTrack {
   }
 
   // Get max possible volume index for a phone call audio stream.
-  @CalledByNative
-  private int getStreamMaxVolume() {
+  @Override
+  public int getStreamMaxVolume() {
     threadChecker.checkIsOnValidThread();
     Logging.d(TAG, "getStreamMaxVolume");
     return audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
   }
 
   // Set current volume level for a phone call audio stream.
-  @CalledByNative
-  private boolean setStreamVolume(int volume) {
+  @Override
+  public boolean setStreamVolume(int volume) {
     threadChecker.checkIsOnValidThread();
     Logging.d(TAG, "setStreamVolume(" + volume + ")");
     if (audioManager.isVolumeFixed()) {
@@ -348,15 +348,15 @@ class WebRtcAudioTrack {
   }
 
   /** Get current volume level for a phone call audio stream. */
-  @CalledByNative
-  private int getStreamVolume() {
+  @Override
+  public int getStreamVolume() {
     threadChecker.checkIsOnValidThread();
     Logging.d(TAG, "getStreamVolume");
     return audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
   }
 
-  @CalledByNative
-  private int GetPlayoutUnderrunCount() {
+  @Override
+  public int GetPlayoutUnderrunCount() {
     if (Build.VERSION.SDK_INT >= 24) {
       if (audioTrack != null) {
         return audioTrack.getUnderrunCount();
@@ -470,16 +470,16 @@ class WebRtcAudioTrack {
     }
   }
 
-  @CalledByNative
-  private int getBufferSizeInFrames() {
+  @Override
+  public int getBufferSizeInFrames() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       return audioTrack.getBufferSizeInFrames();
     }
     return -1;
   }
 
-  @CalledByNative
-  private int getInitialBufferSizeInFrames() {
+  @Override
+  public int getInitialBufferSizeInFrames() {
     return initialBufferSizeInFrames;
   }
 
@@ -526,6 +526,7 @@ class WebRtcAudioTrack {
 
   // Sets all samples to be played out to zero if `mute` is true, i.e.,
   // ensures that the speaker is muted.
+  @Override
   public void setSpeakerMute(boolean mute) {
     Logging.w(TAG, "setSpeakerMute(" + mute + ")");
     speakerMute = mute;
