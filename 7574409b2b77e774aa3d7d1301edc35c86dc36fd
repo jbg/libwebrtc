@@ -124,6 +124,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cd88dbf_ed5fed37",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-06-03T18:52:01Z",
+      "side": 1,
+      "message": "Yes, it should. Everything will work the same way as before, it\u0027s just in case of first successful portal call, when receiving the restore_token, we will store it for the upcoming portal call that, when token is used, will be pre-authorized and will not ask the user again, but we still get same response from the portal and we still have to use PipeWire as before etc. There is no difference in the workflow, just slightly different behavior in the portals backend implementation which can skip the dialog if we provide the token we store here (after first portal call).",
+      "parentUuid": "96116508_0021266e",
+      "revId": "7574409b2b77e774aa3d7d1301edc35c86dc36fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e32fc834_ef75562d",

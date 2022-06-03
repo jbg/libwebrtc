@@ -51,6 +51,24 @@
       "parentUuid": "1194718b_5fcb7890",
       "revId": "34a725a075ac4d2ab0d879fc8962fa65f8c6d44a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da3fc4af_a77756e1",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-06-03T18:52:01Z",
+      "side": 1,
+      "message": "Right, Salman uses this in his implementation where he passes a different portal based on ScreenCastPortalInterface.",
+      "parentUuid": "efb5caaf_1bd182c0",
+      "revId": "34a725a075ac4d2ab0d879fc8962fa65f8c6d44a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
