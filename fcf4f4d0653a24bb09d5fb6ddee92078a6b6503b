@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b2d5d7_629a852d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-03T14:18:59Z",
+      "side": 1,
+      "message": "I note that reassembly is linear in the number of chunks. I\u0027m not quite sure what the triggering logic is - would need to trigger at least when seeing an end chunk and when considering an incoming chunk that might fill a gap.\n\nDo we risk going quadratic when receiving large amounts of chunked messages?\n\nOtherwise, seems straightforward.",
+      "revId": "fcf4f4d0653a24bb09d5fb6ddee92078a6b6503b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "503e761b_ad0f744e",
+        "filename": "net/dcsctp/rx/interleaved_reassembly_streams.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-03T14:18:59Z",
+      "side": 1,
+      "message": "Why protected and not private? I can\u0027t see a derived class in this CL.",
+      "revId": "fcf4f4d0653a24bb09d5fb6ddee92078a6b6503b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec5fe66_7dcfa88f",
+        "filename": "net/dcsctp/rx/interleaved_reassembly_streams.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-03T14:18:59Z",
+      "side": 1,
+      "message": ".... if one or more messages were assembled?",
+      "revId": "fcf4f4d0653a24bb09d5fb6ddee92078a6b6503b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
