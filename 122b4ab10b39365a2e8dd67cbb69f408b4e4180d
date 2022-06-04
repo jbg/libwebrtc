@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39fe6d8d_0bb4f84c",
+        "filename": "common_video/linux/portal/pipewire_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-04T05:48:58Z",
+      "side": 1,
+      "message": "It\u0027s in a different namespace (`webrtc` vs. `common_video_linux_portal`) but I can change it, if you prefer that.",
+      "parentUuid": "8550d807_b214e3cf",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e544cafa_516ca301",
         "filename": "modules/desktop_capture/BUILD.gn",
         "patchSetId": 5
@@ -117,6 +135,24 @@
       "writtenOn": "2022-06-03T23:55:16Z",
       "side": 1,
       "message": "Is this still used?  If so, can those places be updated to use the new config location in common_video?",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6294fe5_db28812c",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-04T05:48:58Z",
+      "side": 1,
+      "message": "It\u0027s used in chromium:\nhttps://chromium.googlesource.com/chromium/src/+/e8bd9641fddf5246cb63d70839096b832cedd630/chrome/browser/BUILD.gn#6198\nhttps://chromium.googlesource.com/chromium/src/+/e8bd9641fddf5246cb63d70839096b832cedd630/content/public/browser/BUILD.gn#445\nhttps://chromium.googlesource.com/chromium/src/+/e8bd9641fddf5246cb63d70839096b832cedd630/content/public/common/BUILD.gn#277\n\nMy idea was to merge it like this and remove it with the shim headers when chromium is fixed.",
+      "parentUuid": "16aa8c28_eec923f6",
       "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
