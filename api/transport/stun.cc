@@ -82,6 +82,16 @@ bool LengthValid(int type, int length) {
   return true;
 }
 
+const StunAttribute* FindAttribute(
+    const std::vector<std::unique_ptr<StunAttribute>>& attributes,
+    int type) {
+  auto it = std::find_if(attributes.begin(), attributes.end(),
+                         [&](const std::unique_ptr<StunAttribute>& a) {
+                           return a->type() == type;
+                         });
+  return it == attributes.end() ? nullptr : it->get();
+}
+
 }  // namespace
 
 const char STUN_ERROR_REASON_TRY_ALTERNATE_SERVER[] = "Try Alternate Server";
@@ -646,12 +656,7 @@ StunAttribute* StunMessage::CreateAttribute(int type, size_t length) /*const*/ {
 }
 
 const StunAttribute* StunMessage::GetAttribute(int type) const {
-  for (const auto& attr : attrs_) {
-    if (attr->type() == type) {
-      return attr.get();
-    }
-  }
-  return NULL;
+  return FindAttribute(attrs_, type);
 }
 
 bool StunMessage::IsValidTransactionId(absl::string_view transaction_id) {
@@ -662,12 +667,17 @@ bool StunMessage::IsValidTransactionId(absl::string_view transaction_id) {
 bool StunMessage::EqualAttributes(
     const StunMessage* other,
     std::function<bool(int type)> attribute_type_mask) const {
-  RTC_DCHECK(other != nullptr);
+  return EqualAttributes(other->attrs_, std::move(attribute_type_mask));
+}
+
+bool StunMessage::EqualAttributes(
+    const std::vector<std::unique_ptr<StunAttribute>>& attributes,
+    std::function<bool(int type)> attribute_type_mask) const {
   rtc::ByteBufferWriter tmp_buffer_ptr1;
   rtc::ByteBufferWriter tmp_buffer_ptr2;
   for (const auto& attr : attrs_) {
     if (attribute_type_mask(attr->type())) {
-      const StunAttribute* other_attr = other->GetAttribute(attr->type());
+      const StunAttribute* other_attr = FindAttribute(attributes, attr->type());
       if (other_attr == nullptr) {
         return false;
       }
@@ -685,7 +695,7 @@ bool StunMessage::EqualAttributes(
     }
   }
 
-  for (const auto& attr : other->attrs_) {
+  for (const auto& attr : attributes) {
     if (attribute_type_mask(attr->type())) {
       const StunAttribute* own_attr = GetAttribute(attr->type());
       if (own_attr == nullptr) {

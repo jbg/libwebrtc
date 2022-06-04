@@ -279,6 +279,9 @@ class StunMessage {
   // for all attributes that `attribute_type_mask` return true
   bool EqualAttributes(const StunMessage* other,
                        std::function<bool(int type)> attribute_type_mask) const;
+  bool EqualAttributes(
+      const std::vector<std::unique_ptr<StunAttribute>>& attributes,
+      std::function<bool(int type)> attribute_type_mask) const;
 
   // Expose raw-buffer ValidateMessageIntegrity function for testing.
   static bool ValidateMessageIntegrityForTesting(const char* data,
