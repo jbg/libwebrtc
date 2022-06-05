@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74797d78_83fd6649",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-06-05T21:32:46Z",
+      "side": 1,
+      "message": "When chunks are added, inserting the data into the chunk list is O(log(N)), where N is the number of concurrently assembled messages. The actual assembly: in TryToAssembleMessage, detecting if the message can be assembled is O(1) (just inspecting the first and last element in the std::map, and its size, which are all constant). The assembly is linear with the number of chunks in that message.\n\nThe number of concurrently received messages are maximum the number of active streams, which is effectively small. The number of chunks in a message is max 256kb/~MTU \u003d\u003e ~256 chunks. So I\u0027m not too concerned.\n\nBut there is an optimization that can be made - to be made more memory efficient, by avoiding the std::map(s) and using more of std::vector. But I\u0027ll do that as an optimization later.",
+      "parentUuid": "f1b2d5d7_629a852d",
+      "revId": "fcf4f4d0653a24bb09d5fb6ddee92078a6b6503b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "503e761b_ad0f744e",
@@ -35,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d655a9_8aea267b",
+        "filename": "net/dcsctp/rx/interleaved_reassembly_streams.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-06-05T21:32:46Z",
+      "side": 1,
+      "message": "You\u0027re correct. In a previous version, ordered and unordered were handled by different classes, inheriting from this on. But now they are generalized into a single one, so this should be private now.",
+      "parentUuid": "503e761b_ad0f744e",
+      "revId": "fcf4f4d0653a24bb09d5fb6ddee92078a6b6503b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ec5fe66_7dcfa88f",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-06-03T14:18:59Z",
       "side": 1,
       "message": ".... if one or more messages were assembled?",
+      "revId": "fcf4f4d0653a24bb09d5fb6ddee92078a6b6503b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4158f515_a08ec2da",
+        "filename": "net/dcsctp/rx/interleaved_reassembly_streams.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-06-05T21:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ec5fe66_7dcfa88f",
       "revId": "fcf4f4d0653a24bb09d5fb6ddee92078a6b6503b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
