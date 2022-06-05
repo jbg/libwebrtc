@@ -55,7 +55,6 @@ if (is_android) {
       ":swcodecs_java",
       ":video_api_java",
       ":video_java",
-      "../../modules/audio_device:audio_device_java",
       "../../rtc_base:base_java",
     ]
   }
@@ -91,7 +90,6 @@ if (is_android) {
       ":surfaceviewrenderer_java",
       ":video_api_java",
       ":video_java",
-      "//modules/audio_device:audio_device_java",
       "//rtc_base:base_java",
     ]
   }
@@ -317,7 +315,6 @@ if (is_android) {
       ":swcodecs_java",
       ":video_api_java",
       ":video_java",
-      "//modules/audio_device:audio_device_java",
       "//rtc_base:base_java",
       "//third_party/androidx:androidx_annotation_annotation_java",
     ]
@@ -579,7 +576,6 @@ if (current_os == "linux" || is_android) {
       ":internal_jni",
       ":native_api_jni",
       "../../api:field_trials_view",
-      "../../api:libjingle_peerconnection_api",
       "../../api:scoped_refptr",
       "../../api:sequence_checker",
       "../../rtc_base",
@@ -984,10 +980,12 @@ if (current_os == "linux" || is_android) {
 
     deps = [
       ":base_jni",
+      ":internal_jni",
       ":java_audio_device_module",
       ":opensles_audio_device_module",
       "../../api:scoped_refptr",
-      "../../modules/audio_device",
+      "../../modules/audio_device:audio_device_api",
+      "../../modules/utility:utility",
       "../../rtc_base:checks",
       "../../rtc_base:logging",
       "../../rtc_base:refcount",
@@ -1197,7 +1195,7 @@ if (current_os == "linux" || is_android) {
       ":base_jni",
       ":generated_java_audio_device_module_native_jni",
       "../../api:sequence_checker",
-      "../../modules/audio_device",
+      "../../modules/audio_device:audio_device_api",
       "../../modules/audio_device:audio_device_buffer",
       "../../rtc_base:checks",
       "../../rtc_base:logging",
@@ -1255,7 +1253,7 @@ if (current_os == "linux" || is_android) {
       "../../api:refcountedbase",
       "../../api:scoped_refptr",
       "../../api:sequence_checker",
-      "../../modules/audio_device",
+      "../../modules/audio_device:audio_device_api",
       "../../modules/audio_device:audio_device_buffer",
       "../../rtc_base:checks",
       "../../rtc_base:logging",

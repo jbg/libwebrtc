@@ -27,10 +27,6 @@ struct {
   const char* name;
   jclass clazz;
 } loaded_classes[] = {
-    {"org/webrtc/voiceengine/BuildInfo", nullptr},
-    {"org/webrtc/voiceengine/WebRtcAudioManager", nullptr},
-    {"org/webrtc/voiceengine/WebRtcAudioRecord", nullptr},
-    {"org/webrtc/voiceengine/WebRtcAudioTrack", nullptr},
 };
 
 // Android's FindClass() is trickier than usual because the app-specific
@@ -230,6 +226,10 @@ void JVM::Initialize(JavaVM* jvm, jobject context) {
   jmethodID initialize_method = jni->GetStaticMethodID(
       context_utils, "initialize", "(Landroid/content/Context;)V");
   jni->CallStaticVoidMethod(context_utils, initialize_method, context);
+  if (jni->GetObjectRefType(context) != JNIGlobalRefType) {
+    context = jni->NewGlobalRef(context);
+  }
+  JVM::GetInstance()->SetContext(context);
 }
 
 // static
@@ -255,6 +255,10 @@ JVM::JVM(JavaVM* jvm) : jvm_(jvm) {
 JVM::~JVM() {
   RTC_LOG(LS_INFO) << "JVM::~JVM";
   RTC_DCHECK(thread_checker_.IsCurrent());
+  if (global_app_context_) {
+    jni()->DeleteGlobalRef(global_app_context_);
+    global_app_context_ = nullptr;
+  }
   FreeClassReferences(jni());
 }
 
