@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b441a92_70eda347",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-06T16:53:49Z",
+      "side": 1,
+      "message": "It would be slightly better to encapsulate these checks as follows:\n\nScreenCastPortal* BaseCapturerPipewire::GetScreenCastPortal() {\n  return is_screencast_portal_ ? ... : nullptr;\n}\n\nthen here\n\nif (ScreenCastPortal* screencast_portal \u003d GetScreenCastPortal()) {\n ...\n}",
+      "revId": "34a725a075ac4d2ab0d879fc8962fa65f8c6d44a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1194718b_5fcb7890",
         "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.h",
         "patchSetId": 4
@@ -67,6 +84,24 @@
       "side": 1,
       "message": "Right, Salman uses this in his implementation where he passes a different portal based on ScreenCastPortalInterface.",
       "parentUuid": "efb5caaf_1bd182c0",
+      "revId": "34a725a075ac4d2ab0d879fc8962fa65f8c6d44a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5872d666_ca58b81c",
+        "filename": "modules/desktop_capture/linux/wayland/base_capturer_pipewire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-06T16:53:49Z",
+      "side": 1,
+      "message": "Hmmm.  It\u0027s not great to implement dynamic typing in C++ using a run-time variable as the compiler will not know when a downcast is safe or not.\n\nA better design option would be to encapsulate the token behavior into a separate object or API, separate from the ScreenCapturePortalInterface.  I\u0027ve made a suggestion to at least encapsulate the downcasting into one place so there\u0027s less risk that unsafe casts will be added in the future.",
+      "parentUuid": "da3fc4af_a77756e1",
       "revId": "34a725a075ac4d2ab0d879fc8962fa65f8c6d44a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
