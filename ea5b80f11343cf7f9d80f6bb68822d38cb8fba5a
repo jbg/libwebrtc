@@ -33,6 +33,23 @@
       "message": "Ping!",
       "revId": "ea5b80f11343cf7f9d80f6bb68822d38cb8fba5a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7445f109_b00255c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-06-06T21:39:03Z",
+      "side": 1,
+      "message": "Updating reviewer as sprang@ appears to be OOO.  PTAL!",
+      "revId": "ea5b80f11343cf7f9d80f6bb68822d38cb8fba5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
