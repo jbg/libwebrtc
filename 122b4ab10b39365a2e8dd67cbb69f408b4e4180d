@@ -105,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5a7b0ff_8bc53f9e",
+        "filename": "common_video/linux/portal/pipewire_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-06T16:58:08Z",
+      "side": 1,
+      "message": "If they are in different namespaces, then that is fine.",
+      "parentUuid": "39fe6d8d_0bb4f84c",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e544cafa_516ca301",
@@ -153,6 +171,24 @@
       "side": 1,
       "message": "It\u0027s used in chromium:\nhttps://chromium.googlesource.com/chromium/src/+/e8bd9641fddf5246cb63d70839096b832cedd630/chrome/browser/BUILD.gn#6198\nhttps://chromium.googlesource.com/chromium/src/+/e8bd9641fddf5246cb63d70839096b832cedd630/content/public/browser/BUILD.gn#445\nhttps://chromium.googlesource.com/chromium/src/+/e8bd9641fddf5246cb63d70839096b832cedd630/content/public/common/BUILD.gn#277\n\nMy idea was to merge it like this and remove it with the shim headers when chromium is fixed.",
       "parentUuid": "16aa8c28_eec923f6",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63eeaac8_64976842",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-06T16:58:08Z",
+      "side": 1,
+      "message": "That sounds good. Usually configs needed for clients to link against a target are propagated by adding them as public_configs, versus having other targets reference them directly.",
+      "parentUuid": "e6294fe5_db28812c",
       "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
