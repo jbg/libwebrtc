@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "modules/desktop_capture/linux/wayland/scoped_glib.h"
+#include "common_video/linux/portal/scoped_glib.h"
 
 namespace webrtc {
 
