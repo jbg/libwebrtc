@@ -425,7 +425,8 @@ class TestSimulcastEncoderAdapterFakeHelper {
   SdpVideoFormat video_format_;
 };
 
-static const int kTestTemporalLayerProfile[3] = {3, 2, 1};
+static const ScalabilityMode kTestScalabilityProfile[3] = {
+    ScalabilityMode::kL1T3, ScalabilityMode::kL1T2, ScalabilityMode::kL1T1};
 
 class TestSimulcastEncoderAdapterFake : public ::testing::Test,
                                         public EncodedImageCallback {
@@ -486,9 +487,8 @@ class TestSimulcastEncoderAdapterFake : public ::testing::Test,
   void SetupCodec() { SetupCodec(/*active_streams=*/{true, true, true}); }
 
   void SetupCodec(std::vector<bool> active_streams) {
-    SimulcastTestFixtureImpl::DefaultSettings(
-        &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-        kVideoCodecVP8);
+    SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                              kVideoCodecVP8);
     ASSERT_LE(active_streams.size(), codec_.numberOfSimulcastStreams);
     codec_.numberOfSimulcastStreams = active_streams.size();
     for (size_t stream_idx = 0; stream_idx < kMaxSimulcastStreams;
@@ -517,8 +517,7 @@ class TestSimulcastEncoderAdapterFake : public ::testing::Test,
     EXPECT_EQ(ref.maxFramerate, target.maxFramerate);
     EXPECT_EQ(ref.GetVideoEncoderComplexity(),
               target.GetVideoEncoderComplexity());
-    EXPECT_EQ(ref.VP8().numberOfTemporalLayers,
-              target.VP8().numberOfTemporalLayers);
+    EXPECT_EQ(ref.GetScalabilityMode(), target.GetScalabilityMode());
     EXPECT_EQ(ref.VP8().denoisingOn, target.VP8().denoisingOn);
     EXPECT_EQ(ref.VP8().automaticResizeOn, target.VP8().automaticResizeOn);
     EXPECT_EQ(ref.GetFrameDropEnabled(), target.GetFrameDropEnabled());
@@ -535,9 +534,9 @@ class TestSimulcastEncoderAdapterFake : public ::testing::Test,
                     VideoCodec* ref_codec,
                     bool reverse_layer_order = false) {
     *ref_codec = codec_;
-    ref_codec->VP8()->numberOfTemporalLayers =
-        kTestTemporalLayerProfile[reverse_layer_order ? 2 - stream_index
-                                                      : stream_index];
+    ref_codec->SetScalabilityMode(
+        kTestScalabilityProfile[reverse_layer_order ? 2 - stream_index
+                                                    : stream_index]);
     ref_codec->width = codec_.simulcastStream[stream_index].width;
     ref_codec->height = codec_.simulcastStream[stream_index].height;
     ref_codec->maxBitrate = codec_.simulcastStream[stream_index].maxBitrate;
@@ -647,9 +646,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, EncodedCallbackForDifferentEncoders) {
 // with the lowest stream.
 TEST_F(TestSimulcastEncoderAdapterFake, ReusesEncodersInOrder) {
   // Set up common settings for three streams.
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   rate_allocator_.reset(new SimulcastRateAllocator(codec_));
   adapter_->RegisterEncodeCompleteCallback(this);
   const uint32_t target_bitrate =
@@ -875,9 +873,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, ReinitDoesNotReorderFrameSimulcastIdx) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, SupportsNativeHandleForSingleStreams) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 1;
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
   adapter_->RegisterEncodeCompleteCallback(this);
@@ -891,9 +888,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, SupportsNativeHandleForSingleStreams) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, SetRatesUnderMinBitrate) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.minBitrate = 50;
   codec_.numberOfSimulcastStreams = 1;
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
@@ -922,9 +918,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, SetRatesUnderMinBitrate) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, SupportsImplementationName) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   std::vector<const char*> encoder_names;
   encoder_names.push_back("codec1");
   encoder_names.push_back("codec2");
@@ -946,9 +941,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, SupportsImplementationName) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, RuntimeEncoderInfoUpdate) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   std::vector<const char*> encoder_names;
   encoder_names.push_back("codec1");
   encoder_names.push_back("codec2");
@@ -967,9 +961,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, RuntimeEncoderInfoUpdate) {
 
 TEST_F(TestSimulcastEncoderAdapterFake,
        SupportsNativeHandleForMultipleStreams) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
   adapter_->RegisterEncodeCompleteCallback(this);
@@ -1013,9 +1006,8 @@ class FakeNativeBufferI420 : public VideoFrameBuffer {
 
 TEST_F(TestSimulcastEncoderAdapterFake,
        NativeHandleForwardingForMultipleStreams) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   // High start bitrate, so all streams are enabled.
   codec_.startBitrate = 3000;
@@ -1045,9 +1037,8 @@ TEST_F(TestSimulcastEncoderAdapterFake,
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, NativeHandleForwardingOnlyIfSupported) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   // High start bitrate, so all streams are enabled.
   codec_.startBitrate = 3000;
@@ -1091,9 +1082,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, NativeHandleForwardingOnlyIfSupported) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, TestFailureReturnCodesFromEncodeCalls) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
   adapter_->RegisterEncodeCompleteCallback(this);
@@ -1118,9 +1108,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, TestFailureReturnCodesFromEncodeCalls) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, TestInitFailureCleansUpEncoders) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   helper_->factory()->set_init_encode_return_value(
       WEBRTC_VIDEO_CODEC_FALLBACK_SOFTWARE);
@@ -1133,9 +1122,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, DoesNotAlterMaxQpForScreenshare) {
   const int kHighMaxQp = 56;
   const int kLowMaxQp = 46;
 
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   codec_.simulcastStream[0].qpMax = kHighMaxQp;
   codec_.mode = VideoCodecMode::kScreensharing;
@@ -1167,9 +1155,9 @@ TEST_F(TestSimulcastEncoderAdapterFake,
   const int kHighMaxQp = 56;
   const int kLowMaxQp = 46;
 
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8, true /* reverse_layer_order */);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8,
+                                            true /* reverse_layer_order */);
   codec_.numberOfSimulcastStreams = 3;
   codec_.simulcastStream[2].qpMax = kHighMaxQp;
   codec_.mode = VideoCodecMode::kScreensharing;
@@ -1198,9 +1186,8 @@ TEST_F(TestSimulcastEncoderAdapterFake,
 
 TEST_F(TestSimulcastEncoderAdapterFake, ActivatesCorrectStreamsInInitEncode) {
   // Set up common settings for three streams.
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   rate_allocator_.reset(new SimulcastRateAllocator(codec_));
   adapter_->RegisterEncodeCompleteCallback(this);
 
@@ -1236,9 +1223,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, ActivatesCorrectStreamsInInitEncode) {
 
 TEST_F(TestSimulcastEncoderAdapterFake, TrustedRateControl) {
   // Set up common settings for three streams.
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   rate_allocator_.reset(new SimulcastRateAllocator(codec_));
   adapter_->RegisterEncodeCompleteCallback(this);
 
@@ -1284,9 +1270,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, TrustedRateControl) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, ReportsHardwareAccelerated) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   adapter_->RegisterEncodeCompleteCallback(this);
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
@@ -1307,9 +1292,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, ReportsHardwareAccelerated) {
 
 TEST_F(TestSimulcastEncoderAdapterFake,
        ReportsLeastCommonMultipleOfRequestedResolutionAlignments) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   helper_->factory()->set_requested_resolution_alignments({2, 4, 7});
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
@@ -1319,9 +1303,8 @@ TEST_F(TestSimulcastEncoderAdapterFake,
 
 TEST_F(TestSimulcastEncoderAdapterFake,
        ReportsApplyAlignmentToSimulcastLayers) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
 
   // No encoder has apply_alignment_to_all_simulcast_layers, report false.
@@ -1362,9 +1345,8 @@ TEST_F(
   SetUp();
   helper_->factory()->set_resolution_bitrate_limits(bitrate_limits);
 
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 1;
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
   ASSERT_EQ(1u, helper_->factory()->encoders().size());
@@ -1378,9 +1360,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, EncoderInfoFromFieldTrial) {
       "requested_resolution_alignment:8,"
       "apply_alignment_to_all_simulcast_layers/");
   SetUp();
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
   ASSERT_EQ(3u, helper_->factory()->encoders().size());
@@ -1401,9 +1382,8 @@ TEST_F(TestSimulcastEncoderAdapterFake,
       "min_bitrate_bps:44000|55000|66000,"
       "max_bitrate_bps:77000|88000|99000/");
   SetUp();
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 1;
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
   ASSERT_EQ(1u, helper_->factory()->encoders().size());
@@ -1420,9 +1400,8 @@ TEST_F(TestSimulcastEncoderAdapterFake,
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, ReportsIsQpTrusted) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   adapter_->RegisterEncodeCompleteCallback(this);
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
@@ -1442,9 +1421,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, ReportsIsQpTrusted) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, ReportsFpsAllocation) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   adapter_->RegisterEncodeCompleteCallback(this);
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
@@ -1471,9 +1449,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, ReportsFpsAllocation) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, SetRateDistributesBandwithAllocation) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   const DataRate target_bitrate =
       DataRate::KilobitsPerSec(codec_.simulcastStream[0].targetBitrate +
@@ -1513,9 +1490,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, SetRateDistributesBandwithAllocation) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, CanSetZeroBitrateWithHeadroom) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
 
   rate_allocator_.reset(new SimulcastRateAllocator(codec_));
@@ -1538,9 +1514,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, CanSetZeroBitrateWithHeadroom) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, SupportsSimulcast) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
 
   // Indicate that mock encoders internally support simulcast.
@@ -1658,9 +1633,8 @@ TEST_F(TestSimulcastEncoderAdapterFake, SupportsFallback) {
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, SupportsPerSimulcastLayerMaxFramerate) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 3;
   codec_.simulcastStream[0].maxFramerate = 60;
   codec_.simulcastStream[1].maxFramerate = 30;
@@ -1742,9 +1716,8 @@ TEST_F(TestSimulcastEncoderAdapterFake,
   // Enable support for fallback encoder factory and re-setup.
   use_fallback_factory_ = true;
   SetUp();
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 1;
   helper_->factory()->SetEncoderNames({"primary"});
   helper_->fallback_factory()->SetEncoderNames({"fallback"});
@@ -1763,9 +1736,8 @@ TEST_F(TestSimulcastEncoderAdapterFake,
   // Enable support for fallback encoder factory and re-setup.
   use_fallback_factory_ = true;
   SetUp();
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
+  SimulcastTestFixtureImpl::DefaultSettings(&codec_, kTestScalabilityProfile,
+                                            kVideoCodecVP8);
   codec_.numberOfSimulcastStreams = 1;
   helper_->factory()->SetEncoderNames({"primary"});
   helper_->fallback_factory()->SetEncoderNames({"fallback"});

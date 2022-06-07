@@ -18,6 +18,7 @@
 
 #include "absl/container/inlined_vector.h"
 #include "modules/video_coding/svc/create_scalability_structure.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "rtc_base/checks.h"
 
 namespace webrtc {
@@ -187,7 +188,8 @@ SvcRateAllocator::NumLayers SvcRateAllocator::GetNumLayers(
   }
   if (codec.codecType == kVideoCodecVP9) {
     layers.spatial = codec.VP9().numberOfSpatialLayers;
-    layers.temporal = codec.VP9().numberOfTemporalLayers;
+    layers.temporal = ScalabilityModeToNumTemporalLayers(
+        codec.GetScalabilityMode().value_or(ScalabilityMode::kL1T1));
     return layers;
   }
   layers.spatial = 1;

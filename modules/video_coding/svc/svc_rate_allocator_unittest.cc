@@ -40,9 +40,10 @@ static VideoCodec Configure(size_t width,
 
   codec.VP9()->numberOfSpatialLayers =
       std::min<unsigned char>(num_spatial_layers, spatial_layers.size());
+#if 0
   codec.VP9()->numberOfTemporalLayers = std::min<unsigned char>(
       num_temporal_layers, spatial_layers.back().numberOfTemporalLayers);
-
+#endif
   for (size_t sl_idx = 0; sl_idx < spatial_layers.size(); ++sl_idx) {
     codec.spatialLayers[sl_idx] = spatial_layers[sl_idx];
   }
