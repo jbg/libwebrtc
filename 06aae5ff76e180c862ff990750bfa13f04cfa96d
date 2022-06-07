@@ -16,6 +16,23 @@
       "message": "ptal.",
       "revId": "06aae5ff76e180c862ff990750bfa13f04cfa96d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4508483a_30bf00f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-06-07T06:32:02Z",
+      "side": 1,
+      "message": "LGTM, it looks like CQ has unrelated issues, I am going to check with the trooper.",
+      "revId": "06aae5ff76e180c862ff990750bfa13f04cfa96d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
