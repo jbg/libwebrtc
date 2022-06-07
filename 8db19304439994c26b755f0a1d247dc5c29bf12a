@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "608125cd_730fffd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-06-07T09:01:04Z",
+      "side": 1,
+      "message": "It looks like this CL breaks many tests and can\u0027t be landed as is. I don\u0027t have the resources to resolve all open issues at this stage.\n\n",
+      "revId": "8db19304439994c26b755f0a1d247dc5c29bf12a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
