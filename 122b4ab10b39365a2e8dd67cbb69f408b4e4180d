@@ -70,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ea1a53f_7e60cd75",
+        "filename": "common_video/linux/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-07T15:40:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c41652db_d0cec98f",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8550d807_b214e3cf",
@@ -140,6 +158,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea694379_5f945e2a",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-07T15:40:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e544cafa_516ca301",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16aa8c28_eec923f6",
@@ -195,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cff5890_9b029075",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-07T15:40:47Z",
+      "side": 1,
+      "message": "Chromium is a bit strange there. The deps are done in `third_party/webrtc_overrides` and the `pipewire_config` is added when needed.",
+      "parentUuid": "63eeaac8_64976842",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7307baf4_a758ae06",
         "filename": "modules/desktop_capture/BUILD.gn",
         "patchSetId": 5
@@ -206,6 +260,24 @@
       "writtenOn": "2022-06-03T23:55:16Z",
       "side": 1,
       "message": "Can you declare one config in the other BUILD.gn that includes all of these?",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd5c5838_42dfb01e",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-07T15:40:47Z",
+      "side": 1,
+      "message": "I\u0027ve added two. One with the subset that will be used by video_capture and one that includes all configs that are listed here. I hope that\u0027s ok.",
+      "parentUuid": "7307baf4_a758ae06",
       "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
