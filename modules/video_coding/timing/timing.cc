@@ -23,7 +23,8 @@ namespace {
 
 // Default pacing that is used for the low-latency renderer path.
 constexpr TimeDelta kZeroPlayoutDelayDefaultMinPacing = TimeDelta::Millis(8);
-constexpr TimeDelta kLowLatencyRendererMaxPlayoutDelay = TimeDelta::Millis(500);
+constexpr TimeDelta kLowLatencyStreamMaxPlayoutDelayThreshold =
+    TimeDelta::Millis(500);
 
 void CheckDelaysValid(TimeDelta min_delay, TimeDelta max_delay) {
   if (min_delay > max_delay) {
@@ -191,9 +192,7 @@ void VCMTiming::SetLastDecodeScheduledTimestamp(
 
 Timestamp VCMTiming::RenderTimeInternal(uint32_t frame_timestamp,
                                         Timestamp now) const {
-  if (min_playout_delay_.IsZero() &&
-      (max_playout_delay_.IsZero() ||
-       max_playout_delay_ <= kLowLatencyRendererMaxPlayoutDelay)) {
+  if (IsLowLatencyStreamInternal()) {
     // Render as soon as possible or with low-latency renderer algorithm.
     return Timestamp::Zero();
   }
@@ -248,6 +247,19 @@ TimeDelta VCMTiming::TargetVideoDelay() const {
 TimeDelta VCMTiming::TargetDelayInternal() const {
   return std::max(min_playout_delay_,
                   jitter_delay_ + RequiredDecodeTime() + render_delay_);
+}
+
+bool VCMTiming::IsLowLatencyStream() const {
+  MutexLock lock(&mutex_);
+  return IsLowLatencyStreamInternal();
+}
+
+bool VCMTiming::IsLowLatencyStreamInternal() const {
+  // min_playout_delay_==0, max_playout_delay_>=0 indicates that the low-latency
+  // path should be used, which means that frames should be decoded as soon as
+  // possible.
+  return min_playout_delay_.IsZero() &&
+         max_playout_delay_ <= kLowLatencyStreamMaxPlayoutDelayThreshold;
 }
 
 VCMTiming::VideoDelayTimings VCMTiming::GetTimings() const {

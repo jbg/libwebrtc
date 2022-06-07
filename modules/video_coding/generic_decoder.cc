@@ -104,6 +104,7 @@ void VCMDecodedFrameCallback::Decoded(VideoFrame& decodedImage,
   decodedImage.set_ntp_time_ms(frameInfo->ntp_time_ms);
   decodedImage.set_packet_infos(frameInfo->packet_infos);
   decodedImage.set_rotation(frameInfo->rotation);
+  decodedImage.set_is_low_latency_stream(_timing->IsLowLatencyStream());
 
   absl::optional<int> max_composition_delay_in_frames =
       _timing->MaxCompositionDelayInFrames();

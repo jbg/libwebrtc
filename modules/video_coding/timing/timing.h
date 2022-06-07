@@ -113,6 +113,8 @@ class VCMTiming {
       absl::optional<int> max_composition_delay_in_frames);
   absl::optional<int> MaxCompositionDelayInFrames() const;
 
+  bool IsLowLatencyStream() const;
+
   // Updates the last time a frame was scheduled for decoding.
   void SetLastDecodeScheduledTimestamp(Timestamp last_decode_scheduled);
 
@@ -121,6 +123,7 @@ class VCMTiming {
   Timestamp RenderTimeInternal(uint32_t frame_timestamp, Timestamp now) const
       RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
   TimeDelta TargetDelayInternal() const RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
+  bool IsLowLatencyStreamInternal() const RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
 
  private:
   mutable Mutex mutex_;
