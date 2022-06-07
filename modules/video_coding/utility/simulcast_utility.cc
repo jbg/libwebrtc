@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <cmath>
 
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "rtc_base/checks.h"
 
 namespace webrtc {
@@ -79,6 +80,9 @@ bool SimulcastUtility::ValidSimulcastParameters(const VideoCodec& codec,
     if (codec.simulcastStream[i].numberOfTemporalLayers !=
         codec.simulcastStream[i + 1].numberOfTemporalLayers)
       return false;
+    if (codec.simulcastStream[i].scalability_mode !=
+        codec.simulcastStream[i + 1].scalability_mode)
+      return false;
   }
   return true;
 }
@@ -90,13 +94,20 @@ bool SimulcastUtility::IsConferenceModeScreenshare(const VideoCodec& codec) {
 
 int SimulcastUtility::NumberOfTemporalLayers(const VideoCodec& codec,
                                              int spatial_id) {
-  uint8_t num_temporal_layers =
-      std::max<uint8_t>(1, codec.VP8().numberOfTemporalLayers);
+  int num_temporal_layers = 1;
+  absl::optional<ScalabilityMode> scalability_mode = codec.GetScalabilityMode();
+  if (scalability_mode) {
+    num_temporal_layers = ScalabilityModeToNumTemporalLayers(*scalability_mode);
+  }
   if (codec.numberOfSimulcastStreams > 0) {
     RTC_DCHECK_LT(spatial_id, codec.numberOfSimulcastStreams);
     num_temporal_layers =
+        std::max<int>(num_temporal_layers,
+                      codec.simulcastStream[spatial_id].numberOfTemporalLayers);
+    num_temporal_layers =
         std::max(num_temporal_layers,
-                 codec.simulcastStream[spatial_id].numberOfTemporalLayers);
+                 ScalabilityModeToNumTemporalLayers(
+                     codec.simulcastStream[spatial_id].scalability_mode));
   }
   return num_temporal_layers;
 }

@@ -517,8 +517,7 @@ class TestSimulcastEncoderAdapterFake : public ::testing::Test,
     EXPECT_EQ(ref.maxFramerate, target.maxFramerate);
     EXPECT_EQ(ref.GetVideoEncoderComplexity(),
               target.GetVideoEncoderComplexity());
-    EXPECT_EQ(ref.VP8().numberOfTemporalLayers,
-              target.VP8().numberOfTemporalLayers);
+    EXPECT_EQ(ref.GetScalabilityMode(), target.GetScalabilityMode());
     EXPECT_EQ(ref.VP8().denoisingOn, target.VP8().denoisingOn);
     EXPECT_EQ(ref.VP8().automaticResizeOn, target.VP8().automaticResizeOn);
     EXPECT_EQ(ref.GetFrameDropEnabled(), target.GetFrameDropEnabled());
@@ -535,9 +534,11 @@ class TestSimulcastEncoderAdapterFake : public ::testing::Test,
                     VideoCodec* ref_codec,
                     bool reverse_layer_order = false) {
     *ref_codec = codec_;
+#if 0
     ref_codec->VP8()->numberOfTemporalLayers =
         kTestTemporalLayerProfile[reverse_layer_order ? 2 - stream_index
                                                       : stream_index];
+#endif
     ref_codec->width = codec_.simulcastStream[stream_index].width;
     ref_codec->height = codec_.simulcastStream[stream_index].height;
     ref_codec->maxBitrate = codec_.simulcastStream[stream_index].maxBitrate;

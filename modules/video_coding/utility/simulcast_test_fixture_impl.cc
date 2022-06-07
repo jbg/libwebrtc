@@ -191,6 +191,9 @@ void ConfigureStream(int width,
                      SimulcastStream* stream,
                      int num_temporal_layers) {
   RTC_DCHECK(stream);
+  static const ScalabilityMode kScalabilityModes[3] = {
+      ScalabilityMode::kL1T1, ScalabilityMode::kL1T2, ScalabilityMode::kL1T3};
+
   stream->width = width;
   stream->height = height;
   stream->maxBitrate = max_bitrate;
@@ -199,6 +202,8 @@ void ConfigureStream(int width,
   stream->maxFramerate = max_framerate;
   if (num_temporal_layers >= 0) {
     stream->numberOfTemporalLayers = num_temporal_layers;
+    RTC_CHECK_LE(num_temporal_layers, 3);
+    stream->scalability_mode = kScalabilityModes[num_temporal_layers - 1];
   }
   stream->qpMax = 45;
   stream->active = true;
@@ -588,11 +593,10 @@ void SimulcastTestFixtureImpl::SwitchingToOneStream(int width, int height) {
   const int* temporal_layer_profile = nullptr;
   // Disable all streams except the last and set the bitrate of the last to
   // 100 kbps. This verifies the way GTP switches to screenshare mode.
+  settings_.SetScalabilityMode(ScalabilityMode::kL1T1);
   if (codec_type_ == kVideoCodecVP8) {
-    settings_.VP8()->numberOfTemporalLayers = 1;
     temporal_layer_profile = kDefaultTemporalLayerProfile;
   } else {
-    settings_.H264()->numberOfTemporalLayers = 1;
     temporal_layer_profile = kNoTemporalLayerProfile;
   }
   settings_.maxBitrate = 100;
