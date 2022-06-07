@@ -164,8 +164,8 @@ VideoFrame::Builder::~Builder() = default;
 VideoFrame VideoFrame::Builder::build() {
   RTC_CHECK(video_frame_buffer_ != nullptr);
   return VideoFrame(id_, video_frame_buffer_, timestamp_us_, timestamp_rtp_,
-                    ntp_time_ms_, rotation_, color_space_, update_rect_,
-                    packet_infos_);
+                    ntp_time_ms_, rotation_, is_low_latency_stream_,
+                    color_space_, update_rect_, packet_infos_);
 }
 
 VideoFrame::Builder& VideoFrame::Builder::set_video_frame_buffer(
@@ -239,7 +239,8 @@ VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
       timestamp_rtp_(0),
       ntp_time_ms_(0),
       timestamp_us_(timestamp_us),
-      rotation_(rotation) {}
+      rotation_(rotation),
+      is_low_latency_stream_(false) {}
 
 VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
                        uint32_t timestamp_rtp,
@@ -249,7 +250,8 @@ VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
       timestamp_rtp_(timestamp_rtp),
       ntp_time_ms_(0),
       timestamp_us_(render_time_ms * rtc::kNumMicrosecsPerMillisec),
-      rotation_(rotation) {
+      rotation_(rotation),
+      is_low_latency_stream_(false) {
   RTC_DCHECK(buffer);
 }
 
@@ -259,6 +261,7 @@ VideoFrame::VideoFrame(uint16_t id,
                        uint32_t timestamp_rtp,
                        int64_t ntp_time_ms,
                        VideoRotation rotation,
+                       bool is_low_latency_stream,
                        const absl::optional<ColorSpace>& color_space,
                        const absl::optional<UpdateRect>& update_rect,
                        RtpPacketInfos packet_infos)
@@ -268,6 +271,7 @@ VideoFrame::VideoFrame(uint16_t id,
       ntp_time_ms_(ntp_time_ms),
       timestamp_us_(timestamp_us),
       rotation_(rotation),
+      is_low_latency_stream_(is_low_latency_stream),
       color_space_(color_space),
       update_rect_(update_rect),
       packet_infos_(std::move(packet_infos)) {
