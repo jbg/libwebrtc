@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08654d2b_e61a190a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-08T07:43:31Z",
+      "side": 1,
+      "message": "The new version are build fixed for `rtc_use_pipewire\u003dfalse` and updates for the latest version of https://webrtc-review.googlesource.com/c/src/+/263721.",
+      "revId": "b0a08e46677d7f4a4f19a0f8c66bdcce015c35e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
