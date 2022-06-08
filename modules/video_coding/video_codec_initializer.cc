@@ -117,13 +117,26 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
     sim_stream->maxBitrate = streams[i].max_bitrate_bps / 1000;
     sim_stream->qpMax = streams[i].max_qp;
 
-    int num_temporal_layers =
-        streams[i].scalability_mode.has_value()
-            ? ScalabilityModeToNumTemporalLayers(*streams[i].scalability_mode)
-            : streams[i].num_temporal_layers.value_or(1);
-
-    sim_stream->numberOfTemporalLayers =
-        static_cast<unsigned char>(num_temporal_layers);
+    if (streams[i].scalability_mode.has_value()) {
+      sim_stream->scalability_mode = *streams[i].scalability_mode;
+    } else {
+      switch (streams[i].num_temporal_layers.value_or(1)) {
+        default:
+          sim_stream->scalability_mode = ScalabilityMode::kL1T1;
+          RTC_DCHECK(false) << "Unexpected number of temporal layers"
+                            << *streams[i].num_temporal_layers;
+          break;
+        case 1:
+          sim_stream->scalability_mode = ScalabilityMode::kL1T1;
+          break;
+        case 2:
+          sim_stream->scalability_mode = ScalabilityMode::kL1T2;
+          break;
+        case 3:
+          sim_stream->scalability_mode = ScalabilityMode::kL1T3;
+          break;
+      }
+    }
     sim_stream->active = streams[i].active;
 
     video_codec.width =
@@ -195,17 +208,6 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
           break;
         }
       }
-      video_codec.VP8()->numberOfTemporalLayers =
-          streams.back().scalability_mode.has_value()
-              ? ScalabilityModeToNumTemporalLayers(
-                    *streams.back().scalability_mode)
-              : streams.back().num_temporal_layers.value_or(
-                    video_codec.VP8()->numberOfTemporalLayers);
-
-      RTC_DCHECK_GE(video_codec.VP8()->numberOfTemporalLayers, 1);
-      RTC_DCHECK_LE(video_codec.VP8()->numberOfTemporalLayers,
-                    kMaxTemporalStreams);
-
       break;
     }
     case kVideoCodecVP9: {
@@ -215,13 +217,6 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
       if (!config.encoder_specific_settings) {
         *video_codec.VP9() = VideoEncoder::GetDefaultVp9Settings();
       }
-
-      video_codec.VP9()->numberOfTemporalLayers = static_cast<unsigned char>(
-          streams.back().num_temporal_layers.value_or(
-              video_codec.VP9()->numberOfTemporalLayers));
-      RTC_DCHECK_GE(video_codec.VP9()->numberOfTemporalLayers, 1);
-      RTC_DCHECK_LE(video_codec.VP9()->numberOfTemporalLayers,
-                    kMaxTemporalStreams);
 
       RTC_DCHECK(config.spatial_layers.empty() ||
                  config.spatial_layers.size() ==
@@ -249,7 +244,9 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
         spatial_layers = GetSvcConfig(
             video_codec.width, video_codec.height, video_codec.maxFramerate,
             first_active_layer, video_codec.VP9()->numberOfSpatialLayers,
-            video_codec.VP9()->numberOfTemporalLayers,
+            ScalabilityModeToNumTemporalLayers(
+                video_codec.GetScalabilityMode().value_or(
+                    ScalabilityMode::kL1T1)),
             video_codec.mode == VideoCodecMode::kScreensharing);
 
         // If there was no request for spatial layering, don't limit bitrate
@@ -292,12 +289,6 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
       RTC_DCHECK_LE(video_codec.VP9()->numberOfSpatialLayers,
                     kMaxSpatialLayers);
 
-      video_codec.VP9()->numberOfTemporalLayers = static_cast<unsigned char>(
-          spatial_layers.back().numberOfTemporalLayers);
-      RTC_DCHECK_GE(video_codec.VP9()->numberOfTemporalLayers, 1);
-      RTC_DCHECK_LE(video_codec.VP9()->numberOfTemporalLayers,
-                    kMaxTemporalStreams);
-
       break;
     }
     case kVideoCodecAV1:
@@ -317,12 +308,6 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
       RTC_CHECK(!config.encoder_specific_settings);
 
       *video_codec.H264() = VideoEncoder::GetDefaultH264Settings();
-      video_codec.H264()->numberOfTemporalLayers = static_cast<unsigned char>(
-          streams.back().num_temporal_layers.value_or(
-              video_codec.H264()->numberOfTemporalLayers));
-      RTC_DCHECK_GE(video_codec.H264()->numberOfTemporalLayers, 1);
-      RTC_DCHECK_LE(video_codec.H264()->numberOfTemporalLayers,
-                    kMaxTemporalStreams);
       break;
     }
     default:

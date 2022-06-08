@@ -783,9 +783,8 @@ webrtc::VideoCodec SimulcastEncoderAdapter::MakeStreamCodec(
       codec_params.qpMax = kLowestResMaxQp;
     }
   }
+  codec_params.SetScalabilityMode(stream_params.scalability_mode);
   if (codec.codecType == webrtc::kVideoCodecVP8) {
-    codec_params.VP8()->numberOfTemporalLayers =
-        stream_params.numberOfTemporalLayers;
     if (!is_highest_quality_stream) {
       // For resolutions below CIF, set the codec `complexity` parameter to
       // kComplexityHigher, which maps to cpu_used = -4.
@@ -797,11 +796,7 @@ webrtc::VideoCodec SimulcastEncoderAdapter::MakeStreamCodec(
       // Turn off denoising for all streams but the highest resolution.
       codec_params.VP8()->denoisingOn = false;
     }
-  } else if (codec.codecType == webrtc::kVideoCodecH264) {
-    codec_params.H264()->numberOfTemporalLayers =
-        stream_params.numberOfTemporalLayers;
   }
-
   // Cap start bitrate to the min bitrate in order to avoid strange codec
   // behavior.
   codec_params.startBitrate =

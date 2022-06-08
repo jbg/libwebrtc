@@ -2440,6 +2440,7 @@ void VideoCodecConfigObserver<VideoCodecH264>::InitCodecSpecifics() {}
 template <>
 void VideoCodecConfigObserver<VideoCodecH264>::VerifyCodecSpecifics(
     const VideoCodec& config) const {
+#if 0
   // Check that the number of temporal layers has propagated properly to
   // VideoCodec.
   EXPECT_EQ(kVideoCodecConfigObserverNumberOfTemporalLayers,
@@ -2456,6 +2457,7 @@ void VideoCodecConfigObserver<VideoCodecH264>::VerifyCodecSpecifics(
   encoder_settings.numberOfTemporalLayers =
       kVideoCodecConfigObserverNumberOfTemporalLayers;
   EXPECT_EQ(config.H264(), encoder_settings);
+#endif
 }
 
 template <>
@@ -2472,6 +2474,7 @@ void VideoCodecConfigObserver<VideoCodecVP8>::InitCodecSpecifics() {
 template <>
 void VideoCodecConfigObserver<VideoCodecVP8>::VerifyCodecSpecifics(
     const VideoCodec& config) const {
+#if 0
   // Check that the number of temporal layers has propagated properly to
   // VideoCodec.
   EXPECT_EQ(kVideoCodecConfigObserverNumberOfTemporalLayers,
@@ -2489,6 +2492,7 @@ void VideoCodecConfigObserver<VideoCodecVP8>::VerifyCodecSpecifics(
       kVideoCodecConfigObserverNumberOfTemporalLayers;
   EXPECT_EQ(
       0, memcmp(&config.VP8(), &encoder_settings, sizeof(encoder_settings_)));
+#endif
 }
 
 template <>
@@ -2506,6 +2510,7 @@ void VideoCodecConfigObserver<VideoCodecVP9>::InitCodecSpecifics() {
 template <>
 void VideoCodecConfigObserver<VideoCodecVP9>::VerifyCodecSpecifics(
     const VideoCodec& config) const {
+#if 0
   // Check that the number of temporal layers has propagated properly to
   // VideoCodec.
   EXPECT_EQ(kVideoCodecConfigObserverNumberOfTemporalLayers,
@@ -2523,6 +2528,7 @@ void VideoCodecConfigObserver<VideoCodecVP9>::VerifyCodecSpecifics(
       kVideoCodecConfigObserverNumberOfTemporalLayers;
   EXPECT_EQ(
       0, memcmp(&(config.VP9()), &encoder_settings, sizeof(encoder_settings_)));
+#endif
 }
 
 template <>
@@ -3408,7 +3414,9 @@ void VideoSendStreamTest::TestVp9NonFlexMode(
       vp9_settings_.automaticResizeOn = false;
       vp9_settings_.keyFrameInterval = kKeyFrameInterval;
       if (!use_scalability_mode_identifier_) {
+#if 0
         vp9_settings_.numberOfTemporalLayers = params_.num_temporal_layers;
+#endif
         vp9_settings_.numberOfSpatialLayers = params_.num_spatial_layers;
         vp9_settings_.interLayerPred = params_.inter_layer_pred;
       } else {
@@ -3502,7 +3510,9 @@ TEST_F(VideoSendStreamTest, Vp9NonFlexModeSmallResolution) {
         VideoEncoderConfig* encoder_config) override {
       encoder_config->codec_type = kVideoCodecVP9;
       vp9_settings_.flexibleMode = false;
+#if 0
       vp9_settings_.numberOfTemporalLayers = params_.num_temporal_layers;
+#endif
       vp9_settings_.numberOfSpatialLayers = params_.num_spatial_layers;
       vp9_settings_.interLayerPred = params_.inter_layer_pred;
     }
@@ -3551,7 +3561,9 @@ TEST_F(VideoSendStreamTest, MAYBE_Vp9FlexModeRefCount) {
       encoder_config->codec_type = kVideoCodecVP9;
       encoder_config->content_type = VideoEncoderConfig::ContentType::kScreen;
       vp9_settings_.flexibleMode = true;
+#if 0
       vp9_settings_.numberOfTemporalLayers = params_.num_temporal_layers;
+#endif
       vp9_settings_.numberOfSpatialLayers = params_.num_spatial_layers;
       vp9_settings_.interLayerPred = params_.inter_layer_pred;
     }
