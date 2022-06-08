@@ -55,7 +55,6 @@ if (is_android) {
       ":swcodecs_java",
       ":video_api_java",
       ":video_java",
-      "../../modules/audio_device:audio_device_java",
       "../../rtc_base:base_java",
     ]
   }
@@ -91,7 +90,6 @@ if (is_android) {
       ":surfaceviewrenderer_java",
       ":video_api_java",
       ":video_java",
-      "//modules/audio_device:audio_device_java",
       "//rtc_base:base_java",
     ]
   }
@@ -317,7 +315,6 @@ if (is_android) {
       ":swcodecs_java",
       ":video_api_java",
       ":video_java",
-      "//modules/audio_device:audio_device_java",
       "//rtc_base:base_java",
       "//third_party/androidx:androidx_annotation_annotation_java",
     ]
@@ -579,7 +576,6 @@ if (current_os == "linux" || is_android) {
       ":internal_jni",
       ":native_api_jni",
       "../../api:field_trials_view",
-      "../../api:libjingle_peerconnection_api",
       "../../api:scoped_refptr",
       "../../api:sequence_checker",
       "../../rtc_base",
@@ -930,6 +926,7 @@ if (current_os == "linux" || is_android) {
   rtc_library("native_api_jni") {
     visibility = [ "*" ]
     sources = [
+      "native_api/jni/application_context_provider.cc",
       "native_api/jni/class_loader.cc",
       "native_api/jni/java_types.cc",
       "native_api/jni/jvm.cc",
@@ -938,6 +935,7 @@ if (current_os == "linux" || is_android) {
     ]
 
     public = [
+      "native_api/jni/application_context_provider.h",
       "native_api/jni/class_loader.h",
       "native_api/jni/java_types.h",
       "native_api/jni/jni_int_wrapper.h",
@@ -946,6 +944,7 @@ if (current_os == "linux" || is_android) {
     ]
 
     deps = [
+      ":generated_context_provider_jni",
       ":generated_external_classes_jni",
       ":generated_native_api_jni",
       ":internal_jni",
@@ -984,10 +983,12 @@ if (current_os == "linux" || is_android) {
 
     deps = [
       ":base_jni",
+      ":internal_jni",
       ":java_audio_device_module",
+      ":native_api_jni",
       ":opensles_audio_device_module",
       "../../api:scoped_refptr",
-      "../../modules/audio_device",
+      "../../modules/audio_device:audio_device_api",
       "../../rtc_base:checks",
       "../../rtc_base:logging",
       "../../rtc_base:refcount",
@@ -1197,7 +1198,7 @@ if (current_os == "linux" || is_android) {
       ":base_jni",
       ":generated_java_audio_device_module_native_jni",
       "../../api:sequence_checker",
-      "../../modules/audio_device",
+      "../../modules/audio_device:audio_device_api",
       "../../modules/audio_device:audio_device_buffer",
       "../../rtc_base:checks",
       "../../rtc_base:logging",
@@ -1255,7 +1256,7 @@ if (current_os == "linux" || is_android) {
       "../../api:refcountedbase",
       "../../api:scoped_refptr",
       "../../api:sequence_checker",
-      "../../modules/audio_device",
+      "../../modules/audio_device:audio_device_api",
       "../../modules/audio_device:audio_device_buffer",
       "../../rtc_base:checks",
       "../../rtc_base:logging",
@@ -1439,6 +1440,7 @@ if (current_os == "linux" || is_android) {
 
   generate_jni("generated_native_api_jni") {
     sources = [
+      "src/java/org/webrtc/ApplicationContextProvider.java",
       "src/java/org/webrtc/JniHelper.java",
       "src/java/org/webrtc/WebRtcClassLoader.java",
     ]
@@ -1464,6 +1466,12 @@ if (current_os == "linux" || is_android) {
       "src/java/org/webrtc/audio/WebRtcAudioRecord.java",
       "src/java/org/webrtc/audio/WebRtcAudioTrack.java",
     ]
+    namespace = "webrtc::jni"
+    jni_generator_include = "//sdk/android/src/jni/jni_generator_helper.h"
+  }
+
+  generate_jni("generated_context_provider_jni") {
+    sources = [ "src/java/org/webrtc/ApplicationContextProvider.java" ]
     namespace = "webrtc::jni"
     jni_generator_include = "//sdk/android/src/jni/jni_generator_helper.h"
   }
@@ -1603,8 +1611,6 @@ if (is_android) {
 
     sources = [
       "native_unittests/android_network_monitor_unittest.cc",
-      "native_unittests/application_context_provider.cc",
-      "native_unittests/application_context_provider.h",
       "native_unittests/audio_device/audio_device_unittest.cc",
       "native_unittests/codecs/wrapper_unittest.cc",
       "native_unittests/java_types_unittest.cc",
@@ -1676,7 +1682,6 @@ if (is_android) {
     testonly = true
 
     sources = [
-      "native_unittests/org/webrtc/ApplicationContextProvider.java",
       "native_unittests/org/webrtc/BuildInfo.java",
       "native_unittests/org/webrtc/CodecsWrapperTestHelper.java",
       "native_unittests/org/webrtc/FakeVideoEncoder.java",
@@ -1701,7 +1706,6 @@ if (is_android) {
     testonly = true
 
     sources = [
-      "native_unittests/org/webrtc/ApplicationContextProvider.java",
       "native_unittests/org/webrtc/BuildInfo.java",
       "native_unittests/org/webrtc/CodecsWrapperTestHelper.java",
       "native_unittests/org/webrtc/JavaTypesTestHelper.java",
