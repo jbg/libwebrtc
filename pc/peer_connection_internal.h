@@ -20,7 +20,6 @@
 #include "api/peer_connection_interface.h"
 #include "call/call.h"
 #include "pc/jsep_transport_controller.h"
-#include "pc/peer_connection_message_handler.h"
 #include "pc/rtp_transceiver.h"
 #include "pc/rtp_transmission_manager.h"
 #include "pc/sctp_data_channel.h"
@@ -61,7 +60,6 @@ class PeerConnectionSdpMethods {
   virtual void ReportSdpBundleUsage(
       const SessionDescriptionInterface& remote_description) = 0;
 
-  virtual PeerConnectionMessageHandler* message_handler() = 0;
   virtual RtpTransmissionManager* rtp_manager() = 0;
   virtual const RtpTransmissionManager* rtp_manager() const = 0;
   virtual bool dtls_enabled() const = 0;

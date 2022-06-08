@@ -525,7 +525,6 @@ PeerConnection::PeerConnection(
       session_id_(rtc::ToString(rtc::CreateRandomId64() & LLONG_MAX)),
       dtls_enabled_(dtls_enabled),
       data_channel_controller_(this),
-      message_handler_(signaling_thread()),
       weak_factory_(this) {
   worker_thread()->Invoke<void>(RTC_FROM_HERE, [this] {
     RTC_DCHECK_RUN_ON(worker_thread());
@@ -664,11 +663,12 @@ RTCError PeerConnection::Initialize(
   int delay_ms = configuration.report_usage_pattern_delay_ms
                      ? *configuration.report_usage_pattern_delay_ms
                      : REPORT_USAGE_PATTERN_DELAY_MS;
-  message_handler_.RequestUsagePatternReport(
-      [this]() {
-        RTC_DCHECK_RUN_ON(signaling_thread());
-        ReportUsagePattern();
-      },
+  signaling_thread()->PostDelayedTask(
+      ToQueuedTask(signaling_thread_safety_,
+                   [this]() {
+                     RTC_DCHECK_RUN_ON(signaling_thread());
+                     ReportUsagePattern();
+                   }),
       delay_ms);
 
   // Record the number of configured ICE servers for all connections.
@@ -1229,7 +1229,13 @@ bool PeerConnection::GetStats(StatsObserver* observer,
                         << track->id();
     return false;
   }
-  message_handler_.PostGetStats(observer, stats_.get(), track);
+  signaling_thread()->PostTask(
+      ToQueuedTask(signaling_thread_safety_, [this, track, observer]() {
+        RTC_DCHECK_RUN_ON(signaling_thread());
+        StatsReports reports;
+        stats_->GetStats(track, &reports);
+        observer->OnComplete(reports);
+      }));
 
   return true;
 }
@@ -2964,12 +2970,10 @@ bool PeerConnection::ShouldFireNegotiationNeededEvent(uint32_t event_id) {
 
 void PeerConnection::RequestUsagePatternReportForTesting() {
   RTC_DCHECK_RUN_ON(signaling_thread());
-  message_handler_.RequestUsagePatternReport(
-      [this]() {
-        RTC_DCHECK_RUN_ON(signaling_thread());
-        ReportUsagePattern();
-      },
-      /* delay_ms= */ 0);
+  signaling_thread()->PostTask(ToQueuedTask(signaling_thread_safety_, [this]() {
+    RTC_DCHECK_RUN_ON(signaling_thread());
+    ReportUsagePattern();
+  }));
 }
 
 std::function<void(const rtc::CopyOnWriteBuffer& packet,

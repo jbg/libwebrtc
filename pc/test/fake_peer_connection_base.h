@@ -302,7 +302,6 @@ class FakePeerConnectionBase : public PeerConnectionInternal {
   void ReportSdpBundleUsage(
       const SessionDescriptionInterface& remote_description) override {}
 
-  PeerConnectionMessageHandler* message_handler() override { return nullptr; }
   RtpTransmissionManager* rtp_manager() override { return nullptr; }
   const RtpTransmissionManager* rtp_manager() const override { return nullptr; }
   bool dtls_enabled() const override { return false; }

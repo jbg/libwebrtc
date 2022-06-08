@@ -210,7 +210,6 @@ class MockPeerConnectionInternal : public PeerConnectionInternal {
               ReportSdpBundleUsage,
               (const SessionDescriptionInterface&),
               (override));
-  MOCK_METHOD(PeerConnectionMessageHandler*, message_handler, (), (override));
   MOCK_METHOD(RtpTransmissionManager*, rtp_manager, (), (override));
   MOCK_METHOD(const RtpTransmissionManager*,
               rtp_manager,

@@ -733,7 +733,6 @@ rtc_source_set("peerconnection") {
     ":peer_connection",
     ":peer_connection_factory",
     ":peer_connection_internal",
-    ":peer_connection_message_handler",
     ":proxy",
     ":remote_audio_source",
     ":rtc_stats_collector",
@@ -966,7 +965,6 @@ rtc_source_set("peer_connection_sdp_methods") {
   sources = [ "peer_connection_sdp_methods.h" ]
   deps = [
     ":jsep_transport_controller",
-    ":peer_connection_message_handler",
     ":sctp_data_channel",
     ":usage_pattern",
     "../api:libjingle_peerconnection_api",
@@ -979,7 +977,6 @@ rtc_source_set("peer_connection_internal") {
   sources = [ "peer_connection_internal.h" ]
   deps = [
     ":jsep_transport_controller",
-    ":peer_connection_message_handler",
     ":peer_connection_sdp_methods",
     ":rtp_transceiver",
     ":rtp_transmission_manager",
@@ -1081,7 +1078,6 @@ rtc_source_set("sdp_offer_answer") {
     ":media_stream_observer",
     ":media_stream_proxy",
     ":peer_connection_internal",
-    ":peer_connection_message_handler",
     ":rtp_media_utils",
     ":rtp_receiver",
     ":rtp_receiver_proxy",
@@ -1168,7 +1164,6 @@ rtc_source_set("peer_connection") {
     ":ice_server_parsing",
     ":jsep_transport_controller",
     ":peer_connection_internal",
-    ":peer_connection_message_handler",
     ":rtc_stats_collector",
     ":rtp_receiver",
     ":rtp_receiver_proxy",
@@ -1501,26 +1496,6 @@ rtc_source_set("peer_connection_factory") {
     "../rtc_base/system:file_wrapper",
   ]
   absl_deps = [ "//third_party/abseil-cpp/absl/strings:strings" ]
-}
-
-rtc_library("peer_connection_message_handler") {
-  visibility = [ ":*" ]
-  sources = [
-    "peer_connection_message_handler.cc",
-    "peer_connection_message_handler.h",
-  ]
-  deps = [
-    ":stats_collector_interface",
-    "../api:libjingle_peerconnection_api",
-    "../api:media_stream_interface",
-    "../api:rtc_error",
-    "../api:scoped_refptr",
-    "../api:sequence_checker",
-    "../rtc_base",
-    "../rtc_base:checks",
-    "../rtc_base:location",
-    "../rtc_base:threading",
-  ]
 }
 
 rtc_library("usage_pattern") {

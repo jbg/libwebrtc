@@ -61,7 +61,6 @@
 #include "pc/dtls_transport.h"
 #include "pc/jsep_transport_controller.h"
 #include "pc/peer_connection_internal.h"
-#include "pc/peer_connection_message_handler.h"
 #include "pc/rtc_stats_collector.h"
 #include "pc/rtp_transceiver.h"
 #include "pc/rtp_transmission_manager.h"
@@ -336,10 +335,6 @@ class PeerConnection : public PeerConnectionInternal,
       const override {
     RTC_DCHECK_RUN_ON(signaling_thread());
     return &configuration_;
-  }
-  PeerConnectionMessageHandler* message_handler() override {
-    RTC_DCHECK_RUN_ON(signaling_thread());
-    return &message_handler_;
   }
 
   RtpTransmissionManager* rtp_manager() override { return rtp_manager_.get(); }
@@ -695,10 +690,6 @@ class PeerConnection : public PeerConnectionInternal,
   // The DataChannelController is accessed from both the signaling thread
   // and networking thread. It is a thread-aware object.
   DataChannelController data_channel_controller_;
-
-  // Machinery for handling messages posted to oneself
-  PeerConnectionMessageHandler message_handler_
-      RTC_GUARDED_BY(signaling_thread());
 
   // Administration of senders, receivers and transceivers
   // Accessed on both signaling and network thread. Const after Initialize().
