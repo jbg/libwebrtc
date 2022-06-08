@@ -16,6 +16,23 @@
       "message": "I have fixed unittest error. Could you please run try-jobs again? Is\u0027t caused by get android application context by JVM in utility directory but not init it. I have changed to use ApplicationContextProvider to get context instead of it.",
       "revId": "ab4370d2297829b3380ad0fcc6ad9836d6854315",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcc718a1_e0d9d210",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-06-08T11:49:36Z",
+      "side": 1,
+      "message": "Still several failing bots. Sorry.",
+      "revId": "ab4370d2297829b3380ad0fcc6ad9836d6854315",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
