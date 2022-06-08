@@ -31,6 +31,7 @@ pw_stream * pw_stream_new(pw_core *core, const char *name, pw_properties *props)
 int pw_stream_queue_buffer(pw_stream *stream, pw_buffer *buffer);
 int pw_stream_set_active(pw_stream *stream, bool active);
 int pw_stream_update_params(pw_stream *stream, const spa_pod **params, uint32_t n_params);
+const char * pw_stream_state_as_string(enum pw_stream_state state);
 
 // thread-loop.h
 void pw_thread_loop_destroy(pw_thread_loop *loop);
@@ -48,3 +49,6 @@ void pw_context_destroy(pw_context *context);
 pw_context *pw_context_new(pw_loop *main_loop, pw_properties *props, size_t user_data_size);
 pw_core * pw_context_connect(pw_context *context, pw_properties *properties, size_t user_data_size);
 pw_core * pw_context_connect_fd(pw_context *context, int fd, pw_properties *properties, size_t user_data_size);
+
+// proxy.h
+void pw_proxy_destroy(struct pw_proxy *proxy);
