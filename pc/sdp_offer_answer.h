@@ -694,6 +694,9 @@ class SdpOfferAnswerHandler : public SdpStateProvider,
 
   rtc::WeakPtrFactory<SdpOfferAnswerHandler> weak_ptr_factory_
       RTC_GUARDED_BY(signaling_thread());
+  // This safety ensures that lambdas do not complete after deletion
+  // of this object.
+  ScopedTaskSafety task_safety_;
 };
 
 }  // namespace webrtc
