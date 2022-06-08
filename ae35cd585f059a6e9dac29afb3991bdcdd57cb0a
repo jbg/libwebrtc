@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f25e2ed_65b4e5f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-08T15:54:58Z",
+      "side": 1,
+      "message": "So these are inliners that allow you to send in a lambda rather than ToQueuedTask(lambda)?\nAdding @danilchap who can say why he thought it was worthwile.\n\n",
+      "revId": "ae35cd585f059a6e9dac29afb3991bdcdd57cb0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
