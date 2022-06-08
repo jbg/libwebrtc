@@ -537,20 +537,6 @@ bool TransportFeedback::Parse(const CommonHeader& packet) {
   return true;
 }
 
-std::unique_ptr<TransportFeedback> TransportFeedback::ParseFrom(
-    const uint8_t* buffer,
-    size_t length) {
-  CommonHeader header;
-  if (!header.Parse(buffer, length))
-    return nullptr;
-  if (header.type() != kPacketType || header.fmt() != kFeedbackMessageType)
-    return nullptr;
-  std::unique_ptr<TransportFeedback> parsed(new TransportFeedback);
-  if (!parsed->Parse(header))
-    return nullptr;
-  return parsed;
-}
-
 bool TransportFeedback::IsConsistent() const {
   size_t packet_size = kTransportFeedbackHeaderSizeBytes;
   std::vector<DeltaSize> delta_sizes;

@@ -285,12 +285,13 @@ RemoteEstimatorProxy::MaybeBuildFeedbackPacket(
       // shall be the time of the first received packet in the feedback.
       feedback_packet->SetBase(
           static_cast<uint16_t>(begin_sequence_number_inclusive & 0xFFFF),
-          arrival_time_ms * 1000);
+          Timestamp::Millis(arrival_time_ms));
       feedback_packet->SetFeedbackSequenceNumber(feedback_packet_count_++);
     }
 
-    if (!feedback_packet->AddReceivedPacket(static_cast<uint16_t>(seq & 0xFFFF),
-                                            arrival_time_ms * 1000)) {
+    if (!feedback_packet->AddReceivedPacket(
+            static_cast<uint16_t>(seq & 0xFFFF),
+            Timestamp::Millis(arrival_time_ms))) {
       // Could not add timestamp, feedback packet might be full. Return and
       // try again with a fresh packet.
       break;
