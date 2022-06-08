@@ -36,8 +36,7 @@ constexpr size_t kDefaultPacketSize = 100;
 constexpr uint32_t kMediaSsrc = 456;
 constexpr uint16_t kBaseSeq = 10;
 constexpr int64_t kBaseTimeMs = 123;
-constexpr int64_t kMaxSmallDeltaMs =
-    (rtcp::TransportFeedback::kDeltaScaleFactor * 0xFF) / 1000;
+constexpr TimeDelta kMaxSmallDelta = rtcp::TransportFeedback::kDeltaTick * 0xFF;
 
 constexpr int kBackWindowMs = 500;
 constexpr int kMinSendIntervalMs = 50;
@@ -56,10 +55,10 @@ std::vector<uint16_t> SequenceNumbers(
 std::vector<int64_t> TimestampsMs(
     const rtcp::TransportFeedback& feedback_packet) {
   std::vector<int64_t> timestamps;
-  int64_t timestamp_us = feedback_packet.GetBaseTimeUs();
+  Timestamp timestamp = feedback_packet.BaseTime();
   for (const auto& rtp_packet_received : feedback_packet.GetReceivedPackets()) {
-    timestamp_us += rtp_packet_received.delta_us();
-    timestamps.push_back(timestamp_us / 1000);
+    timestamp += rtp_packet_received.delta();
+    timestamps.push_back(timestamp.ms());
   }
   return timestamps;
 }
@@ -186,8 +185,8 @@ TEST_F(RemoteEstimatorProxyTest, FeedbackWithMissingStart) {
 
 TEST_F(RemoteEstimatorProxyTest, SendsFeedbackWithVaryingDeltas) {
   IncomingPacket(kBaseSeq, kBaseTimeMs);
-  IncomingPacket(kBaseSeq + 1, kBaseTimeMs + kMaxSmallDeltaMs);
-  IncomingPacket(kBaseSeq + 2, kBaseTimeMs + (2 * kMaxSmallDeltaMs) + 1);
+  IncomingPacket(kBaseSeq + 1, kBaseTimeMs + kMaxSmallDelta.ms());
+  IncomingPacket(kBaseSeq + 2, kBaseTimeMs + (2 * kMaxSmallDelta.ms()) + 1);
 
   EXPECT_CALL(feedback_sender_, Call)
       .WillOnce(Invoke(
@@ -200,20 +199,21 @@ TEST_F(RemoteEstimatorProxyTest, SendsFeedbackWithVaryingDeltas) {
 
             EXPECT_THAT(SequenceNumbers(*feedback_packet),
                         ElementsAre(kBaseSeq, kBaseSeq + 1, kBaseSeq + 2));
-            EXPECT_THAT(TimestampsMs(*feedback_packet),
-                        ElementsAre(kBaseTimeMs, kBaseTimeMs + kMaxSmallDeltaMs,
-                                    kBaseTimeMs + (2 * kMaxSmallDeltaMs) + 1));
+            EXPECT_THAT(
+                TimestampsMs(*feedback_packet),
+                ElementsAre(kBaseTimeMs, kBaseTimeMs + kMaxSmallDelta.ms(),
+                            kBaseTimeMs + (2 * kMaxSmallDelta.ms()) + 1));
           }));
 
   Process();
 }
 
 TEST_F(RemoteEstimatorProxyTest, SendsFragmentedFeedback) {
-  static constexpr int64_t kTooLargeDelta =
-      rtcp::TransportFeedback::kDeltaScaleFactor * (1 << 16);
+  static constexpr TimeDelta kTooLargeDelta =
+      rtcp::TransportFeedback::kDeltaTick * (1 << 16);
 
   IncomingPacket(kBaseSeq, kBaseTimeMs);
-  IncomingPacket(kBaseSeq + 1, kBaseTimeMs + kTooLargeDelta);
+  IncomingPacket(kBaseSeq + 1, kBaseTimeMs + kTooLargeDelta.ms());
 
   EXPECT_CALL(feedback_sender_, Call)
       .WillOnce(Invoke(
@@ -240,7 +240,7 @@ TEST_F(RemoteEstimatorProxyTest, SendsFragmentedFeedback) {
             EXPECT_THAT(SequenceNumbers(*feedback_packet),
                         ElementsAre(kBaseSeq + 1));
             EXPECT_THAT(TimestampsMs(*feedback_packet),
-                        ElementsAre(kBaseTimeMs + kTooLargeDelta));
+                        ElementsAre(kBaseTimeMs + kTooLargeDelta.ms()));
           }));
 
   Process();
@@ -484,8 +484,8 @@ TEST_F(RemoteEstimatorProxyOnRequestTest, ProcessDoesNotSendFeedback) {
 TEST_F(RemoteEstimatorProxyOnRequestTest, RequestSinglePacketFeedback) {
   proxy_.SetSendPeriodicFeedback(false);
   IncomingPacket(kBaseSeq, kBaseTimeMs);
-  IncomingPacket(kBaseSeq + 1, kBaseTimeMs + kMaxSmallDeltaMs);
-  IncomingPacket(kBaseSeq + 2, kBaseTimeMs + 2 * kMaxSmallDeltaMs);
+  IncomingPacket(kBaseSeq + 1, kBaseTimeMs + kMaxSmallDelta.ms());
+  IncomingPacket(kBaseSeq + 2, kBaseTimeMs + 2 * kMaxSmallDelta.ms());
 
   EXPECT_CALL(feedback_sender_, Call)
       .WillOnce(Invoke(
@@ -499,12 +499,12 @@ TEST_F(RemoteEstimatorProxyOnRequestTest, RequestSinglePacketFeedback) {
             EXPECT_THAT(SequenceNumbers(*feedback_packet),
                         ElementsAre(kBaseSeq + 3));
             EXPECT_THAT(TimestampsMs(*feedback_packet),
-                        ElementsAre(kBaseTimeMs + 3 * kMaxSmallDeltaMs));
+                        ElementsAre(kBaseTimeMs + 3 * kMaxSmallDelta.ms()));
           }));
 
   constexpr FeedbackRequest kSinglePacketFeedbackRequest = {
       /*include_timestamps=*/true, /*sequence_count=*/1};
-  IncomingPacket(kBaseSeq + 3, kBaseTimeMs + 3 * kMaxSmallDeltaMs,
+  IncomingPacket(kBaseSeq + 3, kBaseTimeMs + 3 * kMaxSmallDelta.ms(),
                  kSinglePacketFeedbackRequest);
 }
 
@@ -512,7 +512,7 @@ TEST_F(RemoteEstimatorProxyOnRequestTest, RequestLastFivePacketFeedback) {
   proxy_.SetSendPeriodicFeedback(false);
   int i = 0;
   for (; i < 10; ++i) {
-    IncomingPacket(kBaseSeq + i, kBaseTimeMs + i * kMaxSmallDeltaMs);
+    IncomingPacket(kBaseSeq + i, kBaseTimeMs + i * kMaxSmallDelta.ms());
   }
 
   EXPECT_CALL(feedback_sender_, Call)
@@ -528,16 +528,16 @@ TEST_F(RemoteEstimatorProxyOnRequestTest, RequestLastFivePacketFeedback) {
                         ElementsAre(kBaseSeq + 6, kBaseSeq + 7, kBaseSeq + 8,
                                     kBaseSeq + 9, kBaseSeq + 10));
             EXPECT_THAT(TimestampsMs(*feedback_packet),
-                        ElementsAre(kBaseTimeMs + 6 * kMaxSmallDeltaMs,
-                                    kBaseTimeMs + 7 * kMaxSmallDeltaMs,
-                                    kBaseTimeMs + 8 * kMaxSmallDeltaMs,
-                                    kBaseTimeMs + 9 * kMaxSmallDeltaMs,
-                                    kBaseTimeMs + 10 * kMaxSmallDeltaMs));
+                        ElementsAre(kBaseTimeMs + 6 * kMaxSmallDelta.ms(),
+                                    kBaseTimeMs + 7 * kMaxSmallDelta.ms(),
+                                    kBaseTimeMs + 8 * kMaxSmallDelta.ms(),
+                                    kBaseTimeMs + 9 * kMaxSmallDelta.ms(),
+                                    kBaseTimeMs + 10 * kMaxSmallDelta.ms()));
           }));
 
   constexpr FeedbackRequest kFivePacketsFeedbackRequest = {
       /*include_timestamps=*/true, /*sequence_count=*/5};
-  IncomingPacket(kBaseSeq + i, kBaseTimeMs + i * kMaxSmallDeltaMs,
+  IncomingPacket(kBaseSeq + i, kBaseTimeMs + i * kMaxSmallDelta.ms(),
                  kFivePacketsFeedbackRequest);
 }
 
@@ -547,7 +547,7 @@ TEST_F(RemoteEstimatorProxyOnRequestTest,
   int i = 0;
   for (; i < 10; ++i) {
     if (i != 7 && i != 9)
-      IncomingPacket(kBaseSeq + i, kBaseTimeMs + i * kMaxSmallDeltaMs);
+      IncomingPacket(kBaseSeq + i, kBaseTimeMs + i * kMaxSmallDelta.ms());
   }
 
   EXPECT_CALL(feedback_sender_, Call)
@@ -562,14 +562,14 @@ TEST_F(RemoteEstimatorProxyOnRequestTest,
             EXPECT_THAT(SequenceNumbers(*feedback_packet),
                         ElementsAre(kBaseSeq + 6, kBaseSeq + 8, kBaseSeq + 10));
             EXPECT_THAT(TimestampsMs(*feedback_packet),
-                        ElementsAre(kBaseTimeMs + 6 * kMaxSmallDeltaMs,
-                                    kBaseTimeMs + 8 * kMaxSmallDeltaMs,
-                                    kBaseTimeMs + 10 * kMaxSmallDeltaMs));
+                        ElementsAre(kBaseTimeMs + 6 * kMaxSmallDelta.ms(),
+                                    kBaseTimeMs + 8 * kMaxSmallDelta.ms(),
+                                    kBaseTimeMs + 10 * kMaxSmallDelta.ms()));
           }));
 
   constexpr FeedbackRequest kFivePacketsFeedbackRequest = {
       /*include_timestamps=*/true, /*sequence_count=*/5};
-  IncomingPacket(kBaseSeq + i, kBaseTimeMs + i * kMaxSmallDeltaMs,
+  IncomingPacket(kBaseSeq + i, kBaseTimeMs + i * kMaxSmallDelta.ms(),
                  kFivePacketsFeedbackRequest);
 }
 

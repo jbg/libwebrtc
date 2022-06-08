@@ -111,8 +111,7 @@ class TransportFeedback : public Rtpfb {
   bool IncludeTimestamps() const { return include_timestamps_; }
 
   bool Parse(const CommonHeader& packet);
-  static std::unique_ptr<TransportFeedback> ParseFrom(const uint8_t* buffer,
-                                                      size_t length);
+
   // Pre and postcondition for all public methods. Should always return true.
   // This function is for tests.
   bool IsConsistent() const;
