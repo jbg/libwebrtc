@@ -133,6 +133,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae2d1e17_01a3a001",
+        "filename": "api/video_codecs/av1_profile.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-06-09T23:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e29c4d86_ec0caa28",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 21
+      },
+      "revId": "ea5b80f11343cf7f9d80f6bb68822d38cb8fba5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b114101_5a4f39e7",
@@ -146,6 +170,30 @@
       "writtenOn": "2022-06-07T07:59:51Z",
       "side": 1,
       "message": "Could perhaps be absl::string_view (if we\u0027re willing to commit to the value being a constant with unlimited lifetime).",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "ea5b80f11343cf7f9d80f6bb68822d38cb8fba5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68f4e598_9a088fc5",
+        "filename": "api/video_codecs/av1_profile.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-06-09T23:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b114101_5a4f39e7",
       "range": {
         "startLine": 33,
         "startChar": 11,
@@ -179,6 +227,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "761ff3f8_e433352d",
+        "filename": "api/video_codecs/av1_profile.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-06-09T23:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "096be83b_87c53f26",
+      "range": {
+        "startLine": 37,
+        "startChar": 46,
+        "endLine": 37,
+        "endChar": 65
+      },
+      "revId": "ea5b80f11343cf7f9d80f6bb68822d38cb8fba5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b39e15e_6ef13775",
@@ -202,6 +274,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c9697b_ebeaf3ba",
+        "filename": "api/video_codecs/av1_profile.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-06-09T23:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b39e15e_6ef13775",
+      "range": {
+        "startLine": 40,
+        "startChar": 52,
+        "endLine": 40,
+        "endChar": 61
+      },
+      "revId": "ea5b80f11343cf7f9d80f6bb68822d38cb8fba5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca4f6542_facd7a7e",
@@ -215,6 +311,30 @@
       "writtenOn": "2022-06-07T07:59:51Z",
       "side": 1,
       "message": "This change looks unrelated (but perhaps an intentional improvement of consistency?).",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 50
+      },
+      "revId": "ea5b80f11343cf7f9d80f6bb68822d38cb8fba5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a092377f_b4182470",
+        "filename": "api/video_codecs/test/sdp_video_format_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-06-09T23:36:33Z",
+      "side": 1,
+      "message": "Yeah it looked like a bug in the test that I noticed when I was adding the new tests below. The other codecs were comparing upper-case and lower-case variants and AFAIK VP9 shouldn\u0027t be treated any different.",
+      "parentUuid": "ca4f6542_facd7a7e",
       "range": {
         "startLine": 26,
         "startChar": 0,
