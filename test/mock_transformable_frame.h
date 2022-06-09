@@ -22,7 +22,7 @@ class MockTransformableFrame : public TransformableFrameInterface {
   MOCK_METHOD(void, SetData, (rtc::ArrayView<const uint8_t>), (override));
   MOCK_METHOD(uint8_t, GetPayloadType, (), (const, override));
   MOCK_METHOD(uint32_t, GetSsrc, (), (const, override));
-  MOCK_METHOD(uint32_t, GetTimestamp, (), (const, override));
+  MOCK_METHOD(int64_t, GetTimestamp, (), (const, override));
 };
 
 }  // namespace webrtc

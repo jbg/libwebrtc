@@ -36,7 +36,7 @@ class TransformableIncomingAudioFrame
 
   uint8_t GetPayloadType() const override { return header_.payloadType; }
   uint32_t GetSsrc() const override { return ssrc_; }
-  uint32_t GetTimestamp() const override { return header_.timestamp; }
+  int64_t GetTimestamp() const override { return header_.timestamp; }
   const RTPHeader& GetHeader() const override { return header_; }
   Direction GetDirection() const override { return Direction::kReceiver; }
 

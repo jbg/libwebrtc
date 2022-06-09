@@ -56,7 +56,8 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
     encoded_data_ = EncodedImageBuffer::Create(data.data(), data.size());
   }
 
-  uint32_t GetTimestamp() const override { return timestamp_; }
+  int64_t GetTimestamp() const override { return capture_time_ms_; }
+  uint32_t GetRtpTimestamp() const { return timestamp_; }
   uint32_t GetSsrc() const override { return ssrc_; }
 
   bool IsKeyFrame() const override {
@@ -159,7 +160,7 @@ void RTPSenderVideoFrameTransformerDelegate::SendVideo(
   sender_->SendVideo(
       transformed_video_frame->GetPayloadType(),
       transformed_video_frame->GetCodecType(),
-      transformed_video_frame->GetTimestamp(),
+      transformed_video_frame->GetRtpTimestamp(),
       transformed_video_frame->GetCaptureTimeMs(),
       transformed_video_frame->GetData(),
       transformed_video_frame->GetHeader(),

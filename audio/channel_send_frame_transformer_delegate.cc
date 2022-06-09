@@ -37,7 +37,7 @@ class TransformableOutgoingAudioFrame : public TransformableFrameInterface {
   void SetData(rtc::ArrayView<const uint8_t> data) override {
     payload_.SetData(data.data(), data.size());
   }
-  uint32_t GetTimestamp() const override {
+  int64_t GetTimestamp() const override {
     return rtp_timestamp_ + rtp_start_timestamp_;
   }
   uint32_t GetStartTimestamp() const { return rtp_start_timestamp_; }
