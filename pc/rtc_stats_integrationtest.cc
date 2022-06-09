@@ -1138,8 +1138,6 @@ class RTCStatsReportVerifier {
     verifier.TestMemberIsNonNegative<uint64_t>(transport.packets_sent);
     verifier.TestMemberIsNonNegative<uint64_t>(transport.bytes_received);
     verifier.TestMemberIsNonNegative<uint64_t>(transport.packets_received);
-    verifier.TestMemberIsOptionalIDReference(transport.rtcp_transport_stats_id,
-                                             RTCTransportStats::kType);
     verifier.TestMemberIsDefined(transport.dtls_state);
     verifier.TestMemberIsIDReference(transport.selected_candidate_pair_id,
                                      RTCIceCandidatePairStats::kType);

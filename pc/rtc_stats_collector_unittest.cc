@@ -2483,81 +2483,6 @@ TEST_F(RTCStatsCollectorTest, CollectRTCTransportStats) {
       expected_rtp_transport,
       report->Get(expected_rtp_transport.id())->cast_to<RTCTransportStats>());
 
-  cricket::ConnectionInfo rtcp_connection_info;
-  rtcp_connection_info.best_connection = false;
-  rtcp_connection_info.local_candidate = *rtcp_local_candidate.get();
-  rtcp_connection_info.remote_candidate = *rtcp_remote_candidate.get();
-  rtcp_connection_info.sent_total_bytes = 1337;
-  rtcp_connection_info.recv_total_bytes = 42;
-  rtcp_connection_info.sent_total_packets = 3;
-  rtcp_connection_info.sent_discarded_packets = 2;
-  rtcp_connection_info.packets_received = 4;
-  cricket::TransportChannelStats rtcp_transport_channel_stats;
-  rtcp_transport_channel_stats.component =
-      cricket::ICE_CANDIDATE_COMPONENT_RTCP;
-  rtcp_transport_channel_stats.ice_transport_stats.connection_infos.push_back(
-      rtcp_connection_info);
-  rtcp_transport_channel_stats.dtls_state = DtlsTransportState::kConnecting;
-  rtcp_transport_channel_stats.ice_transport_stats.bytes_sent = 1337;
-  rtcp_transport_channel_stats.ice_transport_stats.packets_sent = 1;
-  rtcp_transport_channel_stats.ice_transport_stats.bytes_received = 42;
-  rtcp_transport_channel_stats.ice_transport_stats.packets_received = 4;
-  rtcp_transport_channel_stats.ice_transport_stats.ice_local_username_fragment =
-      "thelocalufrag";
-  rtcp_transport_channel_stats.ice_transport_stats.ice_state =
-      IceTransportState::kChecking;
-  pc_->SetTransportStats(kTransportName, {rtp_transport_channel_stats,
-                                          rtcp_transport_channel_stats});
-
-  // Get stats with RTCP and without an active connection or certificates.
-  report = stats_->GetFreshStatsReport();
-
-  RTCTransportStats expected_rtcp_transport(
-      "RTCTransport_transport_" +
-          rtc::ToString(cricket::ICE_CANDIDATE_COMPONENT_RTCP),
-      report->timestamp_us());
-  expected_rtcp_transport.bytes_sent = 1337;
-  expected_rtcp_transport.packets_sent = 1;
-  expected_rtcp_transport.bytes_received = 42;
-  expected_rtcp_transport.packets_received = 4;
-  expected_rtcp_transport.dtls_state = RTCDtlsTransportState::kConnecting;
-  expected_rtcp_transport.dtls_role = RTCDtlsRole::kUnknown;
-  expected_rtcp_transport.selected_candidate_pair_changes = 0;
-  expected_rtcp_transport.ice_role = RTCIceRole::kUnknown;
-  expected_rtcp_transport.ice_local_username_fragment = "thelocalufrag";
-  expected_rtcp_transport.ice_state = RTCIceTransportState::kChecking;
-
-  expected_rtp_transport.rtcp_transport_stats_id = expected_rtcp_transport.id();
-  ASSERT_TRUE(report->Get(expected_rtp_transport.id()));
-  EXPECT_EQ(
-      expected_rtp_transport,
-      report->Get(expected_rtp_transport.id())->cast_to<RTCTransportStats>());
-  ASSERT_TRUE(report->Get(expected_rtcp_transport.id()));
-  EXPECT_EQ(
-      expected_rtcp_transport,
-      report->Get(expected_rtcp_transport.id())->cast_to<RTCTransportStats>());
-
-  // Get stats with an active connection (selected candidate pair).
-  rtcp_transport_channel_stats.ice_transport_stats.connection_infos[0]
-      .best_connection = true;
-  pc_->SetTransportStats(kTransportName, {rtp_transport_channel_stats,
-                                          rtcp_transport_channel_stats});
-
-  report = stats_->GetFreshStatsReport();
-
-  expected_rtcp_transport.selected_candidate_pair_id =
-      "RTCIceCandidatePair_" + rtcp_local_candidate->id() + "_" +
-      rtcp_remote_candidate->id();
-
-  ASSERT_TRUE(report->Get(expected_rtp_transport.id()));
-  EXPECT_EQ(
-      expected_rtp_transport,
-      report->Get(expected_rtp_transport.id())->cast_to<RTCTransportStats>());
-  ASSERT_TRUE(report->Get(expected_rtcp_transport.id()));
-  EXPECT_EQ(
-      expected_rtcp_transport,
-      report->Get(expected_rtcp_transport.id())->cast_to<RTCTransportStats>());
-
   // Get stats with certificates.
   std::unique_ptr<CertificateInfo> local_certinfo =
       CreateFakeCertificateAndInfoFromDers({"(local) local", "(local) chain"});
@@ -2576,19 +2501,10 @@ TEST_F(RTCStatsCollectorTest, CollectRTCTransportStats) {
   expected_rtp_transport.remote_certificate_id =
       "RTCCertificate_" + remote_certinfo->fingerprints[0];
 
-  expected_rtcp_transport.local_certificate_id =
-      *expected_rtp_transport.local_certificate_id;
-  expected_rtcp_transport.remote_certificate_id =
-      *expected_rtp_transport.remote_certificate_id;
-
   ASSERT_TRUE(report->Get(expected_rtp_transport.id()));
   EXPECT_EQ(
       expected_rtp_transport,
       report->Get(expected_rtp_transport.id())->cast_to<RTCTransportStats>());
-  ASSERT_TRUE(report->Get(expected_rtcp_transport.id()));
-  EXPECT_EQ(
-      expected_rtcp_transport,
-      report->Get(expected_rtcp_transport.id())->cast_to<RTCTransportStats>());
 }
 
 TEST_F(RTCStatsCollectorTest, CollectRTCTransportStatsWithCrypto) {

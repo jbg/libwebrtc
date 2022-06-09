@@ -98,7 +98,6 @@ TEST_F(RTCStatsTraversalTest, NoReachableConnections) {
 }
 
 TEST_F(RTCStatsTraversalTest, SelfReference) {
-  transport_->rtcp_transport_stats_id = "transport";
   TakeReferencedStats({transport_});
   EXPECT_VISITED(transport_);
   EXPECT_UNVISITED(candidate_pair_);
@@ -107,7 +106,6 @@ TEST_F(RTCStatsTraversalTest, SelfReference) {
 }
 
 TEST_F(RTCStatsTraversalTest, BogusReference) {
-  transport_->rtcp_transport_stats_id = "bogus-reference";
   TakeReferencedStats({transport_});
   EXPECT_VISITED(transport_);
   EXPECT_UNVISITED(candidate_pair_);

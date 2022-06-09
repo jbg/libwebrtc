@@ -734,14 +734,9 @@ ProduceRemoteInboundRtpStreamStatsFromReportBlockData(
                                         ? report.Get(*outbound_rtp.transport_id)
                                         : nullptr;
     if (transport_from_id) {
-      const auto& transport = transport_from_id->cast_to<RTCTransportStats>();
-      // If RTP and RTCP are not multiplexed, there is a separate RTCP
-      // transport paired with the RTP transport, otherwise the same
+      // Since RTP and RTCP are multiplexed, the same
       // transport is used for RTCP and RTP.
-      remote_inbound->transport_id =
-          transport.rtcp_transport_stats_id.is_defined()
-              ? *transport.rtcp_transport_stats_id
-              : *outbound_rtp.transport_id;
+      remote_inbound->transport_id = *outbound_rtp.transport_id;
     }
     // We're assuming the same codec is used on both ends. However if the
     // codec is switched out on the fly we may have received a Report Block
@@ -2098,17 +2093,6 @@ void RTCStatsCollector::ProduceTransportStats_n(
     const std::string& transport_name = entry.first;
     const cricket::TransportStats& transport_stats = entry.second;
 
-    // Get reference to RTCP channel, if it exists.
-    std::string rtcp_transport_stats_id;
-    for (const cricket::TransportChannelStats& channel_stats :
-         transport_stats.channel_stats) {
-      if (channel_stats.component == cricket::ICE_CANDIDATE_COMPONENT_RTCP) {
-        rtcp_transport_stats_id = RTCTransportStatsIDFromTransportChannel(
-            transport_name, channel_stats.component);
-        break;
-      }
-    }
-
     // Get reference to local and remote certificates of this transport, if they
     // exist.
     const auto& certificate_stats_it =
@@ -2156,10 +2140,6 @@ void RTCStatsCollector::ProduceTransportStats_n(
           transport_stats->selected_candidate_pair_id =
               RTCIceCandidatePairStatsIDFromConnectionInfo(info);
         }
-      }
-      if (channel_stats.component != cricket::ICE_CANDIDATE_COMPONENT_RTCP &&
-          !rtcp_transport_stats_id.empty()) {
-        transport_stats->rtcp_transport_stats_id = rtcp_transport_stats_id;
       }
       if (!local_certificate_id.empty())
         transport_stats->local_certificate_id = local_certificate_id;

@@ -135,7 +135,6 @@ std::vector<const std::string*> GetStatsReferencedIds(const RTCStats& stats) {
   } else if (type == RTCTransportStats::kType) {
     // RTCTransportStats does not have any neighbor references.
     const auto& transport = static_cast<const RTCTransportStats&>(stats);
-    AddIdIfDefined(transport.rtcp_transport_stats_id, &neighbor_ids);
     AddIdIfDefined(transport.selected_candidate_pair_id, &neighbor_ids);
     AddIdIfDefined(transport.local_certificate_id, &neighbor_ids);
     AddIdIfDefined(transport.remote_certificate_id, &neighbor_ids);
