@@ -100,7 +100,7 @@ class SimulcastRateAllocatorTest : public ::testing::TestWithParam<bool> {
     RTC_DCHECK_GE(active_streams.size(), num_simulcast_layers);
     SetupCodec2SL3TL(active_streams);
     codec_.numberOfSimulcastStreams = num_simulcast_layers;
-    codec_.simulcastStream[2].numberOfTemporalLayers = 3;
+    codec_.simulcastStream[2].scalability_mode = ScalabilityMode::kL1T3;
     codec_.simulcastStream[2].maxBitrate = 4000;
     codec_.simulcastStream[2].targetBitrate = 3000;
     codec_.simulcastStream[2].minBitrate = 2000;
@@ -112,7 +112,7 @@ class SimulcastRateAllocatorTest : public ::testing::TestWithParam<bool> {
     RTC_DCHECK_GE(active_streams.size(), num_simulcast_layers);
     SetupCodec1SL3TL(active_streams);
     codec_.numberOfSimulcastStreams = num_simulcast_layers;
-    codec_.simulcastStream[1].numberOfTemporalLayers = 3;
+    codec_.simulcastStream[1].scalability_mode = ScalabilityMode::kL1T3;
     codec_.simulcastStream[1].maxBitrate = 1000;
     codec_.simulcastStream[1].targetBitrate = 500;
     codec_.simulcastStream[1].minBitrate = 50;
@@ -124,7 +124,7 @@ class SimulcastRateAllocatorTest : public ::testing::TestWithParam<bool> {
     RTC_DCHECK_GE(active_streams.size(), num_simulcast_layers);
     SetupCodec3TL();
     codec_.numberOfSimulcastStreams = num_simulcast_layers;
-    codec_.simulcastStream[0].numberOfTemporalLayers = 3;
+    codec_.simulcastStream[0].scalability_mode = ScalabilityMode::kL1T3;
     codec_.simulcastStream[0].maxBitrate = 500;
     codec_.simulcastStream[0].targetBitrate = 100;
     codec_.simulcastStream[0].minBitrate = 10;
@@ -133,7 +133,7 @@ class SimulcastRateAllocatorTest : public ::testing::TestWithParam<bool> {
 
   void SetupCodec3TL() {
     codec_.maxBitrate = 0;
-    codec_.VP8()->numberOfTemporalLayers = 3;
+    codec_.SetScalabilityMode(ScalabilityMode::kL1T3);
   }
 
   VideoBitrateAllocation GetAllocation(uint32_t target_bitrate) {
@@ -660,7 +660,7 @@ class ScreenshareRateAllocationTest : public SimulcastRateAllocatorTest {
       codec_.simulcastStream[0].targetBitrate =
           kLegacyScreenshareTargetBitrateKbps;
       codec_.simulcastStream[0].maxBitrate = kLegacyScreenshareMaxBitrateKbps;
-      codec_.simulcastStream[0].numberOfTemporalLayers = 2;
+      codec_.simulcastStream[0].scalability_mode = ScalabilityMode::kL1T2;
       codec_.simulcastStream[0].active = active;
 
       codec_.simulcastStream[1].minBitrate =
@@ -669,11 +669,11 @@ class ScreenshareRateAllocationTest : public SimulcastRateAllocatorTest {
           kSimulcastScreenshareMaxBitrateKbps;
       codec_.simulcastStream[1].maxBitrate =
           kSimulcastScreenshareMaxBitrateKbps;
-      codec_.simulcastStream[1].numberOfTemporalLayers = 2;
+      codec_.simulcastStream[1].scalability_mode = ScalabilityMode::kL1T2;
       codec_.simulcastStream[1].active = active;
     } else {
       codec_.numberOfSimulcastStreams = 0;
-      codec_.VP8()->numberOfTemporalLayers = 2;
+      codec_.SetScalabilityMode(ScalabilityMode::kL1T2);
       codec_.active = active;
     }
   }

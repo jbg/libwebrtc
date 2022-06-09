@@ -10,6 +10,7 @@
 #ifndef TEST_VIDEO_CODEC_SETTINGS_H_
 #define TEST_VIDEO_CODEC_SETTINGS_H_
 
+#include "api/video_codecs/scalability_mode.h"
 #include "api/video_codecs/video_encoder.h"
 
 namespace webrtc {
@@ -24,7 +25,7 @@ const uint8_t kTestPayloadType = 100;
 const int64_t kTestTimingFramesDelayMs = 200;
 const uint16_t kTestOutlierFrameSizePercent = 250;
 
-static void CodecSettings(VideoCodecType codec_type, VideoCodec* settings) {
+inline void CodecSettings(VideoCodecType codec_type, VideoCodec* settings) {
   *settings = {};
 
   settings->width = kTestWidth;
@@ -45,6 +46,7 @@ static void CodecSettings(VideoCodecType codec_type, VideoCodec* settings) {
       kTestTimingFramesDelayMs,
       kTestOutlierFrameSizePercent,
   };
+  settings->SetScalabilityMode(ScalabilityMode::kL1T1);
 
   settings->codecType = codec_type;
   switch (codec_type) {

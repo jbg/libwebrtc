@@ -44,8 +44,10 @@ const int kMaxBitrates[kNumberOfSimulcastStreams] = {150, 600, 1200};
 const int kMinBitrates[kNumberOfSimulcastStreams] = {50, 150, 600};
 const int kTargetBitrates[kNumberOfSimulcastStreams] = {100, 450, 1000};
 const float kMaxFramerates[kNumberOfSimulcastStreams] = {30, 30, 30};
-const int kDefaultTemporalLayerProfile[3] = {3, 3, 3};
-const int kNoTemporalLayerProfile[3] = {0, 0, 0};
+const ScalabilityMode kDefaultScalabilityProfile[3] = {
+    ScalabilityMode::kL1T3, ScalabilityMode::kL1T3, ScalabilityMode::kL1T3};
+const ScalabilityMode kNoScalabilityProfile[3] = {
+    ScalabilityMode::kL1T1, ScalabilityMode::kL1T1, ScalabilityMode::kL1T1};
 
 const VideoEncoder::Capabilities kCapabilities(false);
 const VideoEncoder::Settings kSettings(kCapabilities, 1, 1200);
@@ -189,7 +191,7 @@ void ConfigureStream(int width,
                      int target_bitrate,
                      float max_framerate,
                      SimulcastStream* stream,
-                     int num_temporal_layers) {
+                     ScalabilityMode scalability_mode) {
   RTC_DCHECK(stream);
   stream->width = width;
   stream->height = height;
@@ -197,9 +199,7 @@ void ConfigureStream(int width,
   stream->minBitrate = min_bitrate;
   stream->targetBitrate = target_bitrate;
   stream->maxFramerate = max_framerate;
-  if (num_temporal_layers >= 0) {
-    stream->numberOfTemporalLayers = num_temporal_layers;
-  }
+  stream->scalability_mode = scalability_mode;
   stream->qpMax = 45;
   stream->active = true;
 }
@@ -208,7 +208,7 @@ void ConfigureStream(int width,
 
 void SimulcastTestFixtureImpl::DefaultSettings(
     VideoCodec* settings,
-    const int* temporal_layer_profile,
+    const ScalabilityMode* scalability_profile,
     VideoCodecType codec_type,
     bool reverse_layer_order) {
   RTC_CHECK(settings);
@@ -233,15 +233,15 @@ void SimulcastTestFixtureImpl::DefaultSettings(
   ConfigureStream(kDefaultWidth / 4, kDefaultHeight / 4, kMaxBitrates[0],
                   kMinBitrates[0], kTargetBitrates[0], kMaxFramerates[0],
                   &settings->simulcastStream[layer_order[0]],
-                  temporal_layer_profile[0]);
+                  scalability_profile[0]);
   ConfigureStream(kDefaultWidth / 2, kDefaultHeight / 2, kMaxBitrates[1],
                   kMinBitrates[1], kTargetBitrates[1], kMaxFramerates[1],
                   &settings->simulcastStream[layer_order[1]],
-                  temporal_layer_profile[1]);
+                  scalability_profile[1]);
   ConfigureStream(kDefaultWidth, kDefaultHeight, kMaxBitrates[2],
                   kMinBitrates[2], kTargetBitrates[2], kMaxFramerates[2],
                   &settings->simulcastStream[layer_order[2]],
-                  temporal_layer_profile[2]);
+                  scalability_profile[2]);
   settings->SetFrameDropEnabled(true);
   if (codec_type == kVideoCodecVP8) {
     settings->VP8()->denoisingOn = true;
@@ -260,8 +260,8 @@ SimulcastTestFixtureImpl::SimulcastTestFixtureImpl(
   encoder_ = encoder_factory->CreateVideoEncoder(video_format);
   decoder_ = decoder_factory->CreateVideoDecoder(video_format);
   SetUpCodec((codec_type_ == kVideoCodecVP8 || codec_type_ == kVideoCodecH264)
-                 ? kDefaultTemporalLayerProfile
-                 : kNoTemporalLayerProfile);
+                 ? kDefaultScalabilityProfile
+                 : kNoScalabilityProfile);
 }
 
 SimulcastTestFixtureImpl::~SimulcastTestFixtureImpl() {
@@ -269,10 +269,11 @@ SimulcastTestFixtureImpl::~SimulcastTestFixtureImpl() {
   decoder_->Release();
 }
 
-void SimulcastTestFixtureImpl::SetUpCodec(const int* temporal_layer_profile) {
+void SimulcastTestFixtureImpl::SetUpCodec(
+    const ScalabilityMode* scalability_profile) {
   encoder_->RegisterEncodeCompleteCallback(&encoder_callback_);
   decoder_->RegisterDecodeCompleteCallback(&decoder_callback_);
-  DefaultSettings(&settings_, temporal_layer_profile, codec_type_);
+  DefaultSettings(&settings_, scalability_profile, codec_type_);
   SetUpRateAllocator();
   EXPECT_EQ(0, encoder_->InitEncode(&settings_, kSettings));
   VideoDecoder::Settings decoder_settings;
@@ -585,15 +586,14 @@ void SimulcastTestFixtureImpl::TestActiveStreams() {
 }
 
 void SimulcastTestFixtureImpl::SwitchingToOneStream(int width, int height) {
-  const int* temporal_layer_profile = nullptr;
+  const ScalabilityMode* scalability_profile = nullptr;
   // Disable all streams except the last and set the bitrate of the last to
   // 100 kbps. This verifies the way GTP switches to screenshare mode.
+  settings_.SetScalabilityMode(ScalabilityMode::kL1T1);
   if (codec_type_ == kVideoCodecVP8) {
-    settings_.VP8()->numberOfTemporalLayers = 1;
-    temporal_layer_profile = kDefaultTemporalLayerProfile;
+    scalability_profile = kDefaultScalabilityProfile;
   } else {
-    settings_.H264()->numberOfTemporalLayers = 1;
-    temporal_layer_profile = kNoTemporalLayerProfile;
+    scalability_profile = kNoScalabilityProfile;
   }
   settings_.maxBitrate = 100;
   settings_.startBitrate = 100;
@@ -603,7 +603,7 @@ void SimulcastTestFixtureImpl::SwitchingToOneStream(int width, int height) {
     settings_.simulcastStream[i].maxBitrate = 0;
     settings_.simulcastStream[i].width = settings_.width;
     settings_.simulcastStream[i].height = settings_.height;
-    settings_.simulcastStream[i].numberOfTemporalLayers = 1;
+    settings_.simulcastStream[i].scalability_mode = ScalabilityMode::kL1T1;
   }
   // Setting input image to new resolution.
   input_buffer_ = I420Buffer::Create(settings_.width, settings_.height);
@@ -644,7 +644,7 @@ void SimulcastTestFixtureImpl::SwitchingToOneStream(int width, int height) {
   EXPECT_EQ(0, encoder_->Encode(*input_frame_, &frame_types));
 
   // Switch back.
-  DefaultSettings(&settings_, temporal_layer_profile, codec_type_);
+  DefaultSettings(&settings_, scalability_profile, codec_type_);
   // Start at the lowest bitrate for enabling base stream.
   settings_.startBitrate = kMinBitrates[0];
   SetUpRateAllocator();
@@ -748,8 +748,9 @@ void SimulcastTestFixtureImpl::TestSpatioTemporalLayers333PatternEncoder() {
 // TODO(marpan): Although this seems safe for now, we should fix this.
 void SimulcastTestFixtureImpl::TestSpatioTemporalLayers321PatternEncoder() {
   EXPECT_EQ(codec_type_, kVideoCodecVP8);
-  int temporal_layer_profile[3] = {3, 2, 1};
-  SetUpCodec(temporal_layer_profile);
+  static const ScalabilityMode scalability_profile[3] = {
+      ScalabilityMode::kL1T3, ScalabilityMode::kL1T2, ScalabilityMode::kL1T1};
+  SetUpCodec(scalability_profile);
   TestEncodedImageCallback encoder_callback;
   encoder_->RegisterEncodeCompleteCallback(&encoder_callback);
   SetRates(kMaxBitrates[2], 30);  // To get all three streams.
@@ -908,11 +909,11 @@ void SimulcastTestFixtureImpl::
     TestEncoderInfoForDefaultTemporalLayerProfileHasFpsAllocation() {
   VideoEncoder::EncoderInfo encoder_info = encoder_->GetEncoderInfo();
   EXPECT_EQ(encoder_info.fps_allocation[0].size(),
-            static_cast<size_t>(kDefaultTemporalLayerProfile[0]));
+            static_cast<size_t>(kDefaultScalabilityProfile[0]));
   EXPECT_EQ(encoder_info.fps_allocation[1].size(),
-            static_cast<size_t>(kDefaultTemporalLayerProfile[1]));
+            static_cast<size_t>(kDefaultScalabilityProfile[1]));
   EXPECT_EQ(encoder_info.fps_allocation[2].size(),
-            static_cast<size_t>(kDefaultTemporalLayerProfile[2]));
+            static_cast<size_t>(kDefaultScalabilityProfile[2]));
 }
 }  // namespace test
 }  // namespace webrtc

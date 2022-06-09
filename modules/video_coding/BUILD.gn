@@ -459,6 +459,7 @@ rtc_library("video_coding_utility") {
     "../../rtc_base/task_utils:to_queued_task",
     "../../system_wrappers:field_trial",
     "../rtp_rtcp:rtp_rtcp_format",
+    "svc:scalability_mode_util",
   ]
   absl_deps = [
     "//third_party/abseil-cpp/absl/numeric:bits",
@@ -499,6 +500,7 @@ rtc_library("webrtc_h264") {
     "../../rtc_base/system:rtc_export",
     "../../system_wrappers:field_trial",
     "../../system_wrappers:metrics",
+    "svc:scalability_mode_util",
     "//third_party/libyuv",
   ]
   absl_deps = [
@@ -952,6 +954,7 @@ if (rtc_include_tests) {
       "../../test:test_support",
       "../../test:video_test_common",
       "../../test:video_test_support",
+      "svc:scalability_mode_util",
     ]
     absl_deps = [
       "//third_party/abseil-cpp/absl/strings:strings",
@@ -1210,6 +1213,7 @@ if (rtc_include_tests) {
       "../rtp_rtcp:rtp_video_header",
       "codecs/av1:video_coding_codecs_av1_tests",
       "deprecated:nack_module",
+      "svc:scalability_mode_util",
       "svc:scalability_structure_tests",
       "svc:svc_rate_allocator_tests",
       "timing:jitter_estimator",
