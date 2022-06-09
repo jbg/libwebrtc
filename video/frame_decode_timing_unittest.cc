@@ -29,6 +29,8 @@ using ::testing::Optional;
 
 namespace {
 
+constexpr TimeDelta kMaxWaitForFrame = TimeDelta::Millis(300);
+
 class FakeVCMTiming : public webrtc::VCMTiming {
  public:
   explicit FakeVCMTiming(Clock* clock, const FieldTrialsView& field_trials)
@@ -80,13 +82,13 @@ TEST_F(FrameDecodeTimingTest, ReturnsWaitTimesWhenValid) {
   const Timestamp render_time = clock_.CurrentTime() + TimeDelta::Millis(60);
   timing_.SetTimes(90000, render_time, decode_delay);
 
-  EXPECT_THAT(
-      frame_decode_scheduler_.OnFrameBufferUpdated(90000, 180000, false),
-      Optional(
-          AllOf(Field(&FrameDecodeTiming::FrameSchedule::latest_decode_time,
-                      Eq(clock_.CurrentTime() + decode_delay)),
-                Field(&FrameDecodeTiming::FrameSchedule::render_time,
-                      Eq(render_time)))));
+  EXPECT_THAT(frame_decode_scheduler_.OnFrameBufferUpdated(
+                  90000, 180000, kMaxWaitForFrame, false),
+              Optional(AllOf(
+                  Field(&FrameDecodeTiming::FrameSchedule::latest_decode_time,
+                        Eq(clock_.CurrentTime() + decode_delay)),
+                  Field(&FrameDecodeTiming::FrameSchedule::render_time,
+                        Eq(render_time)))));
 }
 
 TEST_F(FrameDecodeTimingTest, FastForwardsFrameTooFarInThePast) {
@@ -95,9 +97,9 @@ TEST_F(FrameDecodeTimingTest, FastForwardsFrameTooFarInThePast) {
   const Timestamp render_time = clock_.CurrentTime();
   timing_.SetTimes(90000, render_time, decode_delay);
 
-  EXPECT_THAT(
-      frame_decode_scheduler_.OnFrameBufferUpdated(90000, 180000, false),
-      Eq(absl::nullopt));
+  EXPECT_THAT(frame_decode_scheduler_.OnFrameBufferUpdated(
+                  90000, 180000, kMaxWaitForFrame, false),
+              Eq(absl::nullopt));
 }
 
 TEST_F(FrameDecodeTimingTest, NoFastForwardIfOnlyFrameToDecode) {
@@ -107,10 +109,25 @@ TEST_F(FrameDecodeTimingTest, NoFastForwardIfOnlyFrameToDecode) {
   timing_.SetTimes(90000, render_time, decode_delay);
 
   // Negative `decode_delay` means that `latest_decode_time` is now.
-  EXPECT_THAT(frame_decode_scheduler_.OnFrameBufferUpdated(90000, 90000, false),
+  EXPECT_THAT(frame_decode_scheduler_.OnFrameBufferUpdated(
+                  90000, 90000, kMaxWaitForFrame, false),
               Optional(AllOf(
                   Field(&FrameDecodeTiming::FrameSchedule::latest_decode_time,
                         Eq(clock_.CurrentTime())),
+                  Field(&FrameDecodeTiming::FrameSchedule::render_time,
+                        Eq(render_time)))));
+}
+
+TEST_F(FrameDecodeTimingTest, MaxWaitCapped) {
+  const TimeDelta decode_delay = TimeDelta::Seconds(3);
+  const Timestamp render_time = clock_.CurrentTime() + TimeDelta::Seconds(3);
+  timing_.SetTimes(90000, render_time, decode_delay);
+
+  EXPECT_THAT(frame_decode_scheduler_.OnFrameBufferUpdated(
+                  90000, 180000, kMaxWaitForFrame, false),
+              Optional(AllOf(
+                  Field(&FrameDecodeTiming::FrameSchedule::latest_decode_time,
+                        Eq(clock_.CurrentTime() + kMaxWaitForFrame)),
                   Field(&FrameDecodeTiming::FrameSchedule::render_time,
                         Eq(render_time)))));
 }
