@@ -247,6 +247,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "558ef839_fbce2b9f",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-09T21:29:40Z",
+      "side": 1,
+      "message": "OK.  I don\u0027t really know the history behind that but this approach really isn\u0027t correct.  Regardless it\u0027s not something that can be fixed here.",
+      "parentUuid": "2cff5890_9b029075",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7307baf4_a758ae06",
@@ -278,6 +296,24 @@
       "side": 1,
       "message": "I\u0027ve added two. One with the subset that will be used by video_capture and one that includes all configs that are listed here. I hope that\u0027s ok.",
       "parentUuid": "7307baf4_a758ae06",
+      "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d6a08ff_f15f3781",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-09T21:29:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bd5c5838_42dfb01e",
       "revId": "122b4ab10b39365a2e8dd67cbb69f408b4e4180d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
