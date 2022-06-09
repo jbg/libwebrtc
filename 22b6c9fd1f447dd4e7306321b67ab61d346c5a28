@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dbc736b_82c686b8",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-06-09T14:53:01Z",
+      "side": 1,
+      "message": "it works but is it correct way to construct the candidate?",
+      "revId": "22b6c9fd1f447dd4e7306321b67ab61d346c5a28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
