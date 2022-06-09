@@ -37,6 +37,7 @@
 #include "media/engine/simulcast.h"
 #include "modules/video_coding/codecs/h264/include/h264_globals.h"
 #include "modules/video_coding/codecs/vp9/svc_config.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "modules/video_coding/utility/ivf_file_writer.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/cpu_time.h"
@@ -73,8 +74,9 @@ void ConfigureSimulcast(VideoCodec* codec_settings) {
     SimulcastStream* ss = &codec_settings->simulcastStream[i];
     ss->width = static_cast<uint16_t>(streams[i].width);
     ss->height = static_cast<uint16_t>(streams[i].height);
-    ss->numberOfTemporalLayers =
-        static_cast<unsigned char>(*streams[i].num_temporal_layers);
+    RTC_CHECK(!streams[i].num_temporal_layers.has_value());
+    ss->scalability_mode =
+        streams[i].scalability_mode.value_or(ScalabilityMode::kL1T1);
     ss->maxBitrate = streams[i].max_bitrate_bps / 1000;
     ss->targetBitrate = streams[i].target_bitrate_bps / 1000;
     ss->minBitrate = streams[i].min_bitrate_bps / 1000;
@@ -89,7 +91,13 @@ void ConfigureSvc(VideoCodec* codec_settings) {
   const std::vector<SpatialLayer> layers = GetSvcConfig(
       codec_settings->width, codec_settings->height, kDefaultMaxFramerateFps,
       /*first_active_layer=*/0, codec_settings->VP9()->numberOfSpatialLayers,
+#if 1
       codec_settings->VP9()->numberOfTemporalLayers,
+#else
+      ScalabilityModeToNumTemporalLayers(
+          codec_settings->GetScalabilityMode().value_or(
+              ScalabilityMode::kL1T1)),
+#endif
       /* is_screen_sharing = */ false);
   ASSERT_EQ(codec_settings->VP9()->numberOfSpatialLayers, layers.size())
       << "GetSvcConfig returned fewer spatial layers than configured.";
@@ -104,8 +112,6 @@ std::string CodecSpecificToString(const VideoCodec& codec) {
   rtc::SimpleStringBuilder ss(buf);
   switch (codec.codecType) {
     case kVideoCodecVP8:
-      ss << "\nnum_temporal_layers: "
-         << static_cast<int>(codec.VP8().numberOfTemporalLayers);
       ss << "\ndenoising: " << codec.VP8().denoisingOn;
       ss << "\nautomatic_resize: " << codec.VP8().automaticResizeOn;
       ss << "\nkey_frame_interval: " << codec.VP8().keyFrameInterval;
@@ -123,8 +129,6 @@ std::string CodecSpecificToString(const VideoCodec& codec) {
       break;
     case kVideoCodecH264:
       ss << "\nkey_frame_interval: " << codec.H264().keyFrameInterval;
-      ss << "\nnum_temporal_layers: "
-         << static_cast<int>(codec.H264().numberOfTemporalLayers);
       break;
     default:
       break;
@@ -172,8 +176,7 @@ VideoCodecTestFixtureImpl::Config::Config() = default;
 void VideoCodecTestFixtureImpl::Config::SetCodecSettings(
     std::string codec_name,
     size_t num_simulcast_streams,
-    size_t num_spatial_layers,
-    size_t num_temporal_layers,
+    ScalabilityMode scalability_mode,
     bool denoising_on,
     bool frame_dropper_on,
     bool spatial_resize_on,
@@ -190,7 +193,12 @@ void VideoCodecTestFixtureImpl::Config::SetCodecSettings(
 
   RTC_CHECK(num_simulcast_streams >= 1 &&
             num_simulcast_streams <= kMaxSimulcastStreams);
+
+  int num_spatial_layers = ScalabilityModeToNumSpatialLayers(scalability_mode);
   RTC_CHECK(num_spatial_layers >= 1 && num_spatial_layers <= kMaxSpatialLayers);
+
+  int num_temporal_layers =
+      ScalabilityModeToNumTemporalLayers(scalability_mode);
   RTC_CHECK(num_temporal_layers >= 1 &&
             num_temporal_layers <= kMaxTemporalStreams);
 
@@ -207,10 +215,9 @@ void VideoCodecTestFixtureImpl::Config::SetCodecSettings(
                                  : static_cast<uint8_t>(num_simulcast_streams);
 
   codec_settings.SetFrameDropEnabled(frame_dropper_on);
+  codec_settings.SetScalabilityMode(scalability_mode);
   switch (codec_settings.codecType) {
     case kVideoCodecVP8:
-      codec_settings.VP8()->numberOfTemporalLayers =
-          static_cast<uint8_t>(num_temporal_layers);
       codec_settings.VP8()->denoisingOn = denoising_on;
       codec_settings.VP8()->automaticResizeOn = spatial_resize_on;
       codec_settings.VP8()->keyFrameInterval = kBaseKeyFrameInterval;
@@ -229,8 +236,6 @@ void VideoCodecTestFixtureImpl::Config::SetCodecSettings(
       break;
     case kVideoCodecH264:
       codec_settings.H264()->keyFrameInterval = kBaseKeyFrameInterval;
-      codec_settings.H264()->numberOfTemporalLayers =
-          static_cast<uint8_t>(num_temporal_layers);
       break;
     default:
       break;
@@ -249,15 +254,13 @@ size_t VideoCodecTestFixtureImpl::Config::NumberOfCores() const {
 }
 
 size_t VideoCodecTestFixtureImpl::Config::NumberOfTemporalLayers() const {
-  if (codec_settings.codecType == kVideoCodecVP8) {
-    return codec_settings.VP8().numberOfTemporalLayers;
-  } else if (codec_settings.codecType == kVideoCodecVP9) {
-    return codec_settings.VP9().numberOfTemporalLayers;
-  } else if (codec_settings.codecType == kVideoCodecH264) {
-    return codec_settings.H264().numberOfTemporalLayers;
-  } else {
-    return 1;
+  RTC_CHECK(codec_settings.GetScalabilityMode().has_value());
+  int num_layers =
+      ScalabilityModeToNumTemporalLayers(*codec_settings.GetScalabilityMode());
+  if (codec_settings.codecType == kVideoCodecVP9) {
+    RTC_CHECK_EQ(num_layers, codec_settings.VP9().numberOfTemporalLayers);
   }
+  return num_layers;
 }
 
 size_t VideoCodecTestFixtureImpl::Config::NumberOfSpatialLayers() const {
@@ -306,8 +309,8 @@ std::string VideoCodecTestFixtureImpl::Config::ToString() const {
           codec_settings.simulcastStream[i];
       ss << "\nwidth: " << simulcast_stream.width;
       ss << "\nheight: " << simulcast_stream.height;
-      ss << "\nnum_temporal_layers: "
-         << static_cast<int>(simulcast_stream.numberOfTemporalLayers);
+      ss << "\nscalability_mode: "
+         << ScalabilityModeToString(simulcast_stream.scalability_mode);
       ss << "\nmin_bitrate_kbps: " << simulcast_stream.minBitrate;
       ss << "\ntarget_bitrate_kbps: " << simulcast_stream.targetBitrate;
       ss << "\nmax_bitrate_kbps: " << simulcast_stream.maxBitrate;
