@@ -16,6 +16,23 @@
       "message": "So these are inliners that allow you to send in a lambda rather than ToQueuedTask(lambda)?\nAdding @danilchap who can say why he thought it was worthwile.\n\n",
       "revId": "ae35cd585f059a6e9dac29afb3991bdcdd57cb0a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "995c0e31_2a2f81f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-09T11:18:07Z",
+      "side": 1,
+      "message": "If we agree that ToQueuedTask() is unavoidable in many contexts, this is a move in the direction of consistency, so approving.\n\nI personally think that we should go for direct posting of lambdas as what we teach people, and ToQueuedTask() is an implementation detail. But that is a larger CL.\n",
+      "revId": "ae35cd585f059a6e9dac29afb3991bdcdd57cb0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
