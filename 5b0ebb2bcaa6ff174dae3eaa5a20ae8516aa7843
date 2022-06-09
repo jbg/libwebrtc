@@ -16,6 +16,23 @@
       "message": "Hi, this CL is for removing sprintf usage. Please take a look. Thanks.",
       "revId": "5b0ebb2bcaa6ff174dae3eaa5a20ae8516aa7843",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "079ba441_8d194ce6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-06-09T09:21:47Z",
+      "side": 1,
+      "message": "Thanks for fixing.",
+      "revId": "5b0ebb2bcaa6ff174dae3eaa5a20ae8516aa7843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
