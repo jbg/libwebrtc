@@ -1983,6 +1983,19 @@ void PeerConnection::SetConnectionState(
     // Record the number of configured ICE servers for connected connections.
     RTC_HISTOGRAM_COUNTS_LINEAR("WebRTC.PeerConnection.IceServers.Connected",
                                 configuration_.servers.size(), 0, 31, 32);
+
+    // Record RtcpMuxPolicy setting.
+    RtcpMuxPolicyUsage rtcp_mux_policy = kRtcpMuxPolicyUsageMax;
+    switch (configuration_.rtcp_mux_policy) {
+      case kRtcpMuxPolicyNegotiate:
+        rtcp_mux_policy = kRtcpMuxPolicyUsageNegotiate;
+        break;
+      case kRtcpMuxPolicyRequire:
+        rtcp_mux_policy = kRtcpMuxPolicyUsageRequire;
+        break;
+    }
+    RTC_HISTOGRAM_ENUMERATION("WebRTC.PeerConnection.RtcpMuxPolicy",
+                              rtcp_mux_policy, kRtcpMuxPolicyUsageMax);
   }
 }
 
