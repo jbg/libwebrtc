@@ -5018,7 +5018,14 @@ TEST_F(VideoStreamEncoderTest,
           vp9_settings);
   // Simulcast layers are used for enabling/disabling streams.
   video_encoder_config.simulcast_layers.resize(3);
+  video_encoder_config.simulcast_layers[0].scalability_mode =
+      ScalabilityMode::kL3T2;
+  video_encoder_config.simulcast_layers[1].scalability_mode =
+      ScalabilityMode::kL3T2;
+  video_encoder_config.simulcast_layers[2].scalability_mode =
+      ScalabilityMode::kL3T2;
   video_encoder_config.simulcast_layers[2].active = false;
+
   ConfigureEncoder(std::move(video_encoder_config),
                    VideoStreamEncoder::BitrateAllocationCallbackType::
                        kVideoLayersAllocation);
@@ -5068,6 +5075,12 @@ TEST_F(VideoStreamEncoderTest,
           vp9_settings);
   // Simulcast layers are used for enabling/disabling streams.
   video_encoder_config.simulcast_layers.resize(3);
+  video_encoder_config.simulcast_layers[0].scalability_mode =
+      ScalabilityMode::kL3T2;
+  video_encoder_config.simulcast_layers[1].scalability_mode =
+      ScalabilityMode::kL3T2;
+  video_encoder_config.simulcast_layers[2].scalability_mode =
+      ScalabilityMode::kL3T2;
   video_encoder_config.simulcast_layers[0].active = false;
   video_encoder_config.simulcast_layers[1].active = false;
   video_encoder_config.simulcast_layers[2].active = true;
@@ -8976,8 +8989,8 @@ class ReconfigureEncoderTest : public VideoStreamEncoderTest {
               kWidth / expected.scale_resolution_down_by);
     EXPECT_EQ(actual.simulcastStream[0].height,
               kHeight / expected.scale_resolution_down_by);
-    EXPECT_EQ(actual.simulcastStream[0].numberOfTemporalLayers,
-              expected.num_temporal_layers);
+    EXPECT_EQ(actual.simulcastStream[0].scalability_mode,
+              expected.scalability_mode.value_or(ScalabilityMode::kL1T1));
     EXPECT_EQ(actual.GetScalabilityMode(), expected.scalability_mode);
   }
 

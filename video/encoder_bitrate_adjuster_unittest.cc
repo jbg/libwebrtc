@@ -14,6 +14,7 @@
 #include <vector>
 
 #include "api/units/data_rate.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "rtc_base/fake_clock.h"
 #include "rtc_base/numerics/safe_conversions.h"
 #include "test/field_trial.h"
@@ -60,13 +61,27 @@ class EncoderBitrateAdjusterTest : public ::testing::Test {
     } else {
       codec_.codecType = VideoCodecType::kVideoCodecVP8;
       codec_.numberOfSimulcastStreams = num_spatial_layers;
-      codec_.VP8()->numberOfTemporalLayers = num_temporal_layers;
       for (size_t si = 0; si < num_spatial_layers; ++si) {
         codec_.simulcastStream[si].minBitrate = 100 * (1 << si);
         codec_.simulcastStream[si].targetBitrate = 200 * (1 << si);
         codec_.simulcastStream[si].maxBitrate = 300 * (1 << si);
         codec_.simulcastStream[si].active = true;
-        codec_.simulcastStream[si].numberOfTemporalLayers = num_temporal_layers;
+        switch (num_temporal_layers) {
+          case 1:
+            codec_.simulcastStream[si].scalability_mode =
+                ScalabilityMode::kL1T1;
+            break;
+          case 2:
+            codec_.simulcastStream[si].scalability_mode =
+                ScalabilityMode::kL1T2;
+            break;
+          case 3:
+            codec_.simulcastStream[si].scalability_mode =
+                ScalabilityMode::kL1T3;
+            break;
+          default:
+            RTC_CHECK(false);
+        }
       }
     }
 
@@ -182,7 +197,8 @@ class EncoderBitrateAdjusterTest : public ::testing::Test {
     if (codec_.codecType == VideoCodecType::kVideoCodecVP9) {
       return codec_.spatialLayers[spatial_index].numberOfTemporalLayers;
     }
-    return codec_.simulcastStream[spatial_index].numberOfTemporalLayers;
+    return ScalabilityModeToNumTemporalLayers(
+        codec_.simulcastStream[spatial_index].scalability_mode);
   }
 
   void ExpectNear(const VideoBitrateAllocation& expected_allocation,

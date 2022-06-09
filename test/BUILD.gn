@@ -821,6 +821,7 @@ rtc_library("fake_video_codecs") {
     "../modules/video_coding:codec_globals_headers",
     "../modules/video_coding:video_codec_interface",
     "../modules/video_coding:video_coding_utility",
+    "../modules/video_coding/svc:scalability_mode_util",
     "../rtc_base:checks",
     "../rtc_base:criticalsection",
     "../rtc_base:macromagic",
