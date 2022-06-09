@@ -108,6 +108,7 @@ class RTC_EXPORT VideoFrame {
     uint32_t timestamp_rtp_ = 0;
     int64_t ntp_time_ms_ = 0;
     VideoRotation rotation_ = kVideoRotation_0;
+    bool is_low_latency_stream_ = false;
     absl::optional<ColorSpace> color_space_;
     absl::optional<UpdateRect> update_rect_;
     RtpPacketInfos packet_infos_;
@@ -249,6 +250,11 @@ class RTC_EXPORT VideoFrame {
     processing_time_ = processing_time;
   }
 
+  bool is_low_latency_stream() const { return is_low_latency_stream_; }
+  void set_is_low_latency_stream(bool is_low_latency_stream) {
+    is_low_latency_stream_ = is_low_latency_stream;
+  }
+
  private:
   VideoFrame(uint16_t id,
              const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
@@ -256,6 +262,7 @@ class RTC_EXPORT VideoFrame {
              uint32_t timestamp_rtp,
              int64_t ntp_time_ms,
              VideoRotation rotation,
+             bool is_low_latency_stream,
              const absl::optional<ColorSpace>& color_space,
              const absl::optional<UpdateRect>& update_rect,
              RtpPacketInfos packet_infos);
@@ -267,6 +274,7 @@ class RTC_EXPORT VideoFrame {
   int64_t ntp_time_ms_;
   int64_t timestamp_us_;
   VideoRotation rotation_;
+  bool is_low_latency_stream_;
   absl::optional<ColorSpace> color_space_;
   absl::optional<int32_t> max_composition_delay_in_frames_;
   // Updated since the last frame area. If present it means that the bounding
