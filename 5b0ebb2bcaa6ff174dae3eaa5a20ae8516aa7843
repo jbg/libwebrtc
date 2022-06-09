@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35f454f1_2b3a92dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-06-09T09:17:49Z",
+      "side": 1,
+      "message": "Hi, this CL is for removing sprintf usage. Please take a look. Thanks.",
+      "revId": "5b0ebb2bcaa6ff174dae3eaa5a20ae8516aa7843",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
