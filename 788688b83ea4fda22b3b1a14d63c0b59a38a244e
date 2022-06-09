@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36af094b_0d9a9377",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-06-09T08:40:43Z",
+      "side": 1,
+      "message": "Wording here on the VideoFrame does not make sense to me. A frame is individual and not tied to a stream. If it was a property of a stream it should be marked there somehow. I think the wording should be something that applies to this frame. Perhaps, use_low_latency_rendering or something to that effect.",
+      "range": {
+        "startLine": 253,
+        "startChar": 7,
+        "endLine": 253,
+        "endChar": 28
+      },
+      "revId": "788688b83ea4fda22b3b1a14d63c0b59a38a244e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f3af6de_a4725ee1",
+        "filename": "modules/video_coding/generic_decoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-06-09T08:40:43Z",
+      "side": 1,
+      "message": "Another option is to not read these in from `_timing` but rather pass them in to the VCMReceveier2.Decode() call.",
+      "range": {
+        "startLine": 107,
+        "startChar": 2,
+        "endLine": 107,
+        "endChar": 72
+      },
+      "revId": "788688b83ea4fda22b3b1a14d63c0b59a38a244e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b143046e_0cee035a",
+        "filename": "modules/video_coding/timing/timing.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-06-09T08:40:43Z",
+      "side": 1,
+      "message": "and rendered",
+      "range": {
+        "startLine": 261,
+        "startChar": 5,
+        "endLine": 261,
+        "endChar": 12
+      },
+      "revId": "788688b83ea4fda22b3b1a14d63c0b59a38a244e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

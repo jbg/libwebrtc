@@ -22,6 +22,30 @@
       },
       "revId": "dd7f310d1dd9b4ddc40200a3957fddb57993739b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "965f2c3a_d801bb4f",
+        "filename": "modules/video_coding/generic_decoder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-06-09T08:40:43Z",
+      "side": 1,
+      "message": "This would be preferable as to avoid taking the lock twice in a row. All the information can be returned in a struct.",
+      "parentUuid": "34076259_a140763b",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 45
+      },
+      "revId": "dd7f310d1dd9b4ddc40200a3957fddb57993739b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
