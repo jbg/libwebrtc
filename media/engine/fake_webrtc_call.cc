@@ -268,25 +268,19 @@ void FakeVideoSendStream::ReconfigureVideoEncoder(
   video_streams_ =
       config.video_stream_factory->CreateEncoderStreams(width, height, config);
   if (config.encoder_specific_settings != nullptr) {
-    const unsigned char num_temporal_layers = static_cast<unsigned char>(
-        video_streams_.back().num_temporal_layers.value_or(1));
     if (config_.rtp.payload_name == "VP8") {
       config.encoder_specific_settings->FillVideoCodecVp8(
           &codec_specific_settings_.vp8);
-      if (!video_streams_.empty()) {
-        codec_specific_settings_.vp8.numberOfTemporalLayers =
-            num_temporal_layers;
-      }
     } else if (config_.rtp.payload_name == "VP9") {
       config.encoder_specific_settings->FillVideoCodecVp9(
           &codec_specific_settings_.vp9);
       if (!video_streams_.empty()) {
         codec_specific_settings_.vp9.numberOfTemporalLayers =
-            num_temporal_layers;
+            // TODO(bugs.webrtc.org/11607): Delete; use scalability mode setting
+            // instead.
+            video_streams_.back().num_temporal_layers.value_or(1);
       }
     } else if (config_.rtp.payload_name == "H264") {
-      codec_specific_settings_.h264.numberOfTemporalLayers =
-          num_temporal_layers;
     } else {
       ADD_FAILURE() << "Unsupported encoder payload: "
                     << config_.rtp.payload_name;
