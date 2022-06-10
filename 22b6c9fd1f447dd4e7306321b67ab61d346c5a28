@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb270331_e3d765a4",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1715,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-06-10T11:41:17Z",
+      "side": 1,
+      "message": "https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/rtc_stats_collector.cc;l\u003d802?q\u003dProduceIceCandidateStats\n- a bit ugly style-wise but...",
+      "parentUuid": "06d1d9f4_8417a214",
+      "revId": "22b6c9fd1f447dd4e7306321b67ab61d346c5a28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7dbc736b_82c686b8",
         "filename": "pc/rtc_stats_collector_unittest.cc",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "it\u0027s a test, so I mostly care that it works.",
       "parentUuid": "7dbc736b_82c686b8",
+      "revId": "22b6c9fd1f447dd4e7306321b67ab61d346c5a28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dbc2f4a_6605e8f0",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-06-10T11:41:17Z",
+      "side": 1,
+      "message": "yeah. The raw pointer is valid until the end of the scope.",
+      "parentUuid": "a40c118e_64a5bfed",
       "revId": "22b6c9fd1f447dd4e7306321b67ab61d346c5a28",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
