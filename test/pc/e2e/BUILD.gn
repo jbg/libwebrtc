@@ -894,7 +894,10 @@ if (!build_with_chromium) {
     visibility = [ "*" ]
     testonly = true
     sources = [ "analyzer/video/multi_head_queue.h" ]
-    deps = [ "../../../rtc_base:checks" ]
+    deps = [
+      "../../../rtc_base:checks",
+      "../../../rtc_base:logging",
+    ]
     absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
   }
 }
