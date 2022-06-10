@@ -11,6 +11,8 @@
 #ifndef API_VIDEO_CODECS_SIMULCAST_STREAM_H_
 #define API_VIDEO_CODECS_SIMULCAST_STREAM_H_
 
+#include "api/video_codecs/scalability_mode.h"
+
 namespace webrtc {
 
 // TODO(bugs.webrtc.org/6883): Unify with struct VideoStream, part of
@@ -19,7 +21,7 @@ struct SimulcastStream {
   int width;
   int height;
   float maxFramerate;  // fps.
-  unsigned char numberOfTemporalLayers;
+  ScalabilityMode scalability_mode;
   unsigned int maxBitrate;     // kilobits/sec.
   unsigned int targetBitrate;  // kilobits/sec.
   unsigned int minBitrate;     // kilobits/sec.
