@@ -13,88 +13,149 @@
 
 #include <deque>
 #include <memory>
-#include <vector>
+#include <set>
+#include <unordered_map>
 
 #include "absl/types/optional.h"
 #include "rtc_base/checks.h"
 
 namespace webrtc {
 
-// A queue that allows more than one reader. Readers are independent, and all
-// readers will see all elements; an inserted element stays in the queue until
-// all readers have extracted it. Elements are copied and copying is assumed to
-// be cheap.
 template <typename T>
 class MultiHeadQueue {
  public:
-  // Creates queue with exactly `readers_count` readers.
+  // Creates queue with exactly `readers_count` readers named from 0 to
+  // `readers_count - 1`.
   explicit MultiHeadQueue(size_t readers_count) {
     for (size_t i = 0; i < readers_count; ++i) {
-      queues_.push_back(std::deque<T>());
+      heads_[i] = 0;
+    }
+  }
+  // Creates queue with specified readers.
+  explicit MultiHeadQueue(std::set<size_t> readers) {
+    for (size_t reader : readers) {
+      heads_[reader] = 0;
     }
   }
 
-  // Creates a copy of an existing head. Complexity O(MultiHeadQueue::size()).
-  // `copy_index` - index of the queue that will be used as a source for
-  //     copying.
-  void AddHead(size_t copy_index) { queues_.push_back(queues_[copy_index]); }
+  // Creates a copy of an existing head.
+  // `reader_to_copy` - reader who's queue will be used as a source to copy.
+  // Complexity O(MultiHeadQueue::size()).
+  void AddHead(size_t reader_to_copy) {
+    size_t pos = GetHeadPositionOrDie(reader_to_copy);
 
-  // Add value to the end of the queue. Complexity O(readers_count).
-  void PushBack(T value) {
-    for (auto& queue : queues_) {
-      queue.push_back(value);
+    size_t reader = heads_.size();
+    heads_[reader] = heads_[reader_to_copy];
+    for (size_t i = pos; i < queue_.size(); ++i) {
+      in_queues_[i]++;
     }
+  }
+
+  // Creates a copy of an existing queue for new reader.
+  // `reader_to_copy` - reader who's queue will be used as a source to copy.
+  // Complexity O(MultiHeadQueue::size(reader_to_copy)).
+  void AddHead(size_t reader, size_t reader_to_copy) {
+    size_t pos = GetHeadPositionOrDie(reader_to_copy);
+
+    auto it = heads_.find(reader);
+    RTC_CHECK(it == heads_.end())
+        << "Reader " << reader << " is already in the queue";
+    heads_[reader] = heads_[reader_to_copy];
+    for (size_t i = pos; i < queue_.size(); ++i) {
+      in_queues_[i]++;
+    }
+  }
+
+  // Removes specified `reader` from the queue.
+  // Complexity O(MultiHeadQueue::size(reader)).
+  void RemoveHead(size_t reader) {
+    size_t pos = GetHeadPositionOrDie(reader);
+    for (size_t i = pos; i < queue_.size(); ++i) {
+      in_queues_[i]--;
+    }
+    while (!in_queues_.empty() && in_queues_[0] == 0) {
+      PopFront();
+    }
+    heads_.erase(reader);
+  }
+
+  // Add value to the end of the queue. Complexity O(1).
+  void PushBack(T value) {
+    queue_.push_back(value);
+    in_queues_.push_back(heads_.size());
   }
 
   // Extract element from specified head. Complexity O(1).
-  absl::optional<T> PopFront(size_t index) {
-    RTC_CHECK_LT(index, queues_.size());
-    if (queues_[index].empty()) {
+  absl::optional<T> PopFront(size_t reader) {
+    size_t pos = GetHeadPositionOrDie(reader);
+    if (pos >= queue_.size()) {
       return absl::nullopt;
     }
-    T out = queues_[index].front();
-    queues_[index].pop_front();
+
+    T out = queue_[pos];
+
+    in_queues_[pos]--;
+    heads_[reader]++;
+
+    if (in_queues_[pos] == 0) {
+      RTC_DCHECK_EQ(pos, 0);
+      PopFront();
+    }
     return out;
   }
 
   // Returns element at specified head. Complexity O(1).
-  absl::optional<T> Front(size_t index) const {
-    RTC_CHECK_LT(index, queues_.size());
-    if (queues_[index].empty()) {
+  absl::optional<T> Front(size_t reader) const {
+    size_t pos = GetHeadPositionOrDie(reader);
+    if (pos >= queue_.size()) {
       return absl::nullopt;
     }
-    return queues_[index].front();
+    return queue_[pos];
   }
 
   // Returns true if for specified head there are no more elements in the queue
   // or false otherwise. Complexity O(1).
-  bool IsEmpty(size_t index) const {
-    RTC_CHECK_LT(index, queues_.size());
-    return queues_[index].empty();
+  bool IsEmpty(size_t reader) const {
+    size_t pos = GetHeadPositionOrDie(reader);
+    return pos >= queue_.size();
   }
 
   // Returns size of the longest queue between all readers.
-  // Complexity O(readers_count).
-  size_t size() const {
-    size_t size = 0;
-    for (auto& queue : queues_) {
-      if (queue.size() > size) {
-        size = queue.size();
-      }
-    }
-    return size;
-  }
+  // Complexity O(1).
+  size_t size() const { return queue_.size(); }
 
   // Returns size of the specified queue. Complexity O(1).
-  size_t size(size_t index) const {
-    RTC_CHECK_LT(index, queues_.size());
-    return queues_[index].size();
+  size_t size(size_t reader) const {
+    size_t pos = GetHeadPositionOrDie(reader);
+    return queue_.size() - pos;
   }
 
-  size_t readers_count() const { return queues_.size(); }
+  // Complexity O(1).
+  size_t readers_count() const { return heads_.size(); }
 
  private:
-  std::vector<std::deque<T>> queues_;
+  size_t GetHeadPositionOrDie(size_t reader) const {
+    auto it = heads_.find(reader);
+    RTC_CHECK(it != heads_.end()) << "No queue for reader " << reader;
+    return it->second - removed_elements_count_;
+  }
+
+  void PopFront() {
+    RTC_DCHECK(!queue_.empty());
+    RTC_DCHECK_EQ(in_queues_[0], 0);
+    queue_.pop_front();
+    in_queues_.pop_front();
+    removed_elements_count_++;
+  }
+
+  // Number of the elements that were removed from the queue. It is used to
+  // subtract from each head to compute the right index inside `queue_`;
+  size_t removed_elements_count_ = 0;
+  std::deque<T> queue_;
+  // In how many queues the element is.
+  std::deque<size_t> in_queues_;
+  // Map from the head reader to the head position in the queue.
+  std::unordered_map<size_t, size_t> heads_;
 };
 
 }  // namespace webrtc

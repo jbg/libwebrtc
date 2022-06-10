@@ -15,13 +15,42 @@
 namespace webrtc {
 namespace {
 
-TEST(MultiHeadQueueTest, GetOnEmpty) {
+TEST(MultiHeadQueueTest, EmptyQueueEmptyForAllHeads) {
   MultiHeadQueue<int> queue = MultiHeadQueue<int>(10);
-  EXPECT_TRUE(queue.IsEmpty(0));
+  EXPECT_EQ(queue.size(), 0lu);
   for (int i = 0; i < 10; ++i) {
+    EXPECT_TRUE(queue.IsEmpty(i));
+    EXPECT_EQ(queue.size(i), 0lu);
     EXPECT_FALSE(queue.PopFront(i).has_value());
     EXPECT_FALSE(queue.Front(i).has_value());
   }
+}
+
+TEST(MultiHeadQueueTest, SizeIsEqualForAllHeadsAfterAddOnly) {
+  MultiHeadQueue<int> queue = MultiHeadQueue<int>(10);
+  queue.PushBack(1);
+  queue.PushBack(2);
+  queue.PushBack(3);
+  EXPECT_EQ(queue.size(), 3lu);
+  for (int i = 0; i < 10; ++i) {
+    EXPECT_FALSE(queue.IsEmpty(i));
+    EXPECT_EQ(queue.size(i), 3lu);
+  }
+}
+
+TEST(MultiHeadQueueTest, SizeIsCorrectAfterRemoveFromOnlyOneHead) {
+  MultiHeadQueue<int> queue = MultiHeadQueue<int>(10);
+  for (int i = 0; i < 5; ++i) {
+    queue.PushBack(i);
+  }
+  EXPECT_EQ(queue.size(), 5lu);
+  // Removing elements from queue #0
+  for (int i = 0; i < 5; ++i) {
+    EXPECT_EQ(queue.size(0), static_cast<size_t>(5 - i));
+    EXPECT_EQ(queue.PopFront(0), absl::optional<int>(i));
+  }
+  EXPECT_EQ(queue.size(0), 0lu);
+  EXPECT_TRUE(queue.IsEmpty(0));
 }
 
 TEST(MultiHeadQueueTest, SingleHeadOneAddOneRemove) {
@@ -44,10 +73,9 @@ TEST(MultiHeadQueueTest, SingleHead) {
     EXPECT_EQ(queue.size(), i + 1);
   }
   for (size_t i = 0; i < 10; ++i) {
-    absl::optional<size_t> value = queue.PopFront(0);
+    EXPECT_EQ(queue.Front(0), absl::optional<size_t>(i));
+    EXPECT_EQ(queue.PopFront(0), absl::optional<size_t>(i));
     EXPECT_EQ(queue.size(), 10 - i - 1);
-    ASSERT_TRUE(value.has_value());
-    EXPECT_EQ(value.value(), i);
   }
 }
 
