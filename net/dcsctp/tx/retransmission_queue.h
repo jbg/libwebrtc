@@ -201,6 +201,8 @@ class RetransmissionQueue {
   // If there is data sent and not ACKED, ensure that the retransmission timer
   // is running.
   void StartT3RtxTimerIfOutstandingData();
+  // Starts T3-RTX if it's not running.
+  void MaybeStartT3RtxTimer();
 
   // Returns the current congestion control algorithm phase.
   CongestionAlgorithmPhase phase() const {
@@ -249,6 +251,10 @@ class RetransmissionQueue {
   // cumulative acked. Note that it also contains chunks that have been acked in
   // gap ack blocks.
   OutstandingData outstanding_data_;
+  // The highest outstanding TSN when the T3-RTX timer was started. When the
+  // timer expires, all chunks up to (and including) this TSN will be
+  // retransmitted, but not the newer ones.
+  UnwrappedTSN max_tsn_to_retransmit_;
 };
 }  // namespace dcsctp
 

@@ -125,8 +125,8 @@ class OutstandingData {
                                       TimeMs time_sent,
                                       TimeMs expires_at);
 
-  // Nacks all outstanding data.
-  void NackAll();
+  // Nacks all outstanding data up to, and including, `max_tsn_to_nack`.
+  void NackAllUntil(UnwrappedTSN max_tsn_to_nack);
 
   // Creates a FORWARD-TSN chunk.
   ForwardTsnChunk CreateForwardTsn() const;
