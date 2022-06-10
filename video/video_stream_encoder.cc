@@ -35,6 +35,7 @@
 #include "call/adaptation/resource_adaptation_processor.h"
 #include "call/adaptation/video_stream_adapter.h"
 #include "modules/video_coding/include/video_codec_initializer.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "modules/video_coding/svc/svc_rate_allocator.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
@@ -137,8 +138,8 @@ bool RequiresEncoderReset(const VideoCodec& prev_send_codec,
             prev_send_codec.simulcastStream[i].width ||
         new_send_codec.simulcastStream[i].height !=
             prev_send_codec.simulcastStream[i].height ||
-        new_send_codec.simulcastStream[i].numberOfTemporalLayers !=
-            prev_send_codec.simulcastStream[i].numberOfTemporalLayers ||
+        new_send_codec.simulcastStream[i].scalability_mode !=
+            prev_send_codec.simulcastStream[i].scalability_mode ||
         new_send_codec.simulcastStream[i].qpMax !=
             prev_send_codec.simulcastStream[i].qpMax) {
       return true;
@@ -253,9 +254,9 @@ VideoLayersAllocation CreateVideoLayersAllocation(
         frame_rate_fraction = encoder_info.fps_allocation[si][0];
       } else {  // Temporal layers are supported.
         uint32_t temporal_layer_bitrate_bps = 0;
-        for (size_t ti = 0;
-             ti < encoder_config.simulcastStream[si].numberOfTemporalLayers;
-             ++ti) {
+        const size_t num_temporal_layers = ScalabilityModeToNumTemporalLayers(
+            encoder_config.simulcastStream[si].scalability_mode);
+        for (size_t ti = 0; ti < num_temporal_layers; ++ti) {
           if (!target_bitrate.HasBitrate(si, ti)) {
             break;
           }
@@ -1094,7 +1095,9 @@ void VideoStreamEncoder::ReconfigureEncoder() {
                << " max_kbps: " << codec.simulcastStream[i].maxBitrate
                << " max_fps: " << codec.simulcastStream[i].maxFramerate
                << " max_qp: " << codec.simulcastStream[i].qpMax
-               << " num_tl: " << codec.simulcastStream[i].numberOfTemporalLayers
+               << " scalability_mode: "
+               << ScalabilityModeToString(
+                      codec.simulcastStream[i].scalability_mode)
                << " active: "
                << (codec.simulcastStream[i].active ? "true" : "false") << "\n";
   }
@@ -1227,22 +1230,14 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     pending_encoder_creation_ = false;
   }
 
-  int num_layers;
-  if (codec.codecType == kVideoCodecVP8) {
-    num_layers = codec.VP8()->numberOfTemporalLayers;
+  int num_layers = 1;
+  absl::optional<ScalabilityMode> scalability_mode = codec.GetScalabilityMode();
+  if (scalability_mode.has_value()) {
+    num_layers = ScalabilityModeToNumTemporalLayers(*scalability_mode);
   } else if (codec.codecType == kVideoCodecVP9) {
     num_layers = codec.VP9()->numberOfTemporalLayers;
-  } else if (codec.codecType == kVideoCodecH264) {
-    num_layers = codec.H264()->numberOfTemporalLayers;
-  } else if (codec.codecType == kVideoCodecGeneric &&
-             codec.numberOfSimulcastStreams > 0) {
-    // This is mainly for unit testing, disabling frame dropping.
-    // TODO(sprang): Add a better way to disable frame dropping.
-    num_layers = codec.simulcastStream[0].numberOfTemporalLayers;
-  } else {
-    num_layers = 1;
+    RTC_DCHECK_GT(num_layers, 0);
   }
-
   frame_dropper_.Reset();
   frame_dropper_.SetRates(codec.startBitrate, max_framerate_);
   // Force-disable frame dropper if either:
