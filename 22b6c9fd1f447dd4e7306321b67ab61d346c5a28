@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac03eff_f22d414e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-10T11:38:59Z",
+      "side": 1,
+      "message": "Surprised it was that easy....",
+      "revId": "22b6c9fd1f447dd4e7306321b67ab61d346c5a28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06d1d9f4_8417a214",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1715,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-10T11:38:59Z",
+      "side": 1,
+      "message": "It worries me that I can\u0027t quite figure out how duplicates are eliminated.\nI assume the manual testing would have showed that issue up if it was a problem.",
+      "revId": "22b6c9fd1f447dd4e7306321b67ab61d346c5a28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dbc736b_82c686b8",
@@ -14,6 +48,24 @@
       "writtenOn": "2022-06-09T14:53:01Z",
       "side": 1,
       "message": "it works but is it correct way to construct the candidate?",
+      "revId": "22b6c9fd1f447dd4e7306321b67ab61d346c5a28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a40c118e_64a5bfed",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-10T11:38:59Z",
+      "side": 1,
+      "message": "it\u0027s a test, so I mostly care that it works.",
+      "parentUuid": "7dbc736b_82c686b8",
       "revId": "22b6c9fd1f447dd4e7306321b67ab61d346c5a28",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
