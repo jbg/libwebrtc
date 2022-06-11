@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c9319f_7b64e515",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5733
+      },
+      "writtenOn": "2022-06-11T01:08:59Z",
+      "side": 1,
+      "message": "Similar comments as in https://crrev.com/c/3700775. This is the WebRTC repo, so that\u0027s redundant. This could just be\n  [Cast Convergence] Replace is_chromecast with is_castos/is_cast_android\nOR\n  [Cast Convergence] Replace is_chromecast with new args",
+      "revId": "da1b0b93cfeb8f19b83ae7ae2e0fb63e98464473",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa1eb214_9ff57dc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5733
+      },
+      "writtenOn": "2022-06-11T01:08:59Z",
+      "side": 1,
+      "message": "Logic LG",
+      "revId": "da1b0b93cfeb8f19b83ae7ae2e0fb63e98464473",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
