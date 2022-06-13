@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f55fc94c_7f66c0e1",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-13T09:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af095052_ca40eb20",
+      "range": {
+        "startLine": 57,
+        "startChar": 22,
+        "endLine": 57,
+        "endChar": 28
+      },
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63a66c71_b284951e",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-06-13T07:31:41Z",
       "side": 1,
       "message": "Should this be `!\u003d`?",
+      "range": {
+        "startLine": 61,
+        "startChar": 17,
+        "endLine": 61,
+        "endChar": 19
+      },
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a9150a9_e90f1f45",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-13T09:06:30Z",
+      "side": 1,
+      "message": "If it will be !\u003d, it means we are trying to add reader with index, for example, \"5\" and we found \"5\" among heads keys, which means that \"5\" is already reading this queue, so it should fail in such. case.",
+      "parentUuid": "63a66c71_b284951e",
       "range": {
         "startLine": 61,
         "startChar": 17,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2577c5a_b552c8b6",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-13T09:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "746feb96_10da8f2f",
+      "range": {
+        "startLine": 155,
+        "startChar": 5,
+        "endLine": 155,
+        "endChar": 39
+      },
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10e56521_9d33e001",
@@ -110,6 +182,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "149366c3_4ffe2fff",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-13T09:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10e56521_9d33e001",
+      "range": {
+        "startLine": 157,
+        "startChar": 18,
+        "endLine": 157,
+        "endChar": 22
+      },
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7fa2db9_b5436557",
@@ -123,6 +219,24 @@
       "writtenOn": "2022-06-13T07:31:41Z",
       "side": 1,
       "message": "Should we add expectations for other readers and for the global structure as well?",
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a42bc90a_39cae64b",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-13T09:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7fa2db9_b5436557",
       "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
