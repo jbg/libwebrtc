@@ -22,6 +22,7 @@
 
 #include "absl/strings/match.h"
 #include "common_video/libyuv/include/webrtc_libyuv.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "modules/video_coding/utility/simulcast_rate_allocator.h"
 #include "modules/video_coding/utility/simulcast_utility.h"
 #include "rtc_base/checks.h"
@@ -241,9 +242,8 @@ int32_t H264EncoderImpl::InitEncode(const VideoCodec* inst,
     configurations_[i].max_frame_rate = static_cast<float>(codec_.maxFramerate);
     configurations_[i].frame_dropping_on = codec_.GetFrameDropEnabled();
     configurations_[i].key_frame_interval = codec_.H264()->keyFrameInterval;
-    configurations_[i].num_temporal_layers =
-        std::max(codec_.H264()->numberOfTemporalLayers,
-                 codec_.simulcastStream[idx].numberOfTemporalLayers);
+    configurations_[i].num_temporal_layers = ScalabilityModeToNumTemporalLayers(
+        codec_.simulcastStream[idx].scalability_mode);
 
     // Create downscaled image buffers.
     if (i > 0) {

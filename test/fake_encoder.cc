@@ -22,6 +22,7 @@
 #include "modules/video_coding/codecs/h264/include/h264_globals.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/include/video_error_codes.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "rtc_base/checks.h"
 #include "system_wrappers/include/sleep.h"
 
@@ -187,7 +188,8 @@ FakeEncoder::FrameInfo FakeEncoder::NextFrame(
     if (target_bitrate.GetBitrate(i, 0) > 0) {
       int temporal_id = last_frame_info_.layers.size() > i
                             ? ++last_frame_info_.layers[i].temporal_id %
-                                  simulcast_streams[i].numberOfTemporalLayers
+                                  ScalabilityModeToNumTemporalLayers(
+                                      simulcast_streams[i].scalability_mode)
                             : 0;
       frame_info.layers.emplace_back(0, temporal_id);
     }
@@ -278,8 +280,8 @@ VideoEncoder::EncoderInfo FakeEncoder::GetEncoderInfo() const {
   info.implementation_name = kImplementationName;
   MutexLock lock(&mutex_);
   for (int sid = 0; sid < config_.numberOfSimulcastStreams; ++sid) {
-    int number_of_temporal_layers =
-        config_.simulcastStream[sid].numberOfTemporalLayers;
+    int number_of_temporal_layers = ScalabilityModeToNumTemporalLayers(
+        config_.simulcastStream[sid].scalability_mode);
     info.fps_allocation[sid].clear();
     for (int tid = 0; tid < number_of_temporal_layers; ++tid) {
       // {1/4, 1/2, 1} allocation for num layers = 3.
