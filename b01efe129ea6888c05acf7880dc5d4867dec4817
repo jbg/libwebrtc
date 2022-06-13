@@ -87,6 +87,24 @@
       "parentUuid": "80340f7e_4332cbe8",
       "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1fb9f57_b2b52c67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-06-13T18:04:55Z",
+      "side": 1,
+      "message": "For reference, I\u0027m currently working on exporting base/third_party/libevent to third_party. https://chromium-review.googlesource.com/c/chromium/src/+/3695888 This will further reduce //base dependencies.",
+      "parentUuid": "235ded80_4ae587ed",
+      "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
