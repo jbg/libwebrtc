@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d68752db_291a3407",
+        "filename": "test/pc/e2e/analyzer/video/multi_reader_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-13T13:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4b1feae_dae8ccd3",
+      "range": {
+        "startLine": 25,
+        "startChar": 28,
+        "endLine": 25,
+        "endChar": 50
+      },
+      "revId": "f7c94d576f7da760a1c2daaa9c284b6ab807d7db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1005a54d_31c7db25",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-13T12:57:01Z",
       "side": 1,
       "message": "When an element will be removed by all the readers, the element will be removed from the queue.",
+      "range": {
+        "startLine": 26,
+        "startChar": 12,
+        "endLine": 27,
+        "endChar": 42
+      },
+      "revId": "f7c94d576f7da760a1c2daaa9c284b6ab807d7db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9538d48_d3576050",
+        "filename": "test/pc/e2e/analyzer/video/multi_reader_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-13T13:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1005a54d_31c7db25",
       "range": {
         "startLine": 26,
         "startChar": 12,
