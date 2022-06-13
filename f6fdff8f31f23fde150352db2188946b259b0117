@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4ef4f1e_4ed24058",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-06-13T07:31:41Z",
+      "side": 1,
+      "message": "First round of comments, I will take a deeper look later but please let me know about the idea of renaming to MultiReaderQueue (hiding the head concept behind the API and letting the user only focus on readers).",
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af095052_ca40eb20",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-06-13T07:31:41Z",
+      "side": 1,
+      "message": "I wonder if we should rename this data structure to something like MultiReaderQueue and explicitly elevate the \"reader\" concept to the API of this class.\n\nFor example, I think it is easier for a user of this data structure to have something like:\n\n```\nvoid AddReader(size_t reader, size_t reader_to_copy)\n```\n\ninstead of having to think at the map between heads and readers (which are kind of related anyway).\n\nWDYT?",
+      "range": {
+        "startLine": 57,
+        "startChar": 22,
+        "endLine": 57,
+        "endChar": 28
+      },
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63a66c71_b284951e",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-06-13T07:31:41Z",
+      "side": 1,
+      "message": "Should this be `!\u003d`?",
+      "range": {
+        "startLine": 61,
+        "startChar": 17,
+        "endLine": 61,
+        "endChar": 19
+      },
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "746feb96_10da8f2f",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-06-13T07:31:41Z",
+      "side": 1,
+      "message": "I would change this to:\n\n```\n// In how may queues the element at index `i` is.\n```\n\nMaybe also mention some invariants? Like an element can be removed from the front if and only if it is in 0 queues?",
+      "range": {
+        "startLine": 155,
+        "startChar": 5,
+        "endLine": 155,
+        "endChar": 39
+      },
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10e56521_9d33e001",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-06-13T07:31:41Z",
+      "side": 1,
+      "message": "Remove this \"head\", I think it is more clear as:\n\n```\n// Map from the reader to its head position in the queue.\n```",
+      "range": {
+        "startLine": 157,
+        "startChar": 18,
+        "endLine": 157,
+        "endChar": 22
+      },
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7fa2db9_b5436557",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-06-13T07:31:41Z",
+      "side": 1,
+      "message": "Should we add expectations for other readers and for the global structure as well?",
+      "revId": "f6fdff8f31f23fde150352db2188946b259b0117",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
