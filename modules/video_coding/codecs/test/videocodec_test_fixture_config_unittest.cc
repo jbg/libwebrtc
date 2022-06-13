@@ -24,7 +24,8 @@ namespace test {
 using Config = VideoCodecTestFixture::Config;
 
 namespace {
-const size_t kNumTemporalLayers = 2;
+constexpr ScalabilityMode kScalabilityMode = ScalabilityMode::kL1T2;
+constexpr size_t kNumTemporalLayers = 2;
 }  // namespace
 
 TEST(Config, NumberOfCoresWithUseSingleCore) {
@@ -48,13 +49,14 @@ TEST(Config, NumberOfTemporalLayersIsOne) {
 TEST(Config, NumberOfTemporalLayers_Vp8) {
   Config config;
   webrtc::test::CodecSettings(kVideoCodecVP8, &config.codec_settings);
-  config.codec_settings.VP8()->numberOfTemporalLayers = kNumTemporalLayers;
+  config.codec_settings.SetScalabilityMode(kScalabilityMode);
   EXPECT_EQ(kNumTemporalLayers, config.NumberOfTemporalLayers());
 }
 
 TEST(Config, NumberOfTemporalLayers_Vp9) {
   Config config;
   webrtc::test::CodecSettings(kVideoCodecVP9, &config.codec_settings);
+  config.codec_settings.SetScalabilityMode(kScalabilityMode);
   config.codec_settings.VP9()->numberOfTemporalLayers = kNumTemporalLayers;
   EXPECT_EQ(kNumTemporalLayers, config.NumberOfTemporalLayers());
 }
