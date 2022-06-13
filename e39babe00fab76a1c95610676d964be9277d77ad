@@ -104,6 +104,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "848380c9_c4ef6138",
+        "filename": "modules/desktop_capture/linux/wayland/portal_request_response.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-13T16:11:06Z",
+      "side": 1,
+      "message": "Yes, use the URL for whichever tracker has the bug.",
+      "parentUuid": "40e486f7_12784558",
+      "revId": "e39babe00fab76a1c95610676d964be9277d77ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7aded567_5f5a5c21",
