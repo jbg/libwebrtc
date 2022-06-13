@@ -16,6 +16,7 @@
 
 #include "api/test/videocodec_test_stats.h"
 #include "api/video_codecs/h264_profile_level_id.h"
+#include "api/video_codecs/scalability_mode.h"
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder_factory.h"
 #include "modules/video_coding/include/video_codec_interface.h"
@@ -67,8 +68,7 @@ class VideoCodecTestFixture {
     Config();
     void SetCodecSettings(std::string codec_name,
                           size_t num_simulcast_streams,
-                          size_t num_spatial_layers,
-                          size_t num_temporal_layers,
+                          ScalabilityMode scalability_mode,
                           bool denoising_on,
                           bool frame_dropper_on,
                           bool spatial_resize_on,

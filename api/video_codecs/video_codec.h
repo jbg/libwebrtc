@@ -44,7 +44,6 @@ struct VideoCodecVP8 {
   bool operator!=(const VideoCodecVP8& other) const {
     return !(*this == other);
   }
-  unsigned char numberOfTemporalLayers;
   bool denoisingOn;
   bool automaticResizeOn;
   int keyFrameInterval;
@@ -79,7 +78,6 @@ struct VideoCodecH264 {
     return !(*this == other);
   }
   int keyFrameInterval;
-  uint8_t numberOfTemporalLayers;
 };
 
 // Translates from name of codec to codec type and vice versa.
