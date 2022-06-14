@@ -34,6 +34,24 @@
       "parentUuid": "025d50db_cd5ef413",
       "revId": "1961da47775dad72ce083a2da38242cc910f8e67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ac805df_7f026c34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-14T11:29:58Z",
+      "side": 1,
+      "message": "Why can\u0027t this be just scoped_refptr\u003cEvent\u003e?\n\nEven with FinalRefCountedObject, I find it more readable than Ref, which is likely to be an abstraction that the user has never seen before (it\u0027s very rare), and is such a generic term that it doesn\u0027t give you much of a clue of what its semantics are supposed to be.\n\n(Note - Event is an object that is defined in webrtc, but overridden in the Chrome import of webrtc.)",
+      "parentUuid": "e85ef665_78f85a5e",
+      "revId": "1961da47775dad72ce083a2da38242cc910f8e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
