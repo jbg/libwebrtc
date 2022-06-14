@@ -86,7 +86,9 @@ TEST(ProbingTest, ProbesRampsUpWhenVideoEncoderConfigChanges) {
   VideoStreamConfig video_config;
   video_config.encoder.codec =
       VideoStreamConfig::Encoder::Codec::kVideoCodecVP8;
-  video_config.encoder.layers.spatial = 3;
+  // TODO(bugs.webrtc.org/11607): Treat simulcast and spatial layers differently
+  // in the config.
+  video_config.encoder.scalability_mode = "L3T1";
   video_config.source.generator.width = 1280;
   video_config.source.generator.height = 720;
 

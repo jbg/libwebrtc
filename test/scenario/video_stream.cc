@@ -22,6 +22,7 @@
 #include "media/engine/internal_decoder_factory.h"
 #include "media/engine/internal_encoder_factory.h"
 #include "media/engine/webrtc_video_engine.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "test/call_test.h"
 #include "test/fake_encoder.h"
 #include "test/scenario/hardware_codecs.h"
@@ -77,18 +78,7 @@ VideoEncoderConfig::ContentType ConvertContentType(
       return VideoEncoderConfig::ContentType::kScreen;
   }
 }
-InterLayerPredMode ToInterLayerPredMode(
-    VideoStreamConfig::Encoder::Layers::Prediction value) {
-  using Pred = VideoStreamConfig::Encoder::Layers::Prediction;
-  switch (value) {
-    case Pred::kTemporalOnly:
-      return InterLayerPredMode::kOff;
-    case Pred::kSpatialOnKey:
-      return InterLayerPredMode::kOnKeyPic;
-    case Pred::kFull:
-      return InterLayerPredMode::kOn;
-  }
-}
+
 std::vector<RtpExtension> GetVideoRtpExtensions(
     const VideoStreamConfig config) {
   std::vector<RtpExtension> res = {
@@ -156,17 +146,22 @@ CreateVp9SpecificSettings(VideoStreamConfig video_config) {
   VideoStreamConfig::Encoder conf = video_config.encoder;
   VideoCodecVP9 vp9 = VideoEncoder::GetDefaultVp9Settings();
   vp9.keyFrameInterval = conf.key_frame_interval.value_or(0);
-  vp9.numberOfTemporalLayers = static_cast<uint8_t>(conf.layers.temporal);
-  vp9.numberOfSpatialLayers = static_cast<uint8_t>(conf.layers.spatial);
-  vp9.interLayerPred = ToInterLayerPredMode(conf.layers.prediction);
+  ScalabilityMode scalability_mode =
+      ScalabilityModeFromString(conf.scalability_mode)
+          .value_or(ScalabilityMode::kL1T1);
+  vp9.numberOfTemporalLayers =
+      ScalabilityModeToNumTemporalLayers(scalability_mode);
+  vp9.numberOfSpatialLayers =
+      ScalabilityModeToNumSpatialLayers(scalability_mode);
+  vp9.interLayerPred = ScalabilityModeToInterLayerPredMode(scalability_mode);
 
   if (conf.content_type == kScreen &&
-      (video_config.source.framerate > 5 || conf.layers.spatial >= 3)) {
+      (video_config.source.framerate > 5 || vp9.numberOfSpatialLayers >= 3)) {
     vp9.flexibleMode = true;
   }
 
-  if (conf.content_type == kScreen ||
-      conf.layers.temporal * conf.layers.spatial) {
+  if (conf.content_type == kScreen || vp9.numberOfTemporalLayers > 1 ||
+      vp9.numberOfSpatialLayers > 1) {
     vp9.automaticResizeOn = false;
     vp9.denoisingOn = false;
   } else {
@@ -181,8 +176,13 @@ rtc::scoped_refptr<VideoEncoderConfig::EncoderSpecificSettings>
 CreateVp8SpecificSettings(VideoStreamConfig config) {
   VideoCodecVP8 vp8_settings = VideoEncoder::GetDefaultVp8Settings();
   vp8_settings.keyFrameInterval = config.encoder.key_frame_interval.value_or(0);
-  vp8_settings.numberOfTemporalLayers = config.encoder.layers.temporal;
-  if (config.encoder.layers.spatial * config.encoder.layers.temporal > 1) {
+  ScalabilityMode scalability_mode =
+      ScalabilityModeFromString(config.encoder.scalability_mode)
+          .value_or(ScalabilityMode::kL1T1);
+  vp8_settings.numberOfTemporalLayers =
+      ScalabilityModeToNumTemporalLayers(scalability_mode);
+  if (vp8_settings.numberOfTemporalLayers > 1 ||
+      ScalabilityModeToNumSpatialLayers(scalability_mode) > 1) {
     vp8_settings.automaticResizeOn = false;
     vp8_settings.denoisingOn = false;
   } else {
@@ -195,9 +195,8 @@ CreateVp8SpecificSettings(VideoStreamConfig config) {
 
 rtc::scoped_refptr<VideoEncoderConfig::EncoderSpecificSettings>
 CreateH264SpecificSettings(VideoStreamConfig config) {
-  RTC_DCHECK_EQ(config.encoder.layers.temporal, 1);
-  RTC_DCHECK_EQ(config.encoder.layers.spatial, 1);
-
+  RTC_DCHECK(ScalabilityModeFromString(config.encoder.scalability_mode) ==
+             ScalabilityMode::kL1T1);
   // TODO(bugs.webrtc.org/6883): Set a key frame interval as a setting that
   // isn't codec specific.
   RTC_CHECK_EQ(0, config.encoder.key_frame_interval.value_or(0));
@@ -231,11 +230,12 @@ VideoEncoderConfig CreateVideoEncoderConfig(VideoStreamConfig config) {
       SdpVideoFormat(CodecTypeToPayloadString(config.encoder.codec), {});
 
   encoder_config.number_of_streams = 1;
+  int spatial_layers = ScalabilityModeToNumSpatialLayers(
+      ScalabilityModeFromString(config.encoder.scalability_mode)
+          .value_or(ScalabilityMode::kL1T1));
   if (config.encoder.codec == VideoStreamConfig::Encoder::Codec::kVideoCodecVP8)
-    encoder_config.number_of_streams =
-        static_cast<size_t>(config.encoder.layers.spatial);
-  encoder_config.simulcast_layers =
-      std::vector<VideoStream>(config.encoder.layers.spatial);
+    encoder_config.number_of_streams = static_cast<size_t>(spatial_layers);
+  encoder_config.simulcast_layers = std::vector<VideoStream>(spatial_layers);
   encoder_config.min_transmit_bitrate_bps = config.stream.pad_to_rate.bps();
 
   std::string cricket_codec = CodecTypeToCodecName(config.encoder.codec);
@@ -551,7 +551,9 @@ ReceiveVideoStream::ReceiveVideoStream(CallClient* receiver,
                             CodecTypeToPayloadString(config.encoder.codec));
   size_t num_streams = 1;
   if (config.encoder.codec == VideoStreamConfig::Encoder::Codec::kVideoCodecVP8)
-    num_streams = config.encoder.layers.spatial;
+    num_streams = ScalabilityModeToNumSpatialLayers(
+        ScalabilityModeFromString(config.encoder.scalability_mode)
+            .value_or(ScalabilityMode::kL1T1));
   for (size_t i = 0; i < num_streams; ++i) {
     rtc::VideoSinkInterface<VideoFrame>* renderer = &fake_renderer_;
     if (matcher->Active()) {

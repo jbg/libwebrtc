@@ -103,7 +103,9 @@ TEST(VideoStreamTest, ReceivesVp8SimulcastFrames) {
       c->encoder.implementation = CodecImpl::kSoftware;
       c->encoder.codec = Codec::kVideoCodecVP8;
       // By enabling multiple spatial layers, simulcast will be enabled for VP8.
-      c->encoder.layers.spatial = 3;
+      // TODO(bugs.webrtc.org/11607): Treat simulcast and spatial layers
+      // differently in the config.
+      c->encoder.scalability_mode = "L3T1";
     });
     s.RunFor(kRunTime);
   }
@@ -213,7 +215,7 @@ TEST(VideoStreamTest, ResolutionAdaptsToAvailableBandwidth) {
     c->encoder.implementation = CodecImpl::kSoftware;
     c->encoder.codec = Codec::kVideoCodecVP9;
     // Enable SVC.
-    c->encoder.layers.spatial = 2;
+    c->encoder.scalability_mode = "L2T1";
   });
 
   // Run for a few seconds, until streams have stabilized,
