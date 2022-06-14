@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8832e0fb_ceea6341",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-06-14T14:48:36Z",
+      "side": 1,
+      "message": "Can mark as deprecated to ensure no WebRTC use.",
+      "range": {
+        "startLine": 213,
+        "startChar": 5,
+        "endLine": 213,
+        "endChar": 15
+      },
+      "revId": "0eb589b35b304aba8c7b9966eae34a39c109a284",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a0142b5_b47a8edc",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-06-14T14:48:36Z",
+      "side": 1,
+      "message": "Comment here looks incomplete.",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 24
+      },
+      "revId": "0eb589b35b304aba8c7b9966eae34a39c109a284",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bba10fb_620c4aa5",
+        "filename": "modules/video_coding/generic_decoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-06-14T14:48:36Z",
+      "side": 1,
+      "message": "nit: Can use int32_t\u0026 to avoid using * repeatedly.",
+      "range": {
+        "startLine": 110,
+        "startChar": 5,
+        "endLine": 110,
+        "endChar": 54
+      },
+      "revId": "0eb589b35b304aba8c7b9966eae34a39c109a284",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ad77101_eaad1d11",
+        "filename": "video/video_receive_stream2_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-06-14T14:48:36Z",
+      "side": 1,
+      "message": "nit: Instead of using `EXPECT_FALSE`, use `EXPECT_THAT(..., Eq(absl::nullopt))` in order to get nice error messages which would include the value. Can also use `EXPECT_THAT(..., Optional(xxx))`",
+      "range": {
+        "startLine": 418,
+        "startChar": 2,
+        "endLine": 418,
+        "endChar": 14
+      },
+      "revId": "0eb589b35b304aba8c7b9966eae34a39c109a284",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
