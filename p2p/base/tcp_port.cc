@@ -269,6 +269,10 @@ int TCPPort::GetError() {
 }
 
 bool TCPPort::SupportsProtocol(const std::string& protocol) const {
+  return SupportsProtocol(absl::string_view(protocol));
+}
+
+bool TCPPort::SupportsProtocol(absl::string_view protocol) const {
   return protocol == TCP_PROTOCOL_NAME || protocol == SSLTCP_PROTOCOL_NAME;
 }
 

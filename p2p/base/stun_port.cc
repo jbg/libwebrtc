@@ -348,6 +348,10 @@ bool UDPPort::HandleIncomingPacket(rtc::AsyncPacketSocket* socket,
 }
 
 bool UDPPort::SupportsProtocol(const std::string& protocol) const {
+  return SupportsProtocol(absl::string_view(protocol));
+}
+
+bool UDPPort::SupportsProtocol(absl::string_view protocol) const {
   return protocol == UDP_PROTOCOL_NAME;
 }
 
