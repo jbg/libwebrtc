@@ -16,6 +16,24 @@
       "message": "Here\u0027s a removal cl, do you think this makes sense?\n\nThere\u0027s a slight conflict between \n\n1. Keeping implementation of rtc::Ref and rtc::make_ref_counted together, because they should stay consistent, and reuse the same HasAddRefAndRelease utility.\n\n2. Move rtc::make_ref_counted but not rtc::Ref to api/.",
       "revId": "1961da47775dad72ce083a2da38242cc910f8e67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e85ef665_78f85a5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-14T11:03:38Z",
+      "side": 1,
+      "message": "I\u0027m thinking that if avoiding explicit scoped_ref_ptr\u003cFinalRefCountedObject\u003cEvent\u003e\u003e declaration is a good thing in the AsyncInvoker usecase, it\u0027s likely a good thing to have also for other users of make_ref_counted, and then it should be moved to api/ together with make_ref_counted.\n\nWe probably don\u0027t want users to refer to FinalRefCountedObject directly.",
+      "parentUuid": "025d50db_cd5ef413",
+      "revId": "1961da47775dad72ce083a2da38242cc910f8e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
