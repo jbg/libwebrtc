@@ -266,6 +266,15 @@ PortAllocatorSession* BasicPortAllocator::CreateSessionInternal(
   return session;
 }
 
+PortAllocatorSession* BasicPortAllocator::CreateSessionInternal(
+    absl::string_view content_name,
+    int component,
+    absl::string_view ice_ufrag,
+    absl::string_view ice_pwd) {
+  return CreateSessionInternal(std::string(content_name), component,
+                               std::string(ice_ufrag), std::string(ice_pwd));
+}
+
 void BasicPortAllocator::AddTurnServer(const RelayServerConfig& turn_server) {
   CheckRunOnValidThreadAndInitialized();
   std::vector<RelayServerConfig> new_turn_servers = turn_servers();

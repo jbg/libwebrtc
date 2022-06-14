@@ -602,11 +602,18 @@ class RTC_EXPORT PortAllocator : public sigslot::has_slots<> {
       SignalCandidateFilterChanged;
 
  protected:
+  // TODO(webrtc::13579): Remove std::string version once downstream users have
+  // migrated to the absl::string_view version.
   virtual PortAllocatorSession* CreateSessionInternal(
       const std::string& content_name,
       int component,
       const std::string& ice_ufrag,
       const std::string& ice_pwd) = 0;
+  virtual PortAllocatorSession* CreateSessionInternal(
+      absl::string_view content_name,
+      int component,
+      absl::string_view ice_ufrag,
+      absl::string_view ice_pwd);
 
   const std::vector<std::unique_ptr<PortAllocatorSession>>& pooled_sessions() {
     return pooled_sessions_;

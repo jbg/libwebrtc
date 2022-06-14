@@ -242,6 +242,15 @@ class FakePortAllocator : public cricket::PortAllocator {
                                         ice_pwd, field_trials_);
   }
 
+  cricket::PortAllocatorSession* CreateSessionInternal(
+      absl::string_view content_name,
+      int component,
+      absl::string_view ice_ufrag,
+      absl::string_view ice_pwd) override {
+    return CreateSessionInternal(std::string(content_name), component,
+                                 std::string(ice_ufrag), std::string(ice_pwd));
+  }
+
   bool initialized() const { return initialized_; }
 
   // For testing: Manipulate MdnsObfuscationEnabled()
