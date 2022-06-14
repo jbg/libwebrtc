@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2956c3ee_5c037578",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-14T12:51:51Z",
+      "side": 1,
+      "message": "PTAL. Some tests fail at the moment, likely vp8 simulcast that needs more care.",
+      "revId": "36309cb334a3e5f9ceb3dd5589f9f12f74abf104",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ff9c9e_f9a91fc3",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-14T12:51:51Z",
+      "side": 1,
+      "message": "This config code mixes up spatial layers and simulcast. Considering changing to\n\nstruct SimulcastStream { std::string scalability_mode \u003d \"L1T1\" };\nstd::vector\u003cSimulcastStream\u003e \u003d { SimulcastStream() };\n\nAlso not sure if it sould be appropriate to use the ScalabilityMode enum at this level.",
+      "range": {
+        "startLine": 141,
+        "startChar": 4,
+        "endLine": 141,
+        "endChar": 42
+      },
+      "revId": "36309cb334a3e5f9ceb3dd5589f9f12f74abf104",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
