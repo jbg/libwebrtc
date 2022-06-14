@@ -16,6 +16,63 @@
       "message": "In every instance, I find the declaration easier to understand without the use of Ref. Go for it!\n",
       "revId": "a3be7370003deb78e75908e2f169f060d427896c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfe40e58_a29a38f5",
+        "filename": "rtc_base/async_invoker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-06-14T11:26:42Z",
+      "side": 1,
+      "message": "can we mark this as [[deprecated]]?",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 66
+      },
+      "revId": "a3be7370003deb78e75908e2f169f060d427896c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01f6f824_a51a416c",
+        "filename": "rtc_base/async_invoker_inl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-06-14T11:26:42Z",
+      "side": 1,
+      "message": "can we mark this as [[deprecated]]?\n\nAlternatively, DEPRECATED_AsyncClosure to match with DEPRECATED_AsyncInvoker.",
+      "revId": "a3be7370003deb78e75908e2f169f060d427896c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a041784d_b7d2acbf",
+        "filename": "rtc_base/async_invoker_inl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-06-14T11:26:42Z",
+      "side": 1,
+      "message": "same thing.\n\ncould even move it into private section of DEPRECATED_AsyncInvoker.",
+      "revId": "a3be7370003deb78e75908e2f169f060d427896c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
