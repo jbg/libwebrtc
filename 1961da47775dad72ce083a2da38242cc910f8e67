@@ -88,6 +88,24 @@
       "parentUuid": "52d54ee2_3d65e245",
       "revId": "1961da47775dad72ce083a2da38242cc910f8e67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "104b8dc2_4b62cddc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-06-14T12:11:01Z",
+      "side": 1,
+      "message": "then scoped_refptr would be doing essentially the same thing as make_ref_counted 🤔\nhmm... maybe we don\u0027t need to cross that bridge just yet.",
+      "parentUuid": "31a5d490_8f7b5987",
+      "revId": "1961da47775dad72ce083a2da38242cc910f8e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
