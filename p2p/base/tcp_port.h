@@ -63,6 +63,7 @@ class TCPPort : public Port {
   int SetOption(rtc::Socket::Option opt, int value) override;
   int GetError() override;
   bool SupportsProtocol(const std::string& protocol) const override;
+  bool SupportsProtocol(absl::string_view protocol) const override;
   ProtocolType GetProtocol() const override;
 
  protected:
