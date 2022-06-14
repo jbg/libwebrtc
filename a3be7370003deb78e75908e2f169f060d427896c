@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac292878_7390a5a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-14T11:02:20Z",
+      "side": 1,
+      "message": "In every instance, I find the declaration easier to understand without the use of Ref. Go for it!\n",
+      "revId": "a3be7370003deb78e75908e2f169f060d427896c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
