@@ -52,6 +52,24 @@
       "parentUuid": "e85ef665_78f85a5e",
       "revId": "1961da47775dad72ce083a2da38242cc910f8e67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d54ee2_3d65e245",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-06-14T11:35:20Z",
+      "side": 1,
+      "message": "it needs to be FinalRefCountedObject\u003c Event \u003e because Event doesn\u0027t implement reference counting.\n\nmake_ref_counted does this behind the scenes and the idea with Ref\u003c\u003e was to have a utility for declaring types that match with what make_ref_counted produces.\n\nHowever, this code (async invoker) is deprecated and not used by webrtc (hopefully we can delete it soon), so I\u0027m not too worried about it.",
+      "parentUuid": "0ac805df_7f026c34",
+      "revId": "1961da47775dad72ce083a2da38242cc910f8e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
