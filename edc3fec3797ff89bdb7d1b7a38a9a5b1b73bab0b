@@ -33,6 +33,46 @@
       "message": "Hello, Xavier. Friendly ping for the review :)",
       "revId": "edc3fec3797ff89bdb7d1b7a38a9a5b1b73bab0b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b666af45_73a1746a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-06-15T13:25:29Z",
+      "side": 1,
+      "message": "Sorry for the delayed review...",
+      "revId": "edc3fec3797ff89bdb7d1b7a38a9a5b1b73bab0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9db8d648_5e5de67e",
+        "filename": "sdk/android/api/org/webrtc/FieldTrial.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-06-15T13:25:29Z",
+      "side": 1,
+      "message": "This feels strange to have this static provider, and to keep a dependency on PeerConnectionFactory when ultimately it’s [a static function call](https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/sdk/android/src/jni/pc/peer_connection_factory.cc;l\u003d220-221;drc\u003de0a92f9a426bb1c840200930de67ad9c10400279).\n\nCould you move the native method to this class, moving the C++ implementation accordingly?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 0
+      },
+      "revId": "edc3fec3797ff89bdb7d1b7a38a9a5b1b73bab0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
