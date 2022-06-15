@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '090f9e3701d4281c0ce9508459ce7c4d15f0539d',
+  'chromium_revision': 'f1dce164b96d9c15f0209bca8e88db40b3b5bcd8',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -29,7 +29,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@79c8f410bc671a7c0e1dbba5ddd6b1486f8e09da',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@7959e33c0d56455627141a0ae705b9a7e51c7a75',
+    'https://chromium.googlesource.com/chromium/src/build@6326939d517160bfec46310170aa3fa1d6918d33',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@8b16338d17cd71b04a6ba28da7322ab6739892c2',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -42,9 +42,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@a068c2a7c2d9a0177b0e5ef5cec312283e8f1b57',
+    'https://chromium.googlesource.com/chromium/src/testing@7d7b7841ede7978e9db4cfa3cfe0d07b8bff21fa',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@bc0051d5404d263486fc6f7df38b583671f76e91',
+    'https://chromium.googlesource.com/chromium/src/third_party@fef14b6c0f6a511c541c5af6eee99d231ddb2ae8',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -180,7 +180,7 @@ deps = {
   'src/third_party/googletest/src':
     'https://chromium.googlesource.com/external/github.com/google/googletest.git@af29db7ec28d6df1c7f0f745186884091e602e07',
   'src/third_party/icu': {
-    'url': 'https://chromium.googlesource.com/chromium/deps/icu.git@165825933050109d8331d0faa56cc9f52460fbbf',
+    'url': 'https://chromium.googlesource.com/chromium/deps/icu.git@12de966fcbe1d1a48dba310aee63807856ffeee8',
   },
   'src/third_party/jdk': {
       'packages': [
@@ -275,7 +275,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@eecd16489b5fe65f633e8ddf8605672392d4c6e8',
+    'https://chromium.googlesource.com/chromium/src/tools@1bde899d8472382d63538a88f7999d09e7ba68e5',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
