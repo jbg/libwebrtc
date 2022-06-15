@@ -69,6 +69,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28adbf63_fe551a71",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-15T09:36:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "166e3370_3cfd3c1d",
+      "revId": "e39babe00fab76a1c95610676d964be9277d77ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "239754e3_79708b13",
@@ -122,6 +140,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64cb48b_8a2e623e",
+        "filename": "modules/desktop_capture/linux/wayland/portal_request_response.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-15T09:36:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "848380c9_c4ef6138",
+      "revId": "e39babe00fab76a1c95610676d964be9277d77ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7aded567_5f5a5c21",
@@ -135,6 +171,24 @@
       "writtenOn": "2022-06-09T21:29:40Z",
       "side": 1,
       "message": "Ditto",
+      "revId": "e39babe00fab76a1c95610676d964be9277d77ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c164f87_ceae9fb2",
+        "filename": "modules/desktop_capture/linux/wayland/scoped_glib.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-15T09:36:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aded567_5f5a5c21",
       "revId": "e39babe00fab76a1c95610676d964be9277d77ad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -156,6 +210,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6211660_a3283070",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-15T09:36:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4bc3744_033a4c96",
+      "revId": "e39babe00fab76a1c95610676d964be9277d77ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b09be10_d8a93fe1",
@@ -169,6 +241,24 @@
       "writtenOn": "2022-06-09T21:29:40Z",
       "side": 1,
       "message": "And one more time",
+      "revId": "e39babe00fab76a1c95610676d964be9277d77ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e3ffa44_737a2d7f",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_session_details.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-06-15T09:36:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b09be10_d8a93fe1",
       "revId": "e39babe00fab76a1c95610676d964be9277d77ad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
