@@ -10,9 +10,9 @@
 
 #include "modules/desktop_capture/linux/wayland/base_capturer_pipewire.h"
 
+#include "common_video/linux/portal/xdg_desktop_portal_utils.h"
 #include "modules/desktop_capture/desktop_capture_options.h"
 #include "modules/desktop_capture/desktop_capturer.h"
-#include "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 
