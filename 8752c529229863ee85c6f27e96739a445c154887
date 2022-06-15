@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "030111fb_e5ba5911",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_stream_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-15T10:24:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96285811_e1b46810",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 40
+      },
+      "revId": "8752c529229863ee85c6f27e96739a445c154887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89359e0e_6bece63c",
@@ -47,6 +71,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71ea5aa7_cf63fcf6",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_stream_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-15T10:24:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89359e0e_6bece63c",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 87,
+        "endChar": 3
+      },
+      "revId": "8752c529229863ee85c6f27e96739a445c154887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb85b4b3_fcbb2aeb",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-06-14T19:43:46Z",
       "side": 1,
       "message": "/*reader\u003d*/\n\n(also in other places, it improves readability)",
+      "range": {
+        "startLine": 145,
+        "startChar": 50,
+        "endLine": 145,
+        "endChar": 51
+      },
+      "revId": "8752c529229863ee85c6f27e96739a445c154887",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da66cb97_09742313",
+        "filename": "test/pc/e2e/analyzer/video/multi_reader_queue_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-15T10:24:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb85b4b3_fcbb2aeb",
       "range": {
         "startLine": 145,
         "startChar": 50,
