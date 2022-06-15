@@ -16,6 +16,23 @@
       "message": "+henrika for OWNERs review",
       "revId": "8d0f9631de43ee3c4a85be6b174d44061ab9cf77",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa60d62_0676e5a0",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-15T21:25:34Z",
+      "side": 1,
+      "message": "CastOS almost certainly doesn\u0027t want pipewire or its dependencies, so the right fix here is to update the webrtc_overrides to stop building pipewire for CastOS.  However I\u0027ll need to check on that before putting any patches together.",
+      "revId": "8d0f9631de43ee3c4a85be6b174d44061ab9cf77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
