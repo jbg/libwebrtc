@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e6c46f_72d48497",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-16T23:35:16Z",
+      "side": 1,
+      "message": "Thanks for implementing this and seeing it through. Stream restoration will definitely help the user experience for Chrome\u0027s wayland users.\n\nThere are a couple of longer term takeaways I had from this review.\n\n- The current class hierarchy for the portal code doesn\u0027t capture the variations in how it is used very well, resulting in the downcasting and use of a boolean state variable inside of the implementation to do a second level of method dispatch.  Both of these are signs that the current API is not a good fit.  I wonder if stream restoration had landed first, if a different design would have been chosen for the pipewire capturer.  Since I\u0027m not deeply familiar with the remote desktop use cases I don\u0027t have a better alternative to propose right now though.\n\n- The integer source_id we pass back and forth is not sufficient to track state on both sides of the capturer API.   (This is not the first time this has happened, there are issues with using it in Chrome as well.)   If/when we undertake a fresh start for the system capturers we will want to make sure capturers have a clean way to maintiain rich session state all the way from initiation and source selection to termination of the stream.\n",
+      "revId": "936cf76487d56838849a94539bbffdb45622c048",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa900cb2_75361247",
+        "filename": "modules/desktop_capture/linux/wayland/restore_token_manager.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-06-16T23:35:16Z",
+      "side": 1,
+      "message": "I couldn\u0027t find a way in C++17 to move the token out of the map to avoid a copy + erase here.  It\u0027s not a big deal, just a little surprising there is still a gap in STL around this.",
+      "revId": "936cf76487d56838849a94539bbffdb45622c048",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
