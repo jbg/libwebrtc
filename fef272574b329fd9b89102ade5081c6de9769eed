@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3004d6f_62445afe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-06-16T20:18:04Z",
+      "side": 1,
+      "message": "Danil, since you made me rebase after burning some trash can you take a look so the sheriff doesn\u0027t? :-)",
+      "revId": "fef272574b329fd9b89102ade5081c6de9769eed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
