@@ -42,7 +42,9 @@ class RTC_EXPORT BasicPortAllocator : public PortAllocator {
                      RelayPortFactoryInterface* relay_port_factory = nullptr);
   BasicPortAllocator(
       rtc::NetworkManager* network_manager,
-      std::unique_ptr<rtc::PacketSocketFactory> owned_socket_factory);
+      std::unique_ptr<rtc::PacketSocketFactory> owned_socket_factory,
+      webrtc::TurnCustomizer* customizer = nullptr,
+      RelayPortFactoryInterface* relay_port_factory = nullptr);
   BasicPortAllocator(
       rtc::NetworkManager* network_manager,
       std::unique_ptr<rtc::PacketSocketFactory> owned_socket_factory,

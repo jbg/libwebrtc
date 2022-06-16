@@ -215,14 +215,14 @@ PeerConnectionFactory::CreatePeerConnectionOrError(
                                                        network_thread());
   }
   if (!dependencies.allocator) {
-    rtc::PacketSocketFactory* packet_socket_factory;
+    std::unique_ptr<rtc::PacketSocketFactory> packet_socket_factory;
     if (dependencies.packet_socket_factory)
-      packet_socket_factory = dependencies.packet_socket_factory.get();
+      packet_socket_factory = std::move(dependencies.packet_socket_factory);
     else
-      packet_socket_factory = context_->default_socket_factory();
+      packet_socket_factory = context_->CreateSocketFactory();
 
     dependencies.allocator = std::make_unique<cricket::BasicPortAllocator>(
-        context_->default_network_manager(), packet_socket_factory,
+        context_->default_network_manager(), std::move(packet_socket_factory),
         configuration.turn_customizer);
     dependencies.allocator->SetPortRange(
         configuration.port_allocator_config.min_port,

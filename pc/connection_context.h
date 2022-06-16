@@ -92,10 +92,8 @@ class ConnectionContext final
     RTC_DCHECK_RUN_ON(signaling_thread_);
     return default_network_manager_.get();
   }
-  rtc::BasicPacketSocketFactory* default_socket_factory() {
-    RTC_DCHECK_RUN_ON(signaling_thread_);
-    return default_socket_factory_.get();
-  }
+  std::unique_ptr<rtc::PacketSocketFactory> CreateSocketFactory();
+
   CallFactoryInterface* call_factory() {
     RTC_DCHECK_RUN_ON(worker_thread());
     return call_factory_.get();
@@ -117,6 +115,7 @@ class ConnectionContext final
   // The following three variables are used to communicate between the
   // constructor and the destructor, and are never exposed externally.
   bool wraps_current_thread_;
+  rtc::SocketFactory* socket_factory_ RTC_GUARDED_BY(signaling_thread_);
   std::unique_ptr<rtc::SocketFactory> owned_socket_factory_;
   std::unique_ptr<rtc::Thread> owned_network_thread_
       RTC_GUARDED_BY(signaling_thread_);
@@ -141,8 +140,6 @@ class ConnectionContext final
   std::unique_ptr<webrtc::CallFactoryInterface> const call_factory_
       RTC_GUARDED_BY(worker_thread());
 
-  std::unique_ptr<rtc::BasicPacketSocketFactory> default_socket_factory_
-      RTC_GUARDED_BY(signaling_thread_);
   std::unique_ptr<SctpTransportFactoryInterface> const sctp_factory_;
 };
 
