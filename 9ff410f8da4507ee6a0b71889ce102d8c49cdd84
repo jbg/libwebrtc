@@ -39,6 +39,30 @@
       },
       "revId": "9ff410f8da4507ee6a0b71889ce102d8c49cdd84",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ff98058_5d97a69c",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-06-16T19:44:07Z",
+      "side": 1,
+      "message": "Hmm, I guess it may not hurt... But to avoid having to change things in chromium, and keep the object ownership model consistent, it would probably be better to move ownership of the injected socket factory to the PeerConnectionFactory/PeerConnectionFactoryDependencies, replacing default_socket_factory_ if it\u0027s injected (and same goes for the network manager).\n\nI notice that rtc::SocketFactory is already injectable via PeerConnectionFactoryDependencies, what were your plans around that?",
+      "parentUuid": "7ebe1e10_bed04d0a",
+      "range": {
+        "startLine": 222,
+        "startChar": 30,
+        "endLine": 222,
+        "endChar": 62
+      },
+      "revId": "9ff410f8da4507ee6a0b71889ce102d8c49cdd84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
