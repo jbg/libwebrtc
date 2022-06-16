@@ -12,6 +12,7 @@
 
 #include <type_traits>
 #include <utility>
+#include <vector>
 
 #include "api/transport/field_trial_based_config.h"
 #include "media/base/media_engine.h"
@@ -109,15 +110,28 @@ ConnectionContext::ConnectionContext(
   signaling_thread_->AllowInvokesToThread(worker_thread());
   signaling_thread_->AllowInvokesToThread(network_thread_);
   worker_thread_->AllowInvokesToThread(network_thread_);
+  std::vector<rtc::Thread*> other_threads{signaling_thread_, worker_thread_};
   if (network_thread_->IsCurrent()) {
-    // TODO(https://crbug.com/webrtc/12802) switch to DisallowAllInvokes
-    network_thread_->AllowInvokesToThread(network_thread_);
+    network_thread_->DisallowBlockingCalls();
+    network_thread_->DisallowAllInvokes();
+    for (rtc::Thread* other_thread : other_threads) {
+      if (other_thread == network_thread_) {
+        network_thread_->AllowInvokesToThread(network_thread_);
+        break;
+      }
+    }
   } else {
-    network_thread_->PostTask(ToQueuedTask([thread = network_thread_] {
-      thread->DisallowBlockingCalls();
-      // TODO(https://crbug.com/webrtc/12802) switch to DisallowAllInvokes
-      thread->AllowInvokesToThread(thread);
-    }));
+    network_thread_->PostTask(ToQueuedTask(
+        [thread = network_thread_, other_threads = std::move(other_threads)] {
+          thread->DisallowBlockingCalls();
+          thread->DisallowAllInvokes();
+          for (rtc::Thread* other_thread : other_threads) {
+            if (other_thread == thread) {
+              thread->AllowInvokesToThread(thread);
+              break;
+            }
+          }
+        }));
   }
 
   RTC_DCHECK_RUN_ON(signaling_thread_);
