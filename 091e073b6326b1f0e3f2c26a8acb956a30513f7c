@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc2bc34f_114137a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-06-16T11:46:53Z",
+      "side": 1,
+      "message": "I am sorry that this happened.\nShould I have added the `native_library_java` and `field_trial_java` dependencies with `public_deps`?",
+      "revId": "091e073b6326b1f0e3f2c26a8acb956a30513f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
