@@ -113,11 +113,8 @@ ConnectionContext::ConnectionContext(
     // TODO(https://crbug.com/webrtc/12802) switch to DisallowAllInvokes
     network_thread_->AllowInvokesToThread(network_thread_);
   } else {
-    network_thread_->PostTask(ToQueuedTask([thread = network_thread_] {
-      thread->DisallowBlockingCalls();
-      // TODO(https://crbug.com/webrtc/12802) switch to DisallowAllInvokes
-      thread->AllowInvokesToThread(thread);
-    }));
+    network_thread_->PostTask(ToQueuedTask(
+        [thread = network_thread_] { thread->DisallowBlockingCalls(); }));
   }
 
   RTC_DCHECK_RUN_ON(signaling_thread_);
