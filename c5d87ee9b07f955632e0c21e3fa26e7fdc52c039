@@ -16,6 +16,23 @@
       "message": "PTAL Harald",
       "revId": "c5d87ee9b07f955632e0c21e3fa26e7fdc52c039",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fc7fe06_95d73840",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-06-16T19:56:55Z",
+      "side": 1,
+      "message": "Almost identical to https://webrtc-review.googlesource.com/c/src/+/266060 (modulo drive-by bugs)",
+      "revId": "c5d87ee9b07f955632e0c21e3fa26e7fdc52c039",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
