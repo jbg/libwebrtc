@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749885b9_21e7ef80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-16T08:04:52Z",
+      "side": 1,
+      "message": "I noticed this error when looking into making NetworkManager injectable in the same way. It appears we have no test coverage for this injection.",
+      "revId": "9ff410f8da4507ee6a0b71889ce102d8c49cdd84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ebe1e10_bed04d0a",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-16T08:04:52Z",
+      "side": 1,
+      "message": "Is it ok to create a new instance of BasicPacketSocketFactory for each PeerConnection? They will still share the underlying network thread and rtc::SocketFactory.",
+      "range": {
+        "startLine": 222,
+        "startChar": 30,
+        "endLine": 222,
+        "endChar": 62
+      },
+      "revId": "9ff410f8da4507ee6a0b71889ce102d8c49cdd84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
