@@ -173,13 +173,17 @@ BasicPortAllocator::BasicPortAllocator(
 
 BasicPortAllocator::BasicPortAllocator(
     rtc::NetworkManager* network_manager,
-    std::unique_ptr<rtc::PacketSocketFactory> owned_socket_factory)
+    std::unique_ptr<rtc::PacketSocketFactory> owned_socket_factory,
+    webrtc::TurnCustomizer* customizer,
+    RelayPortFactoryInterface* relay_port_factory)
     : network_manager_(network_manager),
       socket_factory_(std::move(owned_socket_factory)) {
-  Init(nullptr, nullptr);
+  Init(relay_port_factory, nullptr);
   RTC_DCHECK(relay_port_factory_ != nullptr);
   RTC_DCHECK(network_manager_ != nullptr);
   RTC_CHECK(socket_factory_ != nullptr);
+  SetConfiguration(ServerAddresses(), std::vector<RelayServerConfig>(), 0,
+                   webrtc::NO_PRUNE, customizer);
 }
 
 BasicPortAllocator::BasicPortAllocator(

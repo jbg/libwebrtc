@@ -123,26 +123,23 @@ ConnectionContext::ConnectionContext(
   RTC_DCHECK_RUN_ON(signaling_thread_);
   rtc::InitRandom(rtc::Time32());
 
-  rtc::SocketFactory* socket_factory = dependencies->socket_factory;
-  if (socket_factory == nullptr) {
+  socket_factory_ = dependencies->socket_factory;
+  if (socket_factory_ == nullptr) {
     if (owned_socket_factory_) {
-      socket_factory = owned_socket_factory_.get();
+      socket_factory_ = owned_socket_factory_.get();
     } else {
       // TODO(bugs.webrtc.org/13145): This case should be deleted. Either
       // require that a PacketSocketFactory and NetworkManager always are
       // injected (with no need to construct these default objects), or require
       // that if a network_thread is injected, an approprite rtc::SocketServer
       // should be injected too.
-      socket_factory = network_thread()->socketserver();
+      socket_factory_ = network_thread()->socketserver();
     }
   }
   // If network_monitor_factory_ is non-null, it will be used to create a
   // network monitor while on the network thread.
   default_network_manager_ = std::make_unique<rtc::BasicNetworkManager>(
-      network_monitor_factory_.get(), socket_factory, &field_trials());
-
-  default_socket_factory_ =
-      std::make_unique<rtc::BasicPacketSocketFactory>(socket_factory);
+      network_monitor_factory_.get(), socket_factory_, &field_trials());
 
   // Set warning levels on the threads, to give warnings when response
   // may be slower than is expected of the thread.
@@ -160,6 +157,12 @@ ConnectionContext::ConnectionContext(
   }
 }
 
+std::unique_ptr<rtc::PacketSocketFactory>
+ConnectionContext::CreateSocketFactory() {
+  RTC_DCHECK_RUN_ON(signaling_thread_);
+  return std::make_unique<rtc::BasicPacketSocketFactory>(socket_factory_);
+}
+
 ConnectionContext::~ConnectionContext() {
   RTC_DCHECK_RUN_ON(signaling_thread_);
   worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
@@ -173,8 +176,7 @@ ConnectionContext::~ConnectionContext() {
   });
 
   // Make sure `worker_thread()` and `signaling_thread()` outlive
-  // `default_socket_factory_` and `default_network_manager_`.
-  default_socket_factory_ = nullptr;
+  // `default_network_manager_`.
   default_network_manager_ = nullptr;
 
   if (wraps_current_thread_)
