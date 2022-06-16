@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c35643e1_333dde53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-06-16T07:58:23Z",
+      "side": 1,
+      "message": "Thanks, I think that goes in the right direction that way.\n\nFor context, we’re making changes to the way we access field trials, and access should change from using the `field_trial::FindFullName` function to use an object implementing https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/field_trials.h, that will be injected where needed.\n\nSo ultimately accesses like the one in https://webrtc-review.googlesource.com/c/src/+/260220 will have to change, and the `FieldTrialView` java equivalent will likely be injected in the encoder constructor. So this change, by introducing a `FieldTrial` class, is probably a good base for those future changes (even if the method will have to change to be non-static at some point).",
+      "revId": "2f3aa74518de41b59d6b329c5b3fea61ec449b08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
