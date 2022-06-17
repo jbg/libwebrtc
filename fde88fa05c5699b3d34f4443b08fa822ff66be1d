@@ -50,6 +50,24 @@
       "message": "I *think* this case should be covered by signaling_thread_-\u003eAllowInvokesToThread(network_thread_) above, so this branch of the \"if\" shouldn\u0027t need to exist.\n\nDoes anything fail if you replace this branch with just \"if (!network_thread-\u003eIsCurrent()) ?",
       "revId": "fde88fa05c5699b3d34f4443b08fa822ff66be1d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f3f8baa_6d9cf1a9",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-06-17T08:29:41Z",
+      "side": 1,
+      "message": "Well, I don\u0027t think it would be a problem. Let\u0027s see how it goes.",
+      "parentUuid": "dadadb2f_69432359",
+      "revId": "fde88fa05c5699b3d34f4443b08fa822ff66be1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
