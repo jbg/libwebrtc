@@ -16,6 +16,24 @@
       "message": "Thanks for lgtm! I had hoped for some more advice, though. \n\nI see one main issue with the cl as is: It still keeps confusion of spatial layers vs simulcast, in that vp8 simulcast is configured by setting scalability mode \"L3T1\". I think moving to a vector to represent the simulcast layers is the right way to fix this, but could perhaps be a followup cl.\n\nSecond, I\u0027m not sure how the scenario tests fit in the bigger test picture. I guess they\u0027re intended to be integration tests running calls over an emulated network where \"scenario\" refers to what happens to the network (bandwidth changes, links going up and down, etc). Is that right? In that case, I don\u0027t think it needs any coverage for the old way of configuring layers.\n\nThird, is is appropriate to use the ScalabilityMode enum directly in the config, or should it use strings, to be closer to peerconnection-level apis?",
       "revId": "f1ab98d48a4b021ced4bb7df59243c88b9ac1bf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fffd19ce_2593cfb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-06-17T12:03:23Z",
+      "side": 1,
+      "message": "Scenario framework was created to write integration. assertion based or MQ tests on Call level. Scenario is network + media + peer configuration, so it more refers to test scenario, bot only the network.\n\nI think using enums should be fine and I think it might be even better.",
+      "parentUuid": "fbbf91fe_8c86a90b",
+      "revId": "f1ab98d48a4b021ced4bb7df59243c88b9ac1bf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
