@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df48a97d_0f2a576a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-06-17T10:43:29Z",
+      "side": 1,
+      "message": "Hope this doesn\u0027t break downstream projects :)",
+      "revId": "362980434d5406de87c7fc8655b36f8b83161830",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
