@@ -68,6 +68,24 @@
       "parentUuid": "dadadb2f_69432359",
       "revId": "fde88fa05c5699b3d34f4443b08fa822ff66be1d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ebe1379_c457c0d5",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-17T10:38:15Z",
+      "side": 1,
+      "message": "It is not a problem (it just does the same thing twice), but it misleads as to what\u0027s actually going on. Like it better now, thanks!",
+      "parentUuid": "9f3f8baa_6d9cf1a9",
+      "revId": "fde88fa05c5699b3d34f4443b08fa822ff66be1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
