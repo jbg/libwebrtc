@@ -16,6 +16,23 @@
       "message": "PTAL Harald",
       "revId": "7609c50155ab98ba6a6c924bc31d28d4391096bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b13dc862_d896732e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-17T08:10:24Z",
+      "side": 1,
+      "message": "Nice to see those \"low hanging fruit\" things that haven\u0027t made the priority list forever finally done!\n",
+      "revId": "7609c50155ab98ba6a6c924bc31d28d4391096bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
