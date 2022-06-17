@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "466e73e5_8754f66f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-06-17T07:02:44Z",
+      "side": 1,
+      "message": "The 2 failures are not related.\n\n* The one on M1s is an infra failure (related to the old issue that on branches infra is not branched and uses HEAD but some configs are in the WebRTC repo and not up to date).\n\n* The __string one is related to libc++ and we see this at HEAD as well (https://webrtc-review.googlesource.com/c/src/+/266002/) so it is not this CL.",
+      "revId": "5bf424c486492bb2dd215cdd753cf2170414aa3a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
