@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94837fc3_10c65607",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-17T08:34:53Z",
+      "side": 1,
+      "message": "fixing nits in the follow sgtm",
+      "revId": "f5dba47cd1ca9ebbc8b2d89d981bce5b71660cc3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
