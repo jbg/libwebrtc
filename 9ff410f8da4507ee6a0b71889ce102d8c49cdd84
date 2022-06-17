@@ -87,6 +87,30 @@
       },
       "revId": "9ff410f8da4507ee6a0b71889ce102d8c49cdd84",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "115c0d57_eb2c7c90",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-17T09:03:01Z",
+      "side": 1,
+      "message": "\u003e So move injection from CreatePeerConnection time to CreatePeerConnectionFactory time? Sounds reasonable to me. Are there any drawbacks?\n\nTried out in cl  https://webrtc-review.googlesource.com/c/src/+/266140",
+      "parentUuid": "f0ba6742_abf85b1b",
+      "range": {
+        "startLine": 222,
+        "startChar": 30,
+        "endLine": 222,
+        "endChar": 62
+      },
+      "revId": "9ff410f8da4507ee6a0b71889ce102d8c49cdd84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
