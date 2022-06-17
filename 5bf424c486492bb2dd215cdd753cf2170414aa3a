@@ -52,6 +52,24 @@
       "parentUuid": "1b15e8dd_b0cb488e",
       "revId": "5bf424c486492bb2dd215cdd753cf2170414aa3a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c2c7de_f6426810",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-06-17T09:29:51Z",
+      "side": 1,
+      "message": "Just saw the reply from artem about \"No-Try: True\" :)",
+      "parentUuid": "1b15e8dd_b0cb488e",
+      "revId": "5bf424c486492bb2dd215cdd753cf2170414aa3a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
