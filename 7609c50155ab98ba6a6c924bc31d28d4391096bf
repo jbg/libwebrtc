@@ -33,6 +33,24 @@
       "message": "Nice to see those \"low hanging fruit\" things that haven\u0027t made the priority list forever finally done!\n",
       "revId": "7609c50155ab98ba6a6c924bc31d28d4391096bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba0e47e1_32e59cb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-06-17T08:16:51Z",
+      "side": 1,
+      "message": "Yeah and nice to be able to say \"please stop using track stats\". At least in JavaScript, there may still be some RTCNonStandardStatsMembers in track that we need to move to be able to say that to native users too",
+      "parentUuid": "b13dc862_d896732e",
+      "revId": "7609c50155ab98ba6a6c924bc31d28d4391096bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
