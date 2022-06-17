@@ -16,6 +16,40 @@
       "message": "Hello, Harald. PTAL.",
       "revId": "fde88fa05c5699b3d34f4443b08fa822ff66be1d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0996ed20_add09792",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-17T08:19:27Z",
+      "side": 1,
+      "message": "I think you can simplify this further. (Good stuff!)\n\nCompile errors seem unrelated.",
+      "revId": "fde88fa05c5699b3d34f4443b08fa822ff66be1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dadadb2f_69432359",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-17T08:19:27Z",
+      "side": 1,
+      "message": "I *think* this case should be covered by signaling_thread_-\u003eAllowInvokesToThread(network_thread_) above, so this branch of the \"if\" shouldn\u0027t need to exist.\n\nDoes anything fail if you replace this branch with just \"if (!network_thread-\u003eIsCurrent()) ?",
+      "revId": "fde88fa05c5699b3d34f4443b08fa822ff66be1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
