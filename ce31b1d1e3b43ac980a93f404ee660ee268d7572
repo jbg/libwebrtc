@@ -16,6 +16,29 @@
       "message": "Philip, Are you comfortable reviewing threading change?",
       "revId": "ce31b1d1e3b43ac980a93f404ee660ee268d7572",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc7e2344_3eafd48f",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-06-20T14:59:29Z",
+      "side": 1,
+      "message": "nit: is it possible to `[receive_side_cc \u003d \u0026receive_side_cc_]...`?",
+      "range": {
+        "startLine": 853,
+        "startChar": 7,
+        "endLine": 853,
+        "endChar": 22
+      },
+      "revId": "ce31b1d1e3b43ac980a93f404ee660ee268d7572",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
