@@ -39,6 +39,30 @@
       },
       "revId": "ce31b1d1e3b43ac980a93f404ee660ee268d7572",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03bf7214_fcf2c207",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-20T15:03:40Z",
+      "side": 1,
+      "message": "C++ allows that, but google style guide doesn\u0027t:\n\nhttps://google.github.io/styleguide/cppguide.html#Lambda_expressions\n\n“Use captures only to actually capture variables from the enclosing scope. Do not use captures with initializers to introduce new names, or to substantially change the meaning of an existing name. Instead, declare a new variable in the conventional way and then capture it,”",
+      "parentUuid": "cc7e2344_3eafd48f",
+      "range": {
+        "startLine": 853,
+        "startChar": 7,
+        "endLine": 853,
+        "endChar": 22
+      },
+      "revId": "ce31b1d1e3b43ac980a93f404ee660ee268d7572",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
