@@ -47,12 +47,15 @@ constexpr size_t kAlignmentShiftSubBlocks = kWindowSizeSubBlocks * 3 / 4;
 
 }  // namespace
 
+class MatchedFilterTest : public ::testing::TestWithParam<bool> {};
+
 #if defined(WEBRTC_HAS_NEON)
 // Verifies that the optimized methods for NEON are similar to their reference
 // counterparts.
-TEST(MatchedFilter, TestNeonOptimizations) {
+TEST_P(MatchedFilterTest, TestNeonOptimizations) {
   Random random_generator(42U);
   constexpr float kSmoothing = 0.7f;
+  const bool kComputeAccumulatederror = GetParam();
   for (auto down_sampling_factor : kDownSamplingFactors) {
     const size_t sub_block_size = kBlockSize / down_sampling_factor;
 
@@ -61,6 +64,10 @@ TEST(MatchedFilter, TestNeonOptimizations) {
     std::vector<float> y(sub_block_size);
     std::vector<float> h_NEON(512);
     std::vector<float> h(512);
+    std::vector<float> accumulated_error(512);
+    std::vector<float> accumulated_error_NEON(512);
+    std::vector<float> scratch_memory(512);
+
     int x_index = 0;
     for (int k = 0; k < 1000; ++k) {
       RandomizeSampleVector(&random_generator, y);
@@ -71,16 +78,30 @@ TEST(MatchedFilter, TestNeonOptimizations) {
       float error_sum_NEON = 0.f;
 
       MatchedFilterCore_NEON(x_index, h.size() * 150.f * 150.f, kSmoothing, x,
-                             y, h_NEON, &filters_updated_NEON, &error_sum_NEON);
+                             y, h_NEON, &filters_updated_NEON, &error_sum_NEON,
+                             kComputeAccumulatederror, accumulated_error_NEON,
+                             scratch_memory);
 
       MatchedFilterCore(x_index, h.size() * 150.f * 150.f, kSmoothing, x, y, h,
-                        &filters_updated, &error_sum);
+                        &filters_updated, &error_sum, kComputeAccumulatederror,
+                        accumulated_error);
 
       EXPECT_EQ(filters_updated, filters_updated_NEON);
       EXPECT_NEAR(error_sum, error_sum_NEON, error_sum / 100000.f);
 
       for (size_t j = 0; j < h.size(); ++j) {
         EXPECT_NEAR(h[j], h_NEON[j], 0.00001f);
+      }
+
+      if (kComputeAccumulatederror) {
+        for (size_t j = 0; j < accumulated_error.size(); ++j) {
+          float difference =
+              std::abs(accumulated_error[j] - accumulated_error_NEON[j]);
+          float relative_difference = accumulated_error[j] > 0
+                                          ? difference / accumulated_error[j]
+                                          : difference;
+          EXPECT_NEAR(relative_difference, 0.0f, 0.02f);
+        }
       }
 
       x_index = (x_index + sub_block_size) % x.size();
@@ -92,7 +113,8 @@ TEST(MatchedFilter, TestNeonOptimizations) {
 #if defined(WEBRTC_ARCH_X86_FAMILY)
 // Verifies that the optimized methods for SSE2 are bitexact to their reference
 // counterparts.
-TEST(MatchedFilter, TestSse2Optimizations) {
+TEST_P(MatchedFilterTest, TestSse2Optimizations) {
+  const bool kComputeAccumulatederror = GetParam();
   bool use_sse2 = (GetCPUInfo(kSSE2) != 0);
   if (use_sse2) {
     Random random_generator(42U);
@@ -104,6 +126,9 @@ TEST(MatchedFilter, TestSse2Optimizations) {
       std::vector<float> y(sub_block_size);
       std::vector<float> h_SSE2(512);
       std::vector<float> h(512);
+      std::vector<float> accumulated_error(512 / 4);
+      std::vector<float> accumulated_error_SSE2(512 / 4);
+      std::vector<float> scratch_memory(512);
       int x_index = 0;
       for (int k = 0; k < 1000; ++k) {
         RandomizeSampleVector(&random_generator, y);
@@ -115,10 +140,12 @@ TEST(MatchedFilter, TestSse2Optimizations) {
 
         MatchedFilterCore_SSE2(x_index, h.size() * 150.f * 150.f, kSmoothing, x,
                                y, h_SSE2, &filters_updated_SSE2,
-                               &error_sum_SSE2);
+                               &error_sum_SSE2, kComputeAccumulatederror,
+                               accumulated_error_SSE2, scratch_memory);
 
         MatchedFilterCore(x_index, h.size() * 150.f * 150.f, kSmoothing, x, y,
-                          h, &filters_updated, &error_sum);
+                          h, &filters_updated, &error_sum,
+                          kComputeAccumulatederror, accumulated_error);
 
         EXPECT_EQ(filters_updated, filters_updated_SSE2);
         EXPECT_NEAR(error_sum, error_sum_SSE2, error_sum / 100000.f);
@@ -127,14 +154,24 @@ TEST(MatchedFilter, TestSse2Optimizations) {
           EXPECT_NEAR(h[j], h_SSE2[j], 0.00001f);
         }
 
+        for (size_t j = 0; j < accumulated_error.size(); ++j) {
+          float difference =
+              std::abs(accumulated_error[j] - accumulated_error_SSE2[j]);
+          float relative_difference = accumulated_error[j] > 0
+                                          ? difference / accumulated_error[j]
+                                          : difference;
+          EXPECT_NEAR(relative_difference, 0.0f, 0.00001f);
+        }
+
         x_index = (x_index + sub_block_size) % x.size();
       }
     }
   }
 }
 
-TEST(MatchedFilter, TestAvx2Optimizations) {
+TEST_P(MatchedFilterTest, TestAvx2Optimizations) {
   bool use_avx2 = (GetCPUInfo(kAVX2) != 0);
+  const bool kComputeAccumulatederror = GetParam();
   if (use_avx2) {
     Random random_generator(42U);
     constexpr float kSmoothing = 0.7f;
@@ -145,29 +182,36 @@ TEST(MatchedFilter, TestAvx2Optimizations) {
       std::vector<float> y(sub_block_size);
       std::vector<float> h_AVX2(512);
       std::vector<float> h(512);
+      std::vector<float> accumulated_error(512 / 4);
+      std::vector<float> accumulated_error_AVX2(512 / 4);
+      std::vector<float> scratch_memory(512);
       int x_index = 0;
       for (int k = 0; k < 1000; ++k) {
         RandomizeSampleVector(&random_generator, y);
-
         bool filters_updated = false;
         float error_sum = 0.f;
         bool filters_updated_AVX2 = false;
         float error_sum_AVX2 = 0.f;
-
         MatchedFilterCore_AVX2(x_index, h.size() * 150.f * 150.f, kSmoothing, x,
                                y, h_AVX2, &filters_updated_AVX2,
-                               &error_sum_AVX2);
-
+                               &error_sum_AVX2, kComputeAccumulatederror,
+                               accumulated_error_AVX2, scratch_memory);
         MatchedFilterCore(x_index, h.size() * 150.f * 150.f, kSmoothing, x, y,
-                          h, &filters_updated, &error_sum);
-
+                          h, &filters_updated, &error_sum,
+                          kComputeAccumulatederror, accumulated_error);
         EXPECT_EQ(filters_updated, filters_updated_AVX2);
         EXPECT_NEAR(error_sum, error_sum_AVX2, error_sum / 100000.f);
-
         for (size_t j = 0; j < h.size(); ++j) {
           EXPECT_NEAR(h[j], h_AVX2[j], 0.00001f);
         }
-
+        for (size_t j = 0; j < accumulated_error.size(); j += 4) {
+          float difference =
+              std::abs(accumulated_error[j] - accumulated_error_AVX2[j]);
+          float relative_difference = accumulated_error[j] > 0
+                                          ? difference / accumulated_error[j]
+                                          : difference;
+          EXPECT_NEAR(relative_difference, 0.0f, 0.00001f);
+        }
         x_index = (x_index + sub_block_size) % x.size();
       }
     }
@@ -199,9 +243,9 @@ TEST(MatchedFilter, MaxSquarePeakIndex) {
 }
 
 // Verifies that the matched filter produces proper lag estimates for
-// artificially
-// delayed signals.
-TEST(MatchedFilter, LagEstimation) {
+// artificially delayed signals.
+TEST_P(MatchedFilterTest, LagEstimation) {
+  const bool kDetectPreEcho = GetParam();
   Random random_generator(42U);
   constexpr size_t kNumChannels = 1;
   constexpr int kSampleRateHz = 48000;
@@ -222,12 +266,12 @@ TEST(MatchedFilter, LagEstimation) {
       Decimator capture_decimator(down_sampling_factor);
       DelayBuffer<float> signal_delay_buffer(down_sampling_factor *
                                              delay_samples);
-      MatchedFilter filter(&data_dumper, DetectOptimization(), sub_block_size,
-                           kWindowSizeSubBlocks, kNumMatchedFilters,
-                           kAlignmentShiftSubBlocks, 150,
-                           config.delay.delay_estimate_smoothing,
-                           config.delay.delay_estimate_smoothing_delay_found,
-                           config.delay.delay_candidate_detection_threshold);
+      MatchedFilter filter(
+          &data_dumper, DetectOptimization(), sub_block_size,
+          kWindowSizeSubBlocks, kNumMatchedFilters, kAlignmentShiftSubBlocks,
+          150, config.delay.delay_estimate_smoothing,
+          config.delay.delay_estimate_smoothing_delay_found,
+          config.delay.delay_candidate_detection_threshold, kDetectPreEcho);
 
       std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
           RenderDelayBuffer::Create(config, kSampleRateHz, kNumChannels));
@@ -254,62 +298,17 @@ TEST(MatchedFilter, LagEstimation) {
             downsampled_capture_data.data(), sub_block_size);
         capture_decimator.Decimate(capture[0], downsampled_capture);
         filter.Update(render_delay_buffer->GetDownsampledRenderBuffer(),
-                      downsampled_capture, false);
+                      downsampled_capture, /*use_slow_smoothing=*/false);
       }
 
       // Obtain the lag estimates.
-      auto lag_estimates = filter.GetLagEstimates();
-
-      // Find which lag estimate should be the most accurate.
-      absl::optional<size_t> expected_most_accurate_lag_estimate;
-      size_t alignment_shift_sub_blocks = 0;
-      for (size_t k = 0; k < config.delay.num_filters; ++k) {
-        if ((alignment_shift_sub_blocks + 3 * kWindowSizeSubBlocks / 4) *
-                sub_block_size >
-            delay_samples) {
-          expected_most_accurate_lag_estimate = k > 0 ? k - 1 : 0;
-          break;
-        }
-        alignment_shift_sub_blocks += kAlignmentShiftSubBlocks;
-      }
-      ASSERT_TRUE(expected_most_accurate_lag_estimate);
-
-      // Verify that the expected most accurate lag estimate is the most
-      // accurate estimate.
-      for (size_t k = 0; k < kNumMatchedFilters; ++k) {
-        if (k != *expected_most_accurate_lag_estimate &&
-            k != (*expected_most_accurate_lag_estimate + 1)) {
-          EXPECT_TRUE(
-              lag_estimates[*expected_most_accurate_lag_estimate].accuracy >
-                  lag_estimates[k].accuracy ||
-              !lag_estimates[k].reliable ||
-              !lag_estimates[*expected_most_accurate_lag_estimate].reliable);
-        }
-      }
-
-      // Verify that all lag estimates are updated as expected for signals
-      // containing strong noise.
-      for (auto& le : lag_estimates) {
-        EXPECT_TRUE(le.updated);
-      }
-
-      // Verify that the expected most accurate lag estimate is reliable.
-      EXPECT_TRUE(
-          lag_estimates[*expected_most_accurate_lag_estimate].reliable ||
-          lag_estimates[std::min(*expected_most_accurate_lag_estimate + 1,
-                                 lag_estimates.size() - 1)]
-              .reliable);
+      auto lag_estimate = filter.GetBestLagEstimate();
+      EXPECT_TRUE(lag_estimate.has_value());
 
       // Verify that the expected most accurate lag estimate is correct.
-      if (lag_estimates[*expected_most_accurate_lag_estimate].reliable) {
-        EXPECT_TRUE(delay_samples ==
-                    lag_estimates[*expected_most_accurate_lag_estimate].lag);
-      } else {
-        EXPECT_TRUE(
-            delay_samples ==
-            lag_estimates[std::min(*expected_most_accurate_lag_estimate + 1,
-                                   lag_estimates.size() - 1)]
-                .lag);
+      if (lag_estimate.has_value()) {
+        EXPECT_EQ(delay_samples, lag_estimate->lag);
+        EXPECT_EQ(delay_samples, lag_estimate->pre_echo_lag);
       }
     }
   }
@@ -317,7 +316,8 @@ TEST(MatchedFilter, LagEstimation) {
 
 // Verifies that the matched filter does not produce reliable and accurate
 // estimates for uncorrelated render and capture signals.
-TEST(MatchedFilter, LagNotReliableForUncorrelatedRenderAndCapture) {
+TEST_P(MatchedFilterTest, LagNotReliableForUncorrelatedRenderAndCapture) {
+  const bool kDetectPreEcho = GetParam();
   constexpr size_t kNumChannels = 1;
   constexpr int kSampleRateHz = 48000;
   constexpr size_t kNumBands = NumBandsForRate(kSampleRateHz);
@@ -335,12 +335,12 @@ TEST(MatchedFilter, LagNotReliableForUncorrelatedRenderAndCapture) {
     ApmDataDumper data_dumper(0);
     std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
         RenderDelayBuffer::Create(config, kSampleRateHz, kNumChannels));
-    MatchedFilter filter(&data_dumper, DetectOptimization(), sub_block_size,
-                         kWindowSizeSubBlocks, kNumMatchedFilters,
-                         kAlignmentShiftSubBlocks, 150,
-                         config.delay.delay_estimate_smoothing,
-                         config.delay.delay_estimate_smoothing_delay_found,
-                         config.delay.delay_candidate_detection_threshold);
+    MatchedFilter filter(
+        &data_dumper, DetectOptimization(), sub_block_size,
+        kWindowSizeSubBlocks, kNumMatchedFilters, kAlignmentShiftSubBlocks, 150,
+        config.delay.delay_estimate_smoothing,
+        config.delay.delay_estimate_smoothing_delay_found,
+        config.delay.delay_candidate_detection_threshold, kDetectPreEcho);
 
     // Analyze the correlation between render and capture.
     for (size_t k = 0; k < 100; ++k) {
@@ -352,20 +352,17 @@ TEST(MatchedFilter, LagNotReliableForUncorrelatedRenderAndCapture) {
                     false);
     }
 
-    // Obtain the lag estimates.
-    auto lag_estimates = filter.GetLagEstimates();
-    EXPECT_EQ(kNumMatchedFilters, lag_estimates.size());
-
-    // Verify that no lag estimates are reliable.
-    for (auto& le : lag_estimates) {
-      EXPECT_FALSE(le.reliable);
-    }
+    // Obtain the best lag estimate and Verify that no lag estimates are
+    // reliable.
+    auto best_lag_estimates = filter.GetBestLagEstimate();
+    EXPECT_FALSE(best_lag_estimates.has_value());
   }
 }
 
 // Verifies that the matched filter does not produce updated lag estimates for
 // render signals of low level.
-TEST(MatchedFilter, LagNotUpdatedForLowLevelRender) {
+TEST_P(MatchedFilterTest, LagNotUpdatedForLowLevelRender) {
+  const bool kDetectPreEcho = GetParam();
   Random random_generator(42U);
   constexpr size_t kNumChannels = 1;
   constexpr int kSampleRateHz = 48000;
@@ -381,12 +378,12 @@ TEST(MatchedFilter, LagNotUpdatedForLowLevelRender) {
         1, std::vector<float>(kBlockSize, 0.f));
     ApmDataDumper data_dumper(0);
     EchoCanceller3Config config;
-    MatchedFilter filter(&data_dumper, DetectOptimization(), sub_block_size,
-                         kWindowSizeSubBlocks, kNumMatchedFilters,
-                         kAlignmentShiftSubBlocks, 150,
-                         config.delay.delay_estimate_smoothing,
-                         config.delay.delay_estimate_smoothing_delay_found,
-                         config.delay.delay_candidate_detection_threshold);
+    MatchedFilter filter(
+        &data_dumper, DetectOptimization(), sub_block_size,
+        kWindowSizeSubBlocks, kNumMatchedFilters, kAlignmentShiftSubBlocks, 150,
+        config.delay.delay_estimate_smoothing,
+        config.delay.delay_estimate_smoothing_delay_found,
+        config.delay.delay_candidate_detection_threshold, kDetectPreEcho);
     std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
         RenderDelayBuffer::Create(EchoCanceller3Config(), kSampleRateHz,
                                   kNumChannels));
@@ -407,85 +404,75 @@ TEST(MatchedFilter, LagNotUpdatedForLowLevelRender) {
                     downsampled_capture, false);
     }
 
-    // Obtain the lag estimates.
-    auto lag_estimates = filter.GetLagEstimates();
-    EXPECT_EQ(kNumMatchedFilters, lag_estimates.size());
-
-    // Verify that no lag estimates are updated and that no lag estimates are
-    // reliable.
-    for (auto& le : lag_estimates) {
-      EXPECT_FALSE(le.updated);
-      EXPECT_FALSE(le.reliable);
-    }
+    // Verify that no lag estimate has been produced.
+    auto lag_estimate = filter.GetBestLagEstimate();
+    EXPECT_FALSE(lag_estimate.has_value());
   }
 }
 
-// Verifies that the correct number of lag estimates are produced for a certain
-// number of alignment shifts.
-TEST(MatchedFilter, NumberOfLagEstimates) {
-  ApmDataDumper data_dumper(0);
-  EchoCanceller3Config config;
-  for (auto down_sampling_factor : kDownSamplingFactors) {
-    const size_t sub_block_size = kBlockSize / down_sampling_factor;
-    for (size_t num_matched_filters = 0; num_matched_filters < 10;
-         ++num_matched_filters) {
-      MatchedFilter filter(&data_dumper, DetectOptimization(), sub_block_size,
-                           32, num_matched_filters, 1, 150,
-                           config.delay.delay_estimate_smoothing,
-                           config.delay.delay_estimate_smoothing_delay_found,
-                           config.delay.delay_candidate_detection_threshold);
-      EXPECT_EQ(num_matched_filters, filter.GetLagEstimates().size());
-    }
-  }
-}
+INSTANTIATE_TEST_SUITE_P(_, MatchedFilterTest, testing::Values(true, false));
 
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
 
+class MatchedFilterDeathTest : public ::testing::TestWithParam<bool> {};
+
 // Verifies the check for non-zero windows size.
-TEST(MatchedFilterDeathTest, ZeroWindowSize) {
+TEST_P(MatchedFilterDeathTest, ZeroWindowSize) {
+  const bool kDetectPreEcho = GetParam();
   ApmDataDumper data_dumper(0);
   EchoCanceller3Config config;
   EXPECT_DEATH(MatchedFilter(&data_dumper, DetectOptimization(), 16, 0, 1, 1,
                              150, config.delay.delay_estimate_smoothing,
                              config.delay.delay_estimate_smoothing_delay_found,
-                             config.delay.delay_candidate_detection_threshold),
+                             config.delay.delay_candidate_detection_threshold,
+                             kDetectPreEcho),
                "");
 }
 
 // Verifies the check for non-null data dumper.
-TEST(MatchedFilterDeathTest, NullDataDumper) {
+TEST_P(MatchedFilterDeathTest, NullDataDumper) {
+  const bool kDetectPreEcho = GetParam();
   EchoCanceller3Config config;
   EXPECT_DEATH(MatchedFilter(nullptr, DetectOptimization(), 16, 1, 1, 1, 150,
                              config.delay.delay_estimate_smoothing,
                              config.delay.delay_estimate_smoothing_delay_found,
-                             config.delay.delay_candidate_detection_threshold),
+                             config.delay.delay_candidate_detection_threshold,
+                             kDetectPreEcho),
                "");
 }
 
 // Verifies the check for that the sub block size is a multiple of 4.
 // TODO(peah): Activate the unittest once the required code has been landed.
-TEST(MatchedFilterDeathTest, DISABLED_BlockSizeMultipleOf4) {
+TEST_P(MatchedFilterDeathTest, DISABLED_BlockSizeMultipleOf4) {
+  const bool kDetectPreEcho = GetParam();
   ApmDataDumper data_dumper(0);
   EchoCanceller3Config config;
   EXPECT_DEATH(MatchedFilter(&data_dumper, DetectOptimization(), 15, 1, 1, 1,
                              150, config.delay.delay_estimate_smoothing,
                              config.delay.delay_estimate_smoothing_delay_found,
-                             config.delay.delay_candidate_detection_threshold),
+                             config.delay.delay_candidate_detection_threshold,
+                             kDetectPreEcho),
                "");
 }
 
 // Verifies the check for that there is an integer number of sub blocks that add
 // up to a block size.
 // TODO(peah): Activate the unittest once the required code has been landed.
-TEST(MatchedFilterDeathTest, DISABLED_SubBlockSizeAddsUpToBlockSize) {
+TEST_P(MatchedFilterDeathTest, DISABLED_SubBlockSizeAddsUpToBlockSize) {
+  const bool kDetectPreEcho = GetParam();
   ApmDataDumper data_dumper(0);
   EchoCanceller3Config config;
   EXPECT_DEATH(MatchedFilter(&data_dumper, DetectOptimization(), 12, 1, 1, 1,
                              150, config.delay.delay_estimate_smoothing,
                              config.delay.delay_estimate_smoothing_delay_found,
-                             config.delay.delay_candidate_detection_threshold),
+                             config.delay.delay_candidate_detection_threshold,
+                             kDetectPreEcho),
                "");
 }
+
+INSTANTIATE_TEST_SUITE_P(_,
+                         MatchedFilterDeathTest,
+                         testing::Values(true, false));
 
 #endif
 
