@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42a98bc7_715cfcdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-06-20T04:59:12Z",
+      "side": 1,
+      "message": "Hello, Xavier. It seems auto wrapping thread creates a thread without any benefits, so I\u0027d like to remove it.\nPlease take a look. Thanks.",
+      "revId": "e01f121820f9e7cf5d94c40aaaebef5696d5ee63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
