@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'c2285d20ad9d27240e6ece47f6e3b5014c4512f8',
+  'chromium_revision': '9e3694f16901de31fbf4a1e4c26854d88e5f1af5',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -27,7 +27,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@4f56dc6ce73a8e862d2474c629c02e5277af6e54',
+    'https://chromium.googlesource.com/chromium/src/base@ff62bfd6db62c528caf3a1e51d935b9998b79a09',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@9b1463e569fba8aa91586e0c7ea3b476ca082eeb',
   'src/buildtools':
@@ -38,13 +38,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@04f2483c280411552e1027e68c875fde155ce6b3',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@962bb0bcb2c658111d0a1dfa3e4086cadbb8f690',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@26236c4e9a2b5d44bdf10ac3f5ae894583bc005d',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@631be728ee2e699985507ea143ee1b64a455077c',
+    'https://chromium.googlesource.com/chromium/src/third_party@a71e0bb75a81184476ad3e556a8c4e781519ea47',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -249,7 +249,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/r8',
-              'version': '9ZYYzSVt4L6QGnf272Wm7wxsJ4VH77Dh2fel6JB9nOcC',
+              'version': 'iMLEt10uXASDfG2AlATR1fO8xYhBoF24nQvDDXLY6Q8C',
           },
       ],
       'condition': 'checkout_android',
@@ -275,7 +275,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@ed4ed4571c127888b41e48b0fbac50934ad2673b',
+    'https://chromium.googlesource.com/chromium/src/tools@4dfd2d2e07717619899aae38fdb2a148584f1d7e',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
