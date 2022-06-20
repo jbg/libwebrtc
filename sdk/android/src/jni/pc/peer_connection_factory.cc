@@ -263,13 +263,6 @@ ScopedJavaLocalRef<jobject> CreatePeerConnectionFactoryForJava(
     std::unique_ptr<NetworkStatePredictorFactoryInterface>
         network_state_predictor_factory,
     std::unique_ptr<NetEqFactory> neteq_factory) {
-  // talk/ assumes pretty widely that the current Thread is ThreadManager'd, but
-  // ThreadManager only WrapCurrentThread()s the thread where it is first
-  // created.  Since the semantics around when auto-wrapping happens in
-  // webrtc/rtc_base/ are convoluted, we simply wrap here to avoid having to
-  // think about ramifications of auto-wrapping there.
-  rtc::ThreadManager::Instance()->WrapCurrentThread();
-
   auto socket_server = std::make_unique<rtc::PhysicalSocketServer>();
   auto network_thread = std::make_unique<rtc::Thread>(socket_server.get());
   network_thread->SetName("network_thread", nullptr);
