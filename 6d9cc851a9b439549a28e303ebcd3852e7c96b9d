@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "133f3962_a01053a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-21T11:46:44Z",
+      "side": 1,
+      "message": "PTAL. There are a few remaining issues.\n\n1. Two tests that want to use 4 temporal layers, which doesn\u0027t work because we have no such scalability mode defined. Currently marked those tests as disabled.\n\n2. Some pieces of code with #if 0 around, where I\u0027m not sure if it can just be deleted, or should be replaced in some way.\n\n3.The changes to use designated initializers could perhaps be taken out to a separate cl, to make this one a bit smaller.\n\n4. There are some downstream tests that need updating before this can be landed.",
+      "revId": "6d9cc851a9b439549a28e303ebcd3852e7c96b9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
