@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de603b02_2bb8f943",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-06-21T12:48:52Z",
+      "side": 1,
+      "message": "I think it would make sense to mention that this is collaboration between Jesús and Lionel.",
+      "revId": "f10bc96a402078b4d14c741a95006695e00bd5bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aee39934_ec5e7553",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-06-21T12:48:52Z",
+      "side": 1,
+      "message": "Impressive work! Please see comments below.",
+      "revId": "f10bc96a402078b4d14c741a95006695e00bd5bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc46a5ec_b889d6b4",
+        "filename": "modules/audio_processing/aec3/matched_filter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-06-21T12:48:52Z",
+      "side": 1,
+      "message": "This does not need to be recomputed for each filter? It could be computed once, right?",
+      "range": {
+        "startLine": 713,
+        "startChar": 0,
+        "endLine": 717,
+        "endChar": 5
+      },
+      "revId": "f10bc96a402078b4d14c741a95006695e00bd5bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a456bed_7f204ff9",
+        "filename": "modules/audio_processing/aec3/matched_filter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-06-21T12:48:52Z",
+      "side": 1,
+      "message": "... and then this could be removed.",
+      "range": {
+        "startLine": 719,
+        "startChar": 4,
+        "endLine": 721,
+        "endChar": 5
+      },
+      "revId": "f10bc96a402078b4d14c741a95006695e00bd5bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5118b54_17d15885",
+        "filename": "modules/audio_processing/aec3/matched_filter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-06-21T12:48:52Z",
+      "side": 1,
+      "message": "... and then we could track the lowest error_sum instead of the highest accuracy.",
+      "range": {
+        "startLine": 732,
+        "startChar": 16,
+        "endLine": 732,
+        "endChar": 24
+      },
+      "revId": "f10bc96a402078b4d14c741a95006695e00bd5bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7651d98_63473f20",
+        "filename": "modules/audio_processing/aec3/matched_filter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-06-21T12:48:52Z",
+      "side": 1,
+      "message": "Here we could compare error_sum_anchor to 30*30*y.size(), which would be easier to read IMHO.",
+      "range": {
+        "startLine": 756,
+        "startChar": 9,
+        "endLine": 756,
+        "endChar": 76
+      },
+      "revId": "f10bc96a402078b4d14c741a95006695e00bd5bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47140902_2809d773",
+        "filename": "modules/audio_processing/aec3/matched_filter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-06-21T12:48:52Z",
+      "side": 1,
+      "message": "Nice!",
+      "range": {
+        "startLine": 790,
+        "startChar": 5,
+        "endLine": 790,
+        "endChar": 26
+      },
+      "revId": "f10bc96a402078b4d14c741a95006695e00bd5bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6301ed86_8ce68933",
+        "filename": "modules/audio_processing/aec3/matched_filter_avx2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-06-21T12:48:52Z",
+      "side": 1,
+      "message": "Let ha denote",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 16
+      },
+      "revId": "f10bc96a402078b4d14c741a95006695e00bd5bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

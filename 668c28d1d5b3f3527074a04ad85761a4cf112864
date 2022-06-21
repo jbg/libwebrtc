@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37144f8c_a6c90d17",
+        "filename": "api/audio/echo_canceller3_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2022-06-21T12:48:52Z",
+      "side": 1,
+      "message": "Is the change bit-exact with previous revisions when detect_pre_echo \u003d false?\nIf so, please add a line to the description saying that it has been tested for bit-exactness.",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 32
+      },
+      "revId": "668c28d1d5b3f3527074a04ad85761a4cf112864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
