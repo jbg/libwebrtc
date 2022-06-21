@@ -16,6 +16,40 @@
       "message": "Awesome!!! Thanks Danil 😊",
       "revId": "675dfb4a1f3cd1c53e88cba0f223d18d55c31b1f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a81c540_ebb3d732",
+        "filename": "call/call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-06-21T07:47:45Z",
+      "side": 1,
+      "message": "can we skip creating this instance now?",
+      "revId": "675dfb4a1f3cd1c53e88cba0f223d18d55c31b1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e38919_842a2d73",
+        "filename": "call/call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-06-21T07:47:45Z",
+      "side": 1,
+      "message": "Are there dependencies outside of webrtc on Call:Create?\nif not, can we simply remove this parameter?",
+      "revId": "675dfb4a1f3cd1c53e88cba0f223d18d55c31b1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
