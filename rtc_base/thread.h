@@ -141,6 +141,7 @@ class RTC_EXPORT ThreadManager {
   // be able to get synchronization privileges, in which case the result
   // will have a null handle.
   Thread* WrapCurrentThread();
+  std::pair<Thread*, rtc::SocketServer*> WrapCurrentThreadWithSocketServer();
   void UnwrapCurrentThread();
 
 #if RTC_DCHECK_IS_ON

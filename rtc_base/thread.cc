@@ -326,6 +326,23 @@ Thread* ThreadManager::WrapCurrentThread() {
   return result;
 }
 
+std::pair<Thread*, rtc::SocketServer*>
+ThreadManager::WrapCurrentThreadWithSocketServer() {
+  Thread* thread = CurrentThread();
+  rtc::SocketServer* socket_server;
+  if (nullptr == thread) {
+    std::unique_ptr<SocketServer> owned_socket_server =
+        CreateDefaultSocketServer();
+    socket_server = owned_socket_server.get();
+    thread = new Thread(owned_socket_server.get());
+    thread->WrapCurrentWithThreadManager(this, true);
+  } else {
+    // TODO(bugs.webrtc.org/13145): Remove socketserver() usage
+    socket_server = thread->socketserver();
+  }
+  return std::make_pair(thread, socket_server);
+}
+
 void ThreadManager::UnwrapCurrentThread() {
   Thread* t = CurrentThread();
   if (t && !(t->IsOwned())) {
