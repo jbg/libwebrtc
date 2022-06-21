@@ -8,11 +8,16 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include "rtc_base/internal/default_socket_server.h"
 #include "rtc_tools/network_tester/test_controller.h"
 
 int main(int /*argn*/, char* /*argv*/[]) {
-  webrtc::TestController server(9090, 9090, "server_config.dat",
-                                "server_packet_log.dat");
+  std::unique_ptr<rtc::SocketServer> socket_server =
+      rtc::CreateDefaultSocketServer();
+  rtc::AutoSocketServerThread main(socket_server.get());
+
+  webrtc::TestController server(socket_server.get(), 9090, 9090,
+                                "server_config.dat", "server_packet_log.dat");
   while (!server.IsTestDone()) {
     server.Run();
   }
