@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4beb4ac5_c3720d97",
+        "filename": "call/call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-21T07:54:41Z",
+      "side": 1,
+      "message": "sure, I just like to split large changes into smaller chunks:\nnext step that address both of your comments:\nhttps://webrtc-review.googlesource.com/c/src/+/266363",
+      "parentUuid": "6a81c540_ebb3d732",
+      "revId": "675dfb4a1f3cd1c53e88cba0f223d18d55c31b1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83e38919_842a2d73",
         "filename": "call/call.cc",
         "patchSetId": 4
