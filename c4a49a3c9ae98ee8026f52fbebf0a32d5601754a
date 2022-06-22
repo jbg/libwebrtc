@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b225199_d6ea9583",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-06-22T16:42:59Z",
+      "side": 1,
+      "message": "Hello, Mirko. Due to my recent chromium change, autoroller will fail something like [1].\nPlease take a look. Thanks.\n\n[1] https://ci.chromium.org/ui/p/webrtc/builders/try/android_arm_rel/41074/overview\n",
+      "revId": "c4a49a3c9ae98ee8026f52fbebf0a32d5601754a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
