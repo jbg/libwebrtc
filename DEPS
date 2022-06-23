@@ -25,8 +25,10 @@ vars = {
 
 deps = {
   # TODO(kjellander): Move this to be Android-only.
-  'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@8fee1bb5b4c0d89709e2774fcac4c25a4358b4a3',
+  'src/base': {
+    'url': 'https://chromium.googlesource.com/chromium/src/base@8fee1bb5b4c0d89709e2774fcac4c25a4358b4a3',
+    'condition': 'checkout_linux or checkout_android',
+  },
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@a70bcd5e11781058592b6483cdd0df4e28690b7b',
   'src/buildtools':
