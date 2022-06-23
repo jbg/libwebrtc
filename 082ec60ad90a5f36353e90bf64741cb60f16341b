@@ -16,6 +16,23 @@
       "message": "nisse, can you take a look?",
       "revId": "082ec60ad90a5f36353e90bf64741cb60f16341b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2ad0f57_e8574e5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-23T11:33:08Z",
+      "side": 1,
+      "message": "Sorry I missed this earlier.\n\nLooks reasonable to me. Scaling is a bit crude, it would make sense to me to call some libyuv function for scaling, but that can be independent of fixing the crash.",
+      "revId": "082ec60ad90a5f36353e90bf64741cb60f16341b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
