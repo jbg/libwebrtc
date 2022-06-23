@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '3aed89bb309c8f82f013396b27a19f794b946b58',
+  'chromium_revision': '442d296d5e4ed60524bc3e39595a62debf88175d',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -20,7 +20,7 @@ vars = {
 
   # By default, download the fuchsia sdk from the public sdk directory.
   'fuchsia_sdk_cipd_prefix': 'fuchsia/sdk/gn/',
-  'fuchsia_version': 'version:8.20220622.1.1',
+  'fuchsia_version': 'version:8.20220623.1.1',
 }
 
 deps = {
@@ -29,7 +29,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@8fee1bb5b4c0d89709e2774fcac4c25a4358b4a3',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@a70bcd5e11781058592b6483cdd0df4e28690b7b',
+    'https://chromium.googlesource.com/chromium/src/build@13d0ebf3b0ea718fbed57ccff7059971e3bb747f',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@34f9ff8fd5f494bf2b886337e6ef6fcea414cb11',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -38,13 +38,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@63865030bed23516c8a10b7d6cbffaf6aebbc897',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@94d54628097115d59050b2648f064d4cee85a77a',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@6a44e5f8eed21b209f799ab7539a671015bac174',
+    'https://chromium.googlesource.com/chromium/src/testing@2041cd1fc149fefbf2471a63c8cc50b61e22d855',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@b7bdfc166f117dcc5e8148a916f0ceb4be403f38',
+    'https://chromium.googlesource.com/chromium/src/third_party@21efd0590ea1e636d23bcfa878410491bf6502ef',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -133,7 +133,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@c4c43b80ea8854c57a4374ac32579b577172dc23',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@c083518eecae6cecd78e0b63ab7288231e4e7788',
+    'https://chromium.googlesource.com/catapult.git@00e3b08d2297df597bae4c5b4bee976a96c850b1',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
@@ -218,13 +218,13 @@ deps = {
   'src/third_party/dav1d/libdav1d':
     'https://chromium.googlesource.com/external/github.com/videolan/dav1d.git@87f9a81cd770e49394a45deca7a3df41243de00b',
   'src/third_party/libaom/source/libaom':
-    'https://aomedia.googlesource.com/aom.git@5f65a36fd95051c12c045c00c7191aa2f647c7be',
+    'https://aomedia.googlesource.com/aom.git@42223eee8546d8f0d6a16c3f5f78a01298139976',
   'src/third_party/libunwindstack': {
       'url': 'https://chromium.googlesource.com/chromium/src/third_party/libunwindstack.git@3c86843ae0f8d560ae0d15b92e34ce88cf83057a',
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@0eba417b2c72264fa825dc21067b9adc9b8adf70',
+    'https://android.googlesource.com/platform/external/perfetto.git@8cafb589b7e414c21a0ef2647fd30c1d1a3a0572',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@ca89bed50dbc5fe2abef50c5f36924bb1da6d1f6',
   'src/third_party/libyuv':
@@ -275,7 +275,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@e7c5cee0442c945675a0517649cae7524e2dad1c',
+    'https://chromium.googlesource.com/chromium/src/tools@deb803d661df8404c457ef371ee09f947b1b150c',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
