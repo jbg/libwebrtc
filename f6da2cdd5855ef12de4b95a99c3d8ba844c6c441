@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6195e6e7_864f58c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-23T10:00:43Z",
+      "side": 1,
+      "message": "I\u0027m now trying to delete all downstream usage of FakePortAllocator. If I succeed, maybe you can delete the visibility\u003d[\"*\"] line on the fake_port_allocator build target.\n\n(Still not at all clear to me what\u0027s the purpose of the FakePortAllocator class. As far as I understand, it provides a single port, without any attempt to enumerate available networks. I\u0027m thinking that\u0027s unlikely to be the right level of abstraction for configuring or replacing the networking used in a test).",
+      "parentUuid": "236bdb94_33c66b37",
+      "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e769919_9289efa1",
         "filename": "p2p/base/fake_port_allocator.h",
         "patchSetId": 7
