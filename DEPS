@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'd1cee5d400e8ee4575652be8d3d9bf6d9eac7732',
+  'chromium_revision': 'f115626f38397e70e4d8afe507886f367c31d7c2',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -20,7 +20,7 @@ vars = {
 
   # By default, download the fuchsia sdk from the public sdk directory.
   'fuchsia_sdk_cipd_prefix': 'fuchsia/sdk/gn/',
-  'fuchsia_version': 'version:8.20220623.3.1',
+  'fuchsia_version': 'version:8.20220624.0.1',
 }
 
 deps = {
@@ -29,7 +29,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@03ecc15b7375282be4ab586392f65fc03ea43085',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@ae20ef26a5c38f38ea927419b046c59e9b1040e7',
+    'https://chromium.googlesource.com/chromium/src/build@98da19b505b49549ffbb982e139512c0bb1367bb',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@34f9ff8fd5f494bf2b886337e6ef6fcea414cb11',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -38,13 +38,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@5a04ed59045d49c94eef07b11ea8a3bfca9df8ca',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@21e102e0b4199e33dd5da55192205945fcad2424',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@b8e361d4ee8de5759e83aa54e089a4c2e705941c',
+    'https://chromium.googlesource.com/chromium/src/testing@fb6b62d911404791be409db84547494318543ba5',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@b8388687c85bceb7757261f77183bb66056f8d7e',
+    'https://chromium.googlesource.com/chromium/src/third_party@22503b7a9f135ef6a02d622b8d9f8c2ae74258d1',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -275,7 +275,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@9c7a2fc349c843f71d1e1687c13d8736a9937212',
+    'https://chromium.googlesource.com/chromium/src/tools@ce76015c3a895ba5d25589a5cfee99efe0ebad88',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
