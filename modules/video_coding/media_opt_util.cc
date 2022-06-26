@@ -559,7 +559,7 @@ void VCMLossProtectionLogic::UpdateMaxLossHistory(uint8_t lossPr255,
         _lossPrHistory[i + 1].timeMs = _lossPrHistory[i].timeMs;
       }
     }
-    if (_shortMaxLossPr255 == 0) {
+    if (lossPr255 > _shortMaxLossPr255) {
       _shortMaxLossPr255 = lossPr255;
     }
 
