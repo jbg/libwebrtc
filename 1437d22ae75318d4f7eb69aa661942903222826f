@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef211f49_89231999",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-27T08:40:39Z",
+      "side": 1,
+      "message": "Looks good, just waiting for some additional tests to complete.",
+      "revId": "1437d22ae75318d4f7eb69aa661942903222826f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de3bcbc4_3911d98e",
+        "filename": "p2p/base/p2p_transport_channel_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 3392,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-27T08:40:39Z",
+      "side": 1,
+      "message": "Can you use std::make_unique instead of raw new?\n\nAlternatively, change to direct (non-pointer) member variables?",
+      "range": {
+        "startLine": 3391,
+        "startChar": 0,
+        "endLine": 3392,
+        "endChar": 78
+      },
+      "revId": "1437d22ae75318d4f7eb69aa661942903222826f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
