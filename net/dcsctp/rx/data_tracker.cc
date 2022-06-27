@@ -373,4 +373,9 @@ void DataTracker::AddHandoverState(DcSctpSocketHandoverState& state) {
   state.rx.seen_packet = seen_packet_;
 }
 
+void DataTracker::RestoreFromState(const DcSctpSocketHandoverState& state) {
+  seen_packet_ = state.rx.seen_packet;
+  last_cumulative_acked_tsn_ =
+      tsn_unwrapper_.Unwrap(TSN(state.rx.last_cumulative_acked_tsn));
+}
 }  // namespace dcsctp
