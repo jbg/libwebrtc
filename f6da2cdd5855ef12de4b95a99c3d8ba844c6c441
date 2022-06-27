@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07484a4b_74e8ae7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-27T08:31:57Z",
+      "side": 1,
+      "message": "\u003e Done\n\nThanks.\n\n\u003e In your opinion, you seem to think that FakePortAllocator is not necessary. Are there any follow-up bugs in the issue tracker?\n\nI\u0027m not really familiar with the tests that currently use the FakePortAllocator, I can\u0027s say if it is necessary for some of them. And I\u0027m not aware of a tracking bug.",
+      "parentUuid": "7631e112_cb5690e8",
+      "revId": "f6da2cdd5855ef12de4b95a99c3d8ba844c6c441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e769919_9289efa1",
         "filename": "p2p/base/fake_port_allocator.h",
         "patchSetId": 7
