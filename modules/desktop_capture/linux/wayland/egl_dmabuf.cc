@@ -635,7 +635,7 @@ std::vector<uint64_t> EglDmaBuf::QueryDmaBufModifiers(uint32_t format) {
       EglQueryDmaBufFormatsEXT(egl_.display, 0, nullptr, &count);
 
   if (!success || !count) {
-    RTC_LOG(LS_ERROR) << "Failed to query DMA-BUF formats.";
+    RTC_LOG(LS_WARNING) << "Failed to query DMA-BUF formats.";
     return {DRM_FORMAT_MOD_INVALID};
   }
 
@@ -643,13 +643,13 @@ std::vector<uint64_t> EglDmaBuf::QueryDmaBufModifiers(uint32_t format) {
   if (!EglQueryDmaBufFormatsEXT(egl_.display, count,
                                 reinterpret_cast<EGLint*>(formats.data()),
                                 &count)) {
-    RTC_LOG(LS_ERROR) << "Failed to query DMA-BUF formats.";
+    RTC_LOG(LS_WARNING) << "Failed to query DMA-BUF formats.";
     return {DRM_FORMAT_MOD_INVALID};
   }
 
   if (std::find(formats.begin(), formats.end(), drm_format) == formats.end()) {
-    RTC_LOG(LS_ERROR) << "Format " << drm_format
-                      << " not supported for modifiers.";
+    RTC_LOG(LS_WARNING) << "Format " << drm_format
+                        << " not supported for modifiers.";
     return {DRM_FORMAT_MOD_INVALID};
   }
 
@@ -657,14 +657,14 @@ std::vector<uint64_t> EglDmaBuf::QueryDmaBufModifiers(uint32_t format) {
                                        nullptr, &count);
 
   if (!success || !count) {
-    RTC_LOG(LS_ERROR) << "Failed to query DMA-BUF modifiers.";
+    RTC_LOG(LS_WARNING) << "Failed to query DMA-BUF modifiers.";
     return {DRM_FORMAT_MOD_INVALID};
   }
 
   std::vector<uint64_t> modifiers(count);
   if (!EglQueryDmaBufModifiersEXT(egl_.display, drm_format, count,
                                   modifiers.data(), nullptr, &count)) {
-    RTC_LOG(LS_ERROR) << "Failed to query DMA-BUF modifiers.";
+    RTC_LOG(LS_WARNING) << "Failed to query DMA-BUF modifiers.";
   }
 
   // Support modifier-less buffers
