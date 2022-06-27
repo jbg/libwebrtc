@@ -732,7 +732,7 @@ void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
                           ? video_metadata->region.position.x
                           : 0;
 
-  const uint32_t frame_stride = kBytesPerPixel * video_size_.width();
+  const uint32_t frame_stride = kBytesPerPixel * desktop_size_.width();
   uint32_t stride = spa_buffer->datas[0].chunk->stride;
 
   if (spa_buffer->datas[0].type == SPA_DATA_DmaBuf && stride > frame_stride) {
