@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d51ff7_4bdb9c93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-06-27T17:13:28Z",
+      "side": 1,
+      "message": "LGTM, consider updating log statements though.\n\nFYI that Mark is out through the middle of July; so no need to wait on him.",
+      "revId": "1925c79c47fe611d8f8caacc7f81131b13e836c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3024ef6_77ce3dd6",
+        "filename": "modules/desktop_capture/linux/wayland/egl_dmabuf.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-06-27T17:13:28Z",
+      "side": 1,
+      "message": "Seems like this should maybe be different than the one on 638?\n\nSame for the pair of logs on 660/667?",
+      "revId": "1925c79c47fe611d8f8caacc7f81131b13e836c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
