@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5179aadd_737efe33",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-06-27T18:54:34Z",
+      "side": 1,
+      "message": "This should be correct.",
+      "parentUuid": "584720a5_2cf08554",
+      "range": {
+        "startLine": 725,
+        "startChar": 49,
+        "endLine": 725,
+        "endChar": 60
+      },
+      "revId": "0eab4cee7af0a42cdbb2d2a522b8dd88829bc48a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a28ff18_2e37833a",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-27T17:09:47Z",
       "side": 1,
       "message": "Can you add part of the commit description as a comment here? I do admit it\u0027s a little confusing because you say that in KDE the video stream is the size of the window, so I\u0027m not sure I 100% understand how this ends up being okay there?",
+      "range": {
+        "startLine": 735,
+        "startChar": 49,
+        "endLine": 735,
+        "endChar": 62
+      },
+      "revId": "0eab4cee7af0a42cdbb2d2a522b8dd88829bc48a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e223b688_6cb405b7",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-06-27T18:54:34Z",
+      "side": 1,
+      "message": "I added some comments and renamed some variables to have names that better describe what they represent. Maybe I should have make this a new change? Or is it okay to have it like that?",
+      "parentUuid": "4a28ff18_2e37833a",
       "range": {
         "startLine": 735,
         "startChar": 49,
