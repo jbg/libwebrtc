@@ -353,6 +353,24 @@ FrameDependencyStructure ScalabilityStructureL2T2::DependencyStructure() const {
   return structure;
 }
 
+FrameDependencyStructure ScalabilityStructureL2T3::DependencyStructure() const {
+  FrameDependencyStructure structure;
+#if 0
+  structure.num_decode_targets = 3;
+  structure.num_chains = 3;
+  structure.decode_target_protected_by_chain = {0, 1, 2};
+  auto& templates = structure.templates;
+  templates.resize(6);
+  templates[0].S(0).Dtis("SRR").ChainDiffs({3, 2, 1}).FrameDiffs({3});
+  templates[1].S(0).Dtis("SSS").ChainDiffs({0, 0, 0});
+  templates[2].S(1).Dtis("-SR").ChainDiffs({1, 1, 1}).FrameDiffs({3, 1});
+  templates[3].S(1).Dtis("-SS").ChainDiffs({1, 1, 1}).FrameDiffs({1});
+  templates[4].S(2).Dtis("--S").ChainDiffs({2, 1, 1}).FrameDiffs({3, 1});
+  templates[5].S(2).Dtis("--S").ChainDiffs({2, 1, 1}).FrameDiffs({1});
+#endif
+  return structure;
+}
+
 FrameDependencyStructure ScalabilityStructureL3T1::DependencyStructure() const {
   FrameDependencyStructure structure;
   structure.num_decode_targets = 3;
