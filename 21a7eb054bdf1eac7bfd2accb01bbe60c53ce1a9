@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d79457ea_841b4814",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-29T09:40:57Z",
+      "side": 1,
+      "message": "This attempts to wire up L2T3 and S2T3, but I need some help to actually define the proper dependency templates.\n\nUnclear to me why the failing tests are affected, \n\n  ScalabilityModeOff/Vp9Test.NonFlexMode/L2T3_WithoutIdentifier\n  ScalabilityModeOff/Vp9Test.NonFlexMode/S2T3_WithoutIdentifier\n  \nAs far as I see, they don\u0027t set the scalability mode, but it looks like they fail because the \"structure\" for the new modes are invalid. Perhaps because of the conversion back from detailed settings to mode?\n\n# Fatal error in: ../../modules/rtp_rtcp/source/rtp_sender_video.cc, line 253\n# last system error: 1\n# Check failed: video_structure-\u003enum_decode_targets \u003e 0 (0 vs. 0)",
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
