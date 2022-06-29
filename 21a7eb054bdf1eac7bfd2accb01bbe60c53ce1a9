@@ -16,6 +16,75 @@
       "message": "This attempts to wire up L2T3 and S2T3, but I need some help to actually define the proper dependency templates.\n\nUnclear to me why the failing tests are affected, \n\n  ScalabilityModeOff/Vp9Test.NonFlexMode/L2T3_WithoutIdentifier\n  ScalabilityModeOff/Vp9Test.NonFlexMode/S2T3_WithoutIdentifier\n  \nAs far as I see, they don\u0027t set the scalability mode, but it looks like they fail because the \"structure\" for the new modes are invalid. Perhaps because of the conversion back from detailed settings to mode?\n\n# Fatal error in: ../../modules/rtp_rtcp/source/rtp_sender_video.cc, line 253\n# last system error: 1\n# Check failed: video_structure-\u003enum_decode_targets \u003e 0 (0 vs. 0)",
       "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cb44816_8d72924d",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-29T10:44:23Z",
+      "side": 1,
+      "message": "6 \u003d num_spatial_layers * num_temporal_layers",
+      "range": {
+        "startLine": 359,
+        "startChar": 33,
+        "endLine": 359,
+        "endChar": 34
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b298bc0f_9c9acc31",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-29T10:44:23Z",
+      "side": 1,
+      "message": "num_chains \u003d num_spatial_layers\ndecode_target_protected_by_chain \u003d {0, 0, 0, 1, 1, 1}",
+      "range": {
+        "startLine": 360,
+        "startChar": 25,
+        "endLine": 361,
+        "endChar": 57
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce237d95_42fd5053",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-29T10:44:23Z",
+      "side": 1,
+      "message": "there should be 10 templates (take a look at L3T3 structure, throw away S(2) templates,\nfor dtis throw away decode targets mapping to S2 (i.e. last 3 chars).\nchain diffs and frame diffs might be a bit more complicted to update, but may be not:\nfor frame diffs replace 3x values with 2x value for diffs - those correspond to temporal dependencies\nfor chain diffs can use the same trick - order templates in order of the frames they arrive, sort separately.",
+      "range": {
+        "startLine": 363,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 22
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
