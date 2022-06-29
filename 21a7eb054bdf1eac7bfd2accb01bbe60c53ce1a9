@@ -109,6 +109,30 @@
       },
       "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da2bddd1_5e4c08af",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-29T15:14:55Z",
+      "side": 1,
+      "message": "yes, DD spec can be a good document to check, examples in particular:\nhttps://aomediacodec.github.io/av1-rtp-spec/#a1011-decode-targets-decode-target-indications-and-chains\n\nIt should be easier to see frame diffs and chain diffs with a diagram: https://www.w3.org/TR/webrtc-svc/#L2T3*\n\nlook at first 10 frames (first 5 pictures, each consists of S0 and S1 frames).\ndraw frame ids on them in order:\n\n   4\n / |  6\n2--+-/|\n|  |  |\n|  3  |  ....\n| /   5\n1----/\n\n\nnow, FrameDiffs should be easy to calculate, e.g. frame_id\u003d6 depends directly on frame_id\u003d2 and frame_id\u003d5, so its framediffs would be {6-2, 6-5} \u003d {4, 1} [order doesn\u0027t matter from frame diffs]\n\nchain diffs are bit more complicated - check last T0 frame per spatial id.\ne.g. for frame_id\u003d6 these frames are frame_id\u003d1 and frame_id\u003d2, so \nchain_diffs \u003d {5, 4} [order does matter for chain diffs]\n\nyou may write fdiffs/chain_diffs for more than 10 frames, but you would notice that template for frame#11 exactly matches template for frame#3\n\nThere are also tests that validate structures for consistency.\ncheck scalability_structure_unittest.cc and add new modes for testing",
+      "parentUuid": "1f618411_005a8210",
+      "range": {
+        "startLine": 363,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 22
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

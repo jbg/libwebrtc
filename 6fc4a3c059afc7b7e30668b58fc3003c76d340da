@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "126b5cbb_93934d9e",
+        "filename": "modules/video_coding/svc/scalability_mode_util.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-29T15:14:55Z",
+      "side": 1,
+      "message": "side question: why this function implemented as an extra switch instead of\n\n  return ScalabilityStructureConfig(scalability_mode)-\u003enum_spatial_layers;",
+      "range": {
+        "startLine": 193,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 37
+      },
+      "revId": "6fc4a3c059afc7b7e30668b58fc3003c76d340da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1566ff6a_b51001ae",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-29T15:14:55Z",
+      "side": 1,
+      "message": "there are two chains, and thus there should be two chain diffs per template:\n{0, 0}\n{1, 1}\n{2, 1}\n{3, 2}\n...\n{7, 6}\n{8, 7}\n{1, 8}",
+      "revId": "6fc4a3c059afc7b7e30668b58fc3003c76d340da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ddec514_cec1c7ae",
+        "filename": "modules/video_coding/svc/scalability_structure_simulcast.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-29T15:14:55Z",
+      "side": 1,
+      "message": "this would be similar to L2T3 structure except\ndtis are different (see S3T3 dtis, adjust them same way)\nframe diffs wouldn\u0027t contain fdiff\u003d1 for S1 frames (i.e. dependency on the previous frame, i.e. spatial dependency)\nchain diffs would be exactly the same.",
+      "range": {
+        "startLine": 245,
+        "startChar": 25,
+        "endLine": 245,
+        "endChar": 49
+      },
+      "revId": "6fc4a3c059afc7b7e30668b58fc3003c76d340da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
