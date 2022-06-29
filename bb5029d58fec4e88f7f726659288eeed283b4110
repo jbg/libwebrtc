@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de798cb5_acec4790",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10184
+      },
+      "writtenOn": "2022-06-29T11:42:08Z",
+      "side": 1,
+      "message": "Could you please merge it?\nI don\u0027t have permissions to submit it to CQ.",
+      "revId": "bb5029d58fec4e88f7f726659288eeed283b4110",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
