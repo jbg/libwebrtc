@@ -85,6 +85,30 @@
       },
       "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f618411_005a8210",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-29T14:26:47Z",
+      "side": 1,
+      "message": "I\u0027ve given this a try. Dropped S2, dropped final 3 chars of Dtis, updates frame diffs. I didn\u0027t get how to do the chain diffs. Also not sure about the order (the t[x] index), I kept them unchanged from L3T3, and at least they cover the range 0...9.\n\nI don\u0027t really understand this (I have a very fuzzy understanding of intended frame dependencies, and even less clue about how it\u0027s represented in these template objects). For docs, should one start with reading the dependency descriptor spec?",
+      "parentUuid": "ce237d95_42fd5053",
+      "range": {
+        "startLine": 363,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 22
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
