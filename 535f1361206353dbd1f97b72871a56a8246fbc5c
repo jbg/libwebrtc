@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8169df5e_b84e95bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-29T07:32:07Z",
+      "side": 1,
+      "message": "I *think* RestoreFromState should only be permitted on pristine objects.\nAdding checks for pristineness in all objects might be overkill, but I\u0027d like to have it in at least one place.\n\nWDYT?",
+      "revId": "535f1361206353dbd1f97b72871a56a8246fbc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c44b1342_1d64e22f",
+        "filename": "net/dcsctp/socket/transmission_control_block.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-29T07:32:07Z",
+      "side": 1,
+      "message": "It would seem natural to have some check that we don\u0027t get the call sequence\n\n- CreateTCB\n- Use TCB, create connections and so on\n- RestoreFromState(other state)\n\nThis might be the logical place to do an RTC_CHECK(\"state is pristine\").",
+      "revId": "535f1361206353dbd1f97b72871a56a8246fbc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
