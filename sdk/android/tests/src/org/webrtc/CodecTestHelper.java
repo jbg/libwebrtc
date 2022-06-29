@@ -8,6 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+// TEST
+
 package org.webrtc;
 
 import static com.google.common.truth.Truth.assertThat;
