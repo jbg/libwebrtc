@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11d8153c_171e4dc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-06-29T10:33:28Z",
+      "side": 1,
+      "message": "Agree - the socket - the only entrypoint - does validate that there is no TCB already.",
+      "parentUuid": "8169df5e_b84e95bb",
+      "revId": "535f1361206353dbd1f97b72871a56a8246fbc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c44b1342_1d64e22f",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-06-29T07:32:07Z",
       "side": 1,
       "message": "It would seem natural to have some check that we don\u0027t get the call sequence\n\n- CreateTCB\n- Use TCB, create connections and so on\n- RestoreFromState(other state)\n\nThis might be the logical place to do an RTC_CHECK(\"state is pristine\").",
+      "revId": "535f1361206353dbd1f97b72871a56a8246fbc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c5cba32_8dcc1258",
+        "filename": "net/dcsctp/socket/transmission_control_block.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-06-29T10:33:28Z",
+      "side": 1,
+      "message": "From the socket\u0027s point of view, calling DcSctpSocket::RestoreFromState will error if the socket is not in closed state, i.e. it will not allow calling RestoreFromState when there is a TCB (pristine or not).\n\nI did add a few RTC_DCHECKs in individual components to ensure that no mistake is ever made, but the only way to call these is through DcSctpSocket::RestoreFromState",
+      "parentUuid": "c44b1342_1d64e22f",
       "revId": "535f1361206353dbd1f97b72871a56a8246fbc5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
