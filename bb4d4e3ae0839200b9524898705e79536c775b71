@@ -70,6 +70,24 @@
       "parentUuid": "ca0a2121_8c2b3ce3",
       "revId": "bb4d4e3ae0839200b9524898705e79536c775b71",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74258f59_e03d29e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-30T12:19:38Z",
+      "side": 1,
+      "message": "I\u0027ve debugged a bit more about this. We get layer_frames_ like\n\n(libvpx_vp9_encoder.cc:1213): XXX layer_frames_:\n(libvpx_vp9_encoder.cc:1215):   spatial id: 0\n(libvpx_vp9_encoder.cc:1217):     id: 2, referenced: 1, updated: 0\n(libvpx_vp9_encoder.cc:1217):     id: 4, referenced: 0, updated: 1\n\nSo only a single spatial layer, which seems like a problem for the test, but doesn\u0027t really explain encoder failure.\n\nThe reason for only a single layer, is that the second spatial layer gets disabled by ScalabilityStructureFullSvc::OnRatesUpdated.",
+      "parentUuid": "e7b239f1_3e71b6c8",
+      "revId": "bb4d4e3ae0839200b9524898705e79536c775b71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
