@@ -34,6 +34,24 @@
       "parentUuid": "3a820be8_3874303e",
       "revId": "bb4d4e3ae0839200b9524898705e79536c775b71",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca0a2121_8c2b3ce3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-30T10:19:36Z",
+      "side": 1,
+      "message": "It fails with errors like \n\n(libvpx_vp9_encoder.cc:506): Encoder in error state: 8\n(default_video_quality_analyzer.cc:542): Encoder error for frame.id\u003d10, code\u003d-1\n(video_stream_encoder.cc:1900): Failed to encode frame. Error code: -1\n(default_video_quality_analyzer.cc:542): Encoder error for frame.id\u003d11, code\u003d-1\n(video_stream_encoder.cc:1900): Failed to encode frame. Error code: -1\n\nI guess one has to dig in libvpx sources to find out what error state 8 means.",
+      "parentUuid": "9a236aeb_9902423c",
+      "revId": "bb4d4e3ae0839200b9524898705e79536c775b71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
