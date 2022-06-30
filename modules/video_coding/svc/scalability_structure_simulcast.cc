@@ -242,6 +242,21 @@ FrameDependencyStructure ScalabilityStructureS2T1::DependencyStructure() const {
   return structure;
 }
 
+FrameDependencyStructure ScalabilityStructureS2T3::DependencyStructure() const {
+  FrameDependencyStructure structure;
+#if 0
+  structure.num_decode_targets = 2;
+  structure.num_chains = 2;
+  structure.decode_target_protected_by_chain = {0, 1};
+  structure.templates.resize(4);
+  structure.templates[0].S(0).Dtis("S-").ChainDiffs({2, 1}).FrameDiffs({2});
+  structure.templates[1].S(0).Dtis("S-").ChainDiffs({0, 0});
+  structure.templates[2].S(1).Dtis("-S").ChainDiffs({1, 2}).FrameDiffs({2});
+  structure.templates[3].S(1).Dtis("-S").ChainDiffs({1, 0});
+#endif
+  return structure;
+}
+
 FrameDependencyStructure ScalabilityStructureS3T3::DependencyStructure() const {
   FrameDependencyStructure structure;
   structure.num_decode_targets = 9;
