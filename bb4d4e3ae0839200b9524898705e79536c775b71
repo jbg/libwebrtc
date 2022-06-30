@@ -88,6 +88,24 @@
       "parentUuid": "e7b239f1_3e71b6c8",
       "revId": "bb4d4e3ae0839200b9524898705e79536c775b71",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5496bbf1_aa9b2e98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-30T13:44:32Z",
+      "side": 1,
+      "message": "This call to codec_enc_config_set fails: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc;drc\u003d179f40e81a461a9978701f6d830f8fdad92d5e2e;l\u003d1117\n\nBut it\u0027s rather curious, the contents of the config struct appear to be exactly the same as for the previous call, which succeeded. Is it possible that other changes, e.g., via codec_control, can make the config no longer valid?\n\nHowever, looking at config changes, I see one other anomaly:\n\nThe attribute config_-\u003elayer_target_bitrate is changed from {391, 510, 725, 0, 0, 0, 0, 0, 0, 0, 0, 0}, i.e., all temporal layers of first spatial layer, to {391, 510, 725, 732, 222, 403, 0, 0, 0, 0, 0, 0}, i.e., include second spatial layer.\n\nAt the same time, ss_target_bitrate changes from \n{725, 0, 0, 0, 0} to {725, 1357, 0, 0, 0} which kind of makes sense. Except that 725 equals the rate for S0T2, and 1357 is the sum of rates for S1T0, S1T1 and S1S2. It\u0027s as if code does\u0027n agree with itself if rate for temporal layers should be cumulative or not. There\u0027s a comment in LibvpxVp9Encoder::SetSvcRates\n\n      // Bitrates in `layer_target_bitrate` are accumulated for each temporal              \n      // layer but in `VideoBitrateAllocation` they should be separated.                   \n\nThat appears broken with the above layer_target_bitrate settings.\n\nAlso at the same time, layer_frames_ only has a single entry,\n\n(libvpx_vp9_encoder.cc:1219): XXX layer_frames_:\n(libvpx_vp9_encoder.cc:1221):   spatial id: 0\n(libvpx_vp9_encoder.cc:1223):     id: 2, referenced: 1, updated: 0\n(libvpx_vp9_encoder.cc:1223):     id: 4, referenced: 0, updated: 1\n\nSo here, it looks Like the second spatial is still disabled.",
+      "parentUuid": "74258f59_e03d29e5",
+      "revId": "bb4d4e3ae0839200b9524898705e79536c775b71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
