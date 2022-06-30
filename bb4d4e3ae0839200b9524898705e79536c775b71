@@ -52,6 +52,24 @@
       "parentUuid": "9a236aeb_9902423c",
       "revId": "bb4d4e3ae0839200b9524898705e79536c775b71",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b239f1_3e71b6c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-30T10:30:42Z",
+      "side": 1,
+      "message": "Looks like it\u0027s\n\n  /*!\\brief An application-supplied parameter is not valid.                                \n   *                                                                                       \n   */\n  VPX_CODEC_INVALID_PARAM,\n\nNot that surprising, but not very specific either... \n\nMain suspect is perhaps this call: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc;drc\u003d179f40e81a461a9978701f6d830f8fdad92d5e2e;l\u003d1214\n\n    vpx_svc_ref_frame_config_t ref_config \u003d Vp9References(layer_frames_);\n    libvpx_-\u003ecodec_control(encoder_, VP9E_SET_SVC_REF_FRAME_CONFIG,\n                           \u0026ref_config);",
+      "parentUuid": "ca0a2121_8c2b3ce3",
+      "revId": "bb4d4e3ae0839200b9524898705e79536c775b71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
