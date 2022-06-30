@@ -83,8 +83,18 @@ rtc_library("default_task_queue_factory") {
   deps = [ ":task_queue" ]
 
   if (rtc_enable_libevent) {
-    sources += [ "default_task_queue_factory_libevent.cc" ]
-    deps += [ "../../rtc_base:rtc_task_queue_libevent" ]
+    if (is_android) {
+      sources +=
+          [ "default_task_queue_factory_stdlib_or_libevent_experiment.cc" ]
+      deps += [
+        "../../rtc_base:rtc_task_queue_libevent",
+        "../../rtc_base:rtc_task_queue_stdlib",
+        "../../system_wrappers:field_trial",
+      ]
+    } else {
+      sources += [ "default_task_queue_factory_libevent.cc" ]
+      deps += [ "../../rtc_base:rtc_task_queue_libevent" ]
+    }
   } else if (is_mac || is_ios) {
     sources += [ "default_task_queue_factory_gcd.cc" ]
     deps += [ "../../rtc_base:rtc_task_queue_gcd" ]
