@@ -133,6 +133,30 @@
       },
       "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae23726d_6f408d6d",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-30T07:22:57Z",
+      "side": 1,
+      "message": "Thanks for explaining. I\u0027m adding an ascii version of the diagram. As I understand it, the repeating pattern contains 8 frames (for frames in each spatial layer).\n\nWhy are there 10 templates, rather than just 8? With my current modifications, there are two entries with .S(0).T(0) even though the pattern only includes one frame in this layer, and similarly for .S(1).T(0).\n\nI guess we include the T0 frames of the next instance of the pattern (frame id 9 and 10), but why should they have different templates? Should O think of frames 1 and 2 as key frames, with no dependencies on earlier frames (except that 2 depends on 1), and the corresponding frame sin the next instance (frames 9 and 10) as non key-frames?",
+      "parentUuid": "da2bddd1_5e4c08af",
+      "range": {
+        "startLine": 363,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 22
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
