@@ -39,6 +39,30 @@
       },
       "revId": "f025df0db8b7992db98c281297c09d3bcf8d9eea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9b07ce0_65f2d202",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-06-30T14:39:36Z",
+      "side": 1,
+      "message": "That\u0027s a nice find, indeed looks wrong.\nI wonder how this has worked so far though?\nWould be nice with a unit test for that case.",
+      "parentUuid": "fb0a08c8_d94875f9",
+      "range": {
+        "startLine": 469,
+        "startChar": 36,
+        "endLine": 469,
+        "endChar": 55
+      },
+      "revId": "f025df0db8b7992db98c281297c09d3bcf8d9eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
