@@ -157,6 +157,30 @@
       },
       "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88fef2e2_79b182f2",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-30T08:00:22Z",
+      "side": 1,
+      "message": "Yes, repeating pattern is 8 frames.\nYes, first two T0 frames (key frame) are special - they have different dependencies than later T0 frames. extra 2 templates are for those first 2 frames.\n\nWhile it is possible to create structure with just 8 templates and then put some special flags on the key frame(s), it is a bit more efficient to create template that will be used just once.",
+      "parentUuid": "ae23726d_6f408d6d",
+      "range": {
+        "startLine": 363,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 22
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

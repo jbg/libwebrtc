@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7fc5ec4_b2eab080",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-30T08:00:22Z",
+      "side": 1,
+      "message": "Neat!\n\nI was sure that L2T3 structure is too complicated to draw it in ascii.\nNice to see it is actually possible",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 20
+      },
+      "revId": "0e49f09074b8f4a5317e574ed86dca54938182c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
