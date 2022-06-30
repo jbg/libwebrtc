@@ -205,6 +205,30 @@
       },
       "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3baa2a06_e8384c3b",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-30T08:36:12Z",
+      "side": 1,
+      "message": "test is right (and I was wrong when wrote that chain_diffs for S2T3 and L2T3 are the same).\n\nfor frame 9 (which is S1T0 delta frame) the previous frame that is required to decode spatial layer1 would be S0T0 frame, because S1 depends on S0. i.e. chain_diff[1] \u003d 1.\nfor S2T3 structure \nchain 0 contains frames: 0,    8,    16, ...\nchain 1 contains frames: 0, 1, 8, 9, 16, 17\n\nso for frame 6 last frames in chains are 0, 1 (and thus chain_diffs \u003d [6, 5]),\nbut for frame 9 last frame in chains is 8 for both chains, (and thus chain_diffs \u003d [1, 1]).\n\n\n[in S2T3 structure S1 doesn\u0027t depends on S0, so for frame#9 the previous frame that is required to decode spatial layer1 would be previous S1T0 frame, i.e. chain_diff[1] \u003d\u003d 8",
+      "parentUuid": "26c77460_b51c0c88",
+      "range": {
+        "startLine": 363,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 22
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
