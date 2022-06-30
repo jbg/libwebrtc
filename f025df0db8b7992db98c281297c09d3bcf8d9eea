@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cb7f2e7_0a1ba282",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-06-30T14:06:56Z",
+      "side": 1,
+      "message": "LGTM for the SVC E2E test changes, as long as it passes.",
+      "revId": "f025df0db8b7992db98c281297c09d3bcf8d9eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb0a08c8_d94875f9",
