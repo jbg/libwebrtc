@@ -181,6 +181,30 @@
       },
       "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26c77460_b51c0c88",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-30T08:22:58Z",
+      "side": 1,
+      "message": "Now the unit tests almost pass. What should the chain diffs be on T0 frames? I get\n\n for frame 9, Expected S1T0: dtis \u003d ---SSS, frame diffs \u003d { 8, 1, }, chain diffs \u003d { 1, 1, }\n\nWhile it seems to me that diff for most recent previous S1T0 would be 8, hence chain diffs {1, 8}.",
+      "parentUuid": "88fef2e2_79b182f2",
+      "range": {
+        "startLine": 363,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 22
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
