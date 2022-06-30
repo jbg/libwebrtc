@@ -51,6 +51,23 @@
       "message": "ping (feel free to +2, I don\u0027t have the right permissions to do so here)",
       "revId": "526870f7e1f7bbdf4e9012da8643330d30ff9cf2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b95dff4f_f3bff76f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14874
+      },
+      "writtenOn": "2022-06-30T10:02:06Z",
+      "side": 1,
+      "message": "hta, can you help with approval and landing please?",
+      "revId": "526870f7e1f7bbdf4e9012da8643330d30ff9cf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
