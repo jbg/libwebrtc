@@ -36,6 +36,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b95e372_dc2be54c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-06-30T06:41:39Z",
+      "side": 1,
+      "message": "Sounds good.\nI didn\u0027t see any new patchset with new RTC_DCHECKs; if you want to add some before submitting, that is not a problem.\n",
+      "revId": "535f1361206353dbd1f97b72871a56a8246fbc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c44b1342_1d64e22f",
