@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "219082bb_feea20de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-06-30T10:23:05Z",
+      "side": 1,
+      "message": "new structures lgtm\nno idea what went wrong in the integration test.",
+      "revId": "0299788c398b2f03c51a6e8f268705d26f459136",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
