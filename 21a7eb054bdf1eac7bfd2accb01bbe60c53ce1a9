@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04223e40_85e808b8",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-30T14:00:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9cb44816_8d72924d",
+      "range": {
+        "startLine": 359,
+        "startChar": 33,
+        "endLine": 359,
+        "endChar": 34
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b298bc0f_9c9acc31",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-06-29T10:44:23Z",
       "side": 1,
       "message": "num_chains \u003d num_spatial_layers\ndecode_target_protected_by_chain \u003d {0, 0, 0, 1, 1, 1}",
+      "range": {
+        "startLine": 360,
+        "startChar": 25,
+        "endLine": 361,
+        "endChar": 57
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8fcaa58_f2bcee55",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-30T14:00:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b298bc0f_9c9acc31",
       "range": {
         "startLine": 360,
         "startChar": 25,
@@ -245,6 +293,30 @@
       "side": 1,
       "message": "Updated S2T3, they now pass the unit tests.",
       "parentUuid": "3baa2a06_e8384c3b",
+      "range": {
+        "startLine": 363,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 22
+      },
+      "revId": "21a7eb054bdf1eac7bfd2accb01bbe60c53ce1a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e083fec_c1664459",
+        "filename": "modules/video_coding/svc/scalability_structure_full_svc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-06-30T14:00:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34918bba_7adbaceb",
       "range": {
         "startLine": 363,
         "startChar": 2,
