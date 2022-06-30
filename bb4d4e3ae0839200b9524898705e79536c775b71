@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a820be8_3874303e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-06-30T09:37:15Z",
+      "side": 1,
+      "message": "Can you also add an entry for L2T3 in svc_e2e_tests.cc ? Not S2T3 though, those tests don\u0027t support S modes yet.",
+      "revId": "bb4d4e3ae0839200b9524898705e79536c775b71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
