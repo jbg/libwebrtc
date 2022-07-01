@@ -206,7 +206,6 @@ rtc_library("audio_device_impl") {
     "../../system_wrappers",
     "../../system_wrappers:field_trial",
     "../../system_wrappers:metrics",
-    "../utility",
   ]
   absl_deps = [
     "//third_party/abseil-cpp/absl/base:core_headers",
@@ -214,6 +213,9 @@ rtc_library("audio_device_impl") {
   ]
   if (rtc_include_internal_audio_device && is_ios) {
     deps += [ "../../sdk:audio_device" ]
+  }
+  if (is_android) {
+    deps += [ "../utility" ]
   }
 
   sources = [
@@ -433,7 +435,6 @@ if (rtc_include_tests && !build_with_chromium) {
       "../../system_wrappers",
       "../../test:fileutils",
       "../../test:test_support",
-      "../utility",
     ]
     absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
     if (is_linux || is_chromeos || is_mac || is_win) {
@@ -460,6 +461,7 @@ if (rtc_include_tests && !build_with_chromium) {
         "../../sdk/android:libjingle_peerconnection_java",
         "../../sdk/android:native_api_jni",
         "../../sdk/android:native_test_jni_onload",
+        "../utility",
       ]
     }
     if (!rtc_include_internal_audio_device) {
