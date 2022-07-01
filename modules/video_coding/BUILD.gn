@@ -84,6 +84,7 @@ rtc_library("nack_requester") {
     "../../api:sequence_checker",
     "../../api/task_queue",
     "../../api/task_queue:pending_task_safety_flag",
+    "../../api/task_queue:to_queued_task",
     "../../api/units:time_delta",
     "../../api/units:timestamp",
     "../../rtc_base:checks",

@@ -84,21 +84,14 @@ void AudioBweTest::PerformTest() {
   SleepMs(GetNetworkPipeConfig().queue_delay_ms + kExtraProcessTimeMs);
 }
 
-class StatsPollTask : public QueuedTask {
- public:
-  explicit StatsPollTask(Call* sender_call) : sender_call_(sender_call) {}
-
- private:
-  bool Run() override {
-    RTC_CHECK(sender_call_);
-    Call::Stats call_stats = sender_call_->GetStats();
+absl::AnyInvocable<void() &&> StatsPollTask(Call* sender_call) {
+  RTC_CHECK(sender_call);
+  return [sender_call] {
+    Call::Stats call_stats = sender_call->GetStats();
     EXPECT_GT(call_stats.send_bandwidth_bps, 25000);
-    TaskQueueBase::Current()->PostDelayedTask(std::unique_ptr<QueuedTask>(this),
-                                              100);
-    return false;
-  }
-  Call* sender_call_;
-};
+    TaskQueueBase::Current()->PostDelayedTask(StatsPollTask(sender_call), 100);
+  };
+}
 
 class NoBandwidthDropAfterDtx : public AudioBweTest {
  public:
@@ -144,8 +137,7 @@ class NoBandwidthDropAfterDtx : public AudioBweTest {
   }
 
   void PerformTest() override {
-    stats_poller_.PostDelayedTask(std::make_unique<StatsPollTask>(sender_call_),
-                                  100);
+    stats_poller_.PostDelayedTask(StatsPollTask(sender_call_), 100);
     sender_call_->OnAudioTransportOverheadChanged(0);
     AudioBweTest::PerformTest();
   }

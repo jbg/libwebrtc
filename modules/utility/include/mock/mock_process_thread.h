@@ -19,23 +19,5 @@
 
 namespace webrtc {
 
-class MockProcessThread : public ProcessThread {
- public:
-  MOCK_METHOD(void, Start, (), (override));
-  MOCK_METHOD(void, Stop, (), (override));
-  MOCK_METHOD(void, Delete, (), (override));
-  MOCK_METHOD(void, WakeUp, (Module*), (override));
-  MOCK_METHOD(void, PostTask, (std::unique_ptr<QueuedTask>), (override));
-  MOCK_METHOD(void,
-              PostDelayedTask,
-              (std::unique_ptr<QueuedTask>, uint32_t),
-              (override));
-  MOCK_METHOD(void,
-              RegisterModule,
-              (Module*, const rtc::Location&),
-              (override));
-  MOCK_METHOD(void, DeRegisterModule, (Module*), (override));
-};
-
 }  // namespace webrtc
 #endif  // MODULES_UTILITY_INCLUDE_MOCK_MOCK_PROCESS_THREAD_H_

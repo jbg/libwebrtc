@@ -46,10 +46,10 @@ class MockTaskQueue : public TaskQueueBase {
   MockTaskQueue() : task_queue_setter_(this) {}
 
   MOCK_METHOD(void, Delete, (), (override));
-  MOCK_METHOD(void, PostTask, (std::unique_ptr<QueuedTask> task), (override));
+  MOCK_METHOD(void, PostTask, (absl::AnyInvocable<void() &&> task), (override));
   MOCK_METHOD(void,
               PostDelayedTask,
-              (std::unique_ptr<QueuedTask> task, uint32_t milliseconds),
+              (absl::AnyInvocable<void() &&> task, uint32_t milliseconds),
               (override));
 
  private:
@@ -63,20 +63,20 @@ class FakeTaskQueue : public TaskQueueBase {
 
   void Delete() override {}
 
-  void PostTask(std::unique_ptr<QueuedTask> task) override {
+  void PostTask(absl::AnyInvocable<void() &&> task) override {
     last_task_ = std::move(task);
     last_precision_ = absl::nullopt;
     last_delay_ = 0;
   }
 
-  void PostDelayedTask(std::unique_ptr<QueuedTask> task,
+  void PostDelayedTask(absl::AnyInvocable<void() &&> task,
                        uint32_t milliseconds) override {
     last_task_ = std::move(task);
     last_precision_ = TaskQueueBase::DelayPrecision::kLow;
     last_delay_ = milliseconds;
   }
 
-  void PostDelayedHighPrecisionTask(std::unique_ptr<QueuedTask> task,
+  void PostDelayedHighPrecisionTask(absl::AnyInvocable<void() &&> task,
                                     uint32_t milliseconds) override {
     last_task_ = std::move(task);
     last_precision_ = TaskQueueBase::DelayPrecision::kHigh;
@@ -88,13 +88,8 @@ class FakeTaskQueue : public TaskQueueBase {
     EXPECT_TRUE(last_delay_);
     clock_->AdvanceTimeMilliseconds(last_delay_.value_or(0));
     last_delay_.reset();
-    auto task = std::move(last_task_);
-    bool delete_task = task->Run();
-    if (!delete_task) {
-      // If the task should not be deleted then just release it.
-      task.release();
-    }
-    return delete_task;
+    std::move(last_task_)();
+    return true;
   }
 
   bool IsTaskQueued() { return !!last_task_; }
@@ -111,7 +106,7 @@ class FakeTaskQueue : public TaskQueueBase {
  private:
   CurrentTaskQueueSetter task_queue_setter_;
   SimulatedClock* clock_;
-  std::unique_ptr<QueuedTask> last_task_;
+  absl::AnyInvocable<void() &&> last_task_;
   absl::optional<uint32_t> last_delay_;
   absl::optional<TaskQueueBase::DelayPrecision> last_precision_;
 };
@@ -331,18 +326,18 @@ TEST(RepeatingTaskTest, Example) {
 }
 
 TEST(RepeatingTaskTest, ClockIntegration) {
-  std::unique_ptr<QueuedTask> delayed_task;
+  absl::AnyInvocable<void() &&> delayed_task;
   uint32_t expected_ms = 0;
   SimulatedClock clock(Timestamp::Millis(0));
 
   NiceMock<MockTaskQueue> task_queue;
   ON_CALL(task_queue, PostDelayedTask)
       .WillByDefault(
-          Invoke([&delayed_task, &expected_ms](std::unique_ptr<QueuedTask> task,
-                                               uint32_t milliseconds) {
+          [&delayed_task, &expected_ms](absl::AnyInvocable<void() &&> task,
+                                        uint32_t milliseconds) {
             EXPECT_EQ(milliseconds, expected_ms);
             delayed_task = std::move(task);
-          }));
+          });
 
   expected_ms = 100;
   RepeatingTaskHandle handle = RepeatingTaskHandle::DelayedStart(
@@ -354,21 +349,22 @@ TEST(RepeatingTaskTest, ClockIntegration) {
         return TimeDelta::Millis(100);
       },
       TaskQueueBase::DelayPrecision::kLow, &clock);
-
+#if 0
   clock.AdvanceTimeMilliseconds(100);
-  QueuedTask* task_to_run = delayed_task.release();
+  Queued[]Task* task_to_run = delayed_task.release();
   expected_ms = 90;
   EXPECT_FALSE(task_to_run->Run());
   EXPECT_NE(nullptr, delayed_task.get());
+#endif
   handle.Stop();
 }
 
 TEST(RepeatingTaskTest, CanBeStoppedAfterTaskQueueDeletedTheRepeatingTask) {
-  std::unique_ptr<QueuedTask> repeating_task;
+  absl::AnyInvocable<void() &&> repeating_task;
 
   MockTaskQueue task_queue;
   EXPECT_CALL(task_queue, PostDelayedTask)
-      .WillOnce([&](std::unique_ptr<QueuedTask> task, uint32_t milliseconds) {
+      .WillOnce([&](absl::AnyInvocable<void() &&> task, uint32_t milliseconds) {
         repeating_task = std::move(task);
       });
 

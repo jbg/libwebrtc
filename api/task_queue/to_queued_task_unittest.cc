@@ -23,16 +23,14 @@ namespace {
 using ::testing::InSequence;
 using ::testing::MockFunction;
 
-void RunTask(std::unique_ptr<QueuedTask> task) {
+void RunTask(absl::AnyInvocable<void() &&> task) {
   // Simulate how task queue suppose to run tasks.
-  QueuedTask* raw = task.release();
-  if (raw->Run())
-    delete raw;
+  std::move(task)();
 }
 
 TEST(ToQueuedTaskTest, AcceptsLambda) {
   bool run = false;
-  std::unique_ptr<QueuedTask> task = ToQueuedTask([&run] { run = true; });
+  absl::AnyInvocable<void()&&> task = ToQueuedTask([&run] { run = true; });
   EXPECT_FALSE(run);
   RunTask(std::move(task));
   EXPECT_TRUE(run);
@@ -65,7 +63,7 @@ TEST(ToQueuedTaskTest, AcceptsCopyableClosure) {
   int num_moves = 0;
   int num_runs = 0;
 
-  std::unique_ptr<QueuedTask> task;
+  absl::AnyInvocable<void() &&> task;
   {
     CopyableClosure closure(&num_copies, &num_moves, &num_runs);
     task = ToQueuedTask(closure);

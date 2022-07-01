@@ -14,6 +14,7 @@
 #include <utility>
 
 #include "absl/strings/string_view.h"
+#include "api/task_queue/to_queued_task.h"
 #include "rtc_base/location.h"
 
 namespace webrtc {

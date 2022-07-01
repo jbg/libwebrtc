@@ -28,6 +28,7 @@
 #include <queue>
 #include <utility>
 
+#include "absl/memory/memory.h"
 #include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
 #include "api/task_queue/queued_task.h"
@@ -43,7 +44,6 @@
 
 namespace webrtc {
 namespace {
-#define WM_RUN_TASK WM_USER + 1
 #define WM_QUEUE_DELAYED_TASK WM_USER + 2
 
 void CALLBACK InitializeQueueThread(ULONG_PTR param) {
@@ -78,7 +78,7 @@ class DelayedTaskInfo {
  public:
   // Default ctor needed to support priority_queue::pop().
   DelayedTaskInfo() {}
-  DelayedTaskInfo(uint32_t milliseconds, std::unique_ptr<QueuedTask> task)
+  DelayedTaskInfo(uint32_t milliseconds, absl::AnyInvocable<void() &&> task)
       : due_time_(GetTick() + milliseconds), task_(std::move(task)) {}
   DelayedTaskInfo(DelayedTaskInfo&&) = default;
 
@@ -93,7 +93,7 @@ class DelayedTaskInfo {
   // See below for why this method is const.
   void Run() const {
     RTC_DCHECK(due_time_);
-    task_->Run() ? task_.reset() : static_cast<void>(task_.release());
+    std::move(task_)();
   }
 
   int64_t due_time() const { return due_time_; }
@@ -108,7 +108,7 @@ class DelayedTaskInfo {
   // (`task`), mutable.
   // Because of this, the `task` variable is made private and can only be
   // mutated by calling the `Run()` method.
-  mutable std::unique_ptr<QueuedTask> task_;
+  mutable absl::AnyInvocable<void() &&> task_;
 };
 
 class MultimediaTimer {
@@ -158,8 +158,8 @@ class TaskQueueWin : public TaskQueueBase {
   ~TaskQueueWin() override = default;
 
   void Delete() override;
-  void PostTask(std::unique_ptr<QueuedTask> task) override;
-  void PostDelayedTask(std::unique_ptr<QueuedTask> task,
+  void PostTask(absl::AnyInvocable<void() &&> task) override;
+  void PostDelayedTask(absl::AnyInvocable<void() &&> task,
                        uint32_t milliseconds) override;
 
   void RunPendingTasks();
@@ -189,7 +189,7 @@ class TaskQueueWin : public TaskQueueBase {
   UINT_PTR timer_id_ = 0;
   rtc::PlatformThread thread_;
   Mutex pending_lock_;
-  std::queue<std::unique_ptr<QueuedTask>> pending_
+  std::queue<absl::AnyInvocable<void() &&>> pending_
       RTC_GUARDED_BY(pending_lock_);
   HANDLE in_queue_;
 };
@@ -221,15 +221,15 @@ void TaskQueueWin::Delete() {
   delete this;
 }
 
-void TaskQueueWin::PostTask(std::unique_ptr<QueuedTask> task) {
+void TaskQueueWin::PostTask(absl::AnyInvocable<void() &&> task) {
   MutexLock lock(&pending_lock_);
   pending_.push(std::move(task));
   ::SetEvent(in_queue_);
 }
 
-void TaskQueueWin::PostDelayedTask(std::unique_ptr<QueuedTask> task,
+void TaskQueueWin::PostDelayedTask(absl::AnyInvocable<void() &&> task,
                                    uint32_t milliseconds) {
-  if (!milliseconds) {
+  if (milliseconds == 0) {
     PostTask(std::move(task));
     return;
   }
@@ -249,7 +249,7 @@ void TaskQueueWin::PostDelayedTask(std::unique_ptr<QueuedTask> task,
 
 void TaskQueueWin::RunPendingTasks() {
   while (true) {
-    std::unique_ptr<QueuedTask> task;
+    absl::AnyInvocable<void() &&> task;
     {
       MutexLock lock(&pending_lock_);
       if (pending_.empty())
@@ -258,8 +258,7 @@ void TaskQueueWin::RunPendingTasks() {
       pending_.pop();
     }
 
-    if (!task->Run())
-      task.release();
+    std::move(task)();
   }
 }
 
@@ -306,20 +305,13 @@ bool TaskQueueWin::ProcessQueuedMessages() {
          msg.message != WM_QUIT) {
     if (!msg.hwnd) {
       switch (msg.message) {
-        // TODO(tommi): Stop using this way of queueing tasks.
-        case WM_RUN_TASK: {
-          QueuedTask* task = reinterpret_cast<QueuedTask*>(msg.lParam);
-          if (task->Run())
-            delete task;
-          break;
-        }
         case WM_QUEUE_DELAYED_TASK: {
-          std::unique_ptr<DelayedTaskInfo> info(
-              reinterpret_cast<DelayedTaskInfo*>(msg.lParam));
+          auto info =
+              absl::WrapUnique(reinterpret_cast<DelayedTaskInfo*>(msg.lParam));
           bool need_to_schedule_timers =
               timer_tasks_.empty() ||
               timer_tasks_.top().due_time() > info->due_time();
-          timer_tasks_.emplace(std::move(*info.get()));
+          timer_tasks_.emplace(std::move(*info));
           if (need_to_schedule_timers) {
             CancelTimers();
             ScheduleNextTimer();

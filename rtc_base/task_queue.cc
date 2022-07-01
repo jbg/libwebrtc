@@ -29,24 +29,23 @@ bool TaskQueue::IsCurrent() const {
   return impl_->IsCurrent();
 }
 
-void TaskQueue::PostTask(std::unique_ptr<webrtc::QueuedTask> task) {
+void TaskQueue::PostTask(absl::AnyInvocable<void() &&> task) {
   impl_->PostTask(std::move(task));
 }
 
-void TaskQueue::PostDelayedTask(std::unique_ptr<webrtc::QueuedTask> task,
+void TaskQueue::PostDelayedTask(absl::AnyInvocable<void() &&> task,
                                 uint32_t milliseconds) {
   impl_->PostDelayedTask(std::move(task), milliseconds);
 }
 
-void TaskQueue::PostDelayedHighPrecisionTask(
-    std::unique_ptr<webrtc::QueuedTask> task,
-    uint32_t milliseconds) {
+void TaskQueue::PostDelayedHighPrecisionTask(absl::AnyInvocable<void() &&> task,
+                                             uint32_t milliseconds) {
   impl_->PostDelayedHighPrecisionTask(std::move(task), milliseconds);
 }
 
 void TaskQueue::PostDelayedTaskWithPrecision(
     webrtc::TaskQueueBase::DelayPrecision precision,
-    std::unique_ptr<webrtc::QueuedTask> task,
+    absl::AnyInvocable<void() &&> task,
     uint32_t milliseconds) {
   impl_->PostDelayedTaskWithPrecision(precision, std::move(task), milliseconds);
 }

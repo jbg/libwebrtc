@@ -31,8 +31,8 @@ class FakeTaskQueue : public webrtc::TaskQueueBase {
   FakeTaskQueue() : task_queue_setter_(this) {}
 
   void Delete() override {}
-  void PostTask(std::unique_ptr<webrtc::QueuedTask> task) override {}
-  void PostDelayedTask(std::unique_ptr<webrtc::QueuedTask> task,
+  void PostTask(absl::AnyInvocable<void() &&> task) override {}
+  void PostDelayedTask(absl::AnyInvocable<void() &&> task,
                        uint32_t milliseconds) override {}
 
  private:

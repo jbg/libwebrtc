@@ -418,37 +418,12 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   bool IsInvokeToThreadAllowed(rtc::Thread* target);
 
   // From TaskQueueBase
-  void PostTask(std::unique_ptr<webrtc::QueuedTask> task) override;
-  void PostDelayedTask(std::unique_ptr<webrtc::QueuedTask> task,
+  void PostTask(absl::AnyInvocable<void() &&> task) override;
+  void PostDelayedTask(absl::AnyInvocable<void() &&> task,
                        uint32_t milliseconds) override;
-  void PostDelayedHighPrecisionTask(std::unique_ptr<webrtc::QueuedTask> task,
+  void PostDelayedHighPrecisionTask(absl::AnyInvocable<void() &&> task,
                                     uint32_t milliseconds) override;
   void Delete() override;
-
-  // Helper methods to avoid having to do ToQueuedTask() at the calling places.
-  template <class Closure,
-            typename std::enable_if<!std::is_convertible<
-                Closure,
-                std::unique_ptr<webrtc::QueuedTask>>::value>::type* = nullptr>
-  void PostTask(Closure&& closure) {
-    PostTask(webrtc::ToQueuedTask(std::forward<Closure>(closure)));
-  }
-  template <class Closure,
-            typename std::enable_if<!std::is_convertible<
-                Closure,
-                std::unique_ptr<webrtc::QueuedTask>>::value>::type* = nullptr>
-  void PostDelayedTask(Closure&& closure, uint32_t milliseconds) {
-    PostDelayedTask(webrtc::ToQueuedTask(std::forward<Closure>(closure)),
-                    milliseconds);
-  }
-  template <class Closure,
-            typename std::enable_if<!std::is_convertible<
-                Closure,
-                std::unique_ptr<webrtc::QueuedTask>>::value>::type* = nullptr>
-  void PostDelayedHighPrecisionTask(Closure&& closure, uint32_t milliseconds) {
-    PostDelayedHighPrecisionTask(
-        webrtc::ToQueuedTask(std::forward<Closure>(closure)), milliseconds);
-  }
 
   // ProcessMessages will process I/O and dispatch messages until:
   //  1) cms milliseconds have elapsed (returns true)
@@ -657,7 +632,7 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   // Only touched from the worker thread itself.
   bool blocking_calls_allowed_ = true;
 
-  // Runs webrtc::QueuedTask posted to the Thread.
+  // Runs tasks posted to the Thread through TaskQueue interface.
   QueuedTaskHandler queued_task_handler_;
   std::unique_ptr<TaskQueueBase::CurrentTaskQueueSetter>
       task_queue_registration_;

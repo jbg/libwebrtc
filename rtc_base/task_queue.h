@@ -17,10 +17,8 @@
 #include <utility>
 
 #include "absl/memory/memory.h"
-#include "api/task_queue/queued_task.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/task_queue/task_queue_factory.h"
-#include "api/task_queue/to_queued_task.h"
 #include "rtc_base/system/rtc_export.h"
 #include "rtc_base/thread_annotations.h"
 
@@ -43,25 +41,6 @@ namespace rtc {
 //       queue_.PostTask([]() { Work(); });
 //     ...
 //
-//   2) Posting a custom task on a timer.  The task posts itself again after
-//      every running:
-//
-//     class TimerTask : public QueuedTask {
-//      public:
-//       TimerTask() {}
-//      private:
-//       bool Run() override {
-//         ++count_;
-//         TaskQueueBase::Current()->PostDelayedTask(
-//             absl::WrapUnique(this), 1000);
-//         // Ownership has been transferred to the next occurance,
-//         // so return false to prevent from being deleted now.
-//         return false;
-//       }
-//       int count_ = 0;
-//     };
-//     ...
-//     queue_.PostDelayedTask(std::make_unique<TimerTask>(), 1000);
 //
 // For more examples, see task_queue_unittests.cc.
 //
@@ -91,30 +70,17 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueue {
   // Returns non-owning pointer to the task queue implementation.
   webrtc::TaskQueueBase* Get() { return impl_; }
 
-  // TODO(tommi): For better debuggability, implement RTC_FROM_HERE.
-
   // Ownership of the task is passed to PostTask.
-  void PostTask(std::unique_ptr<webrtc::QueuedTask> task);
+  void PostTask(absl::AnyInvocable<void() &&> task);
   // See webrtc::TaskQueueBase for precision expectations.
-  void PostDelayedTask(std::unique_ptr<webrtc::QueuedTask> task,
+  void PostDelayedTask(absl::AnyInvocable<void() &&> task,
                        uint32_t milliseconds);
-  void PostDelayedHighPrecisionTask(std::unique_ptr<webrtc::QueuedTask> task,
+  void PostDelayedHighPrecisionTask(absl::AnyInvocable<void() &&> task,
                                     uint32_t milliseconds);
   void PostDelayedTaskWithPrecision(
       webrtc::TaskQueueBase::DelayPrecision precision,
-      std::unique_ptr<webrtc::QueuedTask> task,
+      absl::AnyInvocable<void() &&> task,
       uint32_t milliseconds);
-
-  // std::enable_if is used here to make sure that calls to PostTask() with
-  // std::unique_ptr<SomeClassDerivedFromQueuedTask> would not end up being
-  // caught by this template.
-  template <class Closure,
-            typename std::enable_if<!std::is_convertible<
-                Closure,
-                std::unique_ptr<webrtc::QueuedTask>>::value>::type* = nullptr>
-  void PostTask(Closure&& closure) {
-    PostTask(webrtc::ToQueuedTask(std::forward<Closure>(closure)));
-  }
 
  private:
   webrtc::TaskQueueBase* const impl_;

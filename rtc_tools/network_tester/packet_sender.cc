@@ -27,53 +27,37 @@ namespace webrtc {
 
 namespace {
 
-class SendPacketTask : public QueuedTask {
- public:
-  explicit SendPacketTask(PacketSender* packet_sender)
-      : target_time_ms_(rtc::TimeMillis()), packet_sender_(packet_sender) {}
-
- private:
-  bool Run() override {
-    if (packet_sender_->IsSending()) {
-      packet_sender_->SendPacket();
-      target_time_ms_ += packet_sender_->GetSendIntervalMs();
-      int64_t delay_ms = std::max(static_cast<int64_t>(0),
-                                  target_time_ms_ - rtc::TimeMillis());
+absl::AnyInvocable<void() &&> SendPacketTask(
+    PacketSender* packet_sender,
+    int64_t target_time_ms = rtc::TimeMillis()) {
+  return [target_time_ms, packet_sender]() mutable {
+    if (packet_sender->IsSending()) {
+      packet_sender->SendPacket();
+      target_time_ms += packet_sender->GetSendIntervalMs();
+      int64_t delay_ms =
+          std::max<int64_t>(0, target_time_ms - rtc::TimeMillis());
       TaskQueueBase::Current()->PostDelayedTask(
-          std::unique_ptr<QueuedTask>(this), delay_ms);
-      return false;
-    } else {
-      return true;
+          SendPacketTask(packet_sender, target_time_ms), delay_ms);
     }
-  }
-  int64_t target_time_ms_;
-  PacketSender* const packet_sender_;
-};
+  };
+}
 
-class UpdateTestSettingTask : public QueuedTask {
- public:
-  UpdateTestSettingTask(PacketSender* packet_sender,
-                        std::unique_ptr<ConfigReader> config_reader)
-      : packet_sender_(packet_sender),
-        config_reader_(std::move(config_reader)) {}
-
- private:
-  bool Run() override {
-    auto config = config_reader_->GetNextConfig();
+absl::AnyInvocable<void() &&> UpdateTestSettingTask(
+    PacketSender* packet_sender,
+    std::unique_ptr<ConfigReader> config_reader) {
+  return [packet_sender, config_reader = std::move(config_reader)]() mutable {
+    auto config = config_reader->GetNextConfig();
     if (config) {
-      packet_sender_->UpdateTestSetting((*config).packet_size,
-                                        (*config).packet_send_interval_ms);
+      packet_sender->UpdateTestSetting((*config).packet_size,
+                                       (*config).packet_send_interval_ms);
       TaskQueueBase::Current()->PostDelayedTask(
-          std::unique_ptr<QueuedTask>(this), (*config).execution_time_ms);
-      return false;
+          UpdateTestSettingTask(packet_sender, std::move(config_reader)),
+          (*config).execution_time_ms);
     } else {
-      packet_sender_->StopSending();
-      return true;
+      packet_sender->StopSending();
     }
-  }
-  PacketSender* const packet_sender_;
-  const std::unique_ptr<ConfigReader> config_reader_;
-};
+  };
+}
 
 }  // namespace
 
@@ -98,9 +82,9 @@ void PacketSender::StartSending() {
     RTC_DCHECK_RUN_ON(&worker_queue_checker_);
     sending_ = true;
   });
-  worker_queue_.PostTask(std::make_unique<UpdateTestSettingTask>(
+  worker_queue_.PostTask(UpdateTestSettingTask(
       this, std::make_unique<ConfigReader>(config_file_path_)));
-  worker_queue_.PostTask(std::make_unique<SendPacketTask>(this));
+  worker_queue_.PostTask(SendPacketTask(this));
 }
 
 void PacketSender::StopSending() {

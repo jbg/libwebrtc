@@ -50,8 +50,8 @@ class TaskQueueStdlib final : public TaskQueueBase {
   ~TaskQueueStdlib() override = default;
 
   void Delete() override;
-  void PostTask(std::unique_ptr<QueuedTask> task) override;
-  void PostDelayedTask(std::unique_ptr<QueuedTask> task,
+  void PostTask(absl::AnyInvocable<void() &&> task) override;
+  void PostDelayedTask(absl::AnyInvocable<void() &&> task,
                        uint32_t milliseconds) override;
 
  private:
@@ -69,7 +69,7 @@ class TaskQueueStdlib final : public TaskQueueBase {
 
   struct NextTask {
     bool final_task_ = false;
-    std::unique_ptr<QueuedTask> run_task_;
+    absl::AnyInvocable<void() &&> run_task_;
     int64_t sleep_time_ms_ = 0;
   };
 
@@ -97,7 +97,7 @@ class TaskQueueStdlib final : public TaskQueueBase {
 
   // The list of all pending tasks that need to be processed in the
   // FIFO queue ordering on the worker thread.
-  std::queue<std::pair<OrderId, std::unique_ptr<QueuedTask>>> pending_queue_
+  std::queue<std::pair<OrderId, absl::AnyInvocable<void() &&>>> pending_queue_
       RTC_GUARDED_BY(pending_lock_);
 
   // The list of all pending tasks that need to be processed at a future
@@ -106,7 +106,7 @@ class TaskQueueStdlib final : public TaskQueueBase {
   // task is processed based on FIFO ordering. std::priority_queue was
   // considered but rejected due to its inability to extract the
   // std::unique_ptr out of the queue without the presence of a hack.
-  std::map<DelayedEntryTimeout, std::unique_ptr<QueuedTask>> delayed_queue_
+  std::map<DelayedEntryTimeout, absl::AnyInvocable<void() &&>> delayed_queue_
       RTC_GUARDED_BY(pending_lock_);
 
   // Contains the active worker thread assigned to processing
@@ -151,19 +151,18 @@ void TaskQueueStdlib::Delete() {
   delete this;
 }
 
-void TaskQueueStdlib::PostTask(std::unique_ptr<QueuedTask> task) {
+void TaskQueueStdlib::PostTask(absl::AnyInvocable<void() &&> task) {
   {
     MutexLock lock(&pending_lock_);
     OrderId order = thread_posting_order_++;
 
-    pending_queue_.push(std::pair<OrderId, std::unique_ptr<QueuedTask>>(
-        order, std::move(task)));
+    pending_queue_.emplace(order, std::move(task));
   }
 
   NotifyWake();
 }
 
-void TaskQueueStdlib::PostDelayedTask(std::unique_ptr<QueuedTask> task,
+void TaskQueueStdlib::PostDelayedTask(absl::AnyInvocable<void() &&> task,
                                       uint32_t milliseconds) {
   const auto fire_at = rtc::TimeMillis() + milliseconds;
 
@@ -233,9 +232,8 @@ void TaskQueueStdlib::ProcessTasks() {
 
     if (task.run_task_) {
       // process entry immediately then try again
-      QueuedTask* release_ptr = task.run_task_.release();
-      if (release_ptr->Run())
-        delete release_ptr;
+      std::move(task.run_task_)();
+      task.run_task_ = nullptr;
 
       // Attempt to run more tasks before going to sleep.
       continue;
