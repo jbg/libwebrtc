@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f10c3d92_f0e96978",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-01T07:38:08Z",
+      "side": 1,
+      "message": "Erik, can you do owner\u0027s review as well?",
+      "revId": "f025df0db8b7992db98c281297c09d3bcf8d9eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb0a08c8_d94875f9",
