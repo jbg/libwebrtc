@@ -77,3 +77,60 @@ TaskQueueBase::CurrentTaskQueueSetter::~CurrentTaskQueueSetter() {
 #else
 #error Unsupported platform
 #endif
+
+// TODO(bugs.webrtc.org/xxx): Delete these.
+namespace webrtc {
+namespace {
+class Task : public QueuedTask {
+ public:
+  explicit Task(absl::AnyInvocable<void() &&> task) : task_(std::move(task)) {}
+  ~Task() override = default;
+
+  bool Run() override {
+    std::move(task_)();
+    return true;
+  }
+
+ private:
+  absl::AnyInvocable<void() &&> task_;
+};
+
+std::unique_ptr<QueuedTask> ToLegacy(absl::AnyInvocable<void() &&> task) {
+  return std::make_unique<Task>(std::move(task));
+}
+
+absl::AnyInvocable<void() &&> FromLegacy(std::unique_ptr<QueuedTask> task) {
+  return [task = std::move(task)]() mutable {
+    if (!task->Run()) {
+      task.release();
+    }
+  };
+}
+
+}  // namespace
+
+void TaskQueueBase::PostTask(std::unique_ptr<QueuedTask> task) {
+  Add(FromLegacy(std::move(task)));
+}
+
+void TaskQueueBase::Add(absl::AnyInvocable<void() &&> task) {
+  PostTask(ToLegacy(std::move(task)));
+}
+
+void TaskQueueBase::PostDelayedTask(std::unique_ptr<QueuedTask> task,
+                                    uint32_t milliseconds) {
+  AddDelayed(FromLegacy(std::move(task)), TimeDelta::Millis(milliseconds));
+}
+
+void TaskQueueBase::AddDelayed(absl::AnyInvocable<void() &&> task,
+                               TimeDelta delay) {
+  PostDelayedTask(ToLegacy(std::move(task)), delay.ms());
+}
+
+void TaskQueueBase::AddWithHighPrecisionDelay(
+    absl::AnyInvocable<void() &&> task,
+    TimeDelta delay) {
+  PostDelayedHighPrecisionTask(ToLegacy(std::move(task)), delay.ms());
+}
+
+}  // namespace webrtc

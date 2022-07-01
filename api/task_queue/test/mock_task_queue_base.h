@@ -13,18 +13,36 @@
 
 #include <memory>
 
+#include "absl/functional/any_invocable.h"
 #include "api/task_queue/task_queue_base.h"
+#include "api/units/time_delta.h"
 #include "test/gmock.h"
 
 namespace webrtc {
 
 class MockTaskQueueBase : public TaskQueueBase {
  public:
-  MOCK_METHOD0(Delete, void());
-  MOCK_METHOD1(PostTask, void(std::unique_ptr<QueuedTask>));
-  MOCK_METHOD2(PostDelayedTask, void(std::unique_ptr<QueuedTask>, uint32_t));
-  MOCK_METHOD2(PostDelayedHighPrecisionTask,
-               void(std::unique_ptr<QueuedTask>, uint32_t));
+  MOCK_METHOD(void, Delete, (), (override));
+  // Deprecated interface.
+  MOCK_METHOD(void, PostTask, (std::unique_ptr<QueuedTask>), (override));
+  MOCK_METHOD(void,
+              PostDelayedTask,
+              (std::unique_ptr<QueuedTask>, uint32_t),
+              (override));
+  MOCK_METHOD(void,
+              PostDelayedHighPrecisionTask,
+              (std::unique_ptr<QueuedTask>, uint32_t),
+              (override));
+  // Fresh interface.
+  MOCK_METHOD(void, Add, (absl::AnyInvocable<void() &&>), (override));
+  MOCK_METHOD(void,
+              AddDelayed,
+              (absl::AnyInvocable<void() &&>, TimeDelta),
+              (override));
+  MOCK_METHOD(void,
+              AddWithHighPrecisionDelay,
+              (absl::AnyInvocable<void() &&>, TimeDelta),
+              (override));
 };
 
 }  // namespace webrtc
