@@ -63,6 +63,30 @@
       },
       "revId": "f025df0db8b7992db98c281297c09d3bcf8d9eea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d7e115b_1c6fc576",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-01T07:34:47Z",
+      "side": 1,
+      "message": "At least, there\u0027s coverage via the new L3T2 e2e test. Unit test would be nice, but I\u0027m not able to do that now.",
+      "parentUuid": "a9b07ce0_65f2d202",
+      "range": {
+        "startLine": 469,
+        "startChar": 36,
+        "endLine": 469,
+        "endChar": 55
+      },
+      "revId": "f025df0db8b7992db98c281297c09d3bcf8d9eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
