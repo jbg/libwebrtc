@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "609dbbf5_19710c2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-07-02T12:29:02Z",
+      "side": 1,
+      "message": "Hi, mirko. I\u0027m not sure if network_tester is currently being used, but it needs some cleanup for the https://bugs.webrtc.org/13145 issue. PTAL. Thanks.",
+      "revId": "dfcf688c202c852ca7471520a36e426e7b1eeaa4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
