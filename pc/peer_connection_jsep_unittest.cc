@@ -77,11 +77,13 @@ using ::testing::ElementsAre;
 using ::testing::UnorderedElementsAre;
 using ::testing::Values;
 
-PeerConnectionFactoryDependencies CreatePeerConnectionFactoryDependencies() {
+PeerConnectionFactoryDependencies CreatePeerConnectionFactoryDependencies(
+    rtc::SocketServer* socket_server) {
   PeerConnectionFactoryDependencies dependencies;
   dependencies.worker_thread = rtc::Thread::Current();
   dependencies.network_thread = rtc::Thread::Current();
   dependencies.signaling_thread = rtc::Thread::Current();
+  dependencies.socket_server = socket_server;
   dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
   dependencies.trials = std::make_unique<FieldTrialBasedConfig>();
   cricket::MediaEngineDependencies media_deps;
@@ -115,7 +117,7 @@ class PeerConnectionJsepTest : public ::testing::Test {
   WrapperPtr CreatePeerConnection(const RTCConfiguration& config) {
     rtc::scoped_refptr<PeerConnectionFactoryInterface> pc_factory =
         CreateModularPeerConnectionFactory(
-            CreatePeerConnectionFactoryDependencies());
+            CreatePeerConnectionFactoryDependencies(vss_.get()));
     auto observer = std::make_unique<MockPeerConnectionObserver>();
     auto result = pc_factory->CreatePeerConnectionOrError(
         config, PeerConnectionDependencies(observer.get()));
