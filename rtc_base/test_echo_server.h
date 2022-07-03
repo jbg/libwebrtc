@@ -31,7 +31,7 @@ namespace rtc {
 // Useful for unit tests.
 class TestEchoServer : public sigslot::has_slots<> {
  public:
-  TestEchoServer(Thread* thread, const SocketAddress& addr);
+  TestEchoServer(SocketServer* socket_server, const SocketAddress& addr);
   ~TestEchoServer() override;
 
   TestEchoServer(const TestEchoServer&) = delete;

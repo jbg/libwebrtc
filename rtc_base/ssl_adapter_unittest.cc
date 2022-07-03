@@ -32,10 +32,11 @@ using ::testing::Return;
 
 static const int kTimeout = 5000;
 
-static rtc::Socket* CreateSocket(const rtc::SSLMode& ssl_mode) {
+static rtc::Socket* CreateSocket(rtc::SocketServer* socket_server,
+                                 const rtc::SSLMode& ssl_mode) {
   rtc::SocketAddress address(rtc::IPAddress(INADDR_ANY), 0);
 
-  rtc::Socket* socket = rtc::Thread::Current()->socketserver()->CreateSocket(
+  rtc::Socket* socket = socket_server->CreateSocket(
       address.family(),
       (ssl_mode == rtc::SSL_MODE_DTLS) ? SOCK_DGRAM : SOCK_STREAM);
   socket->Bind(address);
@@ -58,9 +59,10 @@ class MockCertVerifier : public rtc::SSLCertificateVerifier {
 // duplicate test cases for simple parameter changes.
 class SSLAdapterTestDummyClient : public sigslot::has_slots<> {
  public:
-  explicit SSLAdapterTestDummyClient(const rtc::SSLMode& ssl_mode)
+  explicit SSLAdapterTestDummyClient(rtc::SocketServer* socket_server,
+                                     const rtc::SSLMode& ssl_mode)
       : ssl_mode_(ssl_mode) {
-    rtc::Socket* socket = CreateSocket(ssl_mode_);
+    rtc::Socket* socket = CreateSocket(socket_server, ssl_mode_);
 
     ssl_adapter_.reset(rtc::SSLAdapter::Create(socket));
 
@@ -159,13 +161,14 @@ class SSLAdapterTestDummyClient : public sigslot::has_slots<> {
 
 class SSLAdapterTestDummyServer : public sigslot::has_slots<> {
  public:
-  explicit SSLAdapterTestDummyServer(const rtc::SSLMode& ssl_mode,
+  explicit SSLAdapterTestDummyServer(rtc::SocketServer* socket_server,
+                                     const rtc::SSLMode& ssl_mode,
                                      const rtc::KeyParams& key_params)
       : ssl_mode_(ssl_mode) {
     // Generate a key pair and a certificate for this host.
     ssl_identity_ = rtc::SSLIdentity::Create(GetHostname(), key_params);
 
-    server_socket_.reset(CreateSocket(ssl_mode_));
+    server_socket_.reset(CreateSocket(socket_server, ssl_mode_));
 
     if (ssl_mode_ == rtc::SSL_MODE_TLS) {
       server_socket_->SignalReadEvent.connect(
@@ -298,8 +301,9 @@ class SSLAdapterTestBase : public ::testing::Test, public sigslot::has_slots<> {
       : ssl_mode_(ssl_mode),
         vss_(new rtc::VirtualSocketServer()),
         thread_(vss_.get()),
-        server_(new SSLAdapterTestDummyServer(ssl_mode_, key_params)),
-        client_(new SSLAdapterTestDummyClient(ssl_mode_)),
+        server_(
+            new SSLAdapterTestDummyServer(vss_.get(), ssl_mode_, key_params)),
+        client_(new SSLAdapterTestDummyClient(vss_.get(), ssl_mode_)),
         handshake_wait_(kTimeout) {}
 
   void SetHandshakeWait(int wait) { handshake_wait_ = wait; }
