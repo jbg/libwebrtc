@@ -34,6 +34,8 @@ EmulatedNetworkManager::EmulatedNetworkManager(
       std::make_unique<rtc::BasicPacketSocketFactory>(socket_server.get());
   // Since we pass ownership of the socket server to `network_thread_`, we must
   // arrange that it outlives `packet_socket_factory_` which refers to it.
+  socket_server_ =
+      socket_server.get();  // Ownership is taken by network_thread_
   network_thread_ =
       time_controller->CreateThread("net_thread", std::move(socket_server));
 }
