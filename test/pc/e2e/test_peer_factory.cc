@@ -224,11 +224,13 @@ PeerConnectionFactoryDependencies CreatePCFDependencies(
     std::unique_ptr<cricket::MediaEngineInterface> media_engine,
     rtc::Thread* signaling_thread,
     rtc::Thread* worker_thread,
-    rtc::Thread* network_thread) {
+    rtc::Thread* network_thread,
+    rtc::SocketServer* socket_server) {
   PeerConnectionFactoryDependencies pcf_deps;
   pcf_deps.signaling_thread = signaling_thread;
   pcf_deps.worker_thread = worker_thread;
   pcf_deps.network_thread = network_thread;
+  pcf_deps.socket_server = socket_server;
   pcf_deps.media_engine = std::move(media_engine);
 
   pcf_deps.call_factory = std::move(pcf_dependencies->call_factory);
@@ -351,7 +353,8 @@ std::unique_ptr<TestPeer> TestPeerFactory::CreateTestPeer(
       components->pcf_dependencies->audio_processing;
   PeerConnectionFactoryDependencies pcf_deps = CreatePCFDependencies(
       std::move(components->pcf_dependencies), std::move(media_engine),
-      signaling_thread_, worker_thread.get(), components->network_thread);
+      signaling_thread_, worker_thread.get(), components->network_thread,
+      components->socket_server);
   rtc::scoped_refptr<PeerConnectionFactoryInterface> peer_connection_factory =
       CreateModularPeerConnectionFactory(std::move(pcf_deps));
 

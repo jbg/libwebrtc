@@ -132,7 +132,8 @@ class EmulatedNetworkManagerInterface {
   // by EmulatedNetworkManagerInterface implementation.
   virtual rtc::PacketSocketFactory* packet_socket_factory() = 0;
   webrtc::webrtc_pc_e2e::PeerNetworkDependencies network_dependencies() {
-    return {network_thread(), network_manager(), packet_socket_factory()};
+    return {network_thread(), socket_server(), network_manager(),
+            packet_socket_factory()};
   }
   // Returns list of endpoints that are associated with this instance. Pointers
   // are guaranteed to be non-null and are owned by NetworkEmulationManager.

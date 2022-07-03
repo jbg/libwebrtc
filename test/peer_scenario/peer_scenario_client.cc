@@ -237,6 +237,7 @@ PeerScenarioClient::PeerScenarioClient(
   pcf_deps.network_thread = manager->network_thread();
   pcf_deps.signaling_thread = signaling_thread_;
   pcf_deps.worker_thread = worker_thread_.get();
+  pcf_deps.socket_server = manager->socket_server();
   pcf_deps.call_factory =
       CreateTimeControllerBasedCallFactory(net->time_controller());
   pcf_deps.task_queue_factory =

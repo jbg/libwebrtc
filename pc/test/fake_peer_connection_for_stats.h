@@ -146,12 +146,12 @@ class FakePeerConnectionForStats : public FakePeerConnectionBase {
  public:
   // TODO(steveanton): Add support for specifying separate threads to test
   // multi-threading correctness.
-  FakePeerConnectionForStats()
+  explicit FakePeerConnectionForStats(rtc::SocketServer* socket_server)
       : network_thread_(rtc::Thread::Current()),
         worker_thread_(rtc::Thread::Current()),
         signaling_thread_(rtc::Thread::Current()),
         // TODO(hta): remove separate thread variables and use context.
-        dependencies_(MakeDependencies()),
+        dependencies_(MakeDependencies(socket_server)),
         context_(ConnectionContext::Create(&dependencies_)),
         local_streams_(StreamCollection::Create()),
         remote_streams_(StreamCollection::Create()) {}
@@ -162,11 +162,13 @@ class FakePeerConnectionForStats : public FakePeerConnectionBase {
     }
   }
 
-  static PeerConnectionFactoryDependencies MakeDependencies() {
+  static PeerConnectionFactoryDependencies MakeDependencies(
+      rtc::SocketServer* socket_server) {
     PeerConnectionFactoryDependencies dependencies;
     dependencies.network_thread = rtc::Thread::Current();
     dependencies.worker_thread = rtc::Thread::Current();
     dependencies.signaling_thread = rtc::Thread::Current();
+    dependencies.socket_server = socket_server;
     return dependencies;
   }
 

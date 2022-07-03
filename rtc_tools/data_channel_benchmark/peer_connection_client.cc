@@ -134,7 +134,7 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface>
 PeerConnectionClient::CreateDefaultFactory(rtc::Thread* signaling_thread) {
   auto factory = webrtc::CreatePeerConnectionFactory(
       /*network_thread=*/nullptr, /*worker_thread=*/nullptr,
-      /*signaling_thread*/ signaling_thread,
+      /*signaling_thread*/ signaling_thread, nullptr,
       /*default_adm=*/nullptr, webrtc::CreateBuiltinAudioEncoderFactory(),
       webrtc::CreateBuiltinAudioDecoderFactory(),
       webrtc::CreateBuiltinVideoEncoderFactory(),

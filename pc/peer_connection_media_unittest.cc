@@ -107,18 +107,20 @@ class PeerConnectionMediaBaseTest : public ::testing::Test {
   }
 
   WrapperPtr CreatePeerConnection(const RTCConfiguration& config) {
-    return CreatePeerConnection(config, std::make_unique<FakeMediaEngine>());
+    return CreatePeerConnection(config, std::make_unique<FakeMediaEngine>(),
+                                vss_.get());
   }
 
   WrapperPtr CreatePeerConnection(
       std::unique_ptr<FakeMediaEngine> media_engine) {
-    return CreatePeerConnection(RTCConfiguration(), std::move(media_engine));
+    return CreatePeerConnection(RTCConfiguration(), std::move(media_engine),
+                                vss_.get());
   }
 
   // Creates PeerConnectionFactory and PeerConnection for given configuration.
-  WrapperPtr CreatePeerConnection(
-      const RTCConfiguration& config,
-      std::unique_ptr<FakeMediaEngine> media_engine) {
+  WrapperPtr CreatePeerConnection(const RTCConfiguration& config,
+                                  std::unique_ptr<FakeMediaEngine> media_engine,
+                                  rtc::SocketServer* socket_server) {
     auto* media_engine_ptr = media_engine.get();
 
     PeerConnectionFactoryDependencies factory_dependencies;
@@ -126,6 +128,7 @@ class PeerConnectionMediaBaseTest : public ::testing::Test {
     factory_dependencies.network_thread = rtc::Thread::Current();
     factory_dependencies.worker_thread = rtc::Thread::Current();
     factory_dependencies.signaling_thread = rtc::Thread::Current();
+    factory_dependencies.socket_server = socket_server;
     factory_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
     factory_dependencies.media_engine = std::move(media_engine);
     factory_dependencies.call_factory = CreateCallFactory();

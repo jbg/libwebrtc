@@ -622,11 +622,12 @@ class MockTrackObserver : public ObserverInterface {
 class PeerConnectionFactoryForTest : public webrtc::PeerConnectionFactory {
  public:
   static rtc::scoped_refptr<PeerConnectionFactoryForTest>
-  CreatePeerConnectionFactoryForTest() {
+  CreatePeerConnectionFactoryForTest(rtc::SocketServer* socket_server) {
     PeerConnectionFactoryDependencies dependencies;
     dependencies.worker_thread = rtc::Thread::Current();
     dependencies.network_thread = rtc::Thread::Current();
     dependencies.signaling_thread = rtc::Thread::Current();
+    dependencies.socket_server = socket_server;
     dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
     dependencies.trials = std::make_unique<FieldTrialBasedConfig>();
     cricket::MediaEngineDependencies media_deps;
@@ -670,6 +671,7 @@ class PeerConnectionInterfaceBaseTest : public ::testing::Test {
     fake_audio_capture_module_ = FakeAudioCaptureModule::Create();
     pc_factory_ = webrtc::CreatePeerConnectionFactory(
         rtc::Thread::Current(), rtc::Thread::Current(), rtc::Thread::Current(),
+        vss_.get(),
         rtc::scoped_refptr<webrtc::AudioDeviceModule>(
             fake_audio_capture_module_),
         webrtc::CreateBuiltinAudioEncoderFactory(),
@@ -679,7 +681,8 @@ class PeerConnectionInterfaceBaseTest : public ::testing::Test {
         nullptr /* audio_processing */);
     ASSERT_TRUE(pc_factory_);
     pc_factory_for_test_ =
-        PeerConnectionFactoryForTest::CreatePeerConnectionFactoryForTest();
+        PeerConnectionFactoryForTest::CreatePeerConnectionFactoryForTest(
+            vss_.get());
   }
 
   void TearDown() override {
@@ -1385,7 +1388,7 @@ TEST_P(PeerConnectionInterfaceTest,
   rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> pc_factory(
       webrtc::CreatePeerConnectionFactory(
           rtc::Thread::Current(), rtc::Thread::Current(),
-          rtc::Thread::Current(), fake_audio_capture_module_,
+          rtc::Thread::Current(), socket_server(), fake_audio_capture_module_,
           webrtc::CreateBuiltinAudioEncoderFactory(),
           webrtc::CreateBuiltinAudioDecoderFactory(),
           webrtc::CreateBuiltinVideoEncoderFactory(),
@@ -3657,7 +3660,8 @@ INSTANTIATE_TEST_SUITE_P(PeerConnectionInterfaceTest,
 class PeerConnectionMediaConfigTest : public ::testing::Test {
  protected:
   void SetUp() override {
-    pcf_ = PeerConnectionFactoryForTest::CreatePeerConnectionFactoryForTest();
+    pcf_ = PeerConnectionFactoryForTest::CreatePeerConnectionFactoryForTest(
+        nullptr);
   }
   const cricket::MediaConfig TestCreatePeerConnection(
       const RTCConfiguration& config) {

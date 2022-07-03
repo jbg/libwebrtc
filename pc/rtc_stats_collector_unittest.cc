@@ -59,6 +59,7 @@
 #include "rtc_base/fake_clock.h"
 #include "rtc_base/fake_ssl_identity.h"
 #include "rtc_base/gunit.h"
+#include "rtc_base/internal/default_socket_server.h"
 #include "rtc_base/network_constants.h"
 #include "rtc_base/ref_counted_object.h"
 #include "rtc_base/rtc_certificate.h"
@@ -654,7 +655,10 @@ class RTCStatsCollectorWrapper {
 class RTCStatsCollectorTest : public ::testing::Test {
  public:
   RTCStatsCollectorTest()
-      : pc_(rtc::make_ref_counted<FakePeerConnectionForStats>()),
+      : socket_server_(rtc::CreateDefaultSocketServer()),
+        main_thread_(socket_server_.get()),
+        pc_(rtc::make_ref_counted<FakePeerConnectionForStats>(
+            socket_server_.get())),
         stats_(new RTCStatsCollectorWrapper(pc_)) {}
 
   void ExpectReportContainsCertificateInfo(
@@ -916,7 +920,8 @@ class RTCStatsCollectorTest : public ::testing::Test {
 
  protected:
   rtc::ScopedFakeClock fake_clock_;
-  rtc::AutoThread main_thread_;
+  std::unique_ptr<rtc::SocketServer> socket_server_;
+  rtc::AutoSocketServerThread main_thread_;
   rtc::scoped_refptr<FakePeerConnectionForStats> pc_;
   std::unique_ptr<RTCStatsCollectorWrapper> stats_;
 };
@@ -3567,8 +3572,11 @@ class FakeRTCStatsCollector : public RTCStatsCollector,
 };
 
 TEST(RTCStatsCollectorTestWithFakeCollector, ThreadUsageAndResultsMerging) {
-  rtc::AutoThread main_thread_;
-  auto pc = rtc::make_ref_counted<FakePeerConnectionForStats>();
+  std::unique_ptr<rtc::SocketServer> socket_server =
+      rtc::CreateDefaultSocketServer();
+  rtc::AutoSocketServerThread main_thread(socket_server.get());
+  auto pc =
+      rtc::make_ref_counted<FakePeerConnectionForStats>(socket_server.get());
   rtc::scoped_refptr<FakeRTCStatsCollector> stats_collector(
       FakeRTCStatsCollector::Create(pc.get(),
                                     50 * rtc::kNumMicrosecsPerMillisec));

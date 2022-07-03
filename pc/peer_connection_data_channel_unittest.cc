@@ -58,11 +58,13 @@ using ::testing::Values;
 
 namespace {
 
-PeerConnectionFactoryDependencies CreatePeerConnectionFactoryDependencies() {
+PeerConnectionFactoryDependencies CreatePeerConnectionFactoryDependencies(
+    rtc::SocketServer* socket_server) {
   PeerConnectionFactoryDependencies deps;
   deps.network_thread = rtc::Thread::Current();
   deps.worker_thread = rtc::Thread::Current();
   deps.signaling_thread = rtc::Thread::Current();
+  deps.socket_server = socket_server;
   deps.task_queue_factory = CreateDefaultTaskQueueFactory();
   deps.media_engine = std::make_unique<cricket::FakeMediaEngine>();
   deps.call_factory = CreateCallFactory();
@@ -129,7 +131,7 @@ class PeerConnectionDataChannelBaseTest : public ::testing::Test {
   WrapperPtr CreatePeerConnection(
       const RTCConfiguration& config,
       const PeerConnectionFactoryInterface::Options factory_options) {
-    auto factory_deps = CreatePeerConnectionFactoryDependencies();
+    auto factory_deps = CreatePeerConnectionFactoryDependencies(vss_.get());
     FakeSctpTransportFactory* fake_sctp_transport_factory =
         static_cast<FakeSctpTransportFactory*>(factory_deps.sctp_factory.get());
     rtc::scoped_refptr<PeerConnectionFactoryInterface> pc_factory =
