@@ -88,6 +88,7 @@ class PeerConnectionHeaderExtensionTest
     factory_dependencies.network_thread = rtc::Thread::Current();
     factory_dependencies.worker_thread = rtc::Thread::Current();
     factory_dependencies.signaling_thread = rtc::Thread::Current();
+    factory_dependencies.socket_server = socket_server_.get();
     factory_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
     factory_dependencies.media_engine = std::move(media_engine);
     factory_dependencies.call_factory = CreateCallFactory();

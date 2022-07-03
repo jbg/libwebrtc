@@ -76,12 +76,14 @@ int MakeUsageFingerprint(std::set<UsageEvent> events) {
 class PeerConnectionFactoryForUsageHistogramTest
     : public PeerConnectionFactory {
  public:
-  PeerConnectionFactoryForUsageHistogramTest()
-      : PeerConnectionFactory([] {
+  explicit PeerConnectionFactoryForUsageHistogramTest(
+      rtc::SocketServer* socket_server)
+      : PeerConnectionFactory([socket_server] {
           PeerConnectionFactoryDependencies dependencies;
           dependencies.network_thread = rtc::Thread::Current();
           dependencies.worker_thread = rtc::Thread::Current();
           dependencies.signaling_thread = rtc::Thread::Current();
+          dependencies.socket_server = socket_server;
           dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
           dependencies.media_engine =
               std::make_unique<cricket::FakeMediaEngine>();
@@ -334,7 +336,8 @@ class PeerConnectionUsageHistogramTest : public ::testing::Test {
       const PeerConnectionFactoryInterface::Options factory_options,
       PeerConnectionDependencies deps) {
     auto pc_factory =
-        rtc::make_ref_counted<PeerConnectionFactoryForUsageHistogramTest>();
+        rtc::make_ref_counted<PeerConnectionFactoryForUsageHistogramTest>(
+            vss_.get());
     pc_factory->SetOptions(factory_options);
 
     // If no allocator is provided, one will be created using a network manager

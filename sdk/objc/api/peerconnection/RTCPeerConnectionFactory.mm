@@ -40,6 +40,7 @@
 #include "media/engine/webrtc_media_engine.h"
 #include "modules/audio_device/include/audio_device.h"
 #include "modules/audio_processing/include/audio_processing.h"
+#include "rtc_base/internal/default_socket_server.h"
 
 #include "sdk/objc/native/api/video_decoder_factory.h"
 #include "sdk/objc/native/api/video_encoder_factory.h"
@@ -51,6 +52,7 @@
 #endif
 
 @implementation RTC_OBJC_TYPE (RTCPeerConnectionFactory) {
+  std::unique_ptr<rtc::SocketServer> _socketServer;
   std::unique_ptr<rtc::Thread> _networkThread;
   std::unique_ptr<rtc::Thread> _workerThread;
   std::unique_ptr<rtc::Thread> _signalingThread;
@@ -99,7 +101,8 @@
 }
 - (instancetype)initNative {
   if (self = [super init]) {
-    _networkThread = rtc::Thread::CreateWithSocketServer();
+    _socketServer = rtc::CreateDefaultSocketServer();
+    _networkThread.reset(new rtc::Thread(_socketServer.get()));
     _networkThread->SetName("network_thread", _networkThread.get());
     BOOL result = _networkThread->Start();
     RTC_DCHECK(result) << "Failed to start network thread.";
@@ -123,6 +126,7 @@
     dependencies.network_thread = _networkThread.get();
     dependencies.worker_thread = _workerThread.get();
     dependencies.signaling_thread = _signalingThread.get();
+    dependencies.socket_server = _socketServer.get();
     if (webrtc::field_trial::IsEnabled("WebRTC-Network-UseNWPathMonitor")) {
       dependencies.network_monitor_factory = webrtc::CreateNetworkMonitorFactory();
     }
@@ -170,6 +174,7 @@
     dependencies.network_thread = _networkThread.get();
     dependencies.worker_thread = _workerThread.get();
     dependencies.signaling_thread = _signalingThread.get();
+    dependencies.socket_server = _socketServer.get();
     if (webrtc::field_trial::IsEnabled("WebRTC-Network-UseNWPathMonitor")) {
       dependencies.network_monitor_factory = webrtc::CreateNetworkMonitorFactory();
     }

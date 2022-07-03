@@ -38,6 +38,7 @@
 #include "pc/transport_stats.h"
 #include "pc/video_track.h"
 #include "rtc_base/fake_ssl_identity.h"
+#include "rtc_base/internal/default_socket_server.h"
 #include "rtc_base/message_digest.h"
 #include "rtc_base/net_helper.h"
 #include "rtc_base/rtc_certificate.h"
@@ -596,8 +597,13 @@ class StatsCollectorForTest : public StatsCollector {
 
 class StatsCollectorTest : public ::testing::Test {
  protected:
+  StatsCollectorTest()
+      : socket_server_(rtc::CreateDefaultSocketServer()),
+        main_thread_(socket_server_.get()) {}
+
   rtc::scoped_refptr<FakePeerConnectionForStats> CreatePeerConnection() {
-    return rtc::make_ref_counted<FakePeerConnectionForStats>();
+    return rtc::make_ref_counted<FakePeerConnectionForStats>(
+        socket_server_.get());
   }
 
   std::unique_ptr<StatsCollectorForTest> CreateStatsCollector(
@@ -732,7 +738,8 @@ class StatsCollectorTest : public ::testing::Test {
   }
 
  private:
-  rtc::AutoThread main_thread_;
+  std::unique_ptr<rtc::SocketServer> socket_server_;
+  rtc::AutoSocketServerThread main_thread_;
 };
 
 static rtc::scoped_refptr<MockRtpSenderInternal> CreateMockSender(

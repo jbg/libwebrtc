@@ -45,10 +45,12 @@ class PeerConfigurerImpl final
                     PeerConnectionE2EQualityTestFixture::CapturingDeviceIndex>;
 
   PeerConfigurerImpl(rtc::Thread* network_thread,
+                     rtc::SocketServer* socket_server,
                      rtc::NetworkManager* network_manager,
                      rtc::PacketSocketFactory* packet_socket_factory)
       : components_(
             std::make_unique<InjectableComponents>(network_thread,
+                                                   socket_server,
                                                    network_manager,
                                                    packet_socket_factory)),
         params_(std::make_unique<Params>()),

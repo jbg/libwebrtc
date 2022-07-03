@@ -92,9 +92,11 @@ struct PeerConnectionComponents {
 // has a network thread, that will be used to communicate with another peers.
 struct InjectableComponents {
   InjectableComponents(rtc::Thread* network_thread,
+                       rtc::SocketServer* socket_server,
                        rtc::NetworkManager* network_manager,
                        rtc::PacketSocketFactory* packet_socket_factory)
       : network_thread(network_thread),
+        socket_server(socket_server),
         pcf_dependencies(std::make_unique<PeerConnectionFactoryComponents>()),
         pc_dependencies(
             std::make_unique<PeerConnectionComponents>(network_manager,
@@ -103,6 +105,7 @@ struct InjectableComponents {
   }
 
   rtc::Thread* const network_thread;
+  rtc::SocketServer* const socket_server;
 
   std::unique_ptr<PeerConnectionFactoryComponents> pcf_dependencies;
   std::unique_ptr<PeerConnectionComponents> pc_dependencies;

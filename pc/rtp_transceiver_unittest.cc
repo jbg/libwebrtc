@@ -24,6 +24,7 @@
 #include "pc/test/mock_channel_interface.h"
 #include "pc/test/mock_rtp_receiver_internal.h"
 #include "pc/test/mock_rtp_sender_internal.h"
+#include "rtc_base/internal/default_socket_server.h"
 #include "rtc_base/thread.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
@@ -42,7 +43,9 @@ namespace {
 class RtpTransceiverTest : public testing::Test {
  public:
   RtpTransceiverTest()
-      : dependencies_(MakeDependencies()),
+      : socket_server_(rtc::CreateDefaultSocketServer()),
+        main_thread_(socket_server_.get()),
+        dependencies_(MakeDependencies(socket_server_.get())),
         context_(ConnectionContext::Create(&dependencies_)) {}
 
  protected:
@@ -52,13 +55,16 @@ class RtpTransceiverTest : public testing::Test {
   ConnectionContext* context() { return context_.get(); }
 
  private:
-  rtc::AutoThread main_thread_;
+  std::unique_ptr<rtc::SocketServer> socket_server_;
+  rtc::AutoSocketServerThread main_thread_;
 
-  static PeerConnectionFactoryDependencies MakeDependencies() {
+  static PeerConnectionFactoryDependencies MakeDependencies(
+      rtc::SocketServer* socket_server) {
     PeerConnectionFactoryDependencies d;
     d.network_thread = rtc::Thread::Current();
     d.worker_thread = rtc::Thread::Current();
     d.signaling_thread = rtc::Thread::Current();
+    d.socket_server = socket_server;
     d.media_engine = std::make_unique<cricket::FakeMediaEngine>();
     return d;
   }

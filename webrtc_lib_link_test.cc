@@ -77,7 +77,8 @@ void TestCase2RegularFactory() {
 
   auto peer_connection_factory = webrtc::CreatePeerConnectionFactory(
       rtc::Thread::Current(), rtc::Thread::Current(), rtc::Thread::Current(),
-      std::move(media_deps.adm), std::move(media_deps.audio_encoder_factory),
+      nullptr, std::move(media_deps.adm),
+      std::move(media_deps.audio_encoder_factory),
       std::move(media_deps.audio_decoder_factory),
       std::move(media_deps.video_encoder_factory),
       std::move(media_deps.video_decoder_factory), nullptr, nullptr);

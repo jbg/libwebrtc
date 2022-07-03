@@ -137,13 +137,6 @@ ConnectionContext::ConnectionContext(
   if (socket_server == nullptr) {
     if (owned_socket_server_) {
       socket_server = owned_socket_server_.get();
-    } else {
-      // TODO(bugs.webrtc.org/13145): This case should be deleted. Either
-      // require that a PacketSocketFactory and NetworkManager always are
-      // injected (with no need to construct these default objects), or require
-      // that if a network_thread is injected, an approprite rtc::SocketServer
-      // should be injected too.
-      socket_server = network_thread()->socketserver();
     }
   }
   if (!default_network_manager_) {

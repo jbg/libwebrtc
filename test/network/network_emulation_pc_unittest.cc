@@ -53,7 +53,8 @@ bool AddIceCandidates(PeerConnectionWrapper* peer,
 
 rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
     rtc::Thread* signaling_thread,
-    rtc::Thread* network_thread) {
+    rtc::Thread* network_thread,
+    rtc::SocketServer* socket_server) {
   PeerConnectionFactoryDependencies pcf_deps;
   pcf_deps.task_queue_factory = CreateDefaultTaskQueueFactory();
   pcf_deps.call_factory = CreateCallFactory();
@@ -61,6 +62,7 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
       std::make_unique<RtcEventLogFactory>(pcf_deps.task_queue_factory.get());
   pcf_deps.network_thread = network_thread;
   pcf_deps.signaling_thread = signaling_thread;
+  pcf_deps.socket_server = socket_server;
   pcf_deps.trials = std::make_unique<FieldTrialBasedConfig>();
   cricket::MediaEngineDependencies media_deps;
   media_deps.task_queue_factory = pcf_deps.task_queue_factory.get();
@@ -148,13 +150,15 @@ TEST(NetworkEmulationManagerPCTest, Run) {
 
   signaling_thread->Invoke<void>(RTC_FROM_HERE, [&]() {
     alice_pcf = CreatePeerConnectionFactory(signaling_thread.get(),
-                                            alice_network->network_thread());
+                                            alice_network->network_thread(),
+                                            alice_network->socket_server());
     alice_pc = CreatePeerConnection(alice_pcf, alice_observer.get(),
                                     alice_network->packet_socket_factory(),
                                     alice_network->network_manager());
 
     bob_pcf = CreatePeerConnectionFactory(signaling_thread.get(),
-                                          bob_network->network_thread());
+                                          bob_network->network_thread(),
+                                          bob_network->socket_server());
     bob_pc = CreatePeerConnection(bob_pcf, bob_observer.get(),
                                   bob_network->packet_socket_factory(),
                                   bob_network->network_manager());
@@ -258,13 +262,15 @@ TEST(NetworkEmulationManagerPCTest, RunTURN) {
 
   signaling_thread->Invoke<void>(RTC_FROM_HERE, [&]() {
     alice_pcf = CreatePeerConnectionFactory(signaling_thread.get(),
-                                            alice_network->network_thread());
+                                            alice_network->network_thread(),
+                                            alice_network->socket_server());
     alice_pc = CreatePeerConnection(
         alice_pcf, alice_observer.get(), alice_network->packet_socket_factory(),
         alice_network->network_manager(), alice_turn);
 
     bob_pcf = CreatePeerConnectionFactory(signaling_thread.get(),
-                                          bob_network->network_thread());
+                                          bob_network->network_thread(),
+                                          bob_network->socket_server());
     bob_pc = CreatePeerConnection(bob_pcf, bob_observer.get(),
                                   bob_network->packet_socket_factory(),
                                   bob_network->network_manager(), bob_turn);

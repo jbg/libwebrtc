@@ -22,6 +22,7 @@ namespace webrtc_pc_e2e {
 // PeerConnectionE2EQualityTestFixture.
 struct PeerNetworkDependencies {
   rtc::Thread* network_thread;
+  rtc::SocketServer* socket_server;
   rtc::NetworkManager* network_manager;
   rtc::PacketSocketFactory* packet_socket_factory;
 };
