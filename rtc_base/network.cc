@@ -509,15 +509,17 @@ bool NetworkManagerBase::IsVpnMacAddress(
 
 BasicNetworkManager::BasicNetworkManager(
     NetworkMonitorFactory* network_monitor_factory,
-    SocketFactory* socket_factory,
+    SocketServer* socket_server,
     const webrtc::FieldTrialsView* field_trials)
     : field_trials_(field_trials),
       network_monitor_factory_(network_monitor_factory),
-      socket_factory_(socket_factory),
+      socket_server_(socket_server),
       allow_mac_based_ipv6_(
           field_trials_->IsEnabled("WebRTC-AllowMACBasedIPv6")),
       bind_using_ifname_(
-          !field_trials_->IsDisabled("WebRTC-BindUsingInterfaceName")) {}
+          !field_trials_->IsDisabled("WebRTC-BindUsingInterfaceName")) {
+  RTC_DCHECK(socket_server);
+}
 
 BasicNetworkManager::~BasicNetworkManager() {
   if (task_safety_flag_) {
@@ -955,7 +957,7 @@ void BasicNetworkManager::StartNetworkMonitor() {
     // PhysicalSocket::Bind will call
     // BasicNetworkManager::BindSocketToNetwork(), (that will lookup interface
     // name and then call network_monitor_->BindSocketToNetwork()).
-    thread_->socketserver()->set_network_binder(this);
+    socket_server_->set_network_binder(this);
   }
 
   network_monitor_->Start();
@@ -969,8 +971,8 @@ void BasicNetworkManager::StopNetworkMonitor() {
 
   if (network_monitor_->SupportsBindSocketToNetwork()) {
     // Reset NetworkBinder on SocketServer.
-    if (thread_->socketserver()->network_binder() == this) {
-      thread_->socketserver()->set_network_binder(nullptr);
+    if (socket_server_->network_binder() == this) {
+      socket_server_->set_network_binder(nullptr);
     }
   }
 }
@@ -978,16 +980,8 @@ void BasicNetworkManager::StopNetworkMonitor() {
 IPAddress BasicNetworkManager::QueryDefaultLocalAddress(int family) const {
   RTC_DCHECK(family == AF_INET || family == AF_INET6);
 
-  // TODO(bugs.webrtc.org/13145): Delete support for null `socket_factory_`,
-  // require socket factory to be provided to constructor.
-  SocketFactory* socket_factory = socket_factory_;
-  if (!socket_factory) {
-    socket_factory = thread_->socketserver();
-  }
-  RTC_DCHECK(socket_factory);
-
   std::unique_ptr<Socket> socket(
-      socket_factory->CreateSocket(family, SOCK_DGRAM));
+      socket_server_->CreateSocket(family, SOCK_DGRAM));
   if (!socket) {
     RTC_LOG_ERR(LS_ERROR) << "Socket creation failed";
     return IPAddress();

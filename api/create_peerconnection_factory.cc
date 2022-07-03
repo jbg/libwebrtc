@@ -56,7 +56,7 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
 
   if (network_thread) {
     // TODO(bugs.webrtc.org/13145): Add an rtc::SocketFactory* argument.
-    dependencies.socket_factory = network_thread->socketserver();
+    dependencies.socket_server = network_thread->socketserver();
   }
   cricket::MediaEngineDependencies media_dependencies;
   media_dependencies.task_queue_factory = dependencies.task_queue_factory.get();
