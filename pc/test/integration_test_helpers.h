@@ -777,6 +777,7 @@ class PeerConnectionIntegrationWrapper : public webrtc::PeerConnectionObserver,
     pc_factory_dependencies.network_thread = network_thread;
     pc_factory_dependencies.worker_thread = worker_thread;
     pc_factory_dependencies.signaling_thread = signaling_thread;
+    pc_factory_dependencies.socket_server = socket_server;
     pc_factory_dependencies.task_queue_factory =
         webrtc::CreateDefaultTaskQueueFactory();
     pc_factory_dependencies.trials = std::make_unique<FieldTrialBasedConfig>();
