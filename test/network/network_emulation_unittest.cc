@@ -210,10 +210,10 @@ TEST(NetworkEmulationManagerTest, Run) {
     rtc::Socket* s1 = nullptr;
     rtc::Socket* s2 = nullptr;
     t1->Invoke<void>(RTC_FROM_HERE, [&] {
-      s1 = t1->socketserver()->CreateSocket(AF_INET, SOCK_DGRAM);
+      s1 = nt1->socket_server()->CreateSocket(AF_INET, SOCK_DGRAM);
     });
     t2->Invoke<void>(RTC_FROM_HERE, [&] {
-      s2 = t2->socketserver()->CreateSocket(AF_INET, SOCK_DGRAM);
+      s2 = nt2->socket_server()->CreateSocket(AF_INET, SOCK_DGRAM);
     });
 
     SocketReader r1(s1, t1);
@@ -364,10 +364,10 @@ TEST(NetworkEmulationManagerTest, DebugStatsCollectedInDebugMode) {
     rtc::Socket* s1 = nullptr;
     rtc::Socket* s2 = nullptr;
     t1->Invoke<void>(RTC_FROM_HERE, [&] {
-      s1 = t1->socketserver()->CreateSocket(AF_INET, SOCK_DGRAM);
+      s1 = nt1->socket_server()->CreateSocket(AF_INET, SOCK_DGRAM);
     });
     t2->Invoke<void>(RTC_FROM_HERE, [&] {
-      s2 = t2->socketserver()->CreateSocket(AF_INET, SOCK_DGRAM);
+      s2 = nt2->socket_server()->CreateSocket(AF_INET, SOCK_DGRAM);
     });
 
     SocketReader r1(s1, t1);
@@ -466,10 +466,10 @@ TEST(NetworkEmulationManagerTest, ThroughputStats) {
   rtc::Socket* s1 = nullptr;
   rtc::Socket* s2 = nullptr;
   t1->Invoke<void>(RTC_FROM_HERE, [&] {
-    s1 = t1->socketserver()->CreateSocket(AF_INET, SOCK_DGRAM);
+    s1 = nt1->socket_server()->CreateSocket(AF_INET, SOCK_DGRAM);
   });
   t2->Invoke<void>(RTC_FROM_HERE, [&] {
-    s2 = t2->socketserver()->CreateSocket(AF_INET, SOCK_DGRAM);
+    s2 = nt2->socket_server()->CreateSocket(AF_INET, SOCK_DGRAM);
   });
 
   SocketReader r1(s1, t1);
