@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "871c271e_9074a7c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-03T07:54:35Z",
+      "side": 1,
+      "message": "Overall this looks fine, just some small comments.",
+      "revId": "d60a822140e4e6234aa46afa6c12285e7becd6cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21706204_4aabf743",
+        "filename": "rtc_tools/network_tester/jni.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-03T07:54:35Z",
+      "side": 1,
+      "message": "Nit: this should be /*cms\u003d*/100 (https://google.github.io/styleguide/cppguide.html#Function_Argument_Comments) or a named constant.",
+      "range": {
+        "startLine": 54,
+        "startChar": 42,
+        "endLine": 54,
+        "endChar": 54
+      },
+      "revId": "d60a822140e4e6234aa46afa6c12285e7becd6cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9617f0fe_e38995e0",
+        "filename": "rtc_tools/network_tester/packet_sender.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-03T07:54:35Z",
+      "side": 1,
+      "message": "absl::string_view (https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d13579)?",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 24
+      },
+      "revId": "d60a822140e4e6234aa46afa6c12285e7becd6cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c1e5791_0a358e76",
+        "filename": "rtc_tools/network_tester/server.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-03T07:54:35Z",
+      "side": 1,
+      "message": "Same here (see other comment).",
+      "range": {
+        "startLine": 20,
+        "startChar": 32,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "d60a822140e4e6234aa46afa6c12285e7becd6cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24263456_7a096061",
+        "filename": "rtc_tools/network_tester/test_controller.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-03T07:54:35Z",
+      "side": 1,
+      "message": "Should this be removed or maybe add a more explicit log message?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 38
+      },
+      "revId": "d60a822140e4e6234aa46afa6c12285e7becd6cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9611dbe8_8b686232",
+        "filename": "rtc_tools/network_tester/test_controller.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-03T07:54:35Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 38
+      },
+      "revId": "d60a822140e4e6234aa46afa6c12285e7becd6cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
