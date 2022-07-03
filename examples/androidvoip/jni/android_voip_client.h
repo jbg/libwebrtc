@@ -137,9 +137,7 @@ class AndroidVoipClient : public webrtc::Transport,
 
  private:
   AndroidVoipClient(JNIEnv* env,
-                    const webrtc::JavaParamRef<jobject>& j_voip_client)
-      : voip_thread_(rtc::Thread::CreateWithSocketServer()),
-        j_voip_client_(env, j_voip_client) {}
+                    const webrtc::JavaParamRef<jobject>& j_voip_client);
 
   void Init(JNIEnv* env,
             const webrtc::JavaParamRef<jobject>& application_context);
@@ -159,6 +157,7 @@ class AndroidVoipClient : public webrtc::Transport,
   void ReadRTCPPacket(const std::vector<uint8_t>& packet_copy);
 
   // Used to invoke operations and send/receive RTP/RTCP packets.
+  std::unique_ptr<rtc::SocketServer> socket_server_;
   std::unique_ptr<rtc::Thread> voip_thread_;
   // Reference to the VoipClient java instance used to
   // invoke callbacks when operations are finished.

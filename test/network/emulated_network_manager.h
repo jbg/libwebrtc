@@ -50,6 +50,7 @@ class EmulatedNetworkManager : public rtc::NetworkManagerBase,
   }
 
   // EmulatedNetworkManagerInterface API
+  rtc::SocketServer* socket_server() override { return socket_server_; }
   rtc::Thread* network_thread() override { return network_thread_.get(); }
   rtc::NetworkManager* network_manager() override { return this; }
   rtc::PacketSocketFactory* packet_socket_factory() override {
@@ -72,6 +73,7 @@ class EmulatedNetworkManager : public rtc::NetworkManagerBase,
   // pointers are assigned only in the constructor, but the way they are
   // initialized unfortunately doesn't work with const std::unique_ptr<...>.
   std::unique_ptr<rtc::Thread> network_thread_;
+  rtc::SocketServer* socket_server_;
   std::unique_ptr<rtc::PacketSocketFactory> packet_socket_factory_;
   bool sent_first_update_ RTC_GUARDED_BY(network_thread_);
   int start_count_ RTC_GUARDED_BY(network_thread_);
