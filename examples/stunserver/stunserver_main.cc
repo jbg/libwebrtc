@@ -29,10 +29,12 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  rtc::Thread* pthMain = rtc::Thread::Current();
+  auto [pthMain, socket_server] = rtc::Thread::CurrentWithSocketServer();
+  RTC_DCHECK(pthMain != NULL);
+  RTC_DCHECK(socket_server != NULL);
 
   rtc::AsyncUDPSocket* server_socket =
-      rtc::AsyncUDPSocket::Create(pthMain->socketserver(), server_addr);
+      rtc::AsyncUDPSocket::Create(socket_server, server_addr);
   if (!server_socket) {
     std::cerr << "Failed to create a UDP socket" << std::endl;
     return 1;

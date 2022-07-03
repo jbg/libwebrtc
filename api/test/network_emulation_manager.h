@@ -119,6 +119,7 @@ class EmulatedNetworkManagerInterface {
  public:
   virtual ~EmulatedNetworkManagerInterface() = default;
 
+  virtual rtc::SocketServer* socket_server() = 0;
   // Returns non-null pointer to thread that have to be used as network thread
   // for WebRTC to properly setup network emulation. Returned thread is owned
   // by EmulatedNetworkManagerInterface implementation.
