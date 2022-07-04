@@ -35,7 +35,6 @@
 #include "rtc_tools/rtc_event_log_visualizer/analyzer.h"
 #include "rtc_tools/rtc_event_log_visualizer/plot_base.h"
 #include "system_wrappers/include/field_trial.h"
-#include "test/testsupport/file_utils.h"
 
 ABSL_FLAG(std::string,
           plot,
@@ -467,8 +466,9 @@ int main(int argc, char* argv[]) {
   if (!absl::GetFlag(FLAGS_wav_filename).empty()) {
     wav_path = absl::GetFlag(FLAGS_wav_filename);
   } else {
-    wav_path = webrtc::test::ResourcePath(
-        "audio_processing/conversational_speech/EN_script2_F_sp2_B1", "wav");
+    RTC_FATAL()
+        << "Missing --wav_filename flag. To use with a default conversational "
+           "WAV file, please use the event_log_visualizer_testonly binary.\n";
   }
   absl::optional<webrtc::NetEqStatsGetterMap> neteq_stats;
 
