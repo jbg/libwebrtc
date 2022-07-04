@@ -32,24 +32,28 @@ RTC_POP_IGNORING_WUNDEF()
 
 namespace webrtc {
 
-class WriteToFileTask : public QueuedTask {
+class WriteToFileTask {
  public:
+  WriteToFileTask() = default;
   WriteToFileTask(webrtc::FileWrapper* debug_file,
                   int64_t* num_bytes_left_for_log);
-  ~WriteToFileTask() override;
+  WriteToFileTask(WriteToFileTask&&) = default;
+  WriteToFileTask& operator=(WriteToFileTask&&) = default;
+  ~WriteToFileTask() = default;
 
-  audioproc::Event* GetEvent();
+  audioproc::Event* GetEvent() { return event_.get(); }
+
+  explicit operator bool() const { return event_ != nullptr; }
+  void operator()();
 
  private:
   bool IsRoomForNextEvent(size_t event_byte_size) const;
 
   void UpdateBytesLeft(size_t event_byte_size);
 
-  bool Run() override;
-
-  webrtc::FileWrapper* const debug_file_;
-  audioproc::Event event_;
-  int64_t* const num_bytes_left_for_log_;
+  webrtc::FileWrapper* debug_file_ = nullptr;
+  std::unique_ptr<audioproc::Event> event_;
+  int64_t* num_bytes_left_for_log_ = nullptr;
 };
 
 }  // namespace webrtc

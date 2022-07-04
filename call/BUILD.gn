@@ -301,6 +301,7 @@ rtc_library("call") {
     "../api:transport_api",
     "../api/rtc_event_log",
     "../api/task_queue:pending_task_safety_flag",
+    "../api/task_queue:to_queued_task",
     "../api/transport:network_control",
     "../api/units:time_delta",
     "../api/video_codecs:video_codecs_api",

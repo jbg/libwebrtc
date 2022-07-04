@@ -38,8 +38,8 @@ class SimulatedTaskQueue : public TaskQueueBase,
 
   // TaskQueueBase interface
   void Delete() override;
-  void PostTask(std::unique_ptr<QueuedTask> task) override;
-  void PostDelayedTask(std::unique_ptr<QueuedTask> task,
+  void PostTask(absl::AnyInvocable<void() &&> task) override;
+  void PostDelayedTask(absl::AnyInvocable<void() &&> task,
                        uint32_t milliseconds) override;
 
  private:
@@ -49,8 +49,8 @@ class SimulatedTaskQueue : public TaskQueueBase,
 
   mutable Mutex lock_;
 
-  std::deque<std::unique_ptr<QueuedTask>> ready_tasks_ RTC_GUARDED_BY(lock_);
-  std::map<Timestamp, std::vector<std::unique_ptr<QueuedTask>>> delayed_tasks_
+  std::deque<absl::AnyInvocable<void() &&>> ready_tasks_ RTC_GUARDED_BY(lock_);
+  std::map<Timestamp, std::vector<absl::AnyInvocable<void() &&>>> delayed_tasks_
       RTC_GUARDED_BY(lock_);
 
   Timestamp next_run_time_ RTC_GUARDED_BY(lock_) = Timestamp::PlusInfinity();

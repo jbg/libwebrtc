@@ -55,20 +55,7 @@ TEST_P(TaskQueueTest, PostCustomTask) {
   rtc::Event ran;
   auto queue = CreateTaskQueue(factory, "PostCustomImplementation");
 
-  class CustomTask : public QueuedTask {
-   public:
-    explicit CustomTask(rtc::Event* ran) : ran_(ran) {}
-
-   private:
-    bool Run() override {
-      ran_->Set();
-      return false;  // Do not allow the task to be deleted by the queue.
-    }
-
-    rtc::Event* const ran_;
-  } my_task(&ran);
-
-  queue->PostTask(absl::WrapUnique(&my_task));
+  queue->PostTask([&ran] { ran.Set(); });
   EXPECT_TRUE(ran.Wait(1000));
 }
 
@@ -143,50 +130,6 @@ TEST_P(TaskQueueTest, PostDelayedAfterDestruct) {
   // Task might outlive the TaskQueue, but still should be deleted.
   EXPECT_TRUE(deleted.Wait(1000));
   EXPECT_FALSE(run.Wait(0));  // and should not run.
-}
-
-TEST_P(TaskQueueTest, PostAndReuse) {
-  std::unique_ptr<webrtc::TaskQueueFactory> factory = GetParam()();
-  rtc::Event event;
-  auto post_queue = CreateTaskQueue(factory, "PostQueue");
-  auto reply_queue = CreateTaskQueue(factory, "ReplyQueue");
-
-  int call_count = 0;
-
-  class ReusedTask : public QueuedTask {
-   public:
-    ReusedTask(int* counter, TaskQueueBase* reply_queue, rtc::Event* event)
-        : counter_(*counter), reply_queue_(reply_queue), event_(*event) {
-      EXPECT_EQ(counter_, 0);
-    }
-
-   private:
-    bool Run() override {
-      if (++counter_ == 1) {
-        reply_queue_->PostTask(absl::WrapUnique(this));
-        // At this point, the object is owned by reply_queue_ and it's
-        // theoratically possible that the object has been deleted (e.g. if
-        // posting wasn't possible).  So, don't touch any member variables here.
-
-        // Indicate to the current queue that ownership has been transferred.
-        return false;
-      } else {
-        EXPECT_EQ(counter_, 2);
-        EXPECT_TRUE(reply_queue_->IsCurrent());
-        event_.Set();
-        return true;  // Indicate that the object should be deleted.
-      }
-    }
-
-    int& counter_;
-    TaskQueueBase* const reply_queue_;
-    rtc::Event& event_;
-  };
-
-  auto task =
-      std::make_unique<ReusedTask>(&call_count, reply_queue.get(), &event);
-  post_queue->PostTask(std::move(task));
-  EXPECT_TRUE(event.Wait(1000));
 }
 
 TEST_P(TaskQueueTest, PostALot) {

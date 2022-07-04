@@ -25,7 +25,7 @@ namespace webrtc {
 
 namespace {
 
-class SendPacketTask : public QueuedTask {
+class SendPacketTask {
  public:
   explicit SendPacketTask(
       PacketSender* packet_sender,
@@ -34,26 +34,23 @@ class SendPacketTask : public QueuedTask {
         packet_sender_(packet_sender),
         task_safety_flag_(task_safety_flag) {}
 
- private:
-  bool Run() override {
+  void operator()() {
     if (task_safety_flag_->alive() && packet_sender_->IsSending()) {
       packet_sender_->SendPacket();
       target_time_ms_ += packet_sender_->GetSendIntervalMs();
       int64_t delay_ms = std::max(static_cast<int64_t>(0),
                                   target_time_ms_ - rtc::TimeMillis());
-      TaskQueueBase::Current()->PostDelayedTask(
-          std::unique_ptr<QueuedTask>(this), delay_ms);
-      return false;
-    } else {
-      return true;
+      TaskQueueBase::Current()->PostDelayedTask(std::move(*this), delay_ms);
     }
   }
+
+ private:
   int64_t target_time_ms_;
   PacketSender* const packet_sender_;
   rtc::scoped_refptr<webrtc::PendingTaskSafetyFlag> task_safety_flag_;
 };
 
-class UpdateTestSettingTask : public QueuedTask {
+class UpdateTestSettingTask {
  public:
   UpdateTestSettingTask(
       PacketSender* packet_sender,
@@ -62,26 +59,27 @@ class UpdateTestSettingTask : public QueuedTask {
       : packet_sender_(packet_sender),
         config_reader_(std::move(config_reader)),
         task_safety_flag_(task_safety_flag) {}
+  UpdateTestSettingTask(UpdateTestSettingTask&&) = default;
+  UpdateTestSettingTask& operator=(UpdateTestSettingTask&&) = delete;
 
- private:
-  bool Run() override {
+  void operator()() {
     if (!task_safety_flag_->alive()) {
-      return true;
+      return;
     }
     auto config = config_reader_->GetNextConfig();
     if (config) {
       packet_sender_->UpdateTestSetting((*config).packet_size,
                                         (*config).packet_send_interval_ms);
-      TaskQueueBase::Current()->PostDelayedTask(
-          std::unique_ptr<QueuedTask>(this), (*config).execution_time_ms);
-      return false;
+      TaskQueueBase::Current()->PostDelayedTask(std::move(*this),
+                                                (*config).execution_time_ms);
     } else {
       packet_sender_->StopSending();
-      return true;
     }
   }
+
+ private:
   PacketSender* const packet_sender_;
-  const std::unique_ptr<ConfigReader> config_reader_;
+  std::unique_ptr<ConfigReader> config_reader_;
   rtc::scoped_refptr<webrtc::PendingTaskSafetyFlag> task_safety_flag_;
 };
 
@@ -109,11 +107,10 @@ void PacketSender::StartSending() {
     RTC_DCHECK_RUN_ON(&worker_queue_checker_);
     sending_ = true;
   }));
-  worker_queue_->PostTask(std::make_unique<UpdateTestSettingTask>(
+  worker_queue_->PostTask(UpdateTestSettingTask(
       this, std::make_unique<ConfigReader>(config_file_path_),
       task_safety_flag_));
-  worker_queue_->PostTask(
-      std::make_unique<SendPacketTask>(this, task_safety_flag_));
+  worker_queue_->PostTask(SendPacketTask(this, task_safety_flag_));
 }
 
 void PacketSender::StopSending() {

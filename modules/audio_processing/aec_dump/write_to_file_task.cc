@@ -17,13 +17,8 @@ namespace webrtc {
 WriteToFileTask::WriteToFileTask(webrtc::FileWrapper* debug_file,
                                  int64_t* num_bytes_left_for_log)
     : debug_file_(debug_file),
+      event_(std::make_unique<audioproc::Event>()),
       num_bytes_left_for_log_(num_bytes_left_for_log) {}
-
-WriteToFileTask::~WriteToFileTask() = default;
-
-audioproc::Event* WriteToFileTask::GetEvent() {
-  return &event_;
-}
 
 bool WriteToFileTask::IsRoomForNextEvent(size_t event_byte_size) const {
   int64_t next_message_size = event_byte_size + sizeof(int32_t);
@@ -38,17 +33,17 @@ void WriteToFileTask::UpdateBytesLeft(size_t event_byte_size) {
   }
 }
 
-bool WriteToFileTask::Run() {
+void WriteToFileTask::operator()() {
   std::string event_string;
-  event_.SerializeToString(&event_string);
+  event_->SerializeToString(&event_string);
 
-  const size_t event_byte_size = event_.ByteSizeLong();
+  const size_t event_byte_size = event_->ByteSizeLong();
 
   if (!IsRoomForNextEvent(event_byte_size)) {
     // Ensure that no further events are written, even if they're smaller than
     // the current event.
     *num_bytes_left_for_log_ = 0;
-    return true;
+    return;
   }
 
   UpdateBytesLeft(event_byte_size);
@@ -60,7 +55,6 @@ bool WriteToFileTask::Run() {
   if (!debug_file_->Write(event_string.data(), event_string.length())) {
     RTC_DCHECK_NOTREACHED();
   }
-  return true;  // Delete task from queue at once.
 }
 
 }  // namespace webrtc

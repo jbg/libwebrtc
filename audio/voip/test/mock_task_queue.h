@@ -28,10 +28,10 @@ class MockTaskQueue : public TaskQueueBase {
   // hold onto current global TaskQueueBase throughout the testing.
   void Delete() override {}
 
-  MOCK_METHOD(void, PostTask, (std::unique_ptr<QueuedTask>), (override));
+  MOCK_METHOD(void, PostTask, (absl::AnyInvocable<void() &&>), (override));
   MOCK_METHOD(void,
               PostDelayedTask,
-              (std::unique_ptr<QueuedTask>, uint32_t),
+              (absl::AnyInvocable<void() &&>, uint32_t),
               (override));
 
  private:

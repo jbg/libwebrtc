@@ -110,6 +110,17 @@ class RTC_SCOPED_LOCKABLE MarkProcessingCritScope {
   size_t* processing_;
 };
 
+class TaskMessageData : public MessageData {
+ public:
+  explicit TaskMessageData(absl::AnyInvocable<void() &&> task)
+      : task_(std::move(task)) {}
+
+  void Run() { std::move(task_)(); }
+
+ private:
+  absl::AnyInvocable<void() &&> task_;
+};
+
 }  // namespace
 
 ThreadManager* ThreadManager::Instance() {
@@ -1021,16 +1032,11 @@ void Thread::ClearCurrentTaskQueue() {
 
 void Thread::QueuedTaskHandler::OnMessage(Message* msg) {
   RTC_DCHECK(msg);
-  auto* data = static_cast<ScopedMessageData<webrtc::QueuedTask>*>(msg->pdata);
-  std::unique_ptr<webrtc::QueuedTask> task(data->Release());
+  auto* data = static_cast<TaskMessageData*>(msg->pdata);
+  data->Run();
   // Thread expects handler to own Message::pdata when OnMessage is called
   // Since MessageData is no longer needed, delete it.
   delete data;
-
-  // QueuedTask interface uses Run return value to communicate who owns the
-  // task. false means QueuedTask took the ownership.
-  if (!task->Run())
-    task.release();
 }
 
 void Thread::AllowInvokesToThread(Thread* thread) {
@@ -1088,26 +1094,25 @@ bool Thread::IsInvokeToThreadAllowed(rtc::Thread* target) {
 #endif
 }
 
-void Thread::PostTask(std::unique_ptr<webrtc::QueuedTask> task) {
+void Thread::PostTask(absl::AnyInvocable<void() &&> task) {
   // Though Post takes MessageData by raw pointer (last parameter), it still
   // takes it with ownership.
   Post(RTC_FROM_HERE, &queued_task_handler_,
-       /*id=*/0, new ScopedMessageData<webrtc::QueuedTask>(std::move(task)));
+       /*id=*/0, new TaskMessageData(std::move(task)));
 }
 
-void Thread::PostDelayedTask(std::unique_ptr<webrtc::QueuedTask> task,
+void Thread::PostDelayedTask(absl::AnyInvocable<void() &&> task,
                              uint32_t milliseconds) {
   // This implementation does not support low precision yet.
   PostDelayedHighPrecisionTask(std::move(task), milliseconds);
 }
 
-void Thread::PostDelayedHighPrecisionTask(
-    std::unique_ptr<webrtc::QueuedTask> task,
-    uint32_t milliseconds) {
+void Thread::PostDelayedHighPrecisionTask(absl::AnyInvocable<void() &&> task,
+                                          uint32_t milliseconds) {
   // Though PostDelayed takes MessageData by raw pointer (last parameter),
   // it still takes it with ownership.
   PostDelayed(RTC_FROM_HERE, milliseconds, &queued_task_handler_, /*id=*/0,
-              new ScopedMessageData<webrtc::QueuedTask>(std::move(task)));
+              new TaskMessageData(std::move(task)));
 }
 
 void Thread::Delete() {

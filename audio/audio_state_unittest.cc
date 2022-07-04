@@ -39,12 +39,12 @@ struct FakeAsyncAudioProcessingHelper {
     FakeTaskQueue() = default;
 
     void Delete() override { delete this; }
-    void PostTask(std::unique_ptr<QueuedTask> task) override {
-      std::move(task)->Run();
+    void PostTask(absl::AnyInvocable<void() &&> task) override {
+      std::move(task)();
     }
     MOCK_METHOD(void,
                 PostDelayedTask,
-                (std::unique_ptr<QueuedTask> task, uint32_t milliseconds),
+                (absl::AnyInvocable<void() &&> task, uint32_t milliseconds),
                 (override));
   };
 

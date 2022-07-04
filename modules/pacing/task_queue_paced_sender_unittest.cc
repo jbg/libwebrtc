@@ -119,36 +119,34 @@ class TaskQueueWithFakePrecisionFactory : public TaskQueueFactory {
       // TaskQueueDeleter.
       delete this;
     }
-    void PostTask(std::unique_ptr<QueuedTask> task) override {
-      task_queue_->PostTask(
-          ToQueuedTask([this, task = std::move(task)]() mutable {
-            RunTask(std::move(task));
-          }));
+    void PostTask(absl::AnyInvocable<void() &&> task) override {
+      task_queue_->PostTask([this, task = std::move(task)]() mutable {
+        RunTask(std::move(task));
+      });
     }
-    void PostDelayedTask(std::unique_ptr<QueuedTask> task,
+    void PostDelayedTask(absl::AnyInvocable<void() &&> task,
                          uint32_t milliseconds) override {
       ++parent_factory_->delayed_low_precision_count_;
       task_queue_->PostDelayedTask(
-          ToQueuedTask([this, task = std::move(task)]() mutable {
+          [this, task = std::move(task)]() mutable {
             RunTask(std::move(task));
-          }),
+          },
           milliseconds);
     }
-    void PostDelayedHighPrecisionTask(std::unique_ptr<QueuedTask> task,
+    void PostDelayedHighPrecisionTask(absl::AnyInvocable<void() &&> task,
                                       uint32_t milliseconds) override {
       ++parent_factory_->delayed_high_precision_count_;
       task_queue_->PostDelayedHighPrecisionTask(
-          ToQueuedTask([this, task = std::move(task)]() mutable {
+          [this, task = std::move(task)]() mutable {
             RunTask(std::move(task));
-          }),
+          },
           milliseconds);
     }
 
    private:
-    void RunTask(std::unique_ptr<QueuedTask> task) {
+    void RunTask(absl::AnyInvocable<void() &&> task) {
       CurrentTaskQueueSetter set_current(this);
-      if (!task->Run())
-        task.release();
+      std::move(task)();
     }
 
     TaskQueueWithFakePrecisionFactory* parent_factory_;

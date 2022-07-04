@@ -75,7 +75,7 @@ AecDumpImpl::~AecDumpImpl() {
 void AecDumpImpl::WriteInitMessage(const ProcessingConfig& api_format,
                                    int64_t time_now_ms) {
   auto task = CreateWriteToFileTask();
-  auto* event = task->GetEvent();
+  auto* event = task.GetEvent();
   event->set_type(audioproc::Event::INIT);
   audioproc::Init* msg = event->mutable_init();
 
@@ -136,7 +136,7 @@ void AecDumpImpl::WriteRenderStreamMessage(const int16_t* const data,
                                            int num_channels,
                                            int samples_per_channel) {
   auto task = CreateWriteToFileTask();
-  auto* event = task->GetEvent();
+  auto* event = task.GetEvent();
 
   event->set_type(audioproc::Event::REVERSE_STREAM);
   audioproc::ReverseStream* msg = event->mutable_reverse_stream();
@@ -149,7 +149,7 @@ void AecDumpImpl::WriteRenderStreamMessage(const int16_t* const data,
 void AecDumpImpl::WriteRenderStreamMessage(
     const AudioFrameView<const float>& src) {
   auto task = CreateWriteToFileTask();
-  auto* event = task->GetEvent();
+  auto* event = task.GetEvent();
 
   event->set_type(audioproc::Event::REVERSE_STREAM);
 
@@ -166,7 +166,7 @@ void AecDumpImpl::WriteRenderStreamMessage(
 void AecDumpImpl::WriteConfig(const InternalAPMConfig& config) {
   RTC_DCHECK_RUNS_SERIALIZED(&race_checker_);
   auto task = CreateWriteToFileTask();
-  auto* event = task->GetEvent();
+  auto* event = task.GetEvent();
   event->set_type(audioproc::Event::CONFIG);
   CopyFromConfigToEvent(config, event->mutable_config());
   worker_queue_->PostTask(std::move(task));
@@ -176,7 +176,7 @@ void AecDumpImpl::WriteRuntimeSetting(
     const AudioProcessing::RuntimeSetting& runtime_setting) {
   RTC_DCHECK_RUNS_SERIALIZED(&race_checker_);
   auto task = CreateWriteToFileTask();
-  auto* event = task->GetEvent();
+  auto* event = task.GetEvent();
   event->set_type(audioproc::Event::RUNTIME_SETTING);
   audioproc::RuntimeSetting* setting = event->mutable_runtime_setting();
   switch (runtime_setting.type()) {
@@ -236,9 +236,8 @@ void AecDumpImpl::WriteRuntimeSetting(
   worker_queue_->PostTask(std::move(task));
 }
 
-std::unique_ptr<WriteToFileTask> AecDumpImpl::CreateWriteToFileTask() {
-  return std::make_unique<WriteToFileTask>(&debug_file_,
-                                           &num_bytes_left_for_log_);
+WriteToFileTask AecDumpImpl::CreateWriteToFileTask() {
+  return WriteToFileTask(&debug_file_, &num_bytes_left_for_log_);
 }
 
 std::unique_ptr<AecDump> AecDumpFactory::Create(webrtc::FileWrapper file,
