@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe8b180_c9031305",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-04T08:37:12Z",
+      "side": 1,
+      "message": "LGTM % the issue with https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/tools_webrtc/libs/generate_licenses.py;l\u003d35;drc\u003dd69a726989cdeb5abdb1f9b742a54a31d661a892.",
+      "revId": "793fdeeb085a361cac0163d502ce05d423968f30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
