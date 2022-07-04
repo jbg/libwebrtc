@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "967cc94f_8d25f614",
+        "filename": "rtc_tools/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-04T08:12:05Z",
+      "side": 1,
+      "message": "I am not really happy with this name, but I am not sure things like \"_default_conversational_speech\" is better. WDYT?",
+      "range": {
+        "startLine": 466,
+        "startChar": 42,
+        "endLine": 466,
+        "endChar": 51
+      },
+      "revId": "c205a353bd68cf0ebca4fa00809b55d8d577230f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
