@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3340a7aa_e2c94db3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-04T07:52:45Z",
+      "side": 1,
+      "message": "PTAL. It seems in the case of a single simulcast layer with a single spatial layer, it\u0027s spatialLayers[0].numberOfTemporalLayers that is used (for populating VideoLayersAllocation), not simulcastStreams[0].numberOfTemporalLayers. With this change, VideoCodecInitializer sets both.",
+      "revId": "19cec9f71aae394ae7d13a32e9eebe342d09aa4f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
