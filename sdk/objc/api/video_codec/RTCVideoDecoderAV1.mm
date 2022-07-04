@@ -15,21 +15,12 @@
 #import "RTCVideoDecoderAV1.h"
 #import "RTCWrappedNativeVideoDecoder.h"
 
-#include "modules/video_coding/codecs/av1/libaom_av1_decoder.h"
+#include "modules/video_coding/codecs/av1/dav1d_decoder.h"
 
 @implementation RTC_OBJC_TYPE (RTCVideoDecoderAV1)
 
 + (id<RTC_OBJC_TYPE(RTCVideoDecoder)>)av1Decoder {
-  std::unique_ptr<webrtc::VideoDecoder> nativeDecoder(webrtc::CreateLibaomAv1Decoder());
-  if (nativeDecoder == nullptr) {
-    return nil;
-  }
   return [[RTC_OBJC_TYPE(RTCWrappedNativeVideoDecoder) alloc]
-      initWithNativeDecoder:std::move(nativeDecoder)];
-}
+      initWithNativeDecoder:std::unique_ptr<webrtc::VideoDecoder>(webrtc::CreateDav1dDecoder())];
 
-+ (bool)isSupported {
-  return webrtc::kIsLibaomAv1DecoderSupported;
-}
-
-@end
+  @end
