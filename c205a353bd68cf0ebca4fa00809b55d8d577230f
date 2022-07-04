@@ -22,6 +22,70 @@
       },
       "revId": "c205a353bd68cf0ebca4fa00809b55d8d577230f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76900451_0c4f38a7",
+        "filename": "rtc_tools/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-07-04T09:31:51Z",
+      "side": 1,
+      "message": "I think this should be kept as event_log_visualizer to avoid a behavior change, and use some suffix for the new target that likely won\u0027t be called manually anyway.",
+      "parentUuid": "967cc94f_8d25f614",
+      "range": {
+        "startLine": 466,
+        "startChar": 42,
+        "endLine": 466,
+        "endChar": 51
+      },
+      "revId": "c205a353bd68cf0ebca4fa00809b55d8d577230f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c99a3e5_ff5a0773",
+        "filename": "rtc_tools/rtc_event_log_visualizer/main_testonly.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-07-04T09:31:51Z",
+      "side": 1,
+      "message": "Can\u0027t we allow passing --wav_filename and just append --wav_filename\u003ddefault_file if nothing is passed manually?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 56
+      },
+      "revId": "c205a353bd68cf0ebca4fa00809b55d8d577230f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24e789c7_8df862e0",
+        "filename": "rtc_tools/rtc_event_log_visualizer/main_testonly.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-07-04T09:31:51Z",
+      "side": 1,
+      "message": "I think this will lose the stderr error messages, no? On the other hand, redirecting srderr to stdout wouldn\u0027t work since we pipe the stdout for further processing.",
+      "revId": "c205a353bd68cf0ebca4fa00809b55d8d577230f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
