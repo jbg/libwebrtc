@@ -15,7 +15,7 @@ namespace webrtc {
 // Base interface for asynchronously executed tasks.
 // The interface basically consists of a single function, Run(), that executes
 // on the target queue.  For more details see the Run() method and TaskQueue.
-class QueuedTask {
+class [[deprecated]] QueuedTask {
  public:
   virtual ~QueuedTask() = default;
 

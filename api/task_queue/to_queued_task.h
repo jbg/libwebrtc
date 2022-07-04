@@ -15,95 +15,41 @@
 #include <type_traits>
 #include <utility>
 
+#include "absl/cleanup/cleanup.h"
+#include "absl/functional/any_invocable.h"
 #include "api/task_queue/pending_task_safety_flag.h"
 #include "api/task_queue/queued_task.h"
 
 namespace webrtc {
-namespace webrtc_new_closure_impl {
-// Simple implementation of QueuedTask for use with lambdas.
-template <typename Closure>
-class ClosureTask : public QueuedTask {
- public:
-  explicit ClosureTask(Closure&& closure)
-      : closure_(std::forward<Closure>(closure)) {}
 
- private:
-  bool Run() override {
-    closure_();
-    return true;
-  }
-
-  typename std::decay<Closure>::type closure_;
-};
-
-template <typename Closure>
-class SafetyClosureTask : public QueuedTask {
- public:
-  explicit SafetyClosureTask(rtc::scoped_refptr<PendingTaskSafetyFlag> safety,
-                             Closure&& closure)
-      : closure_(std::forward<Closure>(closure)),
-        safety_flag_(std::move(safety)) {}
-
- private:
-  bool Run() override {
-    if (safety_flag_->alive())
-      closure_();
-    return true;
-  }
-
-  typename std::decay<Closure>::type closure_;
-  rtc::scoped_refptr<PendingTaskSafetyFlag> safety_flag_;
-};
-
-// Extends ClosureTask to also allow specifying cleanup code.
-// This is useful when using lambdas if guaranteeing cleanup, even if a task
-// was dropped (queue is too full), is required.
-template <typename Closure, typename Cleanup>
-class ClosureTaskWithCleanup : public ClosureTask<Closure> {
- public:
-  ClosureTaskWithCleanup(Closure&& closure, Cleanup&& cleanup)
-      : ClosureTask<Closure>(std::forward<Closure>(closure)),
-        cleanup_(std::forward<Cleanup>(cleanup)) {}
-  ~ClosureTaskWithCleanup() override { cleanup_(); }
-
- private:
-  typename std::decay<Cleanup>::type cleanup_;
-};
-}  // namespace webrtc_new_closure_impl
-
-// Convenience function to construct closures that can be passed directly
-// to methods that support std::unique_ptr<QueuedTask> but not template
-// based parameters.
-template <typename Closure>
-std::unique_ptr<QueuedTask> ToQueuedTask(Closure&& closure) {
-  return std::make_unique<webrtc_new_closure_impl::ClosureTask<Closure>>(
-      std::forward<Closure>(closure));
+inline absl::AnyInvocable<void() &&> ToQueuedTask(
+    absl::AnyInvocable<void() &&> closure) {
+  return closure;
 }
 
-template <typename Closure>
-std::unique_ptr<QueuedTask> ToQueuedTask(
+inline absl::AnyInvocable<void() &&> ToQueuedTask(
     rtc::scoped_refptr<PendingTaskSafetyFlag> safety,
-    Closure&& closure) {
-  return std::make_unique<webrtc_new_closure_impl::SafetyClosureTask<Closure>>(
-      std::move(safety), std::forward<Closure>(closure));
+    absl::AnyInvocable<void() &&> closure) {
+  return [safety = std::move(safety), closure = std::move(closure)]() mutable {
+    if (safety->alive()) {
+      std::move(closure)();
+    }
+  };
 }
 
-template <typename Closure>
-std::unique_ptr<QueuedTask> ToQueuedTask(const ScopedTaskSafety& safety,
-                                         Closure&& closure) {
-  return ToQueuedTask(safety.flag(), std::forward<Closure>(closure));
+inline absl::AnyInvocable<void() &&> ToQueuedTask(
+    const ScopedTaskSafety& safety,
+    absl::AnyInvocable<void() &&> closure) {
+  return ToQueuedTask(safety.flag(), std::move(closure));
 }
 
-template <typename Closure,
-          typename Cleanup,
-          typename std::enable_if<!std::is_same<
-              typename std::remove_const<
-                  typename std::remove_reference<Closure>::type>::type,
-              ScopedTaskSafety>::value>::type* = nullptr>
-std::unique_ptr<QueuedTask> ToQueuedTask(Closure&& closure, Cleanup&& cleanup) {
-  return std::make_unique<
-      webrtc_new_closure_impl::ClosureTaskWithCleanup<Closure, Cleanup>>(
-      std::forward<Closure>(closure), std::forward<Cleanup>(cleanup));
+inline absl::AnyInvocable<void() &&> ToQueuedTask(
+    absl::AnyInvocable<void() &&> closure,
+    absl::AnyInvocable<void() &&> cleanup) {
+  absl::Cleanup c = std::move(cleanup);
+  return [closure = std::move(closure), c = std::move(c)]() mutable {
+    std::move(closure)();
+  };
 }
 
 }  // namespace webrtc

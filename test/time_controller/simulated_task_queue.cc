@@ -29,8 +29,8 @@ SimulatedTaskQueue::~SimulatedTaskQueue() {
 void SimulatedTaskQueue::Delete() {
   // Need to destroy the tasks outside of the lock because task destruction
   // can lead to re-entry in SimulatedTaskQueue via custom destructors.
-  std::deque<std::unique_ptr<QueuedTask>> ready_tasks;
-  std::map<Timestamp, std::vector<std::unique_ptr<QueuedTask>>> delayed_tasks;
+  std::deque<absl::AnyInvocable<void() &&>> ready_tasks;
+  std::map<Timestamp, std::vector<absl::AnyInvocable<void() &&>>> delayed_tasks;
   {
     MutexLock lock(&lock_);
     ready_tasks_.swap(ready_tasks);
@@ -52,15 +52,10 @@ void SimulatedTaskQueue::RunReady(Timestamp at_time) {
   }
   CurrentTaskQueueSetter set_current(this);
   while (!ready_tasks_.empty()) {
-    std::unique_ptr<QueuedTask> ready = std::move(ready_tasks_.front());
+    absl::AnyInvocable<void()&&> ready = std::move(ready_tasks_.front());
     ready_tasks_.pop_front();
     lock_.Unlock();
-    bool delete_task = ready->Run();
-    if (delete_task) {
-      ready.reset();
-    } else {
-      ready.release();
-    }
+    std::move(ready)();
     lock_.Lock();
   }
   if (!delayed_tasks_.empty()) {
@@ -70,13 +65,13 @@ void SimulatedTaskQueue::RunReady(Timestamp at_time) {
   }
 }
 
-void SimulatedTaskQueue::PostTask(std::unique_ptr<QueuedTask> task) {
+void SimulatedTaskQueue::PostTask(absl::AnyInvocable<void() &&> task) {
   MutexLock lock(&lock_);
   ready_tasks_.emplace_back(std::move(task));
   next_run_time_ = Timestamp::MinusInfinity();
 }
 
-void SimulatedTaskQueue::PostDelayedTask(std::unique_ptr<QueuedTask> task,
+void SimulatedTaskQueue::PostDelayedTask(absl::AnyInvocable<void() &&> task,
                                          uint32_t milliseconds) {
   MutexLock lock(&lock_);
   Timestamp target_time =

@@ -9076,10 +9076,10 @@ TEST(VideoStreamEncoderSimpleTest, CreateDestroy) {
 
    private:
     void Delete() override { delete this; }
-    void PostTask(std::unique_ptr<QueuedTask> task) override {
+    void PostTask(absl::AnyInvocable<void() &&> task) override {
       // meh.
     }
-    void PostDelayedTask(std::unique_ptr<QueuedTask> task,
+    void PostDelayedTask(absl::AnyInvocable<void() &&> task,
                          uint32_t milliseconds) override {
       ASSERT_TRUE(false);
     }

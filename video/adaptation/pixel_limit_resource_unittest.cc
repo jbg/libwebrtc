@@ -46,7 +46,7 @@ class PixelLimitResourceTest : public ::testing::Test {
     input_state_provider_.SetInputState(current_pixels, 30, current_pixels);
   }
 
-  void RunTaskOnTaskQueue(std::unique_ptr<QueuedTask> task) {
+  void RunTaskOnTaskQueue(absl::AnyInvocable<void() &&> task) {
     task_queue_->PostTask(std::move(task));
     time_controller_.AdvanceTime(TimeDelta::Millis(0));
   }

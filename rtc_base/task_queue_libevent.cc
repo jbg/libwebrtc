@@ -106,12 +106,11 @@ class TaskQueueLibevent final : public TaskQueueBase {
   TaskQueueLibevent(absl::string_view queue_name, rtc::ThreadPriority priority);
 
   void Delete() override;
-  void PostTask(std::unique_ptr<QueuedTask> task) override;
-  void PostDelayedTask(std::unique_ptr<QueuedTask> task,
+  void PostTask(absl::AnyInvocable<void() &&> task) override;
+  void PostDelayedTask(absl::AnyInvocable<void() &&> task,
                        uint32_t milliseconds) override;
 
  private:
-  class SetTimerTask;
   struct TimerEvent;
 
   ~TaskQueueLibevent() override = default;
@@ -126,44 +125,32 @@ class TaskQueueLibevent final : public TaskQueueBase {
   event wakeup_event_;
   rtc::PlatformThread thread_;
   Mutex pending_lock_;
-  absl::InlinedVector<std::unique_ptr<QueuedTask>, 4> pending_
+  absl::InlinedVector<absl::AnyInvocable<void() &&>, 4> pending_
       RTC_GUARDED_BY(pending_lock_);
   // Holds a list of events pending timers for cleanup when the loop exits.
   std::list<TimerEvent*> pending_timers_;
 };
 
 struct TaskQueueLibevent::TimerEvent {
-  TimerEvent(TaskQueueLibevent* task_queue, std::unique_ptr<QueuedTask> task)
+  TimerEvent(TaskQueueLibevent* task_queue, absl::AnyInvocable<void() &&> task)
       : task_queue(task_queue), task(std::move(task)) {}
   ~TimerEvent() { event_del(&ev); }
 
   event ev;
   TaskQueueLibevent* task_queue;
-  std::unique_ptr<QueuedTask> task;
+  absl::AnyInvocable<void() &&> task;
 };
 
-class TaskQueueLibevent::SetTimerTask : public QueuedTask {
- public:
-  SetTimerTask(std::unique_ptr<QueuedTask> task, uint32_t milliseconds)
-      : task_(std::move(task)),
-        milliseconds_(milliseconds),
-        posted_(rtc::Time32()) {}
-
- private:
-  bool Run() override {
-    // Compensate for the time that has passed since construction
-    // and until we got here.
-    uint32_t post_time = rtc::Time32() - posted_;
+absl::AnyInvocable<void() &&> SetTimerTask(absl::AnyInvocable<void() &&> task,
+                                           uint32_t milliseconds) {
+  uint32_t posted = rtc::Time32();
+  return [task = std::move(task), milliseconds, posted]() mutable {
+    uint32_t post_time = rtc::Time32() - posted;
     TaskQueueLibevent::Current()->PostDelayedTask(
-        std::move(task_),
-        post_time > milliseconds_ ? 0 : milliseconds_ - post_time);
-    return true;
-  }
-
-  std::unique_ptr<QueuedTask> task_;
-  const uint32_t milliseconds_;
-  const uint32_t posted_;
-};
+        std::move(task),
+        post_time > milliseconds ? 0 : milliseconds - post_time);
+  };
+}
 
 TaskQueueLibevent::TaskQueueLibevent(absl::string_view queue_name,
                                      rtc::ThreadPriority priority)
@@ -219,7 +206,7 @@ void TaskQueueLibevent::Delete() {
   delete this;
 }
 
-void TaskQueueLibevent::PostTask(std::unique_ptr<QueuedTask> task) {
+void TaskQueueLibevent::PostTask(absl::AnyInvocable<void() &&> task) {
   {
     MutexLock lock(&pending_lock_);
     bool had_pending_tasks = !pending_.empty();
@@ -242,7 +229,7 @@ void TaskQueueLibevent::PostTask(std::unique_ptr<QueuedTask> task) {
                sizeof(message));
 }
 
-void TaskQueueLibevent::PostDelayedTask(std::unique_ptr<QueuedTask> task,
+void TaskQueueLibevent::PostDelayedTask(absl::AnyInvocable<void() &&> task,
                                         uint32_t milliseconds) {
   if (IsCurrent()) {
     TimerEvent* timer = new TimerEvent(this, std::move(task));
@@ -253,7 +240,7 @@ void TaskQueueLibevent::PostDelayedTask(std::unique_ptr<QueuedTask> task,
                   rtc::dchecked_cast<int>(milliseconds % 1000) * 1000};
     event_add(&timer->ev, &tv);
   } else {
-    PostTask(std::make_unique<SetTimerTask>(std::move(task), milliseconds));
+    PostTask(SetTimerTask(std::move(task), milliseconds));
   }
 }
 
@@ -271,19 +258,14 @@ void TaskQueueLibevent::OnWakeup(int socket,
       event_base_loopbreak(me->event_base_);
       break;
     case kRunTasks: {
-      absl::InlinedVector<std::unique_ptr<QueuedTask>, 4> tasks;
+      absl::InlinedVector<absl::AnyInvocable<void() &&>, 4> tasks;
       {
         MutexLock lock(&me->pending_lock_);
         tasks.swap(me->pending_);
       }
       RTC_DCHECK(!tasks.empty());
       for (auto& task : tasks) {
-        if (task->Run()) {
-          task.reset();
-        } else {
-          // `false` means the task should *not* be deleted.
-          task.release();
-        }
+        std::move(task)();
       }
       break;
     }
@@ -298,8 +280,7 @@ void TaskQueueLibevent::RunTimer(int fd,
                                  short flags,  // NOLINT
                                  void* context) {
   TimerEvent* timer = static_cast<TimerEvent*>(context);
-  if (!timer->task->Run())
-    timer->task.release();
+  std::move(timer->task)();
   timer->task_queue->pending_timers_.remove(timer);
   delete timer;
 }

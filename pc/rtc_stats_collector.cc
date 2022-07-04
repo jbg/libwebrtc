@@ -1305,30 +1305,13 @@ void RTCStatsCollector::GetStatsReportInternal(
     std::vector<RequestInfo> requests;
     requests.swap(requests_);
 
-    // Task subclass to take ownership of the requests.
-    // TODO(nisse): Delete when we can use C++14, and do lambda capture with
-    // std::move.
-    class DeliveryTask : public QueuedTask {
-     public:
-      DeliveryTask(rtc::scoped_refptr<RTCStatsCollector> collector,
-                   rtc::scoped_refptr<const RTCStatsReport> cached_report,
-                   std::vector<RequestInfo> requests)
-          : collector_(collector),
-            cached_report_(cached_report),
-            requests_(std::move(requests)) {}
-      bool Run() override {
-        collector_->DeliverCachedReport(cached_report_, std::move(requests_));
-        return true;
-      }
+    rtc::scoped_refptr<RTCStatsCollector> collector(this);
+    signaling_thread_->PostTask([collector = std::move(collector),
+                                 cached_report_ = cached_report_,
+                                 requests = std::move(requests)]() mutable {
+      collector->DeliverCachedReport(cached_report_, std::move(requests));
+    });
 
-     private:
-      rtc::scoped_refptr<RTCStatsCollector> collector_;
-      rtc::scoped_refptr<const RTCStatsReport> cached_report_;
-      std::vector<RequestInfo> requests_;
-    };
-    signaling_thread_->PostTask(std::make_unique<DeliveryTask>(
-        rtc::scoped_refptr<RTCStatsCollector>(this), cached_report_,
-        std::move(requests)));
   } else if (!num_pending_partial_reports_) {
     // Only start gathering stats if we're not already gathering stats. In the
     // case of already gathering stats, `callback_` will be invoked when there

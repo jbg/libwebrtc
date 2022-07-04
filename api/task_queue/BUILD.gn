@@ -25,6 +25,7 @@ rtc_library("task_queue") {
   absl_deps = [
     "//third_party/abseil-cpp/absl/base:config",
     "//third_party/abseil-cpp/absl/base:core_headers",
+    "//third_party/abseil-cpp/absl/functional:any_invocable",
     "//third_party/abseil-cpp/absl/strings",
   ]
 }
@@ -103,6 +104,10 @@ rtc_source_set("to_queued_task") {
   deps = [
     ":task_queue",
     "../../api/task_queue:pending_task_safety_flag",
+  ]
+  absl_deps = [
+    "//third_party/abseil-cpp/absl/cleanup",
+    "//third_party/abseil-cpp/absl/functional:any_invocable",
   ]
 }
 

@@ -105,8 +105,11 @@ class VideoProcessor {
 
       // Post the callback to the right task queue, if needed.
       if (!task_queue_->IsCurrent()) {
-        task_queue_->PostTask(std::make_unique<EncodeCallbackTask>(
-            video_processor_, encoded_image, codec_specific_info));
+        task_queue_->PostTask([video_processor_ = video_processor_,
+                               encoded_image,
+                               codec_specific_info = *codec_specific_info] {
+          video_processor_->FrameEncoded(encoded_image, codec_specific_info);
+        });
         return Result(Result::OK, 0);
       }
 
@@ -115,27 +118,6 @@ class VideoProcessor {
     }
 
    private:
-    class EncodeCallbackTask : public QueuedTask {
-     public:
-      EncodeCallbackTask(VideoProcessor* video_processor,
-                         const webrtc::EncodedImage& encoded_image,
-                         const webrtc::CodecSpecificInfo* codec_specific_info)
-          : video_processor_(video_processor),
-            encoded_image_(encoded_image),
-            codec_specific_info_(*codec_specific_info) {
-      }
-
-      bool Run() override {
-        video_processor_->FrameEncoded(encoded_image_, codec_specific_info_);
-        return true;
-      }
-
-     private:
-      VideoProcessor* const video_processor_;
-      webrtc::EncodedImage encoded_image_;
-      const webrtc::CodecSpecificInfo codec_specific_info_;
-    };
-
     VideoProcessor* const video_processor_;
     TaskQueueBase* const task_queue_;
   };

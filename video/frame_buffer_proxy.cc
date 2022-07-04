@@ -17,6 +17,7 @@
 #include "absl/base/attributes.h"
 #include "absl/functional/bind_front.h"
 #include "api/sequence_checker.h"
+#include "api/task_queue/to_queued_task.h"
 #include "api/units/data_size.h"
 #include "api/video/encoded_frame.h"
 #include "api/video/frame_buffer.h"

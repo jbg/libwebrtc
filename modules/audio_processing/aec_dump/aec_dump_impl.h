@@ -75,7 +75,7 @@ class AecDumpImpl : public AecDump {
       const AudioProcessing::RuntimeSetting& runtime_setting) override;
 
  private:
-  std::unique_ptr<WriteToFileTask> CreateWriteToFileTask();
+  WriteToFileTask CreateWriteToFileTask();
 
   FileWrapper debug_file_;
   int64_t num_bytes_left_for_log_ = 0;
