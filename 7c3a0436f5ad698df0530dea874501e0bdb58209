@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f427f64_1e4e9e9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-07-04T15:57:59Z",
+      "side": 1,
+      "message": "LGTM % 1 nit",
+      "revId": "7c3a0436f5ad698df0530dea874501e0bdb58209",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f9a38b_a0b237ff",
+        "filename": "modules/congestion_controller/receive_side_congestion_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-07-04T15:57:59Z",
+      "side": 1,
+      "message": "nit:\n\n    {\n      MutexLock lock(\u0026mutex_);\n      ...\n    }\n\n?",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 18
+      },
+      "revId": "7c3a0436f5ad698df0530dea874501e0bdb58209",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
