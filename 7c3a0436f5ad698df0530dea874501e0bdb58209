@@ -39,6 +39,30 @@
       },
       "revId": "7c3a0436f5ad698df0530dea874501e0bdb58209",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21261f43_4d3d55df",
+        "filename": "modules/congestion_controller/receive_side_congestion_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-04T16:02:56Z",
+      "side": 1,
+      "message": "I did consider that pattern, but that is more complicated: result of the rbe_-\u003eProcess is required outside the lock zone, so it would be something like\n\nTimeDelta time_until_rbe \u003d TimeDelta::Zero();\n{\n  MutexLock lock(\u0026mutex_);\n  time_until_rbe \u003d rbe_-\u003eProcess();\n}\n\nwhich look much more clampsy to me than manual lock management.",
+      "parentUuid": "f6f9a38b_a0b237ff",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 18
+      },
+      "revId": "7c3a0436f5ad698df0530dea874501e0bdb58209",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
