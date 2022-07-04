@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8092c926_499d862e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-04T21:51:08Z",
+      "side": 1,
+      "message": "Where are the tests?\n\nI\u0027d also like the .h file to have instructions on what to use when (and the restrictions that it imposes, such as the functor being moveable).",
+      "revId": "32f1a70c311249d5f568ef8cfe5d30ff7c35f1fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f97e9058_4bdf10d7",
+        "filename": "api/task_queue/task_queue_base.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-04T21:51:08Z",
+      "side": 1,
+      "message": "Here I am confused. PostTask(QueuedTask) calls FromLegacy and then calls PostTask(AnyInvocable).\nPostTas(Anyinvocable) calls ToLegacy and then calls PostTask(Task) which is a QueuedTask.\n\nWhat breaks the loop?",
+      "revId": "32f1a70c311249d5f568ef8cfe5d30ff7c35f1fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
