@@ -32,4 +32,7 @@ specific_include_rules = {
   ".*video_replay\.cc": [
     "+modules/video_coding/utility/ivf_file_writer.h",
   ],
+  "main_testonly.cc": [
+    "+absl/strings/str_join.h",
+  ],
 }
