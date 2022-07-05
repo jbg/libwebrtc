@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "467b0d96_86cebbae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T08:19:47Z",
+      "side": 1,
+      "message": "No functionality is added, but TaskQueueBase interface suggests new set of function to use and implement. I\u0027ve updated existent task queue test suite to show new intended usage.\n\nfunctionality and thus documentation for the new functions is also almost unchanged. I\u0027ve reviewed it and made minor tweaks to match newer functions.\n\nI\u0027ve also stress more that old functions will be removed.\n\nThe fact that absl::AnyInvocable is move-only is property of that type. Not sure why that need to be documented here where it is used (same as there is no documentation here that std::unique_ptr is a move only type)",
+      "parentUuid": "8092c926_499d862e",
+      "revId": "32f1a70c311249d5f568ef8cfe5d30ff7c35f1fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f97e9058_4bdf10d7",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-07-04T21:51:08Z",
       "side": 1,
       "message": "Here I am confused. PostTask(QueuedTask) calls FromLegacy and then calls PostTask(AnyInvocable).\nPostTas(Anyinvocable) calls ToLegacy and then calls PostTask(Task) which is a QueuedTask.\n\nWhat breaks the loop?",
+      "revId": "32f1a70c311249d5f568ef8cfe5d30ff7c35f1fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d91225e5_86b450d4",
+        "filename": "api/task_queue/task_queue_base.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T08:19:47Z",
+      "side": 1,
+      "message": "both PostTask are virtual, so loop breaks when derived class implements one of them. (If derived task queue would implement none of the variants, then code should crash with stack overflow as soon as PostTask is called.)\nI\u0027ve added a comment.",
+      "parentUuid": "f97e9058_4bdf10d7",
       "revId": "32f1a70c311249d5f568ef8cfe5d30ff7c35f1fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
