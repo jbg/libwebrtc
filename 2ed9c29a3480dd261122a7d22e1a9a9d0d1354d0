@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3273012_c3576aa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-05T07:19:42Z",
+      "side": 1,
+      "message": "PTAL. Trying to cleanup some old TODOs.",
+      "revId": "2ed9c29a3480dd261122a7d22e1a9a9d0d1354d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
