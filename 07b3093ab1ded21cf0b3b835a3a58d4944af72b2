@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "107cbe19_a46f3f1b",
+        "filename": "api/task_queue/pending_task_safety_flag.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T11:12:30Z",
+      "side": 1,
+      "message": "I\u0027ve updated examples and tests to avoid encouraging breaking style guide rule:\n\nhttps://google.github.io/styleguide/cppguide.html#Lambda_expressions\n\n“Do not use captures with initializers to introduce new names, or to substantially change the meaning of an existing name. Instead, declare a new variable in the conventional way and then capture it,”",
+      "revId": "07b3093ab1ded21cf0b3b835a3a58d4944af72b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

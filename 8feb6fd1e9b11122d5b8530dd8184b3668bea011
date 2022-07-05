@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4122e5b_2ab49b6a",
+        "filename": "api/task_queue/pending_task_safety_flag.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T11:12:30Z",
+      "side": 0,
+      "message": "I\u0027m not sure extra overload for `ScopedTaskSafety` pulls it weight.\nI suggest not to have such overload, instead ask callers to use `flag` accessor.\n\nBut I do not have strong opinion on this choice.",
+      "revId": "8feb6fd1e9b11122d5b8530dd8184b3668bea011",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebfe7a34_9467cba6",
+        "filename": "rtc_base/task_queue.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T11:12:30Z",
+      "side": 0,
+      "message": "ToQueuedTask(absl::AnyInvocable\u003cvoid() \u0026\u0026\u003e) doesn\u0027t compile.\n`absl::AnyInvocable\u003cvoid() \u0026\u0026\u003e` has some protection against calling it more than once,\nbut `ToQueuedTask` is written as if `closure` could be called multiple times.\nI\u0027ve updated this function early because `PendingTaskSafetyFlagTest` uses it through `TaskQueueForTest` helper",
+      "range": {
+        "startLine": 116,
+        "startChar": 21,
+        "endLine": 116,
+        "endChar": 33
+      },
+      "revId": "8feb6fd1e9b11122d5b8530dd8184b3668bea011",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
