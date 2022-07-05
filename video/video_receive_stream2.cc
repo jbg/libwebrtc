@@ -35,6 +35,7 @@
 #include "api/units/timestamp.h"
 #include "api/video/encoded_image.h"
 #include "api/video/frame_buffer.h"
+#include "api/video/i420_buffer.h"
 #include "api/video_codecs/h264_profile_level_id.h"
 #include "api/video_codecs/sdp_video_format.h"
 #include "api/video_codecs/video_codec.h"
@@ -139,6 +140,56 @@ RenderResolution InitialDecoderResolution(const FieldTrialsView& field_trials) {
   return RenderResolution(320, 180);
 }
 
+// Video decoder class that is used for testing. Does not decode but
+// returns a black frame of the appropriate size.
+class BlackVideoDecoder : public webrtc::VideoDecoder {
+ public:
+  explicit BlackVideoDecoder(SdpVideoFormat format) : format_(format) {}
+  bool Configure(const Settings& settings) override { return true; }
+  int32_t Decode(const webrtc::EncodedImage& input_image,
+                 bool missing_frames,
+                 int64_t render_time_ms) override {
+    // For keyframes store the size and reuse in delta frames.
+    if (input_image._frameType == VideoFrameType::kVideoFrameKey) {
+      width_ = input_image._encodedWidth;
+      height_ = input_image._encodedHeight;
+    }
+    webrtc::VideoFrame video_frame =
+        CreateFrame(width_, height_, input_image.Timestamp());
+    decode_complete_callback_->Decoded(video_frame, absl::nullopt,
+                                       absl::nullopt);
+
+    return WEBRTC_VIDEO_CODEC_OK;
+  }
+
+  int32_t RegisterDecodeCompleteCallback(
+      webrtc::DecodedImageCallback* callback) override {
+    decode_complete_callback_ = callback;
+    return WEBRTC_VIDEO_CODEC_OK;
+  }
+
+  int32_t Release() override { return WEBRTC_VIDEO_CODEC_OK; }
+
+  const char* ImplementationName() const override {
+    return "BlackVideoDecoder";
+  }
+
+ private:
+  webrtc::VideoFrame CreateFrame(int width, int height, uint32_t timestamp) {
+    rtc::scoped_refptr<webrtc::I420Buffer> buffer =
+        webrtc::I420Buffer::Create(width, height);
+    webrtc::I420Buffer::SetBlack(buffer.get());
+    return webrtc::VideoFrame::Builder()
+        .set_video_frame_buffer(buffer)
+        .set_timestamp_rtp(timestamp)
+        .build();
+  }
+
+  DecodedImageCallback* decode_complete_callback_;
+  SdpVideoFormat format_;
+  int width_;
+  int height_;
+};
 // Video decoder class to be used for unknown codecs. Doesn't support decoding
 // but logs messages to LS_ERROR.
 class NullVideoDecoder : public webrtc::VideoDecoder {
@@ -508,7 +559,9 @@ void VideoReceiveStream2::CreateAndRegisterExternalDecoder(
   TRACE_EVENT0("webrtc",
                "VideoReceiveStream2::CreateAndRegisterExternalDecoder");
   std::unique_ptr<VideoDecoder> video_decoder =
-      config_.decoder_factory->CreateVideoDecoder(decoder.video_format);
+      call_->trials().IsEnabled("WebRTC-BlackNullDecoder")
+          ? std::make_unique<BlackVideoDecoder>(decoder.video_format)
+          : config_.decoder_factory->CreateVideoDecoder(decoder.video_format);
   // If we still have no valid decoder, we have to create a "Null" decoder
   // that ignores all calls. The reason we can get into this state is that the
   // old decoder factory interface doesn't have a way to query supported
