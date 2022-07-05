@@ -53,7 +53,7 @@ class SimulcastTestFixtureImpl final : public SimulcastTestFixture {
   void TestEncoderInfoForDefaultTemporalLayerProfileHasFpsAllocation() override;
 
   static void DefaultSettings(VideoCodec* settings,
-                              const int* temporal_layer_profile,
+                              const ScalabilityMode* scalability_profile,
                               VideoCodecType codec_type,
                               bool reverse_layer_order = false);
 
@@ -61,7 +61,7 @@ class SimulcastTestFixtureImpl final : public SimulcastTestFixture {
   class TestEncodedImageCallback;
   class TestDecodedImageCallback;
 
-  void SetUpCodec(const int* temporal_layer_profile);
+  void SetUpCodec(const ScalabilityMode* temporal_layer_profile);
   void SetUpRateAllocator();
   void SetRates(uint32_t bitrate_kbps, uint32_t fps);
   void RunActiveStreamsTest(std::vector<bool> active_streams);

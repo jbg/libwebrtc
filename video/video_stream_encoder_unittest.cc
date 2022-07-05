@@ -815,6 +815,22 @@ class MockVideoSourceInterface : public rtc::VideoSourceInterface<VideoFrame> {
   MOCK_METHOD(void, RequestRefreshFrame, (), (override));
 };
 
+// Gets expexted scalability mode, taking both of the optional scalability mode
+// and num_temporal_layers settings into account.
+ScalabilityMode VideoStreamToScalabilityMode(const VideoStream& stream) {
+  if (stream.scalability_mode.has_value()) {
+    return *stream.scalability_mode;
+  }
+  if (stream.num_temporal_layers.has_value()) {
+    static const ScalabilityMode kScalabilityModes[3] = {
+        ScalabilityMode::kL1T1, ScalabilityMode::kL1T2, ScalabilityMode::kL1T3};
+    RTC_CHECK_GT(*stream.num_temporal_layers, 0);
+    RTC_CHECK_LE(*stream.num_temporal_layers, 3);
+    return kScalabilityModes[*stream.num_temporal_layers - 1];
+  }
+  return ScalabilityMode::kL1T1;
+}
+
 }  // namespace
 
 class VideoStreamEncoderTest : public ::testing::Test {
@@ -8977,8 +8993,8 @@ class ReconfigureEncoderTest : public VideoStreamEncoderTest {
               kWidth / expected.scale_resolution_down_by);
     EXPECT_EQ(actual.simulcastStream[0].height,
               kHeight / expected.scale_resolution_down_by);
-    EXPECT_EQ(actual.simulcastStream[0].numberOfTemporalLayers,
-              expected.num_temporal_layers);
+    EXPECT_EQ(actual.simulcastStream[0].scalability_mode,
+              VideoStreamToScalabilityMode(expected));
     EXPECT_EQ(actual.GetScalabilityMode(), expected.scalability_mode);
   }
 

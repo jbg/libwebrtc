@@ -828,8 +828,6 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
       if (params_.video[video_idx].codec == "VP8") {
         VideoCodecVP8 vp8_settings = VideoEncoder::GetDefaultVp8Settings();
         vp8_settings.denoisingOn = false;
-        vp8_settings.numberOfTemporalLayers = static_cast<unsigned char>(
-            params_.video[video_idx].num_temporal_layers);
         video_encoder_configs_[video_idx].encoder_specific_settings =
             rtc::make_ref_counted<
                 VideoEncoderConfig::Vp8EncoderSpecificSettings>(vp8_settings);
