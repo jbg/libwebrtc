@@ -34,6 +34,24 @@
       "parentUuid": "7d1572cd_e25c9132",
       "revId": "4769c3f9ec052b8dd3e8b0b24c3b3e9e3d53405f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23850d57_b286b770",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-05T14:32:06Z",
+      "side": 1,
+      "message": "The test would be something like:\n- ScopedFieldTrial(\"flag/enabled\")\n- Decode a (non-black) frame (or 2, to be fancy)\n- Check that it has the right size\n- Check that it\u0027s black\n\nThen you know that the black frame decoder is a) invokable, and b) doesn\u0027t crash.",
+      "parentUuid": "f99fcdcb_b44801bc",
+      "revId": "4769c3f9ec052b8dd3e8b0b24c3b3e9e3d53405f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
