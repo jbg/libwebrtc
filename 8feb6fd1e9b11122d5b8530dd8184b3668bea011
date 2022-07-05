@@ -39,6 +39,30 @@
       },
       "revId": "8feb6fd1e9b11122d5b8530dd8184b3668bea011",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b80f7499_b8a780f0",
+        "filename": "api/task_queue/task_queue_base.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T13:43:19Z",
+      "side": 1,
+      "message": "TaskQueueTest.PostDelayedAfterDestruct test captures similar scenario.\n\nabsl::AnyInvocable is an object and has destructor. \nAs exampled in the TaskQueueTest.PostDelayedAfterDestruct test,\nI find this way to be the most natural way to provide custom destructor:\n```\nrtc::Event shutdown_event;\nabsl::Cleanup shutdown \u003d [\u0026shutdown_event] {\n  // ~QueuedTask(): Always executed but might not run on the TQ\n  // if `encoder_queue_` has been shut down.\n  shutdown_event.Set(); \n}\nencoder_queue_.PostTask([this, shutdown \u003d std::move(shutdown)] {\n // stuff executed in QueuedTask::Run.\n});\nshutdown_event.Wait(rtc::Event::kForever); // \u003c- Will always be satisfied.\n```",
+      "parentUuid": "b958b604_c6f5cada",
+      "range": {
+        "startLine": 64,
+        "startChar": 5,
+        "endLine": 64,
+        "endChar": 15
+      },
+      "revId": "8feb6fd1e9b11122d5b8530dd8184b3668bea011",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
