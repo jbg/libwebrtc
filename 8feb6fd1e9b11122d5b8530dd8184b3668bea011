@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "703c5215_99cf43c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2022-07-05T13:36:08Z",
+      "side": 1,
+      "message": "lgtm. one question below that\u0027s more related to follow-up changes.",
+      "revId": "8feb6fd1e9b11122d5b8530dd8184b3668bea011",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b958b604_c6f5cada",
+        "filename": "api/task_queue/task_queue_base.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2022-07-05T13:36:08Z",
+      "side": 1,
+      "message": "where did we end up with the corner case when PostTask cannot post the task?\nPreviously this could be handled in the dtor of QueuedTask.\n\nConsider e.g. this case (simplified from video_stream_encoder.cc):\n\n```\n  rtc::Event shutdown_event;\n  encoder_queue_.PostTask(webrtc::ToQueuedTask(\n      [this] {\n        // stuff executed in QueuedTask::Run.\n      },\n      [\u0026shutdown_event]() {\n        // ~QueuedTask(): Always executed but might\n        // not run on the TQ if `encoder_queue_` has been\n        // shut down.\n        shutdown_event.Set();\n      }));\n  shutdown_event.Wait(rtc::Event::kForever); // \u003c- Must always be satisfied.\n```   \n   \nIf this gets bundled into a single AnyInvocable() then presumably there\u0027s not a\nstraight forward way to detect the case when PostTask() can\u0027t queue the task?\n\nSince it\u0027s a corner case, maybe we can implement some sort of utility that allows the calling code to detect this case.",
+      "range": {
+        "startLine": 64,
+        "startChar": 5,
+        "endLine": 64,
+        "endChar": 15
+      },
+      "revId": "8feb6fd1e9b11122d5b8530dd8184b3668bea011",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
