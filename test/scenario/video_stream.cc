@@ -179,9 +179,7 @@ CreateVp8SpecificSettings(VideoStreamConfig config) {
   // TODO(bugs.webrtc.org/11607): Support separate scalability mode per
   // simulcast stream.
   ScalabilityMode scalability_mode = config.encoder.simulcast_streams[0];
-  vp8_settings.numberOfTemporalLayers =
-      ScalabilityModeToNumTemporalLayers(scalability_mode);
-  if (vp8_settings.numberOfTemporalLayers > 1 ||
+  if (ScalabilityModeToNumTemporalLayers(scalability_mode) > 1 ||
       config.encoder.simulcast_streams.size() > 1) {
     vp8_settings.automaticResizeOn = false;
     vp8_settings.denoisingOn = false;

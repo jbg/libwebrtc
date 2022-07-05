@@ -3651,15 +3651,6 @@ EncoderStreamFactory::CreateDefaultVideoStreams(
   layer.max_qp = max_qp_;
   layer.bitrate_priority = encoder_config.bitrate_priority;
 
-  if (absl::EqualsIgnoreCase(codec_name_, kVp9CodecName)) {
-    RTC_DCHECK(encoder_config.encoder_specific_settings);
-    // Use VP9 SVC layering from codec settings which might be initialized
-    // though field trial in ConfigureVideoEncoderSettings.
-    webrtc::VideoCodecVP9 vp9_settings;
-    encoder_config.encoder_specific_settings->FillVideoCodecVp9(&vp9_settings);
-    layer.num_temporal_layers = vp9_settings.numberOfTemporalLayers;
-  }
-
   if (IsTemporalLayersSupported(codec_name_)) {
     // Use configured number of temporal layers if set.
     if (encoder_config.simulcast_layers[0].num_temporal_layers) {
