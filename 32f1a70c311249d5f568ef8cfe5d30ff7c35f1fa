@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86340f82_500bc995",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-05T08:37:43Z",
+      "side": 1,
+      "message": "it is of importance when looking at what needs to change when moving from std::function to absl::AnyInvocable, which is why I thought it might be good to mention here.",
+      "parentUuid": "467b0d96_86cebbae",
+      "revId": "32f1a70c311249d5f568ef8cfe5d30ff7c35f1fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f97e9058_4bdf10d7",

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f9ceea3_4b631926",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-05T08:37:43Z",
+      "side": 1,
+      "message": "Looks good now.\nMy remaining worry (that I mentioned on the -core call) is the disposition of the helper functions that took ScopedTaskSafety as an argument. Can be resolved either with more PostTask variants, a wrapper function specifically for that purpose, or simply a \"do it yourself\" for the lambda writers.",
+      "revId": "af11da34a1f0e34d738c579daf6a7a5604631299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bb2a090_377af77d",
+        "filename": "api/task_queue/task_queue_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-05T08:37:43Z",
+      "side": 1,
+      "message": "Nit: PostDelayedTask",
+      "revId": "af11da34a1f0e34d738c579daf6a7a5604631299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
