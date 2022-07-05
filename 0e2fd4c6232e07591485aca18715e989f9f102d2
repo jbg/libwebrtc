@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2561e6e4_59e75918",
+        "filename": "api/task_queue/pending_task_safety_flag.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T14:09:50Z",
+      "side": 1,
+      "message": "May that is ok. It depends how you interpret style guide, \nin particular would you count \u0027safety_flag\u0027 as new name, or as the same name as \u0027safety_flag_\u0027.\n\nOn the other hand, using similar name may introduce hard to spot bug:\n```\n[safety_flag \u003d safety_flag_, this] {\n  if (!safety_flag_-\u003ealive()) return;\n  MyMethod();\n}\n```\n\nIt seems much more concise and safer to use SafeTask wrapper:\n`SafeTask(safety_flag_, [this] { MyMethod(); });`\n\n\nI\u0027ve changed local flag name to another name that doesn\u0027t look similar to the member name to make it easier to spot mistakes like one above.",
+      "parentUuid": "969abe99_34727c39",
+      "revId": "0e2fd4c6232e07591485aca18715e989f9f102d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f33e43b_e8e1fe40",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-07-05T13:40:23Z",
       "side": 1,
       "message": "I know the c++ compiler keeps track of which flag is meant in \"flag \u003d std::move(flag)\", but humans tend not to - can you use different names for the move target and the move source?",
+      "revId": "0e2fd4c6232e07591485aca18715e989f9f102d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84eaac0e_6acab19d",
+        "filename": "api/task_queue/pending_task_safety_flag.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T14:09:50Z",
+      "side": 1,
+      "message": "no, google style guide requires to use the same name in this case:\n\nhttps://google.github.io/styleguide/cppguide.html#Lambda_expressions\n\"Use captures only to actually capture variables from the enclosing scope. Do not use captures with initializers to introduce new names\"",
+      "parentUuid": "5f33e43b_e8e1fe40",
       "revId": "0e2fd4c6232e07591485aca18715e989f9f102d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1457b414_30787fe6",
+        "filename": "api/task_queue/pending_task_safety_flag_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T14:09:50Z",
+      "side": 1,
+      "message": "c++ allows that, google style guide - doesn\u0027t.",
+      "parentUuid": "f934826c_def88f45",
+      "revId": "0e2fd4c6232e07591485aca18715e989f9f102d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa5f868b_9f25ea4b",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-07-05T13:40:23Z",
       "side": 1,
       "message": "This change seems unrelated. Copy-pasta,or drive-by?",
+      "revId": "0e2fd4c6232e07591485aca18715e989f9f102d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ed67727_954a5202",
+        "filename": "rtc_base/task_queue.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T14:09:50Z",
+      "side": 1,
+      "message": "This change is needed to make `PendingTaskSafetyFlagTest` compile:\n\nToQueuedTask(absl::AnyInvocable\u003cvoid() \u0026\u0026\u003e) doesn\u0027t compile.\n`absl::AnyInvocable\u003cvoid() \u0026\u0026\u003e`  has some protection against calling it more than once,\nbut `ToQueuedTask` is written as if `closure` could be called multiple times.\nI\u0027ve updated this function early because `PendingTaskSafetyFlagTest` uses it through `TaskQueueForTest` helper",
+      "parentUuid": "aa5f868b_9f25ea4b",
       "revId": "0e2fd4c6232e07591485aca18715e989f9f102d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
