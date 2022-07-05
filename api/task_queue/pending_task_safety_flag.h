@@ -13,6 +13,7 @@
 
 #include <utility>
 
+#include "absl/functional/any_invocable.h"
 #include "api/ref_counted_base.h"
 #include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
@@ -154,6 +155,16 @@ class ScopedTaskSafetyDetached final {
   rtc::scoped_refptr<PendingTaskSafetyFlag> flag_ =
       PendingTaskSafetyFlag::CreateDetached();
 };
+
+inline absl::AnyInvocable<void() &&> SafeTask(
+    rtc::scoped_refptr<PendingTaskSafetyFlag> flag,
+    absl::AnyInvocable<void() &&> task) {
+  return [flag = std::move(flag), task = std::move(task)]() mutable {
+    if (flag->alive()) {
+      std::move(task)();
+    }
+  };
+}
 
 }  // namespace webrtc
 
