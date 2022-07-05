@@ -177,4 +177,22 @@ TEST(PendingTaskSafetyFlagTest, PendingTaskNotAliveInitialized) {
   EXPECT_TRUE(task_2_ran);
 }
 
+TEST(ToQueuedTaskTest, SafeTask) {
+  rtc::scoped_refptr<PendingTaskSafetyFlag> flag =
+      PendingTaskSafetyFlag::Create();
+
+  int count = 0;
+  // Create two identical tasks that increment the `count`.
+  auto task1 = SafeTask(flag, [&count] { ++count; });
+  auto task2 = SafeTask(flag, [&count] { ++count; });
+
+  EXPECT_EQ(0, count);
+  std::move(task1)();
+  EXPECT_EQ(1, count);
+  flag->SetNotAlive();
+  // Now task2 should actually not run.
+  std::move(task2)();
+  EXPECT_EQ(1, count);
+}
+
 }  // namespace webrtc
