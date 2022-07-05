@@ -33,6 +33,29 @@
       "message": "Sorry I missed this earlier.\n\nLooks reasonable to me. Scaling is a bit crude, it would make sense to me to call some libyuv function for scaling, but that can be independent of fixing the crash.",
       "revId": "082ec60ad90a5f36353e90bf64741cb60f16341b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a57f439d_9a504a5e",
+        "filename": "examples/peerconnection/client/linux/main_wnd.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-05T13:15:21Z",
+      "side": 1,
+      "message": "nit: Like you do below, maybe here we could calculate `(width_ * height_ * 4) * 4` once and assign to a local variable (e.g. `required_buffer_size`) for slightly better context? (see also line 453)",
+      "range": {
+        "startLine": 449,
+        "startChar": 50,
+        "endLine": 449,
+        "endChar": 72
+      },
+      "revId": "082ec60ad90a5f36353e90bf64741cb60f16341b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
