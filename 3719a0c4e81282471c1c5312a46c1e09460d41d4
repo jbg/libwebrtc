@@ -16,6 +16,24 @@
       "message": "LGTM, but is this expected to change stats on average? If so, should we make a PSA?",
       "revId": "3719a0c4e81282471c1c5312a46c1e09460d41d4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3102b848_e881e155",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-05T08:42:51Z",
+      "side": 1,
+      "message": "the difference is quite small imo. PSA can\u0027t hurt though,will do once it rolled into canary",
+      "parentUuid": "44832d6e_c99924cd",
+      "revId": "3719a0c4e81282471c1c5312a46c1e09460d41d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
