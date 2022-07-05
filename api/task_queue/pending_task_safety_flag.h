@@ -13,6 +13,7 @@
 
 #include <utility>
 
+#include "absl/functional/any_invocable.h"
 #include "api/ref_counted_base.h"
 #include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
@@ -37,13 +38,13 @@ namespace webrtc {
 //
 // class ExampleClass {
 // ....
-//    my_task_queue_->PostTask(ToQueuedTask(
+//    my_task_queue_->PostTask(
 //        [safety = pending_task_safety_flag_, this]() {
 //          // Now running on the main thread.
 //          if (!safety->alive())
 //            return;
 //          MyMethod();
-//        }));
+//        });
 //   ....
 //   ~ExampleClass() {
 //     pending_task_safety_flag_->SetNotAlive();
@@ -52,9 +53,9 @@ namespace webrtc {
 //        = PendingTaskSafetyFlag::Create();
 // }
 //
-// ToQueuedTask has an overload that makes this check automatic:
+// SafeTask makes this check automatic:
 //
-//    my_task_queue_->PostTask(ToQueuedTask(pending_task_safety_flag_,
+//    my_task_queue_->PostTask(SafeTask(pending_task_safety_flag_,
 //        [this]() { MyMethod(); }));
 //
 class PendingTaskSafetyFlag final
@@ -105,12 +106,9 @@ class PendingTaskSafetyFlag final
 // It does automatic PTSF creation and signalling of destruction when the
 // ScopedTaskSafety instance goes out of scope.
 //
-// ToQueuedTask has an overload that takes a ScopedTaskSafety too, so there
-// is no need to explicitly call the "flag" method.
-//
 // Example usage:
 //
-//     my_task_queue->PostTask(ToQueuedTask(scoped_task_safety,
+//     my_task_queue->PostTask(SafeTask(scoped_task_safety.flag(),
 //        [this]() {
 //             // task goes here
 //        }
@@ -154,6 +152,16 @@ class ScopedTaskSafetyDetached final {
   rtc::scoped_refptr<PendingTaskSafetyFlag> flag_ =
       PendingTaskSafetyFlag::CreateDetached();
 };
+
+inline absl::AnyInvocable<void() &&> SafeTask(
+    rtc::scoped_refptr<PendingTaskSafetyFlag> flag,
+    absl::AnyInvocable<void() &&> task) {
+  return [flag = std::move(flag), task = std::move(task)]() mutable {
+    if (flag->alive()) {
+      std::move(task)();
+    }
+  };
+}
 
 }  // namespace webrtc
 
