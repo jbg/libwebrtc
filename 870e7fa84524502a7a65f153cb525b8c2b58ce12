@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37b2f7ce_13f56cea",
+        "filename": "rtc_tools/unpack_aecdump/unpack.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-05T08:16:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acd0390f_8cf279a5",
+      "range": {
+        "startLine": 107,
+        "startChar": 6,
+        "endLine": 107,
+        "endChar": 13
+      },
+      "revId": "870e7fa84524502a7a65f153cb525b8c2b58ce12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af3d02b1_bead945f",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-07-05T07:56:04Z",
       "side": 1,
       "message": "Is this needed? Do we fully support little endian elsewhere in the code?\n\nFor instance, I guess the other WriteSamples function below also would need to support that?",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 6
+      },
+      "revId": "870e7fa84524502a7a65f153cb525b8c2b58ce12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea3d1b9_bf23288f",
+        "filename": "rtc_tools/unpack_aecdump/unpack.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-05T08:16:32Z",
+      "side": 1,
+      "message": "I am not sure, but I think it is safe to keep the preprocessor error here (maybe we should add it to the other WriteSamples as well?).",
+      "parentUuid": "af3d02b1_bead945f",
       "range": {
         "startLine": 117,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fc0cb42_fd900a12",
+        "filename": "rtc_tools/unpack_aecdump/unpack.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-05T08:16:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "876450e8_58d28398",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 12
+      },
+      "revId": "870e7fa84524502a7a65f153cb525b8c2b58ce12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f440141_2762f654",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-07-05T07:56:04Z",
       "side": 1,
       "message": "Can we CHECK here instead?",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 181,
+        "endChar": 12
+      },
+      "revId": "870e7fa84524502a7a65f153cb525b8c2b58ce12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80852d32_968b6c93",
+        "filename": "rtc_tools/unpack_aecdump/unpack.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-05T08:16:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f440141_2762f654",
       "range": {
         "startLine": 180,
         "startChar": 4,
