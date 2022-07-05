@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc261dd6_ce5a54a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-05T07:04:58Z",
+      "side": 1,
+      "message": "Can you also delete the implementation from peer_connection_interface.cc and recheck?\n",
+      "revId": "891a0b3cc7b04ba33b79dbaf0fa12d2bc30b1ae3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
