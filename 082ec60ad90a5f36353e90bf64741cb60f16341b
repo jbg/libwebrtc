@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c312477_8382672c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-05T13:16:12Z",
+      "side": 1,
+      "message": "oh and please update the AUTHORS file as well. Resetting lgtm until ready.",
+      "revId": "082ec60ad90a5f36353e90bf64741cb60f16341b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a57f439d_9a504a5e",
