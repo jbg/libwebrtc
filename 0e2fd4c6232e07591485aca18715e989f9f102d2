@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "969abe99_34727c39",
+        "filename": "api/task_queue/pending_task_safety_flag.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-05T13:44:40Z",
+      "side": 1,
+      "message": "nit: I think we may even have code around that does this (slightly less boilerplate but less obvious what the copy accomplishes):\n\n```\nmy_task_queue_-\u003ePostTask(\n    [safety_flag \u003d safety_flag_, this] {\n  ...\n```",
+      "revId": "0e2fd4c6232e07591485aca18715e989f9f102d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f33e43b_e8e1fe40",
