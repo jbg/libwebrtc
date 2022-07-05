@@ -63,6 +63,30 @@
       },
       "revId": "8feb6fd1e9b11122d5b8530dd8184b3668bea011",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "334b2d3d_d3ffbd7d",
+        "filename": "api/task_queue/task_queue_base.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T13:44:41Z",
+      "side": 1,
+      "message": "absl::Cleanup ensures destructor won\u0027t run when absl::AnyInvocable is moved, but will run when it is destroyed for the last time.",
+      "parentUuid": "b80f7499_b8a780f0",
+      "range": {
+        "startLine": 64,
+        "startChar": 5,
+        "endLine": 64,
+        "endChar": 15
+      },
+      "revId": "8feb6fd1e9b11122d5b8530dd8184b3668bea011",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
