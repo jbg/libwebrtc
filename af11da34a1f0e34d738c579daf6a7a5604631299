@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2bb3ead_34f7b1e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T09:02:00Z",
+      "side": 1,
+      "message": "I prefer 2nd option:\nhttps://webrtc-review.googlesource.com/c/src/+/267706\n\nbecause such helper doesn\u0027t need to depend on task queue specific classes, it feels natural to put it next to safety flag classes themself.",
+      "parentUuid": "8f9ceea3_4b631926",
+      "revId": "af11da34a1f0e34d738c579daf6a7a5604631299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bb2a090_377af77d",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-07-05T08:37:43Z",
       "side": 1,
       "message": "Nit: PostDelayedTask",
+      "revId": "af11da34a1f0e34d738c579daf6a7a5604631299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39615abe_6389571f",
+        "filename": "api/task_queue/task_queue_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T09:02:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bb2a090_377af77d",
       "revId": "af11da34a1f0e34d738c579daf6a7a5604631299",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

@@ -54,6 +54,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f55b7c39_9364a8e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-05T09:02:00Z",
+      "side": 1,
+      "message": "I do not understand how std::function is related here.\nThere is no move from std::function in this transition. \nTaskQueue never relied on std::function.\nAfaik, std::function is rarely used when posting callable objects to the TaskQueue.\nlambdas are posted often, but those already could be move-only.\n\nThe main move is from (move-only) object std::unique_ptr\u003cQueuedTask\u003e\nto (move-only) object absl::AnyInvocable\u003cvoid () \u0026\u0026\u003e",
+      "parentUuid": "86340f82_500bc995",
+      "revId": "32f1a70c311249d5f568ef8cfe5d30ff7c35f1fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f97e9058_4bdf10d7",
