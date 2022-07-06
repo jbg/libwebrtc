@@ -52,6 +52,24 @@
       "parentUuid": "f99fcdcb_b44801bc",
       "revId": "4769c3f9ec052b8dd3e8b0b24c3b3e9e3d53405f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75dca148_8710a493",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-06T07:09:41Z",
+      "side": 1,
+      "message": "yes but that would require putting it into a .h file (where would I put it?) and mind you, the video decoder itself doesn\u0027t have a test. The most tricky part would be \"check that it is black\" for which there is no method in the YUV buffer.\n\n(but at least I could do a death test for crashing when width/height is not set by the depacketizer)",
+      "parentUuid": "23850d57_b286b770",
+      "revId": "4769c3f9ec052b8dd3e8b0b24c3b3e9e3d53405f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
