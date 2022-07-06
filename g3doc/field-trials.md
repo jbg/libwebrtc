@@ -43,3 +43,22 @@ The policy for field trials is:
     -   is open,
     -   is assigned to an owner, and
     -   has the end date specified.
+
+## Killswitches
+
+Field trials can be used as killswitches for new features which have a moderate amount of breaking
+in unforeseen circumstances. In such cases, the killswitch can be used to deactivate the feature
+without the need for a new release.
+
+This will typically use the
+[IsDisabled](https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/field_trials_view.h;l=35;drc=e62c2f2c77bca9af93b1f8cc5a37bb9978a18844)
+method.
+
+## Standing field trials
+
+Some field trials are used to guard test-only features or features that should not be enabled
+by default in Chrome. Examples of this include
+
+* [WebRTC-Debugging-RtpDump](https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/srtp_session.cc;l=123;drc=2d6c4d07129f88d599fc41965c22c7faaf09e793) which dumps decrypted RTP packets to the logs.
+* [WebRTCFakeNetwork...](https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/call/call_factory.cc;l=45;drc=80b7c6befd39c83241ad1bdfb3902be45d0a0ccf) which allows configuring a virtual network with custom delays and packet loss.
+
