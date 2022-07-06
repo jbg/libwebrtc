@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e39df31a_93761d91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-06T08:19:47Z",
+      "side": 1,
+      "message": "this should cover some of the commonly used exceptions and explain killswitches",
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
