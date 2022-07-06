@@ -43,6 +43,7 @@
 #include "call/rtp_stream_receiver_controller_interface.h"
 #include "call/rtx_receive_stream.h"
 #include "common_video/include/incoming_video_stream.h"
+#include "modules/video_coding/black_frame_decoder.h"
 #include "modules/video_coding/frame_buffer2.h"
 #include "modules/video_coding/frame_helpers.h"
 #include "modules/video_coding/include/video_codec_interface.h"
@@ -508,7 +509,9 @@ void VideoReceiveStream2::CreateAndRegisterExternalDecoder(
   TRACE_EVENT0("webrtc",
                "VideoReceiveStream2::CreateAndRegisterExternalDecoder");
   std::unique_ptr<VideoDecoder> video_decoder =
-      config_.decoder_factory->CreateVideoDecoder(decoder.video_format);
+      call_->trials().IsEnabled("WebRTC-BlackFrameDecoder")
+          ? std::make_unique<BlackFrameDecoder>(decoder.video_format)
+          : config_.decoder_factory->CreateVideoDecoder(decoder.video_format);
   // If we still have no valid decoder, we have to create a "Null" decoder
   // that ignores all calls. The reason we can get into this state is that the
   // old decoder factory interface doesn't have a way to query supported
