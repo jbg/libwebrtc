@@ -33,6 +33,41 @@
       "message": "Hey Philipp!\n\nIn general we want to move away from parsing bitstream data in the RTP part of the receive pipeline, so width and height being passed into a decoder is not something we should rely on.\n\nWhat I would propose instead is to implement a BlackVideoEncoderFactory that supports codecs that we know how to parse, and pass it from Chrome into WebRTC instead. From CreateVideoEncoder you can then simply return a BlackVideoDecoder that knows how to parse the bitstream of the given codec. This would be cleaner IMO, and if you ever want to parse other information you could do that as well.",
       "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf707c6_e6157ff7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-07T16:44:08Z",
+      "side": 1,
+      "message": "\\o Philip!\n\nyeah, I got that from the AV1 issue and it already motivated moving from a simple hack to the current approach.\n\nMoving the whole bitstream parsing here would require the following from what I can see:\n- the H264 SPSParser\n- the width/height extraction from VideoRtpDepacketizerVp8::Parse and VideoRtpDepacketizerVp9::ParseRtpPayload respectively\n- some new code for AV1\n- maybe some glue code for QpParser::Parse (which could be static?). That is the only stat that seems interesting that is missing right now.\n\nWRT the factory approach i\u0027d like to have this both in chrome and native long-term. What advantages would a factory have?\n\n(we do have the width and height exposed to JS in the encoded transform API but I hope nobody is relying on those properties on the incoming stream)",
+      "parentUuid": "c0c3675c_c1ff064c",
+      "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58bff56a_3e337dec",
+        "filename": "modules/video_coding/black_frame_decoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-07T16:44:08Z",
+      "side": 1,
+      "message": "instead of a DCHECK one could do a 2x2 frame which if I recall correctly is an error style used elsewhere",
+      "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
