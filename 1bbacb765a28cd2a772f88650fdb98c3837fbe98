@@ -16,6 +16,23 @@
       "message": "Hej Philip - do you mind taking a look?",
       "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0c3675c_c1ff064c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-07-07T15:22:03Z",
+      "side": 1,
+      "message": "Hey Philipp!\n\nIn general we want to move away from parsing bitstream data in the RTP part of the receive pipeline, so width and height being passed into a decoder is not something we should rely on.\n\nWhat I would propose instead is to implement a BlackVideoEncoderFactory that supports codecs that we know how to parse, and pass it from Chrome into WebRTC instead. From CreateVideoEncoder you can then simply return a BlackVideoDecoder that knows how to parse the bitstream of the given codec. This would be cleaner IMO, and if you ever want to parse other information you could do that as well.",
+      "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
