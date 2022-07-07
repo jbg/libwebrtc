@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53cff7c9_04d055ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-07T08:52:55Z",
+      "side": 1,
+      "message": "lgtm assuming downstream compatibility is simple to address",
+      "revId": "5c67a0f2848101337c0ccb6afff7f2c43f2d2402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
