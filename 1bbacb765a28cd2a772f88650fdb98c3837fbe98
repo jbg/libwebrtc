@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf1d2eb2_a43d252a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-07T18:48:44Z",
+      "side": 1,
+      "message": "went a bit in the direction of doing the parsing \"myself\" and the result looks still reasonably nice. Pulling bits and pieces from various parts of the code thought... maybe width/height extaction should be centralized similar to the QP parser?\n\nTests still need an update",
+      "parentUuid": "bcf707c6_e6157ff7",
+      "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58bff56a_3e337dec",
         "filename": "modules/video_coding/black_frame_decoder.cc",
         "patchSetId": 10
@@ -66,6 +84,24 @@
       "writtenOn": "2022-07-07T16:44:08Z",
       "side": 1,
       "message": "instead of a DCHECK one could do a 2x2 frame which if I recall correctly is an error style used elsewhere",
+      "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0377e170_8ca4d657",
+        "filename": "modules/video_coding/black_frame_decoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-07T18:48:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58bff56a_3e337dec",
       "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
