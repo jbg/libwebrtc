@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07a5b562_cd01cc05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-07T14:18:48Z",
+      "side": 1,
+      "message": "Hej Philip - do you mind taking a look?",
+      "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
