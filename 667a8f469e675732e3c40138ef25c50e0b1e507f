@@ -22,6 +22,76 @@
       },
       "revId": "667a8f469e675732e3c40138ef25c50e0b1e507f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb83133_13a9fc15",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-07T11:09:53Z",
+      "side": 1,
+      "message": "alternative way to fix it is \n`static constexpr bool kMarkerBit \u003d true;`\n\nbut your way is still an improvment.",
+      "parentUuid": "35ef141a_ae36ac92",
+      "range": {
+        "startLine": 174,
+        "startChar": 13,
+        "endLine": 174,
+        "endChar": 24
+      },
+      "revId": "667a8f469e675732e3c40138ef25c50e0b1e507f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "610f46f9_4025e0b0",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-07T11:09:53Z",
+      "side": 1,
+      "message": "ScopedKeyValueConfig suppose to override certain field, but this test doesn\u0027t, it just need an empty field trials.\nDo we have some simple NoFieldTrials class?\nMay be update existent class that you\u0027ve deleted:\n\n```\nclass FieldTrialConfig : public FieldTrialsView {\n public:\n  std::string Lookup(absl::string_view key) const override {\n    return \"\";\n  }\n};\n```\n(There might be need to add a new field tiral, it would be simpler to add it to existent local class)\n\n\nOr use class from `api/field_trials.h`:\nconst FieldTrials field_trials_{\"\"}",
+      "range": {
+        "startLine": 175,
+        "startChar": 14,
+        "endLine": 175,
+        "endChar": 34
+      },
+      "revId": "667a8f469e675732e3c40138ef25c50e0b1e507f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2c9965_cec0b91f",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-07T11:09:53Z",
+      "side": 1,
+      "message": "why this change?",
+      "range": {
+        "startLine": 545,
+        "startChar": 30,
+        "endLine": 545,
+        "endChar": 33
+      },
+      "revId": "667a8f469e675732e3c40138ef25c50e0b1e507f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
