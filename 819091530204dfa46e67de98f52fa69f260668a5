@@ -33,6 +33,24 @@
       "message": "This is the function that you can call from a test. video_receive_stream2_unittest is the logical place for a test.\n\nCall it with a mock decoder argument after setting the field trial.\n(It would be cleaner code if you chose to inject the BlackVideoDecoder via the decoder factory, but that\u0027s more convolution for what is, after all, a testing tool.)",
       "revId": "819091530204dfa46e67de98f52fa69f260668a5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "055c5f12_b40ce587",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-07T14:20:10Z",
+      "side": 1,
+      "message": "I (think I) can\u0027t inject via the factory since I actually want to use it in Chrome and override the chrome factory",
+      "parentUuid": "b748857e_c2fbdf67",
+      "revId": "819091530204dfa46e67de98f52fa69f260668a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
