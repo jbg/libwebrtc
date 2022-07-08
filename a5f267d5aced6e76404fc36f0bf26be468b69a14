@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d2ed2d_0127ef9b",
+        "filename": "tools_webrtc/ios/build_ios_libs.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5509
+      },
+      "writtenOn": "2022-07-08T09:17:27Z",
+      "side": 1,
+      "message": "do we still need to pass use_lld at all now? it\u0027s true by default.",
+      "revId": "a5f267d5aced6e76404fc36f0bf26be468b69a14",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
