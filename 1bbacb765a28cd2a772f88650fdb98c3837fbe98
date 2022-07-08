@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8561a23_e6352fd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-07-08T08:37:38Z",
+      "side": 1,
+      "message": "BlackFrameDecoder LG, would still like to see a factory though.\n\n\u003e WRT the factory approach i\u0027d like to have this both in chrome and native long-term. What advantages would a factory have?\n\nThe upside with injecting a factory is that test specific code like this is less nested in WebRTC. In Chrome we would still use a flag, but then this would be pushed out as far out as possible, and if you use it natively you can simply inject it from your own app.",
+      "parentUuid": "bf1d2eb2_a43d252a",
+      "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58bff56a_3e337dec",
         "filename": "modules/video_coding/black_frame_decoder.cc",
         "patchSetId": 10
