@@ -16,6 +16,23 @@
       "message": "this should cover some of the commonly used exceptions and explain killswitches",
       "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f01613f_68d8e97e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-08T10:05:29Z",
+      "side": 1,
+      "message": "I added this to Monday\u0027s webrtc-core meeting agenda (I won\u0027t be there, but at least the folks who are present can discuss it)\n",
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
