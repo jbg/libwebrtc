@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "581708e5_e036307c",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Is this CL dead, or is it merely pining for the fjords?\n",
       "revId": "bc3ec2cf99b2ed6ed930b355c2456dab263f3175",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "3383b85e_6b78e29c",
         "filename": "/PATCHSET_LEVEL",
@@ -32,10 +33,10 @@
       "message": "I think pining for the fjords is more accurate :) The most important part of this CL has been done differently but there _might_ be some things in here that would be worth landing but I haven\u0027t had time to give it attention. Safe to ignore for now and I\u0027ll ping back. I\u0027ll give you a heads-up if this CL ceases to be.",
       "parentUuid": "581708e5_e036307c",
       "revId": "bc3ec2cf99b2ed6ed930b355c2456dab263f3175",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "91f732b0_b8488300",
         "filename": "pc/peer_connection.cc",
@@ -49,10 +50,10 @@
       "side": 1,
       "message": "Doesn\u0027t this comment belong in jsep_transport_controller.h?",
       "revId": "bc3ec2cf99b2ed6ed930b355c2456dab263f3175",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "9de326b1_ddfe4b89",
         "filename": "pc/peer_connection.cc",
@@ -67,10 +68,10 @@
       "message": "both I guess.\nIdeally we\u0027d fix this in both places. At a minimum we could fix this call site and not have a problem since the code in jsep_transport_controller \"handles\" being called on the wrong thread but does the right thing when called on the network thread.",
       "parentUuid": "91f732b0_b8488300",
       "revId": "bc3ec2cf99b2ed6ed930b355c2456dab263f3175",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "c8b49251_53d3e7d3",
         "filename": "pc/stats_collector.h",
@@ -84,10 +85,10 @@
       "side": 1,
       "message": "I don\u0027t like this API ... we\u0027re effectively doing two completely different operations, one of which can be fire-and-forget, and the other which requires waiting, and separating them by the presence of an argument rather than the message signature.\n\nI\u0027d rather separate the two into UpdateStats (as present) and UpdateAndReturnStats (with callback). Then the fire-and-forget nature of UpdateStats for the call sites that currently use it is more obviously preserved.",
       "revId": "bc3ec2cf99b2ed6ed930b355c2456dab263f3175",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "c6a0c9b1_f3a56644",
         "filename": "pc/stats_collector.h",
@@ -102,8 +103,71 @@
       "message": "Good suggestion. Agree.",
       "parentUuid": "c8b49251_53d3e7d3",
       "revId": "bc3ec2cf99b2ed6ed930b355c2456dab263f3175",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ],
+  "submitRequirementResults": [
+    {
+      "submitRequirement": {
+        "name": "Code-Review",
+        "description": {
+          "value": "At least one maximum vote for label \u0027Code-Review\u0027 is required"
+        },
+        "applicabilityExpression": {},
+        "submittabilityExpression": {
+          "expressionString": "label:Code-Review\u003dMAX,user\u003dnon_uploader AND -label:Code-Review\u003dMIN"
+        },
+        "overrideExpression": {
+          "value": {
+            "expressionString": "label:Bot-Commit\u003d+1"
+          }
+        },
+        "allowOverrideInChildProjects": true
+      },
+      "applicabilityExpressionResult": {},
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"label:Code-Review=MAX,user=non_uploader AND -label:Code-Review=MIN"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Code-Review=MAX,user=non_uploader","label:Code-Review=MIN"]}
+      },
+      "overrideExpressionResult": {
+        "value": {"expression":{"expressionString":"label:Bot-Commit=+1"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Bot-Commit=+1"]}
+      },
+      "patchSetCommitId": "bc3ec2cf99b2ed6ed930b355c2456dab263f3175",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    },
+    {
+      "submitRequirement": {
+        "name": "Review-Enforcement",
+        "description": {
+          "value": "Two Google employees must approve the change. Uploading the change or voting positively on Code-Review count as approval."
+        },
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "is:review-enforced_gerrit"
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "is:review-enforcement-satisfied_gerrit"
+        },
+        "overrideExpression": {},
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"is:review-enforced_gerrit"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:review-enforced_gerrit"]}
+      },
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"is:review-enforcement-satisfied_gerrit"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+      },
+      "overrideExpressionResult": {},
+      "patchSetCommitId": "bc3ec2cf99b2ed6ed930b355c2456dab263f3175",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
     }
   ]
 }
