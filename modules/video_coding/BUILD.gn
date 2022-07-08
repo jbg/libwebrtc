@@ -164,6 +164,8 @@ rtc_library("frame_helpers") {
 rtc_library("video_coding") {
   visibility = [ "*" ]
   sources = [
+    "black_frame_decoder.cc",
+    "black_frame_decoder.h",
     "decoder_database.cc",
     "decoder_database.h",
     "fec_controller_default.cc",
@@ -1073,6 +1075,7 @@ if (rtc_include_tests) {
     testonly = true
 
     sources = [
+      "black_frame_decoder_unittest.cc",
       "chain_diff_calculator_unittest.cc",
       "codecs/test/videocodec_test_fixture_config_unittest.cc",
       "codecs/test/videocodec_test_stats_impl_unittest.cc",

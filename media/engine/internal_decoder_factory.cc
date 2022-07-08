@@ -15,6 +15,7 @@
 #include "api/video_codecs/video_codec.h"
 #include "media/base/codec.h"
 #include "media/base/media_constants.h"
+#include "modules/video_coding/black_frame_decoder.h"
 #include "modules/video_coding/codecs/av1/libaom_av1_decoder.h"
 #include "modules/video_coding/codecs/h264/include/h264.h"
 #include "modules/video_coding/codecs/vp8/include/vp8.h"
@@ -83,6 +84,8 @@ std::unique_ptr<VideoDecoder> InternalDecoderFactory::CreateVideoDecoder(
                         << format.ToString();
     return nullptr;
   }
+  if (field_trial::IsEnabled("WebRTC-BlackFrameDecoder"))
+    return std::make_unique<BlackFrameDecoder>(format);
 
   if (absl::EqualsIgnoreCase(format.name, cricket::kVp8CodecName))
     return VP8Decoder::Create();
