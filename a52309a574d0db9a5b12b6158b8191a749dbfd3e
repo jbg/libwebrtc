@@ -18,6 +18,40 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce669d8b_003f7b42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-08T11:01:32Z",
+      "side": 1,
+      "message": "while I\u0027m at it - a shoutout to \"one header, one cc file, one target\"....",
+      "revId": "a52309a574d0db9a5b12b6158b8191a749dbfd3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "228c9a14_cbd6f478",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-08T11:01:32Z",
+      "side": 1,
+      "message": "Libraries like this are not encouraged - the ideal target consists of one header file and one .cc file, and stuff that needs it can depend on it.\n\nThere\u0027s a LOT of stuff to clean up to get to the ideal for old code, but don\u0027t make it worse.",
+      "revId": "a52309a574d0db9a5b12b6158b8191a749dbfd3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "335a999b_a6cab0aa",
