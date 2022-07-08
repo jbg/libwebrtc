@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ff0e7ab_d773f3c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-08T09:46:37Z",
+      "side": 1,
+      "message": "(ignore the include-not-allowed gn warning for now)",
+      "revId": "36f2d654384811724a021b0c3dcc42aa8398b8d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

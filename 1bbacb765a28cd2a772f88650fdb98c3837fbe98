@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0db7f84_2b6345c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-08T09:46:37Z",
+      "side": 1,
+      "message": "So effectively overriding the factory similar to what is done here:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/peerconnection/peer_connection_dependency_factory.cc;l\u003d638;bpv\u003d1;bpt\u003d0?q\u003dFakeVideoDecoderFactory%20\u0026ss\u003dchromium%2Fchromium%2Fsrc\n(which of course I found only now; should I move the BlackFrameDecoder to test/ too?).\n\nWDYT about combining this with --disable-webrtc-hw-decoding (I think that disables support for some H264 variants but that seems ok) which \"falls back\" to the internal decoder factory and moving the BlackVideoDecoder field trial flag to InternalDecoderFactory::CreateVideoDecoder as done in the latest patchset?\nIt doesn\u0027t support new style for field trials though.",
+      "parentUuid": "f8561a23_e6352fd2",
+      "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58bff56a_3e337dec",
         "filename": "modules/video_coding/black_frame_decoder.cc",
         "patchSetId": 10
