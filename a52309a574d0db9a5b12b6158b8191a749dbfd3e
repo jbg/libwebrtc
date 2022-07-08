@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d2257c0_f653fe19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-08T10:32:24Z",
+      "side": 1,
+      "message": "Much more self-contained, I assume there\u0027s another CL in the works integrating it.\n",
+      "revId": "a52309a574d0db9a5b12b6158b8191a749dbfd3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "335a999b_a6cab0aa",
+        "filename": "modules/video_coding/black_frame_decoder.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-08T10:32:24Z",
+      "side": 1,
+      "message": "Should there be an RTC_LOG(ERROR) \u003c\u003c \"Unsupported codec \" \u003c\u003c type_ here?\nwe don\u0027t get enough keyframes to make it unbearable logspew.",
+      "revId": "a52309a574d0db9a5b12b6158b8191a749dbfd3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ca7e8d2_d8ba9342",
+        "filename": "modules/video_coding/black_frame_decoder_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-07-08T10:32:24Z",
+      "side": 1,
+      "message": "Which branch of the switch will be taken in the BlackFrameDecoder when looking for size given this codec name?",
+      "revId": "a52309a574d0db9a5b12b6158b8191a749dbfd3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
