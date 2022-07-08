@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0d58482_ea05f54b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-07-08T11:21:42Z",
+      "side": 1,
+      "message": "\u003e So effectively overriding the factory similar to what is done here:\n\nYepp, exactly like that.\n\n\u003e should I move the BlackFrameDecoder to test\n\nNo, then only other test targets would be able to depend on it (assuming everything in test/ is testonly).\n\n\u003e moving the BlackVideoDecoder field trial flag to InternalDecoderFactory::CreateVideoDecoder as done in the latest patchset\n\nNo, there is ongoing work to remove BuiltinVideo{Encoder,Decoder}Factory (https://bugs.webrtc.org/13573), and while not explicitly stated, this means we would remove the InternalDecoderFactory as well.",
+      "parentUuid": "a0db7f84_2b6345c0",
+      "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58bff56a_3e337dec",
         "filename": "modules/video_coding/black_frame_decoder.cc",
         "patchSetId": 10
