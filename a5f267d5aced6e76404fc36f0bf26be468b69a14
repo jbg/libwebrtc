@@ -16,6 +16,24 @@
       "message": "do we still need to pass use_lld at all now? it\u0027s true by default.",
       "revId": "a5f267d5aced6e76404fc36f0bf26be468b69a14",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2543fd96_f506156c",
+        "filename": "tools_webrtc/ios/build_ios_libs.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5390
+      },
+      "writtenOn": "2022-07-08T12:09:50Z",
+      "side": 1,
+      "message": "I don\u0027t think it is required.",
+      "parentUuid": "12d2ed2d_0127ef9b",
+      "revId": "a5f267d5aced6e76404fc36f0bf26be468b69a14",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
