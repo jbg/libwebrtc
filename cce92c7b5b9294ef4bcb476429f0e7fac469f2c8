@@ -22,6 +22,30 @@
       },
       "revId": "cce92c7b5b9294ef4bcb476429f0e7fac469f2c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41406b45_0ecceb3c",
+        "filename": "media/engine/black_frame_decoder_factory.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-08T16:00:07Z",
+      "side": 1,
+      "message": "it is wrapping the actual factory, see the Multiplex factory\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/media/engine/multiplex_codec_factory.h\nwhich does a similar thing to extend by an arcane codec. The goal is to get the same behavior for getCapabilities, createOffer et al but just not to decode",
+      "parentUuid": "2ac8787b_6d8a0b1e",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 50
+      },
+      "revId": "cce92c7b5b9294ef4bcb476429f0e7fac469f2c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
