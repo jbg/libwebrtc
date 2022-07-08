@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d4dfa5c_a29bc576",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-08T15:02:57Z",
+      "side": 1,
+      "message": "\u003e \u003e So effectively overriding the factory similar to what is done here:\n\u003e \n\u003e Yepp, exactly like that.\n\u003e \n\u003e \u003e should I move the BlackFrameDecoder to test\n\u003e \n\u003e No, then only other test targets would be able to depend on it (assuming everything in test/ is testonly).\n\nThe chrome PCDF has no problems accessing webrtc/test/ (which is a bit surprising but...). Will leave it where it is for now.\n\n\u003e \u003e moving the BlackVideoDecoder field trial flag to InternalDecoderFactory::CreateVideoDecoder as done in the latest patchset\n\u003e \n\u003e No, there is ongoing work to remove BuiltinVideo{Encoder,Decoder}Factory (https://bugs.webrtc.org/13573), and while not explicitly stated, this means we would remove the InternalDecoderFactory as well.\n\nlike in the updated version? Chrome CL (missing actual flag):\n  https://chromium-review.googlesource.com/c/chromium/src/+/3751141",
+      "parentUuid": "e0d58482_ea05f54b",
+      "revId": "1bbacb765a28cd2a772f88650fdb98c3837fbe98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58bff56a_3e337dec",
         "filename": "modules/video_coding/black_frame_decoder.cc",
         "patchSetId": 10
