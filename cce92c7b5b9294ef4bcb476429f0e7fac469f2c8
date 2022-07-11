@@ -70,6 +70,30 @@
       },
       "revId": "cce92c7b5b9294ef4bcb476429f0e7fac469f2c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af3a46a5_62b12b8a",
+        "filename": "media/engine/black_frame_decoder_factory.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-07-11T14:54:28Z",
+      "side": 1,
+      "message": "I want to retain all the different profiles, profile-levels and packetization modes normally offered and keep them in sync.\n\nAV1 which is currently kinda unsupported (and returns a 2x2 frame) could be filtered for now. But that gets quite confusing because the decoder won\u0027t support AV1 yet the encoder will. And then if an offerer prefers AV1 (e.g. on https://webrtc.github.io/samples/src/content/peerconnection/change-codecs/) this will result in VP8 (or whatever is the \u0027next best\u0027) being negotiated.\n\nI hope that i\u0027ll be able to find time (or a person) for some OBU parsing soon enough.",
+      "parentUuid": "8959bde8_dc411da6",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 50
+      },
+      "revId": "cce92c7b5b9294ef4bcb476429f0e7fac469f2c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
