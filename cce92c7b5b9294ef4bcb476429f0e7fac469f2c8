@@ -46,6 +46,30 @@
       },
       "revId": "cce92c7b5b9294ef4bcb476429f0e7fac469f2c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8959bde8_dc411da6",
+        "filename": "media/engine/black_frame_decoder_factory.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-07-11T14:01:59Z",
+      "side": 1,
+      "message": "This doesn\u0027t quite make sense to me. I think you should only advertise codecs that BlackFrameDecoder knows how to parse, and other codecs can be tested the way they already are (with an actual decoder).",
+      "parentUuid": "41406b45_0ecceb3c",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 50
+      },
+      "revId": "cce92c7b5b9294ef4bcb476429f0e7fac469f2c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
