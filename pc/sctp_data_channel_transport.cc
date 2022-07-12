@@ -27,8 +27,9 @@ SctpDataChannelTransport::SctpDataChannelTransport(
       this, &SctpDataChannelTransport::OnClosedAbruptly);
 }
 
-RTCError SctpDataChannelTransport::OpenChannel(int channel_id) {
-  sctp_transport_->OpenStream(channel_id);
+RTCError SctpDataChannelTransport::OpenChannel(int channel_id,
+                                               DataChannelPriority priority) {
+  sctp_transport_->OpenStream(channel_id, priority);
   return RTCError::OK();
 }
 

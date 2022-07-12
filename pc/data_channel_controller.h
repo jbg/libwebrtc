@@ -54,7 +54,7 @@ class DataChannelController : public SctpDataChannelControllerInterface,
                 cricket::SendDataResult* result) override;
   bool ConnectDataChannel(SctpDataChannel* webrtc_data_channel) override;
   void DisconnectDataChannel(SctpDataChannel* webrtc_data_channel) override;
-  void AddSctpDataStream(int sid) override;
+  void AddSctpDataStream(int sid, DataChannelPriority priority) override;
   void RemoveSctpDataStream(int sid) override;
   bool ReadyToSendData() const override;
 

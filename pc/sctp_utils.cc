@@ -16,6 +16,7 @@
 
 #include "absl/types/optional.h"
 #include "api/priority.h"
+#include "pc/sctp_data_channel_constants.h"
 #include "rtc_base/byte_buffer.h"
 #include "rtc_base/copy_on_write_buffer.h"
 #include "rtc_base/logging.h"
@@ -37,15 +38,6 @@ enum DataChannelOpenMessageChannelType {
   DCOMCT_UNORDERED_PARTIAL_TIME = 0x82,
 };
 
-// Values of priority in the DC open protocol message.
-// These are compared against an integer, so are enum, not enum class.
-enum DataChannelPriority {
-  DCO_PRIORITY_VERY_LOW = 128,
-  DCO_PRIORITY_LOW = 256,
-  DCO_PRIORITY_MEDIUM = 512,
-  DCO_PRIORITY_HIGH = 1024,
-};
-
 bool IsOpenMessage(const rtc::CopyOnWriteBuffer& payload) {
   // Format defined at
   // http://tools.ietf.org/html/draft-jesup-rtcweb-data-protocol-04
@@ -58,93 +50,93 @@ bool IsOpenMessage(const rtc::CopyOnWriteBuffer& payload) {
   return message_type == DATA_CHANNEL_OPEN_MESSAGE_TYPE;
 }
 
-bool ParseDataChannelOpenMessage(const rtc::CopyOnWriteBuffer& payload,
-                                 std::string* label,
-                                 DataChannelInit* config) {
+absl::optional<DataChannelOpenMessage> ParseDataChannelOpenMessage(
+    const rtc::CopyOnWriteBuffer& payload) {
   // Format defined at
   // http://tools.ietf.org/html/draft-jesup-rtcweb-data-protocol-04
+  DataChannelOpenMessage message;
 
   rtc::ByteBufferReader buffer(payload.data<char>(), payload.size());
   uint8_t message_type;
   if (!buffer.ReadUInt8(&message_type)) {
     RTC_LOG(LS_WARNING) << "Could not read OPEN message type.";
-    return false;
+    return absl::nullopt;
   }
   if (message_type != DATA_CHANNEL_OPEN_MESSAGE_TYPE) {
     RTC_LOG(LS_WARNING) << "Data Channel OPEN message of unexpected type: "
                         << message_type;
-    return false;
+    return absl::nullopt;
   }
 
   uint8_t channel_type;
   if (!buffer.ReadUInt8(&channel_type)) {
     RTC_LOG(LS_WARNING) << "Could not read OPEN message channel type.";
-    return false;
+    return absl::nullopt;
   }
 
   uint16_t priority;
   if (!buffer.ReadUInt16(&priority)) {
-    RTC_LOG(LS_WARNING)
-        << "Could not read OPEN message reliabilility prioirty.";
-    return false;
+    RTC_LOG(LS_WARNING) << "Could not read OPEN message priority.";
+    return absl::nullopt;
   }
   // Parse priority as defined in
   // https://w3c.github.io/webrtc-priority/#rtcdatachannel-processing-steps
-  if (priority <= DCO_PRIORITY_VERY_LOW) {
-    config->priority = Priority::kVeryLow;
-  } else if (priority <= DCO_PRIORITY_LOW) {
-    config->priority = Priority::kLow;
-  } else if (priority <= DCO_PRIORITY_MEDIUM) {
-    config->priority = Priority::kMedium;
+  if (priority <= kDataChannelPriorityVeryLow) {
+    message.configuration.priority = Priority::kVeryLow;
+  } else if (priority <= kDataChannelPriorityLow) {
+    message.configuration.priority = Priority::kLow;
+  } else if (priority <= kDataChannelPriorityMedium) {
+    message.configuration.priority = Priority::kMedium;
   } else {
-    config->priority = Priority::kHigh;
+    message.configuration.priority = Priority::kHigh;
   }
+  message.configuration.internal_priority = DataChannelPriority(priority);
 
   uint32_t reliability_param;
   if (!buffer.ReadUInt32(&reliability_param)) {
     RTC_LOG(LS_WARNING) << "Could not read OPEN message reliabilility param.";
-    return false;
+    return absl::nullopt;
   }
   uint16_t label_length;
   if (!buffer.ReadUInt16(&label_length)) {
     RTC_LOG(LS_WARNING) << "Could not read OPEN message label length.";
-    return false;
+    return absl::nullopt;
   }
   uint16_t protocol_length;
   if (!buffer.ReadUInt16(&protocol_length)) {
     RTC_LOG(LS_WARNING) << "Could not read OPEN message protocol length.";
-    return false;
+    return absl::nullopt;
   }
-  if (!buffer.ReadString(label, (size_t)label_length)) {
+  if (!buffer.ReadString(&message.label, (size_t)label_length)) {
     RTC_LOG(LS_WARNING) << "Could not read OPEN message label";
-    return false;
+    return absl::nullopt;
   }
-  if (!buffer.ReadString(&config->protocol, protocol_length)) {
+  if (!buffer.ReadString(&message.configuration.protocol, protocol_length)) {
     RTC_LOG(LS_WARNING) << "Could not read OPEN message protocol.";
-    return false;
+    return absl::nullopt;
   }
 
-  config->ordered = true;
+  message.configuration.ordered = true;
   switch (channel_type) {
     case DCOMCT_UNORDERED_RELIABLE:
     case DCOMCT_UNORDERED_PARTIAL_RTXS:
     case DCOMCT_UNORDERED_PARTIAL_TIME:
-      config->ordered = false;
+      message.configuration.ordered = false;
   }
 
-  config->maxRetransmits = absl::nullopt;
-  config->maxRetransmitTime = absl::nullopt;
+  message.configuration.maxRetransmits = absl::nullopt;
+  message.configuration.maxRetransmitTime = absl::nullopt;
   switch (channel_type) {
     case DCOMCT_ORDERED_PARTIAL_RTXS:
     case DCOMCT_UNORDERED_PARTIAL_RTXS:
-      config->maxRetransmits = reliability_param;
+      message.configuration.maxRetransmits = reliability_param;
       break;
     case DCOMCT_ORDERED_PARTIAL_TIME:
     case DCOMCT_UNORDERED_PARTIAL_TIME:
-      config->maxRetransmitTime = reliability_param;
+      message.configuration.maxRetransmitTime = reliability_param;
       break;
   }
-  return true;
+  return message;
 }
 
 bool ParseDataChannelOpenAckMessage(const rtc::CopyOnWriteBuffer& payload) {
@@ -175,16 +167,16 @@ bool WriteDataChannelOpenMessage(const std::string& label,
   if (config.priority) {
     switch (*config.priority) {
       case Priority::kVeryLow:
-        priority = DCO_PRIORITY_VERY_LOW;
+        priority = kDataChannelPriorityVeryLow;
         break;
       case Priority::kLow:
-        priority = DCO_PRIORITY_LOW;
+        priority = kDataChannelPriorityLow;
         break;
       case Priority::kMedium:
-        priority = DCO_PRIORITY_MEDIUM;
+        priority = kDataChannelPriorityMedium;
         break;
       case Priority::kHigh:
-        priority = DCO_PRIORITY_HIGH;
+        priority = kDataChannelPriorityHigh;
         break;
     }
   }

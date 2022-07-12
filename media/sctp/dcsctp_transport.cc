@@ -205,13 +205,16 @@ bool DcSctpTransport::Start(int local_sctp_port,
   return true;
 }
 
-bool DcSctpTransport::OpenStream(int sid) {
-  RTC_LOG(LS_INFO) << debug_name_ << "->OpenStream(" << sid << ").";
+bool DcSctpTransport::OpenStream(int sid, DataChannelPriority priority) {
+  RTC_LOG(LS_INFO) << debug_name_ << "->OpenStream(" << sid << ", "
+                   << priority.value() << ").";
   if (!socket_) {
-    RTC_LOG(LS_ERROR) << debug_name_ << "->OpenStream(sid=" << sid
-                      << "): Transport is not started.";
+    RTC_LOG(LS_ERROR) << debug_name_ << "->OpenStream(sid=" << sid << ", "
+                      << priority.value() << "): Transport is not started.";
     return false;
   }
+  socket_->SetStreamPriority(dcsctp::StreamID(static_cast<uint16_t>(sid)),
+                             dcsctp::StreamPriority(priority.value()));
   return true;
 }
 

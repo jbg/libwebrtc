@@ -65,7 +65,7 @@ class FakeDataChannelController
     connected_channels_.erase(data_channel);
   }
 
-  void AddSctpDataStream(int sid) override {
+  void AddSctpDataStream(int sid, webrtc::DataChannelPriority) override {
     RTC_CHECK(sid >= 0);
     if (!transport_available_) {
       return;

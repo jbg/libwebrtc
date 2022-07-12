@@ -16,8 +16,10 @@
 #include <utility>
 
 #include "absl/cleanup/cleanup.h"
+#include "api/priority.h"
 #include "media/sctp/sctp_transport_internal.h"
 #include "pc/proxy.h"
+#include "pc/sctp_data_channel_constants.h"
 #include "pc/sctp_utils.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/location.h"
@@ -35,6 +37,20 @@ static std::atomic<int> g_unique_id{0};
 
 int GenerateUniqueId() {
   return ++g_unique_id;
+}
+
+DataChannelPriority ToDataChannelPriority(Priority priority) {
+  switch (priority) {
+    case Priority::kVeryLow:
+      return DataChannelPriority(kDataChannelPriorityVeryLow);
+    case Priority::kMedium:
+      return DataChannelPriority(kDataChannelPriorityMedium);
+    case Priority::kHigh:
+      return DataChannelPriority(kDataChannelPriorityHigh);
+    default:
+    case Priority::kLow:
+      return DataChannelPriority(kDataChannelPriorityLow);
+  }
 }
 
 // Define proxy for DataChannelInterface.
@@ -78,6 +94,9 @@ InternalDataChannelInit::InternalDataChannelInit(const DataChannelInit& base)
     // Specified in createDataChannel, WebRTC spec section 6.1 bullet 13.
     id = -1;
   }
+
+  internal_priority = ToDataChannelPriority(priority.value_or(Priority::kLow));
+
   // Backwards compatibility: If maxRetransmits or maxRetransmitTime
   // are negative, the feature is not enabled.
   // Values are clamped to a 16bit range.
@@ -335,7 +354,7 @@ void SctpDataChannel::SetSctpSid(int sid) {
 
   const_cast<InternalDataChannelInit&>(config_).id = sid;
   RTC_DCHECK(!controller_detached_);
-  controller_->AddSctpDataStream(sid);
+  controller_->AddSctpDataStream(sid, config_.internal_priority);
 }
 
 void SctpDataChannel::OnClosingProcedureStartedRemotely(int sid) {
@@ -377,7 +396,7 @@ void SctpDataChannel::OnTransportChannelCreated() {
   // The sid may have been unassigned when controller_->ConnectDataChannel was
   // done. So always add the streams even if connected_to_transport_ is true.
   if (config_.id >= 0) {
-    controller_->AddSctpDataStream(config_.id);
+    controller_->AddSctpDataStream(config_.id, config_.internal_priority);
   }
 }
 
