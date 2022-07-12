@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b210eb1_b21053fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-07-12T14:54:51Z",
+      "side": 1,
+      "message": "PTAL. This is the last step of removing the Write(const std::string\u0026) overload in RtcEventLogOutput.",
+      "revId": "59456458dc4ad9bca44a26a2a6b8d1a27a4ee521",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
