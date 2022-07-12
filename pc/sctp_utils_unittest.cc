@@ -14,6 +14,7 @@
 
 #include "absl/types/optional.h"
 #include "api/priority.h"
+#include "pc/sctp_data_channel_constants.h"
 #include "rtc_base/byte_buffer.h"
 #include "rtc_base/copy_on_write_buffer.h"
 #include "test/gtest.h"
@@ -86,16 +87,15 @@ TEST_F(SctpUtilsTest, WriteParseOpenMessageWithOrderedReliable) {
 
   VerifyOpenMessageFormat(packet, label, config);
 
-  std::string output_label;
-  webrtc::DataChannelInit output_config;
-  ASSERT_TRUE(webrtc::ParseDataChannelOpenMessage(packet, &output_label,
-                                                  &output_config));
+  absl::optional<webrtc::DataChannelOpenMessage> message =
+      webrtc::ParseDataChannelOpenMessage(packet);
+  ASSERT_TRUE(message);
 
-  EXPECT_EQ(label, output_label);
-  EXPECT_EQ(config.protocol, output_config.protocol);
-  EXPECT_EQ(config.ordered, output_config.ordered);
-  EXPECT_EQ(config.maxRetransmitTime, output_config.maxRetransmitTime);
-  EXPECT_EQ(config.maxRetransmits, output_config.maxRetransmits);
+  EXPECT_EQ(label, message->label);
+  EXPECT_EQ(config.protocol, message->configuration.protocol);
+  EXPECT_EQ(config.ordered, message->configuration.ordered);
+  EXPECT_EQ(config.maxRetransmitTime, message->configuration.maxRetransmitTime);
+  EXPECT_EQ(config.maxRetransmits, message->configuration.maxRetransmits);
 }
 
 TEST_F(SctpUtilsTest, WriteParseOpenMessageWithMaxRetransmitTime) {
@@ -110,16 +110,15 @@ TEST_F(SctpUtilsTest, WriteParseOpenMessageWithMaxRetransmitTime) {
 
   VerifyOpenMessageFormat(packet, label, config);
 
-  std::string output_label;
-  webrtc::DataChannelInit output_config;
-  ASSERT_TRUE(webrtc::ParseDataChannelOpenMessage(packet, &output_label,
-                                                  &output_config));
+  absl::optional<webrtc::DataChannelOpenMessage> message =
+      webrtc::ParseDataChannelOpenMessage(packet);
+  ASSERT_TRUE(message);
 
-  EXPECT_EQ(label, output_label);
-  EXPECT_EQ(config.protocol, output_config.protocol);
-  EXPECT_EQ(config.ordered, output_config.ordered);
-  EXPECT_EQ(*config.maxRetransmitTime, *output_config.maxRetransmitTime);
-  EXPECT_FALSE(output_config.maxRetransmits);
+  EXPECT_EQ(label, message->label);
+  EXPECT_EQ(config.protocol, message->configuration.protocol);
+  EXPECT_EQ(config.ordered, message->configuration.ordered);
+  EXPECT_EQ(config.maxRetransmitTime, message->configuration.maxRetransmitTime);
+  EXPECT_EQ(config.maxRetransmits, message->configuration.maxRetransmits);
 }
 
 TEST_F(SctpUtilsTest, WriteParseOpenMessageWithMaxRetransmits) {
@@ -133,16 +132,15 @@ TEST_F(SctpUtilsTest, WriteParseOpenMessageWithMaxRetransmits) {
 
   VerifyOpenMessageFormat(packet, label, config);
 
-  std::string output_label;
-  webrtc::DataChannelInit output_config;
-  ASSERT_TRUE(webrtc::ParseDataChannelOpenMessage(packet, &output_label,
-                                                  &output_config));
+  absl::optional<webrtc::DataChannelOpenMessage> message =
+      webrtc::ParseDataChannelOpenMessage(packet);
+  ASSERT_TRUE(message);
 
-  EXPECT_EQ(label, output_label);
-  EXPECT_EQ(config.protocol, output_config.protocol);
-  EXPECT_EQ(config.ordered, output_config.ordered);
-  EXPECT_EQ(config.maxRetransmits, output_config.maxRetransmits);
-  EXPECT_FALSE(output_config.maxRetransmitTime);
+  EXPECT_EQ(label, message->label);
+  EXPECT_EQ(config.protocol, message->configuration.protocol);
+  EXPECT_EQ(config.ordered, message->configuration.ordered);
+  EXPECT_EQ(config.maxRetransmitTime, message->configuration.maxRetransmitTime);
+  EXPECT_EQ(config.maxRetransmits, message->configuration.maxRetransmits);
 }
 
 TEST_F(SctpUtilsTest, WriteParseOpenMessageWithPriority) {
@@ -156,14 +154,15 @@ TEST_F(SctpUtilsTest, WriteParseOpenMessageWithPriority) {
 
   VerifyOpenMessageFormat(packet, label, config);
 
-  std::string output_label;
-  webrtc::DataChannelInit output_config;
-  ASSERT_TRUE(webrtc::ParseDataChannelOpenMessage(packet, &output_label,
-                                                  &output_config));
+  absl::optional<webrtc::DataChannelOpenMessage> message =
+      webrtc::ParseDataChannelOpenMessage(packet);
+  ASSERT_TRUE(message);
 
-  EXPECT_EQ(label, output_label);
-  ASSERT_TRUE(output_config.priority);
-  EXPECT_EQ(*config.priority, *output_config.priority);
+  EXPECT_EQ(label, message->label);
+  ASSERT_TRUE(message->configuration.priority);
+  EXPECT_EQ(*config.priority, *message->configuration.priority);
+  EXPECT_EQ(webrtc::DataChannelPriority(webrtc::kDataChannelPriorityVeryLow),
+            message->configuration.internal_priority);
 }
 
 TEST_F(SctpUtilsTest, WriteParseAckMessage) {

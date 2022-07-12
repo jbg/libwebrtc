@@ -13,8 +13,10 @@
 #define API_TRANSPORT_DATA_CHANNEL_TRANSPORT_INTERFACE_H_
 
 #include "absl/types/optional.h"
+#include "api/priority.h"
 #include "api/rtc_error.h"
 #include "rtc_base/copy_on_write_buffer.h"
+#include "rtc_base/strong_alias.h"
 
 namespace webrtc {
 
@@ -29,6 +31,9 @@ enum class DataMessageType {
   // Transport-agnostic control messages, such as open or open-ack messages.
   kControl,
 };
+
+using DataChannelPriority =
+    webrtc::StrongAlias<class DataChannelPriorityTag, uint16_t>;
 
 // Parameters for sending data.  The parameters may change from message to
 // message, even within a single channel.  For example, control messages may be
@@ -95,7 +100,8 @@ class DataChannelTransportInterface {
 
   // Opens a data `channel_id` for sending.  May return an error if the
   // specified `channel_id` is unusable.  Must be called before `SendData`.
-  virtual RTCError OpenChannel(int channel_id) = 0;
+  virtual RTCError OpenChannel(int channel_id,
+                               DataChannelPriority priority) = 0;
 
   // Sends a data buffer to the remote endpoint using the given send parameters.
   // `buffer` may not be larger than 256 KiB. Returns an error if the send

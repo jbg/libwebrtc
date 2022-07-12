@@ -508,26 +508,6 @@ rtc_source_set("sctp_transport") {
   absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
 }
 
-rtc_source_set("sctp_utils") {
-  visibility = [
-    ":*",
-    "../test/fuzzers:*",
-  ]
-  sources = [
-    "sctp_utils.cc",
-    "sctp_utils.h",
-  ]
-  deps = [
-    "../api:libjingle_peerconnection_api",
-    "../api:priority",
-    "../api/transport:datagram_transport_interface",
-    "../media:rtc_media_base",
-    "../rtc_base:byte_buffer",
-    "../rtc_base:copy_on_write_buffer",
-    "../rtc_base:logging",
-  ]
-  absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
-}
 rtc_source_set("srtp_filter") {
   visibility = [ ":*" ]
   sources = [
@@ -857,11 +837,13 @@ rtc_library("sctp_data_channel") {
   sources = [
     "sctp_data_channel.cc",
     "sctp_data_channel.h",
+    "sctp_data_channel_constants.h",
+    "sctp_utils.cc",
+    "sctp_utils.h",
   ]
   deps = [
     ":data_channel_utils",
     ":proxy",
-    ":sctp_utils",
     "../api:libjingle_peerconnection_api",
     "../api:priority",
     "../api:rtc_error",
@@ -869,6 +851,7 @@ rtc_library("sctp_data_channel") {
     "../api/transport:datagram_transport_interface",
     "../media:rtc_data_sctp_transport_internal",
     "../media:rtc_media_base",
+    "../rtc_base:byte_buffer",
     "../rtc_base:checks",
     "../rtc_base:copy_on_write_buffer",
     "../rtc_base:location",
@@ -942,7 +925,6 @@ rtc_source_set("data_channel_controller") {
     ":data_channel_utils",
     ":peer_connection_internal",
     ":sctp_data_channel",
-    ":sctp_utils",
     "../api:libjingle_peerconnection_api",
     "../api:rtc_error",
     "../api:scoped_refptr",
@@ -2324,7 +2306,6 @@ if (rtc_include_tests && !build_with_chromium) {
       ":rtp_transport_internal",
       ":sctp_data_channel",
       ":sctp_transport",
-      ":sctp_utils",
       ":sdp_serializer",
       ":sdp_utils",
       ":session_description",
