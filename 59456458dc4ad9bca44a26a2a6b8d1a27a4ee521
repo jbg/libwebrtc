@@ -33,6 +33,23 @@
       "message": "Nice. Thanks!",
       "revId": "59456458dc4ad9bca44a26a2a6b8d1a27a4ee521",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5899c8a2_f8c6194a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-07-12T19:46:56Z",
+      "side": 1,
+      "message": "Adding Tommi for global approval.",
+      "revId": "59456458dc4ad9bca44a26a2a6b8d1a27a4ee521",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
