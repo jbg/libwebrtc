@@ -49,7 +49,7 @@ class SctpDataChannelControllerInterface {
   // Disconnects from the transport signals.
   virtual void DisconnectDataChannel(SctpDataChannel* data_channel) = 0;
   // Adds the data channel SID to the transport for SCTP.
-  virtual void AddSctpDataStream(int sid) = 0;
+  virtual void AddSctpDataStream(int sid, DataChannelPriority priority) = 0;
   // Begins the closing procedure by sending an outgoing stream reset. Still
   // need to wait for callbacks to tell when this completes.
   virtual void RemoveSctpDataStream(int sid) = 0;
@@ -68,6 +68,10 @@ struct InternalDataChannelInit : public DataChannelInit {
   InternalDataChannelInit() : open_handshake_role(kOpener) {}
   explicit InternalDataChannelInit(const DataChannelInit& base);
   OpenHandshakeRole open_handshake_role;
+
+  // Numeric value for the data channel priority, coming from either
+  // the base priority field or set by a DCEP message.
+  DataChannelPriority internal_priority;
 };
 
 // Helper class to allocate unique IDs for SCTP DataChannels.

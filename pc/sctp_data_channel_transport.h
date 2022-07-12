@@ -27,7 +27,7 @@ class SctpDataChannelTransport : public DataChannelTransportInterface,
   explicit SctpDataChannelTransport(
       cricket::SctpTransportInternal* sctp_transport);
 
-  RTCError OpenChannel(int channel_id) override;
+  RTCError OpenChannel(int channel_id, DataChannelPriority priority) override;
   RTCError SendData(int channel_id,
                     const SendDataParams& params,
                     const rtc::CopyOnWriteBuffer& buffer) override;

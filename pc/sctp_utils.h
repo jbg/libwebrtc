@@ -13,9 +13,11 @@
 
 #include <string>
 
+#include "absl/types/optional.h"
 #include "api/data_channel_interface.h"
 #include "api/transport/data_channel_transport_interface.h"
 #include "media/base/media_channel.h"
+#include "pc/sctp_data_channel.h"
 #include "rtc_base/copy_on_write_buffer.h"
 
 namespace rtc {
@@ -28,9 +30,13 @@ struct DataChannelInit;
 // Read the message type and return true if it's an OPEN message.
 bool IsOpenMessage(const rtc::CopyOnWriteBuffer& payload);
 
-bool ParseDataChannelOpenMessage(const rtc::CopyOnWriteBuffer& payload,
-                                 std::string* label,
-                                 DataChannelInit* config);
+struct DataChannelOpenMessage {
+  std::string label;
+  webrtc::InternalDataChannelInit configuration;
+};
+
+absl::optional<DataChannelOpenMessage> ParseDataChannelOpenMessage(
+    const rtc::CopyOnWriteBuffer& payload);
 
 bool ParseDataChannelOpenAckMessage(const rtc::CopyOnWriteBuffer& payload);
 

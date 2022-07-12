@@ -118,7 +118,7 @@ TEST(DcSctpTransportTest, CloseSequence) {
 
   peer_a.sctp_transport_->Start(5000, 5000, 256 * 1024);
   peer_b.sctp_transport_->Start(5000, 5000, 256 * 1024);
-  peer_a.sctp_transport_->OpenStream(1);
+  peer_a.sctp_transport_->OpenStream(1, DataChannelPriority(256));
   peer_a.sctp_transport_->ResetStream(1);
 
   // Simulate the callbacks from the stream resets
@@ -161,7 +161,7 @@ TEST(DcSctpTransportTest, CloseSequenceSimultaneous) {
 
   peer_a.sctp_transport_->Start(5000, 5000, 256 * 1024);
   peer_b.sctp_transport_->Start(5000, 5000, 256 * 1024);
-  peer_a.sctp_transport_->OpenStream(1);
+  peer_a.sctp_transport_->OpenStream(1, DataChannelPriority(256));
   peer_a.sctp_transport_->ResetStream(1);
   peer_b.sctp_transport_->ResetStream(1);
 

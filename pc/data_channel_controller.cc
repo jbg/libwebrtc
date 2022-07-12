@@ -79,11 +79,12 @@ void DataChannelController::DisconnectDataChannel(
   SignalDataChannelTransportChannelClosed_s.disconnect(webrtc_data_channel);
 }
 
-void DataChannelController::AddSctpDataStream(int sid) {
+void DataChannelController::AddSctpDataStream(int sid,
+                                              DataChannelPriority priority) {
   if (data_channel_transport()) {
-    network_thread()->Invoke<void>(RTC_FROM_HERE, [this, sid] {
+    network_thread()->Invoke<void>(RTC_FROM_HERE, [this, sid, priority] {
       if (data_channel_transport()) {
-        data_channel_transport()->OpenChannel(sid);
+        data_channel_transport()->OpenChannel(sid, priority);
       }
     });
   }
@@ -226,16 +227,17 @@ bool DataChannelController::HandleOpenMessage_s(
   if (params.type == DataMessageType::kControl && IsOpenMessage(buffer)) {
     // Received OPEN message; parse and signal that a new data channel should
     // be created.
-    std::string label;
-    InternalDataChannelInit config;
-    config.id = params.sid;
-    if (!ParseDataChannelOpenMessage(buffer, &label, &config)) {
+    absl::optional<DataChannelOpenMessage> message =
+        ParseDataChannelOpenMessage(buffer);
+    if (!message) {
       RTC_LOG(LS_WARNING) << "Failed to parse the OPEN message for sid "
                           << params.sid;
       return true;
     }
-    config.open_handshake_role = InternalDataChannelInit::kAcker;
-    OnDataChannelOpenMessage(label, config);
+    message->configuration.id = params.sid;
+    message->configuration.open_handshake_role =
+        InternalDataChannelInit::kAcker;
+    OnDataChannelOpenMessage(message->label, message->configuration);
     return true;
   }
   return false;
