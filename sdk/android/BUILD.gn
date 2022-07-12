@@ -540,6 +540,7 @@ if (is_android) {
 
     deps = [
       ":base_java",
+      ":dav1d_java",
       ":libaom_av1_java",
       ":libvpx_vp8_java",
       ":libvpx_vp9_java",
