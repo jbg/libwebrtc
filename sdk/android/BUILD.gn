@@ -540,6 +540,7 @@ if (is_android) {
 
     deps = [
       ":base_java",
+      ":dav1d_java",
       ":libaom_av1_java",
       ":libvpx_vp8_java",
       ":libvpx_vp9_java",
@@ -886,17 +887,17 @@ if (current_os == "linux" || is_android) {
     ]
   }
 
-  rtc_library("libaom_av1_decoder_if_supported_jni") {
-    visibility = [ "*" ]
-    allow_poison = [ "software_video_codecs" ]
-    sources = [ "src/jni/libaom_av1_codec.cc" ]
-    deps = [
-      ":base_jni",
-      ":generated_libaom_av1_decoder_if_supported_jni",
-      ":video_jni",
-      "../../modules/video_coding/codecs/av1:libaom_av1_decoder",
-    ]
-  }
+  #  rtc_library("libaom_av1_decoder_if_supported_jni") {
+  #    visibility = [ "*" ]
+  #    allow_poison = [ "software_video_codecs" ]
+  #    sources = [ "src/jni/libaom_av1_codec.cc" ]
+  #    deps = [
+  #      ":base_jni",
+  #      ":generated_libaom_av1_decoder_if_supported_jni",
+  #      ":video_jni",
+  #      "../../modules/video_coding/codecs/av1:libaom_av1_decoder",
+  #    ]
+  #  }
 
   rtc_library("dav1d_av1_jni") {
     visibility = [ "*" ]
@@ -914,7 +915,7 @@ if (current_os == "linux" || is_android) {
     visibility = [ "*" ]
     allow_poison = [ "software_video_codecs" ]
     deps = [
-      ":libaom_av1_decoder_if_supported_jni",
+      #":libaom_av1_decoder_if_supported_jni",
       ":libvpx_vp8_jni",
       ":libvpx_vp9_jni",
     ]
@@ -1370,12 +1371,12 @@ if (current_os == "linux" || is_android) {
     jni_generator_include = "//sdk/android/src/jni/jni_generator_helper.h"
   }
 
-  generate_jni("generated_libaom_av1_decoder_if_supported_jni") {
-    sources = [ "api/org/webrtc/LibaomAv1Decoder.java" ]
-
-    namespace = "webrtc::jni"
-    jni_generator_include = "//sdk/android/src/jni/jni_generator_helper.h"
-  }
+  #  generate_jni("generated_libaom_av1_decoder_if_supported_jni") {
+  #    sources = [ "api/org/webrtc/LibaomAv1Decoder.java" ]
+  #
+  #    namespace = "webrtc::jni"
+  #    jni_generator_include = "//sdk/android/src/jni/jni_generator_helper.h"
+  #  }
 
   generate_jni("generated_dav1d_jni") {
     sources = [ "api/org/webrtc/Dav1dDecoder.java" ]
