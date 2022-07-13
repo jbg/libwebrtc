@@ -16,6 +16,24 @@
       "message": "you could use std::find_if here as well (I think):\n\n```\nreturn std::find_if(supported_formats.begin(),\n                   supported_formats.end(), [\u0026](const auto\u0026 supported_format) {\n                     return supported_format.name \u003d\u003d format.name \u0026\u0026\n                         supported_format.parameters \u003d\u003d format.parameters;\n                   }) !\u003d supported_formats.end();\n```",
       "revId": "5211ef32711f76e0eea39f778d15561432d54c45",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2919e3c8_a3ead53a",
+        "filename": "api/video_codecs/video_encoder_factory_template.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-07-13T09:08:50Z",
+      "side": 1,
+      "message": "Done, used absl::c_any_of instead",
+      "parentUuid": "5fabbae1_149d78a8",
+      "revId": "5211ef32711f76e0eea39f778d15561432d54c45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
