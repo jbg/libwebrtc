@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fabbae1_149d78a8",
+        "filename": "api/video_codecs/video_encoder_factory_template.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-13T08:50:13Z",
+      "side": 1,
+      "message": "you could use std::find_if here as well (I think):\n\n```\nreturn std::find_if(supported_formats.begin(),\n                   supported_formats.end(), [\u0026](const auto\u0026 supported_format) {\n                     return supported_format.name \u003d\u003d format.name \u0026\u0026\n                         supported_format.parameters \u003d\u003d format.parameters;\n                   }) !\u003d supported_formats.end();\n```",
+      "revId": "5211ef32711f76e0eea39f778d15561432d54c45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
