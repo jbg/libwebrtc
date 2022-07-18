@@ -46,19 +46,10 @@ struct VideoCodecVP8 {
   }
   // Temporary utility method for transition deleting numberOfTemporalLayers
   // setting (replaced by ScalabilityMode).
-  void SetNumberOfTemporalLayers(unsigned char n) {
-    numberOfTemporalLayers = n;
-  }
-  unsigned char numberOfTemporalLayers;
+  void SetNumberOfTemporalLayers(unsigned char) {}
   bool denoisingOn;
   bool automaticResizeOn;
   int keyFrameInterval;
-};
-
-enum class InterLayerPredMode : int {
-  kOff = 0,      // Inter-layer prediction is disabled.
-  kOn = 1,       // Inter-layer prediction is enabled.
-  kOnKeyPic = 2  // Inter-layer prediction is enabled but limited to key frames.
 };
 
 // VP9 specific.
@@ -90,11 +81,8 @@ struct VideoCodecH264 {
   }
   // Temporary utility method for transition deleting numberOfTemporalLayers
   // setting (replaced by ScalabilityMode).
-  void SetNumberOfTemporalLayers(unsigned char n) {
-    numberOfTemporalLayers = n;
-  }
+  void SetNumberOfTemporalLayers(unsigned char) {}
   int keyFrameInterval;
-  uint8_t numberOfTemporalLayers;
 };
 
 // Translates from name of codec to codec type and vice versa.

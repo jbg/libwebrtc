@@ -2439,24 +2439,7 @@ void VideoCodecConfigObserver<VideoCodecH264>::InitCodecSpecifics() {}
 
 template <>
 void VideoCodecConfigObserver<VideoCodecH264>::VerifyCodecSpecifics(
-    const VideoCodec& config) const {
-  // Check that the number of temporal layers has propagated properly to
-  // VideoCodec.
-  EXPECT_EQ(kVideoCodecConfigObserverNumberOfTemporalLayers,
-            config.H264().numberOfTemporalLayers);
-
-  for (unsigned char i = 0; i < config.numberOfSimulcastStreams; ++i) {
-    EXPECT_EQ(kVideoCodecConfigObserverNumberOfTemporalLayers,
-              config.simulcastStream[i].numberOfTemporalLayers);
-  }
-
-  // Set expected temporal layers as they should have been set when
-  // reconfiguring the encoder and not match the set config.
-  VideoCodecH264 encoder_settings = VideoEncoder::GetDefaultH264Settings();
-  encoder_settings.numberOfTemporalLayers =
-      kVideoCodecConfigObserverNumberOfTemporalLayers;
-  EXPECT_EQ(config.H264(), encoder_settings);
-}
+    const VideoCodec& config) const {}
 
 template <>
 rtc::scoped_refptr<VideoEncoderConfig::EncoderSpecificSettings>
@@ -2471,25 +2454,7 @@ void VideoCodecConfigObserver<VideoCodecVP8>::InitCodecSpecifics() {
 
 template <>
 void VideoCodecConfigObserver<VideoCodecVP8>::VerifyCodecSpecifics(
-    const VideoCodec& config) const {
-  // Check that the number of temporal layers has propagated properly to
-  // VideoCodec.
-  EXPECT_EQ(kVideoCodecConfigObserverNumberOfTemporalLayers,
-            config.VP8().numberOfTemporalLayers);
-
-  for (unsigned char i = 0; i < config.numberOfSimulcastStreams; ++i) {
-    EXPECT_EQ(kVideoCodecConfigObserverNumberOfTemporalLayers,
-              config.simulcastStream[i].numberOfTemporalLayers);
-  }
-
-  // Set expected temporal layers as they should have been set when
-  // reconfiguring the encoder and not match the set config.
-  VideoCodecVP8 encoder_settings = encoder_settings_;
-  encoder_settings.numberOfTemporalLayers =
-      kVideoCodecConfigObserverNumberOfTemporalLayers;
-  EXPECT_EQ(
-      0, memcmp(&config.VP8(), &encoder_settings, sizeof(encoder_settings_)));
-}
+    const VideoCodec& config) const {}
 
 template <>
 rtc::scoped_refptr<VideoEncoderConfig::EncoderSpecificSettings>
@@ -2512,8 +2477,9 @@ void VideoCodecConfigObserver<VideoCodecVP9>::VerifyCodecSpecifics(
             config.VP9().numberOfTemporalLayers);
 
   for (unsigned char i = 0; i < config.numberOfSimulcastStreams; ++i) {
-    EXPECT_EQ(kVideoCodecConfigObserverNumberOfTemporalLayers,
-              config.simulcastStream[i].numberOfTemporalLayers);
+    EXPECT_EQ(static_cast<int>(kVideoCodecConfigObserverNumberOfTemporalLayers),
+              ScalabilityModeToNumTemporalLayers(
+                  config.simulcastStream[i].scalability_mode));
   }
 
   // Set expected temporal layers as they should have been set when

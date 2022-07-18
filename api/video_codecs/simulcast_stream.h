@@ -27,7 +27,7 @@ struct SimulcastStream {
   int width = 0;
   int height = 0;
   float maxFramerate = 0;  // fps.
-  unsigned char numberOfTemporalLayers = 1;
+  ScalabilityMode scalability_mode = ScalabilityMode::kL1T1;
   unsigned int maxBitrate = 0;     // kilobits/sec.
   unsigned int targetBitrate = 0;  // kilobits/sec.
   unsigned int minBitrate = 0;     // kilobits/sec.

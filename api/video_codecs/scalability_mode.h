@@ -92,6 +92,12 @@ inline constexpr size_t kScalabilityModeCount =
 RTC_EXPORT
 absl::string_view ScalabilityModeToString(ScalabilityMode scalability_mode);
 
+enum class InterLayerPredMode : int {
+  kOff = 0,      // Inter-layer prediction is disabled.
+  kOn = 1,       // Inter-layer prediction is enabled.
+  kOnKeyPic = 2  // Inter-layer prediction is enabled but limited to key frames.
+};
+
 }  // namespace webrtc
 
 #endif  // API_VIDEO_CODECS_SCALABILITY_MODE_H_
