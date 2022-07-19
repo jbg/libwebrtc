@@ -28,6 +28,7 @@
 #include <utility>
 #include <vector>
 
+#include "api/task_queue/pending_task_safety_flag.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
