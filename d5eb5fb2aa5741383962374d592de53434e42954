@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab119b4_bb23740f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-07-19T23:52:57Z",
+      "side": 1,
+      "message": "Hi, Danil. I want to reduce the warning log that doesn\u0027t seem very important. (And I\u0027ve seen a comment on the monorail complaining about BUGBUG.) Please take a look. Thanks.",
+      "revId": "d5eb5fb2aa5741383962374d592de53434e42954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
