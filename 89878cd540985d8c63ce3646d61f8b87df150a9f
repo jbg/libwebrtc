@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e40a803_37c6ed7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T08:52:06Z",
+      "side": 1,
+      "message": "Ali, as owner of the webrtc:12889, can you advise how useful this log message is?\nI\u0027m unsure if filtering it by delta would be helpful or would hide the issue.",
+      "revId": "89878cd540985d8c63ce3646d61f8b87df150a9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c88ed76f_0f555d87",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T08:52:06Z",
+      "side": 1,
+      "message": "That looks like very helpful addition to the log message, Thank you!\n\nnit: may be embed it into the message:\n\"Task queue scheduled delayed call \" \u003c\u003c delta \u003c\u003c \" too early.\n\nreading message alone [in a text log] it seems unclear what `delta` mean.",
+      "range": {
+        "startLine": 782,
+        "startChar": 8,
+        "endLine": 782,
+        "endChar": 16
+      },
+      "revId": "89878cd540985d8c63ce3646d61f8b87df150a9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

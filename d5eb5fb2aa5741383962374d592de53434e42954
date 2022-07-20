@@ -16,6 +16,24 @@
       "message": "Hi, Danil. I want to reduce the warning log that doesn\u0027t seem very important. (And I\u0027ve seen a comment on the monorail complaining about BUGBUG.) Please take a look. Thanks.",
       "revId": "d5eb5fb2aa5741383962374d592de53434e42954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567bc902_3dbbe722",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T08:52:06Z",
+      "side": 1,
+      "message": "to me calling 0.5 ms too early looks as bad as calling 2ms too early (same wasted wake up), it is still a bug.\n\nOn the other hand, logging it on every occurrence is probably too much, this class probably not a good place to track libevent task queue bug.\n\nmay be more advance throttling is more appropriate: add a member variable to count number of occurrences and log juest the 1st,  and every 10th (or log every x seconds) together with a number of total hits.",
+      "parentUuid": "cab119b4_bb23740f",
+      "revId": "d5eb5fb2aa5741383962374d592de53434e42954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
