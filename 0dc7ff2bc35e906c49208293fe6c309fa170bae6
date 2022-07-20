@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9cb8349f_65c569ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T12:24:57Z",
+      "side": 1,
+      "message": "Yes, such explanation makes sense to me.\n\nand also yes, it seems that presence of the rtx stream should make unneeded to change reordering threshold for media ssrc.\nBut that might be a risky change with not that much benefit.",
+      "parentUuid": "440f1bbc_759e9f41",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "0dc7ff2bc35e906c49208293fe6c309fa170bae6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c091e191_16a519bf",
         "filename": "video/rtp_video_stream_receiver2.cc",
         "patchSetId": 2
