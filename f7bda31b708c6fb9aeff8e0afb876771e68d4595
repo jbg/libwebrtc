@@ -16,6 +16,24 @@
       "message": "can this be const?",
       "revId": "f7bda31b708c6fb9aeff8e0afb876771e68d4595",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d13a651_64cbf1e3",
+        "filename": "rtc_base/task_queue_win.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T12:29:51Z",
+      "side": 1,
+      "message": "no, making it const deletes move assign operator, and move assign operator is required for std::priority_queue::pop",
+      "parentUuid": "0197aeae_62dc95e9",
+      "revId": "f7bda31b708c6fb9aeff8e0afb876771e68d4595",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

@@ -16,6 +16,24 @@
       "message": "do you want to retain this DCHECK? (new one checks `task_` and not `due_time_`).\nI\u0027m guessing that this dcheck is here to make sure that a DelayedTaskInfo is never default constructed and then Run gets called on such an instance (since the default ctor only exists for compatibility with priority_queue).",
       "revId": "866caeb62ce56bf3a4332adefca52fe496106657",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b6dd77_c5fdc12f",
+        "filename": "rtc_base/task_queue_win.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T12:29:51Z",
+      "side": 0,
+      "message": "yes, that exactly what this DCHECK is.\nI do not see a reason to remove it. \nI\u0027ve changed it because old one no longer works and generally less natural to use for checking this struct has non-trivial state.\nnew one also better aligns with the next line - to invoke task_ it has to be set to non null functor.",
+      "parentUuid": "3a546d67_1f373705",
+      "revId": "866caeb62ce56bf3a4332adefca52fe496106657",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
