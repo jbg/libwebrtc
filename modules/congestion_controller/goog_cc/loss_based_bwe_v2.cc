@@ -248,7 +248,14 @@ void LossBasedBweV2::UpdateBandwidthEstimate(
     recovering_after_loss_timestamp_ = last_send_time_most_recent_observation_;
   }
 
-  current_estimate_ = best_candidate;
+  if (config_->not_increase_if_inherent_loss_less_than_average_loss &&
+      GetAverageReportedLossRatio() > best_candidate.inherent_loss &&
+      current_estimate_.loss_limited_bandwidth <
+          best_candidate.loss_limited_bandwidth) {
+    current_estimate_.inherent_loss = best_candidate.inherent_loss;
+  } else {
+    current_estimate_ = best_candidate;
+  }
 }
 
 // Returns a `LossBasedBweV2::Config` iff the `key_value_config` specifies a
@@ -270,6 +277,8 @@ absl::optional<LossBasedBweV2::Config> LossBasedBweV2::CreateConfig(
       "HigherLogBwBiasFactor", 0.001);
   FieldTrialParameter<double> inherent_loss_lower_bound(
       "InherentLossLowerBound", 1.0e-3);
+  FieldTrialParameter<double> loss_threshold_of_high_bandwidth_preference(
+      "LossThresholdOfHighBandwidthPreference", 0.99);
   FieldTrialParameter<DataRate> inherent_loss_upper_bound_bandwidth_balance(
       "InherentLossUpperBoundBwBalance", DataRate::KilobitsPerSec(15.0));
   FieldTrialParameter<double> inherent_loss_upper_bound_offset(
@@ -306,6 +315,9 @@ absl::optional<LossBasedBweV2::Config> LossBasedBweV2::CreateConfig(
       "DelayedIncreaseWindow", TimeDelta::Millis(300));
   FieldTrialParameter<bool> use_acked_bitrate_only_when_overusing(
       "UseAckedBitrateOnlyWhenOverusing", false);
+  FieldTrialParameter<bool>
+      not_increase_if_inherent_loss_less_than_average_loss(
+          "NotIncreaseIfInherentLossLessThanAverageLoss", false);
 
   if (key_value_config) {
     ParseFieldTrial({&enabled,
@@ -316,6 +328,7 @@ absl::optional<LossBasedBweV2::Config> LossBasedBweV2::CreateConfig(
                      &higher_bandwidth_bias_factor,
                      &higher_log_bandwidth_bias_factor,
                      &inherent_loss_lower_bound,
+                     &loss_threshold_of_high_bandwidth_preference,
                      &inherent_loss_upper_bound_bandwidth_balance,
                      &inherent_loss_upper_bound_offset,
                      &initial_inherent_loss_estimate,
@@ -335,7 +348,8 @@ absl::optional<LossBasedBweV2::Config> LossBasedBweV2::CreateConfig(
                      &trendline_observations_window_size,
                      &max_increase_factor,
                      &delayed_increase_window,
-                     &use_acked_bitrate_only_when_overusing},
+                     &use_acked_bitrate_only_when_overusing,
+                     &not_increase_if_inherent_loss_less_than_average_loss},
                     key_value_config->Lookup("WebRTC-Bwe-LossBasedBweV2"));
   }
 
@@ -354,6 +368,8 @@ absl::optional<LossBasedBweV2::Config> LossBasedBweV2::CreateConfig(
   config->higher_log_bandwidth_bias_factor =
       higher_log_bandwidth_bias_factor.Get();
   config->inherent_loss_lower_bound = inherent_loss_lower_bound.Get();
+  config->loss_threshold_of_high_bandwidth_preference =
+      loss_threshold_of_high_bandwidth_preference.Get();
   config->inherent_loss_upper_bound_bandwidth_balance =
       inherent_loss_upper_bound_bandwidth_balance.Get();
   config->inherent_loss_upper_bound_offset =
@@ -385,6 +401,9 @@ absl::optional<LossBasedBweV2::Config> LossBasedBweV2::CreateConfig(
   config->delayed_increase_window = delayed_increase_window.Get();
   config->use_acked_bitrate_only_when_overusing =
       use_acked_bitrate_only_when_overusing.Get();
+  config->not_increase_if_inherent_loss_less_than_average_loss =
+      not_increase_if_inherent_loss_less_than_average_loss.Get();
+
   return config;
 }
 
@@ -445,6 +464,13 @@ bool LossBasedBweV2::IsConfigValid() const {
       config_->inherent_loss_lower_bound >= 1.0) {
     RTC_LOG(LS_WARNING) << "The inherent loss lower bound must be in [0, 1): "
                         << config_->inherent_loss_lower_bound;
+    valid = false;
+  }
+  if (config_->loss_threshold_of_high_bandwidth_preference < 0.0 ||
+      config_->loss_threshold_of_high_bandwidth_preference >= 1.0) {
+    RTC_LOG(LS_WARNING)
+        << "The loss threshold of high bandwidth preference must be in [0, 1): "
+        << config_->loss_threshold_of_high_bandwidth_preference;
     valid = false;
   }
   if (config_->inherent_loss_upper_bound_bandwidth_balance <=
@@ -720,10 +746,24 @@ double LossBasedBweV2::GetInherentLossUpperBound(DataRate bandwidth) const {
   return std::min(inherent_loss_upper_bound, 1.0);
 }
 
+double LossBasedBweV2::AdjustBiasFactor(double loss_rate,
+                                        double bias_factor) const {
+  return bias_factor *
+         (config_->loss_threshold_of_high_bandwidth_preference - loss_rate) /
+         (0.001 +
+          sqrt(std::pow(
+              config_->loss_threshold_of_high_bandwidth_preference - loss_rate,
+              2)));
+}
+
 double LossBasedBweV2::GetHighBandwidthBias(DataRate bandwidth) const {
   if (IsValid(bandwidth)) {
-    return config_->higher_bandwidth_bias_factor * bandwidth.kbps() +
-           config_->higher_log_bandwidth_bias_factor *
+    const double average_reported_loss_ratio = GetAverageReportedLossRatio();
+    return AdjustBiasFactor(average_reported_loss_ratio,
+                            config_->higher_bandwidth_bias_factor) *
+               bandwidth.kbps() +
+           AdjustBiasFactor(average_reported_loss_ratio,
+                            config_->higher_log_bandwidth_bias_factor) *
                std::log(1.0 + bandwidth.kbps());
   }
   return 0.0;
