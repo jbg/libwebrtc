@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e22e9906_7d9398ab",
+        "filename": "test/test_main_lib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-20T14:59:43Z",
+      "side": 1,
+      "message": "I cannot do the other change because of this API.",
+      "range": {
+        "startLine": 164,
+        "startChar": 29,
+        "endLine": 164,
+        "endChar": 44
+      },
+      "revId": "f23b164a0e95c87ea3bcd92d18a34bb754286b1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
