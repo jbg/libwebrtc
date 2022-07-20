@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e227636_bdc064d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T20:37:26Z",
+      "side": 1,
+      "message": "running locally this change decreases time to run the test case from the linked bug from 160 seconds to 58-59 seconds.",
+      "revId": "f04d4693ce0690321abcd691ad8c13a6ac87e124",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
