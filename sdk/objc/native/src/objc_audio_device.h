@@ -11,17 +11,25 @@
 #ifndef SDK_OBJC_NATIVE_SRC_OBJC_AUDIO_DEVICE_H_
 #define SDK_OBJC_NATIVE_SRC_OBJC_AUDIO_DEVICE_H_
 
+#include <memory>
+
 #import "components/audio/RTCAudioDevice.h"
+
+#include "modules/audio_device/audio_device_buffer.h"
 #include "modules/audio_device/include/audio_device.h"
+#include "rtc_base/thread.h"
+
+@class ObjCAudioDeviceDelegate;
 
 namespace webrtc {
+
+class FineAudioBuffer;
 
 namespace objc_adm {
 
 class ObjCAudioDeviceModule : public AudioDeviceModule {
  public:
-  explicit ObjCAudioDeviceModule(
-      id<RTC_OBJC_TYPE(RTCAudioDevice)> audio_device);
+  explicit ObjCAudioDeviceModule(id<RTC_OBJC_TYPE(RTCAudioDevice)> audio_device);
   ~ObjCAudioDeviceModule() override;
 
   // Retrieve the currently utilized audio layer
@@ -126,8 +134,92 @@ class ObjCAudioDeviceModule : public AudioDeviceModule {
   int GetRecordAudioParameters(AudioParameters* params) const override;
 #endif  // WEBRTC_IOS
 
+ public:
+  OSStatus OnDeliverRecordedData(AudioUnitRenderActionFlags* flags,
+                                 const AudioTimeStamp* time_stamp,
+                                 NSInteger bus_number,
+                                 UInt32 num_frames,
+                                 const AudioBufferList* io_data,
+                                 RTC_OBJC_TYPE(RTCAudioDeviceRenderRecordedDataBlock) render_block);
+
+  OSStatus OnGetPlayoutData(AudioUnitRenderActionFlags* flags,
+                            const AudioTimeStamp* time_stamp,
+                            NSInteger bus_number,
+                            UInt32 num_frames,
+                            AudioBufferList* io_data);
+
+  void HandleAudioInputParametersChange();
+
+  void HandleAudioOutputParametersChange();
+
+  void HandleAudioInputInterrupted();
+
+  void HandleAudioOutputInterrupted();
+
+ private:
+  // Update our audio parameters if they are different from current device audio parameters
+  // Returns true when our parameters are update, false - otherwise.
+  bool UpdateAudioParameters(AudioParameters& params, const AudioParameters& device_params);
+
+  // Update our cached audio latency with device latency
+  void UpdateAudioDelay(std::atomic<int>& delay_ms, const NSTimeInterval device_latency);
+
+  // Uses current `playout_parameters_` to inform the audio device buffer (ADB)
+  // about our internal audio parameters.
+  void UpdateOutputAudioDeviceBuffer();
+
+  // Uses current `record_parameters_` to inform the audio device buffer (ADB)
+  // about our internal audio parameters.
+  void UpdateInputAudioDeviceBuffer();
+
  private:
   id<RTC_OBJC_TYPE(RTCAudioDevice)> audio_device_;
+
+  const std::unique_ptr<TaskQueueFactory> task_queue_factory_;
+
+  std::unique_ptr<AudioDeviceBuffer> audio_device_buffer_;
+
+  // Set to 1 when recording is active and 0 otherwise.
+  std::atomic<bool> recording_ = false;
+
+  // Set to 1 when playout is active and 0 otherwise.
+  std::atomic<bool> playing_ = false;
+
+  std::atomic<int> cached_playout_delay_ms_ = 0;
+
+  std::atomic<int> cached_recording_delay_ms_ = 0;
+
+  // Thread that is initialized audio device module.
+  rtc::Thread* thread_;
+
+  // Ensures that methods are called from the same thread as this object is
+  // initialized on.
+  SequenceChecker thread_checker_;
+
+  // I/O audio thread checker.
+  SequenceChecker io_playout_thread_checker_;
+  SequenceChecker io_record_thread_checker_;
+
+  bool is_initialized_ RTC_GUARDED_BY(thread_checker_) = false;
+  bool is_playout_initialized_ RTC_GUARDED_BY(thread_checker_) = false;
+  bool is_recording_initialized_ RTC_GUARDED_BY(thread_checker_) = false;
+
+  // Contains audio parameters (sample rate, #channels, buffer size etc.) for
+  // the playout and recording sides.
+  AudioParameters playout_parameters_;
+  AudioParameters record_parameters_;
+
+  // FineAudioBuffer takes an AudioDeviceBuffer which delivers audio data
+  // in chunks of 10ms.
+  std::unique_ptr<FineAudioBuffer> record_fine_audio_buffer_;
+
+  std::unique_ptr<FineAudioBuffer> playout_fine_audio_buffer_;
+
+  // Temporary storage for recorded data.
+  rtc::BufferT<int16_t> record_audio_buffer_;
+
+  // Delegate object provided to RTCAudioDevice during initialization
+  ObjCAudioDeviceDelegate* audio_device_delegate_;
 };
 
 }  // namespace objc_adm
