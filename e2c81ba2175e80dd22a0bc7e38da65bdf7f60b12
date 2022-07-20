@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a341bd41_a2ffbe6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-07-20T13:41:50Z",
+      "side": 1,
+      "message": "Thanks Alessio! LGTM",
+      "revId": "e2c81ba2175e80dd22a0bc7e38da65bdf7f60b12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e64c4b6_7dc407c6",
+        "filename": "modules/audio_processing/agc/agc_manager_direct.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-07-20T13:41:50Z",
+      "side": 1,
+      "message": "Repeating \"known\" here",
+      "range": {
+        "startLine": 257,
+        "startChar": 55,
+        "endLine": 258,
+        "endChar": 20
+      },
+      "revId": "e2c81ba2175e80dd22a0bc7e38da65bdf7f60b12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
