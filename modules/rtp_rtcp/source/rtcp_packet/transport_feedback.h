@@ -110,6 +110,7 @@ class TransportFeedback : public Rtpfb {
   class LastChunk {
    public:
     using DeltaSize = TransportFeedback::DeltaSize;
+    static constexpr size_t kMaxRunLengthCapacity = 0x1fff;
 
     LastChunk();
 
@@ -120,6 +121,8 @@ class TransportFeedback : public Rtpfb {
     bool CanAdd(DeltaSize delta_size) const;
     // Add `delta_size`, assumes `CanAdd(delta_size)`,
     void Add(DeltaSize delta_size);
+    // Equivalent to calling Add(0) `num_missing` times. Assumes `Empty()`.
+    void AddMissingPackets(size_t num_missing);
 
     // Encode chunk as large as possible removing encoded delta sizes.
     // Assume CanAdd() == false for some valid delta_size.
@@ -133,7 +136,6 @@ class TransportFeedback : public Rtpfb {
     void AppendTo(std::vector<DeltaSize>* deltas) const;
 
    private:
-    static constexpr size_t kMaxRunLengthCapacity = 0x1fff;
     static constexpr size_t kMaxOneBitCapacity = 14;
     static constexpr size_t kMaxTwoBitCapacity = 7;
     static constexpr size_t kMaxVectorCapacity = kMaxOneBitCapacity;
@@ -158,6 +160,8 @@ class TransportFeedback : public Rtpfb {
   void Clear();
 
   bool AddDeltaSize(DeltaSize delta_size);
+  // Adds `num_missing_packets` deltas of size 0.
+  bool AddMissingPackets(size_t num_missing_packets);
 
   const bool include_lost_;
   uint16_t base_seq_no_;
