@@ -94,6 +94,30 @@
       },
       "revId": "cce92c7b5b9294ef4bcb476429f0e7fac469f2c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d3182ca_1fb9dcb3",
+        "filename": "media/engine/black_frame_decoder_factory.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-07-20T12:56:17Z",
+      "side": 1,
+      "message": "Keeping SDP parmaters in sync makes sense to me, what doesn\u0027t make sense is to keep support for all codecs, even the ones we can\u0027t parse. I think maybe we should GetSupportedFormats from the wrapped factory and filter out everything that isn\u0027t supported by the BlackFrameDecoder. This way things stay in sync, but you won\u0027t run any nonsensical tests.",
+      "parentUuid": "af3a46a5_62b12b8a",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 50
+      },
+      "revId": "cce92c7b5b9294ef4bcb476429f0e7fac469f2c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
