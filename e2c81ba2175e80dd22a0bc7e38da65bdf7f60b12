@@ -39,6 +39,30 @@
       },
       "revId": "e2c81ba2175e80dd22a0bc7e38da65bdf7f60b12",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42a71dc0_4698e6c0",
+        "filename": "modules/audio_processing/agc/agc_manager_direct.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-07-20T14:32:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e64c4b6_7dc407c6",
+      "range": {
+        "startLine": 257,
+        "startChar": 55,
+        "endLine": 258,
+        "endChar": 20
+      },
+      "revId": "e2c81ba2175e80dd22a0bc7e38da65bdf7f60b12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
