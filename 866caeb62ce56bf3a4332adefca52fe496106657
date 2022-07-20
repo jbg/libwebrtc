@@ -34,6 +34,24 @@
       "parentUuid": "3a546d67_1f373705",
       "revId": "866caeb62ce56bf3a4332adefca52fe496106657",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef688011_177fc153",
+        "filename": "rtc_base/task_queue_win.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-20T12:36:33Z",
+      "side": 0,
+      "message": "I see. Thanks for clarifying.",
+      "parentUuid": "c6b6dd77_c5fdc12f",
+      "revId": "866caeb62ce56bf3a4332adefca52fe496106657",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
