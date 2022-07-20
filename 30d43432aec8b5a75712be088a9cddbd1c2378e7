@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "973af6bc_a8cb3c3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-20T13:19:36Z",
+      "side": 1,
+      "message": "PTAL. Intended to unblock https://webrtc-review.googlesource.com/c/src/+/264800.",
+      "revId": "30d43432aec8b5a75712be088a9cddbd1c2378e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
