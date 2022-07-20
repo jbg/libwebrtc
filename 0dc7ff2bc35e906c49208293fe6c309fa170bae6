@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "810b4949_e9e5ecd3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T10:06:05Z",
+      "side": 1,
+      "message": "why?\n\nmax reordering threshold is used to produce reasonable packet loss rtcp statistic when stream restarts.\nWhat is special about rtx that it should always use the default value?\n\n(though with new code it might be better to explain other way around: why nack support affects the ordering threshold)",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "0dc7ff2bc35e906c49208293fe6c309fa170bae6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c091e191_16a519bf",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T10:06:05Z",
+      "side": 1,
+      "message": "prefer constexpr",
+      "range": {
+        "startLine": 277,
+        "startChar": 11,
+        "endLine": 277,
+        "endChar": 16
+      },
+      "revId": "0dc7ff2bc35e906c49208293fe6c309fa170bae6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

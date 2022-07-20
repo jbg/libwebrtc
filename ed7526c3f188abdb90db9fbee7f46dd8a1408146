@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b166596_b712b7d5",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T10:06:05Z",
+      "side": 0,
+      "message": "yes, we do not resent rtx packets, but that has to do with the max reordering threshold for rtcp stats?",
+      "range": {
+        "startLine": 283,
+        "startChar": 75,
+        "endLine": 284,
+        "endChar": 30
+      },
+      "revId": "ed7526c3f188abdb90db9fbee7f46dd8a1408146",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
