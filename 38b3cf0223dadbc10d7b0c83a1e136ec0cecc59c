@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0af853e1_805a4d8d",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T08:59:40Z",
+      "side": 0,
+      "message": "instead of using `0` as special value to indicate sleep forever, I initialize sleep_time_ms with kForever constant by default,\nso now unset value of sleep_time_ms automaticall means \u0027forever\u0027",
+      "range": {
+        "startLine": 244,
+        "startChar": 22,
+        "endLine": 244,
+        "endChar": 46
+      },
+      "revId": "38b3cf0223dadbc10d7b0c83a1e136ec0cecc59c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

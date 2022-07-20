@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4bf1d1b_f0da2271",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-20T08:59:40Z",
+      "side": 1,
+      "message": "changing increment from postfix to prefix to align with PostDelayedTask way of using the same order.\nBefore this change there could be an order collision between task added with PostTask and task added with PostDelayedTask.\n\nnot really an issue (order between PostTask and PostDelayedTask) is not guaranteed, but not neat.",
+      "range": {
+        "startLine": 162,
+        "startChar": 23,
+        "endLine": 162,
+        "endChar": 46
+      },
+      "revId": "ab13f06bb74cbc58c4c21e3db3c7e49efaa686a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
