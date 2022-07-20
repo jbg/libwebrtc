@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "440f1bbc_759e9f41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-20T12:09:31Z",
+      "side": 1,
+      "message": "My understanding is that a retransmitted packet (when not using rtx) will use the same seqno as the original packet, and will hence look like an out-of-order packet. And since we don\u0027t want a retransmission of an old packet to be interpreted as stream restart, the max reordering threshold is increased (by a factor of 9, from default 50 to 450).\n\nBut that doens\u0027t apply to the rtx stream, since there we expect to see only the (rare) reorder caused by the network.\n\nDoes that make sense?\n\nMaybe the logic should be to increase max reordering threshold only if nack is enabled, *and* there is no configured rtx stream? Under the theory that retransmission on the rtx ssrc will get its own contiguous sequence?",
+      "parentUuid": "810b4949_e9e5ecd3",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "0dc7ff2bc35e906c49208293fe6c309fa170bae6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c091e191_16a519bf",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-20T10:06:05Z",
       "side": 1,
       "message": "prefer constexpr",
+      "range": {
+        "startLine": 277,
+        "startChar": 11,
+        "endLine": 277,
+        "endChar": 16
+      },
+      "revId": "0dc7ff2bc35e906c49208293fe6c309fa170bae6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db8d6e0c_b569a5fa",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-20T12:09:31Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "c091e191_16a519bf",
       "range": {
         "startLine": 277,
         "startChar": 11,
