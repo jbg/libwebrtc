@@ -136,6 +136,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eef73450_0800346f",
+        "filename": "sdk/objc/native/src/objc_audio_device.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-21T13:52:28Z",
+      "side": 1,
+      "message": "Sorry, I meant to indicate that this should be a DLOG and not a LOG. The cost of LOG statements is higher, it adds binary bytes in production builds and may impact performance in some cases. Especially for LS_VERBOSE statement, they should generally be DLOG since verbose logging generally does not get collected for post mortem diagnosis.\n\nSo, I\u0027d suggest to go for DLOG_F(LS_INFO) or DLOG_F(LS_VERBOSE) instead of LOG_F(LS_VERBOSE).",
+      "parentUuid": "09134d09_5423df0e",
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "309b25e2_b2f6d86f",
         "filename": "sdk/objc/native/src/objc_audio_device_delegate.mm",
         "patchSetId": 4
