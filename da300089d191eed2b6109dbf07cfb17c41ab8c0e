@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3863cee9_2034e3e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-07-21T06:03:03Z",
+      "side": 1,
+      "message": "Hi Henrik, Tommi and Justin!\n\nCould you please review this CL? It is the third step of providing API to inject ObjC audio device: it implements native ADM in terms of RTCAudioDevice instead of directly using any of sound APIs of iOS/Mac. \n\nThanks a lot in advance, Yury.",
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
