@@ -80,6 +80,30 @@
       },
       "revId": "02294defef5406beca2533f59baaf50f2d241053",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5a354d7_a2bada8a",
+        "filename": "sdk/objc/native/src/objc_audio_device.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-21T10:14:12Z",
+      "side": 1,
+      "message": "Actually, if DLOG suffices, that\u0027s better. The LOG variant can basically end up being log spam and code bloat. In particular in the case of LS_VERBOSE, I\u0027d go for DLOG.",
+      "parentUuid": "32fad624_a2f15c60",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 12
+      },
+      "revId": "02294defef5406beca2533f59baaf50f2d241053",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
