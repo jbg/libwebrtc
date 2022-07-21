@@ -70,6 +70,24 @@
       "parentUuid": "54adc88a_71f79b01",
       "revId": "d5eb5fb2aa5741383962374d592de53434e42954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d4a5cf6_c8bd5720",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-07-21T08:30:36Z",
+      "side": 1,
+      "message": "I figured this was kind of a limitation of the current TaskQueue API. Some implementations of task queues use millisecond precision, so I thought this kind of problem might occur.\n\nWhat I don\u0027t understand about this is that the TaskQueueGcd uses microsecond precision. It looks like it needs further investigation, but not today.",
+      "parentUuid": "9e7d35ff_6f3d49c6",
+      "revId": "d5eb5fb2aa5741383962374d592de53434e42954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
