@@ -16,6 +16,24 @@
       "message": "Please take a stamp, Ilya (you can ignore the bot failures)",
       "revId": "d861ab945cbb6147f2348711595f4eeb4d9290e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5db81e5b_b77f0531",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-07-21T09:07:29Z",
+      "side": 1,
+      "message": "(The mac_chromium_dbg_ng stats failure is unrelated and fixed by https://chromium-review.googlesource.com/c/chromium/src/+/3779657)",
+      "parentUuid": "56a7db3e_b0d80346",
+      "revId": "d861ab945cbb6147f2348711595f4eeb4d9290e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
