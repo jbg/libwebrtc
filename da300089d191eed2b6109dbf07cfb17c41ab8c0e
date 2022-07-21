@@ -77,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f34e298d_4db77b2e",
+        "filename": "sdk/objc/native/src/objc_audio_device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-07-21T13:25:16Z",
+      "side": 1,
+      "message": "ObjCAudioDeviceModule has audio device buffer which has audio parameters of playout \u0026 recording. The audio device buffer is configured to work with specific sample rate \u0026 channel count. ObjCAudioDeviceModule stores audio parameters which were used to configure ADB in fields playout_parameters_ and recording_parameters_.\n\nOn the other hand RTCAudioDevice protocol has it\u0027s own audio parameters exposed as individual properties. RTCAudioDevice audio parameters might be changed while playout/recording is in progress, for example when device is switched. RTCAudioDevice audio parameters must be kept in sync with ADB audio parameters. There helper methods are invoked when RTCAudioDevice reports that it\u0027s audio parameters are changed. They are used to re-configure ADB parameters to match parameters of RTCAudioDevice.\n\nUpdateAudioDelay is a bit different: it is invoked when RTCAudioDevice reports the latency of audio input/output is changed. When RTCAudioDevice latency update happen the latency is cached into atomic field which is later used from audio IO thread and passed to ADB. The reason why it\u0027s cached and not polled on each IO cycle - Apple strongly recommends to avoid ObjC calls from within realtime context of audio IO thread.\n\nIf you think these explanation make sense I could extend an existing comments in code.",
+      "parentUuid": "ed0721c6_eab15f1f",
+      "range": {
+        "startLine": 159,
+        "startChar": 1,
+        "endLine": 159,
+        "endChar": 8
+      },
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13f746a8_c809dba4",
         "filename": "sdk/objc/native/src/objc_audio_device.mm",
         "patchSetId": 4
@@ -88,6 +112,24 @@
       "writtenOn": "2022-07-21T08:15:27Z",
       "side": 1,
       "message": "DLOG? Actually, do you mind going over the log statements and make sure there\u0027s consistency between what\u0027s LOG and what\u0027s DLOG? E.g. I see there are non LOG statements below for some getters which I\u0027m guessing should be DLOG.",
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09134d09_5423df0e",
+        "filename": "sdk/objc/native/src/objc_audio_device.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-07-21T13:25:16Z",
+      "side": 1,
+      "message": "Thanks for noticing. I\u0027ve decided to avoid usage of DLOG_F(LS_INFO) functions at all in favor of LOG_F(LS_VERBOSE) because there are only few usages of DLOG functions across code base.",
+      "parentUuid": "13f746a8_c809dba4",
       "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -105,6 +147,30 @@
       "writtenOn": "2022-07-21T09:00:42Z",
       "side": 1,
       "message": "why use 21.3333ms buffers?",
+      "range": {
+        "startLine": 26,
+        "startChar": 58,
+        "endLine": 26,
+        "endChar": 64
+      },
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd5d4555_2c4a1d80",
+        "filename": "sdk/objc/native/src/objc_audio_device_delegate.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-07-21T13:25:16Z",
+      "side": 1,
+      "message": "This is is just preferred (default) value, implementation may use a different values. I\u0027ve took it from an existing implementation: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/sdk/objc/components/audio/RTCAudioSessionConfiguration.m;l\u003d37-45.\nJust realized that according to comment existing implementation expected to use 0.01 buffer size :)\nSo I\u0027ll update preferred buffer size to 512/48000.",
+      "parentUuid": "309b25e2_b2f6d86f",
       "range": {
         "startLine": 26,
         "startChar": 58,

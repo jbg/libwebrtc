@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f550e0_390fb315",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-07-21T13:25:16Z",
+      "side": 1,
+      "message": "I\u0027ve updated CL description adding some details. Hope it will help to understand the changes. ",
+      "revId": "134587802453cb466e10e52420010bb452c622d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
