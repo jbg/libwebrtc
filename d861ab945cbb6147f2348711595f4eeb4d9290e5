@@ -34,6 +34,23 @@
       "parentUuid": "56a7db3e_b0d80346",
       "revId": "d861ab945cbb6147f2348711595f4eeb4d9290e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65df3baf_4059b97a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-07-21T09:22:56Z",
+      "side": 1,
+      "message": "Thanks. Since there is a risk that someone reverts this CL, let\u0027s land it tomorrow *after* the branch cut",
+      "revId": "d861ab945cbb6147f2348711595f4eeb4d9290e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
