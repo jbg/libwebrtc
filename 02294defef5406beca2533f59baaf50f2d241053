@@ -33,6 +33,29 @@
       "message": "+peterhanspers for ObjC",
       "revId": "02294defef5406beca2533f59baaf50f2d241053",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35b15091_e0a4e7f1",
+        "filename": "sdk/objc/native/src/objc_audio_device.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-07-21T08:23:06Z",
+      "side": 1,
+      "message": "What does the _F version do? It is not used much in other code. Why not regular RTC_DLOG?",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 12
+      },
+      "revId": "02294defef5406beca2533f59baaf50f2d241053",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
