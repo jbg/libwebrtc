@@ -172,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46d8019b_1f359261",
+        "filename": "sdk/objc/native/src/objc_audio_device.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-21T15:52:31Z",
+      "side": 1,
+      "message": "yes I haven\u0027t looked in detail at the changes, was just replying to your last comment. Alright, sounds good then - I\u0027ll ping back after taking a look",
+      "parentUuid": "ced3911d_651dd8fc",
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "309b25e2_b2f6d86f",
         "filename": "sdk/objc/native/src/objc_audio_device_delegate.mm",
         "patchSetId": 4
