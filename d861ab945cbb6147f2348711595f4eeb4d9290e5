@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56a7db3e_b0d80346",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-07-21T08:58:08Z",
+      "side": 1,
+      "message": "Please take a stamp, Ilya (you can ignore the bot failures)",
+      "revId": "d861ab945cbb6147f2348711595f4eeb4d9290e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
