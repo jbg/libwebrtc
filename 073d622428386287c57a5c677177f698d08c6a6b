@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cccd935c_58099587",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-07-21T11:04:18Z",
+      "side": 1,
+      "message": "Updated to rather use RTC_DLOG_F. For consistency it\u0027s only used to trance function entrance and RTC_LOG_F will be used otherwise.",
+      "revId": "073d622428386287c57a5c677177f698d08c6a6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

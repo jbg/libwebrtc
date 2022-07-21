@@ -104,6 +104,30 @@
       },
       "revId": "02294defef5406beca2533f59baaf50f2d241053",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ea22171_0de7276e",
+        "filename": "sdk/objc/native/src/objc_audio_device.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-07-21T11:04:18Z",
+      "side": 1,
+      "message": "No problem. I\u0027ve changed RTC_LOG_F(LS_VERBOSE) to RTC_DLOG_F(LS_VERBOSE), but will use regular RTC_LOG_F with other log levels. I use RTC_DLOG_F(LS_VERBOSE) specifically to trace entrance to the function, and RTC_LOG_F in other cases.",
+      "parentUuid": "a5a354d7_a2bada8a",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 12
+      },
+      "revId": "02294defef5406beca2533f59baaf50f2d241053",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
