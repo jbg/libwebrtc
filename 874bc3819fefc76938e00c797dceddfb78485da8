@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ebfa5e0_f669f36f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16629
+      },
+      "writtenOn": "2022-07-21T09:02:07Z",
+      "side": 1,
+      "message": "Updated CL to avoid usage of RTC_DLOG function, used RTC_LOG*(LS_VERBOSE) instead. \nRTC_LOG_F macro automatically prepend caller function name while RTC_LOG marco does not. I\u0027ve seen other code uses RTC_LOG() \u003c\u003c __FUNCTION__ but this is exactly what RTC_LOG_F does, so I decided to use _F functions.\n",
+      "revId": "874bc3819fefc76938e00c797dceddfb78485da8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
