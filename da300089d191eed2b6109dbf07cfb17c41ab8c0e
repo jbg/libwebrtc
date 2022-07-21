@@ -35,6 +35,46 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f31f31d9_9825ec16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-07-21T09:00:42Z",
+      "side": 1,
+      "message": "Would you mind adding some more comments in the CL description about the overall architecture here since the change is rather complex.\n\nPlease explain the dependency of RTCAudioDevice and add comments about parts that will be unused/inactive when no external ADM is injected. I am trying to understand fully what parts are \"dead\" when the default ADM is used. ",
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed0721c6_eab15f1f",
+        "filename": "sdk/objc/native/src/objc_audio_device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-07-21T09:00:42Z",
+      "side": 1,
+      "message": "Please explain why these private methods are needed.",
+      "range": {
+        "startLine": 159,
+        "startChar": 1,
+        "endLine": 159,
+        "endChar": 8
+      },
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13f746a8_c809dba4",
@@ -48,6 +88,29 @@
       "writtenOn": "2022-07-21T08:15:27Z",
       "side": 1,
       "message": "DLOG? Actually, do you mind going over the log statements and make sure there\u0027s consistency between what\u0027s LOG and what\u0027s DLOG? E.g. I see there are non LOG statements below for some getters which I\u0027m guessing should be DLOG.",
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "309b25e2_b2f6d86f",
+        "filename": "sdk/objc/native/src/objc_audio_device_delegate.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-07-21T09:00:42Z",
+      "side": 1,
+      "message": "why use 21.3333ms buffers?",
+      "range": {
+        "startLine": 26,
+        "startChar": 58,
+        "endLine": 26,
+        "endChar": 64
+      },
       "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
