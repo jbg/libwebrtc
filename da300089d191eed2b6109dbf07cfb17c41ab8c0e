@@ -16,6 +16,40 @@
       "message": "Hi Henrik, Tommi and Justin!\n\nCould you please review this CL? It is the third step of providing API to inject ObjC audio device: it implements native ADM in terms of RTCAudioDevice instead of directly using any of sound APIs of iOS/Mac. \n\nThanks a lot in advance, Yury.",
       "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67b49c7b_903379c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-21T08:15:27Z",
+      "side": 1,
+      "message": "Peter - do you mind taking a look as well?",
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f746a8_c809dba4",
+        "filename": "sdk/objc/native/src/objc_audio_device.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-07-21T08:15:27Z",
+      "side": 1,
+      "message": "DLOG? Actually, do you mind going over the log statements and make sure there\u0027s consistency between what\u0027s LOG and what\u0027s DLOG? E.g. I see there are non LOG statements below for some getters which I\u0027m guessing should be DLOG.",
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
