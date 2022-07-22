@@ -125,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec0c81d4_a855d67c",
+        "filename": "sdk/objc/native/src/objc_audio_device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-07-22T11:13:47Z",
+      "side": 1,
+      "message": "Added in modified form as comment.",
+      "parentUuid": "c9868b2a_00d844ae",
+      "range": {
+        "startLine": 159,
+        "startChar": 1,
+        "endLine": 159,
+        "endChar": 8
+      },
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13f746a8_c809dba4",
         "filename": "sdk/objc/native/src/objc_audio_device.mm",
         "patchSetId": 4
@@ -212,6 +236,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "385d26c9_9f235f0d",
+        "filename": "sdk/objc/native/src/objc_audio_device.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-07-22T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46d8019b_1f359261",
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "309b25e2_b2f6d86f",
@@ -273,6 +315,30 @@
       "side": 1,
       "message": "My bad, the existing implementation uses 20ms which is a good compromise between latency and robustness and it is an even multiple of 10ms which is the default packet size in WebRTC. So, please try to use the same size (20ms) here as well.",
       "parentUuid": "dd5d4555_2c4a1d80",
+      "range": {
+        "startLine": 26,
+        "startChar": 58,
+        "endLine": 26,
+        "endChar": 64
+      },
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24ad95e3_d4bacbdc",
+        "filename": "sdk/objc/native/src/objc_audio_device_delegate.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-07-22T11:13:47Z",
+      "side": 1,
+      "message": "Changed to 20ms.",
+      "parentUuid": "f8efed94_4074ff52",
       "range": {
         "startLine": 26,
         "startChar": 58,
