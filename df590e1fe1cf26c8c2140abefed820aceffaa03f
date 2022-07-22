@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbfa956c_a5839caa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-07-22T14:19:29Z",
+      "side": 1,
+      "message": "Would choosing a different high bandwidth bias value be an alternative to making it dynamic?",
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74f3d691_d0c71b05",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-07-22T14:19:29Z",
+      "side": 1,
+      "message": "Could you explain this function a bit more? It\u0027s not as simple as it sounds in the cl description with if loss \u003e threshold then use low bandwidth bias else use high bandwidth bias.\n\nAlso, it doesn\u0027t look like this is equivalent to the current behavior with the default parameters? Maybe we want to keep the current behavior in case this is running in production?",
+      "range": {
+        "startLine": 751,
+        "startChar": 0,
+        "endLine": 751,
+        "endChar": 57
+      },
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "476414f5_ad2ef1d9",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-07-22T14:19:29Z",
+      "side": 1,
+      "message": "How was this constant chosen?",
+      "range": {
+        "startLine": 755,
+        "startChar": 10,
+        "endLine": 755,
+        "endChar": 15
+      },
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3493939_bee0359e",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-07-22T14:19:29Z",
+      "side": 1,
+      "message": "std::abs?",
+      "range": {
+        "startLine": 756,
+        "startChar": 10,
+        "endLine": 756,
+        "endChar": 23
+      },
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
