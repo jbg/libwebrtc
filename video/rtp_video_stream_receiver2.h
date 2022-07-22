@@ -339,7 +339,8 @@ class RtpVideoStreamReceiver2 : public LossNotificationSender,
   const KeyFrameReqMethod keyframe_request_method_;
 
   RtcpFeedbackBuffer rtcp_feedback_buffer_;
-  const std::unique_ptr<NackRequester> nack_module_;
+  std::unique_ptr<NackRequester> nack_module_
+      RTC_GUARDED_BY(packet_sequence_checker_);
   std::unique_ptr<LossNotificationController> loss_notification_controller_
       RTC_GUARDED_BY(packet_sequence_checker_);
 
