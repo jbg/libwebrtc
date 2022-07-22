@@ -101,6 +101,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9868b2a_00d844ae",
+        "filename": "sdk/objc/native/src/objc_audio_device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-07-22T07:48:32Z",
+      "side": 1,
+      "message": "Thanks. Please add these explanations in a clean format as comments.",
+      "parentUuid": "f34e298d_4db77b2e",
+      "range": {
+        "startLine": 159,
+        "startChar": 1,
+        "endLine": 159,
+        "endChar": 8
+      },
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13f746a8_c809dba4",
         "filename": "sdk/objc/native/src/objc_audio_device.mm",
         "patchSetId": 4
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "This is is just preferred (default) value, implementation may use a different values. I\u0027ve took it from an existing implementation: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/sdk/objc/components/audio/RTCAudioSessionConfiguration.m;l\u003d37-45.\nJust realized that according to comment existing implementation expected to use 0.01 buffer size :)\nSo I\u0027ll update preferred buffer size to 512/48000.",
       "parentUuid": "309b25e2_b2f6d86f",
+      "range": {
+        "startLine": 26,
+        "startChar": 58,
+        "endLine": 26,
+        "endChar": 64
+      },
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8efed94_4074ff52",
+        "filename": "sdk/objc/native/src/objc_audio_device_delegate.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-07-22T07:48:32Z",
+      "side": 1,
+      "message": "My bad, the existing implementation uses 20ms which is a good compromise between latency and robustness and it is an even multiple of 10ms which is the default packet size in WebRTC. So, please try to use the same size (20ms) here as well.",
+      "parentUuid": "dd5d4555_2c4a1d80",
       "range": {
         "startLine": 26,
         "startChar": 58,
