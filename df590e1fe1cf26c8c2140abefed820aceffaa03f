@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "822fc47f_8b886768",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-07-22T19:35:36Z",
+      "side": 1,
+      "message": "\u003e Would choosing a different high bandwidth bias value be an alternative to making it dynamic?\n\nI tried to tune it as well. However adjusting bandwidth factor does not help as it always prefers higher (or lower) bandwidth candidates, even when the loss rate is high (or low). What it should do is to favour/disfavour candidates depending on the current loss.",
+      "parentUuid": "fbfa956c_a5839caa",
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74f3d691_d0c71b05",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-07-22T14:19:29Z",
       "side": 1,
       "message": "Could you explain this function a bit more? It\u0027s not as simple as it sounds in the cl description with if loss \u003e threshold then use low bandwidth bias else use high bandwidth bias.\n\nAlso, it doesn\u0027t look like this is equivalent to the current behavior with the default parameters? Maybe we want to keep the current behavior in case this is running in production?",
+      "range": {
+        "startLine": 751,
+        "startChar": 0,
+        "endLine": 751,
+        "endChar": 57
+      },
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4156878_24f1dc11",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-07-22T19:35:36Z",
+      "side": 1,
+      "message": "This graph can help explaining the idea. Assuming the threshold is 15%, smoothing factor is 0.2. If the loss rate goes to 0, then adjusted bias factor go to bias factor. At 15%, the adjusted bias factor is 0, and it is -1 * bias factor when the loss rate goes to 100%",
+      "parentUuid": "74f3d691_d0c71b05",
       "range": {
         "startLine": 751,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c7417d6_28ed9de1",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-07-22T19:35:36Z",
+      "side": 1,
+      "message": "Updated it. It is the smoothing factor. Initially I picked the constant because did not want to introduce a new param and made the model more complicated, but then realize it is the right thing to do.",
+      "parentUuid": "476414f5_ad2ef1d9",
+      "range": {
+        "startLine": 755,
+        "startChar": 10,
+        "endLine": 755,
+        "endChar": 15
+      },
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3493939_bee0359e",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-07-22T14:19:29Z",
       "side": 1,
       "message": "std::abs?",
+      "range": {
+        "startLine": 756,
+        "startChar": 10,
+        "endLine": 756,
+        "endChar": 23
+      },
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7a6b04c_fe7b3375",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-07-22T19:35:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3493939_bee0359e",
       "range": {
         "startLine": 756,
         "startChar": 10,
