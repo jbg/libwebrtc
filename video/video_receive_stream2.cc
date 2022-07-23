@@ -355,8 +355,7 @@ void VideoReceiveStream2::Start() {
   const bool protected_by_fec = config_.rtp.protected_by_flexfec ||
                                 rtp_video_stream_receiver_.IsUlpfecEnabled();
 
-  if (rtp_video_stream_receiver_.IsRetransmissionsEnabled() &&
-      protected_by_fec) {
+  if (config_.rtp.nack.rtp_history_ms > 0 && protected_by_fec) {
     frame_buffer_->SetProtectionMode(kProtectionNackFEC);
   }
 
@@ -522,6 +521,27 @@ void VideoReceiveStream2::SetLossNotificationEnabled(bool enabled) {
   // TODO(tommi): Stop using the config struct for the internal state.
   const_cast<bool&>(config_.rtp.lntf.enabled) = enabled;
   rtp_video_stream_receiver_.SetLossNotificationEnabled(enabled);
+}
+
+void VideoReceiveStream2::SetNackHistory(int history_ms) {
+  RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
+  RTC_DCHECK_GE(history_ms, 0);
+
+  if (config_.rtp.nack.rtp_history_ms == history_ms)
+    return;
+
+  // TODO(tommi): Stop using the config struct for the internal state.
+  const_cast<int&>(config_.rtp.nack.rtp_history_ms) = history_ms;
+
+  const bool protected_by_fec = config_.rtp.protected_by_flexfec ||
+                                rtp_video_stream_receiver_.IsUlpfecEnabled();
+
+  frame_buffer_->SetProtectionMode(history_ms > 0 && protected_by_fec
+                                       ? kProtectionNackFEC
+                                       : kProtectionNack);
+
+  // TODO(tommi): Update anything based on `DetermineMaxWaitForFrame`
+  rtp_video_stream_receiver_.SetNackHistory(history_ms);
 }
 
 void VideoReceiveStream2::CreateAndRegisterExternalDecoder(
@@ -784,6 +804,7 @@ void VideoReceiveStream2::OnEncodedFrame(std::unique_ptr<EncodedFrame> frame) {
 
 void VideoReceiveStream2::OnDecodableFrameTimeout(TimeDelta wait_time) {
   if (!call_->worker_thread()->IsCurrent()) {
+    RTC_DCHECK_RUN_ON(&decode_queue_);
     call_->worker_thread()->PostTask(
         SafeTask(task_safety_.flag(),
                  [this, wait_time] { OnDecodableFrameTimeout(wait_time); }));
