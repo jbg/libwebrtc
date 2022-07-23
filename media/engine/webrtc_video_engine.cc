@@ -3064,22 +3064,8 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetFeedbackParameters(
 
   int nack_history_ms =
       nack_enabled ? rtx_time != -1 ? rtx_time : kNackHistoryMs : 0;
-  if (config_.rtp.nack.rtp_history_ms == nack_history_ms) {
-    RTC_LOG(LS_INFO)
-        << "Ignoring call to SetFeedbackParameters because parameters are "
-           "unchanged; nack="
-        << nack_enabled << ", rtx_time=" << rtx_time;
-    return;
-  }
-
-  RTC_LOG_F(LS_INFO) << "(recv) because of SetFeedbackParameters; nack="
-                     << nack_enabled << ". rtp_history_ms "
-                     << config_.rtp.nack.rtp_history_ms << "->"
-                     << nack_history_ms;
-
   config_.rtp.nack.rtp_history_ms = nack_history_ms;
-
-  RecreateReceiveStream();
+  stream_->SetNackHistory(nack_history_ms);
 }
 
 void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetFlexFecPayload(
