@@ -355,8 +355,7 @@ void VideoReceiveStream2::Start() {
   const bool protected_by_fec = config_.rtp.protected_by_flexfec ||
                                 rtp_video_stream_receiver_.IsUlpfecEnabled();
 
-  if (rtp_video_stream_receiver_.IsRetransmissionsEnabled() &&
-      protected_by_fec) {
+  if (config_.rtp.nack.rtp_history_ms > 0 && protected_by_fec) {
     frame_buffer_->SetProtectionMode(kProtectionNackFEC);
   }
 
@@ -522,6 +521,11 @@ void VideoReceiveStream2::SetLossNotificationEnabled(bool enabled) {
   // TODO(tommi): Stop using the config struct for the internal state.
   const_cast<bool&>(config_.rtp.lntf.enabled) = enabled;
   rtp_video_stream_receiver_.SetLossNotificationEnabled(enabled);
+}
+
+void VideoReceiveStream2::SetNackHistory(int history_ms) {
+  // TODO(tommi): Stop using the config struct for the internal state.
+  const_cast<int&>(config_.rtp.nack.rtp_history_ms) = history_ms;
 }
 
 void VideoReceiveStream2::CreateAndRegisterExternalDecoder(

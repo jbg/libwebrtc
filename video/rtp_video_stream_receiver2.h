@@ -149,7 +149,6 @@ class RtpVideoStreamReceiver2 : public LossNotificationSender,
                             bool buffering_allowed) override;
 
   bool IsUlpfecEnabled() const;
-  bool IsRetransmissionsEnabled() const;
 
   // Returns true if a decryptor is attached and frames can be decrypted.
   // Updated by OnDecryptionStatusChangeCallback. Note this refers to Frame
@@ -339,7 +338,8 @@ class RtpVideoStreamReceiver2 : public LossNotificationSender,
   const KeyFrameReqMethod keyframe_request_method_;
 
   RtcpFeedbackBuffer rtcp_feedback_buffer_;
-  const std::unique_ptr<NackRequester> nack_module_;
+  std::unique_ptr<NackRequester> nack_module_
+      RTC_GUARDED_BY(packet_sequence_checker_);
   std::unique_ptr<LossNotificationController> loss_notification_controller_
       RTC_GUARDED_BY(packet_sequence_checker_);
 
