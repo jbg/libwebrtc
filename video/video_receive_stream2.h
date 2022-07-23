@@ -148,6 +148,7 @@ class VideoReceiveStream2
   void SetRtcpMode(RtcpMode mode) override;
   void SetFlexFecProtection(RtpPacketSinkInterface* flexfec_sink) override;
   void SetLossNotificationEnabled(bool enabled) override;
+  void SetNackHistory(int history_ms) override;
 
   webrtc::VideoReceiveStreamInterface::Stats GetStats() const override;
 
