@@ -3078,6 +3078,7 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetFeedbackParameters(
                      << nack_history_ms;
 
   config_.rtp.nack.rtp_history_ms = nack_history_ms;
+  // stream_->SetNackHistory(nack_history_ms);
 
   RecreateReceiveStream();
 }
