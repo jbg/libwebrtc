@@ -296,6 +296,8 @@ class VideoReceiveStreamInterface : public MediaReceiveStreamInterface {
   // thread.
   virtual void SetLossNotificationEnabled(bool enabled) = 0;
 
+  virtual void SetNackHistory(int history_ms) = 0;
+
  protected:
   virtual ~VideoReceiveStreamInterface() {}
 };

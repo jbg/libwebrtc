@@ -105,12 +105,12 @@ std::unique_ptr<ModuleRtpRtcpImpl2> CreateRtpRtcpModule(
 std::unique_ptr<NackRequester> MaybeConstructNackModule(
     TaskQueueBase* current_queue,
     NackPeriodicProcessor* nack_periodic_processor,
-    const VideoReceiveStreamInterface::Config& config,
+    const NackConfig& nack,
     Clock* clock,
     NackSender* nack_sender,
     KeyFrameRequestSender* keyframe_request_sender,
     const FieldTrialsView& field_trials) {
-  if (config.rtp.nack.rtp_history_ms == 0)
+  if (nack.rtp_history_ms == 0)
     return nullptr;
 
   // TODO(bugs.webrtc.org/12420): pass rtp_history_ms to the nack module.
@@ -253,7 +253,7 @@ RtpVideoStreamReceiver2::RtpVideoStreamReceiver2(
       rtcp_feedback_buffer_(this, this, this),
       nack_module_(MaybeConstructNackModule(current_queue,
                                             nack_periodic_processor,
-                                            config_,
+                                            config_.rtp.nack,
                                             clock_,
                                             &rtcp_feedback_buffer_,
                                             &rtcp_feedback_buffer_,
@@ -704,10 +704,6 @@ bool RtpVideoStreamReceiver2::IsUlpfecEnabled() const {
   return config_.rtp.ulpfec_payload_type != -1;
 }
 
-bool RtpVideoStreamReceiver2::IsRetransmissionsEnabled() const {
-  return config_.rtp.nack.rtp_history_ms > 0;
-}
-
 bool RtpVideoStreamReceiver2::IsDecryptable() const {
   RTC_DCHECK_RUN_ON(&worker_task_checker_);
   return frames_decryptable_;
@@ -919,7 +915,7 @@ const RtpHeaderExtensionMap& RtpVideoStreamReceiver2::GetRtpExtensions() const {
 }
 
 void RtpVideoStreamReceiver2::UpdateRtt(int64_t max_rtt_ms) {
-  RTC_DCHECK_RUN_ON(&worker_task_checker_);
+  RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
   if (nack_module_)
     nack_module_->UpdateRtt(max_rtt_ms);
 }
@@ -978,7 +974,6 @@ void RtpVideoStreamReceiver2::ManageFrame(
 
 // RTC_RUN_ON(packet_sequence_checker_)
 void RtpVideoStreamReceiver2::ReceivePacket(const RtpPacketReceived& packet) {
-  RTC_DCHECK_RUN_ON(&worker_task_checker_);
   if (packet.payload_size() == 0) {
     // Padding or keep-alive packet.
     // TODO(nisse): Could drop empty packets earlier, but need to figure out how
