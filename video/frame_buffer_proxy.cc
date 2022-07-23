@@ -120,13 +120,13 @@ class FrameBuffer2Proxy : public FrameBufferProxy {
   }
 
  private:
-  TimeDelta MaxWait(bool keyframe_required) const {
+  TimeDelta MaxWait(bool keyframe_required) const RTC_RUN_ON(decode_queue_) {
     return keyframe_required ? max_wait_for_keyframe_ : max_wait_for_frame_;
   }
 
   RTC_NO_UNIQUE_ADDRESS SequenceChecker worker_sequence_checker_;
-  const TimeDelta max_wait_for_keyframe_;
-  const TimeDelta max_wait_for_frame_;
+  const TimeDelta max_wait_for_keyframe_ RTC_GUARDED_BY(decode_queue_);
+  const TimeDelta max_wait_for_frame_ RTC_GUARDED_BY(decode_queue_);
   video_coding::FrameBuffer frame_buffer_;
   TaskQueueBase* const decode_queue_;
   VCMReceiveStatisticsCallback* const stats_proxy_;
@@ -375,7 +375,11 @@ class FrameBuffer3Proxy : public FrameBufferProxy {
       timeout_tracker_.Stop();
       return;
     }
-    receiver_->OnDecodableFrameTimeout(delay);
+    // `OnDecodableFrameTimeout` and `OnEncodedFrame` should be called on the
+    // same (decoder) thread.
+    decode_queue_->PostTask(SafeTask(decode_safety_, [this, delay]() {
+      receiver_->OnDecodableFrameTimeout(delay);
+    }));
     // Stop sending timeouts until receive starts waiting for a new frame.
     timeout_tracker_.Stop();
     decoder_ready_for_new_frame_ = false;
