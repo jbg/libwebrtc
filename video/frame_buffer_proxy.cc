@@ -90,6 +90,18 @@ class FrameBuffer2Proxy : public FrameBufferProxy {
     frame_buffer_.UpdateRtt(max_rtt_ms);
   }
 
+  void SetMaxWaits(TimeDelta max_wait_for_keyframe,
+                   TimeDelta max_wait_for_frame) override {
+    RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+    decode_queue_->PostTask(
+        SafeTask(decode_safety_,
+                 [this, max_wait_for_keyframe, max_wait_for_frame]() mutable {
+                   RTC_DCHECK_RUN_ON(decode_queue_);
+                   max_wait_for_keyframe_ = max_wait_for_keyframe;
+                   max_wait_for_frame_ = max_wait_for_frame;
+                 }));
+  }
+
   void StartNextDecode(bool keyframe_required) override {
     if (!decode_queue_->IsCurrent()) {
       decode_queue_->PostTask(SafeTask(
@@ -120,13 +132,13 @@ class FrameBuffer2Proxy : public FrameBufferProxy {
   }
 
  private:
-  TimeDelta MaxWait(bool keyframe_required) const {
+  TimeDelta MaxWait(bool keyframe_required) const RTC_RUN_ON(decode_queue_) {
     return keyframe_required ? max_wait_for_keyframe_ : max_wait_for_frame_;
   }
 
   RTC_NO_UNIQUE_ADDRESS SequenceChecker worker_sequence_checker_;
-  const TimeDelta max_wait_for_keyframe_;
-  const TimeDelta max_wait_for_frame_;
+  TimeDelta max_wait_for_keyframe_ RTC_GUARDED_BY(decode_queue_);
+  TimeDelta max_wait_for_frame_ RTC_GUARDED_BY(decode_queue_);
   video_coding::FrameBuffer frame_buffer_;
   TaskQueueBase* const decode_queue_;
   VCMReceiveStatisticsCallback* const stats_proxy_;
@@ -271,6 +283,14 @@ class FrameBuffer3Proxy : public FrameBufferProxy {
     jitter_estimator_.UpdateRtt(TimeDelta::Millis(max_rtt_ms));
   }
 
+  void SetMaxWaits(TimeDelta max_wait_for_keyframe,
+                   TimeDelta max_wait_for_frame) override {
+    RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+    timeout_tracker_.SetTimeouts(VideoReceiveStreamTimeoutTracker::Timeouts{
+        .max_wait_for_keyframe = max_wait_for_keyframe,
+        .max_wait_for_frame = max_wait_for_frame});
+  }
+
   void StartNextDecode(bool keyframe_required) override {
     if (!worker_queue_->IsCurrent()) {
       worker_queue_->PostTask(SafeTask(
@@ -375,7 +395,11 @@ class FrameBuffer3Proxy : public FrameBufferProxy {
       timeout_tracker_.Stop();
       return;
     }
-    receiver_->OnDecodableFrameTimeout(delay);
+    // `OnDecodableFrameTimeout` and `OnEncodedFrame` should be called on the
+    // same (decoder) thread.
+    decode_queue_->PostTask(SafeTask(decode_safety_, [this, delay]() {
+      receiver_->OnDecodableFrameTimeout(delay);
+    }));
     // Stop sending timeouts until receive starts waiting for a new frame.
     timeout_tracker_.Stop();
     decoder_ready_for_new_frame_ = false;
