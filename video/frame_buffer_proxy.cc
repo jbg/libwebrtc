@@ -375,7 +375,11 @@ class FrameBuffer3Proxy : public FrameBufferProxy {
       timeout_tracker_.Stop();
       return;
     }
-    receiver_->OnDecodableFrameTimeout(delay);
+    // `OnDecodableFrameTimeout` and `OnEncodedFrame` should be called on the
+    // decoder thread.
+    decode_queue_->PostTask(SafeTask(decode_safety_, [this, delay]() {
+      receiver_->OnDecodableFrameTimeout(delay);
+    }));
     // Stop sending timeouts until receive starts waiting for a new frame.
     timeout_tracker_.Stop();
     decoder_ready_for_new_frame_ = false;
