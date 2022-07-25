@@ -131,6 +131,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0530b68_73a0c944",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-07-25T08:18:12Z",
+      "side": 1,
+      "message": "The default loss_threshold_of_high_bandwidth_preference value is 0.99, means it always prefers higher candidates if the loss is less than 99%. Thus the feature is (basically) not activated by default.",
+      "parentUuid": "f63135d6_b19fd89d",
+      "range": {
+        "startLine": 751,
+        "startChar": 0,
+        "endLine": 751,
+        "endChar": 57
+      },
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "476414f5_ad2ef1d9",
