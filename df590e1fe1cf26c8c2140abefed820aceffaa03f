@@ -179,6 +179,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ed79485_5e8be355",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-07-25T09:04:01Z",
+      "side": 1,
+      "message": "Ack. Yes, you are right. It will be slightly different. https://screenshot.googleplex.com/5pN55Bq4ncrUUax. With the default bias factor, the model favours the higher candidate if the loss is up to 98%. I think effect is small enough to not need a flag.",
+      "parentUuid": "4086a140_0e294607",
+      "range": {
+        "startLine": 751,
+        "startChar": 0,
+        "endLine": 751,
+        "endChar": 57
+      },
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "476414f5_ad2ef1d9",
