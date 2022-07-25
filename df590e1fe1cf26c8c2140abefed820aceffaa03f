@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f63135d6_b19fd89d",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-07-25T08:11:37Z",
+      "side": 1,
+      "message": "Thanks, makes sense. How about keeping the current behavior and hiding the change behind a flag? Or do you think the difference is small enough with the default parameters?",
+      "parentUuid": "213137af_2320f2d3",
+      "range": {
+        "startLine": 751,
+        "startChar": 0,
+        "endLine": 751,
+        "endChar": 57
+      },
+      "revId": "df590e1fe1cf26c8c2140abefed820aceffaa03f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "476414f5_ad2ef1d9",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
         "patchSetId": 5
