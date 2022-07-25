@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eadf91c8_8afc935d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-25T11:25:30Z",
+      "side": 1,
+      "message": "I missed that these two methods are from the same interface.",
+      "parentUuid": "7e4392af_5f374927",
+      "revId": "12dbef018b80c50855d14b3825db3543fb73c781",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "703a0a8a_9d667fe1",
@@ -85,6 +103,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e40964d_f6075489",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-25T11:25:30Z",
+      "side": 1,
+      "message": "I still do not understand why OnTimeout function is a good place for such comment.\nMay be move it to the FrameSchedulingReceiver interface,\nor annotate `receiver_` variable instead:\n`FrameSchedulingReceiver* const receiver_ RTC_PT_GUARDED_BY(decode_queue_);`",
+      "parentUuid": "bf5aaccd_e10223d5",
+      "range": {
+        "startLine": 378,
+        "startChar": 4,
+        "endLine": 379,
+        "endChar": 22
+      },
+      "revId": "12dbef018b80c50855d14b3825db3543fb73c781",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6f4aebb_7966e647",
         "filename": "video/video_receive_stream2.cc",
         "patchSetId": 3
@@ -120,6 +162,30 @@
       "side": 1,
       "message": "It\u0027s the currently default behavior, so I didn\u0027t want to change it in this CL. Since this is an exception case, I\u0027m not too worried about inefficiencies. I\u0027d rather fix the consistency first.",
       "parentUuid": "e6f4aebb_7966e647",
+      "range": {
+        "startLine": 762,
+        "startChar": 26,
+        "endLine": 762,
+        "endChar": 49
+      },
+      "revId": "12dbef018b80c50855d14b3825db3543fb73c781",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d87e882_faf98ccf",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-25T11:25:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "00527e72_442d5b2e",
       "range": {
         "startLine": 762,
         "startChar": 26,
