@@ -147,6 +147,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0bfcf0_28611da2",
+        "filename": "sdk/objc/native/src/objc_audio_device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2022-07-25T07:51:03Z",
+      "side": 1,
+      "message": "Looks great. Thanks.",
+      "parentUuid": "ec0c81d4_a855d67c",
+      "range": {
+        "startLine": 159,
+        "startChar": 1,
+        "endLine": 159,
+        "endChar": 8
+      },
+      "revId": "da300089d191eed2b6109dbf07cfb17c41ab8c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13f746a8_c809dba4",
