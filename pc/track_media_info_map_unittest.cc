@@ -33,6 +33,8 @@
 #include "test/gmock.h"
 #include "test/gtest.h"
 
+using ::testing::ElementsAre;
+
 namespace webrtc {
 
 namespace {
@@ -104,9 +106,7 @@ class TrackMediaInfoMapTest : public ::testing::Test {
   TrackMediaInfoMapTest() : TrackMediaInfoMapTest(true) {}
 
   explicit TrackMediaInfoMapTest(bool use_real_video_track)
-      : voice_media_info_(new cricket::VoiceMediaInfo()),
-        video_media_info_(new cricket::VideoMediaInfo()),
-        local_audio_track_(AudioTrack::Create("LocalAudioTrack", nullptr)),
+      : local_audio_track_(AudioTrack::Create("LocalAudioTrack", nullptr)),
         remote_audio_track_(AudioTrack::Create("RemoteAudioTrack", nullptr)),
         local_video_track_(use_real_video_track
                                ? CreateVideoTrack("LocalVideoTrack")
@@ -114,15 +114,6 @@ class TrackMediaInfoMapTest : public ::testing::Test {
         remote_video_track_(use_real_video_track
                                 ? CreateVideoTrack("RemoteVideoTrack")
                                 : CreateMockVideoTrack("LocalVideoTrack")) {}
-
-  ~TrackMediaInfoMapTest() {
-    // If we have a map the ownership has been passed to the map, only delete if
-    // `CreateMap` has not been called.
-    if (!map_) {
-      delete voice_media_info_;
-      delete video_media_info_;
-    }
-  }
 
   void AddRtpSenderWithSsrcs(std::initializer_list<uint32_t> ssrcs,
                              MediaStreamTrackInterface* local_track) {
@@ -140,7 +131,7 @@ class TrackMediaInfoMapTest : public ::testing::Test {
         voice_sender_info.local_stats.push_back(cricket::SsrcSenderInfo());
         voice_sender_info.local_stats[i++].ssrc = ssrc;
       }
-      voice_media_info_->senders.push_back(voice_sender_info);
+      voice_media_info_.senders.push_back(voice_sender_info);
     } else {
       cricket::VideoSenderInfo video_sender_info;
       size_t i = 0;
@@ -148,8 +139,8 @@ class TrackMediaInfoMapTest : public ::testing::Test {
         video_sender_info.local_stats.push_back(cricket::SsrcSenderInfo());
         video_sender_info.local_stats[i++].ssrc = ssrc;
       }
-      video_media_info_->senders.push_back(video_sender_info);
-      video_media_info_->aggregated_senders.push_back(video_sender_info);
+      video_media_info_.senders.push_back(video_sender_info);
+      video_media_info_.aggregated_senders.push_back(video_sender_info);
     }
   }
 
@@ -169,7 +160,7 @@ class TrackMediaInfoMapTest : public ::testing::Test {
         voice_receiver_info.local_stats.push_back(cricket::SsrcReceiverInfo());
         voice_receiver_info.local_stats[i++].ssrc = ssrc;
       }
-      voice_media_info_->receivers.push_back(voice_receiver_info);
+      voice_media_info_.receivers.push_back(voice_receiver_info);
     } else {
       cricket::VideoReceiverInfo video_receiver_info;
       size_t i = 0;
@@ -177,22 +168,24 @@ class TrackMediaInfoMapTest : public ::testing::Test {
         video_receiver_info.local_stats.push_back(cricket::SsrcReceiverInfo());
         video_receiver_info.local_stats[i++].ssrc = ssrc;
       }
-      video_media_info_->receivers.push_back(video_receiver_info);
+      video_media_info_.receivers.push_back(video_receiver_info);
     }
   }
 
+  // Copies the current state of `voice_media_info_` and `video_media_info_`
+  // into the map.
   void CreateMap() {
     RTC_DCHECK(!map_);
-    map_.reset(new TrackMediaInfoMap(
-        std::unique_ptr<cricket::VoiceMediaInfo>(voice_media_info_),
-        std::unique_ptr<cricket::VideoMediaInfo>(video_media_info_),
-        rtp_senders_, rtp_receivers_));
+    map_.reset(new TrackMediaInfoMap(voice_media_info_, video_media_info_,
+                                     rtp_senders_, rtp_receivers_));
   }
 
- protected:
+ private:
   rtc::AutoThread main_thread_;
-  cricket::VoiceMediaInfo* voice_media_info_;
-  cricket::VideoMediaInfo* video_media_info_;
+  cricket::VoiceMediaInfo voice_media_info_;
+  cricket::VideoMediaInfo video_media_info_;
+
+ protected:
   std::vector<rtc::scoped_refptr<RtpSenderInternal>> rtp_senders_;
   std::vector<rtc::scoped_refptr<RtpReceiverInternal>> rtp_receivers_;
   std::unique_ptr<TrackMediaInfoMap> map_;
@@ -213,30 +206,28 @@ TEST_F(TrackMediaInfoMapTest, SingleSenderReceiverPerTrackWithOneSsrc) {
 
   // Local audio track <-> RTP audio sender
   ASSERT_TRUE(map_->GetVoiceSenderInfos(*local_audio_track_));
-  EXPECT_EQ(
-      *map_->GetVoiceSenderInfos(*local_audio_track_),
-      std::vector<cricket::VoiceSenderInfo*>({&voice_media_info_->senders[0]}));
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVoiceSenderInfos(*local_audio_track_),
+              ElementsAre(&map_->voice_media_info()->senders[0]));
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->senders[0]),
             local_audio_track_.get());
 
   // Remote audio track <-> RTP audio receiver
   EXPECT_EQ(map_->GetVoiceReceiverInfo(*remote_audio_track_),
-            &voice_media_info_->receivers[0]);
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->receivers[0]),
+            &map_->voice_media_info()->receivers[0]);
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->receivers[0]),
             remote_audio_track_.get());
 
   // Local video track <-> RTP video sender
   ASSERT_TRUE(map_->GetVideoSenderInfos(*local_video_track_));
-  EXPECT_EQ(
-      *map_->GetVideoSenderInfos(*local_video_track_),
-      std::vector<cricket::VideoSenderInfo*>({&video_media_info_->senders[0]}));
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVideoSenderInfos(*local_video_track_),
+              ElementsAre(&map_->video_media_info()->senders[0]));
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->senders[0]),
             local_video_track_.get());
 
   // Remote video track <-> RTP video receiver
   EXPECT_EQ(map_->GetVideoReceiverInfo(*remote_video_track_),
-            &video_media_info_->receivers[0]);
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->receivers[0]),
+            &map_->video_media_info()->receivers[0]);
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->receivers[0]),
             remote_video_track_.get());
 }
 
@@ -263,30 +254,28 @@ TEST_F(TrackMediaInfoMapTest,
 
   // Local audio track <-> RTP audio sender
   ASSERT_TRUE(map_->GetVoiceSenderInfos(*local_audio_track_));
-  EXPECT_EQ(
-      *map_->GetVoiceSenderInfos(*local_audio_track_),
-      std::vector<cricket::VoiceSenderInfo*>({&voice_media_info_->senders[0]}));
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVoiceSenderInfos(*local_audio_track_),
+              ElementsAre(&map_->voice_media_info()->senders[0]));
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->senders[0]),
             local_audio_track_.get());
 
   // Remote audio track <-> RTP audio receiver
   EXPECT_EQ(map_->GetVoiceReceiverInfo(*remote_audio_track_),
-            &voice_media_info_->receivers[0]);
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->receivers[0]),
+            &map_->voice_media_info()->receivers[0]);
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->receivers[0]),
             remote_audio_track_.get());
 
   // Local video track <-> RTP video sender
   ASSERT_TRUE(map_->GetVideoSenderInfos(*local_video_track_));
-  EXPECT_EQ(
-      *map_->GetVideoSenderInfos(*local_video_track_),
-      std::vector<cricket::VideoSenderInfo*>({&video_media_info_->senders[0]}));
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVideoSenderInfos(*local_video_track_),
+              ElementsAre(&map_->video_media_info()->senders[0]));
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->senders[0]),
             local_video_track_.get());
 
   // Remote video track <-> RTP video receiver
   EXPECT_EQ(map_->GetVideoReceiverInfo(*remote_video_track_),
-            &video_media_info_->receivers[0]);
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->receivers[0]),
+            &map_->video_media_info()->receivers[0]);
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->receivers[0]),
             remote_video_track_.get());
 }
 
@@ -297,18 +286,16 @@ TEST_F(TrackMediaInfoMapTest, SingleMultiSsrcSenderPerTrack) {
 
   // Local audio track <-> RTP audio senders
   ASSERT_TRUE(map_->GetVoiceSenderInfos(*local_audio_track_));
-  EXPECT_EQ(
-      *map_->GetVoiceSenderInfos(*local_audio_track_),
-      std::vector<cricket::VoiceSenderInfo*>({&voice_media_info_->senders[0]}));
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVoiceSenderInfos(*local_audio_track_),
+              ElementsAre(&map_->voice_media_info()->senders[0]));
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->senders[0]),
             local_audio_track_.get());
 
   // Local video track <-> RTP video senders
   ASSERT_TRUE(map_->GetVideoSenderInfos(*local_video_track_));
-  EXPECT_EQ(
-      *map_->GetVideoSenderInfos(*local_video_track_),
-      std::vector<cricket::VideoSenderInfo*>({&video_media_info_->senders[0]}));
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVideoSenderInfos(*local_video_track_),
+              ElementsAre(&map_->video_media_info()->senders[0]));
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->senders[0]),
             local_video_track_.get());
 }
 
@@ -321,24 +308,22 @@ TEST_F(TrackMediaInfoMapTest, MultipleOneSsrcSendersPerTrack) {
 
   // Local audio track <-> RTP audio senders
   ASSERT_TRUE(map_->GetVoiceSenderInfos(*local_audio_track_));
-  EXPECT_EQ(
-      *map_->GetVoiceSenderInfos(*local_audio_track_),
-      std::vector<cricket::VoiceSenderInfo*>(
-          {&voice_media_info_->senders[0], &voice_media_info_->senders[1]}));
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVoiceSenderInfos(*local_audio_track_),
+              ElementsAre(&map_->voice_media_info()->senders[0],
+                          &map_->voice_media_info()->senders[1]));
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->senders[0]),
             local_audio_track_.get());
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->senders[1]),
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->senders[1]),
             local_audio_track_.get());
 
   // Local video track <-> RTP video senders
   ASSERT_TRUE(map_->GetVideoSenderInfos(*local_video_track_));
-  EXPECT_EQ(
-      *map_->GetVideoSenderInfos(*local_video_track_),
-      std::vector<cricket::VideoSenderInfo*>(
-          {&video_media_info_->senders[0], &video_media_info_->senders[1]}));
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVideoSenderInfos(*local_video_track_),
+              ElementsAre(&map_->video_media_info()->senders[0],
+                          &map_->video_media_info()->senders[1]));
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->senders[0]),
             local_video_track_.get());
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->senders[1]),
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->senders[1]),
             local_video_track_.get());
 }
 
@@ -351,24 +336,22 @@ TEST_F(TrackMediaInfoMapTest, MultipleMultiSsrcSendersPerTrack) {
 
   // Local audio track <-> RTP audio senders
   ASSERT_TRUE(map_->GetVoiceSenderInfos(*local_audio_track_));
-  EXPECT_EQ(
-      *map_->GetVoiceSenderInfos(*local_audio_track_),
-      std::vector<cricket::VoiceSenderInfo*>(
-          {&voice_media_info_->senders[0], &voice_media_info_->senders[1]}));
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVoiceSenderInfos(*local_audio_track_),
+              ElementsAre(&map_->voice_media_info()->senders[0],
+                          &map_->voice_media_info()->senders[1]));
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->senders[0]),
             local_audio_track_.get());
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->senders[1]),
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->senders[1]),
             local_audio_track_.get());
 
   // Local video track <-> RTP video senders
   ASSERT_TRUE(map_->GetVideoSenderInfos(*local_video_track_));
-  EXPECT_EQ(
-      *map_->GetVideoSenderInfos(*local_video_track_),
-      std::vector<cricket::VideoSenderInfo*>(
-          {&video_media_info_->senders[0], &video_media_info_->senders[1]}));
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVideoSenderInfos(*local_video_track_),
+              ElementsAre(&map_->video_media_info()->senders[0],
+                          &map_->video_media_info()->senders[1]));
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->senders[0]),
             local_video_track_.get());
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->senders[1]),
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->senders[1]),
             local_video_track_.get());
 }
 
@@ -382,30 +365,28 @@ TEST_F(TrackMediaInfoMapTest, SingleSenderReceiverPerTrackWithSsrcNotUnique) {
 
   // Local audio track <-> RTP audio senders
   ASSERT_TRUE(map_->GetVoiceSenderInfos(*local_audio_track_));
-  EXPECT_EQ(
-      *map_->GetVoiceSenderInfos(*local_audio_track_),
-      std::vector<cricket::VoiceSenderInfo*>({&voice_media_info_->senders[0]}));
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVoiceSenderInfos(*local_audio_track_),
+              ElementsAre(&map_->voice_media_info()->senders[0]));
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->senders[0]),
             local_audio_track_.get());
 
   // Remote audio track <-> RTP audio receiver
   EXPECT_EQ(map_->GetVoiceReceiverInfo(*remote_audio_track_),
-            &voice_media_info_->receivers[0]);
-  EXPECT_EQ(map_->GetAudioTrack(voice_media_info_->receivers[0]),
+            &map_->voice_media_info()->receivers[0]);
+  EXPECT_EQ(map_->GetAudioTrack(map_->voice_media_info()->receivers[0]),
             remote_audio_track_.get());
 
   // Local video track <-> RTP video senders
   ASSERT_TRUE(map_->GetVideoSenderInfos(*local_video_track_));
-  EXPECT_EQ(
-      *map_->GetVideoSenderInfos(*local_video_track_),
-      std::vector<cricket::VideoSenderInfo*>({&video_media_info_->senders[0]}));
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->senders[0]),
+  EXPECT_THAT(*map_->GetVideoSenderInfos(*local_video_track_),
+              ElementsAre(&map_->video_media_info()->senders[0]));
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->senders[0]),
             local_video_track_.get());
 
   // Remote video track <-> RTP video receiver
   EXPECT_EQ(map_->GetVideoReceiverInfo(*remote_video_track_),
-            &video_media_info_->receivers[0]);
-  EXPECT_EQ(map_->GetVideoTrack(video_media_info_->receivers[0]),
+            &map_->video_media_info()->receivers[0]);
+  EXPECT_EQ(map_->GetVideoTrack(map_->video_media_info()->receivers[0]),
             remote_video_track_.get());
 }
 
