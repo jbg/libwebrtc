@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "431a7c7f_be143a9d",
+        "filename": "modules/video_coding/timing/jitter_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-07-26T08:07:00Z",
+      "side": 0,
+      "message": "These tested only upper bound, which we can no longer set - so removed from the test.",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 120,
+        "endChar": 52
+      },
+      "revId": "ed6b586b62ec93ae82a231b6128f2f7360e663af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b00d1971_7ff10ff5",
+        "filename": "modules/video_coding/timing/jitter_estimator_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-07-26T08:07:00Z",
+      "side": 0,
+      "message": "These really ignore upper bound afaict, and only test rtt_mult_add_cap_ms, so rewrote the test to just verify that.",
+      "range": {
+        "startLine": 121,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 60
+      },
+      "revId": "ed6b586b62ec93ae82a231b6128f2f7360e663af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
