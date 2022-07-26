@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0595de3_c5ba875e",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2022-07-26T12:16:24Z",
+      "side": 1,
+      "message": "Isn\u0027t this code less efficient than the non string_view version? This will copy the file name, while in the old code the string was passed along as a reference. Or are you planning to update the AecDumpFactory::Create method at a later stage to also accept a string_view?",
+      "range": {
+        "startLine": 1665,
+        "startChar": 6,
+        "endLine": 1665,
+        "endChar": 28
+      },
+      "revId": "eb7bea7226ff8ac0edba5c78ed957414c8def453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
