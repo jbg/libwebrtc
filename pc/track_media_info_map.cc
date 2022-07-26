@@ -105,8 +105,8 @@ void GetAudioAndVideoTrackBySsrc(
 }  // namespace
 
 TrackMediaInfoMap::TrackMediaInfoMap(
-    std::unique_ptr<cricket::VoiceMediaInfo> voice_media_info,
-    std::unique_ptr<cricket::VideoMediaInfo> video_media_info,
+    absl::optional<cricket::VoiceMediaInfo> voice_media_info,
+    absl::optional<cricket::VideoMediaInfo> video_media_info,
     const std::vector<rtc::scoped_refptr<RtpSenderInternal>>& rtp_senders,
     const std::vector<rtc::scoped_refptr<RtpReceiverInternal>>& rtp_receivers)
     : voice_media_info_(std::move(voice_media_info)),
@@ -132,7 +132,7 @@ TrackMediaInfoMap::TrackMediaInfoMap(
     attachment_id_by_track_[receiver->track().get()] = receiver->AttachmentId();
   }
 
-  if (voice_media_info_) {
+  if (voice_media_info_.has_value()) {
     for (auto& sender_info : voice_media_info_->senders) {
       AudioTrackInterface* associated_track =
           FindValueOrNull(local_audio_track_by_ssrc, sender_info.ssrc());
@@ -167,7 +167,7 @@ TrackMediaInfoMap::TrackMediaInfoMap(
       voice_info_by_receiver_ssrc_[receiver_info.ssrc()] = &receiver_info;
     }
   }
-  if (video_media_info_) {
+  if (video_media_info_.has_value()) {
     for (auto& sender_info : video_media_info_->senders) {
       std::set<uint32_t> ssrcs;
       ssrcs.insert(sender_info.ssrc());
