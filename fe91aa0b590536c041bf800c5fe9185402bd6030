@@ -16,6 +16,23 @@
       "message": "Hello, Stefan. PTAL.",
       "revId": "fe91aa0b590536c041bf800c5fe9185402bd6030",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1fc3de5_abd50bc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-07-26T09:04:08Z",
+      "side": 1,
+      "message": "Hi, sprang. Could you take a look? Thanks.",
+      "revId": "fe91aa0b590536c041bf800c5fe9185402bd6030",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
