@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f814b65_a7605bef",
+        "filename": "modules/video_coding/timing/jitter_estimator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-07-26T08:38:20Z",
+      "side": 1,
+      "message": "Nit: [rtt, jitter]",
+      "range": {
+        "startLine": 107,
+        "startChar": 13,
+        "endLine": 107,
+        "endChar": 19
+      },
+      "revId": "e293af8254d590d0fa12485cfb3ef17a64337984",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
