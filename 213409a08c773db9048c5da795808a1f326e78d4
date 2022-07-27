@@ -57,6 +57,30 @@
       },
       "revId": "213409a08c773db9048c5da795808a1f326e78d4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0ca35fc_f013c3b6",
+        "filename": "pc/rtc_stats_collector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-07-27T08:57:19Z",
+      "side": 1,
+      "message": "I think not - update: I got rid of this optional now by giving map an Initialize() method. The only reason it was ever nullopt was just temporarily before having been initialized.",
+      "parentUuid": "b5fad816_347a2955",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 37
+      },
+      "revId": "213409a08c773db9048c5da795808a1f326e78d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
