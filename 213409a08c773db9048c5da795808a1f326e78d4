@@ -16,6 +16,24 @@
       "message": "Seems ok to me, but I\u0027d appreciate a second opinion given that TrackMediaInfoMap uses a nontrivial amount of storage.",
       "revId": "213409a08c773db9048c5da795808a1f326e78d4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "834fa63f_f356be0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-07-27T05:47:28Z",
+      "side": 1,
+      "message": "Alright, Mirko care to give a second opinion?\n\nThis change makes TrackMediaInfoMap absl::optional\u003c\u003e instead of std::unique_ptr\u003c\u003e in RtpTransceiverStatsInfo which is used in std::vector\u003cRtpTransceiverStatsInfo\u003e transceiver_stats_infos_ where we have one info per transceiver. The map is never \"missing\", except during the initialization of the RtpTransceiverStatsInfo which requires tasks on different threads, so the difference is that the map becomes part of the storage for RtpTransceiverStatsInfo rather than being pointed to.\n\nWe also make the TrackMediaInfoMap\u0027s cricket::[Voice/Video]MediaInfo absl::optional\u003c\u003e instead of std::unique_ptr\u003c\u003e. These are structs containing a couple of std::vector\u003c\u003es and std::map\u003c\u003es. In PrepareTransceiverStatsInfosAndCallStats_s_w_n() these structs get std::move()\u0027d a couple of times as for the TrackMediaInfoMap to take ownership of them.",
+      "parentUuid": "c6db487f_b035cde7",
+      "revId": "213409a08c773db9048c5da795808a1f326e78d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
