@@ -1253,11 +1253,11 @@ TEST_F(AcmSenderBitExactnessNewApi, OpusFromFormat_stereo_20ms_voip) {
   ASSERT_NO_FATAL_FAILURE(SetUpTestExternalEncoder(
       AudioEncoderOpus::MakeAudioEncoder(*config, 120), 120));
   const std::string audio_maybe_sse =
-      "058c03ca2c9bb5c0066d4c15ce50d772"
-      "|ca54661b220cc35239c6864ab858d29a";
+      "_058c03ca2c9bb5c0066d4c15ce50d772"
+      "|_ca54661b220cc35239c6864ab858d29a";
   const std::string payload_maybe_sse =
-      "f270ec7be7a5ed60c203c2317c4e1011"
-      "|eb0752ce1b6f2436fefc2e19bd084fb5";
+      "_f270ec7be7a5ed60c203c2317c4e1011"
+      "|_eb0752ce1b6f2436fefc2e19bd084fb5";
   Run(audio_maybe_sse, payload_maybe_sse, /*expected_packets=*/50,
       /*expected_channels=*/test::AcmReceiveTestOldApi::kStereoOutput);
 }
