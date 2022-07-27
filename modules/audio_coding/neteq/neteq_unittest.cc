@@ -79,8 +79,8 @@ TEST_F(NetEqDecodingTest, MAYBE_TestOpusBitExactness) {
   // The checksum depends on SSE being enabled, the second part is the non-SSE
   // checksum.
   const std::string output_checksum =
-      "919e5eb3ba901192878f2354b981a15508c8373c|"
-      "c5eb0a8fcf7e8255a40f821cb815e1096619efeb";
+      "111919e5eb3ba901192878f2354b981a15508c8373c|"
+      "111c5eb0a8fcf7e8255a40f821cb815e1096619efeb";
 
   const std::string network_stats_checksum =
       "3d043e47e5f4bb81d37e7bce8c44bf802965c853";
@@ -102,8 +102,8 @@ TEST_F(NetEqDecodingTest, MAYBE_TestOpusDtxBitExactness) {
   // The checksum depends on SSE being enabled, the second part is the non-SSE
   // checksum.
   const std::string output_checksum =
-      "5cea4a8e750842ac67b79e8e2ce6a0a1c01f8130|"
-      "e97e32a77355e7ce46a2dc2f43bf1c2805530fcb";
+      "1115cea4a8e750842ac67b79e8e2ce6a0a1c01f8130|"
+      "111e97e32a77355e7ce46a2dc2f43bf1c2805530fcb";
 
   const std::string network_stats_checksum =
       "dc8447b9fee1a21fd5d1f4045d62b982a3fb0215";
