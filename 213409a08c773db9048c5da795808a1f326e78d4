@@ -34,6 +34,29 @@
       "parentUuid": "c6db487f_b035cde7",
       "revId": "213409a08c773db9048c5da795808a1f326e78d4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5fad816_347a2955",
+        "filename": "pc/rtc_stats_collector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-27T08:33:30Z",
+      "side": 1,
+      "message": "Do we need the distinction between an absent map and en empty map?",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 37
+      },
+      "revId": "213409a08c773db9048c5da795808a1f326e78d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
