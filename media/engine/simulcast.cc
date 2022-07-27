@@ -137,15 +137,14 @@ int DefaultNumberOfTemporalLayers(int simulcast_id,
   RTC_CHECK_GE(simulcast_id, 0);
   RTC_CHECK_LT(simulcast_id, webrtc::kMaxSimulcastStreams);
 
-  const int kDefaultNumTemporalLayers = 3;
-  const int kDefaultNumScreenshareTemporalLayers = 2;
-  int default_num_temporal_layers = screenshare
-                                        ? kDefaultNumScreenshareTemporalLayers
-                                        : kDefaultNumTemporalLayers;
+  if (screenshare) {
+    return kMaxScreenshareSimulcastLayers;
+  }
+
+  int default_num_temporal_layers = 3;
 
   const std::string group_name =
-      screenshare ? trials.Lookup("WebRTC-VP8ScreenshareTemporalLayers")
-                  : trials.Lookup("WebRTC-VP8ConferenceTemporalLayers");
+      trials.Lookup("WebRTC-VP8ConferenceTemporalLayers");
   if (group_name.empty())
     return default_num_temporal_layers;
 
