@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f32cc62a_daf20089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-07-27T16:24:41Z",
+      "side": 1,
+      "message": "improves speed of the linked test case by ~5 seconds.\nsame test compiled in non debug is improved only by ~100ms - 300ms out of 10s.\nnot much, but still an improvement. (i.e. ~1-3%)",
+      "revId": "6ad2a2c4a23898fdd075c42c777619b4d086f2b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
