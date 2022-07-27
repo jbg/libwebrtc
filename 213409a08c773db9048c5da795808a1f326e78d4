@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a3b7c5_0197680f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-27T09:02:10Z",
+      "side": 1,
+      "message": "Yes, this LGTM.\n\nWe are not moving anything from the heap to the stack (well, we delegate this to std::vector) but it seems fine to make TrackMediaInfoMap more local to RtpTransceiverStatsInfo and avoid to jump to another memory location.",
+      "parentUuid": "834fa63f_f356be0d",
+      "revId": "213409a08c773db9048c5da795808a1f326e78d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5fad816_347a2955",
