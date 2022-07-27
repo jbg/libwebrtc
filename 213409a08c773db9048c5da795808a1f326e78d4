@@ -54,6 +54,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "327ce867_d4fd8c3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-07-27T09:08:02Z",
+      "side": 1,
+      "message": "I think we avoid two jumps per usage of the map, one for the dereferencing of the map and one for the map\u0027s info. The std::moves of the infos during initialization is more complex but moving those infos should just grab a couple of internal ptrs (inside vector/map).",
+      "parentUuid": "47a3b7c5_0197680f",
+      "revId": "213409a08c773db9048c5da795808a1f326e78d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5fad816_347a2955",
