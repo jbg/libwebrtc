@@ -33,6 +33,46 @@
       "message": "Hi, sprang. Could you take a look? Thanks.",
       "revId": "fe91aa0b590536c041bf800c5fe9185402bd6030",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b409755_4bbd90f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-07-27T14:44:48Z",
+      "side": 1,
+      "message": "Thanks for fixing!",
+      "revId": "fe91aa0b590536c041bf800c5fe9185402bd6030",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0e5d3ff_8534affd",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1547,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-07-27T14:44:48Z",
+      "side": 1,
+      "message": "nit: drop the argument, just `.reset()` is enough.",
+      "range": {
+        "startLine": 1547,
+        "startChar": 22,
+        "endLine": 1547,
+        "endChar": 29
+      },
+      "revId": "fe91aa0b590536c041bf800c5fe9185402bd6030",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
