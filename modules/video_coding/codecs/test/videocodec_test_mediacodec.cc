@@ -78,8 +78,8 @@ std::unique_ptr<VideoCodecTestFixture> CreateTestFixtureWithConfig(
 
 TEST(VideoCodecTestMediaCodec, ForemanCif500kbpsVp8) {
   auto config = CreateConfig();
-  config.SetCodecSettings(cricket::kVp8CodecName, 1, 1, 1, false, false, false,
-                          352, 288);
+  config.SetCodecSettings(cricket::kVp8CodecName, 1, ScalabilityMode::kL1T1,
+                          false, false, false, 352, 288);
   auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{500, kForemanFramerateFps, 0}};
@@ -100,8 +100,8 @@ TEST(VideoCodecTestMediaCodec, ForemanCif500kbpsH264CBP) {
   const auto frame_checker =
       std::make_unique<VideoCodecTestFixtureImpl::H264KeyframeChecker>();
   config.encoded_frame_checker = frame_checker.get();
-  config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, false, false,
-                          352, 288);
+  config.SetCodecSettings(cricket::kH264CodecName, 1, ScalabilityMode::kL1T1,
+                          false, false, false, 352, 288);
   auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{500, kForemanFramerateFps, 0}};
@@ -126,8 +126,8 @@ TEST(VideoCodecTestMediaCodec, DISABLED_ForemanCif500kbpsH264CHP) {
 
   config.h264_codec_settings.profile = H264Profile::kProfileConstrainedHigh;
   config.encoded_frame_checker = frame_checker.get();
-  config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, false, false,
-                          352, 288);
+  config.SetCodecSettings(cricket::kH264CodecName, 1, ScalabilityMode::kL1T1,
+                          false, false, false, 352, 288);
   auto fixture = CreateTestFixtureWithConfig(config);
 
   std::vector<RateProfile> rate_profiles = {{500, kForemanFramerateFps, 0}};
@@ -163,8 +163,8 @@ TEST(VideoCodecTestMediaCodec, ForemanMixedRes100kbpsVp8H264) {
                         std::to_string(height);
       config.filepath = ResourcePath(config.filename, "yuv");
       config.num_frames = kNumFrames;
-      config.SetCodecSettings(codec, 1, 1, 1, false, false, false, width,
-                              height);
+      config.SetCodecSettings(codec, 1, ScalabilityMode::kL1T1, false, false,
+                              false, width, height);
 
       auto fixture = CreateTestFixtureWithConfig(config);
       fixture->RunTest(rate_profiles, nullptr /* rc_thresholds */,
@@ -189,7 +189,8 @@ TEST_P(VideoCodecTestMediaCodecRateAdaptation, DISABLED_RateAdaptation) {
                       static_cast<size_t>(kConstRateIntervalSec *
                                           rate_profile.back().input_fps);
   config.encode_in_real_time = true;
-  config.SetCodecSettings(codec_name, 1, 1, 1, false, false, false, 1280, 720);
+  config.SetCodecSettings(codec_name, 1, ScalabilityMode::kL1T1, false, false,
+                          false, 1280, 720);
 
   auto fixture = CreateTestFixtureWithConfig(config);
   fixture->RunTest(rate_profile, nullptr, nullptr, nullptr);

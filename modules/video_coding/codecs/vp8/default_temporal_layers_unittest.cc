@@ -90,6 +90,12 @@ constexpr int kKeyFrameFlags = ToVp8CodecFlags(kNone, kAll, true);
 std::vector<uint32_t> GetTemporalLayerRates(int target_bitrate_kbps,
                                             int framerate_fps,
                                             int num_temporal_layers) {
+  static const ScalabilityMode kScalabilityModes[3] = {
+      ScalabilityMode::kL1T1, ScalabilityMode::kL1T2, ScalabilityMode::kL1T3};
+
+  RTC_CHECK_GT(num_temporal_layers, 0);
+  RTC_CHECK_LE(num_temporal_layers, 3);
+
   VideoCodec codec;
   codec.codecType = VideoCodecType::kVideoCodecVP8;
   codec.numberOfSimulcastStreams = 1;
@@ -97,7 +103,8 @@ std::vector<uint32_t> GetTemporalLayerRates(int target_bitrate_kbps,
   codec.maxFramerate = framerate_fps;
   codec.simulcastStream[0].targetBitrate = target_bitrate_kbps;
   codec.simulcastStream[0].maxBitrate = target_bitrate_kbps;
-  codec.simulcastStream[0].numberOfTemporalLayers = num_temporal_layers;
+  codec.simulcastStream[0].scalability_mode =
+      kScalabilityModes[num_temporal_layers - 1];
   codec.simulcastStream[0].active = true;
   SimulcastRateAllocator allocator(codec);
   return allocator

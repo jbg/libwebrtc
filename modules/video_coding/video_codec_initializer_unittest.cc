@@ -26,6 +26,7 @@
 #include "api/video_codecs/vp8_temporal_layers.h"
 #include "api/video_codecs/vp8_temporal_layers_factory.h"
 #include "modules/video_coding/codecs/vp9/include/vp9_globals.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "rtc_base/checks.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
@@ -71,10 +72,6 @@ class VideoCodecInitializerTest : public ::testing::Test {
 
     if (type == VideoCodecType::kVideoCodecVP8) {
       config_.number_of_streams = num_spatial_streams;
-      VideoCodecVP8 vp8_settings = VideoEncoder::GetDefaultVp8Settings();
-      vp8_settings.numberOfTemporalLayers = num_temporal_streams;
-      config_.encoder_specific_settings = rtc::make_ref_counted<
-          webrtc::VideoEncoderConfig::Vp8EncoderSpecificSettings>(vp8_settings);
     } else if (type == VideoCodecType::kVideoCodecVP9) {
       VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
       vp9_settings.numberOfSpatialLayers = num_spatial_streams;
@@ -155,7 +152,8 @@ TEST_F(VideoCodecInitializerTest, SingleStreamVp8Screenshare) {
       bitrate_allocator_->Allocate(VideoBitrateAllocationParameters(
           kDefaultTargetBitrateBps, kDefaultFrameRate));
   EXPECT_EQ(1u, codec_out_.numberOfSimulcastStreams);
-  EXPECT_EQ(1u, codec_out_.VP8()->numberOfTemporalLayers);
+  EXPECT_EQ(ScalabilityMode::kL1T1,
+            codec_out_.simulcastStream[0].scalability_mode);
   EXPECT_EQ(kDefaultTargetBitrateBps, bitrate_allocation.get_sum_bps());
 }
 
@@ -170,7 +168,8 @@ TEST_F(VideoCodecInitializerTest, SingleStreamVp8ScreenshareInactive) {
       bitrate_allocator_->Allocate(VideoBitrateAllocationParameters(
           kDefaultTargetBitrateBps, kDefaultFrameRate));
   EXPECT_EQ(1u, codec_out_.numberOfSimulcastStreams);
-  EXPECT_EQ(1u, codec_out_.VP8()->numberOfTemporalLayers);
+  EXPECT_EQ(ScalabilityMode::kL1T1,
+            codec_out_.simulcastStream[0].scalability_mode);
   EXPECT_EQ(0U, bitrate_allocation.get_sum_bps());
 }
 
@@ -181,7 +180,8 @@ TEST_F(VideoCodecInitializerTest, TemporalLayeredVp8ScreenshareConference) {
   bitrate_allocator_->SetLegacyConferenceMode(true);
 
   EXPECT_EQ(1u, codec_out_.numberOfSimulcastStreams);
-  EXPECT_EQ(2u, codec_out_.VP8()->numberOfTemporalLayers);
+  EXPECT_EQ(ScalabilityMode::kL1T2,
+            codec_out_.simulcastStream[0].scalability_mode);
   VideoBitrateAllocation bitrate_allocation =
       bitrate_allocator_->Allocate(VideoBitrateAllocationParameters(
           kScreenshareCodecTargetBitrateBps, kScreenshareDefaultFramerate));
@@ -197,7 +197,8 @@ TEST_F(VideoCodecInitializerTest, TemporalLayeredVp8Screenshare) {
   EXPECT_TRUE(InitializeCodec());
 
   EXPECT_EQ(1u, codec_out_.numberOfSimulcastStreams);
-  EXPECT_EQ(2u, codec_out_.VP8()->numberOfTemporalLayers);
+  EXPECT_EQ(ScalabilityMode::kL1T2,
+            codec_out_.simulcastStream[0].scalability_mode);
   VideoBitrateAllocation bitrate_allocation =
       bitrate_allocator_->Allocate(VideoBitrateAllocationParameters(
           kScreenshareCodecTargetBitrateBps, kScreenshareDefaultFramerate));
@@ -215,7 +216,10 @@ TEST_F(VideoCodecInitializerTest, SimulcastVp8Screenshare) {
   EXPECT_TRUE(InitializeCodec());
 
   EXPECT_EQ(2u, codec_out_.numberOfSimulcastStreams);
-  EXPECT_EQ(1u, codec_out_.VP8()->numberOfTemporalLayers);
+  EXPECT_EQ(ScalabilityMode::kL1T2,
+            codec_out_.simulcastStream[0].scalability_mode);
+  EXPECT_EQ(ScalabilityMode::kL1T1,
+            codec_out_.simulcastStream[1].scalability_mode);
   const uint32_t max_bitrate_bps =
       streams_[0].target_bitrate_bps + streams_[1].max_bitrate_bps;
   VideoBitrateAllocation bitrate_allocation =
@@ -240,7 +244,10 @@ TEST_F(VideoCodecInitializerTest, SimulcastVp8ScreenshareInactive) {
   EXPECT_TRUE(InitializeCodec());
 
   EXPECT_EQ(2u, codec_out_.numberOfSimulcastStreams);
-  EXPECT_EQ(1u, codec_out_.VP8()->numberOfTemporalLayers);
+  EXPECT_EQ(ScalabilityMode::kL1T2,
+            codec_out_.simulcastStream[0].scalability_mode);
+  EXPECT_EQ(ScalabilityMode::kL1T1,
+            codec_out_.simulcastStream[1].scalability_mode);
   const uint32_t target_bitrate =
       streams_[0].target_bitrate_bps + streams_[1].target_bitrate_bps;
   VideoBitrateAllocation bitrate_allocation =
@@ -264,7 +271,10 @@ TEST_F(VideoCodecInitializerTest, HighFpsSimulcastVp8Screenshare) {
   EXPECT_TRUE(InitializeCodec());
 
   EXPECT_EQ(2u, codec_out_.numberOfSimulcastStreams);
-  EXPECT_EQ(3u, codec_out_.VP8()->numberOfTemporalLayers);
+  EXPECT_EQ(ScalabilityMode::kL1T2,
+            codec_out_.simulcastStream[0].scalability_mode);
+  EXPECT_EQ(ScalabilityMode::kL1T3,
+            codec_out_.simulcastStream[1].scalability_mode);
   const uint32_t max_bitrate_bps =
       streams_[0].target_bitrate_bps + streams_[1].max_bitrate_bps;
   VideoBitrateAllocation bitrate_allocation = bitrate_allocator_->Allocate(
