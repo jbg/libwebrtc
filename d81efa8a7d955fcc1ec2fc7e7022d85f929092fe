@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8658f6d0_ee65aff3",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-07-27T15:23:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c787d2ae_839a0035",
+      "revId": "d81efa8a7d955fcc1ec2fc7e7022d85f929092fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "357105d6_6efaf45d",
@@ -35,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1575adee_218f726e",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-07-27T15:23:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "357105d6_6efaf45d",
+      "revId": "d81efa8a7d955fcc1ec2fc7e7022d85f929092fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52ffc31a_ebd15e54",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-07-27T13:03:14Z",
       "side": 1,
       "message": "Please use absl::optional\u003c\u003e instead, there are some assumptions that are not DCHECK\u0027ed that needs to be true (encoding_it !\u003d rtp_parameters_.encodings.end()) for this to get a value, and false seems like the wrong default when being inactive requires opting out.\n\nThere is also the info constructed by GetAggregatedVideoSenderInfo() which never has active assigned. Better to leave this one nullopt. (This is the info that is used to construct \"track\" stats, which doesn\u0027t have active, but the less assumptions we make the better)",
+      "revId": "d81efa8a7d955fcc1ec2fc7e7022d85f929092fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "326e2e1d_1da305d9",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-07-27T15:23:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52ffc31a_ebd15e54",
       "revId": "d81efa8a7d955fcc1ec2fc7e7022d85f929092fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
