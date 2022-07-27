@@ -79,11 +79,10 @@ TEST_F(NetEqDecodingTest, MAYBE_TestOpusBitExactness) {
   // The checksum depends on SSE being enabled, the second part is the non-SSE
   // checksum.
   const std::string output_checksum =
-      "919e5eb3ba901192878f2354b981a15508c8373c|"
-      "c5eb0a8fcf7e8255a40f821cb815e1096619efeb";
+      "fec6827bb9ee0b21770bbbb4a3a6f8823bf537dc";
 
   const std::string network_stats_checksum =
-      "3d043e47e5f4bb81d37e7bce8c44bf802965c853";
+      "076662525572dba753b11578330bd491923f7f5e";
 
   DecodeAndCompare(input_rtp_file, output_checksum, network_stats_checksum,
                    absl::GetFlag(FLAGS_gen_ref));
@@ -102,8 +101,7 @@ TEST_F(NetEqDecodingTest, MAYBE_TestOpusDtxBitExactness) {
   // The checksum depends on SSE being enabled, the second part is the non-SSE
   // checksum.
   const std::string output_checksum =
-      "5cea4a8e750842ac67b79e8e2ce6a0a1c01f8130|"
-      "e97e32a77355e7ce46a2dc2f43bf1c2805530fcb";
+      "b3c4899eab5378ef5e54f2302948872149f6ad5e";
 
   const std::string network_stats_checksum =
       "dc8447b9fee1a21fd5d1f4045d62b982a3fb0215";
