@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7980df5d_85a47930",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-27T09:12:33Z",
+      "side": 1,
+      "message": "Another late comment, possibly for a followup cl.",
+      "revId": "854b5c1169c2f6b2dab480cda2319cedde2e9de5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e59b9cee_6c6116ce",
+        "filename": "pc/track_media_info_map.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-27T09:12:33Z",
+      "side": 1,
+      "message": "I think it would be prudent to document expected lifetime of these referenced objects. Are they used only for the duration of the Initialize call, or is caller expected to keep them alive longer?\n\nIn the former case, maybe use ArrayView?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 25
+      },
+      "revId": "854b5c1169c2f6b2dab480cda2319cedde2e9de5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
