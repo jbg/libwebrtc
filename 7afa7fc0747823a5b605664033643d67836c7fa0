@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "945329c6_62b470fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-27T08:17:00Z",
+      "side": 1,
+      "message": "Tests now finally seem to pass, including downstream tests. Åsa, can you have a new look?",
+      "revId": "7afa7fc0747823a5b605664033643d67836c7fa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36accba1_ec2ab427",
+        "filename": "api/video_codecs/scalability_mode.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-27T08:17:00Z",
+      "side": 1,
+      "message": "Moved here from video_codec.h, to avoid a circular dependency.",
+      "range": {
+        "startLine": 95,
+        "startChar": 11,
+        "endLine": 95,
+        "endChar": 29
+      },
+      "revId": "7afa7fc0747823a5b605664033643d67836c7fa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
