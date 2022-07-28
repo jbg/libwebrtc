@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98f0a4dd_5ef6de7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-07-28T07:07:32Z",
+      "side": 1,
+      "message": "Ivo, I am using OO because this seems safe (I want to unblock downstream tests)",
+      "revId": "74813873c4e6fd7ab1d929f5bf9e215058a080f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
