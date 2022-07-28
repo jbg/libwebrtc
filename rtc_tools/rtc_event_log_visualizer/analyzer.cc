@@ -1449,7 +1449,8 @@ void EventLogAnalyzer::CreateReceiveSideBweSimulationGraph(Plot* plot) {
     size_t payload = packet.rtp.total_length; /*Should subtract header?*/
     clock.AdvanceTimeMicroseconds(packet.rtp.log_time_us() -
                                   clock.TimeInMicroseconds());
-    rscc.OnReceivedPacket(arrival_time_ms, payload, packet.rtp.header);
+    rscc.OnReceivedPacket(
+        RtpPacketForBwe::Create(arrival_time_ms, payload, packet.rtp.header));
     acked_bitrate.Update(payload, arrival_time_ms);
     absl::optional<uint32_t> bitrate_bps = acked_bitrate.Rate(arrival_time_ms);
     if (bitrate_bps) {

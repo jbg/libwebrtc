@@ -8,6 +8,20 @@
 
 import("../../webrtc.gni")
 
+rtc_source_set("rtp_packet_for_bwe") {
+  sources = [
+    "rtp_packet_for_bwe.cc",
+    "rtp_packet_for_bwe.h",
+  ]
+  deps = [
+    "../../api:rtp_headers",
+    "../../api/units:data_size",
+    "../../api/units:timestamp",
+    "../rtp_rtcp:rtp_rtcp_format",
+  ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
+}
+
 rtc_library("remote_bitrate_estimator") {
   sources = [
     "aimd_rate_control.cc",
@@ -41,6 +55,7 @@ rtc_library("remote_bitrate_estimator") {
   }
 
   deps = [
+    ":rtp_packet_for_bwe",
     "../../api:field_trials_view",
     "../../api:network_state_predictor_api",
     "../../api:rtp_headers",

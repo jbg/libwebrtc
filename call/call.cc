@@ -1537,27 +1537,27 @@ void Call::NotifyBweOfReceivedPacket(const RtpPacketReceived& packet,
                                      MediaType media_type,
                                      bool use_send_side_bwe) {
   RTC_DCHECK_RUN_ON(worker_thread_);
-  RTPHeader header;
-  packet.GetHeader(&header);
+  RtpPacketForBwe rtp_packet_for_bwe = RtpPacketForBwe::Create(packet);
 
   ReceivedPacket packet_msg;
-  packet_msg.size = DataSize::Bytes(packet.payload_size());
-  packet_msg.receive_time = packet.arrival_time();
-  if (header.extension.hasAbsoluteSendTime) {
-    packet_msg.send_time = header.extension.GetAbsoluteSendTimestamp();
+  packet_msg.size = rtp_packet_for_bwe.payload_size;
+  packet_msg.receive_time = rtp_packet_for_bwe.arrival_time;
+  if (rtp_packet_for_bwe.absolute_send_time_24bits.has_value()) {
+    packet_msg.send_time = AbsoluteSendTime::From24Bits(
+        *rtp_packet_for_bwe.absolute_send_time_24bits);
   }
   transport_send_->OnReceivedPacket(packet_msg);
 
-  if (!use_send_side_bwe && header.extension.hasTransportSequenceNumber) {
+  if (!use_send_side_bwe &&
+      rtp_packet_for_bwe.transport_sequence_number.has_value()) {
     // Inconsistent configuration of send side BWE. Do nothing.
     return;
   }
   // For audio, we only support send side BWE.
   if (media_type == MediaType::VIDEO ||
-      (use_send_side_bwe && header.extension.hasTransportSequenceNumber)) {
-    receive_side_cc_.OnReceivedPacket(
-        packet.arrival_time().ms(),
-        packet.payload_size() + packet.padding_size(), header);
+      (use_send_side_bwe &&
+       rtp_packet_for_bwe.transport_sequence_number.has_value())) {
+    receive_side_cc_.OnReceivedPacket(rtp_packet_for_bwe);
   }
 }
 

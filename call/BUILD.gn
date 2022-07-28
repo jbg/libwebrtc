@@ -311,6 +311,7 @@ rtc_library("call") {
     "../logging:rtc_stream_config",
     "../modules/congestion_controller",
     "../modules/pacing",
+    "../modules/remote_bitrate_estimator:rtp_packet_for_bwe",
     "../modules/rtp_rtcp",
     "../modules/rtp_rtcp:rtp_rtcp_format",
     "../modules/video_coding",

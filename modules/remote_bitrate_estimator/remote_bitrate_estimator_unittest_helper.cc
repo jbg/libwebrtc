@@ -229,15 +229,13 @@ void RemoteBitrateEstimatorTest::IncomingPacket(uint32_t ssrc,
                                                 int64_t arrival_time,
                                                 uint32_t rtp_timestamp,
                                                 uint32_t absolute_send_time) {
-  RTPHeader header;
-  memset(&header, 0, sizeof(header));
-  header.ssrc = ssrc;
-  header.timestamp = rtp_timestamp;
-  header.extension.hasAbsoluteSendTime = true;
-  header.extension.absoluteSendTime = absolute_send_time;
-  RTC_CHECK_GE(arrival_time + arrival_time_offset_ms_, 0);
-  bitrate_estimator_->IncomingPacket(arrival_time + arrival_time_offset_ms_,
-                                     payload_size, header);
+  bitrate_estimator_->IncomingPacket(
+      {.arrival_time =
+           Timestamp::Millis(arrival_time + arrival_time_offset_ms_),
+       .payload_size = DataSize::Bytes(payload_size),
+       .ssrc = ssrc,
+       .timestamp = rtp_timestamp,
+       .absolute_send_time_24bits = absolute_send_time});
 }
 
 // Generates a frame of packets belonging to a stream at a given bitrate and
