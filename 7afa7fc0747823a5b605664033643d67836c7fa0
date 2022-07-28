@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94494567_92c9f384",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2022-07-28T11:55:46Z",
+      "side": 1,
+      "message": "Chromium breakage hopefully fixed now. So I hope you can get this landed soon, in my absence.",
+      "revId": "7afa7fc0747823a5b605664033643d67836c7fa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36accba1_ec2ab427",
