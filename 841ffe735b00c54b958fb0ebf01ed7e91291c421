@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "841ffe735b00c54b958fb0ebf01ed7e91291c421",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e590f3de_37e58cb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2022-07-28T08:22:18Z",
+      "side": 1,
+      "message": "LGTM 😞\n\nI\u0027ll find another owner for api/video",
+      "revId": "841ffe735b00c54b958fb0ebf01ed7e91291c421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
