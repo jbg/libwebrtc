@@ -30,6 +30,7 @@
 #include "modules/remote_bitrate_estimator/inter_arrival.h"
 #include "modules/remote_bitrate_estimator/overuse_detector.h"
 #include "modules/remote_bitrate_estimator/overuse_estimator.h"
+#include "modules/remote_bitrate_estimator/rtp_packet_for_bwe.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/rate_statistics.h"
@@ -52,9 +53,7 @@ class RemoteBitrateEstimatorAbsSendTime : public RemoteBitrateEstimator {
 
   ~RemoteBitrateEstimatorAbsSendTime() override;
 
-  void IncomingPacket(int64_t arrival_time_ms,
-                      size_t payload_size,
-                      const RTPHeader& header) override;
+  void IncomingPacket(const RtpPacketForBwe& packet) override;
   TimeDelta Process() override;
   void OnRttUpdate(int64_t avg_rtt_ms, int64_t max_rtt_ms) override;
   void RemoveStream(uint32_t ssrc) override;
@@ -91,11 +90,6 @@ class RemoteBitrateEstimatorAbsSendTime : public RemoteBitrateEstimator {
 
   static void MaybeAddCluster(const Cluster& cluster_aggregate,
                               std::list<Cluster>& clusters);
-
-  void IncomingPacketInfo(Timestamp arrival_time,
-                          uint32_t send_time_24bits,
-                          DataSize payload_size,
-                          uint32_t ssrc);
 
   std::list<Cluster> ComputeClusters() const;
 

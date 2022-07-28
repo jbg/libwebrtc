@@ -49,6 +49,10 @@ class AbsoluteSendTime {
     RTC_DCHECK_LT(time6x18, 1 << 24);
     return static_cast<uint32_t>(time6x18);
   }
+  static constexpr Timestamp From24Bits(uint32_t value) {
+    RTC_DCHECK_LT(value, uint32_t{1} << 24);
+    return Timestamp::Micros((value * int64_t{1'000'000}) >> 18);
+  }
 };
 
 class AbsoluteCaptureTimeExtension {

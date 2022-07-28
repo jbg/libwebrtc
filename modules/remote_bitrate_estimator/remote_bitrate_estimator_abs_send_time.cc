@@ -23,6 +23,7 @@
 #include "api/units/timestamp.h"
 #include "modules/remote_bitrate_estimator/include/bwe_defines.h"
 #include "modules/remote_bitrate_estimator/include/remote_bitrate_estimator.h"
+#include "modules/remote_bitrate_estimator/rtp_packet_for_bwe.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/thread_annotations.h"
@@ -212,26 +213,20 @@ bool RemoteBitrateEstimatorAbsSendTime::IsBitrateImproving(
 }
 
 void RemoteBitrateEstimatorAbsSendTime::IncomingPacket(
-    int64_t arrival_time_ms,
-    size_t payload_size,
-    const RTPHeader& header) {
+    const RtpPacketForBwe& packet) {
   RTC_DCHECK_RUNS_SERIALIZED(&network_race_);
-  if (!header.extension.hasAbsoluteSendTime) {
+  if (!packet.absolute_send_time_24bits.has_value()) {
     RTC_LOG(LS_WARNING)
         << "RemoteBitrateEstimatorAbsSendTimeImpl: Incoming packet "
            "is missing absolute send time extension!";
     return;
   }
-  IncomingPacketInfo(Timestamp::Millis(arrival_time_ms),
-                     header.extension.absoluteSendTime,
-                     DataSize::Bytes(payload_size), header.ssrc);
-}
 
-void RemoteBitrateEstimatorAbsSendTime::IncomingPacketInfo(
-    Timestamp arrival_time,
-    uint32_t send_time_24bits,
-    DataSize payload_size,
-    uint32_t ssrc) {
+  Timestamp arrival_time = packet.arrival_time;
+  uint32_t send_time_24bits = *packet.absolute_send_time_24bits;
+  DataSize payload_size = packet.payload_size;
+  uint32_t ssrc = packet.ssrc;
+
   RTC_CHECK(send_time_24bits < (1ul << 24));
   if (!uma_recorded_) {
     RTC_HISTOGRAM_ENUMERATION(kBweTypeHistogram, BweNames::kReceiverAbsSendTime,

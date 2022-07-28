@@ -24,18 +24,9 @@ using ::testing::ElementsAre;
 using ::testing::MockFunction;
 
 namespace webrtc {
-
 namespace {
 
-// Helper to convert some time format to resolution used in absolute send time
-// header extension, rounded upwards. `t` is the time to convert, in some
-// resolution. `denom` is the value to divide `t` by to get whole seconds,
-// e.g. `denom` = 1000 if `t` is in milliseconds.
-uint32_t AbsSendTime(int64_t t, int64_t denom) {
-  return (((t << 18) + (denom >> 1)) / denom) & 0x00fffffful;
-}
-
-const uint32_t kInitialBitrateBps = 60000;
+constexpr uint32_t kInitialBitrateBps = 60000;
 
 }  // namespace
 
@@ -51,18 +42,19 @@ TEST(ReceiveSideCongestionControllerTest, SendsRembWithAbsSendTime) {
       &clock_, feedback_sender.AsStdFunction(), remb_sender.AsStdFunction(),
       nullptr);
 
+  const uint32_t ssrc = 0x11eb21c;
   size_t payload_size = 1000;
-  RTPHeader header;
-  header.ssrc = 0x11eb21c;
-  header.extension.hasAbsoluteSendTime = true;
 
-  EXPECT_CALL(remb_sender, Call(_, ElementsAre(header.ssrc))).Times(AtLeast(1));
+  EXPECT_CALL(remb_sender, Call(_, ElementsAre(ssrc))).Times(AtLeast(1));
 
   for (int i = 0; i < 10; ++i) {
     clock_.AdvanceTimeMilliseconds((1000 * payload_size) / kInitialBitrateBps);
-    int64_t now_ms = clock_.TimeInMilliseconds();
-    header.extension.absoluteSendTime = AbsSendTime(now_ms, 1000);
-    controller.OnReceivedPacket(now_ms, payload_size, header);
+    Timestamp now = clock_.CurrentTime();
+    controller.OnReceivedPacket(
+        {.arrival_time = clock_.CurrentTime(),
+         .payload_size = DataSize::Bytes(payload_size),
+         .ssrc = ssrc,
+         .absolute_send_time_24bits = AbsoluteSendTime::To24Bits(now)});
   }
 }
 

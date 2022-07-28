@@ -21,6 +21,7 @@
 #include "modules/congestion_controller/remb_throttler.h"
 #include "modules/pacing/packet_router.h"
 #include "modules/remote_bitrate_estimator/remote_estimator_proxy.h"
+#include "modules/remote_bitrate_estimator/rtp_packet_for_bwe.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/thread_annotations.h"
 
@@ -42,9 +43,13 @@ class ReceiveSideCongestionController : public CallStatsObserver {
 
   ~ReceiveSideCongestionController() override {}
 
-  virtual void OnReceivedPacket(int64_t arrival_time_ms,
-                                size_t payload_size,
-                                const RTPHeader& header);
+  void OnReceivedPacket(const RtpPacketForBwe& packet);
+  [[deprecated]] void OnReceivedPacket(int64_t arrival_time_ms,
+                                       size_t payload_size,
+                                       const RTPHeader& header) {
+    OnReceivedPacket(
+        RtpPacketForBwe::Create(arrival_time_ms, payload_size, header));
+  }
 
   void SetSendPeriodicFeedback(bool send_periodic_feedback);
 
@@ -73,9 +78,8 @@ class ReceiveSideCongestionController : public CallStatsObserver {
   TimeDelta MaybeProcess();
 
  private:
-  void PickEstimatorFromHeader(const RTPHeader& header)
+  void PickEstimator(bool has_absolute_send_time)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
-  void PickEstimator() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
 
   Clock& clock_;
   const FieldTrialBasedConfig field_trial_config_;

@@ -13,6 +13,8 @@
 #include <algorithm>
 #include <utility>
 
+#include "system_wrappers/include/clock.h"
+
 namespace webrtc {
 
 namespace {
