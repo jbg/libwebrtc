@@ -56,6 +56,30 @@
       },
       "revId": "5a4e039b51c761c3ac40d687dbd15963eda2fe1a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f874975_ac11f853",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2323,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-07-28T12:12:44Z",
+      "side": 1,
+      "message": "Since audio does not support simulcast we would expect there to only be one encoding (or possibly empty if things are not configured properly?). If there were multiple encodings here something would probably be wrong.",
+      "parentUuid": "c0f0e42b_b03ffc01",
+      "range": {
+        "startLine": 2323,
+        "startChar": 21,
+        "endLine": 2323,
+        "endChar": 40
+      },
+      "revId": "5a4e039b51c761c3ac40d687dbd15963eda2fe1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
