@@ -5571,7 +5571,7 @@ TEST_F(WebRtcVideoChannelTest, GetAggregatedStatsReportWithoutSubStreams) {
 
   EXPECT_EQ(sender.framerate_input, stats.input_frame_rate);
   EXPECT_EQ(sender.framerate_sent, stats.encode_frame_rate);
-  EXPECT_EQ(sender.nominal_bitrate, stats.media_bitrate_bps);
+  EXPECT_EQ(sender.target_bitrate, static_cast<float>(stats.media_bitrate_bps));
   EXPECT_NE(sender.adapt_reason & WebRtcVideoChannel::ADAPTREASON_CPU, 0);
   EXPECT_NE(sender.adapt_reason & WebRtcVideoChannel::ADAPTREASON_BANDWIDTH, 0);
   EXPECT_EQ(sender.adapt_changes, stats.number_of_cpu_adapt_changes);
@@ -5696,7 +5696,7 @@ TEST_F(WebRtcVideoChannelTest, GetAggregatedStatsReportForSubStreams) {
 
   EXPECT_EQ(sender.framerate_input, stats.input_frame_rate);
   EXPECT_EQ(sender.framerate_sent, stats.encode_frame_rate);
-  EXPECT_EQ(sender.nominal_bitrate, stats.media_bitrate_bps);
+  EXPECT_EQ(sender.target_bitrate, static_cast<float>(stats.media_bitrate_bps));
   EXPECT_NE(sender.adapt_reason & WebRtcVideoChannel::ADAPTREASON_CPU, 0);
   EXPECT_NE(sender.adapt_reason & WebRtcVideoChannel::ADAPTREASON_BANDWIDTH, 0);
   EXPECT_EQ(sender.adapt_changes, stats.number_of_cpu_adapt_changes);
@@ -5815,7 +5815,6 @@ TEST_F(WebRtcVideoChannelTest, GetPerLayerStatsReportForSubStreams) {
 
   EXPECT_EQ(sender.framerate_input, stats.input_frame_rate);
   EXPECT_EQ(sender.framerate_sent, substream.encode_frame_rate);
-  EXPECT_EQ(sender.nominal_bitrate, stats.media_bitrate_bps);
   EXPECT_NE(sender.adapt_reason & WebRtcVideoChannel::ADAPTREASON_CPU, 0);
   EXPECT_NE(sender.adapt_reason & WebRtcVideoChannel::ADAPTREASON_BANDWIDTH, 0);
   EXPECT_EQ(sender.adapt_changes, stats.number_of_cpu_adapt_changes);
@@ -5831,6 +5830,7 @@ TEST_F(WebRtcVideoChannelTest, GetPerLayerStatsReportForSubStreams) {
   EXPECT_EQ(sender.key_frames_encoded,
             static_cast<uint32_t>(substream.frame_counts.key_frames));
   EXPECT_EQ(sender.total_encode_time_ms, substream.total_encode_time_ms);
+  EXPECT_EQ(sender.target_bitrate, static_cast<float>(stats.media_bitrate_bps));
   EXPECT_EQ(sender.total_encoded_bytes_target,
             substream.total_encoded_bytes_target);
   EXPECT_EQ(sender.total_packet_send_delay_ms,
@@ -6295,10 +6295,10 @@ TEST_F(WebRtcVideoChannelTest, TranslatesSenderBitrateStatsCorrectly) {
   channel_->FillBitrateInfo(&bwe_info);
   // Assuming stream and stream2 corresponds to senders[0] and [1] respectively
   // is OK as std::maps are sorted and AddSendStream() gives increasing SSRCs.
-  EXPECT_EQ(stats.media_bitrate_bps,
-            info.aggregated_senders[0].nominal_bitrate);
-  EXPECT_EQ(stats2.media_bitrate_bps,
-            info.aggregated_senders[1].nominal_bitrate);
+  EXPECT_EQ(static_cast<float>(stats.media_bitrate_bps),
+            info.aggregated_senders[0].target_bitrate);
+  EXPECT_EQ(static_cast<float>(stats2.media_bitrate_bps),
+            info.aggregated_senders[1].target_bitrate);
   EXPECT_EQ(stats.target_media_bitrate_bps + stats2.target_media_bitrate_bps,
             bwe_info.target_enc_bitrate);
   EXPECT_EQ(stats.media_bitrate_bps + stats2.media_bitrate_bps,

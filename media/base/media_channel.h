@@ -576,7 +576,6 @@ struct VideoSenderInfo : public MediaSenderInfo {
   double framerate_input = 0;
   int framerate_sent = 0;
   int aggregated_framerate_sent = 0;
-  int nominal_bitrate = 0;
   int adapt_reason = 0;
   int adapt_changes = 0;
   // https://w3c.github.io/webrtc-stats/#dom-rtcoutboundrtpstreamstats-qualitylimitationreason
