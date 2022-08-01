@@ -1699,6 +1699,8 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
       pending_frame_.reset();
       accumulated_update_rect_.Union(video_frame.update_rect());
       accumulated_update_rect_is_valid_ &= video_frame.has_update_rect();
+      encoder_stats_observer_->OnFrameDropped(
+          VideoStreamEncoderObserver::DropReason::kEncoderQueue);
     }
     return;
   }
@@ -1718,6 +1720,8 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
       TraceFrameDropStart();
       accumulated_update_rect_.Union(video_frame.update_rect());
       accumulated_update_rect_is_valid_ &= video_frame.has_update_rect();
+      encoder_stats_observer_->OnFrameDropped(
+          VideoStreamEncoderObserver::DropReason::kEncoderQueue);
     }
     return;
   }
@@ -2146,6 +2150,7 @@ void VideoStreamEncoder::OnBitrateUpdated(DataRate target_bitrate,
 
   const bool video_is_suspended = target_bitrate == DataRate::Zero();
   const bool video_suspension_changed = video_is_suspended != EncoderPaused();
+  const bool paused_frame_drop = encoder_paused_and_dropped_frame_;
 
   if (!video_is_suspended && settings_.encoder_switch_request_callback &&
       encoder_selector_) {
@@ -2185,14 +2190,21 @@ void VideoStreamEncoder::OnBitrateUpdated(DataRate target_bitrate,
     RTC_LOG(LS_INFO) << "Video suspend state changed to: "
                      << (video_is_suspended ? "suspended" : "not suspended");
     encoder_stats_observer_->OnSuspendChange(video_is_suspended);
-  }
-  if (video_suspension_changed && !video_is_suspended && pending_frame_ &&
-      !DropDueToSize(pending_frame_->size())) {
-    int64_t pending_time_us =
-        clock_->CurrentTime().us() - pending_frame_post_time_us_;
-    if (pending_time_us < kPendingFrameTimeoutMs * 1000)
-      EncodeVideoFrame(*pending_frame_, pending_frame_post_time_us_);
-    pending_frame_.reset();
+
+    if (!video_is_suspended && pending_frame_ &&
+        !DropDueToSize(pending_frame_->size())) {
+      // A pending stored frame can be processed.
+      int64_t pending_time_us =
+          clock_->CurrentTime().us() - pending_frame_post_time_us_;
+      if (pending_time_us < kPendingFrameTimeoutMs * 1000)
+        EncodeVideoFrame(*pending_frame_, pending_frame_post_time_us_);
+      pending_frame_.reset();
+    } else if (!video_is_suspended && !pending_frame_ && paused_frame_drop) {
+      // A frame was enqueued during pause-state, but since it was a native
+      // frame we could not store it in `pending_frame_` so request a
+      // refresh-frame instead.
+      RequestRefreshFrame();
+    }
   }
 }
 
