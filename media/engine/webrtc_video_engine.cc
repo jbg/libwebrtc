@@ -2639,7 +2639,6 @@ WebRtcVideoChannel::WebRtcVideoSendStream::GetPerLayerVideoSenderInfos(
     common_info.framerate_input = stats.input_frame_rate;
     common_info.avg_encode_ms = stats.avg_encode_time_ms;
     common_info.encode_usage_percent = stats.encode_usage_percent;
-    common_info.nominal_bitrate = stats.media_bitrate_bps;
     common_info.content_type = stats.content_type;
     common_info.aggregated_framerate_sent = stats.encode_frame_rate;
     common_info.aggregated_huge_frames_sent = stats.huge_frames_sent;
@@ -2654,6 +2653,8 @@ WebRtcVideoChannel::WebRtcVideoSendStream::GetPerLayerVideoSenderInfos(
       common_info.frames_encoded = stats.frames_encoded;
       common_info.total_encode_time_ms = stats.total_encode_time_ms;
       common_info.total_encoded_bytes_target = stats.total_encoded_bytes_target;
+      common_info.target_bitrate =
+          static_cast<float>(stats.target_media_bitrate_bps);
       common_info.frames_sent = stats.frames_encoded;
       common_info.huge_frames_sent = stats.huge_frames_sent;
       infos.push_back(common_info);
@@ -2709,6 +2710,7 @@ WebRtcVideoChannel::WebRtcVideoSendStream::GetPerLayerVideoSenderInfos(
     info.qp_sum = stream_stats.qp_sum;
     info.total_encode_time_ms = stream_stats.total_encode_time_ms;
     info.total_encoded_bytes_target = stream_stats.total_encoded_bytes_target;
+    info.target_bitrate = static_cast<float>(stream_stats.total_bitrate_bps);
     info.huge_frames_sent = stream_stats.huge_frames_sent;
     infos.push_back(info);
   }

@@ -670,6 +670,7 @@ void SetOutboundRTPStreamStatsFromVideoSenderInfo(
       rtc::kNumMillisecsPerSec;
   outbound_video->total_encoded_bytes_target =
       video_sender_info.total_encoded_bytes_target;
+  outbound_video->target_bitrate = video_sender_info.target_bitrate;
   if (video_sender_info.send_frame_width > 0) {
     outbound_video->frame_width =
         static_cast<uint32_t>(video_sender_info.send_frame_width);
