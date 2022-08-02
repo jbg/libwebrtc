@@ -413,6 +413,7 @@ void RTPSenderVideo::AddRtpHeaderExtensions(const RTPVideoHeader& video_header,
       extension_is_set = packet->SetExtension<RtpDependencyDescriptorExtension>(
           *video_structure_,
           active_decode_targets_tracker_.ActiveChainsBitmask(), descriptor);
+      RTC_CHECK(extension_is_set);
 
       // Remove the temporary shared ownership.
       descriptor.attached_structure.release();
@@ -445,8 +446,10 @@ void RTPSenderVideo::AddRtpHeaderExtensions(const RTPVideoHeader& video_header,
         }
       }
 
-      packet->SetExtension<RtpGenericFrameDescriptorExtension00>(
-          generic_descriptor);
+      extension_is_set =
+          packet->SetExtension<RtpGenericFrameDescriptorExtension00>(
+              generic_descriptor);
+      RTC_CHECK(extension_is_set);
     }
   }
 

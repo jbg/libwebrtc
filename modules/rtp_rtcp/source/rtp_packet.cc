@@ -603,6 +603,9 @@ rtc::ArrayView<uint8_t> RtpPacket::AllocateExtension(ExtensionType type,
   if (length == 0 || length > RtpExtension::kMaxValueSize ||
       (!extensions_.ExtmapAllowMixed() &&
        length > RtpExtension::kOneByteHeaderExtensionMaxValueSize)) {
+    RTC_LOG(LS_INFO) << "Can't Allocate Extension. ExtmapAllowMixed: "
+                     << extensions_.ExtmapAllowMixed()
+                     << ", length: " << length;
     return nullptr;
   }
 
