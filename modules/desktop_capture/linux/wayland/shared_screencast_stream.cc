@@ -10,6 +10,7 @@
 
 #include "modules/desktop_capture/linux/wayland/shared_screencast_stream.h"
 
+#include <fcntl.h>
 #include <libdrm/drm_fourcc.h>
 #include <pipewire/pipewire.h>
 #include <spa/param/video/format-utils.h>
@@ -445,7 +446,8 @@ bool SharedScreenCastStreamPrivate::StartScreenCastStream(
     if (!pw_fd_) {
       pw_core_ = pw_context_connect(pw_context_, nullptr, 0);
     } else {
-      pw_core_ = pw_context_connect_fd(pw_context_, pw_fd_, nullptr, 0);
+      pw_core_ = pw_context_connect_fd(
+          pw_context_, fcntl(pw_fd_, F_DUPFD_CLOEXEC), nullptr, 0);
     }
 
     if (!pw_core_) {
