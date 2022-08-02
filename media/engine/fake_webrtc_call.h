@@ -293,6 +293,10 @@ class FakeVideoReceiveStream final
     config_.rtp.lntf.enabled = enabled;
   }
 
+  void SetNackHistory(int history_ms) override {
+    config_.rtp.nack.rtp_history_ms = history_ms;
+  }
+
   void Start() override;
   void Stop() override;
 
