@@ -106,6 +106,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da2a63bc_c636e03e",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T14:01:13Z",
+      "side": 1,
+      "message": "Nit: \"Kill switches\" here and below",
+      "range": {
+        "startLine": 47,
+        "startChar": 3,
+        "endLine": 47,
+        "endChar": 15
+      },
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a3a7e46_50ebef7d",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T14:01:13Z",
+      "side": 1,
+      "message": "Nit: binary release",
+      "range": {
+        "startLine": 51,
+        "startChar": 27,
+        "endLine": 51,
+        "endChar": 34
+      },
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe245367_6073ddae",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T14:01:13Z",
+      "side": 1,
+      "message": "```\n[`IsDisabled`](https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/field_trials_view.h?q\u003dfunc:IsDisabled)\n```",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 163
+      },
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e6b4735_ae81887a",
         "filename": "g3doc/field-trials.md",
         "patchSetId": 2
@@ -117,6 +186,29 @@
       "writtenOn": "2022-08-02T12:59:32Z",
       "side": 1,
       "message": "We don\u0027t want to use field trials to configure test-only behavior going forward. We still allow existing test-only trials but strongly discourage new ones. I\u0027m worried people might get the wrong idea if we document test-only trials as a valid use case.",
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0643d3a_2f7f21db",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T14:01:13Z",
+      "side": 1,
+      "message": "Test-only\n\nAnd maybe add this as a subsection to Policy (since it\u0027s about and exemption to the policy)?",
+      "range": {
+        "startLine": 57,
+        "startChar": 3,
+        "endLine": 57,
+        "endChar": 11
+      },
       "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -235,6 +327,71 @@
         "endLine": 60,
         "endChar": 46
       },
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbbe4bd7_bce73a0f",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T14:01:13Z",
+      "side": 1,
+      "message": "In that case we should change this section to something like this:\n\n```\n### Test-only field trials\n\nSome field trials are exempt from the policy to be used to guard test-only features. It is strongly discouraged to add new test-only field trials. If you are looking to add new test-only functionality to Chromium, consider if it can be done as a [feature](https://chromium.googlesource.com/chromium/src.git/+/HEAD/docs/configuration.md#features).\n\nThe following test-only field trials are exempt from the policy:\n\n-   WebRTC-Debugging-RtpDump\n-   WebRTC-FakeNetworkReceiveConfig\n-   WebRTC-FakeNetworkSendConfig\n```",
+      "parentUuid": "e4a66918_d04537e8",
+      "range": {
+        "startLine": 60,
+        "startChar": 22,
+        "endLine": 60,
+        "endChar": 46
+      },
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "421dc978_4aae0cb2",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T14:01:13Z",
+      "side": 1,
+      "message": "\u003e If not, we should consider either creating one or allowing new standing field trials until we have one.\n\nYes, we will still allow (but discourage) new test-only trials until we have a clear migration path.\n\n\u003e the beauty of field trials is that they integrate without any extra effort and go *deep* into libwebrtc (aka: they allow cutting corners)\n\nSure, but that also adds a hidden maintenance cost. If one wants to try out some new tool it can be added as a field trial a first. But test-only tools that we find useful we should integrate properly.\n\nWe can hopefully make the integration more seamless as well...\n\n\u003e For blink features that affect libwebrtc I think these typically go via RTCConfiguration. I don\u0027t think there is any example of a blink::Feature going into libwebrtc (and then we don\u0027t want that namespace inside libwebrtc?)\n\nHere are some more examples for audio processor: https://source.chromium.org/chromium/chromium/src/+/main:media/webrtc/webrtc_features.h",
+      "parentUuid": "a29bb3ff_06ac84de",
+      "range": {
+        "startLine": 60,
+        "startChar": 14,
+        "endLine": 60,
+        "endChar": 20
+      },
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a42395e4_324c4331",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T14:01:13Z",
+      "side": 1,
+      "message": "This has since been renamed.",
       "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
