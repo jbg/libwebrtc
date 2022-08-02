@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f8f9015_2a8976d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-08-02T10:51:34Z",
+      "side": 1,
+      "message": "Hello Everyone!\n\nIs there anything I can do to facilitate further review?\n\nThanks a lot in advance,\nYury.",
+      "revId": "f5a0371b0c48d72bf10d7387a55ef63edd5e20b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
