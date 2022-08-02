@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f629a33_a96f87b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-02T11:47:14Z",
+      "side": 1,
+      "message": "LGTM, just some comments.",
+      "revId": "7a0b03e2f49f89b5bb903930e65085e8755c5c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab577df4_7a155d0d",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-02T11:47:14Z",
+      "side": 1,
+      "message": "The output directory where streams will be dumped?",
+      "range": {
+        "startLine": 222,
+        "startChar": 26,
+        "endLine": 223,
+        "endChar": 14
+      },
+      "revId": "7a0b03e2f49f89b5bb903930e65085e8755c5c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be6bee8_151adbeb",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-02T11:47:14Z",
+      "side": 1,
+      "message": "Should we also document this one?",
+      "range": {
+        "startLine": 232,
+        "startChar": 35,
+        "endLine": 232,
+        "endChar": 51
+      },
+      "revId": "7a0b03e2f49f89b5bb903930e65085e8755c5c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4acaaa72_e413b93c",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-02T11:47:14Z",
+      "side": 1,
+      "message": "Will you follow up soonish? If not, let\u0027s add a bug to remove these.",
+      "range": {
+        "startLine": 302,
+        "startChar": 7,
+        "endLine": 302,
+        "endChar": 17
+      },
+      "revId": "7a0b03e2f49f89b5bb903930e65085e8755c5c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17daceac_f15e691b",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-02T11:47:14Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 308,
+        "startChar": 7,
+        "endLine": 308,
+        "endChar": 10
+      },
+      "revId": "7a0b03e2f49f89b5bb903930e65085e8755c5c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "844eaaa0_0062bf92",
+        "filename": "test/pc/e2e/analyzer/video/video_quality_analyzer_injection_helper.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-02T11:47:14Z",
+      "side": 1,
+      "message": "Same here, if we are not removing in the next few days, let\u0027s add a bug.",
+      "range": {
+        "startLine": 137,
+        "startChar": 22,
+        "endLine": 137,
+        "endChar": 36
+      },
+      "revId": "7a0b03e2f49f89b5bb903930e65085e8755c5c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ebf243b_34c4f49a",
+        "filename": "test/pc/e2e/analyzer/video/video_quality_analyzer_injection_helper.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-02T11:47:14Z",
+      "side": 1,
+      "message": "Here as well.",
+      "range": {
+        "startLine": 275,
+        "startChar": 22,
+        "endLine": 275,
+        "endChar": 36
+      },
+      "revId": "7a0b03e2f49f89b5bb903930e65085e8755c5c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c8d327f_e70c3bb8",
+        "filename": "test/pc/e2e/analyzer/video/video_quality_analyzer_injection_helper.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-02T11:47:14Z",
+      "side": 1,
+      "message": "Unrelate from this CL but a potential follow-up, since we have if (output_dump_file_name.has_value()), can we remove the Maybe from MaybeCreateVideoWriter and delegate the caller the decision to call iif there is a file name?\n\nIt is ~ redundant it seems.",
+      "range": {
+        "startLine": 284,
+        "startChar": 13,
+        "endLine": 284,
+        "endChar": 35
+      },
+      "revId": "7a0b03e2f49f89b5bb903930e65085e8755c5c52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
