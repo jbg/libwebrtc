@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "909f5639_69cd0946",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-08-02T08:11:02Z",
+      "side": 1,
+      "message": "lgtm % trivial comments",
+      "revId": "a50b50227062909799fe371313c6592cd09d6b5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa16f6b_680aba6e",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2153,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-08-02T08:11:02Z",
+      "side": 1,
+      "message": "Is it really needed? Naming some logical expressions is one thing, but just renaming bool seems redundant.",
+      "range": {
+        "startLine": 2153,
+        "startChar": 13,
+        "endLine": 2153,
+        "endChar": 67
+      },
+      "revId": "a50b50227062909799fe371313c6592cd09d6b5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4940f3ab_c1d5da26",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2202,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-08-02T08:11:02Z",
+      "side": 1,
+      "message": "nit: This can be moved to the enclosing |if| condition.",
+      "range": {
+        "startLine": 2202,
+        "startChar": 15,
+        "endLine": 2202,
+        "endChar": 34
+      },
+      "revId": "a50b50227062909799fe371313c6592cd09d6b5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
