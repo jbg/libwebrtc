@@ -33,6 +33,24 @@
       "message": "I believe this change has been approved, but it needs to be rebased as there is a merge conflict.",
       "revId": "11620fc5c69d6ede18aa109d57f491eb3988611c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef4caae_be5b8a39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-08-02T14:25:39Z",
+      "side": 1,
+      "message": "Rebased.",
+      "parentUuid": "a04ed2f3_2369e181",
+      "revId": "11620fc5c69d6ede18aa109d57f491eb3988611c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
