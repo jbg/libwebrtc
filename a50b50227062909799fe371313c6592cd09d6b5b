@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "04758131_da0122ae",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2153,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-08-02T09:44:31Z",
+      "side": 1,
+      "message": "I (incorrectly) thought some method called here indirectly cleared that flag. But I think it was just a mistake in my test code. Removed.",
+      "parentUuid": "0fa16f6b_680aba6e",
+      "range": {
+        "startLine": 2153,
+        "startChar": 13,
+        "endLine": 2153,
+        "endChar": 67
+      },
+      "revId": "a50b50227062909799fe371313c6592cd09d6b5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4940f3ab_c1d5da26",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 2
