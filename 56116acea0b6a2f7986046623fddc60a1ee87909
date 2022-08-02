@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9272272e_e101915f",
+        "filename": "media/engine/simulcast.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-02T12:24:25Z",
+      "side": 1,
+      "message": "move these constants into unnamed namespace (preferably), e.g. expand unnamed namespace to include both these constants and function(s) below.\n\nIf that is complicated, add static keyword to indicate internal linkage\nhttps://en.cppreference.com/w/cpp/language/storage_duration",
+      "range": {
+        "startLine": 131,
+        "startChar": 14,
+        "endLine": 131,
+        "endChar": 39
+      },
+      "revId": "56116acea0b6a2f7986046623fddc60a1ee87909",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
