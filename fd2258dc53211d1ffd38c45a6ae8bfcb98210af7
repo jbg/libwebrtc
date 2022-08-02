@@ -33,6 +33,103 @@
       "message": "I added this to Monday\u0027s webrtc-core meeting agenda (I won\u0027t be there, but at least the folks who are present can discuss it)\n",
       "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68765ea9_1e8edc6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T12:59:32Z",
+      "side": 1,
+      "message": "Sorry for the late reply, I just came back from summer vacation.",
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b7618a_9cf00dfa",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T12:59:32Z",
+      "side": 1,
+      "message": "I don\u0027t see any compelling reason to document this use-case explicitly, but I\u0027m not opposed to adding it either.",
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e6b4735_ae81887a",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T12:59:32Z",
+      "side": 1,
+      "message": "We don\u0027t want to use field trials to configure test-only behavior going forward. We still allow existing test-only trials but strongly discourage new ones. I\u0027m worried people might get the wrong idea if we document test-only trials as a valid use case.",
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f351b7_9e6dfdd1",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T12:59:32Z",
+      "side": 1,
+      "message": "Do you think its worth enumerating all test-only field trials that exempt from the policy instead of just having examples here?",
+      "range": {
+        "startLine": 60,
+        "startChar": 22,
+        "endLine": 60,
+        "endChar": 46
+      },
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca8a449_31bdff56",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2022-08-02T12:59:32Z",
+      "side": 1,
+      "message": "For Chrome specifically, if we want new test-only behavior we should probably wire it up as a feature [1] instead.\n\n[1] https://chromium.googlesource.com/chromium/src/+/HEAD/docs/configuration.md#features",
+      "range": {
+        "startLine": 60,
+        "startChar": 14,
+        "endLine": 60,
+        "endChar": 20
+      },
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
