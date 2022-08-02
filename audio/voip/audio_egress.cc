@@ -73,9 +73,9 @@ void AudioEgress::SendAudioData(std::unique_ptr<AudioFrame> audio_frame) {
   RTC_DCHECK_GT(audio_frame->samples_per_channel_, 0);
   RTC_DCHECK_LE(audio_frame->num_channels_, 8);
 
-  encoder_queue_.PostTask(
+  encoder_queue_->PostTask(
       [this, audio_frame = std::move(audio_frame)]() mutable {
-        RTC_DCHECK_RUN_ON(&encoder_queue_);
+        RTC_DCHECK_RUN_ON(encoder_queue_.get());
         if (!rtp_rtcp_->SendingMedia()) {
           return;
         }
@@ -112,7 +112,7 @@ int32_t AudioEgress::SendData(AudioFrameType frame_type,
                               uint32_t timestamp,
                               const uint8_t* payload_data,
                               size_t payload_size) {
-  RTC_DCHECK_RUN_ON(&encoder_queue_);
+  RTC_DCHECK_RUN_ON(encoder_queue_.get());
 
   rtc::ArrayView<const uint8_t> payload(payload_data, payload_size);
 
@@ -173,8 +173,8 @@ bool AudioEgress::SendTelephoneEvent(int dtmf_event, int duration_ms) {
 }
 
 void AudioEgress::SetMute(bool mute) {
-  encoder_queue_.PostTask([this, mute] {
-    RTC_DCHECK_RUN_ON(&encoder_queue_);
+  encoder_queue_->PostTask([this, mute] {
+    RTC_DCHECK_RUN_ON(encoder_queue_.get());
     encoder_context_.mute_ = mute;
   });
 }

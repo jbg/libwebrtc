@@ -22,6 +22,8 @@
 #include "api/crypto/frame_encryptor_interface.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/sequence_checker.h"
+#include "api/task_queue/task_queue_base.h"
+#include "api/task_queue/task_queue_factory.h"
 #include "audio/channel_send_frame_transformer_delegate.h"
 #include "audio/utility/audio_frame_operations.h"
 #include "call/rtp_transport_controller_send_interface.h"
@@ -39,7 +41,6 @@
 #include "rtc_base/race_checker.h"
 #include "rtc_base/rate_limiter.h"
 #include "rtc_base/synchronization/mutex.h"
-#include "rtc_base/task_queue.h"
 #include "rtc_base/time_utils.h"
 #include "system_wrappers/include/clock.h"
 #include "system_wrappers/include/metrics.h"
@@ -241,7 +242,7 @@ class ChannelSend : public ChannelSendInterface,
 
   // Defined last to ensure that there are no running tasks when the other
   // members are destroyed.
-  rtc::TaskQueue encoder_queue_;
+  std::unique_ptr<TaskQueueBase, TaskQueueDeleter> encoder_queue_;
 };
 
 const int kTelephoneEventAttenuationdB = 10;
@@ -348,7 +349,7 @@ int32_t ChannelSend::SendData(AudioFrameType frameType,
                               const uint8_t* payloadData,
                               size_t payloadSize,
                               int64_t absolute_capture_timestamp_ms) {
-  RTC_DCHECK_RUN_ON(&encoder_queue_);
+  RTC_DCHECK_RUN_ON(encoder_queue_.get());
   rtc::ArrayView<const uint8_t> payload(payloadData, payloadSize);
   if (frame_transformer_delegate_) {
     // Asynchronously transform the payload before sending it. After the payload
@@ -535,8 +536,8 @@ void ChannelSend::StartSend() {
   RTC_DCHECK_EQ(0, ret);
 
   // It is now OK to start processing on the encoder task queue.
-  encoder_queue_.PostTask([this] {
-    RTC_DCHECK_RUN_ON(&encoder_queue_);
+  encoder_queue_->PostTask([this] {
+    RTC_DCHECK_RUN_ON(encoder_queue_.get());
     encoder_queue_is_active_ = true;
   });
 }
@@ -549,8 +550,8 @@ void ChannelSend::StopSend() {
   sending_ = false;
 
   rtc::Event flush;
-  encoder_queue_.PostTask([this, &flush]() {
-    RTC_DCHECK_RUN_ON(&encoder_queue_);
+  encoder_queue_->PostTask([this, &flush]() {
+    RTC_DCHECK_RUN_ON(encoder_queue_.get());
     encoder_queue_is_active_ = false;
     flush.Set();
   });
@@ -809,9 +810,9 @@ void ChannelSend::ProcessAndEncodeAudio(
   // Profile time between when the audio frame is added to the task queue and
   // when the task is actually executed.
   audio_frame->UpdateProfileTimeStamp();
-  encoder_queue_.PostTask(
+  encoder_queue_->PostTask(
       [this, audio_frame = std::move(audio_frame)]() mutable {
-        RTC_DCHECK_RUN_ON(&encoder_queue_);
+        RTC_DCHECK_RUN_ON(encoder_queue_.get());
         if (!encoder_queue_is_active_) {
           if (fixing_timestamp_stall_) {
             _timeStamp +=
@@ -883,8 +884,8 @@ int64_t ChannelSend::GetRTT() const {
 void ChannelSend::SetFrameEncryptor(
     rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor) {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  encoder_queue_.PostTask([this, frame_encryptor]() mutable {
-    RTC_DCHECK_RUN_ON(&encoder_queue_);
+  encoder_queue_->PostTask([this, frame_encryptor]() mutable {
+    RTC_DCHECK_RUN_ON(encoder_queue_.get());
     frame_encryptor_ = std::move(frame_encryptor);
   });
 }
@@ -895,9 +896,9 @@ void ChannelSend::SetEncoderToPacketizerFrameTransformer(
   if (!frame_transformer)
     return;
 
-  encoder_queue_.PostTask(
+  encoder_queue_->PostTask(
       [this, frame_transformer = std::move(frame_transformer)]() mutable {
-        RTC_DCHECK_RUN_ON(&encoder_queue_);
+        RTC_DCHECK_RUN_ON(encoder_queue_.get());
         InitFrameTransformerDelegate(std::move(frame_transformer));
       });
 }
@@ -910,7 +911,7 @@ void ChannelSend::OnReceivedRtt(int64_t rtt_ms) {
 
 void ChannelSend::InitFrameTransformerDelegate(
     rtc::scoped_refptr<webrtc::FrameTransformerInterface> frame_transformer) {
-  RTC_DCHECK_RUN_ON(&encoder_queue_);
+  RTC_DCHECK_RUN_ON(encoder_queue_.get());
   RTC_DCHECK(frame_transformer);
   RTC_DCHECK(!frame_transformer_delegate_);
 
@@ -920,14 +921,14 @@ void ChannelSend::InitFrameTransformerDelegate(
       [this](AudioFrameType frameType, uint8_t payloadType,
              uint32_t rtp_timestamp, rtc::ArrayView<const uint8_t> payload,
              int64_t absolute_capture_timestamp_ms) {
-        RTC_DCHECK_RUN_ON(&encoder_queue_);
+        RTC_DCHECK_RUN_ON(encoder_queue_.get());
         return SendRtpAudio(frameType, payloadType, rtp_timestamp, payload,
                             absolute_capture_timestamp_ms);
       };
   frame_transformer_delegate_ =
       rtc::make_ref_counted<ChannelSendFrameTransformerDelegate>(
           std::move(send_audio_callback), std::move(frame_transformer),
-          &encoder_queue_);
+          encoder_queue_.get());
   frame_transformer_delegate_->Init();
 }
 

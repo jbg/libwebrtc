@@ -16,6 +16,7 @@
 
 #include "api/audio_codecs/audio_format.h"
 #include "api/sequence_checker.h"
+#include "api/task_queue/task_queue_base.h"
 #include "api/task_queue/task_queue_factory.h"
 #include "audio/audio_level.h"
 #include "audio/utility/audio_frame_operations.h"
@@ -25,7 +26,6 @@
 #include "modules/rtp_rtcp/source/rtp_rtcp_interface.h"
 #include "modules/rtp_rtcp/source/rtp_sender_audio.h"
 #include "rtc_base/synchronization/mutex.h"
-#include "rtc_base/task_queue.h"
 #include "rtc_base/time_utils.h"
 
 namespace webrtc {
@@ -150,7 +150,7 @@ class AudioEgress : public AudioSender, public AudioPacketizationCallback {
 
   // Defined last to ensure that there are no running tasks when the other
   // members are destroyed.
-  rtc::TaskQueue encoder_queue_;
+  std::unique_ptr<TaskQueueBase, TaskQueueDeleter> encoder_queue_;
 };
 
 }  // namespace webrtc

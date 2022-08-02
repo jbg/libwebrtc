@@ -22,6 +22,7 @@
 #include "api/crypto/frame_encryptor_interface.h"
 #include "api/function_view.h"
 #include "api/rtc_event_log/rtc_event_log.h"
+#include "api/task_queue/task_queue_factory.h"
 #include "audio/audio_state.h"
 #include "audio/channel_send.h"
 #include "audio/conversion.h"
@@ -38,7 +39,6 @@
 #include "rtc_base/event.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/strings/audio_format_to_string.h"
-#include "rtc_base/task_queue.h"
 
 namespace webrtc {
 namespace {
@@ -145,7 +145,7 @@ AudioSendStream::AudioSendStream(
     const FieldTrialsView& field_trials)
     : clock_(clock),
       field_trials_(field_trials),
-      rtp_transport_queue_(rtp_transport->GetWorkerQueue()),
+      rtp_transport_queue_(rtp_transport->GetWorkerQueue()->Get()),
       allocate_audio_without_feedback_(
           field_trials_.IsEnabled("WebRTC-Audio-ABWENoTWCC")),
       enable_audio_alr_probing_(

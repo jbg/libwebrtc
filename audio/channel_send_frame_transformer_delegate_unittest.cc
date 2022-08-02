@@ -85,7 +85,7 @@ TEST(ChannelSendFrameTransformerDelegateTest,
   MockChannelSend mock_channel;
   rtc::scoped_refptr<ChannelSendFrameTransformerDelegate> delegate =
       rtc::make_ref_counted<ChannelSendFrameTransformerDelegate>(
-          mock_channel.callback(), mock_frame_transformer, &channel_queue);
+          mock_channel.callback(), mock_frame_transformer, channel_queue.Get());
   rtc::scoped_refptr<TransformedFrameCallback> callback;
   EXPECT_CALL(*mock_frame_transformer, RegisterTransformedFrameCallback)
       .WillOnce(SaveArg<0>(&callback));
@@ -115,7 +115,7 @@ TEST(ChannelSendFrameTransformerDelegateTest,
   MockChannelSend mock_channel;
   rtc::scoped_refptr<ChannelSendFrameTransformerDelegate> delegate =
       rtc::make_ref_counted<ChannelSendFrameTransformerDelegate>(
-          mock_channel.callback(), mock_frame_transformer, &channel_queue);
+          mock_channel.callback(), mock_frame_transformer, channel_queue.Get());
 
   delegate->Reset();
   EXPECT_CALL(mock_channel, SendFrame).Times(0);

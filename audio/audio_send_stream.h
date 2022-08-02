@@ -17,6 +17,8 @@
 
 #include "api/field_trials_view.h"
 #include "api/sequence_checker.h"
+#include "api/task_queue/task_queue_base.h"
+#include "api/task_queue/task_queue_factory.h"
 #include "audio/audio_level.h"
 #include "audio/channel_send.h"
 #include "call/audio_send_stream.h"
@@ -26,7 +28,6 @@
 #include "rtc_base/experiments/struct_parameters_parser.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/synchronization/mutex.h"
-#include "rtc_base/task_queue.h"
 
 namespace webrtc {
 class RtcEventLog;
@@ -168,7 +169,7 @@ class AudioSendStream final : public webrtc::AudioSendStream,
   SequenceChecker worker_thread_checker_;
   SequenceChecker pacer_thread_checker_;
   rtc::RaceChecker audio_capture_race_checker_;
-  rtc::TaskQueue* rtp_transport_queue_;
+  TaskQueueBase* rtp_transport_queue_;
 
   const bool allocate_audio_without_feedback_;
   const bool force_no_audio_feedback_ = allocate_audio_without_feedback_;
