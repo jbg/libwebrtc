@@ -73,6 +73,23 @@
       },
       "revId": "249e402ddc6bef08db0604db1e7a5506c64db615",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead2533c_30cca59a",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-03T21:46:35Z",
+      "side": 1,
+      "message": "Do you need to assign pw_fd_ to the return value of fcntl?",
+      "revId": "249e402ddc6bef08db0604db1e7a5506c64db615",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
