@@ -16,6 +16,23 @@
       "message": "Keeping this as WIP as I would like to have more confirmations it fixes the issue. I did couple of tries and was not able to reproduce the crash, but I was already having hard times to reproduce it before.",
       "revId": "249e402ddc6bef08db0604db1e7a5506c64db615",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6559eb32_d088e10d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-03T09:33:39Z",
+      "side": 1,
+      "message": "I haven\u0027t been able to reproduce the crash with this fix, but even in case it doesn\u0027t fix the crash it should be correct thing to do.",
+      "revId": "249e402ddc6bef08db0604db1e7a5506c64db615",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
