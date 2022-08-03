@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2798b34_a421f5c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2022-08-03T09:13:51Z",
+      "side": 1,
+      "message": "Considered a WeakPtr but decided to keep the manual signalling to maintain current shutdown order for the AudioRtpSender.",
+      "revId": "9f65086c5dd3c7489b9d5ee2461b7fa3d218ef3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
