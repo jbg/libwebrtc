@@ -90,6 +90,24 @@
       "message": "Do you need to assign pw_fd_ to the return value of fcntl?",
       "revId": "249e402ddc6bef08db0604db1e7a5506c64db615",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b4477b1_c0c4548f",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-03T21:52:04Z",
+      "side": 1,
+      "message": "It\u0027s worth noting that pw_fd_ may not even be needed at all in this class, as it\u0027s entirely assigned and used in this method (with no guards that it equals -1 at the start or anything).\n\nScreencastPortal is what actually maintains the reference to clean it up later:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/linux/wayland/screencast_portal.cc;drc\u003d93f9db7e8a6f442390bb0ed6a2ffc6fa75b2ae5f;l\u003d70\n\nI wonder if it would be better if it was noted up this call stack somewhere that the function is expected to take ownership of this fd and thus the fcntl call should be at the point where screencast_portal passes it out?\n\nThough there may be some bugs with guarantees that the handle gets closed outside of it being handed directly to this connect method, where we know it will be closed. (I\u0027m not sure e.g. what the remote desktop code does if it extends that observer), so in that case perhaps this is fine as is (though potentially worth removing the member).",
+      "parentUuid": "ead2533c_30cca59a",
+      "revId": "249e402ddc6bef08db0604db1e7a5506c64db615",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
