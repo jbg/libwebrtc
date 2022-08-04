@@ -18,6 +18,7 @@
 #include <vector>
 
 #include "absl/memory/memory.h"
+#include "modules/desktop_capture/linux/wayland/dmabuf_desktop_frame.h"
 #include "modules/desktop_capture/linux/wayland/egl_dmabuf.h"
 #include "modules/desktop_capture/linux/wayland/screencast_stream_utils.h"
 #include "modules/desktop_capture/screen_capture_frame_queue.h"
@@ -780,25 +781,32 @@ void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
     }
   }
 
-  if (!queue_.current_frame() ||
-      !queue_.current_frame()->size().equals(frame_size_)) {
-    std::unique_ptr<DesktopFrame> frame(new BasicDesktopFrame(
-        DesktopSize(frame_size_.width(), frame_size_.height())));
+  if (spa_buffer->datas[0].type == SPA_DATA_DmaBuf) {
+    std::unique_ptr<DmaBufDesktopFrame> frame(new DmaBufDesktopFrame(
+        frame_size_, src_stride - (kBytesPerPixel * x_offset),
+        std::move(src_unique_ptr), updated_src));
     queue_.ReplaceCurrentFrame(SharedDesktopFrame::Wrap(std::move(frame)));
-  }
+  } else {
+    if (!queue_.current_frame() ||
+        !queue_.current_frame()->size().equals(frame_size_)) {
+      std::unique_ptr<DesktopFrame> frame(new BasicDesktopFrame(
+          DesktopSize(frame_size_.width(), frame_size_.height())));
+      queue_.ReplaceCurrentFrame(SharedDesktopFrame::Wrap(std::move(frame)));
+    }
 
-  queue_.current_frame()->CopyPixelsFrom(
-      updated_src, (src_stride - (kBytesPerPixel * x_offset)),
-      DesktopRect::MakeWH(frame_size_.width(), frame_size_.height()));
+    queue_.current_frame()->CopyPixelsFrom(
+        updated_src, (src_stride - (kBytesPerPixel * x_offset)),
+        DesktopRect::MakeWH(frame_size_.width(), frame_size_.height()));
 
-  if (spa_video_format_.format == SPA_VIDEO_FORMAT_RGBx ||
-      spa_video_format_.format == SPA_VIDEO_FORMAT_RGBA) {
-    uint8_t* tmp_src = queue_.current_frame()->data();
-    for (int i = 0; i < frame_size_.height(); ++i) {
-      // If both sides decided to go with the RGBx format we need to convert
-      // it to BGRx to match color format expected by WebRTC.
-      ConvertRGBxToBGRx(tmp_src, queue_.current_frame()->stride());
-      tmp_src += queue_.current_frame()->stride();
+    if (spa_video_format_.format == SPA_VIDEO_FORMAT_RGBx ||
+        spa_video_format_.format == SPA_VIDEO_FORMAT_RGBA) {
+      uint8_t* tmp_src = queue_.current_frame()->data();
+      for (int i = 0; i < frame_size_.height(); ++i) {
+        // If both sides decided to go with the RGBx format we need to convert
+        // it to BGRx to match color format expected by WebRTC.
+        ConvertRGBxToBGRx(tmp_src, queue_.current_frame()->stride());
+        tmp_src += queue_.current_frame()->stride();
+      }
     }
   }
 

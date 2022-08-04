@@ -584,6 +584,8 @@ rtc_library("desktop_capture") {
     sources += [
       "linux/wayland/base_capturer_pipewire.cc",
       "linux/wayland/base_capturer_pipewire.h",
+      "linux/wayland/dmabuf_desktop_frame.cc",
+      "linux/wayland/dmabuf_desktop_frame.h",
       "linux/wayland/egl_dmabuf.cc",
       "linux/wayland/egl_dmabuf.h",
       "linux/wayland/mouse_cursor_monitor_pipewire.cc",
