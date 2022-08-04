@@ -50,6 +50,7 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
     private boolean useStereoOutput;
     private AudioAttributes audioAttributes;
     private boolean useLowLatency;
+    private boolean enableVolumeLogger;
 
     private Builder(Context context) {
       this.context = context;
@@ -213,6 +214,12 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
       return this;
     }
 
+    /** Disables the volume logger on the audio output track. */
+    public Builder setEnableVolumeLogger(boolean enableVolumeLogger) {
+      this.enableVolumeLogger = enableVolumeLogger;
+      return this;
+    }
+
     /**
      * Construct an AudioDeviceModule based on the supplied arguments. The caller takes ownership
      * and is responsible for calling release().
@@ -248,8 +255,11 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
       final WebRtcAudioRecord audioInput = new WebRtcAudioRecord(context, executor, audioManager,
           audioSource, audioFormat, audioRecordErrorCallback, audioRecordStateCallback,
           samplesReadyCallback, useHardwareAcousticEchoCanceler, useHardwareNoiseSuppressor);
+
       final WebRtcAudioTrack audioOutput = new WebRtcAudioTrack(context, audioManager,
           audioAttributes, audioTrackErrorCallback, audioTrackStateCallback, useLowLatency);
+      audioOutput.setVolumeLoggerState(enableVolumeLogger);
+
       return new JavaAudioDeviceModule(context, audioManager, audioInput, audioOutput,
           inputSampleRate, outputSampleRate, useStereoInput, useStereoOutput);
     }

@@ -73,6 +73,7 @@ class WebRtcAudioTrack {
   private byte[] emptyBytes;
   private boolean useLowLatency;
   private int initialBufferSizeInFrames;
+  private boolean isVolumeLoggerEnabled = true;
 
   private final @Nullable AudioTrackErrorCallback errorCallback;
   private final @Nullable AudioTrackStateCallback stateCallback;
@@ -176,6 +177,15 @@ class WebRtcAudioTrack {
     this.nativeAudioTrack = nativeAudioTrack;
   }
 
+  public void setVolumeLoggerState(boolean enableVolumeLogger) {
+    if (enableVolumeLogger) {
+      volumeLogger.start();
+    } else {
+      volumeLogger.stop();
+    }
+    isVolumeLoggerEnabled = enableVolumeLogger;
+  }
+
   @CalledByNative
   private int initPlayout(int sampleRate, int channels, double bufferSizeFactor) {
     threadChecker.checkIsOnValidThread();
@@ -266,7 +276,9 @@ class WebRtcAudioTrack {
   @CalledByNative
   private boolean startPlayout() {
     threadChecker.checkIsOnValidThread();
-    volumeLogger.start();
+    if (isVolumeLoggerEnabled) {
+      volumeLogger.start();
+    }
     Logging.d(TAG, "startPlayout");
     assertTrue(audioTrack != null);
     assertTrue(audioThread == null);
