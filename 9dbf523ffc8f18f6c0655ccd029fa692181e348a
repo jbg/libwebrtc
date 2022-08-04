@@ -22,6 +22,30 @@
       },
       "revId": "9dbf523ffc8f18f6c0655ccd029fa692181e348a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60c65fa1_7fd5a12f",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioTrack.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 15039
+      },
+      "writtenOn": "2022-08-04T14:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fe04571_a97fdf3d",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 3
+      },
+      "revId": "9dbf523ffc8f18f6c0655ccd029fa692181e348a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
