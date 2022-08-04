@@ -16,6 +16,23 @@
       "message": "A small one here, just mapping a constant :-)",
       "revId": "54f3ea0aff10ba4e052de19407499ee5a86b735c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "442e403f_908e33b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-08-04T13:47:53Z",
+      "side": 1,
+      "message": "This is likely to break some internal code with checks of exhaustive switches, we need some preemptive action before that can go in. I’ll come back when this is done.",
+      "revId": "54f3ea0aff10ba4e052de19407499ee5a86b735c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
