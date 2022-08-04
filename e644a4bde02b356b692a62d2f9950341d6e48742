@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce06c6f9_4849ad27",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioTrack.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-08-04T15:30:46Z",
+      "side": 0,
+      "message": "You can keep it final by explicitly assigning a null when it’s disabled (with a ternary on the flag, for instance)",
+      "range": {
+        "startLine": 68,
+        "startChar": 10,
+        "endLine": 68,
+        "endChar": 15
+      },
+      "revId": "e644a4bde02b356b692a62d2f9950341d6e48742",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
