@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe04571_a97fdf3d",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioTrack.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-08-04T13:57:58Z",
+      "side": 1,
+      "message": "Could this be passed in the constructor instead, to avoid mutable state? (and possibly even avoid the creation of a VolumeLogger if it’s disabled)\n\nThe constructor is package private, so it should be fine to add arguments to it.",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 3
+      },
+      "revId": "9dbf523ffc8f18f6c0655ccd029fa692181e348a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
