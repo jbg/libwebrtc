@@ -108,6 +108,48 @@
       "parentUuid": "ead2533c_30cca59a",
       "revId": "249e402ddc6bef08db0604db1e7a5506c64db615",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e46a6b3c_14224401",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-04T09:49:23Z",
+      "side": 1,
+      "message": "I\u0027m not sure if it\u0027s necessary. I believe this will rarely fail and if it does, I think PipeWire will just fail to connect. I also don\u0027t see PipeWire doing this check either in their code when duplicating file descriptors.",
+      "parentUuid": "ccc4353d_eb154cc7",
+      "range": {
+        "startLine": 450,
+        "startChar": 23,
+        "endLine": 450,
+        "endChar": 53
+      },
+      "revId": "249e402ddc6bef08db0604db1e7a5506c64db615",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f83af5f_e9ae7a7d",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-04T09:49:23Z",
+      "side": 1,
+      "message": "It is indeed not needed to store the fd as a member variable so I removed it and also fixed the code to consider \"0\" as a valid fd.",
+      "parentUuid": "4b4477b1_c0c4548f",
+      "revId": "249e402ddc6bef08db0604db1e7a5506c64db615",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
