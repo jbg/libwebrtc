@@ -65,7 +65,7 @@ class WebRtcAudioTrack {
   private @Nullable final AudioAttributes audioAttributes;
   private @Nullable AudioTrack audioTrack;
   private @Nullable AudioTrackThread audioThread;
-  private final VolumeLogger volumeLogger;
+  private VolumeLogger volumeLogger;
 
   // Samples to be played are replaced by zeros if `speakerMute` is set to true.
   // Can be used to ensure that the speaker is fully muted.
@@ -154,19 +154,22 @@ class WebRtcAudioTrack {
   @CalledByNative
   WebRtcAudioTrack(Context context, AudioManager audioManager) {
     this(context, audioManager, null /* audioAttributes */, null /* errorCallback */,
-        null /* stateCallback */, false /* useLowLatency */);
+        null /* stateCallback */, false /* useLowLatency */, true /* enableVolumeLogger */);
   }
 
   WebRtcAudioTrack(Context context, AudioManager audioManager,
       @Nullable AudioAttributes audioAttributes, @Nullable AudioTrackErrorCallback errorCallback,
-      @Nullable AudioTrackStateCallback stateCallback, boolean useLowLatency) {
+      @Nullable AudioTrackStateCallback stateCallback, boolean useLowLatency,
+      boolean enableVolumeLogger) {
     threadChecker.detachThread();
     this.context = context;
     this.audioManager = audioManager;
     this.audioAttributes = audioAttributes;
     this.errorCallback = errorCallback;
     this.stateCallback = stateCallback;
-    this.volumeLogger = new VolumeLogger(audioManager);
+    if (enableVolumeLogger) {
+      this.volumeLogger = new VolumeLogger(audioManager);
+    }
     this.useLowLatency = useLowLatency;
     Logging.d(TAG, "ctor" + WebRtcAudioUtils.getThreadInfo());
   }
@@ -266,7 +269,9 @@ class WebRtcAudioTrack {
   @CalledByNative
   private boolean startPlayout() {
     threadChecker.checkIsOnValidThread();
-    volumeLogger.start();
+    if (volumeLogger != null) {
+      volumeLogger.start();
+    }
     Logging.d(TAG, "startPlayout");
     assertTrue(audioTrack != null);
     assertTrue(audioThread == null);
@@ -298,7 +303,9 @@ class WebRtcAudioTrack {
   @CalledByNative
   private boolean stopPlayout() {
     threadChecker.checkIsOnValidThread();
-    volumeLogger.stop();
+    if (volumeLogger != null) {
+      volumeLogger.stop();
+    }
     Logging.d(TAG, "stopPlayout");
     assertTrue(audioThread != null);
     logUnderrunCount();
