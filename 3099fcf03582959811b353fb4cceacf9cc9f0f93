@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45872bbf_7883e7c3",
+        "filename": "call/video_receive_stream.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-05T12:21:19Z",
+      "side": 1,
+      "message": "may be\nTimeDelta history_size\n\n(in spirit of using strict types to represent time)",
+      "range": {
+        "startLine": 304,
+        "startChar": 30,
+        "endLine": 304,
+        "endChar": 44
+      },
+      "revId": "3099fcf03582959811b353fb4cceacf9cc9f0f93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "474a868f_876c8dcb",
+        "filename": "video/frame_buffer_proxy.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-05T12:21:19Z",
+      "side": 1,
+      "message": "SetTimeouts is not overloaded, so you can omit the parameter type:\n\n```\ntimeout_tracker_.SetTimeouts({\n        .max_wait_for_keyframe \u003d max_wait_for_keyframe,\n        .max_wait_for_frame \u003d max_wait_for_frame});\n```",
+      "range": {
+        "startLine": 179,
+        "startChar": 33,
+        "endLine": 179,
+        "endChar": 75
+      },
+      "revId": "3099fcf03582959811b353fb4cceacf9cc9f0f93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d409841_b15bc117",
+        "filename": "video/rtp_video_stream_receiver2.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-05T12:21:19Z",
+      "side": 1,
+      "message": "usually Nack is configured for video streams, \nso absl::optional\u003cNackRequester\u003e might be a better type to store it.\n\nhttps://abseil.io/tips/123",
+      "range": {
+        "startLine": 347,
+        "startChar": 2,
+        "endLine": 347,
+        "endChar": 32
+      },
+      "revId": "3099fcf03582959811b353fb4cceacf9cc9f0f93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "679d4464_03f47bc9",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-05T12:21:19Z",
+      "side": 1,
+      "message": "may be remove this const\n\nhttps://abseil.io/tips/109",
+      "range": {
+        "startLine": 185,
+        "startChar": 35,
+        "endLine": 185,
+        "endChar": 40
+      },
+      "revId": "3099fcf03582959811b353fb4cceacf9cc9f0f93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "231988d5_d6b9fa9f",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-05T12:21:19Z",
+      "side": 1,
+      "message": "split this statement into three:\n\nTimeDelta history \u003d ...;\nTimeDelta max_wait_for_keyframe \u003d ...; \nTimeDelta max_wait_for_frame \u003d ...;",
+      "range": {
+        "startLine": 544,
+        "startChar": 51,
+        "endLine": 544,
+        "endChar": 52
+      },
+      "revId": "3099fcf03582959811b353fb4cceacf9cc9f0f93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0380280_c4b669a8",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-05T12:21:19Z",
+      "side": 1,
+      "message": "would prefer it as\nRTC_DCHECK_RUN_ON(\u0026decode_queue_)\ninsider the function body, to be sure compiler/test verify it, keep it up to date.",
+      "revId": "3099fcf03582959811b353fb4cceacf9cc9f0f93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f31892e7_e18fddd7",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-05T12:21:19Z",
+      "side": 1,
+      "message": "is it needed when `this` is already captured?\nor you insists it should be max wait time when task was posted, not when task was executed.\nIn such case I would like to see a comment explaining why is that.\n\n....\nI think I understood why it need to be passed as capture:\nmax_wait_time_for_key_frame_ is only accessible from decode_queue_, but required on the worker_thread.",
+      "range": {
+        "startLine": 816,
+        "startChar": 29,
+        "endLine": 816,
+        "endChar": 75
+      },
+      "revId": "3099fcf03582959811b353fb4cceacf9cc9f0f93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
