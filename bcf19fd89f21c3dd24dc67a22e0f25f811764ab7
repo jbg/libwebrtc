@@ -33,6 +33,24 @@
       "message": "Can this be merged? I would like to merge it and wait for builds so people who were able to reproduce this more frequently can test it.",
       "revId": "bcf19fd89f21c3dd24dc67a22e0f25f811764ab7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35be69e7_ab7f1651",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-08T16:48:03Z",
+      "side": 1,
+      "message": "Let\u0027s go ahead and merge this. Mark\u0027s been pretty swamped and is about to go on vacation; and I think we essentially addressed his main comment.",
+      "parentUuid": "e6e949eb_06e4d27e",
+      "revId": "bcf19fd89f21c3dd24dc67a22e0f25f811764ab7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
