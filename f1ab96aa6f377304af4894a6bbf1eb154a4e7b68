@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17c99527_8931bd06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-08-08T15:29:36Z",
+      "side": 1,
+      "message": "Hello Xavier!\n\nCould you please review this CL which fixes runtime error when LibaomEncoder creation attempted?\n\nThanks a lot in advance,\nYury.",
+      "revId": "f1ab96aa6f377304af4894a6bbf1eb154a4e7b68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
