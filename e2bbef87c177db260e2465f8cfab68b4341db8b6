@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e64ff024_1c0cbce1",
+        "filename": "sdk/objc/native/src/objc_audio_device_delegate.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2022-08-08T15:10:52Z",
+      "side": 1,
+      "message": "typo: audio_device, here and elsewhere. Or audio_device_module to avoid confusion with audio device.",
+      "range": {
+        "startLine": 127,
+        "startChar": 43,
+        "endLine": 127,
+        "endChar": 55
+      },
+      "revId": "e2bbef87c177db260e2465f8cfab68b4341db8b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
