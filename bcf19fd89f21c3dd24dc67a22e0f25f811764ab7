@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "bcf19fd89f21c3dd24dc67a22e0f25f811764ab7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6e949eb_06e4d27e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-08T09:55:44Z",
+      "side": 1,
+      "message": "Can this be merged? I would like to merge it and wait for builds so people who were able to reproduce this more frequently can test it.",
+      "revId": "bcf19fd89f21c3dd24dc67a22e0f25f811764ab7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
