@@ -116,6 +116,10 @@ TEST(SamplesStatsCounterTest, NumericStabilityForVariance) {
   EXPECT_NEAR(stats.GetVariance(), 1. / 12, 1e-3);
 }
 
+TEST(SamplesStatsCounterTest, AsJson) {
+  EXPECT_TRUE(false) << "TODO(brandtr): Implement";
+}
+
 TEST_P(SamplesStatsCounterTest, AddSamples) {
   int data[SIZE_FOR_MERGE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
   // Split the data in different partitions.

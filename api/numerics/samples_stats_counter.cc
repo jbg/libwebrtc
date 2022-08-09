@@ -12,6 +12,8 @@
 
 #include <algorithm>
 #include <cmath>
+#include <sstream>  // no-presubmit-check TODO(webrtc:8982)
+#include <string>
 
 #include "absl/algorithm/container.h"
 #include "rtc_base/time_utils.h"
@@ -72,6 +74,29 @@ double SamplesStatsCounter::GetPercentile(double percentile) {
   const double low = samples_[rank].value;
   const double high = samples_[std::min(rank + 1, samples_.size() - 1)].value;
   return low + fract_part * (high - low);
+}
+
+std::string SamplesStatsCounter::ToJson(absl::string_view graph_name,
+                                        absl::string_view trace_name,
+                                        absl::string_view units) const {
+  std::ostringstream value_stream;  // no-presubmit-check TODO(webrtc:8982)
+  value_stream.precision(8);
+  value_stream << R"({"graph_name":")" << graph_name << R"(",)";
+  value_stream << R"("trace_name":")" << trace_name << R"(",)";
+  value_stream << R"("units":")" << units << R"(",)";
+  if (!IsEmpty()) {
+    value_stream << R"("mean":)" << GetAverage() << ',';
+    value_stream << R"("std":)" << GetStandardDeviation() << ',';
+  }
+  value_stream << R"("samples":[)";
+  const char* sep = "";
+  for (const auto& sample : GetTimedSamples()) {
+    value_stream << sep << R"({"time":)" << sample.time.us() << ','
+                 << R"("value":)" << sample.value << '}';
+    sep = ",";
+  }
+  value_stream << "]}";
+  return value_stream.str();
 }
 
 SamplesStatsCounter operator*(const SamplesStatsCounter& counter,

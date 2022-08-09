@@ -104,26 +104,10 @@ class PlottableCounterPrinter {
         }
       }
 
-      std::ostringstream value_stream;
-      value_stream.precision(8);
-      value_stream << R"({"graph_name":")" << counter.graph_name << R"(",)";
-      value_stream << R"("trace_name":")" << counter.trace_name << R"(",)";
-      value_stream << R"("units":")" << counter.units << R"(",)";
-      if (!counter.counter.IsEmpty()) {
-        value_stream << R"("mean":)" << counter.counter.GetAverage() << ',';
-        value_stream << R"("std":)" << counter.counter.GetStandardDeviation()
-                     << ',';
-      }
-      value_stream << R"("samples":[)";
-      const char* sep = "";
-      for (const auto& sample : counter.counter.GetTimedSamples()) {
-        value_stream << sep << R"({"time":)" << sample.time.us() << ','
-                     << R"("value":)" << sample.value << '}';
-        sep = ",";
-      }
-      value_stream << "]}";
+      std::string json = counter.counter.ToJson(
+          counter.graph_name, counter.trace_name, counter.units);
 
-      fprintf(output_, "PLOTTABLE_DATA: %s\n", value_stream.str().c_str());
+      fprintf(output_, "PLOTTABLE_DATA: %s\n", json.c_str());
     }
   }
 

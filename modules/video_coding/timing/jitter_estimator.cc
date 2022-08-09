@@ -11,10 +11,10 @@
 #include "modules/video_coding/timing/jitter_estimator.h"
 
 #include <math.h>
-#include <string.h>
 
 #include <algorithm>
 #include <cstdint>
+#include <string>
 
 #include "absl/types/optional.h"
 #include "api/field_trials_view.h"
@@ -53,10 +53,83 @@ JitterEstimator::JitterEstimator(Clock* clock,
     : fps_counter_(30),  // TODO(sprang): Use an estimator with limit based on
                          // time, rather than number of samples.
       clock_(clock) {
+  if (field_trials.IsEnabled("WebRTC-JitterEstimator-StateTracking")) {
+    state_tracking_ = std::make_unique<StateTrackingForDevelopment>();
+  }
   Reset();
 }
 
-JitterEstimator::~JitterEstimator() = default;
+JitterEstimator::~JitterEstimator() {
+  if (state_tracking_) {
+    // Inputs.
+    if (!state_tracking_->frame_delays_ms.IsEmpty()) {
+      // TODO(brandtr): Break out boilerplate into helper.
+      std::string frame_delays_ms_json =
+          state_tracking_->frame_delays_ms.ToJson("frame_delays_ms", "unknown",
+                                                  "ms");
+      printf("PLOTTABLE_DATA: %s\n", frame_delays_ms_json.c_str());
+    }
+    if (!state_tracking_->frame_sizes_bytes.IsEmpty()) {
+      std::string frame_sizes_bytes_json =
+          state_tracking_->frame_sizes_bytes.ToJson("frame_sizes_bytes",
+                                                    "unknown", "bytes");
+      printf("PLOTTABLE_DATA: %s\n", frame_sizes_bytes_json.c_str());
+    }
+    if (!state_tracking_->frame_nacked_bool.IsEmpty()) {
+      std::string frame_nacked_bool_json =
+          state_tracking_->frame_nacked_bool.ToJson("frame_nacked_bool",
+                                                    "unknown", "bytes");
+      printf("PLOTTABLE_DATA: %s\n", frame_nacked_bool_json.c_str());
+    }
+    if (!state_tracking_->rtt_ms.IsEmpty()) {
+      std::string rtt_ms_json =
+          state_tracking_->rtt_ms.ToJson("rtt_ms", "unknown", "bytes");
+      printf("PLOTTABLE_DATA: %s\n", rtt_ms_json.c_str());
+    }
+
+    // States.
+    if (!state_tracking_->avg_frame_size_bytes.IsEmpty()) {
+      std::string avg_frame_size_bytes_json =
+          state_tracking_->avg_frame_size_bytes.ToJson("avg_frame_size_bytes",
+                                                       "unknown", "bytes");
+      printf("PLOTTABLE_DATA: %s\n", avg_frame_size_bytes_json.c_str());
+    }
+    if (!state_tracking_->max_frame_size_bytes.IsEmpty()) {
+      std::string max_frame_size_bytes_json =
+          state_tracking_->max_frame_size_bytes.ToJson("max_frame_size_bytes",
+                                                       "unknown", "bytes");
+      printf("PLOTTABLE_DATA: %s\n", max_frame_size_bytes_json.c_str());
+    }
+    if (!state_tracking_->deviation_from_expected_delay_ms.IsEmpty()) {
+      std::string deviation_from_expected_delay_ms_json =
+          state_tracking_->deviation_from_expected_delay_ms.ToJson(
+              "deviation_from_expected_delay_ms", "unknown", "ms");
+      printf("PLOTTABLE_DATA: %s\n",
+             deviation_from_expected_delay_ms_json.c_str());
+    }
+    if (!state_tracking_->instantaneous_jitter_estimate_ms.IsEmpty()) {
+      std::string instantaneous_jitter_estimate_ms_json =
+          state_tracking_->instantaneous_jitter_estimate_ms.ToJson(
+              "instantaneous_jitter_estimate_ms", "unknown", "ms");
+      printf("PLOTTABLE_DATA: %s\n",
+             instantaneous_jitter_estimate_ms_json.c_str());
+    }
+    if (!state_tracking_->filtered_jitter_estimate_ms.IsEmpty()) {
+      std::string filtered_jitter_estimate_ms_json =
+          state_tracking_->filtered_jitter_estimate_ms.ToJson(
+              "filtered_jitter_estimate_ms", "unknown", "ms");
+      printf("PLOTTABLE_DATA: %s\n", filtered_jitter_estimate_ms_json.c_str());
+    }
+
+    // Outputs.
+    if (!state_tracking_->final_jitter_estimate_ms.IsEmpty()) {
+      std::string final_jitter_estimate_ms_json =
+          state_tracking_->final_jitter_estimate_ms.ToJson(
+              "final_jitter_estimate_ms", "unknown", "bytes");
+      printf("PLOTTABLE_DATA: %s\n", final_jitter_estimate_ms_json.c_str());
+    }
+  }
+}
 
 // Resets the JitterEstimate.
 void JitterEstimator::Reset() {
@@ -94,6 +167,10 @@ void JitterEstimator::UpdateEstimate(TimeDelta frame_delay,
   if (frame_size.IsZero()) {
     return;
   }
+  if (state_tracking_) {
+    state_tracking_->frame_delays_ms.AddSample(frame_delay.ms());
+    state_tracking_->frame_sizes_bytes.AddSample(frame_size.bytes());
+  }
   // Can't use DataSize since this can be negative.
   double delta_frame_bytes =
       frame_size.bytes() - prev_frame_size_.value_or(DataSize::Zero()).bytes();
@@ -120,6 +197,11 @@ void JitterEstimator::UpdateEstimate(TimeDelta frame_delay,
   // Update max_frame_size_ estimate.
   max_frame_size_ = std::max(kPsi * max_frame_size_, frame_size);
 
+  if (state_tracking_) {
+    state_tracking_->avg_frame_size_bytes.AddSample(avg_frame_size_.bytes());
+    state_tracking_->max_frame_size_bytes.AddSample(max_frame_size_.bytes());
+  }
+
   if (!prev_frame_size_) {
     prev_frame_size_ = frame_size;
     return;
@@ -136,6 +218,10 @@ void JitterEstimator::UpdateEstimate(TimeDelta frame_delay,
   // the frame size also is large the deviation is probably due to an incorrect
   // line slope.
   double deviation = DeviationFromExpectedDelay(frame_delay, delta_frame_bytes);
+
+  if (state_tracking_) {
+    state_tracking_->deviation_from_expected_delay_ms.AddSample(deviation);
+  }
 
   if (fabs(deviation) < kNumStdDevDelayOutlier * sqrt(var_noise_) ||
       frame_size.bytes() >
@@ -169,6 +255,9 @@ void JitterEstimator::UpdateEstimate(TimeDelta frame_delay,
 
 // Updates the nack/packet ratio.
 void JitterEstimator::FrameNacked() {
+  if (state_tracking_) {
+    state_tracking_->frame_nacked_bool.AddSample(1.0);
+  }
   if (nack_count_ < kNackLimit) {
     nack_count_++;
   }
@@ -344,9 +433,16 @@ TimeDelta JitterEstimator::CalculateEstimate() {
 
 void JitterEstimator::PostProcessEstimate() {
   filter_jitter_estimate_ = CalculateEstimate();
+  if (state_tracking_) {
+    state_tracking_->filtered_jitter_estimate_ms.AddSample(
+        filter_jitter_estimate_.ms());
+  }
 }
 
 void JitterEstimator::UpdateRtt(TimeDelta rtt) {
+  if (state_tracking_) {
+    state_tracking_->rtt_ms.AddSample(rtt.ms());
+  }
   rtt_filter_.Update(rtt);
 }
 
@@ -357,6 +453,10 @@ TimeDelta JitterEstimator::GetJitterEstimate(
     absl::optional<TimeDelta> rtt_mult_add_cap) {
   TimeDelta jitter = CalculateEstimate() + OPERATING_SYSTEM_JITTER;
   Timestamp now = clock_->CurrentTime();
+
+  if (state_tracking_) {
+    state_tracking_->instantaneous_jitter_estimate_ms.AddSample(jitter.ms());
+  }
 
   if (now - latest_nack_ > kNackCountTimeout)
     nack_count_ = 0;
@@ -390,7 +490,11 @@ TimeDelta JitterEstimator::GetJitterEstimate(
              (fps - kJitterScaleLowThreshold) * jitter;
   }
 
-  return std::max(TimeDelta::Zero(), jitter);
+  TimeDelta ret = std::max(TimeDelta::Zero(), jitter);
+  if (state_tracking_) {
+    state_tracking_->final_jitter_estimate_ms.AddSample(ret.ms());
+  }
+  return ret;
 }
 
 Frequency JitterEstimator::GetFrameRate() const {

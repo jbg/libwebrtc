@@ -11,8 +11,10 @@
 #ifndef API_NUMERICS_SAMPLES_STATS_COUNTER_H_
 #define API_NUMERICS_SAMPLES_STATS_COUNTER_H_
 
+#include <string>
 #include <vector>
 
+#include "absl/strings/string_view.h"
 #include "api/array_view.h"
 #include "api/units/timestamp.h"
 #include "rtc_base/checks.h"
@@ -98,6 +100,11 @@ class SamplesStatsCounter {
     }
     return out;
   }
+
+  // TODO(brandtr): Docs.
+  std::string ToJson(absl::string_view graph_name,
+                     absl::string_view trace_name,
+                     absl::string_view units) const;
 
  private:
   webrtc_impl::RunningStatistics<double> stats_;

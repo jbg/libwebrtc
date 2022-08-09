@@ -38,6 +38,7 @@ rtc_library("jitter_estimator") {
   deps = [
     ":rtt_filter",
     "../../../api:field_trials_view",
+    "../../../api/numerics",
     "../../../api/units:data_size",
     "../../../api/units:frequency",
     "../../../api/units:time_delta",
