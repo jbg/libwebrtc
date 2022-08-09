@@ -71,6 +71,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c543d67c_f422d5ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-09T11:18:48Z",
+      "side": 1,
+      "message": "Trying to keep \"field trials are temporary\", but allowing adding testonly features behind field trials as initial implmeentations....",
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "60b7618a_9cf00dfa",
         "filename": "g3doc/field-trials.md",
         "patchSetId": 2
@@ -369,6 +386,30 @@
       "side": 1,
       "message": "\u003e If not, we should consider either creating one or allowing new standing field trials until we have one.\n\nYes, we will still allow (but discourage) new test-only trials until we have a clear migration path.\n\n\u003e the beauty of field trials is that they integrate without any extra effort and go *deep* into libwebrtc (aka: they allow cutting corners)\n\nSure, but that also adds a hidden maintenance cost. If one wants to try out some new tool it can be added as a field trial a first. But test-only tools that we find useful we should integrate properly.\n\nWe can hopefully make the integration more seamless as well...\n\n\u003e For blink features that affect libwebrtc I think these typically go via RTCConfiguration. I don\u0027t think there is any example of a blink::Feature going into libwebrtc (and then we don\u0027t want that namespace inside libwebrtc?)\n\nHere are some more examples for audio processor: https://source.chromium.org/chromium/chromium/src/+/main:media/webrtc/webrtc_features.h",
       "parentUuid": "a29bb3ff_06ac84de",
+      "range": {
+        "startLine": 60,
+        "startChar": 14,
+        "endLine": 60,
+        "endChar": 20
+      },
+      "revId": "fd2258dc53211d1ffd38c45a6ae8bfcb98210af7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a572979b_84fc5852",
+        "filename": "g3doc/field-trials.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-09T11:18:48Z",
+      "side": 1,
+      "message": "As per discussion on webrtc-core: We feel that adding permanent features to be manipulated via field trials is the wrong API. However, we appreciate the need to be able to quickly use a field trial to see if a test-only feature is worth incorporating. But permanently enabling it should be something for the peerconnection options record, not for a field trial.\n\nThus - when a bug is filed for a new field trial guarding a test-only feature, the bug should include info on what the envisioned permanent mechanism should be, and a timeline about when it will be added. Once the permanent mechanism is in place, the field trial can be removed.",
+      "parentUuid": "421dc978_4aae0cb2",
       "range": {
         "startLine": 60,
         "startChar": 14,
