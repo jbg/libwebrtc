@@ -2976,6 +2976,8 @@ bool WebRtcVideoChannel::WebRtcVideoReceiveStream::ReconfigureCodecs(
 
   const auto& codec = recv_codecs.front();
   if (config_.rtp.ulpfec_payload_type != codec.ulpfec.ulpfec_payload_type) {
+    // RTC_DCHECK_EQ(config_.rtp.ulpfec_payload_type,
+    // codec.ulpfec.ulpfec_payload_type);
     config_.rtp.ulpfec_payload_type = codec.ulpfec.ulpfec_payload_type;
     recreate_needed = true;
   }
