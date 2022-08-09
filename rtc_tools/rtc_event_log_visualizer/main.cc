@@ -373,6 +373,9 @@ int main(int argc, char* argv[]) {
   plots.RegisterPlot("fraction_loss_feedback", [&](Plot* plot) {
     analyzer.CreateFractionLossGraph(plot);
   });
+  plots.RegisterPlot("packet_feedback_loss_rate", [&](Plot* plot) {
+    analyzer.CreatePacketFeedbackLossRate(plot);
+  });
   plots.RegisterPlot("incoming_timestamps", [&](Plot* plot) {
     analyzer.CreateTimestampGraph(webrtc::kIncomingPacket, plot);
   });

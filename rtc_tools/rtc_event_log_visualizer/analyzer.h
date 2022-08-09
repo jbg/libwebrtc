@@ -56,6 +56,8 @@ class EventLogAnalyzer {
 
   void CreateFractionLossGraph(Plot* plot);
 
+  void CreatePacketFeedbackLossRate(Plot* plot);
+
   void CreateTotalIncomingBitrateGraph(Plot* plot);
   void CreateTotalOutgoingBitrateGraph(Plot* plot,
                                        bool show_detector_state = false,
