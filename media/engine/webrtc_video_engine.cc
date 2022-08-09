@@ -2972,17 +2972,10 @@ bool WebRtcVideoChannel::WebRtcVideoReceiveStream::ReconfigureCodecs(
   ExtractCodecInformation(recv_codecs, rtx_associated_payload_types,
                           raw_payload_types, decoders);
 
-  bool recreate_needed = false;
-
   const auto& codec = recv_codecs.front();
   if (config_.rtp.ulpfec_payload_type != codec.ulpfec.ulpfec_payload_type) {
     config_.rtp.ulpfec_payload_type = codec.ulpfec.ulpfec_payload_type;
-    recreate_needed = true;
-  }
-
-  if (config_.rtp.red_payload_type != codec.ulpfec.red_payload_type) {
-    config_.rtp.red_payload_type = codec.ulpfec.red_payload_type;
-    recreate_needed = true;
+    stream_->SetUlpfecPayloadType(config_.rtp.ulpfec_payload_type);
   }
 
   const bool has_lntf = HasLntf(codec.codec);
@@ -3006,6 +2999,13 @@ bool WebRtcVideoChannel::WebRtcVideoReceiveStream::ReconfigureCodecs(
   if (config_.rtp.nack.rtp_history_ms != new_history_ms) {
     config_.rtp.nack.rtp_history_ms = new_history_ms;
     stream_->SetNackHistory(webrtc::TimeDelta::Millis(new_history_ms));
+  }
+
+  bool recreate_needed = false;
+
+  if (config_.rtp.red_payload_type != codec.ulpfec.red_payload_type) {
+    config_.rtp.red_payload_type = codec.ulpfec.red_payload_type;
+    recreate_needed = true;
   }
 
   const bool has_rtr = HasRrtr(codec.codec);
