@@ -55,7 +55,9 @@ struct RtpStreamSender {
 
   RtpStreamSender(RtpStreamSender&&) = default;
   RtpStreamSender& operator=(RtpStreamSender&&) = default;
-
+  // false if the encoder producing frames for this rtp stream
+  // is configured to not send any frames.
+  bool has_enabled_videolayers = true;
   // Note: Needs pointer stability.
   std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp;
   std::unique_ptr<RTPSenderVideo> sender_video;
@@ -185,8 +187,7 @@ class RtpVideoSender : public RtpVideoSenderInterface,
   bool fec_allowed_ RTC_GUARDED_BY(mutex_);
 
   // Rtp modules are assumed to be sorted in simulcast index order.
-  const std::vector<webrtc_internal_rtp_video_sender::RtpStreamSender>
-      rtp_streams_;
+  std::vector<webrtc_internal_rtp_video_sender::RtpStreamSender> rtp_streams_;
   const RtpConfig rtp_config_;
   const absl::optional<VideoCodecType> codec_type_;
   RtpTransportControllerSendInterface* const transport_;

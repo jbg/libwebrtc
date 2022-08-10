@@ -566,6 +566,13 @@ EncodedImageCallback::Result RtpVideoSender::OnEncodedImage(
   }
   RTC_DCHECK_LT(stream_index, rtp_streams_.size());
 
+  if (!rtp_streams_[stream_index].has_enabled_videolayers) {
+    // No frames should be sent on this rtp stream  according to the latest
+    // OnVideoLayersAllocationUpdated update. Sometimes an encoder still produce
+    // an image after it has been reconfigured.
+    return Result(Result::ERROR_SEND_FAILED);
+  }
+
   uint32_t rtp_timestamp =
       encoded_image.Timestamp() +
       rtp_streams_[stream_index].rtp_rtcp->StartTimestamp();
@@ -667,6 +674,11 @@ void RtpVideoSender::OnVideoLayersAllocationUpdated(
     for (size_t i = 0; i < rtp_streams_.size(); ++i) {
       VideoLayersAllocation stream_allocation = allocation;
       stream_allocation.rtp_stream_index = i;
+      rtp_streams_[i].has_enabled_videolayers =
+          absl::c_any_of(allocation.active_spatial_layers,
+                         [&i](const VideoLayersAllocation::SpatialLayer layer) {
+                           return layer.rtp_stream_index == static_cast<int>(i);
+                         });
       rtp_streams_[i].sender_video->SetVideoLayersAllocation(
           std::move(stream_allocation));
     }
