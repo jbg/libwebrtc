@@ -615,9 +615,6 @@ TEST(PCGenericDescriptorTest,
 }
 
 TEST(PCFullStackTest, Pc_Foreman_Cif_Delay_50_0_Plr_5_H264_Sps_Pps_Idr) {
-  test::ScopedFieldTrials override_field_trials(
-      AppendFieldTrials("WebRTC-SpsPpsIdrIsH264Keyframe/Enabled/"));
-
   std::unique_ptr<NetworkEmulationManager> network_emulation_manager =
       CreateNetworkEmulationManager();
   BuiltInNetworkBehaviorConfig config;
@@ -633,10 +630,12 @@ TEST(PCFullStackTest, Pc_Foreman_Cif_Delay_50_0_Plr_5_H264_Sps_Pps_Idr) {
         auto frame_generator = CreateFromYuvFileFrameGenerator(
             video, ClipNameToClipPath("foreman_cif"));
         alice->AddVideoConfig(std::move(video), std::move(frame_generator));
-        alice->SetVideoCodecs({VideoCodecConfig(cricket::kH264CodecName)});
+        alice->SetVideoCodecs({VideoCodecConfig(
+            cricket::kH264CodecName, {{"sps-pps-idr-in-keyframe", ""}})});
       },
       [](PeerConfigurer* bob) {
-        bob->SetVideoCodecs({VideoCodecConfig(cricket::kH264CodecName)});
+        bob->SetVideoCodecs({VideoCodecConfig(
+            cricket::kH264CodecName, {{"sps-pps-idr-in-keyframe", ""}})});
       });
   fixture->Run(RunParams(TimeDelta::Seconds(kTestDurationSec)));
 }
