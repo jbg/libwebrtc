@@ -508,11 +508,7 @@ class RtpVideoStreamReceiver2TestH264
   RtpVideoStreamReceiver2TestH264() : RtpVideoStreamReceiver2Test(GetParam()) {}
 };
 
-INSTANTIATE_TEST_SUITE_P(SpsPpsIdrIsKeyframe,
-                         RtpVideoStreamReceiver2TestH264,
-                         Values("", "WebRTC-SpsPpsIdrIsH264Keyframe/Enabled/"));
-
-TEST_P(RtpVideoStreamReceiver2TestH264, InBandSpsPps) {
+TEST_F(RtpVideoStreamReceiver2TestH264, InBandSpsPps) {
   rtc::CopyOnWriteBuffer sps_data;
   RtpPacketReceived rtp_packet;
   RTPVideoHeader sps_video_header = GetDefaultH264VideoHeader();
@@ -559,7 +555,7 @@ TEST_P(RtpVideoStreamReceiver2TestH264, InBandSpsPps) {
                                                     idr_video_header);
 }
 
-TEST_P(RtpVideoStreamReceiver2TestH264, OutOfBandFmtpSpsPps) {
+TEST_F(RtpVideoStreamReceiver2TestH264, OutOfBandFmtpSpsPps) {
   constexpr int kPayloadType = 99;
   std::map<std::string, std::string> codec_params;
   // Example parameter sets from https://tools.ietf.org/html/rfc3984#section-8.2
@@ -600,13 +596,10 @@ TEST_P(RtpVideoStreamReceiver2TestH264, OutOfBandFmtpSpsPps) {
                                                     video_header);
 }
 
-TEST_P(RtpVideoStreamReceiver2TestH264, ForceSpsPpsIdrIsKeyframe) {
+TEST_F(RtpVideoStreamReceiver2TestH264, ForceSpsPpsIdrIsKeyframe) {
   constexpr int kPayloadType = 99;
   std::map<std::string, std::string> codec_params;
-  if (GetParam() ==
-      "") {  // Forcing can be done either with field trial or codec_params.
-    codec_params.insert({cricket::kH264FmtpSpsPpsIdrInKeyframe, ""});
-  }
+  codec_params.insert({cricket::kH264FmtpSpsPpsIdrInKeyframe, ""});
   rtp_video_stream_receiver_->AddReceiveCodec(kPayloadType, kVideoCodecH264,
                                               codec_params,
                                               /*raw_payload=*/false);

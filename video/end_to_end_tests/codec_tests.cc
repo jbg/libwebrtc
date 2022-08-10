@@ -234,13 +234,7 @@ class EndToEndTestH264 : public test::CallTest,
   test::ScopedFieldTrials field_trial_;
 };
 
-INSTANTIATE_TEST_SUITE_P(
-    SpsPpsIdrIsKeyframe,
-    EndToEndTestH264,
-    ::testing::Values("WebRTC-SpsPpsIdrIsH264Keyframe/Disabled/",
-                      "WebRTC-SpsPpsIdrIsH264Keyframe/Enabled/"));
-
-TEST_P(EndToEndTestH264, SendsAndReceivesH264) {
+TEST_F(EndToEndTestH264, SendsAndReceivesH264) {
   test::FunctionVideoEncoderFactory encoder_factory(
       []() { return H264Encoder::Create(cricket::VideoCodec("H264")); });
   test::FunctionVideoDecoderFactory decoder_factory(
@@ -250,7 +244,7 @@ TEST_P(EndToEndTestH264, SendsAndReceivesH264) {
   RunBaseTest(&test);
 }
 
-TEST_P(EndToEndTestH264, SendsAndReceivesH264VideoRotation90) {
+TEST_F(EndToEndTestH264, SendsAndReceivesH264VideoRotation90) {
   test::FunctionVideoEncoderFactory encoder_factory(
       []() { return H264Encoder::Create(cricket::VideoCodec("H264")); });
   test::FunctionVideoDecoderFactory decoder_factory(
@@ -260,7 +254,7 @@ TEST_P(EndToEndTestH264, SendsAndReceivesH264VideoRotation90) {
   RunBaseTest(&test);
 }
 
-TEST_P(EndToEndTestH264, SendsAndReceivesH264PacketizationMode0) {
+TEST_F(EndToEndTestH264, SendsAndReceivesH264PacketizationMode0) {
   cricket::VideoCodec codec = cricket::VideoCodec("H264");
   codec.SetParam(cricket::kH264FmtpPacketizationMode, "0");
   test::FunctionVideoEncoderFactory encoder_factory(
@@ -272,7 +266,7 @@ TEST_P(EndToEndTestH264, SendsAndReceivesH264PacketizationMode0) {
   RunBaseTest(&test);
 }
 
-TEST_P(EndToEndTestH264, SendsAndReceivesH264PacketizationMode1) {
+TEST_F(EndToEndTestH264, SendsAndReceivesH264PacketizationMode1) {
   cricket::VideoCodec codec = cricket::VideoCodec("H264");
   codec.SetParam(cricket::kH264FmtpPacketizationMode, "1");
   test::FunctionVideoEncoderFactory encoder_factory(
