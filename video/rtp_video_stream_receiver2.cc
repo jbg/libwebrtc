@@ -240,6 +240,7 @@ RtpVideoStreamReceiver2::RtpVideoStreamReceiver2(
                                            this,
                                            config->rtp.extensions,
                                            clock)),
+      ulpfec_payload_type_(config_.rtp.ulpfec_payload_type),
       packet_sink_(config->rtp.packet_sink_),
       receiving_(false),
       last_packet_log_ms_(-1),
@@ -965,6 +966,26 @@ void RtpVideoStreamReceiver2::SetNackHistory(TimeDelta history) {
       history.ms() > 0 ? kMaxPacketAgeToNack : kDefaultMaxReorderingThreshold);
 }
 
+int RtpVideoStreamReceiver2::ulpfec_payload_type() const {
+  RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
+  return ulpfec_payload_type_;
+}
+
+void RtpVideoStreamReceiver2::set_ulpfec_payload_type(int payload_type) {
+  RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
+
+  if (ulpfec_payload_type_ == payload_type)
+    return;
+
+  if (ulpfec_payload_type_ != -1 && payload_type == -1) {
+    // TODO(tommi): Refactor this and `UpdateHistograms()`.
+    // Perhaps move histogram reporting into `ulpfec_receiver_`?
+    UpdateHistograms();
+  }
+
+  ulpfec_payload_type_ = payload_type;
+}
+
 absl::optional<int64_t> RtpVideoStreamReceiver2::LastReceivedPacketMs() const {
   RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
   if (last_received_rtp_system_time_) {
@@ -1024,7 +1045,7 @@ void RtpVideoStreamReceiver2::ParseAndHandleEncapsulatingHeader(
   RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
   if (packet.PayloadType() == config_.rtp.red_payload_type &&
       packet.payload_size() > 0) {
-    if (packet.payload()[0] == config_.rtp.ulpfec_payload_type) {
+    if (packet.payload()[0] == ulpfec_payload_type_) {
       // Notify video_receiver about received FEC packets to avoid NACKing these
       // packets.
       NotifyReceiverOfEmptyPacket(packet.SequenceNumber());
