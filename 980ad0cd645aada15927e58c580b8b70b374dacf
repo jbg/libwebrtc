@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba789297_db764628",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-08-10T09:57:46Z",
+      "side": 0,
+      "message": "not sure this test provides much value anymore, maybe remove?",
+      "revId": "980ad0cd645aada15927e58c580b8b70b374dacf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

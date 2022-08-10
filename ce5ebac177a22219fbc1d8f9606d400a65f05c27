@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86fc8c26_5a642469",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-08-10T09:57:46Z",
+      "side": 1,
+      "message": "at least we can get rid of the field trial.\n\nStill trying to figure out the exact semantics of this so I can add documentation.\nIt is not clear whether you can use it in a declarative way to say \"sps-pps-idr-in-keyframe\" in SRD to express \"I promise I am going to *always* send SPS/PPS as part of a keyframe or whether it needs to be done through munging before SLD (bad)",
+      "revId": "ce5ebac177a22219fbc1d8f9606d400a65f05c27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
