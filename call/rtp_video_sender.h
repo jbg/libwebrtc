@@ -55,7 +55,6 @@ struct RtpStreamSender {
 
   RtpStreamSender(RtpStreamSender&&) = default;
   RtpStreamSender& operator=(RtpStreamSender&&) = default;
-
   // Note: Needs pointer stability.
   std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp;
   std::unique_ptr<RTPSenderVideo> sender_video;
