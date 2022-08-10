@@ -22,6 +22,30 @@
       },
       "revId": "e2bbef87c177db260e2465f8cfab68b4341db8b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf5d9ae1_c0f3055f",
+        "filename": "sdk/objc/native/src/objc_audio_device_delegate.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-08-10T13:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e64ff024_1c0cbce1",
+      "range": {
+        "startLine": 127,
+        "startChar": 43,
+        "endLine": 127,
+        "endChar": 55
+      },
+      "revId": "e2bbef87c177db260e2465f8cfab68b4341db8b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
