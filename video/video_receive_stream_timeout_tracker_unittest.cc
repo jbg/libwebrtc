@@ -47,14 +47,14 @@ class VideoReceiveStreamTimeoutTrackerTest : public ::testing::Test {
 };
 
 TEST_F(VideoReceiveStreamTimeoutTrackerTest, TimeoutAfterInitialPeriod) {
-  timeout_tracker_.Start(true);
+  timeout_tracker_.Start();
   time_controller_.AdvanceTime(kMaxWaitForKeyframe);
   EXPECT_THAT(timeouts_, testing::ElementsAre(kMaxWaitForKeyframe));
   timeout_tracker_.Stop();
 }
 
 TEST_F(VideoReceiveStreamTimeoutTrackerTest, NoTimeoutAfterStop) {
-  timeout_tracker_.Start(true);
+  timeout_tracker_.Start();
   time_controller_.AdvanceTime(kMaxWaitForKeyframe / 2);
   timeout_tracker_.Stop();
   time_controller_.AdvanceTime(kMaxWaitForKeyframe);
@@ -62,7 +62,7 @@ TEST_F(VideoReceiveStreamTimeoutTrackerTest, NoTimeoutAfterStop) {
 }
 
 TEST_F(VideoReceiveStreamTimeoutTrackerTest, TimeoutForDeltaFrame) {
-  timeout_tracker_.Start(true);
+  timeout_tracker_.Start();
   time_controller_.AdvanceTime(TimeDelta::Millis(5));
   timeout_tracker_.OnEncodedFrameReleased();
   time_controller_.AdvanceTime(kMaxWaitForFrame);
@@ -71,7 +71,7 @@ TEST_F(VideoReceiveStreamTimeoutTrackerTest, TimeoutForDeltaFrame) {
 }
 
 TEST_F(VideoReceiveStreamTimeoutTrackerTest, TimeoutForKeyframeWhenForced) {
-  timeout_tracker_.Start(true);
+  timeout_tracker_.Start();
   time_controller_.AdvanceTime(TimeDelta::Millis(5));
   timeout_tracker_.OnEncodedFrameReleased();
   timeout_tracker_.SetWaitingForKeyframe();
@@ -81,7 +81,7 @@ TEST_F(VideoReceiveStreamTimeoutTrackerTest, TimeoutForKeyframeWhenForced) {
 }
 
 TEST_F(VideoReceiveStreamTimeoutTrackerTest, TotalTimeoutUsedInCallback) {
-  timeout_tracker_.Start(true);
+  timeout_tracker_.Start();
   time_controller_.AdvanceTime(kMaxWaitForKeyframe * 2);
   timeout_tracker_.OnEncodedFrameReleased();
   time_controller_.AdvanceTime(kMaxWaitForFrame * 2);

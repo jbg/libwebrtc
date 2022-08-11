@@ -40,7 +40,7 @@ class VideoReceiveStreamTimeoutTracker {
       const VideoReceiveStreamTimeoutTracker&) = delete;
 
   bool Running() const;
-  void Start(bool waiting_for_keyframe);
+  void Start();
   void Stop();
   void SetWaitingForKeyframe();
   void OnEncodedFrameReleased();

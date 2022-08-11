@@ -494,7 +494,7 @@ void VideoReceiveStream2::Start() {
     decoder_stopped_ = false;
   });
 
-  timeout_tracker_.Start(true);
+  timeout_tracker_.Start();
   RTC_DCHECK_EQ(frame_buffer_->CurrentSize(), 0);
 
   decoder_running_ = true;

@@ -39,10 +39,10 @@ TimeDelta VideoReceiveStreamTimeoutTracker::TimeUntilTimeout() const {
   return std::max(timeout_ - clock_->CurrentTime(), TimeDelta::Zero());
 }
 
-void VideoReceiveStreamTimeoutTracker::Start(bool waiting_for_keyframe) {
+void VideoReceiveStreamTimeoutTracker::Start() {
   RTC_DCHECK_RUN_ON(bookkeeping_queue_);
   RTC_DCHECK(!timeout_task_.Running());
-  waiting_for_keyframe_ = waiting_for_keyframe;
+  waiting_for_keyframe_ = true;
   TimeDelta timeout_delay = TimeoutForNextFrame();
   last_frame_ = clock_->CurrentTime();
   timeout_ = last_frame_ + timeout_delay;
@@ -52,6 +52,7 @@ void VideoReceiveStreamTimeoutTracker::Start(bool waiting_for_keyframe) {
 }
 
 void VideoReceiveStreamTimeoutTracker::Stop() {
+  RTC_DCHECK_RUN_ON(bookkeeping_queue_);
   timeout_task_.Stop();
 }
 
@@ -63,7 +64,7 @@ void VideoReceiveStreamTimeoutTracker::SetWaitingForKeyframe() {
   // delay.
   if (clock_->CurrentTime() + timeout_delay < timeout_) {
     Stop();
-    Start(waiting_for_keyframe_);
+    Start();
   }
 }
 
