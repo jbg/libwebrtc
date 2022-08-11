@@ -491,7 +491,6 @@ void VideoReceiveStream2::Start() {
   decode_queue_.PostTask([this] {
     RTC_DCHECK_RUN_ON(&decode_queue_);
     decode_safety_->SetAlive();
-    decoder_stopped_ = false;
   });
 
   timeout_tracker_.Start(true);
@@ -527,7 +526,6 @@ void VideoReceiveStream2::Stop() {
     decode_queue_.PostTask([this, &done] {
       RTC_DCHECK_RUN_ON(&decode_queue_);
       decode_safety_->SetNotAlive();
-      decoder_stopped_ = true;
       done.Set();
     });
     done.Wait(rtc::Event::kForever);
@@ -993,8 +991,6 @@ void VideoReceiveStream2::OnEncodedFrame(std::unique_ptr<EncodedFrame> frame) {
       [this, frame = std::move(frame), keyframe_required = keyframe_required_,
        max_wait_for_keyframe = max_wait_for_keyframe_]() mutable {
         RTC_DCHECK_RUN_ON(&decode_queue_);
-        if (decoder_stopped_)
-          return;
         HandleEncodedFrame(std::move(frame), keyframe_required,
                            max_wait_for_keyframe);
       }));

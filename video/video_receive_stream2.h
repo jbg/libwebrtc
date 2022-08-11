@@ -255,7 +255,6 @@ class VideoReceiveStream2
   CallStats* const call_stats_;
 
   bool decoder_running_ RTC_GUARDED_BY(worker_sequence_checker_) = false;
-  bool decoder_stopped_ RTC_GUARDED_BY(decode_queue_) = true;
   bool decoder_currently_decoding_ RTC_GUARDED_BY(worker_sequence_checker_) =
       false;
 
@@ -364,7 +363,7 @@ class VideoReceiveStream2
   // Used to signal destruction to potentially pending tasks.
   ScopedTaskSafety worker_task_safety_;
   rtc::scoped_refptr<PendingTaskSafetyFlag> decode_safety_ RTC_PT_GUARDED_BY(
-      decode_queue_) = PendingTaskSafetyFlag::CreateDetached();
+      decode_queue_) = PendingTaskSafetyFlag::CreateDetachedInactive();
 };
 
 }  // namespace internal
