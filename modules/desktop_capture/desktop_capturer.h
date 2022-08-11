@@ -58,6 +58,23 @@ class RTC_EXPORT DesktopCapturer {
     virtual void OnCaptureResult(Result result,
                                  std::unique_ptr<DesktopFrame> frame) = 0;
 
+    // The following methods are used by capturers that use a delegated source
+    // list (see the UsesDelegatedSourceList method for full details). These
+    // notifications can be used to help drive any UI that the embedder may
+    // want to show around this source list.
+
+    // Called after the user has made a selection in the delegated source list.
+    virtual void OnDelegatedSourceListSelection() {}
+
+    // Called if the user dismisses the delegated source list without making a
+    // selection.
+    virtual void OnDelegatedSourceListCancelled() {}
+
+    // Called if the delegated source list is dismissed without a selection,
+    // this could indicate either a rejection by the user, or an error that
+    // occurred causing the dialog to be dismissed by the system.
+    virtual void OnDelegatedSourceListError() {}
+
    protected:
     virtual ~Callback() {}
   };
@@ -87,6 +104,17 @@ class RTC_EXPORT DesktopCapturer {
   // Called at the beginning of a capturing session. `callback` must remain
   // valid until capturer is destroyed.
   virtual void Start(Callback* callback) = 0;
+
+  // Used to indicate if the capturer handles (often requires) displaying it's
+  // own source list and requires the user to make their selection there. Note
+  // that the capturer will still return a non-empty SourceList in response to a
+  // call to GetSourceList for integration with embedders who may still wish to
+  // show their own UI/preview; but these sources will largely be a dummy source
+  // and invalid until the user has made their selection in the capturer's own
+  // UI. Note that some capturers with delegated source lists may also support
+  // "selecting" (via SelectSource) a SourceID that is not in the returned
+  // source list as a form of restore token.
+  virtual bool UsesDelegatedSourceList() const;
 
   // Sets SharedMemoryFactory that will be used to create buffers for the
   // captured frames. The factory can be invoked on a thread other than the one

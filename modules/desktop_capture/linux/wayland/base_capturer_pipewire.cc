@@ -65,6 +65,22 @@ void BaseCapturerPipeWire::OnScreenCastRequestResult(RequestResponse result,
           source_id_, screencast_portal->RestoreToken());
     }
   }
+
+  RTC_DCHECK(callback_);
+  switch (result) {
+    case RequestResponse::kUnknown:
+      RTC_DCHECK_NOTREACHED();
+      break;
+    case RequestResponse::kSuccess:
+      callback_->OnDelegatedSourceListSelection();
+      break;
+    case RequestResponse::kUserCancelled:
+      callback_->OnDelegatedSourceListCancelled();
+      break;
+    case RequestResponse::kError:
+      callback_->OnDelegatedSourceListError();
+      break;
+  }
 }
 
 void BaseCapturerPipeWire::OnScreenCastSessionClosed() {
@@ -96,6 +112,10 @@ void BaseCapturerPipeWire::Start(Callback* callback) {
   }
 
   portal_->Start();
+}
+
+bool BaseCapturerPipeWire::UsesDelegatedSourceList() const {
+  return true;
 }
 
 void BaseCapturerPipeWire::CaptureFrame() {
