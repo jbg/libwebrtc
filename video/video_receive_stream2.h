@@ -255,7 +255,6 @@ class VideoReceiveStream2
   CallStats* const call_stats_;
 
   bool decoder_running_ RTC_GUARDED_BY(worker_sequence_checker_) = false;
-  bool decoder_stopped_ RTC_GUARDED_BY(decode_queue_) = true;
   bool decoder_currently_decoding_ RTC_GUARDED_BY(worker_sequence_checker_) =
       false;
 
