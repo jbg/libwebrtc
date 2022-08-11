@@ -53,6 +53,7 @@ BaseCapturerPipeWire::~BaseCapturerPipeWire() {}
 void BaseCapturerPipeWire::OnScreenCastRequestResult(RequestResponse result,
                                                      uint32_t stream_node_id,
                                                      int fd) {
+  RTC_LOG(LS_ERROR) << " stream_node_id: " << stream_node_id << " fd: " << fd;
   if (result != RequestResponse::kSuccess ||
       !options_.screencast_stream()->StartScreenCastStream(
           stream_node_id, fd, options_.get_width(), options_.get_height())) {
@@ -64,6 +65,22 @@ void BaseCapturerPipeWire::OnScreenCastRequestResult(RequestResponse result,
       RestoreTokenManager::GetInstance().AddToken(
           source_id_, screencast_portal->RestoreToken());
     }
+  }
+
+  RTC_DCHECK(callback_);
+  switch (result) {
+    case RequestResponse::kUnknown:
+      RTC_DCHECK_NOTREACHED();
+      break;
+    case RequestResponse::kSuccess:
+      callback_->OnDelegatedSourceListSelection();
+      break;
+    case RequestResponse::kUserCancelled:
+      callback_->OnDelegatedSourceListCancelled();
+      break;
+    case RequestResponse::kError:
+      callback_->OnDelegatedSourceListError();
+      break;
   }
 }
 
@@ -96,6 +113,10 @@ void BaseCapturerPipeWire::Start(Callback* callback) {
   }
 
   portal_->Start();
+}
+
+bool BaseCapturerPipeWire::UsesDelegatedSourceList() const {
+  return true;
 }
 
 void BaseCapturerPipeWire::CaptureFrame() {
