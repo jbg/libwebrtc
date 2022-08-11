@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb919b1d_69108758",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2022-08-11T08:43:29Z",
+      "side": 1,
+      "message": "Hi Philip,\n\nJust a very minor clean up. I think that this is a legacy from the time when prev_estimate_ was not an optional.",
+      "revId": "2622ca9d4c9ec8dc68ed668d6fc28477337045f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
