@@ -116,6 +116,8 @@ class RTC_EXPORT DesktopCapturer {
   // source list as a form of restore token.
   virtual bool UsesDelegatedSourceList() const;
 
+  virtual void FocusList();
+
   // Sets SharedMemoryFactory that will be used to create buffers for the
   // captured frames. The factory can be invoked on a thread other than the one
   // where CaptureFrame() is called. It will be destroyed on the same thread.
