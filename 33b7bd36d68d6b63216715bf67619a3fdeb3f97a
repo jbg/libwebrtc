@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d573b38a_f5ececd3",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-12T08:49:11Z",
+      "side": 1,
+      "message": "Yes - done now and added a TODO for following up.",
+      "parentUuid": "fc6ef0cc_d6b944a2",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 129,
+        "endChar": 35
+      },
+      "revId": "33b7bd36d68d6b63216715bf67619a3fdeb3f97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "962db6c9_84dd7e98",
         "filename": "video/rtp_video_stream_receiver2.cc",
         "patchSetId": 3
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "Oh sorry, I didn\u0027t realize this was a CL chain with dependencies. (Again, it\u0027s been a while since I used Gerrit last.)\n\nIf I understand your proposal correctly, you will instantiate the UlpfecReceiver when the RED payload type is !\u003d -1, thus ensuring that RED de-encapsulation still happens? And then deal with the configured ulpfec payload type inside the UlpfecReceiver object? That sounds good to me.",
       "parentUuid": "6ca5ece8_e5ac42c0",
+      "range": {
+        "startLine": 1040,
+        "startChar": 7,
+        "endLine": 1040,
+        "endChar": 27
+      },
+      "revId": "33b7bd36d68d6b63216715bf67619a3fdeb3f97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66469cd2_b71c4ed7",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-12T08:49:11Z",
+      "side": 1,
+      "message": "no worries 😊 yes that\u0027s the idea. patch updated now.",
+      "parentUuid": "9d8420bc_7549b13d",
       "range": {
         "startLine": 1040,
         "startChar": 7,
