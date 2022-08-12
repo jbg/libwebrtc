@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d2e6000_4df08d28",
+        "filename": "rtc_base/byte_buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-12T15:20:03Z",
+      "side": 1,
+      "message": "It is interesting to note that this test should trigger a test failure on UBSan but it doesn\u0027t.\n\nI added an RTC_CHECK in BufferT::AppendData() and indeed we were calling memcpy with a nullptr arg:\n\n[ RUN      ] ByteBufferTest.TestWriteNullptr\n\n\n#\n# Fatal error in: ../../rtc_base/buffer.h, line 275\n# last system error: 0\n# Check failed: false\n# *** SIGABRT received at time\u003d1660316597 on cpu 10 ***\nPC: @     0x7fbdf16618a1  (unknown)  raise\n    @     0x55a2b38e9765        208  absl::WriteFailureInfo()\n    @     0x55a2b38e94ac         64  absl::AbslFailureSignalHandler()\n    @     0x7fbdf1aff200  1552114736  (unknown)\n    @     0x55a2b3dd1885        368  rtc::webrtc_checks_impl::FatalLog()\n    @     0x55a2b35dc457         48  rtc::ByteBufferTest_TestWriteNullptr_Test::TestBody()\n    @     0x55a2b38d2adf         48  testing::Test::Run()\n    @     0x55a2b38d3919         64  testing::TestInfo::Run()\n    @     0x55a2b38d4511         80  testing::TestSuite::Run()\n    @     0x55a2b38e016f        144  testing::internal::UnitTestImpl::RunAllTests()\n    @     0x55a2b38df979         48  testing::UnitTest::Run()\n    @     0x55a2b3bf5c65        496  webrtc::(anonymous namespace)::TestMainImpl::Run()\n    @     0x55a2b3809d7f         96  main\n    @     0x7fbdf164c7fd  (unknown)  __libc_start_main\n    \nI am looking into why UBSan doesn\u0027t catch this. I suspect the config is missing an -fsanitize\u003d...\".",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 1
+      },
+      "revId": "1887529b245d0422deb958ef2d76e3aea0d85f10",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
