@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc6ef0cc_d6b944a2",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-08-12T08:30:17Z",
+      "side": 1,
+      "message": "I think these two are not always checked together, since the SDP can be valid with both, or just one, of these payload types set. For the same reason, I think we should not DCHECK here.\n\nHowever, with your proposal below, I think you should only do \n```\nif (config_.rtp.red_payload_type \u003d\u003d -1)\n```\nhere? That should ensure that the UlpfecReceiver is instantiated when needed for RED de-encaps, and whether or not it\u0027s used for ULPFEC reception is determined by this check here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/rtp_rtcp/source/ulpfec_receiver.cc;l\u003d137;drc\u003d7fbab87b6044afcb24a849bd225dc042f3cf7843.\n\nDoes that make sense?",
+      "parentUuid": "df9323ce_be201df4",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 129,
+        "endChar": 35
+      },
+      "revId": "33b7bd36d68d6b63216715bf67619a3fdeb3f97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "962db6c9_84dd7e98",
         "filename": "video/rtp_video_stream_receiver2.cc",
         "patchSetId": 3
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "Since there are a few CLs lined up that depend on this CL, should I rather change it so that we always create ulpfec_receiver_, even if the ulpfec payload id is -1?",
       "parentUuid": "962db6c9_84dd7e98",
+      "range": {
+        "startLine": 1040,
+        "startChar": 7,
+        "endLine": 1040,
+        "endChar": 27
+      },
+      "revId": "33b7bd36d68d6b63216715bf67619a3fdeb3f97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d8420bc_7549b13d",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-08-12T08:30:17Z",
+      "side": 1,
+      "message": "Oh sorry, I didn\u0027t realize this was a CL chain with dependencies. (Again, it\u0027s been a while since I used Gerrit last.)\n\nIf I understand your proposal correctly, you will instantiate the UlpfecReceiver when the RED payload type is !\u003d -1, thus ensuring that RED de-encapsulation still happens? And then deal with the configured ulpfec payload type inside the UlpfecReceiver object? That sounds good to me.",
+      "parentUuid": "6ca5ece8_e5ac42c0",
       "range": {
         "startLine": 1040,
         "startChar": 7,
