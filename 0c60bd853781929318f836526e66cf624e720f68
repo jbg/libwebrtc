@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c9c8f17_2cfbd851",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-12T19:59:37Z",
+      "side": 1,
+      "message": "nit: it\u0027s more common in the code base to use an early return for these sort of cases. i.e.\n\n```\nif (!data)\n  return;\n```\n\nActually, I wonder if we should have a dcheck for this too? Just to alert developers. Another thing we could do is to dcheck that the size is 0 if data is nullptr. Since the return type is void, I wonder if we should even have a CHECK() (not dcheck) for this, to see if we need to weed out cases where this could happen (since it\u0027s for sure not handled).",
+      "revId": "0c60bd853781929318f836526e66cf624e720f68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
