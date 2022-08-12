@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df9323ce_be201df4",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-12T08:15:30Z",
+      "side": 1,
+      "message": "I can add that check. When I added this helper I figured I\u0027d try to keep the checks as close to how the code is structured since it appeared to me that there were places where these two weren\u0027t always checked together.\n\nI could also add a DCHECK that if the ulpfec id is valid that red must be too?",
+      "parentUuid": "a057aa0b_ef8a1cdb",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 129,
+        "endChar": 35
+      },
+      "revId": "33b7bd36d68d6b63216715bf67619a3fdeb3f97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "962db6c9_84dd7e98",
         "filename": "video/rtp_video_stream_receiver2.cc",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-12T06:02:24Z",
       "side": 1,
       "message": "It\u0027s been a while since I worked with this code, but I think this change (as is) would break RED de-encapsulation, when ULPFEC is not negotiated.\n\nMaybe better to wait with this change, until the RED de-encapsulation and ULPFEC reception have been split?",
+      "range": {
+        "startLine": 1040,
+        "startChar": 7,
+        "endLine": 1040,
+        "endChar": 27
+      },
+      "revId": "33b7bd36d68d6b63216715bf67619a3fdeb3f97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca5ece8_e5ac42c0",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-12T08:15:30Z",
+      "side": 1,
+      "message": "Since there are a few CLs lined up that depend on this CL, should I rather change it so that we always create ulpfec_receiver_, even if the ulpfec payload id is -1?",
+      "parentUuid": "962db6c9_84dd7e98",
       "range": {
         "startLine": 1040,
         "startChar": 7,

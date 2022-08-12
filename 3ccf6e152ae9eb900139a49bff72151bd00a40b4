@@ -16,6 +16,24 @@
       "message": "actually... shouldn\u0027t it be impossible here that `config_.rtp.ulpfec_payload_type` is -1?  (there\u0027s no check for it though)",
       "revId": "3ccf6e152ae9eb900139a49bff72151bd00a40b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32ca53cb_1785c437",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-12T08:15:30Z",
+      "side": 1,
+      "message": "Nevermind - since `PayloadType()` is `uint8 \u0026 0x7f`, the answer is yes.",
+      "parentUuid": "3a0b12ba_d97c39e6",
+      "revId": "3ccf6e152ae9eb900139a49bff72151bd00a40b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
