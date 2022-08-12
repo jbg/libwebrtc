@@ -267,13 +267,15 @@ class BufferT {
             typename std::enable_if<
                 internal::BufferCompat<T, U>::value>::type* = nullptr>
   void AppendData(const U* data, size_t size) {
-    RTC_DCHECK(IsConsistent());
-    const size_t new_size = size_ + size;
-    EnsureCapacityWithHeadroom(new_size, true);
-    static_assert(sizeof(T) == sizeof(U), "");
-    std::memcpy(data_.get() + size_, data, size * sizeof(U));
-    size_ = new_size;
-    RTC_DCHECK(IsConsistent());
+    if (data != nullptr) {
+      RTC_DCHECK(IsConsistent());
+      const size_t new_size = size_ + size;
+      EnsureCapacityWithHeadroom(new_size, true);
+      static_assert(sizeof(T) == sizeof(U), "");
+      std::memcpy(data_.get() + size_, data, size * sizeof(U));
+      size_ = new_size;
+      RTC_DCHECK(IsConsistent());
+    }
   }
 
   template <typename U,

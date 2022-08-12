@@ -192,6 +192,11 @@ TEST(ByteBufferTest, TestReadWriteBuffer) {
   buffer.Clear();
 }
 
+TEST(ByteBufferTest, TestWriteNullptr) {
+  ByteBufferWriter write_buffer;
+  write_buffer.WriteBytes(nullptr, 0);
+}
+
 TEST(ByteBufferTest, TestReadWriteUVarint) {
   ByteBufferWriter write_buffer;
   size_t size = 0;
