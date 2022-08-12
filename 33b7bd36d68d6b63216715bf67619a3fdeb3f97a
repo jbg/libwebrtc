@@ -16,6 +16,52 @@
       "message": "just checking if you saw this one too?",
       "revId": "33b7bd36d68d6b63216715bf67619a3fdeb3f97a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a057aa0b_ef8a1cdb",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-08-12T06:02:24Z",
+      "side": 1,
+      "message": "\u0026\u0026 config_.rtp.red_payload_type \u003d -1?",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 129,
+        "endChar": 35
+      },
+      "revId": "33b7bd36d68d6b63216715bf67619a3fdeb3f97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "962db6c9_84dd7e98",
+        "filename": "video/rtp_video_stream_receiver2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-08-12T06:02:24Z",
+      "side": 1,
+      "message": "It\u0027s been a while since I worked with this code, but I think this change (as is) would break RED de-encapsulation, when ULPFEC is not negotiated.\n\nMaybe better to wait with this change, until the RED de-encapsulation and ULPFEC reception have been split?",
+      "range": {
+        "startLine": 1040,
+        "startChar": 7,
+        "endLine": 1040,
+        "endChar": 27
+      },
+      "revId": "33b7bd36d68d6b63216715bf67619a3fdeb3f97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
