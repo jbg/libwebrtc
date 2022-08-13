@@ -116,6 +116,13 @@ class RTC_EXPORT DesktopCapturer {
   // source list as a form of restore token.
   virtual bool UsesDelegatedSourceList() const;
 
+  // Used to prompt the capturer to show the delegated source list, if it uses
+  // one. If the source list is already visible, this will be a no-op. This
+  // should not be needed after a call to start, and may clear any user
+  // selection from a previous invocation of the source list (either via this
+  // method or via Start).
+  virtual void EnsureDelegatedSourceListVisible();
+
   // Sets SharedMemoryFactory that will be used to create buffers for the
   // captured frames. The factory can be invoked on a thread other than the one
   // where CaptureFrame() is called. It will be destroyed on the same thread.

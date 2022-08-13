@@ -16,8 +16,6 @@
 #include "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
-#include "rtc_base/random.h"
-#include "rtc_base/time_utils.h"
 
 namespace webrtc {
 
@@ -44,8 +42,7 @@ BaseCapturerPipeWire::BaseCapturerPipeWire(
     : options_(options),
       is_screencast_portal_(false),
       portal_(std::move(portal)) {
-  Random random(rtc::TimeMicros());
-  source_id_ = static_cast<SourceId>(random.Rand(1, INT_MAX));
+  source_id_ = RestoreTokenManager::GetInstance().GetUnusedId();
 }
 
 BaseCapturerPipeWire::~BaseCapturerPipeWire() {}
@@ -53,6 +50,7 @@ BaseCapturerPipeWire::~BaseCapturerPipeWire() {}
 void BaseCapturerPipeWire::OnScreenCastRequestResult(RequestResponse result,
                                                      uint32_t stream_node_id,
                                                      int fd) {
+  is_portal_open_ = false;
   if (result != RequestResponse::kSuccess ||
       !options_.screencast_stream()->StartScreenCastStream(
           stream_node_id, fd, options_.get_width(), options_.get_height())) {
@@ -111,6 +109,7 @@ void BaseCapturerPipeWire::Start(Callback* callback) {
     }
   }
 
+  is_portal_open_ = true;
   portal_->Start();
 }
 
@@ -155,6 +154,16 @@ bool BaseCapturerPipeWire::SelectSource(SourceId id) {
   // Screen selection is handled by the xdg-desktop-portal.
   selected_source_id_ = id;
   return true;
+}
+
+void BaseCapturerPipeWire::EnsureDelegatedSourceListVisible() {
+  if (is_portal_open_ || !callback_)
+    return;
+
+  options_.screencast_stream()->StopScreenCastStream();
+  source_id_ = RestoreTokenManager::GetInstance().GetUnusedId();
+  is_portal_open_ = true;
+  portal_->Start();
 }
 
 SessionDetails BaseCapturerPipeWire::GetSessionDetails() {
