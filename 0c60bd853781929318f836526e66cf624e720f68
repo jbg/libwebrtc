@@ -16,6 +16,47 @@
       "message": "nit: it\u0027s more common in the code base to use an early return for these sort of cases. i.e.\n\n```\nif (!data)\n  return;\n```\n\nActually, I wonder if we should have a dcheck for this too? Just to alert developers. Another thing we could do is to dcheck that the size is 0 if data is nullptr. Since the return type is void, I wonder if we should even have a CHECK() (not dcheck) for this, to see if we need to weed out cases where this could happen (since it\u0027s for sure not handled).",
       "revId": "0c60bd853781929318f836526e66cf624e720f68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0e028ed_2c4a7d27",
+        "filename": "rtc_base/buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-13T13:32:13Z",
+      "side": 1,
+      "message": "Done.\n\nI added both, the DCHECK will warn on dbg builds that probably this is an error but it is safe in release because of the early return. I also added the CHECK for cases where data is nullptr and size is not 0 since this is a sign something is wrong.\n\nIf this is fine feel free to +2.",
+      "parentUuid": "5c9c8f17_2cfbd851",
+      "revId": "0c60bd853781929318f836526e66cf624e720f68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0381a45_20291e0e",
+        "filename": "rtc_base/byte_buffer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-13T13:32:13Z",
+      "side": 1,
+      "message": "Removed and opened https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1352721 with a small repro.",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 1
+      },
+      "revId": "0c60bd853781929318f836526e66cf624e720f68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
