@@ -267,6 +267,10 @@ class BufferT {
             typename std::enable_if<
                 internal::BufferCompat<T, U>::value>::type* = nullptr>
   void AppendData(const U* data, size_t size) {
+    RTC_CHECK(data != nullptr || size == 0);
+    if (data == nullptr) {
+      return;
+    }
     RTC_DCHECK(IsConsistent());
     const size_t new_size = size_ + size;
     EnsureCapacityWithHeadroom(new_size, true);
