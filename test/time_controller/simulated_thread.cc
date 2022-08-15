@@ -12,6 +12,8 @@
 #include <algorithm>
 #include <utility>
 
+#include "api/units/time_delta.h"
+
 namespace webrtc {
 namespace {
 
@@ -24,8 +26,8 @@ class DummySocketServer : public rtc::SocketServer {
     RTC_DCHECK_NOTREACHED();
     return nullptr;
   }
-  bool Wait(int cms, bool process_io) override {
-    RTC_CHECK_EQ(cms, 0);
+  bool Wait(TimeDelta delay, bool process_io) override {
+    RTC_CHECK_EQ(delay, TimeDelta::Zero());
     return true;
   }
   void WakeUp() override {}

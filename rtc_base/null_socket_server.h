@@ -23,7 +23,7 @@ class RTC_EXPORT NullSocketServer : public SocketServer {
   NullSocketServer();
   ~NullSocketServer() override;
 
-  bool Wait(int cms, bool process_io) override;
+  bool Wait(webrtc::TimeDelta delay, bool process_io) override;
   void WakeUp() override;
 
   Socket* CreateSocket(int family, int type) override;

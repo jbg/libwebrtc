@@ -384,8 +384,8 @@ void NATSocketServer::SetMessageQueue(Thread* queue) {
   server_->SetMessageQueue(queue);
 }
 
-bool NATSocketServer::Wait(int cms, bool process_io) {
-  return server_->Wait(cms, process_io);
+bool NATSocketServer::Wait(webrtc::TimeDelta delay, bool process_io) {
+  return server_->Wait(delay, process_io);
 }
 
 void NATSocketServer::WakeUp() {

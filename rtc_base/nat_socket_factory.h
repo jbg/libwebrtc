@@ -152,7 +152,7 @@ class NATSocketServer : public SocketServer, public NATInternalSocketFactory {
   Socket* CreateSocket(int family, int type) override;
 
   void SetMessageQueue(Thread* queue) override;
-  bool Wait(int cms, bool process_io) override;
+  bool Wait(webrtc::TimeDelta delay, bool process_io) override;
   void WakeUp() override;
 
   // NATInternalSocketFactory implementation

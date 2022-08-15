@@ -74,7 +74,7 @@ class RTC_EXPORT PhysicalSocketServer : public SocketServer {
   virtual Socket* WrapSocket(SOCKET s);
 
   // SocketServer:
-  bool Wait(int cms, bool process_io) override;
+  bool Wait(webrtc::TimeDelta delay, bool process_io) override;
   void WakeUp() override;
 
   void Add(Dispatcher* dispatcher);
@@ -86,14 +86,14 @@ class RTC_EXPORT PhysicalSocketServer : public SocketServer {
   static constexpr size_t kNumEpollEvents = 128;
 
 #if defined(WEBRTC_POSIX)
-  bool WaitSelect(int cms, bool process_io);
+  bool WaitSelect(webrtc::TimeDelta delay, bool process_io);
 #endif  // WEBRTC_POSIX
 #if defined(WEBRTC_USE_EPOLL)
   void AddEpoll(Dispatcher* dispatcher, uint64_t key);
   void RemoveEpoll(Dispatcher* dispatcher);
   void UpdateEpoll(Dispatcher* dispatcher, uint64_t key);
-  bool WaitEpoll(int cms);
-  bool WaitPoll(int cms, Dispatcher* dispatcher);
+  bool WaitEpoll(webrtc::TimeDelta delay);
+  bool WaitPoll(webrtc::TimeDelta delay, Dispatcher* dispatcher);
 
   // This array is accessed in isolation by a thread calling into Wait().
   // It's useless to use a SequenceChecker to guard it because a socket

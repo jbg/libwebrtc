@@ -13,6 +13,7 @@
 
 #include <memory>
 
+#include "api/units/time_delta.h"
 #include "rtc_base/socket_factory.h"
 
 namespace rtc {
@@ -40,10 +41,11 @@ class SocketServer : public SocketFactory {
   virtual void SetMessageQueue(Thread* queue) {}
 
   // Sleeps until:
-  //  1) cms milliseconds have elapsed (unless cms == kForever)
+  //  1) `delay` has elapsed (unless `delay` is
+  //     webrtc::TimeDelta::PlusInfinity())
   //  2) WakeUp() is called
   // While sleeping, I/O is performed if process_io is true.
-  virtual bool Wait(int cms, bool process_io) = 0;
+  virtual bool Wait(webrtc::TimeDelta delay, bool process_io) = 0;
 
   // Causes the current wait (if one is in progress) to wake up.
   virtual void WakeUp() = 0;

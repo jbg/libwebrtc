@@ -908,7 +908,10 @@ rtc_library("null_socket_server") {
 
 rtc_source_set("socket_server") {
   sources = [ "socket_server.h" ]
-  deps = [ ":socket_factory" ]
+  deps = [
+    ":socket_factory",
+    "../api/units:time_delta",
+  ]
 }
 
 rtc_library("threading") {
@@ -937,6 +940,7 @@ rtc_library("threading") {
     "//third_party/abseil-cpp/absl/cleanup",
     "//third_party/abseil-cpp/absl/functional:any_invocable",
     "//third_party/abseil-cpp/absl/strings",
+    "//third_party/abseil-cpp/absl/types:optional",
   ]
   deps = [
     ":async_resolver_interface",
@@ -965,6 +969,8 @@ rtc_library("threading") {
     "../api/task_queue",
     "../api/task_queue:pending_task_safety_flag",
     "../api/units:time_delta",
+    "../api/units:timestamp",
+    "../system_wrappers",
     "synchronization:mutex",
     "system:no_unique_address",
     "system:rtc_export",
@@ -1498,6 +1504,7 @@ if (rtc_include_tests) {
         ":testclient",
         ":threading",
         ":timeutils",
+        "../api/units:time_delta",
         "../system_wrappers",
         "../test:fileutils",
         "../test:test_main",

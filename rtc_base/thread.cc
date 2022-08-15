@@ -11,6 +11,7 @@
 #include "rtc_base/thread.h"
 
 #include "absl/strings/string_view.h"
+#include "api/units/time_delta.h"
 
 #if defined(WEBRTC_WIN)
 #include <comdef.h>
@@ -537,7 +538,9 @@ bool Thread::Get(Message* pmsg, int cmsWait, bool process_io) {
 
     {
       // Wait and multiplex in the meantime
-      if (!ss_->Wait(static_cast<int>(cmsNext), process_io))
+      if (!ss_->Wait(cmsNext == kForever ? webrtc::TimeDelta::PlusInfinity()
+                                         : webrtc::TimeDelta::Millis(cmsNext),
+                     process_io))
         return false;
     }
 
@@ -968,7 +971,8 @@ void Thread::Send(const Location& posted_from,
     crit_.Enter();
     while (!ready) {
       crit_.Leave();
-      current_thread->socketserver()->Wait(kForever, false);
+      current_thread->socketserver()->Wait(webrtc::TimeDelta::PlusInfinity(),
+                                           false);
       waited = true;
       crit_.Enter();
     }

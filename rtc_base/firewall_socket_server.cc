@@ -210,8 +210,8 @@ void FirewallSocketServer::SetMessageQueue(Thread* queue) {
   server_->SetMessageQueue(queue);
 }
 
-bool FirewallSocketServer::Wait(int cms, bool process_io) {
-  return server_->Wait(cms, process_io);
+bool FirewallSocketServer::Wait(webrtc::TimeDelta delay, bool process_io) {
+  return server_->Wait(delay, process_io);
 }
 
 void FirewallSocketServer::WakeUp() {
