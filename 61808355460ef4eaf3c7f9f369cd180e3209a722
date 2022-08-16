@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e47ecfd_446eacb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-08-16T23:33:36Z",
+      "side": 1,
+      "message": "Adding Sergey to review as they were the original author and Alex to review as the current OWNER.\n\nPTAL!",
+      "revId": "61808355460ef4eaf3c7f9f369cd180e3209a722",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
