@@ -247,7 +247,7 @@ void VideoStreamBufferController::StartNextDecode(bool keyframe_required) {
 
   RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
   if (!timeout_tracker_.Running())
-    timeout_tracker_.Start(keyframe_required);
+    timeout_tracker_.Start();
   keyframe_required_ = keyframe_required;
   if (keyframe_required_) {
     timeout_tracker_.SetWaitingForKeyframe();
