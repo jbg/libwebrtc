@@ -204,11 +204,20 @@ class VideoReceiveStream2
   void OnDecodableFrameTimeout(TimeDelta wait) override;
 
   void CreateAndRegisterExternalDecoder(const Decoder& decoder);
-  void HandleEncodedFrameOnDecodeQueue(std::unique_ptr<EncodedFrame> frame,
-                                       Timestamp now,
-                                       bool keyframe_request_is_due,
-                                       bool keyframe_required)
-      RTC_RUN_ON(decode_queue_);
+
+  struct DecodeFrameResult {
+    DecodeFrameResult(DecodeFrameResult&&) = default;
+    DecodeFrameResult& operator=(DecodeFrameResult&&) = default;
+
+    bool force_request_key_frame;
+    absl::optional<int64_t> decoded_frame_picture_id;
+    bool keyframe_required;
+  };
+
+  DecodeFrameResult HandleEncodedFrameOnDecodeQueue(
+      std::unique_ptr<EncodedFrame> frame,
+      bool keyframe_request_is_due,
+      bool keyframe_required) RTC_RUN_ON(decode_queue_);
   void UpdatePlayoutDelays() const
       RTC_EXCLUSIVE_LOCKS_REQUIRED(worker_sequence_checker_);
   void RequestKeyFrame(Timestamp now) RTC_RUN_ON(packet_sequence_checker_);
