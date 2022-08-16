@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33dc03c4_2f6c72e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-08-16T14:53:13Z",
+      "side": 1,
+      "message": "The name has to be PrintTo so that GTest can find it: https://github.com/google/googletest/blob/main/docs/advanced.md#teaching-googletest-how-to-print-your-values",
+      "parentUuid": "dc0e5204_87014222",
+      "revId": "2233b16879080ca6bc027c6a5dc131a5d1a7d588",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a2b955b_2b699ac5",
