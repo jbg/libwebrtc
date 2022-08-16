@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc0e5204_87014222",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-16T14:51:30Z",
+      "side": 1,
+      "message": "ok, thanks for the context. I guess we could rename the method to PrintFooForTest to make things clear, but not super important given the build config.",
+      "revId": "2233b16879080ca6bc027c6a5dc131a5d1a7d588",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a2b955b_2b699ac5",
