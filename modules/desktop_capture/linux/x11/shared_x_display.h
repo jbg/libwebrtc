@@ -76,7 +76,9 @@ class RTC_EXPORT SharedXDisplay
 
   Display* display_;
 
-  EventHandlersMap event_handlers_;
+  Mutex mutex_;
+
+  EventHandlersMap event_handlers_ RTC_GUARDED_BY(mutex_);
 };
 
 }  // namespace webrtc
