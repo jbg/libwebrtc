@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "248acc27_0697c9fb",
+        "filename": "test/fake_encoded_frame.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-08-16T10:11:34Z",
+      "side": 1,
+      "message": "This change could move to a separate CL to be fair. This has to be in the webrtc namespace so that GTest can find it when printing the frame. This was not working before when it was in the test namespace. This dependency should only be included in test code - the GN target is marked testonly. https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/test/BUILD.gn;l\u003d1201;drc\u003d054ea47379a573c421f177ef2f20705fc2fd4dd9",
+      "parentUuid": "7a2b955b_2b699ac5",
+      "revId": "2233b16879080ca6bc027c6a5dc131a5d1a7d588",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72a110a1_5f1340ad",
