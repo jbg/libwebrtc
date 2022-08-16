@@ -22,6 +22,30 @@
       },
       "revId": "d6f494d6cc89575c70fd208d5b4b2fc4f0b141dd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8de452b2_8483ff00",
+        "filename": "video/video_stream_buffer_controller.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-08-16T11:55:35Z",
+      "side": 1,
+      "message": "Now that you point this out... there is a use-case for this parameter. \n\nIf the stream times out we request a keyframe, but do not require one. Instead the stream will accept a non-keyframe. I assume the timeout then should be for a normal frame?",
+      "parentUuid": "88160ede_33d92bc3",
+      "range": {
+        "startLine": 250,
+        "startChar": 4,
+        "endLine": 250,
+        "endChar": 29
+      },
+      "revId": "d6f494d6cc89575c70fd208d5b4b2fc4f0b141dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
