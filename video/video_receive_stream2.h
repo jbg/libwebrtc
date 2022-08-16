@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 
+#include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
 #include "api/task_queue/pending_task_safety_flag.h"
 #include "api/task_queue/task_queue_factory.h"
@@ -252,7 +253,6 @@ class VideoReceiveStream2
   CallStats* const call_stats_;
 
   bool decoder_running_ RTC_GUARDED_BY(worker_sequence_checker_) = false;
-  bool decoder_stopped_ RTC_GUARDED_BY(decode_queue_) = true;
 
   SourceTracker source_tracker_;
   ReceiveStatisticsProxy stats_proxy_;
@@ -336,6 +336,11 @@ class VideoReceiveStream2
 
   DecodeSynchronizer* decode_sync_;
 
+  // Starts inactive since the decoder will not be started until Start() has
+  // been called.
+  rtc::scoped_refptr<PendingTaskSafetyFlag> decode_queue_safety_
+      RTC_PT_GUARDED_BY(decode_queue_) =
+          PendingTaskSafetyFlag::CreateDetachedInactive();
   // Defined last so they are destroyed before all other members.
   rtc::TaskQueue decode_queue_;
 
