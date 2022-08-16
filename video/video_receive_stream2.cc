@@ -408,7 +408,7 @@ void VideoReceiveStream2::Start() {
   stats_proxy_.DecoderThreadStarting();
   decode_queue_.PostTask([this] {
     RTC_DCHECK_RUN_ON(&decode_queue_);
-    decoder_stopped_ = false;
+    decode_queue_safety_->SetAlive();
   });
   buffer_->StartNextDecode(true);
   decoder_running_ = true;
@@ -439,7 +439,7 @@ void VideoReceiveStream2::Stop() {
     rtc::Event done;
     decode_queue_.PostTask([this, &done] {
       RTC_DCHECK_RUN_ON(&decode_queue_);
-      decoder_stopped_ = true;
+      decode_queue_safety_->SetAlive();
       done.Set();
     });
     done.Wait(rtc::Event::kForever);
@@ -805,33 +805,34 @@ void VideoReceiveStream2::OnEncodedFrame(std::unique_ptr<EncodedFrame> frame) {
   }
   stats_proxy_.OnPreDecode(frame->CodecSpecific()->codecType, qp);
 
-  decode_queue_.PostTask([this, now, keyframe_request_is_due,
-                          received_frame_is_keyframe, frame = std::move(frame),
-                          keyframe_required = keyframe_required_]() mutable {
-    RTC_DCHECK_RUN_ON(&decode_queue_);
-    if (decoder_stopped_)
-      return;
-    DecodeFrameResult result = HandleEncodedFrameOnDecodeQueue(
-        std::move(frame), keyframe_request_is_due, keyframe_required);
+  decode_queue_.PostTask(SafeTask(
+      decode_queue_safety_,
+      [this, now, keyframe_request_is_due, received_frame_is_keyframe,
+       frame = std::move(frame),
+       keyframe_required = keyframe_required_]() mutable {
+        RTC_DCHECK_RUN_ON(&decode_queue_);
+        DecodeFrameResult result = HandleEncodedFrameOnDecodeQueue(
+            std::move(frame), keyframe_request_is_due, keyframe_required);
 
-    // TODO(bugs.webrtc.org/11993): Make this PostTask to the network thread.
-    call_->worker_thread()->PostTask(
-        SafeTask(task_safety_.flag(),
-                 [this, now, result = std::move(result),
-                  received_frame_is_keyframe, keyframe_request_is_due]() {
-                   RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
-                   keyframe_required_ = result.keyframe_required;
+        // TODO(bugs.webrtc.org/11993): Make this PostTask to the network
+        // thread.
+        call_->worker_thread()->PostTask(
+            SafeTask(task_safety_.flag(),
+                     [this, now, result = std::move(result),
+                      received_frame_is_keyframe, keyframe_request_is_due]() {
+                       RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
+                       keyframe_required_ = result.keyframe_required;
 
-                   if (result.decoded_frame_picture_id)
-                     rtp_video_stream_receiver_.FrameDecoded(
-                         *result.decoded_frame_picture_id);
+                       if (result.decoded_frame_picture_id)
+                         rtp_video_stream_receiver_.FrameDecoded(
+                             *result.decoded_frame_picture_id);
 
-                   HandleKeyFrameGeneration(received_frame_is_keyframe, now,
-                                            result.force_request_key_frame,
-                                            keyframe_request_is_due);
-                   buffer_->StartNextDecode(keyframe_required_);
-                 }));
-  });
+                       HandleKeyFrameGeneration(received_frame_is_keyframe, now,
+                                                result.force_request_key_frame,
+                                                keyframe_request_is_due);
+                       buffer_->StartNextDecode(keyframe_required_);
+                     }));
+      }));
 }
 
 void VideoReceiveStream2::OnDecodableFrameTimeout(TimeDelta wait) {
