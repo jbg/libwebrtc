@@ -238,7 +238,7 @@ void XServerPixelBuffer::InitShm(const XWindowAttributes& attributes) {
         shm_segment_info_->shmaddr = reinterpret_cast<char*>(shmat_result);
         x_shm_image_->data = shm_segment_info_->shmaddr;
 
-        XErrorTrap error_trap(display_);
+        XErrorTrap error_trap;
         using_shm = XShmAttach(display_, shm_segment_info_);
         XSync(display_, False);
         if (error_trap.GetLastErrorAndDisable() != 0)
@@ -277,7 +277,7 @@ bool XServerPixelBuffer::InitPixmaps(int depth) {
     return false;
 
   {
-    XErrorTrap error_trap(display_);
+    XErrorTrap error_trap;
     shm_pixmap_ = XShmCreatePixmap(
         display_, window_, shm_segment_info_->shmaddr, shm_segment_info_,
         window_rect_.width(), window_rect_.height(), depth);
@@ -291,7 +291,7 @@ bool XServerPixelBuffer::InitPixmaps(int depth) {
   }
 
   {
-    XErrorTrap error_trap(display_);
+    XErrorTrap error_trap;
     XGCValues shm_gc_values;
     shm_gc_values.subwindow_mode = IncludeInferiors;
     shm_gc_values.graphics_exposures = False;
@@ -312,7 +312,7 @@ bool XServerPixelBuffer::InitPixmaps(int depth) {
 bool XServerPixelBuffer::IsWindowValid() const {
   XWindowAttributes attributes;
   {
-    XErrorTrap error_trap(display_);
+    XErrorTrap error_trap;
     if (!XGetWindowAttributes(display_, window_, &attributes) ||
         error_trap.GetLastErrorAndDisable() != 0) {
       return false;
@@ -324,7 +324,7 @@ bool XServerPixelBuffer::IsWindowValid() const {
 void XServerPixelBuffer::Synchronize() {
   if (shm_segment_info_ && !shm_pixmap_) {
     // XShmGetImage can fail if the display is being reconfigured.
-    XErrorTrap error_trap(display_);
+    XErrorTrap error_trap;
     // XShmGetImage fails if the window is partially out of screen.
     xshm_get_image_succeeded_ =
         XShmGetImage(display_, window_, x_shm_image_, 0, 0, AllPlanes);
