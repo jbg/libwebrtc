@@ -447,7 +447,7 @@ class VideoStreamEncoderUnderTest : public VideoStreamEncoder {
       fake_cpu_resource_->SetUsageState(ResourceUsageState::kOveruse);
       event.Set();
     });
-    ASSERT_TRUE(event.Wait(5000));
+    ASSERT_TRUE(event.Wait(TimeDelta::Seconds(5)));
     time_controller_->AdvanceTime(TimeDelta::Zero());
   }
 
@@ -457,7 +457,7 @@ class VideoStreamEncoderUnderTest : public VideoStreamEncoder {
       fake_cpu_resource_->SetUsageState(ResourceUsageState::kUnderuse);
       event.Set();
     });
-    ASSERT_TRUE(event.Wait(5000));
+    ASSERT_TRUE(event.Wait(TimeDelta::Seconds(5)));
     time_controller_->AdvanceTime(TimeDelta::Zero());
   }
 
@@ -468,7 +468,7 @@ class VideoStreamEncoderUnderTest : public VideoStreamEncoder {
       fake_quality_resource_->SetUsageState(ResourceUsageState::kOveruse);
       event.Set();
     });
-    ASSERT_TRUE(event.Wait(5000));
+    ASSERT_TRUE(event.Wait(TimeDelta::Seconds(5)));
     time_controller_->AdvanceTime(TimeDelta::Zero());
   }
   void TriggerQualityHigh() {
@@ -477,7 +477,7 @@ class VideoStreamEncoderUnderTest : public VideoStreamEncoder {
       fake_quality_resource_->SetUsageState(ResourceUsageState::kUnderuse);
       event.Set();
     });
-    ASSERT_TRUE(event.Wait(5000));
+    ASSERT_TRUE(event.Wait(TimeDelta::Seconds(5)));
     time_controller_->AdvanceTime(TimeDelta::Zero());
   }
 
@@ -821,7 +821,7 @@ class MockVideoSourceInterface : public rtc::VideoSourceInterface<VideoFrame> {
 
 class VideoStreamEncoderTest : public ::testing::Test {
  public:
-  static const int kDefaultTimeoutMs = 1000;
+  static constexpr TimeDelta kDefaultTimeout = TimeDelta::Seconds(1);
 
   VideoStreamEncoderTest()
       : video_send_config_(VideoSendStream::Config(nullptr)),
@@ -1371,7 +1371,7 @@ class VideoStreamEncoderTest : public ::testing::Test {
 
     void WaitForEncodedFrame(int64_t expected_ntp_time) {
       EXPECT_TRUE(
-          TimedWaitForEncodedFrame(expected_ntp_time, kDefaultTimeoutMs));
+          TimedWaitForEncodedFrame(expected_ntp_time, kDefaultTimeout.ms()));
     }
 
     bool TimedWaitForEncodedFrame(int64_t expected_ntp_time,
@@ -1389,7 +1389,7 @@ class VideoStreamEncoderTest : public ::testing::Test {
 
     void WaitForEncodedFrame(uint32_t expected_width,
                              uint32_t expected_height) {
-      EXPECT_TRUE(WaitForFrame(kDefaultTimeoutMs));
+      EXPECT_TRUE(WaitForFrame(kDefaultTimeout.ms()));
       CheckLastFrameSizeMatches(expected_width, expected_height);
     }
 
@@ -1625,7 +1625,7 @@ TEST_F(VideoStreamEncoderTest, EncodeOneFrame) {
   rtc::Event frame_destroyed_event;
   video_source_.IncomingCapturedFrame(CreateFrame(1, &frame_destroyed_event));
   WaitForEncodedFrame(1);
-  EXPECT_TRUE(frame_destroyed_event.Wait(kDefaultTimeoutMs));
+  EXPECT_TRUE(frame_destroyed_event.Wait(kDefaultTimeout));
   video_stream_encoder_->Stop();
 }
 
@@ -1639,7 +1639,7 @@ TEST_F(VideoStreamEncoderTest, DropsFramesBeforeFirstOnBitrateUpdated) {
   AdvanceTime(TimeDelta::Millis(10));
   video_source_.IncomingCapturedFrame(CreateFrame(2, nullptr));
   AdvanceTime(TimeDelta::Zero());
-  EXPECT_TRUE(frame_destroyed_event.Wait(kDefaultTimeoutMs));
+  EXPECT_TRUE(frame_destroyed_event.Wait(kDefaultTimeout));
 
   video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
       kTargetBitrate, kTargetBitrate, kTargetBitrate, 0, 0, 0);
@@ -1700,7 +1700,7 @@ TEST_F(VideoStreamEncoderTest, DropsFrameAfterStop) {
   sink_.SetExpectNoFrames();
   rtc::Event frame_destroyed_event;
   video_source_.IncomingCapturedFrame(CreateFrame(2, &frame_destroyed_event));
-  EXPECT_TRUE(frame_destroyed_event.Wait(kDefaultTimeoutMs));
+  EXPECT_TRUE(frame_destroyed_event.Wait(kDefaultTimeout));
 }
 
 TEST_F(VideoStreamEncoderTest, DropsPendingFramesOnSlowEncode) {
@@ -8165,7 +8165,7 @@ TEST_F(VideoStreamEncoderTest, QpPresent_QpKept) {
   CodecSpecificInfo codec_info;
   codec_info.codecType = kVideoCodecVP8;
   fake_encoder_.InjectEncodedImage(encoded_image, &codec_info);
-  EXPECT_TRUE(sink_.WaitForFrame(kDefaultTimeoutMs));
+  EXPECT_TRUE(sink_.WaitForFrame(kDefaultTimeout.ms()));
   EXPECT_EQ(sink_.GetLastEncodedImage().qp_, 123);
   video_stream_encoder_->Stop();
 }
@@ -8187,7 +8187,7 @@ TEST_F(VideoStreamEncoderTest, QpAbsent_QpParsed) {
   CodecSpecificInfo codec_info;
   codec_info.codecType = kVideoCodecVP8;
   fake_encoder_.InjectEncodedImage(encoded_image, &codec_info);
-  EXPECT_TRUE(sink_.WaitForFrame(kDefaultTimeoutMs));
+  EXPECT_TRUE(sink_.WaitForFrame(kDefaultTimeout.ms()));
   EXPECT_EQ(sink_.GetLastEncodedImage().qp_, 25);
   video_stream_encoder_->Stop();
 }
@@ -8210,7 +8210,7 @@ TEST_F(VideoStreamEncoderTest, QpAbsentParsingDisabled_QpAbsent) {
   CodecSpecificInfo codec_info;
   codec_info.codecType = kVideoCodecVP8;
   fake_encoder_.InjectEncodedImage(encoded_image, &codec_info);
-  EXPECT_TRUE(sink_.WaitForFrame(kDefaultTimeoutMs));
+  EXPECT_TRUE(sink_.WaitForFrame(kDefaultTimeout.ms()));
   EXPECT_EQ(sink_.GetLastEncodedImage().qp_, -1);
   video_stream_encoder_->Stop();
 }
@@ -8619,7 +8619,7 @@ TEST_F(VideoStreamEncoderTest,
 
   // Frame should be dropped and destroyed.
   ExpectDroppedFrame();
-  EXPECT_TRUE(frame_destroyed_event.Wait(kDefaultTimeoutMs));
+  EXPECT_TRUE(frame_destroyed_event.Wait(kDefaultTimeout));
   EXPECT_EQ(video_source_.refresh_frames_requested_, 0);
 
   // Set bitrates, unpausing the encoder and triggering a request for a refresh

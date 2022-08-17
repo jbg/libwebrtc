@@ -24,7 +24,8 @@ class EventWrapperImpl : public EventWrapper {
   }
 
   EventTypeWrapper Wait(int max_time_ms) override {
-    return event_.Wait(max_time_ms) ? kEventSignaled : kEventTimeout;
+    return event_.Wait(TimeDelta::Millis(max_time_ms)) ? kEventSignaled
+                                                       : kEventTimeout;
   }
 
  private:
