@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1e587a8_178d0f91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-08-17T22:07:23Z",
+      "side": 1,
+      "message": "I fixed a mistake in the last patchset so this should be ready for review again Sergey. I think you can ignore the ios try-bot failures as they appear to be infra related.",
+      "revId": "087ed4e4e551a607dd44d26c11b3e9e39fe7e79c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
