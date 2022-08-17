@@ -910,11 +910,8 @@ TEST_P(PeerConnectionRtpTest, LegacyObserverOnSuccess) {
       callee->SetRemoteDescription(caller->CreateOfferAndSetAsLocal(), &error));
 }
 
-// Verifies legacy behavior: The observer is not called if if the peer
-// connection is destroyed because the asynchronous callback is executed in the
-// peer connection's message handler.
 TEST_P(PeerConnectionRtpTest,
-       LegacyObserverNotCalledIfPeerConnectionDereferenced) {
+       LegacyObserverIsCalledIfPeerConnectionDereferenced) {
   auto caller = CreatePeerConnection();
   auto callee = CreatePeerConnection();
 
@@ -924,8 +921,8 @@ TEST_P(PeerConnectionRtpTest,
   auto offer = caller->CreateOfferAndSetAsLocal();
   callee->pc()->SetRemoteDescription(observer.get(), offer.release());
   callee = nullptr;
-  rtc::Thread::Current()->ProcessMessages(0);
-  EXPECT_FALSE(observer->called());
+
+  EXPECT_TRUE_WAIT(observer->called(), 10'000);
 }
 
 // RtpTransceiver Tests.
