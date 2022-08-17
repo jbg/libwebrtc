@@ -81,7 +81,7 @@ TEST(PlatformThreadTest, JoinsThread) {
   // This test flakes if there are problems with the join implementation.
   rtc::Event event;
   PlatformThread::SpawnJoinable([&] { event.Set(); }, "T");
-  EXPECT_TRUE(event.Wait(/*give_up_after_ms=*/0));
+  EXPECT_TRUE(event.Wait(/*give_up_after=*/webrtc::TimeDelta::Zero()));
 }
 
 TEST(PlatformThreadTest, StopsBeforeDetachedThreadExits) {

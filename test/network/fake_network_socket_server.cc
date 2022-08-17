@@ -18,6 +18,7 @@
 #include "absl/algorithm/container.h"
 #include "api/scoped_refptr.h"
 #include "api/task_queue/pending_task_safety_flag.h"
+#include "rtc_base/event.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/thread.h"
 
@@ -306,7 +307,9 @@ void FakeNetworkSocketServer::SetMessageQueue(rtc::Thread* thread) {
 bool FakeNetworkSocketServer::Wait(int cms, bool process_io) {
   RTC_DCHECK(thread_ == rtc::Thread::Current());
   if (cms != 0)
-    wakeup_.Wait(cms);
+    // TODO(bugs.webrtc.org/14366): Migrate to TimeDelta.
+    wakeup_.Wait(cms == kForever ? TimeDelta::PlusInfinity()
+                                 : TimeDelta::Millis(cms));
   return true;
 }
 
