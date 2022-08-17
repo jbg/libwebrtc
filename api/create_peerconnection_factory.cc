@@ -41,18 +41,19 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
     AudioFrameProcessor* audio_frame_processor,
     std::unique_ptr<FieldTrialsView> field_trials) {
   PeerConnectionFactoryDependencies dependencies;
-  dependencies.network_thread = network_thread;
-  dependencies.worker_thread = worker_thread;
-  dependencies.signaling_thread = signaling_thread;
-  dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
-  dependencies.call_factory = CreateCallFactory();
-  dependencies.event_log_factory = std::make_unique<RtcEventLogFactory>(
-      dependencies.task_queue_factory.get());
   if (field_trials) {
     dependencies.trials = std::move(field_trials);
   } else {
     dependencies.trials = std::make_unique<webrtc::FieldTrialBasedConfig>();
   }
+  dependencies.network_thread = network_thread;
+  dependencies.worker_thread = worker_thread;
+  dependencies.signaling_thread = signaling_thread;
+  dependencies.task_queue_factory =
+      CreateDefaultTaskQueueFactory(dependencies.trials.get());
+  dependencies.call_factory = CreateCallFactory();
+  dependencies.event_log_factory = std::make_unique<RtcEventLogFactory>(
+      dependencies.task_queue_factory.get());
 
   if (network_thread) {
     // TODO(bugs.webrtc.org/13145): Add an rtc::SocketFactory* argument.
