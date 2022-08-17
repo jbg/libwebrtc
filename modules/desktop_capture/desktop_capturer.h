@@ -58,6 +58,25 @@ class RTC_EXPORT DesktopCapturer {
     virtual void OnCaptureResult(Result result,
                                  std::unique_ptr<DesktopFrame> frame) = 0;
 
+    // The following methods are used by capturers that use a delegated source
+    // list (see the UsesDelegatedSourceList method for full details). These
+    // notifications can be used to help drive any UI that the embedder may
+    // want to show around this source list.
+
+    // Called after the user has made a selection in the delegated source list.
+    // Note that the consumer will still need to get the source out of the
+    // capturer by calling GetSourceList.
+    virtual void OnDelegatedSourceListSelection() {}
+
+    // Called if the user dismisses the delegated source list without making a
+    // selection.
+    virtual void OnDelegatedSourceListCancelled() {}
+
+    // Called if the delegated source list is dismissed without a selection,
+    // this could indicate either a rejection by the user, or an error that
+    // occurred causing the dialog to be dismissed by the system.
+    virtual void OnDelegatedSourceListError() {}
+
    protected:
     virtual ~Callback() {}
   };
@@ -88,6 +107,15 @@ class RTC_EXPORT DesktopCapturer {
   // valid until capturer is destroyed.
   virtual void Start(Callback* callback) = 0;
 
+  // Returns true if the capturer handles (often requires) displaying it's
+  // own source list and requires the user to make their selection there.
+  // Returns false if the capturer does not provide a UI for the user to make
+  // a selection.
+  // Note that consumers should still use GetSourceList and SelectSource, but
+  // their behavior may be modified, if this returns true. See those methods for
+  // a more in-depth discussion of those potential modifications.
+  virtual bool UsesDelegatedSourceList() const;
+
   // Sets SharedMemoryFactory that will be used to create buffers for the
   // captured frames. The factory can be invoked on a thread other than the one
   // where CaptureFrame() is called. It will be destroyed on the same thread.
@@ -116,10 +144,19 @@ class RTC_EXPORT DesktopCapturer {
   // should return monitors.
   // For DesktopCapturer implementations to capture windows, this function
   // should only return root windows owned by applications.
+  // Note that capturers who use a delegated source list will return a
+  // SourceList with exactly one value, but it is largely a dummy/placeholder
+  // value, and may not be viable for capture until the consumer has been
+  // notified via Callback::OnDelegatedSourceListSelection (e.g. it may not have
+  // a preview or be a valid SourceID that can be passed to another instance of
+  // this capturer.
   virtual bool GetSourceList(SourceList* sources);
 
   // Selects a source to be captured. Returns false in case of a failure (e.g.
   // if there is no source with the specified type and id.)
+  // Note that some capturers with delegated source lists may also support
+  // selecting a SourceID that is not in the returned source list as a form of
+  // restore token.
   virtual bool SelectSource(SourceId id);
 
   // Brings the selected source to the front and sets the input focus on it.

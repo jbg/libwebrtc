@@ -36,6 +36,7 @@ class BaseCapturerPipeWire : public DesktopCapturer,
 
   // DesktopCapturer interface.
   void Start(Callback* delegate) override;
+  bool UsesDelegatedSourceList() const override;
   void CaptureFrame() override;
   bool GetSourceList(SourceList* sources) override;
   bool SelectSource(SourceId id) override;

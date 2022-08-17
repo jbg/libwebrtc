@@ -29,6 +29,10 @@ namespace webrtc {
 
 DesktopCapturer::~DesktopCapturer() = default;
 
+bool DesktopCapturer::UsesDelegatedSourceList() const {
+  return false;
+}
+
 void DesktopCapturer::SetSharedMemoryFactory(
     std::unique_ptr<SharedMemoryFactory> shared_memory_factory) {}
 
