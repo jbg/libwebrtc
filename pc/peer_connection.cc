@@ -86,10 +86,10 @@ namespace webrtc {
 namespace {
 
 // UMA metric names.
-const char kSimulcastNumberOfEncodings[] =
+constexpr char kSimulcastNumberOfEncodings[] =
     "WebRTC.PeerConnection.Simulcast.NumberOfSendEncodings";
 
-static const int REPORT_USAGE_PATTERN_DELAY_MS = 60000;
+constexpr TimeDelta kReportUsagePatternDelay = TimeDelta::Minutes(1);
 
 uint32_t ConvertIceTransportTypeToCandidateFilter(
     PeerConnectionInterface::IceTransportsType type) {
@@ -523,7 +523,6 @@ PeerConnection::PeerConnection(
       session_id_(rtc::ToString(rtc::CreateRandomId64() & LLONG_MAX)),
       dtls_enabled_(dtls_enabled),
       data_channel_controller_(this),
-      message_handler_(signaling_thread()),
       weak_factory_(this) {
   worker_thread()->Invoke<void>(RTC_FROM_HERE, [this] {
     RTC_DCHECK_RUN_ON(worker_thread());
@@ -659,15 +658,19 @@ RTCError PeerConnection::Initialize(
                                     cricket::MEDIA_TYPE_VIDEO, context())));
   }
 
-  int delay_ms = configuration.report_usage_pattern_delay_ms
-                     ? *configuration.report_usage_pattern_delay_ms
-                     : REPORT_USAGE_PATTERN_DELAY_MS;
-  message_handler_.RequestUsagePatternReport(
-      [this]() {
-        RTC_DCHECK_RUN_ON(signaling_thread());
-        ReportUsagePattern();
+  TimeDelta delay =
+      configuration.report_usage_pattern_delay_ms
+          ? TimeDelta::Millis(*configuration.report_usage_pattern_delay_ms)
+          : kReportUsagePatternDelay;
+  rtc::WeakPtr<PeerConnection> ptr = weak_factory_.GetWeakPtr();
+  signaling_thread()->PostDelayedTask(
+      [ptr = std::move(ptr)] {
+        if (ptr) {
+          RTC_DCHECK_RUN_ON(ptr->signaling_thread());
+          ptr->ReportUsagePattern();
+        }
       },
-      delay_ms);
+      delay);
 
   // Record the number of configured ICE servers for all connections.
   RTC_HISTOGRAM_COUNTS_LINEAR("WebRTC.PeerConnection.IceServers.Configured",
@@ -1228,7 +1231,19 @@ bool PeerConnection::GetStats(StatsObserver* observer,
                         << track->id();
     return false;
   }
-  message_handler_.PostGetStats(observer, legacy_stats_.get(), track);
+  rtc::scoped_refptr<StatsObserver> wrap_observer(observer);
+  rtc::scoped_refptr<MediaStreamTrackInterface> wrap_track(track);
+  rtc::WeakPtr<PeerConnection> ptr = weak_factory_.GetWeakPtr();
+  signaling_thread()->PostTask([wrap_observer = std::move(wrap_observer),
+                                wrap_track = std::move(wrap_track),
+                                ptr = std::move(ptr)] {
+    if (ptr) {
+      RTC_DCHECK_RUN_ON(ptr->signaling_thread());
+      StatsReports reports;
+      ptr->legacy_stats_->GetStats(wrap_track.get(), &reports);
+      wrap_observer->OnComplete(reports);
+    }
+  });
 
   return true;
 }
@@ -2997,12 +3012,13 @@ bool PeerConnection::ShouldFireNegotiationNeededEvent(uint32_t event_id) {
 
 void PeerConnection::RequestUsagePatternReportForTesting() {
   RTC_DCHECK_RUN_ON(signaling_thread());
-  message_handler_.RequestUsagePatternReport(
-      [this]() {
-        RTC_DCHECK_RUN_ON(signaling_thread());
-        ReportUsagePattern();
-      },
-      /* delay_ms= */ 0);
+  rtc::WeakPtr<PeerConnection> ptr = weak_factory_.GetWeakPtr();
+  signaling_thread()->PostTask([ptr = std::move(ptr)] {
+    if (ptr) {
+      RTC_DCHECK_RUN_ON(ptr->signaling_thread());
+      ptr->ReportUsagePattern();
+    }
+  });
 }
 
 std::function<void(const rtc::CopyOnWriteBuffer& packet,
