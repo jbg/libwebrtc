@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '73d2f8e6537ecbbd7941e74c9b0d8ded1cfc0cf8',
+  'chromium_revision': '46058e4dd5c5796d1fad7aaaa8472f01592030c1',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -41,9 +41,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@3fc01b97a5c8a23b45f04b36f13e0ff71f5842ee',
+    'https://chromium.googlesource.com/chromium/src/testing@40bc3a16b5d255765eb7d2efcf76b010ec9a0ced',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@8fe2ec3d37b0137de530382aee0076b0465c8e78',
+    'https://chromium.googlesource.com/chromium/src/third_party@8d1b82e768cb30df0119e3eb9994a921f7fc5de8',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -79,7 +79,7 @@ deps = {
   'src/buildtools/clang_format/script':
     'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/clang/tools/clang-format.git@8b525d2747f2584fc35d8c7e612e66f377858df7',
   'src/buildtools/third_party/libc++/trunk':
-    'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git@5df82514bc009b7fa3d4964ee1fdaf975646d44c',
+    'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git@9de2fe0403752ea1ad2c6b21a79032ad87cdc404',
   'src/buildtools/third_party/libc++abi/trunk':
     'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git@039323b945911a54cb7400da8fb14fcbb0348e97',
   'src/buildtools/third_party/libunwind/trunk':
@@ -266,7 +266,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@bd2eea65dc8f9ed751a8c589a05a2eeee7330d83',
+    'https://chromium.googlesource.com/chromium/src/tools@121834087f8e046779dd2fcc9b8c1ce43f95ac36',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
