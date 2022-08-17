@@ -16,6 +16,29 @@
       "message": "Adding Sergey to review as they were the original author and Alex to review as the current OWNER.\n\nPTAL!",
       "revId": "61808355460ef4eaf3c7f9f369cd180e3209a722",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9765bec_d76dc679",
+        "filename": "modules/desktop_capture/linux/x11/x_error_trap.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6232
+      },
+      "writtenOn": "2022-08-17T18:18:43Z",
+      "side": 1,
+      "message": "Xlib has one error handler that\u0027s shared between all threads. In theory this error handler may be called on another thread (which uses different Display). This code doesn\u0027t handle that case currently. I think the best we can do in that case is to log the error (similar to how it\u0027s done in the default handler, see https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/x/xlib_support.cc;drc\u003d36c59c53be1d8852f5087008c45a95797bac9730;l\u003d18 ).",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 23
+      },
+      "revId": "61808355460ef4eaf3c7f9f369cd180e3209a722",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
