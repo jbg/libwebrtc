@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "093bfc10_859215b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-17T20:17:44Z",
+      "side": 1,
+      "message": "the CQ issue is https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d14379, https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1353718.",
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
