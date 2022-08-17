@@ -16,6 +16,23 @@
       "message": "This has been tested on MacOS, Linux, and Windows and results in a noticeable performance improvement when encoding without hardware acceleration.\n\nRelated Issues:\n\nhttps://bugs.chromium.org/p/chromium/issues/detail?id\u003d583348\nhttps://bugs.chromium.org/p/webrtc/issues/detail?id\u003d14368\n",
       "revId": "80d802c592a49bfb4e762e0fafa2526e4f6fe5e3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f0feb61_a4bba043",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-08-17T12:09:42Z",
+      "side": 1,
+      "message": "looks good, but I was never really involved in that bug investigation.\n+ssilkin@ you know openh264 much better than me, could you have a look?",
+      "revId": "80d802c592a49bfb4e762e0fafa2526e4f6fe5e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
