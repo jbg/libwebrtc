@@ -18,36 +18,39 @@ namespace webrtc {
 
 namespace {
 
-// TODO(sergeyu): This code is not thread safe. Fix it. Bug 2202.
-static bool g_xserver_error_trap_enabled = false;
 static int g_last_xserver_error_code = 0;
+static Display* g_display_for_error_handler = nullptr;
+
+Mutex* AcquireMutex() {
+  static Mutex* mutex = new Mutex();
+  return mutex;
+}
 
 int XServerErrorHandler(Display* display, XErrorEvent* error_event) {
-  RTC_DCHECK(g_xserver_error_trap_enabled);
+  RTC_DCHECK_EQ(g_display_for_error_handler, display);
   g_last_xserver_error_code = error_event->error_code;
   return 0;
 }
 
 }  // namespace
 
-XErrorTrap::XErrorTrap(Display* display)
-    : original_error_handler_(NULL), enabled_(true) {
-  RTC_DCHECK(!g_xserver_error_trap_enabled);
-  original_error_handler_ = XSetErrorHandler(&XServerErrorHandler);
-  g_xserver_error_trap_enabled = true;
+XErrorTrap::XErrorTrap(Display* display) : mutex_lock_(AcquireMutex()) {
+  // We don't expect this class to be used in a nested fashion so therefore
+  // g_display_for_error_handler should never be valid here.
+  RTC_DCHECK(!g_display_for_error_handler);
+  g_display_for_error_handler = display;
   g_last_xserver_error_code = 0;
+  original_error_handler_ = XSetErrorHandler(&XServerErrorHandler);
 }
 
 int XErrorTrap::GetLastErrorAndDisable() {
-  enabled_ = false;
-  RTC_DCHECK(g_xserver_error_trap_enabled);
+  g_display_for_error_handler = nullptr;
   XSetErrorHandler(original_error_handler_);
-  g_xserver_error_trap_enabled = false;
   return g_last_xserver_error_code;
 }
 
 XErrorTrap::~XErrorTrap() {
-  if (enabled_)
+  if (g_display_for_error_handler)
     GetLastErrorAndDisable();
 }
 

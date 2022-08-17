@@ -134,7 +134,7 @@ bool GetWindowList(XAtomCache* cache,
     ::Window* children;
     unsigned int num_children;
     {
-      XErrorTrap error_trap(display);
+      XErrorTrap error_trap(display());
       if (XQueryTree(display, root_window, &root_window, &parent, &children,
                      &num_children) == 0 ||
           error_trap.GetLastErrorAndDisable() != 0) {
@@ -174,7 +174,7 @@ bool GetWindowRect(::Display* display,
   }
 
   {
-    XErrorTrap error_trap(display);
+    XErrorTrap error_trap(display());
     if (!XGetWindowAttributes(display, window, attributes) ||
         error_trap.GetLastErrorAndDisable() != 0) {
       return false;
@@ -183,7 +183,7 @@ bool GetWindowRect(::Display* display,
   *rect = DesktopRectFromXAttributes(*attributes);
 
   {
-    XErrorTrap error_trap(display);
+    XErrorTrap error_trap(display());
     ::Window child;
     if (!XTranslateCoordinates(display, window, attributes->root, -rect->left(),
                                -rect->top(), &offset_x, &offset_y, &child) ||
