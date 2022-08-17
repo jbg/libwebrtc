@@ -55,9 +55,10 @@ void Event::Reset() {
 bool Event::Wait(webrtc::TimeDelta give_up_after,
                  webrtc::TimeDelta /*warn_after*/) {
   ScopedYieldPolicy::YieldExecution();
-  const DWORD ms = give_up_after.IsPlusInfinity()
-                       ? INFINITE
-                       : give_up_after.RoundUpTo(webrtc::TimeDelta::Millis(1));
+  const DWORD ms =
+      give_up_after.IsPlusInfinity()
+          ? INFINITE
+          : give_up_after.RoundUpTo(webrtc::TimeDelta::Millis(1)).ms();
   return (WaitForSingleObject(event_handle_, ms) == WAIT_OBJECT_0);
 }
 

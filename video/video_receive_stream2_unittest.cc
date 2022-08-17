@@ -520,7 +520,7 @@ TEST_P(VideoReceiveStream2Test, LazyDecoderCreation) {
   EXPECT_CALL(mock_decoder_, Release());
 
   // Make sure the decoder thread had a chance to run.
-  init_decode_event.Wait(kDefaultTimeOut.ms());
+  init_decode_event.Wait(kDefaultTimeOut);
 }
 
 TEST_P(VideoReceiveStream2Test, PassesNtpTime) {
