@@ -20,6 +20,7 @@
 #include <xf86drm.h>
 
 #include "absl/memory/memory.h"
+#include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
@@ -45,7 +46,7 @@ typedef EGLImageKHR (*eglCreateImageKHR_func)(EGLDisplay dpy,
 typedef EGLBoolean (*eglDestroyImageKHR_func)(EGLDisplay dpy,
                                               EGLImageKHR image);
 typedef EGLint (*eglGetError_func)(void);
-typedef void* (*eglGetProcAddress_func)(const char*);
+typedef void* (*eglGetProcAddress_func)(absl::string_view);
 typedef EGLDisplay (*eglGetPlatformDisplayEXT_func)(EGLenum platform,
                                                     void* native_display,
                                                     const EGLint* attrib_list);
@@ -107,7 +108,7 @@ typedef void (*glGetTexImage_func)(GLenum target,
                                    GLenum type,
                                    void* pixels);
 typedef void (*glTexParameteri_func)(GLenum target, GLenum pname, GLint param);
-typedef void* (*glXGetProcAddressARB_func)(const char*);
+typedef void* (*glXGetProcAddressARB_func)(absl::string_view);
 
 // This doesn't follow naming conventions in WebRTC, where the naming
 // should look like e.g. egl_bind_api instead of EglBindAPI, however
