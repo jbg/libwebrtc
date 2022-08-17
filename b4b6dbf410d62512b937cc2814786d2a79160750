@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9f4e206_8b457bec",
+        "filename": "modules/desktop_capture/linux/wayland/egl_dmabuf.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-17T19:55:04Z",
+      "side": 1,
+      "message": "Ah, yes. Good catch. I have a clang script which is sometimes a little too aggressive. This one slipped through.",
+      "parentUuid": "9a1a8008_b30f8ebb",
+      "range": {
+        "startLine": 49,
+        "startChar": 40,
+        "endLine": 49,
+        "endChar": 57
+      },
+      "revId": "b4b6dbf410d62512b937cc2814786d2a79160750",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67fc9901_58754fdb",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-17T19:24:54Z",
       "side": 1,
       "message": "Same question as above? Or does this matter?",
+      "range": {
+        "startLine": 111,
+        "startChar": 43,
+        "endLine": 111,
+        "endChar": 60
+      },
+      "revId": "b4b6dbf410d62512b937cc2814786d2a79160750",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4caba31_d8d99934",
+        "filename": "modules/desktop_capture/linux/wayland/egl_dmabuf.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-17T19:55:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67fc9901_58754fdb",
       "range": {
         "startLine": 111,
         "startChar": 43,
@@ -87,6 +135,53 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "187aa481_ad611880",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-17T19:55:04Z",
+      "side": 1,
+      "message": "This should not induce a behavior change if these functions are being called correctly at the moment. Otherwise, we may have a security risk on our hands, no?\n\nBut given that the function signature is changing, the function should no longer assume the the string_view is null-terminated. The use of string_view indicates that null termination is not required. Hence we have to convert to string (these conversions at call sites to external APIs are common when adopting absl::string_view).",
+      "parentUuid": "cc3127a4_3c02285b",
+      "range": {
+        "startLine": 47,
+        "startChar": 18,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "b4b6dbf410d62512b937cc2814786d2a79160750",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb879f38_663ab5f0",
+        "filename": "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-17T19:55:04Z",
+      "side": 1,
+      "message": "SessionRequestResponseSignalCallback is actually not being used anywhere. So removing.",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 42
+      },
+      "revId": "b4b6dbf410d62512b937cc2814786d2a79160750",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92426b75_63e0f937",
@@ -100,6 +195,24 @@
       "writtenOn": "2022-08-17T19:24:54Z",
       "side": 1,
       "message": "I think this newline should be removed?",
+      "revId": "b4b6dbf410d62512b937cc2814786d2a79160750",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50846a04_598dd6d8",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-17T19:55:04Z",
+      "side": 1,
+      "message": "git cl format insists on this. I checked the style guide, which says \"C system headers (more precisely: headers in angle brackets with the .h extension)\" should appear in their own group separated by blank lines.",
+      "parentUuid": "92426b75_63e0f937",
       "revId": "b4b6dbf410d62512b937cc2814786d2a79160750",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
