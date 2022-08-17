@@ -50,33 +50,13 @@ class Event {
   bool Wait(webrtc::TimeDelta give_up_after, webrtc::TimeDelta warn_after);
 
   // Waits with the given timeout and a reasonable default warning timeout.
-  // TODO(bugs.webrtc.org/14366): De-template this after millisec-based Wait is
-  // removed.
-  template <class T>
-  bool Wait(T give_up_after) {
-    webrtc::TimeDelta duration = ToTimeDelta(give_up_after);
-    return Wait(duration, duration.IsPlusInfinity()
-                              ? webrtc::TimeDelta::Seconds(3)
-                              : kForever);
-  }
-
-  // TODO(bugs.webrtc.org/14366): Remove after millisec-based Wait is removed.
-  // Compatibility wrapper for call sites that use both kForever and millisecond
-  // wait
-  template <class T, class U>
-  bool Wait(T give_up_after, U warn_after) {
-    return Wait(ToTimeDelta(give_up_after), ToTimeDelta(warn_after));
+  bool Wait(webrtc::TimeDelta give_up_after) {
+    return Wait(give_up_after, give_up_after.IsPlusInfinity()
+                                   ? webrtc::TimeDelta::Seconds(3)
+                                   : kForever);
   }
 
  private:
-  // TODO(bugs.webrtc.org/14366): Remove after millisec-based Wait is removed.
-  static webrtc::TimeDelta ToTimeDelta(int duration) {
-    return webrtc::TimeDelta::Millis(duration);
-  }
-  static webrtc::TimeDelta ToTimeDelta(webrtc::TimeDelta duration) {
-    return duration;
-  }
-
 #if defined(WEBRTC_WIN)
   HANDLE event_handle_;
 #elif defined(WEBRTC_POSIX)
