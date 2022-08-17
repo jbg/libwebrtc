@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4701a21d_bc76c0c4",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-17T19:49:01Z",
+      "side": 1,
+      "message": "Yes they will. Done.",
+      "parentUuid": "cccc65ba_50960aaf",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a00369dc_f4432a19",
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebdb32bb_ee28c4d0",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-17T19:49:01Z",
+      "side": 1,
+      "message": "A user choice to dismiss versus either a rejection or an error. I intended the next two lines to clarify this, but if you have a better proposal for the comment I\u0027ll happily change it.",
+      "parentUuid": "a00369dc_f4432a19",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66c7a6a8_57ef8978",
         "filename": "modules/desktop_capture/desktop_capturer.h",
         "patchSetId": 2
@@ -82,6 +118,24 @@
       "writtenOn": "2022-08-16T22:37:02Z",
       "side": 1,
       "message": "I wonder if the client would want more details on the error that occurred, although then we would have to come up with some capturer-specific mapping to a generic error enum.  Or pass through an integer error code that comes from the implementation.\n\nThe reason I ask is that even if Chrome doesn\u0027t use it now, adding the error value later would be a breaking change.",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3b13152_54a52a22",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-17T19:49:01Z",
+      "side": 1,
+      "message": "Spoke offline that it would likely make more sense to expand DesktopCapturer if we truly need this in the future. Most logging can/should probably be done internally to the capturer. Consumers don\u0027t necessarily care *what* went wrong, they just need to surface to the user that something did.",
+      "parentUuid": "66c7a6a8_57ef8978",
       "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -105,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4706c33f_c92e3b5a",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-17T19:49:01Z",
+      "side": 1,
+      "message": "Thinking a little about our discussion yesterday; and the fact that I\u0027ll likely be adding an Ensure/Hide DelegatedSourceList method; I\u0027m thinking of maybe converting this method to something like:\n\n`virtual DelegatedSourceListController* GetDelegatedSourceListController() const;`\n\nCapturers that do not support/have a delegated source list will return nullptr; while others will return the controller which may keep the interface a bit cleaner.\nI *could* move the methods down to an observer there that would need to be separately registered, or leave alone.\n\nThoughts before I go forward with that implementation?",
+      "parentUuid": "8c72f2a9_3ffc6f8d",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c9b1758_8783a48a",
         "filename": "modules/desktop_capture/desktop_capturer.h",
         "patchSetId": 2
@@ -116,6 +188,24 @@
       "writtenOn": "2022-08-16T22:37:02Z",
       "side": 1,
       "message": "Nit: Add a paragraph break before \"Note\"",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5f3ae70_e2403ecb",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-17T19:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c9b1758_8783a48a",
       "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -133,6 +223,24 @@
       "writtenOn": "2022-08-16T22:37:02Z",
       "side": 1,
       "message": "Nit: I might move the comment about the non-empty SourceList to the documentation for GetSourceList(), and the comment about source IDs to the documentation for SelectSource().\n\nHere you could just mention that delegated source lists also change the behavior of those methods and to look there for more details.",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa687c79_fc761e3c",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-17T19:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6188ddf_3da24c3c",
       "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
