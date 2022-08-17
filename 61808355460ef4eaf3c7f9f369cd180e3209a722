@@ -39,6 +39,30 @@
       },
       "revId": "61808355460ef4eaf3c7f9f369cd180e3209a722",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b55392e_0e6dd199",
+        "filename": "modules/desktop_capture/linux/x11/x_error_trap.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-08-17T19:30:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9765bec_d76dc679",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 23
+      },
+      "revId": "61808355460ef4eaf3c7f9f369cd180e3209a722",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
