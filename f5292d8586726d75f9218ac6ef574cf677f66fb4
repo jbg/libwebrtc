@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c4289e8_36ea104a",
+        "filename": "sdk/objc/unittests/scoped_cftyperef_tests.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-18T21:58:16Z",
+      "side": 1,
+      "message": "There is an error in testShouldBeTestableForTruthiness. Now everything will be fine.",
+      "revId": "f5292d8586726d75f9218ac6ef574cf677f66fb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
