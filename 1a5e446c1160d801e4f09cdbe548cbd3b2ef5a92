@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffca8257_120a296d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-18T08:02:13Z",
+      "side": 1,
+      "message": "LGTM but I defer final approval to Kari.",
+      "revId": "1a5e446c1160d801e4f09cdbe548cbd3b2ef5a92",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
