@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c693e21_a9aa7822",
+        "filename": "modules/desktop_capture/linux/x11/x_error_trap.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6232
+      },
+      "writtenOn": "2022-08-18T18:04:09Z",
+      "side": 1,
+      "message": "This may be accessed from different threads. Use std::atomic?",
+      "range": {
+        "startLine": 22,
+        "startChar": 16,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "383d42de9e797c5a4d3f5135cb2e8d42654e0a3a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
