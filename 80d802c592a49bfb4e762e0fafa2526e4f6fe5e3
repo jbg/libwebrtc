@@ -73,6 +73,30 @@
       },
       "revId": "80d802c592a49bfb4e762e0fafa2526e4f6fe5e3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e3c92aa_d8216a19",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 19624
+      },
+      "writtenOn": "2022-08-18T11:40:13Z",
+      "side": 1,
+      "message": "I believe that you are correct. I was attempting to clarify the existing TODO, but misinterpreted it as referring to spatial encoding.\n\nI\u0027ve removed that statement since it isn\u0027t correct.",
+      "parentUuid": "9e3cbff6_fd66908b",
+      "range": {
+        "startLine": 58,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 57
+      },
+      "revId": "80d802c592a49bfb4e762e0fafa2526e4f6fe5e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

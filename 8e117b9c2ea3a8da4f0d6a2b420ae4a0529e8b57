@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a10e8324_d16ade26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19624
+      },
+      "writtenOn": "2022-08-18T11:40:13Z",
+      "side": 1,
+      "message": "I\u0027ve removed an unnecessary comment as requested.",
+      "revId": "8e117b9c2ea3a8da4f0d6a2b420ae4a0529e8b57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
