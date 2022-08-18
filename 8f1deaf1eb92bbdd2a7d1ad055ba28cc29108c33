@@ -16,6 +16,213 @@
       "message": "the CQ issue is https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d14379, https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1353718.",
       "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2688a38c_6f700507",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T08:42:42Z",
+      "side": 1,
+      "message": "this type is used a lot in the file, may be add alias for it:\n\nnamespace rtc {\n\nusing ::webrtc::TimeDelta;\n\nEvent::Event() ...",
+      "range": {
+        "startLine": 55,
+        "startChar": 17,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de53bbd5_de742192",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T08:42:42Z",
+      "side": 1,
+      "message": "personally I would find constant 1\u0027000\u0027000\u0027000 easier to read. (and that would also avoid extra dependency on time_utils.h), but won\u0027t insist.\n\n(1000000000 without thousand separators is ofc hard to read and deserves updating)",
+      "range": {
+        "startLine": 136,
+        "startChar": 20,
+        "endLine": 136,
+        "endChar": 38
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "febdd6b5_475bfbd3",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T08:42:42Z",
+      "side": 1,
+      "message": "this condition is redundant:\nif !warn_after.IsPlusInfinity() \u0026\u0026 give_up_after.IsPlusInfinity(), then\n`warn_after \u003e give_up_after` is false\n\noverall this expression can be simplified:\n`warn_ts \u003d warn_after \u003e\u003d give_up ? absl::nullopt : absl::make_optional(...);`\nThat produce slightly different result when `warn_after \u003d\u003d give_up \u0026\u0026 warn_after.IsFinite()`, but that shouldn\u0027t have practical difference because code below ways on give_up_ts first..",
+      "range": {
+        "startLine": 153,
+        "startChar": 15,
+        "endLine": 153,
+        "endChar": 49
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb445235_1a45c81a",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T08:42:42Z",
+      "side": 1,
+      "message": "might be more natural to change GetTimespec to return optional\u003ctimespec\u003e\nand move IsPlusInfinity() into it.\n\nbut that is not directly related to the main topic of this change.",
+      "range": {
+        "startLine": 160,
+        "startChar": 6,
+        "endLine": 162,
+        "endChar": 60
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50893e4f_88fbe8d1",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T08:42:42Z",
+      "side": 1,
+      "message": "long term, do you plan to keep kForever constant,\nor let users pass in PlusInfinity() directly?",
+      "range": {
+        "startLine": 27,
+        "startChar": 37,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c37328d_95031611",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T08:42:42Z",
+      "side": 1,
+      "message": "drop `milliseconds`",
+      "range": {
+        "startLine": 41,
+        "startChar": 21,
+        "endLine": 41,
+        "endChar": 33
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "917eb5a0_fe19c555",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T08:42:42Z",
+      "side": 1,
+      "message": "personal unimportant preference: I prefer to use keyword \u0027typename\u0027 here specially because T might be \u0027int\u0027 which is a type, but not a class.",
+      "range": {
+        "startLine": 66,
+        "startChar": 12,
+        "endLine": 66,
+        "endChar": 17
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e051899b_591a56fe",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T08:42:42Z",
+      "side": 1,
+      "message": "There are very few calls to this function: I found 4 including use in this file.\n\nIt might be simpler to update all of them rather than introduce template temporary hack.\n\nYou still need to do some magic to propagate such change into chromium, to change  interface in chromium and change webrtc call sites independently.\nBut you need such hack anyway (might be not that hacky - the only non-test usage of this function is in null_socket_server).\n\nMay be solve that chromium update issue first, then this change will be much simpler.\n\n(Side note - Wait with single parameter has lot\u0027s of usage, so some temporary solution for it seems reasonable, but Wait alone is simpler to solve with overload rather than templates)",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 42
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a5ad860_059d78f9",
+        "filename": "rtc_base/event_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T08:42:42Z",
+      "side": 1,
+      "message": "May be use a duration with non-integer millis, e.g.\nTimeDelta::Micros(10\u0027499)\n\nto verify such delta wouldn\u0027t wait just 10ms.",
+      "range": {
+        "startLine": 70,
+        "startChar": 61,
+        "endLine": 70,
+        "endChar": 71
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
