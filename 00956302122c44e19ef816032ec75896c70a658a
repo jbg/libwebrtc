@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a341f25f_c4c995c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-18T13:51:07Z",
+      "side": 1,
+      "message": "This will now how to wait for https://chromium-review.googlesource.com/c/chromium/src/+/3833538 to land.",
+      "revId": "00956302122c44e19ef816032ec75896c70a658a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

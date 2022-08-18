@@ -205,6 +205,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92178426_91855ab0",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-18T13:51:07Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "5c257be1_2990ea5b",
+      "range": {
+        "startLine": 27,
+        "startChar": 37,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c37328d_95031611",
@@ -360,6 +384,30 @@
       "side": 1,
       "message": "discussed offline.\nMain benefit - less temporary code.\nI do not want you to block on this.",
       "parentUuid": "efbcf18a_e2ff7db4",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 42
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71077b78_8f494a92",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-18T13:51:07Z",
+      "side": 1,
+      "message": "We agreed offline that after https://chromium-review.googlesource.com/c/chromium/src/+/3833538 is landed, the template version is no longer needed.",
+      "parentUuid": "e3c06533_f4d33e3e",
       "range": {
         "startLine": 67,
         "startChar": 2,
