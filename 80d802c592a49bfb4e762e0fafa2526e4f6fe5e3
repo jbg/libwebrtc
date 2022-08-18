@@ -33,6 +33,46 @@
       "message": "looks good, but I was never really involved in that bug investigation.\n+ssilkin@ you know openh264 much better than me, could you have a look?",
       "revId": "80d802c592a49bfb4e762e0fafa2526e4f6fe5e3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ad6903b_6adbe7ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2022-08-18T08:40:37Z",
+      "side": 1,
+      "message": "Looks good. Just one note.",
+      "revId": "80d802c592a49bfb4e762e0fafa2526e4f6fe5e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e3cbff6_fd66908b",
+        "filename": "modules/video_coding/codecs/h264/h264_encoder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2022-08-18T08:40:37Z",
+      "side": 1,
+      "message": "How is it restricted to simulcast? OpenH264 encoder has slice level multithreading (judging from file name - https://source.chromium.org/chromium/chromium/src/+/main:third_party/openh264/src/codec/encoder/core/src/slice_multi_threading.cpp). I.e., the multithreading will be used in singlecast if encoder is requested to produce more than 1 slice.\n\nI would suggest removing this statement if it is not true (i.e., no need to actually restrict the multithreding to simulcast).",
+      "range": {
+        "startLine": 58,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 57
+      },
+      "revId": "80d802c592a49bfb4e762e0fafa2526e4f6fe5e3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
