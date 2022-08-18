@@ -15,9 +15,8 @@
 
 #import <XCTest/XCTest.h>
 
-#if TARGET_OS_IPHONE
-#import <AVFoundation/AVFoundation.h>
-#import <UIKit/UIKit.h>
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
 #endif
 
 @interface NaluRewriterTests : XCTestCase
@@ -372,3 +371,43 @@ static const uint8_t SPS_PPS_BUFFER[] = {
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class NaluRewriterTest : public XCTestToGTest<NaluRewriterTests> {
+ public:
+  NaluRewriterTest() = default;
+  ~NaluRewriterTest() override = default;
+};
+
+INVOKE_XCTEST(NaluRewriterTest, CreateVideoFormatDescription)
+
+INVOKE_XCTEST(NaluRewriterTest, ReadEmptyInput)
+
+INVOKE_XCTEST(NaluRewriterTest, ReadSingleNalu)
+
+INVOKE_XCTEST(NaluRewriterTest, ReadSingleNalu3ByteHeader)
+
+INVOKE_XCTEST(NaluRewriterTest, ReadMissingNalu)
+
+INVOKE_XCTEST(NaluRewriterTest, ReadMultipleNalus)
+
+INVOKE_XCTEST(NaluRewriterTest, EmptyOutputBuffer)
+
+INVOKE_XCTEST(NaluRewriterTest, WriteSingleNalu)
+
+INVOKE_XCTEST(NaluRewriterTest, WriteMultipleNalus)
+
+INVOKE_XCTEST(NaluRewriterTest, Overflow)
+
+INVOKE_XCTEST(NaluRewriterTest, H264AnnexBBufferToCMSampleBuffer)
+
+INVOKE_XCTEST(NaluRewriterTest, H264CMSampleBufferToAnnexBBuffer)
+
+INVOKE_XCTEST(NaluRewriterTest, H264CMSampleBufferToAnnexBBufferWithKeyframe)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

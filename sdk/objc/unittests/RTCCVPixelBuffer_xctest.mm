@@ -21,6 +21,10 @@
 #include "common_video/libyuv/include/webrtc_libyuv.h"
 #include "third_party/libyuv/include/libyuv.h"
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 @interface RTCCVPixelBufferTests : XCTestCase
 @end
 
@@ -306,3 +310,55 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCCVPixelBufferTest : public XCTestToGTest<RTCCVPixelBufferTests> {
+ public:
+  RTCCVPixelBufferTest() = default;
+  ~RTCCVPixelBufferTest() override = default;
+};
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, RequiresCroppingNoCrop)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, RequiresCroppingWithCrop)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, RequiresScalingNoScale)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, RequiresScalingWithScale)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, RequiresScalingWithScaleAndMatchingCrop)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, BufferSize_NV12)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, BufferSize_RGB)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, CropAndScale_NV12)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, CropAndScaleNoOp_NV12)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, CropAndScale_NV12FullToVideo)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, CropAndScaleZeroSizeFrame_NV12)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, CropAndScaleToOddFormat_NV12)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, CropAndScale_32BGRA)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, CropAndScale_32ARGB)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, CropAndScaleWithSmallCropInfo_32ARGB)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, CropAndScaleWithLargeCropInfo_32ARGB)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, ToI420_NV12)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, ToI420_32BGRA)
+
+INVOKE_XCTEST(RTCCVPixelBufferTest, ToI420_32ARGB)
+
+}  // namespace webrtc
+
+#endif

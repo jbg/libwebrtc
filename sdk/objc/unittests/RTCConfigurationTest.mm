@@ -20,10 +20,14 @@
 #import "api/peerconnection/RTCIceServer.h"
 #import "helpers/NSString+StdString.h"
 
-@interface RTCConfigurationTest : XCTestCase
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
+@interface RTCConfigurationTests : XCTestCase
 @end
 
-@implementation RTCConfigurationTest
+@implementation RTCConfigurationTests
 
 - (void)testConversionToNativeConfiguration {
   NSArray *urlStrings = @[ @"stun:stun1.example.net" ];
@@ -160,3 +164,23 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCConfigurationTest : public XCTestToGTest<RTCConfigurationTests> {
+ public:
+  RTCConfigurationTest() = default;
+  ~RTCConfigurationTest() override = default;
+};
+
+INVOKE_XCTEST(RTCConfigurationTest, ConversionToNativeConfiguration)
+
+INVOKE_XCTEST(RTCConfigurationTest, NativeConversionToConfiguration)
+
+INVOKE_XCTEST(RTCConfigurationTest, DefaultValues)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

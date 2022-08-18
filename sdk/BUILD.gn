@@ -1045,30 +1045,25 @@ if (is_ios || is_mac) {
     }
 
     if (rtc_include_tests) {
-      if (is_ios) {
+      if (is_mac || is_ios) {
         rtc_library("sdk_unittests_sources") {
           testonly = true
           include_dirs = [ "objc/" ]
 
           sources = [
             "objc/unittests/ObjCVideoTrackSource_xctest.mm",
-            "objc/unittests/RTCAudioSessionTest.mm",
             "objc/unittests/RTCCVPixelBuffer_xctest.mm",
-            "objc/unittests/RTCCallbackLogger_xctest.m",
-            "objc/unittests/RTCCameraVideoCapturerTests.mm",
+            "objc/unittests/RTCCallbackLogger_xctest.mm",
             "objc/unittests/RTCCertificateTest.mm",
             "objc/unittests/RTCConfigurationTest.mm",
             "objc/unittests/RTCDataChannelConfigurationTest.mm",
             "objc/unittests/RTCEncodedImage_xctest.mm",
-            "objc/unittests/RTCFileVideoCapturer_xctest.mm",
-            "objc/unittests/RTCH264ProfileLevelId_xctest.m",
+            "objc/unittests/RTCH264ProfileLevelId_xctest.mm",
             "objc/unittests/RTCIceCandidateTest.mm",
             "objc/unittests/RTCIceServerTest.mm",
-            "objc/unittests/RTCMTLVideoView_xctest.m",
             "objc/unittests/RTCMediaConstraintsTest.mm",
-            "objc/unittests/RTCNV12TextureCache_xctest.m",
             "objc/unittests/RTCPeerConnectionFactoryBuilderTest.mm",
-            "objc/unittests/RTCPeerConnectionFactory_xctest.m",
+            "objc/unittests/RTCPeerConnectionFactory_xctest.mm",
             "objc/unittests/RTCPeerConnectionTest.mm",
             "objc/unittests/RTCSessionDescriptionTest.mm",
             "objc/unittests/RTCTracingTest.mm",
@@ -1080,31 +1075,40 @@ if (is_ios || is_mac) {
             "objc/unittests/scoped_cftyperef_tests.mm",
           ]
 
-          # TODO(bugs.webrtc.org/12937): Remove OpenGL deprecation warning
-          # workaround.
-          defines = [ "GLES_SILENCE_DEPRECATION" ]
+          if (is_mac) {
+            sources += [ "objc/unittests/xctest_to_gtest.h" ]
+          }
 
-          # TODO(peterhanspers): Reenable these tests on simulator.
-          # See bugs.webrtc.org/7812
-          if (target_environment != "simulator") {
+          if (is_ios) {
+            # TODO(bugs.webrtc.org/12937): Remove OpenGL deprecation warning
+            # workaround.
+            defines = [ "GLES_SILENCE_DEPRECATION" ]
             sources += [
-              "objc/unittests/RTCAudioDeviceModule_xctest.mm",
-              "objc/unittests/RTCAudioDevice_xctest.mm",
+              "objc/unittests/RTCAudioSessionTest.mm",
+              "objc/unittests/RTCCameraVideoCapturerTests.mm",
+              "objc/unittests/RTCFileVideoCapturer_xctest.mm",
+              "objc/unittests/RTCMTLVideoView_xctest.m",
+              "objc/unittests/RTCNV12TextureCache_xctest.m",
             ]
+
+            # TODO(peterhanspers): Reenable these tests on simulator.
+            # See bugs.webrtc.org/7812
+            if (target_environment != "simulator") {
+              sources += [
+                "objc/unittests/RTCAudioDeviceModule_xctest.mm",
+                "objc/unittests/RTCAudioDevice_xctest.mm",
+              ]
+            }
           }
 
           deps = [
-            ":audio_device",
-            ":audio_session_objc",
             ":base_native_additions_objc",
             ":base_objc",
             ":callback_logger_objc",
-            ":framework_objc",
             ":helpers_objc",
             ":mediaconstraints_objc",
             ":metal_objc",
             ":native_api",
-            ":native_api_audio_device_module",
             ":native_video",
             ":peerconnectionfactory_base_objc",
             ":video_toolbox_cc",
@@ -1135,16 +1139,52 @@ if (is_ios || is_mac) {
             "//third_party/libyuv",
           ]
 
+          if (is_mac) {
+            deps += [
+              ":mac_framework_objc",
+              "../test:test_support",
+            ]
+          }
+
+          if (is_ios) {
+            deps += [
+              ":audio_device",
+              ":audio_session_objc",
+              ":framework_objc",
+              ":native_api_audio_device_module",
+            ]
+          }
+
           if (rtc_ios_macos_use_opengl_rendering) {
             deps += [ ":opengl_objc" ]
           }
 
-          public_deps = [
-            "//build/config/ios:xctest",
-            "//third_party/ocmock",
+          deps += [ "//third_party/ocmock" ]
+
+          if (is_mac) {
+            deps += [ "//build/config/mac:xctest" ]
+          }
+
+          if (is_ios) {
+            deps += [ "//build/config/ios:xctest" ]
+          }
+        }
+      }
+
+      if (is_mac) {
+        rtc_xctest_test("sdk_unittests") {
+          testonly = true
+          info_plist = "//test/mac/Info.plist"
+
+          deps = [
+            ":sdk_unittests_sources",
+            "../test:test_main",
+            "//build/config/mac:xctest",
           ]
         }
+      }
 
+      if (is_ios) {
         bundle_data("sdk_unittests_bundle_data") {
           sources = [
             "objc/unittests/audio_short16.pcm",
@@ -1170,6 +1210,7 @@ if (is_ios || is_mac) {
             ":sdk_unittests_sources",
             "../rtc_base",
             "../rtc_base:threading",
+            "//build/config/ios:xctest",
             "//test:test_support",
           ]
           ldflags = [ "-all_load" ]

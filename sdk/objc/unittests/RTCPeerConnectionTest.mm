@@ -28,6 +28,10 @@
 #import "api/peerconnection/RTCSessionDescription.h"
 #import "helpers/NSString+StdString.h"
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 @interface RTCPeerConnectionTests : XCTestCase
 @end
 
@@ -202,3 +206,25 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCPeerConnectionTest : public XCTestToGTest<RTCPeerConnectionTests> {
+ public:
+  RTCPeerConnectionTest() = default;
+  ~RTCPeerConnectionTest() override = default;
+};
+
+INVOKE_XCTEST(RTCPeerConnectionTest, ConfigurationGetter)
+
+INVOKE_XCTEST(RTCPeerConnectionTest, WithDependencies)
+
+INVOKE_XCTEST(RTCPeerConnectionTest, WithInvalidSDP)
+
+INVOKE_XCTEST(RTCPeerConnectionTest, WithInvalidIceCandidate)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

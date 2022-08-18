@@ -24,6 +24,10 @@
 #include "media/base/fake_video_renderer.h"
 #include "sdk/objc/native/api/video_frame.h"
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 typedef void (^VideoSinkCallback)(RTC_OBJC_TYPE(RTCVideoFrame) *);
 
 namespace {
@@ -467,3 +471,39 @@ class ObjCCallbackVideoSink : public rtc::VideoSinkInterface<webrtc::VideoFrame>
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class ObjCVideoTrackSourceTest : public XCTestToGTest<ObjCVideoTrackSourceTests> {
+ public:
+  ObjCVideoTrackSourceTest() = default;
+  ~ObjCVideoTrackSourceTest() override = default;
+};
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFrameAdaptsFrame)
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFrameAdaptsFrameWithAlignment)
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFrameAdaptationResultsInCommonResolutions)
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFrameWithoutAdaptation)
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFrameCVPixelBufferNeedsAdaptation)
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFrameCVPixelBufferNeedsCropping)
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFramePreAdaptedCVPixelBufferNeedsAdaptation)
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFramePreCroppedCVPixelBufferNeedsCropping)
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFrameSmallerPreCroppedCVPixelBufferNeedsCropping)
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFrameI420BufferNeedsAdaptation)
+
+INVOKE_XCTEST(ObjCVideoTrackSourceTest, OnCapturedFrameI420BufferNeedsCropping)
+
+}  // namespace webrtc
+
+#endif

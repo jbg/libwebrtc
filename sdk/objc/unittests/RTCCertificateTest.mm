@@ -23,10 +23,14 @@
 #import "api/peerconnection/RTCPeerConnectionFactory.h"
 #import "helpers/NSString+StdString.h"
 
-@interface RTCCertificateTest : XCTestCase
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
+@interface RTCCertificateTests : XCTestCase
 @end
 
-@implementation RTCCertificateTest
+@implementation RTCCertificateTests
 
 - (void)testCertificateIsUsedInConfig {
   RTC_OBJC_TYPE(RTCConfiguration) *originalConfig = [[RTC_OBJC_TYPE(RTCConfiguration) alloc] init];
@@ -71,3 +75,19 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCCertificateTest : public XCTestToGTest<RTCCertificateTests> {
+ public:
+  RTCCertificateTest() = default;
+  ~RTCCertificateTest() override = default;
+};
+
+INVOKE_XCTEST(RTCCertificateTest, CertificateIsUsedInConfig)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

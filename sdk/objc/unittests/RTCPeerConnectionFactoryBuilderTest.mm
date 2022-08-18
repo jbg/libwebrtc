@@ -31,6 +31,10 @@ extern "C" {
 #include "rtc_base/gunit.h"
 #include "rtc_base/system/unused.h"
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 @interface RTCPeerConnectionFactoryBuilderTests : XCTestCase
 @end
 
@@ -70,3 +74,22 @@ extern "C" {
   OCMVerifyAll(factoryMock);
 }
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCPeerConnectionFactoryBuilderTest
+    : public XCTestToGTest<RTCPeerConnectionFactoryBuilderTests> {
+ public:
+  RTCPeerConnectionFactoryBuilderTest() = default;
+  ~RTCPeerConnectionFactoryBuilderTest() override = default;
+};
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryBuilderTest, Builder)
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryBuilderTest, DefaultComponentsBuilder)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

@@ -19,6 +19,10 @@
 #import "api/peerconnection/RTCMediaConstraints.h"
 #import "helpers/NSString+StdString.h"
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 @interface RTCMediaConstraintsTests : XCTestCase
 @end
 
@@ -56,3 +60,19 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCMediaConstraintsTest : public XCTestToGTest<RTCMediaConstraintsTests> {
+ public:
+  RTCMediaConstraintsTest() = default;
+  ~RTCMediaConstraintsTest() override = default;
+};
+
+INVOKE_XCTEST(RTCMediaConstraintsTest, MediaConstraints)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

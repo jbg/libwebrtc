@@ -17,10 +17,14 @@
 #import "api/peerconnection/RTCDataChannelConfiguration.h"
 #import "helpers/NSString+StdString.h"
 
-@interface RTCDataChannelConfigurationTest : XCTestCase
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
+@interface RTCDataChannelConfigurationTests : XCTestCase
 @end
 
-@implementation RTCDataChannelConfigurationTest
+@implementation RTCDataChannelConfigurationTests
 
 - (void)testConversionToNativeDataChannelInit {
   BOOL isOrdered = NO;
@@ -49,3 +53,19 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCDataChannelConfigurationTest : public XCTestToGTest<RTCDataChannelConfigurationTests> {
+ public:
+  RTCDataChannelConfigurationTest() = default;
+  ~RTCDataChannelConfigurationTest() override = default;
+};
+
+INVOKE_XCTEST(RTCDataChannelConfigurationTest, ConversionToNativeDataChannelInit)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

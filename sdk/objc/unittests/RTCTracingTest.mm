@@ -18,6 +18,10 @@
 #import "api/peerconnection/RTCTracing.h"
 #import "helpers/NSString+StdString.h"
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 @interface RTCTracingTests : XCTestCase
 @end
 
@@ -39,3 +43,19 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCTracingTest : public XCTestToGTest<RTCTracingTests> {
+ public:
+  RTCTracingTest() = default;
+  ~RTCTracingTest() override = default;
+};
+
+INVOKE_XCTEST(RTCTracingTest, TracingTestNoInitialization)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

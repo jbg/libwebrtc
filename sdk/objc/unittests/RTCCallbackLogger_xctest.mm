@@ -12,6 +12,10 @@
 
 #import <XCTest/XCTest.h>
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 @interface RTCCallbackLoggerTests : XCTestCase
 
 @property(nonatomic, strong) RTC_OBJC_TYPE(RTCCallbackLogger) * logger;
@@ -242,3 +246,45 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCCallbackLoggerTest : public XCTestToGTest<RTCCallbackLoggerTests> {
+ public:
+  RTCCallbackLoggerTest() = default;
+  ~RTCCallbackLoggerTest() override = default;
+};
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, DefaultSeverityLevel)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, CallbackGetsCalledForAppropriateLevel)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, CallbackWithSeverityGetsCalledForAppropriateLevel)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, CallbackDoesNotGetCalledForOtherLevels)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, CallbackWithSeverityDoesNotGetCalledForOtherLevels)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, CallbackDoesNotgetCalledForSeverityNone)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, CallbackWithSeverityDoesNotgetCalledForSeverityNone)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, StartingWithNilCallbackDoesNotCrash)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, StartingWithNilCallbackWithSeverityDoesNotCrash)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, StopCallbackLogger)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, StopCallbackWithSeverityLogger)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, DestroyingCallbackLogger)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, DestroyingCallbackWithSeverityLogger)
+
+INVOKE_XCTEST(RTCCallbackLoggerTest, CallbackWithSeverityLoggerCannotStartTwice)
+
+}  // namespace webrtc
+
+#endif

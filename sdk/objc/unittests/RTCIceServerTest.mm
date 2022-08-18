@@ -19,10 +19,14 @@
 #import "api/peerconnection/RTCIceServer.h"
 #import "helpers/NSString+StdString.h"
 
-@interface RTCIceServerTest : XCTestCase
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
+@interface RTCIceServerTests : XCTestCase
 @end
 
-@implementation RTCIceServerTest
+@implementation RTCIceServerTests
 
 - (void)testOneURLServer {
   RTC_OBJC_TYPE(RTCIceServer) *server =
@@ -134,3 +138,31 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCIceServerTest : public XCTestToGTest<RTCIceServerTests> {
+ public:
+  RTCIceServerTest() = default;
+  ~RTCIceServerTest() override = default;
+};
+
+INVOKE_XCTEST(RTCIceServerTest, OneURLServer)
+
+INVOKE_XCTEST(RTCIceServerTest, TwoURLServer)
+
+INVOKE_XCTEST(RTCIceServerTest, PasswordCredential)
+
+INVOKE_XCTEST(RTCIceServerTest, Hostname)
+
+INVOKE_XCTEST(RTCIceServerTest, TlsAlpnProtocols)
+
+INVOKE_XCTEST(RTCIceServerTest, TlsEllipticCurves)
+
+INVOKE_XCTEST(RTCIceServerTest, InitFromNativeServer)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

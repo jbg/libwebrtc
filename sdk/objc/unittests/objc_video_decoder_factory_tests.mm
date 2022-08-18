@@ -22,6 +22,10 @@
 #include "modules/video_coding/include/video_error_codes.h"
 #include "rtc_base/gunit.h"
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 id<RTC_OBJC_TYPE(RTCVideoDecoderFactory)> CreateDecoderFactoryReturning(int return_code) {
   id decoderMock = OCMProtocolMock(@protocol(RTC_OBJC_TYPE(RTCVideoDecoder)));
   OCMStub([decoderMock startDecodeWithNumberOfCores:1]).andReturn(return_code);
@@ -105,3 +109,29 @@ std::unique_ptr<webrtc::VideoDecoder> GetObjCDecoder(
   EXPECT_EQ(decoder->Release(), WEBRTC_VIDEO_CODEC_ERROR);
 }
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class ObjCVideoDecoderFactoryTest : public XCTestToGTest<ObjCVideoDecoderFactoryTests> {
+ public:
+  ObjCVideoDecoderFactoryTest() = default;
+  ~ObjCVideoDecoderFactoryTest() override = default;
+};
+
+INVOKE_XCTEST(ObjCVideoDecoderFactoryTest, ConfigureReturnsTrueOnSuccess)
+
+INVOKE_XCTEST(ObjCVideoDecoderFactoryTest, ConfigureReturnsFalseOnFail)
+
+INVOKE_XCTEST(ObjCVideoDecoderFactoryTest, DecodeReturnsOKOnSuccess)
+
+INVOKE_XCTEST(ObjCVideoDecoderFactoryTest, DecodeReturnsErrorOnFail)
+
+INVOKE_XCTEST(ObjCVideoDecoderFactoryTest, ReleaseDecodeReturnsOKOnSuccess)
+
+INVOKE_XCTEST(ObjCVideoDecoderFactoryTest, ReleaseDecodeReturnsErrorOnFail)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

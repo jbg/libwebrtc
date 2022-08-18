@@ -12,6 +12,10 @@
 
 #import <XCTest/XCTest.h>
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 @interface RTCH264ProfileLevelIdTests : XCTestCase
 
 @end
@@ -46,3 +50,21 @@ static NSString *level31ConstrainedBaseline = @"42e01f";
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCH264ProfileLevelIdTest : public XCTestToGTest<RTCH264ProfileLevelIdTests> {
+ public:
+  RTCH264ProfileLevelIdTest() = default;
+  ~RTCH264ProfileLevelIdTest() override = default;
+};
+
+INVOKE_XCTEST(RTCH264ProfileLevelIdTest, InitWithString)
+
+INVOKE_XCTEST(RTCH264ProfileLevelIdTest, InitWithProfileAndLevel)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

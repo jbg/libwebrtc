@@ -25,6 +25,10 @@
 
 #import <XCTest/XCTest.h>
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 @interface RTCPeerConnectionFactoryTests : XCTestCase
 @end
 
@@ -43,8 +47,9 @@
 
     @autoreleasepool {
       factory = [[RTC_OBJC_TYPE(RTCPeerConnectionFactory) alloc] init];
-      peerConnection =
-          [factory peerConnectionWithConfiguration:config constraints:constraints delegate:nil];
+      peerConnection = [factory peerConnectionWithConfiguration:config
+                                                    constraints:constraints
+                                                       delegate:nil];
       [peerConnection close];
       factory = nil;
     }
@@ -86,10 +91,11 @@
 
     @autoreleasepool {
       factory = [[RTC_OBJC_TYPE(RTCPeerConnectionFactory) alloc] init];
-      peerConnection =
-          [factory peerConnectionWithConfiguration:config constraints:constraints delegate:nil];
-      dataChannel =
-          [peerConnection dataChannelForLabel:@"test_channel" configuration:dataChannelConfig];
+      peerConnection = [factory peerConnectionWithConfiguration:config
+                                                    constraints:constraints
+                                                       delegate:nil];
+      dataChannel = [peerConnection dataChannelForLabel:@"test_channel"
+                                          configuration:dataChannelConfig];
       XCTAssertNotNil(dataChannel);
       [peerConnection close];
       peerConnection = nil;
@@ -117,8 +123,9 @@
 
     @autoreleasepool {
       factory = [[RTC_OBJC_TYPE(RTCPeerConnectionFactory) alloc] init];
-      peerConnection =
-          [factory peerConnectionWithConfiguration:config constraints:contraints delegate:nil];
+      peerConnection = [factory peerConnectionWithConfiguration:config
+                                                    constraints:contraints
+                                                       delegate:nil];
       tranceiver = [peerConnection addTransceiverOfType:RTCRtpMediaTypeAudio init:init];
       XCTAssertNotNil(tranceiver);
       [peerConnection close];
@@ -146,8 +153,9 @@
 
     @autoreleasepool {
       factory = [[RTC_OBJC_TYPE(RTCPeerConnectionFactory) alloc] init];
-      peerConnection =
-          [factory peerConnectionWithConfiguration:config constraints:constraints delegate:nil];
+      peerConnection = [factory peerConnectionWithConfiguration:config
+                                                    constraints:constraints
+                                                       delegate:nil];
       sender = [peerConnection senderWithKind:kRTCMediaStreamTrackKindVideo streamId:@"stream"];
       XCTAssertNotNil(sender);
       [peerConnection close];
@@ -338,27 +346,26 @@
                                                            optionalConstraints:nil];
 
   dispatch_semaphore_t negotiatedSem = dispatch_semaphore_create(0);
-  [weakPC1 offerForConstraints:sdpConstraints
-             completionHandler:^(RTC_OBJC_TYPE(RTCSessionDescription) * offer, NSError * error) {
-               XCTAssertNil(error);
-               XCTAssertNotNil(offer);
-               [weakPC1
-                   setLocalDescription:offer
-                     completionHandler:^(NSError *error) {
-                       XCTAssertNil(error);
-                       [weakPC2
-                           setRemoteDescription:offer
-                              completionHandler:^(NSError *error) {
-                                XCTAssertNil(error);
-                                [weakPC2
-                                    answerForConstraints:sdpConstraints
-                                       completionHandler:^(
-                                           RTC_OBJC_TYPE(RTCSessionDescription) * answer,
-                                           NSError * error) {
-                                         XCTAssertNil(error);
-                                         XCTAssertNotNil(answer);
-                                         [weakPC2
-                                             setLocalDescription:answer
+  [weakPC1
+      offerForConstraints:sdpConstraints
+        completionHandler:^(RTC_OBJC_TYPE(RTCSessionDescription) * offer, NSError * error) {
+          XCTAssertNil(error);
+          XCTAssertNotNil(offer);
+          [weakPC1
+              setLocalDescription:offer
+                completionHandler:^(NSError *error) {
+                  XCTAssertNil(error);
+                  [weakPC2
+                      setRemoteDescription:offer
+                         completionHandler:^(NSError *error) {
+                           XCTAssertNil(error);
+                           [weakPC2
+                               answerForConstraints:sdpConstraints
+                                  completionHandler:^(RTC_OBJC_TYPE(RTCSessionDescription) * answer,
+                                                      NSError * error) {
+                                    XCTAssertNil(error);
+                                    XCTAssertNotNil(answer);
+                                    [weakPC2 setLocalDescription:answer
                                                completionHandler:^(NSError *error) {
                                                  XCTAssertNil(error);
                                                  [weakPC1
@@ -368,10 +375,10 @@
                                                           dispatch_semaphore_signal(negotiatedSem);
                                                         }];
                                                }];
-                                       }];
-                              }];
-                     }];
-             }];
+                                  }];
+                         }];
+                }];
+        }];
 
   return 0 ==
       dispatch_semaphore_wait(negotiatedSem,
@@ -379,3 +386,42 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCPeerConnectionFactoryTest : public XCTestToGTest<RTCPeerConnectionFactoryTests> {
+ public:
+  RTCPeerConnectionFactoryTest() = default;
+  ~RTCPeerConnectionFactoryTest() override = default;
+};
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, PeerConnectionLifetime)
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, MediaStreamLifetime)
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, DataChannelLifetime)
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, RTCRtpTransceiverLifetime)
+
+// TODO(crbug.com/webrtc/13989): Remove call to CreateSender in senderWithKind.
+#if 0
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, RTCRtpSenderLifetime)
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, RTCRtpReceiverLifetime)
+#endif
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, AudioSourceLifetime)
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, VideoSourceLifetime)
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, AudioTrackLifetime)
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, VideoTrackLifetime)
+
+INVOKE_XCTEST(RTCPeerConnectionFactoryTest, Rollback)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

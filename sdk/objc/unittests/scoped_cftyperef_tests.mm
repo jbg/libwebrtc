@@ -12,6 +12,10 @@
 
 #include "sdk/objc/helpers/scoped_cftyperef.h"
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 namespace {
 struct TestType {
   TestType() : has_value(true) {}
@@ -109,3 +113,31 @@ using ScopedTestType = rtc::internal::ScopedTypeRef<TestTypeRef, TestTypeTraits>
 @end
 
 #pragma clang diagnostic pop
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class ScopedTypeRefTest : public XCTestToGTest<ScopedTypeRefTests> {
+ public:
+  ScopedTypeRefTest() = default;
+  ~ScopedTypeRefTest() override = default;
+};
+
+INVOKE_XCTEST(ScopedTypeRefTest, ShouldNotRetainByDefault)
+
+INVOKE_XCTEST(ScopedTypeRefTest, ShouldRetainWithPolicy)
+
+INVOKE_XCTEST(ScopedTypeRefTest, ShouldReleaseWhenLeavingScope)
+
+INVOKE_XCTEST(ScopedTypeRefTest, ShouldBeCopyable)
+
+INVOKE_XCTEST(ScopedTypeRefTest, CanReleaseOwnership)
+
+INVOKE_XCTEST(ScopedTypeRefTest, ShouldBeTestableForTruthiness)
+
+INVOKE_XCTEST(ScopedTypeRefTest, ShouldProvideAccessToWrappedType)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

@@ -12,6 +12,10 @@
 
 #import <XCTest/XCTest.h>
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 @interface RTCEncodedImageTests : XCTestCase
 @end
 
@@ -53,3 +57,23 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCEncodedImageTest : public XCTestToGTest<RTCEncodedImageTests> {
+ public:
+  RTCEncodedImageTest() = default;
+  ~RTCEncodedImageTest() override = default;
+};
+
+INVOKE_XCTEST(RTCEncodedImageTest, InitializedWithNativeEncodedImage)
+
+INVOKE_XCTEST(RTCEncodedImageTest, InitWithNSData)
+
+INVOKE_XCTEST(RTCEncodedImageTest, RetainsNativeEncodedImage)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

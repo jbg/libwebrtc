@@ -19,10 +19,14 @@
 #import "api/peerconnection/RTCIceCandidate.h"
 #import "helpers/NSString+StdString.h"
 
-@interface RTCIceCandidateTest : XCTestCase
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
+@interface RTCIceCandidateTests : XCTestCase
 @end
 
-@implementation RTCIceCandidateTest
+@implementation RTCIceCandidateTests
 
 - (void)testCandidate {
   NSString *sdp = @"candidate:4025901590 1 udp 2122265343 "
@@ -58,3 +62,21 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCIceCandidateTest : public XCTestToGTest<RTCIceCandidateTests> {
+ public:
+  RTCIceCandidateTest() = default;
+  ~RTCIceCandidateTest() override = default;
+};
+
+INVOKE_XCTEST(RTCIceCandidateTest, Candidate)
+
+INVOKE_XCTEST(RTCIceCandidateTest, InitFromNativeCandidate)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

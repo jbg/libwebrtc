@@ -17,6 +17,10 @@
 #import "api/peerconnection/RTCSessionDescription.h"
 #import "helpers/NSString+StdString.h"
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 @interface RTCSessionDescriptionTests : XCTestCase
 @end
 
@@ -120,3 +124,21 @@
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class RTCSessionDescriptionTest : public XCTestToGTest<RTCSessionDescriptionTests> {
+ public:
+  RTCSessionDescriptionTest() = default;
+  ~RTCSessionDescriptionTest() override = default;
+};
+
+INVOKE_XCTEST(RTCSessionDescriptionTest, SessionDescriptionConversion)
+
+INVOKE_XCTEST(RTCSessionDescriptionTest, InitFromNativeSessionDescription)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

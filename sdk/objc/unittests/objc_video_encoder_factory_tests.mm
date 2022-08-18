@@ -25,6 +25,10 @@
 #include "rtc_base/gunit.h"
 #include "sdk/objc/native/src/objc_frame_buffer.h"
 
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+#include "sdk/objc/unittests/xctest_to_gtest.h"
+#endif
+
 id<RTC_OBJC_TYPE(RTCVideoEncoderFactory)> CreateEncoderFactoryReturning(int return_code) {
   id encoderMock = OCMProtocolMock(@protocol(RTC_OBJC_TYPE(RTCVideoEncoder)));
   OCMStub([encoderMock startEncodeWithSettings:[OCMArg any] numberOfCores:1])
@@ -146,3 +150,33 @@ std::unique_ptr<webrtc::VideoEncoder> GetObjCEncoder(
 }
 
 @end
+
+#if defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)
+
+namespace webrtc {
+
+class ObjCVideoEncoderFactoryTest : public XCTestToGTest<ObjCVideoEncoderFactoryTests> {
+ public:
+  ObjCVideoEncoderFactoryTest() = default;
+  ~ObjCVideoEncoderFactoryTest() override = default;
+};
+
+INVOKE_XCTEST(ObjCVideoEncoderFactoryTest, InitEncodeReturnsOKOnSuccess)
+
+INVOKE_XCTEST(ObjCVideoEncoderFactoryTest, InitEncodeReturnsErrorOnFail)
+
+INVOKE_XCTEST(ObjCVideoEncoderFactoryTest, EncodeReturnsOKOnSuccess)
+
+INVOKE_XCTEST(ObjCVideoEncoderFactoryTest, EncodeReturnsErrorOnFail)
+
+INVOKE_XCTEST(ObjCVideoEncoderFactoryTest, ReleaseEncodeReturnsOKOnSuccess)
+
+INVOKE_XCTEST(ObjCVideoEncoderFactoryTest, ReleaseEncodeReturnsErrorOnFail)
+
+INVOKE_XCTEST(ObjCVideoEncoderFactoryTest, GetSupportedFormats)
+
+INVOKE_XCTEST(ObjCVideoEncoderFactoryTest, GetImplementations)
+
+}  // namespace webrtc
+
+#endif  // defined(WEBRTC_MAC) && !defined(WEBRTC_IOS)

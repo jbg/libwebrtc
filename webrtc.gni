@@ -1105,6 +1105,25 @@ if (is_mac || is_ios) {
   }
 }
 
+if (is_mac) {
+  template("rtc_xctest_test") {
+    bundle_data("xctest_bundle_$target_name") {
+      sources = [
+        "$mac_shared_frameworks_path/XCTest.framework",
+        "$mac_shared_frameworks_path/XCTestCore.framework",
+        "$mac_shared_frameworks_path/XCUIAutomation.framework",
+        "$mac_shared_frameworks_path/XCUnit.framework",
+      ]
+      outputs = [ "{{bundle_contents_dir}}/Frameworks/{{source_file_part}}" ]
+    }
+
+    mac_app_bundle(target_name) {
+      forward_variables_from(invoker, "*")
+      deps += [ ":xctest_bundle_$target_name" ]
+    }
+  }
+}
+
 if (is_android) {
   template("rtc_android_library") {
     android_library(target_name) {
