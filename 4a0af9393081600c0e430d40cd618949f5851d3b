@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8f7bd0_64aa22ae",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-18T01:30:39Z",
+      "side": 1,
+      "message": "This code requires https://chromium-review.googlesource.com/c/chromium/src/+/3829250.",
+      "revId": "4a0af9393081600c0e430d40cd618949f5851d3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
