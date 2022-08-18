@@ -181,6 +181,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c257be1_2990ea5b",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T13:00:08Z",
+      "side": 1,
+      "message": "then may be add a TODO to remove this redundant constant",
+      "parentUuid": "0bc6a206_92c3b408",
+      "range": {
+        "startLine": 27,
+        "startChar": 37,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c37328d_95031611",
@@ -312,6 +336,30 @@
       "side": 1,
       "message": "I removed one of the 3 call sites, leaving 2 that seem to have \"legit\" use cases (not sure I see how useful the warnings are).\n\nWhat\u0027s the concrete idea you\u0027re thinking of?\nNote this is very temporary (couple of days) and I don\u0027t foresee large delays in switching all clients over to be fully TimeDelta, so unless you see other benefits with an alternative approach, I\u0027d like to go ahead.",
       "parentUuid": "e051899b_591a56fe",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 42
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3c06533_f4d33e3e",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-18T13:00:08Z",
+      "side": 1,
+      "message": "discussed offline.\nMain benefit - less temporary code.\nI do not want you to block on this.",
+      "parentUuid": "efbcf18a_e2ff7db4",
       "range": {
         "startLine": 67,
         "startChar": 2,
