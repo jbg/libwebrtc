@@ -89,6 +89,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d6ff07aa_8f4971ad",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-18T12:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "febdd6b5_475bfbd3",
+      "range": {
+        "startLine": 153,
+        "startChar": 15,
+        "endLine": 153,
+        "endChar": 49
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "eb445235_1a45c81a",
         "filename": "rtc_base/event.cc",
         "patchSetId": 3
@@ -133,6 +157,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bc6a206_92c3b408",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-18T12:34:55Z",
+      "side": 1,
+      "message": "After spending some time with this I feel kForever is pretty redundant. I think PlusInfinity communicates the intent quite clearly.\nThere are a few other kForever definitions in the code (ex SocketServer).\nOne alternative is to define Forever(), IsForever() alias in TimeDelta but it feels like it would also be just redundant.\n\nNoting here that chromium has a special call for indefinite wait. I didn\u0027t investigate what effects that would have on webrtc, but it sure would make for less text as lots of callsites use kForever. Maybe in the future just let\u0027s add a default parameter to Wait() - it\u0027s pretty obvious reading that what the meaning is too.",
+      "parentUuid": "50893e4f_88fbe8d1",
+      "range": {
+        "startLine": 27,
+        "startChar": 37,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c37328d_95031611",
@@ -158,6 +206,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f736312c_20878666",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-18T12:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c37328d_95031611",
+      "range": {
+        "startLine": 41,
+        "startChar": 21,
+        "endLine": 41,
+        "endChar": 33
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "917eb5a0_fe19c555",
         "filename": "rtc_base/event.h",
         "patchSetId": 3
@@ -169,6 +241,30 @@
       "writtenOn": "2022-08-18T08:42:42Z",
       "side": 1,
       "message": "personal unimportant preference: I prefer to use keyword \u0027typename\u0027 here specially because T might be \u0027int\u0027 which is a type, but not a class.",
+      "range": {
+        "startLine": 66,
+        "startChar": 12,
+        "endLine": 66,
+        "endChar": 17
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "481f54e7_32423785",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-18T12:34:55Z",
+      "side": 1,
+      "message": "Yeah I like that better too actually.",
+      "parentUuid": "917eb5a0_fe19c555",
       "range": {
         "startLine": 66,
         "startChar": 12,
@@ -204,6 +300,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "efbcf18a_e2ff7db4",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-18T12:34:55Z",
+      "side": 1,
+      "message": "I removed one of the 3 call sites, leaving 2 that seem to have \"legit\" use cases (not sure I see how useful the warnings are).\n\nWhat\u0027s the concrete idea you\u0027re thinking of?\nNote this is very temporary (couple of days) and I don\u0027t foresee large delays in switching all clients over to be fully TimeDelta, so unless you see other benefits with an alternative approach, I\u0027d like to go ahead.",
+      "parentUuid": "e051899b_591a56fe",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 42
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a5ad860_059d78f9",
         "filename": "rtc_base/event_unittest.cc",
         "patchSetId": 3
@@ -215,6 +335,30 @@
       "writtenOn": "2022-08-18T08:42:42Z",
       "side": 1,
       "message": "May be use a duration with non-integer millis, e.g.\nTimeDelta::Micros(10\u0027499)\n\nto verify such delta wouldn\u0027t wait just 10ms.",
+      "range": {
+        "startLine": 70,
+        "startChar": 61,
+        "endLine": 70,
+        "endChar": 71
+      },
+      "revId": "8f1deaf1eb92bbdd2a7d1ad055ba28cc29108c33",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c97e3c93_fb413167",
+        "filename": "rtc_base/event_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-18T12:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a5ad860_059d78f9",
       "range": {
         "startLine": 70,
         "startChar": 61,
