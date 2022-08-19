@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f03dbef_412be15e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-19T06:40:21Z",
+      "side": 1,
+      "message": "Should dcSCTP drop pre-sent packets that are sent on streams outside the negotiated bounds once the connection is established?",
+      "revId": "59d76799f8d5ec8aa4722dc15c45f52a2c420f4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "661f36e6_b80610eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-19T06:40:21Z",
+      "side": 1,
+      "message": "Code seems good. Is this a first step towards policing the range?\nIt seems a bit weird to support negotiating the range and then ignoring it.\n",
+      "revId": "59d76799f8d5ec8aa4722dc15c45f52a2c420f4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adad6e57_49c44ec9",
+        "filename": "net/dcsctp/socket/dcsctp_socket.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-19T06:40:21Z",
+      "side": 1,
+      "message": "Is this growth of the argument list an argument for GetCapabilities to get passed \"chunk\" rather than taking it apart in the caller?\nIs GetCapabilities used anywhere else than when processing incoming chunks?\nIf not, should it be called GetCapabilitiesFromIncomingChunk?",
+      "revId": "59d76799f8d5ec8aa4722dc15c45f52a2c420f4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
