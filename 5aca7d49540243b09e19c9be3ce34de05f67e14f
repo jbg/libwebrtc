@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "edaaa07f_b0c8fc70",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-19T18:23:56Z",
+      "side": 1,
+      "message": "What is the difference between \"rejection\" and \"dismissal\"?\n\nOne way to make this clearer:\n\n// Any user action to cancel the source selection.\nOnDelegatedSourceListCancelled();\n\n// Any system error that causes source selection to fail.\nOnDelegatedSourceListError();",
+      "parentUuid": "ebdb32bb_ee28c4d0",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66c7a6a8_57ef8978",
         "filename": "modules/desktop_capture/desktop_capturer.h",
         "patchSetId": 2
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "Thinking a little about our discussion yesterday; and the fact that I\u0027ll likely be adding an Ensure/Hide DelegatedSourceList method; I\u0027m thinking of maybe converting this method to something like:\n\n`virtual DelegatedSourceListController* GetDelegatedSourceListController() const;`\n\nCapturers that do not support/have a delegated source list will return nullptr; while others will return the controller which may keep the interface a bit cleaner.\nI *could* move the methods down to an observer there that would need to be separately registered, or leave alone.\n\nThoughts before I go forward with that implementation?",
       "parentUuid": "8c72f2a9_3ffc6f8d",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b70d8c90_6aae35cf",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-19T18:23:56Z",
+      "side": 1,
+      "message": "Is the idea that the caller would obtain a pointer to the controller, and then register its own client/observer to get notified when events take place on the controller?\n\nI like organizing all of the \"delegated source list\" APIs into one class/interface.   The downside is that the client has a raw pointer to a (presumably) unowned object it has to keep track of, and I don\u0027t see a good way to pass a WeakPtr across the WebRTC boundary.\n\nI wonder if there is a way that ownership of the controller object could stay with the caller and the controller becomes a \"handle\"?  E.g. the methods become no-ops if the underlying delegate goes away?",
+      "parentUuid": "4706c33f_c92e3b5a",
       "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
