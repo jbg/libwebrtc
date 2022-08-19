@@ -18,6 +18,74 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3fd68cc_da97aebc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-19T18:37:29Z",
+      "side": 1,
+      "message": "Couple of minor things",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abbd2b4d_dd69be61",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-19T18:37:29Z",
+      "side": 1,
+      "message": "Is *portal_response guaranteed to be written by g_variant_get?\nIf not, please value-initialize portal_response.",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad2cdda_b2c4b580",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-19T18:37:29Z",
+      "side": 1,
+      "message": "It looks like 0 represents a \"success\" response.  Please declare a constant like kPortalSuccessResponse so this can be written as:\n\nif (portal_response \u003d\u003d kPortalSuccessResponse) {\n...\n}",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78227e4d_c7d53073",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-19T18:37:29Z",
+      "side": 1,
+      "message": "It looks like g_variant_dup_string allocates a new character buffer, which needs to be freed by gfree().  The std::string assignment then copies the buffer into session_handle.  Is the buffer leaked here?\n\nhttps://www.freedesktop.org/software/gstreamer-sdk/data/docs/latest/glib/glib-GVariant.html#g-variant-dup-string\n\nMaybe not since presumably this would be caught by ASAN?",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3ee64a8_cee981b3",
