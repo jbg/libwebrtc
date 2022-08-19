@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f61a09e_5d441927",
+        "filename": "modules/video_coding/event_wrapper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-19T08:36:38Z",
+      "side": 1,
+      "message": "I wonder if we can simply replace use of EventWrapper with rtc::Event instead.",
+      "revId": "ec77848aa3581924d3713232066bc4d439fdc5a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
