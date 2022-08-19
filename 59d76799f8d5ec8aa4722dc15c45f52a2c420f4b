@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b69302ea_c6d56fb8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-08-19T09:49:23Z",
+      "side": 1,
+      "message": "We should probably do that and more. We should probably also return errors if we try to send anything on a StreamID outside the negotiated bounds.",
+      "parentUuid": "9f03dbef_412be15e",
+      "revId": "59d76799f8d5ec8aa4722dc15c45f52a2c420f4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "661f36e6_b80610eb",
@@ -31,6 +49,41 @@
       "writtenOn": "2022-08-19T06:40:21Z",
       "side": 1,
       "message": "Code seems good. Is this a first step towards policing the range?\nIt seems a bit weird to support negotiating the range and then ignoring it.\n",
+      "revId": "59d76799f8d5ec8aa4722dc15c45f52a2c420f4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cbd1f46_7301c4db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-08-19T09:49:23Z",
+      "side": 1,
+      "message": "This is a first step to surface the real value to the SctpSidAllocator.",
+      "parentUuid": "661f36e6_b80610eb",
+      "revId": "59d76799f8d5ec8aa4722dc15c45f52a2c420f4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0140493c_8160279d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-08-19T09:49:23Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "59d76799f8d5ec8aa4722dc15c45f52a2c420f4b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
