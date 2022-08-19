@@ -213,6 +213,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a5905ee_84706dd7",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-19T19:55:14Z",
+      "side": 1,
+      "message": "My intention was that the caller wouldn\u0027t/shouldn\u0027t take ownership of it at all. Or perhaps the Capturer guarantees that it will be alive as long as the capturer is, so that things can stash a reference for the duration of a method. Returning a reference would be one way to do this; but given we need to indicate when it\u0027s not supported, we can\u0027t do that...\n\nIn general in our code base, raw pointer means \"don\u0027t take ownership of this, it\u0027s not yours\"",
+      "parentUuid": "b70d8c90_6aae35cf",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c9b1758_8783a48a",
         "filename": "modules/desktop_capture/desktop_capturer.h",
         "patchSetId": 2
