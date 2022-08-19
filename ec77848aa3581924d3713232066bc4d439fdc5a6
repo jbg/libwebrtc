@@ -16,6 +16,24 @@
       "message": "I wonder if we can simply replace use of EventWrapper with rtc::Event instead.",
       "revId": "ec77848aa3581924d3713232066bc4d439fdc5a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38622fe5_1026c223",
+        "filename": "modules/video_coding/event_wrapper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-19T08:55:57Z",
+      "side": 1,
+      "message": "I tried to delete the EventWrapper. There\u0027s a design problem in that the old VCMJitterBuffer/Receiver classes wait synchronously on events internally, so we would need a test redesign. The tested code is partially slated for deletion (with only 1 known downstream consumer) so I just left this todo for now.",
+      "parentUuid": "4f61a09e_5d441927",
+      "revId": "ec77848aa3581924d3713232066bc4d439fdc5a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
