@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d7e3c6_49e4b988",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-19T08:10:08Z",
+      "side": 1,
+      "message": "minor optional nits except for video/video_analyzer.cc comment",
+      "revId": "eda7b8d9c0f029f9d50ff0349c360ef5184c667e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93134f05_e4bde8b1",
+        "filename": "api/task_queue/task_queue_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-19T08:10:08Z",
+      "side": 1,
+      "message": "or Minutes(1)",
+      "range": {
+        "startLine": 235,
+        "startChar": 44,
+        "endLine": 235,
+        "endChar": 55
+      },
+      "revId": "eda7b8d9c0f029f9d50ff0349c360ef5184c667e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64498739_c8c0c71c",
+        "filename": "modules/video_coding/event_wrapper.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-19T08:10:08Z",
+      "side": 1,
+      "message": "I\u0027ve doubled checked max_time_ms \u003d -1 (i.e. kForever) is not used,\nso indeed no need to check for it.",
+      "range": {
+        "startLine": 27,
+        "startChar": 28,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "eda7b8d9c0f029f9d50ff0349c360ef5184c667e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5505a2c_0ca57bda",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-19T08:10:08Z",
+      "side": 1,
+      "message": "actually next_fire_at_us should be Timestamp",
+      "range": {
+        "startLine": 65,
+        "startChar": 47,
+        "endLine": 65,
+        "endChar": 56
+      },
+      "revId": "eda7b8d9c0f029f9d50ff0349c360ef5184c667e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac754d23_31495ed6",
+        "filename": "rtc_base/task_queue_stdlib.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-19T08:10:08Z",
+      "side": 1,
+      "message": "precision can be increased here, but it is safer to do it in own change",
+      "range": {
+        "startLine": 222,
+        "startChar": 4,
+        "endLine": 223,
+        "endChar": 68
+      },
+      "revId": "eda7b8d9c0f029f9d50ff0349c360ef5184c667e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63c6d1a8_9755f246",
+        "filename": "rtc_base/thread_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-19T08:10:08Z",
+      "side": 1,
+      "message": "TimeDelta is already aliased (be consistent with the previous line)",
+      "range": {
+        "startLine": 1114,
+        "startChar": 26,
+        "endLine": 1114,
+        "endChar": 32
+      },
+      "revId": "eda7b8d9c0f029f9d50ff0349c360ef5184c667e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf21c0a6_490a2181",
+        "filename": "video/video_analyzer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-19T08:10:08Z",
+      "side": 1,
+      "message": "remove this multiplication (it was there to convert s -\u003e ms)",
+      "range": {
+        "startLine": 51,
+        "startChar": 28,
+        "endLine": 51,
+        "endChar": 34
+      },
+      "revId": "eda7b8d9c0f029f9d50ff0349c360ef5184c667e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
