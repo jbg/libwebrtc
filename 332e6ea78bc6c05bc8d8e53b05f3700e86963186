@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c001b92e_b165aad3",
+        "filename": "api/create_peerconnection_factory.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-19T09:23:59Z",
+      "side": 1,
+      "message": "any reason for moving this down? I kinda like having the non-conditional initialization where the instance is declared. In fact we might want to update to something along the lines of:\n\n```\nPeerConnectionFactoryDependencies dependencies \u003d {\n    .network_thread \u003d network_thread,\n    .worker_thread \u003d worker_thread,\n    ...\n```\n\nI guess you could even do that with the condition inline, using `?:`",
+      "revId": "332e6ea78bc6c05bc8d8e53b05f3700e86963186",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe6b697f_5c9bf225",
+        "filename": "api/task_queue/default_task_queue_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-19T09:23:59Z",
+      "side": 1,
+      "message": "do we have an option of using a weak_ptr or scoped_refptr here rather than a raw pointer? Is the ownership/lifetime clearly documented?",
+      "revId": "332e6ea78bc6c05bc8d8e53b05f3700e86963186",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a77fb2c_20836ddf",
+        "filename": "rtc_tools/video_replay.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-19T09:23:59Z",
+      "side": 1,
+      "message": "nit: make_unique?",
+      "revId": "332e6ea78bc6c05bc8d8e53b05f3700e86963186",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
