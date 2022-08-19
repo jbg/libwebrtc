@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3ee64a8_cee981b3",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2022-08-19T17:27:21Z",
+      "side": 1,
+      "message": "Is there any case where the `portal response \u003d\u003d 0` (i.e. success) and yet `session_handle` is not populated? If not, may be consider moving this block condition on `portal_response` before L74 to ensure that if the portal request has succeeded the the return data can be assumed to be valid.\n\nWe can potentially make use of `RTC_DCHECK(!session_handle.empty())` to ensure sanity of the session handle returned by the portal on a successful call.",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
