@@ -231,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89e25960_09d361a2",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-19T20:25:25Z",
+      "side": 1,
+      "message": "\u003e Capturer guarantees that it will be alive as long as the capturer is,\n\nIn lieu of ownership passing, that\u0027s OK.  The lifetime expectations should be documented, and ideally the controller pointer is managed by the same object(s) that own the capturer and it\u0027s used on the same sequences as the capturer.\n\nThe scenario I was thinking of is where the system decides to tear down the actual dialog the controller is working with, in that case we can\u0027t destroy the controller yet if the capturer is still alive.  That seems somewhat independent of who owns the controller itself.\n\n\u003e In general in our code base, raw pointer means \"don\u0027t take ownership of this, it\u0027s not yours\"\n\nRight, if you decide to pass ownership instead, you\u0027d return by value or unique_ptr.",
+      "parentUuid": "4a5905ee_84706dd7",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c9b1758_8783a48a",
         "filename": "modules/desktop_capture/desktop_capturer.h",
         "patchSetId": 2
