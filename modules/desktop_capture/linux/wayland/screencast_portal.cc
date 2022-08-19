@@ -161,7 +161,13 @@ void ScreenCastPortal::OnSessionRequestResponseSignal(
   that->RegisterSessionClosedSignalHandler(
       OnSessionClosedSignal, parameters, that->connection_,
       that->session_handle_, that->session_closed_signal_id_);
-  that->SourcesRequest();
+
+  // Do not continue if we don't get session_handle back. The call above will
+  // already notify the capturer there is a failure, but we would still continue
+  // to make following request and crash on that.
+  if (!that->session_handle_.empty()) {
+    that->SourcesRequest();
+  }
 }
 
 // static

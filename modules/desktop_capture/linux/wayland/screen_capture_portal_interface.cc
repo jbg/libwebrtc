@@ -71,11 +71,13 @@ void ScreenCapturePortalInterface::RegisterSessionClosedSignalHandler(
   Scoped<GVariant> response_data;
   g_variant_get(parameters, /*format_string=*/"(u@a{sv})", &portal_response,
                 response_data.receive());
-  Scoped<GVariant> g_session_handle(
-      g_variant_lookup_value(response_data.get(), /*key=*/"session_handle",
-                             /*expected_type=*/nullptr));
-  session_handle = g_variant_dup_string(
-      /*value=*/g_session_handle.get(), /*length=*/nullptr);
+  if (!portal_response) {
+    Scoped<GVariant> g_session_handle(
+        g_variant_lookup_value(response_data.get(), /*key=*/"session_handle",
+                               /*expected_type=*/nullptr));
+    session_handle = g_variant_dup_string(
+        /*value=*/g_session_handle.get(), /*length=*/nullptr);
+  }
 
   if (session_handle.empty() || portal_response) {
     RTC_LOG(LS_ERROR) << "Failed to request the session subscription.";
