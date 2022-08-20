@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'a4e2e00dae200e70cb4cd190f4b598821c2eea9c',
+  'chromium_revision': '8e10b22aaa88a89c13a6fcc5df9d86fb53ef93c1',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -20,7 +20,7 @@ vars = {
 
   # By default, download the fuchsia sdk from the public sdk directory.
   'fuchsia_sdk_cipd_prefix': 'fuchsia/sdk/gn/',
-  'fuchsia_version': 'version:9.20220820.0.1',
+  'fuchsia_version': 'version:9.20220820.2.1',
 }
 
 deps = {
@@ -37,7 +37,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@e40fd0b4f21955ff36e038a74cac50a903e07f93',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@d701a42149e2ffe3de84853eb075e22a3acecd20',
     'condition': 'checkout_ios',
   },
   'src/testing':
