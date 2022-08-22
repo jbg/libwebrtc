@@ -116,6 +116,11 @@ class ScopedSetTrue {
  private:
   bool* value_;
 };
+
+int ToWaitDuration(webrtc::TimeDelta duration) {
+  return duration.RoundUpTo(webrtc::TimeDelta::Millis(1)).ms();
+}
+
 }  // namespace
 
 namespace rtc {
@@ -1166,7 +1171,8 @@ void PhysicalSocketServer::Update(Dispatcher* pdispatcher) {
 
 #if defined(WEBRTC_POSIX)
 
-bool PhysicalSocketServer::Wait(int cmsWait, bool process_io) {
+bool PhysicalSocketServer::Wait(webrtc::TimeDelta max_wait_duration,
+                                bool process_io) {
   // We don't support reentrant waiting.
   RTC_DCHECK(!waiting_);
   ScopedSetTrue s(&waiting_);
@@ -1175,12 +1181,12 @@ bool PhysicalSocketServer::Wait(int cmsWait, bool process_io) {
   // (i.e. signaling) dispatcher, so "poll" will be used instead of the default
   // "select" to support sockets larger than FD_SETSIZE.
   if (!process_io) {
-    return WaitPoll(cmsWait, signal_wakeup_);
+    return WaitPoll(max_wait_duration, signal_wakeup_);
   } else if (epoll_fd_ != INVALID_SOCKET) {
-    return WaitEpoll(cmsWait);
+    return WaitEpoll(max_wait_duration);
   }
 #endif
-  return WaitSelect(cmsWait, process_io);
+  return WaitSelect(max_wait_duration, process_io);
 }
 
 // `error_event` is true if we are responding to an event where we know an
@@ -1250,22 +1256,23 @@ static void ProcessEvents(Dispatcher* dispatcher,
   }
 }
 
-bool PhysicalSocketServer::WaitSelect(int cmsWait, bool process_io) {
+bool PhysicalSocketServer::WaitSelect(webrtc::TimeDelta max_wait_duration,
+                                      bool process_io) {
   // Calculate timing information
 
   struct timeval* ptvWait = nullptr;
   struct timeval tvWait;
   int64_t stop_us;
-  if (cmsWait != kForever) {
+  if (max_wait_duration != kForever) {
     // Calculate wait timeval
-    tvWait.tv_sec = cmsWait / 1000;
-    tvWait.tv_usec = (cmsWait % 1000) * 1000;
+    auto max_wait_duration_us = max_wait_duration.us();
+    tvWait.tv_sec = max_wait_duration_us / rtc::kNumMicrosecsPerSec;
+    tvWait.tv_usec = max_wait_duration_us / rtc::kNumMicrosecsPerSec;
     ptvWait = &tvWait;
 
     // Calculate when to return
-    stop_us = rtc::TimeMicros() + cmsWait * 1000;
+    stop_us = rtc::TimeMicros() + max_wait_duration_us;
   }
-
 
   fd_set fdsRead;
   fd_set fdsWrite;
@@ -1450,13 +1457,13 @@ void PhysicalSocketServer::UpdateEpoll(Dispatcher* pdispatcher, uint64_t key) {
   }
 }
 
-bool PhysicalSocketServer::WaitEpoll(int cmsWait) {
+bool PhysicalSocketServer::WaitEpoll(webrtc::TimeDelta max_wait_duration) {
   RTC_DCHECK(epoll_fd_ != INVALID_SOCKET);
   int64_t tvWait = -1;
   int64_t tvStop = -1;
-  if (cmsWait != kForever) {
-    tvWait = cmsWait;
-    tvStop = TimeAfter(cmsWait);
+  if (max_wait_duration != kForever) {
+    tvWait = ToWaitDuration(max_wait_duration);
+    tvStop = TimeAfter(tvWait);
   }
 
   fWait_ = true;
@@ -1499,7 +1506,7 @@ bool PhysicalSocketServer::WaitEpoll(int cmsWait) {
       }
     }
 
-    if (cmsWait != kForever) {
+    if (max_wait_duration != kForever) {
       tvWait = TimeDiff(tvStop, TimeMillis());
       if (tvWait <= 0) {
         // Return success on timeout.
@@ -1511,13 +1518,14 @@ bool PhysicalSocketServer::WaitEpoll(int cmsWait) {
   return true;
 }
 
-bool PhysicalSocketServer::WaitPoll(int cmsWait, Dispatcher* dispatcher) {
+bool PhysicalSocketServer::WaitPoll(webrtc::TimeDelta max_wait_duration,
+                                    Dispatcher* dispatcher) {
   RTC_DCHECK(dispatcher);
   int64_t tvWait = -1;
   int64_t tvStop = -1;
-  if (cmsWait != kForever) {
-    tvWait = cmsWait;
-    tvStop = TimeAfter(cmsWait);
+  if (max_wait_duration != kForever) {
+    tvWait = ToWaitDuration(max_wait_duration);
+    tvStop = TimeAfter(tvWait);
   }
 
   fWait_ = true;
@@ -1566,7 +1574,7 @@ bool PhysicalSocketServer::WaitPoll(int cmsWait, Dispatcher* dispatcher) {
       ProcessEvents(dispatcher, readable, writable, error, error);
     }
 
-    if (cmsWait != kForever) {
+    if (max_wait_duration != kForever) {
       tvWait = TimeDiff(tvStop, TimeMillis());
       if (tvWait < 0) {
         // Return success on timeout.
@@ -1583,12 +1591,15 @@ bool PhysicalSocketServer::WaitPoll(int cmsWait, Dispatcher* dispatcher) {
 #endif  // WEBRTC_POSIX
 
 #if defined(WEBRTC_WIN)
-bool PhysicalSocketServer::Wait(int cmsWait, bool process_io) {
+bool PhysicalSocketServer::Wait(webrtc::TimeDelta max_wait_duration,
+                                bool process_io) {
   // We don't support reentrant waiting.
   RTC_DCHECK(!waiting_);
   ScopedSetTrue s(&waiting_);
 
-  int64_t cmsTotal = cmsWait;
+  int64_t cmsTotal = max_wait_duration.IsPlusInfinity()
+                         ? WSA_INFINITE
+                         : ToWaitDuration(max_wait_duration);
   int64_t cmsElapsed = 0;
   int64_t msStart = Time();
 
@@ -1634,8 +1645,8 @@ bool PhysicalSocketServer::Wait(int cmsWait, bool process_io) {
     // Which is shorter, the delay wait or the asked wait?
 
     int64_t cmsNext;
-    if (cmsWait == kForever) {
-      cmsNext = cmsWait;
+    if (max_wait_duration == kForever) {
+      cmsNext = WSA_INFINITE;
     } else {
       cmsNext = std::max<int64_t>(0, cmsTotal - cmsElapsed);
     }
@@ -1750,7 +1761,7 @@ bool PhysicalSocketServer::Wait(int cmsWait, bool process_io) {
     if (!fWait_)
       break;
     cmsElapsed = TimeSince(msStart);
-    if ((cmsWait != kForever) && (cmsElapsed >= cmsWait)) {
+    if ((max_wait_duration != kForever) && (cmsElapsed >= cmsTotal)) {
       break;
     }
   }
