@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af811497_9cfbc0e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-22T16:49:44Z",
+      "side": 1,
+      "message": "AUTHORS has IPR effects, so please don\u0027t remove the contributor.\n",
+      "revId": "8b2d26542060e823b00135b2b2ed0ff89d1401ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bfac57b_496fb2e0",
+        "filename": "AUTHORS",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-22T16:49:44Z",
+      "side": 0,
+      "message": "Please take out this change.",
+      "revId": "bc8a62b244c4038d2a005bffcbe7a82bd933d7d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22457941_6ad88c9b",
+        "filename": "AUTHORS",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-22T16:49:44Z",
+      "side": 0,
+      "message": "Also this change.",
+      "revId": "bc8a62b244c4038d2a005bffcbe7a82bd933d7d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
