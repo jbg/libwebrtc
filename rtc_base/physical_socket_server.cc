@@ -1166,10 +1166,15 @@ void PhysicalSocketServer::Update(Dispatcher* pdispatcher) {
 
 #if defined(WEBRTC_POSIX)
 
-bool PhysicalSocketServer::Wait(int cmsWait, bool process_io) {
+bool PhysicalSocketServer::Wait(webrtc::TimeDelta max_wait_duration,
+                                bool process_io) {
   // We don't support reentrant waiting.
   RTC_DCHECK(!waiting_);
   ScopedSetTrue s(&waiting_);
+  const int cmsWait =
+      max_wait_duration == Event::kForever
+          ? kForeverMs
+          : max_wait_duration.RoundUpTo(webrtc::TimeDelta::Millis(1)).ms();
 #if defined(WEBRTC_USE_EPOLL)
   // We don't keep a dedicated "epoll" descriptor containing only the non-IO
   // (i.e. signaling) dispatcher, so "poll" will be used instead of the default
