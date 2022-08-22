@@ -16,6 +16,24 @@
       "message": "Looks good.\n\nA further simplification might want to replace the callback class with a success lambda and a failure lambda, but I think that will travel up the inheritance chain, so keeping the change local seems like a Good Idea.\n",
       "revId": "e0a4d827fd24c889e5081736d9322ac36498fc8b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d401a11e_b0037819",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-22T10:57:33Z",
+      "side": 1,
+      "message": "I considered further simplification to replace the interface with a single AnyInvocable, where non-null certificate indicates success and nullptr indicates failure,\nbut decided to postpone it to a dedicate change.",
+      "parentUuid": "dfcb4b19_ebbd0d36",
+      "revId": "e0a4d827fd24c889e5081736d9322ac36498fc8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
