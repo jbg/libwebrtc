@@ -123,6 +123,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f3f501b_cdb5c8ce",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-22T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edaaa07f_b0c8fc70",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66c7a6a8_57ef8978",
@@ -261,6 +279,24 @@
       "side": 1,
       "message": "I\u0027m re-working the ordering of how I\u0027m going to land things; I\u0027ll probably send a new change to make it less confusing.",
       "parentUuid": "89e25960_09d361a2",
+      "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99cd4c7b_48682694",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-22T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "905a1eec_10126b64",
       "revId": "5aca7d49540243b09e19c9be3ce34de05f67e14f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
