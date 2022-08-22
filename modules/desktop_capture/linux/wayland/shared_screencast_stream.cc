@@ -550,13 +550,15 @@ void SharedScreenCastStreamPrivate::UpdateScreenCastStreamResolution(
 void SharedScreenCastStreamPrivate::StopScreenCastStream() {
   if (pw_stream_) {
     pw_stream_disconnect(pw_stream_);
+    webrtc::MutexLock lock(&queue_lock_);
+    queue_.Reset();
   }
 }
 
 std::unique_ptr<DesktopFrame> SharedScreenCastStreamPrivate::CaptureFrame() {
   webrtc::MutexLock lock(&queue_lock_);
 
-  if (!queue_.current_frame()) {
+  if (!pw_stream_ || !queue_.current_frame()) {
     return std::unique_ptr<DesktopFrame>{};
   }
 
