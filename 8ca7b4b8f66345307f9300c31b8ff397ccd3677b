@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e7e3b1_605c2180",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-22T18:09:30Z",
+      "side": 1,
+      "message": "Mark PTAL, this should address most of the feedback from the previous (abandoned) CL as well; but I\u0027ve changed the ordering I\u0027m landing the changes in. (e.g. I\u0027m going to land controlling the visibility first and then responding to events).",
+      "revId": "8ca7b4b8f66345307f9300c31b8ff397ccd3677b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
