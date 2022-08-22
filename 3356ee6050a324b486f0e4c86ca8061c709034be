@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45c6dfc7_e99ff993",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-22T21:11:40Z",
+      "side": 1,
+      "message": "Maybe rephrase as:\n\nReturns a valid pointer if the capturer requires the user to make a source selection from a source list provided by the capturer.\n\nSince it\u0027s not clear if the selection is required or not?",
+      "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "879855d2_34dd8c13",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-22T21:11:40Z",
+      "side": 1,
+      "message": "Nit: add blank line for paragraph break",
+      "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac2a5af_2d59f936",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-22T21:11:40Z",
+      "side": 1,
+      "message": "if this returns a value.",
+      "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da3f5b31_1696d90f",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-22T21:11:40Z",
+      "side": 1,
+      "message": "It looks like OnDelegatedSourceListSelection has been dropped from the API.  Does the caller still need it?",
+      "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12b69566_f714d9f0",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-22T21:11:40Z",
+      "side": 1,
+      "message": "The DelegatedSourceListController could be used to return this sentinel value so that callers don\u0027t have to know this implementation detail.\n\nEg.\n\nSourceID GetPlaceholderSourceID();\n\nThat way the caller can determine for certain that the delegated source list is returning the placeholder value.",
+      "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfde89fd_87736e80",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-22T21:11:40Z",
+      "side": 1,
+      "message": "It would be better if the DelegatedSourceListController exposed an API to make this explicit, e.g.\n\nabsl::optional\u003cSourceId\u003e GetSourceListRestoreToken()\n\nso the caller knows exactly if/when a restore token is available to pass into SelectSource().",
+      "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
