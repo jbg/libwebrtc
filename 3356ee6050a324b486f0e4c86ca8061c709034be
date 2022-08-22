@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffccee27_12e03f2a",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-22T22:50:07Z",
+      "side": 1,
+      "message": "The behavior is already \"forked\" when a delegated source list is used.  The problem now is that the caller does not have a way to detect or validate that the API is following the \"forked\" rules when a delegated source list is in use.\n\nFor example I am not sure how you would write tests or port the behavior to a new API in the future that keeps the contract of the current APIs.  Maybe it could be done if there are known Source IDs that are used for these special values.",
+      "parentUuid": "ab233765_9f2255eb",
+      "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cfde89fd_87736e80",
         "filename": "modules/desktop_capture/desktop_capturer.h",
         "patchSetId": 2
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "I was trying to not expose that logic fully to the embedder. I was mainly calling out that for capturers with a delegated source list, it is valid to pass a SourceId that is not in the SourceList from GetSourceList.\n\nThe fact that there is a DelegatedSourceList doesn\u0027t really get used beyond the picker code right now; if you want to take a look at the modifications I\u0027ve currently had to make, or if you want to chat about ways to make the consumption cleaner:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3846372\n\nI took a quick look, and I think plugging something like this into the existing picker code is going to be more complicated than it\u0027s worth.\n\nI\u0027ll note that this is technically the existing behavior we have right now (allowing you to select a source that isn\u0027t necessarily in the source list as a form of restore token).",
       "parentUuid": "cfde89fd_87736e80",
+      "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dff3a4f_9d4dd26a",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-22T22:50:07Z",
+      "side": 1,
+      "message": "Ok, we can table this and the other API discussion until the other patch is in review.  If the caller can use the delegated source list without knowing anything about the details about the placeholder or restore tokens, then a more explicit API may not be needed.\n\nBut I would lean towards the caller being able to check that the API is behaving as expected, in which case, it would need to know the difference between a placeholder/token and a \"normal\" SourceID.",
+      "parentUuid": "53092e04_268253db",
       "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

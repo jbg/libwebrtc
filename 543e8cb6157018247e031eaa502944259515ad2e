@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "434df4f7_4edd948f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-22T22:50:07Z",
+      "side": 1,
+      "message": "I\u0027m OK with landing this to move things forward and tabling the API discussions until later.   However if we decide to go with more explicit APIs for the source list use cases then you may end up with additional patches to land everything...\n",
+      "revId": "543e8cb6157018247e031eaa502944259515ad2e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
