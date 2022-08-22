@@ -52,6 +52,42 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1904a070_77d39b35",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-22T12:06:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abbd2b4d_dd69be61",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e7651a_896747f0",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-22T12:06:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abbd2b4d_dd69be61",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ad2cdda_b2c4b580",
@@ -69,6 +105,42 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44372e46_6fcc6327",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-22T12:06:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ad2cdda_b2c4b580",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "373f31fb_87fb39c1",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-22T12:06:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ad2cdda_b2c4b580",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78227e4d_c7d53073",
@@ -82,6 +154,42 @@
       "writtenOn": "2022-08-19T18:37:29Z",
       "side": 1,
       "message": "It looks like g_variant_dup_string allocates a new character buffer, which needs to be freed by gfree().  The std::string assignment then copies the buffer into session_handle.  Is the buffer leaked here?\n\nhttps://www.freedesktop.org/software/gstreamer-sdk/data/docs/latest/glib/glib-GVariant.html#g-variant-dup-string\n\nMaybe not since presumably this would be caught by ASAN?",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dadabde_efb8e3e7",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-22T12:06:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78227e4d_c7d53073",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d518eb46_9e04724e",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-22T12:06:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78227e4d_c7d53073",
       "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -117,6 +225,42 @@
       "side": 1,
       "message": "+1\n\nIf both are still possible I would maybe slightly prefer structuring it like:\n\n```\nif (portal_response) {\n  RTC_LOG(LS_ERROR) \u003c\u003c \"Portal Error: \" \u003c\u003c portal_response;\n  OnPortalDone(RequestResponse::kError);\n  return;\n}\n\n// do session_handle setting\n\nif (session_handle.empty()) {\n  RTC_LOG(LS_ERROR) \u003c\u003c \"Could not get session handle despite valid response\";\n  OnPortalDone(RequestResponse::kError);\n  return;\n}\n```\n\nThe first kError you can choose if you want to translate to the appropriate RequestResponse if it was a cancellation.",
       "parentUuid": "f3ee64a8_cee981b3",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c95838b3_61f2e761",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-22T12:06:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51732504_e10c6165",
+      "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c2a0a2d_226e4579",
+        "filename": "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-22T12:06:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51732504_e10c6165",
       "revId": "590ff81021523984c9f7602a55fc256dc6ebe88b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
