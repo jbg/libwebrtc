@@ -245,6 +245,24 @@
       "parentUuid": "53092e04_268253db",
       "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b281293_8b63aae4",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-22T23:51:09Z",
+      "side": 1,
+      "message": "I just tried selecting the \"dummy\" source ID in the Chrome picker before making a selection in the PipeWire picker and it works as expected, namely the Chrome picker is dismissed and I\u0027m left with a PipeWire picker before the stream can start, and once I make that choice the stream starts.\n\nI think a caller certainly can use the delegated source list without needing to know any details about the placeholder or restore tokens. The two behaviors that I wanted to document are mainly:\n1) DelegatedSourceList capturers should return a SourceList with exactly one item.\n 1a) While you can use this one item before a user selection is made, the best user-visible behavior may be to guarantee that a selection was first made in the picker.\n2) It is valid to pass a previously received SourceId into SelectSource, even if that SourceID is not in the Source list.\n\nThe API already exposes to you if you try to select an invalid source in that SelectSource can return false, so I think treating the SourceID as an opaque handle is within the parameters of the existing API shape.",
+      "parentUuid": "5dff3a4f_9d4dd26a",
+      "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
