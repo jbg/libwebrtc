@@ -33,6 +33,24 @@
       "message": "Hm. Here you take a raw pointer to the unique FieldTrialBasedConfig created above, but you don\u0027t reset the pointer. When the unique_ptr goes out of scope, the object will be deallocated.\n\nAre you missing a dependencies.trials \u003d std::move(field_trials)?",
       "revId": "363207dba0c5c85af1e95be8df67a17d20c937b2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3629c93b_f34eae16",
+        "filename": "api/create_peerconnection_factory.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-23T10:58:21Z",
+      "side": 1,
+      "message": "Indeed, I am. Good catch. Thx.",
+      "parentUuid": "84754ba4_f604027f",
+      "revId": "363207dba0c5c85af1e95be8df67a17d20c937b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
