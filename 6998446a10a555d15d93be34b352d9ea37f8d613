@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ee906f_6cdb5012",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-23T07:09:54Z",
+      "side": 1,
+      "message": "I did consider to post to the signaling thread without protecting these 2 tasks,\nthat would be simpler, but then tasks may execute after peer connection is destroyed, and some tests fail. I didn\u0027t manage to understand one of them, how it should behave, how it can behave about the same.",
+      "revId": "6998446a10a555d15d93be34b352d9ea37f8d613",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
