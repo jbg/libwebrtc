@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "17003278_88d85b43",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-23T10:26:07Z",
+      "side": 1,
+      "message": "Done. Opened webrtc:14389 and the CL is now linked to that bug instead.",
+      "parentUuid": "8905f4e3_d6c57f04",
+      "revId": "332e6ea78bc6c05bc8d8e53b05f3700e86963186",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a85314dd_0196faa5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 10
@@ -52,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79067ba5_656b29d9",
+        "filename": "api/create_peerconnection_factory.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-23T10:26:07Z",
+      "side": 1,
+      "message": "Fixed. This was moved only in order to reuse the field_trials field, but I agree that your suggestion is stylistically better.\n\nI changed the initialization order, but wasn\u0027t able to use the designated initializer syntax since the PeerConnectionFactoryDependencies struct doesn\u0027t conform to the requirements (it has \"user-provided\" constructors).",
+      "parentUuid": "c001b92e_b165aad3",
+      "revId": "332e6ea78bc6c05bc8d8e53b05f3700e86963186",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe6b697f_5c9bf225",
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6fcce4d5_8d067d63",
+        "filename": "api/task_queue/default_task_queue_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-23T10:26:07Z",
+      "side": 1,
+      "message": "This usage of FieldTrialsView* is a rather common pattern in WebRTC\u0027s codebase at the moment: Accepting a raw pointer in cases where we don\u0027t need/want to change all call sites (for example in tests). My understanding is that using a raw pointer clearly documents that the ownership is not passed to the function (which is what we do mean in this case).",
+      "parentUuid": "fe6b697f_5c9bf225",
+      "revId": "332e6ea78bc6c05bc8d8e53b05f3700e86963186",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a77fb2c_20836ddf",
         "filename": "rtc_tools/video_replay.cc",
         "patchSetId": 10
@@ -82,6 +136,24 @@
       "writtenOn": "2022-08-19T09:23:59Z",
       "side": 1,
       "message": "nit: make_unique?",
+      "revId": "332e6ea78bc6c05bc8d8e53b05f3700e86963186",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02086af8_e3be5c9b",
+        "filename": "rtc_tools/video_replay.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-23T10:26:07Z",
+      "side": 1,
+      "message": "call_config.trials is a plain pointer type (also note that FieldTrialBasedConfig has no data members. its Lookup() function simply calls the global webrtc::field_trial::FindFullName() function.)",
+      "parentUuid": "9a77fb2c_20836ddf",
       "revId": "332e6ea78bc6c05bc8d8e53b05f3700e86963186",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
