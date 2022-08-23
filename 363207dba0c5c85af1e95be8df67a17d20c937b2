@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cda58dff_d581da21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-23T10:34:48Z",
+      "side": 1,
+      "message": "Detecting a possible ownership problem. Bug looks fine.\n",
+      "revId": "363207dba0c5c85af1e95be8df67a17d20c937b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84754ba4_f604027f",
+        "filename": "api/create_peerconnection_factory.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-23T10:34:48Z",
+      "side": 1,
+      "message": "Hm. Here you take a raw pointer to the unique FieldTrialBasedConfig created above, but you don\u0027t reset the pointer. When the unique_ptr goes out of scope, the object will be deallocated.\n\nAre you missing a dependencies.trials \u003d std::move(field_trials)?",
+      "revId": "363207dba0c5c85af1e95be8df67a17d20c937b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
