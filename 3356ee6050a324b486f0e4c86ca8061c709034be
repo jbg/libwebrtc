@@ -263,6 +263,24 @@
       "parentUuid": "5dff3a4f_9d4dd26a",
       "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "013e05d0_7131ab2c",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-23T17:54:19Z",
+      "side": 1,
+      "message": "I\u0027m not completely satisfied with this API shape but not sure how much value there is in debating this further.   The comments should be sufficient for now and I\u0027d like to see how the API is used as well.\n\nIf I were designing from scratch, I would start with completely separate objects/flows representing user selections, and surfaces that can be captured from, and have some service that can produce candidate selections and map them to surfaces.  I would also have a session object that kept track of the capture state across selection/picking, capture initiation, surface switching, etc.\n\nBasically stop trying to use \"SourceID\" as the solution for tracking all sorts of different things :-)",
+      "parentUuid": "4b281293_8b63aae4",
+      "revId": "3356ee6050a324b486f0e4c86ca8061c709034be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
