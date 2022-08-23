@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "55b2c2a4_0ca06add",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-08-23T07:16:55Z",
+      "side": 1,
+      "message": "I will do this as a follow-up CL, which I noted in the commit message!",
+      "parentUuid": "b69302ea_c6d56fb8",
+      "revId": "59d76799f8d5ec8aa4722dc15c45f52a2c420f4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "661f36e6_b80610eb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -118,6 +136,24 @@
       "writtenOn": "2022-08-19T06:40:21Z",
       "side": 1,
       "message": "Is this growth of the argument list an argument for GetCapabilities to get passed \"chunk\" rather than taking it apart in the caller?\nIs GetCapabilities used anywhere else than when processing incoming chunks?\nIf not, should it be called GetCapabilitiesFromIncomingChunk?",
+      "revId": "59d76799f8d5ec8aa4722dc15c45f52a2c420f4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6068334_346b2371",
+        "filename": "net/dcsctp/socket/dcsctp_socket.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-08-23T07:16:55Z",
+      "side": 1,
+      "message": "It will be called with two different chunks, INIT and INIT_ACK. They could have some fancy inheritance scheme, and I\u0027ll likely do that if this grows any longer. I did rename it, though, to indicate that it doesn\u0027t \"get\" anything - it \"computes\" things.",
+      "parentUuid": "adad6e57_49c44ec9",
       "revId": "59d76799f8d5ec8aa4722dc15c45f52a2c420f4b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
