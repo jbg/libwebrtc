@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99e22d30_86a43c4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-08-24T16:32:22Z",
+      "side": 1,
+      "message": "Hello. Is there anything I can do proceed with rest of review of CL chain?\nI\u0027ve introduced minor change in CL #2 \u0026 #3: extended signature of deliverRecordedData to accept additional argument of `void *` and make it passed into `render_block`. This should provide more freedom to implementation of how to pass extra data in block without additional allocations.\nThanks a lot in advance, Yury.",
+      "revId": "6eb8a300363de2c1ae75d638ae334011bab4e448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
