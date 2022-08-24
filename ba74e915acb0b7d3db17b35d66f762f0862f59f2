@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa1bab02_3589da2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2022-08-24T17:18:28Z",
+      "side": 1,
+      "message": "It looks like Sergey is going to be out longer (original OOO was 8/24 but now it is next week).  I\u0027ve addressed all of his feedback and have tested this quite a bit so I\u0027d like to land it today both so I can unblock several pending CLs of mine in Chromium and also so we can get Canary coverage on it sooner than later (we are getting close to feature freeze).\n",
+      "revId": "ba74e915acb0b7d3db17b35d66f762f0862f59f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
