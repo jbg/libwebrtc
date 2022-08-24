@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'bfd736ea10501b114c724386f23f33f2439bd5ba',
+  'chromium_revision': 'ecbab5c709dae633a3e907b8f0b9e121f809b6f6',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -20,7 +20,7 @@ vars = {
 
   # By default, download the fuchsia sdk from the public sdk directory.
   'fuchsia_sdk_cipd_prefix': 'fuchsia/sdk/gn/',
-  'fuchsia_version': 'version:9.20220823.1.1',
+  'fuchsia_version': 'version:9.20220824.1.1',
 
   # By default, do not check out the re-client binaries.
   'checkout_reclient': False,
@@ -32,7 +32,7 @@ vars = {
 deps = {
   # TODO(kjellander): Move this to be Android-only.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@f4ddb6b5f7d1af13bb8a9bb74e050a34254b611b',
+    'https://chromium.googlesource.com/chromium/src/base@7d73a55e78191a0ec8af2d601eafb223fbe10332',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@90d51f4aefdd87cd494c2e3554c38927c59b09b6',
   'src/buildtools':
@@ -43,13 +43,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@d02174568a4fc30c46f253e5c7c1ec447bf487f6',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@e55052634dead65afe600192590a685e0daa3e24',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@50c0df5662b45591c8ed4a8f47e5c157e8d42518',
+    'https://chromium.googlesource.com/chromium/src/testing@f109f2c52726c99e30a12581791e7a48b17a061e',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@6337e1d09af3eaccccd0de6b5fdd4391f91f37e4',
+    'https://chromium.googlesource.com/chromium/src/third_party@aaa7e01e3340ec508d68ff8da3e9c66060542ab0',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -282,7 +282,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@9390ec55326228044c7f3d2d4dc842ad7e1ba785',
+    'https://chromium.googlesource.com/chromium/src/tools@7e1e3e0661d1d4456754ab420b51a18d6a87d466',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
@@ -370,7 +370,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': 'LTTmRlS5kbJrcKpqumRf5thU-ys_1p5VJrLp1W5ZfVAC',
+          'version': 'MELv-PC9D_0B035PO-sa3Wcb4aj83og1iDjZSSa9ccYC',
       },
     ],
     'condition': 'checkout_android',
