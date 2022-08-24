@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90300a73_ae915695",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-24T07:47:00Z",
+      "side": 1,
+      "message": "Hi, Mirko and Björn. Are you still concerned that this change will become a problem in the future?",
+      "revId": "06e77e0de1b32a9a5ecef58ba137d0cf4c3dfa85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
