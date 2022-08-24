@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7407e33_cb1367cc",
+        "filename": "api/task_queue/default_task_queue_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-24T07:15:24Z",
+      "side": 1,
+      "message": "I wouldn\u0027t say that it \"clearly\" does it since that\u0027s where we\u0027ve had problems. I think that weak_ptr/scoped_refptr/unique_ptr are more clear, but for sure we do have places where we use raw pointers. We\u0027ve been trying to clarify those however and in some cases such as in the Connection/Port family of classes we\u0027ve uncovered lifetime issues (non consistent and not safe), circular dependencies and uaf issues as we\u0027ve done so.\n\nIn any case, if this is a convention already for field trials, we don\u0027t need to solve in this CL.",
+      "parentUuid": "6fcce4d5_8d067d63",
+      "revId": "332e6ea78bc6c05bc8d8e53b05f3700e86963186",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a77fb2c_20836ddf",
         "filename": "rtc_tools/video_replay.cc",
         "patchSetId": 10
