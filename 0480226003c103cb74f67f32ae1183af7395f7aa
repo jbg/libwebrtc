@@ -16,6 +16,24 @@
       "message": "do we want to dcheck that current is nullptr (since we set that in the dtor) or do we want to restore what was current?",
       "revId": "0480226003c103cb74f67f32ae1183af7395f7aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c966d1b_0e96c828",
+        "filename": "rtc_base/thread_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-24T18:44:40Z",
+      "side": 1,
+      "message": "This is a test fixture with very low usage, I find it safe to assume it is running on the main thread with no AutoThread installed (i.e. dcheck current is nullptr)\n\nMoreover, this code won\u0027t live long, I would like to remove this code in a week or so.\n\nThis fixture is used for testing Dispose (which I plan to delete after updating chromium)\nand by one more test that do not need this fixture, can use simpler one above.\n\nFor now it is needed because Dispose message was so special, it was processed by Thread::Get function that doesn\u0027t check if it is running on the current thread,\nbut now disposing is handled by regular Thread::Dispatch function that has a DCHECK it is running on the current thread.",
+      "parentUuid": "3236230c_439d529a",
+      "revId": "0480226003c103cb74f67f32ae1183af7395f7aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
