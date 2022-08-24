@@ -159,6 +159,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6503c55_4541035e",
+        "filename": "api/task_queue/default_task_queue_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-24T08:50:17Z",
+      "side": 1,
+      "message": "Thanks for clarifying Tommi. I\u0027ll land this one as is for now.",
+      "parentUuid": "94ff70b2_f10ca4e0",
+      "revId": "332e6ea78bc6c05bc8d8e53b05f3700e86963186",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a77fb2c_20836ddf",
