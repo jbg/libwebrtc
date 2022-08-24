@@ -33,6 +33,24 @@
       "message": "this feels a bit brittle - I don\u0027t suppose we can change OnSuccess to accept ownership via unique_ptr?",
       "revId": "6998446a10a555d15d93be34b352d9ea37f8d613",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "722d3b67_94a76d76",
+        "filename": "pc/webrtc_session_description_factory.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-08-24T07:27:12Z",
+      "side": 1,
+      "message": "Yes, it should be unique_ptr in the interface.\nThere is a TODO about exactly that in the CreateSessionDescriptionObserver\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/jsep.h;l\u003d225;drc\u003dd5cdd1818144331a5457ac303110468bd67edd01\n\nbut that is out of scope of this change: previous handler (see line 290 in the old code) also pass the `description.release() `",
+      "parentUuid": "75b06349_d45ed15f",
+      "revId": "6998446a10a555d15d93be34b352d9ea37f8d613",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
