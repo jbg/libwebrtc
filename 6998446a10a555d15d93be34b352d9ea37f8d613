@@ -16,6 +16,23 @@
       "message": "I did consider to post to the signaling thread without protecting these 2 tasks,\nthat would be simpler, but then tasks may execute after peer connection is destroyed, and some tests fail. I didn\u0027t manage to understand one of them, how it should behave, how it can behave about the same.",
       "revId": "6998446a10a555d15d93be34b352d9ea37f8d613",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75b06349_d45ed15f",
+        "filename": "pc/webrtc_session_description_factory.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-24T07:20:14Z",
+      "side": 1,
+      "message": "this feels a bit brittle - I don\u0027t suppose we can change OnSuccess to accept ownership via unique_ptr?",
+      "revId": "6998446a10a555d15d93be34b352d9ea37f8d613",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
