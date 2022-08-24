@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3236230c_439d529a",
+        "filename": "rtc_base/thread_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-24T18:29:06Z",
+      "side": 1,
+      "message": "do we want to dcheck that current is nullptr (since we set that in the dtor) or do we want to restore what was current?",
+      "revId": "0480226003c103cb74f67f32ae1183af7395f7aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
