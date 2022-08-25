@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65035187_53b4bc10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-25T07:30:40Z",
+      "side": 1,
+      "message": "lgtm % some confusion around that comment",
+      "revId": "28d210585fb3110b938f2bc88b758793a68dfe6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c9548ba_f57b3a81",
+        "filename": "examples/peerconnection/client/linux/main.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-08-25T07:30:40Z",
+      "side": 1,
+      "message": "I\u0027m not clear on what this comment is supposed to explain - can you clarify?",
+      "revId": "28d210585fb3110b938f2bc88b758793a68dfe6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
