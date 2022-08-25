@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51105451_0f392801",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5427
+      },
+      "writtenOn": "2022-08-25T10:55:42Z",
+      "side": 1,
+      "message": "With this changes the example is working. But I have not found the reason why it is not running with the changes before.",
+      "revId": "e1ce8eedd0e39b273b0be8caa517dbce22180d05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
