@@ -548,15 +548,25 @@ void SharedScreenCastStreamPrivate::UpdateScreenCastStreamResolution(
 }
 
 void SharedScreenCastStreamPrivate::StopScreenCastStream() {
-  if (pw_stream_) {
-    pw_stream_disconnect(pw_stream_);
-  }
+  if (!pw_main_loop_ || !pw_stream_)
+    return;
+
+  // We get buffers on the PipeWire thread, but this may not be called from that
+  // thread. We need to wait on and stop the thread before we disconnect the
+  // stream so that we can guarantee we aren't in the middle of processing a new
+  // frame.
+  pw_thread_loop_wait(pw_main_loop_);
+  pw_thread_loop_stop(pw_main_loop_);
+
+  pw_stream_disconnect(pw_stream_);
+  webrtc::MutexLock lock(&queue_lock_);
+  queue_.Reset();
 }
 
 std::unique_ptr<DesktopFrame> SharedScreenCastStreamPrivate::CaptureFrame() {
   webrtc::MutexLock lock(&queue_lock_);
 
-  if (!queue_.current_frame()) {
+  if (!pw_stream_ || !queue_.current_frame()) {
     return std::unique_ptr<DesktopFrame>{};
   }
 
