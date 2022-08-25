@@ -33,6 +33,24 @@
       "message": "I\u0027m not clear on what this comment is supposed to explain - can you clarify?",
       "revId": "28d210585fb3110b938f2bc88b758793a68dfe6d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d5fa19_b98adb22",
+        "filename": "examples/peerconnection/client/linux/main.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-08-25T08:19:02Z",
+      "side": 1,
+      "message": "I feel the same - I just ported the old comment to the new world. I can remove it if you\u0027d like?",
+      "parentUuid": "7c9548ba_f57b3a81",
+      "revId": "28d210585fb3110b938f2bc88b758793a68dfe6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
