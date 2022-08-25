@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c342c32_928ed69f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-25T08:28:59Z",
+      "side": 1,
+      "message": "Commentary.\n",
+      "revId": "28d210585fb3110b938f2bc88b758793a68dfe6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c9548ba_f57b3a81",
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "I feel the same - I just ported the old comment to the new world. I can remove it if you\u0027d like?",
       "parentUuid": "7c9548ba_f57b3a81",
+      "revId": "28d210585fb3110b938f2bc88b758793a68dfe6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e0b573_fabf7f85",
+        "filename": "examples/peerconnection/client/linux/main.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-25T08:28:59Z",
+      "side": 1,
+      "message": "This is commented-out code, likely from a time when Wait() took a duration. This functionality has been removed, I guess someone thought they\u0027d come back later and re-enable it or remove the comment.\n\nRemove it and add a new comment saying \"this function never waits\".",
+      "parentUuid": "54d5fa19_b98adb22",
       "revId": "28d210585fb3110b938f2bc88b758793a68dfe6d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
