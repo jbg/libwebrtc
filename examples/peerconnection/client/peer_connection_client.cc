@@ -15,6 +15,9 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/net_helpers.h"
+#ifdef WIN32
+#include "rtc_base/win32_socket_server.h"
+#endif
 
 namespace {
 
@@ -24,9 +27,17 @@ constexpr char kByeMessage[] = "BYE";
 constexpr webrtc::TimeDelta kReconnectDelay = webrtc::TimeDelta::Seconds(2);
 
 rtc::Socket* CreateClientSocket(int family) {
+#ifdef WIN32
+  rtc::Win32Socket* sock = new rtc::Win32Socket();
+  sock->CreateT(family, SOCK_STREAM);
+  return sock;
+#elif defined(WEBRTC_POSIX)
   rtc::Thread* thread = rtc::Thread::Current();
   RTC_DCHECK(thread != NULL);
   return thread->socketserver()->CreateSocket(family, SOCK_STREAM);
+#else
+#error Platform not supported.
+#endif
 }
 
 }  // namespace
