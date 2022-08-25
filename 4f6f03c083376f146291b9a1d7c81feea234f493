@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e2394b_c6442ae0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-25T08:35:19Z",
+      "side": 1,
+      "message": "A few comments on the code too, now that I looked at it again.\n",
+      "revId": "4f6f03c083376f146291b9a1d7c81feea234f493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48bb8027_1ac64c99",
@@ -49,6 +66,75 @@
       "side": 1,
       "message": "Naming things is hard :(\n\nThis concept (dependency descriptor) is not at the peer connection level, so I\u0027m hesitant to use it as the name of a test file. For example, future readers might think like this:\n\"Okay, this is pc/dependency_descriptor_field_trial_unittest.cc. But where is pc/dependency_descriptor_field_trial.cc?\"",
       "parentUuid": "48bb8027_1ac64c99",
+      "revId": "4f6f03c083376f146291b9a1d7c81feea234f493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb744538_a7b86e2f",
+        "filename": "pc/peer_connection_field_trial_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-25T08:35:19Z",
+      "side": 1,
+      "message": "Yeah. This actually argues for keeping the file where the dependency descriptor lives, not in pc/. But that makes the dependency graph more complex, since you\u0027re using lots of stuff from pc/test.\n\nSuggest keeping it as it is, but add a file comment saying \"This file contains tests that verify that field trials do what they\u0027re supposed to do\", and above the test",
+      "parentUuid": "d18a652b_ea87048b",
+      "revId": "4f6f03c083376f146291b9a1d7c81feea234f493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4fa69fc_ee163485",
+        "filename": "pc/peer_connection_field_trial_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-25T08:35:19Z",
+      "side": 1,
+      "message": "The many-arguments version is discouraged; you should be able to use the one that takes PC.dependencies instead.",
+      "revId": "4f6f03c083376f146291b9a1d7c81feea234f493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43399a7e_aa882ecd",
+        "filename": "pc/peer_connection_field_trial_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-25T08:35:19Z",
+      "side": 1,
+      "message": "Can we use ASSERT_ to just stop here, instead of crashing on the nullpointer?",
+      "revId": "4f6f03c083376f146291b9a1d7c81feea234f493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "390e6057_f7ed4a63",
+        "filename": "pc/peer_connection_field_trial_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-25T08:35:19Z",
+      "side": 1,
+      "message": "Add a comment above this test to say \"Tests for the dependency descriptor field trial. The depenency descriptor field trial is implemented in ...\" (filename of file actually implementing the DD field trial).",
       "revId": "4f6f03c083376f146291b9a1d7c81feea234f493",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
