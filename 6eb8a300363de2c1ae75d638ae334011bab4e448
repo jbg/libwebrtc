@@ -33,6 +33,23 @@
       "message": "Thank you very much for review Herink! Could you please approve from your @webrtc.org account, so bot counts approval for `sdk/BUILD.gn` file.\nThanks a lot in advance!",
       "revId": "6eb8a300363de2c1ae75d638ae334011bab4e448",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b272b6c2_64ade49c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-08-25T10:11:31Z",
+      "side": 1,
+      "message": "Hi Tommi! You\u0027ve reviewed and approved previous two CL in the chain, but not this one. Should I wait for your approval on this CL? Technically it\u0027s already enough approvals to land, so if you don\u0027t have time to proper review and don\u0027t mind me landing this CL chain as is let me know please.\n\nThanks a lot in advance,\nYury.",
+      "revId": "6eb8a300363de2c1ae75d638ae334011bab4e448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
