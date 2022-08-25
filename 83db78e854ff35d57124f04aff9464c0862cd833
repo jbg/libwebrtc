@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c4ee388_858f7ed4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-25T05:38:00Z",
+      "side": 1,
+      "message": "It seems that this CL is blocking the WebRTC role in Chromium.\nhttps://ci.chromium.org/ui/p/chromium/builders/try/linux-rel/1111511/overview\n",
+      "revId": "83db78e854ff35d57124f04aff9464c0862cd833",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
