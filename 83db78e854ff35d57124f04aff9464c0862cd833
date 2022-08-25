@@ -34,6 +34,24 @@
       "tag": "mailMessageId\u003d\u003cCANDN_yUHGG\u003dWmyAC\u003djWsGEX7iCCreVP_vG17iY9SVKmsNtzJtw@mail.gmail.com\u003e",
       "revId": "83db78e854ff35d57124f04aff9464c0862cd833",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99f963e2_8e48eb17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2022-08-25T10:06:48Z",
+      "side": 1,
+      "message": "No, Chromium does not use TaskQueueStdlib at all. Chrome uses its own implementation called WebRtcTaskQueue.\n\nThe compile issue is only with the definition of the tests. Since the signature for CreateDefaultTaskQueueFactory() is changed in this CL, the blink tests no longer compile. Don\u0027t know why this wasn\u0027t caught by any of the chromium compile bots.\n\nThe only sane solution I can think of right now is to 1) revert this CL, 2) disable those tests (comment them out) in blink, 3) land this CL, 4) once rolled into chromium, fix the tests and re-enable them.",
+      "parentUuid": "89636e0d_1624e12e",
+      "revId": "83db78e854ff35d57124f04aff9464c0862cd833",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
