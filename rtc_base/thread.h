@@ -298,14 +298,6 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
     return messages_.size() + delayed_messages_.size();
   }
 
-  // Internally posts a message which causes the doomed object to be deleted
-  // TODO(bugs.webrtc.org/8324): Delete when unused by dependencies.
-  template <class T>
-  void Dispose(T* doomed) {
-    RTC_DCHECK(doomed);
-    PostTask([dommed = absl::WrapUnique(doomed)] {});
-  }
-
   bool IsCurrent() const;
 
   // Sleeps the calling thread for the specified number of milliseconds, during
