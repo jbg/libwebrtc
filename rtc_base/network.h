@@ -449,6 +449,7 @@ class RTC_EXPORT Network {
   // Note that when not specifying any flag, it's treated as case global
   // IPv6 address
   IPAddress GetBestIP() const;
+  bool PreferGlobalIPv6Address() const;
 
   // Adds an active IP address to this network. Does not check for duplicates.
   void AddIP(const InterfaceAddress& ip) { ips_.push_back(ip); }
