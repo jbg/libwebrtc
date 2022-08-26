@@ -22,6 +22,30 @@
       },
       "revId": "02c99982c8e5a88ca14cc217254f3d9b3c792646",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bc7fb22_50945462",
+        "filename": "infra/config/luci-notify.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-26T13:16:56Z",
+      "side": 0,
+      "message": "I kept it to be safe but yes, it looks like we can remove it.",
+      "parentUuid": "529cf0b0_982e9096",
+      "range": {
+        "startLine": 625,
+        "startChar": 54,
+        "endLine": 625,
+        "endChar": 70
+      },
+      "revId": "02c99982c8e5a88ca14cc217254f3d9b3c792646",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
