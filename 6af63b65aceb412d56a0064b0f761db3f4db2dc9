@@ -16,6 +16,46 @@
       "message": "Drive-by comment:\n\nIf you are working to actually test DegradationPreference, you might want to look at https://chromium-review.googlesource.com/c/chromium/src/+/3117645 which was my attempt to do something similar.\n\nIt is not submitted because it\u0027s wildly unstable due to too-long rampup times.\n",
       "revId": "6af63b65aceb412d56a0064b0f761db3f4db2dc9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0f6507_38cfd1b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-08-26T10:40:19Z",
+      "side": 1,
+      "message": "Ьфниу ",
+      "revId": "6af63b65aceb412d56a0064b0f761db3f4db2dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17acffc2_c8d354a3",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-08-26T10:40:19Z",
+      "side": 1,
+      "message": "Please also add a comment that if it\u0027s contradict to what is set via `content_hint` it may lead to unpredictable behaviour in WebRTC itself.",
+      "range": {
+        "startLine": 386,
+        "startChar": 4,
+        "endLine": 386,
+        "endChar": 65
+      },
+      "revId": "6af63b65aceb412d56a0064b0f761db3f4db2dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
