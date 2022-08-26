@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "529cf0b0_982e9096",
+        "filename": "infra/config/luci-notify.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 15909
+      },
+      "writtenOn": "2022-08-26T12:37:04Z",
+      "side": 0,
+      "message": "Can we also remove this regex as well?",
+      "range": {
+        "startLine": 625,
+        "startChar": 54,
+        "endLine": 625,
+        "endChar": 70
+      },
+      "revId": "02c99982c8e5a88ca14cc217254f3d9b3c792646",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
