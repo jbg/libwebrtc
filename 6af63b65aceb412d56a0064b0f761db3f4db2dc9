@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46de71c3_adc33e52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-26T10:34:25Z",
+      "side": 1,
+      "message": "Drive-by comment:\n\nIf you are working to actually test DegradationPreference, you might want to look at https://chromium-review.googlesource.com/c/chromium/src/+/3117645 which was my attempt to do something similar.\n\nIt is not submitted because it\u0027s wildly unstable due to too-long rampup times.\n",
+      "revId": "6af63b65aceb412d56a0064b0f761db3f4db2dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
