@@ -89,20 +89,21 @@ class RTC_EXPORT RtpSenderInterface : public rtc::RefCountInterface {
   // using the user provided encryption mechanism regardless of whether SRTP is
   // enabled or not.
   virtual void SetFrameEncryptor(
-      rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor);
+      rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor) = 0;
 
   // Returns a pointer to the frame encryptor set previously by the
   // user. This can be used to update the state of the object.
-  virtual rtc::scoped_refptr<FrameEncryptorInterface> GetFrameEncryptor() const;
+  virtual rtc::scoped_refptr<FrameEncryptorInterface> GetFrameEncryptor()
+      const = 0;
 
   virtual void SetEncoderToPacketizerFrameTransformer(
-      rtc::scoped_refptr<FrameTransformerInterface> frame_transformer);
+      rtc::scoped_refptr<FrameTransformerInterface> frame_transformer) = 0;
 
   // Sets a user defined encoder selector.
   // Overrides selector that is (optionally) provided by VideoEncoderFactory.
   virtual void SetEncoderSelector(
       std::unique_ptr<VideoEncoderFactory::EncoderSelectorInterface>
-          encoder_selector) {}
+          encoder_selector) = 0;
 
  protected:
   ~RtpSenderInterface() override = default;
