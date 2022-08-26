@@ -16,6 +16,23 @@
       "message": "Mark, I hit an issue in SharedScreencastStream that I think is better to fix with this change. Can you take a second look at the patchset diff?\n\nJan, LMK if this seems reasonable now.",
       "revId": "2b8670d410aa3a457e4a67df6437c97aca1c1aab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feeef818_56ff7c92",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-26T06:27:36Z",
+      "side": 1,
+      "message": "If you look at StartScreenCastStream() you will see that the next time you start sharing again you will re-create all the objects (pw_loop, pw_stream, etc.) so I believe these will get leaked as you don\u0027t destroy them and later on just initialize again. Unfortunately SharedScreenCastStream was not written with \"reusability\" in mind so what I would do is:\n\n1) Move pw_thread_loop_wait(pw_main_loop_) to the destructor, that\u0027s what I actually meant when I asked you to try it.\n2) Move the content of the desctructor to a separate function so it can be called from here, similar to ScreenCast::Cleanup().\n3) Use it here and in the desctructor instead",
+      "revId": "2b8670d410aa3a457e4a67df6437c97aca1c1aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
