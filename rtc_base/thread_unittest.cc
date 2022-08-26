@@ -196,12 +196,7 @@ class FunctorB {
  private:
   AtomicBool* flag_;
 };
-struct FunctorC {
-  int operator()() {
-    Thread::Current()->ProcessMessages(50);
-    return 24;
-  }
-};
+
 struct FunctorD {
  public:
   explicit FunctorD(AtomicBool* flag) : flag_(flag) {}
@@ -378,7 +373,7 @@ TEST(ThreadTest, InvokeToThreadAllowedReturnsTrueWithoutPolicies) {
 
   thread1->PostTask(
       [&]() { EXPECT_TRUE(thread1->IsInvokeToThreadAllowed(thread2.get())); });
-  main_thread.ProcessMessages(100);
+  main_thread.ProcessMessages(TimeDelta::Millis(100));
 }
 
 TEST(ThreadTest, InvokeAllowedWhenThreadsAdded) {
@@ -397,7 +392,7 @@ TEST(ThreadTest, InvokeAllowedWhenThreadsAdded) {
     EXPECT_TRUE(thread1->IsInvokeToThreadAllowed(thread3.get()));
     EXPECT_FALSE(thread1->IsInvokeToThreadAllowed(thread4.get()));
   });
-  main_thread.ProcessMessages(100);
+  main_thread.ProcessMessages(TimeDelta::Millis(100));
 }
 
 TEST(ThreadTest, InvokesDisallowedWhenDisallowAllInvokes) {
@@ -410,7 +405,7 @@ TEST(ThreadTest, InvokesDisallowedWhenDisallowAllInvokes) {
 
   thread1->PostTask(
       [&]() { EXPECT_FALSE(thread1->IsInvokeToThreadAllowed(thread2.get())); });
-  main_thread.ProcessMessages(100);
+  main_thread.ProcessMessages(TimeDelta::Millis(100));
 }
 #endif  // (!defined(NDEBUG) || RTC_DCHECK_IS_ON)
 
@@ -422,7 +417,7 @@ TEST(ThreadTest, InvokesAllowedByDefault) {
 
   thread1->PostTask(
       [&]() { EXPECT_TRUE(thread1->IsInvokeToThreadAllowed(thread2.get())); });
-  main_thread.ProcessMessages(100);
+  main_thread.ProcessMessages(TimeDelta::Millis(100));
 }
 
 TEST(ThreadTest, Invoke) {

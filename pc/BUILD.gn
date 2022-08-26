@@ -901,6 +901,7 @@ rtc_library("connection_context") {
     "../api/neteq:neteq_api",
     "../api/transport:field_trial_based_config",
     "../api/transport:sctp_transport_factory_interface",
+    "../api/units:time_delta",
     "../media:rtc_data_sctp_transport_factory",
     "../media:rtc_media_base",
     "../p2p:rtc_p2p",
