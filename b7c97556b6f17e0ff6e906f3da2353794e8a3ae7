@@ -16,6 +16,24 @@
       "message": "How will this value be used? Would there be drawbacks to e.g. use a double instead of an enum?",
       "revId": "b7c97556b6f17e0ff6e906f3da2353794e8a3ae7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57ec354d_53f629a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-26T13:00:16Z",
+      "side": 1,
+      "message": "I\u0027m going to use this API in the linked CL. pc/test/svc_e2e_tests.cc#L498 of https://webrtc-review.googlesource.com/c/src/+/273123/2\n\nI think using an enum is better than using a double, because it\u0027s a bit inconvenient to check if floating point values are equal.",
+      "parentUuid": "7e0582c2_9218cb7f",
+      "revId": "b7c97556b6f17e0ff6e906f3da2353794e8a3ae7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
