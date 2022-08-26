@@ -32,6 +32,7 @@
 #include "api/function_view.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/units/time_delta.h"
+#include "api/units/timestamp.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/deprecated/recursive_critical_section.h"
 #include "rtc_base/location.h"
@@ -288,8 +289,7 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
                      uint32_t id = MQID_ANY,
                      MessageList* removed = nullptr);
 
-  // Amount of time until the next message can be retrieved
-  virtual int GetDelay();
+  virtual webrtc::TimeDelta TimeUntilNextTask();
 
   bool empty() const { return size() == 0u; }
   size_t size() const {
@@ -312,7 +312,7 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   // Sets the expected processing time in ms. The thread will write
   // log messages when Invoke() takes more time than this.
   // Default is 50 ms.
-  void SetDispatchWarningMs(int deadline);
+  void SetDispatchWarning(webrtc::TimeDelta max_run_time);
 
   // Starts the execution of the thread.
   bool Start();
@@ -385,7 +385,11 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   // ProcessMessages will process I/O and dispatch messages until:
   //  1) cms milliseconds have elapsed (returns true)
   //  2) Stop() is called (returns false)
-  bool ProcessMessages(int cms);
+  bool ProcessMessages(int cms) {
+    return ProcessMessages(cms == kForever ? webrtc::TimeDelta::PlusInfinity()
+                                           : webrtc::TimeDelta::Millis(cms));
+  }
+  bool ProcessMessages(webrtc::TimeDelta wait);
 
   // Returns true if this is a thread that we created using the standard
   // constructor, false if it was created by a call to
@@ -432,39 +436,6 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
     rtc::Thread* const previous_;
   };
 
-  // DelayedMessage goes into a priority queue, sorted by trigger time. Messages
-  // with the same trigger time are processed in num_ (FIFO) order.
-  class DelayedMessage {
-   public:
-    DelayedMessage(int64_t delay,
-                   int64_t run_time_ms,
-                   uint32_t num,
-                   const Message& msg)
-        : delay_ms_(delay),
-          run_time_ms_(run_time_ms),
-          message_number_(num),
-          msg_(msg) {}
-
-    bool operator<(const DelayedMessage& dmsg) const {
-      return (dmsg.run_time_ms_ < run_time_ms_) ||
-             ((dmsg.run_time_ms_ == run_time_ms_) &&
-              (dmsg.message_number_ < message_number_));
-    }
-
-    int64_t delay_ms_;  // for debugging
-    int64_t run_time_ms_;
-    // Monotonicaly incrementing number used for ordering of messages
-    // targeted to execute at the same time.
-    uint32_t message_number_;
-    Message msg_;
-  };
-
-  class PriorityQueue : public std::priority_queue<DelayedMessage> {
-   public:
-    container_type& container() { return c; }
-    void reheap() { make_heap(c.begin(), c.end(), comp); }
-  };
-
   void DoDelayPost(const Location& posted_from,
                    int64_t cmsDelay,
                    int64_t tstamp,
@@ -501,21 +472,41 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   friend class ScopedDisallowBlockingCalls;
 
  private:
-  static const int kSlowDispatchLoggingThreshold = 50;  // 50 ms
+  static constexpr webrtc::TimeDelta kSlowDispatchLoggingThreshold =
+      webrtc::TimeDelta::Millis(50);
+
+  // DelayedMessage goes into a priority queue, sorted by trigger time. Messages
+  // with the same trigger time are processed in num_ (FIFO) order.
+  struct DelayedMessage {
+    bool operator<(const DelayedMessage& dmsg) const {
+      return (dmsg.run_at < run_at) || ((dmsg.run_at == run_at) &&
+                                        (dmsg.message_number < message_number));
+    }
+
+    webrtc::Timestamp run_at;
+    // Monotonicaly incrementing number used for ordering of messages
+    // targeted to execute at the same time.
+    uint32_t message_number;
+    Message msg;
+  };
+
+  class PriorityQueue : public std::priority_queue<DelayedMessage> {
+   public:
+    container_type& container() { return c; }
+    void reheap() { make_heap(c.begin(), c.end(), comp); }
+  };
 
   // TODO(bugs.webrtc.org/9702): Delete when chromium stops overriding it.
   // chromium's ThreadWrapper overrides it just to check it is never called.
-  virtual bool Peek(Message* pmsg, int cms_wait) {
+  virtual bool Get(Message* pmsg, int cmsWait, bool process_io) {
     RTC_DCHECK_NOTREACHED();
     return false;
   }
-  // Get() will process I/O until:
-  //  1) A message is available (returns true)
-  //  2) cmsWait seconds have elapsed (returns false)
-  //  3) Stop() is called (returns false)
-  virtual bool Get(Message* pmsg,
-                   int cmsWait = kForever,
-                   bool process_io = true);
+  virtual int GetDelay() {
+    RTC_DCHECK_NOTREACHED();
+    return 0;
+  }
+
   virtual void Dispatch(Message* pmsg);
 
   // Sets the per-thread allow-blocking-calls flag and returns the previous
@@ -595,7 +586,8 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
 
   friend class ThreadManager;
 
-  int dispatch_warning_ms_ RTC_GUARDED_BY(this) = kSlowDispatchLoggingThreshold;
+  webrtc::TimeDelta dispatch_warning_ RTC_GUARDED_BY(this) =
+      kSlowDispatchLoggingThreshold;
 };
 
 // AutoThread automatically installs itself at construction

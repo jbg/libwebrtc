@@ -35,6 +35,8 @@
 #include "absl/algorithm/container.h"
 #include "absl/cleanup/cleanup.h"
 #include "api/sequence_checker.h"
+#include "api/units/time_delta.h"
+#include "api/units/timestamp.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/deprecated/recursive_critical_section.h"
 #include "rtc_base/event.h"
@@ -75,6 +77,7 @@ namespace rtc {
 namespace {
 
 using ::webrtc::TimeDelta;
+using ::webrtc::Timestamp;
 
 struct AnyInvocableMessage final : public MessageData {
   explicit AnyInvocableMessage(absl::AnyInvocable<void() &&> task)
@@ -116,6 +119,11 @@ class RTC_SCOPED_LOCKABLE MarkProcessingCritScope {
   const RecursiveCriticalSection* const cs_;
   size_t* processing_;
 };
+
+Timestamp Now() {
+  // TODO(bugs.webrc.org/13756): Increase precision to microseconds.
+  return Timestamp::Millis(rtc::TimeMillis());
+}
 
 }  // namespace
 
@@ -245,7 +253,7 @@ void ThreadManager::ProcessAllMessageQueuesInternal() {
   // to process messages as well.
   while (queues_not_done.load() > 0) {
     if (current) {
-      current->ProcessMessages(0);
+      current->ProcessMessages(TimeDelta::Zero());
     }
   }
 }
@@ -445,73 +453,6 @@ void Thread::Restart() {
   stop_.store(0, std::memory_order_release);
 }
 
-bool Thread::Get(Message* pmsg, int cmsWait, bool process_io) {
-  // Get w/wait + timer scan / dispatch + socket / event multiplexer dispatch
-
-  int64_t cmsTotal = cmsWait;
-  int64_t cmsElapsed = 0;
-  int64_t msStart = TimeMillis();
-  int64_t msCurrent = msStart;
-  while (true) {
-    // Check for posted events
-    int64_t cmsDelayNext = kForever;
-    {
-      // All queue operations need to be locked, but nothing else in this loop
-      // can happen inside the crit.
-      CritScope cs(&crit_);
-      // Check for delayed messages that have been triggered and calculate the
-      // next trigger time.
-      while (!delayed_messages_.empty()) {
-        if (msCurrent < delayed_messages_.top().run_time_ms_) {
-          cmsDelayNext =
-              TimeDiff(delayed_messages_.top().run_time_ms_, msCurrent);
-          break;
-        }
-        messages_.push_back(delayed_messages_.top().msg_);
-        delayed_messages_.pop();
-      }
-      // Pull a message off the message queue, if available.
-      if (!messages_.empty()) {
-        *pmsg = messages_.front();
-        messages_.pop_front();
-        return true;
-      }
-    }
-
-    if (IsQuitting())
-      break;
-
-    // Which is shorter, the delay wait or the asked wait?
-
-    int64_t cmsNext;
-    if (cmsWait == kForever) {
-      cmsNext = cmsDelayNext;
-    } else {
-      cmsNext = std::max<int64_t>(0, cmsTotal - cmsElapsed);
-      if ((cmsDelayNext != kForever) && (cmsDelayNext < cmsNext))
-        cmsNext = cmsDelayNext;
-    }
-
-    {
-      // Wait and multiplex in the meantime
-      if (!ss_->Wait(cmsNext == kForever ? SocketServer::kForever
-                                         : webrtc::TimeDelta::Millis(cmsNext),
-                     process_io))
-        return false;
-    }
-
-    // If the specified timeout expired, return
-
-    msCurrent = TimeMillis();
-    cmsElapsed = TimeDiff(msCurrent, msStart);
-    if (cmsWait != kForever) {
-      if (cmsElapsed >= cmsWait)
-        return false;
-    }
-  }
-  return false;
-}
-
 void Thread::Post(const Location& posted_from,
                   MessageHandler* phandler,
                   uint32_t id,
@@ -579,8 +520,9 @@ void Thread::DoDelayPost(const Location& posted_from,
     msg.phandler = phandler;
     msg.message_id = id;
     msg.pdata = pdata;
-    DelayedMessage delayed(delay_ms, run_at_ms, delayed_next_num_, msg);
-    delayed_messages_.push(delayed);
+    delayed_messages_.push({.run_at = Timestamp::Millis(run_at_ms),
+                            .message_number = delayed_next_num_,
+                            .msg = msg});
     // If this message queue processes 1 message every millisecond for 50 days,
     // we will wrap this number.  Even then, only messages with identical times
     // will be misordered, and then only briefly.  This is probably ok.
@@ -590,20 +532,18 @@ void Thread::DoDelayPost(const Location& posted_from,
   WakeUpSocketServer();
 }
 
-int Thread::GetDelay() {
+TimeDelta Thread::TimeUntilNextTask() {
   CritScope cs(&crit_);
 
-  if (!messages_.empty())
-    return 0;
-
-  if (!delayed_messages_.empty()) {
-    int delay = TimeUntil(delayed_messages_.top().run_time_ms_);
-    if (delay < 0)
-      delay = 0;
-    return delay;
+  if (!messages_.empty()) {
+    return TimeDelta::Zero();
   }
 
-  return kForever;
+  if (!delayed_messages_.empty()) {
+    return std::max(TimeDelta::Zero(), delayed_messages_.top().run_at - Now());
+  }
+
+  return TimeDelta::PlusInfinity();
 }
 
 void Thread::ClearInternal(MessageHandler* phandler,
@@ -628,11 +568,11 @@ void Thread::ClearInternal(MessageHandler* phandler,
 
   auto new_end = delayed_messages_.container().begin();
   for (auto it = new_end; it != delayed_messages_.container().end(); ++it) {
-    if (it->msg_.Match(phandler, id)) {
+    if (it->msg.Match(phandler, id)) {
       if (removed) {
-        removed->push_back(it->msg_);
+        removed->push_back(it->msg);
       } else {
-        delete it->msg_.pdata;
+        delete it->msg.pdata;
       }
     } else {
       *new_end++ = *it;
@@ -648,17 +588,17 @@ void Thread::Dispatch(Message* pmsg) {
                pmsg->posted_from.file_name(), "src_func",
                pmsg->posted_from.function_name());
   RTC_DCHECK_RUN_ON(this);
-  int64_t start_time = TimeMillis();
+  Timestamp start_time = Now();
   pmsg->phandler->OnMessage(pmsg);
-  int64_t end_time = TimeMillis();
-  int64_t diff = TimeDiff(end_time, start_time);
-  if (diff >= dispatch_warning_ms_) {
+  Timestamp end_time = Now();
+  TimeDelta diff = end_time - start_time;
+  if (diff > dispatch_warning_) {
     RTC_LOG(LS_INFO) << "Message to " << name() << " took " << diff
-                     << "ms to dispatch. Posted from: "
+                     << " to dispatch. Posted from: "
                      << pmsg->posted_from.ToString();
     // To avoid log spew, move the warning limit to only give warning
     // for delays that are larger than the one observed.
-    dispatch_warning_ms_ = diff + 1;
+    dispatch_warning_ = diff;
   }
 }
 
@@ -710,13 +650,13 @@ bool Thread::SetName(absl::string_view name, const void* obj) {
   return true;
 }
 
-void Thread::SetDispatchWarningMs(int deadline) {
+void Thread::SetDispatchWarning(TimeDelta max_run_time) {
   if (!IsCurrent()) {
-    PostTask([this, deadline]() { SetDispatchWarningMs(deadline); });
+    PostTask([this, max_run_time]() { SetDispatchWarning(max_run_time); });
     return;
   }
   RTC_DCHECK_RUN_ON(this);
-  dispatch_warning_ms_ = deadline;
+  dispatch_warning_ = max_run_time;
 }
 
 bool Thread::Start() {
@@ -838,7 +778,7 @@ void* Thread::PreRun(void* pv) {
 }  // namespace rtc
 
 void Thread::Run() {
-  ProcessMessages(kForever);
+  ProcessMessages(TimeDelta::PlusInfinity());
 }
 
 bool Thread::IsOwned() {
@@ -1062,30 +1002,59 @@ void Thread::Clear(MessageHandler* phandler,
   ClearInternal(phandler, id, removed);
 }
 
-bool Thread::ProcessMessages(int cmsLoop) {
+bool Thread::ProcessMessages(TimeDelta wait) {
+  RTC_DCHECK_GE(wait, TimeDelta::Zero());
   // Using ProcessMessages with a custom clock for testing and a time greater
   // than 0 doesn't work, since it's not guaranteed to advance the custom
   // clock's time, and may get stuck in an infinite loop.
-  RTC_DCHECK(GetClockForTesting() == nullptr || cmsLoop == 0 ||
-             cmsLoop == kForever);
-  int64_t msEnd = (kForever == cmsLoop) ? 0 : TimeAfter(cmsLoop);
-  int cmsNext = cmsLoop;
+  RTC_DCHECK(GetClockForTesting() == nullptr || wait == TimeDelta::Zero() ||
+             wait == TimeDelta::PlusInfinity());
+  Timestamp now = Now();
+  const Timestamp deadline = now + wait;
 
-  while (true) {
+  do {  // run loop at least once even if now == deadline.
 #if defined(WEBRTC_MAC)
     ScopedAutoReleasePool pool;
 #endif
-    Message msg;
-    if (!Get(&msg, cmsNext))
-      return !IsQuitting();
-    Dispatch(&msg);
-
-    if (cmsLoop != kForever) {
-      cmsNext = static_cast<int>(TimeUntil(msEnd));
-      if (cmsNext < 0)
-        return true;
+    // Check for posted events
+    Timestamp delay_until = deadline;
+    absl::optional<Message> message;
+    {
+      // All queue operations need to be locked, but nothing else in this loop
+      // can happen inside the crit.
+      CritScope cs(&crit_);
+      // Check for delayed messages that have been triggered and calculate the
+      // next trigger time.
+      while (!delayed_messages_.empty()) {
+        if (now < delayed_messages_.top().run_at) {
+          delay_until = std::min(deadline, delayed_messages_.top().run_at);
+          break;
+        }
+        messages_.push_back(delayed_messages_.top().msg);
+        delayed_messages_.pop();
+      }
+      // Pull a message off the message queue, if available.
+      if (!messages_.empty()) {
+        message = messages_.front();
+        messages_.pop_front();
+      }
     }
-  }
+    if (message.has_value()) {
+      Dispatch(&*message);
+      now = Now();
+      continue;
+    }
+
+    if (IsQuitting())
+      return false;
+
+    // Wait and multiplex in the meantime
+    ss_->Wait(delay_until - now, /*process_io=*/true);
+
+    now = Now();
+    // If the specified timeout expired, return
+  } while (now < deadline);
+  return true;
 }
 
 bool Thread::WrapCurrentWithThreadManager(ThreadManager* thread_manager,
