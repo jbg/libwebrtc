@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5fe50f2_2334c5fd",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-08-26T08:27:05Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think this constant helps. Just reading the method call below you could be tricker into thinking `kBweLimitedDuetoPacketLoss` means that we _are_ limited due to packet loss. Suggest changing call sites, e.g.:\n\n```\n  probes \u003d probe_controller-\u003eSetEstimatedBitrate(\n      kStartBitrateBps, /*bwe_limited_due_to_packet_loss\u003d*/false, fixture.NowMs());\n```\n\nSame below.",
+      "range": {
+        "startLine": 170,
+        "startChar": 2,
+        "endLine": 170,
+        "endChar": 48
+      },
+      "revId": "35b0206c2f53811560253c22e971e64700e3248f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6f6fb49_ad14e019",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-08-26T08:27:05Z",
+      "side": 1,
+      "message": "nit: KiloBitsPerSec(6) ?",
+      "range": {
+        "startLine": 544,
+        "startChar": 49,
+        "endLine": 544,
+        "endChar": 66
+      },
+      "revId": "35b0206c2f53811560253c22e971e64700e3248f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
