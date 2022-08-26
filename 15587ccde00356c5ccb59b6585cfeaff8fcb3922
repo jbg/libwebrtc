@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81d2f274_fd68f13d",
+        "filename": "test/pc/e2e/analyzer/video/quality_analyzing_video_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-26T10:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60dca693_8a64aad1",
+      "range": {
+        "startLine": 92,
+        "startChar": 15,
+        "endLine": 92,
+        "endChar": 36
+      },
+      "revId": "15587ccde00356c5ccb59b6585cfeaff8fcb3922",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbd2e873_8db839b2",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-26T10:21:58Z",
       "side": 1,
       "message": "Do we need a brackets around it?",
+      "range": {
+        "startLine": 93,
+        "startChar": 30,
+        "endLine": 93,
+        "endChar": 31
+      },
+      "revId": "15587ccde00356c5ccb59b6585cfeaff8fcb3922",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5c33156_0d8b3852",
+        "filename": "test/pc/e2e/analyzer/video/quality_analyzing_video_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-26T10:57:10Z",
+      "side": 1,
+      "message": "Nope. Done.",
+      "parentUuid": "dbd2e873_8db839b2",
       "range": {
         "startLine": 93,
         "startChar": 30,
