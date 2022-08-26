@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04fea29e_c28145d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-26T10:54:23Z",
+      "side": 1,
+      "message": "This option will be used in the following CL: https://webrtc-review.googlesource.com/c/src/+/273123\nTo check the output frame size of the SVC streams, I need to specify MAINTAIN_RESOLUTION so that the resolution is not modified during the call.\n\nI have no intention of testing the DegradationPreference itself.",
+      "parentUuid": "46de71c3_adc33e52",
+      "revId": "6af63b65aceb412d56a0064b0f761db3f4db2dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17acffc2_c8d354a3",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-08-26T10:40:19Z",
       "side": 1,
       "message": "Please also add a comment that if it\u0027s contradict to what is set via `content_hint` it may lead to unpredictable behaviour in WebRTC itself.",
+      "range": {
+        "startLine": 386,
+        "startChar": 4,
+        "endLine": 386,
+        "endChar": 65
+      },
+      "revId": "6af63b65aceb412d56a0064b0f761db3f4db2dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b3c83e4_d13784ac",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-26T10:54:23Z",
+      "side": 1,
+      "message": "Okay. I want to add DCHECK to prevent specifying both content_hint and degradation_preference, what do you think?\nIf you\u0027re okay, I will  place it somewhere in `MediaHelper::MaybeAddVideo`.",
+      "parentUuid": "17acffc2_c8d354a3",
       "range": {
         "startLine": 386,
         "startChar": 4,
