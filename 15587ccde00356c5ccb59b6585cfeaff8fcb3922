@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41f5a37e_b1cfe4b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-26T09:08:00Z",
+      "side": 1,
+      "message": "Hi, Artem. This CL is a necessary change in the chained CL. https://webrtc-review.googlesource.com/c/src/+/273123. Please take a look.",
+      "revId": "15587ccde00356c5ccb59b6585cfeaff8fcb3922",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
