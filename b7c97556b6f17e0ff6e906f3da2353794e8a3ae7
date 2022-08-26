@@ -34,6 +34,47 @@
       "parentUuid": "7e0582c2_9218cb7f",
       "revId": "b7c97556b6f17e0ff6e906f3da2353794e8a3ae7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "339fc998_76410ab0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-08-26T13:11:59Z",
+      "side": 1,
+      "message": "Ack. Nit regarding the name, but I don\u0027t have strong feelings based on limited use. Pick one you like :)",
+      "parentUuid": "57ec354d_53f629a2",
+      "revId": "b7c97556b6f17e0ff6e906f3da2353794e8a3ae7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2484fb7_d7fdac89",
+        "filename": "modules/video_coding/svc/scalability_mode_util.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-08-26T13:11:59Z",
+      "side": 1,
+      "message": "nit: \"one half\" sounds like 0.5 to me. \"one and a half\" is clearer but leads to a bit of an ugly constant name...\n\nkTwoToOne, or kThreeToTwo might other options",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 10
+      },
+      "revId": "b7c97556b6f17e0ff6e906f3da2353794e8a3ae7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
