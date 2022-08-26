@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40c59cf7_ba3de789",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-08-26T10:31:29Z",
+      "side": 1,
+      "message": "Please fix compile errors, and add the required steps to update AUTHORS.\nAlso make sure you have a valid CLA.\nTrying to find a reviewer with knowledge of the Windows aspects (Niels is no longer working on the project).",
+      "revId": "2ca831af0892f44bc252b8ce09ec9d8590c3a103",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
