@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d82c9932_73429f2b",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-29T19:42:39Z",
+      "side": 1,
+      "message": "I will have to test it tomorrow, I\u0027m looking into it quickly now and I\u0027m not sure whether calling pw_thread_loop_wait() without signaling we are done is correct thing to do. This call should actually be blocking until some thread calls pw_thread_loop_signal() and PipeWire doesn\u0027t seem to do it internally so it has to be us doing this once we are sure it\u0027s safe to tear it down.",
+      "parentUuid": "3e618923_ecd9d49f",
+      "revId": "b147666a257a4213dd4dbd5e324b9f19093eb6c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9d27c85_6ef2720b",
         "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
         "patchSetId": 5
