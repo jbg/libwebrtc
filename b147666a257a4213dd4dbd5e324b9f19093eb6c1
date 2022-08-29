@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1b0d84d_22f0ddb2",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-29T20:03:31Z",
+      "side": 1,
+      "message": "If pw_thread_loop_start fails (simulated by never running it and just returning false in StartScreenCastStream), we seem to be fine to run the wait/destroy (e.g. in the runs I have now it wasn\u0027t hanging and I expect that it would non-racily hang without the thread started if there was an actual issue there). There was a small issue with this testing where I had to reset the value of capturer_failed_ in OnScreenCastRequestResult; I think it\u0027s reasonable to do this longer term since we get that because there\u0027s been a new request.\n\nI did confirm that we do call StopScreenCastStream even if Start fails and that the cleanup proceeds as expected.\n\nI\u0027ll wait to land to see if Jan\u0027s investigation turns up that there\u0027s something else we need to do; but with the latest patchest things seem to work smoothly and recoverably.",
+      "parentUuid": "d82c9932_73429f2b",
+      "revId": "b147666a257a4213dd4dbd5e324b9f19093eb6c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9d27c85_6ef2720b",
         "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
         "patchSetId": 5
