@@ -140,6 +140,30 @@
       },
       "revId": "6af63b65aceb412d56a0064b0f761db3f4db2dc9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d205a15_b5dc268f",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-08-29T19:49:22Z",
+      "side": 1,
+      "message": "Artem: The WebRTC specification is fine having both content_hint and degradation_preference set, it is even required in some use case.\nWe want that kind of check.",
+      "parentUuid": "477e4313_3248d70e",
+      "range": {
+        "startLine": 386,
+        "startChar": 4,
+        "endLine": 386,
+        "endChar": 65
+      },
+      "revId": "6af63b65aceb412d56a0064b0f761db3f4db2dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
