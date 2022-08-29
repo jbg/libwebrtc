@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7cc6c74_5d38a24c",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-08-29T11:53:32Z",
+      "side": 0,
+      "message": "We don\u0027t seem to be guarding against this anymore. Was that check redundant, or is this implicitly covered by the infinity start values now?",
+      "range": {
+        "startLine": 175,
+        "startChar": 10,
+        "endLine": 175,
+        "endChar": 37
+      },
+      "revId": "f02212b8b0bb81a5787e77ddb43b3d19f64251e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
