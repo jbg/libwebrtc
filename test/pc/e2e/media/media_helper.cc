@@ -83,15 +83,6 @@ MediaHelper::MaybeAddVideo(TestPeer* peer) {
     RTCErrorOr<rtc::scoped_refptr<RtpSenderInterface>> sender =
         peer->AddTrack(track, {sync_group, *video_config.stream_label});
     RTC_CHECK(sender.ok());
-    if (video_config.temporal_layers_count) {
-      RtpParameters rtp_parameters = sender.value()->GetParameters();
-      for (auto& encoding_parameters : rtp_parameters.encodings) {
-        encoding_parameters.num_temporal_layers =
-            video_config.temporal_layers_count;
-      }
-      RTCError res = sender.value()->SetParameters(rtp_parameters);
-      RTC_CHECK(res.ok()) << "Failed to set RTP parameters";
-    }
   }
   return out;
 }

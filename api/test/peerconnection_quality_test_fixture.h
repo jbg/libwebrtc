@@ -316,10 +316,6 @@ class PeerConnectionE2EQualityTestFixture {
     // RtpEncodingParameters::rid may be changed by fixture implementation to
     // ensure signaling correctness.
     std::vector<RtpEncodingParameters> encoding_params;
-    // Count of temporal layers for video stream. This value will be set into
-    // each RtpEncodingParameters of RtpParameters of corresponding
-    // RtpSenderInterface for this video stream.
-    absl::optional<int> temporal_layers_count;
     // DEPRECATED: use input_dump_options instead. If specified the input stream
     // will be also copied to specified file. It is actually one of the test's
     // output file, which contains copy of what was captured during the test for
