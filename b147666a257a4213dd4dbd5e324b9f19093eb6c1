@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be6fb2c_d62a1c21",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-29T18:32:57Z",
+      "side": 1,
+      "message": "If I\u0027ve traced everything correctly, this is basically only called from the capturer thread. So I\u0027ve turned \"this may not be called from that thread\" to \"this is called from the capturer thread\".\n\nI\u0027ve also clarified that we need to wait on/stop the PipeWire thread.",
+      "parentUuid": "a083b23c_067d579e",
+      "revId": "b147666a257a4213dd4dbd5e324b9f19093eb6c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ad1e7a5_cf77a778",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-08-29T17:46:44Z",
       "side": 1,
       "message": "It appears that this can be allocated but never started, or the \"pipewire context\" fails to start (L414-426).  Do we still need to call pw_thread_loop_wait/_stop in those cases?",
+      "revId": "b147666a257a4213dd4dbd5e324b9f19093eb6c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e618923_ecd9d49f",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-29T18:32:57Z",
+      "side": 1,
+      "message": "I\u0027ll do some experimentation here; the documentation I found is unfortunately pretty light; but it does look like there may be a trap if the main thread hasn\u0027t started....\n\nJan do you have anymore information you can share here while I experiment?",
+      "parentUuid": "8ad1e7a5_cf77a778",
       "revId": "b147666a257a4213dd4dbd5e324b9f19093eb6c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "affb0c0c_1bc2b2f7",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-29T18:32:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9d27c85_6ef2720b",
+      "revId": "b147666a257a4213dd4dbd5e324b9f19093eb6c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3d2830a_450f0481",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-08-29T17:46:44Z",
       "side": 1,
       "message": "Aside: If all of these pipewire internal structs have essentially the same lifetime, IMO it would be better to bundle them into a single class that can be created, intiialized, and destroyed together, ideally using an RAII pattern.\n\nThis class could also be used to validate thread-correct behavior.\n\nSounds like it could be a big change, though, given the extensive usage of these pipewire structs, and you might want to hang other APIs off of it to wrap more of low-level pipewire details and possibly facilitate unit test mocks.\n\nWDYT?",
+      "revId": "b147666a257a4213dd4dbd5e324b9f19093eb6c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee87d363_38a5595e",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-29T18:32:57Z",
+      "side": 1,
+      "message": "Seems like a reasonable change, but agreed that it\u0027s probably larger in structure than I want to land with this change. https://crbug.com/1357768",
+      "parentUuid": "c3d2830a_450f0481",
       "revId": "b147666a257a4213dd4dbd5e324b9f19093eb6c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
