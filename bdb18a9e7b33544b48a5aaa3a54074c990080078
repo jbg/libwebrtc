@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "776bfdc6_3b5ad96a",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-29T11:48:07Z",
+      "side": 1,
+      "message": "Nit: should this be:\n\n# Use default values for PartitionAlloc as standalone library from\n# base/allocator/partition_allocator/build_overrides/partition_alloc.gni",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 137
+      },
+      "revId": "bdb18a9e7b33544b48a5aaa3a54074c990080078",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
