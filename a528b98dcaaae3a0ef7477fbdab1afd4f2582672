@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e53e490_1991228b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-08-29T09:47:26Z",
+      "side": 1,
+      "message": "Thanks for also enabling the tests in svc_e2e_tests.cc!",
+      "revId": "a528b98dcaaae3a0ef7477fbdab1afd4f2582672",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
