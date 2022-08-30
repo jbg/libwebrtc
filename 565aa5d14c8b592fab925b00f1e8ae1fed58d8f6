@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3e2d0e6_d28fa58c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-30T09:53:29Z",
+      "side": 1,
+      "message": "Addressing added enums in https://webrtc-review.googlesource.com/c/src/+/273301.",
+      "revId": "565aa5d14c8b592fab925b00f1e8ae1fed58d8f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
