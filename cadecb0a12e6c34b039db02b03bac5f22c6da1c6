@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ef3f17_48bf4f0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-30T06:58:05Z",
+      "side": 1,
+      "message": "When the dependent CL is merged, I will send this to CQ. Thanks!",
+      "revId": "cadecb0a12e6c34b039db02b03bac5f22c6da1c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
