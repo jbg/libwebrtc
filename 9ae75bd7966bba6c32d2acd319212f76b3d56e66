@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca7a8a2d_deb6d994",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-08-30T02:09:12Z",
+      "side": 1,
+      "message": "It seems that a CL similar to this ( https://webrtc-review.googlesource.com/c/src/+/273400 ) has already been merged.",
+      "revId": "9ae75bd7966bba6c32d2acd319212f76b3d56e66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
