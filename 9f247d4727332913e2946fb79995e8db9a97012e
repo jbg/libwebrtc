@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10f308c7_f5efc749",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-30T08:52:47Z",
+      "side": 1,
+      "message": "I believe this was supposed to be removed.",
+      "revId": "9f247d4727332913e2946fb79995e8db9a97012e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

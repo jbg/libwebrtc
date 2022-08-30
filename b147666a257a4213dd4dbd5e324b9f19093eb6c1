@@ -124,6 +124,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5faadad0_1c99c066",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-08-30T08:52:47Z",
+      "side": 1,
+      "message": "Looks it works as expected. I don\u0027t have doubts anymore.",
+      "parentUuid": "f1b0d84d_22f0ddb2",
+      "revId": "b147666a257a4213dd4dbd5e324b9f19093eb6c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9d27c85_6ef2720b",
