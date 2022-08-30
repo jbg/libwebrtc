@@ -43,6 +43,7 @@ class BaseCapturerPipeWire : public DesktopCapturer,
   DelegatedSourceListController* GetDelegatedSourceListController() override;
 
   // DelegatedSourceListController
+  void Observe(Observer* observer) override;
   void EnsureVisible() override;
   void EnsureHidden() override;
 
@@ -63,6 +64,8 @@ class BaseCapturerPipeWire : public DesktopCapturer,
   bool capturer_failed_ = false;
   bool is_screencast_portal_ = false;
   bool is_portal_open_ = false;
+
+  Observer* delegated_source_list_observer_ = nullptr;
 
   // SourceId that is selected using SelectSource() and that we previously
   // returned in GetSourceList(). This should be a SourceId that has a restore

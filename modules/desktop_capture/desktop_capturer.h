@@ -41,6 +41,31 @@ class DesktopFrame;
 // information.
 class RTC_EXPORT DelegatedSourceListController {
  public:
+  // Notifications that can be used to help drive any UI that the embedder may
+  // want to show around this source list (e.g. if an embedder shows their own
+  // UI in addition to the Delegated Source List).
+  class Observer {
+   public:
+    // Called after the user has made a selection in the delegated source list.
+    // Note that the consumer will still need to get the source out of the
+    // capturer by calling GetSourceList.
+    virtual void OnSelection() {}
+
+    // Called when there is any user action that cancels the source selection.
+    virtual void OnCancelled() {}
+
+    // Called when there is a system error that cancels the source selection.
+    virtual void OnError() {}
+
+   protected:
+    virtual ~Observer() {}
+  };
+
+  // Observer must remain valid until the owning DesktopCapturer is destroyed.
+  // Only one Observer is allowed at a time, and may be cleared by passing
+  // nullptr.
+  virtual void Observe(Observer* observer) = 0;
+
   // Used to prompt the capturer to show the delegated source list. If the
   // source list is already visible, this will be a no-op. Must be called after
   // starting the DesktopCapturer.
