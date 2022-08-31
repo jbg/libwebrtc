@@ -16,6 +16,74 @@
       "message": "Mark PTAL",
       "revId": "5bd9b37c85522090211375829f10467ddc78f41e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa96f094_246971c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-31T03:48:56Z",
+      "side": 1,
+      "message": "LGTM with some optional suggestions",
+      "revId": "5bd9b37c85522090211375829f10467ddc78f41e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4601e5_5604cb5b",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-31T03:48:56Z",
+      "side": 1,
+      "message": "Optional: It looks like these could be in its own file since it\u0027s not dependent in any way on DesktopCapturer, and the usage below could be forward declared.  That would keep this file smaller.",
+      "revId": "5bd9b37c85522090211375829f10467ddc78f41e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4932ee3c_85e3cc0f",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-31T03:48:56Z",
+      "side": 1,
+      "message": "Nit: It might be simplest to just use \"client\" here and below instead of \"embedder\" or \"consumer\".",
+      "revId": "5bd9b37c85522090211375829f10467ddc78f41e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e829a5b_78cef6d4",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-08-31T03:48:56Z",
+      "side": 1,
+      "message": "Nit: If you expect clients to override all methods these could be pure virtual ... this might save a few bytes of binary size from the empty functions.",
+      "revId": "5bd9b37c85522090211375829f10467ddc78f41e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
