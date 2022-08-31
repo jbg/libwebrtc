@@ -131,11 +131,9 @@ TEST_F(StatsEndToEndTest, GetStats) {
             stats.rtcp_packet_type_counts.pli_packets != 0 ||
             stats.rtcp_packet_type_counts.nack_requests != 0 ||
             stats.rtcp_packet_type_counts.unique_nack_requests != 0;
-
-        RTC_DCHECK(stats.current_payload_type == -1 ||
-                   stats.current_payload_type == kFakeVideoSendPayloadType);
         receive_stats_filled_["IncomingPayloadType"] |=
-            stats.current_payload_type == kFakeVideoSendPayloadType;
+            stats.current_payload_type.value_or(-1) ==
+            kFakeVideoSendPayloadType;
       }
 
       return AllStatsFilled(receive_stats_filled_);
