@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3186329_20f63a38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-08-31T16:29:11Z",
+      "side": 1,
+      "message": "This may be a premature optimization, but reducing stats size can\u0027t hurt considering how expensive getStats can be. WDYT?",
+      "revId": "2acb71905ddb6c951c098731d66d5778b0f8333d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
