@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dbc0f24_76e659cf",
+        "filename": "tools_webrtc/android/build_aar.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-08-31T06:40:39Z",
+      "side": 1,
+      "message": "There is a double \u0027c\u0027 here.",
+      "range": {
+        "startLine": 182,
+        "startChar": 21,
+        "endLine": 182,
+        "endChar": 22
+      },
+      "revId": "54761f9c70b29135e38721f6249d5d4a40d5268b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
