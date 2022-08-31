@@ -18,19 +18,23 @@
 #include <memory>
 #include <set>
 #include <utility>
+#include <vector>
 
 #include "absl/algorithm/container.h"
 #include "absl/memory/memory.h"
 #include "absl/strings/match.h"
 #include "absl/strings/string_view.h"
+#include "absl/types/optional.h"
 #include "api/async_dns_resolver.h"
 #include "api/candidate.h"
 #include "api/field_trials_view.h"
+#include "api/sequence_checker.h"
 #include "logging/rtc_event_log/ice_logger.h"
 #include "p2p/base/active_ice_controller_adapter.h"
 #include "p2p/base/basic_async_resolver_factory.h"
 #include "p2p/base/connection.h"
 #include "p2p/base/connection_info.h"
+#include "p2p/base/ice_controller_request_types.h"
 #include "p2p/base/legacy_ice_controller_adapter.h"
 #include "p2p/base/port.h"
 #include "rtc_base/checks.h"
@@ -2356,6 +2360,18 @@ void P2PTransportChannel::AckPruneRequest(PruneAcknowledgement ack) {
     PruneConnections(connections_to_prune);
   }
   OnConnectionsResorted();
+}
+
+void P2PTransportChannel::SubmitSwitchRequest(SwitchAcknowledgement ack) {
+  RTC_DCHECK_RUN_ON(network_thread_);
+  Connection* conn = FindConnection(ack.connection_id);
+  if (conn) {
+    SwitchRequest switch_request(
+        ack.reason, conn, /*_recheck_event=*/absl::nullopt,
+        /*_connections_to_forget_state_on=*/std::vector<const Connection*>(),
+        /*_cancelable=*/false, ack.perform_prune);
+    ice_controller_adapter_->ProcessSwitchRequest(switch_request);
+  }
 }
 
 void P2PTransportChannel::SetIceControllerObserver(

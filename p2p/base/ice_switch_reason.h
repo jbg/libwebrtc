@@ -29,6 +29,7 @@ enum class IceSwitchReason {
   // P2PTransportChannel to recheck a switch periodically without an event
   // taking place.
   ICE_CONTROLLER_RECHECK,
+  APPLICATION_REQUESTED,
 };
 
 std::string IceSwitchReasonToString(IceSwitchReason reason);

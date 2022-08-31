@@ -20,6 +20,9 @@
 
 namespace cricket {
 
+// TODO(samvi) choose a more neutral term for acknowledgement that can be used
+// as both a response to a proposal and a proactive proposal.
+
 // An acknowledgement for a PingRequest.
 struct PingAcknowledgement {
   PingAcknowledgement(uint32_t _connection_id, int _recheck_delay_ms)

@@ -287,6 +287,7 @@ class FakeIceTransport : public IceTransportInternal {
   void AckPingRequest(PingAcknowledgement ack) override {}
   void AckSwitchRequest(SwitchAcknowledgement ack) override {}
   void AckPruneRequest(PruneAcknowledgement ack) override {}
+  void SubmitSwitchRequest(SwitchAcknowledgement ack) override {}
 
   void SetIceControllerObserver(IceControllerObserver& observer) override {}
 

@@ -317,6 +317,9 @@ class RTC_EXPORT IceTransportInternal : public rtc::PacketTransportInternal {
   // Acknowledge a prune request.
   virtual void AckPruneRequest(PruneAcknowledgement ack) = 0;
 
+  // Make an ICE switch request.
+  virtual void SubmitSwitchRequest(SwitchAcknowledgement ack) = 0;
+
   // Sets the ICE controller observer.
   virtual void SetIceControllerObserver(IceControllerObserver& observer) = 0;
 

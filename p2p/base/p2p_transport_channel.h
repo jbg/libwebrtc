@@ -50,6 +50,7 @@
 #include "p2p/base/candidate_pair_interface.h"
 #include "p2p/base/connection.h"
 #include "p2p/base/ice_agent_interface.h"
+#include "p2p/base/ice_controller_ack_types.h"
 #include "p2p/base/ice_controller_adapter_interface.h"
 #include "p2p/base/ice_controller_factory_interface.h"
 #include "p2p/base/ice_controller_observer.h"
@@ -175,6 +176,7 @@ class P2PTransportChannel : public IceTransportInternal,
   void AckPingRequest(PingAcknowledgement ack) override;
   void AckSwitchRequest(SwitchAcknowledgement ack) override;
   void AckPruneRequest(PruneAcknowledgement ack) override;
+  void SubmitSwitchRequest(SwitchAcknowledgement ack) override;
   void SetIceControllerObserver(IceControllerObserver& observer) override;
 
   // From IceAgentInterface
