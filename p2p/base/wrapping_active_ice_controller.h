@@ -61,8 +61,8 @@ class WrappingActiveIceController : public ActiveIceControllerInterface {
   bool OnImmediateSwitchRequest(IceSwitchReason reason,
                                 const Connection* selected) override;
 
-  void ProcessPingRequest(const PingRequest& ping_result) override;
-  void ProcessSwitchRequest(const SwitchRequest& switch_request) override;
+  void ProcessPingRequest(const PingRequest& request) override;
+  void ProcessSwitchRequest(const SwitchRequest& request) override;
 
   void SetIceControllerObserver(IceControllerObserver& observer) override;
 

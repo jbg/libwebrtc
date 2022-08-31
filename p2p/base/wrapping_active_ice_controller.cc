@@ -118,8 +118,8 @@ void WrappingActiveIceController::OnStartPingingRequest() {
   if (wrapped_->HasPingableConnection()) {
     network_thread_->PostTask(
         SafeTask(task_safety_.flag(), [this]() { PingBestConnection(); }));
-    started_pinging_ = true;
     agent_.OnStartedPinging();
+    started_pinging_ = true;
   }
 }
 
@@ -151,10 +151,11 @@ bool WrappingActiveIceController::OnImmediateSwitchRequest(
                         result.connections_to_forget_state_on,
                         /*cancelable=*/false,
                         /*requires_pruning=*/false);
-  if (observer_) {
+  if (observer_ && result.connection.has_value()) {
     observer_->OnSwitchRequest(request);
+  } else {
+    ProcessSwitchRequest(request);
   }
-  ProcessSwitchRequest(request);
   return result.connection.has_value();
 }
 
@@ -176,26 +177,26 @@ void WrappingActiveIceController::PingBestConnection() {
 
   IceControllerInterface::PingResult result =
       wrapped_->SelectConnectionToPing(agent_.GetLastPingSentMs());
-  // TODO(samvi) remove once SwitchResult and SwitchRequest are converged.
   PingRequest request(result.connection, result.recheck_delay_ms);
-  if (observer_) {
+  if (observer_ && result.connection.has_value()) {
     observer_->OnPingRequest(request);
+  } else {
+    ProcessPingRequest(request);
   }
-  ProcessPingRequest(request);
 }
 
 void WrappingActiveIceController::ProcessPingRequest(
-    const PingRequest& result) {
+    const PingRequest& request) {
   RTC_DCHECK_RUN_ON(network_thread_);
 
-  if (result.connection.value_or(nullptr)) {
-    agent_.SendPingRequest(*result.connection);
+  if (request.connection.value_or(nullptr)) {
+    agent_.SendPingRequest(*request.connection);
   }
 
-  if (result.recheck_delay_ms.has_value()) {
+  if (request.recheck_delay_ms.has_value()) {
     network_thread_->PostDelayedTask(
         SafeTask(task_safety_.flag(), [this]() { PingBestConnection(); }),
-        TimeDelta::Millis(result.recheck_delay_ms.value()));
+        TimeDelta::Millis(request.recheck_delay_ms.value()));
   }
 }
 
@@ -212,40 +213,47 @@ void WrappingActiveIceController::SwitchToBestConnectionAndPrune(
                         result.connections_to_forget_state_on,
                         /*cancelable=*/true,
                         /*requires_pruning=*/true);
-  if (observer_) {
+  if (observer_ && result.connection.has_value()) {
     observer_->OnSwitchRequest(request);
+  } else {
+    ProcessSwitchRequest(request);
   }
-  ProcessSwitchRequest(request);
-
-  if (agent_.ShouldPruneConnections()) {
-    std::vector<const Connection*> conns_to_prune =
-        wrapped_->PruneConnections();
-    if (observer_) {
-      PruneRequest request{conns_to_prune};
-      observer_->OnPruneRequest(request);
-    }
-    agent_.PruneConnections(conns_to_prune);
-  }
-
-  agent_.OnConnectionsResorted();
 }
 
 void WrappingActiveIceController::ProcessSwitchRequest(
-    const SwitchRequest& result) {
+    const SwitchRequest& request) {
   RTC_DCHECK_RUN_ON(network_thread_);
-  if (result.connection.has_value()) {
-    agent_.SwitchSelectedConnection(*(result.connection), result.reason);
+  if (request.connection.has_value()) {
+    agent_.SwitchSelectedConnection(*(request.connection), request.reason);
   }
-  if (result.recheck_event.has_value()) {
+  if (request.recheck_event.has_value()) {
     network_thread_->PostDelayedTask(
         SafeTask(task_safety_.flag(),
-                 [this, recheck_reason = result.recheck_event->reason]() {
+                 [this, recheck_reason = request.recheck_event->reason]() {
                    SwitchToBestConnectionAndPrune(recheck_reason);
                  }),
-        TimeDelta::Millis(result.recheck_event->recheck_delay_ms));
+        TimeDelta::Millis(request.recheck_event->recheck_delay_ms));
   }
   agent_.ForgetLearnedStateForConnections(
-      result.connections_to_forget_state_on);
+      request.connections_to_forget_state_on);
+
+  if (request.requires_pruning) {
+    bool defer_resort_handling = false;
+    if (agent_.ShouldPruneConnections()) {
+      std::vector<const Connection*> conns_to_prune =
+          wrapped_->PruneConnections();
+      if (observer_) {
+        defer_resort_handling = true;
+        PruneRequest request{conns_to_prune};
+        observer_->OnPruneRequest(request);
+      } else {
+        agent_.PruneConnections(conns_to_prune);
+      }
+    }
+    if (!defer_resort_handling) {
+      agent_.OnConnectionsResorted();
+    }
+  }
 }
 
 }  // namespace cricket

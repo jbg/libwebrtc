@@ -60,17 +60,24 @@ struct SwitchAcknowledgement {
   const std::vector<const uint32_t> connection_ids_to_forget_state_on;
 
   // Whether a prune should be performed after the switch.
-  bool perform_prune;
+  const bool perform_prune;
 };
 
 // An acknowledgement for a PruneRequest.
 struct PruneAcknowledgement {
   explicit PruneAcknowledgement(
-      std::vector<const uint32_t> _connection_ids_to_prune)
-      : connection_ids_to_prune(std::move(_connection_ids_to_prune)) {}
+      std::vector<const uint32_t> _connection_ids_to_prune,
+      bool _only_handle_resort)
+      : connection_ids_to_prune(std::move(_connection_ids_to_prune)),
+        only_handle_resort(_only_handle_resort) {}
 
   // A vector of IDs for connections to prune.
   const std::vector<const uint32_t> connection_ids_to_prune;
+
+  // Set if the prune request was rejected, in which case we still need to
+  // handle the resorting. This could be indicated by just setting the
+  // connections to an empty list, but stated explicitly for clarity.
+  const bool only_handle_resort;
 };
 
 }  // namespace cricket

@@ -2345,14 +2345,16 @@ void P2PTransportChannel::AckSwitchRequest(SwitchAcknowledgement ack) {
 
 void P2PTransportChannel::AckPruneRequest(PruneAcknowledgement ack) {
   RTC_DCHECK_RUN_ON(network_thread_);
-  std::vector<const Connection*> connections_to_prune;
-  for (const uint32_t conn_id : ack.connection_ids_to_prune) {
-    Connection* conn_to_prune = FindConnection(conn_id);
-    if (conn_to_prune) {
-      connections_to_prune.push_back(conn_to_prune);
+  if (!ack.only_handle_resort) {
+    std::vector<const Connection*> connections_to_prune;
+    for (const uint32_t conn_id : ack.connection_ids_to_prune) {
+      Connection* conn_to_prune = FindConnection(conn_id);
+      if (conn_to_prune) {
+        connections_to_prune.push_back(conn_to_prune);
+      }
     }
+    PruneConnections(connections_to_prune);
   }
-  PruneConnections(connections_to_prune);
   OnConnectionsResorted();
 }
 

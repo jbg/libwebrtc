@@ -65,11 +65,12 @@ struct SwitchRequest {
   // A vector with connection to run ForgetLearnedState on.
   std::vector<const Connection*> connections_to_forget_state_on;
 
+  // The below booleans should be derived from the IceSwitchReason, but
+  // explicitly stated here for now for simplicity.
+
   // Whether the request can be canceled. A switch may not be canceled if, for
   // instance, it is at the controlled agent because of an indication from the
   // controlling agent.
-  // This could possibly be tied to the IceSwitchReason, but stated explicitly
-  // for now.
   bool cancelable;
 
   // Whether a prune must be performed after the switch. Pruning shouldn't be
