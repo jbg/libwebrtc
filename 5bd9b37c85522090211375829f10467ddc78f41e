@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c6d8e03_e15497ae",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-31T22:18:58Z",
+      "side": 1,
+      "message": "I\u0027d like to not block the existing change in Chromium on this, and also I\u0027d like to try to just reland the initial change so I\u0027m going to split it up but actually include it in the header here for now and then I\u0027ll fix the header includes later.",
+      "parentUuid": "3d4601e5_5604cb5b",
+      "revId": "5bd9b37c85522090211375829f10467ddc78f41e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4932ee3c_85e3cc0f",
@@ -69,6 +87,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e607f5_c26c4226",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-31T22:18:58Z",
+      "side": 1,
+      "message": "I\u0027ve actually switched \"embedder\" here to \"consumer\" to match the existing prose below for the DesktopCapturer::Callback",
+      "parentUuid": "4932ee3c_85e3cc0f",
+      "revId": "5bd9b37c85522090211375829f10467ddc78f41e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e829a5b_78cef6d4",
@@ -82,6 +118,24 @@
       "writtenOn": "2022-08-31T03:48:56Z",
       "side": 1,
       "message": "Nit: If you expect clients to override all methods these could be pure virtual ... this might save a few bytes of binary size from the empty functions.",
+      "revId": "5bd9b37c85522090211375829f10467ddc78f41e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d994dd0_3604f41f",
+        "filename": "modules/desktop_capture/desktop_capturer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-31T22:18:58Z",
+      "side": 1,
+      "message": "I think it\u0027s probably best practice to add as pure virtual now while it\u0027s new; though future changes may need to be added with a default implementation, then implemented in chromium, and then turned to pure virtual.",
+      "parentUuid": "7e829a5b_78cef6d4",
       "revId": "5bd9b37c85522090211375829f10467ddc78f41e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
