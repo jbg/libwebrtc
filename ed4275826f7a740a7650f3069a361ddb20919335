@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe73638_c7ae3320",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-08-31T19:39:16Z",
+      "side": 1,
+      "message": "This seems like a great optimization, my only concern is that it\u0027s technically possible for two codecs to have different parameters (meaning FMTP parameters) in different m\u003d sections. There are certain parameters that \"identify\" the codec and must be identical for a given payload type, and others that are allowed to be different. For example, for H264: \n\n   o  The parameters identifying a media format configuration for H.264\n      are profile-level-id and packetization-mode.  These media format\n      configuration parameters (except for the level part of profile-\n      level-id) MUST be used symmetrically; that is, the answerer MUST\n      either maintain all configuration parameters or remove the media\n      format (payload type) completely if one or more of the parameter\n      values are not supported.  Note that the level part of profile-\n      level-id includes level_idc, and, for indication of Level 1b when\n      profile_idc is equal to 66, 77, or 88, bit 4\n      (constraint_set3_flag) of profile-iop.  The level part of profile-\n      level-id is changeable.\n      \nSo, two m\u003d sections can use different profile levels (and various other parameters not mentioned above) for the same H264 payload type. This is something that Unified Plan allows that Plan B doesn\u0027t.\n\nMeaning that to eliminate duplicates you would need to check whether the FMTP lines are actually the same. And assigning the codec_id would be a bit more complicated. But it\u0027s still doable.",
+      "revId": "ed4275826f7a740a7650f3069a361ddb20919335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c63e3f78_f881287b",
