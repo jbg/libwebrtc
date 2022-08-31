@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4a91df4_47b96ad2",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-08-31T14:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfe846a3_511abbbc",
+      "revId": "48f95e18277611681c98b71fcf89e6c660c95069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "222d0450_793c3caa",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-08-31T14:09:29Z",
       "side": 1,
       "message": "RTCCodec_TransportName_Send_1 (i.e. just the transport name instead of the transport stats name) would be better imo). The _2 can\u0027t happen as there are no codecs on RTCP.",
+      "revId": "48f95e18277611681c98b71fcf89e6c660c95069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dbdd772_698126cd",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-08-31T14:37:07Z",
+      "side": 1,
+      "message": "I agree that transport_name should be a sufficient identifier due to RTCP not having codecs, but by using transport_id (which only differs by two characters in length) we avoid passing around two variables (_name and _id) in some places where _id is already available.\n\nBut I could look into making various stats identifiers shorter as a separate issue :) no need to spell everything out in the id\n\nIf we were spec compliant, the stats name would be a random string, but size could matter a little for performance.",
+      "parentUuid": "222d0450_793c3caa",
       "revId": "48f95e18277611681c98b71fcf89e6c660c95069",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

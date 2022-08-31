@@ -16,6 +16,24 @@
       "message": "drive-by?",
       "revId": "d13686a26b7ec26d34307874fb05473c59ced036",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94abeacf_1b7e21e1",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1940,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-08-31T14:37:07Z",
+      "side": 0,
+      "message": "I had to plumb down the transport_id to CreateInboundAudioStreamStats (and similar places) so it made more sense to also set the -\u003etransport_id in the same place.",
+      "parentUuid": "96dbfee0_8d8961fc",
+      "revId": "d13686a26b7ec26d34307874fb05473c59ced036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
