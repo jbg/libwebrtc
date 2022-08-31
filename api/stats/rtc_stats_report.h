@@ -70,6 +70,9 @@ class RTC_EXPORT RTCStatsReport final
   void AddStats(std::unique_ptr<const RTCStats> stats);
   const RTCStats* Get(const std::string& id) const;
   size_t size() const { return stats_.size(); }
+  bool contains(const std::string& id) const {
+    return stats_.find(id) != stats_.end();
+  }
 
   // Gets the stat object of type `T` by ID, where `T` is any class descending
   // from `RTCStats`.

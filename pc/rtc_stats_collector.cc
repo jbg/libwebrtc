@@ -354,7 +354,7 @@ double DoubleAudioLevelFromIntAudioLevel(int audio_level) {
 
 std::unique_ptr<RTCCodecStats> CodecStatsFromRtpCodecParameters(
     uint64_t timestamp_us,
-    const std::string& mid,
+    const std::string& transport_name,
     const std::string& transport_id,
     bool inbound,
     const RtpCodecParameters& codec_params) {
@@ -362,9 +362,10 @@ std::unique_ptr<RTCCodecStats> CodecStatsFromRtpCodecParameters(
   RTC_DCHECK_LE(codec_params.payload_type, 127);
   RTC_DCHECK(codec_params.clock_rate);
   uint32_t payload_type = static_cast<uint32_t>(codec_params.payload_type);
-  std::unique_ptr<RTCCodecStats> codec_stats(new RTCCodecStats(
-      RTCCodecStatsIDFromMidDirectionAndPayload(mid, inbound, payload_type),
-      timestamp_us));
+  std::unique_ptr<RTCCodecStats> codec_stats(
+      new RTCCodecStats(RTCCodecStatsIDFromMidDirectionAndPayload(
+                            transport_name, inbound, payload_type),
+                        timestamp_us));
   codec_stats->payload_type = payload_type;
   codec_stats->mime_type = codec_params.mime_type();
   if (codec_params.clock_rate) {
@@ -1555,14 +1556,28 @@ void RTCStatsCollector::ProduceCodecStats_n(
       // Inbound
       for (const auto& pair :
            stats.track_media_info_map.voice_media_info()->receive_codecs) {
+        auto id = RTCCodecStatsIDFromMidDirectionAndPayload(
+            *stats.transport_name, true,
+            static_cast<uint32_t>(pair.second.payload_type));
+        if (report->contains(id)) {
+          continue;
+        }
         report->AddStats(CodecStatsFromRtpCodecParameters(
-            timestamp_us, *stats.mid, transport_id, true, pair.second));
+            timestamp_us, *stats.transport_name, transport_id, true,
+            pair.second));
       }
       // Outbound
       for (const auto& pair :
            stats.track_media_info_map.voice_media_info()->send_codecs) {
+        auto id = RTCCodecStatsIDFromMidDirectionAndPayload(
+            *stats.transport_name, false,
+            static_cast<uint32_t>(pair.second.payload_type));
+        if (report->contains(id)) {
+          continue;
+        }
         report->AddStats(CodecStatsFromRtpCodecParameters(
-            timestamp_us, *stats.mid, transport_id, false, pair.second));
+            timestamp_us, *stats.transport_name, transport_id, false,
+            pair.second));
       }
     }
     // Video
@@ -1570,14 +1585,28 @@ void RTCStatsCollector::ProduceCodecStats_n(
       // Inbound
       for (const auto& pair :
            stats.track_media_info_map.video_media_info()->receive_codecs) {
+        auto id = RTCCodecStatsIDFromMidDirectionAndPayload(
+            *stats.transport_name, false,
+            static_cast<uint32_t>(pair.second.payload_type));
+        if (report->contains(id)) {
+          continue;
+        }
         report->AddStats(CodecStatsFromRtpCodecParameters(
-            timestamp_us, *stats.mid, transport_id, true, pair.second));
+            timestamp_us, *stats.transport_name, transport_id, true,
+            pair.second));
       }
       // Outbound
       for (const auto& pair :
            stats.track_media_info_map.video_media_info()->send_codecs) {
+        auto id = RTCCodecStatsIDFromMidDirectionAndPayload(
+            *stats.transport_name, false,
+            static_cast<uint32_t>(pair.second.payload_type));
+        if (report->contains(id)) {
+          continue;
+        }
         report->AddStats(CodecStatsFromRtpCodecParameters(
-            timestamp_us, *stats.mid, transport_id, false, pair.second));
+            timestamp_us, *stats.transport_name, transport_id, false,
+            pair.second));
       }
     }
   }
