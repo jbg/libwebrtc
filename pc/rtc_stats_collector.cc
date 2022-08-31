@@ -1542,10 +1542,20 @@ void RTCStatsCollector::ProduceCodecStats_n(
     RTCStatsReport* report) const {
   RTC_DCHECK_RUN_ON(network_thread_);
   rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
+  RTC_LOG(LS_ERROR) << "STATS INFOS" << transceiver_stats_infos.size();
+  std::set<std::string> transports_seen;
 
   for (const auto& stats : transceiver_stats_infos) {
     if (!stats.mid) {
       continue;
+    }
+    if (stats.transport_name) {
+      if (transports_seen.find(*stats.transport_name) !=
+          transports_seen.end()) {
+        // codec stats are unique per transport.
+        continue;
+      }
+      transports_seen.insert(*stats.transport_name);
     }
     std::string transport_id = RTCTransportStatsIDFromTransportChannel(
         *stats.transport_name, cricket::ICE_CANDIDATE_COMPONENT_RTP);
