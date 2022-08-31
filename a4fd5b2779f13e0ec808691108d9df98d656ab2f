@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "501670a6_e68a29cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12419
+      },
+      "writtenOn": "2022-08-31T14:45:03Z",
+      "side": 1,
+      "message": "Overriding owners since it\u0027s just a reland",
+      "revId": "a4fd5b2779f13e0ec808691108d9df98d656ab2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
