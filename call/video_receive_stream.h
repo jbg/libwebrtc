@@ -120,7 +120,7 @@ class VideoReceiveStreamInterface : public MediaReceiveStreamInterface {
     int64_t first_frame_received_to_decoded_ms = -1;
     absl::optional<uint64_t> qp_sum;
 
-    int current_payload_type = -1;
+    absl::optional<int> current_payload_type;
 
     int total_bitrate_bps = 0;
 
