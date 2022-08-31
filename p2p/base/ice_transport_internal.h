@@ -22,6 +22,7 @@
 #include "api/rtc_error.h"
 #include "api/transport/enums.h"
 #include "p2p/base/connection.h"
+#include "p2p/base/ice_controller_ack_types.h"
 #include "p2p/base/packet_transport_internal.h"
 #include "p2p/base/port.h"
 #include "p2p/base/transport_description.h"
@@ -302,6 +303,18 @@ class RTC_EXPORT IceTransportInternal : public rtc::PacketTransportInternal {
   // none.
   virtual absl::optional<const CandidatePair> GetSelectedCandidatePair()
       const = 0;
+
+  // ICE controller passthrough actions
+  // TODO(samvi) Do these actions belong in a separate interface?
+
+  // Acknowledge a ping request.
+  virtual void AckPingRequest(PingAcknowledgement ack) = 0;
+
+  // Acknowledge a switch request.
+  virtual void AckSwitchRequest(SwitchAcknowledgement ack) = 0;
+
+  // Acknowledge a prune request.
+  virtual void AckPruneRequest(PruneAcknowledgement ack) = 0;
 
   sigslot::signal1<IceTransportInternal*> SignalGatheringState;
 
