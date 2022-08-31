@@ -16,6 +16,58 @@
       "message": "OK, still LGTM.   alcooper@, did you want to review this?",
       "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7900ba9_ef3bca64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-31T21:26:23Z",
+      "side": 1,
+      "message": "Skimmed through this, mainly defferring to your review; but a couple of spots did catch my eye that I think need the RTC_NO_SANITIZE(\"cfi-icall\") decoration.",
+      "parentUuid": "f4ab00a1_e07754aa",
+      "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09ff1041_4be423cb",
+        "filename": "common_video/linux/portal/pipewire_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-31T21:26:23Z",
+      "side": 1,
+      "message": "I believe InitializeStubs requires adding:\n`RTC_NO_SANITIZE(\"cfi-icall\")`\nTo this method (above it).\n\nThis maybe currently avoids errors since the method that currently calls it is decorated as such (and it looks like it makes other lock, etc. calls that need it), but I think for correctness we should decorate this method.",
+      "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30112cdd_d79ac77d",
+        "filename": "common_video/linux/portal/pipewire_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-08-31T21:26:23Z",
+      "side": 1,
+      "message": "I am not sure, but *think* these may qualify as indirect calls as well (IIRC from the usage in shared_screencast_stream).\n\nNote that similar to the above, the callers may already be decorated as such and that\u0027s why we avoid issues; but I think for correctness they should be decorated.",
+      "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
