@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaeb0d35_9df06970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-08-31T11:33:04Z",
+      "side": 1,
+      "message": "Thank you - this should solve the core issue! But I do have some performance considerations, so I\u0027ll also look into creating a CL doing something similar, I\u0027ll let you know what I find.",
+      "revId": "06394aebd13432805b29980a5884cf884d0d5813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
