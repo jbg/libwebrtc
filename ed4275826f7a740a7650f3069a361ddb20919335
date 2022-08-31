@@ -68,6 +68,24 @@
       "message": "victor: would an abseil map help us here (I tried but GN/presubmit did not allow me)? This is a tiny mapping with 127 entries but stats performance is quite important so we would take every bit we can get",
       "revId": "ed4275826f7a740a7650f3069a361ddb20919335",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02062072_abbadc71",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1562,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2022-08-31T21:38:44Z",
+      "side": 1,
+      "message": "If these maps are seldom mutated (inserted, deleted), consider using a webrtc::flat_map as that will bring much better cache locality. It sounds like it would be suitable if the number of entries is small. \n\nabsl::flat_hash_map aren\u0027t allowed still, due to the increases in code size and non-optimized performance on some architectures.",
+      "parentUuid": "c63e3f78_f881287b",
+      "revId": "ed4275826f7a740a7650f3069a361ddb20919335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
