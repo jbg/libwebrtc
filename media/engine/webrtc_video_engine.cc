@@ -3253,10 +3253,10 @@ WebRtcVideoChannel::WebRtcVideoReceiveStream::GetVideoReceiverInfo(
   info.add_ssrc(config_.rtp.remote_ssrc);
   webrtc::VideoReceiveStreamInterface::Stats stats = stream_->GetStats();
   info.decoder_implementation_name = stats.decoder_implementation_name;
-  if (stats.current_payload_type != -1) {
-    info.codec_payload_type = stats.current_payload_type;
+  if (stats.current_payload_type) {
+    info.codec_payload_type = *stats.current_payload_type;
     auto decoder_it = absl::c_find_if(config_.decoders, [&](const auto& d) {
-      return d.payload_type == stats.current_payload_type;
+      return d.payload_type == *stats.current_payload_type;
     });
     if (decoder_it != config_.decoders.end())
       info.codec_name = decoder_it->video_format.name;
