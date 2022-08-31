@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96dbfee0_8d8961fc",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1940,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-08-31T14:09:29Z",
+      "side": 0,
+      "message": "drive-by?",
+      "revId": "d13686a26b7ec26d34307874fb05473c59ced036",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
