@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d630dc6d_df8f00c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-08-31T14:41:39Z",
+      "side": 1,
+      "message": "victor: absl table question below, you might know",
+      "revId": "ed4275826f7a740a7650f3069a361ddb20919335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c63e3f78_f881287b",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1562,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-08-31T14:41:39Z",
+      "side": 1,
+      "message": "victor: would an abseil map help us here (I tried but GN/presubmit did not allow me)? This is a tiny mapping with 127 entries but stats performance is quite important so we would take every bit we can get",
+      "revId": "ed4275826f7a740a7650f3069a361ddb20919335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
