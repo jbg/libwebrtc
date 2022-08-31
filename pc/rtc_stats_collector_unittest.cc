@@ -705,7 +705,7 @@ class RTCStatsCollectorTest : public ::testing::Test {
     ExampleStatsGraph graph;
 
     // codec (send)
-    graph.send_codec_id = "RTCCodec_VideoMid_Outbound_1";
+    graph.send_codec_id = "RTCCodec_TransportName_Outbound_1";
     cricket::VideoMediaInfo video_media_info;
     RtpCodecParameters send_codec;
     send_codec.payload_type = 1;
@@ -713,7 +713,7 @@ class RTCStatsCollectorTest : public ::testing::Test {
     video_media_info.send_codecs.insert(
         std::make_pair(send_codec.payload_type, send_codec));
     // codec (recv)
-    graph.recv_codec_id = "RTCCodec_VideoMid_Inbound_2";
+    graph.recv_codec_id = "RTCCodec_TransportName_Inbound_2";
     RtpCodecParameters recv_codec;
     recv_codec.payload_type = 2;
     recv_codec.clock_rate = 0;
@@ -806,7 +806,7 @@ class RTCStatsCollectorTest : public ::testing::Test {
     ExampleStatsGraph graph;
 
     // codec (send)
-    graph.send_codec_id = "RTCCodec_VoiceMid_Outbound_1";
+    graph.send_codec_id = "RTCCodec_TransportName_Outbound_1";
     cricket::VoiceMediaInfo media_info;
     RtpCodecParameters send_codec;
     send_codec.payload_type = 1;
@@ -814,7 +814,7 @@ class RTCStatsCollectorTest : public ::testing::Test {
     media_info.send_codecs.insert(
         std::make_pair(send_codec.payload_type, send_codec));
     // codec (recv)
-    graph.recv_codec_id = "RTCCodec_VoiceMid_Inbound_2";
+    graph.recv_codec_id = "RTCCodec_TransportName_Inbound_2";
     RtpCodecParameters recv_codec;
     recv_codec.payload_type = 2;
     recv_codec.clock_rate = 0;
@@ -1062,7 +1062,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCCodecStats) {
 
   rtc::scoped_refptr<const RTCStatsReport> report = stats_->GetStatsReport();
 
-  RTCCodecStats expected_inbound_audio_codec("RTCCodec_AudioMid_Inbound_1",
+  RTCCodecStats expected_inbound_audio_codec("RTCCodec_TransportName_Inbound_1",
                                              report->timestamp_us());
   expected_inbound_audio_codec.payload_type = 1;
   expected_inbound_audio_codec.mime_type = "audio/opus";
@@ -1071,15 +1071,15 @@ TEST_F(RTCStatsCollectorTest, CollectRTCCodecStats) {
   expected_inbound_audio_codec.sdp_fmtp_line = "minptime=10;useinbandfec=1";
   expected_inbound_audio_codec.transport_id = "RTCTransport_TransportName_1";
 
-  RTCCodecStats expected_outbound_audio_codec("RTCCodec_AudioMid_Outbound_2",
-                                              report->timestamp_us());
+  RTCCodecStats expected_outbound_audio_codec(
+      "RTCCodec_TransportName_Outbound_2", report->timestamp_us());
   expected_outbound_audio_codec.payload_type = 2;
   expected_outbound_audio_codec.mime_type = "audio/isac";
   expected_outbound_audio_codec.clock_rate = 1338;
   expected_outbound_audio_codec.channels = 2;
   expected_outbound_audio_codec.transport_id = "RTCTransport_TransportName_1";
 
-  RTCCodecStats expected_inbound_video_codec("RTCCodec_VideoMid_Inbound_3",
+  RTCCodecStats expected_inbound_video_codec("RTCCodec_TransportName_Inbound_3",
                                              report->timestamp_us());
   expected_inbound_video_codec.payload_type = 3;
   expected_inbound_video_codec.mime_type = "video/H264";
@@ -1088,8 +1088,8 @@ TEST_F(RTCStatsCollectorTest, CollectRTCCodecStats) {
       "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f";
   expected_inbound_video_codec.transport_id = "RTCTransport_TransportName_1";
 
-  RTCCodecStats expected_outbound_video_codec("RTCCodec_VideoMid_Outbound_4",
-                                              report->timestamp_us());
+  RTCCodecStats expected_outbound_video_codec(
+      "RTCCodec_TransportName_Outbound_4", report->timestamp_us());
   expected_outbound_video_codec.payload_type = 4;
   expected_outbound_video_codec.mime_type = "video/VP8";
   expected_outbound_video_codec.clock_rate = 1340;
@@ -2102,7 +2102,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Audio) {
   expected_audio.mid = "AudioMid";
   expected_audio.track_id = stats_of_track_type[0]->id();
   expected_audio.transport_id = "RTCTransport_TransportName_1";
-  expected_audio.codec_id = "RTCCodec_AudioMid_Inbound_42";
+  expected_audio.codec_id = "RTCCodec_TransportName_Inbound_42";
   expected_audio.packets_received = 2;
   expected_audio.nack_count = 5;
   expected_audio.fec_packets_discarded = 5566;
@@ -2222,7 +2222,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Video) {
   expected_video.mid = "VideoMid";
   expected_video.track_id = IdForType<RTCMediaStreamTrackStats>(report.get());
   expected_video.transport_id = "RTCTransport_TransportName_1";
-  expected_video.codec_id = "RTCCodec_VideoMid_Inbound_42";
+  expected_video.codec_id = "RTCCodec_TransportName_Inbound_42";
   expected_video.fir_count = 5;
   expected_video.pli_count = 6;
   expected_video.nack_count = 7;
@@ -2322,7 +2322,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCOutboundRTPStreamStats_Audio) {
   expected_audio.kind = "audio";
   expected_audio.track_id = IdForType<RTCMediaStreamTrackStats>(report.get());
   expected_audio.transport_id = "RTCTransport_TransportName_1";
-  expected_audio.codec_id = "RTCCodec_AudioMid_Outbound_42";
+  expected_audio.codec_id = "RTCCodec_TransportName_Outbound_42";
   expected_audio.packets_sent = 2;
   expected_audio.retransmitted_packets_sent = 20;
   expected_audio.bytes_sent = 3;
@@ -2412,7 +2412,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCOutboundRTPStreamStats_Video) {
   expected_video.kind = "video";
   expected_video.track_id = stats_of_track_type[0]->id();
   expected_video.transport_id = "RTCTransport_TransportName_1";
-  expected_video.codec_id = "RTCCodec_VideoMid_Outbound_42";
+  expected_video.codec_id = "RTCCodec_TransportName_Outbound_42";
   expected_video.fir_count = 2;
   expected_video.pli_count = 3;
   expected_video.nack_count = 4;
@@ -2756,7 +2756,7 @@ TEST_F(RTCStatsCollectorTest, CollectNoStreamRTCOutboundRTPStreamStats_Audio) {
   expected_audio.kind = "audio";
   expected_audio.track_id = IdForType<RTCMediaStreamTrackStats>(report.get());
   expected_audio.transport_id = "RTCTransport_TransportName_1";
-  expected_audio.codec_id = "RTCCodec_AudioMid_Outbound_42";
+  expected_audio.codec_id = "RTCCodec_TransportName_Outbound_42";
   expected_audio.packets_sent = 2;
   expected_audio.retransmitted_packets_sent = 20;
   expected_audio.bytes_sent = 3;
