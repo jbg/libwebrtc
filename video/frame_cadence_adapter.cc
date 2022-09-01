@@ -313,8 +313,8 @@ ZeroHertzAdapterMode::ZeroHertzAdapterMode(
 void ZeroHertzAdapterMode::ReconfigureParameters(
     const FrameCadenceAdapterInterface::ZeroHertzModeParams& params) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  RTC_DLOG(LS_INFO) << __func__ << " this " << this << " num_simulcast_layers "
-                    << params.num_simulcast_layers;
+  RTC_LOG(LS_INFO) << __func__ << " this " << this << " num_simulcast_layers "
+                   << params.num_simulcast_layers;
 
   // Start as unconverged.
   layer_trackers_.clear();
@@ -327,8 +327,9 @@ void ZeroHertzAdapterMode::UpdateLayerQualityConvergence(
     bool quality_converged) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK_LT(spatial_index, layer_trackers_.size());
-  RTC_LOG(LS_INFO) << __func__ << " this " << this << " layer " << spatial_index
-                   << " quality has converged: " << quality_converged;
+  RTC_LOG(LS_VERBOSE) << __func__ << " this " << this << " layer "
+                      << spatial_index
+                      << " quality has converged: " << quality_converged;
   if (layer_trackers_[spatial_index].quality_converged.has_value())
     layer_trackers_[spatial_index].quality_converged = quality_converged;
 }
@@ -336,6 +337,8 @@ void ZeroHertzAdapterMode::UpdateLayerQualityConvergence(
 void ZeroHertzAdapterMode::UpdateLayerStatus(int spatial_index, bool enabled) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK_LT(spatial_index, layer_trackers_.size());
+  RTC_LOG(LS_VERBOSE) << __func__ << " this " << this << " index "
+                      << spatial_index << " enabled " << enabled;
   if (enabled) {
     if (!layer_trackers_[spatial_index].quality_converged.has_value()) {
       // Assume quality has not converged until hearing otherwise.
@@ -357,8 +360,8 @@ void ZeroHertzAdapterMode::OnFrame(Timestamp post_time,
                                    int frames_scheduled_for_processing,
                                    const VideoFrame& frame) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  RTC_DLOG(LS_VERBOSE) << "ZeroHertzAdapterMode::" << __func__ << " this "
-                       << this;
+  RTC_LOG(LS_VERBOSE) << "ZeroHertzAdapterMode::" << __func__ << " this "
+                      << this;
   refresh_frame_requester_.Stop();
 
   // Assume all enabled layers are unconverged after frame entry.
@@ -367,8 +370,8 @@ void ZeroHertzAdapterMode::OnFrame(Timestamp post_time,
   // Remove stored repeating frame if needed.
   if (scheduled_repeat_.has_value()) {
     RTC_DCHECK(queued_frames_.size() == 1);
-    RTC_DLOG(LS_VERBOSE) << __func__ << " this " << this
-                         << " cancel repeat and restart with original";
+    RTC_LOG(LS_VERBOSE) << __func__ << " this " << this
+                        << " cancel repeat and restart with original";
     queued_frames_.pop_front();
   }
 
@@ -387,7 +390,7 @@ void ZeroHertzAdapterMode::OnFrame(Timestamp post_time,
 
 void ZeroHertzAdapterMode::OnDiscardedFrame() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  RTC_DLOG(LS_VERBOSE) << "ZeroHertzAdapterMode::" << __func__;
+  RTC_LOG(LS_VERBOSE) << "ZeroHertzAdapterMode::" << __func__;
 
   // Under zero hertz source delivery, a discarded frame ending a sequence of
   // frames which happened to contain important information can be seen as a
@@ -458,7 +461,7 @@ bool ZeroHertzAdapterMode::HasQualityConverged() const {
 
 void ZeroHertzAdapterMode::ResetQualityConvergenceInfo() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  RTC_DLOG(LS_INFO) << __func__ << " this " << this;
+  RTC_LOG(LS_INFO) << __func__ << " this " << this;
   for (auto& layer_tracker : layer_trackers_) {
     if (layer_tracker.quality_converged.has_value())
       layer_tracker.quality_converged = false;
@@ -468,7 +471,7 @@ void ZeroHertzAdapterMode::ResetQualityConvergenceInfo() {
 void ZeroHertzAdapterMode::ProcessOnDelayedCadence() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK(!queued_frames_.empty());
-  RTC_DLOG(LS_VERBOSE) << __func__ << " this " << this;
+  RTC_LOG(LS_VERBOSE) << __func__ << " this " << this;
 
   SendFrameNow(queued_frames_.front());
 
@@ -487,8 +490,8 @@ void ZeroHertzAdapterMode::ProcessOnDelayedCadence() {
 
 void ZeroHertzAdapterMode::ScheduleRepeat(int frame_id, bool idle_repeat) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  RTC_DLOG(LS_VERBOSE) << __func__ << " this " << this << " frame_id "
-                       << frame_id;
+  RTC_LOG(LS_VERBOSE) << __func__ << " this " << this << " frame_id "
+                      << frame_id;
   Timestamp now = clock_->CurrentTime();
   if (!scheduled_repeat_.has_value()) {
     scheduled_repeat_.emplace(now, queued_frames_.front().timestamp_us(),
@@ -509,8 +512,8 @@ void ZeroHertzAdapterMode::ScheduleRepeat(int frame_id, bool idle_repeat) {
 
 void ZeroHertzAdapterMode::ProcessRepeatedFrameOnDelayedCadence(int frame_id) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  RTC_DLOG(LS_VERBOSE) << __func__ << " this " << this << " frame_id "
-                       << frame_id;
+  RTC_LOG(LS_VERBOSE) << __func__ << " this " << this << " frame_id "
+                      << frame_id;
   RTC_DCHECK(!queued_frames_.empty());
 
   // Cancel this invocation if new frames turned up.
@@ -547,10 +550,10 @@ void ZeroHertzAdapterMode::ProcessRepeatedFrameOnDelayedCadence(int frame_id) {
 
 void ZeroHertzAdapterMode::SendFrameNow(const VideoFrame& frame) const {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  RTC_DLOG(LS_VERBOSE) << __func__ << " this " << this << " timestamp "
-                       << frame.timestamp() << " timestamp_us "
-                       << frame.timestamp_us() << " ntp_time_ms "
-                       << frame.ntp_time_ms();
+  RTC_LOG(LS_VERBOSE) << __func__ << " this " << this << " timestamp "
+                      << frame.timestamp() << " timestamp_us "
+                      << frame.timestamp_us() << " ntp_time_ms "
+                      << frame.ntp_time_ms();
   // TODO(crbug.com/1255737): figure out if frames_scheduled_for_processing
   // makes sense to compute in this implementation.
   callback_->OnFrame(/*post_time=*/clock_->CurrentTime(),
@@ -566,14 +569,14 @@ TimeDelta ZeroHertzAdapterMode::RepeatDuration(bool idle_repeat) const {
 
 void ZeroHertzAdapterMode::MaybeStartRefreshFrameRequester() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  RTC_DLOG(LS_VERBOSE) << __func__;
+  RTC_LOG(LS_VERBOSE) << __func__;
   if (!refresh_frame_requester_.Running()) {
     refresh_frame_requester_ = RepeatingTaskHandle::DelayedStart(
         queue_,
         FrameCadenceAdapterInterface::kOnDiscardedFrameRefreshFramePeriod *
             frame_delay_,
         [this] {
-          RTC_DLOG(LS_VERBOSE) << __func__ << " RequestRefreshFrame";
+          RTC_LOG(LS_VERBOSE) << __func__ << " RequestRefreshFrame";
           if (callback_)
             callback_->RequestRefreshFrame();
           return frame_delay_;
@@ -591,7 +594,7 @@ FrameCadenceAdapterImpl::FrameCadenceAdapterImpl(
           !field_trials.IsDisabled("WebRTC-ZeroHertzScreenshare")) {}
 
 FrameCadenceAdapterImpl::~FrameCadenceAdapterImpl() {
-  RTC_DLOG(LS_VERBOSE) << __func__ << " this " << this;
+  RTC_LOG(LS_VERBOSE) << __func__ << " this " << this;
 }
 
 void FrameCadenceAdapterImpl::Initialize(Callback* callback) {
@@ -603,6 +606,10 @@ void FrameCadenceAdapterImpl::Initialize(Callback* callback) {
 void FrameCadenceAdapterImpl::SetZeroHertzModeEnabled(
     absl::optional<ZeroHertzModeParams> params) {
   RTC_DCHECK_RUN_ON(queue_);
+  RTC_LOG(LS_VERBOSE)
+      << __func__ << " this " << this << " params.num_simulcast_layers "
+      << params.value_or(ZeroHertzModeParams{.num_simulcast_layers = -1})
+             .num_simulcast_layers;
   bool was_zero_hertz_enabled = zero_hertz_params_.has_value();
   if (params.has_value() && !was_zero_hertz_enabled)
     has_reported_screenshare_frame_rate_umas_ = false;
@@ -647,8 +654,8 @@ void FrameCadenceAdapterImpl::OnFrame(const VideoFrame& frame) {
   // This method is called on the network thread under Chromium, or other
   // various contexts in test.
   RTC_DCHECK_RUNS_SERIALIZED(&incoming_frame_race_checker_);
-  RTC_DLOG(LS_VERBOSE) << "FrameCadenceAdapterImpl::" << __func__ << " this "
-                       << this;
+  RTC_LOG(LS_VERBOSE) << "FrameCadenceAdapterImpl::" << __func__ << " this "
+                      << this;
 
   // Local time in webrtc time base.
   Timestamp post_time = clock_->CurrentTime();
