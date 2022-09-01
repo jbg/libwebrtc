@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baf385f4_9f335a95",
+        "filename": "modules/desktop_capture/differ_block.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-01T16:05:01Z",
+      "side": 1,
+      "message": "This is in an x86 only target: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/BUILD.gn;l\u003d713;drc\u003ddc0911bd37d7b9d3599a5e6433339b764312e446.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 6
+      },
+      "revId": "b350c6b60aac90097d77723e02239706be7ae9b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
