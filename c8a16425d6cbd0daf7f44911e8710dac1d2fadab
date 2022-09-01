@@ -122,6 +122,24 @@
       "parentUuid": "30112cdd_d79ac77d",
       "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "974670fa_ea0e5029",
+        "filename": "common_video/linux/portal/pipewire_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-09-01T07:11:55Z",
+      "side": 1,
+      "message": "I think this one should be safe, the last call that did trigger this issue was pw_loop_signal_event) which got inlined and cause the crash.",
+      "parentUuid": "b5c036de_0a2bec1a",
+      "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
