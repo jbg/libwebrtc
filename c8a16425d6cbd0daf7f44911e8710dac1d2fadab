@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00d8ad64_f91a283e",
+        "filename": "common_video/linux/portal/pipewire_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-09-01T07:02:34Z",
+      "side": 1,
+      "message": "I was unaware of that. I\u0027m not sure if I understand this fully. When exactly is this needed? For the InitializeStubs() called here? In that case, I should probably remove it from SharedScreenCastStreamPrivate::StartScreenCastStream() since it\u0027s no longer needed there.",
+      "parentUuid": "09ff1041_4be423cb",
+      "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30112cdd_d79ac77d",
         "filename": "common_video/linux/portal/pipewire_utils.cc",
         "patchSetId": 9
@@ -66,6 +84,24 @@
       "writtenOn": "2022-08-31T21:26:23Z",
       "side": 1,
       "message": "I am not sure, but *think* these may qualify as indirect calls as well (IIRC from the usage in shared_screencast_stream).\n\nNote that similar to the above, the callers may already be decorated as such and that\u0027s why we avoid issues; but I think for correctness they should be decorated.",
+      "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5c036de_0a2bec1a",
+        "filename": "common_video/linux/portal/pipewire_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-09-01T07:02:34Z",
+      "side": 1,
+      "message": "From what I can tell, the stub for pw_thread_loop_lock() is generated with DISABLE_CFI_ICALL so I don\u0027t think it\u0027s necessary to add it again. Or am I missing something here?\n\nEither way, I\u0027m just moving this code around and I\u0027d like to avoid unrelated changes.",
+      "parentUuid": "30112cdd_d79ac77d",
       "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
