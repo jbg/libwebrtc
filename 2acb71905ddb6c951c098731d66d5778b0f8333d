@@ -33,6 +33,24 @@
       "message": "I\u0027m not really worried about changing the naming scheme, people definitely shouldn\u0027t be depending on predictable names.\n\nIt\u0027s sometimes nice to have more readable names, for example when scrolling through chrome://webrtc-internals. But we still have the stats type, so the only information you really need from the name is the media type (audio or video) which is still easy to see with the new naming scheme. So I think this should be fine.\n\nMight want to ask someone else for a second opinion though.",
       "revId": "2acb71905ddb6c951c098731d66d5778b0f8333d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2985b789_613c9fc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-09-01T08:00:47Z",
+      "side": 1,
+      "message": "Ack.\n\nSince people shouldn\u0027t rely on this anyway, changing them may actually be a good thing to alert anyone who does depend on the old naming scheme.",
+      "parentUuid": "a295392d_0782afa8",
+      "revId": "2acb71905ddb6c951c098731d66d5778b0f8333d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
