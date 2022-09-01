@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90e1c2d9_17d9baf0",
+        "filename": "common_video/linux/portal/pipewire_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-09-01T07:07:50Z",
+      "side": 1,
+      "message": "We used to have issues (crashes) because of this, because Chrome has some strict checks when it comes to dlopening so we had to put these checks in various places where we do either dlopen, or where functions gets inlined etc. You will not be able to reproduce this when Chromium is built with \"is_official\u003dfalse\". See https://webrtc-review.googlesource.com/c/src/+/261300 for example.",
+      "parentUuid": "00d8ad64_f91a283e",
+      "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30112cdd_d79ac77d",
         "filename": "common_video/linux/portal/pipewire_utils.cc",
         "patchSetId": 9
