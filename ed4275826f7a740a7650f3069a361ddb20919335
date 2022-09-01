@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "101f8692_66a25ccd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-09-01T22:46:21Z",
+      "side": 1,
+      "message": "Thanks for weighing in fippo!\n\n\u003e It certainly seems against the spirit of \"one codec per payload type, no different meanings\"\n\nThe reason each payload type can only refer to one codec is because the receiver needs to know how to decode it. But keeping with the H264 example, the decoder doesn\u0027t need to know the exact profile level in advance (as far as I know), so it\u0027s perfectly valid to be receiving two tracks that use different levels.\n\nHowever, 8859 4.7 is pretty clear that fmtp lines MUST be identical. It could be an oversight, but if we assume it\u0027s not, Chrome should start complaining about mismatching fmtp lines, and this becomes a non issue for this CL.\n\nI\u0027m ok with landing this CL as is, and I\u0027m also good with the previous version given that this is such a niche issue and apparently not supported by the standard; I\u0027ll trust your judgment.",
+      "parentUuid": "9a209b3f_4c564b2f",
+      "revId": "ed4275826f7a740a7650f3069a361ddb20919335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c63e3f78_f881287b",
         "filename": "pc/rtc_stats_collector.cc",
         "patchSetId": 4
