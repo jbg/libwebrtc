@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "095ab0a4_bb367dd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2022-09-01T22:50:27Z",
+      "side": 1,
+      "message": "Given hta\u0027s comment here (https://github.com/w3c/webrtc-stats/issues/614#issuecomment-1017941582) I think it\u0027s safe to say FMTPs should be identical. I generally defer to him when it comes to RTP specification issues.",
+      "parentUuid": "101f8692_66a25ccd",
+      "revId": "ed4275826f7a740a7650f3069a361ddb20919335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c63e3f78_f881287b",
         "filename": "pc/rtc_stats_collector.cc",
         "patchSetId": 4
