@@ -125,6 +125,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e0b149_188f52b6",
+        "filename": "common_video/linux/portal/pipewire_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-09-01T17:35:56Z",
+      "side": 1,
+      "message": "Specifically this bug has the build flags that you need: https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1291002#c6\n\nHowever, it did sound like we could look at adding ourselves back to tools/cfi/ignores.txt like I did here: https://chromium-review.googlesource.com/c/chromium/src/+/3434619",
+      "parentUuid": "11d3b727_fbf248eb",
+      "revId": "c8a16425d6cbd0daf7f44911e8710dac1d2fadab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30112cdd_d79ac77d",
