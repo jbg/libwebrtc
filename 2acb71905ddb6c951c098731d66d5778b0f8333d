@@ -51,6 +51,23 @@
       "parentUuid": "a295392d_0782afa8",
       "revId": "2acb71905ddb6c951c098731d66d5778b0f8333d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cb02da4_9d530e80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-09-01T08:04:04Z",
+      "side": 1,
+      "message": "+hta in case he wants to weigh in, but I think he\u0027s OOO.",
+      "revId": "2acb71905ddb6c951c098731d66d5778b0f8333d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
