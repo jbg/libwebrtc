@@ -196,6 +196,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56ef1da0_be7602cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-09-01T08:43:43Z",
+      "side": 1,
+      "message": "Mark, Alex, you are the current owners of the code that is moved. Should I add a new owners file with the two of you in common_video/linux/portal/?",
+      "parentUuid": "e918eab1_e16e7684",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9d544b5_b62159ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-09-01T08:43:43Z",
+      "side": 1,
+      "message": "Salman, can you take another look? I think it should be ok now.",
+      "parentUuid": "e0d7d171_90787cbc",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13b80707_3be7b8c7",
         "filename": "common_video/linux/BUILD.gn",
         "patchSetId": 1
