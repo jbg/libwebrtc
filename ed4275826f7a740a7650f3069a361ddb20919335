@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c7257a5_e60dac6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-09-01T12:58:46Z",
+      "side": 1,
+      "message": "I didn\u0027t think this was allowed and filed https://github.com/w3c/webrtc-stats/issues/664 as a follow-up, but considering Chrome does currently allow this (https://jsfiddle.net/henbos/7kqxgnr8/) I updated the CL to correctly handle different FPTM lines.",
+      "parentUuid": "95afa969_0150cd34",
+      "revId": "ed4275826f7a740a7650f3069a361ddb20919335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c63e3f78_f881287b",
         "filename": "pc/rtc_stats_collector.cc",
         "patchSetId": 4
@@ -119,6 +137,24 @@
       "writtenOn": "2022-09-01T10:00:46Z",
       "side": 1,
       "message": "thank you!\nhbos: lets try flat_set (bonus: with a reserved size of 127) in a different CL?",
+      "parentUuid": "02062072_abbadc71",
+      "revId": "ed4275826f7a740a7650f3069a361ddb20919335",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b958f4_fbb917a0",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1562,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-09-01T12:58:46Z",
+      "side": 1,
+      "message": "For both the map and the set we could end up with large number of entries meaning the O(n) insertion would make this function O(n^2) for n like 50 or even \u003e 100 when you have 100s of transceivers and not BUNDLING. Less of a concern in BUNDLE but sticking to std containers for now.",
       "parentUuid": "02062072_abbadc71",
       "revId": "ed4275826f7a740a7650f3069a361ddb20919335",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca3aea9_5097b90c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-09-01T12:58:46Z",
+      "side": 1,
+      "message": "Filed spec about FMTP line but updated the CL to correctly handle \"same PT, different FMTP lines\" in the meantime - PTAL Taylor",
+      "revId": "9273530eb19d635d132e3b841249a1a637a66105",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
