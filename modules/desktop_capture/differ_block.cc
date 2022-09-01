@@ -12,7 +12,9 @@
 
 #include <string.h>
 
+#if defined(WEBRTC_ARCH_X86_FAMILY)
 #include "modules/desktop_capture/differ_vector_sse2.h"
+#endif
 #include "rtc_base/system/arch.h"
 #include "system_wrappers/include/cpu_features_wrapper.h"
 
