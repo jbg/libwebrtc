@@ -178,7 +178,7 @@ class RTCStatsCollector : public rtc::RefCountInterface,
   void ProduceCodecStats_n(
       int64_t timestamp_us,
       const std::vector<RtpTransceiverStatsInfo>& transceiver_stats_infos,
-      RTCStatsReport* report) const;
+      RTCStatsReport* report);
   // Produces `RTCDataChannelStats`.
   void ProduceDataChannelStats_s(int64_t timestamp_us,
                                  RTCStatsReport* report) const;
@@ -289,6 +289,10 @@ class RTCStatsCollector : public rtc::RefCountInterface,
   int64_t cache_timestamp_us_;
   int64_t cache_lifetime_us_;
   rtc::scoped_refptr<const RTCStatsReport> cached_report_;
+
+  // Cached "codec" report with a longer lifetime. These will get invalidated
+  // when the cache is cleared upon SLD/SRD operations.
+  rtc::scoped_refptr<const RTCStatsReport> cached_codecs_;
 
   // Data recorded and maintained by the stats collector during its lifetime.
   // Some stats are produced from this record instead of other components.

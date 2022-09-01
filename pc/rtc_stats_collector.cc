@@ -1348,6 +1348,7 @@ void RTCStatsCollector::GetStatsReportInternal(
 void RTCStatsCollector::ClearCachedStatsReport() {
   RTC_DCHECK_RUN_ON(signaling_thread_);
   cached_report_ = nullptr;
+  cached_codecs_ = nullptr;
 }
 
 void RTCStatsCollector::WaitForPendingRequest() {
@@ -1539,9 +1540,18 @@ void RTCStatsCollector::ProduceCertificateStats_n(
 void RTCStatsCollector::ProduceCodecStats_n(
     int64_t timestamp_us,
     const std::vector<RtpTransceiverStatsInfo>& transceiver_stats_infos,
-    RTCStatsReport* report) const {
+    RTCStatsReport* report) {
   RTC_DCHECK_RUN_ON(network_thread_);
   rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
+
+  if (cached_codecs_ && cached_codecs_->size() > 0) {
+    RTC_LOG(LS_ERROR) << "USING CACHED CODECS " << cached_codecs_->size();
+    report->TakeMembersFrom(cached_codecs_->Copy());
+    return;
+  }
+
+  rtc::scoped_refptr<RTCStatsReport> codecs =
+      RTCStatsReport::Create(timestamp_us);
 
   for (const auto& stats : transceiver_stats_infos) {
     if (!stats.mid) {
@@ -1555,13 +1565,13 @@ void RTCStatsCollector::ProduceCodecStats_n(
       // Inbound
       for (const auto& pair :
            stats.track_media_info_map.voice_media_info()->receive_codecs) {
-        report->AddStats(CodecStatsFromRtpCodecParameters(
+        codecs->AddStats(CodecStatsFromRtpCodecParameters(
             timestamp_us, *stats.mid, transport_id, true, pair.second));
       }
       // Outbound
       for (const auto& pair :
            stats.track_media_info_map.voice_media_info()->send_codecs) {
-        report->AddStats(CodecStatsFromRtpCodecParameters(
+        codecs->AddStats(CodecStatsFromRtpCodecParameters(
             timestamp_us, *stats.mid, transport_id, false, pair.second));
       }
     }
@@ -1570,17 +1580,22 @@ void RTCStatsCollector::ProduceCodecStats_n(
       // Inbound
       for (const auto& pair :
            stats.track_media_info_map.video_media_info()->receive_codecs) {
-        report->AddStats(CodecStatsFromRtpCodecParameters(
+        codecs->AddStats(CodecStatsFromRtpCodecParameters(
             timestamp_us, *stats.mid, transport_id, true, pair.second));
       }
       // Outbound
       for (const auto& pair :
            stats.track_media_info_map.video_media_info()->send_codecs) {
-        report->AddStats(CodecStatsFromRtpCodecParameters(
+        codecs->AddStats(CodecStatsFromRtpCodecParameters(
             timestamp_us, *stats.mid, transport_id, false, pair.second));
       }
     }
   }
+
+  // Cache codec stats and add them to the result.
+  cached_codecs_ = codecs;
+  report->TakeMembersFrom(cached_codecs_->Copy());
+  RTC_LOG(LS_ERROR) << "cached copy size down " << cached_codecs_->size();
 }
 
 void RTCStatsCollector::ProduceDataChannelStats_s(
