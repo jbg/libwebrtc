@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eecab23e_39cacc6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-09-01T16:26:01Z",
+      "side": 1,
+      "message": "can you give it a spin in a large call with your bot friends?\nPreferably without the optimizations to bring down the number yet which should make the impact more visible ;-)\n\nWill need to add tests but first I want to know if this is worth it",
+      "revId": "5e6f6110f0d775c734721a6b84f3c9e97a91b208",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
