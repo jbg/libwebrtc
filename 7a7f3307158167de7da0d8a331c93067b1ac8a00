@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0947d2ea_8acbd4c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-09-01T08:27:53Z",
+      "side": 1,
+      "message": "Maybe add a todo to remove it before it goes to beta/stable?\nIdeally we would need to wire up a chrome finch trial here, but we still have 2 weeks before branch, so it seems to be an overkill.",
+      "revId": "7a7f3307158167de7da0d8a331c93067b1ac8a00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
