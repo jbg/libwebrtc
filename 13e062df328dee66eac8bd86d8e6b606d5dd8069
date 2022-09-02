@@ -248,6 +248,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "711082aa_057686bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-09-02T07:48:29Z",
+      "side": 1,
+      "message": "Done. And rebased again. Just a trivial merge conflict with a new include.",
+      "parentUuid": "83ee448b_3ca65d17",
+      "revId": "13e062df328dee66eac8bd86d8e6b606d5dd8069",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13b80707_3be7b8c7",
