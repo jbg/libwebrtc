@@ -27,6 +27,7 @@ namespace dcsctp {
 // a lot, which is an indicator of a bad connection.
 class RetransmissionTimeout {
  public:
+  static constexpr DurationMs kInitialRtt = DurationMs(100);
   static constexpr int kRttShift = 3;
   static constexpr int kRttVarShift = 2;
   explicit RetransmissionTimeout(const DcSctpOptions& options);
@@ -48,7 +49,7 @@ class RetransmissionTimeout {
   // If this is the first measurement
   bool first_measurement_ = true;
   // Smoothed Round-Trip Time, shifted by kRttShift
-  int32_t scaled_srtt_ = 0;
+  int32_t scaled_srtt_ = *kInitialRtt << kRttShift;
   // Round-Trip Time Variation, shifted by kRttVarShift
   int32_t scaled_rtt_var_ = 0;
   // Retransmission Timeout
