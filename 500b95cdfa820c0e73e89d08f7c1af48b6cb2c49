@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96fdadc_a3cfb19a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-09-02T13:06:34Z",
+      "side": 1,
+      "message": "always insecure what the actual format of that string is,\nbut I assumed you double checked...(and tested)",
+      "revId": "500b95cdfa820c0e73e89d08f7c1af48b6cb2c49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
