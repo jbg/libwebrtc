@@ -16,6 +16,24 @@
       "message": "always insecure what the actual format of that string is,\nbut I assumed you double checked...(and tested)",
       "revId": "500b95cdfa820c0e73e89d08f7c1af48b6cb2c49",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08fb33dd_a8af6d52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17854
+      },
+      "writtenOn": "2022-09-02T13:11:16Z",
+      "side": 1,
+      "message": "Thank you for the quick review! I followed the same format as in https://webrtc-review.googlesource.com/c/src/+/273101.\n\nUnit tests exercise that the correct format is used, and verified that the do tests fail if the string is changed.",
+      "parentUuid": "c96fdadc_a3cfb19a",
+      "revId": "500b95cdfa820c0e73e89d08f7c1af48b6cb2c49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
