@@ -1377,6 +1377,7 @@ void RTCStatsCollector::GetStatsReportInternal(
 void RTCStatsCollector::ClearCachedStatsReport() {
   RTC_DCHECK_RUN_ON(signaling_thread_);
   cached_report_ = nullptr;
+  cached_codecs_ = nullptr;
 }
 
 void RTCStatsCollector::WaitForPendingRequest() {
@@ -1568,10 +1569,17 @@ void RTCStatsCollector::ProduceCertificateStats_n(
 void RTCStatsCollector::ProduceCodecStats_n(
     int64_t timestamp_us,
     const std::vector<RtpTransceiverStatsInfo>& transceiver_stats_infos,
-    RTCStatsReport* report) const {
+    RTCStatsReport* report) {
   RTC_DCHECK_RUN_ON(network_thread_);
   rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
 
+  if (cached_codecs_ && cached_codecs_->size() > 0) {
+    report->TakeMembersFrom(cached_codecs_->Copy());
+    return;
+  }
+
+  rtc::scoped_refptr<RTCStatsReport> codecs =
+      RTCStatsReport::Create(timestamp_us);
   // For each transport, payload types does uniquely identify codecs, but the
   // FMTP line could in theory be different on different m= sections. As such,
   // the (PT,FMTP) pair on a per-transport basis uniquely identifies an
@@ -1610,7 +1618,7 @@ void RTCStatsCollector::ProduceCodecStats_n(
                 .second != true) {
           continue;  // (PT,FMTP) already seen.
         }
-        report->AddStats(CodecStatsFromRtpCodecParameters(
+        codecs->AddStats(CodecStatsFromRtpCodecParameters(
             timestamp_us, kDirectionInbound, transport_id, codec));
       }
       // Outbound
@@ -1623,7 +1631,7 @@ void RTCStatsCollector::ProduceCodecStats_n(
                 .second != true) {
           continue;  // (PT,FMTP) already seen.
         }
-        report->AddStats(CodecStatsFromRtpCodecParameters(
+        codecs->AddStats(CodecStatsFromRtpCodecParameters(
             timestamp_us, kDirectionOutbound, transport_id, codec));
       }
     }
@@ -1639,7 +1647,7 @@ void RTCStatsCollector::ProduceCodecStats_n(
                 .second != true) {
           continue;  // (PT,FMTP) already seen.
         }
-        report->AddStats(CodecStatsFromRtpCodecParameters(
+        codecs->AddStats(CodecStatsFromRtpCodecParameters(
             timestamp_us, kDirectionInbound, transport_id, codec));
       }
       // Outbound
@@ -1652,11 +1660,15 @@ void RTCStatsCollector::ProduceCodecStats_n(
                 .second != true) {
           continue;  // (PT,FMTP) already seen.
         }
-        report->AddStats(CodecStatsFromRtpCodecParameters(
+        codecs->AddStats(CodecStatsFromRtpCodecParameters(
             timestamp_us, kDirectionOutbound, transport_id, codec));
       }
     }
   }
+
+  // Cache codec stats and add them to the result.
+  cached_codecs_ = codecs;
+  report->TakeMembersFrom(cached_codecs_->Copy());
 }
 
 void RTCStatsCollector::ProduceDataChannelStats_s(
