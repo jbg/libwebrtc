@@ -101,6 +101,24 @@
       "message": "This should be tested in rtc_stats_collector_unittest.cc.\n\nA neat test would be to call getStats again and ensure we get the same RTCCodecStats even if the test (illegally) modifies the underlying codec info, but this requires making sure we pass due to `cached_codecs_` and not due to `cached_report_`.\n\nIn order to do a test like this you may need to add an optional bool parameter so that you can ensure a fresh report but still have cached codecs:\n`ClearCachedStatsReport(bool clear_cached_codecs \u003d true)`",
       "revId": "5e6f6110f0d775c734721a6b84f3c9e97a91b208",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28014508_ddc87b22",
+        "filename": "pc/rtc_stats_collector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-09-02T08:06:09Z",
+      "side": 1,
+      "message": "Test:\n\ngetStats\nillegal modify of codecs\nClear non-codec cache and getStats again; the modification should not be visible.\nClear codec cache as well and getStats again; the modification should now be visible.",
+      "parentUuid": "ad072f21_cb663416",
+      "revId": "5e6f6110f0d775c734721a6b84f3c9e97a91b208",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
