@@ -949,7 +949,9 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
   virtual void GetStats(
       rtc::scoped_refptr<RtpReceiverInterface> selector,
       rtc::scoped_refptr<RTCStatsCollectorCallback> callback) = 0;
-  // Clear cached stats in the RTCStatsCollector.
+
+  // Clear cached stats in the RTCStatsCollector. See
+  // https://w3c.github.io/webrtc-stats/#guidelines-for-getstats-results-caching-throttling
   virtual void ClearStatsCache() {}
 
   // Create a data channel with the provided config, or default config if none
