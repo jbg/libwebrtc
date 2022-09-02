@@ -160,6 +160,8 @@ class AudioProcessingImpl : public AudioProcessing {
   FRIEND_TEST_ALL_PREFIXES(ApmWithSubmodulesExcludedTest,
                            BitexactWithDisabledModules);
 
+  void set_stream_analog_level_locked(int level)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
   int recommended_stream_analog_level_locked() const
       RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
 
@@ -294,6 +296,15 @@ class AudioProcessingImpl : public AudioProcessing {
 
   // Sample rate used for the fullband processing.
   int proc_fullband_sample_rate_hz() const
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
+
+  // If the input volume emulation is used, calls `set_stream_analog_level()`.
+  void MaybeUpdateAppliedInputVolumeLocked()
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
+  // If the input volume emulation is used, retrieves the recommended input
+  // volume and sets that to emulate the input volume on the next processed
+  // audio frame.
+  void MaybeUseRecommendedInputVolumeLocked()
       RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_capture_);
 
   // Empties and handles the respective RuntimeSetting queues.
