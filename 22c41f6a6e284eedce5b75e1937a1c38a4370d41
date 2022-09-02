@@ -16,6 +16,24 @@
       "message": "Remove this before submitting",
       "revId": "22c41f6a6e284eedce5b75e1937a1c38a4370d41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2f69d82_2e8b7942",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1596,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-09-02T07:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87d5c47a_2c286f0c",
+      "revId": "22c41f6a6e284eedce5b75e1937a1c38a4370d41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
