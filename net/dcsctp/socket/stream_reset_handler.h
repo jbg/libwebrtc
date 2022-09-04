@@ -88,8 +88,9 @@ class StreamResetHandler {
         last_processed_req_seq_nbr_(
             handover_state ? ReconfigRequestSN(
                                  handover_state->rx.last_completed_reset_req_sn)
-                           : ReconfigRequestSN(*ctx_->peer_initial_tsn() - 1)) {
-  }
+                           : ReconfigRequestSN(*ctx_->peer_initial_tsn() - 1)),
+        last_processed_req_result_(
+            ReconfigurationResponseParameter::Result::kSuccessNothingToDo) {}
 
   // Initiates reset of the provided streams. While there can only be one
   // ongoing stream reset request at any time, this method can be called at any
@@ -113,7 +114,7 @@ class StreamResetHandler {
 
  private:
   // Represents a stream request operation. There can only be one ongoing at
-  // any time, and a sent request may either succeed, fail or result in the
+  // any time, and a sent request may either succeed, fail or - in the
   // receiver signaling that it can't process it right now, and then it will be
   // retried.
   class CurrentRequest {
@@ -188,7 +189,7 @@ class StreamResetHandler {
       std::vector<ReconfigurationResponseParameter>& responses);
 
   // Called when this socket receives an outgoing stream reset request. It might
-  // either be performed straight away, or have to be deferred, and the result
+  // either be performed straight away, or have to be deferred, and the -
   // of that will be put in `responses`.
   void HandleResetOutgoing(
       const ParameterDescriptor& descriptor,
@@ -224,6 +225,8 @@ class StreamResetHandler {
 
   // For incoming requests - last processed request sequence number.
   ReconfigRequestSN last_processed_req_seq_nbr_;
+  // The result from last processed incoming request
+  ReconfigurationResponseParameter::Result last_processed_req_result_;
 };
 }  // namespace dcsctp
 
