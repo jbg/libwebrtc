@@ -136,9 +136,10 @@ bool StreamResetHandler::ValidateReqSeqNbr(
   if (req_seq_nbr == last_processed_req_seq_nbr_) {
     // This has already been performed previously.
     RTC_DLOG(LS_VERBOSE) << log_prefix_ << "req=" << *req_seq_nbr
-                         << " already processed";
+                         << " already processed, returning result="
+                         << ToString(last_processed_req_result_);
     responses.push_back(ReconfigurationResponseParameter(
-        req_seq_nbr, ResponseResult::kSuccessNothingToDo));
+        req_seq_nbr, last_processed_req_result_));
     return false;
   }
 
@@ -170,20 +171,18 @@ void StreamResetHandler::HandleResetOutgoing(
   }
 
   if (ValidateReqSeqNbr(req->request_sequence_number(), responses)) {
-    ResponseResult result;
-
     RTC_DLOG(LS_VERBOSE) << log_prefix_
                          << "Reset outgoing streams with req_seq_nbr="
                          << *req->request_sequence_number();
 
     last_processed_req_seq_nbr_ = req->request_sequence_number();
-    result = reassembly_queue_->ResetStreams(
+    last_processed_req_result_ = reassembly_queue_->ResetStreams(
         *req, data_tracker_->last_cumulative_acked_tsn());
-    if (result == ResponseResult::kSuccessPerformed) {
+    if (last_processed_req_result_ == ResponseResult::kSuccessPerformed) {
       ctx_->callbacks().OnIncomingStreamsReset(req->stream_ids());
     }
     responses.push_back(ReconfigurationResponseParameter(
-        req->request_sequence_number(), result));
+        req->request_sequence_number(), last_processed_req_result_));
   }
 }
 
