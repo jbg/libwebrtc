@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8493a0a5_c090d46c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-09-05T12:52:40Z",
+      "side": 1,
+      "message": "This changes the initial RTT from 0 to 500 ms. Which means that no RTT-based timer will expire before the first Ack is received if the situation is anything like a working connection.\n\nAre there cases where this change influences behavior, and should there be tests for those?\nDo we test that the first RTT measurement overwrites the 500 value and does not change the variance, rather than averaging between 500 and the new value?\n\nApproving since the new value makes more sense than zero.\n",
+      "revId": "eedf52d3a2036b9f315d415ffa8f47926be91f40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb3437c_61111b5f",
+        "filename": "net/dcsctp/tx/retransmission_timeout_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-09-05T12:52:40Z",
+      "side": 1,
+      "message": "Nit: This test would pass if the constant 0 was replaced with kInitialRto \u003c\u003c kRttShift.\nShould you have another test that setting it to a non-default value does the Right Thing?",
+      "revId": "eedf52d3a2036b9f315d415ffa8f47926be91f40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
