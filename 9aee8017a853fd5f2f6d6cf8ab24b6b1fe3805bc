@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0ea34342_08014550",
+        "filename": "modules/video_coding/timing/jitter_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-09-06T12:08:54Z",
+      "side": 1,
+      "message": "I would have preferred `kFramesUntilPostProcessing`, but this constant is actually reused for some frame rate filtering ramp-up as well. I actually think that fits under the name `kFrameProcessingStartupCount`, so I\u0027ll go with that. Will also update the comment a bit.",
+      "parentUuid": "c0d071d8_d79181f4",
+      "range": {
+        "startLine": 33,
+        "startChar": 17,
+        "endLine": 33,
+        "endChar": 40
+      },
+      "revId": "9aee8017a853fd5f2f6d6cf8ab24b6b1fe3805bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7ee80a48_f16f997d",
         "filename": "modules/video_coding/timing/jitter_estimator.cc",
         "patchSetId": 13
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-06T11:43:50Z",
       "side": 1,
       "message": "`kFramesUntilSizeFiltering`?",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 39
+      },
+      "revId": "9aee8017a853fd5f2f6d6cf8ab24b6b1fe3805bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a12e653_80071fad",
+        "filename": "modules/video_coding/timing/jitter_estimator.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-09-06T12:08:54Z",
+      "side": 1,
+      "message": "Good idea, done!",
+      "parentUuid": "7ee80a48_f16f997d",
       "range": {
         "startLine": 36,
         "startChar": 17,
