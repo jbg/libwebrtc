@@ -6636,6 +6636,7 @@
       }
     ]
   },
+  "linux_fuchsia_rel": {},
   "linux_libfuzzer_rel": {},
   "linux_memcheck": {
     "isolated_scripts": [
