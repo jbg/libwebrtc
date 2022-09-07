@@ -79,6 +79,13 @@
           'isolated_scripts': 'desktop_tests',
         },
       },
+      'Linux Fuchsia': {
+        'os_type': 'linux',
+        'mixins': ['linux-bionic', 'x86-64', 'resultdb-json-format'],
+        'test_suites': {
+          'isolated_scripts': 'desktop_tests',
+        },
+      },
       'Linux MSan': {
         'os_type': 'linux',
         'mixins': ['linux-bionic', 'x86-64', 'resultdb-json-format'],
@@ -466,6 +473,13 @@
         'mixins': ['linux-bionic', 'x86-64', 'resultdb-json-format'],
         'test_suites': {
           'isolated_scripts': 'desktop_tests',
+        },
+      },
+      'linux_fuchsia_rel': {
+        'os_type': 'linux',
+        'mixins': ['linux-bionic', 'x86-64', 'resultdb-json-format'],
+        'test_suties': {
+          'isolateds_scripts': 'desktop_tests',
         },
       },
       'linux_libfuzzer_rel': {},

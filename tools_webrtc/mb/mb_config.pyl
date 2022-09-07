@@ -58,6 +58,7 @@
         'rtti_no_sctp': 'rtti_no_sctp_x64',
       },
       'Linux Asan': 'asan_lsan_clang_release_bot_x64',
+      'Linux Fuchsia': 'release_bot_x64_fuchsia',
       'Linux MSan': 'msan_clang_release_bot_x64',
       'Linux Tsan v2': 'tsan_clang_release_bot_x64',
       'Linux UBSan': 'ubsan_clang_release_bot_x64',
@@ -179,6 +180,7 @@
       'linux_compile_x86_dbg': 'debug_bot_x86',
       'linux_compile_x86_rel': 'pure_release_bot_x86',
       'linux_dbg': 'debug_bot_x64',
+      'linux_fuchsia_rel': 'release_bot_x64_fuchsia',
       'linux_libfuzzer_rel': 'libfuzzer_asan_release_bot_x64',
       'linux_more_configs': {
         'bwe_test_logging': 'bwe_test_logging_x64',
@@ -301,6 +303,7 @@
     'release_bot_arm': ['openh264', 'release_bot', 'arm'],
     'release_bot_arm64': ['openh264', 'release_bot', 'arm64'],
     'release_bot_x64': ['openh264', 'release_bot', 'x64'],
+    'release_bot_x64_fuchsia': ['openh264', 'release_bot', 'x64', 'fuchsia'],
     'release_bot_x64_reclient': [
       'openh264', 'release_bot_reclient', 'x64',
     ],
@@ -403,6 +406,9 @@
     },
     'dummy_audio_file_devices': {
       'gn_args': 'rtc_use_dummy_audio_file_devices=true',
+    },
+    'fuchsia': {
+      'gn_args': 'is_fuchsia=true'
     },
     'full_symbols': {
       'gn_args': 'symbol_level=2',
