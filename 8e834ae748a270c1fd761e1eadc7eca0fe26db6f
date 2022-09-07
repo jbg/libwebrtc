@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c21a897_6baa02e1",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-09-07T08:25:16Z",
+      "side": 1,
+      "message": "This is very specific to the capture_level_adjustment and its analog_mic emulation.\n\nHowever, the methods sounds like they are more general and does not at all refer to the emulation.\n\nCould the implementation added in this CL instead be more specific as to what is actually done?\n\nFor instance I\u0027d rather prefer to put \n if (submodules_.capture_levels_adjuster \u0026\u0026\n      config_.capture_level_adjustment.analog_mic_gain_emulation.enabled) {\n  set_stream_analog_level_locked(submodules_.capture_levels_adjuster-\u003eGetAnalogMicGainLevel());\n  }\ndirectly in the code rather than to have that abstracted in a function which gives the impression it is generic for volume settings.",
+      "range": {
+        "startLine": 1383,
+        "startChar": 0,
+        "endLine": 1405,
+        "endChar": 1
+      },
+      "revId": "8e834ae748a270c1fd761e1eadc7eca0fe26db6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

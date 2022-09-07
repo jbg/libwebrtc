@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7c42ec4_583b961a",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-09-07T08:25:16Z",
+      "side": 0,
+      "message": "What I like with this approach is that the calls to submodules_.capture_levels_adjuster are more localized. In contrast, the CL spreads out the use of submodules_.capture_levels_adjuster.\n \nWould it be possible to maintain that  somehow?",
+      "range": {
+        "startLine": 1102,
+        "startChar": 0,
+        "endLine": 1113,
+        "endChar": 0
+      },
+      "revId": "c5f731dc3f46ee573a45282722cacc93386b3fd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
