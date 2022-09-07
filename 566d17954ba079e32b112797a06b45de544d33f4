@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d5b2ed4_68329577",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-09-07T12:09:16Z",
+      "side": 1,
+      "message": "This would have an effect only if you created native encoders without wrapping them in a `VideoEncoderSoftwareFallbackWrapper` I presume?\nRegardless I think that makes sense, such as when a codec does not have matching software implementation available.",
+      "revId": "566d17954ba079e32b112797a06b45de544d33f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
