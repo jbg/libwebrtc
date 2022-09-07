@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a728991f_b53a58a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-09-07T16:30:18Z",
+      "side": 1,
+      "message": "picking up https://webrtc-review.googlesource.com/c/src/+/249601 again. We still need a spec change.",
+      "revId": "272c3478b7c2241ba6da53f9f73593c920684dd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
