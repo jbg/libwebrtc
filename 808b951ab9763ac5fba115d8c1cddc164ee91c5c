@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed3d325_672cbc22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15909
+      },
+      "writtenOn": "2022-09-07T08:05:44Z",
+      "side": 1,
+      "message": "https://ci.chromium.org/ui/p/webrtc/builders/ci/Android32%20(M%20Nexus5X)/20476/overview completed builds with reclient successfully.",
+      "revId": "808b951ab9763ac5fba115d8c1cddc164ee91c5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
