@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4cb2c20_6be2ed21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-07T12:07:19Z",
+      "side": 1,
+      "message": "LGTM, I don\u0027t remember if there were more GN args but we can discover this later (this doesn\u0027t block LKGR).",
+      "revId": "e6f12387dc584dce6aeab2d0e3cc0d69cd3de6fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57e62141_be76c6d8",
+        "filename": "infra/config/config.star",
+        "patchSetId": 4
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-07T12:07:19Z",
+      "side": 1,
+      "message": "Let\u0027s add `cq \u003d None` and remove this later?",
+      "range": {
+        "startLine": 782,
+        "startChar": 27,
+        "endLine": 782,
+        "endChar": 28
+      },
+      "revId": "e6f12387dc584dce6aeab2d0e3cc0d69cd3de6fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
