@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "471088c9_c914285c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15909
+      },
+      "writtenOn": "2022-09-07T03:45:13Z",
+      "side": 1,
+      "message": "The latest build completed with reclient successfully.\nhttps://ci.chromium.org/ui/p/webrtc/builders/ci/Linux64%20Release/31493/overview",
+      "revId": "cb6154346a4af1a2fcc2ae05ed84fc5d7d5ec59b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
