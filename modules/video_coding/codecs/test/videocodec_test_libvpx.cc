@@ -414,15 +414,15 @@ TEST(VideoCodecTestLibvpx, DISABLED_MultiresVP8RdPerf) {
   config.filename = "FourPeople_1280x720_30";
   config.filepath = ResourcePath(config.filename, "yuv");
   config.num_frames = 300;
-  config.print_frame_level_stats = true;
-  config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true, true, false,
-                          1280, 720);
+  config.print_frame_level_stats = false;
+  config.SetCodecSettings(cricket::kVp8CodecName, 3, 1, 3, true,
+                          /*frame_dropper_on=*/false, false, 1280, 720);
   const auto frame_checker = std::make_unique<QpFrameChecker>();
   config.encoded_frame_checker = frame_checker.get();
   auto fixture = CreateVideoCodecTestFixture(config);
 
   std::map<size_t, std::vector<VideoStatistics>> rd_stats;
-  for (size_t bitrate_kbps : kBitrateRdPerfKbps) {
+  for (size_t bitrate_kbps : {3}) {
     std::vector<RateProfile> rate_profiles = {{bitrate_kbps, 30, 0}};
 
     fixture->RunTest(rate_profiles, nullptr, nullptr, nullptr);
