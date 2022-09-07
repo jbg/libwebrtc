@@ -1060,6 +1060,15 @@ void SendStatisticsProxy::OnEncoderImplementationChanged(
   stats_.encoder_implementation_name = implementation_name;
 }
 
+void SendStatisticsProxy::OnEncoderImplementationChanged(
+    EncoderImplementation implementation) {
+  MutexLock lock(&mutex_);
+  encoder_changed_ = EncoderChangeEvent{stats_.encoder_implementation_name,
+                                        implementation.name};
+  stats_.encoder_implementation_name = implementation.name;
+  stats_.power_efficient_encoder = implementation.is_hardware_accelerated;
+}
+
 int SendStatisticsProxy::GetInputFrameRate() const {
   MutexLock lock(&mutex_);
   return round(uma_container_->input_frame_rate_tracker_.ComputeRate());
