@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c1ea00c_466d3b1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-09-08T17:05:14Z",
+      "side": 1,
+      "message": "RS-LGTM\n\nI don\u0027t know what all the error codes (\u003c 0) mean exactly, but this seems like a reasonable change to me.",
+      "revId": "e100e7bd82d834f27dc6f5923174583f77f93356",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
