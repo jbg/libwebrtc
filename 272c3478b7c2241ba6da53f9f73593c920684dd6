@@ -33,6 +33,24 @@
       "message": "I\u0027m not sure \"codec_payload_type has a value\" should be used as a magic value for \"has the stream been negotiated\"... and I\u0027m not sure I like the idea of setting magic value 0. If we decide that outbound-rtp should appear even if we\u0027ve not sent anything yet then I\u0027d like to make this more explicit.\n\nBut let\u0027s wait and see what happens to the spec discussion. It may be relevant what other browsers do today, e.g. if this part of the spec is already implemented by Firefox.",
       "revId": "272c3478b7c2241ba6da53f9f73593c920684dd6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "938fcef9_11676214",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-09-08T10:02:42Z",
+      "side": 1,
+      "message": "There is no magic value 0 (which is a valid payload type for G711)\n\nI do not think we should risk breaking the behavior which Chrome has implemented for years on statistics that are heavily relied on.",
+      "parentUuid": "ed4371f7_516a7ad9",
+      "revId": "272c3478b7c2241ba6da53f9f73593c920684dd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
