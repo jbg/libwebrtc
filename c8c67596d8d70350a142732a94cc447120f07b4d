@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4f2c719_31ff9950",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-09-08T14:47:20Z",
+      "side": 1,
+      "message": "It feels this function deserve a comment: why aborted retransmission should treat packet as sent?\n\nMay be something like\n\"Treat as if packet was sent, but dropped by the network, even though packet is dropped in the webrtc.\"",
+      "revId": "c8c67596d8d70350a142732a94cc447120f07b4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0ee04ab_c77b2e15",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-09-08T14:47:20Z",
+      "side": 1,
+      "message": "uint16_t kAbortedSequenceNumbers[] \u003d {media_sequence_number};\n\nhttps://abseil.io/tips/88\nUse assignment syntax when initializing directly with the intended literal value ..., with containers (std::vector, std::map, etc)\n...\nUse {} initialization without the \u003d only if the above options don’t compile",
+      "range": {
+        "startLine": 988,
+        "startChar": 2,
+        "endLine": 988,
+        "endChar": 60
+      },
+      "revId": "c8c67596d8d70350a142732a94cc447120f07b4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "433bdb0a_90315ddd",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-09-08T14:47:20Z",
+      "side": 1,
+      "message": "what this expectation mean?\nThat packet is again available for retransmission?",
+      "revId": "c8c67596d8d70350a142732a94cc447120f07b4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
