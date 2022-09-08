@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb22ab02_5770e702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-08T05:55:04Z",
+      "side": 1,
+      "message": "Skipping Win because of the libc++ issue we are going to solve on the next roll.",
+      "revId": "fe8d8b2ed621074442d8ceb46dc1043903d6a508",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
