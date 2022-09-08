@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d16638dd_9c9d7b1c",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-09-08T14:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4f2c719_31ff9950",
+      "revId": "c8c67596d8d70350a142732a94cc447120f07b4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0ee04ab_c77b2e15",
@@ -43,6 +61,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0f2c378b_ef9ff273",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-09-08T14:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0ee04ab_c77b2e15",
+      "range": {
+        "startLine": 988,
+        "startChar": 2,
+        "endLine": 988,
+        "endChar": 60
+      },
+      "revId": "c8c67596d8d70350a142732a94cc447120f07b4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "433bdb0a_90315ddd",
         "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
         "patchSetId": 2
@@ -54,6 +96,24 @@
       "writtenOn": "2022-09-08T14:47:20Z",
       "side": 1,
       "message": "what this expectation mean?\nThat packet is again available for retransmission?",
+      "revId": "c8c67596d8d70350a142732a94cc447120f07b4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d4709b7_76233a32",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-09-08T14:54:15Z",
+      "side": 1,
+      "message": "Yes. The `fetching packet is possible again` part from the comment above.",
+      "parentUuid": "433bdb0a_90315ddd",
       "revId": "c8c67596d8d70350a142732a94cc447120f07b4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
