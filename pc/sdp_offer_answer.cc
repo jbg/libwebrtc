@@ -55,7 +55,6 @@
 #include "pc/usage_pattern.h"
 #include "pc/webrtc_session_description_factory.h"
 #include "rtc_base/helpers.h"
-#include "rtc_base/location.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/rtc_certificate.h"
 #include "rtc_base/ssl_stream_adapter.h"
@@ -696,8 +695,7 @@ rtc::scoped_refptr<webrtc::DtlsTransport> LookupDtlsTransportByMid(
   // the network thread and then update the implementation to check that
   // the set_ and relevant get methods are always called on the network
   // thread (we'll need to update proxy maps).
-  return network_thread->Invoke<rtc::scoped_refptr<webrtc::DtlsTransport>>(
-      RTC_FROM_HERE,
+  return network_thread->BlockingCall(
       [controller, &mid] { return controller->LookupDtlsTransportByMid(mid); });
 }
 
@@ -2200,8 +2198,8 @@ void SdpOfferAnswerHandler::DoSetLocalDescription(
 
     // TODO(deadbeef): We already had to hop to the network thread for
     // MaybeStartGathering...
-    context_->network_thread()->Invoke<void>(
-        RTC_FROM_HERE, [this] { port_allocator()->DiscardCandidatePool(); });
+    context_->network_thread()->BlockingCall(
+        [this] { port_allocator()->DiscardCandidatePool(); });
     // Make UMA notes about what was agreed to.
     ReportNegotiatedSdpSemantics(*local_description());
   }
@@ -2404,8 +2402,8 @@ void SdpOfferAnswerHandler::SetRemoteDescriptionPostProcess(bool was_answer) {
   if (was_answer) {
     // TODO(deadbeef): We already had to hop to the network thread for
     // MaybeStartGathering...
-    context_->network_thread()->Invoke<void>(
-        RTC_FROM_HERE, [this] { port_allocator()->DiscardCandidatePool(); });
+    context_->network_thread()->BlockingCall(
+        [this] { port_allocator()->DiscardCandidatePool(); });
     // Make UMA notes about what was agreed to.
     ReportNegotiatedSdpSemantics(*remote_description());
   }
@@ -3831,8 +3829,7 @@ void SdpOfferAnswerHandler::GetOptionsForOffer(
   session_options->rtcp_cname = rtcp_cname_;
   session_options->crypto_options = pc_->GetCryptoOptions();
   session_options->pooled_ice_credentials =
-      context_->network_thread()->Invoke<std::vector<cricket::IceParameters>>(
-          RTC_FROM_HERE,
+      context_->network_thread()->BlockingCall(
           [this] { return port_allocator()->GetPooledIceCredentials(); });
   session_options->offer_extmap_allow_mixed =
       pc_->configuration()->offer_extmap_allow_mixed;
@@ -4095,8 +4092,7 @@ void SdpOfferAnswerHandler::GetOptionsForAnswer(
   session_options->rtcp_cname = rtcp_cname_;
   session_options->crypto_options = pc_->GetCryptoOptions();
   session_options->pooled_ice_credentials =
-      context_->network_thread()->Invoke<std::vector<cricket::IceParameters>>(
-          RTC_FROM_HERE,
+      context_->network_thread()->BlockingCall(
           [this] { return port_allocator()->GetPooledIceCredentials(); });
 }
 
@@ -4570,7 +4566,7 @@ RTCError SdpOfferAnswerHandler::PushdownMediaDescription(
     for (const auto& entry : channels) {
       std::string error;
       bool success =
-          context_->worker_thread()->Invoke<bool>(RTC_FROM_HERE, [&]() {
+          context_->worker_thread()->BlockingCall([&]() {
             return (source == cricket::CS_LOCAL)
                        ? entry.first->SetLocalContent(entry.second, type, error)
                        : entry.first->SetRemoteContent(entry.second, type,
@@ -4918,7 +4914,7 @@ RTCError SdpOfferAnswerHandler::CreateChannels(const SessionDescription& desc) {
 
 bool SdpOfferAnswerHandler::CreateDataChannel(const std::string& mid) {
   RTC_DCHECK_RUN_ON(signaling_thread());
-  if (!context_->network_thread()->Invoke<bool>(RTC_FROM_HERE, [this, &mid] {
+  if (!context_->network_thread()->BlockingCall([this, &mid] {
         RTC_DCHECK_RUN_ON(context_->network_thread());
         return pc_->SetupDataChannelTransport_n(mid);
       })) {
@@ -4940,7 +4936,7 @@ void SdpOfferAnswerHandler::DestroyDataChannelTransport(RTCError error) {
   if (has_sctp)
     data_channel_controller()->OnTransportChannelClosed(error);
 
-  context_->network_thread()->Invoke<void>(RTC_FROM_HERE, [this] {
+  context_->network_thread()->BlockingCall([this] {
     RTC_DCHECK_RUN_ON(context_->network_thread());
     pc_->TeardownDataChannelTransport_n();
   });
@@ -5231,17 +5227,16 @@ bool SdpOfferAnswerHandler::UpdatePayloadTypeDemuxingState(
   // needs to be fully (and only) managed on the network thread and once that's
   // the case, there's no need to stop by on the worker. Ideally we could also
   // do this without blocking.
-  return context_->worker_thread()->Invoke<bool>(
-      RTC_FROM_HERE, [&channels_to_update]() {
-        for (const auto& it : channels_to_update) {
-          if (!it.second->SetPayloadTypeDemuxingEnabled(it.first)) {
-            // Note that the state has already been irrevocably changed at this
-            // point. Is it useful to stop the loop?
-            return false;
-          }
-        }
-        return true;
-      });
+  return context_->worker_thread()->BlockingCall([&channels_to_update]() {
+    for (const auto& it : channels_to_update) {
+      if (!it.second->SetPayloadTypeDemuxingEnabled(it.first)) {
+        // Note that the state has already been irrevocably changed at this
+        // point. Is it useful to stop the loop?
+        return false;
+      }
+    }
+    return true;
+  });
 }
 
 bool SdpOfferAnswerHandler::ConfiguredForMedia() const {

@@ -22,6 +22,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
 #include "rtc_base/fake_clock.h"
+#include "rtc_base/location.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/physical_socket_server.h"
 #include "rtc_base/socket_address_pair.h"
