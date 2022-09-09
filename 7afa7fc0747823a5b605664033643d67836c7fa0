@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e0fee1_8c7b64c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-09-09T19:32:59Z",
+      "side": 1,
+      "message": "I heard that Niels is no longer working on the WebRTC. Will this CL be merged someday or will it be abandoned?",
+      "revId": "7afa7fc0747823a5b605664033643d67836c7fa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36accba1_ec2ab427",
