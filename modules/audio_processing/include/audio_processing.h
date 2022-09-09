@@ -536,6 +536,41 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
   // enqueueing was successfull.
   virtual bool PostRuntimeSetting(RuntimeSetting setting) = 0;
 
+  // Result of a `ProcessCaptureStream()` call.
+  struct ProcessCaptureResult {
+    // True when a `ProcessCaptureStream()` call succeeds.
+    bool success;
+    // If specified, the caller should apply the recommended input volume on
+    // the capture device. The volume is a value in the [0, 255] range.
+    absl::optional<int> recommended_input_volume;
+  };
+
+  // Accepts and produces a ~10 ms frame of interleaved 16 bit integer audio as
+  // specified in `input_config` and `output_config`. `src` and `dest` may use
+  // the same memory, if desired.
+  virtual ProcessCaptureResult ProcessCaptureStream(const int16_t* const src,
+                            const StreamConfig& input_config,
+                            const StreamConfig& output_config,
+                            int16_t* const dest,
+                            absl::optional<int> applied_input_volume,
+                            absl::optional<bool> key_pressed) = 0;
+
+  // Accepts deinterleaved float audio with the range [-1, 1]. Each element of
+  // `src` points to a channel buffer, arranged according to `input_stream`. At
+  // output, the channels will be arranged according to `output_stream` in
+  // `dest`.
+  //
+  // The output must have one channel or as many channels as the input. `src`
+  // and `dest` may use the same memory, if desired.
+  virtual ProcessCaptureResult ProcessCaptureStream(const float* const* src,
+                            const StreamConfig& input_config,
+                            const StreamConfig& output_config,
+                            float* const* dest,
+                            absl::optional<int> applied_input_volume,
+                            absl::optional<bool> key_pressed) = 0;
+
+  // Deprecated. Switch to `ProcessCaptureStream()`.
+  // TODO(bugs.webrtc.org/7494): Remove once deprecation grace period ends.
   // Accepts and produces a ~10 ms frame of interleaved 16 bit integer audio as
   // specified in `input_config` and `output_config`. `src` and `dest` may use
   // the same memory, if desired.
@@ -544,6 +579,8 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
                             const StreamConfig& output_config,
                             int16_t* const dest) = 0;
 
+  // Deprecated. Switch to `ProcessCaptureStream()`.
+  // TODO(bugs.webrtc.org/7494): Remove once deprecation grace period ends.
   // Accepts deinterleaved float audio with the range [-1, 1]. Each element of
   // `src` points to a channel buffer, arranged according to `input_stream`. At
   // output, the channels will be arranged according to `output_stream` in
@@ -584,14 +621,19 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
   virtual bool GetLinearAecOutput(
       rtc::ArrayView<std::array<float, 160>> linear_output) const = 0;
 
+  // Deprecated. Switch to `ProcessCaptureStream()`.
+  // TODO(bugs.webrtc.org/7494): Remove once deprecation grace period ends.
   // This must be called prior to ProcessStream() if and only if adaptive analog
   // gain control is enabled, to pass the current analog level from the audio
   // HAL. Must be within the range [0, 255].
   virtual void set_stream_analog_level(int level) = 0;
 
-  // When an analog mode is set, this should be called after ProcessStream()
-  // to obtain the recommended new analog level for the audio HAL. It is the
-  // user's responsibility to apply this level.
+  // Deprecated. Switch to `ProcessCaptureStream()`.
+  // TODO(bugs.webrtc.org/7494): Remove once deprecation grace period ends.
+  // When an analog mode is set, this should be called after
+  // `set_stream_analog_level()` and `ProcessStream()` to obtain the recommended
+  // new analog level for the audio HAL. It is the user's responsibility to
+  // apply this level.
   virtual int recommended_stream_analog_level() const = 0;
 
   // This must be called if and only if echo processing is enabled.
@@ -610,6 +652,7 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
   virtual int set_stream_delay_ms(int delay) = 0;
   virtual int stream_delay_ms() const = 0;
 
+  // Deprecated. Switch to `ProcessCaptureStream()`.
   // Call to signal that a key press occurred (true) or did not occur (false)
   // with this chunk of audio.
   virtual void set_stream_key_pressed(bool key_pressed) = 0;
