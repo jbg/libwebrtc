@@ -12,6 +12,7 @@
 
 #include <utility>
 
+#include "absl/algorithm/container.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "rtc_base/checks.h"
 
@@ -55,6 +56,9 @@ PrioritizedPacketQueue::StreamQueue::StreamQueue(Timestamp creation_time)
 bool PrioritizedPacketQueue::StreamQueue::EnqueuePacket(QueuedPacket packet,
                                                         int priority_level) {
   bool first_packet_at_level = packets_[priority_level].empty();
+  if (packet.packet->is_key_frame()) {
+    ++keyframe_packets_;
+  }
   packets_[priority_level].push_back(std::move(packet));
   return first_packet_at_level;
 }
@@ -64,6 +68,10 @@ PrioritizedPacketQueue::StreamQueue::DequePacket(int priority_level) {
   RTC_DCHECK(!packets_[priority_level].empty());
   QueuedPacket packet = std::move(packets_[priority_level].front());
   packets_[priority_level].pop_front();
+  if (packet.packet->is_key_frame()) {
+    RTC_DCHECK_GT(keyframe_packets_, 0);
+    --keyframe_packets_;
+  }
   return packet;
 }
 
@@ -85,10 +93,6 @@ Timestamp PrioritizedPacketQueue::StreamQueue::LeadingPacketEnqueueTime(
     int priority_level) const {
   RTC_DCHECK(!packets_[priority_level].empty());
   return packets_[priority_level].begin()->enqueue_time;
-}
-
-Timestamp PrioritizedPacketQueue::StreamQueue::LastEnqueueTime() const {
-  return last_enqueue_time_;
 }
 
 PrioritizedPacketQueue::PrioritizedPacketQueue(Timestamp creation_time)
@@ -145,7 +149,7 @@ void PrioritizedPacketQueue::Push(Timestamp enqueue_time,
   if (enqueue_time - last_culling_time_ > kTimeout) {
     for (auto it = streams_.begin(); it != streams_.end();) {
       if (it->second->IsEmpty() &&
-          it->second->LastEnqueueTime() + kTimeout < enqueue_time) {
+          it->second->last_enqueue_time() + kTimeout < enqueue_time) {
         streams_.erase(it++);
       } else {
         ++it;
@@ -163,27 +167,7 @@ std::unique_ptr<RtpPacketToSend> PrioritizedPacketQueue::Pop() {
   RTC_DCHECK_GE(top_active_prio_level_, 0);
   StreamQueue& stream_queue = *streams_by_prio_[top_active_prio_level_].front();
   QueuedPacket packet = stream_queue.DequePacket(top_active_prio_level_);
-  --size_packets_;
-  RTC_DCHECK(packet.packet->packet_type().has_value());
-  RtpPacketMediaType packet_type = packet.packet->packet_type().value();
-  --size_packets_per_media_type_[static_cast<size_t>(packet_type)];
-  RTC_DCHECK_GE(size_packets_per_media_type_[static_cast<size_t>(packet_type)],
-                0);
-  size_payload_ -= packet.PacketSize();
-
-  // Calculate the total amount of time spent by this packet in the queue
-  // while in a non-paused state. Note that the `pause_time_sum_ms_` was
-  // subtracted from `packet.enqueue_time_ms` when the packet was pushed, and
-  // by subtracting it now we effectively remove the time spent in in the
-  // queue while in a paused state.
-  TimeDelta time_in_non_paused_state =
-      last_update_time_ - packet.enqueue_time - pause_time_sum_;
-  queue_time_sum_ -= time_in_non_paused_state;
-
-  RTC_DCHECK(size_packets_ > 0 || queue_time_sum_ == TimeDelta::Zero());
-
-  RTC_CHECK(packet.enqueue_time_iterator != enqueue_times_.end());
-  enqueue_times_.erase(packet.enqueue_time_iterator);
+  OnRemovedPacket(packet);
 
   // Remove StreamQueue from head of fifo-queue for this prio level, and
   // and add it to the end if it still has packets.
@@ -267,6 +251,67 @@ void PrioritizedPacketQueue::UpdateAverageQueueTime(Timestamp now) {
 void PrioritizedPacketQueue::SetPauseState(bool paused, Timestamp now) {
   UpdateAverageQueueTime(now);
   paused_ = paused;
+}
+
+bool PrioritizedPacketQueue::HasKeyframePackets(uint32_t ssrc) const {
+  auto it = streams_.find(ssrc);
+  if (it != streams_.end()) {
+    return it->second->has_keyframe_packets();
+  }
+  return false;
+}
+
+void PrioritizedPacketQueue::FlushVideoStream(
+    uint32_t media_ssrc,
+    absl::optional<uint32_t> rtx_ssrx) {
+  FlushStream(media_ssrc, GetPriorityForType(RtpPacketMediaType::kVideo));
+  if (rtx_ssrx) {
+    FlushStream(*rtx_ssrx,
+                GetPriorityForType(RtpPacketMediaType::kRetransmission));
+  } else {
+    FlushStream(media_ssrc,
+                GetPriorityForType(RtpPacketMediaType::kRetransmission));
+  }
+}
+
+void PrioritizedPacketQueue::OnRemovedPacket(const QueuedPacket& packet) {
+  --size_packets_;
+  RTC_DCHECK(packet.packet->packet_type().has_value());
+  RtpPacketMediaType packet_type = packet.packet->packet_type().value();
+  --size_packets_per_media_type_[static_cast<size_t>(packet_type)];
+  RTC_DCHECK_GE(size_packets_per_media_type_[static_cast<size_t>(packet_type)],
+                0);
+  size_payload_ -= packet.PacketSize();
+
+  // Calculate the total amount of time spent by this packet in the queue
+  // while in a non-paused state. Note that the `pause_time_sum_ms_` was
+  // subtracted from `packet.enqueue_time_ms` when the packet was pushed, and
+  // by subtracting it now we effectively remove the time spent in in the
+  // queue while in a paused state.
+  TimeDelta time_in_non_paused_state =
+      last_update_time_ - packet.enqueue_time - pause_time_sum_;
+  queue_time_sum_ -= time_in_non_paused_state;
+
+  RTC_DCHECK(size_packets_ > 0 || queue_time_sum_ == TimeDelta::Zero());
+
+  RTC_CHECK(packet.enqueue_time_iterator != enqueue_times_.end());
+  enqueue_times_.erase(packet.enqueue_time_iterator);
+}
+
+void PrioritizedPacketQueue::FlushStream(uint32_t ssrc, int prio_level) {
+  auto media_it = streams_.find(ssrc);
+  if (media_it != streams_.end()) {
+    StreamQueue& stream_queue = *media_it->second.get();
+    while (stream_queue.HasPacketsAtPrio(prio_level)) {
+      QueuedPacket packet = stream_queue.DequePacket(prio_level);
+      OnRemovedPacket(packet);
+    }
+
+    auto prio_it = absl::c_find(streams_by_prio_[prio_level], &stream_queue);
+    if (prio_it != streams_by_prio_[prio_level].end()) {
+      streams_by_prio_[prio_level].erase(prio_it);
+    }
+  }
 }
 
 }  // namespace webrtc

@@ -80,6 +80,13 @@ class PrioritizedPacketQueue {
   // Set the pause state, while `paused` is true queuing time is not counted.
   void SetPauseState(bool paused, Timestamp now);
 
+  // Checks if the queue for the given SSRC has original (retransmissions not
+  // counted) video packets containing keyframe data.
+  bool HasKeyframePackets(uint32_t ssrc) const;
+
+  // Remove any pending media and retransmissions for the given stream.
+  void FlushVideoStream(uint32_t media_ssrc, absl::optional<uint32_t> rtx_ssrx);
+
  private:
   static constexpr int kNumPriorityLevels = 4;
 
@@ -112,12 +119,20 @@ class PrioritizedPacketQueue {
     bool HasPacketsAtPrio(int priority_level) const;
     bool IsEmpty() const;
     Timestamp LeadingPacketEnqueueTime(int priority_level) const;
-    Timestamp LastEnqueueTime() const;
+    Timestamp last_enqueue_time() const { return last_enqueue_time_; }
+    bool has_keyframe_packets() const { return keyframe_packets_ > 0; }
 
    private:
     std::deque<QueuedPacket> packets_[kNumPriorityLevels];
     Timestamp last_enqueue_time_;
+    int keyframe_packets_;
   };
+
+  // Remove packet from any stats it's included in.
+  void OnRemovedPacket(const QueuedPacket& packet);
+
+  // Remove all packets for the given prio level and SSRC.
+  void FlushStream(uint32_t ssrc, int prio_level);
 
   // Cumulative sum, over all packets, of time spent in the queue.
   TimeDelta queue_time_sum_;

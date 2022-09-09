@@ -69,6 +69,8 @@ PacingController::PacingController(Clock* clock,
           IsEnabled(field_trials_, "WebRTC-Pacer-IgnoreTransportOverhead")),
       fast_retransmissions_(
           IsEnabled(field_trials_, "WebRTC-Pacer-FastRetransmissions")),
+      keyframe_flushing_(
+          IsEnabled(field_trials_, "WebRTC-Pacer-KeyframeFlushing")),
       min_packet_limit_(kDefaultMinPacketLimit),
       transport_overhead_per_packet_(DataSize::Zero()),
       send_burst_interval_(TimeDelta::Zero()),
@@ -196,6 +198,16 @@ void PacingController::EnqueuePacket(std::unique_ptr<RtpPacketToSend> packet) {
   RTC_CHECK(packet->packet_type());
 
   prober_.OnIncomingPacket(DataSize::Bytes(packet->payload_size()));
+
+  if (keyframe_flushing_ &&
+      packet->packet_type() == RtpPacketMediaType::kVideo &&
+      packet->is_key_frame() && packet->is_first_packet_of_frame() &&
+      !packet_queue_.HasKeyframePackets(packet->Ssrc())) {
+    // First packet of a keyframe, flush any pending packets currently in the
+    // queue for that stream in order to get it out as quickly as possible.
+    packet_queue_.FlushVideoStream(
+        packet->Ssrc(), packet_sender_->GetRtxSsrcForMedia(packet->Ssrc()));
+  }
 
   const Timestamp now = CurrentTime();
   if (packet_queue_.Empty()) {
