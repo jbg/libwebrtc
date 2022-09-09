@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64174116_6d99e222",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15909
+      },
+      "writtenOn": "2022-09-09T08:44:49Z",
+      "side": 1,
+      "message": "\u003e  config.star:621: function-docstring: The function \"perf_builder\" has no docstring.\n A docstring is a string literal (not a comment) which should be the first statement of a function body (it may follow comment lines).\n\nI will add a docstring in another CL, and will do rebase.",
+      "revId": "94f4e85e0b3371ea78604cb6f9ab27087d7645bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
