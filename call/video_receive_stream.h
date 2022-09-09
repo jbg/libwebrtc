@@ -87,6 +87,7 @@ class VideoReceiveStreamInterface : public MediaReceiveStreamInterface {
 
     // Decoder stats.
     std::string decoder_implementation_name = "unknown";
+    bool power_efficient_decoder = false;
     FrameCounts frame_counts;
     int decode_ms = 0;
     int max_decode_ms = 0;

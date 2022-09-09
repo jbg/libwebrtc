@@ -608,6 +608,8 @@ void SetInboundRTPStreamStatsFromVideoReceiverInfo(
     inbound_video->decoder_implementation =
         video_receiver_info.decoder_implementation_name;
   }
+  inbound_video->power_efficient_decoder =
+      video_receiver_info.power_efficient_decoder;
 }
 
 // Provides the media independent counters and information (both audio and
@@ -731,6 +733,8 @@ void SetOutboundRTPStreamStatsFromVideoSenderInfo(
   if (video_sender_info.rid) {
     outbound_video->rid = *video_sender_info.rid;
   }
+  outbound_video->power_efficient_encoder =
+      video_sender_info.power_efficient_encoder;
 }
 
 std::unique_ptr<RTCRemoteInboundRtpStreamStats>
