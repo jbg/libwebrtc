@@ -235,6 +235,30 @@ std::vector<std::unique_ptr<RtpPacketToSend>> PacketRouter::GeneratePadding(
   return padding_packets;
 }
 
+void PacketRouter::OnAbortedRetransmissions(
+    uint32_t ssrc,
+    rtc::ArrayView<const uint16_t> sequence_numbers) {
+  MutexLock lock(&modules_mutex_);
+  auto kv = send_modules_map_.find(ssrc);
+  if (kv == send_modules_map_.end()) {
+    return;
+  }
+  kv->second->OnAbortedRetransmissions(sequence_numbers);
+}
+
+absl::optional<uint32_t> PacketRouter::GetRtxSsrcForMedia(uint32_t ssrc) const {
+  MutexLock lock(&modules_mutex_);
+  auto kv = send_modules_map_.find(ssrc);
+  if (kv == send_modules_map_.end()) {
+    return absl::nullopt;
+  }
+  if (kv->second->SSRC() != ssrc) {
+    // Module with this SSRC registered, but it's not the media SSRC.
+    return absl::nullopt;
+  }
+  return kv->second->RtxSsrc();
+}
+
 uint16_t PacketRouter::CurrentTransportSequenceNumber() const {
   MutexLock lock(&modules_mutex_);
   return transport_seq_ & 0xFFFF;
