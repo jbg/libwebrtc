@@ -46,9 +46,11 @@
 #include "api/transport/stun.h"
 #include "logging/rtc_event_log/events/rtc_event_ice_candidate_pair_config.h"
 #include "logging/rtc_event_log/ice_logger.h"
+#include "p2p/base/active_ice_controller_factory_interface.h"
 #include "p2p/base/basic_async_resolver_factory.h"
 #include "p2p/base/candidate_pair_interface.h"
 #include "p2p/base/connection.h"
+#include "p2p/base/ice_agent_interface.h"
 #include "p2p/base/ice_controller_factory_interface.h"
 #include "p2p/base/ice_controller_interface.h"
 #include "p2p/base/ice_switch_reason.h"
@@ -104,7 +106,8 @@ class RemoteCandidate : public Candidate {
 
 // P2PTransportChannel manages the candidates and connection process to keep
 // two P2P clients connected to each other.
-class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
+class RTC_EXPORT P2PTransportChannel : public IceTransportInternal,
+                                       public IceAgentInterface {
  public:
   static std::unique_ptr<P2PTransportChannel> Create(
       absl::string_view transport_name,
@@ -167,6 +170,19 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   absl::optional<int> GetRttEstimate() override;
   const Connection* selected_connection() const override;
   absl::optional<const CandidatePair> GetSelectedCandidatePair() const override;
+
+  // From IceAgentInterface
+  void OnStartedPinging() override;
+  int64_t GetLastPingSentMs() const override;
+  void UpdateConnectionStates() override;
+  void UpdateTransportState() override;
+  void OnAllConnectionsTimedOut() override;
+  void SendPingRequest(const Connection* connection) override;
+  void SwitchSelectedConnection(const Connection* connection,
+                                IceSwitchReason reason) override;
+  void ForgetLearnedStateForConnections(
+      std::vector<const Connection*> connections) override;
+  bool PruneConnections(std::vector<const Connection*> connections) override;
 
   // TODO(honghaiz): Remove this method once the reference of it in
   // Chromoting is removed.
@@ -249,7 +265,9 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
           owned_dns_resolver_factory,
       webrtc::RtcEventLog* event_log,
       IceControllerFactoryInterface* ice_controller_factory,
+      ActiveIceControllerFactoryInterface* active_ice_controller_factory,
       const webrtc::FieldTrialsView* field_trials);
+
   bool IsGettingPorts() {
     RTC_DCHECK_RUN_ON(network_thread_);
     return allocator_session()->IsGettingPorts();
@@ -258,19 +276,19 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   // Returns true if it's possible to send packets on `connection`.
   bool ReadyToSend(const Connection* connection) const;
   bool PresumedWritable(const Connection* conn) const;
-  void UpdateConnectionStates();
+  // TODO(bugs.webrtc.org/14367) remove once refactor lands.
   void RequestSortAndStateUpdate(IceSwitchReason reason_to_sort);
   // Start pinging if we haven't already started, and we now have a connection
   // that's pingable.
+  // TODO(bugs.webrtc.org/14367) remove once refactor lands.
   void MaybeStartPinging();
+  void SendPingRequestInternal(Connection* connection);
 
+  // TODO(bugs.webrtc.org/14367) remove once refactor lands.
   void SortConnectionsAndUpdateState(IceSwitchReason reason_to_sort);
-  void SortConnections();
-  void SortConnectionsIfNeeded();
   rtc::NetworkRoute ConfigureNetworkRoute(const Connection* conn);
-  void SwitchSelectedConnection(Connection* conn, IceSwitchReason reason);
-  void UpdateState();
-  void HandleAllTimedOut();
+  void SwitchSelectedConnectionInternal(Connection* conn,
+                                        IceSwitchReason reason);
   void MaybeStopPortAllocatorSessions();
   void OnSelectedConnectionDestroyed() RTC_RUN_ON(network_thread_);
 
@@ -333,6 +351,7 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
 
   void OnNominated(Connection* conn);
 
+  // TODO(bugs.webrtc.org/14367) remove once refactor lands.
   void CheckAndPing();
 
   void LogCandidatePairConfig(Connection* conn,
@@ -342,11 +361,14 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   bool GetUseCandidateAttr(Connection* conn) const;
 
   // Returns true if the new_connection is selected for transmission.
+  // TODO(bugs.webrtc.org/14367) remove once refactor lands.
   bool MaybeSwitchSelectedConnection(Connection* new_connection,
                                      IceSwitchReason reason);
+  // TODO(bugs.webrtc.org/14367) remove once refactor lands.
   bool MaybeSwitchSelectedConnection(
       IceSwitchReason reason,
       IceControllerInterface::SwitchResult result);
+  // TODO(bugs.webrtc.org/14367) remove once refactor lands.
   void PruneConnections();
 
   // Returns the latest remote ICE parameters or nullptr if there are no remote
@@ -404,6 +426,7 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
 
   void ParseFieldTrials(const webrtc::FieldTrialsView* field_trials);
 
+  // TODO(bugs.webrtc.org/14367) remove once refactor lands.
   webrtc::ScopedTaskSafety task_safety_;
   std::string transport_name_ RTC_GUARDED_BY(network_thread_);
   int component_ RTC_GUARDED_BY(network_thread_);
@@ -430,6 +453,7 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
 
   std::vector<RemoteCandidate> remote_candidates_
       RTC_GUARDED_BY(network_thread_);
+  // TODO(bugs.webrtc.org/14367) remove once refactor lands.
   bool sort_dirty_ RTC_GUARDED_BY(
       network_thread_);  // indicates whether another sort is needed right now
   bool had_connection_ RTC_GUARDED_BY(network_thread_) =
@@ -456,6 +480,7 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   IceConfig config_ RTC_GUARDED_BY(network_thread_);
   int last_sent_packet_id_ RTC_GUARDED_BY(network_thread_) =
       -1;  // -1 indicates no packet was sent before.
+  // TODO(bugs.webrtc.org/14367) remove once refactor lands.
   bool started_pinging_ RTC_GUARDED_BY(network_thread_) = false;
   // The value put in the "nomination" attribute for the next nominated
   // connection. A zero-value indicates the connection will not be nominated.
@@ -469,7 +494,10 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
       RTC_GUARDED_BY(network_thread_);
   webrtc::IceEventLog ice_event_log_ RTC_GUARDED_BY(network_thread_);
 
+  bool use_active_ice_controller_ RTC_GUARDED_BY(network_thread_) = false;
   std::unique_ptr<IceControllerInterface> ice_controller_
+      RTC_GUARDED_BY(network_thread_);
+  std::unique_ptr<ActiveIceControllerInterface> active_ice_controller_
       RTC_GUARDED_BY(network_thread_);
 
   struct CandidateAndResolver final {
