@@ -15,11 +15,11 @@
 
 #include <string>
 
+#include "common_video/linux/portal/portal_request_response.h"
+#include "common_video/linux/portal/xdg_desktop_portal_utils.h"
+#include "common_video/linux/portal/xdg_session_details.h"
 #include "modules/desktop_capture/desktop_capture_types.h"
-#include "modules/desktop_capture/linux/wayland/portal_request_response.h"
 #include "modules/desktop_capture/linux/wayland/screen_capture_portal_interface.h"
-#include "modules/desktop_capture/linux/wayland/xdg_desktop_portal_utils.h"
-#include "modules/desktop_capture/linux/wayland/xdg_session_details.h"
 
 namespace webrtc {
 
