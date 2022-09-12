@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4cccaf_6f26b966",
+        "filename": "test/testsupport/metrics/chrome_perf_dashboard_metrics_exporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-12T07:51:02Z",
+      "side": 1,
+      "message": "This contains unit and the sample, WDYT about ChromePerfDashboardSample?",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "3037e3c0080641807e1c75ddc929b05ef42bc04e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8408774a_bb290449",
+        "filename": "test/testsupport/metrics/chrome_perf_dashboard_metrics_exporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-12T07:51:02Z",
+      "side": 1,
+      "message": "Remove \"The\"?",
+      "range": {
+        "startLine": 70,
+        "startChar": 19,
+        "endLine": 70,
+        "endChar": 22
+      },
+      "revId": "3037e3c0080641807e1c75ddc929b05ef42bc04e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17f90342_4012dc02",
+        "filename": "test/testsupport/metrics/chrome_perf_dashboard_metrics_exporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-12T07:51:02Z",
+      "side": 1,
+      "message": "The unit is used only here, I wonder if it is better to just have a pure function ToChromePerfDashboardUnit(webrtc::test::Unit) and another one like ToChromePerfDashboardValue(double value, Unit unit) (and remove ChromePerfDashboardUnit).\n\nThis way we don\u0027t couple them when they have clearly different usage patterns.",
+      "range": {
+        "startLine": 113,
+        "startChar": 48,
+        "endLine": 113,
+        "endChar": 57
+      },
+      "revId": "3037e3c0080641807e1c75ddc929b05ef42bc04e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f09abab_50da87fe",
+        "filename": "test/testsupport/metrics/chrome_perf_dashboard_metrics_exporter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-12T07:51:02Z",
+      "side": 1,
+      "message": "Is this part relevant or can we omit it?",
+      "range": {
+        "startLine": 24,
+        "startChar": 74,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "3037e3c0080641807e1c75ddc929b05ef42bc04e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5bc232c_167974d9",
+        "filename": "test/testsupport/metrics/chrome_perf_dashboard_metrics_exporter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-12T07:51:02Z",
+      "side": 1,
+      "message": "Path where the proto file will be written?",
+      "range": {
+        "startLine": 28,
+        "startChar": 26,
+        "endLine": 28,
+        "endChar": 30
+      },
+      "revId": "3037e3c0080641807e1c75ddc929b05ef42bc04e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
