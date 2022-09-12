@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc4473c6_8fe751fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2022-09-12T10:43:24Z",
+      "side": 1,
+      "message": "I found that we have video codec statuses are defined in Java as well. Updated that part.",
+      "revId": "ec26eef1c89c7b4d5446ef3c88354ff08f3d8fc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
