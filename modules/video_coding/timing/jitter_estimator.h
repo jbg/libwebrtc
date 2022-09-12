@@ -47,10 +47,11 @@ class JitterEstimator {
     std::unique_ptr<StructParametersParser> Parser() {
       return StructParametersParser::Create(
           "max_frame_size_percentile", &max_frame_size_percentile,
-          "max_frame_size_window", &max_frame_size_window,
-          "num_stddev_delay_outlier", &num_stddev_delay_outlier,
-          "num_stddev_size_outlier", &num_stddev_size_outlier,
-          "congestion_rejection_factor", &congestion_rejection_factor);
+          "median_frame_size", &median_frame_size, "frame_size_window",
+          &frame_size_window, "num_stddev_delay_outlier",
+          &num_stddev_delay_outlier, "num_stddev_size_outlier",
+          &num_stddev_size_outlier, "congestion_rejection_factor",
+          &congestion_rejection_factor);
     }
 
     bool MaxFrameSizePercentileEnabled() const {
@@ -61,8 +62,10 @@ class JitterEstimator {
     // window of recent frame sizes.
     absl::optional<double> max_frame_size_percentile;
 
+    bool median_frame_size = false;
+
     // The length of the percentile filter's window, in number of frames.
-    absl::optional<int> max_frame_size_window;
+    absl::optional<int> frame_size_window;
 
     // A (relative) frame delay variation sample is an outlier if its absolute
     // deviation from the Kalman filter model falls outside this number of
@@ -126,6 +129,7 @@ class JitterEstimator {
  private:
   // These functions return values that could be overriden through the config.
   double GetMaxFrameSizeEstimateBytes() const;
+  double GetAvgFrameSizeEstimateBytes() const;
   double GetNumStddevDelayOutlier() const;
   double GetNumStddevSizeOutlier() const;
   double GetCongestionRejectionFactor() const;
@@ -168,6 +172,7 @@ class JitterEstimator {
   double max_frame_size_bytes_;
   // Percentile frame sized received (over a window). Only used if configured.
   PercentileFilter<int64_t> max_frame_size_bytes_percentile_;
+  PercentileFilter<int64_t> median_frame_size_bytes_percentile_;
   std::queue<int64_t> frame_sizes_in_percentile_filter_;
   // TODO(bugs.webrtc.org/14381): Update `startup_frame_size_sum_bytes_` to
   // DataSize when api/units have sufficient precision.
