@@ -165,7 +165,8 @@ TEST_F(JitterEstimatorTest, Single2xFrameSizeImpactsJitterEstimate) {
 TEST_F(JitterEstimatorTest, EmptyFieldTrialsParsesToUnsetConfig) {
   JitterEstimator::Config config = estimator_.GetConfigForTest();
   EXPECT_FALSE(config.max_frame_size_percentile.has_value());
-  EXPECT_FALSE(config.max_frame_size_window.has_value());
+  EXPECT_FALSE(config.median_frame_size_percentile);
+  EXPECT_FALSE(config.frame_size_window.has_value());
   EXPECT_FALSE(config.num_stddev_delay_outlier.has_value());
   EXPECT_FALSE(config.num_stddev_size_outlier.has_value());
   EXPECT_FALSE(config.congestion_rejection_factor.has_value());
@@ -177,7 +178,8 @@ class FieldTrialsOverriddenJitterEstimatorTest : public JitterEstimatorTest {
       : JitterEstimatorTest(
             "WebRTC-JitterEstimatorConfig/"
             "max_frame_size_percentile:0.9,"
-            "max_frame_size_window:30,"
+            "median_frame_size_percentile:true,"
+            "frame_size_window:30,"
             "num_stddev_delay_outlier:2,"
             "num_stddev_size_outlier:3.1,"
             "congestion_rejection_factor:-1.55/") {}
@@ -187,7 +189,8 @@ class FieldTrialsOverriddenJitterEstimatorTest : public JitterEstimatorTest {
 TEST_F(FieldTrialsOverriddenJitterEstimatorTest, FieldTrialsParsesCorrectly) {
   JitterEstimator::Config config = estimator_.GetConfigForTest();
   EXPECT_EQ(*config.max_frame_size_percentile, 0.9);
-  EXPECT_EQ(*config.max_frame_size_window, 30);
+  EXPECT_TRUE(config.median_frame_size_percentile);
+  EXPECT_EQ(*config.frame_size_window, 30);
   EXPECT_EQ(*config.num_stddev_delay_outlier, 2.0);
   EXPECT_EQ(*config.num_stddev_size_outlier, 3.1);
   EXPECT_EQ(*config.congestion_rejection_factor, -1.55);
