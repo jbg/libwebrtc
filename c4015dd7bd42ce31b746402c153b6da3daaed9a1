@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e412caab_3fa7cb7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-12T13:12:00Z",
+      "side": 1,
+      "message": "The Win compile error is related to crbug.com/1337238 (landing this CL, unblocks the roll with the fix).",
+      "revId": "c4015dd7bd42ce31b746402c153b6da3daaed9a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
