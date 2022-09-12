@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01210b89_386a311d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-12T08:17:34Z",
+      "side": 1,
+      "message": "Should this be MetricsLoggerAndExporter?",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "fff89eb5dbae66e4cd87311f77efba033d744538",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c26c787_7c4daf3f",
+        "filename": "test/testsupport/metrics/metrics_logger_and_exporter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-12T08:17:34Z",
+      "side": 1,
+      "message": "Combines metrics logging and exporting to ...",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 42
+      },
+      "revId": "fff89eb5dbae66e4cd87311f77efba033d744538",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "740c2b1d_45ca0a2e",
+        "filename": "test/testsupport/metrics/metrics_logger_and_exporter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-12T08:17:34Z",
+      "side": 1,
+      "message": "return false if at least one of the exporter failed?\n\nOr even better, return an absl::Status?\n\nAs of now, Export returns a bool and we are ignoring it.",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 6
+      },
+      "revId": "fff89eb5dbae66e4cd87311f77efba033d744538",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
