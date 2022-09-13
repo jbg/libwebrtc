@@ -8,9 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "rtc_base/numerics/moving_median_filter.h"
+#include "rtc_base/numerics/moving_percentile_filter.h"
 
 #include <stdint.h>
+
 #include <algorithm>
 
 #include "test/gtest.h"

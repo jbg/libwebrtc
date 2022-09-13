@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef RTC_BASE_NUMERICS_MOVING_MEDIAN_FILTER_H_
-#define RTC_BASE_NUMERICS_MOVING_MEDIAN_FILTER_H_
+#ifndef RTC_BASE_NUMERICS_MOVING_PERCENTILE_FILTER_H_
+#define RTC_BASE_NUMERICS_MOVING_PERCENTILE_FILTER_H_
 
 #include <stddef.h>
 
@@ -23,14 +23,16 @@ namespace webrtc {
 
 // Class to efficiently get moving median filter from a stream of samples.
 template <typename T>
-class MovingMedianFilter {
+class MovingPercentileFilter {
  public:
-  // Construct filter. `window_size` is how many latest samples are stored and
-  // used to take median. `window_size` must be positive.
-  explicit MovingMedianFilter(size_t window_size);
+  // Construct filter. `percentile` defines what percentile to track and
+  // `window_size` is how many latest samples are stored for finding the
+  // percentile. `percentile` must be between 0.0 and 1.0 (inclusive) and
+  // `window_size` must be positive.
+  MovingPercentileFilter(float percentile, size_t window_size);
 
-  MovingMedianFilter(const MovingMedianFilter&) = delete;
-  MovingMedianFilter& operator=(const MovingMedianFilter&) = delete;
+  MovingPercentileFilter(const MovingPercentileFilter&) = delete;
+  MovingPercentileFilter& operator=(const MovingPercentileFilter&) = delete;
 
   // Insert a new sample.
   void Insert(const T& value);
@@ -52,13 +54,23 @@ class MovingMedianFilter {
 };
 
 template <typename T>
-MovingMedianFilter<T>::MovingMedianFilter(size_t window_size)
-    : percentile_filter_(0.5f), samples_stored_(0), window_size_(window_size) {
+class MovingMedianFilter : public MovingPercentileFilter<T> {
+ public:
+  explicit MovingMedianFilter(size_t window_size)
+      : MovingPercentileFilter<T>(0.5f, window_size) {}
+};
+
+template <typename T>
+MovingPercentileFilter<T>::MovingPercentileFilter(float percentile,
+                                                  size_t window_size)
+    : percentile_filter_(percentile),
+      samples_stored_(0),
+      window_size_(window_size) {
   RTC_CHECK_GT(window_size, 0);
 }
 
 template <typename T>
-void MovingMedianFilter<T>::Insert(const T& value) {
+void MovingPercentileFilter<T>::Insert(const T& value) {
   percentile_filter_.Insert(value);
   samples_.emplace_back(value);
   ++samples_stored_;
@@ -70,21 +82,21 @@ void MovingMedianFilter<T>::Insert(const T& value) {
 }
 
 template <typename T>
-T MovingMedianFilter<T>::GetFilteredValue() const {
+T MovingPercentileFilter<T>::GetFilteredValue() const {
   return percentile_filter_.GetPercentileValue();
 }
 
 template <typename T>
-void MovingMedianFilter<T>::Reset() {
+void MovingPercentileFilter<T>::Reset() {
   percentile_filter_.Reset();
   samples_.clear();
   samples_stored_ = 0;
 }
 
 template <typename T>
-size_t MovingMedianFilter<T>::GetNumberOfSamplesStored() const {
+size_t MovingPercentileFilter<T>::GetNumberOfSamplesStored() const {
   return samples_stored_;
 }
 
 }  // namespace webrtc
-#endif  // RTC_BASE_NUMERICS_MOVING_MEDIAN_FILTER_H_
+#endif  // RTC_BASE_NUMERICS_MOVING_PERCENTILE_FILTER_H_
