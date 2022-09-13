@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a786f8ab_d454dc1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-09-13T13:18:11Z",
+      "side": 1,
+      "message": "At TPAC, doubts were raised about whether this is Web compatible, given that this stat has been showing up early in Chrome \"forever\".\n",
+      "revId": "272c3478b7c2241ba6da53f9f73593c920684dd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed4371f7_516a7ad9",
