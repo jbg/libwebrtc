@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "855493c4_63ca53cf",
+        "filename": "modules/video_coding/timing/jitter_estimator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-09-13T13:29:49Z",
+      "side": 1,
+      "message": "I considered adding conditional checks for the `Erase`s too, but it felt a bit verbose since those operations are almost trivial when nothing has been inserted.\n\nAnyway, now that I\u0027m using the `MedianMovingAverage` for the `avg` filter, the possibility for this asymmetry is gone.",
+      "parentUuid": "42928e5b_0e60feab",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 5
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19f2ed17_b30bd4f6",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-13T12:03:38Z",
       "side": 1,
       "message": "GetAvgFrameSizeEstimateBytes?",
+      "range": {
+        "startLine": 208,
+        "startChar": 6,
+        "endLine": 208,
+        "endChar": 27
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a241ce72_27b78a9f",
+        "filename": "modules/video_coding/timing/jitter_estimator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-09-13T13:29:49Z",
+      "side": 1,
+      "message": "No, here we want the arithmetic average since we are implicitly doing a normal CDF table lookup.\n\nHaving said that, `avg_frame_size_bytes_` is not an arithmetically moving average (FIR), but rather an exponentially moving average (IIR), so maybe my interpretation of a \"normal CDF table lookup\" is not fully correct. Still, I don\u0027t think we should use the median here.",
+      "parentUuid": "19f2ed17_b30bd4f6",
       "range": {
         "startLine": 208,
         "startChar": 6,
@@ -72,6 +120,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "769b4d2a_95969c12",
+        "filename": "modules/video_coding/timing/jitter_estimator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-09-13T13:29:49Z",
+      "side": 1,
+      "message": "Yeah, I don\u0027t disagree about `avg_frame_size_bytes_` being a global whose purpose is not directly clear. (See prior comment where we still need to use it.)\n\nI put the conditional in this function to make it symmetric to how `GetMaxFrameSizeEstimateBytes` is implemented. However, `GetAvgFrameSizeEstimateBytes` is only called in a single spot, so I\u0027ll move the check over there and remove the function.",
+      "parentUuid": "bc85ab1e_d4d5aaca",
+      "range": {
+        "startLine": 268,
+        "startChar": 2,
+        "endLine": 268,
+        "endChar": 31
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f5ff81f8_0c77ac62",
         "filename": "modules/video_coding/timing/jitter_estimator.h",
         "patchSetId": 7
@@ -83,6 +155,30 @@
       "writtenOn": "2022-09-13T12:03:38Z",
       "side": 1,
       "message": "There is a MediaFilter class, but eh...",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 18
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "181eb4ea_c0981b17",
+        "filename": "modules/video_coding/timing/jitter_estimator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-09-13T13:29:49Z",
+      "side": 1,
+      "message": "Ah, I hadn\u0027t seen that one! I\u0027ll move the \"avg\" to that right away, and make a TODO to make it configurable to take a percentile parameter. I can do that simplification next week.",
+      "parentUuid": "f5ff81f8_0c77ac62",
       "range": {
         "startLine": 178,
         "startChar": 2,
