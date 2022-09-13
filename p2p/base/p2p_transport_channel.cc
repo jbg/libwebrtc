@@ -33,6 +33,7 @@
 #include "p2p/base/connection.h"
 #include "p2p/base/connection_info.h"
 #include "p2p/base/port.h"
+#include "p2p/base/wrapping_active_ice_controller.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/crc32.h"
 #include "rtc_base/experiments/struct_parameters_parser.h"
@@ -2473,10 +2474,17 @@ P2PTransportChannel::IceControllerAdapter::IceControllerAdapter(
     P2PTransportChannel* transport)
     : transport_(transport) {
   if (IsIceControllerRefactorFieldTrialEnabled(field_trials)) {
-    RTC_DCHECK(active_ice_controller_factory);
-    ActiveIceControllerFactoryArgs active_args{args,
-                                               /* ice_agent= */ transport};
-    active_ice_controller_ = active_ice_controller_factory->Create(active_args);
+    if (active_ice_controller_factory) {
+      ActiveIceControllerFactoryArgs active_args{args,
+                                                 /* ice_agent= */ transport};
+      active_ice_controller_ =
+          active_ice_controller_factory->Create(active_args);
+    } else {
+      std::unique_ptr<IceControllerInterface> wrapped =
+          std::make_unique<BasicIceController>(args);
+      active_ice_controller_ = std::make_unique<WrappingActiveIceController>(
+          /* ice_agent= */ transport, ice_controller_factory, args);
+    }
   } else {
     if (ice_controller_factory != nullptr) {
       legacy_ice_controller_ = ice_controller_factory->Create(args);
