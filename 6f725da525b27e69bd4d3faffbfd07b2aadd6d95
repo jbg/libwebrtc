@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42928e5b_0e60feab",
+        "filename": "modules/video_coding/timing/jitter_estimator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-09-13T12:03:38Z",
+      "side": 1,
+      "message": "You always erase from both, so why not insert in both?",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 5
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19f2ed17_b30bd4f6",
+        "filename": "modules/video_coding/timing/jitter_estimator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-09-13T12:03:38Z",
+      "side": 1,
+      "message": "GetAvgFrameSizeEstimateBytes?",
+      "range": {
+        "startLine": 208,
+        "startChar": 6,
+        "endLine": 208,
+        "endChar": 27
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc85ab1e_d4d5aaca",
+        "filename": "modules/video_coding/timing/jitter_estimator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-09-13T12:03:38Z",
+      "side": 1,
+      "message": "My preference for easier to understand code: When you want to use the \"average frame size\" regardless of how you calculate it, check the condition and pick which source to use where you use it. For example:\n\n      double avg_frame_size_bytes \u003d config_.avg_frame_size_median ?\n          avg_frame_size_median_bytes_.GetPercentileValue() : avg_frame_size_bytes_\n\n      bool size_is_positive_outlier \u003d\n          frame_size.bytes() \u003e\n          avg_frame_size_bytes +\n              GetNumStddevSizeOutlier() * sqrt(var_frame_size_bytes2_);\n\nRight now `avg_frame_size_bytes_` is like a global variable and you have to read the rest of the code to understand this function.\n\nSame is true for `GetMaxFrameSizeEstimateBytes` ofc...",
+      "range": {
+        "startLine": 268,
+        "startChar": 2,
+        "endLine": 268,
+        "endChar": 31
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5ff81f8_0c77ac62",
+        "filename": "modules/video_coding/timing/jitter_estimator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-09-13T12:03:38Z",
+      "side": 1,
+      "message": "There is a MediaFilter class, but eh...",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 18
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
