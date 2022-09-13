@@ -16,6 +16,52 @@
       "message": "PTAL Jonas, thanks!",
       "revId": "7442748549d75df9cc27d63d1f49c8b320cc04bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "868ca093_7f81e3aa",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-09-13T12:15:26Z",
+      "side": 1,
+      "message": "warning (or RTC_DCHECK) if pruning \"incorrect\" connection ?",
+      "range": {
+        "startLine": 1870,
+        "startChar": 17,
+        "endLine": 1870,
+        "endChar": 18
+      },
+      "revId": "7442748549d75df9cc27d63d1f49c8b320cc04bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "468b56d2_4f65cfa5",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-09-13T12:15:26Z",
+      "side": 1,
+      "message": "behavior change ?\nalthough I don\u0027t understand what PingConnection(nullptr) might do ??",
+      "range": {
+        "startLine": 2133,
+        "startChar": 4,
+        "endLine": 2133,
+        "endChar": 19
+      },
+      "revId": "7442748549d75df9cc27d63d1f49c8b320cc04bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
