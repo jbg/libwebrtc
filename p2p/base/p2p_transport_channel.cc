@@ -1685,9 +1685,20 @@ rtc::DiffServCodePoint P2PTransportChannel::DefaultDscpValue() const {
 
 rtc::ArrayView<Connection*> P2PTransportChannel::connections() const {
   RTC_DCHECK_RUN_ON(network_thread_);
-  rtc::ArrayView<const Connection*> res = ice_controller_->connections();
-  return rtc::ArrayView<Connection*>(const_cast<Connection**>(res.data()),
-                                     res.size());
+  // RTC_LOG(LS_INFO) << "Enumerating own connections...";
+  // for (auto conn : connections_) {
+  //   RTC_LOG(LS_INFO) << conn->ToString();
+  // }
+  // auto conns = ice_controller_->connections();
+  // RTC_LOG(LS_INFO) << "Enumerating controller connections...";
+  // for (auto conn : conns) {
+  //   RTC_LOG(LS_INFO) << conn->ToString();
+  // }
+  return rtc::ArrayView<Connection*>(
+      const_cast<Connection**>(connections_.data()), connections_.size());
+  // rtc::ArrayView<const Connection*> res = ice_controller_->connections();
+  // return rtc::ArrayView<Connection*>(const_cast<Connection**>(res.data()),
+  //                                    res.size());
 }
 
 void P2PTransportChannel::RemoveConnectionForTest(Connection* connection) {
