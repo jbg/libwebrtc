@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "351cbcfe_42e46c13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-09-13T13:22:25Z",
+      "side": 1,
+      "message": "The conclusion IIUC was to implement the spec (gate on packets \u003e 0, not negotiation like this CL is doing).\n\nWeb compat was raised. Personally I think whether we create the metrics before or after the first packet matters more to web platform tests or unit tests rather than real environments. Typically apps just poll at a fixed frequency and see what exists, I doubt assertions will fail if under some edge case the metric is missing a little longer than usual.\n\nJan-Ivar pointed out that that Firefox already shipped what the spec said wrt when to create, so I think Chrome can do the same without too much concern. But I don\u0027t mind adding a kill switch just in case.",
+      "parentUuid": "a786f8ab_d454dc1b",
+      "revId": "272c3478b7c2241ba6da53f9f73593c920684dd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed4371f7_516a7ad9",
