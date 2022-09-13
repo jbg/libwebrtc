@@ -194,8 +194,9 @@ void JitterEstimator::UpdateEstimate(TimeDelta frame_delay,
       kDefaultMaxTimestampDeviationInSigmas * sqrt(var_noise_ms2_) + 0.5);
   frame_delay.Clamp(-max_time_deviation, max_time_deviation);
 
+  double frame_delay_ms = ToMillis(frame_delay);
   double delay_deviation_ms =
-      frame_delay.ms() -
+      frame_delay_ms -
       kalman_filter_.GetFrameDelayVariationEstimateTotal(delta_frame_bytes);
 
   // Outlier rejection.
@@ -226,7 +227,7 @@ void JitterEstimator::UpdateEstimate(TimeDelta frame_delay,
     if (delta_frame_bytes >
         GetCongestionRejectionFactor() * max_frame_size_bytes) {
       // Update the Kalman filter with the new data
-      kalman_filter_.PredictAndUpdate(frame_delay.ms(), delta_frame_bytes,
+      kalman_filter_.PredictAndUpdate(frame_delay_ms, delta_frame_bytes,
                                       max_frame_size_bytes, var_noise_ms2_);
     }
   } else {
@@ -256,6 +257,20 @@ void JitterEstimator::UpdateRtt(TimeDelta rtt) {
 
 JitterEstimator::Config JitterEstimator::GetConfigForTest() const {
   return config_;
+}
+
+double JitterEstimator::ToMillis(const TimeDelta& time_delta) const {
+  if (config_.microsecond_granularity) {
+    return time_delta.us() / 1000.0;
+  }
+  return time_delta.ms();
+}
+
+TimeDelta JitterEstimator::FromMillis(double millis) const {
+  if (config_.microsecond_granularity) {
+    return TimeDelta::Micros(1000.0 * millis);
+  }
+  return TimeDelta::Millis(millis);
 }
 
 double JitterEstimator::GetAvgFrameSizeEstimateBytes() const {
@@ -356,7 +371,7 @@ TimeDelta JitterEstimator::CalculateEstimate() {
   double ret_ms = kalman_filter_.GetFrameDelayVariationEstimateSizeBased(
                       worst_case_frame_size_deviation_bytes) +
                   NoiseThreshold();
-  TimeDelta ret = TimeDelta::Millis(ret_ms);
+  TimeDelta ret = FromMillis(ret_ms);
 
   // A very low estimate (or negative) is neglected.
   if (ret < kMinJitterEstimate) {
