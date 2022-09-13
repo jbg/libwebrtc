@@ -164,6 +164,7 @@ TEST_F(JitterEstimatorTest, Single2xFrameSizeImpactsJitterEstimate) {
 
 TEST_F(JitterEstimatorTest, EmptyFieldTrialsParsesToUnsetConfig) {
   JitterEstimator::Config config = estimator_.GetConfigForTest();
+  EXPECT_FALSE(config.microsecond_granularity);
   EXPECT_FALSE(config.avg_frame_size_median);
   EXPECT_FALSE(config.max_frame_size_percentile.has_value());
   EXPECT_FALSE(config.frame_size_window.has_value());
@@ -177,6 +178,7 @@ class FieldTrialsOverriddenJitterEstimatorTest : public JitterEstimatorTest {
   FieldTrialsOverriddenJitterEstimatorTest()
       : JitterEstimatorTest(
             "WebRTC-JitterEstimatorConfig/"
+            "microsecond_granularity:true,"
             "avg_frame_size_median:true,"
             "max_frame_size_percentile:0.9,"
             "frame_size_window:30,"
@@ -188,6 +190,7 @@ class FieldTrialsOverriddenJitterEstimatorTest : public JitterEstimatorTest {
 
 TEST_F(FieldTrialsOverriddenJitterEstimatorTest, FieldTrialsParsesCorrectly) {
   JitterEstimator::Config config = estimator_.GetConfigForTest();
+  EXPECT_TRUE(config.microsecond_granularity);
   EXPECT_TRUE(config.avg_frame_size_median);
   EXPECT_EQ(*config.max_frame_size_percentile, 0.9);
   EXPECT_EQ(*config.frame_size_window, 30);

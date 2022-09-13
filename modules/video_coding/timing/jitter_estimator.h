@@ -47,6 +47,7 @@ class JitterEstimator {
     std::unique_ptr<StructParametersParser> Parser() {
       // clang-format off
       return StructParametersParser::Create(
+          "microsecond_granularity", &microsecond_granularity,
           "avg_frame_size_median", &avg_frame_size_median,
           "max_frame_size_percentile", &max_frame_size_percentile,
           "frame_size_window", &frame_size_window,
@@ -60,7 +61,11 @@ class JitterEstimator {
       return max_frame_size_percentile.has_value();
     }
 
-    // If set, the "avg" frame size is calculated as the median over a window
+    // If true, the class will use microsecond granularity in all numerical
+    // calculations of delays and durations.
+    bool microsecond_granularity = false;
+
+    // If true, the "avg" frame size is calculated as the median over a window
     // of recent frame sizes.
     bool avg_frame_size_median = false;
 
@@ -131,7 +136,10 @@ class JitterEstimator {
   Config GetConfigForTest() const;
 
  private:
-  // These functions return values that could be overriden through the config.
+  // Conversion functions whose behaviour depend on the config.
+  double ToMillis(const TimeDelta& time_delta) const;
+  TimeDelta FromMillis(double millis) const;
+  // Functions whose return values depend on the config.
   double GetAvgFrameSizeEstimateBytes() const;
   double GetMaxFrameSizeEstimateBytes() const;
   double GetNumStddevDelayOutlier() const;
