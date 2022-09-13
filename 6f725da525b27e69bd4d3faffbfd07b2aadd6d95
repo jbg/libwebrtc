@@ -97,6 +97,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9997546b_13567a9b",
+        "filename": "modules/video_coding/timing/jitter_estimator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-09-13T15:52:26Z",
+      "side": 1,
+      "message": "Maybe I\u0027m wrong in thinking ways of determining avg frame size is kind of arbitrary, so both should work. Anyhow, please add a comment why we use `avg_frame_size_bytes_` here.",
+      "parentUuid": "a241ce72_27b78a9f",
+      "range": {
+        "startLine": 208,
+        "startChar": 6,
+        "endLine": 208,
+        "endChar": 27
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bc85ab1e_d4d5aaca",
         "filename": "modules/video_coding/timing/jitter_estimator.cc",
         "patchSetId": 7
@@ -203,6 +227,30 @@
       "side": 1,
       "message": "Something like this: https://webrtc-review.googlesource.com/c/src/+/275311. Still needs tests etc.",
       "parentUuid": "181eb4ea_c0981b17",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 18
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "744b0687_2386a404",
+        "filename": "modules/video_coding/timing/jitter_estimator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-09-13T15:52:26Z",
+      "side": 1,
+      "message": "Nice!",
+      "parentUuid": "da25845a_a097bf48",
       "range": {
         "startLine": 178,
         "startChar": 2,
