@@ -110,6 +110,9 @@ if (!build_with_chromium) {
     if (target_os == "android") {
       deps += [ "tools_webrtc:binary_version_check" ]
     }
+    if (is_fuchsia) {
+      deps += [ "//build/config/fuchsia:deployment_resources" ]
+    }
   }
 }
 
