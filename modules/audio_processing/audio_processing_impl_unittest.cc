@@ -33,6 +33,8 @@ namespace {
 using ::testing::Invoke;
 using ::testing::NotNull;
 
+constexpr int kMinInputVolume = 12;
+
 class MockInitialize : public AudioProcessingImpl {
  public:
   MockInitialize() : AudioProcessingImpl() {}
@@ -126,6 +128,71 @@ class TestRenderPreProcessor : public CustomProcessing {
   // Modifies a sample. This member is used in Process() to modify a frame and
   // it is publicly visible to enable tests.
   static constexpr float ProcessSample(float x) { return 2.f * x; }
+};
+
+// Creates a simple `AudioProcessing` instance for APM input volume testing
+// with analog and digital AGC enabled and minimum volume `startup_min_volume`
+// at the startup.
+rtc::scoped_refptr<AudioProcessing> CreateApmForInputVolumeTest(
+    int startup_min_volume) {
+  webrtc::AudioProcessing::Config config;
+  // Enable AGC1 analog.
+  config.gain_controller1.enabled = true;
+  config.gain_controller1.analog_gain_controller.enabled = true;
+  config.gain_controller1.analog_gain_controller.startup_min_volume =
+      startup_min_volume;
+  // Enable AGC2 digital.
+  config.gain_controller2.enabled = true;
+  config.gain_controller2.adaptive_digital.enabled = true;
+
+  auto apm(AudioProcessingBuilder().Create());
+  apm->ApplyConfig(config);
+  return apm;
+}
+
+// Runs `apm` input processing for volume adjustments for `num_frames` random
+// frames starting from the volume `initial_volume`. This includes three steps:
+// 1) Set the input volume 2) Process the stream 3) Set the new recommended
+// input volume. Returns the new recommended input volume.
+int ProcessInputVolume(AudioProcessing& apm,
+                       int num_frames,
+                       int initial_volume) {
+  constexpr int kSampleRateHz = 48000;
+  constexpr int kNumChannels = 1;
+  std::array<float, kSampleRateHz / 100> buffer;
+  float* channel_pointers[] = {buffer.data()};
+  StreamConfig stream_config(/*sample_rate_hz=*/kSampleRateHz,
+                             /*num_channels=*/kNumChannels);
+  int recommended_input_volume = initial_volume;
+  for (int i = 0; i < num_frames; ++i) {
+    Random random_generator(2341U);
+    RandomizeSampleVector(&random_generator, buffer);
+
+    apm.set_stream_analog_level(recommended_input_volume);
+    apm.ProcessStream(channel_pointers, stream_config, stream_config,
+                      channel_pointers);
+    recommended_input_volume = apm.recommended_stream_analog_level();
+  }
+  return recommended_input_volume;
+}
+
+class InputVolumeStartupParameterizedTest
+    : public ::testing::TestWithParam<std::tuple<int, int>> {
+ protected:
+  int GetMinStartupVolume() const { return std::get<0>(GetParam()); }
+  int GetStartupVolume() const { return std::get<1>(GetParam()); }
+};
+
+class InputVolumeNotZeroParameterizedTest
+    : public ::testing::TestWithParam<std::tuple<int, int>> {
+ protected:
+  int GetStartupVolume() const { return std::get<0>(GetParam()); }
+  int GetVolume() const { return std::get<1>(GetParam()); }
+};
+
+class InputVolumeZeroParameterizedTest : public ::testing::TestWithParam<int> {
+ protected:
+  int GetStartupVolume() const { return GetParam(); }
 };
 
 }  // namespace
@@ -813,4 +880,118 @@ TEST(ApmWithSubmodulesExcludedTest, ToggleTransientSuppressor) {
               kNoErr);
   }
 }
+
+// Tests that the minimum startup volume is applied at the startup.
+TEST_P(InputVolumeStartupParameterizedTest,
+       VerifyStartupMinVolumeAppliedAtStartup) {
+  const int initial_volume = GetStartupVolume();
+  const int startup_min_volume = GetMinStartupVolume();
+  const int min_volume = std::max(startup_min_volume, kMinInputVolume);
+  const int expected_volume = std::max(initial_volume, min_volume);
+  auto apm(CreateApmForInputVolumeTest(startup_min_volume));
+
+  const int recommended_volume =
+      ProcessInputVolume(*apm, /*num_frames=*/1, initial_volume);
+
+  ASSERT_EQ(recommended_volume, expected_volume);
+}
+
+// Tests that the minimum input volume is applied if the volume is manually
+// adjusted to a non-zero value when "WebRTC-Audio-2ndAgcMinMicLevelExperiment"
+// is enabled.
+TEST_P(InputVolumeNotZeroParameterizedTest,
+       VerifyMinVolumeAppliedAfterManualVolumeAdjustments) {
+  webrtc::test::ScopedFieldTrials field_trials(
+      "WebRTC-Audio-2ndAgcMinMicLevelExperiment/Enabled-12/");
+  constexpr int kStartupMinVolume = 0;
+  const int startup_volume = GetStartupVolume();
+  const int set_volume = GetVolume();
+  const int expected_volume = std::max(set_volume, kMinInputVolume);
+  auto apm(CreateApmForInputVolumeTest(kStartupMinVolume));
+
+  ProcessInputVolume(*apm, /*num_frames=*/1, startup_volume);
+  const int recommended_volume =
+      ProcessInputVolume(*apm, /*num_frames=*/1, set_volume);
+
+  ASSERT_NE(set_volume, 0);
+  ASSERT_EQ(recommended_volume, expected_volume);
+}
+
+// Tests that the minimum input volume is not applied if the volume is manually
+// adjusted to zero when "WebRTC-Audio-2ndAgcMinMicLevelExperiment" is enabled.
+TEST_P(InputVolumeZeroParameterizedTest,
+       VerifyMinVolumeNotAppliedAfterManualVolumeAdjustments) {
+  webrtc::test::ScopedFieldTrials field_trials(
+      "WebRTC-Audio-2ndAgcMinMicLevelExperiment/Enabled-12/");
+  constexpr int kStartupMinVolume = 0;
+  constexpr int kZeroVolume = 0;
+  const int startup_volume = GetStartupVolume();
+  auto apm(CreateApmForInputVolumeTest(kStartupMinVolume));
+
+  const int volume_after_startup =
+      ProcessInputVolume(*apm, /*num_frames=*/1, startup_volume);
+  const int recommended_volume =
+      ProcessInputVolume(*apm, /*num_frames=*/1, kZeroVolume);
+
+  ASSERT_NE(recommended_volume, volume_after_startup);
+  ASSERT_EQ(recommended_volume, kZeroVolume);
+}
+
+// Tests that the minimum input volume is applied if the volume is not zero
+// before it is automatically adjusted when
+// "WebRTC-Audio-2ndAgcMinMicLevelExperiment" is enabled.
+TEST_P(InputVolumeNotZeroParameterizedTest,
+       VerifyMinVolumeAppliedAfterAutomaticVolumeAdjustments) {
+  webrtc::test::ScopedFieldTrials field_trials(
+      "WebRTC-Audio-2ndAgcMinMicLevelExperiment/Enabled-12/");
+  constexpr int kStartupMinVolume = 0;
+  const int startup_volume = GetStartupVolume();
+  const int set_volume = GetVolume();
+  auto apm(CreateApmForInputVolumeTest(kStartupMinVolume));
+
+  ProcessInputVolume(*apm, /*num_frames=*/1, startup_volume);
+  const int recommended_volume =
+      ProcessInputVolume(*apm, /*num_frames=*/400, set_volume);
+
+  ASSERT_NE(set_volume, 0);
+  if (recommended_volume != set_volume) {
+    ASSERT_GE(recommended_volume, kMinInputVolume);
+  }
+}
+
+// Tests that the minimum input volume is not applied if the volume is zero
+// before it is automatically adjusted when
+// "WebRTC-Audio-2ndAgcMinMicLevelExperiment" is enabled.
+TEST_P(InputVolumeZeroParameterizedTest,
+       VerifyMinVolumeNotAppliedAfterAutomaticVolumeAdjustments) {
+  webrtc::test::ScopedFieldTrials field_trials(
+      "WebRTC-Audio-2ndAgcMinMicLevelExperiment/Enabled-12/");
+  constexpr int kStartupMinVolume = 0;
+  constexpr int kZeroVolume = 0;
+  const int startup_volume = GetStartupVolume();
+  auto apm(CreateApmForInputVolumeTest(kStartupMinVolume));
+
+  const int volume_after_startup =
+      ProcessInputVolume(*apm, /*num_frames=*/1, startup_volume);
+  const int recommended_volume =
+      ProcessInputVolume(*apm, /*num_frames=*/400, kZeroVolume);
+
+  ASSERT_NE(recommended_volume, volume_after_startup);
+  ASSERT_EQ(recommended_volume, kZeroVolume);
+}
+
+INSTANTIATE_TEST_SUITE_P(AudioProcessingImplTest,
+                         InputVolumeStartupParameterizedTest,
+                         ::testing::Combine(::testing::Values(0, 5, 15),
+                                            ::testing::Values(0, 5, 30)));
+
+INSTANTIATE_TEST_SUITE_P(AudioProcessingImplTest,
+                         InputVolumeNotZeroParameterizedTest,
+                         ::testing::Combine(::testing::Values(0, 5, 15),
+                                            ::testing::Values(1, 5, 30)));
+
+INSTANTIATE_TEST_SUITE_P(AudioProcessingImplTest,
+                         InputVolumeZeroParameterizedTest,
+                         ::testing::Values(0, 5, 15));
+
 }  // namespace webrtc
