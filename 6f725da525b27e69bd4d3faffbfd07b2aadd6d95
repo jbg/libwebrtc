@@ -121,6 +121,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0a2331d7_bc2e6152",
+        "filename": "modules/video_coding/timing/jitter_estimator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-09-14T10:17:48Z",
+      "side": 1,
+      "message": "In terms of being an outlier rejection heuristic, yes, both would work. There\u0027s two reasons I don\u0027t think we should do that, however:\n1) `sample_mean + n*sample_stddev` is a common form in statistics for outlier detection ([example](https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule)), whereas I have never seen `sample_median + n*sample_stddev`. At least to me, doing this calculation feels like a \"dimensionality error\", conceptually (but not dimensionally) similar to [this](https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/timing/frame_delay_variation_kalman_filter.cc;l\u003d85-86;drc\u003d665875b0d846827d2c3a330f3a7a9e76a884219c). Again, this is caveated by the fact that `avg_frame_size_bytes_` is not a true sample mean though...\n2) Switching to `sample_median + n*sample_stddev` would change the impact of `GetNumStddevSizeOutlier()`, meaning that we would couple the feature in this CL with the already existing `num_stddev_delay_outlier` override. With such a coupling, we would practically have to set both field trials at the same time. We may want to do that anyways, but at least now we are not forced to.\n\nI\u0027ll add a comment about this.",
+      "parentUuid": "9997546b_13567a9b",
+      "range": {
+        "startLine": 208,
+        "startChar": 6,
+        "endLine": 208,
+        "endChar": 27
+      },
+      "revId": "6f725da525b27e69bd4d3faffbfd07b2aadd6d95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bc85ab1e_d4d5aaca",
         "filename": "modules/video_coding/timing/jitter_estimator.cc",
         "patchSetId": 7
