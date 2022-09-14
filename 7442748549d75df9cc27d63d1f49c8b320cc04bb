@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf7836cd_39c1d29b",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 17854
+      },
+      "writtenOn": "2022-09-14T09:58:29Z",
+      "side": 1,
+      "message": "Added a warning.\n\nNot a DCHECK because the agent interface doesn\u0027t really prevent the ICE controller from calling Prune when it is not allowed, or explicitly expose when Prune is disallowed. So it is up to the ICE controlelr to determine when to call Prune and handle when it is not allowed (through the return value of Prune).",
+      "parentUuid": "868ca093_7f81e3aa",
+      "range": {
+        "startLine": 1870,
+        "startChar": 17,
+        "endLine": 1870,
+        "endChar": 18
+      },
+      "revId": "7442748549d75df9cc27d63d1f49c8b320cc04bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "468b56d2_4f65cfa5",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-13T12:15:26Z",
       "side": 1,
       "message": "behavior change ?\nalthough I don\u0027t understand what PingConnection(nullptr) might do ??",
+      "range": {
+        "startLine": 2133,
+        "startChar": 4,
+        "endLine": 2133,
+        "endChar": 19
+      },
+      "revId": "7442748549d75df9cc27d63d1f49c8b320cc04bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d7d9cf8_e7fa2168",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 17854
+      },
+      "writtenOn": "2022-09-14T09:58:29Z",
+      "side": 1,
+      "message": "Partially reverted, but kept value() since that is well-behaved vs. the dereference operator when the optional is empty.\n\nStoring a nullptr as a valid value in optional makes me... uncomfortable. Might add a PingResult-style constructor to SwitchResult in the future to avoid that possiblility (for the loss of initializer-list of course).",
+      "parentUuid": "468b56d2_4f65cfa5",
       "range": {
         "startLine": 2133,
         "startChar": 4,
