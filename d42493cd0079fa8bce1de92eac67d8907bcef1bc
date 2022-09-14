@@ -39,6 +39,30 @@
       },
       "revId": "d42493cd0079fa8bce1de92eac67d8907bcef1bc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7925a9ad_fc4499f5",
+        "filename": "modules/video_coding/timing/jitter_estimator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-09-14T14:22:56Z",
+      "side": 1,
+      "message": "Good catch! Yes, it can :)",
+      "parentUuid": "0aedb6cf_fa66d434",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 48
+      },
+      "revId": "d42493cd0079fa8bce1de92eac67d8907bcef1bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
