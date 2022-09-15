@@ -49,7 +49,7 @@ constexpr double kDefaultMaxFrameSizePercentile = 0.95;
 constexpr int kDefaultFrameSizeWindow = 30 * 10;
 
 // Outlier rejection constants.
-constexpr double kDefaultMaxTimestampDeviationInSigmas = 3.5;
+constexpr double kNumStdDevDelayClamp = 3.5;
 constexpr double kNumStdDevDelayOutlier = 15.0;
 constexpr double kNumStdDevSizeOutlier = 3.0;
 constexpr double kCongestionRejectionFactor = -0.25;
@@ -209,8 +209,10 @@ void JitterEstimator::UpdateEstimate(TimeDelta frame_delay,
   prev_frame_size_ = frame_size;
 
   // Cap frame_delay based on the current time deviation noise.
-  TimeDelta max_time_deviation = TimeDelta::Millis(
-      kDefaultMaxTimestampDeviationInSigmas * sqrt(var_noise_ms2_) + 0.5);
+  double num_stddev_delay_clamp =
+      config_.num_stddev_delay_clamp.value_or(kNumStdDevDelayClamp);
+  TimeDelta max_time_deviation =
+      TimeDelta::Millis(num_stddev_delay_clamp * sqrt(var_noise_ms2_) + 0.5);
   frame_delay.Clamp(-max_time_deviation, max_time_deviation);
 
   double delay_deviation_ms =
