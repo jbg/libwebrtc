@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11bd2e33_25715fb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-09-15T10:44:41Z",
+      "side": 1,
+      "message": "Hi Alessio, I made a few changes based on the offline discussion. Can you please take a look? Thanks!",
+      "revId": "a45eecfce0200e1a39702f81beeb18d2cc81c6f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
