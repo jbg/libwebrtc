@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "f80abbd4467dea95be368bbcbee7b3b9257fe173",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19f05dd2_1aeda058",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-09-15T11:45:19Z",
+      "side": 1,
+      "message": "Thanks! Will rebase and land.",
+      "revId": "f80abbd4467dea95be368bbcbee7b3b9257fe173",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
