@@ -22,6 +22,30 @@
       },
       "revId": "5a5d81fb40a4493c6842c48a051e46b9759711fb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58f1aab5_fa764139",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-09-15T11:23:04Z",
+      "side": 1,
+      "message": "Ah yes, I was being naive. Thanks for pointing me in the right direction. I hit another issue though (namely what https://fuchsia-review.googlesource.com/c/fuchsia/+/533861/5/scripts/sdk/gn/base/build/prepare_package_inputs.py#130 asserts). Will update soonish.",
+      "parentUuid": "d12fb6ba_90e638a4",
+      "range": {
+        "startLine": 114,
+        "startChar": 6,
+        "endLine": 114,
+        "endChar": 10
+      },
+      "revId": "5a5d81fb40a4493c6842c48a051e46b9759711fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
