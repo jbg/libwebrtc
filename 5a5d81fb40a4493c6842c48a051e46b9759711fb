@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d12fb6ba_90e638a4",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-15T07:03:14Z",
+      "side": 1,
+      "message": "Should this be data_deps?\n\nThis target is just a \"root\" target to build \"all\" but I suspect that instead of adding this here, we need to add this as a \"data_deps\" to the rtc_test template (https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/webrtc.gni;l\u003d462-532;drc\u003dcf7802d3f4c4e69bf6e6536b8b421efd4ee7371f). This is to fix the CAS issue, correct?",
+      "range": {
+        "startLine": 114,
+        "startChar": 6,
+        "endLine": 114,
+        "endChar": 10
+      },
+      "revId": "5a5d81fb40a4493c6842c48a051e46b9759711fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
