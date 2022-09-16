@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06449e60_2f61f6bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17854
+      },
+      "writtenOn": "2022-09-16T14:34:36Z",
+      "side": 1,
+      "message": "Changes to testing naming introduced in this CL are causing test infra failures on Windows, most likely because the test names hit the Windows file name length limit of 260. The limit can be increased on Windows 10 version 1607 and later. But in the meanwhile I\u0027ll change how the test names are generated to stay under the limit.",
+      "revId": "0f548565c38c88d1fd0adc483351a563066188d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
