@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "568b2776_a5ce9fd9",
+        "filename": "api/test/metrics/metrics_logger_and_exporter.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-09-18T18:13:18Z",
+      "side": 1,
+      "message": "Will the Export() method grab an additional lock?\nwonder if there\u0027s a risk of lock inversion or if we might be able to lock down the threading model now before assumptions are made about methods being called from any context",
+      "revId": "8a62fbf55c386be0f34f97909af4e063b6e50df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b424a43e_f3366310",
+        "filename": "api/test/metrics/metrics_logger_and_exporter.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-09-18T18:13:18Z",
+      "side": 1,
+      "message": "does the method have to support being called from any thread?",
+      "revId": "8a62fbf55c386be0f34f97909af4e063b6e50df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
