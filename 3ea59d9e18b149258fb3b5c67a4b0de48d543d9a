@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25066779_ef337e47",
+        "filename": "api/test/metrics/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-18T10:06:23Z",
+      "side": 1,
+      "message": "Can we uncomment this lines? If not, let\u0027s add a TODO.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 5
+      },
+      "revId": "3ea59d9e18b149258fb3b5c67a4b0de48d543d9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "311fd402_8d3e1b2d",
+        "filename": "api/test/metrics/chrome_perf_dashboard_metrics_exporter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-18T10:06:23Z",
+      "side": 1,
+      "message": "I forgot to mention this before but I think it is a good thing to add a comment (maybe even before ToChromePerfDashboardUnit) saying that kKilobitsPerSecond is not represented on CPD, hence we rename the unit and port the value to the new unit.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 30
+      },
+      "revId": "3ea59d9e18b149258fb3b5c67a4b0de48d543d9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
