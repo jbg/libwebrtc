@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d415ea_0e9186a0",
+        "filename": "api/test/metrics/metrics_logger_and_exporter.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-19T10:25:41Z",
+      "side": 1,
+      "message": "`exporter-\u003eExport` is not expected to be called from multiple threads and be required to hold any locks inside. So Export should try to get any other locks.\n\n\u003e also double checking if it\u0027s intentional to stop calling remaining exporters as soon as one fails?\n\nGood point, forgot about optimisation. Also added test",
+      "parentUuid": "98cd7dc0_dea1a3e8",
+      "revId": "8a62fbf55c386be0f34f97909af4e063b6e50df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b424a43e_f3366310",
@@ -66,6 +84,24 @@
       "writtenOn": "2022-09-18T18:13:18Z",
       "side": 1,
       "message": "does the method have to support being called from any thread?",
+      "revId": "8a62fbf55c386be0f34f97909af4e063b6e50df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff66609_0e47e23d",
+        "filename": "api/test/metrics/metrics_logger_and_exporter.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-19T10:25:41Z",
+      "side": 1,
+      "message": "This method I foreseen to be used for testing mostly, but `metrics_` collection can be accessed from multiple threads when we log to it.",
+      "parentUuid": "b424a43e_f3366310",
       "revId": "8a62fbf55c386be0f34f97909af4e063b6e50df3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
