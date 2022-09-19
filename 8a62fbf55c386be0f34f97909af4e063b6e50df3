@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62479809_a148a80f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-09-19T07:33:19Z",
+      "side": 1,
+      "message": "meant to OK the CL too ys",
+      "revId": "8a62fbf55c386be0f34f97909af4e063b6e50df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "568b2776_a5ce9fd9",
@@ -14,6 +31,24 @@
       "writtenOn": "2022-09-18T18:13:18Z",
       "side": 1,
       "message": "Will the Export() method grab an additional lock?\nwonder if there\u0027s a risk of lock inversion or if we might be able to lock down the threading model now before assumptions are made about methods being called from any context",
+      "revId": "8a62fbf55c386be0f34f97909af4e063b6e50df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98cd7dc0_dea1a3e8",
+        "filename": "api/test/metrics/metrics_logger_and_exporter.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-09-19T07:33:19Z",
+      "side": 1,
+      "message": "also double checking if it\u0027s intentional to stop calling remaining exporters as soon as one fails?",
+      "parentUuid": "568b2776_a5ce9fd9",
       "revId": "8a62fbf55c386be0f34f97909af4e063b6e50df3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
