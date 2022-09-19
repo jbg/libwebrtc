@@ -104,6 +104,24 @@
       "parentUuid": "b424a43e_f3366310",
       "revId": "8a62fbf55c386be0f34f97909af4e063b6e50df3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "818c07a2_ce3b2426",
+        "filename": "api/test/metrics/metrics_logger_and_exporter.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-19T11:17:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cff66609_0e47e23d",
+      "revId": "8a62fbf55c386be0f34f97909af4e063b6e50df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
