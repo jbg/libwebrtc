@@ -220,6 +220,7 @@ if (rtc_include_tests) {
         ":audio_end_to_end_test",
         "../api:create_network_emulation_manager",
         "../api:create_peerconnection_quality_test_fixture",
+        "../api:create_two_network_links",
         "../api:network_emulation_manager_api",
         "../api:peer_connection_quality_test_fixture_api",
         "../api:simulated_network_api",
