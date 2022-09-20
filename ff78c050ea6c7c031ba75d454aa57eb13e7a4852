@@ -16,6 +16,23 @@
       "message": "Thank you Alessio!",
       "revId": "ff78c050ea6c7c031ba75d454aa57eb13e7a4852",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fa01ad7_bf3cc52e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-09-20T14:12:45Z",
+      "side": 1,
+      "message": "Thanks Hanna!",
+      "revId": "ff78c050ea6c7c031ba75d454aa57eb13e7a4852",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
