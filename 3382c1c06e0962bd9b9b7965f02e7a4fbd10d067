@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "910ede67_1a23e00b",
+        "filename": "p2p/base/ice_controller_interface.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-09-20T10:29:07Z",
+      "side": 1,
+      "message": "In the future prefer rtc::SimpleStringBuilder (or rtc::StringBuilder, though not in this case)\nover concatenating strings using \u0027+\u0027 and \u0027+\u003d\u0027 operators\n\nRelated article: https://abseil.io/tips/3",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 70
+      },
+      "revId": "3382c1c06e0962bd9b9b7965f02e7a4fbd10d067",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
