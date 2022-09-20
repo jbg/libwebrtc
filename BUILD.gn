@@ -33,6 +33,14 @@ if (is_android) {
   import("//build/config/android/rules.gni")
 }
 
+# TODO(jansson): Remove the "!build_with_chromium" condition once this clause
+# is removed from Chromium.
+if (is_fuchsia && !build_with_chromium) {
+  import("//build/config/fuchsia/generate_runner_scripts.gni")
+  import("//third_party/fuchsia-sdk/sdk/build/component.gni")
+  import("//third_party/fuchsia-sdk/sdk/build/package.gni")
+}
+
 if (!build_with_chromium) {
   # This target should (transitively) cause everything to be built; if you run
   # 'ninja default' and then 'ninja all', the second build should do no work.
