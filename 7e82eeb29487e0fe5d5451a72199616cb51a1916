@@ -22,6 +22,30 @@
       },
       "revId": "7e82eeb29487e0fe5d5451a72199616cb51a1916",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f9537f7_28bcf81c",
+        "filename": "api/test/metrics/chrome_perf_dashboard_metrics_exporter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-20T11:29:05Z",
+      "side": 1,
+      "message": "Old system by default logged 0 if no values were provided, so I preserved this behavior.",
+      "parentUuid": "58fc0e3a_a59a1906",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 7
+      },
+      "revId": "7e82eeb29487e0fe5d5451a72199616cb51a1916",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
