@@ -43,10 +43,10 @@ Metric PsnrForTestFoo(double mean, double stddev) {
                 .stats = Metric::Stats{.mean = mean, .stddev = stddev}};
 }
 
-TEST(StdoutMetricsExporterTest, MAYBE_ExportMetricFormatCorrect) {
+TEST(StdoutMetricsExporterTest, ExportMetricFormatCorrect) {
   Metric metric1{
       .name = "test_metric1",
-      .unit = Unit::kTimeMs,
+      .unit = Unit::kMilliseconds,
       .improvement_direction = ImprovementDirection::kBiggerIsBetter,
       .test_case = "test_case_name1",
       .metric_metadata = DefaultMetadata(),
@@ -70,7 +70,7 @@ TEST(StdoutMetricsExporterTest, MAYBE_ExportMetricFormatCorrect) {
 
   std::string expected =
       "RESULT: test_case_name1/test_metric1= "
-      "{mean=15, stddev=5} TimeMs (BiggerIsBetter)\n"
+      "{mean=15, stddev=5} Milliseconds (BiggerIsBetter)\n"
       "RESULT: test_case_name2/test_metric2= "
       "{mean=30, stddev=10} KilobitsPerSecond (SmallerIsBetter)\n";
 
