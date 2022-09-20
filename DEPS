@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '651829c138b8cf11fdfe42dd3c28d7df33e6a734',
+  'chromium_revision': 'a06657ce860ea98aab3ac458bf9a2a5b5d3b9108',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -20,7 +20,7 @@ vars = {
 
   # By default, download the fuchsia sdk from the public sdk directory.
   'fuchsia_sdk_cipd_prefix': 'fuchsia/sdk/gn/',
-  'fuchsia_version': 'version:9.20220919.1.1',
+  'fuchsia_version': 'version:9.20220919.2.1',
 
   # By default, do not check out the re-client binaries.
   'checkout_reclient': False,
@@ -47,9 +47,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@4a8859cc9f8ad4ab56e550f235f758f4ae1f802d',
+    'https://chromium.googlesource.com/chromium/src/testing@b1e005415395a5663c8c727831d8088bf48718e8',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@ceabb36cefff5f5cc992c62b0adb506da8bd4f4d',
+    'https://chromium.googlesource.com/chromium/src/third_party@2ff8abaec06e67303fc2e48240743a3ef4fe668a',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -295,7 +295,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@f4a47cbbcf77ed14e2931e2855c0bbb4f5fefcc7',
+    'https://chromium.googlesource.com/chromium/src/tools@d6327a0e3cf64a55bafb4fe7305b485fcc29da1f',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
