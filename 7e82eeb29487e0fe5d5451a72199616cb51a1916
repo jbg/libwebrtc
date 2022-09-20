@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58fc0e3a_a59a1906",
+        "filename": "api/test/metrics/chrome_perf_dashboard_metrics_exporter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-20T09:45:38Z",
+      "side": 1,
+      "message": "This is the last part that seems unclear.\n\nShould we do something like:\n\n```\nif (!samples.empty()) {\n writer-\u003eLogResultList(\n          metric.name, metric.test_case, samples,\n          ToChromePerfDashboardUnit(metric.unit),\n          /*important\u003d*/false,\n          ToChromePerfDashboardImproveDirection(metric.improvement_direction));\n} else if (!IsEmpty(metric.stats)) {\n      writer-\u003eLogResultMeanAndError(\n          metric.name, metric.test_case, *metric.stats.mean,\n          *metric.stats.stddev, ToChromePerfDashboardUnit(metric.unit),\n          /*important\u003d*/false,\n          ToChromePerfDashboardImproveDirection(metric.improvement_direction));\n} else {\n  // Is this even expected?\n  // Maybe we should log?\n}\n```\n\n\nWhat stands out to me is the \"adding 0\", which is not a neutral value (0 errors is positive, 0 passing tests is not).",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 7
+      },
+      "revId": "7e82eeb29487e0fe5d5451a72199616cb51a1916",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
