@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93ef26a5_34943955",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-21T07:27:01Z",
+      "side": 1,
+      "message": "It is the plan",
+      "parentUuid": "009fc1ca_cff6231e",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 56
+      },
+      "revId": "9b84e6ed8bcae42745a404c5547f11d1ac18bab9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcf5583d_4def4e46",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-21T06:38:32Z",
       "side": 1,
       "message": "2022",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "9b84e6ed8bcae42745a404c5547f11d1ac18bab9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2615c13e_5f60cf85",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_metric_names_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-21T07:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcf5583d_4def4e46",
       "range": {
         "startLine": 2,
         "startChar": 18,
