@@ -16,6 +16,24 @@
       "message": "wdyt?",
       "revId": "f48da566836fa61ee2b8e00bd7c9449464c8362f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bef40774_be4a9732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-09-21T08:48:31Z",
+      "side": 1,
+      "message": "I prefer this, LGTM",
+      "parentUuid": "0e50760a_301e3f6b",
+      "revId": "f48da566836fa61ee2b8e00bd7c9449464c8362f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
