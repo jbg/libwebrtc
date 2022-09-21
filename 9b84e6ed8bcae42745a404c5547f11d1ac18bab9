@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "009fc1ca_cff6231e",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-21T06:38:32Z",
+      "side": 1,
+      "message": "After the migration, this ctor will be removed, correct?",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 56
+      },
+      "revId": "9b84e6ed8bcae42745a404c5547f11d1ac18bab9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf5583d_4def4e46",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_metric_names_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-21T06:38:32Z",
+      "side": 1,
+      "message": "2022",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "9b84e6ed8bcae42745a404c5547f11d1ac18bab9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
