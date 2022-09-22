@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39567e46_184be83e",
+        "filename": "BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-09-22T18:33:46Z",
+      "side": 1,
+      "message": "AFAIK These setup deps that in turn package the targets as fuchsia components. Removed the todo since we need to cleanup that in general and added a comment about what these do.",
+      "parentUuid": "23ffcf85_21051806",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 59
+      },
+      "revId": "8dbe4fe8cc31b5e7467c07ceb2f1263d07e2d116",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93184c60_0e284c47",
@@ -47,6 +71,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71864b8c_98d77ac9",
+        "filename": "DEPS",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-09-22T18:33:46Z",
+      "side": 1,
+      "message": "Right, was testing things.",
+      "parentUuid": "93184c60_0e284c47",
+      "range": {
+        "startLine": 27,
+        "startChar": 22,
+        "endLine": 27,
+        "endChar": 26
+      },
+      "revId": "8dbe4fe8cc31b5e7467c07ceb2f1263d07e2d116",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc2ab5de_4cf9087f",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-22T15:25:28Z",
       "side": 1,
       "message": "Missing \"//\"?",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 39,
+        "endChar": 10
+      },
+      "revId": "8dbe4fe8cc31b5e7467c07ceb2f1263d07e2d116",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe8588b_a6248db9",
+        "filename": "webrtc.gni",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-09-22T18:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc2ab5de_4cf9087f",
       "range": {
         "startLine": 39,
         "startChar": 9,
