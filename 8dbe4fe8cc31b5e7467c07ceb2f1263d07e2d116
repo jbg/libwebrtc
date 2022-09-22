@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3aa041e1_0f74a216",
+        "filename": "BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-22T18:58:35Z",
+      "side": 1,
+      "message": "If we remove them, do anything break?\n\nI looked at https://chromium-review.googlesource.com/c/chromium/src/+/3883943, IIUC they add them because they use things like fuchsia_component, fuchsia_package, fuchsia_package_installer. But at the moment we don\u0027t.",
+      "parentUuid": "39567e46_184be83e",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 59
+      },
+      "revId": "8dbe4fe8cc31b5e7467c07ceb2f1263d07e2d116",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93184c60_0e284c47",
         "filename": "DEPS",
         "patchSetId": 10
