@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23ffcf85_21051806",
+        "filename": "BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-22T15:25:28Z",
+      "side": 1,
+      "message": "What happens if we don\u0027t import these?\n\nIn theory, with GN we only need to import if we use the definition of something from these .gni files in the current BUILD.gn file. Or are there side effects we need to trigger?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 59
+      },
+      "revId": "8dbe4fe8cc31b5e7467c07ceb2f1263d07e2d116",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93184c60_0e284c47",
+        "filename": "DEPS",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-22T15:25:28Z",
+      "side": 1,
+      "message": "Should this be False?\n\n(we should not checkout fuchsia deps on all platforms, but only when targeting Fuchsia)",
+      "range": {
+        "startLine": 27,
+        "startChar": 22,
+        "endLine": 27,
+        "endChar": 26
+      },
+      "revId": "8dbe4fe8cc31b5e7467c07ceb2f1263d07e2d116",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc2ab5de_4cf9087f",
+        "filename": "webrtc.gni",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-22T15:25:28Z",
+      "side": 1,
+      "message": "Missing \"//\"?",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 39,
+        "endChar": 10
+      },
+      "revId": "8dbe4fe8cc31b5e7467c07ceb2f1263d07e2d116",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
