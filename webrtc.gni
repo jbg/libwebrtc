@@ -35,6 +35,10 @@ if (is_mac) {
   import("//build/config/mac/rules.gni")
 }
 
+if (is_fuchsia) {
+  import("build/config/fuchsia/config.gni")
+}
+
 # This declare_args is separated from the next one because args declared
 # in this one, can be read from the next one (args defined in the same
 # declare_args cannot be referenced in that scope).
@@ -518,6 +522,13 @@ template("rtc_test") {
         deps += absl_deps
       }
     }
+
+    #if (is_fuchsia) {
+    #  if (!defined(data_deps)) {
+    #    data_deps = []
+    #  }
+    #  data_deps += [ "//build/config/fuchsia:deployment_resources" ]
+    #}
 
     # TODO(crbug.com/webrtc/13556): Adding the .app folder in the runtime_deps
     # shoulnd't be necessary. this code should be removed and the same solution
