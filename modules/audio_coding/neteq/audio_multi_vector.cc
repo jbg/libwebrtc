@@ -69,6 +69,9 @@ void AudioMultiVector::CopyTo(AudioMultiVector* copy_to) const {
 void AudioMultiVector::PushBackInterleaved(
     rtc::ArrayView<const int16_t> append_this) {
   RTC_DCHECK_EQ(append_this.size() % num_channels_, 0);
+  if (append_this.empty()) {
+    return;
+  }
   if (num_channels_ == 1) {
     // Special case to avoid extra allocation and data shuffling.
     channels_[0]->PushBack(append_this.data(), append_this.size());
