@@ -21,7 +21,6 @@
 #include "api/test/track_id_stream_info_map.h"
 #include "api/units/time_delta.h"
 #include "rtc_base/synchronization/mutex.h"
-#include "test/testsupport/perf_test.h"
 
 namespace webrtc {
 namespace webrtc_pc_e2e {
@@ -66,11 +65,6 @@ class DefaultAudioQualityAnalyzer : public AudioQualityAnalyzerInterface {
   };
 
   std::string GetTestCaseName(const std::string& stream_label) const;
-  void ReportResult(const std::string& metric_name,
-                    const std::string& stream_label,
-                    const SamplesStatsCounter& counter,
-                    const std::string& unit,
-                    webrtc::test::ImproveDirection improve_direction) const;
 
   test::MetricsLogger* const metrics_logger_;
 

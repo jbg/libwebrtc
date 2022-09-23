@@ -891,18 +891,12 @@ void DefaultVideoQualityAnalyzer::
 }
 
 void DefaultVideoQualityAnalyzer::ReportResults() {
-  using ::webrtc::test::ImproveDirection;
-
   MutexLock lock(&mutex_);
   for (auto& item : frames_comparator_.stream_stats()) {
     ReportResults(GetTestCaseName(ToMetricName(item.first)), item.second,
                   stream_frame_counters_.at(item.first));
   }
-  if (metrics_logger_ == nullptr) {
-    test::PrintResult("cpu_usage", "", test_label_.c_str(),
-                      GetCpuUsagePercent(), "%", false,
-                      ImproveDirection::kSmallerIsBetter);
-  } else {
+  if (metrics_logger_ != nullptr) {
     metrics_logger_->LogSingleValueMetric(
         "cpu_usage_%", test_label_, GetCpuUsagePercent(), Unit::kUnitless,
         ImprovementDirection::kSmallerIsBetter);
@@ -943,7 +937,6 @@ void DefaultVideoQualityAnalyzer::ReportResults(
     const std::string& test_case_name,
     const StreamStats& stats,
     const FrameCounters& frame_counters) {
-  using ::webrtc::test::ImproveDirection;
   TimeDelta test_duration = Now() - start_time_;
 
   double sum_squared_interframe_delays_secs = 0;
@@ -972,91 +965,7 @@ void DefaultVideoQualityAnalyzer::ReportResults(
         video_duration.seconds<double>() / sum_squared_interframe_delays_secs;
   }
 
-  if (metrics_logger_ == nullptr) {
-    // Report results through old performance metrics API.
-    ReportResult("psnr", test_case_name, stats.psnr, "dB",
-                 ImproveDirection::kBiggerIsBetter);
-    ReportResult("ssim", test_case_name, stats.ssim, "unitless",
-                 ImproveDirection::kBiggerIsBetter);
-    ReportResult("transport_time", test_case_name, stats.transport_time_ms,
-                 "ms", ImproveDirection::kSmallerIsBetter);
-    ReportResult("total_delay_incl_transport", test_case_name,
-                 stats.total_delay_incl_transport_ms, "ms",
-                 ImproveDirection::kSmallerIsBetter);
-    ReportResult("time_between_rendered_frames", test_case_name,
-                 stats.time_between_rendered_frames_ms, "ms",
-                 ImproveDirection::kSmallerIsBetter);
-    test::PrintResult("harmonic_framerate", "", test_case_name,
-                      harmonic_framerate_fps, "Hz", /*important=*/false,
-                      ImproveDirection::kBiggerIsBetter);
-    test::PrintResult("encode_frame_rate", "", test_case_name,
-                      stats.encode_frame_rate.IsEmpty()
-                          ? 0
-                          : stats.encode_frame_rate.GetEventsPerSecond(),
-                      "Hz", /*important=*/false,
-                      ImproveDirection::kBiggerIsBetter);
-    ReportResult("encode_time", test_case_name, stats.encode_time_ms, "ms",
-                 ImproveDirection::kSmallerIsBetter);
-    ReportResult("time_between_freezes", test_case_name,
-                 stats.time_between_freezes_ms, "ms",
-                 ImproveDirection::kBiggerIsBetter);
-    ReportResult("freeze_time_ms", test_case_name, stats.freeze_time_ms, "ms",
-                 ImproveDirection::kSmallerIsBetter);
-    ReportResult("pixels_per_frame", test_case_name,
-                 stats.resolution_of_rendered_frame, "count",
-                 ImproveDirection::kBiggerIsBetter);
-    test::PrintResult("min_psnr", "", test_case_name,
-                      stats.psnr.IsEmpty() ? 0 : stats.psnr.GetMin(), "dB",
-                      /*important=*/false, ImproveDirection::kBiggerIsBetter);
-    ReportResult("decode_time", test_case_name, stats.decode_time_ms, "ms",
-                 ImproveDirection::kSmallerIsBetter);
-    ReportResult("receive_to_render_time", test_case_name,
-                 stats.receive_to_render_time_ms, "ms",
-                 ImproveDirection::kSmallerIsBetter);
-    test::PrintResult("dropped_frames", "", test_case_name,
-                      frame_counters.dropped, "count",
-                      /*important=*/false, ImproveDirection::kSmallerIsBetter);
-    test::PrintResult("frames_in_flight", "", test_case_name,
-                      frame_counters.captured - frame_counters.rendered -
-                          frame_counters.dropped,
-                      "count",
-                      /*important=*/false, ImproveDirection::kSmallerIsBetter);
-    test::PrintResult("rendered_frames", "", test_case_name,
-                      frame_counters.rendered, "count", /*important=*/false,
-                      ImproveDirection::kBiggerIsBetter);
-    ReportResult("max_skipped", test_case_name, stats.skipped_between_rendered,
-                 "count", ImproveDirection::kSmallerIsBetter);
-    ReportResult("target_encode_bitrate", test_case_name,
-                 stats.target_encode_bitrate / kBitsInByte, "bytesPerSecond",
-                 ImproveDirection::kNone);
-    test::PrintResult("actual_encode_bitrate", "", test_case_name,
-                      static_cast<double>(stats.total_encoded_images_payload) /
-                          test_duration.seconds<double>(),
-                      "bytesPerSecond", /*important=*/false,
-                      ImproveDirection::kNone);
-
-    if (options_.report_detailed_frame_stats) {
-      test::PrintResult("num_encoded_frames", "", test_case_name,
-                        frame_counters.encoded, "count",
-                        /*important=*/false, ImproveDirection::kBiggerIsBetter);
-      test::PrintResult("num_decoded_frames", "", test_case_name,
-                        frame_counters.decoded, "count",
-                        /*important=*/false, ImproveDirection::kBiggerIsBetter);
-      test::PrintResult("num_send_key_frames", "", test_case_name,
-                        stats.num_send_key_frames, "count",
-                        /*important=*/false, ImproveDirection::kBiggerIsBetter);
-      test::PrintResult("num_recv_key_frames", "", test_case_name,
-                        stats.num_recv_key_frames, "count",
-                        /*important=*/false, ImproveDirection::kBiggerIsBetter);
-
-      ReportResult("recv_key_frame_size_bytes", test_case_name,
-                   stats.recv_key_frame_size_bytes, "count",
-                   ImproveDirection::kBiggerIsBetter);
-      ReportResult("recv_delta_frame_size_bytes", test_case_name,
-                   stats.recv_delta_frame_size_bytes, "count",
-                   ImproveDirection::kBiggerIsBetter);
-    }
-  } else {
+  if (metrics_logger_ != nullptr) {
     metrics_logger_->LogMetric("psnr_dB", test_case_name, stats.psnr,
                                Unit::kUnitless,
                                ImprovementDirection::kBiggerIsBetter);
@@ -1153,16 +1062,6 @@ void DefaultVideoQualityAnalyzer::ReportResults(
                                  ImprovementDirection::kBiggerIsBetter);
     }
   }
-}
-
-void DefaultVideoQualityAnalyzer::ReportResult(
-    const std::string& metric_name,
-    const std::string& test_case_name,
-    const SamplesStatsCounter& counter,
-    const std::string& unit,
-    webrtc::test::ImproveDirection improve_direction) {
-  test::PrintResult(metric_name, /*modifier=*/"", test_case_name, counter, unit,
-                    /*important=*/false, improve_direction);
 }
 
 std::string DefaultVideoQualityAnalyzer::GetTestCaseName(
