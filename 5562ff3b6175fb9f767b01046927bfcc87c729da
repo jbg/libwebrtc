@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0a3796b_11ec80f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-09-23T19:41:04Z",
+      "side": 1,
+      "message": "Overall OK, but in some places we check metrics_logger_ is not nullptr before deference it, in others we don\u0027t.",
+      "revId": "5562ff3b6175fb9f767b01046927bfcc87c729da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
