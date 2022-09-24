@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe5aee4_20ddc5c2",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-24T14:56:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c023fcf8_1df5e414",
+      "range": {
+        "startLine": 895,
+        "startChar": 2,
+        "endLine": 895,
+        "endChar": 35
+      },
+      "revId": "c48e23170a1e19f7c218849e4c9ae40781959695",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e97d597c_ac352213",
@@ -64,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcf9fa09_e48f3dfd",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 964,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-24T14:56:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e97d597c_ac352213",
+      "range": {
+        "startLine": 964,
+        "startChar": 2,
+        "endLine": 964,
+        "endChar": 35
+      },
+      "revId": "c48e23170a1e19f7c218849e4c9ae40781959695",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34b7cd23_019340d0",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-09-24T09:32:20Z",
       "side": 1,
       "message": "Do we plan to CHECK here as well and remove the ctor taking the nullptr?\n\nIf yes, let\u0027s add a TODO.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 42
+      },
+      "revId": "c48e23170a1e19f7c218849e4c9ae40781959695",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81e67378_eba9ea5d",
+        "filename": "test/pc/e2e/stats_based_network_quality_metrics_reporter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-24T14:56:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34b7cd23_019340d0",
       "range": {
         "startLine": 42,
         "startChar": 0,
