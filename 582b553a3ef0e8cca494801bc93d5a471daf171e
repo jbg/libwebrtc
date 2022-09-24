@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6368c4f9_222d47b8",
+        "filename": "test/pc/e2e/analyzer/audio/default_audio_quality_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-24T08:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2121dc1_78383fc3",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 19
+      },
+      "revId": "582b553a3ef0e8cca494801bc93d5a471daf171e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6746423a_efcb1d3b",
@@ -47,6 +71,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e6cee33_30698fc1",
+        "filename": "test/pc/e2e/analyzer/video/video_quality_metrics_reporter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-24T08:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6746423a_efcb1d3b",
+      "range": {
+        "startLine": 125,
+        "startChar": 2,
+        "endLine": 125,
+        "endChar": 17
+      },
+      "revId": "582b553a3ef0e8cca494801bc93d5a471daf171e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0bd0b52_53a66871",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-23T19:41:04Z",
       "side": 1,
       "message": "Also here (and in other places).\n\nStatsBasedNetworkQualityMetricsReporter instead also controls the logger is not nullptr before dereferencing.",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 19
+      },
+      "revId": "582b553a3ef0e8cca494801bc93d5a471daf171e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29df99b2_e1312aa7",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-09-24T08:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0bd0b52_53a66871",
       "range": {
         "startLine": 105,
         "startChar": 4,
