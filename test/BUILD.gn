@@ -279,7 +279,6 @@ rtc_library("scoped_key_value_config") {
 }
 
 rtc_library("perf_test") {
-  visibility = [ "*" ]
   testonly = true
   sources = [
     "testsupport/perf_result_reporter.cc",
