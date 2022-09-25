@@ -592,6 +592,16 @@ if (rtc_include_tests) {
     ]
   }
 
+  rtc_library("create_two_network_links") {
+    visibility = [ "*" ]
+    testonly = true
+    sources = [
+      "test/create_two_network_links.cc",
+      "test/create_two_network_links.h",
+    ]
+    deps = [ ":network_emulation_manager_api" ]
+  }
+
   if (!build_with_chromium) {
     rtc_library("create_video_quality_test_fixture_api") {
       visibility = [ "*" ]
