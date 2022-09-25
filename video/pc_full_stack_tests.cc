@@ -16,6 +16,7 @@
 #include "api/test/create_network_emulation_manager.h"
 #include "api/test/create_peer_connection_quality_test_frame_generator.h"
 #include "api/test/create_peerconnection_quality_test_fixture.h"
+#include "api/test/create_two_network_links.h"
 #include "api/test/frame_generator_interface.h"
 #include "api/test/metrics/global_metrics_logger_and_exporter.h"
 #include "api/test/network_emulation_manager.h"
@@ -52,31 +53,6 @@ using VideoCodecConfig =
 namespace {
 
 constexpr int kTestDurationSec = 45;
-
-EmulatedNetworkNode* CreateEmulatedNodeWithConfig(
-    NetworkEmulationManager* emulation,
-    const BuiltInNetworkBehaviorConfig& config) {
-  return emulation->CreateEmulatedNode(
-      std::make_unique<SimulatedNetwork>(config));
-}
-
-std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
-CreateTwoNetworkLinks(NetworkEmulationManager* emulation,
-                      const BuiltInNetworkBehaviorConfig& config) {
-  auto* alice_node = CreateEmulatedNodeWithConfig(emulation, config);
-  auto* bob_node = CreateEmulatedNodeWithConfig(emulation, config);
-
-  auto* alice_endpoint = emulation->CreateEndpoint(EmulatedEndpointConfig());
-  auto* bob_endpoint = emulation->CreateEndpoint(EmulatedEndpointConfig());
-
-  emulation->CreateRoute(alice_endpoint, {alice_node}, bob_endpoint);
-  emulation->CreateRoute(bob_endpoint, {bob_node}, alice_endpoint);
-
-  return {
-      emulation->CreateEmulatedNetworkManagerInterface({alice_endpoint}),
-      emulation->CreateEmulatedNetworkManagerInterface({bob_endpoint}),
-  };
-}
 
 std::unique_ptr<webrtc_pc_e2e::PeerConnectionE2EQualityTestFixture>
 CreateTestFixture(const std::string& test_case_name,

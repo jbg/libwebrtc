@@ -15,6 +15,7 @@
 #include "absl/strings/string_view.h"
 #include "api/test/create_network_emulation_manager.h"
 #include "api/test/create_peerconnection_quality_test_fixture.h"
+#include "api/test/create_two_network_links.h"
 #include "api/test/metrics/global_metrics_logger_and_exporter.h"
 #include "api/test/network_emulation_manager.h"
 #include "api/test/peerconnection_quality_test_fixture.h"
@@ -52,24 +53,6 @@ std::string GetMetricTestCaseName() {
     return test_info->name();
   }
   return test_case_prefix + "_" + test_info->name();
-}
-
-std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
-CreateTwoNetworkLinks(NetworkEmulationManager* emulation,
-                      const BuiltInNetworkBehaviorConfig& config) {
-  auto* alice_node = emulation->CreateEmulatedNode(config);
-  auto* bob_node = emulation->CreateEmulatedNode(config);
-
-  auto* alice_endpoint = emulation->CreateEndpoint(EmulatedEndpointConfig());
-  auto* bob_endpoint = emulation->CreateEndpoint(EmulatedEndpointConfig());
-
-  emulation->CreateRoute(alice_endpoint, {alice_node}, bob_endpoint);
-  emulation->CreateRoute(bob_endpoint, {bob_node}, alice_endpoint);
-
-  return {
-      emulation->CreateEmulatedNetworkManagerInterface({alice_endpoint}),
-      emulation->CreateEmulatedNetworkManagerInterface({bob_endpoint}),
-  };
 }
 
 std::unique_ptr<webrtc_pc_e2e::PeerConnectionE2EQualityTestFixture>
