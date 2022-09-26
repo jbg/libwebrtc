@@ -79,7 +79,12 @@ class RTCStatsCollector : public rtc::RefCountInterface,
   void GetStatsReport(rtc::scoped_refptr<RtpReceiverInternal> selector,
                       rtc::scoped_refptr<RTCStatsCollectorCallback> callback);
   // Clears the cache's reference to the most recent stats report. Subsequently
-  // calling `GetStatsReport` guarantees fresh stats.
+  // calling `GetStatsReport` guarantees fresh stats. This method must be called
+  // any time the PeerConnection visibly changes as a result of an API call as
+  // per
+  // https://w3c.github.io/webrtc-stats/#guidelines-for-getstats-results-caching-throttling.
+  // This method also needs to be called when certificates changes, which
+  // happens during negotiation.
   void ClearCachedStatsReport();
 
   // If there is a `GetStatsReport` requests in-flight, waits until it has been
@@ -93,6 +98,8 @@ class RTCStatsCollector : public rtc::RefCountInterface,
   struct CertificateStatsPair {
     std::unique_ptr<rtc::SSLCertificateStats> local;
     std::unique_ptr<rtc::SSLCertificateStats> remote;
+
+    CertificateStatsPair Copy() const;
   };
 
   // Stats gathering on a particular thread. Virtual for the sake of testing.
@@ -227,7 +234,7 @@ class RTCStatsCollector : public rtc::RefCountInterface,
   std::map<std::string, CertificateStatsPair>
   PrepareTransportCertificateStats_n(
       const std::map<std::string, cricket::TransportStats>&
-          transport_stats_by_name) const;
+          transport_stats_by_name);
   // The results are stored in `transceiver_stats_infos_` and `call_stats_`.
   void PrepareTransceiverStatsInfosAndCallStats_s_w_n();
 
@@ -279,6 +286,10 @@ class RTCStatsCollector : public rtc::RefCountInterface,
   // now get rid of the variable and keep the data scoped within a stats
   // collection sequence.
   std::vector<RtpTransceiverStatsInfo> transceiver_stats_infos_;
+  // This cache avoids having to call rtc::SSLCertChain::GetStats(), which can
+  // relatively expensive. ClearCachedStatsReport() needs to be called any time
+  // the set of certificates changes. This can happen during negotiation.
+  std::map<std::string, CertificateStatsPair> cached_certificates_by_transport_;
 
   Call::Stats call_stats_;
 
