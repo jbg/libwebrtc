@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bc703ff_bb14653a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2022-09-26T11:51:50Z",
+      "side": 1,
+      "message": "LGTM, but please add \"chromium:1367993\" to the Bug: line before submitting.\n\nThanks!",
+      "revId": "d39c2456092069965d1dca2bd7f548b7330580ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
