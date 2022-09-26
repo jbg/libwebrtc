@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95286509_c38ac40d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-09-26T12:11:47Z",
+      "side": 1,
+      "message": "Deduplication in test code is fine, but I think we can make it even simpler.",
+      "revId": "75d078f77c8a81d7eb7f472f5edd716354857b13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19f6dcfb_87e126a1",
+        "filename": "api/test/create_two_network_links.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-09-26T12:11:47Z",
+      "side": 1,
+      "message": "It would be more logical to have this as a function on the NetworkEmulationManager interface, I think. (Also saves adding an extra c++ standalone compile unit).\n\nAnd the name should probably be CreateEndpointPairWithTwoWayRoutes; CreateTwoNetworkLinks does not describe what it does.",
+      "revId": "75d078f77c8a81d7eb7f472f5edd716354857b13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
