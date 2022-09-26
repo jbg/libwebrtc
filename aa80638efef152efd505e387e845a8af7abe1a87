@@ -16,6 +16,23 @@
       "message": "Please take a look, Harald",
       "revId": "aa80638efef152efd505e387e845a8af7abe1a87",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d82b8bdb_590ce62e",
+        "filename": "pc/rtc_stats_collector.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-09-26T10:55:45Z",
+      "side": 1,
+      "message": "English nit: \"certificates changes\" -\u003e \"certificates change\".\nI think it\u0027s superfluous - it would be more informative to say that \"All negotiation calls must call this method\" - there is so much that changes on negotiation.",
+      "revId": "aa80638efef152efd505e387e845a8af7abe1a87",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
