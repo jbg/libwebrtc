@@ -400,7 +400,6 @@ if (!build_with_chromium) {
         ":video_quality_metrics_reporter",
         "../..:field_trial",
         "../..:fileutils",
-        "../..:perf_test",
         "../../../api:audio_quality_analyzer_api",
         "../../../api:libjingle_peerconnection_api",
         "../../../api:media_stream_interface",
@@ -690,7 +689,6 @@ if (!build_with_chromium) {
     ]
 
     deps = [
-      "../..:perf_test",
       "../../../api:audio_quality_analyzer_api",
       "../../../api:rtc_stats_api",
       "../../../api:stats_observer_interface",
@@ -739,7 +737,6 @@ if (!build_with_chromium) {
       "analyzer/video/video_quality_metrics_reporter.h",
     ]
     deps = [
-      "../..:perf_test",
       "../../../api:peer_connection_quality_test_fixture_api",
       "../../../api:rtc_stats_api",
       "../../../api:track_id_stream_info_map",
@@ -771,7 +768,6 @@ if (!build_with_chromium) {
     deps = [
       ":default_video_quality_analyzer_internal",
       ":default_video_quality_analyzer_shared",
-      "../..:perf_test",
       "../../../api:array_view",
       "../../../api:video_quality_analyzer_api",
       "../../../api/numerics",
@@ -881,7 +877,6 @@ if (!build_with_chromium) {
       "network_quality_metrics_reporter.h",
     ]
     deps = [
-      "../..:perf_test",
       "../../../api:network_emulation_manager_api",
       "../../../api:peer_connection_quality_test_fixture_api",
       "../../../api:rtc_stats_api",
@@ -907,7 +902,6 @@ if (!build_with_chromium) {
       "stats_based_network_quality_metrics_reporter.h",
     ]
     deps = [
-      "../..:perf_test",
       "../../../api:array_view",
       "../../../api:network_emulation_manager_api",
       "../../../api:peer_connection_quality_test_fixture_api",
@@ -940,7 +934,6 @@ if (!build_with_chromium) {
       "cross_media_metrics_reporter.h",
     ]
     deps = [
-      "../..:perf_test",
       "../../../api:network_emulation_manager_api",
       "../../../api:peer_connection_quality_test_fixture_api",
       "../../../api:rtc_stats_api",
