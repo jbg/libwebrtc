@@ -960,7 +960,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
 
   webrtc::RTCError SetRtpParameters(const webrtc::RtpParameters& parameters) {
     webrtc::RTCError error = CheckRtpParametersInvalidModificationAndValues(
-        rtp_parameters_, parameters);
+        rtp_parameters_, parameters, {});
     if (!error.ok()) {
       return error;
     }
