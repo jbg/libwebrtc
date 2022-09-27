@@ -75,6 +75,15 @@ struct AbsoluteCaptureTime {
   //
   //   Capture NTP Clock = Sender NTP Clock + Capture Clock Offset
   absl::optional<int64_t> estimated_capture_clock_offset;
+
+  uint64_t GetAdjustedAbsoluteCaptureTime() const {
+    int64_t offset = estimated_capture_clock_offset.value_or(0);
+    if (offset >= 0) {
+      return absolute_capture_timestamp + static_cast<uint64_t>(offset);
+    } else {
+      return absolute_capture_timestamp - static_cast<uint64_t>(-offset);
+    }
+  }
 };
 
 inline bool operator==(const AbsoluteCaptureTime& lhs,
