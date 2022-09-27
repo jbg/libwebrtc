@@ -94,11 +94,12 @@ static constexpr int kClippedLevelMin = 70;
 //      setter.
 //
 // APM accepts only linear PCM audio data in chunks of ~10 ms (see
-// AudioProcessing::GetFrameSize() for details). The int16 interfaces use
-// interleaved data, while the float interfaces use deinterleaved data.
+// AudioProcessing::GetFrameSize() for details) and sample rates ranging from
+// 8000 Hz to 384000 Hz. The int16 interfaces use interleaved data, while the
+// float interfaces use deinterleaved data.
 //
 // Usage example, omitting error checking:
-// AudioProcessing* apm = AudioProcessingBuilder().Create();
+// rtc::scoped_refptr<AudioProcessing> apm = AudioProcessingBuilder().Create();
 //
 // AudioProcessing::Config config;
 // config.echo_canceller.enabled = true;
@@ -115,9 +116,6 @@ static constexpr int kClippedLevelMin = 70;
 // config.high_pass_filter.enabled = true;
 //
 // apm->ApplyConfig(config)
-//
-// apm->noise_reduction()->set_level(kHighSuppression);
-// apm->noise_reduction()->Enable(true);
 //
 // // Start a voice call...
 //
@@ -140,7 +138,7 @@ static constexpr int kClippedLevelMin = 70;
 // apm->Initialize();
 //
 // // Close the application...
-// delete apm;
+// apm.reset();
 //
 class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
  public:
