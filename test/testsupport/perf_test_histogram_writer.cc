@@ -17,6 +17,7 @@
 
 #include "absl/strings/string_view.h"
 #include "api/numerics/samples_stats_counter.h"
+#include "api/test/metrics/metric.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/synchronization/mutex.h"
@@ -47,32 +48,33 @@ class PerfTestHistogramWriter : public PerfTestResultWriter {
                  const double value,
                  absl::string_view units,
                  const bool important,
-                 ImproveDirection improve_direction) override {
+                 ImprovementDirection improvement_direction) override {
     (void)important;
-    AddSample(graph_name, trace_name, value, units, improve_direction);
+    AddSample(graph_name, trace_name, value, units, improvement_direction);
   }
-  void LogResultMeanAndError(absl::string_view graph_name,
-                             absl::string_view trace_name,
-                             const double mean,
-                             const double error,
-                             absl::string_view units,
-                             const bool important,
-                             ImproveDirection improve_direction) override {
+  void LogResultMeanAndError(
+      absl::string_view graph_name,
+      absl::string_view trace_name,
+      const double mean,
+      const double error,
+      absl::string_view units,
+      const bool important,
+      ImprovementDirection improvement_direction) override {
     RTC_LOG(LS_WARNING) << "Discarding stddev, not supported by histograms";
     (void)error;
     (void)important;
 
-    AddSample(graph_name, trace_name, mean, units, improve_direction);
+    AddSample(graph_name, trace_name, mean, units, improvement_direction);
   }
   void LogResultList(absl::string_view graph_name,
                      absl::string_view trace_name,
                      const rtc::ArrayView<const double> values,
                      absl::string_view units,
                      const bool important,
-                     ImproveDirection improve_direction) override {
+                     ImprovementDirection improvement_direction) override {
     (void)important;
     for (double value : values) {
-      AddSample(graph_name, trace_name, value, units, improve_direction);
+      AddSample(graph_name, trace_name, value, units, improvement_direction);
     }
   }
   std::string Serialize() const override {
@@ -95,7 +97,7 @@ class PerfTestHistogramWriter : public PerfTestResultWriter {
                  absl::string_view trace_name,
                  const double value,
                  absl::string_view units,
-                 ImproveDirection improve_direction) {
+                 ImprovementDirection improvement_direction) {
     // WebRTC annotates the units into the metric name when they are not
     // supported by the Histogram API.
     std::string graph_name(original_graph_name);
@@ -114,7 +116,7 @@ class PerfTestHistogramWriter : public PerfTestResultWriter {
     measurement_and_story << graph_name << trace_name;
     MutexLock lock(&mutex_);
     if (histograms_.count(measurement_and_story.str()) == 0) {
-      proto::UnitAndDirection unit = ParseUnit(units, improve_direction);
+      proto::UnitAndDirection unit = ParseUnit(units, improvement_direction);
       std::unique_ptr<catapult::HistogramBuilder> builder =
           std::make_unique<catapult::HistogramBuilder>(graph_name, unit);
 
@@ -138,14 +140,15 @@ class PerfTestHistogramWriter : public PerfTestResultWriter {
     }
   }
 
-  proto::UnitAndDirection ParseUnit(absl::string_view units,
-                                    ImproveDirection improve_direction) {
+  proto::UnitAndDirection ParseUnit(
+      absl::string_view units,
+      ImprovementDirection improvement_direction) {
     RTC_DCHECK(units.find('_') == std::string::npos)
         << "The unit_bigger|smallerIsBetter syntax isn't supported in WebRTC, "
            "use the enum instead.";
 
     proto::UnitAndDirection result;
-    result.set_improvement_direction(ParseDirection(improve_direction));
+    result.set_improvement_direction(ParseDirection(improvement_direction));
     if (units == "bps") {
       result.set_unit(proto::BYTES_PER_SECOND);
     } else if (units == "dB") {
@@ -172,16 +175,17 @@ class PerfTestHistogramWriter : public PerfTestResultWriter {
   }
 
   proto::ImprovementDirection ParseDirection(
-      ImproveDirection improve_direction) {
-    switch (improve_direction) {
-      case ImproveDirection::kNone:
+      ImprovementDirection improvement_direction) {
+    switch (improvement_direction) {
+      case ImprovementDirection::kNeitherIsBetter:
         return proto::NOT_SPECIFIED;
-      case ImproveDirection::kSmallerIsBetter:
+      case ImprovementDirection::kSmallerIsBetter:
         return proto::SMALLER_IS_BETTER;
-      case ImproveDirection::kBiggerIsBetter:
+      case ImprovementDirection::kBiggerIsBetter:
         return proto::BIGGER_IS_BETTER;
       default:
-        RTC_DCHECK_NOTREACHED() << "Invalid enum value " << improve_direction;
+        RTC_DCHECK_NOTREACHED()
+            << "Invalid enum value " << improvement_direction;
     }
   }
 
