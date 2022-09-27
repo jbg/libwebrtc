@@ -37,12 +37,20 @@ class Call;
 
 namespace cricket {
 
+// Verifies that the scalability_mode value of each encoding is supported by any
+// codec of the list. If the list is empty, no check is done.
+webrtc::RTCError CheckScalabilityModeValues(
+    const webrtc::RtpParameters& new_parameters,
+    rtc::ArrayView<cricket::VideoCodec> codecs);
+
 webrtc::RTCError CheckRtpParametersValues(
-    const webrtc::RtpParameters& new_parameters);
+    const webrtc::RtpParameters& new_parameters,
+    rtc::ArrayView<cricket::VideoCodec> codecs);
 
 webrtc::RTCError CheckRtpParametersInvalidModificationAndValues(
     const webrtc::RtpParameters& old_parameters,
-    const webrtc::RtpParameters& new_parameters);
+    const webrtc::RtpParameters& new_parameters,
+    rtc::ArrayView<cricket::VideoCodec> codecs);
 
 struct RtpCapabilities {
   RtpCapabilities();

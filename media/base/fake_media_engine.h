@@ -153,7 +153,7 @@ class RtpHelper : public Base {
     auto parameters_iterator = rtp_send_parameters_.find(ssrc);
     if (parameters_iterator != rtp_send_parameters_.end()) {
       auto result = CheckRtpParametersInvalidModificationAndValues(
-          parameters_iterator->second, parameters);
+          parameters_iterator->second, parameters, {});
       if (!result.ok())
         return result;
 

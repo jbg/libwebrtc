@@ -2265,11 +2265,11 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::SetSendParameters(
 webrtc::RTCError WebRtcVideoChannel::WebRtcVideoSendStream::SetRtpParameters(
     const webrtc::RtpParameters& new_parameters) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
-  webrtc::RTCError error = CheckRtpParametersInvalidModificationAndValues(
-      rtp_parameters_, new_parameters);
-  if (!error.ok()) {
-    return error;
-  }
+  // This is checked higher in the stack (RtpSender), so this is only checking
+  // for users accessing the private APIs, not specification conformance.
+  RTC_DCHECK(CheckRtpParametersInvalidModificationAndValues(rtp_parameters_,
+                                                            new_parameters, {})
+                 .ok());
 
   bool new_param = false;
   for (size_t i = 0; i < rtp_parameters_.encodings.size(); ++i) {
