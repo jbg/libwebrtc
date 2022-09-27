@@ -16,7 +16,8 @@
 #include <string>
 
 #include "absl/strings/string_view.h"
-#include "test/testsupport/perf_test.h"
+#include "api/array_view.h"
+#include "api/test/metrics/metric.h"
 
 namespace webrtc {
 namespace test {
@@ -32,7 +33,7 @@ class PerfTestResultWriter {
                          double value,
                          absl::string_view units,
                          bool important,
-                         webrtc::test::ImproveDirection improve_direction) = 0;
+                         ImprovementDirection improvement_direction) = 0;
   virtual void LogResultMeanAndError(
       absl::string_view graph_name,
       absl::string_view trace_name,
@@ -40,14 +41,13 @@ class PerfTestResultWriter {
       double error,
       absl::string_view units,
       bool important,
-      webrtc::test::ImproveDirection improve_direction) = 0;
-  virtual void LogResultList(
-      absl::string_view graph_name,
-      absl::string_view trace_name,
-      rtc::ArrayView<const double> values,
-      absl::string_view units,
-      bool important,
-      webrtc::test::ImproveDirection improve_direction) = 0;
+      ImprovementDirection improvement_direction) = 0;
+  virtual void LogResultList(absl::string_view graph_name,
+                             absl::string_view trace_name,
+                             rtc::ArrayView<const double> values,
+                             absl::string_view units,
+                             bool important,
+                             ImprovementDirection improvement_direction) = 0;
 
   virtual std::string Serialize() const = 0;
 };

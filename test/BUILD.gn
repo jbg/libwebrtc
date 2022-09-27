@@ -279,24 +279,18 @@ rtc_library("scoped_key_value_config") {
 }
 
 rtc_library("perf_test") {
-  visibility = [ "*" ]
   testonly = true
   sources = [
-    "testsupport/perf_test.cc",
-    "testsupport/perf_test.h",
     "testsupport/perf_test_histogram_writer.h",
     "testsupport/perf_test_result_writer.h",
   ]
   deps = [
     "../api:array_view",
     "../api/numerics",
-    "../rtc_base:checks",
-    "../rtc_base:criticalsection",
+    "../api/test/metrics:metric",
     "../rtc_base:logging",
-    "../rtc_base:rtc_numerics",
     "../rtc_base:stringutils",
     "../rtc_base/synchronization:mutex",
-    "../test:fileutils",
   ]
   absl_deps = [
     "//third_party/abseil-cpp/absl/strings",
@@ -328,11 +322,9 @@ if (is_ios) {
       "ios/test_support.mm",
     ]
     deps = [
-      ":perf_test",
       "../api/test/metrics:chrome_perf_dashboard_metrics_exporter",
       "../api/test/metrics:global_metrics_logger_and_exporter",
       "../api/test/metrics:metrics_exporter",
-      "../api/test/metrics:print_result_proxy_metrics_exporter",
       "../api/test/metrics:stdout_metrics_exporter",
       "../sdk:helpers_objc",
     ]
@@ -508,14 +500,12 @@ if (rtc_include_tests && !build_with_chromium) {
 
     deps = [
       ":field_trial",
-      ":perf_test",
       ":resources_dir_flag",
       ":test_flags",
       ":test_support",
       "../api/test/metrics:chrome_perf_dashboard_metrics_exporter",
       "../api/test/metrics:global_metrics_logger_and_exporter",
       "../api/test/metrics:metrics_exporter",
-      "../api/test/metrics:print_result_proxy_metrics_exporter",
       "../api/test/metrics:stdout_metrics_exporter",
       "../rtc_base",
       "../rtc_base:checks",
@@ -628,6 +618,7 @@ if (rtc_include_tests && !build_with_chromium) {
       "../api:scoped_refptr",
       "../api:simulcast_test_fixture_api",
       "../api/task_queue:task_queue_test",
+      "../api/test/metrics:metric",
       "../api/test/video:function_video_factory",
       "../api/units:time_delta",
       "../api/video:encoded_image",
@@ -669,7 +660,6 @@ if (rtc_include_tests && !build_with_chromium) {
       "rtp_file_writer_unittest.cc",
       "run_loop_unittest.cc",
       "testsupport/ivf_video_frame_generator_unittest.cc",
-      "testsupport/perf_test_unittest.cc",
       "testsupport/test_artifacts_unittest.cc",
       "testsupport/video_frame_writer_unittest.cc",
       "testsupport/y4m_frame_reader_unittest.cc",

@@ -59,18 +59,6 @@ double ToChromePerfDashboardValue(double value, Unit unit) {
   }
 }
 
-ImproveDirection ToChromePerfDashboardImproveDirection(
-    ImprovementDirection direction) {
-  switch (direction) {
-    case ImprovementDirection::kBiggerIsBetter:
-      return ImproveDirection::kBiggerIsBetter;
-    case ImprovementDirection::kNeitherIsBetter:
-      return ImproveDirection::kNone;
-    case ImprovementDirection::kSmallerIsBetter:
-      return ImproveDirection::kSmallerIsBetter;
-  }
-}
-
 bool WriteMetricsToFile(const std::string& path, const std::string& data) {
   CreateDir(DirName(path));
   FILE* output = fopen(path.c_str(), "wb");
@@ -108,12 +96,10 @@ bool ChromePerfDashboardMetricsExporter::Export(
     if (metric.time_series.samples.empty() && IsEmpty(metric.stats)) {
       // If there were no data collected for the metric it is expected that 0
       // will be exported, so add 0 to the samples.
-      writer->LogResult(
-          metric.name, metric.test_case,
-          ToChromePerfDashboardValue(0, metric.unit),
-          ToChromePerfDashboardUnit(metric.unit),
-          /*important=*/false,
-          ToChromePerfDashboardImproveDirection(metric.improvement_direction));
+      writer->LogResult(metric.name, metric.test_case,
+                        ToChromePerfDashboardValue(0, metric.unit),
+                        ToChromePerfDashboardUnit(metric.unit),
+                        /*important=*/false, metric.improvement_direction);
       continue;
     }
 
@@ -123,8 +109,7 @@ bool ChromePerfDashboardMetricsExporter::Export(
           ToChromePerfDashboardValue(*metric.stats.mean, metric.unit),
           ToChromePerfDashboardValue(*metric.stats.stddev, metric.unit),
           ToChromePerfDashboardUnit(metric.unit),
-          /*important=*/false,
-          ToChromePerfDashboardImproveDirection(metric.improvement_direction));
+          /*important=*/false, metric.improvement_direction);
       continue;
     }
 
@@ -133,11 +118,9 @@ bool ChromePerfDashboardMetricsExporter::Export(
       samples[i] = ToChromePerfDashboardValue(
           metric.time_series.samples[i].value, metric.unit);
     }
-    writer->LogResultList(
-        metric.name, metric.test_case, samples,
-        ToChromePerfDashboardUnit(metric.unit),
-        /*important=*/false,
-        ToChromePerfDashboardImproveDirection(metric.improvement_direction));
+    writer->LogResultList(metric.name, metric.test_case, samples,
+                          ToChromePerfDashboardUnit(metric.unit),
+                          /*important=*/false, metric.improvement_direction);
   }
   return WriteMetricsToFile(export_file_path_, writer->Serialize());
 }
