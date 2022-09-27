@@ -278,25 +278,23 @@ rtc_library("scoped_key_value_config") {
   absl_deps = [ "//third_party/abseil-cpp/absl/strings:strings" ]
 }
 
-rtc_library("perf_test") {
-  visibility = [ "*" ]
+rtc_library("perf_test_result_writer") {
+  visibility = [
+    ":perf_test_histogram_writer_unittest",
+    "../api/test/metrics:chrome_perf_dashboard_metrics_exporter",
+  ]
   testonly = true
   sources = [
-    "testsupport/perf_test.cc",
-    "testsupport/perf_test.h",
     "testsupport/perf_test_histogram_writer.h",
     "testsupport/perf_test_result_writer.h",
   ]
   deps = [
     "../api:array_view",
     "../api/numerics",
-    "../rtc_base:checks",
-    "../rtc_base:criticalsection",
+    "../api/test/metrics:metric",
     "../rtc_base:logging",
-    "../rtc_base:rtc_numerics",
     "../rtc_base:stringutils",
     "../rtc_base/synchronization:mutex",
-    "../test:fileutils",
   ]
   absl_deps = [
     "//third_party/abseil-cpp/absl/strings",
@@ -328,11 +326,9 @@ if (is_ios) {
       "ios/test_support.mm",
     ]
     deps = [
-      ":perf_test",
       "../api/test/metrics:chrome_perf_dashboard_metrics_exporter",
       "../api/test/metrics:global_metrics_logger_and_exporter",
       "../api/test/metrics:metrics_exporter",
-      "../api/test/metrics:print_result_proxy_metrics_exporter",
       "../api/test/metrics:stdout_metrics_exporter",
       "../sdk:helpers_objc",
     ]
@@ -508,14 +504,12 @@ if (rtc_include_tests && !build_with_chromium) {
 
     deps = [
       ":field_trial",
-      ":perf_test",
       ":resources_dir_flag",
       ":test_flags",
       ":test_support",
       "../api/test/metrics:chrome_perf_dashboard_metrics_exporter",
       "../api/test/metrics:global_metrics_logger_and_exporter",
       "../api/test/metrics:metrics_exporter",
-      "../api/test/metrics:print_result_proxy_metrics_exporter",
       "../api/test/metrics:stdout_metrics_exporter",
       "../rtc_base",
       "../rtc_base:checks",
@@ -601,6 +595,19 @@ if (rtc_include_tests && !build_with_chromium) {
     absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
   }
 
+  if (rtc_enable_protobuf) {
+    rtc_library("perf_test_histogram_writer_unittest") {
+      testonly = true
+      sources = [ "testsupport/perf_test_histogram_writer_unittest.cc" ]
+      deps = [
+        ":perf_test_result_writer",
+        ":test_support",
+        "../api/test/metrics:metric",
+        "//third_party/catapult/tracing/tracing:histogram",
+      ]
+    }
+  }
+
   rtc_test("test_support_unittests") {
     deps = [
       ":call_config_utils",
@@ -611,7 +618,6 @@ if (rtc_include_tests && !build_with_chromium) {
       ":fileutils_unittests",
       ":fixed_fps_video_frame_writer_adapter_test",
       ":frame_generator_impl",
-      ":perf_test",
       ":rtc_expect_death",
       ":rtp_test_utils",
       ":run_loop",
@@ -628,6 +634,7 @@ if (rtc_include_tests && !build_with_chromium) {
       "../api:scoped_refptr",
       "../api:simulcast_test_fixture_api",
       "../api/task_queue:task_queue_test",
+      "../api/test/metrics:metric",
       "../api/test/video:function_video_factory",
       "../api/units:time_delta",
       "../api/video:encoded_image",
@@ -669,7 +676,6 @@ if (rtc_include_tests && !build_with_chromium) {
       "rtp_file_writer_unittest.cc",
       "run_loop_unittest.cc",
       "testsupport/ivf_video_frame_generator_unittest.cc",
-      "testsupport/perf_test_unittest.cc",
       "testsupport/test_artifacts_unittest.cc",
       "testsupport/video_frame_writer_unittest.cc",
       "testsupport/y4m_frame_reader_unittest.cc",
@@ -679,8 +685,7 @@ if (rtc_include_tests && !build_with_chromium) {
     ]
 
     if (rtc_enable_protobuf) {
-      sources += [ "testsupport/perf_test_histogram_writer_unittest.cc" ]
-      deps += [ "//third_party/catapult/tracing/tracing:histogram" ]
+      deps += [ ":perf_test_histogram_writer_unittest" ]
     }
 
     data = test_support_unittests_resources
