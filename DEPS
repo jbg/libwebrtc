@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '2652ae0313a4565484aed75b7197f66d48049699',
+  'chromium_revision': 'd2cbab5faf4b16c9e47a9c26b0f0302238a3cd92',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -51,9 +51,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@e8d25a90b2cd3fa5e0b2785a3192e08d38edeb20',
+    'https://chromium.googlesource.com/chromium/src/testing@7b6ba87ea3955509e9c9205c24c7f313e7f41fa0',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@c53b0dbafdbfc0375ab2919dd2c0d47a26f11681',
+    'https://chromium.googlesource.com/chromium/src/third_party@f4beb1f56a699d23cb7309fa871e846baa2ab3b7',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -229,7 +229,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@865ce2ab0b69f9bf7ebd09bc5b0e493d08ad1da3',
+    'https://android.googlesource.com/platform/external/perfetto.git@5d05254ce3d2e578b6a08642d2e6997c12665304',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@9d6d0624d7943a09cc0be9df1a7402522989ac1a',
   'src/third_party/libyuv':
@@ -278,7 +278,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@611b3fb47eba41d03671a83251f31dfe5e5f4687',
+    'https://chromium.googlesource.com/chromium/src/tools@ab58c68f2ced8676fa0f995f198cdc4c35a35a55',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
