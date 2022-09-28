@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43371ea2_c597f999",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-09-28T08:35:59Z",
+      "side": 1,
+      "message": "Since the constant is now 0, would it make more sense to simply remove all the related code and if-branches?",
+      "revId": "dcbcdf014b0f982058c2dda26d71618c0756b7b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "218bb1d5_2c5ad4ea",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-09-28T08:35:59Z",
+      "side": 1,
+      "message": "decoders",
+      "range": {
+        "startLine": 69,
+        "startChar": 13,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "dcbcdf014b0f982058c2dda26d71618c0756b7b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
