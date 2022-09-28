@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25d24309_a505ed11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-09-28T10:51:25Z",
+      "side": 1,
+      "message": "I guess you know where the downstream dependency is now.\n\nI would recommend NOT moving these files unless you can get rid of the downstream dependency - we don\u0027t want any more files outside api/ depended on by external projects.",
+      "revId": "24afd092e42b6ff79ed670b05d35e8c404687e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
