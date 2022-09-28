@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c20c18f0_f0bb4ed8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-09-28T16:06:44Z",
+      "side": 1,
+      "message": "Åsa, could you take a look as OWNER?",
+      "revId": "eeb85c9f432c53ff6eb8177eb2de2b398ea582dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
