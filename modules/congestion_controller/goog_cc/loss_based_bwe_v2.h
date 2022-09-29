@@ -27,8 +27,20 @@
 
 namespace webrtc {
 
+enum class LossBasedState {
+  kIncreasing = 0,
+  kDecreasing = 1,
+  kDelayBasedEstimate = 2
+};
+
 class LossBasedBweV2 {
  public:
+  struct Result {
+    Result();
+    ~Result() = default;
+    DataRate bandwidth_estimate = DataRate::Zero();
+    LossBasedState state = LossBasedState::kDelayBasedEstimate;
+  };
   // Creates a disabled `LossBasedBweV2` if the
   // `key_value_config` is not valid.
   explicit LossBasedBweV2(const FieldTrialsView* key_value_config);
@@ -44,15 +56,17 @@ class LossBasedBweV2 {
   bool IsReady() const;
 
   // Returns `DataRate::PlusInfinity` if no BWE can be calculated.
-  DataRate GetBandwidthEstimate(DataRate delay_based_limit) const;
+  Result GetLossBasedResult(DataRate delay_based_limit) const;
 
   void SetAcknowledgedBitrate(DataRate acknowledged_bitrate);
   void SetBandwidthEstimate(DataRate bandwidth_estimate);
+  void SetProbeBitrate(absl::optional<DataRate> probe_bitrate);
 
   void UpdateBandwidthEstimate(
       rtc::ArrayView<const PacketResult> packet_results,
       DataRate delay_based_estimate,
-      BandwidthUsage delay_detector_state);
+      BandwidthUsage delay_detector_state,
+      absl::optional<DataRate> probe_bitrate);
 
  private:
   struct ChannelParameters {
@@ -92,6 +106,7 @@ class LossBasedBweV2 {
     TimeDelta delayed_increase_window = TimeDelta::Zero();
     bool use_acked_bitrate_only_when_overusing = false;
     bool not_increase_if_inherent_loss_less_than_average_loss = false;
+    bool probe_integration_enabled = false;
   };
 
   struct Derivatives {
@@ -152,6 +167,14 @@ class LossBasedBweV2 {
       const std::vector<PacketResult>& packet_feedbacks,
       Timestamp at_time);
   void UpdateDelayDetector(BandwidthUsage delay_detector_state);
+  void BoundBestCandidate(ChannelParameters& best_candidate);
+  void UpdateCurrentBandwidthLimit(const DataRate& delay_based_estimate);
+  void MaybeUpdateEstimate(const ChannelParameters& best_candidate,
+                           const DataRate& delay_based_estimate);
+  void UpdateEstimateToBestCandidate(const ChannelParameters& best_candidate,
+                                     const DataRate& delay_based_estimate);
+  bool IsEstimateIncreasingWhenLossLimited(
+      const ChannelParameters& best_candidate);
 
   absl::optional<DataRate> acknowledged_bitrate_;
   absl::optional<Config> config_;
@@ -168,6 +191,8 @@ class LossBasedBweV2 {
   Timestamp recovering_after_loss_timestamp_ = Timestamp::MinusInfinity();
   DataRate bandwidth_limit_in_current_window_ = DataRate::PlusInfinity();
   bool limited_due_to_loss_candidate_ = false;
+  LossBasedState current_state_ = LossBasedState::kDelayBasedEstimate;
+  DataRate probe_bitrate_ = DataRate::PlusInfinity();
 };
 
 }  // namespace webrtc
