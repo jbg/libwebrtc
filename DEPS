@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'd70c946a5dcc687a20d59aa0585acec77153429f',
+  'chromium_revision': '67d0d5f23e2080d2917c384e50392c57b5b2f287',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -40,7 +40,7 @@ vars = {
 deps = {
   # TODO(kjellander): Move this to be Android-only.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@bcdec102865fe573485cc3cdf5a9b831ca51bc03',
+    'https://chromium.googlesource.com/chromium/src/base@ba0016c2bb091fb2bbcfaba88176f7af87ba0600',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@2d2482275fd42c4bd89ba741299161bad6a231c9',
   'src/buildtools':
@@ -51,13 +51,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@73270e0a31f82d27e1b5375ce244144a212656e3',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@88b9ae751537ae77e29d383ba6de35e41c5ccd2c',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@8bc0639ffe779c8f2c07d5373a791149e5bddde5',
+    'https://chromium.googlesource.com/chromium/src/testing@5e880b26ef3c4bd251b862afd114b9eef4cf8cca',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@9ce643dc004eb7b24cb8fde61907f8835faaa941',
+    'https://chromium.googlesource.com/chromium/src/third_party@2b879b9dd9c78e297719bf25e9a741312ac7a5a1',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -292,7 +292,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@ba47770600567bf80a01823243bc3baf5d9e30f3',
+    'https://chromium.googlesource.com/chromium/src/tools@e7c098afdd914e969357907a627bc6e01d87d79b',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
@@ -1829,7 +1829,18 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/org_checkerframework_checker_qual',
-              'version': 'version:2@3.22.1.cr1',
+              'version': 'version:2@3.25.0.cr1',
+          },
+      ],
+      'condition': 'checkout_android',
+      'dep_type': 'cipd',
+  },
+
+  'src/third_party/android_deps/libs/org_checkerframework_checker_util': {
+      'packages': [
+          {
+              'package': 'chromium/third_party/android_deps/libs/org_checkerframework_checker_util',
+              'version': 'version:2@3.25.0.cr1',
           },
       ],
       'condition': 'checkout_android',
