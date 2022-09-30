@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28f29e2e_f3837a55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-09-30T15:40:44Z",
+      "side": 1,
+      "message": "Please?",
+      "revId": "00108e45e30b0fa5e1fe37da57722ddc61d028bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa3ba9ef_816613d7",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-09-30T15:40:44Z",
+      "side": 1,
+      "message": "sprang@ does pacer actually block for a period of time somewhere ? \nSounds like something we need to disable in our experiment.",
+      "range": {
+        "startLine": 346,
+        "startChar": 33,
+        "endLine": 346,
+        "endChar": 60
+      },
+      "revId": "00108e45e30b0fa5e1fe37da57722ddc61d028bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
