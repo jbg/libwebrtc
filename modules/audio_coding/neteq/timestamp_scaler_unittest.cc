@@ -10,13 +10,18 @@
 
 #include "modules/audio_coding/neteq/timestamp_scaler.h"
 
+#include <stdlib.h>
+
 #include "api/audio_codecs/builtin_audio_decoder_factory.h"
 #include "modules/audio_coding/neteq/mock/mock_decoder_database.h"
 #include "modules/audio_coding/neteq/packet.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
+#include "test/mock_audio_decoder.h"
+#include "test/mock_audio_decoder_factory.h"
 
 using ::testing::_;
+using ::testing::Invoke;
 using ::testing::Return;
 using ::testing::ReturnNull;
 
@@ -300,6 +305,74 @@ TEST(TimestampScaler, TestOpusLargeStep) {
     // Scale back.
     EXPECT_EQ(external_timestamp, scaler.ToExternal(internal_timestamp));
     internal_timestamp += kStep;
+  }
+
+  EXPECT_CALL(db, Die());  // Called when database object is deleted.
+}
+
+TEST(TimestampScaler, TestSmallerInternal) {
+  MockDecoderDatabase db;
+  auto factory = rtc::make_ref_counted<MockAudioDecoderFactory>();
+
+  auto* decoder = new MockAudioDecoder;
+  EXPECT_CALL(*factory, MakeAudioDecoderMock(_, _, _))
+      .WillOnce(Invoke([decoder](const SdpAudioFormat& format,
+                                 absl::optional<AudioCodecPairId> codec_pair_id,
+                                 std::unique_ptr<AudioDecoder>* dec) {
+        EXPECT_EQ("fake", format.name);
+        dec->reset(decoder);
+      }));
+
+  EXPECT_CALL(*decoder, SampleRateHz()).WillRepeatedly(Return(16000));
+
+  const DecoderDatabase::DecoderInfo info(SdpAudioFormat("fake", 48000, 2),
+                                          absl::nullopt, factory.get());
+  static const uint8_t kRtpPayloadType = 17;
+  EXPECT_CALL(db, GetDecoderInfo(kRtpPayloadType))
+      .WillRepeatedly(Return(&info));
+
+  TimestampScaler scaler(db);
+  // Test both sides of the timestamp wrap-around.
+  static const uint32_t kStep = 960;
+  uint32_t external_timestamp = 0;
+  // `external_timestamp` will be a large positive value.
+  external_timestamp = external_timestamp - 5 * kStep;
+  uint32_t internal_timestamp = external_timestamp;
+  for (; external_timestamp != 5 * kStep; external_timestamp += kStep) {
+    // Scale to internal timestamp.
+    EXPECT_EQ(internal_timestamp,
+              scaler.ToInternal(external_timestamp, kRtpPayloadType));
+    // Scale back.
+    EXPECT_EQ(external_timestamp, scaler.ToExternal(internal_timestamp));
+    internal_timestamp += kStep / 3;
+  }
+
+  // late packets
+  external_timestamp -= 2 * kStep;
+  internal_timestamp -= 2 * (kStep / 3);
+
+  EXPECT_EQ(internal_timestamp,
+            scaler.ToInternal(external_timestamp, kRtpPayloadType));
+  EXPECT_EQ(external_timestamp, scaler.ToExternal(internal_timestamp));
+
+  external_timestamp -= 8 * kStep;
+  internal_timestamp -= 8 * (kStep / 3);
+
+  EXPECT_EQ(internal_timestamp,
+            scaler.ToInternal(external_timestamp, kRtpPayloadType));
+  EXPECT_EQ(external_timestamp, scaler.ToExternal(internal_timestamp));
+
+  external_timestamp += 10 * kStep;
+  internal_timestamp += 10 * (kStep / 3);
+
+  // iterate backwards
+  for (int i = 0; i < 10; external_timestamp -= kStep, i++) {
+    // Scale to internal timestamp.
+    EXPECT_EQ(internal_timestamp,
+              scaler.ToInternal(external_timestamp, kRtpPayloadType));
+    // Scale back.
+    EXPECT_EQ(external_timestamp, scaler.ToExternal(internal_timestamp));
+    internal_timestamp -= kStep / 3;
   }
 
   EXPECT_CALL(db, Die());  // Called when database object is deleted.
