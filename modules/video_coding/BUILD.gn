@@ -196,6 +196,22 @@ rtc_library("frame_buffer2") {
   absl_deps = [ "//third_party/abseil-cpp/absl/container:inlined_vector" ]
 }
 
+rtc_library("black_frame_decoder") {
+  sources = [
+    "black_frame_decoder.cc",
+    "black_frame_decoder.h",
+  ]
+  deps = [
+    ":video_codec_interface",
+    ":video_coding_utility",
+    "../../api:scoped_refptr",
+    "../../api/video:video_frame",
+    "../../api/video_codecs:video_codecs_api",
+    "../../common_video",
+    "../../rtc_base:logging",
+  ]
+}
+
 rtc_library("video_coding") {
   visibility = [ "*" ]
   sources = [
@@ -236,6 +252,7 @@ rtc_library("video_coding") {
   ]
 
   deps = [
+    ":black_frame_decoder",
     ":codec_globals_headers",
     ":encoded_frame",
     ":frame_helpers",
@@ -1117,6 +1134,7 @@ if (rtc_include_tests) {
     testonly = true
 
     sources = [
+      "black_frame_decoder_unittest.cc",
       "chain_diff_calculator_unittest.cc",
       "codecs/test/videocodec_test_fixture_config_unittest.cc",
       "codecs/test/videocodec_test_stats_impl_unittest.cc",
@@ -1168,6 +1186,7 @@ if (rtc_include_tests) {
     }
 
     deps = [
+      ":black_frame_decoder",
       ":chain_diff_calculator",
       ":codec_globals_headers",
       ":encoded_frame",
