@@ -12,6 +12,7 @@
 
 #include "api/audio_codecs/audio_format.h"
 #include "modules/audio_coding/neteq/decoder_database.h"
+#include "modules/include/module_common_types_public.h"
 #include "rtc_base/checks.h"
 
 namespace webrtc {
@@ -60,7 +61,13 @@ uint32_t TimestampScaler::ToInternal(uint32_t external_timestamp,
       internal_ref_ = external_timestamp;
       first_packet_received_ = true;
     }
-    const int64_t external_diff = int64_t{external_timestamp} - external_ref_;
+
+    // The right side is uint32_t arithmetic
+    int64_t external_diff = external_timestamp - external_ref_;
+    if (IsNewerTimestamp(external_ref_, external_timestamp)) {
+      external_diff -= (1L << 32);
+    }
+
     RTC_DCHECK_GT(denominator_, 0);
     external_ref_ = external_timestamp;
     internal_ref_ += (external_diff * numerator_) / denominator_;
