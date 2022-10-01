@@ -39,6 +39,30 @@
       },
       "revId": "00108e45e30b0fa5e1fe37da57722ddc61d028bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6deda247_044d9aa2",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-10-01T16:07:32Z",
+      "side": 1,
+      "message": "It doesn\u0027t us an actual os sleep() function if that\u0027s your worry. This is about the holdback window where avoid scheduling a delayed task too short a time into the future.\nSo I don\u0027t think there\u0027s any action needed for this experiment?",
+      "parentUuid": "fa3ba9ef_816613d7",
+      "range": {
+        "startLine": 346,
+        "startChar": 33,
+        "endLine": 346,
+        "endChar": 60
+      },
+      "revId": "00108e45e30b0fa5e1fe37da57722ddc61d028bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
