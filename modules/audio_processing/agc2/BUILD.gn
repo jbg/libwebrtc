@@ -126,6 +126,20 @@ rtc_library("gain_applier") {
   ]
 }
 
+rtc_library("input_volume_controller") {
+  sources = [
+    "speech_probability_buffer.cc",
+    "speech_probability_buffer.h",
+  ]
+
+  visibility = [
+    "..:gain_controller2",
+    "./*",
+  ]
+
+  deps = [ "../../../rtc_base:checks" ]
+}
+
 rtc_library("noise_level_estimator") {
   sources = [
     "noise_level_estimator.cc",
@@ -188,6 +202,15 @@ rtc_library("cpu_features") {
     "../../../rtc_base:stringutils",
     "../../../rtc_base/system:arch",
     "../../../system_wrappers",
+  ]
+}
+
+rtc_library("input_volume_controller_unittests") {
+  testonly = true
+  sources = [ "speech_probability_buffer_unittest.cc" ]
+  deps = [
+    ":input_volume_controller",
+    "../../../test:test_support",
   ]
 }
 
