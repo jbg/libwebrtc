@@ -12,6 +12,7 @@
 
 #include "api/audio_codecs/audio_format.h"
 #include "modules/audio_coding/neteq/decoder_database.h"
+#include "modules/include/module_common_types_public.h"
 #include "rtc_base/checks.h"
 
 namespace webrtc {
@@ -60,7 +61,13 @@ uint32_t TimestampScaler::ToInternal(uint32_t external_timestamp,
       internal_ref_ = external_timestamp;
       first_packet_received_ = true;
     }
-    const int64_t external_diff = int64_t{external_timestamp} - external_ref_;
+
+    // The right side is uint32_t arithmetic
+    int64_t external_diff = external_timestamp - external_ref_;
+    if (IsNewerTimestamp(external_ref_, external_timestamp)) {
+      external_diff -= (1L << 32);
+    }
+
     RTC_DCHECK_GT(denominator_, 0);
     external_ref_ = external_timestamp;
     internal_ref_ += (external_diff * numerator_) / denominator_;
@@ -76,7 +83,11 @@ uint32_t TimestampScaler::ToExternal(uint32_t internal_timestamp) const {
     // Not initialized, or scale factor is 1.
     return internal_timestamp;
   } else {
-    const int64_t internal_diff = int64_t{internal_timestamp} - internal_ref_;
+    // The right side is uint32_t arithmetic
+    int64_t internal_diff = internal_timestamp - internal_ref_;
+    if (IsNewerTimestamp(internal_ref_, internal_timestamp)) {
+      internal_diff -= (1L << 32);
+    }
     RTC_DCHECK_GT(numerator_, 0);
     // Do not update references in this method.
     // Switch `denominator_` and `numerator_` to convert the other way.
