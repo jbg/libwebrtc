@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0eb8867_c054389d",
+        "filename": "rtc_tools/video_replay.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-10-03T15:00:59Z",
+      "side": 1,
+      "message": "I am not sure I get the comment.\n\nAre we advancing 0us just to process the last packet?",
+      "range": {
+        "startLine": 581,
+        "startChar": 4,
+        "endLine": 584,
+        "endChar": 26
+      },
+      "revId": "2bef7e288afca69364ac775938de6f92c5b84d9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
