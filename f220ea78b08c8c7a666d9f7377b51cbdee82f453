@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b456ba0e_87b12763",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-03T11:41:14Z",
+      "side": 1,
+      "message": "Perhaps instead of the description, add a helper function UsingWorkerThread\n\n  bool UsingWorkerThread(absl::string_view field_trial) {\n    return field_trial.find(\"Enabled\") !\u003d std::string::npos;\n  }\n  \nThen in the test description helper use that function. I think this is a bit more clear than using the description as a helper for asserting in the tests.",
+      "range": {
+        "startLine": 192,
+        "startChar": 14,
+        "endLine": 192,
+        "endChar": 25
+      },
+      "revId": "f220ea78b08c8c7a666d9f7377b51cbdee82f453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aaa1c57_32ae34c3",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-03T11:41:14Z",
+      "side": 1,
+      "message": "This can be a lambda instead of a struct.",
+      "range": {
+        "startLine": 215,
+        "startChar": 25,
+        "endLine": 215,
+        "endChar": 43
+      },
+      "revId": "f220ea78b08c8c7a666d9f7377b51cbdee82f453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91c0f38c_d00497bb",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-03T11:41:14Z",
+      "side": 1,
+      "message": "It is unclear to me why this needed to change.",
+      "range": {
+        "startLine": 298,
+        "startChar": 26,
+        "endLine": 298,
+        "endChar": 40
+      },
+      "revId": "f220ea78b08c8c7a666d9f7377b51cbdee82f453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
