@@ -279,6 +279,7 @@ if (!is_component_build) {
       "../test:video_test_support",
       "//third_party/abseil-cpp/absl/flags:flag",
       "//third_party/abseil-cpp/absl/flags:parse",
+      "//third_party/abseil-cpp/absl/strings:strings",
     ]
     if (build_with_chromium) {
       # When building from Chromium, WebRTC's metrics and field trial

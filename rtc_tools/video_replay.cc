@@ -16,6 +16,7 @@
 
 #include "absl/flags/flag.h"
 #include "absl/flags/parse.h"
+#include "absl/strings/string_view.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/test/video/function_video_decoder_factory.h"
@@ -144,15 +145,15 @@ ABSL_FLAG(uint32_t, render_height, 480, "Height of render window");
 
 namespace {
 
-static bool ValidatePayloadType(int32_t payload_type) {
+bool ValidatePayloadType(int32_t payload_type) {
   return payload_type > 0 && payload_type <= 127;
 }
 
-static bool ValidateOptionalPayloadType(int32_t payload_type) {
+bool ValidateOptionalPayloadType(int32_t payload_type) {
   return payload_type == -1 || ValidatePayloadType(payload_type);
 }
 
-static bool ValidateRtpHeaderExtensionId(int32_t extension_id) {
+bool ValidateRtpHeaderExtensionId(int32_t extension_id) {
   return extension_id >= -1 && extension_id < 15;
 }
 
@@ -160,87 +161,87 @@ bool ValidateInputFilenameNotEmpty(const std::string& string) {
   return !string.empty();
 }
 
-static int MediaPayloadType() {
+int MediaPayloadType() {
   return absl::GetFlag(FLAGS_media_payload_type);
 }
 
-static int RedPayloadType() {
+int RedPayloadType() {
   return absl::GetFlag(FLAGS_red_payload_type);
 }
 
-static int UlpfecPayloadType() {
+int UlpfecPayloadType() {
   return absl::GetFlag(FLAGS_ulpfec_payload_type);
 }
 
-static int FlexfecPayloadType() {
+int FlexfecPayloadType() {
   return absl::GetFlag(FLAGS_flexfec_payload_type);
 }
 
-static int MediaPayloadTypeRtx() {
+int MediaPayloadTypeRtx() {
   return absl::GetFlag(FLAGS_media_payload_type_rtx);
 }
 
-static int RedPayloadTypeRtx() {
+int RedPayloadTypeRtx() {
   return absl::GetFlag(FLAGS_red_payload_type_rtx);
 }
 
-static uint32_t Ssrc() {
+uint32_t Ssrc() {
   return absl::GetFlag(FLAGS_ssrc);
 }
 
-static uint32_t SsrcRtx() {
+uint32_t SsrcRtx() {
   return absl::GetFlag(FLAGS_ssrc_rtx);
 }
 
-static uint32_t SsrcFlexfec() {
+uint32_t SsrcFlexfec() {
   return absl::GetFlag(FLAGS_ssrc_flexfec);
 }
 
-static int AbsSendTimeId() {
+int AbsSendTimeId() {
   return absl::GetFlag(FLAGS_abs_send_time_id);
 }
 
-static int TransmissionOffsetId() {
+int TransmissionOffsetId() {
   return absl::GetFlag(FLAGS_transmission_offset_id);
 }
 
-static std::string InputFile() {
+std::string InputFile() {
   return absl::GetFlag(FLAGS_input_file);
 }
 
-static std::string ConfigFile() {
+std::string ConfigFile() {
   return absl::GetFlag(FLAGS_config_file);
 }
 
-static std::string OutBase() {
+std::string OutBase() {
   return absl::GetFlag(FLAGS_out_base);
 }
 
-static std::string DecoderBitstreamFilename() {
+std::string DecoderBitstreamFilename() {
   return absl::GetFlag(FLAGS_decoder_bitstream_filename);
 }
 
-static std::string IVFFilename() {
+std::string IVFFilename() {
   return absl::GetFlag(FLAGS_decoder_ivf_filename);
 }
 
-static std::string Codec() {
+std::string Codec() {
   return absl::GetFlag(FLAGS_codec);
 }
 
-static uint32_t RenderWidth() {
+uint32_t RenderWidth() {
   return absl::GetFlag(FLAGS_render_width);
 }
 
-static uint32_t RenderHeight() {
+uint32_t RenderHeight() {
   return absl::GetFlag(FLAGS_render_height);
 }
-
 }  // namespace
 
 namespace webrtc {
+namespace {
 
-static const uint32_t kReceiverLocalSsrc = 0x123456;
+const uint32_t kReceiverLocalSsrc = 0x123456;
 
 class FileRenderPassthrough : public rtc::VideoSinkInterface<VideoFrame> {
  public:
@@ -333,38 +334,204 @@ class DecoderIvfFileWriter : public test::FakeDecoder {
   VideoCodecType video_codec_type_;
 };
 
+// Holds all the shared memory structures required for a receive stream. This
+// structure is used to prevent members being deallocated before the replay
+// has been finished.
+struct StreamState {
+  test::NullTransport transport;
+  std::vector<std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>>> sinks;
+  std::vector<VideoReceiveStreamInterface*> receive_streams;
+  std::vector<FlexfecReceiveStream*> flexfec_streams;
+  std::unique_ptr<VideoDecoderFactory> decoder_factory;
+};
+
+// Loads multiple configurations from the provided configuration file.
+std::unique_ptr<StreamState> ConfigureFromFile(const std::string& config_path,
+                                               Call* call) {
+  auto stream_state = std::make_unique<StreamState>();
+  // Parse the configuration file.
+  std::ifstream config_file(config_path);
+  std::stringstream raw_json_buffer;
+  raw_json_buffer << config_file.rdbuf();
+  std::string raw_json = raw_json_buffer.str();
+  Json::CharReaderBuilder builder;
+  Json::Value json_configs;
+  std::string error_message;
+  std::unique_ptr<Json::CharReader> json_reader(builder.newCharReader());
+  if (!json_reader->parse(raw_json.data(), raw_json.data() + raw_json.size(),
+                          &json_configs, &error_message)) {
+    fprintf(stderr, "Error parsing JSON config\n");
+    fprintf(stderr, "%s\n", error_message.c_str());
+    return nullptr;
+  }
+
+  stream_state->decoder_factory = std::make_unique<InternalDecoderFactory>();
+  size_t config_count = 0;
+  for (const auto& json : json_configs) {
+    // Create the configuration and parse the JSON into the config.
+    auto receive_config =
+        ParseVideoReceiveStreamJsonConfig(&(stream_state->transport), json);
+    // Instantiate the underlying decoder.
+    for (auto& decoder : receive_config.decoders) {
+      decoder = test::CreateMatchingDecoder(decoder.payload_type,
+                                            decoder.video_format.name);
+    }
+    // Create a window for this config.
+    std::stringstream window_title;
+    window_title << "Playback Video (" << config_count++ << ")";
+    stream_state->sinks.emplace_back(test::VideoRenderer::Create(
+        window_title.str().c_str(), RenderWidth(), RenderHeight()));
+    // Create a receive stream for this config.
+    receive_config.renderer = stream_state->sinks.back().get();
+    receive_config.decoder_factory = stream_state->decoder_factory.get();
+    stream_state->receive_streams.emplace_back(
+        call->CreateVideoReceiveStream(std::move(receive_config)));
+  }
+  return stream_state;
+}
+
+// Loads the base configuration from flags passed in on the commandline.
+std::unique_ptr<StreamState> ConfigureFromFlags(
+    const std::string& rtp_dump_path,
+    Call* call) {
+  auto stream_state = std::make_unique<StreamState>();
+  // Create the video renderers. We must add both to the stream state to keep
+  // them from deallocating.
+  std::stringstream window_title;
+  window_title << "Playback Video (" << rtp_dump_path << ")";
+  std::unique_ptr<test::VideoRenderer> playback_video(
+      test::VideoRenderer::Create(window_title.str().c_str(), RenderWidth(),
+                                  RenderHeight()));
+  auto file_passthrough =
+      std::make_unique<FileRenderPassthrough>(OutBase(), playback_video.get());
+  stream_state->sinks.push_back(std::move(playback_video));
+  stream_state->sinks.push_back(std::move(file_passthrough));
+  // Setup the configuration from the flags.
+  VideoReceiveStreamInterface::Config receive_config(
+      &(stream_state->transport));
+  receive_config.rtp.remote_ssrc = Ssrc();
+  receive_config.rtp.local_ssrc = kReceiverLocalSsrc;
+  receive_config.rtp.rtx_ssrc = SsrcRtx();
+  receive_config.rtp.rtx_associated_payload_types[MediaPayloadTypeRtx()] =
+      MediaPayloadType();
+  receive_config.rtp.rtx_associated_payload_types[RedPayloadTypeRtx()] =
+      RedPayloadType();
+  receive_config.rtp.ulpfec_payload_type = UlpfecPayloadType();
+  receive_config.rtp.red_payload_type = RedPayloadType();
+  receive_config.rtp.nack.rtp_history_ms = 1000;
+
+  if (FlexfecPayloadType() != -1) {
+    receive_config.rtp.protected_by_flexfec = true;
+    webrtc::FlexfecReceiveStream::Config flexfec_config(
+        &(stream_state->transport));
+    flexfec_config.payload_type = FlexfecPayloadType();
+    flexfec_config.protected_media_ssrcs.push_back(Ssrc());
+    flexfec_config.rtp.remote_ssrc = SsrcFlexfec();
+    FlexfecReceiveStream* flexfec_stream =
+        call->CreateFlexfecReceiveStream(flexfec_config);
+    receive_config.rtp.packet_sink_ = flexfec_stream;
+    stream_state->flexfec_streams.push_back(flexfec_stream);
+  }
+
+  if (TransmissionOffsetId() != -1) {
+    receive_config.rtp.extensions.push_back(RtpExtension(
+        RtpExtension::kTimestampOffsetUri, TransmissionOffsetId()));
+  }
+  if (AbsSendTimeId() != -1) {
+    receive_config.rtp.extensions.push_back(
+        RtpExtension(RtpExtension::kAbsSendTimeUri, AbsSendTimeId()));
+  }
+  receive_config.renderer = stream_state->sinks.back().get();
+
+  // Setup the receiving stream
+  VideoReceiveStreamInterface::Decoder decoder;
+  decoder = test::CreateMatchingDecoder(MediaPayloadType(), Codec());
+  if (!DecoderBitstreamFilename().empty()) {
+    // Replace decoder with file writer if we're writing the bitstream to a
+    // file instead.
+    stream_state->decoder_factory =
+        std::make_unique<test::FunctionVideoDecoderFactory>([]() {
+          return std::make_unique<DecoderBitstreamFileWriter>(
+              DecoderBitstreamFilename().c_str());
+        });
+  } else if (!IVFFilename().empty()) {
+    // Replace decoder with file writer if we're writing the ivf to a
+    // file instead.
+    stream_state->decoder_factory =
+        std::make_unique<test::FunctionVideoDecoderFactory>([]() {
+          return std::make_unique<DecoderIvfFileWriter>(IVFFilename().c_str(),
+                                                        Codec());
+        });
+  } else {
+    stream_state->decoder_factory = std::make_unique<InternalDecoderFactory>();
+  }
+  receive_config.decoder_factory = stream_state->decoder_factory.get();
+  receive_config.decoders.push_back(decoder);
+
+  stream_state->receive_streams.emplace_back(
+      call->CreateVideoReceiveStream(std::move(receive_config)));
+  return stream_state;
+}
+
+std::unique_ptr<test::RtpFileReader> CreateRtpReader(
+    const std::string& rtp_dump_path) {
+  std::unique_ptr<test::RtpFileReader> rtp_reader(test::RtpFileReader::Create(
+      test::RtpFileReader::kRtpDump, rtp_dump_path));
+  if (!rtp_reader) {
+    rtp_reader.reset(
+        test::RtpFileReader::Create(test::RtpFileReader::kPcap, rtp_dump_path));
+    if (!rtp_reader) {
+      fprintf(stderr,
+              "Couldn't open input file as either a rtpdump or .pcap. Note "
+              "that .pcapng is not supported.\nTrying to interpret the file as "
+              "length/packet interleaved.\n");
+      rtp_reader.reset(test::RtpFileReader::Create(
+          test::RtpFileReader::kLengthPacketInterleaved, rtp_dump_path));
+      if (!rtp_reader) {
+        fprintf(stderr,
+                "Unable to open input file with any supported format\n");
+        return nullptr;
+      }
+    }
+  }
+  return rtp_reader;
+}
+
 // The RtpReplayer is responsible for parsing the configuration provided by the
 // user, setting up the windows, receive streams and decoders and then replaying
 // the provided RTP dump.
 class RtpReplayer final {
  public:
-  // Replay a rtp dump with an optional json configuration.
-  static void Replay(const std::string& replay_config_path,
-                     const std::string& rtp_dump_path) {
+  RtpReplayer(absl::string_view replay_config_path,
+              absl::string_view rtp_dump_path,
+              std::unique_ptr<FieldTrialsView> field_trials)
+      : replay_config_path_(replay_config_path),
+        rtp_dump_path_(rtp_dump_path),
+        field_trials_(std::move(field_trials)),
+        task_queue_factory_(CreateDefaultTaskQueueFactory(field_trials_.get())),
+        task_queue_(task_queue_factory_->CreateTaskQueue(
+            "worker_task_queue",
+            TaskQueueFactory::Priority::NORMAL)) {}
+
+  void Run() {
     webrtc::RtcEventLogNull event_log;
     Call::Config call_config(&event_log);
-    call_config.trials = new FieldTrialBasedConfig();
-
-    std::unique_ptr<webrtc::TaskQueueFactory> task_queue_factory =
-        webrtc::CreateDefaultTaskQueueFactory(call_config.trials);
-    auto worker_thread = task_queue_factory->CreateTaskQueue(
-        "worker_thread", TaskQueueFactory::Priority::NORMAL);
-    rtc::Event sync_event(/*manual_reset=*/false,
-                          /*initially_signalled=*/false);
-    call_config.task_queue_factory = task_queue_factory.get();
+    call_config.trials = field_trials_.get();
+    call_config.task_queue_factory = task_queue_factory_.get();
 
     // Creation of the streams must happen inside a task queue because it is
     // resued as a worker thread.
     std::unique_ptr<Call> call;
     std::unique_ptr<StreamState> stream_state;
-    worker_thread->PostTask([&]() {
+    rtc::Event sync_event;
+    task_queue_->PostTask([&]() {
       call.reset(Call::Create(call_config));
 
       // Attempt to load the configuration
-      if (replay_config_path.empty()) {
-        stream_state = ConfigureFromFlags(rtp_dump_path, call.get());
+      if (replay_config_path_.empty()) {
+        stream_state = ConfigureFromFlags(rtp_dump_path_, call.get());
       } else {
-        stream_state = ConfigureFromFile(replay_config_path, call.get());
+        stream_state = ConfigureFromFile(replay_config_path_, call.get());
       }
 
       if (stream_state == nullptr) {
@@ -378,21 +545,18 @@ class RtpReplayer final {
       }
       sync_event.Set();
     });
-
-    // Attempt to create an RtpReader from the input file.
-    std::unique_ptr<test::RtpFileReader> rtp_reader =
-        CreateRtpReader(rtp_dump_path);
-
-    // Wait for streams creation.
     sync_event.Wait(/*give_up_after=*/TimeDelta::Seconds(10));
 
+    std::unique_ptr<test::RtpFileReader> rtp_reader =
+        CreateRtpReader(rtp_dump_path_);
+
     if (stream_state != nullptr && rtp_reader != nullptr) {
-      ReplayPackets(call.get(), rtp_reader.get(), worker_thread.get());
+      ReplayPackets(call.get(), rtp_reader.get());
     }
 
     // Destruction of streams and the call must happen on the same thread as
     // their creation.
-    worker_thread->PostTask([&]() {
+    task_queue_->PostTask([&]() {
       for (const auto& receive_stream : stream_state->receive_streams) {
         call->DestroyVideoReceiveStream(receive_stream);
       }
@@ -406,181 +570,13 @@ class RtpReplayer final {
   }
 
  private:
-  // Holds all the shared memory structures required for a receive stream. This
-  // structure is used to prevent members being deallocated before the replay
-  // has been finished.
-  struct StreamState {
-    test::NullTransport transport;
-    std::vector<std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>>> sinks;
-    std::vector<VideoReceiveStreamInterface*> receive_streams;
-    std::vector<FlexfecReceiveStream*> flexfec_streams;
-    std::unique_ptr<VideoDecoderFactory> decoder_factory;
-  };
-
-  // Loads multiple configurations from the provided configuration file.
-  static std::unique_ptr<StreamState> ConfigureFromFile(
-      const std::string& config_path,
-      Call* call) {
-    auto stream_state = std::make_unique<StreamState>();
-    // Parse the configuration file.
-    std::ifstream config_file(config_path);
-    std::stringstream raw_json_buffer;
-    raw_json_buffer << config_file.rdbuf();
-    std::string raw_json = raw_json_buffer.str();
-    Json::CharReaderBuilder builder;
-    Json::Value json_configs;
-    std::string error_message;
-    std::unique_ptr<Json::CharReader> json_reader(builder.newCharReader());
-    if (!json_reader->parse(raw_json.data(), raw_json.data() + raw_json.size(),
-                            &json_configs, &error_message)) {
-      fprintf(stderr, "Error parsing JSON config\n");
-      fprintf(stderr, "%s\n", error_message.c_str());
-      return nullptr;
-    }
-
-    stream_state->decoder_factory = std::make_unique<InternalDecoderFactory>();
-    size_t config_count = 0;
-    for (const auto& json : json_configs) {
-      // Create the configuration and parse the JSON into the config.
-      auto receive_config =
-          ParseVideoReceiveStreamJsonConfig(&(stream_state->transport), json);
-      // Instantiate the underlying decoder.
-      for (auto& decoder : receive_config.decoders) {
-        decoder = test::CreateMatchingDecoder(decoder.payload_type,
-                                              decoder.video_format.name);
-      }
-      // Create a window for this config.
-      std::stringstream window_title;
-      window_title << "Playback Video (" << config_count++ << ")";
-      stream_state->sinks.emplace_back(test::VideoRenderer::Create(
-          window_title.str().c_str(), RenderWidth(), RenderHeight()));
-      // Create a receive stream for this config.
-      receive_config.renderer = stream_state->sinks.back().get();
-      receive_config.decoder_factory = stream_state->decoder_factory.get();
-      stream_state->receive_streams.emplace_back(
-          call->CreateVideoReceiveStream(std::move(receive_config)));
-    }
-    return stream_state;
-  }
-
-  // Loads the base configuration from flags passed in on the commandline.
-  static std::unique_ptr<StreamState> ConfigureFromFlags(
-      const std::string& rtp_dump_path,
-      Call* call) {
-    auto stream_state = std::make_unique<StreamState>();
-    // Create the video renderers. We must add both to the stream state to keep
-    // them from deallocating.
-    std::stringstream window_title;
-    window_title << "Playback Video (" << rtp_dump_path << ")";
-    std::unique_ptr<test::VideoRenderer> playback_video(
-        test::VideoRenderer::Create(window_title.str().c_str(), RenderWidth(),
-                                    RenderHeight()));
-    auto file_passthrough = std::make_unique<FileRenderPassthrough>(
-        OutBase(), playback_video.get());
-    stream_state->sinks.push_back(std::move(playback_video));
-    stream_state->sinks.push_back(std::move(file_passthrough));
-    // Setup the configuration from the flags.
-    VideoReceiveStreamInterface::Config receive_config(
-        &(stream_state->transport));
-    receive_config.rtp.remote_ssrc = Ssrc();
-    receive_config.rtp.local_ssrc = kReceiverLocalSsrc;
-    receive_config.rtp.rtx_ssrc = SsrcRtx();
-    receive_config.rtp.rtx_associated_payload_types[MediaPayloadTypeRtx()] =
-        MediaPayloadType();
-    receive_config.rtp.rtx_associated_payload_types[RedPayloadTypeRtx()] =
-        RedPayloadType();
-    receive_config.rtp.ulpfec_payload_type = UlpfecPayloadType();
-    receive_config.rtp.red_payload_type = RedPayloadType();
-    receive_config.rtp.nack.rtp_history_ms = 1000;
-
-    if (FlexfecPayloadType() != -1) {
-      receive_config.rtp.protected_by_flexfec = true;
-      webrtc::FlexfecReceiveStream::Config flexfec_config(
-          &(stream_state->transport));
-      flexfec_config.payload_type = FlexfecPayloadType();
-      flexfec_config.protected_media_ssrcs.push_back(Ssrc());
-      flexfec_config.rtp.remote_ssrc = SsrcFlexfec();
-      FlexfecReceiveStream* flexfec_stream =
-          call->CreateFlexfecReceiveStream(flexfec_config);
-      receive_config.rtp.packet_sink_ = flexfec_stream;
-      stream_state->flexfec_streams.push_back(flexfec_stream);
-    }
-
-    if (TransmissionOffsetId() != -1) {
-      receive_config.rtp.extensions.push_back(RtpExtension(
-          RtpExtension::kTimestampOffsetUri, TransmissionOffsetId()));
-    }
-    if (AbsSendTimeId() != -1) {
-      receive_config.rtp.extensions.push_back(
-          RtpExtension(RtpExtension::kAbsSendTimeUri, AbsSendTimeId()));
-    }
-    receive_config.renderer = stream_state->sinks.back().get();
-
-    // Setup the receiving stream
-    VideoReceiveStreamInterface::Decoder decoder;
-    decoder = test::CreateMatchingDecoder(MediaPayloadType(), Codec());
-    if (!DecoderBitstreamFilename().empty()) {
-      // Replace decoder with file writer if we're writing the bitstream to a
-      // file instead.
-      stream_state->decoder_factory =
-          std::make_unique<test::FunctionVideoDecoderFactory>([]() {
-            return std::make_unique<DecoderBitstreamFileWriter>(
-                DecoderBitstreamFilename().c_str());
-          });
-    } else if (!IVFFilename().empty()) {
-      // Replace decoder with file writer if we're writing the ivf to a
-      // file instead.
-      stream_state->decoder_factory =
-          std::make_unique<test::FunctionVideoDecoderFactory>([]() {
-            return std::make_unique<DecoderIvfFileWriter>(IVFFilename().c_str(),
-                                                          Codec());
-          });
-    } else {
-      stream_state->decoder_factory =
-          std::make_unique<InternalDecoderFactory>();
-    }
-    receive_config.decoder_factory = stream_state->decoder_factory.get();
-    receive_config.decoders.push_back(decoder);
-
-    stream_state->receive_streams.emplace_back(
-        call->CreateVideoReceiveStream(std::move(receive_config)));
-    return stream_state;
-  }
-
-  static std::unique_ptr<test::RtpFileReader> CreateRtpReader(
-      const std::string& rtp_dump_path) {
-    std::unique_ptr<test::RtpFileReader> rtp_reader(test::RtpFileReader::Create(
-        test::RtpFileReader::kRtpDump, rtp_dump_path));
-    if (!rtp_reader) {
-      rtp_reader.reset(test::RtpFileReader::Create(test::RtpFileReader::kPcap,
-                                                   rtp_dump_path));
-      if (!rtp_reader) {
-        fprintf(
-            stderr,
-            "Couldn't open input file as either a rtpdump or .pcap. Note "
-            "that .pcapng is not supported.\nTrying to interpret the file as "
-            "length/packet interleaved.\n");
-        rtp_reader.reset(test::RtpFileReader::Create(
-            test::RtpFileReader::kLengthPacketInterleaved, rtp_dump_path));
-        if (!rtp_reader) {
-          fprintf(stderr,
-                  "Unable to open input file with any supported format\n");
-          return nullptr;
-        }
-      }
-    }
-    return rtp_reader;
-  }
-
-  static void ReplayPackets(Call* call,
-                            test::RtpFileReader* rtp_reader,
-                            TaskQueueBase* worker_thread) {
+  void ReplayPackets(Call* call, test::RtpFileReader* rtp_reader) {
     int64_t replay_start_ms = -1;
     int num_packets = 0;
     std::map<uint32_t, int> unknown_packets;
-    rtc::Event event(/*manual_reset=*/false, /*initially_signalled=*/false);
     uint32_t start_timestamp = absl::GetFlag(FLAGS_start_timestamp);
     uint32_t stop_timestamp = absl::GetFlag(FLAGS_stop_timestamp);
+    rtc::Event event;
     while (true) {
       int64_t now_ms = rtc::TimeMillis();
       if (replay_start_ms == -1) {
@@ -606,7 +602,7 @@ class RtpReplayer final {
 
       ++num_packets;
       PacketReceiver::DeliveryStatus result = PacketReceiver::DELIVERY_OK;
-      worker_thread->PostTask([&]() {
+      task_queue_->PostTask([&]() {
         MediaType media_type =
             IsRtcpPacket(packet_buffer) ? MediaType::ANY : MediaType::VIDEO;
         result = call->Receiver()->DeliverPacket(media_type,
@@ -642,10 +638,19 @@ class RtpReplayer final {
               it->second);
     }
   }
-};  // class RtpReplayer
+
+  const std::string replay_config_path_;
+  const std::string rtp_dump_path_;
+  std::unique_ptr<FieldTrialsView> field_trials_;
+  std::unique_ptr<webrtc::TaskQueueFactory> task_queue_factory_;
+  std::unique_ptr<TaskQueueBase, TaskQueueDeleter> task_queue_;
+};
+}  // namespace
 
 void RtpReplay() {
-  RtpReplayer::Replay(ConfigFile(), InputFile());
+  RtpReplayer replayer(ConfigFile(), InputFile(),
+                       std::make_unique<FieldTrialBasedConfig>());
+  replayer.Run();
 }
 
 }  // namespace webrtc
