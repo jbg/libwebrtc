@@ -1,0 +1,343 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fa9b830_cc4ca2d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "This will be interesting to see how it works in the end. \n\nThis cl is huge. Can you please split it? \nI suggest to submit the lost_based_bwe_v2 changes first. \nThanks",
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662755b0_13166f3b",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "unused?",
+      "range": {
+        "startLine": 34,
+        "startChar": 48,
+        "endLine": 34,
+        "endChar": 65
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b147967_9975f048",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "does probe_bitrate_ never time out? For how long should a probe be valid?",
+      "range": {
+        "startLine": 178,
+        "startChar": 17,
+        "endLine": 178,
+        "endChar": 31
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d78b9c_d05f622f",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "? So a probe bitrate always decrease? Doesnt this take the min probe bitrate thoughout the call?",
+      "range": {
+        "startLine": 213,
+        "startChar": 6,
+        "endLine": 213,
+        "endChar": 20
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a5dd53_20f6ccfc",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "SetProbeBitrate is only used here. Can you please inline it here to make it more obviouse that it store the min probe bitrate.",
+      "range": {
+        "startLine": 228,
+        "startChar": 2,
+        "endLine": 228,
+        "endChar": 17
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d8ccac4_4d48ab55",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "All of these are only used once. Even though the method becomes super long, I think its easier to read one big method. Especially since the naming of these methods are not super clear.",
+      "range": {
+        "startLine": 261,
+        "startChar": 2,
+        "endLine": 261,
+        "endChar": 20
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fe2734c_4a2ba2a6",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "if limited_due_to_loss_candidate_ is true, delay based estimate is valid and   current_estimate_.loss_limited_bandwidth \u003c delay_based_estimate. Do you really need to check  probe_bitrate_ \u003c delay_based_estimate?",
+      "range": {
+        "startLine": 327,
+        "startChar": 44,
+        "endLine": 327,
+        "endChar": 74
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d90a23ee_212a7c60",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "nope, here probe_bitrate_ is recet.",
+      "range": {
+        "startLine": 331,
+        "startChar": 4,
+        "endLine": 331,
+        "endChar": 18
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "768c546f_dd3b25c2",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "It starts to become a lot of states. \nlimited_due_to_loss_candidate_ seems to be the same thing as current_state !\u003d LossBasedState::kDelayBasedEstimate. Can you please remove limited_due_to_loss_candidate_ ?",
+      "range": {
+        "startLine": 344,
+        "startChar": 4,
+        "endLine": 344,
+        "endChar": 18
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b55b864c_87ddb04b",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "spelling",
+      "range": {
+        "startLine": 1038,
+        "startChar": 27,
+        "endLine": 1038,
+        "endChar": 62
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9996ca2a_91f22ae9",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "This scenario can not happen. A probe result can not be computed without feedback. Sorry, its not clear what this test is testing.",
+      "range": {
+        "startLine": 1102,
+        "startChar": 6,
+        "endLine": 1102,
+        "endChar": 23
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe968af_5650a0a5",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "Is there a test that test that loss based does not recover \u003e acked bitrate * factor?",
+      "range": {
+        "startLine": 1110,
+        "startChar": 7,
+        "endLine": 1110,
+        "endChar": 25
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a4d9d5_12d36999",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "You dont need this. probe bitrate is limited on line 473",
+      "range": {
+        "startLine": 450,
+        "startChar": 8,
+        "endLine": 450,
+        "endChar": 25
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b19b98e_83f7d006",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "Should this be loss_based_state_ !\u003d LossBasedState::kDecreasing to include same as 450?",
+      "range": {
+        "startLine": 473,
+        "startChar": 43,
+        "endLine": 473,
+        "endChar": 54
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b99446df_5739d6cc",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-03T17:45:06Z",
+      "side": 1,
+      "message": "loss_based_state?",
+      "range": {
+        "startLine": 112,
+        "startChar": 21,
+        "endLine": 112,
+        "endChar": 36
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
