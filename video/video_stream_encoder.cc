@@ -30,6 +30,7 @@
 #include "api/video/video_bitrate_allocator_factory.h"
 #include "api/video/video_codec_constants.h"
 #include "api/video/video_layers_allocation.h"
+#include "api/video/video_stream_encoder_observer.h"
 #include "api/video_codecs/sdp_video_format.h"
 #include "api/video_codecs/video_encoder.h"
 #include "call/adaptation/resource_adaptation_processor.h"
@@ -1819,9 +1820,12 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
 
   // Encoder metadata needs to be updated before encode complete callback.
   VideoEncoder::EncoderInfo info = encoder_->GetEncoderInfo();
-  if (info.implementation_name != encoder_info_.implementation_name) {
-    encoder_stats_observer_->OnEncoderImplementationChanged(
-        info.implementation_name);
+  if (info.implementation_name != encoder_info_.implementation_name ||
+      info.is_hardware_accelerated != encoder_info_.is_hardware_accelerated) {
+    encoder_stats_observer_->OnEncoderImplementationChanged({
+        .name = info.implementation_name,
+        .is_hardware_accelerated = info.is_hardware_accelerated,
+    });
     if (bitrate_adjuster_) {
       // Encoder implementation changed, reset overshoot detector states.
       bitrate_adjuster_->Reset();
