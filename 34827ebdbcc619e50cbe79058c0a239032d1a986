@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15f3b4ab_c5647550",
+        "filename": "modules/audio_coding/neteq/timestamp_scaler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2022-10-03T19:59:59Z",
+      "side": 1,
+      "message": "what might be more clear is adding in [1] a static \u0027getDifference\u0027/\u0027getTimestampDifference\u0027(a, b), similar to IsNewer/IsNewerTimestamp(a, b), that just returns a - b but accounting for wrap-around.  As that is all this is doing here, getDifference(a, b). \n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/include/module_common_types_public.h;l\u003d21",
+      "revId": "34827ebdbcc619e50cbe79058c0a239032d1a986",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
