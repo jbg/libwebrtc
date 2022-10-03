@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f32761a0_624f81b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-10-03T10:02:22Z",
+      "side": 1,
+      "message": "Sorry for spamming... I run local tests with a few various RTP dumps and settings, so nothing should be broken.",
+      "revId": "73a5ab499412d85907b6cfe2b17922676d5e9df5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
