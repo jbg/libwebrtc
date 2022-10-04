@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6032cec4_87647b98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-04T08:13:12Z",
+      "side": 1,
+      "message": "The referenced PR is about framesDropped, not packetsDiscarded.",
+      "revId": "2675013f47b456f987e6ddc0ecf2c9e7baaf4647",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5622d23_b4005c8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-04T08:13:12Z",
+      "side": 1,
+      "message": "have to ask a few questions...",
+      "revId": "2675013f47b456f987e6ddc0ecf2c9e7baaf4647",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7db65cf5_ab55a0a4",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-04T08:13:12Z",
+      "side": 1,
+      "message": "why is packetsDisccarded only tested for audio?",
+      "revId": "2675013f47b456f987e6ddc0ecf2c9e7baaf4647",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
