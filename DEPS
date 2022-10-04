@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '825abfcc26dee471fbf5072495403db078ce3708',
+  'chromium_revision': '963d5e03283d7c237e9901e64fcf30075888f881',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -51,13 +51,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@657a1eb3577f73ef65af52b955a21e158fe3e31a',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@23711e2ffd7a21eb575aada77a91d5029362d9fc',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@e85e8ed9788982d03ec3efe030521693a997761c',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@091dd231f3a74c741723866ac113f1c9313858b2',
+    'https://chromium.googlesource.com/chromium/src/third_party@4871c5394dcb8bb0f70d2a04d416d667fe68e61b',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -243,7 +243,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@ad82476afb8e871871290f5e26b6477b9953db81',
+    'https://android.googlesource.com/platform/external/perfetto.git@e552de0d99aadf1bafaf00a31375477241cc43a9',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@9d6d0624d7943a09cc0be9df1a7402522989ac1a',
   'src/third_party/libyuv':
@@ -292,7 +292,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@f02e0648214a1af9830e8ae9205f03f2321c4745',
+    'https://chromium.googlesource.com/chromium/src/tools@b2cbf4a350d00486c95d4280b3cea1e52908a572',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
