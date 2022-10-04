@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e498ae0_0cbb63ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-04T09:58:53Z",
+      "side": 1,
+      "message": "I think this needs a few more comments and TODOs.\nAt the moment, it seems a bit unclear to me that we\u0027re actually checking on all paths that might cause a change to the parameters.",
+      "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e31aa43a_8e7b072f",
+        "filename": "media/base/media_engine.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-04T09:58:53Z",
+      "side": 1,
+      "message": "Need a comment here to say what it checks - I think it checks that all the scalability modes found in the parameters are found in at least one of the codecs in the codec list.",
+      "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be4bb9a1_56a23d23",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2267,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-04T09:58:53Z",
+      "side": 1,
+      "message": "Hm. Here the assumption is that CheckRtpParamters.. doesn\u0027t need to be called with the list of codecs, because it is already checked further up the stack.\n\nI\u0027d like to document that by doing an RTC_DCHECK(CheckRtpParameters...) with a comment saying \"This was already checked in AddTransceiver\".\n\nIf there are paths to here that don\u0027t go through AddTransceiver (such as by SetParameters), those paths should also do the check for SVC mode values.\n\nIf it\u0027s too much of a bother doing this properly now, just add a TODO with bug number.",
+      "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793aa965_abcebd99",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-04T09:58:53Z",
+      "side": 1,
+      "message": "Here too it seems that we need to check codecs, or add a TODO.",
+      "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42b9ff82_b8150d31",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-04T09:58:53Z",
+      "side": 1,
+      "message": "That\u0027s not much of a check. If this is because it\u0027s the base class, this should probably be in the .h file so that its defaulting becomes immediately obvious.",
+      "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
