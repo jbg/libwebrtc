@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "39676806_c7c7421c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-04T08:28:09Z",
+      "side": 1,
+      "message": "I got my wires crossed. This move has already happened, updated the CL description to point to the spec instead of a PR:\nhttps://w3c.github.io/webrtc-stats/#inboundrtpstats-dict*",
+      "parentUuid": "6032cec4_87647b98",
+      "revId": "2675013f47b456f987e6ddc0ecf2c9e7baaf4647",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f5622d23_b4005c8e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2022-10-04T08:13:12Z",
       "side": 1,
       "message": "why is packetsDisccarded only tested for audio?",
+      "revId": "2675013f47b456f987e6ddc0ecf2c9e7baaf4647",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ef38943_2821fe4a",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-04T08:28:09Z",
+      "side": 1,
+      "message": "Like many metrics, it was only ever implemented for one of the kinds:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/rtc_stats_collector.cc;l\u003d498?q\u003d%22packets_discarded%20%3D%22%20f:rtc_stats_collector\n\nSince this is a C++ test and not a WPT, we test our implementation, not the spec.\n\nBut speaking of spec, if we want spec to reach PR we should probably go through all implemented metrics and mark them as \"only applicable to audio/video\" if we lack implementation for a particular kind",
+      "parentUuid": "7db65cf5_ab55a0a4",
       "revId": "2675013f47b456f987e6ddc0ecf2c9e7baaf4647",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
