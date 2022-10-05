@@ -352,7 +352,6 @@ void TaskQueuePacedSender::UpdateStats() {
 
 TaskQueuePacedSender::Stats TaskQueuePacedSender::GetStats() const {
   MutexLock lock(&stats_mutex_);
-  return current_stats_;
 }
 
 }  // namespace webrtc
