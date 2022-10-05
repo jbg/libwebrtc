@@ -2376,8 +2376,6 @@ TEST_F(RTCStatsCollectorTest,
   video_receiver_info_ssrc3.frames_decoded = 995;
   video_receiver_info_ssrc3.frames_dropped = 10;
   video_receiver_info_ssrc3.frames_rendered = 990;
-  video_receiver_info_ssrc3.total_frames_duration_ms = 15000;
-  video_receiver_info_ssrc3.sum_squared_frame_durations = 1.5;
 
   stats_->CreateMockRtpSendersReceiversAndChannels(
       {}, {}, {},
@@ -2421,8 +2419,6 @@ TEST_F(RTCStatsCollectorTest,
   expected_remote_video_track_ssrc3.frames_received = 1000;
   expected_remote_video_track_ssrc3.frames_decoded = 995;
   expected_remote_video_track_ssrc3.frames_dropped = 10;
-  expected_remote_video_track_ssrc3.total_frames_duration = 15;
-  expected_remote_video_track_ssrc3.sum_squared_frame_durations = 1.5;
 
   ASSERT_TRUE(report->Get(expected_remote_video_track_ssrc3.id()));
   EXPECT_EQ(expected_remote_video_track_ssrc3,

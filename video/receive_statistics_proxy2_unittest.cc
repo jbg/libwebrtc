@@ -503,42 +503,6 @@ TEST_F(ReceiveStatisticsProxy2Test, PauseBeforeFirstAndAfterLastFrameIgnored) {
   EXPECT_EQ(0u, stats.total_pauses_duration_ms);
 }
 
-TEST_F(ReceiveStatisticsProxy2Test, ReportsFramesDuration) {
-  VideoReceiveStreamInterface::Stats stats = statistics_proxy_->GetStats();
-  ASSERT_EQ(0u, stats.total_frames_duration_ms);
-
-  webrtc::VideoFrame frame = CreateFrame(kWidth, kHeight);
-
-  // Emulate delay before first frame is rendered. This is needed to ensure
-  // that frame duration only covers time since first frame is rendered and
-  // not the total time.
-  time_controller_.AdvanceTime(TimeDelta::Millis(5432));
-  for (int i = 0; i <= 10; ++i) {
-    time_controller_.AdvanceTime(TimeDelta::Millis(30));
-    statistics_proxy_->OnRenderedFrame(MetaData(frame));
-  }
-
-  stats = statistics_proxy_->GetStats();
-  EXPECT_EQ(10 * 30u, stats.total_frames_duration_ms);
-}
-
-TEST_F(ReceiveStatisticsProxy2Test, ReportsSumSquaredFrameDurations) {
-  VideoReceiveStreamInterface::Stats stats = statistics_proxy_->GetStats();
-  ASSERT_EQ(0u, stats.sum_squared_frame_durations);
-
-  webrtc::VideoFrame frame = CreateFrame(kWidth, kHeight);
-  for (int i = 0; i <= 10; ++i) {
-    time_controller_.AdvanceTime(TimeDelta::Millis(30));
-    statistics_proxy_->OnRenderedFrame(MetaData(frame));
-  }
-
-  stats = statistics_proxy_->GetStats();
-  const double kExpectedSumSquaredFrameDurationsSecs =
-      10 * (30 / 1000.0 * 30 / 1000.0);
-  EXPECT_EQ(kExpectedSumSquaredFrameDurationsSecs,
-            stats.sum_squared_frame_durations);
-}
-
 TEST_F(ReceiveStatisticsProxy2Test, OnDecodedFrameWithoutQpQpSumWontExist) {
   webrtc::VideoFrame frame = CreateFrame(kWidth, kHeight);
   EXPECT_EQ(absl::nullopt, statistics_proxy_->GetStats().qp_sum);

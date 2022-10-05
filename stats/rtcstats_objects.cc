@@ -429,9 +429,7 @@ WEBRTC_RTCSTATS_IMPL(RTCMediaStreamTrackStats, RTCStats, "track",
                      &delayed_packet_outage_samples,
                      &relative_packet_arrival_delay,
                      &interruption_count,
-                     &total_interruption_duration,
-                     &total_frames_duration,
-                     &sum_squared_frame_durations)
+                     &total_interruption_duration)
 // clang-format on
 
 RTCMediaStreamTrackStats::RTCMediaStreamTrackStats(const std::string& id,
@@ -480,9 +478,7 @@ RTCMediaStreamTrackStats::RTCMediaStreamTrackStats(std::string&& id,
           "relativePacketArrivalDelay",
           {NonStandardGroupId::kRtcStatsRelativePacketArrivalDelay}),
       interruption_count("interruptionCount"),
-      total_interruption_duration("totalInterruptionDuration"),
-      total_frames_duration("totalFramesDuration"),
-      sum_squared_frame_durations("sumOfSquaredFramesDuration") {
+      total_interruption_duration("totalInterruptionDuration") {
   RTC_DCHECK(kind == RTCMediaStreamTrackKind::kAudio ||
              kind == RTCMediaStreamTrackKind::kVideo);
 }
@@ -521,9 +517,7 @@ RTCMediaStreamTrackStats::RTCMediaStreamTrackStats(
       delayed_packet_outage_samples(other.delayed_packet_outage_samples),
       relative_packet_arrival_delay(other.relative_packet_arrival_delay),
       interruption_count(other.interruption_count),
-      total_interruption_duration(other.total_interruption_duration),
-      total_frames_duration(other.total_frames_duration),
-      sum_squared_frame_durations(other.sum_squared_frame_durations) {}
+      total_interruption_duration(other.total_interruption_duration) {}
 
 RTCMediaStreamTrackStats::~RTCMediaStreamTrackStats() {}
 

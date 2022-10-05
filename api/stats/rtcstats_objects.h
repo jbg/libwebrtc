@@ -355,10 +355,6 @@ class RTC_EXPORT RTCMediaStreamTrackStats final : public RTCStats {
   // https://github.com/w3c/webrtc-provisional-stats/issues/17
   RTCNonStandardStatsMember<uint32_t> interruption_count;
   RTCNonStandardStatsMember<double> total_interruption_duration;
-  // Non-standard video-only members.
-  // https://w3c.github.io/webrtc-provisional-stats/#dom-rtcvideoreceiverstats
-  RTCNonStandardStatsMember<double> total_frames_duration;
-  RTCNonStandardStatsMember<double> sum_squared_frame_durations;
 };
 
 // https://w3c.github.io/webrtc-stats/#pcstats-dict*

@@ -594,10 +594,6 @@ class RTCStatsReportVerifier {
             media_stream_track.frames_decoded);
         verifier.TestMemberIsNonNegative<uint32_t>(
             media_stream_track.frames_dropped);
-        verifier.TestMemberIsNonNegative<double>(
-            media_stream_track.total_frames_duration);
-        verifier.TestMemberIsNonNegative<double>(
-            media_stream_track.sum_squared_frame_durations);
       } else {
         verifier.TestMemberIsIDReference(media_stream_track.media_source_id,
                                          RTCVideoSourceStats::kType);
@@ -612,10 +608,6 @@ class RTCStatsReportVerifier {
         verifier.TestMemberIsUndefined(media_stream_track.frames_received);
         verifier.TestMemberIsUndefined(media_stream_track.frames_decoded);
         verifier.TestMemberIsUndefined(media_stream_track.frames_dropped);
-        verifier.TestMemberIsUndefined(
-            media_stream_track.total_frames_duration);
-        verifier.TestMemberIsUndefined(
-            media_stream_track.sum_squared_frame_durations);
       }
       // Video-only members
       verifier.TestMemberIsNonNegative<uint32_t>(
@@ -722,9 +714,6 @@ class RTCStatsReportVerifier {
       verifier.TestMemberIsUndefined(media_stream_track.frames_received);
       verifier.TestMemberIsUndefined(media_stream_track.frames_decoded);
       verifier.TestMemberIsUndefined(media_stream_track.frames_dropped);
-      verifier.TestMemberIsUndefined(media_stream_track.total_frames_duration);
-      verifier.TestMemberIsUndefined(
-          media_stream_track.sum_squared_frame_durations);
       // Audio-only members
       // TODO(hbos): `echo_return_loss` and `echo_return_loss_enhancement` are
       // flaky on msan bot (sometimes defined, sometimes undefined). Should the
