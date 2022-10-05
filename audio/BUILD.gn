@@ -84,6 +84,7 @@ rtc_library("audio") {
     "../modules/pacing",
     "../modules/rtp_rtcp",
     "../modules/rtp_rtcp:rtp_rtcp_format",
+    "../modules/utility:utility",
     "../rtc_base:audio_format_to_string",
     "../rtc_base:buffer",
     "../rtc_base:checks",
@@ -111,6 +112,7 @@ rtc_library("audio") {
     "utility:audio_frame_operations",
   ]
   absl_deps = [
+    "//third_party/abseil-cpp/absl/functional:any_invocable",
     "//third_party/abseil-cpp/absl/memory",
     "//third_party/abseil-cpp/absl/strings",
     "//third_party/abseil-cpp/absl/types:optional",
