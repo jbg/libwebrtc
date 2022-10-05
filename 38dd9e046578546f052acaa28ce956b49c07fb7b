@@ -16,6 +16,24 @@
       "message": "Delete All The Baggage.\n\nGuess other reviewers will check downstream projects for dependencies.",
       "revId": "38dd9e046578546f052acaa28ce956b49c07fb7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47f8ff35_e742bde7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-05T11:59:20Z",
+      "side": 1,
+      "message": "I synced with Mirta and I\u0027ll update these CLs to duplicate the metrics in both places for now and add a TODO to delete in the track stats as a follow-up when downstream has migrated.",
+      "parentUuid": "1978b455_54cdc813",
+      "revId": "38dd9e046578546f052acaa28ce956b49c07fb7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
