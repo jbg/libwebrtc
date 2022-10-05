@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1978b455_54cdc813",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-05T11:57:46Z",
+      "side": 1,
+      "message": "Delete All The Baggage.\n\nGuess other reviewers will check downstream projects for dependencies.",
+      "revId": "38dd9e046578546f052acaa28ce956b49c07fb7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
