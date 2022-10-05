@@ -594,14 +594,6 @@ class RTCStatsReportVerifier {
             media_stream_track.frames_decoded);
         verifier.TestMemberIsNonNegative<uint32_t>(
             media_stream_track.frames_dropped);
-        verifier.TestMemberIsNonNegative<uint32_t>(
-            media_stream_track.freeze_count);
-        verifier.TestMemberIsNonNegative<uint32_t>(
-            media_stream_track.pause_count);
-        verifier.TestMemberIsNonNegative<double>(
-            media_stream_track.total_freezes_duration);
-        verifier.TestMemberIsNonNegative<double>(
-            media_stream_track.total_pauses_duration);
         verifier.TestMemberIsNonNegative<double>(
             media_stream_track.total_frames_duration);
         verifier.TestMemberIsNonNegative<double>(
@@ -620,12 +612,6 @@ class RTCStatsReportVerifier {
         verifier.TestMemberIsUndefined(media_stream_track.frames_received);
         verifier.TestMemberIsUndefined(media_stream_track.frames_decoded);
         verifier.TestMemberIsUndefined(media_stream_track.frames_dropped);
-        verifier.TestMemberIsUndefined(media_stream_track.freeze_count);
-        verifier.TestMemberIsUndefined(media_stream_track.pause_count);
-        verifier.TestMemberIsUndefined(
-            media_stream_track.total_freezes_duration);
-        verifier.TestMemberIsUndefined(
-            media_stream_track.total_pauses_duration);
         verifier.TestMemberIsUndefined(
             media_stream_track.total_frames_duration);
         verifier.TestMemberIsUndefined(
@@ -736,10 +722,6 @@ class RTCStatsReportVerifier {
       verifier.TestMemberIsUndefined(media_stream_track.frames_received);
       verifier.TestMemberIsUndefined(media_stream_track.frames_decoded);
       verifier.TestMemberIsUndefined(media_stream_track.frames_dropped);
-      verifier.TestMemberIsUndefined(media_stream_track.freeze_count);
-      verifier.TestMemberIsUndefined(media_stream_track.pause_count);
-      verifier.TestMemberIsUndefined(media_stream_track.total_freezes_duration);
-      verifier.TestMemberIsUndefined(media_stream_track.total_pauses_duration);
       verifier.TestMemberIsUndefined(media_stream_track.total_frames_duration);
       verifier.TestMemberIsUndefined(
           media_stream_track.sum_squared_frame_durations);
@@ -904,6 +886,12 @@ class RTCStatsReportVerifier {
           inbound_stream.total_inter_frame_delay);
       verifier.TestMemberIsNonNegative<double>(
           inbound_stream.total_squared_inter_frame_delay);
+      verifier.TestMemberIsNonNegative<uint32_t>(inbound_stream.pause_count);
+      verifier.TestMemberIsNonNegative<double>(
+          inbound_stream.total_pauses_duration);
+      verifier.TestMemberIsNonNegative<uint32_t>(inbound_stream.freeze_count);
+      verifier.TestMemberIsNonNegative<double>(
+          inbound_stream.total_freezes_duration);
       // The integration test is not set up to test screen share; don't require
       // this to be present.
       verifier.MarkMemberTested(inbound_stream.content_type, true);
@@ -921,6 +909,10 @@ class RTCStatsReportVerifier {
       verifier.TestMemberIsUndefined(inbound_stream.total_inter_frame_delay);
       verifier.TestMemberIsUndefined(
           inbound_stream.total_squared_inter_frame_delay);
+      verifier.TestMemberIsUndefined(inbound_stream.pause_count);
+      verifier.TestMemberIsUndefined(inbound_stream.total_pauses_duration);
+      verifier.TestMemberIsUndefined(inbound_stream.freeze_count);
+      verifier.TestMemberIsUndefined(inbound_stream.total_freezes_duration);
       verifier.TestMemberIsUndefined(inbound_stream.content_type);
       verifier.TestMemberIsUndefined(inbound_stream.min_playout_delay);
     }

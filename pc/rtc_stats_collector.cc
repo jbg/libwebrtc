@@ -608,6 +608,14 @@ void SetInboundRTPStreamStatsFromVideoReceiverInfo(
       video_receiver_info.total_inter_frame_delay;
   inbound_video->total_squared_inter_frame_delay =
       video_receiver_info.total_squared_inter_frame_delay;
+  inbound_video->pause_count = video_receiver_info.pause_count;
+  inbound_video->total_pauses_duration =
+      static_cast<double>(video_receiver_info.total_pauses_duration_ms) /
+      rtc::kNumMillisecsPerSec;
+  inbound_video->freeze_count = video_receiver_info.freeze_count;
+  inbound_video->total_freezes_duration =
+      static_cast<double>(video_receiver_info.total_freezes_duration_ms) /
+      rtc::kNumMillisecsPerSec;
   inbound_video->min_playout_delay =
       static_cast<double>(video_receiver_info.min_playout_delay_ms) /
       rtc::kNumMillisecsPerSec;
@@ -1104,14 +1112,6 @@ ProduceMediaStreamTrackStatsFromVideoReceiverInfo(
   // value as "RTCInboundRTPStreamStats.framesDecoded". https://crbug.com/659137
   video_track_stats->frames_decoded = video_receiver_info.frames_decoded;
   video_track_stats->frames_dropped = video_receiver_info.frames_dropped;
-  video_track_stats->freeze_count = video_receiver_info.freeze_count;
-  video_track_stats->pause_count = video_receiver_info.pause_count;
-  video_track_stats->total_freezes_duration =
-      static_cast<double>(video_receiver_info.total_freezes_duration_ms) /
-      rtc::kNumMillisecsPerSec;
-  video_track_stats->total_pauses_duration =
-      static_cast<double>(video_receiver_info.total_pauses_duration_ms) /
-      rtc::kNumMillisecsPerSec;
   video_track_stats->total_frames_duration =
       static_cast<double>(video_receiver_info.total_frames_duration_ms) /
       rtc::kNumMillisecsPerSec;

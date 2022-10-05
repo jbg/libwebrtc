@@ -2376,10 +2376,6 @@ TEST_F(RTCStatsCollectorTest,
   video_receiver_info_ssrc3.frames_decoded = 995;
   video_receiver_info_ssrc3.frames_dropped = 10;
   video_receiver_info_ssrc3.frames_rendered = 990;
-  video_receiver_info_ssrc3.freeze_count = 3;
-  video_receiver_info_ssrc3.pause_count = 2;
-  video_receiver_info_ssrc3.total_freezes_duration_ms = 1000;
-  video_receiver_info_ssrc3.total_pauses_duration_ms = 10000;
   video_receiver_info_ssrc3.total_frames_duration_ms = 15000;
   video_receiver_info_ssrc3.sum_squared_frame_durations = 1.5;
 
@@ -2425,10 +2421,6 @@ TEST_F(RTCStatsCollectorTest,
   expected_remote_video_track_ssrc3.frames_received = 1000;
   expected_remote_video_track_ssrc3.frames_decoded = 995;
   expected_remote_video_track_ssrc3.frames_dropped = 10;
-  expected_remote_video_track_ssrc3.freeze_count = 3;
-  expected_remote_video_track_ssrc3.pause_count = 2;
-  expected_remote_video_track_ssrc3.total_freezes_duration = 1;
-  expected_remote_video_track_ssrc3.total_pauses_duration = 10;
   expected_remote_video_track_ssrc3.total_frames_duration = 15;
   expected_remote_video_track_ssrc3.sum_squared_frame_durations = 1.5;
 
@@ -2576,6 +2568,10 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Video) {
   video_media_info.receivers[0].frames_assembled_from_multiple_packets = 23;
   video_media_info.receivers[0].total_inter_frame_delay = 0.123;
   video_media_info.receivers[0].total_squared_inter_frame_delay = 0.00456;
+  video_media_info.receivers[0].pause_count = 2;
+  video_media_info.receivers[0].total_pauses_duration_ms = 10000;
+  video_media_info.receivers[0].freeze_count = 3;
+  video_media_info.receivers[0].total_freezes_duration_ms = 1000;
   video_media_info.receivers[0].jitter_ms = 1199;
   video_media_info.receivers[0].jitter_buffer_delay_seconds = 3.456;
   video_media_info.receivers[0].jitter_buffer_target_delay_seconds = 1.1;
@@ -2638,6 +2634,10 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Video) {
   expected_video.frames_assembled_from_multiple_packets = 23;
   expected_video.total_inter_frame_delay = 0.123;
   expected_video.total_squared_inter_frame_delay = 0.00456;
+  expected_video.pause_count = 2;
+  expected_video.total_pauses_duration = 10;
+  expected_video.freeze_count = 3;
+  expected_video.total_freezes_duration = 1;
   expected_video.jitter = 1.199;
   expected_video.jitter_buffer_delay = 3.456;
   expected_video.jitter_buffer_target_delay = 1.1;
