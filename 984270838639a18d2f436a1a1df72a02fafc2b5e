@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e72a7cfd_f0292dec",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-05T16:08:01Z",
+      "side": 1,
+      "message": "RTCNonStandardStatsMember is an example of how we add additional data that is only applicable to very special RTCStatsMembers using a virtual getter e.g. is_standardized() and group_ids(), such that normal RTCStatsMembers don\u0027t need to have any additional members.\n\nBut in this case I think we can just add the enum as a new field in the RTCStatsMember class? It\u0027s just a byte",
+      "parentUuid": "e65f8a2c_dd2568d0",
+      "revId": "984270838639a18d2f436a1a1df72a02fafc2b5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ea4d96c_40e30372",
         "filename": "test/fake_encoder.cc",
         "patchSetId": 8
