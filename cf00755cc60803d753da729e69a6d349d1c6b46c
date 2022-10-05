@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be53a6f8_716f5c3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T08:23:06Z",
+      "side": 1,
+      "message": "Thank you Alessio for the comments! I\u0027ve addressed them and simplified the buffer by using a fixed buffer size. The revised circular buffer related tests are simple and the main focus is on testing the API.",
+      "revId": "cf00755cc60803d753da729e69a6d349d1c6b46c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

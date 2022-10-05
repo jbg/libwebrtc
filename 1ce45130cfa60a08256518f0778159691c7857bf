@@ -81,6 +81,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7420cc6_583a5706",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T08:23:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b33f6460_9fc7660b",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 21
+      },
+      "revId": "1ce45130cfa60a08256518f0778159691c7857bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abb4547f_73857ff5",
@@ -94,6 +118,30 @@
       "writtenOn": "2022-10-04T13:22:04Z",
       "side": 1,
       "message": "same here: since `Update()` it\u0027s essentially the 4-5 lines above + `AddNewEntry()`",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 13
+      },
+      "revId": "1ce45130cfa60a08256518f0778159691c7857bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc5c87e4_42830752",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T08:23:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abb4547f_73857ff5",
       "range": {
         "startLine": 37,
         "startChar": 2,
@@ -127,6 +175,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "684c70d9_ec2ad872",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T08:23:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96b1be9e_2f2273be",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 23
+      },
+      "revId": "1ce45130cfa60a08256518f0778159691c7857bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f3e457a_bb0bd1d5",
@@ -150,6 +222,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a54eb48_1987289a",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T08:23:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f3e457a_bb0bd1d5",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 65
+      },
+      "revId": "1ce45130cfa60a08256518f0778159691c7857bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e87fabd_75cdce88",
@@ -163,6 +259,24 @@
       "writtenOn": "2022-10-04T13:22:04Z",
       "side": 1,
       "message": "All the tests in this file use `GetSumProbabilities()` and/or `GetBufferCapacity()` and no test calls `IsActiveSegment()`. That means that we\u0027re testing the implementation instead of the API contract (see abseil.io/tips/135).\n\nSuggestion:\n- Add tests that only rely on the public API, some examples:\n  - Replace the `CheckNoUpdates` test with one that checks that `IsActiveSegment()` returns false after the class is instantiated\n  - Add a test that calls `Update(/*probability\u003d*/1.0f)` a number of times equal to the capacity and that checks that `IsActiveSegment()` returns true \n  - Add a test that checks that transients are correctly ignored (that\u0027s what the docstring for `IsActiveSegment()` promises)\n- Keep only 2-3 tests to check that the circular buffer (implementation detail, independent from the API contract) is correctly implemented\n\n\n\nIf you prefer to stay on the safe side and have tests for the circular buffer, then you could add a separate circular buffer class with its header file, but that\u0027d be overkilling. A simpler solution is to declare the circular buffer class in the same header file, but in a nested namespace which is not part of the public API:\n\n```\nnamespace webrtc {\nnamespace impl {\nclass CircularBuffer {\n...\n};\n}  // namespace impl\nclass SpeechProbabilityBuffer{\n...\n};\n}  // namespace webrtc\n```",
+      "revId": "1ce45130cfa60a08256518f0778159691c7857bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56f13de1_b58935ab",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T08:23:06Z",
+      "side": 1,
+      "message": "I\u0027ve simplified the class by using a fixed buffer size. This also allows simplifying the tests. I\u0027ve added tests for IsActiveSegment().",
+      "parentUuid": "6e87fabd_75cdce88",
       "revId": "1ce45130cfa60a08256518f0778159691c7857bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
