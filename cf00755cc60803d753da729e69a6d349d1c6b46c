@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47589667_379396ab",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T16:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e1778f3_7229b9f4",
+      "range": {
+        "startLine": 20,
+        "startChar": 37,
+        "endLine": 20,
+        "endChar": 42
+      },
+      "revId": "cf00755cc60803d753da729e69a6d349d1c6b46c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50bc493c_e042bf1c",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-10-05T12:33:50Z",
       "side": 1,
       "message": "nit: what about \"Replace ... with zero probability\".\n\nThat clarifies to me that `RemoveTransient()` doesn\u0027t decrease the circular buffer size. When I read the code the first time, I was wondering why `buffer_index_` remained unchanged.",
+      "range": {
+        "startLine": 72,
+        "startChar": 5,
+        "endLine": 72,
+        "endChar": 11
+      },
+      "revId": "cf00755cc60803d753da729e69a6d349d1c6b46c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7d4622a_265d99f5",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T16:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50bc493c_e042bf1c",
       "range": {
         "startLine": 72,
         "startChar": 5,
@@ -123,6 +171,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eadc45a2_6302ec07",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T16:52:15Z",
+      "side": 1,
+      "message": "Thanks! This got forgotten when fixing the buffer capacity (was supposed to enable capacity 0). Removed now.",
+      "parentUuid": "9d6869e3_851b39cb",
+      "range": {
+        "startLine": 87,
+        "startChar": 2,
+        "endLine": 87,
+        "endChar": 31
+      },
+      "revId": "cf00755cc60803d753da729e69a6d349d1c6b46c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19262115_18253bb9",
         "filename": "modules/audio_processing/agc2/speech_probability_buffer.cc",
         "patchSetId": 3
@@ -134,6 +206,30 @@
       "writtenOn": "2022-10-05T12:33:50Z",
       "side": 1,
       "message": "probabilities_.size() is now hardcoded, so by replacing it with `kNumAnalysisFrames`, this expression is computed at compile time\n\nactually, I\u0027d replace `probabilities_.size()` with `kNumAnalysisFrames` everywhere",
+      "range": {
+        "startLine": 93,
+        "startChar": 27,
+        "endLine": 93,
+        "endChar": 69
+      },
+      "revId": "cf00755cc60803d753da729e69a6d349d1c6b46c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18596283_ade160dc",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T16:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19262115_18253bb9",
       "range": {
         "startLine": 93,
         "startChar": 27,
@@ -167,6 +263,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "912624bb_45f76952",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T16:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5893269a_b4584389",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 75,
+        "endChar": 24
+      },
+      "revId": "cf00755cc60803d753da729e69a6d349d1c6b46c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9523a823_5bb74dcc",
@@ -180,6 +300,30 @@
       "writtenOn": "2022-10-05T12:33:50Z",
       "side": 1,
       "message": "TL;DR: I\u0027d add a test that clarifies how much time is needed for `IsActiveSegment()` to toggle from false to true and viceversa; such a test should verify that the time (number of `Update()` calls) is bound\n\nlet\u0027s have an offline discussion on this\n\n---\n\ninteresting, good that this behavior is clarified by this test\n\nthis means that we need to observe a number of low probability updates before `IsActiveSegment()` stops returning true\n\nexample:\n\n- let\u0027s start with a long voiced sequence due to which the buffer includes 100 x 1.0 observations\n- hence, `SpeechProbabilityBuffer::sum_probabilities_` is `100.0f`\n- let\u0027s now switch to a sequence of low speech probability observations with 0.0 probability\n- the earliest time `IsActiveSegment()` switches from returning `true` to returning `false` is when N x 0.0 speech probabilities are observed with N such that `sum_probabilities_ \u003c\u003d kActivityThreshold * 100`, that is `sum_probabilities_ \u003c\u003d 30`\n- hence, N \u003d 70, that is 700 ms of zero speech probability, is the earliest\n\nsuch a \"long wait\" poses some risks from an AGC perspective:\n- underestimated speech levels, which may cause gain overshooting\n- allowing gain changes during non-speech\n\nso, `kActivityThreshold` must be closer to 1 and to pick a good value I\u0027d add requirements on the max time it takes for `IsActiveSegment()` to toggle from true to false",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 40
+      },
+      "revId": "cf00755cc60803d753da729e69a6d349d1c6b46c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662e890f_615cccde",
+        "filename": "modules/audio_processing/agc2/speech_probability_buffer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-05T16:52:15Z",
+      "side": 1,
+      "message": "I\u0027ve added tests `CheckSegmentIsActiveChangesFromTrueToFalse` and `CheckSegmentIsActiveChangesFromFalseToTrue`.",
+      "parentUuid": "9523a823_5bb74dcc",
       "range": {
         "startLine": 289,
         "startChar": 0,
