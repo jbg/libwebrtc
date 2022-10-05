@@ -141,6 +141,7 @@ class FrameInFlight {
   // object to decide when it should be deleted.
   std::set<size_t> expected_receivers_;
   absl::optional<VideoFrame> frame_;
+  uint16_t frame_id_ = VideoFrame::kNotSetId;
 
   // Frame events timestamp.
   Timestamp captured_time_;
