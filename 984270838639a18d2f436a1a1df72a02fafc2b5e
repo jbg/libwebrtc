@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e65f8a2c_dd2568d0",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-05T16:05:11Z",
+      "side": 1,
+      "message": "The native library can expose all metrics always, but Chrome needs to know which metrics it should filter out if https://w3c.github.io/webrtc-stats/#limiting-exposure-of-hardware-capabilities returns false.\n\nCan we add some way to detect that this exposes hardware? Perhaps an \"enum class ExposureCriteria : uint8_t { kAlways, kHardware }\" on the RTCStatsMember via a getter?\n\nEnum is better than bool in case we add other criterias in the future, we don\u0027t want to increase the size of RTCStatsMember with more and more fields over time since we do have more than 200 stats members being collected on multiple objects so who knows how many stats members there are in total in a 50p meeting...",
+      "revId": "984270838639a18d2f436a1a1df72a02fafc2b5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ea4d96c_40e30372",
+        "filename": "test/fake_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-05T16:05:11Z",
+      "side": 1,
+      "message": "It\u0027s a shame that EncoderInfo and DecoderInfo does not use absl::optional\u003c\u003e, it assumes that any encoder implementation and decoder implementation is setting this value correctly. It\u0027s already used by downstream projects though, so I suggest we ignore this problem.",
+      "revId": "984270838639a18d2f436a1a1df72a02fafc2b5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
