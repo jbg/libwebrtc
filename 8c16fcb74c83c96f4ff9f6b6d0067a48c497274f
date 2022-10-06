@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcca56dd_5ee6af58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-06T11:41:59Z",
+      "side": 1,
+      "message": "Adding affected owners as reviewers, to check that I don\u0027t misrepresent them.",
+      "revId": "8c16fcb74c83c96f4ff9f6b6d0067a48c497274f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
