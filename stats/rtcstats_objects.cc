@@ -430,12 +430,12 @@ WEBRTC_RTCSTATS_IMPL(RTCMediaStreamTrackStats, RTCStats, "track",
                      &relative_packet_arrival_delay,
                      &interruption_count,
                      &total_interruption_duration,
+                     &total_frames_duration,
+                     &sum_squared_frame_durations,
                      &freeze_count,
                      &pause_count,
                      &total_freezes_duration,
-                     &total_pauses_duration,
-                     &total_frames_duration,
-                     &sum_squared_frame_durations)
+                     &total_pauses_duration)
 // clang-format on
 
 RTCMediaStreamTrackStats::RTCMediaStreamTrackStats(const std::string& id,
@@ -485,12 +485,12 @@ RTCMediaStreamTrackStats::RTCMediaStreamTrackStats(std::string&& id,
           {NonStandardGroupId::kRtcStatsRelativePacketArrivalDelay}),
       interruption_count("interruptionCount"),
       total_interruption_duration("totalInterruptionDuration"),
+      total_frames_duration("totalFramesDuration"),
+      sum_squared_frame_durations("sumOfSquaredFramesDuration"),
       freeze_count("freezeCount"),
       pause_count("pauseCount"),
       total_freezes_duration("totalFreezesDuration"),
-      total_pauses_duration("totalPausesDuration"),
-      total_frames_duration("totalFramesDuration"),
-      sum_squared_frame_durations("sumOfSquaredFramesDuration") {
+      total_pauses_duration("totalPausesDuration") {
   RTC_DCHECK(kind == RTCMediaStreamTrackKind::kAudio ||
              kind == RTCMediaStreamTrackKind::kVideo);
 }
@@ -530,12 +530,12 @@ RTCMediaStreamTrackStats::RTCMediaStreamTrackStats(
       relative_packet_arrival_delay(other.relative_packet_arrival_delay),
       interruption_count(other.interruption_count),
       total_interruption_duration(other.total_interruption_duration),
+      total_frames_duration(other.total_frames_duration),
+      sum_squared_frame_durations(other.sum_squared_frame_durations),
       freeze_count(other.freeze_count),
       pause_count(other.pause_count),
       total_freezes_duration(other.total_freezes_duration),
-      total_pauses_duration(other.total_pauses_duration),
-      total_frames_duration(other.total_frames_duration),
-      sum_squared_frame_durations(other.sum_squared_frame_durations) {}
+      total_pauses_duration(other.total_pauses_duration) {}
 
 RTCMediaStreamTrackStats::~RTCMediaStreamTrackStats() {}
 
@@ -685,6 +685,10 @@ WEBRTC_RTCSTATS_IMPL(
     &frames_assembled_from_multiple_packets,
     &total_inter_frame_delay,
     &total_squared_inter_frame_delay,
+    &pause_count,
+    &total_pauses_duration,
+    &freeze_count,
+    &total_freezes_duration,
     &content_type,
     &estimated_playout_timestamp,
     &decoder_implementation,
@@ -692,6 +696,11 @@ WEBRTC_RTCSTATS_IMPL(
     &pli_count,
     &nack_count,
     &qp_sum,
+    &jitter_buffer_flushes,
+    &delayed_packet_outage_samples,
+    &relative_packet_arrival_delay,
+    &interruption_count,
+    &total_interruption_duration,
     &min_playout_delay)
 // clang-format on
 
@@ -739,6 +748,10 @@ RTCInboundRTPStreamStats::RTCInboundRTPStreamStats(std::string&& id,
           "framesAssembledFromMultiplePackets"),
       total_inter_frame_delay("totalInterFrameDelay"),
       total_squared_inter_frame_delay("totalSquaredInterFrameDelay"),
+      pause_count("pauseCount"),
+      total_pauses_duration("totalPausesDuration"),
+      freeze_count("freezeCount"),
+      total_freezes_duration("totalFreezesDuration"),
       content_type("contentType"),
       estimated_playout_timestamp("estimatedPlayoutTimestamp"),
       decoder_implementation("decoderImplementation"),
@@ -746,6 +759,18 @@ RTCInboundRTPStreamStats::RTCInboundRTPStreamStats(std::string&& id,
       pli_count("pliCount"),
       nack_count("nackCount"),
       qp_sum("qpSum"),
+      jitter_buffer_flushes(
+          "jitterBufferFlushes",
+          {NonStandardGroupId::kRtcAudioJitterBufferMaxPackets}),
+      delayed_packet_outage_samples(
+          "delayedPacketOutageSamples",
+          {NonStandardGroupId::kRtcAudioJitterBufferMaxPackets,
+           NonStandardGroupId::kRtcStatsRelativePacketArrivalDelay}),
+      relative_packet_arrival_delay(
+          "relativePacketArrivalDelay",
+          {NonStandardGroupId::kRtcStatsRelativePacketArrivalDelay}),
+      interruption_count("interruptionCount"),
+      total_interruption_duration("totalInterruptionDuration"),
       min_playout_delay("minPlayoutDelay") {}
 
 RTCInboundRTPStreamStats::RTCInboundRTPStreamStats(
@@ -789,6 +814,10 @@ RTCInboundRTPStreamStats::RTCInboundRTPStreamStats(
           other.frames_assembled_from_multiple_packets),
       total_inter_frame_delay(other.total_inter_frame_delay),
       total_squared_inter_frame_delay(other.total_squared_inter_frame_delay),
+      pause_count(other.pause_count),
+      total_pauses_duration(other.total_pauses_duration),
+      freeze_count(other.freeze_count),
+      total_freezes_duration(other.total_freezes_duration),
       content_type(other.content_type),
       estimated_playout_timestamp(other.estimated_playout_timestamp),
       decoder_implementation(other.decoder_implementation),
@@ -796,6 +825,11 @@ RTCInboundRTPStreamStats::RTCInboundRTPStreamStats(
       pli_count(other.pli_count),
       nack_count(other.nack_count),
       qp_sum(other.qp_sum),
+      jitter_buffer_flushes(other.jitter_buffer_flushes),
+      delayed_packet_outage_samples(other.delayed_packet_outage_samples),
+      relative_packet_arrival_delay(other.relative_packet_arrival_delay),
+      interruption_count(other.interruption_count),
+      total_interruption_duration(other.total_interruption_duration),
       min_playout_delay(other.min_playout_delay) {}
 
 RTCInboundRTPStreamStats::~RTCInboundRTPStreamStats() {}

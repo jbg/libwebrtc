@@ -2234,6 +2234,8 @@ TEST_F(RTCStatsCollectorTest,
   voice_receiver_info.silent_concealed_samples = 765;
   voice_receiver_info.jitter_buffer_delay_seconds = 3.456;
   voice_receiver_info.jitter_buffer_emitted_count = 13;
+  // TODO(crbug.com/webrtc/14524): These metrics have been moved from "track"
+  // stats, no need to test these here.
   voice_receiver_info.jitter_buffer_flushes = 7;
   voice_receiver_info.delayed_packet_outage_samples = 15;
   voice_receiver_info.relative_packet_arrival_delay_seconds = 16;
@@ -2278,6 +2280,8 @@ TEST_F(RTCStatsCollectorTest,
   expected_remote_audio_track.silent_concealed_samples = 765;
   expected_remote_audio_track.jitter_buffer_delay = 3.456;
   expected_remote_audio_track.jitter_buffer_emitted_count = 13;
+  // TODO(crbug.com/webrtc/14524): These metrics have been moved from "track"
+  // stats, delete them.
   expected_remote_audio_track.jitter_buffer_flushes = 7;
   expected_remote_audio_track.delayed_packet_outage_samples = 15;
   expected_remote_audio_track.relative_packet_arrival_delay = 16;
@@ -2376,12 +2380,14 @@ TEST_F(RTCStatsCollectorTest,
   video_receiver_info_ssrc3.frames_decoded = 995;
   video_receiver_info_ssrc3.frames_dropped = 10;
   video_receiver_info_ssrc3.frames_rendered = 990;
+  video_receiver_info_ssrc3.total_frames_duration_ms = 15000;
+  video_receiver_info_ssrc3.sum_squared_frame_durations = 1.5;
+  // TODO(crbug.com/webrtc/14521): When removed from "track", there's no need to
+  // test these here.
   video_receiver_info_ssrc3.freeze_count = 3;
   video_receiver_info_ssrc3.pause_count = 2;
   video_receiver_info_ssrc3.total_freezes_duration_ms = 1000;
   video_receiver_info_ssrc3.total_pauses_duration_ms = 10000;
-  video_receiver_info_ssrc3.total_frames_duration_ms = 15000;
-  video_receiver_info_ssrc3.sum_squared_frame_durations = 1.5;
 
   stats_->CreateMockRtpSendersReceiversAndChannels(
       {}, {}, {},
@@ -2425,12 +2431,13 @@ TEST_F(RTCStatsCollectorTest,
   expected_remote_video_track_ssrc3.frames_received = 1000;
   expected_remote_video_track_ssrc3.frames_decoded = 995;
   expected_remote_video_track_ssrc3.frames_dropped = 10;
+  expected_remote_video_track_ssrc3.total_frames_duration = 15;
+  expected_remote_video_track_ssrc3.sum_squared_frame_durations = 1.5;
+  // TODO(crbug.com/webrtc/14521): These metrics have been moved, delete them.
   expected_remote_video_track_ssrc3.freeze_count = 3;
   expected_remote_video_track_ssrc3.pause_count = 2;
   expected_remote_video_track_ssrc3.total_freezes_duration = 1;
   expected_remote_video_track_ssrc3.total_pauses_duration = 10;
-  expected_remote_video_track_ssrc3.total_frames_duration = 15;
-  expected_remote_video_track_ssrc3.sum_squared_frame_durations = 1.5;
 
   ASSERT_TRUE(report->Get(expected_remote_video_track_ssrc3.id()));
   EXPECT_EQ(expected_remote_video_track_ssrc3,
@@ -2468,6 +2475,11 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Audio) {
   voice_media_info.receivers[0].audio_level = 14442;  // [0,32767]
   voice_media_info.receivers[0].total_output_energy = 10.0;
   voice_media_info.receivers[0].total_output_duration = 11.0;
+  voice_media_info.receivers[0].jitter_buffer_flushes = 7;
+  voice_media_info.receivers[0].delayed_packet_outage_samples = 15;
+  voice_media_info.receivers[0].relative_packet_arrival_delay_seconds = 16;
+  voice_media_info.receivers[0].interruption_count = 7788;
+  voice_media_info.receivers[0].total_interruption_duration_ms = 778899;
 
   voice_media_info.receivers[0].last_packet_received_timestamp_ms =
       absl::nullopt;
@@ -2523,6 +2535,11 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Audio) {
   expected_audio.audio_level = 14442.0 / 32767.0;  // [0,1]
   expected_audio.total_audio_energy = 10.0;
   expected_audio.total_samples_duration = 11.0;
+  expected_audio.jitter_buffer_flushes = 7;
+  expected_audio.delayed_packet_outage_samples = 15;
+  expected_audio.relative_packet_arrival_delay = 16;
+  expected_audio.interruption_count = 7788;
+  expected_audio.total_interruption_duration = 778.899;
 
   ASSERT_TRUE(report->Get(expected_audio.id()));
   EXPECT_EQ(
@@ -2576,6 +2593,10 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Video) {
   video_media_info.receivers[0].frames_assembled_from_multiple_packets = 23;
   video_media_info.receivers[0].total_inter_frame_delay = 0.123;
   video_media_info.receivers[0].total_squared_inter_frame_delay = 0.00456;
+  video_media_info.receivers[0].pause_count = 2;
+  video_media_info.receivers[0].total_pauses_duration_ms = 10000;
+  video_media_info.receivers[0].freeze_count = 3;
+  video_media_info.receivers[0].total_freezes_duration_ms = 1000;
   video_media_info.receivers[0].jitter_ms = 1199;
   video_media_info.receivers[0].jitter_buffer_delay_seconds = 3.456;
   video_media_info.receivers[0].jitter_buffer_target_delay_seconds = 1.1;
@@ -2638,6 +2659,10 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Video) {
   expected_video.frames_assembled_from_multiple_packets = 23;
   expected_video.total_inter_frame_delay = 0.123;
   expected_video.total_squared_inter_frame_delay = 0.00456;
+  expected_video.pause_count = 2;
+  expected_video.total_pauses_duration = 10;
+  expected_video.freeze_count = 3;
+  expected_video.total_freezes_duration = 1;
   expected_video.jitter = 1.199;
   expected_video.jitter_buffer_delay = 3.456;
   expected_video.jitter_buffer_target_delay = 1.1;
