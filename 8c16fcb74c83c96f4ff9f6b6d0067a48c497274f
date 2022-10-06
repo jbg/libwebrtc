@@ -16,6 +16,23 @@
       "message": "Adding affected owners as reviewers, to check that I don\u0027t misrepresent them.",
       "revId": "8c16fcb74c83c96f4ff9f6b6d0067a48c497274f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0134505_96663605",
+        "filename": "api/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-10-06T12:01:16Z",
+      "side": 1,
+      "message": "nit: Pacific Time?",
+      "revId": "8c16fcb74c83c96f4ff9f6b6d0067a48c497274f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
