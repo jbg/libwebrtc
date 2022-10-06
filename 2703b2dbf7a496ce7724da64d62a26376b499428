@@ -16,6 +16,23 @@
       "message": "Great work Hanna! LGTM",
       "revId": "2703b2dbf7a496ce7724da64d62a26376b499428",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d28f4c54_ba2bcd9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-06T11:20:10Z",
+      "side": 1,
+      "message": "Thanks Alessio!",
+      "revId": "2703b2dbf7a496ce7724da64d62a26376b499428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
