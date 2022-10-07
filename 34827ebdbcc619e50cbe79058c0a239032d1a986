@@ -34,6 +34,24 @@
       "parentUuid": "15f3b4ab_c5647550",
       "revId": "34827ebdbcc619e50cbe79058c0a239032d1a986",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d584f1db_4b86fbc0",
+        "filename": "modules/audio_coding/neteq/timestamp_scaler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2022-10-07T17:00:04Z",
+      "side": 1,
+      "message": "yeaaah I almost did, but felt bad introducing two more stateful components. But I agree, that\u0027s better.\n\nWhat do you think about the getTimestampDifference(a, b) way? That feels reusable \ngetTimestampDifference(7, 2) \u003d 5\ngetTimestampDifference(2, 7) \u003d -5\ngetTimestampDifference(1, 2^32) \u003d 2\ngetTimestampDifference(2^32, 1) \u003d -2",
+      "parentUuid": "bda784a8_715c1e62",
+      "revId": "34827ebdbcc619e50cbe79058c0a239032d1a986",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
