@@ -16,6 +16,24 @@
       "message": "what might be more clear is adding in [1] a static \u0027getDifference\u0027/\u0027getTimestampDifference\u0027(a, b), similar to IsNewer/IsNewerTimestamp(a, b), that just returns a - b but accounting for wrap-around.  As that is all this is doing here, getDifference(a, b). \n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/include/module_common_types_public.h;l\u003d21",
       "revId": "34827ebdbcc619e50cbe79058c0a239032d1a986",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda784a8_715c1e62",
+        "filename": "modules/audio_coding/neteq/timestamp_scaler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-10-07T14:08:39Z",
+      "side": 1,
+      "message": "Would it be possible to rewrite this to use the TimestampUnwrapper instead? I think that would be easier to follow. Ideally we would use unwrapped timestamps throughout NetEq but that would be a lot of work.. :)",
+      "parentUuid": "15f3b4ab_c5647550",
+      "revId": "34827ebdbcc619e50cbe79058c0a239032d1a986",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aa4816d_2af41ab1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-10-07T14:08:39Z",
+      "side": 1,
+      "message": "Sorry for the delay, thanks for fixing this.",
+      "revId": "34a069380eae6897b1f88c2587e1df8aafa8e0a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
