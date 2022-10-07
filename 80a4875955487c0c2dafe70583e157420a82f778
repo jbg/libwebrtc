@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c98358e_09bfa111",
+        "filename": "test/frame_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-07T13:01:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c45c477_b31b0db2",
+      "range": {
+        "startLine": 217,
+        "startChar": 43,
+        "endLine": 217,
+        "endChar": 49
+      },
+      "revId": "80a4875955487c0c2dafe70583e157420a82f778",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "053644d2_593774b6",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-07T12:51:57Z",
       "side": 1,
       "message": "Use existing FrameGeneratorTest::size_y and size_uv. Update the code below, since that size_uv is half of what you calculate yourself.",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 18
+      },
+      "revId": "80a4875955487c0c2dafe70583e157420a82f778",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b54a13a3_610c97b4",
+        "filename": "test/frame_generator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-07T13:01:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "053644d2_593774b6",
       "range": {
         "startLine": 82,
         "startChar": 4,
