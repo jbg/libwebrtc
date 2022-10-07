@@ -16,6 +16,167 @@
       "message": "Please ?",
       "revId": "747022a90bb1240ec1dd80bcfd17696c6475f342",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cacdc91_c459b1d0",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-07T11:57:33Z",
+      "side": 1,
+      "message": "Curious, Is the other option here that the bitrate is updated on the network thread?",
+      "range": {
+        "startLine": 401,
+        "startChar": 26,
+        "endLine": 401,
+        "endChar": 52
+      },
+      "revId": "747022a90bb1240ec1dd80bcfd17696c6475f342",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b3f965_23d1814f",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-07T11:57:33Z",
+      "side": 1,
+      "message": "Can this use a sequence checker? Or is that not possible due to the null thread issue?",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 481,
+        "endChar": 49
+      },
+      "revId": "747022a90bb1240ec1dd80bcfd17696c6475f342",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7516063_cfec605b",
+        "filename": "video/video_send_stream_impl_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-07T11:57:33Z",
+      "side": 1,
+      "message": "Replace with `time_controller_.AdvanceTime(TimeDetla::Zero())` as other task queues could have pending tasks.",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 40
+      },
+      "revId": "747022a90bb1240ec1dd80bcfd17696c6475f342",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea30d807_d4bb5059",
+        "filename": "video/video_send_stream_impl_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-07T11:57:33Z",
+      "side": 1,
+      "message": "Can this be moved out of this closure?",
+      "range": {
+        "startLine": 845,
+        "startChar": 0,
+        "endLine": 845,
+        "endChar": 38
+      },
+      "revId": "747022a90bb1240ec1dd80bcfd17696c6475f342",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "082123d8_42abd24e",
+        "filename": "video/video_send_stream_impl_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-07T11:57:33Z",
+      "side": 1,
+      "message": "This can move outside the closure",
+      "range": {
+        "startLine": 849,
+        "startChar": 0,
+        "endLine": 850,
+        "endChar": 34
+      },
+      "revId": "747022a90bb1240ec1dd80bcfd17696c6475f342",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54f54d20_a950f110",
+        "filename": "video/video_send_stream_impl_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-07T11:57:33Z",
+      "side": 1,
+      "message": "Does this check depend on the time being advanced only 0s, and not 5s? If it doesn\u0027t matter, change the above advance to 5s.",
+      "range": {
+        "startLine": 884,
+        "startChar": 12,
+        "endLine": 884,
+        "endChar": 27
+      },
+      "revId": "747022a90bb1240ec1dd80bcfd17696c6475f342",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81e146f2_72974ca3",
+        "filename": "video/video_send_stream_impl_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-07T11:57:33Z",
+      "side": 1,
+      "message": "These can be moved above after the time advancement.",
+      "range": {
+        "startLine": 889,
+        "startChar": 1,
+        "endLine": 890,
+        "endChar": 67
+      },
+      "revId": "747022a90bb1240ec1dd80bcfd17696c6475f342",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
