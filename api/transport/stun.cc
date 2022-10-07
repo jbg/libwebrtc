@@ -24,6 +24,7 @@
 #include "rtc_base/helpers.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/message_digest.h"
+#include "system_wrappers/include/metrics.h"
 
 using rtc::ByteBufferReader;
 using rtc::ByteBufferWriter;
@@ -257,6 +258,71 @@ StunMessage::IntegrityStatus StunMessage::ValidateMessageIntegrity(
     }
   } else {
     integrity_ = IntegrityStatus::kNoIntegrity;
+  }
+  // Log the result of integrity checking. See crbug.com/1177125 for background.
+  // Convert args to integer for the benefit of the macros.
+  int boundary = static_cast<int>(IntegrityStatus::kIntegrityMax);
+  int integrity = static_cast<int>(integrity_);
+  if (IsStunRequestType(type_)) {
+    RTC_HISTOGRAM_ENUMERATION("WebRTC.Stun.Integrity.Request", integrity,
+                              boundary);
+  } else if (IsStunSuccessResponseType(type_)) {
+    RTC_HISTOGRAM_ENUMERATION("WebRTC.Stun.Integrity.Response", integrity,
+                              boundary);
+  } else if (IsStunIndicationType(type_)) {
+    RTC_HISTOGRAM_ENUMERATION("WebRTC.Stun.Integrity.Indication", integrity,
+                              boundary);
+  } else {
+    RTC_DCHECK(IsStunErrorResponseType(type_));
+    auto* error_attribute = GetErrorCode();
+    if (!error_attribute) {
+      RTC_HISTOGRAM_ENUMERATION(
+          "WebRTC.Stun.Integrity.ErrorResponse.NoErrorAttribute", integrity,
+          boundary);
+    } else {
+      switch (error_attribute->code()) {
+        case STUN_ERROR_TRY_ALTERNATE:
+          RTC_HISTOGRAM_ENUMERATION(
+              "WebRTC.Stun.Integrity.ErrorResponse.TryAlternate", integrity,
+              boundary);
+          break;
+        case STUN_ERROR_BAD_REQUEST:
+          RTC_HISTOGRAM_ENUMERATION(
+              "WebRTC.Stun.Integrity.ErrorResponse.BadRequest", integrity,
+              boundary);
+          break;
+        case STUN_ERROR_UNAUTHORIZED:
+          RTC_HISTOGRAM_ENUMERATION(
+              "WebRTC.Stun.Integrity.ErrorResponse.Unauthorized", integrity,
+              boundary);
+          break;
+        case STUN_ERROR_UNKNOWN_ATTRIBUTE:
+          RTC_HISTOGRAM_ENUMERATION(
+              "WebRTC.Stun.Integrity.ErrorResponse.UnknownAttribute", integrity,
+              boundary);
+          break;
+        case STUN_ERROR_STALE_NONCE:
+          RTC_HISTOGRAM_ENUMERATION(
+              "WebRTC.Stun.Integrity.ErrorResponse.StaleNonce", integrity,
+              boundary);
+          break;
+        case STUN_ERROR_SERVER_ERROR:
+          RTC_HISTOGRAM_ENUMERATION(
+              "WebRTC.Stun.Integrity.ErrorResponse.ServerError", integrity,
+              boundary);
+          break;
+        case STUN_ERROR_GLOBAL_FAILURE:
+          RTC_HISTOGRAM_ENUMERATION(
+              "WebRTC.Stun.Integrity.ErrorResponse.GlobalFailure", integrity,
+              boundary);
+          break;
+        default:
+          RTC_HISTOGRAM_ENUMERATION(
+              "WebRTC.Stun.Integrity.ErrorResponse.ErrorOther", integrity,
+              boundary);
+          break;
+      }
+    }
   }
   return integrity_;
 }

@@ -164,6 +164,7 @@ class StunMessage {
     kNoIntegrity,   // Message-integrity attribute missing
     kIntegrityOk,   // Message-integrity checked OK
     kIntegrityBad,  // Message-integrity verification failed
+    kIntegrityMax
   };
 
   int type() const { return type_; }
