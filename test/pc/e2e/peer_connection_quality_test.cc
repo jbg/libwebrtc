@@ -10,17 +10,21 @@
 #include "test/pc/e2e/peer_connection_quality_test.h"
 
 #include <algorithm>
+#include <cstddef>
 #include <memory>
 #include <set>
 #include <utility>
 
+#include "absl/functional/bind_front.h"
 #include "absl/strings/string_view.h"
 #include "api/jsep.h"
+#include "api/make_ref_counted.h"
 #include "api/media_stream_interface.h"
 #include "api/peer_connection_interface.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/rtc_event_log_output_file.h"
 #include "api/scoped_refptr.h"
+#include "api/task_queue/task_queue_factory.h"
 #include "api/test/metrics/metric.h"
 #include "api/test/time_controller.h"
 #include "api/test/video_quality_analyzer_interface.h"
@@ -30,10 +34,12 @@
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/task_queue_for_test.h"
+#include "rtc_base/task_utils/tracking_task_queue_factory_proxy.h"
 #include "system_wrappers/include/cpu_info.h"
 #include "system_wrappers/include/field_trial.h"
 #include "test/field_trial.h"
 #include "test/pc/e2e/analyzer/audio/default_audio_quality_analyzer.h"
+#include "test/pc/e2e/analyzer/threading/thread_duration_analyzer.h"
 #include "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h"
 #include "test/pc/e2e/analyzer/video/video_frame_tracking_id_injector.h"
 #include "test/pc/e2e/analyzer/video/video_quality_metrics_reporter.h"
@@ -123,6 +129,11 @@ void ValidateP2PSimulcastParams(
   }
 }
 
+bool TrackThreadDuration() {
+  // TODO(eshr): Check a field trial or use a param or something else.
+  return true;
+}
+
 }  // namespace
 
 PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
@@ -143,11 +154,25 @@ PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
     std::unique_ptr<VideoQualityAnalyzerInterface> video_quality_analyzer,
     test::MetricsLogger* metrics_logger)
     : time_controller_(time_controller),
+      thread_duration_analyzer_(
+          TrackThreadDuration()
+              ? rtc::make_ref_counted<ThreadDurationAnalyzer>()
+              : nullptr),
       task_queue_factory_(time_controller_.CreateTaskQueueFactory()),
       test_case_name_(std::move(test_case_name)),
       executor_(std::make_unique<TestActivitiesExecutor>(
           time_controller_.GetClock())),
       metrics_logger_(metrics_logger) {
+  if (thread_duration_analyzer_) {
+    task_queue_factory_ = std::make_unique<TrackingTaskQueueFactoryProxy>(
+        time_controller_.GetClock(), std::move(task_queue_factory_),
+        TimeDelta::Millis(50), TimeDelta::Millis(50),
+        absl::bind_front(&ThreadDurationAnalyzer::OnLatencyMeasured,
+                         thread_duration_analyzer_),
+        absl::bind_front(&ThreadDurationAnalyzer::OnTaskDurationMeasured,
+                         thread_duration_analyzer_));
+  }
+
   // Create default video quality analyzer. We will always create an analyzer,
   // even if there are no video streams, because it will be installed into video
   // encoder/decoder factories.
@@ -418,6 +443,9 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
   video_quality_analyzer_injection_helper_->Stop();
   for (auto& reporter : quality_metrics_reporters_) {
     reporter->StopAndReportResults();
+  }
+  if (thread_duration_analyzer_ && metrics_logger_) {
+    thread_duration_analyzer_->LogMetrics(*metrics_logger_, test_case_name_);
   }
 
   // Reset `task_queue_` after test to cleanup.

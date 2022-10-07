@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "absl/strings/string_view.h"
+#include "api/scoped_refptr.h"
 #include "api/task_queue/task_queue_factory.h"
 #include "api/test/audio_quality_analyzer_interface.h"
 #include "api/test/metrics/metrics_logger.h"
@@ -28,6 +29,7 @@
 #include "rtc_base/thread.h"
 #include "rtc_base/thread_annotations.h"
 #include "system_wrappers/include/clock.h"
+#include "test/pc/e2e/analyzer/threading/thread_duration_analyzer.h"
 #include "test/pc/e2e/analyzer/video/single_process_encoded_image_data_injector.h"
 #include "test/pc/e2e/analyzer/video/video_quality_analyzer_injection_helper.h"
 #include "test/pc/e2e/analyzer_helper.h"
@@ -116,7 +118,8 @@ class PeerConnectionE2EQualityTest
   Timestamp Now() const;
 
   TimeController& time_controller_;
-  const std::unique_ptr<TaskQueueFactory> task_queue_factory_;
+  rtc::scoped_refptr<ThreadDurationAnalyzer> thread_duration_analyzer_;
+  std::unique_ptr<TaskQueueFactory> task_queue_factory_;
   std::string test_case_name_;
   std::unique_ptr<VideoQualityAnalyzerInjectionHelper>
       video_quality_analyzer_injection_helper_;

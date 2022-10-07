@@ -397,6 +397,7 @@ if (!build_with_chromium) {
         ":test_activities_executor",
         ":test_peer",
         ":test_peer_factory",
+        ":thread_duration_analyzer",
         ":video_frame_tracking_id_injector",
         ":video_quality_analyzer_injection_helper",
         ":video_quality_metrics_reporter",
@@ -405,6 +406,7 @@ if (!build_with_chromium) {
         "../..:perf_test",
         "../../../api:audio_quality_analyzer_api",
         "../../../api:libjingle_peerconnection_api",
+        "../../../api:make_ref_counted",
         "../../../api:media_stream_interface",
         "../../../api:peer_connection_quality_test_fixture_api",
         "../../../api:rtc_event_log_output_file",
@@ -428,10 +430,14 @@ if (!build_with_chromium) {
         "../../../rtc_base:task_queue_for_test",
         "../../../rtc_base:threading",
         "../../../rtc_base/synchronization:mutex",
+        "../../../rtc_base/task_utils:tracking_task_queue_factory_proxy",
         "../../../system_wrappers",
         "../../../system_wrappers:field_trial",
       ]
-      absl_deps = [ "//third_party/abseil-cpp/absl/strings" ]
+      absl_deps = [
+        "//third_party/abseil-cpp/absl/functional:bind_front",
+        "//third_party/abseil-cpp/absl/strings",
+      ]
     }
 
     rtc_library("single_process_encoded_image_data_injector_unittest") {
@@ -680,6 +686,26 @@ if (!build_with_chromium) {
       "../../../api:sequence_checker",
       "../../../api:track_id_stream_info_map",
       "../../../rtc_base:macromagic",
+    ]
+    absl_deps = [ "//third_party/abseil-cpp/absl/strings" ]
+  }
+
+  rtc_library("thread_duration_analyzer") {
+    visibility = [ "*" ]
+    testonly = true
+    sources = [
+      "analyzer/threading/thread_duration_analyzer.cc",
+      "analyzer/threading/thread_duration_analyzer.h",
+    ]
+    deps = [
+      "../../../api/numerics",
+      "../../../api/test/metrics:metric",
+      "../../../api/test/metrics:metrics_logger",
+      "../../../api/units:time_delta",
+      "../../../rtc_base:refcount",
+      "../../../rtc_base:stringutils",
+      "../../../rtc_base/containers:flat_map",
+      "../../../rtc_base/synchronization:mutex",
     ]
     absl_deps = [ "//third_party/abseil-cpp/absl/strings" ]
   }
