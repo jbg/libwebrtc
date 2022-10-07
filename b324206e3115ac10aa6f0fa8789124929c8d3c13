@@ -16,6 +16,24 @@
       "message": "This could be replaced with a new sequence checker for the network sequence instead of removing it. IT is also more explicit to check that it is run on a given sequence always than checking that it is not run on a sequence. \n\nIn the case that the worker thread \u003d\u003d network thread, DCHECK_RUN_ON(network_sequence_) will work just fine.",
       "revId": "b324206e3115ac10aa6f0fa8789124929c8d3c13",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f54eab7d_505debd0",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-07T12:24:02Z",
+      "side": 0,
+      "message": "Updated comment. We can check the seqeuence if our experiment is successful.",
+      "parentUuid": "9ba73fd9_68088797",
+      "revId": "b324206e3115ac10aa6f0fa8789124929c8d3c13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
