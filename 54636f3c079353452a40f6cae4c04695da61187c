@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f777067b_736546df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-10-07T17:35:39Z",
+      "side": 1,
+      "message": "while I was pondering how to write docs for the beautiful stats model... this seems more like how you would do it in 2022",
+      "revId": "54636f3c079353452a40f6cae4c04695da61187c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
