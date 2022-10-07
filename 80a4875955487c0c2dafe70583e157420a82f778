@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c45c477_b31b0db2",
+        "filename": "test/frame_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-10-07T12:51:57Z",
+      "side": 1,
+      "message": "Please add enum value kNV12 [1] and use it here. Add it to two switches [2], [3] (return FOURCC_NV12)\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_video/libyuv/include/webrtc_libyuv.h;l\u003d38;drc\u003d8d399817282e3c12ed54eb23ec42a5e418298ec6\n\n[2] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_video/libyuv/webrtc_libyuv.cc;l\u003d29;drc\u003d8d399817282e3c12ed54eb23ec42a5e418298ec6\n\n[3]\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_video/libyuv/webrtc_libyuv.cc;l\u003d92;drc\u003d8d399817282e3c12ed54eb23ec42a5e418298ec6",
+      "range": {
+        "startLine": 217,
+        "startChar": 43,
+        "endLine": 217,
+        "endChar": 49
+      },
+      "revId": "80a4875955487c0c2dafe70583e157420a82f778",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053644d2_593774b6",
+        "filename": "test/frame_generator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-10-07T12:51:57Z",
+      "side": 1,
+      "message": "Use existing FrameGeneratorTest::size_y and size_uv. Update the code below, since that size_uv is half of what you calculate yourself.",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 18
+      },
+      "revId": "80a4875955487c0c2dafe70583e157420a82f778",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
