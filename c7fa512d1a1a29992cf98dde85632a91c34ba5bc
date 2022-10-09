@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cea9601e_6e5da8c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2022-10-09T21:50:59Z",
+      "side": 1,
+      "message": "One comment about the enum to follow the histogram recommendations.\nLGTM otherwise. Stamping +1 so that you don\u0027t have to wait for me for another round.",
+      "revId": "c7fa512d1a1a29992cf98dde85632a91c34ba5bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25f7421d_30bbe007",
+        "filename": "api/transport/stun.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2022-10-09T21:50:59Z",
+      "side": 1,
+      "message": "Preferably these should have explicit numbers and a comment that the entries should not be renumbered. See https://chromium.googlesource.com/chromium/src.git/+/HEAD/tools/metrics/histograms/README.md#requirements\n\nFor some reason WebRTC is still using the legacy enum histograms. I think that kCount might be a better name than kMax since that would usually have been used as kMax \u003d kIntegrityBad.\nhttps://chromium.googlesource.com/chromium/src.git/+/HEAD/tools/metrics/histograms/README.md#legacy-enums",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 4
+      },
+      "revId": "c7fa512d1a1a29992cf98dde85632a91c34ba5bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
