@@ -71,6 +71,8 @@ constexpr char kFlexFecEnabledFieldTrials[] =
     "WebRTC-FlexFEC-03-Advertised/Enabled/WebRTC-FlexFEC-03/Enabled/";
 constexpr char kUseStandardsBytesStats[] =
     "WebRTC-UseStandardBytesStats/Enabled/";
+constexpr char kSendsPacketsOnWorkerThread[] =
+    "WebRTC-SendPacketsOnWorkerThread/Enabled/";
 
 class FixturePeerConnectionObserver : public MockPeerConnectionObserver {
  public:
@@ -273,7 +275,8 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
 
   TestPeerFactory test_peer_factory(
       signaling_thread.get(), time_controller_,
-      video_quality_analyzer_injection_helper_.get(), task_queue_.get());
+      video_quality_analyzer_injection_helper_.get(), task_queue_.get(),
+      run_params.use_network_thread_as_worker_thread);
   alice_ = test_peer_factory.CreateTestPeer(
       std::move(alice_configurer),
       std::make_unique<FixturePeerConnectionObserver>(
@@ -437,6 +440,9 @@ std::string PeerConnectionE2EQualityTest::GetFieldTrials(
       kUseStandardsBytesStats};
   if (run_params.enable_flex_fec_support) {
     default_field_trials.push_back(kFlexFecEnabledFieldTrials);
+  }
+  if (run_params.enable_experiment_send_packet_on_worker_thread) {
+    default_field_trials.push_back(kSendsPacketsOnWorkerThread);
   }
   rtc::StringBuilder sb;
   sb << field_trial::GetFieldTrialString();
