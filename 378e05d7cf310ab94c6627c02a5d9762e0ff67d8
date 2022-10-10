@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77d03014_1ef3a63f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-10T10:23:48Z",
+      "side": 1,
+      "message": "Since you saw the previous ones ... nothing in webrtc uses these forms, but it\u0027s polite to deprecate before removing.",
+      "revId": "378e05d7cf310ab94c6627c02a5d9762e0ff67d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
