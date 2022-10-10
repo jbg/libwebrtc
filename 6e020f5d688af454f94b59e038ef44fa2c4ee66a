@@ -33,6 +33,24 @@
       "message": "This will also break my unit test as I have a test for this exact case. At least I can remove it and make it more simple.",
       "revId": "6e020f5d688af454f94b59e038ef44fa2c4ee66a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d3d3e79_a2a7af5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2022-10-10T18:59:05Z",
+      "side": 1,
+      "message": "I think the underlying issue is us always moving to the next frame without knowing if we will be able to use it. If we can extend the queue API to tell us whether or not the next frame is shared, we can still avoid overwriting the frame (i.e. keeping your logic to return from ProcessBuffer). This can though cause visual effects of screen freezes (when e.g. queue has no frame we can write to) and/or frames speeding up (when we suddenly have a frame we can use in the queue but we have missed to capture few frames in the past) I think. But at least frames will be monotonic on time scale.\n\n(Separately, we should keep the RTC_DLOG (for debug logging this condition) since otherwise we see lot of warnings on some slower machines.)",
+      "parentUuid": "5f2a2a8f_25add97a",
+      "revId": "6e020f5d688af454f94b59e038ef44fa2c4ee66a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
