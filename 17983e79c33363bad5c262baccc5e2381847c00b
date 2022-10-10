@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb139aae_a9c8b669",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-10-10T18:09:32Z",
+      "side": 1,
+      "message": "LGTM with one nit.",
+      "revId": "17983e79c33363bad5c262baccc5e2381847c00b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5e6660f_33523318",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-10-10T18:09:32Z",
+      "side": 1,
+      "message": "NIT: Not valid anymore.",
+      "range": {
+        "startLine": 799,
+        "startChar": 0,
+        "endLine": 799,
+        "endChar": 71
+      },
+      "revId": "17983e79c33363bad5c262baccc5e2381847c00b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
