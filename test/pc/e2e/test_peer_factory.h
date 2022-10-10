@@ -56,11 +56,14 @@ class TestPeerFactory {
   TestPeerFactory(rtc::Thread* signaling_thread,
                   TimeController& time_controller,
                   VideoQualityAnalyzerInjectionHelper* video_analyzer_helper,
-                  rtc::TaskQueue* task_queue)
+                  rtc::TaskQueue* task_queue,
+                  bool use_network_thread_as_worker_thread)
       : signaling_thread_(signaling_thread),
         time_controller_(time_controller),
         video_analyzer_helper_(video_analyzer_helper),
-        task_queue_(task_queue) {}
+        task_queue_(task_queue),
+        use_network_thread_as_worker_thread_(
+            use_network_thread_as_worker_thread) {}
 
   // Setups all components, that should be provided to WebRTC
   // PeerConnectionFactory and PeerConnection creation methods,
@@ -78,6 +81,7 @@ class TestPeerFactory {
   TimeController& time_controller_;
   VideoQualityAnalyzerInjectionHelper* video_analyzer_helper_;
   rtc::TaskQueue* task_queue_;
+  const bool use_network_thread_as_worker_thread_;
 };
 
 }  // namespace webrtc_pc_e2e
