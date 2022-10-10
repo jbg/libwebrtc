@@ -635,6 +635,9 @@ class PeerConnectionE2EQualityTestFixture {
     // If true will set conference mode in SDP media section for all video
     // tracks for all peers.
     bool use_conference_mode = false;
+    // Packets will be sent using the worker thread and the network thread
+    // onlyt. See webrtc:1502.
+    bool enable_experiment_send_packet_on_worker_thread = false;
     // If specified echo emulation will be done, by mixing the render audio into
     // the capture signal. In such case input signal will be reduced by half to
     // avoid saturation or compression in the echo path simulation.

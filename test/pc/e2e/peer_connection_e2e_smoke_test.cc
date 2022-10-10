@@ -36,7 +36,18 @@ namespace webrtc {
 namespace webrtc_pc_e2e {
 namespace {
 
-class PeerConnectionE2EQualityTestSmokeTest : public ::testing::Test {
+struct PeerConnectionE2EQualityTestSmokeTestParams {
+  bool enable_experiment_send_on_worker_thread = false;
+};
+
+std::vector<PeerConnectionE2EQualityTestSmokeTestParams>
+ParameterizedTestParams() {
+  return {{}, {.enable_experiment_send_on_worker_thread = true}};
+}
+
+class PeerConnectionE2EQualityTestSmokeTest
+    : public ::testing::TestWithParam<
+          PeerConnectionE2EQualityTestSmokeTestParams> {
  public:
   using EmulatedSFUConfig =
       PeerConnectionE2EQualityTestFixture::EmulatedSFUConfig;
@@ -65,6 +76,13 @@ class PeerConnectionE2EQualityTestSmokeTest : public ::testing::Test {
         *network_emulation_->time_controller(),
         /*audio_quality_analyzer=*/nullptr, std::move(video_quality_analyzer));
   }
+
+  RunParams CreateParameterizedRunParams(TimeDelta run_time) {
+    RunParams run_params(run_time);
+    run_params.enable_experiment_send_packet_on_worker_thread =
+        GetParam().enable_experiment_send_on_worker_thread;
+    return run_params;
+  };
 
   std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
   CreateNetwork() {
@@ -130,13 +148,23 @@ class PeerConnectionE2EQualityTestSmokeTest : public ::testing::Test {
   std::unique_ptr<PeerConnectionE2EQualityTestFixture> fixture_;
 };
 
+INSTANTIATE_TEST_SUITE_P(
+    PeerConnectionE2EQualityTestSmokeTest,
+    PeerConnectionE2EQualityTestSmokeTest,
+    testing::ValuesIn(ParameterizedTestParams()),
+    [](const testing::TestParamInfo<
+        PeerConnectionE2EQualityTestSmokeTestParams>& info) {
+      return info.param.enable_experiment_send_on_worker_thread ? "SendOnWt"
+                                                                : "Default";
+    });
+
 // IOS debug builds can be quite slow, disabling to avoid issues with timeouts.
 #if defined(WEBRTC_IOS) && defined(WEBRTC_ARCH_ARM64) && !defined(NDEBUG)
 #define MAYBE_Smoke DISABLED_Smoke
 #else
 #define MAYBE_Smoke Smoke
 #endif
-TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Smoke) {
+TEST_P(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Smoke) {
   std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
       network_links = CreateNetwork();
   AddPeer(network_links.first, [](PeerConfigurer* alice) {
@@ -186,13 +214,13 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Smoke) {
               {{"alice", network_links.first->endpoints()},
                {"charlie", network_links.second->endpoints()}}),
           network_emulation(), test::GetGlobalMetricsLogger()));
-  RunParams run_params(TimeDelta::Seconds(2));
+  RunParams run_params = CreateParameterizedRunParams(TimeDelta::Seconds(2));
   run_params.enable_flex_fec_support = true;
   RunAndCheckEachVideoStreamReceivedFrames(run_params);
 }
 
 #if defined(WEBRTC_MAC) || defined(WEBRTC_IOS)
-TEST_F(PeerConnectionE2EQualityTestSmokeTest, SmokeH264) {
+TEST_P(PeerConnectionE2EQualityTestSmokeTest, SmokeH264) {
   std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
       network_links = CreateNetwork();
 
@@ -250,7 +278,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, SmokeH264) {
 #else
 #define MAYBE_ChangeNetworkConditions ChangeNetworkConditions
 #endif
-TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_ChangeNetworkConditions) {
+TEST_P(PeerConnectionE2EQualityTestSmokeTest, MAYBE_ChangeNetworkConditions) {
   NetworkEmulationManager::SimulatedNetworkNode alice_node =
       network_emulation()
           ->NodeBuilder()
@@ -312,7 +340,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_ChangeNetworkConditions) {
     alice_node.simulation->SetConfig(config);
   });
 
-  RunParams run_params(TimeDelta::Seconds(2));
+  RunParams run_params = CreateParameterizedRunParams(TimeDelta::Seconds(2));
   run_params.enable_flex_fec_support = true;
   RunAndCheckEachVideoStreamReceivedFrames(run_params);
 }
@@ -323,7 +351,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_ChangeNetworkConditions) {
 #else
 #define MAYBE_Screenshare Screenshare
 #endif
-TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Screenshare) {
+TEST_P(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Screenshare) {
   std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
       network_links = CreateNetwork();
   AddPeer(network_links.first, [](PeerConfigurer* alice) {
@@ -340,7 +368,9 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Screenshare) {
                           std::move(screen_share_frame_generator));
   });
   AddPeer(network_links.second, [](PeerConfigurer* bob) {});
-  RunAndCheckEachVideoStreamReceivedFrames(RunParams(TimeDelta::Seconds(2)));
+
+  RunAndCheckEachVideoStreamReceivedFrames(
+      CreateParameterizedRunParams(TimeDelta::Seconds(2)));
 }
 
 // IOS debug builds can be quite slow, disabling to avoid issues with timeouts.
@@ -349,7 +379,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Screenshare) {
 #else
 #define MAYBE_Echo Echo
 #endif
-TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Echo) {
+TEST_P(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Echo) {
   std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
       network_links = CreateNetwork();
   AddPeer(network_links.first, [](PeerConfigurer* alice) {
@@ -369,7 +399,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Echo) {
         test::ResourcePath("pc_quality_smoke_test_bob_source", "wav");
     bob->SetAudioConfig(std::move(audio));
   });
-  RunParams run_params(TimeDelta::Seconds(2));
+  RunParams run_params = CreateParameterizedRunParams(TimeDelta::Seconds(2));
   run_params.echo_emulation_config = EchoEmulationConfig();
   RunAndCheckEachVideoStreamReceivedFrames(run_params);
 }
@@ -380,7 +410,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Echo) {
 #else
 #define MAYBE_Simulcast Simulcast
 #endif
-TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Simulcast) {
+TEST_P(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Simulcast) {
   std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
       network_links = CreateNetwork();
   AddPeer(network_links.first, [](PeerConfigurer* alice) {
@@ -398,7 +428,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Simulcast) {
     alice->SetAudioConfig(std::move(audio));
   });
   AddPeer(network_links.second, [](PeerConfigurer* bob) {});
-  RunParams run_params(TimeDelta::Seconds(2));
+  RunParams run_params = CreateParameterizedRunParams(TimeDelta::Seconds(2));
   RunAndCheckEachVideoStreamReceivedFrames(run_params);
 }
 
@@ -408,7 +438,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Simulcast) {
 #else
 #define MAYBE_Svc Svc
 #endif
-TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Svc) {
+TEST_P(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Svc) {
   std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
       network_links = CreateNetwork();
   AddPeer(network_links.first, [](PeerConfigurer* alice) {
@@ -429,7 +459,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Svc) {
   AddPeer(network_links.second, [](PeerConfigurer* bob) {
     bob->SetVideoCodecs({VideoCodecConfig(cricket::kVp9CodecName)});
   });
-  RunParams run_params(TimeDelta::Seconds(2));
+  RunParams run_params = CreateParameterizedRunParams(TimeDelta::Seconds(2));
   RunAndCheckEachVideoStreamReceivedFrames(run_params);
 }
 
@@ -439,7 +469,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_Svc) {
 #else
 #define MAYBE_HighBitrate HighBitrate
 #endif
-TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_HighBitrate) {
+TEST_P(PeerConnectionE2EQualityTestSmokeTest, MAYBE_HighBitrate) {
   std::pair<EmulatedNetworkManagerInterface*, EmulatedNetworkManagerInterface*>
       network_links = CreateNetwork();
   AddPeer(network_links.first, [](PeerConfigurer* alice) {
@@ -469,7 +499,7 @@ TEST_F(PeerConnectionE2EQualityTestSmokeTest, MAYBE_HighBitrate) {
     bob->SetVideoCodecs(
         {VideoCodecConfig(cricket::kVp9CodecName, {{"profile-id", "0"}})});
   });
-  RunParams run_params(TimeDelta::Seconds(2));
+  RunParams run_params = CreateParameterizedRunParams(TimeDelta::Seconds(2));
   RunAndCheckEachVideoStreamReceivedFrames(run_params);
 }
 
