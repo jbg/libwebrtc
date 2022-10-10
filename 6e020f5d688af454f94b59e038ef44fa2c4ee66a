@@ -16,6 +16,23 @@
       "message": "Thanks. I think I saw this issue in the past for a while, but never identified what might be wrong. I know the X11 implementation was slightly different, but it looked weird to me ovewriting shared frames so I implemented it the way that was correct in my opinion.",
       "revId": "6e020f5d688af454f94b59e038ef44fa2c4ee66a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc6c889b_fcf82e43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-10T18:30:14Z",
+      "side": 1,
+      "message": "This will also break my unit test as I have a test for this exact case. At least I can remove it and make it more simple.",
+      "revId": "6e020f5d688af454f94b59e038ef44fa2c4ee66a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
