@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3351c0e8_8f4e6f15",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-10-10T15:33:15Z",
+      "side": 1,
+      "message": "Unrelated from this CL, but I wonder if we should have expectations on https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/test/pc/e2e/peer_connection_e2e_smoke_test.cc;l\u003d103;drc\u003df863182ce5363d2cb3be395aea35b9c9fb1f6abb, if this is empty, no expectations are run.",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 55
+      },
+      "revId": "121c23f58c48ea355b5396103d727554b36ac2be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55eba0ad_0a6dcb11",
+        "filename": "test/pc/e2e/test_peer_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-10-10T15:33:15Z",
+      "side": 1,
+      "message": "Does it make sense to add a TODO to remove the code once launched or is this something you are going to find and cleanup anyway?",
+      "range": {
+        "startLine": 343,
+        "startChar": 2,
+        "endLine": 349,
+        "endChar": 63
+      },
+      "revId": "121c23f58c48ea355b5396103d727554b36ac2be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
