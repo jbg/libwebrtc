@@ -635,6 +635,9 @@ class PeerConnectionE2EQualityTestFixture {
     // If true will set conference mode in SDP media section for all video
     // tracks for all peers.
     bool use_conference_mode = false;
+    // A Peerconnection use the network thread as the worker thread.
+    // Ie, worker thread and the network thread is the same thread.
+    bool use_network_thread_as_worker_thread = false;
     // If specified echo emulation will be done, by mixing the render audio into
     // the capture signal. In such case input signal will be reduced by half to
     // avoid saturation or compression in the echo path simulation.

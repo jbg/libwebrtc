@@ -273,7 +273,8 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
 
   TestPeerFactory test_peer_factory(
       signaling_thread.get(), time_controller_,
-      video_quality_analyzer_injection_helper_.get(), task_queue_.get());
+      video_quality_analyzer_injection_helper_.get(), task_queue_.get(),
+      run_params.use_network_thread_as_worker_thread);
   alice_ = test_peer_factory.CreateTestPeer(
       std::move(alice_configurer),
       std::make_unique<FixturePeerConnectionObserver>(
