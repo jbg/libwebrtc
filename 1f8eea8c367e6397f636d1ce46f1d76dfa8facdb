@@ -22,6 +22,30 @@
       },
       "revId": "1f8eea8c367e6397f636d1ce46f1d76dfa8facdb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d5b6cee_735c3e18",
+        "filename": "test/testsupport/y4m_frame_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-10T13:04:53Z",
+      "side": 1,
+      "message": "Discussed offline. Addressed in a bit different way to avoid complicated string parsing.",
+      "parentUuid": "2fd8cfee_0705213b",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 37
+      },
+      "revId": "1f8eea8c367e6397f636d1ce46f1d76dfa8facdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
