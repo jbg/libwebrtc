@@ -39,6 +39,30 @@
       },
       "revId": "c7fa512d1a1a29992cf98dde85632a91c34ba5bc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7416d6d8_e49360fa",
+        "filename": "api/transport/stun.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-10T04:37:40Z",
+      "side": 1,
+      "message": "Done.\n\nThe macros are defined within WebRTC, and overridden by Chrome. So I think nobody\u0027s gotten around to implementing the newer ones that autoscale and work for \"enum class\".\n\nWorthwhile forklift cleanup project?",
+      "parentUuid": "25f7421d_30bbe007",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 4
+      },
+      "revId": "c7fa512d1a1a29992cf98dde85632a91c34ba5bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
