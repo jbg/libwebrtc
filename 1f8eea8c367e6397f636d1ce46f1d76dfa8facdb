@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fd8cfee_0705213b",
+        "filename": "test/testsupport/y4m_frame_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-10-10T12:54:15Z",
+      "side": 1,
+      "message": "It would be great to log the expected WxHxFPS and the one we received.",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 37
+      },
+      "revId": "1f8eea8c367e6397f636d1ce46f1d76dfa8facdb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
