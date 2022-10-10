@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "613c0060_006f3bf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "I will do it.",
+      "parentUuid": "8fa9b830_cc4ca2d6",
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "662755b0_13166f3b",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-10-03T17:45:06Z",
       "side": 1,
       "message": "unused?",
+      "range": {
+        "startLine": 34,
+        "startChar": 48,
+        "endLine": 34,
+        "endChar": 65
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e2e132_f3081ff3",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "662755b0_13166f3b",
       "range": {
         "startLine": 34,
         "startChar": 48,
@@ -64,6 +106,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48223294_b0046a97",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Probe result expects to be timed out after being used for updating estimate. So in most cases, it will be in an observation window (about 250ms). In some rare cases when we do not receive packet feedback in a few seconds, probe result is used as the estimate until the next packet feedback arrives.",
+      "parentUuid": "2b147967_9975f048",
+      "range": {
+        "startLine": 178,
+        "startChar": 17,
+        "endLine": 178,
+        "endChar": 31
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8d78b9c_d05f622f",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-10-03T17:45:06Z",
       "side": 1,
       "message": "? So a probe bitrate always decrease? Doesnt this take the min probe bitrate thoughout the call?",
+      "range": {
+        "startLine": 213,
+        "startChar": 6,
+        "endLine": 213,
+        "endChar": 20
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce008065_db9c3705",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "No, if there are several probe results in an observation window (about 250ms), we use the minimum of them. Otherwise, probe result is reset after each observation window: probe_bitrate_ \u003d DataRate::MinusInfinity();",
+      "parentUuid": "c8d78b9c_d05f622f",
       "range": {
         "startLine": 213,
         "startChar": 6,
@@ -110,6 +200,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21266a53_6fae1e62",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Ack.\nAfter setting the estimate by the probe result, the probe is reseted: probe_bitrate_ \u003d DataRate::MinusInfinity();",
+      "parentUuid": "95a5dd53_20f6ccfc",
+      "range": {
+        "startLine": 228,
+        "startChar": 2,
+        "endLine": 228,
+        "endChar": 17
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d8ccac4_4d48ab55",
@@ -123,6 +237,30 @@
       "writtenOn": "2022-10-03T17:45:06Z",
       "side": 1,
       "message": "All of these are only used once. Even though the method becomes super long, I think its easier to read one big method. Especially since the naming of these methods are not super clear.",
+      "range": {
+        "startLine": 261,
+        "startChar": 2,
+        "endLine": 261,
+        "endChar": 20
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb479051_3c49584b",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d8ccac4_4d48ab55",
       "range": {
         "startLine": 261,
         "startChar": 2,
@@ -156,6 +294,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f5c8857_14ad654c",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fe2734c_4a2ba2a6",
+      "range": {
+        "startLine": 327,
+        "startChar": 44,
+        "endLine": 327,
+        "endChar": 74
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d90a23ee_212a7c60",
@@ -169,6 +331,30 @@
       "writtenOn": "2022-10-03T17:45:06Z",
       "side": 1,
       "message": "nope, here probe_bitrate_ is recet.",
+      "range": {
+        "startLine": 331,
+        "startChar": 4,
+        "endLine": 331,
+        "endChar": 18
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a215cfa5_a68d105b",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d90a23ee_212a7c60",
       "range": {
         "startLine": 331,
         "startChar": 4,
@@ -202,6 +388,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fe60815_34575fc5",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Done. Thanks for spotting this. There are indeed too many states.",
+      "parentUuid": "768c546f_dd3b25c2",
+      "range": {
+        "startLine": 344,
+        "startChar": 4,
+        "endLine": 344,
+        "endChar": 18
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b55b864c_87ddb04b",
@@ -215,6 +425,30 @@
       "writtenOn": "2022-10-03T17:45:06Z",
       "side": 1,
       "message": "spelling",
+      "range": {
+        "startLine": 1038,
+        "startChar": 27,
+        "endLine": 1038,
+        "endChar": 62
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a9da9e6_e4833d1b",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b55b864c_87ddb04b",
       "range": {
         "startLine": 1038,
         "startChar": 27,
@@ -248,6 +482,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4f8c745_e3d1bd86",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "This test makes sure that probe result is used when loss based bwe cannot produce a new estimate, e.g., when observation duration is too short (less than 250ms). I changed the test description to make the test meaning to be clearer.",
+      "parentUuid": "9996ca2a_91f22ae9",
+      "range": {
+        "startLine": 1102,
+        "startChar": 6,
+        "endLine": 1102,
+        "endChar": 23
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbe968af_5650a0a5",
@@ -261,6 +519,30 @@
       "writtenOn": "2022-10-03T17:45:06Z",
       "side": 1,
       "message": "Is there a test that test that loss based does not recover \u003e acked bitrate * factor?",
+      "range": {
+        "startLine": 1110,
+        "startChar": 7,
+        "endLine": 1110,
+        "endChar": 25
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69efc247_d8713272",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Yes, EstimateBitrateIsBoundedDuringDelayedWindowAfterLossBasedBweBacksOff for example.",
+      "parentUuid": "fbe968af_5650a0a5",
       "range": {
         "startLine": 1110,
         "startChar": 7,
@@ -294,6 +576,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4632f61_91b92d2a",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Line 473 works if state \u003d kDecreasing. If state is kIncreasing, we want to probe at estimated_bitrate_ as well. However, we cannot combine this line with line 473 because we want to keep probing further if state is kIncreasing. In short, the logic is:\n\nkDecreasing: probe once at estimated_bitrate_.\nkIncreasing: probe first at estimated_bitrate_. Can probe further.\nkDelayBasedEstimate: probe first at estimated_bitrate_ * config_.alr_probe_scale. Can probe further.",
+      "parentUuid": "e6a4d9d5_12d36999",
+      "range": {
+        "startLine": 450,
+        "startChar": 8,
+        "endLine": 450,
+        "endChar": 25
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b19b98e_83f7d006",
@@ -317,6 +623,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd4ac419_4730e0fc",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "I guess you mean loss_based_state_ !\u003d LossBasedState::kDelayBasedEstimate. If so, we cannot probe further if loss_based_state_ \u003d\u003d kIncreasing, which seems unreasonable to me.",
+      "parentUuid": "7b19b98e_83f7d006",
+      "range": {
+        "startLine": 473,
+        "startChar": 43,
+        "endLine": 473,
+        "endChar": 54
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b99446df_5739d6cc",
@@ -330,6 +660,30 @@
       "writtenOn": "2022-10-03T17:45:06Z",
       "side": 1,
       "message": "loss_based_state?",
+      "range": {
+        "startLine": 112,
+        "startChar": 21,
+        "endLine": 112,
+        "endChar": 36
+      },
+      "revId": "2925c1bcbe794bcc2470fe4e1498a4f504b720fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aa302ec_7d1298c6",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-10T14:37:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b99446df_5739d6cc",
       "range": {
         "startLine": 112,
         "startChar": 21,
