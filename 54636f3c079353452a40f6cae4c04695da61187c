@@ -16,6 +16,23 @@
       "message": "while I was pondering how to write docs for the beautiful stats model... this seems more like how you would do it in 2022",
       "revId": "54636f3c079353452a40f6cae4c04695da61187c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f2a4eba_119e249f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-10T11:23:46Z",
+      "side": 1,
+      "message": "Code looks sane (and better than before), I don\u0027t think the API changes at all, tests still pass, but I want Henrik to have the final say on this one.",
+      "revId": "54636f3c079353452a40f6cae4c04695da61187c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
