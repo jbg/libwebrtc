@@ -103,6 +103,10 @@ double GetLossProbability(double inherent_loss,
 
 }  // namespace
 
+LossBasedBweV2::Result::Result()
+    : bandwidth_estimate(DataRate::MinusInfinity()),
+      state(LossBasedState::kDelayBasedEstimate) {}
+
 LossBasedBweV2::LossBasedBweV2(const FieldTrialsView* key_value_config)
     : config_(CreateConfig(key_value_config)) {
   if (!config_.has_value()) {
@@ -134,8 +138,10 @@ bool LossBasedBweV2::IsReady() const {
          num_observations_ > 0;
 }
 
-DataRate LossBasedBweV2::GetBandwidthEstimate(
+LossBasedBweV2::Result LossBasedBweV2::GetLossBasedResult(
     DataRate delay_based_limit) const {
+  Result result;
+  result.state = current_state_;
   if (!IsReady()) {
     if (!IsEnabled()) {
       RTC_LOG(LS_WARNING)
@@ -150,17 +156,28 @@ DataRate LossBasedBweV2::GetBandwidthEstimate(
                                "statistics before it can be used.";
       }
     }
-    return IsValid(delay_based_limit) ? delay_based_limit
-                                      : DataRate::PlusInfinity();
+    result.bandwidth_estimate = IsValid(delay_based_limit)
+                                    ? delay_based_limit
+                                    : DataRate::PlusInfinity();
+    return result;
   }
 
-  if (delay_based_limit.IsFinite()) {
-    return std::min({current_estimate_.loss_limited_bandwidth,
-                     GetInstantUpperBound(), delay_based_limit});
+  if (IsValid(delay_based_limit)) {
+    result.bandwidth_estimate =
+        std::min({current_estimate_.loss_limited_bandwidth,
+                  GetInstantUpperBound(), delay_based_limit});
   } else {
-    return std::min(current_estimate_.loss_limited_bandwidth,
-                    GetInstantUpperBound());
+    result.bandwidth_estimate = std::min(
+        current_estimate_.loss_limited_bandwidth, GetInstantUpperBound());
   }
+
+  if (config_->probe_integration_enabled &&
+      current_state_ == LossBasedState::kDecreasing &&
+      IsValid(probe_bitrate_)) {
+    result.bandwidth_estimate =
+        std::min(probe_bitrate_, result.bandwidth_estimate);
+  }
+  return result;
 }
 
 void LossBasedBweV2::SetAcknowledgedBitrate(DataRate acknowledged_bitrate) {
@@ -190,15 +207,26 @@ void LossBasedBweV2::SetMinBitrate(DataRate min_bitrate) {
   }
 }
 
+void LossBasedBweV2::SetProbeBitrate(absl::optional<DataRate> probe_bitrate) {
+  if (probe_bitrate.has_value() && IsValid(probe_bitrate.value())) {
+    if (!IsValid(probe_bitrate_) || probe_bitrate_ > probe_bitrate.value()) {
+      probe_bitrate_ = probe_bitrate.value();
+    }
+  }
+}
+
 void LossBasedBweV2::UpdateBandwidthEstimate(
     rtc::ArrayView<const PacketResult> packet_results,
     DataRate delay_based_estimate,
-    BandwidthUsage delay_detector_state) {
+    BandwidthUsage delay_detector_state,
+    absl::optional<DataRate> probe_bitrate) {
   if (!IsEnabled()) {
     RTC_LOG(LS_WARNING)
         << "The estimator must be enabled before it can be used.";
     return;
   }
+  RTC_LOG(LS_WARNING) << "UpdateBandwidthEstimate 0 ";
+  SetProbeBitrate(probe_bitrate);
   if (packet_results.empty()) {
     RTC_LOG(LS_VERBOSE)
         << "The estimate cannot be updated without any loss statistics.";
@@ -214,7 +242,7 @@ void LossBasedBweV2::UpdateBandwidthEstimate(
         << "The estimator must be initialized before it can be used.";
     return;
   }
-
+  RTC_LOG(LS_WARNING) << "UpdateBandwidthEstimate 1 ";
   ChannelParameters best_candidate = current_estimate_;
   double objective_max = std::numeric_limits<double>::lowest();
   for (ChannelParameters candidate : GetCandidates(delay_based_estimate)) {
@@ -230,7 +258,7 @@ void LossBasedBweV2::UpdateBandwidthEstimate(
       current_estimate_.loss_limited_bandwidth) {
     last_time_estimate_reduced_ = last_send_time_most_recent_observation_;
   }
-
+  RTC_LOG(LS_WARNING) << "UpdateBandwidthEstimate 2 ";
   // Do not increase the estimate if the average loss is greater than current
   // inherent loss.
   if (GetAverageReportedLossRatio() > best_candidate.inherent_loss &&
@@ -240,13 +268,13 @@ void LossBasedBweV2::UpdateBandwidthEstimate(
     best_candidate.loss_limited_bandwidth =
         current_estimate_.loss_limited_bandwidth;
   }
-
+  RTC_LOG(LS_WARNING) << "UpdateBandwidthEstimate 3 ";
   // Bound the estimate increase if:
   // 1. The estimate is limited due to loss, and
   // 2. The estimate has been increased for less than `delayed_increase_window`
   // ago, and
   // 3. The best candidate is greater than bandwidth_limit_in_current_window.
-  if (limited_due_to_loss_candidate_ &&
+  if (IsBandwidthLimitedDueToLoss() &&
       recovering_after_loss_timestamp_.IsFinite() &&
       recovering_after_loss_timestamp_ + config_->delayed_increase_window >
           last_send_time_most_recent_observation_ &&
@@ -254,21 +282,56 @@ void LossBasedBweV2::UpdateBandwidthEstimate(
           bandwidth_limit_in_current_window_) {
     best_candidate.loss_limited_bandwidth = bandwidth_limit_in_current_window_;
   }
-  limited_due_to_loss_candidate_ =
-      delay_based_estimate.IsFinite() &&
-      best_candidate.loss_limited_bandwidth < delay_based_estimate;
-
-  if (limited_due_to_loss_candidate_ &&
+  RTC_LOG(LS_WARNING) << "UpdateBandwidthEstimate 4 ";
+  bool increasing_when_loss_limited =
+      IsEstimateIncreasingWhenLossLimited(best_candidate);
+  // Bound the best candidate by the acked bitrate.
+  if (increasing_when_loss_limited && !IsValid(probe_bitrate_)) {
+    best_candidate.loss_limited_bandwidth =
+        IsValid(best_candidate.loss_limited_bandwidth)
+            ? std::min(best_candidate.loss_limited_bandwidth,
+                       config_->bandwidth_rampup_upper_bound_factor *
+                           (*acknowledged_bitrate_))
+            : config_->bandwidth_rampup_upper_bound_factor *
+                  (*acknowledged_bitrate_);
+  }
+  RTC_LOG(LS_WARNING) << "UpdateBandwidthEstimate 5 ";
+  if (increasing_when_loss_limited) {
+    current_state_ = LossBasedState::kIncreasing;
+  } else if (IsValid(delay_based_estimate) &&
+             best_candidate.loss_limited_bandwidth < delay_based_estimate) {
+    current_state_ = LossBasedState::kDecreasing;
+  } else if (best_candidate.loss_limited_bandwidth == delay_based_estimate) {
+    current_state_ = LossBasedState::kDelayBasedEstimate;
+  }
+  current_estimate_ = best_candidate;
+  RTC_LOG(LS_WARNING) << "UpdateBandwidthEstimate 6 ";
+  if (config_->probe_integration_enabled && IsBandwidthLimitedDueToLoss() &&
+      IsValid(probe_bitrate_) && IsValid(delay_based_estimate)) {
+    current_estimate_.loss_limited_bandwidth = probe_bitrate_;
+    probe_bitrate_ = DataRate::MinusInfinity();
+  }
+  RTC_LOG(LS_WARNING) << "UpdateBandwidthEstimate 7 ";
+  if (IsBandwidthLimitedDueToLoss() &&
       (recovering_after_loss_timestamp_.IsInfinite() ||
        recovering_after_loss_timestamp_ + config_->delayed_increase_window <
            last_send_time_most_recent_observation_)) {
-    bandwidth_limit_in_current_window_ = std::max(
-        kCongestionControllerMinBitrate,
-        best_candidate.loss_limited_bandwidth * config_->max_increase_factor);
+    bandwidth_limit_in_current_window_ =
+        std::max(kCongestionControllerMinBitrate,
+                 current_estimate_.loss_limited_bandwidth *
+                     config_->max_increase_factor);
     recovering_after_loss_timestamp_ = last_send_time_most_recent_observation_;
   }
+}
 
-  current_estimate_ = best_candidate;
+bool LossBasedBweV2::IsEstimateIncreasingWhenLossLimited(
+    const ChannelParameters& best_candidate) {
+  return (current_estimate_.loss_limited_bandwidth <
+              best_candidate.loss_limited_bandwidth ||
+          (current_estimate_.loss_limited_bandwidth ==
+               best_candidate.loss_limited_bandwidth &&
+           current_state_ == LossBasedState::kIncreasing)) &&
+         IsBandwidthLimitedDueToLoss();
 }
 
 // Returns a `LossBasedBweV2::Config` iff the `key_value_config` specifies a
@@ -339,6 +402,8 @@ absl::optional<LossBasedBweV2::Config> LossBasedBweV2::CreateConfig(
       "BandwidthCapAtHighLossRate", DataRate::KilobitsPerSec(500.0));
   FieldTrialParameter<double> slope_of_bwe_high_loss_func(
       "SlopeOfBweHighLossFunc", 1000);
+  FieldTrialParameter<bool> probe_integration_enabled("ProbeIntegrationEnabled",
+                                                      false);
   if (key_value_config) {
     ParseFieldTrial({&enabled,
                      &bandwidth_rampup_upper_bound_factor,
@@ -371,6 +436,7 @@ absl::optional<LossBasedBweV2::Config> LossBasedBweV2::CreateConfig(
                      &delayed_increase_window,
                      &use_acked_bitrate_only_when_overusing,
                      &not_increase_if_inherent_loss_less_than_average_loss,
+                     &probe_integration_enabled,
                      &high_loss_rate_threshold,
                      &bandwidth_cap_at_high_loss_rate,
                      &slope_of_bwe_high_loss_func},
@@ -433,6 +499,8 @@ absl::optional<LossBasedBweV2::Config> LossBasedBweV2::CreateConfig(
   config->bandwidth_cap_at_high_loss_rate =
       bandwidth_cap_at_high_loss_rate.Get();
   config->slope_of_bwe_high_loss_func = slope_of_bwe_high_loss_func.Get();
+  config->probe_integration_enabled = probe_integration_enabled.Get();
+
   return config;
 }
 
@@ -645,7 +713,7 @@ double LossBasedBweV2::GetAverageReportedLossRatio() const {
 DataRate LossBasedBweV2::GetCandidateBandwidthUpperBound(
     DataRate delay_based_estimate) const {
   DataRate candidate_bandwidth_upper_bound = DataRate::PlusInfinity();
-  if (limited_due_to_loss_candidate_) {
+  if (IsBandwidthLimitedDueToLoss()) {
     candidate_bandwidth_upper_bound = bandwidth_limit_in_current_window_;
   }
 
@@ -660,14 +728,6 @@ DataRate LossBasedBweV2::GetCandidateBandwidthUpperBound(
 
   if (!acknowledged_bitrate_.has_value())
     return candidate_bandwidth_upper_bound;
-
-  candidate_bandwidth_upper_bound =
-      IsValid(candidate_bandwidth_upper_bound)
-          ? std::min(candidate_bandwidth_upper_bound,
-                     config_->bandwidth_rampup_upper_bound_factor *
-                         (*acknowledged_bitrate_))
-          : config_->bandwidth_rampup_upper_bound_factor *
-                (*acknowledged_bitrate_);
 
   if (config_->rampup_acceleration_max_factor > 0.0) {
     const TimeDelta time_since_bandwidth_reduced = std::min(
@@ -993,6 +1053,10 @@ bool LossBasedBweV2::PushBackObservation(
 
   CalculateInstantUpperBound();
   return true;
+}
+
+bool LossBasedBweV2::IsBandwidthLimitedDueToLoss() const {
+  return current_state_ != LossBasedState::kDelayBasedEstimate;
 }
 
 }  // namespace webrtc
