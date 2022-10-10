@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c074384_75fadd2c",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-10T16:00:36Z",
+      "side": 1,
+      "message": "Let\u0027s put it into PeerConfigurer:\nPeerConfigurer::SetUseNetworkThreadAsWorkerThread(bool) with false set by default.\n\nThen you won\u0027t need to change API of test peer factory and will be able to control it on per peer level.",
+      "range": {
+        "startLine": 640,
+        "startChar": 9,
+        "endLine": 640,
+        "endChar": 44
+      },
+      "revId": "121c23f58c48ea355b5396103d727554b36ac2be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3351c0e8_8f4e6f15",
         "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
         "patchSetId": 5
@@ -42,6 +65,29 @@
         "startChar": 2,
         "endLine": 349,
         "endChar": 63
+      },
+      "revId": "121c23f58c48ea355b5396103d727554b36ac2be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b8a23c2_ecf164a0",
+        "filename": "test/pc/e2e/test_peer_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-10T16:00:36Z",
+      "side": 1,
+      "message": "Let\u0027s also add a comment inside TestPeer that worker thread can be null and when it is a valid case",
+      "range": {
+        "startLine": 373,
+        "startChar": 10,
+        "endLine": 373,
+        "endChar": 18
       },
       "revId": "121c23f58c48ea355b5396103d727554b36ac2be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
