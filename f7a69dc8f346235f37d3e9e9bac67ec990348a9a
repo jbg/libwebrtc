@@ -16,6 +16,23 @@
       "message": "clean up all the things",
       "revId": "f7a69dc8f346235f37d3e9e9bac67ec990348a9a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d2ab64_3f6c5f69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-10-10T08:33:47Z",
+      "side": 1,
+      "message": "kron@ if you could help satisfying the \"four eyes\" rule... ;-)",
+      "revId": "f7a69dc8f346235f37d3e9e9bac67ec990348a9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
