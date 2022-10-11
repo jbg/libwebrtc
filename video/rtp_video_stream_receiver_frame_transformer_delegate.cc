@@ -60,6 +60,12 @@ class TransformableVideoReceiverFrame
 
   Direction GetDirection() const override { return Direction::kReceiver; }
 
+  std::unique_ptr<TransformableFrameInterface> Clone() const override {
+    return std::make_unique<TransformableVideoReceiverFrame>(
+        std::make_unique<RtpFrameObject>(*frame_),
+        ssrc_);
+  }
+
  private:
   std::unique_ptr<RtpFrameObject> frame_;
   const VideoFrameMetadata metadata_;

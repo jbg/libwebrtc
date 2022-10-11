@@ -46,6 +46,11 @@ class TransformableFrameInterface {
   // sender frames to allow received frames to be directly re-transmitted on
   // other PeerConnectionss.
   virtual Direction GetDirection() const { return Direction::kUnknown; }
+
+  virtual std::unique_ptr<TransformableFrameInterface> Clone() const {
+    RTC_CHECK(false) << "Clone not implemented.";
+    return nullptr;
+  }
 };
 
 class TransformableVideoFrameInterface : public TransformableFrameInterface {
