@@ -52,6 +52,24 @@
       "parentUuid": "bda784a8_715c1e62",
       "revId": "34827ebdbcc619e50cbe79058c0a239032d1a986",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8c44829_ce86b200",
+        "filename": "modules/audio_coding/neteq/timestamp_scaler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-10-11T20:43:25Z",
+      "side": 1,
+      "message": "Sure, I think that\u0027s fine too.",
+      "parentUuid": "d584f1db_4b86fbc0",
+      "revId": "34827ebdbcc619e50cbe79058c0a239032d1a986",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
