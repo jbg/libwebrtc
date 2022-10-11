@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d656c7_4fd62dd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-10-11T10:24:15Z",
+      "side": 1,
+      "message": "who knows C++ best for a second opinion?\nStill not sure if vector and map are trivially copy-able too...",
+      "revId": "c9c106b1fdfd493d846e097ef716f45dae5217b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
