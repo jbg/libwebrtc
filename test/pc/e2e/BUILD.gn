@@ -198,8 +198,10 @@ if (!build_with_chromium) {
       ]
       deps = [
         "../..:video_test_support",
-        "../../../api:peer_connection_quality_test_fixture_api",
+        "../../../api/test/video:video_frame_writer",
         "../../../api/video:video_frame",
+        "../../../rtc_base:checks",
+        "../../../rtc_base:logging",
         "../../../system_wrappers",
       ]
       absl_deps = [
@@ -216,7 +218,6 @@ if (!build_with_chromium) {
         "../..:fileutils",
         "../..:test_support",
         "../..:video_test_support",
-        "../../../api:peer_connection_quality_test_fixture_api",
         "../../../api:scoped_refptr",
         "../../../api/video:video_frame",
         "../../../rtc_base:random",
