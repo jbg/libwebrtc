@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5f9797b_91538984",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-11T15:51:45Z",
+      "side": 1,
+      "message": "It actually has some effect. If there is a probe result, it can be used and reset at anytime in the duration [current_time, current_time + 250ms]. It is 250ms because loss based bwe only gives an estimate when it gathers enough feedback for 1 observation of 250ms.\n\nAssume that loss based bwe gathers enough feedback at current_time + 125ms. The existing implementation uses \"old estimate\" in duration [current_time, current_time + 124ms], and at current_time + 125ms it uses the probe result as the estimate. The new implementation is to use the probe result in the whole duration [current_time, current_time + 125ms], i.e. whenever probe result is ready, it should be used.",
+      "parentUuid": "846c5502_2841d08a",
+      "range": {
+        "startLine": 177,
+        "startChar": 11,
+        "endLine": 177,
+        "endChar": 29
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48ea79dd_a1267ee8",
@@ -41,6 +65,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f25307ec_23bd7706",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-11T15:51:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48ea79dd_a1267ee8",
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0956a9e_2ceaaf45",
@@ -54,6 +96,30 @@
       "writtenOn": "2022-10-11T12:42:05Z",
       "side": 1,
       "message": "Since you take std::min - does increasing_when_loss_limited  matter?",
+      "range": {
+        "startLine": 288,
+        "startChar": 6,
+        "endLine": 288,
+        "endChar": 35
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb726815_8f4c3edf",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-11T15:51:45Z",
+      "side": 1,
+      "message": "Because using acked bitrate as a bound did not return positive results previously, I want to re-use it in a specific scenario, which is bandwidth increasing when network is loss limited. \n\nWe do not want to use acked bitrate as a bound when state is kDelayBasedEstimate. We might want to use it when state is kDecreasing, but I do not yet see a strong motivation to do that.",
+      "parentUuid": "d0956a9e_2ceaaf45",
       "range": {
         "startLine": 288,
         "startChar": 6,
@@ -87,6 +153,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e27b7dc_83912545",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-11T15:51:45Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3b504c12_22d3bf72",
+      "range": {
+        "startLine": 289,
+        "startChar": 6,
+        "endLine": 289,
+        "endChar": 13
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "521c4bf4_c28e2e8e",
@@ -100,6 +190,30 @@
       "writtenOn": "2022-10-11T12:42:05Z",
       "side": 1,
       "message": "probe_bitrate_ can be very old here right?  Should you do this only if   IsValid(probe_bitrate) instead of if  IsValid(probe_bitrate_)\n\nMaybe also write a comment about the reasoning why a probe result overides any loss based estimates?\nTo my understandng, a probe is always trusted to be correct? \n\nOr should this be         \nstd::min(probe_bitrate_, best_candidate.loss_limited_bandwidt); as you do on line 178 ?",
+      "range": {
+        "startLine": 310,
+        "startChar": 14,
+        "endLine": 310,
+        "endChar": 28
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "500efc9f_6390c0c9",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-11T15:51:45Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "521c4bf4_c28e2e8e",
       "range": {
         "startLine": 310,
         "startChar": 14,
@@ -133,6 +247,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a628979_75e270bf",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-11T15:51:45Z",
+      "side": 1,
+      "message": "Ack.\n\nIt is a very valid point and I wanted to implement that way as well.\n\nHowever it is not possible yet because GetCandidateBandwidthUpperBound introduces the \"Generic\" bound, while bounding on the best candidate is \"context dependent bound\". Generic bound means that we bound based on the current network state, e.g. loss rate. Context dependent bound means that we bound based on the current estimate, e.g. if we aim to increase the estimate to the best candidate, should we do it?, and if we should, how much should we increase?\n\nOf course grouping all the bounds into one place is possible, but it will more complicated change. It might (or might not) result in a simpler/cleaner implementation, I cannot judge which one is better atm.",
+      "parentUuid": "d0b39b75_039087ff",
+      "range": {
+        "startLine": 775,
+        "startChar": 6,
+        "endLine": 775,
+        "endChar": 37
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17291c77_17456b5d",
@@ -146,6 +284,24 @@
       "writtenOn": "2022-10-11T12:42:05Z",
       "side": 1,
       "message": "please describe what these states mean.",
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d372d0d_524d52f8",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-11T15:51:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17291c77_17456b5d",
       "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -173,6 +329,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f496a245_5a25ed89",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-11T15:51:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69e0fdae_1a106d2a",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 10
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30f81003_6569813a",
@@ -186,6 +366,24 @@
       "writtenOn": "2022-10-11T12:42:05Z",
       "side": 1,
       "message": "Why two methods to set the probe bitrate? Can one be removed?",
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d3b5913_7cc18e90",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-11T15:51:45Z",
+      "side": 1,
+      "message": "There is only one, probe bitrate is given to UpdateBandwidthEstimate, which calls SetProbeBitrate. I should move SetProbeBitrate to be private and I just did.",
+      "parentUuid": "30f81003_6569813a",
       "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

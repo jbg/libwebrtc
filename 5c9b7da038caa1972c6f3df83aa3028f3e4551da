@@ -16,6 +16,24 @@
       "message": "Is this currently not used?",
       "revId": "5c9b7da038caa1972c6f3df83aa3028f3e4551da",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe0bb32c_a13d9e4c",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-11T15:51:45Z",
+      "side": 0,
+      "message": "Yes, it is currently disabled by setting bandwidth_rampup_upper_bound_factor to 100000.",
+      "parentUuid": "2ed501ef_e18bf1cd",
+      "revId": "5c9b7da038caa1972c6f3df83aa3028f3e4551da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
