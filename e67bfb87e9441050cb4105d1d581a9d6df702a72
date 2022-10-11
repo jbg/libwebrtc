@@ -16,6 +16,57 @@
       "message": "I still haven\u0027t tested this yet (still building Chromium), but I think this should work so I\u0027m pushing it as WIP so you can try and take a look.",
       "revId": "e67bfb87e9441050cb4105d1d581a9d6df702a72",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "921fd32a_c42b789b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2022-10-11T15:04:34Z",
+      "side": 1,
+      "message": "Thanks for the change.",
+      "revId": "e67bfb87e9441050cb4105d1d581a9d6df702a72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f43d8d0c_aec765b8",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2022-10-11T15:04:34Z",
+      "side": 1,
+      "message": "Any idea why this was set to 16? A comment would be nice.",
+      "revId": "e67bfb87e9441050cb4105d1d581a9d6df702a72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73235f40_e4b14f00",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2022-10-11T15:04:34Z",
+      "side": 1,
+      "message": "It would be ok to do a union for overlapping rectangles but otherwise we should add separate non-overlapping rectangles possibly using this API:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/desktop_region.h;drc\u003db44e2b7a8a0df47f5a2d114d82ff8d5375e13bd7;bpv\u003d1;bpt\u003d1;l\u003d113",
+      "revId": "e67bfb87e9441050cb4105d1d581a9d6df702a72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
