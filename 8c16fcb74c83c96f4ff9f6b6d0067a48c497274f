@@ -33,6 +33,24 @@
       "message": "nit: Pacific Time?",
       "revId": "8c16fcb74c83c96f4ff9f6b6d0067a48c497274f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c9c7730_b414dd0f",
+        "filename": "api/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-11T12:10:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0134505_96663605",
+      "revId": "8c16fcb74c83c96f4ff9f6b6d0067a48c497274f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
