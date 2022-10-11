@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "585d0c3d_64a66427",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-11T16:13:38Z",
+      "side": 1,
+      "message": "I don\u0027t remember, I\u0027ve seen it somewhere probably, but it can be also unlimited (that\u0027s what I see in PipeWire example).",
+      "parentUuid": "f43d8d0c_aec765b8",
+      "revId": "e67bfb87e9441050cb4105d1d581a9d6df702a72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73235f40_e4b14f00",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-10-11T15:04:34Z",
       "side": 1,
       "message": "It would be ok to do a union for overlapping rectangles but otherwise we should add separate non-overlapping rectangles possibly using this API:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/desktop_region.h;drc\u003db44e2b7a8a0df47f5a2d114d82ff8d5375e13bd7;bpv\u003d1;bpt\u003d1;l\u003d113",
+      "revId": "e67bfb87e9441050cb4105d1d581a9d6df702a72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29b222e6_224b1fd3",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-11T16:13:38Z",
+      "side": 1,
+      "message": "Thanks for this suggestion. I didn\u0027t realize the difference between DesktopRegion and DesktopRect. Fixed.",
+      "parentUuid": "73235f40_e4b14f00",
       "revId": "e67bfb87e9441050cb4105d1d581a9d6df702a72",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
