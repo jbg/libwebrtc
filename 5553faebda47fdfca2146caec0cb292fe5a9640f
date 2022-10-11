@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2042fd6_3b9d4ca6",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T11:08:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c04a464a_524a91f9",
+      "range": {
+        "startLine": 535,
+        "startChar": 7,
+        "endLine": 535,
+        "endChar": 8
+      },
+      "revId": "5553faebda47fdfca2146caec0cb292fe5a9640f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f61de7c_13e65c02",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-10-11T10:41:57Z",
       "side": 1,
       "message": "Let\u0027s be more explicit here: components-\u003eworker_thread !\u003d nullptr\nThe same bellow",
+      "range": {
+        "startLine": 344,
+        "startChar": 6,
+        "endLine": 344,
+        "endChar": 31
+      },
+      "revId": "5553faebda47fdfca2146caec0cb292fe5a9640f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bce91154_14f602fa",
+        "filename": "test/pc/e2e/test_peer_factory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T11:08:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f61de7c_13e65c02",
       "range": {
         "startLine": 344,
         "startChar": 6,
