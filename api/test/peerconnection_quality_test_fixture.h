@@ -577,6 +577,9 @@ class PeerConnectionE2EQualityTestFixture {
     // crash.
     virtual PeerConfigurer* SetVideoCodecs(
         std::vector<VideoCodecConfig> video_codecs) = 0;
+    // Set factory to use for video frame dumping if it will be requested.
+    virtual PeerConfigurer* SetVideoFrameWriterFactory(
+        std::unique_ptr<VideoFrameWriterFactory> factory) = 0;
     // Set the audio stream for the call from this peer. If this method won't
     // be invoked, this peer will send no audio.
     virtual PeerConfigurer* SetAudioConfig(AudioConfig config) = 0;
