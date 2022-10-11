@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "846c5502_2841d08a",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T12:42:05Z",
+      "side": 1,
+      "message": "The probe result maybe very old here right? \nAlso, on line 311 you reset probe_bitra_ and set current_estimate_.loss_limited_bandwidth. So cant you just remove these lines? Looks to me like they have no effect.",
+      "range": {
+        "startLine": 177,
+        "startChar": 11,
+        "endLine": 177,
+        "endChar": 29
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48ea79dd_a1267ee8",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T12:42:05Z",
+      "side": 1,
+      "message": "// Bound the best candidate by the acked bitrate unless there is a recent probe.",
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0956a9e_2ceaaf45",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T12:42:05Z",
+      "side": 1,
+      "message": "Since you take std::min - does increasing_when_loss_limited  matter?",
+      "range": {
+        "startLine": 288,
+        "startChar": 6,
+        "endLine": 288,
+        "endChar": 35
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b504c12_22d3bf72",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T12:42:05Z",
+      "side": 1,
+      "message": "Should IsValid return false if acknowledged_bitrate\u003d\u003dabsl::nullopt?",
+      "range": {
+        "startLine": 289,
+        "startChar": 6,
+        "endLine": 289,
+        "endChar": 13
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "521c4bf4_c28e2e8e",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T12:42:05Z",
+      "side": 1,
+      "message": "probe_bitrate_ can be very old here right?  Should you do this only if   IsValid(probe_bitrate) instead of if  IsValid(probe_bitrate_)\n\nMaybe also write a comment about the reasoning why a probe result overides any loss based estimates?\nTo my understandng, a probe is always trusted to be correct? \n\nOr should this be         \nstd::min(probe_bitrate_, best_candidate.loss_limited_bandwidt); as you do on line 178 ?",
+      "range": {
+        "startLine": 310,
+        "startChar": 14,
+        "endLine": 310,
+        "endChar": 28
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b39b75_039087ff",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T12:42:05Z",
+      "side": 1,
+      "message": "I am wondering - would it make sense to keep all limitations of the candidates in GetCandidateBandwidthUpperBound instead of limiting the best candidate afterwards?",
+      "range": {
+        "startLine": 775,
+        "startChar": 6,
+        "endLine": 775,
+        "endChar": 37
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17291c77_17456b5d",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T12:42:05Z",
+      "side": 1,
+      "message": "please describe what these states mean.",
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69e0fdae_1a106d2a",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T12:42:05Z",
+      "side": 1,
+      "message": "No need for this ctor.",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 10
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f81003_6569813a",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T12:42:05Z",
+      "side": 1,
+      "message": "Why two methods to set the probe bitrate? Can one be removed?",
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

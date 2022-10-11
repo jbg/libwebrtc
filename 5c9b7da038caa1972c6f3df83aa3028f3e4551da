@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed501ef_e18bf1cd",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-11T12:42:05Z",
+      "side": 0,
+      "message": "Is this currently not used?",
+      "revId": "5c9b7da038caa1972c6f3df83aa3028f3e4551da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
