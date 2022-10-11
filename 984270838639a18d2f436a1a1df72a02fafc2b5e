@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c5ee789_28be6d27",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-11T13:57:01Z",
+      "side": 1,
+      "message": "This has been moved out of this CL and I have opened a bug for this.",
+      "parentUuid": "e72a7cfd_f0292dec",
+      "revId": "984270838639a18d2f436a1a1df72a02fafc2b5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ea4d96c_40e30372",
@@ -49,6 +67,24 @@
       "writtenOn": "2022-10-05T16:05:11Z",
       "side": 1,
       "message": "It\u0027s a shame that EncoderInfo and DecoderInfo does not use absl::optional\u003c\u003e, it assumes that any encoder implementation and decoder implementation is setting this value correctly. It\u0027s already used by downstream projects though, so I suggest we ignore this problem.",
+      "revId": "984270838639a18d2f436a1a1df72a02fafc2b5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11cf1d67_f7d0442c",
+        "filename": "test/fake_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-11T13:57:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6ea4d96c_40e30372",
       "revId": "984270838639a18d2f436a1a1df72a02fafc2b5e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
