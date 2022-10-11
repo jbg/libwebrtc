@@ -294,9 +294,7 @@ void SharedScreenCastStreamPrivate::OnStreamParamChanged(
   params.push_back(reinterpret_cast<spa_pod*>(spa_pod_builder_add_object(
       &builder, SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta, SPA_PARAM_META_type,
       SPA_POD_Id(SPA_META_VideoDamage), SPA_PARAM_META_size,
-      SPA_POD_CHOICE_RANGE_Int(sizeof(struct spa_meta_region) * 16,
-                               sizeof(struct spa_meta_region) * 1,
-                               sizeof(struct spa_meta_region) * 16))));
+      SPA_POD_Int(sizeof(struct spa_meta_region)))));
 
   pw_stream_update_params(that->pw_stream_, params.data(), params.size());
 }
@@ -823,8 +821,23 @@ void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
     }
   }
 
-  queue_.current_frame()->mutable_updated_region()->SetRect(
-      DesktopRect::MakeSize(queue_.current_frame()->size()));
+  // Set video damage regions
+  const struct spa_meta* video_damage = static_cast<struct spa_meta*>(
+      spa_buffer_find_meta(spa_buffer, SPA_META_VideoDamage));
+  if (video_damage) {
+    spa_meta_region* meta_region;
+
+    queue_.current_frame()->mutable_updated_region()->Clear();
+    spa_meta_for_each(meta_region, video_damage) {
+      queue_.current_frame()->mutable_updated_region()->AddRect(
+          DesktopRect::MakeXYWH(
+              meta_region->region.position.x, meta_region->region.position.y,
+              meta_region->region.size.width, meta_region->region.size.height));
+    }
+  } else {
+    queue_.current_frame()->mutable_updated_region()->SetRect(
+        DesktopRect::MakeSize(queue_.current_frame()->size()));
+  }
 }
 
 void SharedScreenCastStreamPrivate::ConvertRGBxToBGRx(uint8_t* frame,
