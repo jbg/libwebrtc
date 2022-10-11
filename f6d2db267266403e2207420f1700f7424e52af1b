@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "901fdb10_dff88570",
+        "filename": "test/pc/e2e/analyzer/video/video_dumping.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-11T08:16:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7ffc334_4ebc96df",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "f6d2db267266403e2207420f1700f7424e52af1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b29efc9_89bebfe3",
@@ -47,6 +71,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69927f7f_2854282d",
+        "filename": "test/pc/e2e/analyzer/video/video_dumping.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-11T08:16:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b29efc9_89bebfe3",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 76
+      },
+      "revId": "f6d2db267266403e2207420f1700f7424e52af1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c70557e_b7794d97",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-10-11T06:59:02Z",
       "side": 1,
       "message": "Should this be removed?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 2
+      },
+      "revId": "f6d2db267266403e2207420f1700f7424e52af1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aebb6e79_880b8212",
+        "filename": "test/pc/e2e/analyzer/video/video_quality_analyzer_injection_helper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-11T08:16:55Z",
+      "side": 1,
+      "message": "Forgot about it, thank you",
+      "parentUuid": "5c70557e_b7794d97",
       "range": {
         "startLine": 75,
         "startChar": 0,
