@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56b744e9_b1cf3f0a",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-12T07:21:25Z",
+      "side": 1,
+      "message": "Are you saing that current_estimate_.loss_limited_bandwidth is only updated every 250ms? Can you add a comment where that is ensured to guide readers - including me because I dont see it.\n\ncurrent_estimate_.loss_limited_bandwidth seems to be set to the probe bitrate as soon as we are loss limited. \n\nEvent if current_estimate_.loss_limited_bandwidth is not updated immediately - isnt it ok to wait 250ms until BWE increase to the last probe in order to make the code easier?",
+      "parentUuid": "b5f9797b_91538984",
+      "range": {
+        "startLine": 177,
+        "startChar": 11,
+        "endLine": 177,
+        "endChar": 29
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48ea79dd_a1267ee8",
         "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
         "patchSetId": 17
@@ -261,6 +285,30 @@
       "side": 1,
       "message": "Ack.\n\nIt is a very valid point and I wanted to implement that way as well.\n\nHowever it is not possible yet because GetCandidateBandwidthUpperBound introduces the \"Generic\" bound, while bounding on the best candidate is \"context dependent bound\". Generic bound means that we bound based on the current network state, e.g. loss rate. Context dependent bound means that we bound based on the current estimate, e.g. if we aim to increase the estimate to the best candidate, should we do it?, and if we should, how much should we increase?\n\nOf course grouping all the bounds into one place is possible, but it will more complicated change. It might (or might not) result in a simpler/cleaner implementation, I cannot judge which one is better atm.",
       "parentUuid": "d0b39b75_039087ff",
+      "range": {
+        "startLine": 775,
+        "startChar": 6,
+        "endLine": 775,
+        "endChar": 37
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "503bfd9f_b74eae43",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-12T07:21:25Z",
+      "side": 1,
+      "message": "I see,ok.",
+      "parentUuid": "0a628979_75e270bf",
       "range": {
         "startLine": 775,
         "startChar": 6,

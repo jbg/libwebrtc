@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89bb6eac_af6d5006",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-12T07:21:25Z",
+      "side": 1,
+      "message": "May I suggest rewriting this block slightly since every if block currently do  IsBandwidthLimitedDueToLoss. \n\nif (current_state_ !\u003d LossBasedState::kDelayBasedEstimate) {\n bool increasing_when_loss_limited \u003d...\n \n .... everything below that currently do if (IsBandwidthLimitedDueToLoss)\n\n  maybe update  current_state_ \n} else {\n  current_state_  \u003d .... \n}",
+      "revId": "552c406cc70ac625925715865965de6493892428",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
