@@ -33,6 +33,23 @@
       "message": "nit: Can you rephrase as \"When this stat should be exposed.\" rather than when it should be filtered out (for a split second I read this as kAlways filtering it out).",
       "revId": "b7174a82fed7cd1d4831da0e06f9c0c04c99df34",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6182d4a_4cdd3369",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-12T13:42:39Z",
+      "side": 1,
+      "message": "How about re-implementing RTCNonStandardStatsMember as RTCRestrictedStatsMember\u003ckNonStandard\u003e? :D\n\nis_standardized() would just be changed to exposure_criteria() !\u003d kNonStandard",
+      "revId": "b7174a82fed7cd1d4831da0e06f9c0c04c99df34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
