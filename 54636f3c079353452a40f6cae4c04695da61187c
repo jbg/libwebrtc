@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8651475b_30b736a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-10-12T11:31:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a890beda_91ea413a",
+      "revId": "54636f3c079353452a40f6cae4c04695da61187c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f777067b_736546df",
@@ -82,6 +100,24 @@
       "writtenOn": "2022-10-12T07:32:19Z",
       "side": 1,
       "message": "How about adding...?\n\nconst absl::optional\u003cT\u003e\u0026 OptionalValue() const { return value_; }",
+      "revId": "54636f3c079353452a40f6cae4c04695da61187c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf5301b0_255f46f7",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-10-12T11:31:38Z",
+      "side": 1,
+      "message": "I don\u0027t think this will be used widely. Long-term I think it would be \"nicer\" to expose some of the optional features like value_or(default) as methods. But so far we solved all the problems this API tackles without this.",
+      "parentUuid": "42d55676_01d6e914",
       "revId": "54636f3c079353452a40f6cae4c04695da61187c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
