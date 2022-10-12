@@ -120,6 +120,24 @@
       "parentUuid": "42d55676_01d6e914",
       "revId": "54636f3c079353452a40f6cae4c04695da61187c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a26497b7_ef42fa70",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-12T12:25:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bf5301b0_255f46f7",
+      "revId": "54636f3c079353452a40f6cae4c04695da61187c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
