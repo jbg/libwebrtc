@@ -70,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29f332cd_1332dd03",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-12T08:20:58Z",
+      "side": 1,
+      "message": "Alright, the way I did it now limits it to actually one damage region so I\u0027m setting this back to 16, which is what KWin does support. We can update this later based on what number of damage regions will be supported by Mutter.",
+      "parentUuid": "585d0c3d_64a66427",
+      "revId": "e67bfb87e9441050cb4105d1d581a9d6df702a72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73235f40_e4b14f00",
