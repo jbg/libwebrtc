@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef5a9a82_9faa1439",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-12T12:10:08Z",
+      "side": 1,
+      "message": "LGTM % comment below.",
+      "revId": "a3abf111c7292d36757c6a0f0f9acbb77aa96689",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64953541_bd143c0b",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-10-12T12:10:08Z",
+      "side": 1,
+      "message": "this can also be moved to the  if (IsBandwidthLimitedDueToLoss() block above.",
+      "range": {
+        "startLine": 313,
+        "startChar": 6,
+        "endLine": 313,
+        "endChar": 33
+      },
+      "revId": "a3abf111c7292d36757c6a0f0f9acbb77aa96689",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
