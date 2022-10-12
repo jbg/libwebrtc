@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc43196_314f2140",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2022-10-12T18:38:39Z",
+      "side": 1,
+      "message": "decided to go with jakobi\u0027s TimestampUnwrapper suggestion as that\u0027s closer to the goal of only using unwrapped timestamps throughout neteq",
+      "revId": "7b0e247ca005c0c4c924f7682dea853eee605566",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
