@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50bf6a4d_ac6eb659",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-12T10:50:50Z",
+      "side": 1,
+      "message": "Done.\n\u003e Are you saing that current_estimate_.loss_limited_bandwidth is only updated every 250ms?\n\nYes, we have a ObservationDurationLowerBound:250ms to control the observation duration.\n\n\u003e Event if current_estimate_.loss_limited_bandwidth is not updated immediately - isnt it ok to wait 250ms until BWE increase to the last probe in order to make the code easier?\n\nThat sounds reasonable to me. I updated the code by removing the line.",
+      "parentUuid": "56b744e9_b1cf3f0a",
+      "range": {
+        "startLine": 177,
+        "startChar": 11,
+        "endLine": 177,
+        "endChar": 29
+      },
+      "revId": "71f00cd002000a95d0b27edf01cbe8fdee0d1ffb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48ea79dd_a1267ee8",
