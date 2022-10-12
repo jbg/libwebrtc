@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c6f6572_adc1f230",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-12T08:39:40Z",
+      "side": 1,
+      "message": "what kind of review are you expecting from me?\nI\u0027m not familiar with this code, so can only provide some random readability suggestions here and there.",
+      "revId": "03420e87ade86ec50b5e358ac3f3584473dfd303",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1acc08c_48a38685",
@@ -100,6 +117,23 @@
         "endLine": 29,
         "endChar": 50
       },
+      "revId": "03420e87ade86ec50b5e358ac3f3584473dfd303",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d25a7bb_aa3ddaea",
+        "filename": "test/pc/e2e/analyzer/video/video_dumping.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-12T08:39:40Z",
+      "side": 1,
+      "message": "what the returned writer does in addition to `video_writer_delegate` when frame_ids_dump_file_name \u003d\u003d absl::nullopt?\n\nif implementation could be\n```\n std::unique_ptr\u003ctest::VideoFrameWriter\u003e CreateVideoFrameWriter(\n    std::unique_ptr\u003ctest::VideoFrameWriter\u003e video_writer_delegate,\n    absl::optional\u003cstd::string\u003e frame_ids_dump_file_name) {\n  if (frame_ids_dump_file_name.has_value()) {\n    return CreateWrapper(video_writer_Delegate, *frame_ids_dump_file_name);\n  } else {\n    return video_writer_delegate;\n  }\n }\n```\nThen it might be cleaner not to have 2nd parameter as optional.",
       "revId": "03420e87ade86ec50b5e358ac3f3584473dfd303",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
