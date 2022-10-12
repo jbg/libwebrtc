@@ -12,6 +12,7 @@
 #define MODULES_AUDIO_CODING_NETEQ_TIMESTAMP_SCALER_H_
 
 #include "modules/audio_coding/neteq/packet.h"
+#include "modules/include/module_common_types_public.h"
 
 namespace webrtc {
 
@@ -60,6 +61,9 @@ class TimestampScaler {
   int denominator_;
   uint32_t external_ref_;
   uint32_t internal_ref_;
+  TimestampUnwrapper external_unwrapper_;
+  TimestampUnwrapper internal_unwrapper_;
+
   const DecoderDatabase& decoder_database_;
 };
 
