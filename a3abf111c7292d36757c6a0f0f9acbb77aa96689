@@ -39,6 +39,30 @@
       },
       "revId": "a3abf111c7292d36757c6a0f0f9acbb77aa96689",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb72c16c_b458abbf",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2022-10-12T14:05:40Z",
+      "side": 1,
+      "message": "I tried then realized that it cannot. The block above works with old current_state_. Then current_state_ is updated according to best_candidate from line 302 to 310. After that, the bandwidth_limit_in_current_window_ is updated based on the new current_state_.",
+      "parentUuid": "64953541_bd143c0b",
+      "range": {
+        "startLine": 313,
+        "startChar": 6,
+        "endLine": 313,
+        "endChar": 33
+      },
+      "revId": "a3abf111c7292d36757c6a0f0f9acbb77aa96689",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
