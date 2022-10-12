@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1acc08c_48a38685",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-10-12T07:02:58Z",
+      "side": 1,
+      "message": "This part should belong to the previous ctor documentation since it is that ctor that will use Y4M by default.\n\nThis one will use the one provided by this function.",
+      "range": {
+        "startLine": 271,
+        "startChar": 48,
+        "endLine": 272,
+        "endChar": 18
+      },
+      "revId": "03420e87ade86ec50b5e358ac3f3584473dfd303",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c9f3e02_bcc6fdde",
+        "filename": "api/test/video/video_frame_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-10-12T07:02:58Z",
+      "side": 1,
+      "message": "Nit: Calling WriteFrame after Close is not allowed.\n\nOr something along these lines (more direct).",
+      "range": {
+        "startLine": 29,
+        "startChar": 5,
+        "endLine": 29,
+        "endChar": 50
+      },
+      "revId": "03420e87ade86ec50b5e358ac3f3584473dfd303",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
