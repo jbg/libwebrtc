@@ -50,6 +50,23 @@
       "message": "lgtm, but I’ll let Philip confirm this is the right fix for this.",
       "revId": "f1ab96aa6f377304af4894a6bbf1eb154a4e7b68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef851e4b_366b89b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-10-13T12:36:52Z",
+      "side": 1,
+      "message": "I don\u0027t believe this dependency should be part of `swcodecs_jni`. We are moving away from bundling encoders/decoders into single build targets, instead, depend on the `libaom_av1_encoder_jni` directly.",
+      "revId": "f1ab96aa6f377304af4894a6bbf1eb154a4e7b68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
