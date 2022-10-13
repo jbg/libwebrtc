@@ -33,6 +33,23 @@
       "message": "Hello Xavier!\n\nCould you please take a look or assign someone else who can review this CL?\n\nThanks a lot in advance, Yury.",
       "revId": "f1ab96aa6f377304af4894a6bbf1eb154a4e7b68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dda6620_af9f16ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-10-13T11:58:59Z",
+      "side": 1,
+      "message": "lgtm, but I’ll let Philip confirm this is the right fix for this.",
+      "revId": "f1ab96aa6f377304af4894a6bbf1eb154a4e7b68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
