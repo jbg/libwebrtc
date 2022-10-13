@@ -239,6 +239,10 @@ const StunUInt16ListAttribute* StunMessage::GetUnknownAttributes() const {
 
 StunMessage::IntegrityStatus StunMessage::ValidateMessageIntegrity(
     const std::string& password) {
+  RTC_LOG(LS_ERROR) << "DEBUG: Checking integrity for " << this
+                    << " with password " << password;
+  RTC_DCHECK(integrity_ == IntegrityStatus::kNotSet)
+      << "DEBUG: Verification should only be done once";
   password_ = password;
   if (GetByteString(STUN_ATTR_MESSAGE_INTEGRITY)) {
     if (ValidateMessageIntegrityOfType(
@@ -325,6 +329,14 @@ StunMessage::IntegrityStatus StunMessage::ValidateMessageIntegrity(
     }
   }
   return integrity_;
+}
+
+StunMessage::IntegrityStatus StunMessage::RevalidateMessageIntegrity(
+    const std::string& password) {
+  RTC_LOG(LS_INFO) << "Message revalidation, old status was "
+                   << static_cast<int>(integrity_);
+  integrity_ = IntegrityStatus::kNotSet;
+  return ValidateMessageIntegrity(password);
 }
 
 bool StunMessage::ValidateMessageIntegrityForTesting(
