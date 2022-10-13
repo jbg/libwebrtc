@@ -13,6 +13,7 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/network_state_predictor.h"
+#include "logging/rtc_event_log/encoder/bit_writer.h"
 #include "logging/rtc_event_log/encoder/blob_encoding.h"
 #include "logging/rtc_event_log/encoder/delta_encoding.h"
 #include "logging/rtc_event_log/encoder/rtc_event_log_encoder_common.h"
@@ -55,6 +56,7 @@
 #include "modules/rtp_rtcp/source/rtcp_packet/rtpfb.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/sdes.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/sender_report.h"
+#include "modules/rtp_rtcp/source/rtp_dependency_descriptor_extension.h"
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"
 #include "modules/rtp_rtcp/source/rtp_packet.h"
 #include "rtc_base/checks.h"
@@ -381,6 +383,55 @@ void EncodeRtcpPacket(rtc::ArrayView<const EventType*> batch,
   proto_batch->set_raw_packet_blobs(EncodeBlobs(scrubed_packets));
 }
 
+template <typename EventType>
+std::string EncodeDependencyDescriptor(
+    const std::vector<const EventType*>& batch) {
+  std::vector<rtc::ArrayView<const uint8_t>> raw_dds(batch.size());
+  for (const auto& packet : batch) {
+    auto raw_dd =
+        packet->template GetRawExtension<RtpDependencyDescriptorExtension>();
+    if (raw_dd.size() < 3) {
+      RTC_LOG(LS_WARNING) << "DependencyDescriptor size not valid.";
+      return {};
+    }
+    raw_dds.push_back(raw_dd);
+  }
+
+  BitWriter writer(1024 * 1024);
+  std::vector<absl::optional<uint64_t>> values(raw_dds.size());
+  std::string encoded_deltas;
+  // Start and end bit.
+  for (const auto& raw_dd : raw_dds) {
+    writer.WriteBits(raw_dd[0] >> 6, 2);
+  }
+  // Template IDs.
+  {
+    for (const auto& raw_dd : raw_dds) {
+      values.push_back(raw_dd[0] & 0011'1111);
+    }
+    encoded_deltas = EncodeDeltas(absl::nullopt, values);
+    if (encoded_deltas.empty()) {
+      RTC_LOG(LS_WARNING) << "Failed to encode template ids.";
+      return {};
+    }
+    writer.WriteBits(encoded_deltas);
+  }
+  values.clear();
+  // Frame numbers.
+  {
+    for (const auto& raw_dd : raw_dds) {
+      values.push_back((uint16_t{raw_dd[1]} << 8) + raw_dd[2]);
+    }
+    encoded_deltas = EncodeDeltas(absl::nullopt, values);
+    if (encoded_deltas.empty()) {
+      RTC_LOG(LS_WARNING) << "Failed to encode frame numbers.";
+      return {};
+    }
+    writer.WriteBits(encoded_deltas);
+  }
+  return writer.GetString();
+}
+
 template <typename EventType, typename ProtoType>
 void EncodeRtpPacket(const std::vector<const EventType*>& batch,
                      ProtoType* proto_batch) {
@@ -452,6 +503,36 @@ void EncodeRtpPacket(const std::vector<const EventType*>& batch,
 
       base_voice_activity = voice_activity;
       proto_batch->set_voice_activity(voice_activity);
+    }
+  }
+
+  struct DependecyDescriptorInfo {
+    bool start_of_frame;
+    bool end_of_frame;
+    uint8_t template_id;
+    uint16_t frame_number;
+    rtc::ArrayView<const uint8_t> extended;
+  };
+  absl::optional<DependecyDescriptorInfo> dd_info;
+  {
+    rtc::ArrayView<const uint8_t> dd_raw =
+        base_event
+            ->template GetRawExtension<RtpDependencyDescriptorExtension>();
+    if (dd_raw.size() >= 3) {
+      dd_info = {.start_of_frame = static_cast<bool>(dd_raw[0] & 1000'0000),
+                 .end_of_frame = static_cast<bool>(dd_raw[0] & 0100'0000),
+                 .template_id = static_cast<uint8_t>(dd_raw[0] & 0011'1111),
+                 .frame_number = static_cast<uint16_t>(
+                     (uint16_t{dd_raw[1]} << 8) + dd_raw[2])};
+      proto_batch->set_start_of_frame(dd_info->start_of_frame);
+      proto_batch->set_end_of_frame(dd_info->end_of_frame);
+      proto_batch->set_template_id(dd_info->template_id);
+      proto_batch->set_frame_number(dd_info->frame_number);
+      if (dd_raw.size() > 3) {
+        dd_info->extended = dd_raw.subview(3);
+        proto_batch->set_extended(dd_info->extended.data(),
+                                  dd_info->extended.size());
+      }
     }
   }
 
@@ -649,6 +730,8 @@ void EncodeRtpPacket(const std::vector<const EventType*>& batch,
   if (!encoded_deltas.empty()) {
     proto_batch->set_voice_activity_deltas(encoded_deltas);
   }
+
+  // TODO: For option 1, encode everything with dd_info as base.
 }
 }  // namespace
 
