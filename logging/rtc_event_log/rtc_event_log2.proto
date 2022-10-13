@@ -147,6 +147,14 @@ message IncomingRtpPackets {
   // `audio_level` and `voice_activity` are always used in conjunction.
   optional uint32 audio_level = 19;
   optional bool voice_activity = 20;
+  // DependecyDescriptor fields option 1
+  optional bool start_of_frame = 21;
+  optional bool end_of_frame = 22;
+  optional uint32 template_id = 23;
+  optional uint32 frame_number = 24;
+  optional bytes extended = 25;
+  // DependecyDescriptor fields option 2
+  optional bytes dependency_descriptor_compressed = 26;
   // TODO(terelius): Add other header extensions like playout delay?
 
   // Delta encodings.
@@ -168,6 +176,12 @@ message IncomingRtpPackets {
   // `audio_level` and `voice_activity` are always used in conjunction.
   optional bytes audio_level_deltas = 119;
   optional bytes voice_activity_deltas = 120;
+  // DependencyDescriptor fields option 1
+  optional bytes start_of_frame_delta = 121;
+  optional bytes end_of_frame_delta = 122;
+  optional bytes template_id_delta = 123;
+  optional bytes frame_number_delta = 124;
+  optional bytes extended_absolut = 125;
 }
 
 message OutgoingRtpPackets {
@@ -216,6 +230,13 @@ message OutgoingRtpPackets {
   optional uint32 audio_level = 19;
   optional bool voice_activity = 20;
   // TODO(terelius): Add other header extensions like playout delay?
+  optional bool start_of_frame = 21;
+  optional bool end_of_frame = 22;
+  optional uint32 template_id = 23;
+  optional uint32 frame_number = 24;
+  optional bytes extended = 25;
+  // DependecyDescriptor fields option 2
+  optional bytes dependency_descriptor_compressed = 26;
 
   // Delta encodings.
   optional bytes timestamp_ms_deltas = 101;
@@ -236,6 +257,12 @@ message OutgoingRtpPackets {
   // `audio_level` and `voice_activity` are always used in conjunction.
   optional bytes audio_level_deltas = 119;
   optional bytes voice_activity_deltas = 120;
+  // DependencyDescriptor fields option 1
+  optional bytes start_of_frame_delta = 121;
+  optional bytes end_of_frame_delta = 122;
+  optional bytes template_id_delta = 123;
+  optional bytes frame_number_delta = 124;
+  optional bytes extended_absolut = 125;
 }
 
 message IncomingRtcpPackets {
