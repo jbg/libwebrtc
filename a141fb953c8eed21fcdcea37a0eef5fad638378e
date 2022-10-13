@@ -16,6 +16,23 @@
       "message": "This at least calls out where the design has issues.",
       "revId": "a141fb953c8eed21fcdcea37a0eef5fad638378e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac417b6e_06ca58d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-10-13T10:31:10Z",
+      "side": 1,
+      "message": "but maybe it\u0027s worth the time to just fix\nall the bad testcases once and for all ?\nit\u0027s not going to be more fun next time we have to dig into this...",
+      "revId": "a141fb953c8eed21fcdcea37a0eef5fad638378e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
