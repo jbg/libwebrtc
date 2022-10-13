@@ -107,11 +107,25 @@ bool StunRequestManager::CheckResponse(StunMessage* msg) {
   // integrity-protected or not.
   // For some tests, the message integrity is not set in the request.
   // Complain, and then don't check.
-  bool skip_integrity_checking = false;
-  if (request->msg()->integrity() == StunMessage::IntegrityStatus::kNotSet) {
-    skip_integrity_checking = true;
+  bool skip_integrity_checking =
+      (request->msg()->integrity() == StunMessage::IntegrityStatus::kNotSet);
+  if (skip_integrity_checking) {
+    RTC_LOG(LS_ERROR)
+        << "CheckResponse called on a passwordless request. Fix test!";
   } else {
-    msg->ValidateMessageIntegrity(request->msg()->password());
+    if (msg->integrity() == StunMessage::IntegrityStatus::kNotSet) {
+      RTC_LOG(LS_ERROR) << "DEBUG: CheckResponse checking for the first time";
+      msg->ValidateMessageIntegrity(request->msg()->password());
+    } else if (msg->integrity() == StunMessage::IntegrityStatus::kIntegrityOk &&
+               msg->password() == request->msg()->password()) {
+      RTC_LOG(LS_ERROR) << "DEBUG: Already validated, all OK";
+    } else if (msg->integrity() ==
+               StunMessage::IntegrityStatus::kIntegrityBad) {
+      RTC_LOG(LS_ERROR) << "DEBUG: Revalidating";
+      msg->RevalidateMessageIntegrity(request->msg()->password());
+    } else {
+      RTC_CHECK_NOTREACHED();
+    }
   }
 
   bool success = true;
