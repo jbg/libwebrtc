@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8f4330_61953d67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-10-13T14:05:38Z",
+      "side": 1,
+      "message": "Hey Björn!\n\nThis is very much WIP, but before I continue we should decide on how we want the DD to be encoded.\n\nTrying to follow the current pattern of encoding things we still end up with special, and kind of forced, handling of extended DDs. This complicates things as the info of the DD gets broken up into \"regular\", and special members. To decode this you need to combine them, which basically means you need special handling of the \"regular\" values anyway.\n\nThe other alternative is to simply encode the DD in a single byte array for the whole batch, which to me looks like the cleaner alternative (EncodeDependencyDescriptor).\n\nI just created this CL so we can see how things would turn out in practice, we can discuss offline, or feel free to leave comments in the CL.",
+      "revId": "1c466587cc1f9565bfd1c78d33095546ab623506",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74fbe56d_5799164e",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-10-13T14:05:38Z",
+      "side": 1,
+      "message": "Options 1:\nOne proto id per field\nExtended info breaks the pattern by being represented as bytes instead of anything delta-encodable.",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 31
+      },
+      "revId": "1c466587cc1f9565bfd1c78d33095546ab623506",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0171a2e_e20e8ce4",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-10-13T14:05:38Z",
+      "side": 1,
+      "message": "Option 2:\nOne proto id for all dependency descriptor related info.\nAlso breaks the pattern ofc.",
+      "range": {
+        "startLine": 157,
+        "startChar": 1,
+        "endLine": 157,
+        "endChar": 55
+      },
+      "revId": "1c466587cc1f9565bfd1c78d33095546ab623506",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9940e993_7a72a854",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-10-13T14:05:38Z",
+      "side": 1,
+      "message": "Another thing I noticed is that when the first event in the batch does not have some extension present, but subsequent events do, then the base value of that extension is encoded in its corresponding _delta member in the proto.",
+      "range": {
+        "startLine": 184,
+        "startChar": 17,
+        "endLine": 184,
+        "endChar": 33
+      },
+      "revId": "1c466587cc1f9565bfd1c78d33095546ab623506",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27d00be7_807f7a01",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-10-13T14:05:38Z",
+      "side": 1,
+      "message": "Given that we are not delta encoding this information, this is kind of forced. Maybe it\u0027s better to simply encode all of them into one proto member?",
+      "range": {
+        "startLine": 184,
+        "startChar": 2,
+        "endLine": 184,
+        "endChar": 40
+      },
+      "revId": "1c466587cc1f9565bfd1c78d33095546ab623506",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
