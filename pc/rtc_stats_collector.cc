@@ -931,9 +931,6 @@ const std::string& ProduceIceCandidateStats(int64_t timestamp_us,
         candidate_stats->network_adapter_type = std::string(
             NetworkTypeToStatsNetworkAdapterType(candidate.network_type()));
       }
-    } else {
-      // We don't expect to know the adapter type of remote candidates.
-      RTC_DCHECK_EQ(rtc::ADAPTER_TYPE_UNKNOWN, candidate.network_type());
     }
     candidate_stats->ip = candidate.address().ipaddr().ToString();
     candidate_stats->address = candidate.address().ipaddr().ToString();
