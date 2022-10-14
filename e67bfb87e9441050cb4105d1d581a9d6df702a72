@@ -88,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90b2abf9_1ef3498e",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2022-10-14T17:24:48Z",
+      "side": 1,
+      "message": "Would you know what happens if the source / compositor wants to send more than the maximum number we are setting here? Would it send more frames with different deltas until it has communicated all the damaged rectangles? If yes, how do we ensure that we have waited for all the damaged rectangles of the frame (otherwise, we might present an inconsistent frame state to the user) or may be it just marks the complete frame as damaged (which is possibly what you were seeing in the testing)?\n\nMay be we should set the number fairly large (if not unlimited) so that we don\u0027t have to keep on waiting for all the deltas by the compositor.",
+      "parentUuid": "29f332cd_1332dd03",
+      "revId": "e67bfb87e9441050cb4105d1d581a9d6df702a72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73235f40_e4b14f00",
