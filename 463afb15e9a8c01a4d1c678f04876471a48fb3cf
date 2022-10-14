@@ -16,6 +16,23 @@
       "message": "Hitting this error in ApplyFakeNetworkConfig:\n\n#\n# Fatal error in: ../../pc/rtc_stats_collector.cc, line 936\n# last system error: 0\n# Check failed: rtc::ADAPTER_TYPE_UNKNOWN \u003d\u003d candidate.network_type() (0 vs. 16)\n# *** SIGABRT received at time\u003d1665715854 on cpu 2 ***",
       "revId": "463afb15e9a8c01a4d1c678f04876471a48fb3cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e34fbd0_0257b91a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-10-14T06:29:28Z",
+      "side": 1,
+      "message": "For reference, the test of this CL does not work without https://webrtc-review.googlesource.com/c/src/+/279201.",
+      "revId": "463afb15e9a8c01a4d1c678f04876471a48fb3cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
