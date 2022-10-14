@@ -35,11 +35,15 @@ const uint32_t kSsrc4 = 304;
 RtpPacketReceived CreateRtpPacket(uint32_t ssrc,
                                   size_t header_size,
                                   size_t payload_size,
-                                  size_t padding_size) {
+                                  size_t padding_size,
+                                  int32_t payload_type_frequency,
+                                  uint32_t timestamp,
+                                  uint16_t sequence_number) {
   RtpPacketReceived packet;
   packet.SetSsrc(ssrc);
-  packet.SetSequenceNumber(100);
-  packet.set_payload_type_frequency(90000);
+  packet.SetSequenceNumber(sequence_number);
+  packet.SetTimestamp(timestamp);
+  packet.set_payload_type_frequency(payload_type_frequency);
   RTC_CHECK_GE(header_size, 12);
   RTC_CHECK_EQ(header_size % 4, 0);
   if (header_size > 12) {
@@ -51,6 +55,31 @@ RtpPacketReceived CreateRtpPacket(uint32_t ssrc,
   packet.SetPayloadSize(payload_size);
   packet.SetPadding(padding_size);
   return packet;
+}
+
+RtpPacketReceived MakeRtpPacket(int32_t payload_type_frequency,
+                                uint32_t timestamp) {
+  return CreateRtpPacket(kSsrc1, /*header_size=*/12, kPacketSize1 - 12,
+                         /*padding_size=*/0, payload_type_frequency, timestamp,
+                         /*sequence_number=*/100);
+}
+
+RtpPacketReceived MakeNextRtpPacket(const RtpPacketReceived& previous_packet,
+                                    int32_t payload_type_frequency,
+                                    uint32_t timestamp) {
+  return CreateRtpPacket(kSsrc1, /*header_size=*/12, kPacketSize1 - 12,
+                         /*padding_size=*/0, payload_type_frequency, timestamp,
+                         previous_packet.SequenceNumber() + 1);
+}
+
+RtpPacketReceived CreateRtpPacket(uint32_t ssrc,
+                                  size_t header_size,
+                                  size_t payload_size,
+                                  size_t padding_size) {
+  return CreateRtpPacket(ssrc, header_size, payload_size, padding_size,
+                         /*payload_type_frequency=*/90000,
+                         /*timestamp=*/0,
+                         /*sequence_number=*/100);
 }
 
 RtpPacketReceived CreateRtpPacket(uint32_t ssrc, size_t packet_size) {
@@ -576,6 +605,171 @@ TEST_P(ReceiveStatisticsTest, LastPacketReceivedTimestamp) {
   counters = receive_statistics_->GetStatistician(kSsrc1)
                  ->GetReceiveStreamDataCounters();
   EXPECT_EQ(45, counters.last_packet_received_timestamp_ms);
+}
+
+class ReviseJitterTest : public ::testing::Test {
+ public:
+  ReviseJitterTest()
+      : clock_(0),
+        receive_statistics_(ReceiveStatistics::Create(&clock_)) {
+  }
+
+ protected:
+  void OnRtpPacket(RtpPacketReceived rtp_packet_received) {
+    receive_statistics_->OnRtpPacket(rtp_packet_received);
+    clock_.AdvanceTimeMilliseconds(50);
+  }
+
+  uint32_t GetJitter() {
+    return receive_statistics_->GetStatistician(kSsrc1)->GetStats().jitter;
+  }
+
+ private:
+  SimulatedClock clock_;
+  std::unique_ptr<ReceiveStatistics> receive_statistics_;
+};
+
+TEST_F(ReviseJitterTest, AllPacketsHaveSamePayloadTypeFrequency) {
+  RtpPacketReceived packet1 = MakeRtpPacket(/*payload_type_frequency=*/8000,
+                                            /*timestamp=*/1);
+  RtpPacketReceived packet2 = MakeNextRtpPacket(
+      packet1, /*payload_type_frequency=*/8000, /*timestamp=*/1 + 160);
+
+  RtpPacketReceived packet3 = MakeNextRtpPacket(
+      packet2, /*payload_type_frequency=*/8000, /*timestamp=*/1 + 2 * 160);
+
+  OnRtpPacket(packet1);
+  OnRtpPacket(packet2);
+  OnRtpPacket(packet3);
+
+  EXPECT_EQ(GetJitter(), 29U);
+}
+
+TEST_F(ReviseJitterTest, AllPacketsHaveDifferentPayloadTypeFrequency) {
+  RtpPacketReceived packet1 = MakeRtpPacket(/*payload_type_frequency=*/8000,
+                                            /*timestamp=*/1);
+  RtpPacketReceived packet2 = MakeNextRtpPacket(
+      packet1, /*payload_type_frequency=*/8000, /*timestamp=*/1 + 160);
+  RtpPacketReceived packet3 = MakeNextRtpPacket(
+      packet2, /*payload_type_frequency=*/48000, /*timestamp=*/1 + 160 + 960);
+
+  OnRtpPacket(packet1);
+  OnRtpPacket(packet2);
+  OnRtpPacket(packet3);
+
+  EXPECT_EQ(GetJitter(), 174U);
+}
+
+TEST_F(ReviseJitterTest,
+       FirstPacketPayloadTypeFrequencyIsZeroAndFrequencyChanged) {
+  RtpPacketReceived packet1 = MakeRtpPacket(/*payload_type_frequency=*/0,
+                                            /*timestamp=*/1);
+  RtpPacketReceived packet2 = MakeNextRtpPacket(
+      packet1, /*payload_type_frequency=*/8000, /*timestamp=*/1 + 160);
+  RtpPacketReceived packet3 = MakeNextRtpPacket(
+      packet2, /*payload_type_frequency=*/48000, /*timestamp=*/1 + 160 + 960);
+
+  OnRtpPacket(packet1);
+  OnRtpPacket(packet2);
+  OnRtpPacket(packet3);
+
+  EXPECT_EQ(GetJitter(), 174U);
+}
+
+TEST_F(ReviseJitterTest,
+       FirstPacketPayloadTypeFrequencyIsZeroAndFrequencyNotChanged) {
+  RtpPacketReceived packet1 = MakeRtpPacket(/*payload_type_frequency=*/0,
+                                            /*timestamp=*/1);
+  RtpPacketReceived packet2 = MakeNextRtpPacket(
+      packet1, /*payload_type_frequency=*/8000, /*timestamp=*/1 + 160);
+  RtpPacketReceived packet3 = MakeNextRtpPacket(
+      packet2, /*payload_type_frequency=*/8000, /*timestamp=*/1 + 160 + 160);
+
+  OnRtpPacket(packet1);
+  OnRtpPacket(packet2);
+  OnRtpPacket(packet3);
+
+  EXPECT_EQ(GetJitter(), 29U);
+}
+
+TEST_F(ReviseJitterTest,
+       TwoFirstPacketPayloadTypeFrequencyIsZeroAndFrequencyChanged) {
+  RtpPacketReceived packet1 = MakeRtpPacket(/*payload_type_frequency=*/0,
+                                            /*timestamp=*/1);
+  RtpPacketReceived packet2 = MakeNextRtpPacket(
+      packet1, /*payload_type_frequency=*/0, /*timestamp=*/1 + 160);
+  RtpPacketReceived packet3 = MakeNextRtpPacket(
+      packet2, /*payload_type_frequency=*/48000, /*timestamp=*/1 + 160 + 960);
+  RtpPacketReceived packet4 = MakeNextRtpPacket(
+      packet3, /*payload_type_frequency=*/8000,
+      /*timestamp=*/1 + 160 + 960 + 160);
+
+  OnRtpPacket(packet1);
+  OnRtpPacket(packet2);
+  OnRtpPacket(packet3);
+  OnRtpPacket(packet4);
+
+  EXPECT_EQ(GetJitter(), 30U);
+}
+
+TEST_F(ReviseJitterTest,
+       TwoFirstPacketPayloadTypeFrequencyIsZeroAndFrequencyNotChanged) {
+  RtpPacketReceived packet1 = MakeRtpPacket(/*payload_type_frequency=*/0,
+                                            /*timestamp=*/1);
+  RtpPacketReceived packet2 = MakeNextRtpPacket(
+      packet1, /*payload_type_frequency=*/0, /*timestamp=*/1 + 160);
+  RtpPacketReceived packet3 = MakeNextRtpPacket(
+      packet2, /*payload_type_frequency=*/8000, /*timestamp=*/1 + 160 + 160);
+  RtpPacketReceived packet4 = MakeNextRtpPacket(
+      packet3, /*payload_type_frequency=*/8000,
+      /*timestamp=*/1 + 160 + 160 + 160);
+
+  OnRtpPacket(packet1);
+  OnRtpPacket(packet2);
+  OnRtpPacket(packet3);
+  OnRtpPacket(packet4);
+
+  EXPECT_EQ(GetJitter(), 37U);
+}
+
+TEST_F(ReviseJitterTest,
+       MiddlePacketPayloadTypeFrequencyIsZeroAndFrequencyChanged) {
+  RtpPacketReceived packet1 = MakeRtpPacket(/*payload_type_frequency=*/48000,
+                                            /*timestamp=*/1);
+  RtpPacketReceived packet2 = MakeNextRtpPacket(
+      packet1, /*payload_type_frequency=*/48000, /*timestamp=*/1 + 960);
+  RtpPacketReceived packet3 = MakeNextRtpPacket(
+      packet2, /*payload_type_frequency=*/0, /*timestamp=*/1 + 960 + 55);
+  RtpPacketReceived packet4 = MakeNextRtpPacket(
+      packet3, /*payload_type_frequency=*/8000,
+      /*timestamp=*/1 + 960 + 55 + 160);
+
+  OnRtpPacket(packet1);
+  OnRtpPacket(packet2);
+  OnRtpPacket(packet3);
+  OnRtpPacket(packet4);
+
+  EXPECT_EQ(GetJitter(), 28U);
+}
+
+TEST_F(ReviseJitterTest,
+       MiddlePacketPayloadTypeFrequencyIsZeroAndFrequencyNotChanged) {
+  RtpPacketReceived packet1 = MakeRtpPacket(/*payload_type_frequency=*/48000,
+                                            /*timestamp=*/1);
+  RtpPacketReceived packet2 = MakeNextRtpPacket(
+      packet1, /*payload_type_frequency=*/48000, /*timestamp=*/1 + 960);
+  RtpPacketReceived packet3 = MakeNextRtpPacket(
+      packet2, /*payload_type_frequency=*/0, /*timestamp=*/1 + 960 + 55);
+  RtpPacketReceived packet4 = MakeNextRtpPacket(
+      packet3, /*payload_type_frequency=*/48000,
+      /*timestamp=*/1 + 960 + 55 + 960);
+
+  OnRtpPacket(packet1);
+  OnRtpPacket(packet2);
+  OnRtpPacket(packet3);
+  OnRtpPacket(packet4);
+
+  EXPECT_EQ(GetJitter(), 172U);
 }
 
 }  // namespace
