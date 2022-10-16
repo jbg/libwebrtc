@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fbffe98_1bf5455b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-16T09:46:31Z",
+      "side": 1,
+      "message": "Looks good once all the debug statements are gone.\n\nI keep looking for the part where one SetParameters() call can configure multiple encoders (for simulcast), but it seems that this is handled at an even lower level than I thought it was.",
+      "revId": "daa5ef0e706faa9dd796de128a27404acbff5b0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbb3acd7_2978a955",
+        "filename": "api/rtp_sender_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-16T09:46:31Z",
+      "side": 1,
+      "message": "according to IWYU, you should have the any_invocable.h #include here.",
+      "revId": "daa5ef0e706faa9dd796de128a27404acbff5b0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08730769_6645bb71",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2325,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-16T09:46:31Z",
+      "side": 1,
+      "message": "Leftover debug prints",
+      "revId": "daa5ef0e706faa9dd796de128a27404acbff5b0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ed05b30_30ecfa50",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2328,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-16T09:46:31Z",
+      "side": 1,
+      "message": "It seems a bit strange to have to move AND null, but I guess the type isn\u0027t checkable when it\u0027s in the \"moved-from\" state.",
+      "revId": "daa5ef0e706faa9dd796de128a27404acbff5b0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67bb90dd_1bef9000",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2340,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-16T09:46:31Z",
+      "side": 1,
+      "message": "Leftover debug.",
+      "revId": "daa5ef0e706faa9dd796de128a27404acbff5b0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
