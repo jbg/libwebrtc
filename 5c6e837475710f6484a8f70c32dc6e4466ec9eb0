@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06abe033_334152e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-17T09:08:47Z",
+      "side": 1,
+      "message": "The point of the DCHECK is to detect when we are not handling all cases.\n\nRather than deleting the DCHECK, what is the case we are not handling? Why are we not handling it?",
+      "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
