@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a7e36a_1c7e0371",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-17T12:57:38Z",
+      "side": 1,
+      "message": "https://google.github.io/styleguide/cppguide.html#Casting\n“In general, do not use C-style casts. Instead, use these C++-style casts when explicit type conversion is necessary.”",
+      "range": {
+        "startLine": 190,
+        "startChar": 19,
+        "endLine": 190,
+        "endChar": 29
+      },
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c4cec45_1159c929",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-17T12:57:38Z",
+      "side": 1,
+      "message": "rather than recalculate jitter per latest frequency,\nmay be it would be better to store jitter_q4_ as TimeDelta,\nand calculated back to rtp timeunits at the api boundary.\n\n(see also https://webrtc-review.googlesource.com/c/src/+/279281)",
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a350fbca_4002db14",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-17T12:57:38Z",
+      "side": 1,
+      "message": "I would prefer `int` type to represent payload type frequency, in partuclar RtpPacketReceived::payload_type_frequency is int.\n\nhttps://google.github.io/styleguide/cppguide.html#Integer_Types\n“Keep in mind that even if your value won\u0027t ever be too large for an int, it may be used in intermediate calculations which may require a larger type.”\n“We use int very often, for integers we know are not going to be too big, e.g., loop counters. Use plain old int for such things.”",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 64
+      },
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23715cbe_4021c303",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-17T12:57:38Z",
+      "side": 1,
+      "message": "helper function with 7 integer parameters are hard to read/maintain.\nIn particlar when parameters are used in trivial way.\nYou are using these helper just in Make helper below, right?\nmay be leave this helper as is, and in the MakeRtpPacket function call in rtppacketReceived directly:\n\n```\nRtpPacketReceived MakeRtpPacket(int payload_type_frequency,\n                                uint32_t timestamp) {\n  RtpPacketReceived packet \u003d CreateRtpPacket(kSsrc1, /*header_size\u003d*/12, kPacketSize1 - 12, /*padding_size\u003d*/0);\n  packet.SetTimestamp(timestamp);\n  packet.set_payload_type_frequency(payload_type_frequence);\n  return packet;\n}\n```\n\nBetter yet - do not create new helpers. Each tests need it\u0027s own set of rtp fields, so it might be clearer if those fields are set per test.\n\n(CreateRtpPacket probably should take even less parameters, only header size setter is non-trival and deserves a helper)",
+      "range": {
+        "startLine": 39,
+        "startChar": 34,
+        "endLine": 41,
+        "endChar": 58
+      },
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58051518_307e73a6",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-17T12:57:38Z",
+      "side": 1,
+      "message": "to avoid repetition you may make it a free function instead:\n\nint Jitter(const ReceiveStatistics\u0026 stats, uint32_t ssrc \u003d ) {\n  return stats.GetStatistician(\n}",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 625,
+        "endChar": 3
+      },
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8b5d8a0_6729096f",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-17T12:57:38Z",
+      "side": 1,
+      "message": "please do not keep object under test inside fixture, it makes test harder to read.\nhttps://abseil.io/tips/122\n\nIn this case I do not think fixtures adds value. initialisation is not that complicated.\nPacket creating may be moved into dedicated helpers, but creating packets directly in tests allows to stress which packet fields are important for jitter calculation.\n\nTEST(...Test, Name) {\n  // Arrange\n  SimulatedClock clock;\n  std::unique_ptr\u003cReceiveStatsticis\u003e statistics \u003d ReceiveStatistics::Create(\u0026clock);\n  RtpPacketReceived packet;\n  packet.SetSsrc(kSsrc1);\n  packet.set_payload_type_frequency(8\u0027000);\n  \n  // Act\n  packet.SetTimestamp(1);\n  packet.SetSequenceNumber(100);\n  statistics-\u003eOnRtpPacket(packet);\n  clock.AdvanceTime(TimeDelta::Millis(100));\n  \n  packet.SetTimestamp(1 + 160);\n  packet.SetSequenceNumber(101);\n  statistics-\u003eOnRtpPacket(packet);\n  ...\n  \n  // Assert\n  EXPECT_EQ(receive_statistics_-\u003eGetStatistician(kSsrc1)-\u003eGetStats().jitter, 29U);\n}\n\nor bypass ReceiveStatistics, validate StreamStatisticianImpl directly:\n\nTEST(StreamStatisticianTest, ...) {\n  SimulatedClock clock;\n  StreamStatisticianImpl stats(kSsrc1, \u0026clock, 50);\n  ...\n  stats.UpdateCounters(packet);\n  ...\n  EXPECT_EQ(stats.GetStats().jitter, ...);\n \n}",
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3cf6211_a37b6086",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-17T12:57:38Z",
+      "side": 1,
+      "message": "where these expectation values comes from, how I can see this values is correct?",
+      "range": {
+        "startLine": 660,
+        "startChar": 25,
+        "endLine": 660,
+        "endChar": 29
+      },
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
