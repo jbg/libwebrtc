@@ -146,6 +146,7 @@ class TurnEntry : public sigslot::has_slots<> {
  public:
   enum BindState { STATE_UNBOUND, STATE_BINDING, STATE_BOUND };
   TurnEntry(TurnPort* port, Connection* conn, int channel_id);
+  ~TurnEntry();
 
   TurnPort* port() { return port_; }
 
@@ -271,7 +272,7 @@ TurnPort::TurnPort(TaskQueueBase* thread,
       tls_elliptic_curves_(tls_elliptic_curves),
       tls_cert_verifier_(tls_cert_verifier),
       credentials_(credentials),
-      socket_(NULL),
+      socket_(nullptr),
       error_(0),
       stun_dscp_value_(rtc::DSCP_NO_CHANGE),
       request_manager_(
@@ -294,9 +295,7 @@ TurnPort::~TurnPort() {
     Release();
   }
 
-  while (!entries_.empty()) {
-    DestroyEntry(entries_.front());
-  }
+  entries_.clear();
 
   if (socket_)
     socket_->UnsubscribeClose(this);
@@ -547,7 +546,7 @@ void TurnPort::OnAllocateMismatch() {
   } else {
     delete socket_;
   }
-  socket_ = NULL;
+  socket_ = nullptr;
 
   ResetNonce();
   PrepareAddress();
@@ -641,16 +640,7 @@ int TurnPort::SendTo(const void* data,
                      bool payload) {
   // Try to find an entry for this specific address; we should have one.
   TurnEntry* entry = FindEntry(addr);
-  if (!entry) {
-    RTC_LOG(LS_ERROR) << "Did not find the TurnEntry for address "
-                      << addr.ToSensitiveString();
-    // Although this could be a logic error or a result of not being able to
-    // establish a connection, we pick an error code that makes some semantic
-    // sense to make debugging easier.
-    error_ = EADDRNOTAVAIL;
-    RTC_DCHECK_NOTREACHED();
-    return SOCKET_ERROR;
-  }
+  RTC_DCHECK(entry);
 
   if (!ready()) {
     error_ = ENOTCONN;
@@ -1175,26 +1165,26 @@ void TurnPort::ResetNonce() {
 }
 
 bool TurnPort::HasPermission(const rtc::IPAddress& ipaddr) const {
-  return absl::c_any_of(entries_, [&ipaddr](const TurnEntry* e) {
-    return e->address().ipaddr() == ipaddr;
-  });
+  return absl::c_any_of(entries_,
+                        [&ipaddr](const std::unique_ptr<TurnEntry>& e) {
+                          return e->address().ipaddr() == ipaddr;
+                        });
 }
 
 TurnEntry* TurnPort::FindEntry(const rtc::SocketAddress& addr) const {
-  auto it = absl::c_find_if(
-      entries_, [&addr](const TurnEntry* e) { return e->address() == addr; });
-  return (it != entries_.end()) ? *it : NULL;
+  auto it =
+      absl::c_find_if(entries_, [&addr](const std::unique_ptr<TurnEntry>& e) {
+        return e->address() == addr;
+      });
+  return (it != entries_.end()) ? it->get() : nullptr;
 }
 
 TurnEntry* TurnPort::FindEntry(int channel_id) const {
-  auto it = absl::c_find_if(entries_, [&channel_id](const TurnEntry* e) {
-    return e->channel_id() == channel_id;
-  });
-  return (it != entries_.end()) ? *it : NULL;
-}
-
-bool TurnPort::EntryExists(TurnEntry* e) {
-  return absl::c_linear_search(entries_, e);
+  auto it = absl::c_find_if(entries_,
+                            [&channel_id](const std::unique_ptr<TurnEntry>& e) {
+                              return e->channel_id() == channel_id;
+                            });
+  return (it != entries_.end()) ? it->get() : nullptr;
 }
 
 bool TurnPort::CreateOrRefreshEntry(Connection* conn, int channel_number) {
@@ -1202,8 +1192,7 @@ bool TurnPort::CreateOrRefreshEntry(Connection* conn, int channel_number) {
   TurnEntry* entry = FindEntry(remote_candidate.address());
 
   if (entry == nullptr) {
-    entry = new TurnEntry(this, conn, channel_number);
-    entries_.push_back(entry);
+    entries_.push_back(std::make_unique<TurnEntry>(this, conn, channel_number));
     return true;
   }
 
@@ -1215,25 +1204,19 @@ bool TurnPort::CreateOrRefreshEntry(Connection* conn, int channel_number) {
 }
 
 void TurnPort::DestroyEntry(TurnEntry* entry) {
-  entry->destroyed_callback_list_.Send(entry);
-  entries_.remove(entry);
-  delete entry;
+  auto it =
+      absl::c_find_if(entries_, [entry](const std::unique_ptr<TurnEntry>& e) {
+        return e.get() == entry;
+      });
+  entries_.erase(it);
 }
 
 void TurnPort::HandleConnectionDestroyed(Connection* conn) {
   // Schedule an event to destroy TurnEntry for the connection, which is
   // being destroyed.
   const rtc::SocketAddress& remote_address = conn->remote_candidate().address();
+  // We should always have an entry for this connection.
   TurnEntry* entry = FindEntry(remote_address);
-  if (!entry) {
-    // TODO(chromium:1374310): This happens because more than one connection
-    // may be associated with an entry. Previously a connection with the same
-    // address has been destroyed and subsequently the entry removed
-    // (prematurely.)
-    RTC_DLOG_F(LS_WARNING) << "Entry has been removed.";
-    return;
-  }
-
   rtc::scoped_refptr<webrtc::PendingTaskSafetyFlag> flag =
       entry->UntrackConnection(conn);
   if (flag) {
@@ -1749,6 +1732,10 @@ TurnEntry::TurnEntry(TurnPort* port, Connection* conn, int channel_id)
       connections_({conn}) {
   // Creating permission for `ext_addr_`.
   SendCreatePermissionRequest(0);
+}
+
+TurnEntry::~TurnEntry() {
+  destroyed_callback_list_.Send(this);
 }
 
 void TurnEntry::TrackConnection(Connection* conn) {
