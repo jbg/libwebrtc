@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "821ab514_3a54d34d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-17T09:48:58Z",
+      "side": 1,
+      "message": "I tested this now with fixed KWin and it seems to be working. It can be reviewed now. Thank you.",
+      "revId": "50311e01f61f0df5e158690ce312dba36ab7c67c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
