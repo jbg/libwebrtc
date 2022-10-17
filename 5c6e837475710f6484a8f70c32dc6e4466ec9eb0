@@ -16,6 +16,24 @@
       "message": "The point of the DCHECK is to detect when we are not handling all cases.\n\nRather than deleting the DCHECK, what is the case we are not handling? Why are we not handling it?",
       "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a35df44d_46adf557",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-10-17T22:44:31Z",
+      "side": 1,
+      "message": "This can happen if unittest tries to create two peerconnections using `BasicNetworkManager`, exchange candidates, and then call GetStats.\n\nIn this case the candidate may have a network type other than `ADAPTER_TYPE_UNKNOWN`, but this code is not taking that into account.\n\nMost tests use `FakeNetworkManager` and by default `FakeNetworkManager.AddInterface` will add an fake network adapter with `ADAPTER_TYPE_UNKNOWN`, so it will not trigger this issue.\n\n\nInstead of deleting the whole else block, I\u0027m going to add a comment like below.\n```\n// network_type, relay_protocol, url, network_adapter_type are not defined\n// in the remote candidate.\n```",
+      "parentUuid": "06abe033_334152e7",
+      "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
