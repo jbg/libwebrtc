@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c7f3659_5a484a66",
+        "filename": "media/base/media_engine.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-10-17T13:23:26Z",
+      "side": 1,
+      "message": "Added comments for the new and old functions.",
+      "parentUuid": "e31aa43a_8e7b072f",
+      "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be4bb9a1_56a23d23",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-10-04T09:58:53Z",
       "side": 1,
       "message": "Hm. Here the assumption is that CheckRtpParamters.. doesn\u0027t need to be called with the list of codecs, because it is already checked further up the stack.\n\nI\u0027d like to document that by doing an RTC_DCHECK(CheckRtpParameters...) with a comment saying \"This was already checked in AddTransceiver\".\n\nIf there are paths to here that don\u0027t go through AddTransceiver (such as by SetParameters), those paths should also do the check for SVC mode values.\n\nIf it\u0027s too much of a bother doing this properly now, just add a TODO with bug number.",
+      "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d9714d_b8e42209",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2267,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-10-17T13:23:26Z",
+      "side": 1,
+      "message": "All the API exposed paths are checked, it\u0027s only used in tests now.\nWe should probably migrate them later, added a TODO.",
+      "parentUuid": "be4bb9a1_56a23d23",
       "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "514a74c7_43de444e",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-10-17T13:23:26Z",
+      "side": 1,
+      "message": "Added instead an override that doesn\u0027t take the codec list when they\u0027re not directly available or not relevant.",
+      "parentUuid": "793aa965_abcebd99",
+      "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42b9ff82_b8150d31",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-10-04T09:58:53Z",
       "side": 1,
       "message": "That\u0027s not much of a check. If this is because it\u0027s the base class, this should probably be in the .h file so that its defaulting becomes immediately obvious.",
+      "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "188969c5_60dc848c",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-10-17T13:23:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42b9ff82_b8150d31",
       "revId": "607bec2a367df586e27b0abeb8b08ae16eb6d3b1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
