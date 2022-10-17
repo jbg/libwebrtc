@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fe78c2b_234a2bc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-10-17T08:52:52Z",
+      "side": 1,
+      "message": "This restores the assumption that I temporarily removed in the first fix. There are a few changes that make this possible, so if you\u0027re curious to see what the issue was, see the relation chain of this CL, in particular https://webrtc-review.googlesource.com/c/src/+/279264",
+      "revId": "125c8c8f705b67e9ec3de1784e17448dda19a80e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
