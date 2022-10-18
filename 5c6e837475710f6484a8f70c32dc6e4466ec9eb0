@@ -34,6 +34,24 @@
       "parentUuid": "06abe033_334152e7",
       "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4ba1ba6_7d3e70af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-18T07:34:51Z",
+      "side": 1,
+      "message": "Does removing the DCHECK hide a bug (i.e. remote candidates should not have a value so the DCHECK is valid)?\n\nIn my mind, if it is a bug, we should fix the bug instead of hiding the bug. That is update the test so that we don\u0027t hit the DCHECK.\n\nIf it\u0027s not a bug, it sounds like we should be able to handle more adapter types.\n\nAlternatively we could do a LS_WARNING log or something, but just removing the DCHECK seems like hiding a real problem... +Harald for second opinion",
+      "parentUuid": "a35df44d_46adf557",
+      "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
