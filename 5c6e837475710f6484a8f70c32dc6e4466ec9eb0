@@ -90,6 +90,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee97a4f_2ae8357e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-10-18T09:31:26Z",
+      "side": 1,
+      "message": "In normal cases, remote candidates doesn\u0027t have network_type values. However, in tests, it is common to pass SDP and remote candidates as a object. `SessionDescriptionInterface*` and `IceCandidateInterface*`.\nIn this case, network_type property is preserved, so it triggers DCHECK when GetStats called.\n\nI have opened another CL which eliminates the root cause of this issue.\nhttps://webrtc-review.googlesource.com/c/src/+/279680",
+      "parentUuid": "7cbc0eaa_fceadfb2",
+      "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e1443d36_5c2dc83e",
@@ -103,6 +121,23 @@
       "writtenOn": "2022-10-18T07:48:20Z",
       "side": 1,
       "message": "Agree with Henrik\u0027s concern.",
+      "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cead83fe_405ae910",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-10-18T09:31:26Z",
+      "side": 1,
+      "message": "In normal cases, remote candidates doesn\u0027t have network_type values. However, in tests, it is common to pass SDP and remote candidates as a object. `SessionDescriptionInterface*` and `IceCandidateInterface*`.\nIn this case, network_type property is preserved, so it triggers DCHECK when GetStats called.\n\nI have opened another CL which eliminates the root cause of this issue.\nhttps://webrtc-review.googlesource.com/c/src/+/279680",
       "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
