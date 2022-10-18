@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eda39296_2903eb31",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-18T12:56:15Z",
+      "side": 1,
+      "message": "Since I removed usage of `frame_updated_since_last_grab_` I think we better to have it as a separate change.",
+      "parentUuid": "5471be1a_017f5f4e",
+      "range": {
+        "startLine": 592,
+        "startChar": 2,
+        "endLine": 592,
+        "endChar": 41
+      },
+      "revId": "50311e01f61f0df5e158690ce312dba36ab7c67c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92b3727e_3230d552",
@@ -64,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "700c3d57_ca0f910c",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-18T12:56:15Z",
+      "side": 1,
+      "message": "Your solution looks more elegant.",
+      "parentUuid": "92b3727e_3230d552",
+      "range": {
+        "startLine": 837,
+        "startChar": 4,
+        "endLine": 845,
+        "endChar": 5
+      },
+      "revId": "50311e01f61f0df5e158690ce312dba36ab7c67c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ae972b0_a8537f76",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-10-17T17:32:30Z",
       "side": 1,
       "message": "NIT: Let\u0027s set this above queue_.MoveToNextFrame()",
+      "range": {
+        "startLine": 864,
+        "startChar": 2,
+        "endLine": 864,
+        "endChar": 40
+      },
+      "revId": "50311e01f61f0df5e158690ce312dba36ab7c67c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eab9643_d9850a0d",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-18T12:56:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ae972b0_a8537f76",
       "range": {
         "startLine": 864,
         "startChar": 2,
