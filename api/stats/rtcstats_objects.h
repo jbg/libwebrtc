@@ -286,9 +286,8 @@ class RTC_EXPORT RTCRemoteIceCandidateStats final
   const char* type() const override;
 };
 
-// https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamstats
-// TODO(https://crbug.com/webrtc/14172): Deprecate and remove.
-class RTC_EXPORT RTCMediaStreamStats final : public RTCStats {
+// TODO(https://crbug.com/webrtc/14419): Delete this class, it's deprecated.
+class [[deprecated]] RTC_EXPORT RTCMediaStreamStats final : public RTCStats {
  public:
   WEBRTC_RTCSTATS_DECL();
 
@@ -301,9 +300,9 @@ class RTC_EXPORT RTCMediaStreamStats final : public RTCStats {
   RTCStatsMember<std::vector<std::string>> track_ids;
 };
 
-// TODO(https://crbug.com/webrtc/14175): Deprecate and remove in favor of
-// RTCMediaSourceStats/RTCOutboundRtpStreamStats and RTCInboundRtpStreamStats.
-class RTC_EXPORT RTCMediaStreamTrackStats final : public RTCStats {
+// TODO(https://crbug.com/webrtc/14175): Delete this class, it's deprecated.
+class [[deprecated]] RTC_EXPORT RTCMediaStreamTrackStats final
+    : public RTCStats {
  public:
   WEBRTC_RTCSTATS_DECL();
 
