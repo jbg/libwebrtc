@@ -79,6 +79,9 @@ class RTC_EXPORT RtpSenderInterface : public rtc::RefCountInterface {
   // rtpparameters.h
   // The encodings are in increasing quality order for simulcast.
   virtual RTCError SetParameters(const RtpParameters& parameters) = 0;
+  virtual void SetParameters(
+      const RtpParameters& parameters,
+      absl::AnyInvocable<void(RTCError) &&> callback) = 0;
 
   // Returns null for a video sender.
   virtual rtc::scoped_refptr<DtmfSenderInterface> GetDtmfSender() const = 0;

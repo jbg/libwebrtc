@@ -656,6 +656,7 @@ VideoStreamEncoder::VideoStreamEncoder(
       max_framerate_(-1),
       pending_encoder_reconfiguration_(false),
       pending_encoder_creation_(false),
+      encoder_configuration_callback_(nullptr),
       crop_width_(0),
       crop_height_(0),
       encoder_target_bitrate_bps_(absl::nullopt),
@@ -879,9 +880,18 @@ void VideoStreamEncoder::SetStartBitrate(int start_bitrate_bps) {
 
 void VideoStreamEncoder::ConfigureEncoder(VideoEncoderConfig config,
                                           size_t max_data_payload_length) {
+  ConfigureEncoder(std::move(config), max_data_payload_length, nullptr);
+}
+
+void VideoStreamEncoder::ConfigureEncoder(
+    VideoEncoderConfig config,
+    size_t max_data_payload_length,
+    absl::AnyInvocable<void(RTCError) &&> encoder_configuration_callback) {
   RTC_DCHECK_RUN_ON(worker_queue_);
   encoder_queue_.PostTask(
-      [this, config = std::move(config), max_data_payload_length]() mutable {
+      [this, config = std::move(config), max_data_payload_length,
+       encoder_configuration_callback =
+           std::move(encoder_configuration_callback)]() mutable {
         RTC_DCHECK_RUN_ON(&encoder_queue_);
         RTC_DCHECK(sink_);
         RTC_LOG(LS_INFO) << "ConfigureEncoder requested.";
@@ -912,7 +922,12 @@ void VideoStreamEncoder::ConfigureEncoder(VideoEncoderConfig config,
         // minimize the number of reconfigurations. The codec configuration
         // depends on incoming video frame size.
         if (last_frame_info_) {
+          encoder_configuration_callback_ =
+              std::move(encoder_configuration_callback);
           ReconfigureEncoder();
+        } else {
+          if (encoder_configuration_callback)
+            std::move(encoder_configuration_callback)(webrtc::RTCError::OK());
         }
       });
 }
@@ -1369,7 +1384,12 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   stream_resource_manager_.ConfigureQualityScaler(info);
   stream_resource_manager_.ConfigureBandwidthQualityScaler(info);
 
-  if (!encoder_initialized_) {
+  if (encoder_initialized_) {
+    if (encoder_configuration_callback_) {
+      std::move(encoder_configuration_callback_)(webrtc::RTCError::OK());
+      encoder_configuration_callback_ = nullptr;
+    }
+  } else {
     RTC_LOG(LS_WARNING) << "Failed to initialize "
                         << CodecTypeToPayloadString(codec.codecType)
                         << " encoder."
@@ -1378,6 +1398,12 @@ void VideoStreamEncoder::ReconfigureEncoder() {
 
     if (switch_encoder_on_init_failures_) {
       RequestEncoderSwitch();
+    } else {
+      if (encoder_configuration_callback_) {
+        std::move(encoder_configuration_callback_)(
+            webrtc::RTCError(RTCErrorType::UNSUPPORTED_OPERATION));
+        encoder_configuration_callback_ = nullptr;
+      }
     }
   }
 }

@@ -15,6 +15,7 @@ rtc_library("video_stream_encoder_interface") {
   ]
   deps = [
     "../api:fec_controller_api",
+    "../api:rtc_error",
     "../api:rtp_parameters",
     "../api:scoped_refptr",
     "../api/adaptation:resource_adaptation_api",
@@ -406,6 +407,7 @@ rtc_library("video_stream_encoder_impl") {
     ":frame_cadence_adapter",
     ":video_stream_encoder_interface",
     "../api:field_trials_view",
+    "../api:rtc_error",
     "../api:rtp_parameters",
     "../api:sequence_checker",
     "../api/adaptation:resource_adaptation_api",

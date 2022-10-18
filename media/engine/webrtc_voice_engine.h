@@ -156,7 +156,8 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   webrtc::RtpParameters GetRtpSendParameters(uint32_t ssrc) const override;
   webrtc::RTCError SetRtpSendParameters(
       uint32_t ssrc,
-      const webrtc::RtpParameters& parameters) override;
+      const webrtc::RtpParameters& parameters,
+      absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback) override;
   webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const override;
   webrtc::RtpParameters GetDefaultRtpReceiveParameters() const override;
 

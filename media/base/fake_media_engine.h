@@ -30,6 +30,7 @@
 #include "modules/audio_processing/include/audio_processing.h"
 #include "rtc_base/copy_on_write_buffer.h"
 #include "rtc_base/network_route.h"
+#include "rtc_base/thread.h"
 
 using webrtc::RtpExtension;
 
@@ -149,19 +150,32 @@ class RtpHelper : public Base {
   }
   virtual webrtc::RTCError SetRtpSendParameters(
       uint32_t ssrc,
-      const webrtc::RtpParameters& parameters) {
+      const webrtc::RtpParameters& parameters,
+      absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback) {
     auto parameters_iterator = rtp_send_parameters_.find(ssrc);
     if (parameters_iterator != rtp_send_parameters_.end()) {
       auto result = CheckRtpParametersInvalidModificationAndValues(
           parameters_iterator->second, parameters);
-      if (!result.ok())
+      if (!result.ok()) {
+        if (done_callback) {
+          std::move(done_callback)(result);
+        }
         return result;
+      }
 
       parameters_iterator->second = parameters;
+
+      if (done_callback) {
+        std::move(done_callback)(webrtc::RTCError::OK());
+      }
       return webrtc::RTCError::OK();
     }
     // Replicate the behavior of the real media channel: return false
     // when setting parameters for unknown SSRCs.
+    if (done_callback) {
+      std::move(done_callback)(
+          webrtc::RTCError(webrtc::RTCErrorType::INTERNAL_ERROR));
+    }
     return webrtc::RTCError(webrtc::RTCErrorType::INTERNAL_ERROR);
   }
 
