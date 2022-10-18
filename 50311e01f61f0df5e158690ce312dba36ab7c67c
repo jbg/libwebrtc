@@ -65,6 +65,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad7d8bc3_7f580f7d",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-10-18T18:36:35Z",
+      "side": 1,
+      "message": "Oh, I think this solution actually works it in; since if there isn\u0027t a new frame then damage_region_ will be empty and we\u0027ll swap it into the retrieved frame.",
+      "parentUuid": "eda39296_2903eb31",
+      "range": {
+        "startLine": 592,
+        "startChar": 2,
+        "endLine": 592,
+        "endChar": 41
+      },
+      "revId": "50311e01f61f0df5e158690ce312dba36ab7c67c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92b3727e_3230d552",

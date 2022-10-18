@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be8d69e7_df69cab4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-10-18T18:36:35Z",
+      "side": 1,
+      "message": "LGTM, but let\u0027s maybe add a flag.",
+      "revId": "7b3c65395410d68d9bdbf5944df9f10473addd45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5f2c332_49a223bf",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-10-18T18:36:35Z",
+      "side": 1,
+      "message": "With us trying to launch this I\u0027m a little worried about unintended behavior from this. Would you consider adding an option (pipewire_use_damage_region) that we check here to determine if we swap in damage_region_ or if we make it a full-sized Rect like we used to do?",
+      "range": {
+        "startLine": 592,
+        "startChar": 0,
+        "endLine": 593,
+        "endChar": 25
+      },
+      "revId": "7b3c65395410d68d9bdbf5944df9f10473addd45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
