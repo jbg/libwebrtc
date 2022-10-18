@@ -38,6 +38,7 @@ using modules_desktop_capture_linux_wayland::StubPathMap;
 namespace webrtc {
 
 const int kBytesPerPixel = 4;
+const int kVideoDamageRegionCount = 16;
 
 #if defined(WEBRTC_DLOPEN_PIPEWIRE)
 const char kPipeWireLib[] = "libpipewire-0.3.so.0";
@@ -98,6 +99,10 @@ class SharedScreenCastStreamPrivate {
  private:
   // Stops the streams and cleans up any in-use elements.
   void StopAndCleanupStream();
+
+  // Track damage region updates that were reported since the last time
+  // frame was captured
+  DesktopRegion damage_region_;
 
   uint32_t pw_stream_node_id_ = 0;
 
@@ -292,9 +297,10 @@ void SharedScreenCastStreamPrivate::OnStreamParamChanged(
   params.push_back(reinterpret_cast<spa_pod*>(spa_pod_builder_add_object(
       &builder, SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta, SPA_PARAM_META_type,
       SPA_POD_Id(SPA_META_VideoDamage), SPA_PARAM_META_size,
-      SPA_POD_CHOICE_RANGE_Int(sizeof(struct spa_meta_region) * 16,
-                               sizeof(struct spa_meta_region) * 1,
-                               sizeof(struct spa_meta_region) * 16))));
+      SPA_POD_CHOICE_RANGE_Int(
+          sizeof(struct spa_meta_region) * kVideoDamageRegionCount,
+          sizeof(struct spa_meta_region) * 1,
+          sizeof(struct spa_meta_region) * kVideoDamageRegionCount))));
 
   pw_stream_update_params(that->pw_stream_, params.data(), params.size());
 }
@@ -583,6 +589,9 @@ std::unique_ptr<DesktopFrame> SharedScreenCastStreamPrivate::CaptureFrame() {
   }
 
   std::unique_ptr<SharedDesktopFrame> frame = queue_.current_frame()->Share();
+  frame->mutable_updated_region()->Swap(&damage_region_);
+  damage_region_.Clear();
+
   return std::move(frame);
 }
 
@@ -819,8 +828,29 @@ void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
     }
   }
 
-  queue_.current_frame()->mutable_updated_region()->SetRect(
-      DesktopRect::MakeSize(queue_.current_frame()->size()));
+  // Set video damage regions
+  const struct spa_meta* video_damage = static_cast<struct spa_meta*>(
+      spa_buffer_find_meta(spa_buffer, SPA_META_VideoDamage));
+  if (video_damage) {
+    spa_meta_region* meta_region;
+
+    queue_.current_frame()->mutable_updated_region()->Clear();
+
+    spa_meta_for_each(meta_region, video_damage) {
+      // Skip empty regions
+      if (meta_region->region.size.width == 0 ||
+          meta_region->region.size.height == 0) {
+        continue;
+      }
+
+      damage_region_.AddRect(DesktopRect::MakeXYWH(
+          meta_region->region.position.x, meta_region->region.position.y,
+          meta_region->region.size.width, meta_region->region.size.height));
+    }
+  } else {
+    queue_.current_frame()->mutable_updated_region()->SetRect(
+        DesktopRect::MakeSize(queue_.current_frame()->size()));
+  }
 }
 
 void SharedScreenCastStreamPrivate::ConvertRGBxToBGRx(uint8_t* frame,
