@@ -16,6 +16,29 @@
       "message": "marpan@, can you PTAL and give OWNERS approval for common_video/?",
       "revId": "b21347be1dde827a791aeab2345b44f5feb884af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd4478cd_1d80cffa",
+        "filename": "common_video/linux/portal/pipewire_utils.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-10-18T23:35:56Z",
+      "side": 1,
+      "message": "Looks like you have a merge conflict, Not sure of your timeline but FYI I\u0027m also trying to land a change to refactor this into a Pipewire_utils: https://webrtc-review.googlesource.com/c/src/+/279163\n\n(And Jan recently made it so that libdrm is not required to be dlopened).",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 27
+      },
+      "revId": "b21347be1dde827a791aeab2345b44f5feb884af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
