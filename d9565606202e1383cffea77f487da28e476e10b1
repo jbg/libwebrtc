@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5ea2eb54_3bf6d556",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 19934
+      },
+      "writtenOn": "2022-10-18T20:46:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86a7e36a_1c7e0371",
+      "range": {
+        "startLine": 190,
+        "startChar": 19,
+        "endLine": 190,
+        "endChar": 29
+      },
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a350fbca_4002db14",
         "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
         "patchSetId": 2
@@ -77,6 +101,30 @@
       "writtenOn": "2022-10-17T12:57:38Z",
       "side": 1,
       "message": "helper function with 7 integer parameters are hard to read/maintain.\nIn particlar when parameters are used in trivial way.\nYou are using these helper just in Make helper below, right?\nmay be leave this helper as is, and in the MakeRtpPacket function call in rtppacketReceived directly:\n\n```\nRtpPacketReceived MakeRtpPacket(int payload_type_frequency,\n                                uint32_t timestamp) {\n  RtpPacketReceived packet \u003d CreateRtpPacket(kSsrc1, /*header_size\u003d*/12, kPacketSize1 - 12, /*padding_size\u003d*/0);\n  packet.SetTimestamp(timestamp);\n  packet.set_payload_type_frequency(payload_type_frequence);\n  return packet;\n}\n```\n\nBetter yet - do not create new helpers. Each tests need it\u0027s own set of rtp fields, so it might be clearer if those fields are set per test.\n\n(CreateRtpPacket probably should take even less parameters, only header size setter is non-trival and deserves a helper)",
+      "range": {
+        "startLine": 39,
+        "startChar": 34,
+        "endLine": 41,
+        "endChar": 58
+      },
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b20628_92deee42",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 19934
+      },
+      "writtenOn": "2022-10-18T20:46:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23715cbe_4021c303",
       "range": {
         "startLine": 39,
         "startChar": 34,
@@ -127,6 +175,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "def790ae_b05f4c2e",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 19934
+      },
+      "writtenOn": "2022-10-18T20:46:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8b5d8a0_6729096f",
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3cf6211_a37b6086",
@@ -140,6 +206,30 @@
       "writtenOn": "2022-10-17T12:57:38Z",
       "side": 1,
       "message": "where these expectation values comes from, how I can see this values is correct?",
+      "range": {
+        "startLine": 660,
+        "startChar": 25,
+        "endLine": 660,
+        "endChar": 29
+      },
+      "revId": "d9565606202e1383cffea77f487da28e476e10b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f24dc62d_beeffcd0",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 19934
+      },
+      "writtenOn": "2022-10-18T20:46:02Z",
+      "side": 1,
+      "message": "Added explanation comments. Let me know if you have better ideas.",
+      "parentUuid": "b3cf6211_a37b6086",
       "range": {
         "startLine": 660,
         "startChar": 25,
