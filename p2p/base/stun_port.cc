@@ -140,8 +140,8 @@ class StunBindingRequest : public StunRequest {
 
 UDPPort::AddressResolver::AddressResolver(
     rtc::PacketSocketFactory* factory,
-    std::function<void(const rtc::SocketAddress&, int)> done_callback)
-    : socket_factory_(factory), done_(std::move(done_callback)) {}
+    std::function<void(const rtc::SocketAddress&, int)> callback)
+    : socket_factory_(factory), done_(std::move(callback)) {}
 
 void UDPPort::AddressResolver::Resolve(
     const rtc::SocketAddress& address,
