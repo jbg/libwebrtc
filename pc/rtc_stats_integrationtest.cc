@@ -339,8 +339,8 @@ class RTCStatsReportVerifier {
     stats_types.insert(RTCIceCandidatePairStats::kType);
     stats_types.insert(RTCLocalIceCandidateStats::kType);
     stats_types.insert(RTCRemoteIceCandidateStats::kType);
-    stats_types.insert(RTCMediaStreamStats::kType);
-    stats_types.insert(RTCMediaStreamTrackStats::kType);
+    stats_types.insert(RTCLegacyMediaStreamStats::kType);
+    stats_types.insert(RTCLegacyMediaStreamTrackStats::kType);
     stats_types.insert(RTCPeerConnectionStats::kType);
     stats_types.insert(RTCInboundRTPStreamStats::kType);
     stats_types.insert(RTCOutboundRTPStreamStats::kType);
@@ -380,12 +380,12 @@ class RTCStatsReportVerifier {
       } else if (stats.type() == RTCRemoteIceCandidateStats::kType) {
         verify_successful &= VerifyRTCRemoteIceCandidateStats(
             stats.cast_to<RTCRemoteIceCandidateStats>());
-      } else if (stats.type() == RTCMediaStreamStats::kType) {
-        verify_successful &=
-            VerifyRTCMediaStreamStats(stats.cast_to<RTCMediaStreamStats>());
-      } else if (stats.type() == RTCMediaStreamTrackStats::kType) {
-        verify_successful &= VerifyRTCMediaStreamTrackStats(
-            stats.cast_to<RTCMediaStreamTrackStats>());
+      } else if (stats.type() == RTCLegacyMediaStreamStats::kType) {
+        verify_successful &= VerifyRTCLegacyMediaStreamStats(
+            stats.cast_to<RTCLegacyMediaStreamStats>());
+      } else if (stats.type() == RTCLegacyMediaStreamTrackStats::kType) {
+        verify_successful &= VerLegacyifyRTCMediaStreamTrackStats(
+            stats.cast_to<RTCLegacyMediaStreamTrackStats>());
       } else if (stats.type() == RTCPeerConnectionStats::kType) {
         verify_successful &= VerifyRTCPeerConnectionStats(
             stats.cast_to<RTCPeerConnectionStats>());
@@ -560,16 +560,17 @@ class RTCStatsReportVerifier {
     return VerifyRTCIceCandidateStats(remote_candidate);
   }
 
-  bool VerifyRTCMediaStreamStats(const RTCMediaStreamStats& media_stream) {
+  bool VerifyRTCLegacyMediaStreamStats(
+      const RTCLegacyMediaStreamStats& media_stream) {
     RTCStatsVerifier verifier(report_.get(), &media_stream);
     verifier.TestMemberIsDefined(media_stream.stream_identifier);
     verifier.TestMemberIsIDReference(media_stream.track_ids,
-                                     RTCMediaStreamTrackStats::kType);
+                                     RTCLegacyMediaStreamTrackStats::kType);
     return verifier.ExpectAllMembersSuccessfullyTested();
   }
 
-  bool VerifyRTCMediaStreamTrackStats(
-      const RTCMediaStreamTrackStats& media_stream_track) {
+  bool VerLegacyifyRTCMediaStreamTrackStats(
+      const RTCLegacyMediaStreamTrackStats& media_stream_track) {
     RTCStatsVerifier verifier(report_.get(), &media_stream_track);
     verifier.TestMemberIsDefined(media_stream_track.track_identifier);
     verifier.TestMemberIsDefined(media_stream_track.remote_source);
@@ -787,7 +788,7 @@ class RTCStatsReportVerifier {
         stream.type() == RTCOutboundRTPStreamStats::kType) {
       verifier.TestMemberIsDefined(stream.media_type);
       verifier.TestMemberIsIDReference(stream.track_id,
-                                       RTCMediaStreamTrackStats::kType);
+                                       RTCLegacyMediaStreamTrackStats::kType);
     } else {
       verifier.TestMemberIsUndefined(stream.media_type);
       verifier.TestMemberIsUndefined(stream.track_id);
@@ -1213,7 +1214,7 @@ TEST_F(RTCStatsIntegrationTest, GetStatsWithSenderSelector) {
       // TODO(hbos): Include RTCRtpContributingSourceStats when implemented.
       RTCInboundRTPStreamStats::kType,
       RTCPeerConnectionStats::kType,
-      RTCMediaStreamStats::kType,
+      RTCLegacyMediaStreamStats::kType,
       RTCDataChannelStats::kType,
   };
   RTCStatsReportVerifier(report.get()).VerifyReport(allowed_missing_stats);
@@ -1232,7 +1233,7 @@ TEST_F(RTCStatsIntegrationTest, GetStatsWithReceiverSelector) {
       // TODO(hbos): Include RTCRtpContributingSourceStats when implemented.
       RTCOutboundRTPStreamStats::kType,
       RTCPeerConnectionStats::kType,
-      RTCMediaStreamStats::kType,
+      RTCLegacyMediaStreamStats::kType,
       RTCDataChannelStats::kType,
   };
   RTCStatsReportVerifier(report.get()).VerifyReport(allowed_missing_stats);
