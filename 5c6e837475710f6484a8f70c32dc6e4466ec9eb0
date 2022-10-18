@@ -52,6 +52,24 @@
       "parentUuid": "a35df44d_46adf557",
       "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1538bd9a_188fa2f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-18T07:35:48Z",
+      "side": 1,
+      "message": "Removing the DCHECK does make sense if remote candidates can have an adapter type that we don\u0027t want to expose but I\u0027m guessing we added the DCHECK for a reason",
+      "parentUuid": "c4ba1ba6_7d3e70af",
+      "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
