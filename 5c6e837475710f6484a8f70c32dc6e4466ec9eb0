@@ -70,6 +70,41 @@
       "parentUuid": "c4ba1ba6_7d3e70af",
       "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cbc0eaa_fceadfb2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-18T07:48:20Z",
+      "side": 1,
+      "message": "In the case of a test using BasicNetworkManager, what does the network type turn up as?\nThe remote network type being known is either a bug or a feature; if it\u0027s a bug, the DCHECK has alerted us to it and is good; if it is a feature, the DCHECK needs to accomodate it.",
+      "parentUuid": "1538bd9a_188fa2f9",
+      "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1443d36_5c2dc83e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-18T07:48:20Z",
+      "side": 1,
+      "message": "Agree with Henrik\u0027s concern.",
+      "revId": "5c6e837475710f6484a8f70c32dc6e4466ec9eb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
