@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/functional/any_invocable.h"
 #include "absl/types/optional.h"
 #include "api/audio_codecs/audio_codec_pair_id.h"
 #include "api/audio_codecs/audio_encoder.h"
@@ -24,6 +25,7 @@
 #include "api/crypto/crypto_options.h"
 #include "api/crypto/frame_encryptor_interface.h"
 #include "api/frame_transformer_interface.h"
+#include "api/rtc_error.h"
 #include "api/rtp_parameters.h"
 #include "api/scoped_refptr.h"
 #include "call/audio_sender.h"
@@ -171,7 +173,9 @@ class AudioSendStream : public AudioSender {
   virtual const webrtc::AudioSendStream::Config& GetConfig() const = 0;
 
   // Reconfigure the stream according to the Configuration.
-  virtual void Reconfigure(const Config& config) = 0;
+  virtual void Reconfigure(
+      const Config& config,
+      absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback) = 0;
 
   // Starts stream activity.
   // When a stream is active, it can receive, process and deliver packets.

@@ -149,7 +149,8 @@ class WebRtcVideoChannel : public VideoMediaChannel,
   webrtc::RtpParameters GetRtpSendParameters(uint32_t ssrc) const override;
   webrtc::RTCError SetRtpSendParameters(
       uint32_t ssrc,
-      const webrtc::RtpParameters& parameters) override;
+      const webrtc::RtpParameters& parameters,
+      absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback) override;
   webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const override;
   webrtc::RtpParameters GetDefaultRtpReceiveParameters() const override;
   bool GetSendCodec(VideoCodec* send_codec) override;
@@ -361,7 +362,9 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     ~WebRtcVideoSendStream();
 
     void SetSendParameters(const ChangedSendParameters& send_params);
-    webrtc::RTCError SetRtpParameters(const webrtc::RtpParameters& parameters);
+    webrtc::RTCError SetRtpParameters(
+        const webrtc::RtpParameters& parameters,
+        absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback);
     webrtc::RtpParameters GetRtpParameters() const;
 
     void SetFrameEncryptor(
@@ -419,7 +422,8 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     void RecreateWebRtcStream();
     webrtc::VideoEncoderConfig CreateVideoEncoderConfig(
         const VideoCodec& codec) const;
-    void ReconfigureEncoder();
+    void ReconfigureEncoder(
+        absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback);
 
     // Calls Start or Stop according to whether or not `sending_` is true,
     // and whether or not the encoding in `rtp_parameters_` is active.

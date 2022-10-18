@@ -88,7 +88,10 @@ class VideoSendStream : public webrtc::VideoSendStream {
   void SetSource(rtc::VideoSourceInterface<webrtc::VideoFrame>* source,
                  const DegradationPreference& degradation_preference) override;
 
-  void ReconfigureVideoEncoder(VideoEncoderConfig) override;
+  void ReconfigureVideoEncoder(VideoEncoderConfig config) override;
+  void ReconfigureVideoEncoder(
+      VideoEncoderConfig config,
+      absl::AnyInvocable<void(RTCError) &&> configuration_callback) override;
   Stats GetStats() override;
 
   void StopPermanentlyAndGetRtpStates(RtpStateMap* rtp_state_map,

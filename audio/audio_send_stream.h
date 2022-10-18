@@ -88,7 +88,9 @@ class AudioSendStream final : public webrtc::AudioSendStream,
 
   // webrtc::AudioSendStream implementation.
   const webrtc::AudioSendStream::Config& GetConfig() const override;
-  void Reconfigure(const webrtc::AudioSendStream::Config& config) override;
+  void Reconfigure(
+      const webrtc::AudioSendStream::Config& config,
+      absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback) override;
   void Start() override;
   void Stop() override;
   void SendAudioData(std::unique_ptr<AudioFrame> audio_frame) override;
@@ -129,7 +131,10 @@ class AudioSendStream final : public webrtc::AudioSendStream,
   void StoreEncoderProperties(int sample_rate_hz, size_t num_channels)
       RTC_RUN_ON(worker_thread_checker_);
 
-  void ConfigureStream(const Config& new_config, bool first_time)
+  void ConfigureStream(
+      const Config& new_config,
+      bool first_time,
+      absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback)
       RTC_RUN_ON(worker_thread_checker_);
   bool SetupSendCodec(const Config& new_config)
       RTC_RUN_ON(worker_thread_checker_);

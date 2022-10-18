@@ -31,8 +31,11 @@ FakeAudioSendStream::FakeAudioSendStream(
     : id_(id), config_(config) {}
 
 void FakeAudioSendStream::Reconfigure(
-    const webrtc::AudioSendStream::Config& config) {
+    const webrtc::AudioSendStream::Config& config,
+    absl::AnyInvocable<void(webrtc::RTCError) &&> done_callback) {
   config_ = config;
+  if (done_callback)
+    std::move(done_callback)(webrtc::RTCError::OK());
 }
 
 const webrtc::AudioSendStream::Config& FakeAudioSendStream::GetConfig() const {
@@ -275,6 +278,12 @@ webrtc::VideoSendStream::Stats FakeVideoSendStream::GetStats() {
 
 void FakeVideoSendStream::ReconfigureVideoEncoder(
     webrtc::VideoEncoderConfig config) {
+  ReconfigureVideoEncoder(std::move(config), nullptr);
+}
+
+void FakeVideoSendStream::ReconfigureVideoEncoder(
+    webrtc::VideoEncoderConfig config,
+    absl::AnyInvocable<void(webrtc::RTCError) &&> completion_callback) {
   int width, height;
   if (last_frame_) {
     width = last_frame_->width();
@@ -326,6 +335,8 @@ void FakeVideoSendStream::ReconfigureVideoEncoder(
   codec_settings_set_ = config.encoder_specific_settings != nullptr;
   encoder_config_ = std::move(config);
   ++num_encoder_reconfigurations_;
+  if (completion_callback)
+    std::move(completion_callback)({});
 }
 
 void FakeVideoSendStream::UpdateActiveSimulcastLayers(
