@@ -33,6 +33,8 @@
 
 namespace webrtc {
 
+using SetParametersCallback = absl::AnyInvocable<void(RTCError) &&>;
+
 class RTC_EXPORT RtpSenderInterface : public rtc::RefCountInterface {
  public:
   // Returns true if successful in setting the track.
@@ -79,6 +81,8 @@ class RTC_EXPORT RtpSenderInterface : public rtc::RefCountInterface {
   // rtpparameters.h
   // The encodings are in increasing quality order for simulcast.
   virtual RTCError SetParameters(const RtpParameters& parameters) = 0;
+  virtual void SetParametersAsync(const RtpParameters& parameters,
+                                  SetParametersCallback callback);
 
   // Returns null for a video sender.
   virtual rtc::scoped_refptr<DtmfSenderInterface> GetDtmfSender() const = 0;
