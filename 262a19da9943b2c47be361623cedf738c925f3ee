@@ -16,6 +16,161 @@
       "message": "Hi Alessio and Per, can you please take a look? Thanks!",
       "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7654726_b17c7642",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-19T15:04:23Z",
+      "side": 1,
+      "message": "Thanks Hanna! I added some comments",
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f7ae0ba_e43a0143",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-19T15:04:23Z",
+      "side": 1,
+      "message": "I would DCHECK this: the input volume controller should never be used on platforms without input volume",
+      "range": {
+        "startLine": 175,
+        "startChar": 4,
+        "endLine": 175,
+        "endChar": 43
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ae686f_790fd8d6",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-19T15:04:23Z",
+      "side": 1,
+      "message": "feel free to ignore this comment since, in practice, we don\u0027t deal with any platforms which require input volume adaptation without digital gain adaptation\n\n---\n\nmy bad, I should have prioritized the work to move the speech level estimator outside of the digital adaptive controller into GainController2; I wonder if I should fast track that change so that we always pass speech probability and speech level here",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a45d8641_5ef13f18",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-19T15:04:23Z",
+      "side": 1,
+      "message": "I added a comment about these params in https://webrtc-review.googlesource.com/c/src/+/278625/7/modules/audio_processing/agc2/input_volume_controller.h#179. Let\u0027s discuss in the other CL and/or offline.",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 59
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5608d32c_9d2ba2bf",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-19T15:04:23Z",
+      "side": 1,
+      "message": "good catch!",
+      "range": {
+        "startLine": 46,
+        "startChar": 54,
+        "endLine": 46,
+        "endChar": 68
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40e5a33a_d13a47db",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-19T15:04:23Z",
+      "side": 1,
+      "message": "let\u0027s just add a parent CL that removes Initialize() since it\u0027s not used",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 17
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b71d6e_4954a78c",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-19T15:04:23Z",
+      "side": 1,
+      "message": "what about returning the (optional) recommended input volume when `Analyze()` or `Process()` are called?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 56
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
