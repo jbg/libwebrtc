@@ -34,6 +34,24 @@
       "parentUuid": "36e27c55_5d520385",
       "revId": "6f480177fec92ea4ef57f901c24dc4bee3b46a7c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6327ebad_4f025cd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-10-19T16:55:41Z",
+      "side": 1,
+      "message": "Where will pipewire camera capture live inside webrtc? modules/video_capture ..?\nIf so I would add a new common module instead.\n\nThe things in common_video won\u0027t all move to the same place, it\u0027s going to be a case-by-case thing.",
+      "parentUuid": "65c993fc_2d36e89c",
+      "revId": "6f480177fec92ea4ef57f901c24dc4bee3b46a7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
