@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f591429_e2ce3f73",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-19T13:35:00Z",
+      "side": 1,
+      "message": "prefer int",
+      "range": {
+        "startLine": 70,
+        "startChar": 36,
+        "endLine": 70,
+        "endChar": 43
+      },
+      "revId": "8b4397b2a05723ce39ba15c5502666954e108864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "345c3ee0_4f745c81",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-10-19T13:35:00Z",
+      "side": 1,
+      "message": "prefer to use thousand separators for integers with many digits:\n48\u0027000",
+      "range": {
+        "startLine": 671,
+        "startChar": 42,
+        "endLine": 671,
+        "endChar": 47
+      },
+      "revId": "8b4397b2a05723ce39ba15c5502666954e108864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
