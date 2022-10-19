@@ -16,6 +16,24 @@
       "message": "Open for bike shed suggestions if this should be \"DeprecatedRTCFoo\" or \"RTCDeprecatedFoo\" or \"ObsoleteRTCFoo\" etc...",
       "revId": "d8a1806491abe6dc56efe88315e5f7f879382b08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b3310fe_0bf65cf1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-19T07:26:28Z",
+      "side": 1,
+      "message": "Maybe something with \"Deprecated\" because of [[deprecated]]?",
+      "parentUuid": "169ca736_7d8be78e",
+      "revId": "d8a1806491abe6dc56efe88315e5f7f879382b08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
