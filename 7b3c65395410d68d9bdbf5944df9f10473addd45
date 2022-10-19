@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d22d7fdc_085c7302",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-19T12:16:43Z",
+      "side": 1,
+      "message": "What KWin does, when there are more damage regions in a frame than available damage region metadata in the PW buffer, is that they will just send a bounding rect. I don\u0027t know what others will do as KWin is the only available implementation at this moment and it\u0027s itself limited to 16 damage regions.",
+      "parentUuid": "28732ff4_70e46a09",
+      "revId": "7b3c65395410d68d9bdbf5944df9f10473addd45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5f2c332_49a223bf",
