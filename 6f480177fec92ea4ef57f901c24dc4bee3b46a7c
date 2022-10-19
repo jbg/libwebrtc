@@ -52,6 +52,24 @@
       "parentUuid": "65c993fc_2d36e89c",
       "revId": "6f480177fec92ea4ef57f901c24dc4bee3b46a7c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a847b62e_5d0bab46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2022-10-19T17:03:21Z",
+      "side": 1,
+      "message": "According to https://webrtc-review.googlesource.com/c/src/+/261620 it will go into modules/video_capture.\n\nDo you suggest modules/pipewire then?",
+      "parentUuid": "6327ebad_4f025cd2",
+      "revId": "6f480177fec92ea4ef57f901c24dc4bee3b46a7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
