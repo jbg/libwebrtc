@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7805c5a6_31a02796",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-19T15:11:07Z",
+      "side": 1,
+      "message": "If I read this and YieldPolicy correctly, the following will NOT cause an error (innermost yield policy wins):\n\nvoid Foo() {\n  ScopedYieldPolicy foo_allow;\n  ....\n  event.Wait();\n}\n\nvoid Bar() {\n  RTC_DISALLOW_WAIT();\n  Foo();\n}\n\nShould there be a test for that too?",
+      "revId": "24cf5d8c7698ec064dadfbfdfde3482ab18df988",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4bc6572_4b5d060f",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-19T15:11:07Z",
+      "side": 1,
+      "message": "Nit: disallow -\u003e disallows",
+      "revId": "24cf5d8c7698ec064dadfbfdfde3482ab18df988",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
