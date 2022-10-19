@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1a130c8_0eeeb3f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-19T14:05:15Z",
+      "side": 1,
+      "message": "+1 with a comment for Chrome",
+      "revId": "d6e730ad52b5937215746bcaa216171d9ee38cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b005646_31afe77a",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-19T14:05:15Z",
+      "side": 1,
+      "message": "The macro might be needed in another file for Chrome due to webrtc-overrides.",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "d6e730ad52b5937215746bcaa216171d9ee38cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
