@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "647378c0_49b00cd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2022-10-19T07:37:37Z",
+      "side": 1,
+      "message": "There are references to totalFramesDuration/sumOfSquaredFramesDuration in the downstream projects. They should be switched to totalInterFrameDelay/totalSquaredInterFrameDelay before landing this CL.",
+      "revId": "a52d8b90a59352b1c0e0acd956373a64b3f4d74a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
