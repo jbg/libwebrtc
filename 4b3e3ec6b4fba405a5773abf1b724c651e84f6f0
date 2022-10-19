@@ -22,6 +22,30 @@
       },
       "revId": "4b3e3ec6b4fba405a5773abf1b724c651e84f6f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "523b4c1c_ea41a67c",
+        "filename": "webrtc.gni",
+        "patchSetId": 10
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-19T17:56:21Z",
+      "side": 1,
+      "message": "Ok, my understanding was you want this conditionally used. Do you want to have an option in DesktopCapturerOptions instead? How would this get set? And we don\u0027t have access to it from here so it would need to be passed to SharedScreenCastStream as an option as well.",
+      "parentUuid": "b1670ada_4237ea2e",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 40
+      },
+      "revId": "4b3e3ec6b4fba405a5773abf1b724c651e84f6f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
