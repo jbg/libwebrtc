@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36e27c55_5d520385",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-10-19T16:31:20Z",
+      "side": 1,
+      "message": "What is the rationale for moving things to common_video?\nThat seems like the wrong place to me. It was originally added as thing both video/ and modules/ could reference, and that does not appear to be a use case here?\nFwiw has mostly lost its purpose at this time and in fact we\u0027re hoping to remove it entirely down the line.",
+      "revId": "6f480177fec92ea4ef57f901c24dc4bee3b46a7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
