@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1670ada_4237ea2e",
+        "filename": "webrtc.gni",
+        "patchSetId": 10
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-10-19T17:06:22Z",
+      "side": 1,
+      "message": "Sorry, by flag I meant an option in DesktopCaptureOptions not a build flag.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 40
+      },
+      "revId": "4b3e3ec6b4fba405a5773abf1b724c651e84f6f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
