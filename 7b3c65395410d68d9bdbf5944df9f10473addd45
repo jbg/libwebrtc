@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28732ff4_70e46a09",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2022-10-19T11:55:41Z",
+      "side": 1,
+      "message": "(Comment missed from previous review)\n\nWould you know what happens if the source / compositor wants to send more than the maximum number we are setting here? Would it send more frames with different deltas until it has communicated all the damaged rectangles? If yes, how do we ensure that we have waited for all the damaged rectangles of the frame (otherwise, we might present an inconsistent frame state to the user potentially violating \"perfect frame\" ideology of wayland) or may be it just marks the complete frame as damaged (which is possibly what you were seeing in the testing when you used a single region count)?\n\nMay be we should set the number fairly large (if not unlimited) so that we don\u0027t have to keep on waiting for all the deltas by the compositor (assuming that compositor does send deltas).",
+      "revId": "7b3c65395410d68d9bdbf5944df9f10473addd45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5f2c332_49a223bf",
         "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
         "patchSetId": 7
