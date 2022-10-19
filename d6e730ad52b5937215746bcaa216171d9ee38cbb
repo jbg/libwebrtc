@@ -63,6 +63,30 @@
       },
       "revId": "d6e730ad52b5937215746bcaa216171d9ee38cbb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e96d54b5_3603e0a8",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-19T15:01:40Z",
+      "side": 1,
+      "message": "Could it be in its own header perhaps? Though I don\u0027t know how Chrome works with the YieldInterface as they use their own events.\n\nAnother option is to have the RTC_DISALLOW_WAIT macro implemented in Chromium upstream first in the webrtc-overrides header, and land this after.",
+      "parentUuid": "a49e8126_6d12108f",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "d6e730ad52b5937215746bcaa216171d9ee38cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
