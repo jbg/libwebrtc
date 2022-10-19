@@ -39,6 +39,30 @@
       },
       "revId": "d6e730ad52b5937215746bcaa216171d9ee38cbb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a49e8126_6d12108f",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-10-19T14:54:39Z",
+      "side": 1,
+      "message": "ah - hmm... what\u0027s a good place for it.\nAlso, I\u0027ve renamed it now to RTC_DISALLOW_WAIT to avoid a potential conflict",
+      "parentUuid": "6b005646_31afe77a",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "d6e730ad52b5937215746bcaa216171d9ee38cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
