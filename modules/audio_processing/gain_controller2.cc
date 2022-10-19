@@ -61,6 +61,16 @@ std::unique_ptr<AdaptiveDigitalGainController> CreateAdaptiveDigitalController(
   return nullptr;
 }
 
+// Creates an input volume controller if enabled in the config.
+std::unique_ptr<InputVolumeController> CreateInputVolumeController(
+    const Agc2Config::InputVolumeController& config,
+    int num_channels) {
+  if (config.enabled) {
+    return std::make_unique<InputVolumeController>(num_channels, config);
+  }
+  return nullptr;
+}
+
 }  // namespace
 
 std::atomic<int> GainController2::instance_count_(0);
@@ -79,6 +89,9 @@ GainController2::GainController2(const Agc2Config& config,
                                           sample_rate_hz,
                                           num_channels,
                                           &data_dumper_)),
+      input_volume_controller_(
+          CreateInputVolumeController(config.input_volume_controller,
+                                      num_channels)),
       limiter_(sample_rate_hz, &data_dumper_, /*histogram_name_prefix=*/"Agc2"),
       calls_since_last_limiter_log_(0) {
   RTC_DCHECK(Validate(config));
@@ -91,25 +104,59 @@ GainController2::GainController2(const Agc2Config& config,
         config.adaptive_digital.vad_reset_period_ms, cpu_features_,
         sample_rate_hz);
   }
+  if (input_volume_controller_) {
+    input_volume_controller_->Initialize();
+  }
 }
 
 GainController2::~GainController2() = default;
 
-void GainController2::Initialize(int sample_rate_hz, int num_channels) {
+void GainController2::Initialize(
+    const Agc2Config::InputVolumeController& config,
+    int sample_rate_hz,
+    int num_channels) {
   RTC_DCHECK(sample_rate_hz == AudioProcessing::kSampleRate8kHz ||
              sample_rate_hz == AudioProcessing::kSampleRate16kHz ||
              sample_rate_hz == AudioProcessing::kSampleRate32kHz ||
              sample_rate_hz == AudioProcessing::kSampleRate48kHz);
+  RTC_DCHECK_GE(num_channels, 0);
   // TODO(bugs.webrtc.org/7494): Initialize `fixed_gain_applier_`.
   limiter_.SetSampleRate(sample_rate_hz);
   if (vad_) {
     vad_->Initialize(sample_rate_hz);
   }
+
   if (adaptive_digital_controller_) {
     adaptive_digital_controller_->Initialize(sample_rate_hz, num_channels);
   }
+
+  // Create a new `InputVolumeController` if the number of channels has changed.
+  // TODO(webrtc:7494): Simplify once `num_channels` is removed from the inputs.
+  if ((config.enabled && !input_volume_controller_) ||
+      input_volume_controller_->num_channels() != num_channels) {
+    const absl::optional<int> recommended_input_volume =
+        input_volume_controller_
+            ? absl::optional<int>(
+                  input_volume_controller_->recommended_analog_level())
+            : absl::nullopt;
+    input_volume_controller_.reset(
+        new InputVolumeController(num_channels, config));
+    if (recommended_input_volume.has_value()) {
+      input_volume_controller_->set_stream_analog_level(
+          *recommended_input_volume);
+    }
+    input_volume_controller_->Initialize();
+  }
+
   data_dumper_.InitiateNewSetOfRecordings();
   calls_since_last_limiter_log_ = 0;
+}
+
+void GainController2::SetCaptureOutputUsed(bool capture_output_used) {
+  if (input_volume_controller_) {
+    input_volume_controller_->HandleCaptureOutputUsedChange(
+        capture_output_used);
+  }
 }
 
 void GainController2::SetFixedGainDb(float gain_db) {
@@ -120,6 +167,23 @@ void GainController2::SetFixedGainDb(float gain_db) {
     limiter_.Reset();
   }
   fixed_gain_applier_.SetGainFactor(gain_factor);
+}
+
+void GainController2::Analyze(absl::optional<int> applied_input_volume,
+                              const AudioBuffer& audio_buffer) {
+  if (input_volume_controller_) {
+    if (applied_input_volume.has_value()) {
+      input_volume_controller_->set_stream_analog_level(*applied_input_volume);
+    }
+    input_volume_controller_->AnalyzePreProcess(audio_buffer);
+  }
+}
+
+absl::optional<int> GainController2::GetRecommendedInputVolume() const {
+  return input_volume_controller_
+             ? absl::optional<int>(
+                   input_volume_controller_->recommended_analog_level())
+             : absl::nullopt;
 }
 
 void GainController2::Process(absl::optional<float> speech_probability,
@@ -142,6 +206,16 @@ void GainController2::Process(absl::optional<float> speech_probability,
   if (speech_probability.has_value()) {
     data_dumper_.DumpRaw("agc2_speech_probability", speech_probability.value());
   }
+
+  if (input_volume_controller_) {
+    absl::optional<float> speech_level = absl::nullopt;
+    if (adaptive_digital_controller_) {
+      speech_level =
+          adaptive_digital_controller_->GetSpeechLevelDbfsIfConfident();
+    }
+    input_volume_controller_->Process(*audio, speech_probability, speech_level);
+  }
+
   fixed_gain_applier_.ApplyGain(float_frame);
   if (adaptive_digital_controller_) {
     RTC_DCHECK(speech_probability.has_value());
@@ -166,11 +240,16 @@ bool GainController2::Validate(
     const AudioProcessing::Config::GainController2& config) {
   const auto& fixed = config.fixed_digital;
   const auto& adaptive = config.adaptive_digital;
+  const auto& input_volume_controller = config.input_volume_controller;
   return fixed.gain_db >= 0.0f && fixed.gain_db < 50.f &&
          adaptive.headroom_db >= 0.0f && adaptive.max_gain_db > 0.0f &&
          adaptive.initial_gain_db >= 0.0f &&
          adaptive.max_gain_change_db_per_second > 0.0f &&
-         adaptive.max_output_noise_level_dbfs <= 0.0f;
+         adaptive.max_output_noise_level_dbfs <= 0.0f &&
+         input_volume_controller.max_digital_gain_db >= 0 &&
+         input_volume_controller.max_digital_gain_db <= 30 &&
+         input_volume_controller.min_digital_gain_db >= 0 &&
+         input_volume_controller.min_digital_gain_db <= 30;
 }
 
 }  // namespace webrtc

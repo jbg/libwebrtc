@@ -18,6 +18,7 @@
 #include "modules/audio_processing/agc2/adaptive_digital_gain_controller.h"
 #include "modules/audio_processing/agc2/cpu_features.h"
 #include "modules/audio_processing/agc2/gain_applier.h"
+#include "modules/audio_processing/agc2/input_volume_controller.h"
 #include "modules/audio_processing/agc2/limiter.h"
 #include "modules/audio_processing/agc2/vad_wrapper.h"
 #include "modules/audio_processing/include/audio_processing.h"
@@ -42,10 +43,29 @@ class GainController2 {
   ~GainController2();
 
   // Detects and handles changes of sample rate and/or number of channels.
-  void Initialize(int sample_rate_hz, int num_channels);
+  // TODO(webrtc:7494): Deprecate this method because it's not used.
+  // Alternatively remove the  argument `num_channels` to allow easy
+  // initialization of `InputVolumeController` without `config`.
+  void Initialize(
+      const AudioProcessing::Config::GainController2::InputVolumeController&
+          config,
+      int sample_rate_hz,
+      int num_channels);
 
   // Sets the fixed digital gain.
   void SetFixedGainDb(float gain_db);
+
+  // Updates the input volume controller about whether the capture output is
+  // used or not.
+  void SetCaptureOutputUsed(bool capture_output_used);
+
+  // Analyzes `audio` before `Process()` is called so that the analysis can be
+  // performed before external digital processing operations take place (e.g.,
+  // echo cancellation). The analysis consists of input clipping detection and
+  // prediction (if enabled). If `applied_input_volume` has a value, the applied
+  // input volume in `InputVolumeController` is updated.
+  void Analyze(absl::optional<int> applied_input_volume,
+               const AudioBuffer& audio_buffer);
 
   // Applies fixed and adaptive digital gains to `audio` and runs a limiter.
   // If the internal VAD is used, `speech_probability` is ignored. Otherwise
@@ -61,6 +81,10 @@ class GainController2 {
 
   AvailableCpuFeatures GetCpuFeatures() const { return cpu_features_; }
 
+  // Returns the recommended input volume if input volume controller is enabled
+  // and if a volume recommendation is available.
+  absl::optional<int> GetRecommendedInputVolume() const;
+
  private:
   static std::atomic<int> instance_count_;
   const AvailableCpuFeatures cpu_features_;
@@ -68,6 +92,7 @@ class GainController2 {
   GainApplier fixed_gain_applier_;
   std::unique_ptr<VoiceActivityDetectorWrapper> vad_;
   std::unique_ptr<AdaptiveDigitalGainController> adaptive_digital_controller_;
+  std::unique_ptr<InputVolumeController> input_volume_controller_;
   Limiter limiter_;
   int calls_since_last_limiter_log_;
 };

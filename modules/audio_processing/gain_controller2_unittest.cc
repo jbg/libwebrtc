@@ -22,11 +22,15 @@
 #include "modules/audio_processing/test/audio_buffer_tools.h"
 #include "modules/audio_processing/test/bitexactness_tools.h"
 #include "rtc_base/checks.h"
+#include "test/gmock.h"
 #include "test/gtest.h"
 
 namespace webrtc {
 namespace test {
 namespace {
+
+using ::testing::Eq;
+using ::testing::Optional;
 
 using Agc2Config = AudioProcessing::Config::GainController2;
 
@@ -40,13 +44,18 @@ void SetAudioBufferSamples(float value, AudioBuffer& ab) {
 float RunAgc2WithConstantInput(GainController2& agc2,
                                float input_level,
                                int num_frames,
-                               int sample_rate_hz) {
+                               int sample_rate_hz,
+                               int num_channels = 1,
+                               int applied_initial_volume = 0) {
   const int num_samples = rtc::CheckedDivExact(sample_rate_hz, 100);
-  AudioBuffer ab(sample_rate_hz, 1, sample_rate_hz, 1, sample_rate_hz, 1);
+  AudioBuffer ab(sample_rate_hz, num_channels, sample_rate_hz, num_channels,
+                 sample_rate_hz, num_channels);
 
   // Give time to the level estimator to converge.
   for (int i = 0; i < num_frames + 1; ++i) {
     SetAudioBufferSamples(input_level, ab);
+    agc2.Analyze(
+        i > 0 ? agc2.GetRecommendedInputVolume() : applied_initial_volume, ab);
     agc2.Process(/*speech_probability=*/absl::nullopt,
                  /*input_volume_changed=*/false, &ab);
   }
@@ -135,6 +144,106 @@ TEST(GainController2, CheckAdaptiveDigitalMaxOutputNoiseLevelConfig) {
   EXPECT_TRUE(GainController2::Validate(config));
   config.adaptive_digital.max_output_noise_level_dbfs = -5.0f;
   EXPECT_TRUE(GainController2::Validate(config));
+}
+
+TEST(GainController2, CheckInputVolumeControllerDigitalGainDb) {
+  Agc2Config config;
+  config.input_volume_controller.max_digital_gain_db = -1;
+  config.input_volume_controller.min_digital_gain_db = 0;
+  EXPECT_FALSE(GainController2::Validate(config));
+
+  config.input_volume_controller.max_digital_gain_db = 0;
+  config.input_volume_controller.min_digital_gain_db = -1;
+  EXPECT_FALSE(GainController2::Validate(config));
+
+  config.input_volume_controller.max_digital_gain_db = 0;
+  config.input_volume_controller.min_digital_gain_db = 0;
+  EXPECT_TRUE(GainController2::Validate(config));
+
+  config.input_volume_controller.max_digital_gain_db = 30;
+  config.input_volume_controller.min_digital_gain_db = 30;
+  EXPECT_TRUE(GainController2::Validate(config));
+
+  config.input_volume_controller.max_digital_gain_db = 31;
+  config.input_volume_controller.min_digital_gain_db = 30;
+  EXPECT_FALSE(GainController2::Validate(config));
+
+  config.input_volume_controller.max_digital_gain_db = 30;
+  config.input_volume_controller.min_digital_gain_db = 31;
+  EXPECT_FALSE(GainController2::Validate(config));
+}
+
+TEST(GainController2,
+     CheckGetRecommendedInputVolumeWhenInputVolumeControllerNotEnabled) {
+  constexpr float kHighInputLevel = 32767.0f;
+  constexpr float kLowInputLevel = 1000.0f;
+  constexpr int kInitialInputVolume = 100;
+  constexpr int kNumChannels = 2;
+  constexpr int kNumFrames = 5;
+  constexpr int kSampleRateHz = 16000;
+
+  Agc2Config config;
+  config.input_volume_controller.enabled = false;
+  auto gain_controller =
+      std::make_unique<GainController2>(config, kSampleRateHz, kNumChannels,
+                                        /*use_internal_vad=*/true);
+
+  EXPECT_EQ(gain_controller->GetRecommendedInputVolume(), absl::nullopt);
+
+  // Run AGC with a signal with no clipping or detected speech. Expect no
+  // recommended input volume.
+  EXPECT_FLOAT_EQ(RunAgc2WithConstantInput(*gain_controller, kLowInputLevel,
+                                           kNumFrames, kSampleRateHz,
+                                           kNumChannels, kInitialInputVolume),
+                  kLowInputLevel);
+
+  EXPECT_EQ(gain_controller->GetRecommendedInputVolume(), absl::nullopt);
+
+  // Run AGC for a signal with clipping. Expect no recommended input volume.
+  EXPECT_LE(RunAgc2WithConstantInput(*gain_controller, kHighInputLevel,
+                                     kNumFrames, kSampleRateHz, kNumChannels,
+                                     kInitialInputVolume),
+            kHighInputLevel);
+
+  EXPECT_EQ(gain_controller->GetRecommendedInputVolume(), absl::nullopt);
+}
+
+TEST(GainController2,
+     CheckGetRecommendedInputVolumeWhenInputVolumeControllerEnabled) {
+  constexpr float kHighInputLevel = 32767.0f;
+  constexpr float kLowInputLevel = 1000.0f;
+  constexpr int kInitialInputVolume = 100;
+  constexpr int kNumChannels = 2;
+  constexpr int kNumFrames = 5;
+  constexpr int kSampleRateHz = 16000;
+
+  Agc2Config config;
+  config.input_volume_controller.enabled = true;
+  auto gain_controller =
+      std::make_unique<GainController2>(config, kSampleRateHz, kNumChannels,
+                                        /*use_internal_vad=*/true);
+
+  EXPECT_THAT(gain_controller->GetRecommendedInputVolume(), Optional(Eq(0)));
+
+  // Run AGC with a signal with no clipping or detected speech. Expect no change
+  // in the recommended input volume.
+  EXPECT_FLOAT_EQ(RunAgc2WithConstantInput(*gain_controller, kLowInputLevel,
+                                           kNumFrames, kSampleRateHz,
+                                           kNumChannels, kInitialInputVolume),
+                  kLowInputLevel);
+
+  EXPECT_THAT(gain_controller->GetRecommendedInputVolume(),
+              Optional(Eq(kInitialInputVolume)));
+
+  // Run AGC for a signal with clipping. Expect a decrease in the recommended
+  // input volume.
+  EXPECT_LE(RunAgc2WithConstantInput(*gain_controller, kHighInputLevel,
+                                     kNumFrames, kSampleRateHz, kNumChannels,
+                                     kInitialInputVolume),
+            kHighInputLevel);
+
+  EXPECT_THAT(gain_controller->GetRecommendedInputVolume(),
+              Optional(Eq(kInitialInputVolume - 15)));
 }
 
 // Checks that the default config is applied.
