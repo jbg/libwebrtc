@@ -74,6 +74,30 @@
       },
       "revId": "7b3c65395410d68d9bdbf5944df9f10473addd45",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69848bde_ce6f0587",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-10-19T16:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5f2c332_49a223bf",
+      "range": {
+        "startLine": 592,
+        "startChar": 0,
+        "endLine": 593,
+        "endChar": 25
+      },
+      "revId": "7b3c65395410d68d9bdbf5944df9f10473addd45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
