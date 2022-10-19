@@ -356,6 +356,9 @@ if (is_linux || is_chromeos) {
       if (!rtc_link_pipewire) {
         defines += [ "WEBRTC_DLOPEN_PIPEWIRE" ]
       }
+      if (rtc_pipewire_use_damage_region) {
+        defines += [ "WEBRTC_PIPEWIRE_DAMAGE_REGION" ]
+      }
 
       # Chromecast build config overrides `WEBRTC_USE_PIPEWIRE` even when
       # `rtc_use_pipewire` is not set, which causes pipewire_config to not be

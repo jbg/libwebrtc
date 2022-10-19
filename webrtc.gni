@@ -144,6 +144,9 @@ declare_args() {
   # Set this to link PipeWire and required libraries directly instead of using the dlopen.
   rtc_link_pipewire = false
 
+  # Enable usage of SPA_META_VideoDamage metadata in PipeWire buffers
+  rtc_pipewire_use_damage_region = false
+
   # Enable to use the Mozilla internal settings.
   build_with_mozilla = false
 
