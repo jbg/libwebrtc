@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bdcc37e_657a964c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-10-20T11:04:16Z",
+      "side": 1,
+      "message": "At the moment I don\u0027t see that as an intentional feature, but it is a side effect of the implementation. So I think that adding an explicit test for it, could be seen as \"that\u0027s how it\u0027s supposed to work\".\n\nMoving forward though, I think we\u0027ll take advantage of it and essentially reverse the default (default being \u0027allow\u0027 now but would be \u0027deny\u0027)",
+      "parentUuid": "7805c5a6_31a02796",
+      "revId": "24cf5d8c7698ec064dadfbfdfde3482ab18df988",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4bc6572_4b5d060f",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-19T15:11:07Z",
       "side": 1,
       "message": "Nit: disallow -\u003e disallows",
+      "revId": "24cf5d8c7698ec064dadfbfdfde3482ab18df988",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a042b41e_5129a1f1",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-10-20T11:04:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4bc6572_4b5d060f",
       "revId": "24cf5d8c7698ec064dadfbfdfde3482ab18df988",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
