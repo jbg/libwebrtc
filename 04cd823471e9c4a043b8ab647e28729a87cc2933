@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c62bc02_ec655f04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-10-20T09:09:21Z",
+      "side": 1,
+      "message": "Fixed in the 2nd patchset, thanks for the speedy review!",
+      "revId": "04cd823471e9c4a043b8ab647e28729a87cc2933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a9553ea_8bf6885d",
@@ -41,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6884fa3e_06bbff7b",
+        "filename": "sdk/android/api/org/webrtc/Camera2Enumerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-10-20T09:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a9553ea_8bf6885d",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 37
+      },
+      "revId": "04cd823471e9c4a043b8ab647e28729a87cc2933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61637b79_3db20e04",
@@ -54,6 +95,30 @@
       "writtenOn": "2022-10-20T08:58:29Z",
       "side": 1,
       "message": "IllegalArgumentException inherits from RuntimeException, so you don’t need to list it explicitly. Same thing below.",
+      "range": {
+        "startLine": 92,
+        "startChar": 37,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "04cd823471e9c4a043b8ab647e28729a87cc2933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "689cddea_a67d3e3f",
+        "filename": "sdk/android/api/org/webrtc/Camera2Enumerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-10-20T09:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61637b79_3db20e04",
       "range": {
         "startLine": 92,
         "startChar": 37,
