@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07bcd284_b8da3141",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-10-20T10:52:27Z",
+      "side": 1,
+      "message": "+tommi@ as root owner, can you help approve a new module directory?",
+      "revId": "251c2c907e76b0c165169e9a950d8fd73fcbbd8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

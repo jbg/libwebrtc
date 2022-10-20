@@ -106,6 +106,24 @@
       "parentUuid": "93a171c9_e8e3b449",
       "revId": "6f480177fec92ea4ef57f901c24dc4bee3b46a7c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f103589_6bb8c683",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-10-20T10:52:27Z",
+      "side": 1,
+      "message": "Thanks! Yes, unfortunately seems we need a root owner now.",
+      "parentUuid": "de8b28ac_798430ce",
+      "revId": "6f480177fec92ea4ef57f901c24dc4bee3b46a7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
