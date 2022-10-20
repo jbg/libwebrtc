@@ -16,6 +16,23 @@
       "message": "Please?",
       "revId": "5915641745aa78d007cf6fa0c99e11c2f2708323",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff233c7_cbbce0ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-10-20T08:32:29Z",
+      "side": 1,
+      "message": "Was it a speculative revert? Just to see how the metrics move?",
+      "revId": "5915641745aa78d007cf6fa0c99e11c2f2708323",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
