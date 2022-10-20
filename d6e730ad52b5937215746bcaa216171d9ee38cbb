@@ -87,6 +87,30 @@
       },
       "revId": "d6e730ad52b5937215746bcaa216171d9ee38cbb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29dd36fa_8cbaea25",
+        "filename": "rtc_base/event.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-10-20T11:07:23Z",
+      "side": 1,
+      "message": "I\u0027d prefer to land the webrtc side change first atm at least since I haven\u0027t fully wrapped my head around how we\u0027d integrate things (and what corner cases we might run into) across chromium and webrtc. As is, we\u0027d at least have a webrtc hermetic guard.",
+      "parentUuid": "e96d54b5_3603e0a8",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "d6e730ad52b5937215746bcaa216171d9ee38cbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
