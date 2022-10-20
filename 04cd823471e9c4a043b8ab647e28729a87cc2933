@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e3a0ab4_e4d7dab0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2022-10-20T08:32:50Z",
+      "side": 1,
+      "message": "Some old Android version checks cleanup.",
+      "revId": "04cd823471e9c4a043b8ab647e28729a87cc2933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
