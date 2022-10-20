@@ -2621,6 +2621,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Video) {
       absl::nullopt;
   video_media_info.receivers[0].decoder_implementation_name = "";
   video_media_info.receivers[0].min_playout_delay_ms = 50;
+  video_media_info.receivers[0].power_efficient_decoder = false;
 
   // Note: these two values intentionally differ,
   // only the decoded one should show up.
@@ -2685,6 +2686,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Video) {
   // `expected_video.decoder_implementation` should be undefined.
   expected_video.min_playout_delay = 0.05;
   expected_video.frames_per_second = 5;
+  expected_video.power_efficient_decoder = false;
 
   ASSERT_TRUE(report->Get(expected_video.id()));
   EXPECT_EQ(
@@ -2702,6 +2704,8 @@ TEST_F(RTCStatsCollectorTest, CollectRTCInboundRTPStreamStats_Video) {
   expected_video.estimated_playout_timestamp = 1234;
   video_media_info.receivers[0].decoder_implementation_name = "libfoodecoder";
   expected_video.decoder_implementation = "libfoodecoder";
+  video_media_info.receivers[0].power_efficient_decoder = true;
+  expected_video.power_efficient_decoder = true;
   video_media_channel->SetStats(video_media_info);
 
   report = stats_->GetFreshStatsReport();
@@ -2845,6 +2849,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCOutboundRTPStreamStats_Video) {
   video_media_info.senders[0].qp_sum = absl::nullopt;
   video_media_info.senders[0].content_type = VideoContentType::UNSPECIFIED;
   video_media_info.senders[0].encoder_implementation_name = "";
+  video_media_info.senders[0].power_efficient_encoder = false;
   video_media_info.senders[0].send_frame_width = 200;
   video_media_info.senders[0].send_frame_height = 100;
   video_media_info.senders[0].framerate_sent = 10;
@@ -2909,6 +2914,7 @@ TEST_F(RTCStatsCollectorTest, CollectRTCOutboundRTPStreamStats_Video) {
   expected_video.frames_sent = 5;
   expected_video.huge_frames_sent = 2;
   expected_video.active = false;
+  expected_video.power_efficient_encoder = false;
   // `expected_video.content_type` should be undefined.
   // `expected_video.qp_sum` should be undefined.
   // `expected_video.encoder_implementation` should be undefined.
@@ -2926,6 +2932,8 @@ TEST_F(RTCStatsCollectorTest, CollectRTCOutboundRTPStreamStats_Video) {
   video_media_info.senders[0].encoder_implementation_name = "libfooencoder";
   video_media_info.aggregated_senders[0] = video_media_info.senders[0];
   expected_video.encoder_implementation = "libfooencoder";
+  video_media_info.senders[0].power_efficient_encoder = true;
+  expected_video.power_efficient_encoder = true;
   video_media_channel->SetStats(video_media_info);
 
   report = stats_->GetFreshStatsReport();

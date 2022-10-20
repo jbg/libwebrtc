@@ -586,6 +586,7 @@ WEBRTC_RTCSTATS_IMPL(
     &nack_count,
     &qp_sum,
     &goog_timing_frame_info,
+    &power_efficient_decoder,
     &jitter_buffer_flushes,
     &delayed_packet_outage_samples,
     &relative_packet_arrival_delay,
@@ -650,6 +651,7 @@ RTCInboundRTPStreamStats::RTCInboundRTPStreamStats(std::string&& id,
       nack_count("nackCount"),
       qp_sum("qpSum"),
       goog_timing_frame_info("googTimingFrameInfo"),
+      power_efficient_decoder("powerEfficientDecoder"),
       jitter_buffer_flushes(
           "jitterBufferFlushes",
           {NonStandardGroupId::kRtcAudioJitterBufferMaxPackets}),
@@ -700,7 +702,8 @@ WEBRTC_RTCSTATS_IMPL(
     &pli_count,
     &nack_count,
     &qp_sum,
-    &active)
+    &active,
+    &power_efficient_encoder)
 // clang-format on
 
 RTCOutboundRTPStreamStats::RTCOutboundRTPStreamStats(const std::string& id,
@@ -740,7 +743,8 @@ RTCOutboundRTPStreamStats::RTCOutboundRTPStreamStats(std::string&& id,
       pli_count("pliCount"),
       nack_count("nackCount"),
       qp_sum("qpSum"),
-      active("active") {}
+      active("active"),
+      power_efficient_encoder("powerEfficientEncoder") {}
 
 RTCOutboundRTPStreamStats::RTCOutboundRTPStreamStats(
     const RTCOutboundRTPStreamStats& other) = default;
