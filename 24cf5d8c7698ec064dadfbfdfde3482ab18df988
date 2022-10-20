@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd417970_56f97824",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-10-20T11:17:21Z",
+      "side": 1,
+      "message": "I could rename it to something like `disallow_wait_##__LINE__`?",
+      "parentUuid": "3895f45e_dee1edc2",
+      "revId": "24cf5d8c7698ec064dadfbfdfde3482ab18df988",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4bc6572_4b5d060f",
