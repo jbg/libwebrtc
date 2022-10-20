@@ -36,6 +36,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3895f45e_dee1edc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-20T11:09:27Z",
+      "side": 1,
+      "message": "about the variable name \"no_waiting_please\": Do we have any guidance for variables declared by macros?\n\nAnyway, doing +1 on this.",
+      "revId": "24cf5d8c7698ec064dadfbfdfde3482ab18df988",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4bc6572_4b5d060f",
