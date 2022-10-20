@@ -16,6 +16,52 @@
       "message": "Some old Android version checks cleanup.",
       "revId": "04cd823471e9c4a043b8ab647e28729a87cc2933",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9553ea_8bf6885d",
+        "filename": "sdk/android/api/org/webrtc/Camera2Enumerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-10-20T08:58:29Z",
+      "side": 1,
+      "message": "You also need to update the imports.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 37
+      },
+      "revId": "04cd823471e9c4a043b8ab647e28729a87cc2933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61637b79_3db20e04",
+        "filename": "sdk/android/api/org/webrtc/Camera2Enumerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2022-10-20T08:58:29Z",
+      "side": 1,
+      "message": "IllegalArgumentException inherits from RuntimeException, so you don’t need to list it explicitly. Same thing below.",
+      "range": {
+        "startLine": 92,
+        "startChar": 37,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "04cd823471e9c4a043b8ab647e28729a87cc2933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
