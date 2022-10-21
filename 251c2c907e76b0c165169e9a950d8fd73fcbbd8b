@@ -67,6 +67,24 @@
       "message": "The failure is a bug in depot_tools. PRESUBMIT.py calls input_api.canned_checks.CheckLicense() with a regex and in this case current_year is not set. Broken by a7949c2545d46330ac4972ab169247a244da48e9 from today.",
       "revId": "251c2c907e76b0c165169e9a950d8fd73fcbbd8b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d544a6aa_bf794ed3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-10-21T16:13:19Z",
+      "side": 1,
+      "message": "Saw a few other changes go in yesterday; if you want to try again.",
+      "parentUuid": "e3cee28c_ca1e8a1a",
+      "revId": "251c2c907e76b0c165169e9a950d8fd73fcbbd8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
