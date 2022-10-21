@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44875286_ae93d6fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-10-21T07:14:54Z",
+      "side": 1,
+      "message": "Thanks for this CL!",
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f7ae0ba_e43a0143",
@@ -48,6 +65,30 @@
       "writtenOn": "2022-10-19T15:04:23Z",
       "side": 1,
       "message": "I would DCHECK this: the input volume controller should never be used on platforms without input volume",
+      "range": {
+        "startLine": 175,
+        "startChar": 4,
+        "endLine": 175,
+        "endChar": 43
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f004d1e4_410d36d4",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-10-21T07:14:54Z",
+      "side": 1,
+      "message": "If that is the case (i.e., it should always have a value), I\u0027d instead make applied_input_volume not being an optional.\n\nMaking it an optional is a clear signal that it is allowed for it not to have a value. Then we shouldn\u0027t DCHECK when it hasn\u0027t a value.\n\nAlso, DCHECKing is not really a safety since it only happens in debug builds.",
+      "parentUuid": "5f7ae0ba_e43a0143",
       "range": {
         "startLine": 175,
         "startChar": 4,
@@ -145,6 +186,52 @@
         "startChar": 0,
         "endLine": 51,
         "endChar": 17
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64027193_63b8275f",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-10-21T07:14:54Z",
+      "side": 1,
+      "message": "?I\u0027m a bit confused here.\nWhy modify the initialize method if it is not used and marked as deprecated?\n\nAnother aspect is why AudioProcessing::Config::GainController2::InputVolumeController is an argument. Is this to support runtime configurations of the input volume controller? \nAn aspect of that is that just passing this substruct makes it a bit unintuitive to control GainController2. I.e., why only pass a substruct, and not the whole GainController2 config struct?",
+      "range": {
+        "startLine": 50,
+        "startChar": 6,
+        "endLine": 51,
+        "endChar": 16
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b53a2818_16bd2c00",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-10-21T07:14:54Z",
+      "side": 1,
+      "message": "Do you have an example of a case where there is no applied_input_volume available, but we still want to run Analyze?\n\nI thought we always got the input volume reported when we run the analog agc?",
+      "range": {
+        "startLine": 67,
+        "startChar": 7,
+        "endLine": 68,
+        "endChar": 48
       },
       "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
