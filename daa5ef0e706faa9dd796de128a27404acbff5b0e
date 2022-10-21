@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29b1b286_6bdbb549",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2325,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-10-21T16:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08730769_6645bb71",
+      "revId": "daa5ef0e706faa9dd796de128a27404acbff5b0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ed05b30_30ecfa50",
@@ -69,6 +87,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf2a2fe2_c09dfe8b",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2328,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-10-21T16:51:46Z",
+      "side": 1,
+      "message": "There\u0027s that, and it\u0027s also a way to check whether we had to call ReconfigureEncoder() in this case. If we haven\u0027t, then we need to fire the callback.",
+      "parentUuid": "7ed05b30_30ecfa50",
+      "revId": "daa5ef0e706faa9dd796de128a27404acbff5b0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67bb90dd_1bef9000",
@@ -82,6 +118,24 @@
       "writtenOn": "2022-10-16T09:46:31Z",
       "side": 1,
       "message": "Leftover debug.",
+      "revId": "daa5ef0e706faa9dd796de128a27404acbff5b0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7253b444_38efdb29",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2340,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-10-21T16:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67bb90dd_1bef9000",
       "revId": "daa5ef0e706faa9dd796de128a27404acbff5b0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
