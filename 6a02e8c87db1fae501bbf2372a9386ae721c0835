@@ -50,6 +50,24 @@
       "message": "Hey Aaron,\n\nWould you mind explaining what FEC efficiency implications this change has? Is this a bugfix for a rare event, or will the issue happen frequently?",
       "revId": "6a02e8c87db1fae501bbf2372a9386ae721c0835",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe90fc85_d12977a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19424
+      },
+      "writtenOn": "2022-10-22T23:33:02Z",
+      "side": 1,
+      "message": "Hi Rasmus,\n\nShould be a bugfix for a rare event.\n\nThe idea is that Video FEC is triggered based on the the largest PLR within X windows, with each window being Y ms long.\n\nFor a given window W1, when we receive the last valid PLR within that window we will close that window by saving off the time the window ended (_lossPrHistory[0].timeMs \u003d now;) and the largest PLR of that window (_lossPrHistory[0].lossPr255 \u003d _shortMaxLossPr255;)\n\nHowever, when closing the window we do not take into account the currently passed in \"lossPr255\". This is despite the fact that \"lossPr255\" may very well be larger than the current max PLR \"_shortMaxLossPr255\".\n\nThis diff resolves that by checking one last time if lossPr255 \u003e _shortMaxLossPr255, and if so assigns _shortMaxLossPr255 to be lossPr255",
+      "parentUuid": "b2b2c076_2f9dfd44",
+      "revId": "6a02e8c87db1fae501bbf2372a9386ae721c0835",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
