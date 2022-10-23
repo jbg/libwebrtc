@@ -16,6 +16,24 @@
       "message": "I will just assume this is tested - we don\u0027t have bots on our side doing openssl at the moment.\n\nThank you! (and welcome Meta to the AUTHORS list!)",
       "revId": "dbd328fc904db7b8d71c1563458e072132f2ca1c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f9b749_e0232424",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7529
+      },
+      "writtenOn": "2022-10-23T16:49:44Z",
+      "side": 1,
+      "message": "On our side we saw that this change fixes a test failure in RTCStatsCollectorTest.CollectRTCTransportStatsWithCrypto when building with OpenSSL. I looked through the OpenSSL repo and it looks like these ids haven\u0027t changed in a long time, so likely this was broken since https://webrtc-review.googlesource.com/c/src/+/158403 landed.",
+      "parentUuid": "cbcdaf53_a255161b",
+      "revId": "dbd328fc904db7b8d71c1563458e072132f2ca1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
