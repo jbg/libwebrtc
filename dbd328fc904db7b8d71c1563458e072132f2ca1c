@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbcdaf53_a255161b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-23T12:09:04Z",
+      "side": 1,
+      "message": "I will just assume this is tested - we don\u0027t have bots on our side doing openssl at the moment.\n\nThank you! (and welcome Meta to the AUTHORS list!)",
+      "revId": "dbd328fc904db7b8d71c1563458e072132f2ca1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
