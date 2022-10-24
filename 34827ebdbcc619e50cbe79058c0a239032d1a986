@@ -88,6 +88,24 @@
       "parentUuid": "f8c44829_ce86b200",
       "revId": "34827ebdbcc619e50cbe79058c0a239032d1a986",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56b16065_08cd89de",
+        "filename": "modules/audio_coding/neteq/timestamp_scaler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2022-10-24T23:51:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ed102b1_5aaeca7d",
+      "revId": "34827ebdbcc619e50cbe79058c0a239032d1a986",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
