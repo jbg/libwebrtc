@@ -13,6 +13,7 @@
 
 #include "absl/types/optional.h"
 #include "rtc_base/gtest_prod_util.h"
+#include "system_wrappers/include/metrics.h"
 
 namespace webrtc {
 
@@ -21,7 +22,9 @@ namespace webrtc {
 // the statistics into a histogram.
 class InputVolumeStatsReporter {
  public:
-  InputVolumeStatsReporter();
+  // Ctor. Set `is_applied_input_volume` to true if the stats reporter is used
+  // to analyze the applied input volue, false for the recommended input volume.
+  explicit InputVolumeStatsReporter(bool is_applied_input_volume);
   InputVolumeStatsReporter(const InputVolumeStatsReporter&) = delete;
   InputVolumeStatsReporter operator=(const InputVolumeStatsReporter&) = delete;
   ~InputVolumeStatsReporter();
@@ -56,6 +59,14 @@ class InputVolumeStatsReporter {
 
   // Computes aggregate stat and logs them into a histogram.
   void LogVolumeUpdateStats() const;
+
+  // Histograms.
+  metrics::Histogram* decrease_rate_histogram_;
+  metrics::Histogram* decrease_average_histogram_;
+  metrics::Histogram* increase_rate_histogram_;
+  metrics::Histogram* increase_average_histogram_;
+  metrics::Histogram* update_rate_histogram_;
+  metrics::Histogram* update_average_histogram_;
 
   int log_volume_update_stats_counter_ = 0;
   absl::optional<int> previous_input_volume_ = absl::nullopt;
