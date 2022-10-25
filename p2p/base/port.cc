@@ -101,8 +101,10 @@ std::string Port::ComputeFoundation(absl::string_view type,
                                     absl::string_view protocol,
                                     absl::string_view relay_protocol,
                                     const rtc::SocketAddress& base_address) {
+  // RTC_DCHECK(tiebreaker_);
   rtc::StringBuilder sb;
-  sb << type << base_address.ipaddr().ToString() << protocol << relay_protocol;
+  sb << type << base_address.ipaddr().ToString() << protocol << relay_protocol
+     << rtc::ToString(IceTiebreaker());
   return rtc::ToString(rtc::ComputeCrc32(sb.Release()));
 }
 
@@ -262,7 +264,6 @@ void Port::AddAddress(const rtc::SocketAddress& address,
   if (protocol == TCP_PROTOCOL_NAME && type == LOCAL_PORT_TYPE) {
     RTC_DCHECK(!tcptype.empty());
   }
-
   std::string foundation =
       ComputeFoundation(type, protocol, relay_protocol, base_address);
   Candidate c(component_, protocol, address, 0U, username_fragment(), password_,
