@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9df42847_e3f58f13",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sink.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 12419
+      },
+      "writtenOn": "2022-10-26T21:19:05Z",
+      "side": 1,
+      "message": "Nit: do we need it, since it repeats comment in the header?",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e952bb89_526f527f",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sink.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 12419
+      },
+      "writtenOn": "2022-10-26T21:19:05Z",
+      "side": 1,
+      "message": "Nit: this naming is a bit confusing as it repeats name of the class.",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97bbd58e_d1d64929",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sinks_support.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 12419
+      },
+      "writtenOn": "2022-10-26T21:19:05Z",
+      "side": 1,
+      "message": "`video_configs_` have values of type `std::pair\u003cstd::string, PeerConnectionE2EQualityTestFixture::VideoConfig\u003e`. IIUC that means that during `auto insert_result \u003d video_configs_.emplace(*config.stream_label, std::pair{std::string(sender_peer_name), config});` the config will be copied.\n\nWith that - I think it\u0027s better to take config by value instead of the const reference. So we are clear that the function needs ownership over the config. It will also allow users to use move and get rid of the copying if they don\u0027t need the ownership.",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "816816f6_20caecee",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sinks_support.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 12419
+      },
+      "writtenOn": "2022-10-26T21:19:05Z",
+      "side": 1,
+      "message": "Why don\u0027t we ask for string (here and below)? Since we convert it to string later anyway.\n\nNot sure what is the right way. Asking mostly for my understanding.",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e74e97b_4ce9fa93",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sinks_support.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 12419
+      },
+      "writtenOn": "2022-10-26T21:19:05Z",
+      "side": 1,
+      "message": "Nit: \"Support\" suffix sounds odd. Maybe \"Helper\" instead?",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e849188a_4554c709",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sinks_support.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 12419
+      },
+      "writtenOn": "2022-10-26T21:19:05Z",
+      "side": 1,
+      "message": "Looking at the way we use the video_writers_ I feel like it should be linked list.",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c00f57c2_fcd3a4d4",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sinks_support_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 12419
+      },
+      "writtenOn": "2022-10-26T21:19:05Z",
+      "side": 1,
+      "message": "Nit: add utility function to compare configs. \n\nPS: Im not 100% sure so feel free to ignore :)",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 43,
+        "endChar": 60
+      },
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
