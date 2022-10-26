@@ -109,6 +109,7 @@ class FakePortAllocatorSession : public PortAllocatorSession {
         field_trials_(field_trials) {
     ipv4_network_.AddIP(rtc::IPAddress(INADDR_LOOPBACK));
     ipv6_network_.AddIP(rtc::IPAddress(in6addr_loopback));
+    set_ice_tiebreaker(0x1234);
   }
 
   void SetCandidateFilter(uint32_t filter) override {
@@ -124,6 +125,7 @@ class FakePortAllocatorSession : public PortAllocatorSession {
       port_.reset(TestUDPPort::Create(network_thread_, factory_, &network, 0, 0,
                                       username(), password(), false,
                                       &field_trials_));
+      port_->SetIceTiebreaker(ice_tiebreaker());
       RTC_DCHECK(port_);
       port_->SubscribePortDestroyed(
           [this](PortInterface* port) { OnPortDestroyed(port); });
