@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c6679e8_6ae344fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-10-26T21:33:38Z",
+      "side": 1,
+      "message": "I\u0027m not sure I like updating NetEq sample rate from the outside after construction (that would require a lot of changes). Of course it could be desirable to choose different output sample rate for Opus etc. depending on the playout device sample rate, but that would be a complex change as well.\n\nWe could add a default sample rate property to the audio receive stream config instead of this field trial. However, I think we should update the default sample rate to 48k anyway.",
+      "parentUuid": "89afc59c_39ab6874",
+      "revId": "e5ef883e9734e6f0c252152f1f938d59daa690f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a914e6c1_64bd8e5a",
         "filename": "api/neteq/neteq.cc",
         "patchSetId": 1
