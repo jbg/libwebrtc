@@ -56,6 +56,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89afc59c_39ab6874",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-10-26T19:54:16Z",
+      "side": 1,
+      "message": "I\u0027m fine with change the default to 48k. The reason I\u0027ve chosen field trial is to make sure existing users won\u0027t be affected, but I\u0027m fine if it is allowed to be changed.\nBTW, now I think that ideal solution to my problem would be not overriding NetEq::Config defaults, but rather changing AudioMixerImpl::Mix signature to accept current audio device sample rate here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_mixer/audio_mixer_impl.cc;l\u003d158\nand then audio device sample rate should be preferred over preferred sample rate of audio source, when the audio source preferred sample rate (https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_mixer/audio_mixer_impl.cc;l\u003d158) came from NetEq::Config rather than actual sample rate of received data. Currently last_output_sample_rate_ is initialized to NetEq::Config::sample_rate_hz (https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_coding/neteq/neteq_impl.cc;l\u003d150;drc\u003d70d839a3b8bcf1ef43c42a54a4b27f14ee149750;bpv\u003d1;bpt\u003d1) and then used to compute preferred sample rate, even so no actual data is ever received, so silence generation is done with NetEq::Config::sample_rate_hz rather than audio device sample rate.\nWhat do you think about alternative approach (not sure if it\u0027s doable at all until deep dive and try to implement)?",
+      "parentUuid": "1df7b112_f8d27b87",
+      "revId": "e5ef883e9734e6f0c252152f1f938d59daa690f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf4b3640_a17fc5f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-10-26T19:54:16Z",
+      "side": 1,
+      "message": "Hi Jacob! Thank you very much for review and valuable comments.",
+      "revId": "e5ef883e9734e6f0c252152f1f938d59daa690f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a914e6c1_64bd8e5a",
         "filename": "api/neteq/neteq.cc",
         "patchSetId": 1
@@ -67,6 +102,30 @@
       "writtenOn": "2022-10-26T19:16:25Z",
       "side": 1,
       "message": "Some of these will be overridden here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/audio/channel_receive.cc;l\u003d78;drc\u003d70d839a3b8bcf1ef43c42a54a4b27f14ee149750",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 56
+      },
+      "revId": "e5ef883e9734e6f0c252152f1f938d59daa690f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c83412_4459af14",
+        "filename": "api/neteq/neteq.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-10-26T19:54:16Z",
+      "side": 1,
+      "message": "It seems to make sense to remove ability to configure these fields over field trials, since there are other means to change them. I\u0027ve changed that is case field trial approach to configuration is accepted.",
+      "parentUuid": "a914e6c1_64bd8e5a",
       "range": {
         "startLine": 32,
         "startChar": 0,
