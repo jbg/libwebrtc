@@ -534,9 +534,11 @@ class PortTest : public ::testing::Test, public sigslot::has_slots<> {
   }
   std::unique_ptr<UDPPort> CreateUdpPort(const SocketAddress& addr,
                                          PacketSocketFactory* socket_factory) {
-    return UDPPort::Create(&main_, socket_factory, MakeNetwork(addr), 0, 0,
-                           username_, password_, true, absl::nullopt,
-                           &field_trials_);
+    auto port = UDPPort::Create(&main_, socket_factory, MakeNetwork(addr), 0, 0,
+                                username_, password_, true, absl::nullopt,
+                                &field_trials_);
+    port->SetIceTiebreaker(0x1);
+    return port;
   }
   std::unique_ptr<UDPPort> CreateUdpPortMultipleAddrs(
       const SocketAddress& global_addr,
