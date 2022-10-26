@@ -16,6 +16,65 @@
       "message": "Hello Henrik!\n\nCould you please take a look at this small CL which provides a way to override default config of NetEq.\nI\u0027ve encountered one tricky problem with current default of 16k. I\u0027m working on iOS application which establishes PeerConnection to SFU server to receive audio. The connection is established long before actual incoming audio is received (it could happen arbitrary time since connection establishment). There is an existing code in audio mixer which eventually uses 16k sample rate came from initial value of NetEq::Config::sample_rate_hz\u003d16k to mix some sort of silence in absence of incoming audio. This 16k \"silence\" is then resampled to HW sample rate of 48k. This resampling consumes non-negligible amount of resources and could be avoided in my scenario by overriding default value of NetEq::Config::sample_rate_hz to be 48k. So I\u0027ve added field trial to override defaults.\nThe default config is come from this call: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/audio/channel_send.cc;l\u003d478;drc\u003d2d0ba28e2521ab1ff907b98f6bb12272b4346823 which is non-overrideable from pre-combiled iOS SDK (without custom patches). So I\u0027ve picked field trial solution to adjust configuration since something similar used in other places.\n\nThanks a lot in advance for review,\nYury.",
       "revId": "e5ef883e9734e6f0c252152f1f938d59daa690f8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "016b9c1a_4fe9b0bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-10-26T19:16:25Z",
+      "side": 1,
+      "message": "NetEq should output 0s before any packets have arrived so no expensive resampling should be needed (given that the mute information is available).\n\nHowever, I do think we could/should make the default sample rate 48k anyway given that Opus is the default audio codec in WebRTC. Do you think this field trial is needed in that case?",
+      "parentUuid": "8ac7e087_1b0393a7",
+      "revId": "e5ef883e9734e6f0c252152f1f938d59daa690f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1df7b112_f8d27b87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-10-26T19:16:25Z",
+      "side": 1,
+      "message": "Thanks. I actually think we could/should",
+      "parentUuid": "8ac7e087_1b0393a7",
+      "revId": "e5ef883e9734e6f0c252152f1f938d59daa690f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a914e6c1_64bd8e5a",
+        "filename": "api/neteq/neteq.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-10-26T19:16:25Z",
+      "side": 1,
+      "message": "Some of these will be overridden here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/audio/channel_receive.cc;l\u003d78;drc\u003d70d839a3b8bcf1ef43c42a54a4b27f14ee149750",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 56
+      },
+      "revId": "e5ef883e9734e6f0c252152f1f938d59daa690f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
