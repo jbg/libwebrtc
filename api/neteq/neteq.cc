@@ -10,11 +10,26 @@
 
 #include "api/neteq/neteq.h"
 
+#include "rtc_base/experiments/struct_parameters_parser.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/strings/string_builder.h"
+#include "system_wrappers/include/field_trial.h"
+
+namespace {
+constexpr char kNetEqConfigFieldTrial[] = "WebRTC-Audio-NetEqConfig";
+}
 
 namespace webrtc {
 
-NetEq::Config::Config() = default;
+NetEq::Config::Config() {
+  auto parser = StructParametersParser::Create(
+      "sample_rate_hz", &sample_rate_hz, "enable_post_decode_vad",
+      &enable_post_decode_vad, "min_delay_ms", &min_delay_ms, "max_delay_ms",
+      &max_delay_ms, "enable_rtx_handling", &enable_rtx_handling);
+  parser->Parse(webrtc::field_trial::FindFullName(kNetEqConfigFieldTrial));
+  RTC_LOG(LS_VERBOSE) << "NetEq config: " << ToString();
+}
+
 NetEq::Config::Config(const Config&) = default;
 NetEq::Config::Config(Config&&) = default;
 NetEq::Config::~Config() = default;
