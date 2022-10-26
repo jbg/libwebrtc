@@ -206,6 +206,10 @@ class RTC_EXPORT PortAllocatorSession : public sigslot::has_slots<> {
   const std::string& ice_pwd() const { return ice_pwd_; }
   bool pooled() const { return pooled_; }
 
+  // TODO(bugs.webrtc.org/14605): move this to the constructor
+  void set_ice_tiebreaker(uint64_t tiebreaker) { tiebreaker_ = tiebreaker; }
+  uint64_t ice_tiebreaker() const { return tiebreaker_; }
+
   // Setting this filter should affect not only candidates gathered in the
   // future, but candidates already gathered and ports already "ready",
   // which would be returned by ReadyCandidates() and ReadyPorts().
@@ -321,6 +325,9 @@ class RTC_EXPORT PortAllocatorSession : public sigslot::has_slots<> {
   std::string ice_pwd_;
 
   bool pooled_ = false;
+
+  // TODO(bugs.webrtc.org/14605): move this to the constructor
+  uint64_t tiebreaker_;
 
   // SetIceParameters is an implementation detail which only PortAllocator
   // should be able to call.

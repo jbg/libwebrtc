@@ -1557,6 +1557,7 @@ void AllocationSequence::CreateUDPPorts() {
   }
 
   if (port) {
+    port->SetIceTiebreaker(session_->ice_tiebreaker());
     // If shared socket is enabled, STUN candidate will be allocated by the
     // UDPPort.
     if (IsFlagSet(PORTALLOCATOR_ENABLE_SHARED_SOCKET)) {
