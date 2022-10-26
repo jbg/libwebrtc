@@ -217,7 +217,11 @@ bool RemoveDir(absl::string_view directory_name) {
 
 bool RemoveFile(absl::string_view file_name) {
 #ifdef WIN32
-  return DeleteFileA(std::string(file_name).c_str()) != FALSE;
+  bool out = DeleteFileA(std::string(file_name).c_str()) != FALSE;
+  if (!out) {
+    RTC_LOG(ERROR) << "Last error: " << GetLastError();
+  }
+  return out;
 #else
   return unlink(std::string(file_name).c_str()) == 0;
 #endif
