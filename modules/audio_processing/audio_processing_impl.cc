@@ -309,7 +309,7 @@ AudioProcessingImpl::AudioProcessingImpl(
   capture_nonlocked_.echo_controller_enabled =
       static_cast<bool>(echo_control_factory_);
 
-  Initialize();
+  RTC_DCHECK_EQ(Initialize(), kNoError);
 }
 
 AudioProcessingImpl::~AudioProcessingImpl() = default;
@@ -416,8 +416,14 @@ int AudioProcessingImpl::InitializeLocked(const ProcessingConfig& config) {
   UpdateActiveSubmoduleStates();
 
   for (const auto& stream : config.streams) {
-    if (stream.num_channels() > 0 && stream.sample_rate_hz() <= 0) {
-      return kBadSampleRateError;
+    if (stream.num_channels() > 0) {
+      // The resampler requires frames large enough to fit its convolution
+      // kernels, so rates are restricted to 8000 Hz.
+      if (stream.sample_rate_hz() < 8000 ||
+          stream.sample_rate_hz() >
+              static_cast<int>(AudioBuffer::kMaxSampleRate)) {
+        return kBadSampleRateError;
+      }
     }
   }
 
