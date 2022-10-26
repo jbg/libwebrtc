@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ac7e087_1b0393a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2022-10-26T17:14:53Z",
+      "side": 1,
+      "message": "Hello Henrik!\n\nCould you please take a look at this small CL which provides a way to override default config of NetEq.\nI\u0027ve encountered one tricky problem with current default of 16k. I\u0027m working on iOS application which establishes PeerConnection to SFU server to receive audio. The connection is established long before actual incoming audio is received (it could happen arbitrary time since connection establishment). There is an existing code in audio mixer which eventually uses 16k sample rate came from initial value of NetEq::Config::sample_rate_hz\u003d16k to mix some sort of silence in absence of incoming audio. This 16k \"silence\" is then resampled to HW sample rate of 48k. This resampling consumes non-negligible amount of resources and could be avoided in my scenario by overriding default value of NetEq::Config::sample_rate_hz to be 48k. So I\u0027ve added field trial to override defaults.\nThe default config is come from this call: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/audio/channel_send.cc;l\u003d478;drc\u003d2d0ba28e2521ab1ff907b98f6bb12272b4346823 which is non-overrideable from pre-combiled iOS SDK (without custom patches). So I\u0027ve picked field trial solution to adjust configuration since something similar used in other places.\n\nThanks a lot in advance for review,\nYury.",
+      "revId": "e5ef883e9734e6f0c252152f1f938d59daa690f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
