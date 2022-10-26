@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ea86e6_f8868f8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-26T08:19:17Z",
+      "side": 1,
+      "message": "I guess we\u0027ll have to use a few more words here before submitting.",
+      "revId": "ddc3f633fdc976a4a59fae64ea16c2b22610896a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "976f0150_e1800a1a",
@@ -14,6 +31,57 @@
       "writtenOn": "2022-10-25T20:17:15Z",
       "side": 1,
       "message": "I *think* the DCHECKS only get triggered from unit tests but this requires more analysis",
+      "revId": "ddc3f633fdc976a4a59fae64ea16c2b22610896a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8fe2c37_4152cb96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-26T08:19:17Z",
+      "side": 1,
+      "message": "Guess you want to land this with fixed tests too.",
+      "revId": "ddc3f633fdc976a4a59fae64ea16c2b22610896a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2193a8ae_e29052ed",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-26T08:19:17Z",
+      "side": 1,
+      "message": "need to remove the commented out code (or remove the out-commenting once tests are fixed.",
+      "revId": "ddc3f633fdc976a4a59fae64ea16c2b22610896a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8040368_47a0af70",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-26T08:19:17Z",
+      "side": 1,
+      "message": "Here I thin RTC_DCHECK is appropriate.\nThe value might accidentally be zero, but that\u0027s a negligible probability (1/2^64).",
       "revId": "ddc3f633fdc976a4a59fae64ea16c2b22610896a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

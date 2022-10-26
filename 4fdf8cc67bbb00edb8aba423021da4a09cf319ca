@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce694b22_95a9c5ba",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-26T08:19:17Z",
+      "side": 0,
+      "message": "don\u0027t remove this blank line",
+      "revId": "4fdf8cc67bbb00edb8aba423021da4a09cf319ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
