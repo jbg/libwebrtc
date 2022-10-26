@@ -977,6 +977,27 @@ TEST_F(NetEqDecodingTestFaxMode, TestJitterBufferDelayWithAcceleration) {
             rtc::checked_cast<int>(stats.jitter_buffer_target_delay_ms));
 }
 
+TEST(NetEqConfigOverrideTest, TestInitialConfigValuesOverridenWithFieldTrial) {
+  NetEq::Config default_config;
+  test::ScopedFieldTrials field_trials(
+      "WebRTC-Audio-NetEqConfig/"
+      "sample_rate_hz:48000,max_packets_in_buffer:400,enable_rtx_handling:"
+      "true/");
+  NetEq::Config overriden_config;
+  EXPECT_EQ(48000, overriden_config.sample_rate_hz);
+  EXPECT_EQ(400u, overriden_config.max_packets_in_buffer);
+  EXPECT_EQ(true, overriden_config.enable_rtx_handling);
+
+  EXPECT_EQ(default_config.enable_fast_accelerate,
+            overriden_config.enable_fast_accelerate);
+  EXPECT_EQ(default_config.enable_post_decode_vad,
+            overriden_config.enable_post_decode_vad);
+  EXPECT_EQ(default_config.min_delay_ms, overriden_config.min_delay_ms);
+  EXPECT_EQ(default_config.min_delay_ms, overriden_config.min_delay_ms);
+  EXPECT_EQ(default_config.enable_muted_state,
+            overriden_config.enable_muted_state);
+}
+
 namespace test {
 TEST(NetEqNoTimeStretchingMode, RunTest) {
   NetEq::Config config;
