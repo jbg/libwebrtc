@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0acf81c7_c302e3d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2022-10-27T14:54:51Z",
+      "side": 1,
+      "message": "Build is expected to be broken until https://chromium-review.googlesource.com/c/chromium/src/+/3986032 is landed.",
+      "revId": "0a3111be554e1f0b0bf89077204254ad2e5805c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
