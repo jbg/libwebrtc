@@ -50,6 +50,24 @@
       "message": "the ice_breaker is already \"transported\" down to the port\nfrom jsep_transport_controller to p2p_transport_channel,\nwhich will set it on the port.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/jsep_transport_controller.cc;drc\u003d27e39fa1dd71076618c358639ed8a327bc3873c4;l\u003d422\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/p2p/base/p2p_transport_channel.cc;drc\u003d27e39fa1dd71076618c358639ed8a327bc3873c4;l\u003d368\n\nI don\u0027t understand why that is not sufficient ?",
       "revId": "575143998fe5aecbbe6be8a01bf80e8d49c3a69d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27597e68_d060607c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-10-27T11:16:58Z",
+      "side": 1,
+      "message": "timing issue, compute foundation is called before that for pooled candidates which are also created before the transport controller here:\n  https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/peer_connection.cc;l\u003d619;drc\u003d27e39fa1dd71076618c358639ed8a327bc3873c4;bpv\u003d1;bpt\u003d1\n\nThis will get much simpler when the tie-breaker is moved from the transport controller to the peerconnection but I wanted to avoid API changes for easier cherry-picking.\n\n(check PS1+2 for the \"simple\" case and 3+4 for how pooled candidates make it harder)",
+      "parentUuid": "3d999ada_6c0f7225",
+      "revId": "575143998fe5aecbbe6be8a01bf80e8d49c3a69d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
