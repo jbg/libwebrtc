@@ -33,6 +33,23 @@
       "message": "tests split to https://webrtc-review.googlesource.com/c/src/+/280680",
       "revId": "575143998fe5aecbbe6be8a01bf80e8d49c3a69d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d999ada_6c0f7225",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-10-27T11:08:50Z",
+      "side": 1,
+      "message": "the ice_breaker is already \"transported\" down to the port\nfrom jsep_transport_controller to p2p_transport_channel,\nwhich will set it on the port.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/jsep_transport_controller.cc;drc\u003d27e39fa1dd71076618c358639ed8a327bc3873c4;l\u003d422\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/p2p/base/p2p_transport_channel.cc;drc\u003d27e39fa1dd71076618c358639ed8a327bc3873c4;l\u003d368\n\nI don\u0027t understand why that is not sufficient ?",
+      "revId": "575143998fe5aecbbe6be8a01bf80e8d49c3a69d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
