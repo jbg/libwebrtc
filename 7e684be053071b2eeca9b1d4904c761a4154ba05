@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4396878a_b69e0576",
+        "filename": "video/video_stream_buffer_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-27T11:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abd356c8_8ea4424f",
+      "range": {
+        "startLine": 288,
+        "startChar": 51,
+        "endLine": 289,
+        "endChar": 76
+      },
+      "revId": "7e684be053071b2eeca9b1d4904c761a4154ba05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9068457b_53dba1f0",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-27T10:23:47Z",
       "side": 1,
       "message": "RTC_DCHECK_EQ ?\nThen you don\u0027t need to explicitly add them to the message below.",
+      "range": {
+        "startLine": 292,
+        "startChar": 2,
+        "endLine": 292,
+        "endChar": 12
+      },
+      "revId": "7e684be053071b2eeca9b1d4904c761a4154ba05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0002130_03e6da94",
+        "filename": "video/video_stream_buffer_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-27T11:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9068457b_53dba1f0",
       "range": {
         "startLine": 292,
         "startChar": 2,
