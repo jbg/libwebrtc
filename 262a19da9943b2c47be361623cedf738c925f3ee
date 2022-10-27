@@ -125,6 +125,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9834a3c4_2eaee290",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-27T16:21:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3d4750db_a9bc9950",
+      "range": {
+        "startLine": 175,
+        "startChar": 4,
+        "endLine": 175,
+        "endChar": 43
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "26ae686f_790fd8d6",
         "filename": "modules/audio_processing/gain_controller2.cc",
         "patchSetId": 1
@@ -333,6 +357,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d04ce7e_761086ef",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-27T16:21:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1f149195_e8e662ad",
+      "range": {
+        "startLine": 67,
+        "startChar": 7,
+        "endLine": 68,
+        "endChar": 48
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3b71d6e_4954a78c",
@@ -370,6 +418,30 @@
       "side": 1,
       "message": "Could you please elaborate on this a bit more? On the one hand, it would remove some temporal coupling, but on the other hand, both Analyze() and Process() mutate this class consisting of analog and digital gain control as well as VAD so it isn\u0027t necessarily obvious that the return value then is the analog gain.",
       "parentUuid": "c3b71d6e_4954a78c",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 56
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93bad6af_4ddad45b",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-27T16:21:19Z",
+      "side": 1,
+      "message": "Reason for my proposal: live without unnecessary methods to improve code clarity and reduce misuse.\n\nAs shown below, we don\u0027t really need to store the recommended input volume anywhere (not in APM, not in `InputVolumeController`, not even in `MonoInputVolumeController`):\n\n```\nAudioProcessingImpl::ProcessCapture(..., int applied_input_volume, int\u0026 recommended_input_volume) {\n  ...\n  agc2-\u003eAnalyze(applied_input_volume, capture_buffer);\n  ...\n  recommended_input_volume \u003d agc2-\u003eProcess(applied_input_volume, capture_buffer);\n  ...\n}\n\nint GainController2::Process(...) {\n  ...\n  int recommended_input_volume \u003d input_volume_controller_-\u003eProcess(...);\n  ...\n  return recommended_input_volume;\n}\n```\n\nsame for `MonoInputVolumeController::Process()`.\n\nSo, if we can already remove the getter at this stage, I wouldn\u0027t wait.\n\nMy view is that we shouldn\u0027t repeat the choice of adding `set_stream_analog_level()` and `recommended_stream_analog_level()`, which would have made sense if they hadn\u0027t been called for every frame.\n\nFinally, I do not recommend adding non-trivial getters - I evince `GetRecommendedInputVolume()` is not trivial from the camel case. Just compute the recommended input volume in Process() and return it. IMO, clarifying what `GainController2::Process()` returns in its docstring is sufficiently clear.",
+      "parentUuid": "e7e9f78f_30ce2997",
       "range": {
         "startLine": 84,
         "startChar": 0,

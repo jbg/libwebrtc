@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae61900f_fb3d89e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-27T16:21:19Z",
+      "side": 1,
+      "message": "Thanks for the replies Hanna! I closed the comments you addressed and replied to that on `GainController2::GetRecommendedInputVolume()`.",
+      "revId": "da6692395af4fe61d84b7508b8779b931311e0c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d3b005c_ac91407a",
@@ -53,6 +70,29 @@
         "startChar": 38,
         "endLine": 171,
         "endChar": 54
+      },
+      "revId": "da6692395af4fe61d84b7508b8779b931311e0c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c968f4d0_462bf29d",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-10-27T16:21:19Z",
+      "side": 1,
+      "message": "Nit: if you also find it confusing, remove \"external\"\n\nI know I wrote this some time ago when I changed the docstring in agc_manager_direct.h, but now that I read it again, I believe it\u0027s not needed.",
+      "range": {
+        "startLine": 53,
+        "startChar": 29,
+        "endLine": 53,
+        "endChar": 37
       },
       "revId": "da6692395af4fe61d84b7508b8779b931311e0c6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
