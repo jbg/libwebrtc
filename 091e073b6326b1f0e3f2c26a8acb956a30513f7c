@@ -34,6 +34,24 @@
       "parentUuid": "fc2bc34f_114137a0",
       "revId": "091e073b6326b1f0e3f2c26a8acb956a30513f7c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f930c984_4127c021",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-10-27T02:02:52Z",
+      "side": 1,
+      "message": "Hi, @xalep@webrtc.org , can you re-apply this change?",
+      "parentUuid": "86800bc6_2cac019a",
+      "revId": "091e073b6326b1f0e3f2c26a8acb956a30513f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
