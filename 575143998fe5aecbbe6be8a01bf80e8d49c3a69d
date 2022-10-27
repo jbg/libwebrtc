@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae16ecad_174e2a23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-10-27T09:20:37Z",
+      "side": 1,
+      "message": "PS1+2 have the changes required for the \"normal\" case.\nPS3+4 have the changes required for the case of pooled session.",
+      "revId": "575143998fe5aecbbe6be8a01bf80e8d49c3a69d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
