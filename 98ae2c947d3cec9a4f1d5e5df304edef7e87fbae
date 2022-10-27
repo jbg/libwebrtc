@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4af20866_c3a5d6cc",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sink.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-27T00:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9df42847_e3f58f13",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e952bb89_526f527f",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-26T21:19:05Z",
       "side": 1,
       "message": "Nit: this naming is a bit confusing as it repeats name of the class.",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed75cdfc_a8a4501e",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sink.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-27T00:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e952bb89_526f527f",
       "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52571852_8402849d",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sinks_support.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-27T00:16:29Z",
+      "side": 1,
+      "message": "The idea is that it allows API user to pass different types here without creating std::string.\n\nhttps://abseil.io/tips/1",
+      "parentUuid": "816816f6_20caecee",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e74e97b_4ce9fa93",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-10-26T21:19:05Z",
       "side": 1,
       "message": "Nit: \"Support\" suffix sounds odd. Maybe \"Helper\" instead?",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35868c7e_5a8c6cc1",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sinks_support.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-27T00:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e74e97b_4ce9fa93",
       "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -103,6 +175,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1453cacf_0e300c61",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sinks_support.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-27T00:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e849188a_4554c709",
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c00f57c2_fcd3a4d4",
@@ -116,6 +206,30 @@
       "writtenOn": "2022-10-26T21:19:05Z",
       "side": 1,
       "message": "Nit: add utility function to compare configs. \n\nPS: Im not 100% sure so feel free to ignore :)",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 43,
+        "endChar": 60
+      },
+      "revId": "98ae2c947d3cec9a4f1d5e5df304edef7e87fbae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a97efdba_166c64cb",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sinks_support_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-10-27T00:16:29Z",
+      "side": 1,
+      "message": "Done. It\u0027s actually a good point. Also added comment why we don\u0027t compare all fields.",
+      "parentUuid": "c00f57c2_fcd3a4d4",
       "range": {
         "startLine": 40,
         "startChar": 2,
