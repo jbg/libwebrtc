@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7d66e18_b59c1639",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-28T13:19:07Z",
+      "side": 1,
+      "message": "sp: Epoch",
+      "range": {
+        "startLine": 9,
+        "startChar": 18,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9e1f5fe6_14e479f6",
@@ -14,6 +37,132 @@
       "writtenOn": "2022-10-28T12:43:03Z",
       "side": 1,
       "message": "Please?",
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeac4f75_ea6d9d02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-28T13:19:07Z",
+      "side": 1,
+      "message": "A few comments, overall looks good. Wondering if the drift should be measured continuously and left a comment around that.",
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4c6be65_7976a2c9",
+        "filename": "rtc_base/async_udp_socket.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-28T13:19:07Z",
+      "side": 1,
+      "message": "Something makes me wonder not just about epoch, but also clock drift? Perhaps we don\u0027t really care but this could be checked every X frames or seconds (Checked using the timestamp provided by the socket). \n\nI could see potential issues if, for example, during your first packet there is a large delay between the socket timestamp and the read completing (e.g. network thread waited too long), and the whole call is affected.",
+      "range": {
+        "startLine": 136,
+        "startChar": 9,
+        "endLine": 136,
+        "endChar": 28
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5cbd2a3_30125bd6",
+        "filename": "rtc_base/async_udp_socket.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-28T13:19:07Z",
+      "side": 1,
+      "message": "nit: Cache this in a field to avoid having to check the field trial string repeatedly.",
+      "range": {
+        "startLine": 138,
+        "startChar": 10,
+        "endLine": 138,
+        "endChar": 41
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3855217a_d1e37aed",
+        "filename": "rtc_base/async_udp_socket.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-28T13:19:07Z",
+      "side": 1,
+      "message": "I think it is most common to use RTC_NO_UNIQUE_ADDRESS with SequenceCheckers. https://crbug.com/webrtc/11495",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 25
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "671a386e_ab95ff0c",
+        "filename": "rtc_base/async_udp_socket.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-28T13:19:07Z",
+      "side": 1,
+      "message": "I believe this should be std::unique_ptr\u003cchar[]\u003e because it holds an array, but I am not 100% sure about this.",
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2333ea9c_589e1e61",
+        "filename": "rtc_base/socket_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-10-28T13:19:07Z",
+      "side": 1,
+      "message": "sp: Epoch",
+      "range": {
+        "startLine": 1117,
+        "startChar": 45,
+        "endLine": 1117,
+        "endChar": 49
+      },
       "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
