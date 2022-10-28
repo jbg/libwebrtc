@@ -27,6 +27,7 @@
 #include "rtc_base/random.h"
 #include "rtc_base/strings/string_builder.h"
 #include "system_wrappers/include/cpu_features_wrapper.h"
+#include "test/field_trial.h"
 #include "test/gtest.h"
 
 namespace webrtc {
@@ -553,6 +554,56 @@ INSTANTIATE_TEST_SUITE_P(_,
                          testing::Values(true, false));
 
 #endif
+
+TEST(MatchedFilterFieldTrialTest, PreEchoConfiguraiton) {
+  float threshold_in = 0.1f;
+  int mode_in = 2;
+  rtc::StringBuilder field_trial_name;
+  field_trial_name << "WebRTC-Aec3PreEchoConfiguration/threshold:"
+                   << threshold_in << ",mode:" << mode_in << "/";
+  webrtc::test::ScopedFieldTrials field_trials(field_trial_name.str());
+  ApmDataDumper data_dumper(0);
+  EchoCanceller3Config config;
+  MatchedFilter matched_filter(
+      &data_dumper, DetectOptimization(),
+      kBlockSize / config.delay.down_sampling_factor, kWindowSizeSubBlocks,
+      kNumMatchedFilters, kAlignmentShiftSubBlocks,
+      config.render_levels.poor_excitation_render_limit,
+      config.delay.delay_estimate_smoothing,
+      config.delay.delay_estimate_smoothing_delay_found,
+      config.delay.delay_candidate_detection_threshold,
+      config.delay.detect_pre_echo);
+
+  auto& pre_echo_config = matched_filter.GetPreEchoConfiguration();
+  EXPECT_EQ(pre_echo_config.threshold, threshold_in);
+  EXPECT_EQ(pre_echo_config.mode, mode_in);
+}
+
+TEST(MatchedFilterFieldTrialTest, WrongPreEchoConfiguraiton) {
+  constexpr float kDefaultThreshold = 0.5f;
+  constexpr int kDefaultMode = 0;
+  float threshold_in = -0.1f;
+  int mode_in = 5;
+  rtc::StringBuilder field_trial_name;
+  field_trial_name << "WebRTC-Aec3PreEchoConfiguration/threshold:"
+                   << threshold_in << ",mode:" << mode_in << "/";
+  webrtc::test::ScopedFieldTrials field_trials(field_trial_name.str());
+  ApmDataDumper data_dumper(0);
+  EchoCanceller3Config config;
+  MatchedFilter matched_filter(
+      &data_dumper, DetectOptimization(),
+      kBlockSize / config.delay.down_sampling_factor, kWindowSizeSubBlocks,
+      kNumMatchedFilters, kAlignmentShiftSubBlocks,
+      config.render_levels.poor_excitation_render_limit,
+      config.delay.delay_estimate_smoothing,
+      config.delay.delay_estimate_smoothing_delay_found,
+      config.delay.delay_candidate_detection_threshold,
+      config.delay.detect_pre_echo);
+
+  auto& pre_echo_config = matched_filter.GetPreEchoConfiguration();
+  EXPECT_EQ(pre_echo_config.threshold, kDefaultThreshold);
+  EXPECT_EQ(pre_echo_config.mode, kDefaultMode);
+}
 
 }  // namespace aec3
 }  // namespace webrtc
