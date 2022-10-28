@@ -461,24 +461,41 @@ int SimulcastEncoderAdapter::Encode(
     }
   }
 
-  // All active streams should generate a key frame if
-  // a key frame is requested by any stream.
-  bool is_keyframe_needed = false;
+  // If adapter is passed through and only one sw encoder does simulcast,
+  // frame types for all streams should be passed to the encoder unchanged.
+  // Otherwise a single per-encoder frame type is passed.
+  std::vector<VideoFrameType> stream_frame_types(
+      bypass_mode_ ? total_streams_count_ : 1);
+  std::fill(stream_frame_types.begin(), stream_frame_types.end(),
+            VideoFrameType::kVideoFrameDelta);
   if (frame_types) {
-    for (const auto& frame_type : *frame_types) {
-      if (frame_type == VideoFrameType::kVideoFrameKey) {
-        is_keyframe_needed = true;
-        break;
+    if (bypass_mode_) {
+      // In bypass mode, requesting a key frame on any layer triggers a
+      // key frame request on all layers.
+      for (const auto& frame_type : *frame_types) {
+        if (frame_type == VideoFrameType::kVideoFrameKey) {
+          stream_frame_types[0] = VideoFrameType::kVideoFrameKey;
+          break;
+        }
+      }
+    } else {
+      for (const auto& layer : stream_contexts_) {
+        if (frame_types->size() >= static_cast<size_t>(layer.stream_idx()) &&
+            (*frame_types)[layer.stream_idx()] ==
+                VideoFrameType::kVideoFrameKey) {
+          stream_frame_types[layer.stream_idx()] =
+              VideoFrameType::kVideoFrameKey;
+        }
       }
     }
   }
-
-  if (!is_keyframe_needed) {
-    for (const auto& layer : stream_contexts_) {
-      if (layer.is_keyframe_needed()) {
-        is_keyframe_needed = true;
-        break;
-      }
+  for (const auto& layer : stream_contexts_) {
+    if (layer.is_keyframe_needed()) {
+      // This is legacy behavior, generating a keyframe on all layers
+      // when generating one for a new layer.
+      std::fill(stream_frame_types.begin(), stream_frame_types.end(),
+                VideoFrameType::kVideoFrameKey);
+      break;
     }
   }
 
@@ -496,22 +513,11 @@ int SimulcastEncoderAdapter::Encode(
     // Convert timestamp from RTP 90kHz clock.
     const Timestamp frame_timestamp =
         Timestamp::Micros((1000 * input_image.timestamp()) / 90);
-
-    // If adapter is passed through and only one sw encoder does simulcast,
-    // frame types for all streams should be passed to the encoder unchanged.
-    // Otherwise a single per-encoder frame type is passed.
-    std::vector<VideoFrameType> stream_frame_types(
-        bypass_mode_ ? total_streams_count_ : 1);
-    if (is_keyframe_needed) {
-      std::fill(stream_frame_types.begin(), stream_frame_types.end(),
-                VideoFrameType::kVideoFrameKey);
+    if (stream_frame_types[bypass_mode_ ? layer.stream_idx() : 0] ==
+        VideoFrameType::kVideoFrameKey) {
       layer.OnKeyframe(frame_timestamp);
-    } else {
-      if (layer.ShouldDropFrame(frame_timestamp)) {
-        continue;
-      }
-      std::fill(stream_frame_types.begin(), stream_frame_types.end(),
-                VideoFrameType::kVideoFrameDelta);
+    } else if (layer.ShouldDropFrame(frame_timestamp)) {
+      continue;
     }
 
     // If scaling isn't required, because the input resolution
