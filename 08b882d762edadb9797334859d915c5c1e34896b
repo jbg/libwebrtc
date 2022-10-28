@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c218d4c0_e54fe760",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5686
+      },
+      "writtenOn": "2022-10-28T19:14:11Z",
+      "side": 1,
+      "message": "Instead of having the JsepTransportController generate the tiebreaker, then pass it down to the PortAllocator, it would be simpler if the PortAllocator just generated it itself. Then it would always be set and you could just pass it into the Port constructors",
+      "revId": "08b882d762edadb9797334859d915c5c1e34896b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
