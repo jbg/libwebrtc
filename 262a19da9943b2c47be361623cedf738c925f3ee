@@ -450,6 +450,30 @@
       },
       "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ccbb359_aa54c42f",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-28T14:25:58Z",
+      "side": 1,
+      "message": "The value is needed by AudioProcessingImpl::UpdateRecommendedInputVolumeLocked() which currently gets the recommendation through getters. Do you prefer changing the signature of that method instead of adding a getter in this class?",
+      "parentUuid": "93bad6af_4ddad45b",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 56
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

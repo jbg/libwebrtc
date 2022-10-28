@@ -75,6 +75,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "549abb96_77ce1886",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-28T14:25:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d3b005c_ac91407a",
+      "range": {
+        "startLine": 171,
+        "startChar": 38,
+        "endLine": 171,
+        "endChar": 54
+      },
+      "revId": "da6692395af4fe61d84b7508b8779b931311e0c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c968f4d0_462bf29d",
@@ -88,6 +112,30 @@
       "writtenOn": "2022-10-27T16:21:19Z",
       "side": 1,
       "message": "Nit: if you also find it confusing, remove \"external\"\n\nI know I wrote this some time ago when I changed the docstring in agc_manager_direct.h, but now that I read it again, I believe it\u0027s not needed.",
+      "range": {
+        "startLine": 53,
+        "startChar": 29,
+        "endLine": 53,
+        "endChar": 37
+      },
+      "revId": "da6692395af4fe61d84b7508b8779b931311e0c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ce21271_4e96465b",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-10-28T14:25:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c968f4d0_462bf29d",
       "range": {
         "startLine": 53,
         "startChar": 29,
