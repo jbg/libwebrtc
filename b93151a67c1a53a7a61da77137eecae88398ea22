@@ -179,6 +179,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d8cea45_1f9b52cc",
+        "filename": "modules/audio_processing/aec3/matched_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 10796
+      },
+      "writtenOn": "2022-10-31T07:59:32Z",
+      "side": 1,
+      "message": "We will then loose the: \n  - it should have a slope `accumulated_error[k] \u003c pre_echo_configuration.threshold * accumulated_error[k - 1]` \n  - *AND* \n  - be lower than the threshold `accumulated_error[k] \u003c pre_echo_configuration.threshold`",
+      "parentUuid": "b73ee3e8_a098a278",
+      "range": {
+        "startLine": 72,
+        "startChar": 10,
+        "endLine": 74,
+        "endChar": 65
+      },
+      "revId": "b93151a67c1a53a7a61da77137eecae88398ea22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a502210d_78d4fafb",
