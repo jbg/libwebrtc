@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc6b53f9_3268c0d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-31T17:57:31Z",
+      "side": 1,
+      "message": "If you can catch it in time, please complete the deprecation notices.",
+      "revId": "2a0ed27fa8667ca4877b1e93928f734e8ca3a47e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00542472_9ca2b37e",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-31T17:57:31Z",
+      "side": 1,
+      "message": "Deprecations should always include either a bug number, an explanation of which function to use instead, or both.",
+      "revId": "2a0ed27fa8667ca4877b1e93928f734e8ca3a47e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
