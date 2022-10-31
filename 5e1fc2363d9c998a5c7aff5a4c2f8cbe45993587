@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a728737_9ab6a8ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-10-31T15:02:58Z",
+      "side": 1,
+      "message": "The downstream dependencies have now been fixed to use inbound-rtp instead.",
+      "revId": "5e1fc2363d9c998a5c7aff5a4c2f8cbe45993587",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
