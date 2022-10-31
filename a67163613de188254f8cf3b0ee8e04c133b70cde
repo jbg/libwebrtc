@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edcdbc13_05e412c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-31T14:39:21Z",
+      "side": 1,
+      "message": "Looks good - the part I really don\u0027t like is the double waiting that does both a blocking invoke and a wait-for-event.",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a753597_d083e2b9",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-31T14:39:21Z",
+      "side": 1,
+      "message": "Doing both double-inclusion of .h files and public_deps seems like overkill. Are those for two different downstreams?",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9de27f0_66309952",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-31T14:39:21Z",
+      "side": 1,
+      "message": "Name seems wrong here, this function does not set anything.\nCheckArgumentsToSetParameters may be a better name.",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9013f6cc_3b9a2c84",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-31T14:39:21Z",
+      "side": 1,
+      "message": "What code path is doing the reset of last_transaction_id_ here?",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "735a2ee3_d7e5ab26",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-31T14:39:21Z",
+      "side": 1,
+      "message": "This \"event set/wait\" is just a blocking invoke in disguise. And the SetParametersInternal does a blocking call when the last parameter is true; you know that the callback has been called when SetParametersInternal is true.\n\nWhy is this double waiting needed?",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8074937e_c056c3a5",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-31T14:39:21Z",
+      "side": 1,
+      "message": "Here too you can invert and use return.",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2bb06fb_153d0af7",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-10-31T14:39:21Z",
+      "side": 1,
+      "message": "You can add a \"return\" here and invert the if condition, to give early-return-on-error semantics.",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
