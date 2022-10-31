@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "436c8d42_767cf40f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-10-31T09:59:00Z",
+      "side": 1,
+      "message": "Did you upload a new patchset? I cannot see it in gerrit.",
+      "revId": "b93151a67c1a53a7a61da77137eecae88398ea22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bb7a68f_7c75f0a8",
