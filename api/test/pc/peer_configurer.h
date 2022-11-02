@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2019 The WebRTC project authors. All Rights Reserved.
+ *  Copyright (c) 2022 The WebRTC project authors. All Rights Reserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -7,8 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-#ifndef TEST_PC_E2E_PEER_CONFIGURER_H_
-#define TEST_PC_E2E_PEER_CONFIGURER_H_
+#ifndef API_TEST_PC_PEER_CONFIGURER_H_
+#define API_TEST_PC_PEER_CONFIGURER_H_
 
 #include <memory>
 #include <string>
@@ -23,6 +23,8 @@
 #include "api/rtc_event_log/rtc_event_log_factory_interface.h"
 #include "api/task_queue/task_queue_factory.h"
 #include "api/test/create_peer_connection_quality_test_frame_generator.h"
+#include "api/test/pc/media_quality_test_params.h"
+#include "api/test/peer_network_dependencies.h"
 #include "api/test/peerconnection_quality_test_fixture.h"
 #include "api/transport/network_control.h"
 #include "api/video_codecs/video_decoder_factory.h"
@@ -32,7 +34,6 @@
 #include "rtc_base/rtc_certificate_generator.h"
 #include "rtc_base/ssl_certificate.h"
 #include "rtc_base/thread.h"
-#include "test/pc/e2e/peer_connection_quality_test_params.h"
 
 namespace webrtc {
 namespace webrtc_pc_e2e {
@@ -43,6 +44,9 @@ class PeerConfigurerImpl final
   using VideoSource =
       absl::variant<std::unique_ptr<test::FrameGeneratorInterface>,
                     PeerConnectionE2EQualityTestFixture::CapturingDeviceIndex>;
+
+  explicit PeerConfigurerImpl(
+      const PeerNetworkDependencies& network_dependencies);
 
   PeerConfigurerImpl(rtc::Thread* network_thread,
                      rtc::NetworkManager* network_manager,
@@ -335,4 +339,4 @@ class PeerParamsPreprocessor {
 }  // namespace webrtc_pc_e2e
 }  // namespace webrtc
 
-#endif  // TEST_PC_E2E_PEER_CONFIGURER_H_
+#endif  // API_TEST_PC_PEER_CONFIGURER_H_
