@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "313e2bd5_c475fb61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-02T10:42:21Z",
+      "side": 1,
+      "message": "Can you add [Merge to 108] into the CL description?",
+      "revId": "bcb61aea8e78e3ce7deacdf346169f209a67f786",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9868f221_dbc7ef0f",
