@@ -49,6 +49,24 @@ namespace {
 
 const int64_t kGetStatsTimeoutMs = 10000;
 
+constexpr std::array<std::pair<absl::string_view, int>, 14>
+    kKnownStatsMemberCount{
+        std::make_pair("candidate-pair", 22), std::make_pair("certificate", 4),
+        std::make_pair("codec", 6), std::make_pair("data-channel", 8),
+        std::make_pair("inbound-rtp", 62),
+        std::make_pair("local-candidate", 18),
+        // std::make_pair("media-source", 7), // RTCVideoSourceStats has 6,
+        // RTCAudioSourceStats has 7
+        std::make_pair("outbound-rtp", 36),
+        std::make_pair("peer-connection", 2),
+        std::make_pair("remote-candidate", 18),
+        std::make_pair("remote-inbound-rtp", 13),
+        std::make_pair("remote-outbound-rtp", 13), std::make_pair("stream", 2),
+        std::make_pair("track", 35), std::make_pair("transport", 17)};
+
+constexpr std::array<absl::string_view, 2> kMaybeNotFoundStats{
+    "remote-outbound-rtp", "media-source"};
+
 const unsigned char* GetCategoryEnabledHandler(const char* name) {
   if (strcmp("webrtc_stats", name) != 0) {
     return reinterpret_cast<const unsigned char*>("");
@@ -1334,12 +1352,57 @@ TEST_F(RTCStatsIntegrationTest, GetStatsContainsNoDuplicateMembers) {
   StartCall();
 
   rtc::scoped_refptr<const RTCStatsReport> report = GetStatsFromCallee();
+  std::set<std::string> stats_names;
   for (const RTCStats& stats : *report) {
     std::set<std::string> member_names;
+    int member_count = 0;
+    RTC_LOG(LS_INFO) << "stats " << stats.type();
     for (const auto* member : stats.Members()) {
+      member_count++;
       EXPECT_TRUE(member_names.find(member->name()) == member_names.end())
           << member->name() << " is a duplicate!";
       member_names.insert(member->name());
+    }
+    auto known_stats_member_iter = absl::c_find_if(
+        kKnownStatsMemberCount,
+        [&stats](const std::pair<absl::string_view, int>& stat_member_count) {
+          return stat_member_count.first == stats.type();
+        });
+    if (known_stats_member_iter == kKnownStatsMemberCount.end()) {
+      if (absl::c_find(kMaybeNotFoundStats,
+                       static_cast<std::string>(stats.type())) !=
+          kMaybeNotFoundStats.end()) {
+        RTC_LOG(LS_WARNING)
+            << stats.type()
+            << " stats not found in this call, but it is accepted.";
+      } else {
+        FAIL() << stats.type() << " should be exist in kKnownStatsMemberCount";
+      }
+    }
+
+    if (known_stats_member_iter != kKnownStatsMemberCount.end()) {
+      EXPECT_EQ(known_stats_member_iter->second, member_count)
+          << stats.type() << " member count wrong";
+    }
+    stats_names.insert(stats.type());
+  }
+
+  for (const std::pair<absl::string_view, int>& known_stats_name_count :
+       kKnownStatsMemberCount) {
+    auto seen_stats_name_iter = stats_names.find(
+        static_cast<std::string>(known_stats_name_count.first));
+    if (seen_stats_name_iter == stats_names.end()) {
+      if (absl::c_find(
+              kMaybeNotFoundStats,
+              static_cast<std::string>(known_stats_name_count.first)) !=
+          kMaybeNotFoundStats.end()) {
+        RTC_LOG(LS_WARNING)
+            << known_stats_name_count.first
+            << " stats not found in this call, but it is accepted.";
+      } else {
+        FAIL() << known_stats_name_count.first
+               << " stats not found in this call.";
+      }
     }
   }
 }
