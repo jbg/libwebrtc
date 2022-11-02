@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cacb3990_68c08112",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-11-02T13:35:12Z",
+      "side": 1,
+      "message": "Oh right, it\u0027s not strictly needed anymore since I added the public_deps.",
+      "parentUuid": "9a753597_d083e2b9",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9de27f0_66309952",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-10-31T14:39:21Z",
       "side": 1,
       "message": "Name seems wrong here, this function does not set anything.\nCheckArgumentsToSetParameters may be a better name.",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28331431_6e9a669d",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-11-02T13:35:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9de27f0_66309952",
       "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cebf790_9b45e731",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-11-02T13:35:12Z",
+      "side": 1,
+      "message": "It is done after the callback has resolved. It doesn\u0027t necessarily follow the spec, but I don\u0027t want to change the current behaviour.",
+      "parentUuid": "9013f6cc_3b9a2c84",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "735a2ee3_d7e5ab26",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-10-31T14:39:21Z",
       "side": 1,
       "message": "This \"event set/wait\" is just a blocking invoke in disguise. And the SetParametersInternal does a blocking call when the last parameter is true; you know that the callback has been called when SetParametersInternal is true.\n\nWhy is this double waiting needed?",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "512ab3bd_f5ee29dc",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-11-02T13:35:12Z",
+      "side": 1,
+      "message": "There are many levels of queues, and we wait only on the first one with the BlockingCall, and is required for some tests running in single thread mode.\nThey would probably benefit from being updated later not to depend on the fact that they run in a single thread mode and that a BlockingCall resolves immediately without progressing the run loop.\nThe second one is the encoder configuration queue much deeper in the stack, that call has always been async.",
+      "parentUuid": "735a2ee3_d7e5ab26",
       "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -103,6 +175,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d00a3b2_5455119d",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-11-02T13:35:12Z",
+      "side": 1,
+      "message": "Changed the structure to only have a single location where the callback is used, making this a lot easier to read.",
+      "parentUuid": "8074937e_c056c3a5",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2bb06fb_153d0af7",
@@ -116,6 +206,24 @@
       "writtenOn": "2022-10-31T14:39:21Z",
       "side": 1,
       "message": "You can add a \"return\" here and invert the if condition, to give early-return-on-error semantics.",
+      "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c22479d8_5eee7140",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-11-02T13:35:12Z",
+      "side": 1,
+      "message": "Changed the structure to only have a single location where the callback is used, making this a lot easier to read.",
+      "parentUuid": "c2bb06fb_153d0af7",
       "revId": "a67163613de188254f8cf3b0ee8e04c133b70cde",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
