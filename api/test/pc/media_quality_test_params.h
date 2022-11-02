@@ -7,8 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-#ifndef TEST_PC_E2E_PEER_CONNECTION_QUALITY_TEST_PARAMS_H_
-#define TEST_PC_E2E_PEER_CONNECTION_QUALITY_TEST_PARAMS_H_
+#ifndef API_TEST_PC_MEDIA_QUALITY_TEST_PARAMS_H_
+#define API_TEST_PC_MEDIA_QUALITY_TEST_PARAMS_H_
 
 #include <cstddef>
 #include <memory>
@@ -27,7 +27,6 @@
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder_factory.h"
 #include "modules/audio_processing/include/audio_processing.h"
-#include "p2p/base/port_allocator.h"
 #include "rtc_base/network.h"
 #include "rtc_base/rtc_certificate_generator.h"
 #include "rtc_base/ssl_certificate.h"
@@ -121,7 +120,8 @@ struct Params {
   absl::optional<PeerConnectionE2EQualityTestFixture::AudioConfig> audio_config;
   // Flags to set on `cricket::PortAllocator`. These flags will be added
   // to the default ones that are presented on the port allocator.
-  uint32_t port_allocator_extra_flags = cricket::kDefaultPortAllocatorFlags;
+  uint32_t port_allocator_extra_flags =
+      0;  // Same as kDefaultPortAllocatorFlags.
   // If `rtc_event_log_path` is set, an RTCEventLog will be saved in that
   // location and it will be available for further analysis.
   absl::optional<std::string> rtc_event_log_path;
@@ -159,4 +159,4 @@ struct ConfigurableParams {
 }  // namespace webrtc_pc_e2e
 }  // namespace webrtc
 
-#endif  // TEST_PC_E2E_PEER_CONNECTION_QUALITY_TEST_PARAMS_H_
+#endif  // API_TEST_PC_MEDIA_QUALITY_TEST_PARAMS_H_
