@@ -700,6 +700,7 @@ rtc_source_set("rtc_stats_api") {
   ]
 
   deps = [
+    ":array_view",
     ":make_ref_counted",
     ":scoped_refptr",
     "../api:refcountedbase",

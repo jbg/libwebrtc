@@ -569,7 +569,7 @@ TEST(RTCStatsDeathTest, CheckCasting) {
   RTCLocalIceCandidateStats rtc_local_ice_candidate_stats("", 0);
   stats_ptr = &rtc_local_ice_candidate_stats;
   stats_ptr->cast_to<RTCLocalIceCandidateStats>();
-  // stats_ptr->cast_to<RTCIceCandidateStats>();
+  stats_ptr->cast_to<RTCIceCandidateStats>();
   EXPECT_DEATH(stats_ptr->cast_to<RTCIceCandidatePairStats>(), "");
 
   RTCPeerConnectionStats rtc_peer_connection_stats("", 0);
@@ -580,46 +580,46 @@ TEST(RTCStatsDeathTest, CheckCasting) {
   RTCInboundRTPStreamStats rtc_inbound_rtp_stream_stats("", 0);
   stats_ptr = &rtc_inbound_rtp_stream_stats;
   stats_ptr->cast_to<RTCInboundRTPStreamStats>();
-  // stats_ptr->cast_to<RTCSentRtpStreamStats>();
-  // stats_ptr->cast_to<RTCRTPStreamStats>();
+  stats_ptr->cast_to<RTCReceivedRtpStreamStats>();
+  stats_ptr->cast_to<RTCRTPStreamStats>();
   EXPECT_DEATH(stats_ptr->cast_to<RTCPeerConnectionStats>(), "");
 
   RTCOutboundRTPStreamStats rtc_outbound_rtp_stream_stats("", 0);
   stats_ptr = &rtc_outbound_rtp_stream_stats;
   stats_ptr->cast_to<RTCOutboundRTPStreamStats>();
-  // stats_ptr->cast_to<RTCRTPStreamStats>();
+  stats_ptr->cast_to<RTCRTPStreamStats>();
   EXPECT_DEATH(stats_ptr->cast_to<RTCInboundRTPStreamStats>(), "");
 
   RTCRemoteInboundRtpStreamStats rtc_remote_inbound_rtp_stream_stats("", 0);
   stats_ptr = &rtc_remote_inbound_rtp_stream_stats;
   stats_ptr->cast_to<RTCRemoteInboundRtpStreamStats>();
-  // stats_ptr->cast_to<RTCReceivedRtpStreamStats>();
-  // stats_ptr->cast_to<RTCRTPStreamStats>();
+  stats_ptr->cast_to<RTCReceivedRtpStreamStats>();
+  stats_ptr->cast_to<RTCRTPStreamStats>();
   EXPECT_DEATH(stats_ptr->cast_to<RTCOutboundRTPStreamStats>(), "");
 
   RTCRemoteOutboundRtpStreamStats rtc_remote_outbound_rtp_stream_stats("", 0);
   stats_ptr = &rtc_remote_outbound_rtp_stream_stats;
   stats_ptr->cast_to<RTCRemoteOutboundRtpStreamStats>();
-  // stats_ptr->cast_to<RTCSentRtpStreamStats>();
-  // stats_ptr->cast_to<RTCRTPStreamStats>();
+  stats_ptr->cast_to<RTCSentRtpStreamStats>();
+  stats_ptr->cast_to<RTCRTPStreamStats>();
   EXPECT_DEATH(stats_ptr->cast_to<RTCRemoteInboundRtpStreamStats>(), "");
 
   RTCAudioSourceStats rtc_audio_source_stats("", 0);
   stats_ptr = &rtc_audio_source_stats;
   stats_ptr->cast_to<RTCAudioSourceStats>();
-  // stats_ptr->cast_to<RTCMediaSourceStats>();
+  stats_ptr->cast_to<RTCMediaSourceStats>();
   EXPECT_DEATH(stats_ptr->cast_to<RTCRemoteOutboundRtpStreamStats>(), "");
 
   RTCVideoSourceStats rtc_video_source_stats("", 0);
   stats_ptr = &rtc_video_source_stats;
   stats_ptr->cast_to<RTCVideoSourceStats>();
-  // stats_ptr->cast_to<RTCMediaSourceStats>();
+  stats_ptr->cast_to<RTCMediaSourceStats>();
   // EXPECT_DEATH(stats_ptr->cast_to<RTCAudioSourceStats>(), "");
 
   RTCTransportStats rtc_transport_stats("", 0);
   stats_ptr = &rtc_transport_stats;
   stats_ptr->cast_to<RTCTransportStats>();
-  EXPECT_DEATH(stats_ptr->cast_to<RTCVideoSourceStats>(), "");
+  EXPECT_DEATH(stats_ptr->cast_to<RTCMediaSourceStats>(), "");
 }
 
 #endif  // RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)

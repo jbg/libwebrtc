@@ -296,6 +296,13 @@ const char* RTCLocalIceCandidateStats::type() const {
   return kType;
 }
 
+rtc::ArrayView<const char*> RTCLocalIceCandidateStats::compatible_types()
+    const {
+  static const char* kCompatibleTypes[] = {
+      static_cast<const char*>("abstract-ice-candidate")};
+  return rtc::ArrayView<const char*>(kCompatibleTypes);
+}
+
 const char RTCRemoteIceCandidateStats::kType[] = "remote-candidate";
 
 RTCRemoteIceCandidateStats::RTCRemoteIceCandidateStats(const std::string& id,
@@ -305,6 +312,13 @@ RTCRemoteIceCandidateStats::RTCRemoteIceCandidateStats(const std::string& id,
 RTCRemoteIceCandidateStats::RTCRemoteIceCandidateStats(std::string&& id,
                                                        int64_t timestamp_us)
     : RTCIceCandidateStats(std::move(id), timestamp_us, true) {}
+
+rtc::ArrayView<const char*> RTCRemoteIceCandidateStats::compatible_types()
+    const {
+  static const char* kCompatibleTypes[] = {
+      static_cast<const char*>("abstract-ice-candidate")};
+  return rtc::ArrayView<const char*>(kCompatibleTypes);
+}
 
 std::unique_ptr<RTCStats> RTCRemoteIceCandidateStats::copy() const {
   return std::make_unique<RTCRemoteIceCandidateStats>(*this);
@@ -509,6 +523,12 @@ RTCReceivedRtpStreamStats::RTCReceivedRtpStreamStats(
 
 RTCReceivedRtpStreamStats::~RTCReceivedRtpStreamStats() {}
 
+rtc::ArrayView<const char*> RTCReceivedRtpStreamStats::compatible_types()
+    const {
+  static const char* kCompatibleTypes[] = {static_cast<const char*>("rtp")};
+  return rtc::ArrayView<const char*>(kCompatibleTypes);
+}
+
 // clang-format off
 WEBRTC_RTCSTATS_IMPL(
     RTCSentRtpStreamStats, RTCRTPStreamStats, "sent-rtp",
@@ -664,6 +684,13 @@ RTCInboundRTPStreamStats::RTCInboundRTPStreamStats(
     const RTCInboundRTPStreamStats& other) = default;
 RTCInboundRTPStreamStats::~RTCInboundRTPStreamStats() {}
 
+rtc::ArrayView<const char*> RTCInboundRTPStreamStats::compatible_types() const {
+  static const char* kCompatibleTypes[] = {
+      static_cast<const char*>("received-rtp"),
+      static_cast<const char*>("rtp")};
+  return rtc::ArrayView<const char*>(kCompatibleTypes);
+}
+
 // clang-format off
 WEBRTC_RTCSTATS_IMPL(
     RTCOutboundRTPStreamStats, RTCRTPStreamStats, "outbound-rtp",
@@ -743,6 +770,12 @@ RTCOutboundRTPStreamStats::RTCOutboundRTPStreamStats(
 
 RTCOutboundRTPStreamStats::~RTCOutboundRTPStreamStats() {}
 
+rtc::ArrayView<const char*> RTCOutboundRTPStreamStats::compatible_types()
+    const {
+  static const char* kCompatibleTypes[] = {static_cast<const char*>("rtp")};
+  return rtc::ArrayView<const char*>(kCompatibleTypes);
+}
+
 // clang-format off
 WEBRTC_RTCSTATS_IMPL(
     RTCRemoteInboundRtpStreamStats, RTCReceivedRtpStreamStats,
@@ -773,6 +806,14 @@ RTCRemoteInboundRtpStreamStats::RTCRemoteInboundRtpStreamStats(
     const RTCRemoteInboundRtpStreamStats& other) = default;
 
 RTCRemoteInboundRtpStreamStats::~RTCRemoteInboundRtpStreamStats() {}
+
+rtc::ArrayView<const char*> RTCRemoteInboundRtpStreamStats::compatible_types()
+    const {
+  static const char* kCompatibleTypes[] = {
+      static_cast<const char*>("received-rtp"),
+      static_cast<const char*>("rtp")};
+  return rtc::ArrayView<const char*>(kCompatibleTypes);
+}
 
 // clang-format off
 WEBRTC_RTCSTATS_IMPL(
@@ -806,6 +847,13 @@ RTCRemoteOutboundRtpStreamStats::RTCRemoteOutboundRtpStreamStats(
     const RTCRemoteOutboundRtpStreamStats& other) = default;
 
 RTCRemoteOutboundRtpStreamStats::~RTCRemoteOutboundRtpStreamStats() {}
+
+rtc::ArrayView<const char*> RTCRemoteOutboundRtpStreamStats::compatible_types()
+    const {
+  static const char* kCompatibleTypes[] = {static_cast<const char*>("sent-rtp"),
+                                           static_cast<const char*>("rtp")};
+  return rtc::ArrayView<const char*>(kCompatibleTypes);
+}
 
 // clang-format off
 WEBRTC_RTCSTATS_IMPL(RTCMediaSourceStats, RTCStats, "parent-media-source",
@@ -853,6 +901,12 @@ RTCAudioSourceStats::RTCAudioSourceStats(const RTCAudioSourceStats& other) =
 
 RTCAudioSourceStats::~RTCAudioSourceStats() {}
 
+rtc::ArrayView<const char*> RTCAudioSourceStats::compatible_types() const {
+  static const char* kCompatibleTypes[] = {
+      static_cast<const char*>("parent-media-source")};
+  return rtc::ArrayView<const char*>(kCompatibleTypes);
+}
+
 // clang-format off
 WEBRTC_RTCSTATS_IMPL(RTCVideoSourceStats, RTCMediaSourceStats, "media-source",
     &width,
@@ -876,6 +930,12 @@ RTCVideoSourceStats::RTCVideoSourceStats(const RTCVideoSourceStats& other) =
     default;
 
 RTCVideoSourceStats::~RTCVideoSourceStats() {}
+
+rtc::ArrayView<const char*> RTCVideoSourceStats::compatible_types() const {
+  static const char* kCompatibleTypes[] = {
+      static_cast<const char*>("parent-media-source")};
+  return rtc::ArrayView<const char*>(kCompatibleTypes);
+}
 
 // clang-format off
 WEBRTC_RTCSTATS_IMPL(RTCTransportStats, RTCStats, "transport",

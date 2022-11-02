@@ -21,6 +21,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/array_view.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/system/rtc_export.h"
 #include "rtc_base/system/rtc_export_template.h"
@@ -68,6 +69,10 @@ class RTC_EXPORT RTCStats {
   int64_t timestamp_us() const { return timestamp_us_; }
   // Returns the static member variable `kType` of the implementing class.
   virtual const char* type() const = 0;
+  // Returns the static member variable `kType` of base classes.
+  virtual rtc::ArrayView<const char*> compatible_types() const {
+    return rtc::ArrayView<const char*>();
+  }
   // Returns a vector of pointers to all the `RTCStatsMemberInterface` members
   // of this class. This allows for iteration of members. For a given class,
   // `Members` always returns the same members in the same order.
@@ -86,7 +91,21 @@ class RTC_EXPORT RTCStats {
   // object is of type `T`.
   template <typename T>
   const T& cast_to() const {
-    RTC_DCHECK_EQ(type(), T::kType);
+#if RTC_DCHECK_IS_ON
+    if (!rtc::SafeEq(type(), T::kType)) {
+      bool compatible = false;
+      for (const char* type : compatible_types()) {
+        if (rtc::SafeEq(type, T::kType)) {
+          compatible = true;
+          break;
+        }
+      }
+
+      if (!compatible) {
+        RTC_DCHECK_EQ(type(), T::kType);
+      }
+    }
+#endif
     return static_cast<const T&>(*this);
   }
 
