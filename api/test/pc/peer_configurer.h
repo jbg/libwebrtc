@@ -23,6 +23,7 @@
 #include "api/rtc_event_log/rtc_event_log_factory_interface.h"
 #include "api/task_queue/task_queue_factory.h"
 #include "api/test/create_peer_connection_quality_test_frame_generator.h"
+#include "api/test/pc/media_quality_test_params.h"
 #include "api/test/peerconnection_quality_test_fixture.h"
 #include "api/transport/network_control.h"
 #include "api/video_codecs/video_decoder_factory.h"
@@ -32,7 +33,6 @@
 #include "rtc_base/rtc_certificate_generator.h"
 #include "rtc_base/ssl_certificate.h"
 #include "rtc_base/thread.h"
-#include "test/pc/e2e/peer_connection_quality_test_params.h"
 
 namespace webrtc {
 namespace webrtc_pc_e2e {
