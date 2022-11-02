@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "test/pc/e2e/peer_configurer.h"
+#include "api/test/pc/peer_configurer.h"
 
 #include <set>
 
