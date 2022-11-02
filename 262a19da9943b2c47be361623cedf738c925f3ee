@@ -498,6 +498,30 @@
       },
       "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df538ba2_d6c347dc",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-02T18:52:14Z",
+      "side": 1,
+      "message": "Thank you for the clarification!\n\nMy understanding from our offline discussion was that we could land this CL with the getter and then refactor if needed once https://webrtc-review.googlesource.com/c/src/+/281185 is ready.\n\nHowever, I do think that even then a separate getter would be clearer than a return value from `Process()` which in addition to volume recommendations does several other things, such as runs VAD and estimates and applies digital gain.",
+      "parentUuid": "64d75af7_0d914dc4",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 56
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

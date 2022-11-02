@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fd9b51a_4f51d3ed",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-02T18:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f48e9091_58fa3ed0",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 73
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "246dce27_910c098d",
@@ -64,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "038e473b_5f60faf4",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-02T18:52:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "246dce27_910c098d",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 3
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc06f1ae_e4baf5c6",
@@ -77,6 +125,24 @@
       "writtenOn": "2022-11-02T15:25:50Z",
       "side": 1,
       "message": "Not related to this CL, but good to add since we finally have `GainController2::SetCaptureOutputUsed()`.\n\nCould you add the following?\n`// TODO(bugs.webrtc.org/7494): Pass flag to other components too.`",
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bcde8fd_13904bdc",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-02T18:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc06f1ae_e4baf5c6",
       "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -129,6 +195,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72a766f7_00e6206b",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-02T18:52:14Z",
+      "side": 1,
+      "message": "See the related discussion for gain_controller2.h",
+      "parentUuid": "f410f482_699c408f",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 0
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "648ddae9_1db5864b",
         "filename": "modules/audio_processing/gain_controller2_unittest.cc",
         "patchSetId": 6
@@ -140,6 +230,30 @@
       "writtenOn": "2022-11-02T15:25:50Z",
       "side": 1,
       "message": "What about `EXPECT_TRUE(recommended_input_volume.has_value());`?\n\nReasons:\n- the test name `CheckGetRecommendedInputVolumeWhenInputVolumeControllerEnabled` suggests that we want to check that a volume is recommended when the controller is used\n- the test name doesn\u0027t suggest that we want to test how the controller adapts the initial input volume\n- even if the test were to test the controller behavior, I\u0027d rather use `Ne` or `Lt` instead of `Eq`\n\nAlso, we should reduce overlap between the `GainController2` tests and the `InputVolumeController` tests. So, I wouldn\u0027t test the controller behavior at all in this unit test file. WDYT?",
+      "range": {
+        "startLine": 221,
+        "startChar": 23,
+        "endLine": 221,
+        "endChar": 51
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea159fe0_3e73c314",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-02T18:52:14Z",
+      "side": 1,
+      "message": "I\u0027ve removed the exact volume checks and added checks for `gain_controller-\u003eGetRecommendedInputVolume().has_value()`.",
+      "parentUuid": "648ddae9_1db5864b",
       "range": {
         "startLine": 221,
         "startChar": 23,
