@@ -474,6 +474,30 @@
       },
       "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64d75af7_0d914dc4",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-02T15:25:50Z",
+      "side": 1,
+      "message": "TL;DR yes, let\u0027s remove this getter and make `Process()` return the recommended input volume via absl::optional\u003cint\u003e\n\nReason: https://webrtc-review.googlesource.com/c/src/+/281185 removes `UpdateRecommendedInputVolumeLocked()` and should land before we integrate AGC2 as input volume controller in APM. That will be the final step and, to the best of my knowledge, there is no urgency adding such integration.",
+      "parentUuid": "2ccbb359_aa54c42f",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 56
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

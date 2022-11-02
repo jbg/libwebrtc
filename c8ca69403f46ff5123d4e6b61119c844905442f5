@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ee11d0_74f9e19e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-02T15:25:50Z",
+      "side": 1,
+      "message": "Thanks Hanna! I added some comments.",
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f48e9091_58fa3ed0",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-02T15:25:50Z",
+      "side": 1,
+      "message": "nit: `return std::make_unique\u003cInputVolumeController\u003e(num_channels, /*config\u003d*/{.enabled \u003d enabled});`",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 73
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "246dce27_910c098d",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-02T15:25:50Z",
+      "side": 1,
+      "message": "Could you remove `InputVolumeController::Initialize()`? The inizialization can be done in the ctor, no need to add a separate method. Fully fine to change this in a separate CL; if so, consider adding a TODO to mark `Initialize()` for removal.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 3
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc06f1ae_e4baf5c6",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-02T15:25:50Z",
+      "side": 1,
+      "message": "Not related to this CL, but good to add since we finally have `GainController2::SetCaptureOutputUsed()`.\n\nCould you add the following?\n`// TODO(bugs.webrtc.org/7494): Pass flag to other components too.`",
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1906649_9fa5cc70",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-02T15:25:50Z",
+      "side": 1,
+      "message": "in a follow-up CL, let\u0027s remove `set_stream_analog_level()` and pass `applied_input_volume` to `AnalyzePreProcess()`",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 62
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f410f482_699c408f",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-02T15:25:50Z",
+      "side": 1,
+      "message": "as agreed, remove this and instead get the recommendation from line 178 - i.e., when `InputVolumeController::Process()` is called",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 0
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "648ddae9_1db5864b",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-02T15:25:50Z",
+      "side": 1,
+      "message": "What about `EXPECT_TRUE(recommended_input_volume.has_value());`?\n\nReasons:\n- the test name `CheckGetRecommendedInputVolumeWhenInputVolumeControllerEnabled` suggests that we want to check that a volume is recommended when the controller is used\n- the test name doesn\u0027t suggest that we want to test how the controller adapts the initial input volume\n- even if the test were to test the controller behavior, I\u0027d rather use `Ne` or `Lt` instead of `Eq`\n\nAlso, we should reduce overlap between the `GainController2` tests and the `InputVolumeController` tests. So, I wouldn\u0027t test the controller behavior at all in this unit test file. WDYT?",
+      "range": {
+        "startLine": 221,
+        "startChar": 23,
+        "endLine": 221,
+        "endChar": 51
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
