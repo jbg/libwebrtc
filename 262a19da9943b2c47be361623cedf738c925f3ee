@@ -522,6 +522,30 @@
       },
       "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57cd368e_9856cbf4",
+        "filename": "modules/audio_processing/gain_controller2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-03T12:45:32Z",
+      "side": 1,
+      "message": "As agreed offline this morning, let\u0027s keep the getter for now and then remove the getter and maybe rename `Process()` to `ProcessAndRecommendInputVolume()` in a separate CL.",
+      "parentUuid": "df538ba2_d6c347dc",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 56
+      },
+      "revId": "262a19da9943b2c47be361623cedf738c925f3ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

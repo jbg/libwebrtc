@@ -217,6 +217,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c4813c5_7176100f",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-03T12:45:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "72a766f7_00e6206b",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 0
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "648ddae9_1db5864b",
@@ -254,6 +278,30 @@
       "side": 1,
       "message": "I\u0027ve removed the exact volume checks and added checks for `gain_controller-\u003eGetRecommendedInputVolume().has_value()`.",
       "parentUuid": "648ddae9_1db5864b",
+      "range": {
+        "startLine": 221,
+        "startChar": 23,
+        "endLine": 221,
+        "endChar": 51
+      },
+      "revId": "c8ca69403f46ff5123d4e6b61119c844905442f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70576597_5da81fd4",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-03T12:45:32Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "ea159fe0_3e73c314",
       "range": {
         "startLine": 221,
         "startChar": 23,
