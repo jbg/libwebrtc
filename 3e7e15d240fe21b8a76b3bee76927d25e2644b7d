@@ -1,0 +1,303 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c80cc463_1fca099c",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1453,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "moved into `InitializeLocked`",
+      "range": {
+        "startLine": 1450,
+        "startChar": 0,
+        "endLine": 1453,
+        "endChar": 3
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93746df7_3be26668",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1458,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "moved into `MaybeInitializeRender`",
+      "range": {
+        "startLine": 1453,
+        "startChar": 3,
+        "endLine": 1458,
+        "endChar": 0
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e75235ae_6e315876",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1500,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "moved into `MaybeInitializeRender`",
+      "range": {
+        "startLine": 1490,
+        "startChar": 0,
+        "endLine": 1500,
+        "endChar": 0
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef35f501_ceef12a9",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "Outdated comment.",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 70
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cde74f3_b12a286d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "This condition is unnecessary: If true, the channel count check will anyway also fail.",
+      "range": {
+        "startLine": 423,
+        "startChar": 8,
+        "endLine": 423,
+        "endChar": 33
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d014fd0_e2c780c4",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "Moved into the two callers of `AnalyzeReverseStreamLocked`:\n- `AnalyzeReverseStream`\n- `ProcessReverseStream`\n\n...because `Process*` has to do more work on errors.",
+      "range": {
+        "startLine": 1459,
+        "startChar": 0,
+        "endLine": 1459,
+        "endChar": 58
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d76e01_03f853ba",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1486,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "moved into `InitializeLocked`",
+      "range": {
+        "startLine": 1484,
+        "startChar": 0,
+        "endLine": 1486,
+        "endChar": 3
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7af64aee_0434bffe",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "This is printed all the time on many platforms, I think it is unactionable noise when denormal disabling is supported.",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 72
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46879620_b8bbf27a",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1461,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "This is guaranteed by MaybeInitializeRender.",
+      "range": {
+        "startLine": 1460,
+        "startChar": 0,
+        "endLine": 1461,
+        "endChar": 73
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0a0a87b_f784f4b5",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1463,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "This is done twice for one path: once in ProcessReverseStream and then once here. Moved this one into `AnalyzeReverseStream` instead, so it happens identically at each API entrypoint.",
+      "range": {
+        "startLine": 1462,
+        "startChar": 0,
+        "endLine": 1463,
+        "endChar": 61
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5adcb9a9_74134a1b",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "Leftover intention from the intelligibility enhancer work. Comment not applicable anymore.",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 65
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91fca7fc_874ed4ce",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "Two initializations are to be expected here: We change format once for capture and once for render. Perhaps it worked differently in the past.",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 53
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b05b4f27_377af7f3",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-03T13:43:34Z",
+      "side": 0,
+      "message": "Leftover pointer-to-submodule reference.",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 2
+      },
+      "revId": "3e7e15d240fe21b8a76b3bee76927d25e2644b7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
