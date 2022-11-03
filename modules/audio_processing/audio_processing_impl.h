@@ -248,10 +248,11 @@ class AudioProcessingImpl : public AudioProcessing {
   // capture thread blocks the render thread.
   // Called by render: Holds the render lock when reading the format struct and
   // acquires both locks if reinitialization is required.
-  int MaybeInitializeRender(const ProcessingConfig& processing_config)
+  int MaybeInitializeRender(const StreamConfig& input_config,
+                            const StreamConfig& output_config)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_render_);
-  // Called by capture: Holds the capture lock when reading the format struct
-  // and acquires both locks if reinitialization is needed.
+  // Called by capture: Acquires and releases the capture lock to read the
+  // format struct and acquires both locks if reinitialization is needed.
   int MaybeInitializeCapture(const StreamConfig& input_config,
                              const StreamConfig& output_config);
 
