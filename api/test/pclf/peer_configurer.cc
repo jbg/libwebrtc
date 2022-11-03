@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2020 The WebRTC project authors. All Rights Reserved.
+ *  Copyright (c) 2022 The WebRTC project authors. All Rights Reserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -8,11 +8,12 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "test/pc/e2e/peer_configurer.h"
+#include "api/test/pclf/peer_configurer.h"
 
 #include <set>
 
 #include "absl/strings/string_view.h"
+#include "api/test/peer_network_dependencies.h"
 #include "modules/video_coding/svc/create_scalability_structure.h"
 #include "modules/video_coding/svc/scalability_mode_util.h"
 #include "rtc_base/arraysize.h"
@@ -33,6 +34,15 @@ constexpr absl::string_view kDefaultNames[] = {"alice", "bob",  "charlie",
                                                "david", "erin", "frank"};
 
 }  // namespace
+
+PeerConfigurerImpl::PeerConfigurerImpl(
+    const PeerNetworkDependencies& network_dependencies)
+    : components_(std::make_unique<InjectableComponents>(
+          network_dependencies.network_thread,
+          network_dependencies.network_manager,
+          network_dependencies.packet_socket_factory)),
+      params_(std::make_unique<Params>()),
+      configurable_params_(std::make_unique<ConfigurableParams>()) {}
 
 DefaultNamesProvider::DefaultNamesProvider(
     absl::string_view prefix,
