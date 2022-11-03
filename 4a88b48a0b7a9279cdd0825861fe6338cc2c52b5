@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a618a961_c668f253",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-03T21:16:21Z",
+      "side": 1,
+      "message": "Accepting this as one step in a journey...",
+      "revId": "4a88b48a0b7a9279cdd0825861fe6338cc2c52b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbbaed97_f97b32d1",
+        "filename": "api/test/pclf/peer_configurer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-03T21:16:21Z",
+      "side": 1,
+      "message": "is the plan to rename this to PeerConfigurer?\nSeems like a good idea, if so; I\u0027m skeptical about the ...Impl suffix in general, and it is definitely out of place in /api.",
+      "revId": "4a88b48a0b7a9279cdd0825861fe6338cc2c52b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
