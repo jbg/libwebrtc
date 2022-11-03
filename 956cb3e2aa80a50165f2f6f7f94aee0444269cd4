@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f26eb0_adc45a53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-11-03T10:07:04Z",
+      "side": 1,
+      "message": "overall lg, but with comment on the callback\nshould someone from the audio side comment too?",
+      "revId": "956cb3e2aa80a50165f2f6f7f94aee0444269cd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55d6e275_05638072",
+        "filename": "api/rtp_sender_interface.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-11-03T10:07:04Z",
+      "side": 1,
+      "message": "Could we use a wrapper class around the callback, similar to SignalingThreadCallback?\n\nWe could avoid a bunch of code on this form then:\n```\nif (callback) {\n      std::move(callback)(\n          webrtc::RTCError(...));\n}\n```\nIf you have it return the error code, could avoid some extra return statements too.\n\nIt\u0027s also unclear to me if there\u0027s codepaths the never call the callback - and if it\u0027s expected that the callback is always called. A wrapper could help validate that, just as SignalingThreadCallback appears to do.\n\nwdyt?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 68
+      },
+      "revId": "956cb3e2aa80a50165f2f6f7f94aee0444269cd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bed5b21_f1bd3b59",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-11-03T10:07:04Z",
+      "side": 1,
+      "message": "nit: use {} with if/else",
+      "revId": "956cb3e2aa80a50165f2f6f7f94aee0444269cd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
