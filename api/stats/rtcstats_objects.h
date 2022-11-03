@@ -274,6 +274,7 @@ class RTC_EXPORT RTCLocalIceCandidateStats final : public RTCIceCandidateStats {
   RTCLocalIceCandidateStats(std::string&& id, int64_t timestamp_us);
   std::unique_ptr<RTCStats> copy() const override;
   const char* type() const override;
+  rtc::ArrayView<const char*> compatible_types() const override;
 };
 
 class RTC_EXPORT RTCRemoteIceCandidateStats final
@@ -284,6 +285,7 @@ class RTC_EXPORT RTCRemoteIceCandidateStats final
   RTCRemoteIceCandidateStats(std::string&& id, int64_t timestamp_us);
   std::unique_ptr<RTCStats> copy() const override;
   const char* type() const override;
+  rtc::ArrayView<const char*> compatible_types() const override;
 };
 
 // TODO(https://crbug.com/webrtc/14419): Delete this class, it's deprecated.
@@ -407,6 +409,8 @@ class RTC_EXPORT RTCReceivedRtpStreamStats : public RTCRTPStreamStats {
   RTCReceivedRtpStreamStats(const RTCReceivedRtpStreamStats& other);
   ~RTCReceivedRtpStreamStats() override;
 
+  rtc::ArrayView<const char*> compatible_types() const override;
+
   RTCStatsMember<double> jitter;
   RTCStatsMember<int32_t> packets_lost;  // Signed per RFC 3550
 
@@ -441,6 +445,8 @@ class RTC_EXPORT RTCInboundRTPStreamStats final
   RTCInboundRTPStreamStats(std::string&& id, int64_t timestamp_us);
   RTCInboundRTPStreamStats(const RTCInboundRTPStreamStats& other);
   ~RTCInboundRTPStreamStats() override;
+
+  rtc::ArrayView<const char*> compatible_types() const override;
 
   // TODO(https://crbug.com/webrtc/14174): Implement trackIdentifier and kind.
 
@@ -525,6 +531,7 @@ class RTC_EXPORT RTCOutboundRTPStreamStats final : public RTCRTPStreamStats {
   RTCOutboundRTPStreamStats(std::string&& id, int64_t timestamp_us);
   RTCOutboundRTPStreamStats(const RTCOutboundRTPStreamStats& other);
   ~RTCOutboundRTPStreamStats() override;
+  rtc::ArrayView<const char*> compatible_types() const override;
 
   RTCStatsMember<std::string> media_source_id;
   RTCStatsMember<std::string> remote_id;
@@ -574,6 +581,7 @@ class RTC_EXPORT RTCRemoteInboundRtpStreamStats final
   RTCRemoteInboundRtpStreamStats(std::string&& id, int64_t timestamp_us);
   RTCRemoteInboundRtpStreamStats(const RTCRemoteInboundRtpStreamStats& other);
   ~RTCRemoteInboundRtpStreamStats() override;
+  rtc::ArrayView<const char*> compatible_types() const override;
 
   RTCStatsMember<std::string> local_id;
   RTCStatsMember<double> round_trip_time;
@@ -592,6 +600,7 @@ class RTC_EXPORT RTCRemoteOutboundRtpStreamStats final
   RTCRemoteOutboundRtpStreamStats(std::string&& id, int64_t timestamp_us);
   RTCRemoteOutboundRtpStreamStats(const RTCRemoteOutboundRtpStreamStats& other);
   ~RTCRemoteOutboundRtpStreamStats() override;
+  rtc::ArrayView<const char*> compatible_types() const override;
 
   RTCStatsMember<std::string> local_id;
   RTCStatsMember<double> remote_timestamp;
@@ -626,6 +635,7 @@ class RTC_EXPORT RTCAudioSourceStats final : public RTCMediaSourceStats {
   RTCAudioSourceStats(std::string&& id, int64_t timestamp_us);
   RTCAudioSourceStats(const RTCAudioSourceStats& other);
   ~RTCAudioSourceStats() override;
+  rtc::ArrayView<const char*> compatible_types() const override;
 
   RTCStatsMember<double> audio_level;
   RTCStatsMember<double> total_audio_energy;
@@ -643,6 +653,7 @@ class RTC_EXPORT RTCVideoSourceStats final : public RTCMediaSourceStats {
   RTCVideoSourceStats(std::string&& id, int64_t timestamp_us);
   RTCVideoSourceStats(const RTCVideoSourceStats& other);
   ~RTCVideoSourceStats() override;
+  rtc::ArrayView<const char*> compatible_types() const override;
 
   RTCStatsMember<uint32_t> width;
   RTCStatsMember<uint32_t> height;
