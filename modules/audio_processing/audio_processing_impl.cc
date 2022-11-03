@@ -145,6 +145,109 @@ void PackRenderAudioBufferForEchoDetector(const AudioBuffer& audio,
 
 constexpr int kUnspecifiedDataDumpInputVolume = -100;
 
+// Options for gracefully handling processing errors.
+enum class FormatErrorOutputOption {
+  kOutputExactCopyOfInput,
+  kOutputBroadcastCopyOfFirstInputChannel,
+  kOutputSilence,
+  kDoNothing
+};
+
+FormatErrorOutputOption ChooseErrorOutputOption(
+    const StreamConfig& input_config,
+    const StreamConfig& output_config) {
+  if (input_config.sample_rate_hz() < 0 || output_config.sample_rate_hz() < 0) {
+    // Data format has no interpretation: Do not touch output.
+    return FormatErrorOutputOption::kDoNothing;
+  }
+  if (input_config.sample_rate_hz() != output_config.sample_rate_hz()) {
+    // Sample rates do not match: Cannot copy input into output.
+    // Note: If the sample rates are in a supported range, we could resample.
+    // However, that would significantly increase complexity of this error
+    // handling code.
+    return FormatErrorOutputOption::kOutputSilence;
+  }
+  if (input_config.num_channels() != output_config.num_channels()) {
+    // Channel counts do not match: We cannot easily map input channels to
+    // output channels.
+    return FormatErrorOutputOption::kOutputBroadcastCopyOfFirstInputChannel;
+  }
+  // The formats match exactly.
+  return FormatErrorOutputOption::kOutputExactCopyOfInput;
+}
+
+void BestEffortCopyOnFormatError(const int16_t* const src,
+                                 const StreamConfig& input_config,
+                                 const StreamConfig& output_config,
+                                 int16_t* const dest) {
+  RTC_DCHECK(src);
+  RTC_DCHECK(dest);
+  FormatErrorOutputOption output_option =
+      ChooseErrorOutputOption(input_config, output_config);
+  const size_t num_output_channels = output_config.num_channels();
+  switch (output_option) {
+    case FormatErrorOutputOption::kOutputSilence:
+      for (size_t i = 0; i < output_config.num_samples(); ++i) {
+        dest[i] = 0;
+      }
+      break;
+    case FormatErrorOutputOption::kOutputBroadcastCopyOfFirstInputChannel:
+      for (size_t ch = 0; ch < num_output_channels; ++ch) {
+        for (size_t i = 0; i < output_config.num_frames(); ++i) {
+          dest[ch + num_output_channels * i] =
+              src[input_config.num_channels() * i];
+        }
+      }
+      break;
+    case FormatErrorOutputOption::kOutputExactCopyOfInput:
+      for (size_t ch = 0; ch < num_output_channels; ++ch) {
+        for (size_t i = 0; i < output_config.num_frames(); ++i) {
+          dest[ch + num_output_channels * i] =
+              src[ch + num_output_channels * i];
+        }
+      }
+      break;
+    case FormatErrorOutputOption::kDoNothing:
+      break;
+  }
+}
+
+void BestEffortCopyOnFormatError(const float* const* src,
+                                 const StreamConfig& input_config,
+                                 const StreamConfig& output_config,
+                                 float* const* dest) {
+  RTC_DCHECK(src);
+  RTC_DCHECK(dest);
+  FormatErrorOutputOption output_option =
+      ChooseErrorOutputOption(input_config, output_config);
+  const size_t num_output_channels = output_config.num_channels();
+  switch (output_option) {
+    case FormatErrorOutputOption::kOutputSilence:
+      for (size_t ch = 0; ch < num_output_channels; ++ch) {
+        for (size_t i = 0; i < output_config.num_frames(); ++i) {
+          dest[ch][i] = 0;
+        }
+      }
+      break;
+    case FormatErrorOutputOption::kOutputBroadcastCopyOfFirstInputChannel:
+      for (size_t ch = 0; ch < num_output_channels; ++ch) {
+        for (size_t i = 0; i < output_config.num_frames(); ++i) {
+          dest[ch][i] = src[0][i];
+        }
+      }
+      break;
+    case FormatErrorOutputOption::kOutputExactCopyOfInput:
+      for (size_t ch = 0; ch < num_output_channels; ++ch) {
+        for (size_t i = 0; i < output_config.num_frames(); ++i) {
+          dest[ch][i] = src[ch][i];
+        }
+      }
+      break;
+    case FormatErrorOutputOption::kDoNothing:
+      break;
+  }
+}
+
 }  // namespace
 
 // Throughout webrtc, it's assumed that success is represented by zero.
@@ -334,8 +437,12 @@ int AudioProcessingImpl::Initialize(const ProcessingConfig& processing_config) {
 }
 
 int AudioProcessingImpl::MaybeInitializeRender(
-    const ProcessingConfig& processing_config) {
-  // Called from both threads. Thread check is therefore not possible.
+    const StreamConfig& input_config,
+    const StreamConfig& output_config) {
+  ProcessingConfig processing_config = formats_.api_format;
+  processing_config.reverse_input_stream() = input_config;
+  processing_config.reverse_output_stream() = output_config;
+
   if (processing_config == formats_.api_format) {
     return kNoError;
   }
@@ -420,20 +527,30 @@ int AudioProcessingImpl::InitializeLocked(const ProcessingConfig& config) {
   UpdateActiveSubmoduleStates();
 
   for (const auto& stream : config.streams) {
-    if (stream.num_channels() > 0 && stream.sample_rate_hz() <= 0) {
+    // The resampler requires frames large enough to fit its convolution
+    // kernels, so rates are restricted to 8000 Hz.
+    if (stream.sample_rate_hz() < 8000 ||
+        stream.sample_rate_hz() >
+            static_cast<int>(AudioBuffer::kMaxSampleRate)) {
       return kBadSampleRateError;
     }
   }
 
-  const size_t num_in_channels = config.input_stream().num_channels();
-  const size_t num_out_channels = config.output_stream().num_channels();
-
-  // Need at least one input channel.
-  // Need either one output channel or as many outputs as there are inputs.
-  if (num_in_channels == 0 ||
-      !(num_out_channels == 1 || num_out_channels == num_in_channels)) {
-    return kBadNumberChannelsError;
-  }
+  auto check_channel_count = [](const size_t num_in_channels,
+                                const size_t num_out_channels) {
+    // Need at least one input channel.
+    // Need either one output channel or as many outputs as there are inputs.
+    if (num_in_channels == 0 ||
+        !(num_out_channels == 1 || num_out_channels == num_in_channels)) {
+      return kBadNumberChannelsError;
+    }
+    return kNoError;
+  };
+  RETURN_ON_ERR(check_channel_count(config.input_stream().num_channels(),
+                                    config.output_stream().num_channels()));
+  RETURN_ON_ERR(
+      check_channel_count(config.reverse_input_stream().num_channels(),
+                          config.reverse_output_stream().num_channels()));
 
   formats_.api_format = config;
 
@@ -760,7 +877,11 @@ int AudioProcessingImpl::ProcessStream(const float* const* src,
     return kNullPointerError;
   }
 
-  RETURN_ON_ERR(MaybeInitializeCapture(input_config, output_config));
+  int init_error = MaybeInitializeCapture(input_config, output_config);
+  if (init_error != kNoError) {
+    BestEffortCopyOnFormatError(src, input_config, output_config, dest);
+    return init_error;
+  }
 
   MutexLock lock_capture(&mutex_capture_);
   DenormalDisabler denormal_disabler(use_denormal_disabler_);
@@ -1055,7 +1176,12 @@ int AudioProcessingImpl::ProcessStream(const int16_t* const src,
                                        const StreamConfig& output_config,
                                        int16_t* const dest) {
   TRACE_EVENT0("webrtc", "AudioProcessing::ProcessStream_AudioFrame");
-  RETURN_ON_ERR(MaybeInitializeCapture(input_config, output_config));
+
+  int init_error = MaybeInitializeCapture(input_config, output_config);
+  if (init_error != kNoError) {
+    BestEffortCopyOnFormatError(src, input_config, output_config, dest);
+    return init_error;
+  }
 
   MutexLock lock_capture(&mutex_capture_);
   DenormalDisabler denormal_disabler(use_denormal_disabler_);
@@ -1412,6 +1538,7 @@ int AudioProcessingImpl::AnalyzeReverseStream(
     const StreamConfig& reverse_config) {
   TRACE_EVENT0("webrtc", "AudioProcessing::AnalyzeReverseStream_StreamConfig");
   MutexLock lock(&mutex_render_);
+  RETURN_ON_ERR(MaybeInitializeRender(reverse_config, reverse_config));
   return AnalyzeReverseStreamLocked(data, reverse_config, reverse_config);
 }
 
@@ -1423,7 +1550,14 @@ int AudioProcessingImpl::ProcessReverseStream(const float* const* src,
   MutexLock lock(&mutex_render_);
   DenormalDisabler denormal_disabler(use_denormal_disabler_);
 
+  int init_error = MaybeInitializeRender(input_config, output_config);
+  if (init_error != kNoError) {
+    BestEffortCopyOnFormatError(src, input_config, output_config, dest);
+    return init_error;
+  }
+
   RETURN_ON_ERR(AnalyzeReverseStreamLocked(src, input_config, output_config));
+
   if (submodule_states_.RenderMultiBandProcessingActive() ||
       submodule_states_.RenderFullBandProcessingActive()) {
     render_.render_audio->CopyTo(formats_.api_format.reverse_output_stream(),
@@ -1448,15 +1582,6 @@ int AudioProcessingImpl::AnalyzeReverseStreamLocked(
     return kNullPointerError;
   }
 
-  if (input_config.num_channels() == 0) {
-    return kBadNumberChannelsError;
-  }
-
-  ProcessingConfig processing_config = formats_.api_format;
-  processing_config.reverse_input_stream() = input_config;
-  processing_config.reverse_output_stream() = output_config;
-
-  RETURN_ON_ERR(MaybeInitializeRender(processing_config));
   RTC_DCHECK_EQ(input_config.num_frames(),
                 formats_.api_format.reverse_input_stream().num_frames());
 
@@ -1481,24 +1606,15 @@ int AudioProcessingImpl::ProcessReverseStream(const int16_t* const src,
                                               int16_t* const dest) {
   TRACE_EVENT0("webrtc", "AudioProcessing::ProcessReverseStream_AudioFrame");
 
-  if (input_config.num_channels() <= 0) {
-    return AudioProcessing::Error::kBadNumberChannelsError;
-  }
-
   MutexLock lock(&mutex_render_);
   DenormalDisabler denormal_disabler(use_denormal_disabler_);
 
-  ProcessingConfig processing_config = formats_.api_format;
-  processing_config.reverse_input_stream().set_sample_rate_hz(
-      input_config.sample_rate_hz());
-  processing_config.reverse_input_stream().set_num_channels(
-      input_config.num_channels());
-  processing_config.reverse_output_stream().set_sample_rate_hz(
-      output_config.sample_rate_hz());
-  processing_config.reverse_output_stream().set_num_channels(
-      output_config.num_channels());
+  int init_error = MaybeInitializeRender(input_config, output_config);
+  if (init_error != kNoError) {
+    BestEffortCopyOnFormatError(src, input_config, output_config, dest);
+    return init_error;
+  }
 
-  RETURN_ON_ERR(MaybeInitializeRender(processing_config));
   if (input_config.num_frames() !=
       formats_.api_format.reverse_input_stream().num_frames()) {
     return kBadDataLengthError;
