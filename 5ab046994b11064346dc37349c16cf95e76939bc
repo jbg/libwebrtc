@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0d5b9661_12f48643",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-11-03T15:04:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f2fb5ed_e34b6032",
+      "revId": "5ab046994b11064346dc37349c16cf95e76939bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "959e6874_bde77cad",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 8
@@ -48,6 +66,24 @@
       "writtenOn": "2022-11-03T11:58:58Z",
       "side": 1,
       "message": "Since this is now a public API, there should be a class documentation (\"what is this for and how do I use it\").\n\n\"See documentation in peerconnection_quality_test_fixture, should only be used in conjunction with that class\" may be adequate (but also calls into question why this class needs to be moved at all).",
+      "revId": "5ab046994b11064346dc37349c16cf95e76939bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8395f7aa_0a1b87d3",
+        "filename": "api/test/pclf/peer_configurer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-11-03T15:04:14Z",
+      "side": 1,
+      "message": "Copied the documentation from PeerConnectionE2EQualityTestFixture::PeerConfigurer since this interface should be removed in upcoming CLs.",
+      "parentUuid": "bebc8812_e9ad8488",
       "revId": "5ab046994b11064346dc37349c16cf95e76939bc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
