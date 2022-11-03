@@ -1343,6 +1343,134 @@ TEST_F(RTCStatsIntegrationTest, GetStatsContainsNoDuplicateMembers) {
     }
   }
 }
+
+TEST_F(RTCStatsIntegrationTest, GetStatsContainsExpectedMemeberCount) {
+  StartCall();
+
+  class RtcpSrObserver : public rtc::VideoSinkInterface<VideoFrame> {
+   public:
+    RtcpSrObserver() : ntp_time_set_(false) {}
+
+    ~RtcpSrObserver() override = default;
+
+    bool ntp_time_set() const {
+      MutexLock lock(&mutex_);
+      return ntp_time_set_;
+    }
+
+    void OnFrame(const VideoFrame& video_frame) {
+      MutexLock lock(&mutex_);
+      if (video_frame.ntp_time_ms() <= 0) {
+        // Haven't got enough RTCP SR in order to calculate the capture ntp
+        // time.
+        return;
+      }
+      ntp_time_set_ = true;
+    }
+
+   private:
+    mutable Mutex mutex_;
+    bool ntp_time_set_;
+  };
+  std::unique_ptr<RtcpSrObserver> video_frame_observer =
+      std::make_unique<RtcpSrObserver>();
+  VideoTrackInterface* callee_video_track = nullptr;
+
+  for (auto callee_transceiver : callee_->pc()->GetTransceivers()) {
+    if (callee_transceiver->media_type() == cricket::MEDIA_TYPE_VIDEO &&
+        (callee_transceiver->direction() ==
+             RtpTransceiverDirection::kSendRecv ||
+         callee_transceiver->direction() ==
+             RtpTransceiverDirection::kRecvOnly)) {
+      auto callee_track = callee_transceiver->receiver()->track();
+      callee_video_track =
+          static_cast<VideoTrackInterface*>(callee_track.get());
+      break;
+    }
+  }
+
+  ASSERT_NE(nullptr, callee_video_track);
+  callee_video_track->AddOrUpdateSink(video_frame_observer.get(),
+                                      rtc::VideoSinkWants());
+
+  EXPECT_TRUE_WAIT(video_frame_observer->ntp_time_set(), kGetStatsTimeoutMs);
+  callee_video_track->RemoveSink(video_frame_observer.get());
+
+  rtc::scoped_refptr<const RTCStatsReport> report = GetStatsFromCallee();
+
+  struct RTCStatsReportValidator {
+    absl::string_view type;
+    absl::variant<int, std::function<int(const RTCStats& stats)>> count_matcher;
+  };
+
+  const std::array<RTCStatsReportValidator, 15> kKnownStatsMembers{
+      RTCStatsReportValidator{"candidate-pair", 22},
+      RTCStatsReportValidator{"certificate", 4},
+      RTCStatsReportValidator{"codec", 6},
+      RTCStatsReportValidator{"data-channel", 8},
+      RTCStatsReportValidator{"inbound-rtp", 62},
+      RTCStatsReportValidator{"local-candidate", 18},
+      RTCStatsReportValidator{
+          "media-source",
+          [](const RTCStats& stats) {
+            const RTCMediaSourceStats& media_source_stats =
+                stats.cast_to<RTCMediaSourceStats>();
+            if (media_source_stats.kind.ValueOrDefault("") == "audio") {
+              return 7;
+            }
+            return 6;
+          }},
+      RTCStatsReportValidator{"outbound-rtp", 36},
+      RTCStatsReportValidator{"peer-connection", 2},
+      RTCStatsReportValidator{"remote-candidate", 18},
+      RTCStatsReportValidator{"remote-inbound-rtp", 13},
+      RTCStatsReportValidator{"remote-outbound-rtp", 14},
+      RTCStatsReportValidator{"stream", 2},
+      RTCStatsReportValidator{"track", 35},
+      RTCStatsReportValidator{"transport", 17}};
+
+  std::set<std::string> stats_type_names;
+  for (const RTCStats& stats : *report) {
+    int member_count = static_cast<int>(stats.Members().size());
+    auto known_stats_member_iter = absl::c_find_if(
+        kKnownStatsMembers,
+        [&stats](const RTCStatsReportValidator& stat_member_count) {
+          if (stat_member_count.type.compare(stats.type()) == 0) {
+            return true;
+          }
+          return false;
+        });
+    EXPECT_NE(kKnownStatsMembers.end(), known_stats_member_iter)
+        << stats.type() << " should be exist in kKnownStatsMembers";
+
+    if (known_stats_member_iter != kKnownStatsMembers.end()) {
+      int expected_count = -1;
+      if (const int* count =
+              absl::get_if<int>(&known_stats_member_iter->count_matcher)) {
+        expected_count = *count;
+      } else if (const std::function<int(const RTCStats& stats)>* matcher =
+                     absl::get_if<std::function<int(const RTCStats& stats)>>(
+                         &known_stats_member_iter->count_matcher)) {
+        expected_count = (*matcher)(stats);
+      } else {
+        RTC_DCHECK_NOTREACHED();
+      }
+
+      EXPECT_EQ(expected_count, member_count)
+          << stats.type() << " member count wrong";
+    }
+    stats_type_names.insert(stats.type());
+  }
+
+  for (const RTCStatsReportValidator& known_stats_name_count :
+       kKnownStatsMembers) {
+    auto seen_stats_name_iter = stats_type_names.find(
+        static_cast<std::string>(known_stats_name_count.type));
+    EXPECT_NE(stats_type_names.end(), seen_stats_name_iter)
+        << known_stats_name_count.type
+        << " should be exist in kKnownStatsMembers";
+  }
+}
 #endif  // WEBRTC_HAVE_SCTP
 
 }  // namespace
