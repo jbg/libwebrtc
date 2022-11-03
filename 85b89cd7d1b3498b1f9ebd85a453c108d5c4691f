@@ -16,6 +16,23 @@
       "message": "Hello Henrik!\n\nCould you please review this tiny MR with micro-optimization which is though important for mobiles (in my case iOS).\n\nThanks a lot in advance,\nYury.",
       "revId": "85b89cd7d1b3498b1f9ebd85a453c108d5c4691f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57720975_f1d39cd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2022-11-03T14:41:06Z",
+      "side": 1,
+      "message": "Thanks for improving the code!",
+      "revId": "85b89cd7d1b3498b1f9ebd85a453c108d5c4691f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
