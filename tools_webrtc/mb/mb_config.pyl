@@ -188,7 +188,7 @@
         'rtti_no_sctp': 'rtti_no_sctp_x64',
       },
       'linux_msan': 'msan_clang_release_bot_x64',
-      'linux_rel': 'release_bot_x64',
+      'linux_rel': 'code_coverage_bot_x64',
       'linux_tsan2': 'tsan_clang_release_bot_x64',
       'linux_ubsan': 'ubsan_clang_release_bot_x64',
       'linux_ubsan_vptr': 'ubsan_vptr_clang_release_bot_x64',
@@ -248,6 +248,7 @@
     ['android', 'debug_static_bot', 'arm', 'bwe_test_logging'],
     'bwe_test_logging_x64': ['debug_bot', 'x64', 'bwe_test_logging'],
     'bwe_test_logging_x86': ['debug_bot', 'x86', 'bwe_test_logging'],
+    'code_coverage_bot_x64': ['openh264', 'release_bot', 'x64', 'code_coverage'],
     'codesearch_gen_linux_bot': ['openh264', 'debug_bot', 'minimal_symbols'],
     # TODO(kjellander): Restore Goma for this when crbug.com/726706 is fixed.
     'debug_bot_arm': ['openh264', 'debug', 'arm'],
@@ -383,6 +384,9 @@
     'clang': {
       'gn_args': 'is_clang=true',
     },
+    'code_coverage': {
+      'gn_args': 'use_clang_coverage=true',
+    },
     'dcheck_always_on': {
       'gn_args': 'dcheck_always_on=true',
     },
@@ -461,7 +465,7 @@
     'release_bot': {
       'mixins': ['pure_release_bot', 'dcheck_always_on'],
     },
-    'release_bot_reclient': {
+   'release_bot_reclient': {
       'mixins': ['pure_release_bot_reclient', 'dcheck_always_on'],
     },
     'rtti': {

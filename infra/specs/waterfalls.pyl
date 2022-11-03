@@ -514,8 +514,12 @@
         },
       },
       'linux_rel': {
-        'os_type': 'linux',
-        'mixins': ['linux-bionic', 'x86-64', 'resultdb-json-format'],
+        'os_type':
+        'linux',
+        'mixins': [
+          'linux-bionic', 'x86-64', 'resultdb-json-format',
+          'isolate_profile_data'
+        ],
         'test_suites': {
           'isolated_scripts': 'linux_desktop_tests_tryserver',
         },
