@@ -16,6 +16,24 @@
       "message": "How do I see it\u0027s actually using goma? I cannot see that in the logs for the builder you are referring too.\n\nhttps://ci.chromium.org/ui/p/webrtc/builders/ci/Linux32%20Debug%20(ARM)/18995/overview",
       "revId": "56c90a96e3fb9dbdf6eee7829b7d1e9f387304e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba02174f_9cc2ae9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15909
+      },
+      "writtenOn": "2022-11-04T07:52:26Z",
+      "side": 1,
+      "message": "There is `preprocess_for_goma` step which shows up only for Goma enabled builds.\nhttp://screen/3hXjJQhNyGPTFQm",
+      "parentUuid": "d9b55581_4f9c7446",
+      "revId": "56c90a96e3fb9dbdf6eee7829b7d1e9f387304e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
