@@ -52,6 +52,24 @@
       "parentUuid": "ba02174f_9cc2ae9a",
       "revId": "56c90a96e3fb9dbdf6eee7829b7d1e9f387304e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ea7f4e_ea66c0e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-11-04T08:14:00Z",
+      "side": 1,
+      "message": "I saw that but that just says goma is started and ready, how do I confirm it\u0027s actually utilized? If you look at https://logs.chromium.org/logs/webrtc/buildbucket/cr-buildbucket/8798531185785194641/+/u/start_goma_canceller/stdout, it says connection refused when trying to connect to some local port. What\u0027s that for?",
+      "parentUuid": "0c3f8b94_e2d65f78",
+      "revId": "56c90a96e3fb9dbdf6eee7829b7d1e9f387304e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ],
   "submitRequirementResults": [
