@@ -70,6 +70,24 @@
       "parentUuid": "0c3f8b94_e2d65f78",
       "revId": "56c90a96e3fb9dbdf6eee7829b7d1e9f387304e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d84c46c_bcd19a70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15909
+      },
+      "writtenOn": "2022-11-04T08:46:26Z",
+      "side": 1,
+      "message": "Oh, do you mean the builder runs Goma steps. But ninja doesn\u0027t use Goma?\nLooking at the compile stats, that seems to be the case.\nhttps://logs.chromium.org/logs/webrtc/buildbucket/cr-buildbucket/8798531185785194641/+/u/postprocess_for_goma/goma_stat/stdout\n\nI found this builder because Goma backend still receives requests with webrtc-ci-builder@ service account, and this is the only builder runs Goma steps. \n\nIt\u0027s possible that Goma client just does handshake or something with the backend.\n\nFortunately, the recent build completed successfully with reclient.\nhttps://ci.chromium.org/ui/p/webrtc/builders/ci/Linux32%20Debug%20(ARM)/19003/overview\n\ncrbug.com/726706 said the issue wasn\u0027t resolved.\nbut I guess it is outdated, and the issue has been fixed at some point.\n\nFor the canceller step, \nThat is a cancel signal handler to gracefully shutdown Goma local proxy. the message is shown after the compile step. (Note that this is an async step that doesn\u0027t block following steps)\nhttps://logs.chromium.org/logs/webrtc/buildbucket/cr-buildbucket/8798531185785194641/+/u/start_goma_canceller/stdout#L11903_0",
+      "parentUuid": "96ea7f4e_ea66c0e9",
+      "revId": "56c90a96e3fb9dbdf6eee7829b7d1e9f387304e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ],
   "submitRequirementResults": [
