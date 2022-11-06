@@ -18,6 +18,7 @@
 #include "absl/types/optional.h"
 #include "api/test/peerconnection_quality_test_fixture.h"
 #include "api/test/video/video_frame_writer.h"
+#include "api/units/timestamp.h"
 #include "api/video/i420_buffer.h"
 #include "api/video/video_frame.h"
 #include "rtc_base/checks.h"
@@ -42,8 +43,10 @@ AnalyzingVideoSink::AnalyzingVideoSink(absl::string_view peer_name,
                                        Clock* clock,
                                        VideoQualityAnalyzerInterface& analyzer,
                                        AnalyzingVideoSinksHelper& sinks_helper,
-                                       const VideoSubscription& subscription)
+                                       const VideoSubscription& subscription,
+                                       bool collect_infra_stats)
     : peer_name_(peer_name),
+      collect_infra_stats_(collect_infra_stats),
       clock_(clock),
       analyzer_(&analyzer),
       sinks_helper_(&sinks_helper),
@@ -92,6 +95,8 @@ void AnalyzingVideoSink::OnFrame(const VideoFrame& frame) {
     AnalyzeFrame(frame);
   } else {
     std::string stream_label = analyzer_->GetStreamLabel(frame.id());
+    MutexLock lock(&mutex_);
+    Timestamp processing_started = clock_->CurrentTime();
     SinksDescriptor* sinks_descriptor = PopulateSinks(stream_label);
     RTC_CHECK(sinks_descriptor != nullptr);
 
@@ -101,14 +106,29 @@ void AnalyzingVideoSink::OnFrame(const VideoFrame& frame) {
     for (auto& sink : sinks_descriptor->sinks) {
       sink->OnFrame(scaled_frame);
     }
+    Timestamp processing_finished = clock_->CurrentTime();
+
+    if (collect_infra_stats_) {
+      sink_stats_.analyzing_sink_processing_time_ms.AddSample(
+          (processing_finished - processing_started).ms<double>());
+    }
   }
 }
 
+AnalyzingVideoSink::SinkStats AnalyzingVideoSink::sink_stats() const {
+  MutexLock lock(&mutex_);
+  return sink_stats_;
+}
+
 VideoFrame AnalyzingVideoSink::ScaleVideoFrame(
-    const VideoFrame& frame,
-    const VideoResolution& required_resolution) {
+    const VideoFrame& frame, const VideoResolution& required_resolution) {
+  Timestamp processing_started = clock_->CurrentTime();
   if (required_resolution.width() == static_cast<size_t>(frame.width()) &&
       required_resolution.height() == static_cast<size_t>(frame.height())) {
+    if (collect_infra_stats_) {
+      sink_stats_.scaling_tims_ms.AddSample(
+          (clock_->CurrentTime() - processing_started).ms<double>());
+    }
     return frame;
   }
 
@@ -131,6 +151,10 @@ VideoFrame AnalyzingVideoSink::ScaleVideoFrame(
 
   VideoFrame scaled_frame = frame;
   scaled_frame.set_video_frame_buffer(scaled_buffer);
+  if (collect_infra_stats_) {
+    sink_stats_.scaling_tims_ms.AddSample(
+        (clock_->CurrentTime() - processing_started).ms<double>());
+  }
   return scaled_frame;
 }
 
@@ -144,7 +168,6 @@ void AnalyzingVideoSink::AnalyzeFrame(const VideoFrame& frame) {
 AnalyzingVideoSink::SinksDescriptor* AnalyzingVideoSink::PopulateSinks(
     absl::string_view stream_label) {
   // Fast pass: sinks already exists.
-  MutexLock lock(&mutex_);
   auto sinks_it = stream_sinks_.find(std::string(stream_label));
   if (sinks_it != stream_sinks_.end()) {
     return &sinks_it->second;

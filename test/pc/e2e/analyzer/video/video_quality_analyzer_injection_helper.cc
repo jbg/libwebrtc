@@ -45,8 +45,7 @@ class AnalyzingFramePreprocessor
     : public test::TestVideoCapturer::FramePreprocessor {
  public:
   AnalyzingFramePreprocessor(
-      absl::string_view peer_name,
-      absl::string_view stream_label,
+      absl::string_view peer_name, absl::string_view stream_label,
       VideoQualityAnalyzerInterface* analyzer,
       std::vector<std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>>> sinks)
       : peer_name_(peer_name),
@@ -79,10 +78,8 @@ class AnalyzingFramePreprocessor
 }  // namespace
 
 VideoQualityAnalyzerInjectionHelper::VideoQualityAnalyzerInjectionHelper(
-    Clock* clock,
-    std::unique_ptr<VideoQualityAnalyzerInterface> analyzer,
-    EncodedImageDataInjector* injector,
-    EncodedImageDataExtractor* extractor)
+    Clock* clock, std::unique_ptr<VideoQualityAnalyzerInterface> analyzer,
+    EncodedImageDataInjector* injector, EncodedImageDataExtractor* extractor)
     : clock_(clock),
       analyzer_(std::move(analyzer)),
       injector_(injector),
@@ -96,8 +93,7 @@ VideoQualityAnalyzerInjectionHelper::~VideoQualityAnalyzerInjectionHelper() =
 
 std::unique_ptr<VideoEncoderFactory>
 VideoQualityAnalyzerInjectionHelper::WrapVideoEncoderFactory(
-    absl::string_view peer_name,
-    std::unique_ptr<VideoEncoderFactory> delegate,
+    absl::string_view peer_name, std::unique_ptr<VideoEncoderFactory> delegate,
     double bitrate_multiplier,
     EmulatedSFUConfigMap stream_to_sfu_config) const {
   return std::make_unique<QualityAnalyzingVideoEncoderFactory>(
@@ -115,8 +111,7 @@ VideoQualityAnalyzerInjectionHelper::WrapVideoDecoderFactory(
 
 std::unique_ptr<test::TestVideoCapturer::FramePreprocessor>
 VideoQualityAnalyzerInjectionHelper::CreateFramePreprocessor(
-    absl::string_view peer_name,
-    const VideoConfig& config) {
+    absl::string_view peer_name, const VideoConfig& config) {
   std::vector<std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>>> sinks;
   if (config.input_dump_options.has_value()) {
     std::unique_ptr<test::VideoFrameWriter> writer =
@@ -150,15 +145,15 @@ VideoQualityAnalyzerInjectionHelper::CreateVideoSink(
 std::unique_ptr<AnalyzingVideoSink>
 VideoQualityAnalyzerInjectionHelper::CreateVideoSink(
     absl::string_view peer_name,
-    const PeerConnectionE2EQualityTestFixture::VideoSubscription&
-        subscription) {
+    const PeerConnectionE2EQualityTestFixture::VideoSubscription& subscription,
+    bool report_infra_metrics) {
   return std::make_unique<AnalyzingVideoSink>(peer_name, clock_, *analyzer_,
-                                              sinks_helper_, subscription);
+                                              sinks_helper_, subscription,
+                                              report_infra_metrics);
 }
 
 void VideoQualityAnalyzerInjectionHelper::Start(
-    std::string test_case_name,
-    rtc::ArrayView<const std::string> peer_names,
+    std::string test_case_name, rtc::ArrayView<const std::string> peer_names,
     int max_threads_count) {
   analyzer_->Start(std::move(test_case_name), peer_names, max_threads_count);
   extractor_->Start(peer_names.size());
