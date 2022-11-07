@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfe3e6e0_cfe62181",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-07T10:35:22Z",
+      "side": 1,
+      "message": "Scratching an itch while listening to presos.",
+      "revId": "32bfd28942ef063aea5bcd42b84e39ab0e05655d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
