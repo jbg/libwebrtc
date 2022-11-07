@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeaef846_70e04f80",
+        "filename": "test/pc/e2e/analyzer/video/analyzing_video_sink.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-07T08:09:48Z",
+      "side": 1,
+      "message": "Why do we switch to RTC_EXCLUSIVE_LOCKS_REQUIRED() on both ScaleVideoFrame() and PopulateSinks()?\n\nIs that to freely access stats_?",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 43
+      },
+      "revId": "c3a5f1b5e5e9b6316d8870053622cc37dbe22443",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
