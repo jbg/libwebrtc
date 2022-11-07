@@ -5824,6 +5824,26 @@ TEST_F(WebRtcVideoChannelTest, GetPerLayerStatsReportForSubStreams) {
   EXPECT_EQ(sender.rid, absl::nullopt);
 }
 
+TEST_F(WebRtcVideoChannelTest,
+       OutboundRtpIsActiveComesFromMatchingEncodingParams) {
+  FakeVideoSendStream* stream = AddSendStream();
+  auto stats = GetInitialisedStats();
+
+  constexpr uint32_t kSsrc1 = 123u;
+  constexpr uint32_t kSsrc2 = 456u;
+
+  // Instantiate substreams.
+  stats.substreams[kSsrc1];
+  stats.substreams[kSsrc2];
+
+  stream->SetStats(stats);
+
+  cricket::VideoMediaInfo video_media_info;
+  ASSERT_TRUE(channel_->GetStats(&video_media_info));
+  EXPECT_EQ(video_media_info.senders.size(), 2u);
+  // auto& sender = video_media_info.senders[0];
+}
+
 TEST_F(WebRtcVideoChannelTest, MediaSubstreamMissingProducesEmpyStats) {
   FakeVideoSendStream* stream = AddSendStream();
 
