@@ -72,10 +72,20 @@ class RTC_EXPORT StreamInterface {
                             size_t buffer_len,
                             size_t* read,
                             int* error) = 0;
+  virtual StreamResult Read(rtc::ArrayView<uint8_t> buffer,
+                            size_t* read,
+                            int* error) {
+    return Read(buffer.data(), buffer.size(), read, error);
+  }
   virtual StreamResult Write(const void* data,
                              size_t data_len,
                              size_t* written,
                              int* error) = 0;
+  virtual StreamResult Write(rtc::ArrayView<const uint8_t> data,
+                             size_t* written,
+                             int* error) {
+    return Write(data.data(), data.size(), written, error);
+  }
   // Attempt to transition to the SS_CLOSED state.  SE_CLOSE will not be
   // signalled as a result of this call.
   virtual void Close() = 0;
