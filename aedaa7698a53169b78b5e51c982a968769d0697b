@@ -33,6 +33,92 @@
       "message": "Hi Per, PTAL!",
       "revId": "aedaa7698a53169b78b5e51c982a968769d0697b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "962d6397_5a23f337",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-11-07T11:27:26Z",
+      "side": 1,
+      "message": "Thanks for this CL! It addresses a really important topic!",
+      "revId": "aedaa7698a53169b78b5e51c982a968769d0697b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d4e9ba8_33265078",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-11-07T11:27:26Z",
+      "side": 1,
+      "message": "What about the case\n output_config.sample_rate_hz() \u003e 0.\n\nThen we could at least output silence. From a security perspective, that is likely better than not doing anything.",
+      "range": {
+        "startLine": 159,
+        "startChar": 1,
+        "endLine": 159,
+        "endChar": 80
+      },
+      "revId": "aedaa7698a53169b78b5e51c982a968769d0697b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1418653_f255493d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-11-07T11:27:26Z",
+      "side": 1,
+      "message": "I know this is checked elsewhere but since the explicit intention is to populate the output, maybe also add a DCHECK that num_output_channels \u003e 0?",
+      "range": {
+        "startLine": 220,
+        "startChar": 1,
+        "endLine": 220,
+        "endChar": 19
+      },
+      "revId": "aedaa7698a53169b78b5e51c982a968769d0697b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62c5b70e_63632b09",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-11-07T11:27:26Z",
+      "side": 1,
+      "message": "This is good, but it is also a bit odd in the sense that\n1. It gives the impression that the only way MaybeInitializeCapture can fail is due to format errors (maybe that is in practice true though, at least implicitly?)\n2. BestEffortCopyOnFormatError does not at all take the error code into account.\n3. the error code produced returned by ProcessStream does not reflect what was done in BestEffortCopyOnFormatError.\n\n\nWould it be possible to:\na) Extract all error-handling/error-code producing aspects related to formats, from MaybeInitializeCapture into a separate piece of code.\nb) Integrate BestEffortCopyOnFormatError with the format-related error handling so that BestEffortCopyOnFormatError does not indendently reproduce the error that was reported by MaybeInitializeCapture?",
+      "range": {
+        "startLine": 880,
+        "startChar": 1,
+        "endLine": 881,
+        "endChar": 31
+      },
+      "revId": "aedaa7698a53169b78b5e51c982a968769d0697b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
