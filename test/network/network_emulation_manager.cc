@@ -16,7 +16,6 @@
 #include "api/units/time_delta.h"
 #include "api/units/timestamp.h"
 #include "call/simulated_network.h"
-#include "rtc_base/fake_network.h"
 #include "test/network/emulated_turn_server.h"
 #include "test/network/traffic_route.h"
 #include "test/time_controller/real_time_controller.h"
@@ -45,15 +44,16 @@ std::unique_ptr<TimeController> CreateTimeController(TimeMode mode) {
 }
 }  // namespace
 
-NetworkEmulationManagerImpl::NetworkEmulationManagerImpl(TimeMode mode)
+NetworkEmulationManagerImpl::NetworkEmulationManagerImpl(
+    TimeMode mode, EmulatedNetworkStatsGatheringMode stats_gathering_mode)
     : time_mode_(mode),
+      stats_gathering_mode_(stats_gathering_mode),
       time_controller_(CreateTimeController(mode)),
       clock_(time_controller_->GetClock()),
       next_node_id_(1),
       next_ip4_address_(kMinIPv4Address),
       task_queue_(time_controller_->GetTaskQueueFactory()->CreateTaskQueue(
-          "NetworkEmulation",
-          TaskQueueFactory::Priority::NORMAL)) {}
+          "NetworkEmulation", TaskQueueFactory::Priority::NORMAL)) {}
 
 // TODO(srte): Ensure that any pending task that must be run for consistency
 // (such as stats collection tasks) are not cancelled when the task queue is
@@ -65,8 +65,7 @@ NetworkEmulationManagerImpl::~NetworkEmulationManagerImpl() {
 }
 
 EmulatedNetworkNode* NetworkEmulationManagerImpl::CreateEmulatedNode(
-    BuiltInNetworkBehaviorConfig config,
-    uint64_t random_seed) {
+    BuiltInNetworkBehaviorConfig config, uint64_t random_seed) {
   return CreateEmulatedNode(
       std::make_unique<SimulatedNetwork>(config, random_seed));
 }
@@ -74,7 +73,7 @@ EmulatedNetworkNode* NetworkEmulationManagerImpl::CreateEmulatedNode(
 EmulatedNetworkNode* NetworkEmulationManagerImpl::CreateEmulatedNode(
     std::unique_ptr<NetworkBehaviorInterface> network_behavior) {
   auto node = std::make_unique<EmulatedNetworkNode>(
-      clock_, &task_queue_, std::move(network_behavior));
+      clock_, &task_queue_, std::move(network_behavior), stats_gathering_mode_);
   EmulatedNetworkNode* out = node.get();
   task_queue_.PostTask([this, node = std::move(node)]() mutable {
     network_nodes_.push_back(std::move(node));
@@ -107,7 +106,8 @@ EmulatedEndpointImpl* NetworkEmulationManagerImpl::CreateEndpoint(
   bool res = used_ip_addresses_.insert(*ip).second;
   RTC_CHECK(res) << "IP=" << ip->ToString() << " already in use";
   auto node = std::make_unique<EmulatedEndpointImpl>(
-      EmulatedEndpointImpl::Options(next_node_id_++, *ip, config),
+      EmulatedEndpointImpl::Options(next_node_id_++, *ip, config,
+                                    stats_gathering_mode_),
       config.start_as_enabled, &task_queue_, clock_);
   EmulatedEndpointImpl* out = node.get();
   endpoints_.push_back(std::move(node));
@@ -130,8 +130,7 @@ void NetworkEmulationManagerImpl::DisableEndpoint(EmulatedEndpoint* endpoint) {
 }
 
 EmulatedRoute* NetworkEmulationManagerImpl::CreateRoute(
-    EmulatedEndpoint* from,
-    const std::vector<EmulatedNetworkNode*>& via_nodes,
+    EmulatedEndpoint* from, const std::vector<EmulatedNetworkNode*>& via_nodes,
     EmulatedEndpoint* to) {
   // Because endpoint has no send node by default at least one should be
   // provided here.
@@ -162,8 +161,7 @@ EmulatedRoute* NetworkEmulationManagerImpl::CreateRoute(
 }
 
 EmulatedRoute* NetworkEmulationManagerImpl::CreateDefaultRoute(
-    EmulatedEndpoint* from,
-    const std::vector<EmulatedNetworkNode*>& via_nodes,
+    EmulatedEndpoint* from, const std::vector<EmulatedNetworkNode*>& via_nodes,
     EmulatedEndpoint* to) {
   // Because endpoint has no send node by default at least one should be
   // provided here.
@@ -209,8 +207,7 @@ void NetworkEmulationManagerImpl::ClearRoute(EmulatedRoute* route) {
 }
 
 TcpMessageRoute* NetworkEmulationManagerImpl::CreateTcpRoute(
-    EmulatedRoute* send_route,
-    EmulatedRoute* ret_route) {
+    EmulatedRoute* send_route, EmulatedRoute* ret_route) {
   auto tcp_route = std::make_unique<TcpMessageRouteImpl>(
       clock_, task_queue_.Get(), send_route, ret_route);
   auto* route_ptr = tcp_route.get();
@@ -314,6 +311,20 @@ void NetworkEmulationManagerImpl::GetStats(
     }
     stats_callback(stats_builder.Build());
   });
+}
+
+void NetworkEmulationManagerImpl::GetStats(
+    rtc::ArrayView<EmulatedNetworkNode* const> nodes,
+    std::function<void(std::unique_ptr<EmulatedNetworkNodeStats>)>
+        stats_callback) {
+  task_queue_.PostTask(
+      [nodes, stats_callback, stats_gathering_mode = stats_gathering_mode_]() {
+        EmulatedNetworkNodeStatsBuilder stats_builder(stats_gathering_mode);
+        for (auto* node : nodes) {
+          stats_builder.AddEmulatedNetworkNodeStats(*node->stats());
+        }
+        stats_callback(stats_builder.Build());
+      });
 }
 
 absl::optional<rtc::IPAddress>

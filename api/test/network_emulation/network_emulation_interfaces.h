@@ -198,6 +198,17 @@ class EmulatedNetworkStats {
   IncomingStatsPerSource() const = 0;
 };
 
+class EmulatedNetworkNodeStats {
+ public:
+  virtual ~EmulatedNetworkNodeStats() = default;
+
+  // Returns counter of how much time in microseconds each packet spent in the
+  // emulated network node for which stats were collected.
+  virtual const SamplesStatsCounter& PacketTransportTimeUs() const = 0;
+
+  virtual const SamplesStatsCounter& SizeToPacketTransportTime() const = 0;
+};
+
 // EmulatedEndpoint is an abstraction for network interface on device. Instances
 // of this are created by NetworkEmulationManager::CreateEndpoint and
 // thread safe.
