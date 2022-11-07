@@ -16,6 +16,52 @@
       "message": "Scratching an itch while listening to presos.",
       "revId": "32bfd28942ef063aea5bcd42b84e39ab0e05655d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ee766db_5bfae4cb",
+        "filename": "rtc_base/stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-07T12:31:46Z",
+      "side": 1,
+      "message": "if you want to keep the output parameters, make them references to stress they can\u0027t be null.\n\nhttps://google.github.io/styleguide/cppguide.html#Inputs_and_Outputs\n\n“non-optional output and input/output parameters should usually be references (which cannot be null)”",
+      "range": {
+        "startLine": 76,
+        "startChar": 28,
+        "endLine": 77,
+        "endChar": 38
+      },
+      "revId": "32bfd28942ef063aea5bcd42b84e39ab0e05655d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7c404f0_e1ccd083",
+        "filename": "rtc_base/stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-07T12:31:46Z",
+      "side": 1,
+      "message": "while this is an improvement, it might be beneficial to improve it further by removing output parameters, and instead use them as return value.\ne. g.\n\nstruct SrError { int error; };\nstruct SrSuccess { int processed_bytes; };\nstruct SrBlock {};\nstruct SrEndOfStream {};\nusing ???Result \u003d absl::variant\u003cSrError, SrSuccess, SrBlock, SrEndOfStream\u003e;\n\nvirtual ???Result Read(rtc::ArrayView\u003cuint8_t\u003e buffer);\nvirtual ???Result Write(rtc::ArrayView\u003cconst uint8_t\u003e buffer);",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 0
+      },
+      "revId": "32bfd28942ef063aea5bcd42b84e39ab0e05655d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
