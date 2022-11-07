@@ -416,6 +416,29 @@ MergeInfoAboutOutboundRtpSubstreams(
   return rtp_substreams;
 }
 
+bool IsActiveFromEncodings(
+    absl::optional<uint32_t> ssrc,
+    const std::vector<webrtc::RtpEncodingParameters>& encodings) {
+  if (ssrc.has_value()) {
+    // Report the `active` value of a specific ssrc, or false if an encoding
+    // with this ssrc does not exist.
+    auto encoding_it = std::find_if(
+        encodings.begin(), encodings.end(),
+        [ssrc = ssrc.value()](const webrtc::RtpEncodingParameters& encoding) {
+          return encoding.ssrc.has_value() && encoding.ssrc.value() == ssrc;
+        });
+    return encoding_it != encodings.end() ? encoding_it->active : false;
+  }
+  // If `ssrc` is not specified then any encoding being active counts as active,
+  // as long as it has an ssrc.
+  for (const auto& encoding : encodings) {
+    if (encoding.ssrc.has_value() && encoding.active) {
+      return true;
+    }
+  }
+  return false;
+}
+
 }  // namespace
 
 // This constant is really an on/off, lower-level configurable NACK history
@@ -2628,19 +2651,17 @@ WebRtcVideoChannel::WebRtcVideoSendStream::GetPerLayerVideoSenderInfos(
     common_info.power_efficient_encoder = stats.power_efficient_encoder;
 
     // If we don't have any substreams, get the remaining metrics from `stats`.
-    // Otherwise, these values are obtained from `sub_stream` below.
+    // Otherwise, these values are obtained from `sub_stream` below. This can
+    // happen before we have negotiated or connected.
     if (stats.substreams.empty()) {
+      // When we're not sure which individual RTP streams exists yet, a single
+      // outbound-rtp is created representing any and all layers.
       for (uint32_t ssrc : parameters_.config.rtp.ssrcs) {
         common_info.add_ssrc(ssrc);
-        auto encoding_it = std::find_if(
-            rtp_parameters_.encodings.begin(), rtp_parameters_.encodings.end(),
-            [&ssrc](const webrtc::RtpEncodingParameters& parameters) {
-              return parameters.ssrc && parameters.ssrc == ssrc;
-            });
-        if (encoding_it != rtp_parameters_.encodings.end()) {
-          common_info.active = encoding_it->active;
-        }
       }
+      // If any SSRC is active, we're active.
+      common_info.active =
+          IsActiveFromEncodings(absl::nullopt, rtp_parameters_.encodings);
       common_info.framerate_sent = stats.encode_frame_rate;
       common_info.frames_encoded = stats.frames_encoded;
       common_info.total_encode_time_ms = stats.total_encode_time_ms;
@@ -2655,17 +2676,11 @@ WebRtcVideoChannel::WebRtcVideoSendStream::GetPerLayerVideoSenderInfos(
       MergeInfoAboutOutboundRtpSubstreams(stats.substreams);
   for (const auto& pair : outbound_rtp_substreams) {
     auto info = common_info;
-    info.add_ssrc(pair.first);
-    info.rid = parameters_.config.rtp.GetRidForSsrc(pair.first);
-    // Search the associated encoding by SSRC.
-    auto encoding_it = std::find_if(
-        rtp_parameters_.encodings.begin(), rtp_parameters_.encodings.end(),
-        [&pair](const webrtc::RtpEncodingParameters& parameters) {
-          return parameters.ssrc && pair.first == *parameters.ssrc;
-        });
-    if (encoding_it != rtp_parameters_.encodings.end()) {
-      info.active = encoding_it->active;
-    }
+    uint32_t ssrc = pair.first;
+    info.add_ssrc(ssrc);
+    info.rid = parameters_.config.rtp.GetRidForSsrc(ssrc);
+    // TODO/(hbos): Handle SVC case also.
+    info.active = IsActiveFromEncodings(ssrc, rtp_parameters_.encodings);
     auto stream_stats = pair.second;
     RTC_DCHECK_EQ(stream_stats.type,
                   webrtc::VideoSendStream::StreamStats::StreamType::kMedia);
