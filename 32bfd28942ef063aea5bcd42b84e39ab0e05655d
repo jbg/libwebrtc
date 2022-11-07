@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b47b4f22_b6b61305",
+        "filename": "rtc_base/stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-07T13:06:24Z",
+      "side": 1,
+      "message": "Done.\n\nInterestingly, the three places I had patched to use the new form were all using null pointers (and naming them \"0\" rather than \"nullptr\" or \"NULL\"). I don\u0027t see a reason to continue to support that form.",
+      "parentUuid": "6ee766db_5bfae4cb",
+      "range": {
+        "startLine": 76,
+        "startChar": 28,
+        "endLine": 77,
+        "endChar": 38
+      },
+      "revId": "32bfd28942ef063aea5bcd42b84e39ab0e05655d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c7c404f0_e1ccd083",
         "filename": "rtc_base/stream.h",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-07T12:31:46Z",
       "side": 1,
       "message": "while this is an improvement, it might be beneficial to improve it further by removing output parameters, and instead use them as return value.\ne. g.\n\nstruct SrError { int error; };\nstruct SrSuccess { int processed_bytes; };\nstruct SrBlock {};\nstruct SrEndOfStream {};\nusing ???Result \u003d absl::variant\u003cSrError, SrSuccess, SrBlock, SrEndOfStream\u003e;\n\nvirtual ???Result Read(rtc::ArrayView\u003cuint8_t\u003e buffer);\nvirtual ???Result Write(rtc::ArrayView\u003cconst uint8_t\u003e buffer);",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 0
+      },
+      "revId": "32bfd28942ef063aea5bcd42b84e39ab0e05655d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3dae49_7ec6b3d8",
+        "filename": "rtc_base/stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-07T13:06:24Z",
+      "side": 1,
+      "message": "I don\u0027t want to do too many changes in one go. These functions return a StreamResult which is an enum; we could change it to a class object containing a StreamResult, a size_t for the read argument, and the int error status.\nCould also be an overload, since the number of arguments is different (1 vs 3).\n\nBut changing the signature in this way would require rewriting the logic on all call sites, not just the rather brief patching required for the buffer.\n\nI think I\u0027ll leave it alone for now.",
+      "parentUuid": "c7c404f0_e1ccd083",
       "range": {
         "startLine": 75,
         "startChar": 0,
