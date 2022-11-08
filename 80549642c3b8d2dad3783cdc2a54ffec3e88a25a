@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c079e85_638d5cfd",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-08T07:58:40Z",
+      "side": 1,
+      "message": "can this become a struct?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 8
+      },
+      "revId": "80549642c3b8d2dad3783cdc2a54ffec3e88a25a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

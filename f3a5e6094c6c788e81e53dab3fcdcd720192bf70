@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad9002fc_c34d7e54",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-08T07:58:40Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "f3a5e6094c6c788e81e53dab3fcdcd720192bf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f69cacb_f2b476ad",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-08T07:58:40Z",
+      "side": 1,
+      "message": "I wonder if these should be private and force users to call the public API of this class.",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 54
+      },
+      "revId": "f3a5e6094c6c788e81e53dab3fcdcd720192bf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc6552bf_af66533b",
+        "filename": "test/network/network_emulation.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-08T07:58:40Z",
+      "side": 1,
+      "message": "RTC_NO_UNIQUE_ADDRESS SequenceChecker sequence_checker_;",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 36
+      },
+      "revId": "f3a5e6094c6c788e81e53dab3fcdcd720192bf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d92ada96_95e6e078",
+        "filename": "test/network/network_emulation.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-08T07:58:40Z",
+      "side": 1,
+      "message": "RTC_NO_UNIQUE_ADDRESS SequenceChecker sequence_checker_;",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 36
+      },
+      "revId": "f3a5e6094c6c788e81e53dab3fcdcd720192bf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
