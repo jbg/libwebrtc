@@ -129,6 +129,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51ac52ed_df0d595c",
+        "filename": "rtc_base/async_udp_socket.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-11-08T12:40:03Z",
+      "side": 1,
+      "message": "Understood, so things are fine as long as sent packet times are not compared to receive packet times - or at least if they are, only the delta between two pairs are considered.",
+      "parentUuid": "9e2879f4_b3a00875",
+      "range": {
+        "startLine": 136,
+        "startChar": 9,
+        "endLine": 136,
+        "endChar": 28
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5cbd2a3_30125bd6",
