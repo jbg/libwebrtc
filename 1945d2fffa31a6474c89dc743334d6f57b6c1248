@@ -176,6 +176,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "109a91e4_03c5804f",
+        "filename": "rtc_base/async_udp_socket.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-11-08T12:38:56Z",
+      "side": 1,
+      "message": "Right! All good then.",
+      "parentUuid": "76f37666_4f93a974",
+      "range": {
+        "startLine": 138,
+        "startChar": 10,
+        "endLine": 138,
+        "endChar": 41
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3855217a_d1e37aed",
@@ -254,6 +278,24 @@
       "side": 1,
       "message": "That would be a ptr to a ptr.",
       "parentUuid": "671a386e_ab95ff0c",
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e47c83_a4e315d5",
+        "filename": "rtc_base/async_udp_socket.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-11-08T12:38:56Z",
+      "side": 1,
+      "message": "But I think you need delete[] to be used instead of delete, which is what std::unique_ptr\u003cT[]\u003e does. \n\nAlternatively, couldn\u0027t this be defined in the class directly, since size is static and known at compile time?\n\n  char buf_[BUF_SIZE];",
+      "parentUuid": "d5e4da7d_e0153e3c",
       "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
