@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b9b1e10d_d8d1c08f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-08T11:51:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7d66e18_b59c1639",
+      "range": {
+        "startLine": 9,
+        "startChar": 18,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9e1f5fe6_14e479f6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
@@ -81,6 +105,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e2879f4_b3a00875",
+        "filename": "rtc_base/async_udp_socket.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-08T11:51:04Z",
+      "side": 1,
+      "message": "I am not sure, but I would think that the actual clock is the same, they just have different epoch. \nFor BWE, we are interested in if receive times increase/decrease - not the actual value. \nSo this only matters when we switch connections between UDP - that can read receive time from the socket - and TCP, that can not. Normally - if we switch between UDP and TCP, its should be because of a bad connection on UDP and it will likely be disruptive anyway, so I think we can live with a larger receive time stamp jump (but not  different epoch large...)",
+      "parentUuid": "f4c6be65_7976a2c9",
+      "range": {
+        "startLine": 136,
+        "startChar": 9,
+        "endLine": 136,
+        "endChar": 28
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5cbd2a3_30125bd6",
@@ -94,6 +142,30 @@
       "writtenOn": "2022-10-28T13:19:07Z",
       "side": 1,
       "message": "nit: Cache this in a field to avoid having to check the field trial string repeatedly.",
+      "range": {
+        "startLine": 138,
+        "startChar": 10,
+        "endLine": 138,
+        "endChar": 41
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76f37666_4f93a974",
+        "filename": "rtc_base/async_udp_socket.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-08T11:51:04Z",
+      "side": 1,
+      "message": "It is only checked once when socket_time_offset_ is nullopt.",
+      "parentUuid": "e5cbd2a3_30125bd6",
       "range": {
         "startLine": 138,
         "startChar": 10,
@@ -127,6 +199,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eafe2ab4_7394406a",
+        "filename": "rtc_base/async_udp_socket.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-08T11:51:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3855217a_d1e37aed",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 25
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "671a386e_ab95ff0c",
@@ -146,6 +242,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5e4da7d_e0153e3c",
+        "filename": "rtc_base/async_udp_socket.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-08T11:51:04Z",
+      "side": 1,
+      "message": "That would be a ptr to a ptr.",
+      "parentUuid": "671a386e_ab95ff0c",
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2333ea9c_589e1e61",
         "filename": "rtc_base/socket_unittest.cc",
         "patchSetId": 7
@@ -157,6 +271,30 @@
       "writtenOn": "2022-10-28T13:19:07Z",
       "side": 1,
       "message": "sp: Epoch",
+      "range": {
+        "startLine": 1117,
+        "startChar": 45,
+        "endLine": 1117,
+        "endChar": 49
+      },
+      "revId": "1945d2fffa31a6474c89dc743334d6f57b6c1248",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e22e184_83a66b57",
+        "filename": "rtc_base/socket_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-08T11:51:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2333ea9c_589e1e61",
       "range": {
         "startLine": 1117,
         "startChar": 45,
