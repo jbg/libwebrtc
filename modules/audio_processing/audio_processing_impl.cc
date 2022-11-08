@@ -661,6 +661,10 @@ void AudioProcessingImpl::HandleCaptureOutputUsedSetting(
     submodules_.noise_suppressor->SetCaptureOutputUsage(
         capture_.capture_output_used);
   }
+  if (submodules_.gain_controller2) {
+    submodules_.gain_controller2->SetCaptureOutputUsed(
+        capture_.capture_output_used);
+  }
 }
 
 void AudioProcessingImpl::SetRuntimeSetting(RuntimeSetting setting) {
@@ -836,7 +840,9 @@ void AudioProcessingImpl::HandleCaptureRuntimeSettings() {
         // TODO(bugs.chromium.org/9138): Log setting handling by Aec Dump.
         break;
       case RuntimeSetting::Type::kCaptureCompressionGain: {
-        if (!submodules_.agc_manager) {
+        if (!submodules_.agc_manager &&
+            !(submodules_.gain_controller2 &&
+              config_.gain_controller2.input_volume_controller.enabled)) {
           float value;
           setting.GetFloat(&value);
           int int_value = static_cast<int>(value + .5f);
@@ -941,7 +947,10 @@ void AudioProcessingImpl::QueueBandedRenderAudio(AudioBuffer* audio) {
     }
   }
 
-  if (!submodules_.agc_manager && submodules_.gain_control) {
+  if (!submodules_.agc_manager &&
+      !(submodules_.gain_controller2 &&
+        config_.gain_controller2.input_volume_controller.enabled) &&
+      submodules_.gain_control) {
     GainControlImpl::PackRenderAudioBuffer(*audio, &agc_render_queue_buffer_);
     // Insert the samples into the queue.
     if (!agc_render_signal_queue_->Insert(&agc_render_queue_buffer_)) {
@@ -1165,8 +1174,18 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
     submodules_.echo_controller->AnalyzeCapture(capture_buffer);
   }
 
-  if (submodules_.agc_manager) {
+  // Prioritize AGC2 input volume controller over AGC1 analog controller
+  // if both are enabled.
+  if (submodules_.agc_manager &&
+      !(submodules_.gain_controller2 &&
+        config_.gain_controller2.input_volume_controller.enabled)) {
     submodules_.agc_manager->AnalyzePreProcess(*capture_buffer);
+  }
+
+  if (submodules_.gain_controller2 &&
+      capture_.applied_input_volume.has_value()) {
+    submodules_.gain_controller2->Analyze(*capture_.applied_input_volume,
+                                          *capture_buffer);
   }
 
   if (submodule_states_.CaptureMultiBandSubModulesActive() &&
@@ -1238,7 +1257,11 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
     }
   }
 
-  if (submodules_.agc_manager) {
+  // Prioritize AGC2 input volume controller over AGC1 analog controller
+  // if both are enabled.
+  if (submodules_.agc_manager &&
+      !(submodules_.gain_controller2 &&
+        config_.gain_controller2.input_volume_controller.enabled)) {
     submodules_.agc_manager->Process(*capture_buffer);
 
     absl::optional<int> new_digital_gain =
@@ -1290,7 +1313,9 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
       float transient_suppressor_voice_probability = 1.0f;
       switch (transient_suppressor_vad_mode_) {
         case TransientSuppressor::VadMode::kDefault:
-          if (submodules_.agc_manager) {
+          if (submodules_.agc_manager &&
+              !(submodules_.gain_controller2 &&
+                config_.gain_controller2.input_volume_controller.enabled)) {
             transient_suppressor_voice_probability =
                 submodules_.agc_manager->voice_probability();
           }
@@ -1630,6 +1655,11 @@ void AudioProcessingImpl::set_stream_analog_level_locked(int level) {
   // `ProcessStream()`.
   capture_.recommended_input_volume = absl::nullopt;
 
+  if (submodules_.gain_controller2 &&
+      config_.gain_controller2.input_volume_controller.enabled) {
+    return;
+  }
+
   if (submodules_.agc_manager) {
     submodules_.agc_manager->set_stream_analog_level(level);
     return;
@@ -1662,6 +1692,16 @@ void AudioProcessingImpl::UpdateRecommendedInputVolumeLocked() {
     // When `set_stream_analog_level()` is not called, no input level can be
     // recommended.
     capture_.recommended_input_volume = absl::nullopt;
+    return;
+  }
+
+  if (submodules_.gain_controller2 &&
+      config_.gain_controller2.input_volume_controller.enabled) {
+    const absl::optional<int> recommended_volume =
+        submodules_.gain_controller2->GetRecommendedInputVolume();
+    capture_.recommended_input_volume = recommended_volume.has_value()
+                                            ? *recommended_volume
+                                            : capture_.applied_input_volume;
     return;
   }
 
@@ -1948,6 +1988,8 @@ void AudioProcessingImpl::InitializeGainController2(bool config_has_changed) {
     submodules_.gain_controller2 = std::make_unique<GainController2>(
         config_.gain_controller2, proc_fullband_sample_rate_hz(),
         num_input_channels(), use_internal_vad);
+    submodules_.gain_controller2->SetCaptureOutputUsed(
+        capture_.capture_output_used);
   }
 }
 
