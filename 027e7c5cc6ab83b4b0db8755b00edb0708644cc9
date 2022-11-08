@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1805dc96_989f6d13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-08T10:00:40Z",
+      "side": 1,
+      "message": "Thank you for the great comments, I\u0027ve updated the code. PTAL!",
+      "revId": "027e7c5cc6ab83b4b0db8755b00edb0708644cc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
