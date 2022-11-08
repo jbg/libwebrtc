@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96e82939_fe1b54d0",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-11-08T21:58:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad9002fc_c34d7e54",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "f3a5e6094c6c788e81e53dab3fcdcd720192bf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f69cacb_f2b476ad",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-08T07:58:40Z",
       "side": 1,
       "message": "I wonder if these should be private and force users to call the public API of this class.",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 54
+      },
+      "revId": "f3a5e6094c6c788e81e53dab3fcdcd720192bf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dc12df4_7373370a",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-11-08T21:58:52Z",
+      "side": 1,
+      "message": "I don\u0027t know, both probably will work, but the thinking that I had in mind is that methods are here only for simplification of access, but the data members are the actual stats that users are expected to use. WDYT?",
+      "parentUuid": "7f69cacb_f2b476ad",
       "range": {
         "startLine": 215,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afbba1bd_d8365948",
+        "filename": "test/network/network_emulation.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-11-08T21:58:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc6552bf_af66533b",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 36
+      },
+      "revId": "f3a5e6094c6c788e81e53dab3fcdcd720192bf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d92ada96_95e6e078",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-11-08T07:58:40Z",
       "side": 1,
       "message": "RTC_NO_UNIQUE_ADDRESS SequenceChecker sequence_checker_;",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 36
+      },
+      "revId": "f3a5e6094c6c788e81e53dab3fcdcd720192bf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4fbc30f_4cc13805",
+        "filename": "test/network/network_emulation.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-11-08T21:58:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d92ada96_95e6e078",
       "range": {
         "startLine": 80,
         "startChar": 2,
