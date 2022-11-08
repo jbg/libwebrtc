@@ -49,6 +49,30 @@ namespace {
 
 const int64_t kGetStatsTimeoutMs = 10000;
 
+constexpr std::array<std::pair<RTCStatsType, int>, 16> kKnownStatsMemberCounts{
+    std::make_pair(RTCStatsType::kCodec, 6),
+    std::make_pair(RTCStatsType::kInboundRtp, 62),
+    std::make_pair(RTCStatsType::kOutboundRtp, 36),
+    std::make_pair(RTCStatsType::kRemoteInboundRtp, 13),
+    std::make_pair(RTCStatsType::kRemoteOutboundRtp, 14),
+    std::make_pair(RTCStatsType::kAudioSource, 7),
+    std::make_pair(RTCStatsType::kVideoSource, 6),
+    // TODO(bugs.webrtc.org/xxxx): Not implemented
+    // std::make_pair(RTCStatsType::kMediaPlayout, 0),
+    std::make_pair(RTCStatsType::kPeerConnection, 2),
+    std::make_pair(RTCStatsType::kDataChannel, 8),
+    // TODO(https://crbug.com/webrtc/14419): "stream" is deprecated, delete when
+    // upstream no longer depends on it.
+    std::make_pair(RTCStatsType::kDEPRECATED_Stream, 2),
+    // TODO(https://crbug.com/webrtc/14175): "track" is deprecated, delete when
+    // upstream no longer depends on it.
+    std::make_pair(RTCStatsType::kDEPRECATED_Track, 26),
+    std::make_pair(RTCStatsType::kTransport, 17),
+    std::make_pair(RTCStatsType::kCandidatePair, 24),
+    std::make_pair(RTCStatsType::kLocalCandidate, 18),
+    std::make_pair(RTCStatsType::kRemoteCandidate, 18),
+    std::make_pair(RTCStatsType::kCertificate, 4)};
+
 const unsigned char* GetCategoryEnabledHandler(const char* name) {
   if (strcmp("webrtc_stats", name) != 0) {
     return reinterpret_cast<const unsigned char*>("");
@@ -1297,6 +1321,94 @@ TEST_F(RTCStatsIntegrationTest, GetStatsContainsNoDuplicateMembers) {
           << member->name() << " is a duplicate!";
       member_names.insert(member->name());
     }
+  }
+}
+
+TEST_F(RTCStatsIntegrationTest, GetStatsContainsExpectedMemeberCount) {
+  StartCall();
+
+  class RtcpSrObserver : public rtc::VideoSinkInterface<VideoFrame> {
+   public:
+    RtcpSrObserver() : ntp_time_set_(false) {}
+
+    ~RtcpSrObserver() override = default;
+
+    bool ntp_time_set() const {
+      MutexLock lock(&mutex_);
+      return ntp_time_set_;
+    }
+
+    void OnFrame(const VideoFrame& video_frame) {
+      MutexLock lock(&mutex_);
+      if (video_frame.ntp_time_ms() <= 0) {
+        // Haven't got enough RTCP SR in order to calculate the capture ntp
+        // time.
+        return;
+      }
+      ntp_time_set_ = true;
+    }
+
+   private:
+    mutable Mutex mutex_;
+    bool ntp_time_set_;
+  };
+  std::unique_ptr<RtcpSrObserver> video_frame_observer =
+      std::make_unique<RtcpSrObserver>();
+  VideoTrackInterface* callee_video_track = nullptr;
+
+  for (auto callee_transceiver : callee_->pc()->GetTransceivers()) {
+    if (callee_transceiver->media_type() == cricket::MEDIA_TYPE_VIDEO &&
+        (callee_transceiver->direction() ==
+             RtpTransceiverDirection::kSendRecv ||
+         callee_transceiver->direction() ==
+             RtpTransceiverDirection::kRecvOnly)) {
+      auto callee_track = callee_transceiver->receiver()->track();
+      callee_video_track =
+          static_cast<VideoTrackInterface*>(callee_track.get());
+      break;
+    }
+  }
+
+  ASSERT_NE(nullptr, callee_video_track);
+  callee_video_track->AddOrUpdateSink(video_frame_observer.get(),
+                                      rtc::VideoSinkWants());
+
+  EXPECT_TRUE_WAIT(video_frame_observer->ntp_time_set(), kGetStatsTimeoutMs);
+  callee_video_track->RemoveSink(video_frame_observer.get());
+
+  rtc::scoped_refptr<const RTCStatsReport> report = GetStatsFromCallee();
+
+  std::set<RTCStatsType> stats_type_names;
+  for (const RTCStats& stats : *report) {
+    int member_count = static_cast<int>(stats.Members().size());
+    auto known_stats_member_iter = absl::c_find_if(
+        kKnownStatsMemberCounts,
+        [&stats](const std::pair<RTCStatsType, int>& stat_member_count) {
+          if (stat_member_count.first == stats.StatsType()) {
+            return true;
+          }
+          return false;
+        });
+    EXPECT_NE(kKnownStatsMemberCounts.end(), known_stats_member_iter)
+        << RTCStats::StatsTypeToString(stats.StatsType())
+        << " should be exist in kKnownStatsMemberCounts";
+
+    if (known_stats_member_iter != kKnownStatsMemberCounts.end()) {
+      int expected_member_ount = known_stats_member_iter->second;
+      EXPECT_EQ(expected_member_ount, member_count)
+          << RTCStats::StatsTypeToString(stats.StatsType())
+          << " member count wrong";
+    }
+    stats_type_names.insert(stats.StatsType());
+  }
+
+  for (const std::pair<RTCStatsType, int>& known_stats_name_count :
+       kKnownStatsMemberCounts) {
+    auto seen_stats_name_iter =
+        stats_type_names.find(known_stats_name_count.first);
+    EXPECT_NE(stats_type_names.end(), seen_stats_name_iter)
+        << RTCStats::StatsTypeToString(known_stats_name_count.first)
+        << " should be exist in kKnownStatsMemberCounts";
   }
 }
 #endif  // WEBRTC_HAVE_SCTP
