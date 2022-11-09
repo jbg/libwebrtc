@@ -33,6 +33,40 @@
       "message": "Tommi- please?",
       "revId": "9065011442f44728d0300495049c0ef19da3ae0d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b673f967_f3886a30",
+        "filename": "rtc_base/async_udp_socket.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-11-09T09:27:33Z",
+      "side": 1,
+      "message": "we could consider using optional\u003c\u003e for the timestamp argument. oh and maybe also Timestamp as the type? 😊",
+      "revId": "9065011442f44728d0300495049c0ef19da3ae0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a14e06d_488df0ab",
+        "filename": "rtc_base/async_udp_socket.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-11-09T09:27:33Z",
+      "side": 1,
+      "message": "kBufferSize?",
+      "revId": "9065011442f44728d0300495049c0ef19da3ae0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
