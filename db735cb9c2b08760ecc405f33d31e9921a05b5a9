@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c6b8e9d_05ca475d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-11-09T13:47:10Z",
+      "side": 1,
+      "message": "I see it passed the test, however, would it be possible to print the output from the test? Right now it only prints:\n```\n[0/1] Running tests...\n[1/1] PipeWireStreamTest.TestPipeWire (122 ms)\n```",
+      "revId": "db735cb9c2b08760ecc405f33d31e9921a05b5a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
