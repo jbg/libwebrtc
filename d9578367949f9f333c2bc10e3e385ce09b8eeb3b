@@ -52,6 +52,24 @@
       "parentUuid": "9258d1b3_16782a75",
       "revId": "d9578367949f9f333c2bc10e3e385ce09b8eeb3b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1707a237_5b65e4f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-11-09T17:02:34Z",
+      "side": 1,
+      "message": "Maybe the command could be logged when running the test ?\nNot sure where to add a comment / README file that will be seen by users.",
+      "parentUuid": "cbfcd8f9_4d1d96de",
+      "revId": "d9578367949f9f333c2bc10e3e385ce09b8eeb3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
