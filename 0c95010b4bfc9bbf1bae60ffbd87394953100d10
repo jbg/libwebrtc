@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90a83978_691207a5",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-09T08:03:44Z",
+      "side": 1,
+      "message": "Remove `public` since it is the default.\n\n(also below)",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 8
+      },
+      "revId": "0c95010b4bfc9bbf1bae60ffbd87394953100d10",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

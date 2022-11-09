@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "949cea9a_9a12e9b5",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-09T08:03:44Z",
+      "side": 1,
+      "message": "OK, I wonder if we can just let users call the relevant sub-fields of the data members (or methods) and just remove these passthrough methods.\n\nThis is optional, maybe in a separate CL.",
+      "parentUuid": "0dc12df4_7373370a",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 54
+      },
+      "revId": "f3a5e6094c6c788e81e53dab3fcdcd720192bf70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc6552bf_af66533b",
         "filename": "test/network/network_emulation.h",
         "patchSetId": 3
