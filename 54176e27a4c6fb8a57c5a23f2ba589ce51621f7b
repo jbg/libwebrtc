@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ddecc6f9_46a10b5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-09T19:20:53Z",
+      "side": 1,
+      "message": "Hi! Thanks for this CL! It\u0027s great that it\u0027s so explicit about the AGC order of precedence.\n\n1. Is there some more precise issue to use than \"Automatic Gain Control (AGC) clean-up and refactoring\"? Or is all the AGC2 development and release related work already tracked in that one?\n\n2. Testing - is this CL (or some followup?) manually tested? Could you mention that in a `Tested:` tag in the CL description?",
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f751410_52cd733b",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-09T19:20:53Z",
+      "side": 1,
+      "message": "There is a hefty amount of logic to compute variants of: \"is AgcManagerDirect in control\", \"is Agc1 in control\" and \"is InputVolumeController in control\", and it requires inspection at each site to understand what is done. I\u0027m sure it is more straightforward to the rest of you (Hanna, Alessio, Per) who all have dabbled with implementing one of our gain controllers, but it\u0027s easy for me to lose track of what the logic is saying at each point.\n\nIs it possible to somehow centralize the logic? To make it easier to read and more obviously consistent across audio_processing_impl. Is it an improvement, or is the logic too varied / does it lead to too verbose code?\n\nSomething like:\n```\nenum class ActiveAnalogAgcEnum {\n  kLegacyAgc1,\n  kLegacyAgcMangerDirect,\n  kInputVolumeController,\n  kNone\n};\nActiveAnalogAgcEnum ActiveAnalogAgc(submodules_, config_);\n```\n\n...and then consistently defer to this function:\n```\n  ... in ProcessCaptureStreamLocked:\n  if (ActiveAnalogAgc(submodules_, config_)\n          \u003d\u003d ActiveAnalogAgcEnum::kLegacyAgc1) {\n    GainControlImpl::PackRenderAudioBuffer(*audio, \u0026agc_render_queue_buffer_);\n    ...\n  }\n  ...\n  if (ActiveAnalogAgc(submodules_, config_)\n          \u003d\u003d ActiveAnalogAgcEnum::kLegacyAgcManagerDirect) {\n    submodules_.agc_manager-\u003eAnalyzePreProcess(*capture_buffer);\n  }\n  ... etc\n  ... in set_stream_analog_level:\n  switch (ActiveAnalogAgc(submodules_, config_)) {\n    case ActiveAnalogAgcEnum::kInputVolumeController:\n      return;\n    case ActiveAnalogAgcEnum::kLegacyAgcManagerDirect:\n      submodules_.agc_manager-\u003eset_stream_analog_level(level);\n      return;\n    case ActiveAnalogAgcEnum::kLegacyAgcManagerDirect:\n      submodules_.agc_manager-\u003eset_stream_analog_level(level);\n      return;\n    case kNone:\n      int error \u003d submodules_.gain_control-\u003eset_stream_analog_level(level);\n      RTC_DCHECK_EQ(kNoError, error);\n      return;\n  }\n  RTC_NOTREACHED();\n```",
+      "range": {
+        "startLine": 950,
+        "startChar": 6,
+        "endLine": 953,
+        "endChar": 30
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78c99558_df81d2a6",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
