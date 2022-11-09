@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b9c1856_9b0206e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2022-11-09T12:47:03Z",
+      "side": 1,
+      "message": "It is ready for review. Xavier, could you please take a look?",
+      "revId": "841781efc2ed89867e4cc593e67d8ea0368c3e69",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
