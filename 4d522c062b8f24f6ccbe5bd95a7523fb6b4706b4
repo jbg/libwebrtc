@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89fe6fda_b1ab3831",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2022-11-09T14:53:47Z",
+      "side": 1,
+      "message": "Updated create{Encode|Decoder} based on Xavier suggestions. Instead of querying supported codecs and checking for presence of the requested codec among them, the factory now tries to create native codec and returns null on failure.",
+      "revId": "4d522c062b8f24f6ccbe5bd95a7523fb6b4706b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
