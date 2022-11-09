@@ -34,6 +34,24 @@
       "parentUuid": "cab40d76_30c349f2",
       "revId": "66e716590bec4b85f2583c822b9fb8a5c0c5f057",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1176655c_af77e888",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-11-09T23:24:42Z",
+      "side": 1,
+      "message": "If so, in case someone is trying to implement webrtc:14618, how about having them add an implementation similar to this to their Java tests?\n\nMy guess is that the Java stats class would not easily sync with the C++ implementation without safety measures.",
+      "parentUuid": "8e434503_7fd2808b",
+      "revId": "66e716590bec4b85f2583c822b9fb8a5c0c5f057",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
