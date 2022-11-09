@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d682e0c5_5d0d0555",
+        "filename": "api/rtp_sender_interface.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-11-09T22:44:19Z",
+      "side": 1,
+      "message": "I added a helper function instead, which should help simplifying the code. What do you think of it?\nSince at the higher level, the SignalingThreadCallback is used, it\u0027ll CHECK if it\u0027s destroyed without being called, which should help finding those rare cases (I\u0027ve hopefully been thoroughly through the code enough times).",
+      "parentUuid": "55d6e275_05638072",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 68
+      },
+      "revId": "956cb3e2aa80a50165f2f6f7f94aee0444269cd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bed5b21_f1bd3b59",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-11-03T10:07:04Z",
       "side": 1,
       "message": "nit: use {} with if/else",
+      "revId": "956cb3e2aa80a50165f2f6f7f94aee0444269cd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6274ab65_cd4167e5",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-11-09T22:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bed5b21_f1bd3b59",
       "revId": "956cb3e2aa80a50165f2f6f7f94aee0444269cd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
