@@ -26,6 +26,18 @@ class MockRtpSender : public RtpSenderInterface {
     return rtc::make_ref_counted<MockRtpSender>();
   }
 
+  MockRtpSender() {
+    ON_CALL(*this, GetFrameEncryptor).WillByDefault([this] {
+      return frame_encryptor_;
+    });
+    ON_CALL(*this, SetFrameEncryptor)
+        .WillByDefault(
+            [this](rtc::scoped_refptr<webrtc::FrameEncryptorInterface>
+                       frame_encryptor) {
+              frame_encryptor_ = frame_encryptor;
+            });
+  }
+
   MOCK_METHOD(bool, SetTrack, (MediaStreamTrackInterface*), (override));
   MOCK_METHOD(rtc::scoped_refptr<MediaStreamTrackInterface>,
               track,
@@ -66,6 +78,10 @@ class MockRtpSender : public RtpSenderInterface {
               SetEncoderSelector,
               (std::unique_ptr<VideoEncoderFactory::EncoderSelectorInterface>),
               (override));
+
+ private:
+  rtc::scoped_refptr<webrtc::FrameEncryptorInterface> frame_encryptor_ =
+      nullptr;
 };
 
 static_assert(!std::is_abstract_v<rtc::RefCountedObject<MockRtpSender>>, "");
