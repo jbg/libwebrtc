@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c99558_df81d2a6",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1701,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-09T10:18:01Z",
+      "side": 1,
+      "message": "This was changed in patchset 2: `GetRecommendedInputVolume()` may return an `absl::nullopt`, assign that to `capture_.recommended_input_volume` without further checks instead of repeating `capture_.applied_input_volume`",
+      "range": {
+        "startLine": 1700,
+        "startChar": 0,
+        "endLine": 1701,
+        "endChar": 66
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
