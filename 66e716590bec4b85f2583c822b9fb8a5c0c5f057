@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab40d76_30c349f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-11-09T10:43:49Z",
+      "side": 1,
+      "message": "Is this test really needed?\n\nThe other integration tests keeps track of which stats members have been \"tested\", so if you add a new metric but you forget to update the existing integration test, it should complain that the test completed without having asserted anything about this new member",
+      "revId": "66e716590bec4b85f2583c822b9fb8a5c0c5f057",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
