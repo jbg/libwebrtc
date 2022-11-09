@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c54b6a48_a777b045",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-09T22:48:20Z",
+      "side": 1,
+      "message": "\"Amount of time\"",
+      "range": {
+        "startLine": 230,
+        "startChar": 5,
+        "endLine": 230,
+        "endChar": 18
+      },
+      "revId": "2f2e4143fd8c2276ebca55647ec098df0dcb40ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a70a01e_171b7910",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-09T22:48:20Z",
+      "side": 1,
+      "message": "Nit: line break after 231?",
+      "revId": "2f2e4143fd8c2276ebca55647ec098df0dcb40ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "594dfdea_649cdd79",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-09T22:48:20Z",
+      "side": 1,
+      "message": "Should we list them (or refer to them)?",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 16
+      },
+      "revId": "2f2e4143fd8c2276ebca55647ec098df0dcb40ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a3b66f_cc94fcf5",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-09T22:48:20Z",
+      "side": 1,
+      "message": "nit: this is unclear. Should this be \"network stats for each node in `nodes`...\"?",
+      "range": {
+        "startLine": 342,
+        "startChar": 12,
+        "endLine": 342,
+        "endChar": 36
+      },
+      "revId": "2f2e4143fd8c2276ebca55647ec098df0dcb40ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
