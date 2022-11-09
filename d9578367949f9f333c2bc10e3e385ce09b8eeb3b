@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94c70ffe_4e406569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2022-11-09T16:11:18Z",
+      "side": 1,
+      "message": "One of the reasons we had the shared_screencast_stream_test.py was to enable local runs that would more closely mimic the CQ. it seems to me with the deletion of this script that we\u0027ve now lost that ability?",
+      "revId": "d9578367949f9f333c2bc10e3e385ce09b8eeb3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
