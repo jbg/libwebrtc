@@ -16,6 +16,24 @@
       "message": "I see it passed the test, however, would it be possible to print the output from the test? Right now it only prints:\n```\n[0/1] Running tests...\n[1/1] PipeWireStreamTest.TestPipeWire (122 ms)\n```",
       "revId": "db735cb9c2b08760ecc405f33d31e9921a05b5a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc9acd8_460d8a9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-11-09T13:51:25Z",
+      "side": 1,
+      "message": "So this is the behavior for all WebRTC tests.\nThe output is printed only in case of errors.\nThe test output for successful tests can be found in \"CAS outputs\" in test_logs/passed-tests.log.\n\nhttps://cas-viewer.appspot.com/projects/chromium-swarm/instances/default_instance/blobs/0e4b91b3dc25d98e449dd9b995c811bb92401bf2cfca4a5e7c2ba90aca01ede4/2651?filename\u003dpassed-tests.log",
+      "parentUuid": "8c6b8e9d_05ca475d",
+      "revId": "db735cb9c2b08760ecc405f33d31e9921a05b5a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
