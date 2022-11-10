@@ -43,6 +43,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e3a1284_5b140259",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-10T06:55:17Z",
+      "side": 1,
+      "message": "Is no `capture_.applied_input_volume` ever an error here? Would it be a useful debugging signal to log a (rate-limited) warning/error?",
+      "range": {
+        "startLine": 1186,
+        "startChar": 6,
+        "endLine": 1186,
+        "endChar": 47
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7740d3b4_0911cc63",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-10T06:55:17Z",
+      "side": 1,
+      "message": "Should the input volume always go to AGC2 when set, as done here?\nOr are we ever in a situation where we use digital AGC2 and analog AGC1, and here have a `submodules_.gain_controller2` for digital AGC but `capture_.applied_input_volume` expected to go to AGC1?",
+      "range": {
+        "startLine": 1184,
+        "startChar": 0,
+        "endLine": 1189,
+        "endChar": 3
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78c99558_df81d2a6",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
