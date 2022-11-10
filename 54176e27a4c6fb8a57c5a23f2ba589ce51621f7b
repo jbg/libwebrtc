@@ -18,6 +18,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14b30c0b_e4473a22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-10T17:39:24Z",
+      "side": 1,
+      "message": "Thanks Sam for the comments!",
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b8b8f19_04183bfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-10T17:39:24Z",
+      "side": 1,
+      "message": "Thanks Sam for the comments!\n\n1. We\u0027ve been using that issue also for some related CLs.\n\n2. Thanks for reminding! I\u0027ll add the comment after finishing all the changes.",
+      "parentUuid": "ddecc6f9_46a10b5e",
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f751410_52cd733b",
@@ -31,6 +66,30 @@
       "writtenOn": "2022-11-09T19:20:53Z",
       "side": 1,
       "message": "There is a hefty amount of logic to compute variants of: \"is AgcManagerDirect in control\", \"is Agc1 in control\" and \"is InputVolumeController in control\", and it requires inspection at each site to understand what is done. I\u0027m sure it is more straightforward to the rest of you (Hanna, Alessio, Per) who all have dabbled with implementing one of our gain controllers, but it\u0027s easy for me to lose track of what the logic is saying at each point.\n\nIs it possible to somehow centralize the logic? To make it easier to read and more obviously consistent across audio_processing_impl. Is it an improvement, or is the logic too varied / does it lead to too verbose code?\n\nSomething like:\n```\nenum class ActiveAnalogAgcEnum {\n  kLegacyAgc1,\n  kLegacyAgcMangerDirect,\n  kInputVolumeController,\n  kNone\n};\nActiveAnalogAgcEnum ActiveAnalogAgc(submodules_, config_);\n```\n\n...and then consistently defer to this function:\n```\n  ... in ProcessCaptureStreamLocked:\n  if (ActiveAnalogAgc(submodules_, config_)\n          \u003d\u003d ActiveAnalogAgcEnum::kLegacyAgc1) {\n    GainControlImpl::PackRenderAudioBuffer(*audio, \u0026agc_render_queue_buffer_);\n    ...\n  }\n  ...\n  if (ActiveAnalogAgc(submodules_, config_)\n          \u003d\u003d ActiveAnalogAgcEnum::kLegacyAgcManagerDirect) {\n    submodules_.agc_manager-\u003eAnalyzePreProcess(*capture_buffer);\n  }\n  ... etc\n  ... in set_stream_analog_level:\n  switch (ActiveAnalogAgc(submodules_, config_)) {\n    case ActiveAnalogAgcEnum::kInputVolumeController:\n      return;\n    case ActiveAnalogAgcEnum::kLegacyAgcManagerDirect:\n      submodules_.agc_manager-\u003eset_stream_analog_level(level);\n      return;\n    case ActiveAnalogAgcEnum::kLegacyAgcManagerDirect:\n      submodules_.agc_manager-\u003eset_stream_analog_level(level);\n      return;\n    case kNone:\n      int error \u003d submodules_.gain_control-\u003eset_stream_analog_level(level);\n      RTC_DCHECK_EQ(kNoError, error);\n      return;\n  }\n  RTC_NOTREACHED();\n```",
+      "range": {
+        "startLine": 950,
+        "startChar": 6,
+        "endLine": 953,
+        "endChar": 30
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "208273ce_349bbf4d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-10T17:39:24Z",
+      "side": 1,
+      "message": "I wrote a draft CL for a centralised logic in: https://webrtc-review.googlesource.com/c/src/+/282981.\n\nSam, Alessio, Per: Could you please take a look at the logic? It\u0027s not a pure refactoring CL (centralising the logic meant including some extra checks in some cases). Also, some parts of the logic won\u0027t be needed after Alessio\u0027s APM refactoring CLs land but some would still be needed. WDYT?",
+      "parentUuid": "8f751410_52cd733b",
       "range": {
         "startLine": 950,
         "startChar": 6,
@@ -89,6 +148,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62f9cc37_1b3fa1dd",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-10T17:39:24Z",
+      "side": 1,
+      "message": "This logic doesn\u0027t depend on whether AGC1 analog is used or not (AGC1 volume is set elsewhere regardless of this call if AGC1 analog is enabled). Internally AGC2 sets the volume if InputVolumeController has been enabled in its constructor.",
+      "parentUuid": "7740d3b4_0911cc63",
+      "range": {
+        "startLine": 1184,
+        "startChar": 0,
+        "endLine": 1189,
+        "endChar": 3
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78c99558_df81d2a6",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -100,6 +183,30 @@
       "writtenOn": "2022-11-09T10:18:01Z",
       "side": 1,
       "message": "This was changed in patchset 2: `GetRecommendedInputVolume()` may return an `absl::nullopt`, assign that to `capture_.recommended_input_volume` without further checks instead of repeating `capture_.applied_input_volume`",
+      "range": {
+        "startLine": 1700,
+        "startChar": 0,
+        "endLine": 1701,
+        "endChar": 66
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67551d17_62c70067",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1701,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-10T17:39:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "78c99558_df81d2a6",
       "range": {
         "startLine": 1700,
         "startChar": 0,
