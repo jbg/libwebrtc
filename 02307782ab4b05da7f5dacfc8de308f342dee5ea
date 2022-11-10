@@ -18,6 +18,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ce6d962_9ca84919",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-11-10T10:51:33Z",
+      "side": 1,
+      "message": "No to adding behaviour to current mocks, please extend the base mocks in your codebase to add it.\nFixes to mocks and add MOCK_METHOD where the interface has a compatibility default implementation are fine and could be merged separately.",
+      "revId": "02307782ab4b05da7f5dacfc8de308f342dee5ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47ffdf21_33f91db4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2022-11-10T10:51:33Z",
+      "side": 1,
+      "message": "Agreed, but it should be a subclass of MockRtpSender, and you can add all the members and EXPECT_CALL you need in the constructor.",
+      "parentUuid": "6d1b6b5f_e5ce5661",
+      "revId": "02307782ab4b05da7f5dacfc8de308f342dee5ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32ba8efd_74275f44",
