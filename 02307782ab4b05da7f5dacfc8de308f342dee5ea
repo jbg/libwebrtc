@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68512d3b_d002033a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-10T10:55:27Z",
+      "side": 1,
+      "message": "Agree with subclassing MockRtpSender. I wrote it wrong in my remark.\n(note: there are mocks marked final. Those markings should probably be rmeoved.)",
+      "parentUuid": "47ffdf21_33f91db4",
+      "revId": "02307782ab4b05da7f5dacfc8de308f342dee5ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32ba8efd_74275f44",
