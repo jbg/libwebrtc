@@ -124,6 +124,24 @@
       "parentUuid": "eb7e7bb0_cb16b5c1",
       "revId": "d9578367949f9f333c2bc10e3e385ce09b8eeb3b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7addbd0e_d6e68c0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-11-10T12:49:40Z",
+      "side": 1,
+      "message": "Not sure you want to use gtest-parallel locally.\ntest_env.py can be omitted as well.\nI think the below command should be enough:\n`python3 ../../tools_webrtc/configure_pipewire.py ./shared_screencast_stream_test`",
+      "parentUuid": "d6362c54_7ef401c0",
+      "revId": "d9578367949f9f333c2bc10e3e385ce09b8eeb3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
