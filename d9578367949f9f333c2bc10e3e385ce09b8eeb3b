@@ -106,6 +106,24 @@
       "parentUuid": "1d1d4973_e18874f7",
       "revId": "d9578367949f9f333c2bc10e3e385ce09b8eeb3b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6362c54_7ef401c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-11-10T12:44:23Z",
+      "side": 1,
+      "message": "So the command looks like this:\n`python3 ../../tools_webrtc/configure_pipewire.py python3 ../../testing/test_env.py ../../third_party/gtest-parallel/gtest_parallel.py --output_dir\u003dtest_logs --dump_json_test_results\u003dtest_logs/output.json ./shared_screencast_stream_test`\n\nShould I just add a README file saying something like \"command to run shared_screencast_stream_test: command\"?",
+      "parentUuid": "eb7e7bb0_cb16b5c1",
+      "revId": "d9578367949f9f333c2bc10e3e385ce09b8eeb3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
