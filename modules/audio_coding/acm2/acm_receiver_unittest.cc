@@ -148,8 +148,7 @@ class AcmReceiverTestOldApi : public AudioPacketizationCallback,
 #define MAYBE_SampleRate SampleRate
 #endif
 TEST_F(AcmReceiverTestOldApi, MAYBE_SampleRate) {
-  const std::map<int, SdpAudioFormat> codecs = {{0, {"ISAC", 16000, 1}},
-                                                {1, {"ISAC", 32000, 1}}};
+  const std::map<int, SdpAudioFormat> codecs = {{0, {"OPUS", 48000, 1}}};
   receiver_->SetCodecs(codecs);
 
   constexpr int kOutSampleRateHz = 8000;  // Different than codec sample rate.
@@ -233,15 +232,6 @@ TEST_F(AcmReceiverTestFaxModeOldApi, MAYBE_VerifyAudioFramePCMU) {
 }
 
 #if defined(WEBRTC_ANDROID)
-#define MAYBE_VerifyAudioFrameISAC DISABLED_VerifyAudioFrameISAC
-#else
-#define MAYBE_VerifyAudioFrameISAC VerifyAudioFrameISAC
-#endif
-TEST_F(AcmReceiverTestFaxModeOldApi, MAYBE_VerifyAudioFrameISAC) {
-  RunVerifyAudioFrame({"ISAC", 16000, 1});
-}
-
-#if defined(WEBRTC_ANDROID)
 #define MAYBE_VerifyAudioFrameOpus DISABLED_VerifyAudioFrameOpus
 #else
 #define MAYBE_VerifyAudioFrameOpus VerifyAudioFrameOpus
@@ -310,12 +300,10 @@ TEST_F(AcmReceiverTestPostDecodeVadPassiveOldApi, MAYBE_PostdecodingVad) {
 #else
 #define MAYBE_LastAudioCodec LastAudioCodec
 #endif
-#if defined(WEBRTC_CODEC_ISAC)
+#if defined(WEBRTC_CODEC_OPUS)
 TEST_F(AcmReceiverTestOldApi, MAYBE_LastAudioCodec) {
-  const std::map<int, SdpAudioFormat> codecs = {{0, {"ISAC", 16000, 1}},
-                                                {1, {"PCMA", 8000, 1}},
-                                                {2, {"ISAC", 32000, 1}},
-                                                {3, {"L16", 32000, 1}}};
+  const std::map<int, SdpAudioFormat> codecs = {
+      {0, {"OPUS", 48000, 2}}, {1, {"PCMA", 8000, 1}}, {2, {"L16", 32000, 1}}};
   const std::map<int, int> cng_payload_types = {
       {8000, 100}, {16000, 101}, {32000, 102}};
   {
