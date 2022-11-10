@@ -65,6 +65,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23528297_20e33a2b",
+        "filename": "api/rtp_sender_interface.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2022-11-10T11:59:33Z",
+      "side": 1,
+      "message": "lgtm, thanks!",
+      "parentUuid": "d682e0c5_5d0d0555",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 68
+      },
+      "revId": "956cb3e2aa80a50165f2f6f7f94aee0444269cd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bed5b21_f1bd3b59",
