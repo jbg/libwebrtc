@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d1b6b5f_e5ce5661",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-10T07:58:50Z",
+      "side": 1,
+      "message": "This starts the mock down the slippery slope of being a fake, by adding behaviors to what\u0027s otherwise a pure mock.\n\nI think this is the wrong way to go - the tests that need these particular behaviors should add it themselves, not impose them on all tests that use the mocks.\n\nIf you really need these behaviors, is there anything stopping you from defining your own MockRtpSenderWithBehavior as a subclass of RtpSender (et al)?",
+      "revId": "02307782ab4b05da7f5dacfc8de308f342dee5ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32ba8efd_74275f44",
+        "filename": "api/test/mock_rtpreceiver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-10T07:58:50Z",
+      "side": 1,
+      "message": "You need to #include the file defining FramDecryptorInterface for this to compile.\nPlease ensure that you compile the api:compile_all_headers target when testing this.",
+      "revId": "02307782ab4b05da7f5dacfc8de308f342dee5ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
