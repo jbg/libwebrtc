@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c76dd4_f1769c14",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-11T17:06:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "910c0eb0_2c5082c3",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 3
+      },
+      "revId": "027e7c5cc6ab83b4b0db8755b00edb0708644cc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8eba1f1b_609f7477",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-10T16:13:22Z",
       "side": 1,
       "message": "What about using memset?",
+      "range": {
+        "startLine": 253,
+        "startChar": 8,
+        "endLine": 253,
+        "endChar": 20
+      },
+      "revId": "027e7c5cc6ab83b4b0db8755b00edb0708644cc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb7885a1_dcd95756",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-11T17:06:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8eba1f1b_609f7477",
       "range": {
         "startLine": 253,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6627c7_14a65430",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-11T17:06:48Z",
+      "side": 1,
+      "message": "Good point, replaced with DCHECKs as discussed offline",
+      "parentUuid": "e0fcc789_8787429e",
+      "range": {
+        "startLine": 284,
+        "startChar": 1,
+        "endLine": 295,
+        "endChar": 5
+      },
+      "revId": "027e7c5cc6ab83b4b0db8755b00edb0708644cc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee0fc10d_21c28df8",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-11-10T16:13:22Z",
       "side": 1,
       "message": "Since there is so much setting to zero, and these frames are fairly long, I think using memset is prefferable from a speed perspective.",
+      "range": {
+        "startLine": 304,
+        "startChar": 8,
+        "endLine": 306,
+        "endChar": 9
+      },
+      "revId": "027e7c5cc6ab83b4b0db8755b00edb0708644cc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d1fad7f_38e09ee5",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-11T17:06:48Z",
+      "side": 1,
+      "message": "nice, done!",
+      "parentUuid": "ee0fc10d_21c28df8",
       "range": {
         "startLine": 304,
         "startChar": 8,
@@ -133,6 +229,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "486cb608_8f62e05f",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-11T17:06:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d495d338_de48e0b4",
+      "range": {
+        "startLine": 312,
+        "startChar": 10,
+        "endLine": 312,
+        "endChar": 34
+      },
+      "revId": "027e7c5cc6ab83b4b0db8755b00edb0708644cc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4594512e_39436e3e",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-11-10T16:13:22Z",
       "side": 1,
       "message": "Should we really do this checks in prod, for each frame?\nIt is basically just wasted cycles to do the checks for each frame just to be able to return an error value, where the error value typically signals an incorrect integration.\n\nOne aspect here is that even though the lines 1585-1591 does their best to verify the input, they add very little security, since there are no guarantees what the data points to.\nWe can warn about the absolutely most secure case of incorrect input which is nullptr, but the checks/warnings do not at all guard against the more dangerous incorrect inputs.\n\nMy question therefore is: do we really need to report kNullPointerError?\nIs the kNullPointerError used/checked anywhere?\nDo we really want to extend the scheme of checking these pointers?",
+      "range": {
+        "startLine": 1585,
+        "startChar": 1,
+        "endLine": 1592,
+        "endChar": 3
+      },
+      "revId": "027e7c5cc6ab83b4b0db8755b00edb0708644cc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca2704e_69d2b099",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1592,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-11T17:06:48Z",
+      "side": 1,
+      "message": "Done! Good points. The main concern is to be consistent - current ToT is not, so despite checking it is neither safe nor easy to understand when we test for nullpointer.\n\nThe new version DCHECKs all pointers for null, since it is a programmer error more than something that may happen at runtime. The code is optimized away for builds without DCHECKs.",
+      "parentUuid": "4594512e_39436e3e",
       "range": {
         "startLine": 1585,
         "startChar": 1,
