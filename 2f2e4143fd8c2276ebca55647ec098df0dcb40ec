@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "667e7b50_b7382757",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-11-11T22:14:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c54b6a48_a777b045",
+      "range": {
+        "startLine": 230,
+        "startChar": 5,
+        "endLine": 230,
+        "endChar": 18
+      },
+      "revId": "2f2e4143fd8c2276ebca55647ec098df0dcb40ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a70a01e_171b7910",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-11-09T22:48:20Z",
       "side": 1,
       "message": "Nit: line break after 231?",
+      "revId": "2f2e4143fd8c2276ebca55647ec098df0dcb40ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa6e19c1_c37f4dcc",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-11-11T22:14:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a70a01e_171b7910",
       "revId": "2f2e4143fd8c2276ebca55647ec098df0dcb40ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -64,6 +106,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de09c61d_35f3be11",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-11-11T22:14:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "594dfdea_649cdd79",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 16
+      },
+      "revId": "2f2e4143fd8c2276ebca55647ec098df0dcb40ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18a3b66f_cc94fcf5",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-11-09T22:48:20Z",
       "side": 1,
       "message": "nit: this is unclear. Should this be \"network stats for each node in `nodes`...\"?",
+      "range": {
+        "startLine": 342,
+        "startChar": 12,
+        "endLine": 342,
+        "endChar": 36
+      },
+      "revId": "2f2e4143fd8c2276ebca55647ec098df0dcb40ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a00a0619_f9c56482",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2022-11-11T22:14:43Z",
+      "side": 1,
+      "message": "So the stats are combined among all the passed nodes. Rephrased.",
+      "parentUuid": "18a3b66f_cc94fcf5",
       "range": {
         "startLine": 342,
         "startChar": 12,
