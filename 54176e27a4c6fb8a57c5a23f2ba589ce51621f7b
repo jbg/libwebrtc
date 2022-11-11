@@ -53,6 +53,46 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8128b84d_41ea0d04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-11T15:05:28Z",
+      "side": 1,
+      "message": "Thanks Hanna! I added a few comments.",
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48775a0e_e1d20cdb",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-11T15:05:28Z",
+      "side": 1,
+      "message": "in the CL description I\u0027d add that AGC2 now handles the capture output unused state",
+      "range": {
+        "startLine": 664,
+        "startChar": 0,
+        "endLine": 667,
+        "endChar": 3
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f751410_52cd733b",
@@ -102,6 +142,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1692660b_8e7f7ccf",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-11T15:05:28Z",
+      "side": 1,
+      "message": "I reviewed https://webrtc-review.googlesource.com/c/src/+/282981, I added some comments but the approach LGTM.",
+      "parentUuid": "208273ce_349bbf4d",
+      "range": {
+        "startLine": 950,
+        "startChar": 6,
+        "endLine": 953,
+        "endChar": 30
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e3a1284_5b140259",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -113,6 +177,30 @@
       "writtenOn": "2022-11-10T06:55:17Z",
       "side": 1,
       "message": "Is no `capture_.applied_input_volume` ever an error here? Would it be a useful debugging signal to log a (rate-limited) warning/error?",
+      "range": {
+        "startLine": 1186,
+        "startChar": 6,
+        "endLine": 1186,
+        "endChar": 47
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b3b0f9_9727c1d9",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-11T15:05:28Z",
+      "side": 1,
+      "message": "AGC2 can be used in digital-only mode and if so, there\u0027s no input volume to handle\nhowever, I see why you have this question\nwould the following help?\n\n```\nif (submodules_.gain_controller2) {\n  submodules_.gain_controller2-\u003eAnalyze(\n      capture_.applied_input_volume, *capture_buffer);\n}\n```\n\nAGC2 knows if the input volume controller is enabled; if so, it will compute a new recommended input volume, otherwise it recommends the applied input volume. Hence, it\u0027s easier to pass the optional value and then `GainController2::Analyze()` will yell if the first arg is unspecified and the input volume controller is enabled or in the opposite case.\n\nWDYT?",
+      "parentUuid": "9e3a1284_5b140259",
       "range": {
         "startLine": 1186,
         "startChar": 6,
@@ -165,6 +253,29 @@
         "startChar": 0,
         "endLine": 1189,
         "endChar": 3
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2746c8f2_19d76542",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-11T15:05:28Z",
+      "side": 1,
+      "message": "Shall we remove the 2nd arg in `GainController2::Process()`?\nFor me it\u0027s ok to keep as it is, but I\u0027d like to hear by others.\nI\u0027m asking because `GainController2::Analyze()` now observes the applied input volumes and hence it looks odd that we pass this flag - and it\u0027s error prone since one could pass different applied input volumes and false as input volume change flag. \n\nAlternatively, we could detect input volume changes internally in `GainController2`. Another option is passing `capture_.applied_input_volume_changed` to `GainController2::Analyze()` together with the applied input volume, but I wouldn\u0027t do that since the flag is only used by `GainController2::Process()` and it\u0027d make `GainController2` unnecessarily too complex - I\u0027d prefer to avoid adding a private member in `GainController2` to \"pass\" information from `Analyze()` to `Process()`.\n\nWDYT?",
+      "range": {
+        "startLine": 1351,
+        "startChar": 29,
+        "endLine": 1351,
+        "endChar": 66
       },
       "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
