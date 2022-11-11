@@ -70,6 +70,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8e46f9d_0d0eeab7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-11T16:37:41Z",
+      "side": 1,
+      "message": "This CL LGTM, I\u0027m OK with adding the enum either here or in a follow up",
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48775a0e_e1d20cdb",
@@ -258,6 +275,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe8ff56e_929b3ba2",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-11T16:37:41Z",
+      "side": 1,
+      "message": "Makes sense, thank you for explaining",
+      "parentUuid": "62f9cc37_1b3fa1dd",
+      "range": {
+        "startLine": 1184,
+        "startChar": 0,
+        "endLine": 1189,
+        "endChar": 3
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2746c8f2_19d76542",
@@ -271,6 +312,30 @@
       "writtenOn": "2022-11-11T15:05:28Z",
       "side": 1,
       "message": "Shall we remove the 2nd arg in `GainController2::Process()`?\nFor me it\u0027s ok to keep as it is, but I\u0027d like to hear by others.\nI\u0027m asking because `GainController2::Analyze()` now observes the applied input volumes and hence it looks odd that we pass this flag - and it\u0027s error prone since one could pass different applied input volumes and false as input volume change flag. \n\nAlternatively, we could detect input volume changes internally in `GainController2`. Another option is passing `capture_.applied_input_volume_changed` to `GainController2::Analyze()` together with the applied input volume, but I wouldn\u0027t do that since the flag is only used by `GainController2::Process()` and it\u0027d make `GainController2` unnecessarily too complex - I\u0027d prefer to avoid adding a private member in `GainController2` to \"pass\" information from `Analyze()` to `Process()`.\n\nWDYT?",
+      "range": {
+        "startLine": 1351,
+        "startChar": 29,
+        "endLine": 1351,
+        "endChar": 66
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c324e644_5a95671c",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-11T16:37:41Z",
+      "side": 1,
+      "message": "\u003e I\u0027d like to hear by others\n\nIt sounds like this would reduce and simplify the API surface of AGC2, and sgtm for that reason.",
+      "parentUuid": "2746c8f2_19d76542",
       "range": {
         "startLine": 1351,
         "startChar": 29,
