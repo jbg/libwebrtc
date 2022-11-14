@@ -123,6 +123,24 @@
       "parentUuid": "d1fb9f57_b2b52c67",
       "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c63df96_35ae86f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-14T08:53:48Z",
+      "side": 1,
+      "message": "Yes, one is the android test you mentioned and the other one is the JNI generator depending on it as well.\n\nBut I think both a re solvable (Björn is looking into them).",
+      "parentUuid": "6fcea424_297cb70a",
+      "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
