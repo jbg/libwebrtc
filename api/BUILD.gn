@@ -1173,6 +1173,7 @@ if (rtc_include_tests) {
 
     deps = [
       ":libjingle_peerconnection_api",
+      "../api/crypto:frame_decryptor_interface",
       "../test:test_support",
     ]
   }
