@@ -16,11 +16,10 @@
 #include "api/media_stream_interface.h"
 #include "api/scoped_refptr.h"
 #include "rtc_base/ref_counted_object.h"
-#include "test/gmock.h"
 
 namespace webrtc {
 
-class MockVideoTrack final
+class MockVideoTrack
     : public rtc::RefCountedObject<webrtc::VideoTrackInterface> {
  public:
   static rtc::scoped_refptr<MockVideoTrack> Create() {
