@@ -110,6 +110,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fca8dbec_240c26fa",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-14T13:36:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48775a0e_e1d20cdb",
+      "range": {
+        "startLine": 664,
+        "startChar": 0,
+        "endLine": 667,
+        "endChar": 3
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f751410_52cd733b",
@@ -181,6 +205,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f53486_4a107c32",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-14T13:36:12Z",
+      "side": 1,
+      "message": "Based on the offline discussion, let\u0027s abandon https://webrtc-review.googlesource.com/c/src/+/282981.",
+      "parentUuid": "1692660b_8e7f7ccf",
+      "range": {
+        "startLine": 950,
+        "startChar": 6,
+        "endLine": 953,
+        "endChar": 30
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e3a1284_5b140259",
@@ -218,6 +266,30 @@
       "side": 1,
       "message": "AGC2 can be used in digital-only mode and if so, there\u0027s no input volume to handle\nhowever, I see why you have this question\nwould the following help?\n\n```\nif (submodules_.gain_controller2) {\n  submodules_.gain_controller2-\u003eAnalyze(\n      capture_.applied_input_volume, *capture_buffer);\n}\n```\n\nAGC2 knows if the input volume controller is enabled; if so, it will compute a new recommended input volume, otherwise it recommends the applied input volume. Hence, it\u0027s easier to pass the optional value and then `GainController2::Analyze()` will yell if the first arg is unspecified and the input volume controller is enabled or in the opposite case.\n\nWDYT?",
       "parentUuid": "9e3a1284_5b140259",
+      "range": {
+        "startLine": 1186,
+        "startChar": 6,
+        "endLine": 1186,
+        "endChar": 47
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d4ebd6_1de01f6e",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-14T13:36:12Z",
+      "side": 1,
+      "message": "A few CLs ago this argument was changed from optional to non-optional based on the review comments: https://webrtc-review.googlesource.com/c/src/+/279822/comment/5f7ae0ba_e43a0143/.\n\nI agree that it would simplify the call but I would leave this to a later CL if we find it necessary.",
+      "parentUuid": "46b3b0f9_9727c1d9",
       "range": {
         "startLine": 1186,
         "startChar": 6,
@@ -336,6 +408,30 @@
       "side": 1,
       "message": "\u003e I\u0027d like to hear by others\n\nIt sounds like this would reduce and simplify the API surface of AGC2, and sgtm for that reason.",
       "parentUuid": "2746c8f2_19d76542",
+      "range": {
+        "startLine": 1351,
+        "startChar": 29,
+        "endLine": 1351,
+        "endChar": 66
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbda0c7b_a00b4843",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-14T13:36:12Z",
+      "side": 1,
+      "message": "That\u0027s a good idea! I\u0027d suggest we only take care of the integration in this CL and postpone changes in GainController2 to another CL.",
+      "parentUuid": "c324e644_5a95671c",
       "range": {
         "startLine": 1351,
         "startChar": 29,
