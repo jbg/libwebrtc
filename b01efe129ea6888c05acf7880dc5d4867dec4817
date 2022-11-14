@@ -105,6 +105,24 @@
       "parentUuid": "235ded80_4ae587ed",
       "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fcea424_297cb70a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-11-14T08:41:28Z",
+      "side": 1,
+      "message": "Moving //base/third_party/libevent to //third_party/libevent is completed.\n\n@mbonadei@webrtc.org, I think the only blocker for removing //base dependency is Android unittests, but you said there are two reasons in https://chromium-review.googlesource.com/c/chromium/src/+/4015625/comments/0a5a5063_18a0d911. Can you tell me what other reasons are?",
+      "parentUuid": "d1fb9f57_b2b52c67",
+      "revId": "b01efe129ea6888c05acf7880dc5d4867dec4817",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
