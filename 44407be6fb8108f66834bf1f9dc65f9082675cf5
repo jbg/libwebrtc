@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b4617f8_be4524d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-11-14T07:07:37Z",
+      "side": 1,
+      "message": "still pondering where the right test for this should live, so far I have only demonstrated no change in behavior.\n\nSimilar to TestSimulcastEncoderAdapterFake.ActivatesCorrectStreamsInInitEncode maybe?",
+      "revId": "44407be6fb8108f66834bf1f9dc65f9082675cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7385faef_8b29e071",
+        "filename": "media/engine/simulcast_encoder_adapter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-11-14T07:07:37Z",
+      "side": 1,
+      "message": "the stream_frame_types.size() \u003d\u003d 1 here was required or some tests started crashing with out of bounds. Which seems a bit like those tests are not set up correctly? See https://webrtc-review.googlesource.com/c/src/+/281002?checksPatchset\u003d1\u0026tab\u003dchecks",
+      "revId": "44407be6fb8108f66834bf1f9dc65f9082675cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
