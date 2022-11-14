@@ -16,6 +16,40 @@
       "message": "I wish we had coverage analysis (again?)... this should have been easy to see as a code path not covered.",
       "revId": "d7bdb729793457a03dd0ede2ae0a9afe6672d127",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bbfeb69_b8bf06e9",
+        "filename": "modules/rtp_rtcp/source/rtp_video_layers_allocation_extension.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-11-14T09:39:09Z",
+      "side": 1,
+      "message": "How about instead of \"at most four\":\n\nAt most kMaxSpatialIds (4).\n\nand add a static assert for that here since the loop requires it.",
+      "revId": "d7bdb729793457a03dd0ede2ae0a9afe6672d127",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40cc3689_d68d18a5",
+        "filename": "modules/rtp_rtcp/source/rtp_video_layers_allocation_extension.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-11-14T09:39:09Z",
+      "side": 1,
+      "message": "same",
+      "revId": "d7bdb729793457a03dd0ede2ae0a9afe6672d127",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
