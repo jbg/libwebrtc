@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf52e0f_acae2cc7",
+        "filename": "modules/rtp_rtcp/source/rtp_video_layers_allocation_extension.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-11-14T10:30:54Z",
+      "side": 1,
+      "message": "Maybe keep something like this here so that readers will know that this needs to be kept in sync:\n\n`// From /docs/native-code/rtp-rtpext/video-layers-allocation00/README.md`",
+      "revId": "14e6a55d6ab559b6f6e01617c6a9834f7696cb69",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4f040d9_b49ff4fb",
+        "filename": "modules/rtp_rtcp/source/rtp_video_layers_allocation_extension.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2022-11-14T10:30:54Z",
+      "side": 1,
+      "message": "hah, good old linebreak 😊 Maybe something like this would fit:\n// There are at most `kMaxSpatialIds` (4) temporal layers per spatial layer.",
+      "revId": "14e6a55d6ab559b6f6e01617c6a9834f7696cb69",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
