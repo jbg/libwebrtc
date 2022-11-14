@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbc6026e_bfc24416",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-14T21:10:23Z",
+      "side": 1,
+      "message": "Add \"Bug: none\" here, or use Florent\u0027s bug for this",
+      "revId": "d4cfcaa07e4564c1b5e4a4d010b7d7b02a22f1a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dfc006b_0c5b86d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-14T21:10:23Z",
+      "side": 1,
+      "message": "Will be happy to approve this - but Florent has a CL in progress that will conflict with this one (among other things, removing \"final\" and harmonizing the API for refcounted types), so I suggest that you hold off on this one and rebase it when that one lands. (https://webrtc-review.googlesource.com/c/src/+/262423 - it had to be reverted due to downstream issues wrt assumptions on mocks).",
+      "revId": "d4cfcaa07e4564c1b5e4a4d010b7d7b02a22f1a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
