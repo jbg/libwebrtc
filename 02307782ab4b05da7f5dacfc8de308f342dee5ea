@@ -71,6 +71,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc62bb41_2bb23892",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20084
+      },
+      "writtenOn": "2022-11-14T19:20:35Z",
+      "side": 1,
+      "message": "Ack, thanks for taking a look. Agree that individual tests extending mocks when needed is the right approach instead. Uploaded new change that just adds mock methods and removes final declaration from mocks.",
+      "parentUuid": "68512d3b_d002033a",
+      "revId": "02307782ab4b05da7f5dacfc8de308f342dee5ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32ba8efd_74275f44",
@@ -84,6 +102,24 @@
       "writtenOn": "2022-11-10T07:58:50Z",
       "side": 1,
       "message": "You need to #include the file defining FramDecryptorInterface for this to compile.\nPlease ensure that you compile the api:compile_all_headers target when testing this.",
+      "revId": "02307782ab4b05da7f5dacfc8de308f342dee5ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79bc7cfc_09112171",
+        "filename": "api/test/mock_rtpreceiver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 20084
+      },
+      "writtenOn": "2022-11-14T19:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32ba8efd_74275f44",
       "revId": "02307782ab4b05da7f5dacfc8de308f342dee5ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
