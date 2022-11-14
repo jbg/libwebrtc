@@ -16,15 +16,22 @@
 #include "api/media_stream_interface.h"
 #include "api/scoped_refptr.h"
 #include "rtc_base/ref_counted_object.h"
-#include "test/gmock.h"
 
 namespace webrtc {
 
-class MockVideoTrack final
+class MockVideoTrack
     : public rtc::RefCountedObject<webrtc::VideoTrackInterface> {
  public:
   static rtc::scoped_refptr<MockVideoTrack> Create() {
     return rtc::scoped_refptr<MockVideoTrack>(new MockVideoTrack());
+  }
+
+  MockVideoTrack() {
+    ON_CALL(*this, enabled()).WillByDefault([this] { return enabled_; });
+    ON_CALL(*this, set_enabled(testing::_)).WillByDefault([this](bool enable) {
+      enabled_ = enable;
+      return true;
+    });
   }
 
   // NotifierInterface
@@ -62,6 +69,9 @@ class MockVideoTrack final
 
   MOCK_METHOD(ContentHint, content_hint, (), (const, override));
   MOCK_METHOD(void, set_content_hint, (ContentHint hint), (override));
+
+ protected:
+  bool enabled_;
 };
 
 }  // namespace webrtc
