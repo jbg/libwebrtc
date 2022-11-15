@@ -76,7 +76,7 @@ ABSL_FLAG(bool,
           false,
           "Tells to initialize new API for exporting performance metrics");
 
-ABSL_FLAG(bool, logs, true, "print logs to stderr");
+ABSL_FLAG(bool, logs, false, "print logs to stderr");
 ABSL_FLAG(bool, verbose, false, "verbose logs to stderr");
 
 ABSL_FLAG(std::string,
