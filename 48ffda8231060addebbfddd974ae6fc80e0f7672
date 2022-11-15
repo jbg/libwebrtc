@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2b0cef8_9eb060ae",
+        "filename": "call/rtp_transport_controller_send.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-15T08:59:34Z",
+      "side": 1,
+      "message": "Why doesnt this use  RtpTransportConfig as an input parameter instead?",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 28
+      },
+      "revId": "48ffda8231060addebbfddd974ae6fc80e0f7672",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
