@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d57d0f4_1956c09c",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-15T12:51:07Z",
+      "side": 1,
+      "message": "or just directly use const PeerConnectionInterface::RTCConfiguration\u0026 configuration is fine by me.",
+      "range": {
+        "startLine": 251,
+        "startChar": 56,
+        "endLine": 251,
+        "endChar": 74
+      },
+      "revId": "f8dcefef87769d5fa571b89e305d0de4918ba483",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2269d800_eff0b94c",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-15T12:51:07Z",
+      "side": 1,
+      "message": "nit: no need for PeerConnectionFactory",
+      "range": {
+        "startLine": 308,
+        "startChar": 10,
+        "endLine": 308,
+        "endChar": 31
+      },
+      "revId": "f8dcefef87769d5fa571b89e305d0de4918ba483",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d000ebd9_9a6efe14",
+        "filename": "pc/peer_connection_factory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-15T12:51:07Z",
+      "side": 1,
+      "message": "nit:\n\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order\n\nprivate:\n struct ....\n \n  rtc::Thread* network_thread() const",
+      "range": {
+        "startLine": 138,
+        "startChar": 9,
+        "endLine": 138,
+        "endChar": 25
+      },
+      "revId": "f8dcefef87769d5fa571b89e305d0de4918ba483",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
