@@ -16,6 +16,24 @@
       "message": "ping. I\u0027d still like to see this one, even without proper AV1 support (which is a bit more involved). Power savings for testing ;-)",
       "revId": "14844cdb6a52b4e9945b020d1c0febaf309d8262",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf0605ac_3a7e4c46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-11-15T09:49:42Z",
+      "side": 1,
+      "message": "I understand this is only for testing, but if frame resolution is not important then why not always set the decoded frame resolution to 2x2?\n\nI feel like either resolution should be parsed, and then only supported codecs should be advertised, or we don\u0027t care about the resolution so all frames should be decoded as 2x2.",
+      "parentUuid": "02ff14a1_b5e29926",
+      "revId": "14844cdb6a52b4e9945b020d1c0febaf309d8262",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
