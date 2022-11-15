@@ -326,6 +326,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60f059a9_6d41ec26",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-15T15:47:42Z",
+      "side": 1,
+      "message": "\u003e A few CLs ago this argument was changed from optional to non-optional based on the review comments: https://webrtc-review.googlesource.com/c/src/+/279822/comment/5f7ae0ba_e43a0143/.\n\u003e I agree that it would simplify the call but I would leave this to a later CL if we find it necessary.\n\nAnd obviously it was me adding that comment and now I contradict the old myself 😂\nMy apologies Hanna. I however have a good reason for the preference over passing the optional value and always calling `Analyze()`: when (one day) `CaptureLevelAdjuster` will be merged into `GainController2` and when the input volume is emulated, then `GainController2` will need to observe the (externally) applied input volume so that such a value can be recommended.\n\nAs Sam said, the code is correct. The final decision is yours Hanna.",
+      "parentUuid": "f02a63e5_ba369336",
+      "range": {
+        "startLine": 1186,
+        "startChar": 6,
+        "endLine": 1186,
+        "endChar": 47
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7740d3b4_0911cc63",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -480,6 +504,30 @@
       "side": 1,
       "message": "sounds alright to me",
       "parentUuid": "cbda0c7b_a00b4843",
+      "range": {
+        "startLine": 1351,
+        "startChar": 29,
+        "endLine": 1351,
+        "endChar": 66
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ac492d_b15ed5f1",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-15T15:47:42Z",
+      "side": 1,
+      "message": "+1, maybe add\n```\n//TODO(bugs.webrtc.org/7494): Let AGC2 detect applied input volume changes.\n```",
+      "parentUuid": "7e7c998c_7bfd9cbd",
       "range": {
         "startLine": 1351,
         "startChar": 29,

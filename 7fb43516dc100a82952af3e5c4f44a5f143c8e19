@@ -33,6 +33,161 @@
       "message": "reasserting my LGTM since I\u0027m in the attention set\n\nlet me know if there\u0027s anything you miss my input on!",
       "revId": "7fb43516dc100a82952af3e5c4f44a5f143c8e19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f328e820_a3b46201",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-15T15:47:42Z",
+      "side": 1,
+      "message": "Thanks Hanna! I added some comments.",
+      "revId": "7fb43516dc100a82952af3e5c4f44a5f143c8e19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "facc0676_839d43f9",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-15T15:47:42Z",
+      "side": 1,
+      "message": "[optional] suggestion to avoid touching production code that we will remove\n\nWhat about removing this and instead logging something like\n```\nRTC_LOG(LS_ERROR) \u003c\u003c \"Invalid APM configuration: multiple input volume controllers.\";\n```\nwhen multiple input volume controllers are active?\n\nThe error should be logged when:\n- `config_.gain_controller1.enabled` is true\n- `config_.gain_controller1.mode` is kAnalog or `config_.gain_controller1.analog_gain_controller.enabled` is true\n- `config_.gain_controller2.input_volume_controller.enabled` is true\n\nThe error could be logged in `AudioProcessingImpl::InitializeLocked()` and `AudioProcessingImpl::ApplyConfig()`.",
+      "range": {
+        "startLine": 951,
+        "startChar": 0,
+        "endLine": 952,
+        "endChar": 68
+      },
+      "revId": "7fb43516dc100a82952af3e5c4f44a5f143c8e19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0980e450_1c3cbb4e",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-15T15:47:42Z",
+      "side": 1,
+      "message": "not needed if you address my previous comment",
+      "range": {
+        "startLine": 1179,
+        "startChar": 29,
+        "endLine": 1181,
+        "endChar": 65
+      },
+      "revId": "7fb43516dc100a82952af3e5c4f44a5f143c8e19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99f850af_367e62f6",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1264,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-15T15:47:42Z",
+      "side": 1,
+      "message": "same as above, I would minimize the control group code changes and log an error when the config is invalid",
+      "range": {
+        "startLine": 1259,
+        "startChar": 0,
+        "endLine": 1264,
+        "endChar": 68
+      },
+      "revId": "7fb43516dc100a82952af3e5c4f44a5f143c8e19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b064247_af0af121",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1318,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-15T15:47:42Z",
+      "side": 1,
+      "message": "and same here",
+      "range": {
+        "startLine": 1316,
+        "startChar": 37,
+        "endLine": 1318,
+        "endChar": 73
+      },
+      "revId": "7fb43516dc100a82952af3e5c4f44a5f143c8e19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b5c21ff_b966c7db",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1662,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-15T15:47:42Z",
+      "side": 1,
+      "message": "Returning without doing anything is correct, but I\u0027d move this part at the end of this function to minimize the risks of changing the existing behavior.",
+      "range": {
+        "startLine": 1658,
+        "startChar": 0,
+        "endLine": 1662,
+        "endChar": 0
+      },
+      "revId": "7fb43516dc100a82952af3e5c4f44a5f143c8e19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeb1552b_a278f7a8",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1704,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-15T15:47:42Z",
+      "side": 1,
+      "message": "same here, I find it safer to have this before line 1717",
+      "range": {
+        "startLine": 1698,
+        "startChar": 0,
+        "endLine": 1704,
+        "endChar": 0
+      },
+      "revId": "7fb43516dc100a82952af3e5c4f44a5f143c8e19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
