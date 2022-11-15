@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba606770_4cb9ad20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-15T16:56:07Z",
+      "side": 1,
+      "message": "Thank you for the comments!",
+      "revId": "9ff4d0a172e8879278d7d0d450741f74b325e40d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1285468_75bc47c7",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-15T16:56:07Z",
+      "side": 1,
+      "message": "Alessio, could you please check that this is what you meant?",
+      "range": {
+        "startLine": 1909,
+        "startChar": 5,
+        "endLine": 1913,
+        "endChar": 64
+      },
+      "revId": "9ff4d0a172e8879278d7d0d450741f74b325e40d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d9cb32_509185a4",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2143,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-15T16:56:07Z",
+      "side": 1,
+      "message": "Alessio, Sam: WDYT, should we continue logging `kAdaptiveAnalog` also with `InputVolumeController`?",
+      "range": {
+        "startLine": 2143,
+        "startChar": 30,
+        "endLine": 2143,
+        "endChar": 58
+      },
+      "revId": "9ff4d0a172e8879278d7d0d450741f74b325e40d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

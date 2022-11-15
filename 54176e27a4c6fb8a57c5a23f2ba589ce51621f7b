@@ -350,6 +350,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9a3d369_d4dab74d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-15T16:56:07Z",
+      "side": 1,
+      "message": "Thank you for the detailed comments Alessio and Sam! I\u0027ve changed the code as discussed offline with Sam. WDYT?",
+      "parentUuid": "60f059a9_6d41ec26",
+      "range": {
+        "startLine": 1186,
+        "startChar": 6,
+        "endLine": 1186,
+        "endChar": 47
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7740d3b4_0911cc63",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -528,6 +552,30 @@
       "side": 1,
       "message": "+1, maybe add\n```\n//TODO(bugs.webrtc.org/7494): Let AGC2 detect applied input volume changes.\n```",
       "parentUuid": "7e7c998c_7bfd9cbd",
+      "range": {
+        "startLine": 1351,
+        "startChar": 29,
+        "endLine": 1351,
+        "endChar": 66
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34aa4783_1fa5f275",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-15T16:56:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0ac492d_b15ed5f1",
       "range": {
         "startLine": 1351,
         "startChar": 29,
