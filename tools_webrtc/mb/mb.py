@@ -82,9 +82,9 @@ class WebRTCMetaBuildWrapper(mb.MetaBuildWrapper):
     elif is_android:
       cmdline += [
           vpython_exe, '../../build/android/test_wrapper/logdog_wrapper.py',
-          '--target', target, '--logdog-bin-cmd', '../../bin/logdog_butler',
-          '--logcat-output-file', '${ISOLATED_OUTDIR}/logcats',
-          '--store-tombstones'
+          '--target', target, '--logdog-bin-cmd',
+          '../../.task_template_packages/logdog_butler', '--logcat-output-file',
+          '${ISOLATED_OUTDIR}/logcats', '--store-tombstones', '-vv'
       ]
     elif is_ios or is_fuchsia:
       cmdline += [
