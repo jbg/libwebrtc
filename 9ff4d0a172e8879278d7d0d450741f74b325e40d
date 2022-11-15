@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2752cad2_e3fd08ce",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1179,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-15T18:04:13Z",
+      "side": 1,
+      "message": "nit: could be\n\n\nif (submodules_.gain_controller2 \u0026\u0026 \n    config_.gain_controller2.input_volume_controller.enabled) {",
+      "range": {
+        "startLine": 1178,
+        "startChar": 6,
+        "endLine": 1179,
+        "endChar": 64
+      },
+      "revId": "9ff4d0a172e8879278d7d0d450741f74b325e40d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1285468_75bc47c7",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 6
@@ -54,6 +77,30 @@
       "writtenOn": "2022-11-15T16:56:07Z",
       "side": 1,
       "message": "Alessio, Sam: WDYT, should we continue logging `kAdaptiveAnalog` also with `InputVolumeController`?",
+      "range": {
+        "startLine": 2143,
+        "startChar": 30,
+        "endLine": 2143,
+        "endChar": 58
+      },
+      "revId": "9ff4d0a172e8879278d7d0d450741f74b325e40d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a0fda39_bb1bd41a",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2143,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-15T18:04:13Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong opinion. If you think it may help future debugging and aecdump usage from an AGC2 perspective, feel free to add it.\n\nSome more general context:\nThis config logged in aecdumps has not been kept up-to-date. I don\u0027t see how to comprehensively+maintainably test it, so even if we do the work to update it, it will probably quickly fall out of date again. Per has voiced a similar opinion. So the config is mainly informational, rather than a way to accurately \"rerun\" the processing that happened during recording.\n\nI have an action item for myself to store `config_.ToString()` in the aecdump [1] (happy to help someone else pick it up though!). That string is more or less kept up to date, and will automatically cover most of the APM configuration, including the full AGC config.\n\nIf I may dream for a moment, if we would just store a few bits of injected submodules, the field trials, the config, and some kind of build identifier, then we would have an almost complete picture of APM\u0027s state without a great deal of maintenance.\n\n[1] https://bugs.webrtc.org/14016#c1",
+      "parentUuid": "10d9cb32_509185a4",
       "range": {
         "startLine": 2143,
         "startChar": 30,

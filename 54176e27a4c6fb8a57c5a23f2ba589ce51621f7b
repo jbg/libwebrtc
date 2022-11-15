@@ -374,6 +374,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64322adf_695af7c8",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-15T18:04:13Z",
+      "side": 1,
+      "message": "lgtm! thanks for adding the check + comment to clarify that no `applied_input_volume` is really a kind of error state here.",
+      "parentUuid": "d9a3d369_d4dab74d",
+      "range": {
+        "startLine": 1186,
+        "startChar": 6,
+        "endLine": 1186,
+        "endChar": 47
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7740d3b4_0911cc63",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
