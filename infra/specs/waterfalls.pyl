@@ -12,30 +12,24 @@
     'mixins': [],
     'machines': {
       'Android32 (M Nexus5X)': {
-        'mixins': [
-          'walleye', 'android-devices', 'logdog-butler',
-          'has_native_resultdb_integration'
-        ],
+        'mixins':
+        ['walleye', 'android-devices', 'has_native_resultdb_integration'],
         'test_suites': {
           'gtest_tests': 'android_tests',
           'junit_tests': 'android_junit_tests',
         },
       },
       'Android32 (M Nexus5X)(dbg)': {
-        'mixins': [
-          'walleye', 'android-devices', 'logdog-butler',
-          'has_native_resultdb_integration'
-        ],
+        'mixins':
+        ['walleye', 'android-devices', 'has_native_resultdb_integration'],
         'test_suites': {
           'gtest_tests': 'android_tests',
           'junit_tests': 'android_junit_tests',
         },
       },
       'Android32 (more configs)': {
-        'mixins': [
-          'walleye', 'android-devices', 'logdog-butler',
-          'has_native_resultdb_integration'
-        ],
+        'mixins':
+        ['walleye', 'android-devices', 'has_native_resultdb_integration'],
         'test_suites': {
           'gtest_tests': 'more_configs_tests',
         },
@@ -44,20 +38,16 @@
       'Android32 Builder x86': {},
       'Android32 Builder x86 (dbg)': {},
       'Android64 (M Nexus5X)': {
-        'mixins': [
-          'walleye', 'android-devices', 'logdog-butler',
-          'has_native_resultdb_integration'
-        ],
+        'mixins':
+        ['walleye', 'android-devices', 'has_native_resultdb_integration'],
         'test_suites': {
           'gtest_tests': 'android_tests',
           'junit_tests': 'android_junit_tests',
         },
       },
       'Android64 (M Nexus5X)(dbg)': {
-        'mixins': [
-          'walleye', 'android-devices', 'logdog-butler',
-          'has_native_resultdb_integration'
-        ],
+        'mixins':
+        ['walleye', 'android-devices', 'has_native_resultdb_integration'],
         'test_suites': {
           'gtest_tests': 'android_tests',
           'junit_tests': 'android_junit_tests',
@@ -401,49 +391,39 @@
     'mixins': [],
     'machines': {
       'android_arm64_dbg': {
-        'mixins': [
-          'walleye', 'android-devices', 'logdog-butler',
-          'has_native_resultdb_integration'
-        ],
+        'mixins':
+        ['walleye', 'android-devices', 'has_native_resultdb_integration'],
         'test_suites': {
           'gtest_tests': 'android_tests_tryserver',
           'junit_tests': 'android_junit_tests',
         },
       },
       'android_arm64_rel': {
-        'mixins': [
-          'walleye', 'android-devices', 'logdog-butler',
-          'has_native_resultdb_integration'
-        ],
+        'mixins':
+        ['walleye', 'android-devices', 'has_native_resultdb_integration'],
         'test_suites': {
           'gtest_tests': 'android_tests_tryserver',
           'junit_tests': 'android_junit_tests',
         },
       },
       'android_arm_dbg': {
-        'mixins': [
-          'walleye', 'android-devices', 'logdog-butler',
-          'has_native_resultdb_integration'
-        ],
+        'mixins':
+        ['walleye', 'android-devices', 'has_native_resultdb_integration'],
         'test_suites': {
           'gtest_tests': 'android_tests_tryserver',
           'junit_tests': 'android_junit_tests',
         },
       },
       'android_arm_more_configs': {
-        'mixins': [
-          'walleye', 'android-devices', 'logdog-butler',
-          'has_native_resultdb_integration'
-        ],
+        'mixins':
+        ['walleye', 'android-devices', 'has_native_resultdb_integration'],
         'test_suites': {
           'gtest_tests': 'more_configs_tests',
         },
       },
       'android_arm_rel': {
-        'mixins': [
-          'walleye', 'android-devices', 'logdog-butler',
-          'has_native_resultdb_integration'
-        ],
+        'mixins':
+        ['walleye', 'android-devices', 'has_native_resultdb_integration'],
         'test_suites': {
           'gtest_tests': 'android_tests_tryserver',
           'junit_tests': 'android_junit_tests',
