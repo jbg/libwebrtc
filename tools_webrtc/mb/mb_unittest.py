@@ -329,10 +329,12 @@ class UnitTest(unittest.TestCase):
         '--target',
         'foo_unittests',
         '--logdog-bin-cmd',
-        '../../bin/logdog_butler',
+        '../../.task_template_packages/logdog_butler',
         '--logcat-output-file',
         '${ISOLATED_OUTDIR}/logcats',
         '--store-tombstones',
+        '--log_level',
+        'warning',
     ])
 
   def test_gen_swarming_android_junit_test(self):
@@ -368,10 +370,12 @@ class UnitTest(unittest.TestCase):
         '--target',
         'foo_unittests',
         '--logdog-bin-cmd',
-        '../../bin/logdog_butler',
+        '../../.task_template_packages/logdog_butler',
         '--logcat-output-file',
         '${ISOLATED_OUTDIR}/logcats',
         '--store-tombstones',
+        '--log_level',
+        'warning',
     ])
 
   def test_gen_timeout(self):

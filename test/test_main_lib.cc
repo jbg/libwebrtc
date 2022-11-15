@@ -78,6 +78,8 @@ ABSL_FLAG(bool,
 
 ABSL_FLAG(bool, logs, true, "print logs to stderr");
 ABSL_FLAG(bool, verbose, false, "verbose logs to stderr");
+// Default to LS_INFO, even for release builds to provide better test logging.
+ABSL_FLAG(std::string, log_level, "info", "log level");
 
 ABSL_FLAG(std::string,
           trace_event,
@@ -101,13 +103,9 @@ class TestMainImpl : public TestMain {
     // have this flag).
     (void)absl::GetFlag(FLAGS_resources_dir);
 
-    // Default to LS_INFO, even for release builds to provide better test
-    // logging.
-    if (rtc::LogMessage::GetLogToDebug() > rtc::LS_INFO)
-      rtc::LogMessage::LogToDebug(rtc::LS_INFO);
-
     if (absl::GetFlag(FLAGS_verbose))
-      rtc::LogMessage::LogToDebug(rtc::LS_VERBOSE);
+      absl::SetFlag(&FLAGS_log_level, "verbose");
+    rtc::LogMessage::ConfigureLogging(absl::GetFlag(FLAGS_log_level));
 
     rtc::LogMessage::SetLogToStderr(absl::GetFlag(FLAGS_logs) ||
                                     absl::GetFlag(FLAGS_verbose));
