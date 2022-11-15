@@ -16,6 +16,23 @@
       "message": "Thank you for the comments Alessio and Sam!",
       "revId": "7fb43516dc100a82952af3e5c4f44a5f143c8e19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a83061b_795ae1de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-15T12:29:13Z",
+      "side": 1,
+      "message": "reasserting my LGTM since I\u0027m in the attention set\n\nlet me know if there\u0027s anything you miss my input on!",
+      "revId": "7fb43516dc100a82952af3e5c4f44a5f143c8e19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

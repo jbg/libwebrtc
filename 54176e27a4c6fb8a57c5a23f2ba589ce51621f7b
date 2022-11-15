@@ -302,6 +302,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f02a63e5_ba369336",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-15T12:29:13Z",
+      "side": 1,
+      "message": "I defer to you here. I don\u0027t want to nitpick over details that I don\u0027t understand enough of.\n\nMy confusion stems from how `AGC2::Analyze()` is called conditioned on whether the user provided a `applied_input_volume`. It makes it look like an event signal and not a \"regular\" processing call.\nAPM has a sort of implicit pattern where submodules have APIs that are called...\n1) unconditionally on all frames (determined by the APM config and fixed during processing), and\n2) to signal events, like `set_compression_gain_db`.\n\n`AGC2::Analyze()` looks to the name and parameters (capture_buffer) like one of these guaranteed-for-every-frame functions but the code here reads like an event signal \"new volume detected\". Either can be fine, it is an AGC2 interface design question.\nIf it is (1) then it would be nicer to treat `!applied_input_volume` as an error state: call `AGC2::Analyze` if the config indicates it, and if there is no applied input volume then DCHECK / log / use a placeholder value / otherwise be loud about it (even if just with a comment `//volume should always be set for input volume control, using placeholder to avoid crashing`).\nIf it is (2) then it might help to rename it to `OnNewVolume` (or something like that) since all other `Analyze`/`Process` functions are type (1) and clarify that the AGC is okay with only intermittently seeing the capture buffer. But I\u0027m not sure if we have a use case for that, and the linked comment discussion speaks against this.\n\nRegardless, it seems like the code is correct and can land in the current version. But it would be nice to clarify right away, even if just with a TODO.",
+      "parentUuid": "a0d4ebd6_1de01f6e",
+      "range": {
+        "startLine": 1186,
+        "startChar": 6,
+        "endLine": 1186,
+        "endChar": 47
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7740d3b4_0911cc63",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -432,6 +456,30 @@
       "side": 1,
       "message": "That\u0027s a good idea! I\u0027d suggest we only take care of the integration in this CL and postpone changes in GainController2 to another CL.",
       "parentUuid": "c324e644_5a95671c",
+      "range": {
+        "startLine": 1351,
+        "startChar": 29,
+        "endLine": 1351,
+        "endChar": 66
+      },
+      "revId": "54176e27a4c6fb8a57c5a23f2ba589ce51621f7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e7c998c_7bfd9cbd",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-15T12:29:13Z",
+      "side": 1,
+      "message": "sounds alright to me",
+      "parentUuid": "cbda0c7b_a00b4843",
       "range": {
         "startLine": 1351,
         "startChar": 29,
