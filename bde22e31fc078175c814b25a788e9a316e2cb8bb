@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95bda936_b85d0074",
+        "filename": "call/rtp_transport_controller_send.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-11-15T09:44:01Z",
+      "side": 1,
+      "message": "\u003e Why doesnt this use RtpTransportConfig as an input parameter instead?\n\nGood question, it does now.",
+      "revId": "bde22e31fc078175c814b25a788e9a316e2cb8bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38d7082e_8c33c597",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-11-15T09:44:01Z",
+      "side": 1,
+      "message": "\u003e I would think that experiments should always override the default.\n\nDone. Only using `burst_interval` if nothing else was specified by experiments.",
+      "revId": "bde22e31fc078175c814b25a788e9a316e2cb8bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "779d8e05_f7a78ecb",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-11-15T09:44:01Z",
+      "side": 1,
+      "message": "\u003e I am not a big fan of growing argument lists and having to redo the same thing over and over. Suggest you add config as argument to CreateCall_w instead. Its blocking so you should be able to just provide a reference.\n\nConfig it is.",
+      "revId": "bde22e31fc078175c814b25a788e9a316e2cb8bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
