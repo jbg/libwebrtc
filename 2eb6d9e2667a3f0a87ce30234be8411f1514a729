@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "575b06b6_0f1ed8d4",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-11-16T08:40:58Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of this if-statement? The function anyway returns after it, so it does not seem to serve any purpose?\n\nThe same actually goes for the early return on line 1659.",
+      "range": {
+        "startLine": 1662,
+        "startChar": 1,
+        "endLine": 1665,
+        "endChar": 3
+      },
+      "revId": "2eb6d9e2667a3f0a87ce30234be8411f1514a729",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
