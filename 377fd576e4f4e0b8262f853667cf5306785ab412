@@ -16,6 +16,46 @@
       "message": "Thanks Per!",
       "revId": "377fd576e4f4e0b8262f853667cf5306785ab412",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d46e4ad_9d5701ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-16T16:22:17Z",
+      "side": 1,
+      "message": "Thanks Hanna! LGTM % 1 comment",
+      "revId": "377fd576e4f4e0b8262f853667cf5306785ab412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "759676b6_4a92ee1f",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1903,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-16T16:22:17Z",
+      "side": 1,
+      "message": "also add `config_.gain_controller2.enabled`\n\nif the default for `config_.gain_controller2.input_volume_controller.enabled` is true, but AGC2 is disabled, this would trigger a false positive",
+      "range": {
+        "startLine": 1903,
+        "startChar": 6,
+        "endLine": 1903,
+        "endChar": 62
+      },
+      "revId": "377fd576e4f4e0b8262f853667cf5306785ab412",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
