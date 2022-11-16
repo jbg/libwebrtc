@@ -170,12 +170,16 @@ void GainController2::Process(absl::optional<float> speech_probability,
   }
 
   if (input_volume_controller_) {
+    RTC_DCHECK(adaptive_digital_controller_);
     absl::optional<float> speech_level;
     if (adaptive_digital_controller_) {
       speech_level =
           adaptive_digital_controller_->GetSpeechLevelDbfsIfConfident();
     }
-    input_volume_controller_->Process(speech_probability, speech_level);
+    RTC_DCHECK(speech_probability.has_value());
+    if (speech_probability.has_value()) {
+      input_volume_controller_->Process(*speech_probability, speech_level);
+    }
   }
 
   fixed_gain_applier_.ApplyGain(float_frame);

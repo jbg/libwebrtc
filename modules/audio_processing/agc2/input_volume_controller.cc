@@ -186,9 +186,8 @@ void MonoInputVolumeController::Initialize() {
   is_first_frame_ = true;
 }
 
-void MonoInputVolumeController::Process(
-    absl::optional<int> rms_error_dbfs,
-    absl::optional<float> speech_probability) {
+void MonoInputVolumeController::Process(absl::optional<int> rms_error_dbfs,
+                                        float speech_probability) {
   if (check_volume_on_next_process_) {
     check_volume_on_next_process_ = false;
     // We have to wait until the first process call to check the volume,
@@ -197,8 +196,7 @@ void MonoInputVolumeController::Process(
   }
 
   // Count frames with a high speech probability as speech.
-  if (speech_probability.has_value() &&
-      *speech_probability >= speech_probability_threshold_) {
+  if (speech_probability >= speech_probability_threshold_) {
     ++speech_frames_since_update_input_volume_;
   }
 
@@ -377,7 +375,7 @@ InputVolumeController::InputVolumeController(int num_capture_channels,
       clipping_rate_log_(0.0f),
       target_range_max_dbfs_(config.target_range_max_dbfs),
       target_range_min_dbfs_(config.target_range_min_dbfs),
-      channel_controllers_(num_capture_channels) {
+      channel_controllers_(/*num_capture_channels=*/1) {
   RTC_LOG(LS_INFO) << "[agc] analog controller enabled: "
                    << (analog_controller_enabled_ ? "yes" : "no");
   const int min_mic_level = min_mic_level_override_.value_or(kMinMicLevel);
@@ -494,7 +492,7 @@ void InputVolumeController::AnalyzePreProcess(const AudioBuffer& audio_buffer) {
   AggregateChannelLevels();
 }
 
-void InputVolumeController::Process(absl::optional<float> speech_probability,
+void InputVolumeController::Process(float speech_probability,
                                     absl::optional<float> speech_level_dbfs) {
   AggregateChannelLevels();
 
@@ -503,7 +501,7 @@ void InputVolumeController::Process(absl::optional<float> speech_probability,
   }
 
   absl::optional<int> rms_error_dbfs;
-  if (speech_probability.has_value() && speech_level_dbfs.has_value()) {
+  if (speech_level_dbfs.has_value()) {
     // Compute the error for all frames (both speech and non-speech frames).
     rms_error_dbfs = GetSpeechLevelErrorDb(
         *speech_level_dbfs, target_range_min_dbfs_, target_range_max_dbfs_);
