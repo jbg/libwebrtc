@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f6758c6_5a539875",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-16T08:36:54Z",
+      "side": 1,
+      "message": "Added Henrik B. and Sam for the missing owners\u0027 approvals.",
+      "revId": "b79b863078728c913f96b2f07d94806ea9eef8d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
