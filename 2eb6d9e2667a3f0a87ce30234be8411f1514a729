@@ -22,6 +22,30 @@
       },
       "revId": "2eb6d9e2667a3f0a87ce30234be8411f1514a729",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcea8813_008c3ff3",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-16T09:35:49Z",
+      "side": 1,
+      "message": "No purpose :) The if statement is removed now.\n\nIt was a remnant of the priority reordering based on https://webrtc-review.googlesource.com/c/src/+/282720/comment/0b5c21ff_b966c7db/. However, based on the comment I\u0027d leave the earlier `return` as is.",
+      "parentUuid": "575b06b6_0f1ed8d4",
+      "range": {
+        "startLine": 1662,
+        "startChar": 1,
+        "endLine": 1665,
+        "endChar": 3
+      },
+      "revId": "2eb6d9e2667a3f0a87ce30234be8411f1514a729",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
