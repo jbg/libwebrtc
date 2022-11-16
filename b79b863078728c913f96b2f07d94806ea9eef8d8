@@ -33,6 +33,23 @@
       "message": "media/engine/webrtc_voice_engine_unittest.cc LGTM",
       "revId": "b79b863078728c913f96b2f07d94806ea9eef8d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8989b31_82149087",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2022-11-16T14:50:20Z",
+      "side": 1,
+      "message": "pc/peer_connection_interface_unittest.cc LGTM",
+      "revId": "b79b863078728c913f96b2f07d94806ea9eef8d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
