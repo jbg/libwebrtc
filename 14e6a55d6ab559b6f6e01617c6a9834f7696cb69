@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dc0847d_d7031b2b",
+        "filename": "modules/rtp_rtcp/source/rtp_video_layers_allocation_extension.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-11-16T12:22:25Z",
+      "side": 1,
+      "message": "actually this was removed in an earlier CL, this is gone after rebase and just points to the one doc",
+      "parentUuid": "dcf52e0f_acae2cc7",
+      "revId": "14e6a55d6ab559b6f6e01617c6a9834f7696cb69",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4f040d9_b49ff4fb",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-14T10:30:54Z",
       "side": 1,
       "message": "hah, good old linebreak 😊 Maybe something like this would fit:\n// There are at most `kMaxSpatialIds` (4) temporal layers per spatial layer.",
+      "revId": "14e6a55d6ab559b6f6e01617c6a9834f7696cb69",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "851a8918_b2f9e044",
+        "filename": "modules/rtp_rtcp/source/rtp_video_layers_allocation_extension.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-11-16T12:22:25Z",
+      "side": 1,
+      "message": "the assert solves this :-)",
+      "parentUuid": "b4f040d9_b49ff4fb",
       "revId": "14e6a55d6ab559b6f6e01617c6a9834f7696cb69",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
