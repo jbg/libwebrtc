@@ -637,8 +637,9 @@ int32_t LibaomAv1Encoder::Encode(
     }
 
     // Encode a frame.
-    aom_codec_err_t ret = aom_codec_encode(&ctx_, frame_for_encode_,
-                                           frame.timestamp(), duration, flags);
+    const aom_codec_pts_t pts = frame.ntp_time_ms() * kRtpTicksPerSecond / 1000;
+    aom_codec_err_t ret =
+        aom_codec_encode(&ctx_, frame_for_encode_, pts, duration, flags);
     if (ret != AOM_CODEC_OK) {
       RTC_LOG(LS_WARNING) << "LibaomAv1Encoder::Encode returned " << ret
                           << " on aom_codec_encode.";
