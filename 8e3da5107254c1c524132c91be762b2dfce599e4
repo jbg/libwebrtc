@@ -33,6 +33,41 @@
       "message": "Thanks you for submitting fixes to WebRTC!\n\nIn this case however a fix has already been created and is landing now: https://webrtc-review.googlesource.com/c/src/+/283701",
       "revId": "8e3da5107254c1c524132c91be762b2dfce599e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c98bc10d_9cd91932",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20109
+      },
+      "writtenOn": "2022-11-17T16:28:19Z",
+      "side": 1,
+      "message": "Abandon this diff since another version of fix has been landed.",
+      "revId": "8e3da5107254c1c524132c91be762b2dfce599e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1586663_50d545d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20109
+      },
+      "writtenOn": "2022-11-17T16:28:19Z",
+      "side": 1,
+      "message": "Thank you, Philip.",
+      "parentUuid": "cdd6d8b5_ee6ba43a",
+      "revId": "8e3da5107254c1c524132c91be762b2dfce599e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
