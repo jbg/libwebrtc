@@ -309,15 +309,19 @@ void LossBasedBweV2::UpdateBandwidthEstimate(
     }
   }
 
-  if (IsEstimateIncreasingWhenLossLimited(best_candidate)) {
-    current_state_ = LossBasedState::kIncreasing;
-  } else if (IsValid(delay_based_estimate_) &&
-             best_candidate.loss_limited_bandwidth < delay_based_estimate_) {
-    current_state_ = LossBasedState::kDecreasing;
-  } else if (IsValid(delay_based_estimate_) &&
-             best_candidate.loss_limited_bandwidth == delay_based_estimate_) {
+  if (IsValid(delay_based_estimate_)) {
+    if (IsEstimateIncreasingWhenLossLimited(best_candidate) &&
+        best_candidate.loss_limited_bandwidth < delay_based_estimate) {
+      current_state_ = LossBasedState::kIncreasing;
+    } else if (best_candidate.loss_limited_bandwidth < delay_based_estimate_) {
+      current_state_ = LossBasedState::kDecreasing;
+    } else if (best_candidate.loss_limited_bandwidth >= delay_based_estimate_) {
+      current_state_ = LossBasedState::kDelayBasedEstimate;
+    }
+  } else {
     current_state_ = LossBasedState::kDelayBasedEstimate;
   }
+
   current_estimate_ = best_candidate;
 
   if (IsBandwidthLimitedDueToLoss() &&
