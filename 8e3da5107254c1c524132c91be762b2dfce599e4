@@ -16,6 +16,23 @@
       "message": "Hi Philip and Danil,\nMeta proposes this patch to fix the av1 issue in https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d14673\nNiklas suggest that I can ask your help on reviewing this fix.\nCould you help us review the patch and kick off CQ DRY RUN?\n\nThank you.",
       "revId": "8e3da5107254c1c524132c91be762b2dfce599e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdd6d8b5_ee6ba43a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2022-11-17T08:19:09Z",
+      "side": 1,
+      "message": "Thanks you for submitting fixes to WebRTC!\n\nIn this case however a fix has already been created and is landing now: https://webrtc-review.googlesource.com/c/src/+/283701",
+      "revId": "8e3da5107254c1c524132c91be762b2dfce599e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
