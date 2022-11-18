@@ -34,6 +34,24 @@
       "parentUuid": "f0ba323c_e8c5be03",
       "revId": "4d575c12b0b992d3a24759348224d17d05e393a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35b1a359_572688bc",
+        "filename": "rtc_base/cpu_time.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-11-18T09:09:40Z",
+      "side": 1,
+      "message": "Filed https://bugs.fuchsia.dev/p/fuchsia/issues/detail?id\u003d115601",
+      "parentUuid": "7a7d95f0_1440a554",
+      "revId": "4d575c12b0b992d3a24759348224d17d05e393a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
