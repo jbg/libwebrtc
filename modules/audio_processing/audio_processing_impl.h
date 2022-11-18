@@ -188,6 +188,16 @@ class AudioProcessingImpl : public AudioProcessing {
   static std::atomic<int> instance_count_;
   const bool use_setup_specific_default_aec3_config_;
 
+  // TODO(webrtc:7494): Remove the reader and the config when
+  // "WebRTC-Audio-InputVolumeControllerExperiment" field trial is removed.
+  // "WebRTC-Audio-InputVolumeControllerExperiment" field trial config and
+  // reader. `specific_input_volume_controller_config_` must be defined before
+  // `config_`.
+  const AudioProcessing::Config AdjustConfig(
+      const AudioProcessing::Config& config);
+  absl::optional<InputVolumeController::Config>
+      specific_input_volume_controller_config_ = absl::nullopt;
+
   const bool use_denormal_disabler_;
 
   const TransientSuppressor::VadMode transient_suppressor_vad_mode_;
