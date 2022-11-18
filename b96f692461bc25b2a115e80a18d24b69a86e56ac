@@ -16,6 +16,206 @@
       "message": "Hi Alessio, Per, and Sam! Could you please take a look? Thanks!",
       "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "859ccc3b_8b8c4026",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T14:28:33Z",
+      "side": 1,
+      "message": "Thanks Hanna! I have some suggestions to move some code in the anon ns and declare the newly added memeber as const.",
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b135c82a_8a335a70",
+        "filename": "modules/audio_processing/agc2/input_volume_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T14:28:33Z",
+      "side": 1,
+      "message": "nit: also add\n`bool operator!\u003d(const Config\u0026 rhs) const { return !(*this \u003d\u003d rhs); }`",
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc844ada_e7574a20",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T14:28:33Z",
+      "side": 1,
+      "message": "I think there\u0027s a way to we keep the field trial parsing code in the anon namespace and declare the newly added property const\n\n1. replace `AudioProcessingImpl::AdjustConfig` with a function in the anon ns (more details below)\n2. make ` absl::optional\u003cInputVolumeController::Config\u003e AudioProcessingImpl::input_volume_controller_config_override_` const\n3. in the ctor, assign `input_volume_controller_config_override_(GetInputVolumeControllerConfigOverride())` where `GetInputVolumeControllerConfigOverride()` is defined in the anon ns\n4. when `AudioProcessingImpl::config_` is assigned in the ctor, call `config_(AdjustConfig(config, input_volume_controller_config_override_))`\n5. when `AudioProcessingImpl::ApplyConfig()` is called, the passed config is modified with `AdjustConfig(config, input_volume_controller_config_override_)` as done in the ctor\n\nOne could argue that in this way the field trial is parsed when AGC1 analog is disabled, but I would take a simpler approach in the code below and, when the field trial is enabled, always (i) entirely disable AGC1 and (ii) enable AGC2 Input Volume Controller + Adaptive Digital.\n\nWDYT?",
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98fd1f25_47b84a2f",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T14:28:33Z",
+      "side": 1,
+      "message": "my recommendation is to remove `analog_agc_enabled` altogether (see my next comment), but FYI this is error prone since, when `config.gain_controller1.analog_gain_controller.enabled` is true and APM initializes the sub-modules, the legacy AGC1 mode changes from `kAdaptiveAnalog` to `kFixedDigital`",
+      "range": {
+        "startLine": 158,
+        "startChar": 7,
+        "endLine": 159,
+        "endChar": 71
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8404b5c6_b44950f0",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T14:28:33Z",
+      "side": 1,
+      "message": "This is not strictly necessary as we know the AGC config of the platforms on which the field trial will be used (namely, `analog_agc_enabled` will always be true).\n\nI would simply return `absl::nullopt` when `!field_trial::IsEnabled(kInputVolumeControllerFieldTrial)`.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 3
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1e572d3_eda36cf6",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T14:28:33Z",
+      "side": 1,
+      "message": "nit: remove, it\u0027s clear it has value from the line above and we\u0027re not validating any external argument",
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb1bb8a_13c7ea81",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T14:28:33Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28e05fb2_80e7884f",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T14:28:33Z",
+      "side": 1,
+      "message": "nit: add a constexpr default, reads better\n\n```\nconstexpr InputVolumeController::Config kDefaultConfig;\nFieldTrialConstrained\u003cint\u003e clipped_level_min(\n    \"clipped_level_min\", kDefaultConfig.clipped_level_min, 0, 255);\n```",
+      "range": {
+        "startLine": 190,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 67
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "880128bf_928d2f7e",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T14:28:33Z",
+      "side": 1,
+      "message": "if you address the comments above, here you can return the struct using the designated initializers\n\n```\nreturn {\n  .clipped_level_min \u003d static_cast\u003cint\u003e(clipped_level_min.Get()),\n  ...\n};\n```",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 25
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e49a7a_df996ad7",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T14:28:33Z",
+      "side": 1,
+      "message": "what about `input_volume_controller_config_override_`? specified when the field trial is enabled, otherwise unspecified",
+      "range": {
+        "startLine": 199,
+        "startChar": 6,
+        "endLine": 199,
+        "endChar": 46
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
