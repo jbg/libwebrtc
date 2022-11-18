@@ -43,6 +43,7 @@ struct InternalAPMConfig {
   bool aecm_comfort_noise_enabled = false;
   int aecm_routing_mode = 0;
   bool agc_enabled = false;
+  // TODO(bugs.webrtc.org/14685): Remove `agc_mode`.
   int agc_mode = 0;
   bool agc_limiter_enabled = false;
   bool hpf_enabled = false;

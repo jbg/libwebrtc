@@ -34,7 +34,9 @@ class GainControlImpl : public GainControl {
 
   ~GainControlImpl() override;
 
+  // Deprecated. TODO(bugs.webrtc.org/14685): Remove.
   void ProcessRenderAudio(rtc::ArrayView<const int16_t> packed_render_audio);
+  // Deprecated. TODO(bugs.webrtc.org/14685): Remove.
   int AnalyzeCaptureAudio(const AudioBuffer& audio);
   int ProcessCaptureAudio(AudioBuffer* audio, bool stream_has_echo);
 
@@ -44,15 +46,20 @@ class GainControlImpl : public GainControl {
                                     std::vector<int16_t>* packed_buffer);
 
   // GainControl implementation.
+  // Deprecated. TODO(bugs.webrtc.org/14685): Remove.
   int stream_analog_level() const override;
   bool is_limiter_enabled() const override { return limiter_enabled_; }
+  // Deprecated. TODO(bugs.webrtc.org/14685): Remove.
   Mode mode() const override { return mode_; }
+  // Deprecated. TODO(bugs.webrtc.org/14685): Remove.
   int set_mode(Mode mode) override;
   int compression_gain_db() const override { return compression_gain_db_; }
+  // Deprecated. TODO(bugs.webrtc.org/14685): Remove.
   int set_analog_level_limits(int minimum, int maximum) override;
   int set_compression_gain_db(int gain) override;
   int set_target_level_dbfs(int level) override;
   int enable_limiter(bool enable) override;
+  // Deprecated. TODO(bugs.webrtc.org/14685): Remove.
   int set_stream_analog_level(int level) override;
 
  private:
@@ -68,14 +75,13 @@ class GainControlImpl : public GainControl {
 
   std::unique_ptr<ApmDataDumper> data_dumper_;
 
-  Mode mode_;
+  const Mode mode_;
   int minimum_capture_level_;
   int maximum_capture_level_;
   bool limiter_enabled_;
   int target_level_dbfs_;
   int compression_gain_db_;
   int analog_capture_level_ = 0;
-  bool was_analog_level_set_;
   bool stream_is_saturated_;
 
   std::vector<std::unique_ptr<MonoAgcState>> mono_agcs_;

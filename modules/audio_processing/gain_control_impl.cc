@@ -26,19 +26,6 @@ namespace webrtc {
 typedef void Handle;
 
 namespace {
-int16_t MapSetting(GainControl::Mode mode) {
-  switch (mode) {
-    case GainControl::kAdaptiveAnalog:
-      return kAgcModeAdaptiveAnalog;
-    case GainControl::kAdaptiveDigital:
-      return kAgcModeAdaptiveDigital;
-    case GainControl::kFixedDigital:
-      return kAgcModeFixedDigital;
-  }
-  RTC_DCHECK_NOTREACHED();
-  return -1;
-}
-
 // Applies the sub-frame `gains` to all the bands in `out` and clamps the output
 // in the signe 16 bit range.
 void ApplyDigitalGain(const int32_t gains[11],
@@ -93,14 +80,13 @@ int GainControlImpl::instance_counter_ = 0;
 
 GainControlImpl::GainControlImpl()
     : data_dumper_(new ApmDataDumper(instance_counter_)),
-      mode_(kAdaptiveAnalog),
+      mode_(kFixedDigital),
       minimum_capture_level_(0),
       maximum_capture_level_(255),
       limiter_enabled_(true),
       target_level_dbfs_(3),
       compression_gain_db_(9),
       analog_capture_level_(0),
-      was_analog_level_set_(false),
       stream_is_saturated_(false) {}
 
 GainControlImpl::~GainControlImpl() = default;
@@ -142,58 +128,12 @@ void GainControlImpl::PackRenderAudioBuffer(
 }
 
 int GainControlImpl::AnalyzeCaptureAudio(const AudioBuffer& audio) {
-  RTC_DCHECK(num_proc_channels_);
-  RTC_DCHECK_GE(AudioBuffer::kMaxSplitFrameLength, audio.num_frames_per_band());
-  RTC_DCHECK_EQ(audio.num_channels(), *num_proc_channels_);
-  RTC_DCHECK_LE(*num_proc_channels_, mono_agcs_.size());
-
-  int16_t split_band_data[AudioBuffer::kMaxNumBands]
-                         [AudioBuffer::kMaxSplitFrameLength];
-  int16_t* split_bands[AudioBuffer::kMaxNumBands] = {
-      split_band_data[0], split_band_data[1], split_band_data[2]};
-
-  if (mode_ == kAdaptiveAnalog) {
-    for (size_t ch = 0; ch < mono_agcs_.size(); ++ch) {
-      capture_levels_[ch] = analog_capture_level_;
-
-      audio.ExportSplitChannelData(ch, split_bands);
-
-      int err =
-          WebRtcAgc_AddMic(mono_agcs_[ch]->state, split_bands,
-                           audio.num_bands(), audio.num_frames_per_band());
-
-      if (err != AudioProcessing::kNoError) {
-        return AudioProcessing::kUnspecifiedError;
-      }
-    }
-  } else if (mode_ == kAdaptiveDigital) {
-    for (size_t ch = 0; ch < mono_agcs_.size(); ++ch) {
-      int32_t capture_level_out = 0;
-
-      audio.ExportSplitChannelData(ch, split_bands);
-
-      int err =
-          WebRtcAgc_VirtualMic(mono_agcs_[ch]->state, split_bands,
-                               audio.num_bands(), audio.num_frames_per_band(),
-                               analog_capture_level_, &capture_level_out);
-
-      capture_levels_[ch] = capture_level_out;
-
-      if (err != AudioProcessing::kNoError) {
-        return AudioProcessing::kUnspecifiedError;
-      }
-    }
-  }
-
+  RTC_DCHECK_EQ(mode_, kFixedDigital);
   return AudioProcessing::kNoError;
 }
 
 int GainControlImpl::ProcessCaptureAudio(AudioBuffer* audio,
                                          bool stream_has_echo) {
-  if (mode_ == kAdaptiveAnalog && !was_analog_level_set_) {
-    return AudioProcessing::kStreamParameterNotSetError;
-  }
-
   RTC_DCHECK(num_proc_channels_);
   RTC_DCHECK_GE(AudioBuffer::kMaxSplitFrameLength,
                 audio->num_frames_per_band());
@@ -250,58 +190,24 @@ int GainControlImpl::ProcessCaptureAudio(AudioBuffer* audio,
     return AudioProcessing::kUnspecifiedError;
   }
 
-  was_analog_level_set_ = false;
-
   return AudioProcessing::kNoError;
 }
 
-
-// TODO(ajm): ensure this is called under kAdaptiveAnalog.
 int GainControlImpl::set_stream_analog_level(int level) {
-  data_dumper_->DumpRaw("gain_control_set_stream_analog_level", 1, &level);
-
-  was_analog_level_set_ = true;
-  if (level < minimum_capture_level_ || level > maximum_capture_level_) {
-    return AudioProcessing::kBadParameterError;
-  }
-  analog_capture_level_ = level;
-
   return AudioProcessing::kNoError;
 }
 
 int GainControlImpl::stream_analog_level() const {
-  data_dumper_->DumpRaw("gain_control_stream_analog_level", 1,
-                        &analog_capture_level_);
   return analog_capture_level_;
 }
 
 int GainControlImpl::set_mode(Mode mode) {
-  if (MapSetting(mode) == -1) {
-    return AudioProcessing::kBadParameterError;
-  }
-
-  mode_ = mode;
-  RTC_DCHECK(num_proc_channels_);
-  RTC_DCHECK(sample_rate_hz_);
-  Initialize(*num_proc_channels_, *sample_rate_hz_);
   return AudioProcessing::kNoError;
 }
-
 
 int GainControlImpl::set_analog_level_limits(int minimum, int maximum) {
-  if (minimum < 0 || maximum > 65535 || maximum < minimum) {
-    return AudioProcessing::kBadParameterError;
-  }
-
-  minimum_capture_level_ = minimum;
-  maximum_capture_level_ = maximum;
-
-  RTC_DCHECK(num_proc_channels_);
-  RTC_DCHECK(sample_rate_hz_);
-  Initialize(*num_proc_channels_, *sample_rate_hz_);
   return AudioProcessing::kNoError;
 }
-
 
 int GainControlImpl::set_target_level_dbfs(int level) {
   if (level > 31 || level < 0) {
@@ -342,7 +248,7 @@ void GainControlImpl::Initialize(size_t num_proc_channels, int sample_rate_hz) {
     }
 
     int error = WebRtcAgc_Init(mono_agcs_[ch]->state, minimum_capture_level_,
-                               maximum_capture_level_, MapSetting(mode_),
+                               maximum_capture_level_, kAgcModeFixedDigital,
                                *sample_rate_hz_);
     RTC_DCHECK_EQ(error, 0);
     capture_levels_[ch] = analog_capture_level_;

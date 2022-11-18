@@ -741,20 +741,21 @@ void ApmTest::StreamParametersTest(Format format) {
   // -- Missing AGC level --
   AudioProcessing::Config apm_config = apm_->GetConfig();
   apm_config.gain_controller1.enabled = true;
+  apm_config.gain_controller1.analog_gain_controller.enabled = true;
   apm_->ApplyConfig(apm_config);
-  EXPECT_EQ(apm_->kStreamParameterNotSetError, ProcessStreamChooser(format));
+  EXPECT_EQ(apm_->kNoError, ProcessStreamChooser(format));
 
   // Resets after successful ProcessStream().
   apm_->set_stream_analog_level(127);
   EXPECT_EQ(apm_->kNoError, ProcessStreamChooser(format));
-  EXPECT_EQ(apm_->kStreamParameterNotSetError, ProcessStreamChooser(format));
+  EXPECT_EQ(apm_->kNoError, ProcessStreamChooser(format));
 
   // Other stream parameters set correctly.
   apm_config.echo_canceller.enabled = true;
   apm_config.echo_canceller.mobile_mode = false;
   apm_->ApplyConfig(apm_config);
   EXPECT_EQ(apm_->kNoError, apm_->set_stream_delay_ms(100));
-  EXPECT_EQ(apm_->kStreamParameterNotSetError, ProcessStreamChooser(format));
+  EXPECT_EQ(apm_->kNoError, ProcessStreamChooser(format));
   apm_config.gain_controller1.enabled = false;
   apm_->ApplyConfig(apm_config);
 

@@ -109,20 +109,6 @@ int SuitableProcessRate(int minimum_rate,
   return uppermost_native_rate;
 }
 
-GainControl::Mode Agc1ConfigModeToInterfaceMode(
-    AudioProcessing::Config::GainController1::Mode mode) {
-  using Agc1Config = AudioProcessing::Config::GainController1;
-  switch (mode) {
-    case Agc1Config::kAdaptiveAnalog:
-      return GainControl::kAdaptiveAnalog;
-    case Agc1Config::kAdaptiveDigital:
-      return GainControl::kAdaptiveDigital;
-    case Agc1Config::kFixedDigital:
-      return GainControl::kFixedDigital;
-  }
-  RTC_CHECK_NOTREACHED();
-}
-
 bool MinimizeProcessingForUnusedOutput() {
   return !field_trial::IsEnabled("WebRTC-MutedStateKillSwitch");
 }
@@ -1770,12 +1756,6 @@ void AudioProcessingImpl::set_stream_analog_level_locked(int level) {
     submodules_.agc_manager->set_stream_analog_level(level);
     return;
   }
-
-  if (submodules_.gain_control) {
-    int error = submodules_.gain_control->set_stream_analog_level(level);
-    RTC_DCHECK_EQ(kNoError, error);
-    return;
-  }
 }
 
 int AudioProcessingImpl::recommended_stream_analog_level() const {
@@ -1804,12 +1784,6 @@ void AudioProcessingImpl::UpdateRecommendedInputVolumeLocked() {
   if (submodules_.agc_manager) {
     capture_.recommended_input_volume =
         submodules_.agc_manager->recommended_analog_level();
-    return;
-  }
-
-  if (submodules_.gain_control) {
-    capture_.recommended_input_volume =
-        submodules_.gain_control->stream_analog_level();
     return;
   }
 
@@ -2028,10 +2002,7 @@ void AudioProcessingImpl::InitializeGainController1() {
   submodules_.gain_control->Initialize(num_proc_channels(),
                                        proc_sample_rate_hz());
   if (!config_.gain_controller1.analog_gain_controller.enabled) {
-    int error = submodules_.gain_control->set_mode(
-        Agc1ConfigModeToInterfaceMode(config_.gain_controller1.mode));
-    RTC_DCHECK_EQ(kNoError, error);
-    error = submodules_.gain_control->set_target_level_dbfs(
+    int error = submodules_.gain_control->set_target_level_dbfs(
         config_.gain_controller1.target_level_dbfs);
     RTC_DCHECK_EQ(kNoError, error);
     error = submodules_.gain_control->set_compression_gain_db(
