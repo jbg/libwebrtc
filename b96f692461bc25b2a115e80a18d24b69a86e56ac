@@ -94,6 +94,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72d760ed_036f5106",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-18T16:05:58Z",
+      "side": 1,
+      "message": "no, don\u0027t do what I suggested above\nreason: it\u0027d break chrome://flags/#enable-webrtc-allow-input-volume-adjustment (see https://chromium-review.googlesource.com/c/chromium/src/+/3942258)\n\nBTW we will need to update chromium so that the flag works with AGC2. The code to update is at the end of `ConfigAutomaticGainControl()` in media/webrtc/helpers.cc.",
+      "parentUuid": "98fd1f25_47b84a2f",
+      "range": {
+        "startLine": 158,
+        "startChar": 7,
+        "endLine": 159,
+        "endChar": 71
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8404b5c6_b44950f0",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 1
