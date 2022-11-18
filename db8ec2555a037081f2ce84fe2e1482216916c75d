@@ -16,6 +16,52 @@
       "message": "moved some things back. Now it makes more sense!",
       "revId": "db8ec2555a037081f2ce84fe2e1482216916c75d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "785320bc_4e83f1a5",
+        "filename": "media/engine/simulcast_encoder_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-11-18T16:05:22Z",
+      "side": 1,
+      "message": "nit: rename to |kf_on_all_layers| or similar.",
+      "range": {
+        "startLine": 470,
+        "startChar": 6,
+        "endLine": 470,
+        "endChar": 25
+      },
+      "revId": "db8ec2555a037081f2ce84fe2e1482216916c75d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c28172_a8bce387",
+        "filename": "media/engine/simulcast_encoder_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-11-18T16:05:22Z",
+      "side": 1,
+      "message": "You set the type only on the first stream, contrary to what the comment above says.\n\nEither update the comment, or do std::fill(stream_frame_types) here.",
+      "range": {
+        "startLine": 506,
+        "startChar": 31,
+        "endLine": 506,
+        "endChar": 32
+      },
+      "revId": "db8ec2555a037081f2ce84fe2e1482216916c75d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
