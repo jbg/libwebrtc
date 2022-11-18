@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bebc915_683152e2",
+        "filename": "modules/audio_processing/agc2/input_volume_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-18T17:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b135c82a_8a335a70",
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc844ada_e7574a20",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-11-18T14:28:33Z",
       "side": 1,
       "message": "I think there\u0027s a way to we keep the field trial parsing code in the anon namespace and declare the newly added property const\n\n1. replace `AudioProcessingImpl::AdjustConfig` with a function in the anon ns (more details below)\n2. make ` absl::optional\u003cInputVolumeController::Config\u003e AudioProcessingImpl::input_volume_controller_config_override_` const\n3. in the ctor, assign `input_volume_controller_config_override_(GetInputVolumeControllerConfigOverride())` where `GetInputVolumeControllerConfigOverride()` is defined in the anon ns\n4. when `AudioProcessingImpl::config_` is assigned in the ctor, call `config_(AdjustConfig(config, input_volume_controller_config_override_))`\n5. when `AudioProcessingImpl::ApplyConfig()` is called, the passed config is modified with `AdjustConfig(config, input_volume_controller_config_override_)` as done in the ctor\n\nOne could argue that in this way the field trial is parsed when AGC1 analog is disabled, but I would take a simpler approach in the code below and, when the field trial is enabled, always (i) entirely disable AGC1 and (ii) enable AGC2 Input Volume Controller + Adaptive Digital.\n\nWDYT?",
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a551b322_042d4cc3",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-18T17:29:26Z",
+      "side": 1,
+      "message": "The method is now split into two functions that are run in the ctor initializer list in the order: `GetInputVolumeControllerConfigOverride()`, `AdjustConfig()`.\n\nThe code sets the following fields if the override gets activated:\n\n`adjusted_config.gain_controller1.enabled \u003d false;`\n`adjusted_config.gain_controller1.analog_gain_controller.enabled \u003d false;`\n`adjusted_config.gain_controller2.enabled \u003d true;`\n`adjusted_config.gain_controller2.adaptive_digital.enabled \u003d true;`\n`adjusted_config.gain_controller2.input_volume_controller.enabled \u003d true;`\n  \nWDYT?",
+      "parentUuid": "dc844ada_e7574a20",
       "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -141,6 +177,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad99fc82_cde60315",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-18T17:29:26Z",
+      "side": 1,
+      "message": "If we return `absl::nullopt`, we\u0027ll need to move the logic to the ctor member initializer list:\n\n`config_(input_volume_controller_config_override_ ? AdjustConfig(config), config)`\n\nDo you prefer that?",
+      "parentUuid": "8404b5c6_b44950f0",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 3
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1e572d3_eda36cf6",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 1
@@ -152,6 +212,24 @@
       "writtenOn": "2022-11-18T14:28:33Z",
       "side": 1,
       "message": "nit: remove, it\u0027s clear it has value from the line above and we\u0027re not validating any external argument",
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0ec98a9_869efe6f",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-18T17:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1e572d3_eda36cf6",
       "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -173,6 +251,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a91d4b8a_88265b28",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-18T17:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9eb1bb8a_13c7ea81",
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28e05fb2_80e7884f",
@@ -186,6 +282,30 @@
       "writtenOn": "2022-11-18T14:28:33Z",
       "side": 1,
       "message": "nit: add a constexpr default, reads better\n\n```\nconstexpr InputVolumeController::Config kDefaultConfig;\nFieldTrialConstrained\u003cint\u003e clipped_level_min(\n    \"clipped_level_min\", kDefaultConfig.clipped_level_min, 0, 255);\n```",
+      "range": {
+        "startLine": 190,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 67
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dea05ae_909a29ea",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-18T17:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28e05fb2_80e7884f",
       "range": {
         "startLine": 190,
         "startChar": 8,
@@ -219,6 +339,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe35a41c_747a03cc",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-18T17:29:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "880128bf_928d2f7e",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 25
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02e49a7a_df996ad7",
@@ -232,6 +376,30 @@
       "writtenOn": "2022-11-18T14:28:33Z",
       "side": 1,
       "message": "what about `input_volume_controller_config_override_`? specified when the field trial is enabled, otherwise unspecified",
+      "range": {
+        "startLine": 199,
+        "startChar": 6,
+        "endLine": 199,
+        "endChar": 46
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14a8ddde_43ad9d0d",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-18T17:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02e49a7a_df996ad7",
       "range": {
         "startLine": 199,
         "startChar": 6,
