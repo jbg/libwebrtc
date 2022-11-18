@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "478f2b7b_bb7b38eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-11-18T09:16:59Z",
+      "side": 1,
+      "message": "Mirko, Please RS LGTM",
+      "revId": "e7da2d09e92894d3a87d3e002113e82156e9ca61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
