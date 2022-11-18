@@ -354,6 +354,21 @@ void MonoInputVolumeController::UpdateInputVolume(int rms_error_dbfs) {
   SetLevel(LevelFromGainError(residual_gain, level_, min_mic_level_));
 }
 
+bool InputVolumeController::Config::operator==(
+    const InputVolumeController::Config& rhs) const {
+  return enable_clipping_predictor == rhs.enable_clipping_predictor &&
+         clipped_level_min == rhs.clipped_level_min &&
+         clipped_level_step == rhs.clipped_level_step &&
+         clipped_ratio_threshold == rhs.clipped_ratio_threshold &&
+         clipped_wait_frames == rhs.clipped_wait_frames &&
+         target_range_max_dbfs == rhs.target_range_max_dbfs &&
+         target_range_min_dbfs == rhs.target_range_min_dbfs &&
+         update_input_volume_wait_frames ==
+             rhs.update_input_volume_wait_frames &&
+         speech_probability_threshold == rhs.speech_probability_threshold &&
+         speech_ratio_threshold == rhs.speech_ratio_threshold;
+}
+
 InputVolumeController::InputVolumeController(int num_capture_channels,
                                              const Config& config)
     : num_capture_channels_(num_capture_channels),
