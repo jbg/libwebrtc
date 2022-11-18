@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "279a7812_00f1acf0",
+        "filename": "media/engine/simulcast_encoder_adapter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-11-18T15:39:37Z",
+      "side": 1,
+      "message": "this is what blew up indeed. So we have this for\n  VideoSendStreamTest.TestTemporalLayersVp8SimulcastWithDifferentNumTls\nbypass_mode_\u003dfalse, total_streams_count_\u003d2 which leads to stream_frame_types.size()\u003d1.\nThose are two encoders because they have a different number of temporal layers.\n\nIt turns out that moving this up here was wrong.",
+      "parentUuid": "a6ef0d8d_866dc79a",
+      "revId": "44407be6fb8108f66834bf1f9dc65f9082675cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b9cb2d2_98642511",
         "filename": "media/engine/simulcast_encoder_adapter.cc",
         "patchSetId": 2
@@ -78,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c05327f2_c9e155c5",
+        "filename": "media/engine/simulcast_encoder_adapter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-11-18T15:39:37Z",
+      "side": 1,
+      "message": "It (LibvpxVp8Encoder::Encode, H264EncoderImpl::Encode) does but I am making these changes step by step.",
+      "parentUuid": "2b9cb2d2_98642511",
+      "range": {
+        "startLine": 472,
+        "startChar": 9,
+        "endLine": 473,
+        "endChar": 41
+      },
+      "revId": "44407be6fb8108f66834bf1f9dc65f9082675cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d459a7ff_e9d52b96",
         "filename": "media/engine/simulcast_encoder_adapter.cc",
         "patchSetId": 2
@@ -89,6 +131,30 @@
       "writtenOn": "2022-11-14T09:55:55Z",
       "side": 1,
       "message": "What layer is \"new\"? Shouldn\u0027t it be \"when requesting keyframe on any layer\" instead?",
+      "range": {
+        "startLine": 494,
+        "startChar": 35,
+        "endLine": 494,
+        "endChar": 44
+      },
+      "revId": "44407be6fb8108f66834bf1f9dc65f9082675cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9555a229_f1d3a3bb",
+        "filename": "media/engine/simulcast_encoder_adapter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-11-18T15:39:37Z",
+      "side": 1,
+      "message": "This happens when you have a simulcast stream configured for three layers but it starts with just one layer being active due to bandwidth restrictions. Then, when the second layer gets activated, a keyframe is generated.\n\nYou can see that on\n  https://fippo.github.io/simulcast-playground/rid-as-mid\nif you check outbound-rtp and keyframesEncoded stats (somewhat depending on BWE)\n\nNow I don\u0027t think this is great behavior (an SFU would forward the new low/mid resolution keyframe to subscribers on existing streams) but changing it is tricky and requires an opt-in mechanism.\n\nchanged to \"for a layer that became active for the first time or after being disabled\"",
+      "parentUuid": "d459a7ff_e9d52b96",
       "range": {
         "startLine": 494,
         "startChar": 35,
