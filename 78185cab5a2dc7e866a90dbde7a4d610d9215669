@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "959b6622_ca41f6f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-18T06:09:05Z",
+      "side": 1,
+      "message": "Thanks, lgtm % comments.",
+      "revId": "78185cab5a2dc7e866a90dbde7a4d610d9215669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bea213da_50f38c41",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-18T06:09:05Z",
+      "side": 1,
+      "message": "nit: you should not need IsValid. If delay_based_estimate is infinite, I would think that its ok to say we are loss limited.",
+      "range": {
+        "startLine": 312,
+        "startChar": 6,
+        "endLine": 312,
+        "endChar": 13
+      },
+      "revId": "78185cab5a2dc7e866a90dbde7a4d610d9215669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06d392e_06aeaea3",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-18T06:09:05Z",
+      "side": 1,
+      "message": "assert here that we are in the loss based decreasing state.",
+      "revId": "78185cab5a2dc7e866a90dbde7a4d610d9215669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "802187fe_ecc1f287",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-18T06:09:05Z",
+      "side": 1,
+      "message": "result_after_recovery is only used here. Please but EXPECT_EQ here.",
+      "range": {
+        "startLine": 823,
+        "startChar": 25,
+        "endLine": 823,
+        "endChar": 46
+      },
+      "revId": "78185cab5a2dc7e866a90dbde7a4d610d9215669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13b7988d_a280babf",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-11-18T06:09:05Z",
+      "side": 1,
+      "message": "this does not seem to test anything. Remove?",
+      "range": {
+        "startLine": 826,
+        "startChar": 22,
+        "endLine": 826,
+        "endChar": 32
+      },
+      "revId": "78185cab5a2dc7e866a90dbde7a4d610d9215669",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
