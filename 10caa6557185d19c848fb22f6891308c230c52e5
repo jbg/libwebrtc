@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de36abb4_f0b00c44",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2022-11-21T19:17:31Z",
+      "side": 1,
+      "message": "Would it make sense to just return a single default frame length instead of nullopt? I\u0027m not sure how the calling code should handle nullopt.",
+      "range": {
+        "startLine": 818,
+        "startChar": 13,
+        "endLine": 818,
+        "endChar": 26
+      },
+      "revId": "10caa6557185d19c848fb22f6891308c230c52e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
