@@ -75,6 +75,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bd933c0_012dcfc8",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-21T16:46:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f094c95f_cb488e06",
+      "range": {
+        "startLine": 157,
+        "startChar": 20,
+        "endLine": 157,
+        "endChar": 59
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a22a1dd_17225fe3",
@@ -98,6 +122,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36460202_7747fb25",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-21T16:46:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a22a1dd_17225fe3",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 66
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03a72ea4_854921af",
@@ -111,6 +159,30 @@
       "writtenOn": "2022-11-21T10:26:04Z",
       "side": 1,
       "message": "remove, unused",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 80
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c9fe04e_4effdf98",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-21T16:46:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03a72ea4_854921af",
       "range": {
         "startLine": 159,
         "startChar": 0,
@@ -167,6 +239,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d96d6b4_b36ef5aa",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-21T16:46:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3366c689_f1d3b10f",
+      "range": {
+        "startLine": 182,
+        "startChar": 6,
+        "endLine": 182,
+        "endChar": 47
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b24039b8_21ab5f56",
@@ -180,6 +276,30 @@
       "writtenOn": "2022-11-21T10:26:04Z",
       "side": 1,
       "message": "return",
+      "range": {
+        "startLine": 197,
+        "startChar": 2,
+        "endLine": 197,
+        "endChar": 53
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d045ea2f_00acbae1",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-21T16:46:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b24039b8_21ab5f56",
       "range": {
         "startLine": 197,
         "startChar": 2,
@@ -334,6 +454,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b00c158d_5b7df88b",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-21T16:46:11Z",
+      "side": 1,
+      "message": "It\u0027s a good idea to add checks here.\n\nJust to make sure -- Alessio, is the preferred behaviour that the override is only taken into account if one of `hybrid_agc_config_detected` and `full_agc1_config_detected` is true? We need to leave `.gain_controller2.input_volume_controller.enabled \u003d true` out here from the check, it\u0027s set in this function, not necessarily before.",
+      "parentUuid": "5a2876da_9ebdb11a",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 74
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8efc6a6_95bcd11f",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 3
@@ -345,6 +489,30 @@
       "writtenOn": "2022-11-21T09:13:43Z",
       "side": 1,
       "message": "sine these two variables are identical, `input_volume_controller_config_override_changed` will never be `true` and can be removed",
+      "range": {
+        "startLine": 629,
+        "startChar": 13,
+        "endLine": 630,
+        "endChar": 47
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "513fe825_3468dd41",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-21T16:46:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8efc6a6_95bcd11f",
       "range": {
         "startLine": 629,
         "startChar": 13,
@@ -368,6 +536,30 @@
       "writtenOn": "2022-11-21T09:13:43Z",
       "side": 1,
       "message": "The std::optional operator\u003d\u003d do this comparison for us, so `\u003d (previous_input_volume_controller_config_override !\u003d input_volume_controller_config_override_` should be enough\n\n\nhttps://en.cppreference.com/w/cpp/utility/optional/operator_cmp\n\"contained values are compared (using the corresponding operator of T) only if both lhs and rhs contain values. Otherwise, [essentially compare has_value()]\"\n\n\n\n(but see the earlier comment about `input_volume_controller_config_override_changed`)",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 52
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88b4b3a9_777f2c1c",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-21T16:46:11Z",
+      "side": 1,
+      "message": "Thanks Sam for the explanation! The check is removed since `input_volume_controller_config_override_changed` is now a const.",
+      "parentUuid": "79b486a7_cee9df95",
       "range": {
         "startLine": 654,
         "startChar": 0,

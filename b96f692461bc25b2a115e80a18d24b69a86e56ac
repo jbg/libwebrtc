@@ -196,6 +196,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b8c34c6_b3cde8fa",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-21T16:46:11Z",
+      "side": 1,
+      "message": "The current version of the check is in line with what was decided at: https://webrtc-review.googlesource.com/c/src/+/282720/comment/facc0676_839d43f9/. If it\u0027s not an error but just redundancy I\u0027d keep the two similar until the deprecation CL is ready.\n\nWDYT?",
+      "parentUuid": "8fd66263_e4d9d139",
+      "range": {
+        "startLine": 158,
+        "startChar": 7,
+        "endLine": 159,
+        "endChar": 71
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8404b5c6_b44950f0",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 1
