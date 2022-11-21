@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e3c22db_fcb1909a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-21T22:00:20Z",
+      "side": 1,
+      "message": "Looks good.",
+      "revId": "43769678b84b5cc3124a82470a4f7cf4a8aaaa1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c94f42a7_e950e14e",
@@ -32,6 +49,24 @@
       "side": 1,
       "message": "This could in theory create a null dereference if the mac address is 00:00:00:00:00:00 (and address size is 6 bytes).",
       "parentUuid": "c94f42a7_e950e14e",
+      "revId": "43769678b84b5cc3124a82470a4f7cf4a8aaaa1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a306f892_1646a409",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-21T22:00:20Z",
+      "side": 1,
+      "message": "address.data() returns an uint8_t* - even if the MAC address is 0, the pointer won\u0027t be.",
+      "parentUuid": "a089e85d_25038e74",
       "revId": "43769678b84b5cc3124a82470a4f7cf4a8aaaa1b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
