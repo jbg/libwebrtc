@@ -215,6 +215,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "154b3a26_403c55a5",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-21T14:43:01Z",
+      "side": 1,
+      "message": "```\n\"Returns an adjusted config\" -\u003e \"Replaces analog AGC1 with AGC2 input volume controller\"\n```\nAlessio clarified to me that this is not all that `AdjustConfig` does, since it is intended to replace the full AGC1 with the full AGC2 as well. So I guess something like \"Returns a config where AGC2 is used for all gain control if [...]\".",
+      "parentUuid": "7391780e_0adb41f5",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 46
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70b10657_79886e6b",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 3
@@ -274,6 +298,30 @@
       "side": 1,
       "message": "One mistake in my comment above that Sam noticed. In the *Hybrid AGC* config, ignore the last line sicne `.gain_controller2.input_volume_controller.enabled` must obviously be false.",
       "parentUuid": "6b433624_2b101cc9",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 74
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a2876da_9ebdb11a",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-21T14:43:01Z",
+      "side": 1,
+      "message": "This is less confusing once the function comment clarifies that AGC2 is fully enabled (i.e. that we also intend to switch from AGC1 digital to AGC2 digital with this experiment).\n\nI\u0027m OK with no DCHECK, the DCHECK suggested by Alessio, or DCHECKING that a digital AGC is already enabled (since the analog part is already tested for up front.)",
+      "parentUuid": "21c5bb6b_2328ffe6",
       "range": {
         "startLine": 236,
         "startChar": 0,
