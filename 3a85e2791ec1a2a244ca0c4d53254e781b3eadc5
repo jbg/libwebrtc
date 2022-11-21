@@ -262,6 +262,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21c5bb6b_2328ffe6",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T13:54:03Z",
+      "side": 1,
+      "message": "One mistake in my comment above that Sam noticed. In the *Hybrid AGC* config, ignore the last line sicne `.gain_controller2.input_volume_controller.enabled` must obviously be false.",
+      "parentUuid": "6b433624_2b101cc9",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 74
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8efc6a6_95bcd11f",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 3
