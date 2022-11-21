@@ -105,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a80af814_e5ffefab",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "Great work! LGTM",
+      "parentUuid": "a551b322_042d4cc3",
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98fd1f25_47b84a2f",
@@ -154,6 +172,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fd66263_e4d9d139",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "As I wrote in my 2nd reply, you were right and `analog_agc_enabled` is needed. However, I wonder if we can remove `config.gain_controller1.mode \u003d\u003d kAdaptiveAnalog`, since I am not aware of any platforms where AGC1 is enabled, the mode is `kAdaptiveAnalog` but `gain_controller1.analog_gain_controller.enabled` is false.\n\nAlso, I started working on https://webrtc-review.googlesource.com/c/src/+/283803 to deprecate `config.gain_controller1.mode` since, in practice, it is always used as `kFixedDigital` because, when initially set to `kAdaptiveAnalog`, then `.gain_controller1.analog_gain_controller.enabled` is always true and, when the APM sub-modules are initialized, the mode is changed to `kFixedDigital`.",
+      "parentUuid": "72d760ed_036f5106",
+      "range": {
+        "startLine": 158,
+        "startChar": 7,
+        "endLine": 159,
+        "endChar": 71
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8404b5c6_b44950f0",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 1
@@ -189,6 +231,30 @@
       "side": 1,
       "message": "If we return `absl::nullopt`, we\u0027ll need to move the logic to the ctor member initializer list:\n\n`config_(input_volume_controller_config_override_ ? AdjustConfig(config), config)`\n\nDo you prefer that?",
       "parentUuid": "8404b5c6_b44950f0",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 3
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c6ecc9e_09de4fd1",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "The current patch set looks great",
+      "parentUuid": "ad99fc82_cde60315",
       "range": {
         "startLine": 162,
         "startChar": 0,

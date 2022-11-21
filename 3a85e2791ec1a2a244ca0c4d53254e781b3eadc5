@@ -35,6 +35,115 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28d9e112_e1d9929f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "Thanks for the new patchset Hanna, great work!",
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f094c95f_cb488e06",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "nit: a shorter name is fine here (e.g., `field_trial_name`) since there are no other field trials being parsed in this function",
+      "range": {
+        "startLine": 157,
+        "startChar": 20,
+        "endLine": 157,
+        "endChar": 59
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a22a1dd_17225fe3",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "move closer to where it\u0027s used (namely, line 189)",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 66
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03a72ea4_854921af",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "remove, unused",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 80
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "235775d2_20084ac9",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "Question: `/*upper_limit\u003d*/absl::nullopt` means that there\u0027s no upper limit, right?",
+      "range": {
+        "startLine": 172,
+        "startChar": 65,
+        "endLine": 173,
+        "endChar": 19
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3366c689_f1d3b10f",
@@ -53,6 +162,29 @@
         "startChar": 6,
         "endLine": 182,
         "endChar": 47
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b24039b8_21ab5f56",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "return",
+      "range": {
+        "startLine": 197,
+        "startChar": 2,
+        "endLine": 197,
+        "endChar": 53
       },
       "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
@@ -106,6 +238,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b433624_2b101cc9",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "TL;DR we should check how this code interacts with https://source.chromium.org/chromium/chromium/src/+/main:media/webrtc/helpers.cc;l\u003d67-118;drc\u003d6be15666177fafa1311dab630d2fd4619beeeed6 on different platforms.\n\n\u003e Are there any conflicts here wrt digital AGC?\n\nNo, because `gain_controller1.enabled \u003d false` disables any digital gains applied by AGC1.\n\n\u003e What if AGC1 digital + AGC2 input volume control is specified, can that happen?\n\nNo, that setup is used nowhere. Also, at this point of the code, AGC1 analog must be active (see `analog_agc_enabled` above).\n\nWe should `RTC_DCHECK(!config.gain_controller2.input_volume_controller.enabled)` after line 236, since this is a newly added functionality that must be enabled via the field trial override.\n\n\u003e \n\u003e If some combination like this is possible in practice, then we should handle it.\n\u003e \n\u003e If it is possible in theory but not in practice because we will only use this experiment on platforms X+Y with config Z, then assumptions like that should be checked (DCHECK / LOG(ERROR) / at least call out in a comment). It makes some configs effectively illegal, because configuring APM in conflict with those assumptions will behave in unexpected and undesired ways.\n\nGood point. At this point in the code, we expect one of the following configurations:\n\n#1 Hybrid AGC: AGC1 analog + AGC2 adaptive digital\n```\n.gain_controller1 enabled \u003d true,\n.gain_controller1.analog_gain_controller.enabled \u003d true,\n.gain_controller1.analog_gain_controller.enable_digital_adaptive \u003d false\n.gain_controller2.enabled \u003d true\n.gain_controller2.adaptive_digital.enabled \u003d true\n.gain_controller2.input_volume_controller.enabled \u003d true\n``` \n\n#2 Full AGC1\n```\n.gain_controller1 enabled \u003d true,\n.gain_controller1.analog_gain_controller.enabled \u003d true,\n.gain_controller1.analog_gain_controller.enable_digital_adaptive \u003d true\n.gain_controller2.enabled \u003d false\n```\n\nWe could define two local boolean variables named `hybrid_agc_config_detected` and `full_agc1_config_detected` and then DCHECK `hybrid_agc_config_detected` XOR `full_agc1_config_detected`.",
+      "parentUuid": "70b10657_79886e6b",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 74
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8efc6a6_95bcd11f",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 3
@@ -145,6 +301,29 @@
         "startChar": 0,
         "endLine": 659,
         "endChar": 52
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d22a25_8d37edc5",
+        "filename": "modules/audio_processing/audio_processing_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T10:26:04Z",
+      "side": 1,
+      "message": "nit: bugs.webrtc.org/7494\n(I also wish this notation is accepted...)",
+      "range": {
+        "startLine": 194,
+        "startChar": 10,
+        "endLine": 194,
+        "endChar": 21
       },
       "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
