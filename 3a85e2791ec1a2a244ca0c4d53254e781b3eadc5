@@ -16,6 +16,138 @@
       "message": "Thank you Alessio for the comments!",
       "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be8aee0e_510ce39d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-21T09:13:43Z",
+      "side": 1,
+      "message": "The AdjustedConfig setup looks great, minimal footprint in audio_processing_impl.\n\nI am not looking at the AGC2 unit tests unless you need me to, Alessio knows that better.",
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3366c689_f1d3b10f",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-21T09:13:43Z",
+      "side": 1,
+      "message": "Should this be `kDefaultConfig.` like the rest?",
+      "range": {
+        "startLine": 182,
+        "startChar": 6,
+        "endLine": 182,
+        "endChar": 47
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7391780e_0adb41f5",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-21T09:13:43Z",
+      "side": 1,
+      "message": "Can this comment be more explicit about what adjustment is made? Something like:\n\"Returns an adjusted config\" -\u003e \"Replaces analog AGC1 with AGC2 input volume controller\"",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 46
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b10657_79886e6b",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-21T09:13:43Z",
+      "side": 1,
+      "message": "Are there any conflicts here wrt digital AGC?\nWhat if AGC1 digital + AGC2 input volume control is specified, can that happen?\n\nIf some combination like this is possible in practice, then we should handle it.\n\nIf it is possible in theory but not in practice because we will only use this experiment on platforms X+Y with config Z, then assumptions like that should be checked (DCHECK / LOG(ERROR) / at least call out in a comment). It makes some configs effectively illegal, because configuring APM in conflict with those assumptions will behave in unexpected and undesired ways.",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 74
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8efc6a6_95bcd11f",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-21T09:13:43Z",
+      "side": 1,
+      "message": "sine these two variables are identical, `input_volume_controller_config_override_changed` will never be `true` and can be removed",
+      "range": {
+        "startLine": 629,
+        "startChar": 13,
+        "endLine": 630,
+        "endChar": 47
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79b486a7_cee9df95",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-21T09:13:43Z",
+      "side": 1,
+      "message": "The std::optional operator\u003d\u003d do this comparison for us, so `\u003d (previous_input_volume_controller_config_override !\u003d input_volume_controller_config_override_` should be enough\n\n\nhttps://en.cppreference.com/w/cpp/utility/optional/operator_cmp\n\"contained values are compared (using the corresponding operator of T) only if both lhs and rhs contain values. Otherwise, [essentially compare has_value()]\"\n\n\n\n(but see the earlier comment about `input_volume_controller_config_override_changed`)",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 52
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
