@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'b8e1994ea3b0402c959e2922cc22e03234195a83',
+  'chromium_revision': '6e5f1d450f9381d259be2daf76938420e8f38d63',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -52,13 +52,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@2f2a1d16122129a1940d84f5b753a25a30c66601',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@c37f75ab218128b612e2f6ef748b8d62598b04aa',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@6917a6ceb48a6a72508890bfbaedf1fd49a80e8f',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@40a3010b90bf839fb68ce6cedfcd417067f1ee96',
+    'https://chromium.googlesource.com/chromium/src/third_party@68c7a6263ef414c597b8db5201f1e8bcdf863161',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -162,7 +162,7 @@ deps = {
   },
 
   'src/third_party/boringssl/src':
-    'https://boringssl.googlesource.com/boringssl.git@1ee71185a2322dc354bee5e5a0abfb1810a27dc6',
+    'https://boringssl.googlesource.com/boringssl.git@f0518d45119dd4dd322a884669daf8247bc3c992',
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@442456a68cafc9325ef9e6f5bae8f425241ddaab',
   'src/third_party/catapult':
@@ -245,7 +245,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@d8f0dc3d20c814236d97a042f06ffacd8f2d6b1f',
+    'https://android.googlesource.com/platform/external/perfetto.git@f5b6c4ed868219aefe172ac2d5bd683814a5f001',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@605350bd5b68ac47f595d60cc8ef346588e773c0',
   'src/third_party/libyuv':
