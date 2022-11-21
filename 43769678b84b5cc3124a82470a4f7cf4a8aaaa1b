@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c94f42a7_e950e14e",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-11-21T16:37:20Z",
+      "side": 1,
+      "message": "should this be || for extra robustness?",
+      "revId": "43769678b84b5cc3124a82470a4f7cf4a8aaaa1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09f6bded_22dba6c8",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-11-21T16:37:20Z",
+      "side": 1,
+      "message": "wondering if this should check PhysicalAddressLength before doing a (scream) reinterpret_cast",
+      "revId": "43769678b84b5cc3124a82470a4f7cf4a8aaaa1b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

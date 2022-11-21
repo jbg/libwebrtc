@@ -86,6 +86,24 @@
       "parentUuid": "2d76e393_41b78082",
       "revId": "9f88d5864284983499837921a4426d60c0c232fb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "551adf47_fd8b754f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-11-21T16:37:20Z",
+      "side": 1,
+      "message": "added a comment explaining this. I think this will apply to everything detected on a hardcoded MAC basis.\nAnd updated the commit message which was off.",
+      "parentUuid": "c4710a83_6c37c22b",
+      "revId": "9f88d5864284983499837921a4426d60c0c232fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
