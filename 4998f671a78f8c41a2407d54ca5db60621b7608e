@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6b62a8_0da873b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T15:17:10Z",
+      "side": 1,
+      "message": "Thanks for this CL Hanna! Great work with the unit tests!!\nLGTM % a few nits",
+      "revId": "4998f671a78f8c41a2407d54ca5db60621b7608e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d370eb31_d594219d",
+        "filename": "modules/audio_processing/agc2/input_volume_controller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T15:17:10Z",
+      "side": 1,
+      "message": "Thanks for adding all the tests below! Great to have them!",
+      "revId": "4998f671a78f8c41a2407d54ca5db60621b7608e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a1c141_e89eac14",
+        "filename": "modules/audio_processing/agc2/input_volume_controller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T15:17:10Z",
+      "side": 1,
+      "message": "nit: could you call `set_stream_analog_level()` before each `Process()` call? it\u0027s good to stick to the API contract\n\nconsider adding a helper function that calls the setter, then Process and that returns the recommended volume; once we switch to the simplified API, that helper will be replaced",
+      "range": {
+        "startLine": 1520,
+        "startChar": 2,
+        "endLine": 1520,
+        "endChar": 63
+      },
+      "revId": "4998f671a78f8c41a2407d54ca5db60621b7608e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39cfb38a_da367314",
+        "filename": "modules/audio_processing/agc2/input_volume_controller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T15:17:10Z",
+      "side": 1,
+      "message": "ditto, also in the tests below",
+      "range": {
+        "startLine": 1540,
+        "startChar": 18,
+        "endLine": 1540,
+        "endChar": 41
+      },
+      "revId": "4998f671a78f8c41a2407d54ca5db60621b7608e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "579cc54a_beb938ac",
+        "filename": "modules/audio_processing/agc2/input_volume_controller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1696,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T15:17:10Z",
+      "side": 1,
+      "message": "nit: `CheckClippedLevelMinIsEffective` is a bit easier to read",
+      "range": {
+        "startLine": 1696,
+        "startChar": 36,
+        "endLine": 1696,
+        "endChar": 60
+      },
+      "revId": "4998f671a78f8c41a2407d54ca5db60621b7608e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "342f947b_bf843cc3",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-21T15:17:10Z",
+      "side": 1,
+      "message": "Once https://webrtc-review.googlesource.com/c/src/+/280560 lands, this won\u0027t be needed anymore since it\u0027ll be possible to use the input volume controller without the digital adaptive controller.\n\nSo, let\u0027s add a TODO explaining that this is a temporary dcheck",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 45
+      },
+      "revId": "4998f671a78f8c41a2407d54ca5db60621b7608e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
