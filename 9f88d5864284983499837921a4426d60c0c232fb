@@ -33,6 +33,23 @@
       "message": "PTAL. Actually \"documented\" in the response Harald got from Cisco",
       "revId": "9f88d5864284983499837921a4426d60c0c232fb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71df611_8779096a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-11-21T14:02:49Z",
+      "side": 1,
+      "message": "adding new MAC is great,\nbut why unset underlying_type_for_vpn ?",
+      "revId": "9f88d5864284983499837921a4426d60c0c232fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
