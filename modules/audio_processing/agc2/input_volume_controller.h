@@ -35,6 +35,8 @@ class InputVolumeController final {
  public:
   // Config for the constructor.
   struct Config {
+    bool operator==(const Config& rhs) const;
+    bool operator!=(const Config& rhs) const { return !(*this == rhs); }
     // Lowest input volume level that will be applied in response to clipping.
     int clipped_level_min = 70;
     // Amount input volume level is lowered with every clipping event. Limited
