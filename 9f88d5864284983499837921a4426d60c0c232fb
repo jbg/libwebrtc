@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdbb4f03_eb545f42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20134
+      },
+      "writtenOn": "2022-11-21T12:45:40Z",
+      "side": 1,
+      "message": "In the case that ```IsVpnMacAddress()``` returns true, It means that the interface is a either Palo Alto Networks Global Protect (PANGP) or Cisco AnyConnect VPN client. Both those drivers report themselves as ```IF_TYPE_ETHERNET_CSMACD``` (0x06) regardless of the actual underlying interface type. So, the current line ```underlying_type_for_vpn \u003d adapter_type;``` is actually equivalent to ```underlying_type_for_vpn \u003d ADAPTER_TYPE_ETHERNET;```, which might be a wrong inference. For that reason I suggest the replacement to ```ADAPTER_TYPE_UNKNOWN``` which reflects reality better.",
+      "revId": "9f88d5864284983499837921a4426d60c0c232fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
