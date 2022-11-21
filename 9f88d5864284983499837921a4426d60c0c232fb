@@ -68,6 +68,24 @@
       "parentUuid": "b71df611_8779096a",
       "revId": "9f88d5864284983499837921a4426d60c0c232fb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4710a83_6c37c22b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2022-11-21T14:08:53Z",
+      "side": 1,
+      "message": "got it...\n\n1) should we make that a property of the MAC (aka VPN) ?\ni.e that the vpn bool \"set underlying_type_to_unknown\" or similar\nor will all VPNs behave like that ?\n\nor 2) Add a comment that all VPN\u0027s in the current list\nidentify as ETHERNET, and that we might consider changing it\nif a new VPN that that does not do this show up.",
+      "parentUuid": "2d76e393_41b78082",
+      "revId": "9f88d5864284983499837921a4426d60c0c232fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
