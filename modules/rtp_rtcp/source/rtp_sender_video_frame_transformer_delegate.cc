@@ -18,6 +18,7 @@
 #include "modules/rtp_rtcp/source/rtp_descriptor_authentication.h"
 #include "modules/rtp_rtcp/source/rtp_sender_video.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/logging.h"
 
 namespace webrtc {
 namespace {
@@ -206,4 +207,24 @@ void RTPSenderVideoFrameTransformerDelegate::Reset() {
     sender_ = nullptr;
   }
 }
+
+std::unique_ptr<TransformableVideoFrameInterface> CloneSenderVideoFrame(
+    TransformableVideoFrameInterface* original) {
+  auto encoded_image_buffer = EncodedImageBuffer::Create(
+      original->GetData().data(), original->GetData().size());
+  EncodedImage encoded_image;
+  encoded_image.SetEncodedData(encoded_image_buffer);
+  // TODO(hta): Make this cast safe.
+  auto original_as_sender =
+      static_cast<TransformableVideoSenderFrame*>(original);
+  // TODO(hta): Fill in other EncodedImage parameters
+  RTPVideoHeader new_header = original_as_sender->GetHeader();
+  return std::make_unique<TransformableVideoSenderFrame>(
+      encoded_image, new_header, original->GetPayloadType(),
+      absl::nullopt,  // codec_type
+      original->GetTimestamp(),
+      absl::nullopt,  // expected_retransmission_time_ms
+      original->GetSsrc());
+}
+
 }  // namespace webrtc
