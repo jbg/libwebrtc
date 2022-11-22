@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5df93ff_f4a696d4",
+        "filename": "media/engine/simulcast_encoder_adapter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-11-22T09:16:55Z",
+      "side": 1,
+      "message": "I believe it works right now because encoder would generate keyframe whenever it wants, so we don\u0027t have to worry about the internal key-frame requirements of the encoder.",
+      "parentUuid": "6ea60562_3ca20310",
+      "revId": "00d64c68f889cc0127a2b2da4820727320f8dc68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fb80ac4_ab4f5201",
         "filename": "media/engine/simulcast_encoder_adapter_unittest.cc",
         "patchSetId": 6
