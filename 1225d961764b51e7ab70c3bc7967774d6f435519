@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de70a811_c77cb64c",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-11-22T15:17:59Z",
+      "side": 1,
+      "message": "This only disables the dav1d decoder, do you need to fully turn off AV1?",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 3
+      },
+      "revId": "1225d961764b51e7ab70c3bc7967774d6f435519",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
