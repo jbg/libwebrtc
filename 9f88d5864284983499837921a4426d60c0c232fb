@@ -104,6 +104,24 @@
       "parentUuid": "c4710a83_6c37c22b",
       "revId": "9f88d5864284983499837921a4426d60c0c232fb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67440c33_d94ba469",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14280
+      },
+      "writtenOn": "2022-11-22T09:12:52Z",
+      "side": 1,
+      "message": "... and just to check, hardcoded mac address detection is still our best option to detect these as VPNs? 😊\n\n\n(In other OSes it seems we use interface name prefix such at \u0027tun\u0027 so it\u0027s not like we\u0027re much more robust there)",
+      "parentUuid": "bdbb4f03_eb545f42",
+      "revId": "9f88d5864284983499837921a4426d60c0c232fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
