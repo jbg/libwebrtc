@@ -16,6 +16,184 @@
       "message": "Thanks Sam!",
       "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b12f37_0ca85120",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-22T13:53:23Z",
+      "side": 1,
+      "message": "Thanks Hanna! Great work, LGTM % my final comments",
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "585236df_36218791",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-22T13:53:23Z",
+      "side": 1,
+      "message": "I would adjust the config before logging it otherwise this log line will be misleading.",
+      "range": {
+        "startLine": 772,
+        "startChar": 2,
+        "endLine": 772,
+        "endChar": 76
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4dfcd61_58c2ece3",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-22T13:53:23Z",
+      "side": 1,
+      "message": "I wouldn\u0027t use this since it\u0027s misleading and it\u0027s going to be deprecated. But as it\u0027s not been deprecated yet, feel free to leave as it is.",
+      "range": {
+        "startLine": 250,
+        "startChar": 21,
+        "endLine": 250,
+        "endChar": 68
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5e02219_6819bb57",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-22T13:53:23Z",
+      "side": 1,
+      "message": "GainController1Mode",
+      "range": {
+        "startLine": 256,
+        "startChar": 49,
+        "endLine": 256,
+        "endChar": 67
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ff0a942_1ee117e0",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-22T13:53:23Z",
+      "side": 1,
+      "message": "GainController1AnalogEnabled",
+      "range": {
+        "startLine": 259,
+        "startChar": 7,
+        "endLine": 259,
+        "endChar": 34
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81a7afec_a05d27bf",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-22T13:53:23Z",
+      "side": 1,
+      "message": "here we have 2 tests in one\n- one test checks that the config doesn\u0027t change when no analog AGC is active\n- the other one checks that the config changes when at least one of them is active\n\nif you address my previous comment where I ask to remove the 2nd parameter in `AudioProcessingImplInputVolumeControllerExperimentParametrizedTest` (namely, that with type `AudioProcessing::Config::GainController1::Mode`), then you can remove `AudioProcessingImplInputVolumeControllerExperimentParametrizedTest` altogether or only use it for the test below (namely, `ConfigNotAdjustedWhenExperimentNotEnabled`) and replace `ConfigAdjustedWhenExperimentEnabled` with the following non-parametric tests:\n- `ConfigAdjustedWhenExperimentEnabledAndAgc1AnalogEnabled`\n- `ConfigNotAdjustedWhenExperimentEnabledAndAgc1AnalogDisabled`",
+      "range": {
+        "startLine": 1124,
+        "startChar": 0,
+        "endLine": 1195,
+        "endChar": 1
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e7a340_f81ac9d3",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-22T13:53:23Z",
+      "side": 1,
+      "message": "Don\u0027t use optional since the caller can just pass `{}` to get the default config and that simplifies lines 71, 72 above",
+      "range": {
+        "startLine": 83,
+        "startChar": 10,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a73a88_d4b3919a",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-22T13:53:23Z",
+      "side": 1,
+      "message": "this is used elsewhere, you could define a constexpr value in the anon namespace",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 4
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

@@ -478,6 +478,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d2da304_ae47a274",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-22T13:53:23Z",
+      "side": 1,
+      "message": "\u003e It\u0027s a good idea to add checks here.\n\u003e \n\u003e Just to make sure -- Alessio, is the preferred behaviour that the override is only taken into account if one of `hybrid_agc_config_detected` and `full_agc1_config_detected` is true? \n\nI would do that to ensure that the experiment is not activated on platforms that don\u0027t support Full AGC2.\n\n\u003e We need to leave `.gain_controller2.input_volume_controller.enabled \u003d true` out here from the check, it\u0027s set in this function, not necessarily before.\n\nYes, it was a mistake in my 1st comment above. Actually we could add `DCHECK(!config.gain_controller2.input_volume_controller.enabled);`.",
+      "parentUuid": "b00c158d_5b7df88b",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 74
+      },
+      "revId": "3a85e2791ec1a2a244ca0c4d53254e781b3eadc5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8efc6a6_95bcd11f",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 3

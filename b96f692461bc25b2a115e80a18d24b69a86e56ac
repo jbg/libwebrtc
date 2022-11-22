@@ -218,6 +218,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8266df1c_e60345f6",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-22T13:53:23Z",
+      "side": 1,
+      "message": "It\u0027s not an error and as it\u0027s not officially deprecated yet, it\u0027s ok to keep as it is.",
+      "parentUuid": "4b8c34c6_b3cde8fa",
+      "range": {
+        "startLine": 158,
+        "startChar": 7,
+        "endLine": 159,
+        "endChar": 71
+      },
+      "revId": "b96f692461bc25b2a115e80a18d24b69a86e56ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8404b5c6_b44950f0",
