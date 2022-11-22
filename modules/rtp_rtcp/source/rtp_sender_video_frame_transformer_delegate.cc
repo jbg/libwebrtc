@@ -206,4 +206,22 @@ void RTPSenderVideoFrameTransformerDelegate::Reset() {
     sender_ = nullptr;
   }
 }
+
+std::unique_ptr<TransformableVideoFrameInterface> CloneSenderVideoFrame(
+    TransformableVideoFrameInterface* original) {
+  auto encoded_image_buffer = EncodedImageBuffer::Create(
+      original->GetData().data(), original->GetData().size());
+  EncodedImage encoded_image;
+  encoded_image.SetEncodedData(encoded_image_buffer);
+  // TODO(hta): Fill in other EncodedImage parameters
+  RTPVideoHeader new_header;
+  // TODO(hta): Fill in video header data
+  return std::make_unique<TransformableVideoSenderFrame>(
+      encoded_image, new_header, original->GetPayloadType(),
+      absl::nullopt,  // codec_type
+      original->GetTimestamp(),
+      absl::nullopt,  // expected_retransmission_time_ms
+      original->GetSsrc());
+}
+
 }  // namespace webrtc
