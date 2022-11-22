@@ -75,6 +75,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "642e5b43_5e13bf0c",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-11-22T09:58:49Z",
+      "side": 1,
+      "message": "Someone else added kNV12 in the meantime (https://webrtc-review.googlesource.com/c/src/+/278402) so I just had to fix this here.",
+      "parentUuid": "359f967a_072b6042",
+      "range": {
+        "startLine": 39,
+        "startChar": 24,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "b0a08e46677d7f4a4f19a0f8c66bdcce015c35e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95344692_15ab308c",
@@ -88,6 +112,24 @@
       "writtenOn": "2022-09-09T21:41:27Z",
       "side": 1,
       "message": "This is incorrect. NV12 is not YV12.\n\nThis persists through a few files, I\u0027m trying to work through where all the rabbit holes go on this one to get NV12 to work.",
+      "revId": "b0a08e46677d7f4a4f19a0f8c66bdcce015c35e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9833b7a4_4d2f9408",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-11-22T09:58:49Z",
+      "side": 1,
+      "message": "Fixed that as well. The stride calculation was wrong as well. With that fixed and my current chromium WIP patches, I have a working NV12 \"camera\".",
+      "parentUuid": "95344692_15ab308c",
       "revId": "b0a08e46677d7f4a4f19a0f8c66bdcce015c35e7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
