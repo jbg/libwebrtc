@@ -287,7 +287,7 @@ config("common_config") {
     defines += [ "RTC_ENABLE_VP9" ]
   }
 
-  if (rtc_include_dav1d_in_internal_decoder_factory) {
+  if (rtc_include_dav1d_in_internal_decoder_factory && !is_fuchsia) {
     defines += [ "RTC_DAV1D_IN_INTERNAL_DECODER_FACTORY" ]
   }
 
