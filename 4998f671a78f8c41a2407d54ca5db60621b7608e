@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daae1970_5aff9f23",
+        "filename": "modules/audio_processing/agc2/input_volume_controller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-22T13:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26a1c141_e89eac14",
+      "range": {
+        "startLine": 1520,
+        "startChar": 2,
+        "endLine": 1520,
+        "endChar": 63
+      },
+      "revId": "4998f671a78f8c41a2407d54ca5db60621b7608e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39cfb38a_da367314",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-11-21T15:17:10Z",
       "side": 1,
       "message": "ditto, also in the tests below",
+      "range": {
+        "startLine": 1540,
+        "startChar": 18,
+        "endLine": 1540,
+        "endChar": 41
+      },
+      "revId": "4998f671a78f8c41a2407d54ca5db60621b7608e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e99bd2c7_a753b304",
+        "filename": "modules/audio_processing/agc2/input_volume_controller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-22T13:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39cfb38a_da367314",
       "range": {
         "startLine": 1540,
         "startChar": 18,
@@ -104,6 +152,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34fde598_fc425f06",
+        "filename": "modules/audio_processing/agc2/input_volume_controller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1696,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-22T13:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "579cc54a_beb938ac",
+      "range": {
+        "startLine": 1696,
+        "startChar": 36,
+        "endLine": 1696,
+        "endChar": 60
+      },
+      "revId": "4998f671a78f8c41a2407d54ca5db60621b7608e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "342f947b_bf843cc3",
@@ -117,6 +189,30 @@
       "writtenOn": "2022-11-21T15:17:10Z",
       "side": 1,
       "message": "Once https://webrtc-review.googlesource.com/c/src/+/280560 lands, this won\u0027t be needed anymore since it\u0027ll be possible to use the input volume controller without the digital adaptive controller.\n\nSo, let\u0027s add a TODO explaining that this is a temporary dcheck",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 45
+      },
+      "revId": "4998f671a78f8c41a2407d54ca5db60621b7608e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aa18d83_59be3c9c",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-22T13:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "342f947b_bf843cc3",
       "range": {
         "startLine": 173,
         "startChar": 4,
