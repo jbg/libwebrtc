@@ -22,6 +22,30 @@
       },
       "revId": "6d81b874103a805043a32867ee7fa219f69d4471",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9584b4c1_919ad06f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 19369
+      },
+      "writtenOn": "2022-11-23T15:51:30Z",
+      "side": 1,
+      "message": "Hrm ... that came from some historical cache. And looks like it was an earlier patchset - maybe it\u0027s still valid - but it was an old message. Must have got held back by gerrit until I hit publish just then.",
+      "parentUuid": "31aaf6fe_c197ff88",
+      "range": {
+        "startLine": 12,
+        "startChar": 23,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "6d81b874103a805043a32867ee7fa219f69d4471",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
