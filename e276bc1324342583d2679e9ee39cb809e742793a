@@ -52,6 +52,24 @@
       "parentUuid": "cbcaaed3_32cf88f8",
       "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6bab376_0caba8e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-11-23T16:39:53Z",
+      "side": 1,
+      "message": "The webrtc CLs are referenced above in the relation chain.\n\nThe Chromium CLs are:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3634526\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3308882\n\nI\u0027ve pushed all the relevant patches to:\nhttps://github.com/libcamera-org/libwebrtc/tree/pipewire-wip\nhttps://github.com/libcamera-org/chromium/tree/webrtc-camera-wip\n\nThe build system CL to build the capture code for chromium is not up-to-date. Just use the hack I\u0027ve pushed to the github branch.",
+      "parentUuid": "f04fbb08_9507ad38",
+      "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
