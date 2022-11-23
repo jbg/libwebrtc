@@ -34,6 +34,24 @@
       "parentUuid": "cf53e846_6c755e0f",
       "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f04fbb08_9507ad38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19369
+      },
+      "writtenOn": "2022-11-23T15:50:16Z",
+      "side": 1,
+      "message": "Yes, please - what are the URLs? I\u0027ll test and validate on latest PW / libcamera / on a surface go2 with an IPU3.",
+      "parentUuid": "cbcaaed3_32cf88f8",
+      "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
