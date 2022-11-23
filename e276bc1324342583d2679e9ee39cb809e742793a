@@ -16,6 +16,24 @@
       "message": "I think this is ready now. I\u0027ve gone over the code again and cleaned up a few things. And I\u0027ve fixed removing cameras.\n@grulja, the pipewire code is your area of expertise. Any more comments about that?\n\n@kieran.bingham, I\u0027ve updated the chromium CLs and the branches on the libcamera forks on github, if you want to test the latest version.",
       "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbcaaed3_32cf88f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-11-23T15:14:07Z",
+      "side": 1,
+      "message": "I will try to look into this this week.",
+      "parentUuid": "cf53e846_6c755e0f",
+      "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
