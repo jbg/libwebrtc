@@ -60,6 +60,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b0f96a26_6d163a69",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-23T17:32:05Z",
+      "side": 1,
+      "message": "Done. The adjusted config is also logged from `AdjustConfig()`, so the same config will be logged twice.",
+      "parentUuid": "585236df_36218791",
+      "range": {
+        "startLine": 772,
+        "startChar": 2,
+        "endLine": 772,
+        "endChar": 76
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e4dfcd61_58c2ece3",
         "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
         "patchSetId": 5
@@ -104,6 +128,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a1861e_198b050c",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-23T17:32:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c5e02219_6819bb57",
+      "range": {
+        "startLine": 256,
+        "startChar": 49,
+        "endLine": 256,
+        "endChar": 67
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ff0a942_1ee117e0",
@@ -117,6 +165,30 @@
       "writtenOn": "2022-11-22T13:53:23Z",
       "side": 1,
       "message": "GainController1AnalogEnabled",
+      "range": {
+        "startLine": 259,
+        "startChar": 7,
+        "endLine": 259,
+        "endChar": 34
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e8e3756_ae680357",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-23T17:32:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7ff0a942_1ee117e0",
       "range": {
         "startLine": 259,
         "startChar": 7,
@@ -150,6 +222,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a77ee61_aac00925",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-23T17:32:05Z",
+      "side": 1,
+      "message": "I\u0027ve removed the parametric tests (all that were added in this CL) and added separate tests for hybrid AGC and AGC1 with and without the field trial override.",
+      "parentUuid": "81a7afec_a05d27bf",
+      "range": {
+        "startLine": 1124,
+        "startChar": 0,
+        "endLine": 1195,
+        "endChar": 1
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52e7a340_f81ac9d3",
@@ -173,6 +269,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f823608f_2cce1ac7",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-23T17:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52e7a340_f81ac9d3",
+      "range": {
+        "startLine": 83,
+        "startChar": 10,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2a73a88_d4b3919a",
@@ -186,6 +306,30 @@
       "writtenOn": "2022-11-22T13:53:23Z",
       "side": 1,
       "message": "this is used elsewhere, you could define a constexpr value in the anon namespace",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 4
+      },
+      "revId": "eb0893392d2ce0979554fea1be563d0b104d6c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07adbadf_7f8bfbf9",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-23T17:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2a73a88_d4b3919a",
       "range": {
         "startLine": 199,
         "startChar": 0,
