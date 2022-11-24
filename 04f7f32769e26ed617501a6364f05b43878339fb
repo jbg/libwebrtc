@@ -16,6 +16,52 @@
       "message": "Thank you for the comments!",
       "revId": "04f7f32769e26ed617501a6364f05b43878339fb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940ebb74_1834f0d7",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-24T13:59:17Z",
+      "side": 1,
+      "message": "is this all it does? I\u0027m under the impression that it also replaces AGC1 digital with AGC2 digital, if AGC1 digital is enabled (and the other conditions are satisfied).",
+      "range": {
+        "startLine": 381,
+        "startChar": 3,
+        "endLine": 381,
+        "endChar": 57
+      },
+      "revId": "04f7f32769e26ed617501a6364f05b43878339fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba74ae8_6e5ca362",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2022-11-24T13:59:17Z",
+      "side": 1,
+      "message": "Can this be removed? It is logged twice when experiment is enabled and `ApplyConfig` is called.\n\nOr is it logged here to ensure that the config is logged for the experiment when running in Chrome, which never calls `ApplyConfig`?\n\nIn that case, I suggest logging in the APM constructor (around where we log the injected submodules) instead of here, so the config is always known. (and leave the `ApplyConfig` one as in the current version)",
+      "range": {
+        "startLine": 427,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 49
+      },
+      "revId": "04f7f32769e26ed617501a6364f05b43878339fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
