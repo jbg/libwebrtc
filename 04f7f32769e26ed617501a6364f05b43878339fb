@@ -75,6 +75,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d4f9cd1_51e75a32",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-24T15:51:32Z",
+      "side": 1,
+      "message": "I\u0027ve changed this as discussed offline.",
+      "parentUuid": "940ebb74_1834f0d7",
+      "range": {
+        "startLine": 381,
+        "startChar": 3,
+        "endLine": 381,
+        "endChar": 57
+      },
+      "revId": "04f7f32769e26ed617501a6364f05b43878339fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78ed86ea_76d8ecd0",
@@ -88,6 +112,30 @@
       "writtenOn": "2022-11-24T14:33:42Z",
       "side": 1,
       "message": "I would also state what precondition failed besides describing what action is taken. What about: \"Unexpected AGC config: using the unadjusted config.\"",
+      "range": {
+        "startLine": 417,
+        "startChar": 26,
+        "endLine": 417,
+        "endChar": 75
+      },
+      "revId": "04f7f32769e26ed617501a6364f05b43878339fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9203b921_b2783463",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-24T15:51:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78ed86ea_76d8ecd0",
       "range": {
         "startLine": 417,
         "startChar": 26,
@@ -145,6 +193,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb6ce13d_0e038c3a",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-24T15:51:32Z",
+      "side": 1,
+      "message": "I think it\u0027s good to always log the adjusted config. I\u0027ve moved the logging to the constructor to remove the duplication.",
+      "parentUuid": "fe804d57_c13c1cd4",
+      "range": {
+        "startLine": 427,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 49
+      },
+      "revId": "04f7f32769e26ed617501a6364f05b43878339fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90783778_ab4e4e25",
@@ -158,6 +230,30 @@
       "writtenOn": "2022-11-24T14:33:42Z",
       "side": 1,
       "message": "nit: no need to add the type, just use `{}`; for better readability `/*input_volume_controller_config\u003d*/{}`",
+      "range": {
+        "startLine": 78,
+        "startChar": 14,
+        "endLine": 78,
+        "endChar": 41
+      },
+      "revId": "04f7f32769e26ed617501a6364f05b43878339fb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d996c60d_84cd85fb",
+        "filename": "modules/audio_processing/gain_controller2_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2022-11-24T15:51:32Z",
+      "side": 1,
+      "message": "That doesn\u0027t work with `make_unique` but I\u0027ve used the notation where applicable.",
+      "parentUuid": "90783778_ab4e4e25",
       "range": {
         "startLine": 78,
         "startChar": 14,
