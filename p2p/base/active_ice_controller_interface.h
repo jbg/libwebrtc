@@ -72,7 +72,7 @@ class ActiveIceControllerInterface {
 
   // Called to switch to the given connection immediately without checking for
   // the best available connection.
-  virtual bool OnImmediateSwitchRequest(IceSwitchReason reason,
+  virtual bool OnImmediateSwitchRequest(IceSwitchReason reasons,
                                         const Connection* selected) = 0;
 
   // Only for unit tests
