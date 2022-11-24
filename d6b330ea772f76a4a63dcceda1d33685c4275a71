@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60098fa5_e9850dc2",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2022-11-24T17:49:10Z",
+      "side": 0,
+      "message": "We should be safe if the original encoder queue has been destroyed - we\u0027ll just create a new \"owned\" encoder queue to post these delayed frames, which will get destroyed when this object is destroyed.",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 13
+      },
+      "revId": "d6b330ea772f76a4a63dcceda1d33685c4275a71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
