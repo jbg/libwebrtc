@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "079388c6_e23a96c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-24T17:56:01Z",
+      "side": 1,
+      "message": "Approving.\n\nAdding Markus Handell to the CL just because he was doing something related to encoder queues and might have insight into whether it might have side effects.",
+      "revId": "6a6973be6b9e42befc2acbf21b93d26644e5b6b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
