@@ -99,6 +99,13 @@ ABSL_FLAG(std::string,
           "Path to collect trace events (json file) for chrome://tracing. "
           "If not set, events aren't captured.");
 
+ABSL_FLAG(int, test_launcher_shard_index, 0, "Sets the shard index to run.");
+
+ABSL_FLAG(int,
+          test_launcher_total_shards,
+          0,
+          "Sets the total number of shards.");
+
 namespace webrtc {
 
 namespace {

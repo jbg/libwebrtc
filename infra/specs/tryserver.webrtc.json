@@ -2225,7 +2225,8 @@
               "cpu": "x86-64",
               "os": "Ubuntu-18.04"
             }
-          ]
+          ],
+          "shards": 2
         },
         "test_id_prefix": "ninja://modules/audio_coding:audio_decoder_unittests/"
       },
@@ -2247,75 +2248,10 @@
               "cpu": "x86-64",
               "os": "Ubuntu-18.04"
             }
-          ]
+          ],
+          "shards": 2
         },
         "test_id_prefix": "ninja://common_audio:common_audio_unittests/"
-      },
-      {
-        "isolate_name": "common_video_unittests",
-        "merge": {
-          "args": [],
-          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
-        },
-        "name": "common_video_unittests",
-        "resultdb": {
-          "enable": true,
-          "has_native_resultdb_integration": true
-        },
-        "swarming": {
-          "can_use_on_swarming_builders": true,
-          "dimension_sets": [
-            {
-              "cpu": "x86-64",
-              "os": "Ubuntu-18.04"
-            }
-          ]
-        },
-        "test_id_prefix": "ninja://common_video:common_video_unittests/"
-      },
-      {
-        "isolate_name": "dcsctp_unittests",
-        "merge": {
-          "args": [],
-          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
-        },
-        "name": "dcsctp_unittests",
-        "resultdb": {
-          "enable": true,
-          "has_native_resultdb_integration": true
-        },
-        "swarming": {
-          "can_use_on_swarming_builders": true,
-          "dimension_sets": [
-            {
-              "cpu": "x86-64",
-              "os": "Ubuntu-18.04"
-            }
-          ]
-        },
-        "test_id_prefix": "ninja://net/dcsctp:dcsctp_unittests/"
-      },
-      {
-        "isolate_name": "low_bandwidth_audio_test",
-        "merge": {
-          "args": [],
-          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
-        },
-        "name": "low_bandwidth_audio_test",
-        "resultdb": {
-          "enable": true,
-          "has_native_resultdb_integration": true
-        },
-        "swarming": {
-          "can_use_on_swarming_builders": true,
-          "dimension_sets": [
-            {
-              "cpu": "x86-64",
-              "os": "Ubuntu-18.04"
-            }
-          ]
-        },
-        "test_id_prefix": "ninja://audio:low_bandwidth_audio_test/"
       }
     ]
   },
