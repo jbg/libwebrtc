@@ -24,8 +24,8 @@
 #include "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
+#include "rtc_base/inline_task_queue_adapter.h"
 #include "rtc_base/logging.h"
-#include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/numerics/safe_minmax.h"
 #include "rtc_base/time_utils.h"
 
@@ -62,7 +62,7 @@ RtcEventLogImpl::RtcEventLogImpl(RtcEventLog::EncodingType encoding_type,
       output_scheduled_(false),
       logging_state_started_(false),
       task_queue_(
-          std::make_unique<rtc::TaskQueue>(task_queue_factory->CreateTaskQueue(
+          new InlineTaskQueueAdapter(task_queue_factory->CreateTaskQueue(
               "rtc_event_log",
               TaskQueueFactory::Priority::NORMAL))) {}
 
@@ -75,8 +75,8 @@ RtcEventLogImpl::~RtcEventLogImpl() {
 
   // We want to block on any executing task by invoking ~TaskQueue() before
   // we set unique_ptr's internal pointer to null.
-  rtc::TaskQueue* tq = task_queue_.get();
-  delete tq;
+  TaskQueueBase* tq = task_queue_.get();
+  tq->Delete();
   task_queue_.release();
 }
 
