@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed1ce29d_b1d8d014",
+        "filename": "modules/remote_bitrate_estimator/overuse_detector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-11-25T09:53:09Z",
+      "side": 0,
+      "message": "If no field trial was specified, did we initialize k_up_ and k_down_ to 0? That would mean that the experiment was effectively disabled unless it was explicitly enabled, I think.",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 21
+      },
+      "revId": "b05968e5ecc9f4c6f4a8ad15e9821bcfa4796561",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
