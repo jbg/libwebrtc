@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "218472b1_e19ff3f5",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-11-28T12:52:13Z",
+      "side": 1,
+      "message": "This is what caused us crashes in the capturer as this will cause the `fd` to be automatically closed by PipeWire. You should also close this `fd` yourself when you are cleaning all the DBus stuff.\nUse `pw_core_ \u003d pw_context_connect_fd(fcntl(fd, F_DUPFD_CLOEXEC), nullptr, 0);`\n\nFor reference: https://webrtc-review.googlesource.com/c/src/+/270421",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4af05a09_2e72e12f",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-11-28T12:52:13Z",
+      "side": 1,
+      "message": "Maybe also add `pw_thread_loop_wait(pw_main_loop_)` before stopping it to give it some time to finish?",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd5c443_a5272907",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-11-28T12:52:13Z",
+      "side": 1,
+      "message": "It looks like you will end up calling Finish(Success) multiple times, for example from the `PipeWireSync()` call in `InitPipeWire()`, but also in callbacks (`OnRegistryGlobal` or `OnNodeInfo`). Is this really how it\u0027s supposed to work? I\u0027m just asking, I might be missing something and I definitely don\u0027t know how the camera API in WebRTC is supposed to work, but I would expect you make sure all nodes/cams are listed before calling finish.",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "645c37db_12196019",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-11-28T12:52:13Z",
+      "side": 1,
+      "message": "This doesn\u0027t always give you the latest buffer if I\u0027m not mistaken.\n\nCheck what we have in the capturer: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/linux/wayland/shared_screencast_stream.cc;l\u003d316",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
