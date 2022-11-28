@@ -1,0 +1,389 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e0e1b4_0389eadf",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "because InlineTaskQueueAdapter::Delete just calls the destructor, may be allow to use `InlineTaskQueueAdapter` with an extra allocation: expose the destructor as public. Then this line can become `InlineTaskQueueAdapter task_queue_;`",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 72
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e91379a_aae86df0",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "task_queue/ subfolder seems like a better place for this helper",
+      "range": {
+        "startLine": 612,
+        "startChar": 13,
+        "endLine": 612,
+        "endChar": 38
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f7524fe_6de8ba73",
+        "filename": "rtc_base/inline_task_queue_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "it it same as?\nPostTask\u003cabsl::AnyInvocable\u003cvoid() \u0026\u0026\u003e\u003e(std::move(task));",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 3
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d31febd7_3309a612",
+        "filename": "rtc_base/inline_task_queue_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "prefer to wrap single line if statment into {} too.\n(this omission is allowed for \"historical reasons\" which I read that it shouldn\u0027t be used in new code)\n\nhttps://google.github.io/styleguide/cppguide.html#Conditionals",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 33
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1267a78_4d06748f",
+        "filename": "rtc_base/inline_task_queue_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "can you please clarify:\nrealasing lock before decreasing does decrease chance of the contending the lock,\nbut\nreleasing lock before decreasing also increases chance PostTask would allocate WrappedImmediateTask that otherwise would be inlined.\n\nright? (commend doesn\u0027t make it clear if this way it \n\"to decrease chance of something that cause pointless...\"\nor is it\n\"to decrease chance of something, and to cause pointless...\"",
+      "range": {
+        "startLine": 109,
+        "startChar": 27,
+        "endLine": 111,
+        "endChar": 0
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f9169a_bee9044e",
+        "filename": "rtc_base/inline_task_queue_adapter.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "why add \u0027Adapter\u0027 suffix?\nName feels good enough without it. (this class is still the TaskQueue because it implements its interface)",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a92d0c_8b13833d",
+        "filename": "rtc_base/inline_task_queue_adapter.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "drop the namespace",
+      "range": {
+        "startLine": 32,
+        "startChar": 38,
+        "endLine": 32,
+        "endChar": 47
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1117e40d_08639d68",
+        "filename": "rtc_base/inline_task_queue_adapter.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "personally prefer to use keyword \u0027typename\u0027 - prefer not to think about Lambda type as a class.",
+      "range": {
+        "startLine": 46,
+        "startChar": 12,
+        "endLine": 46,
+        "endChar": 17
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a28aff1_831200ce",
+        "filename": "rtc_base/inline_task_queue_adapter.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "you make this class open to all classes that can see it.\nMay be make it a struct then? (or do not befriend and add wrappers to access queue_size_)",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 36
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6e996bf_ed82d944",
+        "filename": "rtc_base/inline_task_queue_adapter.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "I wonder if atomic can be avoided ( https://abseil.io/docs/cpp/atomic_danger )\nin particular that article mention that atomic with default memory ordering might be less perfomant than lock with a non-atomic integer.\n\nHave you done and benchmark to motivate the need of the atomic?",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 20
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d91e2e_18b27ddd",
+        "filename": "rtc_base/inline_task_queue_adapter.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "do you ever pass \u0027false\u0027 in this parameter?",
+      "range": {
+        "startLine": 97,
+        "startChar": 8,
+        "endLine": 97,
+        "endChar": 29
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce0dc5f_6cd8e939",
+        "filename": "rtc_base/inline_task_queue_adapter.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "may be `void operator()() \u0026\u0026` to stress it is called at most once and class is not usable afterwards.",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 22
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f08bef_bad0f6fa",
+        "filename": "rtc_base/inline_task_queue_adapter_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "would this work?\n\n```\nTEST(InlineTaskQueueAdapterTest, RunsAnyInvocable) {\n  InlineTaskQueueAdapter adapter(\n      CreateDefaultTaskQueueFactory()-\u003eCreateTaskQueue(\n          \"test\", TaskQueueFactory::Priority::NORMAL));\n\n  bool called \u003d false;\n  absl::AnyInvocable\u003cvoid() \u0026\u0026\u003e task \u003d [\u0026] { called \u003d true; };\n  adapter.PostTask(std::move(task));\n  EXPECT_TRUE(called);\n}\n```",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fd82eef_b9263875",
+        "filename": "rtc_base/inline_task_queue_adapter_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "if the inner task won\u0027t run, this test would hang forever (or rather until test timeout, which would be minutes).\nMay be wait for a shorter time, e.g.\n```\nconstexpr TimeDelta kAlmostForever \u003d TimeDelta::Seconds(1);\n\nASSERT_TRUE(event.Wait(kAlmostForever));\n```",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 35
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ecb9001_cb45b153",
+        "filename": "rtc_base/inline_task_queue_adapter_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "event.Set() called right after `called` assigned to true, so this looks redundant with the previous expectation.",
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad50603_ae49255b",
+        "filename": "rtc_base/inline_task_queue_adapter_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "I suspect `thread` is null here (rtc::Thread is unused, no code sets Thread::Current)\nso validating inside task below that rtc::Thread::Current is still null doesn\u0027t ensure it is the same thread.\n\nmay be use `PlatformThreadId CurrentThreadId();` from platform_thread_types",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 40
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "128bdc93_9bf5a8dd",
+        "filename": "rtc_base/inline_task_queue_adapter_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T14:30:15Z",
+      "side": 1,
+      "message": "override",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 216,
+        "endChar": 9
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
