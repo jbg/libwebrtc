@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3009d085_eadf53ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2022-11-28T08:34:09Z",
+      "side": 1,
+      "message": "LGTM. I added the fuchsia try bot to but realized there is no sharding setup in the test suites yet 😊",
+      "revId": "723a61ea51a96d262ab4cd79aeeae75a24e8819d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
