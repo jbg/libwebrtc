@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e72b20_11e12276",
+        "filename": "test/test_main_lib.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-11-28T17:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd13716d_d911e60e",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 107,
+        "endChar": 43
+      },
+      "revId": "e2ca809d34f4fafb9295432b61c43fefad2b26f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f7e72bc_febaa008",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-28T17:36:01Z",
       "side": 1,
       "message": "Why is Fuchsia sharding different from other OS? It looks like we need to manually set the GTEST env variables here, while on other OS this is done by something else (some infra py script I suspect).\n\n(this is for me, to understand the code better)",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 5
+      },
+      "revId": "e2ca809d34f4fafb9295432b61c43fefad2b26f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1ccda6e_94e0b3a4",
+        "filename": "test/test_main_lib.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-11-28T17:42:41Z",
+      "side": 1,
+      "message": "Here\u0027s what as been done for iOS:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3639706\nFor linux, mac, windows the sharding is handled by gtest_parallel.\nFor android I haven\u0027t checked.\n\nAs described in https://crbug.com/webrtc/14713 we could ask fuchsia to deal with the sharding without these extra args.\nBut since they are handled by Chromium I thought it could be beneficial to get inline.",
+      "parentUuid": "2f7e72bc_febaa008",
       "range": {
         "startLine": 143,
         "startChar": 0,
