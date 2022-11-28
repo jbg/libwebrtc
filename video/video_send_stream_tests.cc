@@ -2694,9 +2694,7 @@ TEST_F(VideoSendStreamTest, ReconfigureBitratesSetsEncoderBitratesCorrectly) {
   // bitrates than expected by this test, due to encoder pushback and subtracted
   // overhead.
   webrtc::test::ScopedKeyValueConfig field_trials(
-      field_trials_,
-      "WebRTC-VideoRateControl/bitrate_adjuster:false/"
-      "WebRTC-SendSideBwe-WithOverhead/Disabled/");
+      field_trials_, "WebRTC-VideoRateControl/bitrate_adjuster:false/");
 
   class EncoderBitrateThresholdObserver : public test::SendTest,
                                           public VideoBitrateAllocatorFactory,
@@ -3701,8 +3699,6 @@ TEST_F(VideoSendStreamTest, EncoderConfigMaxFramerateReportedToSource) {
 // testing that the maximum possible target payload rate is smaller than the
 // maximum bandwidth estimate by the overhead rate.
 TEST_F(VideoSendStreamTest, RemoveOverheadFromBandwidth) {
-  test::ScopedFieldTrials override_field_trials(
-      "WebRTC-SendSideBwe-WithOverhead/Enabled/");
   class RemoveOverheadFromBandwidthTest : public test::EndToEndTest,
                                           public test::FakeEncoder {
    public:
