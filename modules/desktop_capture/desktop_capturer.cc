@@ -87,6 +87,8 @@ std::unique_ptr<DesktopCapturer> DesktopCapturer::CreateScreenCapturer(
   }
 #endif  // defined(RTC_ENABLE_WIN_WGC)
 
+  // Dummy comment....
+
   std::unique_ptr<DesktopCapturer> capturer = CreateRawScreenCapturer(options);
   if (capturer && options.detect_updated_region()) {
     capturer.reset(new DesktopCapturerDifferWrapper(std::move(capturer)));
