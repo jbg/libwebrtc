@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "02802a47_42693ef6",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T15:48:29Z",
+      "side": 1,
+      "message": "using InlineTaskQueue would block logging startup on IO. That is likely undesired.",
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "336a923e_88d26d80",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-28T15:48:29Z",
+      "side": 1,
+      "message": "may be it would be simpler/easier just to eliminate this PostTask:\nassume logging to memory is relatively fast (but has to be thread safe now), \nscheduling output suppose to be fast too,\ntask queue can be used just for logging to the output sink.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 5
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "29e0e1b4_0389eadf",
