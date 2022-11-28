@@ -151,9 +151,7 @@ class TestRtpSenderVideo : public RTPSenderVideo {
 
 class FieldTrials : public FieldTrialsRegistry {
  public:
-  explicit FieldTrials(bool use_send_side_bwe_with_overhead)
-      : use_send_side_bwe_with_overhead_(use_send_side_bwe_with_overhead),
-        include_capture_clock_offset_(false) {}
+  FieldTrials() : include_capture_clock_offset_(false) {}
 
   void set_include_capture_clock_offset(bool include_capture_clock_offset) {
     include_capture_clock_offset_ = include_capture_clock_offset;
@@ -161,23 +159,19 @@ class FieldTrials : public FieldTrialsRegistry {
 
  private:
   std::string GetValue(absl::string_view key) const override {
-    if (key == "WebRTC-SendSideBwe-WithOverhead") {
-      return use_send_side_bwe_with_overhead_ ? "Enabled" : "";
-    } else if (key == "WebRTC-IncludeCaptureClockOffset") {
+    if (key == "WebRTC-IncludeCaptureClockOffset") {
       return include_capture_clock_offset_ ? "" : "Disabled";
     }
     return "";
   }
 
-  bool use_send_side_bwe_with_overhead_;
   bool include_capture_clock_offset_;
 };
 
-class RtpSenderVideoTest : public ::testing::TestWithParam<bool> {
+class RtpSenderVideoTest : public ::testing::Test {
  public:
   RtpSenderVideoTest()
-      : field_trials_(GetParam()),
-        fake_clock_(kStartTime),
+      : fake_clock_(kStartTime),
         retransmission_rate_limiter_(&fake_clock_, 1000),
         rtp_module_(ModuleRtpRtcpImpl2::Create([&] {
           RtpRtcpInterface::Configuration config;
@@ -210,7 +204,7 @@ class RtpSenderVideoTest : public ::testing::TestWithParam<bool> {
   std::unique_ptr<TestRtpSenderVideo> rtp_sender_video_;
 };
 
-TEST_P(RtpSenderVideoTest, KeyFrameHasCVO) {
+TEST_F(RtpSenderVideoTest, KeyFrameHasCVO) {
   uint8_t kFrame[kMaxPacketLength];
   rtp_module_->RegisterRtpHeaderExtension(VideoOrientation::Uri(),
                                           kVideoRotationExtensionId);
@@ -227,7 +221,7 @@ TEST_P(RtpSenderVideoTest, KeyFrameHasCVO) {
   EXPECT_EQ(kVideoRotation_0, rotation);
 }
 
-TEST_P(RtpSenderVideoTest, TimingFrameHasPacketizationTimstampSet) {
+TEST_F(RtpSenderVideoTest, TimingFrameHasPacketizationTimstampSet) {
   uint8_t kFrame[kMaxPacketLength];
   const int64_t kPacketizationTimeMs = 100;
   const int64_t kEncodeStartDeltaMs = 10;
@@ -255,7 +249,7 @@ TEST_P(RtpSenderVideoTest, TimingFrameHasPacketizationTimstampSet) {
   EXPECT_EQ(kEncodeFinishDeltaMs, timing.encode_finish_delta_ms);
 }
 
-TEST_P(RtpSenderVideoTest, DeltaFrameHasCVOWhenChanged) {
+TEST_F(RtpSenderVideoTest, DeltaFrameHasCVOWhenChanged) {
   uint8_t kFrame[kMaxPacketLength];
   rtp_module_->RegisterRtpHeaderExtension(VideoOrientation::Uri(),
                                           kVideoRotationExtensionId);
@@ -279,7 +273,7 @@ TEST_P(RtpSenderVideoTest, DeltaFrameHasCVOWhenChanged) {
   EXPECT_EQ(kVideoRotation_0, rotation);
 }
 
-TEST_P(RtpSenderVideoTest, DeltaFrameHasCVOWhenNonZero) {
+TEST_F(RtpSenderVideoTest, DeltaFrameHasCVOWhenNonZero) {
   uint8_t kFrame[kMaxPacketLength];
   rtp_module_->RegisterRtpHeaderExtension(VideoOrientation::Uri(),
                                           kVideoRotationExtensionId);
@@ -304,7 +298,7 @@ TEST_P(RtpSenderVideoTest, DeltaFrameHasCVOWhenNonZero) {
 
 // Make sure rotation is parsed correctly when the Camera (C) and Flip (F) bits
 // are set in the CVO byte.
-TEST_P(RtpSenderVideoTest, SendVideoWithCameraAndFlipCVO) {
+TEST_F(RtpSenderVideoTest, SendVideoWithCameraAndFlipCVO) {
   // Test extracting rotation when Camera (C) and Flip (F) bits are zero.
   EXPECT_EQ(kVideoRotation_0, ConvertCVOByteToVideoRotation(0));
   EXPECT_EQ(kVideoRotation_90, ConvertCVOByteToVideoRotation(1));
@@ -323,7 +317,7 @@ TEST_P(RtpSenderVideoTest, SendVideoWithCameraAndFlipCVO) {
             ConvertCVOByteToVideoRotation(flip_bit | camera_bit | 3));
 }
 
-TEST_P(RtpSenderVideoTest, RetransmissionTypesGeneric) {
+TEST_F(RtpSenderVideoTest, RetransmissionTypesGeneric) {
   RTPVideoHeader header;
   header.codec = kVideoCodecGeneric;
 
@@ -338,7 +332,7 @@ TEST_P(RtpSenderVideoTest, RetransmissionTypesGeneric) {
       kDefaultExpectedRetransmissionTimeMs));
 }
 
-TEST_P(RtpSenderVideoTest, RetransmissionTypesH264) {
+TEST_F(RtpSenderVideoTest, RetransmissionTypesH264) {
   RTPVideoHeader header;
   header.video_type_header.emplace<RTPVideoHeaderH264>().packetization_mode =
       H264PacketizationMode::NonInterleaved;
@@ -355,7 +349,7 @@ TEST_P(RtpSenderVideoTest, RetransmissionTypesH264) {
       kDefaultExpectedRetransmissionTimeMs));
 }
 
-TEST_P(RtpSenderVideoTest, RetransmissionTypesVP8BaseLayer) {
+TEST_F(RtpSenderVideoTest, RetransmissionTypesVP8BaseLayer) {
   RTPVideoHeader header;
   header.codec = kVideoCodecVP8;
   auto& vp8_header = header.video_type_header.emplace<RTPVideoHeaderVP8>();
@@ -378,7 +372,7 @@ TEST_P(RtpSenderVideoTest, RetransmissionTypesVP8BaseLayer) {
       kDefaultExpectedRetransmissionTimeMs));
 }
 
-TEST_P(RtpSenderVideoTest, RetransmissionTypesVP8HigherLayers) {
+TEST_F(RtpSenderVideoTest, RetransmissionTypesVP8HigherLayers) {
   RTPVideoHeader header;
   header.codec = kVideoCodecVP8;
 
@@ -398,7 +392,7 @@ TEST_P(RtpSenderVideoTest, RetransmissionTypesVP8HigherLayers) {
   }
 }
 
-TEST_P(RtpSenderVideoTest, RetransmissionTypesVP9) {
+TEST_F(RtpSenderVideoTest, RetransmissionTypesVP9) {
   RTPVideoHeader header;
   header.codec = kVideoCodecVP9;
 
@@ -418,7 +412,7 @@ TEST_P(RtpSenderVideoTest, RetransmissionTypesVP9) {
   }
 }
 
-TEST_P(RtpSenderVideoTest, ConditionalRetransmit) {
+TEST_F(RtpSenderVideoTest, ConditionalRetransmit) {
   const int64_t kFrameIntervalMs = 33;
   const int64_t kRttMs = (kFrameIntervalMs * 3) / 2;
   const uint8_t kSettings =
@@ -476,7 +470,7 @@ TEST_P(RtpSenderVideoTest, ConditionalRetransmit) {
       rtp_sender_video_->AllowRetransmission(header, kSettings, kRttMs));
 }
 
-TEST_P(RtpSenderVideoTest, ConditionalRetransmitLimit) {
+TEST_F(RtpSenderVideoTest, ConditionalRetransmitLimit) {
   const int64_t kFrameIntervalMs = 200;
   const int64_t kRttMs = (kFrameIntervalMs * 3) / 2;
   const int32_t kSettings =
@@ -509,7 +503,7 @@ TEST_P(RtpSenderVideoTest, ConditionalRetransmitLimit) {
       rtp_sender_video_->AllowRetransmission(header, kSettings, kRttMs));
 }
 
-TEST_P(RtpSenderVideoTest, SendsDependencyDescriptorWhenVideoStructureIsSet) {
+TEST_F(RtpSenderVideoTest, SendsDependencyDescriptorWhenVideoStructureIsSet) {
   const int64_t kFrameId = 100000;
   uint8_t kFrame[100];
   rtp_module_->RegisterRtpHeaderExtension(
@@ -577,7 +571,7 @@ TEST_P(RtpSenderVideoTest, SendsDependencyDescriptorWhenVideoStructureIsSet) {
               ElementsAre(1, 501));
 }
 
-TEST_P(RtpSenderVideoTest,
+TEST_F(RtpSenderVideoTest,
        SkipsDependencyDescriptorOnDeltaFrameWhenFailedToAttachToKeyFrame) {
   const int64_t kFrameId = 100000;
   uint8_t kFrame[100];
@@ -631,7 +625,7 @@ TEST_P(RtpSenderVideoTest,
                    .HasExtension<RtpDependencyDescriptorExtension>());
 }
 
-TEST_P(RtpSenderVideoTest, PropagatesChainDiffsIntoDependencyDescriptor) {
+TEST_F(RtpSenderVideoTest, PropagatesChainDiffsIntoDependencyDescriptor) {
   const int64_t kFrameId = 100000;
   uint8_t kFrame[100];
   rtp_module_->RegisterRtpHeaderExtension(
@@ -664,7 +658,7 @@ TEST_P(RtpSenderVideoTest, PropagatesChainDiffsIntoDependencyDescriptor) {
               ContainerEq(generic.chain_diffs));
 }
 
-TEST_P(RtpSenderVideoTest,
+TEST_F(RtpSenderVideoTest,
        PropagatesActiveDecodeTargetsIntoDependencyDescriptor) {
   const int64_t kFrameId = 100000;
   uint8_t kFrame[100];
@@ -698,7 +692,7 @@ TEST_P(RtpSenderVideoTest,
   EXPECT_EQ(descriptor_key.active_decode_targets_bitmask, 0b01u);
 }
 
-TEST_P(RtpSenderVideoTest,
+TEST_F(RtpSenderVideoTest,
        SetDiffentVideoStructureAvoidsCollisionWithThePreviousStructure) {
   const int64_t kFrameId = 100000;
   uint8_t kFrame[100];
@@ -772,7 +766,7 @@ TEST_P(RtpSenderVideoTest,
       descriptor_key2.attached_structure.get(), &descriptor_delta));
 }
 
-TEST_P(RtpSenderVideoTest,
+TEST_F(RtpSenderVideoTest,
        AuthenticateVideoHeaderWhenDependencyDescriptorExtensionIsUsed) {
   static constexpr size_t kFrameSize = 100;
   uint8_t kFrame[kFrameSize] = {1, 2, 3, 4};
@@ -815,7 +809,7 @@ TEST_P(RtpSenderVideoTest,
                   .HasExtension<RtpDependencyDescriptorExtension>());
 }
 
-TEST_P(RtpSenderVideoTest, PopulateGenericFrameDescriptor) {
+TEST_F(RtpSenderVideoTest, PopulateGenericFrameDescriptor) {
   const int64_t kFrameId = 100000;
   uint8_t kFrame[100];
   rtp_module_->RegisterRtpHeaderExtension(
@@ -872,17 +866,17 @@ void RtpSenderVideoTest::
   EXPECT_EQ(transport_.last_sent_packet().payload_size(), 1 + kFrameSize);
 }
 
-TEST_P(RtpSenderVideoTest,
+TEST_F(RtpSenderVideoTest,
        UsesMinimalVp8DescriptorWhenGenericFrameDescriptorExtensionIsUsed00) {
   UsesMinimalVp8DescriptorWhenGenericFrameDescriptorExtensionIsUsed(0);
 }
 
-TEST_P(RtpSenderVideoTest,
+TEST_F(RtpSenderVideoTest,
        UsesMinimalVp8DescriptorWhenGenericFrameDescriptorExtensionIsUsed01) {
   UsesMinimalVp8DescriptorWhenGenericFrameDescriptorExtensionIsUsed(1);
 }
 
-TEST_P(RtpSenderVideoTest, VideoLayersAllocationWithResolutionSentOnKeyFrames) {
+TEST_F(RtpSenderVideoTest, VideoLayersAllocationWithResolutionSentOnKeyFrames) {
   const size_t kFrameSize = 100;
   uint8_t kFrame[kFrameSize];
   rtp_module_->RegisterRtpHeaderExtension(
@@ -918,7 +912,7 @@ TEST_P(RtpSenderVideoTest, VideoLayersAllocationWithResolutionSentOnKeyFrames) {
           .GetExtension<RtpVideoLayersAllocationExtension>(&sent_allocation));
 }
 
-TEST_P(RtpSenderVideoTest,
+TEST_F(RtpSenderVideoTest,
        VideoLayersAllocationWithoutResolutionSentOnDeltaWhenUpdated) {
   const size_t kFrameSize = 100;
   uint8_t kFrame[kFrameSize];
@@ -966,7 +960,7 @@ TEST_P(RtpSenderVideoTest,
               SizeIs(1));
 }
 
-TEST_P(RtpSenderVideoTest,
+TEST_F(RtpSenderVideoTest,
        VideoLayersAllocationWithResolutionSentOnDeltaWhenSpatialLayerAdded) {
   const size_t kFrameSize = 100;
   uint8_t kFrame[kFrameSize];
@@ -1012,7 +1006,7 @@ TEST_P(RtpSenderVideoTest,
   EXPECT_TRUE(sent_allocation.resolution_and_frame_rate_is_valid);
 }
 
-TEST_P(RtpSenderVideoTest,
+TEST_F(RtpSenderVideoTest,
        VideoLayersAllocationWithResolutionSentOnLargeFrameRateChange) {
   const size_t kFrameSize = 100;
   uint8_t kFrame[kFrameSize];
@@ -1054,7 +1048,7 @@ TEST_P(RtpSenderVideoTest,
   EXPECT_EQ(sent_allocation.active_spatial_layers[0].frame_rate_fps, 20);
 }
 
-TEST_P(RtpSenderVideoTest,
+TEST_F(RtpSenderVideoTest,
        VideoLayersAllocationWithoutResolutionSentOnSmallFrameRateChange) {
   const size_t kFrameSize = 100;
   uint8_t kFrame[kFrameSize];
@@ -1095,7 +1089,7 @@ TEST_P(RtpSenderVideoTest,
   EXPECT_FALSE(sent_allocation.resolution_and_frame_rate_is_valid);
 }
 
-TEST_P(RtpSenderVideoTest, VideoLayersAllocationSentOnDeltaFramesOnlyOnUpdate) {
+TEST_F(RtpSenderVideoTest, VideoLayersAllocationSentOnDeltaFramesOnlyOnUpdate) {
   const size_t kFrameSize = 100;
   uint8_t kFrame[kFrameSize];
   rtp_module_->RegisterRtpHeaderExtension(
@@ -1137,7 +1131,7 @@ TEST_P(RtpSenderVideoTest, VideoLayersAllocationSentOnDeltaFramesOnlyOnUpdate) {
           .GetExtension<RtpVideoLayersAllocationExtension>(&sent_allocation));
 }
 
-TEST_P(RtpSenderVideoTest, VideoLayersAllocationNotSentOnHigherTemporalLayers) {
+TEST_F(RtpSenderVideoTest, VideoLayersAllocationNotSentOnHigherTemporalLayers) {
   const size_t kFrameSize = 100;
   uint8_t kFrame[kFrameSize];
   rtp_module_->RegisterRtpHeaderExtension(
@@ -1173,7 +1167,7 @@ TEST_P(RtpSenderVideoTest, VideoLayersAllocationNotSentOnHigherTemporalLayers) {
                   .HasExtension<RtpVideoLayersAllocationExtension>());
 }
 
-TEST_P(RtpSenderVideoTest, AbsoluteCaptureTime) {
+TEST_F(RtpSenderVideoTest, AbsoluteCaptureTime) {
   constexpr int64_t kAbsoluteCaptureTimestampMs = 12345678;
   uint8_t kFrame[kMaxPacketLength];
   rtp_module_->RegisterRtpHeaderExtension(AbsoluteCaptureTimeExtension::Uri(),
@@ -1210,7 +1204,7 @@ TEST_P(RtpSenderVideoTest, AbsoluteCaptureTime) {
 
 // Essentially the same test as AbsoluteCaptureTime but with a field trial.
 // After the field trial is experimented, we will remove AbsoluteCaptureTime.
-TEST_P(RtpSenderVideoTest, AbsoluteCaptureTimeWithCaptureClockOffset) {
+TEST_F(RtpSenderVideoTest, AbsoluteCaptureTimeWithCaptureClockOffset) {
   field_trials_.set_include_capture_clock_offset(true);
   rtp_sender_video_ = std::make_unique<TestRtpSenderVideo>(
       &fake_clock_, rtp_module_->RtpSender(), field_trials_);
@@ -1248,7 +1242,7 @@ TEST_P(RtpSenderVideoTest, AbsoluteCaptureTimeWithCaptureClockOffset) {
   EXPECT_EQ(absolute_capture_time->estimated_capture_clock_offset, 0);
 }
 
-TEST_P(RtpSenderVideoTest, AbsoluteCaptureTimeWithExtensionProvided) {
+TEST_F(RtpSenderVideoTest, AbsoluteCaptureTimeWithExtensionProvided) {
   constexpr AbsoluteCaptureTime kAbsoluteCaptureTime = {
       123,
       absl::optional<int64_t>(456),
@@ -1281,7 +1275,7 @@ TEST_P(RtpSenderVideoTest, AbsoluteCaptureTimeWithExtensionProvided) {
   EXPECT_EQ(absolute_capture_time, kAbsoluteCaptureTime);
 }
 
-TEST_P(RtpSenderVideoTest, PopulatesPlayoutDelay) {
+TEST_F(RtpSenderVideoTest, PopulatesPlayoutDelay) {
   // Single packet frames.
   constexpr size_t kPacketSize = 123;
   uint8_t kFrame[kPacketSize];
@@ -1338,7 +1332,7 @@ TEST_P(RtpSenderVideoTest, PopulatesPlayoutDelay) {
   EXPECT_EQ(received_delay, kExpectedDelay);
 }
 
-TEST_P(RtpSenderVideoTest, SendGenericVideo) {
+TEST_F(RtpSenderVideoTest, SendGenericVideo) {
   const uint8_t kPayloadType = 127;
   const VideoCodecType kCodecType = VideoCodecType::kVideoCodecGeneric;
   const uint8_t kPayload[] = {47, 11, 32, 93, 89};
@@ -1371,7 +1365,7 @@ TEST_P(RtpSenderVideoTest, SendGenericVideo) {
   EXPECT_THAT(sent_payload.subview(1), ElementsAreArray(kDeltaPayload));
 }
 
-TEST_P(RtpSenderVideoTest, SendRawVideo) {
+TEST_F(RtpSenderVideoTest, SendRawVideo) {
   const uint8_t kPayloadType = 111;
   const uint8_t kPayload[] = {11, 22, 33, 44, 55};
 
@@ -1386,10 +1380,6 @@ TEST_P(RtpSenderVideoTest, SendRawVideo) {
       transport_.last_sent_packet().payload();
   EXPECT_THAT(sent_payload, ElementsAreArray(kPayload));
 }
-
-INSTANTIATE_TEST_SUITE_P(WithAndWithoutOverhead,
-                         RtpSenderVideoTest,
-                         ::testing::Bool());
 
 class RtpSenderVideoWithFrameTransformerTest : public ::testing::Test {
  public:
