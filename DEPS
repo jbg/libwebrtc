@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '8113154ab70cd64d68db29739c54d5f0ebd53eb0',
+  'chromium_revision': 'd3354786ef14321bd7248330d6384706cbdefde6',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -52,13 +52,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@31d059e03ab14b0f0949c7653318416d841efdea',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@4d02e61a8d27c6d71021cc44eaa95b9195453665',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@760f5a33d63a348c71333a71754aea95e51ee772',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@2f339b31510ea0099823221cbd82da8b6bffc417',
+    'https://chromium.googlesource.com/chromium/src/third_party@84b251f80797ae463dcdae5e59bc6d0d9d34436f',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -175,7 +175,7 @@ deps = {
   'src/third_party/crc32c/src':
     'https://chromium.googlesource.com/external/github.com/google/crc32c.git@fa5ade41ee480003d9c5af6f43567ba22e4e17e6',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@fc04ff162881290c48882bf0ac737db77f91e8f9',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@67828ff1bb688f19ea114e5aa1de812da863c4da',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@fd5b30c4bcf95ee607caf47ef65c3b96210867a4',
   'src/third_party/flatbuffers/src':
@@ -294,7 +294,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@30a94740442d5aa8383f0bf65f66dd2e5b74d464',
+    'https://chromium.googlesource.com/chromium/src/tools@b0b638afab0c757c8ff07daa7e074f9fdd45a724',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
@@ -483,11 +483,11 @@ deps = {
       'packages': [
         {
           'package': 'infra/tools/luci/isolate/${{platform}}',
-          'version': 'git_revision:f8f64a8c560d2bf68a3ad1137979d17cffb36d30',
+          'version': 'git_revision:7a04ca7c0fd3e73cc09c817542a74d947e68b8c9',
         },
         {
           'package': 'infra/tools/luci/swarming/${{platform}}',
-          'version': 'git_revision:f8f64a8c560d2bf68a3ad1137979d17cffb36d30',
+          'version': 'git_revision:7a04ca7c0fd3e73cc09c817542a74d947e68b8c9',
         },
       ],
       'dep_type': 'cipd',
