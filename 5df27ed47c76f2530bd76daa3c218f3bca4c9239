@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9a8ab21_8edede53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-11-29T08:10:15Z",
+      "side": 1,
+      "message": "After creating this CL, I discovered that similar efforts were being made. https://webrtc-review.googlesource.com/c/src/+/285085.\nAfter that CL is merged, I will request a review after leaving only the `spatialLayerActiveCount` field added in this CL.",
+      "revId": "5df27ed47c76f2530bd76daa3c218f3bca4c9239",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
