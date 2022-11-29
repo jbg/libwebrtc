@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0a9b9e5_9eb141bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20084
+      },
+      "writtenOn": "2022-11-29T14:53:43Z",
+      "side": 1,
+      "message": "ping on this: rebased against most recent main, cl now only removes final declaration on mocks and adds the mock methods needed",
+      "revId": "1c36e9cc37cfaaeeeb57b354bd70397b42dc8172",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
