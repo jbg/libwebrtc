@@ -10,6 +10,13 @@
 
 #include "api/rtp_packet_infos.h"
 
+#include <stddef.h>
+
+#include <cstdint>
+#include <string>
+
+#include "api/rtp_headers.h"
+#include "api/units/timestamp.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 

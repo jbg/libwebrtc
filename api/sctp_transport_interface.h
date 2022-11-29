@@ -16,6 +16,7 @@
 #include "api/rtc_error.h"
 #include "api/scoped_refptr.h"
 #include "rtc_base/ref_count.h"
+#include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {
 

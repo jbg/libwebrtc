@@ -11,11 +11,8 @@
 #include "api/field_trials.h"
 
 #include <memory>
-#include <utility>
 
-#include "absl/strings/string_view.h"
 #include "api/transport/field_trial_based_config.h"
-#include "rtc_base/containers/flat_set.h"
 #include "system_wrappers/include/field_trial.h"
 #include "test/gmock.h"
 #include "test/gtest.h"

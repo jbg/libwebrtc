@@ -10,6 +10,8 @@
 #ifndef API_SEQUENCE_CHECKER_H_
 #define API_SEQUENCE_CHECKER_H_
 
+#include <string>
+
 #include "rtc_base/checks.h"
 #include "rtc_base/synchronization/sequence_checker_internal.h"
 #include "rtc_base/thread_annotations.h"
