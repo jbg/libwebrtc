@@ -11,6 +11,7 @@
 #include "api/function_view.h"
 
 #include <memory>
+#include <string>
 #include <utility>
 
 #include "test/gtest.h"

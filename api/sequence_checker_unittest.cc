@@ -11,7 +11,6 @@
 #include "api/sequence_checker.h"
 
 #include <memory>
-#include <utility>
 
 #include "api/function_view.h"
 #include "api/units/time_delta.h"

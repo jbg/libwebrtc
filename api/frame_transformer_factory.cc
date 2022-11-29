@@ -11,6 +11,7 @@
 #include "api/frame_transformer_factory.h"
 
 #include "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate.h"
+#include "rtc_base/checks.h"
 
 namespace webrtc {
 

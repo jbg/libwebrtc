@@ -10,16 +10,16 @@
 
 #include "api/array_view.h"
 
-#include <algorithm>
 #include <array>
+#include <cstdint>
 #include <string>
 #include <utility>
 #include <vector>
 
 #include "rtc_base/buffer.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/gunit.h"
 #include "test/gmock.h"
+#include "test/gtest.h"
 
 namespace rtc {
 
