@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e5de217_77774594",
+        "filename": "media/engine/simulcast_encoder_adapter_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-29T08:52:32Z",
+      "side": 1,
+      "message": "it would be more consistent for it to be true initially and false when the initial keyframe has passed, but I don\u0027t think it matters much in practice.",
+      "parentUuid": "d5df93ff_f4a696d4",
+      "revId": "00d64c68f889cc0127a2b2da4820727320f8dc68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fb80ac4_ab4f5201",
         "filename": "media/engine/simulcast_encoder_adapter_unittest.cc",
         "patchSetId": 6
