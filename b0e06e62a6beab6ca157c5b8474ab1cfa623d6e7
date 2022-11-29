@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ca0a5f4_66f5d6b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20159
+      },
+      "writtenOn": "2022-11-29T12:32:28Z",
+      "side": 1,
+      "message": "I tested it on Chromium by building it with this patch applied.",
+      "revId": "b0e06e62a6beab6ca157c5b8474ab1cfa623d6e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
