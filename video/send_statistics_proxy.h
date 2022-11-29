@@ -292,10 +292,11 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
 
   absl::optional<int64_t> last_outlier_timestamp_ RTC_GUARDED_BY(mutex_);
 
-  int last_num_spatial_layers_ RTC_GUARDED_BY(mutex_);
-  int last_num_simulcast_streams_ RTC_GUARDED_BY(mutex_);
-  std::array<bool, kMaxSpatialLayers> last_spatial_layer_use_
-      RTC_GUARDED_BY(mutex_);
+  int num_spatial_layers_active_ RTC_GUARDED_BY(mutex_);
+  int num_simulcast_streams_active_ RTC_GUARDED_BY(mutex_);
+  std::array<bool, kMaxSpatialLayers> spatial_layer_use_ RTC_GUARDED_BY(mutex_);
+  int num_spatial_layers_ RTC_GUARDED_BY(mutex_);
+  int num_temporal_layers_ RTC_GUARDED_BY(mutex_);
   // Indicates if the latest bitrate allocation had layers disabled by low
   // available bandwidth.
   bool bw_limited_layers_ RTC_GUARDED_BY(mutex_);

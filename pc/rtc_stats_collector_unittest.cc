@@ -2834,6 +2834,9 @@ TEST_F(RTCStatsCollectorTest, CollectRTCOutboundRTPStreamStats_Video) {
   video_media_info.senders[0].framerate_sent = 10;
   video_media_info.senders[0].frames_sent = 5;
   video_media_info.senders[0].huge_frames_sent = 2;
+  video_media_info.senders[0].spatial_layer_count = 1;
+  video_media_info.senders[0].temporal_layer_count = 1;
+  video_media_info.senders[0].spatial_layer_active_count = 1;
   video_media_info.senders[0].active = false;
   video_media_info.aggregated_senders.push_back(video_media_info.senders[0]);
   RtpCodecParameters codec_parameters;
@@ -2892,6 +2895,9 @@ TEST_F(RTCStatsCollectorTest, CollectRTCOutboundRTPStreamStats_Video) {
   expected_video.frames_per_second = 10.0;
   expected_video.frames_sent = 5;
   expected_video.huge_frames_sent = 2;
+  expected_video.spatial_layer_count = 1;
+  expected_video.temporal_layer_count = 1;
+  expected_video.spatial_layer_active_count = 1;
   expected_video.active = false;
   expected_video.power_efficient_encoder = false;
   // `expected_video.content_type` should be undefined.

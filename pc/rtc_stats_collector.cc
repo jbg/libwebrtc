@@ -769,6 +769,10 @@ void SetOutboundRTPStreamStatsFromVideoSenderInfo(
   }
   outbound_video->frames_sent = video_sender_info.frames_sent;
   outbound_video->huge_frames_sent = video_sender_info.huge_frames_sent;
+  outbound_video->temporal_layer_count = video_sender_info.temporal_layer_count;
+  outbound_video->spatial_layer_count = video_sender_info.spatial_layer_count;
+  outbound_video->spatial_layer_active_count =
+      video_sender_info.spatial_layer_active_count;
   outbound_video->quality_limitation_reason =
       QualityLimitationReasonToRTCQualityLimitationReason(
           video_sender_info.quality_limitation_reason);

@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "api/media_stream_interface.h"
+#include "api/stats/rtcstats_objects.h"
 #include "api/test/create_network_emulation_manager.h"
 #include "api/test/create_peer_connection_quality_test_frame_generator.h"
 #include "api/test/create_peerconnection_quality_test_fixture.h"
@@ -203,6 +204,31 @@ class SvcVideoQualityAnalyzer : public DefaultVideoQualityAnalyzer {
                                                   input_image);
   }
 
+  void OnStatsReports(
+      absl::string_view pc_label,
+      const rtc::scoped_refptr<const RTCStatsReport>& report) override {
+    if (pc_label != "alice") {
+      return;
+    }
+
+    std::vector<const RTCOutboundRTPStreamStats*> outbound_stream_stats =
+        report->GetStatsOfType<RTCOutboundRTPStreamStats>();
+    const RTCOutboundRTPStreamStats* video_stream_stats = nullptr;
+    for (const RTCOutboundRTPStreamStats* stat : outbound_stream_stats) {
+      if (stat->media_type.ValueOrDefault("") == "video") {
+        video_stream_stats = stat;
+        break;
+      }
+    }
+
+    int aa = video_stream_stats->temporal_layer_count.ValueOrDefault(0);
+    temporal_layer_count_seen_[aa]++;
+    spatial_layer_count_seen_[video_stream_stats->spatial_layer_count
+                                  .ValueOrDefault(0)]++;
+    spatial_layer_active_count_seen_
+        [video_stream_stats->spatial_layer_active_count.ValueOrDefault(0)]++;
+  }
+
   const SpatialTemporalLayerCounts& encoder_layers_seen() const {
     return encoder_layers_seen_;
   }
@@ -210,9 +236,24 @@ class SvcVideoQualityAnalyzer : public DefaultVideoQualityAnalyzer {
     return decoder_layers_seen_;
   }
 
+  const webrtc::flat_map<int, int>& temporal_layer_count_seen() const {
+    return temporal_layer_count_seen_;
+  }
+
+  const webrtc::flat_map<int, int>& spatial_layer_count_seen() const {
+    return spatial_layer_count_seen_;
+  }
+
+  const webrtc::flat_map<int, int>& spatial_layer_active_count_seen() const {
+    return spatial_layer_active_count_seen_;
+  }
+
  private:
   SpatialTemporalLayerCounts encoder_layers_seen_;
   SpatialTemporalLayerCounts decoder_layers_seen_;
+  webrtc::flat_map<int, int> temporal_layer_count_seen_;
+  webrtc::flat_map<int, int> spatial_layer_count_seen_;
+  webrtc::flat_map<int, int> spatial_layer_active_count_seen_;
 };
 
 MATCHER_P2(HasSpatialAndTemporalLayers,
@@ -360,6 +401,25 @@ TEST_P(SvcTest, ScalabilityModeSupported) {
       RTC_LOG(LS_INFO) << "  Layer: " << spatial_index << "," << temporal_index
                        << " frames: " << frame_count;
     }
+  }
+  RTC_LOG(LS_INFO) << "temporal_layer_count seen: "
+                   << analyzer_ptr->temporal_layer_count_seen().size();
+  for (auto& [temporal_idx, count] :
+       analyzer_ptr->temporal_layer_count_seen()) {
+    RTC_LOG(LS_INFO) << temporal_idx << " count: " << count;
+  }
+
+  RTC_LOG(LS_INFO) << "spatial_layer_count seen: "
+                   << analyzer_ptr->spatial_layer_count_seen().size();
+  for (auto& [spatial_idx, count] : analyzer_ptr->spatial_layer_count_seen()) {
+    RTC_LOG(LS_INFO) << spatial_idx << " count: " << count;
+  }
+
+  RTC_LOG(LS_INFO) << "spatial_layer_active_count seen: "
+                   << analyzer_ptr->spatial_layer_active_count_seen().size();
+  for (auto& [spatial_idx, count] :
+       analyzer_ptr->spatial_layer_active_count_seen()) {
+    RTC_LOG(LS_INFO) << spatial_idx << " count: " << count;
   }
 }
 

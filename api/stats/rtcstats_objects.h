@@ -540,6 +540,10 @@ class RTC_EXPORT RTCOutboundRTPStreamStats final : public RTCRTPStreamStats {
   RTCStatsMember<double> frames_per_second;
   RTCStatsMember<uint32_t> frames_sent;
   RTCStatsMember<uint32_t> huge_frames_sent;
+  // TODO(bugs.webrtc.org/XXXX): Add to the spec
+  RTCStatsMember<uint32_t> spatial_layer_count;
+  RTCStatsMember<uint32_t> temporal_layer_count;
+  RTCStatsMember<uint32_t> spatial_layer_active_count;
   RTCStatsMember<double> total_packet_send_delay;
   // Enum type RTCQualityLimitationReason
   RTCStatsMember<std::string> quality_limitation_reason;

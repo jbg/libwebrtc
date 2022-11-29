@@ -21,6 +21,7 @@
 #include "api/video/video_codec_type.h"
 #include "api/video_codecs/video_codec.h"
 #include "modules/video_coding/include/video_codec_interface.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/mod_ops.h"
@@ -149,9 +150,11 @@ SendStatisticsProxy::SendStatisticsProxy(
       quality_limitation_reason_tracker_(clock_),
       media_byte_rate_tracker_(kBucketSizeMs, kBucketCount),
       encoded_frame_rate_tracker_(kBucketSizeMs, kBucketCount),
-      last_num_spatial_layers_(0),
-      last_num_simulcast_streams_(0),
-      last_spatial_layer_use_{},
+      num_spatial_layers_active_(0),
+      num_simulcast_streams_active_(0),
+      spatial_layer_use_{},
+      num_spatial_layers_(0),
+      num_temporal_layers_(0),
       bw_limited_layers_(false),
       internal_encoder_scaler_(false),
       uma_container_(
@@ -828,6 +831,9 @@ void SendStatisticsProxy::OnInactiveSsrc(uint32_t ssrc) {
   stats->retransmit_bitrate_bps = 0;
   stats->height = 0;
   stats->width = 0;
+  stats->spatial_layer_count = 0;
+  stats->temporal_layer_count = 0;
+  stats->spatial_layer_active_count = 0;
 }
 
 void SendStatisticsProxy::OnSetEncoderTargetRate(uint32_t bitrate_bps) {
@@ -1037,8 +1043,12 @@ void SendStatisticsProxy::OnSendEncodedImage(
   }
   // is_top_spatial_layer pertains only to SVC, will always be true for
   // simulcast.
-  if (is_top_spatial_layer)
+  if (is_top_spatial_layer) {
     encoded_frame_rate_trackers_[ssrc]->AddSamples(1);
+    stats->spatial_layer_count = num_spatial_layers_;
+    stats->temporal_layer_count = num_temporal_layers_;
+    stats->spatial_layer_active_count = num_spatial_layers_active_;
+  }
 
   absl::optional<int> downscales =
       adaptation_limitations_.MaskedQualityCounts().resolution_adaptations;
@@ -1209,10 +1219,10 @@ void SendStatisticsProxy::UpdateAdaptationStats() {
 void SendStatisticsProxy::OnBitrateAllocationUpdated(
     const VideoCodec& codec,
     const VideoBitrateAllocation& allocation) {
-  int num_spatial_layers = 0;
+  int num_spatial_layers_active = 0;
   for (int i = 0; i < kMaxSpatialLayers; i++) {
     if (codec.spatialLayers[i].active) {
-      num_spatial_layers++;
+      num_spatial_layers_active++;
     }
   }
   int num_simulcast_streams = 0;
@@ -1220,6 +1230,35 @@ void SendStatisticsProxy::OnBitrateAllocationUpdated(
     if (codec.simulcastStream[i].active) {
       num_simulcast_streams++;
     }
+  }
+
+  int num_temporal_layers = 0;
+  for (int i = 0; i < kMaxSpatialLayers; i++) {
+    if (codec.spatialLayers[i].active) {
+      num_temporal_layers = std::max(
+          num_temporal_layers,
+          static_cast<int>(codec.spatialLayers[i].numberOfTemporalLayers));
+      break;
+    }
+  }
+  for (int i = 0; i < kMaxSimulcastStreams; i++) {
+    if (codec.simulcastStream[i].active) {
+      num_temporal_layers = std::max(
+          num_temporal_layers,
+          static_cast<int>(codec.simulcastStream[i].numberOfTemporalLayers));
+      break;
+    }
+  }
+
+  int num_spatial_layers = 0;
+  if (codec.GetScalabilityMode().has_value()) {
+    num_spatial_layers =
+        ScalabilityModeToNumSpatialLayers(*codec.GetScalabilityMode());
+  } else if (codec.codecType == VideoCodecType::kVideoCodecVP9) {
+    num_spatial_layers = static_cast<int>(codec.VP9().numberOfSpatialLayers);
+  }
+  if (num_spatial_layers == 0) {
+    num_spatial_layers = 1;
   }
 
   std::array<bool, kMaxSpatialLayers> spatial_layers;
@@ -1232,18 +1271,20 @@ void SendStatisticsProxy::OnBitrateAllocationUpdated(
   bw_limited_layers_ = allocation.is_bw_limited();
   UpdateAdaptationStats();
 
-  if (spatial_layers != last_spatial_layer_use_) {
+  if (spatial_layers != spatial_layer_use_) {
     // If the number of spatial layers has changed, the resolution change is
     // not due to quality limitations, it is because the configuration
     // changed.
-    if (last_num_spatial_layers_ == num_spatial_layers &&
-        last_num_simulcast_streams_ == num_simulcast_streams) {
+    if (num_spatial_layers_active_ == num_spatial_layers_active &&
+        num_simulcast_streams_active_ == num_simulcast_streams) {
       ++stats_.quality_limitation_resolution_changes;
     }
-    last_spatial_layer_use_ = spatial_layers;
+    spatial_layer_use_ = spatial_layers;
   }
-  last_num_spatial_layers_ = num_spatial_layers;
-  last_num_simulcast_streams_ = num_simulcast_streams;
+  num_spatial_layers_active_ = num_spatial_layers_active;
+  num_simulcast_streams_active_ = num_simulcast_streams;
+  num_spatial_layers_ = num_spatial_layers;
+  num_temporal_layers_ = num_temporal_layers;
 }
 
 // Informes observer if an internal encoder scaler has reduced video
