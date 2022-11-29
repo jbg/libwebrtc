@@ -16,6 +16,40 @@
       "message": "I tested it on Chromium by building it with this patch applied.",
       "revId": "b0e06e62a6beab6ca157c5b8474ab1cfa623d6e7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9211b025_9fa2d7d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-29T14:50:22Z",
+      "side": 1,
+      "message": "I\u0027d like unittests....",
+      "revId": "b0e06e62a6beab6ca157c5b8474ab1cfa623d6e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03f4309b_89d90be9",
+        "filename": "p2p/base/stun_port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-29T14:50:22Z",
+      "side": 1,
+      "message": "Quite worried about letting this one in without a test in stun_port_unittest.cc\n\nAs far as I can tell from a quick glance, all tests in stun_port_unittest.cc are run without an MdnsResponderProvider. So we\u0027re not testing the new code path here.\n\nCan you look at adding a test in stun_port_unittest.cc that operates with a mock MdnsResponderProvider and checks that its presence causes the right result?",
+      "revId": "b0e06e62a6beab6ca157c5b8474ab1cfa623d6e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
