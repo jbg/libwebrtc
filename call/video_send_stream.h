@@ -93,6 +93,10 @@ class VideoSendStream {
     uint64_t total_encode_time_ms = 0;
     uint64_t total_encoded_bytes_target = 0;
     uint32_t huge_frames_sent = 0;
+    // TODO(bugs.webrtc.org/XXXX): Add to the spec
+    uint32_t temporal_layer_count = 0;
+    uint32_t spatial_layer_count = 0;
+    uint32_t spatial_layer_active_count = 0;
   };
 
   struct Stats {

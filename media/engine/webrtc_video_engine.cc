@@ -2731,6 +2731,9 @@ WebRtcVideoChannel::WebRtcVideoSendStream::GetPerLayerVideoSenderInfos(
     info.total_encode_time_ms = stream_stats.total_encode_time_ms;
     info.total_encoded_bytes_target = stream_stats.total_encoded_bytes_target;
     info.huge_frames_sent = stream_stats.huge_frames_sent;
+    info.temporal_layer_count = stream_stats.temporal_layer_count;
+    info.spatial_layer_count = stream_stats.spatial_layer_count;
+    info.spatial_layer_active_count = stream_stats.spatial_layer_active_count;
     infos.push_back(info);
   }
   return infos;

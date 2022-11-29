@@ -2726,6 +2726,7 @@ if (rtc_include_tests && !build_with_chromium) {
       "../api:media_stream_interface",
       "../api:network_emulation_manager_api",
       "../api:peer_connection_quality_test_fixture_api",
+      "../api:rtc_stats_api",
       "../api:simulated_network_api",
       "../api:time_controller",
       "../api/test/metrics:global_metrics_logger_and_exporter",

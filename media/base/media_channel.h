@@ -612,6 +612,10 @@ struct VideoSenderInfo : public MediaSenderInfo {
   uint32_t aggregated_huge_frames_sent = 0;
   absl::optional<std::string> rid;
   absl::optional<bool> power_efficient_encoder;
+  // TODO(bugs.webrtc.org/XXXX): Add to the spec
+  uint32_t temporal_layer_count = 0;
+  uint32_t spatial_layer_count = 0;
+  uint32_t spatial_layer_active_count = 0;
 };
 
 struct VideoReceiverInfo : public MediaReceiverInfo {

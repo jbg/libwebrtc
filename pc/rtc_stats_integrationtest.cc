@@ -984,6 +984,12 @@ class RTCStatsReportVerifier {
       verifier.TestMemberIsNonNegative<uint32_t>(
           outbound_stream.huge_frames_sent);
       verifier.MarkMemberTested(outbound_stream.rid, true);
+      verifier.TestMemberIsNonNegative<uint32_t>(
+          outbound_stream.temporal_layer_count);
+      verifier.TestMemberIsNonNegative<uint32_t>(
+          outbound_stream.spatial_layer_count);
+      verifier.TestMemberIsNonNegative<uint32_t>(
+          outbound_stream.spatial_layer_active_count);
     } else {
       verifier.TestMemberIsUndefined(outbound_stream.frames_encoded);
       verifier.TestMemberIsUndefined(outbound_stream.key_frames_encoded);
@@ -1005,6 +1011,10 @@ class RTCStatsReportVerifier {
       verifier.TestMemberIsUndefined(outbound_stream.frame_width);
       verifier.TestMemberIsUndefined(outbound_stream.frames_sent);
       verifier.TestMemberIsUndefined(outbound_stream.huge_frames_sent);
+      verifier.TestMemberIsUndefined(outbound_stream.temporal_layer_count);
+      verifier.TestMemberIsUndefined(outbound_stream.spatial_layer_count);
+      verifier.TestMemberIsUndefined(
+          outbound_stream.spatial_layer_active_count);
     }
     return verifier.ExpectAllMembersSuccessfullyTested();
   }
