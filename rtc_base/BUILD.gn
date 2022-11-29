@@ -612,6 +612,25 @@ rtc_library("rtc_task_queue") {
   ]
 }
 
+rtc_library("inline_task_queue") {
+  visibility = [ "*" ]
+  sources = [
+    "inline_task_queue.cc",
+    "inline_task_queue.h",
+  ]
+  deps = [
+    ":macromagic",
+    ":refcount",
+    "../api:make_ref_counted",
+    "../api:scoped_refptr",
+    "../api/task_queue",
+    "../api/units:time_delta",
+    "synchronization:mutex",
+    "system:rtc_export",
+  ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/functional:any_invocable" ]
+}
+
 rtc_source_set("rtc_operations_chain") {
   visibility = [ "*" ]
   sources = [
@@ -1531,6 +1550,7 @@ if (rtc_include_tests) {
         "deprecated/recursive_critical_section_unittest.cc",
         "event_tracer_unittest.cc",
         "event_unittest.cc",
+        "inline_task_queue_unittest.cc",
         "logging_unittest.cc",
         "numerics/divide_round_unittest.cc",
         "numerics/histogram_percentile_counter_unittest.cc",
@@ -1575,6 +1595,7 @@ if (rtc_include_tests) {
         ":event_tracer",
         ":gunit_helpers",
         ":histogram_percentile_counter",
+        ":inline_task_queue",
         ":ip_address",
         ":logging",
         ":macromagic",
@@ -1583,6 +1604,7 @@ if (rtc_include_tests) {
         ":null_socket_server",
         ":one_time_event",
         ":platform_thread",
+        ":platform_thread_types",
         ":random",
         ":rate_limiter",
         ":rate_statistics",
@@ -1612,6 +1634,9 @@ if (rtc_include_tests) {
         "../api:make_ref_counted",
         "../api:scoped_refptr",
         "../api/numerics",
+        "../api/task_queue",
+        "../api/task_queue:default_task_queue_factory",
+        "../api/task_queue:task_queue_test",
         "../api/units:time_delta",
         "../system_wrappers",
         "../test:fileutils",

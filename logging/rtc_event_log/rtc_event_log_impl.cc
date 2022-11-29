@@ -24,8 +24,8 @@
 #include "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
+#include "rtc_base/inline_task_queue.h"
 #include "rtc_base/logging.h"
-#include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/numerics/safe_minmax.h"
 #include "rtc_base/time_utils.h"
 
@@ -61,10 +61,11 @@ RtcEventLogImpl::RtcEventLogImpl(RtcEventLog::EncodingType encoding_type,
       last_output_ms_(rtc::TimeMillis()),
       output_scheduled_(false),
       logging_state_started_(false),
-      task_queue_(
-          std::make_unique<rtc::TaskQueue>(task_queue_factory->CreateTaskQueue(
-              "rtc_event_log",
-              TaskQueueFactory::Priority::NORMAL))) {}
+      task_queue_(task_queue_factory->CreateTaskQueue(
+          "rtc_event_log",
+          TaskQueueFactory::Priority::NORMAL)) {
+  sequence_checker_.Detach();
+}
 
 RtcEventLogImpl::~RtcEventLogImpl() {
   // If we're logging to the output, this will stop that. Blocking function.
@@ -72,12 +73,6 @@ RtcEventLogImpl::~RtcEventLogImpl() {
     logging_state_checker_.Detach();
     StopLogging();
   }
-
-  // We want to block on any executing task by invoking ~TaskQueue() before
-  // we set unique_ptr's internal pointer to null.
-  rtc::TaskQueue* tq = task_queue_.get();
-  delete tq;
-  task_queue_.release();
 }
 
 bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output,
@@ -98,9 +93,10 @@ bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output,
   RTC_DCHECK_RUN_ON(&logging_state_checker_);
   logging_state_started_ = true;
   // Binding to `this` is safe because `this` outlives the `task_queue_`.
-  task_queue_->PostTask([this, output_period_ms, timestamp_us, utc_time_us,
-                         output = std::move(output)]() mutable {
-    RTC_DCHECK_RUN_ON(task_queue_.get());
+  task_queue_.PostTaskNoInline([this, output_period_ms, timestamp_us,
+                                utc_time_us,
+                                output = std::move(output)]() mutable {
+    RTC_DCHECK_RUN_ON(&sequence_checker_);
     RTC_DCHECK(output->IsActive());
     output_period_ms_ = output_period_ms;
     event_output_ = std::move(output);
@@ -127,8 +123,8 @@ void RtcEventLogImpl::StopLogging() {
 void RtcEventLogImpl::StopLogging(std::function<void()> callback) {
   RTC_DCHECK_RUN_ON(&logging_state_checker_);
   logging_state_started_ = false;
-  task_queue_->PostTask([this, callback] {
-    RTC_DCHECK_RUN_ON(task_queue_.get());
+  task_queue_.PostTaskNoInline([this, callback] {
+    RTC_DCHECK_RUN_ON(&sequence_checker_);
     if (event_output_) {
       RTC_DCHECK(event_output_->IsActive());
       LogEventsFromMemoryToOutput();
@@ -142,15 +138,16 @@ void RtcEventLogImpl::Log(std::unique_ptr<RtcEvent> event) {
   RTC_CHECK(event);
 
   // Binding to `this` is safe because `this` outlives the `task_queue_`.
-  task_queue_->PostTask([this, event = std::move(event)]() mutable {
-    RTC_DCHECK_RUN_ON(task_queue_.get());
-    LogToMemory(std::move(event));
-    if (event_output_)
-      ScheduleOutput();
-  });
+  task_queue_.PostTask(
+      [this, event = std::move(event), task_queue = &task_queue_]() mutable {
+        RTC_DCHECK_RUN_ON(&sequence_checker_);
+        LogToMemory(std::move(event));
+        if (event_output_)
+          ScheduleOutput(task_queue);
+      });
 }
 
-void RtcEventLogImpl::ScheduleOutput() {
+void RtcEventLogImpl::ScheduleOutput(TaskQueueBase* task_queue) {
   RTC_DCHECK(event_output_ && event_output_->IsActive());
   if (history_.size() >= kMaxEventsInHistory) {
     // We have to emergency drain the buffer. We can't wait for the scheduled
@@ -161,7 +158,7 @@ void RtcEventLogImpl::ScheduleOutput() {
 
   RTC_DCHECK(output_period_ms_.has_value());
   if (*output_period_ms_ == kImmediateOutput) {
-    // We are already on the `task_queue_` so there is no reason to post a task
+    // We are already on the `task_queue` so there is no reason to post a task
     // if we want to output immediately.
     LogEventsFromMemoryToOutput();
     return;
@@ -169,9 +166,9 @@ void RtcEventLogImpl::ScheduleOutput() {
 
   if (!output_scheduled_) {
     output_scheduled_ = true;
-    // Binding to `this` is safe because `this` outlives the `task_queue_`.
+    // Binding to `this` is safe because `this` outlives the `task_queue`.
     auto output_task = [this]() {
-      RTC_DCHECK_RUN_ON(task_queue_.get());
+      RTC_DCHECK_RUN_ON(&sequence_checker_);
       if (event_output_) {
         RTC_DCHECK(event_output_->IsActive());
         LogEventsFromMemoryToOutput();
@@ -182,8 +179,8 @@ void RtcEventLogImpl::ScheduleOutput() {
     const int64_t time_since_output_ms = now_ms - last_output_ms_;
     const uint32_t delay = rtc::SafeClamp(
         *output_period_ms_ - time_since_output_ms, 0, *output_period_ms_);
-    task_queue_->PostDelayedTask(std::move(output_task),
-                                 TimeDelta::Millis(delay));
+    task_queue->PostDelayedTask(std::move(output_task),
+                                TimeDelta::Millis(delay));
   }
 }
 
