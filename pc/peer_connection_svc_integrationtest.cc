@@ -15,6 +15,7 @@
 
 #include <vector>
 
+#include "absl/strings/match.h"
 #include "api/rtc_error.h"
 #include "api/rtp_parameters.h"
 #include "api/rtp_transceiver_interface.h"
@@ -238,6 +239,40 @@ TEST_F(PeerConnectionSVCIntegrationTest,
   EXPECT_EQ(result.type(), webrtc::RTCErrorType::UNSUPPORTED_OPERATION);
 }
 
+TEST_F(PeerConnectionSVCIntegrationTest, FallbackToL1Tx) {
+  ASSERT_TRUE(CreatePeerConnectionWrappers());
+  ConnectFakeSignaling();
+
+  webrtc::RtpTransceiverInit init;
+  webrtc::RtpEncodingParameters encoding_parameters;
+  init.send_encodings.push_back(encoding_parameters);
+  auto transceiver_or_error =
+      caller()->pc()->AddTransceiver(caller()->CreateLocalVideoTrack(), init);
+  ASSERT_TRUE(transceiver_or_error.ok());
+  auto caller_transceiver = transceiver_or_error.MoveValue();
+
+  transceiver_or_error =
+      callee()->pc()->AddTransceiver(cricket::MEDIA_TYPE_VIDEO);
+  ASSERT_TRUE(transceiver_or_error.ok());
+  auto callee_transceiver = transceiver_or_error.MoveValue();
+  EXPECT_TRUE(
+      SetCodecPreferences(callee_transceiver, cricket::kVp8CodecName).ok());
+
+  webrtc::RtpParameters parameters =
+      caller_transceiver->sender()->GetParameters();
+  ASSERT_EQ(parameters.encodings.size(), 1u);
+  parameters.encodings[0].scalability_mode = "L3T3";
+  auto result = caller_transceiver->sender()->SetParameters(parameters);
+  EXPECT_TRUE(result.ok());
+
+  caller()->CreateAndSetAndSignalOffer();
+  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
+
+  parameters = caller_transceiver->sender()->GetParameters();
+  ASSERT_TRUE(parameters.encodings[0].scalability_mode.has_value());
+  EXPECT_TRUE(
+      absl::StartsWith(*parameters.encodings[0].scalability_mode, "L1T"));
+}
 }  // namespace
 
 }  // namespace webrtc
