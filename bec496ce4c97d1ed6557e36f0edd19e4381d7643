@@ -39,6 +39,30 @@
       },
       "revId": "bec496ce4c97d1ed6557e36f0edd19e4381d7643",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab149a80_1d68f1e0",
+        "filename": "audio/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2022-11-30T09:40:16Z",
+      "side": 1,
+      "message": "Yes it could but I like it to be explicit per platform though. If we exclude platforms from the if statement, you need to know all the platforms.",
+      "parentUuid": "8cc25534_7abaec76",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 7
+      },
+      "revId": "bec496ce4c97d1ed6557e36f0edd19e4381d7643",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
