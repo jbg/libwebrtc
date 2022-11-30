@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a8a501c_e7a3bf52",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-11-30T17:12:12Z",
+      "side": 1,
+      "message": "I would still expect you close the fd yourself to have it under your control, but given the PipeWire documentation explicitly says it will close it, it should not be a problem.",
+      "parentUuid": "1acbf71a_3217d822",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4af05a09_2e72e12f",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "`pw_thread_loop_wait()` blocks until some other thread calls `pw_thread_loop_signal()`. Or what am I missing here?",
       "parentUuid": "4af05a09_2e72e12f",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e9810dd_92fc3a71",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-11-30T17:12:12Z",
+      "side": 1,
+      "message": "Digging now into it, you are correct and I wonder why it works in our case. I think it\u0027s because we close the session and that gives us later OnCoreError callback which in return resumes this wait. This probably won\u0027t be happening in your case as the camera portal works differently.",
+      "parentUuid": "f8789540_70bd0f33",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -137,6 +173,24 @@
       "side": 1,
       "message": "You\u0027re dropping buffers if there is more than one buffer pending. I\u0027m not sure if that is the correct thing to do for cameras. v4l2 does not drop buffers either.",
       "parentUuid": "645c37db_12196019",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de534c37_f4e2996c",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-11-30T17:12:12Z",
+      "side": 1,
+      "message": "Right, but wouldn\u0027t that give you the most recent picture behind the camera? Let\u0027s say your are receiving frames faster than you are able to proccess, than won\u0027t your image be lagging and there will be delay? At least that\u0027s the usual behavior I see everywhere with screen sharing, but I might be wrong here.",
+      "parentUuid": "10e1ace7_6d8da46a",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
