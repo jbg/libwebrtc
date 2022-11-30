@@ -86,6 +86,24 @@
       "parentUuid": "03f4309b_89d90be9",
       "revId": "b0e06e62a6beab6ca157c5b8474ab1cfa623d6e7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dce9b1b2_9fb34039",
+        "filename": "p2p/base/stun_port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 20159
+      },
+      "writtenOn": "2022-11-30T09:43:49Z",
+      "side": 1,
+      "message": "For the unit tests I created, I also checked the following.\n\nTest `StunPortTest.TestStunCandidateDiscardedWithMdnsObfuscationNotEnabled`:\nSucceeded whether or not Patchset 1 (`b0e06e62a6beab6ca157c5b8474ab1cfa623d6e7`) was applied.\n\nTest `StunPortTest.TestStunCandidateGeneratedWithMdnsObfuscationEnabled`:\nFailed when Patchset 1 was not applied.\nSucceeded when Patchset 1 was applied.",
+      "parentUuid": "af91c404_9d218bb1",
+      "revId": "b0e06e62a6beab6ca157c5b8474ab1cfa623d6e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
