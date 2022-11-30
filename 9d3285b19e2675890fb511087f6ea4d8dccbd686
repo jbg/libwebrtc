@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c64f3d_f308cc6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-11-30T08:11:41Z",
+      "side": 1,
+      "message": "Aha, build_with_chromium\u003dtrue means webrtc/sdk can\u0027t be usable.",
+      "revId": "9d3285b19e2675890fb511087f6ea4d8dccbd686",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
