@@ -68,6 +68,24 @@
       "parentUuid": "90e986ae_1e16def2",
       "revId": "352be9e8105e611e8304cc883007d549277ce65a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67aa4948_1913c2d5",
+        "filename": "p2p/base/stun_port_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-11-30T10:22:44Z",
+      "side": 1,
+      "message": "Don\u0027t do it inside the EXPECT.\n\nEXPECT_NE(port()-\u003eCandiates()[0].type(), port()-\u003eCandidates()[1].type());\nif (port()-\u003eCandidates()[0].type() \u003d\u003d cricket::LOCAL_PORT_TYPE) {\n   EXPECT_EQ(port()-\u003eCandidates()[1].type(), cricket::STUN_PORT_TYPE);\n} else {\n   EXPECT_EQ(port()-\u003eCandidates()[0].type(), cricket::STUN_PORT_TYPE);\n   EXPECT_EQ(port()-\u003eCandidates()[1].type(), cricket::LOCAL_PORT_TYPE);\n}",
+      "parentUuid": "26d4c927_7a3edaf3",
+      "revId": "352be9e8105e611e8304cc883007d549277ce65a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
