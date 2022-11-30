@@ -193,6 +193,24 @@
       "parentUuid": "10e1ace7_6d8da46a",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "046ba7d3_40d6cf95",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-11-30T17:39:58Z",
+      "side": 1,
+      "message": "I think there is a difference between screen sharing and a camera. With screen sharing we have a high resolution and the framerate is best effort anyways. So just returning the latest buffer is a good idea.\n\nWith a Camera I would argue that smooth playback is more important than absolute minimum latency. And that means delivering all frames.",
+      "parentUuid": "de534c37_f4e2996c",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
