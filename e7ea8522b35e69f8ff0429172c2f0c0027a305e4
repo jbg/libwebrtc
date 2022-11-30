@@ -177,6 +177,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b031557d_92046543",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-30T09:55:34Z",
+      "side": 1,
+      "message": "sorry for misleading comment, I mean \u0027rtc_base/task_utils\u0027\n(I agree it is better not to expose this class in the api)",
+      "parentUuid": "210cf612_324c54e3",
+      "range": {
+        "startLine": 612,
+        "startChar": 13,
+        "endLine": 612,
+        "endChar": 38
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7f7524fe_6de8ba73",
@@ -636,6 +660,30 @@
       "side": 1,
       "message": "I would have used a thread checker but somebody deleted it. Used CurrentThreadId from the below suggestion instead.",
       "parentUuid": "96f08bef_bad0f6fa",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "e7ea8522b35e69f8ff0429172c2f0c0027a305e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f609529e_3f7813f0",
+        "filename": "rtc_base/inline_task_queue_adapter_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-30T09:55:34Z",
+      "side": 1,
+      "message": "what would happen if you try to call \nInlineTaskQueueAdapter::PostTask\npassing variable with the type `absl::AnyInvocable\u003cvoid() \u0026\u0026\u003e`\nWould it compile?",
+      "parentUuid": "9fd9d5fa_8c6d5b06",
       "range": {
         "startLine": 27,
         "startChar": 0,

@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d2cf2b3_2e89a41d",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-30T09:55:34Z",
+      "side": 1,
+      "message": "`ScheduleOutput` may write to the output immediately.\nI\u0027m worried that Log would now block on the output, which may introduce unexpected delay for operation that suppose to be fast.\n\nI\u0027m leaving it for the RtcEventLog owner to comment if that consider to be a problem.",
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d23818e8_dbe40dc3",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-30T09:55:34Z",
+      "side": 1,
+      "message": "why introduce sequence_checker_ instead of using task_queue_ directly?\n\nclass RTC_LOCKABLE InlineTaskQueue : public TaskQueueBase { ...\n\nRTC_GUARDED_BY(task_queue_);\n...\nRTC_DCHECK_RUN_ON(\u0026task_queue_);",
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cf4e8c1_19e0406f",
+        "filename": "rtc_base/inline_task_queue.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-30T09:55:34Z",
+      "side": 1,
+      "message": "may be\n++shared_state_-\u003equeue_size;\nbase_task_queue-\u003ePostTask(WrappedImmediateTask(std::move(task), shared_state_ this));\n\n(it feels odd to pass bool parameter to ask constructor to do something caller can do itself)",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 79
+      },
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea3a0ab_7c08df00",
+        "filename": "rtc_base/inline_task_queue.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-30T09:55:34Z",
+      "side": 1,
+      "message": "there now single call to TryBeginExecution/EndExecution.\n\nmay it would be easier to track what\u0027s going on if you inline these functions:\n\n```\nclass InlineTaskQueue {\n public:\n  template \u003ctypename Lambda\u003e\n  void PostTask(Lambda\u0026\u0026 lambda);\n ...\n};\n\n... still in header file, at the very end\n// Below are implementation details.\ntemplate \u003ctypename Lambda\u003e\nvoid InlineTaskQueue::PostTask(Lambda\u0026\u0026 lambda) {\n  if (shared_state-\u003equeue_size.fetch_add(1) \u003d\u003d 0) {\n    // Need to take the `task_mu` lock to ensure serial execution with other\n    // concurrent deferred or delayed tasks.\n    MutexLock lock(\u0026shared_state-\u003etask_mu);\n    CurrentTaskQueueSetter setter(this);\n    std::forward\u003cLambda\u003e(lambda)();\n    shared_state-\u003equeue_size.fetch_sub(1);\n  } else {\n    // The queue slot was already taken in TryBeginInlineExecution.\n    base_task_queue_-\u003ePostTask(WrappedImmediateTask(\n          std::forward\u003cLambda\u003e(lambda), shared_state_, this,\n          /*queue_slot_taken\u003d*/true));\n  }\n}\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 23,
+        "endLine": 50,
+        "endChar": 46
+      },
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dd5effb_242ee284",
+        "filename": "rtc_base/inline_task_queue.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-30T09:55:34Z",
+      "side": 1,
+      "message": "these 2 forward declarations are no longer needed.",
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eb8046d_e4de5bdf",
+        "filename": "rtc_base/inline_task_queue.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-11-30T09:55:34Z",
+      "side": 1,
+      "message": "because it is a struct, drop trailing \u0027_\u0027",
+      "range": {
+        "startLine": 82,
+        "startChar": 17,
+        "endLine": 82,
+        "endChar": 18
+      },
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
