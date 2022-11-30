@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1acbf71a_3217d822",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-11-30T16:14:11Z",
+      "side": 1,
+      "message": "No. The desktop capture code the fd is closed explicitly as well. This does not happen here, so no duplication is necessary.",
+      "parentUuid": "218472b1_e19ff3f5",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4af05a09_2e72e12f",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-28T12:52:13Z",
       "side": 1,
       "message": "Maybe also add `pw_thread_loop_wait(pw_main_loop_)` before stopping it to give it some time to finish?",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8789540_70bd0f33",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-11-30T16:14:11Z",
+      "side": 1,
+      "message": "`pw_thread_loop_wait()` blocks until some other thread calls `pw_thread_loop_signal()`. Or what am I missing here?",
+      "parentUuid": "4af05a09_2e72e12f",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1358506c_4c918eb3",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-11-30T16:14:11Z",
+      "side": 1,
+      "message": "The important part is `seq \u003d\u003d that-\u003esync_seq_`:\n`PipeWireSync()` send a new sync event with a new sequence number.\nWe call `PipeWireSync()` whenever we request new data. So when a sync event comes back and the sequence data does not match, then we are still waiting for more data.\nWhen the sequence numbers match, then all requested data has arrived and enumeration is complete and Finish(Success) is called.",
+      "parentUuid": "7fd5c443_a5272907",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "645c37db_12196019",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-11-28T12:52:13Z",
       "side": 1,
       "message": "This doesn\u0027t always give you the latest buffer if I\u0027m not mistaken.\n\nCheck what we have in the capturer: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/linux/wayland/shared_screencast_stream.cc;l\u003d316",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10e1ace7_6d8da46a",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-11-30T16:14:11Z",
+      "side": 1,
+      "message": "You\u0027re dropping buffers if there is more than one buffer pending. I\u0027m not sure if that is the correct thing to do for cameras. v4l2 does not drop buffers either.",
+      "parentUuid": "645c37db_12196019",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
