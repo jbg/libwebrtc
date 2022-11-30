@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec4218cd_2da8a44a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2022-11-30T11:34:43Z",
+      "side": 1,
+      "message": "LGTM for iOS changes.",
+      "revId": "51c27b9973dbc3c40715d387df30e5d404f5e488",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
