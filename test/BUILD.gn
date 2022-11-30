@@ -1080,13 +1080,14 @@ if (is_mac) {
       "mac/video_renderer_mac.h",
       "mac/video_renderer_mac.mm",
     ]
-    deps = [ ":test_renderer_generic" ]
-    frameworks = [
-      "Cocoa.framework",
-      "OpenGL.framework",
-      "CoreVideo.framework",
+    deps = [
+      ":test_renderer_generic",
+      "../api/video:video_frame",
+      "../sdk:base_objc",
+      "../sdk:metal_objc",
+      "../sdk:videoframebuffer_objc",
     ]
-    defines = [ "GL_SILENCE_DEPRECATION" ]
+    frameworks = [ "Cocoa.framework" ]
   }
 }
 
@@ -1116,14 +1117,11 @@ rtc_library("test_renderer_generic") {
   if (!((is_linux || is_chromeos) && rtc_use_x11) && !is_mac && !is_win) {
     sources += [ "null_platform_renderer.cc" ]
   }
-  if (((is_linux || is_chromeos) && rtc_use_x11) || is_mac) {
+  if ((is_linux || is_chromeos) && rtc_use_x11) {
     sources += [
       "gl/gl_renderer.cc",
       "gl/gl_renderer.h",
     ]
-  }
-  if (is_mac) {
-    defines = [ "GL_SILENCE_DEPRECATION" ]
   }
 
   if ((is_linux || is_chromeos) && rtc_use_x11) {

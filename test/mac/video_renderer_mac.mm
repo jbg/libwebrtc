@@ -9,15 +9,19 @@
  */
 
 #include "test/mac/video_renderer_mac.h"
+#include "api/video/video_frame.h"
+
+#import "sdk/objc/api/video_frame_buffer/RTCNativeI420Buffer+Private.h"
+#import "sdk/objc/base/RTCVideoFrame.h"
+#import "sdk/objc/components/renderer/metal/RTCMTLNSVideoView.h"
 
 #import <Cocoa/Cocoa.h>
 
-// Creates a Cocoa Window with an OpenGL context, used together with an OpenGL
-// renderer.
+// Creates a Cocoa Window with a RTCMTLNSVideoView view.
 @interface CocoaWindow : NSObject {
  @private
   NSWindow *window_;
-  NSOpenGLContext *context_;
+  RTC_OBJC_TYPE(RTCMTLNSVideoView) * view_;
   NSString *title_;
   int width_;
   int height_;
@@ -26,7 +30,8 @@
 - (id)initWithTitle:(NSString *)title width:(int)width height:(int)height;
 // 'createWindow' must be called on the main thread.
 - (void)createWindow:(NSObject *)ignored;
-- (void)makeCurrentContext;
+
+- (void)onFrame:(const webrtc ::VideoFrame&)frame;
 
 @end
 
@@ -66,16 +71,21 @@
                                             defer:NO];
 
   NSRect viewFrame = NSMakeRect(0, 0, width_, height_);
-  NSOpenGLView *view = [[NSOpenGLView alloc] initWithFrame:viewFrame pixelFormat:nil];
-  context_ = [view openGLContext];
+  view_ = [[RTC_OBJC_TYPE(RTCMTLNSVideoView) alloc] initWithFrame:viewFrame];
 
-  [[window_ contentView] addSubview:view];
+  [[window_ contentView] addSubview:view_];
   [window_ setTitle:title_];
   [window_ makeKeyAndOrderFront:NSApp];
 }
 
-- (void)makeCurrentContext {
-  [context_ makeCurrentContext];
+- (void)onFrame:(const webrtc::VideoFrame&)frame {
+  RTC_OBJC_TYPE(RTCI420Buffer)* buffer = [[RTC_OBJC_TYPE(RTCI420Buffer) alloc]
+      initWithFrameBuffer:frame.video_frame_buffer()->ToI420()];
+  RTC_OBJC_TYPE(RTCVideoFrame)* videoFrame = [[RTC_OBJC_TYPE(RTCVideoFrame) alloc]
+      initWithBuffer:buffer
+            rotation:static_cast<RTCVideoRotation>(frame.rotation())
+         timeStampNs:frame.timestamp_us()];
+  [view_ renderFrame:videoFrame];
 }
 
 @end
@@ -97,9 +107,7 @@ VideoRenderer* VideoRenderer::CreatePlatformRenderer(const char* window_title,
 MacRenderer::MacRenderer()
     : window_(NULL) {}
 
-MacRenderer::~MacRenderer() {
-  GlRenderer::Destroy();
-}
+MacRenderer::~MacRenderer() {}
 
 bool MacRenderer::Init(const char* window_title, int width, int height) {
   window_ = [[CocoaWindow alloc]
@@ -108,19 +116,12 @@ bool MacRenderer::Init(const char* window_title, int width, int height) {
                                             height:height];
   if (!window_)
     return false;
-  [window_ performSelectorOnMainThread:@selector(createWindow:)
-                            withObject:nil
-                         waitUntilDone:YES];
-
-  [window_ makeCurrentContext];
-  GlRenderer::Init();
-  GlRenderer::ResizeViewport(width, height);
+  [window_ performSelectorOnMainThread:@selector(createWindow:) withObject:nil waitUntilDone:YES];
   return true;
 }
 
 void MacRenderer::OnFrame(const VideoFrame& frame) {
-  [window_ makeCurrentContext];
-  GlRenderer::OnFrame(frame);
+  [window_ onFrame:frame];
 }
 
 }  // test

@@ -11,14 +11,14 @@
 #ifndef TEST_MAC_VIDEO_RENDERER_MAC_H_
 #define TEST_MAC_VIDEO_RENDERER_MAC_H_
 
-#include "test/gl/gl_renderer.h"
+#include "test/video_renderer.h"
 
 @class CocoaWindow;
 
 namespace webrtc {
 namespace test {
 
-class MacRenderer : public GlRenderer {
+class MacRenderer : public VideoRenderer {
  public:
   MacRenderer();
   virtual ~MacRenderer();
@@ -28,7 +28,7 @@ class MacRenderer : public GlRenderer {
 
   bool Init(const char* window_title, int width, int height);
 
-  // Implements GlRenderer.
+  // Implements  rtc::VideoSinkInterface.
   void OnFrame(const VideoFrame& frame) override;
 
  private:
