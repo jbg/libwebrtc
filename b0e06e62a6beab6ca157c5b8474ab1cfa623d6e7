@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b5ce346_4b276265",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20159
+      },
+      "writtenOn": "2022-11-30T09:19:27Z",
+      "side": 1,
+      "message": "I tested on Chromium like the following.\n\n-----\n\nOn Chromium build without the patch applied:\n\nThe bug reported in webrtc:13426 was reproduced.\nOnly an obfuscated host candidate was gathered when the host address was public (by connecting my computer\u0027s ethernet cable directly to the wall jack).\nTested on https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/\n\n-----\n\nOn Chromium build with the patch applied:\n\nThe bug reported in webrtc:13426 was fixed.\nAn obfuscated host cadidate was gathered and a srflx candidate\nwas also gathered when the host address was public (by connecting my computer\u0027s ethernet cable directly to the wall jack).\nAn obfuscated host cadidate was gathered and a srflx candidate\nwas gathered when the host address was private (by connecting my computer\u0027s ethernet cable to the router).\nTested on https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/\n\nI also have checked on my application (https://gorisanson.github.io/pikachu-volleyball-p2p-online/en/) that the WebRTC data channel is working well whether the host address is public or private, when I run the application in Chromium build with the patch applied. (The peer over the WebRTC data channel, in this case, had a private host address and ran the same application in Chrome browser.)\n\n-----",
+      "parentUuid": "6ca0a5f4_66f5d6b9",
+      "revId": "b0e06e62a6beab6ca157c5b8474ab1cfa623d6e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03f4309b_89d90be9",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-11-29T14:50:22Z",
       "side": 1,
       "message": "Quite worried about letting this one in without a test in stun_port_unittest.cc\n\nAs far as I can tell from a quick glance, all tests in stun_port_unittest.cc are run without an MdnsResponderProvider. So we\u0027re not testing the new code path here.\n\nCan you look at adding a test in stun_port_unittest.cc that operates with a mock MdnsResponderProvider and checks that its presence causes the right result?",
+      "revId": "b0e06e62a6beab6ca157c5b8474ab1cfa623d6e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af91c404_9d218bb1",
+        "filename": "p2p/base/stun_port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 20159
+      },
+      "writtenOn": "2022-11-30T09:19:27Z",
+      "side": 1,
+      "message": "I created unit tests for that.\n\nI\u0027m not experienced with C++ and GoogleTest.\nTell me if there are some mistakes. 😊",
+      "parentUuid": "03f4309b_89d90be9",
       "revId": "b0e06e62a6beab6ca157c5b8474ab1cfa623d6e7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
