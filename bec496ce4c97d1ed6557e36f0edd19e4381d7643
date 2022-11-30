@@ -16,6 +16,29 @@
       "message": "Nice find !",
       "revId": "bec496ce4c97d1ed6557e36f0edd19e4381d7643",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cc25534_7abaec76",
+        "filename": "audio/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-11-30T09:24:03Z",
+      "side": 1,
+      "message": "Maybe it could be written like this ?\nif (is_win) {\n        data +\u003d [\n          \"../tools_webrtc/audio_quality/win/PolqaOem64.dll\",\n          \"../tools_webrtc/audio_quality/win/PolqaOem64.exe\",\n          \"../tools_webrtc/audio_quality/win/pesq.exe\",\n          \"../tools_webrtc/audio_quality/win/vcomp120.dll\",\n        ]\n} else if (is_mac) {\n        data +\u003d [ \"../tools_webrtc/audio_quality/mac/pesq\" ]\n} else {\n        data +\u003d [\n          \"../tools_webrtc/audio_quality/linux/PolqaOem64\",\n          \"../tools_webrtc/audio_quality/linux/pesq\",\n        ]\n}",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 7
+      },
+      "revId": "bec496ce4c97d1ed6557e36f0edd19e4381d7643",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
