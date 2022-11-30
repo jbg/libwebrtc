@@ -50,6 +50,24 @@
       "message": "strictly as a stylistic issue, I would like to see this broken up into four EXPECT_EQ statements - if they ever fail, that will make it much easier to see in the log which expectation it was that was not satisfied.",
       "revId": "352be9e8105e611e8304cc883007d549277ce65a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26d4c927_7a3edaf3",
+        "filename": "p2p/base/stun_port_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 20159
+      },
+      "writtenOn": "2022-11-30T10:08:39Z",
+      "side": 1,
+      "message": "Please could you tell me some hints about how can I break it into four EXPECT_EQ statement? Is there some OR or AND in GoogleTest?",
+      "parentUuid": "90e986ae_1e16def2",
+      "revId": "352be9e8105e611e8304cc883007d549277ce65a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
