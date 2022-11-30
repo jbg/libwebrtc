@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "988530b9_07a110b8",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-11-30T13:02:41Z",
+      "side": 1,
+      "message": "Yes, I\u0027m also a bit worried about long running tasks on the logging thread. Markus has another CL which addresses this: https://webrtc-review.googlesource.com/c/src/+/285086",
+      "parentUuid": "6d2cf2b3_2e89a41d",
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d23818e8_dbe40dc3",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
         "patchSetId": 8
