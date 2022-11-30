@@ -34,6 +34,24 @@
       "parentUuid": "f5718c5e_76649f7f",
       "revId": "f3d73a1836d65b3b32ae0a5a8436158c0da60f12",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "267986f2_df4edafd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-11-30T15:06:36Z",
+      "side": 1,
+      "message": "Thanks for the fix. Still LGTM.",
+      "parentUuid": "28c0e130_f854b372",
+      "revId": "f3d73a1836d65b3b32ae0a5a8436158c0da60f12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
