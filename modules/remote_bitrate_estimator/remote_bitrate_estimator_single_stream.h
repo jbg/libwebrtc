@@ -59,7 +59,7 @@ class RemoteBitrateEstimatorSingleStream : public RemoteBitrateEstimator {
   typedef std::map<uint32_t, Detector*> SsrcOveruseEstimatorMap;
 
   // Triggers a new estimate calculation.
-  void UpdateEstimate(int64_t time_now) RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
+  void UpdateEstimate(Timestamp now) RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
 
   void GetSsrcs(std::vector<uint32_t>* ssrcs) const
       RTC_SHARED_LOCKS_REQUIRED(mutex_);
@@ -72,8 +72,8 @@ class RemoteBitrateEstimatorSingleStream : public RemoteBitrateEstimator {
   AimdRateControl remote_rate_ RTC_GUARDED_BY(mutex_);
   RemoteBitrateObserver* const observer_ RTC_GUARDED_BY(mutex_);
   mutable Mutex mutex_;
-  int64_t last_process_time_;
-  int64_t process_interval_ms_ RTC_GUARDED_BY(mutex_);
+  Timestamp last_process_time_ = Timestamp::MinusInfinity();
+  TimeDelta process_interval_ RTC_GUARDED_BY(mutex_);
   bool uma_recorded_;
 };
 

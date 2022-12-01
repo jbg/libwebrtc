@@ -41,17 +41,15 @@ enum { kTimestampGroupLengthMs = 5 };
 static const double kTimestampToMs = 1.0 / 90.0;
 
 struct RemoteBitrateEstimatorSingleStream::Detector {
-  explicit Detector(int64_t last_packet_time_ms,
-                    const OverUseDetectorOptions& options,
+  explicit Detector(const OverUseDetectorOptions& options,
                     bool enable_burst_grouping,
                     const FieldTrialsView* key_value_config)
-      : last_packet_time_ms(last_packet_time_ms),
-        inter_arrival(90 * kTimestampGroupLengthMs,
+      : inter_arrival(90 * kTimestampGroupLengthMs,
                       kTimestampToMs,
                       enable_burst_grouping),
         estimator(options),
         detector(key_value_config) {}
-  int64_t last_packet_time_ms;
+  Timestamp last_packet_time = Timestamp::MinusInfinity();
   InterArrival inter_arrival;
   OveruseEstimator estimator;
   OveruseDetector detector;
@@ -65,8 +63,7 @@ RemoteBitrateEstimatorSingleStream::RemoteBitrateEstimatorSingleStream(
       last_valid_incoming_bitrate_(0),
       remote_rate_(&field_trials_),
       observer_(observer),
-      last_process_time_(-1),
-      process_interval_ms_(kProcessIntervalMs),
+      process_interval_(TimeDelta::Millis(500)),
       uma_recorded_(false) {
   RTC_LOG(LS_INFO) << "RemoteBitrateEstimatorSingleStream: Instantiating.";
 }
@@ -93,7 +90,7 @@ void RemoteBitrateEstimatorSingleStream::IncomingPacket(
   uint32_t ssrc = header.ssrc;
   uint32_t rtp_timestamp =
       header.timestamp + header.extension.transmissionTimeOffset;
-  int64_t now_ms = clock_->TimeInMilliseconds();
+  Timestamp now = clock_->CurrentTime();
   MutexLock lock(&mutex_);
   SsrcOveruseEstimatorMap::iterator it = overuse_detectors_.find(ssrc);
   if (it == overuse_detectors_.end()) {
@@ -104,16 +101,16 @@ void RemoteBitrateEstimatorSingleStream::IncomingPacket(
     // automatically cleaned up when we have one RemoteBitrateEstimator per REMB
     // group.
     std::pair<SsrcOveruseEstimatorMap::iterator, bool> insert_result =
-        overuse_detectors_.insert(
-            std::make_pair(ssrc, new Detector(now_ms, OverUseDetectorOptions(),
-                                              true, &field_trials_)));
+        overuse_detectors_.insert(std::make_pair(
+            ssrc,
+            new Detector(OverUseDetectorOptions(), true, &field_trials_)));
     it = insert_result.first;
   }
   Detector* estimator = it->second;
-  estimator->last_packet_time_ms = now_ms;
+  estimator->last_packet_time = now;
 
   // Check if incoming bitrate estimate is valid, and if it needs to be reset.
-  absl::optional<uint32_t> incoming_bitrate = incoming_bitrate_.Rate(now_ms);
+  absl::optional<uint32_t> incoming_bitrate = incoming_bitrate_.Rate(now.ms());
   if (incoming_bitrate) {
     last_valid_incoming_bitrate_ = *incoming_bitrate;
   } else if (last_valid_incoming_bitrate_ > 0) {
@@ -123,59 +120,55 @@ void RemoteBitrateEstimatorSingleStream::IncomingPacket(
     incoming_bitrate_.Reset();
     last_valid_incoming_bitrate_ = 0;
   }
-  incoming_bitrate_.Update(payload_size, now_ms);
+  incoming_bitrate_.Update(payload_size, now.ms());
 
   const BandwidthUsage prior_state = estimator->detector.State();
   uint32_t timestamp_delta = 0;
   int64_t time_delta = 0;
   int size_delta = 0;
   if (estimator->inter_arrival.ComputeDeltas(
-          rtp_timestamp, arrival_time_ms, now_ms, payload_size,
+          rtp_timestamp, arrival_time_ms, now.ms(), payload_size,
           &timestamp_delta, &time_delta, &size_delta)) {
     double timestamp_delta_ms = timestamp_delta * kTimestampToMs;
     estimator->estimator.Update(time_delta, timestamp_delta_ms, size_delta,
-                                estimator->detector.State(), now_ms);
+                                estimator->detector.State(), now.ms());
     estimator->detector.Detect(estimator->estimator.offset(),
                                timestamp_delta_ms,
-                               estimator->estimator.num_of_deltas(), now_ms);
+                               estimator->estimator.num_of_deltas(), now.ms());
   }
   if (estimator->detector.State() == BandwidthUsage::kBwOverusing) {
     absl::optional<uint32_t> incoming_bitrate_bps =
-        incoming_bitrate_.Rate(now_ms);
+        incoming_bitrate_.Rate(now.ms());
     if (incoming_bitrate_bps &&
         (prior_state != BandwidthUsage::kBwOverusing ||
          remote_rate_.TimeToReduceFurther(
-             Timestamp::Millis(now_ms),
-             DataRate::BitsPerSec(*incoming_bitrate_bps)))) {
+             now, DataRate::BitsPerSec(*incoming_bitrate_bps)))) {
       // The first overuse should immediately trigger a new estimate.
       // We also have to update the estimate immediately if we are overusing
       // and the target bitrate is too high compared to what we are receiving.
-      UpdateEstimate(now_ms);
+      UpdateEstimate(now);
     }
   }
 }
 
 TimeDelta RemoteBitrateEstimatorSingleStream::Process() {
   MutexLock lock(&mutex_);
-  int64_t now_ms = clock_->TimeInMilliseconds();
-  int64_t next_process_time_ms = last_process_time_ + process_interval_ms_;
-  if (last_process_time_ == -1 || now_ms >= next_process_time_ms) {
-    UpdateEstimate(now_ms);
-    last_process_time_ = now_ms;
-    return TimeDelta::Millis(process_interval_ms_);
+  Timestamp now = clock_->CurrentTime();
+  Timestamp next_process_time = last_process_time_ + process_interval_;
+  if (now >= next_process_time) {
+    UpdateEstimate(now);
+    last_process_time_ = now;
+    return process_interval_;
   }
 
-  return TimeDelta::Millis(next_process_time_ms - now_ms);
+  return next_process_time - now;
 }
 
-void RemoteBitrateEstimatorSingleStream::UpdateEstimate(int64_t now_ms) {
+void RemoteBitrateEstimatorSingleStream::UpdateEstimate(Timestamp now) {
   BandwidthUsage bw_state = BandwidthUsage::kBwNormal;
   SsrcOveruseEstimatorMap::iterator it = overuse_detectors_.begin();
   while (it != overuse_detectors_.end()) {
-    const int64_t time_of_last_received_packet =
-        it->second->last_packet_time_ms;
-    if (time_of_last_received_packet >= 0 &&
-        now_ms - time_of_last_received_packet > kStreamTimeOutMs) {
+    if (now - it->second->last_packet_time > kStreamTimeOut) {
       // This over-use detector hasn't received packets for `kStreamTimeOutMs`
       // milliseconds and is considered stale.
       delete it->second;
@@ -195,12 +188,11 @@ void RemoteBitrateEstimatorSingleStream::UpdateEstimate(int64_t now_ms) {
   }
 
   const RateControlInput input(
-      bw_state, OptionalRateFromOptionalBps(incoming_bitrate_.Rate(now_ms)));
-  uint32_t target_bitrate =
-      remote_rate_.Update(&input, Timestamp::Millis(now_ms)).bps<uint32_t>();
+      bw_state, OptionalRateFromOptionalBps(incoming_bitrate_.Rate(now.ms())));
+  uint32_t target_bitrate = remote_rate_.Update(&input, now).bps<uint32_t>();
   if (remote_rate_.ValidEstimate()) {
-    process_interval_ms_ = remote_rate_.GetFeedbackInterval().ms();
-    RTC_DCHECK_GT(process_interval_ms_, 0);
+    process_interval_ = remote_rate_.GetFeedbackInterval();
+    RTC_DCHECK_GT(process_interval_, TimeDelta::Zero());
     std::vector<uint32_t> ssrcs;
     GetSsrcs(&ssrcs);
     if (observer_)
