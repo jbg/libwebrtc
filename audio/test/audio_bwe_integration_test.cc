@@ -153,7 +153,7 @@ using AudioBweIntegrationTest = CallTest;
 
 // TODO(tschumim): This test is flaky when run on android and mac. Re-enable the
 // test for when the issue is fixed.
-TEST_F(AudioBweIntegrationTest, DISABLED_NoBandwidthDropAfterDtx) {
+TEST_F(AudioBweIntegrationTest, NoBandwidthDropAfterDtx) {
   NoBandwidthDropAfterDtx test;
   RunBaseTest(&test);
 }

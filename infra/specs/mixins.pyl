@@ -59,6 +59,15 @@
       }
     }
   },
+  'fuchsia-compatible-perf-tests': {
+    'merge': {
+      'script': '//tools_webrtc/perf/process_perf_results.py',
+      'args': ['--test-suite', 'fuchsia_perf_tests']
+    },
+    '$mixin_append': {
+      'args': ['--nologs']
+    }
+  },
   'hammerhead': {
     'swarming': {
       'dimensions': {
@@ -209,7 +218,17 @@
     'swarming': {
       'idempotent': False,
       'dimensions': {
-        'pool': 'WebRTC-perf'
+        'pool': 'WebRTC-perf',
+        'gce': 0
+      }
+    }
+  },
+  'perf-pool-vm': {
+    'idempotent': False,
+    'swarming': {
+      'dimensions': {
+        'pool': 'WebRTC-perf',
+        'gce': 1
       }
     }
   },

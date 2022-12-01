@@ -145,6 +145,11 @@
       # 'tools_unittests': {},
       #
     },
+    'fuchsia_perf_tests': {
+      'fuchsia_perf_tests': {
+        'mixins': ['fuchsia-compatible-perf-tests'],
+      },
+    },
     'ios_device_tests': {
       # TODO(bugs.webrtc.org/11362): Real XCTests fail to start on devices.
       #'apprtcmobile_tests': {'mixins': ['xcodebuild-device-runner']},
