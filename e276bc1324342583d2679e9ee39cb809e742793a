@@ -70,6 +70,24 @@
       "parentUuid": "f04fbb08_9507ad38",
       "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7d28daa_d11c2f91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-01T10:52:50Z",
+      "side": 1,
+      "message": "I tried to build it on top of current Chromium, using WebRTC changes in the relation chain (except the last one which I took from your WebRTC github repo) and I picked Chromium changes from your github repo and getting:\n```\nFAILED: libcapture_lib.so libcapture_lib.so.TOC \npython3 \"../../build/toolchain/gcc_solink_wrapper.py\" --readelf\u003d\"../../third_party/llvm-build/Release+Asserts/bin/llvm-readelf\" --nm\u003d\"../../third_party/llvm-build/Release+Asserts/bin/llvm-nm\"  --sofile\u003d\"./libcapture_lib.so\" --tocfile\u003d\"./libcapture_lib.so.TOC\" --output\u003d\"./libcapture_lib.so\" -- ../../third_party/llvm-build/Release+Asserts/bin/clang++ -shared -Wl,-soname\u003d\"libcapture_lib.so\" -Werror -fuse-ld\u003dlld -Wl,--fatal-warnings -Wl,--build-id -fPIC -Wl,-z,noexecstack -Wl,-z,relro -Wl,--color-diagnostics -Wl,--undefined-version -Wl,--no-call-graph-profile-sort -m64 -no-canonical-prefixes -Wl,--gdb-index -rdynamic -Wl,-z,defs -Wl,--as-needed -nostdlib++ --sysroot\u003d../../build/linux/debian_bullseye_amd64-sysroot -Wl,-rpath\u003d\\$ORIGIN -L../../build/linux/debian_bullseye_amd64-sysroot/usr/lib/x86_64-linux-gnu -o \"./libcapture_lib.so\" @\"./libcapture_lib.so.rsp\" \nld.lld: error: undefined symbol: webrtc::VideoCaptureFactory::CreateDeviceInfo(webrtc::VideoCaptureOptions*)\n\u003e\u003e\u003e referenced by video_capture_device_factory_webrtc.cc:45 (../../media/capture/video/linux/video_capture_device_factory_webrtc.cc:45)\n\u003e\u003e\u003e               obj/media/capture/capture_lib/video_capture_device_factory_webrtc.o:(media::VideoCaptureDeviceFactoryWebRtc::FinishGetDevicesInfo())\n\nld.lld: error: undefined symbol: webrtc::VideoCaptureFactory::Create(webrtc::VideoCaptureOptions*, char const*)\n\u003e\u003e\u003e referenced by video_capture_device_webrtc.cc:20 (../../media/capture/video/linux/video_capture_device_webrtc.cc:20)\n\u003e\u003e\u003e               obj/media/capture/capture_lib/video_capture_device_webrtc.o:(media::VideoCaptureDeviceWebRtc::VideoCaptureDeviceWebRtc(webrtc::VideoCaptureOptions*, media::VideoCaptureDeviceDescriptor const\u0026))\nclang++: error: linker command failed with exit code 1 (use -v to see invocation)\n[9292/19402] CXX obj/headless/headless_shared_sources/emulation.o\nninja: build stopped: subcommand failed.\n```\n\nDo I miss something?",
+      "parentUuid": "b6bab376_0caba8e0",
+      "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
