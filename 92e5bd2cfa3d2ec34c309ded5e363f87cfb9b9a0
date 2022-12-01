@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5b390b3_23611c41",
+        "filename": "modules/video_capture/linux/device_info_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-01T10:45:33Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this at least check if there are any devices and return `-1` in case of none, similar to v4l2?",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "357d39e6_0af88325",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-01T10:45:33Z",
+      "side": 1,
+      "message": "Should this also return false in case of `VideoCaptureOptions::Status::UNAVAILABLE`? E.g. the desktop capturer, when requests frames, can ask later again if there are not available yet and there is no error. I don\u0027t expect that when you for example set `UNAVAILABLE` in case it fails to dlopen PipeWire, that it is something that will change later.",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c81d2e59_aac159c9",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-01T10:45:33Z",
+      "side": 1,
+      "message": "I would move the PipeWire lib initialization here, to have it together and possibly not initialized in case the portal request fails or is rejected.",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "218472b1_e19ff3f5",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 15
@@ -109,6 +160,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "900cdf26_3300e2cd",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-01T10:45:33Z",
+      "side": 1,
+      "message": "Unused variable. Will yell error during compilation.",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fd5c443_a5272907",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 15
@@ -138,6 +206,91 @@
       "side": 1,
       "message": "The important part is `seq \u003d\u003d that-\u003esync_seq_`:\n`PipeWireSync()` send a new sync event with a new sequence number.\nWe call `PipeWireSync()` whenever we request new data. So when a sync event comes back and the sequence data does not match, then we are still waiting for more data.\nWhen the sequence numbers match, then all requested data has arrived and enumeration is complete and Finish(Success) is called.",
       "parentUuid": "7fd5c443_a5272907",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af8dff73_486e3060",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-01T10:45:33Z",
+      "side": 1,
+      "message": "absl::string_view?",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b3faa5_f2a4fa7f",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-01T10:45:33Z",
+      "side": 1,
+      "message": "Isn\u0027t the `Cleanup()` call redundant? I expect that in case of `Status::ERROR` or `Status::DENIED` it will end up closing the request anyway so the destructor will be called afterwards.",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1863bbef_45ebdcec",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-01T10:45:33Z",
+      "side": 1,
+      "message": "Can be static.",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "393a0109_49c5d9e3",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-01T10:45:33Z",
+      "side": 1,
+      "message": "Check if `stream_` was properly created?",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c102085f_cecb1cfa",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-01T10:45:33Z",
+      "side": 1,
+      "message": "This duplicates the `prefer_jpeg` case, in case if it\u0027s just about order, can you just push the `SPA_MEDIA_SUBTYPE_raw` directly at the correct position based on the condition?",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
