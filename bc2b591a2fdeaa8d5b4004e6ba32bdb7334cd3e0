@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76120563_2e6cc03b",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-12-01T10:38:12Z",
+      "side": 1,
+      "message": "This link doesn\u0027t work for me.\nMaybe use fxbug.dev/115601 instead ?",
+      "range": {
+        "startLine": 727,
+        "startChar": 12,
+        "endLine": 728,
+        "endChar": 12
+      },
+      "revId": "bc2b591a2fdeaa8d5b4004e6ba32bdb7334cd3e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a3d02fe_a33f2350",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-12-01T10:38:12Z",
+      "side": 1,
+      "message": "Should we mention that the goal is to switch back to webrtc_perf_tests ?",
+      "range": {
+        "startLine": 728,
+        "startChar": 6,
+        "endLine": 728,
+        "endChar": 56
+      },
+      "revId": "bc2b591a2fdeaa8d5b4004e6ba32bdb7334cd3e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866b049f_b6cfbd34",
+        "filename": "infra/specs/mixins_webrtc.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-12-01T10:38:12Z",
+      "side": 1,
+      "message": "I would call this perf-fuchsia-perf-tests to be coherent with the others.\nStarting with \u0027perf\u0027 makes these mixins stay closer to each other.",
+      "range": {
+        "startLine": 38,
+        "startChar": 3,
+        "endLine": 38,
+        "endChar": 32
+      },
+      "revId": "bc2b591a2fdeaa8d5b4004e6ba32bdb7334cd3e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2703e085_77f5d4f8",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-12-01T10:38:12Z",
+      "side": 1,
+      "message": "I would call this fuchsia_compatible_perf_tests.",
+      "range": {
+        "startLine": 148,
+        "startChar": 5,
+        "endLine": 148,
+        "endChar": 23
+      },
+      "revId": "bc2b591a2fdeaa8d5b4004e6ba32bdb7334cd3e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
