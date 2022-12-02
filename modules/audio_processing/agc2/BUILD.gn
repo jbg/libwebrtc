@@ -257,8 +257,6 @@ rtc_library("input_volume_controller") {
     "../../../system_wrappers:field_trial",
     "../../../system_wrappers:metrics",
   ]
-
-  absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
 }
 
 rtc_library("noise_level_estimator") {
