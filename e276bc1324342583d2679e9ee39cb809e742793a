@@ -88,6 +88,24 @@
       "parentUuid": "b6bab376_0caba8e0",
       "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d38a2bbc_c2cff31a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-02T05:36:40Z",
+      "side": 1,
+      "message": "I\u0027ve not tested component builds. The `VideoCaptureFactory` class is not exported. That will need to change.",
+      "parentUuid": "c7d28daa_d11c2f91",
+      "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
