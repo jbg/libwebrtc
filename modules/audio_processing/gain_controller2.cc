@@ -182,8 +182,9 @@ void GainController2::Process(absl::optional<float> speech_probability,
           adaptive_digital_controller_->GetSpeechLevelDbfsIfConfident();
     }
     RTC_DCHECK(speech_probability.has_value());
-    if (speech_probability.has_value()) {
-      input_volume_controller_->Process(*speech_probability, speech_level);
+    // TODO(bugs.webrtc.org/7494): Use the current speech level estimation.
+    if (speech_level.has_value()) {
+      input_volume_controller_->Process(*speech_probability, *speech_level);
     }
   }
 
