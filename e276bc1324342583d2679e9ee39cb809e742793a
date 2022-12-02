@@ -106,6 +106,24 @@
       "parentUuid": "c7d28daa_d11c2f91",
       "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07e52451_4f41114b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-12-02T08:10:07Z",
+      "side": 1,
+      "message": "Since I see .so in the build I think this is an is_component_build\u003dtrue.\n\nFor this, see RTC_EXPORT (e.g. maybe https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_capture/video_capture_factory.h;l\u003d23;drc\u003d8581877121f58435d683c2a39a73e72e5dcd558a needs to be marked RTC_EXPORT) and ensure the target exporting the symbol is in https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc_overrides/BUILD.gn;l\u003d16;drc\u003d77e3d9e912e69be2907d849ad4980e2b50ce1c49.",
+      "parentUuid": "d38a2bbc_c2cff31a",
+      "revId": "e276bc1324342583d2679e9ee39cb809e742793a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
