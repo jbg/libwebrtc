@@ -377,6 +377,7 @@ if (rtc_enable_protobuf) {
       "../rtc_base:safe_minmax",
       "../rtc_base:timeutils",
       "../rtc_base/system:no_unique_address",
+      "../rtc_base/task_utils:inline_task_queue",
     ]
     absl_deps = [
       "//third_party/abseil-cpp/absl/strings",
