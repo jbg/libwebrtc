@@ -22,6 +22,30 @@
       },
       "revId": "b0e1f86a05d3aee6943e8e5a721682205a757006",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b48b4ce3_834c4d82",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-12-05T07:27:56Z",
+      "side": 1,
+      "message": "If we completely remove the `//base` dependency, this file will naturally be removed as we don\u0027t need to care about PartitionAlloc.",
+      "parentUuid": "3e979ced_a03c6173",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 11
+      },
+      "revId": "b0e1f86a05d3aee6943e8e5a721682205a757006",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
