@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c949c41_1906ac2e",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-12-05T14:22:17Z",
+      "side": 1,
+      "message": "This PostTask may now cause rtc event logger memory buffer to overflow:\n\nSomeThread:\nPostTask(event) x #(memory size input - 1), may be inlined.\n\u003cblock tq to avoid inlined calls\u003e\nPostTask(event1);\nPostTask(event2);\n\u003cunblock tq\u003e\n\nOn TQ:\nExecute(task for event1): {\n  PostTask(LogFromMemoryToOuput) - posted _after_ task to handle event2\n}\nExecute(task for event2): - can\u0027t log to memory because it is full - hit DCHECK@ line#187.\nExecute(LogFromMemory) - dumps memory, frees it, but it is too late, event2 is lost.",
+      "revId": "3db9f25072200f847f0c66d6257293d418271df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b9da2a5_e643b759",
+        "filename": "rtc_base/task_utils/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-12-05T14:22:17Z",
+      "side": 1,
+      "message": "avoid public visibility (this would allow use this target from outside webrtc.\ndefault visibility - any target within webrtc)",
+      "revId": "3db9f25072200f847f0c66d6257293d418271df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f81f40_dc001d64",
+        "filename": "rtc_base/task_utils/inline_task_queue.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-12-05T14:22:17Z",
+      "side": 1,
+      "message": "add\nInlineTaskQueue(const InlineTaskQueue\u0026) \u003d delete;\nInlineTaskQueue\u0026 operator\u003d(const InlineTaskQueue\u0026) \u003d delete;\n\nto explicitly disallow copy or move of this class\n\nhttps://google.github.io/styleguide/cppguide.html#Copy_Constructors\n\n“Every class\u0027s public interface must make clear which copy and move operations the class supports. This should usually take the form of explicitly declaring and/or deleting the appropriate operations in the public section of the declaration.”",
+      "revId": "3db9f25072200f847f0c66d6257293d418271df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46212e8a_d1aa7003",
+        "filename": "rtc_base/task_utils/inline_task_queue.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-12-05T14:22:17Z",
+      "side": 1,
+      "message": "there is a more compact way: you may turn this class into function:\n\n```\n.h\nabsl::AnyInvocable\u003cvoid() \u0026\u0026\u003e WrappedDelayedTask(\n        absl::AnyInvocable\u003cvoid() \u0026\u0026\u003e task,\n        rtc::scoped_refptr\u003crtc::FinalRefCountedObject\u003cSharedState\u003e\u003e\n            shared_state,\n        TaskQueueBase* queue);\n        \n.cc\nabsl::AnyInvocable\u003cvoid() \u0026\u0026\u003e WrappedDelayedTask(\n        absl::AnyInvocable\u003cvoid() \u0026\u0026\u003e task,\n        rtc::scoped_refptr\u003crtc::FinalRefCountedObject\u003cSharedState\u003e\u003e\n            shared_state,\n        TaskQueueBase* queue) {\n  return [task \u003d std::move(task), shared_state \u003d std::move(shared_state), queue]() mutable {\n    CurrentTaskQueueSetter setter(queue);\n    shared_state-\u003equeue_size++;\n    {\n      MutexLock lock(\u0026shared_state-\u003etask_mu);\n      std::move(task)();\n      // To decrease the chance that inline PostTask callers contend `task_mu_`,\n      // we unlock the mutex before reducing `queue_size_`.\n    }\n    shared_state-\u003equeue_size--;\n  };\n}\n```\n\n(though same trick won\u0027t that easily work from the WrappedImmidiateTask because that one has non-default destructor)",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 26
+      },
+      "revId": "3db9f25072200f847f0c66d6257293d418271df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b1c31d6_5a32777b",
+        "filename": "rtc_base/task_utils/inline_task_queue.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-12-05T14:22:17Z",
+      "side": 1,
+      "message": "comment is no longer accurate (and not needed now that addition is in the same function)",
+      "revId": "3db9f25072200f847f0c66d6257293d418271df3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
