@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e979ced_a03c6173",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-12-05T07:21:44Z",
+      "side": 1,
+      "message": "Isn\u0027t this a step in the opposite direction (e.g. keep a dependency on //base)?\n\nOn the other hand, if //base is compiled, these values are needed. So LGTM. \n\nIt is also easy to undo.",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 11
+      },
+      "revId": "b0e1f86a05d3aee6943e8e5a721682205a757006",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
