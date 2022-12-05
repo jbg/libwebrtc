@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "698df71a_d31fc124",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-12-05T12:05:27Z",
+      "side": 1,
+      "message": "I\u0027ll fix it in this CL.",
+      "parentUuid": "988530b9_07a110b8",
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d23818e8_dbe40dc3",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
         "patchSetId": 8
@@ -49,6 +67,24 @@
       "writtenOn": "2022-11-30T09:55:34Z",
       "side": 1,
       "message": "why introduce sequence_checker_ instead of using task_queue_ directly?\n\nclass RTC_LOCKABLE InlineTaskQueue : public TaskQueueBase { ...\n\nRTC_GUARDED_BY(task_queue_);\n...\nRTC_DCHECK_RUN_ON(\u0026task_queue_);",
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f166b7_4d46315c",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-12-05T12:05:27Z",
+      "side": 1,
+      "message": "It\u0027s because when I deleted the destructor hack at PS8, tasks can no longer refer to the task queue.",
+      "parentUuid": "d23818e8_dbe40dc3",
       "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -76,6 +112,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47465435_2b11ebc8",
+        "filename": "rtc_base/inline_task_queue.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-12-05T12:05:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cf4e8c1_19e0406f",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 79
+      },
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ea3a0ab_7c08df00",
@@ -89,6 +149,30 @@
       "writtenOn": "2022-11-30T09:55:34Z",
       "side": 1,
       "message": "there now single call to TryBeginExecution/EndExecution.\n\nmay it would be easier to track what\u0027s going on if you inline these functions:\n\n```\nclass InlineTaskQueue {\n public:\n  template \u003ctypename Lambda\u003e\n  void PostTask(Lambda\u0026\u0026 lambda);\n ...\n};\n\n... still in header file, at the very end\n// Below are implementation details.\ntemplate \u003ctypename Lambda\u003e\nvoid InlineTaskQueue::PostTask(Lambda\u0026\u0026 lambda) {\n  if (shared_state-\u003equeue_size.fetch_add(1) \u003d\u003d 0) {\n    // Need to take the `task_mu` lock to ensure serial execution with other\n    // concurrent deferred or delayed tasks.\n    MutexLock lock(\u0026shared_state-\u003etask_mu);\n    CurrentTaskQueueSetter setter(this);\n    std::forward\u003cLambda\u003e(lambda)();\n    shared_state-\u003equeue_size.fetch_sub(1);\n  } else {\n    // The queue slot was already taken in TryBeginInlineExecution.\n    base_task_queue_-\u003ePostTask(WrappedImmediateTask(\n          std::forward\u003cLambda\u003e(lambda), shared_state_, this,\n          /*queue_slot_taken\u003d*/true));\n  }\n}\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 23,
+        "endLine": 50,
+        "endChar": 46
+      },
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f3302b7_4b95246f",
+        "filename": "rtc_base/inline_task_queue.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-12-05T12:05:27Z",
+      "side": 1,
+      "message": "Good suggestion, done.",
+      "parentUuid": "8ea3a0ab_7c08df00",
       "range": {
         "startLine": 50,
         "startChar": 23,
@@ -129,6 +213,30 @@
       "writtenOn": "2022-11-30T09:55:34Z",
       "side": 1,
       "message": "because it is a struct, drop trailing \u0027_\u0027",
+      "range": {
+        "startLine": 82,
+        "startChar": 17,
+        "endLine": 82,
+        "endChar": 18
+      },
+      "revId": "9d753fd650c9e3df32152483b26d06f9d2ef0743",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ce0f070_ac6bfa56",
+        "filename": "rtc_base/inline_task_queue.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-12-05T12:05:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8eb8046d_e4de5bdf",
       "range": {
         "startLine": 82,
         "startChar": 17,
