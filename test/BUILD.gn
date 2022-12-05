@@ -335,6 +335,7 @@ if (is_ios) {
       "../api/test/metrics:metrics_set_proto_file_exporter",
       "../api/test/metrics:print_result_proxy_metrics_exporter",
       "../api/test/metrics:stdout_metrics_exporter",
+      "../rtc_base:logging",
       "../sdk:helpers_objc",
     ]
     absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]

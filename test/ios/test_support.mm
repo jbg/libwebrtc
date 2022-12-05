@@ -16,6 +16,7 @@
 #include "api/test/metrics/metrics_set_proto_file_exporter.h"
 #include "api/test/metrics/print_result_proxy_metrics_exporter.h"
 #include "api/test/metrics/stdout_metrics_exporter.h"
+#include "rtc_base/logging.h"
 #include "test/ios/coverage_util_ios.h"
 #include "test/ios/google_test_runner_delegate.h"
 #include "test/ios/test_support.h"
@@ -145,6 +146,12 @@ static absl::optional<std::vector<std::string>> g_metrics_to_plot;
 - (void)runTests {
   RTC_DCHECK(!rtc::test::ShouldRunIOSUnittestsWithXCTest());
   rtc::test::ConfigureCoverageReportPath();
+
+  NSArray<NSString *> *outputDirectories =
+      NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  if ([outputDirectories count] != 0) {
+    LOG(INFO) << "#### " << outputDirectories[0];
+  }
 
   int exitStatus = [self runGoogleTests];
 
