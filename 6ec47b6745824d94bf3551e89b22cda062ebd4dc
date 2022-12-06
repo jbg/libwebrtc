@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d104f7c_f960e941",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-12-06T13:16:18Z",
+      "side": 1,
+      "message": "will do a follow-up PSA once this lands.",
+      "revId": "6ec47b6745824d94bf3551e89b22cda062ebd4dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
