@@ -34,6 +34,24 @@
       "parentUuid": "02ff14a1_b5e29926",
       "revId": "14844cdb6a52b4e9945b020d1c0febaf309d8262",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "015254f6_a6a28ce0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2022-12-06T17:08:39Z",
+      "side": 1,
+      "message": "the resolution is important for two reasons:\n1/ it gets taken into account for the video elements videoWidth/videoHeight. This is typically what informs layout decisions which in turn changes how the application tested behaves\n2/ it shows up in stats\nThe surprising thing is that this decoder works and the only change is that you don\u0027t get the actual picture.\n\nIf someone wants to use this together with AV1 they will notice it does not work and put the effort in (hopefully)",
+      "parentUuid": "cf0605ac_3a7e4c46",
+      "revId": "14844cdb6a52b4e9945b020d1c0febaf309d8262",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
