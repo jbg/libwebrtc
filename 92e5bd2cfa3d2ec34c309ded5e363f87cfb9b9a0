@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7774825_25dee3ed",
+        "filename": "modules/video_capture/linux/device_info_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "I just copied that from the V4L2 implementation. I don\u0027t think it is actually called on Linux.",
+      "parentUuid": "a5b390b3_23611c41",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c475781_0506cad3",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 15
@@ -48,6 +66,24 @@
       "writtenOn": "2022-12-06T09:58:16Z",
       "side": 1,
       "message": "Shouldn\u0027t this be called in `OnRegistryGlobal` callback?",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59b4f4d4_52ee5b0e",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "It\u0027s called there indirectly: The `PipewireNode` object is created there.",
+      "parentUuid": "8c475781_0506cad3",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67a8b611_58f1b9e2",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "I need to remove that function. It a leftover from earlier versions and is not used any more.",
+      "parentUuid": "357d39e6_0af88325",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c81d2e59_aac159c9",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 15
@@ -82,6 +136,24 @@
       "writtenOn": "2022-12-01T10:45:33Z",
       "side": 1,
       "message": "I would move the PipeWire lib initialization here, to have it together and possibly not initialized in case the portal request fails or is rejected.",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd7ac138_0a215f7c",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "I did it early so we can fail faster (without any D-Bus calls) when libpipewire is not available, but I can put it here as well.",
+      "parentUuid": "c81d2e59_aac159c9",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -211,6 +283,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8a550ef_9acb9de6",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "Right, I removed some other code here at some point but I forgot the variable. I\u0027ll remove it.",
+      "parentUuid": "900cdf26_3300e2cd",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fd5c443_a5272907",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 15
@@ -263,6 +353,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0553bf2e_15dd3e8c",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "I didn\u0027t know about that. I\u0027ll change it.",
+      "parentUuid": "af8dff73_486e3060",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55b3faa5_f2a4fa7f",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 15
@@ -274,6 +382,24 @@
       "writtenOn": "2022-12-01T10:45:33Z",
       "side": 1,
       "message": "Isn\u0027t the `Cleanup()` call redundant? I expect that in case of `Status::ERROR` or `Status::DENIED` it will end up closing the request anyway so the destructor will be called afterwards.",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13378473_99bd4278",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "Hmm, good point. I\u0027ll check when the object is actually delete.",
+      "parentUuid": "55b3faa5_f2a4fa7f",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -297,6 +423,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c3b2263_544ea520",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "1863bbef_45ebdcec",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "393a0109_49c5d9e3",
         "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
         "patchSetId": 15
@@ -308,6 +452,24 @@
       "writtenOn": "2022-12-01T10:45:33Z",
       "side": 1,
       "message": "Check if `stream_` was properly created?",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0003cea8_c9af86b6",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "good point.",
+      "parentUuid": "393a0109_49c5d9e3",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -331,6 +493,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "085a3876_8cce29b3",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "Sure. I was trying to avoid inserting something at the beginning of a vector but it\u0027s a very short vector of pointers, so it really doesn\u0027t matter here.",
+      "parentUuid": "c102085f_cecb1cfa",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d44b5da_ff8fc7a2",
         "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
         "patchSetId": 15
@@ -342,6 +522,24 @@
       "writtenOn": "2022-12-06T09:58:16Z",
       "side": 1,
       "message": "No support for SPA_META_VideoCrop? I can see this is going to be supported in OBS and we support it in PipeWire based desktop capturer.",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2780ccee_82e01f64",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T11:57:18Z",
+      "side": 1,
+      "message": "The internal camera API in webrtc does not support cropping. And the v4l2 and libcamera plugins in pipewire don\u0027t support SPA_META_VideoCrop so it cannot be used anyways with devices provided by those plugins. So I don\u0027t think it makes sense to add support here.\nIt\u0027s different for screen sharing: I thinks it\u0027s used there to cut out individual windows from a entire screen.\nOr am I missing something here?",
+      "parentUuid": "5d44b5da_ff8fc7a2",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
