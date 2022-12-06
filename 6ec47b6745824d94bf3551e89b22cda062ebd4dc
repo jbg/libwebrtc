@@ -33,6 +33,23 @@
       "message": "since I need a second +1 anyway ;-)",
       "revId": "6ec47b6745824d94bf3551e89b22cda062ebd4dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fbdf967_4bfb4a47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2022-12-06T15:11:53Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "6ec47b6745824d94bf3551e89b22cda062ebd4dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
