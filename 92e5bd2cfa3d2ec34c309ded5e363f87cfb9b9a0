@@ -546,6 +546,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11dfad96_b2d3e7e0",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 20124
+      },
+      "writtenOn": "2022-12-06T12:13:39Z",
+      "side": 1,
+      "message": "\u003e And the v4l2 and libcamera plugins in pipewire don\u0027t support SPA_META_VideoCrop so it cannot be used.\n\nThat\u0027s correct - for screen sharing it\u0027s AFAIK mainly used to implement resizable window sharing.\n\nWhat *is* supported now (in libcamera, v4l2 will probably follow) is `SPA_META_VideoTransform` (see https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/1455), which would be great to support here for both cameras and screen sharing.\nIn case of cameras it will be needed on some mobile devices such as phones, which often have their cameras rotated 90deg, requiring clients to rotate the buffers accordingly. For screen sharing it\u0027d allow to share pre-rotated buffers, which is only a minor performance optimization.",
+      "parentUuid": "2780ccee_82e01f64",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "645c37db_12196019",
         "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
         "patchSetId": 15
