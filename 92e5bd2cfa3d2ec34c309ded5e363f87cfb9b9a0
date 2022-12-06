@@ -286,6 +286,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75bc0f45_ade74a31",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-06T17:26:41Z",
+      "side": 1,
+      "message": "Right, I did not realize it\u0027s the shared one. We call it StartScreenCastStream() in the desktop capturer so maybe call it StartPipeWire()?",
+      "parentUuid": "e50a6026_4910bb16",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "218472b1_e19ff3f5",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 15
