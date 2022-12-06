@@ -89,6 +89,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0f18c83_5583d155",
+        "filename": "modules/video_capture/linux/device_info_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-06T16:46:31Z",
+      "side": 1,
+      "message": "You are right, my mistake.",
+      "parentUuid": "e934dd38_5f396432",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c475781_0506cad3",
@@ -226,6 +244,24 @@
       "side": 1,
       "message": "I moved it right before `InitPipeWire()` because it has a different failure status, ok like this?",
       "parentUuid": "dd7ac138_0a215f7c",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d42834e_378964e6",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-06T16:46:31Z",
+      "side": 1,
+      "message": "Yes, it\u0027s just a bit weird that we have two methods with basically same name (`InitPipeWire` and `InitializePipeWire`). Maybe call it `InitPipeWireLib`?",
+      "parentUuid": "b1508444_2d4c1c82",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -846,6 +882,24 @@
       "side": 1,
       "message": "\u003e \u003e Can we please start with a basic implementation first?\n\u003e \n\u003e Absolutely, this wasn\u0027t meant to be a blocker. Just wanted to make sure you know about it.\n\nI didn\u0027t know about it and it was good to talk about it. It got me thinking and I noticed that the new API (in the other CL) was incomplete. So thank you for that.",
       "parentUuid": "b088b4ad_c6942d70",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d7f13f8_1131d573",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-06T16:46:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5df86b81_9f16db75",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
