@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42a8d394_4a9a28af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-06T09:58:16Z",
+      "side": 1,
+      "message": "I unfortunately have no experience with PipeWire and camera, but I would suggest looking into:\n1) https://github.com/wtay/obs-studio/blob/pipewire-unified-dev/plugins/linux-pipewire/camera-portal.c\n2) https://github.com/wtay/obs-studio/blob/pipewire-unified-dev/plugins/linux-pipewire/pipewire-stream-video-async.c\n\nThis is an implementation of camera support from Wim Taymans (author of PipeWire) so I would consider this as a referencing implementation. In case you want to double-check some of the stuff you are doing.",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5b390b3_23611c41",
         "filename": "modules/video_capture/linux/device_info_pipewire.cc",
         "patchSetId": 15
@@ -14,6 +31,23 @@
       "writtenOn": "2022-12-01T10:45:33Z",
       "side": 1,
       "message": "Shouldn\u0027t this at least check if there are any devices and return `-1` in case of none, similar to v4l2?",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c475781_0506cad3",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-06T09:58:16Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be called in `OnRegistryGlobal` callback?",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -291,6 +325,23 @@
       "writtenOn": "2022-12-01T10:45:33Z",
       "side": 1,
       "message": "This duplicates the `prefer_jpeg` case, in case if it\u0027s just about order, can you just push the `SPA_MEDIA_SUBTYPE_raw` directly at the correct position based on the condition?",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d44b5da_ff8fc7a2",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-06T09:58:16Z",
+      "side": 1,
+      "message": "No support for SPA_META_VideoCrop? I can see this is going to be supported in OBS and we support it in PipeWire based desktop capturer.",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
