@@ -16,6 +16,23 @@
       "message": "will do a follow-up PSA once this lands.",
       "revId": "6ec47b6745824d94bf3551e89b22cda062ebd4dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0250990_e312385a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-12-06T13:50:47Z",
+      "side": 1,
+      "message": "since I need a second +1 anyway ;-)",
+      "revId": "6ec47b6745824d94bf3551e89b22cda062ebd4dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
