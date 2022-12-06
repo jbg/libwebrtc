@@ -600,6 +600,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8093ce4_25a8ad6c",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 20124
+      },
+      "writtenOn": "2022-12-06T12:30:59Z",
+      "side": 1,
+      "message": "It allows to fluidly resize shared windows without having to recreate buffers etc. \n\nIf you share windows in Mutter it will pick a big size for the buffers (usually screen size, apart from edge cases where a window is bigger than the/one screen) and then crop to the actual window size.",
+      "parentUuid": "76784ee7_42118c70",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "645c37db_12196019",
         "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
         "patchSetId": 15
