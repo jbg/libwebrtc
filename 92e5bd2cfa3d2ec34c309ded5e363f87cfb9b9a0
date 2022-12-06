@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2e12053_4307ffe1",
+        "filename": "modules/video_capture/linux/device_info_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-06T12:24:17Z",
+      "side": 1,
+      "message": "It\u0027s definitely in V4L2 implementation.\n\nSee https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_capture/linux/video_capture_v4l2.cc;l\u003d81",
+      "parentUuid": "d7774825_25dee3ed",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c475781_0506cad3",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 15
@@ -558,6 +576,24 @@
       "side": 1,
       "message": "\u003e And the v4l2 and libcamera plugins in pipewire don\u0027t support SPA_META_VideoCrop so it cannot be used.\n\nThat\u0027s correct - for screen sharing it\u0027s AFAIK mainly used to implement resizable window sharing.\n\nWhat *is* supported now (in libcamera, v4l2 will probably follow) is `SPA_META_VideoTransform` (see https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/1455), which would be great to support here for both cameras and screen sharing.\nIn case of cameras it will be needed on some mobile devices such as phones, which often have their cameras rotated 90deg, requiring clients to rotate the buffers accordingly. For screen sharing it\u0027d allow to share pre-rotated buffers, which is only a minor performance optimization.",
       "parentUuid": "2780ccee_82e01f64",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76784ee7_42118c70",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-06T12:24:17Z",
+      "side": 1,
+      "message": "I can think of zooming, this is when video cropping can get used? But I don\u0027t know really, I just saw that the OBS implementation supports it.",
+      "parentUuid": "11dfad96_b2d3e7e0",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
