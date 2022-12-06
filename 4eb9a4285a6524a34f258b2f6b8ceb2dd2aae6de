@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e60b691_715d899b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15909
+      },
+      "writtenOn": "2022-12-06T07:30:33Z",
+      "side": 1,
+      "message": "Oops, I accidentally pushed another change to this patch. \nPlease give +1 again...",
+      "revId": "4eb9a4285a6524a34f258b2f6b8ceb2dd2aae6de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
