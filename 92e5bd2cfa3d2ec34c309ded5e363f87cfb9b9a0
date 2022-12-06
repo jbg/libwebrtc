@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e934dd38_5f396432",
+        "filename": "modules/video_capture/linux/device_info_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T15:53:54Z",
+      "side": 1,
+      "message": "This is `DeviceInfo*::Init` not `VideoCaptureModule*::Init`.\nSee https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_capture/linux/device_info_v4l2.cc;l\u003d34",
+      "parentUuid": "d2e12053_4307ffe1",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c475781_0506cad3",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 15
@@ -141,6 +159,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a99f4847_70d046ea",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T15:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67a8b611_58f1b9e2",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c81d2e59_aac159c9",
@@ -172,6 +208,24 @@
       "side": 1,
       "message": "I did it early so we can fail faster (without any D-Bus calls) when libpipewire is not available, but I can put it here as well.",
       "parentUuid": "c81d2e59_aac159c9",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1508444_2d4c1c82",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T15:53:54Z",
+      "side": 1,
+      "message": "I moved it right before `InitPipeWire()` because it has a different failure status, ok like this?",
+      "parentUuid": "dd7ac138_0a215f7c",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -317,6 +371,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4744a0fc_c6c915f3",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T15:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8a550ef_9acb9de6",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fd5c443_a5272907",
@@ -383,6 +455,24 @@
       "side": 1,
       "message": "I didn\u0027t know about that. I\u0027ll change it.",
       "parentUuid": "af8dff73_486e3060",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d12911e3_157d9b0b",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T15:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0553bf2e_15dd3e8c",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -457,6 +547,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "456ec627_c5291ada",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T15:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c3b2263_544ea520",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "393a0109_49c5d9e3",
@@ -492,6 +600,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3726532_7de5e1e6",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T15:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0003cea8_c9af86b6",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c102085f_cecb1cfa",
@@ -523,6 +649,24 @@
       "side": 1,
       "message": "Sure. I was trying to avoid inserting something at the beginning of a vector but it\u0027s a very short vector of pointers, so it really doesn\u0027t matter here.",
       "parentUuid": "c102085f_cecb1cfa",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aed55a4_cce7e867",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T15:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "085a3876_8cce29b3",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -630,6 +774,24 @@
       "side": 1,
       "message": "Yes, I know what it gets used for in case of screen sharing and I implemented it for this exact case. I\u0027m here talking just about camera usage.",
       "parentUuid": "e8093ce4_25a8ad6c",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f02aaae9_e6fa5694",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T15:53:54Z",
+      "side": 1,
+      "message": "The crop rectangle is provided by the source. I\u0027m not sure how that would help for zooming. And there is certainly no PipeWire camera implementation that make use of that.\n\n`SPA_META_VideoTransform` is not in any PipeWire release, so I don\u0027t have a version check that I could use in the implementation.\n\nCan we please start with a basic implementation first? We can add more features later on. I\u0027ve added support for rotation in the new API needed for chromium (https://webrtc-review.googlesource.com/c/src/+/264548), so it can be easily added later.",
+      "parentUuid": "83583e39_3fd14698",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
