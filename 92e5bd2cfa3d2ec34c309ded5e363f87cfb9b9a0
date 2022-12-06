@@ -304,6 +304,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d94aea5_3df3d715",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-06T17:42:10Z",
+      "side": 1,
+      "message": "Good idea. It also matches the StopPipewire(). Done.",
+      "parentUuid": "75bc0f45_ade74a31",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "218472b1_e19ff3f5",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 15
