@@ -67,6 +67,24 @@
       "message": "const or constexpr?",
       "revId": "75b8c97c9eb14807e9e3fa4522d9f1221dd60b1d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5669c59_cb38a920",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4105,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-12-07T13:43:22Z",
+      "side": 1,
+      "message": "There are a ton of other tests which don\u0027t const it (but modify) so this seemed more like those tests.",
+      "parentUuid": "cf840a69_f4c8c757",
+      "revId": "75b8c97c9eb14807e9e3fa4522d9f1221dd60b1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
