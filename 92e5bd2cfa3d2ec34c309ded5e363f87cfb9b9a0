@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e3e7fe4_1530ad87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-07T09:01:40Z",
+      "side": 1,
+      "message": "Thanks. I looked at other examples from Wim but I didn\u0027t know this one. Nothing really surprising in there.\n\nOne thing I remembered when I read this code is, that PipeWire and Chromium support controls for things like focus handling. There is currently nothing like this in webrtc. Not something for this CL but at some point we need new API for this to get the same features as V4L2 in Chromium.",
+      "parentUuid": "42a8d394_4a9a28af",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5b390b3_23611c41",
@@ -316,6 +334,24 @@
       "side": 1,
       "message": "Good idea. It also matches the StopPipewire(). Done.",
       "parentUuid": "75bc0f45_ade74a31",
+      "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c9d9a7_26ba6c7d",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2022-12-07T09:01:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d94aea5_3df3d715",
       "revId": "92e5bd2cfa3d2ec34c309ded5e363f87cfb9b9a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
