@@ -50,6 +50,40 @@
       "message": "LGTM!",
       "revId": "6ec47b6745824d94bf3551e89b22cda062ebd4dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d041b5_6d628bde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-12-07T09:20:35Z",
+      "side": 1,
+      "message": "Go for it!",
+      "revId": "6ec47b6745824d94bf3551e89b22cda062ebd4dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb48b9ce_9fbb1201",
+        "filename": "pc/sdp_offer_answer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-12-07T09:20:35Z",
+      "side": 1,
+      "message": "Should this be 17 characters long rather than 30?",
+      "revId": "6ec47b6745824d94bf3551e89b22cda062ebd4dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
