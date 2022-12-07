@@ -16,6 +16,24 @@
       "message": "@grulja, any more comments? If not then I think this needs review from an owner, right?",
       "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc398a19_e278a59e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2022-12-07T09:05:27Z",
+      "side": 1,
+      "message": "Looks good to me, but note that I haven\u0027t tested if it works since I was not able to build Chromium.",
+      "parentUuid": "e377dff4_7d961563",
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
