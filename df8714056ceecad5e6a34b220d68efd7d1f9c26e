@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e83ee410_24a71e57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-12-07T08:53:42Z",
+      "side": 1,
+      "message": "Thanks for the comments Hanna. I abandoned this change, part of it has been added in https://webrtc-review.googlesource.com/c/src/+/280560.",
+      "revId": "df8714056ceecad5e6a34b220d68efd7d1f9c26e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {

@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70bc8776_3e702a00",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-12-07T08:53:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "09a654e5_ca092938",
+      "range": {
+        "startLine": 186,
+        "startChar": 8,
+        "endLine": 186,
+        "endChar": 32
+      },
+      "revId": "28e8996d95549a3cf1a57c77396aa7e170d9613e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c7c2c37_7da55d95",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-12-05T10:03:13Z",
       "side": 1,
       "message": "If there\u0027s no speech level estimate available (i.e., `GetSpeechLevelDbfsIfConfident()` doesn\u0027t return a value), `InputVolumeController::Process()` won\u0027t be called. This means the counters for [speech segment activity estimation](https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_processing/agc2/input_volume_controller.cc;drc\u003de00147440758c12688db81ca164745f3fb74da84;l\u003d209)  won\u0027t be updated. Not having a speech probability value here is an error state but not having a speech level value isn\u0027t.",
+      "range": {
+        "startLine": 187,
+        "startChar": 6,
+        "endLine": 187,
+        "endChar": 75
+      },
+      "revId": "28e8996d95549a3cf1a57c77396aa7e170d9613e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f70a21fb_37255364",
+        "filename": "modules/audio_processing/gain_controller2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2022-12-07T08:53:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2c7c2c37_7da55d95",
       "range": {
         "startLine": 187,
         "startChar": 6,
