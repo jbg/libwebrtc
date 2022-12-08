@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3196407_499188d4",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-12-08T14:16:06Z",
+      "side": 1,
+      "message": "This will change behavior of current probe experiment that only cares about loss based bwe. Sorry you might have to keep them separate for now unless we move where the field trials are evalutated.  \n\nMaybe rename BandwidthLimitedCause to reflect that its only loss based state. \nSince network_state_predictor is in api/  probe controller can depend on that directly in probe controller.",
+      "range": {
+        "startLine": 69,
+        "startChar": 11,
+        "endLine": 69,
+        "endChar": 32
+      },
+      "revId": "0b712e7cb8c43089f2703ebb58770459a0483b71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
