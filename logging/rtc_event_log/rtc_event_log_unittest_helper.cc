@@ -116,6 +116,12 @@ EventGenerator::NewAudioNetworkAdaptation() {
   return std::make_unique<RtcEventAudioNetworkAdaptation>(std::move(config));
 }
 
+std::unique_ptr<RtcEventNetEqSetMinimumDelay>
+EventGenerator::NewNetEqSetMinimumDelay(uint32_t ssrc) {
+  return std::make_unique<RtcEventNetEqSetMinimumDelay>(
+      ssrc, prng_.Rand(std::numeric_limits<uint32_t>::max()));
+}
+
 std::unique_ptr<RtcEventBweUpdateDelayBased>
 EventGenerator::NewBweUpdateDelayBased() {
   constexpr int32_t kMaxBweBps = 20000000;
