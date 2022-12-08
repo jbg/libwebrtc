@@ -31,6 +31,7 @@
 #include "logging/rtc_event_log/events/rtc_event_generic_packet_sent.h"
 #include "logging/rtc_event_log/events/rtc_event_ice_candidate_pair.h"
 #include "logging/rtc_event_log/events/rtc_event_ice_candidate_pair_config.h"
+#include "logging/rtc_event_log/events/rtc_event_neteq_set_minimum_delay.h"
 #include "logging/rtc_event_log/events/rtc_event_probe_cluster_created.h"
 #include "logging/rtc_event_log/events/rtc_event_probe_result_failure.h"
 #include "logging/rtc_event_log/events/rtc_event_probe_result_success.h"
@@ -680,6 +681,8 @@ std::string RtcEventLogEncoderNewFormat::EncodeBatch(
     std::vector<const RtcEventAudioNetworkAdaptation*>
         audio_network_adaptation_events;
     std::vector<const RtcEventAudioPlayout*> audio_playout_events;
+    std::vector<const RtcEventNetEqSetMinimumDelay*>
+        neteq_set_minimum_delay_events;
     std::vector<const RtcEventAudioReceiveStreamConfig*>
         audio_recv_stream_configs;
     std::vector<const RtcEventAudioSendStreamConfig*> audio_send_stream_configs;
@@ -877,6 +880,12 @@ std::string RtcEventLogEncoderNewFormat::EncodeBatch(
           frames_decoded[rtc_event->ssrc()].emplace_back(rtc_event);
           break;
         }
+        case RtcEvent::Type::NetEqSetMinimumDelay: {
+          auto* rtc_event =
+              static_cast<const RtcEventNetEqSetMinimumDelay* const>(it->get());
+          neteq_set_minimum_delay_events.push_back(rtc_event);
+          break;
+        }
         case RtcEvent::Type::BeginV3Log:
         case RtcEvent::Type::EndV3Log:
           // These special events are written as part of starting
@@ -892,6 +901,7 @@ std::string RtcEventLogEncoderNewFormat::EncodeBatch(
     EncodeAudioPlayout(audio_playout_events, &event_stream);
     EncodeAudioRecvStreamConfig(audio_recv_stream_configs, &event_stream);
     EncodeAudioSendStreamConfig(audio_send_stream_configs, &event_stream);
+    EncodeNetEqSetMinimumDelay(neteq_set_minimum_delay_events, &event_stream);
     EncodeBweUpdateDelayBased(bwe_delay_based_updates, &event_stream);
     EncodeBweUpdateLossBased(bwe_loss_based_updates, &event_stream);
     EncodeDtlsTransportState(dtls_transport_states, &event_stream);
@@ -1159,6 +1169,18 @@ void RtcEventLogEncoderNewFormat::EncodeAudioSendStreamConfig(
         ConvertToProtoFormat(base_event->config().rtp_extensions, proto_config);
     if (!has_recognized_extensions)
       proto_batch->clear_header_extensions();
+  }
+}
+
+void RtcEventLogEncoderNewFormat::EncodeNetEqSetMinimumDelay(
+    rtc::ArrayView<const RtcEventNetEqSetMinimumDelay*> batch,
+    rtclog2::EventStream* event_stream) {
+  for (const RtcEventNetEqSetMinimumDelay* base_event : batch) {
+    rtclog2::NetEqSetMinimumDelay* proto_batch =
+        event_stream->add_neteq_set_minimum_delay();
+    proto_batch->set_timestamp_ms(base_event->timestamp_ms());
+    proto_batch->set_remote_ssrc(base_event->remote_ssrc());
+    proto_batch->set_minimum_delay_ms(base_event->minimum_delay_ms());
   }
 }
 

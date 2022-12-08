@@ -30,6 +30,7 @@
 #include "logging/rtc_event_log/encoder/rtc_event_log_encoder_common.h"
 #include "logging/rtc_event_log/encoder/var_int.h"
 #include "logging/rtc_event_log/events/logged_rtp_rtcp.h"
+#include "logging/rtc_event_log/rtc_event_log2.pb.h"
 #include "logging/rtc_event_log/rtc_event_processor.h"
 #include "modules/audio_coding/audio_network_adaptor/include/audio_network_adaptor.h"
 #include "modules/include/module_common_types_public.h"
@@ -1087,6 +1088,7 @@ void ParsedRtcEventLog::Clear() {
   start_log_events_.clear();
   stop_log_events_.clear();
   audio_playout_events_.clear();
+  neteq_set_minimum_delay_events_.clear();
   audio_network_adaptation_events_.clear();
   bwe_probe_cluster_created_events_.clear();
   bwe_probe_failure_events_.clear();
@@ -1455,6 +1457,10 @@ ParsedRtcEventLog::ParseStatus ParsedRtcEventLog::ParseStreamInternalV3(
         RtcEventAudioPlayout::Parse(event_fields, batched,
                                     audio_playout_events_);
         break;
+      // case static_cast<uint32_t>(RtcEvent::Type::NetEqSetMinimumDelay):
+      //   RtcEventNetEqSetMinimumDelay::Parse(event_fields, batched,
+      //                                       neteq_set_minimum_delay_events_);
+      //   break;
       case static_cast<uint32_t>(RtcEvent::Type::BweUpdateDelayBased):
         RtcEventBweUpdateDelayBased::Parse(event_fields, batched,
                                            bwe_delay_updates_);
@@ -2523,7 +2529,8 @@ ParsedRtcEventLog::ParseStatus ParsedRtcEventLog::StoreParsedNewFormatEvent(
           stream.generic_packets_sent_size() +
           stream.generic_packets_received_size() +
           stream.generic_acks_received_size() +
-          stream.frame_decoded_events_size(),
+          stream.frame_decoded_events_size() +
+          stream.neteq_set_minimum_delay_size(),
       1u);
 
   if (stream.incoming_rtp_packets_size() == 1) {
@@ -2583,6 +2590,8 @@ ParsedRtcEventLog::ParseStatus ParsedRtcEventLog::StoreParsedNewFormatEvent(
     return StoreGenericAckReceivedEvent(stream.generic_acks_received(0));
   } else if (stream.frame_decoded_events_size() == 1) {
     return StoreFrameDecodedEvents(stream.frame_decoded_events(0));
+  } else if (stream.neteq_set_minimum_delay_size() == 1) {
+    return StoreNetEqSetMinimumDelay(stream.neteq_set_minimum_delay(0));
   } else {
     RTC_DCHECK_NOTREACHED();
     return ParseStatus::Success();
@@ -3201,6 +3210,19 @@ ParsedRtcEventLog::ParseStatus ParsedRtcEventLog::StoreGenericPacketSentEvent(
          static_cast<size_t>(payload_length_values[i].value()),
          static_cast<size_t>(padding_length_values[i].value())});
   }
+  return ParseStatus::Success();
+}
+
+ParsedRtcEventLog::ParseStatus ParsedRtcEventLog::StoreNetEqSetMinimumDelay(
+    const rtclog2::NetEqSetMinimumDelay& proto) {
+  RTC_PARSE_CHECK_OR_RETURN(proto.has_timestamp_ms());
+  RTC_PARSE_CHECK_OR_RETURN(proto.has_remote_ssrc());
+  RTC_PARSE_CHECK_OR_RETURN(proto.has_minimum_delay_ms());
+
+  // Base event
+  neteq_set_minimum_delay_events_[proto.remote_ssrc()].emplace_back(
+      Timestamp::Millis(proto.timestamp_ms()), proto.remote_ssrc(),
+      static_cast<int>(proto.minimum_delay_ms()));
   return ParseStatus::Success();
 }
 
