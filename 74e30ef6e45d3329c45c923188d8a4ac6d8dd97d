@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fdb47d7_011fbf23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-12-08T13:02:29Z",
+      "side": 1,
+      "message": "Please? A sneaky way to unblock https://webrtc-review.googlesource.com/c/src/+/285740",
+      "revId": "74e30ef6e45d3329c45c923188d8a4ac6d8dd97d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
