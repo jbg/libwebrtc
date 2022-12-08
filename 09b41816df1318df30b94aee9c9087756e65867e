@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c8a7e6_98985e01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-12-08T10:50:42Z",
+      "side": 1,
+      "message": "Thanks for doing this.",
+      "revId": "09b41816df1318df30b94aee9c9087756e65867e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f0a69a2_30c8fc40",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-12-08T10:50:42Z",
+      "side": 1,
+      "message": "what about probing when loss based bwe increase but delay based bwe is overusing or underusing ?",
+      "range": {
+        "startLine": 70,
+        "startChar": 25,
+        "endLine": 70,
+        "endChar": 36
+      },
+      "revId": "09b41816df1318df30b94aee9c9087756e65867e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea2f6a0_ac6cbab3",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-12-08T10:50:42Z",
+      "side": 1,
+      "message": "not_probe_if_delay_unknown?",
+      "range": {
+        "startLine": 113,
+        "startChar": 6,
+        "endLine": 113,
+        "endChar": 47
+      },
+      "revId": "09b41816df1318df30b94aee9c9087756e65867e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ca301c_5ed8ef4d",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-12-08T10:50:42Z",
+      "side": 1,
+      "message": "you will have to remove this if statement and handle each case separate. Otherwise enabling not_probe_if_network_overusing_underusing will limit probes if loss limited.",
+      "range": {
+        "startLine": 506,
+        "startChar": 14,
+        "endLine": 506,
+        "endChar": 50
+      },
+      "revId": "09b41816df1318df30b94aee9c9087756e65867e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a9b0fa_8f50c15e",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2022-12-08T10:50:42Z",
+      "side": 1,
+      "message": "kDelayBasedLimitedDelayUnkown?  and only have one state ? We dont care if the delay is currently increasing or decreasing.",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 20
+      },
+      "revId": "09b41816df1318df30b94aee9c9087756e65867e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
