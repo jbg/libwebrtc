@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23b64c93_12107899",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-08T16:20:14Z",
+      "side": 1,
+      "message": "Generally looks good. Some comments below",
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd8159c3_3e71891d",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-08T16:20:14Z",
+      "side": 1,
+      "message": "Please guard this new event behind a field trial.",
+      "range": {
+        "startLine": 1178,
+        "startChar": 0,
+        "endLine": 1178,
+        "endChar": 64
+      },
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a91da82_36eedb14",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-08T16:20:14Z",
+      "side": 1,
+      "message": "Please add delta compression. See EncodeAudioPlayout(...)",
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "001bda2b_cebe3d74",
+        "filename": "logging/rtc_event_log/events/rtc_event_neteq_set_minimum_delay.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-08T16:20:14Z",
+      "side": 1,
+      "message": "This should be uint32_t, no?",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 10
+      },
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40a8dcfd_44bac422",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-08T16:20:14Z",
+      "side": 1,
+      "message": "I guess fixed32 would be more efficient for this field",
+      "range": {
+        "startLine": 292,
+        "startChar": 11,
+        "endLine": 292,
+        "endChar": 17
+      },
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9439dc5d_c35c89df",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-08T16:20:14Z",
+      "side": 1,
+      "message": "Will this field ever contain negative values? if so, how often?",
+      "range": {
+        "startLine": 293,
+        "startChar": 11,
+        "endLine": 293,
+        "endChar": 16
+      },
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54f4d8d8_914b4a68",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-08T16:20:14Z",
+      "side": 1,
+      "message": "I believe this is the type of message where we want to encode batches rather than individual events for better compression.\n\nAdd number_of_deltas, timestamp_ms_deltas, remote_ssrc_deltas and minimum_delay_ms_deltas please.",
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13228470_534243ba",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-08T16:20:14Z",
+      "side": 1,
+      "message": "For testing, you will also want a function like this.",
+      "range": {
+        "startLine": 162,
+        "startChar": 7,
+        "endLine": 162,
+        "endChar": 36
+      },
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
