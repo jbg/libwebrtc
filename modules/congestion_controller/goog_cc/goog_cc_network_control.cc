@@ -22,6 +22,7 @@
 #include <vector>
 
 #include "absl/strings/match.h"
+#include "api/network_state_predictor.h"
 #include "api/units/data_rate.h"
 #include "api/units/time_delta.h"
 #include "api/units/timestamp.h"
@@ -61,14 +62,19 @@ bool IsNotDisabled(const FieldTrialsView* config, absl::string_view key) {
   return !absl::StartsWith(config->Lookup(key), "Disabled");
 }
 
-BandwidthLimitedCause GetBandwidthLimitedCause(
-    LossBasedState loss_based_state) {
+BandwidthLimitedCause GetBandwidthLimitedCause(LossBasedState loss_based_state,
+                                               BandwidthUsage bandwidth_usage) {
   switch (loss_based_state) {
     case LossBasedState::kDecreasing:
       return BandwidthLimitedCause::kLossLimitedBweDecreasing;
     case LossBasedState::kIncreasing:
       return BandwidthLimitedCause::kLossLimitedBweIncreasing;
     default:
+      if (bandwidth_usage == BandwidthUsage::kBwOverusing) {
+        return BandwidthLimitedCause::kNetworkOverusing;
+      } else if (bandwidth_usage == BandwidthUsage::kBwUnderusing) {
+        return BandwidthLimitedCause::kNetworkUnderusing;
+      }
       return BandwidthLimitedCause::kDelayBasedLimited;
   }
 }
@@ -676,7 +682,8 @@ void GoogCcNetworkController::MaybeTriggerOnNetworkChanged(
 
     auto probes = probe_controller_->SetEstimatedBitrate(
         loss_based_target_rate,
-        GetBandwidthLimitedCause(bandwidth_estimation_->loss_based_state()),
+        GetBandwidthLimitedCause(bandwidth_estimation_->loss_based_state(),
+                                 delay_based_bwe_->last_state()),
         at_time);
     update->probe_cluster_configs.insert(update->probe_cluster_configs.end(),
                                          probes.begin(), probes.end());
