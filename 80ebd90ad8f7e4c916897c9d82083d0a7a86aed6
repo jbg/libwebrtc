@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91167f16_8bca4e27",
+        "filename": "test/pc/e2e/peer_connection_quality_test_metric_names_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-12-09T10:13:15Z",
+      "side": 1,
+      "message": "This shows the issue we are addressing.\n\nalice_audio is not the test name, in the future this will be the gtest test name by default and never include stream or peer names or ids since they are already there in the metadata.",
+      "range": {
+        "startLine": 174,
+        "startChar": 38,
+        "endLine": 174,
+        "endChar": 49
+      },
+      "revId": "80ebd90ad8f7e4c916897c9d82083d0a7a86aed6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
