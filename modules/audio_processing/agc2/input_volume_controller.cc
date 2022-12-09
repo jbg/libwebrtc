@@ -245,6 +245,7 @@ void MonoInputVolumeController::HandleClipping(int clipped_level_step) {
     // Don't try to adjust the input volume if we're already below the limit. As
     // a consequence, if the user has brought the input volume above the limit,
     // we will still not react until the postproc updates the input volume.
+    RTC_DLOG(LS_INFO) << "***** Y1";
     SetInputVolume(
         std::max(min_input_volume_after_clipping_,
                  last_recommended_input_volume_ - clipped_level_step));
