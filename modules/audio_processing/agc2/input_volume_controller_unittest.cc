@@ -333,6 +333,79 @@ class InputVolumeControllerTestHelper {
   InputVolumeController controller;
 };
 
+class InputVolumeControllerChannelSampleRateTest
+    : public ::testing::TestWithParam<std::tuple<int, int>> {
+ protected:
+  int GetNumChannels() const { return std::get<0>(GetParam()); }
+  int GetSampleRateHz() const { return std::get<1>(GetParam()); }
+};
+
+TEST_P(InputVolumeControllerChannelSampleRateTest, DISABLED_CheckIsAlive) {
+  const int num_channels = GetNumChannels();
+  const int sample_rate_hz = GetSampleRateHz();
+
+  constexpr InputVolumeController::Config kDefaultConfig;
+  InputVolumeController controller(num_channels, kDefaultConfig);
+  controller.Initialize();
+  AudioBuffer buffer(sample_rate_hz, num_channels, sample_rate_hz, num_channels,
+                     sample_rate_hz, num_channels);
+
+  constexpr int kStartupVolume = 255;
+  int applied_initial_volume = kStartupVolume;
+
+  // Trigger a downward adaptation with clipping.
+  constexpr int kLevelWithinTargetDbfs =
+      (kDefaultConfig.target_range_min_dbfs +
+       kDefaultConfig.target_range_max_dbfs) /
+      2;
+  WriteAlternatingAudioBufferSamples(/*samples_value=*/kMaxSample, buffer);
+  const int initial_volume1 = applied_initial_volume;
+  for (int i = 0; i < 100; ++i) {
+    controller.set_stream_analog_level(applied_initial_volume);
+    controller.AnalyzePreProcess(buffer);
+    controller.Process(kHighSpeechProbability,
+                       /*speech_level_dbfs=*/kLevelWithinTargetDbfs);
+    applied_initial_volume = controller.recommended_analog_level();
+  }
+  ASSERT_LT(controller.recommended_analog_level(), initial_volume1);
+
+  // Make sure that enough frames are analyzed, otherwise no volume change takes
+  // place.
+  constexpr int kNumCalls = kDefaultConfig.update_input_volume_wait_frames;
+  // Fill in audio that does not clip.
+  WriteAlternatingAudioBufferSamples(/*samples_value=*/1234.5f, buffer);
+
+  // Trigger an upward adaptation.
+  const int initial_volume2 = controller.recommended_analog_level();
+  for (int i = 0; i < kNumCalls; ++i) {
+    controller.set_stream_analog_level(applied_initial_volume);
+    controller.AnalyzePreProcess(buffer);
+    controller.Process(
+        kHighSpeechProbability,
+        /*speech_level_dbfs=*/kDefaultConfig.target_range_min_dbfs - 5);
+    applied_initial_volume = controller.recommended_analog_level();
+  }
+  EXPECT_GT(controller.recommended_analog_level(), initial_volume2);
+
+  // Trigger a downward adaptation.
+  const int initial_volume = controller.recommended_analog_level();
+  for (int i = 0; i < kNumCalls; ++i) {
+    controller.set_stream_analog_level(applied_initial_volume);
+    controller.AnalyzePreProcess(buffer);
+    controller.Process(
+        kHighSpeechProbability,
+        /*speech_level_dbfs=*/kDefaultConfig.target_range_max_dbfs + 5);
+    applied_initial_volume = controller.recommended_analog_level();
+  }
+  EXPECT_LT(controller.recommended_analog_level(), initial_volume);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    ,
+    InputVolumeControllerChannelSampleRateTest,
+    ::testing::Combine(::testing::Values(1, 2, 3, 6),
+                       ::testing::Values(8000, 16000, 32000, 48000)));
+
 class InputVolumeControllerParametrizedTest
     : public ::testing::TestWithParam<absl::optional<int>> {
  protected:
