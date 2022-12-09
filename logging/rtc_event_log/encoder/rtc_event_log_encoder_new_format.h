@@ -39,6 +39,7 @@ class RtcEventDtlsTransportState;
 class RtcEventDtlsWritableState;
 class RtcEventLoggingStarted;
 class RtcEventLoggingStopped;
+class RtcEventNetEqSetMinimumDelay;
 class RtcEventProbeClusterCreated;
 class RtcEventProbeResultFailure;
 class RtcEventProbeResultSuccess;
@@ -117,6 +118,9 @@ class RtcEventLogEncoderNewFormat final : public RtcEventLogEncoder {
                             rtclog2::EventStream* event_stream);
   void EncodeLoggingStopped(rtc::ArrayView<const RtcEventLoggingStopped*> batch,
                             rtclog2::EventStream* event_stream);
+  void EncodeNetEqSetMinimumDelay(
+      rtc::ArrayView<const RtcEventNetEqSetMinimumDelay*> batch,
+      rtclog2::EventStream* event_stream);
   void EncodeProbeClusterCreated(
       rtc::ArrayView<const RtcEventProbeClusterCreated*> batch,
       rtclog2::EventStream* event_stream);
