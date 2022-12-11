@@ -25,8 +25,8 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
 #include "rtc_base/logging.h"
-#include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/numerics/safe_minmax.h"
+#include "rtc_base/task_utils/inline_task_queue.h"
 #include "rtc_base/time_utils.h"
 
 namespace webrtc {
@@ -57,14 +57,14 @@ std::unique_ptr<RtcEventLogEncoder> CreateEncoder(
 RtcEventLogImpl::RtcEventLogImpl(RtcEventLog::EncodingType encoding_type,
                                  TaskQueueFactory* task_queue_factory)
     : event_encoder_(CreateEncoder(encoding_type)),
-      num_config_events_written_(0),
       last_output_ms_(rtc::TimeMillis()),
       output_scheduled_(false),
       logging_state_started_(false),
-      task_queue_(
-          std::make_unique<rtc::TaskQueue>(task_queue_factory->CreateTaskQueue(
-              "rtc_event_log",
-              TaskQueueFactory::Priority::NORMAL))) {}
+      task_queue_(task_queue_factory->CreateTaskQueue(
+          "rtc_event_log",
+          TaskQueueFactory::Priority::NORMAL)) {
+  sequence_checker_.Detach();
+}
 
 RtcEventLogImpl::~RtcEventLogImpl() {
   // If we're logging to the output, this will stop that. Blocking function.
@@ -72,12 +72,6 @@ RtcEventLogImpl::~RtcEventLogImpl() {
     logging_state_checker_.Detach();
     StopLogging();
   }
-
-  // We want to block on any executing task by invoking ~TaskQueue() before
-  // we set unique_ptr's internal pointer to null.
-  rtc::TaskQueue* tq = task_queue_.get();
-  delete tq;
-  task_queue_.release();
 }
 
 bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output,
@@ -98,13 +92,13 @@ bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output,
   RTC_DCHECK_RUN_ON(&logging_state_checker_);
   logging_state_started_ = true;
   // Binding to `this` is safe because `this` outlives the `task_queue_`.
-  task_queue_->PostTask([this, output_period_ms, timestamp_us, utc_time_us,
-                         output = std::move(output)]() mutable {
-    RTC_DCHECK_RUN_ON(task_queue_.get());
+  task_queue_.PostTaskNoInline([this, output_period_ms, timestamp_us,
+                                utc_time_us,
+                                output = std::move(output)]() mutable {
+    RTC_DCHECK_RUN_ON(&sequence_checker_);
     RTC_DCHECK(output->IsActive());
     output_period_ms_ = output_period_ms;
     event_output_ = std::move(output);
-    num_config_events_written_ = 0;
     WriteToOutput(event_encoder_->EncodeLogStart(timestamp_us, utc_time_us));
     LogEventsFromMemoryToOutput();
   });
@@ -127,8 +121,8 @@ void RtcEventLogImpl::StopLogging() {
 void RtcEventLogImpl::StopLogging(std::function<void()> callback) {
   RTC_DCHECK_RUN_ON(&logging_state_checker_);
   logging_state_started_ = false;
-  task_queue_->PostTask([this, callback] {
-    RTC_DCHECK_RUN_ON(task_queue_.get());
+  task_queue_.PostTaskNoInline([this, callback] {
+    RTC_DCHECK_RUN_ON(&sequence_checker_);
     if (event_output_) {
       RTC_DCHECK(event_output_->IsActive());
       LogEventsFromMemoryToOutput();
@@ -142,48 +136,44 @@ void RtcEventLogImpl::Log(std::unique_ptr<RtcEvent> event) {
   RTC_CHECK(event);
 
   // Binding to `this` is safe because `this` outlives the `task_queue_`.
-  task_queue_->PostTask([this, event = std::move(event)]() mutable {
-    RTC_DCHECK_RUN_ON(task_queue_.get());
-    LogToMemory(std::move(event));
-    if (event_output_)
-      ScheduleOutput();
-  });
+  task_queue_.PostTask(
+      [this, event = std::move(event), task_queue = &task_queue_]() mutable {
+        RTC_DCHECK_RUN_ON(&sequence_checker_);
+        LogToMemory(std::move(event));
+        if (event_output_)
+          ScheduleOutput(task_queue);
+      });
 }
 
-void RtcEventLogImpl::ScheduleOutput() {
-  RTC_DCHECK(event_output_ && event_output_->IsActive());
-  if (history_.size() >= kMaxEventsInHistory) {
-    // We have to emergency drain the buffer. We can't wait for the scheduled
-    // output task because there might be other event incoming before that.
-    LogEventsFromMemoryToOutput();
-    return;
-  }
-
-  RTC_DCHECK(output_period_ms_.has_value());
-  if (*output_period_ms_ == kImmediateOutput) {
-    // We are already on the `task_queue_` so there is no reason to post a task
-    // if we want to output immediately.
-    LogEventsFromMemoryToOutput();
-    return;
-  }
-
-  if (!output_scheduled_) {
+void RtcEventLogImpl::ScheduleOutput(TaskQueueBase* task_queue) {
+  // Reasons for immediate drain:
+  // 1. history_.size() >= kMaxEventsInHistory. We have to drain the buffer
+  // immediately. We can't wait for the delayed scheduled output task because
+  // there might be other event incoming before that.
+  // 2. *output_period_ms_ == kImmediateOutput.
+  bool needs_immediate_drain =
+      history_.size() >= kMaxEventsInHistory ||
+      config_history_.size() >= kMaxEventsInConfigHistory ||
+      *output_period_ms_ == kImmediateOutput;
+  // Binding to `this` is safe because `this` outlives the `task_queue_`.
+  auto output_task = [this]() {
+    RTC_DCHECK_RUN_ON(&sequence_checker_);
+    if (event_output_) {
+      RTC_DCHECK(event_output_->IsActive());
+      LogEventsFromMemoryToOutput();
+    }
+    output_scheduled_ = false;
+  };
+  if (needs_immediate_drain) {
+    task_queue->PostTask(std::move(output_task));
+  } else if (!output_scheduled_) {
     output_scheduled_ = true;
-    // Binding to `this` is safe because `this` outlives the `task_queue_`.
-    auto output_task = [this]() {
-      RTC_DCHECK_RUN_ON(task_queue_.get());
-      if (event_output_) {
-        RTC_DCHECK(event_output_->IsActive());
-        LogEventsFromMemoryToOutput();
-      }
-      output_scheduled_ = false;
-    };
     const int64_t now_ms = rtc::TimeMillis();
     const int64_t time_since_output_ms = now_ms - last_output_ms_;
     const uint32_t delay = rtc::SafeClamp(
         *output_period_ms_ - time_since_output_ms, 0, *output_period_ms_);
-    task_queue_->PostDelayedTask(std::move(output_task),
-                                 TimeDelta::Millis(delay));
+    task_queue->PostDelayedTask(std::move(output_task),
+                                TimeDelta::Millis(delay));
   }
 }
 
@@ -193,9 +183,10 @@ void RtcEventLogImpl::LogToMemory(std::unique_ptr<RtcEvent> event) {
   const size_t container_max_size =
       event->IsConfigEvent() ? kMaxEventsInConfigHistory : kMaxEventsInHistory;
 
-  if (container.size() >= container_max_size) {
-    RTC_DCHECK(!event_output_);  // Shouldn't lose events if we have an output.
-    container.pop_front();
+  if (!event_output_) {
+    while (container.size() >= container_max_size) {
+      container.pop_front();
+    }
   }
   container.push_back(std::move(event));
 }
@@ -204,30 +195,23 @@ void RtcEventLogImpl::LogEventsFromMemoryToOutput() {
   RTC_DCHECK(event_output_ && event_output_->IsActive());
   last_output_ms_ = rtc::TimeMillis();
 
-  // Serialize all stream configurations that haven't already been written to
-  // this output. `num_config_events_written_` is used to track which configs we
-  // have already written. (Note that the config may have been written to
-  // previous outputs; configs are not discarded.)
-  std::string encoded_configs;
-  RTC_DCHECK_LE(num_config_events_written_, config_history_.size());
-  if (num_config_events_written_ < config_history_.size()) {
-    const auto begin = config_history_.begin() + num_config_events_written_;
-    const auto end = config_history_.end();
-    encoded_configs = event_encoder_->EncodeBatch(begin, end);
-    num_config_events_written_ = config_history_.size();
-  }
+  // Serialize all unwritten stream configurations.
+  std::string encoded_configs = event_encoder_->EncodeBatch(
+      config_history_.begin(), config_history_.end());
+  config_history_.clear();
 
-  // Serialize the events in the event queue. Note that the write may fail,
-  // for example if we are writing to a file and have reached the maximum limit.
+  // Serialize all unwritten events in the history.
+  std::string encoded_history =
+      event_encoder_->EncodeBatch(history_.begin(), history_.end());
+  history_.clear();
+
+  // Note that the write may fail, for example if we are writing to a file and
+  // have reached the maximum limit.
   // We don't get any feedback if this happens, so we still remove the events
   // from the event log history. This is normally not a problem, but if another
   // log is started immediately after the first one becomes full, then one
   // cannot rely on the second log to contain everything that isn't in the first
   // log; one batch of events might be missing.
-  std::string encoded_history =
-      event_encoder_->EncodeBatch(history_.begin(), history_.end());
-  history_.clear();
-
   WriteConfigsAndHistoryToOutput(encoded_configs, encoded_history);
 }
 

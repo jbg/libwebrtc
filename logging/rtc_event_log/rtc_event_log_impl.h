@@ -23,10 +23,12 @@
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/rtc_event_log_output.h"
 #include "api/sequence_checker.h"
+#include "api/task_queue/task_queue_base.h"
 #include "api/task_queue/task_queue_factory.h"
 #include "logging/rtc_event_log/encoder/rtc_event_log_encoder.h"
 #include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/task_queue.h"
+#include "rtc_base/task_utils/inline_task_queue.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
@@ -50,44 +52,49 @@ class RtcEventLogImpl final : public RtcEventLog {
   void Log(std::unique_ptr<RtcEvent> event) override;
 
  private:
-  void LogToMemory(std::unique_ptr<RtcEvent> event) RTC_RUN_ON(task_queue_);
-  void LogEventsFromMemoryToOutput() RTC_RUN_ON(task_queue_);
+  void LogToMemory(std::unique_ptr<RtcEvent> event)
+      RTC_RUN_ON(sequence_checker_);
+  void LogEventsFromMemoryToOutput() RTC_RUN_ON(sequence_checker_);
 
-  void StopOutput() RTC_RUN_ON(task_queue_);
+  void StopOutput() RTC_RUN_ON(sequence_checker_);
 
   void WriteConfigsAndHistoryToOutput(absl::string_view encoded_configs,
                                       absl::string_view encoded_history)
-      RTC_RUN_ON(task_queue_);
-  void WriteToOutput(absl::string_view output_string) RTC_RUN_ON(task_queue_);
+      RTC_RUN_ON(sequence_checker_);
+  void WriteToOutput(absl::string_view output_string)
+      RTC_RUN_ON(sequence_checker_);
 
-  void StopLoggingInternal() RTC_RUN_ON(task_queue_);
+  void StopLoggingInternal() RTC_RUN_ON(sequence_checker_);
 
-  void ScheduleOutput() RTC_RUN_ON(task_queue_);
+  void ScheduleOutput(TaskQueueBase* task_queue) RTC_RUN_ON(sequence_checker_);
 
   // History containing all past configuration events.
   std::deque<std::unique_ptr<RtcEvent>> config_history_
-      RTC_GUARDED_BY(*task_queue_);
+      RTC_GUARDED_BY(sequence_checker_);
 
   // History containing the most recent (non-configuration) events (~10s).
-  std::deque<std::unique_ptr<RtcEvent>> history_ RTC_GUARDED_BY(*task_queue_);
+  std::deque<std::unique_ptr<RtcEvent>> history_
+      RTC_GUARDED_BY(sequence_checker_);
 
   std::unique_ptr<RtcEventLogEncoder> event_encoder_
-      RTC_GUARDED_BY(*task_queue_);
-  std::unique_ptr<RtcEventLogOutput> event_output_ RTC_GUARDED_BY(*task_queue_);
+      RTC_GUARDED_BY(sequence_checker_);
+  std::unique_ptr<RtcEventLogOutput> event_output_
+      RTC_GUARDED_BY(sequence_checker_);
 
-  size_t num_config_events_written_ RTC_GUARDED_BY(*task_queue_);
-  absl::optional<int64_t> output_period_ms_ RTC_GUARDED_BY(*task_queue_);
-  int64_t last_output_ms_ RTC_GUARDED_BY(*task_queue_);
-  bool output_scheduled_ RTC_GUARDED_BY(*task_queue_);
+  absl::optional<int64_t> output_period_ms_ RTC_GUARDED_BY(sequence_checker_);
+  int64_t last_output_ms_ RTC_GUARDED_BY(sequence_checker_);
+  bool output_scheduled_ RTC_GUARDED_BY(sequence_checker_);
 
   RTC_NO_UNIQUE_ADDRESS SequenceChecker logging_state_checker_;
   bool logging_state_started_ RTC_GUARDED_BY(logging_state_checker_);
+
+  RTC_NO_UNIQUE_ADDRESS SequenceChecker sequence_checker_;
 
   // Since we are posting tasks bound to `this`,  it is critical that the event
   // log and its members outlive `task_queue_`. Keep the `task_queue_`
   // last to ensure it destructs first, or else tasks living on the queue might
   // access other members after they've been torn down.
-  std::unique_ptr<rtc::TaskQueue> task_queue_;
+  InlineTaskQueue task_queue_;
 };
 
 }  // namespace webrtc

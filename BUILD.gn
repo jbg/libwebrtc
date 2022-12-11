@@ -594,7 +594,7 @@ if (rtc_include_tests && !build_with_chromium) {
       "rtc_base:weak_ptr_unittests",
       "rtc_base/experiments:experiments_unittests",
       "rtc_base/system:file_wrapper_unittests",
-      "rtc_base/task_utils:repeating_task_unittests",
+      "rtc_base/task_utils:task_utils_unittests",
       "rtc_base/units:units_unittests",
       "sdk:sdk_tests",
       "test:rtp_test_utils",
