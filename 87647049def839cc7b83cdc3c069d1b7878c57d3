@@ -16,6 +16,24 @@
       "message": "config.star should also be modified.",
       "revId": "87647049def839cc7b83cdc3c069d1b7878c57d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30543455_6de3f3b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-12T19:34:54Z",
+      "side": 1,
+      "message": "Done. Thanks",
+      "parentUuid": "1e3e93ba_ac98d0fd",
+      "revId": "87647049def839cc7b83cdc3c069d1b7878c57d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
