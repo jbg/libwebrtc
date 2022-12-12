@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f91b07d_b99b638c",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2022-12-12T19:39:50Z",
+      "side": 1,
+      "message": "Maybe this one can be removed in this CL as well.",
+      "range": {
+        "startLine": 133,
+        "startChar": 6,
+        "endLine": 133,
+        "endChar": 45
+      },
+      "revId": "bcba8106eeb26e7a837c3ca9ce66dccc53371c0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
