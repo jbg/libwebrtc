@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37457e5b_12250e73",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 19084
+      },
+      "writtenOn": "2022-12-12T07:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd8159c3_3e71891d",
+      "range": {
+        "startLine": 1178,
+        "startChar": 0,
+        "endLine": 1178,
+        "endChar": 64
+      },
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a91da82_36eedb14",
@@ -58,6 +82,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "056f3928_6d7732f1",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 19084
+      },
+      "writtenOn": "2022-12-12T07:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a91da82_36eedb14",
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "001bda2b_cebe3d74",
@@ -71,6 +113,30 @@
       "writtenOn": "2022-12-08T16:20:14Z",
       "side": 1,
       "message": "This should be uint32_t, no?",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 10
+      },
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "501bf5ea_759d4f8b",
+        "filename": "logging/rtc_event_log/events/rtc_event_neteq_set_minimum_delay.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 19084
+      },
+      "writtenOn": "2022-12-12T07:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "001bda2b_cebe3d74",
       "range": {
         "startLine": 54,
         "startChar": 2,
@@ -104,6 +170,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "112779e5_46055df1",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 19084
+      },
+      "writtenOn": "2022-12-12T07:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40a8dcfd_44bac422",
+      "range": {
+        "startLine": 292,
+        "startChar": 11,
+        "endLine": 292,
+        "endChar": 17
+      },
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9439dc5d_c35c89df",
@@ -117,6 +207,30 @@
       "writtenOn": "2022-12-08T16:20:14Z",
       "side": 1,
       "message": "Will this field ever contain negative values? if so, how often?",
+      "range": {
+        "startLine": 293,
+        "startChar": 11,
+        "endLine": 293,
+        "endChar": 16
+      },
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff3acae2_ed7781c6",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 19084
+      },
+      "writtenOn": "2022-12-12T07:56:47Z",
+      "side": 1,
+      "message": "It might as the API is asking for an `int`.",
+      "parentUuid": "9439dc5d_c35c89df",
       "range": {
         "startLine": 293,
         "startChar": 11,
@@ -144,6 +258,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15134a05_b4d6ba24",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 19084
+      },
+      "writtenOn": "2022-12-12T07:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54f4d8d8_914b4a68",
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13228470_534243ba",
@@ -157,6 +289,30 @@
       "writtenOn": "2022-12-08T16:20:14Z",
       "side": 1,
       "message": "For testing, you will also want a function like this.",
+      "range": {
+        "startLine": 162,
+        "startChar": 7,
+        "endLine": 162,
+        "endChar": 36
+      },
+      "revId": "b4d3adc1b08e5e36073e7588b7151076c3d5e4be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ffab3b3_e955c3d7",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest_helper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 19084
+      },
+      "writtenOn": "2022-12-12T07:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13228470_534243ba",
       "range": {
         "startLine": 162,
         "startChar": 7,
