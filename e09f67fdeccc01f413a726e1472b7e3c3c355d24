@@ -16,6 +16,24 @@
       "message": "I\u0027m going to offline today, and starting OOO until next year. \nSo please revert this CL if something gets broken.",
       "revId": "e09f67fdeccc01f413a726e1472b7e3c3c355d24",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "399ab25d_f168f180",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2022-12-13T08:49:45Z",
+      "side": 1,
+      "message": "Will do, thanks and have a nice OOO!",
+      "parentUuid": "30bf3389_0aad1fca",
+      "revId": "e09f67fdeccc01f413a726e1472b7e3c3c355d24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
