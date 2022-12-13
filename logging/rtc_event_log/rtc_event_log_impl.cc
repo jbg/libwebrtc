@@ -57,7 +57,6 @@ std::unique_ptr<RtcEventLogEncoder> CreateEncoder(
 RtcEventLogImpl::RtcEventLogImpl(RtcEventLog::EncodingType encoding_type,
                                  TaskQueueFactory* task_queue_factory)
     : event_encoder_(CreateEncoder(encoding_type)),
-      num_config_events_written_(0),
       last_output_ms_(rtc::TimeMillis()),
       output_scheduled_(false),
       logging_state_started_(false),
@@ -104,7 +103,6 @@ bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output,
     RTC_DCHECK(output->IsActive());
     output_period_ms_ = output_period_ms;
     event_output_ = std::move(output);
-    num_config_events_written_ = 0;
     WriteToOutput(event_encoder_->EncodeLogStart(timestamp_us, utc_time_us));
     LogEventsFromMemoryToOutput();
   });
@@ -152,7 +150,8 @@ void RtcEventLogImpl::Log(std::unique_ptr<RtcEvent> event) {
 
 void RtcEventLogImpl::ScheduleOutput() {
   RTC_DCHECK(event_output_ && event_output_->IsActive());
-  if (history_.size() >= kMaxEventsInHistory) {
+  if (history_.size() >= kMaxEventsInHistory ||
+      config_history_.size() >= kMaxEventsInConfigHistory) {
     // We have to emergency drain the buffer. We can't wait for the scheduled
     // output task because there might be other event incoming before that.
     LogEventsFromMemoryToOutput();
@@ -204,18 +203,10 @@ void RtcEventLogImpl::LogEventsFromMemoryToOutput() {
   RTC_DCHECK(event_output_ && event_output_->IsActive());
   last_output_ms_ = rtc::TimeMillis();
 
-  // Serialize all stream configurations that haven't already been written to
-  // this output. `num_config_events_written_` is used to track which configs we
-  // have already written. (Note that the config may have been written to
-  // previous outputs; configs are not discarded.)
-  std::string encoded_configs;
-  RTC_DCHECK_LE(num_config_events_written_, config_history_.size());
-  if (num_config_events_written_ < config_history_.size()) {
-    const auto begin = config_history_.begin() + num_config_events_written_;
-    const auto end = config_history_.end();
-    encoded_configs = event_encoder_->EncodeBatch(begin, end);
-    num_config_events_written_ = config_history_.size();
-  }
+  // Serialize all stream configurations in the config event queue.
+  std::string encoded_configs = event_encoder_->EncodeBatch(
+      config_history_.begin(), config_history_.end());
+  config_history_.clear();
 
   // Serialize the events in the event queue. Note that the write may fail,
   // for example if we are writing to a file and have reached the maximum limit.
