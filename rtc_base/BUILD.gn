@@ -1683,8 +1683,17 @@ if (rtc_include_tests) {
         "numerics/running_statistics_unittest.cc",
         "numerics/sequence_number_util_unittest.cc",
       ]
+
+      # Android does not properly handle the templated tests.
+      if (!is_android) {
+        sources += [ "numerics/sequence_numbers_conformance_test.cc" ]
+      }
       deps = [
         ":rtc_numerics",
+        ":strong_alias",
+        ":timeutils",
+        "../modules:module_api_public",
+        "../net/dcsctp/common:sequence_numbers",
         "../test:test_main",
         "../test:test_support",
       ]
