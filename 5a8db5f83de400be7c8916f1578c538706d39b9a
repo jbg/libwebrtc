@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a58c1deb_3f06dd84",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5522
+      },
+      "writtenOn": "2022-12-13T08:49:11Z",
+      "side": 1,
+      "message": "We can\u0027t clear the config_history. If we start logging again, we need to retain all config events to know how we should interpret the other events.",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 26
+      },
+      "revId": "5a8db5f83de400be7c8916f1578c538706d39b9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
