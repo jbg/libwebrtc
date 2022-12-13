@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf304366_711ef2cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-12-13T21:28:48Z",
+      "side": 1,
+      "message": "I am actually having heartburn with the implied semantics that you\u0027re testing (which I suppose is a Good Thing).\n\nI\u0027m trying to reproduce this from memory.....\n\nBack in the early Arpanet days, there was a protocol with an 8-bit sequence number. The treatment was that when a higher number got in, they would move the current \"top\" to the new number. \"bottom\" was the last unacknowledged number. Anything below the \"bottom\" was discarded as a duplicate; anything within the window got accepted as a new packet (filling in gaps). You sent ACKs to tell the sender to fill in the gaps.\n\nThis worked fine until, somehow, 3 packets got on the wire that divided the number space into three. Each sequence of 3 packets would roll the wraparound counter, making the recipient think that there was another window of packets that one should wait for. And of course the sender, not getting any acks for those packets, would resend them, causing another tick of the wraparound counter.\n\nBad Idea.\n\nThe result of the disaster was protocol designer advice that you should never leave more than half your number space valid; only packets within the valid interval could cause wraparound - packets outside it would simply be discarded with no effect.\n\nI wonder if we should equip our wrapping counters with belts AND suspenders.",
+      "revId": "7c2c6736b9722cb931e33532d11d4472351592ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2184f3b_e3d0175b",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 1687,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-12-13T21:28:48Z",
+      "side": 1,
+      "message": "Can you file a bug and add a TODO() \"fix when Android is fixed\"?",
+      "revId": "7c2c6736b9722cb931e33532d11d4472351592ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5674716a_c220a1d2",
+        "filename": "rtc_base/numerics/sequence_numbers_conformance_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-12-13T21:28:48Z",
+      "side": 1,
+      "message": "This seems weird, in that the maxval of an int64_t is 1\u003c\u003c63.\nIs the intent of the construct that you can specify the max value, and it defaults to 2^32? (Note that the maximum value of an int32 is 1\u003c\u003c32-1)",
+      "revId": "7c2c6736b9722cb931e33532d11d4472351592ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
