@@ -64,7 +64,7 @@ class RtcEventLogImpl final : public RtcEventLog {
 
   void ScheduleOutput() RTC_RUN_ON(task_queue_);
 
-  // History containing all past configuration events.
+  // History containing the most recent configuration events.
   std::deque<std::unique_ptr<RtcEvent>> config_history_
       RTC_GUARDED_BY(*task_queue_);
 
@@ -75,7 +75,6 @@ class RtcEventLogImpl final : public RtcEventLog {
       RTC_GUARDED_BY(*task_queue_);
   std::unique_ptr<RtcEventLogOutput> event_output_ RTC_GUARDED_BY(*task_queue_);
 
-  size_t num_config_events_written_ RTC_GUARDED_BY(*task_queue_);
   absl::optional<int64_t> output_period_ms_ RTC_GUARDED_BY(*task_queue_);
   int64_t last_output_ms_ RTC_GUARDED_BY(*task_queue_);
   bool output_scheduled_ RTC_GUARDED_BY(*task_queue_);
