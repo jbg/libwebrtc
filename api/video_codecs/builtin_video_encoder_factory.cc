@@ -11,6 +11,7 @@
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "absl/strings/match.h"
@@ -47,6 +48,13 @@ class BuiltinVideoEncoderFactory : public VideoEncoderFactory {
 
   std::vector<SdpVideoFormat> GetSupportedFormats() const override {
     return internal_encoder_factory_->GetSupportedFormats();
+  }
+
+  CodecSupport QueryCodecSupport(
+      const SdpVideoFormat& format,
+      absl::optional<std::string> scalability_mode) const override {
+    return internal_encoder_factory_->QueryCodecSupport(format,
+                                                        scalability_mode);
   }
 
  private:
