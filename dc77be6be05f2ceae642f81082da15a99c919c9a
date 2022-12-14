@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "458906ce_4d0496ad",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-12-14T08:04:52Z",
+      "side": 1,
+      "message": "I remembered running into trouble with rtc_library when there was only a .h file, and wasn\u0027t able to figure out why rtc_library was better than rtc_source_set, so I defaulted to rtc_source_set. What\u0027s the general rule here?",
+      "parentUuid": "35b52489_b70d3bd4",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 14
+      },
+      "revId": "dc77be6be05f2ceae642f81082da15a99c919c9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "251c262c_ccfc4e63",
         "filename": "media/BUILD.gn",
         "patchSetId": 3
