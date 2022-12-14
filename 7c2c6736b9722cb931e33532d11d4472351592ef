@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8accdfd_7d76f5f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-12-14T09:46:34Z",
+      "side": 1,
+      "message": "This is the idea of using the unwrapper - move the values that can wrap into a much large number space and so ordering can remain. If things arrive out of order the unwrapper will handle that accordingly. \n\nI would argue that these wrapping counters should use StrongAlias as is done in dcsctp, and so we get saftey. Ideally all sequence counting is done in the larger space and then is wrapped when sending things on the wire, and done in the inverse when reading data from the wire.",
+      "parentUuid": "bf304366_711ef2cb",
+      "revId": "7c2c6736b9722cb931e33532d11d4472351592ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2184f3b_e3d0175b",
@@ -35,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25025eba_0f88423a",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 1687,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-12-14T09:46:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2184f3b_e3d0175b",
+      "revId": "7c2c6736b9722cb931e33532d11d4472351592ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5674716a_c220a1d2",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-12-13T21:28:48Z",
       "side": 1,
       "message": "This seems weird, in that the maxval of an int64_t is 1\u003c\u003c63.\nIs the intent of the construct that you can specify the max value, and it defaults to 2^32? (Note that the maximum value of an int32 is 1\u003c\u003c32-1)",
+      "revId": "7c2c6736b9722cb931e33532d11d4472351592ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29559f09_bbd76fbf",
+        "filename": "rtc_base/numerics/sequence_numbers_conformance_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-12-14T09:46:34Z",
+      "side": 1,
+      "message": "This represents the first value where the unsigned range will wrap around. Re-reading the code, it is confusing. I will change it to be max(uint32_t) instead, and modify the tests accordingly.",
+      "parentUuid": "5674716a_c220a1d2",
       "revId": "7c2c6736b9722cb931e33532d11d4472351592ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
