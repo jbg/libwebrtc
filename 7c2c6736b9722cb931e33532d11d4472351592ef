@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84b61793_dd4cd1a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-12-14T22:41:26Z",
+      "side": 1,
+      "message": "Yeah, what I was pointing out was that allowing incoming numbers to increment by \u003e half the number space is dangerous for your protocol\u0027s sanity, and we might want to enforce that \"you don\u0027t want to do that\".\n\nGot the reference from a friend - RFC 789. https://www.rfc-editor.org/rfc/rfc789.txt for your reading enjoyment if you want to take a look.\n\nGuess \"not this CL\".",
+      "parentUuid": "c8accdfd_7d76f5f9",
+      "revId": "7c2c6736b9722cb931e33532d11d4472351592ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2184f3b_e3d0175b",
