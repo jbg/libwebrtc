@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5efdbb20_67c9d5a2",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-12-14T08:10:51Z",
+      "side": 1,
+      "message": "The default should be rtc_library (https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/webrtc.gni;l\u003d739;drc\u003d6bf20cc76a59e1f548ca53c6ef21f4143e3fe974) but you remember correctly that this is an issue with .h only targets.\n\nMaybe let\u0027s file a CL to add that in an .md doc under docs/ or g3docs/?",
+      "parentUuid": "458906ce_4d0496ad",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 14
+      },
+      "revId": "dc77be6be05f2ceae642f81082da15a99c919c9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "251c262c_ccfc4e63",
         "filename": "media/BUILD.gn",
         "patchSetId": 3
