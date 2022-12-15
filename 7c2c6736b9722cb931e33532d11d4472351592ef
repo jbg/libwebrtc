@@ -54,6 +54,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe867445_8763399a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2022-12-15T10:41:59Z",
+      "side": 1,
+      "message": "Interesting read! This case is actually tested from the NegativeUnwrap test. In this case we check that wrapping half the sequence size wraps backwards and not forwards (implying it refers to an older sequence number).",
+      "parentUuid": "84b61793_dd4cd1a0",
+      "revId": "7c2c6736b9722cb931e33532d11d4472351592ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2184f3b_e3d0175b",
