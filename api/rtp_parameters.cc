@@ -282,11 +282,12 @@ const std::vector<RtpExtension> RtpExtension::DeduplicateHeaderExtensions(
   }
 
   // Sort the returned vector to make comparisons of header extensions reliable.
-  // In order of priority, we sort by uri first, then encrypt and id last.
+  // In order of priority, we sort by uri first, then encrypt, then attributes,
+  // then id.
   std::sort(filtered.begin(), filtered.end(),
             [](const RtpExtension& a, const RtpExtension& b) {
-              return std::tie(a.uri, a.encrypt, a.id) <
-                     std::tie(b.uri, b.encrypt, b.id);
+              return std::tie(a.uri, a.encrypt, a.id, a.attributes) <
+                     std::tie(b.uri, b.encrypt, b.id, b.attributes);
             });
 
   return filtered;

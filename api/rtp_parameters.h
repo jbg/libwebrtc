@@ -272,7 +272,8 @@ struct RTC_EXPORT RtpExtension {
 
   std::string ToString() const;
   bool operator==(const RtpExtension& rhs) const {
-    return uri == rhs.uri && id == rhs.id && encrypt == rhs.encrypt;
+    return uri == rhs.uri && id == rhs.id && encrypt == rhs.encrypt &&
+           attributes == rhs.attributes;
   }
   static bool IsSupportedForAudio(absl::string_view uri);
   static bool IsSupportedForVideo(absl::string_view uri);
@@ -401,6 +402,8 @@ struct RTC_EXPORT RtpExtension {
   std::string uri;
   int id = 0;
   bool encrypt = false;
+  // Extension attributes with a meaning specific to this extension.
+  absl::optional<std::string> attributes;
 };
 
 struct RTC_EXPORT RtpFecParameters {

@@ -1310,6 +1310,7 @@ bool ParseExtmap(absl::string_view line,
   if (!GetValueFromString(line, sub_fields[0], &value, error)) {
     return false;
   }
+  // TODO(bugs.webrtc.org/7477): parse direction.
 
   bool encrypted = false;
   if (uri == RtpExtension::kEncryptHeaderExtensionsUri) {
@@ -1330,6 +1331,16 @@ bool ParseExtmap(absl::string_view line,
   }
 
   *extmap = RtpExtension(uri, value, encrypted);
+  if ((!encrypted && fields.size() > 2) || (encrypted && fields.size() > 3)) {
+    // RFC 5285/8285
+    // a=extmap:<value["/"<direction>] <URI> <extensionattributes>
+    size_t offset = fields[0].size() + fields[1].size() + 1 + kLinePrefixLength;
+    if (encrypted) {
+      offset += fields[2].size() + 1;
+    }
+    offset++;
+    extmap->attributes = std::string(line.substr(offset));
+  }
   return true;
 }
 
