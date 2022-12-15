@@ -58,9 +58,11 @@ constexpr int kLagInFrames = 0;  // No look ahead.
 constexpr int kRtpTicksPerSecond = 90000;
 constexpr float kMinimumFrameRate = 1.0;
 
-aom_superblock_size_t GetSuperblockSize(int width, int height, int threads) {
+aom_superblock_size_t GetSuperblockSize(int width, int height, int threads,
+                                        is_screen) {
   int resolution = width * height;
-  if (threads >= 4 && resolution >= 960 * 540 && resolution < 1920 * 1080)
+  if (threads >= 4 && resolution >= 960 * 540 && resolution < 1920 * 1080 &&
+      !is_screen)
     return AOM_SUPERBLOCK_SIZE_64X64;
   else
     return AOM_SUPERBLOCK_SIZE_DYNAMIC;
@@ -291,7 +293,8 @@ int LibaomAv1Encoder::InitEncode(const VideoCodec* codec_settings,
   SET_ENCODER_PARAM_OR_RETURN_ERROR(AV1E_SET_ENABLE_REF_FRAME_MVS, 0);
   SET_ENCODER_PARAM_OR_RETURN_ERROR(
       AV1E_SET_SUPERBLOCK_SIZE,
-      GetSuperblockSize(cfg_.g_w, cfg_.g_h, cfg_.g_threads));
+      GetSuperblockSize(cfg_.g_w, cfg_.g_h, cfg_.g_threads,
+                        codec_settings->mode == VideoCodecMode::kScreensharing);
   SET_ENCODER_PARAM_OR_RETURN_ERROR(AV1E_SET_ENABLE_CFL_INTRA, 0);
   SET_ENCODER_PARAM_OR_RETURN_ERROR(AV1E_SET_ENABLE_SMOOTH_INTRA, 0);
   SET_ENCODER_PARAM_OR_RETURN_ERROR(AV1E_SET_ENABLE_ANGLE_DELTA, 0);
