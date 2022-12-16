@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06389096_2073f38e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-12-16T22:06:41Z",
+      "side": 1,
+      "message": "Hmm...looks like DTX only works with CELT at high complexity settings?",
+      "revId": "4e31f9643bb1aed6141498c5708a32e6b14c1343",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
