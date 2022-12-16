@@ -289,7 +289,7 @@ void OpusTest::TestDtxEffect(bool dtx, int block_length_ms) {
 
   // We input some silent segments. In DTX mode, the encoder will stop sending.
   // However, DTX may happen after a while.
-  for (int i = 0; i < 30; ++i) {
+  for (int i = 0; i < 100; ++i) {
     EXPECT_EQ(output_samples, static_cast<size_t>(EncodeDecode(
                                   opus_encoder_, silence, opus_decoder_,
                                   output_data_decode, &audio_type)));
