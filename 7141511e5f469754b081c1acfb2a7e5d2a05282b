@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "077f3c4e_c7e733ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-12-16T09:40:06Z",
+      "side": 1,
+      "message": "LGTM assuming the \"# temporary - bugs.webrtc.org/14775\" will be removed in the next few days/weeks.",
+      "revId": "7141511e5f469754b081c1acfb2a7e5d2a05282b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
