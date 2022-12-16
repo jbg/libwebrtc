@@ -154,10 +154,16 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
                        nullptr, typename T::Options(), network_thread_),
                    std::make_unique<typename T::MediaChannel>(
                        nullptr, typename T::Options(), network_thread_),
+                   std::make_unique<typename T::MediaChannel>(
+                       nullptr, typename T::Options(), network_thread_),
+                   std::make_unique<typename T::MediaChannel>(
+                       nullptr, typename T::Options(), network_thread_),
                    flags1, flags2);
   }
-  void CreateChannels(std::unique_ptr<typename T::MediaChannel> ch1,
-                      std::unique_ptr<typename T::MediaChannel> ch2,
+  void CreateChannels(std::unique_ptr<typename T::MediaChannel> ch1s,
+                      std::unique_ptr<typename T::MediaChannel> ch1r,
+                      std::unique_ptr<typename T::MediaChannel> ch2s,
+                      std::unique_ptr<typename T::MediaChannel> ch2r,
                       int flags1,
                       int flags2) {
     RTC_DCHECK(!channel1_);
@@ -235,10 +241,10 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
         fake_rtp_dtls_transport2_.get(), fake_rtcp_dtls_transport2_.get(),
         flags2);
 
-    channel1_ = CreateChannel(worker_thread, network_thread_, std::move(ch1),
-                              rtp_transport1_.get(), flags1);
-    channel2_ = CreateChannel(worker_thread, network_thread_, std::move(ch2),
-                              rtp_transport2_.get(), flags2);
+    channel1_ = CreateChannel(worker_thread, network_thread_, std::move(ch1s),
+                              std::move(ch1r), rtp_transport1_.get(), flags1);
+    channel2_ = CreateChannel(worker_thread, network_thread_, std::move(ch2s),
+                              std::move(ch2r), rtp_transport2_.get(), flags2);
     CreateContent(flags1, kPcmuCodec, kH264Codec, &local_media_content1_);
     CreateContent(flags2, kPcmuCodec, kH264Codec, &local_media_content2_);
     CopyContent(local_media_content1_, &remote_media_content1_);
@@ -261,7 +267,8 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
   std::unique_ptr<typename T::Channel> CreateChannel(
       rtc::Thread* worker_thread,
       rtc::Thread* network_thread,
-      std::unique_ptr<typename T::MediaChannel> ch,
+      std::unique_ptr<typename T::MediaChannel> ch_send,
+      std::unique_ptr<typename T::MediaChannel> ch_receive,
       webrtc::RtpTransportInternal* rtp_transport,
       int flags);
 
@@ -1474,14 +1481,15 @@ template <>
 std::unique_ptr<cricket::VoiceChannel> ChannelTest<VoiceTraits>::CreateChannel(
     rtc::Thread* worker_thread,
     rtc::Thread* network_thread,
-    std::unique_ptr<cricket::FakeVoiceMediaChannel> ch,
+    std::unique_ptr<cricket::FakeVoiceMediaChannel> send_ch,
+    std::unique_ptr<cricket::FakeVoiceMediaChannel> receive_ch,
     webrtc::RtpTransportInternal* rtp_transport,
     int flags) {
   rtc::Thread* signaling_thread = rtc::Thread::Current();
   auto channel = std::make_unique<cricket::VoiceChannel>(
-      worker_thread, network_thread, signaling_thread, std::move(ch),
-      cricket::CN_AUDIO, (flags & DTLS) != 0, webrtc::CryptoOptions(),
-      &ssrc_generator_);
+      worker_thread, network_thread, signaling_thread, std::move(send_ch),
+      std::move(receive_ch), cricket::CN_AUDIO, (flags & DTLS) != 0,
+      webrtc::CryptoOptions(), &ssrc_generator_);
   SendTask(network_thread, [&]() {
     RTC_DCHECK_RUN_ON(channel->network_thread());
     channel->SetRtpTransport(rtp_transport);
@@ -1560,14 +1568,15 @@ template <>
 std::unique_ptr<cricket::VideoChannel> ChannelTest<VideoTraits>::CreateChannel(
     rtc::Thread* worker_thread,
     rtc::Thread* network_thread,
-    std::unique_ptr<cricket::FakeVideoMediaChannel> ch,
+    std::unique_ptr<cricket::FakeVideoMediaChannel> send_ch,
+    std::unique_ptr<cricket::FakeVideoMediaChannel> receive_ch,
     webrtc::RtpTransportInternal* rtp_transport,
     int flags) {
   rtc::Thread* signaling_thread = rtc::Thread::Current();
   auto channel = std::make_unique<cricket::VideoChannel>(
-      worker_thread, network_thread, signaling_thread, std::move(ch),
-      cricket::CN_VIDEO, (flags & DTLS) != 0, webrtc::CryptoOptions(),
-      &ssrc_generator_);
+      worker_thread, network_thread, signaling_thread, std::move(send_ch),
+      std::move(receive_ch), cricket::CN_VIDEO, (flags & DTLS) != 0,
+      webrtc::CryptoOptions(), &ssrc_generator_);
   SendTask(network_thread, [&]() {
     RTC_DCHECK_RUN_ON(channel->network_thread());
     channel->SetRtpTransport(rtp_transport);
