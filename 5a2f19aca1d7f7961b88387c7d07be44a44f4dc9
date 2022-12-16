@@ -16,6 +16,23 @@
       "message": "Hi,\nWas wondering if we could get this review going.",
       "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c856a0_d63886db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2022-12-16T08:29:58Z",
+      "side": 1,
+      "message": "lgtm for channel_receive.cc. But I leave it to the other reviewers to review the rest of the files.",
+      "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
