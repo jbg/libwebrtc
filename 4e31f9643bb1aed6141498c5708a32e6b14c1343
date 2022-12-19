@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8502add4_9b26f7e4",
+        "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-12-19T10:43:06Z",
+      "side": 1,
+      "message": "Seems like setting complexity to 10 fixes this: https://source.chromium.org/chromium/chromium/src/+/main:third_party/opus/src/src/opus_encoder.c;l\u003d1126;drc\u003d0fa39b5867fd2657cec109e80fd10682dca03cde\n\nI guess the Opus level analysis needs to run for DTX to work with CELT (which it only does at the maximum complexity setting when using fixed point).\n\nSidenote: we really shouldn\u0027t treat \"arm\" as low performance CPUs (e.g. Apple M1).",
+      "parentUuid": "03914429_9711bace",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 77
+      },
+      "revId": "4e31f9643bb1aed6141498c5708a32e6b14c1343",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "972806a6_0e1c10b2",
         "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
         "patchSetId": 4
