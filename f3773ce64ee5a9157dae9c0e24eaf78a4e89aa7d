@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f816726a_975db391",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2022-12-19T16:42:02Z",
+      "side": 1,
+      "message": "LGTM but let\u0027s wait for the Chromium CL to roll into WebRTC.",
+      "revId": "f3773ce64ee5a9157dae9c0e24eaf78a4e89aa7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
