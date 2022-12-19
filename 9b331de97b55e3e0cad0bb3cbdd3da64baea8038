@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b45ef96_b78bbd7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-12-19T12:22:47Z",
+      "side": 1,
+      "message": "Sorry for slow review! lgtm.",
+      "revId": "9b331de97b55e3e0cad0bb3cbdd3da64baea8038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "112a7b4e_7acdd228",
+        "filename": "api/video_codecs/builtin_video_encoder_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-12-19T12:22:47Z",
+      "side": 1,
+      "message": "Consider including the header for absl::optional too.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 17
+      },
+      "revId": "9b331de97b55e3e0cad0bb3cbdd3da64baea8038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f89e6073_9e73d6e0",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2022-12-19T12:22:47Z",
+      "side": 1,
+      "message": "Could this be replace by \"-\u003e\" ?",
+      "range": {
+        "startLine": 460,
+        "startChar": 57,
+        "endLine": 460,
+        "endChar": 66
+      },
+      "revId": "9b331de97b55e3e0cad0bb3cbdd3da64baea8038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
