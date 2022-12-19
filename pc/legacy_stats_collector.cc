@@ -1096,15 +1096,18 @@ class MediaChannelStatsGatherer {
 
 class VoiceMediaChannelStatsGatherer final : public MediaChannelStatsGatherer {
  public:
-  VoiceMediaChannelStatsGatherer(
-      cricket::VoiceMediaChannel* voice_media_channel)
-      : voice_media_channel_(voice_media_channel) {
-    RTC_DCHECK(voice_media_channel_);
+  explicit VoiceMediaChannelStatsGatherer(
+      cricket::ChannelInterface* voice_channel)
+      : voice_channel_(voice_channel) {
+    RTC_DCHECK(voice_channel_);
   }
 
   bool GetStatsOnWorkerThread() override {
-    return voice_media_channel_->GetStats(&voice_media_info,
-                                          /*get_and_clear_legacy_stats=*/true);
+    return voice_channel_->voice_media_send_channel()->GetStats(
+               &voice_media_info,
+               /*get_and_clear_legacy_stats=*/true) &&
+           voice_channel_->voice_media_receive_channel()->GetStats(
+               &voice_media_info, true);
   }
 
   void ExtractStats(LegacyStatsCollector* collector) const override {
@@ -1123,20 +1126,23 @@ class VoiceMediaChannelStatsGatherer final : public MediaChannelStatsGatherer {
   }
 
  private:
-  cricket::VoiceMediaChannel* voice_media_channel_;
+  cricket::ChannelInterface* voice_channel_;
   cricket::VoiceMediaInfo voice_media_info;
 };
 
 class VideoMediaChannelStatsGatherer final : public MediaChannelStatsGatherer {
  public:
-  VideoMediaChannelStatsGatherer(
-      cricket::VideoMediaChannel* video_media_channel)
-      : video_media_channel_(video_media_channel) {
-    RTC_DCHECK(video_media_channel_);
+  explicit VideoMediaChannelStatsGatherer(
+      cricket::ChannelInterface* video_channel)
+      : video_channel_(video_channel) {
+    RTC_DCHECK(video_channel_);
   }
 
   bool GetStatsOnWorkerThread() override {
-    return video_media_channel_->GetStats(&video_media_info);
+    return video_channel_->video_media_send_channel()->GetStats(
+               &video_media_info) &&
+           video_channel_->video_media_receive_channel()->GetStats(
+               &video_media_info);
   }
 
   void ExtractStats(LegacyStatsCollector* collector) const override {
@@ -1147,20 +1153,18 @@ class VideoMediaChannelStatsGatherer final : public MediaChannelStatsGatherer {
   bool HasRemoteAudio() const override { return false; }
 
  private:
-  cricket::VideoMediaChannel* video_media_channel_;
+  cricket::ChannelInterface* video_channel_;
   cricket::VideoMediaInfo video_media_info;
 };
 
 std::unique_ptr<MediaChannelStatsGatherer> CreateMediaChannelStatsGatherer(
-    cricket::MediaChannel* channel) {
+    cricket::ChannelInterface* channel) {
   RTC_DCHECK(channel);
   if (channel->media_type() == cricket::MEDIA_TYPE_AUDIO) {
-    return std::make_unique<VoiceMediaChannelStatsGatherer>(
-        channel->AsVoiceChannel());
+    return std::make_unique<VoiceMediaChannelStatsGatherer>(channel);
   } else {
     RTC_DCHECK_EQ(channel->media_type(), cricket::MEDIA_TYPE_VIDEO);
-    return std::make_unique<VideoMediaChannelStatsGatherer>(
-        channel->AsVideoChannel());
+    return std::make_unique<VideoMediaChannelStatsGatherer>(channel);
   }
 }
 
@@ -1181,7 +1185,7 @@ void LegacyStatsCollector::ExtractMediaInfo(
         continue;
       }
       std::unique_ptr<MediaChannelStatsGatherer> gatherer =
-          CreateMediaChannelStatsGatherer(channel->media_channel());
+          CreateMediaChannelStatsGatherer(channel);
       gatherer->mid = channel->mid();
       gatherer->transport_name = transport_names_by_mid.at(gatherer->mid);
 
