@@ -258,6 +258,8 @@ void OpusTest::TestDtxEffect(bool dtx, int block_length_ms) {
   CreateSingleOrMultiStreamDecoder(&opus_decoder_, channels_, use_multistream_,
                                    decoder_sample_rate_hz_);
 
+  EXPECT_EQ(0, WebRtcOpus_SetComplexity(opus_encoder_, 10));
+
   // Set bitrate.
   EXPECT_EQ(
       0, WebRtcOpus_SetBitRate(opus_encoder_, channels_ == 1 ? 32000 : 64000));
