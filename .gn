@@ -75,4 +75,8 @@ default_args = {
   fuchsia_sdk_readelf_exec =
       "//third_party/llvm-build/Release+Asserts/bin/llvm-readelf"
   fuchsia_target_api_level = 9
+
+  # Chromium uses C++20 by default, but WebRTC want to stay on C++17 for now
+  # because of upstream projects.
+  use_cxx17 = true
 }
