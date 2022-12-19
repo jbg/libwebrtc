@@ -16,6 +16,69 @@
       "message": "Hmm...looks like DTX only works with CELT at high complexity settings?",
       "revId": "4e31f9643bb1aed6141498c5708a32e6b14c1343",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ea29b93_e68451fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2022-12-19T08:23:19Z",
+      "side": 1,
+      "message": "Thanks for this change. Just some minor comments/questions.",
+      "revId": "4e31f9643bb1aed6141498c5708a32e6b14c1343",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c6d61ad_38a94c15",
+        "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2022-12-19T08:23:19Z",
+      "side": 1,
+      "message": "Is this change intentional?",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 77
+      },
+      "revId": "4e31f9643bb1aed6141498c5708a32e6b14c1343",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972806a6_0e1c10b2",
+        "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2022-12-19T08:23:19Z",
+      "side": 1,
+      "message": "is it now 2 bytes because the unittest is encoding with Celt? \n\nmaybe we can update the comment.",
+      "range": {
+        "startLine": 385,
+        "startChar": 40,
+        "endLine": 385,
+        "endChar": 53
+      },
+      "revId": "4e31f9643bb1aed6141498c5708a32e6b14c1343",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
