@@ -106,6 +106,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bcf84ec_c9cb2d2b",
+        "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-12-19T15:56:19Z",
+      "side": 1,
+      "message": "I ended up only running the DTX tests with VOIP mode enabled. This cl introduces a slight regression, DTX will not work with OPUS_APPLICATION_AUDIO (used with stereo) and low complexity settings but I don\u0027t think anyone is using that configuration.",
+      "parentUuid": "8502add4_9b26f7e4",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 77
+      },
+      "revId": "4e31f9643bb1aed6141498c5708a32e6b14c1343",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "972806a6_0e1c10b2",
@@ -119,6 +143,30 @@
       "writtenOn": "2022-12-19T08:23:19Z",
       "side": 1,
       "message": "is it now 2 bytes because the unittest is encoding with Celt? \n\nmaybe we can update the comment.",
+      "range": {
+        "startLine": 385,
+        "startChar": 40,
+        "endLine": 385,
+        "endChar": 53
+      },
+      "revId": "4e31f9643bb1aed6141498c5708a32e6b14c1343",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aa42bc0_6d6ac7e0",
+        "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-12-19T15:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "972806a6_0e1c10b2",
       "range": {
         "startLine": 385,
         "startChar": 40,
