@@ -70,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e417dd_bbc04b50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2022-12-20T14:12:56Z",
+      "side": 1,
+      "message": "Ah, thank you!\n\nThe lack of `setUp` means these tests send a lot of messages to nil objects, thus doing nothing, which I think is an even bigger problem. As in, there is not even the code coverage one would expect.",
+      "parentUuid": "c0a74320_0235fbfa",
+      "revId": "bc52ecf8a22639467736c7830bd5cc94fcfd8fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b859fe77_4f6bd18b",
