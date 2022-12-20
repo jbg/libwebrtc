@@ -130,6 +130,7 @@ void ExtractCommonSendProperties(const cricket::MediaSenderInfo& info,
   if (!use_standard_bytes_stats) {
     bytes_sent += info.header_and_padding_bytes_sent;
   }
+  RTC_LOG(LS_ERROR) << "DEBUG: Add BytesSent in ExtractCommon";
   report->AddInt64(StatsReport::kStatsValueNameBytesSent, bytes_sent);
   if (info.rtt_ms >= 0) {
     report->AddInt64(StatsReport::kStatsValueNameRtt, info.rtt_ms);
@@ -616,6 +617,7 @@ void LegacyStatsCollector::GetStats(MediaStreamTrackInterface* track,
   RTC_DCHECK(reports != NULL);
   RTC_DCHECK(reports->empty());
 
+  RTC_LOG(LS_ERROR) << "DEBUG: LegacyStatsCollector called";
   rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
 
   if (!track) {
@@ -652,6 +654,7 @@ void LegacyStatsCollector::GetStats(MediaStreamTrackInterface* track,
 
 void LegacyStatsCollector::UpdateStats(
     PeerConnectionInterface::StatsOutputLevel level) {
+  RTC_LOG(LS_ERROR) << "DEBUG: UpdateStats";
   RTC_DCHECK_RUN_ON(pc_->signaling_thread());
   // Calls to UpdateStats() that occur less than kMinGatherStatsPeriodMs apart
   // will be ignored. Using a monotonic clock specifically for this, while using
@@ -664,6 +667,7 @@ void LegacyStatsCollector::UpdateStats(
   }
   cache_timestamp_ms_ = cache_now_ms;
   stats_gathering_started_ = GetTimeNow();
+  RTC_LOG(LS_ERROR) << "DEBUG: UpdateStats starting";
 
   // TODO(tommi): ExtractSessionInfo now has a single hop to the network thread
   // to fetch stats, then applies them on the signaling thread. See if we need
@@ -795,6 +799,7 @@ StatsReport* LegacyStatsCollector::AddConnectionInfoReport(
       {StatsReport::kStatsValueNameRecvPingRequests, info.recv_ping_requests},
       {StatsReport::kStatsValueNameRecvPingResponses, info.recv_ping_responses},
   };
+  RTC_LOG(LS_ERROR) << "DEBUG: Adding BytesSent in AddConnectionInfoReport";
   for (const auto& i : int64s)
     report->AddInt64(i.name, i.value);
 
@@ -1096,15 +1101,18 @@ class MediaChannelStatsGatherer {
 
 class VoiceMediaChannelStatsGatherer final : public MediaChannelStatsGatherer {
  public:
-  VoiceMediaChannelStatsGatherer(
-      cricket::VoiceMediaChannel* voice_media_channel)
-      : voice_media_channel_(voice_media_channel) {
-    RTC_DCHECK(voice_media_channel_);
+  explicit VoiceMediaChannelStatsGatherer(
+      cricket::ChannelInterface* voice_channel)
+      : voice_channel_(voice_channel) {
+    RTC_DCHECK(voice_channel_);
   }
 
   bool GetStatsOnWorkerThread() override {
-    return voice_media_channel_->GetStats(&voice_media_info,
-                                          /*get_and_clear_legacy_stats=*/true);
+    return voice_channel_->voice_media_send_channel()->GetStats(
+               &voice_media_info,
+               /*get_and_clear_legacy_stats=*/true) &&
+           voice_channel_->voice_media_receive_channel()->GetStats(
+               &voice_media_info, true);
   }
 
   void ExtractStats(LegacyStatsCollector* collector) const override {
@@ -1123,20 +1131,27 @@ class VoiceMediaChannelStatsGatherer final : public MediaChannelStatsGatherer {
   }
 
  private:
-  cricket::VoiceMediaChannel* voice_media_channel_;
+  cricket::ChannelInterface* voice_channel_;
   cricket::VoiceMediaInfo voice_media_info;
 };
 
 class VideoMediaChannelStatsGatherer final : public MediaChannelStatsGatherer {
  public:
-  VideoMediaChannelStatsGatherer(
-      cricket::VideoMediaChannel* video_media_channel)
-      : video_media_channel_(video_media_channel) {
-    RTC_DCHECK(video_media_channel_);
+  explicit VideoMediaChannelStatsGatherer(
+      cricket::ChannelInterface* video_channel)
+      : video_channel_(video_channel) {
+    RTC_DCHECK(video_channel_);
   }
 
   bool GetStatsOnWorkerThread() override {
-    return video_media_channel_->GetStats(&video_media_info);
+    RTC_LOG(LS_ERROR) << "DEBUG: GetStatsOnWorkerThread called";
+    bool result =
+        video_channel_->video_media_send_channel()->GetStats(&video_media_info);
+    RTC_LOG(LS_ERROR) << "DEBUG: Result of GetStatsOnWorkerThread 1 " << result;
+    result &= video_channel_->video_media_receive_channel()->GetStats(
+        &video_media_info);
+    RTC_LOG(LS_ERROR) << "DEBUG: Result of GetStatsOnWorkerThread 2 " << result;
+    return result;
   }
 
   void ExtractStats(LegacyStatsCollector* collector) const override {
@@ -1147,20 +1162,18 @@ class VideoMediaChannelStatsGatherer final : public MediaChannelStatsGatherer {
   bool HasRemoteAudio() const override { return false; }
 
  private:
-  cricket::VideoMediaChannel* video_media_channel_;
+  cricket::ChannelInterface* video_channel_;
   cricket::VideoMediaInfo video_media_info;
 };
 
 std::unique_ptr<MediaChannelStatsGatherer> CreateMediaChannelStatsGatherer(
-    cricket::MediaChannel* channel) {
+    cricket::ChannelInterface* channel) {
   RTC_DCHECK(channel);
   if (channel->media_type() == cricket::MEDIA_TYPE_AUDIO) {
-    return std::make_unique<VoiceMediaChannelStatsGatherer>(
-        channel->AsVoiceChannel());
+    return std::make_unique<VoiceMediaChannelStatsGatherer>(channel);
   } else {
     RTC_DCHECK_EQ(channel->media_type(), cricket::MEDIA_TYPE_VIDEO);
-    return std::make_unique<VideoMediaChannelStatsGatherer>(
-        channel->AsVideoChannel());
+    return std::make_unique<VideoMediaChannelStatsGatherer>(channel);
   }
 }
 
@@ -1170,6 +1183,7 @@ void LegacyStatsCollector::ExtractMediaInfo(
     const std::map<std::string, std::string>& transport_names_by_mid) {
   RTC_DCHECK_RUN_ON(pc_->signaling_thread());
 
+  RTC_LOG(LS_ERROR) << "DEBUG: ExtractMediaInfo called";
   std::vector<std::unique_ptr<MediaChannelStatsGatherer>> gatherers;
 
   auto transceivers = pc_->GetTransceiversInternal();
@@ -1181,7 +1195,7 @@ void LegacyStatsCollector::ExtractMediaInfo(
         continue;
       }
       std::unique_ptr<MediaChannelStatsGatherer> gatherer =
-          CreateMediaChannelStatsGatherer(channel->media_channel());
+          CreateMediaChannelStatsGatherer(channel);
       gatherer->mid = channel->mid();
       gatherer->transport_name = transport_names_by_mid.at(gatherer->mid);
 

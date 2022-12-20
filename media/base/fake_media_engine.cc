@@ -452,6 +452,8 @@ VoiceMediaChannel* FakeVoiceEngine::CreateMediaChannel(
 
   FakeVoiceMediaChannel* ch =
       new FakeVoiceMediaChannel(this, options, call->network_thread());
+  RTC_LOG(LS_ERROR) << "DEBUG: Creating fake voice channel "
+                    << channels_.size();
   channels_.push_back(ch);
   return ch;
 }
@@ -519,6 +521,8 @@ VideoMediaChannel* FakeVideoEngine::CreateMediaChannel(
 
   FakeVideoMediaChannel* ch =
       new FakeVideoMediaChannel(this, options, call->network_thread());
+  RTC_LOG(LS_ERROR) << "DEBUG: Creating fake video channel "
+                    << channels_.size();
   channels_.emplace_back(ch);
   return ch;
 }

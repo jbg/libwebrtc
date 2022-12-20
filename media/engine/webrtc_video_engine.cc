@@ -1614,6 +1614,7 @@ void WebRtcVideoChannel::SetDefaultSink(
 }
 
 bool WebRtcVideoChannel::GetStats(VideoMediaInfo* info) {
+  RTC_LOG(LS_ERROR) << "DEBUG: VideoChannelGetStats called";
   RTC_DCHECK_RUN_ON(&thread_checker_);
   TRACE_EVENT0("webrtc", "WebRtcVideoChannel::GetStats");
 
@@ -1626,7 +1627,6 @@ bool WebRtcVideoChannel::GetStats(VideoMediaInfo* info) {
     log_stats = true;
   }
 
-  info->Clear();
   FillSenderStats(info, log_stats);
   FillReceiverStats(info, log_stats);
   FillSendAndReceiveCodecStats(info);
@@ -1666,9 +1666,13 @@ void WebRtcVideoChannel::FillSenderStats(VideoMediaInfo* video_media_info,
 
 void WebRtcVideoChannel::FillReceiverStats(VideoMediaInfo* video_media_info,
                                            bool log_stats) {
+  RTC_LOG(LS_ERROR)
+      << "DEBUG: FillreceiverStats called with receive streams size "
+      << receive_streams_.size();
   for (std::map<uint32_t, WebRtcVideoReceiveStream*>::iterator it =
            receive_streams_.begin();
        it != receive_streams_.end(); ++it) {
+    RTC_LOG(LS_ERROR) << "DEBUG: FillReceiverStats push an entry";
     video_media_info->receivers.push_back(
         it->second->GetVideoReceiverInfo(log_stats));
   }
