@@ -264,6 +264,26 @@ CMSampleBufferRef createTestSampleBufferRef() {
 #endif
 }
 
+- (void)testRotationCameraBackLandscapeLeft {
+  [self testRotationCamera:AVCaptureDevicePositionBack
+           withOrientation:UIDeviceOrientationLandscapeLeft];
+}
+
+- (void)testRotationCameraFrontLandscapeLeft {
+  [self testRotationCamera:AVCaptureDevicePositionFront
+           withOrientation:UIDeviceOrientationLandscapeLeft];
+}
+
+- (void)testRotationCameraBackLandscapeRight {
+  [self testRotationCamera:AVCaptureDevicePositionBack
+           withOrientation:UIDeviceOrientationLandscapeRight];
+}
+
+- (void)testRotationCameraFrontLandscapeRight {
+  [self testRotationCamera:AVCaptureDevicePositionFront
+           withOrientation:UIDeviceOrientationLandscapeRight];
+}
+
 - (void)setExif:(CMSampleBufferRef)sampleBuffer {
   rtc::ScopedCFTypeRef<CFMutableDictionaryRef> exif(CFDictionaryCreateMutable(
       kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks));
