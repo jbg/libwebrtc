@@ -39,6 +39,30 @@
       },
       "revId": "81e903def8ca5845a6b62aa6b9ae52ec50b70106",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab02f87a_e15c6e75",
+        "filename": "modules/audio_coding/codecs/opus/opus_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2022-12-20T10:22:47Z",
+      "side": 1,
+      "message": "I should make the comment better. If the Opus VAD isn\u0027t used (due to complexity), then SILK mode is forced when the application is set to VOIP. So DTX doesn\u0027t work when OPUS_APPLICATION_AUDIO is used AND the complexity is low.",
+      "parentUuid": "99ecc0c6_31d320bb",
+      "range": {
+        "startLine": 740,
+        "startChar": 35,
+        "endLine": 740,
+        "endChar": 50
+      },
+      "revId": "81e903def8ca5845a6b62aa6b9ae52ec50b70106",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
