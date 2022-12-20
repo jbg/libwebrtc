@@ -163,12 +163,6 @@ ConnectionContext::ConnectionContext(
   signaling_thread_->SetDispatchWarningMs(100);
   worker_thread_->SetDispatchWarningMs(30);
   network_thread_->SetDispatchWarningMs(10);
-
-  if (media_engine_) {
-    // TODO(tommi): Change VoiceEngine to do ctor time initialization so that
-    // this isn't necessary.
-    worker_thread_->BlockingCall([&] { media_engine_->Init(); });
-  }
 }
 
 ConnectionContext::~ConnectionContext() {

@@ -33,6 +33,7 @@ AudioState::AudioState(const AudioState::Config& config)
                        config_.audio_processing.get(),
                        config_.async_audio_processing_factory.get()) {
   process_thread_checker_.Detach();
+  thread_checker_.Detach();
   RTC_DCHECK(config_.audio_mixer);
   RTC_DCHECK(config_.audio_device_module);
 }
@@ -154,7 +155,6 @@ void AudioState::SetRecording(bool enabled) {
 }
 
 void AudioState::SetStereoChannelSwapping(bool enable) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
   audio_transport_.SetStereoChannelSwapping(enable);
 }
 

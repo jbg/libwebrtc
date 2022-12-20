@@ -21,6 +21,7 @@
 #include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
 #include "api/task_queue/pending_task_safety_flag.h"
+#include "api/task_queue/task_queue_base.h"
 #include "api/task_queue/task_queue_factory.h"
 #include "api/transport/rtp/rtp_source.h"
 #include "call/audio_state.h"
@@ -44,8 +45,6 @@ class WebRtcVoiceMediaChannel;
 // WebRtcVoiceEngine is a class to be used with CompositeMediaEngine.
 // It uses the WebRtc VoiceEngine library for audio handling.
 class WebRtcVoiceEngine final : public VoiceEngineInterface {
-  friend class WebRtcVoiceMediaChannel;
-
  public:
   WebRtcVoiceEngine(
       webrtc::TaskQueueFactory* task_queue_factory,
@@ -62,9 +61,6 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
   WebRtcVoiceEngine& operator=(const WebRtcVoiceEngine&) = delete;
 
   ~WebRtcVoiceEngine() override;
-
-  // Does initialization that needs to occur on the worker thread.
-  void Init() override;
 
   rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const override;
   VoiceMediaChannel* CreateMediaChannel(
@@ -88,19 +84,18 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
   void StopAecDump() override;
 
  private:
+  friend class WebRtcVoiceMediaChannel;
+
   // Every option that is "set" will be applied. Every option not "set" will be
   // ignored. This allows us to selectively turn on and off different options
   // easily at any time.
-  void ApplyOptions(const AudioOptions& options);
+  void ApplyOptionsOnWorkerThread(const AudioOptions& options);
+  // Version that doesn't assume running on the worker thread.
+  void ApplyOptionsInternal(const AudioOptions& options);
 
   int CreateVoEChannel();
 
-  webrtc::TaskQueueFactory* const task_queue_factory_;
-  std::unique_ptr<rtc::TaskQueue> low_priority_worker_queue_;
-
-  webrtc::AudioDeviceModule* adm();
-  webrtc::AudioProcessing* apm() const;
-  webrtc::AudioState* audio_state();
+  rtc::TaskQueue low_priority_worker_queue_;
 
   std::vector<AudioCodec> CollectCodecs(
       const std::vector<webrtc::AudioCodecSpec>& specs) const;
