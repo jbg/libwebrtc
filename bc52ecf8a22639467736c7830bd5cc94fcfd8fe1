@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ead25db_b769058a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2022-12-20T12:44:55Z",
+      "side": 1,
+      "message": "Do I assume correctly that these tests do not run in automation anywhere?",
+      "revId": "bc52ecf8a22639467736c7830bd5cc94fcfd8fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b859fe77_4f6bd18b",
@@ -48,6 +65,24 @@
       "writtenOn": "2022-12-20T11:10:06Z",
       "side": 1,
       "message": "Shouldn\u0027t we implement `tearDown` as we did in RTCCameraVideoCapturerTests?",
+      "revId": "bc52ecf8a22639467736c7830bd5cc94fcfd8fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8657e01b_0ce86409",
+        "filename": "sdk/objc/unittests/RTCCameraVideoCapturerTests.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2022-12-20T12:44:55Z",
+      "side": 1,
+      "message": "Ah yes, good catch! I first tried an approach with inheritance, that\u0027s why it is still missing here.",
+      "parentUuid": "b859fe77_4f6bd18b",
       "revId": "bc52ecf8a22639467736c7830bd5cc94fcfd8fe1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
