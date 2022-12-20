@@ -72,6 +72,7 @@ webrtc::RTCError InvokeSetParametersCallback(SetParametersCallback& callback,
 namespace cricket {
 
 class AudioSource;
+class MediaChannel;  // TODO(bugs.webrtc.org/13931): Delete when irrelevant
 class VideoCapturer;
 struct RtpHeader;
 struct VideoFormat;
@@ -212,6 +213,17 @@ class MediaBaseChannelInterface {
   // worker_thread.
   virtual void SetExtmapAllowMixed(bool extmap_allow_mixed) = 0;
   virtual bool ExtmapAllowMixed() const = 0;
+
+  // Sets the abstract interface class for sending RTP/RTCP data.
+  virtual void SetInterface(MediaChannelNetworkInterface* iface) = 0;
+
+  // Returns `true` if a non-null MediaChannelNetworkInterface pointer is held.
+  // Must be called on the network thread.
+  virtual bool HasNetworkInterface() const = 0;
+
+  // Get the underlying send/receive implementation channel for testing.
+  // TODO(bugs.webrtc.org/13931): Remove method and the fakes that depend on it.
+  virtual MediaChannel* ImplForTesting() = 0;
 };
 
 class MediaSendChannelInterface
@@ -263,14 +275,9 @@ class MediaReceiveChannelInterface
  public:
   virtual ~MediaReceiveChannelInterface() = default;
 
-  virtual VideoMediaReceiveChannelInterface* AsVideoReceiveChannel() {
-    RTC_CHECK_NOTREACHED();
-    return nullptr;
-  }
-  virtual VoiceMediaReceiveChannelInterface* AsVoiceReceiveChannel() {
-    RTC_CHECK_NOTREACHED();
-    return nullptr;
-  }
+  virtual VideoMediaReceiveChannelInterface* AsVideoReceiveChannel() = 0;
+  virtual VoiceMediaReceiveChannelInterface* AsVoiceReceiveChannel() = 0;
+
   // Creates a new incoming media stream with SSRCs, CNAME as described
   // by sp. In the case of a sp without SSRCs, the unsignaled sp is cached
   // to be used later for unsignaled streams received.
@@ -801,6 +808,9 @@ class VoiceMediaSendChannelInterface : public MediaSendChannelInterface {
   // The valid value for the `event` are 0 to 15 which corresponding to
   // DTMF event 0-9, *, #, A-D.
   virtual bool InsertDtmf(uint32_t ssrc, int event, int duration) = 0;
+  // Gets quality stats for the channel. Accumulates stats - does not clear.
+  virtual bool GetStats(VoiceMediaInfo* info,
+                        bool get_and_clear_legacy_stats) = 0;
 };
 
 class VoiceMediaReceiveChannelInterface : public MediaReceiveChannelInterface {
@@ -824,6 +834,10 @@ class VoiceMediaReceiveChannelInterface : public MediaReceiveChannelInterface {
       std::unique_ptr<webrtc::AudioSinkInterface> sink) = 0;
   virtual void SetDefaultRawAudioSink(
       std::unique_ptr<webrtc::AudioSinkInterface> sink) = 0;
+
+  // Gets quality stats for the channel. Accumulates stats - does not clear.
+  virtual bool GetStats(VoiceMediaInfo* info,
+                        bool get_and_clear_legacy_stats) = 0;
 };
 
 // TODO(deadbeef): Rename to VideoSenderParameters, since they're intended to
@@ -865,6 +879,18 @@ class VideoMediaSendChannelInterface : public MediaSendChannelInterface {
                                     const std::vector<std::string>& rids) = 0;
   // Enable network condition based codec switching.
   virtual void SetVideoCodecSwitchingEnabled(bool enabled) = 0;
+  // This fills the "bitrate parts" (rtx, video bitrate) of the
+  // BandwidthEstimationInfo, since that part that isn't possible to get
+  // through webrtc::Call::GetStats, as they are statistics of the send
+  // streams.
+  // TODO(holmer): We should change this so that either BWE graphs doesn't
+  // need access to bitrates of the streams, or change the (RTC)StatsCollector
+  // so that it's getting the send stream stats separately by calling
+  // GetStats(), and merges with BandwidthEstimationInfo by itself.
+  // Accumulates, does not clear.
+  virtual void FillBitrateInfo(BandwidthEstimationInfo* bwe_info) = 0;
+  // Gets quality stats for the channel. Accumulates, does not clear.
+  virtual bool GetStats(VideoMediaInfo* info) = 0;
 };
 
 class VideoMediaReceiveChannelInterface : public MediaReceiveChannelInterface {
@@ -893,6 +919,9 @@ class VideoMediaReceiveChannelInterface : public MediaReceiveChannelInterface {
       std::function<void(const webrtc::RecordableEncodedFrame&)> callback) = 0;
   // Clear recordable encoded frame callback for `ssrc`
   virtual void ClearRecordableEncodedFrameCallback(uint32_t ssrc) = 0;
+
+  // Gets quality stats for the channel. Accumulates, does not clear.
+  virtual bool GetStats(VideoMediaInfo* info) = 0;
 };
 
 // Info about data received in DataMediaChannel.  For use in
