@@ -2277,7 +2277,10 @@ bool WebRtcVoiceMediaChannel::GetStats(VoiceMediaInfo* info,
   RTC_DCHECK(info);
 
   // Get SSRC and stats for each sender.
-  RTC_DCHECK_EQ(info->senders.size(), 0U);
+  // With separate send and receive channels, we expect GetStats to be called on
+  // both, and accumulate info, but only one channel (the send one) should have
+  // senders.
+  RTC_DCHECK(info->senders.size() == 0U || send_streams_.size() == 0);
   for (const auto& stream : send_streams_) {
     webrtc::AudioSendStream::Stats stats =
         stream.second->GetStats(recv_streams_.size() > 0);
