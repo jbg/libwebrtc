@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f034229_9a1b0794",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2022-12-20T17:56:19Z",
+      "side": 1,
+      "message": "I noticed testRotationCamera was not being run, as it takes args. Those args were passed back when these were gtests.",
+      "revId": "9847273ae15f7e734a3c8b7f94d6b52f29cea007",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
