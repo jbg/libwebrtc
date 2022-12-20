@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25c05c37_e6713685",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-12-20T11:10:06Z",
+      "side": 1,
+      "message": "Thanks for the change!",
+      "revId": "bc52ecf8a22639467736c7830bd5cc94fcfd8fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b859fe77_4f6bd18b",
+        "filename": "sdk/objc/unittests/RTCCameraVideoCapturerTests.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-12-20T11:10:06Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we implement `tearDown` as we did in RTCCameraVideoCapturerTests?",
+      "revId": "bc52ecf8a22639467736c7830bd5cc94fcfd8fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
