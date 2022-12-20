@@ -296,7 +296,9 @@ WebRtcVoiceEngine::WebRtcVoiceEngine(
     rtc::scoped_refptr<webrtc::AudioProcessing> audio_processing,
     webrtc::AudioFrameProcessor* audio_frame_processor,
     const webrtc::FieldTrialsView& trials)
-    : task_queue_factory_(task_queue_factory),
+    : low_priority_worker_queue_(task_queue_factory->CreateTaskQueue(
+          "rtc-low-prio",
+          webrtc::TaskQueueFactory::Priority::LOW)),
       adm_(adm),
       encoder_factory_(encoder_factory),
       decoder_factory_(decoder_factory),
@@ -311,32 +313,6 @@ WebRtcVoiceEngine::WebRtcVoiceEngine(
   RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::WebRtcVoiceEngine";
   RTC_DCHECK(decoder_factory);
   RTC_DCHECK(encoder_factory);
-  // The rest of our initialization will happen in Init.
-}
-
-WebRtcVoiceEngine::~WebRtcVoiceEngine() {
-  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::~WebRtcVoiceEngine";
-  if (initialized_) {
-    StopAecDump();
-
-    // Stop AudioDevice.
-    adm()->StopPlayout();
-    adm()->StopRecording();
-    adm()->RegisterAudioCallback(nullptr);
-    adm()->Terminate();
-  }
-}
-
-void WebRtcVoiceEngine::Init() {
-  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::Init";
-
-  // TaskQueue expects to be created/destroyed on the same thread.
-  RTC_DCHECK(!low_priority_worker_queue_);
-  low_priority_worker_queue_.reset(
-      new rtc::TaskQueue(task_queue_factory_->CreateTaskQueue(
-          "rtc-low-prio", webrtc::TaskQueueFactory::Priority::LOW)));
 
   // Load our audio codec lists.
   RTC_LOG(LS_VERBOSE) << "Supported send codecs in order of preference:";
@@ -355,11 +331,11 @@ void WebRtcVoiceEngine::Init() {
   // No ADM supplied? Create a default one.
   if (!adm_) {
     adm_ = webrtc::AudioDeviceModule::Create(
-        webrtc::AudioDeviceModule::kPlatformDefaultAudio, task_queue_factory_);
+        webrtc::AudioDeviceModule::kPlatformDefaultAudio, task_queue_factory);
   }
 #endif  // WEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE
-  RTC_CHECK(adm());
-  webrtc::adm_helpers::Init(adm());
+  RTC_CHECK(adm_);
+  webrtc::adm_helpers::Init(adm_.get());
 
   // Set up AudioState.
   {
@@ -374,12 +350,12 @@ void WebRtcVoiceEngine::Init() {
     if (audio_frame_processor_)
       config.async_audio_processing_factory =
           rtc::make_ref_counted<webrtc::AsyncAudioProcessing::Factory>(
-              *audio_frame_processor_, *task_queue_factory_);
+              *audio_frame_processor_, *task_queue_factory);
     audio_state_ = webrtc::AudioState::Create(config);
   }
 
   // Connect the ADM to our audio path.
-  adm()->RegisterAudioCallback(audio_state()->audio_transport());
+  adm_->RegisterAudioCallback(audio_state_->audio_transport());
 
   // Set default engine options.
   {
@@ -397,9 +373,20 @@ void WebRtcVoiceEngine::Init() {
     options.audio_jitter_buffer_max_packets = 200;
     options.audio_jitter_buffer_fast_accelerate = false;
     options.audio_jitter_buffer_min_delay_ms = 0;
-    ApplyOptions(options);
+    ApplyOptionsInternal(options);
   }
-  initialized_ = true;
+}
+
+WebRtcVoiceEngine::~WebRtcVoiceEngine() {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::~WebRtcVoiceEngine";
+  StopAecDump();
+
+  // Stop AudioDevice.
+  adm_->StopPlayout();
+  adm_->StopRecording();
+  adm_->RegisterAudioCallback(nullptr);
+  adm_->Terminate();
 }
 
 rtc::scoped_refptr<webrtc::AudioState> WebRtcVoiceEngine::GetAudioState()
@@ -418,9 +405,14 @@ VoiceMediaChannel* WebRtcVoiceEngine::CreateMediaChannel(
                                      call);
 }
 
-void WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
+void WebRtcVoiceEngine::ApplyOptionsOnWorkerThread(
+    const AudioOptions& options_in) {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::ApplyOptions: "
+  ApplyOptionsInternal(options_in);
+}
+
+void WebRtcVoiceEngine::ApplyOptionsInternal(const AudioOptions& options_in) {
+  RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::ApplyOptionsInternal: "
                    << options_in.ToString();
   AudioOptions options = options_in;  // The options are modified below.
 
@@ -476,12 +468,12 @@ void WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
     // Android and in combination with Java based audio layer.
     // TODO(henrika): investigate possibility to support built-in EC also
     // in combination with Open SL ES audio.
-    const bool built_in_aec = adm()->BuiltInAECIsAvailable();
+    const bool built_in_aec = adm_->BuiltInAECIsAvailable();
     if (built_in_aec) {
       // Built-in EC exists on this device. Enable/Disable it according to the
       // echo_cancellation audio option.
       const bool enable_built_in_aec = *options.echo_cancellation;
-      if (adm()->EnableBuiltInAEC(enable_built_in_aec) == 0 &&
+      if (adm_->EnableBuiltInAEC(enable_built_in_aec) == 0 &&
           enable_built_in_aec) {
         // Disable internal software EC if built-in EC is enabled,
         // i.e., replace the software EC with the built-in EC.
@@ -493,9 +485,9 @@ void WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
   }
 
   if (options.auto_gain_control) {
-    bool built_in_agc_avaliable = adm()->BuiltInAGCIsAvailable();
+    bool built_in_agc_avaliable = adm_->BuiltInAGCIsAvailable();
     if (built_in_agc_avaliable) {
-      if (adm()->EnableBuiltInAGC(*options.auto_gain_control) == 0 &&
+      if (adm_->EnableBuiltInAGC(*options.auto_gain_control) == 0 &&
           *options.auto_gain_control) {
         // Disable internal software AGC if built-in AGC is enabled,
         // i.e., replace the software AGC with the built-in AGC.
@@ -507,9 +499,9 @@ void WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
   }
 
   if (options.noise_suppression) {
-    if (adm()->BuiltInNSIsAvailable()) {
+    if (adm_->BuiltInNSIsAvailable()) {
       bool builtin_ns = *options.noise_suppression;
-      if (adm()->EnableBuiltInNS(builtin_ns) == 0 && builtin_ns) {
+      if (adm_->EnableBuiltInNS(builtin_ns) == 0 && builtin_ns) {
         // Disable internal software NS if built-in NS is enabled,
         // i.e., replace the software NS with the built-in NS.
         options.noise_suppression = false;
@@ -520,7 +512,7 @@ void WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
   }
 
   if (options.stereo_swapping) {
-    audio_state()->SetStereoChannelSwapping(*options.stereo_swapping);
+    audio_state_->SetStereoChannelSwapping(*options.stereo_swapping);
   }
 
   if (options.audio_jitter_buffer_max_packets) {
@@ -536,12 +528,11 @@ void WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
         *options.audio_jitter_buffer_min_delay_ms;
   }
 
-  webrtc::AudioProcessing* ap = apm();
-  if (!ap) {
+  if (!apm_) {
     return;
   }
 
-  webrtc::AudioProcessing::Config apm_config = ap->GetConfig();
+  webrtc::AudioProcessing::Config apm_config = apm_->GetConfig();
 
   if (options.echo_cancellation) {
     apm_config.echo_canceller.enabled = *options.echo_cancellation;
@@ -571,7 +562,7 @@ void WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
         webrtc::AudioProcessing::Config::NoiseSuppression::Level::kHigh;
   }
 
-  ap->ApplyConfig(apm_config);
+  apm_->ApplyConfig(apm_config);
 }
 
 const std::vector<AudioCodec>& WebRtcVoiceEngine::send_codecs() const {
@@ -602,44 +593,25 @@ bool WebRtcVoiceEngine::StartAecDump(webrtc::FileWrapper file,
                                      int64_t max_size_bytes) {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
 
-  webrtc::AudioProcessing* ap = apm();
-  if (!ap) {
+  if (!apm_) {
     RTC_LOG(LS_WARNING)
         << "Attempting to start aecdump when no audio processing module is "
            "present, hence no aecdump is started.";
     return false;
   }
 
-  return ap->CreateAndAttachAecDump(file.Release(), max_size_bytes,
-                                    low_priority_worker_queue_.get());
+  return apm_->CreateAndAttachAecDump(file.Release(), max_size_bytes,
+                                      &low_priority_worker_queue_);
 }
 
 void WebRtcVoiceEngine::StopAecDump() {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  webrtc::AudioProcessing* ap = apm();
-  if (ap) {
-    ap->DetachAecDump();
+  if (apm_) {
+    apm_->DetachAecDump();
   } else {
     RTC_LOG(LS_WARNING) << "Attempting to stop aecdump when no audio "
                            "processing module is present";
   }
-}
-
-webrtc::AudioDeviceModule* WebRtcVoiceEngine::adm() {
-  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  RTC_DCHECK(adm_);
-  return adm_.get();
-}
-
-webrtc::AudioProcessing* WebRtcVoiceEngine::apm() const {
-  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  return apm_.get();
-}
-
-webrtc::AudioState* WebRtcVoiceEngine::audio_state() {
-  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  RTC_DCHECK(audio_state_);
-  return audio_state_.get();
 }
 
 std::vector<AudioCodec> WebRtcVoiceEngine::CollectCodecs(
@@ -1488,7 +1460,7 @@ bool WebRtcVoiceMediaChannel::SetOptions(const AudioOptions& options) {
   // on top.  This means there is no way to "clear" options such that
   // they go back to the engine default.
   options_.SetAll(options);
-  engine()->ApplyOptions(options_);
+  engine()->ApplyOptionsOnWorkerThread(options_);
 
   absl::optional<std::string> audio_network_adaptor_config =
       GetAudioNetworkAdaptorConfig(options_);
@@ -1789,15 +1761,15 @@ void WebRtcVoiceMediaChannel::SetSend(bool send) {
 
   // Apply channel specific options.
   if (send) {
-    engine()->ApplyOptions(options_);
+    engine()->ApplyOptionsOnWorkerThread(options_);
 
     // Initialize the ADM for recording (this may take time on some platforms,
     // e.g. Android).
     if (options_.init_recording_on_send.value_or(true) &&
         // InitRecording() may return an error if the ADM is already recording.
-        !engine()->adm()->RecordingIsInitialized() &&
-        !engine()->adm()->Recording()) {
-      if (engine()->adm()->InitRecording() != 0) {
+        !engine()->adm_->RecordingIsInitialized() &&
+        !engine()->adm_->Recording()) {
+      if (engine()->adm_->InitRecording() != 0) {
         RTC_LOG(LS_WARNING) << "Failed to initialize recording";
       }
     }
@@ -2242,9 +2214,8 @@ bool WebRtcVoiceMediaChannel::MuteStream(uint32_t ssrc, bool muted) {
   for (const auto& kv : send_streams_) {
     all_muted = all_muted && kv.second->muted();
   }
-  webrtc::AudioProcessing* ap = engine()->apm();
-  if (ap) {
-    ap->set_output_will_be_muted(all_muted);
+  if (engine()->apm_) {
+    engine()->apm_->set_output_will_be_muted(all_muted);
   }
 
   return true;
@@ -2421,7 +2392,7 @@ bool WebRtcVoiceMediaChannel::GetStats(VoiceMediaInfo* info,
     info->receive_codecs.insert(
         std::make_pair(codec_params.payload_type, std::move(codec_params)));
   }
-  info->device_underrun_count = engine_->adm()->GetPlayoutUnderrunCount();
+  info->device_underrun_count = engine_->adm_->GetPlayoutUnderrunCount();
 
   return true;
 }

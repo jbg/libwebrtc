@@ -88,10 +88,6 @@ class VoiceEngineInterface : public RtpHeaderExtensionQueryInterface {
   VoiceEngineInterface(const VoiceEngineInterface&) = delete;
   VoiceEngineInterface& operator=(const VoiceEngineInterface&) = delete;
 
-  // Initialization
-  // Starts the engine.
-  virtual void Init() = 0;
-
   // TODO(solenberg): Remove once VoE API refactoring is done.
   virtual rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const = 0;
 
@@ -158,9 +154,6 @@ class MediaEngineInterface {
  public:
   virtual ~MediaEngineInterface() {}
 
-  // Initialization. Needs to be called on the worker thread.
-  virtual bool Init() = 0;
-
   virtual VoiceEngineInterface& voice() = 0;
   virtual VideoEngineInterface& video() = 0;
   virtual const VoiceEngineInterface& voice() const = 0;
@@ -178,9 +171,6 @@ class CompositeMediaEngine : public MediaEngineInterface {
   CompositeMediaEngine(std::unique_ptr<VoiceEngineInterface> audio_engine,
                        std::unique_ptr<VideoEngineInterface> video_engine);
   ~CompositeMediaEngine() override;
-
-  // Always succeeds.
-  bool Init() override;
 
   VoiceEngineInterface& voice() override;
   VideoEngineInterface& video() override;

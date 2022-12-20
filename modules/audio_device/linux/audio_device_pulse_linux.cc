@@ -80,6 +80,7 @@ AudioDeviceLinuxPulse::AudioDeviceLinuxPulse()
       _recStreamFlags(0),
       _playStreamFlags(0) {
   RTC_DLOG(LS_INFO) << __FUNCTION__ << " created";
+  thread_checker_.Detach();
 
   memset(_paServerVersion, 0, sizeof(_paServerVersion));
   memset(&_playBufferAttr, 0, sizeof(_playBufferAttr));
@@ -135,7 +136,7 @@ int32_t AudioDeviceLinuxPulse::ActiveAudioLayer(
 }
 
 AudioDeviceGeneric::InitStatus AudioDeviceLinuxPulse::Init() {
-  RTC_DCHECK(thread_checker_.IsCurrent());
+  // RTC_DCHECK(thread_checker_.IsCurrent());
   if (_initialized) {
     return InitStatus::OK;
   }
@@ -1302,7 +1303,7 @@ void AudioDeviceLinuxPulse::PaStreamStateCallback(pa_stream* p, void* pThis) {
 }
 
 void AudioDeviceLinuxPulse::PaContextStateCallbackHandler(pa_context* c) {
-  RTC_LOG(LS_VERBOSE) << "context state cb";
+  RTC_LOG(LS_ERROR) << "context state cb";
 
   pa_context_state_t state = LATE(pa_context_get_state)(c);
   switch (state) {
@@ -1596,16 +1597,72 @@ int32_t AudioDeviceLinuxPulse::InitPulseAudio() {
   // Set state callback function
   LATE(pa_context_set_state_callback)(_paContext, PaContextStateCallback, this);
 
+  pa_context_state_t sstate = LATE(pa_context_get_state)(_paContext);
+  switch (sstate) {
+    case PA_CONTEXT_UNCONNECTED:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_UNCONNECTED";
+      break;
+    case PA_CONTEXT_CONNECTING:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_CONNECTING";
+      break;
+    case PA_CONTEXT_AUTHORIZING:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_AUTHORIZING";
+      break;
+    case PA_CONTEXT_SETTING_NAME:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_SETTING_NAME";
+      break;
+    case PA_CONTEXT_FAILED:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_FAILED";
+      break;
+    case PA_CONTEXT_TERMINATED:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_TERMINATED";
+      break;
+    case PA_CONTEXT_READY:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_READY";
+      break;
+    default:
+      RTC_LOG(LS_ERROR) << "(unknown state)";
+  }
+      RTC_LOG(LS_ERROR) << "pa_context_connect";
+
   // Connect the context to a server (default)
   _paStateChanged = false;
   retVal =
       LATE(pa_context_connect)(_paContext, NULL, PA_CONTEXT_NOAUTOSPAWN, NULL);
+
+sstate = LATE(pa_context_get_state)(_paContext);
+  switch (sstate) {
+    case PA_CONTEXT_UNCONNECTED:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_UNCONNECTED";
+      break;
+    case PA_CONTEXT_CONNECTING:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_CONNECTING";
+      break;
+    case PA_CONTEXT_AUTHORIZING:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_AUTHORIZING";
+      break;
+    case PA_CONTEXT_SETTING_NAME:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_SETTING_NAME";
+      break;
+    case PA_CONTEXT_FAILED:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_FAILED";
+      break;
+    case PA_CONTEXT_TERMINATED:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_TERMINATED";
+      break;
+    case PA_CONTEXT_READY:
+      RTC_LOG(LS_ERROR) << "PA_CONTEXT_READY";
+      break;
+    default:
+      RTC_LOG(LS_ERROR) << "(unknown state)";
+  }
 
   if (retVal != PA_OK) {
     RTC_LOG(LS_ERROR) << "failed to connect context, error=" << retVal;
     PaUnLock();
     return -1;
   }
+      RTC_LOG(LS_ERROR) << "wait statechanged";
 
   // Wait for state change
   while (!_paStateChanged) {
@@ -1614,6 +1671,8 @@ int32_t AudioDeviceLinuxPulse::InitPulseAudio() {
 
   // Now check to see what final state we reached.
   pa_context_state_t state = LATE(pa_context_get_state)(_paContext);
+
+      RTC_LOG(LS_ERROR) << "checkstate";
 
   if (state != PA_CONTEXT_READY) {
     if (state == PA_CONTEXT_FAILED) {
@@ -1647,6 +1706,7 @@ int32_t AudioDeviceLinuxPulse::InitPulseAudio() {
                       << sample_rate_hz_ << " Hz";
     return -1;
   }
+      RTC_LOG(LS_ERROR) << "done exit";
 
   return 0;
 }

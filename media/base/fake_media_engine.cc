@@ -437,7 +437,7 @@ FakeVoiceEngine::FakeVoiceEngine() : fail_create_channel_(false) {
   // sanity checks against that.
   SetCodecs({AudioCodec(101, "fake_audio_codec", 0, 0, 1)});
 }
-void FakeVoiceEngine::Init() {}
+
 rtc::scoped_refptr<webrtc::AudioState> FakeVoiceEngine::GetAudioState() const {
   return rtc::scoped_refptr<webrtc::AudioState>();
 }
