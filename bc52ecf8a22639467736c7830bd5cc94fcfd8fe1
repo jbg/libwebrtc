@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0a74320_0235fbfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-12-20T13:00:22Z",
+      "side": 1,
+      "message": "No, this test runs on trybots. The real problem is that failing the gtest macro doesn\u0027t make this test fail.\n\nSee the following log for example:\n\nhttps://chromium-swarm.appspot.com/task?id\u003d5f482641dca4e710\n```\n[03:51:54:INFO] Test Case \u0027-[RTCCameraVideoCapturerTests testSetupSession]\u0027 started.\n[03:51:54:INFO] ../../sdk/objc/unittests/RTCCameraVideoCapturerTests.mm:128: Failure\n[03:51:54:INFO] Value of: session !\u003d nullptr\n[03:51:54:INFO]   Actual: false\n[03:51:54:INFO] Expected: true\n[03:51:54:INFO] ../../sdk/objc/unittests/RTCCameraVideoCapturerTests.mm:131: Failure\n[03:51:54:INFO] Expected equality of these values:\n[03:51:54:INFO]   session.sessionPreset\n[03:51:54:INFO]     Which is: NULL\n[03:51:54:INFO]   AVCaptureSessionPresetInputPriority\n[03:51:54:INFO]     Which is: 1\n[03:51:54:INFO] ../../sdk/objc/unittests/RTCCameraVideoCapturerTests.mm:134: Failure\n[03:51:54:INFO] Expected equality of these values:\n[03:51:54:INFO]   session.outputs.count\n[03:51:54:INFO]     Which is: 0\n[03:51:54:INFO]   1u\n[03:51:54:INFO]     Which is: 1\n[03:51:54:INFO] Test Case \u0027-[RTCCameraVideoCapturerTests testSetupSession]\u0027 passed (0.006 seconds).\n```",
+      "parentUuid": "7ead25db_b769058a",
+      "revId": "bc52ecf8a22639467736c7830bd5cc94fcfd8fe1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b859fe77_4f6bd18b",
