@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "456219fc_63b3483e",
+        "filename": "audio/audio_state.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2022-12-20T14:48:01Z",
+      "side": 1,
+      "message": "The only implementation I found here was thread-safe, so removing the thread checker should be ok.",
+      "range": {
+        "startLine": 158,
+        "startChar": 19,
+        "endLine": 158,
+        "endChar": 43
+      },
+      "revId": "0d7ddaa4b0dccfed8e3f7cad6331c0ec60163d8c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
