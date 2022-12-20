@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af2419fe_a9affd0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2022-12-20T14:33:05Z",
+      "side": 1,
+      "message": "If this looks good, feel free to do a dry run. There should be two (latent) failures with the new asserts. Both related to:\n\"[Orientation] BUG IN CLIENT OF UIKIT: Setting UIDevice.orientation is not supported. Please use UIWindowScene.requestGeometryUpdate(_:)\"",
+      "revId": "105cdd0cb6fe7adeec13303a1575ee11b1736606",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
