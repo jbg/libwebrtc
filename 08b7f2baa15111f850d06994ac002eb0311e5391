@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d095e60c_84a44763",
+        "filename": "sdk/objc/unittests/RTCCameraVideoCapturerTests.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2022-12-20T12:48:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb1217cf_71f5356e",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 12
+      },
+      "revId": "08b7f2baa15111f850d06994ac002eb0311e5391",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c530489f_6ec54b40",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-20T12:24:34Z",
       "side": 1,
       "message": "can we pass the description to the macro so that failures have a sensible message?",
+      "range": {
+        "startLine": 25,
+        "startChar": 66,
+        "endLine": 25,
+        "endChar": 74
+      },
+      "revId": "08b7f2baa15111f850d06994ac002eb0311e5391",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71b2f6da_4ca0ed52",
+        "filename": "sdk/objc/unittests/RTCCameraVideoCapturerTests.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2022-12-20T12:48:42Z",
+      "side": 1,
+      "message": "It doesn\u0027t matter since it is always ignored; the expectation is never fulfilled and only there so that we\u0027ll wait for the timeout.",
+      "parentUuid": "c530489f_6ec54b40",
       "range": {
         "startLine": 25,
         "startChar": 66,
