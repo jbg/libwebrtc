@@ -89,7 +89,6 @@ class MediaChannel : public MediaSendChannelInterface,
     RTC_CHECK_NOTREACHED();
     return nullptr;
   }
-
   // Must declare the methods inherited from the base interface template,
   // even when abstract, to tell the compiler that all instances of the name
   // referred to by subclasses of this share the same implementation.
@@ -102,8 +101,6 @@ class MediaChannel : public MediaSendChannelInterface,
                              const rtc::NetworkRoute& network_route) override =
       0;
 
-  // Sets the abstract interface class for sending RTP/RTCP data.
-  virtual void SetInterface(MediaChannelNetworkInterface* iface);
   // Returns the absolute sendtime extension id value from media channel.
   virtual int GetRtpSendTimeExtnId() const;
   // Base method to send packet using MediaChannelNetworkInterface.
@@ -124,9 +121,10 @@ class MediaChannel : public MediaSendChannelInterface,
   void SetExtmapAllowMixed(bool extmap_allow_mixed) override;
   bool ExtmapAllowMixed() const override;
 
+  void SetInterface(MediaChannelNetworkInterface* iface) override;
   // Returns `true` if a non-null MediaChannelNetworkInterface pointer is held.
   // Must be called on the network thread.
-  bool HasNetworkInterface() const;
+  bool HasNetworkInterface() const override;
 
   void SetFrameEncryptor(uint32_t ssrc,
                          rtc::scoped_refptr<webrtc::FrameEncryptorInterface>
@@ -207,6 +205,10 @@ class VideoMediaChannel : public MediaChannel,
   VideoMediaReceiveChannelInterface* AsVideoReceiveChannel() override {
     return this;
   }
+  VoiceMediaReceiveChannelInterface* AsVoiceReceiveChannel() override {
+    RTC_CHECK_NOTREACHED();
+    return nullptr;
+  }
   cricket::MediaType media_type() const override;
 
   // Downcasting to the subclasses.
@@ -218,19 +220,19 @@ class VideoMediaChannel : public MediaChannel,
   bool ExtmapAllowMixed() const override {
     return MediaChannel::ExtmapAllowMixed();
   }
-  // This fills the "bitrate parts" (rtx, video bitrate) of the
-  // BandwidthEstimationInfo, since that part that isn't possible to get
-  // through webrtc::Call::GetStats, as they are statistics of the send
-  // streams.
-  // TODO(holmer): We should change this so that either BWE graphs doesn't
-  // need access to bitrates of the streams, or change the (RTC)StatsCollector
-  // so that it's getting the send stream stats separately by calling
-  // GetStats(), and merges with BandwidthEstimationInfo by itself.
-  virtual void FillBitrateInfo(BandwidthEstimationInfo* bwe_info) = 0;
-  // Gets quality stats for the channel.
-  virtual bool GetStats(VideoMediaInfo* info) = 0;
+  void SetInterface(MediaChannelNetworkInterface* iface) override {
+    return MediaChannel::SetInterface(iface);
+  }
+  bool HasNetworkInterface() const override {
+    return MediaChannel::HasNetworkInterface();
+  }
   // Enable network condition based codec switching.
   void SetVideoCodecSwitchingEnabled(bool enabled) override;
+
+  MediaChannel* ImplForTesting() override {
+    // This class and its subclasses are not interface classes.
+    RTC_CHECK_NOTREACHED();
+  }
 };
 
 // Base class for implementation classes
@@ -257,6 +259,10 @@ class VoiceMediaChannel : public MediaChannel,
     RTC_CHECK_NOTREACHED();
     return nullptr;
   }
+  VideoMediaReceiveChannelInterface* AsVideoReceiveChannel() override {
+    RTC_CHECK_NOTREACHED();
+    return nullptr;
+  }
 
   void SetExtmapAllowMixed(bool mixed) override {
     MediaChannel::SetExtmapAllowMixed(mixed);
@@ -264,10 +270,17 @@ class VoiceMediaChannel : public MediaChannel,
   bool ExtmapAllowMixed() const override {
     return MediaChannel::ExtmapAllowMixed();
   }
+  void SetInterface(MediaChannelNetworkInterface* iface) override {
+    return MediaChannel::SetInterface(iface);
+  }
+  bool HasNetworkInterface() const override {
+    return MediaChannel::HasNetworkInterface();
+  }
 
-  // Gets quality stats for the channel.
-  virtual bool GetStats(VoiceMediaInfo* info,
-                        bool get_and_clear_legacy_stats) = 0;
+  MediaChannel* ImplForTesting() override {
+    // This class and its subclasses are not interface classes.
+    RTC_CHECK_NOTREACHED();
+  }
 };
 
 // The externally exposed objects that support the Send and Receive interfaces.
@@ -301,6 +314,12 @@ class VoiceMediaSendChannel : public VoiceMediaSendChannelInterface {
     impl()->SetExtmapAllowMixed(extmap_allow_mixed);
   }
   bool ExtmapAllowMixed() const override { return impl()->ExtmapAllowMixed(); }
+  void SetInterface(MediaChannelNetworkInterface* iface) override {
+    return impl()->SetInterface(iface);
+  }
+  bool HasNetworkInterface() const override {
+    return impl()->HasNetworkInterface();
+  }
   // Implementation of MediaSendChannelInterface
   bool AddSendStream(const StreamParams& sp) override {
     return impl()->AddSendStream(sp);
@@ -350,6 +369,11 @@ class VoiceMediaSendChannel : public VoiceMediaSendChannelInterface {
   bool InsertDtmf(uint32_t ssrc, int event, int duration) override {
     return impl()->InsertDtmf(ssrc, event, duration);
   }
+  bool GetStats(VoiceMediaInfo* info,
+                bool get_and_clear_legacy_stats) override {
+    return impl()->GetStats(info, get_and_clear_legacy_stats);
+  }
+  MediaChannel* ImplForTesting() override { return impl_; }
 
  private:
   VoiceMediaSendChannelInterface* impl() { return impl_; }
@@ -361,6 +385,14 @@ class VoiceMediaReceiveChannel : public VoiceMediaReceiveChannelInterface {
  public:
   explicit VoiceMediaReceiveChannel(VoiceMediaChannel* impl) : impl_(impl) {}
   virtual ~VoiceMediaReceiveChannel() {}
+
+  VoiceMediaReceiveChannelInterface* AsVoiceReceiveChannel() override {
+    return this;
+  }
+  VideoMediaReceiveChannelInterface* AsVideoReceiveChannel() override {
+    RTC_DCHECK_NOTREACHED();
+    return nullptr;
+  }
   // Implementation of MediaBaseChannelInterface
   cricket::MediaType media_type() const override { return MEDIA_TYPE_AUDIO; }
   void OnPacketReceived(rtc::CopyOnWriteBuffer packet,
@@ -379,6 +411,12 @@ class VoiceMediaReceiveChannel : public VoiceMediaReceiveChannelInterface {
     impl()->SetExtmapAllowMixed(extmap_allow_mixed);
   }
   bool ExtmapAllowMixed() const override { return impl()->ExtmapAllowMixed(); }
+  void SetInterface(MediaChannelNetworkInterface* iface) override {
+    return impl()->SetInterface(iface);
+  }
+  bool HasNetworkInterface() const override {
+    return impl()->HasNetworkInterface();
+  }
   // Implementation of Delayable
   bool SetBaseMinimumPlayoutDelayMs(uint32_t ssrc, int delay_ms) override {
     return impl()->SetBaseMinimumPlayoutDelayMs(ssrc, delay_ms);
@@ -443,6 +481,11 @@ class VoiceMediaReceiveChannel : public VoiceMediaReceiveChannelInterface {
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override {
     return impl()->SetDefaultRawAudioSink(std::move(sink));
   }
+  bool GetStats(VoiceMediaInfo* info,
+                bool get_and_clear_legacy_stats) override {
+    return impl()->GetStats(info, get_and_clear_legacy_stats);
+  }
+  MediaChannel* ImplForTesting() override { return impl_; }
 
  private:
   VoiceMediaReceiveChannelInterface* impl() { return impl_; }
@@ -461,7 +504,7 @@ class VideoMediaSendChannel : public VideoMediaSendChannelInterface {
   }
 
   // Implementation of MediaBaseChannelInterface
-  cricket::MediaType media_type() const override { return MEDIA_TYPE_AUDIO; }
+  cricket::MediaType media_type() const override { return MEDIA_TYPE_VIDEO; }
   void OnPacketReceived(rtc::CopyOnWriteBuffer packet,
                         int64_t packet_time_us) override {
     impl()->OnPacketReceived(packet, packet_time_us);
@@ -477,7 +520,13 @@ class VideoMediaSendChannel : public VideoMediaSendChannelInterface {
   void SetExtmapAllowMixed(bool extmap_allow_mixed) override {
     impl()->SetExtmapAllowMixed(extmap_allow_mixed);
   }
+  bool HasNetworkInterface() const override {
+    return impl()->HasNetworkInterface();
+  }
   bool ExtmapAllowMixed() const override { return impl()->ExtmapAllowMixed(); }
+  void SetInterface(MediaChannelNetworkInterface* iface) override {
+    return impl()->SetInterface(iface);
+  }
   // Implementation of MediaSendChannelInterface
   bool AddSendStream(const StreamParams& sp) override {
     return impl()->AddSendStream(sp);
@@ -533,6 +582,15 @@ class VideoMediaSendChannel : public VideoMediaSendChannelInterface {
   void SetVideoCodecSwitchingEnabled(bool enabled) override {
     return impl()->SetVideoCodecSwitchingEnabled(enabled);
   }
+  void FillBitrateInfo(BandwidthEstimationInfo* bwe_info) override {
+    impl()->FillBitrateInfo(bwe_info);
+  }
+  bool GetStats(VideoMediaInfo* info) override {
+    RTC_LOG(LS_ERROR) << "DEBUG: Dispatching video sender GetStats";
+    return impl()->GetStats(info);
+  }
+
+  MediaChannel* ImplForTesting() override { return impl_; }
 
  private:
   VideoMediaSendChannelInterface* impl() { return impl_; }
@@ -543,8 +601,17 @@ class VideoMediaSendChannel : public VideoMediaSendChannelInterface {
 class VideoMediaReceiveChannel : public VideoMediaReceiveChannelInterface {
  public:
   explicit VideoMediaReceiveChannel(VideoMediaChannel* impl) : impl_(impl) {}
+
+  VideoMediaReceiveChannelInterface* AsVideoReceiveChannel() override {
+    return this;
+  }
+  VoiceMediaReceiveChannelInterface* AsVoiceReceiveChannel() override {
+    RTC_DCHECK_NOTREACHED();
+    return nullptr;
+  }
+
   // Implementation of MediaBaseChannelInterface
-  cricket::MediaType media_type() const override { return MEDIA_TYPE_AUDIO; }
+  cricket::MediaType media_type() const override { return MEDIA_TYPE_VIDEO; }
   void OnPacketReceived(rtc::CopyOnWriteBuffer packet,
                         int64_t packet_time_us) override {
     impl()->OnPacketReceived(packet, packet_time_us);
@@ -561,6 +628,12 @@ class VideoMediaReceiveChannel : public VideoMediaReceiveChannelInterface {
     impl()->SetExtmapAllowMixed(extmap_allow_mixed);
   }
   bool ExtmapAllowMixed() const override { return impl()->ExtmapAllowMixed(); }
+  void SetInterface(MediaChannelNetworkInterface* iface) override {
+    return impl()->SetInterface(iface);
+  }
+  bool HasNetworkInterface() const override {
+    return impl()->HasNetworkInterface();
+  }
   // Implementation of Delayable
   bool SetBaseMinimumPlayoutDelayMs(uint32_t ssrc, int delay_ms) override {
     return impl()->SetBaseMinimumPlayoutDelayMs(ssrc, delay_ms);
@@ -630,6 +703,11 @@ class VideoMediaReceiveChannel : public VideoMediaReceiveChannelInterface {
   // Clear recordable encoded frame callback for `ssrc`
   void ClearRecordableEncodedFrameCallback(uint32_t ssrc) override {
     impl()->ClearRecordableEncodedFrameCallback(ssrc);
+  }
+  MediaChannel* ImplForTesting() override { return impl_; }
+  bool GetStats(VideoMediaInfo* info) override {
+    RTC_LOG(LS_ERROR) << "DEBUG: Dispatching video receiver GetStats";
+    return impl()->GetStats(info);
   }
 
  private:
