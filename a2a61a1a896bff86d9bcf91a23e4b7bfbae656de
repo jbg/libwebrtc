@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53ea589f_8d7eb7c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2022-12-20T17:59:59Z",
+      "side": 1,
+      "message": "Those failing tests are all due to failing to set orientation on UIDevice.currentDevice. I haven\u0027t found a simple workaround so I marked them as expected to fail for now. If you\u0027re fine with this, please submit a dry run. I noticed these fail on iOS12 and iOS14 but pass on iOS13! If they now unexpectedly pass on iOS13 I\u0027m at a loss.",
+      "revId": "a2a61a1a896bff86d9bcf91a23e4b7bfbae656de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
