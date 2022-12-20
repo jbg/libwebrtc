@@ -509,7 +509,6 @@ class FakeVideoMediaChannel : public RtpHelper<VideoMediaChannel> {
 class FakeVoiceEngine : public VoiceEngineInterface {
  public:
   FakeVoiceEngine();
-  void Init() override;
   rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const override;
 
   VoiceMediaChannel* CreateMediaChannel(

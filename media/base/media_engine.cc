@@ -221,11 +221,6 @@ CompositeMediaEngine::CompositeMediaEngine(
 
 CompositeMediaEngine::~CompositeMediaEngine() = default;
 
-bool CompositeMediaEngine::Init() {
-  voice().Init();
-  return true;
-}
-
 VoiceEngineInterface& CompositeMediaEngine::voice() {
   return *voice_engine_.get();
 }

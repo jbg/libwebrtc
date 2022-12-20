@@ -80,6 +80,7 @@ AudioDeviceLinuxPulse::AudioDeviceLinuxPulse()
       _recStreamFlags(0),
       _playStreamFlags(0) {
   RTC_DLOG(LS_INFO) << __FUNCTION__ << " created";
+  thread_checker_.Detach();
 
   memset(_paServerVersion, 0, sizeof(_paServerVersion));
   memset(&_playBufferAttr, 0, sizeof(_playBufferAttr));
@@ -135,7 +136,7 @@ int32_t AudioDeviceLinuxPulse::ActiveAudioLayer(
 }
 
 AudioDeviceGeneric::InitStatus AudioDeviceLinuxPulse::Init() {
-  RTC_DCHECK(thread_checker_.IsCurrent());
+  // RTC_DCHECK(thread_checker_.IsCurrent());
   if (_initialized) {
     return InitStatus::OK;
   }
