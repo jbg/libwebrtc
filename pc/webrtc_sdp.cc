@@ -281,12 +281,18 @@ static void BuildRtpContentAttributes(const MediaContentDescription* media_desc,
                                       const cricket::MediaType media_type,
                                       int msid_signaling,
                                       std::string* message);
+static void BuildRtpHeaderExtensions(const RtpHeaderExtensions& extensions,
+                                     std::string* message);
 static void BuildRtpmap(const MediaContentDescription* media_desc,
                         const cricket::MediaType media_type,
                         std::string* message);
 static void BuildCandidate(const std::vector<Candidate>& candidates,
                            bool include_ufrag,
                            std::string* message);
+static void BuildIceUfragPwd(const TransportInfo* transport_info,
+                             std::string* message);
+static void BuildDtlsFingerprintSetup(const TransportInfo* transport_info,
+                                      std::string* message);
 static void BuildIceOptions(const std::vector<std::string>& transport_options,
                             std::string* message);
 static bool ParseSessionDescription(absl::string_view message,
@@ -1360,6 +1366,61 @@ static void BuildSctpContentAttributes(
   }
 }
 
+void BuildIceUfragPwd(const TransportInfo* transport_info,
+                      std::string* message) {
+  RTC_DCHECK(transport_info);
+
+  rtc::StringBuilder os;
+  // RFC 5245
+  // ice-pwd-att           = "ice-pwd" ":" password
+  // ice-ufrag-att         = "ice-ufrag" ":" ufrag
+  // ice-ufrag
+  if (!transport_info->description.ice_ufrag.empty()) {
+    InitAttrLine(kAttributeIceUfrag, &os);
+    os << kSdpDelimiterColon << transport_info->description.ice_ufrag;
+    AddLine(os.str(), message);
+  }
+  // ice-pwd
+  if (!transport_info->description.ice_pwd.empty()) {
+    InitAttrLine(kAttributeIcePwd, &os);
+    os << kSdpDelimiterColon << transport_info->description.ice_pwd;
+    AddLine(os.str(), message);
+  }
+}
+
+void BuildDtlsFingerprintSetup(const TransportInfo* transport_info,
+                               std::string* message) {
+  RTC_DCHECK(transport_info);
+
+  rtc::StringBuilder os;
+  // RFC 4572
+  // fingerprint-attribute  =
+  //   "fingerprint" ":" hash-func SP fingerprint
+  // When using max-bundle this is already included at session level.
+  // Insert the fingerprint attribute.
+  auto fingerprint = transport_info->description.identity_fingerprint.get();
+  if (!fingerprint) {
+    return;
+  }
+  InitAttrLine(kAttributeFingerprint, &os);
+  os << kSdpDelimiterColon << fingerprint->algorithm << kSdpDelimiterSpace
+     << fingerprint->GetRfc4572Fingerprint();
+  AddLine(os.str(), message);
+
+  // Inserting setup attribute.
+  if (transport_info->description.connection_role !=
+      cricket::CONNECTIONROLE_NONE) {
+    // Making sure we are not using "passive" mode.
+    cricket::ConnectionRole role = transport_info->description.connection_role;
+    std::string dtls_role_str;
+    const bool success = cricket::ConnectionRoleToString(role, &dtls_role_str);
+    RTC_DCHECK(success);
+    InitAttrLine(kAttributeSetup, &os);
+    os << kSdpDelimiterColon << dtls_role_str;
+    AddLine(os.str(), message);
+  }
+}
+
 void BuildMediaDescription(const ContentInfo* content_info,
                            const TransportInfo* transport_info,
                            const cricket::MediaType media_type,
@@ -1438,10 +1499,6 @@ void BuildMediaDescription(const ContentInfo* content_info,
     port = rtc::ToString(media_desc->connection_address().port());
   }
 
-  rtc::SSLFingerprint* fp =
-      (transport_info) ? transport_info->description.identity_fingerprint.get()
-                       : NULL;
-
   // Add the m and c lines.
   InitLine(kLineTypeMedia, type, &os);
   os << " " << port << " " << media_desc->protocol() << fmt;
@@ -1495,52 +1552,16 @@ void BuildMediaDescription(const ContentInfo* content_info,
   // candidates in the SDP to avoid redundancy.
   BuildCandidate(candidates, false, message);
 
-  // Use the transport_info to build the media level ice-ufrag and ice-pwd.
+  // Use the transport_info to build the media level ice-ufrag, ice-pwd
+  // and DTLS fingerprint and setup attributes.
   if (transport_info) {
-    // RFC 5245
-    // ice-pwd-att           = "ice-pwd" ":" password
-    // ice-ufrag-att         = "ice-ufrag" ":" ufrag
-    // ice-ufrag
-    if (!transport_info->description.ice_ufrag.empty()) {
-      InitAttrLine(kAttributeIceUfrag, &os);
-      os << kSdpDelimiterColon << transport_info->description.ice_ufrag;
-      AddLine(os.str(), message);
-    }
-    // ice-pwd
-    if (!transport_info->description.ice_pwd.empty()) {
-      InitAttrLine(kAttributeIcePwd, &os);
-      os << kSdpDelimiterColon << transport_info->description.ice_pwd;
-      AddLine(os.str(), message);
-    }
+    BuildIceUfragPwd(transport_info, message);
 
     // draft-petithuguenin-mmusic-ice-attributes-level-03
     BuildIceOptions(transport_info->description.transport_options, message);
 
-    // RFC 4572
-    // fingerprint-attribute  =
-    //   "fingerprint" ":" hash-func SP fingerprint
-    if (fp) {
-      // Insert the fingerprint attribute.
-      InitAttrLine(kAttributeFingerprint, &os);
-      os << kSdpDelimiterColon << fp->algorithm << kSdpDelimiterSpace
-         << fp->GetRfc4572Fingerprint();
-      AddLine(os.str(), message);
-
-      // Inserting setup attribute.
-      if (transport_info->description.connection_role !=
-          cricket::CONNECTIONROLE_NONE) {
-        // Making sure we are not using "passive" mode.
-        cricket::ConnectionRole role =
-            transport_info->description.connection_role;
-        std::string dtls_role_str;
-        const bool success =
-            cricket::ConnectionRoleToString(role, &dtls_role_str);
-        RTC_DCHECK(success);
-        InitAttrLine(kAttributeSetup, &os);
-        os << kSdpDelimiterColon << dtls_role_str;
-        AddLine(os.str(), message);
-      }
-    }
+    // Also include the DTLS fingerprint and setup attribute if available.
+    BuildDtlsFingerprintSetup(transport_info, message);
   }
 
   // RFC 3388
@@ -1576,20 +1597,7 @@ void BuildRtpContentAttributes(const MediaContentDescription* media_desc,
     InitAttrLine(kAttributeExtmapAllowMixed, &os);
     AddLine(os.str(), message);
   }
-  // RFC 8285
-  // a=extmap:<value>["/"<direction>] <URI> <extensionattributes>
-  // The definitions MUST be either all session level or all media level. This
-  // implementation uses all media level.
-  for (size_t i = 0; i < media_desc->rtp_header_extensions().size(); ++i) {
-    const RtpExtension& extension = media_desc->rtp_header_extensions()[i];
-    InitAttrLine(kAttributeExtmap, &os);
-    os << kSdpDelimiterColon << extension.id;
-    if (extension.encrypt) {
-      os << kSdpDelimiterSpace << RtpExtension::kEncryptHeaderExtensionsUri;
-    }
-    os << kSdpDelimiterSpace << extension.uri;
-    AddLine(os.str(), message);
-  }
+  BuildRtpHeaderExtensions(media_desc->rtp_header_extensions(), message);
 
   // RFC 3264
   // a=sendrecv || a=sendonly || a=sendrecv || a=inactive
@@ -1750,6 +1758,25 @@ void BuildRtpContentAttributes(const MediaContentDescription* media_desc,
     InitAttrLine(kAttributeSimulcast, &os);
     os << kSdpDelimiterColon
        << serializer.SerializeSimulcastDescription(simulcast);
+    AddLine(os.str(), message);
+  }
+}
+
+void BuildRtpHeaderExtensions(const RtpHeaderExtensions& extensions,
+                              std::string* message) {
+  rtc::StringBuilder os;
+
+  // RFC 8285
+  // a=extmap:<value>["/"<direction>] <URI> <extensionattributes>
+  // The definitions MUST be either all session level or all media level. This
+  // implementation uses all media level.
+  for (const RtpExtension& extension : extensions) {
+    InitAttrLine(kAttributeExtmap, &os);
+    os << kSdpDelimiterColon << extension.id;
+    if (extension.encrypt) {
+      os << kSdpDelimiterSpace << RtpExtension::kEncryptHeaderExtensionsUri;
+    }
+    os << kSdpDelimiterSpace << extension.uri;
     AddLine(os.str(), message);
   }
 }
