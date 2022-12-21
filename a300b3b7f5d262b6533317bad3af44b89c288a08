@@ -34,6 +34,24 @@
       "parentUuid": "1923496c_62f6f2e0",
       "revId": "a300b3b7f5d262b6533317bad3af44b89c288a08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8cec85c_5d0946a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2022-12-21T16:02:36Z",
+      "side": 1,
+      "message": "I\u0027ve triggered the internal bot. Let\u0027s see how it goes.",
+      "parentUuid": "d8d0bdae_ae1cdb46",
+      "revId": "a300b3b7f5d262b6533317bad3af44b89c288a08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
