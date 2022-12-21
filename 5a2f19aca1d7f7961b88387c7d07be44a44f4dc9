@@ -33,6 +33,161 @@
       "message": "lgtm for channel_receive.cc. But I leave it to the other reviewers to review the rest of the files.",
       "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a80e2fa8_fccf69c6",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-21T17:20:00Z",
+      "side": 1,
+      "message": "I know some of the other events aren\u0027t entirely consistent, but I think we want ToUnsigned(...) here",
+      "range": {
+        "startLine": 1196,
+        "startChar": 16,
+        "endLine": 1196,
+        "endChar": 41
+      },
+      "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1342e2d9_0de1e425",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-21T17:20:00Z",
+      "side": 1,
+      "message": "And here.",
+      "range": {
+        "startLine": 1198,
+        "startChar": 32,
+        "endLine": 1198,
+        "endChar": 62
+      },
+      "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03cf9d8e_f72e41bb",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 10
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-21T17:20:00Z",
+      "side": 1,
+      "message": "Please add a comment // required",
+      "range": {
+        "startLine": 290,
+        "startChar": 2,
+        "endLine": 290,
+        "endChar": 10
+      },
+      "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1af9bb2_ead6d039",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 10
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-21T17:20:00Z",
+      "side": 1,
+      "message": "Please add a comment briefly explaining what these fields mean and that they are required.",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 35
+      },
+      "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2933f34c_77e200ed",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-21T17:20:00Z",
+      "side": 1,
+      "message": "I assume we can\u0027t rely on including this via parser.h because of style guide? If so please include both protos in the  in the same way as there. IIRC there are some platform dependencies in paths.",
+      "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5d5b0a4_a569fb36",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 2769,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-21T17:20:00Z",
+      "side": 1,
+      "message": "ToUnsigned(...) ?",
+      "range": {
+        "startLine": 2769,
+        "startChar": 19,
+        "endLine": 2769,
+        "endChar": 50
+      },
+      "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce3e2bd1_99b9b596",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 2789,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2022-12-21T17:20:00Z",
+      "side": 1,
+      "message": "ToSigned(...)?",
+      "range": {
+        "startLine": 2789,
+        "startChar": 31,
+        "endLine": 2789,
+        "endChar": 65
+      },
+      "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
