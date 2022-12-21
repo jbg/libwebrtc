@@ -16,6 +16,40 @@
       "message": "I noticed testRotationCamera was not being run, as it takes args. Those args were passed back when these were gtests.",
       "revId": "9847273ae15f7e734a3c8b7f94d6b52f29cea007",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab36190f_e41371fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-12-21T01:15:23Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "9847273ae15f7e734a3c8b7f94d6b52f29cea007",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b11070e3_73bd75ca",
+        "filename": "sdk/objc/unittests/RTCCameraVideoCapturerTests.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2022-12-21T01:15:23Z",
+      "side": 1,
+      "message": "nit: Can you add a comment that the test method must have no arguments in order to run the test using XCTest?",
+      "revId": "9847273ae15f7e734a3c8b7f94d6b52f29cea007",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
