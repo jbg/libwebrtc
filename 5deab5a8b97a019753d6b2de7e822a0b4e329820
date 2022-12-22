@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "060de1ef_a084b371",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-12-22T08:11:26Z",
+      "side": 1,
+      "message": "Must.... Read ... Code ...",
+      "revId": "5deab5a8b97a019753d6b2de7e822a0b4e329820",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a3fabf5_ac64116f",
@@ -31,6 +48,24 @@
       "writtenOn": "2022-12-22T08:09:49Z",
       "side": 1,
       "message": "This shouldn\u0027t work - you should need to use os.Release() here.\nAlternatively move the StringBuilder declaration inside the loop.",
+      "revId": "5deab5a8b97a019753d6b2de7e822a0b4e329820",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c67e341_f35f2ea0",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2022-12-22T08:11:26Z",
+      "side": 1,
+      "message": "OK, InitAttrLine contains the os-\u003eClear() statement I was missing.",
+      "parentUuid": "5a3fabf5_ac64116f",
       "revId": "5deab5a8b97a019753d6b2de7e822a0b4e329820",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
