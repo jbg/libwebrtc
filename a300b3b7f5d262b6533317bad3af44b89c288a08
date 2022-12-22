@@ -87,6 +87,23 @@
       "message": "The internal bot passes.",
       "revId": "a300b3b7f5d262b6533317bad3af44b89c288a08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23fb3387_78f0b6a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-12-22T08:04:48Z",
+      "side": 1,
+      "message": "finger crossed...",
+      "revId": "a300b3b7f5d262b6533317bad3af44b89c288a08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
