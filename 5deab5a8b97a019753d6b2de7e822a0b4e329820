@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "787d6eb5_6384acf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-12-22T14:06:26Z",
+      "side": 1,
+      "message": "hbos said he loves SDP!",
+      "revId": "5deab5a8b97a019753d6b2de7e822a0b4e329820",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a3fabf5_ac64116f",
@@ -66,6 +83,24 @@
       "side": 1,
       "message": "OK, InitAttrLine contains the os-\u003eClear() statement I was missing.",
       "parentUuid": "5a3fabf5_ac64116f",
+      "revId": "5deab5a8b97a019753d6b2de7e822a0b4e329820",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a9791da_aa2eba57",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-12-22T14:06:26Z",
+      "side": 1,
+      "message": "that pattern is ugly...",
+      "parentUuid": "5c67e341_f35f2ea0",
       "revId": "5deab5a8b97a019753d6b2de7e822a0b4e329820",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
