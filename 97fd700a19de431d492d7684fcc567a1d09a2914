@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "037f8842_de3080c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2022-12-22T06:27:07Z",
+      "side": 1,
+      "message": "pondering how to make the SDP smaller by moving things to session level when max-bundle is used. Didn\u0027t succeed, this will need a mechanism like set_msid_signaling(), but this yielded some nice clean up at least.",
+      "revId": "97fd700a19de431d492d7684fcc567a1d09a2914",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
