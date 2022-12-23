@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5178502d_be912e7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2022-12-23T17:10:27Z",
+      "side": 1,
+      "message": "Erik, am I right described scenario no longer possible after prober redesign?\n(I\u0027ve tried to run this test locally 1000 times - it didn\u0027t fail)\n\n[sending this change to reduce number of own TODOs in code]",
+      "revId": "41337ca34d9416c6aea475f0d03b351ca4a74dd0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
