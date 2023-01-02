@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f27efa6_258bfa1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-01-02T16:30:37Z",
+      "side": 1,
+      "message": "Can this CL be split into two? E.g. adding the API for querying codec capabilities first and then adding the fallback behaviour separately.\nThere are HW encoders with SVC support and it\u0027s unclear to me if this CL will cause them to always fall back. Having testing for that first would ease my mind.",
+      "revId": "581032ce7b576baec4bf7c3b00ae9cf15cf952c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
