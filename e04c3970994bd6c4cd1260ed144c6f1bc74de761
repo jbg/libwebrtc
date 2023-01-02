@@ -52,6 +52,24 @@
       "parentUuid": "f4a82510_d047fc12",
       "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a1c2b8a_2529df30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-01-02T11:17:49Z",
+      "side": 1,
+      "message": "So to check that I understood correctly:\nif we have \n\npeer-\u003eAddTrack(track, {stream_id1, stream_id2})\n\nThen it\u0027s forbidden to have stream_id1 \u003d\u003d stream_id2?\nAnd we either need to use different ones or pass a single parameter there and it will be used as sync group?",
+      "parentUuid": "6ffb2f23_500ffdcd",
+      "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
