@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d358e8a_f30e32e8",
+        "filename": "call/receive_stream.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-02T15:39:24Z",
+      "side": 1,
+      "message": "Can you mark it deprecated?\ni.e. [[deprecated(\"bugs.webrtc.org/14802)]] bool transport_cc \u003d false;\n\nOr does it cause webrtc compilation error?",
+      "revId": "29f6c766ab03b7701047a7280428884a69fd14b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6334c252_481277c1",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-02T15:39:24Z",
+      "side": 1,
+      "message": "nit: merge into single line",
+      "range": {
+        "startLine": 1743,
+        "startChar": 0,
+        "endLine": 1744,
+        "endChar": 35
+      },
+      "revId": "29f6c766ab03b7701047a7280428884a69fd14b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d0ba78_3c4cd9e7",
+        "filename": "test/call_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-02T15:39:24Z",
+      "side": 1,
+      "message": "this parameter become unused, do you plan to remove it in follow up?\nthis CL may be comment it out to show it is unused:\nbool /*send_side_bwe*/,",
+      "revId": "29f6c766ab03b7701047a7280428884a69fd14b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f32f31ba_7a3e4443",
+        "filename": "video/end_to_end_tests/transport_feedback_tests.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-02T15:39:24Z",
+      "side": 1,
+      "message": "EXPECT_TRUE",
+      "range": {
+        "startLine": 276,
+        "startChar": 4,
+        "endLine": 276,
+        "endChar": 19
+      },
+      "revId": "29f6c766ab03b7701047a7280428884a69fd14b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
