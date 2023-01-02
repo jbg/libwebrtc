@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fc0345a_f09bf84b",
+        "filename": "api/video_codecs/builtin_video_encoder_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-01-02T11:18:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "112a7b4e_7acdd228",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 17
+      },
+      "revId": "9b331de97b55e3e0cad0bb3cbdd3da64baea8038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f89e6073_9e73d6e0",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-19T12:22:47Z",
       "side": 1,
       "message": "Could this be replace by \"-\u003e\" ?",
+      "range": {
+        "startLine": 460,
+        "startChar": 57,
+        "endLine": 460,
+        "endChar": 66
+      },
+      "revId": "9b331de97b55e3e0cad0bb3cbdd3da64baea8038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72642f66_26ac71e1",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-01-02T11:18:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f89e6073_9e73d6e0",
       "range": {
         "startLine": 460,
         "startChar": 57,
