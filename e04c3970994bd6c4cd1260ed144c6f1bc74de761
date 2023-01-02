@@ -70,6 +70,24 @@
       "parentUuid": "6ffb2f23_500ffdcd",
       "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e755c711_574c6dce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-01-02T13:42:18Z",
+      "side": 1,
+      "message": "it isn\u0027t actually forbidden (trying to get clarification here https://github.com/w3c/webrtc-pc/issues/2803), but it will not generate a second msid line in the SDP. Which then blew up in parsing since that has a DCHECK on \"we got two streams\"\n\nAre there tests where sync group isn\u0027t the same as the stream?",
+      "parentUuid": "9a1c2b8a_2529df30",
+      "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
