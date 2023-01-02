@@ -88,6 +88,24 @@
       "parentUuid": "9a1c2b8a_2529df30",
       "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df05c179_c79f71f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-01-02T14:48:32Z",
+      "side": 1,
+      "message": "Yes, I think there was a smoke test in webrtc repo to show sync group functionality where alice audio and video streams had sync group equal to \"alice\".\n\nAbout DCHECK: you mean this one:\n\nRTC_CHECK_EQ(transceiver-\u003ereceiver()-\u003estream_ids().size(), 2)\n      \u003c\u003c \"Expected 2 stream ids: 1st - sync group, 2nd - unique stream label\";\n\nIf so, then I will think, maybe we can handle that differently in framework or add some checks on input parameters to ensure that sync group is different from stream label.\n\nThank you for clarification",
+      "parentUuid": "e755c711_574c6dce",
+      "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
