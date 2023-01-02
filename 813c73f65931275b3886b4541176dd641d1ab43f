@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43dd3e7e_501a2617",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2023-01-02T10:31:50Z",
+      "side": 1,
+      "message": "I would still like another dry run here, if you could help me with this, thanks.",
+      "revId": "813c73f65931275b3886b4541176dd641d1ab43f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
