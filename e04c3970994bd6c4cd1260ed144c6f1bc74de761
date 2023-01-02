@@ -16,6 +16,24 @@
       "message": "Hi, can you explain a bit why do we need a \"-sync\" suffix and using stream_label directly as before won\u0027t work?",
       "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a82510_d047fc12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-01-02T10:51:49Z",
+      "side": 1,
+      "message": "Happy new year! Previously this was using the same stream id for the sync group and duplicate stream ids aren\u0027t allowed.\nI suspect that you can just use the stream id as the sync group since streams are synced by stream and hence one does not need an extra sync group at all.",
+      "parentUuid": "48ed72de_2e13c333",
+      "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
