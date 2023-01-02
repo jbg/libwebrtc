@@ -34,6 +34,24 @@
       "parentUuid": "48ed72de_2e13c333",
       "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ffb2f23_500ffdcd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-01-02T11:01:58Z",
+      "side": 1,
+      "message": "err... tracks are synced by stream id",
+      "parentUuid": "f4a82510_d047fc12",
+      "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
