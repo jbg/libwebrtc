@@ -363,7 +363,6 @@ void CallTest::AddMatchingVideoReceiveConfigs(
     int rtp_history_ms) {
   RTC_DCHECK(!video_send_config.rtp.ssrcs.empty());
   VideoReceiveStreamInterface::Config default_config(rtcp_send_transport);
-  default_config.rtp.transport_cc = send_side_bwe;
   default_config.rtp.local_ssrc = kReceiverLocalVideoSsrc;
   for (const RtpExtension& extension : video_send_config.rtp.extensions)
     default_config.rtp.extensions.push_back(extension);
@@ -429,10 +428,6 @@ AudioReceiveStreamInterface::Config CallTest::CreateMatchingAudioConfig(
   audio_config.rtp.local_ssrc = kReceiverLocalAudioSsrc;
   audio_config.rtcp_send_transport = transport;
   audio_config.rtp.remote_ssrc = send_config.rtp.ssrc;
-  audio_config.rtp.transport_cc =
-      send_config.send_codec_spec
-          ? send_config.send_codec_spec->transport_cc_enabled
-          : false;
   audio_config.rtp.extensions = send_config.rtp.extensions;
   audio_config.decoder_factory = audio_decoder_factory;
   audio_config.decoder_map = {{kAudioSendPayloadType, {"opus", 48000, 2}}};
