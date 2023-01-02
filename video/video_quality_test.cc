@@ -819,9 +819,8 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
     if (!decode_all_receive_streams)
       decode_sub_stream = params_.ss[video_idx].selected_stream;
     CreateMatchingVideoReceiveConfigs(
-        video_send_configs_[video_idx], recv_transport,
-        params_.call.send_side_bwe, &video_decoder_factory_, decode_sub_stream,
-        true, kNackRtpHistoryMs);
+        video_send_configs_[video_idx], recv_transport, &video_decoder_factory_,
+        decode_sub_stream, true, kNackRtpHistoryMs);
 
     if (params_.screenshare[video_idx].enabled) {
       // Fill out codec settings.
@@ -926,7 +925,6 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
     }
 
     CreateMatchingFecConfig(recv_transport, *GetVideoSendConfig());
-    GetFlexFecConfig()->rtp.transport_cc = params_.call.send_side_bwe;
     if (params_.call.send_side_bwe) {
       GetFlexFecConfig()->rtp.extensions.push_back(
           RtpExtension(RtpExtension::kTransportSequenceNumberUri,
@@ -994,8 +992,7 @@ void VideoQualityTest::SetupThumbnails(Transport* send_transport,
 
     AddMatchingVideoReceiveConfigs(
         &thumbnail_receive_configs_, thumbnail_send_config, send_transport,
-        params_.call.send_side_bwe, &video_decoder_factory_, absl::nullopt,
-        false, kNackRtpHistoryMs);
+        &video_decoder_factory_, absl::nullopt, false, kNackRtpHistoryMs);
   }
   for (size_t i = 0; i < thumbnail_send_configs_.size(); ++i) {
     thumbnail_send_streams_.push_back(receiver_call_->CreateVideoSendStream(
