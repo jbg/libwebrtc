@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48ed72de_2e13c333",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-01-02T10:06:32Z",
+      "side": 1,
+      "message": "Hi, can you explain a bit why do we need a \"-sync\" suffix and using stream_label directly as before won\u0027t work?",
+      "revId": "e04c3970994bd6c4cd1260ed144c6f1bc74de761",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
