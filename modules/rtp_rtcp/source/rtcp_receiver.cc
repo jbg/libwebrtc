@@ -545,9 +545,10 @@ bool RTCPReceiver::ParseCompoundPacket(rtc::ArrayView<const uint8_t> packet,
     }
   }
 
-  if (packet_type_counter_observer_) {
+  if (packet_type_counter_observer_ && !packet_type_counter_observed_) {
     packet_type_counter_observer_->RtcpPacketTypesCounterUpdated(
         local_media_ssrc(), packet_type_counter_);
+    packet_type_counter_observed_ = true;
   }
 
   if (num_skipped_packets_ > 0) {
@@ -813,6 +814,7 @@ void RTCPReceiver::HandleNack(const CommonHeader& rtcp_block,
     ++packet_type_counter_.nack_packets;
     packet_type_counter_.nack_requests = nack_stats_.requests();
     packet_type_counter_.unique_nack_requests = nack_stats_.unique_requests();
+    packet_type_counter_observed_ = false;
   }
 }
 
@@ -968,6 +970,7 @@ void RTCPReceiver::HandlePli(const CommonHeader& rtcp_block,
 
   if (local_media_ssrc() == pli.media_ssrc()) {
     ++packet_type_counter_.pli_packets;
+    packet_type_counter_observed_ = false;
     // Received a signal that we need to send a new key frame.
     packet_information->packet_type_flags |= kRtcpPli;
   }
@@ -1075,6 +1078,7 @@ void RTCPReceiver::HandleFir(const CommonHeader& rtcp_block,
       continue;
 
     ++packet_type_counter_.fir_packets;
+    packet_type_counter_observed_ = false;
 
     auto inserted = last_fir_.insert(std::make_pair(
         fir.sender_ssrc(), LastFirStatus(now_ms, fir_request.seq_nr)));

@@ -440,6 +440,9 @@ class RTCPReceiver final {
 
   RtcpPacketTypeCounterObserver* const packet_type_counter_observer_;
   RtcpPacketTypeCounter packet_type_counter_;
+  // Tracks if the latest changes to the `packet_type_counter_` were reported to
+  // the `packet_type_counter_observer_`.
+  bool packet_type_counter_observed_ = true;
 
   RtcpNackStats nack_stats_;
 

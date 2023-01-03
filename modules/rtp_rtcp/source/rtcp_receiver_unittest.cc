@@ -186,14 +186,12 @@ TEST(RtcpReceiverTest, BrokenPacketIsIgnored) {
 
 TEST(RtcpReceiverTest, InvalidFeedbackPacketIsIgnored) {
   ReceiverMocks mocks;
+  EXPECT_CALL(mocks.packet_type_counter_observer, RtcpPacketTypesCounterUpdated)
+      .Times(0);
   RTCPReceiver receiver(DefaultConfiguration(&mocks), &mocks.rtp_rtcp_impl);
 
   // Too short feedback packet.
   const uint8_t bad_packet[] = {0x81, rtcp::Rtpfb::kPacketType, 0, 0};
-
-  // TODO(danilchap): Add expectation RtcpPacketTypesCounterUpdated
-  // is not called once parser would be adjusted to avoid that callback on
-  // semi-valid packets.
   receiver.IncomingPacket(bad_packet);
 }
 
@@ -703,10 +701,8 @@ TEST(RtcpReceiverTest, PliPacketNotToUsIgnored) {
   rtcp::Pli pli;
   pli.SetMediaSsrc(kNotToUsSsrc);
 
-  EXPECT_CALL(
-      mocks.packet_type_counter_observer,
-      RtcpPacketTypesCounterUpdated(
-          kReceiverMainSsrc, Field(&RtcpPacketTypeCounter::pli_packets, 0)));
+  EXPECT_CALL(mocks.packet_type_counter_observer, RtcpPacketTypesCounterUpdated)
+      .Times(0);
   EXPECT_CALL(mocks.intra_frame_observer, OnReceivedIntraFrameRequest).Times(0);
   receiver.IncomingPacket(pli.Build());
 }
@@ -1897,9 +1893,8 @@ TEST(RtcpReceiverTest, NackNotForUsIgnored) {
   nack.SetMediaSsrc(kNotToUsSsrc);
   nack.SetPacketIds(kNackList1, kNackListLength1);
 
-  EXPECT_CALL(mocks.packet_type_counter_observer,
-              RtcpPacketTypesCounterUpdated(
-                  _, Field(&RtcpPacketTypeCounter::nack_requests, 0)));
+  EXPECT_CALL(mocks.packet_type_counter_observer, RtcpPacketTypesCounterUpdated)
+      .Times(0);
   receiver.IncomingPacket(nack.Build());
 }
 
@@ -1989,7 +1984,8 @@ TEST(RtcpReceiverTest, ChangeLocalMediaSsrc) {
   EXPECT_CALL(mocks.packet_type_counter_observer,
               RtcpPacketTypesCounterUpdated(kReceiverMainSsrc, _));
   EXPECT_CALL(mocks.packet_type_counter_observer,
-              RtcpPacketTypesCounterUpdated(kSecondarySsrc, _));
+              RtcpPacketTypesCounterUpdated(kSecondarySsrc, _))
+      .Times(0);
 
   // Construct a test nack packet with media ssrc set to `kReceiverMainSsrc`.
   rtcp::Nack nack;
