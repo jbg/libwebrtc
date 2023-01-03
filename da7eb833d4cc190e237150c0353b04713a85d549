@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6044836d_0c031ac7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-03T09:29:04Z",
+      "side": 1,
+      "message": "Nit: no comma in \"packets that\"",
+      "revId": "da7eb833d4cc190e237150c0353b04713a85d549",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b28c3c29_f58079fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-03T09:29:04Z",
+      "side": 1,
+      "message": "I like the lines-delta on this one!",
+      "revId": "da7eb833d4cc190e237150c0353b04713a85d549",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
