@@ -33,6 +33,24 @@
       "message": "Code looks good.\n\nWill there be a change in behavior for tracks where the SSRC is not yet known - changing from \"all zeroes\" to \"no stats returned\"?\nI\u0027m not sure what this did in the previous code.",
       "revId": "e8ca43c39082ae24a1ef2846e9352aa40b853920",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef3f7292_45e1d53b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-01-03T09:06:44Z",
+      "side": 1,
+      "message": "There should be no change in behavior because we don\u0027t create outbound-rtp or inbound-rtp objects if the ssrc is not known yet anyway, so there would have been no RTPs to find either way:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/rtc_stats_collector.cc;l\u003d2026\n\ninfo.connected() returns false if ssrc is not known",
+      "parentUuid": "348ce14c_27c9d29e",
+      "revId": "e8ca43c39082ae24a1ef2846e9352aa40b853920",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
