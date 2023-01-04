@@ -184,6 +184,9 @@ declare_args() {
   # Enable this flag to make webrtc::Mutex be implemented by absl::Mutex.
   rtc_use_absl_mutex = false
 
+  # Enable this flag to make webrtc::Mutex be implemented by Apple's os_unfair_lock.
+  rtc_use_os_unfair_lock = false
+
   # By default, use normal platform audio support or dummy audio, but don't
   # use file-based audio playout and record.
   rtc_use_dummy_audio_file_devices = false
@@ -237,6 +240,9 @@ declare_args() {
   # will only run with builds that have RTC_DCHECKs enabled.
   rtc_strict_field_trials = false
 }
+
+assert(is_apple || !rtc_use_os_unfair_lock,
+       "rtc_use_os_unfair_lock is not available on non-Apple platforms.")
 
 if (!build_with_mozilla) {
   import("//testing/test.gni")
