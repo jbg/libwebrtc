@@ -182,6 +182,9 @@ class WebRtcVideoChannel : public VideoMediaChannel,
   void OnNetworkRouteChanged(absl::string_view transport_name,
                              const rtc::NetworkRoute& network_route) override;
   void SetInterface(MediaChannelNetworkInterface* iface) override;
+  // VideoMediaReceiveChannelInterface implementation (inherited via
+  // VideoMediaChannel).
+  absl::optional<uint32_t> GetDefaultReceiveStreamSsrc() const override;
 
   // E2E Encrypted Video Frame API
   // Set a frame decryptor to a particular ssrc that will intercept all
@@ -215,8 +218,6 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     RTC_DCHECK_RUN_ON(&thread_checker_);
     return sending_;
   }
-
-  absl::optional<uint32_t> GetDefaultReceiveStreamSsrc();
 
   StreamParams unsignaled_stream_params() {
     RTC_DCHECK_RUN_ON(&thread_checker_);
