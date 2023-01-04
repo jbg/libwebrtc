@@ -308,6 +308,10 @@ config("common_config") {
     defines += [ "WEBRTC_ABSL_MUTEX" ]
   }
 
+  if (rtc_use_os_unfair_lock) {
+    defines += [ "WEBRTC_OS_UNFAIR_LOCK" ]
+  }
+
   if (rtc_disable_logging) {
     defines += [ "RTC_DISABLE_LOGGING" ]
   }

@@ -92,4 +92,53 @@ BM_LockWithMutex/threads:2        91.1 ns          182 ns      4059212
 BM_LockWithMutex/threads:4        40.8 ns          131 ns      5496560
 BM_LockWithMutex/threads:12       37.0 ns          130 ns      5377668
 
+04 Jan 2023 macOS Tests
+
+pthread (macOS):
+Run on (12 X 3200 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 256 KiB (x6)
+  L3 Unified 12288 KiB (x1)
+Load Average: 0.94, 0.83, 0.79
+----------------------------------------------------------------------
+Benchmark                            Time             CPU   Iterations
+----------------------------------------------------------------------
+BM_LockWithMutex/threads:1        22.3 ns         22.3 ns     31451910
+BM_LockWithMutex/threads:2        57.0 ns         93.0 ns      7695690
+BM_LockWithMutex/threads:4        55.0 ns          185 ns      3737820
+BM_LockWithMutex/threads:12       62.0 ns          664 ns      1146408
+
+Abseil (macOS):
+Run on (12 X 3200 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 256 KiB (x6)
+  L3 Unified 12288 KiB (x1)
+Load Average: 0.62, 0.77, 0.77
+----------------------------------------------------------------------
+Benchmark                            Time             CPU   Iterations
+----------------------------------------------------------------------
+BM_LockWithMutex/threads:1        20.6 ns         20.6 ns     34069394
+BM_LockWithMutex/threads:2         110 ns          217 ns      3238004
+BM_LockWithMutex/threads:4         127 ns          460 ns      1527144
+BM_LockWithMutex/threads:12       63.2 ns          197 ns      3570564
+
+os_unfair_lock (macOS):
+Run on (12 X 3200 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 256 KiB (x6)
+  L3 Unified 12288 KiB (x1)
+Load Average: 0.65, 0.78, 0.77
+----------------------------------------------------------------------
+Benchmark                            Time             CPU   Iterations
+----------------------------------------------------------------------
+BM_LockWithMutex/threads:1        15.7 ns         15.7 ns     44622936
+BM_LockWithMutex/threads:2        83.3 ns          167 ns      4061290
+BM_LockWithMutex/threads:4        48.4 ns          192 ns      3813884
+BM_LockWithMutex/threads:12       44.6 ns          522 ns      1406352
 */
