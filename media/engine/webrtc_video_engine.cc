@@ -1874,6 +1874,19 @@ void WebRtcVideoChannel::SetInterface(MediaChannelNetworkInterface* iface) {
                           rtc::Socket::OPT_SNDBUF, send_buffer_size);
 }
 
+absl::optional<uint32_t> WebRtcVideoChannel::GetDefaultReceiveStreamSsrc()
+    const {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  absl::optional<uint32_t> ssrc;
+  for (auto it = receive_streams_.begin(); it != receive_streams_.end(); ++it) {
+    if (it->second->IsDefaultStream()) {
+      ssrc.emplace(it->first);
+      break;
+    }
+  }
+  return ssrc;
+}
+
 void WebRtcVideoChannel::SetFrameDecryptor(
     uint32_t ssrc,
     rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor) {
@@ -1959,18 +1972,6 @@ absl::optional<int> WebRtcVideoChannel::GetBaseMinimumPlayoutDelayMs(
     RTC_LOG(LS_ERROR) << "No stream found to get base minimum playout delay";
     return absl::nullopt;
   }
-}
-
-absl::optional<uint32_t> WebRtcVideoChannel::GetDefaultReceiveStreamSsrc() {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
-  absl::optional<uint32_t> ssrc;
-  for (auto it = receive_streams_.begin(); it != receive_streams_.end(); ++it) {
-    if (it->second->IsDefaultStream()) {
-      ssrc.emplace(it->first);
-      break;
-    }
-  }
-  return ssrc;
 }
 
 std::vector<webrtc::RtpSource> WebRtcVideoChannel::GetSources(
