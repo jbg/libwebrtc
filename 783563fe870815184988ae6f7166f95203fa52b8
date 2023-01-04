@@ -16,6 +16,23 @@
       "message": "Please take another look. I\u0027ve skipped the expected-failing tests with `#if 0` blocks.",
       "revId": "783563fe870815184988ae6f7166f95203fa52b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7a5b0ef_99d86a5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2023-01-04T09:51:51Z",
+      "side": 1,
+      "message": "This seems fine for now. Thanks for filing the bug to follow up on XCTSkip etc not working properly.",
+      "revId": "783563fe870815184988ae6f7166f95203fa52b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
