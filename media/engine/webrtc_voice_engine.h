@@ -161,6 +161,7 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
       webrtc::SetParametersCallback callback) override;
   webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const override;
   webrtc::RtpParameters GetDefaultRtpReceiveParameters() const override;
+  absl::optional<uint32_t> GetDefaultReceiveStreamSsrc() const override;
 
   void SetPlayout(bool playout) override;
   void SetSend(bool send) override;

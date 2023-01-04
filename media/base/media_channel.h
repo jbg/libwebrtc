@@ -900,6 +900,7 @@ class VoiceMediaReceiveChannelInterface : public MediaReceiveChannelInterface {
   virtual void SetDefaultRawAudioSink(
       std::unique_ptr<webrtc::AudioSinkInterface> sink) = 0;
   virtual bool GetStats(VoiceMediaReceiveInfo* stats, bool reset_legacy) = 0;
+  virtual absl::optional<uint32_t> GetDefaultReceiveStreamSsrc() const = 0;
 };
 
 // TODO(deadbeef): Rename to VideoSenderParameters, since they're intended to
@@ -972,6 +973,7 @@ class VideoMediaReceiveChannelInterface : public MediaReceiveChannelInterface {
   // Clear recordable encoded frame callback for `ssrc`
   virtual void ClearRecordableEncodedFrameCallback(uint32_t ssrc) = 0;
   virtual bool GetStats(VideoMediaReceiveInfo* stats) = 0;
+  virtual absl::optional<uint32_t> GetDefaultReceiveStreamSsrc() const = 0;
 };
 
 // Info about data received in DataMediaChannel.  For use in

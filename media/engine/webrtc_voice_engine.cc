@@ -1477,6 +1477,16 @@ webrtc::RtpParameters WebRtcVoiceMediaChannel::GetDefaultRtpReceiveParameters()
   return rtp_params;
 }
 
+absl::optional<uint32_t> WebRtcVoiceMediaChannel::GetDefaultReceiveStreamSsrc()
+    const {
+  if (unsignaled_recv_ssrcs_.empty()) {
+    return absl::nullopt;
+  }
+  // In the event of multiple unsignaled ssrcs, the last in the vector will be
+  // the most recent one (the one forwarded to the MediaStreamTrack).
+  return unsignaled_recv_ssrcs_.back();
+}
+
 bool WebRtcVoiceMediaChannel::SetOptions(const AudioOptions& options) {
   RTC_DCHECK_RUN_ON(worker_thread_);
   RTC_LOG(LS_INFO) << "Setting voice channel options: " << options.ToString();

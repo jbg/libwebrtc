@@ -469,6 +469,9 @@ class VoiceMediaReceiveChannel : public VoiceMediaReceiveChannelInterface {
   bool GetStats(VoiceMediaReceiveInfo* info, bool reset_legacy) override {
     return impl_->GetReceiveStats(info, reset_legacy);
   }
+  absl::optional<uint32_t> GetDefaultReceiveStreamSsrc() const override {
+    return impl()->GetDefaultReceiveStreamSsrc();
+  }
 
  private:
   VoiceMediaReceiveChannelInterface* impl() { return impl_; }
@@ -668,6 +671,9 @@ class VideoMediaReceiveChannel : public VideoMediaReceiveChannelInterface {
   }
   bool GetStats(VideoMediaReceiveInfo* info) override {
     return impl_->GetReceiveStats(info);
+  }
+  absl::optional<uint32_t> GetDefaultReceiveStreamSsrc() const override {
+    return impl()->GetDefaultReceiveStreamSsrc();
   }
 
  private:

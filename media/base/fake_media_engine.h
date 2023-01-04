@@ -181,6 +181,9 @@ class RtpHelper : public Base {
   virtual webrtc::RtpParameters GetDefaultRtpReceiveParameters() const {
     return webrtc::RtpParameters();
   }
+  virtual absl::optional<uint32_t> GetDefaultReceiveStreamSsrc() const {
+    return absl::nullopt;
+  }
 
   bool IsStreamMuted(uint32_t ssrc) const {
     bool ret = muted_streams_.find(ssrc) != muted_streams_.end();
