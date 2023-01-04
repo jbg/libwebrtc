@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11cb4271_d01fd293",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-04T09:37:34Z",
+      "side": 1,
+      "message": "Can you put a line into the description saying why this is now safe to land?",
+      "revId": "a0be953576747a5eb02f514e45eb22785a9389a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
