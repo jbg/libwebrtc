@@ -20,6 +20,8 @@
 
 #if defined(WEBRTC_ABSL_MUTEX)
 #include "rtc_base/synchronization/mutex_abseil.h"  // nogncheck
+#elif defined(WEBRTC_OS_UNFAIR_LOCK)
+#include "rtc_base/synchronization/mutex_os_unfair_lock.h"  // nogncheck
 #elif defined(WEBRTC_WIN)
 #include "rtc_base/synchronization/mutex_critical_section.h"
 #elif defined(WEBRTC_POSIX)

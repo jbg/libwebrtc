@@ -30,6 +30,9 @@ rtc_source_set("mutex") {
   if (rtc_use_absl_mutex) {
     sources += [ "mutex_abseil.h" ]
   }
+  if (rtc_use_os_unfair_lock) {
+    sources += [ "mutex_os_unfair_lock.h" ]
+  }
 
   deps = [
     ":yield",
