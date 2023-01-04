@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a5910de_b135a5b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-01-04T12:51:44Z",
+      "side": 1,
+      "message": "Don\u0027t get me wrong I find this API interesting 😊\n\nLooks to me like this mutex type has a small advantage in uncontended performance, which is by far the most common case AFAIK. But it\u0027s diluted by the mutex usage % in a real product scenario (this % can be found with Instruments profiling). Does the new mutex have a performance impact in your local product test rig?\n\nIf we\u0027d want to switch to this implementation, the safest is to switch in an experiment and that would also give power impact from the field at least from Chromium. The CL structure would have to be different for that though, but can happen in a later CL.\n\nFrom Google searches I notice\n- Some trash talk on https://mjtsai.com/blog/2022/10/10/improving-firefox-responsiveness-on-macos/\n- Some reports on Firefox migration from OSSpinLock to os_unfair_lock. Seems it was a good move as it turned out OSSpinLock doesn\u0027t wait for unlockers, but not that relevant for WebRTC/Chromium. https://bugzilla.mozilla.org/show_bug.cgi?id\u003d1670885",
+      "parentUuid": "e5e5616c_54b44fdd",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "801cbaadf3e9f293f82a750fee419378ec337102",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4fc8ab27_74ebf128",
