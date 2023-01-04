@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "973248dd_4f52c1ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-01-04T17:36:16Z",
+      "side": 1,
+      "message": "Alternatively maybe the unsignalled ssrc should be exposed in the default getParameters path instead of an empty encoding? I\u0027ll see what makes more sense tomorrow... I\u0027ll let you know when the CL is ready",
+      "revId": "48558688c975d753c80b98e04b565e9f102282ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
