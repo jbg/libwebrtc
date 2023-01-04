@@ -107,6 +107,10 @@ class MockVoiceMediaChannel : public VoiceMediaChannel {
               GetDefaultRtpReceiveParameters,
               (),
               (const, override));
+  MOCK_METHOD(absl::optional<uint32_t>,
+              GetDefaultReceiveStreamSsrc,
+              (),
+              (const, override));
   MOCK_METHOD(void, SetPlayout, (bool playout), (override));
   MOCK_METHOD(void, SetSend, (bool send), (override));
   MOCK_METHOD(bool,
