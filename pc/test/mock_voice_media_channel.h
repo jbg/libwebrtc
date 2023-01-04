@@ -48,6 +48,9 @@ class MockVoiceMediaChannel : public VoiceMediaChannel {
               (absl::string_view transport_name,
                const rtc::NetworkRoute& network_route),
               (override));
+  MOCK_METHOD(void, SetExtmapAllowMixed, (bool extmap_allow_mixed), (override));
+  MOCK_METHOD(bool, ExtmapAllowMixed, (), (const, override));
+  MOCK_METHOD(bool, HasNetworkInterface, (), (const, override));
   MOCK_METHOD(bool, AddSendStream, (const StreamParams& sp), (override));
   MOCK_METHOD(bool, RemoveSendStream, (uint32_t ssrc), (override));
   MOCK_METHOD(bool, AddRecvStream, (const StreamParams& sp), (override));

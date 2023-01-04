@@ -1430,9 +1430,12 @@ void RTCStatsCollector::GetStatsReportInternal(
     // `network_report_event_`.
     network_report_event_.Reset();
     rtc::scoped_refptr<RTCStatsCollector> collector(this);
+    RTC_LOG(LS_ERROR) << "DEBUG: Posting ProducePartialResultsOnNetworkThread";
     network_thread_->PostTask(
         [collector, sctp_transport_name = pc_->sctp_transport_name(),
          timestamp_us]() mutable {
+          RTC_LOG(LS_ERROR)
+              << "DEBUG: calling ProducePartialResultsOnNetworkThread";
           collector->ProducePartialResultsOnNetworkThread(
               timestamp_us, std::move(sctp_transport_name));
         });
@@ -2050,6 +2053,7 @@ void RTCStatsCollector::ProduceAudioRTPStreamStats_n(
         std::make_pair(outbound_audio->id(), outbound_audio.get());
     if (report->TryAddStats(std::move(outbound_audio))) {
       audio_outbound_rtps.insert(std::move(audio_outbound_pair));
+      RTC_LOG(LS_ERROR) << "DEBUG: Added audio outbound RTP stats";
     } else {
       RTC_LOG(LS_ERROR)
           << "Unable to add audio 'outbound-rtp' to report, ID is not unique.";
@@ -2114,6 +2118,9 @@ void RTCStatsCollector::ProduceVideoRTPStreamStats_n(
     }
   }
   // Outbound
+  RTC_LOG(LS_ERROR)
+      << "DEBUG: Starting to iterate RTCOutboundRTPStats, sender size "
+      << stats.track_media_info_map.video_media_info()->senders.size();
   std::map<std::string, RTCOutboundRTPStreamStats*> video_outbound_rtps;
   for (const cricket::VideoSenderInfo& video_sender_info :
        stats.track_media_info_map.video_media_info()->senders) {
@@ -2144,6 +2151,7 @@ void RTCStatsCollector::ProduceVideoRTPStreamStats_n(
         std::make_pair(outbound_video->id(), outbound_video.get());
     if (report->TryAddStats(std::move(outbound_video))) {
       video_outbound_rtps.insert(std::move(video_outbound_pair));
+      RTC_LOG(LS_ERROR) << "DEBUG: Inserted a video outbound RTP stats";
     } else {
       RTC_LOG(LS_ERROR)
           << "Unable to add video 'outbound-rtp' to report, ID is not unique.";
