@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa5cde5b_88ca1b3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-04T09:43:19Z",
+      "side": 1,
+      "message": "do you want to wait for the successful chromium roll to be more sure?",
+      "revId": "bb520a6c5d2bdf93ac86ddea731290c80337b9ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
