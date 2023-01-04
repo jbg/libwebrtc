@@ -16,6 +16,23 @@
       "message": "I would still like another dry run here, if you could help me with this, thanks.",
       "revId": "813c73f65931275b3886b4541176dd641d1ab43f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b62cb32_0cb2944c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2023-01-04T07:43:50Z",
+      "side": 1,
+      "message": "It seems like the test runner considers expected failures as failures. Because the log says:\n\u003e [06:43:54:INFO] RTCCameraVideoCapturerTests.mm:252: Expected failure in -[RTCCameraVideoCapturerTests testRotationCameraBackLandscapeLeft]: ((expectedFrame.rotation) equal to (RTCVideoRotation_0)) failed: (\"90\") is not equal to (\"0\")Reason: (Setting orientation on UIDevice is not supported)\n\u003e [06:43:54:INFO] Test Case \u0027-[RTCCameraVideoCapturerTests testRotationCameraBackLandscapeLeft]\u0027 passed (1.014 seconds).\n\nSo it \"passed\" and yet the test case is considered failed.\n\nThoughts on the best way forward?",
+      "revId": "813c73f65931275b3886b4541176dd641d1ab43f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
