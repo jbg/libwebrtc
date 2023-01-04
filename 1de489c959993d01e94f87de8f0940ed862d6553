@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb746046_ea05d966",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-04T09:09:00Z",
+      "side": 1,
+      "message": "I\u0027ve also rechecked the scenario from crbug.com/949020 - it still runs under 1s after this change.",
+      "revId": "1de489c959993d01e94f87de8f0940ed862d6553",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
