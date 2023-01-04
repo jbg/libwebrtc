@@ -2978,11 +2978,14 @@ std::function<void(const rtc::CopyOnWriteBuffer& packet,
                    int64_t packet_time_us)>
 PeerConnection::InitializeRtcpCallback() {
   RTC_DCHECK_RUN_ON(network_thread());
-  return [this](const rtc::CopyOnWriteBuffer& packet, int64_t packet_time_us) {
-    RTC_DCHECK_RUN_ON(network_thread());
-    call_ptr_->Receiver()->DeliverPacket(MediaType::ANY, packet,
-                                         packet_time_us);
-  };
+  return
+      [this](const rtc::CopyOnWriteBuffer& packet, int64_t /*packet_time_us*/) {
+        worker_thread()->PostTask(SafeTask(
+            worker_thread_safety_, [this, packet = std::move(packet)]() {
+              RTC_DCHECK_RUN_ON(worker_thread());
+              call_ptr_->Receiver()->DeliverRtcpPacket(packet);
+            }));
+      };
 }
 
 }  // namespace webrtc
