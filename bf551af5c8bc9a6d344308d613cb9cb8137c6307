@@ -64,6 +64,98 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "44c49bd9_f6f06c22",
+        "filename": "call/call.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T12:27:33Z",
+      "side": 1,
+      "message": "there is an implicit conversion from CoWBuffer to ArrayView, i.e.\n\n`event_log_-\u003eLog(std::make_unique\u003cRtcEventRtcpPacketIncoming\u003e(packet));`\nshould work",
+      "range": {
+        "startLine": 1416,
+        "startChar": 8,
+        "endLine": 1416,
+        "endChar": 58
+      },
+      "revId": "bf551af5c8bc9a6d344308d613cb9cb8137c6307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed50ce2_adfde33c",
+        "filename": "call/call.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1451,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T12:27:33Z",
+      "side": 1,
+      "message": "may be move this block just before updating stats (right after event_log_)\nto reduce lifetime of the `length` variable",
+      "range": {
+        "startLine": 1449,
+        "startChar": 0,
+        "endLine": 1451,
+        "endChar": 47
+      },
+      "revId": "bf551af5c8bc9a6d344308d613cb9cb8137c6307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06fc4877_63f4c8e5",
+        "filename": "call/call.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1519,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T12:27:33Z",
+      "side": 1,
+      "message": "mark it as mutable: `[this, packet \u003d std::move(packet]() mutable {` \notherwise packet capture is const and `DeliverRtcpPacket(std::move(packet))` won\u0027t move packet, just copy.",
+      "range": {
+        "startLine": 1519,
+        "startChar": 74,
+        "endLine": 1519,
+        "endChar": 75
+      },
+      "revId": "bf551af5c8bc9a6d344308d613cb9cb8137c6307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2dd27ee_4a7782e5",
+        "filename": "call/packet_receiver.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T12:27:33Z",
+      "side": 1,
+      "message": "drop namespace",
+      "range": {
+        "startLine": 48,
+        "startChar": 6,
+        "endLine": 48,
+        "endChar": 14
+      },
+      "revId": "bf551af5c8bc9a6d344308d613cb9cb8137c6307",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "de4b7234_9a9e2ef1",
