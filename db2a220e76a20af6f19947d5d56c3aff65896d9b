@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2335554e_d85a0aaf",
+        "filename": "call/call.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-01-05T11:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fc49ef0_b5950be0",
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5fa0f80_d71c3a3a",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-01-05T10:50:00Z",
       "side": 1,
       "message": "std::move(parsed_packet)\nor change DeliverRtpPacket signature to take packet by const reference",
+      "range": {
+        "startLine": 1502,
+        "startChar": 31,
+        "endLine": 1502,
+        "endChar": 44
+      },
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23445c42_9ef1ea63",
+        "filename": "call/call.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1502,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-01-05T11:50:51Z",
+      "side": 1,
+      "message": "Done\n\nEven after my initial refactorings, Both Call and WebrtcVideoEngine will continue to modify a RtpPacketReceived slightly. Therefore let the signature here be non const. But I dont have a strong opinion. Eventually, one day... we parse the packet once and dont modify any metadata again....",
+      "parentUuid": "d5fa0f80_d71c3a3a",
       "range": {
         "startLine": 1502,
         "startChar": 31,
@@ -81,6 +123,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "969b3084_64f0e715",
+        "filename": "call/packet_receiver.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-01-05T11:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c9d0d5f_e89c1ccf",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 24
+      },
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "910d5066_7709f528",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-01-05T10:50:00Z",
       "side": 1,
       "message": "this class is already in the webrtc namespace",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 14
+      },
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "138617eb_20ab1d41",
+        "filename": "call/packet_receiver.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-01-05T11:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "910d5066_7709f528",
       "range": {
         "startLine": 47,
         "startChar": 6,
@@ -140,6 +230,30 @@
       "writtenOn": "2023-01-05T10:50:00Z",
       "side": 1,
       "message": "`packet` is passed by reference, so you can\u0027t move it, only copy (std::move does nothing, just confuses the reader):\n`[this, packet] {` ...\n\n(side note: copy of the CoWBuffer is relatively cheap)",
+      "range": {
+        "startLine": 2984,
+        "startChar": 42,
+        "endLine": 2984,
+        "endChar": 68
+      },
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fec44b44_2347212e",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 2984,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-01-05T11:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90e1c360_25fe7e65",
       "range": {
         "startLine": 2984,
         "startChar": 42,
