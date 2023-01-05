@@ -464,6 +464,8 @@ AudioMixer::Source::AudioFrameInfo ChannelReceive::GetAudioFrameWithInfo(
         // `capture_start_ntp_time_ms_` + `elapsed_time_ms_` == `ntp_time_ms_`
         capture_start_ntp_time_ms_ =
             audio_frame->ntp_time_ms_ - audio_frame->elapsed_time_ms_;
+        RTC_LOG(LS_ERROR) << "DEBUG: Capture start NTP time is "
+                          << capture_start_ntp_time_ms_;
       }
     }
   }
