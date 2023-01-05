@@ -610,13 +610,14 @@ WebRtcVideoEngine::~WebRtcVideoEngine() {
 }
 
 VideoMediaChannel* WebRtcVideoEngine::CreateMediaChannel(
+    MediaChannel::Role role,
     webrtc::Call* call,
     const MediaConfig& config,
     const VideoOptions& options,
     const webrtc::CryptoOptions& crypto_options,
     webrtc::VideoBitrateAllocatorFactory* video_bitrate_allocator_factory) {
   RTC_LOG(LS_INFO) << "CreateMediaChannel. Options: " << options.ToString();
-  return new WebRtcVideoChannel(call, config, options, crypto_options,
+  return new WebRtcVideoChannel(role, call, config, options, crypto_options,
                                 encoder_factory_.get(), decoder_factory_.get(),
                                 video_bitrate_allocator_factory);
 }
@@ -674,6 +675,7 @@ WebRtcVideoEngine::GetRtpHeaderExtensions() const {
 }
 
 WebRtcVideoChannel::WebRtcVideoChannel(
+    MediaChannel::Role role,
     webrtc::Call* call,
     const MediaConfig& config,
     const VideoOptions& options,
@@ -681,7 +683,7 @@ WebRtcVideoChannel::WebRtcVideoChannel(
     webrtc::VideoEncoderFactory* encoder_factory,
     webrtc::VideoDecoderFactory* decoder_factory,
     webrtc::VideoBitrateAllocatorFactory* bitrate_allocator_factory)
-    : VideoMediaChannel(call->network_thread(), config.enable_dscp),
+    : VideoMediaChannel(role, call->network_thread(), config.enable_dscp),
       worker_thread_(call->worker_thread()),
       call_(call),
       unsignalled_ssrc_handler_(&default_unsignalled_ssrc_handler_),
@@ -1613,7 +1615,6 @@ bool WebRtcVideoChannel::GetSendStats(VideoMediaSendInfo* info) {
     log_stats = true;
   }
 
-  info->Clear();
   FillSenderStats(info, log_stats);
   FillSendCodecStats(info);
   // TODO(holmer): We should either have rtt available as a metric on
@@ -1655,6 +1656,8 @@ bool WebRtcVideoChannel::GetReceiveStats(VideoMediaReceiveInfo* info) {
 
 void WebRtcVideoChannel::FillSenderStats(VideoMediaSendInfo* video_media_info,
                                          bool log_stats) {
+  RTC_LOG(LS_ERROR) << "DEBUG: FillSenderStats called with sender streams size "
+                    << send_streams_.size();
   for (std::map<uint32_t, WebRtcVideoSendStream*>::iterator it =
            send_streams_.begin();
        it != send_streams_.end(); ++it) {
@@ -1675,6 +1678,7 @@ void WebRtcVideoChannel::FillReceiverStats(
   for (std::map<uint32_t, WebRtcVideoReceiveStream*>::iterator it =
            receive_streams_.begin();
        it != receive_streams_.end(); ++it) {
+    RTC_LOG(LS_ERROR) << "DEBUG: FillReceiverStats push an entry";
     video_media_info->receivers.push_back(
         it->second->GetVideoReceiverInfo(log_stats));
   }

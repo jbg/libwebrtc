@@ -407,13 +407,14 @@ rtc::scoped_refptr<webrtc::AudioState> WebRtcVoiceEngine::GetAudioState()
 }
 
 VoiceMediaChannel* WebRtcVoiceEngine::CreateMediaChannel(
+    MediaChannel::Role role,
     webrtc::Call* call,
     const MediaConfig& config,
     const AudioOptions& options,
     const webrtc::CryptoOptions& crypto_options) {
   RTC_DCHECK_RUN_ON(call->worker_thread());
-  return new WebRtcVoiceMediaChannel(this, config, options, crypto_options,
-                                     call);
+  return new WebRtcVoiceMediaChannel(role, this, config, options,
+                                     crypto_options, call);
 }
 
 void WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
@@ -1255,12 +1256,13 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
 };
 
 WebRtcVoiceMediaChannel::WebRtcVoiceMediaChannel(
+    MediaChannel::Role role,
     WebRtcVoiceEngine* engine,
     const MediaConfig& config,
     const AudioOptions& options,
     const webrtc::CryptoOptions& crypto_options,
     webrtc::Call* call)
-    : VoiceMediaChannel(call->network_thread(), config.enable_dscp),
+    : VoiceMediaChannel(role, call->network_thread(), config.enable_dscp),
       worker_thread_(call->worker_thread()),
       engine_(engine),
       call_(call),
@@ -2268,7 +2270,10 @@ bool WebRtcVoiceMediaChannel::GetSendStats(VoiceMediaSendInfo* info) {
   RTC_DCHECK(info);
 
   // Get SSRC and stats for each sender.
-  RTC_DCHECK_EQ(info->senders.size(), 0U);
+  // With separate send and receive channels, we expect GetStats to be called on
+  // both, and accumulate info, but only one channel (the send one) should have
+  // senders.
+  RTC_DCHECK(info->senders.size() == 0U || send_streams_.size() == 0);
   for (const auto& stream : send_streams_) {
     webrtc::AudioSendStream::Stats stats =
         stream.second->GetStats(recv_streams_.size() > 0);

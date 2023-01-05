@@ -103,6 +103,7 @@ class WebRtcVideoEngine : public VideoEngineInterface {
   ~WebRtcVideoEngine() override;
 
   VideoMediaChannel* CreateMediaChannel(
+      MediaChannel::Role role,
       webrtc::Call* call,
       const MediaConfig& config,
       const VideoOptions& options,
@@ -134,6 +135,7 @@ class WebRtcVideoChannel : public VideoMediaChannel,
                            public webrtc::EncoderSwitchRequestCallback {
  public:
   WebRtcVideoChannel(
+      MediaChannel::Role role,
       webrtc::Call* call,
       const MediaConfig& config,
       const VideoOptions& options,
