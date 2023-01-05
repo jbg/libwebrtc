@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ffda37f_59cb5ebf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T10:50:00Z",
+      "side": 1,
+      "message": "overall lg",
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fc49ef0_b5950be0",
+        "filename": "call/call.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T10:50:00Z",
+      "side": 1,
+      "message": "keep alive packets can be nor AUDIO, nor VIDEO\n(this line isn\u0027t consistent with the check 5 lines above)",
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5fa0f80_d71c3a3a",
+        "filename": "call/call.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1502,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T10:50:00Z",
+      "side": 1,
+      "message": "std::move(parsed_packet)\nor change DeliverRtpPacket signature to take packet by const reference",
+      "range": {
+        "startLine": 1502,
+        "startChar": 31,
+        "endLine": 1502,
+        "endChar": 44
+      },
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c9d0d5f_e89c1ccf",
+        "filename": "call/packet_receiver.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T10:50:00Z",
+      "side": 1,
+      "message": "add\n#include \"rtc_base/checks.h\"",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 24
+      },
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "910d5066_7709f528",
+        "filename": "call/packet_receiver.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T10:50:00Z",
+      "side": 1,
+      "message": "this class is already in the webrtc namespace",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 14
+      },
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a303eb_2589c55e",
+        "filename": "call/packet_receiver.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T10:50:00Z",
+      "side": 1,
+      "message": "I think \u0027undemuxable\u0027 is a single word",
+      "range": {
+        "startLine": 48,
+        "startChar": 33,
+        "endLine": 48,
+        "endChar": 45
+      },
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90e1c360_25fe7e65",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 2984,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-05T10:50:00Z",
+      "side": 1,
+      "message": "`packet` is passed by reference, so you can\u0027t move it, only copy (std::move does nothing, just confuses the reader):\n`[this, packet] {` ...\n\n(side note: copy of the CoWBuffer is relatively cheap)",
+      "range": {
+        "startLine": 2984,
+        "startChar": 42,
+        "endLine": 2984,
+        "endChar": 68
+      },
+      "revId": "db2a220e76a20af6f19947d5d56c3aff65896d9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
