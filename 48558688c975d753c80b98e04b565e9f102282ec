@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2ef095e6_bd4819a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-01-05T07:38:04Z",
+      "side": 1,
+      "message": "I thought about this some more and I think this CL is correct: the receiver should check what the unsignalled SSRC is, not rely on \"default parameters\" to tell it this.\n\nIn fact, after this CL lands and the receiver can obtain the unsignalled SSRC, we will be able to fix the bugs GetParameters() and GetSources() are not working without a signalled ssrc.\n\nLet\u0027s fix those as a follow-up. I filed https://crbug.com/webrtc/14811",
+      "parentUuid": "f810ef20_1970ee36",
+      "revId": "48558688c975d753c80b98e04b565e9f102282ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "20a4936d_86dd475f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
