@@ -226,9 +226,9 @@ class WebRtcVoiceEngineTestFake : public ::testing::TestWithParam<bool> {
   }
 
   bool SetupChannel() {
-    channel_ = engine_->CreateMediaChannel(&call_, cricket::MediaConfig(),
-                                           cricket::AudioOptions(),
-                                           webrtc::CryptoOptions());
+    channel_ = engine_->CreateMediaChannel(
+        cricket::MediaChannel::Role::kBoth, &call_, cricket::MediaConfig(),
+        cricket::AudioOptions(), webrtc::CryptoOptions());
     send_channel_ = std::make_unique<cricket::VoiceMediaSendChannel>(channel_);
     receive_channel_ =
         std::make_unique<cricket::VoiceMediaReceiveChannel>(channel_);
@@ -2998,9 +2998,9 @@ TEST_P(WebRtcVoiceEngineTestFake, InitRecordingOnSend) {
   EXPECT_CALL(*adm_, InitRecording()).Times(1);
 
   std::unique_ptr<cricket::VoiceMediaChannel> channel(
-      engine_->CreateMediaChannel(&call_, cricket::MediaConfig(),
-                                  cricket::AudioOptions(),
-                                  webrtc::CryptoOptions()));
+      engine_->CreateMediaChannel(
+          cricket::MediaChannel::Role::kBoth, &call_, cricket::MediaConfig(),
+          cricket::AudioOptions(), webrtc::CryptoOptions()));
 
   channel->SetSend(true);
 }
@@ -3014,7 +3014,8 @@ TEST_P(WebRtcVoiceEngineTestFake, SkipInitRecordingOnSend) {
   options.init_recording_on_send = false;
 
   std::unique_ptr<cricket::VoiceMediaChannel> channel(
-      engine_->CreateMediaChannel(&call_, cricket::MediaConfig(), options,
+      engine_->CreateMediaChannel(cricket::MediaChannel::Role::kBoth, &call_,
+                                  cricket::MediaConfig(), options,
                                   webrtc::CryptoOptions()));
 
   channel->SetSend(true);
@@ -3040,12 +3041,14 @@ TEST_P(WebRtcVoiceEngineTestFake, SetOptionOverridesViaChannels) {
 
   std::unique_ptr<cricket::WebRtcVoiceMediaChannel> channel1(
       static_cast<cricket::WebRtcVoiceMediaChannel*>(
-          engine_->CreateMediaChannel(&call_, cricket::MediaConfig(),
+          engine_->CreateMediaChannel(cricket::MediaChannel::Role::kBoth,
+                                      &call_, cricket::MediaConfig(),
                                       cricket::AudioOptions(),
                                       webrtc::CryptoOptions())));
   std::unique_ptr<cricket::WebRtcVoiceMediaChannel> channel2(
       static_cast<cricket::WebRtcVoiceMediaChannel*>(
-          engine_->CreateMediaChannel(&call_, cricket::MediaConfig(),
+          engine_->CreateMediaChannel(cricket::MediaChannel::Role::kBoth,
+                                      &call_, cricket::MediaConfig(),
                                       cricket::AudioOptions(),
                                       webrtc::CryptoOptions())));
 
@@ -3157,7 +3160,8 @@ TEST_P(WebRtcVoiceEngineTestFake, TestSetDscpOptions) {
   webrtc::RtpParameters parameters;
 
   channel.reset(static_cast<cricket::WebRtcVoiceMediaChannel*>(
-      engine_->CreateMediaChannel(&call_, config, cricket::AudioOptions(),
+      engine_->CreateMediaChannel(cricket::MediaChannel::Role::kBoth, &call_,
+                                  config, cricket::AudioOptions(),
                                   webrtc::CryptoOptions())));
   channel->SetInterface(&network_interface);
   // Default value when DSCP is disabled should be DSCP_DEFAULT.
@@ -3166,7 +3170,8 @@ TEST_P(WebRtcVoiceEngineTestFake, TestSetDscpOptions) {
 
   config.enable_dscp = true;
   channel.reset(static_cast<cricket::WebRtcVoiceMediaChannel*>(
-      engine_->CreateMediaChannel(&call_, config, cricket::AudioOptions(),
+      engine_->CreateMediaChannel(cricket::MediaChannel::Role::kBoth, &call_,
+                                  config, cricket::AudioOptions(),
                                   webrtc::CryptoOptions())));
   channel->SetInterface(&network_interface);
   EXPECT_EQ(rtc::DSCP_DEFAULT, network_interface.dscp());
@@ -3195,7 +3200,8 @@ TEST_P(WebRtcVoiceEngineTestFake, TestSetDscpOptions) {
   // DiffServCodePoint.
   config.enable_dscp = false;
   channel.reset(static_cast<cricket::WebRtcVoiceMediaChannel*>(
-      engine_->CreateMediaChannel(&call_, config, cricket::AudioOptions(),
+      engine_->CreateMediaChannel(cricket::MediaChannel::Role::kBoth, &call_,
+                                  config, cricket::AudioOptions(),
                                   webrtc::CryptoOptions())));
   channel->SetInterface(&network_interface);
   // Default value when DSCP is disabled should be DSCP_DEFAULT.
@@ -3612,8 +3618,8 @@ TEST(WebRtcVoiceEngineTest, StartupShutdown) {
     call_config.task_queue_factory = task_queue_factory.get();
     auto call = absl::WrapUnique(webrtc::Call::Create(call_config));
     cricket::VoiceMediaChannel* channel = engine.CreateMediaChannel(
-        call.get(), cricket::MediaConfig(), cricket::AudioOptions(),
-        webrtc::CryptoOptions());
+        cricket::MediaChannel::Role::kBoth, call.get(), cricket::MediaConfig(),
+        cricket::AudioOptions(), webrtc::CryptoOptions());
     EXPECT_TRUE(channel != nullptr);
     delete channel;
   }
@@ -3643,7 +3649,8 @@ TEST(WebRtcVoiceEngineTest, StartupShutdownWithExternalADM) {
       call_config.task_queue_factory = task_queue_factory.get();
       auto call = absl::WrapUnique(webrtc::Call::Create(call_config));
       cricket::VoiceMediaChannel* channel = engine.CreateMediaChannel(
-          call.get(), cricket::MediaConfig(), cricket::AudioOptions(),
+          cricket::MediaChannel::Role::kBoth, call.get(),
+          cricket::MediaConfig(), cricket::AudioOptions(),
           webrtc::CryptoOptions());
       EXPECT_TRUE(channel != nullptr);
       delete channel;
@@ -3732,7 +3739,8 @@ TEST(WebRtcVoiceEngineTest, Has32Channels) {
     size_t num_channels = 0;
     while (num_channels < arraysize(channels)) {
       cricket::VoiceMediaChannel* channel = engine.CreateMediaChannel(
-          call.get(), cricket::MediaConfig(), cricket::AudioOptions(),
+          cricket::MediaChannel::Role::kBoth, call.get(),
+          cricket::MediaConfig(), cricket::AudioOptions(),
           webrtc::CryptoOptions());
       if (!channel)
         break;
@@ -3778,8 +3786,8 @@ TEST(WebRtcVoiceEngineTest, SetRecvCodecs) {
     call_config.task_queue_factory = task_queue_factory.get();
     auto call = absl::WrapUnique(webrtc::Call::Create(call_config));
     cricket::WebRtcVoiceMediaChannel channel(
-        &engine, cricket::MediaConfig(), cricket::AudioOptions(),
-        webrtc::CryptoOptions(), call.get());
+        cricket::MediaChannel::Role::kReceive, &engine, cricket::MediaConfig(),
+        cricket::AudioOptions(), webrtc::CryptoOptions(), call.get());
     cricket::AudioRecvParameters parameters;
     parameters.codecs = engine.recv_codecs();
     EXPECT_TRUE(channel.SetRecvParameters(parameters));
@@ -3811,9 +3819,9 @@ TEST(WebRtcVoiceEngineTest, SetRtpSendParametersMaxBitrate) {
     call_config.audio_state = webrtc::AudioState::Create(config);
   }
   auto call = absl::WrapUnique(webrtc::Call::Create(call_config));
-  cricket::WebRtcVoiceMediaChannel channel(&engine, cricket::MediaConfig(),
-                                           cricket::AudioOptions(),
-                                           webrtc::CryptoOptions(), call.get());
+  cricket::WebRtcVoiceMediaChannel channel(
+      cricket::MediaChannel::Role::kSend, &engine, cricket::MediaConfig(),
+      cricket::AudioOptions(), webrtc::CryptoOptions(), call.get());
   {
     cricket::AudioSendParameters params;
     params.codecs.push_back(cricket::AudioCodec(1, "opus", 48000, 32000, 2));

@@ -24,6 +24,7 @@
 #include "call/audio_state.h"
 #include "media/base/codec.h"
 #include "media/base/media_channel.h"
+#include "media/base/media_channel_impl.h"
 #include "media/base/media_config.h"
 #include "media/base/video_common.h"
 #include "rtc_base/system/file_wrapper.h"
@@ -100,6 +101,7 @@ class VoiceEngineInterface : public RtpHeaderExtensionQueryInterface {
   // MediaChannel creation
   // Creates a voice media channel. Returns NULL on failure.
   virtual VoiceMediaChannel* CreateMediaChannel(
+      MediaChannel::Role role,
       webrtc::Call* call,
       const MediaConfig& config,
       const AudioOptions& options,
@@ -129,6 +131,7 @@ class VideoEngineInterface : public RtpHeaderExtensionQueryInterface {
   // Creates a video media channel, paired with the specified voice channel.
   // Returns NULL on failure.
   virtual VideoMediaChannel* CreateMediaChannel(
+      MediaChannel::Role role,
       webrtc::Call* call,
       const MediaConfig& config,
       const VideoOptions& options,

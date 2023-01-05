@@ -115,6 +115,14 @@ void TrackMediaInfoMap::Initialize(
   RTC_DCHECK(!is_initialized_);
   is_initialized_ = true;
   voice_media_info_ = std::move(voice_media_info);
+  if (video_media_info.has_value()) {
+    RTC_LOG(LS_ERROR)
+        << "DEBUG: Initializing TrackMediaInfoMap with array of size "
+        << video_media_info.value().senders.size();
+  } else {
+    RTC_LOG(LS_ERROR)
+        << "DEBUG: Initializing TrackMediaInfoMap video data to null";
+  }
   video_media_info_ = std::move(video_media_info);
 
   std::map<uint32_t, AudioTrackInterface*> local_audio_track_by_ssrc;

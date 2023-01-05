@@ -49,10 +49,11 @@ AudioSource* FakeVoiceMediaChannel::VoiceChannelAudioSink::source() const {
   return source_;
 }
 
-FakeVoiceMediaChannel::FakeVoiceMediaChannel(FakeVoiceEngine* engine,
+FakeVoiceMediaChannel::FakeVoiceMediaChannel(MediaChannel::Role role,
+                                             FakeVoiceEngine* engine,
                                              const AudioOptions& options,
                                              TaskQueueBase* network_thread)
-    : RtpHelper<VoiceMediaChannel>(network_thread),
+    : RtpHelper<VoiceMediaChannel>(role, network_thread),
       engine_(engine),
       max_bps_(-1) {
   output_scalings_[0] = 1.0;  // For default channel.
@@ -259,10 +260,11 @@ bool CompareDtmfInfo(const FakeVoiceMediaChannel::DtmfInfo& info,
           info.ssrc == ssrc);
 }
 
-FakeVideoMediaChannel::FakeVideoMediaChannel(FakeVideoEngine* engine,
+FakeVideoMediaChannel::FakeVideoMediaChannel(MediaChannel::Role role,
+                                             FakeVideoEngine* engine,
                                              const VideoOptions& options,
                                              TaskQueueBase* network_thread)
-    : RtpHelper<VideoMediaChannel>(network_thread),
+    : RtpHelper<VideoMediaChannel>(role, network_thread),
       engine_(engine),
       max_bps_(-1) {
   SetOptions(options);
@@ -448,6 +450,7 @@ rtc::scoped_refptr<webrtc::AudioState> FakeVoiceEngine::GetAudioState() const {
   return rtc::scoped_refptr<webrtc::AudioState>();
 }
 VoiceMediaChannel* FakeVoiceEngine::CreateMediaChannel(
+    MediaChannel::Role role,
     webrtc::Call* call,
     const MediaConfig& config,
     const AudioOptions& options,
@@ -457,7 +460,9 @@ VoiceMediaChannel* FakeVoiceEngine::CreateMediaChannel(
   }
 
   FakeVoiceMediaChannel* ch =
-      new FakeVoiceMediaChannel(this, options, call->network_thread());
+      new FakeVoiceMediaChannel(role, this, options, call->network_thread());
+  RTC_LOG(LS_ERROR) << "DEBUG: Creating fake voice channel "
+                    << channels_.size();
   channels_.push_back(ch);
   return ch;
 }
@@ -514,6 +519,7 @@ bool FakeVideoEngine::SetOptions(const VideoOptions& options) {
   return true;
 }
 VideoMediaChannel* FakeVideoEngine::CreateMediaChannel(
+    MediaChannel::Role role,
     webrtc::Call* call,
     const MediaConfig& config,
     const VideoOptions& options,
@@ -524,7 +530,9 @@ VideoMediaChannel* FakeVideoEngine::CreateMediaChannel(
   }
 
   FakeVideoMediaChannel* ch =
-      new FakeVideoMediaChannel(this, options, call->network_thread());
+      new FakeVideoMediaChannel(role, this, options, call->network_thread());
+  RTC_LOG(LS_ERROR) << "DEBUG: Creating fake video channel "
+                    << channels_.size();
   channels_.emplace_back(ch);
   return ch;
 }

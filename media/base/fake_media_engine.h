@@ -44,8 +44,9 @@ class FakeVoiceEngine;
 template <class Base>
 class RtpHelper : public Base {
  public:
-  explicit RtpHelper(webrtc::TaskQueueBase* network_thread)
-      : Base(network_thread),
+  explicit RtpHelper(MediaChannel::Role role,
+                     webrtc::TaskQueueBase* network_thread)
+      : Base(role, network_thread),
         sending_(false),
         playout_(false),
         fail_set_send_codecs_(false),
@@ -74,6 +75,7 @@ class RtpHelper : public Base {
     }
     rtc::CopyOnWriteBuffer packet(reinterpret_cast<const uint8_t*>(data), len,
                                   kMaxRtpPacketLen);
+    RTC_LOG(LS_ERROR) << "DEBUG: Sending RTP packet";
     return Base::SendPacket(&packet, options);
   }
   bool SendRtcp(const void* data, size_t len) {
@@ -259,6 +261,14 @@ class RtpHelper : public Base {
       rtc::scoped_refptr<webrtc::FrameTransformerInterface> frame_transformer)
       override {}
 
+  void SetInterface(MediaChannelNetworkInterface* iface) override {
+    network_interface_ = iface;
+    MediaChannel::SetInterface(iface);
+  }
+  bool HasNetworkInterface() const override {
+    return network_interface_ != nullptr;
+  }
+
  protected:
   bool MuteStream(uint32_t ssrc, bool mute) {
     if (!HasSendStream(ssrc) && ssrc != 0) {
@@ -298,6 +308,7 @@ class RtpHelper : public Base {
   }
   void OnPacketReceived(rtc::CopyOnWriteBuffer packet,
                         int64_t packet_time_us) override {
+    RTC_LOG(LS_ERROR) << "DEBUG: Received packet";
     rtp_packets_.push_back(std::string(packet.cdata<char>(), packet.size()));
   }
   void OnPacketSent(const rtc::SentPacket& sent_packet) override {}
@@ -336,6 +347,7 @@ class RtpHelper : public Base {
   int transport_overhead_per_packet_;
   rtc::NetworkRoute last_network_route_;
   int num_network_route_changes_;
+  MediaChannelNetworkInterface* network_interface_ = nullptr;
 };
 
 class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
@@ -346,7 +358,8 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
     int event_code;
     int duration;
   };
-  FakeVoiceMediaChannel(FakeVoiceEngine* engine,
+  FakeVoiceMediaChannel(MediaChannel::Role role,
+                        FakeVoiceEngine* engine,
                         const AudioOptions& options,
                         webrtc::TaskQueueBase* network_thread);
   ~FakeVoiceMediaChannel();
@@ -441,7 +454,8 @@ bool CompareDtmfInfo(const FakeVoiceMediaChannel::DtmfInfo& info,
 
 class FakeVideoMediaChannel : public RtpHelper<VideoMediaChannel> {
  public:
-  FakeVideoMediaChannel(FakeVideoEngine* engine,
+  FakeVideoMediaChannel(MediaChannel::Role role,
+                        FakeVideoEngine* engine,
                         const VideoOptions& options,
                         webrtc::TaskQueueBase* network_thread);
 
@@ -519,6 +533,7 @@ class FakeVoiceEngine : public VoiceEngineInterface {
   rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const override;
 
   VoiceMediaChannel* CreateMediaChannel(
+      MediaChannel::Role role,
       webrtc::Call* call,
       const MediaConfig& config,
       const AudioOptions& options,
@@ -556,6 +571,7 @@ class FakeVideoEngine : public VideoEngineInterface {
   FakeVideoEngine();
   bool SetOptions(const VideoOptions& options);
   VideoMediaChannel* CreateMediaChannel(
+      MediaChannel::Role role,
       webrtc::Call* call,
       const MediaConfig& config,
       const VideoOptions& options,
