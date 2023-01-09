@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e331e3fb_43d9e4f9",
+        "filename": "api/video/i410_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-09T15:00:31Z",
+      "side": 1,
+      "message": "remove extra ()",
+      "range": {
+        "startLine": 40,
+        "startChar": 39,
+        "endLine": 40,
+        "endChar": 55
+      },
+      "revId": "e46802465e35a4e807585a4363afe47079f9564f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e03eeaa5_5528f7e9",
+        "filename": "api/video/i410_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-09T15:00:31Z",
+      "side": 1,
+      "message": "remove extra ()",
+      "range": {
+        "startLine": 58,
+        "startChar": 26,
+        "endLine": 58,
+        "endChar": 33
+      },
+      "revId": "e46802465e35a4e807585a4363afe47079f9564f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cf510d5_f6a5018a",
+        "filename": "api/video/i410_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-09T15:00:31Z",
+      "side": 1,
+      "message": "Here too.",
+      "range": {
+        "startLine": 59,
+        "startChar": 26,
+        "endLine": 59,
+        "endChar": 33
+      },
+      "revId": "e46802465e35a4e807585a4363afe47079f9564f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57ee1494_1e3c62ac",
+        "filename": "api/video/i410_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-09T15:00:31Z",
+      "side": 1,
+      "message": "remove extra ()",
+      "range": {
+        "startLine": 166,
+        "startChar": 57,
+        "endLine": 166,
+        "endChar": 68
+      },
+      "revId": "e46802465e35a4e807585a4363afe47079f9564f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3557e51_0966f82b",
+        "filename": "api/video/test/i410_buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-09T15:00:31Z",
+      "side": 1,
+      "message": "Please add a comment, reminding that i410 is 10-bit while i420 is 8 bit, so lat 2 bits would be discarded.\n\nAlso, please add 3 constants kYValue, kUValue, kVValue, use them in FillI410Buffer. Here use them, but shifted right by 2 bits.",
+      "range": {
+        "startLine": 89,
+        "startChar": 36,
+        "endLine": 89,
+        "endChar": 37
+      },
+      "revId": "e46802465e35a4e807585a4363afe47079f9564f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
