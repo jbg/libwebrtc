@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a1c8e82_8952c970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-09T09:57:41Z",
+      "side": 1,
+      "message": "Thanks for cleaning this up!\n\nI *think* this path is only done for ICE connectivity requests, not for STUN requests to a STUN server (where you *have* to accept unauthenticated responses). Might want to add a comment saying so.",
+      "revId": "864a46359a73d1b11553e68a550b5eac07d4c8ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
