@@ -109,41 +109,15 @@ rtc::scoped_refptr<I010Buffer> I010Buffer::Rotate(
 
   rtc::scoped_refptr<webrtc::I010Buffer> buffer =
       Create(rotated_width, rotated_height);
-  // TODO(emircan): Remove this when there is libyuv::I010Rotate().
-  for (int x = 0; x < src.width(); x++) {
-    for (int y = 0; y < src.height(); y++) {
-      int dest_x = x;
-      int dest_y = y;
-      switch (rotation) {
-        // This case is covered by the early return.
-        case webrtc::kVideoRotation_0:
-          RTC_DCHECK_NOTREACHED();
-          break;
-        case webrtc::kVideoRotation_90:
-          dest_x = src.height() - y - 1;
-          dest_y = x;
-          break;
-        case webrtc::kVideoRotation_180:
-          dest_x = src.width() - x - 1;
-          dest_y = src.height() - y - 1;
-          break;
-        case webrtc::kVideoRotation_270:
-          dest_x = y;
-          dest_y = src.width() - x - 1;
-          break;
-      }
-      buffer->MutableDataY()[dest_x + buffer->StrideY() * dest_y] =
-          src.DataY()[x + src.StrideY() * y];
-      dest_x /= 2;
-      dest_y /= 2;
-      int src_x = x / 2;
-      int src_y = y / 2;
-      buffer->MutableDataU()[dest_x + buffer->StrideU() * dest_y] =
-          src.DataU()[src_x + src.StrideU() * src_y];
-      buffer->MutableDataV()[dest_x + buffer->StrideV() * dest_y] =
-          src.DataV()[src_x + src.StrideV() * src_y];
-    }
-  }
+
+  RTC_CHECK_EQ(0,
+               libyuv::I010Rotate(
+                   src.DataY(), src.StrideY(), src.DataU(), src.StrideU(),
+                   src.DataV(), src.StrideV(), buffer->MutableDataY(),
+                   buffer->StrideY(), buffer->MutableDataU(), buffer->StrideU(),
+                   buffer->MutableDataV(), buffer->StrideV(), src.width(),
+                   src.height(), static_cast<libyuv::RotationMode>(rotation)));
+
   return buffer;
 }
 
