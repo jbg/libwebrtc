@@ -34,6 +34,24 @@
       "parentUuid": "63b1cf59_cbaa7653",
       "revId": "a943e730b2acced12fa1028ad43b9c9c91bf631c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0917687_e85b0538",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2023-01-09T08:41:00Z",
+      "side": 1,
+      "message": "The condition was negated, while the intention of the patch seemed to be to replace s/field_trial::/field_trials./, i.e. to not touch the condition.",
+      "parentUuid": "585357ab_ffaa41aa",
+      "revId": "a943e730b2acced12fa1028ad43b9c9c91bf631c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
