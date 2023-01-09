@@ -116,6 +116,10 @@ class DegradedCall : public Call, private PacketReceiver {
   DeliveryStatus DeliverPacket(MediaType media_type,
                                rtc::CopyOnWriteBuffer packet,
                                int64_t packet_time_us) override;
+  void DeliverRtpPacket(
+      MediaType media_type,
+      RtpPacketReceived packet,
+      OnUndemuxablePacketHandler undemuxable_packet_handler) override;
   void DeliverRtcpPacket(rtc::CopyOnWriteBuffer packet) override;
 
  private:

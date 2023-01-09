@@ -414,6 +414,15 @@ PacketReceiver::DeliveryStatus DegradedCall::DeliverPacket(
   return status;
 }
 
+void DegradedCall::DeliverRtpPacket(
+    MediaType media_type,
+    RtpPacketReceived packet,
+    OnUndemuxablePacketHandler undemuxable_packet_handler) {
+  receive_pipe_->DeliverRtpPacket(media_type, std::move(packet),
+                                  std::move(undemuxable_packet_handler));
+  receive_pipe_->Process();
+}
+
 void DegradedCall::DeliverRtcpPacket(rtc::CopyOnWriteBuffer packet) {
   receive_pipe_->DeliverRtcpPacket(std::move(packet));
   receive_pipe_->Process();
