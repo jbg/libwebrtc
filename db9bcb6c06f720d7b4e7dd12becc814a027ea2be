@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74ac4efb_90c73bbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-01-11T14:37:09Z",
+      "side": 1,
+      "message": "It seems I was a bit confused about when this fallback should happen. This one happens if you e.g. try to configure SVC on VP8, which isn\u0027t supported by any implementation since the codec type itself doesn\u0027t support it.\n\nThe scenario I was thinking about, with HW VP9 support for a subset of scalability modes, isn\u0027t actually affected by this CL. The query mechanism will check if _at least one_ encoder (including the SW fallback) supports the scalability mode.\n\nA remaining issue is that the chrome encoder factory doesn\u0027t fall back to software if you attempt to create an instance where the SW encoder supports the mode but the HW encoder does not. This presumably results in an encoder being created without any scalability. I\u0027ll file a separate bug about that however.\n\nSo, LGTM from me at this point.",
+      "revId": "db9bcb6c06f720d7b4e7dd12becc814a027ea2be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
