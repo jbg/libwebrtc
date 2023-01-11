@@ -260,6 +260,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4af4507e_095c8cf9",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-01-11T09:44:14Z",
+      "side": 1,
+      "message": "But it is for style guide reasons?\n\nElsewhere, the proto include looks as follows\n```\nRTC_PUSH_IGNORING_WUNDEF()\n#ifdef WEBRTC_ANDROID_PLATFORM_BUILD\n#include \"external/webrtc/webrtc/logging/rtc_event_log/rtc_event_log.pb.h\"\n#include \"external/webrtc/webrtc/logging/rtc_event_log/rtc_event_log2.pb.h\"\n#else\n#include \"logging/rtc_event_log/rtc_event_log.pb.h\"\n#include \"logging/rtc_event_log/rtc_event_log2.pb.h\"\n#endif\nRTC_POP_IGNORING_WUNDEF()\n```",
+      "parentUuid": "bf0cd908_f7663ed4",
+      "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5d5b0a4_a569fb36",
         "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
         "patchSetId": 10
