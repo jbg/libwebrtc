@@ -276,6 +276,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52288cc5_89fbdd23",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 19084
+      },
+      "writtenOn": "2023-01-11T11:38:59Z",
+      "side": 1,
+      "message": "This is a good point. My includes were more like: \"I am using those definition, I should include those\".\n\nI\u0027ll rely on the includes in `logging/rtc_event_log/rtc_event_log_parser.h`",
+      "parentUuid": "4af4507e_095c8cf9",
+      "revId": "5a2f19aca1d7f7961b88387c7d07be44a44f4dc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5d5b0a4_a569fb36",
