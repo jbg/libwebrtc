@@ -26,6 +26,10 @@
 #include <unistd.h>
 #elif defined(WEBRTC_WIN)
 #include <windows.h>
+#elif defined(WEBRTC_FUCHSIA)
+#include <lib/zx/process.h>
+#include <lib/zx/thread.h>
+#include <zircon/syscalls.h>
 #endif
 
 #if defined(WEBRTC_WIN)
@@ -39,8 +43,10 @@ namespace rtc {
 
 int64_t GetProcessCpuTimeNanos() {
 #if defined(WEBRTC_FUCHSIA)
-  RTC_LOG_ERR(LS_ERROR) << "GetProcessCpuTimeNanos() not implemented";
-  return 0;
+  zx_info_task_runtime_t process_runtime_info;
+  zx::process::self()->get_info(ZX_INFO_TASK_RUNTIME, &process_runtime_info,
+                                sizeof(process_runtime_info), nullptr, nullptr);
+  return process_runtime_info.cpu_time;
 #else
 #if defined(WEBRTC_LINUX)
   struct timespec ts;
@@ -81,8 +87,10 @@ int64_t GetProcessCpuTimeNanos() {
 
 int64_t GetThreadCpuTimeNanos() {
 #if defined(WEBRTC_FUCHSIA)
-  RTC_LOG_ERR(LS_ERROR) << "GetThreadCpuTimeNanos() not implemented";
-  return 0;
+  zx_info_task_runtime_t thread_runtime_info;
+  zx::thread::self()->get_info(ZX_INFO_TASK_RUNTIME, &thread_runtime_info,
+                               sizeof(thread_runtime_info), nullptr, nullptr);
+  return thread_runtime_info.cpu_time;
 #else
 #if defined(WEBRTC_LINUX)
   struct timespec ts;
