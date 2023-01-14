@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'ad7c2cc677756ce87c944cfe4cda5aa848de7216',
+  'chromium_revision': 'c3a0d26ab7b3f5b0870fcb76e62ceb2fea635824',
 
   # Keep the Chromium default of generating location tags.
   'generate_location_tags': True,
@@ -43,7 +43,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@06ff602a10fee7065f9524b0c5baf9f9d5ae4e7b',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@f5c17996ef4c1b84ba25bec4246089b691f27797',
+    'https://chromium.googlesource.com/chromium/src/build@7782e570034268513151a3e09784591e991d25ba',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@a1adda97a812bf8fce5501cb770fe04b0fff38e7',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -52,11 +52,11 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@aaaeb98b4ae5f9bbdaa48c01d8664f2991e4eacc',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@fe00b3f45d0937334aeb1bb79f83054500aca53d',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@5b25b246795468ce6aaca4612d0c2867dfa57e63',
+    'https://chromium.googlesource.com/chromium/src/testing@5ffbd9b949229f6edf22e8cb193e2b60d73c84a9',
   'src/third_party':
     'https://chromium.googlesource.com/chromium/src/third_party@3a18cdb04479daa0cb6add5cfd0d2306b9baf0df',
 
