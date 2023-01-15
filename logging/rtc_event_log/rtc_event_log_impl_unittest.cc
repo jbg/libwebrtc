@@ -184,5 +184,25 @@ TEST_F(RtcEventLogImplTest, SchedulesWriteAfterOutputDurationPassed) {
   Mock::VerifyAndClearExpectations(encoder_ptr_);
 }
 
+TEST_F(RtcEventLogImplTest,
+       DoNotLooseEventsOnHistoryFullLogOnWithMoreEventsCome) {
+  auto e3 = std::make_unique<FakeEvent>();
+  RtcEvent* e3_ptr = e3.get();
+  auto e4 = std::make_unique<FakeEvent>();
+  RtcEvent* e4_ptr = e4.get();
+  event_log_.StartLogging(std::move(output_), kOutputPeriod.ms());
+  time_controller_.AdvanceTime(TimeDelta::Zero());
+  event_log_.Log(std::make_unique<FakeEvent>());
+  event_log_.Log(std::make_unique<FakeEvent>());
+  // History full
+  event_log_.Log(std::move(e3));
+  event_log_.Log(std::move(e4));
+  InSequence s;
+  EXPECT_CALL(*encoder_ptr_, OnEncode(Ref(*e3_ptr)));
+  EXPECT_CALL(*encoder_ptr_, OnEncode(Ref(*e4_ptr)));
+  time_controller_.AdvanceTime(kOutputPeriod);
+  Mock::VerifyAndClearExpectations(encoder_ptr_);
+}
+
 }  // namespace
 }  // namespace webrtc
