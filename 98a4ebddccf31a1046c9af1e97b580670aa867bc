@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0ddaef4_3f30fd2b",
+        "filename": "rtc_base/cpu_time.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 19214
+      },
+      "writtenOn": "2023-01-15T23:45:48Z",
+      "side": 1,
+      "message": "Yes definitely. That was careless of me, thanks for catching.",
+      "parentUuid": "1c67b071_04489070",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 80
+      },
+      "revId": "98a4ebddccf31a1046c9af1e97b580670aa867bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1882d0f6_6c0b3eb5",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-13T07:06:49Z",
       "side": 1,
       "message": "This is the same as the one used for the CPU time, other platforms change this to filter on the thread (see CLOCK_THREAD_CPUTIME_ID vs CLOCK_PROCESS_CPUTIME_ID). Is there anything like this for Fuchsia as well?",
+      "range": {
+        "startLine": 91,
+        "startChar": 31,
+        "endLine": 91,
+        "endChar": 51
+      },
+      "revId": "98a4ebddccf31a1046c9af1e97b580670aa867bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac775c10_511c05e8",
+        "filename": "rtc_base/cpu_time.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 19214
+      },
+      "writtenOn": "2023-01-15T23:45:48Z",
+      "side": 1,
+      "message": "The difference here is that here we call `get_info` on the thread whereas above we call it on the process. See `zx::thread::self()` used here vs `zx::process::self()` above.\n\n`cpu_time` gets filled out differently depending on what the handle is (thread, process, or job).\n\nSee the documentation here: https://fuchsia.dev/fuchsia-src/reference/syscalls/object_get_info?hl\u003den#zx_info_task_runtime\n\nNote that there is a slight difference in syntax here compared to the documentation because here I\u0027ve chose to call `get_info` directly on the handle rather than passing the handle to `zx_object_get_info`. That\u0027s just a style choice of the more C++ way of doing things.",
+      "parentUuid": "1882d0f6_6c0b3eb5",
       "range": {
         "startLine": 91,
         "startChar": 31,
