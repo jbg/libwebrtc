@@ -68,6 +68,24 @@
       "parentUuid": "de1c8723_f8c55741",
       "revId": "63e9b8b34dda977379d7f5342372a748b3319ab8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e239a3e9_266ff4aa",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-16T12:02:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "41df000f_ad6ddd4d",
+      "revId": "63e9b8b34dda977379d7f5342372a748b3319ab8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
