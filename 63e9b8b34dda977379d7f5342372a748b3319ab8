@@ -16,6 +16,40 @@
       "message": "slight change in behavior but this should be acceptable (with a PSA)",
       "revId": "63e9b8b34dda977379d7f5342372a748b3319ab8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb878f68_db85b3b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-16T09:22:11Z",
+      "side": 1,
+      "message": "One outstanding question...",
+      "revId": "63e9b8b34dda977379d7f5342372a748b3319ab8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1c8723_f8c55741",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-16T09:22:11Z",
+      "side": 1,
+      "message": "Will this trigger for audio?\nDo we care?",
+      "revId": "63e9b8b34dda977379d7f5342372a748b3319ab8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
