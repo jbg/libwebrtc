@@ -50,6 +50,24 @@
       "message": "Will this trigger for audio?\nDo we care?",
       "revId": "63e9b8b34dda977379d7f5342372a748b3319ab8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41df000f_ad6ddd4d",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-01-16T11:21:14Z",
+      "side": 1,
+      "message": "it will trigger for audio (which has RED as a codec) hence the note about the change of behavior in the commit message. This should be fairly limited, browser-to-browser G711 and G722.\n\nWill write a PSA",
+      "parentUuid": "de1c8723_f8c55741",
+      "revId": "63e9b8b34dda977379d7f5342372a748b3319ab8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
