@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2148a185_81dcb7d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-01-17T14:34:58Z",
+      "side": 1,
+      "message": "sadly we don\u0027t have a flag \"only do this if max-bundle is used\" :-/",
+      "revId": "2c11a22b4c6123669a69c58d66bbdb4aa9a452da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

@@ -166,6 +166,30 @@
       },
       "revId": "63e9b8b34dda977379d7f5342372a748b3319ab8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "959a7a0f_13333b35",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1968,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-01-17T14:34:58Z",
+      "side": 1,
+      "message": "Yes. We can\u0027t simply switch to \"just *\" but need to add both for a while (6 months?) to give people time to fix their parsers to recognize the wildcard one. Fortunately both libwebrtc and Firefox do support this which makes it easier in terms of release cycles.",
+      "parentUuid": "fd70d252_c248d106",
+      "range": {
+        "startLine": 1968,
+        "startChar": 6,
+        "endLine": 1968,
+        "endChar": 20
+      },
+      "revId": "63e9b8b34dda977379d7f5342372a748b3319ab8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
