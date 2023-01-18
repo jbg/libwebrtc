@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "318e851e_6312ca7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-18T10:31:01Z",
+      "side": 1,
+      "message": "Yes, the WPT tests broke, which means that they need to be disabled before landing again, and rebased and re-enabled afterwards.\n\nThe one I checked went from FAIL to PASS, so it\u0027s a net improvement in WPT conformance - I didn\u0027t look at the others.\n\nBut rolling back until the tests are disabled is the Right Thing to do, so let\u0027s do that.",
+      "revId": "b42e7b88ae6dced2be7e46b7218bb839671a547d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
