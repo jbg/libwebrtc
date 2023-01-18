@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "061c1da3_26066657",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-01-18T16:10:44Z",
+      "side": 1,
+      "message": "Maybe clean up the recipes \"TODO(terelius)\" before enabling the bot by default ?",
+      "revId": "851d2fd555162a0c59bcd9f40c4c65fd057280b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
