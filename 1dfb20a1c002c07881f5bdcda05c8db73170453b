@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91fffffd_606cf30b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-19T14:02:21Z",
+      "side": 1,
+      "message": "Rubber-stamping. Florent, didn\u0027t you catch them all?",
+      "revId": "1dfb20a1c002c07881f5bdcda05c8db73170453b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
