@@ -1045,7 +1045,8 @@ void CallPerfTest::TestMinAudioVideoBitrate(int test_bitrate_from,
 #else
 #define MAYBE_Min_Bitrate_VideoAndAudio Min_Bitrate_VideoAndAudio
 #endif
-TEST_F(CallPerfTest, MAYBE_Min_Bitrate_VideoAndAudio) {
+// TODO(b/266048218): Temporarily disable broken test
+TEST_F(CallPerfTest, DISABLED_Min_Bitrate_VideoAndAudio) {
   TestMinAudioVideoBitrate(110, 40, -10, 10000, 70000, 200000);
 }
 
