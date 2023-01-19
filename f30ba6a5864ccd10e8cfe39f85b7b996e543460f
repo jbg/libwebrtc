@@ -22,6 +22,30 @@
       },
       "revId": "f30ba6a5864ccd10e8cfe39f85b7b996e543460f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a81ecdec_c88c0862",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-19T14:59:40Z",
+      "side": 1,
+      "message": "this is not TimeDelta or Timestamp, this is \u0027PerMs\u0027, i.e. 1/TimeDelta\n(I\u0027m not comfortable enough with the Fraction type to use it here)",
+      "parentUuid": "44c48615_c4ec273c",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 45
+      },
+      "revId": "f30ba6a5864ccd10e8cfe39f85b7b996e543460f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
