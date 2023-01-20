@@ -16,6 +16,24 @@
       "message": "This signals that our abstractions of p2p/base and rtc_base are not sufficiently exposed in api/ - or that we have inappropriate dependencies in chrome.\n\nBut for solving the immediate problem, this looks OK.",
       "revId": "1688fcfff669df726f57709e70f031713c46f5dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e1a245c_f4e0b1b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-01-20T17:40:43Z",
+      "side": 1,
+      "message": "Yes, in general all RTC_EXPORT outside of api/ should eventually go away in favor of better abstractions in api/.",
+      "parentUuid": "58ce50d1_4b242a1d",
+      "revId": "1688fcfff669df726f57709e70f031713c46f5dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
