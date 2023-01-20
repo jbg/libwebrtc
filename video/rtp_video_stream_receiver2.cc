@@ -541,6 +541,9 @@ void RtpVideoStreamReceiver2::OnReceivedPayloadData(
   int64_t unwrapped_rtp_seq_num =
       rtp_seq_num_unwrapper_.Unwrap(rtp_packet.SequenceNumber());
 
+  LOG(ERROR) << "HERRE Received RTP video packet with csrcs "
+             << rtp_packet.Csrcs().size();
+
   RtpPacketInfo& packet_info =
       packet_infos_
           .emplace(unwrapped_rtp_seq_num,

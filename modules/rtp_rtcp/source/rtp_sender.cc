@@ -521,6 +521,8 @@ std::unique_ptr<RtpPacketToSend> RTPSender::AllocatePacket() const {
       &rtp_header_extension_map_, max_packet_size_ + kExtraCapacity);
   packet->SetSsrc(ssrc_);
   packet->SetCsrcs(csrcs_);
+  LOG(ERROR) << "RTPSender::AllocatePacket with csrc count " << csrcs_.size();
+
   // Reserve extensions, if registered, RtpSender set in SendToNetwork.
   packet->ReserveExtension<AbsoluteSendTime>();
   packet->ReserveExtension<TransmissionOffset>();
@@ -582,10 +584,16 @@ void RTPSender::SetMid(absl::string_view mid) {
   UpdateHeaderSizes();
 }
 
+std::vector<uint32_t> RTPSender::Csrcs() const {
+  MutexLock lock(&send_mutex_);
+  return csrcs_;
+}
+
 void RTPSender::SetCsrcs(const std::vector<uint32_t>& csrcs) {
   RTC_DCHECK_LE(csrcs.size(), kRtpCsrcSize);
   MutexLock lock(&send_mutex_);
   csrcs_ = csrcs;
+  LOG(ERROR) << "HERRE RTPSender::SetCsrcs " << csrcs_.size();
   UpdateHeaderSizes();
 }
 
