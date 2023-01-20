@@ -22,6 +22,30 @@
       },
       "revId": "8a0874d4348780973df1e2b8422ad20e92369e42",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8df5b546_5a94123c",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2308,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-01-20T12:19:42Z",
+      "side": 1,
+      "message": "No you\u0027re right, removed the \"_s\"",
+      "parentUuid": "15a8655d_9ba65873",
+      "range": {
+        "startLine": 2308,
+        "startChar": 41,
+        "endLine": 2308,
+        "endChar": 43
+      },
+      "revId": "8a0874d4348780973df1e2b8422ad20e92369e42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
