@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58ce50d1_4b242a1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-20T17:36:38Z",
+      "side": 1,
+      "message": "This signals that our abstractions of p2p/base and rtc_base are not sufficiently exposed in api/ - or that we have inappropriate dependencies in chrome.\n\nBut for solving the immediate problem, this looks OK.",
+      "revId": "1688fcfff669df726f57709e70f031713c46f5dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
