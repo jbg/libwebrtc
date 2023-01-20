@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "387d0d93_a17ebe4d",
+        "filename": "infra/specs/mixins.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-01-20T14:34:12Z",
+      "side": 1,
+      "message": "possible way forward is to define a win10-webrtc mixins with a TODO to remove it.",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 32
+      },
+      "revId": "63d8fda62cbe27b2ba6814e90a8cd4a0c289913a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8266e483_8f608762",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-01-20T14:34:12Z",
+      "side": 1,
+      "message": "If you want to relax dimension on the baremetal-try-pool then we have to make different test target per os (win_video_capture_tests_tryserver and so on).\nWith the current design the dimensions of the baremetal-try-pool is forced to be the same than the other tests.\nThis forces us to keep the baremetal machines not too far behind.",
+      "range": {
+        "startLine": 239,
+        "startChar": 19,
+        "endLine": 239,
+        "endChar": 39
+      },
+      "revId": "63d8fda62cbe27b2ba6814e90a8cd4a0c289913a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c38eb745_e040712d",
+        "filename": "infra/specs/waterfalls.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-01-20T14:34:12Z",
+      "side": 1,
+      "message": "Let me take this one on my next trooper rotation.\nSeems there is an issue with the resultdb go script I wrote.\nMaybe there is a bug you can assign me ?",
+      "range": {
+        "startLine": 441,
+        "startChar": 0,
+        "endLine": 442,
+        "endChar": 38
+      },
+      "revId": "63d8fda62cbe27b2ba6814e90a8cd4a0c289913a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
