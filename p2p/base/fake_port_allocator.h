@@ -86,7 +86,7 @@ class FakePortAllocatorSession : public PortAllocatorSession {
                            int component,
                            absl::string_view ice_ufrag,
                            absl::string_view ice_pwd,
-                           const webrtc::FieldTrialsView& field_trials)
+                           const webrtc::FieldTrialsView* field_trials)
       : PortAllocatorSession(content_name,
                              component,
                              ice_ufrag,
@@ -124,7 +124,7 @@ class FakePortAllocatorSession : public PortAllocatorSession {
               : ipv4_network_;
       port_.reset(TestUDPPort::Create(network_thread_, factory_, &network, 0, 0,
                                       username(), password(), false,
-                                      &field_trials_));
+                                      field_trials_));
       RTC_DCHECK(port_);
       port_->SetIceTiebreaker(ice_tiebreaker());
       port_->SubscribePortDestroyed(
@@ -213,7 +213,7 @@ class FakePortAllocatorSession : public PortAllocatorSession {
   uint32_t candidate_filter_ = CF_ALL;
   int transport_info_update_count_ = 0;
   bool running_ = false;
-  const webrtc::FieldTrialsView& field_trials_;
+  const webrtc::FieldTrialsView* field_trials_;
 };
 
 class FakePortAllocator : public cricket::PortAllocator {
@@ -262,7 +262,7 @@ class FakePortAllocator : public cricket::PortAllocator {
     SendTask(network_thread_, [this] { Initialize(); });
   }
 
-  webrtc::test::ScopedKeyValueConfig field_trials_;
+  const webrtc::FieldTrialsView* field_trials_;
   rtc::Thread* network_thread_;
   const webrtc::AlwaysValidPointerNoDefault<rtc::PacketSocketFactory> factory_;
   bool mdns_obfuscation_enabled_ = false;
