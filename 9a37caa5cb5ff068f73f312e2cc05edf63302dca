@@ -144,6 +144,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4be54fcf_99dfb7d3",
+        "filename": "audio/audio_transport_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-01-23T16:12:21Z",
+      "side": 1,
+      "message": "Missed the fact that your change creates the need for the current format. Sorry.\nAll I was trying to say is that we should avoid making \"nice to have cleanups close to the code we are changing\" but I see now that this is not the case here.",
+      "parentUuid": "72fc7d41_cbd65400",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 6
+      },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b88ba554_75f0d5d1",
