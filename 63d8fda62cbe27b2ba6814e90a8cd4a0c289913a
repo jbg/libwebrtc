@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "932bc47d_accad2f4",
+        "filename": "infra/specs/client.webrtc.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 8218,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2023-01-23T10:36:53Z",
+      "side": 1,
+      "message": "I did not change this, I suspect the mixin file was imported and it\u0027s now updated when I regenerate the json based on the mixin files.",
+      "revId": "63d8fda62cbe27b2ba6814e90a8cd4a0c289913a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "387d0d93_a17ebe4d",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-01-20T14:34:12Z",
       "side": 1,
       "message": "possible way forward is to define a win10-webrtc mixins with a TODO to remove it.",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 32
+      },
+      "revId": "63d8fda62cbe27b2ba6814e90a8cd4a0c289913a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0843be93_ab7ed7ad",
+        "filename": "infra/specs/mixins.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2023-01-23T10:36:53Z",
+      "side": 1,
+      "message": "I\u0027m reverting this in this CL, will have to fix in separate CL.",
+      "parentUuid": "387d0d93_a17ebe4d",
       "range": {
         "startLine": 293,
         "startChar": 0,
@@ -47,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16eeef6f_e72b330b",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2023-01-23T10:36:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8266e483_8f608762",
+      "range": {
+        "startLine": 239,
+        "startChar": 19,
+        "endLine": 239,
+        "endChar": 39
+      },
+      "revId": "63d8fda62cbe27b2ba6814e90a8cd4a0c289913a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c38eb745_e040712d",
@@ -60,6 +125,30 @@
       "writtenOn": "2023-01-20T14:34:12Z",
       "side": 1,
       "message": "Let me take this one on my next trooper rotation.\nSeems there is an issue with the resultdb go script I wrote.\nMaybe there is a bug you can assign me ?",
+      "range": {
+        "startLine": 441,
+        "startChar": 0,
+        "endLine": 442,
+        "endChar": 38
+      },
+      "revId": "63d8fda62cbe27b2ba6814e90a8cd4a0c289913a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c3269da_d5328866",
+        "filename": "infra/specs/waterfalls.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2023-01-23T10:36:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c38eb745_e040712d",
       "range": {
         "startLine": 441,
         "startChar": 0,
