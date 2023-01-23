@@ -163,6 +163,14 @@ NetEqTest::SimulationStepResult NetEqTest::RunToNextGetAudio() {
           absl::make_optional<uint32_t>(packet_data->header.timestamp);
     }
 
+    if (input_->NextNetEqSetMinimumDelayInfo().has_value() &&
+        time_now_ms >=
+            input_->NextNetEqSetMinimumDelayInfo().value().timestamp_ms) {
+      neteq_->SetBaseMinimumDelayMs(
+          input_->NextNetEqSetMinimumDelayInfo().value().delay_ms);
+      input_->AdvanceNetEqSetMinimumDelay();
+    }
+
     // Check if it is time to get output audio.
     if (input_->NextOutputEventTime() &&
         time_now_ms >= *input_->NextOutputEventTime()) {
@@ -281,6 +289,7 @@ NetEqTest::SimulationStepResult NetEqTest::RunToNextGetAudio() {
       return result;
     }
   }
+
   result.simulation_step_ms =
       input_->NextEventTime().value_or(time_now_ms) - start_time_ms;
   result.is_simulation_finished = true;
