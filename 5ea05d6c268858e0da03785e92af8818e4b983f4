@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "210f4b7b_36cfb84f",
+        "filename": "infra/specs/waterfalls.pyl",
+        "patchSetId": 4
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-01-23T16:07:32Z",
+      "side": 1,
+      "message": "This part needs http://go/crrv/c/4187461 that should be picked up by the next chromium roll.",
+      "range": {
+        "startLine": 445,
+        "startChar": 36,
+        "endLine": 446,
+        "endChar": 38
+      },
+      "revId": "5ea05d6c268858e0da03785e92af8818e4b983f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
