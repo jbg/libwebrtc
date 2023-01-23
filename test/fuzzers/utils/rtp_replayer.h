@@ -80,9 +80,11 @@ class RtpReplayer final {
       size_t rtp_dump_size);
 
   // Replays each packet to from the RtpDump.
-  static void ReplayPackets(rtc::FakeClock* clock,
-                            Call* call,
-                            test::RtpFileReader* rtp_reader);
+  static void ReplayPackets(
+      rtc::FakeClock* clock,
+      Call* call,
+      test::RtpFileReader* rtp_reader,
+      const RtpPacketReceived::ExtensionManager& extensions);
 };  // class RtpReplayer
 
 }  // namespace test
