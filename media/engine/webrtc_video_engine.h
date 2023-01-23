@@ -60,36 +60,6 @@ std::map<uint32_t, webrtc::VideoSendStream::StreamStats>
 MergeInfoAboutOutboundRtpSubstreamsForTesting(
     const std::map<uint32_t, webrtc::VideoSendStream::StreamStats>& substreams);
 
-class UnsignalledSsrcHandler {
- public:
-  enum Action {
-    kDropPacket,
-    kDeliverPacket,
-  };
-  virtual Action OnUnsignalledSsrc(WebRtcVideoChannel* channel,
-                                   uint32_t ssrc,
-                                   absl::optional<uint32_t> rtx_ssrc) = 0;
-  virtual ~UnsignalledSsrcHandler() = default;
-};
-
-// TODO(pbos): Remove, use external handlers only.
-class DefaultUnsignalledSsrcHandler : public UnsignalledSsrcHandler {
- public:
-  DefaultUnsignalledSsrcHandler();
-  Action OnUnsignalledSsrc(WebRtcVideoChannel* channel,
-                           uint32_t ssrc,
-                           absl::optional<uint32_t> rtx_ssrc) override;
-
-  rtc::VideoSinkInterface<webrtc::VideoFrame>* GetDefaultSink() const;
-  void SetDefaultSink(WebRtcVideoChannel* channel,
-                      rtc::VideoSinkInterface<webrtc::VideoFrame>* sink);
-
-  virtual ~DefaultUnsignalledSsrcHandler() = default;
-
- private:
-  rtc::VideoSinkInterface<webrtc::VideoFrame>* default_sink_;
-};
-
 // WebRtcVideoEngine is used for the new native WebRTC Video API (webrtc:1667).
 class WebRtcVideoEngine : public VideoEngineInterface {
  public:
@@ -321,6 +291,8 @@ class WebRtcVideoChannel : public VideoMediaChannel,
   bool MaybeCreateDefaultReceiveStream(
       const webrtc::RtpPacketReceived& parsed_packet)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(thread_checker_);
+  void ReCreateDefaulReceivetStream(uint32_t ssrc,
+                                    absl::optional<uint32_t> rtx_ssrc);
   void ConfigureReceiverRtp(
       webrtc::VideoReceiveStreamInterface::Config* config,
       webrtc::FlexfecReceiveStream::Config* flexfec_config,
@@ -445,9 +417,9 @@ class WebRtcVideoChannel : public VideoMediaChannel,
 
     webrtc::VideoSendStream* stream_ RTC_GUARDED_BY(&thread_checker_);
 
-    // Contains settings that are the same for all streams in the MediaChannel,
-    // such as codecs, header extensions, and the global bitrate limit for the
-    // entire channel.
+    // Contains settings that are the same for all streams in the
+    // MediaChannel, such as codecs, header extensions, and the global bitrate
+    // limit for the entire channel.
     VideoSendStreamParameters parameters_ RTC_GUARDED_BY(&thread_checker_);
     // Contains settings that are unique for each stream, such as max_bitrate.
     // Does *not* contain codecs, however.
@@ -486,10 +458,12 @@ class WebRtcVideoChannel : public VideoMediaChannel,
 
     std::vector<webrtc::RtpSource> GetSources();
 
-    // Does not return codecs, they are filled by the owning WebRtcVideoChannel.
+    // Does not return codecs, they are filled by the owning
+    // WebRtcVideoChannel.
     webrtc::RtpParameters GetRtpParameters() const;
 
-    // TODO(deadbeef): Move these feedback parameters into the recv parameters.
+    // TODO(deadbeef): Move these feedback parameters into the recv
+    // parameters.
     void SetFeedbackParameters(bool lntf_enabled,
                                bool nack_enabled,
                                webrtc::RtcpMode rtcp_mode,
@@ -532,8 +506,8 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     void StartReceiveStream();
 
     // Applies a new receive codecs configration to `config_`. Returns true
-    // if the internal stream needs to be reconstructed, or false if no changes
-    // were applied.
+    // if the internal stream needs to be reconstructed, or false if no
+    // changes were applied.
     bool ReconfigureCodecs(const std::vector<VideoCodecSettings>& recv_codecs);
 
     webrtc::Call* const call_;
@@ -564,10 +538,10 @@ class WebRtcVideoChannel : public VideoMediaChannel,
                const webrtc::PacketOptions& options) override;
   bool SendRtcp(const uint8_t* data, size_t len) override;
 
-  // Generate the list of codec parameters to pass down based on the negotiated
-  // "codecs". Note that VideoCodecSettings correspond to concrete codecs like
-  // VP8, VP9, H264 while VideoCodecs correspond also to "virtual" codecs like
-  // RTX, ULPFEC, FLEXFEC.
+  // Generate the list of codec parameters to pass down based on the
+  // negotiated "codecs". Note that VideoCodecSettings correspond to concrete
+  // codecs like VP8, VP9, H264 while VideoCodecs correspond also to "virtual"
+  // codecs like RTX, ULPFEC, FLEXFEC.
   static std::vector<VideoCodecSettings> MapCodecs(
       const std::vector<VideoCodec>& codecs);
   // Get all codecs that are compatible with the receiver.
@@ -600,9 +574,7 @@ class WebRtcVideoChannel : public VideoMediaChannel,
   bool sending_ RTC_GUARDED_BY(thread_checker_);
   webrtc::Call* const call_;
 
-  DefaultUnsignalledSsrcHandler default_unsignalled_ssrc_handler_
-      RTC_GUARDED_BY(thread_checker_);
-  UnsignalledSsrcHandler* const unsignalled_ssrc_handler_
+  rtc::VideoSinkInterface<webrtc::VideoFrame>* default_sink_
       RTC_GUARDED_BY(thread_checker_);
 
   // Delay for unsignaled streams, which may be set before the stream exists.
@@ -616,19 +588,20 @@ class WebRtcVideoChannel : public VideoMediaChannel,
   std::map<uint32_t, WebRtcVideoReceiveStream*> receive_streams_
       RTC_GUARDED_BY(thread_checker_);
   // When the channel and demuxer get reconfigured, there is a window of time
-  // where we have to be prepared for packets arriving based on the old demuxer
-  // criteria because the streams live on the worker thread and the demuxer
-  // lives on the network thread. Because packets are posted from the network
-  // thread to the worker thread, they can still be in-flight when streams are
-  // reconfgured. This can happen when `demuxer_criteria_id_` and
+  // where we have to be prepared for packets arriving based on the old
+  // demuxer criteria because the streams live on the worker thread and the
+  // demuxer lives on the network thread. Because packets are posted from the
+  // network thread to the worker thread, they can still be in-flight when
+  // streams are reconfgured. This can happen when `demuxer_criteria_id_` and
   // `demuxer_criteria_completed_id_` don't match. During this time, we do not
   // want to create unsignalled receive streams and should instead drop the
   // packets. E.g:
   // * If RemoveRecvStream(old_ssrc) was recently called, there may be packets
   //   in-flight for that ssrc. This happens when a receiver becomes inactive.
   // * If we go from one to many m= sections, the demuxer may change from
-  //   forwarding all packets to only forwarding the configured ssrcs, so there
-  //   is a risk of receiving ssrcs for other, recently added m= sections.
+  //   forwarding all packets to only forwarding the configured ssrcs, so
+  //   there is a risk of receiving ssrcs for other, recently added m=
+  //   sections.
   uint32_t demuxer_criteria_id_ RTC_GUARDED_BY(thread_checker_) = 0;
   uint32_t demuxer_criteria_completed_id_ RTC_GUARDED_BY(thread_checker_) = 0;
   absl::optional<int64_t> last_unsignalled_ssrc_creation_time_ms_
@@ -680,8 +653,9 @@ class WebRtcVideoChannel : public VideoMediaChannel,
       unsignaled_frame_transformer_ RTC_GUARDED_BY(thread_checker_);
 
   // TODO(bugs.webrtc.org/11341): Remove this and relevant PC API. Presence
-  // of multiple negotiated codecs allows generic encoder fallback on failures.
-  // Presence of EncoderSelector allows switching to specific encoders.
+  // of multiple negotiated codecs allows generic encoder fallback on
+  // failures. Presence of EncoderSelector allows switching to specific
+  // encoders.
   bool allow_codec_switching_ = false;
 };
 
