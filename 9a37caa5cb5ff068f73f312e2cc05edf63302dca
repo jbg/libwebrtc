@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69efdfad_3fe943a6",
+        "filename": "audio/audio_transport_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-01-23T15:27:50Z",
+      "side": 1,
+      "message": "This is the result of auto format.",
+      "parentUuid": "1561f32c_420dde77",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 6
+      },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b88ba554_75f0d5d1",
@@ -47,6 +71,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4795d144_bb1204e8",
+        "filename": "modules/audio_device/audio_device_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-01-23T15:27:50Z",
+      "side": 1,
+      "message": "This is the result of auto format.",
+      "parentUuid": "b88ba554_75f0d5d1",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 4
+      },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fe7397c_ebdb05d8",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-23T15:16:25Z",
       "side": 1,
       "message": "The indentation does not match function declaration above, is that intentional?",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 6
+      },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "438ae16a_7bb8d034",
+        "filename": "modules/audio_device/audio_device_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-01-23T15:27:50Z",
+      "side": 1,
+      "message": "This is the result of auto format.",
+      "parentUuid": "8fe7397c_ebdb05d8",
       "range": {
         "startLine": 106,
         "startChar": 0,
