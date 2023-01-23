@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7c598eb_12c93e14",
+        "filename": "test/fuzzers/utils/rtp_replayer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-23T16:31:36Z",
+      "side": 0,
+      "message": "I guess you\u0027re removing this logging. I don\u0027t mind. Personally I think there should be even less debug logging in the fuzzer.",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 3
+      },
+      "revId": "bf27f35a04377a3c59ea78291ec6c0d7d4061d76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

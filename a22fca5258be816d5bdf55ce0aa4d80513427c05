@@ -16,6 +16,138 @@
       "message": "Please",
       "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "165f5d85_6d2e6570",
+        "filename": "test/fuzzers/utils/rtp_replayer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-23T16:31:36Z",
+      "side": 1,
+      "message": "`local_id \u003d\u003d i` - feel free to remove extra local_id variable\n(it isn\u0027t the same in RtpPacket fuzzer where some extensions are skipped)",
+      "range": {
+        "startLine": 74,
+        "startChar": 30,
+        "endLine": 74,
+        "endChar": 38
+      },
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d052e4a2_6c23f561",
+        "filename": "test/fuzzers/utils/rtp_replayer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-23T16:31:36Z",
+      "side": 1,
+      "message": "few lines above clock have adjusted its time,\nso may be\nTimestamp::Micros(clock-\u003eTimeNanos() / 1000)\n\nto ensure arrival time aligns with the packet.time_ms fuzzed value",
+      "range": {
+        "startLine": 188,
+        "startChar": 69,
+        "endLine": 188,
+        "endChar": 75
+      },
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfb586c9_6079a521",
+        "filename": "test/fuzzers/utils/rtp_replayer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-23T16:31:36Z",
+      "side": 1,
+      "message": "continue;\n(do not break the loop on a single incorrect packet)",
+      "range": {
+        "startLine": 191,
+        "startChar": 6,
+        "endLine": 191,
+        "endChar": 12
+      },
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c287bff_e900797a",
+        "filename": "test/fuzzers/utils/rtp_replayer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-23T16:31:36Z",
+      "side": 1,
+      "message": "you may omit return type for this lambda - it is simple enough to deduce it.",
+      "range": {
+        "startLine": 196,
+        "startChar": 52,
+        "endLine": 196,
+        "endChar": 59
+      },
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fae9c87d_bdecbfa1",
+        "filename": "test/fuzzers/utils/rtp_replayer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-23T16:31:36Z",
+      "side": 1,
+      "message": "do not log this inside the main loop - move out (or remove completely)",
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29de569c_cf68ea8f",
+        "filename": "test/fuzzers/utils/rtp_replayer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-01-23T16:31:36Z",
+      "side": 1,
+      "message": "or name this type directly, bypassing alias: RtpHeaderExtensionMap - that names is more popular",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 87,
+        "endChar": 47
+      },
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
