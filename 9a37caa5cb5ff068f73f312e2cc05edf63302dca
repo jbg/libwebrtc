@@ -96,6 +96,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dba213a_db6d1243",
+        "filename": "audio/audio_transport_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-01-23T15:53:33Z",
+      "side": 1,
+      "message": "You are changing the indentation to match git cl format in one place only and it creates diffs that are unrelated to your change. I am always advised to only make changes that are real diffs and are related to what you want to accomplish. If the goal is to fix the format, it is better to do so for the complete file in a separate CL. As a reviewer, I would like to see the new diffs only and nothing else. Only that.",
+      "parentUuid": "0714397a_33e2a407",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 6
+      },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b88ba554_75f0d5d1",
