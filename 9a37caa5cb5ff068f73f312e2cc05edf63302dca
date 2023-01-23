@@ -120,6 +120,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72fc7d41_cbd65400",
+        "filename": "audio/audio_transport_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-01-23T16:05:13Z",
+      "side": 1,
+      "message": "The change in formatting is directly caused by my change. Adding absl::optional to the argument would overflow the 80 character line limit.\n\nTo reiterate, the formatting in this file was correct before my change. When I made my change, the lines affected needed to be formatted differently according to the standard.\n\nIt makes absolutely no sense that we shouldn\u0027t format new code changes.",
+      "parentUuid": "5dba213a_db6d1243",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 6
+      },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b88ba554_75f0d5d1",
