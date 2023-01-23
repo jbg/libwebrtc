@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b2e42e0_dc984f12",
+        "filename": "audio/audio_transport_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-01-23T15:35:24Z",
+      "side": 1,
+      "message": "Please avoid changes that causes these extra diffs. Better to maintain the style that conflicts with git cl format.",
+      "parentUuid": "69efdfad_3fe943a6",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 6
+      },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b88ba554_75f0d5d1",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "This is the result of auto format.",
       "parentUuid": "b88ba554_75f0d5d1",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 4
+      },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b84cbc23_1261e0ab",
+        "filename": "modules/audio_device/audio_device_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-01-23T15:35:24Z",
+      "side": 1,
+      "message": "Same comment as before. If format changes are needed, please land them in a separate CL and focus on the changes that are needed here.",
+      "parentUuid": "4795d144_bb1204e8",
       "range": {
         "startLine": 237,
         "startChar": 0,
@@ -138,6 +186,23 @@
         "endLine": 106,
         "endChar": 6
       },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72681daf_b3dde472",
+        "filename": "modules/audio_device/audio_device_data_observer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-01-23T15:35:24Z",
+      "side": 1,
+      "message": "dito",
       "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
