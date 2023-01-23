@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0714397a_33e2a407",
+        "filename": "audio/audio_transport_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-01-23T15:44:08Z",
+      "side": 1,
+      "message": "I don\u0027t understand. The the file is formatted correctly before this change and after this change. Why should we make new changes that break the formatting standard?",
+      "parentUuid": "4b2e42e0_dc984f12",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 6
+      },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b88ba554_75f0d5d1",
@@ -143,6 +167,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87dca5b1_356ef2b8",
+        "filename": "modules/audio_device/audio_device_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-01-23T15:44:08Z",
+      "side": 1,
+      "message": "See my other comment.",
+      "parentUuid": "b84cbc23_1261e0ab",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 4
+      },
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fe7397c_ebdb05d8",
@@ -203,6 +251,24 @@
       "writtenOn": "2023-01-23T15:35:24Z",
       "side": 1,
       "message": "dito",
+      "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f915c193_24735f1f",
+        "filename": "modules/audio_device/audio_device_data_observer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-01-23T15:44:08Z",
+      "side": 1,
+      "message": "See my other comment.",
+      "parentUuid": "72681daf_b3dde472",
       "revId": "9a37caa5cb5ff068f73f312e2cc05edf63302dca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
