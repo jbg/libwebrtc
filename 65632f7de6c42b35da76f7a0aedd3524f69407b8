@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9cfe0d7d_7c14bceb",
+        "filename": "pc/peer_connection_svc_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-01-24T12:23:58Z",
+      "side": 1,
+      "message": "Note: It would have been different if the callee transceiver was created via AddTrack() because such transceivers do get attached to m\u003d lines on offer, but in this case AddTransceiver() is used, which has to be negotiated separately.",
+      "parentUuid": "df0c3a05_cf4c72ff",
+      "revId": "65632f7de6c42b35da76f7a0aedd3524f69407b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf54acd7_e5eb072b",
         "filename": "pc/peer_connection_svc_integrationtest.cc",
         "patchSetId": 4
