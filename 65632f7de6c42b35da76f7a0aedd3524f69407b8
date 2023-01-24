@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ec86c0f_642abd3c",
+        "filename": "pc/peer_connection_svc_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-01-24T14:09:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9cfe0d7d_7c14bceb",
+      "revId": "65632f7de6c42b35da76f7a0aedd3524f69407b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf54acd7_e5eb072b",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "For clarification, I expect that between callee.setRemoteDescription(offer); and callee.setLocalDescription(/* answer */) there exists two transceivers:\n[0] The AddTransceiver-transceiver, currently not up for negotiation, and\n[1] The SDP offer-transceiver, which has the mid, and whose codec preferences should affect the sender\u0027s transceiver.sender.getParameters().",
       "parentUuid": "bf54acd7_e5eb072b",
+      "revId": "65632f7de6c42b35da76f7a0aedd3524f69407b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f80cb7d8_6bbc492c",
+        "filename": "pc/peer_connection_svc_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-01-24T14:09:25Z",
+      "side": 1,
+      "message": "The fallback was happening because in the offer, VP8 was the first codec of the list, which is what ends up being used by the sender.\nChanged the test to explicitly use VP9 only first, and renegotiate to VP8 only, which triggers the fallback.",
+      "parentUuid": "b2d27fff_4ac4f119",
       "revId": "65632f7de6c42b35da76f7a0aedd3524f69407b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
