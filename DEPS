@@ -297,7 +297,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@18a547c18767c1db4a2615e82f4d93e4bcf6679b',
+    'https://chromium.googlesource.com/chromium/src/tools@024412adbd130febc6cc51b516386ddd1d1b23d1',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
