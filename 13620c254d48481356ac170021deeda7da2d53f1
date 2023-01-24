@@ -52,6 +52,24 @@
       "parentUuid": "4e703e9a_1365821e",
       "revId": "13620c254d48481356ac170021deeda7da2d53f1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b796a053_14c14b89",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 15909
+      },
+      "writtenOn": "2023-01-24T01:56:59Z",
+      "side": 1,
+      "message": "followup in https://webrtc-review.googlesource.com/c/src/+/291302",
+      "parentUuid": "6466e7db_fbed4c23",
+      "revId": "13620c254d48481356ac170021deeda7da2d53f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
