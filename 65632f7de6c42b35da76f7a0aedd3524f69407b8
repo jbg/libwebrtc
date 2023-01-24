@@ -68,6 +68,24 @@
       "message": "Why is fallback happening? It looks to me like the callee is accepting the SDP answer without modifications.\n\nThe callee could affect codec preferences by doing GetTransceivers() to obtain the transceiver that was created by the SDP offer and calling SetCodecPreferences() on that transceiver, but in this case it is only setting the codec preferences on the callee transceiver which isn\u0027t up for negotiation yet (as per previous comment).",
       "revId": "65632f7de6c42b35da76f7a0aedd3524f69407b8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2d27fff_4ac4f119",
+        "filename": "pc/peer_connection_svc_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-01-24T12:27:47Z",
+      "side": 1,
+      "message": "For clarification, I expect that between callee.setRemoteDescription(offer); and callee.setLocalDescription(/* answer */) there exists two transceivers:\n[0] The AddTransceiver-transceiver, currently not up for negotiation, and\n[1] The SDP offer-transceiver, which has the mid, and whose codec preferences should affect the sender\u0027s transceiver.sender.getParameters().",
+      "parentUuid": "bf54acd7_e5eb072b",
+      "revId": "65632f7de6c42b35da76f7a0aedd3524f69407b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
