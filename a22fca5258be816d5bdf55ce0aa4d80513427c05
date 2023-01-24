@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4a0060b_3f47bb2f",
+        "filename": "test/fuzzers/utils/rtp_replayer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-01-24T08:12:45Z",
+      "side": 1,
+      "message": "sorry....",
+      "parentUuid": "165f5d85_6d2e6570",
+      "range": {
+        "startLine": 74,
+        "startChar": 30,
+        "endLine": 74,
+        "endChar": 38
+      },
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d052e4a2_6c23f561",
@@ -64,6 +88,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99d8efe5_d99ae5a3",
+        "filename": "test/fuzzers/utils/rtp_replayer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-01-24T08:12:45Z",
+      "side": 1,
+      "message": "Good catch. Yes that was my intention.",
+      "parentUuid": "d052e4a2_6c23f561",
+      "range": {
+        "startLine": 188,
+        "startChar": 69,
+        "endLine": 188,
+        "endChar": 75
+      },
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfb586c9_6079a521",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-01-23T16:31:36Z",
       "side": 1,
       "message": "continue;\n(do not break the loop on a single incorrect packet)",
+      "range": {
+        "startLine": 191,
+        "startChar": 6,
+        "endLine": 191,
+        "endChar": 12
+      },
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed0123a_6708b5c1",
+        "filename": "test/fuzzers/utils/rtp_replayer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-01-24T08:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfb586c9_6079a521",
       "range": {
         "startLine": 191,
         "startChar": 6,
@@ -129,6 +201,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e7e1ba25_26b55bc5",
+        "filename": "test/fuzzers/utils/rtp_replayer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-01-24T08:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fae9c87d_bdecbfa1",
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "29de569c_cf68ea8f",
         "filename": "test/fuzzers/utils/rtp_replayer.h",
         "patchSetId": 6
@@ -140,6 +230,30 @@
       "writtenOn": "2023-01-23T16:31:36Z",
       "side": 1,
       "message": "or name this type directly, bypassing alias: RtpHeaderExtensionMap - that names is more popular",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 87,
+        "endChar": 47
+      },
+      "revId": "a22fca5258be816d5bdf55ce0aa4d80513427c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9a392b8_4a44e9ce",
+        "filename": "test/fuzzers/utils/rtp_replayer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-01-24T08:12:45Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "29de569c_cf68ea8f",
       "range": {
         "startLine": 87,
         "startChar": 12,
