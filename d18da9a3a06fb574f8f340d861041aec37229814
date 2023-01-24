@@ -123,6 +123,212 @@
       "parentUuid": "4ec09414_3e9b2d64",
       "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb29061_ca82725c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-24T09:28:01Z",
+      "side": 1,
+      "message": "I have only a few nits and small style suggestions.",
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d483f91_f18f6132",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-24T09:28:01Z",
+      "side": 1,
+      "message": "nit:\n\n    // static",
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4752dd9_1dc7ce8c",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-24T09:28:01Z",
+      "side": 1,
+      "message": "nit:\n\n    // static",
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcd111a6_6c222055",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-24T09:28:01Z",
+      "side": 1,
+      "message": "Declare this below please, where it\u0027s actually used.",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 24
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20a1d1fa_26433da9",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-24T09:28:01Z",
+      "side": 1,
+      "message": "Two |if| can be combined in one using \u0026\u0026",
+      "range": {
+        "startLine": 136,
+        "startChar": 13,
+        "endLine": 137,
+        "endChar": 29
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7486cd82_74f214b4",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-24T09:28:01Z",
+      "side": 1,
+      "message": "Please change that to a early exit.\n\n    if (!prop)\n      return;",
+      "range": {
+        "startLine": 144,
+        "startChar": 2,
+        "endLine": 144,
+        "endChar": 13
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f76ffd7e_0b123d57",
+        "filename": "modules/video_capture/linux/pipewire_session.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-24T09:28:01Z",
+      "side": 1,
+      "message": "Please make this all const, since they are only ever set in the constructor.",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 64,
+        "endChar": 25
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82c49787_db3cb4a0",
+        "filename": "modules/video_capture/linux/pipewire_session.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-24T09:28:01Z",
+      "side": 1,
+      "message": "Can this be |const|?",
+      "range": {
+        "startLine": 77,
+        "startChar": 28,
+        "endLine": 77,
+        "endChar": 35
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f08912d_cda80582",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-24T09:28:01Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you check here that node_id_ is in range of session_ nodes()?",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 11
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3bc53e7_2bb0337d",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-24T09:28:01Z",
+      "side": 1,
+      "message": "Can this be const?",
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
