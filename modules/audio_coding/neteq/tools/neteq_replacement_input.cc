@@ -40,6 +40,11 @@ absl::optional<int64_t> NetEqReplacementInput::NextOutputEventTime() const {
   return source_->NextOutputEventTime();
 }
 
+absl::optional<NetEqInput::NetEqSetMinimumDelayInfo>
+NetEqReplacementInput::NextNetEqSetMinimumDelayInfo() const {
+  return source_->NextNetEqSetMinimumDelayInfo();
+}
+
 std::unique_ptr<NetEqInput::PacketData> NetEqReplacementInput::PopPacket() {
   std::unique_ptr<PacketData> to_return = std::move(packet_);
   while (true) {
@@ -57,6 +62,10 @@ std::unique_ptr<NetEqInput::PacketData> NetEqReplacementInput::PopPacket() {
 
 void NetEqReplacementInput::AdvanceOutputEvent() {
   source_->AdvanceOutputEvent();
+}
+
+void NetEqReplacementInput::AdvanceNetEqSetMinimumDelay() {
+  source_->AdvanceNetEqSetMinimumDelay();
 }
 
 bool NetEqReplacementInput::ended() const {
