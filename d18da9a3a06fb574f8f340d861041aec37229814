@@ -382,6 +382,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3db46fd4_93a2b4f2",
+        "filename": "modules/video_capture/linux/pipewire_session.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-26T16:14:47Z",
+      "side": 1,
+      "message": "If it doesn\u0027t work, then so be it. |const| is not a requirement, just a nice thing to have.",
+      "parentUuid": "1250a28d_b600ccd1",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 64,
+        "endChar": 25
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82c49787_db3cb4a0",
