@@ -36,6 +36,13 @@ class NetEqInput {
     int64_t time_ms;
   };
 
+  struct NetEqSetMinimumDelayInfo {
+    NetEqSetMinimumDelayInfo(int64_t timestamp_ms_in, int delay_ms_in)
+        : timestamp_ms(timestamp_ms_in), delay_ms(delay_ms_in) {}
+    int64_t timestamp_ms;
+    int delay_ms;
+  };
+
   virtual ~NetEqInput() = default;
 
   // Returns at what time (in ms) NetEq::InsertPacket should be called next, or
@@ -45,6 +52,11 @@ class NetEqInput {
   // Returns at what time (in ms) NetEq::GetAudio should be called next, or
   // empty if no more output events are available.
   virtual absl::optional<int64_t> NextOutputEventTime() const = 0;
+
+  // Returns the information related to the next NetEq set minimum delay event
+  // if available.
+  virtual absl::optional<NetEqSetMinimumDelayInfo>
+  NextNetEqSetMinimumDelayInfo() const = 0;
 
   // Returns the time (in ms) for the next event from either NextPacketTime()
   // or NextOutputEventTime(), or empty if both are out of events.
@@ -69,6 +81,10 @@ class NetEqInput {
   // time).
   virtual void AdvanceOutputEvent() = 0;
 
+  // Move to the next NetEq set minimum delay. This will make
+  // `NextNetEqSetMinimumDelayInfo` return a new value.
+  virtual void AdvanceNetEqSetMinimumDelay() = 0;
+
   // Returns true if the source has come to an end. An implementation must
   // eventually return true from this method, or the test will end up in an
   // infinite loop.
@@ -88,8 +104,11 @@ class TimeLimitedNetEqInput : public NetEqInput {
   ~TimeLimitedNetEqInput() override;
   absl::optional<int64_t> NextPacketTime() const override;
   absl::optional<int64_t> NextOutputEventTime() const override;
+  absl::optional<NetEqSetMinimumDelayInfo> NextNetEqSetMinimumDelayInfo()
+      const override;
   std::unique_ptr<PacketData> PopPacket() override;
   void AdvanceOutputEvent() override;
+  void AdvanceNetEqSetMinimumDelay() override;
   bool ended() const override;
   absl::optional<RTPHeader> NextHeader() const override;
 
