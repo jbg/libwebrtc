@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd94a5b2_87c00a5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17854
+      },
+      "writtenOn": "2023-01-26T15:43:53Z",
+      "side": 1,
+      "message": "PTAL folks. This unblocks https://chromium-review.googlesource.com/c/chromium/src/+/4165083 and following CLs. Thanks!",
+      "revId": "205591ac6ece6e685934557a7585826b2f31366c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
