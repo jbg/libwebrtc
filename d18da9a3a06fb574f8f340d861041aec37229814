@@ -161,6 +161,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5d0bcdb0_d9b649b9",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-26T16:05:24Z",
+      "side": 1,
+      "message": "I\u0027ve added it for all static members functions.",
+      "parentUuid": "1d483f91_f18f6132",
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b4752dd9_1dc7ce8c",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 18
@@ -199,6 +217,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a2dafc_d5af45b3",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-26T16:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcd111a6_6c222055",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 24
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20a1d1fa_26433da9",
@@ -222,6 +264,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81fce1b2_e63cd1be",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-26T16:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20a1d1fa_26433da9",
+      "range": {
+        "startLine": 136,
+        "startChar": 13,
+        "endLine": 137,
+        "endChar": 29
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7486cd82_74f214b4",
@@ -235,6 +301,30 @@
       "writtenOn": "2023-01-24T09:28:01Z",
       "side": 1,
       "message": "Please change that to a early exit.\n\n    if (!prop)\n      return;",
+      "range": {
+        "startLine": 144,
+        "startChar": 2,
+        "endLine": 144,
+        "endChar": 13
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0e7489e_71fbc4b9",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-26T16:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7486cd82_74f214b4",
       "range": {
         "startLine": 144,
         "startChar": 2,
@@ -270,6 +360,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1250a28d_b600ccd1",
+        "filename": "modules/video_capture/linux/pipewire_session.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-26T16:05:24Z",
+      "side": 1,
+      "message": "Hmmm, that does not work. `std::deque::erase` requires a copy operator and that does not work with const members.\n\nHow should I handle this? A `std::list` would work here but break the index based access in `DeviceInfoPipeWire::GetDeviceName()`.",
+      "parentUuid": "f76ffd7e_0b123d57",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 64,
+        "endChar": 25
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82c49787_db3cb4a0",
         "filename": "modules/video_capture/linux/pipewire_session.h",
         "patchSetId": 18
@@ -281,6 +395,30 @@
       "writtenOn": "2023-01-24T09:28:01Z",
       "side": 1,
       "message": "Can this be |const|?",
+      "range": {
+        "startLine": 77,
+        "startChar": 28,
+        "endLine": 77,
+        "endChar": 35
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb151849_46c273c6",
+        "filename": "modules/video_capture/linux/pipewire_session.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-26T16:05:24Z",
+      "side": 1,
+      "message": "It required some related changes but it works.",
+      "parentUuid": "82c49787_db3cb4a0",
       "range": {
         "startLine": 77,
         "startChar": 28,
@@ -314,6 +452,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "157ebcaa_452ab8d3",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-26T16:05:24Z",
+      "side": 1,
+      "message": "It\u0027s the PipeWire node id and not the index in nodes() but it\u0027s still a good point.\nI\u0027ve added a check to verify that the id is a valid camera node id.\n\nWhile adding that, I noticed that the type for `id` and `node_id_` was wrong. Ids in pipewire are `uint32_t`. So I fixed that as well.",
+      "parentUuid": "6f08912d_cda80582",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 11
+      },
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3bc53e7_2bb0337d",
@@ -327,6 +489,24 @@
       "writtenOn": "2023-01-24T09:28:01Z",
       "side": 1,
       "message": "Can this be const?",
+      "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c85bc4_6e0ded8a",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-26T16:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3bc53e7_2bb0337d",
       "revId": "d18da9a3a06fb574f8f340d861041aec37229814",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
