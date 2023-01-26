@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d908086_e96debed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-26T16:28:04Z",
+      "side": 1,
+      "message": "@ilnik, can you start the dry run please? I don\u0027t have the permission to do it.",
+      "revId": "e1ed6586e02b6aa0d5e975627f8b73c4b734120d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
