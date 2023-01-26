@@ -741,11 +741,13 @@ void ChannelReceive::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
   // Deliver RTCP packet to RTP/RTCP module for parsing
   rtp_rtcp_->IncomingRtcpPacket(data, length);
 
+  RTC_LOG(LS_ERROR) << "DEBUG: Parsed incoming packet";
   int64_t rtt = 0;
   rtp_rtcp_->RTT(remote_ssrc_, &rtt, /*avg_rtt=*/nullptr, /*min_rtt=*/nullptr,
                  /*max_rtt=*/nullptr);
   if (rtt == 0) {
     // Waiting for valid RTT.
+    RTC_LOG(LS_ERROR) << "DEBUG:: RTT not valid yet";
     return;
   }
 
