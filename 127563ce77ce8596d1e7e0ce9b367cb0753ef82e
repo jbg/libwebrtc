@@ -16,6 +16,24 @@
       "message": "I\u0027ve changed it to use `sources +\u003d` for all other cases. I think that should fix the error.\n\nAlternatively I could add `video_capture_options.*` only for Linux. But in that case the corresponding API in `video_capture_factory.*` and `video_capture_impl.h` should probably be guarded by appropriate `#ifdef ...`.\n\n@ilnik what do you think?",
       "revId": "127563ce77ce8596d1e7e0ce9b367cb0753ef82e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afc25efc_b19ba569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-27T10:09:03Z",
+      "side": 1,
+      "message": "VideoCaptureOptions has only the callback for non-linux platforms. \nIt is a little weird, but I believe it\u0027s justified.\n\nI would leave it as it is now.",
+      "parentUuid": "d5ca725f_55cad52c",
+      "revId": "127563ce77ce8596d1e7e0ce9b367cb0753ef82e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
