@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4745f650_d5406a85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-27T15:11:29Z",
+      "side": 1,
+      "message": "Right, that function is only implemented on Linux. I\u0027ve adjusted the `#ifdef` accordingly.",
+      "revId": "83785895bc6d8085e17378ec6c77eee0c9ada40e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
