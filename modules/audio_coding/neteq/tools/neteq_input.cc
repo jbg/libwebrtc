@@ -58,6 +58,11 @@ absl::optional<int64_t> TimeLimitedNetEqInput::NextOutputEventTime() const {
   return ended_ ? absl::nullopt : input_->NextOutputEventTime();
 }
 
+absl::optional<NetEqInput::NetEqSetMinimumDelayInfo>
+TimeLimitedNetEqInput::NextNetEqSetMinimumDelayInfo() const {
+  return ended_ ? absl::nullopt : input_->NextNetEqSetMinimumDelayInfo();
+}
+
 std::unique_ptr<NetEqInput::PacketData> TimeLimitedNetEqInput::PopPacket() {
   if (ended_) {
     return std::unique_ptr<PacketData>();
@@ -70,6 +75,13 @@ std::unique_ptr<NetEqInput::PacketData> TimeLimitedNetEqInput::PopPacket() {
 void TimeLimitedNetEqInput::AdvanceOutputEvent() {
   if (!ended_) {
     input_->AdvanceOutputEvent();
+    MaybeSetEnded();
+  }
+}
+
+void TimeLimitedNetEqInput::AdvanceNetEqSetMinimumDelay() {
+  if (!ended_) {
+    input_->AdvanceNetEqSetMinimumDelay();
     MaybeSetEnded();
   }
 }
