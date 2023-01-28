@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea7fbb23_3ff7eb3e",
+        "filename": "modules/video_capture/video_capture_factory.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-01-28T13:18:46Z",
+      "side": 1,
+      "message": "Are you sure? If I understand the toplevel `BUILD.gn` correctly then `WEBRTC_LINUX` is defined on Android, so the check cannot be simplified:\n\n```\nif (is_android) {\n  defines +\u003d [\n  \"WEBRTC_LINUX\",\n  \"WEBRTC_ANDROID\",\n  ]\n  ...\n```\nOr am I missing something?\n\nAbout the order: I can change it but the other two functions have the `return nullptr` first so I did the same thing here.",
+      "parentUuid": "39e19d5f_dedd7afc",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 53
+      },
+      "revId": "83785895bc6d8085e17378ec6c77eee0c9ada40e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecab00d4_e719ee49",
         "filename": "modules/video_capture/video_capture_factory.cc",
         "patchSetId": 21
