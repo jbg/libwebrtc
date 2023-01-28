@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9346a6be_8a716102",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-28T06:44:25Z",
+      "side": 1,
+      "message": "for public repos, I prefer public bugs, even if they just say \"need has been identified downstream\".",
+      "revId": "e09b3592e738a0bda50b68eb7c18d7d3db9fd2e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "701649ab_bacef984",
@@ -14,6 +31,23 @@
       "writtenOn": "2023-01-26T12:07:05Z",
       "side": 1,
       "message": "Great. This allows setting additional socket options that WebRTC itself doesn\u0027t set.",
+      "revId": "e09b3592e738a0bda50b68eb7c18d7d3db9fd2e4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04e9ea46_c92e891a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-28T06:44:25Z",
+      "side": 1,
+      "message": "I\u0027m a bit afraid of this, because it breaks open the abstraction. If our abstraction layer doesn\u0027t expose all the properties people need to set, then our absraction layer is not really abstracting what it needs to.\n\nAlso, exposing the socket means that we can no longer make any assumptions on what other calls have been performed on the socket, which means that strange bugs can be caused.\n\nPlease tell me why this is the right solution...",
       "revId": "e09b3592e738a0bda50b68eb7c18d7d3db9fd2e4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
