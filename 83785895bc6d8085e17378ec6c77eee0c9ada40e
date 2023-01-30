@@ -65,6 +65,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a021fee_d657e36c",
+        "filename": "modules/video_capture/video_capture_factory.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-01-30T09:43:09Z",
+      "side": 1,
+      "message": "You are right. These defines are way too weird.\n\nNit: Please add a comment here that webrtc_linux is also defined for android, but this logic is needed only on pure linux.",
+      "parentUuid": "ea7fbb23_3ff7eb3e",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 53
+      },
+      "revId": "83785895bc6d8085e17378ec6c77eee0c9ada40e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecab00d4_e719ee49",
