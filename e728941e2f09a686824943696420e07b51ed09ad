@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5762f25a_28b01a33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15909
+      },
+      "writtenOn": "2023-01-30T07:44:14Z",
+      "side": 1,
+      "message": "WebRTC folks,\nPlease revert (or fix) if this CL breaks something.",
+      "revId": "e728941e2f09a686824943696420e07b51ed09ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
