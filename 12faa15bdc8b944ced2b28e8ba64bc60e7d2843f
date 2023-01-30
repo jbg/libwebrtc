@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42a49fc3_d359e8f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-01-30T19:25:12Z",
+      "side": 1,
+      "message": "Added a skeptical comment on the bug.\n\nNote: rtc_base is an internal interface, so the only users of this are people who are already mucking around with WebRTC internal.\n\nSit user caveat!",
+      "revId": "12faa15bdc8b944ced2b28e8ba64bc60e7d2843f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
