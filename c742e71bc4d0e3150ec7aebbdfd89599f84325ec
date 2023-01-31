@@ -16,6 +16,23 @@
       "message": "Thanks!",
       "revId": "c742e71bc4d0e3150ec7aebbdfd89599f84325ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64ccd6ba_e2c3c86c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2023-01-31T16:02:30Z",
+      "side": 1,
+      "message": "Harald, please, take a look at this CL.\n\nThanks!",
+      "revId": "c742e71bc4d0e3150ec7aebbdfd89599f84325ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
