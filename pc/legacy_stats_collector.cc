@@ -131,6 +131,7 @@ void ExtractCommonSendProperties(const cricket::MediaSenderInfo& info,
   if (!use_standard_bytes_stats) {
     bytes_sent += info.header_and_padding_bytes_sent;
   }
+  RTC_LOG(LS_ERROR) << "DEBUG: Add BytesSent in ExtractCommon";
   report->AddInt64(StatsReport::kStatsValueNameBytesSent, bytes_sent);
   if (info.rtt_ms >= 0) {
     report->AddInt64(StatsReport::kStatsValueNameRtt, info.rtt_ms);
@@ -231,8 +232,12 @@ void ExtractStats(const cricket::VoiceReceiverInfo& info,
   }
   report->AddInt64(StatsReport::kStatsValueNameBytesReceived, bytes_rcvd);
   if (info.capture_start_ntp_time_ms >= 0) {
+    RTC_LOG(LS_ERROR) << "DEBUG: Setting CaptureStartNtpTime to "
+                      << info.capture_start_ntp_time_ms;
     report->AddInt64(StatsReport::kStatsValueNameCaptureStartNtpTimeMs,
                      info.capture_start_ntp_time_ms);
+  } else {
+    RTC_LOG(LS_ERROR) << "DEBUG: CaptureStartNtpTime not set";
   }
   report->AddString(StatsReport::kStatsValueNameMediaType, "audio");
 }
@@ -309,8 +314,12 @@ void ExtractStats(const cricket::VideoReceiverInfo& info,
   }
   report->AddInt64(StatsReport::kStatsValueNameBytesReceived, bytes_rcvd);
   if (info.capture_start_ntp_time_ms >= 0) {
+    RTC_LOG(LS_ERROR) << "DEBUG: Setting CaptureStartNtpTime to "
+                      << info.capture_start_ntp_time_ms;
     report->AddInt64(StatsReport::kStatsValueNameCaptureStartNtpTimeMs,
                      info.capture_start_ntp_time_ms);
+  } else {
+    RTC_LOG(LS_ERROR) << "DEBUG: CaptureStartNtpTime not set (video)";
   }
   if (info.first_frame_received_to_decoded_ms >= 0) {
     report->AddInt64(StatsReport::kStatsValueNameFirstFrameReceivedToDecodedMs,
@@ -665,6 +674,7 @@ void LegacyStatsCollector::UpdateStats(
   }
   cache_timestamp_ms_ = cache_now_ms;
   stats_gathering_started_ = GetTimeNow();
+  RTC_LOG(LS_ERROR) << "DEBUG: UpdateStats starting";
 
   // TODO(tommi): ExtractSessionInfo now has a single hop to the network thread
   // to fetch stats, then applies them on the signaling thread. See if we need
@@ -796,6 +806,7 @@ StatsReport* LegacyStatsCollector::AddConnectionInfoReport(
       {StatsReport::kStatsValueNameRecvPingRequests, info.recv_ping_requests},
       {StatsReport::kStatsValueNameRecvPingResponses, info.recv_ping_responses},
   };
+  RTC_LOG(LS_ERROR) << "DEBUG: Adding BytesSent in AddConnectionInfoReport";
   for (const auto& i : int64s)
     report->AddInt64(i.name, i.value);
 

@@ -409,13 +409,14 @@ rtc::scoped_refptr<webrtc::AudioState> WebRtcVoiceEngine::GetAudioState()
 }
 
 VoiceMediaChannel* WebRtcVoiceEngine::CreateMediaChannel(
+    MediaChannel::Role role,
     webrtc::Call* call,
     const MediaConfig& config,
     const AudioOptions& options,
     const webrtc::CryptoOptions& crypto_options) {
   RTC_DCHECK_RUN_ON(call->worker_thread());
-  return new WebRtcVoiceMediaChannel(this, config, options, crypto_options,
-                                     call);
+  return new WebRtcVoiceMediaChannel(role, this, config, options,
+                                     crypto_options, call);
 }
 
 void WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
@@ -1249,12 +1250,13 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
 };
 
 WebRtcVoiceMediaChannel::WebRtcVoiceMediaChannel(
+    MediaChannel::Role role,
     WebRtcVoiceEngine* engine,
     const MediaConfig& config,
     const AudioOptions& options,
     const webrtc::CryptoOptions& crypto_options,
     webrtc::Call* call)
-    : VoiceMediaChannel(call->network_thread(), config.enable_dscp),
+    : VoiceMediaChannel(role, call->network_thread(), config.enable_dscp),
       worker_thread_(call->worker_thread()),
       engine_(engine),
       call_(call),
@@ -1822,6 +1824,7 @@ bool WebRtcVoiceMediaChannel::AddSendStream(const StreamParams& sp) {
   TRACE_EVENT0("webrtc", "WebRtcVoiceMediaChannel::AddSendStream");
   RTC_DCHECK_RUN_ON(worker_thread_);
   RTC_LOG(LS_INFO) << "AddSendStream: " << sp.ToString();
+  RTC_DCHECK(role() == MediaChannel::Role::kSend);
 
   uint32_t ssrc = sp.first_ssrc();
   RTC_DCHECK(0 != ssrc);
@@ -1884,6 +1887,7 @@ bool WebRtcVoiceMediaChannel::RemoveSendStream(uint32_t ssrc) {
 bool WebRtcVoiceMediaChannel::AddRecvStream(const StreamParams& sp) {
   TRACE_EVENT0("webrtc", "WebRtcVoiceMediaChannel::AddRecvStream");
   RTC_DCHECK_RUN_ON(worker_thread_);
+  RTC_DCHECK(role() == MediaChannel::Role::kReceive);
   RTC_LOG(LS_INFO) << "AddRecvStream: " << sp.ToString();
 
   if (!sp.has_ssrcs()) {
@@ -2282,7 +2286,10 @@ bool WebRtcVoiceMediaChannel::GetSendStats(VoiceMediaSendInfo* info) {
   RTC_DCHECK(info);
 
   // Get SSRC and stats for each sender.
-  RTC_DCHECK_EQ(info->senders.size(), 0U);
+  // With separate send and receive channels, we expect GetStats to be called on
+  // both, and accumulate info, but only one channel (the send one) should have
+  // senders.
+  RTC_DCHECK(info->senders.size() == 0U || send_streams_.size() == 0);
   for (const auto& stream : send_streams_) {
     webrtc::AudioSendStream::Stats stats =
         stream.second->GetStats(recv_streams_.size() > 0);
@@ -2398,6 +2405,8 @@ bool WebRtcVoiceMediaChannel::GetReceiveStats(VoiceMediaReceiveInfo* info,
     rinfo.decoding_cng = stats.decoding_cng;
     rinfo.decoding_plc_cng = stats.decoding_plc_cng;
     rinfo.decoding_muted_output = stats.decoding_muted_output;
+    RTC_LOG(LS_ERROR) << "DEBUG: capture_start_ntp_time_ms is "
+                      << stats.capture_start_ntp_time_ms;
     rinfo.capture_start_ntp_time_ms = stats.capture_start_ntp_time_ms;
     rinfo.last_packet_received_timestamp_ms =
         stats.last_packet_received_timestamp_ms;
