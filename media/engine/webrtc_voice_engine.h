@@ -69,6 +69,7 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
 
   rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const override;
   VoiceMediaChannel* CreateMediaChannel(
+      MediaChannel::Role role,
       webrtc::Call* call,
       const MediaConfig& config,
       const AudioOptions& options,
@@ -141,7 +142,8 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
 class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
                                       public webrtc::Transport {
  public:
-  WebRtcVoiceMediaChannel(WebRtcVoiceEngine* engine,
+  WebRtcVoiceMediaChannel(MediaChannel::Role role,
+                          WebRtcVoiceEngine* engine,
                           const MediaConfig& config,
                           const AudioOptions& options,
                           const webrtc::CryptoOptions& crypto_options,

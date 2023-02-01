@@ -466,6 +466,10 @@ AudioMixer::Source::AudioFrameInfo ChannelReceive::GetAudioFrameWithInfo(
         // `capture_start_ntp_time_ms_` + `elapsed_time_ms_` == `ntp_time_ms_`
         capture_start_ntp_time_ms_ =
             audio_frame->ntp_time_ms_ - audio_frame->elapsed_time_ms_;
+        RTC_LOG(LS_ERROR) << "DEBUG: Capture start NTP time is "
+                          << capture_start_ntp_time_ms_;
+      } else {
+        RTC_LOG(LS_ERROR) << "DEBUG: Frame has no ntp_time_ms, this=" << this;
       }
     }
   }
@@ -734,7 +738,7 @@ void ChannelReceive::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   // TODO(bugs.webrtc.org/11993): Expect to be called exclusively on the
   // network thread.
-
+  RTC_LOG(LS_ERROR) << "DEBUG: ReceivedRTCPCPacket";
   // Store playout timestamp for the received RTCP packet
   UpdatePlayoutTimestamp(true, rtc::TimeMillis());
 
@@ -746,6 +750,7 @@ void ChannelReceive::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
                  /*max_rtt=*/nullptr);
   if (rtt == 0) {
     // Waiting for valid RTT.
+    RTC_LOG(LS_ERROR) << "DEBUG: Waiting for valid RTT, this=" << this;
     return;
   }
 
@@ -757,10 +762,12 @@ void ChannelReceive::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
                            /*rtcp_arrival_time_frac=*/nullptr,
                            &rtp_timestamp) != 0) {
     // Waiting for RTCP.
+    RTC_LOG(LS_ERROR) << "DEBUG: Waiting for RTCP";
     return;
   }
 
   {
+    RTC_LOG(LS_ERROR) << "DEBUG: Updating NTP estimator";
     MutexLock lock(&ts_stats_lock_);
     ntp_estimator_.UpdateRtcpTimestamp(
         TimeDelta::Millis(rtt), NtpTime(ntp_secs, ntp_frac), rtp_timestamp);
