@@ -32,6 +32,18 @@
 
 namespace webrtc {
 
+// These values are persisted to logs. Entries should not be renumbered and
+// numeric values should never be reused.
+enum class DesktopCapturerUsage {
+  kMacWindow = 0,
+  kMacWindowFullscreen = 1,
+  kWinWindow = 2,
+  kWinWindowFullscreen = 3,
+  kMaxValue = kWinWindowFullscreen
+};
+
+void RTC_EXPORT LogDesktopCapturerUsage(DesktopCapturerUsage usage);
+
 class DesktopCaptureOptions;
 class DesktopFrame;
 
