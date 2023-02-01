@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "703ce199_83d2aee5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-02-01T13:14:59Z",
+      "side": 1,
+      "message": "I am trying to figure out the distribution of usage to compare DXGI and GDI since we today count them as equally common based on the fact that their occurrence is added when they start and both always start at the same time.\n\nI then turned to WebRTC.DesktopCapture.Win.DirectXCapturerFrameTime and WebRTC.DesktopCapture.Win.ScreenGDICapturerFrameTime for a better view but I am not able to find any traces of WebRTC.DesktopCapture.Win.ScreenGDICapturerFrameTime [1] which would mean that DXGI never fails.\n\nI am now adding this new UMA to check if that is really the case or not.\nUsing this new UMA should also give us support to derive the number of times we \nfall back to GDI.\n\n[1] https://screenshot.googleplex.com/3BeoGhNNkvG5jYB",
+      "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
