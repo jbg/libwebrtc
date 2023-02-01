@@ -390,6 +390,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "264d9dfc_c0c68bfd",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T12:45:22Z",
+      "side": 1,
+      "message": "you\u0027re right WillRepeateadly changes expectation from Times(1) to Times(AtLeast(1))\nstill it is redundant with the rtcp_packet_sent flag.\n\nhow about relaxing expectation:\nbool receiver_report_sent \u003d false;\nON_CALL(transport_, SendRtcp).WillByDefault([\u0026](const uint8_t* packet, size_t length) {\n  if (length \u003e\u003d 2 \u0026\u0026 packet[1] \u003d\u003d rtcp::ReceiverErport::kPacketType) {\n    receiver_report_sent \u003d true;\n  }\n});\n...\ntime_controller_.AdvanceTime(TimeDelta::Seconds(5));\nEXPECT_TRUE(receive_report_sent);\n\nThis way you would skip [future] rtcp packets other than ReceiverReport, and rely on value mentioned in https://www.rfc-editor.org/rfc/rfc3550#section-6.2\n\"The RECOMMENDED value for a fixed minimum interval is 5 seconds.\"",
+      "parentUuid": "3aa79a83_b21c55e1",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 13
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c65fdcd8_af64f693",
         "filename": "audio/channel_receive_unittest.cc",
         "patchSetId": 2
@@ -425,6 +449,30 @@
       "side": 1,
       "message": "Good point on the 2.5 seconds. I put in a log statement to measure the time, and was a bit surprised to find it as exactly 2.5 seconds - I had expected either 5 seconds or a random value. The test will pass as long as one occurs within the 2.5 seconds (on the fake clock). I kind of like testing the behavior observed - this increases brittleness, but it does give you a heads-up when you change this - \"you\u0027re changing observable behavior - did you intend to do that?\"\n\nWRT relationship to RtpRtcp, I kind of think that if a component doesn\u0027t have injectable modules, but creates them for itself, then it assumes responsibility for the behavior of that module.\n\nThe test is then testing that the module is properly integrated.",
       "parentUuid": "c65fdcd8_af64f693",
+      "range": {
+        "startLine": 109,
+        "startChar": 2,
+        "endLine": 109,
+        "endChar": 56
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb14129b_1e103949",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T12:45:22Z",
+      "side": 1,
+      "message": "(yes, current implementation uses half of the configured interval as initial delay)\n\nI strongly prefer not to test observed behavior, only promised behavior, or behavior class relies on, preferablly with the comments why such behavior is expected.\nTesting current behavior complicates refactoring: when you change behavior from one acceptable to another acceptable behavior, lots of such tests start to fail and then you need to go through each of them and decide if there was a reason for test to expect that particular behavior, or if that code doesn\u0027t really need the old behavior.\nhttps://testing.googleblog.com/2013/08/testing-on-toilet-test-behavior-not.html\n(aka http://go/tott/571)\n\ne.g. you shouldn\u0027t test order of an unordered map, even it is currently deterministic and changing the order changes observable behavior.",
+      "parentUuid": "ee98098f_fa0d778f",
       "range": {
         "startLine": 109,
         "startChar": 2,
