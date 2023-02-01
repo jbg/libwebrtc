@@ -11,6 +11,7 @@
 #include "modules/desktop_capture/desktop_capture_metrics_helper.h"
 
 #include "modules/desktop_capture/desktop_capture_types.h"
+#include "rtc_base/logging.h"
 #include "system_wrappers/include/metrics.h"
 
 namespace webrtc {
