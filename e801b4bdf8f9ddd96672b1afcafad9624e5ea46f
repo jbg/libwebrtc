@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4030c2c9_6f76d6e8",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T10:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f8ae098_7590f536",
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "712402ba_0d8a0638",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-01T10:22:09Z",
       "side": 1,
       "message": "constexpr\n\nhttps://google.github.io/styleguide/cppguide.html#Static_and_Global_Variables\n“Constant initialization of static storage duration variables should be marked with constexpr or where possible the ABSL_CONST_INIT attribute.”",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bd97c6e_6a715f56",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T10:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "712402ba_0d8a0638",
       "range": {
         "startLine": 35,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1847d9_0a1fbc80",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T10:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c072486a_07846943",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 12
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0e3dd8a_d07b9853",
@@ -87,6 +153,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5df2904c_2283b3e9",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T10:49:05Z",
+      "side": 1,
+      "message": "Of course this doesn\u0027t apply when using a synthetic clock, since the clock is unable to move when called. But the reason is basically that I didn\u0027t find GetClock() or the functions on that object. Thanks for pointing it out!",
+      "parentUuid": "c0e3dd8a_d07b9853",
+      "range": {
+        "startLine": 62,
+        "startChar": 45,
+        "endLine": 62,
+        "endChar": 69
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c36d6c5_66e41a41",
@@ -100,6 +190,30 @@
       "writtenOn": "2023-02-01T10:22:09Z",
       "side": 1,
       "message": "time_controller_.GetClock()-\u003eCurrentTime()",
+      "range": {
+        "startLine": 72,
+        "startChar": 28,
+        "endLine": 72,
+        "endChar": 64
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5794a47_f2279c18",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T10:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c36d6c5_66e41a41",
       "range": {
         "startLine": 72,
         "startChar": 28,
@@ -158,6 +272,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "976aee15_d33da4eb",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T10:49:05Z",
+      "side": 1,
+      "message": "Sticking with the local variable, just because I don\u0027t like the style of activity in EXPECT clauses. but agree with clarity!",
+      "parentUuid": "3e8fe204_5d7cc03f",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 89,
+        "endChar": 25
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c770b4b7_7a0ee257",
         "filename": "audio/channel_receive_unittest.cc",
         "patchSetId": 2
@@ -169,6 +307,30 @@
       "writtenOn": "2023-02-01T10:22:09Z",
       "side": 1,
       "message": "or \nstd::map\u003cint, SdpAudioFormat\u003e codecs \u003d {{10, {\"L16\", 44\u0027100, 1}}};",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 33
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d87b4947_7213a94f",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T10:49:05Z",
+      "side": 1,
+      "message": "Thanks, I was failing to find the syntax for that!",
+      "parentUuid": "c770b4b7_7a0ee257",
       "range": {
         "startLine": 94,
         "startChar": 0,
@@ -204,6 +366,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3aa79a83_b21c55e1",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T10:49:05Z",
+      "side": 1,
+      "message": "EXPECT_CALL with WillRepeatedly will match more than once.\nON_CALL is for when you don\u0027t want to verify; in this case the lambda actually adds a check. (The original lambda contained a debug log, of course.)",
+      "parentUuid": "06e541f4_3c8900fb",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 13
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c65fdcd8_af64f693",
         "filename": "audio/channel_receive_unittest.cc",
         "patchSetId": 2
@@ -215,6 +401,30 @@
       "writtenOn": "2023-02-01T10:22:09Z",
       "side": 1,
       "message": "I\u0027m worried this test assumes too much:\nIt assumes there will be exactly one rtcp packet in 5s/2 (that is current behavior, but it doesn\u0027t have to be. RR should be send periodically after RTP packet is received, but period or initial delay is not defined. It probably safe to assume there will be at least one RR in the first 5s. There might be more RTCP packets if we decide to change default report interval to 1s, to align with video)\nIt assumes there will be no other rtcp messages. (but e.g. if send side bwe is used, there will be transport feedback that is sent more frequently than RR)\n\nAnd it test functionality of the underneath RtpRtcp module, not the functionality of the ChannelReceive itself. Though for that you may say it is an \u0027integration\u0027 test - validates RTCP module is properly integrated into the ChannelReceive.",
+      "range": {
+        "startLine": 109,
+        "startChar": 2,
+        "endLine": 109,
+        "endChar": 56
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee98098f_fa0d778f",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T10:49:05Z",
+      "side": 1,
+      "message": "Good point on the 2.5 seconds. I put in a log statement to measure the time, and was a bit surprised to find it as exactly 2.5 seconds - I had expected either 5 seconds or a random value. The test will pass as long as one occurs within the 2.5 seconds (on the fake clock). I kind of like testing the behavior observed - this increases brittleness, but it does give you a heads-up when you change this - \"you\u0027re changing observable behavior - did you intend to do that?\"\n\nWRT relationship to RtpRtcp, I kind of think that if a component doesn\u0027t have injectable modules, but creates them for itself, then it assumes responsibility for the behavior of that module.\n\nThe test is then testing that the module is properly integrated.",
+      "parentUuid": "c65fdcd8_af64f693",
       "range": {
         "startLine": 109,
         "startChar": 2,
