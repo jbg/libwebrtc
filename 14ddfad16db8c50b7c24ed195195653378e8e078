@@ -16,6 +16,23 @@
       "message": "The two new tests fail with the existing code. Moar tests ;-)",
       "revId": "14ddfad16db8c50b7c24ed195195653378e8e078",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9546a3_a4894492",
+        "filename": "pc/peer_connection_header_extension_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-01T11:49:04Z",
+      "side": 1,
+      "message": "This is in non-BUNDLE.\n\nDoes it also work in BUNDLE?",
+      "revId": "14ddfad16db8c50b7c24ed195195653378e8e078",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
