@@ -28,6 +28,25 @@
 
 namespace webrtc {
 
+namespace {
+
+enum class DirectXCapturerResult {
+  kSuccess = 0,
+  kUnsupportedSession = 1,
+  kFramePrepareFailed = 2,
+  kInitializationFailed = 3,
+  kDuplicationFailed = 4,
+  kInvalidMonitorId = 5,
+  kMaxValue = kInvalidMonitorId
+};
+
+void RecordDirectXCapturerResult(DirectXCapturerResult error) {
+  RTC_HISTOGRAM_ENUMERATION("WebRTC.DesktopCapture.Win.DirectXCapturerResult",
+                            static_cast<int>(error),
+                            static_cast<int>(DirectXCapturerResult::kMaxValue));
+}
+}  // namespace
+
 using Microsoft::WRL::ComPtr;
 
 // static
@@ -157,6 +176,7 @@ void ScreenCapturerWinDirectx::CaptureFrame() {
           << "Current binary is running on a session not supported "
              "by DirectX screen capturer.";
       callback_->OnCaptureResult(Result::ERROR_PERMANENT, nullptr);
+      RecordDirectXCapturerResult(DirectXCapturerResult::kUnsupportedSession);
       break;
     }
     case DuplicateResult::FRAME_PREPARE_FAILED: {
@@ -164,16 +184,23 @@ void ScreenCapturerWinDirectx::CaptureFrame() {
       // This usually means we do not have enough memory or SharedMemoryFactory
       // cannot work correctly.
       callback_->OnCaptureResult(Result::ERROR_PERMANENT, nullptr);
+      RecordDirectXCapturerResult(DirectXCapturerResult::kFramePrepareFailed);
       break;
     }
     case DuplicateResult::INVALID_MONITOR_ID: {
       RTC_LOG(LS_ERROR) << "Invalid monitor id " << current_screen_id_;
       callback_->OnCaptureResult(Result::ERROR_PERMANENT, nullptr);
+      RecordDirectXCapturerResult(DirectXCapturerResult::kInvalidMonitorId);
       break;
     }
-    case DuplicateResult::INITIALIZATION_FAILED:
+    case DuplicateResult::INITIALIZATION_FAILED: {
+      callback_->OnCaptureResult(Result::ERROR_TEMPORARY, nullptr);
+      RecordDirectXCapturerResult(DirectXCapturerResult::kInitializationFailed);
+      break;
+    }
     case DuplicateResult::DUPLICATION_FAILED: {
       callback_->OnCaptureResult(Result::ERROR_TEMPORARY, nullptr);
+      RecordDirectXCapturerResult(DirectXCapturerResult::kDuplicationFailed);
       break;
     }
     case DuplicateResult::SUCCEEDED: {
@@ -192,6 +219,7 @@ void ScreenCapturerWinDirectx::CaptureFrame() {
       // the frame, see WindowCapturerMac::CaptureFrame.
 
       callback_->OnCaptureResult(Result::SUCCESS, std::move(frame));
+      RecordDirectXCapturerResult(DirectXCapturerResult::kSuccess);
       break;
     }
   }
