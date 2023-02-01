@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f8ae098_7590f536",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T10:22:09Z",
+      "side": 1,
+      "message": "consider putting everything into unnamed namespace also:\nThat would guard against ODR violation if neighbour test uses constants with the same name.",
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "712402ba_0d8a0638",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T10:22:09Z",
+      "side": 1,
+      "message": "constexpr\n\nhttps://google.github.io/styleguide/cppguide.html#Static_and_Global_Variables\n“Constant initialization of static storage duration variables should be marked with constexpr or where possible the ABSL_CONST_INIT attribute.”",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c072486a_07846943",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T10:22:09Z",
+      "side": 1,
+      "message": "probably can be omited because this code is in webrtc child namespace",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 12
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e3dd8a_d07b9853",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T10:22:09Z",
+      "side": 1,
+      "message": "do not query time twice. You\u0027re risking producing inaccurate value.\ne.g. if 1st rtc::TimeMillis() returns 999, and 2nd returns 1\u0027000\nyou would try to produce (0, 0) or (1, 999) values which are far from the expected (1, 0) or (0, 999);\n\ninstead query it once.\n\nin fact, 2nd construction parameter of the NtpTime is not milliseconds, but 2^-32 seconds (note NtpTime::kFractionsPerSecond constant)\n\nwhy do you need this function in the first place, specially when you have time_controller_ member that simulates time. You can instead\ncall time_controller_.GetClock()-\u003eCurrentNtpTime()",
+      "range": {
+        "startLine": 62,
+        "startChar": 45,
+        "endLine": 62,
+        "endChar": 69
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c36d6c5_66e41a41",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T10:22:09Z",
+      "side": 1,
+      "message": "time_controller_.GetClock()-\u003eCurrentTime()",
+      "range": {
+        "startLine": 72,
+        "startChar": 28,
+        "endLine": 72,
+        "endChar": 64
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83636f40_83efc486",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T10:22:09Z",
+      "side": 1,
+      "message": "I think it is more common to alias all used symbols from testing:\n\nnamespace webrtc::voe {\nnamespace {\n\nusing ::testing::NiceMock;\nusing ::testing::NotNull;\nusing ::testing::Test;\n\n...\n\nNiceMock\u003cMockRtcEventLog\u003e event_log_;",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 19
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e8fe204_5d7cc03f",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T10:22:09Z",
+      "side": 1,
+      "message": "unrelated to the new test\n\nusing ::testing::NotNull;\n...\nEXPECT_THAT(CreateTestChannelReceive(), NotNull());\n\nlikely clearer communicates the intent.",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 89,
+        "endChar": 25
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c770b4b7_7a0ee257",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T10:22:09Z",
+      "side": 1,
+      "message": "or \nstd::map\u003cint, SdpAudioFormat\u003e codecs \u003d {{10, {\"L16\", 44\u0027100, 1}}};",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 33
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06e541f4_3c8900fb",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T10:22:09Z",
+      "side": 1,
+      "message": "either remote rtcp_packet_sent variable (EXPECT_CALL already validates there was exactly one call),\nor replace EXPECT_CALL with ON_CALL(...).WillByDefault(same lambda);\n\nhttp://google.github.io/googletest/gmock_cook_book.html#UseOnCall",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 13
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c65fdcd8_af64f693",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T10:22:09Z",
+      "side": 1,
+      "message": "I\u0027m worried this test assumes too much:\nIt assumes there will be exactly one rtcp packet in 5s/2 (that is current behavior, but it doesn\u0027t have to be. RR should be send periodically after RTP packet is received, but period or initial delay is not defined. It probably safe to assume there will be at least one RR in the first 5s. There might be more RTCP packets if we decide to change default report interval to 1s, to align with video)\nIt assumes there will be no other rtcp messages. (but e.g. if send side bwe is used, there will be transport feedback that is sent more frequently than RR)\n\nAnd it test functionality of the underneath RtpRtcp module, not the functionality of the ChannelReceive itself. Though for that you may say it is an \u0027integration\u0027 test - validates RTCP module is properly integrated into the ChannelReceive.",
+      "range": {
+        "startLine": 109,
+        "startChar": 2,
+        "endLine": 109,
+        "endChar": 56
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
