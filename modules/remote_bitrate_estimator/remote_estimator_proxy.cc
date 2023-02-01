@@ -96,15 +96,19 @@ void RemoteEstimatorProxy::IncomingPacket(const RtpPacketReceived& packet) {
                             .ssrc = packet.Ssrc()};
   uint16_t seqnum;
   absl::optional<FeedbackRequest> feedback_request;
-  if (!packet.GetExtension<TransportSequenceNumber>(&seqnum)) {
-    if (!packet.GetExtension<TransportSequenceNumberV2>(&seqnum,
-                                                        &feedback_request)) {
-      RTC_DCHECK_NOTREACHED() << " Expected transport sequence number.";
-      return;
-    }
+  if (packet.GetExtension<TransportSequenceNumber>(&seqnum) ||
+      packet.GetExtension<TransportSequenceNumberV2>(
+          &seqnum, &internal_packet.feedback_request)) {
+    internal_packet.transport_sequence_number = seqnum;
+  } else {
+    // This function expected to be called only for packets that have
+    // TransportSequenceNumber rtp header extension, however malformed RTP
+    // packet may contain unparsable TransportSequenceNumber.
+    RTC_DCHECK(packet.HasExtension<TransportSequenceNumber>() ||
+               packet.HasExtension<TransportSequenceNumberV2>)
+        << " Expected transport sequence number.";
+    return;
   }
-  internal_packet.transport_sequence_number = seqnum;
-  internal_packet.feedback_request = feedback_request;
 
   uint32_t send_time_24_bits;
   if (packet.GetExtension<AbsoluteSendTime>(&send_time_24_bits)) {
