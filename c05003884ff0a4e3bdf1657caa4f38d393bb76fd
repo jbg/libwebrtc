@@ -34,6 +34,47 @@
       "parentUuid": "703ce199_83d2aee5",
       "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67340e23_ebaab28e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-02-01T18:50:41Z",
+      "side": 1,
+      "message": "It looks like WindowGDI isn\u0027t captured either. I think the issue is that histograms.xml[1] has them as \"ScreenGDI\" and \"WindowGDI\", but the code tries to log them as \"ScreenGdi\"[2] and \"WindowGdi\"[3] so they got omitted...\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:tools/metrics/histograms/metadata/web_rtc/histograms.xml;drc\u003d788950873060265b3be7c06b1c08c4700f8e6d40;l\u003d995\n\n[2]https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/win/screen_capturer_win_gdi.cc;drc\u003def5b21e6374a499c74827ee52958bc0a15a60b30;l\u003d104\n\n[3]https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/win/window_capturer_win_gdi.cc;drc\u003db1372f973adfcd7b279f819a98350142fc3f8556;l\u003d174\n\nI\u0027ll start a thread with the metrics folks. If you think there\u0027s value in this change still LMK; but it mostly looks fine.",
+      "parentUuid": "01bd07e7_8cb9b9b0",
+      "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2981cc71_c3f7eff7",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_directx.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-02-01T18:50:41Z",
+      "side": 1,
+      "message": "This needs a comment that it\u0027s persisted to logs and that values shouldn\u0027t be re-used/re-ordered.",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 32
+      },
+      "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
