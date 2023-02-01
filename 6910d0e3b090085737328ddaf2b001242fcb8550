@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed307a5c_9542f846",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T14:56:01Z",
+      "side": 1,
+      "message": "Thanks for the review!\nNow back to rebasing the next one...",
+      "revId": "6910d0e3b090085737328ddaf2b001242fcb8550",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
