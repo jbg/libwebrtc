@@ -16,6 +16,23 @@
       "message": "Thanks for the review! Lots of points well taken!",
       "revId": "848a16812e22745304d9c2e01959a1935647e438",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb04326_b2429b34",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T12:57:25Z",
+      "side": 1,
+      "message": "delete comments with unused code.",
+      "revId": "848a16812e22745304d9c2e01959a1935647e438",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
