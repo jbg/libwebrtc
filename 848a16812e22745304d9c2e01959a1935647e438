@@ -65,6 +65,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e6ca61a_bdecde85",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-01T14:45:35Z",
+      "side": 1,
+      "message": "I would still welcome proper RTP packet before assuming RTCP RR are sent out.\nI think there was code not to send out empty receiver reports. It seems wastefull to send empty receiver reports at the beginning of the call. (empty RR at the middle of the call might be treated as keep alive packets)",
+      "parentUuid": "3ebcc719_1e9231c8",
+      "range": {
+        "startLine": 77,
+        "startChar": 19,
+        "endLine": 77,
+        "endChar": 29
+      },
+      "revId": "848a16812e22745304d9c2e01959a1935647e438",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffb04326_b2429b34",
