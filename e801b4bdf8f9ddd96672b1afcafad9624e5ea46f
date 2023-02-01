@@ -412,6 +412,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8696f8df_0e09bac8",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T14:19:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "264d9dfc_c0c68bfd",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 13
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c65fdcd8_af64f693",
@@ -473,6 +497,30 @@
       "side": 1,
       "message": "(yes, current implementation uses half of the configured interval as initial delay)\n\nI strongly prefer not to test observed behavior, only promised behavior, or behavior class relies on, preferablly with the comments why such behavior is expected.\nTesting current behavior complicates refactoring: when you change behavior from one acceptable to another acceptable behavior, lots of such tests start to fail and then you need to go through each of them and decide if there was a reason for test to expect that particular behavior, or if that code doesn\u0027t really need the old behavior.\nhttps://testing.googleblog.com/2013/08/testing-on-toilet-test-behavior-not.html\n(aka http://go/tott/571)\n\ne.g. you shouldn\u0027t test order of an unordered map, even it is currently deterministic and changing the order changes observable behavior.",
       "parentUuid": "ee98098f_fa0d778f",
+      "range": {
+        "startLine": 109,
+        "startChar": 2,
+        "endLine": 109,
+        "endChar": 56
+      },
+      "revId": "e801b4bdf8f9ddd96672b1afcafad9624e5ea46f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba724cb_c94f4001",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-01T14:19:14Z",
+      "side": 1,
+      "message": "One purpose of writing tests as an exploratory mechanism is to uncover the promises :-) In this case, i think our current behavior is likely the wrong thing, and we should change it - but that\u0027s a deliberate discussion. 5 seconds OK for now.",
+      "parentUuid": "eb14129b_1e103949",
       "range": {
         "startLine": 109,
         "startChar": 2,
