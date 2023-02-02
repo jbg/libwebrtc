@@ -581,7 +581,7 @@ webrtc_fuzzer_test("rtp_frame_reference_finder_fuzzer") {
   deps = [
     "../../api:rtp_packet_info",
     "../../api:scoped_refptr",
-    "../../modules/video_coding/",
+    "../../modules/rtp_rtcp",
     "../../system_wrappers",
   ]
 }
