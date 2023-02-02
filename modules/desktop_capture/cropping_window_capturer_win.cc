@@ -153,6 +153,8 @@ class CroppingWindowCapturerWin : public CroppingWindowCapturer {
   bool enumerate_current_process_windows_;
 
   rtc::scoped_refptr<FullScreenWindowDetector> full_screen_window_detector_;
+
+  mutable bool fullscreen_usage_logged_ = false;
 };
 
 void CroppingWindowCapturerWin::CaptureFrame() {
@@ -307,6 +309,10 @@ WindowId CroppingWindowCapturerWin::GetWindowToCapture() const {
       full_screen_window_detector_
           ? full_screen_window_detector_->FindFullScreenWindow(selected_source)
           : 0;
+  if (full_screen_source != selected_source && !fullscreen_usage_logged_) {
+    fullscreen_usage_logged_ = true;
+    LogDesktopCapturerFullscreenDetectorUsage();
+  }
   return full_screen_source ? full_screen_source : selected_source;
 }
 
