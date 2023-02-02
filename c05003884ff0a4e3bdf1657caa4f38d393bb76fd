@@ -151,6 +151,53 @@
       },
       "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c754e219_51dc2882",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_directx.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-02-02T17:03:28Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem done? Perhaps a missed add/upload?",
+      "parentUuid": "268e54f0_61cb9603",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 32
+      },
+      "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3d8c3d5_d1c337d1",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_directx.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-02-02T17:03:28Z",
+      "side": 1,
+      "message": "Actually, on looking a bit more, we control this enum. So it may be better to add numbering/comment to that and just log this directly before the switch?",
+      "range": {
+        "startLine": 174,
+        "startChar": 9,
+        "endLine": 174,
+        "endChar": 24
+      },
+      "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
