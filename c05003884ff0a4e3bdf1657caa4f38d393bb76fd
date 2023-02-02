@@ -72,6 +72,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1271800_3c4c899d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-02-02T10:17:20Z",
+      "side": 1,
+      "message": "Verified existence and functionality manually by enabling screen sharing for a few seconds and then visit chrome://histograms/DirectXCapturerResult\n\n[1] https://screenshot.googleplex.com/AVQDkmN93tHC7HB",
+      "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2981cc71_c3f7eff7",
