@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "394cd628_95cdcb1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2023-02-02T14:29:38Z",
+      "side": 1,
+      "message": "PTAL. Smaller CL this time.",
+      "revId": "13a696f2ef347547f199c3f1b8bfbea364de923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
