@@ -42,7 +42,8 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
         timestamp_(rtp_timestamp),
         capture_time_ms_(encoded_image.capture_time_ms_),
         expected_retransmission_time_ms_(expected_retransmission_time_ms),
-        ssrc_(ssrc) {
+        ssrc_(ssrc),
+        csrcs_(csrcs) {
     RTC_DCHECK_GE(payload_type_, 0);
     RTC_DCHECK_LE(payload_type_, 127);
     metadata_.SetCsrcs(std::move(csrcs));
@@ -73,12 +74,12 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
   const VideoFrameMetadata& GetMetadata() const override { return metadata_; }
   void SetMetadata(const VideoFrameMetadata& metadata) override {
     header_.SetFromMetadata(metadata);
-    std::vector<uint32_t> csrcs = metadata.GetCsrcs();
+    csrcs_ = metadata.GetCsrcs();
 
     // We have to keep a local copy because GetMetadata() has to return a
     // reference.
     metadata_ = header_.GetAsMetadata();
-    metadata_.SetCsrcs(std::move(csrcs));
+    metadata_.SetCsrcs(csrcs_);
   }
 
   const RTPVideoHeader& GetHeader() const { return header_; }
@@ -107,6 +108,7 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
   const int64_t capture_time_ms_;
   const absl::optional<int64_t> expected_retransmission_time_ms_;
   const uint32_t ssrc_;
+  std::vector<uint32_t> csrcs_;
 };
 }  // namespace
 
