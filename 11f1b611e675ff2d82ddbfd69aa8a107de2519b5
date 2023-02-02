@@ -16,6 +16,24 @@
       "message": "After reading the bug, I\u0027m a bit worried that we may be \"doing the wrong thing\" - if an app going fullscreen means that we switch to capturing that app rather than the window that the user wanted captured, we may end up capturing something that the user doesn\u0027t intend to have captured.\n\nBut this UMA in itself seems very reasonable.",
       "revId": "11f1b611e675ff2d82ddbfd69aa8a107de2519b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "915aa6aa_933b81c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2023-02-02T12:09:16Z",
+      "side": 1,
+      "message": "Thanks for the review!\n\nI agree, this is just a first step to see how often this feature is used. There\u0027s some special logic to make sure that this only applies to certain applications, like PowerPoint and similar.\n\nIf we want to keep this behavior, the feature would have to be adapted to work with the new capture API in macOS.",
+      "parentUuid": "a30db516_b0bbd1a1",
+      "revId": "11f1b611e675ff2d82ddbfd69aa8a107de2519b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
