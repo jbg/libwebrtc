@@ -16,6 +16,23 @@
       "message": "PTAL. Smaller CL this time.",
       "revId": "13a696f2ef347547f199c3f1b8bfbea364de923e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cde02c1_d5e24f7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-02-02T14:37:36Z",
+      "side": 1,
+      "message": "Nice! Looking at what remains here, it really only does resampling (just like AcmReceiver). So maybe we should try to break that out and remove ACM eventually.",
+      "revId": "13a696f2ef347547f199c3f1b8bfbea364de923e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
