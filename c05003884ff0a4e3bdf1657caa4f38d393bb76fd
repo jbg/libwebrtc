@@ -54,6 +54,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c570463_5183626b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-02-02T10:06:31Z",
+      "side": 1,
+      "message": "Thanks for driving this change. That will give us a better view of the real usage of GDI and DXGI. Given that I expect DXGI to be the most common API, adding this extra level of stats makes sense imo. Will upload a corresponding Chrome CL today and link to this one as FYI.",
+      "parentUuid": "67340e23_ebaab28e",
+      "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2981cc71_c3f7eff7",
@@ -67,6 +85,30 @@
       "writtenOn": "2023-02-01T18:50:41Z",
       "side": 1,
       "message": "This needs a comment that it\u0027s persisted to logs and that values shouldn\u0027t be re-used/re-ordered.",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 32
+      },
+      "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "268e54f0_61cb9603",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_directx.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-02-02T10:06:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2981cc71_c3f7eff7",
       "range": {
         "startLine": 33,
         "startChar": 11,
