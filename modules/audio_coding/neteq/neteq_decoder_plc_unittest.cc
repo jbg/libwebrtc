@@ -127,6 +127,11 @@ class LossyInput : public NetEqInput {
     return input_->NextOutputEventTime();
   }
 
+  absl::optional<NetEqSetMinimumDelayInfo> NextNetEqSetMinimumDelayInfo()
+      const override {
+    return input_->NextNetEqSetMinimumDelayInfo();
+  }
+
   std::unique_ptr<PacketData> PopPacket() override {
     if (loss_cadence_ != 0 && (++count_ % loss_cadence_) == 0) {
       // Pop `burst_length_` packets to create the loss.
@@ -140,6 +145,10 @@ class LossyInput : public NetEqInput {
   }
 
   void AdvanceOutputEvent() override { return input_->AdvanceOutputEvent(); }
+
+  void AdvanceNetEqSetMinimumDelay() override {
+    return input_->AdvanceNetEqSetMinimumDelay();
+  }
 
   bool ended() const override { return input_->ended(); }
 
