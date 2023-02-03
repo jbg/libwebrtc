@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b86359b_cdc88b22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-03T17:12:59Z",
+      "side": 1,
+      "message": "Thanks for the review!\nPointing at existing utilities is really helpful.",
+      "revId": "d26dfd701fd321c698d395b246f9032290ce5810",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
