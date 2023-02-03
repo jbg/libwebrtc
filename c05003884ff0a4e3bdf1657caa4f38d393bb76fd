@@ -177,6 +177,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca3b4e02_6f74d2ec",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_directx.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-02-03T10:08:15Z",
+      "side": 1,
+      "message": "Forgot to upload, sorry. But given your second comment I assume you think we should reuse the existing enum instead and remove this one.",
+      "parentUuid": "c754e219_51dc2882",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 32
+      },
+      "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3d8c3d5_d1c337d1",
@@ -190,6 +214,30 @@
       "writtenOn": "2023-02-02T17:03:28Z",
       "side": 1,
       "message": "Actually, on looking a bit more, we control this enum. So it may be better to add numbering/comment to that and just log this directly before the switch?",
+      "range": {
+        "startLine": 174,
+        "startChar": 9,
+        "endLine": 174,
+        "endChar": 24
+      },
+      "revId": "c05003884ff0a4e3bdf1657caa4f38d393bb76fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aaf8113_a8f365f6",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_directx.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-02-03T10:08:15Z",
+      "side": 1,
+      "message": "Let me try that.",
+      "parentUuid": "d3d8c3d5_d1c337d1",
       "range": {
         "startLine": 174,
         "startChar": 9,
