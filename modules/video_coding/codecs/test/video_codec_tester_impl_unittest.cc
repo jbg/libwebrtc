@@ -65,16 +65,47 @@ EncodedImage CreateEncodedImage(uint32_t timestamp_rtp) {
 
 class MockRawVideoSource : public RawVideoSource {
  public:
-  MOCK_METHOD(absl::optional<VideoFrame>, PullFrame, (), (override));
+  MockRawVideoSource(int num_frames, Frequency framerate)
+      : num_frames_(num_frames), frame_num_(0), framerate_(framerate) {}
+
+  absl::optional<VideoFrame> PullFrame() override {
+    if (frame_num_ >= num_frames_) {
+      return absl::nullopt;
+    }
+    uint32_t timestamp_rtp = frame_num_ * k90kHz / framerate_;
+    ++frame_num_;
+    return CreateVideoFrame(timestamp_rtp);
+  }
+
   MOCK_METHOD(VideoFrame,
               GetFrame,
               (uint32_t timestamp_rtp, Resolution),
               (override));
+
+ private:
+  int num_frames_;
+  int frame_num_;
+  Frequency framerate_;
 };
 
 class MockCodedVideoSource : public CodedVideoSource {
  public:
-  MOCK_METHOD(absl::optional<EncodedImage>, PullFrame, (), (override));
+  MockCodedVideoSource(int num_frames, Frequency framerate)
+      : num_frames_(num_frames), frame_num_(0), framerate_(framerate) {}
+
+  absl::optional<EncodedImage> PullFrame() override {
+    if (frame_num_ >= num_frames_) {
+      return absl::nullopt;
+    }
+    uint32_t timestamp_rtp = frame_num_ * k90kHz / framerate_;
+    ++frame_num_;
+    return CreateEncodedImage(timestamp_rtp);
+  }
+
+ private:
+  int num_frames_;
+  int frame_num_;
+  Frequency framerate_;
 };
 
 class MockDecoder : public Decoder {
@@ -109,6 +140,7 @@ class MockTaskQueueFactory : public TaskQueueFactory {
 };
 }  // namespace
 
+#if 0
 class VideoCodecTesterImplPacingTest
     : public ::testing::TestWithParam<std::tuple<PacingSettings,
                                                  std::vector<int>,
@@ -249,5 +281,82 @@ INSTANTIATE_TEST_SUITE_P(
              /*frame_timestamp_ms=*/std::vector<int>{0, 100},
              /*frame_capture_delay_ms=*/std::vector<int>{0, 200},
              /*expected_frame_start_ms=*/std::vector<int>{0, 200})}));
+
+#endif
+
+struct PacingTestParams {
+  PacingSettings pacing_settings;
+  Frequency framerate;
+  int num_frames;
+  std::vector<int> expected_delta_ms;
+};
+
+class VideoCodecTesterImplPacingTest
+    : public ::testing::TestWithParam<PacingTestParams> {
+ public:
+  VideoCodecTesterImplPacingTest() : test_params_(GetParam()) {}
+
+ protected:
+  PacingTestParams test_params_;
+};
+
+TEST_P(VideoCodecTesterImplPacingTest, PaceEncode) {
+  MockRawVideoSource video_source(test_params_.num_frames,
+                                  test_params_.framerate);
+  MockEncoder encoder;
+  EncoderSettings encoder_settings;
+  encoder_settings.pacing = test_params_.pacing_settings;
+
+  VideoCodecTesterImpl tester;
+  auto fs =
+      tester.RunEncodeTest(&video_source, &encoder, encoder_settings)->Slice();
+  ASSERT_EQ(static_cast<int>(fs.size()), test_params_.num_frames);
+
+  for (size_t i = 1; i < fs.size(); ++i) {
+    int delta_ms = (fs[i].encode_start - fs[i - 1].encode_start).ms();
+    EXPECT_NEAR(delta_ms, test_params_.expected_delta_ms[i - 1], 10);
+  }
+}
+
+TEST_P(VideoCodecTesterImplPacingTest, PaceDecode) {
+  MockCodedVideoSource video_source(test_params_.num_frames,
+                                    test_params_.framerate);
+  MockDecoder decoder;
+  DecoderSettings decoder_settings;
+  decoder_settings.pacing = test_params_.pacing_settings;
+
+  VideoCodecTesterImpl tester;
+  auto fs =
+      tester.RunDecodeTest(&video_source, &decoder, decoder_settings)->Slice();
+  ASSERT_EQ(static_cast<int>(fs.size()), test_params_.num_frames);
+
+  for (size_t i = 1; i < fs.size(); ++i) {
+    int delta_ms = (fs[i].decode_start - fs[i - 1].decode_start).ms();
+    EXPECT_NEAR(delta_ms, test_params_.expected_delta_ms[i - 1], 10);
+  }
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    All,
+    VideoCodecTesterImplPacingTest,
+    ::testing::ValuesIn(
+        {// No pacing.
+         PacingTestParams({.pacing_settings = {.mode = PacingMode::kNoPacing},
+                           .framerate = Frequency::Hertz(10),
+                           .num_frames = 3,
+                           .expected_delta_ms = {10, 10}}),
+         // Real-time pacing.
+         PacingTestParams({.pacing_settings = {.mode = PacingMode::kRealTime},
+                           .framerate = Frequency::Hertz(10),
+                           .num_frames = 3,
+                           .expected_delta_ms = {100, 100}}),
+         // Pace with specified constant rate.
+         PacingTestParams(
+             {.pacing_settings = {.mode = PacingMode::kConstantRate,
+                                  .constant_rate = Frequency::Hertz(20)},
+              .framerate = Frequency::Hertz(10),
+              .num_frames = 3,
+              .expected_delta_ms = {50, 50}})}));
+
 }  // namespace test
 }  // namespace webrtc
