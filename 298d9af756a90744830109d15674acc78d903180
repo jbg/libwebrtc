@@ -16,6 +16,23 @@
       "message": "WDYT Harald?",
       "revId": "298d9af756a90744830109d15674acc78d903180",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bbaface_f236db26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-03T10:36:48Z",
+      "side": 1,
+      "message": "a bit confused about why this is the right direction to move in (tie more of video processing into the already gigantic rtp_rtcp module), rather than moving everything related to video frames and not related to packetization/depacketization into modules/video.\n\ndo we have a design doc / one-pager of where we want to end up that makes this obvious?",
+      "revId": "298d9af756a90744830109d15674acc78d903180",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
