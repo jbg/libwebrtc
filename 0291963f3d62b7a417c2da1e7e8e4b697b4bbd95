@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a535d9_9b619702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2023-02-03T08:03:41Z",
+      "side": 1,
+      "message": "Thanks for this review.",
+      "revId": "0291963f3d62b7a417c2da1e7e8e4b697b4bbd95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "186fbeb0_87f889e0",
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "I cannot more agree here. However I think this is the scope of another CL: There are already OutputEvents and PacketEvents.",
       "parentUuid": "186fbeb0_87f889e0",
+      "range": {
+        "startLine": 59,
+        "startChar": 2,
+        "endLine": 59,
+        "endChar": 30
+      },
+      "revId": "0291963f3d62b7a417c2da1e7e8e4b697b4bbd95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "557ba901_73423e08",
+        "filename": "modules/audio_coding/neteq/tools/neteq_input.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2023-02-03T08:03:41Z",
+      "side": 1,
+      "message": "I agree with both of you. It is a good change but it is too large for this CL. I am preparing a follow up CL that unify a bit more those events.",
+      "parentUuid": "7ae92811_04d0b139",
       "range": {
         "startLine": 59,
         "startChar": 2,
@@ -95,6 +136,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a8e3537_6921e415",
+        "filename": "modules/audio_coding/neteq/tools/neteq_input.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2023-02-03T08:03:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0c8c8053_e1c6e095",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 49
+      },
+      "revId": "0291963f3d62b7a417c2da1e7e8e4b697b4bbd95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "871d6489_6f3ab244",
@@ -108,6 +173,30 @@
       "writtenOn": "2023-01-30T15:57:29Z",
       "side": 1,
       "message": "Hm...It\u0027s a bit strange to me that we seem to reimplement the \"RtcEventLogSource\" here. Can we join them? Maybe that\u0027s a bit out of scope for this cl but it would be nice...",
+      "range": {
+        "startLine": 179,
+        "startChar": 6,
+        "endLine": 179,
+        "endChar": 22
+      },
+      "revId": "0291963f3d62b7a417c2da1e7e8e4b697b4bbd95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dc3dcdd_bc6f3fb9",
+        "filename": "rtc_tools/rtc_event_log_visualizer/analyze_audio.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2023-02-03T08:03:41Z",
+      "side": 1,
+      "message": "Do you mean that we could directly use the ParsedRtcEventLog in the method CreateNetEqTestAndRun? \n\nOr do you mean that the function SimulateNetEq could create a RtcEventLogSource directly from the rtc event filename? Similar to what is done at NetEqEventLogInput? It could also create that RtcEventLogSource from a ParsedRtcEventLog. From that we could probably create a NetEqInput somehow ... \n\nI agree that it would be better but I also agree that this is a bit unrelated to this CL.",
+      "parentUuid": "871d6489_6f3ab244",
       "range": {
         "startLine": 179,
         "startChar": 6,
