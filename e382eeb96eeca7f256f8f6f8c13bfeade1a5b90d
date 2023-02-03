@@ -16,6 +16,46 @@
       "message": "Thanks Alex. It looks much better now after your comments.",
       "revId": "e382eeb96eeca7f256f8f6f8c13bfeade1a5b90d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69effe8_9e4b588c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-02-03T17:34:39Z",
+      "side": 1,
+      "message": "LGTM w/optional NIT",
+      "revId": "e382eeb96eeca7f256f8f6f8c13bfeade1a5b90d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76bb5b85_496b6011",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_directx.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-02-03T17:34:39Z",
+      "side": 1,
+      "message": "NIT: Let\u0027s just inline this since it\u0027s only called from one spot now.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 1
+      },
+      "revId": "e382eeb96eeca7f256f8f6f8c13bfeade1a5b90d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
