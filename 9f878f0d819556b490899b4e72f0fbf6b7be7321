@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98698ebb_38aef582",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2023-02-03T14:57:41Z",
+      "side": 1,
+      "message": "I refactored the code and somehow forgot to change the histogram name.",
+      "revId": "9f878f0d819556b490899b4e72f0fbf6b7be7321",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
