@@ -16,6 +16,24 @@
       "message": "Maybe clean up the recipes \"TODO(terelius)\" before enabling the bot by default ?",
       "revId": "851d2fd555162a0c59bcd9f40c4c65fd057280b0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fce6e122_3c35eaf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-02-03T15:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "061c1da3_26066657",
+      "revId": "851d2fd555162a0c59bcd9f40c4c65fd057280b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
