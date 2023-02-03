@@ -16,6 +16,24 @@
       "message": "stumbled over this by accident and could not resist cleaning up ;-)",
       "revId": "b052b53d25f3a5dc80766c53eff44f1cd2928c37",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ac2d499_d9fecad7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T12:50:34Z",
+      "side": 1,
+      "message": "Thank you!\nthat is a good way to keep code cleaner.",
+      "parentUuid": "5399f2ff_efdbdf90",
+      "revId": "b052b53d25f3a5dc80766c53eff44f1cd2928c37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
