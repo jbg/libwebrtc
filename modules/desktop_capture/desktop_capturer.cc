@@ -29,8 +29,9 @@
 namespace webrtc {
 
 void LogDesktopCapturerFullscreenDetectorUsage() {
-  RTC_HISTOGRAM_BOOLEAN("WebRTC.Screenshare.DesktopCapturerUsage", true);
-}
+  RTC_HISTOGRAM_BOOLEAN("WebRTC.Screenshare.DesktopCapturerFullscreenDetector",
+                        true);
+}:
 
 DesktopCapturer::~DesktopCapturer() = default;
 
