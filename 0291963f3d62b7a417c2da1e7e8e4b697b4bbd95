@@ -89,6 +89,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67be1947_561dbce3",
+        "filename": "modules/audio_coding/neteq/tools/neteq_input.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-02-03T16:55:27Z",
+      "side": 1,
+      "message": "Awesome, thanks!",
+      "parentUuid": "557ba901_73423e08",
+      "range": {
+        "startLine": 59,
+        "startChar": 2,
+        "endLine": 59,
+        "endChar": 30
+      },
+      "revId": "0291963f3d62b7a417c2da1e7e8e4b697b4bbd95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09ea2385_85108e38",
@@ -197,6 +221,30 @@
       "side": 1,
       "message": "Do you mean that we could directly use the ParsedRtcEventLog in the method CreateNetEqTestAndRun? \n\nOr do you mean that the function SimulateNetEq could create a RtcEventLogSource directly from the rtc event filename? Similar to what is done at NetEqEventLogInput? It could also create that RtcEventLogSource from a ParsedRtcEventLog. From that we could probably create a NetEqInput somehow ... \n\nI agree that it would be better but I also agree that this is a bit unrelated to this CL.",
       "parentUuid": "871d6489_6f3ab244",
+      "range": {
+        "startLine": 179,
+        "startChar": 6,
+        "endLine": 179,
+        "endChar": 22
+      },
+      "revId": "0291963f3d62b7a417c2da1e7e8e4b697b4bbd95",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15e7f57e_bfc094dc",
+        "filename": "rtc_tools/rtc_event_log_visualizer/analyze_audio.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-02-03T16:55:27Z",
+      "side": 1,
+      "message": "I agree with out of scope.\n\nMy suggestion is to add a constructor of NetEqEventLogInput (and RtcEventLogSource) that takes an already parsed event log and use that in analyze_audio instead of defining a new type of NetEqInput.\n\nBut let\u0027s do that in a later cl.",
+      "parentUuid": "7dc3dcdd_bc6f3fb9",
       "range": {
         "startLine": 179,
         "startChar": 6,
