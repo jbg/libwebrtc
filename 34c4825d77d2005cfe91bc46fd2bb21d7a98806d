@@ -16,6 +16,24 @@
       "message": "+ mbonadei@ for changes in api/",
       "revId": "34c4825d77d2005cfe91bc46fd2bb21d7a98806d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb9c1b21_510aac66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-02-03T13:08:01Z",
+      "side": 1,
+      "message": "LGTM.",
+      "parentUuid": "b0b7090b_1fea2ab2",
+      "revId": "34c4825d77d2005cfe91bc46fd2bb21d7a98806d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
