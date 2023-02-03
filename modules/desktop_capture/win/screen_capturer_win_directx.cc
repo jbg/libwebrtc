@@ -28,6 +28,16 @@
 
 namespace webrtc {
 
+namespace {
+
+void RecordDirectXCapturerResult(DxgiDuplicatorController::Result result) {
+  RTC_HISTOGRAM_ENUMERATION(
+      "WebRTC.DesktopCapture.Win.DirectXCapturerResult",
+      static_cast<int>(result),
+      static_cast<int>(DxgiDuplicatorController::Result::MAX_VALUE));
+}
+}  // namespace
+
 using Microsoft::WRL::ComPtr;
 
 // static
@@ -151,6 +161,7 @@ void ScreenCapturerWinDirectx::CaptureFrame() {
                          "error code "
                       << DxgiDuplicatorController::ResultName(result);
   }
+  RecordDirectXCapturerResult(result);
   switch (result) {
     case DuplicateResult::UNSUPPORTED_SESSION: {
       RTC_LOG(LS_ERROR)
@@ -171,7 +182,10 @@ void ScreenCapturerWinDirectx::CaptureFrame() {
       callback_->OnCaptureResult(Result::ERROR_PERMANENT, nullptr);
       break;
     }
-    case DuplicateResult::INITIALIZATION_FAILED:
+    case DuplicateResult::INITIALIZATION_FAILED: {
+      callback_->OnCaptureResult(Result::ERROR_TEMPORARY, nullptr);
+      break;
+    }
     case DuplicateResult::DUPLICATION_FAILED: {
       callback_->OnCaptureResult(Result::ERROR_TEMPORARY, nullptr);
       break;
