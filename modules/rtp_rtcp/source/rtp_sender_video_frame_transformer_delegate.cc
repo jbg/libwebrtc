@@ -18,6 +18,7 @@
 #include "modules/rtp_rtcp/source/rtp_descriptor_authentication.h"
 #include "modules/rtp_rtcp/source/rtp_sender_video.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/logging.h"
 
 namespace webrtc {
 namespace {
@@ -74,11 +75,13 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
   void SetMetadata(const VideoFrameMetadata& metadata) override {
     header_.SetFromMetadata(metadata);
     std::vector<uint32_t> csrcs = metadata.GetCsrcs();
+    ssrc_ = metadata.GetSsrc();
 
     // We have to keep a local copy because GetMetadata() has to return a
     // reference.
     metadata_ = header_.GetAsMetadata();
     metadata_.SetCsrcs(std::move(csrcs));
+    metadata_.SetSsrc(ssrc_);
   }
 
   const RTPVideoHeader& GetHeader() const { return header_; }
@@ -106,7 +109,7 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
   const uint32_t timestamp_;
   const int64_t capture_time_ms_;
   const absl::optional<int64_t> expected_retransmission_time_ms_;
-  const uint32_t ssrc_;
+  uint32_t ssrc_;
 };
 }  // namespace
 
@@ -145,6 +148,7 @@ bool RTPSenderVideoFrameTransformerDelegate::TransformFrame(
 void RTPSenderVideoFrameTransformerDelegate::OnTransformedFrame(
     std::unique_ptr<TransformableFrameInterface> frame) {
   MutexLock lock(&sender_lock_);
+  RTC_LOG(LS_ERROR) << "RTPSenderVideoFrameTransformerDelegate::OnTransformedFrame";
 
   if (!sender_) {
     return;
@@ -163,6 +167,7 @@ void RTPSenderVideoFrameTransformerDelegate::SendVideo(
   RTC_CHECK_EQ(transformed_frame->GetDirection(),
                TransformableFrameInterface::Direction::kSender);
   MutexLock lock(&sender_lock_);
+  RTC_LOG(LS_ERROR) << "RTPSenderVideoFrameTransformerDelegate::SendVideo";
   if (!sender_)
     return;
   auto* transformed_video_frame =
@@ -219,7 +224,7 @@ std::unique_ptr<TransformableVideoFrameInterface> CloneSenderVideoFrame(
     new_codec_type = original_as_sender->GetCodecType();
   } else {
     // TODO(bugs.webrtc.org/14708): Make this codec dependent
-    new_header.video_type_header.emplace<RTPVideoHeaderVP8>();
+    new_header.SetFromMetadata(original->GetMetadata());
     new_codec_type = kVideoCodecVP8;
     // TODO(bugs.webrtc.org/14708): Fill in the new_header when it's not
     // `Direction::kSender`

@@ -92,6 +92,9 @@ class RTC_EXPORT VideoFrameMetadata {
   std::vector<uint32_t> GetCsrcs() const;
   void SetCsrcs(std::vector<uint32_t> csrcs);
 
+  uint32_t GetSsrc() const;
+  void SetSsrc(uint32_t ssrc);
+
  private:
   VideoFrameType frame_type_ = VideoFrameType::kEmptyFrame;
   int16_t width_ = 0;
@@ -112,6 +115,7 @@ class RTC_EXPORT VideoFrameMetadata {
   RTPVideoHeaderCodecSpecifics codec_specifics_;
 
   std::vector<uint32_t> csrcs_;
+  uint32_t ssrc_;
 };
 }  // namespace webrtc
 

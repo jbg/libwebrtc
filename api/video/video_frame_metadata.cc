@@ -144,4 +144,12 @@ void VideoFrameMetadata::SetCsrcs(std::vector<uint32_t> csrcs) {
   csrcs_ = std::move(csrcs);
 }
 
+uint32_t VideoFrameMetadata::GetSsrc() const {
+  return ssrc_;
+}
+
+void VideoFrameMetadata::SetSsrc(uint32_t ssrc) {
+  ssrc_ = ssrc;
+}
+
 }  // namespace webrtc

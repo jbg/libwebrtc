@@ -481,6 +481,8 @@ bool RTPSenderVideo::SendVideo(
                           FrameTypeToString(video_header.frame_type));
   RTC_CHECK_RUNS_SERIALIZED(&send_checker_);
 
+  RTC_LOG(LS_ERROR) << "RTPSEnderVideo::SendVideo frametype " << FrameTypeToString(video_header.frame_type) << ", payload.empty():" << payload.empty() << ", rtp_sender_->SendingMedia(): " << rtp_sender_->SendingMedia();
+
   if (video_header.frame_type == VideoFrameType::kEmptyFrame)
     return true;
 
