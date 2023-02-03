@@ -16,6 +16,304 @@
       "message": "Finally got a test for the function I needed to test. And yes, all the steps seem necessary.",
       "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48b023e_f94ad9fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "mostly small style comments.\n\nfor RTT estimation I would prefer to test desired behavior instead of \u0027by accident\u0027 behavior.",
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5261a9a2_b27953d0",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "does it need to align with time_controller_.GetClock() ?",
+      "range": {
+        "startLine": 81,
+        "startChar": 11,
+        "endLine": 81,
+        "endChar": 28
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a522fdd_ace39670",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "likely you want to remove this log line before submitting",
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b42cf5a9_d9da42bd",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "do not return `const T`, return `T` instead\n(const here would disable some optimizations, but won\u0027t add any safety)",
+      "range": {
+        "startLine": 97,
+        "startChar": 2,
+        "endLine": 97,
+        "endChar": 28
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00258ef8_445f38a8",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "this is the same as\nstd::vector\u003cuint8_t\u003e packet(1024);",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 54
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5de3e42_949c7c8c",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "instead of creating packets \u0027manually\u0027 you may use rtcp::CompountPacket helper:\nauto report \u003d std::make_unique\u003crtcp::SenderReport\u003e();\nreport-\u003eSet(...);\nauto sdes \u003d std::make_unique\u003crtcp::Sdes\u003e();\nsdes-\u003eSet(...);\nrtcp::CompoundPacket p;\np.Append(std::move(report));\np.Append(std::move(sdes));\nreturn p.Build(); // that would return rtc::Buffer\n\nSuch creation is less efficient, but should be more robust e.g. takes care of buffer size, and would make it easier to refactor RtcpPacket::Create function in the future - that funtion currently has horrible api.",
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e4b1e8_e0c34645",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "there is `CompactNtp` helper exactly for this\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/rtp_rtcp/source/time_util.h;l\u003d30;drc\u003df987c78d1412444a0565996fd6c1f335660c3cd2",
+      "range": {
+        "startLine": 123,
+        "startChar": 20,
+        "endLine": 124,
+        "endChar": 48
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66dcc2bb_6c4213d2",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "using current NtpNow time as LastSr suggests receiver report is produced immediately when sender report is received. In such case Delay (since that sender report) should be 0.",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 28
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b144a5_b4a5ec41",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "or return report.Build(); (though that would give you rtc::Buffer instead of std::vector - still should be good enough)",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 136,
+        "endChar": 18
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad50f21_810e6b39",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "may be \nvoid HandleGeneratedRtcp(ChannelReceiveInterface\u0026 channel,\n                         rtc::ArrayView\u003cconst uint8_t\u003e packet);\n\n(passing packet as ArrayView doesn\u0027t add much in this case, but imho still good idea for readability)",
+      "range": {
+        "startLine": 139,
+        "startChar": 27,
+        "endLine": 141,
+        "endChar": 40
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bb39885_7f94f3ce",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "may be join these two log lines into single one.\nit might be good idea to also fail the test:\nFAIL() \u003c\u003c \"Unexpected RTCP packet generated: \" \u003c\u003c rtc::hex....;\n(or ADD_FAILURE - same behavior in this case)\n\nhttp://google.github.io/googletest/reference/assertions.html#ADD_FAILURE",
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46acc15c_01ce8e1f",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "can this pointer be null? does the passed object have to outlive the call to this function?\nSeems like answer is no to both of these question, so pass by [non-const] reference\n(same with previous function)\n\nhttps://google.github.io/styleguide/cppguide.html#Inputs_and_Outputs\n“non-optional output and input/output parameters should usually be references (which cannot be null).”",
+      "range": {
+        "startLine": 155,
+        "startChar": 31,
+        "endLine": 155,
+        "endChar": 56
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba2689cf_e05a5176",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "this is indeed odd: ChannelReceive shouldn\u0027t expect receiver report.\nI guess it is needed to estimate RTT, but in real code that would work only if there is a send channel nearby with the same local ssrc.\n\nI think this deserve documenting. This test fixate behavior that works \u0027by accident\u0027\n\nAnother option could be to configure ReceiveChannel with\n/* enable_non_sender_rtt\u003d */true\n\nand instead of RR with RB inject ExtendedReport with DLRR\nThat would test correct behavior.",
+      "range": {
+        "startLine": 214,
+        "startChar": 32,
+        "endLine": 214,
+        "endChar": 64
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75de8847_a2556dcf",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-03T15:39:08Z",
+      "side": 1,
+      "message": "prefer rtcp_rr.data()\n\ntechnically \u0026rtcp_rr[0] is a pointer to a single element, \nwhere function expects pointer to the beginning of the array.\nIn practice it is the same, but using data() is likely safer.\ne.g. if CreateRtcpReceiverReport for some reason would start to return std::map\u003cint, uint8_t\u003e, then current code would still compile, but wouldn\u0027t behave as expected.\n\n(better yet, ReceivedRTCPPacket should be updated to take rtc::ArrayView as a paremter, then it would be `channel-\u003eReceivedRtcpPacket(CreateRtcpReceiverReport());`\nchanging ReceivedRTCPPacket singature is out of scope of this cl though)",
+      "range": {
+        "startLine": 216,
+        "startChar": 30,
+        "endLine": 216,
+        "endChar": 41
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
