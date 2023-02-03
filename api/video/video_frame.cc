@@ -163,9 +163,10 @@ VideoFrame::Builder::~Builder() = default;
 
 VideoFrame VideoFrame::Builder::build() {
   RTC_CHECK(video_frame_buffer_ != nullptr);
-  return VideoFrame(id_, video_frame_buffer_, timestamp_us_, timestamp_rtp_,
-                    ntp_time_ms_, rotation_, color_space_, render_parameters_,
-                    update_rect_, packet_infos_);
+  return VideoFrame(id_, video_frame_buffer_, timestamp_us_,
+                    capture_time_identifier_ms_, timestamp_rtp_, ntp_time_ms_,
+                    rotation_, color_space_, render_parameters_, update_rect_,
+                    packet_infos_);
 }
 
 VideoFrame::Builder& VideoFrame::Builder::set_video_frame_buffer(
@@ -183,6 +184,12 @@ VideoFrame::Builder& VideoFrame::Builder::set_timestamp_ms(
 VideoFrame::Builder& VideoFrame::Builder::set_timestamp_us(
     int64_t timestamp_us) {
   timestamp_us_ = timestamp_us;
+  return *this;
+}
+
+VideoFrame::Builder& VideoFrame::Builder::set_capture_time_identifier_ms(
+    int64_t capture_time_identifier_ms) {
+  capture_time_identifier_ms_ = capture_time_identifier_ms;
   return *this;
 }
 
@@ -239,6 +246,7 @@ VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
       timestamp_rtp_(0),
       ntp_time_ms_(0),
       timestamp_us_(timestamp_us),
+      capture_time_identifier_ms_(0),
       rotation_(rotation) {}
 
 VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
@@ -249,6 +257,7 @@ VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
       timestamp_rtp_(timestamp_rtp),
       ntp_time_ms_(0),
       timestamp_us_(render_time_ms * rtc::kNumMicrosecsPerMillisec),
+      capture_time_identifier_ms_(0),
       rotation_(rotation) {
   RTC_DCHECK(buffer);
 }
@@ -256,6 +265,7 @@ VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
 VideoFrame::VideoFrame(uint16_t id,
                        const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
                        int64_t timestamp_us,
+                       int64_t capture_time_identifier_ms,
                        uint32_t timestamp_rtp,
                        int64_t ntp_time_ms,
                        VideoRotation rotation,
@@ -268,6 +278,7 @@ VideoFrame::VideoFrame(uint16_t id,
       timestamp_rtp_(timestamp_rtp),
       ntp_time_ms_(ntp_time_ms),
       timestamp_us_(timestamp_us),
+      capture_time_identifier_ms_(capture_time_identifier_ms),
       rotation_(rotation),
       color_space_(color_space),
       render_parameters_(render_parameters),
