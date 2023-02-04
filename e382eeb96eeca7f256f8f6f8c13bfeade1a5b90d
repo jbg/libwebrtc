@@ -56,6 +56,30 @@
       },
       "revId": "e382eeb96eeca7f256f8f6f8c13bfeade1a5b90d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "281b3e5b_9788cc0e",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_directx.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-02-04T10:24:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76bb5b85_496b6011",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 1
+      },
+      "revId": "e382eeb96eeca7f256f8f6f8c13bfeade1a5b90d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
