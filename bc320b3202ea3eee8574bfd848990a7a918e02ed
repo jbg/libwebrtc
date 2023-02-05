@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "686da548_a8220f7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-05T06:18:51Z",
+      "side": 1,
+      "message": "I experimented a bit with the required order of packets. The test fails if the order is SR / SR / RR, but succeeds with both RR / SR / SR and SR / RR / RR.\n\nAdded comment to document this (and left it in SR / RR / SR order).",
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
