@@ -268,6 +268,30 @@
       },
       "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0604fe4_532bb6f4",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T12:09:01Z",
+      "side": 1,
+      "message": "Yes, there is no guarantee DLRR is supported,\nbut we can\u0027t expect there will be audio sending channel either, and without neighbor audio sending channel remote end won\u0027t send receiver report with report blocks.",
+      "parentUuid": "45321b06_3b8ecf57",
+      "range": {
+        "startLine": 218,
+        "startChar": 32,
+        "endLine": 219,
+        "endChar": 34
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63255a0f_77212615",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T12:09:01Z",
+      "side": 1,
+      "message": "remove this const (i.e. return \u0027T\u0027, not \u0027const T\u0027)",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 7
+      },
+      "revId": "107607f9f0e1d73b2c9133a7c23e6fb105aa2ea0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77a7b3ec_825284a0",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T12:09:01Z",
+      "side": 1,
+      "message": "nit: no need to set jitter either - it is not used to calculate RTT.\nThe only 3 fiels that are needed are media ssrc, LastSr, Delay[since]LastSr.",
+      "revId": "107607f9f0e1d73b2c9133a7c23e6fb105aa2ea0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
