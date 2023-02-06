@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b759a4c1_6fc65a34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-06T10:54:47Z",
+      "side": 1,
+      "message": "Looks reasonable, except that I wonder if Jan 1, 1970 (0) is the best value when not set - is absl::optional better?\n\nGoing forward, we expect this to be always set when local capture, but what about remote video without extensions - will it be left undefined?",
+      "revId": "2c605de94ec3f35072f7b061e5829d2909506484",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37953f42_afa9feb6",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-06T10:54:47Z",
+      "side": 1,
+      "message": "given that we don\u0027t set it yet, should it be an absl::optional?",
+      "revId": "2c605de94ec3f35072f7b061e5829d2909506484",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
