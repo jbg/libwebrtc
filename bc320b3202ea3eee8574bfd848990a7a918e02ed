@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9885e6a_57cab49b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-06T11:56:31Z",
+      "side": 1,
+      "message": "No, DLRR is not the answer to getting the functionality we depend on tested.",
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8296b5d3_2cf015b0",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-02-06T11:13:51Z",
       "side": 1,
       "message": "uint8_t\n\nhttps://google.github.io/styleguide/cppguide.html#Type_deduction\n\n“Use type deduction only if it makes the code clearer to readers who aren\u0027t familiar with the project, or if it makes the code safer. Do not use it merely to avoid the inconvenience of writing an explicit type.”",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 8
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0190cce_cdf37cc8",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-06T11:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8296b5d3_2cf015b0",
       "range": {
         "startLine": 93,
         "startChar": 4,
@@ -64,6 +105,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21e3ec9b_bac3dfdb",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-06T11:56:31Z",
+      "side": 1,
+      "message": "Test passes without it, so deleted.",
+      "parentUuid": "c438fb27_8443de20",
+      "range": {
+        "startLine": 109,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 48
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "faab4892_a41dc849",
@@ -77,6 +142,30 @@
       "writtenOn": "2023-02-06T11:13:51Z",
       "side": 1,
       "message": "just do not set it if it doesn\u0027t matter for the current tests (default 0 would be used, which is ok)\n\nCurrent code is very confusing: you\u0027re passing rtp timestamp into field that expects unwrapped rtp sequence number.",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 62
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06783d7e_954e5019",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-06T11:56:31Z",
+      "side": 1,
+      "message": "The test passes without it, so deleted.",
+      "parentUuid": "faab4892_a41dc849",
       "range": {
         "startLine": 121,
         "startChar": 0,
@@ -112,6 +201,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0fbdccb9_64511813",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-06T11:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "475eab1e_fdd7a64f",
+      "range": {
+        "startLine": 152,
+        "startChar": 2,
+        "endLine": 152,
+        "endChar": 5
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3c47cbab_31822802",
         "filename": "audio/channel_receive_unittest.cc",
         "patchSetId": 6
@@ -123,6 +236,30 @@
       "writtenOn": "2023-02-06T11:13:51Z",
       "side": 1,
       "message": "I suggest to be less strict in the comment.\nsomthing like \"This is needed so that receiver can estimate the RTT ...\"\n\nbecause it is not not necessary, RTT can be estimated differently (e.g. with RRTR/DLRR RTCP messages, or, may be in the future, by injecting an abstract function that provide RTT)\nChanging this test to provide RTT differently should be ok.",
+      "range": {
+        "startLine": 218,
+        "startChar": 32,
+        "endLine": 219,
+        "endChar": 34
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45321b06_3b8ecf57",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-06T11:56:31Z",
+      "side": 1,
+      "message": "Not everyone in the world can be expected to support DLRR.\n\nIn fact we should have \"a\u003drtcp-xr:rcvr-rtt all\" in our SDP in order to negotiate its use; I don\u0027t remember seeing us send that. (RFC 3611 section 5.1)",
+      "parentUuid": "3c47cbab_31822802",
       "range": {
         "startLine": 218,
         "startChar": 32,

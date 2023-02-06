@@ -582,6 +582,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b588728_847e8bc8",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-06T11:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0dfeeac_cc7f3f17",
+      "range": {
+        "startLine": 155,
+        "startChar": 31,
+        "endLine": 155,
+        "endChar": 56
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba2689cf_e05a5176",
@@ -643,6 +667,30 @@
       "side": 1,
       "message": "DLRR is just another way to calculate RTT, and it is the proper way for ChannelReceive to calculate RTT. SR way may break for ChannelReceive (e.g. RtpRtcp would improve it\u0027s filter and would ignore incoming RR for receive-only configuration)\n\nyou do not have to test actual DLRR-driver behavior (that would require to provoke ChannelReceive to emit XR with RRTR before feeding DLRR into it).\n\nSame as you create fake RR with RB, you can create fake XR with DLRR (and it would be simpler because it has less fields)",
       "parentUuid": "f30f2741_93dfd522",
+      "range": {
+        "startLine": 214,
+        "startChar": 32,
+        "endLine": 214,
+        "endChar": 64
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e91fcff_1dc4fdc9",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-06T11:56:31Z",
+      "side": 1,
+      "message": "The current behavior is what enables current integration tests to pass. I want to have that behavior documented.\n(We should write another unit test with DLRR)",
+      "parentUuid": "87761e4c_a79151a0",
       "range": {
         "startLine": 214,
         "startChar": 32,
