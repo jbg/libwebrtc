@@ -16,6 +16,121 @@
       "message": "I experimented a bit with the required order of packets. The test fails if the order is SR / SR / RR, but succeeds with both RR / SR / SR and SR / RR / RR.\n\nAdded comment to document this (and left it in SR / RR / SR order).",
       "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8296b5d3_2cf015b0",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T11:13:51Z",
+      "side": 1,
+      "message": "uint8_t\n\nhttps://google.github.io/styleguide/cppguide.html#Type_deduction\n\n“Use type deduction only if it makes the code clearer to readers who aren\u0027t familiar with the project, or if it makes the code safer. Do not use it merely to avoid the inconvenience of writing an explicit type.”",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 8
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c438fb27_8443de20",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T11:13:51Z",
+      "side": 1,
+      "message": "is SDES also needed? kRemoteSsrc is passed in SR too.",
+      "range": {
+        "startLine": 109,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 48
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faab4892_a41dc849",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T11:13:51Z",
+      "side": 1,
+      "message": "just do not set it if it doesn\u0027t matter for the current tests (default 0 would be used, which is ok)\n\nCurrent code is very confusing: you\u0027re passing rtp timestamp into field that expects unwrapped rtp sequence number.",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 62
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "475eab1e_fdd7a64f",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T11:13:51Z",
+      "side": 1,
+      "message": "int64_t to match CallReceiveStatistics::capture_start_ntp_time_ms_ type",
+      "range": {
+        "startLine": 152,
+        "startChar": 2,
+        "endLine": 152,
+        "endChar": 5
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c47cbab_31822802",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T11:13:51Z",
+      "side": 1,
+      "message": "I suggest to be less strict in the comment.\nsomthing like \"This is needed so that receiver can estimate the RTT ...\"\n\nbecause it is not not necessary, RTT can be estimated differently (e.g. with RRTR/DLRR RTCP messages, or, may be in the future, by injecting an abstract function that provide RTT)\nChanging this test to provide RTT differently should be ok.",
+      "range": {
+        "startLine": 218,
+        "startChar": 32,
+        "endLine": 219,
+        "endChar": 34
+      },
+      "revId": "bc320b3202ea3eee8574bfd848990a7a918e02ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

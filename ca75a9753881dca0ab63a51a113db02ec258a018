@@ -231,6 +231,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e3b89f92_23417b99",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T11:13:51Z",
+      "side": 1,
+      "message": "I just mean that calling resize right after vector construction is the same as passing size as the construction parameter.\n\nAs to the overall cleanest way, I still think that RtcpPacket::Build() is the cleanest way, with rtcp::CompountPacket helper to combine 2 RTCP packets into one.",
+      "parentUuid": "a54224ba_bf6d4dd8",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 54
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e5de3e42_949c7c8c",
         "filename": "audio/channel_receive_unittest.cc",
         "patchSetId": 2
@@ -348,6 +372,30 @@
       "side": 1,
       "message": "I think these numbers are not well set, but they have the desired effect.\nThe function should really take the reception time of last SR as parameter, but it is actually called before the first SR is received in this test. I find it strange that it works.",
       "parentUuid": "66dcc2bb_6c4213d2",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 28
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdb65dcf_8552e548",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T11:13:51Z",
+      "side": 1,
+      "message": "just FYI:\nsome time ago it didn\u0027t - RtpRtcp was searching for matching emitted SR, but such lookup isn\u0027t really needed: ReportBlock has all the information needed to calculate the RTT.\n\nIn practice SR is needed to properly generate ReportBlock: NtpTime should be copied from that last SR, and Delay should be calculated based on the time that SR was received.",
+      "parentUuid": "76ba73f3_948c4eb7",
       "range": {
         "startLine": 125,
         "startChar": 4,
@@ -512,6 +560,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0dfeeac_cc7f3f17",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T11:13:51Z",
+      "side": 1,
+      "message": "ProbeCaptureStartNtpTime still takes ChannelReceiveInterface by pointer",
+      "parentUuid": "d8f2e2b2_824d8e0c",
+      "range": {
+        "startLine": 155,
+        "startChar": 31,
+        "endLine": 155,
+        "endChar": 56
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba2689cf_e05a5176",
         "filename": "audio/channel_receive_unittest.cc",
         "patchSetId": 2
@@ -547,6 +619,30 @@
       "side": 1,
       "message": "That would test the DLRR-driven behavior, but that\u0027s not the test that was failing when I did my channel split.\nAdding a test for the DLRR-driven behavior is probably a good idea, but it\u0027s a different test.\n\nI don\u0027t think this is accidental, but I don\u0027t think it was a good idea.",
       "parentUuid": "ba2689cf_e05a5176",
+      "range": {
+        "startLine": 214,
+        "startChar": 32,
+        "endLine": 214,
+        "endChar": 64
+      },
+      "revId": "ca75a9753881dca0ab63a51a113db02ec258a018",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87761e4c_a79151a0",
+        "filename": "audio/channel_receive_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-06T11:13:51Z",
+      "side": 1,
+      "message": "DLRR is just another way to calculate RTT, and it is the proper way for ChannelReceive to calculate RTT. SR way may break for ChannelReceive (e.g. RtpRtcp would improve it\u0027s filter and would ignore incoming RR for receive-only configuration)\n\nyou do not have to test actual DLRR-driver behavior (that would require to provoke ChannelReceive to emit XR with RRTR before feeding DLRR into it).\n\nSame as you create fake RR with RB, you can create fake XR with DLRR (and it would be simpler because it has less fields)",
+      "parentUuid": "f30f2741_93dfd522",
       "range": {
         "startLine": 214,
         "startChar": 32,
