@@ -183,66 +183,6 @@ AudioDeviceModuleIOS::AudioDeviceModuleIOS(bool bypass_voice_processing)
     return 0;
   }
 
-  int32_t AudioDeviceModuleIOS::SpeakerMuteIsAvailable(bool* available) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool isAvailable = false;
-    if (audio_device_->SpeakerMuteIsAvailable(isAvailable) == -1) {
-      return -1;
-    }
-    *available = isAvailable;
-    RTC_DLOG(LS_INFO) << "output: " << isAvailable;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::SetSpeakerMute(bool enable) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << enable << ")";
-    CHECKinitialized_();
-    return audio_device_->SetSpeakerMute(enable);
-  }
-
-  int32_t AudioDeviceModuleIOS::SpeakerMute(bool* enabled) const {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool muted = false;
-    if (audio_device_->SpeakerMute(muted) == -1) {
-      return -1;
-    }
-    *enabled = muted;
-    RTC_DLOG(LS_INFO) << "output: " << muted;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::MicrophoneMuteIsAvailable(bool* available) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool isAvailable = false;
-    if (audio_device_->MicrophoneMuteIsAvailable(isAvailable) == -1) {
-      return -1;
-    }
-    *available = isAvailable;
-    RTC_DLOG(LS_INFO) << "output: " << isAvailable;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::SetMicrophoneMute(bool enable) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << enable << ")";
-    CHECKinitialized_();
-    return (audio_device_->SetMicrophoneMute(enable));
-  }
-
-  int32_t AudioDeviceModuleIOS::MicrophoneMute(bool* enabled) const {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool muted = false;
-    if (audio_device_->MicrophoneMute(muted) == -1) {
-      return -1;
-    }
-    *enabled = muted;
-    RTC_DLOG(LS_INFO) << "output: " << muted;
-    return 0;
-  }
-
   int32_t AudioDeviceModuleIOS::MicrophoneVolumeIsAvailable(bool* available) {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     CHECKinitialized_();

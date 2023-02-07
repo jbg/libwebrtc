@@ -237,24 +237,6 @@ class ADMWrapper : public AudioDeviceModule, public AudioTransport {
   int32_t MinMicrophoneVolume(uint32_t* min_volume) const override {
     return impl_->MinMicrophoneVolume(min_volume);
   }
-  int32_t SpeakerMuteIsAvailable(bool* available) override {
-    return impl_->SpeakerMuteIsAvailable(available);
-  }
-  int32_t SetSpeakerMute(bool enable) override {
-    return impl_->SetSpeakerMute(enable);
-  }
-  int32_t SpeakerMute(bool* enabled) const override {
-    return impl_->SpeakerMute(enabled);
-  }
-  int32_t MicrophoneMuteIsAvailable(bool* available) override {
-    return impl_->MicrophoneMuteIsAvailable(available);
-  }
-  int32_t SetMicrophoneMute(bool enable) override {
-    return impl_->SetMicrophoneMute(enable);
-  }
-  int32_t MicrophoneMute(bool* enabled) const override {
-    return impl_->MicrophoneMute(enabled);
-  }
   int32_t StereoPlayoutIsAvailable(bool* available) const override {
     return impl_->StereoPlayoutIsAvailable(available);
   }

@@ -439,66 +439,6 @@ int32_t AudioDeviceModuleImpl::MinSpeakerVolume(uint32_t* minVolume) const {
   return 0;
 }
 
-int32_t AudioDeviceModuleImpl::SpeakerMuteIsAvailable(bool* available) {
-  RTC_LOG(LS_INFO) << __FUNCTION__;
-  CHECKinitialized_();
-  bool isAvailable = false;
-  if (audio_device_->SpeakerMuteIsAvailable(isAvailable) == -1) {
-    return -1;
-  }
-  *available = isAvailable;
-  RTC_LOG(LS_INFO) << "output: " << isAvailable;
-  return 0;
-}
-
-int32_t AudioDeviceModuleImpl::SetSpeakerMute(bool enable) {
-  RTC_LOG(LS_INFO) << __FUNCTION__ << "(" << enable << ")";
-  CHECKinitialized_();
-  return audio_device_->SetSpeakerMute(enable);
-}
-
-int32_t AudioDeviceModuleImpl::SpeakerMute(bool* enabled) const {
-  RTC_LOG(LS_INFO) << __FUNCTION__;
-  CHECKinitialized_();
-  bool muted = false;
-  if (audio_device_->SpeakerMute(muted) == -1) {
-    return -1;
-  }
-  *enabled = muted;
-  RTC_LOG(LS_INFO) << "output: " << muted;
-  return 0;
-}
-
-int32_t AudioDeviceModuleImpl::MicrophoneMuteIsAvailable(bool* available) {
-  RTC_LOG(LS_INFO) << __FUNCTION__;
-  CHECKinitialized_();
-  bool isAvailable = false;
-  if (audio_device_->MicrophoneMuteIsAvailable(isAvailable) == -1) {
-    return -1;
-  }
-  *available = isAvailable;
-  RTC_LOG(LS_INFO) << "output: " << isAvailable;
-  return 0;
-}
-
-int32_t AudioDeviceModuleImpl::SetMicrophoneMute(bool enable) {
-  RTC_LOG(LS_INFO) << __FUNCTION__ << "(" << enable << ")";
-  CHECKinitialized_();
-  return (audio_device_->SetMicrophoneMute(enable));
-}
-
-int32_t AudioDeviceModuleImpl::MicrophoneMute(bool* enabled) const {
-  RTC_LOG(LS_INFO) << __FUNCTION__;
-  CHECKinitialized_();
-  bool muted = false;
-  if (audio_device_->MicrophoneMute(muted) == -1) {
-    return -1;
-  }
-  *enabled = muted;
-  RTC_LOG(LS_INFO) << "output: " << muted;
-  return 0;
-}
-
 int32_t AudioDeviceModuleImpl::MicrophoneVolumeIsAvailable(bool* available) {
   RTC_LOG(LS_INFO) << __FUNCTION__;
   CHECKinitialized_();
