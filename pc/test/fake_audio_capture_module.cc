@@ -309,36 +309,6 @@ int32_t FakeAudioCaptureModule::MinMicrophoneVolume(
   return 0;
 }
 
-int32_t FakeAudioCaptureModule::SpeakerMuteIsAvailable(bool* /*available*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SetSpeakerMute(bool /*enable*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SpeakerMute(bool* /*enabled*/) const {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::MicrophoneMuteIsAvailable(bool* /*available*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SetMicrophoneMute(bool /*enable*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::MicrophoneMute(bool* /*enabled*/) const {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
 int32_t FakeAudioCaptureModule::StereoPlayoutIsAvailable(
     bool* available) const {
   // No recording device, just dropping audio. Stereo can be dropped just

@@ -603,32 +603,6 @@ int32_t ObjCAudioDeviceModule::MinSpeakerVolume(uint32_t* minVolume) const {
   return -1;
 }
 
-int32_t ObjCAudioDeviceModule::SpeakerMuteIsAvailable(bool* available) {
-  *available = false;
-  return 0;
-}
-
-int32_t ObjCAudioDeviceModule::SetSpeakerMute(bool enable) {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::SpeakerMute(bool* enabled) const {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::MicrophoneMuteIsAvailable(bool* available) {
-  *available = false;
-  return 0;
-}
-
-int32_t ObjCAudioDeviceModule::SetMicrophoneMute(bool enable) {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::MicrophoneMute(bool* enabled) const {
-  return -1;
-}
-
 int32_t ObjCAudioDeviceModule::MicrophoneVolumeIsAvailable(bool* available) {
   *available = false;
   return 0;

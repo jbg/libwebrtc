@@ -171,30 +171,6 @@ int32_t AudioDeviceDummy::MinMicrophoneVolume(uint32_t& minVolume) const {
   return -1;
 }
 
-int32_t AudioDeviceDummy::SpeakerMuteIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::SetSpeakerMute(bool enable) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::SpeakerMute(bool& enabled) const {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::MicrophoneMuteIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::SetMicrophoneMute(bool enable) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::MicrophoneMute(bool& enabled) const {
-  return -1;
-}
-
 int32_t AudioDeviceDummy::StereoPlayoutIsAvailable(bool& available) {
   return -1;
 }

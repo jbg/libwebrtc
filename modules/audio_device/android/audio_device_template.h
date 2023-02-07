@@ -278,24 +278,6 @@ class AudioDeviceTemplate : public AudioDeviceGeneric {
     RTC_CHECK_NOTREACHED();
   }
 
-  int32_t SpeakerMuteIsAvailable(bool& available) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetSpeakerMute(bool enable) override { RTC_CHECK_NOTREACHED(); }
-
-  int32_t SpeakerMute(bool& enabled) const override { RTC_CHECK_NOTREACHED(); }
-
-  int32_t MicrophoneMuteIsAvailable(bool& available) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetMicrophoneMute(bool enable) override { RTC_CHECK_NOTREACHED(); }
-
-  int32_t MicrophoneMute(bool& enabled) const override {
-    RTC_CHECK_NOTREACHED();
-  }
-
   // Returns true if the audio manager has been configured to support stereo
   // and false otherwised. Default is mono.
   int32_t StereoPlayoutIsAvailable(bool& available) override {

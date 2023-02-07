@@ -33,14 +33,8 @@ class AudioMixerManagerLinuxPulse {
   int32_t MaxSpeakerVolume(uint32_t& maxVolume) const;
   int32_t MinSpeakerVolume(uint32_t& minVolume) const;
   int32_t SpeakerVolumeIsAvailable(bool& available);
-  int32_t SpeakerMuteIsAvailable(bool& available);
-  int32_t SetSpeakerMute(bool enable);
   int32_t StereoPlayoutIsAvailable(bool& available);
   int32_t StereoRecordingIsAvailable(bool& available);
-  int32_t SpeakerMute(bool& enabled) const;
-  int32_t MicrophoneMuteIsAvailable(bool& available);
-  int32_t SetMicrophoneMute(bool enable);
-  int32_t MicrophoneMute(bool& enabled) const;
   int32_t MicrophoneVolumeIsAvailable(bool& available);
   int32_t SetMicrophoneVolume(uint32_t volume);
   int32_t MicrophoneVolume(uint32_t& volume) const;
@@ -97,7 +91,6 @@ class AudioMixerManagerLinuxPulse {
   mutable uint32_t _paVolume;
   mutable uint32_t _paMute;
   mutable uint32_t _paVolSteps;
-  bool _paSpeakerMute;
   mutable uint32_t _paSpeakerVolume;
   mutable uint8_t _paChannels;
   bool _paObjectsSet;

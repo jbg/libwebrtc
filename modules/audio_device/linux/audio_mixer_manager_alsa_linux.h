@@ -28,12 +28,6 @@ class AudioMixerManagerLinuxALSA {
   int32_t MaxSpeakerVolume(uint32_t& maxVolume) const;
   int32_t MinSpeakerVolume(uint32_t& minVolume) const;
   int32_t SpeakerVolumeIsAvailable(bool& available);
-  int32_t SpeakerMuteIsAvailable(bool& available);
-  int32_t SetSpeakerMute(bool enable) RTC_LOCKS_EXCLUDED(mutex_);
-  int32_t SpeakerMute(bool& enabled) const;
-  int32_t MicrophoneMuteIsAvailable(bool& available);
-  int32_t SetMicrophoneMute(bool enable) RTC_LOCKS_EXCLUDED(mutex_);
-  int32_t MicrophoneMute(bool& enabled) const;
   int32_t MicrophoneVolumeIsAvailable(bool& available);
   int32_t SetMicrophoneVolume(uint32_t volume) RTC_LOCKS_EXCLUDED(mutex_);
   int32_t MicrophoneVolume(uint32_t& volume) const;

@@ -127,18 +127,6 @@ class AudioDeviceMac : public AudioDeviceGeneric {
   virtual int32_t MaxMicrophoneVolume(uint32_t& maxVolume) const;
   virtual int32_t MinMicrophoneVolume(uint32_t& minVolume) const;
 
-  // Microphone mute control
-  virtual int32_t MicrophoneMuteIsAvailable(bool& available)
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetMicrophoneMute(bool enable);
-  virtual int32_t MicrophoneMute(bool& enabled) const;
-
-  // Speaker mute control
-  virtual int32_t SpeakerMuteIsAvailable(bool& available)
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetSpeakerMute(bool enable);
-  virtual int32_t SpeakerMute(bool& enabled) const;
-
   // Stereo support
   virtual int32_t StereoPlayoutIsAvailable(bool& available)
       RTC_LOCKS_EXCLUDED(mutex_);

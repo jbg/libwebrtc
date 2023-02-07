@@ -410,36 +410,6 @@ class AndroidAudioDeviceModule : public AudioDeviceModule {
     RTC_CHECK_NOTREACHED();
   }
 
-  int32_t SpeakerMuteIsAvailable(bool* available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetSpeakerMute(bool enable) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << enable << ")";
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SpeakerMute(bool* enabled) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t MicrophoneMuteIsAvailable(bool* available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetMicrophoneMute(bool enable) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << enable << ")";
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t MicrophoneMute(bool* enabled) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
-  }
-
   int32_t StereoPlayoutIsAvailable(bool* available) const override {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     *available = is_stereo_playout_supported_;

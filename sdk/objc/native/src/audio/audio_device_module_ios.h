@@ -96,16 +96,6 @@ class AudioDeviceModuleIOS : public AudioDeviceModule {
   int32_t MaxMicrophoneVolume(uint32_t* maxVolume) const override;
   int32_t MinMicrophoneVolume(uint32_t* minVolume) const override;
 
-  // Speaker mute control
-  int32_t SpeakerMuteIsAvailable(bool* available) override;
-  int32_t SetSpeakerMute(bool enable) override;
-  int32_t SpeakerMute(bool* enabled) const override;
-
-  // Microphone mute control
-  int32_t MicrophoneMuteIsAvailable(bool* available) override;
-  int32_t SetMicrophoneMute(bool enable) override;
-  int32_t MicrophoneMute(bool* enabled) const override;
-
   // Stereo support
   int32_t StereoPlayoutIsAvailable(bool* available) const override;
   int32_t SetStereoPlayout(bool enable) override;

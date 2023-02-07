@@ -50,7 +50,6 @@ AudioMixerManagerLinuxPulse::AudioMixerManagerLinuxPulse()
       _paVolume(0),
       _paMute(0),
       _paVolSteps(0),
-      _paSpeakerMute(false),
       _paSpeakerVolume(PA_VOLUME_NORM),
       _paChannels(0),
       _paObjectsSet(false) {
@@ -316,83 +315,6 @@ int32_t AudioMixerManagerLinuxPulse::SpeakerVolumeIsAvailable(bool& available) {
   return 0;
 }
 
-int32_t AudioMixerManagerLinuxPulse::SpeakerMuteIsAvailable(bool& available) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  if (_paOutputDeviceIndex == -1) {
-    RTC_LOG(LS_WARNING) << "output device index has not been set";
-    return -1;
-  }
-
-  // Always available in Pulse Audio
-  available = true;
-
-  return 0;
-}
-
-int32_t AudioMixerManagerLinuxPulse::SetSpeakerMute(bool enable) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  RTC_LOG(LS_VERBOSE) << "AudioMixerManagerLinuxPulse::SetSpeakerMute(enable="
-                      << enable << ")";
-
-  if (_paOutputDeviceIndex == -1) {
-    RTC_LOG(LS_WARNING) << "output device index has not been set";
-    return -1;
-  }
-
-  bool setFailed(false);
-
-  if (_paPlayStream &&
-      (LATE(pa_stream_get_state)(_paPlayStream) != PA_STREAM_UNCONNECTED)) {
-    // We can only really mute if we have a connected stream
-    AutoPulseLock auto_lock(_paMainloop);
-
-    pa_operation* paOperation = NULL;
-    paOperation = LATE(pa_context_set_sink_input_mute)(
-        _paContext, LATE(pa_stream_get_index)(_paPlayStream), (int)enable,
-        PaSetVolumeCallback, NULL);
-    if (!paOperation) {
-      setFailed = true;
-    }
-
-    // Don't need to wait for the completion
-    LATE(pa_operation_unref)(paOperation);
-  } else {
-    // We have not created a stream or it's not connected to the sink
-    // Save the mute status to be set at connection
-    _paSpeakerMute = enable;
-  }
-
-  if (setFailed) {
-    RTC_LOG(LS_WARNING) << "could not mute speaker, error="
-                        << LATE(pa_context_errno)(_paContext);
-    return -1;
-  }
-
-  return 0;
-}
-
-int32_t AudioMixerManagerLinuxPulse::SpeakerMute(bool& enabled) const {
-  if (_paOutputDeviceIndex == -1) {
-    RTC_LOG(LS_WARNING) << "output device index has not been set";
-    return -1;
-  }
-
-  if (_paPlayStream &&
-      (LATE(pa_stream_get_state)(_paPlayStream) != PA_STREAM_UNCONNECTED)) {
-    // We can only get the mute status if we have a connected stream
-    if (!GetSinkInputInfo())
-      return -1;
-
-    enabled = static_cast<bool>(_paMute);
-  } else {
-    enabled = _paSpeakerMute;
-  }
-  RTC_LOG(LS_VERBOSE)
-      << "AudioMixerManagerLinuxPulse::SpeakerMute() => enabled=" << enabled;
-
-  return 0;
-}
-
 int32_t AudioMixerManagerLinuxPulse::StereoPlayoutIsAvailable(bool& available) {
   RTC_DCHECK(thread_checker_.IsCurrent());
   if (_paOutputDeviceIndex == -1) {
@@ -457,97 +379,6 @@ int32_t AudioMixerManagerLinuxPulse::StereoRecordingIsAvailable(
       << "AudioMixerManagerLinuxPulse::StereoRecordingIsAvailable()"
          " => available="
       << available;
-
-  return 0;
-}
-
-int32_t AudioMixerManagerLinuxPulse::MicrophoneMuteIsAvailable(
-    bool& available) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  if (_paInputDeviceIndex == -1) {
-    RTC_LOG(LS_WARNING) << "input device index has not been set";
-    return -1;
-  }
-
-  // Always available in Pulse Audio
-  available = true;
-
-  return 0;
-}
-
-int32_t AudioMixerManagerLinuxPulse::SetMicrophoneMute(bool enable) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  RTC_LOG(LS_VERBOSE)
-      << "AudioMixerManagerLinuxPulse::SetMicrophoneMute(enable=" << enable
-      << ")";
-
-  if (_paInputDeviceIndex == -1) {
-    RTC_LOG(LS_WARNING) << "input device index has not been set";
-    return -1;
-  }
-
-  bool setFailed(false);
-  pa_operation* paOperation = NULL;
-
-  uint32_t deviceIndex = (uint32_t)_paInputDeviceIndex;
-
-  AutoPulseLock auto_lock(_paMainloop);
-
-  // Get the actual stream device index if we have a connected stream
-  // The device used by the stream can be changed
-  // during the call
-  if (_paRecStream &&
-      (LATE(pa_stream_get_state)(_paRecStream) != PA_STREAM_UNCONNECTED)) {
-    deviceIndex = LATE(pa_stream_get_device_index)(_paRecStream);
-  }
-
-  // Set mute switch for the source
-  paOperation = LATE(pa_context_set_source_mute_by_index)(
-      _paContext, deviceIndex, enable, PaSetVolumeCallback, NULL);
-
-  if (!paOperation) {
-    setFailed = true;
-  }
-
-  // Don't need to wait for this to complete.
-  LATE(pa_operation_unref)(paOperation);
-
-  if (setFailed) {
-    RTC_LOG(LS_WARNING) << "could not mute microphone, error="
-                        << LATE(pa_context_errno)(_paContext);
-    return -1;
-  }
-
-  return 0;
-}
-
-int32_t AudioMixerManagerLinuxPulse::MicrophoneMute(bool& enabled) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  if (_paInputDeviceIndex == -1) {
-    RTC_LOG(LS_WARNING) << "input device index has not been set";
-    return -1;
-  }
-
-  uint32_t deviceIndex = (uint32_t)_paInputDeviceIndex;
-
-  {
-    AutoPulseLock auto_lock(_paMainloop);
-    // Get the actual stream device index if we have a connected stream
-    // The device used by the stream can be changed
-    // during the call
-    if (_paRecStream &&
-        (LATE(pa_stream_get_state)(_paRecStream) != PA_STREAM_UNCONNECTED)) {
-      deviceIndex = LATE(pa_stream_get_device_index)(_paRecStream);
-    }
-  }
-
-  if (!GetSourceInfoByIndex(deviceIndex))
-    return -1;
-
-  enabled = static_cast<bool>(_paMute);
-
-  RTC_LOG(LS_VERBOSE)
-      << "AudioMixerManagerLinuxPulse::MicrophoneMute() => enabled=" << enabled;
 
   return 0;
 }

@@ -372,30 +372,6 @@ int32_t FileAudioDevice::MinMicrophoneVolume(uint32_t& minVolume) const {
   return -1;
 }
 
-int32_t FileAudioDevice::SpeakerMuteIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t FileAudioDevice::SetSpeakerMute(bool enable) {
-  return -1;
-}
-
-int32_t FileAudioDevice::SpeakerMute(bool& enabled) const {
-  return -1;
-}
-
-int32_t FileAudioDevice::MicrophoneMuteIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t FileAudioDevice::SetMicrophoneMute(bool enable) {
-  return -1;
-}
-
-int32_t FileAudioDevice::MicrophoneMute(bool& enabled) const {
-  return -1;
-}
-
 int32_t FileAudioDevice::StereoPlayoutIsAvailable(bool& available) {
   available = true;
   return 0;

@@ -110,15 +110,6 @@ class MockAudioDeviceModule : public AudioDeviceModule {
               MinMicrophoneVolume,
               (uint32_t * minVolume),
               (const, override));
-  MOCK_METHOD(int32_t, SpeakerMuteIsAvailable, (bool* available), (override));
-  MOCK_METHOD(int32_t, SetSpeakerMute, (bool enable), (override));
-  MOCK_METHOD(int32_t, SpeakerMute, (bool* enabled), (const, override));
-  MOCK_METHOD(int32_t,
-              MicrophoneMuteIsAvailable,
-              (bool* available),
-              (override));
-  MOCK_METHOD(int32_t, SetMicrophoneMute, (bool enable), (override));
-  MOCK_METHOD(int32_t, MicrophoneMute, (bool* enabled), (const, override));
   MOCK_METHOD(int32_t,
               StereoPlayoutIsAvailable,
               (bool* available),
