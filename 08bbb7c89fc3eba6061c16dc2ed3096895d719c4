@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10bfe6f6_6c8cf8fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-08T13:40:25Z",
+      "side": 1,
+      "message": "This CL is rather big. There\u0027s one disabled test inside it still, but review should get started.",
+      "revId": "08bbb7c89fc3eba6061c16dc2ed3096895d719c4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
