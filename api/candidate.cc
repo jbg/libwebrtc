@@ -88,7 +88,8 @@ std::string Candidate::ToStringInternal(bool sensitive) const {
 
 uint32_t Candidate::GetPriority(uint32_t type_preference,
                                 int network_adapter_preference,
-                                int relay_preference) const {
+                                int relay_preference,
+                                bool adjust_local_preference) const {
   // RFC 5245 - 4.1.2.1.
   // priority = (2^24)*(type preference) +
   //            (2^8)*(local preference) +
@@ -106,10 +107,17 @@ uint32_t Candidate::GetPriority(uint32_t type_preference,
   // local preference =  (NIC Type << 8 | Addr_Pref) + relay preference.
   // The relay preference is based on the number of TURN servers, the
   // first TURN server gets the highest preference.
-
   int addr_pref = IPAddressPrecedence(address_.ipaddr());
   int local_preference =
       ((network_adapter_preference << 8) | addr_pref) + relay_preference;
+
+  // Ensure that the added relay preference will not result in relay candidates
+  // with higher priority than host/srflx candidates if the type preference
+  // (in the upper eight bits) is not taken into account which happens for
+  // received prflx candidates.
+  if (adjust_local_preference && relay_protocol_.empty()) {
+    local_preference += kMaxTurnServers;
+  }
 
   return (type_preference << 24) | (local_preference << 8) | (256 - component_);
 }
