@@ -12,6 +12,30 @@
 
 #include "test/gtest.h"
 
+TEST(ChecksTest, MultipleChecks) {
+  printf("Lets go!\n");
+
+  RTC_CHECK(true);
+  int chars_printed = 0;
+  chars_printed = printf("Woohoo!\n");
+
+  RTC_CHECK(chars_printed > 0);
+  printf("Hooray!\n");
+  printf("Done\n");
+}
+
+TEST(ChecksTest, MultipleDchecks) {
+  printf("Same for DCHECK!\n");
+
+  RTC_DCHECK(true);
+  int chars_printed = 0;
+  chars_printed = printf("Yay!\n");
+
+  RTC_DCHECK(chars_printed > 0);
+  printf("Yippee!\n");
+  printf("Done\n");
+}
+
 TEST(ChecksTest, ExpressionNotEvaluatedWhenCheckPassing) {
   int i = 0;
   RTC_CHECK(true) << "i=" << ++i;
