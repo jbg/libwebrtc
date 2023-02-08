@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdc35ab0_79a712d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2023-02-08T00:02:03Z",
+      "side": 1,
+      "message": "Hi. This would fix the autoroller error with fuchsia. Please take a look.",
+      "revId": "5b97f3f7ca9342fca7f9213fb3c0b99308ede840",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
