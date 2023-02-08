@@ -52,6 +52,24 @@
       "parentUuid": "efcfddde_a7f4183c",
       "revId": "8dad63c1bd9b980be2719057f7b7cfbe94e0598e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74fbc7fa_2ea227cb",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-08T15:36:50Z",
+      "side": 1,
+      "message": "You can use getParameters() to detect scalabilityMode is undefined without connecting, but in either case we have to O/A, but that may be better than getStats()",
+      "parentUuid": "f7c263e0_80de2ce7",
+      "revId": "8dad63c1bd9b980be2719057f7b7cfbe94e0598e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
