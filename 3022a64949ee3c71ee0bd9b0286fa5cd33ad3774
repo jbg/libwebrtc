@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dc40e0c_db7f9436",
+        "filename": "tools_webrtc/libs/generate_licenses.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-02-08T09:32:41Z",
+      "side": 1,
+      "message": "nit: move this out of the \"no license needed\" section.",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 59
+      },
+      "revId": "3022a64949ee3c71ee0bd9b0286fa5cd33ad3774",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
