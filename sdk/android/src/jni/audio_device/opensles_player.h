@@ -75,12 +75,6 @@ class OpenSLESPlayer : public AudioOutput {
   int StopPlayout() override;
   bool Playing() const override;
 
-  bool SpeakerVolumeIsAvailable() override;
-  int SetSpeakerVolume(uint32_t volume) override;
-  absl::optional<uint32_t> SpeakerVolume() const override;
-  absl::optional<uint32_t> MaxSpeakerVolume() const override;
-  absl::optional<uint32_t> MinSpeakerVolume() const override;
-
   void AttachAudioBuffer(AudioDeviceBuffer* audioBuffer) override;
 
   int GetPlayoutUnderrunCount() override { return -1; }

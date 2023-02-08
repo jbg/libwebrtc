@@ -59,11 +59,6 @@ class AudioOutput {
   virtual int32_t StartPlayout() = 0;
   virtual int32_t StopPlayout() = 0;
   virtual bool Playing() const = 0;
-  virtual bool SpeakerVolumeIsAvailable() = 0;
-  virtual int SetSpeakerVolume(uint32_t volume) = 0;
-  virtual absl::optional<uint32_t> SpeakerVolume() const = 0;
-  virtual absl::optional<uint32_t> MaxSpeakerVolume() const = 0;
-  virtual absl::optional<uint32_t> MinSpeakerVolume() const = 0;
   virtual void AttachAudioBuffer(AudioDeviceBuffer* audioBuffer) = 0;
   virtual int GetPlayoutUnderrunCount() = 0;
 };

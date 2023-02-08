@@ -80,30 +80,6 @@ class AudioDeviceGeneric {
   virtual int32_t InitMicrophone() = 0;
   virtual bool MicrophoneIsInitialized() const = 0;
 
-  // Speaker volume controls
-  virtual int32_t SpeakerVolumeIsAvailable(bool& available) = 0;
-  virtual int32_t SetSpeakerVolume(uint32_t volume) = 0;
-  virtual int32_t SpeakerVolume(uint32_t& volume) const = 0;
-  virtual int32_t MaxSpeakerVolume(uint32_t& maxVolume) const = 0;
-  virtual int32_t MinSpeakerVolume(uint32_t& minVolume) const = 0;
-
-  // Microphone volume controls
-  virtual int32_t MicrophoneVolumeIsAvailable(bool& available) = 0;
-  virtual int32_t SetMicrophoneVolume(uint32_t volume) = 0;
-  virtual int32_t MicrophoneVolume(uint32_t& volume) const = 0;
-  virtual int32_t MaxMicrophoneVolume(uint32_t& maxVolume) const = 0;
-  virtual int32_t MinMicrophoneVolume(uint32_t& minVolume) const = 0;
-
-  // Speaker mute control
-  virtual int32_t SpeakerMuteIsAvailable(bool& available) = 0;
-  virtual int32_t SetSpeakerMute(bool enable) = 0;
-  virtual int32_t SpeakerMute(bool& enabled) const = 0;
-
-  // Microphone mute control
-  virtual int32_t MicrophoneMuteIsAvailable(bool& available) = 0;
-  virtual int32_t SetMicrophoneMute(bool enable) = 0;
-  virtual int32_t MicrophoneMute(bool& enabled) const = 0;
-
   // Stereo support
   virtual int32_t StereoPlayoutIsAvailable(bool& available) = 0;
   virtual int32_t SetStereoPlayout(bool enable) = 0;

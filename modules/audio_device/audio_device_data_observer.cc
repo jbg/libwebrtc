@@ -207,54 +207,6 @@ class ADMWrapper : public AudioDeviceModule, public AudioTransport {
   bool MicrophoneIsInitialized() const override {
     return impl_->MicrophoneIsInitialized();
   }
-  int32_t SpeakerVolumeIsAvailable(bool* available) override {
-    return impl_->SpeakerVolumeIsAvailable(available);
-  }
-  int32_t SetSpeakerVolume(uint32_t volume) override {
-    return impl_->SetSpeakerVolume(volume);
-  }
-  int32_t SpeakerVolume(uint32_t* volume) const override {
-    return impl_->SpeakerVolume(volume);
-  }
-  int32_t MaxSpeakerVolume(uint32_t* max_volume) const override {
-    return impl_->MaxSpeakerVolume(max_volume);
-  }
-  int32_t MinSpeakerVolume(uint32_t* min_volume) const override {
-    return impl_->MinSpeakerVolume(min_volume);
-  }
-  int32_t MicrophoneVolumeIsAvailable(bool* available) override {
-    return impl_->MicrophoneVolumeIsAvailable(available);
-  }
-  int32_t SetMicrophoneVolume(uint32_t volume) override {
-    return impl_->SetMicrophoneVolume(volume);
-  }
-  int32_t MicrophoneVolume(uint32_t* volume) const override {
-    return impl_->MicrophoneVolume(volume);
-  }
-  int32_t MaxMicrophoneVolume(uint32_t* max_volume) const override {
-    return impl_->MaxMicrophoneVolume(max_volume);
-  }
-  int32_t MinMicrophoneVolume(uint32_t* min_volume) const override {
-    return impl_->MinMicrophoneVolume(min_volume);
-  }
-  int32_t SpeakerMuteIsAvailable(bool* available) override {
-    return impl_->SpeakerMuteIsAvailable(available);
-  }
-  int32_t SetSpeakerMute(bool enable) override {
-    return impl_->SetSpeakerMute(enable);
-  }
-  int32_t SpeakerMute(bool* enabled) const override {
-    return impl_->SpeakerMute(enabled);
-  }
-  int32_t MicrophoneMuteIsAvailable(bool* available) override {
-    return impl_->MicrophoneMuteIsAvailable(available);
-  }
-  int32_t SetMicrophoneMute(bool enable) override {
-    return impl_->SetMicrophoneMute(enable);
-  }
-  int32_t MicrophoneMute(bool* enabled) const override {
-    return impl_->MicrophoneMute(enabled);
-  }
   int32_t StereoPlayoutIsAvailable(bool* available) const override {
     return impl_->StereoPlayoutIsAvailable(available);
   }

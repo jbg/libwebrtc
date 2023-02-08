@@ -303,98 +303,6 @@ int32_t AudioDeviceLinuxALSA::MinSpeakerVolume(uint32_t& minVolume) const {
   return 0;
 }
 
-int32_t AudioDeviceLinuxALSA::SpeakerMuteIsAvailable(bool& available) {
-  bool isAvailable(false);
-  bool wasInitialized = _mixerManager.SpeakerIsInitialized();
-
-  // Make an attempt to open up the
-  // output mixer corresponding to the currently selected output device.
-  //
-  if (!wasInitialized && InitSpeaker() == -1) {
-    // If we end up here it means that the selected speaker has no volume
-    // control, hence it is safe to state that there is no mute control
-    // already at this stage.
-    available = false;
-    return 0;
-  }
-
-  // Check if the selected speaker has a mute control
-  _mixerManager.SpeakerMuteIsAvailable(isAvailable);
-
-  available = isAvailable;
-
-  // Close the initialized output mixer
-  if (!wasInitialized) {
-    _mixerManager.CloseSpeaker();
-  }
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxALSA::SetSpeakerMute(bool enable) {
-  return (_mixerManager.SetSpeakerMute(enable));
-}
-
-int32_t AudioDeviceLinuxALSA::SpeakerMute(bool& enabled) const {
-  bool muted(0);
-
-  if (_mixerManager.SpeakerMute(muted) == -1) {
-    return -1;
-  }
-
-  enabled = muted;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxALSA::MicrophoneMuteIsAvailable(bool& available) {
-  bool isAvailable(false);
-  bool wasInitialized = _mixerManager.MicrophoneIsInitialized();
-
-  // Make an attempt to open up the
-  // input mixer corresponding to the currently selected input device.
-  //
-  if (!wasInitialized && InitMicrophone() == -1) {
-    // If we end up here it means that the selected microphone has no volume
-    // control, hence it is safe to state that there is no mute control
-    // already at this stage.
-    available = false;
-    return 0;
-  }
-
-  // Check if the selected microphone has a mute control
-  //
-  _mixerManager.MicrophoneMuteIsAvailable(isAvailable);
-  available = isAvailable;
-
-  // Close the initialized input mixer
-  //
-  if (!wasInitialized) {
-    _mixerManager.CloseMicrophone();
-  }
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxALSA::SetMicrophoneMute(bool enable) {
-  return (_mixerManager.SetMicrophoneMute(enable));
-}
-
-// ----------------------------------------------------------------------------
-//  MicrophoneMute
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceLinuxALSA::MicrophoneMute(bool& enabled) const {
-  bool muted(0);
-
-  if (_mixerManager.MicrophoneMute(muted) == -1) {
-    return -1;
-  }
-
-  enabled = muted;
-  return 0;
-}
-
 int32_t AudioDeviceLinuxALSA::StereoRecordingIsAvailable(bool& available) {
   MutexLock lock(&mutex_);
 
@@ -511,71 +419,6 @@ int32_t AudioDeviceLinuxALSA::StereoPlayout(bool& enabled) const {
     enabled = true;
   else
     enabled = false;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxALSA::MicrophoneVolumeIsAvailable(bool& available) {
-  bool wasInitialized = _mixerManager.MicrophoneIsInitialized();
-
-  // Make an attempt to open up the
-  // input mixer corresponding to the currently selected output device.
-  if (!wasInitialized && InitMicrophone() == -1) {
-    // If we end up here it means that the selected microphone has no volume
-    // control.
-    available = false;
-    return 0;
-  }
-
-  // Given that InitMicrophone was successful, we know that a volume control
-  // exists
-  available = true;
-
-  // Close the initialized input mixer
-  if (!wasInitialized) {
-    _mixerManager.CloseMicrophone();
-  }
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxALSA::SetMicrophoneVolume(uint32_t volume) {
-  return (_mixerManager.SetMicrophoneVolume(volume));
-}
-
-int32_t AudioDeviceLinuxALSA::MicrophoneVolume(uint32_t& volume) const {
-  uint32_t level(0);
-
-  if (_mixerManager.MicrophoneVolume(level) == -1) {
-    RTC_LOG(LS_WARNING) << "failed to retrive current microphone level";
-    return -1;
-  }
-
-  volume = level;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxALSA::MaxMicrophoneVolume(uint32_t& maxVolume) const {
-  uint32_t maxVol(0);
-
-  if (_mixerManager.MaxMicrophoneVolume(maxVol) == -1) {
-    return -1;
-  }
-
-  maxVolume = maxVol;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxALSA::MinMicrophoneVolume(uint32_t& minVolume) const {
-  uint32_t minVol(0);
-
-  if (_mixerManager.MinMicrophoneVolume(minVol) == -1) {
-    return -1;
-  }
-
-  minVolume = minVol;
 
   return 0;
 }
@@ -1094,9 +937,9 @@ int32_t AudioDeviceLinuxALSA::StopRecordingLocked() {
 
   // Check if we have muted and unmute if so.
   bool muteEnabled = false;
-  MicrophoneMute(muteEnabled);
+  _mixerManager.MicrophoneMute(muteEnabled);
   if (muteEnabled) {
-    SetMicrophoneMute(false);
+    _mixerManager.SetMicrophoneMute(false);
   }
 
   // set the pcm input handle to NULL

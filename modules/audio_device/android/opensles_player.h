@@ -68,12 +68,6 @@ class OpenSLESPlayer {
   int StopPlayout();
   bool Playing() const { return playing_; }
 
-  int SpeakerVolumeIsAvailable(bool& available);
-  int SetSpeakerVolume(uint32_t volume);
-  int SpeakerVolume(uint32_t& volume) const;
-  int MaxSpeakerVolume(uint32_t& maxVolume) const;
-  int MinSpeakerVolume(uint32_t& minVolume) const;
-
   void AttachAudioBuffer(AudioDeviceBuffer* audioBuffer);
 
  private:
