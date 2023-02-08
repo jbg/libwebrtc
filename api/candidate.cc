@@ -106,10 +106,17 @@ uint32_t Candidate::GetPriority(uint32_t type_preference,
   // local preference =  (NIC Type << 8 | Addr_Pref) + relay preference.
   // The relay preference is based on the number of TURN servers, the
   // first TURN server gets the highest preference.
-
   int addr_pref = IPAddressPrecedence(address_.ipaddr());
   int local_preference =
       ((network_adapter_preference << 8) | addr_pref) + relay_preference;
+
+  // Ensure that the added relay preference will not result in relay candidates
+  // with higher local preference than host/srflx candidates if the type
+  // preference is not taken into account which happens for received prflx
+  // candidates.
+  if (relay_protocol_.empty()) {
+    local_preference += kMaxTurnServers;
+  }
 
   return (type_preference << 24) | (local_preference << 8) | (256 - component_);
 }
