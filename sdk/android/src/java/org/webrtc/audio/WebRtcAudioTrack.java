@@ -331,35 +331,6 @@ class WebRtcAudioTrack {
     return true;
   }
 
-  // Get max possible volume index for a phone call audio stream.
-  @CalledByNative
-  private int getStreamMaxVolume() {
-    threadChecker.checkIsOnValidThread();
-    Logging.d(TAG, "getStreamMaxVolume");
-    return audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
-  }
-
-  // Set current volume level for a phone call audio stream.
-  @CalledByNative
-  private boolean setStreamVolume(int volume) {
-    threadChecker.checkIsOnValidThread();
-    Logging.d(TAG, "setStreamVolume(" + volume + ")");
-    if (audioManager.isVolumeFixed()) {
-      Logging.e(TAG, "The device implements a fixed volume policy.");
-      return false;
-    }
-    audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, volume, 0);
-    return true;
-  }
-
-  /** Get current volume level for a phone call audio stream. */
-  @CalledByNative
-  private int getStreamVolume() {
-    threadChecker.checkIsOnValidThread();
-    Logging.d(TAG, "getStreamVolume");
-    return audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
-  }
-
   @CalledByNative
   private int GetPlayoutUnderrunCount() {
     if (Build.VERSION.SDK_INT >= 24) {

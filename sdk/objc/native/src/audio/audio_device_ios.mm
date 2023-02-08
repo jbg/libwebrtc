@@ -961,46 +961,6 @@ bool AudioDeviceIOS::SpeakerIsInitialized() const {
   return true;
 }
 
-int32_t AudioDeviceIOS::SpeakerVolumeIsAvailable(bool& available) {
-  available = false;
-  return 0;
-}
-
-int32_t AudioDeviceIOS::SetSpeakerVolume(uint32_t volume) {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
-}
-
-int32_t AudioDeviceIOS::SpeakerVolume(uint32_t& volume) const {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
-}
-
-int32_t AudioDeviceIOS::MaxSpeakerVolume(uint32_t& maxVolume) const {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
-}
-
-int32_t AudioDeviceIOS::MinSpeakerVolume(uint32_t& minVolume) const {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
-}
-
-int32_t AudioDeviceIOS::SpeakerMuteIsAvailable(bool& available) {
-  available = false;
-  return 0;
-}
-
-int32_t AudioDeviceIOS::SetSpeakerMute(bool enable) {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
-}
-
-int32_t AudioDeviceIOS::SpeakerMute(bool& enabled) const {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
-}
-
 int32_t AudioDeviceIOS::SetPlayoutDevice(uint16_t index) {
   RTC_LOG_F(LS_WARNING) << "Not implemented";
   return 0;
@@ -1017,21 +977,6 @@ int32_t AudioDeviceIOS::InitMicrophone() {
 
 bool AudioDeviceIOS::MicrophoneIsInitialized() const {
   return true;
-}
-
-int32_t AudioDeviceIOS::MicrophoneMuteIsAvailable(bool& available) {
-  available = false;
-  return 0;
-}
-
-int32_t AudioDeviceIOS::SetMicrophoneMute(bool enable) {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
-}
-
-int32_t AudioDeviceIOS::MicrophoneMute(bool& enabled) const {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
 }
 
 int32_t AudioDeviceIOS::StereoRecordingIsAvailable(bool& available) {
@@ -1062,31 +1007,6 @@ int32_t AudioDeviceIOS::SetStereoPlayout(bool enable) {
 int32_t AudioDeviceIOS::StereoPlayout(bool& enabled) const {
   enabled = false;
   return 0;
-}
-
-int32_t AudioDeviceIOS::MicrophoneVolumeIsAvailable(bool& available) {
-  available = false;
-  return 0;
-}
-
-int32_t AudioDeviceIOS::SetMicrophoneVolume(uint32_t volume) {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
-}
-
-int32_t AudioDeviceIOS::MicrophoneVolume(uint32_t& volume) const {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
-}
-
-int32_t AudioDeviceIOS::MaxMicrophoneVolume(uint32_t& maxVolume) const {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
-}
-
-int32_t AudioDeviceIOS::MinMicrophoneVolume(uint32_t& minVolume) const {
-  RTC_DCHECK_NOTREACHED() << "Not implemented";
-  return -1;
 }
 
 int32_t AudioDeviceIOS::PlayoutDeviceName(uint16_t index,

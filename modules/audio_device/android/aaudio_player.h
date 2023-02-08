@@ -64,13 +64,6 @@ class AAudioPlayer final : public AAudioObserverInterface {
 
   void AttachAudioBuffer(AudioDeviceBuffer* audioBuffer);
 
-  // Not implemented in AAudio.
-  int SpeakerVolumeIsAvailable(bool& available);  // NOLINT
-  int SetSpeakerVolume(uint32_t volume) { return -1; }
-  int SpeakerVolume(uint32_t& volume) const { return -1; }        // NOLINT
-  int MaxSpeakerVolume(uint32_t& maxVolume) const { return -1; }  // NOLINT
-  int MinSpeakerVolume(uint32_t& minVolume) const { return -1; }  // NOLINT
-
  protected:
   // AAudioObserverInterface implementation.
 
