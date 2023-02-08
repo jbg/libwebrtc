@@ -193,36 +193,6 @@ int32_t AudioTrackJni::StopPlayout() {
   return 0;
 }
 
-int AudioTrackJni::SpeakerVolumeIsAvailable(bool& available) {
-  available = true;
-  return 0;
-}
-
-int AudioTrackJni::SetSpeakerVolume(uint32_t volume) {
-  RTC_LOG(LS_INFO) << "SetSpeakerVolume(" << volume << ")";
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  return j_audio_track_->SetStreamVolume(volume) ? 0 : -1;
-}
-
-int AudioTrackJni::MaxSpeakerVolume(uint32_t& max_volume) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  max_volume = j_audio_track_->GetStreamMaxVolume();
-  return 0;
-}
-
-int AudioTrackJni::MinSpeakerVolume(uint32_t& min_volume) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  min_volume = 0;
-  return 0;
-}
-
-int AudioTrackJni::SpeakerVolume(uint32_t& volume) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  volume = j_audio_track_->GetStreamVolume();
-  RTC_LOG(LS_INFO) << "SpeakerVolume: " << volume;
-  return 0;
-}
-
 // TODO(henrika): possibly add stereo support.
 void AudioTrackJni::AttachAudioBuffer(AudioDeviceBuffer* audioBuffer) {
   RTC_LOG(LS_INFO) << "AttachAudioBuffer";

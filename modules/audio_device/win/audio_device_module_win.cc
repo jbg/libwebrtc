@@ -362,40 +362,6 @@ class WindowsAudioDeviceModule : public AudioDeviceModuleForTest {
     return initialized_;
   }
 
-  int32_t SpeakerVolumeIsAvailable(bool* available) override {
-    // TODO(henrika): improve support.
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    *available = false;
-    return 0;
-  }
-
-  int32_t SetSpeakerVolume(uint32_t volume) override { return 0; }
-  int32_t SpeakerVolume(uint32_t* volume) const override { return 0; }
-  int32_t MaxSpeakerVolume(uint32_t* maxVolume) const override { return 0; }
-  int32_t MinSpeakerVolume(uint32_t* minVolume) const override { return 0; }
-
-  int32_t MicrophoneVolumeIsAvailable(bool* available) override {
-    // TODO(henrika): improve support.
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    *available = false;
-    return 0;
-  }
-
-  int32_t SetMicrophoneVolume(uint32_t volume) override { return 0; }
-  int32_t MicrophoneVolume(uint32_t* volume) const override { return 0; }
-  int32_t MaxMicrophoneVolume(uint32_t* maxVolume) const override { return 0; }
-  int32_t MinMicrophoneVolume(uint32_t* minVolume) const override { return 0; }
-
-  int32_t SpeakerMuteIsAvailable(bool* available) override { return 0; }
-  int32_t SetSpeakerMute(bool enable) override { return 0; }
-  int32_t SpeakerMute(bool* enabled) const override { return 0; }
-
-  int32_t MicrophoneMuteIsAvailable(bool* available) override { return 0; }
-  int32_t SetMicrophoneMute(bool enable) override { return 0; }
-  int32_t MicrophoneMute(bool* enabled) const override { return 0; }
-
   int32_t StereoPlayoutIsAvailable(bool* available) const override {
     // TODO(henrika): improve support.
     RTC_DLOG(LS_INFO) << __FUNCTION__;

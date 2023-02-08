@@ -68,13 +68,6 @@ class AAudioPlayer final : public AudioOutput, public AAudioObserverInterface {
 
   void AttachAudioBuffer(AudioDeviceBuffer* audioBuffer) override;
 
-  // Not implemented in AAudio.
-  bool SpeakerVolumeIsAvailable() override;
-  int SetSpeakerVolume(uint32_t volume) override;
-  absl::optional<uint32_t> SpeakerVolume() const override;
-  absl::optional<uint32_t> MaxSpeakerVolume() const override;
-  absl::optional<uint32_t> MinSpeakerVolume() const override;
-
  protected:
   // AAudioObserverInterface implementation.
 

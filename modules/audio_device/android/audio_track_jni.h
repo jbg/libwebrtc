@@ -78,12 +78,6 @@ class AudioTrackJni {
   int32_t StopPlayout();
   bool Playing() const { return playing_; }
 
-  int SpeakerVolumeIsAvailable(bool& available);
-  int SetSpeakerVolume(uint32_t volume);
-  int SpeakerVolume(uint32_t& volume) const;
-  int MaxSpeakerVolume(uint32_t& max_volume) const;
-  int MinSpeakerVolume(uint32_t& min_volume) const;
-
   void AttachAudioBuffer(AudioDeviceBuffer* audioBuffer);
 
  private:

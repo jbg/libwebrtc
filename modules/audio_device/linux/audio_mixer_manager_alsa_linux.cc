@@ -300,103 +300,6 @@ bool AudioMixerManagerLinuxALSA::MicrophoneIsInitialized() const {
   return (_inputMixerHandle != NULL);
 }
 
-int32_t AudioMixerManagerLinuxALSA::SetSpeakerVolume(uint32_t volume) {
-  RTC_LOG(LS_VERBOSE) << "AudioMixerManagerLinuxALSA::SetSpeakerVolume(volume="
-                      << volume << ")";
-
-  MutexLock lock(&mutex_);
-
-  if (_outputMixerElement == NULL) {
-    RTC_LOG(LS_WARNING) << "no avaliable output mixer element exists";
-    return -1;
-  }
-
-  int errVal = LATE(snd_mixer_selem_set_playback_volume_all)(
-      _outputMixerElement, volume);
-  if (errVal < 0) {
-    RTC_LOG(LS_ERROR) << "Error changing master volume: "
-                      << LATE(snd_strerror)(errVal);
-    return -1;
-  }
-
-  return (0);
-}
-
-int32_t AudioMixerManagerLinuxALSA::SpeakerVolume(uint32_t& volume) const {
-  if (_outputMixerElement == NULL) {
-    RTC_LOG(LS_WARNING) << "no avaliable output mixer element exists";
-    return -1;
-  }
-
-  long int vol(0);
-
-  int errVal = LATE(snd_mixer_selem_get_playback_volume)(
-      _outputMixerElement, (snd_mixer_selem_channel_id_t)0, &vol);
-  if (errVal < 0) {
-    RTC_LOG(LS_ERROR) << "Error getting outputvolume: "
-                      << LATE(snd_strerror)(errVal);
-    return -1;
-  }
-  RTC_LOG(LS_VERBOSE) << "AudioMixerManagerLinuxALSA::SpeakerVolume() => vol="
-                      << vol;
-
-  volume = static_cast<uint32_t>(vol);
-
-  return 0;
-}
-
-int32_t AudioMixerManagerLinuxALSA::MaxSpeakerVolume(
-    uint32_t& maxVolume) const {
-  if (_outputMixerElement == NULL) {
-    RTC_LOG(LS_WARNING) << "no avilable output mixer element exists";
-    return -1;
-  }
-
-  long int minVol(0);
-  long int maxVol(0);
-
-  int errVal = LATE(snd_mixer_selem_get_playback_volume_range)(
-      _outputMixerElement, &minVol, &maxVol);
-
-  RTC_LOG(LS_VERBOSE) << "Playout hardware volume range, min: " << minVol
-                      << ", max: " << maxVol;
-
-  if (maxVol <= minVol) {
-    RTC_LOG(LS_ERROR) << "Error getting get_playback_volume_range: "
-                      << LATE(snd_strerror)(errVal);
-  }
-
-  maxVolume = static_cast<uint32_t>(maxVol);
-
-  return 0;
-}
-
-int32_t AudioMixerManagerLinuxALSA::MinSpeakerVolume(
-    uint32_t& minVolume) const {
-  if (_outputMixerElement == NULL) {
-    RTC_LOG(LS_WARNING) << "no avaliable output mixer element exists";
-    return -1;
-  }
-
-  long int minVol(0);
-  long int maxVol(0);
-
-  int errVal = LATE(snd_mixer_selem_get_playback_volume_range)(
-      _outputMixerElement, &minVol, &maxVol);
-
-  RTC_LOG(LS_VERBOSE) << "Playout hardware volume range, min: " << minVol
-                      << ", max: " << maxVol;
-
-  if (maxVol <= minVol) {
-    RTC_LOG(LS_ERROR) << "Error getting get_playback_volume_range: "
-                      << LATE(snd_strerror)(errVal);
-  }
-
-  minVolume = static_cast<uint32_t>(minVol);
-
-  return 0;
-}
-
 // TL: Have done testnig with these but they don't seem reliable and
 // they were therefore not added
 /*
@@ -480,17 +383,6 @@ int32_t AudioMixerManagerLinuxALSA::MinSpeakerVolume(
  return 0;
  }
  */
-
-int32_t AudioMixerManagerLinuxALSA::SpeakerVolumeIsAvailable(bool& available) {
-  if (_outputMixerElement == NULL) {
-    RTC_LOG(LS_WARNING) << "no avaliable output mixer element exists";
-    return -1;
-  }
-
-  available = LATE(snd_mixer_selem_has_playback_volume)(_outputMixerElement);
-
-  return 0;
-}
 
 int32_t AudioMixerManagerLinuxALSA::SpeakerMuteIsAvailable(bool& available) {
   if (_outputMixerElement == NULL) {
