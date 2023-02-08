@@ -77,6 +77,10 @@ class FuzzRtpInput : public NetEqInput {
     return input_->NextOutputEventTime();
   }
 
+  absl::optional<SetMinimumDelayInfo> NextSetMinimumDelayInfo() const override {
+    return input_->NextSetMinimumDelayInfo();
+  }
+
   std::unique_ptr<PacketData> PopPacket() override {
     RTC_DCHECK(packet_);
     std::unique_ptr<PacketData> packet_to_return = std::move(packet_);
@@ -87,6 +91,10 @@ class FuzzRtpInput : public NetEqInput {
   }
 
   void AdvanceOutputEvent() override { return input_->AdvanceOutputEvent(); }
+
+  void AdvanceNetEqSetMinimumDelay() override {
+    return input_->AdvanceNetEqSetMinimumDelay();
+  }
 
   bool ended() const override { return ended_; }
 
