@@ -85,6 +85,7 @@ LIB_TO_LICENSES_DICT = {
     # Compile time dependencies, no license needed:
     'ow2_asm': [],
     'jdk': [],
+    'kotlin_stdlib': ['third_party/kotlin_stdlib/LICENSE'],
 }
 
 # Third_party library _regex_ to licences mapping. Keys are regular expression
