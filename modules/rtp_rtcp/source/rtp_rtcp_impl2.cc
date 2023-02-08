@@ -809,6 +809,7 @@ void ModuleRtpRtcpImpl2::ScheduleRtcpSendEvaluation(TimeDelta duration) {
 void ModuleRtpRtcpImpl2::ScheduleMaybeSendRtcpAtOrAfterTimestamp(
     Timestamp execution_time,
     TimeDelta duration) {
+  RTC_LOG(LS_ERROR) << "DEBUG: ScheduleMaybeSendRtcp..., duration=" << duration;
   // We end up here under various sequences including the worker queue, and
   // the RTCPSender lock is held.
   // See note in ScheduleRtcpSendEvaluation about why `worker_queue_` can be
