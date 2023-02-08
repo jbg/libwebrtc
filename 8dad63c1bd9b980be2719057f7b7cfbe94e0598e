@@ -34,6 +34,24 @@
       "parentUuid": "11efe020_c84ef6a9",
       "revId": "8dad63c1bd9b980be2719057f7b7cfbe94e0598e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7c263e0_80de2ce7",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-08T15:25:09Z",
+      "side": 1,
+      "message": "You do need to do the O/A to get the RTP stream (including spawning the encoders). Today you don\u0027t need to be connected for the RTP streams to show up (I think), but the spec says to only create the RTP stream \"when the first RTP packet is sent\", so that would require a connection. (Ugh, that means that during ramp-up, simulcast would just have some of the RTP streams, it would be better to have all or none as it takes several seconds for ramp up to complete...)",
+      "parentUuid": "efcfddde_a7f4183c",
+      "revId": "8dad63c1bd9b980be2719057f7b7cfbe94e0598e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
