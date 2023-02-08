@@ -242,6 +242,7 @@ void StreamStatisticianImpl::MaybeAppendReportBlockAndReset(
 
   report_blocks.emplace_back();
   rtcp::ReportBlock& stats = report_blocks.back();
+  RTC_LOG(LS_ERROR) << "DEBUG: Reporting for RR on ssrc " << ssrc_;
   stats.SetMediaSsrc(ssrc_);
   // Calculate fraction lost.
   int64_t exp_since_last = received_seq_max_ - last_report_seq_max_;

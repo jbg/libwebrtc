@@ -662,9 +662,12 @@ CreateInboundRTPStreamStatsFromVideoReceiverInfo(
   inbound_video->min_playout_delay =
       static_cast<double>(video_receiver_info.min_playout_delay_ms) /
       rtc::kNumMillisecsPerSec;
+  RTC_LOG(LS_ERROR) << "DEBUG: Collecting last_packet_received_timestamp";
   if (video_receiver_info.last_packet_received_timestamp_ms.has_value()) {
     inbound_video->last_packet_received_timestamp = static_cast<double>(
         *video_receiver_info.last_packet_received_timestamp_ms);
+    RTC_LOG(LS_ERROR) << "DEBUG: last_packet_received_timestamp value "
+                      << *video_receiver_info.last_packet_received_timestamp_ms;
   }
   if (video_receiver_info.estimated_playout_ntp_timestamp_ms.has_value()) {
     // TODO(bugs.webrtc.org/10529): Fix time origin if needed.
@@ -2076,6 +2079,7 @@ void RTCStatsCollector::ProduceAudioRTPStreamStats_n(
         std::make_pair(outbound_audio->id(), outbound_audio.get());
     if (report->TryAddStats(std::move(outbound_audio))) {
       audio_outbound_rtps.insert(std::move(audio_outbound_pair));
+      RTC_LOG(LS_ERROR) << "DEBUG: Added audio outbound RTP stats";
     } else {
       RTC_LOG(LS_ERROR)
           << "Unable to add audio 'outbound-rtp' to report, ID is not unique.";
@@ -2135,6 +2139,9 @@ void RTCStatsCollector::ProduceVideoRTPStreamStats_n(
     }
   }
   // Outbound
+  RTC_LOG(LS_ERROR)
+      << "DEBUG: Starting to iterate RTCOutboundRTPStats, sender size "
+      << stats.track_media_info_map.video_media_info()->senders.size();
   std::map<std::string, RTCOutboundRTPStreamStats*> video_outbound_rtps;
   for (const cricket::VideoSenderInfo& video_sender_info :
        stats.track_media_info_map.video_media_info()->senders) {
@@ -2161,6 +2168,7 @@ void RTCStatsCollector::ProduceVideoRTPStreamStats_n(
         std::make_pair(outbound_video->id(), outbound_video.get());
     if (report->TryAddStats(std::move(outbound_video))) {
       video_outbound_rtps.insert(std::move(video_outbound_pair));
+      RTC_LOG(LS_ERROR) << "DEBUG: Inserted a video outbound RTP stats";
     } else {
       RTC_LOG(LS_ERROR)
           << "Unable to add video 'outbound-rtp' to report, ID is not unique.";
@@ -2464,9 +2472,21 @@ void RTCStatsCollector::PrepareTransceiverStatsInfosAndCallStats_s_w_n() {
         } else if (media_type == cricket::MEDIA_TYPE_VIDEO) {
           auto video_send_channel = channel->video_media_send_channel();
           auto video_receive_channel = channel->video_media_receive_channel();
+          RTC_LOG(LS_ERROR) << "DEBUG: Constructing VideoMediaInfo";
           video_media_info = cricket::VideoMediaInfo(
               std::move(video_send_stats[video_send_channel]),
               std::move(video_receive_stats[video_receive_channel]));
+          if (video_media_info->receivers.size() > 0) {
+            const auto& receiver = video_media_info->receivers[0];
+            if (receiver.last_packet_received_timestamp_ms.has_value()) {
+              RTC_LOG(LS_ERROR)
+                  << "DEBUG: last_packet_received_timestamp_ms="
+                  << receiver.last_packet_received_timestamp_ms.value();
+            } else {
+              RTC_LOG(LS_ERROR)
+                  << "DEBUG: last_packet_received_timestamp_ms has no value";
+            }
+          }
         }
       }
       std::vector<rtc::scoped_refptr<RtpSenderInternal>> senders;
