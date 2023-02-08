@@ -9,12 +9,17 @@
  */
 
 #import <XCTest/XCTest.h>
+// #import <TargetConditionals.h>
 
 #if defined(WEBRTC_IOS)
 #import "sdk/objc/native/api/audio_device_module.h"
 #endif
 
 #include "api/scoped_refptr.h"
+
+// TODO(peterhanspers): Reenable these tests on simulator.
+// See bugs.webrtc.org/7812
+static constexpr bool kTestDisabled = TARGET_OS_SIMULATOR;
 
 typedef int32_t(^NeedMorePlayDataBlock)(const size_t nSamples,
                                         const size_t nBytesPerSample,
@@ -192,10 +197,12 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 #pragma mark - Tests
 
 - (void)testConstructDestruct {
+  XCTSkipIf(kTestDisabled);
   // Using the test fixture to create and destruct the audio device module.
 }
 
 - (void)testInitTerminate {
+  XCTSkipIf(kTestDisabled);
   // Initialization is part of the test fixture.
   XCTAssertTrue(audioDeviceModule->Initialized());
   XCTAssertEqual(0, audioDeviceModule->Terminate());
@@ -205,6 +212,7 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 // Tests that playout can be initiated, started and stopped. No audio callback
 // is registered in this test.
 - (void)testStartStopPlayout {
+  XCTSkipIf(kTestDisabled);
   [self startPlayout];
   [self stopPlayout];
   [self startPlayout];
@@ -214,6 +222,7 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 // Tests that recording can be initiated, started and stopped. No audio callback
 // is registered in this test.
 - (void)testStartStopRecording {
+  XCTSkipIf(kTestDisabled);
   [self startRecording];
   [self stopRecording];
   [self startRecording];
@@ -224,6 +233,7 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 // StartPlayout() while being uninitialized since doing so will hit a
 // RTC_DCHECK.
 - (void)testStopPlayoutRequiresInitToRestart {
+  XCTSkipIf(kTestDisabled);
   XCTAssertEqual(0, audioDeviceModule->InitPlayout());
   XCTAssertEqual(0, audioDeviceModule->StartPlayout());
   XCTAssertEqual(0, audioDeviceModule->StopPlayout());
@@ -236,6 +246,7 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 // explicitly verify correct audio session calls but instead focuses on
 // ensuring that audio starts for both ADMs.
 - (void)testStartPlayoutOnTwoInstances {
+  XCTSkipIf(kTestDisabled);
   // Create and initialize a second/extra ADM instance. The default ADM is
   // created by the test harness.
   rtc::scoped_refptr<webrtc::AudioDeviceModule> secondAudioDeviceModule =
@@ -319,7 +330,7 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 // Start playout and verify that the native audio layer starts asking for real
 // audio samples to play out using the NeedMorePlayData callback.
 - (void)testStartPlayoutVerifyCallbacks {
-
+  XCTSkipIf(kTestDisabled);
   XCTestExpectation *playoutExpectation = [self expectationWithDescription:@"NeedMorePlayoutData"];
   __block int num_callbacks = 0;
   mock.expectNeedMorePlayData(^int32_t(const size_t nSamples,
@@ -352,6 +363,7 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 // Start recording and verify that the native audio layer starts feeding real
 // audio samples via the RecordedDataIsAvailable callback.
 - (void)testStartRecordingVerifyCallbacks {
+  XCTSkipIf(kTestDisabled);
   XCTestExpectation *recordExpectation =
   [self expectationWithDescription:@"RecordedDataIsAvailable"];
   __block int num_callbacks = 0;
@@ -390,6 +402,7 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 // Start playout and recording (full-duplex audio) and verify that audio is
 // active in both directions.
 - (void)testStartPlayoutAndRecordingVerifyCallbacks {
+  XCTSkipIf(kTestDisabled);
   XCTestExpectation *playoutExpectation = [self expectationWithDescription:@"NeedMorePlayoutData"];
   __block NSUInteger callbackCount = 0;
 
@@ -453,6 +466,7 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 // asks for data to play out. Real audio is played out in this test but it does
 // not contain any explicit verification that the audio quality is perfect.
 - (void)testRunPlayoutWithFileAsSource {
+  XCTSkipIf(kTestDisabled);
   XCTAssertEqual(1u, playoutParameters.channels());
 
   // Using XCTestExpectation to count callbacks is very slow.
@@ -488,6 +502,7 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 }
 
 - (void)testDevices {
+  XCTSkipIf(kTestDisabled);
   // Device enumeration is not supported. Verify fixed values only.
   XCTAssertEqual(1, audioDeviceModule->PlayoutDevices());
   XCTAssertEqual(1, audioDeviceModule->RecordingDevices());
@@ -507,6 +522,7 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 // TODO(henrika): tune the final test parameters after running tests on several
 // different devices.
 - (void)testRunPlayoutAndRecordingInFullDuplex {
+  XCTSkipIf(kTestDisabled);
   XCTAssertEqual(recordParameters.channels(), playoutParameters.channels());
   XCTAssertEqual(recordParameters.sample_rate(), playoutParameters.sample_rate());
 

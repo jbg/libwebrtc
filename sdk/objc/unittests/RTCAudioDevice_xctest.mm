@@ -9,12 +9,17 @@
  */
 
 #import <XCTest/XCTest.h>
+// #import <TargetConditionals.h>
 
 #include "api/task_queue/default_task_queue_factory.h"
 
 #import "sdk/objc/components/audio/RTCAudioSession+Private.h"
 #import "sdk/objc/native/api/audio_device_module.h"
 #import "sdk/objc/native/src/audio/audio_device_ios.h"
+
+// TODO(peterhanspers): Reenable these tests on simulator.
+// See bugs.webrtc.org/7812
+static constexpr bool kTestDisabled = TARGET_OS_SIMULATOR;
 
 @interface RTCAudioDeviceTests : XCTestCase {
   rtc::scoped_refptr<webrtc::AudioDeviceModule> _audioDeviceModule;
@@ -78,6 +83,7 @@
 // AudioDeviceIOS's is_interrupted_ flag to RTC_OBJC_TYPE(RTCAudioSession)'s isInterrupted
 // flag in AudioDeviceIOS.InitPlayOrRecord.
 - (void)testInterruptedAudioSession {
+  XCTSkipIf(kTestDisabled);
   XCTAssertTrue(self.audioSession.isActive);
   XCTAssertTrue([self.audioSession.category isEqual:AVAudioSessionCategoryPlayAndRecord] ||
                 [self.audioSession.category isEqual:AVAudioSessionCategoryPlayback]);
