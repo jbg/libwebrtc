@@ -24,6 +24,7 @@
 #include "call/audio_state.h"
 #include "media/base/codec.h"
 #include "media/base/media_channel.h"
+#include "media/base/media_channel_impl.h"
 #include "media/base/media_config.h"
 #include "media/base/video_common.h"
 #include "rtc_base/system/file_wrapper.h"
@@ -100,6 +101,7 @@ class VoiceEngineInterface : public RtpHeaderExtensionQueryInterface {
   // MediaChannel creation
   // Creates a voice media channel. Returns NULL on failure.
   virtual VoiceMediaChannel* CreateMediaChannel(
+      MediaChannel::Role role,
       webrtc::Call* call,
       const MediaConfig& config,
       const AudioOptions& options,
@@ -129,15 +131,30 @@ class VideoEngineInterface : public RtpHeaderExtensionQueryInterface {
   VideoEngineInterface(const VideoEngineInterface&) = delete;
   VideoEngineInterface& operator=(const VideoEngineInterface&) = delete;
 
-  // Creates a video media channel, paired with the specified voice channel.
+  // Creates a video media channel.
   // Returns NULL on failure.
   virtual VideoMediaChannel* CreateMediaChannel(
+      MediaChannel::Role role,
       webrtc::Call* call,
       const MediaConfig& config,
       const VideoOptions& options,
       const webrtc::CryptoOptions& crypto_options,
       webrtc::VideoBitrateAllocatorFactory*
           video_bitrate_allocator_factory) = 0;
+
+  // Creates a video media channel.
+  // Returns NULL on failure.
+  // TODO(bugs.webrtc.org/13931): Stop downstream usage of this function.
+  [[deprecated("Please specify the role")]] virtual VideoMediaChannel*
+  CreateMediaChannel(
+      webrtc::Call* call,
+      const MediaConfig& config,
+      const VideoOptions& options,
+      const webrtc::CryptoOptions& crypto_options,
+      webrtc::VideoBitrateAllocatorFactory* video_bitrate_allocator_factory) {
+    return CreateMediaChannel(MediaChannel::Role::kBoth, call, config, options,
+                              crypto_options, video_bitrate_allocator_factory);
+  }
 
   // Retrieve list of supported codecs.
   virtual std::vector<VideoCodec> send_codecs() const = 0;
