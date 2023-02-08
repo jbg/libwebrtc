@@ -271,7 +271,8 @@ void Port::AddAddress(const rtc::SocketAddress& address,
   Candidate c(component_, protocol, address, 0U, username_fragment(), password_,
               type, generation_, foundation, network_->id(), network_cost_);
   c.set_priority(
-      c.GetPriority(type_preference, network_->preference(), relay_preference));
+      c.GetPriority(type_preference, network_->preference(), relay_preference,
+                    field_trials_->IsEnabled("WebRTC-AdjustIcePriority")));
   c.set_relay_protocol(relay_protocol);
   c.set_tcptype(tcptype);
   c.set_network_name(network_->name());
