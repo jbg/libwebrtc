@@ -16,6 +16,24 @@
       "message": "Because the fallback does not happen until after the codec has been fully configured, i.e. after SRD(answer), I think the only way to feature detect \"simulcast VP9 is supported\" is to actually configure it (e.g. with a dummy peer connection) or to do something blunt like check milestone of browser. Let me know if you have better ideas.",
       "revId": "8dad63c1bd9b980be2719057f7b7cfbe94e0598e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efcfddde_a7f4183c",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-08T15:16:42Z",
+      "side": 1,
+      "message": "The fact that you get 1 RTP stat when you asked for 3 is a clear indication, but does that require connecting the PC?",
+      "parentUuid": "11efe020_c84ef6a9",
+      "revId": "8dad63c1bd9b980be2719057f7b7cfbe94e0598e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
