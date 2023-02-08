@@ -643,6 +643,8 @@ void RTCPReceiver::HandleReportBlock(const ReportBlock& report_block,
   RTCPReportBlock rtcp_report_block;
   rtcp_report_block.sender_ssrc = remote_ssrc;
   rtcp_report_block.source_ssrc = report_block.source_ssrc();
+  RTC_LOG(LS_ERROR) << "DEBUG: ReceiverReport from " << remote_ssrc
+                    << " reporting on " << rtcp_report_block.source_ssrc;
   rtcp_report_block.fraction_lost = report_block.fraction_lost();
   rtcp_report_block.packets_lost = report_block.cumulative_lost_signed();
   if (report_block.extended_high_seq_num() >
