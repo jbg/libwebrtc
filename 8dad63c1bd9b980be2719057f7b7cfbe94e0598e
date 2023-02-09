@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c55ca89_59645942",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2023-02-09T08:42:12Z",
+      "side": 1,
+      "message": "An idea - you can fork this test into one for the explicit legacy case (3 active layers \u003d 1 KSVC stream) and the new case (3 active layers with scalability modes \u003d\u003e 3 streams). The second case can be explicitly disabled for now with a comment to \"enable this when the above bug is fixed\".",
+      "range": {
+        "startLine": 1103,
+        "startChar": 7,
+        "endLine": 1103,
+        "endChar": 42
+      },
+      "revId": "8dad63c1bd9b980be2719057f7b7cfbe94e0598e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea810212_ec25715c",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 18444
+      },
+      "writtenOn": "2023-02-09T08:42:12Z",
+      "side": 1,
+      "message": "nit: Add a comment that this means active? Hard when reading to know what true means.",
+      "range": {
+        "startLine": 1108,
+        "startChar": 69,
+        "endLine": 1108,
+        "endChar": 73
+      },
+      "revId": "8dad63c1bd9b980be2719057f7b7cfbe94e0598e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11efe020_c84ef6a9",
         "filename": "pc/peer_connection_simulcast_unittest.cc",
         "patchSetId": 3
