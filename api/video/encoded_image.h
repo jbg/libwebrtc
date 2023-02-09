@@ -89,6 +89,14 @@ class RTC_EXPORT EncodedImage {
 
   int64_t NtpTimeMs() const { return ntp_time_ms_; }
 
+  const absl::optional<int64_t>& CaptureTimeIdentifierMs() const {
+    return capture_time_identifier_ms_;
+  }
+  void SetCaptureTimeIdentifierMs(
+      const absl::optional<int64_t>& capture_time_identifier_ms) {
+    capture_time_identifier_ms_ = capture_time_identifier_ms;
+  }
+
   absl::optional<int> SpatialIndex() const { return spatial_index_; }
   void SetSpatialIndex(absl::optional<int> spatial_index) {
     RTC_DCHECK_GE(spatial_index.value_or(0), 0);
@@ -204,6 +212,7 @@ class RTC_EXPORT EncodedImage {
   rtc::scoped_refptr<EncodedImageBufferInterface> encoded_data_;
   size_t size_ = 0;  // Size of encoded frame data.
   uint32_t timestamp_rtp_ = 0;
+  absl::optional<int64_t> capture_time_identifier_ms_;
   absl::optional<int> spatial_index_;
   absl::optional<int> temporal_index_;
   std::map<int, size_t> spatial_layer_frame_size_bytes_;
