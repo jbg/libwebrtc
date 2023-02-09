@@ -1174,6 +1174,8 @@ int LibvpxVp8Encoder::GetEncodedPartitions(const VideoFrame& input_image,
       }
     }
     encoded_images_[encoder_idx].SetTimestamp(input_image.timestamp());
+    encoded_images_[encoder_idx].SetCaptureTimeIdentifierMs(
+        input_image.capture_time_identifier_ms());
     encoded_images_[encoder_idx].SetColorSpace(input_image.color_space());
     encoded_images_[encoder_idx].SetRetransmissionAllowed(
         retransmission_allowed);
