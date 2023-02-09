@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "062914b4_9285e6d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-09T07:42:58Z",
+      "side": 1,
+      "message": "The code looks sensible, but the comment is unreadable.... can we do better?\n\nAlso, I\u0027d ask jonaso@ if local priority is supposed to be 1 \u003d highest or 1 \u003d lowest.",
+      "revId": "7c117abb6562ae8a811dc964b0bd29c1bdf2a152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b2be09_19162b9d",
+        "filename": "api/candidate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-09T07:42:58Z",
+      "side": 1,
+      "message": "I\u0027ve read this sentence 3 times and still not sure what it says.\n\nLooking at the code, perhaps it is intended to mean the same as\n\n\"If local_preference is true, increase the priority of candidates of host / prflx / srflx candidates so that they are always of higher priority than relay candidates on the same interface\".\n\nIf so, can we make it say that?",
+      "revId": "7c117abb6562ae8a811dc964b0bd29c1bdf2a152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
