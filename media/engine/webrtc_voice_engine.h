@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 
+#include "api/audio_codecs/audio_codec_pair_id.h"
 #include "api/audio_codecs/audio_encoder_factory.h"
 #include "api/field_trials_view.h"
 #include "api/scoped_refptr.h"
@@ -73,7 +74,8 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
       webrtc::Call* call,
       const MediaConfig& config,
       const AudioOptions& options,
-      const webrtc::CryptoOptions& crypto_options) override;
+      const webrtc::CryptoOptions& crypto_options,
+      webrtc::AudioCodecPairId codec_pair_id) override;
 
   const std::vector<AudioCodec>& send_codecs() const override;
   const std::vector<AudioCodec>& recv_codecs() const override;
@@ -145,7 +147,8 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
                           const MediaConfig& config,
                           const AudioOptions& options,
                           const webrtc::CryptoOptions& crypto_options,
-                          webrtc::Call* call);
+                          webrtc::Call* call,
+                          webrtc::AudioCodecPairId codec_pair_id);
 
   WebRtcVoiceMediaChannel() = delete;
   WebRtcVoiceMediaChannel(const WebRtcVoiceMediaChannel&) = delete;
@@ -325,8 +328,7 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
       send_codec_spec_;
 
   // TODO(kwiberg): Per-SSRC codec pair IDs?
-  const webrtc::AudioCodecPairId codec_pair_id_ =
-      webrtc::AudioCodecPairId::Create();
+  const webrtc::AudioCodecPairId codec_pair_id_;
 
   // Per peer connection crypto options that last for the lifetime of the peer
   // connection.

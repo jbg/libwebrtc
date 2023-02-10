@@ -537,7 +537,8 @@ class FakeVoiceEngine : public VoiceEngineInterface {
       webrtc::Call* call,
       const MediaConfig& config,
       const AudioOptions& options,
-      const webrtc::CryptoOptions& crypto_options) override;
+      const webrtc::CryptoOptions& crypto_options,
+      webrtc::AudioCodecPairId codec_pair_id) override;
   FakeVoiceMediaChannel* GetChannel(size_t index);
   void UnregisterChannel(VoiceMediaChannel* channel);
 

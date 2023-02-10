@@ -413,10 +413,11 @@ VoiceMediaChannel* WebRtcVoiceEngine::CreateMediaChannel(
     webrtc::Call* call,
     const MediaConfig& config,
     const AudioOptions& options,
-    const webrtc::CryptoOptions& crypto_options) {
+    const webrtc::CryptoOptions& crypto_options,
+    webrtc::AudioCodecPairId codec_pair_id) {
   RTC_DCHECK_RUN_ON(call->worker_thread());
   return new WebRtcVoiceMediaChannel(role, this, config, options,
-                                     crypto_options, call);
+                                     crypto_options, call, codec_pair_id);
 }
 
 void WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
@@ -1255,12 +1256,14 @@ WebRtcVoiceMediaChannel::WebRtcVoiceMediaChannel(
     const MediaConfig& config,
     const AudioOptions& options,
     const webrtc::CryptoOptions& crypto_options,
-    webrtc::Call* call)
+    webrtc::Call* call,
+    webrtc::AudioCodecPairId codec_pair_id)
     : VoiceMediaChannel(role, call->network_thread(), config.enable_dscp),
       worker_thread_(call->worker_thread()),
       engine_(engine),
       call_(call),
       audio_config_(config.audio),
+      codec_pair_id_(codec_pair_id),
       crypto_options_(crypto_options) {
   network_thread_checker_.Detach();
   RTC_LOG(LS_VERBOSE) << "WebRtcVoiceMediaChannel::WebRtcVoiceMediaChannel";
