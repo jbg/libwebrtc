@@ -140,10 +140,6 @@ class ADMWrapper : public AudioDeviceModule, public AudioTransport {
     return 0;
   }
 
-  // AudioDeviceModule pass through method overrides.
-  int32_t ActiveAudioLayer(AudioLayer* audio_layer) const override {
-    return impl_->ActiveAudioLayer(audio_layer);
-  }
   int32_t Init() override {
     int res = impl_->Init();
     if (res != 0) {
@@ -155,39 +151,9 @@ class ADMWrapper : public AudioDeviceModule, public AudioTransport {
   }
   int32_t Terminate() override { return impl_->Terminate(); }
   bool Initialized() const override { return impl_->Initialized(); }
-  int16_t PlayoutDevices() override { return impl_->PlayoutDevices(); }
-  int16_t RecordingDevices() override { return impl_->RecordingDevices(); }
-  int32_t PlayoutDeviceName(uint16_t index,
-                            char name[kAdmMaxDeviceNameSize],
-                            char guid[kAdmMaxGuidSize]) override {
-    return impl_->PlayoutDeviceName(index, name, guid);
-  }
-  int32_t RecordingDeviceName(uint16_t index,
-                              char name[kAdmMaxDeviceNameSize],
-                              char guid[kAdmMaxGuidSize]) override {
-    return impl_->RecordingDeviceName(index, name, guid);
-  }
-  int32_t SetPlayoutDevice(uint16_t index) override {
-    return impl_->SetPlayoutDevice(index);
-  }
-  int32_t SetPlayoutDevice(WindowsDeviceType device) override {
-    return impl_->SetPlayoutDevice(device);
-  }
-  int32_t SetRecordingDevice(uint16_t index) override {
-    return impl_->SetRecordingDevice(index);
-  }
-  int32_t SetRecordingDevice(WindowsDeviceType device) override {
-    return impl_->SetRecordingDevice(device);
-  }
-  int32_t PlayoutIsAvailable(bool* available) override {
-    return impl_->PlayoutIsAvailable(available);
-  }
   int32_t InitPlayout() override { return impl_->InitPlayout(); }
   bool PlayoutIsInitialized() const override {
     return impl_->PlayoutIsInitialized();
-  }
-  int32_t RecordingIsAvailable(bool* available) override {
-    return impl_->RecordingIsAvailable(available);
   }
   int32_t InitRecording() override { return impl_->InitRecording(); }
   bool RecordingIsInitialized() const override {
@@ -206,54 +172,6 @@ class ADMWrapper : public AudioDeviceModule, public AudioTransport {
   int32_t InitMicrophone() override { return impl_->InitMicrophone(); }
   bool MicrophoneIsInitialized() const override {
     return impl_->MicrophoneIsInitialized();
-  }
-  int32_t SpeakerVolumeIsAvailable(bool* available) override {
-    return impl_->SpeakerVolumeIsAvailable(available);
-  }
-  int32_t SetSpeakerVolume(uint32_t volume) override {
-    return impl_->SetSpeakerVolume(volume);
-  }
-  int32_t SpeakerVolume(uint32_t* volume) const override {
-    return impl_->SpeakerVolume(volume);
-  }
-  int32_t MaxSpeakerVolume(uint32_t* max_volume) const override {
-    return impl_->MaxSpeakerVolume(max_volume);
-  }
-  int32_t MinSpeakerVolume(uint32_t* min_volume) const override {
-    return impl_->MinSpeakerVolume(min_volume);
-  }
-  int32_t MicrophoneVolumeIsAvailable(bool* available) override {
-    return impl_->MicrophoneVolumeIsAvailable(available);
-  }
-  int32_t SetMicrophoneVolume(uint32_t volume) override {
-    return impl_->SetMicrophoneVolume(volume);
-  }
-  int32_t MicrophoneVolume(uint32_t* volume) const override {
-    return impl_->MicrophoneVolume(volume);
-  }
-  int32_t MaxMicrophoneVolume(uint32_t* max_volume) const override {
-    return impl_->MaxMicrophoneVolume(max_volume);
-  }
-  int32_t MinMicrophoneVolume(uint32_t* min_volume) const override {
-    return impl_->MinMicrophoneVolume(min_volume);
-  }
-  int32_t SpeakerMuteIsAvailable(bool* available) override {
-    return impl_->SpeakerMuteIsAvailable(available);
-  }
-  int32_t SetSpeakerMute(bool enable) override {
-    return impl_->SetSpeakerMute(enable);
-  }
-  int32_t SpeakerMute(bool* enabled) const override {
-    return impl_->SpeakerMute(enabled);
-  }
-  int32_t MicrophoneMuteIsAvailable(bool* available) override {
-    return impl_->MicrophoneMuteIsAvailable(available);
-  }
-  int32_t SetMicrophoneMute(bool enable) override {
-    return impl_->SetMicrophoneMute(enable);
-  }
-  int32_t MicrophoneMute(bool* enabled) const override {
-    return impl_->MicrophoneMute(enabled);
   }
   int32_t StereoPlayoutIsAvailable(bool* available) const override {
     return impl_->StereoPlayoutIsAvailable(available);
@@ -297,15 +215,6 @@ class ADMWrapper : public AudioDeviceModule, public AudioTransport {
   int32_t GetPlayoutUnderrunCount() const override {
     return impl_->GetPlayoutUnderrunCount();
   }
-// Only supported on iOS.
-#if defined(WEBRTC_IOS)
-  int GetPlayoutAudioParameters(AudioParameters* params) const override {
-    return impl_->GetPlayoutAudioParameters(params);
-  }
-  int GetRecordAudioParameters(AudioParameters* params) const override {
-    return impl_->GetRecordAudioParameters(params);
-  }
-#endif  // WEBRTC_IOS
 
  protected:
   rtc::scoped_refptr<AudioDeviceModule> impl_;

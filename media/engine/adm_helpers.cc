@@ -17,22 +17,6 @@
 namespace webrtc {
 namespace adm_helpers {
 
-// On Windows Vista and newer, Microsoft introduced the concept of "Default
-// Communications Device". This means that there are two types of default
-// devices (old Wave Audio style default and Default Communications Device).
-//
-// On Windows systems which only support Wave Audio style default, uses either
-// -1 or 0 to select the default device.
-//
-// Using a #define for AUDIO_DEVICE since we will call *different* versions of
-// the ADM functions, depending on the ID type.
-#if defined(WEBRTC_WIN)
-#define AUDIO_DEVICE_ID \
-  (AudioDeviceModule::WindowsDeviceType::kDefaultCommunicationDevice)
-#else
-#define AUDIO_DEVICE_ID (0u)
-#endif  // defined(WEBRTC_WIN)
-
 void Init(AudioDeviceModule* adm) {
   RTC_DCHECK(adm);
 
@@ -40,10 +24,6 @@ void Init(AudioDeviceModule* adm) {
 
   // Playout device.
   {
-    if (adm->SetPlayoutDevice(AUDIO_DEVICE_ID) != 0) {
-      RTC_LOG(LS_ERROR) << "Unable to set playout device.";
-      return;
-    }
     if (adm->InitSpeaker() != 0) {
       RTC_LOG(LS_ERROR) << "Unable to access speaker.";
     }
@@ -60,10 +40,6 @@ void Init(AudioDeviceModule* adm) {
 
   // Recording device.
   {
-    if (adm->SetRecordingDevice(AUDIO_DEVICE_ID) != 0) {
-      RTC_LOG(LS_ERROR) << "Unable to set recording device.";
-      return;
-    }
     if (adm->InitMicrophone() != 0) {
       RTC_LOG(LS_ERROR) << "Unable to access microphone.";
     }

@@ -72,28 +72,9 @@ class AudioDeviceMac : public AudioDeviceGeneric {
   virtual int32_t Terminate() RTC_LOCKS_EXCLUDED(mutex_);
   virtual bool Initialized() const;
 
-  // Device enumeration
-  virtual int16_t PlayoutDevices();
-  virtual int16_t RecordingDevices();
-  virtual int32_t PlayoutDeviceName(uint16_t index,
-                                    char name[kAdmMaxDeviceNameSize],
-                                    char guid[kAdmMaxGuidSize]);
-  virtual int32_t RecordingDeviceName(uint16_t index,
-                                      char name[kAdmMaxDeviceNameSize],
-                                      char guid[kAdmMaxGuidSize]);
-
-  // Device selection
-  virtual int32_t SetPlayoutDevice(uint16_t index) RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetPlayoutDevice(AudioDeviceModule::WindowsDeviceType device);
-  virtual int32_t SetRecordingDevice(uint16_t index);
-  virtual int32_t SetRecordingDevice(
-      AudioDeviceModule::WindowsDeviceType device);
-
   // Audio transport initialization
-  virtual int32_t PlayoutIsAvailable(bool& available);
   virtual int32_t InitPlayout() RTC_LOCKS_EXCLUDED(mutex_);
   virtual bool PlayoutIsInitialized() const;
-  virtual int32_t RecordingIsAvailable(bool& available);
   virtual int32_t InitRecording() RTC_LOCKS_EXCLUDED(mutex_);
   virtual bool RecordingIsInitialized() const;
 
@@ -110,34 +91,6 @@ class AudioDeviceMac : public AudioDeviceGeneric {
   virtual bool SpeakerIsInitialized() const;
   virtual int32_t InitMicrophone() RTC_LOCKS_EXCLUDED(mutex_);
   virtual bool MicrophoneIsInitialized() const;
-
-  // Speaker volume controls
-  virtual int32_t SpeakerVolumeIsAvailable(bool& available)
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetSpeakerVolume(uint32_t volume);
-  virtual int32_t SpeakerVolume(uint32_t& volume) const;
-  virtual int32_t MaxSpeakerVolume(uint32_t& maxVolume) const;
-  virtual int32_t MinSpeakerVolume(uint32_t& minVolume) const;
-
-  // Microphone volume controls
-  virtual int32_t MicrophoneVolumeIsAvailable(bool& available)
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetMicrophoneVolume(uint32_t volume);
-  virtual int32_t MicrophoneVolume(uint32_t& volume) const;
-  virtual int32_t MaxMicrophoneVolume(uint32_t& maxVolume) const;
-  virtual int32_t MinMicrophoneVolume(uint32_t& minVolume) const;
-
-  // Microphone mute control
-  virtual int32_t MicrophoneMuteIsAvailable(bool& available)
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetMicrophoneMute(bool enable);
-  virtual int32_t MicrophoneMute(bool& enabled) const;
-
-  // Speaker mute control
-  virtual int32_t SpeakerMuteIsAvailable(bool& available)
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetSpeakerMute(bool enable);
-  virtual int32_t SpeakerMute(bool& enabled) const;
 
   // Stereo support
   virtual int32_t StereoPlayoutIsAvailable(bool& available)
@@ -177,10 +130,6 @@ class AudioDeviceMac : public AudioDeviceGeneric {
   int32_t GetNumberDevices(AudioObjectPropertyScope scope,
                            AudioDeviceID scopedDeviceIds[],
                            uint32_t deviceListLength);
-
-  int32_t GetDeviceName(AudioObjectPropertyScope scope,
-                        uint16_t index,
-                        rtc::ArrayView<char> name);
 
   int32_t InitDevice(uint16_t userDeviceIndex,
                      AudioDeviceID& deviceId,

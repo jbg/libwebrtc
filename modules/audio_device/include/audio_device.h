@@ -63,9 +63,6 @@ class AudioDeviceModule : public rtc::RefCountInterface {
       AudioLayer audio_layer,
       TaskQueueFactory* task_queue_factory);
 
-  // Retrieve the currently utilized audio layer
-  virtual int32_t ActiveAudioLayer(AudioLayer* audioLayer) const = 0;
-
   // Full-duplex transportation of PCM audio
   virtual int32_t RegisterAudioCallback(AudioTransport* audioCallback) = 0;
 
@@ -74,27 +71,9 @@ class AudioDeviceModule : public rtc::RefCountInterface {
   virtual int32_t Terminate() = 0;
   virtual bool Initialized() const = 0;
 
-  // Device enumeration
-  virtual int16_t PlayoutDevices() = 0;
-  virtual int16_t RecordingDevices() = 0;
-  virtual int32_t PlayoutDeviceName(uint16_t index,
-                                    char name[kAdmMaxDeviceNameSize],
-                                    char guid[kAdmMaxGuidSize]) = 0;
-  virtual int32_t RecordingDeviceName(uint16_t index,
-                                      char name[kAdmMaxDeviceNameSize],
-                                      char guid[kAdmMaxGuidSize]) = 0;
-
-  // Device selection
-  virtual int32_t SetPlayoutDevice(uint16_t index) = 0;
-  virtual int32_t SetPlayoutDevice(WindowsDeviceType device) = 0;
-  virtual int32_t SetRecordingDevice(uint16_t index) = 0;
-  virtual int32_t SetRecordingDevice(WindowsDeviceType device) = 0;
-
   // Audio transport initialization
-  virtual int32_t PlayoutIsAvailable(bool* available) = 0;
   virtual int32_t InitPlayout() = 0;
   virtual bool PlayoutIsInitialized() const = 0;
-  virtual int32_t RecordingIsAvailable(bool* available) = 0;
   virtual int32_t InitRecording() = 0;
   virtual bool RecordingIsInitialized() const = 0;
 
@@ -111,30 +90,6 @@ class AudioDeviceModule : public rtc::RefCountInterface {
   virtual bool SpeakerIsInitialized() const = 0;
   virtual int32_t InitMicrophone() = 0;
   virtual bool MicrophoneIsInitialized() const = 0;
-
-  // Speaker volume controls
-  virtual int32_t SpeakerVolumeIsAvailable(bool* available) = 0;
-  virtual int32_t SetSpeakerVolume(uint32_t volume) = 0;
-  virtual int32_t SpeakerVolume(uint32_t* volume) const = 0;
-  virtual int32_t MaxSpeakerVolume(uint32_t* maxVolume) const = 0;
-  virtual int32_t MinSpeakerVolume(uint32_t* minVolume) const = 0;
-
-  // Microphone volume controls
-  virtual int32_t MicrophoneVolumeIsAvailable(bool* available) = 0;
-  virtual int32_t SetMicrophoneVolume(uint32_t volume) = 0;
-  virtual int32_t MicrophoneVolume(uint32_t* volume) const = 0;
-  virtual int32_t MaxMicrophoneVolume(uint32_t* maxVolume) const = 0;
-  virtual int32_t MinMicrophoneVolume(uint32_t* minVolume) const = 0;
-
-  // Speaker mute control
-  virtual int32_t SpeakerMuteIsAvailable(bool* available) = 0;
-  virtual int32_t SetSpeakerMute(bool enable) = 0;
-  virtual int32_t SpeakerMute(bool* enabled) const = 0;
-
-  // Microphone mute control
-  virtual int32_t MicrophoneMuteIsAvailable(bool* available) = 0;
-  virtual int32_t SetMicrophoneMute(bool enable) = 0;
-  virtual int32_t MicrophoneMute(bool* enabled) const = 0;
 
   // Stereo support
   virtual int32_t StereoPlayoutIsAvailable(bool* available) const = 0;
@@ -165,12 +120,6 @@ class AudioDeviceModule : public rtc::RefCountInterface {
   // not be present in the stats.
   virtual absl::optional<Stats> GetStats() const { return absl::nullopt; }
 
-// Only supported on iOS.
-#if defined(WEBRTC_IOS)
-  virtual int GetPlayoutAudioParameters(AudioParameters* params) const = 0;
-  virtual int GetRecordAudioParameters(AudioParameters* params) const = 0;
-#endif  // WEBRTC_IOS
-
  protected:
   ~AudioDeviceModule() override {}
 };
@@ -179,6 +128,28 @@ class AudioDeviceModule : public rtc::RefCountInterface {
 // Intended for usage in tests only and requires a unique factory method.
 class AudioDeviceModuleForTest : public AudioDeviceModule {
  public:
+  // Retrieve the currently utilized audio layer
+  virtual int32_t ActiveAudioLayer(AudioLayer* audioLayer) const = 0;
+
+#ifdef WEBRTC_WIN
+  // Device enumeration
+  virtual int16_t PlayoutDevices() = 0;
+  virtual int16_t RecordingDevices() = 0;
+  virtual int32_t PlayoutDeviceName(uint16_t index,
+                                    char name[kAdmMaxDeviceNameSize],
+                                    char guid[kAdmMaxGuidSize]) = 0;
+  virtual int32_t RecordingDeviceName(uint16_t index,
+                                      char name[kAdmMaxDeviceNameSize],
+                                      char guid[kAdmMaxGuidSize]) = 0;
+
+  // Device selection
+  virtual int32_t SetPlayoutDevice(
+      AudioDeviceModule::WindowsDeviceType device) = 0;
+  virtual int32_t SetRecordingDevice(
+      AudioDeviceModule::WindowsDeviceType device) = 0;
+
+#endif
+
   // Triggers internal restart sequences of audio streaming. Can be used by
   // tests to emulate events corresponding to e.g. removal of an active audio
   // device or other actions which causes the stream to be disconnected.

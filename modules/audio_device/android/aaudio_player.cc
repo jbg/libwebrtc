@@ -124,11 +124,6 @@ void AAudioPlayer::AttachAudioBuffer(AudioDeviceBuffer* audioBuffer) {
   fine_audio_buffer_ = std::make_unique<FineAudioBuffer>(audio_device_buffer_);
 }
 
-int AAudioPlayer::SpeakerVolumeIsAvailable(bool& available) {
-  available = false;
-  return 0;
-}
-
 void AAudioPlayer::OnErrorCallback(aaudio_result_t error) {
   RTC_LOG(LS_ERROR) << "OnErrorCallback: " << AAudio_convertResultToText(error);
   // TODO(henrika): investigate if we can use a thread checker here. Initial

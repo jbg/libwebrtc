@@ -53,8 +53,6 @@ class FakeAudioCaptureModule : public webrtc::AudioDeviceModule {
   // pulled frame was generated/pushed from a FakeAudioCaptureModule.
   int frames_received() const RTC_LOCKS_EXCLUDED(mutex_);
 
-  int32_t ActiveAudioLayer(AudioLayer* audio_layer) const override;
-
   // Note: Calling this method from a callback may result in deadlock.
   int32_t RegisterAudioCallback(webrtc::AudioTransport* audio_callback) override
       RTC_LOCKS_EXCLUDED(mutex_);
@@ -63,24 +61,8 @@ class FakeAudioCaptureModule : public webrtc::AudioDeviceModule {
   int32_t Terminate() override;
   bool Initialized() const override;
 
-  int16_t PlayoutDevices() override;
-  int16_t RecordingDevices() override;
-  int32_t PlayoutDeviceName(uint16_t index,
-                            char name[webrtc::kAdmMaxDeviceNameSize],
-                            char guid[webrtc::kAdmMaxGuidSize]) override;
-  int32_t RecordingDeviceName(uint16_t index,
-                              char name[webrtc::kAdmMaxDeviceNameSize],
-                              char guid[webrtc::kAdmMaxGuidSize]) override;
-
-  int32_t SetPlayoutDevice(uint16_t index) override;
-  int32_t SetPlayoutDevice(WindowsDeviceType device) override;
-  int32_t SetRecordingDevice(uint16_t index) override;
-  int32_t SetRecordingDevice(WindowsDeviceType device) override;
-
-  int32_t PlayoutIsAvailable(bool* available) override;
   int32_t InitPlayout() override;
   bool PlayoutIsInitialized() const override;
-  int32_t RecordingIsAvailable(bool* available) override;
   int32_t InitRecording() override;
   bool RecordingIsInitialized() const override;
 
@@ -95,29 +77,6 @@ class FakeAudioCaptureModule : public webrtc::AudioDeviceModule {
   bool SpeakerIsInitialized() const override;
   int32_t InitMicrophone() override;
   bool MicrophoneIsInitialized() const override;
-
-  int32_t SpeakerVolumeIsAvailable(bool* available) override;
-  int32_t SetSpeakerVolume(uint32_t volume) override;
-  int32_t SpeakerVolume(uint32_t* volume) const override;
-  int32_t MaxSpeakerVolume(uint32_t* max_volume) const override;
-  int32_t MinSpeakerVolume(uint32_t* min_volume) const override;
-
-  int32_t MicrophoneVolumeIsAvailable(bool* available) override;
-  int32_t SetMicrophoneVolume(uint32_t volume)
-      RTC_LOCKS_EXCLUDED(mutex_) override;
-  int32_t MicrophoneVolume(uint32_t* volume) const
-      RTC_LOCKS_EXCLUDED(mutex_) override;
-  int32_t MaxMicrophoneVolume(uint32_t* max_volume) const override;
-
-  int32_t MinMicrophoneVolume(uint32_t* min_volume) const override;
-
-  int32_t SpeakerMuteIsAvailable(bool* available) override;
-  int32_t SetSpeakerMute(bool enable) override;
-  int32_t SpeakerMute(bool* enabled) const override;
-
-  int32_t MicrophoneMuteIsAvailable(bool* available) override;
-  int32_t SetMicrophoneMute(bool enable) override;
-  int32_t MicrophoneMute(bool* enabled) const override;
 
   int32_t StereoPlayoutIsAvailable(bool* available) const override;
   int32_t SetStereoPlayout(bool enable) override;
@@ -140,15 +99,6 @@ class FakeAudioCaptureModule : public webrtc::AudioDeviceModule {
   absl::optional<webrtc::AudioDeviceModule::Stats> GetStats() const override {
     return webrtc::AudioDeviceModule::Stats();
   }
-#if defined(WEBRTC_IOS)
-  int GetPlayoutAudioParameters(
-      webrtc::AudioParameters* params) const override {
-    return -1;
-  }
-  int GetRecordAudioParameters(webrtc::AudioParameters* params) const override {
-    return -1;
-  }
-#endif  // WEBRTC_IOS
 
   // End of functions inherited from webrtc::AudioDeviceModule.
 

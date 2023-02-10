@@ -56,16 +56,6 @@ AudioDeviceModuleIOS::AudioDeviceModuleIOS(bool bypass_voice_processing)
     RTC_DLOG(LS_INFO) << __FUNCTION__;
   }
 
-  int32_t AudioDeviceModuleIOS::ActiveAudioLayer(AudioLayer* audioLayer) const {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    AudioLayer activeAudio;
-    if (audio_device_->ActiveAudioLayer(activeAudio) == -1) {
-      return -1;
-    }
-    *audioLayer = activeAudio;
-    return 0;
-  }
-
   int32_t AudioDeviceModuleIOS::Init() {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     if (initialized_)
@@ -117,36 +107,6 @@ AudioDeviceModuleIOS::AudioDeviceModuleIOS(bool bypass_voice_processing)
     return audio_device_->InitMicrophone();
   }
 
-  int32_t AudioDeviceModuleIOS::SpeakerVolumeIsAvailable(bool* available) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool isAvailable = false;
-    if (audio_device_->SpeakerVolumeIsAvailable(isAvailable) == -1) {
-      return -1;
-    }
-    *available = isAvailable;
-    RTC_DLOG(LS_INFO) << "output: " << isAvailable;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::SetSpeakerVolume(uint32_t volume) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << volume << ")";
-    CHECKinitialized_();
-    return audio_device_->SetSpeakerVolume(volume);
-  }
-
-  int32_t AudioDeviceModuleIOS::SpeakerVolume(uint32_t* volume) const {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    uint32_t level = 0;
-    if (audio_device_->SpeakerVolume(level) == -1) {
-      return -1;
-    }
-    *volume = level;
-    RTC_DLOG(LS_INFO) << "output: " << *volume;
-    return 0;
-  }
-
   bool AudioDeviceModuleIOS::SpeakerIsInitialized() const {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     CHECKinitialized__BOOL();
@@ -161,116 +121,6 @@ AudioDeviceModuleIOS::AudioDeviceModuleIOS(bool bypass_voice_processing)
     bool isInitialized = audio_device_->MicrophoneIsInitialized();
     RTC_DLOG(LS_INFO) << "output: " << isInitialized;
     return isInitialized;
-  }
-
-  int32_t AudioDeviceModuleIOS::MaxSpeakerVolume(uint32_t* maxVolume) const {
-    CHECKinitialized_();
-    uint32_t maxVol = 0;
-    if (audio_device_->MaxSpeakerVolume(maxVol) == -1) {
-      return -1;
-    }
-    *maxVolume = maxVol;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::MinSpeakerVolume(uint32_t* minVolume) const {
-    CHECKinitialized_();
-    uint32_t minVol = 0;
-    if (audio_device_->MinSpeakerVolume(minVol) == -1) {
-      return -1;
-    }
-    *minVolume = minVol;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::SpeakerMuteIsAvailable(bool* available) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool isAvailable = false;
-    if (audio_device_->SpeakerMuteIsAvailable(isAvailable) == -1) {
-      return -1;
-    }
-    *available = isAvailable;
-    RTC_DLOG(LS_INFO) << "output: " << isAvailable;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::SetSpeakerMute(bool enable) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << enable << ")";
-    CHECKinitialized_();
-    return audio_device_->SetSpeakerMute(enable);
-  }
-
-  int32_t AudioDeviceModuleIOS::SpeakerMute(bool* enabled) const {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool muted = false;
-    if (audio_device_->SpeakerMute(muted) == -1) {
-      return -1;
-    }
-    *enabled = muted;
-    RTC_DLOG(LS_INFO) << "output: " << muted;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::MicrophoneMuteIsAvailable(bool* available) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool isAvailable = false;
-    if (audio_device_->MicrophoneMuteIsAvailable(isAvailable) == -1) {
-      return -1;
-    }
-    *available = isAvailable;
-    RTC_DLOG(LS_INFO) << "output: " << isAvailable;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::SetMicrophoneMute(bool enable) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << enable << ")";
-    CHECKinitialized_();
-    return (audio_device_->SetMicrophoneMute(enable));
-  }
-
-  int32_t AudioDeviceModuleIOS::MicrophoneMute(bool* enabled) const {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool muted = false;
-    if (audio_device_->MicrophoneMute(muted) == -1) {
-      return -1;
-    }
-    *enabled = muted;
-    RTC_DLOG(LS_INFO) << "output: " << muted;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::MicrophoneVolumeIsAvailable(bool* available) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool isAvailable = false;
-    if (audio_device_->MicrophoneVolumeIsAvailable(isAvailable) == -1) {
-      return -1;
-    }
-    *available = isAvailable;
-    RTC_DLOG(LS_INFO) << "output: " << isAvailable;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::SetMicrophoneVolume(uint32_t volume) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << volume << ")";
-    CHECKinitialized_();
-    return (audio_device_->SetMicrophoneVolume(volume));
-  }
-
-  int32_t AudioDeviceModuleIOS::MicrophoneVolume(uint32_t* volume) const {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    uint32_t level = 0;
-    if (audio_device_->MicrophoneVolume(level) == -1) {
-      return -1;
-    }
-    *volume = level;
-    RTC_DLOG(LS_INFO) << "output: " << *volume;
-    return 0;
   }
 
   int32_t AudioDeviceModuleIOS::StereoRecordingIsAvailable(
@@ -348,132 +198,6 @@ AudioDeviceModuleIOS::AudioDeviceModuleIOS(bool bypass_voice_processing)
     *enabled = stereo;
     RTC_DLOG(LS_INFO) << "output: " << stereo;
     return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::PlayoutIsAvailable(bool* available) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool isAvailable = false;
-    if (audio_device_->PlayoutIsAvailable(isAvailable) == -1) {
-      return -1;
-    }
-    *available = isAvailable;
-    RTC_DLOG(LS_INFO) << "output: " << isAvailable;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::RecordingIsAvailable(bool* available) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    bool isAvailable = false;
-    if (audio_device_->RecordingIsAvailable(isAvailable) == -1) {
-      return -1;
-    }
-    *available = isAvailable;
-    RTC_DLOG(LS_INFO) << "output: " << isAvailable;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::MaxMicrophoneVolume(uint32_t* maxVolume) const {
-    CHECKinitialized_();
-    uint32_t maxVol(0);
-    if (audio_device_->MaxMicrophoneVolume(maxVol) == -1) {
-      return -1;
-    }
-    *maxVolume = maxVol;
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::MinMicrophoneVolume(uint32_t* minVolume) const {
-    CHECKinitialized_();
-    uint32_t minVol(0);
-    if (audio_device_->MinMicrophoneVolume(minVol) == -1) {
-      return -1;
-    }
-    *minVolume = minVol;
-    return 0;
-  }
-
-  int16_t AudioDeviceModuleIOS::PlayoutDevices() {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    uint16_t nPlayoutDevices = audio_device_->PlayoutDevices();
-    RTC_DLOG(LS_INFO) << "output: " << nPlayoutDevices;
-    return (int16_t)(nPlayoutDevices);
-  }
-
-  int32_t AudioDeviceModuleIOS::SetPlayoutDevice(uint16_t index) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << index << ")";
-    CHECKinitialized_();
-    return audio_device_->SetPlayoutDevice(index);
-  }
-
-  int32_t AudioDeviceModuleIOS::SetPlayoutDevice(WindowsDeviceType device) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    return audio_device_->SetPlayoutDevice(device);
-  }
-
-  int32_t AudioDeviceModuleIOS::PlayoutDeviceName(
-      uint16_t index,
-      char name[kAdmMaxDeviceNameSize],
-      char guid[kAdmMaxGuidSize]) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << index << ", ...)";
-    CHECKinitialized_();
-    if (name == NULL) {
-      return -1;
-    }
-    if (audio_device_->PlayoutDeviceName(index, name, guid) == -1) {
-      return -1;
-    }
-    if (name != NULL) {
-      RTC_DLOG(LS_INFO) << "output: name = " << name;
-    }
-    if (guid != NULL) {
-      RTC_DLOG(LS_INFO) << "output: guid = " << guid;
-    }
-    return 0;
-  }
-
-  int32_t AudioDeviceModuleIOS::RecordingDeviceName(
-      uint16_t index,
-      char name[kAdmMaxDeviceNameSize],
-      char guid[kAdmMaxGuidSize]) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << index << ", ...)";
-    CHECKinitialized_();
-    if (name == NULL) {
-      return -1;
-    }
-    if (audio_device_->RecordingDeviceName(index, name, guid) == -1) {
-      return -1;
-    }
-    if (name != NULL) {
-      RTC_DLOG(LS_INFO) << "output: name = " << name;
-    }
-    if (guid != NULL) {
-      RTC_DLOG(LS_INFO) << "output: guid = " << guid;
-    }
-    return 0;
-  }
-
-  int16_t AudioDeviceModuleIOS::RecordingDevices() {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    uint16_t nRecordingDevices = audio_device_->RecordingDevices();
-    RTC_DLOG(LS_INFO) << "output: " << nRecordingDevices;
-    return (int16_t)nRecordingDevices;
-  }
-
-  int32_t AudioDeviceModuleIOS::SetRecordingDevice(uint16_t index) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << index << ")";
-    CHECKinitialized_();
-    return audio_device_->SetRecordingDevice(index);
-  }
-
-  int32_t AudioDeviceModuleIOS::SetRecordingDevice(WindowsDeviceType device) {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    CHECKinitialized_();
-    return audio_device_->SetRecordingDevice(device);
   }
 
   int32_t AudioDeviceModuleIOS::InitPlayout() {
@@ -647,23 +371,5 @@ AudioDeviceModuleIOS::AudioDeviceModuleIOS(bool bypass_voice_processing)
     int32_t ok = audio_device_->GetPlayoutUnderrunCount();
     return ok;
   }
-
-#if defined(WEBRTC_IOS)
-  int AudioDeviceModuleIOS::GetPlayoutAudioParameters(
-      AudioParameters* params) const {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    int r = audio_device_->GetPlayoutAudioParameters(params);
-    RTC_DLOG(LS_INFO) << "output: " << r;
-    return r;
-  }
-
-  int AudioDeviceModuleIOS::GetRecordAudioParameters(
-      AudioParameters* params) const {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    int r = audio_device_->GetRecordAudioParameters(params);
-    RTC_DLOG(LS_INFO) << "output: " << r;
-    return r;
-  }
-#endif  // WEBRTC_IOS
 }
 }

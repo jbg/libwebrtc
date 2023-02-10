@@ -30,10 +30,6 @@ AudioTrackJni::JavaAudioTrack::JavaAudioTrack(
       init_playout_(native_reg->GetMethodId("initPlayout", "(IID)I")),
       start_playout_(native_reg->GetMethodId("startPlayout", "()Z")),
       stop_playout_(native_reg->GetMethodId("stopPlayout", "()Z")),
-      set_stream_volume_(native_reg->GetMethodId("setStreamVolume", "(I)Z")),
-      get_stream_max_volume_(
-          native_reg->GetMethodId("getStreamMaxVolume", "()I")),
-      get_stream_volume_(native_reg->GetMethodId("getStreamVolume", "()I")),
       get_buffer_size_in_frames_(
           native_reg->GetMethodId("getBufferSizeInFrames", "()I")) {}
 
@@ -78,18 +74,6 @@ bool AudioTrackJni::JavaAudioTrack::StartPlayout() {
 
 bool AudioTrackJni::JavaAudioTrack::StopPlayout() {
   return audio_track_->CallBooleanMethod(stop_playout_);
-}
-
-bool AudioTrackJni::JavaAudioTrack::SetStreamVolume(int volume) {
-  return audio_track_->CallBooleanMethod(set_stream_volume_, volume);
-}
-
-int AudioTrackJni::JavaAudioTrack::GetStreamMaxVolume() {
-  return audio_track_->CallIntMethod(get_stream_max_volume_);
-}
-
-int AudioTrackJni::JavaAudioTrack::GetStreamVolume() {
-  return audio_track_->CallIntMethod(get_stream_volume_);
 }
 
 // TODO(henrika): possible extend usage of AudioManager and add it as member.
@@ -190,36 +174,6 @@ int32_t AudioTrackJni::StopPlayout() {
   initialized_ = false;
   playing_ = false;
   direct_buffer_address_ = nullptr;
-  return 0;
-}
-
-int AudioTrackJni::SpeakerVolumeIsAvailable(bool& available) {
-  available = true;
-  return 0;
-}
-
-int AudioTrackJni::SetSpeakerVolume(uint32_t volume) {
-  RTC_LOG(LS_INFO) << "SetSpeakerVolume(" << volume << ")";
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  return j_audio_track_->SetStreamVolume(volume) ? 0 : -1;
-}
-
-int AudioTrackJni::MaxSpeakerVolume(uint32_t& max_volume) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  max_volume = j_audio_track_->GetStreamMaxVolume();
-  return 0;
-}
-
-int AudioTrackJni::MinSpeakerVolume(uint32_t& min_volume) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  min_volume = 0;
-  return 0;
-}
-
-int AudioTrackJni::SpeakerVolume(uint32_t& volume) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  volume = j_audio_track_->GetStreamVolume();
-  RTC_LOG(LS_INFO) << "SpeakerVolume: " << volume;
   return 0;
 }
 

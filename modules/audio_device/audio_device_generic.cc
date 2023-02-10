@@ -49,18 +49,4 @@ int32_t AudioDeviceGeneric::GetPlayoutUnderrunCount() const {
   return -1;
 }
 
-#if defined(WEBRTC_IOS)
-int AudioDeviceGeneric::GetPlayoutAudioParameters(
-    AudioParameters* params) const {
-  RTC_LOG_F(LS_ERROR) << "Not supported on this platform";
-  return -1;
-}
-
-int AudioDeviceGeneric::GetRecordAudioParameters(
-    AudioParameters* params) const {
-  RTC_LOG_F(LS_ERROR) << "Not supported on this platform";
-  return -1;
-}
-#endif  // WEBRTC_IOS
-
 }  // namespace webrtc

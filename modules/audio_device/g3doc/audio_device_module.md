@@ -72,12 +72,6 @@ Basic initialization is done using a utility method called
 
 *   [`AudiDeviceModule::Init`][6] - initializes the native audio parts required
     for each platform.
-*   [`AudiDeviceModule::SetPlayoutDevice`][7] - specifies which speaker to use
-    for playing out audio using an `index` retrieved by the corresponding
-    enumeration method [`AudiDeviceModule::PlayoutDeviceName`][8].
-*   [`AudiDeviceModule::SetRecordingDevice`][9] - specifies which microphone to
-    use for recording audio using an `index` retrieved by the corresponding
-    enumeration method which is [`AudiDeviceModule::RecordingDeviceName`][10].
 *   [`AudiDeviceModule::InitSpeaker`][11] - sets up the parts of the ADM needed
     to use the selected output device.
 *   [`AudiDeviceModule::InitMicrophone`][12] - sets up the parts of the ADM
@@ -138,10 +132,6 @@ and [`AudiDeviceModule::StopPlayout`][36] are called followed by
 [4]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_device/include/audio_device.h;l=46;drc=eb8c4ca608486add9800f6bfb7a8ba3cf23e738e
 [5]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/media/engine/adm_helpers.h;drc=2222a80e79ae1ef5cb9510ec51d3868be75f47a2
 [6]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_device/include/audio_device.h;l=62;drc=9438fb3fff97c803d1ead34c0e4f223db168526f
-[7]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_device/include/audio_device.h;l=77;drc=9438fb3fff97c803d1ead34c0e4f223db168526f
-[8]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_device/include/audio_device.h;l=69;drc=9438fb3fff97c803d1ead34c0e4f223db168526f
-[9]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_device/include/audio_device.h;l=79;drc=9438fb3fff97c803d1ead34c0e4f223db168526f
-[10]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_device/include/audio_device.h;l=72;drc=9438fb3fff97c803d1ead34c0e4f223db168526f
 [11]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_device/include/audio_device.h;l=99;drc=9438fb3fff97c803d1ead34c0e4f223db168526f
 [12]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_device/include/audio_device.h;l=101;drc=9438fb3fff97c803d1ead34c0e4f223db168526f
 [13]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_device/include/audio_device.h;l=130;drc=9438fb3fff97c803d1ead34c0e4f223db168526f

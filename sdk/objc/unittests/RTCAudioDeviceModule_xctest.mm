@@ -487,12 +487,6 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
   [self stopPlayout];
 }
 
-- (void)testDevices {
-  // Device enumeration is not supported. Verify fixed values only.
-  XCTAssertEqual(1, audioDeviceModule->PlayoutDevices());
-  XCTAssertEqual(1, audioDeviceModule->RecordingDevices());
-}
-
 // Start playout and recording and store recorded data in an intermediate FIFO
 // buffer from which the playout side then reads its samples in the same order
 // as they were stored. Under ideal circumstances, a callback sequence would

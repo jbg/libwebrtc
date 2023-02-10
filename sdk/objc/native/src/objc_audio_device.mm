@@ -138,13 +138,6 @@ bool ObjCAudioDeviceModule::Initialized() const {
   return is_initialized_ && [audio_device_ isInitialized];
 }
 
-int32_t ObjCAudioDeviceModule::PlayoutIsAvailable(bool* available) {
-  RTC_DLOG_F(LS_VERBOSE) << "";
-  RTC_DCHECK_RUN_ON(&thread_checker_);
-  *available = Initialized();
-  return 0;
-}
-
 bool ObjCAudioDeviceModule::PlayoutIsInitialized() const {
   RTC_DLOG_F(LS_VERBOSE) << "";
   RTC_DCHECK_RUN_ON(&thread_checker_);
@@ -229,13 +222,6 @@ int32_t ObjCAudioDeviceModule::PlayoutDelay(uint16_t* delayMS) const {
   return 0;
 }
 
-int32_t ObjCAudioDeviceModule::RecordingIsAvailable(bool* available) {
-  RTC_DLOG_F(LS_VERBOSE) << "";
-  RTC_DCHECK_RUN_ON(&thread_checker_);
-  *available = Initialized();
-  return 0;
-}
-
 bool ObjCAudioDeviceModule::RecordingIsInitialized() const {
   RTC_DLOG_F(LS_VERBOSE) << "";
   RTC_DCHECK_RUN_ON(&thread_checker_);
@@ -312,26 +298,6 @@ int32_t ObjCAudioDeviceModule::StopRecording() {
   RTC_LOG_F(LS_INFO) << "Did stop recording";
   return 0;
 }
-
-#if defined(WEBRTC_IOS)
-
-int ObjCAudioDeviceModule::GetPlayoutAudioParameters(AudioParameters* params) const {
-  RTC_DLOG_F(LS_VERBOSE) << "";
-  RTC_DCHECK(playout_parameters_.is_valid());
-  RTC_DCHECK_RUN_ON(&thread_checker_);
-  *params = playout_parameters_;
-  return 0;
-}
-
-int ObjCAudioDeviceModule::GetRecordAudioParameters(AudioParameters* params) const {
-  RTC_DLOG_F(LS_VERBOSE) << "";
-  RTC_DCHECK(record_parameters_.is_valid());
-  RTC_DCHECK_RUN_ON(&thread_checker_);
-  *params = record_parameters_;
-  return 0;
-}
-
-#endif  // WEBRTC_IOS
 
 void ObjCAudioDeviceModule::UpdateOutputAudioDeviceBuffer() {
   RTC_DLOG_F(LS_VERBOSE) << "";
@@ -526,46 +492,6 @@ void ObjCAudioDeviceModule::HandleAudioOutputParametersChange() {
 
 #pragma mark - Not implemented/Not relevant methods from AudioDeviceModule
 
-int32_t ObjCAudioDeviceModule::ActiveAudioLayer(AudioLayer* audioLayer) const {
-  return -1;
-}
-
-int16_t ObjCAudioDeviceModule::PlayoutDevices() {
-  return 0;
-}
-
-int16_t ObjCAudioDeviceModule::RecordingDevices() {
-  return 0;
-}
-
-int32_t ObjCAudioDeviceModule::PlayoutDeviceName(uint16_t index,
-                                                 char name[kAdmMaxDeviceNameSize],
-                                                 char guid[kAdmMaxGuidSize]) {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::RecordingDeviceName(uint16_t index,
-                                                   char name[kAdmMaxDeviceNameSize],
-                                                   char guid[kAdmMaxGuidSize]) {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::SetPlayoutDevice(uint16_t index) {
-  return 0;
-}
-
-int32_t ObjCAudioDeviceModule::SetPlayoutDevice(WindowsDeviceType device) {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::SetRecordingDevice(uint16_t index) {
-  return 0;
-}
-
-int32_t ObjCAudioDeviceModule::SetRecordingDevice(WindowsDeviceType device) {
-  return -1;
-}
-
 int32_t ObjCAudioDeviceModule::InitSpeaker() {
   return 0;
 }
@@ -580,74 +506,6 @@ int32_t ObjCAudioDeviceModule::InitMicrophone() {
 
 bool ObjCAudioDeviceModule::MicrophoneIsInitialized() const {
   return true;
-}
-
-int32_t ObjCAudioDeviceModule::SpeakerVolumeIsAvailable(bool* available) {
-  *available = false;
-  return 0;
-}
-
-int32_t ObjCAudioDeviceModule::SetSpeakerVolume(uint32_t volume) {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::SpeakerVolume(uint32_t* volume) const {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::MaxSpeakerVolume(uint32_t* maxVolume) const {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::MinSpeakerVolume(uint32_t* minVolume) const {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::SpeakerMuteIsAvailable(bool* available) {
-  *available = false;
-  return 0;
-}
-
-int32_t ObjCAudioDeviceModule::SetSpeakerMute(bool enable) {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::SpeakerMute(bool* enabled) const {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::MicrophoneMuteIsAvailable(bool* available) {
-  *available = false;
-  return 0;
-}
-
-int32_t ObjCAudioDeviceModule::SetMicrophoneMute(bool enable) {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::MicrophoneMute(bool* enabled) const {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::MicrophoneVolumeIsAvailable(bool* available) {
-  *available = false;
-  return 0;
-}
-
-int32_t ObjCAudioDeviceModule::SetMicrophoneVolume(uint32_t volume) {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::MicrophoneVolume(uint32_t* volume) const {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::MaxMicrophoneVolume(uint32_t* maxVolume) const {
-  return -1;
-}
-
-int32_t ObjCAudioDeviceModule::MinMicrophoneVolume(uint32_t* minVolume) const {
-  return -1;
 }
 
 int32_t ObjCAudioDeviceModule::StereoPlayoutIsAvailable(bool* available) const {
