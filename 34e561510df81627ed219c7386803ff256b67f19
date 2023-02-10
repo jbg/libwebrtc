@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c44f0cd9_e2900f97",
+        "filename": "pc/channel.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-10T16:51:17Z",
+      "side": 1,
+      "message": "Note that there are two confusingly similar members: media_send_channel_ and media_send_channel_impl_, with the former being a wrapper around the latter.\n(the idea is that they should merge once we get the basic MediaChannel class split into a send and receive implementation.)\n\nmedia_send_channel_ has accessors, media_send_channel_impl_ doesn\u0027t.",
+      "parentUuid": "0b5662a3_188d8adf",
+      "range": {
+        "startLine": 306,
+        "startChar": 26,
+        "endLine": 306,
+        "endChar": 33
+      },
+      "revId": "34e561510df81627ed219c7386803ff256b67f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb857387_1caa4eca",
