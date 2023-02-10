@@ -12,6 +12,72 @@
 
 #include "test/gtest.h"
 
+__attribute__((__noreturn__)) int foo_fun() {
+  printf("Foo\n");
+  exit(1);
+}
+
+TEST(ChecksTest, NoreturnFunction) {
+  printf("Noreturn in ternary branch\n");
+
+  int dummy = (true) ? 0 : foo_fun();
+
+  printf("%d\n", dummy);
+  printf("Done\n");
+}
+
+TEST(ChecksTest, NoreturnFunction2) {
+  printf("Noreturn in other ternary branch\n");
+
+  int dummy = (false) ? foo_fun() : 0;
+
+  printf("%d\n", dummy);
+  printf("Done\n");
+}
+
+TEST(ChecksTest, WrappedInBlock) {
+  printf("Wrappen in block\n");
+
+  int dummy = 47;
+  {
+    dummy = (true) ? 0 : foo_fun();
+  }
+
+  printf("%d\n", dummy);
+  printf("Done\n");
+}
+
+TEST(ChecksTest, NormalReturningFunction) {
+  printf("Normal function\n");
+
+  int dummy = (true) ? 0 : printf("Foo\n");
+
+  printf("%d\n", dummy);
+  printf("Done\n");
+}
+
+TEST(ChecksTest, IfElse) {
+  printf("If-else\n");
+
+  int dummy = 47;
+  if ((true))
+    dummy = 0;
+  else
+    foo_fun();
+
+  printf("%d\n", dummy);
+  printf("Done\n");
+}
+
+TEST(ChecksTest, SingleIf) {
+  printf("Single if\n");
+
+  if ((false))
+    foo_fun();
+
+  printf("Done\n");
+}
+
 TEST(ChecksTest, ExpressionNotEvaluatedWhenCheckPassing) {
   int i = 0;
   RTC_CHECK(true) << "i=" << ++i;
