@@ -75,17 +75,13 @@ class AudioDeviceWindowsCore : public AudioDeviceGeneric {
       RTC_LOCKS_EXCLUDED(mutex_);
 
   // Device selection
-  virtual int32_t SetPlayoutDevice(uint16_t index) RTC_LOCKS_EXCLUDED(mutex_);
   virtual int32_t SetPlayoutDevice(AudioDeviceModule::WindowsDeviceType device);
-  virtual int32_t SetRecordingDevice(uint16_t index) RTC_LOCKS_EXCLUDED(mutex_);
   virtual int32_t SetRecordingDevice(
       AudioDeviceModule::WindowsDeviceType device) RTC_LOCKS_EXCLUDED(mutex_);
 
   // Audio transport initialization
-  virtual int32_t PlayoutIsAvailable(bool& available);
   virtual int32_t InitPlayout() RTC_LOCKS_EXCLUDED(mutex_);
   virtual bool PlayoutIsInitialized() const;
-  virtual int32_t RecordingIsAvailable(bool& available);
   virtual int32_t InitRecording() RTC_LOCKS_EXCLUDED(mutex_);
   virtual bool RecordingIsInitialized() const;
 
@@ -102,37 +98,6 @@ class AudioDeviceWindowsCore : public AudioDeviceGeneric {
   virtual bool SpeakerIsInitialized() const;
   virtual int32_t InitMicrophone() RTC_LOCKS_EXCLUDED(mutex_);
   virtual bool MicrophoneIsInitialized() const;
-
-  // Speaker volume controls
-  virtual int32_t SpeakerVolumeIsAvailable(bool& available)
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetSpeakerVolume(uint32_t volume) RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SpeakerVolume(uint32_t& volume) const
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t MaxSpeakerVolume(uint32_t& maxVolume) const;
-  virtual int32_t MinSpeakerVolume(uint32_t& minVolume) const;
-
-  // Microphone volume controls
-  virtual int32_t MicrophoneVolumeIsAvailable(bool& available)
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetMicrophoneVolume(uint32_t volume)
-      RTC_LOCKS_EXCLUDED(mutex_, volume_mutex_);
-  virtual int32_t MicrophoneVolume(uint32_t& volume) const
-      RTC_LOCKS_EXCLUDED(mutex_, volume_mutex_);
-  virtual int32_t MaxMicrophoneVolume(uint32_t& maxVolume) const;
-  virtual int32_t MinMicrophoneVolume(uint32_t& minVolume) const;
-
-  // Speaker mute control
-  virtual int32_t SpeakerMuteIsAvailable(bool& available)
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetSpeakerMute(bool enable) RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SpeakerMute(bool& enabled) const;
-
-  // Microphone mute control
-  virtual int32_t MicrophoneMuteIsAvailable(bool& available)
-      RTC_LOCKS_EXCLUDED(mutex_);
-  virtual int32_t SetMicrophoneMute(bool enable);
-  virtual int32_t MicrophoneMute(bool& enabled) const;
 
   // Stereo support
   virtual int32_t StereoPlayoutIsAvailable(bool& available);
@@ -165,6 +130,10 @@ class AudioDeviceWindowsCore : public AudioDeviceGeneric {
   bool _winSupportAvrt;
 
  private:  // thread functions
+  int32_t SetPlayoutDeviceLocked(AudioDeviceModule::WindowsDeviceType device)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
+  int32_t SetRecordingDeviceLocked(AudioDeviceModule::WindowsDeviceType device)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
   int32_t InitSpeakerLocked() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
   int32_t InitMicrophoneLocked() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
   int16_t PlayoutDevicesLocked() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);

@@ -18,20 +18,20 @@
 namespace webrtc {
 
 #if defined(WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO)
-rtc::scoped_refptr<AudioDeviceModule> CreateAAudioAudioDeviceModule(
+rtc::scoped_refptr<AudioDeviceModuleForTest> CreateAAudioAudioDeviceModule(
     JNIEnv* env,
     jobject application_context);
 #endif
 
-rtc::scoped_refptr<AudioDeviceModule> CreateJavaAudioDeviceModule(
+rtc::scoped_refptr<AudioDeviceModuleForTest> CreateJavaAudioDeviceModule(
     JNIEnv* env,
     jobject application_context);
 
-rtc::scoped_refptr<AudioDeviceModule> CreateOpenSLESAudioDeviceModule(
+rtc::scoped_refptr<AudioDeviceModuleForTest> CreateOpenSLESAudioDeviceModule(
     JNIEnv* env,
     jobject application_context);
 
-rtc::scoped_refptr<AudioDeviceModule>
+rtc::scoped_refptr<AudioDeviceModuleForTest>
 CreateJavaInputAndOpenSLESOutputAudioDeviceModule(JNIEnv* env,
                                                   jobject application_context);
 

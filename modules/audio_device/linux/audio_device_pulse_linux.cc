@@ -34,10 +34,6 @@ namespace webrtc {
 
 AudioDeviceLinuxPulse::AudioDeviceLinuxPulse()
     : _ptrAudioBuffer(NULL),
-      _inputDeviceIndex(0),
-      _outputDeviceIndex(0),
-      _inputDeviceIsSpecified(false),
-      _outputDeviceIsSpecified(false),
       sample_rate_hz_(0),
       _recChannels(1),
       _playChannels(1),
@@ -213,8 +209,6 @@ int32_t AudioDeviceLinuxPulse::Terminate() {
 #endif
 
   _initialized = false;
-  _outputDeviceIsSpecified = false;
-  _inputDeviceIsSpecified = false;
 
   return 0;
 }
@@ -231,23 +225,10 @@ int32_t AudioDeviceLinuxPulse::InitSpeaker() {
     return -1;
   }
 
-  if (!_outputDeviceIsSpecified) {
-    return -1;
-  }
-
   // check if default device
-  if (_outputDeviceIndex == 0) {
-    uint16_t deviceIndex = 0;
-    GetDefaultDeviceInfo(false, NULL, deviceIndex);
-    _paDeviceIndex = deviceIndex;
-  } else {
-    // get the PA device index from
-    // the callback
-    _deviceIndex = _outputDeviceIndex;
-
-    // get playout devices
-    PlayoutDevices();
-  }
+  uint16_t deviceIndex = 0;
+  GetDefaultDeviceInfo(false, NULL, deviceIndex);
+  _paDeviceIndex = deviceIndex;
 
   // the callback has now set the _paDeviceIndex to
   // the PulseAudio index of the device
@@ -268,23 +249,10 @@ int32_t AudioDeviceLinuxPulse::InitMicrophone() {
     return -1;
   }
 
-  if (!_inputDeviceIsSpecified) {
-    return -1;
-  }
-
   // Check if default device
-  if (_inputDeviceIndex == 0) {
-    uint16_t deviceIndex = 0;
-    GetDefaultDeviceInfo(true, NULL, deviceIndex);
-    _paDeviceIndex = deviceIndex;
-  } else {
-    // Get the PA device index from
-    // the callback
-    _deviceIndex = _inputDeviceIndex;
-
-    // get recording devices
-    RecordingDevices();
-  }
+  uint16_t deviceIndex = 0;
+  GetDefaultDeviceInfo(true, NULL, deviceIndex);
+  _paDeviceIndex = deviceIndex;
 
   // The callback has now set the _paDeviceIndex to
   // the PulseAudio index of the device
@@ -307,169 +275,6 @@ bool AudioDeviceLinuxPulse::SpeakerIsInitialized() const {
 bool AudioDeviceLinuxPulse::MicrophoneIsInitialized() const {
   RTC_DCHECK(thread_checker_.IsCurrent());
   return (_mixerManager.MicrophoneIsInitialized());
-}
-
-int32_t AudioDeviceLinuxPulse::SpeakerVolumeIsAvailable(bool& available) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  bool wasInitialized = _mixerManager.SpeakerIsInitialized();
-
-  // Make an attempt to open up the
-  // output mixer corresponding to the currently selected output device.
-  if (!wasInitialized && InitSpeaker() == -1) {
-    // If we end up here it means that the selected speaker has no volume
-    // control.
-    available = false;
-    return 0;
-  }
-
-  // Given that InitSpeaker was successful, we know volume control exists.
-  available = true;
-
-  // Close the initialized output mixer
-  if (!wasInitialized) {
-    _mixerManager.CloseSpeaker();
-  }
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::SetSpeakerVolume(uint32_t volume) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  if (!_playing) {
-    // Only update the volume if it's been set while we weren't playing.
-    update_speaker_volume_at_startup_ = true;
-  }
-  return (_mixerManager.SetSpeakerVolume(volume));
-}
-
-int32_t AudioDeviceLinuxPulse::SpeakerVolume(uint32_t& volume) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  uint32_t level(0);
-
-  if (_mixerManager.SpeakerVolume(level) == -1) {
-    return -1;
-  }
-
-  volume = level;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::MaxSpeakerVolume(uint32_t& maxVolume) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  uint32_t maxVol(0);
-
-  if (_mixerManager.MaxSpeakerVolume(maxVol) == -1) {
-    return -1;
-  }
-
-  maxVolume = maxVol;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::MinSpeakerVolume(uint32_t& minVolume) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  uint32_t minVol(0);
-
-  if (_mixerManager.MinSpeakerVolume(minVol) == -1) {
-    return -1;
-  }
-
-  minVolume = minVol;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::SpeakerMuteIsAvailable(bool& available) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  bool isAvailable(false);
-  bool wasInitialized = _mixerManager.SpeakerIsInitialized();
-
-  // Make an attempt to open up the
-  // output mixer corresponding to the currently selected output device.
-  //
-  if (!wasInitialized && InitSpeaker() == -1) {
-    // If we end up here it means that the selected speaker has no volume
-    // control, hence it is safe to state that there is no mute control
-    // already at this stage.
-    available = false;
-    return 0;
-  }
-
-  // Check if the selected speaker has a mute control
-  _mixerManager.SpeakerMuteIsAvailable(isAvailable);
-
-  available = isAvailable;
-
-  // Close the initialized output mixer
-  if (!wasInitialized) {
-    _mixerManager.CloseSpeaker();
-  }
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::SetSpeakerMute(bool enable) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  return (_mixerManager.SetSpeakerMute(enable));
-}
-
-int32_t AudioDeviceLinuxPulse::SpeakerMute(bool& enabled) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  bool muted(0);
-  if (_mixerManager.SpeakerMute(muted) == -1) {
-    return -1;
-  }
-
-  enabled = muted;
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::MicrophoneMuteIsAvailable(bool& available) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  bool isAvailable(false);
-  bool wasInitialized = _mixerManager.MicrophoneIsInitialized();
-
-  // Make an attempt to open up the
-  // input mixer corresponding to the currently selected input device.
-  //
-  if (!wasInitialized && InitMicrophone() == -1) {
-    // If we end up here it means that the selected microphone has no
-    // volume control, hence it is safe to state that there is no
-    // boost control already at this stage.
-    available = false;
-    return 0;
-  }
-
-  // Check if the selected microphone has a mute control
-  //
-  _mixerManager.MicrophoneMuteIsAvailable(isAvailable);
-  available = isAvailable;
-
-  // Close the initialized input mixer
-  //
-  if (!wasInitialized) {
-    _mixerManager.CloseMicrophone();
-  }
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::SetMicrophoneMute(bool enable) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  return (_mixerManager.SetMicrophoneMute(enable));
-}
-
-int32_t AudioDeviceLinuxPulse::MicrophoneMute(bool& enabled) const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  bool muted(0);
-  if (_mixerManager.MicrophoneMute(muted) == -1) {
-    return -1;
-  }
-
-  enabled = muted;
-  return 0;
 }
 
 int32_t AudioDeviceLinuxPulse::StereoRecordingIsAvailable(bool& available) {
@@ -573,280 +378,10 @@ int32_t AudioDeviceLinuxPulse::StereoPlayout(bool& enabled) const {
   return 0;
 }
 
-int32_t AudioDeviceLinuxPulse::MicrophoneVolumeIsAvailable(bool& available) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  bool wasInitialized = _mixerManager.MicrophoneIsInitialized();
-
-  // Make an attempt to open up the
-  // input mixer corresponding to the currently selected output device.
-  if (!wasInitialized && InitMicrophone() == -1) {
-    // If we end up here it means that the selected microphone has no
-    // volume control.
-    available = false;
-    return 0;
-  }
-
-  // Given that InitMicrophone was successful, we know that a volume control
-  // exists.
-  available = true;
-
-  // Close the initialized input mixer
-  if (!wasInitialized) {
-    _mixerManager.CloseMicrophone();
-  }
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::SetMicrophoneVolume(uint32_t volume) {
-  return (_mixerManager.SetMicrophoneVolume(volume));
-}
-
-int32_t AudioDeviceLinuxPulse::MicrophoneVolume(uint32_t& volume) const {
-  uint32_t level(0);
-
-  if (_mixerManager.MicrophoneVolume(level) == -1) {
-    RTC_LOG(LS_WARNING) << "failed to retrieve current microphone level";
-    return -1;
-  }
-
-  volume = level;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::MaxMicrophoneVolume(uint32_t& maxVolume) const {
-  uint32_t maxVol(0);
-
-  if (_mixerManager.MaxMicrophoneVolume(maxVol) == -1) {
-    return -1;
-  }
-
-  maxVolume = maxVol;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::MinMicrophoneVolume(uint32_t& minVolume) const {
-  uint32_t minVol(0);
-
-  if (_mixerManager.MinMicrophoneVolume(minVol) == -1) {
-    return -1;
-  }
-
-  minVolume = minVol;
-
-  return 0;
-}
-
-int16_t AudioDeviceLinuxPulse::PlayoutDevices() {
-  PaLock();
-
-  pa_operation* paOperation = NULL;
-  _numPlayDevices = 1;  // init to 1 to account for "default"
-
-  // get the whole list of devices and update _numPlayDevices
-  paOperation =
-      LATE(pa_context_get_sink_info_list)(_paContext, PaSinkInfoCallback, this);
-
-  WaitForOperationCompletion(paOperation);
-
-  PaUnLock();
-
-  return _numPlayDevices;
-}
-
-int32_t AudioDeviceLinuxPulse::SetPlayoutDevice(uint16_t index) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  if (_playIsInitialized) {
-    return -1;
-  }
-
-  const uint16_t nDevices = PlayoutDevices();
-
-  RTC_LOG(LS_VERBOSE) << "number of availiable output devices is " << nDevices;
-
-  if (index > (nDevices - 1)) {
-    RTC_LOG(LS_ERROR) << "device index is out of range [0," << (nDevices - 1)
-                      << "]";
-    return -1;
-  }
-
-  _outputDeviceIndex = index;
-  _outputDeviceIsSpecified = true;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::SetPlayoutDevice(
-    AudioDeviceModule::WindowsDeviceType /*device*/) {
-  RTC_LOG(LS_ERROR) << "WindowsDeviceType not supported";
-  return -1;
-}
-
-int32_t AudioDeviceLinuxPulse::PlayoutDeviceName(
-    uint16_t index,
-    char name[kAdmMaxDeviceNameSize],
-    char guid[kAdmMaxGuidSize]) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  const uint16_t nDevices = PlayoutDevices();
-
-  if ((index > (nDevices - 1)) || (name == NULL)) {
-    return -1;
-  }
-
-  memset(name, 0, kAdmMaxDeviceNameSize);
-
-  if (guid != NULL) {
-    memset(guid, 0, kAdmMaxGuidSize);
-  }
-
-  // Check if default device
-  if (index == 0) {
-    uint16_t deviceIndex = 0;
-    return GetDefaultDeviceInfo(false, name, deviceIndex);
-  }
-
-  // Tell the callback that we want
-  // The name for this device
-  _playDisplayDeviceName = name;
-  _deviceIndex = index;
-
-  // get playout devices
-  PlayoutDevices();
-
-  // clear device name and index
-  _playDisplayDeviceName = NULL;
-  _deviceIndex = -1;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::RecordingDeviceName(
-    uint16_t index,
-    char name[kAdmMaxDeviceNameSize],
-    char guid[kAdmMaxGuidSize]) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  const uint16_t nDevices(RecordingDevices());
-
-  if ((index > (nDevices - 1)) || (name == NULL)) {
-    return -1;
-  }
-
-  memset(name, 0, kAdmMaxDeviceNameSize);
-
-  if (guid != NULL) {
-    memset(guid, 0, kAdmMaxGuidSize);
-  }
-
-  // Check if default device
-  if (index == 0) {
-    uint16_t deviceIndex = 0;
-    return GetDefaultDeviceInfo(true, name, deviceIndex);
-  }
-
-  // Tell the callback that we want
-  // the name for this device
-  _recDisplayDeviceName = name;
-  _deviceIndex = index;
-
-  // Get recording devices
-  RecordingDevices();
-
-  // Clear device name and index
-  _recDisplayDeviceName = NULL;
-  _deviceIndex = -1;
-
-  return 0;
-}
-
-int16_t AudioDeviceLinuxPulse::RecordingDevices() {
-  PaLock();
-
-  pa_operation* paOperation = NULL;
-  _numRecDevices = 1;  // Init to 1 to account for "default"
-
-  // Get the whole list of devices and update _numRecDevices
-  paOperation = LATE(pa_context_get_source_info_list)(
-      _paContext, PaSourceInfoCallback, this);
-
-  WaitForOperationCompletion(paOperation);
-
-  PaUnLock();
-
-  return _numRecDevices;
-}
-
-int32_t AudioDeviceLinuxPulse::SetRecordingDevice(uint16_t index) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  if (_recIsInitialized) {
-    return -1;
-  }
-
-  const uint16_t nDevices(RecordingDevices());
-
-  RTC_LOG(LS_VERBOSE) << "number of availiable input devices is " << nDevices;
-
-  if (index > (nDevices - 1)) {
-    RTC_LOG(LS_ERROR) << "device index is out of range [0," << (nDevices - 1)
-                      << "]";
-    return -1;
-  }
-
-  _inputDeviceIndex = index;
-  _inputDeviceIsSpecified = true;
-
-  return 0;
-}
-
-int32_t AudioDeviceLinuxPulse::SetRecordingDevice(
-    AudioDeviceModule::WindowsDeviceType /*device*/) {
-  RTC_LOG(LS_ERROR) << "WindowsDeviceType not supported";
-  return -1;
-}
-
-int32_t AudioDeviceLinuxPulse::PlayoutIsAvailable(bool& available) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  available = false;
-
-  // Try to initialize the playout side
-  int32_t res = InitPlayout();
-
-  // Cancel effect of initialization
-  StopPlayout();
-
-  if (res != -1) {
-    available = true;
-  }
-
-  return res;
-}
-
-int32_t AudioDeviceLinuxPulse::RecordingIsAvailable(bool& available) {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  available = false;
-
-  // Try to initialize the playout side
-  int32_t res = InitRecording();
-
-  // Cancel effect of initialization
-  StopRecording();
-
-  if (res != -1) {
-    available = true;
-  }
-
-  return res;
-}
-
 int32_t AudioDeviceLinuxPulse::InitPlayout() {
   RTC_DCHECK(thread_checker_.IsCurrent());
 
   if (_playing) {
-    return -1;
-  }
-
-  if (!_outputDeviceIsSpecified) {
     return -1;
   }
 
@@ -952,10 +487,6 @@ int32_t AudioDeviceLinuxPulse::InitRecording() {
   RTC_DCHECK(thread_checker_.IsCurrent());
 
   if (_recording) {
-    return -1;
-  }
-
-  if (!_inputDeviceIsSpecified) {
     return -1;
   }
 
@@ -1993,14 +1524,6 @@ bool AudioDeviceLinuxPulse::PlayThreadProcess() {
     _startPlay = false;
     _playDeviceName = NULL;
 
-    // Set if not default device
-    if (_outputDeviceIndex > 0) {
-      // Get the playout device name
-      _playDeviceName = new char[kAdmMaxDeviceNameSize];
-      _deviceIndex = _outputDeviceIndex;
-      PlayoutDevices();
-    }
-
     // Start muted only supported on 0.9.11 and up
     if (LATE(pa_context_get_protocol_version)(_paContext) >=
         WEBRTC_PA_ADJUST_LATENCY_PROTOCOL_VERSION) {
@@ -2161,14 +1684,6 @@ bool AudioDeviceLinuxPulse::RecThreadProcess() {
     RTC_LOG(LS_VERBOSE) << "_startRec true, performing initial actions";
 
     _recDeviceName = NULL;
-
-    // Set if not default device
-    if (_inputDeviceIndex > 0) {
-      // Get the recording device name
-      _recDeviceName = new char[kAdmMaxDeviceNameSize];
-      _deviceIndex = _inputDeviceIndex;
-      RecordingDevices();
-    }
 
     PaLock();
 

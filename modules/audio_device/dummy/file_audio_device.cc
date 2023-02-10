@@ -66,6 +66,8 @@ bool FileAudioDevice::Initialized() const {
   return true;
 }
 
+#ifdef WEBRTC_WIN
+
 int16_t FileAudioDevice::PlayoutDevices() {
   return 1;
 }
@@ -104,24 +106,8 @@ int32_t FileAudioDevice::RecordingDeviceName(uint16_t index,
   return -1;
 }
 
-int32_t FileAudioDevice::SetPlayoutDevice(uint16_t index) {
-  if (index == 0) {
-    _playout_index = index;
-    return 0;
-  }
-  return -1;
-}
-
 int32_t FileAudioDevice::SetPlayoutDevice(
     AudioDeviceModule::WindowsDeviceType device) {
-  return -1;
-}
-
-int32_t FileAudioDevice::SetRecordingDevice(uint16_t index) {
-  if (index == 0) {
-    _record_index = index;
-    return _record_index;
-  }
   return -1;
 }
 
@@ -130,14 +116,7 @@ int32_t FileAudioDevice::SetRecordingDevice(
   return -1;
 }
 
-int32_t FileAudioDevice::PlayoutIsAvailable(bool& available) {
-  if (_playout_index == 0) {
-    available = true;
-    return _playout_index;
-  }
-  available = false;
-  return -1;
-}
+#endif
 
 int32_t FileAudioDevice::InitPlayout() {
   MutexLock lock(&mutex_);
@@ -158,15 +137,6 @@ int32_t FileAudioDevice::InitPlayout() {
 
 bool FileAudioDevice::PlayoutIsInitialized() const {
   return _playoutFramesIn10MS != 0;
-}
-
-int32_t FileAudioDevice::RecordingIsAvailable(bool& available) {
-  if (_record_index == 0) {
-    available = true;
-    return _record_index;
-  }
-  available = false;
-  return -1;
 }
 
 int32_t FileAudioDevice::InitRecording() {
@@ -330,70 +300,6 @@ int32_t FileAudioDevice::InitMicrophone() {
 
 bool FileAudioDevice::MicrophoneIsInitialized() const {
   return true;
-}
-
-int32_t FileAudioDevice::SpeakerVolumeIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t FileAudioDevice::SetSpeakerVolume(uint32_t volume) {
-  return -1;
-}
-
-int32_t FileAudioDevice::SpeakerVolume(uint32_t& volume) const {
-  return -1;
-}
-
-int32_t FileAudioDevice::MaxSpeakerVolume(uint32_t& maxVolume) const {
-  return -1;
-}
-
-int32_t FileAudioDevice::MinSpeakerVolume(uint32_t& minVolume) const {
-  return -1;
-}
-
-int32_t FileAudioDevice::MicrophoneVolumeIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t FileAudioDevice::SetMicrophoneVolume(uint32_t volume) {
-  return -1;
-}
-
-int32_t FileAudioDevice::MicrophoneVolume(uint32_t& volume) const {
-  return -1;
-}
-
-int32_t FileAudioDevice::MaxMicrophoneVolume(uint32_t& maxVolume) const {
-  return -1;
-}
-
-int32_t FileAudioDevice::MinMicrophoneVolume(uint32_t& minVolume) const {
-  return -1;
-}
-
-int32_t FileAudioDevice::SpeakerMuteIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t FileAudioDevice::SetSpeakerMute(bool enable) {
-  return -1;
-}
-
-int32_t FileAudioDevice::SpeakerMute(bool& enabled) const {
-  return -1;
-}
-
-int32_t FileAudioDevice::MicrophoneMuteIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t FileAudioDevice::SetMicrophoneMute(bool enable) {
-  return -1;
-}
-
-int32_t FileAudioDevice::MicrophoneMute(bool& enabled) const {
-  return -1;
 }
 
 int32_t FileAudioDevice::StereoPlayoutIsAvailable(bool& available) {

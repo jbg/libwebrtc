@@ -49,25 +49,13 @@ int32_t AudioDeviceDummy::RecordingDeviceName(uint16_t index,
   return -1;
 }
 
-int32_t AudioDeviceDummy::SetPlayoutDevice(uint16_t index) {
-  return -1;
-}
-
 int32_t AudioDeviceDummy::SetPlayoutDevice(
     AudioDeviceModule::WindowsDeviceType device) {
   return -1;
 }
 
-int32_t AudioDeviceDummy::SetRecordingDevice(uint16_t index) {
-  return -1;
-}
-
 int32_t AudioDeviceDummy::SetRecordingDevice(
     AudioDeviceModule::WindowsDeviceType device) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::PlayoutIsAvailable(bool& available) {
   return -1;
 }
 
@@ -77,10 +65,6 @@ int32_t AudioDeviceDummy::InitPlayout() {
 
 bool AudioDeviceDummy::PlayoutIsInitialized() const {
   return false;
-}
-
-int32_t AudioDeviceDummy::RecordingIsAvailable(bool& available) {
-  return -1;
 }
 
 int32_t AudioDeviceDummy::InitRecording() {
@@ -129,70 +113,6 @@ int32_t AudioDeviceDummy::InitMicrophone() {
 
 bool AudioDeviceDummy::MicrophoneIsInitialized() const {
   return false;
-}
-
-int32_t AudioDeviceDummy::SpeakerVolumeIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::SetSpeakerVolume(uint32_t volume) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::SpeakerVolume(uint32_t& volume) const {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::MaxSpeakerVolume(uint32_t& maxVolume) const {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::MinSpeakerVolume(uint32_t& minVolume) const {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::MicrophoneVolumeIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::SetMicrophoneVolume(uint32_t volume) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::MicrophoneVolume(uint32_t& volume) const {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::MaxMicrophoneVolume(uint32_t& maxVolume) const {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::MinMicrophoneVolume(uint32_t& minVolume) const {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::SpeakerMuteIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::SetSpeakerMute(bool enable) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::SpeakerMute(bool& enabled) const {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::MicrophoneMuteIsAvailable(bool& available) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::SetMicrophoneMute(bool enable) {
-  return -1;
-}
-
-int32_t AudioDeviceDummy::MicrophoneMute(bool& enabled) const {
-  return -1;
 }
 
 int32_t AudioDeviceDummy::StereoPlayoutIsAvailable(bool& available) {

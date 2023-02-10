@@ -52,14 +52,6 @@ using ::testing::NotNull;
 namespace webrtc {
 namespace {
 
-// Using a #define for AUDIO_DEVICE since we will call *different* versions of
-// the ADM functions, depending on the ID type.
-#if defined(WEBRTC_WIN)
-#define AUDIO_DEVICE_ID (AudioDeviceModule::WindowsDeviceType::kDefaultDevice)
-#else
-#define AUDIO_DEVICE_ID (0u)
-#endif  // defined(WEBRTC_WIN)
-
 // #define ENABLE_DEBUG_PRINTF
 #ifdef ENABLE_DEBUG_PRINTF
 #define PRINTD(...) fprintf(stderr, __VA_ARGS__);
@@ -537,19 +529,18 @@ class MAYBE_AudioDeviceTest
     if (requirements_satisfied_) {
       requirements_satisfied_ = (audio_device_->Init() == 0);
     }
-    // Finally, ensure that at least one valid device exists in each direction.
     if (requirements_satisfied_) {
-      const int16_t num_playout_devices = audio_device_->PlayoutDevices();
-      const int16_t num_record_devices = audio_device_->RecordingDevices();
-      requirements_satisfied_ =
-          num_playout_devices > 0 && num_record_devices > 0;
-    }
-    if (requirements_satisfied_) {
-      EXPECT_EQ(0, audio_device_->SetPlayoutDevice(AUDIO_DEVICE_ID));
+#ifdef WEBRTC_WIN
+      EXPECT_EQ(0, audio_device_->SetPlayoutDevice(
+                       AudioDeviceModule::kDefaultDevice));
+#endif
       EXPECT_EQ(0, audio_device_->InitSpeaker());
       EXPECT_EQ(0, audio_device_->StereoPlayoutIsAvailable(&stereo_playout_));
       EXPECT_EQ(0, audio_device_->SetStereoPlayout(stereo_playout_));
-      EXPECT_EQ(0, audio_device_->SetRecordingDevice(AUDIO_DEVICE_ID));
+#ifdef WEBRTC_WIN
+      EXPECT_EQ(0, audio_device_->SetRecordingDevice(
+                       AudioDeviceModule::kDefaultDevice));
+#endif
       EXPECT_EQ(0, audio_device_->InitMicrophone());
       // Avoid asking for input stereo support and always record in mono
       // since asking can cause issues in combination with remote desktop.
@@ -671,10 +662,10 @@ class MAYBE_AudioDeviceTest
 TEST(MAYBE_AudioDeviceTestWin, ConstructDestructWithFactory) {
   std::unique_ptr<TaskQueueFactory> task_queue_factory =
       CreateDefaultTaskQueueFactory();
-  rtc::scoped_refptr<AudioDeviceModule> audio_device;
+  rtc::scoped_refptr<AudioDeviceModuleForTest> audio_device;
   // The default factory should work for all platforms when a default ADM is
   // requested.
-  audio_device = AudioDeviceModule::Create(
+  audio_device = AudioDeviceModule::CreateForTest(
       AudioDeviceModule::kPlatformDefaultAudio, task_queue_factory.get());
   EXPECT_TRUE(audio_device);
   audio_device = nullptr;
@@ -683,7 +674,7 @@ TEST(MAYBE_AudioDeviceTestWin, ConstructDestructWithFactory) {
   // specific parts are implemented by an AudioDeviceGeneric object. Verify
   // that the old factory can't be used in combination with the latest audio
   // layer AudioDeviceModule::kWindowsCoreAudio2.
-  audio_device = AudioDeviceModule::Create(
+  audio_device = AudioDeviceModule::CreateForTest(
       AudioDeviceModule::kWindowsCoreAudio2, task_queue_factory.get());
   EXPECT_FALSE(audio_device);
   audio_device = nullptr;
@@ -694,7 +685,7 @@ TEST(MAYBE_AudioDeviceTestWin, ConstructDestructWithFactory) {
   ScopedCOMInitializer com_initializer(ScopedCOMInitializer::kMTA);
   EXPECT_TRUE(com_initializer.Succeeded());
   audio_device =
-      CreateWindowsCoreAudioAudioDeviceModule(task_queue_factory.get());
+      CreateWindowsCoreAudioAudioDeviceModuleForTest(task_queue_factory.get());
   EXPECT_TRUE(audio_device);
   AudioDeviceModule::AudioLayer audio_layer;
   EXPECT_EQ(0, audio_device->ActiveAudioLayer(&audio_layer));
@@ -713,86 +704,27 @@ TEST_P(MAYBE_AudioDeviceTest, InitTerminate) {
   EXPECT_FALSE(audio_device()->Initialized());
 }
 
-// Enumerate all available and active output devices.
-TEST_P(MAYBE_AudioDeviceTest, PlayoutDeviceNames) {
-  SKIP_TEST_IF_NOT(requirements_satisfied());
-  char device_name[kAdmMaxDeviceNameSize];
-  char unique_id[kAdmMaxGuidSize];
-  int num_devices = audio_device()->PlayoutDevices();
-  if (NewWindowsAudioDeviceModuleIsUsed()) {
-    num_devices += 2;
-  }
-  EXPECT_GT(num_devices, 0);
-  for (int i = 0; i < num_devices; ++i) {
-    EXPECT_EQ(0, audio_device()->PlayoutDeviceName(i, device_name, unique_id));
-  }
-  EXPECT_EQ(-1, audio_device()->PlayoutDeviceName(num_devices, device_name,
-                                                  unique_id));
-}
-
-// Enumerate all available and active input devices.
-TEST_P(MAYBE_AudioDeviceTest, RecordingDeviceNames) {
-  SKIP_TEST_IF_NOT(requirements_satisfied());
-  char device_name[kAdmMaxDeviceNameSize];
-  char unique_id[kAdmMaxGuidSize];
-  int num_devices = audio_device()->RecordingDevices();
-  if (NewWindowsAudioDeviceModuleIsUsed()) {
-    num_devices += 2;
-  }
-  EXPECT_GT(num_devices, 0);
-  for (int i = 0; i < num_devices; ++i) {
-    EXPECT_EQ(0,
-              audio_device()->RecordingDeviceName(i, device_name, unique_id));
-  }
-  EXPECT_EQ(-1, audio_device()->RecordingDeviceName(num_devices, device_name,
-                                                    unique_id));
-}
-
-// Counts number of active output devices and ensure that all can be selected.
-TEST_P(MAYBE_AudioDeviceTest, SetPlayoutDevice) {
-  SKIP_TEST_IF_NOT(requirements_satisfied());
-  int num_devices = audio_device()->PlayoutDevices();
-  if (NewWindowsAudioDeviceModuleIsUsed()) {
-    num_devices += 2;
-  }
-  EXPECT_GT(num_devices, 0);
-  // Verify that all available playout devices can be set (not enabled yet).
-  for (int i = 0; i < num_devices; ++i) {
-    EXPECT_EQ(0, audio_device()->SetPlayoutDevice(i));
-  }
-  EXPECT_EQ(-1, audio_device()->SetPlayoutDevice(num_devices));
 #ifdef WEBRTC_WIN
-  // On Windows, verify the alternative method where the user can select device
+
+TEST_P(MAYBE_AudioDeviceTest, SetPlayoutDevice) {
+  // Verify the alternative method where the user can select device
   // by role.
   EXPECT_EQ(
       0, audio_device()->SetPlayoutDevice(AudioDeviceModule::kDefaultDevice));
   EXPECT_EQ(0, audio_device()->SetPlayoutDevice(
                    AudioDeviceModule::kDefaultCommunicationDevice));
-#endif
 }
 
-// Counts number of active input devices and ensure that all can be selected.
 TEST_P(MAYBE_AudioDeviceTest, SetRecordingDevice) {
-  SKIP_TEST_IF_NOT(requirements_satisfied());
-  int num_devices = audio_device()->RecordingDevices();
-  if (NewWindowsAudioDeviceModuleIsUsed()) {
-    num_devices += 2;
-  }
-  EXPECT_GT(num_devices, 0);
-  // Verify that all available recording devices can be set (not enabled yet).
-  for (int i = 0; i < num_devices; ++i) {
-    EXPECT_EQ(0, audio_device()->SetRecordingDevice(i));
-  }
-  EXPECT_EQ(-1, audio_device()->SetRecordingDevice(num_devices));
-#ifdef WEBRTC_WIN
-  // On Windows, verify the alternative method where the user can select device
+  // Verify the alternative method where the user can select device
   // by role.
   EXPECT_EQ(
       0, audio_device()->SetRecordingDevice(AudioDeviceModule::kDefaultDevice));
   EXPECT_EQ(0, audio_device()->SetRecordingDevice(
                    AudioDeviceModule::kDefaultCommunicationDevice));
-#endif
 }
+
+#endif  // WEBRTC_WIN
 
 // Tests Start/Stop playout without any registered audio callback.
 TEST_P(MAYBE_AudioDeviceTest, StartStopPlayout) {
@@ -812,17 +744,8 @@ TEST_P(MAYBE_AudioDeviceTest, StartStopRecording) {
 // the selected device can be created and used as intended.
 TEST_P(MAYBE_AudioDeviceTest, StartStopPlayoutWithRealDevice) {
   SKIP_TEST_IF_NOT(requirements_satisfied());
-  int num_devices = audio_device()->PlayoutDevices();
-  if (NewWindowsAudioDeviceModuleIsUsed()) {
-    num_devices += 2;
-  }
-  EXPECT_GT(num_devices, 0);
-  // Verify that all available playout devices can be set and used.
-  for (int i = 0; i < num_devices; ++i) {
-    EXPECT_EQ(0, audio_device()->SetPlayoutDevice(i));
-    StartPlayout();
-    StopPlayout();
-  }
+  StartPlayout();
+  StopPlayout();
 #ifdef WEBRTC_WIN
   AudioDeviceModule::WindowsDeviceType device_role[] = {
       AudioDeviceModule::kDefaultDevice,
@@ -831,33 +754,6 @@ TEST_P(MAYBE_AudioDeviceTest, StartStopPlayoutWithRealDevice) {
     EXPECT_EQ(0, audio_device()->SetPlayoutDevice(device_role[i]));
     StartPlayout();
     StopPlayout();
-  }
-#endif
-}
-
-// Tests Start/Stop recording for all available input devices to ensure that
-// the selected device can be created and used as intended.
-TEST_P(MAYBE_AudioDeviceTest, StartStopRecordingWithRealDevice) {
-  SKIP_TEST_IF_NOT(requirements_satisfied());
-  int num_devices = audio_device()->RecordingDevices();
-  if (NewWindowsAudioDeviceModuleIsUsed()) {
-    num_devices += 2;
-  }
-  EXPECT_GT(num_devices, 0);
-  // Verify that all available recording devices can be set and used.
-  for (int i = 0; i < num_devices; ++i) {
-    EXPECT_EQ(0, audio_device()->SetRecordingDevice(i));
-    StartRecording();
-    StopRecording();
-  }
-#ifdef WEBRTC_WIN
-  AudioDeviceModule::WindowsDeviceType device_role[] = {
-      AudioDeviceModule::kDefaultDevice,
-      AudioDeviceModule::kDefaultCommunicationDevice};
-  for (size_t i = 0; i < arraysize(device_role); ++i) {
-    EXPECT_EQ(0, audio_device()->SetRecordingDevice(device_role[i]));
-    StartRecording();
-    StopRecording();
   }
 #endif
 }
@@ -1147,8 +1043,6 @@ TEST_P(MAYBE_AudioDeviceTest, RunPlayoutAndRecordingInFullDuplex) {
   // (mainly on Windows) do not support mono.
   EXPECT_EQ(0, audio_device()->SetStereoPlayout(true));
   EXPECT_EQ(0, audio_device()->SetStereoRecording(true));
-  // Mute speakers to prevent howling.
-  EXPECT_EQ(0, audio_device()->SetSpeakerVolume(0));
   StartPlayout();
   StartRecording();
   event()->Wait(std::max(kTestTimeOut, kFullDuplexTime));

@@ -174,26 +174,6 @@ bool OpenSLESPlayer::Playing() const {
   return playing_;
 }
 
-bool OpenSLESPlayer::SpeakerVolumeIsAvailable() {
-  return false;
-}
-
-int OpenSLESPlayer::SetSpeakerVolume(uint32_t volume) {
-  return -1;
-}
-
-absl::optional<uint32_t> OpenSLESPlayer::SpeakerVolume() const {
-  return absl::nullopt;
-}
-
-absl::optional<uint32_t> OpenSLESPlayer::MaxSpeakerVolume() const {
-  return absl::nullopt;
-}
-
-absl::optional<uint32_t> OpenSLESPlayer::MinSpeakerVolume() const {
-  return absl::nullopt;
-}
-
 void OpenSLESPlayer::AttachAudioBuffer(AudioDeviceBuffer* audioBuffer) {
   ALOGD("AttachAudioBuffer");
   RTC_DCHECK(thread_checker_.IsCurrent());

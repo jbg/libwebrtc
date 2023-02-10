@@ -171,62 +171,6 @@ class WindowsAudioDeviceModule : public AudioDeviceModuleForTest {
     return initialized_;
   }
 
-  int16_t PlayoutDevices() override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    RETURN_IF_OUTPUT_RESTARTS(0);
-    return output_->NumDevices();
-  }
-
-  int16_t RecordingDevices() override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    RETURN_IF_INPUT_RESTARTS(0);
-    return input_->NumDevices();
-  }
-
-  int32_t PlayoutDeviceName(uint16_t index,
-                            char name[kAdmMaxDeviceNameSize],
-                            char guid[kAdmMaxGuidSize]) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    RETURN_IF_OUTPUT_RESTARTS(0);
-    std::string name_str, guid_str;
-    int ret = -1;
-    if (guid != nullptr) {
-      ret = output_->DeviceName(index, &name_str, &guid_str);
-      rtc::strcpyn(guid, kAdmMaxGuidSize, guid_str.c_str());
-    } else {
-      ret = output_->DeviceName(index, &name_str, nullptr);
-    }
-    rtc::strcpyn(name, kAdmMaxDeviceNameSize, name_str.c_str());
-    return ret;
-  }
-  int32_t RecordingDeviceName(uint16_t index,
-                              char name[kAdmMaxDeviceNameSize],
-                              char guid[kAdmMaxGuidSize]) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    RETURN_IF_INPUT_RESTARTS(0);
-    std::string name_str, guid_str;
-    int ret = -1;
-    if (guid != nullptr) {
-      ret = input_->DeviceName(index, &name_str, &guid_str);
-      rtc::strcpyn(guid, kAdmMaxGuidSize, guid_str.c_str());
-    } else {
-      ret = input_->DeviceName(index, &name_str, nullptr);
-    }
-    rtc::strcpyn(name, kAdmMaxDeviceNameSize, name_str.c_str());
-    return ret;
-  }
-
-  int32_t SetPlayoutDevice(uint16_t index) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    RETURN_IF_OUTPUT_RESTARTS(0);
-    return output_->SetDevice(index);
-  }
-
   int32_t SetPlayoutDevice(
       AudioDeviceModule::WindowsDeviceType device) override {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
@@ -234,24 +178,12 @@ class WindowsAudioDeviceModule : public AudioDeviceModuleForTest {
     RETURN_IF_OUTPUT_RESTARTS(0);
     return output_->SetDevice(device);
   }
-  int32_t SetRecordingDevice(uint16_t index) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    return input_->SetDevice(index);
-  }
 
   int32_t SetRecordingDevice(
       AudioDeviceModule::WindowsDeviceType device) override {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     RTC_DCHECK_RUN_ON(&thread_checker_);
     return input_->SetDevice(device);
-  }
-
-  int32_t PlayoutIsAvailable(bool* available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    *available = true;
-    return 0;
   }
 
   int32_t InitPlayout() override {
@@ -267,13 +199,6 @@ class WindowsAudioDeviceModule : public AudioDeviceModuleForTest {
     RTC_DCHECK_RUN_ON(&thread_checker_);
     RETURN_IF_OUTPUT_RESTARTS(true);
     return output_->PlayoutIsInitialized();
-  }
-
-  int32_t RecordingIsAvailable(bool* available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    *available = true;
-    return 0;
   }
 
   int32_t InitRecording() override {
@@ -361,40 +286,6 @@ class WindowsAudioDeviceModule : public AudioDeviceModuleForTest {
     RTC_DLOG(LS_WARNING) << "This method has no effect";
     return initialized_;
   }
-
-  int32_t SpeakerVolumeIsAvailable(bool* available) override {
-    // TODO(henrika): improve support.
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    *available = false;
-    return 0;
-  }
-
-  int32_t SetSpeakerVolume(uint32_t volume) override { return 0; }
-  int32_t SpeakerVolume(uint32_t* volume) const override { return 0; }
-  int32_t MaxSpeakerVolume(uint32_t* maxVolume) const override { return 0; }
-  int32_t MinSpeakerVolume(uint32_t* minVolume) const override { return 0; }
-
-  int32_t MicrophoneVolumeIsAvailable(bool* available) override {
-    // TODO(henrika): improve support.
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DCHECK_RUN_ON(&thread_checker_);
-    *available = false;
-    return 0;
-  }
-
-  int32_t SetMicrophoneVolume(uint32_t volume) override { return 0; }
-  int32_t MicrophoneVolume(uint32_t* volume) const override { return 0; }
-  int32_t MaxMicrophoneVolume(uint32_t* maxVolume) const override { return 0; }
-  int32_t MinMicrophoneVolume(uint32_t* minVolume) const override { return 0; }
-
-  int32_t SpeakerMuteIsAvailable(bool* available) override { return 0; }
-  int32_t SetSpeakerMute(bool enable) override { return 0; }
-  int32_t SpeakerMute(bool* enabled) const override { return 0; }
-
-  int32_t MicrophoneMuteIsAvailable(bool* available) override { return 0; }
-  int32_t SetMicrophoneMute(bool enable) override { return 0; }
-  int32_t MicrophoneMute(bool* enabled) const override { return 0; }
 
   int32_t StereoPlayoutIsAvailable(bool* available) const override {
     // TODO(henrika): improve support.

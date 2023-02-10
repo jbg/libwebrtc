@@ -179,37 +179,6 @@ bool AudioTrackJni::Playing() const {
   return playing_;
 }
 
-bool AudioTrackJni::SpeakerVolumeIsAvailable() {
-  return true;
-}
-
-int AudioTrackJni::SetSpeakerVolume(uint32_t volume) {
-  RTC_LOG(LS_INFO) << "SetSpeakerVolume(" << volume << ")";
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioTrack_setStreamVolume(env_, j_audio_track_,
-                                               static_cast<int>(volume))
-             ? 0
-             : -1;
-}
-
-absl::optional<uint32_t> AudioTrackJni::MaxSpeakerVolume() const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioTrack_getStreamMaxVolume(env_, j_audio_track_);
-}
-
-absl::optional<uint32_t> AudioTrackJni::MinSpeakerVolume() const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  return 0;
-}
-
-absl::optional<uint32_t> AudioTrackJni::SpeakerVolume() const {
-  RTC_DCHECK(thread_checker_.IsCurrent());
-  const uint32_t volume =
-      Java_WebRtcAudioTrack_getStreamVolume(env_, j_audio_track_);
-  RTC_LOG(LS_INFO) << "SpeakerVolume: " << volume;
-  return volume;
-}
-
 int AudioTrackJni::GetPlayoutUnderrunCount() {
   return Java_WebRtcAudioTrack_GetPlayoutUnderrunCount(env_, j_audio_track_);
 }

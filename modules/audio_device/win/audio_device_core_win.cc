@@ -654,6 +654,12 @@ int32_t AudioDeviceWindowsCore::InitSpeakerLocked() {
     return -1;
   }
 
+  if (SetPlayoutDeviceLocked(AudioDeviceModule::kDefaultCommunicationDevice) ==
+      -1) {
+    RTC_LOG(LS_ERROR) << "failed to set playout device";
+    return -1;
+  }
+
   if (_ptrDeviceOut == NULL) {
     return -1;
   }
@@ -730,6 +736,12 @@ int32_t AudioDeviceWindowsCore::InitMicrophoneLocked() {
     return -1;
   }
 
+  if (SetRecordingDeviceLocked(
+          AudioDeviceModule::kDefaultCommunicationDevice) == -1) {
+    RTC_LOG(LS_ERROR) << "failed to set recording device";
+    return -1;
+  }
+
   if (_usingInputDeviceIndex) {
     int16_t nDevices = RecordingDevicesLocked();
     if (_inputDeviceIndex > (nDevices - 1)) {
@@ -788,364 +800,6 @@ bool AudioDeviceWindowsCore::SpeakerIsInitialized() const {
 
 bool AudioDeviceWindowsCore::MicrophoneIsInitialized() const {
   return (_microphoneIsInitialized);
-}
-
-// ----------------------------------------------------------------------------
-//  SpeakerVolumeIsAvailable
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::SpeakerVolumeIsAvailable(bool& available) {
-  MutexLock lock(&mutex_);
-
-  if (_ptrDeviceOut == NULL) {
-    return -1;
-  }
-
-  HRESULT hr = S_OK;
-  IAudioSessionManager* pManager = NULL;
-  ISimpleAudioVolume* pVolume = NULL;
-
-  hr = _ptrDeviceOut->Activate(__uuidof(IAudioSessionManager), CLSCTX_ALL, NULL,
-                               (void**)&pManager);
-  EXIT_ON_ERROR(hr);
-
-  hr = pManager->GetSimpleAudioVolume(NULL, FALSE, &pVolume);
-  EXIT_ON_ERROR(hr);
-
-  float volume(0.0f);
-  hr = pVolume->GetMasterVolume(&volume);
-  if (FAILED(hr)) {
-    available = false;
-  }
-  available = true;
-
-  SAFE_RELEASE(pManager);
-  SAFE_RELEASE(pVolume);
-
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  SAFE_RELEASE(pManager);
-  SAFE_RELEASE(pVolume);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  SetSpeakerVolume
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::SetSpeakerVolume(uint32_t volume) {
-  {
-    MutexLock lock(&mutex_);
-
-    if (!_speakerIsInitialized) {
-      return -1;
-    }
-
-    if (_ptrDeviceOut == NULL) {
-      return -1;
-    }
-  }
-
-  if (volume < (uint32_t)MIN_CORE_SPEAKER_VOLUME ||
-      volume > (uint32_t)MAX_CORE_SPEAKER_VOLUME) {
-    return -1;
-  }
-
-  HRESULT hr = S_OK;
-
-  // scale input volume to valid range (0.0 to 1.0)
-  const float fLevel = (float)volume / MAX_CORE_SPEAKER_VOLUME;
-  volume_mutex_.Lock();
-  hr = _ptrRenderSimpleVolume->SetMasterVolume(fLevel, NULL);
-  volume_mutex_.Unlock();
-  EXIT_ON_ERROR(hr);
-
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  SpeakerVolume
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::SpeakerVolume(uint32_t& volume) const {
-  {
-    MutexLock lock(&mutex_);
-
-    if (!_speakerIsInitialized) {
-      return -1;
-    }
-
-    if (_ptrDeviceOut == NULL) {
-      return -1;
-    }
-  }
-
-  HRESULT hr = S_OK;
-  float fLevel(0.0f);
-
-  volume_mutex_.Lock();
-  hr = _ptrRenderSimpleVolume->GetMasterVolume(&fLevel);
-  volume_mutex_.Unlock();
-  EXIT_ON_ERROR(hr);
-
-  // scale input volume range [0.0,1.0] to valid output range
-  volume = static_cast<uint32_t>(fLevel * MAX_CORE_SPEAKER_VOLUME);
-
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  MaxSpeakerVolume
-//
-//  The internal range for Core Audio is 0.0 to 1.0, where 0.0 indicates
-//  silence and 1.0 indicates full volume (no attenuation).
-//  We add our (webrtc-internal) own max level to match the Wave API and
-//  how it is used today in VoE.
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::MaxSpeakerVolume(uint32_t& maxVolume) const {
-  if (!_speakerIsInitialized) {
-    return -1;
-  }
-
-  maxVolume = static_cast<uint32_t>(MAX_CORE_SPEAKER_VOLUME);
-
-  return 0;
-}
-
-// ----------------------------------------------------------------------------
-//  MinSpeakerVolume
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::MinSpeakerVolume(uint32_t& minVolume) const {
-  if (!_speakerIsInitialized) {
-    return -1;
-  }
-
-  minVolume = static_cast<uint32_t>(MIN_CORE_SPEAKER_VOLUME);
-
-  return 0;
-}
-
-// ----------------------------------------------------------------------------
-//  SpeakerMuteIsAvailable
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::SpeakerMuteIsAvailable(bool& available) {
-  MutexLock lock(&mutex_);
-
-  if (_ptrDeviceOut == NULL) {
-    return -1;
-  }
-
-  HRESULT hr = S_OK;
-  IAudioEndpointVolume* pVolume = NULL;
-
-  // Query the speaker system mute state.
-  hr = _ptrDeviceOut->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_ALL, NULL,
-                               reinterpret_cast<void**>(&pVolume));
-  EXIT_ON_ERROR(hr);
-
-  BOOL mute;
-  hr = pVolume->GetMute(&mute);
-  if (FAILED(hr))
-    available = false;
-  else
-    available = true;
-
-  SAFE_RELEASE(pVolume);
-
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  SAFE_RELEASE(pVolume);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  SetSpeakerMute
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::SetSpeakerMute(bool enable) {
-  MutexLock lock(&mutex_);
-
-  if (!_speakerIsInitialized) {
-    return -1;
-  }
-
-  if (_ptrDeviceOut == NULL) {
-    return -1;
-  }
-
-  HRESULT hr = S_OK;
-  IAudioEndpointVolume* pVolume = NULL;
-
-  // Set the speaker system mute state.
-  hr = _ptrDeviceOut->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_ALL, NULL,
-                               reinterpret_cast<void**>(&pVolume));
-  EXIT_ON_ERROR(hr);
-
-  const BOOL mute(enable);
-  hr = pVolume->SetMute(mute, NULL);
-  EXIT_ON_ERROR(hr);
-
-  SAFE_RELEASE(pVolume);
-
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  SAFE_RELEASE(pVolume);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  SpeakerMute
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::SpeakerMute(bool& enabled) const {
-  if (!_speakerIsInitialized) {
-    return -1;
-  }
-
-  if (_ptrDeviceOut == NULL) {
-    return -1;
-  }
-
-  HRESULT hr = S_OK;
-  IAudioEndpointVolume* pVolume = NULL;
-
-  // Query the speaker system mute state.
-  hr = _ptrDeviceOut->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_ALL, NULL,
-                               reinterpret_cast<void**>(&pVolume));
-  EXIT_ON_ERROR(hr);
-
-  BOOL mute;
-  hr = pVolume->GetMute(&mute);
-  EXIT_ON_ERROR(hr);
-
-  enabled = (mute == TRUE) ? true : false;
-
-  SAFE_RELEASE(pVolume);
-
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  SAFE_RELEASE(pVolume);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  MicrophoneMuteIsAvailable
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::MicrophoneMuteIsAvailable(bool& available) {
-  MutexLock lock(&mutex_);
-
-  if (_ptrDeviceIn == NULL) {
-    return -1;
-  }
-
-  HRESULT hr = S_OK;
-  IAudioEndpointVolume* pVolume = NULL;
-
-  // Query the microphone system mute state.
-  hr = _ptrDeviceIn->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_ALL, NULL,
-                              reinterpret_cast<void**>(&pVolume));
-  EXIT_ON_ERROR(hr);
-
-  BOOL mute;
-  hr = pVolume->GetMute(&mute);
-  if (FAILED(hr))
-    available = false;
-  else
-    available = true;
-
-  SAFE_RELEASE(pVolume);
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  SAFE_RELEASE(pVolume);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  SetMicrophoneMute
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::SetMicrophoneMute(bool enable) {
-  if (!_microphoneIsInitialized) {
-    return -1;
-  }
-
-  if (_ptrDeviceIn == NULL) {
-    return -1;
-  }
-
-  HRESULT hr = S_OK;
-  IAudioEndpointVolume* pVolume = NULL;
-
-  // Set the microphone system mute state.
-  hr = _ptrDeviceIn->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_ALL, NULL,
-                              reinterpret_cast<void**>(&pVolume));
-  EXIT_ON_ERROR(hr);
-
-  const BOOL mute(enable);
-  hr = pVolume->SetMute(mute, NULL);
-  EXIT_ON_ERROR(hr);
-
-  SAFE_RELEASE(pVolume);
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  SAFE_RELEASE(pVolume);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  MicrophoneMute
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::MicrophoneMute(bool& enabled) const {
-  if (!_microphoneIsInitialized) {
-    return -1;
-  }
-
-  HRESULT hr = S_OK;
-  IAudioEndpointVolume* pVolume = NULL;
-
-  // Query the microphone system mute state.
-  hr = _ptrDeviceIn->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_ALL, NULL,
-                              reinterpret_cast<void**>(&pVolume));
-  EXIT_ON_ERROR(hr);
-
-  BOOL mute;
-  hr = pVolume->GetMute(&mute);
-  EXIT_ON_ERROR(hr);
-
-  enabled = (mute == TRUE) ? true : false;
-
-  SAFE_RELEASE(pVolume);
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  SAFE_RELEASE(pVolume);
-  return -1;
 }
 
 // ----------------------------------------------------------------------------
@@ -1233,150 +887,6 @@ int32_t AudioDeviceWindowsCore::StereoPlayout(bool& enabled) const {
 }
 
 // ----------------------------------------------------------------------------
-//  MicrophoneVolumeIsAvailable
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::MicrophoneVolumeIsAvailable(bool& available) {
-  MutexLock lock(&mutex_);
-
-  if (_ptrDeviceIn == NULL) {
-    return -1;
-  }
-
-  HRESULT hr = S_OK;
-  IAudioEndpointVolume* pVolume = NULL;
-
-  hr = _ptrDeviceIn->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_ALL, NULL,
-                              reinterpret_cast<void**>(&pVolume));
-  EXIT_ON_ERROR(hr);
-
-  float volume(0.0f);
-  hr = pVolume->GetMasterVolumeLevelScalar(&volume);
-  if (FAILED(hr)) {
-    available = false;
-  }
-  available = true;
-
-  SAFE_RELEASE(pVolume);
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  SAFE_RELEASE(pVolume);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  SetMicrophoneVolume
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::SetMicrophoneVolume(uint32_t volume) {
-  RTC_LOG(LS_VERBOSE) << "AudioDeviceWindowsCore::SetMicrophoneVolume(volume="
-                      << volume << ")";
-
-  {
-    MutexLock lock(&mutex_);
-
-    if (!_microphoneIsInitialized) {
-      return -1;
-    }
-
-    if (_ptrDeviceIn == NULL) {
-      return -1;
-    }
-  }
-
-  if (volume < static_cast<uint32_t>(MIN_CORE_MICROPHONE_VOLUME) ||
-      volume > static_cast<uint32_t>(MAX_CORE_MICROPHONE_VOLUME)) {
-    return -1;
-  }
-
-  HRESULT hr = S_OK;
-  // scale input volume to valid range (0.0 to 1.0)
-  const float fLevel = static_cast<float>(volume) / MAX_CORE_MICROPHONE_VOLUME;
-  volume_mutex_.Lock();
-  _ptrCaptureVolume->SetMasterVolumeLevelScalar(fLevel, NULL);
-  volume_mutex_.Unlock();
-  EXIT_ON_ERROR(hr);
-
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  MicrophoneVolume
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::MicrophoneVolume(uint32_t& volume) const {
-  {
-    MutexLock lock(&mutex_);
-
-    if (!_microphoneIsInitialized) {
-      return -1;
-    }
-
-    if (_ptrDeviceIn == NULL) {
-      return -1;
-    }
-  }
-
-  HRESULT hr = S_OK;
-  float fLevel(0.0f);
-  volume = 0;
-  volume_mutex_.Lock();
-  hr = _ptrCaptureVolume->GetMasterVolumeLevelScalar(&fLevel);
-  volume_mutex_.Unlock();
-  EXIT_ON_ERROR(hr);
-
-  // scale input volume range [0.0,1.0] to valid output range
-  volume = static_cast<uint32_t>(fLevel * MAX_CORE_MICROPHONE_VOLUME);
-
-  return 0;
-
-Exit:
-  _TraceCOMError(hr);
-  return -1;
-}
-
-// ----------------------------------------------------------------------------
-//  MaxMicrophoneVolume
-//
-//  The internal range for Core Audio is 0.0 to 1.0, where 0.0 indicates
-//  silence and 1.0 indicates full volume (no attenuation).
-//  We add our (webrtc-internal) own max level to match the Wave API and
-//  how it is used today in VoE.
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::MaxMicrophoneVolume(uint32_t& maxVolume) const {
-  RTC_DLOG(LS_VERBOSE) << __FUNCTION__;
-
-  if (!_microphoneIsInitialized) {
-    return -1;
-  }
-
-  maxVolume = static_cast<uint32_t>(MAX_CORE_MICROPHONE_VOLUME);
-
-  return 0;
-}
-
-// ----------------------------------------------------------------------------
-//  MinMicrophoneVolume
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::MinMicrophoneVolume(uint32_t& minVolume) const {
-  if (!_microphoneIsInitialized) {
-    return -1;
-  }
-
-  minVolume = static_cast<uint32_t>(MIN_CORE_MICROPHONE_VOLUME);
-
-  return 0;
-}
-
-// ----------------------------------------------------------------------------
 //  PlayoutDevices
 // ----------------------------------------------------------------------------
 int16_t AudioDeviceWindowsCore::PlayoutDevices() {
@@ -1393,58 +903,16 @@ int16_t AudioDeviceWindowsCore::PlayoutDevicesLocked() {
 }
 
 // ----------------------------------------------------------------------------
-//  SetPlayoutDevice I (II)
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::SetPlayoutDevice(uint16_t index) {
-  if (_playIsInitialized) {
-    return -1;
-  }
-
-  // Get current number of available rendering endpoint devices and refresh the
-  // rendering collection.
-  UINT nDevices = PlayoutDevices();
-
-  if (index < 0 || index > (nDevices - 1)) {
-    RTC_LOG(LS_ERROR) << "device index is out of range [0," << (nDevices - 1)
-                      << "]";
-    return -1;
-  }
-
-  MutexLock lock(&mutex_);
-
-  HRESULT hr(S_OK);
-
-  RTC_DCHECK(_ptrRenderCollection);
-
-  //  Select an endpoint rendering device given the specified index
-  SAFE_RELEASE(_ptrDeviceOut);
-  hr = _ptrRenderCollection->Item(index, &_ptrDeviceOut);
-  if (FAILED(hr)) {
-    _TraceCOMError(hr);
-    SAFE_RELEASE(_ptrDeviceOut);
-    return -1;
-  }
-
-  WCHAR szDeviceName[MAX_PATH];
-  const int bufferLen = sizeof(szDeviceName) / sizeof(szDeviceName)[0];
-
-  // Get the endpoint device's friendly-name
-  if (_GetDeviceName(_ptrDeviceOut, szDeviceName, bufferLen) == 0) {
-    RTC_LOG(LS_VERBOSE) << "friendly name: \"" << szDeviceName << "\"";
-  }
-
-  _usingOutputDeviceIndex = true;
-  _outputDeviceIndex = index;
-
-  return 0;
-}
-
-// ----------------------------------------------------------------------------
 //  SetPlayoutDevice II (II)
 // ----------------------------------------------------------------------------
 
 int32_t AudioDeviceWindowsCore::SetPlayoutDevice(
+    AudioDeviceModule::WindowsDeviceType device) {
+  MutexLock lock(&mutex_);
+  return SetPlayoutDeviceLocked(device);
+}
+
+int32_t AudioDeviceWindowsCore::SetPlayoutDeviceLocked(
     AudioDeviceModule::WindowsDeviceType device) {
   if (_playIsInitialized) {
     return -1;
@@ -1457,8 +925,6 @@ int32_t AudioDeviceWindowsCore::SetPlayoutDevice(
   } else if (device == AudioDeviceModule::kDefaultCommunicationDevice) {
     role = eCommunications;
   }
-
-  MutexLock lock(&mutex_);
 
   // Refresh the list of rendering endpoint devices
   _RefreshDeviceList(eRender);
@@ -1659,58 +1125,15 @@ int16_t AudioDeviceWindowsCore::RecordingDevicesLocked() {
 }
 
 // ----------------------------------------------------------------------------
-//  SetRecordingDevice I (II)
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::SetRecordingDevice(uint16_t index) {
-  if (_recIsInitialized) {
-    return -1;
-  }
-
-  // Get current number of available capture endpoint devices and refresh the
-  // capture collection.
-  UINT nDevices = RecordingDevices();
-
-  if (index < 0 || index > (nDevices - 1)) {
-    RTC_LOG(LS_ERROR) << "device index is out of range [0," << (nDevices - 1)
-                      << "]";
-    return -1;
-  }
-
-  MutexLock lock(&mutex_);
-
-  HRESULT hr(S_OK);
-
-  RTC_DCHECK(_ptrCaptureCollection);
-
-  // Select an endpoint capture device given the specified index
-  SAFE_RELEASE(_ptrDeviceIn);
-  hr = _ptrCaptureCollection->Item(index, &_ptrDeviceIn);
-  if (FAILED(hr)) {
-    _TraceCOMError(hr);
-    SAFE_RELEASE(_ptrDeviceIn);
-    return -1;
-  }
-
-  WCHAR szDeviceName[MAX_PATH];
-  const int bufferLen = sizeof(szDeviceName) / sizeof(szDeviceName)[0];
-
-  // Get the endpoint device's friendly-name
-  if (_GetDeviceName(_ptrDeviceIn, szDeviceName, bufferLen) == 0) {
-    RTC_LOG(LS_VERBOSE) << "friendly name: \"" << szDeviceName << "\"";
-  }
-
-  _usingInputDeviceIndex = true;
-  _inputDeviceIndex = index;
-
-  return 0;
-}
-
-// ----------------------------------------------------------------------------
 //  SetRecordingDevice II (II)
 // ----------------------------------------------------------------------------
-
 int32_t AudioDeviceWindowsCore::SetRecordingDevice(
+    AudioDeviceModule::WindowsDeviceType device) {
+  MutexLock lock(&mutex_);
+  return SetRecordingDeviceLocked(device);
+}
+
+int32_t AudioDeviceWindowsCore::SetRecordingDeviceLocked(
     AudioDeviceModule::WindowsDeviceType device) {
   if (_recIsInitialized) {
     return -1;
@@ -1723,8 +1146,6 @@ int32_t AudioDeviceWindowsCore::SetRecordingDevice(
   } else if (device == AudioDeviceModule::kDefaultCommunicationDevice) {
     role = eCommunications;
   }
-
-  MutexLock lock(&mutex_);
 
   // Refresh the list of capture endpoint devices
   _RefreshDeviceList(eCapture);
@@ -1752,46 +1173,6 @@ int32_t AudioDeviceWindowsCore::SetRecordingDevice(
 
   _usingInputDeviceIndex = false;
   _inputDevice = device;
-
-  return 0;
-}
-
-// ----------------------------------------------------------------------------
-//  PlayoutIsAvailable
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::PlayoutIsAvailable(bool& available) {
-  available = false;
-
-  // Try to initialize the playout side
-  int32_t res = InitPlayout();
-
-  // Cancel effect of initialization
-  StopPlayout();
-
-  if (res != -1) {
-    available = true;
-  }
-
-  return 0;
-}
-
-// ----------------------------------------------------------------------------
-//  RecordingIsAvailable
-// ----------------------------------------------------------------------------
-
-int32_t AudioDeviceWindowsCore::RecordingIsAvailable(bool& available) {
-  available = false;
-
-  // Try to initialize the recording side
-  int32_t res = InitRecording();
-
-  // Cancel effect of initialization
-  StopRecording();
-
-  if (res != -1) {
-    available = true;
-  }
 
   return 0;
 }
