@@ -12,9 +12,222 @@
 
 #include "test/gtest.h"
 
+#define RTC_HELLO()   \
+  do {                \
+    printf("Hello "); \
+  } while (0)
+
+TEST(ChecksTest, RandomMacro) {
+  RTC_HELLO();
+  printf("World\n");
+}
+
+TEST(ChecksTest, MultipleChecks) {
+  printf("Lets go!\n");
+
+  RTC_CHECK(true);
+  RTC_DCHECK(true);
+  RTC_CHECK(true);
+  int chars_printed = 0;
+  chars_printed = printf("Woohoo!\n");
+
+  RTC_CHECK(chars_printed > 0);
+  RTC_CHECK(chars_printed > 0);
+  printf("Hooray!\n");
+  printf("Done\n");
+}
+
+TEST(ChecksTest, MultipleDchecks) {
+  printf("Same for DCHECK!\n");
+
+  RTC_DCHECK(true);
+  RTC_DCHECK(true);
+  RTC_DCHECK(true);
+  int chars_printed = 0;
+  chars_printed = printf("Yay!\n");
+
+  RTC_DCHECK(chars_printed > 0);
+  RTC_DCHECK(chars_printed > 0);
+  printf("Yippee!\n");
+  printf("Done\n");
+}
+
+TEST(ChecksTest, ExplicitReplacement) {
+  printf("Explicit!\n");
+
+  (true) ? static_cast<void>(0)
+         : ::rtc::webrtc_checks_impl::FatalLogCall<false>(__FILE__, __LINE__,
+                                                          "true") &
+               ::rtc::webrtc_checks_impl::LogStreamer<>();
+
+  int chars_printed = 0;
+  chars_printed = printf("Foo!\n");
+  printf("%d\n", chars_printed);
+}
+
+TEST(ChecksTest, ExplicitReplacement2) {
+  printf("Explicit2!\n");
+
+  (true)
+      ?
+      static_cast<void>(0)
+      :
+      ::rtc::webrtc_checks_impl::FatalLogCall<false>(__FILE__, __LINE__,"true")
+      & ::rtc::webrtc_checks_impl::LogStreamer<>();
+
+  int chars_printed = 0;
+  chars_printed = printf("Bar!\n");
+  printf("%d\n", chars_printed);
+}
+
+TEST(ChecksTest, ExplicitReplacement3) {
+  printf("Explicit3!\n");
+
+  int dummy = (true) ? 0
+      : printf("FatalLogCall<false>\n") &
+      printf("LogStreamer\n");
+
+  printf("%d\n", dummy);
+}
+
+
+TEST(ChecksTest, ExplicitReplacement4) {
+  printf("Explicit4!\n");
+
+  auto a =  ::rtc::webrtc_checks_impl::FatalLogCall<false>(__FILE__, __LINE__,
+                                                           "true");
+  auto b =  ::rtc::webrtc_checks_impl::LogStreamer<>();
+
+  (true) ? static_cast<void>(0)
+         : a &
+         b;
+
+  int chars_printed = 0;
+  chars_printed = printf("Foo!\n");
+  printf("%d\n", chars_printed);
+}
+
+
+class Bar {
+ public:
+  __attribute__((__noreturn__)) void call() const {
+    printf("Foo & Bar\n");
+    exit(1);
+  }
+};
+
+class Foo {
+ public:
+  __attribute__((__noreturn__)) void operator&(const Bar& b) {
+    b.call();
+  }
+};
+
+
+TEST(ChecksTest, ExplicitReplacement5) {
+  printf("Explicit5!\n");
+
+  Foo a;
+  Bar b;
+
+  (true) ? static_cast<void>(0)
+         : a &
+         b;
+
+  int chars_printed = 0;
+  chars_printed = printf("FooBar!\n");
+  printf("%d\n", chars_printed);
+}
+
+TEST(ChecksTest, ExplicitReplacement6) {
+  printf("Explicit6!\n");
+
+  Foo a;
+  Bar b;
+
+  (true) ? static_cast<void>(0) : a & b;
+
+  int chars_printed = 0;
+  chars_printed = printf("FooBar!\n");
+  printf("%d\n", chars_printed);
+}
+
+
+__attribute__((__noreturn__)) int foo_fun() {
+  printf("Foo\n");
+  exit(1);
+}
+
+
+TEST(ChecksTest, ExplicitReplacement7) {
+  printf("Explicit7!\n");
+
+  int dummy = (true) ? 0 : foo_fun();
+
+  printf("%d\n", dummy);
+  printf("Done\n");
+}
+
+
+TEST(ChecksTest, ExplicitReplacement8) {
+  printf("Explicit8!\n");
+
+  int dummy = 47;
+  {
+    dummy = (true) ? 0 : foo_fun();
+  }
+
+  printf("%d\n", dummy);
+  printf("Done\n");
+}
+
+TEST(ChecksTest, ExplicitReplacement9) {
+  printf("Explicit9!\n");
+
+  int dummy = (true) ? 0 : printf("Foo\n");
+
+  printf("%d\n", dummy);
+  printf("Done\n");
+}
+
+
+TEST(ChecksTest, ExplicitReplacement10) {
+  printf("Explicit10!\n");
+
+  int dummy = 47;
+  if ((true))
+    dummy = 0;
+  else
+    foo_fun();
+
+  printf("%d\n", dummy);
+  printf("Done\n");
+}
+
+TEST(ChecksTest, ExplicitReplacement11) {
+  printf("Explicit11!\n");
+
+  if ((false))
+    foo_fun();
+
+  printf("Done\n");
+}
+
+
+
+TEST(ChecksTest, CheckEq) {
+  int i = 47;
+  RTC_CHECK_EQ(i, 47);
+  printf("Still there?\n");
+
+  RTC_CHECK_EQ(i, 47) << "Whoopee";
+  printf("Yes!\n");
+}
+
 TEST(ChecksTest, ExpressionNotEvaluatedWhenCheckPassing) {
   int i = 0;
   RTC_CHECK(true) << "i=" << ++i;
+  (void)i;
   RTC_CHECK_EQ(i, 0) << "Previous check passed, but i was incremented!";
 }
 
