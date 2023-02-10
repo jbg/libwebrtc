@@ -16,6 +16,24 @@
       "message": "Some more fixes. I wonder if anyone cares about the AudioCodecPairId, but there was a test using it, so we might as well plumb it through.",
       "revId": "3af8687d027705f1cc41053818182a0d99ec92d6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a81bc927_161a9ff5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2023-02-10T16:40:29Z",
+      "side": 1,
+      "message": "It should be possible to remove AudioCodecPairId now that ISAC is gone and we don\u0027t need to associate send/receive codec instances. Perhaps ping hlundin@ to create a CL for that so you don\u0027t have to add all this cruft here?",
+      "parentUuid": "6dbeb2c7_5fb262c1",
+      "revId": "3af8687d027705f1cc41053818182a0d99ec92d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

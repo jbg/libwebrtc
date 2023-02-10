@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b5662a3_188d8adf",
+        "filename": "pc/channel.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2023-02-10T16:40:29Z",
+      "side": 1,
+      "message": "Yeah, a nit. To me it looked like sub classes where also using the accessors, so figured why not make them private? your call",
+      "parentUuid": "25b3b185_2569a648",
+      "range": {
+        "startLine": 306,
+        "startChar": 26,
+        "endLine": 306,
+        "endChar": 33
+      },
+      "revId": "34e561510df81627ed219c7386803ff256b67f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb857387_1caa4eca",
