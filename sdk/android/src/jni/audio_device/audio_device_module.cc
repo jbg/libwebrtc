@@ -136,61 +136,6 @@ class AndroidAudioDeviceModule : public AudioDeviceModule {
     return initialized_;
   }
 
-  int16_t PlayoutDevices() override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_LOG(LS_INFO) << "output: " << 1;
-    return 1;
-  }
-
-  int16_t RecordingDevices() override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_DLOG(LS_INFO) << "output: " << 1;
-    return 1;
-  }
-
-  int32_t PlayoutDeviceName(uint16_t index,
-                            char name[kAdmMaxDeviceNameSize],
-                            char guid[kAdmMaxGuidSize]) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t RecordingDeviceName(uint16_t index,
-                              char name[kAdmMaxDeviceNameSize],
-                              char guid[kAdmMaxGuidSize]) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetPlayoutDevice(uint16_t index) override {
-    // OK to use but it has no effect currently since device selection is
-    // done using Andoid APIs instead.
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << index << ")";
-    return 0;
-  }
-
-  int32_t SetPlayoutDevice(
-      AudioDeviceModule::WindowsDeviceType device) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetRecordingDevice(uint16_t index) override {
-    // OK to use but it has no effect currently since device selection is
-    // done using Andoid APIs instead.
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << index << ")";
-    return 0;
-  }
-
-  int32_t SetRecordingDevice(
-      AudioDeviceModule::WindowsDeviceType device) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t PlayoutIsAvailable(bool* available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    *available = true;
-    RTC_DLOG(LS_INFO) << "output: " << *available;
-    return 0;
-  }
-
   int32_t InitPlayout() override {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     if (!initialized_)
@@ -208,13 +153,6 @@ class AndroidAudioDeviceModule : public AudioDeviceModule {
   bool PlayoutIsInitialized() const override {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     return output_->PlayoutIsInitialized();
-  }
-
-  int32_t RecordingIsAvailable(bool* available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    *available = true;
-    RTC_DLOG(LS_INFO) << "output: " << *available;
-    return 0;
   }
 
   int32_t InitRecording() override {
@@ -331,113 +269,6 @@ class AndroidAudioDeviceModule : public AudioDeviceModule {
   bool MicrophoneIsInitialized() const override {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     return initialized_;
-  }
-
-  int32_t SpeakerVolumeIsAvailable(bool* available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    if (!initialized_)
-      return -1;
-    *available = output_->SpeakerVolumeIsAvailable();
-    RTC_DLOG(LS_INFO) << "output: " << *available;
-    return 0;
-  }
-
-  int32_t SetSpeakerVolume(uint32_t volume) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    if (!initialized_)
-      return -1;
-    return output_->SetSpeakerVolume(volume);
-  }
-
-  int32_t SpeakerVolume(uint32_t* output_volume) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    if (!initialized_)
-      return -1;
-    absl::optional<uint32_t> volume = output_->SpeakerVolume();
-    if (!volume)
-      return -1;
-    *output_volume = *volume;
-    RTC_DLOG(LS_INFO) << "output: " << *volume;
-    return 0;
-  }
-
-  int32_t MaxSpeakerVolume(uint32_t* output_max_volume) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    if (!initialized_)
-      return -1;
-    absl::optional<uint32_t> max_volume = output_->MaxSpeakerVolume();
-    if (!max_volume)
-      return -1;
-    *output_max_volume = *max_volume;
-    return 0;
-  }
-
-  int32_t MinSpeakerVolume(uint32_t* output_min_volume) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    if (!initialized_)
-      return -1;
-    absl::optional<uint32_t> min_volume = output_->MinSpeakerVolume();
-    if (!min_volume)
-      return -1;
-    *output_min_volume = *min_volume;
-    return 0;
-  }
-
-  int32_t MicrophoneVolumeIsAvailable(bool* available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    *available = false;
-    RTC_DLOG(LS_INFO) << "output: " << *available;
-    return -1;
-  }
-
-  int32_t SetMicrophoneVolume(uint32_t volume) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << volume << ")";
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t MicrophoneVolume(uint32_t* volume) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t MaxMicrophoneVolume(uint32_t* maxVolume) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t MinMicrophoneVolume(uint32_t* minVolume) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SpeakerMuteIsAvailable(bool* available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetSpeakerMute(bool enable) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << enable << ")";
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SpeakerMute(bool* enabled) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t MicrophoneMuteIsAvailable(bool* available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetMicrophoneMute(bool enable) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__ << "(" << enable << ")";
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t MicrophoneMute(bool* enabled) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    RTC_CHECK_NOTREACHED();
   }
 
   int32_t StereoPlayoutIsAvailable(bool* available) const override {

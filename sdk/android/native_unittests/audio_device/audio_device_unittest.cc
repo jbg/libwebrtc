@@ -606,21 +606,6 @@ class AudioDeviceTest : public ::testing::Test {
     EXPECT_GE(num_supported_interfaces, 1u);
   }
 
-  // Volume control is currently only supported for the Java output audio layer.
-  // For OpenSL ES, the internal stream volume is always on max level and there
-  // is no need for this test to set it to max.
-  bool AudioLayerSupportsVolumeControl() const {
-    return GetActiveAudioLayer() == AudioDeviceModule::kAndroidJavaAudio;
-  }
-
-  void SetMaxPlayoutVolume() {
-    if (!AudioLayerSupportsVolumeControl())
-      return;
-    uint32_t max_volume;
-    EXPECT_EQ(0, audio_device()->MaxSpeakerVolume(&max_volume));
-    EXPECT_EQ(0, audio_device()->SetSpeakerVolume(max_volume));
-  }
-
   void DisableBuiltInAECIfAvailable() {
     if (audio_device()->BuiltInAECIsAvailable()) {
       EXPECT_EQ(0, audio_device()->EnableBuiltInAEC(false));
@@ -654,24 +639,6 @@ class AudioDeviceTest : public ::testing::Test {
   void StopRecording() {
     EXPECT_EQ(0, audio_device()->StopRecording());
     EXPECT_FALSE(audio_device()->Recording());
-  }
-
-  int GetMaxSpeakerVolume() const {
-    uint32_t max_volume(0);
-    EXPECT_EQ(0, audio_device()->MaxSpeakerVolume(&max_volume));
-    return max_volume;
-  }
-
-  int GetMinSpeakerVolume() const {
-    uint32_t min_volume(0);
-    EXPECT_EQ(0, audio_device()->MinSpeakerVolume(&min_volume));
-    return min_volume;
-  }
-
-  int GetSpeakerVolume() const {
-    uint32_t volume(0);
-    EXPECT_EQ(0, audio_device()->SpeakerVolume(&volume));
-    return volume;
   }
 
   JNIEnv* jni_;
@@ -757,12 +724,6 @@ TEST_F(AudioDeviceTest, InitTerminate) {
   EXPECT_FALSE(audio_device()->Initialized());
 }
 
-TEST_F(AudioDeviceTest, Devices) {
-  // Device enumeration is not supported. Verify fixed values only.
-  EXPECT_EQ(1, audio_device()->PlayoutDevices());
-  EXPECT_EQ(1, audio_device()->RecordingDevices());
-}
-
 TEST_F(AudioDeviceTest, IsAcousticEchoCancelerSupported) {
   PRINT("%sAcoustic Echo Canceler support: %s\n", kTag,
         audio_device()->BuiltInAECIsAvailable() ? "Yes" : "No");
@@ -781,52 +742,6 @@ TEST_F(AudioDeviceTest, UsesMonoPlayoutByDefault) {
 // Verify that recording side is configured for mono by default.
 TEST_F(AudioDeviceTest, UsesMonoRecordingByDefault) {
   EXPECT_EQ(1u, input_parameters_.channels());
-}
-
-TEST_F(AudioDeviceTest, SpeakerVolumeShouldBeAvailable) {
-  // The OpenSL ES output audio path does not support volume control.
-  if (!AudioLayerSupportsVolumeControl())
-    return;
-  bool available;
-  EXPECT_EQ(0, audio_device()->SpeakerVolumeIsAvailable(&available));
-  EXPECT_TRUE(available);
-}
-
-TEST_F(AudioDeviceTest, MaxSpeakerVolumeIsPositive) {
-  // The OpenSL ES output audio path does not support volume control.
-  if (!AudioLayerSupportsVolumeControl())
-    return;
-  StartPlayout();
-  EXPECT_GT(GetMaxSpeakerVolume(), 0);
-  StopPlayout();
-}
-
-TEST_F(AudioDeviceTest, MinSpeakerVolumeIsZero) {
-  // The OpenSL ES output audio path does not support volume control.
-  if (!AudioLayerSupportsVolumeControl())
-    return;
-  EXPECT_EQ(GetMinSpeakerVolume(), 0);
-}
-
-TEST_F(AudioDeviceTest, DefaultSpeakerVolumeIsWithinMinMax) {
-  // The OpenSL ES output audio path does not support volume control.
-  if (!AudioLayerSupportsVolumeControl())
-    return;
-  const int default_volume = GetSpeakerVolume();
-  EXPECT_GE(default_volume, GetMinSpeakerVolume());
-  EXPECT_LE(default_volume, GetMaxSpeakerVolume());
-}
-
-TEST_F(AudioDeviceTest, SetSpeakerVolumeActuallySetsVolume) {
-  // The OpenSL ES output audio path does not support volume control.
-  if (!AudioLayerSupportsVolumeControl())
-    return;
-  const int default_volume = GetSpeakerVolume();
-  const int max_volume = GetMaxSpeakerVolume();
-  EXPECT_EQ(0, audio_device()->SetSpeakerVolume(max_volume));
-  int new_volume = GetSpeakerVolume();
-  EXPECT_EQ(new_volume, max_volume);
-  EXPECT_EQ(0, audio_device()->SetSpeakerVolume(default_volume));
 }
 
 // Tests that playout can be initiated, started and stopped. No audio callback
@@ -935,7 +850,6 @@ TEST_F(AudioDeviceTest, RunPlayoutWithFileAsSource) {
   std::unique_ptr<FileAudioStream> file_audio_stream(
       new FileAudioStream(num_callbacks, file_name, playout_sample_rate()));
   mock.HandleCallbacks(&test_is_done_, file_audio_stream.get(), num_callbacks);
-  // SetMaxPlayoutVolume();
   EXPECT_EQ(0, audio_device()->RegisterAudioCallback(&mock));
   StartPlayout();
   test_is_done_.Wait(kTestTimeOut);
@@ -1078,7 +992,6 @@ TEST_F(AudioDeviceTest, DISABLED_RunPlayoutAndRecordingInFullDuplex) {
       new FifoAudioStream(playout_frames_per_10ms_buffer()));
   mock.HandleCallbacks(&test_is_done_, fifo_audio_stream.get(),
                        kFullDuplexTime.seconds() * kNumCallbacksPerSecond);
-  SetMaxPlayoutVolume();
   EXPECT_EQ(0, audio_device()->RegisterAudioCallback(&mock));
   StartRecording();
   StartPlayout();
@@ -1111,7 +1024,6 @@ TEST_F(AudioDeviceTest, DISABLED_MeasureLoopbackLatency) {
   mock.HandleCallbacks(&test_is_done_, latency_audio_stream.get(),
                        kMeasureLatencyTime.seconds() * kNumCallbacksPerSecond);
   EXPECT_EQ(0, audio_device()->RegisterAudioCallback(&mock));
-  SetMaxPlayoutVolume();
   DisableBuiltInAECIfAvailable();
   StartRecording();
   StartPlayout();

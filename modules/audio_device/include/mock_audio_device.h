@@ -32,16 +32,13 @@ class MockAudioDeviceModule : public AudioDeviceModule {
 
   // AudioDeviceModule.
   MOCK_METHOD(int32_t,
-              ActiveAudioLayer,
-              (AudioLayer * audioLayer),
-              (const, override));
-  MOCK_METHOD(int32_t,
               RegisterAudioCallback,
               (AudioTransport * audioCallback),
               (override));
   MOCK_METHOD(int32_t, Init, (), (override));
   MOCK_METHOD(int32_t, Terminate, (), (override));
   MOCK_METHOD(bool, Initialized, (), (const, override));
+#ifdef WEBRTC_WIN
   MOCK_METHOD(int16_t, PlayoutDevices, (), (override));
   MOCK_METHOD(int16_t, RecordingDevices, (), (override));
   MOCK_METHOD(int32_t,
@@ -56,20 +53,17 @@ class MockAudioDeviceModule : public AudioDeviceModule {
                char name[kAdmMaxDeviceNameSize],
                char guid[kAdmMaxGuidSize]),
               (override));
-  MOCK_METHOD(int32_t, SetPlayoutDevice, (uint16_t index), (override));
   MOCK_METHOD(int32_t,
               SetPlayoutDevice,
               (WindowsDeviceType device),
               (override));
-  MOCK_METHOD(int32_t, SetRecordingDevice, (uint16_t index), (override));
   MOCK_METHOD(int32_t,
               SetRecordingDevice,
               (WindowsDeviceType device),
               (override));
-  MOCK_METHOD(int32_t, PlayoutIsAvailable, (bool* available), (override));
+#endif
   MOCK_METHOD(int32_t, InitPlayout, (), (override));
   MOCK_METHOD(bool, PlayoutIsInitialized, (), (const, override));
-  MOCK_METHOD(int32_t, RecordingIsAvailable, (bool* available), (override));
   MOCK_METHOD(int32_t, InitRecording, (), (override));
   MOCK_METHOD(bool, RecordingIsInitialized, (), (const, override));
   MOCK_METHOD(int32_t, StartPlayout, (), (override));
@@ -82,43 +76,6 @@ class MockAudioDeviceModule : public AudioDeviceModule {
   MOCK_METHOD(bool, SpeakerIsInitialized, (), (const, override));
   MOCK_METHOD(int32_t, InitMicrophone, (), (override));
   MOCK_METHOD(bool, MicrophoneIsInitialized, (), (const, override));
-  MOCK_METHOD(int32_t, SpeakerVolumeIsAvailable, (bool* available), (override));
-  MOCK_METHOD(int32_t, SetSpeakerVolume, (uint32_t volume), (override));
-  MOCK_METHOD(int32_t, SpeakerVolume, (uint32_t * volume), (const, override));
-  MOCK_METHOD(int32_t,
-              MaxSpeakerVolume,
-              (uint32_t * maxVolume),
-              (const, override));
-  MOCK_METHOD(int32_t,
-              MinSpeakerVolume,
-              (uint32_t * minVolume),
-              (const, override));
-  MOCK_METHOD(int32_t,
-              MicrophoneVolumeIsAvailable,
-              (bool* available),
-              (override));
-  MOCK_METHOD(int32_t, SetMicrophoneVolume, (uint32_t volume), (override));
-  MOCK_METHOD(int32_t,
-              MicrophoneVolume,
-              (uint32_t * volume),
-              (const, override));
-  MOCK_METHOD(int32_t,
-              MaxMicrophoneVolume,
-              (uint32_t * maxVolume),
-              (const, override));
-  MOCK_METHOD(int32_t,
-              MinMicrophoneVolume,
-              (uint32_t * minVolume),
-              (const, override));
-  MOCK_METHOD(int32_t, SpeakerMuteIsAvailable, (bool* available), (override));
-  MOCK_METHOD(int32_t, SetSpeakerMute, (bool enable), (override));
-  MOCK_METHOD(int32_t, SpeakerMute, (bool* enabled), (const, override));
-  MOCK_METHOD(int32_t,
-              MicrophoneMuteIsAvailable,
-              (bool* available),
-              (override));
-  MOCK_METHOD(int32_t, SetMicrophoneMute, (bool enable), (override));
-  MOCK_METHOD(int32_t, MicrophoneMute, (bool* enabled), (const, override));
   MOCK_METHOD(int32_t,
               StereoPlayoutIsAvailable,
               (bool* available),
@@ -139,16 +96,6 @@ class MockAudioDeviceModule : public AudioDeviceModule {
   MOCK_METHOD(int32_t, EnableBuiltInAGC, (bool enable), (override));
   MOCK_METHOD(int32_t, EnableBuiltInNS, (bool enable), (override));
   MOCK_METHOD(int32_t, GetPlayoutUnderrunCount, (), (const, override));
-#if defined(WEBRTC_IOS)
-  MOCK_METHOD(int,
-              GetPlayoutAudioParameters,
-              (AudioParameters * params),
-              (const, override));
-  MOCK_METHOD(int,
-              GetRecordAudioParameters,
-              (AudioParameters * params),
-              (const, override));
-#endif  // WEBRTC_IOS
 };
 }  // namespace test
 }  // namespace webrtc

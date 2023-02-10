@@ -126,7 +126,7 @@ static const NSUInteger kFullDuplexTimeInSec = 10;
 static const NSUInteger kNumIgnoreFirstCallbacks = 50;
 
 @interface RTCAudioDeviceModuleTests : XCTestCase {
-  rtc::scoped_refptr<webrtc::AudioDeviceModule> audioDeviceModule;
+  rtc::scoped_refptr<webrtc::ios_adm::AudioDeviceModuleIOS> audioDeviceModule;
   MockAudioTransport mock;
 }
 
@@ -485,12 +485,6 @@ static const NSUInteger kNumIgnoreFirstCallbacks = 50;
   NSTimeInterval waitTimeout = kFilePlayTimeInSec * 2.0;
   [self waitForExpectationsWithTimeout:waitTimeout handler:nil];
   [self stopPlayout];
-}
-
-- (void)testDevices {
-  // Device enumeration is not supported. Verify fixed values only.
-  XCTAssertEqual(1, audioDeviceModule->PlayoutDevices());
-  XCTAssertEqual(1, audioDeviceModule->RecordingDevices());
 }
 
 // Start playout and recording and store recorded data in an intermediate FIFO

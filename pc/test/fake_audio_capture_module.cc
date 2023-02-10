@@ -67,12 +67,6 @@ int FakeAudioCaptureModule::frames_received() const {
   return frames_received_;
 }
 
-int32_t FakeAudioCaptureModule::ActiveAudioLayer(
-    AudioLayer* /*audio_layer*/) const {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
 int32_t FakeAudioCaptureModule::RegisterAudioCallback(
     webrtc::AudioTransport* audio_callback) {
   webrtc::MutexLock lock(&mutex_);
@@ -95,62 +89,6 @@ bool FakeAudioCaptureModule::Initialized() const {
   return 0;
 }
 
-int16_t FakeAudioCaptureModule::PlayoutDevices() {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int16_t FakeAudioCaptureModule::RecordingDevices() {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::PlayoutDeviceName(
-    uint16_t /*index*/,
-    char /*name*/[webrtc::kAdmMaxDeviceNameSize],
-    char /*guid*/[webrtc::kAdmMaxGuidSize]) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::RecordingDeviceName(
-    uint16_t /*index*/,
-    char /*name*/[webrtc::kAdmMaxDeviceNameSize],
-    char /*guid*/[webrtc::kAdmMaxGuidSize]) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SetPlayoutDevice(uint16_t /*index*/) {
-  // No playout device, just playing from file. Return success.
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SetPlayoutDevice(WindowsDeviceType /*device*/) {
-  if (play_is_initialized_) {
-    return -1;
-  }
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SetRecordingDevice(uint16_t /*index*/) {
-  // No recording device, just dropping audio. Return success.
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SetRecordingDevice(
-    WindowsDeviceType /*device*/) {
-  if (rec_is_initialized_) {
-    return -1;
-  }
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::PlayoutIsAvailable(bool* /*available*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
 int32_t FakeAudioCaptureModule::InitPlayout() {
   play_is_initialized_ = true;
   return 0;
@@ -158,11 +96,6 @@ int32_t FakeAudioCaptureModule::InitPlayout() {
 
 bool FakeAudioCaptureModule::PlayoutIsInitialized() const {
   return play_is_initialized_;
-}
-
-int32_t FakeAudioCaptureModule::RecordingIsAvailable(bool* /*available*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
 }
 
 int32_t FakeAudioCaptureModule::InitRecording() {
@@ -248,93 +181,6 @@ int32_t FakeAudioCaptureModule::InitMicrophone() {
 }
 
 bool FakeAudioCaptureModule::MicrophoneIsInitialized() const {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SpeakerVolumeIsAvailable(bool* /*available*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SetSpeakerVolume(uint32_t /*volume*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SpeakerVolume(uint32_t* /*volume*/) const {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::MaxSpeakerVolume(
-    uint32_t* /*max_volume*/) const {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::MinSpeakerVolume(
-    uint32_t* /*min_volume*/) const {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::MicrophoneVolumeIsAvailable(
-    bool* /*available*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SetMicrophoneVolume(uint32_t volume) {
-  webrtc::MutexLock lock(&mutex_);
-  current_mic_level_ = volume;
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::MicrophoneVolume(uint32_t* volume) const {
-  webrtc::MutexLock lock(&mutex_);
-  *volume = current_mic_level_;
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::MaxMicrophoneVolume(
-    uint32_t* max_volume) const {
-  *max_volume = kMaxVolume;
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::MinMicrophoneVolume(
-    uint32_t* /*min_volume*/) const {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SpeakerMuteIsAvailable(bool* /*available*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SetSpeakerMute(bool /*enable*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SpeakerMute(bool* /*enabled*/) const {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::MicrophoneMuteIsAvailable(bool* /*available*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::SetMicrophoneMute(bool /*enable*/) {
-  RTC_DCHECK_NOTREACHED();
-  return 0;
-}
-
-int32_t FakeAudioCaptureModule::MicrophoneMute(bool* /*enabled*/) const {
   RTC_DCHECK_NOTREACHED();
   return 0;
 }
