@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbddef4c_67b80d54",
+        "filename": "pc/channel.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2023-02-10T08:46:55Z",
+      "side": 1,
+      "message": "nit: there are accessors for these in ChannelInterface, so they could be made private",
+      "range": {
+        "startLine": 306,
+        "startChar": 26,
+        "endLine": 306,
+        "endChar": 33
+      },
+      "revId": "34e561510df81627ed219c7386803ff256b67f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb857387_1caa4eca",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2023-02-10T08:46:55Z",
+      "side": 1,
+      "message": "This would be leaking the media_send_channel",
+      "revId": "34e561510df81627ed219c7386803ff256b67f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f0e3094_b84e0f9f",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2023-02-10T08:46:55Z",
+      "side": 1,
+      "message": "This would be leaking the media_send_channel",
+      "revId": "34e561510df81627ed219c7386803ff256b67f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
