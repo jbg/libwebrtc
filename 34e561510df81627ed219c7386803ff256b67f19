@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25b3b185_2569a648",
+        "filename": "pc/channel.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-10T15:19:03Z",
+      "side": 1,
+      "message": "These are the implementation objects, not the interface-accessible objects. and they need to be protected, not private, as they\u0027re accessed in a subclass.\n\nBut yes, public is Just Wrong. Luckily, we\u0027re already in a protected: section starting at line 179. (That\u0027s a LONG protected section! This class is too busy...)",
+      "parentUuid": "bbddef4c_67b80d54",
+      "range": {
+        "startLine": 306,
+        "startChar": 26,
+        "endLine": 306,
+        "endChar": 33
+      },
+      "revId": "34e561510df81627ed219c7386803ff256b67f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb857387_1caa4eca",
@@ -41,6 +65,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb2a33b_8b059552",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-10T15:19:03Z",
+      "side": 1,
+      "message": "Solved by the proper application of absl::WrapUnique().",
+      "parentUuid": "eb857387_1caa4eca",
+      "revId": "34e561510df81627ed219c7386803ff256b67f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f0e3094_b84e0f9f",
@@ -54,6 +96,24 @@
       "writtenOn": "2023-02-10T08:46:55Z",
       "side": 1,
       "message": "This would be leaking the media_send_channel",
+      "revId": "34e561510df81627ed219c7386803ff256b67f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41b75e1b_1504d3e8",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-10T15:19:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f0e3094_b84e0f9f",
       "revId": "34e561510df81627ed219c7386803ff256b67f19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
