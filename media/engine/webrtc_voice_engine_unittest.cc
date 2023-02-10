@@ -103,29 +103,9 @@ void AdmSetupExpectations(webrtc::test::MockAudioDeviceModule* adm) {
   // Setup.
   EXPECT_CALL(*adm, Init()).WillOnce(Return(0));
   EXPECT_CALL(*adm, RegisterAudioCallback(_)).WillOnce(Return(0));
-#if defined(WEBRTC_WIN)
-  EXPECT_CALL(
-      *adm,
-      SetPlayoutDevice(
-          ::testing::Matcher<webrtc::AudioDeviceModule::WindowsDeviceType>(
-              webrtc::AudioDeviceModule::kDefaultCommunicationDevice)))
-      .WillOnce(Return(0));
-#else
-  EXPECT_CALL(*adm, SetPlayoutDevice(0)).WillOnce(Return(0));
-#endif  // #if defined(WEBRTC_WIN)
   EXPECT_CALL(*adm, InitSpeaker()).WillOnce(Return(0));
   EXPECT_CALL(*adm, StereoPlayoutIsAvailable(::testing::_)).WillOnce(Return(0));
   EXPECT_CALL(*adm, SetStereoPlayout(false)).WillOnce(Return(0));
-#if defined(WEBRTC_WIN)
-  EXPECT_CALL(
-      *adm,
-      SetRecordingDevice(
-          ::testing::Matcher<webrtc::AudioDeviceModule::WindowsDeviceType>(
-              webrtc::AudioDeviceModule::kDefaultCommunicationDevice)))
-      .WillOnce(Return(0));
-#else
-  EXPECT_CALL(*adm, SetRecordingDevice(0)).WillOnce(Return(0));
-#endif  // #if defined(WEBRTC_WIN)
   EXPECT_CALL(*adm, InitMicrophone()).WillOnce(Return(0));
   EXPECT_CALL(*adm, StereoRecordingIsAvailable(::testing::_))
       .WillOnce(Return(0));

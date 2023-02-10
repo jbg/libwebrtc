@@ -90,58 +90,6 @@ class AudioDeviceTemplate : public AudioDeviceGeneric {
     return initialized_;
   }
 
-  int16_t PlayoutDevices() override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    return 1;
-  }
-
-  int16_t RecordingDevices() override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    return 1;
-  }
-
-  int32_t PlayoutDeviceName(uint16_t index,
-                            char name[kAdmMaxDeviceNameSize],
-                            char guid[kAdmMaxGuidSize]) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t RecordingDeviceName(uint16_t index,
-                              char name[kAdmMaxDeviceNameSize],
-                              char guid[kAdmMaxGuidSize]) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetPlayoutDevice(uint16_t index) override {
-    // OK to use but it has no effect currently since device selection is
-    // done using Andoid APIs instead.
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    return 0;
-  }
-
-  int32_t SetPlayoutDevice(
-      AudioDeviceModule::WindowsDeviceType device) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetRecordingDevice(uint16_t index) override {
-    // OK to use but it has no effect currently since device selection is
-    // done using Andoid APIs instead.
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    return 0;
-  }
-
-  int32_t SetRecordingDevice(
-      AudioDeviceModule::WindowsDeviceType device) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t PlayoutIsAvailable(bool& available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    available = true;
-    return 0;
-  }
-
   int32_t InitPlayout() override {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     return output_.InitPlayout();
@@ -150,12 +98,6 @@ class AudioDeviceTemplate : public AudioDeviceGeneric {
   bool PlayoutIsInitialized() const override {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     return output_.PlayoutIsInitialized();
-  }
-
-  int32_t RecordingIsAvailable(bool& available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    available = true;
-    return 0;
   }
 
   int32_t InitRecording() override {
@@ -229,71 +171,6 @@ class AudioDeviceTemplate : public AudioDeviceGeneric {
   bool MicrophoneIsInitialized() const override {
     RTC_DLOG(LS_INFO) << __FUNCTION__;
     return true;
-  }
-
-  int32_t SpeakerVolumeIsAvailable(bool& available) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    return output_.SpeakerVolumeIsAvailable(available);
-  }
-
-  int32_t SetSpeakerVolume(uint32_t volume) override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    return output_.SetSpeakerVolume(volume);
-  }
-
-  int32_t SpeakerVolume(uint32_t& volume) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    return output_.SpeakerVolume(volume);
-  }
-
-  int32_t MaxSpeakerVolume(uint32_t& maxVolume) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    return output_.MaxSpeakerVolume(maxVolume);
-  }
-
-  int32_t MinSpeakerVolume(uint32_t& minVolume) const override {
-    RTC_DLOG(LS_INFO) << __FUNCTION__;
-    return output_.MinSpeakerVolume(minVolume);
-  }
-
-  int32_t MicrophoneVolumeIsAvailable(bool& available) override {
-    available = false;
-    return -1;
-  }
-
-  int32_t SetMicrophoneVolume(uint32_t volume) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t MicrophoneVolume(uint32_t& volume) const override {
-    RTC_CHECK_NOTREACHED();
-    return -1;
-  }
-
-  int32_t MaxMicrophoneVolume(uint32_t& maxVolume) const override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t MinMicrophoneVolume(uint32_t& minVolume) const override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SpeakerMuteIsAvailable(bool& available) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetSpeakerMute(bool enable) override { RTC_CHECK_NOTREACHED(); }
-
-  int32_t SpeakerMute(bool& enabled) const override { RTC_CHECK_NOTREACHED(); }
-
-  int32_t MicrophoneMuteIsAvailable(bool& available) override {
-    RTC_CHECK_NOTREACHED();
-  }
-
-  int32_t SetMicrophoneMute(bool enable) override { RTC_CHECK_NOTREACHED(); }
-
-  int32_t MicrophoneMute(bool& enabled) const override {
-    RTC_CHECK_NOTREACHED();
   }
 
   // Returns true if the audio manager has been configured to support stereo

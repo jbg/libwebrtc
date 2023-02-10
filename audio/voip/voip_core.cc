@@ -21,15 +21,6 @@ namespace webrtc {
 
 namespace {
 
-// For Windows, use specific enum type to initialize default audio device as
-// defined in AudioDeviceModule::WindowsDeviceType.
-#if defined(WEBRTC_WIN)
-constexpr AudioDeviceModule::WindowsDeviceType kAudioDeviceId =
-    AudioDeviceModule::WindowsDeviceType::kDefaultCommunicationDevice;
-#else
-constexpr uint16_t kAudioDeviceId = 0;
-#endif  // defined(WEBRTC_WIN)
-
 // Maximum value range limit on ChannelId. This can be increased without any
 // side effect and only set at this moderate value for better readability for
 // logging.
@@ -78,17 +69,11 @@ bool VoipCore::InitializeIfNeeded() {
   // work.
 
   // Initialize default speaker device.
-  if (audio_device_module_->SetPlayoutDevice(kAudioDeviceId) != 0) {
-    RTC_LOG(LS_WARNING) << "Unable to set playout device.";
-  }
   if (audio_device_module_->InitSpeaker() != 0) {
     RTC_LOG(LS_WARNING) << "Unable to access speaker.";
   }
 
   // Initialize default recording device.
-  if (audio_device_module_->SetRecordingDevice(kAudioDeviceId) != 0) {
-    RTC_LOG(LS_WARNING) << "Unable to set recording device.";
-  }
   if (audio_device_module_->InitMicrophone() != 0) {
     RTC_LOG(LS_WARNING) << "Unable to access microphone.";
   }
