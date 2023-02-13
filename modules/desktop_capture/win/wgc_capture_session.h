@@ -49,6 +49,11 @@ class WgcCaptureSession final {
     return is_capture_started_;
   }
 
+  bool frames_in_pool() const {
+    RTC_DCHECK_RUN_ON(&sequence_checker_);
+    return frames_in_pool_;
+  }
+
   // We keep 2 buffers in the frame pool to balance the staleness of the frame
   // with having to wait for frames to arrive too frequently. Too many buffers
   // will lead to a high latency, and too few will lead to poor performance.
@@ -78,9 +83,7 @@ class WgcCaptureSession final {
 
   void RemoveEventHandlers();
 
-  // We wait on this event in `GetFrame` if there are no frames in the pool.
-  // `OnFrameArrived` will set the event so we can proceed.
-  rtc::Event wait_for_frame_event_;
+  // Counts the numer of frames in the frame pool.
   int frames_in_pool_;
 
   // We're willing to wait for a frame a little longer if it's the first one.

@@ -49,7 +49,8 @@ enum class WgcCapturerResult {
   kGetFrameFailure = 5,
   kFrameDropped = 6,
   kCreateDispatcherQueueFailure = 7,
-  kMaxValue = kCreateDispatcherQueueFailure
+  kEmptyFramePool = 8,
+  kMaxValue = kEmptyFramePool
 };
 
 void RecordWgcCapturerResult(WgcCapturerResult error) {
@@ -234,6 +235,7 @@ void WgcCapturerWin::Start(Callback* callback) {
 
 void WgcCapturerWin::CaptureFrame() {
   RTC_DCHECK(callback_);
+  RTC_DLOG(LS_INFO) << __func__;
 
   if (!capture_source_) {
     RTC_LOG(LS_ERROR) << "Source hasn't been selected";
@@ -336,7 +338,13 @@ void WgcCapturerWin::CaptureFrame() {
   if (!frame) {
     callback_->OnCaptureResult(DesktopCapturer::Result::ERROR_TEMPORARY,
                                /*frame=*/nullptr);
-    RecordWgcCapturerResult(WgcCapturerResult::kFrameDropped);
+    if (capture_session->frames_in_pool() == 0) {
+      RecordWgcCapturerResult(WgcCapturerResult::kEmptyFramePool);
+      RTC_DLOG(LS_WARNING) << "WgcCapturerResult::kEmptyFramePool";
+    } else {
+      RecordWgcCapturerResult(WgcCapturerResult::kFrameDropped);
+      RTC_DLOG(LS_WARNING) << "WgcCapturerResult::kFrameDropped";
+    }
     return;
   }
 

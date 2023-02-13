@@ -40,11 +40,6 @@ namespace {
 constexpr auto kPixelFormat = ABI::Windows::Graphics::DirectX::
     DirectXPixelFormat::DirectXPixelFormat_B8G8R8A8UIntNormalized;
 
-// The maximum time `GetFrame` will wait for a frame to arrive, if we don't have
-// any in the pool.
-constexpr TimeDelta kMaxWaitForFrame = TimeDelta::Millis(50);
-constexpr TimeDelta kMaxWaitForFirstFrame = TimeDelta::Millis(500);
-
 // These values are persisted to logs. Entries should not be renumbered and
 // numeric values should never be reused.
 enum class StartCaptureResult {
@@ -78,7 +73,8 @@ enum class GetFrameResult {
   kGetContentSizeFailed = 9,
   kResizeMappedTextureFailed = 10,
   kRecreateFramePoolFailed = 11,
-  kMaxValue = kRecreateFramePoolFailed
+  kEmptyFramePool = 12,
+  kMaxValue = kEmptyFramePool
 };
 
 void RecordStartCaptureResult(StartCaptureResult error) {
@@ -212,6 +208,7 @@ HRESULT WgcCaptureSession::StartCapture(const DesktopCaptureOptions& options) {
 HRESULT WgcCaptureSession::GetFrame(
     std::unique_ptr<DesktopFrame>* output_frame) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
+  RTC_DLOG(LS_INFO) << __func__;
 
   if (item_closed_) {
     RTC_LOG(LS_ERROR) << "The target source has been closed.";
@@ -220,10 +217,6 @@ HRESULT WgcCaptureSession::GetFrame(
   }
 
   RTC_DCHECK(is_capture_started_);
-
-  if (frames_in_pool_ < 1)
-    wait_for_frame_event_.Wait(first_frame_ ? kMaxWaitForFirstFrame
-                                            : kMaxWaitForFrame);
 
   ComPtr<WGC::IDirect3D11CaptureFrame> capture_frame;
   HRESULT hr = frame_pool_->TryGetNextFrame(&capture_frame);
@@ -234,7 +227,7 @@ HRESULT WgcCaptureSession::GetFrame(
   }
 
   if (!capture_frame) {
-    RecordGetFrameResult(GetFrameResult::kFrameDropped);
+    RecordGetFrameResult(GetFrameResult::kEmptyFramePool);
     return hr;
   }
 
@@ -387,7 +380,8 @@ HRESULT WgcCaptureSession::OnFrameArrived(
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK_LT(frames_in_pool_, kNumBuffers);
   ++frames_in_pool_;
-  wait_for_frame_event_.Set();
+  RTC_DLOG(LS_INFO) << __func__ << " (frames_in_pool=" << frames_in_pool_
+                    << ")";
   return S_OK;
 }
 
