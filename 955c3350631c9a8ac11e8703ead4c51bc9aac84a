@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd78d91_832e5940",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-13T09:04:04Z",
+      "side": 1,
+      "message": "Added NOTRY to avoid purple bot problems",
+      "revId": "955c3350631c9a8ac11e8703ead4c51bc9aac84a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
