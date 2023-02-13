@@ -21,16 +21,19 @@ RtpPacketInfo::RtpPacketInfo()
 RtpPacketInfo::RtpPacketInfo(uint32_t ssrc,
                              std::vector<uint32_t> csrcs,
                              uint32_t rtp_timestamp,
+                             uint16_t rtp_sequence_number,
                              Timestamp receive_time)
     : ssrc_(ssrc),
       csrcs_(std::move(csrcs)),
       rtp_timestamp_(rtp_timestamp),
+      rtp_sequence_number_(rtp_sequence_number),
       receive_time_(receive_time) {}
 
 RtpPacketInfo::RtpPacketInfo(const RTPHeader& rtp_header,
                              Timestamp receive_time)
     : ssrc_(rtp_header.ssrc),
       rtp_timestamp_(rtp_header.timestamp),
+      rtp_sequence_number_(rtp_header.sequenceNumber),
       receive_time_(receive_time) {
   const auto& extension = rtp_header.extension;
   const auto csrcs_count = std::min<size_t>(rtp_header.numCSRCs, kRtpCsrcSize);

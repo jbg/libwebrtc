@@ -136,6 +136,7 @@ bool RedPayloadSplitter::SplitRed(PacketList* packet_list) {
             /*ssrc=*/red_packet.packet_info.ssrc(),
             /*csrcs=*/std::vector<uint32_t>(),
             /*rtp_timestamp=*/new_packet.timestamp,
+            /*rtp_sequence_number=*/new_packet.sequence_number,
             /*receive_time=*/red_packet.packet_info.receive_time());
         new_packet.packet_info.set_audio_level(
             red_packet.packet_info.audio_level());
