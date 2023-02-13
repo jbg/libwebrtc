@@ -16,6 +16,23 @@
       "message": "Tests passing locally:\n\n$ ./out/Default/peerconnection_unittests\n...\n[----------] Global test environment tear-down\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] 2376 tests from 90 test suites ran. (308714 ms total)\n[  PASSED  ] 2376 tests.",
       "revId": "242409fdecda9f2b5e5729c9a00e83b24fafc050",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1b83bdc_247da1ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18439
+      },
+      "writtenOn": "2023-02-13T08:50:38Z",
+      "side": 1,
+      "message": "Hi Henrik, thanks for reviewing this CL. Could you please also submit it? I don\u0027t have the permissions to submit it myself.",
+      "revId": "242409fdecda9f2b5e5729c9a00e83b24fafc050",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
