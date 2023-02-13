@@ -503,12 +503,6 @@ int32_t H264EncoderImpl::Encode(
     SFrameBSInfo info;
     memset(&info, 0, sizeof(SFrameBSInfo));
 
-    std::vector<ScalableVideoController::LayerFrameConfig> layer_frames;
-    if (svc_controllers_[i]) {
-      layer_frames = svc_controllers_[i]->NextFrameConfig(send_key_frame);
-      RTC_CHECK_EQ(layer_frames.size(), 1);
-    }
-
     // Encode!
     int enc_ret = encoders_[i]->EncodeFrame(&pictures_[i], &info);
     if (enc_ret != 0) {
@@ -547,6 +541,14 @@ int32_t H264EncoderImpl::Encode(
       codec_specific.codecSpecific.H264.idr_frame =
           info.eFrameType == videoFrameTypeIDR;
       codec_specific.codecSpecific.H264.base_layer_sync = false;
+
+      std::vector<ScalableVideoController::LayerFrameConfig> layer_frames;
+      if (svc_controllers_[i]) {
+        layer_frames = svc_controllers_[i]->NextFrameConfig(info.eFrameType ==
+                                                            videoFrameTypeIDR);
+        RTC_CHECK_EQ(layer_frames.size(), 1);
+      }
+
       if (configurations_[i].num_temporal_layers > 1) {
         const uint8_t tid = info.sLayerInfo[0].uiTemporalId;
         codec_specific.codecSpecific.H264.temporal_idx = tid;
