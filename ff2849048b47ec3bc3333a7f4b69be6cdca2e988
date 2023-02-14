@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c1b9aa0_406b6e99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-02-14T18:32:17Z",
+      "side": 1,
+      "message": "Can you review? I still wonder if this is the right thing to do long-term but it fixes a regression and is easy enough to understand that it can be uplifted.",
+      "revId": "ff2849048b47ec3bc3333a7f4b69be6cdca2e988",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
