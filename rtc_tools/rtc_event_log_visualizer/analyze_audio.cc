@@ -237,13 +237,12 @@ class NetEqStreamInput : public test::NetEqInput {
       return std::unique_ptr<PacketData>();
     }
     std::unique_ptr<PacketData> packet_data(new PacketData());
-    packet_data->header = packet_stream_it_->rtp.header;
+    packet_data->header = packet_stream_it_->rtp.LegacyHeader();
     packet_data->time_ms = packet_stream_it_->rtp.log_time_ms();
 
     // This is a header-only "dummy" packet. Set the payload to all zeros, with
     // length according to the virtual length.
-    packet_data->payload.SetSize(packet_stream_it_->rtp.total_length -
-                                 packet_stream_it_->rtp.header_length);
+    packet_data->payload.SetSize(packet_stream_it_->rtp.payload_size());
     std::fill_n(packet_data->payload.data(), packet_data->payload.size(), 0);
 
     ++packet_stream_it_;
@@ -269,7 +268,7 @@ class NetEqStreamInput : public test::NetEqInput {
     if (packet_stream_it_ == packet_stream_.end()) {
       return absl::nullopt;
     }
-    return packet_stream_it_->rtp.header;
+    return packet_stream_it_->rtp.LegacyHeader();
   }
 
  private:

@@ -354,52 +354,47 @@ ParsedRtcEventLog::ParseStatus StoreRtpPackets(
 
   // Base event
   {
-    RTPHeader header;
-    header.markerBit = rtc::checked_cast<bool>(proto.marker());
-    header.payloadType = rtc::checked_cast<uint8_t>(proto.payload_type());
-    header.sequenceNumber =
-        rtc::checked_cast<uint16_t>(proto.sequence_number());
-    header.timestamp = rtc::checked_cast<uint32_t>(proto.rtp_timestamp());
-    header.ssrc = rtc::checked_cast<uint32_t>(proto.ssrc());
-    header.numCSRCs = 0;  // TODO(terelius): Implement CSRC.
-    header.paddingLength = rtc::checked_cast<size_t>(proto.padding_size());
-    header.headerLength = rtc::checked_cast<size_t>(proto.header_size());
+    RtpHeaderExtensionMap extensions =
+        ParsedRtcEventLog::GetDefaultHeaderExtensionMap();
+    RtpPacketReceived header(&extensions);
+    header.SetMarker(rtc::checked_cast<bool>(proto.marker()));
+    header.SetPayloadType(rtc::checked_cast<uint8_t>(proto.payload_type()));
+    header.SetSequenceNumber(
+        rtc::checked_cast<uint16_t>(proto.sequence_number()));
+    header.SetTimestamp(rtc::checked_cast<uint32_t>(proto.rtp_timestamp()));
+    header.SetSsrc(rtc::checked_cast<uint32_t>(proto.ssrc()));
+    // TODO(terelius): Implement CSRC.
     // TODO(terelius): Should we implement payload_type_frequency?
     if (proto.has_transport_sequence_number()) {
-      header.extension.hasTransportSequenceNumber = true;
-      header.extension.transportSequenceNumber =
-          rtc::checked_cast<uint16_t>(proto.transport_sequence_number());
+      header.SetExtension<TransportSequenceNumber>(
+          rtc::checked_cast<uint16_t>(proto.transport_sequence_number()));
     }
     if (proto.has_transmission_time_offset()) {
-      header.extension.hasTransmissionTimeOffset = true;
-      header.extension.transmissionTimeOffset =
-          rtc::checked_cast<int32_t>(proto.transmission_time_offset());
+      header.SetExtension<TransmissionOffset>(
+          rtc::checked_cast<int32_t>(proto.transmission_time_offset()));
     }
     if (proto.has_absolute_send_time()) {
-      header.extension.hasAbsoluteSendTime = true;
-      header.extension.absoluteSendTime =
-          rtc::checked_cast<uint32_t>(proto.absolute_send_time());
+      header.SetExtension<AbsoluteSendTime>(
+          rtc::checked_cast<uint32_t>(proto.absolute_send_time()));
     }
     if (proto.has_video_rotation()) {
-      header.extension.hasVideoRotation = true;
-      header.extension.videoRotation = ConvertCVOByteToVideoRotation(
-          rtc::checked_cast<uint8_t>(proto.video_rotation()));
+      header.SetExtension<VideoOrientation>(ConvertCVOByteToVideoRotation(
+          rtc::checked_cast<uint8_t>(proto.video_rotation())));
     }
     if (proto.has_audio_level()) {
       RTC_PARSE_CHECK_OR_RETURN(proto.has_voice_activity());
-      header.extension.hasAudioLevel = true;
-      header.extension.voiceActivity =
-          rtc::checked_cast<bool>(proto.voice_activity());
       const uint8_t audio_level =
           rtc::checked_cast<uint8_t>(proto.audio_level());
       RTC_PARSE_CHECK_OR_RETURN_LE(audio_level, 0x7Fu);
-      header.extension.audioLevel = audio_level;
+      header.SetExtension<AudioLevel>(
+          rtc::checked_cast<bool>(proto.voice_activity()), audio_level);
     } else {
       RTC_PARSE_CHECK_OR_RETURN(!proto.has_voice_activity());
     }
-    (*rtp_packets_map)[header.ssrc].emplace_back(
-        Timestamp::Millis(proto.timestamp_ms()), header, proto.header_size(),
-        proto.payload_size() + header.headerLength + header.paddingLength);
+    header.SetPadding(rtc::checked_cast<size_t>(proto.padding_size()));
+    (*rtp_packets_map)[header.Ssrc()].emplace_back(
+        Timestamp::Millis(proto.timestamp_ms()), std::move(header),
+        header.headers_size() + proto.payload_size() + proto.padding_size());
   }
 
   const size_t number_of_deltas =
@@ -547,62 +542,59 @@ ParsedRtcEventLog::ParseStatus StoreRtpPackets(
     RTC_PARSE_CHECK_OR_RETURN(
         ToSigned(timestamp_ms_values[i].value(), &timestamp_ms));
 
-    RTPHeader header;
-    header.markerBit = rtc::checked_cast<bool>(*marker_values[i]);
-    header.payloadType = rtc::checked_cast<uint8_t>(*payload_type_values[i]);
-    header.sequenceNumber =
-        rtc::checked_cast<uint16_t>(*sequence_number_values[i]);
-    header.timestamp = rtc::checked_cast<uint32_t>(*rtp_timestamp_values[i]);
-    header.ssrc = rtc::checked_cast<uint32_t>(*ssrc_values[i]);
-    header.numCSRCs = 0;  // TODO(terelius): Implement CSRC.
-    header.paddingLength = rtc::checked_cast<size_t>(*padding_size_values[i]);
-    header.headerLength = rtc::checked_cast<size_t>(*header_size_values[i]);
+    RtpHeaderExtensionMap extensions =
+        ParsedRtcEventLog::GetDefaultHeaderExtensionMap();
+    RtpPacketReceived header(&extensions);
+    header.SetMarker(rtc::checked_cast<bool>(*marker_values[i]));
+    header.SetPayloadType(rtc::checked_cast<uint8_t>(*payload_type_values[i]));
+    header.SetSequenceNumber(
+        rtc::checked_cast<uint16_t>(*sequence_number_values[i]));
+    header.SetTimestamp(rtc::checked_cast<uint32_t>(*rtp_timestamp_values[i]));
+    header.SetSsrc(rtc::checked_cast<uint32_t>(*ssrc_values[i]));
+    // TODO(terelius): Implement CSRC.
     // TODO(terelius): Should we implement payload_type_frequency?
     if (transport_sequence_number_values.size() > i &&
         transport_sequence_number_values[i].has_value()) {
-      header.extension.hasTransportSequenceNumber = true;
-      header.extension.transportSequenceNumber = rtc::checked_cast<uint16_t>(
-          transport_sequence_number_values[i].value());
+      header.SetExtension<TransportSequenceNumber>(rtc::checked_cast<uint16_t>(
+          transport_sequence_number_values[i].value()));
     }
     if (transmission_time_offset_values.size() > i &&
         transmission_time_offset_values[i].has_value()) {
-      header.extension.hasTransmissionTimeOffset = true;
       int32_t transmission_time_offset;
       RTC_PARSE_CHECK_OR_RETURN(
           ToSigned(transmission_time_offset_values[i].value(),
                    &transmission_time_offset));
-      header.extension.transmissionTimeOffset = transmission_time_offset;
+      header.SetExtension<TransmissionOffset>(transmission_time_offset);
     }
     if (absolute_send_time_values.size() > i &&
         absolute_send_time_values[i].has_value()) {
-      header.extension.hasAbsoluteSendTime = true;
-      header.extension.absoluteSendTime =
-          rtc::checked_cast<uint32_t>(absolute_send_time_values[i].value());
+      header.SetExtension<AbsoluteSendTime>(
+          rtc::checked_cast<uint32_t>(absolute_send_time_values[i].value()));
     }
     if (video_rotation_values.size() > i &&
         video_rotation_values[i].has_value()) {
-      header.extension.hasVideoRotation = true;
-      header.extension.videoRotation = ConvertCVOByteToVideoRotation(
-          rtc::checked_cast<uint8_t>(video_rotation_values[i].value()));
+      header.SetExtension<VideoOrientation>(ConvertCVOByteToVideoRotation(
+          rtc::checked_cast<uint8_t>(video_rotation_values[i].value())));
     }
     if (audio_level_values.size() > i && audio_level_values[i].has_value()) {
       RTC_PARSE_CHECK_OR_RETURN(voice_activity_values.size() > i &&
                                 voice_activity_values[i].has_value());
-      header.extension.hasAudioLevel = true;
-      header.extension.voiceActivity =
+
+      const bool voice_activity =
           rtc::checked_cast<bool>(voice_activity_values[i].value());
       const uint8_t audio_level =
           rtc::checked_cast<uint8_t>(audio_level_values[i].value());
       RTC_PARSE_CHECK_OR_RETURN_LE(audio_level, 0x7Fu);
-      header.extension.audioLevel = audio_level;
+      header.SetExtension<AudioLevel>(voice_activity, audio_level);
     } else {
       RTC_PARSE_CHECK_OR_RETURN(voice_activity_values.size() <= i ||
                                 !voice_activity_values[i].has_value());
     }
-    (*rtp_packets_map)[header.ssrc].emplace_back(
-        Timestamp::Millis(timestamp_ms), header, header.headerLength,
-        payload_size_values[i].value() + header.headerLength +
-            header.paddingLength);
+    header.SetPadding(rtc::checked_cast<size_t>(*padding_size_values[i]));
+    (*rtp_packets_map)[header.Ssrc()].emplace_back(
+        Timestamp::Millis(timestamp_ms), std::move(header),
+        header.headers_size() + payload_size_values[i].value() +
+            header.padding_size());
   }
   return ParsedRtcEventLog::ParseStatus::Success();
 }
@@ -951,26 +943,30 @@ LoggedPacketInfo::LoggedPacketInfo(const LoggedRtpPacket& rtp,
                                    LoggedMediaType media_type,
                                    bool rtx,
                                    Timestamp capture_time)
-    : ssrc(rtp.header.ssrc),
-      stream_seq_no(rtp.header.sequenceNumber),
-      size(static_cast<uint16_t>(rtp.total_length)),
-      payload_size(static_cast<uint16_t>(rtp.total_length -
-                                         rtp.header.paddingLength -
-                                         rtp.header.headerLength)),
-      padding_size(static_cast<uint16_t>(rtp.header.paddingLength)),
-      payload_type(rtp.header.payloadType),
+    : ssrc(rtp.Header().Ssrc()),
+      stream_seq_no(rtp.Header().SequenceNumber()),
+      size(static_cast<uint16_t>(rtp.total_length())),
+      payload_size(static_cast<uint16_t>(rtp.payload_size())),
+      padding_size(static_cast<uint16_t>(rtp.padding_size())),
+      payload_type(rtp.Header().PayloadType()),
       media_type(media_type),
       rtx(rtx),
-      marker_bit(rtp.header.markerBit),
-      has_transport_seq_no(rtp.header.extension.hasTransportSequenceNumber),
-      transport_seq_no(static_cast<uint16_t>(
-          has_transport_seq_no ? rtp.header.extension.transportSequenceNumber
-                               : 0)),
+      marker_bit(rtp.Header().Marker()),
+      transport_seq_no(0),
       capture_time(capture_time),
-      log_packet_time(Timestamp::Micros(rtp.log_time_us())),
-      reported_send_time(rtp.header.extension.hasAbsoluteSendTime
-                             ? rtp.header.extension.GetAbsoluteSendTimestamp()
-                             : Timestamp::MinusInfinity()) {}
+      log_packet_time(rtp.log_time()),
+      reported_send_time(Timestamp::MinusInfinity()) {
+  const RtpPacket& header = rtp.Header();
+  absl::optional<FeedbackRequest> unused;
+  has_transport_seq_no =
+      header.GetExtension<TransportSequenceNumber>(&transport_seq_no) ||
+      header.GetExtension<TransportSequenceNumberV2>(&transport_seq_no,
+                                                     &unused);
+  if (absl::optional<uint32_t> abs_send_time =
+          header.GetExtension<AbsoluteSendTime>()) {
+    reported_send_time = AbsoluteSendTime::ToTimestamp(*abs_send_time);
+  }
+}
 
 LoggedPacketInfo::LoggedPacketInfo(const LoggedPacketInfo&) = default;
 
@@ -1639,35 +1635,21 @@ ParsedRtcEventLog::ParseStatus ParsedRtcEventLog::StoreParsedLegacyEvent(
       RtpPacketReceived rtp_header;
       RTC_PARSE_CHECK_OR_RETURN(
           rtp_header.Parse(rtc::CopyOnWriteBuffer(rtp_packet.header())));
+      uint32_t ssrc = rtp_header.Ssrc();
 
-      if (const RtpHeaderExtensionMap* extension_map = GetRtpHeaderExtensionMap(
-              rtp_packet.incoming(), rtp_header.Ssrc())) {
+      if (const RtpHeaderExtensionMap* extension_map =
+              GetRtpHeaderExtensionMap(rtp_packet.incoming(), ssrc)) {
         rtp_header.IdentifyExtensions(*extension_map);
       }
 
-      RTPHeader parsed_header;
-      rtp_header.GetHeader(&parsed_header);
-
-      // Since we give the parser only a header, there is no way for it to know
-      // the padding length. The best solution would be to log the padding
-      // length in RTC event log. In absence of it, we assume the RTP packet to
-      // contain only padding, if the padding bit is set.
-      // TODO(webrtc:9730): Use a generic way to obtain padding length.
-      if (rtp_header.has_padding())
-        parsed_header.paddingLength = total_length - rtp_header.size();
-
       RTC_PARSE_CHECK_OR_RETURN(event.has_timestamp_us());
-      int64_t timestamp_us = event.timestamp_us();
+      Timestamp log_time = Timestamp::Micros(event.timestamp_us());
       if (rtp_packet.incoming()) {
-        incoming_rtp_packets_map_[parsed_header.ssrc].push_back(
-            LoggedRtpPacketIncoming(Timestamp::Micros(timestamp_us),
-                                    parsed_header, rtp_header.size(),
-                                    total_length));
+        incoming_rtp_packets_map_[ssrc].push_back(LoggedRtpPacketIncoming(
+            log_time, std::move(rtp_header), total_length));
       } else {
-        outgoing_rtp_packets_map_[parsed_header.ssrc].push_back(
-            LoggedRtpPacketOutgoing(Timestamp::Micros(timestamp_us),
-                                    parsed_header, rtp_header.size(),
-                                    total_length));
+        outgoing_rtp_packets_map_[ssrc].push_back(LoggedRtpPacketOutgoing(
+            log_time, std::move(rtp_header), total_length));
       }
       break;
     }
@@ -2314,7 +2296,7 @@ std::vector<LoggedPacketInfo> ParsedRtcEventLog::GetPacketInfos(
 
   auto rtp_handler = [&](const LoggedRtpPacket& rtp) {
     advance_time(rtp.log_time());
-    MediaStreamInfo* stream = &streams[rtp.header.ssrc];
+    MediaStreamInfo* stream = &streams[rtp.Header().Ssrc()];
     Timestamp capture_time = Timestamp::MinusInfinity();
     if (!stream->rtx) {
       // RTX copy the timestamp of the retransmitted packets. This means that
@@ -2326,7 +2308,7 @@ std::vector<LoggedPacketInfo> ParsedRtcEventLog::GetPacketInfos(
       constexpr int64_t kStartingCaptureTimeTicks = 90 * 48 * 10000;
       int64_t capture_ticks =
           kStartingCaptureTimeTicks +
-          stream->unwrap_capture_ticks.Unwrap(rtp.header.timestamp);
+          stream->unwrap_capture_ticks.Unwrap(rtp.Header().Timestamp());
       // TODO(srte): Use logged sample rate when it is added to the format.
       capture_time = Timestamp::Seconds(
           capture_ticks /

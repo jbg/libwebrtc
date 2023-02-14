@@ -942,68 +942,42 @@ void EventVerifier::VerifyLoggedIceCandidatePairEvent(
 
 template <typename Event>
 void VerifyLoggedRtpHeader(const Event& original_header,
-                           const RTPHeader& logged_header) {
+                           const RtpPacket& logged_header) {
   // Standard RTP header.
-  EXPECT_EQ(original_header.Marker(), logged_header.markerBit);
-  EXPECT_EQ(original_header.PayloadType(), logged_header.payloadType);
-  EXPECT_EQ(original_header.SequenceNumber(), logged_header.sequenceNumber);
-  EXPECT_EQ(original_header.Timestamp(), logged_header.timestamp);
-  EXPECT_EQ(original_header.Ssrc(), logged_header.ssrc);
+  EXPECT_EQ(original_header.Marker(), logged_header.Marker());
+  EXPECT_EQ(original_header.PayloadType(), logged_header.PayloadType());
+  EXPECT_EQ(original_header.SequenceNumber(), logged_header.SequenceNumber());
+  EXPECT_EQ(original_header.Timestamp(), logged_header.Timestamp());
+  EXPECT_EQ(original_header.Ssrc(), logged_header.Ssrc());
 
-  EXPECT_EQ(original_header.header_length(), logged_header.headerLength);
+  EXPECT_EQ(original_header.header_length(), logged_header.headers_size());
 
   // TransmissionOffset header extension.
-  ASSERT_EQ(original_header.template HasExtension<TransmissionOffset>(),
-            logged_header.extension.hasTransmissionTimeOffset);
-  if (logged_header.extension.hasTransmissionTimeOffset) {
-    int32_t offset;
-    ASSERT_TRUE(
-        original_header.template GetExtension<TransmissionOffset>(&offset));
-    EXPECT_EQ(offset, logged_header.extension.transmissionTimeOffset);
-  }
+  EXPECT_EQ(original_header.template GetExtension<TransmissionOffset>(),
+            logged_header.GetExtension<TransmissionOffset>());
 
   // AbsoluteSendTime header extension.
-  ASSERT_EQ(original_header.template HasExtension<AbsoluteSendTime>(),
-            logged_header.extension.hasAbsoluteSendTime);
-  if (logged_header.extension.hasAbsoluteSendTime) {
-    uint32_t sendtime;
-    ASSERT_TRUE(
-        original_header.template GetExtension<AbsoluteSendTime>(&sendtime));
-    EXPECT_EQ(sendtime, logged_header.extension.absoluteSendTime);
-  }
+  EXPECT_EQ(original_header.template GetExtension<AbsoluteSendTime>(),
+            logged_header.GetExtension<AbsoluteSendTime>());
 
   // TransportSequenceNumber header extension.
-  ASSERT_EQ(original_header.template HasExtension<TransportSequenceNumber>(),
-            logged_header.extension.hasTransportSequenceNumber);
-  if (logged_header.extension.hasTransportSequenceNumber) {
-    uint16_t seqnum;
-    ASSERT_TRUE(original_header.template GetExtension<TransportSequenceNumber>(
-        &seqnum));
-    EXPECT_EQ(seqnum, logged_header.extension.transportSequenceNumber);
-  }
+  EXPECT_EQ(original_header.template GetExtension<TransportSequenceNumber>(),
+            logged_header.GetExtension<TransportSequenceNumber>());
 
   // AudioLevel header extension.
-  ASSERT_EQ(original_header.template HasExtension<AudioLevel>(),
-            logged_header.extension.hasAudioLevel);
-  if (logged_header.extension.hasAudioLevel) {
-    bool voice_activity;
-    uint8_t audio_level;
-    ASSERT_TRUE(original_header.template GetExtension<AudioLevel>(
-        &voice_activity, &audio_level));
-    EXPECT_EQ(voice_activity, logged_header.extension.voiceActivity);
-    EXPECT_EQ(audio_level, logged_header.extension.audioLevel);
-  }
+  bool original_voice_activity = false;
+  bool logged_voice_activity = false;
+  uint8_t original_audio_level = 0;
+  uint8_t logged_audio_level = 0;
+  EXPECT_EQ(original_header.template GetExtension<AudioLevel>(
+                &original_voice_activity, &original_audio_level),
+            logged_header.GetExtension<AudioLevel>(&logged_voice_activity,
+                                                   &logged_audio_level));
+  EXPECT_EQ(logged_voice_activity, original_voice_activity);
+  EXPECT_EQ(logged_audio_level, original_audio_level);
 
-  // VideoOrientation header extension.
-  ASSERT_EQ(original_header.template HasExtension<VideoOrientation>(),
-            logged_header.extension.hasVideoRotation);
-  if (logged_header.extension.hasVideoRotation) {
-    uint8_t rotation;
-    ASSERT_TRUE(
-        original_header.template GetExtension<VideoOrientation>(&rotation));
-    EXPECT_EQ(ConvertCVOByteToVideoRotation(rotation),
-              logged_header.extension.videoRotation);
-  }
+  EXPECT_EQ(original_header.template GetExtension<VideoOrientation>(),
+            logged_header.GetExtension<VideoOrientation>());
 }
 
 void EventVerifier::VerifyLoggedRouteChangeEvent(
@@ -1029,16 +1003,16 @@ void EventVerifier::VerifyLoggedRtpPacketIncoming(
     const LoggedRtpPacketIncoming& logged_event) const {
   EXPECT_EQ(original_event.timestamp_ms(), logged_event.log_time_ms());
 
-  EXPECT_EQ(original_event.header_length(), logged_event.rtp.header_length);
+  EXPECT_EQ(original_event.header_length(),
+            logged_event.rtp.Header().headers_size());
 
-  EXPECT_EQ(original_event.packet_length(), logged_event.rtp.total_length);
+  EXPECT_EQ(original_event.packet_length(), logged_event.rtp.total_length());
 
   // Currently, RTC eventlog encoder-parser can only maintain padding length
   // if packet is full padding.
-  EXPECT_EQ(original_event.padding_length(),
-            logged_event.rtp.header.paddingLength);
+  EXPECT_EQ(original_event.padding_length(), logged_event.rtp.padding_size());
 
-  VerifyLoggedRtpHeader(original_event, logged_event.rtp.header);
+  VerifyLoggedRtpHeader(original_event, logged_event.rtp.Header());
 }
 
 void EventVerifier::VerifyLoggedRtpPacketOutgoing(
@@ -1046,19 +1020,19 @@ void EventVerifier::VerifyLoggedRtpPacketOutgoing(
     const LoggedRtpPacketOutgoing& logged_event) const {
   EXPECT_EQ(original_event.timestamp_ms(), logged_event.log_time_ms());
 
-  EXPECT_EQ(original_event.header_length(), logged_event.rtp.header_length);
+  EXPECT_EQ(original_event.header_length(),
+            logged_event.rtp.Header().headers_size());
 
-  EXPECT_EQ(original_event.packet_length(), logged_event.rtp.total_length);
+  EXPECT_EQ(original_event.packet_length(), logged_event.rtp.total_length());
 
   // Currently, RTC eventlog encoder-parser can only maintain padding length
   // if packet is full padding.
-  EXPECT_EQ(original_event.padding_length(),
-            logged_event.rtp.header.paddingLength);
+  EXPECT_EQ(original_event.padding_length(), logged_event.rtp.padding_size());
 
   // TODO(terelius): Probe cluster ID isn't parsed, used or tested. Unless
   // someone has a strong reason to keep it, it'll be removed.
 
-  VerifyLoggedRtpHeader(original_event, logged_event.rtp.header);
+  VerifyLoggedRtpHeader(original_event, logged_event.rtp.Header());
 }
 
 void EventVerifier::VerifyLoggedGenericPacketSent(

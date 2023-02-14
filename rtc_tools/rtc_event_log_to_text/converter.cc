@@ -44,6 +44,7 @@
 #include "logging/rtc_event_log/rtc_event_log_parser.h"
 #include "logging/rtc_event_log/rtc_event_processor.h"
 #include "logging/rtc_event_log/rtc_stream_config.h"
+#include "modules/rtp_rtcp/source/rtp_header_extensions.h"
 #include "rtc_base/logging.h"
 
 namespace webrtc {
@@ -318,71 +319,45 @@ bool Convert(std::string inputfile,
     fprintf(output, "\n");
   };
 
+  auto log_packet = [&](const LoggedRtpPacket& rtp_packet) {
+    const webrtc::RtpPacket& rtp_header = rtp_packet.Header();
+    fprintf(output, " ssrc=%u", rtp_header.Ssrc());
+    fprintf(output, " seq_no=%u", rtp_header.SequenceNumber());
+    fprintf(output, " marker=%u", rtp_header.Marker());
+    fprintf(output, " pt=%u", rtp_header.PayloadType());
+    fprintf(output, " timestamp=%u", rtp_header.Timestamp());
+    if (auto ast = rtp_header.GetExtension<AbsoluteSendTime>()) {
+      fprintf(output, " abs_send_time=%u", *ast);
+    }
+    if (auto toffset = rtp_header.GetExtension<TransmissionOffset>()) {
+      fprintf(output, " transmission_offset=%d", *toffset);
+    }
+    bool voice_activity;
+    uint8_t audio_level;
+    if (rtp_header.GetExtension<AudioLevel>(&voice_activity, &audio_level)) {
+      fprintf(output, " voice_activity=%d", voice_activity);
+      fprintf(output, " audio_level=%u", audio_level);
+    }
+    if (auto rotation = rtp_header.GetExtension<VideoOrientation>()) {
+      fprintf(output, " video_rotation=%d", *rotation);
+    }
+    if (auto tsn = rtp_header.GetExtension<TransportSequenceNumber>()) {
+      fprintf(output, " transport_seq_no=%u", *tsn);
+    }
+    fprintf(output, " header_length=%zu", rtp_header.headers_size());
+    fprintf(output, " padding_length=%zu", rtp_packet.padding_size());
+    fprintf(output, " total_length=%zu", rtp_packet.total_length());
+  };
+
   auto incoming_rtp_packet_handler = [&](const LoggedRtpPacketIncoming& event) {
     fprintf(output, "RTP_IN %" PRId64, event.log_time_ms());
-    fprintf(output, " ssrc=%u", event.rtp.header.ssrc);
-    fprintf(output, " seq_no=%u", event.rtp.header.sequenceNumber);
-    fprintf(output, " marker=%u", event.rtp.header.markerBit);
-    fprintf(output, " pt=%u", event.rtp.header.payloadType);
-    fprintf(output, " timestamp=%u", event.rtp.header.timestamp);
-    if (event.rtp.header.extension.hasAbsoluteSendTime) {
-      fprintf(output, " abs_send_time=%u",
-              event.rtp.header.extension.absoluteSendTime);
-    }
-    if (event.rtp.header.extension.hasTransmissionTimeOffset) {
-      fprintf(output, " transmission_offset=%d",
-              event.rtp.header.extension.transmissionTimeOffset);
-    }
-    if (event.rtp.header.extension.hasAudioLevel) {
-      fprintf(output, " voice_activity=%d",
-              event.rtp.header.extension.voiceActivity);
-      fprintf(output, " audio_level=%u", event.rtp.header.extension.audioLevel);
-    }
-    if (event.rtp.header.extension.hasVideoRotation) {
-      fprintf(output, " video_rotation=%d",
-              event.rtp.header.extension.videoRotation);
-    }
-    if (event.rtp.header.extension.hasTransportSequenceNumber) {
-      fprintf(output, " transport_seq_no=%u",
-              event.rtp.header.extension.transportSequenceNumber);
-    }
-    fprintf(output, " header_length=%zu", event.rtp.header_length);
-    fprintf(output, " padding_length=%zu", event.rtp.header.paddingLength);
-    fprintf(output, " total_length=%zu", event.rtp.total_length);
+    log_packet(event.rtp);
     fprintf(output, "\n");
   };
 
   auto outgoing_rtp_packet_handler = [&](const LoggedRtpPacketOutgoing& event) {
     fprintf(output, "RTP_OUT %" PRId64, event.log_time_ms());
-    fprintf(output, " ssrc=%u", event.rtp.header.ssrc);
-    fprintf(output, " seq_no=%u", event.rtp.header.sequenceNumber);
-    fprintf(output, " marker=%u", event.rtp.header.markerBit);
-    fprintf(output, " pt=%u", event.rtp.header.payloadType);
-    fprintf(output, " timestamp=%u", event.rtp.header.timestamp);
-    if (event.rtp.header.extension.hasAbsoluteSendTime) {
-      fprintf(output, " abs_send_time=%u",
-              event.rtp.header.extension.absoluteSendTime);
-    }
-    if (event.rtp.header.extension.hasTransmissionTimeOffset) {
-      fprintf(output, " transmission_offset=%d",
-              event.rtp.header.extension.transmissionTimeOffset);
-    }
-    if (event.rtp.header.extension.hasAudioLevel) {
-      fprintf(output, " voice_activity=%d",
-              event.rtp.header.extension.voiceActivity);
-      fprintf(output, " audio_level=%u", event.rtp.header.extension.audioLevel);
-    }
-    if (event.rtp.header.extension.hasVideoRotation) {
-      fprintf(output, " video_rotation=%d",
-              event.rtp.header.extension.videoRotation);
-    }
-    if (event.rtp.header.extension.hasTransportSequenceNumber) {
-      fprintf(output, " transport_seq_no=%u",
-              event.rtp.header.extension.transportSequenceNumber);
-    }
-    fprintf(output, " header_length=%zu", event.rtp.header_length);
-    fprintf(output, " padding_length=%zu", event.rtp.header.paddingLength);
-    fprintf(output, " total_length=%zu", event.rtp.total_length);
+    log_packet(event.rtp);
     fprintf(output, "\n");
   };
 

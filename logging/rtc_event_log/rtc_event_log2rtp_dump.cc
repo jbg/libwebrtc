@@ -106,60 +106,14 @@ bool ShouldSkipStream(MediaType media_type,
   return false;
 }
 
-// Convert a LoggedRtpPacketIncoming to a test::RtpPacket. Header extension IDs
-// are allocated according to the provided extension map. This might not match
-// the extension map used in the actual call.
-void ConvertRtpPacket(
-    const webrtc::LoggedRtpPacketIncoming& incoming,
-    const webrtc::RtpHeaderExtensionMap& default_extension_map,
-    webrtc::test::RtpPacket* packet) {
-  webrtc::RtpPacket reconstructed_packet(&default_extension_map);
-
-  reconstructed_packet.SetMarker(incoming.rtp.header.markerBit);
-  reconstructed_packet.SetPayloadType(incoming.rtp.header.payloadType);
-  reconstructed_packet.SetSequenceNumber(incoming.rtp.header.sequenceNumber);
-  reconstructed_packet.SetTimestamp(incoming.rtp.header.timestamp);
-  reconstructed_packet.SetSsrc(incoming.rtp.header.ssrc);
-  if (incoming.rtp.header.numCSRCs > 0) {
-    reconstructed_packet.SetCsrcs(rtc::ArrayView<const uint32_t>(
-        incoming.rtp.header.arrOfCSRCs, incoming.rtp.header.numCSRCs));
-  }
-
-  // Set extensions.
-  if (incoming.rtp.header.extension.hasTransmissionTimeOffset)
-    reconstructed_packet.SetExtension<webrtc::TransmissionOffset>(
-        incoming.rtp.header.extension.transmissionTimeOffset);
-  if (incoming.rtp.header.extension.hasAbsoluteSendTime)
-    reconstructed_packet.SetExtension<webrtc::AbsoluteSendTime>(
-        incoming.rtp.header.extension.absoluteSendTime);
-  if (incoming.rtp.header.extension.hasTransportSequenceNumber)
-    reconstructed_packet.SetExtension<webrtc::TransportSequenceNumber>(
-        incoming.rtp.header.extension.transportSequenceNumber);
-  if (incoming.rtp.header.extension.hasAudioLevel)
-    reconstructed_packet.SetExtension<webrtc::AudioLevel>(
-        incoming.rtp.header.extension.voiceActivity,
-        incoming.rtp.header.extension.audioLevel);
-  if (incoming.rtp.header.extension.hasVideoRotation)
-    reconstructed_packet.SetExtension<webrtc::VideoOrientation>(
-        incoming.rtp.header.extension.videoRotation);
-  if (incoming.rtp.header.extension.hasVideoContentType)
-    reconstructed_packet.SetExtension<webrtc::VideoContentTypeExtension>(
-        incoming.rtp.header.extension.videoContentType);
-  if (incoming.rtp.header.extension.has_video_timing)
-    reconstructed_packet.SetExtension<webrtc::VideoTimingExtension>(
-        incoming.rtp.header.extension.video_timing);
-
-  RTC_DCHECK_EQ(reconstructed_packet.size(), incoming.rtp.header_length);
-  RTC_DCHECK_EQ(reconstructed_packet.headers_size(),
-                incoming.rtp.header_length);
-  memcpy(packet->data, reconstructed_packet.data(),
-         reconstructed_packet.headers_size());
-  packet->length = reconstructed_packet.headers_size();
-  packet->original_length = incoming.rtp.total_length;
-  packet->time_ms = incoming.log_time_ms();
-  // Set padding bit.
-  if (incoming.rtp.header.paddingLength > 0)
-    packet->data[0] = packet->data[0] | 0x20;
+webrtc::test::RtpPacket ConvertRtpPacket(
+    const webrtc::LoggedRtpPacketIncoming& incoming) {
+  webrtc::test::RtpPacket packet;
+  packet.length = incoming.rtp.Header().headers_size();
+  memcpy(packet.data, incoming.rtp.Header().data(), packet.length);
+  packet.original_length = incoming.rtp.total_length();
+  packet.time_ms = incoming.log_time_ms();
+  return packet;
 }
 
 }  // namespace
@@ -207,12 +161,9 @@ int main(int argc, char* argv[]) {
   int rtp_counter = 0, rtcp_counter = 0;
   bool header_only = false;
 
-  webrtc::RtpHeaderExtensionMap default_extension_map =
-      webrtc::ParsedRtcEventLog::GetDefaultHeaderExtensionMap();
-  auto handle_rtp = [&default_extension_map, &rtp_writer, &rtp_counter](
+  auto handle_rtp = [&rtp_writer, &rtp_counter](
                         const webrtc::LoggedRtpPacketIncoming& incoming) {
-    webrtc::test::RtpPacket packet;
-    ConvertRtpPacket(incoming, default_extension_map, &packet);
+    webrtc::test::RtpPacket packet = ConvertRtpPacket(incoming);
 
     rtp_writer->WritePacket(&packet);
     rtp_counter++;

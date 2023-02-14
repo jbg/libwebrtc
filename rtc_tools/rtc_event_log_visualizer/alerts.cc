@@ -65,10 +65,10 @@ void TriageHelper::AnalyzeStreamGaps(const ParsedRtcEventLog& parsed_log,
     }
     SeqNumUnwrapper<uint16_t> seq_num_unwrapper;
     int64_t last_seq_num =
-        seq_num_unwrapper.Unwrap(packets[0].header.sequenceNumber);
+        seq_num_unwrapper.Unwrap(packets[0].Header().SequenceNumber());
     SeqNumUnwrapper<uint32_t> capture_time_unwrapper;
     int64_t last_capture_time =
-        capture_time_unwrapper.Unwrap(packets[0].header.timestamp);
+        capture_time_unwrapper.Unwrap(packets[0].Header().Timestamp());
     int64_t last_log_time_ms = packets[0].log_time_ms();
     for (const auto& packet : packets) {
       if (packet.log_time_us() > segment_end_us) {
@@ -76,7 +76,8 @@ void TriageHelper::AnalyzeStreamGaps(const ParsedRtcEventLog& parsed_log,
         break;
       }
 
-      int64_t seq_num = seq_num_unwrapper.Unwrap(packet.header.sequenceNumber);
+      int64_t seq_num =
+          seq_num_unwrapper.Unwrap(packet.Header().SequenceNumber());
       if (std::abs(seq_num - last_seq_num) > kMaxSeqNumJump) {
         Alert(seq_num_alert, config_.GetCallTimeSec(packet.log_time()),
               seq_num_explanation);
@@ -84,7 +85,7 @@ void TriageHelper::AnalyzeStreamGaps(const ParsedRtcEventLog& parsed_log,
       last_seq_num = seq_num;
 
       int64_t capture_time =
-          capture_time_unwrapper.Unwrap(packet.header.timestamp);
+          capture_time_unwrapper.Unwrap(packet.Header().Timestamp());
       if (std::abs(capture_time - last_capture_time) >
           kTicksPerMillisec *
               (kCaptureTimeGraceMs + packet.log_time_ms() - last_log_time_ms)) {

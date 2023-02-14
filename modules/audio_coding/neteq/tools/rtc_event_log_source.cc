@@ -116,11 +116,12 @@ bool RtcEventLogSource::Initialize(const ParsedRtcEventLog& parsed_log,
   auto handle_rtp_packet =
       [this, first_log_end_time_us,
        &packet_ssrcs](const webrtc::LoggedRtpPacketIncoming& incoming) {
-        if (!filter_.test(incoming.rtp.header.payloadType) &&
+        if (!filter_.test(incoming.rtp.Header().PayloadType()) &&
             incoming.log_time_us() < first_log_end_time_us) {
           rtp_packets_.emplace_back(std::make_unique<Packet>(
-              incoming.rtp.header, incoming.rtp.total_length,
-              incoming.rtp.total_length - incoming.rtp.header_length,
+              incoming.rtp.LegacyHeader(), incoming.rtp.total_length(),
+              incoming.rtp.total_length() -
+                  incoming.rtp.Header().headers_size(),
               static_cast<double>(incoming.log_time_ms())));
           packet_ssrcs.insert(rtp_packets_.back()->header().ssrc);
         }
