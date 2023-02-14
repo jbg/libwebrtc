@@ -69,6 +69,23 @@
       "message": "All the rocks we turn over...",
       "revId": "3af8687d027705f1cc41053818182a0d99ec92d6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac8d034c_2d75680f",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-14T11:54:25Z",
+      "side": 1,
+      "message": "Returning if a stream could not be created is not new with this CL, but still wondering: why would we fail here? Is this an error? Seems strange to silently abort like this rather than DCHECKing and/or RTC_LOG(LS_ERROR).",
+      "revId": "3af8687d027705f1cc41053818182a0d99ec92d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
