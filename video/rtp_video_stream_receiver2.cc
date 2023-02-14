@@ -547,9 +547,11 @@ void RtpVideoStreamReceiver2::OnReceivedPayloadData(
   RtpPacketInfo& packet_info =
       packet_infos_
           .emplace(unwrapped_rtp_seq_num,
-                   RtpPacketInfo(rtp_packet.Ssrc(), rtp_packet.Csrcs(),
-                                 rtp_packet.Timestamp(),
-                                 /*receive_time_ms=*/clock_->CurrentTime()))
+                   RtpPacketInfo(
+                       rtp_packet.Ssrc(), rtp_packet.Csrcs(),
+                       rtp_packet.Timestamp(), rtp_packet.SequenceNumber(),
+                       /*receive_time_ms=*/clock_->CurrentTime(),
+                       rtp_packet.headers_size(), rtp_packet.payload_size()))
           .first->second;
 
   // Try to extrapolate absolute capture time if it is missing.
@@ -561,6 +563,11 @@ void RtpVideoStreamReceiver2::OnReceivedPayloadData(
           // Assume frequency is the same one for all video frames.
           kVideoPayloadTypeFrequency,
           rtp_packet.GetExtension<AbsoluteCaptureTimeExtension>()));
+
+  uint32_t sendtime;
+  if (rtp_packet.GetExtension<AbsoluteSendTime>(&sendtime)) {
+    packet_info.set_absolute_send_time(AbsoluteSendTime::ToTimestamp(sendtime));
+  }
 
   RTPVideoHeader& video_header = packet->video_header;
   video_header.rotation = kVideoRotation_0;

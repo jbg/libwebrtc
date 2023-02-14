@@ -513,7 +513,8 @@ int NetEqImpl::InsertPacketInternal(const RTPHeader& rtp_header,
     packet.sequence_number = rtp_header.sequenceNumber;
     packet.timestamp = rtp_header.timestamp;
     packet.payload.SetData(payload.data(), payload.size());
-    packet.packet_info = RtpPacketInfo(rtp_header, receive_time);
+    packet.packet_info =
+        RtpPacketInfo(rtp_header, payload.size(), receive_time);
     // Waiting time will be set upon inserting the packet in the buffer.
     RTC_DCHECK(!packet.waiting_time);
     return packet;

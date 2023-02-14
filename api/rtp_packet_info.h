@@ -35,9 +35,14 @@ class RTC_EXPORT RtpPacketInfo {
   RtpPacketInfo(uint32_t ssrc,
                 std::vector<uint32_t> csrcs,
                 uint32_t rtp_timestamp,
-                Timestamp receive_time);
+                uint16_t rtp_sequence_number,
+                Timestamp receive_time,
+                size_t header_size,
+                size_t payload_size);
 
-  RtpPacketInfo(const RTPHeader& rtp_header, Timestamp receive_time);
+  RtpPacketInfo(const RTPHeader& rtp_header,
+                size_t payload_size,
+                Timestamp receive_time);
 
   RtpPacketInfo(const RtpPacketInfo& other) = default;
   RtpPacketInfo(RtpPacketInfo&& other) = default;
@@ -52,6 +57,9 @@ class RTC_EXPORT RtpPacketInfo {
 
   uint32_t rtp_timestamp() const { return rtp_timestamp_; }
   void set_rtp_timestamp(uint32_t value) { rtp_timestamp_ = value; }
+
+  uint16_t rtp_sequence_number() const { return rtp_sequence_number_; }
+  void set_rtp_sequence_number(uint16_t value) { rtp_sequence_number_ = value; }
 
   Timestamp receive_time() const { return receive_time_; }
   void set_receive_time(Timestamp value) { receive_time_ = value; }
@@ -71,6 +79,19 @@ class RTC_EXPORT RtpPacketInfo {
     return *this;
   }
 
+  const absl::optional<Timestamp>& absolute_send_time() const {
+    return absolute_send_time_;
+  }
+
+  RtpPacketInfo& set_absolute_send_time(
+      const absl::optional<Timestamp>& value) {
+    absolute_send_time_ = value;
+    return *this;
+  }
+
+  size_t header_size() const { return header_size_; }
+  size_t payload_size() const { return payload_size_; }
+
   const absl::optional<TimeDelta>& local_capture_clock_offset() const {
     return local_capture_clock_offset_;
   }
@@ -86,6 +107,7 @@ class RTC_EXPORT RtpPacketInfo {
   uint32_t ssrc_;
   std::vector<uint32_t> csrcs_;
   uint32_t rtp_timestamp_;
+  uint16_t rtp_sequence_number_;
 
   // Local `webrtc::Clock`-based timestamp of when the packet was received.
   Timestamp receive_time_;
@@ -97,6 +119,10 @@ class RTC_EXPORT RtpPacketInfo {
   // Fields from the Absolute Capture Time header extension:
   // http://www.webrtc.org/experiments/rtp-hdrext/abs-capture-time
   absl::optional<AbsoluteCaptureTime> absolute_capture_time_;
+
+  absl::optional<Timestamp> absolute_send_time_;
+  size_t header_size_;
+  size_t payload_size_;
 
   // Clock offset between the local clock and the capturer's clock.
   // Do not confuse with `AbsoluteCaptureTime::estimated_capture_clock_offset`
