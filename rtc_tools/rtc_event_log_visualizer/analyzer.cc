@@ -121,14 +121,14 @@ absl::optional<uint32_t> EstimateRtpClockFrequency(
   RTC_CHECK(packets.size() >= 2);
   SeqNumUnwrapper<uint32_t> unwrapper;
   int64_t first_rtp_timestamp =
-      unwrapper.Unwrap(packets[0].rtp.header.timestamp);
+      unwrapper.Unwrap(packets[0].rtp.Header().Timestamp());
   int64_t first_log_timestamp = packets[0].log_time_us();
   int64_t last_rtp_timestamp = first_rtp_timestamp;
   int64_t last_log_timestamp = first_log_timestamp;
   for (size_t i = 1; i < packets.size(); i++) {
     if (packets[i].log_time_us() > end_time_us)
       break;
-    last_rtp_timestamp = unwrapper.Unwrap(packets[i].rtp.header.timestamp);
+    last_rtp_timestamp = unwrapper.Unwrap(packets[i].rtp.Header().Timestamp());
     last_log_timestamp = packets[i].log_time_us();
   }
   if (last_log_timestamp - first_log_timestamp < kNumMicrosecsPerSec) {
@@ -159,11 +159,14 @@ absl::optional<uint32_t> EstimateRtpClockFrequency(
 absl::optional<double> NetworkDelayDiff_AbsSendTime(
     const LoggedRtpPacketIncoming& old_packet,
     const LoggedRtpPacketIncoming& new_packet) {
-  if (old_packet.rtp.header.extension.hasAbsoluteSendTime &&
-      new_packet.rtp.header.extension.hasAbsoluteSendTime) {
-    int64_t send_time_diff = WrappingDifference(
-        new_packet.rtp.header.extension.absoluteSendTime,
-        old_packet.rtp.header.extension.absoluteSendTime, 1ul << 24);
+  uint32_t new_abs_send_time;
+  uint32_t old_abs_send_time;
+  if (old_packet.rtp.Header().GetExtension<AbsoluteSendTime>(
+          &old_abs_send_time) &&
+      new_packet.rtp.Header().GetExtension<AbsoluteSendTime>(
+          &new_abs_send_time)) {
+    int64_t send_time_diff =
+        WrappingDifference(new_abs_send_time, old_abs_send_time, 1ul << 24);
     int64_t recv_time_diff =
         new_packet.log_time_us() - old_packet.log_time_us();
     double delay_change_us =
@@ -179,8 +182,8 @@ absl::optional<double> NetworkDelayDiff_CaptureTime(
     const LoggedRtpPacketIncoming& new_packet,
     const double sample_rate) {
   int64_t send_time_diff =
-      WrappingDifference(new_packet.rtp.header.timestamp,
-                         old_packet.rtp.header.timestamp, 1ull << 32);
+      WrappingDifference(new_packet.rtp.Header().Timestamp(),
+                         old_packet.rtp.Header().Timestamp(), 1ull << 32);
   int64_t recv_time_diff = new_packet.log_time_us() - old_packet.log_time_us();
 
   double delay_change =
@@ -189,11 +192,11 @@ absl::optional<double> NetworkDelayDiff_CaptureTime(
   if (delay_change < -10000 || 10000 < delay_change) {
     RTC_LOG(LS_WARNING) << "Very large delay change. Timestamps correct?";
     RTC_LOG(LS_WARNING) << "Old capture time "
-                        << old_packet.rtp.header.timestamp << ", received time "
-                        << old_packet.log_time_us();
+                        << old_packet.rtp.Header().Timestamp()
+                        << ", received time " << old_packet.log_time_us();
     RTC_LOG(LS_WARNING) << "New capture time "
-                        << new_packet.rtp.header.timestamp << ", received time "
-                        << new_packet.log_time_us();
+                        << new_packet.rtp.Header().Timestamp()
+                        << ", received time " << new_packet.log_time_us();
     RTC_LOG(LS_WARNING) << "Receive time difference " << recv_time_diff << " = "
                         << static_cast<double>(recv_time_diff) /
                                kNumMicrosecsPerSec
@@ -412,10 +415,10 @@ void EventLogAnalyzer::CreatePacketGraph(PacketDirection direction,
     TimeSeries time_series(GetStreamName(parsed_log_, direction, stream.ssrc),
                            LineStyle::kBar);
     auto GetPacketSize = [](const LoggedRtpPacket& packet) {
-      return absl::optional<float>(packet.total_length);
+      return absl::optional<float>(packet.total_length());
     };
     auto ToCallTime = [this](const LoggedRtpPacket& packet) {
-      return this->config_.GetCallTimeSec(packet.timestamp);
+      return this->config_.GetCallTimeSec(packet.log_time());
     };
     ProcessPoints<LoggedRtpPacket>(ToCallTime, GetPacketSize,
                                    stream.packet_view, &time_series);
@@ -649,11 +652,13 @@ void EventLogAnalyzer::CreateAudioLevelGraph(PacketDirection direction,
     TimeSeries time_series(GetStreamName(parsed_log_, direction, stream.ssrc),
                            LineStyle::kLine);
     for (auto& packet : stream.packet_view) {
-      if (packet.header.extension.hasAudioLevel) {
+      bool unused;
+      uint8_t audio_level;
+      if (packet.Header().GetExtension<AudioLevel>(&unused, &audio_level)) {
         float x = config_.GetCallTimeSec(packet.log_time());
         // The audio level is stored in -dBov (so e.g. -10 dBov is stored as 10)
         // Here we convert it to dBov.
-        float y = static_cast<float>(-packet.header.extension.audioLevel);
+        float y = -static_cast<float>(audio_level);
         time_series.points.emplace_back(TimeSeriesPoint(x, y));
       }
     }
@@ -680,9 +685,9 @@ void EventLogAnalyzer::CreateSequenceNumberGraph(Plot* plot) {
         LineStyle::kBar);
     auto GetSequenceNumberDiff = [](const LoggedRtpPacketIncoming& old_packet,
                                     const LoggedRtpPacketIncoming& new_packet) {
-      int64_t diff =
-          WrappingDifference(new_packet.rtp.header.sequenceNumber,
-                             old_packet.rtp.header.sequenceNumber, 1ul << 16);
+      int64_t diff = WrappingDifference(
+          new_packet.rtp.Header().SequenceNumber(),
+          old_packet.rtp.Header().SequenceNumber(), 1ul << 16);
       return diff;
     };
     auto ToCallTime = [this](const LoggedRtpPacketIncoming& packet) {
@@ -722,23 +727,23 @@ void EventLogAnalyzer::CreateIncomingPacketLossGraph(Plot* plot) {
     size_t window_index_begin = 0;
     size_t window_index_end = 0;
     uint64_t highest_seq_number =
-        unwrapper_.Unwrap(packets[0].rtp.header.sequenceNumber) - 1;
+        unwrapper_.Unwrap(packets[0].rtp.Header().SequenceNumber()) - 1;
     uint64_t highest_prior_seq_number =
-        prior_unwrapper_.Unwrap(packets[0].rtp.header.sequenceNumber) - 1;
+        prior_unwrapper_.Unwrap(packets[0].rtp.Header().SequenceNumber()) - 1;
 
     for (Timestamp t = config_.begin_time_; t < config_.end_time_ + kStep;
          t += kStep) {
       while (window_index_end < packets.size() &&
              packets[window_index_end].rtp.log_time() < t) {
         uint64_t sequence_number = unwrapper_.Unwrap(
-            packets[window_index_end].rtp.header.sequenceNumber);
+            packets[window_index_end].rtp.Header().SequenceNumber());
         highest_seq_number = std::max(highest_seq_number, sequence_number);
         ++window_index_end;
       }
       while (window_index_begin < packets.size() &&
              packets[window_index_begin].rtp.log_time() < t - kWindow) {
         uint64_t sequence_number = prior_unwrapper_.Unwrap(
-            packets[window_index_begin].rtp.header.sequenceNumber);
+            packets[window_index_begin].rtp.Header().SequenceNumber());
         highest_prior_seq_number =
             std::max(highest_prior_seq_number, sequence_number);
         ++window_index_begin;
@@ -846,7 +851,7 @@ void EventLogAnalyzer::CreateTotalIncomingBitrateGraph(Plot* plot) {
   for (const auto& stream : parsed_log_.incoming_rtp_packets_by_ssrc()) {
     for (const LoggedRtpPacketIncoming& packet : stream.incoming_packets)
       packets_in_order.insert(
-          std::make_pair(packet.rtp.log_time(), packet.rtp.total_length));
+          std::make_pair(packet.rtp.log_time(), packet.rtp.total_length()));
   }
 
   auto window_begin = packets_in_order.begin();
@@ -915,7 +920,7 @@ void EventLogAnalyzer::CreateTotalOutgoingBitrateGraph(
   for (const auto& stream : parsed_log_.outgoing_rtp_packets_by_ssrc()) {
     for (const LoggedRtpPacketOutgoing& packet : stream.outgoing_packets)
       packets_in_order.insert(
-          std::make_pair(packet.rtp.log_time(), packet.rtp.total_length));
+          std::make_pair(packet.rtp.log_time(), packet.rtp.total_length()));
   }
 
   auto window_begin = packets_in_order.begin();
@@ -1134,7 +1139,7 @@ void EventLogAnalyzer::CreateStreamBitrateGraph(PacketDirection direction,
     TimeSeries time_series(GetStreamName(parsed_log_, direction, stream.ssrc),
                            LineStyle::kLine);
     auto GetPacketSizeKilobits = [](const LoggedRtpPacket& packet) {
-      return packet.total_length * 8.0 / 1000.0;
+      return packet.total_length() * 8.0 / 1000.0;
     };
     MovingAverage<LoggedRtpPacket, double>(
         GetPacketSizeKilobits, stream.packet_view, config_, &time_series);
@@ -1313,22 +1318,23 @@ void EventLogAnalyzer::CreateSendSideBweSimulationGraph(Plot* plot) {
     if (clock.TimeInMicroseconds() >= NextRtpTime()) {
       RTC_DCHECK_EQ(clock.TimeInMicroseconds(), NextRtpTime());
       const RtpPacketType& rtp_packet = *rtp_iterator->second;
-      if (rtp_packet.rtp.header.extension.hasTransportSequenceNumber) {
+      if (absl::optional<uint16_t> transport_sequence_number =
+              rtp_packet.rtp.Header().GetExtension<TransportSequenceNumber>()) {
         RtpPacketSendInfo packet_info;
-        packet_info.media_ssrc = rtp_packet.rtp.header.ssrc;
-        packet_info.transport_sequence_number =
-            rtp_packet.rtp.header.extension.transportSequenceNumber;
-        packet_info.rtp_sequence_number = rtp_packet.rtp.header.sequenceNumber;
-        packet_info.length = rtp_packet.rtp.total_length;
+        packet_info.media_ssrc = rtp_packet.rtp.Header().Ssrc();
+        packet_info.transport_sequence_number = *transport_sequence_number;
+        packet_info.rtp_sequence_number =
+            rtp_packet.rtp.Header().SequenceNumber();
+        packet_info.length = rtp_packet.rtp.total_length();
         if (IsRtxSsrc(parsed_log_, PacketDirection::kOutgoingPacket,
-                      rtp_packet.rtp.header.ssrc)) {
+                      rtp_packet.rtp.Header().Ssrc())) {
           // Don't set the optional media type as we don't know if it is
           // a retransmission, FEC or padding.
         } else if (IsVideoSsrc(parsed_log_, PacketDirection::kOutgoingPacket,
-                               rtp_packet.rtp.header.ssrc)) {
+                               rtp_packet.rtp.Header().Ssrc())) {
           packet_info.packet_type = RtpPacketMediaType::kVideo;
         } else if (IsAudioSsrc(parsed_log_, PacketDirection::kOutgoingPacket,
-                               rtp_packet.rtp.header.ssrc)) {
+                               rtp_packet.rtp.Header().Ssrc())) {
           packet_info.packet_type = RtpPacketMediaType::kAudio;
         }
         transport_feedback.AddPacket(
@@ -1339,10 +1345,10 @@ void EventLogAnalyzer::CreateSendSideBweSimulationGraph(Plot* plot) {
       rtc::SentPacket sent_packet;
       sent_packet.send_time_ms = rtp_packet.rtp.log_time_ms();
       sent_packet.info.included_in_allocation = true;
-      sent_packet.info.packet_size_bytes = rtp_packet.rtp.total_length;
-      if (rtp_packet.rtp.header.extension.hasTransportSequenceNumber) {
-        sent_packet.packet_id =
-            rtp_packet.rtp.header.extension.transportSequenceNumber;
+      sent_packet.info.packet_size_bytes = rtp_packet.rtp.total_length();
+      if (absl::optional<uint16_t> transport_sequence_number =
+              rtp_packet.rtp.Header().GetExtension<TransportSequenceNumber>()) {
+        sent_packet.packet_id = *transport_sequence_number;
         sent_packet.info.included_in_feedback = true;
       }
       auto sent_msg = transport_feedback.ProcessSentPacket(sent_packet);
@@ -1468,13 +1474,20 @@ void EventLogAnalyzer::CreateReceiveSideBweSimulationGraph(Plot* plot) {
   int64_t last_update_us = 0;
   for (const auto& kv : incoming_rtp) {
     const RtpPacketType& packet = *kv.second;
-    int64_t arrival_time_ms = packet.rtp.log_time_us() / 1000;
-    size_t payload = packet.rtp.total_length; /*Should subtract header?*/
-    clock.AdvanceTimeMicroseconds(packet.rtp.log_time_us() -
-                                  clock.TimeInMicroseconds());
-    rscc.OnReceivedPacket(arrival_time_ms, payload, packet.rtp.header);
-    acked_bitrate.Update(payload, arrival_time_ms);
-    absl::optional<uint32_t> bitrate_bps = acked_bitrate.Rate(arrival_time_ms);
+    Timestamp arrival_time = packet.rtp.log_time();
+
+    RtpPacketReceived rtp_packet;
+    rtp_packet.CopyHeaderFrom(packet.rtp.Header());
+    rtp_packet.set_arrival_time(arrival_time);
+    rtp_packet.SetPayloadSize(packet.rtp.payload_size());
+    rtp_packet.SetPadding(packet.rtp.padding_size());
+
+    clock.AdvanceTime(packet.rtp.log_time() - clock.CurrentTime());
+    rscc.OnReceivedPacket(rtp_packet, MediaType::VIDEO);
+    acked_bitrate.Update(rtp_packet.size() - rtp_packet.headers_size(),
+                         arrival_time.ms());
+    absl::optional<uint32_t> bitrate_bps =
+        acked_bitrate.Rate(arrival_time.ms());
     if (bitrate_bps) {
       uint32_t y = *bitrate_bps / 1000;
       float x = config_.GetCallTimeSec(clock.CurrentTime());
@@ -1574,11 +1587,11 @@ void EventLogAnalyzer::CreatePacerDelayGraph(Plot* plot) {
         LineStyle::kLine, PointStyle::kHighlight);
     SeqNumUnwrapper<uint32_t> timestamp_unwrapper;
     uint64_t first_capture_timestamp =
-        timestamp_unwrapper.Unwrap(packets.front().rtp.header.timestamp);
+        timestamp_unwrapper.Unwrap(packets.front().rtp.Header().Timestamp());
     uint64_t first_send_timestamp = packets.front().rtp.log_time_us();
     for (const auto& packet : packets) {
       double capture_time_ms = (static_cast<double>(timestamp_unwrapper.Unwrap(
-                                    packet.rtp.header.timestamp)) -
+                                    packet.rtp.Header().Timestamp())) -
                                 first_capture_timestamp) /
                                *estimated_frequency * 1000;
       double send_time_ms =
@@ -1606,7 +1619,7 @@ void EventLogAnalyzer::CreateTimestampGraph(PacketDirection direction,
         LineStyle::kLine, PointStyle::kHighlight);
     for (const auto& packet : stream.packet_view) {
       float x = config_.GetCallTimeSec(packet.log_time());
-      float y = packet.header.timestamp;
+      float y = packet.Header().Timestamp();
       rtp_timestamps.points.emplace_back(x, y);
     }
     plot->AppendTimeSeries(std::move(rtp_timestamps));

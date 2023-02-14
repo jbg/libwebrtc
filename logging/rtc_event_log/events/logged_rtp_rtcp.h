@@ -12,6 +12,7 @@
 #define LOGGING_RTC_EVENT_LOG_EVENTS_LOGGED_RTP_RTCP_H_
 
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "absl/strings/string_view.h"
@@ -27,52 +28,64 @@
 #include "modules/rtp_rtcp/source/rtcp_packet/remb.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/sender_report.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/transport_feedback.h"
+#include "modules/rtp_rtcp/source/rtp_packet_received.h"
 
 namespace webrtc {
 
-struct LoggedRtpPacket {
-  LoggedRtpPacket(Timestamp timestamp,
-                  RTPHeader header,
-                  size_t header_length,
+class LoggedRtpPacket {
+ public:
+  LoggedRtpPacket(Timestamp log_time,
+                  RtpPacketReceived header,
                   size_t total_length)
-      : timestamp(timestamp),
-        header(header),
-        header_length(header_length),
-        total_length(total_length) {}
+      : log_time_(log_time),
+        header_(std::move(header)),
+        total_length_(total_length) {}
 
-  int64_t log_time_us() const { return timestamp.us(); }
-  int64_t log_time_ms() const { return timestamp.ms(); }
-  Timestamp log_time() const { return timestamp; }
+  int64_t log_time_us() const { return log_time_.us(); }
+  int64_t log_time_ms() const { return log_time_.ms(); }
+  Timestamp log_time() const { return log_time_; }
 
-  Timestamp timestamp;
-  // TODO(terelius): This allocates space for 15 CSRCs even if none are used.
-  RTPHeader header;
-  size_t header_length;
-  size_t total_length;
+  size_t payload_size() const {
+    return header_.has_padding() ? 0 : total_length_ - header_.headers_size();
+  }
+  size_t padding_size() const {
+    return header_.has_padding() ? total_length_ - header_.headers_size() : 0;
+  }
+  size_t total_length() const { return total_length_; }
+
+  const RtpPacketReceived& Header() const { return header_; }
+  RTPHeader LegacyHeader() const {
+    RTPHeader header;
+    header_.GetHeader(&header);
+    return header;
+  }
+
+ private:
+  Timestamp log_time_;
+  RtpPacketReceived header_;
+  size_t total_length_;
 };
 
 struct LoggedRtpPacketIncoming {
-  LoggedRtpPacketIncoming(Timestamp timestamp,
-                          RTPHeader header,
-                          size_t header_length,
+  LoggedRtpPacketIncoming(Timestamp log_time,
+                          RtpPacketReceived header,
                           size_t total_length)
-      : rtp(timestamp, header, header_length, total_length) {}
-  int64_t log_time_us() const { return rtp.timestamp.us(); }
-  int64_t log_time_ms() const { return rtp.timestamp.ms(); }
-  Timestamp log_time() const { return rtp.timestamp; }
+      : rtp(log_time, std::move(header), total_length) {}
+  int64_t log_time_us() const { return log_time().us(); }
+  int64_t log_time_ms() const { return log_time().ms(); }
+  Timestamp log_time() const { return rtp.log_time(); }
 
   LoggedRtpPacket rtp;
 };
 
 struct LoggedRtpPacketOutgoing {
-  LoggedRtpPacketOutgoing(Timestamp timestamp,
-                          RTPHeader header,
-                          size_t header_length,
+  LoggedRtpPacketOutgoing(Timestamp log_time,
+                          RtpPacketReceived header,
                           size_t total_length)
-      : rtp(timestamp, header, header_length, total_length) {}
-  int64_t log_time_us() const { return rtp.timestamp.us(); }
-  int64_t log_time_ms() const { return rtp.timestamp.ms(); }
-  Timestamp log_time() const { return rtp.timestamp; }
+      : rtp(log_time, std::move(header), total_length) {}
+  int64_t log_time_us() const { return log_time().us(); }
+  int64_t log_time_ms() const { return log_time().ms(); }
+  Timestamp log_time() const { return rtp.log_time(); }
 
   LoggedRtpPacket rtp;
 };

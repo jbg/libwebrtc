@@ -471,6 +471,7 @@ if (rtc_include_tests) {
           "../logging:rtc_event_rtp_rtcp",
           "../logging:rtc_event_video",
           "../logging:rtc_stream_config",
+          "../modules/rtp_rtcp:rtp_rtcp_format",
           "../rtc_base:checks",
           "../rtc_base:logging",
           "//third_party/abseil-cpp/absl/base:core_headers",

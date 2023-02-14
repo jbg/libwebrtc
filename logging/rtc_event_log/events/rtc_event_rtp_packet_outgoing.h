@@ -54,7 +54,7 @@ class RtcEventRtpPacketOutgoing final : public RtcEvent {
   uint8_t PayloadType() const { return packet_.PayloadType(); }
   bool Marker() const { return packet_.Marker(); }
   template <typename ExtensionTrait, typename... Args>
-  bool GetExtension(Args&&... args) const {
+  auto GetExtension(Args&&... args) const {
     return packet_.GetExtension<ExtensionTrait>(std::forward<Args>(args)...);
   }
   template <typename ExtensionTrait>
