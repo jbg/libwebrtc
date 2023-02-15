@@ -107,8 +107,8 @@ class RTC_EXPORT VideoFrame {
         const rtc::scoped_refptr<VideoFrameBuffer>& buffer);
     Builder& set_timestamp_ms(int64_t timestamp_ms);
     Builder& set_timestamp_us(int64_t timestamp_us);
-    Builder& set_capture_time_identifier_ms(
-        const absl::optional<int64_t>& capture_time_identifier_ms);
+    Builder& set_capture_time_identifier_us(
+        const absl::optional<int64_t>& capture_time_identifier_us);
     Builder& set_timestamp_rtp(uint32_t timestamp_rtp);
     Builder& set_ntp_time_ms(int64_t ntp_time_ms);
     Builder& set_rotation(VideoRotation rotation);
@@ -122,7 +122,7 @@ class RTC_EXPORT VideoFrame {
     uint16_t id_ = kNotSetId;
     rtc::scoped_refptr<webrtc::VideoFrameBuffer> video_frame_buffer_;
     int64_t timestamp_us_ = 0;
-    absl::optional<int64_t> capture_time_identifier_ms_;
+    absl::optional<int64_t> capture_time_identifier_us_;
     uint32_t timestamp_rtp_ = 0;
     int64_t ntp_time_ms_ = 0;
     VideoRotation rotation_ = kVideoRotation_0;
@@ -169,12 +169,12 @@ class RTC_EXPORT VideoFrame {
   int64_t timestamp_us() const { return timestamp_us_; }
   void set_timestamp_us(int64_t timestamp_us) { timestamp_us_ = timestamp_us; }
 
-  const absl::optional<int64_t>& capture_time_identifier_ms() const {
-    return capture_time_identifier_ms_;
+  const absl::optional<int64_t>& capture_time_identifier_us() const {
+    return capture_time_identifier_us_;
   }
-  void set_capture_time_identifier_ms(
-      const absl::optional<int64_t>& capture_time_identifier_ms) {
-    capture_time_identifier_ms_ = capture_time_identifier_ms;
+  void set_capture_time_identifier_us(
+      const absl::optional<int64_t>& capture_time_identifier_us) {
+    capture_time_identifier_us_ = capture_time_identifier_us;
   }
 
   // Set frame timestamp (90kHz).
@@ -273,7 +273,7 @@ class RTC_EXPORT VideoFrame {
   VideoFrame(uint16_t id,
              const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
              int64_t timestamp_us,
-             const absl::optional<int64_t>& capture_time_identifier_ms,
+             const absl::optional<int64_t>& capture_time_identifier_us,
              uint32_t timestamp_rtp,
              int64_t ntp_time_ms,
              VideoRotation rotation,
@@ -288,7 +288,7 @@ class RTC_EXPORT VideoFrame {
   uint32_t timestamp_rtp_;
   int64_t ntp_time_ms_;
   int64_t timestamp_us_;
-  absl::optional<int64_t> capture_time_identifier_ms_;
+  absl::optional<int64_t> capture_time_identifier_us_;
   VideoRotation rotation_;
   absl::optional<ColorSpace> color_space_;
   // Contains parameters that affect have the frame should be rendered.
