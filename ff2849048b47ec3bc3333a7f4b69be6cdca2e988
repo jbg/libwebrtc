@@ -16,6 +16,24 @@
       "message": "Can you review? I still wonder if this is the right thing to do long-term but it fixes a regression and is easy enough to understand that it can be uplifted.",
       "revId": "ff2849048b47ec3bc3333a7f4b69be6cdca2e988",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f960132_3296e054",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-15T09:33:19Z",
+      "side": 1,
+      "message": "Old code is wrong, but new code is wrong too, and misuse SVCcontroller even more.\n\nIf you\u0027re using ScalableVideoController, then encoder should interact with it more - use configuration it provides (could H264 encoder be configured to use custom buffer references based on layer_frames[0].Buffers() ?).\n\nalso update layer_frame with what encoder produces\ne.g. if encoder choose to produce key frame, call layer_frame[0].T(tid).Keyframe();\nbefore passing it into OnEncodeDone.\n\n(svc controller should be able to handle such scenario, but might need a change to support unrequested key frame).",
+      "parentUuid": "4c1b9aa0_406b6e99",
+      "revId": "ff2849048b47ec3bc3333a7f4b69be6cdca2e988",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
