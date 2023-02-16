@@ -69,9 +69,11 @@
 #include "p2p/base/test_turn_server.h"
 #include "p2p/base/transport_description.h"
 #include "p2p/base/transport_info.h"
+#include "pc/channel.h"
 #include "pc/media_session.h"
 #include "pc/peer_connection.h"
 #include "pc/peer_connection_factory.h"
+#include "pc/rtp_transceiver.h"
 #include "pc/session_description.h"
 #include "pc/test/fake_periodic_video_source.h"
 #include "pc/test/integration_test_helpers.h"
@@ -3786,6 +3788,79 @@ TEST_P(PeerConnectionIntegrationTest, EndToEndRtpSenderVideoEncoderSelector) {
   media_expectations.CalleeExpectsSomeVideo();
 
   EXPECT_TRUE(ExpectNewFrames(media_expectations));
+}
+
+int NacksReceivedCount(PeerConnectionIntegrationWrapper* pc) {
+  rtc::scoped_refptr<const webrtc::RTCStatsReport> report = pc->NewGetStats();
+  auto sender_stats = report->GetStatsOfType<RTCOutboundRTPStreamStats>();
+  if (sender_stats.size() != 1) {
+    ADD_FAILURE();
+    return 0;
+  }
+  if (!sender_stats[0]->nack_count.is_defined()) {
+    return 0;
+  }
+  return *sender_stats[0]->nack_count;
+}
+
+int NacksSentCount(PeerConnectionIntegrationWrapper* pc) {
+  rtc::scoped_refptr<const webrtc::RTCStatsReport> report = pc->NewGetStats();
+  auto receiver_stats = report->GetStatsOfType<RTCInboundRTPStreamStats>();
+  if (receiver_stats.size() != 1) {
+    ADD_FAILURE();
+    return 0;
+  }
+  if (!receiver_stats[0]->nack_count.is_defined()) {
+    return 0;
+  }
+  return *receiver_stats[0]->nack_count;
+}
+
+TEST_F(PeerConnectionIntegrationTestUnifiedPlan, PacketLossCausesNack) {
+  RTCConfiguration config;
+  ASSERT_TRUE(CreatePeerConnectionWrappersWithConfig(config, config));
+  ConnectFakeSignaling();
+  auto audio_transceiver_or_error =
+      caller()->pc()->AddTransceiver(caller()->CreateLocalAudioTrack());
+  ASSERT_TRUE(audio_transceiver_or_error.ok());
+  auto send_transceiver = audio_transceiver_or_error.MoveValue();
+  // Munge the SDP to include NACK and RRTR on Opus, and remove all other
+  // codecs.
+  caller()->SetGeneratedSdpMunger([](cricket::SessionDescription* desc) {
+    for (ContentInfo& content : desc->contents()) {
+      cricket::AudioContentDescription* media =
+          content.media_description()->as_audio();
+      std::vector<cricket::AudioCodec> codecs = media->codecs();
+      std::vector<cricket::AudioCodec> codecs_out;
+      for (cricket::AudioCodec codec : codecs) {
+        if (codec.name == "opus") {
+          RTC_LOG(LS_ERROR) << "DEBUG: Adding fb params to opus";
+          codec.AddFeedbackParam(cricket::FeedbackParam(
+              cricket::kRtcpFbParamNack, cricket::kParamValueEmpty));
+          codec.AddFeedbackParam(cricket::FeedbackParam(
+              cricket::kRtcpFbParamRrtr, cricket::kParamValueEmpty));
+          codecs_out.push_back(codec);
+        }
+      }
+      media->set_codecs(codecs_out);
+    }
+  });
+
+  caller()->CreateAndSetAndSignalOffer();
+  MediaExpectations media_expectations;
+  media_expectations.CalleeExpectsSomeAudio(1);
+  ExpectNewFrames(media_expectations);
+  virtual_socket_server()->set_drop_probability(1.0);
+  auto recv_transceiver = callee()->pc()->GetTransceivers()[0];
+
+  // Wait until callee has sent at least one NACK.
+  // Note that due to stats caching, this might only be visible 50 ms
+  // after the nack was in fact sent.
+  EXPECT_TRUE_WAIT(NacksSentCount(callee()) > 0, kDefaultTimeout);
+  virtual_socket_server()->set_drop_probability(0.0);
+  // Wait until caller has received at least one NACK
+  EXPECT_TRUE_WAIT(NacksReceivedCount(caller()) > 0, kDefaultTimeout);
+  // Declare success
 }
 
 }  // namespace
