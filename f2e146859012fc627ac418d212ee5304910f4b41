@@ -16,6 +16,40 @@
       "message": "Draft for the chromestatus change shared separately",
       "revId": "f2e146859012fc627ac418d212ee5304910f4b41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eeea3d6b_6ea63ec9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-16T18:52:07Z",
+      "side": 1,
+      "message": "This is replacing \"unknown\" with \"\", which is also a string.\nIf the intent was to make it go missing in the stats dictionaries, please add a test that this is what will happen.",
+      "revId": "f2e146859012fc627ac418d212ee5304910f4b41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42d5b92f_5b6b17a8",
+        "filename": "video/receive_statistics_proxy2_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-16T18:52:07Z",
+      "side": 1,
+      "message": "I don\u0027t like \"empty string\" as a value. Will this show up in the JS-level stats as an empty string, or will it show up as \"element missing\"?",
+      "revId": "f2e146859012fc627ac418d212ee5304910f4b41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
