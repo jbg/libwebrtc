@@ -34,6 +34,24 @@
       "parentUuid": "4c1b9aa0_406b6e99",
       "revId": "ff2849048b47ec3bc3333a7f4b69be6cdca2e988",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d84ca54_9bd10eb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-02-16T11:12:33Z",
+      "side": 1,
+      "message": "So the path forward is to back out the change that caused the regression and then fix the problem?",
+      "parentUuid": "9f960132_3296e054",
+      "revId": "ff2849048b47ec3bc3333a7f4b69be6cdca2e988",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
