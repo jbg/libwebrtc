@@ -423,6 +423,10 @@ class VoiceMediaSendChannel : public VoiceMediaSendChannelInterface {
   bool GetStats(VoiceMediaSendInfo* info) override {
     return impl_->GetSendStats(info);
   }
+  bool SenderNackEnabled() const override { return impl_->SenderNackEnabled(); }
+  bool SenderNonSenderRttEnabled() const override {
+    return impl_->SenderNonSenderRttEnabled();
+  }
   MediaChannel* ImplForTesting() override { return impl_; }
 
  private:
@@ -538,6 +542,12 @@ class VoiceMediaReceiveChannel : public VoiceMediaReceiveChannelInterface {
   }
   bool GetStats(VoiceMediaReceiveInfo* info, bool reset_legacy) override {
     return impl_->GetReceiveStats(info, reset_legacy);
+  }
+  void SetReceiveNackEnabled(bool enabled) override {
+    impl_->SetReceiveNackEnabled(enabled);
+  }
+  void SetReceiveNonSenderRttEnabled(bool enabled) override {
+    impl_->SetReceiveNonSenderRttEnabled(enabled);
   }
   MediaChannel* ImplForTesting() override { return impl_; }
 
