@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "285c91d8_e849e78b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-16T06:51:18Z",
+      "side": 1,
+      "message": "Is this a no-impact change because the time was captured in us already, and there were no users of it? Or is this a no-impact change because nothing\u0027s using this yet at all? Or does it have some impact?\n\nPlease expand the description with enough info that a later reviewer can tell.\n\nIf it is generated at all, from any source: Can you add some kind of test that checks that two frames generated from a 60 fps source have a difference in capture time is 16.666, not 16?",
+      "revId": "855b1e09c4f77760157785c22167f29c82562699",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
