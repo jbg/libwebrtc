@@ -245,6 +245,10 @@ class PeerConnectionIntegrationWrapper : public webrtc::PeerConnectionObserver,
   void CreateAndSetAndSignalOffer() {
     auto offer = CreateOfferAndWait();
     ASSERT_NE(nullptr, offer);
+    // DEBUG
+    std::string offer_str;
+    offer->ToString(&offer_str);
+    RTC_LOG(LS_ERROR) << "DEBUG: SDP " << offer_str;
     EXPECT_TRUE(SetLocalDescriptionAndSendSdpMessage(std::move(offer)));
   }
 
