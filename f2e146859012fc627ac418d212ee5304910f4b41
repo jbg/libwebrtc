@@ -139,6 +139,24 @@
       "parentUuid": "93c32c4d_3b108a57",
       "revId": "f2e146859012fc627ac418d212ee5304910f4b41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "117448b9_9a699949",
+        "filename": "video/receive_statistics_proxy2_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-02-17T12:51:51Z",
+      "side": 1,
+      "message": "A good idea and sprinkling the value_or(\"unknown\") improves readability a bit (but raises the question whether those can happen?).\n\nBut now I need to wash my hands, I touched the legacy stats collector.",
+      "parentUuid": "0afad0bf_416ad523",
+      "revId": "f2e146859012fc627ac418d212ee5304910f4b41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
