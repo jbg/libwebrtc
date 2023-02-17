@@ -157,6 +157,24 @@
       "parentUuid": "0afad0bf_416ad523",
       "revId": "f2e146859012fc627ac418d212ee5304910f4b41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33094000_2be67330",
+        "filename": "video/receive_statistics_proxy2_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-17T13:43:42Z",
+      "side": 1,
+      "message": "The idea with optional is to improve code clarity by making \"missing value\" explicit (absl::nullopt) rather than assuming .empty() means null",
+      "parentUuid": "117448b9_9a699949",
+      "revId": "f2e146859012fc627ac418d212ee5304910f4b41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
