@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "259c84fc_cd22931a",
         "filename": "PRESUBMIT.py",
@@ -20,10 +21,10 @@
         "endChar": 24
       },
       "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "81b2370f_7c59c908",
         "filename": "PRESUBMIT.py",
@@ -44,10 +45,10 @@
         "endChar": 24
       },
       "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "724b0ff2_9ed0b5f9",
         "filename": "PRESUBMIT.py",
@@ -61,10 +62,10 @@
       "side": 1,
       "message": "This can create several consecutive underscores. But I guess that\u0027s not really a problem in practice?",
       "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "94d1354d_d3ebf5b2",
         "filename": "PRESUBMIT.py",
@@ -84,10 +85,10 @@
         "endChar": 46
       },
       "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "c034358f_c715f09a",
         "filename": "PRESUBMIT.py",
@@ -107,10 +108,10 @@
         "endChar": 26
       },
       "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "2d81db4c_872dc9af",
         "filename": "PRESUBMIT.py",
@@ -130,10 +131,10 @@
         "endChar": 39
       },
       "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "8ecf7248_ec5a4e30",
         "filename": "PRESUBMIT.py",
@@ -154,10 +155,10 @@
         "endChar": 39
       },
       "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d8bb9f0a_a4282d3e",
         "filename": "PRESUBMIT.py",
@@ -177,10 +178,10 @@
         "endChar": 69
       },
       "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "49fff57b_5e7d4507",
         "filename": "PRESUBMIT.py",
@@ -194,10 +195,10 @@
       "side": 1,
       "message": "sort?",
       "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "f14904b8_016026b6",
         "filename": "PRESUBMIT.py",
@@ -217,8 +218,71 @@
         "endChar": 26
       },
       "revId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ],
+  "submitRequirementResults": [
+    {
+      "submitRequirement": {
+        "name": "Code-Review",
+        "description": {
+          "value": "At least one maximum vote for label \u0027Code-Review\u0027 is required"
+        },
+        "applicabilityExpression": {},
+        "submittabilityExpression": {
+          "expressionString": "label:Code-Review\u003dMAX,user\u003dnon_uploader AND -label:Code-Review\u003dMIN"
+        },
+        "overrideExpression": {
+          "value": {
+            "expressionString": "label:Bot-Commit\u003d+1 AND -label:Code-Review\u003dMIN"
+          }
+        },
+        "allowOverrideInChildProjects": true
+      },
+      "applicabilityExpressionResult": {},
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"label:Code-Review=MAX,user=non_uploader AND -label:Code-Review=MIN"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Code-Review=MAX,user=non_uploader","label:Code-Review=MIN"]}
+      },
+      "overrideExpressionResult": {
+        "value": {"expression":{"expressionString":"label:Bot-Commit=+1 AND -label:Code-Review=MIN"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Bot-Commit=+1","label:Code-Review=MIN"]}
+      },
+      "patchSetCommitId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    },
+    {
+      "submitRequirement": {
+        "name": "Review-Enforcement",
+        "description": {
+          "value": "Two Google employees must approve the change. Uploading the change or voting positively on Code-Review count as approval."
+        },
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "is:review-enforced_gerrit"
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "is:review-enforcement-satisfied_gerrit"
+        },
+        "overrideExpression": {},
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"is:review-enforced_gerrit"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:review-enforced_gerrit"]}
+      },
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"is:review-enforcement-satisfied_gerrit"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+      },
+      "overrideExpressionResult": {},
+      "patchSetCommitId": "7c7f2c49ea7ebef573acbe06bf56dd8119351b70",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
     }
   ]
 }
