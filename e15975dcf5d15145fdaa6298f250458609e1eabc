@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "3653f55b_fd77c12a",
         "filename": "rtc_base/refcounter.h",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "You use a weaker-than-default memory ordering here. Please add a comment explaining why it is sufficient. :-)\n\nE.g.,\n\n  The caller used to own at least one reference to the resource being tracked, and now owns one more. Reads and writes to the resource can be safely reordered past this increment in either direction.",
       "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "c71470a4_6c16e710",
         "filename": "rtc_base/refcounter.h",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "Comment here too. E.g.,\n\n  The caller used to own at least one reference to the resource being tracked, and now owns one less. The acquire-release memory ordering prevents normal accesses to the tracked resource from being reordered after the decrement (would be illegal because one must own a reference to be allowed to access the resource), and prevents accesses made in the process of destroying the tracked resource from being reordered before the decrement (would be illegal because one must not destroy the resource while someone may still be using it).",
       "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "68b56101_6a64132d",
         "filename": "rtc_base/refcounter.h",
@@ -48,10 +49,10 @@
       "side": 1,
       "message": "Comment here too. E.g.,\n\n  The caller owns at least one reference to the tracked object; if the comparison is successful, we are assured that as of the atomic instruction and until the caller creates a new reference, the caller is the sole owner of the tracked resource. The acquire memory ordering prevents accesses made after the comparison from being reordered before the decrement (would be illegal because those accesses may assume that the caller is the sole owner of the resource), but does not prevent accesses to the tracked resource from being reordered after the comparison (legal because the caller still owns a reference to the object).\n\nOh, and that implies that it should be memory_order_acquire.\n\nHowever, there\u0027s a problem: In order to support HasOneRef safely, it seems like we\u0027d need to use memory_order_release in IncRef, to prevent exclusive-access accesses from being reordered after the increment. This makes IncRef more expensive, and I doubt HasOneRef is used often enough to make that a good trade-off. See also https://en.cppreference.com/w/cpp/memory/shared_ptr/use_count, where they decided to use relaxed ordering to eliminate that extra cost, but as a consequence can\u0027t really use the returned number meaningfully.\n\nCan we eliminate HasOneRef?",
       "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "10eeff4d_9a557219",
         "filename": "rtc_base/refcounter.h",
@@ -66,10 +67,10 @@
       "message": "\u003e Can we eliminate HasOneRef?\n\nIt\u0027s used in CopyOnWriteBuffer and I420BufferPool. I\u0027d guess that\u0027s pretty important.\n\nOn the other hand, I don\u0027t see how HasOneRef and the code that relies on it returning true could race with (correct use of) IncRef by other threads. Am I missing somthing subtle?\n\nI take it the issue you see with HasOneRef is the sequence\n\n  HasOneRef returns true\n  Some modification requiring exclusive access\n  Incrementing refcount and passing it out to some other thread(s) \n    (expecting only read access to the now shared object)\n  Other thread accessing object before all of the modifications are visible.\n\nBut to me, that scenario isn\u0027t unique to HasOneRef, we also have the more common pattern\n\n  Create brand new object.\n  Write to it.\n  Pass it on to some other thread for reading.\n\nI hope this does work, but refcount logic can\u0027t be responsible for making it work, since I think \"pass on to other thread\" can be done with move semantics all the way, leaving the refcount unchanged at one all the way. And we have the same pattern also with unique_ptr rather than scoped_refptr.",
       "parentUuid": "68b56101_6a64132d",
       "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "09b55857_8d052df3",
         "filename": "rtc_base/refcounter.h",
@@ -84,8 +85,71 @@
       "message": "Mirko and I talked about this, and arrived at this conclusion too. It works because the problematic transition isn\u0027t going from one to more-than-one reference, but going from one to more-than-one thread owning references---and you can\u0027t send a reference to another thread without doing some synchronization.",
       "parentUuid": "10eeff4d_9a557219",
       "revId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ],
+  "submitRequirementResults": [
+    {
+      "submitRequirement": {
+        "name": "Code-Review",
+        "description": {
+          "value": "At least one maximum vote for label \u0027Code-Review\u0027 is required"
+        },
+        "applicabilityExpression": {},
+        "submittabilityExpression": {
+          "expressionString": "label:Code-Review\u003dMAX,user\u003dnon_uploader AND -label:Code-Review\u003dMIN"
+        },
+        "overrideExpression": {
+          "value": {
+            "expressionString": "label:Bot-Commit\u003d+1 AND -label:Code-Review\u003dMIN"
+          }
+        },
+        "allowOverrideInChildProjects": true
+      },
+      "applicabilityExpressionResult": {},
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"label:Code-Review=MAX,user=non_uploader AND -label:Code-Review=MIN"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Code-Review=MAX,user=non_uploader","label:Code-Review=MIN"]}
+      },
+      "overrideExpressionResult": {
+        "value": {"expression":{"expressionString":"label:Bot-Commit=+1 AND -label:Code-Review=MIN"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Bot-Commit=+1","label:Code-Review=MIN"]}
+      },
+      "patchSetCommitId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    },
+    {
+      "submitRequirement": {
+        "name": "Review-Enforcement",
+        "description": {
+          "value": "Two Google employees must approve the change. Uploading the change or voting positively on Code-Review count as approval."
+        },
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "is:review-enforced_gerrit"
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "is:review-enforcement-satisfied_gerrit"
+        },
+        "overrideExpression": {},
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"is:review-enforced_gerrit"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:review-enforced_gerrit"]}
+      },
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"is:review-enforcement-satisfied_gerrit"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+      },
+      "overrideExpressionResult": {},
+      "patchSetCommitId": "e15975dcf5d15145fdaa6298f250458609e1eabc",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
     }
   ]
 }
