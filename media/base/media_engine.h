@@ -162,20 +162,6 @@ class VideoEngineInterface : public RtpHeaderExtensionQueryInterface {
     return nullptr;
   }
 
-  // Creates a video media channel.
-  // Returns NULL on failure.
-  // TODO(bugs.webrtc.org/13931): Stop downstream usage of this function.
-  [[deprecated("Please specify the role")]] virtual VideoMediaChannel*
-  CreateMediaChannel(
-      webrtc::Call* call,
-      const MediaConfig& config,
-      const VideoOptions& options,
-      const webrtc::CryptoOptions& crypto_options,
-      webrtc::VideoBitrateAllocatorFactory* video_bitrate_allocator_factory) {
-    return CreateMediaChannel(MediaChannel::Role::kBoth, call, config, options,
-                              crypto_options, video_bitrate_allocator_factory);
-  }
-
   // Retrieve list of supported codecs.
   virtual std::vector<VideoCodec> send_codecs() const = 0;
   virtual std::vector<VideoCodec> recv_codecs() const = 0;
