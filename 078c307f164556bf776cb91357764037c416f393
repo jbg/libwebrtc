@@ -79,6 +79,30 @@
       },
       "revId": "078c307f164556bf776cb91357764037c416f393",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b21c2dba_4bf257f9",
+        "filename": "pc/channel.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-19T07:03:48Z",
+      "side": 1,
+      "message": "these are new members (owning pointers to the objects that are wrapped by the non-_impl members of the same name), not moved ones. they\u0027re assigned in the constructor of the subclass, and are allocated here because they have to be destroyed after the wrapper object owned by the subclass. Seems excessive to build accessors for them.\n\nI hope to remove them again when the wrapper classes are no longer needed.",
+      "parentUuid": "68c44f85_967b25ae",
+      "range": {
+        "startLine": 309,
+        "startChar": 38,
+        "endLine": 309,
+        "endChar": 62
+      },
+      "revId": "078c307f164556bf776cb91357764037c416f393",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

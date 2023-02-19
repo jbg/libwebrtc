@@ -86,6 +86,24 @@
       "message": "Returning if a stream could not be created is not new with this CL, but still wondering: why would we fail here? Is this an error? Seems strange to silently abort like this rather than DCHECKing and/or RTC_LOG(LS_ERROR).",
       "revId": "3af8687d027705f1cc41053818182a0d99ec92d6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c47c20be_b1213650",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-19T07:03:48Z",
+      "side": 1,
+      "message": "Oddly, coverage claims that there\u0027s a test that covers failure of the voice media send channel creation (but not the others). \n\nFiled bugs.webrtc.org/14912, will add TODO.",
+      "parentUuid": "ac8d034c_2d75680f",
+      "revId": "3af8687d027705f1cc41053818182a0d99ec92d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
