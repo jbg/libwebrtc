@@ -52,6 +52,23 @@
       "parentUuid": "3e4ca0e9_8ec5025a",
       "revId": "e03b3bd1715481743614695e82ee1bec6ad511c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41faa08b_72dc9bef",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-20T11:59:30Z",
+      "side": 1,
+      "message": "nit: I have a slight preference for .value()",
+      "revId": "e03b3bd1715481743614695e82ee1bec6ad511c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
