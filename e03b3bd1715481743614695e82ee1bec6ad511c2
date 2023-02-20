@@ -34,6 +34,24 @@
       "parentUuid": "e136921f_70f151a5",
       "revId": "e03b3bd1715481743614695e82ee1bec6ad511c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c934305_6d7a4fb5",
+        "filename": "pc/legacy_stats_collector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-20T11:48:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3e4ca0e9_8ec5025a",
+      "revId": "e03b3bd1715481743614695e82ee1bec6ad511c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
