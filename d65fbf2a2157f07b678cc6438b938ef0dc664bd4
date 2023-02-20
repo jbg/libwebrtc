@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8767ad85_4cc83125",
+        "filename": "test/testsupport/y4m_frame_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-02-20T09:46:26Z",
+      "side": 1,
+      "message": "Let\u0027s put it into anonymous namespace. Also please add a comment on how it is calculated.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 38
+      },
+      "revId": "d65fbf2a2157f07b678cc6438b938ef0dc664bd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bac7fbb2_e151c80c",
+        "filename": "test/testsupport/y4m_frame_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-02-20T09:46:26Z",
+      "side": 1,
+      "message": "Maybe add get width/height functions on Y4mFrameReader and then we won\u0027t need to read file here at all?",
+      "range": {
+        "startLine": 44,
+        "startChar": 32,
+        "endLine": 44,
+        "endChar": 52
+      },
+      "revId": "d65fbf2a2157f07b678cc6438b938ef0dc664bd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41493e7d_ecef6b0e",
+        "filename": "test/testsupport/y4m_frame_generator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-02-20T09:46:26Z",
+      "side": 1,
+      "message": "Should we update the comment?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 67
+      },
+      "revId": "d65fbf2a2157f07b678cc6438b938ef0dc664bd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
