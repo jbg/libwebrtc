@@ -16,6 +16,24 @@
       "message": "The reason this broke stuff is that it breaks serialize/deserialize symmetry. When generating the wildcard lines we ignore FEC mechanisms, but when parsing we don\u0027t, causing the feedback parameters to be applied to the FEC codecs.\n\nThis means you can call SdpDeserialize(SdpSerialize(description)) and end up with something different than you started with, which is generally a big no no.\n\nEither the parsing should also ignore these codecs, or the feedback parameters should be added to the initially generated session description so we don\u0027t require this exception for them here.",
       "revId": "815522782a92e168b80edc760b2e53e4d0e4ea0d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "860eb538_e7f5436b",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1912,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-02-20T08:49:59Z",
+      "side": 1,
+      "message": "That makes some sense. However, it opens up the old discussion why e.g. flexfec has no twcc listed. And from the bug, it gets sent on RTX packets so is missing in the declaration.\n\nFor the FEC mechanisms (ulpfec, flexfec, red, rtx) one can argue that PLI+FIR does not apply since they have no concept of \"frames\" and NACK would mean retransmission of a redundancy mechanism.\n\nSounds like I need to fix both ;-)",
+      "parentUuid": "281e7edb_1d1b1170",
+      "revId": "815522782a92e168b80edc760b2e53e4d0e4ea0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
