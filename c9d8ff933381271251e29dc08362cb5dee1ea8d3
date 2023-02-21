@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c509bdb9_50fcb8f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-21T19:47:34Z",
+      "side": 1,
+      "message": "My previous attempt two years ago modified wrong place. extra size for rtx is calculated independently of the estimation of the header overhead (latter seems is used mostly in BWE algorithms)",
+      "revId": "c9d8ff933381271251e29dc08362cb5dee1ea8d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
