@@ -20,6 +20,7 @@
 #include "api/transport/network_types.h"
 #include "api/units/data_rate.h"
 #include "api/units/time_delta.h"
+#include "api/units/timestamp.h"
 #include "modules/pacing/packet_router.h"
 #include "system_wrappers/include/clock.h"
 #include "test/explicit_key_value_config.h"
@@ -211,12 +212,15 @@ class PacingControllerPadding : public PacingController::PacketSender {
 
 class PacingControllerProbing : public PacingController::PacketSender {
  public:
-  PacingControllerProbing() : packets_sent_(0), padding_sent_(0) {}
+  PacingControllerProbing()
+      : packets_sent_(0), padding_packets_sent_(0), padding_sent_(0) {}
 
   void SendPacket(std::unique_ptr<RtpPacketToSend> packet,
                   const PacedPacketInfo& pacing_info) override {
     if (packet->packet_type() != RtpPacketMediaType::kPadding) {
       ++packets_sent_;
+    } else {
+      ++padding_packets_sent_;
     }
     last_pacing_info_ = pacing_info;
   }
@@ -250,12 +254,14 @@ class PacingControllerProbing : public PacingController::PacketSender {
   }
 
   int packets_sent() const { return packets_sent_; }
+  int padding_packets_sent() const { return padding_packets_sent_; }
   int padding_sent() const { return padding_sent_; }
   int total_packets_sent() const { return packets_sent_ + padding_sent_; }
   PacedPacketInfo last_pacing_info() const { return last_pacing_info_; }
 
  private:
   int packets_sent_;
+  int padding_packets_sent_;
   int padding_sent_;
   PacedPacketInfo last_pacing_info_;
 };
@@ -1335,6 +1341,38 @@ TEST_F(PacingControllerTest, ProbingWithPaddingSupport) {
   EXPECT_NEAR((packets_sent * kPacketSize * 8000 + padding_sent) /
                   (clock_.TimeInMilliseconds() - start),
               kFirstClusterRate.bps(), kProbingErrorMargin.bps());
+}
+
+TEST_F(PacingControllerTest, CanProbeWithPaddingBeforeFirstMediaPacket) {
+  // const size_t kPacketSize = 1200;
+  const int kInitialBitrateBps = 300000;
+
+  PacingControllerProbing packet_sender;
+  const test::ExplicitKeyValueConfig trials(
+      "WebRTC-Bwe-ProbingBehavior/min_packet_size:0/");
+  auto pacer =
+      std::make_unique<PacingController>(&clock_, &packet_sender, trials);
+  std::vector<ProbeClusterConfig> probe_clusters = {
+      {.at_time = clock_.CurrentTime(),
+       .target_data_rate = kFirstClusterRate,
+       .target_duration = TimeDelta::Millis(15),
+       .target_probe_count = 5,
+       .id = 0}};
+  pacer->CreateProbeClusters(probe_clusters);
+
+  pacer->SetPacingRates(
+      DataRate::BitsPerSec(kInitialBitrateBps * kPaceMultiplier),
+      DataRate::Zero());
+
+  Timestamp start = clock_.CurrentTime();
+  Timestamp next_process = pacer->NextSendTime();
+  while (clock_.CurrentTime() < start + TimeDelta::Millis(100) &&
+         next_process.IsFinite()) {
+    AdvanceTimeUntil(next_process);
+    pacer->ProcessPackets();
+    next_process = pacer->NextSendTime();
+  }
+  EXPECT_GT(packet_sender.padding_packets_sent(), 5);
 }
 
 TEST_F(PacingControllerTest, PaddingOveruse) {
