@@ -122,6 +122,9 @@ class AAudioWrapper {
   int32_t frames_per_burst_ = 0;
 };
 
+// Returns whether we can use AAudio and load AAudio functions.
+bool IsAAudioSupported();
+
 }  // namespace webrtc
 
 #endif  // MODULES_AUDIO_DEVICE_ANDROID_AAUDIO_WRAPPER_H_

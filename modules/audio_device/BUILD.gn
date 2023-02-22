@@ -11,6 +11,7 @@ import("../../webrtc.gni")
 if (is_android) {
   import("//build/config/android/config.gni")
   import("//build/config/android/rules.gni")
+  import("//tools/generate_stubs/rules.gni")
 }
 
 config("audio_device_warnings_config") {
@@ -177,6 +178,22 @@ rtc_source_set("audio_device_module_from_input_and_output") {
   }
 }
 
+if (is_android) {
+  generate_stubs("aaudio_stubs") {
+    configs = [ "../../:common_config" ]
+    deps = [ "../../rtc_base:logging" ]
+    extra_header = "android/aaudio_stub_header.fragment"
+    logging_function = "RTC_LOG(LS_VERBOSE)"
+    logging_include = "rtc_base/logging.h"
+    output_name = "aaudio_stubs"
+    path_from_source = "modules/audio_device"
+    sigs = [ "android/aaudio.sigs" ]
+
+    macro_include = "rtc_base/system/no_cfi_icall.h"
+    macro_deps = [ "../../rtc_base/system:no_cfi_icall" ]
+  }
+}
+
 # Contains default implementations of webrtc::AudioDeviceModule for Windows,
 # Linux, Mac, iOS and Android.
 rtc_library("audio_device_impl") {
@@ -244,9 +261,6 @@ rtc_library("audio_device_impl") {
   if (rtc_audio_device_plays_sinus_tone) {
     defines += [ "AUDIO_DEVICE_PLAYS_SINUS_TONE" ]
   }
-  if (rtc_enable_android_aaudio) {
-    defines += [ "WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO" ]
-  }
   if (rtc_include_internal_audio_device) {
     sources += [
       "audio_device_data_observer.cc",
@@ -256,6 +270,12 @@ rtc_library("audio_device_impl") {
     ]
     if (is_android) {
       sources += [
+        "android/aaudio_player.cc",
+        "android/aaudio_player.h",
+        "android/aaudio_recorder.cc",
+        "android/aaudio_recorder.h",
+        "android/aaudio_wrapper.cc",
+        "android/aaudio_wrapper.h",
         "android/audio_common.h",
         "android/audio_device_template.h",
         "android/audio_manager.cc",
@@ -277,17 +297,13 @@ rtc_library("audio_device_impl") {
         "log",
         "OpenSLES",
       ]
-      if (rtc_enable_android_aaudio) {
-        sources += [
-          "android/aaudio_player.cc",
-          "android/aaudio_player.h",
-          "android/aaudio_recorder.cc",
-          "android/aaudio_recorder.h",
-          "android/aaudio_wrapper.cc",
-          "android/aaudio_wrapper.h",
-        ]
-        libs += [ "aaudio" ]
-      }
+
+      deps += [ ":aaudio_stubs" ]
+
+      defines += [
+        # AAudio's stub implementation is injected, so relax the verification of functions <=> API level introduced with NDK 23
+        "__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__",
+      ]
 
       if (build_with_mozilla) {
         include_dirs += [
