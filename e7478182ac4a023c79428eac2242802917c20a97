@@ -16,6 +16,24 @@
       "message": "What happens if a probe is requested and there is no RTP module available that can send padding? If you have RTX configured, I think there\u0027s no problem - but on media ssrcs it\u0027s a different story. I think this scenario _should_ not happen currently, but would like test coverage for it anyway..",
       "revId": "e7478182ac4a023c79428eac2242802917c20a97",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c667736a_1c163d62",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-02-22T12:54:35Z",
+      "side": 0,
+      "message": "Should we remove this check all together ? https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/rtp_rtcp/source/rtp_rtcp_impl2.cc;drc\u003d8db4d1d0f51c09c34a9a3c35603a1255c47e0dbe;l\u003d393\n\nAlso see test RtpRtcpImpl2Test, PaddingNotAllowedInMiddleOfFrame",
+      "parentUuid": "26a6c7a8_8f6c38c3",
+      "revId": "e7478182ac4a023c79428eac2242802917c20a97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
