@@ -33,6 +33,24 @@
       "message": "nit:\nthe naming of kRtxHeaderSize is most unfortunate since this is the two bytes for the original sequence number field (OSN) that is part of the RTP payload while the overhead below is part of the RTP header.\n\nMight get slightly more readable if you add it below.",
       "revId": "a01d4253eea36a5dcb69c2c3b8466f9b0fcb7e06",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "163ef3c5_3aa3fb40",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-22T11:43:44Z",
+      "side": 1,
+      "message": "good point, reordered counting in the order those extra bytes appear in the RTP packet and added few more comments.",
+      "parentUuid": "90ccff67_1b9a1c1e",
+      "revId": "a01d4253eea36a5dcb69c2c3b8466f9b0fcb7e06",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
