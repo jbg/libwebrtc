@@ -10,20 +10,18 @@
 
 #include "sdk/android/native_api/audio_device_module/audio_device_android.h"
 
+#include <android/api-level.h>
 #include <stdlib.h>
 
 #include <memory>
 #include <utility>
 
 #include "api/scoped_refptr.h"
+#include "modules/audio_device/android/aaudio_wrapper.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/ref_count.h"
-
-#if defined(WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO)
 #include "sdk/android/src/jni/audio_device/aaudio_player.h"
 #include "sdk/android/src/jni/audio_device/aaudio_recorder.h"
-#endif
-
 #include "sdk/android/src/jni/audio_device/audio_record_jni.h"
 #include "sdk/android/src/jni/audio_device/audio_track_jni.h"
 #include "sdk/android/src/jni/audio_device/opensles_player.h"
@@ -52,11 +50,26 @@ void GetDefaultAudioParameters(JNIEnv* env,
 
 }  // namespace
 
-#if defined(WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO)
 rtc::scoped_refptr<AudioDeviceModule> CreateAAudioAudioDeviceModule(
     JNIEnv* env,
     jobject application_context) {
   RTC_DLOG(LS_INFO) << __FUNCTION__;
+  // While AAudio is available starting with API level 26,
+  // but
+  // modules/audio_device/android/java/src/org/webrtc/voiceengine/
+  // WebRtcAudioManager.java
+  // only enables the AAudio backend if the API level is 27 or higher.
+  // Use the same criteria.
+  if (android_get_device_api_level() < 27) {
+    RTC_LOG(LS_WARNING) << "Not enough API level to use AAudio";
+    return nullptr;
+  }
+
+  if (!IsAAudioSupported()) {
+    RTC_LOG(LS_WARNING) << "Not enough API level to use AAudio";
+    return nullptr;
+  }
+
   // Get default audio input/output parameters.
   AudioParameters input_parameters;
   AudioParameters output_parameters;
@@ -70,7 +83,6 @@ rtc::scoped_refptr<AudioDeviceModule> CreateAAudioAudioDeviceModule(
       std::make_unique<jni::AAudioRecorder>(input_parameters),
       std::make_unique<jni::AAudioPlayer>(output_parameters));
 }
-#endif
 
 rtc::scoped_refptr<AudioDeviceModule> CreateJavaAudioDeviceModule(
     JNIEnv* env,
