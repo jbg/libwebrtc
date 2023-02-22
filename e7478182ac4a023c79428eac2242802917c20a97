@@ -34,6 +34,24 @@
       "parentUuid": "26a6c7a8_8f6c38c3",
       "revId": "e7478182ac4a023c79428eac2242802917c20a97",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76035efe_d4799681",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-02-22T13:30:59Z",
+      "side": 0,
+      "message": "Yeah, makes sense to let the RTP modules decide if they want to send padding - instead of having the pacer assuming.",
+      "parentUuid": "c667736a_1c163d62",
+      "revId": "e7478182ac4a023c79428eac2242802917c20a97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
