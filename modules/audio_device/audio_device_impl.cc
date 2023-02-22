@@ -26,10 +26,9 @@
 #endif
 #elif defined(WEBRTC_ANDROID)
 #include <stdlib.h>
-#if defined(WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO)
+
 #include "modules/audio_device/android/aaudio_player.h"
 #include "modules/audio_device/android/aaudio_recorder.h"
-#endif
 #include "modules/audio_device/android/audio_device_template.h"
 #include "modules/audio_device/android/audio_manager.h"
 #include "modules/audio_device/android/audio_record_jni.h"
@@ -187,7 +186,7 @@ int32_t AudioDeviceModuleImpl::CreatePlatformSpecificObjects() {
   audio_manager_android_.reset(new AudioManager());
   // Select best possible combination of audio layers.
   if (audio_layer == kPlatformDefaultAudio) {
-    if (audio_manager_android_->IsAAudioSupported()) {
+    if (audio_manager_android_->IsAAudioSupported() && IsAAudioSupported()) {
       // Use of AAudio for both playout and recording has highest priority.
       audio_layer = kAndroidAAudioAudio;
     } else if (audio_manager_android_->IsLowLatencyPlayoutSupported() &&
@@ -221,18 +220,15 @@ int32_t AudioDeviceModuleImpl::CreatePlatformSpecificObjects() {
     // time support for HW AEC using the AudioRecord Java API.
     audio_device_.reset(new AudioDeviceTemplate<AudioRecordJni, OpenSLESPlayer>(
         audio_layer, audio_manager));
-  } else if (audio_layer == kAndroidAAudioAudio) {
-#if defined(WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO)
+  } else if (audio_layer == kAndroidAAudioAudio && IsAAudioSupported()) {
     // AAudio based audio for both input and output.
     audio_device_.reset(new AudioDeviceTemplate<AAudioRecorder, AAudioPlayer>(
         audio_layer, audio_manager));
-#endif
-  } else if (audio_layer == kAndroidJavaInputAndAAudioOutputAudio) {
-#if defined(WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO)
+  } else if (audio_layer == kAndroidJavaInputAndAAudioOutputAudio &&
+             IsAAudioSupported()) {
     // Java audio for input and AAudio for output audio (i.e. mixed APIs).
     audio_device_.reset(new AudioDeviceTemplate<AudioRecordJni, AAudioPlayer>(
         audio_layer, audio_manager));
-#endif
   } else {
     RTC_LOG(LS_ERROR) << "The requested audio layer is not supported";
     audio_device_.reset(nullptr);

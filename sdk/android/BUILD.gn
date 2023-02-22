@@ -966,6 +966,7 @@ if (current_os == "linux" || is_android) {
     ]
 
     deps = [
+      ":aaudio_audio_device_module",
       ":base_jni",
       ":java_audio_device_module",
       ":opensles_audio_device_module",
@@ -977,9 +978,6 @@ if (current_os == "linux" || is_android) {
       "../../system_wrappers",
       "../../system_wrappers:metrics",
     ]
-    if (rtc_enable_android_aaudio) {
-      deps += [ ":aaudio_audio_device_module" ]
-    }
   }
 
   # API for wrapping Java VideoDecoderFactory/VideoEncoderFactory classes to C++
@@ -1188,36 +1186,38 @@ if (current_os == "linux" || is_android) {
     absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
   }
 
-  if (rtc_enable_android_aaudio) {
-    rtc_library("aaudio_audio_device_module") {
-      visibility = [ "*" ]
-      defines = [ "WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO" ]
-      sources = [
-        "src/jni/audio_device/aaudio_player.cc",
-        "src/jni/audio_device/aaudio_player.h",
-        "src/jni/audio_device/aaudio_recorder.cc",
-        "src/jni/audio_device/aaudio_recorder.h",
-        "src/jni/audio_device/aaudio_wrapper.cc",
-        "src/jni/audio_device/aaudio_wrapper.h",
-      ]
-      libs = [ "aaudio" ]
-      deps = [
-        ":audio_device_module_base",
-        ":base_jni",
-        "../../api:array_view",
-        "../../api:sequence_checker",
-        "../../api/task_queue",
-        "../../modules/audio_device",
-        "../../modules/audio_device:audio_device_buffer",
-        "../../rtc_base:checks",
-        "../../rtc_base:logging",
-        "../../rtc_base:macromagic",
-        "../../rtc_base:stringutils",
-        "../../rtc_base:timeutils",
-        "../../system_wrappers",
-      ]
-      absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
-    }
+  rtc_library("aaudio_audio_device_module") {
+    visibility = [ "*" ]
+    sources = [
+      "src/jni/audio_device/aaudio_player.cc",
+      "src/jni/audio_device/aaudio_player.h",
+      "src/jni/audio_device/aaudio_recorder.cc",
+      "src/jni/audio_device/aaudio_recorder.h",
+      "src/jni/audio_device/aaudio_wrapper.cc",
+      "src/jni/audio_device/aaudio_wrapper.h",
+    ]
+    deps = [
+      ":audio_device_module_base",
+      ":base_jni",
+      "../../api:array_view",
+      "../../api:sequence_checker",
+      "../../api/task_queue",
+      "../../modules/audio_device",
+      "../../modules/audio_device:aaudio_stubs",
+      "../../modules/audio_device:audio_device_buffer",
+      "../../rtc_base:checks",
+      "../../rtc_base:logging",
+      "../../rtc_base:macromagic",
+      "../../rtc_base:stringutils",
+      "../../rtc_base:timeutils",
+      "../../system_wrappers",
+    ]
+    defines = [
+      # AAudio's stub implementation is injected, so relax the verification of functions <=> API level introduced with NDK 23
+      "__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__",
+    ]
+
+    absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
   }
 
   rtc_library("opensles_audio_device_module") {

@@ -22,6 +22,7 @@
 #include "api/scoped_refptr.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/task_queue/task_queue_factory.h"
+#include "modules/audio_device/android/aaudio_wrapper.h"
 #include "modules/audio_device/android/audio_common.h"
 #include "modules/audio_device/android/audio_manager.h"
 #include "modules/audio_device/android/build_info.h"
@@ -703,16 +704,12 @@ TEST_F(AudioDeviceTest, CorrectAudioLayerIsUsedForOpenSLInBothDirections) {
   EXPECT_EQ(expected_layer, active_layer);
 }
 
-// TODO(bugs.webrtc.org/8914)
-#if !defined(WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO)
-#define MAYBE_CorrectAudioLayerIsUsedForAAudioInBothDirections \
-  DISABLED_CorrectAudioLayerIsUsedForAAudioInBothDirections
-#else
-#define MAYBE_CorrectAudioLayerIsUsedForAAudioInBothDirections \
-  CorrectAudioLayerIsUsedForAAudioInBothDirections
-#endif
-TEST_F(AudioDeviceTest,
-       MAYBE_CorrectAudioLayerIsUsedForAAudioInBothDirections) {
+TEST_F(AudioDeviceTest, CorrectAudioLayerIsUsedForAAudioInBothDirections) {
+  if (!audio_manager()->IsAAudioSupported()) {
+    GTEST_SKIP();
+  }
+  EXPECT_TRUE(IsAAudioSupported());
+
   AudioDeviceModule::AudioLayer expected_layer =
       AudioDeviceModule::kAndroidAAudioAudio;
   AudioDeviceModule::AudioLayer active_layer =
@@ -720,16 +717,11 @@ TEST_F(AudioDeviceTest,
   EXPECT_EQ(expected_layer, active_layer);
 }
 
-// TODO(bugs.webrtc.org/8914)
-#if !defined(WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO)
-#define MAYBE_CorrectAudioLayerIsUsedForCombinedJavaAAudioCombo \
-  DISABLED_CorrectAudioLayerIsUsedForCombinedJavaAAudioCombo
-#else
-#define MAYBE_CorrectAudioLayerIsUsedForCombinedJavaAAudioCombo \
-  CorrectAudioLayerIsUsedForCombinedJavaAAudioCombo
-#endif
-TEST_F(AudioDeviceTest,
-       MAYBE_CorrectAudioLayerIsUsedForCombinedJavaAAudioCombo) {
+TEST_F(AudioDeviceTest, CorrectAudioLayerIsUsedForCombinedJavaAAudioCombo) {
+  if (!audio_manager()->IsAAudioSupported()) {
+    GTEST_SKIP();
+  }
+
   AudioDeviceModule::AudioLayer expected_layer =
       AudioDeviceModule::kAndroidJavaInputAndAAudioOutputAudio;
   AudioDeviceModule::AudioLayer active_layer =
