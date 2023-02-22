@@ -10,6 +10,7 @@
 
 #include "modules/audio_device/android/aaudio_wrapper.h"
 
+#include "modules/audio_device/aaudio_stubs.h"
 #include "modules/audio_device/android/audio_manager.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/strings/string_builder.h"
@@ -35,6 +36,9 @@
 namespace webrtc {
 
 namespace {
+
+static constexpr char kAaudioLib[] = "libaaudio.so";
+absl::optional<bool> gAaudioSupported;
 
 const char* DirectionToString(aaudio_direction_t direction) {
   switch (direction) {
@@ -493,6 +497,27 @@ bool AAudioWrapper::OptimizeBuffers() {
   }
   // Maximum number of frames that can be filled without blocking.
   RTC_LOG(LS_INFO) << "buffer burst size in frames: " << buffer_size;
+  return true;
+}
+
+bool IsAAudioSupported() {
+  using modules_audio_device::InitializeStubs;
+  using modules_audio_device::kModuleAaudio;
+  using modules_audio_device::StubPathMap;
+
+  if (gAaudioSupported.has_value()) {
+    return gAaudioSupported.value();
+  }
+
+  StubPathMap paths;
+  // Check if the AAudio library is available.
+  paths[kModuleAaudio].push_back(kAaudioLib);
+  if (!InitializeStubs(paths)) {
+    RTC_LOG(LS_INFO) << "Failed on loading the AAudio library and symbols";
+    gAaudioSupported = false;
+    return false;
+  }
+  gAaudioSupported = true;
   return true;
 }
 

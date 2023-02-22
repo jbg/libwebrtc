@@ -15,6 +15,7 @@
 #include <numeric>
 
 #include "api/scoped_refptr.h"
+#include "modules/audio_device/android/aaudio_wrapper.h"
 #include "modules/audio_device/include/mock_audio_transport.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/event.h"
@@ -514,12 +515,10 @@ class AudioDeviceTest : public ::testing::Test {
 
   rtc::scoped_refptr<AudioDeviceModule> CreateAudioDevice(
       AudioDeviceModule::AudioLayer audio_layer) {
-#if defined(WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO)
     if (audio_layer == AudioDeviceModule::kAndroidAAudioAudio) {
       return rtc::scoped_refptr<AudioDeviceModule>(
           CreateAAudioAudioDeviceModule(jni_, context_.obj()));
     }
-#endif
     if (audio_layer == AudioDeviceModule::kAndroidJavaAudio) {
       return rtc::scoped_refptr<AudioDeviceModule>(
           CreateJavaAudioDeviceModule(jni_, context_.obj()));
@@ -717,15 +716,19 @@ TEST_F(AudioDeviceTest, CorrectAudioLayerIsUsedForOpenSLInBothDirections) {
 // TODO(bugs.webrtc.org/8914)
 // TODO(phensman): Add test for AAudio/Java combination when this combination
 // is supported.
-#if !defined(WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO)
-#define MAYBE_CorrectAudioLayerIsUsedForAAudioInBothDirections \
-  DISABLED_CorrectAudioLayerIsUsedForAAudioInBothDirections
-#else
-#define MAYBE_CorrectAudioLayerIsUsedForAAudioInBothDirections \
-  CorrectAudioLayerIsUsedForAAudioInBothDirections
-#endif
-TEST_F(AudioDeviceTest,
-       MAYBE_CorrectAudioLayerIsUsedForAAudioInBothDirections) {
+TEST_F(AudioDeviceTest, CorrectAudioLayerIsUsedForAAudioInBothDirections) {
+  // While AAudio is available starting with API level 26,
+  // but
+  // modules/audio_device/android/java/src/org/webrtc/voiceengine/
+  // WebRtcAudioManager.java
+  // only enables the AAudio backend if the API level is 27 or higher.
+  // Use the same criteria.
+  if (android_get_device_api_level() < 27) {
+    GTEST_SKIP();
+  }
+
+  EXPECT_TRUE(IsAAudioSupported());
+
   AudioDeviceModule::AudioLayer expected_layer =
       AudioDeviceModule::kAndroidAAudioAudio;
   AudioDeviceModule::AudioLayer active_layer =
