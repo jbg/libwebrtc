@@ -1317,8 +1317,7 @@ class WebRtcSdpTest : public ::testing::Test {
         1, "AES_CM_128_HMAC_SHA1_80",
         "inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32", ""));
     video->set_protocol(cricket::kMediaProtocolSavpf);
-    video->AddCodec(
-        VideoCodec(120, JsepSessionDescription::kDefaultVideoCodecName));
+    video->AddCodec(VideoCodec(120, "VP8"));
     return video;
   }
 
@@ -1940,7 +1939,7 @@ class WebRtcSdpTest : public ::testing::Test {
         "m=audio 9 RTP/SAVPF 111\r\n"
         "a=rtpmap:111 opus/48000/2\r\n";
     std::string sdp_video =
-        "m=video 3457 RTP/SAVPF 101\r\n"
+        "m=video 3457 RTP/SAVPF 101 102\r\n"
         "a=rtpmap:101 VP8/90000\r\n"
         "a=rtcp-fb:101 goog-lntf\r\n"
         "a=rtcp-fb:101 nack\r\n"
@@ -1951,6 +1950,9 @@ class WebRtcSdpTest : public ::testing::Test {
     os << "a=rtcp-fb:" << (use_wildcard ? "*" : "111") << " nack\r\n";
     os << sdp_video;
     os << "a=rtcp-fb:" << (use_wildcard ? "*" : "101") << " ccm fir\r\n";
+    os << "a=rtpmap:102 rtx/90000\r\n"
+       << "a=fmtp:102 apt=101\r\n"
+       << "a=rtcp-fb:102 unknown\r\n";
     std::string sdp = os.str();
     // Deserialize
     SdpParseError error;
@@ -1967,10 +1969,9 @@ class WebRtcSdpTest : public ::testing::Test {
     const VideoContentDescription* vcd =
         GetFirstVideoContentDescription(jdesc_output->description());
     ASSERT_TRUE(vcd);
-    ASSERT_FALSE(vcd->codecs().empty());
+    ASSERT_EQ(vcd->codecs().size(), 2u);
     cricket::VideoCodec vp8 = vcd->codecs()[0];
-    EXPECT_STREQ(webrtc::JsepSessionDescription::kDefaultVideoCodecName,
-                 vp8.name.c_str());
+    EXPECT_EQ(vp8.name, "VP8");
     EXPECT_EQ(101, vp8.id);
     EXPECT_TRUE(vp8.HasFeedbackParam(cricket::FeedbackParam(
         cricket::kRtcpFbParamLntf, cricket::kParamValueEmpty)));
@@ -1982,6 +1983,18 @@ class WebRtcSdpTest : public ::testing::Test {
         cricket::kRtcpFbParamRemb, cricket::kParamValueEmpty)));
     EXPECT_TRUE(vp8.HasFeedbackParam(cricket::FeedbackParam(
         cricket::kRtcpFbParamCcm, cricket::kRtcpFbCcmParamFir)));
+    EXPECT_FALSE(vp8.HasFeedbackParam(cricket::FeedbackParam(
+        cricket::kRtcpFbParamTransportCc, cricket::kParamValueEmpty)));
+
+    cricket::VideoCodec rtx = vcd->codecs()[1];
+    EXPECT_EQ(rtx.name, "rtx");
+    EXPECT_EQ(102, rtx.id);
+    // Ensure NACK is not applied to RTX when it is parsed from a wildcard.
+    EXPECT_FALSE(rtx.HasFeedbackParam(cricket::FeedbackParam(
+        cricket::kRtcpFbParamNack, cricket::kParamValueEmpty)));
+    // The "unknown" feedback should be parsed (but nothing is done with it).
+    EXPECT_TRUE(rtx.HasFeedbackParam(
+        cricket::FeedbackParam("unknown", cricket::kParamValueEmpty)));
   }
 
   // Two SDP messages can mean the same thing but be different strings, e.g.
