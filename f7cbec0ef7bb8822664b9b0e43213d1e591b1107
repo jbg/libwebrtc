@@ -67,6 +67,24 @@
       "message": "Since this is two usages separated by 600 lines of code, I\u0027d prefer to have this a named constant (kVideoCodecNameVp8?) declared at the top of the file.",
       "revId": "f7cbec0ef7bb8822664b9b0e43213d1e591b1107",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bec7a26a_bd3f7bd7",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1971,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-02-23T11:58:38Z",
+      "side": 1,
+      "message": "There are six usages of \"VP8\" as well as many other inline usages of \"RTX\" (uppercase?), \"apt\", \"annexb\" etc.\nIMO it makes more sense to have this inline so one can see how this corresponds to what is in the SDP.\n\nOf course, looking at the SDP strings I found more \"ISAC\" but that seems harmless",
+      "parentUuid": "e5807074_aaf19074",
+      "revId": "f7cbec0ef7bb8822664b9b0e43213d1e591b1107",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
