@@ -23,7 +23,9 @@ namespace {
 using ::testing::Each;
 using ::testing::ElementsAre;
 using ::testing::ElementsAreArray;
+using ::testing::Eq;
 using ::testing::IsEmpty;
+using ::testing::Optional;
 
 constexpr int8_t kPayloadType = 100;
 constexpr uint32_t kSsrc = 0x12345678;
@@ -1249,6 +1251,43 @@ TEST(RtpPacketTest, SetExtensionWithArray) {
   packet.SetRawExtension<RtpDependencyDescriptorExtension>(extension_data);
   EXPECT_THAT(packet.GetRawExtension<RtpDependencyDescriptorExtension>(),
               ElementsAreArray(extension_data));
+}
+
+TEST(RtpPacketTest, CannotSetAbsCaptureTimeIfExtmapAllowMixedIsFalse) {
+  RtpPacket::ExtensionManager extensions(/*extmap-allow-mixed=*/false);
+  extensions.Register<AbsoluteCaptureTimeExtension>(16);
+
+  RtpPacket packet(&extensions);
+  packet.SetMarker(true);
+  packet.SetPayloadType(111);
+  packet.SetSequenceNumber(23755);
+  packet.SetTimestamp(1799571271);
+  constexpr AbsoluteCaptureTime kAbsoluteCaptureTime{
+      .absolute_capture_timestamp = 16691284706189108052u,
+      .estimated_capture_clock_offset = -871878,
+  };
+  EXPECT_FALSE(
+      packet.SetExtension<AbsoluteCaptureTimeExtension>(kAbsoluteCaptureTime));
+  EXPECT_EQ(packet.GetExtension<AbsoluteCaptureTimeExtension>(), absl::nullopt);
+}
+
+TEST(RtpPacketTest, CanSetAbsCaptureTimeIfExtmapAllowMixedIsTrue) {
+  RtpPacket::ExtensionManager extensions(/*extmap-allow-mixed=*/true);
+  extensions.Register<AbsoluteCaptureTimeExtension>(16);
+
+  RtpPacket packet(&extensions);
+  packet.SetMarker(true);
+  packet.SetPayloadType(111);
+  packet.SetSequenceNumber(23755);
+  packet.SetTimestamp(1799571271);
+  constexpr AbsoluteCaptureTime kAbsoluteCaptureTime{
+      .absolute_capture_timestamp = 16691284706189108052u,
+      .estimated_capture_clock_offset = -871878,
+  };
+  ASSERT_TRUE(
+      packet.SetExtension<AbsoluteCaptureTimeExtension>(kAbsoluteCaptureTime));
+  EXPECT_THAT(packet.GetExtension<AbsoluteCaptureTimeExtension>(),
+              Optional(Eq(kAbsoluteCaptureTime)));
 }
 
 }  // namespace
