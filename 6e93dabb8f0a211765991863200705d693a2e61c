@@ -16,6 +16,23 @@
       "message": "Hi Danil, could you PTAL? Alessio",
       "revId": "6e93dabb8f0a211765991863200705d693a2e61c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a629a0e_1db265a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-02-24T17:40:55Z",
+      "side": 1,
+      "message": "the test name is misleading. it is not about abs capture time extension. that extension is up to 16 bytes, so can fit into RTP header extension with one byte header as long as it has id in range [1, 14]. it fails because of the id 16 - that I\u0027d requires two byte header (which is controlled by the extmap_allow_mixed).",
+      "revId": "6e93dabb8f0a211765991863200705d693a2e61c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
