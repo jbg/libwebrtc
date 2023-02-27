@@ -93,9 +93,10 @@ class RTCPSender final {
     size_t media_bytes_sent;
     uint32_t send_bitrate;
 
-    uint32_t last_rr_ntp_secs;
-    uint32_t last_rr_ntp_frac;
-    uint32_t remote_sr;
+    // Local receive time of the last received RTCP sender report.
+    uint32_t local_receive_compact_ntp;
+    // Remote send time of the last received RTCP sender report.
+    uint32_t remote_sent_compact_ntp;
 
     std::vector<rtcp::ReceiveTimeInfo> last_xr_rtis;
 

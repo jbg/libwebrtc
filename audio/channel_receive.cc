@@ -749,21 +749,13 @@ void ChannelReceive::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
     return;
   }
 
-  uint32_t ntp_secs = 0;
-  uint32_t ntp_frac = 0;
-  uint32_t rtp_timestamp = 0;
-  if (rtp_rtcp_->RemoteNTP(&ntp_secs, &ntp_frac,
-                           /*rtcp_arrival_time_secs=*/nullptr,
-                           /*rtcp_arrival_time_frac=*/nullptr,
-                           &rtp_timestamp) != 0) {
-    // Waiting for RTCP.
-    return;
-  }
-
-  {
+  if (absl::optional<RtpRtcpInterface::SenderReportStats> info =
+          rtp_rtcp_->GetSenderReportStats();
+      info.has_value()) {
     MutexLock lock(&ts_stats_lock_);
-    ntp_estimator_.UpdateRtcpTimestamp(
-        TimeDelta::Millis(rtt), NtpTime(ntp_secs, ntp_frac), rtp_timestamp);
+    ntp_estimator_.UpdateRtcpTimestamp(TimeDelta::Millis(rtt),
+                                       info->last_remote_timestamp,
+                                       info->last_remote_rtp_timestamp);
     absl::optional<int64_t> remote_to_local_clock_offset =
         ntp_estimator_.EstimateRemoteToLocalClockOffset();
     if (remote_to_local_clock_offset.has_value()) {
@@ -1033,11 +1025,14 @@ absl::optional<Syncable::Info> ChannelReceive::GetSyncInfo() const {
   // these locks aren't needed.
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   Syncable::Info info;
-  if (rtp_rtcp_->RemoteNTP(&info.capture_time_ntp_secs,
-                           &info.capture_time_ntp_frac,
-                           /*rtcp_arrival_time_secs=*/nullptr,
-                           /*rtcp_arrival_time_frac=*/nullptr,
-                           &info.capture_time_source_clock) != 0) {
+
+  if (absl::optional<RtpRtcpInterface::SenderReportStats> last_sr =
+          rtp_rtcp_->GetSenderReportStats();
+      last_sr.has_value()) {
+    info.capture_time_ntp_secs = last_sr->last_remote_timestamp.seconds();
+    info.capture_time_ntp_frac = last_sr->last_remote_timestamp.fractions();
+    info.capture_time_source_clock = last_sr->last_remote_rtp_timestamp;
+  } else {
     return absl::nullopt;
   }
 

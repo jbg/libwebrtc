@@ -218,17 +218,13 @@ void AudioIngress::ReceivedRTCPPacket(
     return;
   }
 
-  uint32_t ntp_secs = 0, ntp_frac = 0, rtp_timestamp = 0;
-  if (rtp_rtcp_->RemoteNTP(&ntp_secs, &ntp_frac, nullptr, nullptr,
-                           &rtp_timestamp) != 0) {
-    // Waiting for RTCP.
-    return;
-  }
-
-  {
+  if (absl::optional<RtpRtcpInterface::SenderReportStats> info =
+          rtp_rtcp_->GetSenderReportStats();
+      info.has_value()) {
     MutexLock lock(&lock_);
-    ntp_estimator_.UpdateRtcpTimestamp(
-        TimeDelta::Millis(rtt), NtpTime(ntp_secs, ntp_frac), rtp_timestamp);
+    ntp_estimator_.UpdateRtcpTimestamp(TimeDelta::Millis(rtt),
+                                       info->last_remote_timestamp,
+                                       info->last_remote_rtp_timestamp);
   }
 }
 

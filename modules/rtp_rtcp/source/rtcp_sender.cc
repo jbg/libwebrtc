@@ -92,9 +92,8 @@ RTCPSender::FeedbackState::FeedbackState()
     : packets_sent(0),
       media_bytes_sent(0),
       send_bitrate(0),
-      last_rr_ntp_secs(0),
-      last_rr_ntp_frac(0),
-      remote_sr(0),
+      local_receive_compact_ntp(0),
+      remote_sent_compact_ntp(0),
       receiver(nullptr) {}
 
 RTCPSender::FeedbackState::FeedbackState(const FeedbackState&) = default;
@@ -823,21 +822,17 @@ std::vector<rtcp::ReportBlock> RTCPSender::CreateReportBlocks(
   // streams.
   result = receive_statistics_->RtcpReportBlocks(RTCP_MAX_REPORT_BLOCKS);
 
-  if (!result.empty() && ((feedback_state.last_rr_ntp_secs != 0) ||
-                          (feedback_state.last_rr_ntp_frac != 0))) {
+  if (!result.empty() && feedback_state.remote_sent_compact_ntp != 0) {
     // Get our NTP as late as possible to avoid a race.
     uint32_t now = CompactNtp(clock_->CurrentNtpTime());
-
-    uint32_t receive_time = feedback_state.last_rr_ntp_secs & 0x0000FFFF;
-    receive_time <<= 16;
-    receive_time += (feedback_state.last_rr_ntp_frac & 0xffff0000) >> 16;
+    uint32_t receive_time = feedback_state.local_receive_compact_ntp;
 
     uint32_t delay_since_last_sr = now - receive_time;
     // TODO(danilchap): Instead of setting same value on all report blocks,
     // set only when media_ssrc match sender ssrc of the sender report
     // remote times were taken from.
     for (auto& report_block : result) {
-      report_block.SetLastSr(feedback_state.remote_sr);
+      report_block.SetLastSr(feedback_state.remote_sent_compact_ntp);
       report_block.SetDelayLastSr(delay_since_last_sr);
     }
   }
