@@ -7,6 +7,7 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "api/rtp_parameters.h"
 #include "common_video/test/utilities.h"
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
 #include "modules/rtp_rtcp/source/rtp_dependency_descriptor_extension.h"
@@ -23,7 +24,9 @@ namespace {
 using ::testing::Each;
 using ::testing::ElementsAre;
 using ::testing::ElementsAreArray;
+using ::testing::Eq;
 using ::testing::IsEmpty;
+using ::testing::Optional;
 
 constexpr int8_t kPayloadType = 100;
 constexpr uint32_t kSsrc = 0x12345678;
@@ -45,6 +48,14 @@ constexpr char kStreamId[] = "streamid";
 constexpr char kMid[] = "mid";
 constexpr char kLongMid[] = "extra-long string to test two-byte header";
 constexpr size_t kMaxPaddingSize = 224u;
+
+// Header extension ID test values.
+// See https://www.rfc-editor.org/rfc/rfc8285#section-4.2.
+constexpr int kOneByteHeaderExtensionId = 1;
+// See https://www.rfc-editor.org/rfc/rfc8285#section-4.3.
+constexpr int kTwoBytesHeaderExtensionId =
+    RtpExtension::kOneByteHeaderExtensionMaxId + 1;
+
 // clang-format off
 constexpr uint8_t kMinimumPacket[] = {
     0x80, kPayloadType, kSeqNumFirstByte, kSeqNumSecondByte,
@@ -955,8 +966,7 @@ TEST(RtpPacketTest, CreateAndParseColorSpaceExtensionWithoutHdrMetadata) {
 TEST(RtpPacketTest, CreateAndParseAbsoluteCaptureTime) {
   // Create a packet with absolute capture time extension populated.
   RtpPacketToSend::ExtensionManager extensions;
-  constexpr int kExtensionId = 1;
-  extensions.Register<AbsoluteCaptureTimeExtension>(kExtensionId);
+  extensions.Register<AbsoluteCaptureTimeExtension>(kOneByteHeaderExtensionId);
   RtpPacketToSend send_packet(&extensions);
   send_packet.SetPayloadType(kPayloadType);
   send_packet.SetSequenceNumber(kSeqNum);
@@ -966,7 +976,8 @@ TEST(RtpPacketTest, CreateAndParseAbsoluteCaptureTime) {
   constexpr AbsoluteCaptureTime kAbsoluteCaptureTime{
       /*absolute_capture_timestamp=*/9876543210123456789ULL,
       /*estimated_capture_clock_offset=*/-1234567890987654321LL};
-  send_packet.SetExtension<AbsoluteCaptureTimeExtension>(kAbsoluteCaptureTime);
+  ASSERT_TRUE(send_packet.SetExtension<AbsoluteCaptureTimeExtension>(
+      kAbsoluteCaptureTime));
 
   // Serialize the packet and then parse it again.
   RtpPacketReceived receive_packet(&extensions);
@@ -985,8 +996,7 @@ TEST(RtpPacketTest,
      CreateAndParseAbsoluteCaptureTimeWithoutEstimatedCaptureClockOffset) {
   // Create a packet with absolute capture time extension populated.
   RtpPacketToSend::ExtensionManager extensions;
-  constexpr int kExtensionId = 1;
-  extensions.Register<AbsoluteCaptureTimeExtension>(kExtensionId);
+  extensions.Register<AbsoluteCaptureTimeExtension>(kOneByteHeaderExtensionId);
   RtpPacketToSend send_packet(&extensions);
   send_packet.SetPayloadType(kPayloadType);
   send_packet.SetSequenceNumber(kSeqNum);
@@ -996,7 +1006,8 @@ TEST(RtpPacketTest,
   constexpr AbsoluteCaptureTime kAbsoluteCaptureTime{
       /*absolute_capture_timestamp=*/9876543210123456789ULL,
       /*estimated_capture_clock_offset=*/absl::nullopt};
-  send_packet.SetExtension<AbsoluteCaptureTimeExtension>(kAbsoluteCaptureTime);
+  ASSERT_TRUE(send_packet.SetExtension<AbsoluteCaptureTimeExtension>(
+      kAbsoluteCaptureTime));
 
   // Serialize the packet and then parse it again.
   RtpPacketReceived receive_packet(&extensions);
@@ -1009,6 +1020,65 @@ TEST(RtpPacketTest,
             received_absolute_capture_time.absolute_capture_timestamp);
   EXPECT_EQ(kAbsoluteCaptureTime.estimated_capture_clock_offset,
             received_absolute_capture_time.estimated_capture_clock_offset);
+}
+
+TEST(RtpPacketTest,
+     CanSetAbsoluteCaptureTimeIfOneByteHeaderIdAndExtmapAllowMixedIsFalse) {
+  RtpPacket::ExtensionManager extensions(/*extmap-allow-mixed=*/false);
+  extensions.Register<AbsoluteCaptureTimeExtension>(kOneByteHeaderExtensionId);
+
+  RtpPacket packet(&extensions);
+  packet.SetPayloadType(kPayloadType);
+  packet.SetSequenceNumber(kSeqNum);
+  packet.SetTimestamp(kTimestamp);
+  packet.SetSsrc(kSsrc);
+  constexpr AbsoluteCaptureTime kAbsoluteCaptureTime{
+      .absolute_capture_timestamp = 16691284706189108052u,
+      .estimated_capture_clock_offset = -871878,
+  };
+  ASSERT_TRUE(
+      packet.SetExtension<AbsoluteCaptureTimeExtension>(kAbsoluteCaptureTime));
+  EXPECT_THAT(packet.GetExtension<AbsoluteCaptureTimeExtension>(),
+              Optional(Eq(kAbsoluteCaptureTime)));
+}
+
+TEST(RtpPacketTest,
+     CannotSetAbsoluteCaptureTimeIfTwoBytesHeaderIdAndExtmapAllowMixedIsFalse) {
+  RtpPacket::ExtensionManager extensions(/*extmap-allow-mixed=*/false);
+  extensions.Register<AbsoluteCaptureTimeExtension>(kTwoBytesHeaderExtensionId);
+
+  RtpPacket packet(&extensions);
+  packet.SetPayloadType(kPayloadType);
+  packet.SetSequenceNumber(kSeqNum);
+  packet.SetTimestamp(kTimestamp);
+  packet.SetSsrc(kSsrc);
+  constexpr AbsoluteCaptureTime kAbsoluteCaptureTime{
+      .absolute_capture_timestamp = 16691284706189108052u,
+      .estimated_capture_clock_offset = -871878,
+  };
+  ASSERT_FALSE(
+      packet.SetExtension<AbsoluteCaptureTimeExtension>(kAbsoluteCaptureTime));
+  EXPECT_EQ(packet.GetExtension<AbsoluteCaptureTimeExtension>(), absl::nullopt);
+}
+
+TEST(RtpPacketTest,
+     CanSetAbsoluteCaptureTimeIfTwoBytesHeaderIdAndExtmapAllowMixedIsTrue) {
+  RtpPacket::ExtensionManager extensions(/*extmap-allow-mixed=*/true);
+  extensions.Register<AbsoluteCaptureTimeExtension>(kTwoBytesHeaderExtensionId);
+
+  RtpPacket packet(&extensions);
+  packet.SetPayloadType(kPayloadType);
+  packet.SetSequenceNumber(kSeqNum);
+  packet.SetTimestamp(kTimestamp);
+  packet.SetSsrc(kSsrc);
+  constexpr AbsoluteCaptureTime kAbsoluteCaptureTime{
+      .absolute_capture_timestamp = 16691284706189108052u,
+      .estimated_capture_clock_offset = -871878,
+  };
+  ASSERT_TRUE(
+      packet.SetExtension<AbsoluteCaptureTimeExtension>(kAbsoluteCaptureTime));
+  EXPECT_THAT(packet.GetExtension<AbsoluteCaptureTimeExtension>(),
+              Optional(Eq(kAbsoluteCaptureTime)));
 }
 
 TEST(RtpPacketTest, CreateAndParseTransportSequenceNumber) {
