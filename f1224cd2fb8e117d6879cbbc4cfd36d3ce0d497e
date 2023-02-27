@@ -33,6 +33,24 @@
       "message": "Not knowing the details of what exactly should be removed, I can at least LGTM that the clean up looks correct based on the things that actually are removed.",
       "revId": "f1224cd2fb8e117d6879cbbc4cfd36d3ce0d497e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b883e197_72853d1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17854
+      },
+      "writtenOn": "2023-02-27T11:11:39Z",
+      "side": 1,
+      "message": "Thank you! To elaborate a bit on the change, the field trial WebRTC-UseActiveIceController was used to launch a refactor of P2PTransportChannel. These tests were parameterized to inject the field trial and test both pre- and post-refactor code paths.\n\nThe refactor is now fully launched, and the field trial is no longer read (https://webrtc-review.googlesource.com/c/src/+/294281). So this change cleans up the tests.",
+      "parentUuid": "7321fe98_2abd4464",
+      "revId": "f1224cd2fb8e117d6879cbbc4cfd36d3ce0d497e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
