@@ -134,10 +134,12 @@ NackRequester::~NackRequester() {
 
 void NackRequester::ProcessNacks() {
   RTC_DCHECK_RUN_ON(worker_thread_);
+  RTC_LOG(LS_ERROR) << "DEBUG: ProcessNacks called";
   std::vector<uint16_t> nack_batch = GetNackBatch(kTimeOnly);
   if (!nack_batch.empty()) {
     // This batch of NACKs is triggered externally; there is no external
     // initiator who can batch them with other feedback messages.
+    RTC_LOG(LS_ERROR) << "DEBUG: Sending nacks";
     nack_sender_->SendNack(nack_batch, /*buffering_allowed=*/false);
   }
 }
@@ -208,6 +210,7 @@ int NackRequester::OnReceivedPacket(uint16_t seq_num,
   newest_seq_num_ = seq_num;
 
   // Are there any nacks that are waiting for this seq_num.
+  RTC_LOG(LS_ERROR) << "OnReceivedPacket calling GetNackBatch";
   std::vector<uint16_t> nack_batch = GetNackBatch(kSeqNumOnly);
   if (!nack_batch.empty()) {
     // This batch of NACKs is triggered externally; the initiator can
@@ -297,6 +300,7 @@ std::vector<uint16_t> NackRequester::GetNackBatch(NackFilterOptions options) {
   bool consider_timestamp = options != kSeqNumOnly;
   Timestamp now = clock_->CurrentTime();
   std::vector<uint16_t> nack_batch;
+  RTC_LOG(LS_ERROR) << "DEBUG: Nack list size " << nack_list_.size();
   auto it = nack_list_.begin();
   while (it != nack_list_.end()) {
     bool delay_timed_out = now - it->second.created_at_time >= send_nack_delay_;
