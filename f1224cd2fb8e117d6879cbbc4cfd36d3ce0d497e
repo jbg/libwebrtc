@@ -16,6 +16,23 @@
       "message": "Few minutes to spare for another review, Stefan? Thanks!",
       "revId": "f1224cd2fb8e117d6879cbbc4cfd36d3ce0d497e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7321fe98_2abd4464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-02-27T10:23:03Z",
+      "side": 1,
+      "message": "Not knowing the details of what exactly should be removed, I can at least LGTM that the clean up looks correct based on the things that actually are removed.",
+      "revId": "f1224cd2fb8e117d6879cbbc4cfd36d3ce0d497e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
