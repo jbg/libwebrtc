@@ -19,7 +19,9 @@ namespace webrtc {
 EncoderSimulcastProxy::EncoderSimulcastProxy(VideoEncoderFactory* factory,
                                              const SdpVideoFormat& format)
     : factory_(factory), video_format_(format), callback_(nullptr) {
+  printf("hboz / EncoderSimulcastProxy constr begin\n");
   encoder_ = factory_->CreateVideoEncoder(format);
+  printf("hboz / EncoderSimulcastProxy constr end\n");
 }
 
 EncoderSimulcastProxy::~EncoderSimulcastProxy() = default;
@@ -36,13 +38,16 @@ void EncoderSimulcastProxy::SetFecControllerOverride(
 // TODO(eladalon): s/inst/codec_settings/g.
 int EncoderSimulcastProxy::InitEncode(const VideoCodec* inst,
                                       const VideoEncoder::Settings& settings) {
+  printf("hboz / EncoderSimulcastProxy::InitEncode!\n");
   int ret = encoder_->InitEncode(inst, settings);
   if (ret == WEBRTC_VIDEO_CODEC_ERR_SIMULCAST_PARAMETERS_NOT_SUPPORTED) {
+    printf("hboz / WEBRTC_VIDEO_CODEC_ERR_SIMULCAST_PARAMETERS_NOT_SUPPORTED\n");
     encoder_.reset(new SimulcastEncoderAdapter(factory_, video_format_));
     if (callback_) {
       encoder_->RegisterEncodeCompleteCallback(callback_);
     }
     ret = encoder_->InitEncode(inst, settings);
+    RTC_CHECK(ret == WEBRTC_VIDEO_CODEC_OK);
   }
   return ret;
 }
