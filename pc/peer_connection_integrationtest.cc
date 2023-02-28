@@ -1570,46 +1570,6 @@ TEST_P(PeerConnectionIntegrationTest,
   // ASSERT_EQ(2U, inbound_stream_stats.size());
 }
 
-// Test that DTLS 1.0 is used if both sides only support DTLS 1.0.
-TEST_P(PeerConnectionIntegrationTest, EndToEndCallWithDtls10) {
-  PeerConnectionFactory::Options dtls_10_options;
-  dtls_10_options.ssl_max_version = rtc::SSL_PROTOCOL_DTLS_10;
-  ASSERT_TRUE(CreatePeerConnectionWrappersWithOptions(dtls_10_options,
-                                                      dtls_10_options));
-  ConnectFakeSignaling();
-  // Do normal offer/answer and wait for some frames to be received in each
-  // direction.
-  caller()->AddAudioVideoTracks();
-  callee()->AddAudioVideoTracks();
-  caller()->CreateAndSetAndSignalOffer();
-  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
-  MediaExpectations media_expectations;
-  media_expectations.ExpectBidirectionalAudioAndVideo();
-  ASSERT_TRUE(ExpectNewFrames(media_expectations));
-}
-
-// Test getting cipher stats and UMA metrics when DTLS 1.0 is negotiated.
-TEST_P(PeerConnectionIntegrationTest, Dtls10CipherStatsAndUmaMetrics) {
-  PeerConnectionFactory::Options dtls_10_options;
-  dtls_10_options.ssl_max_version = rtc::SSL_PROTOCOL_DTLS_10;
-  ASSERT_TRUE(CreatePeerConnectionWrappersWithOptions(dtls_10_options,
-                                                      dtls_10_options));
-  ConnectFakeSignaling();
-  caller()->AddAudioVideoTracks();
-  callee()->AddAudioVideoTracks();
-  caller()->CreateAndSetAndSignalOffer();
-  ASSERT_TRUE_WAIT(DtlsConnected(), kDefaultTimeout);
-  EXPECT_TRUE_WAIT(rtc::SSLStreamAdapter::IsAcceptableCipher(
-                       caller()->OldGetStats()->DtlsCipher(), rtc::KT_DEFAULT),
-                   kDefaultTimeout);
-  EXPECT_EQ_WAIT(rtc::SrtpCryptoSuiteToName(kDefaultSrtpCryptoSuite),
-                 caller()->OldGetStats()->SrtpCipher(), kDefaultTimeout);
-  // TODO(bugs.webrtc.org/9456): Fix it.
-  EXPECT_METRIC_EQ(1, webrtc::metrics::NumEvents(
-                          "WebRTC.PeerConnection.SrtpCryptoSuite.Audio",
-                          kDefaultSrtpCryptoSuite));
-}
-
 // Test getting cipher stats and UMA metrics when DTLS 1.2 is negotiated.
 TEST_P(PeerConnectionIntegrationTest, Dtls12CipherStatsAndUmaMetrics) {
   PeerConnectionFactory::Options dtls_12_options;
@@ -1630,48 +1590,6 @@ TEST_P(PeerConnectionIntegrationTest, Dtls12CipherStatsAndUmaMetrics) {
   EXPECT_METRIC_EQ(1, webrtc::metrics::NumEvents(
                           "WebRTC.PeerConnection.SrtpCryptoSuite.Audio",
                           kDefaultSrtpCryptoSuite));
-}
-
-// Test that DTLS 1.0 can be used if the caller supports DTLS 1.2 and the
-// callee only supports 1.0.
-TEST_P(PeerConnectionIntegrationTest, CallerDtls12ToCalleeDtls10) {
-  PeerConnectionFactory::Options caller_options;
-  caller_options.ssl_max_version = rtc::SSL_PROTOCOL_DTLS_12;
-  PeerConnectionFactory::Options callee_options;
-  callee_options.ssl_max_version = rtc::SSL_PROTOCOL_DTLS_10;
-  ASSERT_TRUE(
-      CreatePeerConnectionWrappersWithOptions(caller_options, callee_options));
-  ConnectFakeSignaling();
-  // Do normal offer/answer and wait for some frames to be received in each
-  // direction.
-  caller()->AddAudioVideoTracks();
-  callee()->AddAudioVideoTracks();
-  caller()->CreateAndSetAndSignalOffer();
-  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
-  MediaExpectations media_expectations;
-  media_expectations.ExpectBidirectionalAudioAndVideo();
-  ASSERT_TRUE(ExpectNewFrames(media_expectations));
-}
-
-// Test that DTLS 1.0 can be used if the caller only supports DTLS 1.0 and the
-// callee supports 1.2.
-TEST_P(PeerConnectionIntegrationTest, CallerDtls10ToCalleeDtls12) {
-  PeerConnectionFactory::Options caller_options;
-  caller_options.ssl_max_version = rtc::SSL_PROTOCOL_DTLS_10;
-  PeerConnectionFactory::Options callee_options;
-  callee_options.ssl_max_version = rtc::SSL_PROTOCOL_DTLS_12;
-  ASSERT_TRUE(
-      CreatePeerConnectionWrappersWithOptions(caller_options, callee_options));
-  ConnectFakeSignaling();
-  // Do normal offer/answer and wait for some frames to be received in each
-  // direction.
-  caller()->AddAudioVideoTracks();
-  callee()->AddAudioVideoTracks();
-  caller()->CreateAndSetAndSignalOffer();
-  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
-  MediaExpectations media_expectations;
-  media_expectations.ExpectBidirectionalAudioAndVideo();
-  ASSERT_TRUE(ExpectNewFrames(media_expectations));
 }
 
 // The three tests below verify that "enable_aes128_sha1_32_crypto_cipher"

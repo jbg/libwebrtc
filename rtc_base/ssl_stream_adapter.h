@@ -86,17 +86,9 @@ bool IsGcmCryptoSuiteName(absl::string_view crypto_suite);
 enum SSLRole { SSL_CLIENT, SSL_SERVER };
 enum SSLMode { SSL_MODE_TLS, SSL_MODE_DTLS };
 
-// Note: TLS_10, TLS_11, and DTLS_10 will all be ignored, and only DTLS1_2 will
-// be accepted unless the trial flag WebRTC-LegacyTlsProtocols/Enabled/ is
-// passed in or an explicit override is used. Support for the legacy protocol
-// versions will be completely removed in the future.
-// See https://bugs.webrtc.org/10261.
 enum SSLProtocolVersion {
   SSL_PROTOCOL_NOT_GIVEN = -1,
-  SSL_PROTOCOL_TLS_10 = 0,
-  SSL_PROTOCOL_TLS_11,
   SSL_PROTOCOL_TLS_12,
-  SSL_PROTOCOL_DTLS_10 = SSL_PROTOCOL_TLS_11,
   SSL_PROTOCOL_DTLS_12 = SSL_PROTOCOL_TLS_12,
 };
 enum class SSLPeerCertificateDigestError {

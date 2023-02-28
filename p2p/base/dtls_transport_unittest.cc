@@ -305,9 +305,9 @@ class DtlsTestClient : public sigslot::has_slots<> {
 //
 // Note that this test always uses a FakeClock, due to the `fake_clock_` member
 // variable.
-class DtlsTransportTestBase {
+class DtlsTransportTest : public ::testing::Test {
  public:
-  DtlsTransportTestBase() : client1_("P1"), client2_("P2"), use_dtls_(false) {}
+  DtlsTransportTest() : client1_("P1"), client2_("P2"), use_dtls_(false) {}
 
   void SetMaxProtocolVersions(rtc::SSLProtocolVersion c1,
                               rtc::SSLProtocolVersion c2) {
@@ -393,9 +393,6 @@ class DtlsTransportTestBase {
   rtc::SSLProtocolVersion ssl_expected_version_;
 };
 
-class DtlsTransportTest : public DtlsTransportTestBase,
-                          public ::testing::Test {};
-
 // Connect without DTLS, and transfer RTP data.
 TEST_F(DtlsTransportTest, TestTransferRtp) {
   ASSERT_TRUE(Connect());
@@ -443,30 +440,14 @@ TEST_F(DtlsTransportTest, TestTransferDtlsCombineRecords) {
   TestTransfer(500, 100, /*srtp=*/false);
 }
 
-class DtlsTransportVersionTest
-    : public DtlsTransportTestBase,
-      public ::testing::TestWithParam<
-          ::testing::tuple<rtc::SSLProtocolVersion, rtc::SSLProtocolVersion>> {
-};
-
 // Test that an acceptable cipher suite is negotiated when different versions
 // of DTLS are supported. Note that it's IsAcceptableCipher that does the actual
 // work.
-TEST_P(DtlsTransportVersionTest, TestCipherSuiteNegotiation) {
+TEST_F(DtlsTransportTest, TestCipherSuiteNegotiation) {
   PrepareDtls(rtc::KT_DEFAULT);
-  SetMaxProtocolVersions(::testing::get<0>(GetParam()),
-                         ::testing::get<1>(GetParam()));
+  SetMaxProtocolVersions(rtc::SSL_PROTOCOL_DTLS_12, rtc::SSL_PROTOCOL_DTLS_12);
   ASSERT_TRUE(Connect());
 }
-
-// Will test every combination of 1.0/1.2 on the client and server.
-INSTANTIATE_TEST_SUITE_P(
-    TestCipherSuiteNegotiation,
-    DtlsTransportVersionTest,
-    ::testing::Combine(::testing::Values(rtc::SSL_PROTOCOL_DTLS_10,
-                                         rtc::SSL_PROTOCOL_DTLS_12),
-                       ::testing::Values(rtc::SSL_PROTOCOL_DTLS_10,
-                                         rtc::SSL_PROTOCOL_DTLS_12)));
 
 // Connect with DTLS, negotiating DTLS-SRTP, and transfer SRTP using bypass.
 TEST_F(DtlsTransportTest, TestTransferDtlsSrtp) {
@@ -620,8 +601,8 @@ enum DtlsTransportEvent {
 };
 
 class DtlsEventOrderingTest
-    : public DtlsTransportTestBase,
-      public ::testing::TestWithParam<
+    : public DtlsTransportTest,
+      public ::testing::WithParamInterface<
           ::testing::tuple<std::vector<DtlsTransportEvent>, bool>> {
  protected:
   // If `valid_fingerprint` is false, the caller will receive a fingerprint
