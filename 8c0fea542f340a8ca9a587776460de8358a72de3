@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f760acd3_af139d37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T15:09:40Z",
+      "side": 1,
+      "message": "I\u0027m mostly stamping and know little about how NACKs are handled today so do add someone else if you feel like you need a second opinion about how this should work",
+      "revId": "8c0fea542f340a8ca9a587776460de8358a72de3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0df04f63_6ab59ff3",
