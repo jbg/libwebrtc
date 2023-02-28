@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a27d8e5e_f3f1a6e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-02-28T19:17:28Z",
+      "side": 1,
+      "message": "LGTM; but trying to understand why 2x?",
+      "revId": "2e0677271dec35858ab343e6ae74fe6cd99741b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e62cc047_53ab7d56",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-02-28T19:17:28Z",
+      "side": 1,
+      "message": "Why the 2x? Shouldn\u0027t sleep_count+1 be sufficient?",
+      "range": {
+        "startLine": 232,
+        "startChar": 31,
+        "endLine": 232,
+        "endChar": 35
+      },
+      "revId": "2e0677271dec35858ab343e6ae74fe6cd99741b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
