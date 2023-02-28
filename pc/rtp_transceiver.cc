@@ -247,6 +247,7 @@ RTCError RtpTransceiver::CreateChannel(
       if (!media_send_channel) {
         return;
       }
+
       std::unique_ptr<cricket::VideoMediaChannel> media_receive_channel =
           absl::WrapUnique(media_engine()->video().CreateMediaChannel(
               cricket::MediaChannel::Role::kReceive, call_ptr, media_config,

@@ -981,7 +981,19 @@ VideoChannel::VideoChannel(
                   crypto_options,
                   ssrc_generator),
       send_channel_(media_send_channel_impl_->AsVideoChannel()),
-      receive_channel_(media_receive_channel_impl_->AsVideoChannel()) {}
+      receive_channel_(media_receive_channel_impl_->AsVideoChannel()) {
+  // TODO(bugs.webrtc.org/13931): Remove when values are set
+  // in a more sensible fashion
+  media_send_channel_impl_->AsVideoChannel()->SetSendCodecChangedCallback(
+      [this]() {
+        // Adjust receive streams based on send codec.
+        media_receive_channel()->SetReceiverFeedbackParameters(
+            media_send_channel()->SendCodecHasLntf(),
+            media_send_channel()->SendCodecHasNack(),
+            media_send_channel()->SendCodecRtcpMode(),
+            media_send_channel()->SendCodecRtxTime());
+      });
+}
 
 VideoChannel::~VideoChannel() {
   TRACE_EVENT0("webrtc", "VideoChannel::~VideoChannel");
@@ -1064,12 +1076,6 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
           mid().c_str());
       return false;
     }
-    // adjust receive streams based on send codec
-    media_receive_channel()->SetReceiverFeedbackParameters(
-        media_send_channel()->SendCodecHasLntf(),
-        media_send_channel()->SendCodecHasNack(),
-        media_send_channel()->SendCodecRtcpMode(),
-        media_send_channel()->SendCodecRtxTime());
     last_send_params_ = send_params;
   }
 
