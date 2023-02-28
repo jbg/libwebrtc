@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df04f63_6ab59ff3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-28T13:35:48Z",
+      "side": 1,
+      "message": "I think this is better than the previous version (as in: more accurate reproduction of previous behavior)",
+      "revId": "8c0fea542f340a8ca9a587776460de8358a72de3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
