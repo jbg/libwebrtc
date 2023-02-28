@@ -166,7 +166,7 @@ const webrtc::RTCOutboundRTPStreamStats* FindOutboundRtpByRid(
 namespace webrtc {
 
 constexpr TimeDelta kDefaultTimeout = TimeDelta::Seconds(5);
-constexpr TimeDelta kLongTimeoutForRampingUp = TimeDelta::Seconds(20);
+constexpr TimeDelta kLongTimeoutForRampingUp = TimeDelta::Seconds(30);
 
 class PeerConnectionSimulcastTests : public ::testing::Test {
  public:
@@ -975,9 +975,13 @@ class PeerConnectionSimulcastWithMediaFlowTests
     return true;
   }
 
+  // Tests that have fast ramp up time (e.g. simulcast tests) will want to have
+  // `log_during_ramp_up`, but tests that have slow ramp up time (e.g. SVC) will
+  // want to disable this to avoid log spam.
   bool HasOutboundRtpExpectedResolutions(
       rtc::scoped_refptr<PeerConnectionTestWrapper> pc_wrapper,
-      std::vector<RidAndResolution> resolutions) {
+      std::vector<RidAndResolution> resolutions,
+      bool log_during_ramp_up = true) {
     rtc::scoped_refptr<const RTCStatsReport> report = GetStats(pc_wrapper);
     std::vector<const RTCOutboundRTPStreamStats*> outbound_rtps =
         report->GetStatsOfType<RTCOutboundRTPStreamStats>();
@@ -995,12 +999,14 @@ class PeerConnectionSimulcastWithMediaFlowTests
       EXPECT_THAT(*outbound_rtp->frame_height, Le(resolution.height));
       if (*outbound_rtp->frame_width != resolution.width ||
           *outbound_rtp->frame_height != resolution.height) {
-        // Useful logging for debugging.
-        RTC_LOG(LS_ERROR) << "rid=" << resolution.rid << " is "
-                          << *outbound_rtp->frame_width << "x"
-                          << *outbound_rtp->frame_height << " (want "
-                          << resolution.width << "x" << resolution.height
-                          << ")";
+        if (log_during_ramp_up) {
+          // Useful logging for debugging.
+          RTC_LOG(LS_ERROR)
+              << "rid=" << resolution.rid << " is "
+              << *outbound_rtp->frame_width << "x"
+              << *outbound_rtp->frame_height << " (want " << resolution.width
+              << "x" << resolution.height << ")";
+        }
         return false;
       }
     }
@@ -1083,8 +1089,10 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   remote_pc_wrapper->WaitForConnection();
 
   // Wait until media is flowing on all three layers.
+  // Ramp up time is needed before all three layers are sending.
   EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 3u),
                    kLongTimeoutForRampingUp.ms());
+  // No additional ramp up time is expected for the resolutions to match.
   EXPECT_TRUE_WAIT(HasOutboundRtpExpectedResolutions(
                        local_pc_wrapper,
                        {{"f", 320, 180}, {"h", 640, 360}, {"q", 1280, 720}}),
@@ -1130,15 +1138,14 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   remote_pc_wrapper->WaitForConnection();
 
   // Wait until media is flowing. We only expect a single RTP stream.
+  // We expect to see bytes flowing almost immediately on the lowest layer.
   EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 1u),
-                   kLongTimeoutForRampingUp.ms());
-  // It takes a long time for SVC to ramp up. To avoid risk of flakes on slow
-  // machines this is commented out, but we do expect this to pass.
-  // TODO(https://crbug.com/webrtc/14884): See if we can enable this EXPECT line
-  // in a standalone CL in case it gets reverted.
-  // EXPECT_TRUE_WAIT(HasOutboundRtpExpectedResolutions(local_pc_wrapper,
-  //                                                    {{"f", 1280, 720}}),
-  //                  kLongTimeoutForRampingUp.ms());
+                   kDefaultTimeout.ms());
+  // Further ramp-up time is significant until maximum resolution is achieved.
+  EXPECT_TRUE_WAIT(
+      HasOutboundRtpExpectedResolutions(local_pc_wrapper, {{"f", 1280, 720}},
+                                        /*log_during_ramp_up=*/false),
+      kLongTimeoutForRampingUp.ms());
   // Verify codec and scalability mode.
   rtc::scoped_refptr<const RTCStatsReport> report = GetStats(local_pc_wrapper);
   std::vector<const RTCOutboundRTPStreamStats*> outbound_rtps =
