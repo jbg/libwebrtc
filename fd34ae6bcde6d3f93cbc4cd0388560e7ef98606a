@@ -34,6 +34,24 @@
       "parentUuid": "390ea378_48659958",
       "revId": "fd34ae6bcde6d3f93cbc4cd0388560e7ef98606a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbb0d67c_5e8559b7",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1211,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T12:24:40Z",
+      "side": 1,
+      "message": "Yeah but it can take several seconds before bytes are sent, we don\u0027t want to have a feature detection code that is doing \"wait X seconds to see if bytes are flowing\" to decide whether or not we have SVC or simulcast",
+      "parentUuid": "e4f4116c_b11f845c",
+      "revId": "fd34ae6bcde6d3f93cbc4cd0388560e7ef98606a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
