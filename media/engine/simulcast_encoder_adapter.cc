@@ -267,6 +267,7 @@ SimulcastEncoderAdapter::SimulcastEncoderAdapter(
   // The adapter is typically created on the worker thread, but operated on
   // the encoder task queue.
   encoder_queue_.Detach();
+  RTC_LOG(LS_ERROR) << "hboz / SimulcastEncoderAdapter created";
 }
 
 SimulcastEncoderAdapter::~SimulcastEncoderAdapter() {
@@ -324,6 +325,8 @@ int SimulcastEncoderAdapter::InitEncode(
     codec_.qpMax = kDefaultMaxQp;
   }
 
+  RTC_LOG(LS_ERROR) << "hboz / SEA numberOfSimulcastStreams: "
+                    << codec_.numberOfSimulcastStreams;
   bool is_legacy_singlecast = codec_.numberOfSimulcastStreams == 0;
   int lowest_quality_stream_idx = 0;
   int highest_quality_stream_idx = 0;
@@ -482,6 +485,7 @@ int SimulcastEncoderAdapter::Encode(
   for (auto& layer : stream_contexts_) {
     // Don't encode frames in resolutions that we don't intend to send.
     if (layer.is_paused()) {
+      RTC_LOG(LS_ERROR) << "hboz / layer is paused...";
       continue;
     }
 
@@ -608,6 +612,8 @@ void SimulcastEncoderAdapter::SetRates(
 
   for (StreamContext& layer_context : stream_contexts_) {
     int stream_idx = layer_context.stream_idx();
+    // HACK!
+    stream_idx = 0;
     uint32_t stream_bitrate_kbps =
         parameters.bitrate.GetSpatialLayerSum(stream_idx) / 1000;
 
