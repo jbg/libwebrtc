@@ -16,6 +16,24 @@
       "message": "How does this affect our ability to feature detect? We could use getStats() for now, but the fact the final number of \"outbound-rtp\" stats objects (in this case 1 instead of 3) is reflected immediately is a bug. According to spec, these RTP objects should only be created when the first packet is sent, which could mean \"after ramp up time\"...",
       "revId": "fd34ae6bcde6d3f93cbc4cd0388560e7ef98606a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f4116c_b11f845c",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1211,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-02-28T12:17:35Z",
+      "side": 1,
+      "message": "First packet is sent way before the ramp up time concludes. Ramp up is when BWE grows and we increase resolution. But the first packet of the first frame is sent way way before. Also, the check at L1199 explicitly checks that some packets are sent.",
+      "parentUuid": "390ea378_48659958",
+      "revId": "fd34ae6bcde6d3f93cbc4cd0388560e7ef98606a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
