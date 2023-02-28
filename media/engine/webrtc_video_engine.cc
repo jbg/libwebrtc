@@ -994,6 +994,14 @@ bool WebRtcVideoChannel::ApplyChangedParams(
                                          : webrtc::RtcpMode::kCompound,
           send_codec_->rtx_time);
     }
+  } else {
+    if (send_codec_) {
+      RTC_LOG(LS_ERROR) << "DEBUG: send codec is "
+                        << send_codec_->codec.ToString();
+    }
+    if (changed_params.send_codec || changed_params.rtcp_mode) {
+      send_codec_changed_callback_();
+    }
   }
   return true;
 }

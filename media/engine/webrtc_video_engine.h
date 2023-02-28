@@ -16,6 +16,7 @@
 #include <memory>
 #include <set>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "absl/types/optional.h"
@@ -183,6 +184,11 @@ class WebRtcVideoChannel : public VideoMediaChannel,
 
   absl::optional<int> GetBaseMinimumPlayoutDelayMs(
       uint32_t ssrc) const override;
+
+  void SetSendCodecChangedCallback(
+      absl::AnyInvocable<void()> callback) override {
+    send_codec_changed_callback_ = std::move(callback);
+  }
 
   // Implemented for VideoMediaChannelTest.
   bool sending() const {
@@ -693,6 +699,10 @@ class WebRtcVideoChannel : public VideoMediaChannel,
   // of multiple negotiated codecs allows generic encoder fallback on failures.
   // Presence of EncoderSelector allows switching to specific encoders.
   bool allow_codec_switching_ = false;
+
+  // Callback invoked whenever the send codec changes.
+  // TODO(bugs.webrtc.org/13931): Remove again when coupling isn't needed.
+  absl::AnyInvocable<void()> send_codec_changed_callback_;
 };
 
 }  // namespace cricket
