@@ -1193,22 +1193,25 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   local_pc_wrapper->WaitForConnection();
   remote_pc_wrapper->WaitForConnection();
 
-  // We want to EXPECT to get 3 "outbound-rtps", but because VP9 simulcast is
-  // not supported yet (webrtc:14884), we expect a single RTP stream with SVC.
-  // Due to bugs, the fallback to SVC is not reported in either getStats() or
-  // getParameters(). This test expects what we see, not what we want to see.
-
-  // Legacy SVC fallback only has a single RTP stream.
-  EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 1u),
+  // Yay, we do get 3 layers. This is a good sign for simulcast.
+  EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 3u),
                    kLongTimeoutForRampingUp.ms());
+  // TODO(https://crbug.com/webrtc/14884): Whyyyyyyyy not working?
+  // EXPECT_TRUE_WAIT(HasOutboundRtpExpectedResolutions(
+  //                      local_pc_wrapper,
+  //                      {{"f", 320, 180}, {"h", 640, 360}, {"q", 1280, 720}}),
+  //                  kDefaultTimeout.ms());
   // Legacy SVC fallback uses "L3T3_KEY" but the `scalability_mode` returned by
   // the API seems to reflect what we asked for, not what we got.
   rtc::scoped_refptr<const RTCStatsReport> report = GetStats(local_pc_wrapper);
   std::vector<const RTCOutboundRTPStreamStats*> outbound_rtps =
       report->GetStatsOfType<RTCOutboundRTPStreamStats>();
-  // The fact that we only have a single RTP is a sign SVC is used.
-  ASSERT_THAT(outbound_rtps, SizeIs(1u));
+  ASSERT_THAT(outbound_rtps, SizeIs(3u));
   EXPECT_THAT(GetCurrentCodecMimeType(report, *outbound_rtps[0]),
+              StrCaseEq("video/VP9"));
+  EXPECT_THAT(GetCurrentCodecMimeType(report, *outbound_rtps[1]),
+              StrCaseEq("video/VP9"));
+  EXPECT_THAT(GetCurrentCodecMimeType(report, *outbound_rtps[2]),
               StrCaseEq("video/VP9"));
   // In SVC we should see "L3T3_KEY" but we see the "L1T3" that we asked for.
   EXPECT_EQ(*outbound_rtps[0]->scalability_mode, "L1T3");

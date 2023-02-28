@@ -99,7 +99,10 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
 
   absl::optional<ScalabilityMode> scalability_mode =
       streams[0].scalability_mode;
+  RTC_LOG(LS_ERROR) << "hboz / num streams: " << streams.size();
   for (size_t i = 0; i < streams.size(); ++i) {
+    RTC_LOG(LS_ERROR) << "[" << i << "] " << streams[i].width << "x"
+                      << streams[i].height;
     SimulcastStream* sim_stream = &video_codec.simulcastStream[i];
     RTC_DCHECK_GT(streams[i].width, 0);
     RTC_DCHECK_GT(streams[i].height, 0);
@@ -235,6 +238,7 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
         spatial_layers = config.spatial_layers;
       } else if (scalability_mode.has_value()) {
         // Layering is set via scalability mode.
+        RTC_LOG(LS_ERROR) << "hboz / Layering is set via scalability mode!";
         spatial_layers = GetVp9SvcConfig(video_codec);
         if (spatial_layers.empty())
           break;
@@ -248,6 +252,8 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
           }
         }
 
+        RTC_LOG(LS_ERROR) << "hboz / numberOfSpatialLayers: "
+                          << video_codec.VP9()->numberOfSpatialLayers;
         spatial_layers = GetSvcConfig(
             video_codec.width, video_codec.height, video_codec.maxFramerate,
             first_active_layer, video_codec.VP9()->numberOfSpatialLayers,
