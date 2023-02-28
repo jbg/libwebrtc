@@ -16,6 +16,57 @@
       "message": "You know this test framework best...",
       "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "450cb952_0df7f10c",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3846,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T08:16:11Z",
+      "side": 1,
+      "message": "Why/what part is flaking?",
+      "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d4bb765_06265e25",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3867,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T08:16:11Z",
+      "side": 1,
+      "message": "Gasp SDP mods! Is this a real world use case not supported by SetCodecPreferences?",
+      "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e616bc_5a3cfefd",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3919,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T08:16:11Z",
+      "side": 1,
+      "message": "(gasp etc)",
+      "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
