@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a8a090a_2c7ffd7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-28T08:52:31Z",
+      "side": 1,
+      "message": "Filed https://github.com/w3c/webrtc-extensions/issues/143 to query whether a JS-level control mechanism is needed.",
+      "revId": "5b4c651d67f5249ae68696ed87524bc76526c1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
