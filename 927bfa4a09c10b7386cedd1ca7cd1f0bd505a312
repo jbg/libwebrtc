@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a3fdb67_ee1a450b",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3846,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T08:49:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e169ba8b_9383c8c2",
+      "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d4bb765_06265e25",
@@ -90,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4294d80_3cf72705",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3867,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T08:49:30Z",
+      "side": 1,
+      "message": "Could we live with sensible defaults and wouldn\u0027t we want NACK by default for audio as well? (Otherwise... webrtc-extension?)",
+      "parentUuid": "8e9a98ef_45ab2873",
+      "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50e616bc_5a3cfefd",
         "filename": "pc/peer_connection_integrationtest.cc",
         "patchSetId": 6
@@ -119,6 +155,24 @@
       "side": 1,
       "message": "Switched to verifying it, so now the loop just removes codecs.",
       "parentUuid": "50e616bc_5a3cfefd",
+      "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97366cbb_557b3572",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3919,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T08:49:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ad42c62e_dd7595b6",
       "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
