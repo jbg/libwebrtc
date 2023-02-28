@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e169ba8b_9383c8c2",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3846,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-28T08:40:22Z",
+      "side": 1,
+      "message": "After NACK is sent, it is sometimes not counted as received. The current theory is that the NACK retransmission mechanism is driven by consumption of audio, which is not happening (no audio sink). But haven\u0027t verified the theory yet, which is why it is disabled.",
+      "parentUuid": "450cb952_0df7f10c",
+      "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d4bb765_06265e25",
@@ -52,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e9a98ef_45ab2873",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3867,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-28T08:40:22Z",
+      "side": 1,
+      "message": "Yes, we have no SetCodecPreferences for feedback mechanisms :-(\nI was able to change the video one, because it turns out that Nack is on by default for VP8. But it\u0027s not clear that there is a real use case for such an extension; defaults may be good enough.",
+      "parentUuid": "4d4bb765_06265e25",
+      "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50e616bc_5a3cfefd",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-02-28T08:16:11Z",
       "side": 1,
       "message": "(gasp etc)",
+      "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad42c62e_dd7595b6",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3919,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-28T08:40:22Z",
+      "side": 1,
+      "message": "Switched to verifying it, so now the loop just removes codecs.",
+      "parentUuid": "50e616bc_5a3cfefd",
       "revId": "927bfa4a09c10b7386cedd1ca7cd1f0bd505a312",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
