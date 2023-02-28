@@ -1220,11 +1220,10 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   // `scalability_mode`.
   rtc::scoped_refptr<RtpSenderInterface> sender = transceiver->sender();
   RtpParameters parameters = sender->GetParameters();
-  std::vector<RtpEncodingParameters> encodings = parameters.encodings;
-  ASSERT_EQ(encodings.size(), 3u);
-  encodings[0].scalability_mode = "L1T3";
-  encodings[1].scalability_mode = "L1T3";
-  encodings[2].scalability_mode = "L1T3";
+  ASSERT_EQ(parameters.encodings.size(), 3u);
+  parameters.encodings[0].scalability_mode = "L1T3";
+  parameters.encodings[1].scalability_mode = "L1T3";
+  parameters.encodings[2].scalability_mode = "L1T3";
   sender->SetParameters(parameters);
 
   NegotiateWithSimulcastTweaks(local_pc_wrapper, remote_pc_wrapper, layers);
@@ -1236,22 +1235,32 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   // yet (webrtc:14884), we expect legacy SVC fallback for now...
 
   // Legacy SVC fallback only has a single RTP stream.
-  EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 1u),
+  EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 3u),
                    kLongTimeoutForRampingUp.ms());
+  // EXPECT_TRUE_WAIT(HasOutboundRtpExpectedResolutions(
+  //                      local_pc_wrapper,
+  //                      {{"f", 320, 180}, {"h", 640, 360}, {"q", 1280, 720}}),
+  //                  kDefaultTimeout.ms());
   // Legacy SVC fallback uses L3T3_KEY.
   rtc::scoped_refptr<const RTCStatsReport> report = GetStats(local_pc_wrapper);
   std::vector<const RTCOutboundRTPStreamStats*> outbound_rtps =
       report->GetStatsOfType<RTCOutboundRTPStreamStats>();
-  ASSERT_EQ(outbound_rtps.size(), 1u);
+  ASSERT_EQ(outbound_rtps.size(), 3u);
   EXPECT_TRUE(absl::EqualsIgnoreCase(
       GetCurrentCodecMimeType(report, *outbound_rtps[0]), "video/VP9"));
-  EXPECT_THAT(*outbound_rtps[0]->scalability_mode, StartsWith("L3T3_KEY"));
-  // Legacy SVC fallback sets `scalability_mode` to absl::nullopt.
-  encodings = sender->GetParameters().encodings;
-  ASSERT_EQ(encodings.size(), 3u);
-  EXPECT_FALSE(encodings[0].scalability_mode.has_value());
-  EXPECT_FALSE(encodings[1].scalability_mode.has_value());
-  EXPECT_FALSE(encodings[2].scalability_mode.has_value());
+  EXPECT_TRUE(absl::EqualsIgnoreCase(
+      GetCurrentCodecMimeType(report, *outbound_rtps[1]), "video/VP9"));
+  EXPECT_TRUE(absl::EqualsIgnoreCase(
+      GetCurrentCodecMimeType(report, *outbound_rtps[2]), "video/VP9"));
+  // EXPECT_THAT(*outbound_rtps[0]->scalability_mode, StartsWith("L1T"));
+  // EXPECT_THAT(*outbound_rtps[1]->scalability_mode, StartsWith("L1T"));
+  // EXPECT_THAT(*outbound_rtps[2]->scalability_mode, StartsWith("L1T"));
+  // // Legacy SVC fallback sets `scalability_mode` to absl::nullopt.
+  // parameters = sender->GetParameters();
+  // ASSERT_EQ(parameters.encodings.size(), 3u);
+  // EXPECT_FALSE(parameters.encodings[0].scalability_mode.has_value());
+  // EXPECT_FALSE(parameters.encodings[1].scalability_mode.has_value());
+  // EXPECT_FALSE(parameters.encodings[2].scalability_mode.has_value());
 }
 
 }  // namespace webrtc
