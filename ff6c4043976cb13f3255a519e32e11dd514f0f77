@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74590443_cbde53e0",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-02-28T09:25:20Z",
+      "side": 1,
+      "message": "I think we should assert(https://gn.googlesource.com/gn/+/master/docs/reference.md#func_assert) that this is \"\" or \"dcheck\" or \"warn\" to avoid typos or things like that.",
+      "revId": "ff6c4043976cb13f3255a519e32e11dd514f0f77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aeef381b_9ee0a91a",
         "filename": "webrtc.gni",
         "patchSetId": 1
@@ -14,6 +31,24 @@
       "writtenOn": "2023-02-27T16:23:29Z",
       "side": 1,
       "message": "Do you think it\u0027s a good idea to change this to a string? Since it shouldn\u0027t be used yet it\u0027s kind of safe, but we wouldn\u0027t be able to change this back to a bool if we want to reduce the options at a later point.\n\nThe alternative would be to add a new flag, e.g. rtc_strict_field_trials_severity or something similar. WDYT?",
+      "revId": "ff6c4043976cb13f3255a519e32e11dd514f0f77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb28f03_e1439784",
+        "filename": "webrtc.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-02-28T09:25:20Z",
+      "side": 1,
+      "message": "I think this is OK.\n\nThe alternative would be to use 2 GN arguments:\n\nrtc_strict_field_trials_dcheck + rtc_strict_field_trials_warn, ensure only one of them is true, etc..\n\nThe string solution is better (if we want to increase the options it will be trivial, if we want to for example remove \"dcheck\" we will deprecate it and keep \"warn\" or \"\" as only values).",
+      "parentUuid": "aeef381b_9ee0a91a",
       "revId": "ff6c4043976cb13f3255a519e32e11dd514f0f77",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
