@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffa3e118_fc6e5f12",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T13:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19e710c0_5125814f",
+      "range": {
+        "startLine": 152,
+        "startChar": 4,
+        "endLine": 152,
+        "endChar": 23
+      },
+      "revId": "ff9892aef02bae56dc3daf91d25d19a4f93f5fff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "910c5c61_cd9f4682",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-02-28T12:51:02Z",
       "side": 1,
       "message": "EXPECT_THAT(GetCurrentCodecMimeType(..), ::testing::StrCaseEq(\"video/vp9))",
+      "range": {
+        "startLine": 1208,
+        "startChar": 2,
+        "endLine": 1208,
+        "endChar": 13
+      },
+      "revId": "ff9892aef02bae56dc3daf91d25d19a4f93f5fff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d10fc4f_96a80df2",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1208,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T13:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "910c5c61_cd9f4682",
       "range": {
         "startLine": 1208,
         "startChar": 2,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a503833_8ac411eb",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T13:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79ebd491_35ecd7b7",
+      "range": {
+        "startLine": 1213,
+        "startChar": 2,
+        "endLine": 1213,
+        "endChar": 11
+      },
+      "revId": "ff9892aef02bae56dc3daf91d25d19a4f93f5fff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5441dca_9d5e3b85",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-02-28T12:51:02Z",
       "side": 1,
       "message": "EXPECT_THAT(parameters.encodrings[0].scalability_mode, ::testing::Optional(\"L1T3\"));",
+      "range": {
+        "startLine": 1214,
+        "startChar": 2,
+        "endLine": 1214,
+        "endChar": 13
+      },
+      "revId": "ff9892aef02bae56dc3daf91d25d19a4f93f5fff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a6dcef1_82a525af",
+        "filename": "pc/peer_connection_simulcast_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-02-28T13:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5441dca_9d5e3b85",
       "range": {
         "startLine": 1214,
         "startChar": 2,
