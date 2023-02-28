@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "495a11b7_6e479493",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-02-28T09:37:02Z",
+      "side": 1,
+      "message": "Just add an \"else if\" for \"\", and then let the else have an assert?",
+      "parentUuid": "74590443_cbde53e0",
+      "revId": "ff6c4043976cb13f3255a519e32e11dd514f0f77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aeef381b_9ee0a91a",
         "filename": "webrtc.gni",
         "patchSetId": 1
