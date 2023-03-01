@@ -34,6 +34,7 @@
 #include "modules/video_coding/svc/scalable_video_controller.h"
 #include "modules/video_coding/svc/scalable_video_controller_no_layering.h"
 #include "modules/video_coding/svc/svc_rate_allocator.h"
+#include "modules/video_coding/utility/simulcast_utility.h"
 #include "modules/video_coding/utility/vp9_uncompressed_header_parser.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/experiments/field_trial_list.h"
@@ -267,6 +268,7 @@ LibvpxVp9Encoder::LibvpxVp9Encoder(const cricket::VideoCodec& codec,
       config_changed_(true) {
   codec_ = {};
   memset(&svc_params_, 0, sizeof(vpx_svc_extra_cfg_t));
+  RTC_LOG(LS_ERROR) << "hboz LibvpxVp9Encoder created...";
 }
 
 LibvpxVp9Encoder::~LibvpxVp9Encoder() {
@@ -530,6 +532,7 @@ void LibvpxVp9Encoder::SetRates(const RateControlParameters& parameters) {
 // TODO(eladalon): s/inst/codec_settings/g.
 int LibvpxVp9Encoder::InitEncode(const VideoCodec* inst,
                                  const Settings& settings) {
+  RTC_LOG(LS_ERROR) << "hboz LibvpxVp9Encoder[" << this << "].InitEncode";
   if (inst == nullptr) {
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
   }
@@ -552,6 +555,11 @@ int LibvpxVp9Encoder::InitEncode(const VideoCodec* inst,
   // libvpx probably does not support more than 3 spatial layers.
   if (inst->VP9().numberOfSpatialLayers > 3) {
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
+  }
+
+  int number_of_streams = SimulcastUtility::NumberOfSimulcastStreams(*inst);
+  if (number_of_streams > 1) {
+    return WEBRTC_VIDEO_CODEC_ERR_SIMULCAST_PARAMETERS_NOT_SUPPORTED;
   }
 
   absl::optional<vpx_img_fmt_t> previous_img_fmt =
@@ -842,6 +850,7 @@ int LibvpxVp9Encoder::InitAndSetControlSettings(const VideoCodec* inst) {
   RTC_DCHECK_EQ(performance_flags_by_spatial_index_.size(),
                 static_cast<size_t>(num_spatial_layers_));
 
+  // TODO(https://crbug.com/webrtc/14884): How is this affected by simulcast?
   SvcRateAllocator init_allocator(codec_);
   current_bitrate_allocation_ =
       init_allocator.Allocate(VideoBitrateAllocationParameters(
