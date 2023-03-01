@@ -39,6 +39,30 @@
       },
       "revId": "2e0677271dec35858ab343e6ae74fe6cd99741b6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba2b81d1_f6b4a391",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-03-01T09:27:45Z",
+      "side": 1,
+      "message": "You are correct; that should do it. See https://paste.googleplex.com/5626155309727744. I started out by using only `sleep_count` and that is not sufficient. Did `2*sleep_count` and that was OK. Recall that I found one case where it was not and added `+ 1` and then forgot that I could probably skip the times two or decided to keep it to be extra safe. As is, we *might* still get some initial `kFrameDropped`. Let\u0027s monitor the stats and see. If so, adding a factor or 2 here should be the first thing to try as a fix.",
+      "parentUuid": "e62cc047_53ab7d56",
+      "range": {
+        "startLine": 232,
+        "startChar": 31,
+        "endLine": 232,
+        "endChar": 35
+      },
+      "revId": "2e0677271dec35858ab343e6ae74fe6cd99741b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
