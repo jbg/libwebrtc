@@ -10,9 +10,9 @@
 #include "test/scenario/network_node.h"
 
 #include <algorithm>
+#include <memory>
 #include <vector>
 
-#include <memory>
 #include "rtc_base/net_helper.h"
 #include "rtc_base/numerics/safe_minmax.h"
 
