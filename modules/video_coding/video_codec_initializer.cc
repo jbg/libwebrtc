@@ -50,6 +50,29 @@ bool VideoCodecInitializer::SetupCodec(const VideoEncoderConfig& config,
   return true;
 }
 
+void PrintVideoCodec(const VideoCodec& codec) {
+  RTC_LOG(LS_ERROR) << "FOO PrintVideoCodec\n"
+                    << "{numberOfSimulcastStreams: "
+                    << codec.numberOfSimulcastStreams << ",\n"
+                    << " active: " << codec.active << ",\n";
+  for (size_t i = 0; i < codec.numberOfSimulcastStreams; ++i) {
+    const auto& sim = codec.simulcastStream[i];
+    RTC_LOG(LS_ERROR) << " simulcastStream[" << i << "]: {\n"
+                      << "   width: " << sim.width << ",\n"
+                      << "   height: " << sim.height << ",\n"
+                      << "   active: " << sim.active << ",\n"
+                      << "   maxFramerate: " << sim.maxFramerate << ",\n"
+                      << "   numberOfTemporalLayers: "
+                      << sim.numberOfTemporalLayers << ",\n"
+                      << "   maxBitrate: " << sim.maxBitrate << ",\n"
+                      << "   targetBitrate: " << sim.targetBitrate << ",\n"
+                      << "   minBitrate: " << sim.minBitrate << ",\n"
+                      << "   qpMax: " << sim.qpMax << ",\n"
+                      << " },\n";
+  }
+  RTC_LOG(LS_ERROR) << "}";
+}
+
 // TODO(sprang): Split this up and separate the codec specific parts.
 VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
     const VideoEncoderConfig& config,
@@ -57,6 +80,9 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
   static const int kEncoderMinBitrateKbps = 30;
   RTC_DCHECK(!streams.empty());
   RTC_DCHECK_GE(config.min_transmit_bitrate_bps, 0);
+
+  RTC_LOG(LS_ERROR) << "FOO VideoEncoderConfig.ToString:\n"
+                    << config.ToString();
 
   VideoCodec video_codec;
   video_codec.codecType = config.codec_type;
@@ -99,7 +125,10 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
 
   absl::optional<ScalabilityMode> scalability_mode =
       streams[0].scalability_mode;
+  RTC_LOG(LS_ERROR) << "hboz / num streams: " << streams.size();
   for (size_t i = 0; i < streams.size(); ++i) {
+    RTC_LOG(LS_ERROR) << "[" << i << "] " << streams[i].width << "x"
+                      << streams[i].height;
     SimulcastStream* sim_stream = &video_codec.simulcastStream[i];
     RTC_DCHECK_GT(streams[i].width, 0);
     RTC_DCHECK_GT(streams[i].height, 0);
@@ -235,6 +264,7 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
         spatial_layers = config.spatial_layers;
       } else if (scalability_mode.has_value()) {
         // Layering is set via scalability mode.
+        RTC_LOG(LS_ERROR) << "hboz / Layering is set via scalability mode!";
         spatial_layers = GetVp9SvcConfig(video_codec);
         if (spatial_layers.empty())
           break;
@@ -248,6 +278,8 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
           }
         }
 
+        RTC_LOG(LS_ERROR) << "hboz / numberOfSpatialLayers: "
+                          << video_codec.VP9()->numberOfSpatialLayers;
         spatial_layers = GetSvcConfig(
             video_codec.width, video_codec.height, video_codec.maxFramerate,
             first_active_layer, video_codec.VP9()->numberOfSpatialLayers,
@@ -284,8 +316,8 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
       // This difference must be propagated to the stream configuration.
       video_codec.width = spatial_layers.back().width;
       video_codec.height = spatial_layers.back().height;
-      video_codec.simulcastStream[0].width = spatial_layers.back().width;
-      video_codec.simulcastStream[0].height = spatial_layers.back().height;
+      // video_codec.simulcastStream[0].width = spatial_layers.back().width;
+      // video_codec.simulcastStream[0].height = spatial_layers.back().height;
 
       // Update layering settings.
       video_codec.VP9()->numberOfSpatialLayers =
@@ -346,6 +378,7 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
     }
   }
 
+  PrintVideoCodec(video_codec);
   return video_codec;
 }
 
