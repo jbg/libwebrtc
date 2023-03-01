@@ -93,6 +93,30 @@
       },
       "revId": "cb1bdb9826ea036741533206897b331be78490ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3960d1f_19b32694",
+        "filename": "test/time_controller/external_time_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-01T09:23:20Z",
+      "side": 1,
+      "message": "You\u0027re right,\n\nI thought it would be allowed because this class is derived from TaskQueueBase, but rules are more complicated - it can access private and protected functions of another TaskQueueWrapper object, but not of another generic TaskQueueBase object.",
+      "parentUuid": "c2a2e86a_b9fcf0fb",
+      "range": {
+        "startLine": 50,
+        "startChar": 6,
+        "endLine": 50,
+        "endChar": 12
+      },
+      "revId": "cb1bdb9826ea036741533206897b331be78490ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
