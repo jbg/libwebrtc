@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92be307e_57e593d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-01T12:07:29Z",
+      "side": 1,
+      "message": "Saving 11 KiB on functionality that was already commented out. Good cleanup!",
+      "revId": "c1ab9921735b9ea61e72b577c8d159628e93bdc7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
