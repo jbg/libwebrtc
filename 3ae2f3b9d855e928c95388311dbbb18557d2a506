@@ -16,6 +16,23 @@
       "message": "Do you know any reason to keep support for legacy tls protocols?",
       "revId": "3ae2f3b9d855e928c95388311dbbb18557d2a506",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0e1cee8_73ce6b7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-01T10:38:30Z",
+      "side": 1,
+      "message": "found chromium still uses it.",
+      "revId": "3ae2f3b9d855e928c95388311dbbb18557d2a506",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
