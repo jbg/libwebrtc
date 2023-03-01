@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "379e5c52_0d1d32eb",
+        "filename": "rtc_base/task_utils/repeating_task_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-03-01T09:14:18Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f62147a8_c977f3d5",
+      "range": {
+        "startLine": 363,
+        "startChar": 7,
+        "endLine": 363,
+        "endChar": 16
+      },
+      "revId": "cb1bdb9826ea036741533206897b331be78490ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d49b1e34_343398de",
         "filename": "test/time_controller/external_time_controller.cc",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-01T08:58:09Z",
       "side": 1,
       "message": "can you forward to the base_ as is?\ni.e. \nbase_-\u003ePostDelayedTaskImpl(TaskWrapper(...), delay, traits, location);",
+      "range": {
+        "startLine": 50,
+        "startChar": 6,
+        "endLine": 50,
+        "endChar": 12
+      },
+      "revId": "cb1bdb9826ea036741533206897b331be78490ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2a2e86a_b9fcf0fb",
+        "filename": "test/time_controller/external_time_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-03-01T09:14:18Z",
+      "side": 1,
+      "message": "Not possible as base_ is a unique_ptr\u003cTaskQueueBase\u003e and the method is protected.",
+      "parentUuid": "d49b1e34_343398de",
       "range": {
         "startLine": 50,
         "startChar": 6,
