@@ -53,23 +53,24 @@ EncoderBitrateAdjuster::EncoderBitrateAdjuster(const VideoCodec& codec_settings)
   // in the case of VP9.
   // TODO(https://crbug.com/webrtc/14891): This also needs to be updated in
   // order to support a mix of simulcast and SVC.
-  if (codec_settings.codecType == VideoCodecType::kVideoCodecVP9) {
-    for (size_t si = 0; si < codec_settings.VP9().numberOfSpatialLayers; ++si) {
-      if (codec_settings.spatialLayers[si].active) {
-        min_bitrates_bps_[si] =
-            std::max(codec_settings.minBitrate * 1000,
-                     codec_settings.spatialLayers[si].minBitrate * 1000);
-      }
-    }
-  } else {
-    for (size_t si = 0; si < codec_settings.numberOfSimulcastStreams; ++si) {
-      if (codec_settings.simulcastStream[si].active) {
-        min_bitrates_bps_[si] =
-            std::max(codec_settings.minBitrate * 1000,
-                     codec_settings.simulcastStream[si].minBitrate * 1000);
-      }
+  // if (codec_settings.codecType == VideoCodecType::kVideoCodecVP9) {
+  //   for (size_t si = 0; si < codec_settings.VP9().numberOfSpatialLayers;
+  //   ++si) {
+  //     if (codec_settings.spatialLayers[si].active) {
+  //       min_bitrates_bps_[si] =
+  //           std::max(codec_settings.minBitrate * 1000,
+  //                    codec_settings.spatialLayers[si].minBitrate * 1000);
+  //     }
+  //   }
+  // } else {
+  for (size_t si = 0; si < codec_settings.numberOfSimulcastStreams; ++si) {
+    if (codec_settings.simulcastStream[si].active) {
+      min_bitrates_bps_[si] =
+          std::max(codec_settings.minBitrate * 1000,
+                   codec_settings.simulcastStream[si].minBitrate * 1000);
     }
   }
+  // }
 }
 
 EncoderBitrateAdjuster::~EncoderBitrateAdjuster() = default;

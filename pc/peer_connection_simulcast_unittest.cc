@@ -1249,23 +1249,34 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   local_pc_wrapper->WaitForConnection();
   remote_pc_wrapper->WaitForConnection();
 
-  // We want to EXPECT to get 3 "outbound-rtps", but because VP9 simulcast is
-  // not supported yet (webrtc:14884), we expect a single RTP stream. We get
-  // "L1T3" so we do avoid SVC fallback, but the other two layers are dropped
-  // and some parts of the code still assume SVC which could lead to other bugs
-  // such as invalid bitrate configurations.
-  EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 1u),
+  // Wait until media is flowing on all three layers.
+  // Ramp up time is needed before all three layers are sending.
+  EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 3u),
                    kLongTimeoutForRampingUp.ms());
+  // No significant additional ramp up time should be needed so we use
+  // `kDefaultTimeout` and `log_during_ramp_up`.
+  EXPECT_TRUE_WAIT(HasOutboundRtpExpectedResolutions(
+                       local_pc_wrapper,
+                       {{"f", 320, 180}, {"h", 640, 360}, {"q", 1280, 720}},
+                       /*log_during_ramp_up=*/true),
+                   kDefaultTimeout.ms());
+  // Verify codec and scalability mode.
   rtc::scoped_refptr<const RTCStatsReport> report = GetStats(local_pc_wrapper);
   std::vector<const RTCOutboundRTPStreamStats*> outbound_rtps =
       report->GetStatsOfType<RTCOutboundRTPStreamStats>();
-  ASSERT_THAT(outbound_rtps, SizeIs(1u));
+  ASSERT_THAT(outbound_rtps, SizeIs(3u));
   EXPECT_THAT(GetCurrentCodecMimeType(report, *outbound_rtps[0]),
               StrCaseEq("video/VP9"));
-  // `scalability_mode` in stats does reflect LibvpxVp9Encoder settings!
-  EXPECT_EQ(*outbound_rtps[0]->scalability_mode, "L1T3");
-  // What GetParameters() is returning though is most likely just reflecting
-  // what was set, not what was configured.
+  EXPECT_THAT(GetCurrentCodecMimeType(report, *outbound_rtps[1]),
+              StrCaseEq("video/VP9"));
+  EXPECT_THAT(GetCurrentCodecMimeType(report, *outbound_rtps[2]),
+              StrCaseEq("video/VP9"));
+  EXPECT_THAT(*outbound_rtps[0]->scalability_mode, StartsWith("L1T"));
+  EXPECT_THAT(*outbound_rtps[1]->scalability_mode, StartsWith("L1T"));
+  EXPECT_THAT(*outbound_rtps[2]->scalability_mode, StartsWith("L1T"));
+  // GetParameters() reflects what was set.
+  // TODO(hbos): Is there any value in testing this if GetParameters() just
+  // reflect what was set, not what is used?
   parameters = sender->GetParameters();
   ASSERT_EQ(parameters.encodings.size(), 3u);
   EXPECT_THAT(parameters.encodings[0].scalability_mode,

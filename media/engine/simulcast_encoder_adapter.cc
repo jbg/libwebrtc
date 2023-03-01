@@ -482,6 +482,7 @@ int SimulcastEncoderAdapter::Encode(
   for (auto& layer : stream_contexts_) {
     // Don't encode frames in resolutions that we don't intend to send.
     if (layer.is_paused()) {
+      RTC_LOG(LS_WARNING) << "<DEBUG> A layer is paused";
       continue;
     }
 
