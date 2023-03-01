@@ -26,10 +26,10 @@ template <typename T>
 std::string VectorToString(const std::vector<T>& vector) {
   rtc::StringBuilder sb;
   sb << "[";
-  const char* separator = "";
+  const char* sparator = "";
   for (const T& element : vector) {
-    sb << separator << rtc::ToString(element);
-    separator = ",";
+    sb << sparator << rtc::ToString(element);
+    sparator = ",";
   }
   sb << "]";
   return sb.Release();
