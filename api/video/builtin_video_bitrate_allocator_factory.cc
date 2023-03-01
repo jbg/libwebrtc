@@ -33,7 +33,7 @@ class BuiltinVideoBitrateAllocatorFactory
     switch (codec.codecType) {
       case kVideoCodecAV1:
       case kVideoCodecVP9:
-        return std::make_unique<SvcRateAllocator>(codec);
+        // return std::make_unique<SvcRateAllocator>(codec);
       default:
         return std::make_unique<SimulcastRateAllocator>(codec);
     }

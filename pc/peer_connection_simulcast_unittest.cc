@@ -1249,20 +1249,24 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   local_pc_wrapper->WaitForConnection();
   remote_pc_wrapper->WaitForConnection();
 
-  // We want to EXPECT to get 3 "outbound-rtps", but because VP9 simulcast is
-  // not supported yet (webrtc:14884), we expect a single RTP stream. We get
-  // "L1T3" so we do avoid SVC fallback, but the other two layers are dropped
-  // and some parts of the code still assume SVC which could lead to other bugs
-  // such as invalid bitrate configurations.
-  EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 1u),
+  EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 3u),
                    kLongTimeoutForRampingUp.ms());
+  EXPECT_TRUE_WAIT(HasOutboundRtpExpectedResolutions(
+                       local_pc_wrapper,
+                       {{"f", 320, 180}, {"h", 640, 360}, {"q", 1280, 720}},
+                       /*log_during_ramp_up=*/true),
+                   kDefaultTimeout.ms());
   rtc::scoped_refptr<const RTCStatsReport> report = GetStats(local_pc_wrapper);
   std::vector<const RTCOutboundRTPStreamStats*> outbound_rtps =
       report->GetStatsOfType<RTCOutboundRTPStreamStats>();
-  ASSERT_THAT(outbound_rtps, SizeIs(1u));
+  ASSERT_THAT(outbound_rtps, SizeIs(3u));
   EXPECT_THAT(GetCurrentCodecMimeType(report, *outbound_rtps[0]),
               StrCaseEq("video/VP9"));
-  // `scalability_mode` in stats does reflect LibvpxVp9Encoder settings!
+  EXPECT_THAT(GetCurrentCodecMimeType(report, *outbound_rtps[1]),
+              StrCaseEq("video/VP9"));
+  EXPECT_THAT(GetCurrentCodecMimeType(report, *outbound_rtps[2]),
+              StrCaseEq("video/VP9"));
+  // In SVC we should see "L3T3_KEY" but we see the "L1T3" that we asked for.
   EXPECT_EQ(*outbound_rtps[0]->scalability_mode, "L1T3");
   // What GetParameters() is returning though is most likely just reflecting
   // what was set, not what was configured.
