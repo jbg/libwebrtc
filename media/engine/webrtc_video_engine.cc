@@ -2502,11 +2502,31 @@ WebRtcVideoChannel::WebRtcVideoSendStream::CreateVideoEncoderConfig(
   }
 
   // By default, the stream count for the codec configuration should match the
-  // number of negotiated ssrcs. But if the codec is disabled for simulcast
-  // or a screencast (and not in simulcast screenshare experiment), only
-  // configure a single stream.
+  // number of negotiated ssrcs / number of encodings.
+  //
+  // For legacy reasons, some codecs (VP9, AV1) will not be configured as
+  // simulcast when the API requests to negotiate simulcast and instead fall
+  // back to the assumption that SVC is desired. This is non-standard and will
+  // be deprecated in the future, but is the default path for now.
+  //
+  // If `scalability_mode` is specified, negotiating simulcast does result in
+  // simulcast. We consider it an opt-in to wanting standard behavior. SVC can
+  // be requested using `scalability_mode` too by creating a single encoding
+  // with L3T3.
+  bool scalability_mode_specified = false;
+  for (const webrtc::RtpEncodingParameters& encoding :
+       rtp_parameters_.encodings) {
+    if (encoding.scalability_mode.has_value()) {
+      scalability_mode_specified = true;
+      break;
+    }
+  }
   encoder_config.number_of_streams = parameters_.config.rtp.ssrcs.size();
-  if (IsCodecDisabledForSimulcast(codec.name, call_->trials())) {
+  // TODO(hbos): What about AV1 simulcast? If that is broken we still need to
+  // codec gate `scalability_mode_specified`...
+  if (!scalability_mode_specified &&
+      IsCodecDisabledForSimulcast(codec.name, call_->trials())) {
+    // RTC_CHECK_NOTREACHED();
     encoder_config.number_of_streams = 1;
   }
 
