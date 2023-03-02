@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a422508_62ed2379",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-02T15:02:57Z",
+      "side": 1,
+      "message": "I didn\u0027t include it here because we don\u0027t DCHECK pointers just before dereferencing them anyway, however, since `controller_` is of type WeakPtr, we implicitly do it here (this is in WeakPtr):\n```\n  T* operator-\u003e() const {\n    RTC_DCHECK(get() !\u003d nullptr);\n    return get();\n  }```",
+      "parentUuid": "274e9ace_d337f4e2",
+      "revId": "26e456d7b5d961ff902fc61e359bd3a3bce3c24c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "004b2524_c29c1234",
         "filename": "pc/test/mock_data_channel.h",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2023-03-02T10:46:54Z",
       "side": 1,
       "message": "A weak pointer to a constructor ... does this imply that the interface is constructible? Seems weird to me. But it also seems weird to initialize to a nullpointer in a test when so much of the logic is affected by the nullness of the controller.\n\nWorth considering, and possibly adding a comment.",
+      "revId": "26e456d7b5d961ff902fc61e359bd3a3bce3c24c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "208cc28b_e0b12fb2",
+        "filename": "pc/test/mock_data_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-02T15:02:57Z",
+      "side": 1,
+      "message": "`MockSctpDataChannel` is constructable, yes and it\u0027s functionally equivalent to what it did before (or am I misunderstanding?)\n\nFor this change, this did strike me as a bit weird too, especially since the Mock class is actually constructing the real thing. Further on that, the real thing, `SctpDataChannel`, has a `Create` factory method for constructing it and that path involves calling an Init() method and there we will definitely crash if the controller is nullptr.\n\nSo, although I did consider changing the mock class, these were big enough deterrents for me to pull on that thread in this CL.",
+      "parentUuid": "004b2524_c29c1234",
       "revId": "26e456d7b5d961ff902fc61e359bd3a3bce3c24c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
