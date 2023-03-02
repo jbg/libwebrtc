@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a185bce1_942942a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-02T10:46:54Z",
+      "side": 1,
+      "message": "Two worries.\nOtherwise looks fine.",
+      "revId": "26e456d7b5d961ff902fc61e359bd3a3bce3c24c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "274e9ace_d337f4e2",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-02T10:46:54Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you retain the DCHECK on controller here?",
+      "revId": "26e456d7b5d961ff902fc61e359bd3a3bce3c24c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "004b2524_c29c1234",
+        "filename": "pc/test/mock_data_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-02T10:46:54Z",
+      "side": 1,
+      "message": "A weak pointer to a constructor ... does this imply that the interface is constructible? Seems weird to me. But it also seems weird to initialize to a nullpointer in a test when so much of the logic is affected by the nullness of the controller.\n\nWorth considering, and possibly adding a comment.",
+      "revId": "26e456d7b5d961ff902fc61e359bd3a3bce3c24c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
