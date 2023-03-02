@@ -16,6 +16,24 @@
       "message": "Thanks. I\u0027m currently working on moving more deprecated classes (SessionInfo, DecodingState, JitterBuffer, FrameBuffer, etc.) to this folder, but it\u0027s not clear to me how entangled things are yet...",
       "revId": "f9d4ed97a219b6689f1e164e99bf6ee312d5e45c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "641e1d7e_0e2f4363",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-02T12:15:35Z",
+      "side": 1,
+      "message": "They should all be pretty much detangled, it should only be the VideoCodingModule keeping them around.",
+      "parentUuid": "fc6815ea_a7c7b55c",
+      "revId": "f9d4ed97a219b6689f1e164e99bf6ee312d5e45c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
