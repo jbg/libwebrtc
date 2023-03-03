@@ -233,6 +233,12 @@ class MockRtpReceiverObserver : public webrtc::RtpReceiverObserverInterface {
 class PeerConnectionIntegrationWrapper : public webrtc::PeerConnectionObserver,
                                          public SignalingMessageReceiver {
  public:
+  ~PeerConnectionIntegrationWrapper() {
+    if (peer_connection_) {
+      peer_connection_->Close();
+    }
+  }
+
   webrtc::PeerConnectionFactoryInterface* pc_factory() const {
     return peer_connection_factory_.get();
   }
@@ -761,12 +767,13 @@ class PeerConnectionIntegrationWrapper : public webrtc::PeerConnectionObserver,
     if (!fake_audio_capture_module_) {
       return false;
     }
-    rtc::Thread* const signaling_thread = rtc::Thread::Current();
+    signaling_thread_ = rtc::Thread::Create();
+    signaling_thread_->Start();
 
     webrtc::PeerConnectionFactoryDependencies pc_factory_dependencies;
     pc_factory_dependencies.network_thread = network_thread;
     pc_factory_dependencies.worker_thread = worker_thread;
-    pc_factory_dependencies.signaling_thread = signaling_thread;
+    pc_factory_dependencies.signaling_thread = signaling_thread_.get();
     pc_factory_dependencies.task_queue_factory =
         webrtc::CreateDefaultTaskQueueFactory();
     pc_factory_dependencies.trials = std::make_unique<FieldTrialBasedConfig>();
@@ -1161,6 +1168,8 @@ class PeerConnectionIntegrationWrapper : public webrtc::PeerConnectionObserver,
   }
 
   std::string debug_name_;
+
+  std::unique_ptr<rtc::Thread> signaling_thread_;
 
   std::unique_ptr<rtc::FakeNetworkManager> fake_network_manager_;
   // Reference to the mDNS responder owned by `fake_network_manager_` after set.
