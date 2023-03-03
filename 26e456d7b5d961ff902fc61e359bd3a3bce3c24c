@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba815a51_19e9fa84",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-03T07:11:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3a422508_62ed2379",
+      "revId": "26e456d7b5d961ff902fc61e359bd3a3bce3c24c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "004b2524_c29c1234",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "`MockSctpDataChannel` is constructable, yes and it\u0027s functionally equivalent to what it did before (or am I misunderstanding?)\n\nFor this change, this did strike me as a bit weird too, especially since the Mock class is actually constructing the real thing. Further on that, the real thing, `SctpDataChannel`, has a `Create` factory method for constructing it and that path involves calling an Init() method and there we will definitely crash if the controller is nullptr.\n\nSo, although I did consider changing the mock class, these were big enough deterrents for me to pull on that thread in this CL.",
       "parentUuid": "004b2524_c29c1234",
+      "revId": "26e456d7b5d961ff902fc61e359bd3a3bce3c24c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdb71863_b5634292",
+        "filename": "pc/test/mock_data_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-03T07:11:22Z",
+      "side": 1,
+      "message": "Staring at the CL some more, I think rtc::WeakPtr\u003ctype\u003e() is a constructor for a typed nullptr, not a constructor for the type (that would be rtc::WeakPtr\u003ctype\u003e(new type()) or a Wrap function). My misunderstanidng.",
+      "parentUuid": "208cc28b_e0b12fb2",
       "revId": "26e456d7b5d961ff902fc61e359bd3a3bce3c24c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
