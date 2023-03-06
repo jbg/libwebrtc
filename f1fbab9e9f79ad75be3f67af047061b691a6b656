@@ -71,6 +71,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29f5f34b_dfa0741d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-03-06T16:13:18Z",
+      "side": 1,
+      "message": "yes, and also infra/specs/gn_isolate_map.pyl.",
+      "parentUuid": "ffc7ef6f_bf97ad3f",
+      "revId": "f1fbab9e9f79ad75be3f67af047061b691a6b656",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7aebf381_e7ccc7ea",
