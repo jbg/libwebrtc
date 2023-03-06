@@ -52,6 +52,24 @@
       "parentUuid": "cf0605ac_3a7e4c46",
       "revId": "14844cdb6a52b4e9945b020d1c0febaf309d8262",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87d15757_94480747",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-06T09:49:45Z",
+      "side": 1,
+      "message": "I understand that resolution is important, so I don\u0027t understand why we would want a decoder that outputs incorrect information in the case of AV1. Maybe it\u0027s just a personal preference but I very much dislike things that \"work\" when they should in fact fail completely.",
+      "parentUuid": "015254f6_a6a28ce0",
+      "revId": "14844cdb6a52b4e9945b020d1c0febaf309d8262",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
