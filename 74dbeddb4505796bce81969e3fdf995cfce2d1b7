@@ -16,6 +16,24 @@
       "message": "Am I already allowed to ABSL_DEPRECATE the old ones or will that block the roll? I think it blocks the webrtc chromium compile bot but not the roll...",
       "revId": "74dbeddb4505796bce81969e3fdf995cfce2d1b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3c7cbb1_78f0d609",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-06T14:56:51Z",
+      "side": 1,
+      "message": "Let\u0027s only ABSL_DEPRECATE if both bots and roll is happy. Added bots",
+      "parentUuid": "b466fea7_02d4a7a0",
+      "revId": "74dbeddb4505796bce81969e3fdf995cfce2d1b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
