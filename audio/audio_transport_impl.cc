@@ -193,10 +193,10 @@ void AudioTransportImpl::SendProcessedData(
   while (++it != audio_senders_.end()) {
     auto audio_frame_copy = std::make_unique<AudioFrame>();
     audio_frame_copy->CopyFrom(*audio_frame);
-    (*it)->SendAudioData(std::move(audio_frame_copy));
+    (*it)->SendAudioData(std::move(audio_frame_copy), {});
   }
   // Send the original frame to the first stream w/o copying.
-  (*audio_senders_.begin())->SendAudioData(std::move(audio_frame));
+  (*audio_senders_.begin())->SendAudioData(std::move(audio_frame), {});
 }
 
 // Mix all received streams, feed the result to the AudioProcessing module, then

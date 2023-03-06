@@ -24,6 +24,7 @@
 #include "absl/types/optional.h"
 #include "api/audio_options.h"
 #include "api/scoped_refptr.h"
+#include "api/units/time_delta.h"
 #include "api/video/recordable_encoded_frame.h"
 #include "api/video/video_frame.h"
 #include "api/video/video_sink_interface.h"
@@ -198,6 +199,11 @@ class RTC_EXPORT VideoTrackInterface
 // Interface for receiving audio data from a AudioTrack.
 class AudioTrackSinkInterface {
  public:
+  struct Stats {
+    uint64_t glitch_duration_us = 0;
+    size_t count = 0;
+  };
+
   virtual void OnData(const void* audio_data,
                       int bits_per_sample,
                       int sample_rate,
@@ -215,7 +221,8 @@ class AudioTrackSinkInterface {
                       int sample_rate,
                       size_t number_of_channels,
                       size_t number_of_frames,
-                      absl::optional<int64_t> absolute_capture_timestamp_ms) {
+                      absl::optional<int64_t> absolute_capture_timestamp_ms,
+                      absl::optional<Stats> stats = {}) {
     // TODO(bugs.webrtc.org/10739): Deprecate the old OnData and make this one
     // pure virtual.
     return OnData(audio_data, bits_per_sample, sample_rate, number_of_channels,
@@ -226,6 +233,8 @@ class AudioTrackSinkInterface {
   // the number_of_channels if down-mixing occur. A value of -1 means an unknown
   // number.
   virtual int NumPreferredChannels() const { return -1; }
+
+  virtual void ReportGlitches(int64_t duration, size_t count) {}
 
  protected:
   virtual ~AudioTrackSinkInterface() {}

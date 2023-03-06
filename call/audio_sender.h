@@ -14,13 +14,16 @@
 #include <memory>
 
 #include "api/audio/audio_frame.h"
+#include "api/media_stream_interface.h"
 
 namespace webrtc {
 
 class AudioSender {
  public:
   // Encode and send audio.
-  virtual void SendAudioData(std::unique_ptr<AudioFrame> audio_frame) = 0;
+  virtual void SendAudioData(
+      std::unique_ptr<AudioFrame> audio_frame,
+      absl::optional<webrtc::AudioTrackSinkInterface::Stats> stats) = 0;
 
   virtual ~AudioSender() = default;
 };

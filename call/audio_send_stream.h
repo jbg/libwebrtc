@@ -63,6 +63,9 @@ class AudioSendStream : public AudioSender {
     double total_input_energy = 0.0;
     double total_input_duration = 0.0;
 
+    TimeDelta dropped_samples_duration = webrtc::TimeDelta::Seconds(0);
+    uint64_t dropped_samples_events = 0;
+
     ANAStats ana_statistics;
     AudioProcessingStats apm_statistics;
 

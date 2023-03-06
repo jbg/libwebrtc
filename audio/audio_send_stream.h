@@ -92,7 +92,9 @@ class AudioSendStream final : public webrtc::AudioSendStream,
                    SetParametersCallback callback) override;
   void Start() override;
   void Stop() override;
-  void SendAudioData(std::unique_ptr<AudioFrame> audio_frame) override;
+  void SendAudioData(
+      std::unique_ptr<AudioFrame> audio_frame,
+      absl::optional<webrtc::AudioTrackSinkInterface::Stats> stats) override;
   bool SendTelephoneEvent(int payload_type,
                           int payload_frequency,
                           int event,
@@ -234,6 +236,8 @@ class AudioSendStream final : public webrtc::AudioSendStream,
       0;
   absl::optional<std::pair<TimeDelta, TimeDelta>> frame_length_range_
       RTC_GUARDED_BY(worker_thread_checker_);
+
+  absl::optional<webrtc::AudioTrackSinkInterface::Stats> glitch_stats_;
 };
 }  // namespace internal
 }  // namespace webrtc

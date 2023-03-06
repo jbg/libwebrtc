@@ -1890,6 +1890,11 @@ void RTCStatsCollector::ProduceMediaSourceStats_s(
                 voice_sender_info->total_input_energy;
             audio_source_stats->total_samples_duration =
                 voice_sender_info->total_input_duration;
+            audio_source_stats->dropped_samples_duration =
+                voice_sender_info->dropped_samples_duration.seconds();
+            audio_source_stats->dropped_samples_events =
+                voice_sender_info->dropped_samples_events;
+            RTC_LOG(LS_ERROR) << voice_sender_info->dropped_samples_events;
             SetAudioProcessingStats(audio_source_stats.get(),
                                     voice_sender_info->apm_statistics);
           }

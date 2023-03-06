@@ -15,6 +15,7 @@
 #include <utility>
 #include <vector>
 
+#include "absl/time/time.h"
 #include "api/audio_codecs/audio_encoder.h"
 #include "api/audio_codecs/audio_encoder_factory.h"
 #include "api/audio_codecs/audio_format.h"
@@ -394,7 +395,9 @@ void AudioSendStream::Stop() {
   audio_state()->RemoveSendingStream(this);
 }
 
-void AudioSendStream::SendAudioData(std::unique_ptr<AudioFrame> audio_frame) {
+void AudioSendStream::SendAudioData(
+    std::unique_ptr<AudioFrame> audio_frame,
+    absl::optional<webrtc::AudioTrackSinkInterface::Stats> stats) {
   RTC_CHECK_RUNS_SERIALIZED(&audio_capture_race_checker_);
   RTC_DCHECK_GT(audio_frame->sample_rate_hz_, 0);
   TRACE_EVENT0("webrtc", "AudioSendStream::SendAudioData");
@@ -411,6 +414,14 @@ void AudioSendStream::SendAudioData(std::unique_ptr<AudioFrame> audio_frame) {
     // send-stream should not be required to read the microphone audio levels.
     MutexLock lock(&audio_level_lock_);
     audio_level_.ComputeLevel(*audio_frame, duration);
+    if (stats) {
+      if (!glitch_stats_) {
+        glitch_stats_ = webrtc::AudioTrackSinkInterface::Stats{};
+      }
+      glitch_stats_->glitch_duration_us += stats->glitch_duration_us;
+      glitch_stats_->count += stats->count;
+      RTC_LOG(LS_ERROR) << glitch_stats_->count;
+    }
   }
   channel_send_->ProcessAndEncodeAudio(std::move(audio_frame));
 }
@@ -449,6 +460,15 @@ webrtc::AudioSendStream::Stats AudioSendStream::GetStats(
   stats.packets_sent = call_stats.packetsSent;
   stats.total_packet_send_delay = call_stats.total_packet_send_delay;
   stats.retransmitted_packets_sent = call_stats.retransmitted_packets_sent;
+
+  RTC_LOG(LS_ERROR) << "Has glitch stats: " << (bool)glitch_stats_;
+  if (glitch_stats_) {
+    stats.dropped_samples_duration =
+        TimeDelta::Micros(glitch_stats_->glitch_duration_us);
+    stats.dropped_samples_events = glitch_stats_->count;
+
+    RTC_LOG(LS_ERROR) << glitch_stats_->count;
+  }
   // RTT isn't known until a RTCP report is received. Until then, VoiceEngine
   // returns 0 to indicate an error value.
   if (call_stats.rttMs > 0) {

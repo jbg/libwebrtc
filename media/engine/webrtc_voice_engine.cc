@@ -924,12 +924,14 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
 
   // AudioSource::Sink implementation.
   // This method is called on the audio thread.
-  void OnData(const void* audio_data,
-              int bits_per_sample,
-              int sample_rate,
-              size_t number_of_channels,
-              size_t number_of_frames,
-              absl::optional<int64_t> absolute_capture_timestamp_ms) override {
+  void OnData(
+      const void* audio_data,
+      int bits_per_sample,
+      int sample_rate,
+      size_t number_of_channels,
+      size_t number_of_frames,
+      absl::optional<int64_t> absolute_capture_timestamp_ms,
+      absl::optional<webrtc::AudioTrackSinkInterface::Stats> stats) override {
     TRACE_EVENT_BEGIN2("webrtc", "WebRtcAudioSendStream::OnData", "sample_rate",
                        sample_rate, "number_of_frames", number_of_frames);
     RTC_DCHECK_EQ(16, bits_per_sample);
@@ -946,7 +948,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
       audio_frame->set_absolute_capture_timestamp_ms(
           *absolute_capture_timestamp_ms);
     }
-    stream_->SendAudioData(std::move(audio_frame));
+    stream_->SendAudioData(std::move(audio_frame), stats);
     TRACE_EVENT_END1("webrtc", "WebRtcAudioSendStream::OnData",
                      "number_of_channels", number_of_channels);
   }
@@ -2347,6 +2349,10 @@ bool WebRtcVoiceMediaChannel::GetSendStats(VoiceMediaSendInfo* info) {
     sinfo.ana_statistics = stats.ana_statistics;
     sinfo.apm_statistics = stats.apm_statistics;
     sinfo.report_block_datas = std::move(stats.report_block_datas);
+    sinfo.dropped_samples_duration = stats.dropped_samples_duration;
+    sinfo.dropped_samples_events = stats.dropped_samples_events;
+
+    RTC_LOG(LS_ERROR) << stats.dropped_samples_events;
 
     auto encodings = stream.second->rtp_parameters().encodings;
     if (!encodings.empty()) {

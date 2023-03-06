@@ -26,6 +26,7 @@
 #include "rtc_base/helpers.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/trace_event.h"
+#include "sdk/android/native_api/stacktrace/stacktrace.h"
 
 namespace webrtc {
 
@@ -587,13 +588,15 @@ void LocalAudioSinkAdapter::OnData(
     int sample_rate,
     size_t number_of_channels,
     size_t number_of_frames,
-    absl::optional<int64_t> absolute_capture_timestamp_ms) {
+    absl::optional<int64_t> absolute_capture_timestamp_ms,
+    absl::optional<Stats> stats) {
   TRACE_EVENT2("webrtc", "LocalAudioSinkAdapter::OnData", "sample_rate",
                sample_rate, "number_of_frames", number_of_frames);
+  RTC_LOG(LS_ERROR) << "here " << this;
   MutexLock lock(&lock_);
   if (sink_) {
     sink_->OnData(audio_data, bits_per_sample, sample_rate, number_of_channels,
-                  number_of_frames, absolute_capture_timestamp_ms);
+                  number_of_frames, absolute_capture_timestamp_ms, stats);
     num_preferred_channels_ = sink_->NumPreferredChannels();
   }
 }
@@ -603,6 +606,8 @@ void LocalAudioSinkAdapter::SetSink(cricket::AudioSource::Sink* sink) {
   RTC_DCHECK(!sink || !sink_);
   sink_ = sink;
 }
+
+void LocalAudioSinkAdapter::ReportGlitches(int64_t duration, size_t count) {}
 
 rtc::scoped_refptr<AudioRtpSender> AudioRtpSender::Create(
     rtc::Thread* worker_thread,
