@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26a46b1c_f3495471",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-03-06T08:33:23Z",
+      "side": 1,
+      "message": "Thanks for your contribution  but this is not something we want to land at this stage. AAudio was added as an experiment behind a flag but it was decided not to use it as the default audio layer on Android and the Java based version is still preferred. The main reason for not using it was that we found no advantages in performance in combination with built-in effects such as AEC. We kept the implementation behind a flag but the preferred next step should probably be to remove the support altogether and not to expose it more.\n\nThis CL would probably increase the usage of ADMs based on AAudio and that is not something we want since it would increase the support demands without adding any value to WebRTC.\n\nThe work done here is good work but we are simply not in a situation where we can add more default ADM implementations to WebRTC.\n\nQuestion: why are you suggesting these changes? Why do you need another ADM implementation than the the default in Java?",
+      "revId": "4a69879535e44c2259948d375c8d1dfa858c45c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
