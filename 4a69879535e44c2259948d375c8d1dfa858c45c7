@@ -34,6 +34,24 @@
       "parentUuid": "26a46b1c_f3495471",
       "revId": "4a69879535e44c2259948d375c8d1dfa858c45c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13b94eeb_35616ba4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-03-06T08:58:32Z",
+      "side": 1,
+      "message": "Thanks Daniel! As stated, the CL is good work (don\u0027t get me wrong). We are simply not in a position where we want yo open up this path and expose AAudio more.",
+      "parentUuid": "272b591a_213be333",
+      "revId": "4a69879535e44c2259948d375c8d1dfa858c45c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
