@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b466fea7_02d4a7a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-06T13:59:44Z",
+      "side": 1,
+      "message": "Am I already allowed to ABSL_DEPRECATE the old ones or will that block the roll? I think it blocks the webrtc chromium compile bot but not the roll...",
+      "revId": "74dbeddb4505796bce81969e3fdf995cfce2d1b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
