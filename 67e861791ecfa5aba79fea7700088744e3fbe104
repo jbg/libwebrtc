@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02efc87e_b07ea716",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2023-03-06T08:29:39Z",
+      "side": 1,
+      "message": "ping. I\u0027d still like to see this and it will save CPU cycles in test infra ;-)",
+      "revId": "67e861791ecfa5aba79fea7700088744e3fbe104",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
