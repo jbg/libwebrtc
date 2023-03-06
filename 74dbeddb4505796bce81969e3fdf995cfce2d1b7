@@ -34,6 +34,24 @@
       "parentUuid": "b466fea7_02d4a7a0",
       "revId": "74dbeddb4505796bce81969e3fdf995cfce2d1b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33caa98f_d1aec9d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-06T15:28:40Z",
+      "side": 1,
+      "message": "Bots are sad. You can land this without ABSL_DEPRECATE. After migrating chromium maybe you can even delete without an ABSL_DEPRECATE step!",
+      "parentUuid": "b3c7cbb1_78f0d609",
+      "revId": "74dbeddb4505796bce81969e3fdf995cfce2d1b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
