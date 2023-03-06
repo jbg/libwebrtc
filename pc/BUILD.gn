@@ -2543,6 +2543,60 @@ if (rtc_include_tests && !build_with_chromium) {
     ]
   }
 
+  rtc_test("peer_connection_mediachannel_split_unittests") {
+    testonly = true
+    sources = [ "peer_connection_mediachannel_split_unittest.cc" ]
+    deps = [
+      ":channel",
+      ":integration_test_helpers",
+      ":media_session",
+      ":pc_test_utils",
+      ":peer_connection",
+      ":peer_connection_factory",
+      ":rtp_transceiver",
+      ":session_description",
+      "../api:candidate",
+      "../api:dtmf_sender_interface",
+      "../api:ice_transport_interface",
+      "../api:libjingle_logging_api",
+      "../api:libjingle_peerconnection_api",
+      "../api:media_stream_interface",
+      "../api:mock_encoder_selector",
+      "../api:packet_socket_factory",
+      "../api:rtc_error",
+      "../api:rtc_stats_api",
+      "../api:rtp_parameters",
+      "../api:rtp_transceiver_direction",
+      "../api:scoped_refptr",
+      "../api/crypto:options",
+      "../api/rtc_event_log",
+      "../api/transport/rtp:rtp_source",
+      "../api/units:time_delta",
+      "../api/video:video_rtp_headers",
+      "../logging:fake_rtc_event_log",
+      "../media:codec",
+      "../media:media_constants",
+      "../media:stream_params",
+      "../p2p:p2p_test_utils",
+      "../p2p:rtc_p2p",
+      "../rtc_base:gunit_helpers",
+      "../rtc_base:logging",
+      "../rtc_base:rtc_base_tests_utils",
+      "../rtc_base:socket_address",
+      "../rtc_base:ssl",
+      "../rtc_base:task_queue_for_test",
+      "../rtc_base:threading",
+      "../rtc_base:timeutils",
+      "../system_wrappers:metrics",
+      "../test:test_main",
+      "../test:test_support",
+      "//third_party/abseil-cpp/absl/algorithm:container",
+      "//third_party/abseil-cpp/absl/memory",
+      "//third_party/abseil-cpp/absl/strings",
+      "//third_party/abseil-cpp/absl/types:optional",
+    ]
+  }
+
   rtc_library("data_channel_controller_unittest") {
     testonly = true
     sources = [ "data_channel_controller_unittest.cc" ]
