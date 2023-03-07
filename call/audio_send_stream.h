@@ -29,6 +29,7 @@
 #include "api/scoped_refptr.h"
 #include "call/audio_sender.h"
 #include "call/rtp_config.h"
+#include "media/base/audio_source.h"
 #include "modules/audio_processing/include/audio_processing_statistics.h"
 #include "modules/rtp_rtcp/include/report_block_data.h"
 
@@ -62,6 +63,8 @@ class AudioSendStream : public AudioSender {
     // https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamtrackstats-totalaudioenergy
     double total_input_energy = 0.0;
     double total_input_duration = 0.0;
+
+    absl::optional<cricket::AudioSource::Sink::Stats> sink_stats;
 
     ANAStats ana_statistics;
     AudioProcessingStats apm_statistics;

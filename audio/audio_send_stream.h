@@ -234,6 +234,8 @@ class AudioSendStream final : public webrtc::AudioSendStream,
       0;
   absl::optional<std::pair<TimeDelta, TimeDelta>> frame_length_range_
       RTC_GUARDED_BY(worker_thread_checker_);
+
+  absl::optional<cricket::AudioSource::Sink::Stats> sink_stats_;
 };
 }  // namespace internal
 }  // namespace webrtc

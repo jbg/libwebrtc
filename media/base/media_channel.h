@@ -40,6 +40,7 @@
 #include "api/video_codecs/video_encoder_factory.h"
 #include "call/video_receive_stream.h"
 #include "common_video/include/quality_limitation_reason.h"
+#include "media/base/audio_source.h"
 #include "media/base/codec.h"
 #include "media/base/delayable.h"
 #include "media/base/media_constants.h"
@@ -482,6 +483,7 @@ struct VoiceSenderInfo : public MediaSenderInfo {
   // https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamtrackstats-totalaudioenergy
   double total_input_energy = 0.0;
   double total_input_duration = 0.0;
+  absl::optional<cricket::AudioSource::Sink::Stats> sink_stats;
   webrtc::ANAStats ana_statistics;
   webrtc::AudioProcessingStats apm_statistics;
 };

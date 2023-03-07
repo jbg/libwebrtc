@@ -31,6 +31,7 @@
 #include "common_audio/vad/include/vad.h"
 #include "logging/rtc_event_log/events/rtc_event_audio_send_stream_config.h"
 #include "logging/rtc_event_log/rtc_stream_config.h"
+#include "media/base/audio_source.h"
 #include "media/base/media_channel.h"
 #include "modules/audio_coding/codecs/cng/audio_encoder_cng.h"
 #include "modules/audio_coding/codecs/red/audio_encoder_copy_red.h"
@@ -411,6 +412,14 @@ void AudioSendStream::SendAudioData(std::unique_ptr<AudioFrame> audio_frame) {
     // send-stream should not be required to read the microphone audio levels.
     MutexLock lock(&audio_level_lock_);
     audio_level_.ComputeLevel(*audio_frame, duration);
+    if (audio_frame->get_sink_stats()) {
+      if (!sink_stats_) {
+        sink_stats_ = cricket::AudioSource::Sink::Stats{};
+      }
+      sink_stats_->glitch_duration +=
+          audio_frame->get_sink_stats()->glitch_duration;
+      sink_stats_->glitch_count += audio_frame->get_sink_stats()->glitch_count;
+    }
   }
   channel_send_->ProcessAndEncodeAudio(std::move(audio_frame));
 }
@@ -492,6 +501,8 @@ webrtc::AudioSendStream::Stats AudioSendStream::GetStats(
   stats.report_block_datas = std::move(call_stats.report_block_datas);
 
   stats.nacks_rcvd = call_stats.nacks_rcvd;
+
+  stats.sink_stats = sink_stats_;
 
   return stats;
 }
