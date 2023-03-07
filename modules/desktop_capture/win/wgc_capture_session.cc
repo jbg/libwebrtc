@@ -205,7 +205,7 @@ HRESULT WgcCaptureSession::StartCapture(const DesktopCaptureOptions& options) {
   return hr;
 }
 
-bool WgcCaptureSession::GetFrame(std::unique_ptr<DesktopFrame>* output_frame) {
+std::unique_ptr<DesktopFrame> WgcCaptureSession::GetFrame(bool* result) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
 
   // When GetFrame() asks for the first frame it can happen that no frame has
@@ -234,18 +234,51 @@ bool WgcCaptureSession::GetFrame(std::unique_ptr<DesktopFrame>* output_frame) {
     ProcessFrame();
   }
 
-  // Return false if we still don't have a valid frame leading to a
-  // DesktopCapturer::Result::ERROR_PERMANENT posted by the WGC capturer.
-  if (!queue_.current_frame()) {
+  // Return a NULL frame and false as `result` if we still don't have a valid
+  // frame. This will lead to a DesktopCapturer::Result::ERROR_PERMANENT being
+  // posted by the WGC capturer.
+  DesktopFrame* current_frame = queue_.current_frame();
+  if (!current_frame) {
     RTC_LOG(LS_ERROR) << "GetFrame failed.";
-    return false;
+    *result = false;
+    return std::unique_ptr<DesktopFrame>{};
+  }
+
+  // Update the updated region of the current frame depending on if the current
+  // frame is different (contains modified pixel values) or not.
+  DesktopFrame* previous_frame = queue_.previous_frame();
+  if (previous_frame) {
+    const int previous_frame_size =
+        previous_frame->stride() * previous_frame->size().height();
+    const int current_frame_size =
+        current_frame->stride() * current_frame->size().height();
+
+    // Compare the latest frame with the previous and check if the frames are
+    // equal (both contain the exact same pixel values).
+    bool frames_are_equal = false;
+    if (current_frame_size == previous_frame_size) {
+      frames_are_equal = !memcmp(current_frame->data(), previous_frame->data(),
+                                 current_frame_size);
+    }
+
+    if (frames_are_equal) {
+      // No region is damaged since last frame. This case will trigger 0Hz in
+      // the DesktopCaptureDevice and prevent the frame from being forwarded
+      // to the client.
+      current_frame->mutable_updated_region()->Clear();
+    } else {
+      // Mark the complete screen/window as a damaged region. The frame will be
+      // forwareded to the client since it contains new content.
+      current_frame->mutable_updated_region()->SetRect(
+          webrtc::DesktopRect::MakeSize(current_frame->size()));
+    }
   }
 
   // Emit the current frame.
   std::unique_ptr<DesktopFrame> new_frame = queue_.current_frame()->Share();
-  *output_frame = std::move(new_frame);
 
-  return true;
+  *result = true;
+  return new_frame;
 }
 
 HRESULT WgcCaptureSession::CreateMappedTexture(
@@ -294,7 +327,7 @@ HRESULT WgcCaptureSession::ProcessFrame() {
 
   queue_.MoveToNextFrame();
   if (queue_.current_frame() && queue_.current_frame()->IsShared()) {
-    RTC_DLOG(LS_WARNING) << "Overwriting frame that is still shared.";
+    // RTC_DLOG(LS_VERBOSE) << "Overwriting frame that is still shared.";
   }
 
   ComPtr<WGC::IDirect3D11CaptureFrame> capture_frame;
