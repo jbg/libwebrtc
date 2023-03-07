@@ -7,7 +7,9 @@
 # be found in the AUTHORS file in the root of the source tree.
 
 import("//build/config/linux/gtk/gtk.gni")
+import("//build/config/linux/pkg_config.gni")
 import("//build/config/ui.gni")
+
 import("../../webrtc.gni")
 
 use_desktop_capture_differ_sse2 = current_cpu == "x86" || current_cpu == "x64"
@@ -271,6 +273,12 @@ if (rtc_include_tests) {
 if ((is_linux || is_chromeos) && rtc_use_pipewire) {
   config("pipewire_config") {
     configs = [ "../portal:pipewire_config" ]
+  }
+}
+
+if (rtc_use_pipewire) {
+  pkg_config("gdk") {
+    packages = [ "gdk-3.0" ]
   }
 }
 
@@ -569,7 +577,10 @@ rtc_library("desktop_capture") {
       "linux/wayland/xdg_session_details.h",
     ]
 
-    configs += [ "../portal:pipewire_all" ]
+    configs += [
+      "../portal:pipewire_all",
+      ":gdk",
+    ]
 
     public_configs += [ "../portal:pipewire_config" ]
 
