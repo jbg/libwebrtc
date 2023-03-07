@@ -33,6 +33,23 @@
       "message": "I forgot you are not going to be notified when this is send as WIP. I\u0027m marking it as ready for review, but please do not push it yet.",
       "revId": "595c6a7b13430fac12845b9d3a4528875ad14832",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e9b2bab_1f3bf647",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-07T20:05:15Z",
+      "side": 1,
+      "message": "I\u0027m only able to launch xWayland chrome, but quick testing (and review) looks fine to me.",
+      "revId": "595c6a7b13430fac12845b9d3a4528875ad14832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
