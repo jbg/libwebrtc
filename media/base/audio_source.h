@@ -14,6 +14,8 @@
 #include <cstddef>
 
 #include "absl/types/optional.h"
+#include "api/media_stream_interface.h"
+#include "api/units/time_delta.h"
 
 namespace cricket {
 
@@ -31,7 +33,9 @@ class AudioSource {
         int sample_rate,
         size_t number_of_channels,
         size_t number_of_frames,
-        absl::optional<int64_t> absolute_capture_timestamp_ms) = 0;
+        absl::optional<int64_t> absolute_capture_timestamp_ms,
+        const absl::optional<webrtc::AudioTrackSinkInterface::Stats>&
+            stats) = 0;
 
     // Called when the AudioSource is going away.
     virtual void OnClose() = 0;

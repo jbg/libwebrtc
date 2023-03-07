@@ -15,6 +15,7 @@
 #include <stdint.h>
 
 #include "api/audio/channel_layout.h"
+#include "api/media_stream_interface.h"
 #include "api/rtp_packet_infos.h"
 
 namespace webrtc {
@@ -115,6 +116,15 @@ class AudioFrame {
     return absolute_capture_timestamp_ms_;
   }
 
+  void set_sink_stats(
+      const absl::optional<AudioTrackSinkInterface::Stats>& sink_stats) {
+    sink_stats_ = sink_stats;
+  }
+
+  absl::optional<AudioTrackSinkInterface::Stats> get_sink_stats() const {
+    return sink_stats_;
+  }
+
   // RTP timestamp of the first sample in the AudioFrame.
   uint32_t timestamp_ = 0;
   // Time since the first frame in milliseconds.
@@ -166,6 +176,8 @@ class AudioFrame {
   // capture timestamp of a received frame is found in `packet_infos_`.
   // This timestamp MUST be based on the same clock as rtc::TimeMillis().
   absl::optional<int64_t> absolute_capture_timestamp_ms_;
+
+  absl::optional<AudioTrackSinkInterface::Stats> sink_stats_;
 };
 
 }  // namespace webrtc

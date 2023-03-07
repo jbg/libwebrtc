@@ -304,7 +304,8 @@ class LocalAudioSinkAdapter : public AudioTrackSinkInterface,
               int sample_rate,
               size_t number_of_channels,
               size_t number_of_frames,
-              absl::optional<int64_t> absolute_capture_timestamp_ms) override;
+              absl::optional<int64_t> absolute_capture_timestamp_ms,
+              const absl::optional<Stats>& stats) override;
 
   // AudioSinkInterface implementation.
   void OnData(const void* audio_data,
@@ -314,7 +315,8 @@ class LocalAudioSinkAdapter : public AudioTrackSinkInterface,
               size_t number_of_frames) override {
     OnData(audio_data, bits_per_sample, sample_rate, number_of_channels,
            number_of_frames,
-           /*absolute_capture_timestamp_ms=*/absl::nullopt);
+           /*absolute_capture_timestamp_ms=*/absl::nullopt,
+           /*stats*/ absl::nullopt);
   }
 
   // AudioSinkInterface implementation.

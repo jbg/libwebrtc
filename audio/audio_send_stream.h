@@ -17,6 +17,7 @@
 
 #include "absl/functional/any_invocable.h"
 #include "api/field_trials_view.h"
+#include "api/media_stream_interface.h"
 #include "api/sequence_checker.h"
 #include "api/task_queue/task_queue_base.h"
 #include "audio/audio_level.h"
@@ -234,6 +235,8 @@ class AudioSendStream final : public webrtc::AudioSendStream,
       0;
   absl::optional<std::pair<TimeDelta, TimeDelta>> frame_length_range_
       RTC_GUARDED_BY(worker_thread_checker_);
+
+  absl::optional<webrtc::AudioTrackSinkInterface::Stats> sink_stats_;
 };
 }  // namespace internal
 }  // namespace webrtc

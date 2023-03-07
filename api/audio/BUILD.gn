@@ -18,6 +18,7 @@ rtc_library("audio_frame_api") {
   ]
 
   deps = [
+    "..:media_stream_interface",
     "..:rtp_packet_info",
     "../../rtc_base:checks",
     "../../rtc_base:logging",

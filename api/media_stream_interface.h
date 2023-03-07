@@ -24,6 +24,7 @@
 #include "absl/types/optional.h"
 #include "api/audio_options.h"
 #include "api/scoped_refptr.h"
+#include "api/units/time_delta.h"
 #include "api/video/recordable_encoded_frame.h"
 #include "api/video/video_frame.h"
 #include "api/video/video_sink_interface.h"
@@ -198,6 +199,11 @@ class RTC_EXPORT VideoTrackInterface
 // Interface for receiving audio data from a AudioTrack.
 class AudioTrackSinkInterface {
  public:
+  struct Stats {
+    TimeDelta glitch_duration = TimeDelta::Seconds(0);
+    size_t glitch_count = 0;
+  };
+
   virtual void OnData(const void* audio_data,
                       int bits_per_sample,
                       int sample_rate,
@@ -215,11 +221,22 @@ class AudioTrackSinkInterface {
                       int sample_rate,
                       size_t number_of_channels,
                       size_t number_of_frames,
-                      absl::optional<int64_t> absolute_capture_timestamp_ms) {
+                      absl::optional<int64_t> absolute_capture_timestamp_ms,
+                      const absl::optional<Stats>& stats) {
     // TODO(bugs.webrtc.org/10739): Deprecate the old OnData and make this one
     // pure virtual.
     return OnData(audio_data, bits_per_sample, sample_rate, number_of_channels,
                   number_of_frames);
+  }
+
+  void OnData(const void* audio_data,
+              int bits_per_sample,
+              int sample_rate,
+              size_t number_of_channels,
+              size_t number_of_frames,
+              absl::optional<int64_t> absolute_capture_timestamp_ms) {
+    OnData(audio_data, bits_per_sample, sample_rate, number_of_channels,
+           number_of_frames, absolute_capture_timestamp_ms, absl::nullopt);
   }
 
   // Returns the number of channels encoded by the sink. This can be less than
