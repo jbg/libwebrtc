@@ -33,6 +33,29 @@
       "message": "Björn, could you take a look as well?",
       "revId": "da3e7aac130b60924d5896f93da7b244722eff8d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b234a957_23ec0f52",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-03-07T08:46:24Z",
+      "side": 1,
+      "message": "Iiuc, this test doesn\u0027t depend on the history size. Maybe `size_t kNumberOfEvents \u003d 10;` and skipping the DCHECK_LE would be clearer?",
+      "range": {
+        "startLine": 264,
+        "startChar": 37,
+        "endLine": 264,
+        "endChar": 62
+      },
+      "revId": "da3e7aac130b60924d5896f93da7b244722eff8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
