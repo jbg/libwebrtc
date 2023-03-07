@@ -41,7 +41,13 @@ struct BitrateLimits {
 };
 
 BitrateLimits GetLayerBitrateLimits(int pixels, const VideoCodec& codec) {
-  if (codec.codecType == VideoCodecType::kVideoCodecVP9) {
+  if (codec.codecType == VideoCodecType::kVideoCodecAV1) {
+    if (codec.spatialLayers[0].width * codec.spatialLayers[0].height ==
+        pixels) {
+      return {DataRate::KilobitsPerSec(codec.spatialLayers[0].minBitrate),
+              DataRate::KilobitsPerSec(codec.spatialLayers[0].maxBitrate)};
+    }
+  } else if (codec.codecType == VideoCodecType::kVideoCodecVP9) {
     for (size_t i = 0; i < codec.VP9().numberOfSpatialLayers; ++i) {
       if (codec.spatialLayers[i].width * codec.spatialLayers[i].height ==
           pixels) {
@@ -432,6 +438,42 @@ TEST_F(ResolutionBitrateLimitsWithScalabilityModeTest,
       {{.pixels = 1280 * 720,
         .eq_bitrate = {DataRate::KilobitsPerSec(32),
                        DataRate::KilobitsPerSec(3333)}}});
+  RunBaseTest(&test);
+}
+
+TEST_F(ResolutionBitrateLimitsWithScalabilityModeTest,
+       LimitsAppliedForAv1OneSpatialLayerOneTemporalLayer) {
+  webrtc::test::ScopedFieldTrials field_trials(
+      "WebRTC-GetEncoderInfoOverride/"
+      "frame_size_pixels:230400|921600,"
+      "min_start_bitrate_bps:0|0,"
+      "min_bitrate_bps:25000|80000,"
+      "max_bitrate_bps:400000|1200000/");
+
+  InitEncodeTest test(
+      "AV1", {{.active = true, .scalability_mode = ScalabilityMode::kL1T1}},
+      // Expectations:
+      {{.pixels = 1280 * 720,
+        .eq_bitrate = {DataRate::KilobitsPerSec(80),
+                       DataRate::KilobitsPerSec(1200)}}});
+  RunBaseTest(&test);
+}
+
+TEST_F(ResolutionBitrateLimitsWithScalabilityModeTest,
+       LimitsAppliedForAv1OneSpatialLayerThreeTemporalLayers) {
+  webrtc::test::ScopedFieldTrials field_trials(
+      "WebRTC-GetEncoderInfoOverride/"
+      "frame_size_pixels:230400|921600,"
+      "min_start_bitrate_bps:0|0,"
+      "min_bitrate_bps:25000|80000,"
+      "max_bitrate_bps:400000|1200000/");
+
+  InitEncodeTest test(
+      "AV1", {{.active = true, .scalability_mode = ScalabilityMode::kL1T3}},
+      // Expectations:
+      {{.pixels = 1280 * 720,
+        .eq_bitrate = {DataRate::KilobitsPerSec(80),
+                       DataRate::KilobitsPerSec(1200)}}});
   RunBaseTest(&test);
 }
 

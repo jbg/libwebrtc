@@ -720,7 +720,18 @@ absl::optional<uint32_t> VideoStreamAdapter::GetSingleActiveLayerPixels(
     const VideoCodec& codec) {
   int num_active = 0;
   absl::optional<uint32_t> pixels;
-  if (codec.codecType == VideoCodecType::kVideoCodecVP9) {
+  if (codec.codecType == VideoCodecType::kVideoCodecAV1) {
+    // TODO(webrtc:14956): add active spatial-layer accounting if/when needed.
+    absl::optional<ScalabilityMode> mode = codec.GetScalabilityMode();
+    if (codec.numberOfSimulcastStreams > 1 ||
+        !(mode == ScalabilityMode::kL1T1 || mode == ScalabilityMode::kL1T2 ||
+          mode == ScalabilityMode::kL1T3)) {
+      num_active = 2;
+    } else {
+      ++num_active;
+      pixels = codec.spatialLayers[0].width * codec.spatialLayers[0].height;
+    }
+  } else if (codec.codecType == VideoCodecType::kVideoCodecVP9) {
     for (int i = 0; i < codec.VP9().numberOfSpatialLayers; ++i) {
       if (codec.spatialLayers[i].active) {
         ++num_active;
