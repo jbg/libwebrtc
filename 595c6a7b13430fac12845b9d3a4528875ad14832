@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "596c0050_3b6055b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-07T07:01:14Z",
+      "side": 1,
+      "message": "I\u0027ll keep this as WIP until we verify it fixes the issue I linked. We also have same crash for Firefox so I\u0027ll post the fix there as well. I would appreciate if you can test it and check everything still works as expected for you.",
+      "revId": "595c6a7b13430fac12845b9d3a4528875ad14832",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
