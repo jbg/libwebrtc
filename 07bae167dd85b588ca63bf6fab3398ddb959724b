@@ -16,6 +16,74 @@
       "message": "ready to reland? PS1 is the original CL, PS2+3 are the changes that should make it work",
       "revId": "07bae167dd85b588ca63bf6fab3398ddb959724b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c78ffd3_d9081c33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-07T08:46:03Z",
+      "side": 1,
+      "message": "Since I\u0027m a veteran worrier, here\u0027s some more worry...",
+      "revId": "07bae167dd85b588ca63bf6fab3398ddb959724b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a13f0dd2_f0cc4b9c",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-07T08:46:03Z",
+      "side": 1,
+      "message": "The default is \"if I don\u0027t know what is going on, I\u0027m going to declare it applicable\". Is that a safe choice?",
+      "revId": "07bae167dd85b588ca63bf6fab3398ddb959724b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e99b38_602fab1a",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2958,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-07T08:46:03Z",
+      "side": 1,
+      "message": "Can we avoid the double negative here by calling the helper function IsRtcpFeedbackApplicable?",
+      "revId": "07bae167dd85b588ca63bf6fab3398ddb959724b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffdc9591_c93c741d",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2959,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-07T08:46:03Z",
+      "side": 1,
+      "message": "For the sake of maintainability, I\u0027d be happier with having this function call AddFeedbackParameter inside the loop rather than repeating the logic for calling codec-\u003eAddFeedbackParam.",
+      "revId": "07bae167dd85b588ca63bf6fab3398ddb959724b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
