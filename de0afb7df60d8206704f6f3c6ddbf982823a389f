@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ede553_26c2350c",
+        "filename": "logging/rtc_event_log/events/rtc_event_log_parse_status.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T16:29:30Z",
+      "side": 0,
+      "message": "These used to refer to this using statement: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/logging/rtc_event_log/rtc_event_log_parser.h;l\u003d325;drc\u003d612872b29dc22272bca64e3ef1c2617248c7d517",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 50
+      },
+      "revId": "de0afb7df60d8206704f6f3c6ddbf982823a389f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
