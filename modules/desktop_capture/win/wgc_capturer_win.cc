@@ -322,8 +322,9 @@ void WgcCapturerWin::CaptureFrame() {
     }
   }
 
-  std::unique_ptr<DesktopFrame> frame;
-  if (!capture_session->GetFrame(&frame)) {
+  bool result;
+  std::unique_ptr<DesktopFrame> frame = capture_session->GetFrame(&result);
+  if (!result) {
     RTC_LOG(LS_ERROR) << "GetFrame failed.";
     ongoing_captures_.erase(capture_source_->GetSourceId());
     callback_->OnCaptureResult(DesktopCapturer::Result::ERROR_PERMANENT,
