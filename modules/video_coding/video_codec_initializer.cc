@@ -50,6 +50,29 @@ bool VideoCodecInitializer::SetupCodec(const VideoEncoderConfig& config,
   return true;
 }
 
+// void PrintVideoCodec(const VideoCodec& codec) {
+//   RTC_LOG(LS_ERROR) << "FOO PrintVideoCodec\n"
+//                     << "{numberOfSimulcastStreams: "
+//                     << codec.numberOfSimulcastStreams << ",\n"
+//                     << " active: " << codec.active << ",\n";
+//   for (size_t i = 0; i < codec.numberOfSimulcastStreams; ++i) {
+//     const auto& sim = codec.simulcastStream[i];
+//     RTC_LOG(LS_ERROR) << " simulcastStream[" << i << "]: {\n"
+//                       << "   width: " << sim.width << ",\n"
+//                       << "   height: " << sim.height << ",\n"
+//                       << "   active: " << sim.active << ",\n"
+//                       << "   maxFramerate: " << sim.maxFramerate << ",\n"
+//                       << "   numberOfTemporalLayers: "
+//                       << sim.numberOfTemporalLayers << ",\n"
+//                       << "   maxBitrate: " << sim.maxBitrate << ",\n"
+//                       << "   targetBitrate: " << sim.targetBitrate << ",\n"
+//                       << "   minBitrate: " << sim.minBitrate << ",\n"
+//                       << "   qpMax: " << sim.qpMax << ",\n"
+//                       << " },\n";
+//   }
+//   RTC_LOG(LS_ERROR) << "}";
+// }
+
 // TODO(sprang): Split this up and separate the codec specific parts.
 VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
     const VideoEncoderConfig& config,
@@ -57,6 +80,9 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
   static const int kEncoderMinBitrateKbps = 30;
   RTC_DCHECK(!streams.empty());
   RTC_DCHECK_GE(config.min_transmit_bitrate_bps, 0);
+
+  // RTC_LOG(LS_ERROR) << "FOO VideoEncoderConfig.ToString:\n"
+  //                   << config.ToString();
 
   VideoCodec video_codec;
   video_codec.codecType = config.codec_type;
@@ -212,12 +238,16 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
     }
     case kVideoCodecVP9: {
       // Force the first stream to always be active.
+      // TODO(https://crbug.com/webrtc/14884): This probably does not make sense
+      // anymore?
       video_codec.simulcastStream[0].active = codec_active;
 
       if (!config.encoder_specific_settings) {
         *video_codec.VP9() = VideoEncoder::GetDefaultVp9Settings();
       }
 
+      // Are we assuming all encodings have the same number of temporal/spatial
+      // layers and is this something we should document or track with a crbug?
       video_codec.VP9()->numberOfTemporalLayers = static_cast<unsigned char>(
           streams.back().num_temporal_layers.value_or(
               video_codec.VP9()->numberOfTemporalLayers));
@@ -284,8 +314,9 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
       // This difference must be propagated to the stream configuration.
       video_codec.width = spatial_layers.back().width;
       video_codec.height = spatial_layers.back().height;
-      video_codec.simulcastStream[0].width = spatial_layers.back().width;
-      video_codec.simulcastStream[0].height = spatial_layers.back().height;
+      // TODO(https://crbug.com/webrtc/14884): What is a safe way to do this?
+      // video_codec.simulcastStream[0].width = spatial_layers.back().width;
+      // video_codec.simulcastStream[0].height = spatial_layers.back().height;
 
       // Update layering settings.
       video_codec.VP9()->numberOfSpatialLayers =
@@ -346,6 +377,7 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
     }
   }
 
+  // PrintVideoCodec(video_codec);
   return video_codec;
 }
 

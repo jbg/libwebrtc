@@ -1141,7 +1141,9 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     RTC_LOG(LS_ERROR) << "Failed to create encoder configuration.";
   }
 
-  if (encoder_config_.codec_type == kVideoCodecVP9) {
+  bool disable_vp9_bitrate_limited = true;
+  if (encoder_config_.codec_type == kVideoCodecVP9 &&
+      disable_vp9_bitrate_limited) {
     // Spatial layers configuration might impose some parity restrictions,
     // thus some cropping might be needed.
     crop_width_ = last_frame_info_->width - codec.width;
@@ -1374,22 +1376,22 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   pending_encoder_reconfiguration_ = false;
 
   bool is_svc = false;
-  // Set min_bitrate_bps, max_bitrate_bps, and max padding bit rate for VP9
-  // and leave only one stream containing all necessary information.
-  if (encoder_config_.codec_type == kVideoCodecVP9) {
-    // Lower max bitrate to the level codec actually can produce.
-    streams[0].max_bitrate_bps =
-        std::min(streams[0].max_bitrate_bps,
-                 SvcRateAllocator::GetMaxBitrate(codec).bps<int>());
-    streams[0].min_bitrate_bps = codec.spatialLayers[0].minBitrate * 1000;
-    // target_bitrate_bps specifies the maximum padding bitrate.
-    streams[0].target_bitrate_bps =
-        SvcRateAllocator::GetPaddingBitrate(codec).bps<int>();
-    streams[0].width = streams.back().width;
-    streams[0].height = streams.back().height;
-    is_svc = codec.VP9()->numberOfSpatialLayers > 1;
-    streams.resize(1);
-  }
+  // // Set min_bitrate_bps, max_bitrate_bps, and max padding bit rate for VP9
+  // // and leave only one stream containing all necessary information.
+  // if (encoder_config_.codec_type == kVideoCodecVP9) {
+  //   // Lower max bitrate to the level codec actually can produce.
+  //   streams[0].max_bitrate_bps =
+  //       std::min(streams[0].max_bitrate_bps,
+  //                SvcRateAllocator::GetMaxBitrate(codec).bps<int>());
+  //   streams[0].min_bitrate_bps = codec.spatialLayers[0].minBitrate * 1000;
+  //   // target_bitrate_bps specifies the maximum padding bitrate.
+  //   streams[0].target_bitrate_bps =
+  //       SvcRateAllocator::GetPaddingBitrate(codec).bps<int>();
+  //   streams[0].width = streams.back().width;
+  //   streams[0].height = streams.back().height;
+  //   is_svc = codec.VP9()->numberOfSpatialLayers > 1;
+  //   streams.resize(1);
+  // }
 
   sink_->OnEncoderConfigurationChanged(
       std::move(streams), is_svc, encoder_config_.content_type,
