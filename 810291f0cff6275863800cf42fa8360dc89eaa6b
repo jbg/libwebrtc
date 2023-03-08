@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60c8ede9_bf6b04f1",
+        "filename": "logging/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "Right, I\u0027ll remove this comment and if someone ever needs separate encoder/decoder they can very easily break the new build targets apart.",
+      "parentUuid": "e50bd6aa_d7b847c2",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 71
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4d68166_be3d6e00",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-07T17:04:53Z",
       "side": 1,
       "message": "I don\u0027t think it needs to be included here. What\u0027s the error?",
+      "range": {
+        "startLine": 409,
+        "startChar": 0,
+        "endLine": 409,
+        "endChar": 72
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7240e24_829b6fc0",
+        "filename": "logging/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "```\nIn file included from ../../logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc:11:\nIn file included from ../../logging/rtc_event_log/dependency_descriptor_encoder_decoder.h:17:\nIn file included from ../../logging/rtc_event_log/rtc_event_log2_proto_include.h:21:\ngen/logging/rtc_event_log/rtc_event_log2.pb.h:10:10: fatal error: \u0027google/protobuf/port_def.inc\u0027 file not found\n#include \u003cgoogle/protobuf/port_def.inc\u003e\n\n```",
+      "parentUuid": "b4d68166_be3d6e00",
       "range": {
         "startLine": 409,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d23a83c_5a347d0f",
+        "filename": "logging/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e58684b_c78f3048",
+      "range": {
+        "startLine": 427,
+        "startChar": 0,
+        "endLine": 427,
+        "endChar": 87
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50efce96_a88f09a5",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-07T17:04:53Z",
       "side": 1,
       "message": "Is this needed?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 31
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a026f76d_c7337d83",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "oops, removed",
+      "parentUuid": "50efce96_a88f09a5",
       "range": {
         "startLine": 42,
         "startChar": 0,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0986928_6fd940aa",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "You are right, I misunderstood the API. I should make a similar change to OptionalBlobEncoder to also return an empty string if all blobs are empty.",
+      "parentUuid": "329937f5_fa48aef6",
+      "range": {
+        "startLine": 59,
+        "startChar": 10,
+        "endLine": 59,
+        "endChar": 24
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "89902fe4_ff4879ce",
         "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
         "patchSetId": 3
@@ -129,6 +249,30 @@
       "writtenOn": "2023-03-07T17:04:53Z",
       "side": 1,
       "message": "Malformed logs shouldn\u0027t crash. The event log parser uses a ParseStatus object  https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/logging/rtc_event_log/events/rtc_event_field_encoding_parser.h;l\u003d27;drc\u003de94294450e2ac29ad5ce1f3c2be745abe71d7d88\nand convenience macros\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/logging/rtc_event_log/rtc_event_log_parser.cc;l\u003d52;drc\u003d6c032cb8356b0d3f717c4fcf50796241f2bba6c2\nto propagate errors.\n\nMaybe these should be broken out to a separate file?",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 46
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d5caac3_4fe5d454",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "I\u0027ll update this in a followup PS.",
+      "parentUuid": "89902fe4_ff4879ce",
       "range": {
         "startLine": 160,
         "startChar": 0,
@@ -162,6 +306,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3942f586_3b8f1b68",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "string_view is cleaner, but inlining it is even cleaner",
+      "parentUuid": "a15e408a_20f870c9",
+      "range": {
+        "startLine": 183,
+        "startChar": 36,
+        "endLine": 183,
+        "endChar": 48
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72be4367_c19ddcf0",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-03-07T17:04:53Z",
       "side": 1,
       "message": "If we can\u0027t use string_view, could we make this a bit clearer? :)",
+      "range": {
+        "startLine": 185,
+        "startChar": 13,
+        "endLine": 185,
+        "endChar": 32
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dd51a76_970aa34d",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "Inlined now",
+      "parentUuid": "72be4367_c19ddcf0",
       "range": {
         "startLine": 185,
         "startChar": 13,
@@ -208,6 +400,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb1047b9_0df94797",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "Can\u0027t really avoid capture in both lambdas. Inlined `get_extended`",
+      "parentUuid": "363d99ba_980a1ef9",
+      "range": {
+        "startLine": 191,
+        "startChar": 10,
+        "endLine": 191,
+        "endChar": 15
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd842559_17719f56",
@@ -231,6 +447,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6a97f72_247c95b4",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd842559_17719f56",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 49
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a04d2852_a360aa3d",
@@ -244,6 +484,30 @@
       "writtenOn": "2023-03-07T17:04:53Z",
       "side": 1,
       "message": "Maybe add a comment that this encodes the dependency descriptors for all packets in the batch rather than just the base element.",
+      "range": {
+        "startLine": 172,
+        "startChar": 11,
+        "endLine": 172,
+        "endChar": 40
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "325baed4_00f4efe0",
+        "filename": "logging/rtc_event_log/rtc_event_log2.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-08T10:20:16Z",
+      "side": 1,
+      "message": "Done, also added a comment below.",
+      "parentUuid": "a04d2852_a360aa3d",
       "range": {
         "startLine": 172,
         "startChar": 11,
