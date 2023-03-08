@@ -12,7 +12,9 @@
 
 #include <memory>
 
+#include "absl/types/optional.h"
 #include "api/units/time_delta.h"
+#include "inttypes.h"
 #include "rtc_base/event.h"
 #include "rtc_base/fake_clock.h"
 #include "rtc_base/helpers.h"
@@ -21,6 +23,43 @@
 
 namespace rtc {
 using ::webrtc::TimeDelta;
+
+class Base {
+ public:
+  virtual int64_t time() { return 0; }
+  virtual ~Base() = default;
+};
+
+class Impl : public Base {
+ public:
+  int64_t time() override { return rtc::TimeMillis(); }
+  virtual ~Impl() = default;
+};
+
+TEST(DummyTest, VirtualFunction) {
+  Base* foo = new Impl;
+  int64_t i = foo->time();
+  printf("%" PRId64 "\n", i);
+}
+
+TEST(DummyTest, RedundantBlock) {
+  int64_t i = 0;
+  { i = rtc::TimeMillis(); }
+  printf("%" PRId64 "\n", i);
+}
+
+TEST(DummyTest, EmptyReturn) {
+  auto fun = [](int64_t x) -> absl::optional<int64_t> {
+    if (x == 12345678)
+      return {};
+    x = rtc::TimeMillis();
+    return absl::optional<int64_t>(x);
+  };
+  auto res = fun(0);
+  if (res) {
+    printf("%" PRId64 "\n", *res);
+  }
+}
 
 TEST(TimeTest, TimeInMs) {
   int64_t ts_earlier = TimeMillis();
