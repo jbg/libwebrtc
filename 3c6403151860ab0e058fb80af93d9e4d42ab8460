@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce304668_f223db07",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-08T18:15:19Z",
+      "side": 1,
+      "message": "Why this switch?\n\nI wonder if returning a union wouldn\u0027t be a bit cleaner...",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 71
+      },
+      "revId": "3c6403151860ab0e058fb80af93d9e4d42ab8460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a5b787e_acf9af2f",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-08T18:15:19Z",
+      "side": 1,
+      "message": "I think this should be done to a member variable in process frame:\n```\nif (!frames_are_equal) {\n // Since we\u0027re setting the Rect to the full frame, it\u0027s okay to use SetRect\n // instead of AddRect here. If we had an API to report proper damage regions we\n // should be doing \"AddRect\" with a \"SetRect\" call on a resize.\n damage_region_.SetRect(DesktopRect::MakeSize(current_frame-\u003esize())\n}\n```\n\nThen down here, all you\u0027d do is:\n```\nstd::swap(current_frame-\u003emutable_updated_region(), damage_region_);\ndamage_region_.Clear()\n```\n\nThe reason being let\u0027s look at the following scenarios:\nOS Sends Frame 1\nPage Queries and gets Frame 1 (A)\nOS Sends Frame 2\nPage Queries and gets Frame 2\nPage Queries and gets Frame 2 (B)\nOS Sends Frame 3\nOS Sends Frame 4 (Identical to Frame 3)\nPage Queries and gets Frame 4 (C)\n\nA -\u003e We need this to have the full damage region, I believe this works in both cases\nB-\u003e The page needs to have an empty damage region. In the current code, you actually compare Frames 1 and 2 again before sending the frame up to the page, so you send the full damage region both times.\nC -\u003e The page hasn\u0027t queried for a frame since the frame changed; so in your scenario you\u0027d see that the frames were identical and not send up a damage region. By computing *and not clearing* in ProcessFrame, you track the DamageRegions that the page needs to be made aware of (which in this case is fine to just set to the whole frame).",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 277,
+        "endChar": 7
+      },
+      "revId": "3c6403151860ab0e058fb80af93d9e4d42ab8460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
