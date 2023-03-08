@@ -44,7 +44,7 @@ class WgcCaptureSession final {
   HRESULT StartCapture(const DesktopCaptureOptions& options);
 
   // Returns a frame from the local frame queue, if any are present.
-  bool GetFrame(std::unique_ptr<DesktopFrame>* output_frame);
+  std::unique_ptr<DesktopFrame> GetFrame(bool* result);
 
   bool IsCaptureStarted() const {
     RTC_DCHECK_RUN_ON(&sequence_checker_);
@@ -81,6 +81,8 @@ class WgcCaptureSession final {
   HRESULT ProcessFrame();
 
   void RemoveEventHandlers();
+
+  bool allow_zero_hertz() const { return allow_zero_hertz_; }
 
   std::unique_ptr<EventRegistrationToken> frame_arrived_token_;
   std::unique_ptr<EventRegistrationToken> item_closed_token_;
@@ -139,6 +141,11 @@ class WgcCaptureSession final {
   // kTryGetNextFrameFailed in the startup phase when some empty frames is
   // expected and should not be seen as an error.
   int empty_frame_credit_count_ = 0;
+
+  // Caches the value of DesktopCaptureOptions.allow_wgc_zero_hertz() in
+  // StartCapture(). Adds 0Hz detection in GetFrame() when enabled which adds
+  // complexity since memcmp() is performed on two successive frames.
+  bool allow_zero_hertz_ = false;
 
   SequenceChecker sequence_checker_;
 };
