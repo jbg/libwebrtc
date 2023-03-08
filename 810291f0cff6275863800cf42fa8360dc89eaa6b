@@ -238,6 +238,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b47a785_bdb3c657",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-03-08T10:33:56Z",
+      "side": 1,
+      "message": "I guess OptionalblobEncoder needs to distinguish two forms of \"emptiness\"; no value in the optional vs an empty string in the optional. You are talking about the former?",
+      "parentUuid": "f0986928_6fd940aa",
+      "range": {
+        "startLine": 59,
+        "startChar": 10,
+        "endLine": 59,
+        "endChar": 24
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "89902fe4_ff4879ce",
         "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
         "patchSetId": 3
