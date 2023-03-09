@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894ac390_3e09ca89",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-09T16:07:44Z",
+      "side": 1,
+      "message": "One alternative could be to get the number of spatial layers and use the for-loop below (looping through spatialLayers) also for AV1.",
+      "range": {
+        "startLine": 723,
+        "startChar": 41,
+        "endLine": 723,
+        "endChar": 56
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3a7a4cf_c3d280d4",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-09T16:07:44Z",
+      "side": 1,
+      "message": "E.g. the number of spatial layers could be retrieved from the ScalabilityMode: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/svc/scalability_mode_util.h;l\u003d34",
+      "range": {
+        "startLine": 725,
+        "startChar": 36,
+        "endLine": 725,
+        "endChar": 40
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f327488f_d4f0561f",
+        "filename": "video/end_to_end_tests/resolution_bitrate_limits_tests.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-09T16:07:44Z",
+      "side": 1,
+      "message": "Same as previous comment.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f69505_1688e940",
+        "filename": "video/end_to_end_tests/resolution_bitrate_limits_tests.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-09T16:07:44Z",
+      "side": 1,
+      "message": "Not sure if this test adds any value since temporal layers are not related to the bitrate limits.",
+      "range": {
+        "startLine": 482,
+        "startChar": 41,
+        "endLine": 482,
+        "endChar": 60
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b90ad5df_d6109e77",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-09T16:07:44Z",
+      "side": 1,
+      "message": "Could maybe be retrieved from the scalability mode:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/svc/scalability_mode_util.h;l\u003d34 (and VideoCodec::GetScalabilityMode).",
+      "range": {
+        "startLine": 418,
+        "startChar": 31,
+        "endLine": 418,
+        "endChar": 32
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50586594_f54dc8b5",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-09T16:07:44Z",
+      "side": 1,
+      "message": "Maybe else RTC_DCHECK_NOTREACHED();",
+      "range": {
+        "startLine": 421,
+        "startChar": 2,
+        "endLine": 421,
+        "endChar": 3
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
