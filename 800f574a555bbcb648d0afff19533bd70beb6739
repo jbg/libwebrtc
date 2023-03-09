@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f52112b9_90f56aa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-09T17:45:47Z",
+      "side": 1,
+      "message": "Why?\n\nIf it\u0027s needed in not-test, should it also be moved out of test/ ?",
+      "revId": "800f574a555bbcb648d0afff19533bd70beb6739",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
