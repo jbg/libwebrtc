@@ -284,6 +284,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "724ebfab_6edc28e9",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-09T12:43:14Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "c86c8421_badc74bf",
+      "range": {
+        "startLine": 59,
+        "startChar": 10,
+        "endLine": 59,
+        "endChar": 24
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89902fe4_ff4879ce",
@@ -345,6 +369,30 @@
       "side": 1,
       "message": "Created a separate CL for this instead: https://webrtc-review.googlesource.com/c/src/+/296660",
       "parentUuid": "2d5caac3_4fe5d454",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 46
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "856e992f_5023b88b",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-09T12:43:14Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "95d331cb_d5a6f23b",
       "range": {
         "startLine": 160,
         "startChar": 0,
