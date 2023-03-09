@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56dc1d3d_dafca19f",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-03-09T15:02:06Z",
+      "side": 1,
+      "message": "Bad call perhaps and not really needed. I found [1] and assumed that this implementation was the \"latest and greatest\" and simply followed the style to return the frame instead. \n\nNot clear what you mean by returning a union. Will check your other comments and see if I get it. \n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/linux/wayland/shared_screencast_stream.cc;l\u003d617;drc\u003d0d0b76e40dfff0f4ad58d0640cdf2c4df72030d3",
+      "parentUuid": "ce304668_f223db07",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 71
+      },
+      "revId": "3c6403151860ab0e058fb80af93d9e4d42ab8460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a5b787e_acf9af2f",
         "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-08T18:15:19Z",
       "side": 1,
       "message": "I think this should be done to a member variable in process frame:\n```\nif (!frames_are_equal) {\n // Since we\u0027re setting the Rect to the full frame, it\u0027s okay to use SetRect\n // instead of AddRect here. If we had an API to report proper damage regions we\n // should be doing \"AddRect\" with a \"SetRect\" call on a resize.\n damage_region_.SetRect(DesktopRect::MakeSize(current_frame-\u003esize())\n}\n```\n\nThen down here, all you\u0027d do is:\n```\nstd::swap(current_frame-\u003emutable_updated_region(), damage_region_);\ndamage_region_.Clear()\n```\n\nThe reason being let\u0027s look at the following scenarios:\nOS Sends Frame 1\nPage Queries and gets Frame 1 (A)\nOS Sends Frame 2\nPage Queries and gets Frame 2\nPage Queries and gets Frame 2 (B)\nOS Sends Frame 3\nOS Sends Frame 4 (Identical to Frame 3)\nPage Queries and gets Frame 4 (C)\n\nA -\u003e We need this to have the full damage region, I believe this works in both cases\nB-\u003e The page needs to have an empty damage region. In the current code, you actually compare Frames 1 and 2 again before sending the frame up to the page, so you send the full damage region both times.\nC -\u003e The page hasn\u0027t queried for a frame since the frame changed; so in your scenario you\u0027d see that the frames were identical and not send up a damage region. By computing *and not clearing* in ProcessFrame, you track the DamageRegions that the page needs to be made aware of (which in this case is fine to just set to the whole frame).",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 277,
+        "endChar": 7
+      },
+      "revId": "3c6403151860ab0e058fb80af93d9e4d42ab8460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "695cdee0_9e20a6e6",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-03-09T15:02:06Z",
+      "side": 1,
+      "message": "Great feedback!",
+      "parentUuid": "7a5b787e_acf9af2f",
       "range": {
         "startLine": 250,
         "startChar": 0,
