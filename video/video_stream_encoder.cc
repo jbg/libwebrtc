@@ -37,6 +37,7 @@
 #include "call/adaptation/video_stream_adapter.h"
 #include "media/base/media_channel.h"
 #include "modules/video_coding/include/video_codec_initializer.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "modules/video_coding/svc/svc_rate_allocator.h"
 #include "modules/video_coding/utility/vp8_constants.h"
 #include "rtc_base/arraysize.h"
@@ -383,14 +384,21 @@ int NumActiveStreams(const std::vector<VideoStream>& streams) {
   return num_active;
 }
 
-void ApplyVp9BitrateLimits(const VideoEncoder::EncoderInfo& encoder_info,
-                           const VideoEncoderConfig& encoder_config,
-                           VideoCodec* codec) {
-  if (codec->codecType != VideoCodecType::kVideoCodecVP9 ||
-      encoder_config.simulcast_layers.size() <= 1 ||
-      VideoStreamEncoderResourceManager::IsSimulcastOrMultipleSpatialLayers(
+void ApplyVideoCodecBitrateLimits(const VideoEncoder::EncoderInfo& encoder_info,
+                                  const VideoEncoderConfig& encoder_config,
+                                  VideoCodec* codec) {
+  if (!(codec->codecType == VideoCodecType::kVideoCodecVP9 ||
+        codec->codecType == VideoCodecType::kVideoCodecAV1)) {
+    // ApplyVideoCodecBitrateLimits() supports VP9 and AV1 only.
+    return;
+  }
+  if (VideoStreamEncoderResourceManager::IsSimulcastOrMultipleSpatialLayers(
           encoder_config)) {
     // Resolution bitrate limits usage is restricted to singlecast.
+    return;
+  }
+  if (codec->codecType == VideoCodecType::kVideoCodecVP9 &&
+      encoder_config.simulcast_layers.size() <= 1) {
     return;
   }
 
@@ -405,7 +413,15 @@ void ApplyVp9BitrateLimits(const VideoEncoder::EncoderInfo& encoder_info,
   if (!bitrate_limits.has_value()) {
     return;
   }
-
+  int number_of_spatial_layers;
+  if (codec->codecType == VideoCodecType::kVideoCodecAV1) {
+    number_of_spatial_layers =
+        ScalabilityModeToNumSpatialLayers(*(codec->GetScalabilityMode()));
+  } else if (codec->codecType == VideoCodecType::kVideoCodecVP9) {
+    number_of_spatial_layers = codec->VP9()->numberOfSpatialLayers;
+  } else {
+    RTC_DCHECK_NOTREACHED();
+  }
   // Index for the active stream.
   absl::optional<size_t> index;
   for (size_t i = 0; i < encoder_config.simulcast_layers.size(); ++i) {
@@ -415,7 +431,6 @@ void ApplyVp9BitrateLimits(const VideoEncoder::EncoderInfo& encoder_info,
   if (!index.has_value()) {
     return;
   }
-
   int min_bitrate_bps;
   if (encoder_config.simulcast_layers[*index].min_bitrate_bps <= 0) {
     min_bitrate_bps = bitrate_limits->min_bitrate_bps;
@@ -439,7 +454,7 @@ void ApplyVp9BitrateLimits(const VideoEncoder::EncoderInfo& encoder_info,
     return;
   }
 
-  for (int i = 0; i < codec->VP9()->numberOfSpatialLayers; ++i) {
+  for (int i = 0; i < number_of_spatial_layers; ++i) {
     if (codec->spatialLayers[i].active) {
       codec->spatialLayers[i].minBitrate = min_bitrate_bps / 1000;
       codec->spatialLayers[i].maxBitrate = max_bitrate_bps / 1000;
@@ -1141,15 +1156,16 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     RTC_LOG(LS_ERROR) << "Failed to create encoder configuration.";
   }
 
-  if (encoder_config_.codec_type == kVideoCodecVP9) {
+  if (encoder_config_.codec_type == kVideoCodecVP9 ||
+      encoder_config_.codec_type == kVideoCodecAV1) {
     // Spatial layers configuration might impose some parity restrictions,
     // thus some cropping might be needed.
     crop_width_ = last_frame_info_->width - codec.width;
     crop_height_ = last_frame_info_->height - codec.height;
-    ApplyVp9BitrateLimits(GetEncoderInfoWithBitrateLimitUpdate(
-                              encoder_->GetEncoderInfo(), encoder_config_,
-                              default_limits_allowed_),
-                          encoder_config_, &codec);
+    ApplyVideoCodecBitrateLimits(GetEncoderInfoWithBitrateLimitUpdate(
+                                     encoder_->GetEncoderInfo(),
+                                     encoder_config_, default_limits_allowed_),
+                                 encoder_config_, &codec);
   }
 
   char log_stream_buf[4 * 1024];
@@ -1168,10 +1184,14 @@ void VideoStreamEncoder::ReconfigureEncoder() {
                << " active: "
                << (codec.simulcastStream[i].active ? "true" : "false") << "\n";
   }
-  if (encoder_config_.codec_type == kVideoCodecVP9) {
-    size_t num_spatial_layers = codec.VP9()->numberOfSpatialLayers;
+  if (encoder_config_.codec_type == kVideoCodecVP9 ||
+      encoder_config_.codec_type == kVideoCodecAV1) {
+    int num_spatial_layers =
+        encoder_config_.codec_type == kVideoCodecVP9
+            ? codec.VP9()->numberOfSpatialLayers
+            : ScalabilityModeToNumSpatialLayers(*(codec.GetScalabilityMode()));
     log_stream << "Spatial layers:\n";
-    for (size_t i = 0; i < num_spatial_layers; ++i) {
+    for (int i = 0; i < num_spatial_layers; ++i) {
       log_stream << i << ": " << codec.spatialLayers[i].width << "x"
                  << codec.spatialLayers[i].height
                  << " min_kbps: " << codec.spatialLayers[i].minBitrate
@@ -1331,6 +1351,9 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     num_layers = codec.VP8()->numberOfTemporalLayers;
   } else if (codec.codecType == kVideoCodecVP9) {
     num_layers = codec.VP9()->numberOfTemporalLayers;
+  } else if (codec.codecType == kVideoCodecAV1) {
+    num_layers =
+        ScalabilityModeToNumSpatialLayers(*(codec.GetScalabilityMode()));
   } else if (codec.codecType == kVideoCodecH264) {
     num_layers = codec.H264()->numberOfTemporalLayers;
   } else if (codec.codecType == kVideoCodecGeneric &&

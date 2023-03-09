@@ -482,10 +482,14 @@ void VideoSendStreamImpl::OnEncoderConfigurationChanged(
 
     const absl::optional<DataRate> experimental_min_bitrate =
         GetExperimentalMinVideoBitrate(codec_type);
-    encoder_min_bitrate_bps_ =
-        experimental_min_bitrate
-            ? experimental_min_bitrate->bps()
-            : std::max(streams[0].min_bitrate_bps, kDefaultMinVideoBitrateBps);
+    if (experimental_min_bitrate) {
+      encoder_min_bitrate_bps_ = experimental_min_bitrate->bps();
+    } else if (codec_type == VideoCodecType::kVideoCodecAV1) {
+      encoder_min_bitrate_bps_ = streams[0].min_bitrate_bps;
+    } else {
+      encoder_min_bitrate_bps_ =
+          std::max(streams[0].min_bitrate_bps, kDefaultMinVideoBitrateBps);
+    }
 
     encoder_max_bitrate_bps_ = 0;
     double stream_bitrate_priority_sum = 0;
