@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c208bba_871d0382",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-09T18:33:15Z",
+      "side": 1,
+      "message": "Eliminating the out param altogether would be nice; The case you linked seems to not account for a possible permanent failure; we could:\n\n1) Leave as is to evaluate switching later\n2) Switch semantics such that we\u0027ll always return a frame if it\u0027s a temporary error, it\u0027ll just be black\n3) Return some kind of structured type (absl::optional\u003cstd::unique_ptr\u003cDesktopFrame\u003e\u003e is semantically a bit weird which would be my normal suggestion; though base chromium has a \"base::exepcted\" type which could work: base/types/expected.h)\n\nI think when I was thinking of a union I was thinking of a mojom union type, which we use for XR, which has some notion of an exposed member that\u0027s like \"foo.has_type_a()\"; but for all intents and purposes would be recreating something like base::expected...",
+      "parentUuid": "56dc1d3d_dafca19f",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 71
+      },
+      "revId": "3c6403151860ab0e058fb80af93d9e4d42ab8460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a5b787e_acf9af2f",
         "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
         "patchSetId": 7

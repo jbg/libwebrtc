@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6bc4679_12853817",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-09T18:33:15Z",
+      "side": 1,
+      "message": "We should do this on line 461 below and only use the bool as a local var. Allowing the bool to be overwritten fails case C, and still writing the damage region *here* I believe fails Case B from my initial description.",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 3
+      },
+      "revId": "cb4f57a1b6fd153be37e261f1ce4343d329b291e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
