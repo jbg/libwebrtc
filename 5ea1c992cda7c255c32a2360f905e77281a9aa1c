@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20190601_a4894abf",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2023-03-09T19:58:31Z",
+      "side": 1,
+      "message": "Excellent suggestion.  Done.",
+      "parentUuid": "894ac390_3e09ca89",
+      "range": {
+        "startLine": 723,
+        "startChar": 41,
+        "endLine": 723,
+        "endChar": 56
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3a7a4cf_c3d280d4",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-09T16:07:44Z",
       "side": 1,
       "message": "E.g. the number of spatial layers could be retrieved from the ScalabilityMode: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/svc/scalability_mode_util.h;l\u003d34",
+      "range": {
+        "startLine": 725,
+        "startChar": 36,
+        "endLine": 725,
+        "endChar": 40
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9ae00cd_fa228fb0",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2023-03-09T19:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3a7a4cf_c3d280d4",
       "range": {
         "startLine": 725,
         "startChar": 36,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f78001c4_028e143a",
+        "filename": "video/end_to_end_tests/resolution_bitrate_limits_tests.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2023-03-09T19:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f327488f_d4f0561f",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24f69505_1688e940",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-09T16:07:44Z",
       "side": 1,
       "message": "Not sure if this test adds any value since temporal layers are not related to the bitrate limits.",
+      "range": {
+        "startLine": 482,
+        "startChar": 41,
+        "endLine": 482,
+        "endChar": 60
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "033343d4_7137257e",
+        "filename": "video/end_to_end_tests/resolution_bitrate_limits_tests.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2023-03-09T19:58:31Z",
+      "side": 1,
+      "message": "I\u0027ll remove this test.  It will become especially irrelevant after I address your comment about deriving the number of spatial layers from the scalability mode.",
+      "parentUuid": "24f69505_1688e940",
       "range": {
         "startLine": 482,
         "startChar": 41,
@@ -116,6 +212,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "791e369c_223b8867",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2023-03-09T19:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b90ad5df_d6109e77",
+      "range": {
+        "startLine": 418,
+        "startChar": 31,
+        "endLine": 418,
+        "endChar": 32
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50586594_f54dc8b5",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-03-09T16:07:44Z",
       "side": 1,
       "message": "Maybe else RTC_DCHECK_NOTREACHED();",
+      "range": {
+        "startLine": 421,
+        "startChar": 2,
+        "endLine": 421,
+        "endChar": 3
+      },
+      "revId": "5ea1c992cda7c255c32a2360f905e77281a9aa1c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2189cbbb_6db19679",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2023-03-09T19:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50586594_f54dc8b5",
       "range": {
         "startLine": 421,
         "startChar": 2,
