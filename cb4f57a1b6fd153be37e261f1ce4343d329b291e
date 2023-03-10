@@ -22,6 +22,30 @@
       },
       "revId": "cb4f57a1b6fd153be37e261f1ce4343d329b291e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd4377d1_7fdf1905",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-03-10T11:10:00Z",
+      "side": 1,
+      "message": "My bad. The only \"communication\" between `GetFrame()` and `ProcessFrame` is now `damage_region_`.",
+      "parentUuid": "c6bc4679_12853817",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 3
+      },
+      "revId": "cb4f57a1b6fd153be37e261f1ce4343d329b291e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

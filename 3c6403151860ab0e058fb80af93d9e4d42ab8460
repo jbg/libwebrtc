@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4454e9e3_7f1ee22a",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-03-10T11:10:00Z",
+      "side": 1,
+      "message": "If you don\u0027t mind I\u0027ll pass on doing more work here this round but can do more in a follow-up if needed.\n\nWe can\u0027t depend on base/ and I assume you don\u0027t imply that we should port that support to WebRTC/\n\nI could give option 2 a try but am not sure how you want it. Do you mean that we return NULL for temp error and a valid but black frame for permanent? If so, adding `IsBlack()` and `SetToBlack()` to `BasicDesktopFrame`?",
+      "parentUuid": "2c208bba_871d0382",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 71
+      },
+      "revId": "3c6403151860ab0e058fb80af93d9e4d42ab8460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a5b787e_acf9af2f",
         "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
         "patchSetId": 7
