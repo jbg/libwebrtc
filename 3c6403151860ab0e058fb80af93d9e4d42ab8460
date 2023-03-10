@@ -96,6 +96,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abec375c_6a1099dc",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-10T17:35:07Z",
+      "side": 1,
+      "message": "Definitely don\u0027t mind :) my initial question was more to do with trying to understand the reason for the code change to make the other item the out parameter.\n\nDefinitely wasn\u0027t suggesting the port; mostly wasn\u0027t sure if there was anything similar; though I think base::expected is a \"hardened\" version of a similar (banned) std:: or absl:: type (maybe just absl::statusOr).\n\nI actually meant the other way around. For a temporary error you return just a default DesktopFrame (which defaults to black) and for a permanent error you return null.\n\nBut again; all of this is outside the scope of this CL and my initial question so marking this thread as resolved.",
+      "parentUuid": "4454e9e3_7f1ee22a",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 71
+      },
+      "revId": "3c6403151860ab0e058fb80af93d9e4d42ab8460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a5b787e_acf9af2f",

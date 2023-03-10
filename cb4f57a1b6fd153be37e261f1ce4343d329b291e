@@ -46,6 +46,53 @@
       },
       "revId": "cb4f57a1b6fd153be37e261f1ce4343d329b291e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e92cd6e_493b8c28",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-10T17:35:07Z",
+      "side": 1,
+      "message": "Looks like you\u0027re still doing frames_are_equal(); did an upload fail?",
+      "parentUuid": "fd4377d1_7fdf1905",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 3
+      },
+      "revId": "cb4f57a1b6fd153be37e261f1ce4343d329b291e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5760a2c_67741fb1",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-10T17:35:07Z",
+      "side": 1,
+      "message": "I think you mean false here?",
+      "range": {
+        "startLine": 159,
+        "startChar": 5,
+        "endLine": 159,
+        "endChar": 9
+      },
+      "revId": "cb4f57a1b6fd153be37e261f1ce4343d329b291e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
