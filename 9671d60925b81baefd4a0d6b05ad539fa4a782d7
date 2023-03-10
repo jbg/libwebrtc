@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a080dd_24876f01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-10T12:26:18Z",
+      "side": 1,
+      "message": "This CL blocks an import but I have a fix for it already, if that can be landed ASAP then no need to revert",
+      "revId": "9671d60925b81baefd4a0d6b05ad539fa4a782d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
