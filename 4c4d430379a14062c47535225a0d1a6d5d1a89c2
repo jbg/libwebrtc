@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48ea9b1c_a7cebbbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-10T12:08:24Z",
+      "side": 1,
+      "message": "+gustaf who is in the same time zone, can you provide a stamp?",
+      "revId": "4c4d430379a14062c47535225a0d1a6d5d1a89c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
