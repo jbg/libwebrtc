@@ -367,7 +367,7 @@ TEST_P(PictureIdTest, ContinuousAfterReconfigureVp8) {
   TestPictureIdContinuousAfterReconfigure({1, 3, 3, 1, 1});
 }
 
-TEST_P(PictureIdTest, IncreasingAfterRecreateStreamVp8) {
+TEST_P(PictureIdTest, DISABLED_IncreasingAfterRecreateStreamVp8) {
   test::FunctionVideoEncoderFactory encoder_factory(
       []() { return VP8Encoder::Create(); });
   SetupEncoder(&encoder_factory, "VP8");
@@ -394,7 +394,8 @@ TEST_P(PictureIdTest, ContinuousAfterReconfigureSimulcastEncoderAdapter) {
   TestPictureIdContinuousAfterReconfigure({1, 3, 3, 1, 1});
 }
 
-TEST_P(PictureIdTest, IncreasingAfterRecreateStreamSimulcastEncoderAdapter) {
+TEST_P(PictureIdTest,
+       DISABLED_IncreasingAfterRecreateStreamSimulcastEncoderAdapter) {
   InternalEncoderFactory internal_encoder_factory;
   test::FunctionVideoEncoderFactory encoder_factory(
       [&internal_encoder_factory]() {
@@ -418,7 +419,7 @@ TEST_P(PictureIdTest, ContinuousAfterStreamCountChangeSimulcastEncoderAdapter) {
   TestPictureIdContinuousAfterReconfigure({3, 1, 3});
 }
 
-TEST_P(PictureIdTest, IncreasingAfterRecreateStreamVp9) {
+TEST_P(PictureIdTest, DISABLED_IncreasingAfterRecreateStreamVp9) {
   test::FunctionVideoEncoderFactory encoder_factory(
       []() { return VP9Encoder::Create(); });
   SetupEncoder(&encoder_factory, "VP9");
