@@ -16,6 +16,23 @@
       "message": "+gustaf who is in the same time zone, can you provide a stamp?",
       "revId": "4c4d430379a14062c47535225a0d1a6d5d1a89c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f58c1caa_53be4827",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2023-03-10T12:28:36Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "4c4d430379a14062c47535225a0d1a6d5d1a89c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
