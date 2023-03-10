@@ -16,6 +16,24 @@
       "message": "We have to monitor in case we run out of machines now since we are limiting the pool to 12 cores only. There are a bunch of small jobs taking up time. But we will see.",
       "revId": "543baf100addde5d29bb89ad269f3a77c0f0e817",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e45c93de_7ca905a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-03-10T10:24:28Z",
+      "side": 1,
+      "message": "Agreed, we have to monitor mac_chromium_compile because now it might hit \"no capacity\" error instead of timeout.",
+      "parentUuid": "833d6767_dc488125",
+      "revId": "543baf100addde5d29bb89ad269f3a77c0f0e817",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
