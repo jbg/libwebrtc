@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e36b88a4_fbfa298a",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-10T15:34:19Z",
+      "side": 1,
+      "message": "see comment in video_stream_encoder",
+      "range": {
+        "startLine": 730,
+        "startChar": 49,
+        "endLine": 730,
+        "endChar": 78
+      },
+      "revId": "de6b049b37c54ea5258493fbebd6b90867dcc2fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3599f43f_5e7c071d",
+        "filename": "rtc_base/experiments/encoder_info_settings.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-10T15:34:19Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 42,
+        "startChar": 28,
+        "endLine": 42,
+        "endChar": 30
+      },
+      "revId": "de6b049b37c54ea5258493fbebd6b90867dcc2fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf917b0c_0d705427",
+        "filename": "video/end_to_end_tests/resolution_bitrate_limits_tests.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-10T15:34:19Z",
+      "side": 1,
+      "message": "maybe add EXPECT_TRUE(codec.GetScalabilityMode().has_value());",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 3
+      },
+      "revId": "de6b049b37c54ea5258493fbebd6b90867dcc2fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5116a0bc_30e1f232",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-10T15:34:19Z",
+      "side": 1,
+      "message": "Check if scalability mode is set if AV1.\nReturn if AV1 \u0026\u0026 !codec-\u003eGetScalabilityMode().has_value())",
+      "range": {
+        "startLine": 391,
+        "startChar": 55,
+        "endLine": 391,
+        "endChar": 58
+      },
+      "revId": "de6b049b37c54ea5258493fbebd6b90867dcc2fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f29ba30f_89c8ad5e",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1192,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-10T15:34:19Z",
+      "side": 1,
+      "message": "Validate that scalability mode is set before accessing the value and same below",
+      "range": {
+        "startLine": 1192,
+        "startChar": 48,
+        "endLine": 1192,
+        "endChar": 77
+      },
+      "revId": "de6b049b37c54ea5258493fbebd6b90867dcc2fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1844f111_d1031aab",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-10T15:34:19Z",
+      "side": 1,
+      "message": "Temporal",
+      "range": {
+        "startLine": 1356,
+        "startChar": 28,
+        "endLine": 1356,
+        "endChar": 35
+      },
+      "revId": "de6b049b37c54ea5258493fbebd6b90867dcc2fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

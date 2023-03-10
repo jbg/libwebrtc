@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c1627a0_c712147f",
+        "filename": "video/video_send_stream_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-10T15:34:19Z",
+      "side": 0,
+      "message": "What do you think about using a function GetDefaultMinVideoBitrateBps with the codec_type as argument which returns a different default if AV1?",
+      "range": {
+        "startLine": 488,
+        "startChar": 51,
+        "endLine": 488,
+        "endChar": 77
+      },
+      "revId": "4d9b0c16fc528f9072ab5c2ebcc1d345baec92c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
