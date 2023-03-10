@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5115339f_cc56a2ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-10T10:14:44Z",
+      "side": 1,
+      "message": "Mirko/Jakob, can you stamp this again? The MSAN bot discovered a use-of-uninitialized value of `round_trip_time_measurements` that happens when polling GetStats prior to test being fully ramped up, so I had to fix that too",
+      "revId": "50ebbac3f7089fbb99480be5a64563bac74b7273",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
