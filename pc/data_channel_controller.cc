@@ -47,8 +47,6 @@ bool DataChannelController::ConnectDataChannel(
     // whether or not the underlying transport is ready.
     return false;
   }
-  SignalDataChannelTransportWritable_s.connect(
-      webrtc_data_channel, &SctpDataChannel::OnTransportReady);
   SignalDataChannelTransportReceivedData_s.connect(
       webrtc_data_channel, &SctpDataChannel::OnDataReceived);
   SignalDataChannelTransportChannelClosing_s.connect(
@@ -64,7 +62,6 @@ void DataChannelController::DisconnectDataChannel(
         << "DisconnectDataChannel called when sctp_transport_ is NULL.";
     return;
   }
-  SignalDataChannelTransportWritable_s.disconnect(webrtc_data_channel);
   SignalDataChannelTransportReceivedData_s.disconnect(webrtc_data_channel);
   SignalDataChannelTransportChannelClosing_s.disconnect(webrtc_data_channel);
 }
@@ -176,7 +173,8 @@ void DataChannelController::OnReadyToSend() {
   signaling_thread()->PostTask(SafeTask(signaling_safety_.flag(), [this] {
     RTC_DCHECK_RUN_ON(signaling_thread());
     data_channel_transport_ready_to_send_ = true;
-    SignalDataChannelTransportWritable_s(data_channel_transport_ready_to_send_);
+    for (const auto& channel : sctp_data_channels_)
+      channel->OnTransportReady(true);
   }));
 }
 
