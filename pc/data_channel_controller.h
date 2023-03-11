@@ -155,12 +155,6 @@ class DataChannelController : public SctpDataChannelControllerInterface,
   // signaling thread.
   // TODO(bugs.webrtc.org/11547): These '_s' signals likely all belong on the
   // network thread.
-  sigslot::signal1<bool> SignalDataChannelTransportWritable_s
-      RTC_GUARDED_BY(signaling_thread());
-  sigslot::signal2<const cricket::ReceiveDataParams&,
-                   const rtc::CopyOnWriteBuffer&>
-      SignalDataChannelTransportReceivedData_s
-          RTC_GUARDED_BY(signaling_thread());
   sigslot::signal1<int> SignalDataChannelTransportChannelClosing_s
       RTC_GUARDED_BY(signaling_thread());
 
