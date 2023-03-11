@@ -47,10 +47,6 @@ bool DataChannelController::ConnectDataChannel(
     // whether or not the underlying transport is ready.
     return false;
   }
-  SignalDataChannelTransportWritable_s.connect(
-      webrtc_data_channel, &SctpDataChannel::OnTransportReady);
-  SignalDataChannelTransportReceivedData_s.connect(
-      webrtc_data_channel, &SctpDataChannel::OnDataReceived);
   SignalDataChannelTransportChannelClosing_s.connect(
       webrtc_data_channel, &SctpDataChannel::OnClosingProcedureStartedRemotely);
   return true;
@@ -64,8 +60,6 @@ void DataChannelController::DisconnectDataChannel(
         << "DisconnectDataChannel called when sctp_transport_ is NULL.";
     return;
   }
-  SignalDataChannelTransportWritable_s.disconnect(webrtc_data_channel);
-  SignalDataChannelTransportReceivedData_s.disconnect(webrtc_data_channel);
   SignalDataChannelTransportChannelClosing_s.disconnect(webrtc_data_channel);
 }
 
@@ -120,10 +114,11 @@ void DataChannelController::OnDataReceived(
       SafeTask(signaling_safety_.flag(), [this, params, buffer] {
         RTC_DCHECK_RUN_ON(signaling_thread());
         // TODO(bugs.webrtc.org/11547): The data being received should be
-        // delivered on the network thread (change
-        // SignalDataChannelTransportReceivedData_s to
-        // SignalDataChannelTransportReceivedData_n).
-        SignalDataChannelTransportReceivedData_s(params, buffer);
+        // delivered on the network thread.
+        for (const auto& channel : sctp_data_channels_) {
+          if (channel->id() == params.sid)
+            channel->OnDataReceived(params, buffer);
+        }
       }));
 }
 
@@ -176,7 +171,8 @@ void DataChannelController::OnReadyToSend() {
   signaling_thread()->PostTask(SafeTask(signaling_safety_.flag(), [this] {
     RTC_DCHECK_RUN_ON(signaling_thread());
     data_channel_transport_ready_to_send_ = true;
-    SignalDataChannelTransportWritable_s(data_channel_transport_ready_to_send_);
+    for (const auto& channel : sctp_data_channels_)
+      channel->OnTransportReady(true);
   }));
 }
 
