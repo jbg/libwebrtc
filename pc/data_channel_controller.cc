@@ -41,23 +41,13 @@ bool DataChannelController::SendData(int sid,
 bool DataChannelController::ConnectDataChannel(
     SctpDataChannel* webrtc_data_channel) {
   RTC_DCHECK_RUN_ON(signaling_thread());
-  if (!data_channel_transport()) {
-    // Don't log an error here, because DataChannels are expected to call
-    // ConnectDataChannel in this state. It's the only way to initially tell
-    // whether or not the underlying transport is ready.
-    return false;
-  }
+  // TODO(tommi): Remove this method.
   return true;
 }
 
 void DataChannelController::DisconnectDataChannel(
     SctpDataChannel* webrtc_data_channel) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  if (!data_channel_transport()) {
-    RTC_LOG(LS_ERROR)
-        << "DisconnectDataChannel called when sctp_transport_ is NULL.";
-    return;
-  }
+  // TODO(tommi): Remove this method.
 }
 
 void DataChannelController::AddSctpDataStream(int sid) {
@@ -100,21 +90,18 @@ void DataChannelController::OnDataReceived(
     DataMessageType type,
     const rtc::CopyOnWriteBuffer& buffer) {
   RTC_DCHECK_RUN_ON(network_thread());
-  cricket::ReceiveDataParams params;
-  params.sid = channel_id;
-  params.type = type;
 
-  if (HandleOpenMessage_n(params, buffer))
+  if (HandleOpenMessage_n(type, channel_id, buffer))
     return;
 
   signaling_thread()->PostTask(
-      SafeTask(signaling_safety_.flag(), [this, params, buffer] {
+      SafeTask(signaling_safety_.flag(), [this, channel_id, type, buffer] {
         RTC_DCHECK_RUN_ON(signaling_thread());
         // TODO(bugs.webrtc.org/11547): The data being received should be
         // delivered on the network thread.
         for (const auto& channel : sctp_data_channels_) {
-          if (channel->id() == params.sid)
-            channel->OnDataReceived(params, buffer);
+          if (channel->id() == channel_id)
+            channel->OnDataReceived(type, buffer);
         }
       }));
 }
@@ -127,7 +114,7 @@ void DataChannelController::OnChannelClosing(int channel_id) {
         // TODO(bugs.webrtc.org/11547): Should run on the network thread.
         for (const auto& channel : sctp_data_channels_) {
           if (channel->id() == channel_id)
-            channel->OnClosingProcedureStartedRemotely(channel_id);
+            channel->OnClosingProcedureStartedRemotely();
         }
       }));
 }
@@ -156,7 +143,7 @@ void DataChannelController::OnChannelClosed(int channel_id) {
           // path to not call us back.
           channel->ClearController();
           // TODO(tommi): This basically only calls SetState(kClosed).
-          channel->OnClosingProcedureComplete(channel_id);
+          channel->OnClosingProcedureComplete();
 
           // We don't call OnChannelStateChanged() now, since
           // OnSctpDataChannelClosed() steps have been taken, but we need
@@ -234,19 +221,20 @@ std::vector<DataChannelStats> DataChannelController::GetDataChannelStats()
 }
 
 bool DataChannelController::HandleOpenMessage_n(
-    const cricket::ReceiveDataParams& params,
+    webrtc::DataMessageType type,
+    int channel_id,
     const rtc::CopyOnWriteBuffer& buffer) {
-  if (params.type != DataMessageType::kControl || !IsOpenMessage(buffer))
+  if (type != DataMessageType::kControl || !IsOpenMessage(buffer))
     return false;
 
   // Received OPEN message; parse and signal that a new data channel should
   // be created.
   std::string label;
   InternalDataChannelInit config;
-  config.id = params.sid;
+  config.id = channel_id;
   if (!ParseDataChannelOpenMessage(buffer, &label, &config)) {
     RTC_LOG(LS_WARNING) << "Failed to parse the OPEN message for sid "
-                        << params.sid;
+                        << channel_id;
   } else {
     config.open_handshake_role = InternalDataChannelInit::kAcker;
     signaling_thread()->PostTask(
