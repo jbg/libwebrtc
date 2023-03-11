@@ -151,19 +151,6 @@ class DataChannelController : public SctpDataChannelControllerInterface,
   std::vector<rtc::scoped_refptr<SctpDataChannel>> sctp_data_channels_
       RTC_GUARDED_BY(signaling_thread());
 
-  // Signals from `data_channel_transport_`.  These are invoked on the
-  // signaling thread.
-  // TODO(bugs.webrtc.org/11547): These '_s' signals likely all belong on the
-  // network thread.
-  sigslot::signal1<bool> SignalDataChannelTransportWritable_s
-      RTC_GUARDED_BY(signaling_thread());
-  sigslot::signal2<const cricket::ReceiveDataParams&,
-                   const rtc::CopyOnWriteBuffer&>
-      SignalDataChannelTransportReceivedData_s
-          RTC_GUARDED_BY(signaling_thread());
-  sigslot::signal1<int> SignalDataChannelTransportChannelClosing_s
-      RTC_GUARDED_BY(signaling_thread());
-
   // Owning PeerConnection.
   PeerConnectionInternal* const pc_;
   // The weak pointers must be dereferenced and invalidated on the signalling
