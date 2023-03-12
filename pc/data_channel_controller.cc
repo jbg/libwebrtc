@@ -322,6 +322,7 @@ void DataChannelController::AllocateSctpSids(rtc::SSLRole role) {
       // thread via AddSctpDataStream. Maybe it's better to move the whole loop
       // to the network thread? Maybe even `sctp_data_channels_`?
       channel->SetSctpSid(sid);
+      AddSctpDataStream(sid.value());
     }
   }
   // Since closing modifies the list of channels, we have to do the actual
