@@ -126,6 +126,9 @@ class SharedScreenCastStreamPrivate {
   struct pw_stream* pw_stream_ = nullptr;
   struct pw_thread_loop* pw_main_loop_ = nullptr;
   struct spa_source* renegotiate_ = nullptr;
+  webrtc::Mutex pw_last_buffer_lock_;
+  struct pw_buffer* pw_last_buffer_ RTC_GUARDED_BY(&pw_last_buffer_lock_) =
+      nullptr;
 
   spa_hook spa_core_listener_;
   spa_hook spa_stream_listener_;
@@ -157,6 +160,8 @@ class SharedScreenCastStreamPrivate {
   struct spa_video_info_raw spa_video_format_;
 
   void ProcessBuffer(pw_buffer* buffer);
+  void ProcessBufferMousePosition(pw_buffer* buffer);
+  bool BufferHasImageData(pw_buffer* buffer);
   void ConvertRGBxToBGRx(uint8_t* frame, uint32_t size);
   void UpdateFrameUpdatedRegions(const spa_buffer* spa_buffer,
                                  DesktopFrame& frame);
@@ -331,26 +336,36 @@ void SharedScreenCastStreamPrivate::OnStreamProcess(void* data) {
       static_cast<SharedScreenCastStreamPrivate*>(data);
   RTC_DCHECK(that);
 
-  struct pw_buffer* next_buffer;
-  struct pw_buffer* buffer = nullptr;
+  struct pw_buffer* last_buffer = nullptr;
+  struct pw_buffer* buffer;
 
-  next_buffer = pw_stream_dequeue_buffer(that->pw_stream_);
-  while (next_buffer) {
-    buffer = next_buffer;
-    next_buffer = pw_stream_dequeue_buffer(that->pw_stream_);
-
-    if (next_buffer) {
+  while ((buffer = pw_stream_dequeue_buffer(that->pw_stream_))) {
+    that->ProcessBufferMousePosition(buffer);
+    if (!that->BufferHasImageData(buffer)) {
       pw_stream_queue_buffer(that->pw_stream_, buffer);
+      continue;
     }
+    if (last_buffer) {
+      pw_stream_queue_buffer(that->pw_stream_, last_buffer);
+    }
+    last_buffer = buffer;
   }
 
-  if (!buffer) {
+  if (!last_buffer) {
     return;
   }
 
-  that->ProcessBuffer(buffer);
+  webrtc::MutexLock lock(&that->pw_last_buffer_lock_);
+  // Return pw_buffer we kept from previous OnStreamProcess() call.
+  // We don't need it any more as a new buffer is available.
+  if (that->pw_last_buffer_) {
+    pw_stream_queue_buffer(that->pw_stream_, that->pw_last_buffer_);
+  }
 
-  pw_stream_queue_buffer(that->pw_stream_, buffer);
+  that->pw_last_buffer_ = last_buffer;
+  if (that->observer_) {
+    that->observer_->OnDesktopFrameChanged();
+  }
 }
 
 void SharedScreenCastStreamPrivate::OnRenegotiateFormat(void* data, uint64_t) {
@@ -589,6 +604,10 @@ void SharedScreenCastStreamPrivate::StopAndCleanupStream() {
   pw_thread_loop_stop(pw_main_loop_);
 
   if (pw_stream_) {
+    {
+      webrtc::MutexLock lock(&pw_last_buffer_lock_);
+      pw_last_buffer_ = nullptr;
+    }
     pw_stream_disconnect(pw_stream_);
     pw_stream_destroy(pw_stream_);
     pw_stream_ = nullptr;
@@ -615,9 +634,21 @@ void SharedScreenCastStreamPrivate::StopAndCleanupStream() {
 
 std::unique_ptr<SharedDesktopFrame>
 SharedScreenCastStreamPrivate::CaptureFrame() {
-  webrtc::MutexLock lock(&queue_lock_);
+  if (!pw_stream_) {
+    return std::unique_ptr<SharedDesktopFrame>{};
+  }
 
-  if (!pw_stream_ || !queue_.current_frame()) {
+  {
+    webrtc::MutexLock lock(&pw_last_buffer_lock_);
+    if (pw_last_buffer_) {
+      ProcessBuffer(pw_last_buffer_);
+      pw_stream_queue_buffer(pw_stream_, pw_last_buffer_);
+      pw_last_buffer_ = nullptr;
+    }
+  }
+
+  webrtc::MutexLock lock(&queue_lock_);
+  if (!queue_.current_frame()) {
     return std::unique_ptr<SharedDesktopFrame>{};
   }
 
@@ -690,6 +721,39 @@ void SharedScreenCastStreamPrivate::NotifyCallbackOfNewFrame(
 }
 
 RTC_NO_SANITIZE("cfi-icall")
+void SharedScreenCastStreamPrivate::ProcessBufferMousePosition(
+    pw_buffer* buffer) {
+  spa_buffer* spa_buffer = buffer->buffer;
+
+  const struct spa_meta_cursor* cursor = static_cast<struct spa_meta_cursor*>(
+      spa_buffer_find_meta_data(spa_buffer, SPA_META_Cursor, sizeof(*cursor)));
+  if (cursor && spa_meta_cursor_is_valid(cursor)) {
+    struct spa_meta_bitmap* bitmap = nullptr;
+
+    if (cursor->bitmap_offset)
+      bitmap =
+          SPA_MEMBER(cursor, cursor->bitmap_offset, struct spa_meta_bitmap);
+
+    if (bitmap && bitmap->size.width > 0 && bitmap->size.height > 0) {
+      const uint8_t* bitmap_data = SPA_MEMBER(bitmap, bitmap->offset, uint8_t);
+      BasicDesktopFrame* mouse_frame = new BasicDesktopFrame(
+          DesktopSize(bitmap->size.width, bitmap->size.height));
+      mouse_frame->CopyPixelsFrom(
+          bitmap_data, bitmap->stride,
+          DesktopRect::MakeWH(bitmap->size.width, bitmap->size.height));
+      mouse_cursor_ = std::make_unique<MouseCursor>(
+          mouse_frame, DesktopVector(cursor->hotspot.x, cursor->hotspot.y));
+    }
+    mouse_cursor_position_.set(cursor->position.x, cursor->position.y);
+  }
+}
+
+bool SharedScreenCastStreamPrivate::BufferHasImageData(pw_buffer* buffer) {
+  spa_buffer* spa_buffer = buffer->buffer;
+  return spa_buffer->datas[0].chunk->size;
+}
+
+RTC_NO_SANITIZE("cfi-icall")
 void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
   int64_t capture_start_time_nanos = rtc::TimeNanos();
   if (callback_) {
@@ -700,42 +764,6 @@ void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
   ScopedBuf map;
   std::unique_ptr<uint8_t[]> src_unique_ptr;
   uint8_t* src = nullptr;
-
-  // Try to update the mouse cursor first, because it can be the only
-  // information carried by the buffer
-  {
-    const struct spa_meta_cursor* cursor =
-        static_cast<struct spa_meta_cursor*>(spa_buffer_find_meta_data(
-            spa_buffer, SPA_META_Cursor, sizeof(*cursor)));
-    if (cursor && spa_meta_cursor_is_valid(cursor)) {
-      struct spa_meta_bitmap* bitmap = nullptr;
-
-      if (cursor->bitmap_offset)
-        bitmap =
-            SPA_MEMBER(cursor, cursor->bitmap_offset, struct spa_meta_bitmap);
-
-      if (bitmap && bitmap->size.width > 0 && bitmap->size.height > 0) {
-        const uint8_t* bitmap_data =
-            SPA_MEMBER(bitmap, bitmap->offset, uint8_t);
-        BasicDesktopFrame* mouse_frame = new BasicDesktopFrame(
-            DesktopSize(bitmap->size.width, bitmap->size.height));
-        mouse_frame->CopyPixelsFrom(
-            bitmap_data, bitmap->stride,
-            DesktopRect::MakeWH(bitmap->size.width, bitmap->size.height));
-        mouse_cursor_ = std::make_unique<MouseCursor>(
-            mouse_frame, DesktopVector(cursor->hotspot.x, cursor->hotspot.y));
-
-        if (observer_) {
-          observer_->OnCursorShapeChanged();
-        }
-      }
-      mouse_cursor_position_.set(cursor->position.x, cursor->position.y);
-
-      if (observer_) {
-        observer_->OnCursorPositionChanged();
-      }
-    }
-  }
 
   if (spa_buffer->datas[0].chunk->size == 0) {
     return;
@@ -933,10 +961,6 @@ void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
       ConvertRGBxToBGRx(tmp_src, queue_.current_frame()->stride());
       tmp_src += queue_.current_frame()->stride();
     }
-  }
-
-  if (observer_) {
-    observer_->OnDesktopFrameChanged();
   }
 
   UpdateFrameUpdatedRegions(spa_buffer, *queue_.current_frame());
