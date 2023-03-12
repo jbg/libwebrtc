@@ -23,7 +23,6 @@
 #include "api/rtc_error.h"
 #include "api/scoped_refptr.h"
 #include "api/transport/data_channel_transport_interface.h"
-#include "media/base/media_channel.h"
 #include "pc/data_channel_utils.h"
 #include "pc/sctp_utils.h"
 #include "rtc_base/containers/flat_set.h"
@@ -182,7 +181,7 @@ class SctpDataChannel : public DataChannelInterface,
   // already finished.
   void OnTransportReady(bool writable);
 
-  void OnDataReceived(const cricket::ReceiveDataParams& params,
+  void OnDataReceived(webrtc::DataMessageType type,
                       const rtc::CopyOnWriteBuffer& payload);
 
   // Sets the SCTP sid and adds to transport layer if not set yet. Should only
@@ -191,7 +190,7 @@ class SctpDataChannel : public DataChannelInterface,
 
   // The remote side started the closing procedure by resetting its outgoing
   // stream (our incoming stream). Sets state to kClosing.
-  void OnClosingProcedureStartedRemotely(int sid);
+  void OnClosingProcedureStartedRemotely();
   // The closing procedure is complete; both incoming and outgoing stream
   // resets are done and the channel can transition to kClosed. Called
   // asynchronously after RemoveSctpDataStream.
