@@ -365,12 +365,8 @@ void SctpDataChannel::SetSctpSid(const StreamId& sid) {
   RTC_DCHECK_NE(handshake_state_, kHandshakeWaitingForAck);
   RTC_DCHECK_EQ(state_, kConnecting);
 
-  if (id_ == sid) {
-    return;
-  }
-
   id_ = sid;
-  controller_->AddSctpDataStream(sid.value());
+  // controller_->AddSctpDataStream(sid.value());
 }
 
 void SctpDataChannel::OnClosingProcedureStartedRemotely(int sid) {
