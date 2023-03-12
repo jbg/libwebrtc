@@ -188,6 +188,7 @@ class SctpDataChannel : public DataChannelInterface,
   // Sets the SCTP sid and adds to transport layer if not set yet. Should only
   // be called once.
   void SetSctpSid(const StreamId& sid);
+
   // The remote side started the closing procedure by resetting its outgoing
   // stream (our incoming stream). Sets state to kClosing.
   void OnClosingProcedureStartedRemotely(int sid);
