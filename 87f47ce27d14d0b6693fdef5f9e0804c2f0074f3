@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "420cc96b_47c79154",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-13T15:20:49Z",
+      "side": 1,
+      "message": "This check is done in VerifyRTCOutboundRtpStreamStats but shouldn\u0027t it also be done in VerifyRTCRemoteOutboundRtpStreamStats?",
+      "revId": "87f47ce27d14d0b6693fdef5f9e0804c2f0074f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
