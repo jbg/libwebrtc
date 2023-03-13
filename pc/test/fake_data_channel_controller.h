@@ -88,11 +88,7 @@ class FakeDataChannelController
     for (webrtc::SctpDataChannel* ch : std::set<webrtc::SctpDataChannel*>(
              connected_channels_.begin(), connected_channels_.end())) {
       if (connected_channels_.count(ch) && ch->id() == sid) {
-        // This path mimics the DCC's OnChannelClosed handler since the FDCC
-        // (this class) doesn't have a transport that would do do that.
-        DisconnectDataChannel(ch);
         ch->OnClosingProcedureComplete();
-        OnChannelStateChanged(ch, ch->state());
       }
     }
   }

@@ -369,9 +369,9 @@ void SctpDataChannel::SetSctpSid(const StreamId& sid) {
   controller_->AddSctpDataStream(sid.stream_id_int());
 }
 
-void SctpDataChannel::OnClosingProcedureStartedRemotely(int sid) {
+void SctpDataChannel::OnClosingProcedureStartedRemotely() {
   RTC_DCHECK_RUN_ON(signaling_thread_);
-  if (id_.stream_id_int() == sid && state_ != kClosing && state_ != kClosed) {
+  if (state_ != kClosing && state_ != kClosed) {
     // Don't bother sending queued data since the side that initiated the
     // closure wouldn't receive it anyway. See crbug.com/559394 for a lengthy
     // discussion about this.
@@ -391,6 +391,7 @@ void SctpDataChannel::OnClosingProcedureComplete() {
   // all pending data and transitioned to kClosing already.
   RTC_DCHECK_EQ(state_, kClosing);
   RTC_DCHECK(queued_send_data_.Empty());
+  DisconnectFromTransport();  // TODO(tommi): only needed for tests.
 
   // `OnClosingProcedureComplete` is triggered by the transport. The controller
   // will take care of any cleanup we'd otherwise do recursively via the call
@@ -435,9 +436,7 @@ DataChannelStats SctpDataChannel::GetStats() const {
 void SctpDataChannel::OnDataReceived(const cricket::ReceiveDataParams& params,
                                      const rtc::CopyOnWriteBuffer& payload) {
   RTC_DCHECK_RUN_ON(signaling_thread_);
-  if (id_.stream_id_int() != params.sid) {
-    return;
-  }
+  RTC_DCHECK_EQ(id_.stream_id_int(), params.sid);
 
   if (params.type == DataMessageType::kControl) {
     if (handshake_state_ != kHandshakeWaitingForAck) {
