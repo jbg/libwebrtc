@@ -3370,24 +3370,28 @@ bool ParseContent(absl::string_view message,
 
   media_desc->set_receive_rids(receive_rids);
 
-  // Create tracks from the `ssrc_infos`.
-  // If the stream_id/track_id for all SSRCS are identical, one StreamParams
-  // will be created in CreateTracksFromSsrcInfos, containing all the SSRCs from
-  // the m= section.
-  if (!ssrc_infos.empty()) {
-    CreateTracksFromSsrcInfos(ssrc_infos, stream_ids, track_id, &tracks,
-                              *msid_signaling);
-  } else if (media_type != cricket::MEDIA_TYPE_DATA &&
-             (*msid_signaling & cricket::kMsidSignalingMediaSection)) {
-    // If the stream_ids/track_id was signaled but SSRCs were unsignaled we
-    // still create a track. This isn't done for data media types because
-    // StreamParams aren't used for SCTP streams, and RTP data channels don't
-    // support unsignaled SSRCs.
-    // If track id was not specified, create a random one.
-    if (track_id.empty()) {
-      track_id = rtc::CreateRandomString(8);
+  auto direction = media_desc->direction();
+  if (direction == RtpTransceiverDirection::kSendRecv ||
+      direction == RtpTransceiverDirection::kSendOnly) {
+    // Create tracks from the `ssrc_infos`.
+    // If the stream_id/track_id for all SSRCS are identical, one StreamParams
+    // will be created in CreateTracksFromSsrcInfos, containing all the SSRCs
+    // from the m= section.
+    if (!ssrc_infos.empty()) {
+      CreateTracksFromSsrcInfos(ssrc_infos, stream_ids, track_id, &tracks,
+                                *msid_signaling);
+    } else if (media_type != cricket::MEDIA_TYPE_DATA &&
+               (*msid_signaling & cricket::kMsidSignalingMediaSection)) {
+      // If the stream_ids/track_id was signaled but SSRCs were unsignaled we
+      // still create a track. This isn't done for data media types because
+      // StreamParams aren't used for SCTP streams, and RTP data channels don't
+      // support unsignaled SSRCs.
+      // If track id was not specified, create a random one.
+      if (track_id.empty()) {
+        track_id = rtc::CreateRandomString(8);
+      }
+      CreateTrackWithNoSsrcs(stream_ids, track_id, send_rids, &tracks);
     }
-    CreateTrackWithNoSsrcs(stream_ids, track_id, send_rids, &tracks);
   }
 
   // Add the ssrc group to the track.
