@@ -70,6 +70,30 @@
       },
       "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18372050_ad27f170",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-13T18:47:27Z",
+      "side": 1,
+      "message": "That\u0027s right, but I also expect that it doesn\u0027t change anything since the compositor allocates few buffers upfront which are recycled over and over and might not get freed anyway until they are actually reused. \n\nI asked Wim Taymans (PipeWire author), he said there is a mechanism to refcount busy buffers and they will not get used until we queue them back. It should be safe to hold them until we use another one or until we stop streaming.",
+      "parentUuid": "ed73e568_d2b0c447",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
