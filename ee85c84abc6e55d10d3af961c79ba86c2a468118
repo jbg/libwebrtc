@@ -22,6 +22,30 @@
       },
       "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4982970_097278f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-13T18:34:44Z",
+      "side": 1,
+      "message": "It\u0027s true that it will not play well with Salman\u0027s workflow, because we now process frames only once they are requested :-/.\n\nIncreased memory won\u0027t be much a problem, because the buffer doesn\u0027t carry the frame itself, only its information (size, stride, etc.) and file descriptor.\n\nMartin Stránský said he saw a drop in CPU usage, but we didn\u0027t do any exact measurement so it\u0027s also somewhat theoretical.",
+      "parentUuid": "6ed3dbdf_ab158b8e",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
