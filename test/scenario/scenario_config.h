@@ -141,7 +141,6 @@ struct VideoStreamConfig {
     bool frame_dropping = true;
     struct SingleLayer {
       bool denoising = true;
-      bool automatic_scaling = true;
     } single;
     std::vector<webrtc::ScalabilityMode> simulcast_streams = {
         webrtc::ScalabilityMode::kL1T1};

@@ -101,11 +101,6 @@ int VerifyCodec(const webrtc::VideoCodec* codec_settings) {
   if (codec_settings->width <= 1 || codec_settings->height <= 1) {
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
   }
-  if (codec_settings->codecType == webrtc::kVideoCodecVP8 &&
-      codec_settings->VP8().automaticResizeOn &&
-      CountActiveStreams(*codec_settings) > 1) {
-    return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
-  }
   return WEBRTC_VIDEO_CODEC_OK;
 }
 

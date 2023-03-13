@@ -27,6 +27,7 @@ public interface VideoEncoder {
     public final int startBitrate; // Kilobits per second.
     public final int maxFramerate;
     public final int numberOfSimulcastStreams;
+    // TODO(ssilkin): Update downstream projects and remove.
     public final boolean automaticResizeOn;
     public final Capabilities capabilities;
 
@@ -35,9 +36,18 @@ public interface VideoEncoder {
     public Settings(int numberOfCores, int width, int height, int startBitrate, int maxFramerate,
         int numberOfSimulcastStreams, boolean automaticResizeOn) {
       this(numberOfCores, width, height, startBitrate, maxFramerate, numberOfSimulcastStreams,
-          automaticResizeOn, new VideoEncoder.Capabilities(false /* lossNotification */));
+          false, new VideoEncoder.Capabilities(false /* lossNotification */));
     }
 
+    @CalledByNative("Settings")
+    public Settings(int numberOfCores, int width, int height, int startBitrate, int maxFramerate,
+        int numberOfSimulcastStreams, Capabilities capabilities) {
+      this(numberOfCores, width, height, startBitrate, maxFramerate, numberOfSimulcastStreams,
+          false /* automaticResizeOn */,
+          new VideoEncoder.Capabilities(false /* lossNotification */));
+    }
+
+    // TODO(ssilkin): Update downstream projects and remove.
     @CalledByNative("Settings")
     public Settings(int numberOfCores, int width, int height, int startBitrate, int maxFramerate,
         int numberOfSimulcastStreams, boolean automaticResizeOn, Capabilities capabilities) {

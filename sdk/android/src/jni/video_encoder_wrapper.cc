@@ -55,18 +55,9 @@ int VideoEncoderWrapper::InitEncode(const VideoCodec* codec_settings,
 }
 
 int32_t VideoEncoderWrapper::InitEncodeInternal(JNIEnv* jni) {
-  bool automatic_resize_on;
-  switch (codec_settings_.codecType) {
-    case kVideoCodecVP8:
-      automatic_resize_on = codec_settings_.VP8()->automaticResizeOn;
-      break;
-    case kVideoCodecVP9:
-      automatic_resize_on = codec_settings_.VP9()->automaticResizeOn;
-      gof_.SetGofInfoVP9(TemporalStructureMode::kTemporalStructureMode1);
-      gof_idx_ = 0;
-      break;
-    default:
-      automatic_resize_on = true;
+  if (codec_settings_.codecType == kVideoCodecVP9) {
+    gof_.SetGofInfoVP9(TemporalStructureMode::kTemporalStructureMode1);
+    gof_idx_ = 0;
   }
 
   RTC_DCHECK(capabilities_);
@@ -77,8 +68,7 @@ int32_t VideoEncoderWrapper::InitEncodeInternal(JNIEnv* jni) {
       jni, number_of_cores_, codec_settings_.width, codec_settings_.height,
       static_cast<int>(codec_settings_.startBitrate),
       static_cast<int>(codec_settings_.maxFramerate),
-      static_cast<int>(codec_settings_.numberOfSimulcastStreams),
-      automatic_resize_on, capabilities);
+      static_cast<int>(codec_settings_.numberOfSimulcastStreams), capabilities);
 
   ScopedJavaLocalRef<jobject> callback =
       Java_VideoEncoderWrapper_createEncoderCallback(jni,

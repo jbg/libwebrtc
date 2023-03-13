@@ -916,7 +916,6 @@ class VideoStreamEncoderTest : public ::testing::Test {
     if (payload_name == "VP9") {
       VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
       vp9_settings.numberOfSpatialLayers = num_spatial_layers;
-      vp9_settings.automaticResizeOn = num_spatial_layers <= 1;
       video_encoder_config.encoder_specific_settings =
           rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
               vp9_settings);
@@ -4825,7 +4824,6 @@ TEST_F(VideoStreamEncoderTest,
   vp9_settings.numberOfSpatialLayers = 2;
   vp9_settings.numberOfTemporalLayers = 2;
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
-  vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -4878,7 +4876,6 @@ TEST_F(VideoStreamEncoderTest,
   vp9_settings.numberOfSpatialLayers = 2;
   vp9_settings.numberOfTemporalLayers = 2;
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
-  vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -4924,7 +4921,6 @@ TEST_F(VideoStreamEncoderTest,
   vp9_settings.numberOfSpatialLayers = 2;
   vp9_settings.numberOfTemporalLayers = 2;
   vp9_settings.interLayerPred = InterLayerPredMode::kOnKeyPic;
-  vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -4970,7 +4966,6 @@ TEST_F(VideoStreamEncoderTest,
   vp9_settings.numberOfSpatialLayers = 3;
   vp9_settings.numberOfTemporalLayers = 2;
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
-  vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -5027,7 +5022,6 @@ TEST_F(VideoStreamEncoderTest,
   vp9_settings.numberOfSpatialLayers = 3;
   vp9_settings.numberOfTemporalLayers = 2;
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
-  vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -5077,7 +5071,6 @@ TEST_F(VideoStreamEncoderTest,
   vp9_settings.numberOfSpatialLayers = 3;
   vp9_settings.numberOfTemporalLayers = 2;
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
-  vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -5721,8 +5714,6 @@ TEST_F(VideoStreamEncoderTest, InitialFrameDropActivatesWhenSVCLayersChange) {
                                  &video_encoder_config);
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 3;
-  // Since only one layer is active - automatic resize should be enabled.
-  vp9_settings.automaticResizeOn = true;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -5780,8 +5771,6 @@ TEST_F(VideoStreamEncoderTest,
                                  &video_encoder_config);
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 3;
-  // Since only one layer is active - automatic resize should be enabled.
-  vp9_settings.automaticResizeOn = true;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -5835,8 +5824,6 @@ TEST_F(VideoStreamEncoderTest,
                                  &video_encoder_config);
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 3;
-  // Since only one layer is active - automatic resize should be enabled.
-  vp9_settings.automaticResizeOn = true;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -5897,8 +5884,6 @@ TEST_F(VideoStreamEncoderTest, DefaultMaxAndMinBitratesNotUsedIfDisabled) {
                                  &video_encoder_config);
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 3;
-  // Since only one layer is active - automatic resize should be enabled.
-  vp9_settings.automaticResizeOn = true;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -5971,8 +5956,6 @@ TEST_F(VideoStreamEncoderTest,
                                  &video_encoder_config);
   VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
   vp9_settings.numberOfSpatialLayers = 3;
-  // Since only one layer is active - automatic resize should be enabled.
-  vp9_settings.automaticResizeOn = true;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -8708,7 +8691,6 @@ TEST_F(VideoStreamEncoderTest, RecreatesEncoderWhenEnableVp9SpatialLayer) {
   vp9_settings.numberOfSpatialLayers = 2;
   vp9_settings.numberOfTemporalLayers = 2;
   vp9_settings.interLayerPred = InterLayerPredMode::kOn;
-  vp9_settings.automaticResizeOn = false;
   video_encoder_config.encoder_specific_settings =
       rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
           vp9_settings);
@@ -8893,7 +8875,6 @@ TEST_P(VideoStreamEncoderWithRealEncoderTest, HandlesLayerToggling) {
     VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
     vp9_settings.numberOfSpatialLayers = kNumSpatialLayers;
     vp9_settings.numberOfTemporalLayers = 3;
-    vp9_settings.automaticResizeOn = false;
     config.encoder_specific_settings =
         rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
             vp9_settings);

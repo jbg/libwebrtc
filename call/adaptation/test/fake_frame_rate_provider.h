@@ -54,7 +54,6 @@ class MockVideoStreamEncoderObserver : public VideoStreamEncoderObserver {
               OnBitrateAllocationUpdated,
               (const VideoCodec&, const VideoBitrateAllocation&),
               (override));
-  MOCK_METHOD(void, OnEncoderInternalScalerUpdate, (bool), (override));
   MOCK_METHOD(int, GetInputFrameRate, (), (const, override));
 };
 

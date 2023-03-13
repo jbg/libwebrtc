@@ -51,7 +51,6 @@ struct VideoCodecVP8 {
   }
   unsigned char numberOfTemporalLayers;
   bool denoisingOn;
-  bool automaticResizeOn;
   int keyFrameInterval;
 };
 
@@ -76,7 +75,6 @@ struct VideoCodecVP9 {
   bool denoisingOn;
   int keyFrameInterval;
   bool adaptiveQpMode;
-  bool automaticResizeOn;
   unsigned char numberOfSpatialLayers;
   bool flexibleMode;
   InterLayerPredMode interLayerPred;
