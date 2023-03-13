@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a323ca1_6a22c55e",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-13T15:41:09Z",
+      "side": 1,
+      "message": "Looks like this value is still set from an uint32_t source:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/audio/channel_receive.cc;l\u003d863;drc\u003dda35f4ed6398ae287d5adc828b9546eec95f668a\n\nLooks like these in turn are set in two places, one using size_t so uint64_t-friendly:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/rtp_rtcp/source/rtcp_transceiver_impl.cc;l\u003d645;drc\u003dda35f4ed6398ae287d5adc828b9546eec95f668a\n\nBut the other place is uint32_t, some a few layers more and we end up here I think:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/rtp_rtcp/include/rtp_rtcp_defines.h;l\u003d345;drc\u003dda35f4ed6398ae287d5adc828b9546eec95f668a",
+      "revId": "87f47ce27d14d0b6693fdef5f9e0804c2f0074f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "420cc96b_47c79154",
         "filename": "pc/rtc_stats_integrationtest.cc",
         "patchSetId": 6
