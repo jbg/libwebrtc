@@ -516,7 +516,6 @@ class TestSimulcastEncoderAdapterFake : public ::testing::Test,
     EXPECT_EQ(ref.VP8().numberOfTemporalLayers,
               target.VP8().numberOfTemporalLayers);
     EXPECT_EQ(ref.VP8().denoisingOn, target.VP8().denoisingOn);
-    EXPECT_EQ(ref.VP8().automaticResizeOn, target.VP8().automaticResizeOn);
     EXPECT_EQ(ref.GetFrameDropEnabled(), target.GetFrameDropEnabled());
     EXPECT_EQ(ref.VP8().keyFrameInterval, target.VP8().keyFrameInterval);
     EXPECT_EQ(ref.qpMax, target.qpMax);

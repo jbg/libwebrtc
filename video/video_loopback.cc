@@ -399,7 +399,6 @@ void Loopback() {
   params.video[0].min_transmit_bps = 0;
   params.video[0].ulpfec = absl::GetFlag(FLAGS_use_ulpfec);
   params.video[0].flexfec = absl::GetFlag(FLAGS_use_flexfec);
-  params.video[0].automatic_scaling = NumStreams() < 2;
   params.video[0].clip_path = Clip();
   params.video[0].capture_device_index = GetCaptureDevice();
   params.audio.enabled = absl::GetFlag(FLAGS_audio);

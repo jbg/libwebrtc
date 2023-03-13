@@ -454,10 +454,6 @@ int LibvpxVp8Encoder::InitEncode(const VideoCodec* inst,
     num_active_streams_ = 1;
   }
 
-  if (inst->VP8().automaticResizeOn && num_active_streams_ > 1) {
-    return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
-  }
-
   // Use the previous pixel format to avoid extra image allocations.
   vpx_img_fmt_t pixel_format =
       raw_images_.empty() ? VPX_IMG_FMT_I420 : raw_images_[0].fmt;
@@ -1244,15 +1240,8 @@ VideoEncoder::EncoderInfo LibvpxVp8Encoder::GetEncoderInfo() const {
         encoder_info_override_.resolution_bitrate_limits();
   }
 
-  const bool enable_scaling =
-      num_active_streams_ == 1 &&
-      (vpx_configs_.empty() || vpx_configs_[0].rc_dropframe_thresh > 0) &&
-      codec_.VP8().automaticResizeOn;
-
-  info.scaling_settings = enable_scaling
-                              ? VideoEncoder::ScalingSettings(
-                                    kLowVp8QpThreshold, kHighVp8QpThreshold)
-                              : VideoEncoder::ScalingSettings::kOff;
+  info.scaling_settings =
+      VideoEncoder::ScalingSettings(kLowVp8QpThreshold, kHighVp8QpThreshold);
   if (rate_control_settings_.LibvpxVp8MinPixels()) {
     info.scaling_settings.min_pixels_per_frame =
         rate_control_settings_.LibvpxVp8MinPixels().value();

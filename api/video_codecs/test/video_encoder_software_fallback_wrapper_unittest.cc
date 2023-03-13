@@ -507,7 +507,6 @@ class ForcedFallbackTest : public VideoEncoderSoftwareFallbackWrapperTestBase {
     codec_.width = kWidth;
     codec_.height = kHeight;
     codec_.VP8()->numberOfTemporalLayers = 1;
-    codec_.VP8()->automaticResizeOn = true;
     codec_.SetFrameDropEnabled(true);
     rate_allocator_.reset(new SimulcastRateAllocator(codec_));
   }
@@ -678,17 +677,6 @@ TEST_F(ForcedFallbackTestEnabled, GetScaleSettingsWithFallback) {
   const auto settings = fallback_wrapper_->GetEncoderInfo().scaling_settings;
   EXPECT_TRUE(settings.thresholds.has_value());
   EXPECT_EQ(kMinPixelsPerFrame, settings.min_pixels_per_frame);
-}
-
-TEST_F(ForcedFallbackTestEnabled, ScalingDisabledIfResizeOff) {
-  // Resolution at max threshold.
-  codec_.VP8()->automaticResizeOn = false;
-  InitEncode(kWidth, kHeight);
-  EncodeFrameAndVerifyLastName("libvpx");
-
-  // Should be disabled for automatic resize off.
-  const auto settings = fallback_wrapper_->GetEncoderInfo().scaling_settings;
-  EXPECT_FALSE(settings.thresholds.has_value());
 }
 
 TEST(SoftwareFallbackEncoderTest, BothRateControllersNotTrusted) {

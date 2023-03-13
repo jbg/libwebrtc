@@ -246,7 +246,6 @@ void SimulcastTestFixtureImpl::DefaultSettings(
   settings->SetFrameDropEnabled(true);
   if (codec_type == kVideoCodecVP8) {
     settings->VP8()->denoisingOn = true;
-    settings->VP8()->automaticResizeOn = false;
     settings->VP8()->keyFrameInterval = 3000;
   } else {
     settings->H264()->keyFrameInterval = 3000;
