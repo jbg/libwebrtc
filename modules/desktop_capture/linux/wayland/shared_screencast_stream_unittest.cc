@@ -152,6 +152,8 @@ TEST_F(PipeWireStreamTest, TestPipeWire) {
   test_screencast_stream_provider_->RecordFrame(blue_color);
   frameRecordedEvent.Wait(kShortWait);
 
+  shared_screencast_stream_->CaptureFrame();
+
   // First frame should be now overwritten with blue color
   frameRetrievedEvent.Wait(kShortWait);
   EXPECT_EQ(RgbaColor(frame->data()), blue_color);
