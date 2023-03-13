@@ -56,6 +56,30 @@
       },
       "revId": "05004b1783d5867f95ef4df30c5104fbd25ffd06",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da5df880_8088af1b",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-03-13T10:42:33Z",
+      "side": 1,
+      "message": "Good catch. Done.",
+      "parentUuid": "23b6e735_e84d1ed4",
+      "range": {
+        "startLine": 466,
+        "startChar": 6,
+        "endLine": 466,
+        "endChar": 7
+      },
+      "revId": "05004b1783d5867f95ef4df30c5104fbd25ffd06",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
