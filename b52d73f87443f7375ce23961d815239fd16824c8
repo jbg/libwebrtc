@@ -16,6 +16,23 @@
       "message": "Please take a look.",
       "revId": "b52d73f87443f7375ce23961d815239fd16824c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e20c0065_fba0fc57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-03-13T12:34:20Z",
+      "side": 1,
+      "message": "Feel free to use No-Try:True if needed. We are solving another issue with trybots.",
+      "revId": "b52d73f87443f7375ce23961d815239fd16824c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
