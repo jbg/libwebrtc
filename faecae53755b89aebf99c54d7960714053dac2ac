@@ -34,6 +34,24 @@
       "parentUuid": "e8eac78e_08f21e14",
       "revId": "faecae53755b89aebf99c54d7960714053dac2ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "790e5595_b4e4d3a3",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-03-13T13:17:10Z",
+      "side": 1,
+      "message": "We should drop packets and I believe we did that correctly with the usrsctp implementation previously and there should not be any significant impact. This code would otherwise probably crash or have undefined behaviour in production.\n\nIf it is out of spec, I don\u0027t think we should try to deliver the packets at all.",
+      "parentUuid": "0271c78b_e3ece23c",
+      "revId": "faecae53755b89aebf99c54d7960714053dac2ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
