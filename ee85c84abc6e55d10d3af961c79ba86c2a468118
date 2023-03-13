@@ -94,6 +94,30 @@
       },
       "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a83f723_f2f747a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-13T18:52:17Z",
+      "side": 1,
+      "message": "I can modify it to check whether the callback Salman is using is set and in such case process the buffer right away. That would cover both cases, where one want\u0027s to get the frame as soon as possible and also avoid processing buffers that we are not going to consume.\n\nWould that work for you?",
+      "parentUuid": "18372050_ad27f170",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
