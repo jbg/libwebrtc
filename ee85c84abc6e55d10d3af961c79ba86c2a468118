@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ed3dbdf_ab158b8e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-13T18:11:39Z",
+      "side": 1,
+      "message": "Salman recently added some eventing, and I think long term the goal would be to try to leverage that, which it looks like this breaks.\n\nFurther, it\u0027s worth the discussion of if the (potential) reduced processing power now makes up for the increased memory (to store this extra buffer on top of the frame queue now) and latency (to process the buffer upon demand).\n\nIs this mostly a theoretical or are there metrics about devices that seem to be adversely affected by the current behavior and how this change improves those devices?",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

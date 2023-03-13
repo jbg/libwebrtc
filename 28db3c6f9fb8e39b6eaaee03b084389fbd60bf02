@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d52735c1_de825fa3",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-13T18:11:39Z",
+      "side": 0,
+      "message": "I\u0027m fairly certain that this is what breaks the \"SendFramesImmediately\" flow that Salman added: https://webrtc-review.googlesource.com/c/src/+/291080",
+      "range": {
+        "startLine": 351,
+        "startChar": 2,
+        "endLine": 351,
+        "endChar": 30
+      },
+      "revId": "28db3c6f9fb8e39b6eaaee03b084389fbd60bf02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
