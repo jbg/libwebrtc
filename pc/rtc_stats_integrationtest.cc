@@ -946,7 +946,7 @@ class RTCStatsReportVerifier {
     verifier.TestMemberIsNonNegative<uint32_t>(outbound_stream.nack_count);
     verifier.TestMemberIsOptionalIDReference(
         outbound_stream.remote_id, RTCRemoteInboundRtpStreamStats::kType);
-    verifier.TestMemberIsNonNegative<uint32_t>(outbound_stream.packets_sent);
+    verifier.TestMemberIsNonNegative<uint64_t>(outbound_stream.packets_sent);
     verifier.TestMemberIsNonNegative<double>(
         outbound_stream.total_packet_send_delay);
     verifier.TestMemberIsNonNegative<uint64_t>(
