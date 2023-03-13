@@ -1008,8 +1008,6 @@ struct ReceiveDataParams {
   int sid = 0;
   // The type of message (binary, text, or control).
   webrtc::DataMessageType type = webrtc::DataMessageType::kText;
-  // A per-stream value incremented per packet in the stream.
-  int seq_num = 0;
 };
 
 enum SendDataResult { SDR_SUCCESS, SDR_ERROR, SDR_BLOCK };
