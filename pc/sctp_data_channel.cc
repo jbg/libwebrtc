@@ -209,7 +209,12 @@ void SctpDataChannel::Init() {
 
   // Try to connect to the transport in case the transport channel already
   // exists.
-  OnTransportChannelCreated();
+  // OnTransportChannelCreated();
+  // The sid may have been unassigned when controller_->ConnectDataChannel was
+  // done. So always add the streams even if connected_to_transport_ is true.
+  if (id_.HasValue()) {
+    controller_->AddSctpDataStream(id_.stream_id_int());
+  }
 
   // Checks if the transport is ready to send because the initial channel
   // ready signal may have been sent before the DataChannel creation.
@@ -406,9 +411,9 @@ void SctpDataChannel::OnTransportChannelCreated() {
   if (!controller_) {
     return;
   }
-  if (!connected_to_transport_) {
-    connected_to_transport_ = controller_->ConnectDataChannel(this);
-  }
+  // TODO(tommi): Should `OnTransportChannelCreated` have this info?
+  connected_to_transport_ = id_.HasValue();
+
   // The sid may have been unassigned when controller_->ConnectDataChannel was
   // done. So always add the streams even if connected_to_transport_ is true.
   if (id_.HasValue()) {
@@ -493,6 +498,8 @@ void SctpDataChannel::OnDataReceived(webrtc::DataMessageType type,
 
 void SctpDataChannel::OnTransportReady(bool writable) {
   RTC_DCHECK_RUN_ON(signaling_thread_);
+
+  RTC_LOG(LS_ERROR) << "*** OnTransportReady: " << writable;
 
   writable_ = writable;
   if (!writable) {
