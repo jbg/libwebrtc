@@ -59,29 +59,30 @@ enum class WebrtcPPID : dcsctp::PPID::UnderlyingType {
 
 WebrtcPPID ToPPID(DataMessageType message_type, size_t size) {
   switch (message_type) {
-    case webrtc::DataMessageType::kControl:
+    case DataMessageType::kControl:
       return WebrtcPPID::kDCEP;
-    case webrtc::DataMessageType::kText:
+    case DataMessageType::kText:
       return size > 0 ? WebrtcPPID::kString : WebrtcPPID::kStringEmpty;
-    case webrtc::DataMessageType::kBinary:
+    case DataMessageType::kBinary:
       return size > 0 ? WebrtcPPID::kBinary : WebrtcPPID::kBinaryEmpty;
   }
 }
 
-absl::optional<DataMessageType> ToDataMessageType(dcsctp::PPID ppid) {
+DataMessageType ToDataMessageType(dcsctp::PPID ppid) {
   switch (static_cast<WebrtcPPID>(ppid.value())) {
     case WebrtcPPID::kDCEP:
-      return webrtc::DataMessageType::kControl;
+      return DataMessageType::kControl;
     case WebrtcPPID::kString:
     case WebrtcPPID::kStringPartial:
     case WebrtcPPID::kStringEmpty:
-      return webrtc::DataMessageType::kText;
+      return DataMessageType::kText;
     case WebrtcPPID::kBinary:
     case WebrtcPPID::kBinaryPartial:
     case WebrtcPPID::kBinaryEmpty:
-      return webrtc::DataMessageType::kBinary;
+      return DataMessageType::kBinary;
   }
-  return absl::nullopt;
+  // Default to `kBinary` for unknown PPID values.
+  return DataMessageType::kBinary;
 }
 
 absl::optional<cricket::SctpErrorCauseCode> ToErrorCauseCode(
@@ -425,7 +426,7 @@ SendPacketStatus DcSctpTransport::SendPacketWithStatus(
 }
 
 std::unique_ptr<dcsctp::Timeout> DcSctpTransport::CreateTimeout(
-    webrtc::TaskQueueBase::DelayPrecision precision) {
+    TaskQueueBase::DelayPrecision precision) {
   return task_queue_timeout_factory_.CreateTimeout(precision);
 }
 
@@ -455,14 +456,7 @@ void DcSctpTransport::OnMessageReceived(dcsctp::DcSctpMessage message) {
                        << ", length=" << message.payload().size() << ").";
   cricket::ReceiveDataParams receive_data_params;
   receive_data_params.sid = message.stream_id().value();
-  auto type = ToDataMessageType(message.ppid());
-  if (!type.has_value()) {
-    RTC_LOG(LS_VERBOSE) << debug_name_
-                        << "->OnMessageReceived(): Received an unknown PPID "
-                        << message.ppid().value()
-                        << " on an SCTP packet. Dropping.";
-  }
-  receive_data_params.type = *type;
+  receive_data_params.type = ToDataMessageType(message.ppid());
   // No seq_num available from dcSCTP
   receive_data_params.seq_num = 0;
   receive_buffer_.Clear();
