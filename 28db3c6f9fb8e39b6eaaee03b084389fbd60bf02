@@ -46,6 +46,30 @@
       },
       "revId": "28db3c6f9fb8e39b6eaaee03b084389fbd60bf02",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3725837a_c1f0743a",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-13T20:31:21Z",
+      "side": 0,
+      "message": "Hmm, could that be another potential approach if we find too many frames are being discarded to ask the compositor to slow down the framerate as another mitigation rather than always deferring processing?",
+      "parentUuid": "34946419_ae5198a2",
+      "range": {
+        "startLine": 351,
+        "startChar": 2,
+        "endLine": 351,
+        "endChar": 30
+      },
+      "revId": "28db3c6f9fb8e39b6eaaee03b084389fbd60bf02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46cfb0c3_1bec1999",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-13T20:31:21Z",
+      "side": 1,
+      "message": "Yeah; my biggest concern is what you mention in your other commit description comment; this will definitely increase latency for the CaptureFrame API; so I\u0027d like to understand how that would be impacted. If either you or Martin have numbers to share that would be great. We could also look at doing an experiment in Chrome (which requires some flag configuration here, in chromium, and with some internal code); though I\u0027m not sure if I have the bandwidth to setup/analyze such an experiment right now, which is why some preliminary numbers would be good to understand.\n\nIt\u0027d also be good to understand the buffer starvation or otherwise creation issue.",
+      "parentUuid": "0d1443f0_7f1f99d8",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f93c024f_58a11b73",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -157,6 +181,30 @@
       "writtenOn": "2023-03-13T20:06:34Z",
       "side": 1,
       "message": "For applications that are using CaptureFrame API, this is going to add some capture latency (especially for bigger frames) since processing is being done at the time of the capture now. May be we should also experiment to see if the delay is palpable with higher resolution, if so it will be a good idea to keep on processing and caching frames eagerly. It is hard to say without some benchmarking how much processing power was being wasted earlier and whether capturing/processing lazily would add any significant delay.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 35
+      },
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f631ffd_62315222",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-13T20:31:21Z",
+      "side": 1,
+      "message": "+1, I\u0027ve put more of my thoughts regarding this in the other commit description commit as they pertain more to that ongoing discussion.",
+      "parentUuid": "f93c024f_58a11b73",
       "range": {
         "startLine": 13,
         "startChar": 0,
