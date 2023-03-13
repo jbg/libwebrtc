@@ -393,6 +393,8 @@ void SctpDataChannel::OnClosingProcedureComplete() {
   RTC_DCHECK(queued_send_data_.Empty());
   DisconnectFromTransport();  // TODO(tommi): only needed for tests.
 
+  RTC_LOG(LS_ERROR) << "*** OnClosingProcedureComplete";
+
   // `OnClosingProcedureComplete` is triggered by the transport. The controller
   // will take care of any cleanup we'd otherwise do recursively via the call
   // to `SetState(kClosed)`. To avoid that (and knowing this is the last step
@@ -606,8 +608,12 @@ void SctpDataChannel::SetState(DataState state) {
     observer_->OnStateChange();
   }
 
-  if (controller_)
+  if (controller_) {
+    RTC_LOG(LS_ERROR) << "*** SetState: " << state;
     controller_->OnChannelStateChanged(this, state_);
+  } else {
+    RTC_LOG(LS_ERROR) << "*** SetState: " << state << " no controller";
+  }
 }
 
 void SctpDataChannel::DisconnectFromTransport() {
@@ -615,7 +621,6 @@ void SctpDataChannel::DisconnectFromTransport() {
   if (!connected_to_transport_ || !controller_)
     return;
 
-  controller_->DisconnectDataChannel(this);
   connected_to_transport_ = false;
 }
 
