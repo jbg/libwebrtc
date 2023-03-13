@@ -79,11 +79,7 @@ class SctpDataChannelTest : public ::testing::Test {
  protected:
   SctpDataChannelTest()
       : controller_(new FakeDataChannelController()),
-        webrtc_data_channel_(SctpDataChannel::Create(controller_->weak_ptr(),
-                                                     "test",
-                                                     init_,
-                                                     rtc::Thread::Current(),
-                                                     rtc::Thread::Current())) {}
+        webrtc_data_channel_(controller_->CreateDataChannel("test", init_)) {}
 
   void SetChannelReady() {
     controller_->set_transport_available(true);

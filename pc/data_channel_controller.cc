@@ -38,14 +38,6 @@ bool DataChannelController::SendData(int sid,
   return false;
 }
 
-bool DataChannelController::ConnectDataChannel(
-    SctpDataChannel* webrtc_data_channel) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  // TODO(bugs.webrtc.org/11547): This method can be removed once not
-  // needed by `SctpDataChannel`.
-  return data_channel_transport() ? true : false;
-}
-
 void DataChannelController::AddSctpDataStream(int sid) {
   if (data_channel_transport()) {
     network_thread()->BlockingCall([this, sid] {

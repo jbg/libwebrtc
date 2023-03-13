@@ -31,6 +31,17 @@ class FakeDataChannelController
     return weak_factory_.GetWeakPtr();
   }
 
+  rtc::scoped_refptr<webrtc::SctpDataChannel> CreateDataChannel(
+      absl::string_view label,
+      const webrtc::InternalDataChannelInit& init,
+      rtc::Thread* network_thread = rtc::Thread::Current()) {
+    rtc::scoped_refptr<webrtc::SctpDataChannel> channel =
+        webrtc::SctpDataChannel::Create(weak_ptr(), std::string(label), init,
+                                        rtc::Thread::Current(), network_thread);
+    connected_channels_.insert(channel.get());
+    return channel;
+  }
+
   bool SendData(int sid,
                 const webrtc::SendDataParams& params,
                 const rtc::CopyOnWriteBuffer& payload,
@@ -52,20 +63,10 @@ class FakeDataChannelController
     return true;
   }
 
-  bool ConnectDataChannel(webrtc::SctpDataChannel* data_channel) override {
-    RTC_CHECK(connected_channels_.find(data_channel) ==
-              connected_channels_.end());
-    if (!transport_available_) {
-      return false;
-    }
-    RTC_LOG(LS_VERBOSE) << "DataChannel connected " << data_channel;
-    connected_channels_.insert(data_channel);
-    return true;
-  }
-
   void AddSctpDataStream(int sid) override {
     RTC_CHECK(sid >= 0);
     if (!transport_available_) {
+      RTC_DCHECK(false);
       return;
     }
     send_ssrcs_.insert(sid);
@@ -108,7 +109,9 @@ class FakeDataChannelController
       // in response to OnTransportReady().
       for (webrtc::SctpDataChannel* ch : std::set<webrtc::SctpDataChannel*>(
                connected_channels_.begin(), connected_channels_.end())) {
+        RTC_LOG(LS_ERROR) << "*** 1";
         if (connected_channels_.count(ch)) {
+          RTC_LOG(LS_ERROR) << "*** 2";
           ch->OnTransportReady(true);
         }
       }
