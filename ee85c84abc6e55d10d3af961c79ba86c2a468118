@@ -46,6 +46,30 @@
       },
       "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed73e568_d2b0c447",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-13T18:38:45Z",
+      "side": 1,
+      "message": "\u003e Increased memory won\u0027t be much a problem, because the buffer doesn\u0027t carry the frame itself, only its information (size, stride, etc.) and file descriptor.\n\nPresumably this means that *somewhere* on the system has to hold onto the frame longer than it would otherwise though right? What lifetime guarantees do we have on this frame/buffer?",
+      "parentUuid": "f4982970_097278f0",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
