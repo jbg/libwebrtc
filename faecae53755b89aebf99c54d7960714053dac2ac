@@ -16,6 +16,24 @@
       "message": "I believe using the original code was just missing a return to avoid processing a message with an unknown type and we should not accept it.\nThus having an optional is probably fine.",
       "revId": "faecae53755b89aebf99c54d7960714053dac2ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0271c78b_e3ece23c",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-13T11:23:17Z",
+      "side": 1,
+      "message": "Are you ok with this as is so that we don\u0027t introduce a functional change? (starting to drop packets)",
+      "parentUuid": "e8eac78e_08f21e14",
+      "revId": "faecae53755b89aebf99c54d7960714053dac2ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
