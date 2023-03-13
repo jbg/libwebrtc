@@ -22,6 +22,30 @@
       },
       "revId": "28db3c6f9fb8e39b6eaaee03b084389fbd60bf02",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34946419_ae5198a2",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-03-13T20:06:34Z",
+      "side": 0,
+      "message": "Agreed. If client is lagging behind the frame rate, then may be it can renegotiate the frame rate with the compositor to generate frames at a slower rate until the client gets up to speed?\n\nAlso pipewire documentation mentions that using lower number of buffers is always better so in an unlikely case where pipewire is configured with a single buffer and we keep on holding it then we might starve the compositor from writing a new frame  -- may be that is ok since a slow client is not going to process such frames from compositor anyway.",
+      "parentUuid": "d52735c1_de825fa3",
+      "range": {
+        "startLine": 351,
+        "startChar": 2,
+        "endLine": 351,
+        "endChar": 30
+      },
+      "revId": "28db3c6f9fb8e39b6eaaee03b084389fbd60bf02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

@@ -118,6 +118,70 @@
       },
       "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d1443f0_7f1f99d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-03-13T20:06:34Z",
+      "side": 1,
+      "message": "Sounds reasonable to me.\n\nWDYT, Alex?",
+      "parentUuid": "2a83f723_f2f747a2",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f93c024f_58a11b73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-03-13T20:06:34Z",
+      "side": 1,
+      "message": "For applications that are using CaptureFrame API, this is going to add some capture latency (especially for bigger frames) since processing is being done at the time of the capture now. May be we should also experiment to see if the delay is palpable with higher resolution, if so it will be a good idea to keep on processing and caching frames eagerly. It is hard to say without some benchmarking how much processing power was being wasted earlier and whether capturing/processing lazily would add any significant delay.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 35
+      },
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "778c5299_688078cf",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-03-13T20:06:34Z",
+      "side": 1,
+      "message": "If it is non-null, should we return it back to the pool first (with `pw_stream_queue_buffer`) or does it not matter at cleanup time?",
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
