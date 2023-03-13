@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01568da3_3547e1ad",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-13T21:01:35Z",
+      "side": 0,
+      "message": "Quick glance looks like this comment got lost.",
+      "range": {
+        "startLine": 776,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 40
+      },
+      "revId": "28db3c6f9fb8e39b6eaaee03b084389fbd60bf02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
