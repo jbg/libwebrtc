@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9db09b0c_cde29a32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-14T17:20:02Z",
+      "side": 1,
+      "message": "Whew! It looks so simple now that it\u0027s done!\nNits only.",
+      "revId": "69438c38646fc56fa207896ff6766ed124dca205",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73a80d6c_1d81216a",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-14T17:20:02Z",
+      "side": 1,
+      "message": "This is purely an accessor to whether data_channel_transport() has value now, yes?",
+      "revId": "69438c38646fc56fa207896ff6766ed124dca205",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7f5b5a7_2ae0348a",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-14T17:20:02Z",
+      "side": 1,
+      "message": "It\u0027s not needed (it does nothing), so why not just drop it now?\n\nI see the call in OnChannelClosed is already removed.",
+      "revId": "69438c38646fc56fa207896ff6766ed124dca205",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f712c48_a202f0da",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-14T17:20:02Z",
+      "side": 1,
+      "message": "A TODO at its declaration for replacing sctp_data_channels_ with a map\u003cint, channel\u003e?",
+      "revId": "69438c38646fc56fa207896ff6766ed124dca205",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
