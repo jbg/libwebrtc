@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15dd7afd_1e7f56d2",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-14T21:39:47Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "73a80d6c_1d81216a",
+      "revId": "69438c38646fc56fa207896ff6766ed124dca205",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7f5b5a7_2ae0348a",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c94dcd11_489d219c",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-14T21:39:47Z",
+      "side": 1,
+      "message": "Since it\u0027s a virtual method, used by some tests via the FakeDataChannelController\u0027s implementation, it\u0027s a bit of work to fully remove it. I have a couple of \"cleanup\" CLs coming that will remove this method and a few other things.",
+      "parentUuid": "c7f5b5a7_2ae0348a",
+      "revId": "69438c38646fc56fa207896ff6766ed124dca205",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f712c48_a202f0da",
         "filename": "pc/data_channel_controller.cc",
         "patchSetId": 24
@@ -65,6 +101,24 @@
       "writtenOn": "2023-03-14T17:20:02Z",
       "side": 1,
       "message": "A TODO at its declaration for replacing sctp_data_channels_ with a map\u003cint, channel\u003e?",
+      "revId": "69438c38646fc56fa207896ff6766ed124dca205",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be273fee_efc8f533",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-14T21:39:47Z",
+      "side": 1,
+      "message": "Let\u0027s think about it a bit. Since the IDs of data channels can change (unassigned until connected to a transport) and that technically you could have more than one uninitialized channels  existing at the same time (with the same uninitialized ID), that could get tricky to store in a map.",
+      "parentUuid": "0f712c48_a202f0da",
       "revId": "69438c38646fc56fa207896ff6766ed124dca205",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
