@@ -93,7 +93,10 @@ TEST_F(DataChannelControllerTest, CloseAfterControllerDestroyed) {
   channel->Close();
 }
 
-TEST_F(DataChannelControllerTest, AsyncChannelCloseTeardown) {
+// This test is disabled because kClosing data channels that are not connected
+// to a transport do not transition to kClosed due to webrtc:14993.
+// TODO(https://crbug.com/webrtc/14993): Make this test pass again.
+TEST_F(DataChannelControllerTest, DISABLED_AsyncChannelCloseTeardown) {
   DataChannelController dcc(pc_.get());
   rtc::scoped_refptr<DataChannelInterface> channel =
       dcc.InternalCreateDataChannelWithProxy(

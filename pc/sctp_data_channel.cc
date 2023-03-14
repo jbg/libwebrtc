@@ -359,7 +359,13 @@ void SctpDataChannel::SetSctpSid(const StreamId& sid) {
   RTC_DCHECK(!id_.HasValue());
   RTC_DCHECK(sid.HasValue());
   RTC_DCHECK_NE(handshake_state_, kHandshakeWaitingForAck);
-  RTC_DCHECK_EQ(state_, kConnecting);
+  RTC_DCHECK(state_ == kConnecting || state_ == kClosing);
+  if (state_ == kClosing) {
+    // TODO(https://crbug.com/webrtc/14993): When the referenced bug is fixed,
+    // DCHECK that `state_` can only be `kConnecting` and delete this log.
+    RTC_LOG(LS_ERROR) << "SCTP data channel stream id ignored due to kClosing.";
+    return;
+  }
 
   if (id_ == sid) {
     return;
@@ -564,25 +570,18 @@ void SctpDataChannel::UpdateState() {
       break;
     }
     case kClosing: {
-      if (connected_to_transport_) {
-        // Wait for all queued data to be sent before beginning the closing
-        // procedure.
-        if (queued_send_data_.Empty() && queued_control_data_.Empty()) {
-          // For SCTP data channels, we need to wait for the closing procedure
-          // to complete; after calling RemoveSctpDataStream,
-          // OnClosingProcedureComplete will end up called asynchronously
-          // afterwards.
-          if (!started_closing_procedure_ && controller_ && id_.HasValue()) {
-            started_closing_procedure_ = true;
-            controller_->RemoveSctpDataStream(id_.stream_id_int());
-          }
+      // Wait for all queued data to be sent before beginning the closing
+      // procedure.
+      if (queued_send_data_.Empty() && queued_control_data_.Empty()) {
+        // For SCTP data channels, we need to wait for the closing procedure
+        // to complete; after calling RemoveSctpDataStream,
+        // OnClosingProcedureComplete will end up called asynchronously
+        // afterwards.
+        if (connected_to_transport_ && !started_closing_procedure_ &&
+            controller_ && id_.HasValue() && id_.stream_id_int() >= 0) {
+          started_closing_procedure_ = true;
+          controller_->RemoveSctpDataStream(id_.stream_id_int());
         }
-      } else {
-        // When we're not connected to a transport, we'll transition
-        // directly to the `kClosed` state from here.
-        queued_send_data_.Clear();
-        queued_control_data_.Clear();
-        SetState(kClosed);
       }
       break;
     }

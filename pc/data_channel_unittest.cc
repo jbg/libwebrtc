@@ -638,9 +638,10 @@ TEST_F(SctpDataChannelTest, NeverOpened) {
 }
 
 // Tests that a data channel that's not connected to a transport can transition
-// directly to the `kClosed` state when closed.
-// See also chromium:1421534.
-TEST_F(SctpDataChannelTest, UnusedTransitionsDirectlyToClosed) {
+// directly to the `kClosed` state when closed. The test was added in
+// chromium:1421534 but had to be disabled due to chromium:1423562.
+// TODO(https://crbug.com/webrtc/14993): Make this test pass again.
+TEST_F(SctpDataChannelTest, DISABLED_UnusedTransitionsDirectlyToClosed) {
   webrtc_data_channel_->Close();
   EXPECT_EQ(DataChannelInterface::kClosed, webrtc_data_channel_->state());
 }
