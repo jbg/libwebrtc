@@ -105,6 +105,24 @@
       "parentUuid": "420cc96b_47c79154",
       "revId": "87f47ce27d14d0b6693fdef5f9e0804c2f0074f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2342f483_fb1adce1",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-14T15:53:17Z",
+      "side": 1,
+      "message": "ah... I forgot to update this test when changing the inheritance. Fixed and made the checks better!",
+      "parentUuid": "f2e2fffd_8bf57074",
+      "revId": "87f47ce27d14d0b6693fdef5f9e0804c2f0074f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
