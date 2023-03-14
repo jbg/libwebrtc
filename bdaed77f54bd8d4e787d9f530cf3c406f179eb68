@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "557c5aff_a8e0d450",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-14T17:21:33Z",
+      "side": 1,
+      "message": "Semi-blindly +1\u0027ing since it\u0027s a revert.",
+      "revId": "bdaed77f54bd8d4e787d9f530cf3c406f179eb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
