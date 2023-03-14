@@ -363,7 +363,9 @@ void SctpDataChannel::SetSctpSid(const StreamId& sid) {
   RTC_DCHECK(!id_.HasValue());
   RTC_DCHECK(sid.HasValue());
   RTC_DCHECK_NE(handshake_state_, kHandshakeWaitingForAck);
-  RTC_DCHECK_EQ(state_, kConnecting);
+  if (state_ != kConnecting) {
+    return;
+  }
 
   if (id_ == sid) {
     return;
@@ -586,11 +588,11 @@ void SctpDataChannel::UpdateState() {
           }
         }
       } else {
-        // When we're not connected to a transport, we'll transition
-        // directly to the `kClosed` state from here.
-        queued_send_data_.Clear();
-        queued_control_data_.Clear();
-        SetState(kClosed);
+        // // When we're not connected to a transport, we'll transition
+        // // directly to the `kClosed` state from here.
+        // queued_send_data_.Clear();
+        // queued_control_data_.Clear();
+        // SetState(kClosed);
       }
       break;
     }
