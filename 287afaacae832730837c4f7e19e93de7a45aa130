@@ -34,6 +34,24 @@
       "parentUuid": "7d562832_4bb83ab7",
       "revId": "287afaacae832730837c4f7e19e93de7a45aa130",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8394f95_f1666603",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2023-03-15T16:49:10Z",
+      "side": 1,
+      "message": "It\u0027s hard to say w/o any numbers.  rep movs can be faster than AVX, it depends on the application, compiler, and processor.\n\nI don\u0027t think there will be any real-world perf benefits (at least based on my benchmarking last year) but IIRC it isn\u0027t slower so using the libyuv function is OK if Alex thinks it cleans up the code (though this code hasn\u0027t been changed in ages so it\u0027s not really a regression risk).",
+      "parentUuid": "792fbddd_af9a3119",
+      "revId": "287afaacae832730837c4f7e19e93de7a45aa130",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
