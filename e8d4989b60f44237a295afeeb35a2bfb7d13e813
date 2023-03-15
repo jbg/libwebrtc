@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17afcc8e_034b5d57",
+        "filename": "video/end_to_end_tests/resolution_bitrate_limits_tests.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-15T17:04:07Z",
+      "side": 1,
+      "message": "The setup looks similar to the test below (one stream with one spatial layer).",
+      "range": {
+        "startLine": 476,
+        "startChar": 0,
+        "endLine": 492,
+        "endChar": 1
+      },
+      "revId": "e8d4989b60f44237a295afeeb35a2bfb7d13e813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "982ed1f4_92284acf",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1192,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-03-15T17:04:07Z",
+      "side": 1,
+      "message": "could be removed (GetNumSpatialLayers -\u003e 0 in this case).",
+      "range": {
+        "startLine": 1191,
+        "startChar": 51,
+        "endLine": 1192,
+        "endChar": 45
+      },
+      "revId": "e8d4989b60f44237a295afeeb35a2bfb7d13e813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
