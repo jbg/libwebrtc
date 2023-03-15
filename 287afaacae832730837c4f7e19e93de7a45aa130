@@ -16,6 +16,24 @@
       "message": "Drive-by Q, did you benchmark this Salman?  I checked this last year and there was no perf difference between memcpy and the libyuv optimized function (I suspect memcpy is heavily optimized for the compiler).\n\nI don\u0027t mind making the change  either way but I\u0027m curious what you saw in your benchmarks.",
       "revId": "287afaacae832730837c4f7e19e93de7a45aa130",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "792fbddd_af9a3119",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-03-15T15:21:52Z",
+      "side": 1,
+      "message": "Haven\u0027t benchmarked it (yet) but think it wouldn\u0027t hurt given that libyuv will do the right thing (and that it makes code a little shorter and makes it uniform with other places where we are copying pixels).",
+      "parentUuid": "7d562832_4bb83ab7",
+      "revId": "287afaacae832730837c4f7e19e93de7a45aa130",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
