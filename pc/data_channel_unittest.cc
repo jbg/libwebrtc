@@ -79,11 +79,7 @@ class SctpDataChannelTest : public ::testing::Test {
  protected:
   SctpDataChannelTest()
       : controller_(new FakeDataChannelController()),
-        webrtc_data_channel_(SctpDataChannel::Create(controller_->weak_ptr(),
-                                                     "test",
-                                                     init_,
-                                                     rtc::Thread::Current(),
-                                                     rtc::Thread::Current())) {}
+        webrtc_data_channel_(controller_->CreateDataChannel("test", init_)) {}
 
   void SetChannelReady() {
     controller_->set_transport_available(true);
@@ -137,8 +133,7 @@ TEST_F(SctpDataChannelTest, VerifyConfigurationGetters) {
 TEST_F(SctpDataChannelTest, ConnectedToTransportOnCreated) {
   controller_->set_transport_available(true);
   rtc::scoped_refptr<SctpDataChannel> dc =
-      SctpDataChannel::Create(controller_->weak_ptr(), "test1", init_,
-                              rtc::Thread::Current(), rtc::Thread::Current());
+      controller_->CreateDataChannel("test1", init_);
 
   EXPECT_TRUE(controller_->IsConnected(dc.get()));
   // The sid is not set yet, so it should not have added the streams.
@@ -148,16 +143,6 @@ TEST_F(SctpDataChannelTest, ConnectedToTransportOnCreated) {
   dc->SetSctpSid(StreamId(0));
   EXPECT_TRUE(controller_->IsSendStreamAdded(dc->id()));
   EXPECT_TRUE(controller_->IsRecvStreamAdded(dc->id()));
-}
-
-// Verifies that the data channel is connected to the transport if the transport
-// is not available initially and becomes available later.
-TEST_F(SctpDataChannelTest, ConnectedAfterTransportBecomesAvailable) {
-  EXPECT_FALSE(controller_->IsConnected(webrtc_data_channel_.get()));
-
-  controller_->set_transport_available(true);
-  webrtc_data_channel_->OnTransportChannelCreated();
-  EXPECT_TRUE(controller_->IsConnected(webrtc_data_channel_.get()));
 }
 
 // Tests the state of the data channel.
@@ -327,8 +312,7 @@ TEST_F(SctpDataChannelTest, LateCreatedChannelTransitionToOpen) {
   InternalDataChannelInit init;
   init.id = 1;
   rtc::scoped_refptr<SctpDataChannel> dc =
-      SctpDataChannel::Create(controller_->weak_ptr(), "test1", init,
-                              rtc::Thread::Current(), rtc::Thread::Current());
+      controller_->CreateDataChannel("test1", init);
   EXPECT_EQ(DataChannelInterface::kConnecting, dc->state());
   EXPECT_TRUE_WAIT(DataChannelInterface::kOpen == dc->state(), 1000);
 }
@@ -341,8 +325,7 @@ TEST_F(SctpDataChannelTest, SendUnorderedAfterReceivesOpenAck) {
   init.id = 1;
   init.ordered = false;
   rtc::scoped_refptr<SctpDataChannel> dc =
-      SctpDataChannel::Create(controller_->weak_ptr(), "test1", init,
-                              rtc::Thread::Current(), rtc::Thread::Current());
+      controller_->CreateDataChannel("test1", init);
 
   EXPECT_EQ_WAIT(DataChannelInterface::kOpen, dc->state(), 1000);
 
@@ -369,8 +352,7 @@ TEST_F(SctpDataChannelTest, SendUnorderedAfterReceiveData) {
   init.id = 1;
   init.ordered = false;
   rtc::scoped_refptr<SctpDataChannel> dc =
-      SctpDataChannel::Create(controller_->weak_ptr(), "test1", init,
-                              rtc::Thread::Current(), rtc::Thread::Current());
+      controller_->CreateDataChannel("test1", init);
 
   EXPECT_EQ_WAIT(DataChannelInterface::kOpen, dc->state(), 1000);
 
@@ -450,8 +432,7 @@ TEST_F(SctpDataChannelTest, NoMsgSentIfNegotiatedAndNotFromOpenMsg) {
 
   SetChannelReady();
   rtc::scoped_refptr<SctpDataChannel> dc =
-      SctpDataChannel::Create(controller_->weak_ptr(), "test1", config,
-                              rtc::Thread::Current(), rtc::Thread::Current());
+      controller_->CreateDataChannel("test1", config);
 
   EXPECT_EQ_WAIT(DataChannelInterface::kOpen, dc->state(), 1000);
   EXPECT_EQ(0, controller_->last_sid());
@@ -518,8 +499,7 @@ TEST_F(SctpDataChannelTest, OpenAckSentIfCreatedFromOpenMessage) {
 
   SetChannelReady();
   rtc::scoped_refptr<SctpDataChannel> dc =
-      SctpDataChannel::Create(controller_->weak_ptr(), "test1", config,
-                              rtc::Thread::Current(), rtc::Thread::Current());
+      controller_->CreateDataChannel("test1", config);
 
   EXPECT_EQ_WAIT(DataChannelInterface::kOpen, dc->state(), 1000);
 

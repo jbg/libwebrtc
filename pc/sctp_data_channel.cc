@@ -209,7 +209,13 @@ void SctpDataChannel::Init() {
 
   // Try to connect to the transport in case the transport channel already
   // exists.
-  OnTransportChannelCreated();
+  // OnTransportChannelCreated();
+  // The sid may have been unassigned when controller_->ConnectDataChannel was
+  // done. So always add the streams even if connected_to_transport_ is true.
+  if (id_.HasValue()) {
+    controller_->AddSctpDataStream(id_.stream_id_int());
+    connected_to_transport_ = true;
+  }
 
   // Checks if the transport is ready to send because the initial channel
   // ready signal may have been sent before the DataChannel creation.
@@ -339,6 +345,7 @@ bool SctpDataChannel::Send(const DataBuffer& buffer) {
   // operational state management on the signaling thread.
 
   if (state_ != kOpen) {
+    RTC_LOG(LS_ERROR) << "*** Send - " << state_;
     return false;
   }
 
@@ -361,12 +368,10 @@ void SctpDataChannel::SetSctpSid(const StreamId& sid) {
   RTC_DCHECK_NE(handshake_state_, kHandshakeWaitingForAck);
   RTC_DCHECK_EQ(state_, kConnecting);
 
-  if (id_ == sid) {
-    return;
-  }
-
   id_ = sid;
   controller_->AddSctpDataStream(sid.stream_id_int());
+
+  connected_to_transport_ = true;
 }
 
 void SctpDataChannel::OnClosingProcedureStartedRemotely() {
@@ -396,12 +401,10 @@ void SctpDataChannel::OnClosingProcedureComplete() {
 
 void SctpDataChannel::OnTransportChannelCreated() {
   RTC_DCHECK_RUN_ON(signaling_thread_);
-  if (!controller_) {
-    return;
-  }
-  if (!connected_to_transport_) {
-    connected_to_transport_ = controller_->ConnectDataChannel(this);
-  }
+  RTC_DCHECK(controller_);
+
+  connected_to_transport_ = id_.HasValue();
+
   // The sid may have been unassigned when controller_->ConnectDataChannel was
   // done. So always add the streams even if connected_to_transport_ is true.
   if (id_.HasValue()) {
@@ -487,6 +490,8 @@ void SctpDataChannel::OnDataReceived(webrtc::DataMessageType type,
 void SctpDataChannel::OnTransportReady(bool writable) {
   RTC_DCHECK_RUN_ON(signaling_thread_);
 
+  RTC_LOG(LS_ERROR) << "*** OnTransportReady: " << writable;
+
   writable_ = writable;
   if (!writable) {
     return;
@@ -553,6 +558,8 @@ void SctpDataChannel::UpdateState() {
           // Deliver them now.
           DeliverQueuedReceivedData();
         }
+      } else {
+        RTC_DCHECK(!id_.HasValue());
       }
       break;
     }
