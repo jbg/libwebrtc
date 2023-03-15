@@ -84,11 +84,6 @@ TEST_F(DataChannelControllerTest, CloseAfterControllerDestroyed) {
   auto channel = dcc->InternalCreateDataChannelWithProxy(
       "label",
       std::make_unique<InternalDataChannelInit>(DataChannelInit()).get());
-  // Connect to provider
-  auto inner_channel =
-      DowncastProxiedDataChannelInterfaceToSctpDataChannelForTesting(
-          channel.get());
-  dcc->ConnectDataChannel(inner_channel);
   dcc.reset();
   channel->Close();
 }
@@ -107,9 +102,6 @@ TEST_F(DataChannelControllerTest, AsyncChannelCloseTeardown) {
 
   channel = nullptr;  // dcc still holds a reference to `channel`.
   EXPECT_TRUE(dcc.HasDataChannels());
-
-  // Make sure callbacks to dcc are set up.
-  dcc.ConnectDataChannel(inner_channel);
 
   // Trigger a Close() for the channel. This will send events back to dcc,
   // eventually reaching `OnSctpDataChannelClosed` where dcc removes
