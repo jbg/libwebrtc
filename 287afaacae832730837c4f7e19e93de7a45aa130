@@ -52,6 +52,24 @@
       "parentUuid": "792fbddd_af9a3119",
       "revId": "287afaacae832730837c4f7e19e93de7a45aa130",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb2b0fab_714dc038",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-15T17:10:47Z",
+      "side": 1,
+      "message": "Seems like a reasonable cleanup as long as we have no reason to suspect a performance regression and IIRC makes some of the code more uniform across capturers.",
+      "parentUuid": "b8394f95_f1666603",
+      "revId": "287afaacae832730837c4f7e19e93de7a45aa130",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
