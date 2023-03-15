@@ -16,6 +16,23 @@
       "message": "Semi-blindly +1\u0027ing since it\u0027s a revert.",
       "revId": "bdaed77f54bd8d4e787d9f530cf3c406f179eb68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7ed3229_fe00a344",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-15T08:15:43Z",
+      "side": 1,
+      "message": "The issue was that Meet was accidentally relying on a browser bug that was fixed in Canary, resulting in the m\u003dapplication line disappearing. Now that we have fixed the Meet bug we\u0027ll probably not need to land this CL, which is good news",
+      "revId": "bdaed77f54bd8d4e787d9f530cf3c406f179eb68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
