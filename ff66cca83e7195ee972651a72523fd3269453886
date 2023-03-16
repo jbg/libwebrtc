@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ae4fd2_72fd3b21",
+        "filename": "modules/desktop_capture/linux/wayland/egl_dmabuf.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-16T19:57:24Z",
+      "side": 1,
+      "message": "I\u0027m trying to read the documentation to get better oriented in this. I see in the documentation:\n\nOnce created, a named buffer object may be re-bound to any target as often as needed. However, the GL implementation may make choices about how to optimize the storage of a buffer object based on its initial binding target.\n\nSounds like it can be done, but to me it looks like we are on a safer side with creating it for each DmaBuf import since not every DmaBuf is same? I don\u0027t really know. I will try to read more about it tomorrow.\n\nAnyway, I don\u0027t know whether you have seen my updated description, but with this change as it is done now I\u0027m seeing significant drop in CPU usage, like half the CPU usage per process so there is a performance impact, but positive one + fixed screen sharing on Nvidia drivera.",
+      "parentUuid": "3033b3c1_6829e653",
+      "range": {
+        "startLine": 615,
+        "startChar": 1,
+        "endLine": 615,
+        "endChar": 76
+      },
+      "revId": "ff66cca83e7195ee972651a72523fd3269453886",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa43ddcd_83394d68",
@@ -191,6 +215,30 @@
       "writtenOn": "2023-03-13T20:34:44Z",
       "side": 1,
       "message": "nit: This seems like a good readability cleanup that can be separated from the rest of the change.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 53
+      },
+      "revId": "ff66cca83e7195ee972651a72523fd3269453886",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "460645b5_e67843cb",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-16T19:57:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dff375d3_8905253b",
       "range": {
         "startLine": 160,
         "startChar": 0,
