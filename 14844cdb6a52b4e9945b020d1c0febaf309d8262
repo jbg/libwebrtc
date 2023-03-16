@@ -70,6 +70,24 @@
       "parentUuid": "015254f6_a6a28ce0",
       "revId": "14844cdb6a52b4e9945b020d1c0febaf309d8262",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c608f4_c4887698",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2023-03-16T09:31:14Z",
+      "side": 1,
+      "message": "There are two options for how developers might run into the lack of AV1 support:\n1/ try AV1 and wonder why it is not showing up in the SDP. To understand why they need to understand how video codec factories interact with the SDP which is pretty convoluted\n2/ get a 2x2 resolution when AV1 is used and end up finding the explicit warning, motivating them to add support.\n\nThe latter makes a contribution more likely.",
+      "parentUuid": "87d15757_94480747",
+      "revId": "14844cdb6a52b4e9945b020d1c0febaf309d8262",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
