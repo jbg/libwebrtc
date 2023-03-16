@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5544e7c1_21fa4f65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-03-16T08:33:58Z",
+      "side": 1,
+      "message": "I\u0027l defer to Åsa as the main reviewer. rslgtm as owner",
+      "revId": "bbcb5918f423d4215ba0091ccc403913278f28b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "709a9da2_b6b22b94",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-03-16T08:33:58Z",
+      "side": 1,
+      "message": "nit: Looks like this can be simplified to `if (GetNumSpatialLayers(*codec) \u003e 0) {`",
+      "range": {
+        "startLine": 402,
+        "startChar": 6,
+        "endLine": 404,
+        "endChar": 50
+      },
+      "revId": "bbcb5918f423d4215ba0091ccc403913278f28b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
