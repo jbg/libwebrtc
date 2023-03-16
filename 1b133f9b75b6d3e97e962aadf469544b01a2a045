@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6977642_1b86ab75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-16T13:18:31Z",
+      "side": 1,
+      "message": "Btw. I\u0027ve been investigating https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1378258 past few days and it turns out that the change from glGetTexImage() to glReadPixels(), which I did so I can do image cropping right away through OpenGL makes to fix the Nvidia issue as a side effect.",
+      "revId": "1b133f9b75b6d3e97e962aadf469544b01a2a045",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

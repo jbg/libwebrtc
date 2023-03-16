@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dee4096a_ae1bea68",
+        "filename": "modules/desktop_capture/linux/wayland/egl_dmabuf.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-16T13:18:31Z",
+      "side": 1,
+      "message": "I don\u0027t expect it\u0027s an expensive call, I believe it\u0027s just a sane check to do everytime to make sure things are working. I can see it used in Chromium here as well for example: https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/framebuffer_manager.cc;l\u003d843.\nI got recommendation to use this code from Jonas Adahl (Mutter and gnome-remote-desktop maintainer). This is used in gnome-remote-desktop same way.\n\nAlso from the official documentation:\n```An FBO that is valid for use is said to be \"framebuffer complete\". To test framebuffer completeness, call this function:\n\nGLenum glCheckFramebufferStatus(GLenum target​);\nYou are not required to call this manually. However, using an incomplete FBO is an error, so it\u0027s always a good idea to check.\n```\n\nRegarding the frambuffer. Since I\u0027m not really an expert when it comes to this API I rely on things I ask or see elsewhere. I\u0027ve seen gnome-remote-desktop to create it all the time for each DmaBuf import. Also Jonas told me it doesn\u0027t make sense.",
+      "parentUuid": "973464b2_646a186c",
+      "range": {
+        "startLine": 615,
+        "startChar": 1,
+        "endLine": 615,
+        "endChar": 76
+      },
+      "revId": "ff66cca83e7195ee972651a72523fd3269453886",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa43ddcd_83394d68",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-03-13T20:34:44Z",
       "side": 1,
       "message": "Please document the returned value.",
+      "revId": "ff66cca83e7195ee972651a72523fd3269453886",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fec1fd1b_09c6e97e",
+        "filename": "modules/desktop_capture/linux/wayland/egl_dmabuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-16T13:18:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa43ddcd_83394d68",
       "revId": "ff66cca83e7195ee972651a72523fd3269453886",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -88,6 +130,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba74b677_75cc8ef7",
+        "filename": "modules/desktop_capture/linux/wayland/egl_dmabuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-16T13:18:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38a15560_9be4db0c",
+      "range": {
+        "startLine": 50,
+        "startChar": 23,
+        "endLine": 50,
+        "endChar": 36
+      },
+      "revId": "ff66cca83e7195ee972651a72523fd3269453886",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dff375d3_8905253b",
@@ -124,6 +190,24 @@
       "writtenOn": "2023-03-13T20:34:44Z",
       "side": 1,
       "message": "Print the unsupported type here.",
+      "revId": "ff66cca83e7195ee972651a72523fd3269453886",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e135b4a_067e9ddc",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-16T13:18:31Z",
+      "side": 1,
+      "message": "Actually, it should never reach this codepath as we only announce two types of buffers so it will never use anything else.",
+      "parentUuid": "a44a8dd1_d21ea84c",
       "revId": "ff66cca83e7195ee972651a72523fd3269453886",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

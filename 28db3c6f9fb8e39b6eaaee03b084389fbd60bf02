@@ -22,6 +22,30 @@
       },
       "revId": "28db3c6f9fb8e39b6eaaee03b084389fbd60bf02",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0278c55b_07a62b4d",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-16T13:18:31Z",
+      "side": 0,
+      "message": "Yes, it\u0027s intentional, because the comment is no longer relevant. We are importing DMABufs directly into desktop frame and won\u0027t do any copying into smaller frame as before, therefore there is no need to check different stride or things we did before.",
+      "parentUuid": "01568da3_3547e1ad",
+      "range": {
+        "startLine": 776,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 40
+      },
+      "revId": "28db3c6f9fb8e39b6eaaee03b084389fbd60bf02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
