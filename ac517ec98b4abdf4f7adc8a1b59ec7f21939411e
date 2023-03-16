@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75aa65f7_0ea6b2a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-16T10:25:03Z",
+      "side": 1,
+      "message": "Sorry, wrong check.\nYou have to check controller-\u003edata_channel_transport() in order to figure out if transport is connected or not. Prenegotiated channels will have their ID set at creation time, even though the transport doesn\u0027t exist yet.\n\nTHis probably indicates stronly that we don\u0027t hav eadequate testing of the prenegotiated case at this level!",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03783c44_b8fbacb2",
+        "filename": "pc/data_channel_unittest.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-16T10:25:03Z",
+      "side": 1,
+      "message": "Please delete this comment - I disagree with it.\nIntegration tests are integration tests, which test both the controller and the datachannel; these are unit tests.",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fec98bf_2f45fdf1",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-16T10:25:03Z",
+      "side": 1,
+      "message": "This test is wrong for prenegotiated channel IDs - they will have an ID value assigned when created.",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53ba28e4_977be64c",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-16T10:25:03Z",
+      "side": 1,
+      "message": "Wrong for prenegotiated.",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1999af46_1702f681",
+        "filename": "pc/sctp_data_channel.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-16T10:25:03Z",
+      "side": 1,
+      "message": "Disagree with this TODO too.",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
