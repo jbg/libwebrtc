@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d0f0b0c_c397e43f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-16T17:10:13Z",
+      "side": 1,
+      "message": "LGTM, but if you decide to address Salman\u0027s remaining NIT LMK and I\u0027ll take a second look.",
+      "revId": "7b7b5cb167531d25d6b2115b3825a973bd473c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
