@@ -88,6 +88,24 @@
       "parentUuid": "87d15757_94480747",
       "revId": "14844cdb6a52b4e9945b020d1c0febaf309d8262",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d92433bc_631a6466",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-16T10:46:54Z",
+      "side": 1,
+      "message": "Even though you have to explicitly enable the black frame decoder I can agree with your reasoning. One last suggestion then, could we change the warning on line 82 to an RTC_NOTREACHED instead?",
+      "parentUuid": "49c608f4_c4887698",
+      "revId": "14844cdb6a52b4e9945b020d1c0febaf309d8262",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
