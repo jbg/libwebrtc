@@ -41,11 +41,15 @@ class EglDmaBuf {
   EglDmaBuf();
   ~EglDmaBuf();
 
-  std::unique_ptr<uint8_t[]> ImageFromDmaBuf(
-      const DesktopSize& size,
-      uint32_t format,
-      const std::vector<PlaneData>& plane_datas,
-      uint64_t modifiers);
+  // Returns whether the image was successfully imported from
+  // given DmaBuf and its parameters
+  bool ImageFromDmaBuf(const DesktopSize& size,
+                       uint32_t format,
+                       const std::vector<PlaneData>& plane_datas,
+                       uint64_t modifiers,
+                       const DesktopVector& offset,
+                       const DesktopSize& buffer_size,
+                       uint8_t* data);
   std::vector<uint64_t> QueryDmaBufModifiers(uint32_t format);
 
   bool IsEglInitialized() const { return egl_initialized_; }
