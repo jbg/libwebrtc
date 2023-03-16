@@ -33,6 +33,24 @@
       "message": "Looks good just sanity checking if we can think of any case where we do want to reset the mid. For example:\n\nt \u003d pc.AddTransceiver();\npc.CreateOfferAndSetAsLocal();\nEXPECT(t has a mid);\npc.Rollback();\nEXPECT(t no longer has a mid);\n\nBut hey, we\u0027re still passing this test:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/peer_connection_jsep_unittest.cc;l\u003d1989;drc\u003d0a16276290227c2611a685b99286e92927c531e8\n\nSo I guess we\u0027re good? 😊",
       "revId": "65098f6995cb29a31f9439e01ac9b74c827f8c38",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68450e13_739988e8",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3085,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-03-16T10:19:02Z",
+      "side": 1,
+      "message": "I believe the difference in this test is that it\u0027s not an associated transceiver, so we can roll it back.\nMy initial fix/workaround attempt checked that the state.mid() had a value, which was indeed very wrong and breaking this test.",
+      "parentUuid": "89aef8e1_3575ba62",
+      "revId": "65098f6995cb29a31f9439e01ac9b74c827f8c38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
