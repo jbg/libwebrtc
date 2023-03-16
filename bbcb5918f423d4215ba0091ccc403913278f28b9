@@ -39,6 +39,30 @@
       },
       "revId": "bbcb5918f423d4215ba0091ccc403913278f28b9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72bfe2c0_15f576e5",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2023-03-16T16:26:28Z",
+      "side": 1,
+      "message": "Cool. I think your suggestion is clearer and cleaner. I have replaced the compound if statement with if (!(GetNumSpatialLayers(*codec) \u003e 0)) {.",
+      "parentUuid": "709a9da2_b6b22b94",
+      "range": {
+        "startLine": 402,
+        "startChar": 6,
+        "endLine": 404,
+        "endChar": 50
+      },
+      "revId": "bbcb5918f423d4215ba0091ccc403913278f28b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
