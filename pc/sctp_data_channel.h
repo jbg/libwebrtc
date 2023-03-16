@@ -45,8 +45,6 @@ class SctpDataChannelControllerInterface {
                         const SendDataParams& params,
                         const rtc::CopyOnWriteBuffer& payload,
                         cricket::SendDataResult* result) = 0;
-  // Connects to the transport signals.
-  virtual bool ConnectDataChannel(SctpDataChannel* data_channel) = 0;
   // Adds the data channel SID to the transport for SCTP.
   virtual void AddSctpDataStream(int sid) = 0;
   // Begins the closing procedure by sending an outgoing stream reset. Still
@@ -192,7 +190,6 @@ class SctpDataChannel : public DataChannelInterface {
   // asynchronously after RemoveSctpDataStream.
   void OnClosingProcedureComplete();
   // Called when the transport channel is created.
-  // Only needs to be called for SCTP data channels.
   void OnTransportChannelCreated();
   // Called when the transport channel is unusable.
   // This method makes sure the DataChannel is disconnected and changes state
