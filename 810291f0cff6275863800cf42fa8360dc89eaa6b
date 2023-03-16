@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bee7ad4_7b98a91a",
+        "filename": "logging/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-03-16T14:15:59Z",
+      "side": 1,
+      "message": "I assume rtc_event_log2_proto would work, right? Then it would be the right proto at least.\n\nI suspect that the problem is with the transitive inclusion in rtc_event_log2_proto_include. Maybe public_deps (https://gn.googlesource.com/gn/+/main/docs/reference.md?pli\u003d1#var_public_deps) would solve the issue? On the other hand, this is generated proto code, so I\u0027m not sure it would work.",
+      "parentUuid": "e7240e24_829b6fc0",
+      "range": {
+        "startLine": 409,
+        "startChar": 0,
+        "endLine": 409,
+        "endChar": 72
+      },
+      "revId": "810291f0cff6275863800cf42fa8360dc89eaa6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e58684b_c78f3048",
         "filename": "logging/BUILD.gn",
         "patchSetId": 3

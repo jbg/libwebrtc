@@ -33,6 +33,98 @@
       "message": "ping!",
       "revId": "1e16fc020dc118ea5da6ba6b901041d52ba40397",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ade5d18_674f71c2",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-03-16T14:15:59Z",
+      "side": 1,
+      "message": "I\u0027d prefer returning a Status object, e.g.\nRTC_PARSE_CHECK_OR_RETURN_MESSAGE(condition, \"Not all required fields present\")",
+      "range": {
+        "startLine": 197,
+        "startChar": 1,
+        "endLine": 199,
+        "endChar": 0
+      },
+      "revId": "1e16fc020dc118ea5da6ba6b901041d52ba40397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce6f77f_303ff63a",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-03-16T14:15:59Z",
+      "side": 1,
+      "message": "Same here\nRTC_PARSE_CHECK_OR_RETURN_MESSAGE(condition, message)",
+      "range": {
+        "startLine": 200,
+        "startChar": 10,
+        "endLine": 202,
+        "endChar": 23
+      },
+      "revId": "1e16fc020dc118ea5da6ba6b901041d52ba40397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf71c7a_01a95f2b",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-03-16T14:15:59Z",
+      "side": 1,
+      "message": "Then this would become RTC_PARSE_RETURN_IF_ERROR(...)",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 27
+      },
+      "revId": "1e16fc020dc118ea5da6ba6b901041d52ba40397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85f98f8c_77dfb8c0",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-03-16T14:15:59Z",
+      "side": 1,
+      "message": "And here",
+      "range": {
+        "startLine": 212,
+        "startChar": 4,
+        "endLine": 212,
+        "endChar": 29
+      },
+      "revId": "1e16fc020dc118ea5da6ba6b901041d52ba40397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
