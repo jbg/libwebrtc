@@ -51,6 +51,24 @@
       "parentUuid": "99f8dc53_d1d8ee62",
       "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "153631b9_203da3b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-17T12:12:57Z",
+      "side": 1,
+      "message": "Jeremy\u0027s link is to Patch Set 1 which solves the problem my checking if AV1 exists at runtime. What I was attempting to do in Patch Set 2 was to skip the test entirely if AV1 is not supported:\nhttps://webrtc-review.googlesource.com/c/src/+/298021/2\n\nMy thinking was that #if defined(RTC_USE_LIBAOM_AV1_ENCODER) would be better because then the test does not exist when not applicable, as opposed to returning early and PASSING even though we didn\u0027t exercise AV1.\n\nBut either way, I just want the WebRTC importer to be happy. There is an import bot that doesn\u0027t have AV1 causing the test to fail during configuration to use AV1.",
+      "parentUuid": "91e8291f_744a2a72",
+      "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
