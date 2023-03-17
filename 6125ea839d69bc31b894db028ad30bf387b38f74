@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f24d1fa6_210278c6",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-03-17T13:03:25Z",
+      "side": 1,
+      "message": "Thanks, fixed here and in the other tests.",
+      "parentUuid": "734d29f5_8e40fc57",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 66
+      },
+      "revId": "6125ea839d69bc31b894db028ad30bf387b38f74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9e5be9fd_00033f02",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate_unittest.cc",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-17T10:55:21Z",
       "side": 1,
       "message": "prefer to put variable under test as 1st parameter, value you\u0027re testing with as 2nd parameter.\n\nhttp://go/c-readability-advice#avoid-yoda-style-comparisons\n“More generally, put the \"most variable\" operand on the left”",
+      "range": {
+        "startLine": 187,
+        "startChar": 2,
+        "endLine": 187,
+        "endChar": 60
+      },
+      "revId": "6125ea839d69bc31b894db028ad30bf387b38f74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f649cfdd_ccaec783",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-03-17T13:03:25Z",
+      "side": 1,
+      "message": "Fixed here and in the other tests.",
+      "parentUuid": "9e5be9fd_00033f02",
       "range": {
         "startLine": 187,
         "startChar": 2,
