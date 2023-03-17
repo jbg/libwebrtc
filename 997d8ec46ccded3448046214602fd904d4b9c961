@@ -87,6 +87,24 @@
       "parentUuid": "153631b9_203da3b1",
       "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d99f70_0b05eee2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-17T12:34:54Z",
+      "side": 1,
+      "message": "The correct way to solve this would be to update https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/peer_connection_simulcast_unittest.cc;l\u003d183;drc\u003d9a5de95af91bd5094ecac96d775a11baaa2cb0b3\n\nfrom \n\n    CreateBuiltinVideoEncoderFactory()\n\nto\n    #include \"api/video_codecs/video_encoder_factory_template.h\"\n    #include \"api/video_codecs/video_encoder_factory_template_libaom_av1_adapter.h\"\n    #include \"api/video_codecs/video_encoder_factory_template_libvpx_vp8_adapter.h\"\n    #include \"api/video_codecs/video_encoder_factory_template_libvpx_vp9_adapter.h\"\n    #include \"api/video_codecs/video_encoder_factory_template_open_h264_adapter.h\"\n\n    std::make_unique\u003cVideoEncoderFactoryTemplate\u003c\n        LibvpxVp8EncoderTemplateAdapter,\n        LibvpxVp9EncoderTemplateAdapter,\n        OpenH264EncoderTemplateAdapter,\n        LibaomAv1EncoderTemplateAdapter\u003e\u003e();\n\nalso add \n\n    \"//api/video_codecs:video_encoder_factory_template\",\n    \"//api/video_codecs:video_encoder_factory_template_libaom_av1_adapter\",\n    \"//api/video_codecs:video_encoder_factory_template_libvpx_vp8_adapter\",\n    \"//api/video_codecs:video_encoder_factory_template_libvpx_vp9_adapter\",\n    \"//api/video_codecs:video_encoder_factory_template_open_h264_adapter\",\n\nto deps. This way the AV1 encoder is always included.\n\nUnfortunately OpenH264 still requires defines throughout the code, so those build flags have to stay around a bit longer. Including it is always fine because it will be null when WebRTC is configured to not use H264: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/video_codecs/video_encoder_factory_template_open_h264_adapter.h;drc\u003df012bfaf96fc3240a839ce16a51844c35d9972b1\n\nIt shouldn\u0027t work that way, but while moving from old to new it kind of have to work like that.",
+      "parentUuid": "013f3d28_112ee4ad",
+      "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
