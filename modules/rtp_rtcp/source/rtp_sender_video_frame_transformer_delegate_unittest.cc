@@ -58,9 +58,12 @@ class RtpSenderVideoFrameTransformerDelegateTest : public ::testing::Test {
   ~RtpSenderVideoFrameTransformerDelegateTest() override = default;
 
   std::unique_ptr<TransformableFrameInterface> GetTransformableFrame(
-      rtc::scoped_refptr<RTPSenderVideoFrameTransformerDelegate> delegate) {
+      rtc::scoped_refptr<RTPSenderVideoFrameTransformerDelegate> delegate,
+      bool key_frame = false) {
     EncodedImage encoded_image;
     encoded_image.SetEncodedData(EncodedImageBuffer::Create(1));
+    encoded_image._frameType = key_frame ? VideoFrameType::kVideoFrameKey
+                                         : VideoFrameType::kVideoFrameDelta;
     std::unique_ptr<TransformableFrameInterface> frame = nullptr;
     EXPECT_CALL(*frame_transformer_, Transform)
         .WillOnce([&](std::unique_ptr<TransformableFrameInterface>
@@ -163,7 +166,29 @@ TEST_F(RtpSenderVideoFrameTransformerDelegateTest, CloneSenderVideoFrame) {
   EXPECT_EQ(video_frame->GetPayloadType(), clone->GetPayloadType());
   EXPECT_EQ(video_frame->GetSsrc(), clone->GetSsrc());
   EXPECT_EQ(video_frame->GetTimestamp(), clone->GetTimestamp());
-  EXPECT_EQ(video_frame->Metadata(), clone->Metadata());
+  EXPECT_EQ(video_frame->GetMetadata(), clone->Metadata());
+}
+
+TEST_F(RtpSenderVideoFrameTransformerDelegateTest, CloneKeyFrame) {
+  auto delegate = rtc::make_ref_counted<RTPSenderVideoFrameTransformerDelegate>(
+      &test_sender_, frame_transformer_,
+      /*ssrc=*/1111, /*csrcs=*/std::vector<uint32_t>(),
+      time_controller_.CreateTaskQueueFactory().get());
+
+  std::unique_ptr<TransformableFrameInterface> frame =
+      GetTransformableFrame(delegate, /*key_frame=*/true);
+  ASSERT_TRUE(frame);
+
+  TransformableVideoFrameInterface* video_frame =
+      static_cast<TransformableVideoFrameInterface*>(frame.get());
+  std::unique_ptr<TransformableVideoFrameInterface> clone =
+      CloneSenderVideoFrame(video_frame);
+
+  EXPECT_EQ(video_frame->IsKeyFrame(), clone->IsKeyFrame());
+  EXPECT_EQ(video_frame->GetPayloadType(), clone->GetPayloadType());
+  EXPECT_EQ(video_frame->GetSsrc(), clone->GetSsrc());
+  EXPECT_EQ(video_frame->GetTimestamp(), clone->GetTimestamp());
+  EXPECT_EQ(video_frame->GetMetadata(), clone->GetMetadata());
 }
 
 TEST_F(RtpSenderVideoFrameTransformerDelegateTest, MetadataAfterSetMetadata) {
