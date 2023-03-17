@@ -306,6 +306,10 @@ void VideoEncoderWrapper::OnEncodedFrame(
   frame_copy.SetTimestamp(frame_extra_info.timestamp_rtp);
   frame_copy.capture_time_ms_ = capture_time_ns / rtc::kNumNanosecsPerMillisec;
 
+  // TODO(ssilkin): remove.
+  int qp = ParseQp(frame);
+  RTC_LOG(LS_WARNING) << "Parsed qp: " << qp;
+
   if (frame_copy.qp_ < 0)
     frame_copy.qp_ = ParseQp(frame);
 

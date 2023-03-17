@@ -557,12 +557,12 @@ TEST_P(SpatialQualityTest, DISABLED_SpatialQuality) {
               .framerate = Frequency::MilliHertz(1000 * framerate_fps),
               .bitrate = DataRate::KilobitsPerSec(bitrate_kbps)}}}}}};
 
-  int duration_s = 10;
+  int duration_s = 1;
   int num_frames = duration_s * framerate_fps;
 
   std::unique_ptr<VideoCodecStats> stats =
       RunEncodeDecodeTest(codec_type, codec_impl, video_info, frame_settings,
-                          num_frames, /*save_codec_output=*/false);
+                          num_frames, /*save_codec_output=*/true);
 
   std::vector<VideoCodecStats::Frame> frames = stats->Slice();
   SetTargetRates(frame_settings, frames);
@@ -641,7 +641,7 @@ TEST_P(BitrateAdaptationTest, DISABLED_BitrateAdaptation) {
 
   std::unique_ptr<VideoCodecStats> stats =
       RunEncodeTest(codec_type, codec_impl, video_info, frame_settings,
-                    num_frames, /*save_codec_output=*/false);
+                    num_frames, /*save_codec_output=*/true);
 
   std::vector<VideoCodecStats::Frame> frames =
       stats->Slice(VideoCodecStats::Filter{.first_frame = first_frame});
