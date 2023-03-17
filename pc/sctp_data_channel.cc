@@ -156,7 +156,19 @@ rtc::scoped_refptr<SctpDataChannel> SctpDataChannel::Create(
 
   auto channel = rtc::make_ref_counted<SctpDataChannel>(
       config, std::move(controller), label, signaling_thread, network_thread);
-  channel->Init();
+  RTC_DCHECK_RUN_ON(channel->signaling_thread_);
+  if (channel->controller_->ReadyToSendData()) {
+    // Checks if the transport is ready to send because the initial channel
+    // ready signal may have been sent before the DataChannel creation.
+    // This has to be done async because the upper layer objects (e.g.
+    // Chrome glue and WebKit) are not wired up properly until after this
+    // function returns.
+    signaling_thread->PostTask([channel = channel] {
+      if (channel->state() != kClosed)
+        channel->OnTransportReady(true);
+    });
+  }
+
   return channel;
 }
 
@@ -209,25 +221,6 @@ SctpDataChannel::SctpDataChannel(
   // exists.
   if (id_.HasValue()) {
     controller_->AddSctpDataStream(id_.stream_id_int());
-  }
-}
-
-void SctpDataChannel::Init() {
-  RTC_DCHECK_RUN_ON(signaling_thread_);
-
-  // Checks if the transport is ready to send because the initial channel
-  // ready signal may have been sent before the DataChannel creation.
-  // This has to be done async because the upper layer objects (e.g.
-  // Chrome glue and WebKit) are not wired up properly until after this
-  // function returns.
-  if (controller_->ReadyToSendData()) {
-    AddRef();
-    absl::Cleanup release = [this] { Release(); };
-    rtc::Thread::Current()->PostTask([this, release = std::move(release)] {
-      RTC_DCHECK_RUN_ON(signaling_thread_);
-      if (state_ != kClosed)
-        OnTransportReady(true);
-    });
   }
 }
 
