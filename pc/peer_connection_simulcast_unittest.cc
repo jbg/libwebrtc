@@ -1490,6 +1490,8 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   EXPECT_THAT(*outbound_rtps[2]->scalability_mode, StrEq("L1T3"));
 }
 
+#if defined(RTC_USE_LIBAOM_AV1_ENCODER)
+
 // TODO(https://crbug.com/webrtc/15005): A field trial shouldn't be needed to
 // get spec-compliant behavior! The same field trial is also used for VP9
 // simulcast (https://crbug.com/webrtc/14884).
@@ -1566,5 +1568,7 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   EXPECT_THAT(*outbound_rtps[1]->scalability_mode, StrEq("L1T3"));
   EXPECT_THAT(*outbound_rtps[2]->scalability_mode, StrEq("L1T3"));
 }
+
+#endif  // defined(RTC_USE_LIBAOM_AV1_ENCODER)
 
 }  // namespace webrtc
