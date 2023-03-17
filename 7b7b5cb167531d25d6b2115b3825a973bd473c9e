@@ -34,6 +34,23 @@
       "parentUuid": "8d0f0b0c_c397e43f",
       "revId": "7b7b5cb167531d25d6b2115b3825a973bd473c9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77fac44f_a4546d7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-17T09:55:35Z",
+      "side": 1,
+      "message": "One thing I discovered while reading the documentation. It\u0027s most likely not glReadPixels() that fixed the black screen when sharing on Nvidia. The documentation says: \n\nIf a non-zero named buffer object is bound to the GL_PIXEL_PACK_BUFFER target (see glBindBuffer) while a texture image is requested, pixels is treated as a byte offset into the buffer object\u0027s data store.\n\nI got a confirmation for it. It would have worked after we bound a buffer object as we do now with this change. Anyway, we still need to use glReadPixels() as we need to set an offset and apply cropping.",
+      "revId": "7b7b5cb167531d25d6b2115b3825a973bd473c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
