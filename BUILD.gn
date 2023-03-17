@@ -23,6 +23,7 @@
 
 import("//build/config/linux/pkg_config.gni")
 import("//build/config/sanitizers/sanitizers.gni")
+import("//third_party/libaom/options.gni")
 import("webrtc.gni")
 if (rtc_enable_protobuf) {
   import("//third_party/protobuf/proto_library.gni")
@@ -166,6 +167,10 @@ config("common_inherited_config") {
 
   if (rtc_enable_win_wgc) {
     defines += [ "RTC_ENABLE_WIN_WGC" ]
+  }
+
+  if (enable_libaom) {
+    defines += [ "RTC_USE_LIBAOM_AV1_ENCODER" ]
   }
 
   # Some tests need to declare their own trace event handlers. If this define is
