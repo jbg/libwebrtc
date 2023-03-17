@@ -186,7 +186,8 @@ SctpDataChannel::SctpDataChannel(
       negotiated_(config.negotiated),
       ordered_(config.ordered),
       observer_(nullptr),
-      controller_(std::move(controller)) {
+      controller_(std::move(controller)),
+      connected_to_transport_(config.connected_to_transport) {
   RTC_DCHECK_RUN_ON(signaling_thread_);
   RTC_UNUSED(network_thread_);
   RTC_DCHECK(config.IsValid());
@@ -203,14 +204,16 @@ SctpDataChannel::SctpDataChannel(
       handshake_state_ = kHandshakeShouldSendAck;
       break;
   }
+
+  // Try to connect to the transport in case the transport channel already
+  // exists.
+  if (id_.HasValue()) {
+    controller_->AddSctpDataStream(id_.stream_id_int());
+  }
 }
 
 void SctpDataChannel::Init() {
   RTC_DCHECK_RUN_ON(signaling_thread_);
-
-  // Try to connect to the transport in case the transport channel already
-  // exists.
-  OnTransportChannelCreated();
 
   // Checks if the transport is ready to send because the initial channel
   // ready signal may have been sent before the DataChannel creation.
@@ -362,10 +365,6 @@ void SctpDataChannel::SetSctpSid(const StreamId& sid) {
   RTC_DCHECK_NE(handshake_state_, kHandshakeWaitingForAck);
   RTC_DCHECK_EQ(state_, kConnecting);
 
-  if (id_ == sid) {
-    return;
-  }
-
   id_ = sid;
   controller_->AddSctpDataStream(sid.stream_id_int());
 }
@@ -397,12 +396,10 @@ void SctpDataChannel::OnClosingProcedureComplete() {
 
 void SctpDataChannel::OnTransportChannelCreated() {
   RTC_DCHECK_RUN_ON(signaling_thread_);
-  if (!controller_) {
-    return;
-  }
-  if (!connected_to_transport_) {
-    connected_to_transport_ = controller_->ConnectDataChannel(this);
-  }
+  RTC_DCHECK(controller_);
+
+  connected_to_transport_ = true;
+
   // The sid may have been unassigned when controller_->ConnectDataChannel was
   // done. So always add the streams even if connected_to_transport_ is true.
   if (id_.HasValue()) {
@@ -493,6 +490,8 @@ void SctpDataChannel::OnTransportReady(bool writable) {
     return;
   }
 
+  connected_to_transport_ = true;
+
   SendQueuedControlMessages();
   SendQueuedDataMessages();
 
@@ -506,7 +505,7 @@ void SctpDataChannel::CloseAbruptlyWithError(RTCError error) {
     return;
   }
 
-  DisconnectFromTransport();
+  connected_to_transport_ = false;
 
   // Closing abruptly means any queued data gets thrown away.
   queued_send_data_.Clear();
@@ -601,14 +600,6 @@ void SctpDataChannel::SetState(DataState state) {
 
   if (controller_)
     controller_->OnChannelStateChanged(this, state_);
-}
-
-void SctpDataChannel::DisconnectFromTransport() {
-  RTC_DCHECK_RUN_ON(signaling_thread_);
-  if (!connected_to_transport_ || !controller_)
-    return;
-
-  connected_to_transport_ = false;
 }
 
 void SctpDataChannel::DeliverQueuedReceivedData() {

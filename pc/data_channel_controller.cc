@@ -43,14 +43,6 @@ bool DataChannelController::SendData(int sid,
   return false;
 }
 
-bool DataChannelController::ConnectDataChannel(
-    SctpDataChannel* webrtc_data_channel) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  // TODO(bugs.webrtc.org/11547): This method can be removed once not
-  // needed by `SctpDataChannel`.
-  return data_channel_transport() ? true : false;
-}
-
 void DataChannelController::AddSctpDataStream(int sid) {
   if (data_channel_transport()) {
     network_thread()->BlockingCall([this, sid] {
@@ -223,6 +215,8 @@ bool DataChannelController::HandleOpenMessage_n(
   std::string label;
   InternalDataChannelInit config;
   config.id = channel_id;
+  config.connected_to_transport = (data_channel_transport() != nullptr);
+  RTC_DCHECK(config.connected_to_transport);
   if (!ParseDataChannelOpenMessage(buffer, &label, &config)) {
     RTC_LOG(LS_WARNING) << "Failed to parse the OPEN message for sid "
                         << channel_id;
