@@ -123,6 +123,24 @@
       "parentUuid": "d0d99f70_0b05eee2",
       "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9612f7a_55545697",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-03-17T13:06:10Z",
+      "side": 1,
+      "message": "+1 to Philip\u0027s suggestion (I was messing up things a bit with my proposal, let\u0027s undo that and do what Philip suggested).",
+      "parentUuid": "a21f4500_d0b73dc2",
+      "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
