@@ -168,6 +168,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05e94940_589344c9",
+        "filename": "modules/desktop_capture/linux/wayland/egl_dmabuf.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-17T16:51:19Z",
+      "side": 1,
+      "message": "No problem! I was also going off of existing usages that re-used it and so getting confirmation that it\u0027s okay in this system as well is good to confirm!",
+      "parentUuid": "775bd0d2_66516065",
+      "range": {
+        "startLine": 615,
+        "startChar": 1,
+        "endLine": 615,
+        "endChar": 76
+      },
+      "revId": "ff66cca83e7195ee972651a72523fd3269453886",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa43ddcd_83394d68",
