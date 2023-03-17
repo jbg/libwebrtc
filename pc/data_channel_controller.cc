@@ -43,14 +43,6 @@ bool DataChannelController::SendData(int sid,
   return false;
 }
 
-bool DataChannelController::ConnectDataChannel(
-    SctpDataChannel* webrtc_data_channel) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  // TODO(bugs.webrtc.org/11547): This method can be removed once not
-  // needed by `SctpDataChannel`.
-  return data_channel_transport() ? true : false;
-}
-
 void DataChannelController::AddSctpDataStream(int sid) {
   if (data_channel_transport()) {
     network_thread()->BlockingCall([this, sid] {
@@ -223,6 +215,17 @@ bool DataChannelController::HandleOpenMessage_n(
   std::string label;
   InternalDataChannelInit config;
   config.id = channel_id;
+  // TODO(bugs.webrtc.org/11547): The `data_channel_transport_` pointer belongs
+  // to the network thread but there are a few places where we check this
+  // pointer from the signaling thread. Instead of this approach, have a
+  // separate channel initialization step that runs on the network thread
+  // where we inform the channel of information about whether there's a
+  // transport or not, what the role is and supply an id if any. Subsequently
+  // all that state in the channel code, is needed for callbacks from the
+  // transport which is already initiated from the network thread. Then we can
+  // Remove the trampoline code (see e.g. PostTask() calls in this file) that
+  // travels between the signaling and network threads.
+  config.connected_to_transport = (data_channel_transport() != nullptr);
   if (!ParseDataChannelOpenMessage(buffer, &label, &config)) {
     RTC_LOG(LS_WARNING) << "Failed to parse the OPEN message for sid "
                         << channel_id;
