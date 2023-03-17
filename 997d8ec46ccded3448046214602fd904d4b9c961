@@ -33,6 +33,24 @@
       "message": "AFAICT this is a step in the wrong director.\n\nWe don\u0027t want to spread the use of RTC_USE_LIBAOM_AV1_ENCODER throughout the code, it should be minimized to where it is (unfortunately) required right now. We will hopefully have a fixit soon to remove a bunch of uses of these deprecated encoder factories, and hopefully they can be completely removed in the not too distant future.",
       "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91e8291f_744a2a72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-03-17T12:06:54Z",
+      "side": 1,
+      "message": "Here is the context: \nhttps://webrtc-review.googlesource.com/c/src/+/298021/1\nYou suggest we should add RTC_USE_LIBAOM_AV1_ENCODER only for peerconnection_unittests target then ?",
+      "parentUuid": "99f8dc53_d1d8ee62",
+      "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
