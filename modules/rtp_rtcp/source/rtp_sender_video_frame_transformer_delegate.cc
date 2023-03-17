@@ -216,6 +216,9 @@ std::unique_ptr<TransformableVideoFrameInterface> CloneSenderVideoFrame(
       original->GetData().data(), original->GetData().size());
   EncodedImage encoded_image;
   encoded_image.SetEncodedData(encoded_image_buffer);
+  encoded_image._frameType = original->IsKeyFrame()
+                                 ? VideoFrameType::kVideoFrameKey
+                                 : VideoFrameType::kVideoFrameDelta;
   RTPVideoHeader new_header =
       RTPVideoHeader::FromMetadata(original->GetMetadata());
   // TODO(bugs.webrtc.org/14708): Fill in other EncodedImage parameters
