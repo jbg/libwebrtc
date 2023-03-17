@@ -69,6 +69,24 @@
       "parentUuid": "91e8291f_744a2a72",
       "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "013f3d28_112ee4ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-17T12:14:10Z",
+      "side": 1,
+      "message": "For reference, the same file is able to exclude H264 for tests when built without H264 by using \"#if defined(WEBRTC_USE_H264)\":\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/peer_connection_simulcast_unittest.cc;l\u003d1263;drc\u003d9a5de95af91bd5094ecac96d775a11baaa2cb0b3",
+      "parentUuid": "153631b9_203da3b1",
+      "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
