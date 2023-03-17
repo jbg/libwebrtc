@@ -16,6 +16,23 @@
       "message": "philipel@ FYI.\n\nWRT the:\n\n```\n../../rtc_base/synchronization/mutex_benchmark.cc:41:16: error: \u0027DoNotOptimize\u003cint\u003e\u0027 is deprecated: The const-ref version of this method can permit undesired compiler optimizations in benchmarks [-Werror,-Wdeprecated-declarations]\n```\n\nI am not sure how this managed to roll without any issue. Can you fix in a separate CL?",
       "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99f8dc53_d1d8ee62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-17T12:04:27Z",
+      "side": 1,
+      "message": "AFAICT this is a step in the wrong director.\n\nWe don\u0027t want to spread the use of RTC_USE_LIBAOM_AV1_ENCODER throughout the code, it should be minimized to where it is (unfortunately) required right now. We will hopefully have a fixit soon to remove a bunch of uses of these deprecated encoder factories, and hopefully they can be completely removed in the not too distant future.",
+      "revId": "997d8ec46ccded3448046214602fd904d4b9c961",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
