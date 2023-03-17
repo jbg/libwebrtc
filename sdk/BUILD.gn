@@ -740,7 +740,6 @@ if (is_ios || is_mac) {
 
       defines = []
       if (enable_libaom) {
-        defines += [ "RTC_USE_LIBAOM_AV1_ENCODER" ]
         deps += [ ":libaom_av1_encoder" ]
       }
 
