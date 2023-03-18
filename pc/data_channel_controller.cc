@@ -100,10 +100,11 @@ void DataChannelController::OnDataReceived(
         RTC_DCHECK_RUN_ON(signaling_thread());
         // TODO(bugs.webrtc.org/11547): The data being received should be
         // delivered on the network thread.
-        auto copy = sctp_data_channels_;
-        for (const auto& channel : copy) {
-          if (channel->id() == channel_id)
-            channel->OnDataReceived(type, buffer);
+        auto it = absl::c_find_if(sctp_data_channels_, [&](const auto& c) {
+          return c->id() == channel_id;
+        });
+        if (it != sctp_data_channels_.end()) {
+          (*it)->OnDataReceived(type, buffer);
         }
       }));
 }
@@ -114,11 +115,11 @@ void DataChannelController::OnChannelClosing(int channel_id) {
       SafeTask(signaling_safety_.flag(), [this, channel_id] {
         RTC_DCHECK_RUN_ON(signaling_thread());
         // TODO(bugs.webrtc.org/11547): Should run on the network thread.
-        auto copy = sctp_data_channels_;
-        for (const auto& channel : copy) {
-          if (channel->id() == channel_id)
-            channel->OnClosingProcedureStartedRemotely();
-        }
+        auto it = absl::c_find_if(sctp_data_channels_, [&](const auto& c) {
+          return c->id() == channel_id;
+        });
+        if (it != sctp_data_channels_.end())
+          (*it)->OnClosingProcedureStartedRemotely();
       }));
 }
 
