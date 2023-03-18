@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2e6a275_d190ddce",
+        "filename": "pc/data_channel_unittest.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-18T13:54:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03783c44_b8fbacb2",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fec98bf_2f45fdf1",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-03-16T10:25:03Z",
       "side": 1,
       "message": "This test is wrong for prenegotiated channel IDs - they will have an ID value assigned when created.",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a4eaa25_7fe75b45",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-18T13:54:40Z",
+      "side": 1,
+      "message": "Done - to make this explicit in the ctor case, I added a bool to the internal init struct that indicates whether or not we have a transport.",
+      "parentUuid": "8fec98bf_2f45fdf1",
       "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c54db1ed_d9f75c57",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-18T13:54:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53ba28e4_977be64c",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1999af46_1702f681",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-03-16T10:25:03Z",
       "side": 1,
       "message": "Disagree with this TODO too.",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6eb6fe1_970590f8",
+        "filename": "pc/sctp_data_channel.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-18T13:54:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1999af46_1702f681",
       "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
