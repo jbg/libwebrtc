@@ -44,7 +44,7 @@ class FakeDataChannelController
     return channel;
   }
 
-  bool SendData(int sid,
+  bool SendData(webrtc::StreamId sid,
                 const webrtc::SendDataParams& params,
                 const rtc::CopyOnWriteBuffer& payload,
                 cricket::SendDataResult* result) override {
@@ -60,28 +60,28 @@ class FakeDataChannelController
       return false;
     }
 
-    last_sid_ = sid;
+    last_sid_ = sid.stream_id_int();
     last_send_data_params_ = params;
     return true;
   }
 
-  void AddSctpDataStream(int sid) override {
-    RTC_CHECK(sid >= 0);
+  void AddSctpDataStream(webrtc::StreamId sid) override {
+    RTC_CHECK(sid.HasValue());
     if (!transport_available_) {
       return;
     }
-    send_ssrcs_.insert(sid);
-    recv_ssrcs_.insert(sid);
+    send_ssrcs_.insert(sid.stream_id_int());
+    recv_ssrcs_.insert(sid.stream_id_int());
   }
 
-  void RemoveSctpDataStream(int sid) override {
-    RTC_CHECK(sid >= 0);
-    send_ssrcs_.erase(sid);
-    recv_ssrcs_.erase(sid);
+  void RemoveSctpDataStream(webrtc::StreamId sid) override {
+    RTC_CHECK(sid.HasValue());
+    send_ssrcs_.erase(sid.stream_id_int());
+    recv_ssrcs_.erase(sid.stream_id_int());
     // Unlike the real SCTP transport, act like the closing procedure finished
     // instantly, doing the same snapshot thing as below.
     auto it = absl::c_find_if(connected_channels_,
-                              [&](const auto* c) { return c->id() == sid; });
+                              [&](const auto* c) { return c->sid() == sid; });
     // This path mimics the DCC's OnChannelClosed handler since the FDCC
     // (this class) doesn't have a transport that would do that.
     if (it != connected_channels_.end())

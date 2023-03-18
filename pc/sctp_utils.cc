@@ -13,6 +13,7 @@
 #include <stddef.h>
 
 #include <cstdint>
+#include <utility>
 
 #include "absl/types/optional.h"
 #include "api/priority.h"
@@ -58,7 +59,13 @@ StreamId::StreamId(int id)
   thread_checker_.Detach();
 }
 
-StreamId::StreamId(const StreamId& sid) : id_(sid.id_) {}
+StreamId::StreamId(const StreamId& sid) : id_(sid.id_) {
+  thread_checker_.Detach();
+}
+
+StreamId::StreamId(StreamId&& other) : id_(std::move(other.id_)) {
+  thread_checker_.Detach();
+}
 
 bool StreamId::HasValue() const {
   RTC_DCHECK_RUN_ON(&thread_checker_);
