@@ -108,6 +108,8 @@ class DataChannelController : public SctpDataChannelControllerInterface,
   void OnSctpDataChannelClosed(SctpDataChannel* channel);
 
  private:
+  using ChannelVector = std::vector<rtc::scoped_refptr<SctpDataChannel>>;
+
   rtc::scoped_refptr<SctpDataChannel> InternalCreateSctpDataChannel(
       const std::string& label,
       const InternalDataChannelInit*
@@ -134,6 +136,8 @@ class DataChannelController : public SctpDataChannelControllerInterface,
   // (calls OnTransportChannelCreated on the signaling thread).
   void NotifyDataChannelsOfTransportCreated();
 
+  ChannelVector::iterator FindChannel(StreamId stream_id);
+
   rtc::Thread* network_thread() const;
   rtc::Thread* signaling_thread() const;
 
@@ -149,8 +153,7 @@ class DataChannelController : public SctpDataChannelControllerInterface,
       RTC_GUARDED_BY(signaling_thread()) = false;
 
   SctpSidAllocator sid_allocator_ /* RTC_GUARDED_BY(signaling_thread()) */;
-  std::vector<rtc::scoped_refptr<SctpDataChannel>> sctp_data_channels_
-      RTC_GUARDED_BY(signaling_thread());
+  ChannelVector sctp_data_channels_ RTC_GUARDED_BY(signaling_thread());
   bool has_used_data_channels_ RTC_GUARDED_BY(signaling_thread()) = false;
 
   // Owning PeerConnection.

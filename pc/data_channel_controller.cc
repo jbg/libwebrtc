@@ -100,11 +100,9 @@ void DataChannelController::OnDataReceived(
         RTC_DCHECK_RUN_ON(signaling_thread());
         // TODO(bugs.webrtc.org/11547): The data being received should be
         // delivered on the network thread.
-        auto copy = sctp_data_channels_;
-        for (const auto& channel : copy) {
-          if (channel->id() == channel_id)
-            channel->OnDataReceived(type, buffer);
-        }
+        auto it = FindChannel(StreamId(channel_id));
+        if (it != sctp_data_channels_.end())
+          (*it)->OnDataReceived(type, buffer);
       }));
 }
 
@@ -114,11 +112,9 @@ void DataChannelController::OnChannelClosing(int channel_id) {
       SafeTask(signaling_safety_.flag(), [this, channel_id] {
         RTC_DCHECK_RUN_ON(signaling_thread());
         // TODO(bugs.webrtc.org/11547): Should run on the network thread.
-        auto copy = sctp_data_channels_;
-        for (const auto& channel : copy) {
-          if (channel->id() == channel_id)
-            channel->OnClosingProcedureStartedRemotely();
-        }
+        auto it = FindChannel(StreamId(channel_id));
+        if (it != sctp_data_channels_.end())
+          (*it)->OnClosingProcedureStartedRemotely();
       }));
 }
 
@@ -127,10 +123,7 @@ void DataChannelController::OnChannelClosed(int channel_id) {
   signaling_thread()->PostTask(
       SafeTask(signaling_safety_.flag(), [this, channel_id] {
         RTC_DCHECK_RUN_ON(signaling_thread());
-        auto it = absl::c_find_if(sctp_data_channels_, [&](const auto& c) {
-          return c->id() == channel_id;
-        });
-
+        auto it = FindChannel(StreamId(channel_id));
         // Remove the channel from our list, close it and free up resources.
         if (it != sctp_data_channels_.end()) {
           rtc::scoped_refptr<SctpDataChannel> channel = std::move(*it);
@@ -310,7 +303,7 @@ DataChannelController::InternalCreateSctpDataChannel(
 
 void DataChannelController::AllocateSctpSids(rtc::SSLRole role) {
   RTC_DCHECK_RUN_ON(signaling_thread());
-  std::vector<rtc::scoped_refptr<SctpDataChannel>> channels_to_close;
+  ChannelVector channels_to_close;
   for (const auto& channel : sctp_data_channels_) {
     if (!channel->sid().HasValue()) {
       StreamId sid;
@@ -358,7 +351,7 @@ void DataChannelController::OnTransportChannelClosed(RTCError error) {
   RTC_DCHECK_RUN_ON(signaling_thread());
   // Use a temporary copy of the SCTP DataChannel list because the
   // DataChannel may callback to us and try to modify the list.
-  std::vector<rtc::scoped_refptr<SctpDataChannel>> temp_sctp_dcs;
+  ChannelVector temp_sctp_dcs;
   temp_sctp_dcs.swap(sctp_data_channels_);
   for (const auto& channel : temp_sctp_dcs) {
     channel->OnTransportChannelClosed(error);
@@ -416,6 +409,13 @@ void DataChannelController::NotifyDataChannelsOfTransportCreated() {
       channel->OnTransportChannelCreated();
     }
   }));
+}
+
+DataChannelController::ChannelVector::iterator
+DataChannelController::FindChannel(StreamId stream_id) {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  return absl::c_find_if(sctp_data_channels_,
+                         [&](const auto& c) { return c->sid() == stream_id; });
 }
 
 rtc::Thread* DataChannelController::network_thread() const {
