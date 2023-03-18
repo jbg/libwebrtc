@@ -108,6 +108,8 @@ class DataChannelController : public SctpDataChannelControllerInterface,
   void OnSctpDataChannelClosed(SctpDataChannel* channel);
 
  private:
+  using ChannelVector = std::vector<rtc::scoped_refptr<SctpDataChannel>>;
+
   rtc::scoped_refptr<SctpDataChannel> InternalCreateSctpDataChannel(
       const std::string& label,
       const InternalDataChannelInit*
@@ -133,6 +135,8 @@ class DataChannelController : public SctpDataChannelControllerInterface,
   // Called when all data channels need to be notified of a transport channel
   // (calls OnTransportChannelCreated on the signaling thread).
   void NotifyDataChannelsOfTransportCreated();
+
+  ChannelVector::iterator FindChannel(StreamId stream_id);
 
   rtc::Thread* network_thread() const;
   rtc::Thread* signaling_thread() const;
