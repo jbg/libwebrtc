@@ -80,10 +80,12 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
 
   void RegisterParticipantInCall(absl::string_view peer_name) override;
   void UnregisterParticipantInCall(absl::string_view peer_name) override;
-  void OnPeerStartedReceiveVideoStream(absl::string_view peer_name,
-                                       absl::string_view stream_label) override;
-  void OnPeerStoppedReceiveVideoStream(absl::string_view peer_name,
-                                       absl::string_view stream_label) override;
+  void OnPeerStartedReceiveVideoStream(
+      absl::string_view peer_name,
+      absl::string_view sender_peer_name) override;
+  void OnPeerStoppedReceiveVideoStream(
+      absl::string_view peer_name,
+      absl::string_view sender_peer_name) override;
 
   void Stop() override;
   std::string GetStreamLabel(uint16_t frame_id) override;
