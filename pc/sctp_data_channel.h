@@ -172,7 +172,7 @@ class SctpDataChannel : public DataChannelInterface {
   // Called when the SctpTransport's ready to use. That can happen when we've
   // finished negotiation, or if the channel was created after negotiation has
   // already finished.
-  void OnTransportReady();
+  void OnTransportReady(bool writable);
 
   void OnDataReceived(DataMessageType type,
                       const rtc::CopyOnWriteBuffer& payload);
@@ -221,7 +221,6 @@ class SctpDataChannel : public DataChannelInterface {
     kHandshakeReady
   };
 
-  void Init();
   void UpdateState();
   void SetState(DataState state);
 

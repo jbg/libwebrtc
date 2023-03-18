@@ -109,7 +109,7 @@ class FakeDataChannelController
       // OnTransportReady is called.
       auto copy = connected_channels_;
       for (webrtc::SctpDataChannel* ch : copy) {
-        ch->OnTransportReady();
+        ch->OnTransportReady(true);
       }
     }
   }
@@ -129,7 +129,7 @@ class FakeDataChannelController
       std::set<webrtc::SctpDataChannel*>::iterator it;
       for (it = connected_channels_.begin(); it != connected_channels_.end();
            ++it) {
-        (*it)->OnTransportReady();
+        (*it)->OnTransportReady(true);
       }
     }
   }

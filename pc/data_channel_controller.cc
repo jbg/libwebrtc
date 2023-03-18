@@ -143,7 +143,7 @@ void DataChannelController::OnReadyToSend() {
     data_channel_transport_ready_to_send_ = true;
     auto copy = sctp_data_channels_;
     for (const auto& channel : copy)
-      channel->OnTransportReady();
+      channel->OnTransportReady(true);
   }));
 }
 
@@ -281,7 +281,6 @@ DataChannelController::InternalCreateSctpDataChannel(
   InternalDataChannelInit new_config =
       config ? (*config) : InternalDataChannelInit();
   StreamId sid(new_config.id);
-  new_config.connected_to_transport = (data_channel_transport() != nullptr);
   if (!sid.HasValue()) {
     rtc::SSLRole role;
     // TODO(bugs.webrtc.org/11547): `GetSctpSslRole` likely involves a hop to
@@ -413,7 +412,6 @@ bool DataChannelController::DataChannelSendData(
 
 void DataChannelController::NotifyDataChannelsOfTransportCreated() {
   RTC_DCHECK_RUN_ON(network_thread());
-  RTC_DCHECK(data_channel_transport());
   signaling_thread()->PostTask(SafeTask(signaling_safety_.flag(), [this] {
     RTC_DCHECK_RUN_ON(signaling_thread());
     auto copy = sctp_data_channels_;

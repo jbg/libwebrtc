@@ -156,7 +156,19 @@ rtc::scoped_refptr<SctpDataChannel> SctpDataChannel::Create(
 
   auto channel = rtc::make_ref_counted<SctpDataChannel>(
       config, std::move(controller), label, signaling_thread, network_thread);
-  channel->Init();
+  RTC_DCHECK_RUN_ON(channel->signaling_thread_);
+  if (channel->controller_->ReadyToSendData()) {
+    // Checks if the transport is ready to send because the initial channel
+    // ready signal may have been sent before the DataChannel creation.
+    // This has to be done async because the upper layer objects (e.g.
+    // Chrome glue and WebKit) are not wired up properly until after this
+    // function returns.
+    signaling_thread->PostTask([channel = channel] {
+      if (channel->state() != kClosed)
+        channel->OnTransportReady(true);
+    });
+  }
+
   return channel;
 }
 
@@ -209,26 +221,6 @@ SctpDataChannel::SctpDataChannel(
   // exists.
   if (id_.HasValue()) {
     controller_->AddSctpDataStream(id_.stream_id_int());
-  }
-}
-
-void SctpDataChannel::Init() {
-  RTC_DCHECK_RUN_ON(signaling_thread_);
-
-  // Checks if the transport is ready to send because the initial channel
-  // ready signal may have been sent before the DataChannel creation.
-  // This has to be done async because the upper layer objects (e.g.
-  // Chrome glue and WebKit) are not wired up properly until after this
-  // function returns.
-  if (controller_->ReadyToSendData()) {
-    RTC_DCHECK(connected_to_transport_);
-    AddRef();
-    absl::Cleanup release = [this] { Release(); };
-    rtc::Thread::Current()->PostTask([this, release = std::move(release)] {
-      RTC_DCHECK_RUN_ON(signaling_thread_);
-      if (state_ != kClosed)
-        OnTransportReady();
-    });
   }
 }
 
@@ -483,23 +475,15 @@ void SctpDataChannel::OnDataReceived(DataMessageType type,
   }
 }
 
-void SctpDataChannel::OnTransportReady() {
+void SctpDataChannel::OnTransportReady(bool writable) {
   RTC_DCHECK_RUN_ON(signaling_thread_);
 
-  // TODO(tommi, hta): Do we need the `writable` flag or does
-  // `connected_to_transport_` suffice?
-  // In practice the transport is configured inside
-  // `PeerConnection::SetupDataChannelTransport_n`, which results in
-  // `SctpDataChannel` getting the OnTransportChannelCreated callback, and then
-  // that's immediately followed by calling `transport->SetDataSink` which is
-  // what triggers the callback to `OnTransportReady()`.
-  // These steps are currently accomplished via two separate PostTask calls to
-  // the signaling thread, but could simply be done in single method call on
-  // the network thread (which incidentally is the thread that we'll need to
-  // be on for the below `Send*` calls, which currently do a BlockingCall
-  // from the signaling thread to the network thread.
-  RTC_DCHECK(connected_to_transport_);
-  writable_ = true;
+  writable_ = writable;
+  if (!writable) {
+    return;
+  }
+
+  connected_to_transport_ = true;
 
   SendQueuedControlMessages();
   SendQueuedDataMessages();
@@ -727,7 +711,6 @@ void SctpDataChannel::QueueControlMessage(
 bool SctpDataChannel::SendControlMessage(const rtc::CopyOnWriteBuffer& buffer) {
   RTC_DCHECK_RUN_ON(signaling_thread_);
   RTC_DCHECK(writable_);
-  RTC_DCHECK(connected_to_transport_);
   RTC_DCHECK(id_.HasValue());
 
   if (!controller_) {
