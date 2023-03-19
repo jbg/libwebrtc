@@ -188,6 +188,8 @@ class TestEncoder : public VideoCodecTester::Encoder,
     encoder_->RegisterEncodeCompleteCallback(this);
   }
 
+  void Initialize() override { Configure(frame_settings_.begin()->second); }
+
   void Encode(const VideoFrame& frame, EncodeCallback callback) override {
     callbacks_[frame.timestamp()] = std::move(callback);
 
@@ -328,13 +330,18 @@ class TestDecoder : public VideoCodecTester::Decoder,
     decoder_->RegisterDecodeCompleteCallback(this);
   }
 
+  void Initialize() override {
+    VideoDecoder::Settings ds;
+    ds.set_codec_type(PayloadStringToCodecType(codec_type_));
+    ds.set_number_of_cores(1);
+    ds.set_max_render_resolution({1280, 720});
+
+    bool result = decoder_->Configure(ds);
+    ASSERT_TRUE(result);
+  }
+
   void Decode(const EncodedImage& frame, DecodeCallback callback) override {
     callbacks_[frame.Timestamp()] = std::move(callback);
-
-    if (frame_num_ == 0) {
-      Configure();
-    }
-
     decoder_->Decode(frame, /*missing_frames=*/false,
                      /*render_time_ms=*/0);
     ++frame_num_;
@@ -350,16 +357,6 @@ class TestDecoder : public VideoCodecTester::Decoder,
   VideoDecoder* decoder() { return decoder_.get(); }
 
  protected:
-  void Configure() {
-    VideoDecoder::Settings ds;
-    ds.set_codec_type(PayloadStringToCodecType(codec_type_));
-    ds.set_number_of_cores(1);
-    ds.set_max_render_resolution({1280, 720});
-
-    bool result = decoder_->Configure(ds);
-    ASSERT_TRUE(result);
-  }
-
   int Decoded(VideoFrame& decoded_frame) override {
     auto cb = callbacks_.find(decoded_frame.timestamp());
     RTC_CHECK(cb != callbacks_.end());
