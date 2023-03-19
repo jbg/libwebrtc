@@ -36,8 +36,6 @@ namespace webrtc {
 
 class SctpDataChannel;
 
-// TODO(deadbeef): Get rid of this and have SctpDataChannel depend on
-// SctpTransportInternal (pure virtual SctpTransport interface) instead.
 class SctpDataChannelControllerInterface {
  public:
   // Sends the data to the transport.
@@ -45,8 +43,6 @@ class SctpDataChannelControllerInterface {
                         const SendDataParams& params,
                         const rtc::CopyOnWriteBuffer& payload,
                         cricket::SendDataResult* result) = 0;
-  // Connects to the transport signals.
-  virtual bool ConnectDataChannel(SctpDataChannel* data_channel) = 0;
   // Adds the data channel SID to the transport for SCTP.
   virtual void AddSctpDataStream(int sid) = 0;
   // Begins the closing procedure by sending an outgoing stream reset. Still
@@ -73,6 +69,7 @@ struct InternalDataChannelInit : public DataChannelInit {
   bool IsValid() const;
 
   OpenHandshakeRole open_handshake_role;
+  bool connected_to_transport = false;
 };
 
 // Helper class to allocate unique IDs for SCTP DataChannels.
@@ -175,7 +172,7 @@ class SctpDataChannel : public DataChannelInterface {
   // Called when the SctpTransport's ready to use. That can happen when we've
   // finished negotiation, or if the channel was created after negotiation has
   // already finished.
-  void OnTransportReady(bool writable);
+  void OnTransportReady();
 
   void OnDataReceived(DataMessageType type,
                       const rtc::CopyOnWriteBuffer& payload);
@@ -192,7 +189,6 @@ class SctpDataChannel : public DataChannelInterface {
   // asynchronously after RemoveSctpDataStream.
   void OnClosingProcedureComplete();
   // Called when the transport channel is created.
-  // Only needs to be called for SCTP data channels.
   void OnTransportChannelCreated();
   // Called when the transport channel is unusable.
   // This method makes sure the DataChannel is disconnected and changes state
@@ -228,7 +224,6 @@ class SctpDataChannel : public DataChannelInterface {
   void Init();
   void UpdateState();
   void SetState(DataState state);
-  void DisconnectFromTransport();
 
   void DeliverQueuedReceivedData();
 
