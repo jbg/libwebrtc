@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5ce81d7_ddc101fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-19T10:17:32Z",
+      "side": 1,
+      "message": "adding hta as cc",
+      "revId": "66e85b67e3ede53785bfcc05ed4e1a3f0bae24f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
