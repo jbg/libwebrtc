@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11b2e0dd_c13eb83c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-19T21:30:58Z",
+      "side": 1,
+      "message": "OK, I\u0027ll try again later (perhaps).\n\nThis was part of an attempt to break the dependency from sdp_offer_answer.cc to peer_connection_internal.h - apparently this tagged along in https://webrtc-review.googlesource.com/c/src/+/261060 without really being used; it shouldn\u0027t have been submitted without the inheritance hierarchy actually being changed.",
+      "revId": "8a4d767f1f56c958e5a17d2b7ce97ee2dfea4629",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
