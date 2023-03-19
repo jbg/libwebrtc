@@ -57,10 +57,9 @@ class DcSctpTransport : public cricket::SctpTransportInternal,
              int max_message_size) override;
   bool OpenStream(int sid) override;
   bool ResetStream(int sid) override;
-  bool SendData(int sid,
-                const SendDataParams& params,
-                const rtc::CopyOnWriteBuffer& payload,
-                cricket::SendDataResult* result = nullptr) override;
+  webrtc::RTCError SendData(int sid,
+                            const SendDataParams& params,
+                            const rtc::CopyOnWriteBuffer& payload) override;
   bool ReadyToSendData() override;
   int max_message_size() const override;
   absl::optional<int> max_outbound_streams() const override;
