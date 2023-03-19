@@ -181,13 +181,11 @@ TEST(DcSctpTransportTest, DiscardMessageClosedChannel) {
 
   peer_a.sctp_transport_->Start(5000, 5000, 256 * 1024);
 
-  cricket::SendDataResult result;
   SendDataParams params;
   rtc::CopyOnWriteBuffer payload;
-  bool send_data_return =
-      peer_a.sctp_transport_->SendData(1, params, payload, &result);
-  EXPECT_FALSE(send_data_return);
-  EXPECT_EQ(cricket::SDR_ERROR, result);
+  RTCError err = peer_a.sctp_transport_->SendData(1, params, payload);
+  EXPECT_FALSE(err.ok());
+  EXPECT_EQ(RTCErrorType::INVALID_STATE, err.type());
 }
 
 TEST(DcSctpTransportTest, DiscardMessageClosingChannel) {
@@ -200,14 +198,12 @@ TEST(DcSctpTransportTest, DiscardMessageClosingChannel) {
   peer_a.sctp_transport_->Start(5000, 5000, 256 * 1024);
   peer_a.sctp_transport_->ResetStream(1);
 
-  cricket::SendDataResult result;
   SendDataParams params;
   rtc::CopyOnWriteBuffer payload;
 
-  bool send_data_return =
-      peer_a.sctp_transport_->SendData(1, params, payload, &result);
-  EXPECT_FALSE(send_data_return);
-  EXPECT_EQ(cricket::SDR_ERROR, result);
+  RTCError err = peer_a.sctp_transport_->SendData(1, params, payload);
+  EXPECT_FALSE(err.ok());
+  EXPECT_EQ(RTCErrorType::INVALID_STATE, err.type());
 }
 
 TEST(DcSctpTransportTest, SendDataOpenChannel) {
@@ -221,14 +217,11 @@ TEST(DcSctpTransportTest, SendDataOpenChannel) {
   peer_a.sctp_transport_->OpenStream(1);
   peer_a.sctp_transport_->Start(5000, 5000, 256 * 1024);
 
-  cricket::SendDataResult result;
   SendDataParams params;
   rtc::CopyOnWriteBuffer payload;
 
-  bool send_data_return =
-      peer_a.sctp_transport_->SendData(1, params, payload, &result);
-  EXPECT_TRUE(send_data_return);
-  EXPECT_EQ(cricket::SDR_SUCCESS, result);
+  RTCError err = peer_a.sctp_transport_->SendData(1, params, payload);
+  EXPECT_TRUE(err.ok());
 }
 
 TEST(DcSctpTransportTest, DeliversMessage) {
