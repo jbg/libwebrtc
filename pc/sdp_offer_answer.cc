@@ -1739,10 +1739,7 @@ RTCError SdpOfferAnswerHandler::ApplyLocalDescription(
 
   // If setting the description decided our SSL role, allocate any necessary
   // SCTP sids.
-  rtc::SSLRole role;
-  if (pc_->GetSctpSslRole(&role)) {
-    data_channel_controller()->AllocateSctpSids(role);
-  }
+  AllocateSctpSids();
 
   if (IsUnifiedPlan()) {
     if (ConfiguredForMedia()) {
@@ -1990,10 +1987,7 @@ void SdpOfferAnswerHandler::ApplyRemoteDescription(
 
   // If setting the description decided our SSL role, allocate any necessary
   // SCTP sids.
-  rtc::SSLRole role;
-  if (pc_->GetSctpSslRole(&role)) {
-    data_channel_controller()->AllocateSctpSids(role);
-  }
+  AllocateSctpSids();
 
   if (operation->unified_plan()) {
     ApplyRemoteDescriptionUpdateTransceiverState(operation->type());
@@ -3229,6 +3223,24 @@ void SdpOfferAnswerHandler::UpdateNegotiationNeeded() {
   // is used in the task queued by the observer, this event will only fire
   // when the chain is empty.
   GenerateNegotiationNeededEvent();
+}
+
+void SdpOfferAnswerHandler::AllocateSctpSids() {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  if (!local_description() || !remote_description()) {
+    RTC_DLOG(LS_VERBOSE)
+        << "Local and Remote descriptions must be applied to get the "
+           "SSL Role of the SCTP transport.";
+    return;
+  }
+
+  // TODO(tommi): Use `GetSctpSslRole_n` instead. Do a single blocking call
+  // instead of 1 inside `GetSctpSslRole` and 1 per data channel inside
+  // `AllocateSctpSids`
+  rtc::SSLRole role;
+  if (pc_->GetSctpSslRole(&role)) {
+    data_channel_controller()->AllocateSctpSids(role);
+  }
 }
 
 bool SdpOfferAnswerHandler::CheckIfNegotiationIsNeeded() {
