@@ -247,6 +247,8 @@ class TesterDecoder {
     }
   }
 
+  void Initialize() { decoder_->Initialize(); }
+
   void Decode(const EncodedImage& input_frame) {
     Timestamp timestamp =
         Timestamp::Micros((input_frame.Timestamp() / k90kHz).us());
@@ -312,6 +314,8 @@ class TesterEncoder {
     }
   }
 
+  void Initialize() { encoder_->Initialize(); }
+
   void Encode(const VideoFrame& input_frame) {
     Timestamp timestamp =
         Timestamp::Micros((input_frame.timestamp() / k90kHz).us());
@@ -365,6 +369,8 @@ std::unique_ptr<VideoCodecStats> VideoCodecTesterImpl::RunDecodeTest(
   VideoCodecAnalyzer perf_analyzer;
   TesterDecoder tester_decoder(decoder, &perf_analyzer, decoder_settings);
 
+  tester_decoder.Initialize();
+
   while (auto frame = video_source->PullFrame()) {
     tester_decoder.Decode(*frame);
   }
@@ -382,6 +388,8 @@ std::unique_ptr<VideoCodecStats> VideoCodecTesterImpl::RunEncodeTest(
   VideoCodecAnalyzer perf_analyzer;
   TesterEncoder tester_encoder(encoder, /*decoder=*/nullptr, &perf_analyzer,
                                encoder_settings);
+
+  tester_encoder.Initialize();
 
   while (auto frame = sync_source.PullFrame()) {
     tester_encoder.Encode(*frame);
@@ -403,6 +411,9 @@ std::unique_ptr<VideoCodecStats> VideoCodecTesterImpl::RunEncodeDecodeTest(
   TesterDecoder tester_decoder(decoder, &perf_analyzer, decoder_settings);
   TesterEncoder tester_encoder(encoder, &tester_decoder, &perf_analyzer,
                                encoder_settings);
+
+  tester_encoder.Initialize();
+  tester_decoder.Initialize();
 
   while (auto frame = sync_source.PullFrame()) {
     tester_encoder.Encode(*frame);
