@@ -71,6 +71,8 @@ struct InternalDataChannelInit : public DataChannelInit {
 
   OpenHandshakeRole open_handshake_role;
   bool connected_to_transport = false;
+  // Optional flag from PC that may be used during initialization for stream id.
+  absl::optional<bool> is_caller;
 };
 
 // Helper class to allocate unique IDs for SCTP DataChannels.
