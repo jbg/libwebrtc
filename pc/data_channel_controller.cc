@@ -278,6 +278,12 @@ DataChannelController::InternalCreateSctpDataChannel(
     const std::string& label,
     const InternalDataChannelInit* config) {
   RTC_DCHECK_RUN_ON(signaling_thread());
+  if (config && !config->IsValid()) {
+    RTC_LOG(LS_ERROR) << "Failed to initialize the SCTP data channel due to "
+                         "invalid DataChannelInit.";
+    return nullptr;
+  }
+
   InternalDataChannelInit new_config =
       config ? (*config) : InternalDataChannelInit();
   StreamId sid(new_config.id);
@@ -362,6 +368,12 @@ void DataChannelController::OnTransportChannelClosed(RTCError error) {
   RTC_DCHECK_RUN_ON(signaling_thread());
   // Use a temporary copy of the SCTP DataChannel list because the
   // DataChannel may callback to us and try to modify the list.
+  // TODO(tommi): `OnTransportChannelClosed` is called from
+  // `SdpOfferAnswerHandler::DestroyDataChannelTransport` just before
+  // `TeardownDataChannelTransport_n` is called (but on the network thread) from
+  // the same function. Once `sctp_data_channels_` moves to the network thread,
+  // we can get rid of this function (OnTransportChannelClosed) and run this
+  // loop from within the TeardownDataChannelTransport_n callback.
   std::vector<rtc::scoped_refptr<SctpDataChannel>> temp_sctp_dcs;
   temp_sctp_dcs.swap(sctp_data_channels_);
   for (const auto& channel : temp_sctp_dcs) {

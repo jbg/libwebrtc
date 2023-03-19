@@ -220,7 +220,6 @@ class SctpDataChannel : public DataChannelInterface {
     kHandshakeReady
   };
 
-  void Init();
   void UpdateState();
   void SetState(DataState state);
 
