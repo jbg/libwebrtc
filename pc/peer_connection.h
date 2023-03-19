@@ -314,7 +314,6 @@ class PeerConnection : public PeerConnectionInternal,
            sdp_handler_->signaling_state() == PeerConnectionInterface::kClosed;
   }
   // Get current SSL role used by SCTP's underlying transport.
-  bool GetSctpSslRole(rtc::SSLRole* role) override;
   absl::optional<rtc::SSLRole> GetSctpSslRole_n(
       absl::optional<bool> is_caller) override;
 
