@@ -78,6 +78,8 @@ class PeerConnectionSdpMethods {
   // Returns the observer. Will crash on CHECK if the observer is removed.
   virtual PeerConnectionObserver* Observer() const = 0;
   virtual bool GetSctpSslRole(rtc::SSLRole* role) = 0;
+  virtual absl::optional<rtc::SSLRole> GetSctpSslRole_n(
+      absl::optional<bool> is_caller) = 0;
   virtual PeerConnectionInterface::IceConnectionState
   ice_connection_state_internal() = 0;
   virtual void SetIceConnectionState(
