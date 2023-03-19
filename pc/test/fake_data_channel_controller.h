@@ -37,9 +37,19 @@ class FakeDataChannelController
       webrtc::InternalDataChannelInit init,
       rtc::Thread* network_thread = rtc::Thread::Current()) {
     init.connected_to_transport = transport_available_;
+    rtc::Thread* signaling_thread = rtc::Thread::Current();
     rtc::scoped_refptr<webrtc::SctpDataChannel> channel =
         webrtc::SctpDataChannel::Create(weak_ptr(), std::string(label), init,
-                                        rtc::Thread::Current(), network_thread);
+                                        signaling_thread, network_thread);
+    if (ReadyToSendData()) {
+      signaling_thread->PostTask(
+          SafeTask(signaling_safety_.flag(), [channel = channel] {
+            if (channel->state() !=
+                webrtc::DataChannelInterface::DataState::kClosed) {
+              channel->OnTransportReady();
+            }
+          }));
+    }
     connected_channels_.insert(channel.get());
     return channel;
   }
@@ -160,5 +170,6 @@ class FakeDataChannelController
   std::set<webrtc::SctpDataChannel*> connected_channels_;
   std::set<webrtc::StreamId> known_stream_ids_;
   rtc::WeakPtrFactory<FakeDataChannelController> weak_factory_{this};
+  webrtc::ScopedTaskSafety signaling_safety_;
 };
 #endif  // PC_TEST_FAKE_DATA_CHANNEL_CONTROLLER_H_
