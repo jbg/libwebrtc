@@ -12,6 +12,7 @@ package org.webrtc;
 
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
+import android.media.MediaCodecInfo.CodecCapabilities;
 import android.media.MediaFormat;
 import android.opengl.GLES20;
 import android.os.Build;
@@ -220,8 +221,9 @@ class HardwareVideoEncoder implements VideoEncoder {
     adjustedBitrate = bitrateAdjuster.getAdjustedBitrateBps();
 
     Logging.d(TAG,
-        "initEncode: " + width + " x " + height + ". @ " + settings.startBitrate
-            + "kbps. Fps: " + settings.maxFramerate + " Use surface mode: " + useSurfaceMode);
+        "initEncode: " + codecType.mimeType() + " " + width + " x " + height + ". @ "
+            + settings.startBitrate + "kbps. Fps: " + settings.maxFramerate
+            + " Use surface mode: " + useSurfaceMode);
     return initEncodeInternal();
   }
 
@@ -263,6 +265,21 @@ class HardwareVideoEncoder implements VideoEncoder {
             Logging.w(TAG, "Unknown profile level id: " + profileLevelId);
         }
       }
+
+      // WebRTC quality scaler, which adjusts resolution and/or frame rate based on encoded QP,
+      // expects QP to be in native bitstream range for given codec. Native QP range for VP8 is [0,
+      // 127] and for VP9 is [0, 255]. MediaCodec VP8 and VP9 encoders (perhaps not all) return QP
+      // in range [0, 64], which is libvpx API specific range. Due to this mismatch we can't use QP
+      // feedback from these codecs.
+      if (codecType != VideoCodecMimeType.VP8 && codecType != VideoCodecMimeType.VP9) {
+        MediaCodecInfo codecInfo = codec.getCodecInfo();
+        CodecCapabilities codecCaps = codecInfo.getCapabilitiesForType(codecType.mimeType());
+        if (codecCaps.isFeatureSupported(CodecCapabilities.FEATURE_EncodingStatistics)) {
+          format.setInteger(MediaFormat.KEY_VIDEO_ENCODING_STATISTICS_LEVEL,
+              MediaFormat.VIDEO_ENCODING_STATISTICS_LEVEL_1);
+        }
+      }
+
       Logging.d(TAG, "Format: " + format);
       codec.configure(
           format, null /* surface */, null /* crypto */, MediaCodec.CONFIGURE_FLAG_ENCODE);
@@ -611,21 +628,28 @@ class HardwareVideoEncoder implements VideoEncoder {
 
         outputBuffersBusyCount.increment();
         EncodedImage.Builder builder = outputBuilders.poll();
-        EncodedImage encodedImage = builder
-                                        .setBuffer(frameBuffer,
-                                            () -> {
-                                              // This callback should not throw any exceptions since
-                                              // it may be called on an arbitrary thread.
-                                              // Check bug webrtc:11230 for more details.
-                                              try {
-                                                codec.releaseOutputBuffer(index, false);
-                                              } catch (Exception e) {
-                                                Logging.e(TAG, "releaseOutputBuffer failed", e);
-                                              }
-                                              outputBuffersBusyCount.decrement();
-                                            })
-                                        .setFrameType(frameType)
-                                        .createEncodedImage();
+        builder
+            .setBuffer(frameBuffer,
+                () -> {
+                  // This callback should not throw any exceptions since
+                  // it may be called on an arbitrary thread.
+                  // Check bug webrtc:11230 for more details.
+                  try {
+                    codec.releaseOutputBuffer(index, false);
+                  } catch (Exception e) {
+                    Logging.e(TAG, "releaseOutputBuffer failed", e);
+                  }
+                  outputBuffersBusyCount.decrement();
+                })
+            .setFrameType(frameType);
+
+        MediaFormat format = codec.getOutputFormat(index);
+        if (format.containsKey(MediaFormat.KEY_VIDEO_QP_AVERAGE)) {
+          int qp = format.getInteger(MediaFormat.KEY_VIDEO_QP_AVERAGE);
+          builder.setQp(qp);
+        }
+
+        EncodedImage encodedImage = builder.createEncodedImage();
         // TODO(mellem):  Set codec-specific info.
         callback.onEncodedFrame(encodedImage, new CodecSpecificInfo());
         // Note that the callback may have retained the image.

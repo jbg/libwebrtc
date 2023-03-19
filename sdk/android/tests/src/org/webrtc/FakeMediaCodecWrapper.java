@@ -318,4 +318,14 @@ public class FakeMediaCodecWrapper implements MediaCodecWrapper {
 
   @Override
   public void setParameters(Bundle params) {}
+
+  @Override
+  public MediaCodecInfo getCodecInfo() {
+    return null;
+  }
+
+  @Override
+  public MediaFormat getOutputFormat(int index) {
+    return outputFormat;
+  }
 }
