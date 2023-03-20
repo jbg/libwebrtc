@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c6c28c5_3f6b22ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T21:20:31Z",
+      "side": 1,
+      "message": "If I understand this right, LGTM.",
+      "revId": "5c3b65d0df324542ddfc5a9f9d127fa63d9bd00e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b65476d4_497838cc",
+        "filename": "pc/test/fake_data_channel_controller.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T21:20:31Z",
+      "side": 1,
+      "message": "I take it the copying of \"channel\" adds the extra reference and guarantees its removal when the lambda is destroyed just like the code in Init() did, just in a more readable way? If so - good!",
+      "revId": "5c3b65d0df324542ddfc5a9f9d127fa63d9bd00e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
