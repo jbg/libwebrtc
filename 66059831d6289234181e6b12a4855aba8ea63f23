@@ -16,6 +16,24 @@
       "message": "Looks good, but would it be possible to add at test for this as well?\nAlso, suggest assigning a bug since this is not a trivial CL.",
       "revId": "66059831d6289234181e6b12a4855aba8ea63f23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a372ed_efcc9bf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-03-20T14:16:20Z",
+      "side": 1,
+      "message": "Added bug.\n\nWe would need Robolectic shadows to test this (because we need to mock MediaCodecInfo which is a final class with a private constructor). I thought Robolectic is not available in WebRTC. But it is actually available. Let me try to add test.",
+      "parentUuid": "f4d54766_2ba7110e",
+      "revId": "66059831d6289234181e6b12a4855aba8ea63f23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
