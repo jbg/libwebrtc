@@ -103,6 +103,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d80c79ac_2b511d0e",
+        "filename": "pc/sctp_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T19:05:30Z",
+      "side": 1,
+      "message": "Removed the thread checker from StreamId",
+      "parentUuid": "06b8f71b_5f4c5759",
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d41e7231_83919dff",
         "filename": "pc/sctp_utils.h",
         "patchSetId": 9
