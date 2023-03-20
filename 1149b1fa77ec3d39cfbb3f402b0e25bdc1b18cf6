@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2648d0a_69cc860e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T05:10:02Z",
+      "side": 1,
+      "message": "I can\u0027t find the place where connected_to_transport in the init parameter is set to true in production code. Is there a test missing that would have detected that it wasn\u0027t set to true where it should have been?\n\nReplied on one cleanup query, picked some other nits.",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa07301_e1d538db",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T05:10:02Z",
+      "side": 1,
+      "message": "\"Instead of this approach, have a ..\" -\u003e \"Instead of this approach, we should have a..\" - to make it clear that it\u0027s a forward looking statement.",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d20b298_6778cfde",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T05:10:02Z",
+      "side": 1,
+      "message": "Nit: Comma after \"what the role is\" (oxford comma). Reads better in this case.",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e3d68de_3abdeee3",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T05:10:02Z",
+      "side": 1,
+      "message": "I think this was intended to reflect the RTPTransport \"writable\" state (which flips around when the transport changes state). But SCTP doesn\u0027t have that property. I think it\u0027s safe to delete.",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "101b9fba_48de68a0",
+        "filename": "pc/test/fake_data_channel_controller.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T05:10:02Z",
+      "side": 1,
+      "message": "This looks ugly. You have a controller function overriding the parameter that is passed to it. The connected_to_transport flag should either override the controller\u0027s knowledge or never be visible to the caller.\n\n(This is test code. The good part is that it made me look for and not find where you set connected_to_transport in the init parameters elsewhere.)",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

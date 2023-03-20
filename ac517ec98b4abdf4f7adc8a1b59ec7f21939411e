@@ -125,6 +125,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8c2fb7b_3c3eed7f",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T05:10:02Z",
+      "side": 1,
+      "message": "Don\u0027t delete this DCHECK. It guards against the misconfiguration when someone preconfigures the channel ID and somehow still manages to enter kConnecting state.",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1999af46_1702f681",
         "filename": "pc/sctp_data_channel.h",
         "patchSetId": 18
