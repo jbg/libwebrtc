@@ -2303,7 +2303,7 @@ TEST_F(DefaultVideoQualityAnalyzerSimulatedTimeTest,
   AdvanceTime(TimeDelta::Millis(50));
 
   // Mark stream paused for Bob, but not for Charlie.
-  analyzer.OnPeerStoppedReceiveVideoStream("bob", "alice_video");
+  analyzer.OnPeerPauseSenderStreams("bob", "alice");
   // Freeze for 1 second.
   PassFramesThroughAnalyzerSenderOnly(
       analyzer, "alice", "alice_video", {"bob", "charlie"},
@@ -2311,7 +2311,7 @@ TEST_F(DefaultVideoQualityAnalyzerSimulatedTimeTest,
       /*interframe_delay_ms=*/50, time_controller());
   AdvanceTime(TimeDelta::Millis(50));
   // Unpause stream for Bob.
-  analyzer.OnPeerStartedReceiveVideoStream("bob", "alice_video");
+  analyzer.OnPeerResumeSenderStreams("bob", "alice");
 
   // Pass 20 frames as 20 fps.
   PassFramesThroughAnalyzer(analyzer, "alice", "alice_video",
@@ -2379,7 +2379,7 @@ TEST_F(DefaultVideoQualityAnalyzerSimulatedTimeTest,
   AdvanceTime(TimeDelta::Millis(50));
 
   // Mark stream paused for Bob, but not for Charlie.
-  analyzer.OnPeerStoppedReceiveVideoStream("bob", "alice_video");
+  analyzer.OnPeerPauseSenderStreams("bob", "alice");
   // Freeze for 1 second.
   PassFramesThroughAnalyzerSenderOnly(
       analyzer, "alice", "alice_video", {"bob", "charlie"},
