@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4d54766_2ba7110e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-03-20T12:25:30Z",
+      "side": 1,
+      "message": "Looks good, but would it be possible to add at test for this as well?\nAlso, suggest assigning a bug since this is not a trivial CL.",
+      "revId": "66059831d6289234181e6b12a4855aba8ea63f23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
