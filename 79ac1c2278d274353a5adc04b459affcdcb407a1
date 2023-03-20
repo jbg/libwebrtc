@@ -16,6 +16,114 @@
       "message": "Hi Danil - this CL is similar and related to the other CL I just sent your way.",
       "revId": "79ac1c2278d274353a5adc04b459affcdcb407a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6355deba_6736ab49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T16:08:40Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "79ac1c2278d274353a5adc04b459affcdcb407a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23f1ab02_173fc7ef",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T16:08:40Z",
+      "side": 1,
+      "message": "This two aliases are not needed (code is already in the webrtc namespace)",
+      "revId": "79ac1c2278d274353a5adc04b459affcdcb407a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e39be1d1_47b2e7dd",
+        "filename": "media/sctp/dcsctp_transport.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T16:08:40Z",
+      "side": 1,
+      "message": "doesn\u0027t look like there would be anything after this switch, so may be return directly:\n```\ncase dcsctp::SendStatus::kSuccess:\n  return RTCError::OK();\ncase dcsctp::SendStatus::kErrorResourceExhaustion:\n  ready_to_send_data_ \u003d false;\n  return RTCError(RTCErrorType::RESOURCE_EXHAUSTED);\ndefault:\n  absl::string_view message \u003d ...;\n  RTC_LOG(...);\n  return RTCError(RTCErrorType::NETWORK_ERROR, message);\n```",
+      "revId": "79ac1c2278d274353a5adc04b459affcdcb407a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b85c62_282d82d4",
+        "filename": "media/sctp/dcsctp_transport.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T16:08:40Z",
+      "side": 1,
+      "message": "this class is already in the webrtc namespace",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 8
+      },
+      "revId": "79ac1c2278d274353a5adc04b459affcdcb407a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32d03344_c278d61f",
+        "filename": "media/sctp/dcsctp_transport_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T16:08:40Z",
+      "side": 1,
+      "message": "prefer to put value under test as 1st parameter, constant as 2nd parameter:\nEXPECT_EQ(err.type(), RTCErrorType::INVALID_STATE);\n\n(also, since not OK type imply !.ok(), you may omit previous expectation, and then remove single use variable:\nhttp://go/c-readability-advice#avoid-yoda-style-comparisons\nhttp://go/c-readability-advice#single-use-vars\n\n\n```\nEXPECT_EQ(\n  peer_a.sctp_transport_-\u003eSendData(1, params, payload).type(),\n  RTCErrorType::INVALID_STATE);\n```\n  \n(Side note... may be it would helpful to introduce dedicated matches for the RTCError, so code like this could be something like\n```\nEXPECT_THAT(\n  peer_a.sctp_transport_-\u003eSendData(1, params, payload),\n  RTCErrorIs(RTCErrorType::INVALID_STATE));\n```\n  \nbut that is definitely for another change)",
+      "revId": "79ac1c2278d274353a5adc04b459affcdcb407a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4389e29e_d1698916",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T16:08:40Z",
+      "side": 1,
+      "message": "may be override the error message:\n```\nerr.set_message(\"Failed to send a CONTROL message\");\nCloseAbruptlyWithError(err);\n```",
+      "revId": "79ac1c2278d274353a5adc04b459affcdcb407a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
