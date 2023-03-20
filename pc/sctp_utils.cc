@@ -58,7 +58,10 @@ StreamId::StreamId(int id)
   thread_checker_.Detach();
 }
 
-StreamId::StreamId(const StreamId& sid) : id_(sid.id_) {}
+StreamId::StreamId(const StreamId& sid) : id_(sid.id_) {
+  RTC_DCHECK_RUN_ON(&sid.thread_checker_);  // Since we just read `sid.id_`.
+  thread_checker_.Detach();
+}
 
 bool StreamId::HasValue() const {
   RTC_DCHECK_RUN_ON(&thread_checker_);

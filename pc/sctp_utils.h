@@ -38,7 +38,8 @@ class StreamId {
  public:
   StreamId();
   explicit StreamId(int id);
-  explicit StreamId(const StreamId& sid);
+  StreamId(const StreamId& sid);
+  StreamId& operator=(const StreamId& sid);
 
   // Returns `true` if a valid stream id is contained, in the range of
   // kMinSctpSid - kSpecMaxSctpSid ([0..0xffff]). Note that this
@@ -54,7 +55,6 @@ class StreamId {
   int stream_id_int() const;
   void reset();
 
-  StreamId& operator=(const StreamId& sid);
   bool operator==(const StreamId& sid) const;
   bool operator<(const StreamId& sid) const;
   bool operator!=(const StreamId& sid) const { return !(operator==(sid)); }
