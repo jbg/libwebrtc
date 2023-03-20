@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f773dbb_0d341d99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-20T09:43:45Z",
+      "side": 1,
+      "message": "You reviewed the addition so you can review the removal too ;-)",
+      "revId": "0ee5d643deef62644f6ce60e62c9a65fe1940c55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
